@@ -1,11 +1,504 @@
 {
- "alpha_pts": 18.78424406221798,
+ "alpha_pts": 28.62344968192171,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 127,
  "claims_supported": 122,
  "date": "2026-11-18T05:19:22Z",
- "equity_value": 6145691712.621868,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 13",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 10 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.2127 and margin 0.1997, margin 0.1561 (persist), growth 0.0375, terminal RONIC 0.0490 (equity return r 0.0807), F 10",
+  "run_gap": 0.1719010532496319,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 8000000.0,
+       "printed": 8,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on debt extinguishment | (8) | (5) | (6)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Loss on debt extinguishment in FY2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 231000000.0,
+     "excess_cash_before": 231000000.0,
+     "k0_after": -170579910.6219555,
+     "k0_before": -162579910.6219555,
+     "k0_interest": 387000000.0,
+     "one_offs_charge": 8000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 409948549.4807229,
+     "x0_before": 403636549.4807229
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 6120230580.549382,
+     "seam_ratio": 0.9069574133326351,
+     "tv_share": 0.3454271684132358,
+     "wedge_rate_5": -0.03804726355839744
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.22,
+     "fade_years": 10,
+     "long_run_op_margin": 0.19,
+     "op_margin": [
+      0.16,
+      0.18,
+      0.19,
+      0.19,
+      0.19
+     ],
+     "return_on_new_investment_long_run": 0.065,
+     "rev_growth": [
+      0.21,
+      0.13,
+      0.07,
+      0.055,
+      0.045
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.2127 and margin 0.1997, margin 0.1561 (persist), growth 0.0375, terminal RONIC 0.0490 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 122
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.14,
+      0.23
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.11
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (407) | (213)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.1640"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital expenditures are running at about 30% of nine-month revenue (and higher including equipment deposits) because of repowerings, well above the five-year pooled 16.4%. I hold about 22% across years 1-5 as repowering and growth capex continue before easing."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "the Closing is expected to occur during the third quarter of 2028"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth comes from multi-year drop-downs and repowerings running through 2028 and later, so the fade from year 5 growth to terminal growth should be gradual, about ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Depreciation, amortization and accretion | 682 | 627 | 526"
+       },
+       {
+        "id": "P1",
+        "quote": "relatively low operating and maintenance costs"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Contracted wind, solar and storage assets have low operating costs, but depreciation is a heavy share of revenue (about 48% in 2025). I expect only partial recovery toward the 20-33% margins of earlier years, so I set a level near the current run-rate."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating Income | 135 | 112 | 271 | 197"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,429.0 million | 0.0423 | 0.1120"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income of $271 million on $1,357 million of revenue is about 20%, well above FY2025's 11.2%. Year 1 is held lower to allow for a seasonally weak fourth quarter and higher depreciation. The margin then drifts up as the new assets mature."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P2",
+        "quote": "Some of the Company\u2019s competitors for investments and acquisitions are much larger than the Company"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Drop-downs are bought at negotiated prices with tax-equity structures and are financed with leverage. The base-year return on tangible capital of about 10.5% should fade to a modest spread above the 4.9% break-even as competition for assets limits accretion."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Fleet Enhancement program continues to advance with over 600 MW of repowerings"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is up about 21% on acquisitions and drop-downs, so year 1 should be high. Growth then slows as committed drop-downs (Honeycomb 2 in 2027, Swan in 2028) are smaller relative to the larger base, and Goat Mountain is offline until the second half of 2027."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P6",
+        "quote": "Sponsor-developed pipeline growing to ~16 GW"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The portfolio is long-lived and contracted, with a sponsor pipeline supporting growth for several years. Long-run growth should settle somewhat below the nominal anchor because acquisitions depend on external financing."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Tax-credit and trade policy changes, or sponsor delays, shrink the drop-down pipeline and acquisition accretion"
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "Customer concentration (SCE and PG&E) and failure to re-contract the Flexible Generation and wind assets on comparable terms depress the margin"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher financing costs and heavy repowering capex keep returns near break-even on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.15999999999999998,
+       0.08,
+       0.020000000000000004,
+       0.0049999999999999975,
+       -0.0050000000000000044
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.23,
+      "rev_growth": [
+       0.25,
+       0.16999999999999998,
+       0.11,
+       0.095,
+       0.08499999999999999
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of about $8.7 billion at year-end 2025 has already grown to about $9.4 billion by September 2026 as drop-downs are funded, so debt will keep rising with the asset base rather than staying at the base-year level."
+     },
+     "margin_position": "The FY2025 GAAP operating margin of 11.2% is depressed against the 20-33% seen in earlier years. Depreciation and amortization rose to about 48% of revenue as acquired and dropped-down assets were added, and repowerings brought accelerated depreciation. Nine-month 2026 margin has already recovered to about 20% (271/1,357) as new assets contributed revenue, so the margin is not a commodity cycle but a function of asset additions and depreciation timing.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The reported effective rate is distorted by HLBV allocations (pretax loss of $175 million against $56 million of tax expense), so the 21.1% statutory-like rate in the record may not describe the cash tax the company will actually pay."
+     },
+     "why": "FY2025 includes a weak fourth quarter, with accelerated depreciation on Mt. Storm and Goat Mountain, and an operating margin of 11.2%. Nine-month 2026 revenue is up about 21% and operating income is higher, so the base year understates the current run-rate. Year 1 (FY2026) should step up sharply in both revenue and margin."
+    },
+    "value_at_old_defaults": 167.71893645612172,
+    "values": {
+     "base": 193.85364768436466,
+     "bear": 168.9764040282378,
+     "bull": 241.45473969444544
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 8000000.0,
+       "printed": 8,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on debt extinguishment | (8) | (5) | (6)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "2025 loss on debt extinguishment"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 231000000.0,
+     "excess_cash_before": 231000000.0,
+     "k0_after": -170579910.6219555,
+     "k0_before": -162579910.6219555,
+     "k0_interest": 387000000.0,
+     "one_offs_charge": 8000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 409948549.4807229,
+     "x0_before": 403636549.4807229
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7311802637.945188,
+     "seam_ratio": 0.9245990942531027,
+     "tv_share": 0.36413114263313057,
+     "wedge_rate_5": -0.048474351477357375
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 10 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.22,
+     "fade_years": 10,
+     "long_run_op_margin": 0.22,
+     "op_margin": [
+      0.18,
+      0.22,
+      0.23,
+      0.23,
+      0.23
+     ],
+     "return_on_new_investment_long_run": 0.07,
+     "rev_growth": [
+      0.21,
+      0.1,
+      0.07,
+      0.05,
+      0.05
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.2127 and margin 0.1997, margin 0.1561 (persist), growth 0.0375, terminal RONIC 0.0490 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 122
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.17,
+      0.27
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.11
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (407) | (213)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.1640"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital expenditures of $407M in nine months of 2026 are about 30% of revenue, versus a five-year pooled 0.164. Growth capex for repowerings and drop-downs stays high, so I use about 0.22 across years 1 to 5."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "approximately 12 years as of December 31, 2025 based on CAFD"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The contracts average about 12 years of remaining life, and re-contracting and repowering extend visibility, so the fade to steady state takes about ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $1,314.0 million | 0.1042 | 0.2002"
+       },
+       {
+        "id": "P1",
+        "quote": "approximately 12 years as of December 31, 2025 based on CAFD"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company's own history shows margins of 0.20 to 0.28 before the recent D&A build-up. With about 12 years of remaining contract life and PPA amortization dragging on GAAP income, I fade to about 0.22."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating Income | 135 | 112 | 271 | 197"
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA | 1,393 - 1,433 | 1,606 - 1,676"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income is $271M on $1,357M revenue, about 0.20. Q4 is seasonally weak and Goat Mountain is offline, so the full year is about 0.18. 2027 guidance for higher EBITDA and net income points to about 0.22, rising to 0.23 as repowered assets come online."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1047"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Current return on tangible capital is 0.1047, but new drop-downs are bought at sponsor-set prices with tax-equity financing and the breakeven is 0.049. I use a long-run return of about 0.07, above breakeven but below the current figure."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA | 1,393 - 1,433 | 1,606 - 1,676"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is up about 21% on acquisitions and drop-downs, and Q3 was up 22%. Growth then slows as 2027 Adjusted EBITDA guidance implies about 17% growth, repowered sites return, and committed drop-downs such as Honeycomb 2 and Swan close later at lower volume."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A contracted U.S. renewable and storage owner can grow roughly with inflation plus modest reinvestment. I set 0.03, below the 0.0375 anchor, because the growth relies on a sponsor pipeline and external financing."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Sponsor drop-down pipeline slows or the tax-credit rules cut accretive acquisitions, or equity and debt funding is costly, so growth and returns disappoint"
+     },
+     {
+      "bear_value": 0.17,
+      "input_hit": "long_run_op_margin",
+      "risk": "Contract expiry or re-contracting on worse terms, or counterparty problems with SCE and PG&E, compress margins"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Committed growth investments slip, or weather, repowering outages and Flexible Generation re-contracting reduce revenue"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.16999999999999998,
+       0.06,
+       0.03,
+       0.009999999999999995,
+       0.009999999999999995
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.25,
+       0.14,
+       0.11,
+       0.09,
+       0.09
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt is mostly non-recourse project debt that grows with the asset base, and it already stands at about $9.4B in September 2026, so the base-year $8,674M understates the level the company will carry."
+     },
+     "margin_position": "The GAAP operating margin has fallen from about 0.28 in 2020 to 0.112 in 2025 even though revenue is contracted and rising. The cause is heavy depreciation and amortization on a fast-growing acquired asset base, plus accelerated depreciation on repowering sites. The 2026 nine-month margin is about 0.20, and 2027 guidance implies further recovery, so the margin is depressed rather than cyclical.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "Effective rates are distorted by HLBV tax-equity allocations on pretax losses, so the 0.211 in the record is not a reliable cash-tax guide."
+     },
+     "why": "2025 operating income was only $160M on $1,429M revenue, and Q4 2025 was a loss of about $37M implied by the nine-month figures. 2026 revenue is up about 21% from drop-downs and acquisitions, and nine-month operating income is $271M versus $197M. The base year therefore understates the earnings power of the larger fleet, while growth is capital-hungry and acquisition-funded."
+    },
+    "value_at_old_defaults": 167.71893645612172,
+    "values": {
+     "base": 230.31080584034032,
+     "bear": 191.4043381646923,
+     "bull": 304.71913901604046
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 167.71893645612172,
+  "value_at_old_defaults_quoted": 48.443695249744806,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 7422877936.682337,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 35000000.0,
@@ -59,12 +552,12 @@
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
  "seed_base": {
-  "1000": 168.07789299168783,
-  "3000": 175.59119178919624
+  "1000": 193.85364768436466,
+  "3000": 230.31080584034032
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": "filed shares 35,000,000 against 121,174,959 quoted (x3.46); values are per quoted share",
- "source": "on request (tax fallback rerun)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1808,257 +2301,42 @@
   ]
  },
  "tax_range": {
-  "equity_value_alt": 6229825063.800833,
+  "equity_value_alt": 7525395442.471372,
   "label": "statutory rate (company's filed rate), not measured",
   "positive_pretax_years": 1,
   "pretax_years": 5,
   "rate": 0.211,
   "rate_alt": 0.266,
   "seed_base_alt": {
-   "1000": 171.0112917990699,
-   "3000": 177.99500182288094
+   "1000": 197.83147869190742,
+   "3000": 232.19111802074238
   },
   "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
   "status_alt": "ok",
   "value_alt": {
-   "base": 51.41181912121937,
-   "bear": 45.82540748366705,
-   "bull": 56.67972936719577
+   "base": 62.10355272286595,
+   "bear": 52.77380767164654,
+   "bull": 79.8101587075698
   },
   "value_per_filed_share_alt": {
-   "base": 177.99500182288094,
-   "bear": 158.65405325101673,
-   "bull": 196.23325345184028
+   "base": 215.01129835632491,
+   "bear": 182.71039915096281,
+   "bull": 276.3140769468531
   }
  },
  "ticker": "CWEN",
- "upside": 0.619850083188421,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: long_run_op_margin (1000 none, 3000 up)",
-   "ytd_outside_record: rev_growth.y1 0.2127",
-   "held_at_record: op_margin.y1 model 0.1807 valued at 0.1997"
-  ],
-  "departures": [
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "P4.s148",
-     "P6.s182",
-     "P3.s47",
-     "Y2025-12-31"
-    ],
-    "input": "rev_growth.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "Y2025-12-31",
-     "P6.s176"
-    ],
-    "input": "op_margin.y1"
-   },
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s176",
-     "P6.s179",
-     "P6.s182",
-     "F2"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "backlog",
-    "evidence": [
-     "P4.s19",
-     "P4.s148",
-     "P3.s187",
-     "F2"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "backlog",
-    "evidence": [
-     "P4.s19",
-     "P4.s148",
-     "P3.s187",
-     "F2"
-    ],
-    "inherited_from": "normalized.margin",
-    "input": "long_run_op_margin"
-   },
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "F3",
-     "Y2025-12-31",
-     "Y2024-12-31",
-     "P6.s2"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "up",
-   "normalized.margin": "up",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "down",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "up",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF OPERATIONS (Unaudited) - USD ($) shares in Millions, $ in Millions | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nOperating Revenues\nTotal operating revenues | $ 522 | $ 429 | $ 1,357 | $ 1,119\nOperating Costs and Expenses\nCost of operations, exclusive of depreciation, amortization and accretion shown separately below | 167 | 128 | 450 | 381\nDepreciation, amortization and accretion | 198 | 176 | 576 | 502\nGeneral and administrative | 13 | 10 | 39 | 31\nTransaction and integration costs | 9 | 3 | 21 | 8\nTotal operating costs and expenses | 387 | 317 | 1,086 | 922\nOperating Income | 135 | 112 | 271 | 197\nOther Income (Expense)\nEquity in earnings of unconsolidated affiliates | 29 | 15 | 45 | 27\nOther income, net | 12 | 7 | 28 | 22\nLoss on debt extinguishment | 0 | (7) | (5) | (7)\nInterest expense | (43) | (98) | (249) | (297)\nTotal other expense, net | (2) | (83) | (181) | (255)\nIncome (Loss) Before Income Taxes | 133 | 29 | 90 | (58)\nIncome tax expense (benefit) | 10 | (31) | 5 | (26)\nNet Income (Loss) | 123 | 60 | 85 | (32)\nLess: Net income (loss) attributable to noncontrolling interests and redeemable noncontrolling interests | 72 | (172) | 75 | (291)\nNet Income Attributable to Clearway Energy, Inc. | $ 51 | 232 | $ 10 | 259\nCommon Class A\nOther Income (Expense)\nNet Income Attributable to Clearway Energy, Inc. | $ 68 | $ 76\nEarnings Per Share Attributable to Clearway Energy, Inc. Class A and Class C Common Stockholders\nWeighted average number shares outstanding - basic (in shares) | 0 | 35 | 15 | 35\nWeighted average number of shares outstanding - diluted (in shares) | 0 | 35 | 15 | 35\nEarnings Per Weighted Average Common Share - Basic (in dollars per share) | $ 0.42 | $ 1.97 | $ 0.08 | $ 2.20\nEarnings Per Weighted Average Common Share - Diluted (in dollars per share) | 0.42 | 1.97 | 0.08 | 2.20\nDividends Per Common Share (in dollars per share) | $ 0 | $ 0.4456 | $ 0.4602 | $ 1.3152\nCommon Class C\nOther Income (Expense)\nNet Income Attributable to Clearway Energy, Inc. | $ 164 | $ 183\nEarnings Per Share Attributable to Clearway Energy, Inc. Class A and Class C Common Stockholders\nWeighted average number shares outstanding - basic (in shares) | 121 | 83 | 106 | 83\nWeighted average number of shares outstanding - diluted (in shares) | 121 | 83 | 106 | 83\nEarnings Per Weighted Average Common Share - Basic (in dollars per share) | $ 0.42 | $ 1.97 | $ 0.08 | $ 2.20\nEarnings Per Weighted Average Common Share - Diluted (in dollars per share) | 0.42 | 1.97 | 0.08 | 2.20\nDividends Per Common Share (in dollars per share) | $ 0.4750 | $ 0.4456 | $ 1.4028 | $ 1.3152"
-   },
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF CASH FLOWS (Unaudited) - USD ($) $ in Millions | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash Flows from Operating Activities\nNet Income (Loss) | $ 85 | $ (32)\nAdjustments to reconcile net income (loss) to net cash provided by operating activities:\nEquity in earnings of unconsolidated affiliates | (45) | (27)\nDistributions from unconsolidated affiliates | 25 | 19\nDepreciation, amortization and accretion | 576 | 502\nAmortization of financing costs and debt discounts | 15 | 11\nAmortization of intangibles and out-of-market contracts | 150 | 137\nLoss on debt extinguishment | 5 | 7\nReduction in carrying amount of right-of-use assets | 14 | 12\nChanges in deferred income taxes | 7 | (26)\nChanges in derivative instruments and amortization of accumulated OCI/OCL | (126) | 4\nProceeds from transferable tax credits | 282 | 0\nChanges in other working capital | (49) | (96)\nNet Cash Provided by Operating Activities | 939 | 511\nCash Flows from Investing Activities\nAcquisitions, net of cash acquired | (223) | (324)\nAcquisition of Drop Down Assets, net of cash acquired | (90) | (219)\nCapital expenditures | (407) | (213)\nPayments for equipment deposits and asset purchases from affiliate | (107) | 0\nReturn of investment from unconsolidated affiliates | 16 | 14\nInvestments in unconsolidated affiliates | (91) | 0\nOther | 6 | 3\nNet Cash Used in Investing Activities | (896) | (739)\nCash Flows from Financing Activities\n(Distributions to) contributions from noncontrolling interests, net | (112) | 734\nProceeds from the issuance of Class C common stock | 50 | 0\nPayments of dividends and distributions | (288) | (266)\nPro-rata distributions to CEG | 0 | (7)\nBuyout of noncontrolling interest | (3) | (3)\nProceeds from the revolving credit facility | 262 | 480\nPayments for the revolving credit facility | (479) | (75)\nProceeds from the issuance of long-term debt | 1,245 | 472\nPayments of debt issuance costs | (27) | (7)\nPayments for long-term debt | (760) | (1,191)\nOther | (3) | (1)\nNet Cash (Used in) Provided by Financing Activities | (115) | 136\nNet Decrease in Cash, Cash Equivalents and Restricted Cash | (72) | (92)\nCash, Cash Equivalents and Restricted Cash at Beginning of Period | 818 | 733\nCash, Cash Equivalents and Restricted Cash at End of Period | $ 746 | $ 641"
-   },
-   "P3.s187": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Depreciation, amortization and accretion increased by $55 million during the year ended December 31, 2025, compared to the same period in 2024, primarily due to the solar and BESS acquisitions referenced above, as well as the accelerated depreciation in connection with the repowering of the Mt."
-   },
-   "P3.s47": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Contingent upon achieving commercial operations in 2027, the 360 MW facility will sell power to an investment-grade counterparty under a new 15-year PPA."
-   },
-   "P4.s148": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "On November 4, 2026, the Company entered into a PPA with an additional load-serving entity for between 200 MW and 500 MW of Walnut Creek\u2019s capacity commencing in January 2027 and ending in December 2034."
-   },
-   "P4.s19": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "The weighted average remaining contract duration of the Company\u2019s Renewables & Storage segment offtake agreements was approximately 12 years as of September 30, 2026 based on CAFD."
-   },
-   "P6.s176": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "Net Income | (35) - 5 | 35 - 105"
-   },
-   "P6.s179": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "Depreciation, Amortization, Contract Amortization and ARO | 980 | 1,062"
-   },
-   "P6.s182": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "Adjusted EBITDA | 1,393 - 1,433 | 1,606 - 1,676"
-   },
-   "P6.s2": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "\u2022Fleet Enhancement program continues to advance with over 600 MW of repowerings and 774 MW of new awarded and signed capacity contracts for the Flexible Generation fleet at 8-10 year contract tenors"
-   },
-   "Y2024-12-31": {
-    "kind": "filed_record",
-    "period": "2024-12-31",
-    "text": "Filed annual record, fiscal year ended 2024-12-31 (10-K, accession 0001628280-26-010952): revenue $1,371.0 million; operating income $196.0 million; operating margin 14.3%; net income $88.0 million; depreciation and amortization $627.0 million; capital expenditure $287.0 million."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001628280-26-010952): revenue $1,429.0 million; operating income $160.0 million; operating margin 11.2%; net income $169.0 million; depreciation and amortization $682.0 million; capital expenditure $319.0 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.16403641881638847,
-    0.16403641881638847,
-    0.16403641881638847,
-    0.16403641881638847,
-    0.16403641881638847
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.15605930853924949,
-   "normalized.margin": 0.15605930853924949,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.19970523212969787,
-   "op_margin.y2": 0.15605930853924949,
-   "rev_growth.y1": 0.21268990169794466,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.048961924461139214
-  },
-  "numbers": {
-   "capex": [
-    0.2232330300909727,
-    0.2232330300909727,
-    0.2232330300909727,
-    0.2232330300909727,
-    0.2232330300909727
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.17605930853924948,
-   "normalized.margin": 0.17605930853924948,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.18067161782854776,
-   "op_margin.y2": 0.20015220700152206,
-   "rev_growth.y1": 0.21268990169794466,
-   "rev_growth.y2": 0.04284194118881335,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.048961924461139214
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.18067161782854776,
-    "model_option": "last",
-    "record": 0.19970523212969787,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "record_last",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    2
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "last",
-   "op_margin.y2": "median",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "record_median",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Management has not disclosed full-year revenue, operating income, or total capital expenditure guidance for 2026 or 2027 (providing guidance only for Net Income, Adjusted EBITDA, Cash from Operating Activities, maintenance capital expenditures, and CAFD).",
-   "The packet does not detail the drivers of the anomalous operating margin in fiscal year 2022.",
-   "Replacement pricing on expiring offtake agreements and future external financing terms for drop-down acquisitions are unknown."
-  ],
-  "year": 3
- },
- "value_base": 50.717506104629464,
- "value_bear": 44.925760449220554,
- "value_bull": 56.19496697308417,
+ "upside": 0.9564843154331826,
+ "valuation": null,
+ "value_base": 61.257523916212946,
+ "value_bear": 52.04592640986167,
+ "value_bull": 78.8780369488687,
  "value_per_filed_share": {
-  "base": 175.59119178919624,
-  "bear": 155.53934775579413,
-  "bull": 194.55493736230233
+  "base": 212.0822267623525,
+  "bear": 180.19037109646504,
+  "bull": 273.086939355243
  },
  "valued": true,
  "verdict": "BUY",
  "verdict_differs_at_alt_tax_rate": false,
- "verdict_reason": "expected return +18.8 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +28.6 points a year against the required return over 3 years"
 }

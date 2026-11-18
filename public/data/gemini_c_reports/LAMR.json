@@ -1,23 +1,591 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -11.086938508786647,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 99,
  "claims_supported": 96,
  "date": "2026-11-16T20:13:08Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 11 of 12",
+   "run 1000: ffo_derived_vs_reported: +1.9%",
+   "run 1000: ffo_derived_impairments_taken_as_0",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 11 of 11",
+   "run 3000: ffo_derived_vs_reported: +1.9%",
+   "run 3000: ffo_derived_impairments_taken_as_0"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0553 and margin 0.3093, margin 0.3166 (persist), growth 0.0375, terminal RONIC 0.0573 (equity return r 0.0890), F 10",
+  "run_gap": 0.10936168471192724,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 2012000.0,
+       "printed": 2012,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on extinguishment of debt | 2,012 | 270 | 1,742"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on extinguishment of debt in 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 64812000.0,
+     "excess_cash_before": 64812000.0,
+     "k0_after": 166415571.14618313,
+     "k0_before": 168427571.14618313,
+     "k0_interest": 160442000.0,
+     "one_offs_charge": 2012000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 725903599.1755718,
+     "x0_before": 723961440.1150326
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.019987974468634383,
+     "equity_value": 11196287093.583271,
+     "seam_ratio": 1.015421687525752,
+     "tv_share": 0.3947024552911314,
+     "wedge_rate_5": -0.0036187130212335474
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 11 of 12",
+     "ffo_derived_vs_reported: +1.9%",
+     "ffo_derived_impairments_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.31,
+     "op_margin": [
+      0.3,
+      0.305,
+      0.31,
+      0.31,
+      0.31
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.06,
+      0.045,
+      0.04,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0553 and margin 0.3093, margin 0.3166 (persist), growth 0.0375, terminal RONIC 0.0573 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 96
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.27,
+      0.34
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "derived_after_preferred": 843094000.0,
+      "derived_before_preferred": 843459000.0,
+      "gap_after_preferred": 0.019050370286208818,
+      "gap_before_preferred": 0.019491546934547577,
+      "not_filed": [
+       "impairments"
+      ],
+      "per_share_divisor": null,
+      "reported": {
+       "per": "total",
+       "printed": 827333,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "FFO | $827,333 | $798,418 | $28,915 | 3.6%"
+        }
+       ],
+       "scale": "thousands",
+       "value": 827333000.0,
+       "what": "FFO for fiscal 2025 as reported, net income adjusted for real-estate D&A and property gains (not AFFO), shown before preferred dividends"
+      },
+      "status": "compared"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Capital expenditures \u2013 maintenance | (57,340) | (51,986) | (5,354)"
+       },
+       {
+        "id": "P6",
+        "quote": "Capitalized expenditures-maintenance | (16,706) | (13,880) | (40,717) | (36,542)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is upkeep only: maintenance capex was $57.3 million in 2025 (about 2.5% of revenue), plus some land, building and equipment upkeep. Total capex of about 8% includes digital growth builds and new construction, and acquisitions are excluded. I estimate about 3%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "pose a significant barrier to entry and expansion in many markets"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Entry barriers and a long-lived, contract-like tenant base make the fade of the growth premium gradual, so I use 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $2,111.0 million | 0.0388 | 0.3200"
+       },
+       {
+        "id": "P3",
+        "quote": "Direct advertising expenses | 33.0% | 33.0%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Filed history shows ex-gain margins of roughly 28-30%, with 2023 at 32% and 2024 depressed by high D&A. Regulatory barriers to new billboards and stable direct-cost ratios support about 31%. Cyclicality and digital capex-driven depreciation limit the upside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Gain on disposition of assets and investments | (16,866) | (2,155) | (32,153) | (76,116)"
+       },
+       {
+        "id": "P3",
+        "quote": "the Company recognized a gain on disposition of assets and investments of $75.9 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I strip gains out of the margin. The nine-month 2026 operating margin excluding gains is about 30%, because D&A rose with acquisitions and a software write-off. Operating leverage on 6% growth lifts it only modestly over the next few years."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P2",
+        "quote": "the pool of suitable acquisition candidates is dwindling, and we may have a more difficult time negotiating acquisitions on favorable terms"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 0.79 is inflated by a small tangible base. New investment is mostly acquisitions at rising multiples plus digital conversions, so I take a much lower return, still well above the 0.0573 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Acquisition-adjusted net revenue for the third quarter of 2026 increased 6.2% over acquisition-adjusted net revenue for the third quarter of 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is running at about 6% (nine months +5.9%, Q3 +6.6%), helped by acquisitions and political spend. I fade toward 3.5% as acquisition-adjusted growth normalises. Growth was only 2.7% in 2025, and the acquisition target pool is dwindling."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run outdoor advertising growth is tied to nominal GDP and advertising share, so I stay slightly below the long-run anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Advertising recession or reallocation to other media cuts occupancy and rates after the 2026 political and national boost"
+     },
+     {
+      "bear_value": 0.27,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin compression from rising D&A, storm costs (structures are uninsured against hurricanes) or digital-display regulation"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Acquisition targets get scarcer and pricier, lowering returns on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.034999999999999996,
+       0.019999999999999997,
+       0.015,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       0.07999999999999999,
+       0.065,
+       0.06,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $3.4-3.5 billion is roughly 3.3x adjusted EBITDA and is the level a REIT with acquisition appetite and a 4.5x secured-debt covenant would sustain."
+     },
+     "margin_position": "The filed 2025 operating margin of 34.2% is flattered by a $75.9 million gain on disposition (about 3.3 points of revenue) and by D&A that fell to 14.4% of revenue after a 2024 asset-retirement cost revision. Excluding gains, the 2026 nine-month margin is about 30%, and that is the earning power I use.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "REIT status keeps the tax rate low (2.4% in the first nine months of 2026), and it is likely to persist while the company keeps qualifying and distributing."
+     },
+     "why": "The 2025 operating income includes a large non-recurring Vistar Media gain and unusually low D&A. Underlying margin is nearer 30-31%. Growth has accelerated in 2026, with 5.5% acquisition-adjusted growth over nine months, from national, digital and political demand. Political spend is partly cyclical and will not repeat in odd years."
+    },
+    "value_at_old_defaults": 94.73396620769688,
+    "values": {
+     "base": 119.3534649191001,
+     "bear": 89.08607903933607,
+     "bull": 159.78054897597931
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 2012000.0,
+       "printed": 2012,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on extinguishment of debt | 2,012 | 270 | 1,742"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on extinguishment of debt in 2025 (non-operating, will not recur)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 64812000.0,
+     "excess_cash_before": 64812000.0,
+     "k0_after": 166415571.14618313,
+     "k0_before": 168427571.14618313,
+     "k0_interest": 160442000.0,
+     "one_offs_charge": 2012000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 725903599.1755718,
+     "x0_before": 723961440.1150326
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.00448025497210874,
+     "equity_value": 10029088398.03173,
+     "seam_ratio": 1.0073790534813623,
+     "tv_share": 0.3903279031916417,
+     "wedge_rate_5": -0.0034683738952355613
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 11 of 11",
+     "ffo_derived_vs_reported: +1.9%",
+     "ffo_derived_impairments_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.05,
+     "fade_years": 10,
+     "long_run_op_margin": 0.305,
+     "op_margin": [
+      0.3,
+      0.305,
+      0.31,
+      0.31,
+      0.31
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.048,
+      0.03,
+      0.035,
+      0.035,
+      0.033
+     ],
+     "terminal_growth": 0.033
+    },
+    "old_defaults_inputs": "year 1 growth 0.0553 and margin 0.3093, margin 0.3166 (persist), growth 0.0375, terminal RONIC 0.0573 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 96
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.28,
+      0.33
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.05
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "derived_after_preferred": 843094000.0,
+      "derived_before_preferred": 843459000.0,
+      "gap_after_preferred": 0.01909101897739629,
+      "gap_before_preferred": 0.01953221322373988,
+      "not_filed": [
+       "impairments"
+      ],
+      "per_share_divisor": null,
+      "reported": {
+       "per": "total",
+       "printed": 827.3,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "FFO for the year ended December 31, 2025 was $827.3 million"
+        }
+       ],
+       "scale": "millions",
+       "value": 827300000.0,
+       "what": "FFO (net income before real estate gains and real estate depreciation, adjusted for unconsolidated affiliates and non-controlling interest) for 2025"
+      },
+      "status": "compared"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Capital expenditures \u2013 maintenance | (57,340) | (51,986) | (5,354)"
+       },
+       {
+        "id": "P1",
+        "quote": "We expect our 2026 capitalized expenditures to be approximately $186 million."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is upkeep of the existing portfolio plus a share of digital refresh. Filed maintenance capex was $57.3M in 2025 (about 2.5% of revenue); total capex of $180.8M (about 8%) includes digital growth spending, and acquisitions are excluded. I use about 5% to cover upkeep and the digital re-investment needed to support the growth I assume."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Local advertising constituted approximately 79% of our outdoor net revenues for the year ended December 31, 2025"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade lets the above-trend 2026 growth and the current margin converge gradually to the long-run values for a stable local-market operator."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "pose a significant barrier to entry and expansion in many markets"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Outdoor advertising has high fixed-cost leverage and regulatory barriers to new supply, which supports a margin of about 30-31% after depreciation. Ordinary-company mean reversion and cyclicality argue against assuming more than that, and the gain-inflated 2025 level should not be extrapolated."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "the Company recognized a gain on disposition of assets and investments of $75.9 million"
+       },
+       {
+        "id": "P4",
+        "quote": "primarily related to the disposal of previously capitalized software implementation costs"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed 0.3416 includes a $75.9M gain and low depreciation, so I start from the ex-gain 2026 level of about 0.30. Margin then edges up as adjusted EBITDA grows faster than revenue (9M +8.7% vs revenue +5.9%) and the one-time software write-off in depreciation drops out."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0573."
+       },
+       {
+        "id": "P2",
+        "quote": "the pool of suitable acquisition candidates is dwindling"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed return on tangible capital (0.79) is inflated by goodwill and intangibles sitting outside tangible capital. New returns come mainly from digital conversions and acquisitions bought at competitive prices, since the company says 'the pool of suitable acquisition candidates is dwindling', so I assume about 11%, well above the 0.0573 break-even but far below 0.79."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net revenues increased $98.9 million, or 5.9%, to $1.77 billion for the nine months ended September 30, 2026"
+       },
+       {
+        "id": "P6",
+        "quote": "Our sales growth accelerated in the third quarter, buoyed by demand from national customers, our digital platform and political spend"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 is tracking about 5% (nine months +5.9%, acquisition-adjusted +5.5%), helped by midterm political spend, national demand and digital. I fade to about 3% in the non-election year 2027 and 3-3.5% after, in line with historical 2.7-5.6% growth in normal years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Mature fragmented industry with pricing power and digital conversion, but exposed to competition from other media; I set it slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Advertising recession, or a shift of budgets to other media, cuts occupancy and rates after the 2026 political boost"
+     },
+     {
+      "bear_value": 0.27,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tighter digital billboard regulation or higher component costs, plus interest costs and fixed-cost deleverage, compress margins"
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Acquisition targets get scarcer and pricier, lowering the return on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.28,
+      "rev_growth": [
+       0.033,
+       0.014999999999999996,
+       0.02,
+       0.02,
+       0.018
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.33,
+      "rev_growth": [
+       0.063,
+       0.045,
+       0.05,
+       0.05,
+       0.048
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $3.4-3.5 billion is roughly 3.3x adjusted EBITDA and has been steady for years, with the securitization program extended to 2029 and the company staying within its covenants."
+     },
+     "margin_position": "The filed 2025 operating margin of 0.3416 is flattered by a $75.9 million gain on disposition (mostly the Vistar Media stake sale) and by unusually low depreciation after the 2024 asset retirement obligation cost revision. Excluding the gain, 2025 is about 0.31, and the first nine months of 2026 are about 0.30 (operating income $563.5M less gains $32.2M, over revenue $1,769.2M), with 2026 depreciation lifted by a software write-off.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "REIT status keeps the effective tax rate near 2.4-3.5% (the 10-Q says the rate 'differs from the federal statutory rate primarily due to our qualification for taxation as a REIT'), and that is sustainable as long as the company stays a REIT."
+     },
+     "why": "The base-year margin includes a large non-recurring gain and depreciation that was temporarily low, so it overstates what the billboards earn. The 2026 nine months show underlying margins around 30% with revenue growing 5.9%, helped by political spend in a midterm year. I set margins from the ex-gain level and let growth ease in 2027, a non-election year."
+    },
+    "value_at_old_defaults": 94.73396620769688,
+    "values": {
+     "base": 106.97749725612316,
+     "bear": 88.36024217124088,
+     "bull": 131.77188020557784
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 94.73396620769688,
+  "value_at_old_defaults_quoted": 94.73396620769688,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 11501476574.356634,
  "family": "family_not_built",
+ "far_from_price": false,
+ "filed_shares": 101634142.0,
  "flags": [
   "Lamar Media Corp. and its special purpose subsidiaries entered into the Eighth Amendment to the Receivables Financing Agreement, extending the maturity date of the Accounts Receivable Securitization Program to October 1, 2029 and providing additional flexibility for eligibility of certain receivables.",
   "Lamar updated its 2026 guidance issued in August 2026, raising expected full-year diluted AFFO per share to between $8.87 and $8.97 and expecting full-year diluted earnings per share between $6.01 and $6.04.",
   "Lamar announced third quarter 2026 operating results, reporting net revenues of $624.5 million (a 6.6% increase), net income of $165.0 million (a 14.5% increase), and Adjusted EBITDA of $306.9 million (a 9.3% increase)."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08903203083918919,
+ "market_cap_at_publish": 16150259948,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "no_value_reason": null,
+ "price_at_publish": 158.99,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 119.3534649191001,
+  "3000": 106.97749725612316
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1404,8 +1972,17 @@
   ]
  },
  "ticker": "LAMR",
+ "upside": -0.2878457305709843,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+ "value_base": 113.16548108761162,
+ "value_bear": 88.72316060528848,
+ "value_bull": 145.77621459077858,
+ "value_per_filed_share": {
+  "base": 113.16548108761162,
+  "bear": 88.72316060528848,
+  "bull": 145.77621459077858
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -11.1 points a year against the required return over 3 years"
 }

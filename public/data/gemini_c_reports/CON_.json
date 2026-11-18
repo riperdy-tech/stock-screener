@@ -1,11 +1,539 @@
 {
- "alpha_pts": -16.563246608434206,
+ "alpha_pts": -2.909240461823401,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 142,
  "claims_supported": 121,
  "date": "2026-11-16T10:00:29Z",
- "equity_value": 3308902504.730177,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1690 (filed 0.1499 to 0.1604)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.1710 (filed 0.1499 to 0.1604)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.1720 (filed 0.1499 to 0.1604)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.1720 (filed 0.1499 to 0.1604)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.1710 (filed 0.1499 to 0.1604)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.1650 (filed 0.1499 to 0.1604)",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 2025 effective rate of 22.8% benefited from tax credits and a lower state rate, while 2026 nine-month tax is about 24.8% of pretax income, so a rate near 24-25% is more sustainable.",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1700 (filed 0.1499 to 0.1604)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.1720 (filed 0.1499 to 0.1604)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.1730 (filed 0.1499 to 0.1604)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.1730 (filed 0.1499 to 0.1604)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.1720 (filed 0.1499 to 0.1604)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.1650 (filed 0.1499 to 0.1604)",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The base-year rate of 22.8% was helped by tax credits and a lower state rate, while the 2026 nine-month rate is about 24.8% ($61,627 tax on $248,988 pretax income).",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1067 and margin 0.1813, margin 0.1549 (persist), growth 0.0375, terminal RONIC 0.0624 (equity return r 0.0838), F 10",
+  "run_gap": 0.016687684564854248,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 875000.0,
+       "printed": 875,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on early retirement of debt | (875) | (0.0)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on early retirement of debt in 2025, a non-operating charge that will not recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 79899000.0,
+     "excess_cash_before": 79899000.0,
+     "k0_after": 120869733.48212251,
+     "k0_before": 121744733.48212251,
+     "k0_interest": 109290000.0,
+     "one_offs_charge": 875000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 184583449.47369444,
+     "x0_before": 183907736.1996033
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4487238012.773698,
+     "seam_ratio": 1.012391526275979,
+     "tv_share": 0.5301359985206165,
+     "wedge_rate_5": 0.0013263235866839919
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1690 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y2 0.1710 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y3 0.1720 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y4 0.1720 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y5 0.1710 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: long_run_op_margin 0.1650 (filed 0.1499 to 0.1604)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 effective rate of 22.8% benefited from tax credits and a lower state rate, while 2026 nine-month tax is about 24.8% of pretax income, so a rate near 24-25% is more sustainable.",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.034,
+     "fade_years": 8,
+     "long_run_op_margin": 0.165,
+     "op_margin": [
+      0.169,
+      0.171,
+      0.172,
+      0.172,
+      0.171
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.095,
+      0.06,
+      0.055,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1067 and margin 0.1813, margin 0.1549 (persist), growth 0.0375, terminal RONIC 0.0624 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 21,
+     "kept": 121
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.145,
+      0.18
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.075
+     ],
+     "terminal_growth": [
+      0.028,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital Expenditures2 $82.3mm $70mm \u2013 $80mm"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0338"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 capex guidance of $70-80mm is about 3.2% of revenue, while the 5-year pooled ratio is 3.4%. I use 3.4% to allow for de novo openings and clinic investment."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Rates of reimbursement for workers\u2019 compensation services are established through a legislative or regulatory process within each state that we serve."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is a scaled, regulated-rate business with a high return on tangible capital, so growth and margin should converge gradually over about 8 years rather than abruptly."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $1,900.2 million | 0.0338 | 0.1604"
+       },
+       {
+        "id": "P2",
+        "quote": "Given that we do not control these processes, we may be subject to financial risks"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins have sat between 15% and 16% for four years, and 2026 is above that range. Some of the gain is likely to fade because workers' compensation fee schedules may not keep pace with labor cost inflation. I fade to 16.5%, between the 2026 level and the historical band."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Income from Operations $400 $405"
+       },
+       {
+        "id": "P3",
+        "quote": "The percentage of revenue decreased primarily due to increased staffing efficiencies"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guidance reconciliation shows 2026 income from operations of $400-405mm on about $2.37bn revenue, a margin of about 16.9%, up from 15.4% in 2025. Modest further gains come from staffing efficiencies and from the end of transition services fees, partly offset by labor costs and higher stock compensation."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 1.0000"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0624."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 1.0 reflects an asset-light, acquisition-built balance sheet and is not repeatable on new investment. New centers and bolt-on acquisitions will earn far less. I set 20%, comfortably above the 6.24% value-neutral threshold."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Total Revenue $2,163.4mm $2,360mm \u2013 $2,380mm"
+       },
+       {
+        "id": "P4",
+        "quote": "Total | $152.14 | $147.31 | 3.3%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) follows the raised guidance of $2,360-2,380mm against $2,163.4mm, about 9.5%, helped by the full-year Pivot effect. After that, growth should slow towards visits-per-day growth of about 3-5% plus rate growth near the roughly 3% historical average, with few large acquisitions."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P1",
+        "quote": "averaged approximately 3% from 2016 to"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run growth is limited by a growing workforce, rate growth near 3%, and an injury rate that has stabilized. I set it slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "State workers' compensation fee schedule cuts, or rates lagging labor cost inflation, compress revenue per visit and margins"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Workplace injury frequency declines or employment shifts to lower-injury industries, cutting workers' compensation volume and slowing growth"
+     },
+     {
+      "bear_value": 0.155,
+      "input_hit": "op_margin",
+      "risk": "Q3 seasonal strength does not carry into later quarters, and Q4 or 2027 growth falls short of raised guidance"
+     },
+     {
+      "bear_value": 0.145,
+      "input_hit": "long_run_op_margin",
+      "risk": "Labor shortages and clinician wage inflation raise cost of services faster than reimbursement"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.145,
+      "rev_growth": [
+       0.07,
+       0.034999999999999996,
+       0.03,
+       0.025,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.028
+     },
+     "bull": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.11499999999999999,
+       0.07999999999999999,
+       0.075,
+       0.07,
+       0.065
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Net leverage is 2.90x and falling with voluntary prepayments, so debt of about $1.5-1.6bn is roughly in line with a business generating $500mm of Adjusted EBITDA."
+     },
+     "margin_position": "The 2025 operating margin of 15.4% was held down by one-time separation costs and acquisition and transition costs in G&A. 2026 guidance implies about 16.9%, because cost of services is falling as a share of revenue through staffing efficiencies and separation costs are fading. The margin has stayed in a 15-16% band over 2022-2025.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 effective rate of 22.8% benefited from tax credits and a lower state rate, while 2026 nine-month tax is about 24.8% of pretax income, so a rate near 24-25% is more sustainable."
+     },
+     "why": "2025 includes the Nova and Pivot acquisitions part-year, so 2026 growth is inflated by their full-year contribution. G&A was inflated by one-time separation costs. Interest expense was also unusually high in 2025. 2026 guidance is the better starting point for years 1-5."
+    },
+    "value_at_old_defaults": 25.729960689486422,
+    "values": {
+     "base": 38.15485924515924,
+     "bear": 26.7021998897779,
+     "bull": 51.0945904305253
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 875000.0,
+       "printed": 875,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on early retirement of debt | (875) | (0.0)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on early retirement of debt in 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 79899000.0,
+     "excess_cash_before": 79899000.0,
+     "k0_after": 120869733.48212251,
+     "k0_before": 121744733.48212251,
+     "k0_interest": 109290000.0,
+     "one_offs_charge": 875000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 184583449.47369444,
+     "x0_before": 183907736.1996033
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4564002649.5856085,
+     "seam_ratio": 1.0153760983105398,
+     "tv_share": 0.4791947113719848,
+     "wedge_rate_5": 0.000987077854580535
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1700 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y2 0.1720 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y3 0.1730 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y4 0.1730 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: op_margin.y5 0.1720 (filed 0.1499 to 0.1604)",
+     "margin_outside_filed_record: long_run_op_margin 0.1650 (filed 0.1499 to 0.1604)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate of 22.8% was helped by tax credits and a lower state rate, while the 2026 nine-month rate is about 24.8% ($61,627 tax on $248,988 pretax income).",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.033,
+     "fade_years": 10,
+     "long_run_op_margin": 0.165,
+     "op_margin": [
+      0.17,
+      0.172,
+      0.173,
+      0.173,
+      0.172
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.095,
+      0.065,
+      0.058,
+      0.052,
+      0.048
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1067 and margin 0.1813, margin 0.1549 (persist), growth 0.0375, terminal RONIC 0.0624 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 21,
+     "kept": 121
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.18
+     ],
+     "rev_growth_y3": [
+      0.04,
+      0.075
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0338"
+       },
+       {
+        "id": "P6",
+        "quote": "Capital Expenditures2 $82.3mm $70mm \u2013 $80mm"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled history is about 3.4% of revenue, and 2026 guidance of $70-80mm on about $2.37bn is roughly 3.2%, so I use 3.3%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Cost containment initiatives or state fee schedule changes undertaken by state workers\u2019 compensation boards"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin normalize gradually from the 2026-2030 path, so I use a 10-year fade as a middle-of-the-range choice for a stable service business."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "may constrain our ability to realize reimbursement increases at rates sufficient to keep pace with the inflation of our costs"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "I fade below the guided 2026 margin because state fee schedules are outside the company's control, and labor costs may outrun reimbursement. This is a non-cyclical business, so only part of the recent gain is likely to be given back."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Income from Operations $400 $405"
+       },
+       {
+        "id": "P3",
+        "quote": "The percentage of revenue decreased primarily due to increased staffing efficiencies"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guidance of $400-405mm income from operations on about $2.37bn revenue implies about 17% in 2026. I allow small further gains from operating leverage and the end of separation costs, then flatten."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Organic growth needs little capital, but acquisitions add goodwill and intangibles, so I assume a return well above the 6.2% breakeven but far below the near-infinite historical tangible return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Patient visits of 3,731,956, or 58,312 visits per day, an increase of 4.9% from 55,589 visits per day in Q3 2025"
+       },
+       {
+        "id": "P1",
+        "quote": "averaged approximately 3% from 2016 to"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows the raised FY2026 guidance of $2,360mm-$2,380mm against $2,163.4mm in 2025, roughly +9.5%. After that, growth is organic: about 4-5% volume plus about 3% rate, with fewer acquisitions than in 2025, so it fades toward the mid-single digits."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Rate growth of about 3% plus modest volume growth supports a long-run rate slightly below the 3.75% anchor, given the business's maturity and its dependence on workplace injury rates."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "State workers' compensation fee schedule cuts or reimbursement lagging labor cost inflation compress margins"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Fewer workplace injuries or weaker employment slow volumes; Q3 seasonal strength does not persist"
+     },
+     {
+      "bear_value": 0.155,
+      "input_hit": "op_margin",
+      "risk": "Simultaneous CEO and CFO change plus the end of the Select transition services agreement disrupts execution and raises standalone costs"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.077,
+       0.047,
+       0.04,
+       0.033999999999999996,
+       0.03
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.11199999999999999,
+       0.08199999999999999,
+       0.075,
+       0.06899999999999999,
+       0.065
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of about $1.57bn is roughly 3x EBITDA, and management is paying it down toward a net leverage of 2.90x, so the level is broadly sustainable relative to size."
+     },
+     "margin_position": "The 2025 operating margin of 15.4% was held down by separation costs, acquisition and transition costs and rising stock compensation. Management's 2026 guidance implies about 17% as those costs fade and staffing efficiencies and rate growth continue. The margin is now above its 2022-2025 range of 15.0% to 16.0%, so I assume part of the gain fades.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 22.8% was helped by tax credits and a lower state rate, while the 2026 nine-month rate is about 24.8% ($61,627 tax on $248,988 pretax income)."
+     },
+     "why": "2025 was distorted by the Nova and Pivot acquisitions, one-time costs to separate from Select, and a $109.3 million interest burden. FY2026 guidance (revenue $2,360mm-$2,380mm, income from operations $400-405mm) shows a clearly higher run-rate. I therefore anchor years 1-2 on guidance rather than on 2025."
+    },
+    "value_at_old_defaults": 25.729960689486422,
+    "values": {
+     "base": 38.796932861850244,
+     "bear": 29.86141609145675,
+     "bull": 50.901771599505736
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 25.729960689486422,
+  "value_at_old_defaults_quoted": 25.729960689486422,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4936303560.080444,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 128296000.0,
@@ -15,7 +543,7 @@
   "Matt DiCanio succeeded Keith Newton as president and chief executive officer, and Keith Newton became executive chairman of the Board."
  ],
  "in_code_book": false,
- "ke": 0.08358973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 5327917660,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +551,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 25.791158763563764,
-  "3000": 26.47216039835471
+  "1000": 38.15485924515924,
+  "3000": 38.796932861850244
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1723,140 +2251,17 @@
   ]
  },
  "ticker": "CON",
- "upside": -0.37895014227187274,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 none, 3000 up)",
-   "seeds_disagree: op_margin.y1 (1000 down, 3000 none)",
-   "seeds_disagree: op_margin.y2 (1000 none, 3000 up)",
-   "ytd_outside_record: op_margin.y1 0.1813",
-   "held_at_record: rev_growth.y1 model 0.0955 valued at 0.1067"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s179",
-     "P6.s184",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Operations - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nRevenue | $ 622,122 | $ 572,800 | $ 1,797,707 | $ 1,624,337\nCosts and expenses:\nCost of services, exclusive of depreciation and amortization | 426,650 | 405,535 | 1,239,669 | 1,151,970\nGeneral and administrative, exclusive of depreciation and amortization | [1] | 60,928 | 52,884 | 172,885 | 152,528\nDepreciation and amortization | 20,152 | 19,909 | 59,699 | 55,526\nTotal costs and expenses | 507,730 | 478,328 | 1,472,253 | 1,360,024\nOther operating income, net | 807 | 0 | 423 | 20\nIncome from operations | 115,199 | 94,472 | 325,877 | 264,333\nOther income and expense:\nLoss on early retirement of debt | 0 | 0 | 0 | (875)\nInterest expense | (25,163) | (28,683) | (76,889) | (82,424)\nIncome before income taxes | 90,036 | 65,789 | 248,988 | 181,034\nIncome tax expense | 22,266 | 15,967 | 61,627 | 44,376\nNet income | 67,770 | 49,822 | 187,361 | 136,658\nLess: net income attributable to non-controlling interests | 1,884 | 1,563 | 5,688 | 4,928\nNet income attributable to the Company | $ 65,886 | $ 48,259 | $ 181,673 | $ 131,730\nEarnings per common share (Note 11):\nBasic (in dollars per share) | $ 0.52 | $ 0.38 | $ 1.42 | $ 1.03\nDiluted (in dollars per share) | $ 0.52 | $ 0.38 | $ 1.42 | $ 1.03\n[1] | Includes transition services agreement fees of $0.4 million and $2.7 million for the three months ended September 30, 2026 and 2025, and $3.0 million and $9.9 million for the nine months ended September 30, 2026 and 2025, respectively. See Note 12\u2014\u201cRelated Party Transactions\u2014Transition Services Agreement\u201d, for additional information."
-   },
-   "P6.s179": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "Transition Services Agreement scheduled to formally expire in NovemberSEPARATION Completed leadership transition effective November 1, with Matt DiCanio as President & CEO, Tanner Newton as EVP & CFO, and Keith Newton as executive chairman of the Board LEADERSHIP Raising FY 2026 guidance for Revenue ($2.36bn-$2.38bn) and Adjusted EBITDA1 ($505mm-$510mm)GUIDANCE"
-   },
-   "P6.s184": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "FY 2025 FY 2026 Guidance Commentary Total Revenue $2,163.4mm $2,360mm \u2013 $2,380mm Raising previous guidance ($2,325mm \u2013 $2,375mm) Adjusted EBITDA1 $431.9mm $505mm \u2013 $510mm Raising previous guidance ($485mm \u2013 $495mm) Free Cash Flow1 $197.8mm $220mm \u2013 $240mm Reiterating previous guidance Capital Expenditures2 $82.3mm $70mm \u2013 $80mm Remain on track for target"
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.033779352847064056,
-    0.033779352847064056,
-    0.033779352847064056,
-    0.033779352847064056,
-    0.033779352847064056
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.15490751266686026,
-   "normalized.margin": 0.15490751266686026,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.18127370033047654,
-   "op_margin.y2": 0.15490751266686026,
-   "rev_growth.y1": 0.10673277774254974,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06235860124823188
-  },
-  "numbers": {
-   "capex": [
-    0.033779352847064056,
-    0.033779352847064056,
-    0.033779352847064056,
-    0.033779352847064056,
-    0.033779352847064056
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.15490751266686026,
-   "normalized.margin": 0.15490751266686026,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.18127370033047654,
-   "op_margin.y2": 0.15490751266686026,
-   "rev_growth.y1": 0.09548921913805808,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06235860124823188
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.09548921913805808,
-    "model_option": "guidance",
-    "record": 0.10673277774254974,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence prints no full-year 2026 operating margin guidance. The packet gives only levels for income from operations ($400-$405, in millions) in a reconciliation table.",
-   "Fourth-quarter 2026 results are not in the evidence. How the summer seasonality noted in the 10-K will affect Q4 margins is not stated.",
-   "Parts of the earnings release and investor presentation, including parts of the business outlook text, are omitted. Further guidance detail there is not known.",
-   "The evidence does not say how much of the new $250 million repurchase authorization will be used, or on what timing.",
-   "The evidence does not say what the 2026 CEO and CFO leadership transition will mean for strategy or costs."
-  ],
-  "year": 3
- },
- "value_base": 25.791158763563764,
- "value_bear": 25.41698601117112,
- "value_bull": 26.061539921407324,
+ "upside": -0.07350228079905341,
+ "valuation": null,
+ "value_base": 38.47589605350474,
+ "value_bear": 28.281807990617324,
+ "value_bull": 50.99818101501552,
  "value_per_filed_share": {
-  "base": 25.791158763563764,
-  "bear": 25.41698601117112,
-  "bull": 26.061539921407324
+  "base": 38.47589605350474,
+  "bear": 28.281807990617324,
+  "bull": 50.99818101501552
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -16.6 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -2.9 points a year against the required return over 3 years"
 }

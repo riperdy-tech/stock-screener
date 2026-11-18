@@ -1,11 +1,474 @@
 {
- "alpha_pts": -17.871156001854757,
+ "alpha_pts": -12.94623032087415,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 87,
  "claims_supported": 85,
  "date": "2026-11-17T23:32:17Z",
- "equity_value": 6719825343.309724,
+ "decided": {
+  "flags": [
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0438 and margin 0.0860, margin 0.0860 (persist), growth 0.0375, terminal RONIC 0.0545 (equity return r 0.0946), F 10",
+  "run_gap": 0.0240674923410325,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 198000000.0,
+     "excess_cash_before": 198000000.0,
+     "k0_after": 412049375.9036144,
+     "k0_before": 412049375.9036144,
+     "k0_interest": 404000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 495112792.2223199,
+     "x0_before": 495112792.2223199
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 6991044366.381637,
+     "seam_ratio": 1.0058539632055543,
+     "tv_share": 0.36828474220825075,
+     "wedge_rate_5": -0.0008866864491215988
+    },
+    "flags": [
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.19,
+     "fade_years": 10,
+     "long_run_op_margin": 0.083,
+     "op_margin": [
+      0.074,
+      0.09,
+      0.093,
+      0.094,
+      0.094
+     ],
+     "return_on_new_investment_long_run": 0.075,
+     "rev_growth": [
+      0.05,
+      0.045,
+      0.04,
+      0.035,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0438 and margin 0.0860, margin 0.0860 (persist), growth 0.0375, terminal RONIC 0.0545 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 85
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.07,
+      0.095
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital Expenditures | $2.4B"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.2148"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided 2026 capex of $2.4B on about $13.3B revenue is about 18%, below the 21% five-year pooled average. Fleet growth and the need to replenish aged units after the 2025 capex cut point to about 19%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "for periods generally ranging three to seven years for trucks and tractors and ten years for trailers"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margin and growth fade over a decade because lease contracts run 3-7 years and fleet and used-vehicle cycles are long."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The transportation industry is highly cyclical and susceptible to trends in economic activity."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $12,665.0 million | 0.0023 | 0.0860"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is cyclical and the current margin is above the post-2019 trough, so some of the gap to the long-run median should fade. The structurally better lease pricing and cost savings justify a long-run level at or slightly above the history median of about 7-8%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "FY26 GAAP EPS (includes ~$4.30 non-cash pension settlement charges)(1) | $9.75 - $9.95"
+       },
+       {
+        "id": "P4",
+        "quote": "In addition, we remain on track to deliver over $70 million in expected earnings benefits from strategic initiatives this year, and are well positioned for continued growth."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is depressed by the non-cash pension settlement charges in GAAP, then margin recovers toward 9% on initiative benefits, higher lease pricing and better used-vehicle results. Comparable EPS guidance of $14.85-$15.05 against GAAP of $9.75-$9.95 shows the size of the one-off gap."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0545."
+       },
+       {
+        "id": "P4",
+        "quote": "Adjusted return on equity (1) | 18% | 17%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital of 8.7% is only modestly above the 5.45% level at which growth adds no value. Lease pricing initiatives support some excess return, but competition and cost of capital limit it, so I use 7.5%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Total Revenue Growth | 5%"
+       },
+       {
+        "id": "P6",
+        "quote": "Operating revenue (non-GAAP) growth remains at 3%, primarily driven by SCS"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides 2026 total revenue growth of 5%, with contractual growth in SCS and FMS, and says freight conditions are strengthening. Fuel pass-through inflates 2026 revenue, so growth fades to the roughly 3% operating-revenue trend."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P1",
+        "quote": "leveraging secular trends that favor outsourcing logistics and transportation services;"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Outsourcing trends support growth at or above GDP, but fleet leasing is mature and competitive, so I set terminal growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_op_margin",
+      "risk": "Freight recovery stalls and used-vehicle prices and rental utilization fall back, as in 2023-25, with higher depreciation and losses on sales"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "rev_growth",
+      "risk": "Tariffs, recession or the loss of a large SCS or DTS customer cut revenue growth"
+     },
+     {
+      "bear_value": 0.055,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher capex needs to keep the fleet young, with returns on new investment close to the cost of capital"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       0.030000000000000002,
+       0.024999999999999998,
+       0.02,
+       0.015000000000000003,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       0.07,
+       0.065,
+       0.06,
+       0.055,
+       0.049999999999999996
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "A capital-intensive lease and rental fleet structurally needs debt at roughly 2.4x-2.5x equity, and 2026 debt-to-equity is guided at 245%, near the base level."
+     },
+     "margin_position": "The 2025 margin of 8.6% (pretax plus interest over revenue) sits near the middle of a range that has run from 1.6% to 12.0% over 18 years. It rose out of the 2023-24 trough as lease pricing and cost initiatives lifted contractual earnings, while used-vehicle and rental results stayed weak. In 2026 used-vehicle pricing and rental are recovering, so underlying margin is moving up. GAAP 2026 margin is held down by roughly $4.30 per share of non-cash pension settlement charges.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 26.86% base-year rate is close to the 26.0% comparable rate reported for 2025 and to recent years' 25.7%-26.1%."
+     },
+     "why": "2025 revenue was flat and used-vehicle sales were still a drag, so 2025 is a mid-cycle to slightly soft base, not a peak. Revenue growth is returning (Q3 2026 total revenue up 8%), and FMS margin has improved. The 2026 GAAP margin is distorted by pension settlement and impairment charges, so year 1 is set below the underlying level."
+    },
+    "value_at_old_defaults": 153.3666775225208,
+    "values": {
+     "base": 185.81502438562518,
+     "bear": 137.24048267473728,
+     "bull": 250.42372026853891
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 198000000.0,
+     "excess_cash_before": 198000000.0,
+     "k0_after": 412049375.9036144,
+     "k0_before": 412049375.9036144,
+     "k0_interest": 404000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 495112792.2223199,
+     "x0_before": 495112792.2223199
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7165805428.340971,
+     "seam_ratio": 1.0177957283532348,
+     "tv_share": 0.38080802442284156,
+     "wedge_rate_5": -0.0002695327609413728
+    },
+    "flags": [
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.195,
+     "fade_years": 10,
+     "long_run_op_margin": 0.086,
+     "op_margin": [
+      0.086,
+      0.09,
+      0.093,
+      0.093,
+      0.093
+     ],
+     "return_on_new_investment_long_run": 0.07,
+     "rev_growth": [
+      0.05,
+      0.045,
+      0.04,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0438 and margin 0.0860, margin 0.0860 (persist), growth 0.0375, terminal RONIC 0.0545 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 85
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.074,
+      0.098
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.065
+     ],
+     "terminal_growth": [
+      0.022,
+      0.038
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital Expenditures | $2.4B"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.2148"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 capex is guided at $2.4B, or about 18% of revenue, and fleet growth in an upcycle pushes it higher. The five-year pooled average is 21.5%, so about 19.5% is a midpoint."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "In FMS and DTS, we expect contractual sales trends to improve as freight markets normalize."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade moves margins and growth from the recovery levels toward cycle-average levels, which suits a long-lived contractual fleet business."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "In FMS and DTS, we expect contractual sales trends to improve as freight markets normalize."
+       },
+       {
+        "id": "P2",
+        "quote": "The transportation industry is highly cyclical and susceptible to trends in economic activity."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin is cyclical and 2022 may have been a peak. The ten-year median is near 8.2%, and structural pricing and maintenance gains justify a long-run level slightly above that, at about 8.6%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "we remain on track to deliver over $70 million in expected earnings benefits from strategic initiatives this year"
+       },
+       {
+        "id": "P6",
+        "quote": "In FMS, pre-tax earnings as a percent of operating revenue rose to 13.2%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2026 comparable earnings uplift, the more than $70 million of initiative benefits and the recovering used-vehicle market lift margins from 8.6%. The upside is capped because the pension settlement and impairment charges are non-cash and excluded here, and because cyclical risk remains."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0545."
+       },
+       {
+        "id": "P2",
+        "quote": "any increase in either the cost of our debt or equity as a result of, for example, reductions in our debt rating or stock price volatility could have a significant impact on our competitive position"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is about 8.7%, above the 5.45% break-even. Competition and capital intensity should keep new-investment returns modestly above break-even, at about 7%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Total Revenue Growth | 5%"
+       },
+       {
+        "id": "P1",
+        "quote": "of which $234 billion was outsourced"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides 2026 total revenue growth of 5%, helped by fuel pass-through. Contractual SCS and lease growth and the freight recovery support 3.5% to 4.5% afterwards, as outsourcing slowly gains share."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature North American logistics and leasing business should grow slightly below the 3.75% nominal anchor, as the outsourcing tailwind fades."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.072,
+      "input_hit": "long_run_op_margin",
+      "risk": "Freight cycle turns down again, or used-vehicle prices fall below residual estimates, hurting rental, used sales and depreciation"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "rev_growth",
+      "risk": "Tariffs, a macro slowdown or loss of large SCS/DTS customers stall revenue growth"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Outsourcing tailwind fades and automation or zero-emission vehicles erode service demand"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.074,
+      "rev_growth": [
+       0.025,
+       0.019999999999999997,
+       0.015,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.022
+     },
+     "bull": {
+      "long_run_op_margin": 0.098,
+      "rev_growth": [
+       0.07500000000000001,
+       0.07,
+       0.065,
+       0.060000000000000005,
+       0.060000000000000005
+      ],
+      "terminal_growth": 0.038
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt to equity of 250% fell to 242% and is guided at 245%, which fits a capital-intensive lessor funding its fleet with debt."
+     },
+     "margin_position": "The 2025 margin of 8.6% is near the ten-year median of about 8.2% but well below the 2022 peak of 12%. It was held down by weak used-vehicle sales and rental after a long freight downturn, and it is now recovering as lease pricing, maintenance savings and used-vehicle pricing improve. FMS pre-tax margin on operating revenue reached 13.2% in Q3 2026.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 26.8% effective rate (26.0% comparable) is stable and close to the long-run statutory blend."
+     },
+     "why": "2025 revenue was flat and earnings were growing modestly, with used-vehicle losses of $22 million still a drag. It is a reasonable but slightly trough-like base. The 2026 results show a freight upturn, so margins should drift up in years 1 to 5 and then fade toward a cycle-average level."
+    },
+    "value_at_old_defaults": 153.3666775225208,
+    "values": {
+     "base": 190.34159769611566,
+     "bear": 139.23128199229922,
+     "bull": 264.64051016494005
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 153.3666775225208,
+  "value_at_old_defaults_quoted": 153.3666775225208,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 7862237636.441505,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 41803000.0,
@@ -23,12 +486,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 160.7498347800331,
-  "3000": 160.7498347800331
+  "1000": 185.81502438562518,
+  "3000": 190.34159769611566
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1264,159 +1727,17 @@
   ]
  },
  "ticker": "R",
- "upside": -0.37544215706917594,
- "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.0500 valued at 0.0438"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s55",
-     "P6.s23",
-     "P4.s29"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s62",
-     "P4.s40",
-     "F3"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "down",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS - USD ($) $ in Millions | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash flows from operating activities from continuing operations:\nNet earnings | $ 388 | $ 367\nLess: Loss from discontinued operations, net of tax | (1) | (1)\nEarnings from continuing operations | 389 | 368\nDepreciation expense | 1,280 | 1,274\nUsed vehicle sales, net | (36) | (10)\nAmortization expense and other non-cash charges, net | 110 | 115\nOperating lease right-of-use asset amortization expense | 284 | 281\nNon-operating pension costs, net and share-based compensation expense | 64 | 56\nDeferred income taxes | 16 | 98\nCollections on sales-type leases | 134 | 123\nChanges in operating assets and liabilities:\nReceivables | (183) | (234)\nPrepaid expenses and other assets | (15) | 157\nAccounts payable | 74 | (34)\nAccrued expenses and other liabilities | (132) | (349)\nNet cash provided by operating activities from continuing operations | 1,985 | 1,845\nCash flows from investing activities from continuing operations:\nPurchases of property and revenue earning equipment | (1,375) | (1,730)\nSales of revenue earning equipment | 371 | 369\nSales of operating property and equipment | 11 | 11\nAcquisitions, net of cash acquired | (12) | (1)\nOther investing activities, net | 0 | 1\nNet cash used in investing activities from continuing operations | (1,005) | (1,350)\nCash flows from financing activities from continuing operations:\nNet (repayments) borrowings of commercial paper and other | (576) | 356\nDebt proceeds | 496 | 594\nDebt repayments | (398) | (939)\nDividends on common stock | (113) | (108)\nCommon stock issued, net of tax withholdings on vested stock awards | (15) | (17)\nCommon stock repurchased | (372) | (350)\nOther financing activities | 1 | (5)\nNet cash used in financing activities from continuing operations | (977) | (469)\nEffect of exchange rate changes on Cash and cash equivalents | (3) | 10\nIncrease in Cash and cash equivalents from continuing operations | 0 | 36\nNet cash used in operating activities from discontinued operations | 0 | (1)\nIncrease in Cash and cash equivalents | 0 | 35\nCash and cash equivalents at beginning of period | 198 | 154\nCash and cash equivalents at end of period | $ 198 | $ 189"
-   },
-   "P4.s29": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Total revenue | $3,433 | $3,171 | $9,906 | $9,490 | 8% | 4%"
-   },
-   "P4.s40": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Total capital expenditures (2) | 1,448 | 1,605 | (10)%"
-   },
-   "P6.s23": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Total | $3,433 | 3,171 | 8% | $2,759 | 2,611 | 6%"
-   },
-   "P6.s55": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Total Revenue Growth | 5%"
-   },
-   "P6.s62": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Capital Expenditures | $2.4B"
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.21484733993668947,
-    0.21484733993668947,
-    0.21484733993668947,
-    0.21484733993668947,
-    0.21484733993668947
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.08598499802605605,
-   "normalized.margin": 0.08598499802605605,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.08598499802605605,
-   "op_margin.y2": 0.08598499802605605,
-   "rev_growth.y1": 0.043835616438356206,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05452484703637127
-  },
-  "numbers": {
-   "capex": [
-    0.1804748745135638,
-    0.18906799086934523,
-    0.19766110722512664,
-    0.20625422358090806,
-    0.21484733993668947
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.08598499802605605,
-   "normalized.margin": 0.08598499802605605,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.08598499802605605,
-   "op_margin.y2": 0.08598499802605605,
-   "rev_growth.y1": 0.05,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05452484703637127
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.05,
-    "model_option": "guidance",
-    "record": 0.043835616438356206,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "guidance",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The Q3 2026 Form 10-Q income statement does not report an operating income line item, so year-to-date operating margin is not available.",
-   "Management provides full-year 2026 guidance for GAAP total revenue growth, non-GAAP operating revenue growth, and capital expenditures, but provides no quantitative guidance for operating margin, 2027 revenue growth or margins, or post-2026 capital expenditures.",
-   "The pre-tax dollar amount of the non-cash pension settlement charges expected in the fourth quarter of 2026 is not stated in the packet.",
-   "Portions of the 2025 Form 10-K, Q3 2026 Form 10-Q, and 2026 Form 8-K releases (including non-GAAP reconciliations and liquidity details) were omitted from the packet, and no post-Q3 2026 operating results exist prior to the decision time."
-  ],
-  "year": 3
- },
- "value_base": 160.7498347800331,
- "value_bear": 134.52523650548005,
- "value_bull": 203.66018917153295,
+ "upside": -0.2692634215985573,
+ "valuation": null,
+ "value_base": 188.0783110408704,
+ "value_bear": 138.23588233351825,
+ "value_bull": 257.5321152167395,
  "value_per_filed_share": {
-  "base": 160.7498347800331,
-  "bear": 134.52523650548005,
-  "bull": 203.66018917153295
+  "base": 188.0783110408704,
+  "bear": 138.23588233351825,
+  "bull": 257.5321152167395
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -17.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -12.9 points a year against the required return over 3 years"
 }

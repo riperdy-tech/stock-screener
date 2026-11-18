@@ -1,11 +1,480 @@
 {
- "alpha_pts": 45.694738273986275,
+ "alpha_pts": 59.02634128197264,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 93,
  "claims_supported": 81,
  "date": "2026-11-16T11:21:26Z",
- "equity_value": 8368385140.987654,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 0.1251 rate is income tax of $86.4 million on pretax income of $690.8 million that includes non-taxed disposal gains and FX items, and cash taxes paid were only $44.7 million, so a rate this low is unlikely to persist.",
+   "run 1000: debt_level_representative_no: The $3,510.1 million total debt predates the $200 million note redemption and the Latam sale proceeds, and the merger sets caps on gross debt, so the level will change.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The 12.5% rate is taxes of $86.4 million divided by a pretax income inflated by $219.1 million of finance income and other income, so tax on normalised operating profit would be higher.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3958 (persist), growth 0.0375, terminal RONIC 0.0842 (equity return r 0.0890), F 10",
+  "run_gap": 0.006150711195471809,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 825700000.0,
+     "excess_cash_before": 825700000.0,
+     "k0_after": 144965935.30253375,
+     "k0_before": 144965935.30253375,
+     "k0_interest": 349700000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 591830846.4145173,
+     "x0_before": 591830846.4145173
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 8656782649.780071,
+     "seam_ratio": 1.0265662955167856,
+     "tv_share": 0.46163400604054644,
+     "wedge_rate_5": -0.01716614821737899
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 0.1251 rate is income tax of $86.4 million on pretax income of $690.8 million that includes non-taxed disposal gains and FX items, and cash taxes paid were only $44.7 million, so a rate this low is unlikely to persist.",
+     "debt_level_representative_no: The $3,510.1 million total debt predates the $200 million note redemption and the Latam sale proceeds, and the merger sets caps on gross debt, so the level will change.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.15,
+     "fade_years": 10,
+     "long_run_op_margin": 0.38,
+     "op_margin": [
+      0.39,
+      0.4,
+      0.4,
+      0.4,
+      0.4
+     ],
+     "return_on_new_investment_long_run": 0.14,
+     "rev_growth": [
+      0.17,
+      0.07,
+      0.06,
+      0.055,
+      0.05
+     ],
+     "terminal_growth": 0.04
+    },
+    "old_defaults_inputs": "margin 0.3958 (persist), growth 0.0375, terminal RONIC 0.0842 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 12,
+     "kept": 81
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.3,
+      0.44
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.09
+     ],
+     "terminal_growth": [
+      0.025,
+      0.05
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1789"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property, plant and equipment | (217.5) | (235.2) | (464.9)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex ran 0.1375 of revenue in 2025 against a pooled 0.1789. The Latam exit removes the heavier build programme, and power and site maintenance keep Africa spending near 0.15."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Our MLAs typically include annual or semi-annual inflation-linked revenue escalators, limited customer termination rights"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Colocation and escalators give a gradual fade over about 10 years from the early-period growth rate toward terminal growth."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 821.4 | 604.0 | 524.4"
+       },
+       {
+        "id": "P1",
+        "quote": "these Key Customers had aggregate Contracted Revenue of $11.1 billion and an average remaining lease term of 7.5 years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long contracts of about 7.5 years and 23% power indexation support margins. The 0.52 filed figure should not persist because it relies on disposal gains, and Naira and customer-concentration risk argue for a conservative long-run level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Other income | 179.6 | 85.8 | 0.4"
+       },
+       {
+        "id": "P5",
+        "quote": "Segment Adjusted EBITDA for the third quarter increased 26.8% year-on-year to $215.0 million, resulting in an Adjusted EBITDA Margin of 59.8%."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Underlying 2025 margin excluding other income is about 0.41. Power pass-through revenue and higher diesel costs dilute the margin, and the Nigeria segment EBITDA margin was 59.8% in Q3. I assume the margin sits slightly below the underlying 2025 level."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P3",
+        "quote": "The average cost to build a New Site in our African markets is typically in the range of between $50,000 and $100,000"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return of 0.5066 reflects a tangible capital base shrunk by impairments, so it overstates what new capital earns. New sites cost $50,000 to $100,000 each, and colocation is cheaper to add. I set a return well above the 0.0842 break-even but far below the base-year figure."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "positively impacted revenue and segment Adjusted EBITDA in the third quarter of 2026 by $40.7 million and $24.1 million"
+       },
+       {
+        "id": "P1",
+        "quote": "Our MLAs typically include annual or semi-annual inflation-linked revenue escalators, limited customer termination rights"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is lifted by Naira translation and power pass-through, with Q3 2026 revenue up 21.4% on 403.9. The Rwanda sale only partly offsets this. Later years fade toward contractual CPI escalators and colocation growth, with FX and Nigeria concentration as the main swing factors."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "68% of our revenue from continuing operations, for the year ended December 31, 2025"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Revenue is inflation-linked in emerging markets with about 47% USD or euro linkage, so nominal USD growth near the 0.0375 anchor is reasonable. I set it slightly higher for African inflation and colocation, but FX depreciation trims it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Naira devaluation or FX-reset lag, or Nigerian customer disputes or churn, since Nigeria is 68% of revenue"
+     },
+     {
+      "bear_value": 0.3,
+      "input_hit": "long_run_op_margin",
+      "risk": "Diesel and power costs rise without full pass-through, and the Naira translation tailwind reverses"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Weaker returns on new tower investment because of customer concentration and heavy build costs"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.3,
+      "rev_growth": [
+       0.13,
+       0.030000000000000013,
+       0.020000000000000004,
+       0.015000000000000006,
+       0.010000000000000009
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.44,
+      "rev_growth": [
+       0.2,
+       0.1,
+       0.09,
+       0.08499999999999999,
+       0.08
+      ],
+      "terminal_growth": 0.05
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The $3,510.1 million total debt predates the $200 million note redemption and the Latam sale proceeds, and the merger sets caps on gross debt, so the level will change."
+     },
+     "margin_position": "The filed 2025 operating margin of 0.5192 is inflated by $179.6 million of other income (disposal gains) inside operating income. Without it the margin is about 0.41. Towers have long inflation-linked contracts, but 68% of revenue is Nigerian and the Naira is volatile. Rising power pass-through revenue earns little margin and dilutes the percentage.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 0.1251 rate is income tax of $86.4 million on pretax income of $690.8 million that includes non-taxed disposal gains and FX items, and cash taxes paid were only $44.7 million, so a rate this low is unlikely to persist."
+     },
+     "why": "2025 operating income includes $179.6 million of other income, and 2025 revenue includes the Rwanda business until it was sold in October 2025. Latam is now sold, so the continuing business is Africa only. Q3 2026 revenue of 490.5 is up 21.4% on Naira translation and power pass-through, so the 2025 base understates the 2026 revenue level and overstates the margin."
+    },
+    "value_at_old_defaults": 21.488872104421286,
+    "values": {
+     "base": 29.723365964448334,
+     "bear": 19.005016111684714,
+     "bull": 45.469340705442484
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 825700000.0,
+     "excess_cash_before": 825700000.0,
+     "k0_after": 144965935.30253375,
+     "k0_before": 144965935.30253375,
+     "k0_interest": 349700000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 591830846.4145173,
+     "x0_before": 591830846.4145173
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 8599002233.60697,
+     "seam_ratio": 1.0332908716951832,
+     "tv_share": 0.43456328625514196,
+     "wedge_rate_5": -0.01703213926538879
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 12.5% rate is taxes of $86.4 million divided by a pretax income inflated by $219.1 million of finance income and other income, so tax on normalised operating profit would be higher.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.15,
+     "fade_years": 10,
+     "long_run_op_margin": 0.38,
+     "op_margin": [
+      0.43,
+      0.42,
+      0.41,
+      0.4,
+      0.4
+     ],
+     "return_on_new_investment_long_run": 0.13,
+     "rev_growth": [
+      0.16,
+      0.08,
+      0.07,
+      0.065,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.3958 (persist), growth 0.0375, terminal RONIC 0.0842 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 12,
+     "kept": 81
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.3,
+      0.44
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.1
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.1789"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property, plant and equipment | (217.5) | (235.2) | (464.9)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2025 capex was 13.75% of revenue and the pooled average is 17.9% (with heavier Latam and new-site builds). Latam is now sold, so I use 15% for maintenance, power equipment and new sites."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0890"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Escalators and contracts keep growth decaying only gradually from the mid-single digits toward terminal, so a ten-year fade is a reasonable middle case. Evidence for the exact length is thin."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "year-on-year increase in power generation costs ($38.8 million)"
+       },
+       {
+        "id": "P2",
+        "quote": "68% of our revenue from continuing operations"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base rate says about half of the gap between the latest margin and the median persists, and the latest margin is flattered by one-offs. Higher power costs ($38.8 million in Q3 2026, mostly passed through) and Nigeria concentration argue for a fade to the high 30s."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Other income | 179.6 | 85.8 | 0.4"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 821.4 | 604.0 | 524.4"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin includes $179.6 million of other income that will not recur. The underlying margin is about 0.41, and the Naira tailwind may lift 2026 slightly. Rising power pass-through revenue dilutes margin, so I hold margins around 0.40-0.43."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0842."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 0.51 reflects depreciated legacy assets and the other-income gain. New towers and colocation earn solid but far lower returns, above the 0.0842 break-even, so I use 0.13."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "positively impacted revenue and segment Adjusted EBITDA in the third quarter of 2026 by $40.7 million and $24.1 million"
+       },
+       {
+        "id": "P1",
+        "quote": "these Key Customers had aggregate Contracted Revenue of $11.1 billion and an average remaining lease term of 7.5 years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q3 2026 continuing revenue grew 21.4% year on year, helped by Naira translation, so year 1 is high at 16%. After that growth reverts to CPI escalators, colocation, new sites and power pass-through (~7%), with Naira reset lag as a risk. Contracted revenue provides a visible base."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Revenue is in emerging-market currencies with partial USD/CPI linkage, so long-run nominal growth near the anchor but slightly below it is reasonable."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Naira devaluation or reset lag, or MTN Nigeria renegotiation, hits translated revenue and margin in Nigeria (68% of revenue)"
+     },
+     {
+      "bear_value": 0.3,
+      "input_hit": "long_run_op_margin",
+      "risk": "Power/diesel cost spikes not fully passed through, or other-income gains prove non-recurring, so margins fade to the low end"
+     },
+     {
+      "bear_value": 0.19,
+      "input_hit": "capex_to_revenue",
+      "risk": "Higher required capex for new sites and power equipment without matching revenue"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.3,
+      "rev_growth": [
+       0.12,
+       0.039999999999999994,
+       0.03,
+       0.024999999999999994,
+       0.01999999999999999
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.44,
+      "rev_growth": [
+       0.19,
+       0.11,
+       0.1,
+       0.095,
+       0.09
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Reported debt of $3,510.1 million excludes Latam debt classified as held for sale, and a $200 million note was redeemed in September 2026, while the merger imposes gross-debt caps."
+     },
+     "margin_position": "The 2025 operating margin of 0.5192 is inflated by $179.6 million of other income (disposal gains and similar) inside operating income. Without it the margin is about 0.41. Earlier years were depressed by impairments and Naira devaluation, so the filed history is volatile. Tower leases are long-dated, inflation-linked and power-indexed, so the underlying margin is structurally high but exposed to Nigeria.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 12.5% rate is taxes of $86.4 million divided by a pretax income inflated by $219.1 million of finance income and other income, so tax on normalised operating profit would be higher."
+     },
+     "why": "Base-year operating income includes a large non-recurring other-income line, and finance costs fell sharply from FX-driven losses in 2023 and 2024. The Latam operations are now discontinued and sold, so continuing ops are Africa-only and 68% Nigeria. Q3 2026 revenue grew strongly, helped by Naira translation and power pass-through, which lifts revenue without adding margin."
+    },
+    "value_at_old_defaults": 21.488872104421286,
+    "values": {
+     "base": 29.54110663688695,
+     "bear": 19.76669414860667,
+     "bull": 43.91648562880263
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 21.488872104421286,
+  "value_at_old_defaults_quoted": 21.488872104421286,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 10123468313.051191,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 341637000.0,
@@ -15,7 +484,7 @@
   "IHS Mauritius BR Limited agreed to sell its Latin American tower operations to Latam Towers Infrastructure, LLC at an enterprise value of approximately $952 million (cash consideration of BRL3,550 million, or approximately $683 million), and the Group completed the disposal."
  ],
  "in_code_book": false,
- "ke": 0.08883203083918918,
+ "ke": 0.08903203083918919,
  "market_cap_at_publish": 2845445717,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +492,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 24.494961438566822,
-  "3000": 22.023071685497037
+  "1000": 29.723365964448334,
+  "3000": 29.54110663688695
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1335,136 +1804,17 @@
   ]
  },
  "ticker": "IHS",
- "upside": 1.9409751488109848,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: terminal_g (1000 none, 3000 down)",
-   "margin_at_record_peak: normalized.margin 0.3958 at or above the record's p75 0.3955",
-   "margin_at_record_peak: long_run_op_margin 0.3958 at or above the record's p75 0.3955"
-  ],
-  "departures": [
-   {
-    "driver": "competition",
-    "evidence": [
-     "P1.s40",
-     "P3.s113",
-     "P3.s136",
-     "V0"
-    ],
-    "input": "terminal_ronic"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "up"
-  },
-  "evidence": {
-   "P1.s40": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "As of December 31, 2025, we are the largest independent tower operator in five of the seven markets in which we operate, and we are the only independent tower operator of scale in three of these markets."
-   },
-   "P3.s113": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Colocation and Lease Amendments improve overall gross margins, operating margins and cash flow given the limited incremental cost to deliver such services."
-   },
-   "P3.s136": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "We do not engage in speculative building and only construct New Sites after obtaining a commitment for a long-term lease with an initial tenant and, in general, if we are aware of, or believe there is, commercial potential for Colocation."
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min 0.1592, p25 0.2458, median 0.2724, p75 0.3955, max 0.5192, last 0.5192; persist 0.3958 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 0.2415, 2023-12-31 -0.0184, 2024-12-31 -0.2068, 2025-12-31 0.0359.\nBase-year revenue 1,582,000,000; tax rate 0.1251; return on opening capital 0.5066; capital expenditure 0.1789 and depreciation 0.2179 of revenue (pooled); the desk depreciates by the pooled rule.\nCost of equity 0.0888 (risk-free 0.0510, long-run growth anchor 0.0375, loading 0.793, equity premium 0.0477).\nYear 1 to date: not available (no 10-Q of year 1 effective at T).\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: anchor 0.0375; record_median 0.0088; last 0.0359; zero 0.0000; ytd not available; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.0088; last 0.0359; zero 0.0000; guidance\nop_margin.y1: persist 0.3958; median 0.2724; p25 0.2458; p75 0.3955; last 0.5192; ytd not available; guidance\nop_margin.y2: persist 0.3958; median 0.2724; p25 0.2458; p75 0.3955; last 0.5192; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.3958; median 0.2724; p25 0.2458; p75 0.3955; last 0.5192; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0841; quarter 0.1063; half 0.1443; three_quarters 0.2246; ronic0 0.5066\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.1789; record_last 0.1375; record_max 0.2415; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.17891211142776148,
-    0.17891211142776148,
-    0.17891211142776148,
-    0.17891211142776148,
-    0.17891211142776148
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3957946593510342,
-   "normalized.margin": 0.3957946593510342,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.3957946593510342,
-   "op_margin.y2": 0.3957946593510342,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08413865882441297
-  },
-  "numbers": {
-   "capex": [
-    0.17891211142776148,
-    0.17891211142776148,
-    0.17891211142776148,
-    0.17891211142776148,
-    0.17891211142776148
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3957946593510342,
-   "normalized.margin": 0.3957946593510342,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.3957946593510342,
-   "op_margin.y2": 0.3957946593510342,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10630022991870929
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "anchor",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "quarter"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No quantitative 2026 guidance for revenue, operating margin, or capital expenditure is present in the provided filings or releases.",
-   "Year-to-date 2026 operating income and continuing-operations capital expenditure are not available because no Form 10-Q or Form 8-K Item 2.02 was filed and the detailed financial tables in the Q3 2026 Form 6-K filings are omitted from the packet.",
-   "Whether the pending merger with MTN Group Limited at $8.50 per share (terminable if not consummated on or before November 17, 2026, subject to extensions) will obtain required approvals and close is unknown as of decision time T.",
-   "Historical capital expenditure in the cash flow statements includes the Latin America segment disposed in May and August 2026, and continuing-operations-only capital expenditure is not disclosed in the provided evidence."
-  ],
-  "year": 3
- },
- "value_base": 24.494961438566822,
- "value_bear": 20.923299695997404,
- "value_bull": 26.34013320266084,
+ "upside": 2.5577794552779345,
+ "valuation": null,
+ "value_base": 29.632236300667643,
+ "value_bear": 19.385855130145693,
+ "value_bull": 44.692913167122555,
  "value_per_filed_share": {
-  "base": 24.494961438566822,
-  "bear": 20.923299695997404,
-  "bull": 26.34013320266084
+  "base": 29.632236300667643,
+  "bear": 19.385855130145693,
+  "bull": 44.692913167122555
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +45.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +59.0 points a year against the required return over 3 years"
 }

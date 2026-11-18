@@ -1,11 +1,514 @@
 {
- "alpha_pts": -73.90064792982939,
+ "alpha_pts": -21.88895164654749,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 85,
  "claims_supported": 82,
  "date": "2026-11-18T06:31:36Z",
- "equity_value": 17248215.993880108,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.0800 (filed -2.7194 to 0.0708)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.0950 (filed -2.7194 to 0.0708)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.1050 (filed -2.7194 to 0.0708)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.1150 (filed -2.7194 to 0.0708)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.1200 (filed -2.7194 to 0.0708)",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.0900 (filed -2.7194 to 0.0708)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.1050 (filed -2.7194 to 0.0708)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.1150 (filed -2.7194 to 0.0708)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.1200 (filed -2.7194 to 0.0708)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.1300 (filed -2.7194 to 0.0708)",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1164 and margin 0.0612, margin 0.0030 (persist), growth 0.0375, terminal RONIC 0.1254 (equity return r 0.0838), F 10",
+  "run_gap": 0.15279330660989968,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 121960.24096385537,
+     "cash_not_free": {
+      "amount": 3000000.0,
+      "printed": 3.0,
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "liquidity in an amount which shall exceed the greater of (i) $3.0 million"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "Minimum liquidity the CRG Term Loan covenant requires the company to maintain"
+     },
+     "excess_cash_after": 13578857.0,
+     "excess_cash_before": 16578857.0,
+     "k0_after": 8242801.548805759,
+     "k0_before": 8364761.789769615,
+     "k0_interest": 6759800.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 1222950.37644345,
+     "x0_before": 1126601.7860820044
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 93269671.57460862,
+     "seam_ratio": 1.0351344743741817,
+     "tv_share": 0.5158910396147367,
+     "wedge_rate_5": -0.005578746464346611
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y2 0.0800 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: op_margin.y3 0.0950 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: op_margin.y4 0.1050 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: op_margin.y5 0.1150 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: long_run_op_margin 0.1200 (filed -2.7194 to 0.0708)",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.01,
+     "fade_years": 10,
+     "long_run_op_margin": 0.12,
+     "op_margin": [
+      0.05,
+      0.08,
+      0.095,
+      0.105,
+      0.115
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.095,
+      0.09,
+      0.08,
+      0.07,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1164 and margin 0.0612, margin 0.0030 (persist), growth 0.0375, terminal RONIC 0.1254 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 82
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.08,
+      0.165
+     ],
+     "rev_growth_y3": [
+      0.04,
+      0.115
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (49,052) | (4,543,491)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Continuing surgical operations need very little capital: nine-month 2026 PP&E purchases were only $49K. The 2025 spike came from THP, now discontinued, so I use about 1%, below the 1.7% pooled figure."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "CellerateRX Surgical has no comprehensive patent protection"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive moats are limited and CellerateRX has no comprehensive patent protection, so excess growth should fade over a moderate period of 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $103.1 million | 0.1897 | 0.0708"
+       },
+       {
+        "id": "P3",
+        "quote": "Gross margins were approximately 93% and 91%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 93% gross margin supports scale leverage, but SG&A is heavy, SBC is real, and the lead product has no comprehensive patent protection, so I cap the long-run margin near 12%. The margin rose from 1.5% to 7.1% over 2024-25."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating income of $0.7 million, compared to operating income of $2.9 million in the third quarter of 2025."
+       },
+       {
+        "id": "P6",
+        "quote": "Third quarter operating income included approximately $3.0 million in legal and advisory services"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is depressed by about $4M of merger and advisory costs; Q3 operating income was only $0.7M. Costs should normalize and operating leverage should restore a rising margin from about 8% to 11.5% over years 2-5."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2384"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The model is asset-light with outsourced manufacturing, so the base-year tangible-capital return is high. I assume it fades to about 20%, still above the 12.5% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Net revenue increased 12% to $84.4 million, compared to $75.6 million in the first nine months of 2025."
+       },
+       {
+        "id": "P6",
+        "quote": "updating its full year 2026 net revenue guidance to a range of $110 million to $115 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 growth was 12%, but Q3 slowed to 8% and full-year guidance was cut to $110-115M (about 7-12%). I start at about 9.5% in year 1 and fade toward 6% as the base grows and competition from equivalent products builds."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature U.S. surgical wound and bone products business should grow near nominal GDP in perpetuity, slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_op_margin",
+      "risk": "Competitors launch equivalent hydrolyzed collagen products or larger rivals pressure pricing, cutting growth and margin"
+     },
+     {
+      "bear_value": 0.04,
+      "input_hit": "rev_growth",
+      "risk": "Growth slows faster than guided (further guidance cuts, hospital adoption delays, distributor or customer attrition during the pending merger)"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "op_margin",
+      "risk": "Failed MiMedx merger brings a $9.7M termination fee and covenant stress on the CRG loan (revenue floors rise to $95M in 2027), lowering margins"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.055,
+       0.049999999999999996,
+       0.04,
+       0.030000000000000006,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.165,
+      "rev_growth": [
+       0.13,
+       0.125,
+       0.115,
+       0.10500000000000001,
+       0.095
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "The $46.7M CRG term loan is about 2.7x Adjusted EBITDA and matures in March 2029, so the debt will likely be refinanced or repaid, and the merger outcome could change the capital structure."
+     },
+     "margin_position": "GAAP operating margin was 7.1% in 2025 after a 1.8M impairment, and about 6% in the first nine months of 2026 after roughly 4.1M of merger and advisory costs. Gross margin is about 93%, but SG&A absorbs most of it. Margin has risen as the commercial network scaled, but SBC (about 4.6% of revenue), R&D and amortization still weigh, so GAAP margin sits well below Adjusted EBITDA margin (about 16-17%).",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 21% statutory rate is a reasonable long-run rate even though accumulated losses may keep cash taxes low for a while."
+     },
+     "why": "2025 continuing operations are clean after the THP discontinuation, and revenue grew 19% to $103.1M. The 2025 margin carries a one-time 1.8M impairment and the 2026 margin carries merger costs, so neither year is a perfect run-rate. Growth is slowing (Q3 2026 +8%, guidance cut), which argues for fading growth rather than extrapolating 19%."
+    },
+    "value_at_old_defaults": -9.278352520135236,
+    "values": {
+     "base": 13.186769606486106,
+     "bear": 4.959488953815331,
+     "bull": 29.80102270349047
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 121960.24096385537,
+     "cash_not_free": {
+      "amount": 3000000.0,
+      "printed": 3.0,
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "liquidity in an amount which shall exceed the greater of (i) $3.0 million"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "minimum liquidity the CRG Term Loan covenant requires the company to maintain"
+     },
+     "excess_cash_after": 13578857.0,
+     "excess_cash_before": 16578857.0,
+     "k0_after": 8242801.548805759,
+     "k0_before": 8364761.789769615,
+     "k0_interest": 6759800.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 1222950.37644345,
+     "x0_before": 1126601.7860820044
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 110791879.33099683,
+     "seam_ratio": 1.045290046523538,
+     "tv_share": 0.5259275608087582,
+     "wedge_rate_5": -0.005502058613712435
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y2 0.0900 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: op_margin.y3 0.1050 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: op_margin.y4 0.1150 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: op_margin.y5 0.1200 (filed -2.7194 to 0.0708)",
+     "margin_outside_filed_record: long_run_op_margin 0.1300 (filed -2.7194 to 0.0708)",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.012,
+     "fade_years": 10,
+     "long_run_op_margin": 0.13,
+     "op_margin": [
+      0.058,
+      0.09,
+      0.105,
+      0.115,
+      0.12
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.085,
+      0.09,
+      0.08,
+      0.07,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1164 and margin 0.0612, margin 0.0030 (persist), growth 0.0375, terminal RONIC 0.1254 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 82
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.08,
+      0.17
+     ],
+     "rev_growth_y3": [
+      0.04,
+      0.12
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (49,052) | (4,543,491)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0167"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 capex was only $49K, and 2025 capex was related to the discontinued THP segment. Five-year pooled capex is 1.7% of revenue, so I use a low figure."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The presence of competition in the surgical market may lead to pricing pressure"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade reflects a growing but competitively exposed business, going from high-single-digit growth to the terminal rate."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "CellerateRX Surgical has no comprehensive patent protection"
+       },
+       {
+        "id": "F2",
+        "quote": "Selling, general and administrative | 24,252,475 | 19,877,875 | 68,735,685 | 58,641,402"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Excluding merger costs the current margin is about 11-13%. Share-based pay and selling costs are heavy, and CellerateRX has no comprehensive patent protection, which could pressure pricing, so I keep the long-run margin modestly above the current level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Third quarter operating income included approximately $3.0 million in legal and advisory services"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $103.1 million | 0.1897 | 0.0708"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 absorbs about $4.1M of merger and advisory costs, which should not recur. Margin then rises with operating leverage on a 93% gross margin, partly offset by SG&A growth."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The model is asset-light: no owned manufacturing and tiny capex, giving a high base-year return on tangible capital of 0.2384. I assume it decays to 0.20, still well above the 0.1254 level at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The Company is updating its full year 2026 net revenue guidance to a range of $110 million to $115 million compared to its previously provided range of $116 million to $121 million."
+       },
+       {
+        "id": "P6",
+        "quote": "Net revenue increased 8% to $28.4 million, compared to $26.3 million in the third quarter of 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 guidance of $110-115M implies roughly 7-12% growth, and Q3 growth slowed to 8%. I assume growth near the guidance midpoint, then a gradual fade. OsStic, due in Q1 2027, and new accounts support the early years, while competition limits later years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature US surgical-products business should grow near nominal GDP, close to the long-run anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.04,
+      "input_hit": "rev_growth",
+      "risk": "Merger fails or is delayed; the $9.66M termination fee and merger costs are incurred and standalone growth stalls under the covenant revenue floors"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "CellerateRX faces substantially equivalent competitors and pricing pressure, compressing margin"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "op_margin",
+      "risk": "Rising covenant revenue floors ($95M in 2027) are missed, leading to default interest or acceleration and cuts to growth spending"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.045000000000000005,
+       0.049999999999999996,
+       0.04,
+       0.030000000000000006,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.125,
+       0.13,
+       0.12,
+       0.11,
+       0.09999999999999999
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "About $46.7M of CRG term debt is a single 2029 maturity with rising revenue covenants, so it may be refinanced or repaid depending on the merger outcome."
+     },
+     "margin_position": "GAAP operating margin was 7.1% in 2025 and 6.1% in the first nine months of 2026. A 93% gross margin is offset by heavy selling expense, share-based pay and about $4.1M of 2026 merger costs. Excluding those costs the margin is near 11%. Margins have risen steadily as revenue scaled, so this is operating leverage on a growing base, not a cyclical peak.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 21% statutory-style rate is a reasonable long-run rate, and cash taxes paid are tiny only because of historical losses."
+     },
+     "why": "2025 revenue growth of 19% is above the 7-12% now guided for 2026, and 2025 operating income carried a $1.8M impairment. The 2026 margin is depressed by one-time merger costs, so the base year is only roughly representative. The pending MiMedx merger adds uncertainty, but this valuation is standalone."
+    },
+    "value_at_old_defaults": -9.278352520135236,
+    "values": {
+     "base": 15.368279817430793,
+     "bear": 5.410968020637196,
+     "bull": 35.7941684985621
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": -9.278352520135236,
+  "value_at_old_defaults_quoted": -9.278352520135236,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 123115495.36190964,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 8623028.0,
@@ -59,12 +562,12 @@
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
  "seed_base": {
-  "1000": 2.0002504913448163,
-  "3000": 2.0002504913448163
+  "1000": 13.186769606486106,
+  "3000": 15.368279817430793
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "on request (tax fallback rerun)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1251,230 +1754,42 @@
   ]
  },
  "tax_range": {
-  "equity_value_alt": 18132343.095895626,
+  "equity_value_alt": 117024348.14201021,
   "label": "statutory rate (company's filed rate), not measured",
   "positive_pretax_years": 0,
   "pretax_years": 5,
   "rate": 0.21,
   "rate_alt": 0.265,
   "seed_base_alt": {
-   "1000": 2.102781423868231,
-   "3000": 2.102781423868231
+   "1000": 12.553279830766787,
+   "3000": 14.58900664725699
   },
   "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
   "status_alt": "ok",
   "value_alt": {
-   "base": 2.102781423868231,
-   "bear": -1.5524102392233883,
-   "bull": 2.2422330844666085
+   "base": 13.571143239011889,
+   "bear": 5.05348512994728,
+   "bull": 30.960510076775293
   },
   "value_per_filed_share_alt": {
-   "base": 2.102781423868231,
-   "bear": -1.5524102392233883,
-   "bull": 2.2422330844666085
+   "base": 13.571143239011889,
+   "bear": 5.05348512994728,
+   "bull": 30.960510076775293
   }
  },
  "ticker": "SMTI",
- "upside": -0.9426118826648486,
- "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.0910 valued at 0.1164",
-   "margin_at_record_peak: normalized.margin 0.0708 at or above the record's p75 0.0145",
-   "margin_at_record_peak: long_run_op_margin 0.0708 at or above the record's p75 0.0145",
-   "record_neutral_not_positive: -9.2784 (year 1 growth 0.1164 and margin 0.0612, margin 0.0030 (persist), growth 0.0375, terminal RONIC 0.1254 (equity return r 0.0838), F 10); the scenarios are not compared",
-   "value_not_positive: bear -1.9355"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s32",
-     "P6.s33",
-     "P6.s5",
-     "P6.s26"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "F2",
-     "P6.s13",
-     "P3.s186"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "F2",
-     "P6.s13",
-     "P3.s186"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "P3.s166",
-     "P3.s186",
-     "P3.s33"
-    ],
-    "input": "long_run_op_margin"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "up",
-   "normalized.margin": "up",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Consolidated Statements of Operations (Unaudited) - USD ($) | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nNet Revenue | $ 28,430,158 | $ 26,333,819 | $ 84,365,449 | $ 75,572,167\nCost of goods sold | 2,104,917 | 1,874,214 | 6,009,853 | 5,646,463\nGross profit | 26,325,241 | 24,459,605 | 78,355,596 | 69,925,704\nOperating expenses\nSelling, general and administrative | 24,252,475 | 19,877,875 | 68,735,685 | 58,641,402\nResearch and development | 723,717 | 1,029,591 | 2,637,541 | 3,036,746\nDepreciation and amortization | [1],[2] | 613,044 | 610,899 | 1,819,407 | 1,993,477\nTotal operating expenses | 25,589,236 | 21,518,365 | 73,192,633 | 63,671,625\nOperating income | 736,005 | 2,941,240 | 5,162,963 | 6,254,079\nOther income (expense)\nInterest expense | (1,812,764) | (1,818,105) | (5,422,420) | (4,926,765)\nShare of losses from equity method investments | (442,984) | (288,642) | (1,339,139) | (627,732)\nInterest income | 146,494 | 213,266 | 3,672\nGain on disposal of investment | 105,370 | 105,370\nGain (loss) on disposal of property and equipment | (19,107) | (20,483) | 10,932\nTotal other income (expense) | [3] | (2,022,991) | (2,106,747) | (6,463,406) | (5,539,893)\nNet income (loss) from continuing operations | (1,286,986) | 834,493 | (1,300,443) | 714,186\nNet loss from discontinued operations (including asset impairment charge of $26,472,407 in 2025) (Note 3) | (124,207) | (31,246,601) | (105,011) | (36,672,075)\nNet loss | (1,411,193) | (30,412,108) | (1,405,454) | (35,957,889)\nLess: Net income (loss) attributable to noncontrolling interest from continuing operations | 354 | (955) | (5,197)\nNet loss attributable to Sanara MedTech shareholders | $ (1,411,547) | $ (30,411,153) | $ (1,405,454) | $ (35,952,692)\nNet income (loss) per share, basic:\nContinuing operations | $ (0.15) | $ 0.10 | $ (0.15) | $ 0.08\nDiscontinued operations | (0.01) | (3.62) | (0.01) | (4.26)\nNet income (loss) per share of common stock, basic | (0.16) | (3.52) | (0.16) | (4.18)\nNet income (loss) per share, diluted:\nContinuing operations | (0.15) | 0.09 | (0.15) | 0.08\nDiscontinued operations | (0.01) | (3.49) | (0.01) | (4.12)\nNet income (loss) per share of common stock, diluted | $ (0.16) | $ (3.40) | $ (0.16) | $ (4.04)\nWeighted average number of common shares outstanding, basic | 8,783,139 | 8,646,668 | 8,749,797 | 8,610,538\nWeighted average number of common shares outstanding, diluted | 8,783,139 | 8,940,734 | 8,749,797 | 8,907,565\n[1] | Depreciation expense of $12,482 was reclassified as continuing operations in the nine months ended September 30, 2025, and is therefore no longer reflected in discontinued operations.\n[2] | Depreciation expense of $12,482 was reclassified as continuing operations in the nine months ended September 30, 2025, and is therefore no longer reflected in discontinued operations.\n[3] | For the three and nine months ended September 30, 2026, other expense included interest expense, share of losses from equity method investments and loss on disposal of property and equipment, offset by interest income and gain on disposal of investment. For the three months ended September 30, 2025, other expense included interest expense and share of losses from equity method investments. For the nine months ended September 30, 2025, other expense included interest expense and share of losses from equity method investments, offset by interest income and gain on disposal of property and equipment."
-   },
-   "P3.s166": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Gross margins were approximately 93% and 91% for the years ended December 31, 2025 and 2024, respectively."
-   },
-   "P3.s186": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Lower net loss from continuing operations for the year ended December 31, 2025 was primarily due to revenue growth, partially offset by SG&A and R&D increasing at a relatively lower rate, and higher interest expense related to the CRG Term Loan."
-   },
-   "P3.s33": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Persistent losses related to THP and a lack of any firm commitments from potential investors led management and our Board of Directors to decide to discontinue THP\u2019s operations in mid-September 2025 and shift our focus exclusively on products and technologies for use in the surgical market."
-   },
-   "P6.s13": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "\u25cf | Operating income of $5.2 million, compared to operating income of $6.3 million in the first nine months of 2025. Operating income for the first nine months included approximately $4.1 million in legal and advisory services associated with corporate strategic initiatives and the pending Merger."
-   },
-   "P6.s26": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "Bone fusion products | 2,767,926 | 2,909,693 | 8,517,680 | 8,954,144"
-   },
-   "P6.s32": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "The Company is updating its full year 2026 net revenue guidance to a range of $110 million to $115 million compared to its previously provided range of $116 million to $121 million."
-   },
-   "P6.s33": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "This updated full year guidance represents growth of approximately 7% to 12%, compared to net revenue of $103.1 million for the full year 2025."
-   },
-   "P6.s5": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "\u25cf | Net revenue increased 8% to $28.4 million, compared to $26.3 million in the third quarter of 2025."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001493152-26-012352): revenue $103.1 million; operating income $7.3 million; operating margin 7.1%; net income $-37.6 million; depreciation and amortization $3.9 million; capital expenditure $4.6 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.016675418941024037,
-    0.016675418941024037,
-    0.016675418941024037,
-    0.016675418941024037,
-    0.016675418941024037
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.0029890303543248092,
-   "normalized.margin": 0.0029890303543248092,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.06119759997958406,
-   "op_margin.y2": 0.0029890303543248092,
-   "rev_growth.y1": 0.11635609178707296,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.12543920618833615
-  },
-  "numbers": {
-   "capex": [
-    0.016675418941024037,
-    0.016675418941024037,
-    0.016675418941024037,
-    0.016675418941024037,
-    0.016675418941024037
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.0708367043102143,
-   "normalized.margin": 0.0708367043102143,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.06119759997958406,
-   "op_margin.y2": 0.0708367043102143,
-   "rev_growth.y1": 0.09098333596171426,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.12543920618833615
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.09098333596171426,
-    "model_option": "guidance",
-    "record": 0.11635609178707296,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "last",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Whether and when the pending merger with MiMedx will close or be abandoned following the FTC Second Request, and whether any termination fee will become payable.",
-   "The amount of additional legal, advisory, and transaction expenses that will be incurred after September 30, 2026 in connection with the pending MiMedx merger and FTC review.",
-   "Whether and when OsStic BioAdhesive will receive regulatory clearance and achieve commercial launch or meaningful revenue contribution.",
-   "The long-term competitive impact of lacking comprehensive patent protection for CellerateRX Surgical on standalone revenue growth and operating margins."
-  ],
-  "year": 3
- },
- "value_base": 2.0002504913448163,
- "value_bear": -1.9354669520577936,
- "value_bull": 2.1500806483865773,
+ "upside": -0.5903711725252371,
+ "valuation": null,
+ "value_base": 14.27752471195845,
+ "value_bear": 5.185228487226263,
+ "value_bull": 32.79759560102629,
  "value_per_filed_share": {
-  "base": 2.0002504913448163,
-  "bear": -1.9354669520577936,
-  "bull": 2.1500806483865773
+  "base": 14.27752471195845,
+  "bear": 5.185228487226263,
+  "bull": 32.79759560102629
  },
  "valued": true,
  "verdict": "AVOID",
  "verdict_differs_at_alt_tax_rate": false,
- "verdict_reason": "expected return -73.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -21.9 points a year against the required return over 3 years"
 }

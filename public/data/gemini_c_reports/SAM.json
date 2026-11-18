@@ -1,11 +1,490 @@
 {
- "alpha_pts": -63.7203109286809,
+ "alpha_pts": -31.66132611747384,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 62,
  "claims_supported": 61,
  "date": "2026-11-17T12:57:54Z",
- "equity_value": 168972595.2028027,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 14 of 15",
+   "run 3000: margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0781 (equity return r 0.0781), F 10",
+  "run_gap": 0.012636135721713288,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 223378000.0,
+     "excess_cash_before": 223378000.0,
+     "k0_after": 519609.48064514995,
+     "k0_before": 519609.48064514995,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 103240202.24973218,
+     "x0_before": 103240202.24973218
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 550885650.8084506,
+     "seam_ratio": 0.5525848300873889,
+     "tv_share": 1.1805909513090467,
+     "wedge_rate_5": 0.06093189464325211
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
+     "confidence_low",
+     "quotes_verified: 14 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.035,
+     "fade_years": 10,
+     "long_run_op_margin": 0.075,
+     "op_margin": [
+      -0.033,
+      0.068,
+      0.072,
+      0.074,
+      0.075
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      -0.035,
+      -0.015,
+      0.0,
+      0.01,
+      0.015
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0781 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 61
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.055,
+      0.095
+     ],
+     "rev_growth_y3": [
+      -0.03,
+      0.025
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital Spending ($ million) | $55 to $70 | $60 to $80"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0402"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guidance for 2026 capital spending is $55-70 million, about 3% of revenue, against a 5-year pooled ratio of 4.0%. 3.5% is assumed because owned breweries need maintenance spending."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The two largest brewers in the United States, AB InBev and Molson Coors, participate actively in the US Beer Market"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competition from larger brewers and a gradual brand-mix shift toward spirits RTDs argue for a moderate fade of 10 years rather than a fast convergence."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Operating income | 144,882 | 20.29 | 7.4% | 75,973 | 10.14 | 3.8%"
+       },
+       {
+        "id": "REC",
+        "quote": "2021-12-25 | $2,196.7 million | 0.1862 | 0.0036"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2021-2025 margins were 0.4-6.9%, against 11-20% before 2020. Base rates say about half of the gap above the median persists. Structural savings and Sun Cruiser mix support a margin slightly above the recent median, while shrinking categories and rising competition from larger rivals cap it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute"
+       },
+       {
+        "id": "P6",
+        "quote": "GAAP EPS (Income/ (Loss)) | ($5.76) to ($4.26) | ($6.23) to ($4.23)"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-27 | $2,087.3 million | -0.0236 | 0.0694"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 includes the $194.5 million litigation charge. This charge is unpaid and its cash cost is not in the base-year balance sheet. GAAP EPS guidance of a loss of roughly $4.26 to $5.76 implies an operating margin of about -3% on gross revenue. After that, margin is about 6.8% in year 2 and rises with supply-chain savings, offset by aluminum and freight inflation and the fixed cost of owned breweries."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.1794"
+       },
+       {
+        "id": "P2",
+        "quote": "The Company on an overall basis has yet to see any operating cost leverage from these investments and there is no guarantee that it will."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is high at 17.9%, but new brewery capacity earns less when volumes are falling and fixed costs are high. A return of 12% is assumed, still above the 7.8% cost of equity."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Depletions and Shipments Percentage Change | Down mid-single digits | Down low-single digits to mid-single digits"
+       },
+       {
+        "id": "P6",
+        "quote": "Price Increases | 1% to 2% | 1% to 2%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year-to-date revenue is down about 3% and management guides shipments down mid-single digits with price up 1-2%, so FY2026 is about -3.5%. Growth is assumed to improve slowly as Sun Cruiser grows and declines in Twisted Tea and Truly ease, returning to small positive growth by year 4."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion"
+       },
+       {
+        "id": "P2",
+        "quote": "The US Beer Market has experienced a decline in shipments over the last ten years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The US beer market is flat to shrinking and alcohol consumption per person is declining. Long-run growth is therefore set below the 3.75% anchor, close to inflation-level pricing with slight volume decline."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.03,
+      "input_hit": "rev_growth",
+      "risk": "Volume declines in Twisted Tea, Truly and Samuel Adams persist at about -5% a year, and fixed costs at owned breweries cut margin"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Aluminum, freight and tariff inflation and competitive promotion outrun savings, pushing margin back toward the 2021-2025 median"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Beer and the Beyond beer categories shrink for good as moderation and cannabis or hemp beverages take share"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.055,
+      "rev_growth": [
+       -0.065,
+       -0.045,
+       -0.03,
+       -0.019999999999999997,
+       -0.015
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       -0.010000000000000002,
+       0.010000000000000002,
+       0.025,
+       0.035,
+       0.04
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company reports no debt and a $150 million unused facility, and it funds buybacks from cash flow."
+     },
+     "margin_position": "The FY2025 operating margin of 6.9% is above the 2021-2025 median of about 4.1%, because supply-chain savings, price and mix lifted gross margin. It is still far below the 12-22% margins of 2009-2020. FY2026 GAAP margin is pushed negative by a one-time $194.5 million litigation charge, while underlying margin is roughly flat at about 6.5-7%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The record's 29.3% tax rate is close to the 29% to 30% non-GAAP rate that management guides for 2026."
+     },
+     "why": "FY2025 has no big one-offs. Impairments are small and the 2024 intangible impairment and contract settlement did not recur. Margin is better than the 5-year median, but this reflects real cost savings rather than a cyclical peak. Volume is falling about 5% a year, so the base year does not signal growth. The litigation judgment is an operating item and is put in year 1 margin, since its cash cost is not in the Dec-2025 balance sheet."
+    },
+    "value_at_old_defaults": 31.277433152244424,
+    "values": {
+     "base": 74.28261538052348,
+     "bear": 34.11972363775701,
+     "bull": 138.43090879548615
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 223378000.0,
+     "excess_cash_before": 223378000.0,
+     "k0_after": 519609.48064514995,
+     "k0_before": 519609.48064514995,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 103240202.24973218,
+     "x0_before": 103240202.24973218
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 541345109.8833535,
+     "seam_ratio": 0.41686918648844984,
+     "tv_share": 1.1083373501903153,
+     "wedge_rate_5": 0.05626357996400544
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.075,
+     "op_margin": [
+      -0.033,
+      0.062,
+      0.066,
+      0.07,
+      0.072
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      -0.035,
+      -0.02,
+      -0.005,
+      0.01,
+      0.015
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0781 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 61
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.055,
+      0.095
+     ],
+     "rev_growth_y3": [
+      -0.025,
+      0.015
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital Spending ($ million) | $55 to $70 | $60 to $80"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "2026 capital spending guidance is $55M to $70M, about 3% of revenue. This is below the 4.0% pooled average and below D&A, because the owned-brewery build-out is largely done."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The Company is the second largest supplier in Beyond beer at a 20% market"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years: the company holds the number two position in Beyond beer, but its largest categories are shrinking and its brand base is changing, so convergence to steady state is gradual."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-27 | $2,087.3 million | -0.0236 | 0.0694"
+       },
+       {
+        "id": "P3",
+        "quote": "Advertising, promotional, and selling expenses | 609,953 | 85.43 | 31.0%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin of 6.94% is above the five-year median of about 4%, but it was lifted by structural savings (contract renegotiation, brewery efficiency). Advertising, promotion and selling still absorb 31% of net revenue, and volume is falling. I assume 7.5% in the long run, below the 2010s level, with wide uncertainty."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | 56,329 | 62,049 | (63,359) | 177,895"
+       },
+       {
+        "id": "P6",
+        "quote": "GAAP EPS (Income/ (Loss)) | ($5.76) to ($4.26) | ($6.23) to ($4.23)"
+       },
+       {
+        "id": "P6",
+        "quote": "Gross Margin (including Tariffs) | 49% to 50% | 48.5% to 50%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is GAAP and includes about $196M of litigation expense. The nine-month operating loss is (63,359), and guided GAAP EPS of ($5.76) to ($4.26) implies a full-year operating loss near 3% of revenue. From year 2 the underlying margin of about 6-7% (non-GAAP, litigation excluded) rebuilds slowly, helped by gross margin and capped by freight, aluminum and fixed brewery costs."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1794"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 17.9% reflects an owned-brewery base that is underutilized as volume falls. New investment faces a competitive, declining-volume market, so I use 12%, above the 7.8% breakeven but well below the current return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Depletions and Shipments Percentage Change | Down mid-single digits | Down low-single digits to mid-single digits"
+       },
+       {
+        "id": "P6",
+        "quote": "Price Increases | 1% to 2% | 1% to 2%"
+       },
+       {
+        "id": "P4",
+        "quote": "Net revenue decreased by $56.9 million, or 3.6%, to $1.522 billion"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Management guides 2026 shipments and depletions down mid-single digits with 1% to 2% pricing, and nine-month net revenue is already down 3.6%. I fade the decline as Sun Cruiser and Angry Orchard growth narrows the loss in Twisted Tea, Truly and Samuel Adams, reaching small growth by year 4."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The US Beer Market has experienced a decline in shipments over the last ten years."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The US beer market has shrunk for a decade as alcohol consumption declines, though Beyond beer, where most company volume sits, is growing. I set long-run growth at 2%, below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.03,
+      "input_hit": "rev_growth",
+      "risk": "Volume declines in Twisted Tea, Truly and Samuel Adams persist beyond 2026 and Sun Cruiser cannot offset them."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Aluminum, freight and tariff inflation, plus fixed owned-brewery costs on lower volume, keep margin near the 2022-2024 level of about 4%."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Structural decline in alcohol consumption and competition from cannabis/hemp and spirits reduce long-run category growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.055,
+      "rev_growth": [
+       -0.05500000000000001,
+       -0.04,
+       -0.025,
+       -0.01,
+       -0.005000000000000001
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       -0.015000000000000003,
+       0.0,
+       0.015,
+       0.03,
+       0.035
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company reports no debt and funds itself from cash flow, with a $150M undrawn revolver as backstop."
+     },
+     "margin_position": "The 2025 operating margin of 6.9% is well below the 12-20% of 2010-2020. Volume has fallen since the hard seltzer boom ended, brewery and supply-chain costs rose, and advertising and freight are about 31% of net revenue. Gross margin is recovering through savings, price and mix, and 2026 GAAP margin turns negative only because of a one-off $194.5M litigation charge.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 29.3% matches management's non-GAAP guide of 29% to 30%, though the GAAP rate is distorted in 2026 by the pre-tax loss."
+     },
+     "why": "Fiscal 2025 has no litigation charge or intangible impairment, and its gross margin of 48.5% is close to the 2026 guide of 49% to 50%. It is a fair base for underlying earnings, but 2026 GAAP will look very different because of the supplier judgment, and volume is still shrinking."
+    },
+    "value_at_old_defaults": 31.277433152244424,
+    "values": {
+     "base": 73.34986336136575,
+     "bear": 39.06980340189383,
+     "bull": 126.51790634408367
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 31.277433152244424,
+  "value_at_old_defaults_quoted": 31.277433152244424,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 807328210.0000212,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 10937000.0,
@@ -15,7 +494,7 @@
   "With its third-quarter results, the Company updated its full-year 2026 guidance. Management said it was raising the low end of its gross margin and earnings guidance."
  ],
  "in_code_book": false,
- "ke": 0.07839992553067587,
+ "ke": 0.0781318907508762,
  "market_cap_at_publish": 2280514829,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +502,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 17.124441317822644,
-  "3000": 14.701433013579903
+  "1000": 74.28261538052348,
+  "3000": 73.34986336136575
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -785,154 +1264,17 @@
   ]
  },
  "ticker": "SAM",
- "upside": -0.9259059432308552,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y2 (1000 up, 3000 none)",
-   "seeds_disagree: terminal_g (1000 none, 3000 down)",
-   "ytd_outside_record: op_margin.y1 -0.0390",
-   "V7 shrinking_base_positive_terminal_growth: no return_to_growth or cycle_recovery departure",
-   "margin_at_record_peak: normalized.margin 0.0551 at or above the record's p75 0.0469",
-   "margin_at_record_peak: long_run_op_margin 0.0551 at or above the record's p75 0.0469",
-   "value_far_from_record_neutral: base 15.4496 against 30.9521 (0.50x)",
-   "value_far_from_record_neutral: bear 11.1018 against 30.9521 (0.36x)"
-  ],
-  "departures": [
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P6.s52",
-     "P4.s85",
-     "P2.s32"
-    ],
-    "input": "rev_growth.y2"
-   },
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P2.s50",
-     "P2.s32",
-     "Y2025-12-27"
-    ],
-    "input": "normalized.rev_growth"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "down",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "down",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P2.s32": {
-    "kind": "annual_section",
-    "period": "2025-12-27",
-    "text": "More recently in 2025 these declines accelerated to an approximate decline of 4% in volume."
-   },
-   "P2.s50": {
-    "kind": "annual_section",
-    "period": "2025-12-27",
-    "text": "Beginning in the second half of 2021, the market for hard seltzer products experienced decelerating growth trends, which contributed to the Company\u2019s depletion volume decline of 5% in 2022, 6% in 2023 (5% decline on a 52-week comparable basis), 2% in 2024 and 4% in 2025."
-   },
-   "P4.s85": {
-    "kind": "quarterly_section",
-    "period": "2026-09-26",
-    "text": "Total shipment volume decreased by 5.4% to 5,448,000 barrels for the thirty-nine weeks ended September 26, 2026, as compared to 5,756,000 barrels for the thirty-nine weeks ended September 27, 2025, primarily due to decreases in Twisted Tea, Truly, Samuel Adams, Hard Mountain Dew and Dogfish Head brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands."
-   },
-   "P6.s52": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Depletions and Shipments Percentage Change | Down mid-single digits | Down low-single digits to mid-single digits"
-   },
-   "Y2025-12-27": {
-    "kind": "filed_record",
-    "period": "2025-12-27",
-    "text": "Filed annual record, fiscal year ended 2025-12-27 (10-K, accession 0001193125-26-067467): revenue $2,087.3 million; operating income $144.9 million; operating margin 6.9%; net income $108.5 million; depreciation and amortization $90.4 million; capital expenditure $54.6 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.0402154010767827,
-    0.0402154010767827,
-    0.0402154010767827,
-    0.0402154010767827,
-    0.0402154010767827
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.05513030243917903,
-   "normalized.margin": 0.05513030243917903,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": -0.038995145224742615,
-   "op_margin.y2": 0.05513030243917903,
-   "rev_growth.y1": -0.03185803374689711,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07839992553067587
-  },
-  "numbers": {
-   "capex": [
-    0.0402154010767827,
-    0.0402154010767827,
-    0.0402154010767827,
-    0.0402154010767827,
-    0.0402154010767827
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.05513030243917903,
-   "normalized.margin": 0.05513030243917903,
-   "normalized.rev_growth": -0.01076607314274003,
-   "op_margin.y1": -0.038995145224742615,
-   "op_margin.y2": 0.05513030243917903,
-   "rev_growth.y1": -0.03185803374689711,
-   "rev_growth.y2": -0.023646249746234638,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07839992553067587
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "record_median",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "last",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No sentence in the evidence guides 2026 revenue directly. Guidance covers shipments, depletions and price only, so the revenue-growth options that rest on guidance are not used.",
-   "The fourth-quarter 2026 operating result is not in the evidence. Year 1 operating margin therefore stays on the nine-month figure, which includes the $194.5 million litigation expense.",
-   "The evidence does not say how the supplier-dispute judgment will be paid or whether it will be appealed.",
-   "Revenue growth and operating margin for 2027 and later are not guided. The company says it will give 2027 guidance in February 2027."
-  ],
-  "year": 3
- },
- "value_base": 15.449629258736644,
- "value_bear": 11.101839446524735,
- "value_bull": 19.542370482297056,
+ "upside": -0.6459886163713162,
+ "valuation": null,
+ "value_base": 73.81623937094461,
+ "value_bear": 36.59476351982542,
+ "value_bull": 132.47440756978492,
  "value_per_filed_share": {
-  "base": 15.449629258736644,
-  "bear": 11.101839446524735,
-  "bull": 19.542370482297056
+  "base": 73.81623937094461,
+  "bear": 36.59476351982542,
+  "bull": 132.47440756978492
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -63.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -31.7 points a year against the required return over 3 years"
 }

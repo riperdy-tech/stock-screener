@@ -1,11 +1,394 @@
 {
- "alpha_pts": 2.669791796024737,
+ "alpha_pts": 12.426934004663327,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 79,
  "claims_supported": 78,
  "date": "2026-11-16T09:54:07Z",
- "equity_value": 1515682055.9329479,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.1727, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.10264174310867052,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 1750927507.770502,
+     "implied_pb": 3.436827801381062,
+     "seam_ratio": 1.1240625000000009,
+     "tv_share": 0.5264983972015711
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.22,
+      0.19,
+      0.14,
+      0.11,
+      0.09
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.38,
+      0.28,
+      0.22,
+      0.19,
+      0.17
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1727, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 78
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.08,
+      0.19
+     ],
+     "long_run_roe": [
+      0.1,
+      0.17
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Common stock dividend | (13,804) | (13,813)"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of treasury stock inclusive of excise taxes paid | (19,179) | (15,501)"
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive income (loss), net of taxes | (69,938) | (26,151)"
+       },
+       {
+        "id": "P7",
+        "quote": "total dividends declared in 2026 to 77 cents per share of common stock"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Dividends of about $13.8M and buybacks of $19.2M over nine months are small against earnings, so equity grows nearly at ROE less a modest payout. Year 1 also carries a $44M AOCI drag from unrealised investment losses. Growth slows as ROE falls and payouts, including special dividends, rise."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "In both 2024 and 2025, the Insurance Entities filed and gained regulatory approval of statewide average rate decreases for their homeowners\u2019 insurance programs."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Insurance pricing cycles and rising competition from new Florida entrants mean the excess returns should erode over roughly a decade, not instantly."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Because of the exposure of our property and casualty business to catastrophic events, our operating results and financial condition have varied significantly from one period to the next"
+       },
+       {
+        "id": "P3",
+        "quote": "In October 2025, UPCIC implemented new homeowners policy rates for new and renewal business policies, resulting in an average rate decrease of 5.1% compared to previous rates with an effective date of October 16, 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A Florida-concentrated homeowners insurer with heavy reinsurance costs and hurricane volatility should earn a mid-teens ROE through the cycle, well below today's 30-plus%. The record shows swings from -5% to 49%."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "claims activity to date has been less significant than initially anticipated"
+       },
+       {
+        "id": "P4",
+        "quote": "In Florida, market improvements due to statutory reforms in 2022 have resulted in increased competition and are moderating or reducing pricing."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is mostly known: 9-month net income is $166.0M on $551.0M opening equity, and Q4 faces only a modest Hurricane Isaias hit. After that, ROE fades as Florida rates fall, competition rises and catastrophe loads return toward normal."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth should be close to the nominal anchor of about 3.75%, supported by insured-value growth and non-Florida expansion. I set it slightly below the anchor because the Florida market is mature and competitive."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "roe",
+      "risk": "A major Florida hurricane, or a reversal of the 2022 reforms, produces large losses and cuts earnings and statutory surplus"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Faster competition-driven rate cuts and higher reinsurance costs compress margins permanently"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Statutory capital needs for growth or a loss event force retention and slow book growth, or require new equity"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.15999999999999998,
+       0.13,
+       0.08,
+       0.04999999999999999,
+       0.029999999999999985
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.27,
+       0.24,
+       0.19,
+       0.15999999999999998,
+       0.13999999999999999
+      ],
+      "long_run_roe": 0.17,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "yes",
+     "institution": "insurer",
+     "roe_position": "ROE is currently very high. Florida's 2022 reforms cut claims litigation, the net loss ratio fell to 64.5% from 71.0%, and Florida had no landfalling hurricane in 2025. Book equity was also rebuilt from a low base after the 2022 loss year. 2025 ROE of 49% sits far above the record median of 17%. Florida rate cuts, competition, reinsurance costs and catastrophe normalisation should pull it down.",
+     "why": "2025 and 2026 are benign catastrophe years, and the 9-month 2026 net income of $166.0M already annualises near 37% ROE, so neither year is a through-cycle level. The insurance subsidiaries hold statutory surplus of about $509M and growth in premiums and insured value needs more of it. Payouts are small relative to earnings, so book equity compounds fast while capital is retained. Over the cycle, hurricane exposure concentrated in Florida should bring ROE well below the current level, though still above the 9.4% cost of equity."
+    },
+    "value_at_old_defaults": 49.58700313402054,
+    "values": {
+     "base": 65.4031084242994,
+     "bear": 42.64506782954466,
+     "bull": 110.26871619750705
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 1579982312.7143264,
+     "implied_pb": 3.101286097755843,
+     "seam_ratio": 1.0937777777777768,
+     "tv_share": 0.4814748144273803
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.23,
+      0.18,
+      0.13,
+      0.09,
+      0.07
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.38,
+      0.27,
+      0.21,
+      0.18,
+      0.16
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.1727, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 78
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.06,
+      0.17
+     ],
+     "long_run_roe": [
+      0.1,
+      0.18
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Book value per share of $23.37, up 32.4% year-over-year"
+       },
+       {
+        "id": "P7",
+        "quote": "brings total dividends declared in 2026 to 77 cents per share of common stock"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of treasury stock inclusive of excise taxes paid | (19,179) | (15,501)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 growth is high because equity was $646M at 9/30/26 against $551M at year-end, with payouts small relative to earnings. Growth then slows as ROE falls and the payout (dividends and buybacks) rises, with growth ultimately limited by statutory surplus needs and the cat tail."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "market improvements due to statutory reforms in 2022 have resulted in increased competition and are moderating or reducing pricing"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The elevated return takes several years to compete away through lower rates and normalizing cat and reinsurance costs, so I use a 10-year fade to the long-run ROE."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "Catastrophes have eroded, and in the future may erode, our statutory surplus or ability to obtain adequate reinsurance which could negatively affect our ability to write new or renewal business."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A Florida-concentrated homeowners writer earns attractive returns only between catastrophe years, and the 2021-22 results show the downside. Through-cycle ROE of about 14% is above the 9.36% cost of equity, reflecting a vertically integrated fee stream, but below the recent peak."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "claims activity to date has been less significant than initially anticipated"
+       },
+       {
+        "id": "P4",
+        "quote": "market improvements due to statutory reforms in 2022 have resulted in increased competition and are moderating or reducing pricing"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0518, p25 0.0454, median 0.1727, p75 0.2321, max 0.4902, last 0.4902."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 is mostly booked: 9M annualized ROCE is 37% with a 90.8% combined ratio, and Isaias claims look modest. From 2027 I fade ROE as Florida rates fall, competition moderates pricing, and cat load and reinsurance costs normalize toward the historical median of 0.17."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "UPCIC implemented new homeowners policy rates for new and renewal business policies, resulting in an average rate decrease of 5.1% compared to previous rates"
+       },
+       {
+        "id": "P6",
+        "quote": "Policies in force | 953,611 | 883,888 | 7.9% | 953,611 | 883,888 | 7.9%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is set slightly below the nominal anchor because a mature, cyclical, rate-regulated Florida homeowners franchise with new competition should grow roughly with nominal property values."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "A major Florida hurricane or a reversal of the 2022 reforms exceeds reinsurance and drives a loss year, resetting returns to the 2021-22 range"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "roe",
+      "risk": "Rate cuts, competition and reserve strengthening on pre-reform claims compress margins faster than assumed in 2027"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Statutory surplus and reinsurance cost constrain growth, or a bad year erodes equity"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.16,
+       0.10999999999999999,
+       0.06,
+       0.01999999999999999,
+       0.0
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.27,
+       0.22,
+       0.17,
+       0.13,
+       0.11000000000000001
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "yes",
+     "institution": "insurer",
+     "roe_note": "Year 1 is FY2026: 9M net income of $166.0M plus an assumed Q4 of about $45M gives about $211M on $551M opening equity.",
+     "roe_position": "ROE is very high because 2025 and 2026 were benign, post-reform Florida years. The net combined ratio fell to 90.8% from 96.4%, there was no Florida landfall in 2025, and net investment income grew. Earlier years were weak (2021 and 2022 had low or negative ROE), and Florida homeowners property is catastrophe-exposed, so current returns are well above the through-cycle level. Rates are being cut (Florida -5.1%), competition is rising, and Hurricane Isaias hit after quarter-end.",
+     "why": "FY2025 ROE of 0.49 and a 9-month 2026 annualized ROCE of 37.0% are cyclical peaks produced by a favorable loss and cat environment, not a steady state. Book equity compounds quickly because payouts are small (about 77 cents per share declared against roughly $6 per share of earnings). Growth needs statutory surplus (about $509M at the insurance entities) and reinsurance, and the holding company depends on subsidiary dividends. Over the fade I expect ROE to revert toward the mid-teens, with payout rising as growth slows."
+    },
+    "value_at_old_defaults": 49.58700313402054,
+    "values": {
+     "base": 59.017722920185484,
+     "bear": 39.92553692723812,
+     "bull": 96.28643858928818
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 49.58700313402054,
+  "value_at_old_defaults_quoted": 49.58700313402054,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 1801364796.2054522,
  "family": "financial",
  "far_from_price": false,
  "filed_shares": 28956000.0,
@@ -15,7 +398,7 @@
   "UVE recorded proceeds from issuance of long-term debt of 100,000 (table in thousands), repayment of debt of (101,103) (table in thousands), and debt issuance costs paid of (2,825) (table in thousands)."
  ],
  "in_code_book": false,
- "ke": 0.0934350225480369,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 1347262243,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +406,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 59.81671801507158,
-  "3000": 45.19853991797544
+  "1000": 65.4031084242994,
+  "3000": 59.017722920185484
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1148,140 +1531,17 @@
   ]
  },
  "ticker": "UVE",
- "upside": 0.1250089311179099,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: book_growth.y2 (1000 up, 3000 none)",
-   "seeds_disagree: roe.y2 (1000 up, 3000 none)",
-   "seeds_disagree: long_run_roe (1000 none, 3000 down)"
-  ],
-  "departures": [
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F1",
-     "F2",
-     "F3",
-     "P6.s39"
-    ],
-    "input": "book_growth.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "P6.s23",
-     "P6.s25",
-     "P6.s14"
-    ],
-    "input": "roe.y1"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "up",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "none",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "up",
-   "roe.y2": "none",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "F1": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED BALANCE SHEETS - USD ($) $ in Thousands | Sep. 30, 2026 | Dec. 31, 2025\nASSETS\nAvailable-for-sale debt securities, at fair value, net of allowance for credit loss of $1,473 and $631 (amortized cost: $1,568,720 and $1,466,145) | $ 1,474,856 | $ 1,431,028\nEquity securities, at fair value (cost: $121,826 and $87,326) | 117,710 | 85,420\nOther investments, at fair value (cost: $5,035 and $5,000) | 8,099 | 10,693\nInvestment real estate, net | 5,316 | 5,463\nTotal invested assets | 1,605,981 | 1,532,604\nCash and cash equivalents | 569,461 | 408,868\nRestricted Cash and Cash Equivalent | [1] | 68,635 | 68,970\nPrepaid reinsurance premiums | 409,251 | 291,031\nReinsurance recoverables | 157,038 | 232,918\nPremiums receivable, net | 98,155 | 75,721\nProperty and equipment, net | 47,876 | 49,349\nDeferred policy acquisition costs | 144,706 | 128,564\nIncome taxes recoverable | 15,009 | 0\nDeferred income tax asset, net | 35,340 | 27,658\nOther assets | 32,118 | 24,012\nTotal assets | 3,183,570 | 2,839,695\nLIABILITIES:\nUnpaid losses and loss adjustment expenses | 616,079 | 680,712\nUnearned premiums | 1,195,747 | 1,091,959\nAdvance premium | 80,422 | 61,847\nBook overdraft | 50 | 0\nReinsurance payable, net | 453,650 | 257,242\nCommission payable | 37,041 | 26,307\nIncome taxes payable | 0 | 28,554\nOther liabilities and accrued expenses | 57,209 | 41,558\nDebt, net of issuance costs | 97,336 | 100,481\nTotal liabilities | 2,537,534 | 2,288,660\nCommitments and Contingencies (Note 12)\nSTOCKHOLDERS\u2019 EQUITY:\nCumulative convertible preferred stock | 0 | 0\nCommon stock | 483 | 482\nTreasury shares, at cost - 20,731 and 20,226, respectively | (324,243) | (305,064)\nAdditional paid-in capital | 130,188 | 124,319\nAccumulated other comprehensive income (loss), net of taxes | (69,938) | (26,151)\nRetained earnings | 909,546 | 757,449\nTotal stockholders\u2019 equity | 646,036 | 551,035\nTotal liabilities and stockholders\u2019 equity | $ 3,183,570 | $ 2,839,695\n[1] | See \u201c\u2014Note 5 (Insurance Operations)\u201d for a discussion of the nature of the restrictions for restricted cash and cash equivalents and \u201cNote 14 (Variable Interest Entities)\u201d for a discussion of restricted cash held in a trust account."
-   },
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF INCOME (unaudited) - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nREVENUES\nDirect premiums written | $ 608,878 | $ 592,774 | $ 1,736,739 | $ 1,656,572\nChange in unearned premiums | (52,154) | (58,668) | (103,788) | (85,784)\nDirect premiums earned | 556,724 | 534,106 | 1,632,951 | 1,570,788\nCeded premiums earned | (153,528) | (174,430) | (495,580) | (495,198)\nPremiums earned, net | 403,196 | 359,676 | 1,137,371 | 1,075,590\nNet investment income | 21,478 | 18,337 | 61,178 | 51,655\nNet realized gains (losses) on investments | 973 | (345) | 2,964 | 4,921\nNet change in unrealized gains (losses) on investments | (5,964) | 1,296 | (4,895) | (4,755)\nCommission revenue | 11,841 | 14,598 | 40,352 | 46,727\nPolicy fees | 5,634 | 5,389 | 16,655 | 15,485\nOther revenue | 2,161 | 2,030 | 6,292 | 6,366\nTotal revenues | 439,319 | 400,981 | 1,259,917 | 1,195,989\nOPERATING COSTS AND EXPENSES\nLosses and loss adjustment expenses | 260,488 | 252,279 | 733,146 | 763,139\nPolicy acquisition costs | 71,486 | 63,594 | 204,026 | 186,046\nOther operating costs and expenses | 35,116 | 30,728 | 95,619 | 87,362\nTotal operating costs and expenses | 367,090 | 346,601 | 1,032,791 | 1,036,547\nInterest and amortization of debt issuance costs | 2,081 | 1,603 | 5,671 | 4,823\nINCOME (LOSS) BEFORE INCOME TAXES | 70,148 | 52,777 | 221,455 | 154,619\nIncome tax expense (benefit) | 17,639 | 12,947 | 55,467 | 38,257\nNET INCOME (LOSS) | $ 52,509 | $ 39,830 | $ 165,988 | $ 116,362\nBasic earnings (loss) per common share (in USD per share) | $ 1.90 | $ 1.43 | $ 6.03 | $ 4.16\nWeighted average common shares outstanding - Basic (in shares) | 27,607 | 27,851 | 27,546 | 27,971\nDiluted earnings (loss) per common share (in USD per share) | $ 1.80 | $ 1.38 | $ 5.73 | $ 4.03\nWeighted average common shares outstanding - Diluted (in shares) | 29,185 | 28,808 | 28,968 | 28,903\nCash dividend declared per common share (in USD per share) | $ 0.16 | $ 0.16 | $ 0.48 | $ 0.48"
-   },
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS (unaudited) - USD ($) $ in Thousands | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash flows from operating activities:\nNet cash provided by (used in) operating activities | $ 338,932 | $ 355,413\nCash flows from investing activities:\nProceeds from sale of property and equipment | 313 | 23\nPurchases of property and equipment | (3,561) | (3,361)\nPurchases of equity securities | (76,165) | (28,959)\nPurchases of available-for-sale debt securities | (360,079) | (319,200)\nProceeds from sales of equity securities | 42,662 | 12,512\nProceeds from sales of available-for-sale debt securities | 106,368 | 66,785\nProceeds from sale of private equity limited partnership | 0 | 11,463\nMaturities of available-for-sale debt securities | 151,859 | 151,536\nNet cash provided by (used in) investing activities | (138,603) | (109,201)\nCash flows from financing activities:\nDebt issuance costs paid | (2,825) | 0\nPreferred stock dividend | (8) | (8)\nCommon stock dividend | (13,804) | (13,813)\nPurchases of treasury stock inclusive of excise taxes paid | (19,179) | (15,501)\nPayments related to tax withholding for share-based compensation | (3,152) | (3,639)\nRepayment of debt | (101,103) | (1,103)\nProceeds from issuance of long-term debt | 100,000 | 0\nNet cash provided by (used in) financing activities | (40,071) | (34,064)\nCash and cash equivalents and restricted cash and cash equivalents:\nNet increase (decrease) during the period | 160,258 | 212,148\nBalance, beginning of period | 477,838 | 262,076\nBalance, end of period | $ 638,096 | $ 474,224"
-   },
-   "P6.s14": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "While we recognize the challenges this storm has created for those impacted, claims activity to date has been less significant than initially anticipated.\u201d"
-   },
-   "P6.s23": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Net income available to common stockholders | $52,506 | $39,827 | 31.8% | $165,980 | $116,354 | 42.7%"
-   },
-   "P6.s25": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Annualized ROCE | 32.7% | 33.4% | (0.7) | pts | 37.0% | 35.7% | 1.3 | pts"
-   },
-   "P6.s39": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Direct premiums written | $608,878 | $592,774 | 2.7% | $1,736,739 | $1,656,572 | 4.8%"
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.17265900374160922,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.17265900374160922,
-   "roe.y1": 0.17265900374160922,
-   "roe.y2": 0.17265900374160922,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.09362227033932324,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.17265900374160922,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.17265900374160922,
-   "roe.y1": 0.2321081223775252,
-   "roe.y2": 0.17265900374160922,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "record_median",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    0
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "p75",
-   "roe.y2": "median",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Full-year 2026 underwriting results and ultimate net losses from post-quarter Hurricane Isaias cannot be determined from the evidence available at decision time.",
-   "The ultimate settlement cost and resolution timeline of remaining pre-December 2022 reform litigated Florida claims are not known.",
-   "Future catastrophe frequency and severity, mid-year reinsurance renewal pricing and capacity, and the long-term durability of Florida's 2022 statutory reforms against competitive rate compression or legislative reversal cannot be known from the filings."
-  ],
-  "year": 3
- },
- "value_base": 52.34431744484556,
- "value_bear": 48.664371420824416,
- "value_bull": 56.024263468866685,
+ "upside": 0.3370558000603392,
+ "valuation": null,
+ "value_base": 62.21041567224245,
+ "value_bear": 41.28530237839139,
+ "value_bull": 103.27757739339762,
  "value_per_filed_share": {
-  "base": 52.34431744484556,
-  "bear": 48.664371420824416,
-  "bull": 56.024263468866685
+  "base": 62.21041567224245,
+  "bear": 41.28530237839139,
+  "bull": 103.27757739339762
  },
  "valued": true,
- "verdict": "WATCH",
- "verdict_reason": "expected return +2.7 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict": "BUY",
+ "verdict_reason": "expected return +12.4 points a year against the required return over 3 years"
 }

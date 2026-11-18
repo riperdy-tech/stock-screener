@@ -1,11 +1,508 @@
 {
- "alpha_pts": -35.43235876316404,
+ "alpha_pts": -27.51806775365852,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 66,
  "claims_supported": 62,
  "date": "2026-11-17T19:08:52Z",
- "equity_value": 9697316359.642056,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1500 (filed 0.0865 to 0.1438)",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1550 (filed 0.0865 to 0.1438)",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1994 and margin 0.1526, margin 0.1302 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+  "run_gap": 0.015580135421910227,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 36059000.0,
+       "printed": 36059,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Foreign currency (gains) losses, net(3) | (36,059) | 16,063"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "2025 foreign currency gains in other income, which the company excludes from adjusted net income as a non-core swing item"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 777289000.0,
+     "excess_cash_before": 777289000.0,
+     "k0_after": 87661451.2461847,
+     "k0_before": 51602451.24618471,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 36059000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 667663557.811763,
+     "x0_before": 695755819.3865211
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 11011221592.238165,
+     "seam_ratio": 1.0505846822711737,
+     "tv_share": 0.39483324582371465,
+     "wedge_rate_5": 0.007588154319780768
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1500 (filed 0.0865 to 0.1438)",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.024,
+     "fade_years": 10,
+     "long_run_op_margin": 0.125,
+     "op_margin": [
+      0.15,
+      0.14,
+      0.138,
+      0.136,
+      0.134
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.19,
+      0.12,
+      0.095,
+      0.075,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1994 and margin 0.1526, margin 0.1302 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 62
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.1,
+      0.15
+     ],
+     "rev_growth_y3": [
+      0.05,
+      0.13
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0226"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (124,629) | (84,938)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled capex ratio is 2.3%, and nine-month 2026 capex of $124.6 million is about 2.4% of sales, so I use a slightly higher figure."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We participate in highly competitive markets, and we may not be able to compete successfully, causing us to lose market share and sales."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The competitive advantage is innovation-led and has to be renewed continuously against better-resourced rivals, so convergence to the long-run state takes a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $3,717.4 million | -0.0026 | 0.0865"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $5,528.6 million | 0.2997 | 0.1165"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pre-2024 margins were 8.7% to 11.8% and 2025 was 14.4%. Base rates say about half of the gap to the median persists, giving about 13%. I use 12.5% because competition, tariffs and heavier share-based compensation are headwinds."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "This resulted in a net benefit to cost of sales of $198.6 million"
+       },
+       {
+        "id": "F3",
+        "quote": "Share-based compensation | 119,552 | 31,598"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY2026 GAAP margin is lifted by tariff refunds and partly offset by much higher share-based compensation. I set year 1 at 15% and let the margin drift down to about 13.4% as refunds roll off and the 10% to 12.5% successor tariffs and rising advertising weigh."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.6624"
+       },
+       {
+        "id": "F3",
+        "quote": "Inventories | (436,160) | (238,888)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The current return on tangible capital of 0.66 reflects an outsourced-manufacturing model, but growth needs heavy receivables and inventory. I assume competition pulls long-run returns well down, though still above the 0.1058 hurdle."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "our 14th consecutive quarter of double-digit growth"
+       },
+       {
+        "id": "P6",
+        "quote": "Net sales increased 21.2% to $1,976.4 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is largely visible: nine-month sales are up about 20% and Q3 was up 21.2% with 14 straight double-digit quarters. I fade growth as the base gets larger and new-category launches must keep replacing maturing ones. Cleaning is already growing only 4.1%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature global appliance brand set should grow near nominal GDP, so I stay just under the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariff costs rise or the refund benefits are reversed on appeal, and underlying margins fall back toward the pre-2024 range"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "New categories fade and discretionary demand weakens, so growth drops toward the Cleaning category's 4%"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Working capital keeps absorbing cash and competition lowers the return on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       0.14500000000000002,
+       0.075,
+       0.05,
+       0.03,
+       0.015
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.225,
+       0.155,
+       0.13,
+       0.11,
+       0.095
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $736 million is modest against equity of $3.16 billion and is falling through scheduled term-loan repayments."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 14.4% is above the 2021-2025 median of about 11.7%. It rose on cost optimisation, the end of the JS Global sourcing fee and lower litigation and share-based costs. The 2026 reported margin is inflated by IEEPA tariff refunds booked as a reduction to cost of sales. Share-based compensation and tariffs are now larger costs, so I expect only part of the margin gain to last.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 rate of 22.1% was helped by one-time fourth-quarter benefits, but the 2026 nine-month rate of about 21.6% and third-quarter rate of 23.3% bracket it."
+     },
+     "why": "FY2025 operating margin of 0.1438 sits above the five-year median, but the gain came mostly from structural items such as cost optimisation and the fee ending, not a one-time windfall. Growth of 15.7% is below the 2026 run-rate of about 20%, so the base year understates scale but is reasonable for margin. The 2026 numbers are distorted by refunds, so I anchor on 2025 and adjust."
+    },
+    "value_at_old_defaults": 68.43523245002166,
+    "values": {
+     "base": 90.13033362337913,
+     "bear": 59.96422108985271,
+     "bull": 130.1299073488289
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 36059000.0,
+       "printed": 36059,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Foreign currency (gains) losses, net(3) | (36,059) | 16,063"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "2025 foreign currency gain, net, in other income; unlikely to repeat at this size"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 777289000.0,
+     "excess_cash_before": 777289000.0,
+     "k0_after": 87661451.2461847,
+     "k0_before": 51602451.24618471,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 36059000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 667663557.811763,
+     "x0_before": 695755819.3865211
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 11195297205.895065,
+     "seam_ratio": 1.0540985915263614,
+     "tv_share": 0.39937980077534707,
+     "wedge_rate_5": 0.007527333140881206
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1550 (filed 0.0865 to 0.1438)",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.024,
+     "fade_years": 10,
+     "long_run_op_margin": 0.13,
+     "op_margin": [
+      0.155,
+      0.14,
+      0.138,
+      0.136,
+      0.135
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.18,
+      0.12,
+      0.09,
+      0.075,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1994 and margin 0.1526, margin 0.1302 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 62
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.105,
+      0.15
+     ],
+     "rev_growth_y3": [
+      0.05,
+      0.12
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0226"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (124,629) | (84,938)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has run near 2.3% of revenue across the last five years. Nine-month 2026 purchases of property and equipment of 124,629 are about 2.4% of sales, so I use 2.4%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Shark is the #1 floorcare brand in the United States"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company has leading brand positions, growing share and expansion into new categories and markets, so growth is likely to fade gradually over about a decade rather than abruptly."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $6,399.2 million | 0.1575 | 0.1438"
+       },
+       {
+        "id": "P2",
+        "quote": "Some competitors may be willing to reduce prices and accept lower profit margins to compete with us."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin is well above the 5-year median of about 11.7%. The base rate says about half of that gap persists, which gives about 13%. Competitors that accept lower margins and tariff exposure limit how much of the gain is kept."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 442,859 | 262,891 | 786,764 | 576,484"
+       },
+       {
+        "id": "P4",
+        "quote": "This resulted in a net benefit to cost of sales of $198.6 million and interest income of $10.5 million for the three and nine months ended September 30, 2026."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 GAAP operating margin is about 15.3% (786,764 on 5,154,709) and is helped by tariff refunds recorded in cost of sales. I assume year 1 at about 15.5% and then a step down to the mid-13s as refunds roll off, share-based compensation stays higher and tariffs persist."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.6624"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is very high because the model is asset-light with outsourced manufacturing. New investment goes mostly into receivables and inventory, and competition should push returns down to a still-high level of about 30%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "our 14th consecutive quarter of double-digit growth"
+       },
+       {
+        "id": "P6",
+        "quote": "Net sales increased 21.2% to $1,976.4 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is running above 20% (Q3 2026 +21.2%, 14 straight double-digit quarters). Year 1 (FY2026) is about 18% given nine months of +20% and a tougher fourth-quarter comparison. Growth should then fade as the base gets large, discretionary demand cools and new categories mature."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "I use a value just under the long-run nominal anchor. A leading small-appliance maker with international runway can grow near nominal GDP, but discretionary demand and mature categories cap it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.105,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariff refunds roll off and successor Section 301 tariffs or competition compress gross margin, so the long-run margin lands near the 5-year median or below."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "Consumer discretionary slowdown or fading of new launches (Luxe Caf\u00e9, Crispi, skincare) slows growth toward the pace of the mature Cleaning category."
+     },
+     {
+      "bear_value": 0.18,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Weak cash conversion persists as receivables and inventory absorb cash, and returns on new capital are lower than assumed."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.14,
+       0.08,
+       0.05,
+       0.035,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.21,
+       0.15,
+       0.12,
+       0.105,
+       0.09
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of about $736 million is an amortizing term loan, small against earnings and equity, and the company is in a net cash position."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 14.4% is well above the 5-year range of 8.7% to 11.8%. It rose on cost optimization, the end of the JS Global sourcing fee, and operating leverage on opex. The 2026 GAAP margin looks even higher because tariff refunds reduced cost of sales, while share-based compensation is also rising sharply. I treat part of the margin as durable and part as one-time or at risk from tariffs.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 22.1% base-year rate included some one-time fourth-quarter benefits, but the nine-month 2026 rate of 21.6% (162,868 of 752,507) is close, so a rate of about 22% to 23% is sustainable."
+     },
+     "why": "2025 revenue grew 15.7% and the margin was a multi-year high, so it is a reasonable starting point but not a steady state. 2026 results are flattered by one-time IEEPA tariff refunds, and 2025 carried tariff costs and a $36.1 million foreign currency gain. The business is discretionary consumer goods, so margin could revert part of the way toward the 5-year median of about 11.7%."
+    },
+    "value_at_old_defaults": 68.43523245002166,
+    "values": {
+     "base": 91.5456014591229,
+     "bear": 62.47544426597965,
+     "bull": 130.38763054707223
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 68.43523245002166,
+  "value_at_old_defaults_quoted": 68.43523245002166,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 12907145551.851952,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 142089766.0,
@@ -15,7 +512,7 @@
   "The company repurchased ordinary shares, shown as 1,301,500 treasury shares at a cost of $169,685 (table in thousands), with no treasury shares at year-end 2025."
  ],
  "in_code_book": false,
- "ke": 0.10608180622416283,
+ "ke": 0.10578180622416283,
  "market_cap_at_publish": 31017437447,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +520,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 74.01417258844963,
-  "3000": 68.24781708516612
+  "1000": 90.13033362337913,
+  "3000": 91.5456014591229
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -835,137 +1332,17 @@
   ]
  },
  "ticker": "SN",
- "upside": -0.6873592031510657,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 up, 3000 none)",
-   "held_at_record: op_margin.y1 model 0.1313 valued at 0.1526",
-   "margin_at_record_peak: normalized.margin 0.1302 at or above the record's p75 0.1176",
-   "margin_at_record_peak: long_run_op_margin 0.1302 at or above the record's p75 0.1176"
-  ],
-  "departures": [
-   {
-    "driver": "regulation",
-    "evidence": [
-     "P4.s49",
-     "P4.s51",
-     "F2"
-    ],
-    "input": "op_margin.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "down",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF INCOME - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nNet sales | [1] | $ 1,976,427 | $ 1,630,240 | $ 5,154,709 | $ 4,297,754\nCost of sales | [2] | 806,416 | 812,771 | 2,429,393 | 2,168,892\nGross profit | 1,170,011 | 817,469 | 2,725,316 | 2,128,862\nOperating expenses:\nResearch and development | [3] | 117,920 | 92,826 | 326,137 | 269,838\nSales and marketing | 460,733 | 365,919 | 1,217,581 | 999,376\nGeneral and administrative | [4] | 148,499 | 95,833 | 394,834 | 283,164\nTotal operating expenses | 727,152 | 554,578 | 1,938,552 | 1,552,378\nOperating income | 442,859 | 262,891 | 786,764 | 576,484\nInterest income (expense), net | 3,072 | (12,782) | (11,425) | (39,176)\nOther (expense) income, net | (4,699) | (6,116) | (22,832) | 33,103\nIncome before income taxes | 441,232 | 243,993 | 752,507 | 570,411\nProvision for income taxes | 102,871 | 55,264 | 162,868 | 124,249\nNet income | $ 338,361 | $ 188,729 | $ 589,639 | $ 446,162\nNet income per share, basic (in dollars per share) | $ 2.40 | $ 1.34 | $ 4.17 | $ 3.17\nNet income per share, diluted (in dollars per share) | $ 2.39 | $ 1.33 | $ 4.16 | $ 3.14\nWeighted-average number of shares used in computing net income per share, basic (in shares) | 140,955,550 | 141,112,020 | 141,244,000 | 140,927,916\nWeighted-average number of shares used in computing net income per share, diluted (in shares) | 141,521,492 | 142,119,000 | 141,794,125 | 142,072,681\n[1] | Including amounts associated with related parties of $4,502 and $2,349 for the three months ended September 30, 2026 and 2025, respectively; and $11,025 and $10,951 for the nine months ended September 30, 2026 and 2025, respectively.\n[2] | Including amounts associated with related parties of $15,979 and $26,966 for the three months ended September 30, 2026 and 2025, respectively; and $46,842 and $80,369 for the nine months ended September 30, 2026 and 2025, respectively.\n[3] | Including amounts associated with related parties of $(2,853) and $(1,660) for the three months ended September 30, 2026 and 2025, respectively; and $(8,558) and $(4,904) for the nine months ended September 30, 2026 and 2025, respectively.\n[4] | Including amounts associated with related parties of $0 and $(250) for the three months ended September 30, 2026 and 2025, respectively; and $0 and $(1,737) for the nine months ended September 30, 2026 and 2025, respectively."
-   },
-   "P4.s49": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "In the Condensed Consolidated Statements of Income, $243.8 million related to the tariff refund claims was recorded as a reduction to cost of sales, and $10.5 million of related interest was recorded in interest income (expense), net."
-   },
-   "P4.s51": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "This resulted in a net benefit to cost of sales of $198.6 million and interest income of $10.5 million for the three and nine months ended September 30, 2026."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.02263444219705182,
-    0.02263444219705182,
-    0.02263444219705182,
-    0.02263444219705182,
-    0.02263444219705182
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.13016290940009595,
-   "normalized.margin": 0.13016290940009595,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1526301484720088,
-   "op_margin.y2": 0.13016290940009595,
-   "rev_growth.y1": 0.19939601010202068,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10608180622416283
-  },
-  "numbers": {
-   "capex": [
-    0.02263444219705182,
-    0.02263444219705182,
-    0.02263444219705182,
-    0.02263444219705182,
-    0.02263444219705182
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.13016290940009595,
-   "normalized.margin": 0.13016290940009595,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1313473427949383,
-   "op_margin.y2": 0.13016290940009595,
-   "rev_growth.y1": 0.19939601010202068,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10608180622416283
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.1313473427949383,
-    "model_option": "p25",
-    "record": 0.1526301484720088,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "p25",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The fiscal 2026 outlook figures in the 8-K were cut from the packet, so no sentence states guided year-1 revenue growth, operating margin or capex, and guidance was not chosen.",
-   "The 2026 year-to-date operating margin includes tariff refund benefits recorded in cost of sales. The evidence does not split how much of that benefit is non-recurring, so the lower year-1 margin option is a judgement.",
-   "Revenue growth beyond year 1 is not guided in the evidence, and whether the recent growth above 20% persists is unknown."
-  ],
-  "year": 3
- },
- "value_base": 68.24781708516612,
- "value_bear": 65.92473133338197,
- "value_bull": 74.01417258844963,
+ "upside": -0.5838745359313902,
+ "valuation": null,
+ "value_base": 90.83796754125102,
+ "value_bear": 61.21983267791617,
+ "value_bull": 130.25876894795056,
  "value_per_filed_share": {
-  "base": 68.24781708516612,
-  "bear": 65.92473133338197,
-  "bull": 74.01417258844963
+  "base": 90.83796754125102,
+  "bear": 61.21983267791617,
+  "bull": 130.25876894795056
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -35.4 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -27.5 points a year against the required return over 3 years"
 }

@@ -1,23 +1,575 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -1.6499712155502375,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 65,
  "claims_supported": 62,
  "date": "2026-11-17T18:18:18Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 8 of 8",
+   "run 1000: ffo_derived_vs_reported: +1.9%",
+   "run 1000: ffo_compared_per_share_on_the_base_years_diluted_shares",
+   "run 1000: ffo_derived_preferred_dividends_taken_as_0",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 9 of 9",
+   "run 3000: ffo_derived_vs_reported: +1.9%",
+   "run 3000: ffo_compared_per_share_on_the_base_years_diluted_shares",
+   "run 3000: ffo_derived_preferred_dividends_taken_as_0"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0268 and margin 0.1582, margin 0.1469 (persist), growth 0.0375, terminal RONIC 0.0711 (equity return r 0.0890), F 10",
+  "run_gap": 0.025054529446269305,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 148000000.0,
+       "printed": 148,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "$148 million of gains on asset sales during the year"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "2025 gains on asset sales, booked in other gains below operating profit"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 768000000.0,
+     "excess_cash_before": 768000000.0,
+     "k0_after": 227817182.51148927,
+     "k0_before": 79817182.51148927,
+     "k0_interest": 235000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 148000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 594980276.7372669,
+     "x0_before": 735381254.7323769
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.04886229704618763,
+     "equity_value": 14797116288.391418,
+     "seam_ratio": 1.005972132110629,
+     "tv_share": 0.3759667752950216,
+     "wedge_rate_5": -0.028670400828908343
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 8 of 8",
+     "ffo_derived_vs_reported: +1.9%",
+     "ffo_compared_per_share_on_the_base_years_diluted_shares",
+     "ffo_derived_preferred_dividends_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 10,
+     "long_run_op_margin": 0.148,
+     "op_margin": [
+      0.154,
+      0.155,
+      0.155,
+      0.153,
+      0.152
+     ],
+     "return_on_new_investment_long_run": 0.075,
+     "rev_growth": [
+      0.016,
+      0.035,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0268 and margin 0.1582, margin 0.1469 (persist), growth 0.0375, terminal RONIC 0.0711 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 62
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.13,
+      0.165
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.038
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "derived_after_preferred": 1436000000.0,
+      "derived_before_preferred": 1436000000.0,
+      "gap_after_preferred": 0.019145890450333436,
+      "gap_before_preferred": 0.019145890450333436,
+      "not_filed": [
+       "preferred_dividends"
+      ],
+      "per_share_divisor": 694100000.0,
+      "reported": {
+       "per": "per_share",
+       "printed": 2.03,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "NAREIT FFO per diluted share \u207d\u00b9\u207e | 2.03 | 1.97 | 3.0%"
+        }
+       ],
+       "scale": "units",
+       "value": 2.03,
+       "what": "NAREIT FFO per diluted share for 2025 (the total is not stated in the evidence)"
+      },
+      "status": "compared"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Renewal and replacement capital expenditures are designed to maintain the quality and competitiveness of our hotels."
+       },
+       {
+        "id": "P6",
+        "quote": "R&R and ROI Capital expenditures | 387 | 540 | 585"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I count renewals and replacements as upkeep: guidance of $285-305 million on revenue of about $6.2 billion is about 4.7%. I add roughly 0.8% for continuing ROI work that keeps the hotels competitive. Acquisitions and the condo development are excluded. Filings give no separate upkeep reserve beyond R&R."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "the lodging industry is highly cyclical"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A highly cyclical business with a recovery already largely done warrants a moderate fade of about ten years to the mid-cycle margin and terminal growth."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $5,311.0 million | 0.0823 | 0.1557"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margins were 15.8%, 15.6% and 15.4% in 2022-2024, then 14.0% in 2025. Hotels are highly cyclical and have fixed costs, so I fade to a mid-cycle 14.8%, below the recent peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating profit margin under GAAP | 15.4% | 140 bps | 100 bps | 40 bps"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Year 1 follows management's GAAP margin guidance of 15.4%. After that I hold roughly 15.5% and drift slightly lower, because the World Cup boost and one-off condo profit do not recur and wage inflation continues. Margins are set on what the hotels earn, without asset-sale gains."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0860"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 8.6%, and breakeven for growth is 7.1%. I assume new acquisitions and renovations earn about 7.5% long run, a modest spread above breakeven because competition for hotels is strong."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Total revenues under GAAP (in millions) | $6,213 | 1.6% | 0.4% | 120 bps"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "2026 guidance is only 1.6% growth because the Four Seasons Orlando and Jackson Hole and other hotel sales remove revenue despite RevPAR growth of about 6.75%. From 2027 I expect about 3-3.5% from RevPAR, with a small lift from the two acquired hotels. Condo sales fade and some of them shift into 2027."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Hotel revenue grows roughly with inflation plus modest real growth over time. I set 3.0%, below the 3.75% anchor, because supply additions and a mature portfolio limit growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.125,
+      "input_hit": "long_run_op_margin",
+      "risk": "A recession or fade in luxury and business travel demand, with fixed costs and wage inflation, compresses margins"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Event-driven 2026 demand fades and further dispositions shrink the revenue base"
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "capex_to_revenue",
+      "risk": "Renovation programs and brand-standard requirements push upkeep capital spending higher"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.0009999999999999974,
+       0.02,
+       0.02,
+       0.014999999999999996,
+       0.014999999999999996
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.165,
+      "rev_growth": [
+       0.031,
+       0.05,
+       0.05,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.038
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of about $5.1 billion was essentially unchanged at $5,084 million at September 30, 2026, and the company targets an investment-grade leverage ratio."
+     },
+     "margin_position": "The GAAP operating margin of 13.98% in 2025 sat below the 2022-2024 run of about 15.4-15.8%. Wage increases and a smaller gain on insurance settlements held it down. 2026 guidance has it back at about 15.4% as rate gains offset wages. It is far above the 2020-2021 trough and well above the 2009-2013 lows of 2-10%.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "A 5.1% tax rate is plausible for a REIT whose taxes fall mainly on taxable REIT subsidiaries and foreign hotels."
+     },
+     "why": "2025 had depressed margins from wage growth and lower insurance gains, and it included $99 million of condo revenue and $148 million of asset-sale gains. 2026 guidance already shows revenue growth of only 1.6% because of about $1.1 billion of hotel sales, with the margin recovering to 15.4%. Base-year revenue is a fair starting point, but the margin and the portfolio are in transition."
+    },
+    "value_at_old_defaults": 20.629581158669623,
+    "values": {
+     "base": 24.085436859315884,
+     "bear": 20.990006882564863,
+     "bull": 27.639054129476918
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 148000000.0,
+       "printed": 148,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "$148 million of gains on asset sales during the year"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Gains on asset sales in 2025, recorded below operating profit in other gains"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 768000000.0,
+     "excess_cash_before": 768000000.0,
+     "k0_after": 227817182.51148927,
+     "k0_before": 79817182.51148927,
+     "k0_interest": 235000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 148000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 594980276.7372669,
+     "x0_before": 735381254.7323769
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.05363283261550263,
+     "equity_value": 15190632139.492903,
+     "seam_ratio": 1.0039293039114257,
+     "tv_share": 0.372973650405353,
+     "wedge_rate_5": -0.029422294608127307
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 9 of 9",
+     "ffo_derived_vs_reported: +1.9%",
+     "ffo_compared_per_share_on_the_base_years_diluted_shares",
+     "ffo_derived_preferred_dividends_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.05,
+     "fade_years": 10,
+     "long_run_op_margin": 0.145,
+     "op_margin": [
+      0.154,
+      0.155,
+      0.155,
+      0.155,
+      0.155
+     ],
+     "return_on_new_investment_long_run": 0.075,
+     "rev_growth": [
+      0.016,
+      0.035,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0268 and margin 0.1582, margin 0.1469 (persist), growth 0.0375, terminal RONIC 0.0711 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 62
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.125,
+      0.16
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.045
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "derived_after_preferred": 1436000000.0,
+      "derived_before_preferred": 1436000000.0,
+      "gap_after_preferred": 0.019145890450333436,
+      "gap_before_preferred": 0.019145890450333436,
+      "not_filed": [
+       "preferred_dividends"
+      ],
+      "per_share_divisor": 694100000.0,
+      "reported": {
+       "per": "per_share",
+       "printed": 2.03,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "2.03 | 1.97 | 3.0%"
+        }
+       ],
+       "scale": "units",
+       "value": 2.03,
+       "what": "NAREIT FFO per diluted share for fiscal 2025, as named by the company"
+      },
+      "status": "compared"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "R&R and ROI Capital expenditures | 387 | 540 | 585"
+       },
+       {
+        "id": "P1",
+        "quote": "Renewal and replacement capital expenditures are designed to maintain the quality and competitiveness of our hotels."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is upkeep only: the renewal and replacement spending that maintains hotel quality, about $285-305 million, or 4.7% of $6.2 billion. I exclude acquisitions and most of the return-on-investment redevelopment, but add a small allowance for brand-required work, giving 5%. The filing gives a 2026 R&R range."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "the lodging industry is highly cyclical"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade reflects a cyclical margin normalising gradually while growth settles."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2019-12-31 | $5,469.0 million | -0.0100 | 0.1461"
+       },
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $5,311.0 million | 0.0823 | 0.1557"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pre-pandemic margins were about 12-15% and the 2023-2024 peak was about 15.5%. Lodging is cyclical, so I fade to 14.5%, roughly half the way from the current high toward the long-run median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating profit margin under GAAP | 15.4% | 140 bps | 100 bps | 40 bps"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Year 1 follows the guided 15.4% GAAP operating margin. I hold it near 15.5% for the following years because rate gains are offsetting wage costs. I do not extend it further because of high operating leverage and the World Cup boost to 2026."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0711"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 8.6%, and growth adds no value at 7.1%. Acquisitions at competitive prices and renovations with manager priority returns earn slightly above that hurdle, so I use 7.5%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Total revenues under GAAP (in millions) | $6,213 | 1.6% | 0.4% | 120 bps"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Year 1 uses management's 2026 guidance of 1.6% GAAP revenue growth. Reported growth lags RevPAR growth because hotels were sold and condo sales are lumpy. Later years assume mid-single-digit comparable RevPAR growth fading toward about 3%, plus small acquisition contributions, partly offset by further disposals."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Hotel revenue should grow roughly with nominal GDP and RevPAR over the very long run. Supply growth is below average now, but I set it below the 3.75% code anchor because of cyclicality and portfolio pruning."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.125,
+      "input_hit": "long_run_op_margin",
+      "risk": "Demand slowdown or recession hits luxury and business travel, with fixed costs and wages compressing margins"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Event-driven 2026 strength fades, plus continued dispositions, so reported revenue growth is weak"
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Marriott concentration or labor disputes impair operations and returns on new investment fall"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.125,
+      "rev_growth": [
+       -0.003999999999999997,
+       0.015000000000000006,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.16,
+      "rev_growth": [
+       0.031,
+       0.05,
+       0.045,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $5.1 billion has been flat for nine months, is mostly senior notes, and management targets an investment-grade leverage ratio."
+     },
+     "margin_position": "The 2026 guided GAAP operating margin of 15.4% is near the post-pandemic high of 15.6% in 2023 and above the 2025 level of 14.0%. It is well above the 2011-2018 range of roughly 6.5-13%. Rate growth is currently outrunning wage inflation, and 2026 also benefits from World Cup-boosted demand. This is a cyclical peak-ish margin, so I fade it modestly lower.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT, Host pays little federal tax, and a 5% rate on taxable-subsidiary and foreign income is sustainable."
+     },
+     "why": "2025 operating margin of 14.0% was depressed by an $86 million drop in insurance settlement gains and wage pressure. Net income also included $148 million of asset-sale gains that sit below operating income. 2026 is already shaping up differently: dispositions of about $1.1 billion of Four Seasons assets, 6.75% RevPAR growth and a margin guided to 15.4%. Year 1 is therefore anchored on guidance rather than on 2025."
+    },
+    "value_at_old_defaults": 20.629581158669623,
+    "values": {
+     "base": 24.696541617412112,
+     "bear": 21.027948848553958,
+     "bull": 28.56353706745164
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 20.629581158669623,
+  "value_at_old_defaults_quoted": 20.629581158669623,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 16929785630.348452,
  "family": "family_not_built",
+ "far_from_price": false,
+ "filed_shares": 694100000.0,
  "flags": [
   "Host L.P. amended and restated its senior unsecured bank credit facility. The restatement refinanced the revolver and two term loan tranches and extended the revolver maturity, with a new leverage-based pricing adjustment.",
   "The company raised its full-year 2026 guidance for comparable hotel RevPAR growth and Total RevPAR growth, both above the high end of its prior ranges.",
   "The company entered into a new at-the-market common stock distribution agreement for up to $600 million of shares. It replaces the prior agreement, which still had the same amount unsold."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08903203083918919,
+ "market_cap_at_publish": 17794468632,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "no_value_reason": null,
+ "price_at_publish": 25.62,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 24.085436859315884,
+  "3000": 24.696541617412112
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -815,8 +1367,17 @@
   ]
  },
  "ticker": "HST",
+ "upside": -0.04859279698279828,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+ "value_base": 24.390989238364,
+ "value_bear": 21.00897786555941,
+ "value_bull": 28.10129559846428,
+ "value_per_filed_share": {
+  "base": 24.390989238364,
+  "bear": 21.00897786555941,
+  "bull": 28.10129559846428
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -1.6 points a year against the required return over 3 years"
 }

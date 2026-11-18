@@ -1,11 +1,522 @@
 {
- "alpha_pts": 32.74326093057452,
+ "alpha_pts": 33.15415837211674,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 113,
  "claims_supported": 110,
  "date": "2026-11-17T02:42:24Z",
- "equity_value": 1701531843.3499084,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 19 of 19",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 16 of 16"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3527 (persist), growth 0.0375, terminal RONIC 0.0985 (equity return r 0.0985), F 10",
+  "run_gap": 0.039997577515972514,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 388891000.0,
+     "excess_cash_before": 388891000.0,
+     "k0_after": 3159868.18625097,
+     "k0_before": 3159868.18625097,
+     "k0_interest": 6865000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 90890888.57236594,
+     "x0_before": 90890888.57236594
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1166826680.9187064,
+     "seam_ratio": 0.9904527221497141,
+     "tv_share": 0.3519043443595186,
+     "wedge_rate_5": -0.016095230647501797
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 19 of 19"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.003,
+     "fade_years": 8,
+     "long_run_op_margin": 0.34,
+     "op_margin": [
+      0.385,
+      0.383,
+      0.378,
+      0.372,
+      0.366
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.045,
+      0.01,
+      0.01,
+      0.01,
+      0.012
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3527 (persist), growth 0.0375, terminal RONIC 0.0985 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 110
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.27,
+      0.38
+     ],
+     "rev_growth_y3": [
+      -0.04,
+      0.045
+     ],
+     "terminal_growth": [
+      0.01,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (190) | (867) | (198)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0010"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital spending is tiny: $190K of property and equipment in 2025. I use 0.3% to allow for some capitalised development and intangibles, above the 0.1% pooled figure."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Average MAU decreased 7.1% for the year ended December 31, 2025 compared to 2024"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business has long-lived player cohorts, so the shift from the 2026 margin and growth to long-run levels should be gradual, over about 8 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "In March 2025, DDI-US received a letter from IGT purporting to terminate our licenses to develop and distribute IGT social casino game titles"
+       },
+       {
+        "id": "P2",
+        "quote": "In the United States, we have several pending lawsuits and arbitrations alleging that our social casino-themed games constitute illegal gambling under applicable state laws"
+       },
+       {
+        "id": "P3",
+        "quote": "iGaming | (15,556) | (2,958) | (1,769)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Part of the direct-to-consumer cost advantage should persist, but it will probably be competed or taxed away over time. Legal, licensing (IGT) and platform risks all threaten the margin, and the iGaming segment loses money. I fade to 34%, below the 38 to 40% recent level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Operating profit | $37,497 | $34,987 | $109,407 | $97,032"
+       },
+       {
+        "id": "P5",
+        "quote": "DTC revenue as a percentage of total social casino revenue increased to 58.0% in the third quarter of 2026 from 20.9% in the third quarter of 2025"
+       },
+       {
+        "id": "P5",
+        "quote": "General and administrative | (16,481) | (13,025) | (46,594) | (38,652)"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $359.9 million | 0.0545 | 0.3527"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Operating margin in the nine months of 2026 was 38.7% (109.4 of 282.7), and the direct-to-consumer share keeps lowering platform fees. I start near 38.5%. I then drift it down because G&A is rising, iGaming marketing and duties are heavy, and DoubleDown title revenue is weakening."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0985."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.9379; tax rate 0.2658"
+       },
+       {
+        "id": "F3",
+        "quote": "Impairment loss of goodwill | 8,011 | 0 | 0"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Organic reinvestment needs are tiny, so the return on tangible capital is very high (0.94). New investment also includes acquisitions with large goodwill, so I use a much lower 25%, still well above the 9.85% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Revenue decreased 1.6% to $94.3 million in the third quarter of 2026 compared to $95.8 million in the third quarter of 2025."
+       },
+       {
+        "id": "P5",
+        "quote": "Revenue | $94,271 | $95,847 | $282,681 | $264,152"
+       },
+       {
+        "id": "P3",
+        "quote": "Revenue exclusive of the contributions from WHOW Games decreased approximately 1.7% from $341.3 million in 2024 to $339.6 million in 2025"
+       },
+       {
+        "id": "P5",
+        "quote": "increased 7.4% year-over-year to $17.4 million"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 growth is lifted by a full year of WHOW Games. Nine-month 2026 revenue was $282.7M against $264.2M, but Q3 revenue fell 1.6%, and social casino fell 3.5% while SuprNation grew 7.4%. Organic growth is about flat from year 2 on, with iGaming offsetting a weak core title."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Historically, DoubleDown Casino has accounted for a significant majority of our revenue (2025: 76.1%; 2024: 88.6%)"
+       },
+       {
+        "id": "P5",
+        "quote": "a 3.5% decrease from the third quarter of 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The core social casino market is mature and DoubleDown Casino is still 76.1% of revenue and slipping. Long-run growth should sit below the 3.75% nominal anchor, at about 2.5%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.05,
+      "input_hit": "rev_growth",
+      "risk": "Adverse US rulings that social casino games are illegal gambling, or loss of the IGT content licence, cut the core revenue and margin."
+     },
+     {
+      "bear_value": 0.26,
+      "input_hit": "long_run_op_margin",
+      "risk": "The direct-to-consumer margin benefit reverses, or iGaming losses and G&A growth keep rising, so the long-run margin is lower."
+     },
+     {
+      "bear_value": 0.005,
+      "input_hit": "terminal_growth",
+      "risk": "Platform providers restrict or change terms for chip purchases, or DoubleDown Casino keeps declining, so terminal growth is flat or negative."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       -0.0050000000000000044,
+       -0.04,
+       -0.04,
+       -0.04,
+       -0.038000000000000006
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.38,
+      "rev_growth": [
+       0.07999999999999999,
+       0.045,
+       0.045,
+       0.045,
+       0.047
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The only debt is a small note owed to the controlling shareholder, about $37M against more than $480M of cash, and the filings suggest it was extended."
+     },
+     "margin_position": "The 2025 operating margin of 35.3% is held down by an $8.0M goodwill impairment, $8.3M of other expense and a widening iGaming loss. The margin was 40.1% in 2024. The nine months of 2026 show about 38.7%, helped by the shift to direct-to-consumer sales, which avoids platform fees.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 26.6% base-year rate is close to the 25.4% nine-month 2026 rate (29.5 of 116.1), which fits a mostly US profit base."
+     },
+     "why": "2025 revenue growth came from the WHOW Games acquisition, and revenue excluding it fell 1.7%. Operating profit was cut by a one-time goodwill impairment. The latest nine months show a higher margin with flat to slightly lower organic revenue, so 2026 is a better guide than 2025."
+    },
+    "value_at_old_defaults": 688.364863431314,
+    "values": {
+     "base": 668.4409190521313,
+     "bear": 498.46447210313096,
+     "bull": 859.6113018978041
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 388891000.0,
+     "excess_cash_before": 388891000.0,
+     "k0_after": 3159868.18625097,
+     "k0_before": 3159868.18625097,
+     "k0_interest": 6865000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 90890888.57236594,
+     "x0_before": 90890888.57236594
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1229063231.1076202,
+     "seam_ratio": 1.003657560909959,
+     "tv_share": 0.31488488416119825,
+     "wedge_rate_5": -0.01669280920064733
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 16 of 16"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.002,
+     "fade_years": 10,
+     "long_run_op_margin": 0.35,
+     "op_margin": [
+      0.385,
+      0.38,
+      0.375,
+      0.37,
+      0.365
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.045,
+      0.015,
+      0.015,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3527 (persist), growth 0.0375, terminal RONIC 0.0985 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 110
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.28,
+      0.4
+     ],
+     "rev_growth_y3": [
+      -0.03,
+      0.05
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (190) | (867) | (198)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0010"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital spending is tiny: 190 thousand of property and equipment in 2025 against 359.9 million of revenue. The pooled five-year ratio is 0.1%, and I use 0.2% to allow for some intangibles."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Adjusted EBITDA margin | 42.7% | 39.1% | 41.6% | 38.5%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin and growth profile should converge gradually. A 10-year fade reflects uncertainty about how long the direct-to-consumer cost advantage lasts against regulatory and licence risks."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $359.9 million | 0.0545 | 0.3527"
+       },
+       {
+        "id": "P3",
+        "quote": "iGaming | (15,556) | (2,958) | (1,769)"
+       },
+       {
+        "id": "P2",
+        "quote": "Historically, DoubleDown Casino has accounted for a significant majority of our revenue (2025: 76.1%; 2024: 88.6%)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The business is asset-light and the direct-to-consumer savings are real. Concentration in one title, the IGT licence dispute, the US gambling-law suits and an iGaming segment that lost money in 2025 argue against holding 2024-26 levels, so I fade to about 35%, in line with the 2025 base."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Operating profit | $37,497 | $34,987 | $109,407 | $97,032"
+       },
+       {
+        "id": "P5",
+        "quote": "DTC revenue as a percentage of total social casino revenue increased to 58.0% in the third quarter of 2026 from 20.9% in the third quarter of 2025"
+       },
+       {
+        "id": "F2",
+        "quote": "General and administrative | (52,106) | (41,003) | (19,743)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 operating profit is 109.4 million on 282.7 million of revenue, about 38.7%, because the direct-to-consumer mix lowers platform fees. I expect this to ease as G&A, iGaming duties and legal pressure weigh."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.9379"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0985."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is very high because the business is asset-light and holds a large cash pile. Growth has needed acquisitions with goodwill and intangibles, so new investment should earn far less than the base return while still clearing the 9.85% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Revenue exclusive of the contributions from WHOW Games decreased approximately 1.7% from $341.3 million in 2024 to $339.6 million in 2025."
+       },
+       {
+        "id": "P5",
+        "quote": "Revenue decreased 1.6% to $94.3 million in the third quarter of 2026 compared to $95.8 million in the third quarter of 2025."
+       },
+       {
+        "id": "P5",
+        "quote": "Revenue ($ MM) | $94.3 | $95.8 | $282.7 | $264.2"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is lifted by a full year of WHOW Games, since nine-month 2026 revenue is 282.7 against 264.2 and Q3 was down 1.6%. After that the core social casino business is shrinking and iGaming growth is uncertain, so I assume low single-digit growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0985; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P3",
+        "quote": "Average MAU decreased 7.1% for the year ended December 31, 2025 compared to 2024"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The social casino market is mature, MAU is falling and the core title is weakening, so I set terminal growth below the nominal anchor of 3.75%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.25,
+      "input_hit": "long_run_op_margin",
+      "risk": "US court or regulatory rulings that social casino games are illegal gambling, or loss of IGT licences, shrink US revenue and raise costs"
+     },
+     {
+      "bear_value": -0.04,
+      "input_hit": "rev_growth",
+      "risk": "Continued decline of DoubleDown Casino and the US business, with iGaming and WHOW not offsetting it"
+     },
+     {
+      "bear_value": 0.3,
+      "input_hit": "op_margin",
+      "risk": "Third-party platforms restrict chip purchases or direct-to-consumer channels, reversing the cost-of-revenue savings"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.28,
+      "rev_growth": [
+       0.0,
+       -0.03,
+       -0.03,
+       -0.024999999999999998,
+       -0.024999999999999998
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.4,
+      "rev_growth": [
+       0.08,
+       0.05,
+       0.05,
+       0.05500000000000001,
+       0.05500000000000001
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "The only debt is a small related-party note to the controlling shareholder, now shown as long-term, and the pending tender offer's debt financing terms are not visible."
+     },
+     "margin_position": "The 2025 operating margin of 35.3% sits below 2024's 40.1% because of an 8.0 million goodwill impairment, 8.3 million of other expense, higher G&A and heavy iGaming marketing. The 2026 nine-month margin is about 38.7%, helped by the shift to direct-to-consumer sales, which avoids platform fees.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 rate of about 26.6% is close to the 9-month 2026 rate of about 25.4% (29.5 of 116.1), although Q3 2026 ran higher at about 37%."
+     },
+     "why": "2025 includes a partial year of WHOW Games revenue, which hid a decline in the core business, and it carries a goodwill impairment. Excluding WHOW, revenue fell 1.7%. Nine-month 2026 data show higher margins from lower platform fees, but social casino revenue is falling and legal and licence risks remain. I therefore start the margin above the 2025 base and let it fade down."
+    },
+    "value_at_old_defaults": 688.364863431314,
+    "values": {
+     "base": 695.7225358174325,
+     "bear": 526.7854569566684,
+     "bull": 918.3421752218453
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 688.364863431314,
+  "value_at_old_defaults_quoted": 34.418243960545546,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1689974797.7767909,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 2477672.0,
@@ -15,7 +526,7 @@
   "IGT sent DDI-US a letter purporting to terminate DDI's licenses for IGT social casino titles. DDI disputes the termination."
  ],
  "in_code_book": false,
- "ke": 0.09876177079828694,
+ "ke": 0.09846177079828694,
  "market_cap_at_publish": 776502387,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +534,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 686.7462050464744,
-  "3000": 689.9755834847347
+  "1000": 668.4409190521313,
+  "3000": 695.7225358174325
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": "filed shares 2,477,672 against 49,553,439 quoted (x20); values are per quoted share",
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1370,138 +1881,17 @@
   ]
  },
  "ticker": "DDI",
- "upside": 1.1912770286820873,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y2 (1000 none, 3000 up)",
-   "held_at_record: rev_growth.y1 model 0.0545 valued at 0.0375"
-  ],
-  "departures": [
-   {
-    "driver": "mix",
-    "evidence": [
-     "P5.s24",
-     "P5.s6",
-     "P3.s267"
-    ],
-    "input": "rev_growth.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P3.s267": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Revenue contributed by WHOW Games was $20.3 million for the year ended December 31, 2025 (covering the period from July 14, 2025 to December 31, 2025)."
-   },
-   "P5.s24": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "Revenue ($ MM) | $94.3 | $95.8 | $282.7 | $264.2"
-   },
-   "P5.s6": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "\u2022Revenue decreased 1.6% to $94.3 million in the third quarter of 2026 compared to $95.8 million in the third quarter of 2025."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.0010216222724278845,
-    0.0010216222724278845,
-    0.0010216222724278845,
-    0.0010216222724278845,
-    0.0010216222724278845
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.35272741416577297,
-   "normalized.margin": 0.35272741416577297,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.35272741416577297,
-   "op_margin.y2": 0.35272741416577297,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09876177079828694
-  },
-  "numbers": {
-   "capex": [
-    0.0010216222724278845,
-    0.0010216222724278845,
-    0.0010216222724278845,
-    0.0010216222724278845,
-    0.0010216222724278845
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.35272741416577297,
-   "normalized.margin": 0.35272741416577297,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.35272741416577297,
-   "op_margin.y2": 0.35272741416577297,
-   "rev_growth.y1": 0.05451615738434956,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09876177079828694
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.05451615738434956,
-    "model_option": "last",
-    "record": 0.0375,
-    "record_option": "anchor"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "last",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No filing in the packet gives revenue, margin or capex guidance for fiscal 2026.",
-   "Fourth-quarter 2026 results are not in the evidence. Part of the nine-month revenue gain comes from WHOW Games, acquired in July 2025, so full-year organic growth is not known.",
-   "Third-quarter 2026 revenue fell 1.6% year over year. Whether that decline continues is not known.",
-   "The IGT license termination dispute is unresolved in the evidence, and its effect on future revenue is not known.",
-   "The offer price, conditions and outcome of the DoubleU Games tender offer agreement dated November 9, 2026 are not stated in the evidence.",
-   "The terms of the related-party borrowing reclassified to long-term after the May 27, 2026 maturity are not given in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 34.337311039448316,
- "value_bear": 33.61777952283649,
- "value_bull": 34.78142230358948,
+ "upside": 1.176393564359759,
+ "valuation": null,
+ "value_base": 34.104087153517426,
+ "value_bear": 25.631248814047872,
+ "value_bull": 44.44883794690543,
  "value_per_filed_share": {
-  "base": 686.7462050464744,
-  "bear": 672.3555750441188,
-  "bull": 695.6284301256878
+  "base": 682.0817274347819,
+  "bear": 512.6249645298997,
+  "bull": 888.9767385598248
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +32.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +33.2 points a year against the required return over 3 years"
 }

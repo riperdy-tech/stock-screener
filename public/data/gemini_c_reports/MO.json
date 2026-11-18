@@ -1,11 +1,506 @@
 {
- "alpha_pts": 3.2560645274468616,
+ "alpha_pts": -1.101335195478978,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 120,
  "claims_supported": 107,
  "date": "2026-11-16T19:01:14Z",
- "equity_value": 143026291890.0827,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.5300 (filed 0.2319 to 0.4749)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.5250 (filed 0.2319 to 0.4749)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.5200 (filed 0.2319 to 0.4749)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.5150 (filed 0.2319 to 0.4749)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.5100 (filed 0.2319 to 0.4749)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.4800 (filed 0.2319 to 0.4749)",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year rate of 0.2601 is above the adjusted rate of about 23.0% that the company reports for 2026 year to date.",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.5280 (filed 0.2319 to 0.4749)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.5250 (filed 0.2319 to 0.4749)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.5200 (filed 0.2319 to 0.4749)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.5150 (filed 0.2319 to 0.4749)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.5100 (filed 0.2319 to 0.4749)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.4800 (filed 0.2319 to 0.4749)",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The 2025 rate of 0.2601 is inflated by non-deductible impairment effects, while the company reports an adjusted rate near 23%.",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0137 and margin 0.5322, margin 0.4466 (persist), growth 0.0375, terminal RONIC 0.0453 (equity return r 0.0781), F 10",
+  "run_gap": 0.04764207619822824,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 4474000000.0,
+     "excess_cash_before": 4474000000.0,
+     "k0_after": 691883372.6907635,
+     "k0_before": 691883372.6907635,
+     "k0_interest": 1177000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 6910090873.353634,
+     "x0_before": 6910090873.353634
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 110756476191.81757,
+     "seam_ratio": 0.9869197157966001,
+     "tv_share": 0.3471773453860925,
+     "wedge_rate_5": 0.00173561327410582
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.5300 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y2 0.5250 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y3 0.5200 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y4 0.5150 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y5 0.5100 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: long_run_op_margin 0.4800 (filed 0.2319 to 0.4749)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate of 0.2601 is above the adjusted rate of about 23.0% that the company reports for 2026 year to date.",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.01,
+     "fade_years": 10,
+     "long_run_op_margin": 0.48,
+     "op_margin": [
+      0.53,
+      0.525,
+      0.52,
+      0.515,
+      0.51
+     ],
+     "return_on_new_investment_long_run": 0.4,
+     "rev_growth": [
+      0.013,
+      0.005,
+      0.0,
+      -0.005,
+      -0.005
+     ],
+     "terminal_growth": 0.01
+    },
+    "old_defaults_inputs": "year 1 growth 0.0137 and margin 0.5322, margin 0.4466 (persist), growth 0.0375, terminal RONIC 0.0453 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 107
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.42,
+      0.52
+     ],
+     "rev_growth_y3": [
+      -0.025,
+      0.015
+     ],
+     "terminal_growth": [
+      -0.01,
+      0.02
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0076"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (259) | (124)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 0.76% of revenue pooled over five years but 2026 nine-month capex is about double last year's, so I use 1.0%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "We expect that effective enforcement against illicit products will occur gradually"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The decline in the combustible franchise and the build-out of enforcement and smoke-free products are gradual, so margin and growth converge slowly to steady state."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "PM USA faces competition from lower-priced brands sold by certain domestic and foreign manufacturers that have cost advantages"
+       },
+       {
+        "id": "P4",
+        "quote": "the discount retail share of the cigarette category reached 34.1%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I fade to about the 2021-25 median of 0.468, plus a little for the 2026 level. Discount competitors with cost advantages and rising discount share cap pricing power over the long run."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 3,313 | 3,230 | 9,405 | 8,248"
+       },
+       {
+        "id": "P3",
+        "quote": "Maintain a total adjusted OCI margin of at least 60% in each year through 2028"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income is $9,405m on $17,671m revenue, about 53%, with no goodwill impairment. I fade the margin slowly toward the long run as volume declines, down-trading and reinvestment of Initiative savings weigh, while management keeps an adjusted OCI margin goal of at least 60%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 1.0000"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0453."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is very asset-light, and the filed return on tangible capital is very high. New investment at the margin, such as pouches and marketing, should earn much less than the base year. I use 0.4, far above the 0.0453 breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Net revenues increased 1.4% to $17.7 billion"
+       },
+       {
+        "id": "P4",
+        "quote": "total estimated domestic cigarette industry volume declined by 5% in the third quarter of 2026 versus the third quarter of 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Net revenues are up 1.4% over nine months as pricing outweighs industry volume decline of about 5%. I expect growth to fade to slightly negative as discount mix, pouch migration and consumer pressure erode premium volumes."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "these consumers continue to transition from cigarettes and moist smokeless tobacco"
+       },
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Cigarette and MST volumes are in structural decline as consumers move to smoke-free products. Pricing and smoke-free products offset this only partly, so long-run growth sits well below the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.42,
+      "input_hit": "long_run_op_margin",
+      "risk": "Down-trading to discount and illicit products and faster pouch migration outpace pricing, compressing premium margins."
+     },
+     {
+      "bear_value": -0.03,
+      "input_hit": "rev_growth",
+      "risk": "Volume decline accelerates beyond the pricing offset, for example under inflation of 3.7% and high gas prices."
+     },
+     {
+      "bear_value": -0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Structural decline in nicotine combustibles is steeper and smoke-free products do not replace the lost revenue."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.42,
+      "rev_growth": [
+       -0.012000000000000002,
+       -0.02,
+       -0.025,
+       -0.030000000000000002,
+       -0.030000000000000002
+      ],
+      "terminal_growth": -0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.52,
+      "rev_growth": [
+       0.027999999999999997,
+       0.02,
+       0.015,
+       0.009999999999999998,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.02
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $25.7bn is being paid down gradually and management targets debt-to-EBITDA of about 2.0x, so it should stay roughly in proportion to earnings."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 0.4252 is depressed by non-cash e-vapor impairments. Core smokeable margins are very high, at about 64%, and the nine-month 2026 operating margin is about 0.53 without the impairment. Underlying margin has been in the high 40s to low 50s, and pricing has so far offset volume decline.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 0.2601 is above the adjusted rate of about 23.0% that the company reports for 2026 year to date."
+     },
+     "why": "The 2025 operating margin includes the goodwill impairment and other e-vapor intangible impairments, so it understates earning power. Nine-month 2026 operating income is up strongly against the 2025 period that carried the 873 impairment. The base-year revenue is also still falling, at -3.1%, while 2026 is turning slightly positive on pricing."
+    },
+    "value_at_old_defaults": 80.97447326023232,
+    "values": {
+     "base": 72.95406516375684,
+     "bear": 52.54561433624788,
+     "bull": 91.94093705248935
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 4474000000.0,
+     "excess_cash_before": 4474000000.0,
+     "k0_after": 691883372.6907635,
+     "k0_before": 691883372.6907635,
+     "k0_interest": 1177000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 6910090873.353634,
+     "x0_before": 6910090873.353634
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 116366322942.84396,
+     "seam_ratio": 0.9956758320142901,
+     "tv_share": 0.356114768329598,
+     "wedge_rate_5": 0.0005105075030961856
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.5280 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y2 0.5250 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y3 0.5200 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y4 0.5150 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: op_margin.y5 0.5100 (filed 0.2319 to 0.4749)",
+     "margin_outside_filed_record: long_run_op_margin 0.4800 (filed 0.2319 to 0.4749)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 rate of 0.2601 is inflated by non-deductible impairment effects, while the company reports an adjusted rate near 23%.",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.011,
+     "fade_years": 10,
+     "long_run_op_margin": 0.48,
+     "op_margin": [
+      0.528,
+      0.525,
+      0.52,
+      0.515,
+      0.51
+     ],
+     "return_on_new_investment_long_run": 0.6,
+     "rev_growth": [
+      0.013,
+      0.008,
+      0.006,
+      0.005,
+      0.005
+     ],
+     "terminal_growth": 0.01
+    },
+    "old_defaults_inputs": "year 1 growth 0.0137 and margin 0.5322, margin 0.4466 (persist), growth 0.0375, terminal RONIC 0.0453 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 107
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.4,
+      0.52
+     ],
+     "rev_growth_y3": [
+      -0.005,
+      0.02
+     ],
+     "terminal_growth": [
+      0.0,
+      0.02
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (259) | (124)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0076"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 0.76% of revenue, but nine-month 2026 capex of 259 is about 1.5% of revenue, so I use 1.1%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Smokeable products segment reported domestic cigarette shipment volume decreased 2.9%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The franchise is stable but slowly eroding, so a 10-year fade is a moderate judgement with no sharp cliff expected."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Maintain a total adjusted OCI margin of at least 60% in each year through 2028"
+       },
+       {
+        "id": "P4",
+        "quote": "the discount retail share of the cigarette category reached 34.1%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management targets an adjusted OCI margin of at least 60% (before corporate costs and amortization), which is consistent with GAAP operating margins around 50%. Volume decline and discount mix argue for fading below the current level, and the record shows a 5-year mean near 0.46."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 3,313 | 3,230 | 9,405 | 8,248"
+       },
+       {
+        "id": "F2",
+        "quote": "Impairment of goodwill | 0 | 0 | 0 | 873"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2026 nine-month operating margin is about 53% with no impairment, against 8,248 plus an 873 goodwill impairment in 2025. I fade it slowly for down-trading, litigation costs and smoke-free investment, partly offset by the savings initiative."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0453."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is capital-light, with tiny tangible capital and a filed return of 1.0, so incremental returns are far above the break-even 4.5%. I haircut to 0.6 for the pouch and e-vapor investment and acquisition risk."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Net revenues increased 1.4% to $17.7 billion"
+       },
+       {
+        "id": "P4",
+        "quote": "total estimated domestic cigarette industry volume declined by 5% in the third quarter of 2026 versus the third quarter of 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Net revenues grew 1.4% over nine months through pricing despite a 5% industry volume decline. I expect growth to slow toward about 0.5% as discount share rises and pouches take oral share."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P4",
+        "quote": "these consumers continue to transition from cigarettes and moist smokeless tobacco (\u201cMST\u201d) products to innovative smoke-free products"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A structurally declining US combustible base offset by pricing and a smoke-free sleeve supports growth well below the 3.75% nominal anchor, about 1%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.4,
+      "input_hit": "long_run_op_margin",
+      "risk": "Faster down-trading and volume decline erodes Marlboro pricing power and margins"
+     },
+     {
+      "bear_value": -0.01,
+      "input_hit": "rev_growth",
+      "risk": "Pricing fails to offset volume declines, so revenue shrinks"
+     },
+     {
+      "bear_value": -0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Litigation, a regulatory shock or an excise tax increase hits cash flow and terminal growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.4,
+      "rev_growth": [
+       0.002,
+       -0.002999999999999999,
+       -0.004999999999999999,
+       -0.005999999999999999,
+       -0.005999999999999999
+      ],
+      "terminal_growth": 0.0
+     },
+     "bull": {
+      "long_run_op_margin": 0.52,
+      "rev_growth": [
+       0.027,
+       0.022,
+       0.02,
+       0.019,
+       0.019
+      ],
+      "terminal_growth": 0.02
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $25.7bn is being paid down gradually against a stated target of about 2.0x debt-to-EBITDA, and the business generates stable cash."
+     },
+     "margin_position": "The reported 2025 margin of 0.4252 is depressed by e-vapor goodwill and intangible impairments. Underlying margins are about 0.52 to 0.53, high because the cigarette franchise (Marlboro) has strong pricing power and capital-light operations, with revenue net of excise taxes growing while volumes fall.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 rate of 0.2601 is inflated by non-deductible impairment effects, while the company reports an adjusted rate near 23%."
+     },
+     "why": "2025 operating income includes an 873 goodwill impairment in the first nine months plus further Q4 write-downs. Nine-month 2026 operating income of 9,405 on revenue of 17,671 shows an underlying margin of about 53%. The base-year margin therefore understates the run-rate, and I start from the 2026 level and fade it down for volume decline and down-trading."
+    },
+    "value_at_old_defaults": 80.97447326023232,
+    "values": {
+     "base": 76.5145630510849,
+     "bear": 61.19166165550687,
+     "bull": 96.26736376179623
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 80.97447326023232,
+  "value_at_old_defaults_quoted": 80.97447326023232,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 125777850642.78932,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 1683000000.0,
@@ -15,7 +510,7 @@
   "The Board raised the regular quarterly dividend by 4.7%, and the current annualized rate is $4.44 per share."
  ],
  "in_code_book": false,
- "ke": 0.0779318907508762,
+ "ke": 0.0781318907508762,
  "market_cap_at_publish": 128849815986,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +518,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 84.93854548984784,
-  "3000": 70.27738906307947
+  "1000": 72.95406516375684,
+  "3000": 76.5145630510849
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1432,167 +1927,17 @@
   ]
  },
  "ticker": "MO",
- "upside": 0.1100232530066092,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.rev_growth (1000 none, 3000 down)",
-   "seeds_disagree: terminal_g (1000 none, 3000 down)",
-   "seeds_disagree: capex (1000 up, 3000 none)",
-   "ytd_outside_record: rev_growth.y1 0.0137",
-   "ytd_outside_record: op_margin.y1 0.5322"
-  ],
-  "departures": [
-   {
-    "driver": "pricing",
-    "evidence": [
-     "F2",
-     "P7.s83",
-     "P7.s88",
-     "P3.s85"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2023-12-31",
-     "Y2024-12-31",
-     "P3.s85"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2023-12-31",
-     "Y2024-12-31",
-     "P3.s85"
-    ],
-    "input": "long_run_op_margin"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "up",
-   "normalized.margin": "up",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Earnings - USD ($) $ in Millions | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nNet revenues | $ 6,132 | $ 6,072 | $ 17,671 | $ 17,433\nCost of sales | 1,500 | 1,439 | 4,288 | 4,149\nExcise taxes on products | 691 | 821 | 2,116 | 2,373\nGross profit | 3,941 | 3,812 | 11,267 | 10,911\nMarketing, administration and research costs | 625 | 580 | 1,838 | 1,787\nExit costs | 3 | 2 | 24 | 3\nImpairment of goodwill | 0 | 0 | 0 | 873\nOperating income | 3,313 | 3,230 | 9,405 | 8,248\nInterest and other debt expense, net | 270 | 278 | 823 | 815\nNet periodic benefit income, excluding service cost | (5) | (16) | (9) | (45)\n(Income) losses from investments in equity securities | (242) | (107) | (487) | (398)\nEarnings before income taxes | 3,290 | 3,075 | 9,078 | 7,876\nProvision for income taxes | 776 | 700 | 2,083 | 2,046\nNet earnings | 2,514 | 2,375 | 6,995 | 5,830\nNet losses attributable to noncontrolling interest | 4 | 0 | 4 | 0\nNet earnings attributable to Altria | $ 2,518 | $ 2,375 | $ 6,999 | $ 5,830\nPer share data:\nBasic earnings (losses) per share attributable to Altria (in usd per share) | $ 1.51 | $ 1.41 | $ 4.18 | $ 3.45\nDiluted earnings (losses) per share attributable to Altria (in usd per share) | $ 1.51 | $ 1.41 | $ 4.18 | $ 3.45"
-   },
-   "P3.s85": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "As a result, in connection with the preparation of our financial statements for the year ended December 31, 2025, we recorded non-cash impairments of our e-vapor reporting unit goodwill and definite-lived intangible assets."
-   },
-   "P7.s83": {
-    "kind": "release",
-    "period": "2026-10-28",
-    "text": "Reported OCI | $3,053 | $2,942 | 3.8% | $8,668 | $8,341 | 3.9%"
-   },
-   "P7.s88": {
-    "kind": "release",
-    "period": "2026-10-28",
-    "text": "Reported OCI margins 1 | 64.1% | 64.1% | 0.0 pp | 64.1% | 63.8% | 0.3 pp"
-   },
-   "Y2023-12-31": {
-    "kind": "filed_record",
-    "period": "2023-12-31",
-    "text": "Filed annual record, fiscal year ended 2023-12-31 (10-K, accession 0000764180-26-000017): revenue $24,483.0 million; operating income $11,547.0 million; operating margin 47.2%; net income $8,130.0 million; depreciation and amortization $272.0 million; capital expenditure $196.0 million."
-   },
-   "Y2024-12-31": {
-    "kind": "filed_record",
-    "period": "2024-12-31",
-    "text": "Filed annual record, fiscal year ended 2024-12-31 (10-K, accession 0000764180-26-000017): revenue $24,018.0 million; operating income $11,241.0 million; operating margin 46.8%; net income $11,264.0 million; depreciation and amortization $286.0 million; capital expenditure $142.0 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.007551530242739382,
-    0.007551530242739382,
-    0.007551530242739382,
-    0.007551530242739382,
-    0.007551530242739382
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.4466285123349807,
-   "normalized.margin": 0.4466285123349807,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.5322279440891857,
-   "op_margin.y2": 0.4466285123349807,
-   "rev_growth.y1": 0.013652268685825808,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.045281497152861144
-  },
-  "numbers": {
-   "capex": [
-    0.007551530242739382,
-    0.007551530242739382,
-    0.007551530242739382,
-    0.007551530242739382,
-    0.007551530242739382
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.4680239820134899,
-   "normalized.margin": 0.4680239820134899,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.5322279440891857,
-   "op_margin.y2": 0.4716333782624678,
-   "rev_growth.y1": 0.013652268685825808,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.045281497152861144
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "median",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "p75",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No sentence in the evidence guides 2026 full-year revenue; the raised guidance covers adjusted diluted EPS only.",
-   "The visible evidence does not show fourth-quarter 2026 results or the full guidance assumptions, which were omitted from the release.",
-   "The evidence does not say why capital expenditure rose in the first nine months of 2026 or whether that level will last.",
-   "The outcome of the NJOY ACE ITC appeal and the timing of effective enforcement against illicit e-vapor products are not known.",
-   "Whether price increases can keep offsetting cigarette volume declines beyond 2026 is not stated."
-  ],
-  "year": 3
- },
- "value_base": 84.98294229951438,
- "value_bear": 80.59756933848992,
- "value_bull": 88.21084346345656,
+ "upside": -0.023841441446408096,
+ "valuation": null,
+ "value_base": 74.73431410742087,
+ "value_bear": 56.86863799587738,
+ "value_bull": 94.10415040714278,
  "value_per_filed_share": {
-  "base": 84.98294229951438,
-  "bear": 80.59756933848992,
-  "bull": 88.21084346345656
+  "base": 74.73431410742087,
+  "bear": 56.86863799587738,
+  "bull": 94.10415040714278
  },
  "valued": true,
- "verdict": "WATCH",
- "verdict_reason": "expected return +3.3 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -1.1 points a year against the required return over 3 years"
 }

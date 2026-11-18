@@ -1,18 +1,490 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 63.15614475907262,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 143,
  "claims_supported": 138,
  "date": "2026-11-18T05:03:11Z",
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.2500 (filed -0.2845 to 0.2438)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1134 and margin 0.0929, margin 0.1433 (persist), growth 0.0375, terminal RONIC 0.0635 (equity return r 0.0838), F 10",
+  "run_gap": 0.08017765697362571,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1309000000.0,
+     "excess_cash_before": 1309000000.0,
+     "k0_after": 1449881985.1405623,
+     "k0_before": 1449881985.1405623,
+     "k0_interest": 1604000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 272338511.14457834,
+     "x0_before": 272338511.14457834
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 10109584152.662882,
+     "seam_ratio": 0.9570288262165856,
+     "tv_share": 0.2613081156676098,
+     "wedge_rate_5": -0.029332156111788802
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y2 0.2500 (filed -0.2845 to 0.2438)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.031,
+     "fade_years": 10,
+     "long_run_op_margin": 0.19,
+     "op_margin": [
+      0.145,
+      0.25,
+      0.24,
+      0.23,
+      0.22
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.105,
+      0.03,
+      0.02,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.1134 and margin 0.0929, margin 0.1433 (persist), growth 0.0375, terminal RONIC 0.0635 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 138
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.12,
+      0.25
+     ],
+     "rev_growth_y3": [
+      -0.02,
+      0.045
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0318"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property, plant and equipment | (252) | (305)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled history is 3.2% of revenue and nine-month 2026 capex of $252M is about 3.0% of revenue, so I use 3.1%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Patent and pricing erosion plus the uncertain B+L separation argue for a moderately long fade of ten years to the long-run margin."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $10,266.0 million | 0.0666 | 0.1766"
+       },
+       {
+        "id": "P1",
+        "quote": "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I fade below the 2026 underlying run-rate of about 26% because the Xifaxan price cut and generic entry could remove high-margin revenue. The company's own history shows margins swinging widely, so I keep it above the 2025 base of 17.7% but with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Goodwill impairments | 0 | 0 | 1,426 | 0"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 983 | 619 | 773 | 1,339"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 GAAP margin is held down by the $1,426M goodwill impairment, with nine-month operating income of $773M on $8,317M revenue. Margin then rebounds toward the underlying level excluding impairments, and erodes gradually as Xifaxan pricing and generic pressure bite."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The filed return on tangible capital is very high because of small tangible capital, but new investment such as acquisitions and R&D carries real cost. I use a moderate 15%, well above the 6.35% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Revenues | $ 2,941 | $ 2,681 | $ 8,317 | $ 7,470"
+       },
+       {
+        "id": "P7",
+        "quote": "Raising full year 2026 Revenue, Adjusted EBITDA1, and Adjusted Cash Flows from Operations1 guidance"
+       },
+       {
+        "id": "P2",
+        "quote": "selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is nearly locked in: nine-month revenue is up about 11%, Q3 was up 10% reported and 8% organic, and guidance was raised. Growth then slows because Xifaxan (about 85% of Salix) faces negotiated Medicare prices from 2027, Paragraph IV litigation, and the end of China distributor acquisition uplift."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A diversified specialty-pharma portfolio facing patent expiries and pricing controls should grow below the long-run nominal anchor, so I set 2.5%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_op_margin",
+      "risk": "Xifaxan generic entry or deep negotiated-price cuts erode Salix revenue and margin."
+     },
+     {
+      "bear_value": -0.02,
+      "input_hit": "rev_growth",
+      "risk": "Growth stalls after 2027 as Xifaxan pricing takes effect and acquisition-driven uplift fades, with failed pipeline readouts such as RED-C."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "op_margin",
+      "risk": "Further goodwill impairments or legal and settlement charges keep GAAP margins lower for longer."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       0.065,
+       -0.010000000000000002,
+       -0.02,
+       -0.02,
+       -0.02
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.25,
+      "rev_growth": [
+       0.13,
+       0.05499999999999999,
+       0.045,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Total debt of $20.8B is very high against the equity base, and the company says management is working to reduce it, so the level it keeps relative to its size is uncertain."
+     },
+     "margin_position": "The 2025 GAAP margin of 17.7% is at the top of the company's own history. It rose from 11.0% in 2023 and 16.1% in 2024 as revenue grew and amortization and charges fell. Excluding the 2026 goodwill impairment, the nine-month 2026 underlying margin is about 26%, and Q3 reached about 33%. Year 1 (2026) is depressed on a GAAP basis by the $1,426M impairment.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 25% rate sits oddly against a nine-month 2026 provision of $316M on a pre-tax loss, so the sustainable rate is hard to read."
+     },
+     "why": "Base-year margin of 17.7% understates the current underlying run-rate, because nine-month 2026 operating income excluding the impairment is far higher. 2026 GAAP is distorted by a one-time non-cash goodwill impairment. From 2027 the Xifaxan price negotiation and generic litigation put pressure on the highest-margin product."
+    },
+    "value_at_old_defaults": 8.57321798072111,
+    "values": {
+     "base": 32.43278034835082,
+     "bear": 16.327958958269605,
+     "bull": 59.169156966054445
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1309000000.0,
+     "excess_cash_before": 1309000000.0,
+     "k0_after": 1449881985.1405623,
+     "k0_before": 1449881985.1405623,
+     "k0_interest": 1604000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 272338511.14457834,
+     "x0_before": 272338511.14457834
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 9236270687.196264,
+     "seam_ratio": 0.9795171800329483,
+     "tv_share": 0.3314935572728888,
+     "wedge_rate_5": -0.029405630861845014
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.2,
+     "op_margin": [
+      0.14,
+      0.24,
+      0.22,
+      0.19,
+      0.19
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.095,
+      0.04,
+      0.01,
+      0.0,
+      0.015
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.1134 and margin 0.0929, margin 0.1433 (persist), growth 0.0375, terminal RONIC 0.0635 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 138
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.25
+     ],
+     "rev_growth_y3": [
+      -0.03,
+      0.04
+     ],
+     "terminal_growth": [
+      0.015,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0318"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property, plant and equipment | (252) | (305)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 capex of 252 on revenue of 8,317 is about 3.0%, in line with the pooled 3.2%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "our ability to compete with generic competitors in products that represent a significant amount of our revenue;"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Patent cliffs and pipeline replenishment make the move to steady state gradual; 10 years is a middle estimate."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $10,266.0 million | 0.0666 | 0.1766"
+       },
+       {
+        "id": "F2",
+        "quote": "Amortization of intangible assets | 227 | 253 | 693 | 765"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I fade to about 20%. That is above the 2025 level of 17.7% because intangible amortization is declining and mix is improving. It is capped by Xifaxan erosion and heavy R&D and SG&A needs."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Goodwill impairments | 0 | 0 | 1,426 | 0"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 983 | 619 | 773 | 1,339"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 1,426 goodwill impairment depresses 2026 GAAP margin to about 14% for the full year. Underlying 9-month income of 2,199 before the charge implies roughly 26%. Margins then ease as the Xifaxan IRA price and generic erosion hit in 2027-2029."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The historical return on tangible capital is very high because the business is asset-light after write-downs. New investment is mainly bolt-on deals and R&D at lower returns, so I assume 15%, well above the 6.35% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Revenues | $ 2,941 | $ 2,681 | $ 8,317 | $ 7,470"
+       },
+       {
+        "id": "P7",
+        "quote": "up 10% on a Reported basis and 8% on an Organic1 basis over the prior year period"
+       },
+       {
+        "id": "P5",
+        "quote": "Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "9-month 2026 revenue is up about 11% (partly acquisition-driven), and Q3 organic growth was 8%, so year 1 is high. Growth then fades: Xifaxan is about 85% of Salix, CMS negotiated pricing starts in 2027, and generic challenges are pending. Year 3 onward is near flat."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A levered specialty pharma with concentrated, patent-dependent products should grow below the 3.75% nominal anchor. I use 2.5%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.08,
+      "input_hit": "rev_growth",
+      "risk": "Earlier or broader Xifaxan generic entry or a deep IRA price cut erodes Salix, the largest profit pool."
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin settles lower after Xifaxan erosion, continued legal outflows, and further impairments."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Pipeline failures such as the RED-C trials leave no replacement growth, lowering long-run growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.055,
+       0.0,
+       -0.03,
+       -0.04,
+       -0.025
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.25,
+      "rev_growth": [
+       0.125,
+       0.07,
+       0.04,
+       0.03,
+       0.045
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of about $20.8 billion is roughly 2x revenue and includes B+L debt. Management is paying debt down and may separate B+L, which would change the level, so it is unclear whether this is the level the company keeps."
+     },
+     "margin_position": "GAAP operating margin was 17.7% in 2025, up from 11.0% in 2023. The 9-month 2026 GAAP margin is only 9.3% because of a 1,426 goodwill impairment. Excluding that, the 9-month margin is about 26%, lifted by a strong Q3 and lower other expense. Large intangible amortization still depresses the GAAP margin. The 2027 IRA price on Xifaxan and likely generic erosion are the main forces pulling it back.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 25% rate is a normal-looking assumption, but the 9-month 2026 provision of 316 on a pre-tax loss of 409 shows a volatile, non-deductible-driven tax profile."
+     },
+     "why": "2025 revenue was $10,266 million, but 2026 is running about 11% higher, partly from acquisitions such as the China distributor. 2026 GAAP margin is distorted by the impairment, and underlying margins are well above 2025. The 2027 Xifaxan price negotiation and Paragraph IV generic risk make the current peak unlikely to persist."
+    },
+    "value_at_old_defaults": 8.57321798072111,
+    "values": {
+     "base": 29.93262433643189,
+     "bear": 17.062190266088106,
+     "bull": 51.36643624382523
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 8.57321798072111,
+  "value_at_old_defaults_quoted": 8.57321798072111,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 11693513378.396757,
  "family": "operating",
+ "far_from_price": true,
+ "filed_shares": 375000000.0,
  "flags": [
   "Bausch Health recorded goodwill impairments of 1,426 (table in USD millions) for the nine-month reporting period, and 0 for the three-month reporting period.",
   "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity.",
   "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in the Bausch + Lomb initial public offering."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08378973472633486,
  "loss_record": {
   "cause": "cannot_tell",
   "explanation": "The provided filings include income statement figures only for the three and nine months ended September 30, 2026 and 2025\u2014where the nine-month 2026 pretax loss coincides with both $1,426 million of goodwill impairments and $1,196 million of interest expense\u2014while omitting the statements of operations and MD&A results discussions for fiscal years 2018 through 2025. Without earnings, expense, interest, impairment, or discontinued-operations breakdowns for 2018 through 2025, the evidence does not establish why the multi-year profit record is thin.",
@@ -41,11 +513,19 @@
   ],
   "version": "why_losses.v1 2026-11-18 WO_NC5"
  },
+ "market_cap_at_publish": 3170039324,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
+ "no_value_reason": null,
+ "price_at_publish": 8.47,
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
- "source": "on request (tax fallback rerun)",
+ "seed_base": {
+  "1000": 32.43278034835082,
+  "3000": 29.93262433643189
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -2002,9 +2482,43 @@
    }
   ]
  },
+ "tax_range": {
+  "equity_value_alt": 11153293089.693108,
+  "label": "statutory rate (company's filed rate), not measured",
+  "positive_pretax_years": 2,
+  "pretax_years": 5,
+  "rate": 0.25,
+  "rate_alt": 0.305,
+  "seed_base_alt": {
+   "1000": 30.904027857592933,
+   "3000": 28.58020195410364
+  },
+  "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
+  "status_alt": "ok",
+  "value_alt": {
+   "base": 29.742114905848286,
+   "bear": 16.214929905595728,
+   "bull": 52.1804505646157
+  },
+  "value_per_filed_share_alt": {
+   "base": 29.742114905848286,
+   "bear": 16.214929905595728,
+   "bull": 52.1804505646157
+  }
+ },
  "ticker": "BHC",
+ "upside": 2.6887597229051776,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
+ "value_base": 31.18270234239135,
+ "value_bear": 16.695074612178857,
+ "value_bull": 55.26779660493983,
+ "value_per_filed_share": {
+  "base": 31.18270234239135,
+  "bear": 16.695074612178857,
+  "bull": 55.26779660493983
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_differs_at_alt_tax_rate": false,
+ "verdict_reason": "expected return +63.2 points a year against the required return over 3 years"
 }

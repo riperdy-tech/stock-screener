@@ -1,13 +1,400 @@
 {
- "alpha_pts": 34.994553983242405,
+ "alpha_pts": 10.234465539082116,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 99,
  "claims_supported": 96,
  "date": "2026-11-16T15:49:41Z",
- "equity_value": 5687393357.161284,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.3385, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.2831083824474566,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2292972715.416009,
+     "implied_pb": 2.382236238920552,
+     "seam_ratio": 1.1663000000000001,
+     "tv_share": 0.526541490621495
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.13,
+      0.13,
+      0.12,
+      0.1,
+      0.09
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.12,
+     "roe": [
+      0.29,
+      0.23,
+      0.19,
+      0.16,
+      0.14
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.3385, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 96
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.07,
+      0.17
+     ],
+     "long_run_roe": [
+      0.09,
+      0.16
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The share repurchase program was completed on July 17, 2026, with a total of 504,330 shares repurchased for $80 million."
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive (loss) income | (38,586) | 1,459"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Retained earnings are large relative to the $0.40 quarterly dividend. Year 1 growth is held down by the $80 million buyback, about $40 million of unrealised bond losses and share-settlement outflows, so I take about 0.13. Later years assume earnings retained or partly returned through further buybacks, with growth slowing as returns fall."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The insurance industry historically has been cyclical"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Current returns are far above a sustainable level and rest on very low loss ratios, favourable reinsurance pricing and rapid equity build. A fade of about ten years gives these advantages time to erode toward the long-run return."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.1809, p25 0.0092, median 0.3385, p75 0.4861, max 0.6596, last 0.6596."
+       },
+       {
+        "id": "P3",
+        "quote": "2025 did not have any losses from catastrophic events"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The record shows a 2022 loss year (-0.1809) and a median of 0.3385 on a small base. Over a full hurricane and pricing cycle, a Florida homeowners insurer should earn somewhat above the 9.4% cost of equity, but not the current 0.29. I settle at 0.12, with a wide range for catastrophe and soft-market risk."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net income after noncontrolling interests | $ 83,499 | $ 65,507 | $ 230,703 | $ 201,351"
+       },
+       {
+        "id": "P4",
+        "quote": "The consolidated pre-tax net loss, including loss adjustment expenses and expected reinsurance recoveries, due to Hurricane Isaias is estimated to be approximately $15.0 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.1809, p25 0.0092, median 0.3385, p75 0.4861, max 0.6596, last 0.6596."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is on track for about $300 million of income to common (nine months $230.7 million, plus a Q4 that absorbs a roughly $15 million hurricane loss) on opening equity of $1,041 million, about 0.29. After that I fade the return toward a normal Florida catastrophe year, as the equity base grows and loss ratios revert from today's very low levels."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The insurance industry historically has been cyclical"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth of the Florida-concentrated book should be near nominal GDP growth, constrained by industry cyclicality and the risk that Citizens policy takeouts dry up. I use 0.035, just below the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "roe",
+      "risk": "A major Florida hurricane or adverse reserve development hits earnings and capital"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_roe",
+      "risk": "Rate softening and higher reinsurance costs or new market entrants permanently cut underwriting margins"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Large buybacks or special dividends, or a catastrophe loss, slow book equity growth"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.08000000000000002,
+       0.08000000000000002,
+       0.07,
+       0.05000000000000002,
+       0.04000000000000001
+      ],
+      "long_run_roe": 0.09,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.18000000000000002,
+       0.18000000000000002,
+       0.17,
+       0.15000000000000002,
+       0.14
+      ],
+      "long_run_roe": 0.16,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 0.66 is inflated. Opening common equity was only $453 million, and 2025 had no catastrophe losses, a 56.3% combined ratio and a $299 million profit. Equity has since risen to about $1.1 billion, partly from Exzeo IPO proceeds, so 2026 return on opening equity falls to roughly 0.29 even with similar profits. A Florida homeowners book is exposed to a major hurricane, so these earnings are well above a through-the-cycle level.",
+     "why": "Reported combined ratios are about 58% and the company holds about $743 million of cash plus $1.4 billion of investments against about $1.1 billion of stockholders' equity, so regulatory capital is not binding. Book growth is limited by management's choice to buy back shares and pay a small dividend, not by capital rules. The main restraint is a possible hurricane year and softening rates and reinsurance costs, which would pull returns down."
+    },
+    "value_at_old_defaults": 469.08868793836297,
+    "values": {
+     "base": 192.58358106124334,
+     "bear": 139.34035752124453,
+     "bull": 355.0949439978673
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 3049176298.4738216,
+     "implied_pb": 3.1678781994421166,
+     "seam_ratio": 1.2579999999999996,
+     "tv_share": 0.6017809884829979
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.14,
+      0.18,
+      0.15,
+      0.13,
+      0.11
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.29,
+      0.225,
+      0.2,
+      0.175,
+      0.155
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.3385, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 96
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.08,
+      0.19
+     ],
+     "long_run_roe": [
+      0.1,
+      0.18
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The share repurchase program was completed on July 17, 2026, with a total of 504,330 shares repurchased for $80 million."
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive (loss) income | (38,586) | 1,459"
+       },
+       {
+        "id": "P6",
+        "quote": "The increase of 5% was driven by a higher volume of insurance policies in force while average premium per policy remained relatively consistent."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year-1 growth is limited by the $80 million buyback, dividends, net share settlements and a $40 million after-tax AOCI loss, so nine-month equity rose only about 8%. Later growth approaches the return on equity less modest payouts, then slows as returns fade. No regulatory constraint binds, but policy growth is modest (about 5-7%) and buybacks are not assured."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The consummation of the Exzeo initial public offering in November 2025 also resulted in a dilution of our economic interest in Exzeo"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade is a middle estimate for a franchise with abnormally high current returns that should compress as catastrophe losses and pricing competition normalise, with a modest competitive moat from the in-house Exzeo technology."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Losses and Loss Adjustment Expenses decreased as 2025 did not have any losses from catastrophic events"
+       },
+       {
+        "id": "P2",
+        "quote": "The property and casualty insurance industry is cyclical and highly competitive."
+       },
+       {
+        "id": "P2",
+        "quote": "Although we have begun providing insurance services in other states, our insurance business is primarily in Florida."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "A Florida-concentrated homeowners writer faces cyclical pricing, catastrophe volatility and reinsurance cost swings, so a mid-teens return on equity is more defensible than the recent 30-60%. This sits above the 9.36% cost of equity because of the low-cost tech-enabled operating model and large float, but below recent levels because a normal catastrophe load will return."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Net income after noncontrolling interests | $ 230,703 | $ 201,351"
+       },
+       {
+        "id": "P4",
+        "quote": "The consolidated pre-tax net loss, including loss adjustment expenses and expected reinsurance recoveries, due to Hurricane Isaias is estimated to be approximately $15.0 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.1809, p25 0.0092, median 0.3385, p75 0.4861, max 0.6596, last 0.6596."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is nearly set: nine-month income to common is $230.7 million plus a Q4 that carries the Isaias loss, which implies roughly $300-310 million on $1,041 million opening equity. After that the return fades as equity grows faster than a normalised, higher catastrophe loss load allows income to grow. The record's own median return of 0.3385 shows how unstable the series is, and the base-year 0.6596 is not a run rate."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "We had approximately 313,400 policies in force as of December 31, 2025 compared to approximately 271,300 policies in force as of December 31, 2024."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Policies in force grew about 15% in 2025, but assumption opportunities from Citizens are not guaranteed, so long-run growth should converge toward the nominal growth anchor of 0.0375, slightly lower to reflect a mature, concentrated book."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "roe",
+      "risk": "A major Florida hurricane or a catastrophe-heavy season, with reinsurance not fully absorbing it, produces large underwriting losses."
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Reinsurance becomes more expensive or unavailable, or a reinsurer fails to pay, compressing margins and long-run returns."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Citizens assumptions dry up and pricing competition intensifies, slowing book growth to near zero as returns fall."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Higher interest rates deepen unrealised losses on the new fixed-maturity portfolio and further reduce equity through AOCI."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.07000000000000002,
+       0.11,
+       0.08,
+       0.06000000000000001,
+       0.04000000000000001
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.18000000000000002,
+       0.22,
+       0.19,
+       0.17,
+       0.15000000000000002
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 0.6596 is flattered by a year with no catastrophe losses (gross loss ratio 19.6% versus 34.6% in 2024) and by a low opening equity base of $453.3 million, so it overstates a normal year. The 2026 nine-month run (gross loss ratio 21.0%, combined ratio 58.8%) is again close to catastrophe-free, apart from an estimated $15.0 million loss from Hurricane Isaias in Q4. Equity has since roughly doubled after the Exzeo IPO proceeds and retained earnings, so the return on the larger base will fall even if margins hold. A concentrated Florida homeowners book also implies a catastrophe year will eventually arrive.",
+     "why": "HCI holds $743.5 million of cash and $1.42 billion of investments, funded an $80 million buyback in 2026, and pays only a $0.40 quarterly dividend. Its growth is limited by policy availability and reinsurance cost more than by regulatory capital, although insurer subsidiary capital and Demotech rating requirements remain a backstop. Book growth is therefore driven by retained earnings less modest payouts, with the AOCI swing on its new bond portfolio as a further source of noise."
+    },
+    "value_at_old_defaults": 469.08868793836297,
+    "values": {
+     "base": 256.0960655568101,
+     "bear": 156.2801738005037,
+     "bull": 460.7804901938454
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 469.08868793836297,
+  "value_at_old_defaults_quoted": 469.08868793836297,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 2889048244.573646,
  "family": "financial",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 12878000.0,
  "flags": [
   "Hurricane Isaias made landfall in Florida near Destin, resulting in an estimated consolidated pre-tax net loss of approximately $15.0 million.",
@@ -15,7 +402,7 @@
   "HCI Group\u2019s new catastrophe reinsurance programs took effect, reducing ceded reinsurance costs."
  ],
  "in_code_book": false,
- "ke": 0.0934350225480369,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 2386690934,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +410,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 399.42083907113283,
-  "3000": 441.6363843113282
+  "1000": 192.58358106124334,
+  "3000": 256.0960655568101
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1381,114 +1768,17 @@
   ]
  },
  "ticker": "HCI",
- "upside": 1.3829618138404864,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.roe (1000 down, 3000 none)"
-  ],
-  "departures": [
-   {
-    "driver": "competition",
-    "evidence": [
-     "P2.s16",
-     "P2.s17",
-     "P2.s5",
-     "P3.s57"
-    ],
-    "input": "long_run_roe"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "none",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "down",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "none",
-   "roe.y2": "none",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "P2.s16": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "The insurance industry historically has been cyclical, characterized by periods of intense price competition due to excessive underwriting capacity, as well as periods when shortages of capacity permitted an increase in pricing and, thus, more favorable underwriting profits."
-   },
-   "P2.s17": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "As premium levels increase, there may be new entrants to the market, which could subsequently lead to a decrease in premium levels."
-   },
-   "P2.s5": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "We cannot guarantee that future policy assumptions and acquisitions will be available to the extent they have in the past."
-   },
-   "P3.s57": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Accordingly, Exzeo remains a consolidated, majority-owned, subsidiary of HCI Group, Inc. As the initial public offering diluted HCI's ownership of Exzeo, the amount of Exzeo's net income included in net income attributable to noncontrolling interests will increase in subsequent periods."
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.3384804351640639,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.3384804351640639,
-   "roe.y1": 0.3384804351640639,
-   "roe.y2": 0.3384804351640639,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.30848043516406387,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.3384804351640639,
-   "roe.y1": 0.3384804351640639,
-   "roe.y2": 0.3384804351640639,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "neutral",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    -3
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "median",
-   "roe.y2": "median",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Whether future policy assumptions from Citizens or third-party acquisitions will be available on acceptable terms.",
-   "The frequency and severity of future catastrophic weather events in Florida and other operating states, and the final settled cost of Hurricane Isaias.",
-   "Future catastrophe reinsurance pricing and availability beyond the current treaty program, as well as the pace of competitive rate pressure from new market entrants.",
-   "Management targets or guidance for return on equity, book equity growth, and future capital deployment via dividends, share repurchases, or real estate investments, as none are provided in the filings."
-  ],
-  "year": 3
- },
- "value_base": 441.6363843113282,
- "value_bear": 426.8058764682469,
- "value_bull": 456.46689215440955,
+ "upside": 0.210482766502035,
+ "valuation": null,
+ "value_base": 224.3398233090267,
+ "value_bear": 147.8102656608741,
+ "value_bull": 407.9377170958563,
  "value_per_filed_share": {
-  "base": 441.6363843113282,
-  "bear": 426.8058764682469,
-  "bull": 456.46689215440955
+  "base": 224.3398233090267,
+  "bear": 147.8102656608741,
+  "bull": 407.9377170958563
  },
  "valued": true,
- "verdict": "BUY",
- "verdict_reason": "expected return +35.0 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +10.2 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

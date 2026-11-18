@@ -1,13 +1,488 @@
 {
- "alpha_pts": 35.376290858446104,
+ "alpha_pts": 30.3275839507856,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 116,
  "claims_supported": 113,
  "date": "2026-11-16T17:32:47Z",
- "equity_value": 1870372281.1378443,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.6900 (filed -11.0136 to 0.6097)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.6600 (filed -11.0136 to 0.6097)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.6400 (filed -11.0136 to 0.6097)",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year tax rate of 0.0247 reflects NOL shielding, while 2026 tax expense is about a third of pretax income and deferred tax assets are being used up.",
+   "run 1000: debt_level_representative_no: The record's $199.7 million of debt is the convertible notes, which were repaid, while the $325.0 million revolver is the actual debt now.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.6900 (filed -11.0136 to 0.6097)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.6500 (filed -11.0136 to 0.6097)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.6400 (filed -11.0136 to 0.6097)",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The filed base-year tax rate of 0.0247 reflects NOL use, while 2026 nine-month tax expense is about 33% of pretax income and deferred tax assets are being used up.",
+   "run 3000: debt_level_representative_no: The filed $199.7 million of debt is the convertible notes that were repaid in 2026, and the current debt is the $325.0 million revolver, which management is paying down.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.4192 and margin 0.6949, margin 0.3326 (persist), growth 0.0375, terminal RONIC 0.0838 (equity return r 0.0838), F 10",
+  "run_gap": 0.04613536748632159,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 215456000.0,
+     "excess_cash_before": 215456000.0,
+     "k0_after": 37236021.89236947,
+     "k0_before": 37236021.89236947,
+     "k0_interest": 32746000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 59754884.59187201,
+     "x0_before": 59754884.59187201
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1197759090.4812114,
+     "seam_ratio": 0.8081222854031338,
+     "tv_share": 0.09223036188693878,
+     "wedge_rate_5": 0.0406344345703365
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.6900 (filed -11.0136 to 0.6097)",
+     "margin_outside_filed_record: op_margin.y2 0.6600 (filed -11.0136 to 0.6097)",
+     "margin_outside_filed_record: op_margin.y3 0.6400 (filed -11.0136 to 0.6097)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year tax rate of 0.0247 reflects NOL shielding, while 2026 tax expense is about a third of pretax income and deferred tax assets are being used up.",
+     "debt_level_representative_no: The record's $199.7 million of debt is the convertible notes, which were repaid, while the $325.0 million revolver is the actual debt now.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.001,
+     "fade_years": 10,
+     "long_run_op_margin": 0.3,
+     "op_margin": [
+      0.69,
+      0.66,
+      0.64,
+      0.58,
+      0.45
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.68,
+      -0.07,
+      0.0,
+      -0.08,
+      -0.2
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth 0.4192 and margin 0.6949, margin 0.3326 (persist), growth 0.0375, terminal RONIC 0.0838 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 113
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.45
+     ],
+     "rev_growth_y3": [
+      -0.12,
+      0.08
+     ],
+     "terminal_growth": [
+      0.0,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0004"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Historical capex is tiny, at 0.0004 of revenue pooled over five years. I allow a small rise for potential commercial build."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The planned activation of more than 100 sites in 22 countries is on track."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade reflects a gradual transition from LINZESS erosion to a lower steady-state margin, with the apraglutide outcome still unknown."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "our revenues for that product could be significantly reduced in a short period of time"
+       },
+       {
+        "id": "P4",
+        "quote": "Subject to the results of STARS-2, we plan to file for regulatory approval in 2029."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "After the generic and Medicare price pressure, a profit-share royalty-like stream remains. Ongoing apraglutide spending and an uncertain pipeline pull the margin below the 2019-2022 levels of 0.28-0.61. Because of that pressure, I set the long-run margin near the 2025 level, slightly below it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "$ 352,587"
+       },
+       {
+        "id": "P6",
+        "quote": "LINZESS commercial margin was 79.8% in the third quarter of 2026, compared to 75.9% in the third quarter of 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income was $245.0 million on $352.6 million of revenue, about 0.69. The margin drifts lower as apraglutide R&D rises with STARS-2 and the revenue base shrinks."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0004"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is capital-light, with capex near zero and a profit share through a partner. New investment returns are likely high but apraglutide is risky, so I stay below the base-year level of 1.0."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Raises total 2026 revenue guidance to $485 - $510 million and adjusted EBITDA guidance to greater than $350 million"
+       },
+       {
+        "id": "P1",
+        "quote": "The MFP for a 30-day equivalent supply of LINZESS, which will become the new Medicare net price as of January 1, 2027, is set to $136."
+       },
+       {
+        "id": "P5",
+        "quote": "until up to December 12, 2028"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is anchored on raised guidance and nine-month revenue already at $352.6 million, a jump of about 68% from the 2025 base. Year 2 falls as the $136 Medicare net price starts in 2027. Years 4-5 allow for generic erosion after the Alkem stay ends in December 2028, though settlement entry dates are not in the evidence."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "We have previously entered into settlement agreement with five of these filers."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is a single-product company facing patent and price erosion, with an uncertain apraglutide option. I set terminal growth below the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "Earlier or larger generic LINZESS entry (Alkem loss or earlier settlement dates)"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Medicare MFP and gross-to-net pressure cut collaboration profit share more than assumed"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "terminal_growth",
+      "risk": "STARS-2 failure leaves no second product while R&D continues"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.56,
+       -0.19,
+       -0.12,
+       -0.2,
+       -0.32
+      ],
+      "terminal_growth": 0.0
+     },
+     "bull": {
+      "long_run_op_margin": 0.45,
+      "rev_growth": [
+       0.76,
+       0.009999999999999995,
+       0.08,
+       0.0,
+       -0.12000000000000001
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The record's $199.7 million of debt is the convertible notes, which were repaid, while the $325.0 million revolver is the actual debt now."
+     },
+     "margin_position": "The GAAP margin of 0.33 in 2025 is far below the 2026 run-rate of about 0.69. Ironwood books half of LINZESS net profit as revenue, so costs are small. Net price recovered after the January 2026 list-price cut, and the 2025 restructuring cut SG&A. The 2025 base is depressed by restructuring and a low net price. The 2026 level is unlikely to last through the 2027 Medicare price cut and later generic entry.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year tax rate of 0.0247 reflects NOL shielding, while 2026 tax expense is about a third of pretax income and deferred tax assets are being used up."
+     },
+     "why": "2025 revenue was $296.2 million and 2026 is guided to $485-510 million, so the base year understates current earnings power. The 2026 level carries a price-recovery component and sits ahead of the Medicare MFP in 2027 and possible generic entry after the Alkem stay. Growth is therefore a spike followed by erosion, not a steady trend."
+    },
+    "value_at_old_defaults": 10.909200258183883,
+    "values": {
+     "base": 9.2080834164713,
+     "bear": 6.1252319181317185,
+     "bull": 15.517762802886393
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 215456000.0,
+     "excess_cash_before": 215456000.0,
+     "k0_after": 37236021.89236947,
+     "k0_before": 37236021.89236947,
+     "k0_interest": 32746000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 59754884.59187201,
+     "x0_before": 59754884.59187201
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1263804755.7756238,
+     "seam_ratio": 0.8037114171736323,
+     "tv_share": 0.10925485090377932,
+     "wedge_rate_5": 0.052696653033722715
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.6900 (filed -11.0136 to 0.6097)",
+     "margin_outside_filed_record: op_margin.y2 0.6500 (filed -11.0136 to 0.6097)",
+     "margin_outside_filed_record: op_margin.y3 0.6400 (filed -11.0136 to 0.6097)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The filed base-year tax rate of 0.0247 reflects NOL use, while 2026 nine-month tax expense is about 33% of pretax income and deferred tax assets are being used up.",
+     "debt_level_representative_no: The filed $199.7 million of debt is the convertible notes that were repaid in 2026, and the current debt is the $325.0 million revolver, which management is paying down.",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.001,
+     "fade_years": 10,
+     "long_run_op_margin": 0.35,
+     "op_margin": [
+      0.69,
+      0.65,
+      0.64,
+      0.6,
+      0.52
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.67,
+      -0.08,
+      0.0,
+      -0.1,
+      -0.2
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth 0.4192 and margin 0.6949, margin 0.3326 (persist), growth 0.0375, terminal RONIC 0.0838 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 113
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.2,
+      0.5
+     ],
+     "rev_growth_y3": [
+      -0.12,
+      0.08
+     ],
+     "terminal_growth": [
+      0.0,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0004"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex has been negligible for five years, because the collaboration partner commercializes the product."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "In June 2026, we initiated STARS-2 and are actively recruiting patients."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate 10-year fade reflects a stepwise loss of exclusivity and an uncertain pipeline replacement."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "our revenues for that product could be significantly reduced in a short period of time"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "After generic erosion the profit-share stream shrinks while R&D and overhead are largely fixed, so the margin should settle well below today's. Any apraglutide success is uncertain and could lift it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 93,134 | 75,484 | 245,014 | 91,697"
+       },
+       {
+        "id": "P4",
+        "quote": "Subject to the results of STARS-2, we plan to file for regulatory approval in 2029."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month 2026 margin is about 0.69. It should slip as revenue falls against a growing apraglutide R&D base from STARS-2, with filing planned for 2029 and possible launch costs later."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 1.0000"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, with a filed return on tangible capital of 1.0. New investment would be mostly R&D or business development, so I take a return well above the 0.0838 break-even but far below the filed figure."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Raises total 2026 revenue guidance to $485 - $510 million"
+       },
+       {
+        "id": "P1",
+        "quote": "The MFP for a 30-day equivalent supply of LINZESS, which will become the new Medicare net price as of January 1, 2027, is set to $136."
+       },
+       {
+        "id": "P5",
+        "quote": "We have previously entered into settlement agreement with five of these filers."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is set by the raised 2026 guidance, about $495 million against $296.2 million in 2025. The Medicare net price falls to $136 in 2027, and generic entry becomes a probability-weighted drag in years 4-5, since the Alkem stay runs only to December 2028 and five earlier settlements exist with undisclosed dates."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We are highly dependent on the commercial success of LINZESS (linaclotide) in the U.S. for the foreseeable future."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is a single-product profit-share business facing price setting and generics, so long-run growth is set near or below inflation rather than at the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "Earlier or at-risk generic LINZESS entry, or an adverse Alkem ruling, sharply cuts the profit share"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Medicare MFP and gross-to-net pressure cut net sales more than assumed, and apraglutide R&D keeps rising, compressing margins"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "terminal_growth",
+      "risk": "STARS-2 fails or is delayed, leaving no second product and no long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.2,
+      "rev_growth": [
+       0.55,
+       -0.2,
+       -0.12,
+       -0.22,
+       -0.32
+      ],
+      "terminal_growth": 0.0
+     },
+     "bull": {
+      "long_run_op_margin": 0.5,
+      "rev_growth": [
+       0.75,
+       0.0,
+       0.08,
+       -0.020000000000000004,
+       -0.12000000000000001
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The filed $199.7 million of debt is the convertible notes that were repaid in 2026, and the current debt is the $325.0 million revolver, which management is paying down."
+     },
+     "margin_position": "The margin is very high (about 0.69 in the 2026 nine months against 0.33 in 2025) because the profit share from U.S. LINZESS is booked as revenue with almost no cost of sales. LINZESS net price improved after the list-price cut, and the 2025 restructuring cut SG&A. The margin is not cyclical, but it is exposed to Medicare price setting from 2027, generic entry, and rising apraglutide R&D.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The filed base-year tax rate of 0.0247 reflects NOL use, while 2026 nine-month tax expense is about 33% of pretax income and deferred tax assets are being used up."
+     },
+     "why": "The 2025 base year (revenue $296.2 million, margin 0.33) is far below the current run rate, since 2026 guidance is $485-510 million of revenue and nine-month operating income already exceeds 2025. Year 1 therefore jumps about two thirds. After that, the $136 Medicare net price from 2027 and later generic entry should pull revenue and margin down. The path is therefore a spike followed by erosion, not steady growth."
+    },
+    "value_at_old_defaults": 10.909200258183883,
+    "values": {
+     "base": 9.642932694353025,
+     "bear": 6.224963144093378,
+     "bull": 16.1023177477201
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 10.909200258183883,
+  "value_at_old_defaults_quoted": 10.909200258183883,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1536197579.3952405,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 162983000.0,
  "flags": [
   "The board appointed Chief Commercial Officer Tammi Gaskins as Chief Executive Officer, and Thomas McCourt notified the board that he will retire as CEO and remain a director.",
@@ -15,7 +490,7 @@
   "Ironwood repaid $60.0 million on its revolving credit facility, leaving $325.0 million outstanding and $225.0 million of remaining borrowing capacity."
  ],
  "in_code_book": false,
- "ke": 0.08358973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 806232099,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +498,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 11.475873441634063,
-  "3000": 11.475873441634063
+  "1000": 9.2080834164713,
+  "3000": 9.642932694353025
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1406,131 +1881,17 @@
   ]
  },
  "ticker": "IRWD",
- "upside": 1.319893097109055,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y1 (1000 none, 3000 up)",
-   "ytd_outside_record: rev_growth.y1 0.4192",
-   "ytd_outside_record: op_margin.y1 0.6949"
-  ],
-  "departures": [
-   {
-    "driver": "cost_program",
-    "evidence": [
-     "F2",
-     "P3.s29",
-     "P6.s45"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Income - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nRevenues:\nTotal revenues | $ 133,040 | $ 122,060 | $ 352,587 | $ 248,442\nRevenue from Contract with Customer, Product and Service | Collaborative arrangements revenue | Collaborative arrangements revenue | Collaborative arrangements revenue | Collaborative arrangements revenue\nCosts and expenses:\nResearch and development | $ 28,352 | $ 22,468 | $ 72,713 | $ 73,273\nSelling, general and administrative | 11,554 | 21,908 | 34,900 | 62,963\nRestructuring, net | 2,200 | (40) | 20,509\nTotal costs and expenses | 39,906 | 46,576 | 107,573 | 156,745\nIncome from operations | 93,134 | 75,484 | 245,014 | 91,697\nOther income (expense):\nInterest expense and other financing costs | (6,198) | (8,434) | (22,542) | (24,860)\nInterest and investment income | 619 | 930 | 3,902 | 2,617\nOther | 41 | 40 | 125 | 116\nOther income (expense), net | (5,538) | (7,464) | (18,515) | (22,127)\nIncome before income taxes | 87,596 | 68,020 | 226,499 | 69,570\nIncome tax expense | (27,758) | (27,940) | (74,597) | (43,277)\nNet income | $ 59,838 | $ 40,080 | $ 151,902 | $ 26,293\nNet income per share - basic (in dollars per share) | $ 0.36 | $ 0.25 | $ 0.92 | $ 0.16\nNet income per share - diluted (in dollars per share) | $ 0.36 | $ 0.23 | $ 0.91 | $ 0.16\nWeighted average shares used in computing net income per share - basic (in shares) | 164,895 | 162,215 | 164,255 | 161,642\nWeighted average shares used in computing net income per share - diluted (in shares) | 168,177 | 177,764 | 167,530 | 177,057"
-   },
-   "P3.s29": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "\u25cf | We generated income from operations of $98.5 million during the year ended December 31, 2025, compared to income from operations of $93.1 million during the year ended December 31, 2024. The increase was primarily driven by a $60.6 million decrease in operating expenses resulting from restructuring activities in 2025 in an effort to streamline focus and support the continued development of our pipeline, which offset the decrease in collaborative arrangements revenue. \u200b"
-   },
-   "P6.s45": {
-    "kind": "release",
-    "period": "2026-11-05",
-    "text": "\u00b7 | Total Costs and Expenses. Total costs and expenses in the third quarter of 2026 were $39.9 million, compared to $46.6 million in the third quarter of 2025."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.00044394652794643393,
-    0.00044394652794643393,
-    0.00044394652794643393,
-    0.00044394652794643393,
-    0.00044394652794643393
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.332607352330399,
-   "normalized.margin": 0.332607352330399,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.6949036691653407,
-   "op_margin.y2": 0.332607352330399,
-   "rev_growth.y1": 0.4191924070809283,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08358973472633485
-  },
-  "numbers": {
-   "capex": [
-    0.00044394652794643393,
-    0.00044394652794643393,
-    0.00044394652794643393,
-    0.00044394652794643393,
-    0.00044394652794643393
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.332607352330399,
-   "normalized.margin": 0.332607352330399,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.6949036691653407,
-   "op_margin.y2": 0.5613469872121774,
-   "rev_growth.y1": 0.4191924070809283,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08358973472633485
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "p75",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence does not quantify how much the LINZESS Maximum Fair Price of $136, effective January 1, 2027, will reduce 2027 collaboration revenue.",
-   "The evidence gives no revenue or margin guidance for 2027 or later years.",
-   "The outcome of the Alkem ANDA patent litigation and the timing of any generic LINZESS entry after the stay ending up to December 12, 2028 are not known.",
-   "Whether apraglutide will be approved, or when it would generate revenue, is not known; a regulatory filing is planned for 2029, subject to the STARS-2 results.",
-   "Fourth-quarter 2026 results are not in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 11.475873441634063,
- "value_bear": 10.690559236686832,
- "value_bull": 11.823437861846573,
+ "upside": 0.9054036440630981,
+ "valuation": null,
+ "value_base": 9.425508055412163,
+ "value_bear": 6.175097531112549,
+ "value_bull": 15.810040275303248,
  "value_per_filed_share": {
-  "base": 11.475873441634063,
-  "bear": 10.690559236686832,
-  "bull": 11.823437861846573
+  "base": 9.425508055412163,
+  "bear": 6.175097531112549,
+  "bull": 15.810040275303248
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +35.4 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +30.3 points a year against the required return over 3 years"
 }

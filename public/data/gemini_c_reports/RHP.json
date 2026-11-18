@@ -1,23 +1,505 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -11.892486310625948,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 63,
  "claims_supported": 57,
  "date": "2026-11-17T18:31:17Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Base-year debt of $3,976.9 million predates the Grande Lakes financing; debt and finance lease obligations were already $4,659,308 thousand at Sep. 30, 2026.",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 1000: ffo_not_reported_or_not_found",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: The record's $3,976.9 million debt predates the $700 million 6.250% notes and the Grande Lakes purchase, and debt and finance lease obligations are already 4,659,308 (thousands) at September 30, 2026.",
+   "run 3000: quotes_verified: 9 of 9",
+   "run 3000: ffo_not_reported_or_not_found"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1251 and margin 0.1965, margin 0.1890 (persist), growth 0.0375, terminal RONIC 0.0700 (equity return r 0.0890), F 10",
+  "run_gap": 0.06942040368440737,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 471421000.0,
+     "excess_cash_before": 471421000.0,
+     "k0_after": 251542872.9184739,
+     "k0_before": 251542872.9184739,
+     "k0_interest": 241270000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 243653415.56324852,
+     "x0_before": 243653415.56324852
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.008801051374101716,
+     "equity_value": 5623835212.505522,
+     "seam_ratio": 1.0165398740113376,
+     "tv_share": 0.3995463180279193,
+     "wedge_rate_5": -0.009308000926621273
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Base-year debt of $3,976.9 million predates the Grande Lakes financing; debt and finance lease obligations were already $4,659,308 thousand at Sep. 30, 2026.",
+     "quotes_verified: 11 of 11",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.08,
+     "fade_years": 10,
+     "long_run_op_margin": 0.2,
+     "op_margin": [
+      0.194,
+      0.195,
+      0.2,
+      0.2,
+      0.2
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.136,
+      0.118,
+      0.045,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1251 and margin 0.1965, margin 0.1890 (persist), growth 0.0375, terminal RONIC 0.0700 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 57
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.18,
+      0.22
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.06
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Continued investment in our existing properties through $358.2 million and $407.9 million in capital expenditures in 2025 and 2024, respectively"
+       },
+       {
+        "id": "P1",
+        "quote": "we identified over $1 billion in capital investment opportunities across our entire hotel portfolio"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Filed capex of 13.9% of revenue includes expansion and redevelopment, such as the Opryland expansion within a program through 2027. The filings state no upkeep figure, so my best estimate is that upkeep is about 5-6% of revenue and some redevelopment spending continues, giving 8%. Acquisitions are excluded."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0700."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is a mature hotel owner whose growth and margin should converge slowly. I use 10 years because the acquisition integration and capex program run through 2027."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $2,158.1 million | 0.1950 | 0.2102"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin was 21% in 2023 and 2024 but 18.9% in 2025 after depreciation rose. Given cyclicality and a higher depreciation base, I assume about half of the gap closes, giving 20%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | 94,334 | 88,612 | 406,675 | 344,158"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $2,339.2 million | 0.0839 | 0.2098"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2026 guidance midpoint of consolidated operating income, about $567 million on roughly $2.9 billion of revenue, implies about 19.4%. Grande Lakes starts with a lower margin and higher depreciation, and Entertainment guidance was cut, so margins recover only gradually toward 20%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1434"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0700."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is high at 14.3%, but new hotel acquisitions and renovations earn less. I assume 9%, modestly above the 7% level at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenues | $ 655,801 | $ 592,458 | $ 2,069,351 | $ 1,839,253"
+       },
+       {
+        "id": "P6",
+        "quote": "The Company is raising its full year outlook"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is up 12.5% and guidance was raised. Grande Lakes has contributed only since Sep 1, so 2026 and 2027 carry the acquisition's partial and then full-year revenue. Growth then normalises to same-store RevPAR-type gains of about 4%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0890; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is a mature owner of concentrated group-meeting hotels. Long-run growth should sit below the 3.75% nominal anchor, at about 3%, from pricing and modest expansion."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Group meeting demand weakens or bookings fall again, as in 2025 when net group bookings dropped 10.5%."
+     },
+     {
+      "bear_value": 0.175,
+      "input_hit": "long_run_op_margin",
+      "risk": "Higher depreciation and interest costs, Grande Lakes integration problems, or Marriott cost pressures hold margins below 2023-24 levels."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Heavy redevelopment capex persists and new investments earn near the 7% no-value-added return."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.11600000000000002,
+       0.098,
+       0.025,
+       0.020000000000000004,
+       0.015000000000000006
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       0.15100000000000002,
+       0.133,
+       0.06,
+       0.055,
+       0.05
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $3,976.9 million predates the Grande Lakes financing; debt and finance lease obligations were already $4,659,308 thousand at Sep. 30, 2026."
+     },
+     "margin_position": "The 2025 operating margin of 18.9% is below the 21% earned in 2023 and 2024, because depreciation rose with the Desert Ridge purchase and 2024 had a one-off tax refund. Nine-month 2026 margin of 19.7% is already recovering, but the 2020-21 collapse shows how exposed group lodging is to downturns.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT, most income escapes federal tax, so the very low 2.9% rate is structural, with taxes arising only in the TRS and Entertainment businesses."
+     },
+     "why": "The 2025 base year predates the roughly $1.38 billion Grande Lakes Orlando purchase and the related equity and debt issuance, so 2026 and later will have a larger revenue base, higher depreciation and higher interest. Revenue growth of 10% in 2025 also included a part-year of Desert Ridge. Same-store trends are strong, but 2025 group bookings were soft."
+    },
+    "value_at_old_defaults": 68.80246615141402,
+    "values": {
+     "base": 99.05409884963169,
+     "bear": 83.45901776154152,
+     "bull": 117.84640464546462
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 471421000.0,
+     "excess_cash_before": 471421000.0,
+     "k0_after": 251542872.9184739,
+     "k0_before": 251542872.9184739,
+     "k0_interest": 241270000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 243653415.56324852,
+     "x0_before": 243653415.56324852
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.011109789973350354,
+     "equity_value": 5217180068.705379,
+     "seam_ratio": 1.0150270222569995,
+     "tv_share": 0.39223025963717284,
+     "wedge_rate_5": -0.008606699389605179
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: The record's $3,976.9 million debt predates the $700 million 6.250% notes and the Grande Lakes purchase, and debt and finance lease obligations are already 4,659,308 (thousands) at September 30, 2026.",
+     "quotes_verified: 9 of 9",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.08,
+     "fade_years": 10,
+     "long_run_op_margin": 0.19,
+     "op_margin": [
+      0.195,
+      0.195,
+      0.195,
+      0.193,
+      0.192
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.127,
+      0.095,
+      0.045,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1251 and margin 0.1965, margin 0.1890 (persist), growth 0.0375, terminal RONIC 0.0700 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 57
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.17,
+      0.21
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.06
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Continued investment in our existing properties through $358.2 million and $407.9 million in capital expenditures in 2025 and 2024, respectively"
+       },
+       {
+        "id": "P1",
+        "quote": "we identified over $1 billion in capital investment opportunities across our entire hotel portfolio"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filings give no figure for upkeep alone. Capital spending of 13.9% of revenue in 2025 mixes renewal with redevelopment (the $225 million Gaylord Opryland expansion, a program of over $1 billion). I estimate upkeep and renewal at about 8% of revenue, excluding acquisitions."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "our group room rates may be contracted several years in advance"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Group contracts are signed years ahead and the acquired assets and renovations take several years to stabilize, so the fade to the long-run state takes about ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,577.1 million | 0.1017 | 0.1890"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margins fell from about 21% in 2023-2024 to 18.9% in 2025, and group hotels are cyclical with cost pressure. I fade toward about 19%, between the recent trough and the 2023-2024 peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | 94,334 | 88,612 | 406,675 | 344,158"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The nine-month 2026 margin is 406,675 / 2,069,351, about 19.7%, and guided consolidated operating income of about 566.8 million on roughly 2.9 billion of revenue implies about 19.5%. The Grande Lakes margin is lower, and depreciation keeps rising. I hold margins near 19.5% and ease them slightly."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0700."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is high at 14%, but new hotel acquisitions and expansions typically earn well below that. I set 9%, above the 7% level at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The Company is raising its full year outlook"
+       },
+       {
+        "id": "P4",
+        "quote": "on September 1, 2026, we acquired the Grande Lakes Orlando Resort"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is lifted by the Grande Lakes acquisition, about 4 months in 2026, plus same-store RevPAR growth guided at 4.5-5.5%. Year 2 carries the full-year effect of Grande Lakes. After that growth normalizes toward same-store rate and volume growth plus modest additions."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0890; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth should sit slightly below the nominal anchor, because this is a mature owner of a limited set of large resorts that must keep buying assets with outside capital."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Group meeting demand weakens, as it did with the 10.5% fall in same-store net group bookings in 2025, or Marriott-run operations slip"
+     },
+     {
+      "bear_value": 0.165,
+      "input_hit": "long_run_op_margin",
+      "risk": "Cost inflation and Grande Lakes integration problems compress margins permanently"
+     },
+     {
+      "bear_value": 0.11,
+      "input_hit": "capex_to_revenue",
+      "risk": "Upkeep and renovation capital needs run higher than assumed, and growth keeps relying on external equity and debt"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.10200000000000001,
+       0.07,
+       0.02,
+       0.015000000000000003,
+       0.010000000000000005
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.21,
+      "rev_growth": [
+       0.14200000000000002,
+       0.11,
+       0.06,
+       0.055,
+       0.05
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The record's $3,976.9 million debt predates the $700 million 6.250% notes and the Grande Lakes purchase, and debt and finance lease obligations are already 4,659,308 (thousands) at September 30, 2026."
+     },
+     "margin_position": "The 2025 operating margin of 18.9% is below the 2023-2024 level of about 21%. Depreciation rose with the Desert Ridge purchase and renovations, and 2024 also held a $9.1 million Tennessee tax refund. The 2026 nine-month margin of 19.7% is close to the guided full-year level of about 19.5%. Grande Lakes Orlando is guided to earn a lower margin than the existing portfolio.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT, most income is not taxed federally, and the 2026 nine-month provision of 12,514 on pretax income of 223,672 is also low, so a low rate is sustainable while REIT status holds."
+     },
+     "why": "FY2025 is a pre-acquisition base. Grande Lakes Orlando closed on September 1, 2026 and adds about 1,592 rooms. Revenue should therefore jump in 2026 and 2027 beyond same-store growth, and the base-year debt and share count are out of date. Same-store demand is strong, with the 2026 RevPAR outlook raised, while 2025 group bookings were soft."
+    },
+    "value_at_old_defaults": 68.80246615141402,
+    "values": {
+     "base": 92.40839697436856,
+     "bear": 77.26194206800191,
+     "bull": 109.83997760686512
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 68.80246615141402,
+  "value_at_old_defaults_quoted": 68.80246615141402,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 6314145918.531793,
  "family": "family_not_built",
+ "far_from_price": false,
+ "filed_shares": 65957000.0,
  "flags": [
   "A subsidiary of the company completed the purchase of the Grande Lakes Orlando resort (a JW Marriott and a Ritz-Carlton hotel) for an aggregate price of approximately $1.38 billion.",
   "The company closed an underwritten public offering of 5,865,000 common shares at $117.00 per share, with net proceeds of approximately $658 million.",
   "The company's issuers sold $700 million of 6.250% senior notes due 2035 to fund part of the Grande Lakes Orlando purchase."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08903203083918919,
+ "market_cap_at_publish": 9410208230,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "no_value_reason": null,
+ "price_at_publish": 136.4,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 99.05409884963169,
+  "3000": 92.40839697436856
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -782,8 +1264,17 @@
   ]
  },
  "ticker": "RHP",
+ "upside": -0.3290110309778137,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+ "value_base": 95.73124791200013,
+ "value_bear": 80.36047991477172,
+ "value_bull": 113.84319112616487,
+ "value_per_filed_share": {
+  "base": 95.73124791200013,
+  "bear": 80.36047991477172,
+  "bull": 113.84319112616487
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -11.9 points a year against the required return over 3 years"
 }

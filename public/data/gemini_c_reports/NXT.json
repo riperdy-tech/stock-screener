@@ -1,11 +1,532 @@
 {
- "alpha_pts": -12.197897212096775,
+ "alpha_pts": -10.955266694460288,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 125,
  "claims_supported": 120,
  "date": "2026-11-16T18:33:59Z",
- "equity_value": 8258830624.646108,
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y2 0.1200 (filed 0.1838 to 0.3142)",
+   "run 1000: growth_outside_filed_record: rev_growth.y3 0.0850 (filed 0.1838 to 0.3142)",
+   "run 1000: growth_outside_filed_record: rev_growth.y4 0.0650 (filed 0.1838 to 0.3142)",
+   "run 1000: growth_outside_filed_record: rev_growth.y5 0.0500 (filed 0.1838 to 0.3142)",
+   "run 1000: tax_rate_representative_no: The base-year rate of 17.9% is below the recent run-rate (the second-quarter provision was 49,619 on pretax income of 215,072, about 23%), so a higher long-run rate is likely.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: growth_outside_filed_record: rev_growth.y2 0.1200 (filed 0.1838 to 0.3142)",
+   "run 3000: growth_outside_filed_record: rev_growth.y3 0.0900 (filed 0.1838 to 0.3142)",
+   "run 3000: growth_outside_filed_record: rev_growth.y4 0.0700 (filed 0.1838 to 0.3142)",
+   "run 3000: growth_outside_filed_record: rev_growth.y5 0.0600 (filed 0.1838 to 0.3142)",
+   "run 3000: tax_rate_representative_no: The base-year rate of 0.1792 is below the roughly 20% six-month FY27 rate (83,189 on 413,997 of pretax income) and the 23% Q2 rate, so a higher rate is likely going forward.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 16 of 16"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1554 and margin 0.1949, margin 0.1959 (persist), growth 0.0375, terminal RONIC 0.1113 (equity return r 0.1113), F 10",
+  "run_gap": 0.09668362758669558,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1094976000.0,
+     "excess_cash_before": 1094976000.0,
+     "k0_after": 26306331.527710915,
+     "k0_before": 26306331.527710915,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 560521927.3388054,
+     "x0_before": 560521927.3388054
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7199575169.538553,
+     "seam_ratio": 1.048250599063251,
+     "tv_share": 0.3406444874638123,
+     "wedge_rate_5": 0.013799984312774516
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y2 0.1200 (filed 0.1838 to 0.3142)",
+     "growth_outside_filed_record: rev_growth.y3 0.0850 (filed 0.1838 to 0.3142)",
+     "growth_outside_filed_record: rev_growth.y4 0.0650 (filed 0.1838 to 0.3142)",
+     "growth_outside_filed_record: rev_growth.y5 0.0500 (filed 0.1838 to 0.3142)",
+     "tax_rate_representative_no: The base-year rate of 17.9% is below the recent run-rate (the second-quarter provision was 49,619 on pretax income of 215,072, about 23%), so a higher long-run rate is likely.",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.015,
+     "fade_years": 10,
+     "long_run_op_margin": 0.15,
+     "op_margin": [
+      0.185,
+      0.18,
+      0.172,
+      0.165,
+      0.158
+     ],
+     "return_on_new_investment_long_run": 0.4,
+     "rev_growth": [
+      0.205,
+      0.12,
+      0.085,
+      0.065,
+      0.05
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1554 and margin 0.1949, margin 0.1959 (persist), growth 0.0375, terminal RONIC 0.1113 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 120
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.11,
+      0.185
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.13
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0080"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (39,026) | (26,732)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 5-year pooled capex ratio is 0.8%, but first-half FY27 capex was 39,026 on revenue of 2,044,446 (about 1.9%) as the company invests in manufacturing and the platform, so 1.5% is used."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "GW delivered | 38.0 | 33.6 | 26.0 | 13% | 29%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets growth and margin converge as 45X credits phase out and the platform business matures; the evidence does not point to a more precise length."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The Section 45X Credit amount will be reduced each year by 25% starting in 2030 and end after 2032."
+       },
+       {
+        "id": "P8",
+        "quote": "Q2 FY27, Q1 FY27, and Q2 FY26 results include approximately $99 million, $99 million, and $67 million, respectively, of IRA 45X advanced manufacturing tax credit vendor rebates and tariffs, net."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 45X benefit is about $99 million a quarter, roughly 9% of revenue, and it steps down from 2030 and ends after 2032. Tracker competition is intense, so the margin should settle below today's level but above the early-year history, in line with the base-rate pattern for cyclical companies partly keeping an above-median gap."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 207,546 | 181,345 | 398,453 | 367,575"
+       },
+       {
+        "id": "P8",
+        "quote": "GAAP Gross Margin | 31.1% | 35.9% | 32.4%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The first-half margin is 19.5%, but the full-year guidance implies lower, and mix is shifting to storage and power conversion with higher intangible amortization. A gradual decline is therefore assumed."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000"
+       },
+       {
+        "id": "P5",
+        "quote": "On October 21, 2026, we completed the previously announced acquisition of Zimmermann PV-Steel Group"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The model is asset-light, with suppliers making the products and a return on tangible capital of 1.0, but acquisitions and competition should pull returns down; 0.40 is still well above the 0.1113 breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Revenue | $4.2 to $4.45 billion | $4.1 to $4.4 billion"
+       },
+       {
+        "id": "P8",
+        "quote": "Updated outlook includes Q3 FY27 revenue at approximately 10% year over year growth"
+       },
+       {
+        "id": "P2",
+        "quote": "likely reducing the overall project volume over time"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 follows the raised FY27 outlook of $4.2 to $4.45 billion against a base of $3.56 billion, with the low end of the implied range given more weight because Q3 is guided to only about 10% growth. After that, growth slows because the OBBBA shortens the tax-credit window for customers' projects, partly offset by the backlog and the product expansion."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Solar and electricity demand growth supports growth above inflation for a time, but a mature market justifies staying below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.11,
+      "input_hit": "long_run_op_margin",
+      "risk": "The 45X credit phases down from 2030 and project volume falls after the OBBBA tax-credit deadlines, compressing margins"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Backlog conversion slips or demand drops once the tax-credit window closes, cutting mid-term growth"
+     },
+     {
+      "bear_value": 0.2,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Acquired businesses are integrated poorly or compete on price, which lowers the return on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.11,
+      "rev_growth": [
+       0.14999999999999997,
+       0.06499999999999999,
+       0.03,
+       0.009999999999999995,
+       -0.0050000000000000044
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.185,
+      "rev_growth": [
+       0.25,
+       0.16499999999999998,
+       0.13,
+       0.11,
+       0.095
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company reports no debt and over $1 billion of cash, and it funds acquisitions and buybacks from cash flow, so zero debt is plausible to keep."
+     },
+     "margin_position": "The GAAP operating margin of about 19.5% sits below the FY2024 peak of 23.5% and well above FY2021 to FY2023. It is lifted by roughly $99 million a quarter of 45X credit rebates net of tariffs, which step down from 2030 and end after 2032. Newer, lower-margin products such as storage, inverters and eBOS are also diluting it.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 17.9% is below the recent run-rate (the second-quarter provision was 49,619 on pretax income of 215,072, about 23%), so a higher long-run rate is likely."
+     },
+     "why": "FY2026 revenue grew 20% and the operating margin of 19.6% is close to the first-half FY27 margin of 19.5%, so the base year is a fair starting point. The caveat is that part of the margin depends on a time-limited 45X credit. Demand is also exposed to U.S. tax-credit deadlines that may pull projects forward and then reduce later volume."
+    },
+    "value_at_old_defaults": 55.06873314371214,
+    "values": {
+     "base": 57.558638486031185,
+     "bear": 38.08468198965556,
+     "bull": 88.62079861698444
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 5121000.0,
+       "printed": 5121,
+       "quotes": [
+        {
+         "id": "P8",
+         "quote": "Debt extinguishment cost | \u2014 | \u2014 | 5,121"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Debt extinguishment cost in Q2 FY26 (within base fiscal year ended 2026-03-31), a non-operating item that will not recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1094976000.0,
+     "excess_cash_before": 1094976000.0,
+     "k0_after": 21185331.527710915,
+     "k0_before": 26306331.527710915,
+     "k0_interest": 0.0,
+     "one_offs_charge": 5121000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 564725062.0565097,
+     "x0_before": 560521927.3388054
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 6441107049.764763,
+     "seam_ratio": 1.0496221998550197,
+     "tv_share": 0.3530279092024525,
+     "wedge_rate_5": 0.01211824376023449
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y2 0.1200 (filed 0.1838 to 0.3142)",
+     "growth_outside_filed_record: rev_growth.y3 0.0900 (filed 0.1838 to 0.3142)",
+     "growth_outside_filed_record: rev_growth.y4 0.0700 (filed 0.1838 to 0.3142)",
+     "growth_outside_filed_record: rev_growth.y5 0.0600 (filed 0.1838 to 0.3142)",
+     "tax_rate_representative_no: The base-year rate of 0.1792 is below the roughly 20% six-month FY27 rate (83,189 on 413,997 of pretax income) and the 23% Q2 rate, so a higher rate is likely going forward.",
+     "confidence_low",
+     "quotes_verified: 16 of 16"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.012,
+     "fade_years": 10,
+     "long_run_op_margin": 0.12,
+     "op_margin": [
+      0.165,
+      0.16,
+      0.155,
+      0.145,
+      0.135
+     ],
+     "return_on_new_investment_long_run": 0.4,
+     "rev_growth": [
+      0.21,
+      0.12,
+      0.09,
+      0.07,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1554 and margin 0.1949, margin 0.1959 (persist), growth 0.0375, terminal RONIC 0.1113 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 120
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.15
+     ],
+     "rev_growth_y3": [
+      0.05,
+      0.13
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (39,026) | (26,732)"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-03-31 | 0.0138 | 0.0086"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 0.0138 of revenue in FY26 and about 1.9% in the first half of FY27, above the 0.0080 pooled average, as the company builds out facilities for new product lines. A level of 1.2% balances the recent rise against the asset-light model."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The Section 45X Credit amount will be reduced each year by 25% starting in 2030 and end after 2032."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade lets growth and margin move from the year-5 level to the long-run level as the 45X credits end and the new product lines mature."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-03-31 | $3,559.4 million | 0.2028 | 0.1959"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-03-31 | $2,499.8 million | 0.3142 | 0.2349"
+       },
+       {
+        "id": "P2",
+        "quote": "The Section 45X Credit amount will be reduced each year by 25% starting in 2030 and end after 2032."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Over FY21-FY26 the operating margin ranged from 4.5% to 23.5%, and the 45X credits that help lift current margins end after 2032. Tracker leadership and a broader platform support a margin above the early-year levels, but pricing competition and lower-margin storage and inverters argue for roughly 12%. Ordinary-company mean reversion points toward about half the gap to the median persisting."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Adjusted EBITDA | $890 to $940 million | $870 to $930 million"
+       },
+       {
+        "id": "P8",
+        "quote": "Q2 FY27, Q1 FY27, and Q2 FY26 results include approximately $99 million, $99 million, and $67 million, respectively, of IRA 45X advanced manufacturing tax credit vendor rebates and tariffs, net."
+       },
+       {
+        "id": "P2",
+        "quote": "The Section 45X Credit amount will be reduced each year by 25% starting in 2030 and end after 2032."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The FY27 outlook implies a GAAP operating margin of about 16% once about $185 million of stock compensation, intangible amortization and acquisition costs is deducted from adjusted EBITDA. Q2 gross margin fell to 31.1% from 35.9% in Q1 on mix. 45X support persists through 2029 and then steps down, so margins drift lower to year 5."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.1792;"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1113."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light, with $39 million of capex on $2.0 billion of half-year revenue and outsourced manufacturing, so the filed return on tangible capital of 1.0 is capped. A long-run return of 0.40 stays well above the 0.1113 hurdle, but allows for competition and for acquisitions that add goodwill and intangibles."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Revenue | $4.2 to $4.45 billion | $4.1 to $4.4 billion"
+       },
+       {
+        "id": "P8",
+        "quote": "Updated outlook includes Q3 FY27 revenue at approximately 10% year over year growth, and Q3 FY27 adjusted EBITDA margin roughly 1 to 2 percentage points below Q4 FY27."
+       },
+       {
+        "id": "P8",
+        "quote": "Bookings reached a quarterly record, and backlog exceeded $6 billion."
+       },
+       {
+        "id": "P2",
+        "quote": "Such acceleration in the expiration of these tax credits will reduce the number of projects in future years that would have otherwise qualified for such credits, likely reducing the overall project volume over time."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 follows the raised FY27 guidance, whose midpoint of about $4.325 billion implies roughly 21% growth over the $3.56 billion base. Q3 growth guided near 10% points to a slowdown. The OBBBA credit deadlines should lower project volume over time, while acquisitions and the more than $6 billion backlog support growth in the near years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth is set slightly below the 0.0375 anchor, because a mature solar equipment supplier exposed to policy should not out-grow the economy forever, though electricity demand growth is a tailwind."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_op_margin",
+      "risk": "The 45X credit phase-down and end, together with a mix shift to storage, eBOS and inverters, push the margin to near pre-45X levels."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "The OBBBA tax-credit deadlines pull projects forward and then cut U.S. volume, and backlog is cancelled or delayed."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "op_margin",
+      "risk": "Tracker pricing pressure and competition cut margins during the five forecast years."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       0.16999999999999998,
+       0.08,
+       0.05,
+       0.030000000000000013,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.25,
+       0.16,
+       0.13,
+       0.11000000000000001,
+       0.1
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company reports no debt and over $1 billion of cash, and it funds acquisitions and buybacks from cash, so zero debt looks sustainable, though the TRA liability is a separate debt-like claim."
+     },
+     "margin_position": "The GAAP operating margin of 0.1959 in FY26 sits well above the FY22-FY23 levels of 0.0452 and 0.0886. A large part of the lift comes from IRA 45X credits, about $99 million a quarter net with tariffs. Utility-scale solar demand is policy-driven, and the OBBBA shortens the life of the customer tax credits. The margin is therefore elevated and should fade as 45X steps down from 2030 and the mix shifts to lower-margin storage, eBOS and inverters.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 0.1792 is below the roughly 20% six-month FY27 rate (83,189 on 413,997 of pretax income) and the 23% Q2 rate, so a higher rate is likely going forward."
+     },
+     "why": "FY26 revenue grew 20% to $3.56 billion at a 19.6% operating margin, which the 45X credits help support. The FY27 guidance implies GAAP operating margin of roughly 16%, because adjusted EBITDA of $890 to $940 million excludes about $185 million of stock compensation, intangible amortization and acquisition costs. The base year is therefore a high-water mark for margin, though revenue is growing and backlog exceeds $6 billion."
+    },
+    "value_at_old_defaults": 55.06873314371214,
+    "values": {
+     "base": 52.250276371155486,
+     "bear": 37.929591823910016,
+     "bull": 75.61726071410934
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 55.06873314371214,
+  "value_at_old_defaults_quoted": 55.06873314371214,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 8384461505.767583,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 152710033.0,
@@ -15,7 +536,7 @@
   "The company completed the acquisition of Zimmermann PV-Steel Group for approximately \u20ac230 million, with no stock or earnout."
  ],
  "in_code_book": false,
- "ke": 0.11114375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 11966974449,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +544,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 54.092465305661,
-  "3000": 54.08178141541039
+  "1000": 57.558638486031185,
+  "3000": 52.250276371155486
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1509,154 +2030,17 @@
   ]
  },
  "ticker": "NXT",
- "upside": -0.3098647732688823,
- "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.2151 valued at 0.1554"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P8.s48",
-     "P8.s34",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "F3",
-     "Y2026-03-31"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-10-02",
-    "text": "Unaudited condensed consolidated statements of operations - USD ($) $ in Thousands | 3 Months Ended | 6 Months Ended\nOct. 02, 2026 | Sep. 26, 2025 | Oct. 02, 2026 | Sep. 26, 2025\nIncome Statement [Abstract]\nRevenue | $ 1,109,276 | $ 905,268 | $ 2,044,446 | $ 1,769,521\nCost of sales | 763,960 | 612,408 | 1,363,277 | 1,194,935\nGross profit | 345,316 | 292,860 | 681,169 | 574,586\nSelling, general and administrative expenses | 92,202 | 84,626 | 192,640 | 158,562\nResearch and development | 45,568 | 26,889 | 90,076 | 48,449\nOperating income | 207,546 | 181,345 | 398,453 | 367,575\nInterest expense | 350 | 730 | 603 | 1,946\nOther income, net | (7,876) | (2,110) | (16,147) | (8,063)\nIncome before income taxes | 215,072 | 182,725 | 413,997 | 373,692\nProvision for income taxes | 49,619 | 35,864 | 83,189 | 69,648\nNet income | $ 165,453 | $ 146,861 | $ 330,808 | $ 304,044\nEarnings per share:\nBasic (in USD per share) | $ 1.09 | $ 0.99 | $ 2.19 | $ 2.06\nDiluted (in USD per share) | $ 1.08 | $ 0.97 | $ 2.14 | $ 2.01\nWeighted-average shares used in computing per share amounts:\nBasic (in shares) | 151,495,892 | 148,027,872 | 151,131,192 | 147,480,066\nDiluted (in shares) | 153,909,193 | 152,018,105 | 154,519,706 | 151,110,031"
-   },
-   "F3": {
-    "kind": "statement",
-    "period": "2026-10-02",
-    "text": "Unaudited condensed consolidated statements of cash flows - USD ($) $ in Thousands | 6 Months Ended\nOct. 02, 2026 | Sep. 26, 2025\nCash flows from operating activities:\nNet income | $ 330,808 | $ 304,044\nDepreciation and amortization of intangible assets | 23,689 | 13,150\nChanges in working capital and other, net | (75,336) | (48,991)\nNet cash provided by operating activities | 279,161 | 268,203\nCash flows from investing activities:\nPayment for business acquisitions, net of cash acquired | (132,455) | (108,346)\nPurchases of property and equipment | (39,026) | (26,732)\nOther investing activities | (8,000) | (7,443)\nNet cash used in investing activities | (179,481) | (142,521)\nCash flows from financing activities:\nRepurchase of common stock | (162,068) | 0\nProceeds from exercises of options awards | 32,820 | 0\nTRA payment | (19,381) | (27,427)\nPayment of acquisition deferred purchase price | (16,141) | (14,013)\nDistribution to former non-controlling interest holder | 0 | (3,010)\nPayment of revolver issuance costs | 0 | (1,993)\nNet cash used in financing activities | (164,770) | (46,443)\nNet (decrease) increase in cash and cash equivalents | (65,090) | 79,239\nCash and cash equivalents beginning of period | 1,094,976 | 766,103\nCash and cash equivalents end of period | 1,029,886 | 845,342\nNon-cash investing and financing activities:\nFair value of contingent considerations for acquisitions | 57,760 | 28,930\nAcquisition deferred purchase price | 50,000 | 2,931\nRight-of-use assets obtained in exchange of lease liabilities | $ 8,352 | $ 24,163"
-   },
-   "P8.s34": {
-    "kind": "release",
-    "period": "2026-10-26",
-    "text": "\u2022Bookings reached a quarterly record, and backlog exceeded $6 billion."
-   },
-   "P8.s48": {
-    "kind": "release",
-    "period": "2026-10-26",
-    "text": "Revenue | $4.2 to $4.45 billion | $4.1 to $4.4 billion"
-   },
-   "Y2026-03-31": {
-    "kind": "filed_record",
-    "period": "2026-03-31",
-    "text": "Filed annual record, fiscal year ended 2026-03-31 (10-K, accession 0001852131-26-000017): revenue $3,559.4 million; operating income $697.3 million; operating margin 19.6%; net income $585.9 million; depreciation and amortization $30.6 million; capital expenditure $49.3 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.007954172822335345,
-    0.007954172822335345,
-    0.007954172822335345,
-    0.007954172822335345,
-    0.007954172822335345
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.19589480219925323,
-   "normalized.margin": 0.19589480219925323,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.19489534084050153,
-   "op_margin.y2": 0.19589480219925323,
-   "rev_growth.y1": 0.15536690437694722,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.11114375453902048
-  },
-  "numbers": {
-   "capex": [
-    0.01384422611739652,
-    0.01384422611739652,
-    0.01384422611739652,
-    0.01384422611739652,
-    0.01384422611739652
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.19589480219925323,
-   "normalized.margin": 0.19589480219925323,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.19489534084050153,
-   "op_margin.y2": 0.19589480219925323,
-   "rev_growth.y1": 0.21509584507457746,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.11114375453902048
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.21509584507457746,
-    "model_option": "guidance",
-    "record": 0.15536690437694722,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "record_last",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The packet gives no operating margin guidance for FY2027, only GAAP net income, EPS and adjusted EBITDA ranges.",
-   "How much the Zimmermann acquisition, closed October 21, 2026, adds to FY2027 revenue and margin is not stated.",
-   "The effect of the OBBBA construction-start and placed-in-service deadlines on project volume after 2027 is not quantified.",
-   "The packet does not contain the long-term strategy and financial framework from the November 16 Capital Markets Day.",
-   "The packet gives no timing for when the backlog of over $6 billion converts to revenue."
-  ],
-  "year": 3
- },
- "value_base": 54.08178141541039,
- "value_bear": 50.40470301900146,
- "value_bull": 62.901361007153994,
+ "upside": -0.299366640958424,
+ "valuation": null,
+ "value_base": 54.90445742859333,
+ "value_bear": 38.00713690678279,
+ "value_bull": 82.11902966554689,
  "value_per_filed_share": {
-  "base": 54.08178141541039,
-  "bear": 50.40470301900146,
-  "bull": 62.901361007153994
+  "base": 54.90445742859333,
+  "bear": 38.00713690678279,
+  "bull": 82.11902966554689
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -12.2 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -11.0 points a year against the required return over 3 years"
 }

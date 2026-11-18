@@ -1,5 +1,5 @@
 {
- "alpha_pts": 32.50558167081703,
+ "alpha_pts": 27.711384803049732,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 73,
@@ -7,257 +7,96 @@
  "date": "2026-11-17T23:49:26Z",
  "decided": {
   "flags": [
+   "run 1000: debt_level_representative_no: Debt of about $1.16B is roughly offset by cash, but the large newbuilding program and the JOLCO financings in 2026 will raise debt materially relative to the base year.",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 15 of 15",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: debt_level_representative_no: Debt of about $1.16B against $1.04B of cash will likely rise as the 27 containership and four Newcastlemax newbuildings are funded, and further JOLCO financings were added in the first half of 2026.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 15 of 15"
+   "run 3000: quotes_verified: 12 of 12"
   ],
   "method": "decided.v1",
   "old_defaults_inputs": "margin 0.5059 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
-  "run_gap": 0.08353682334429872,
+  "run_gap": 0.02455468796507402,
   "runs": {
    "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 29541000.0,
+       "printed": 29541,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Gain/(loss) on investments | 29,541 | (25,179) | 17,867"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Gain on investments (marketable securities), which swung from a loss in 2024 and is not recurring"
+      },
+      {
+       "amount": 2499000.0,
+       "printed": 2499,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on debt extinguishment, net | (2,499) | 0 | (2,254)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on debt extinguishment, net, tied to refinancing"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1157536000.0,
+     "excess_cash_before": 1157536000.0,
+     "k0_after": 78251789.82811242,
+     "k0_before": 51209789.82811242,
+     "k0_interest": 0.0,
+     "one_offs_charge": 2499000.0,
+     "one_offs_gain": 29541000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 420514210.1718876,
+     "x0_before": 447556210.1718876
+    },
     "confidence": "low",
     "diagnostics": {
      "da_rule": "vintages",
-     "equity_value": 4050067977.2620735,
-     "seam_ratio": 1.0292171210629604,
-     "tv_share": 0.42402183364397217,
-     "wedge_rate_5": 0.05359916588900338
+     "equity_value": 3648119038.2338448,
+     "seam_ratio": 1.0986835827636139,
+     "tv_share": 0.4838264508546451,
+     "wedge_rate_5": 0.12037510805704636
     },
     "flags": [
+     "debt_level_representative_no: Debt of about $1.16B is roughly offset by cash, but the large newbuilding program and the JOLCO financings in 2026 will raise debt materially relative to the base year.",
      "confidence_low",
-     "quotes_verified: 15 of 15"
+     "quotes_verified: 11 of 11"
     ],
     "inputs": {
-     "capex_to_revenue": 0.28,
-     "fade_years": 8,
-     "long_run_op_margin": 0.4,
-     "op_margin": [
-      0.465,
-      0.445,
-      0.425,
-      0.41,
-      0.4
-     ],
-     "return_on_new_investment_long_run": 0.09,
-     "rev_growth": [
-      0.03,
-      0.04,
-      0.04,
-      0.03,
-      0.02
-     ],
-     "terminal_growth": 0.025
-    },
-    "old_defaults_inputs": "margin 0.5059 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 8,
-     "kept": 65
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.33,
-      0.46
-     ],
-     "rev_growth_y3": [
-      0.01,
-      0.07
-     ],
-     "terminal_growth": [
-      0.015,
-      0.033
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "Since the beginning of 2022, we have ordered 35 newbuilding containerships with an aggregate capacity of 232,948 TEU, eight of which have been delivered to us, for an aggregate purchase price of $2.7 billion."
-       },
-       {
-        "id": "P2",
-        "quote": "In early 2026, we further expanded our drybulk presence by ordering four Newcastlemax bulk carriers scheduled for delivery in 2028 for an aggregate purchase price of $297.3 million."
-       },
-       {
-        "id": "F3",
-        "quote": "Vessels additions and advances for vessels under construction and vessel acquisition | (296,690) | (659,343) | (268,035)"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Remaining newbuild installments for about 27 containerships and four Newcastlemaxes ($297.3 million) are heavy over 2026-2029, then capex drops to replacement level. The 5-year average is elevated versus the 2025 outlay, so I use 0.28. The pooled history of 0.3166 is lumpy."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "The remaining average contracted charter duration for our containership fleet is 4.3 years, weighted by aggregate contracted charter hire."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Contract coverage declines from near-complete in 2026 to a small share by the 2030s, so rates reprice over several years. A medium fade of 8 years reflects that staggered rollover."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "Charter rate levels for containerships generally improved in 2024 and remained at relatively high levels throughout 2025 and in early 2026"
-       },
-       {
-        "id": "P2",
-        "quote": "Our Capesize drybulk carriers are principally deployed on spot market charters, which generate revenues that are less predictable"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Container charter rates are cyclical and the company says rates are 'relatively high'. The long-run margin should revert toward a mid-cycle level below the 2025 figure, as the 2021-2023 boom years (0.52-0.66) do not persist. The historical median is about 0.43-0.45; I use 0.40 because newbuild depreciation is heavier and spot-exposed drybulk is growing."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $1,042.5 million | 0.0280 | 0.4785"
-       },
-       {
-        "id": "F2",
-        "quote": "Depreciation | (163,366) | (148,344) | (129,287)"
-       },
-       {
-        "id": "P2",
-        "quote": "As of February 25, 2026, the charters for two of our containerships are scheduled to expire in 2026 and 21 in 2027."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Margins fell from 0.5964 in 2023 to 0.4785 in 2025 as depreciation and drydocking amortization rose. Newbuilds bought at about $2.7 billion for 35 ships raise depreciation, and charters from stronger markets reprice in 2027-2028. I therefore expect a continued gradual decline, partly cushioned by strong drybulk rates in 2026."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
-       },
-       {
-        "id": "REC",
-        "quote": "return on tangible capital 0.1228"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Base-year return on tangible capital is 0.1228, but ships are competitively priced and charter rates mean-revert. New investment should earn close to the cost of equity, so I use 0.09, just under the 0.0946 breakeven."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Operating revenues increased by $12.2 million, to $274.4 million in the three months ended June 30, 2026 from $262.2 million in the three months ended June 30, 2025."
-       },
-       {
-        "id": "P4",
-        "quote": "Operating revenues of our container vessels segment decreased by 1.6%, or $7.4 million, to $468.2 million in the six months ended June 30, 2026, compared to $475.6 million in the six months ended June 30, 2025"
-       },
-       {
-        "id": "P1",
-        "quote": "27 under construction containerships aggregating 174,550 TEUs"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "H1 2026 revenue grew only about 2.5% (container down 1.6%, drybulk up about 50%). The 27 newbuild containerships delivering 2026-2029 add capacity of about 37% over the current fleet, but re-chartering of expiring contracts at lower rates offsets part of that. I expect low single-digit growth, peaking in 2027-2028 as newbuilds deliver."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A shipping lessor's long-run growth should sit below the 0.0375 nominal anchor because the business is capital-intensive and cyclical with limited pricing power. I use 0.025."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.32,
-      "input_hit": "long_run_op_margin",
-      "risk": "Container charter rates fall at re-chartering of the 21 vessels expiring in 2027 and the 49 vessels available in 2027-2028, plus drybulk spot weakness, pushing margins to a trough-like level"
-     },
-     {
-      "bear_value": 0.01,
-      "input_hit": "rev_growth",
-      "risk": "Newbuild deliveries are delayed or the four uncontracted newbuilds are chartered at weak rates or left idle, so growth stalls"
-     },
-     {
-      "bear_value": 0.38,
-      "input_hit": "capex_to_revenue",
-      "risk": "Capex stays high because of the newbuild program, all fleet renewal is debt-funded and growth earns below the cost of capital"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.33,
-      "rev_growth": [
-       0.0,
-       0.010000000000000002,
-       0.010000000000000002,
-       0.0,
-       -0.009999999999999998
-      ],
-      "terminal_growth": 0.015
-     },
-     "bull": {
-      "long_run_op_margin": 0.46,
-      "rev_growth": [
-       0.060000000000000005,
-       0.07,
-       0.07,
-       0.060000000000000005,
-       0.05
-      ],
-      "terminal_growth": 0.033
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "yes",
-     "margin_position": "The 2025 operating margin of 0.4785 is falling from the 2022 peak of 0.6578. It is still above the company's long-run median of roughly 0.43 to 0.45, outside the loss years. Charter rates were high in 2024-2026 and were fixed in earlier, stronger markets, while depreciation and drydocking amortization are rising with the fleet.",
-     "why": "2025 reflects a mostly contracted container fleet at 98.2% utilization, so earnings are stable, but the margin is still drifting down from the boom years. Many older charters at $40,000-58,000/day roll off in 2027-2028 and will reprice to market, and the 2026 drybulk spot rate surge adds some temporary upside. I treat the base year as representative of the near term but above the long-run level."
-    },
-    "value_at_old_defaults": 386.27810275068936,
-    "values": {
-     "base": 299.92957993210376,
-     "bear": 239.5119706362502,
-     "bull": 376.6582616745175
-    }
-   },
-   "3000": {
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "vintages",
-     "equity_value": 4496343923.332258,
-     "seam_ratio": 1.070731626627258,
-     "tv_share": 0.4552649215560473,
-     "wedge_rate_5": 0.06444534848585427
-    },
-    "flags": [
-     "confidence_low",
-     "quotes_verified: 15 of 15"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.35,
+     "capex_to_revenue": 0.38,
      "fade_years": 10,
      "long_run_op_margin": 0.42,
      "op_margin": [
-      0.47,
+      0.465,
       0.45,
-      0.44,
-      0.43,
-      0.43
+      0.435,
+      0.425,
+      0.42
      ],
      "return_on_new_investment_long_run": 0.1,
      "rev_growth": [
-      0.03,
+      0.035,
       0.05,
-      0.07,
-      0.06,
-      0.04
+      0.05,
+      0.04,
+      0.03
      ],
      "terminal_growth": 0.03
     },
@@ -272,8 +111,8 @@
       0.5
      ],
      "rev_growth_y3": [
-      0.02,
-      0.11
+      0.0,
+      0.09
      ],
      "terminal_growth": [
       0.02,
@@ -288,40 +127,36 @@
         "quote": "Since the beginning of 2022, we have ordered 35 newbuilding containerships with an aggregate capacity of 232,948 TEU, eight of which have been delivered to us, for an aggregate purchase price of $2.7 billion."
        },
        {
-        "id": "F1",
-        "quote": "Advances for vessels under construction and vessel acquisition | 428,147 | 265,838"
-       },
-       {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.3166"
+        "id": "F3",
+        "quote": "Vessels additions and advances for vessels under construction and vessel acquisition | (296,690) | (659,343) | (268,035)"
        }
       ],
-      "quotes_given": 3,
-      "why": "Of 35 newbuilds ordered for $2.7 billion, only eight are delivered, so about $2 billion remains on the container orderbook, plus $297.3 million for the Newcastlemaxes. Part of this is already paid as advances. Spread over 2026-2029 this implies roughly 0.35-0.45 of revenue, in line with the 5-year pooled 0.3166. I hold 0.35 because spending falls after 2029 unless new orders are placed."
+      "quotes_given": 2,
+      "why": "About $2.7B was ordered for 35 containerships (only 8 delivered), plus $297.3M for four Newcastlemaxes due in 2028. The remaining deliveries run through 2029, so capex is heavy in years 1-5, well above the 0.3166 pooled average, and I use 0.38."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P2",
-        "quote": "The staggered maturities of our containership charters also reduce our exposure to any stage in the shipping cycle."
+        "quote": "As of February 25, 2026, the charters for two of our containerships are scheduled to expire in 2026 and 21 in 2027."
        }
       ],
       "quotes_given": 1,
-      "why": "The charter book is staggered and about 72.6% contracted for 2027-2028 falling to far less beyond. Normalization from high-cycle rates takes several years, so a 10-year fade is reasonable."
+      "why": "Contract coverage falls from 99.5% in 2026 to 37.2% in 2029-2030 and 9.6% in 2031-2038. Margins and growth therefore move onto market-based levels over about a decade, and I use 10 years."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2025-12-31 | $1,042.5 million | 0.0280 | 0.4785"
+        "quote": "2022-12-31 | $993.3 million | 0.4407 | 0.6578"
        },
        {
-        "id": "P2",
-        "quote": "The staggered maturities of our containership charters also reduce our exposure to any stage in the shipping cycle."
+        "id": "REC",
+        "quote": "2025-12-31 | $1,042.5 million | 0.0280 | 0.4785"
        }
       ],
       "quotes_given": 2,
-      "why": "A shipping lessor's margin should revert toward the through-cycle level. The 2009-2020 non-distressed years sat around 0.43, and the 2021-2025 average is lifted by a boom. The drybulk spot business is lower-margin and more volatile, so I set 0.42 with a wide range."
+      "why": "Shipping is cyclical, and the 17-year median margin is about 0.43. The 2021-23 peak (0.6578 in 2022) was cyclical and partly non-cash. The newer fleet is more efficient and has long charters, so I settle slightly below the long-run median, at 0.42."
      },
      "op_margin": {
       "quotes": [
@@ -331,36 +166,24 @@
        },
        {
         "id": "P2",
-        "quote": "the charters for two of our containerships are scheduled to expire in 2026 and 21 in 2027"
-       },
-       {
-        "id": "P2",
-        "quote": "Charter rate levels for containerships generally improved in 2024 and remained at relatively high levels throughout 2025 and in early 2026"
+        "quote": "however, to the extent charter rates are at levels lower than were prevailing when we entered into expiring charters, we may have to re-charter these vessels for rates lower than the level of their current charter rates."
        }
       ],
-      "quotes_given": 3,
-      "why": "Operating income has fallen from 580,661 to 498,766 over 2023-2025 while revenue rose. The company says charter rates are high now, so 21 vessels expiring in 2027 may re-charter lower. Newbuilds also add depreciation and are chartered at about $32.5-35k per day, below the rates on some legacy ships. I therefore step the margin down gradually."
+      "quotes_given": 2,
+      "why": "The margin was 0.4785 in 2025 and has fallen for three years as depreciation, drydock amortization and G&A grew faster than revenue. New vessels carry charters of about $32-35k per day, below the $50k+ rates on older large ships that reprice from 2027. I therefore expect further gradual compression, partly offset by stronger drybulk rates in 2026."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "return on tangible capital 0.1228"
-       },
-       {
-        "id": "REC",
         "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
        }
       ],
-      "quotes_given": 2,
-      "why": "Base-year return on tangible capital is 12.3% at a cyclically high-ish margin, while the zero-value-add return is 9.46%. Newbuild ships bought at cycle prices on 5-10 year charters earn near the cost of capital, so I use about 10%."
+      "quotes_given": 1,
+      "why": "Ships are bought and chartered near replacement cost, so returns on new vessels trend toward the cost of capital. The no-value-added return is 0.0946 and the current tangible return is 0.1228. I use about 0.10, a small premium for long contracts and modern eco-design."
      },
      "rev_growth": {
       "quotes": [
-       {
-        "id": "P1",
-        "quote": "27 under construction containerships aggregating 174,550 TEUs"
-       },
        {
         "id": "P4",
         "quote": "Operating revenues increased by $12.2 million, to $274.4 million in the three months ended June 30, 2026 from $262.2 million in the three months ended June 30, 2025."
@@ -370,57 +193,57 @@
         "quote": "Total contracted cash operating revenues, based on concluded charter contracts through the date of this annual report, currently stand at $4.3 billion, including newbuildings."
        }
       ],
-      "quotes_given": 3,
-      "why": "H1 2026 shows container revenue slightly down and drybulk sharply up, so year 1 growth is low. Growth then picks up as 27 newbuild containerships (about 37% more TEU than the current fleet) deliver through 2029, mostly on contracted charters. Re-chartering of expiring vessels at possibly lower rates and the uncontracted ships limit the pace."
+      "quotes_given": 2,
+      "why": "Newbuilding containership deliveries (27 vessels through 2029, 21 already chartered) and a larger drybulk fleet add revenue. First-half 2026 container revenue was slightly down, and the 2027 expiries of 21 charters may reprice lower, so growth is modest and fades to about 3%."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
        }
       ],
       "quotes_given": 1,
-      "why": "A fleet owner's mature growth is roughly inflation-like, below the code anchor, because shipping capacity is cyclical and capital-intensive. I use 3%."
+      "why": "A fleet lessor in a mature, cyclical industry should grow with nominal trade, slightly below the long-run anchor of 0.0375. I use 3%."
      }
     },
     "risks": [
      {
       "bear_value": 0.34,
       "input_hit": "long_run_op_margin",
-      "risk": "Container charter rates fall as 21 vessels re-charter in 2027 and the fleet is re-priced, and drybulk spot rates revert lower, pushing margins well below the fade path."
+      "risk": "The 21 charters expiring in 2027, and later ones, are re-chartered at much lower rates as the container market weakens, compressing margins structurally."
      },
      {
-      "bear_value": 0.02,
+      "bear_value": 0.0,
       "input_hit": "rev_growth",
-      "risk": "Delayed newbuild deliveries, charterer defaults or early terminations, or weak re-chartering hold revenue growth flat."
+      "risk": "Weak spot drybulk rates and lower utilization, together with charterer default or early termination, cut revenue growth."
      },
      {
-      "bear_value": 0.08,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Heavy newbuild and drybulk spending funded by debt and JOLCO financing earns less than its cost of capital in a weak market."
+      "bear_value": 0.5,
+      "input_hit": "capex_to_revenue",
+      "risk": "Newbuilding cost overruns or heavier capex than assumed, funded by debt, hurt free cash flow and returns."
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.34,
       "rev_growth": [
-       -0.020000000000000004,
+       -0.015,
        0.0,
-       0.020000000000000004,
-       0.009999999999999995,
-       -0.010000000000000002
+       0.0,
+       -0.010000000000000002,
+       -0.020000000000000004
       ],
       "terminal_growth": 0.02
      },
      "bull": {
       "long_run_op_margin": 0.5,
       "rev_growth": [
-       0.06999999999999999,
+       0.075,
        0.09,
-       0.11,
-       0.09999999999999999,
-       0.07999999999999999
+       0.09,
+       0.07999999999999999,
+       0.06999999999999999
       ],
       "terminal_growth": 0.04
      }
@@ -428,24 +251,288 @@
     "situation": {
      "base_year_representative": "yes",
      "cyclical": "yes",
-     "margin_position": "The 2025 operating margin of 47.9% is below the 5-year median of about 53% but above the roughly 43% median of the pre-2021 history. It has fallen from 59.6% in 2023 as depreciation, drydocking amortization and G&A grew faster than revenue. The 2021-2023 peak reflected a very strong charter market, and older vessels are still on high legacy rates.",
-     "why": "2025 revenue grew 2.8% and utilization was high, with no impairment or one-offs in operating income. Multi-year charters smooth revenue. The margin is drifting down as expiring charters reset and newbuilds on lower rates add depreciation, so I fade it toward the longer-run median rather than hold 2025. The drybulk spot segment adds cyclical upside and downside."
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt of about $1.16B is roughly offset by cash, but the large newbuilding program and the JOLCO financings in 2026 will raise debt materially relative to the base year."
+     },
+     "margin_position": "The 2025 operating margin of 0.4785 is well below the 2022 peak of 0.6578 and below the 5-year median of about 0.53. It is close to the 17-year median of about 0.43. The 2021-2023 margins were lifted by a strong charter market and non-cash amortization of below-market assumed charters. Depreciation, drydock amortization and G&A are rising as the fleet grows, and older high-rate charters reprice down as they expire.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The company has paid zero income tax in each of the last three years, consistent with a Marshall Islands shipowner that is not taxed on shipping income."
+     },
+     "why": "2025 revenue of $1,042.5M and a margin of 0.4785 are in line with the fixed-rate charter book and with 98.2% container utilization. Drybulk is only about 8% of revenue, so spot-rate noise is small. The base year is a reasonable but slightly elevated starting point, because 2027 charter expiries will reprice the older high-rate vessels."
     },
     "value_at_old_defaults": 386.27810275068936,
     "values": {
-     "base": 326.07687526207724,
-     "bear": 224.94509707596734,
-     "bull": 468.9467622292136
+     "base": 276.3794027180091,
+     "bear": 188.18212118730608,
+     "bull": 403.4039906984255
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 29541000.0,
+       "printed": 29541,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Gain/(loss) on investments | 29,541 | (25,179) | 17,867"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Gain on investments (marketable securities), swinging from a (25,179) loss in 2024"
+      },
+      {
+       "amount": 2499000.0,
+       "printed": 2499,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on debt extinguishment, net | (2,499) | 0 | (2,254)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on debt extinguishment from refinancing"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1157536000.0,
+     "excess_cash_before": 1157536000.0,
+     "k0_after": 78251789.82811242,
+     "k0_before": 51209789.82811242,
+     "k0_interest": 0.0,
+     "one_offs_charge": 2499000.0,
+     "one_offs_gain": 29541000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 420514210.1718876,
+     "x0_before": 447556210.1718876
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "equity_value": 3765387650.3024626,
+     "seam_ratio": 1.0673019371135026,
+     "tv_share": 0.43247882564517703,
+     "wedge_rate_5": 0.09287028175697495
+    },
+    "flags": [
+     "debt_level_representative_no: Debt of about $1.16B against $1.04B of cash will likely rise as the 27 containership and four Newcastlemax newbuildings are funded, and further JOLCO financings were added in the first half of 2026.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.35,
+     "fade_years": 10,
+     "long_run_op_margin": 0.42,
+     "op_margin": [
+      0.465,
+      0.45,
+      0.44,
+      0.435,
+      0.43
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.03,
+      0.04,
+      0.05,
+      0.05,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.5059 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.35,
+      0.5
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.09
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Advances for vessels under construction and vessel acquisition | 428,147 | 265,838"
+       },
+       {
+        "id": "P2",
+        "quote": "In early 2026, we further expanded our drybulk presence by ordering four Newcastlemax bulk carriers scheduled for delivery in 2028 for an aggregate purchase price of $297.3 million."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Remaining shipyard payments on about 27 containerships and four Newcastlemaxes ($297.3M) fall mainly in 2026-2029, and only 428M of advances had been paid by year-end 2025. That implies capex of roughly a third of revenue over years 1 to 5, within a pooled history of 0.32."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The staggered maturities of our containership charters also reduce our exposure to any stage in the shipping cycle."
+       },
+       {
+        "id": "P1",
+        "quote": "Total contracted cash operating revenues, based on concluded charter contracts through the date of this annual report, currently stand at $4.3 billion, including newbuildings."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Charter maturities are staggered and the contracted backlog of $4.3 billion runs off over the next several years, so the margin converges to market-level economics over roughly a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2020-12-31 | $461.6 million | 0.0321 | 0.4322"
+       },
+       {
+        "id": "P2",
+        "quote": "to the extent charter rates are at levels lower than were prevailing when we entered into expiring charters, we may have to re-charter these vessels for rates lower than the level of their current charter rates."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Shipping is cyclical. The current margin is above the company's pre-2021 range (0.43 to 0.45) but below its recent 5-year median, and the base rate says a margin above the long-run median keeps only about half of the gap. Current charters were struck in a strong market and may reset lower, so I fade to about 0.42."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Amortization of deferred drydocking and special survey costs | (44,074) | (29,161) | (18,663)"
+       },
+       {
+        "id": "P4",
+        "quote": "Time Charter Equivalent rate per day, which increased to $28,007 per day in the six months ended June 30, 2026, from $14,386 per day in the six months ended June 30, 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin was 0.4785 in 2025, down from 0.5334 in 2024, with drydock amortization rising from 29.2M to 44.1M, and 2026 management fees are rising. Stronger drybulk TCE helps year 1. New vessels add depreciation, and 2027 re-chartering plus the end of the prepayment revenue pull the margin down gradually toward the long-run level."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Newbuilds are chartered at roughly $32,500-$42,000 per day for 5-10 years, which gives an unlevered return near the cost of equity, so growth adds little value. I set the return at 0.09, slightly below the 0.0946 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Operating revenues increased by $12.2 million, to $274.4 million in the three months ended June 30, 2026 from $262.2 million in the three months ended June 30, 2025."
+       },
+       {
+        "id": "P1",
+        "quote": "Since the beginning of 2022, we have ordered 35 newbuilding containerships with an aggregate capacity of 232,948 TEU, eight of which have been delivered to us, for an aggregate purchase price of $2.7 billion."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "First-half 2026 revenue is up only about 2.5%: the container segment fell 1.6% while drybulk rose 50% on stronger rates. Newbuilding deliveries through 2029 add capacity, but re-chartering of expiring vessels and the end of the 2022 prepayment amortization in January 2027 offset part of it, so growth stays modest and peaks around year 3."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, cyclical vessel owner with an ageing fleet should grow below the 0.0375 nominal anchor, so I use 0.025."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.33,
+      "input_hit": "long_run_op_margin",
+      "risk": "Container charter rates fall at re-chartering (21 vessels expire in 2027, 49 in 2027-2028) and drybulk spot rates revert, compressing margins."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Newbuilding delivery delays, uncontracted vessels (four containerships without charters) or lower charter rates slow revenue growth."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Returns on newbuild investment fall below the cost of capital if charter rates reset lower, so growth destroys value."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.35,
+      "rev_growth": [
+       -0.020000000000000004,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       -0.020000000000000004
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.5,
+      "rev_growth": [
+       0.06999999999999999,
+       0.07999999999999999,
+       0.09,
+       0.09,
+       0.06999999999999999
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt of about $1.16B against $1.04B of cash will likely rise as the 27 containership and four Newcastlemax newbuildings are funded, and further JOLCO financings were added in the first half of 2026."
+     },
+     "margin_position": "The 2025 operating margin of 0.4785 is below the 5-year median of about 0.53 and has fallen each year since the 2022 peak of 0.6578. It is still above the company's pre-2021 history of about 0.43 to 0.45. The decline reflects non-cash revenue from assumed below-market charters running off (21.2M in 2023, 4.5M in 2024, nil in 2025), and rising depreciation, drydock amortization and G&A. Charter rates are currently firm, and the 21 containership charters expiring in 2027 will reset to market.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "Income taxes were zero in 2023-2025 for this Marshall Islands shipping owner, and nothing in the evidence points to a change."
+     },
+     "why": "2025 has no vessel sale gains, the container fleet was 98.2% utilised, and the drybulk fleet was 98% utilised. The margin is already close to a level the multi-year charter book can sustain. Below-market charter amortization is gone, but the 2025 pretax income includes a 29.5M investment gain that sits below operating income and is handled as a one-off. Operating margin rather than net income is the base."
+    },
+    "value_at_old_defaults": 386.27810275068936,
+    "values": {
+     "base": 283.2501674538078,
+     "bear": 200.1952691211243,
+     "bull": 400.1409216851134
     }
    }
   },
   "situation_unclear": false,
   "value_at_old_defaults": 386.27810275068936,
-  "version": "decided.v1 2026-11-18 WO_NC7"
+  "value_at_old_defaults_quoted": 386.27810275068936,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
  },
- "equity_value": 5784393859.965738,
+ "equity_value": 5171061452.637899,
  "family": "commodity",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 18480301.0,
  "flags": [
   "Danaos announced that it is exploring a carve-out and sale of a minority stake in its dry bulk segment and has mandated investment banking firms to advise on a potential equity placement and listing in the Norwegian market."
@@ -459,12 +546,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 299.92957993210376,
-  "3000": 326.07687526207724
+  "1000": 276.3794027180091,
+  "3000": 283.2501674538078
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "on request (new valuation method, example; valuation inputs decided by claude-sonnet-5-5)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1481,17 +1568,17 @@
   ]
  },
  "ticker": "DAC",
- "upside": 1.164588130582573,
+ "upside": 0.9350719390604176,
  "valuation": null,
- "value_base": 313.0032275970905,
- "value_bear": 232.22853385610875,
- "value_bull": 422.80251195186554,
+ "value_base": 279.81478508590845,
+ "value_bear": 194.1886951542152,
+ "value_bull": 401.7724561917695,
  "value_per_filed_share": {
-  "base": 313.0032275970905,
-  "bear": 232.22853385610875,
-  "bull": 422.80251195186554
+  "base": 279.81478508590845,
+  "bear": 194.1886951542152,
+  "bull": 401.7724561917695
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +32.5 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +27.7 points a year against the required return over 3 years"
 }

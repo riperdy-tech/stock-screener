@@ -1,11 +1,479 @@
 {
- "alpha_pts": 1.8633503482613083,
+ "alpha_pts": 0.04203485994057066,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 68,
  "claims_supported": 57,
  "date": "2026-11-17T07:09:47Z",
- "equity_value": 9050083939.369455,
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0196 and margin 0.2476, margin 0.1431 (persist), growth 0.0375, terminal RONIC 0.0815 (equity return r 0.1058), F 10",
+  "run_gap": 0.04258944646315576,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 130354000.0,
+     "excess_cash_before": 130354000.0,
+     "k0_after": 81836335.08353414,
+     "k0_before": 81836335.08353414,
+     "k0_interest": 88287000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 70634917.95803657,
+     "x0_before": 70634917.95803657
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7789611132.368364,
+     "seam_ratio": 1.0131006449967326,
+     "tv_share": 0.31516560479388633,
+     "wedge_rate_5": -0.003456156715733382
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.019,
+     "fade_years": 10,
+     "long_run_op_margin": 0.21,
+     "op_margin": [
+      0.235,
+      0.225,
+      0.225,
+      0.222,
+      0.22
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.025
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0196 and margin 0.2476, margin 0.1431 (persist), growth 0.0375, terminal RONIC 0.0815 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 57
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.17,
+      0.24
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property, equipment, and software | (53,615) | (45,120)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0220"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 capex of $53.6 million is about 1.7% of revenue, against a five-year pooled average of 2.2%. Continued DTC and store investment points to about 1.9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "several footwear companies, including ours, have experienced periods of rapid growth in revenues and earnings followed by periods of declining revenues and losses"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin and growth glide from the current strong, tariff-lightened level to a normal level over about 10 years, reflecting moderate brand durability and fashion-cycle risk."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $3,962.3 million | 0.1146 | 0.2617"
+       },
+       {
+        "id": "P2",
+        "quote": "The footwear industry is highly competitive."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2021-2024 margins of 24-29% reflect a hot-brand peak, and the company's own history shows margins near or below 10% before 2019. A competitive, fashion-sensitive footwear business with a high-margin Crocs Brand and a weaker HEYDUDE brand should fade toward about 21%, below the current adjusted level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 291,927 | 207,660 | 778,449 | 3,118"
+       },
+       {
+        "id": "P4",
+        "quote": "These refunds are non-recurring."
+       },
+       {
+        "id": "P4",
+        "quote": "The tariffs that remain in effect continue to increase our product costs."
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted operating margin to expand modestly from 22.5%, up from our previous guidance of expansion from 22.3%."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Nine-month 2026 GAAP operating income of $778 million includes about $64 million of refunds that the company says will not recur. Year 1 is therefore about 23.5% GAAP, and years 2-5 settle near 22%, in line with the adjusted base of 22.5%. Remaining tariffs and SG&A growing faster than revenue cap the margin, while cost savings and lower duties support it."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2693"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light (outsourced manufacturing) and earned a 26.9% return on tangible capital in the base year. I assume new investment earns a lower 20% as competition and brand maturity erode returns. This stays well above the 8.15% no-value-added threshold."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenues to be up approximately 3% compared to full year 2025, up from our previous guidance of up 1% to 2% at currency rates as of October 26, 2026."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Management guides FY2026 revenue up about 3%, with Crocs Brand up about 4% and HEYDUDE flat. I hold roughly 3% afterward. DTC and international growth offset soft wholesale and a maturing brand, and I trim year 5 to 2.5%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The long-run growth anchor is 3.75%. For a mature, brand-dependent footwear company I use 3%, a little below it, given periods of declining revenue in the industry."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "Brand fade or heavy promotion in Crocs Brand clogs and weak HEYDUDE, with wholesale partners cautious, compresses margins toward historical levels"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Demand slowdown from weak discretionary spending, Middle East distributor disruption and cautious wholesale cuts growth"
+     },
+     {
+      "bear_value": 0.19,
+      "input_hit": "op_margin",
+      "risk": "Underlying gross margin falls when refunds end and the remaining tariffs stay or rise, so the year 2-5 margin runs below 22%"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       -0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.24,
+      "rev_growth": [
+       0.055,
+       0.055,
+       0.055,
+       0.055,
+       0.05
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $1.2-1.3 billion is roughly 1x earnings power and has been stable while cash flow is used for buybacks, so it is a sustainable level relative to size."
+     },
+     "margin_position": "The FY2025 GAAP margin of 3.7% is depressed by $737 million of non-cash HEYDUDE impairments, not by the underlying business. Adjusted margin was about 22.5%. FY2026 GAAP margin is lifted by about $64 million of one-time tariff refunds, and the margin is still above the company's long history, where it was near or below 10% before 2019.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate in the record is 22.6%, but the filed FY2025 effective rate was 211% and past rates swung widely on IP-transaction and valuation-allowance effects, though the 2026 nine-month rate is about 22%."
+     },
+     "why": "FY2025 operating income of $149.5 million is after $738.1 million of impairments, so the 3.7% margin says little about earnings power. The 2026 nine-month run-rate and the adjusted margin of about 22.5% are better anchors, but the 2021-2024 margin of 24-29% was a peak. Crocs has also gone through boom-bust cycles (2014-2017 margins at or below zero), so I fade the margin below recent levels."
+    },
+    "value_at_old_defaults": 99.8804256030692,
+    "values": {
+     "base": 159.3894888919191,
+     "bear": 115.49342023603216,
+     "bull": 215.3357071316628
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 130354000.0,
+     "excess_cash_before": 130354000.0,
+     "k0_after": 81836335.08353414,
+     "k0_before": 81836335.08353414,
+     "k0_interest": 88287000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 70634917.95803657,
+     "x0_before": 70634917.95803657
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7459797356.900156,
+     "seam_ratio": 1.0116029411147538,
+     "tv_share": 0.3091461142132239,
+     "wedge_rate_5": -0.0035601288325851337
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.018,
+     "fade_years": 10,
+     "long_run_op_margin": 0.2,
+     "op_margin": [
+      0.232,
+      0.225,
+      0.22,
+      0.215,
+      0.21
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.03,
+      0.035,
+      0.03,
+      0.03,
+      0.025
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0196 and margin 0.2476, margin 0.1431 (persist), growth 0.0375, terminal RONIC 0.0815 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 57
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.16,
+      0.23
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property, equipment, and software | (53,615) | (45,120)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0220"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has run 1.3% to 1.7% of revenue recently, with 9-month 2026 spending of $53.6 million on revenue of $3.14 billion. The 5-year pool is 2.2%, so I use a figure between the two to allow for continued store and DTC investment."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We face significant competition."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years is a middle value for moving from the elevated current margin and growth rates toward the long-run level, given a brand-dependent business with no hard evidence of how long the premium lasts."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $3,962.3 million | 0.1146 | 0.2617"
+       },
+       {
+        "id": "P2",
+        "quote": "periods of rapid growth in revenues and earnings followed by periods of declining revenues and losses"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company earned 24.9% to 26.2% in 2023 to 2024 and about 22.5% adjusted now. It admits that footwear brands see periods of declining revenues, and it has large competitors. I assume a long-run margin below the current level, in the high teens to low 20s."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted operating margin to expand modestly from 22.5%"
+       },
+       {
+        "id": "P4",
+        "quote": "These refunds are non-recurring."
+       },
+       {
+        "id": "P4",
+        "quote": "The tariffs that remain in effect continue to increase our product costs."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 starts from the guided adjusted margin of about 22.5%, plus a modest uplift from the roughly $64 million of one-time tariff refunds booked in cost of sales. After that the margin steps down gradually as the refund benefit drops out, remaining tariffs keep raising cost, and competitive and promotional pressure builds."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2693; tax rate 0.2259"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0815."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is very high because the business is asset-light and outsources manufacturing. I assume new investment earns less than that, but well above the 0.0815 level at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenues to be up approximately 3% compared to full year 2025"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $4,102.1 million | 0.0353 | 0.2491"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides 2026 revenue up about 3%, with Crocs Brand up about 4% and HEYDUDE flat. After that I expect low-single-digit growth from international expansion and DTC, offset by cautious wholesale and a large revenue base. Growth slows toward year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature global footwear brand should grow at or slightly below the long-run nominal growth anchor, because of brand fashion risk and competition."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariff costs return or rise, promotions increase, and HEYDUDE or the Crocs clog fades, compressing margins structurally"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Wholesale softness, weak consumer and Middle East disruption stall revenue growth"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Fashion-brand fade lowers the return on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.16,
+      "rev_growth": [
+       0.0,
+       0.0050000000000000044,
+       0.0,
+       0.0,
+       -0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.23,
+      "rev_growth": [
+       0.055,
+       0.060000000000000005,
+       0.055,
+       0.055,
+       0.05
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Borrowings of about $1.2 to 1.3 billion are roughly 1.3x annual operating income and are the level the company has held while buying back stock, though net borrowing is rising slightly."
+     },
+     "margin_position": "The FY2025 GAAP operating margin of 3.7% is depressed by $738.1 million of non-cash HEYDUDE impairments. Underlying (adjusted) margin is about 22.5%, in line with the 24.9% to 26.2% of 2023 to 2024 after tariff duties. The 2026 GAAP margin is lifted a little by one-time tariff refunds. The business is fashion and brand driven rather than commodity cyclical, so I fade the margin down modestly from the current high level.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The FILED RECORD shows 0.2259, and the 9-month 2026 tax of $161.0 million on pretax income of $720.2 million is about 22%, although the history of the rate is volatile because of IP transactions and valuation allowances."
+     },
+     "why": "FY2025 operating income of $149.5 million includes $737 million of impairment charges, so it is not a usable earnings base. 2026 year-to-date operating margin is 24.8% and includes about $64 million of non-recurring IEEPA refunds. I therefore start from an adjusted margin of about 22.5% and fade it, since the company says it has seen booms followed by declines before and faces pricing pressure."
+    },
+    "value_at_old_defaults": 99.8804256030692,
+    "values": {
+     "base": 152.74271989415848,
+     "bear": 110.90028209091065,
+     "bull": 205.77541071223033
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 99.8804256030692,
+  "value_at_old_defaults_quoted": 99.8804256030692,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 8460031386.937846,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 54208000.0,
@@ -15,7 +483,7 @@
   "Following the Supreme Court's IEEPA tariff ruling and the Court of International Trade's refund order, Crocs had received about $67 million of IEEPA tariff refunds, including interest. About $64 million was booked as a benefit in cost of sales in the third quarter. Management calls the refunds non-recurring."
  ],
  "in_code_book": false,
- "ke": 0.10608180622416283,
+ "ke": 0.10578180622416283,
  "market_cap_at_publish": 7260678366,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +491,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 166.9510762132795,
-  "3000": 133.0628293075268
+  "1000": 159.3894888919191,
+  "3000": 152.74271989415848
  },
  "seeds_agree": false,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -829,199 +1297,17 @@
   ]
  },
  "ticker": "CROX",
- "upside": 0.24645156873341323,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: long_run_op_margin (1000 up, 3000 none)",
-   "held_at_record: rev_growth.y1 model 0.0300 valued at 0.0196",
-   "held_at_record: op_margin.y1 model 0.2229 valued at 0.2476"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s38",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "regulation",
-    "evidence": [
-     "P4.s18",
-     "P6.s25",
-     "P6.s42"
-    ],
-    "input": "op_margin.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P3.s70",
-     "P6.s25",
-     "Y2024-12-31"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P3.s70",
-     "P6.s25",
-     "Y2024-12-31"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P3.s70",
-     "P6.s25",
-     "Y2024-12-31"
-    ],
-    "inherited_from": "normalized.margin",
-    "input": "long_run_op_margin"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "up",
-   "normalized.margin": "up",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "down",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS (UNAUDITED) - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nRevenues | $ 1,042,583 | $ 996,301 | $ 3,143,508 | $ 3,083,007\nCost of sales | 352,849 | 413,293 | 1,230,122 | 1,249,614\nGross profit | 689,734 | 583,008 | 1,913,386 | 1,833,393\nSelling, general and administrative expenses | 397,807 | 375,348 | 1,131,636 | 1,092,160\nGoodwill impairment | 0 | 0 | 0 | 307,000\nAsset impairments | 0 | 0 | 3,301 | 431,115\nIncome from operations | 291,927 | 207,660 | 778,449 | 3,118\nForeign currency gains (losses), net | 1,276 | 2,957 | (2,651) | 8,264\nInterest income | 3,343 | 531 | 4,261 | 1,235\nInterest expense | (19,059) | (21,711) | (59,427) | (67,000)\nOther (expense) income, net | (53) | (9) | (431) | 143\nIncome (loss) before income taxes | 277,434 | 189,428 | 720,201 | (54,240)\nIncome tax expense | 60,679 | 43,612 | 161,003 | 132,123\nNet income (loss) | $ 216,755 | $ 145,816 | $ 559,198 | $ (186,363)\nNet income (loss) per common share:\nBasic (in dollars per share) | $ 4.57 | $ 2.72 | $ 11.43 | $ (3.38)\nDiluted (in dollars per share) | $ 4.52 | $ 2.70 | $ 11.32 | $ (3.38)\nWeighted average common shares outstanding:\nBasic (in shares) | 47,413 | 53,641 | 48,925 | 55,169\nDiluted (in shares) | 47,954 | 53,989 | 49,418 | 55,169"
-   },
-   "P3.s70": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "\u2022Asset impairments were $738.1 million, primarily driven by the partial impairment of the HEYDUDE indefinite-lived trademark and HEYDUDE Brand reporting unit goodwill."
-   },
-   "P4.s18": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "These refunds are non-recurring."
-   },
-   "P6.s25": {
-    "kind": "release",
-    "period": "2026-10-29",
-    "text": "Adjusted income from operations of $232 million increased 11.7% from $208 million, resulting in adjusted operating margin of 22.3% compared to 20.8%."
-   },
-   "P6.s38": {
-    "kind": "release",
-    "period": "2026-10-29",
-    "text": "\u2022Revenues to be up approximately 3% compared to full year 2025, up from our previous guidance of up 1% to 2% at currency rates as of October 26, 2026."
-   },
-   "P6.s42": {
-    "kind": "release",
-    "period": "2026-10-29",
-    "text": "\u2022Adjusted operating margin to expand modestly from 22.5%, up from our previous guidance of expansion from 22.3%."
-   },
-   "Y2024-12-31": {
-    "kind": "filed_record",
-    "period": "2024-12-31",
-    "text": "Filed annual record, fiscal year ended 2024-12-31 (10-K, accession 0001334036-26-000006): revenue $4,102.1 million; operating income $1,021.9 million; operating margin 24.9%; net income $950.1 million; depreciation and amortization $69.8 million; capital expenditure $69.3 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.022049624939556856,
-    0.022049624939556856,
-    0.022049624939556856,
-    0.022049624939556856,
-    0.022049624939556856
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.14306061971617556,
-   "normalized.margin": 0.14306061971617556,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.24763703480315621,
-   "op_margin.y2": 0.14306061971617556,
-   "rev_growth.y1": 0.019624022910100347,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08166575192811748
-  },
-  "numbers": {
-   "capex": [
-    0.022049624939556856,
-    0.022049624939556856,
-    0.022049624939556856,
-    0.022049624939556856,
-    0.022049624939556856
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.23931352734259076,
-   "normalized.margin": 0.23931352734259076,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.22285225203349185,
-   "op_margin.y2": 0.23931352734259076,
-   "rev_growth.y1": 0.03,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08166575192811748
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.22285225203349185,
-    "model_option": "persist",
-    "record": 0.24763703480315621,
-    "record_option": "ytd"
-   },
-   "rev_growth.y1": {
-    "model": 0.03,
-    "model_option": "guidance",
-    "record": 0.019624022910100347,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "p25",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "p25",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The packet does not state a full-year 2026 operating margin guidance figure; the cited sentence gives only the 22.5% base from which adjusted margin is expected to expand modestly.",
-   "How much of the 9-month 2026 operating margin of 24.8% is non-recurring beyond the IEEPA refunds (about $64 million in cost of sales) is not fully quantified, and further refunds of about $75 million to $80 million in total are of uncertain timing.",
-   "The 2027 and later revenue and margin outlook is not given in the evidence.",
-   "The effect of tariffs still in force and of Middle East conflict costs on future margins cannot be quantified from the evidence."
-  ],
-  "year": 3
- },
- "value_base": 166.9510762132795,
- "value_bear": 159.37398545870698,
- "value_bull": 174.52816696785203,
+ "upside": 0.16518470595724577,
+ "valuation": null,
+ "value_base": 156.06610439303878,
+ "value_bear": 113.19685116347141,
+ "value_bull": 210.55555892194656,
  "value_per_filed_share": {
-  "base": 166.9510762132795,
-  "bear": 159.37398545870698,
-  "bull": 174.52816696785203
+  "base": 156.06610439303878,
+  "bear": 113.19685116347141,
+  "bull": 210.55555892194656
  },
  "valued": true,
  "verdict": "WATCH",
- "verdict_reason": "expected return +1.9 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict_reason": "expected return +0.0 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

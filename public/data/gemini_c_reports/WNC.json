@@ -1,13 +1,496 @@
 {
- "alpha_pts": 14.868509221072145,
+ "alpha_pts": 35.13242599021271,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 64,
  "claims_supported": 61,
  "date": "2026-11-17T14:19:49Z",
- "equity_value": 621676451.4415531,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Long-term debt has already risen to 540,257 thousand from 442,852 thousand, including $150 million of new convertible notes, so the base-year debt of $442.9 million understates the current level.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Debt has already risen from 442.9 million at base to 540.3 million at September 30, 2026, funded by convertible notes and revolver draws while operations burned cash.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0200 and margin -0.0816, margin 0.1330 (persist), growth 0.0375, terminal RONIC 0.0647 (equity return r 0.0946), F 10",
+  "run_gap": 0.05601164400221083,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 31923000.0,
+     "excess_cash_before": 31923000.0,
+     "k0_after": 25891314.05703503,
+     "k0_before": 25891314.05703503,
+     "k0_interest": 21316000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 218840065.45799828,
+     "x0_before": 218840065.45799828
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 712950695.2291688,
+     "seam_ratio": 0.9615088825802711,
+     "tv_share": 0.5256531869728409,
+     "wedge_rate_5": 0.0031810043744393336
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Long-term debt has already risen to 540,257 thousand from 442,852 thousand, including $150 million of new convertible notes, so the base-year debt of $442.9 million understates the current level.",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.025,
+     "fade_years": 8,
+     "long_run_op_margin": 0.065,
+     "op_margin": [
+      -0.077,
+      0.025,
+      0.055,
+      0.065,
+      0.065
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.058,
+      0.25,
+      0.1,
+      0.03,
+      -0.02
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0200 and margin -0.0816, margin 0.1330 (persist), growth 0.0375, terminal RONIC 0.0647 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 61
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.045,
+      0.085
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.18
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0292"
+       },
+       {
+        "id": "F3",
+        "quote": "Cash payments for capital expenditures | (8,946) | (20,207)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 2.9% of revenue, but 2026 capex is only $8.9M for nine months. Capacity additions for the 2027 dry van ramp argue for about 2.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $2,536.5 million | 0.0137 | 0.1230"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Cyclical margins normalize within about 8 years, in line with base-rate evidence on above-median or trough margins reverting."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2019-12-31 | $2,319.1 million | 0.0229 | 0.0616"
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $2,502.1 million | 0.3876 | 0.0666"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 17-year history shows margins of about 5 to 7% in normal years, with a 12% peak in 2023. I assume about 6.5%, with Parts & Services mix and trade remedies as modest upside and import competition and truck body weakness as downside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Gross profit as a percentage of net sales was 3.1% for the third quarter of 2026, compared to 4.1% for the same period in 2025."
+       },
+       {
+        "id": "P3",
+        "quote": "includes a $418.6 million non-cash charge for punitive damages stemming from the Product Liability Matter"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,542.8 million | -0.2075 | 0.1993"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 is deeply negative given the nine-month operating loss of $97.7M and a guided Q4 loss. Margins recover with volume absorption in 2027 to 2028, but readiness costs and materials pressure keep the early recovery modest. The 2025 filed margin is distorted and should not be used as a base."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0647."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth adds no value below 6.47%. Trailer assembly is capital-light, and a 6.5% margin on modest tangible capital supports returns above that threshold, but I discount the filed 1.0 figure and set 12%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Q4-2026 revenue outlook midpoint of $435 million, EPS outlook $(0.65)."
+       },
+       {
+        "id": "P6",
+        "quote": "Total backlog of $1,198 million as of September 30, 2026. An increase of 25% versus Q2-26"
+       },
+       {
+        "id": "P3",
+        "quote": "ACT is forecasting annual new trailer production levels for 2027, 2028, 2029, and 2030 of approximately 257,000, 297,000, 307,000, and 299,000, respectively."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 sales of $1,196.9M plus the Q4 midpoint of $435M give about $1.63B, roughly 6% above 2025. 2027 should rebound sharply on the record backlog and forecast industry production of 231,000 to 257,000 trailers, against 180,000 to 183,000 in 2026. Growth then slows as the cycle matures and flattens or turns slightly down in year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature cyclical trailer maker should grow with the economy, a little below the 3.75% anchor, given Parts & Services diversification and freight growth of about 3 to 4% a year."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "op_margin",
+      "risk": "The freight recession persists or the backlog fails to convert, so volume stays low and margins stay thin"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Canada and Mexico duties are not imposed or enforced, and imports keep pressuring trailer pricing and the long-run margin"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "The 2027 rebound is weaker than the ACT and FTR forecasts, so year-3 growth is lower"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.045,
+      "rev_growth": [
+       -0.042,
+       0.15,
+       0.0,
+       -0.07,
+       -0.12000000000000001
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.085,
+      "rev_growth": [
+       0.13799999999999998,
+       0.32999999999999996,
+       0.18,
+       0.10999999999999999,
+       0.059999999999999984
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Long-term debt has already risen to 540,257 thousand from 442,852 thousand, including $150 million of new convertible notes, so the base-year debt of $442.9 million understates the current level."
+     },
+     "margin_position": "The filed 2025 margin of 19.9% is not an operating level. It is inflated by an unusual litigation item in G&A, and 2024 (-18.3%) was distorted the same way. Underlying margins are thin: 2026 is deeply negative, with Q3 gross margin at 3.1% and Transportation Solutions gross margin at 1.0%, because the freight recession leaves factories under-absorbed. A rebound in dry van volume should lift margin back toward its long-run median of about 6 to 7%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 25.3% base-year rate is close to a normal US statutory-plus-state rate and the 2026 benefit-to-loss ratio is similar."
+     },
+     "why": "The 2025 operating margin of 19.9% includes the Product Liability Matter accounting, so it does not show earning power. 2026 is a trough year, with a nine-month operating loss and guided Q4 loss. Management points to a recovery in 2027 on a $1.2 billion backlog and industry forecasts, so I model 2026 as a loss year, a volume rebound in 2027, and margins settling near the historical median. I treat the 2026 margin as depressed and the 2025 margin as overstated."
+    },
+    "value_at_old_defaults": 40.48257731073889,
+    "values": {
+     "base": 19.256401233164663,
+     "bear": 6.926435496911556,
+     "bull": 47.586327718970715
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 31923000.0,
+     "excess_cash_before": 31923000.0,
+     "k0_after": 25891314.05703503,
+     "k0_before": 25891314.05703503,
+     "k0_interest": 21316000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 218840065.45799828,
+     "x0_before": 218840065.45799828
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 755733801.9623761,
+     "seam_ratio": 0.9731112209388562,
+     "tv_share": 0.5373545573913093,
+     "wedge_rate_5": 0.0033764272658138353
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Debt has already risen from 442.9 million at base to 540.3 million at September 30, 2026, funded by convertible notes and revolver draws while operations burned cash.",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.025,
+     "fade_years": 8,
+     "long_run_op_margin": 0.065,
+     "op_margin": [
+      -0.078,
+      0.025,
+      0.055,
+      0.07,
+      0.065
+     ],
+     "return_on_new_investment_long_run": 0.13,
+     "rev_growth": [
+      0.058,
+      0.22,
+      0.1,
+      0.03,
+      0.0
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0200 and margin -0.0816, margin 0.1330 (persist), growth 0.0375, terminal RONIC 0.0647 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 61
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.045,
+      0.08
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.17
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Cash payments for capital expenditures | (8,946) | (20,207)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0292"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was only 8,946 over nine months of 2026, far below the 5-year pooled ratio, as spending was cut and a facility sold. With dry van capacity being added for 2027 I assume spending normalizes slightly below the pooled 2.9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "The investigations concerning imports from Canada and Mexico remain pending."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margin and growth need several years to move from the post-recovery level to the long-run mid-cycle state, because the trade remedies and the Parts & Services mix shift play out slowly."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,542.8 million | -0.2075 | 0.1993"
+       },
+       {
+        "id": "P3",
+        "quote": "Operating profit in 2025 totaled $307.5 million and the operating margin was 19.9%."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2012-2023 history shows a mid-cycle margin of roughly 5 to 7% outside the distorted years, and a margin below the median tends to return to it. Parts & Services adds a modest mix tailwind, but input costs, imports and competition limit upside. The 19.9% base-year figure is distorted and I ignore it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "(Loss) income from operations | (20,026) | 57,646 | (97,680) | 367,446"
+       },
+       {
+        "id": "P4",
+        "quote": "Gross profit as a percentage of net sales was 3.1% for the third quarter of 2026, compared to 4.1% for the same period in 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 stays deeply negative given the nine-month loss and a guided Q4 loss. Margin turns positive in 2027 as volume absorbs fixed costs and readiness costs, then builds to 6 to 7% by 2029. Margins are not assumed to reach the 2023 peak because Transportation Solutions gross margin is near zero today."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0647."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.2526;"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Assembly-based trailer manufacturing needs little tangible capital: PP&E net is about $267 million against revenue near $1.6 to $2 billion. I set a moderate return well above the 6.47% no-value-added hurdle but far below the nonsensical 1.0 base-year figure."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Q4-2026 revenue outlook midpoint of $435 million, EPS outlook $(0.65)."
+       },
+       {
+        "id": "P6",
+        "quote": "Total backlog of $1,198 million as of September 30, 2026. An increase of 25% versus Q2-26"
+       },
+       {
+        "id": "P1",
+        "quote": "ACT is forecasting annual new trailer production levels for 2027, 2028, 2029, and 2030 of approximately 257,000, 297,000, 307,000, and 299,000, respectively."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is about $1.2 billion over nine months plus a Q4 midpoint of $435 million, so about 6% growth. Year 2 jumps on the 25% backlog rise and industry forecasts of 257,000 trailers in 2027 versus 183,000 in 2026; I haircut those forecasts. Growth then slows as the cycle matures."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "The truck trailer manufacturing industry historically has been, and is expected to be, cyclical"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Mature cyclical trailer manufacturer; I set long-run growth below the 3.75% nominal anchor because trailer demand follows freight volumes."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "rev_growth",
+      "risk": "Backlog fails to convert, or the freight recession persists, so 2027 volume recovery is much weaker than forecast"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins stay depressed because material costs and import pricing pressure persist (Canada/Mexico duties not enforced) and Parts & Services start-up costs keep dragging"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "op_margin",
+      "risk": "Liquidity squeeze: negative operating cash flow with the $40 million revolver block forces more debt or dilution"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.045,
+      "rev_growth": [
+       -0.012000000000000004,
+       0.15,
+       0.03,
+       -0.04000000000000001,
+       -0.07
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.128,
+       0.29000000000000004,
+       0.17,
+       0.1,
+       0.07
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt has already risen from 442.9 million at base to 540.3 million at September 30, 2026, funded by convertible notes and revolver draws while operations burned cash."
+     },
+     "margin_position": "The filed 2025 margin of 19.9% is inflated by the way the Product Liability charge is booked. Underlying 2026 margin is deeply negative: the nine-month operating loss is (97,680) on $1.2 billion of sales. Q3 gross margin was only 3.1% because of material costs, labor, truck body inefficiency and early dry van production-readiness costs. This is a trough in a freight recession, with a backlog that points to recovery.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 25.3% record rate comes from a distorted base year; the 2026 loss-year benefit (28,120 on a 116,322 pretax loss) is about 24%, which is similar, so a mid-20s rate is plausible."
+     },
+     "why": "The 2025 operating margin of 19.9% is distorted by the Product Liability item, and 2024 at -18.3% is distorted the other way. The base year therefore says little about earning power. Current earnings are depressed, and the backlog of $1,198 million with industry forecasts for 2027 suggest a volume rebound. Margins should recover toward the company's own mid-cycle level of roughly 6 to 7%, but only gradually."
+    },
+    "value_at_old_defaults": 40.48257731073889,
+    "values": {
+     "base": 20.366060853612492,
+     "bear": 8.724055652654254,
+     "bull": 44.68075278642757
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 40.48257731073889,
+  "value_at_old_defaults_quoted": 40.48257731073889,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 827039651.1372995,
  "family": "operating",
- "far_from_price": false,
+ "far_from_price": true,
  "filed_shares": 41746000.0,
  "flags": [
   "Wabash completed a private offering of 4.00% Convertible Senior Notes, with total principal of $150 million after the initial purchasers exercised their option for an additional amount.",
@@ -15,7 +498,7 @@
   "The ITC made final affirmative injury determinations on van-type trailer imports from China. Commerce has issued antidumping and countervailing duty orders on those imports."
  ],
  "in_code_book": false,
- "ke": 0.0949579095944475,
+ "ke": 0.09462594437424718,
  "market_cap_at_publish": 413497742,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +506,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 16.557461364836218,
-  "3000": 14.891880693756363
+  "1000": 19.256401233164663,
+  "3000": 20.366060853612492
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -810,151 +1293,17 @@
   ]
  },
  "ticker": "WNC",
- "upside": 0.503457911123377,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: capex (1000 down, 3000 none)",
-   "value_far_from_record_neutral: base 14.8919 against 40.3189 (0.37x)",
-   "value_far_from_record_neutral: bear 11.0928 against 40.3189 (0.28x)",
-   "value_far_from_record_neutral: bull 18.6103 against 40.3189 (0.46x)"
-  ],
-  "departures": [
-   {
-    "driver": "cycle_recovery",
-    "evidence": [
-     "P4.s94",
-     "P6.s17"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P4.s114",
-     "Y2025-12-31"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P4.s114",
-     "Y2025-12-31"
-    ],
-    "input": "long_run_op_margin"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "down",
-   "normalized.margin": "down",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "down",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P4.s114": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "The increase from the prior year period was driven by the third quarter of 2025 impacts of Eileen Williams, Elizabeth Perkins, et al. v. Wabash National Corporation, et al., filed in the Circuit Court of the City of St. Louis, Missouri."
-   },
-   "P4.s94": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Gross profit as a percentage of net sales was 3.1% for the third quarter of 2026, compared to 4.1% for the same period in 2025."
-   },
-   "P6.s17": {
-    "kind": "release",
-    "period": "2026-10-29",
-    "text": "\u25aaQ4-2026 revenue outlook midpoint of $435 million, EPS outlook $(0.65)."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0000879526-26-000036): revenue $1,542.8 million; operating income $307.5 million; operating margin 19.9%; net income $211.5 million; depreciation and amortization $58.7 million; capital expenditure $24.7 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.029152221612752823,
-    0.029152221612752823,
-    0.029152221612752823,
-    0.029152221612752823,
-    0.029152221612752823
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.13296110235911324,
-   "normalized.margin": 0.13296110235911324,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": -0.08161232807353799,
-   "op_margin.y2": 0.13296110235911324,
-   "rev_growth.y1": -0.019997527227112677,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06484930669624371
-  },
-  "numbers": {
-   "capex": [
-    0.029152221612752823,
-    0.029152221612752823,
-    0.029152221612752823,
-    0.029152221612752823,
-    0.029152221612752823
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.06660008336900296,
-   "normalized.margin": 0.06660008336900296,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": -0.08161232807353799,
-   "op_margin.y2": 0.01860067388763068,
-   "rev_growth.y1": -0.019997527227112677,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06484930669624371
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "median",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "p25",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No full-year 2026 revenue guidance is given, only a fourth-quarter range, so the year 1 level has to be built from the nine-month actuals plus the quarter guide.",
-   "No operating margin or capital expenditure guidance for 2026 or 2027 appears in the evidence; the fourth-quarter guide is for revenue and EPS only.",
-   "The 2025 operating margin of 19.9% appears to be distorted by legal-matter items, and the packet does not show how large the distortion is, so the right normalized margin is uncertain.",
-   "The evidence does not give 2027 revenue guidance, although backlog rose and the company says it is preparing for higher dry van output."
-  ],
-  "year": 3
- },
- "value_base": 14.891880693756363,
- "value_bear": 11.092798299798448,
- "value_bull": 18.61028714488645,
+ "upside": 1.0001068134908935,
+ "valuation": null,
+ "value_base": 19.811231043388577,
+ "value_bear": 7.825245574782905,
+ "value_bull": 46.13354025269914,
  "value_per_filed_share": {
-  "base": 14.891880693756363,
-  "bear": 11.092798299798448,
-  "bull": 18.61028714488645
+  "base": 19.811231043388577,
+  "bear": 7.825245574782905,
+  "bull": 46.13354025269914
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +14.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +35.1 points a year against the required return over 3 years"
 }

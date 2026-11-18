@@ -1,20 +1,487 @@
 {
- "alpha_pts": 14.126029236711874,
+ "alpha_pts": 20.757421578639388,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 73,
  "claims_supported": 67,
  "date": "2026-11-17T07:49:34Z",
- "equity_value": 4463427307.08497,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0764 (equity return r 0.1113), F 10",
+  "run_gap": 0.049843599697671125,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1040300000.0,
+     "excess_cash_before": 1040300000.0,
+     "k0_after": 128903567.31116158,
+     "k0_before": 128903567.31116158,
+     "k0_interest": 84500000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 295468950.09283,
+     "x0_before": 295468950.09283
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3906421595.220066,
+     "seam_ratio": 1.0282631186991966,
+     "tv_share": 0.3546017219891196,
+     "wedge_rate_5": 0.003914707074152469
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.029,
+     "fade_years": 10,
+     "long_run_op_margin": 0.125,
+     "op_margin": [
+      0.112,
+      0.116,
+      0.121,
+      0.124,
+      0.126
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.031,
+      0.045,
+      0.055,
+      0.055,
+      0.05
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0764 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 67
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.105,
+      0.135
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.075
+     ],
+     "terminal_growth": [
+      0.028,
+      0.042
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0292"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (91.3) | (93.9)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has run steadily near 3% of revenue (nine-month 2026 purchases of $91.3 million against $93.9 million), consistent with the five-year pool."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "increased 33% for the nine months ended September 30, 2026"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Segments are mature but still reinvesting in digital, so growth and margin should converge to long-run values over about a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $3,989.8 million | 0.0818 | 0.1261"
+       },
+       {
+        "id": "P3",
+        "quote": "Revenue per transaction was $0.08 and $0.10 for the year ended December 31, 2025 and 2024, respectively."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins of 11.5-12.6% in 2022-2025 and the ordinary-company base rate (about half of a gap persists) point to roughly 12.5%. Low-revenue-per-transaction digital mix and cost inflation limit upside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 171.6 | 195.0 | 380.7 | 428.8"
+       },
+       {
+        "id": "P6",
+        "quote": "Operating income of $37.3 million, a 37% decrease from $59.3 million"
+       },
+       {
+        "id": "P4",
+        "quote": "the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 operating income of 380.7 on 3,281.3 of revenue is an 11.6% margin, and Q4 is seasonally weaker. Cross-Border Payments operating income fell 37% in Q3. I start at about 11.2% and recover gradually as digital volume offsets retail weakness."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0764."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 41.8% base-year return is flattered by excluding acquired goodwill and by the asset-light remittance and epay segments. ATM cash funding and ATM and POS hardware are capital-intensive, so I assume a lower marginal return, well above the 7.6% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA"
+       },
+       {
+        "id": "P6",
+        "quote": "increased 33% for the nine months ended September 30, 2026"
+       },
+       {
+        "id": "P3",
+        "quote": "Our annual consolidated revenues increased by 6.4% for 2025 compared to 2024."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Management's revised 2026 outlook implies year-1 growth of about 3% against $4,244.2 million of 2025 revenue. I assume recovery to 5-5.5% as digital accelerators, merchant acquiring and Ren grow and the immigration drag eases, but CoreCard's acquired contribution fades after October 2026."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A global payments business with 77% non-USD revenue and emerging-market exposure should grow near, but slightly below, the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "op_margin",
+      "risk": "Cross-Border Payments pressure from immigration policy and the remittance tax persists or worsens, and digital growth does not offset it"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "rev_growth",
+      "risk": "Revenue growth stays near 2-3% as retail remittance volumes keep falling and the CoreCard contribution fades"
+     },
+     {
+      "bear_value": 0.105,
+      "input_hit": "long_run_op_margin",
+      "risk": "Cost inflation and acquisition amortization keep growing faster than revenue, permanently lowering the margin"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.005999999999999998,
+       0.019999999999999997,
+       0.03,
+       0.03,
+       0.025
+      ],
+      "terminal_growth": 0.028
+     },
+     "bull": {
+      "long_run_op_margin": 0.135,
+      "rev_growth": [
+       0.051,
+       0.065,
+       0.075,
+       0.075,
+       0.07
+      ],
+      "terminal_growth": 0.042
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of about $2.0 billion is roughly 2.5-3x Adjusted EBITDA, and the 2026 convertible issuance mostly refinanced existing short-term debt, so the level looks maintainable."
+     },
+     "margin_position": "The 2025 operating margin of 12.5% sits near the company's 2022-2025 range of about 11.5-12.6%. The 2026 margin is falling to roughly 11% because Cross-Border Payments (remittances) is hurt by U.S. immigration policy and the remittance tax. Costs (salaries, SG&A and CoreCard amortization) are also rising faster than revenue. I treat this as a partly temporary trough, not a cycle.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 30.2% base-year rate is above the statutory level, and the nine-month 2026 rate is about 34.7% with no stated driver, so I cannot say whether it will persist."
+     },
+     "why": "2025 was a good year: revenue grew 6.4% and the margin was 12.5%. 2026 guidance of about $4.375 billion of revenue implies growth of only about 3%, and nine-month operating income fell to 380.7 from 428.8. The base year therefore overstates near-term earnings, and I start the margin lower and let it recover only partly."
+    },
+    "value_at_old_defaults": 97.69677502144702,
+    "values": {
+     "base": 116.3488870693126,
+     "bear": 91.78908198059858,
+     "bull": 141.47734059577823
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1040300000.0,
+     "excess_cash_before": 1040300000.0,
+     "k0_after": 128903567.31116158,
+     "k0_before": 128903567.31116158,
+     "k0_interest": 84500000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 295468950.09283,
+     "x0_before": 295468950.09283
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3670340190.585594,
+     "seam_ratio": 1.0148869714377475,
+     "tv_share": 0.334624198994583,
+     "wedge_rate_5": 0.004009798214299886
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.029,
+     "fade_years": 10,
+     "long_run_op_margin": 0.12,
+     "op_margin": [
+      0.115,
+      0.119,
+      0.123,
+      0.125,
+      0.126
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.031,
+      0.04,
+      0.05,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0764 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 67
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.105,
+      0.135
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.07
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0292"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (91.3) | (93.9)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has been steady at about 2.6-3.1% of revenue, and nine-month 2026 purchases of property and equipment ($91.3m) are in line with the prior year."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenue from the digital accelerators introduced at the Company\u2019s Investor Day(*) increased 33% for the nine months ended September 30, 2026"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth has been mid-single digit and the mix is shifting toward digital and acquiring, so I assume a fairly long fade from year-5 growth to the terminal rate."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $4,244.2 million | 0.0638 | 0.1248"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2022-25 margins were 11.5-12.6% and the 2021 and 2020 margins were depressed. Following the base rate that about half of a gap to the median persists, I set a long-run margin of 12%, slightly above the 5-year median of about 11.7% and below the 2025 peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 171.6 | 195.0 | 380.7 | 428.8"
+       },
+       {
+        "id": "P6",
+        "quote": "continued impact of U.S. immigration policy and global economic pressures on the Cross Border Payments segment, which has persisted longer than we anticipated"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income is 380.7 on 3,281.3 revenue (11.6%), and guided Adjusted EBITDA of about $725m implies roughly an 11.5% GAAP margin for 2026. I assume a gradual recovery toward 12.5% by year 5, as Cross-Border Payments stabilises and CoreCard cost growth anniversaries."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0764."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is very high (0.4176), but it is flattered by ATM cash and settlement balances being outside tangible capital and by acquired goodwill. New ATM, POS and acquisition investment will earn less. I use 20%, well above the 0.0764 break-even and well below the base year."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
+       },
+       {
+        "id": "P6",
+        "quote": "Digital transactions within the Cross-Border Payments segment increased 34% in the third quarter of 2026 compared to the prior year period."
+       },
+       {
+        "id": "P3",
+        "quote": "Our annual consolidated revenues increased by 6.4% for 2025 compared to 2024."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (fiscal 2026) is set by the revised outlook of about $4.375bn against $4,244.2m, i.e. about 3.1%. Later years assume a recovery to mid-single digits as digital volume (+34% in Cross-Border Payments) and merchant acquiring offset the retail remittance drag. Growth was 6.4% in 2025."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth should be close to the nominal anchor. The business is global and fragmented, but physical remittance and prepaid mobile airtime are mature, and digital offsets are uncertain."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.105,
+      "input_hit": "op_margin",
+      "risk": "U.S. immigration and remittance-tax pressure persists or worsens, and further guidance cuts follow, so Cross-Border Payments profit keeps falling."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "rev_growth",
+      "risk": "Digital growth does not offset retail volume declines, and the revenue cuts are deeper than assumed."
+     },
+     {
+      "bear_value": 0.105,
+      "input_hit": "long_run_op_margin",
+      "risk": "Cost inflation and acquisition amortization keep running ahead of revenue, lowering the sustainable margin."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.0009999999999999974,
+       0.009999999999999998,
+       0.02,
+       0.02,
+       0.014999999999999996
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.135,
+      "rev_growth": [
+       0.051000000000000004,
+       0.060000000000000005,
+       0.07,
+       0.07,
+       0.065
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $2.0bn funds ATM cash and was refinanced into convertibles and long-term debt, and it is roughly 3x the guided EBITDA of about $725 million, which looks like a level the company will keep."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 12.5% is near the top of the post-2021 range. In 2026 it is below that level (9 months 11.6%, Q3 14.8% vs 17.0% a year earlier). The Cross-Border Payments segment is under pressure from U.S. immigration policy and the remittance tax, and costs (SG&A, salaries, CoreCard amortization) are growing faster than revenue. I expect a partial recovery as digital volume grows and cost growth slows, but not to the 2024-25 peak.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate is 30.2% but the nine-month 2026 rate is about 35% (121.4 on 350.1 pretax), and the filings do not explain the rise."
+     },
+     "why": "2025 was a year of 6.4% revenue growth and a 12.5% margin, before the remittance weakness and the CoreCard amortization. Management has now cut 2026 guidance, so the base-year margin overstates near-term earning power. Year 1 is fiscal 2026, and I anchor it to the revised outlook."
+    },
+    "value_at_old_defaults": 97.69677502144702,
+    "values": {
+     "base": 110.69065309164944,
+     "bear": 88.65349917593585,
+     "bull": 134.90527937291805
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 97.69677502144702,
+  "value_at_old_defaults_quoted": 97.69677502144702,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 5197253043.160416,
  "family": "operating",
- "far_from_price": false,
+ "far_from_price": true,
  "filed_shares": 45782801.0,
  "flags": [
   "Euronet signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks. No definitive agreement is shown.",
   "Euronet completed the acquisition of 100% of CoreCard Corporation. The third-quarter 2026 release says it lifted Payments Infrastructure revenue and added $4.7 million of incremental non-cash purchase price amortization."
  ],
  "in_code_book": false,
- "ke": 0.11164375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 2502575777,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -22,12 +489,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 97.0967472540611,
-  "3000": 97.4913550414919
+  "1000": 116.3488870693126,
+  "3000": 110.69065309164944
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -890,129 +1357,17 @@
   ]
  },
  "ticker": "EEFT",
- "upside": 0.7835333291827713,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y2 (1000 down, 3000 none)",
-   "held_at_record: rev_growth.y1 model 0.0308 valued at 0.0465"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s29",
-     "P6.s63"
-    ],
-    "input": "rev_growth.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P6.s29": {
-    "kind": "release",
-    "period": "2026-10-27",
-    "text": "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
-   },
-   "P6.s63": {
-    "kind": "release",
-    "period": "2026-10-27",
-    "text": "The Company is revising its 2026 outlook previously provided at its Investor Day in May to approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted earnings per share growth of approximately 10% year-over-year."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.02919628152306539,
-    0.02919628152306539,
-    0.02919628152306539,
-    0.02919628152306539,
-    0.02919628152306539
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.12106426394228857,
-   "normalized.margin": 0.12106426394228857,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.11602108920245024,
-   "op_margin.y2": 0.12106426394228857,
-   "rev_growth.y1": 0.046499760803699663,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07654639010611042
-  },
-  "numbers": {
-   "capex": [
-    0.02919628152306539,
-    0.02919628152306539,
-    0.02919628152306539,
-    0.02919628152306539,
-    0.02919628152306539
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.12106426394228857,
-   "normalized.margin": 0.12106426394228857,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.11602108920245024,
-   "op_margin.y2": 0.12106426394228857,
-   "rev_growth.y1": 0.03081852881579561,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07654639010611042
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.03081852881579561,
-    "model_option": "guidance",
-    "record": 0.046499760803699663,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The revised 2026 outlook gives revenue, Adjusted EBITDA and adjusted EPS growth only, so it gives no operating margin or capital expenditure guidance.",
-   "The evidence does not say how long the U.S. immigration-policy and remittance-tax pressure on Cross-Border Payments will last.",
-   "The evidence does not give 2027 guidance or any quarterly split of the year-1 revenue outlook."
-  ],
-  "year": 3
- },
- "value_base": 97.4913550414919,
- "value_bear": 96.71145707342028,
- "value_bull": 98.41950361312145,
+ "upside": 1.076761507454012,
+ "valuation": null,
+ "value_base": 113.51977008048101,
+ "value_bear": 90.22129057826722,
+ "value_bull": 138.19130998434815,
  "value_per_filed_share": {
-  "base": 97.4913550414919,
-  "bear": 96.71145707342028,
-  "bull": 98.41950361312145
+  "base": 113.51977008048101,
+  "bear": 90.22129057826722,
+  "bull": 138.19130998434815
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +14.1 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +20.8 points a year against the required return over 3 years"
 }

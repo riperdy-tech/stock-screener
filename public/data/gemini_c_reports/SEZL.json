@@ -1,13 +1,384 @@
 {
- "alpha_pts": -20.464781385892735,
+ "alpha_pts": 0.39358750496136796,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 95,
  "claims_supported": 90,
  "date": "2026-11-16T08:47:22Z",
- "equity_value": 2512107760.3543844,
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 7 of 8",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.8026, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.09345944251082047,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 3621997243.3576517,
+     "implied_pb": 23.0701855650277,
+     "seam_ratio": 1.1690740740740722,
+     "tv_share": 0.5461948994743033
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 7 of 8"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.84,
+      0.52,
+      0.34,
+      0.24,
+      0.18
+     ],
+     "fade_years": 12,
+     "long_run_roe": 0.2,
+     "roe": [
+      0.98,
+      0.72,
+      0.55,
+      0.43,
+      0.36
+     ],
+     "terminal_growth": 0.04
+    },
+    "old_defaults_inputs": "roe 0.8026, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 90
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.2,
+      0.45
+     ],
+     "long_run_roe": [
+      0.14,
+      0.28
+     ],
+     "terminal_growth": [
+      0.03,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Repurchase of common stock | (39,360) | (34,630)"
+       },
+       {
+        "id": "P3",
+        "quote": "We primarily rely on revolving credit facilities to fund our receivables over time, and do not currently require additional equity contributions to directly fund product growth."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 growth is high because 2026 earnings are large relative to the opening $169.8M of equity, partly offset by buybacks of $39.4M in nine months. Later growth falls as the base grows and the company keeps returning excess earnings through buybacks, so growth stays below ROE."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Establishing and operating the Bank will require us to contribute significant capital to the Bank"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The return must fall from a very high 2030 level to a mature level. The uncertainty about a bank charter and the strength of the moat argue for a long fade of about 12 years."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Low barriers to entry, larger rivals and regulatory risk should compress returns over time toward a still-above-cost-of-equity level. The capital-light, credit-line-funded model supports a long-run return well above the 9.36% cost of equity. A bank charter would add capital and lower ROE but could also cut funding costs."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net Income | 47,825 | 26,671 | 139,893 | 90,439"
+       },
+       {
+        "id": "P7",
+        "quote": "$190.0 million of Adjusted Net Income (48.8% YoY growth)2"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 net income is $139.9M and FY2026 adjusted net income guidance is $190M, which on the $169.8M opening equity implies a year-1 return a little above 1.0. I cap year 1 at 0.98 to stay inside the allowed range. FY2027 EPS guidance of $7.20 implies roughly $240M, or about 0.72 on a much larger opening base. I haircut later years for credit-cycle, regulatory and competition risk and for the denominator growing."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "I set it near the long-run nominal growth anchor, slightly above, given a consumer-credit business with some continuing volume growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.3,
+      "input_hit": "roe",
+      "risk": "Credit-cycle downturn, or regulatory or state BNPL action on late fees, hits provisions and fees, since earnings have limited history through a downturn and late fees reached $74.0M in 2025."
+     },
+     {
+      "bear_value": 0.13,
+      "input_hit": "long_run_roe",
+      "risk": "Bank charter approval or covenant demands force heavy capital retention and add compliance costs, lowering sustainable ROE."
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "book_growth",
+      "risk": "Credit facility maturing April 19, 2027 is not renewed on good terms, forcing equity raises or slowing receivables growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.7,
+       0.38,
+       0.2,
+       0.09999999999999998,
+       0.03999999999999998
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.95,
+       0.63,
+       0.45,
+       0.35,
+       0.29
+      ],
+      "long_run_roe": 0.28,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Sezzle is a buy-now-pay-later platform with a small equity base, so return on equity is extreme. Equity was only $22.1M at end-2023 and $169.8M at end-2025, while income to common was $133.1M in 2025. Returns are high because short-term receivables are funded mostly by a revolving credit line rather than equity, and because fee, late-fee and subscription yield is rising. The 2025 ratio of 1.5157 is also inflated by a very low opening equity base. 2026 earnings are running well ahead of 2025, but the ratio falls as retained equity builds. Credit losses were 19.8% of 2025 revenue, with no downturn tested yet.",
+     "why": "The 2025 return on opening equity is an artefact of a tiny equity base, so it will not repeat as equity compounds. Equity is not limited by regulatory capital today: the company funds receivables with a credit line and buys back stock. The raised WebBank tangible net worth covenant ($100M) is far below current equity of $277.7M. A de novo bank charter would later require capital, but it is only an application and not approved."
+    },
+    "value_at_old_defaults": 70.07948640430817,
+    "values": {
+     "base": 109.60080799526965,
+     "bear": 42.158291532003496,
+     "bull": 334.57851892338397
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 3298599678.288096,
+     "implied_pb": 21.010316013466017,
+     "seam_ratio": 1.1439473684210517,
+     "tv_share": 0.5756560869230776
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.85,
+      0.55,
+      0.35,
+      0.22,
+      0.15
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.22,
+     "roe": [
+      0.99,
+      0.75,
+      0.55,
+      0.42,
+      0.34
+     ],
+     "terminal_growth": 0.04
+    },
+    "old_defaults_inputs": "roe 0.8026, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 90
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.2,
+      0.5
+     ],
+     "long_run_roe": [
+      0.14,
+      0.32
+     ],
+     "terminal_growth": [
+      0.025,
+      0.05
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total Stockholders' Equity | 277,679 | 169,811"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchase of common stock | (39,360) | (34,630)"
+       },
+       {
+        "id": "P5",
+        "quote": "Establishing and operating the Bank will require us to contribute significant capital to the Bank"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Equity rose from $169.8M to $277.7M in nine months, so 2026 growth is about 85% after Q4 earnings and buybacks. Later growth slows because large buybacks and capital for the bank charter or covenants take a growing share of earnings. Growth stays well below ROE, so the company is paying out cash."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P10",
+        "quote": "increasing the minimum tangible net worth the Company is required to maintain from $12.0 million to $100.0 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Returns are now extreme, with 2025 ROE of 1.52, and need a long glide to a normal level as the base compounds and competitors respond. Ten years is a middle choice given a young, fast-changing business."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We operate in a highly competitive and dynamic industry with a low barrier to entry"
+       },
+       {
+        "id": "P2",
+        "quote": "The BNPL industry has become subject to increased regulatory scrutiny"
+       },
+       {
+        "id": "P3",
+        "quote": "do not currently require additional equity contributions to directly fund product growth"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Competition in a low-barrier industry, regulatory scrutiny and merchant fee pressure should push returns toward a level still above the 9.4% cost of equity. The business is capital-light and fee-rich, which supports that. A bank charter would add capital and lower returns. I fade to about 22% with a wide range."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Raised FY2026 guidance to approximately 42.5% Total Revenue growth"
+       },
+       {
+        "id": "P7",
+        "quote": "Introduced preliminary FY2027 guidance for Adjusted Net Income2 per Diluted Share of $7.20"
+       },
+       {
+        "id": "REC",
+        "quote": "return on opening common equity 1.5157"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) net income should be near the raised guidance of about $190M, which is about 1.1x opening equity of $169.8M. I enter 0.99 to stay inside the allowed range, which is slightly conservative. FY2027 guidance of $7.20 per share implies about $245M, but on a base that has nearly doubled, so ROE falls to about 0.75. It keeps declining as retained earnings pile up and as competition and regulation compress margins."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature consumer-credit and payments platform should grow roughly with the nominal economy. The anchor is 3.75%, and I use 4% because of the product and subscription runway."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.4,
+      "input_hit": "roe",
+      "risk": "Credit losses rise or underwriting tightens in a consumer downturn, or regulators and states restrict late fees and BNPL practices that drove the revenue yield."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Competition and regulation push long-run returns down to a normal consumer-finance level, or bank-charter capital requirements dilute them."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Facility maturity (April 2027), covenant breach or bank-charter capital needs force retention of capital and a slower payout of earnings."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.7,
+       0.4000000000000001,
+       0.2,
+       0.07000000000000003,
+       2.7755575615628914e-17
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       1.0,
+       0.7000000000000001,
+       0.5,
+       0.37,
+       0.30000000000000004
+      ],
+      "long_run_roe": 0.32,
+      "terminal_growth": 0.05
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "unclear",
+     "institution": "other",
+     "roe_position": "Sezzle is a BNPL and payments platform with a very high return on a small equity base. It has been profitable only since 2023 and its equity was just $8.8M at end-2022. Return on opening equity was 1.52 in 2025. For 2026 it is near 1.1 on the guidance, but I cap it just under 1 for the input, since the return is limited to a value below 1. Equity is expanding fast, so the ratio falls mechanically even as profit keeps rising. Credit losses are absorbed on its own books and are seasonally high in Q4.",
+     "why": "The 2025 return of 1.52 sits on opening equity of only $169.8M, so it overstates a sustainable level. Equity reached $277.7M by September 2026 and is likely to roughly double within two years. Regulatory capital does not bind today, because management says no new equity is needed and the WebBank minimum tangible net worth is $100M against about $278M of equity. A pending bank charter and the higher WebBank covenant could absorb capital, and the evidence does not say how much."
+    },
+    "value_at_old_defaults": 70.07948640430817,
+    "values": {
+     "base": 99.81487165853507,
+     "bear": 37.183996087505896,
+     "bull": 414.6193329192481
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 70.07948640430817,
+  "value_at_old_defaults_quoted": 70.07948640430817,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 3742677026.772798,
  "family": "financial",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 35744000.0,
  "flags": [
   "Sezzle submitted applications to the OCC to charter a de novo national bank, Sezzle Bank, N.A., and to the FDIC for deposit insurance, and expects to apply to the Federal Reserve to become a bank holding company.",
@@ -15,7 +386,7 @@
   "Sezzle raised its FY2026 guidance to approximately 42.5% Total Revenue growth, $190.0 million of Adjusted Net Income (48.8% YoY growth), and $5.45\u2013$5.50 of Adjusted Net Income per Diluted Share, and introduced preliminary FY2027 guidance of $7.20 Adjusted Net Income per Diluted Share."
  ],
  "in_code_book": false,
- "ke": 0.0934350225480369,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 5171783113,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +394,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 68.3672880756781,
-  "3000": 70.28054387741675
+  "1000": 109.60080799526965,
+  "3000": 99.81487165853507
  },
  "seeds_agree": false,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1321,83 +1692,17 @@
   ]
  },
  "ticker": "SEZL",
- "upside": -0.5142666068033963,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: long_run_roe (1000 down, 3000 none)",
-   "seeds_disagree: fade_years (1000 down, 3000 none)"
-  ],
-  "departures": [],
-  "directions": {
-   "book_growth.y1": "none",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "none",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "none",
-   "roe.y2": "none",
-   "terminal_g": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.802648936827043,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.802648936827043,
-   "roe.y1": 0.802648936827043,
-   "roe.y2": 0.802648936827043,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.802648936827043,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.802648936827043,
-   "roe.y1": 0.802648936827043,
-   "roe.y2": 0.802648936827043,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "neutral",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    0
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "median",
-   "roe.y2": "median",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The filings and 8-K releases provide no management guidance for book equity growth or return on equity.",
-   "Whether the national bank charter and federal deposit insurance applications for Sezzle Bank, N.A. will be approved, and the exact capital and operating costs required, cannot be determined from the evidence.",
-   "Future share repurchase amounts, which reduce book equity, and the ultimate impact of potential federal or state BNPL regulatory changes are not disclosed.",
-   "Portions of the 10-K, 10-K/A, 10-Q, and 8-K filings were omitted from this packet."
-  ],
-  "year": 3
- },
- "value_base": 70.28054387741675,
- "value_bear": 68.33896205871478,
- "value_bull": 122.45959082424054,
+ "upside": -0.27632753636457497,
+ "valuation": null,
+ "value_base": 104.70783982690236,
+ "value_bear": 39.671143809754696,
+ "value_bull": 374.59892592131604,
  "value_per_filed_share": {
-  "base": 70.28054387741675,
-  "bear": 68.33896205871478,
-  "bull": 122.45959082424054
+  "base": 104.70783982690236,
+  "bear": 39.671143809754696,
+  "bull": 374.59892592131604
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -20.5 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +0.4 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

@@ -1,11 +1,522 @@
 {
- "alpha_pts": 12.876245608334186,
+ "alpha_pts": 9.08730537063985,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 64,
  "claims_supported": 60,
  "date": "2026-11-17T12:34:36Z",
- "equity_value": 1107277152.6096148,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.4030 (filed 0.4061 to 0.5939)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.3980 (filed 0.4061 to 0.5939)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.3940 (filed 0.4061 to 0.5939)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.3910 (filed 0.4061 to 0.5939)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.3890 (filed 0.4061 to 0.5939)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.3850 (filed 0.4061 to 0.5939)",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.4020 (filed 0.4061 to 0.5939)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.3960 (filed 0.4061 to 0.5939)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.3910 (filed 0.4061 to 0.5939)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.3880 (filed 0.4061 to 0.5939)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.3850 (filed 0.4061 to 0.5939)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.3800 (filed 0.4061 to 0.5939)",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0312 and margin 0.4067, margin 0.4280 (persist), growth 0.0375, terminal RONIC 0.0622 (equity return r 0.1113), F 10",
+  "run_gap": 0.023453678733625506,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 900000.0,
+       "printed": 0.9,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "net loss on debt extinguishment of $0.9 million"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Net loss on debt extinguishment included in 2025 interest expense"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 74685000.0,
+     "excess_cash_before": 74685000.0,
+     "k0_after": 38366200.198795184,
+     "k0_before": 39266200.198795184,
+     "k0_interest": 35528000.0,
+     "one_offs_charge": 900000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 84870864.13174784,
+     "x0_before": 84203598.3895696
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 847426484.7755227,
+     "seam_ratio": 1.0216887121607123,
+     "tv_share": 0.2831209440484477,
+     "wedge_rate_5": 0.003500088189572073
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.4030 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y2 0.3980 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y3 0.3940 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y4 0.3910 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y5 0.3890 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: long_run_op_margin 0.3850 (filed 0.4061 to 0.5939)",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.085,
+     "fade_years": 10,
+     "long_run_op_margin": 0.385,
+     "op_margin": [
+      0.403,
+      0.398,
+      0.394,
+      0.391,
+      0.389
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.035,
+      0.03,
+      0.028,
+      0.026,
+      0.025
+     ],
+     "terminal_growth": 0.023
+    },
+    "old_defaults_inputs": "year 1 growth 0.0312 and margin 0.4067, margin 0.4280 (persist), growth 0.0375, terminal RONIC 0.0622 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 60
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.34,
+      0.43
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.045
+     ],
+     "terminal_growth": [
+      0.012,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (22,216) | (22,335)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0918"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 capex was about 8.2% of revenue ($22,216 on $270,831), against a pooled 9.2% history. I use 8.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our fax services constitute substantially all of our revenue and operating income."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is slow-changing and recurring, so a 10-year fade from near-term growth to the terminal rate is a moderate path, with uncertainty about how fast SoHo erosion and digital signatures bite."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $362.6 million | 0.0004 | 0.4061"
+       },
+       {
+        "id": "P2",
+        "quote": "Our fax services constitute substantially all of our revenue and operating income."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2021-2025 median margin is about 0.426 and the current level is about 0.40. Base rates suggest part of the gap persists, but substantial dependence on fax, digital signature substitution and rising cost lines argue for settling a little below the current level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 35,569 | 37,930 | 110,141 | 114,476"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month operating income fell to 110,141 from 114,476 despite revenue growth, driven by G&A and share-based compensation. I model a margin of about 0.40 in year 1 that edges down further."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business needs little tangible capital: capex runs about 8% of revenue against D&A of about 5-6%. Incremental after-tax returns are high but should be capped well below the base-year 1.0 because net capex is rising."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenues | $350 | $364 | $360 | $364"
+       },
+       {
+        "id": "P4",
+        "quote": "The increase was due to an increase of $14.7 million or 9% in our Corporate business, partially offset by a decline of $6.5 million or 7% in our SoHo business."
+       },
+       {
+        "id": "P4",
+        "quote": "Consolidated | 4.69% | 3.70% | 4.36% | 3.64%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is FY2026. Guidance of $360-364M against $349.7M implies growth of about 3.4-4.1%. After that, Corporate growth of about 9% (roughly 60% of revenue) is partly offset by SoHo declining about 6-7%. Rising churn pushes blended growth down toward 2.5%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "Our fax services constitute substantially all of our revenue and operating income."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is a mature fax franchise with a shrinking SoHo base and substitution risk, so long-run growth sits below the growth anchor. Healthcare interoperability is immaterial and cannot be counted on to lift it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.005,
+      "input_hit": "rev_growth",
+      "risk": "Rising churn and digital-signature substitution erode Corporate growth while SoHo keeps shrinking"
+     },
+     {
+      "bear_value": 0.33,
+      "input_hit": "long_run_op_margin",
+      "risk": "G&A and share-based compensation keep outgrowing revenue, compressing margin"
+     },
+     {
+      "bear_value": 0.008,
+      "input_hit": "terminal_growth",
+      "risk": "Fax demand declines structurally in the long run"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       0.017,
+       0.011999999999999997,
+       0.009999999999999998,
+       0.007999999999999997,
+       0.006999999999999999
+      ],
+      "terminal_growth": 0.012
+     },
+     "bull": {
+      "long_run_op_margin": 0.43,
+      "rev_growth": [
+       0.052000000000000005,
+       0.047,
+       0.045,
+       0.043,
+       0.041999999999999996
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $558M is being refinanced into a facility maturing in 2031 rather than cut, and buybacks keep leverage high relative to the small equity base."
+     },
+     "margin_position": "The 2025 operating margin of 0.4296 is above the 2022-2024 range of about 0.41 to 0.43. In 2026 it is slipping to about 0.40 (nine months: 110,141 / 270,831), because G&A and share-based compensation are growing faster than revenue. Fax is a mature, high-margin subscription business with low cost of delivery. The early-2020s margin was inflated by the 2019-2020 levels near 0.59, which later fell as SoHo advertising and spin-off costs came in.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2025 rate of 25.9% compares with GAAP 22.2% in Q3 2026 and a guided non-GAAP rate of 17-19%, so the sustainable rate is uncertain."
+     },
+     "why": "2025 revenue was flat at $349.7M and the margin was 0.43. 2026 shows Corporate growth of about 9% offsetting a SoHo decline of about 7%, with a small margin dip. The base year is a reasonable anchor, though margins are trending a little lower and churn is rising."
+    },
+    "value_at_old_defaults": 57.08181632322039,
+    "values": {
+     "base": 51.65043798267956,
+     "bear": 41.74068952238764,
+     "bull": 63.79659830617515
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 900000.0,
+       "printed": 0.9,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "net loss on debt extinguishment of $0.9 million in the current period"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Net loss on debt extinguishment recorded in 2025 interest expense"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 74685000.0,
+     "excess_cash_before": 74685000.0,
+     "k0_after": 38366200.198795184,
+     "k0_before": 39266200.198795184,
+     "k0_interest": 35528000.0,
+     "one_offs_charge": 900000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 84870864.13174784,
+     "x0_before": 84203598.3895696
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 826203760.9867636,
+     "seam_ratio": 1.0211552495918987,
+     "tv_share": 0.3247351769045266,
+     "wedge_rate_5": 0.003590339201799892
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.4020 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y2 0.3960 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y3 0.3910 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y4 0.3880 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: op_margin.y5 0.3850 (filed 0.4061 to 0.5939)",
+     "margin_outside_filed_record: long_run_op_margin 0.3800 (filed 0.4061 to 0.5939)",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.085,
+     "fade_years": 8,
+     "long_run_op_margin": 0.38,
+     "op_margin": [
+      0.402,
+      0.396,
+      0.391,
+      0.388,
+      0.385
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.034,
+      0.032,
+      0.03,
+      0.027,
+      0.025
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth 0.0312 and margin 0.4067, margin 0.4280 (persist), growth 0.0375, terminal RONIC 0.0622 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 60
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.33,
+      0.42
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.045
+     ],
+     "terminal_growth": [
+      0.005,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (22,216) | (22,335)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex was 8.2% of revenue in the nine months of 2026 (22,216 on 270,831) against a pooled 9.2%, mostly capitalized software and equipment. I hold it near the recent run-rate."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $362.6 million | 0.0004 | 0.4061"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate fade of eight years lets the margin and growth drift from the current Corporate-led profile to the mature steady state, given that the margin history has trended down since the spin-off."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our fax services constitute substantially all of our revenue and operating income."
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $350.4 million | -0.0336 | 0.4264"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Substantially all operating income comes from fax, which digital signatures and AI could erode, and the margin has already slipped from about 59% in 2019-2020 to about 40-43%. I expect the long-run margin to settle slightly below the current level, about halfway between the 2026 run-rate and a more stressed level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 35,569 | 37,930 | 110,141 | 114,476"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month operating income fell despite higher revenue because G&A and share-based compensation rose, which puts 2026 at about 40%. I assume modest further compression as these costs keep outgrowing revenue, with only partial offset from Corporate scale."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light with goodwill dominating the balance sheet, so returns on tangible capital are very high. I haircut heavily because incremental growth needs capitalized software and, possibly, acquisitions, and the break-even return is only 6.2%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenues | $350 | $364 | $360 | $364"
+       },
+       {
+        "id": "P4",
+        "quote": "The increase was due to an increase of $14.7 million or 9% in our Corporate business, partially offset by a decline of $6.5 million or 7% in our SoHo business."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Full-year 2026 guidance of $360-364M implies about 3.5% growth in year 1 from $349.7M. Corporate growth of about 9% outweighs the SoHo decline, but rising churn and SoHo shrinkage should slow growth gradually."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P4",
+        "quote": "Consolidated | 4.69% | 3.70% | 4.36% | 3.64%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A mature fax franchise with a shrinking SoHo base and rising churn should grow below the long-run nominal anchor, with Corporate and healthcare partly offsetting the structural decline."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Rising churn and SoHo decline outpace Corporate growth, and digital signatures and AI erode fax demand."
+     },
+     {
+      "bear_value": 0.32,
+      "input_hit": "long_run_op_margin",
+      "risk": "G&A, personnel and share-based compensation keep outgrowing revenue, compressing margins further."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "terminal_growth",
+      "risk": "Structural decline in fax usage leads to flat or negative perpetual growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.33,
+      "rev_growth": [
+       0.014000000000000005,
+       0.012000000000000004,
+       0.010000000000000002,
+       0.007000000000000003,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.005
+     },
+     "bull": {
+      "long_run_op_margin": 0.42,
+      "rev_growth": [
+       0.049,
+       0.047,
+       0.045,
+       0.041999999999999996,
+       0.04
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $558M is roughly 3x EBITDA and the company is refinancing it into a facility maturing in 2031, while buybacks are funded from cash flow, so leverage is likely to stay near this level."
+     },
+     "margin_position": "The margin is high (about 43% in 2025, about 40.7% in the nine months of 2026) because a mature, recurring cloud-fax subscription base has gross margin near 80% and light sales and R&D spend. It is now drifting down as general and administrative costs and share-based compensation grow faster than revenue.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 25.9% base-year rate is close to the 22.9% nine-month 2026 GAAP rate (21,962 on 96,001 pretax), within normal variation for a multinational with uncertain tax positions."
+     },
+     "why": "2025 revenue was flat at $349.7M, and the 43% operating margin is in line with the 41-43% of 2023-2025. 2026 is running about 2 points lower on margin, so the base year slightly overstates profitability. Corporate growth of about 9% is offsetting a SoHo decline of about 6-7%, and churn is rising."
+    },
+    "value_at_old_defaults": 57.08181632322039,
+    "values": {
+     "base": 50.45308635399789,
+     "bear": 39.46278938503476,
+     "bull": 62.16328746461867
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 57.08181632322039,
+  "value_at_old_defaults_quoted": 57.08181632322039,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 992913992.7974912,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 19449162.0,
@@ -15,7 +526,7 @@
   "The Board increased the total share repurchase authorization to $200.0 million."
  ],
  "in_code_book": false,
- "ke": 0.11164375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 723334772,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +534,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 56.931869486696385,
-  "3000": 56.931869486696385
+  "1000": 51.65043798267956,
+  "3000": 50.45308635399789
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -797,101 +1308,17 @@
   ]
  },
  "ticker": "CCSI",
- "upside": 0.5307948621742946,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: rev_growth.y1 0.0312"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.09178973587605739,
-    0.09178973587605739,
-    0.09178973587605739,
-    0.09178973587605739,
-    0.09178973587605739
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.42800960727037707,
-   "normalized.margin": 0.42800960727037707,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.40667796522554656,
-   "op_margin.y2": 0.42800960727037707,
-   "rev_growth.y1": 0.031242146626762057,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.062228039860632134
-  },
-  "numbers": {
-   "capex": [
-    0.09178973587605739,
-    0.09178973587605739,
-    0.09178973587605739,
-    0.09178973587605739,
-    0.09178973587605739
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.42800960727037707,
-   "normalized.margin": 0.42800960727037707,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.40667796522554656,
-   "op_margin.y2": 0.42800960727037707,
-   "rev_growth.y1": 0.031242146626762057,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.062228039860632134
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Whether Corporate growth of about 9% will offset the SoHo decline beyond year 1 is not stated, so year 2 growth stays at the neutral anchor.",
-   "No operating margin or capital expenditure guidance appears in the evidence, so margin and capex inputs stay at the record-neutral options.",
-   "The effect of the September 2026 credit facility amendment on interest costs is not given in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 56.931869486696385,
- "value_bear": 53.85728085489396,
- "value_bull": 58.011853370114295,
+ "upside": 0.37268942574419905,
+ "valuation": null,
+ "value_base": 51.051762168338726,
+ "value_bear": 40.601739453711204,
+ "value_bull": 62.97994288539691,
  "value_per_filed_share": {
-  "base": 56.931869486696385,
-  "bear": 53.85728085489396,
-  "bull": 58.011853370114295
+  "base": 51.051762168338726,
+  "bear": 40.601739453711204,
+  "bull": 62.97994288539691
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +12.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +9.1 points a year against the required return over 3 years"
 }

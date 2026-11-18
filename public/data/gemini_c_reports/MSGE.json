@@ -1,11 +1,498 @@
 {
- "alpha_pts": -32.450786354338916,
+ "alpha_pts": -27.87796006987155,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 96,
  "claims_supported": 95,
  "date": "2026-11-18T00:04:21Z",
- "equity_value": 1370919872.9743412,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1600 (filed -2.9004 to 0.1334)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.1630 (filed -2.9004 to 0.1334)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.1650 (filed -2.9004 to 0.1334)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.1650 (filed -2.9004 to 0.1334)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.1630 (filed -2.9004 to 0.1334)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.1500 (filed -2.9004 to 0.1334)",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1520 (filed -2.9004 to 0.1334)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.1520 (filed -2.9004 to 0.1334)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.1500 (filed -2.9004 to 0.1334)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.1480 (filed -2.9004 to 0.1334)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.1460 (filed -2.9004 to 0.1334)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.1400 (filed -2.9004 to 0.1334)",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.3720 and margin 0.0448, margin 0.1284 (persist), growth 0.0375, terminal RONIC 0.0581 (equity return r 0.0985), F 10",
+  "run_gap": 0.035181481236294616,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 293599000.0,
+     "excess_cash_before": 293599000.0,
+     "k0_after": 45609304.76600003,
+     "k0_before": 45609304.76600003,
+     "k0_interest": 39962000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 59349800.429605916,
+     "x0_before": 59349800.429605916
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1247588791.2903593,
+     "seam_ratio": 1.0031137238365209,
+     "tv_share": 0.38248225203165964,
+     "wedge_rate_5": -0.009579921443028178
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1600 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y2 0.1630 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y3 0.1650 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y4 0.1650 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y5 0.1630 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: long_run_op_margin 0.1500 (filed -2.9004 to 0.1334)",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.027,
+     "fade_years": 8,
+     "long_run_op_margin": 0.15,
+     "op_margin": [
+      0.16,
+      0.163,
+      0.165,
+      0.165,
+      0.163
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.1,
+      0.05,
+      0.04,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.3720 and margin 0.0448, margin 0.1284 (persist), growth 0.0375, terminal RONIC 0.0581 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 95
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.12,
+      0.17
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0237"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (11,981) | (5,953)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 2.4% of revenue, FY2026 was 2.7%, and Q1 capex doubled year over year. I use 2.7% to allow for continued venue and technology investment."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "which each have a term of 35 years running through 2055"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business has contractual anchors, including 35-year Arena License Agreements through 2055 and multi-year suite licenses. These support a gradual fade of growth and margin over about 8 years rather than a quick one."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-06-30 | $1,060.8 million | 0.1252 | 0.1334"
+       },
+       {
+        "id": "P2",
+        "quote": "For Fiscal Year 2026, the tax exemption was $45 million."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Reported margins have been 11.7% to 13.3% for four years, and the underlying margin is about 16%. Base rates say roughly half of a gap to the median persists, so I fade to 15%. The risks are loss of the $45M tax exemption, Penn Station disruption and cost inflation."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Restructuring charges | (13,986) | (1,055) | (12,931) | NM"
+       },
+       {
+        "id": "P3",
+        "quote": "Impairment of long-lived assets | (13,782) | (11,202) | (2,580) | (23)%"
+       },
+       {
+        "id": "P5",
+        "quote": "we remain well positioned to drive robust growth in both revenue and adjusted operating income this fiscal year"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "FY2026 had $13.8M of impairment and $14.0M of restructuring that should not recur, which lifts underlying margin to about 16%. Concert operating leverage supports a small further gain, but SG&A is rising 18% and revenue-sharing costs with the Knicks and Rangers cap incremental margin."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1896"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The existing base returns 19% on tangible capital, but new investment in venues and productions has uncertain payback, and the break-even return for growth is 5.8%. I assume 12%, which is well above break-even but below the base-year return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Total revenues | 217,134 | 158,262 | 58,872 | 37%"
+       },
+       {
+        "id": "P5",
+        "quote": "231 planned performances as compared to 215 in fiscal 2026"
+       },
+       {
+        "id": "P1",
+        "quote": "the planned 30-night residency from Harry Styles beginning in August 2026 at The Garden"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 benefits from Q1 growth of 37%, a 30-night Harry Styles residency and 231 Christmas Spectacular shows versus 215. Management expects robust growth. After that, growth fades toward low single digits as venue capacity is already well used."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, concentrated New York venue business with fixed capacity should grow near inflation plus modest pricing. That is below the 3.75% long-run nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "A Christmas Spectacular or concert demand decline, or a recession, hits the New York-concentrated business (the Spectacular was 18% of FY2026 revenue)"
+     },
+     {
+      "bear_value": 0.11,
+      "input_hit": "long_run_op_margin",
+      "risk": "The $45M real estate tax exemption is repealed, the zoning permit renewal brings concessions, or Penn Station redevelopment disrupts The Garden, compressing margins"
+     },
+     {
+      "bear_value": 0.13,
+      "input_hit": "op_margin",
+      "risk": "Cost inflation and SG&A growth outpace pricing, so margin gains from concert volume do not materialize"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       0.08,
+       0.030000000000000002,
+       0.02,
+       0.015000000000000003,
+       0.015000000000000003
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.12,
+       0.07,
+       0.06,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of $540.3M is moderate against about $140M of operating income and is being repaid gradually, although consolidated equity is small after buybacks."
+     },
+     "margin_position": "The FY2026 GAAP margin of 13.3% is held down by about $27.8M of impairment and restructuring charges, which is roughly 2.6 points of revenue. Excluding them the margin is about 16%. Q1 FY2027 shows strong operating leverage from record concert volume, though the quarter is small and seasonal.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 38.1% base-year rate is above typical statutory rates, and the Q1 FY2027 tax benefit on small pretax income shows it is volatile, so I cannot tell whether it persists."
+     },
+     "why": "FY2026 revenue of $1,060.8M grew 12.5% and the operating margin has sat between 11.7% and 13.3% for four years. The base year contains non-recurring impairment and restructuring charges, so underlying profitability is a little better than reported. Revenue depends on discretionary spending, the Christmas Spectacular and concert bookings, which makes it moderately cyclical and concentrated in New York."
+    },
+    "value_at_old_defaults": 28.559640701936193,
+    "values": {
+     "base": 33.066927329983805,
+     "bear": 25.464829350618114,
+     "bull": 42.73841570737539
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 293599000.0,
+     "excess_cash_before": 293599000.0,
+     "k0_after": 45609304.76600003,
+     "k0_before": 45609304.76600003,
+     "k0_interest": 39962000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 59349800.429605916,
+     "x0_before": 59349800.429605916
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1194666472.2476315,
+     "seam_ratio": 1.0141713243922579,
+     "tv_share": 0.3617163090508675,
+     "wedge_rate_5": -0.009000027523161879
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1520 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y2 0.1520 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y3 0.1500 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y4 0.1480 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: op_margin.y5 0.1460 (filed -2.9004 to 0.1334)",
+     "margin_outside_filed_record: long_run_op_margin 0.1400 (filed -2.9004 to 0.1334)",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.027,
+     "fade_years": 10,
+     "long_run_op_margin": 0.14,
+     "op_margin": [
+      0.152,
+      0.152,
+      0.15,
+      0.148,
+      0.146
+     ],
+     "return_on_new_investment_long_run": 0.14,
+     "rev_growth": [
+      0.11,
+      0.05,
+      0.04,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.3720 and margin 0.0448, margin 0.1284 (persist), growth 0.0375, terminal RONIC 0.0581 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 95
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.11,
+      0.165
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.07
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0237"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex has run at 1.8% to 2.7% of revenue over the past five years. I use a level slightly above the pooled average to cover continuing venue investment and the Penn Station and technology outlays."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Long-term agreements to host home games at The Garden for two of the most recognized franchises in professional sports"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade is a moderate length: a high-quality but concentrated and capacity-constrained franchise should converge toward long-run margin and growth gradually."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-06-30 | $1,060.8 million | 0.1252 | 0.1334"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The portfolio is unusual (The Garden, Radio City, Christmas Spectacular IP, 35-year arena licenses). But competition, a possible tax exemption repeal and lease renewals argue against holding peak margins. I fade to a level close to the recent 5-year range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Restructuring charges | (13,986) | (1,055) | (12,931) | NM"
+       },
+       {
+        "id": "P3",
+        "quote": "Impairment of long-lived assets | (13,782) | (11,202) | (2,580) | (23)%"
+       },
+       {
+        "id": "P5",
+        "quote": "adjusted operating income of $34.3 million, an increase of $27.2 million"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "FY2026 GAAP margin of 13.3% includes $13.8M of impairment and $14.0M of restructuring, so the underlying margin is about 16%. Q1 adjusted operating income rose $27.2M on higher revenue, partly offset by cost growth in SG&A and direct expenses. I assume the margin sits modestly above the base year and then drifts down on cost inflation and normalization."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.1896"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Base-year return on tangible capital is high at 18.96% because the venues are carried at low book value. New investment, mainly renovations and technology, earns less, and the breakeven return is 5.8%, so I assume a mid-teens return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Total revenues | 1,060,784 | 942,734 | 118,050 | 13%"
+       },
+       {
+        "id": "P5",
+        "quote": "231 planned performances as compared to 215 in fiscal 2026"
+       },
+       {
+        "id": "P5",
+        "quote": "we remain well positioned to drive robust growth in both revenue and adjusted operating income this fiscal year."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Q1 FY2027 revenue grew 37% on a record concert quarter, and the Christmas Spectacular schedule expands from 215 to 231 performances. Management expects robust growth this year. Growth should slow after FY2027 against tougher comparisons and a capacity-constrained set of venues."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth should track nominal GDP and ticket pricing for scarce New York venues, close to the anchor but slightly below it given the capacity limits."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.11,
+      "input_hit": "long_run_op_margin",
+      "risk": "Repeal of the $45M Garden property tax exemption, or a harsh zoning-permit or Penn Station outcome, cuts arena license fees and profit."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Recession, tourism decline or weak Christmas Spectacular/concert demand slows growth, given the concentration in New York City."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "op_margin",
+      "risk": "Cost inflation (labor, SG&A, revenue sharing) outpaces pricing, so margins fall short of year-1 to year-5 assumptions."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.11,
+      "rev_growth": [
+       0.08,
+       0.020000000000000004,
+       0.010000000000000002,
+       0.0050000000000000044,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.165,
+      "rev_growth": [
+       0.14,
+       0.08000000000000002,
+       0.07,
+       0.065,
+       0.065
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "About $540M of debt against roughly $200M of adjusted operating income is modest and is being amortized, so it looks sustainable."
+     },
+     "margin_position": "The FY2026 GAAP operating margin of 13.3% is held down by about $27.8M of restructuring and impairment charges (about 2.6 points of revenue). It sits near the 5-year range of roughly 11.7% to 13.3%. FY2027 Q1 shows strong operating leverage from a record concert slate, but the business depends on discretionary consumer and corporate spending and on a few concentrated assets.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "A 38% rate (FY2026 tax of $40.8M on $107.0M pretax) is plausible for a company concentrated in New York City and state, although the Q1 tax benefit on small pretax income is noisy."
+     },
+     "why": "FY2026 revenue grew 13% and operating income rose 16%, with a normal event calendar. The reported margin is slightly depressed by restructuring and impairment charges. Revenue is concentrated, with the Christmas Spectacular at 18% of FY2026 revenue and the Knicks and Rangers license agreements adding a lot more."
+    },
+    "value_at_old_defaults": 28.559640701936193,
+    "values": {
+     "base": 31.92369416465935,
+     "bear": 22.899550963774,
+     "bull": 44.244114361798864
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 28.559640701936193,
+  "value_at_old_defaults_quoted": 28.559640701936193,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1559839906.4929302,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 48002000.0,
@@ -23,12 +510,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 28.559640701936193,
-  "3000": 28.41237111330088
+  "1000": 33.066927329983805,
+  "3000": 31.92369416465935
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "on request (no-call fix rerun)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1332,163 +1819,17 @@
   ]
  },
  "ticker": "MSGE",
- "upside": -0.6378549703654443,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: capex (1000 none, 3000 up)",
-   "held_at_record: rev_growth.y1 model 0.1620 valued at 0.3720",
-   "held_at_record: op_margin.y1 model 0.1159 valued at 0.0448"
-  ],
-  "departures": [
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P5.s5",
-     "P5.s6",
-     "P5.s7",
-     "Y2026-06-30"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "Y2026-06-30",
-     "P5.s6",
-     "P5.s7"
-    ],
-    "input": "op_margin.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "up",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS (UNAUDITED) - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nRevenues:\nTotal revenues | [1] | $ 217,134 | $ 158,262\nDirect operating expenses:\nTotal direct operating expenses | [1] | (126,755) | (102,370)\nSelling, general, and administrative expenses | [1] | (66,862) | (56,585)\nDepreciation and amortization | (13,793) | (14,074)\nImpairment of long-lived assets | 0 | (13,782)\nRestructuring charges | 0 | (1,190)\nOperating income (loss) | 9,724 | (29,739)\nInterest income | 2,431 | 520\nInterest expense | (9,136) | (11,028)\nOther expense, net | (688) | (172)\nIncome (loss) from operations before income taxes | 2,331 | (40,419)\nIncome tax benefit | 6,578 | 18,765\nNet income (loss) | $ 8,909 | $ (21,654)\nEarnings (loss) per share:\nBasic (in dollars per share) | $ 0.19 | $ (0.46)\nDiluted (in dollars per share) | $ 0.19 | $ (0.46)\nWeighted-average number of common shares outstanding:\nBasic (in shares) | 47,509 | 47,482\nDiluted (in shares) | 47,999 | 47,482\nRevenues from entertainment offerings\nRevenues:\nTotal revenues | $ 174,851 | $ 131,310\nFood, beverage, and merchandise direct operating expenses\nRevenues:\nTotal revenues | 35,693 | 22,837\nDirect operating expenses:\nTotal direct operating expenses | (19,147) | (13,812)\nArena license fees and other leasing revenue\nRevenues:\nTotal revenues | 6,590 | 4,115\nEntertainment offerings, arena license fees, and other leasing direct operating expenses\nDirect operating expenses:\nTotal direct operating expenses | $ (107,608) | $ (88,558)\n[1] | See Note 10. Related Party Transactions for further information on related party arrangements."
-   },
-   "P5.s5": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "This included a new record for the number of concerts in any quarter at the Madison Square Garden Arena (\u201cThe Garden\u201d)."
-   },
-   "P5.s6": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "Subsequent to the end of the quarter, the New York Knicks (\u201cKnicks\u201d) and New York Rangers (\u201cRangers\u201d) began their 2026-27 regular seasons at The Garden."
-   },
-   "P5.s7": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "And later today, the Christmas Spectacular production begins its 2026 holiday season at Radio City Music Hall with 231 planned performances as compared to 215 in fiscal 2026."
-   },
-   "Y2026-06-30": {
-    "kind": "filed_record",
-    "period": "2026-06-30",
-    "text": "Filed annual record, fiscal year ended 2026-06-30 (10-K, accession 0001628280-26-056286): revenue $1,060.8 million; operating income $141.5 million; operating margin 13.3%; net income $66.2 million; depreciation and amortization $56.1 million; capital expenditure $28.3 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.02366527902404981,
-    0.02366527902404981,
-    0.02366527902404981,
-    0.02366527902404981,
-    0.02366527902404981
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.12837381036429438,
-   "normalized.margin": 0.12837381036429438,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.04478340563891422,
-   "op_margin.y2": 0.12837381036429438,
-   "rev_growth.y1": 0.37199074951662436,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05805357927575722
-  },
-  "numbers": {
-   "capex": [
-    0.02366527902404981,
-    0.02366527902404981,
-    0.02366527902404981,
-    0.02366527902404981,
-    0.02366527902404981
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.12837381036429438,
-   "normalized.margin": 0.12837381036429438,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1159026714400194,
-   "op_margin.y2": 0.12837381036429438,
-   "rev_growth.y1": 0.16203733952120913,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05805357927575722
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.1159026714400194,
-    "model_option": "persist",
-    "record": 0.04478340563891422,
-    "record_option": "ytd"
-   },
-   "rev_growth.y1": {
-    "model": 0.16203733952120913,
-    "model_option": "last",
-    "record": 0.37199074951662436,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "last",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The filings and 8-K releases contain no quantitative management guidance for Fiscal Year 2027 revenue, operating margin, or capital expenditures.",
-   "Quarterly risk factors from the Q1 Fiscal Year 2027 Form 10-Q and omitted portions of the Form 10-K, Form 10-Q, and Form 8-K items are not in the packet.",
-   "The financial impact and outcome of the proposed Penn Station redevelopment, the 2028 renewal of The Garden zoning special permit, and potential changes to the New York City real estate tax exemption cannot be determined from the packet."
-  ],
-  "year": 3
- },
- "value_base": 28.559640701936193,
- "value_bear": 24.721968696439873,
- "value_bull": 29.835345196470048,
+ "upside": -0.5879494634967498,
+ "valuation": null,
+ "value_base": 32.495310747321575,
+ "value_bear": 24.182190157196057,
+ "value_bull": 43.49126503458713,
  "value_per_filed_share": {
-  "base": 28.559640701936193,
-  "bear": 24.721968696439873,
-  "bull": 29.835345196470048
+  "base": 32.495310747321575,
+  "bear": 24.182190157196057,
+  "bull": 43.49126503458713
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -32.5 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -27.9 points a year against the required return over 3 years"
 }

@@ -1,13 +1,395 @@
 {
- "alpha_pts": 44.75459991314634,
+ "alpha_pts": 19.812890889343947,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 67,
  "claims_supported": 63,
  "date": "2026-11-17T23:35:25Z",
- "equity_value": 2842244455.838243,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.2794, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.08341043417625595,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 1505624416.3338675,
+     "implied_pb": 3.2239234710918687,
+     "seam_ratio": 1.074600000000003,
+     "tv_share": 0.4774376611426544
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.25,
+      0.17,
+      0.13,
+      0.1,
+      0.08
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.13,
+     "roe": [
+      0.38,
+      0.27,
+      0.23,
+      0.2,
+      0.18
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2794, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 63
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.08,
+      0.17
+     ],
+     "long_run_roe": [
+      0.1,
+      0.17
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total Stockholders' Equity | 599,141 | 505,251"
+       },
+       {
+        "id": "P7",
+        "quote": "repurchasing up to an aggregate of $50.0 million of common stock through December 31, 2027"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Equity was already 599.1M at September 30 against 505.3M at year-end, so year 1 growth is about 25%. After that, growth slows as earnings fall and payouts continue, including a new 50M buyback programme. Unrealized losses on bonds and the buybacks are modest offsets."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "We successfully completed the placement of our catastrophe excess of loss reinsurance program with higher coverage levels than the prior-year while achieving a lower total and risk-adjusted cost."
+       },
+       {
+        "id": "P7",
+        "quote": "Debt-to-capital ratio improved to 10.5% from 15.3% in the prior-year quarter."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The excess return should compete away over about a decade as the cycle softens and reinsurance and cat experience normalise. Debt is low and the 2026 reinsurance placement was cheaper."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.4500, p25 -0.1689, median 0.2794, p75 0.3458, max 0.6726, last 0.6726."
+       },
+       {
+        "id": "P2",
+        "quote": "As of December 31, 2025, nearly all of our premium in force related to business in coastal states"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A coastal property writer has volatile returns. The filed record shows a median of 0.28 but a minimum of -0.45, and 2021-22 were losses. Cost of equity is 9.4%, and competition in commercial residential and a softening cycle should erode excess returns. I settle at about 13%, above r, because the underwriting franchise and reinsurance structure now look much better."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Annualized return on equity of 35.1% for the third quarter of 2026 and 36.1% year to date"
+       },
+       {
+        "id": "P4",
+        "quote": "this level of favorable net loss development is not expected to continue in the future"
+       },
+       {
+        "id": "P3",
+        "quote": "Net combined ratio of 73.1%, a 21.1 point improvement from 94.2% in the prior year"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 net income of 149.3M and a 36.1% year-to-date ROE put 2026 near 0.38 on the 505.3M opening equity. The 2025 return was 0.67, and the Q3 ROE is already below the prior-year quarter's 49.2%. Management says reserve releases will moderate, and the 2024 combined ratio was 94.2%, so I fade the return steadily through year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "The Florida commercial residential market remains highly competitive"
+       },
+       {
+        "id": "P7",
+        "quote": "includes our entry to the State of Texas on an excess and surplus lines basis"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The growth anchor is 3.75%. Premium in force is shrinking in Florida commercial residential, partly offset by personal lines growth elsewhere and Texas E&S entry, so I use a slightly lower rate."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "roe",
+      "risk": "A severe hurricane or series of storms exceeds reinsurance protection and cuts earnings and equity."
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Reserve releases end and reinsurance costs rise at renewal, so margins revert toward 2024 levels."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "book_growth",
+      "risk": "Statutory surplus limits dividends to the holding company, or the company chooses to retain capital for growth, slowing buybacks and changing book growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.2,
+       0.12000000000000001,
+       0.08,
+       0.05,
+       0.03
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.29000000000000004,
+       0.21000000000000002,
+       0.17,
+       0.14,
+       0.12000000000000001
+      ],
+      "long_run_roe": 0.17,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "unclear",
+     "institution": "insurer",
+     "roe_position": "The return on equity is very high because Heritage is a Florida-weighted coastal property insurer in a benign stretch. Rate increases, Florida litigation reform, a lower reinsurance bill and favourable reserve releases have pushed the combined ratio to the low 70s, and the base-year equity is small. It was loss-making in 2021 and 2022 and earned a 94.2% combined ratio in 2024. The current level reflects a light catastrophe run and reserve releases that management says will fade, so I expect a step down toward a mid-teens or lower ROE.",
+     "why": "The 2025 ROE of 0.67 sits on equity rebuilt from 131.0M in 2022 and is not a normal level. Nearly all premium is coastal, so one severe season could wipe out several years of earnings. Book growth is limited more by management's choice to return capital through buybacks than by a shortage of regulatory capital. Year-end statutory surplus was 392.5M against 505.3M of GAAP equity, and the packet gives no current surplus or dividend capacity, so I rate the constraint as unclear."
+    },
+    "value_at_old_defaults": 76.14012670079295,
+    "values": {
+     "base": 52.629915131310696,
+     "bear": 37.963904328747255,
+     "bull": 88.3849425791306
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 1385067483.1317606,
+     "implied_pb": 2.9657805223347586,
+     "seam_ratio": 1.0759444444444457,
+     "tv_share": 0.48815682528212534
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.25,
+      0.18,
+      0.12,
+      0.09,
+      0.07
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.13,
+     "roe": [
+      0.37,
+      0.26,
+      0.21,
+      0.18,
+      0.16
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2794, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 63
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.06,
+      0.17
+     ],
+     "long_run_roe": [
+      0.09,
+      0.16
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total Stockholders' Equity | 599,141 | 505,251"
+       },
+       {
+        "id": "P7",
+        "quote": "for the purpose of repurchasing up to an aggregate of $50.0 million of common stock through December 31, 2027"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Equity rose from $505.3M to $599.1M in nine months, so year 1 growth is high even after buybacks. Growth should slow as ROE falls and as buybacks (the new $50M program) and limits on subsidiary dividends take a larger share of earnings."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "combined statutory surplus for our three insurance company subsidiaries of $392.5 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Moving from the current exceptional returns to a cycle-average ROE should take about a decade, since rate adequacy and reform gains fade slowly while competition and reinsurance costs reset over several treaty years."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Net combined ratio of 73.1%, a 21.1 point improvement from 94.2% in the prior year"
+       },
+       {
+        "id": "P4",
+        "quote": "The Florida commercial residential market remains highly competitive"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A Florida-heavy, coastal property writer should earn modestly above the 9.4% cost of equity over a full cycle. Competition in commercial residential, reinsurance cost swings and a 94.2% combined ratio as recently as 2024 argue against holding anything near current returns."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Annualized return on equity of 35.1% for the third quarter of 2026 and 36.1% year to date"
+       },
+       {
+        "id": "P4",
+        "quote": "the Company expects favorable net loss development to moderate"
+       },
+       {
+        "id": "REC",
+        "quote": "$-154.4 million"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is mostly known: nine-month income is $149.3M, about 0.37 of opening equity of $505.3M. After that, ROE should fall as reserve releases fade, catastrophe losses normalize and equity grows. The 2022 loss year shows how far the ROE can drop."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P4",
+        "quote": "Gross premiums written decreased 3.1% to $322.8 million from $333.2 million in the prior-year quarter"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Premiums written are shrinking (-3.1% in Q3), with growth plans in Texas not yet showing in the numbers. A long-run growth rate near the nominal anchor is reasonable, set slightly below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "roe",
+      "risk": "A major hurricane or run of storms exceeds reinsurance protection, or reserve releases reverse into adverse development."
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Reinsurance costs reset higher and Florida competition erodes margins, so the long-run ROE sits close to the cost of equity."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Statutory surplus limits dividends or buybacks, or premium shrinkage continues, so book growth is slower."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.19,
+       0.12,
+       0.06,
+       0.03,
+       0.010000000000000009
+      ],
+      "long_run_roe": 0.09,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.30000000000000004,
+       0.23,
+       0.17,
+       0.14,
+       0.12000000000000002
+      ],
+      "long_run_roe": 0.16,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "unclear",
+     "institution": "insurer",
+     "roe_position": "The 2025 return on opening equity of 0.6726 and the current 36% annualized ROE are inflated by peak conditions. Catastrophe losses are light, Florida litigation reform has cut claim costs, rates are adequate, reinsurance now costs less, and reserve releases are large ($14.0M in Q3 alone). The record also shows a long loss history (-0.45 in 2022, -0.17 in 2021) before the turn. Management says reserve releases will moderate, and the book is nearly all coastal, so a normal cat year would lower returns. Equity is also still small relative to earnings, which flatters the ratio.",
+     "why": "Statutory surplus of the three insurance subsidiaries was $392.5M at year-end 2025, against net premiums earned of roughly $0.8B, so regulatory capital and rating agencies likely limit how much can be paid out. The evidence gives no current surplus or dividend capacity. Buybacks are modest ($50M authorized for 2027), so book equity will keep compounding fast and growth sits above ROE-supportable payout until returns normalize. Heavy cat and reserve risk argues for retaining capital."
+    },
+    "value_at_old_defaults": 76.14012670079295,
+    "values": {
+     "base": 48.41578238074894,
+     "bear": 32.874674884370094,
+     "bull": 79.80228904488692
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 76.14012670079295,
+  "value_at_old_defaults_quoted": 76.14012670079295,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 1563677066.1913984,
  "family": "financial",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 30949899.0,
  "flags": [
   "The Board established a new share repurchase program of up to $50.0 million of common stock. It starts when the existing program expires.",
@@ -15,7 +397,7 @@
   "Third-quarter results absorbed $15.8 million of pre-tax catastrophe losses, including $9.1 million from Hurricanes Lala and Lowell. The prior-year quarter had none."
  ],
  "in_code_book": false,
- "ke": 0.09390305732783658,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 991500715,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +405,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 91.83372313551793,
-  "3000": 91.83372313551793
+  "1000": 52.629915131310696,
+  "3000": 48.41578238074894
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -833,126 +1215,17 @@
   ]
  },
  "ticker": "HRTG",
- "upside": 1.8666085791357627,
- "valuation": {
-  "annotations": [],
-  "departures": [
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F1",
-     "P7.s13",
-     "V0"
-    ],
-    "input": "book_growth.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P7.s12",
-     "F2",
-     "V0"
-    ],
-    "input": "roe.y1"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "up",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "none",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "up",
-   "roe.y2": "none",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "F1": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Balance Sheets - USD ($) $ in Thousands | Sep. 30, 2026 | Dec. 31, 2025\nASSETS\nFixed maturities, available-for-sale, at fair value (amortized cost of $895,936 and $726,774) | $ 852,630 | $ 713,237\nEquity securities, at fair value, (cost $816 and $1,064) | 816 | 1,064\nOther investments, net | 1,210 | 1,285\nTotal investments | 854,656 | 715,586\nCash and cash equivalents | 532,098 | 559,274\nRestricted cash | 13,286 | 13,307\nAccrued investment income | 7,125 | 6,556\nPremiums receivable, net | 87,931 | 95,331\nReinsurance recoverable on paid and unpaid claims, net of allowance for credit losses of $175 | 218,885 | 318,588\nPrepaid reinsurance premiums | 383,966 | 307,039\nDeferred income tax asset, net | 15,128 | 5,855\nIncome taxes receivable, net | 571 | 0\nDeferred policy acquisition costs, net | 64,852 | 64,544\nProperty and equipment, net | 26,402 | 28,254\nRight-of-use lease asset, finance | 10,773 | 12,598\nRight-of-use lease asset, operating | 5,852 | 4,878\nIntangibles, net | 25,651 | 30,189\nOther assets | 15,646 | 33,823\nTotal Assets | 2,262,822 | 2,195,822\nLIABILITIES AND STOCKHOLDERS' EQUITY\nUnpaid losses and loss adjustment expenses | 459,875 | 579,477\nUnearned premiums | 708,385 | 707,923\nReinsurance payable | 339,143 | 232,801\nLong-term debt, net | 70,432 | 78,428\nAdvance premiums | 26,776 | 19,164\nIncome taxes payable, net | 0 | 4,282\nAccrued compensation | 8,703 | 8,844\nLease liability, finance | 13,612 | 15,587\nLease liability, operating | 6,073 | 5,800\nAccounts payable and other liabilities | 30,682 | 38,265\nTotal Liabilities | 1,663,681 | 1,690,571\nCommitments and contingencies (Note 17)\nStockholders\u2019 Equity:\nCommon stock, $0.0001 par value, 50,000,000 shares authorized, 43,071,733 shares issued and 29,632,416 outstanding at September 30, 2026 and 43,171,585 shares issued and 30,833,776 outstanding at December 31, 2025 | 3 | 3\nAdditional paid-in capital | 360,888 | 365,736\nAccumulated other comprehensive loss, net of taxes | (33,243) | (10,555)\nTreasury stock, at cost, 13,439,317 shares at September 30, 2026 and 12,337,809 shares at December 31, 2025 | (161,074) | (133,183)\nRetained earnings | 432,567 | 283,250\nTotal Stockholders' Equity | 599,141 | 505,251\nTotal Liabilities and Stockholders' Equity | $ 2,262,822 | $ 2,195,822"
-   },
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Operations and Other Comprehensive Income (Unaudited) - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nREVENUES:\nGross premiums written | $ 322,778 | $ 333,160 | $ 1,057,965 | $ 1,100,125\nChange in gross unearned premiums | 30,003 | 28,801 | (468) | (30,742)\nGross premiums earned | 352,781 | 361,961 | 1,057,497 | 1,069,383\nCeded premiums | (147,190) | (166,829) | (451,089) | (477,901)\nNet premiums earned | 205,591 | 195,132 | 606,408 | 591,482\nNet investment income | 11,361 | 9,686 | 31,823 | 27,295\nNet realized (losses) gains on debt securities and other investments | (38) | 2,746 | (59) | 2,746\nOther revenue | 2,327 | 4,895 | 7,923 | 10,490\nTotal revenues | 219,241 | 212,459 | 646,095 | 632,013\nEXPENSES:\nLosses and loss adjustment expenses | 81,391 | 74,766 | 234,045 | 249,793\nPolicy acquisition costs, net of ceding commission income | [1] | 45,114 | 45,182 | 135,959 | 134,143\nGeneral and administrative expenses, net of ceding commission income | [2] | 23,506 | 22,345 | 72,194 | 70,604\nTotal expenses | 150,011 | 142,293 | 442,198 | 454,540\nOperating income | 69,230 | 70,166 | 203,897 | 177,473\nInterest expense, net | 1,515 | 1,850 | 4,983 | 6,157\nIncome before income taxes | 67,715 | 68,316 | 198,914 | 171,316\nIncome tax expense | 16,591 | 17,895 | 49,597 | 42,397\nNet income (loss) | 51,124 | 50,421 | 149,317 | 128,919\nOTHER COMPREHENSIVE (LOSS) INCOME\nChange in net unrealized (losses) gains on investments | (23,421) | 6,009 | (29,859) | 20,557\nReclassification adjustment for net realized investment (gains) losses | 57 | (5) | 78 | (5)\nIncome tax benefits (expense) related to items of other comprehensive income | 5,567 | (1,428) | 7,093 | (4,886)\nTotal comprehensive income | $ 33,327 | $ 54,997 | $ 126,629 | $ 144,585\nWeighted average shares outstanding\nBasic (in shares) | 29,727,529 | 30,962,464 | 30,141,881 | 30,888,169\nDiluted (in shares) | 29,784,837 | 31,021,780 | 30,200,528 | 30,947,450\nEarnings per share\nBasic (in dollars per share) | $ 1.72 | $ 1.63 | $ 4.95 | $ 4.17\nDiluted (in dollars per share) | $ 1.72 | $ 1.63 | $ 4.94 | $ 4.17\n[1] | Policy acquisition costs include $11.5 million and $33.9 million of ceding commission income for the three and nine months ended September 30, 2026 and $12.7 million and $37.5 million of ceding commission income for the three and nine months ended September 30, 2025.\n[2] | General and administrative expenses include $3.8 million and $11.2 million of ceding commission income for the three and nine months ended September 30, 2026 and $4.2 million and $12.4 million of ceding commission income for the three and nine months ended September 30, 2025."
-   },
-   "P7.s12": {
-    "kind": "release",
-    "period": "2026-10-28",
-    "text": "Annualized return on equity of 35.1% for the third quarter of 2026 and 36.1% year to date, with stockholders\u2019 equity at September 30, 2026 up 37.0% from September 30, 2025."
-   },
-   "P7.s13": {
-    "kind": "release",
-    "period": "2026-10-28",
-    "text": "Book value per share of $20.22, up 23.4% from year-end 2025 and 42.9% from the prior-year quarter."
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled return-on-equity record (income to common over opening common equity): min -0.4500, p25 -0.1689, median 0.2794, p75 0.3458, max 0.6726, last 0.6726.\nCommon book equity at the end of the base year 505,251,000; income to common in the base year 195,594,000.\nFiled yearly growth of book equity (consecutive fiscal years): 2021-12-31 -0.2245, 2022-12-31 -0.6180, 2023-12-31 0.6810, 2024-12-31 0.3201, 2025-12-31 0.7375.\nCost of equity 0.0939 (risk-free 0.0515, long-run growth anchor 0.0375, loading 0.889, equity premium 0.0477).\nMENU (option and the number code uses; the first option is the record-neutral one).\nbook_growth.y1, book_growth.y2, normalized.book_growth: neutral 0.0375; record_median 0.3201; last 0.7375; anchor 0.0375; guidance\nroe.y1, roe.y2: median 0.2794; p25 -0.1689; p75 0.3458; last 0.6726; guidance\nnormalized.anchor and long_run_roe.anchor: median 0.2794; p25 -0.1689; p75 0.3458; last 0.6726; long_run_roe.anchor also normalized (the normalized number)\nnormalized.step and long_run_roe.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_g: neutral 0.0375; anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\nDeparture keys: book_growth.y1, book_growth.y2, roe.y1, roe.y2, normalized.roe, normalized.book_growth, long_run_roe, fade_years, terminal_g.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: book_growth, roe."
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.2793671690575631,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.2793671690575631,
-   "roe.y1": 0.2793671690575631,
-   "roe.y2": 0.2793671690575631,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.3201334664971853,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.2793671690575631,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.2793671690575631,
-   "roe.y1": 0.34575202802219185,
-   "roe.y2": 0.2793671690575631,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "record_median",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    0
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "p75",
-   "roe.y2": "median",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Full-year 2026 results are not in the evidence; the nine-month figures are the latest.",
-   "The filings say favorable prior-year reserve development is expected to moderate, but they do not say by how much.",
-   "The evidence does not show how much of the 2026 return came from low catastrophe losses versus lasting underwriting margin.",
-   "Future buyback pace beyond the new $50.0 million program, and 2027 and later book growth, are not stated.",
-   "The evidence does not say when a hurricane season or a reinsurance-cost cycle would pull returns back toward the record median."
-  ],
-  "year": 3
- },
- "value_base": 91.83372313551793,
- "value_bear": 76.66398546088101,
- "value_bull": 114.15574258838828,
+ "upside": 0.5770811281678181,
+ "valuation": null,
+ "value_base": 50.522848756029816,
+ "value_bear": 35.41928960655868,
+ "value_bull": 84.09361581200875,
  "value_per_filed_share": {
-  "base": 91.83372313551793,
-  "bear": 76.66398546088101,
-  "bull": 114.15574258838828
+  "base": 50.522848756029816,
+  "bear": 35.41928960655868,
+  "bull": 84.09361581200875
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +44.8 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +19.8 points a year against the required return over 3 years"
 }

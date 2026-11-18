@@ -1,13 +1,508 @@
 {
- "alpha_pts": -55.909848075956205,
+ "alpha_pts": -19.586755303371493,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 105,
  "claims_supported": 104,
  "date": "2026-11-16T13:25:46Z",
- "equity_value": 1703921198.1808538,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.0360 (filed 0.0076 to 0.0243)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.0370 (filed 0.0076 to 0.0243)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.0380 (filed 0.0076 to 0.0243)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.0380 (filed 0.0076 to 0.0243)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.0380 (filed 0.0076 to 0.0243)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.0350 (filed 0.0076 to 0.0243)",
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Base-year debt of $2,507.5 million was cut by divestiture proceeds, and long-term debt is now 2,146,779 against leverage of 1.79x, so the level has shifted down.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.0360 (filed 0.0076 to 0.0243)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.0390 (filed 0.0076 to 0.0243)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.0410 (filed 0.0076 to 0.0243)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.0420 (filed 0.0076 to 0.0243)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.0430 (filed 0.0076 to 0.0243)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.0400 (filed 0.0076 to 0.0243)",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Long-term debt fell to 2,146,779 from 2,455,204 and leverage to 1.79x after divestiture proceeds, so base-year debt of $2,507.5 million overstates the current level.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.2500 and margin 0.0352, margin 0.0198 (persist), growth 0.0375, terminal RONIC 0.0629 (equity return r 0.0838), F 10",
+  "run_gap": 0.14144112493545624,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 88370000.0,
+     "excess_cash_before": 88370000.0,
+     "k0_after": 158859357.52974892,
+     "k0_before": 158859357.52974892,
+     "k0_interest": 157311000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 172829825.50737223,
+     "x0_before": 172829825.50737223
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 6666885367.428806,
+     "seam_ratio": 1.0408406206952918,
+     "tv_share": 0.502851616476003,
+     "wedge_rate_5": 0.0008651471250937697
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0360 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y2 0.0370 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y3 0.0380 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y4 0.0380 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y5 0.0380 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: long_run_op_margin 0.0350 (filed 0.0076 to 0.0243)",
+     "base_year_not_representative",
+     "debt_level_representative_no: Base-year debt of $2,507.5 million was cut by divestiture proceeds, and long-term debt is now 2,146,779 against leverage of 1.79x, so the level has shifted down.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.0075,
+     "fade_years": 10,
+     "long_run_op_margin": 0.035,
+     "op_margin": [
+      0.036,
+      0.037,
+      0.038,
+      0.038,
+      0.038
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.242,
+      0.12,
+      0.09,
+      0.07,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.2500 and margin 0.0352, margin 0.0198 (persist), growth 0.0375, terminal RONIC 0.0629 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 104
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.027,
+      0.043
+     ],
+     "rev_growth_y3": [
+      0.05,
+      0.13
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0083"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (72,666) | (57,819)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 0.0083 of revenue, while nine-month 2026 capex was 72,666 on revenue of 11.7 billion, about 0.6%. I take a figure between the two."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Changes to Medicare and Medicaid rates or methods governing Medicare and Medicaid payments for our services could materially adversely affect our business."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years is a medium fade from high mix-driven growth to a mature rate in a competitive, reimbursement-exposed industry."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Gross Profit per script ($) | 28.86 | 22.76 | 27% | 28.13 | 21.01 | 34%"
+       },
+       {
+        "id": "P2",
+        "quote": "we may be less price competitive than some of these competitors"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year median margin is only 1-2%. Mix gains are real, as gross profit per script rose 34% over nine months. Thin product margins, vertically integrated rivals and payor leverage argue for fading part-way back from the current peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 160,480 | 87,843 | 412,320 | 187,139"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $12,910.6 million | 0.2818 | 0.0229"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income is 412,320 against 187,139, a margin of about 3.5% against 2.0%. I assume year 1 lands near 3.6% and gains only modestly after, since pharmacy margins are thin."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2361"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0629"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The current return on tangible capital of 0.2361 reflects a light-asset model, but competition and reimbursement pressure should pull the return on new capital down toward, but well above, the 0.0629 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Pharmacy Segment Revenue of $14,000 million to $14,200 million, or 22.3% to 24.1% growth"
+       },
+       {
+        "id": "P6",
+        "quote": "Provider Segment Revenue of $1,900 million to $1,925 million, or 29.7% to 31.4% growth"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows the raised 2026 guidance: pharmacy about +23% and provider about +30%, giving about 24% on the 12,910.6 base. Later years fade because script volume is flat and growth is mostly mix and price per script, which is hard to sustain."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Aging demand for home-based care supports growth near, but slightly below, the long-run nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.025,
+      "input_hit": "long_run_op_margin",
+      "risk": "Reimbursement cuts, loss of limited-distribution drug access or payor and rival price pressure compress thin pharmacy margins"
+     },
+     {
+      "bear_value": 0.04,
+      "input_hit": "rev_growth",
+      "risk": "Pharmacy growth driven by revenue per script rather than volume stalls, as scripts were flat over nine months"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "terminal_growth",
+      "risk": "Long-run growth falls to a lower rate as mix gains end and the market matures"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.027,
+      "rev_growth": [
+       0.202,
+       0.08,
+       0.05,
+       0.030000000000000013,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.043,
+      "rev_growth": [
+       0.28200000000000003,
+       0.16,
+       0.13,
+       0.11000000000000001,
+       0.1
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $2,507.5 million was cut by divestiture proceeds, and long-term debt is now 2,146,779 against leverage of 1.79x, so the level has shifted down."
+     },
+     "margin_position": "The reported margin is low because the company is mostly a thin-margin drug dispenser, with cost of goods at about 81% of revenue. It is rising as higher-value specialty and infusion scripts and Provider Services scale lift gross profit per script faster than SG&A grows.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 24.0% base-year rate is a plausible normal rate, although the nine-month 2026 continuing rate looks lower at about 14% (44,099 on 305,788 pretax)."
+     },
+     "why": "Fiscal 2025 operating margin was 2.29%, but nine-month 2026 operating income of 412,320 on revenue of 11,700,095 implies about 3.5%. Revenue is guided to grow about 24% in 2026, so the base year understates the current scale and margin. The Community Living sale has been excluded from continuing operations, so 2025 revenue and margin are already restated."
+    },
+    "value_at_old_defaults": 7.556400621297339,
+    "values": {
+     "base": 32.95452509839602,
+     "bear": 19.642001587208192,
+     "bull": 57.00164660935287
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 88370000.0,
+     "excess_cash_before": 88370000.0,
+     "k0_after": 158859357.52974892,
+     "k0_before": 158859357.52974892,
+     "k0_interest": 157311000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 172829825.50737223,
+     "x0_before": 172829825.50737223
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7694153942.656523,
+     "seam_ratio": 1.0365032878747569,
+     "tv_share": 0.5052053257387151,
+     "wedge_rate_5": 0.000519783584027014
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0360 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y2 0.0390 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y3 0.0410 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y4 0.0420 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: op_margin.y5 0.0430 (filed 0.0076 to 0.0243)",
+     "margin_outside_filed_record: long_run_op_margin 0.0400 (filed 0.0076 to 0.0243)",
+     "base_year_not_representative",
+     "debt_level_representative_no: Long-term debt fell to 2,146,779 from 2,455,204 and leverage to 1.79x after divestiture proceeds, so base-year debt of $2,507.5 million overstates the current level.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.0078,
+     "fade_years": 10,
+     "long_run_op_margin": 0.04,
+     "op_margin": [
+      0.036,
+      0.039,
+      0.041,
+      0.042,
+      0.043
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.24,
+      0.11,
+      0.08,
+      0.065,
+      0.055
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.2500 and margin 0.0352, margin 0.0198 (persist), growth 0.0375, terminal RONIC 0.0629 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 104
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.03,
+      0.05
+     ],
+     "rev_growth_y3": [
+      0.04,
+      0.12
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0083"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (72,666) | (57,819)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has run at 0.0083 of revenue pooled and about 0.6% in 2026 (72,666 on 11.7 billion), which is low for a pharmacy-heavy model. I use 0.78%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Home Health Care average daily census(3) | 47,256 | 29,980 | 58%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth is currently inflated by mix shift, acquisitions and the 58% rise in home health census, so a 10-year fade to the terminal rate is a reasonable middle path."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "we may be less price competitive than some of these competitors with respect to certain pharmaceutical products"
+       },
+       {
+        "id": "P4",
+        "quote": "Adjusted EBITDA(1) increased by $67.3 million, or 42.0%, to $227.8 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The mix is dominated by low-margin pharmacy, with some pricing pressure from vertically integrated rivals, so I hold the long-run margin near 4%. The gains from limited-distribution drugs and provider scale may partly persist."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 160,480 | 87,843 | 412,320 | 187,139"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $12,910.6 million | 0.2818 | 0.0229"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income of 412,320 on revenue of 11,700,095 gives about 3.5%, and Q3 was about 3.8%. I assume continued gradual operating leverage, with the margin building from 3.6% to 4.3%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2361"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0629."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed return on tangible capital of 0.2361 reflects an asset-light model, but growth also comes from acquisitions and working capital in receivables, and competition erodes returns. I assume a long-run return well below the current level but above the 0.0629 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Pharmacy Segment Revenue of $14,000 million to $14,200 million, or 22.3% to 24.1% growth"
+       },
+       {
+        "id": "P6",
+        "quote": "Provider Segment Revenue of $1,900 million to $1,925 million, or 29.7% to 31.4% growth"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is FY2026. Guidance implies pharmacy of about $14.0-14.2 billion and provider of about $1.9 billion on a 2025 base of $12.9 billion, so roughly 24% growth. Pharmacy growth came mostly from revenue per script and acquisitions, not volume, so I fade growth quickly toward the high single digits."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A long-run growth near the nominal anchor is reasonable for a home-based care platform with aging-demographic tailwinds. I set it slightly below the anchor to reflect mix-driven pharmacy growth that cannot continue indefinitely."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.028,
+      "input_hit": "long_run_op_margin",
+      "risk": "Medicare/Medicaid or payor rate cuts, or loss of limited-distribution drug access, compress pharmacy margins"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Per-script mix and price gains reverse while volume stays flat, so revenue growth fades quickly"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Competition from vertically integrated payor/PBM rivals and in-housing by facilities caps long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.03,
+      "rev_growth": [
+       0.19999999999999998,
+       0.07,
+       0.04,
+       0.025,
+       0.015
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       0.27999999999999997,
+       0.15,
+       0.12,
+       0.105,
+       0.095
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Long-term debt fell to 2,146,779 from 2,455,204 and leverage to 1.79x after divestiture proceeds, so base-year debt of $2,507.5 million overstates the current level."
+     },
+     "margin_position": "The margin is low because about 89% of revenue is drug dispensing, where cost of goods takes most of each dollar. It is rising as higher-value specialty and infusion scripts and Provider Services scale lift gross profit per script faster than SG&A. The 2025 margin of 2.29% sits well below the 2026 nine-month run rate of about 3.5%.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate of 0.2403 is near a normal level, but the nine-month 2026 continuing rate was only about 14% (44,099 on 305,788 of pretax income), so the sustainable rate is uncertain."
+     },
+     "why": "The base year of 2025 predates the divestiture of Community Living, a roughly 24% revenue jump in 2026 and a materially higher margin. Nine-month 2026 operating income was 412,320 against 187,139 a year earlier. Base-year debt of $2,507.5 million has since been reduced, so FY2025 understates the current earnings power and interest burden."
+    },
+    "value_at_old_defaults": 7.556400621297339,
+    "values": {
+     "base": 37.97037384461235,
+     "bear": 22.194872241525605,
+     "bull": 66.51198901234815
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 7.556400621297339,
+  "value_at_old_defaults_quoted": 7.556400621297339,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 7793724370.150361,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 219774000.0,
  "flags": [
   "BrightSpring completed the divestiture of its Community Living business on March 30, 2026. The business had been sold under a January 17, 2025 agreement for $835 million, subject to adjustments. The 2026 cash flow statement shows proceeds from the sale of discontinued operations of 810,908 and a gain on the sale of 101,845 (table in thousands).",
@@ -15,7 +510,7 @@
   "During the nine months ended September 30, 2026 the company repaid long-term debt of (332,300) (table in thousands). Reported leverage fell to 1.79x at September 30, 2026 from 2.15x at June 30, 2026."
  ],
  "in_code_book": false,
- "ke": 0.08358973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 13895096898,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +518,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 7.7530608633453175,
-  "3000": 7.7530608633453175
+  "1000": 32.95452509839602,
+  "3000": 37.97037384461235
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1308,134 +1803,17 @@
   ]
  },
  "ticker": "BTSG",
- "upside": -0.8773724853674025,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: op_margin.y1 0.0352"
-  ],
-  "departures": [
-   {
-    "driver": "mix",
-    "evidence": [
-     "F2",
-     "P6.s41",
-     "P4.s61",
-     "P4.s71"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Operations - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nTotal revenues | $ 4,213,234 | $ 3,334,106 | $ 11,700,095 | $ 9,359,933\nCost of goods | 3,416,415 | 2,721,314 | 9,395,982 | 7,605,931\nCost of services | 278,270 | 220,784 | 810,596 | 648,773\nGross profit | 518,549 | 392,008 | 1,493,517 | 1,105,229\nSelling, general, and administrative expenses | 358,069 | 304,165 | 1,081,197 | 918,090\nOperating income | 160,480 | 87,843 | 412,320 | 187,139\nInterest expense, net | 31,038 | 38,235 | 106,532 | 118,776\nIncome from continuing operations before income taxes | 129,442 | 49,608 | 305,788 | 68,363\nIncome tax expense | 28,640 | 12,120 | 44,099 | 13,118\nIncome from continuing operations, net of income taxes | 100,802 | 37,488 | 261,689 | 55,245\n(Loss) income from discontinued operations, net of income taxes | (503) | 17,753 | 71,429 | 56,548\nNet income | 100,299 | 55,241 | 333,118 | 111,793\nNet income (loss) attributable to noncontrolling interests included in continuing operations | 161 | (595) | (77) | (1,793)\nNet income attributable to BrightSpring Health Services, Inc. and subsidiaries | $ 100,138 | $ 55,836 | $ 333,195 | $ 113,586\nBasic income (loss) per share attributable to common shareholders:\nContinuing operations | $ 0.49 | $ 0.19 | $ 1.27 | $ 0.28\nDiscontinued operations | (0.01) | 0.08 | 0.35 | 0.28\nNet income per share | 0.48 | 0.27 | 1.62 | 0.56\nDiluted income (loss) per share attributable to common shareholders:\nContinuing operations | 0.46 | 0.17 | 1.18 | 0.26\nDiscontinued operations | (0.01) | 0.09 | 0.33 | 0.26\nNet income per share | $ 0.45 | $ 0.26 | $ 1.51 | $ 0.52\nWeighted average shares outstanding:\nBasic | 207,022 | 203,487 | 205,934 | 202,067\nDiluted | 220,226 | 217,982 | 220,972 | 218,519\nProducts\nTotal revenues | $ 3,732,428 | $ 2,966,966 | $ 10,310,950 | $ 8,289,238\nServices\nTotal revenues | $ 480,806 | $ 367,140 | $ 1,389,145 | $ 1,070,695"
-   },
-   "P4.s61": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Specialty and Infusion Pharmacy | 25.8% | 7.5% | \u2014 | 0.4% | 16.8% | 24.0% | 1.0% | 75.5%"
-   },
-   "P4.s71": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Specialty and Infusion Pharmacy | 21.8% | 6.8% | \u2014 | 0.6% | 17.8% | 23.5% | 0.8% | 71.3%"
-   },
-   "P6.s41": {
-    "kind": "release",
-    "period": "2026-10-30",
-    "text": "Gross Profit per script ($) | 28.86 | 22.76 | 27% | 28.13 | 21.01 | 34%"
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.008335522457286297,
-    0.008335522457286297,
-    0.008335522457286297,
-    0.008335522457286297,
-    0.008335522457286297
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.019831268374798858,
-   "normalized.margin": 0.019831268374798858,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03524073949826903,
-   "op_margin.y2": 0.019831268374798858,
-   "rev_growth.y1": 0.25001909735892336,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0628085347717886
-  },
-  "numbers": {
-   "capex": [
-    0.008335522457286297,
-    0.008335522457286297,
-    0.008335522457286297,
-    0.008335522457286297,
-    0.008335522457286297
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.019831268374798858,
-   "normalized.margin": 0.019831268374798858,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03524073949826903,
-   "op_margin.y2": 0.023233904646910088,
-   "rev_growth.y1": 0.25001909735892336,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0628085347717886
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "p75",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The sentence giving full-year 2026 total company revenue guidance is cut from the packet; only the Pharmacy and Provider segment revenue ranges are visible, so total-revenue guidance was not chosen.",
-   "The full-year 2026 Adjusted EBITDA guidance figures are cut from the packet, and no operating-margin guidance is given.",
-   "No item gives numeric revenue, margin or capital expenditure guidance for 2027 or later.",
-   "The evidence does not show whether the 2026 rise in revenue per script and gross profit per script will persist beyond 2026."
-  ],
-  "year": 3
- },
- "value_base": 7.7530608633453175,
- "value_bear": 7.149087270746866,
- "value_bull": 9.020193255597857,
+ "upside": -0.4391025534142079,
+ "valuation": null,
+ "value_base": 35.462449471504186,
+ "value_bear": 20.9184369143669,
+ "value_bull": 61.75681781085051,
  "value_per_filed_share": {
-  "base": 7.7530608633453175,
-  "bear": 7.149087270746866,
-  "bull": 9.020193255597857
+  "base": 35.462449471504186,
+  "bear": 20.9184369143669,
+  "bull": 61.75681781085051
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -55.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -19.6 points a year against the required return over 3 years"
 }

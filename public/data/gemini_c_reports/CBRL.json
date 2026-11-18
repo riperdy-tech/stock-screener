@@ -1,23 +1,514 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -1.8130764855888326,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 67,
  "claims_supported": 56,
  "date": "2026-11-18T03:59:53Z",
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: return_above_base_year: long-run 0.0900 against the base year's 0.0267",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The company pays a negative effective rate because of tax credits and expects a 2027 tax benefit of $4-8M, so a flat 21% statutory rate in the record is not what it pays.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: return_above_base_year: long-run 0.0800 against the base year's 0.0267",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.0060 (persist), growth 0.0375, terminal RONIC 0.0728 (equity return r 0.1058), F 10",
+  "run_gap": 0.2021473393169781,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 36535000.0,
+     "excess_cash_before": 36535000.0,
+     "k0_after": -31684657.927999996,
+     "k0_before": -31684657.927999996,
+     "k0_interest": 10601000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 15179579.763119997,
+     "x0_before": 15179579.763119997
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1251348697.5761912,
+     "seam_ratio": 1.0256504078808295,
+     "tv_share": 0.3513178150523554,
+     "wedge_rate_5": -0.026624953461857545
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0267",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The company pays a negative effective rate because of tax credits and expects a 2027 tax benefit of $4-8M, so a flat 21% statutory rate in the record is not what it pays.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.036,
+     "fade_years": 10,
+     "long_run_op_margin": 0.04,
+     "op_margin": [
+      0.012,
+      0.02,
+      0.028,
+      0.034,
+      0.038
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.012,
+      0.03,
+      0.03,
+      0.028,
+      0.026
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.0060 (persist), growth 0.0375, terminal RONIC 0.0728 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 56
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.025,
+      0.055
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.04
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Capital expenditures of $110 million to $125 million"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0371"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided capex of $110-125M is about 3.3-3.7% of revenue, close to the pooled history of 3.7%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Currently, we do not plan on opening any new stores during 2027."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "With no new stores planned, margin and growth normalization depends on recovering existing stores, which takes several years, so I use a 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2017-07-28 | $2,926.3 million | 0.0048 | 0.1070"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-07-31 | $3,318.7 million | -0.0474 | -0.0038"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins were 9-10% in 2016-2019 but only 1.3-3.5% in 2023-2025, and the sale-leaseback adds rent. Recovery to about 4% reflects the base-rate return toward the median, a better traffic mix and the exit of MSBC, but not a return to the old peak. The range is wide."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Adjusted EBITDA1 of $180 million to $200 million2"
+       },
+       {
+        "id": "P3",
+        "quote": "resulted primarily from lower productivity and the deleverage associated with the decrease in total revenue in 2026 as compared to 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided adjusted EBITDA of $180-200M, less roughly $120M of D&A and recurring impairment, stock compensation and closing costs, implies GAAP operating margin of about 1% in year 1. Margin then recovers as traffic returns and labor and occupancy deleverage reverses, but wage inflation of 2.5-3.0% and commodity inflation of 3.0% limit the pace."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0267"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 2.7% is depressed by the traffic loss, and the break-even for growth is 7.3%. I assume new investment earns modestly above break-even as remodels and maintenance spending pay back."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Total revenue in 2026 decreased 4.7% as compared to 2025."
+       },
+       {
+        "id": "P4",
+        "quote": "Total revenue of $3.325 billion to $3.4 billion including comparable store restaurant sales growth of 3% to 5% and no new store openings"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Revenue fell 4.7% in 2026, and year 1 also loses MSBC sales, so I take only about 1.2% growth, the low end of guidance of $3.325-3.4B. Guided comparable sales growth of 3-5% needs a traffic recovery after a 7.6% decline. I assume partial recovery at around 3% a year with no new stores."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, store-count-flat chain with 655 stores growing mainly through price and traffic should grow somewhat below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.005,
+      "input_hit": "rev_growth",
+      "risk": "Guest traffic does not recover and price increases keep eroding visits, so comparable sales stay flat to negative"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins stay near 2025-2026 levels because of labor and commodity inflation, tariff refund reversal, and added rent from the sale-leaseback"
+     },
+     {
+      "bear_value": 0.005,
+      "input_hit": "op_margin",
+      "risk": "Further brand missteps or leadership disruption under the new CEO lower the earnings base"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.025,
+      "rev_growth": [
+       -0.002999999999999999,
+       0.015,
+       0.015,
+       0.013000000000000001,
+       0.011
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.055,
+      "rev_growth": [
+       0.022000000000000002,
+       0.04,
+       0.04,
+       0.038000000000000006,
+       0.036000000000000004
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt is only the $345M principal of 2030 convertible notes, with no revolver borrowings and 1.7x leverage, which is a sustainable level; the large operating lease obligations are separate."
+     },
+     "margin_position": "The GAAP operating margin is -0.4% in the base year, against 1.6% in 2025 and 9-10% in 2016-2019. The 2026 loss comes from a 7.6% fall in comparable guest traffic after logo and remodel backlash, which deleveraged labor and occupancy costs. It also carries about $27M of MSBC sale loss and $31M of impairment and closing costs, partly masked by a $47M sale-leaseback gain. Underlying earnings are low but positive, and a recovery is plausible but unproven.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The company pays a negative effective rate because of tax credits and expects a 2027 tax benefit of $4-8M, so a flat 21% statutory rate in the record is not what it pays."
+     },
+     "why": "Fiscal 2026 operating income mixes a $47.4M sale-leaseback gain with a $27.0M MSBC loss and $31.2M of impairment and closing costs. Net income also includes $47.4M of litigation settlement income, $15.0M of tariff refunds and $12.6M of supplier settlements. Revenue includes about $56M of MSBC sales that are now divested. Adjusted EBITDA of $147.7M, against $180-200M guided for 2027, is a better guide to the starting earnings level than GAAP operating income. I list no non-operating one-offs: removing the $47.4M litigation gain from the held-forever items would leave no positive earnings base on a GAAP operating loss, so the forward margins carry the recovery instead."
+    },
+    "value_at_old_defaults": 18.081193701251266,
+    "values": {
+     "base": 58.832430391579095,
+     "bear": 44.73480510440349,
+     "bull": 73.72403726304492
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 36535000.0,
+     "excess_cash_before": 36535000.0,
+     "k0_after": -31684657.927999996,
+     "k0_before": -31684657.927999996,
+     "k0_interest": 10601000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 15179579.763119997,
+     "x0_before": 15179579.763119997
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1540718144.0269299,
+     "seam_ratio": 1.0176740575902066,
+     "tv_share": 0.3214143120173298,
+     "wedge_rate_5": -0.03463938657165121
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0800 against the base year's 0.0267",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.036,
+     "fade_years": 10,
+     "long_run_op_margin": 0.05,
+     "op_margin": [
+      0.017,
+      0.029,
+      0.04,
+      0.047,
+      0.052
+     ],
+     "return_on_new_investment_long_run": 0.08,
+     "rev_growth": [
+      0.015,
+      0.025,
+      0.025,
+      0.025,
+      0.025
+     ],
+     "terminal_growth": 0.028
+    },
+    "old_defaults_inputs": "margin 0.0060 (persist), growth 0.0375, terminal RONIC 0.0728 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 56
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.03,
+      0.07
+     ],
+     "rev_growth_y3": [
+      0.005,
+      0.045
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Capital expenditures of $110 million to $125 million"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0371"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guidance of $110-125M on about $3.36B of revenue is about 3.5%. That is slightly below the 3.7% pooled history, which included heavier remodel spending."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "David Deno, will assume the role of President and Chief Executive Officer"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade reflects a brand repair and new CEO whose margin recovery plays out over several years, not a quick reversion."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2017-07-28 | $2,926.3 million | 0.0048 | 0.1070"
+       },
+       {
+        "id": "P3",
+        "quote": "Management believes that the Cracker Barrel brand remains one of the strongest and most differentiated brands in the restaurant industry"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company earned 9-10% margins in 2016-2019 but only 1-4% since 2022, with higher labor and occupancy intensity and a weakened brand. I assume about half of the gap to the old level is recovered, which gives 5%, with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Adjusted EBITDA1 of $180 million to $200 million"
+       },
+       {
+        "id": "P3",
+        "quote": "primarily from lower productivity and the deleverage associated with the decrease in total revenue in 2026 as compared to 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Adjusted EBITDA guidance of $180-200M less about $123M of D&A gives EBIT of roughly 2% of revenue before impairments, so year 1 is about 1.7% GAAP. Margins then rebuild as traffic recovers and fixed labor and occupancy costs are re-leveraged, but wage and commodity inflation limit the pace."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0267"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Base-year return on tangible capital is only 2.7% and the break-even return is 7.3%. Remodels and maintenance capex at a recovered margin should earn modestly above break-even, so I assume 8%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Total revenue of $3.325 billion to $3.4 billion including comparable store restaurant sales growth of 3% to 5% and no new store openings"
+       },
+       {
+        "id": "P1",
+        "quote": "Currently, we do not plan on opening any new stores during 2027."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows guidance of $3.325-3.4B, a 0.2-2.4% rise on the base. The base includes about $56M of divested MSBC revenue, which caps reported growth despite 3-5% comparable-sales guidance. Growth afterwards comes only from price and a traffic recovery, because no new stores are planned."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, store-count-flat family-dining chain with traffic pressure should grow roughly with inflation, so I set growth below the long-run nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Guest traffic does not recover (2026 comparable traffic was down 7.6%); price increases keep eroding visits and costs stay deleveraged"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins stay near 2% because wage and commodity inflation of about 3% outpaces pricing and the brand does not recover"
+     },
+     {
+      "bear_value": 0.012,
+      "input_hit": "op_margin",
+      "risk": "Non-recurring tariff refunds and settlements flattered the base; new tariffs on China-sourced retail raise retail costs"
+     },
+     {
+      "bear_value": 0.012,
+      "input_hit": "op_margin",
+      "risk": "The 47.4M litigation gain stays in the held-forever non-operating items because the earnings base cannot stay positive without it, so value is overstated if it is treated as recurring"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Rent from the sale-leaseback and other leases rises and the 2030 convertible notes need cash settlement, tightening returns"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.03,
+      "rev_growth": [
+       -0.005000000000000001,
+       0.005000000000000001,
+       0.005000000000000001,
+       0.005000000000000001,
+       0.005000000000000001
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       0.034999999999999996,
+       0.045,
+       0.045,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of $337.2M is the 2030 convertible notes only, with no revolver borrowings and leverage of 1.7x, though the large operating lease liabilities sit outside it."
+     },
+     "margin_position": "The FY2026 GAAP operating margin of -0.38% is far below the 9-10% of 2016-2019. Guest traffic fell, brand-initiative backlash hit sales, and store labor and occupancy costs did not shrink with revenue. One-off items also distort the year: a sale-leaseback gain, the MSBC loss and impairments. The company is not commodity-cyclical. The depressed margin is mostly company-specific and partly structural, so only part of the gap should close.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 21% in the record is a statutory-style rate, while the company reports a tax benefit from credits (effective rate -54.0%) and expects a $4,000-$8,000 benefit in 2027, so the sustainable rate is uncertain."
+     },
+     "why": "FY2026 GAAP operating income of -12.5M is the net of a 47.4M sale-leaseback gain, a 27.0M MSBC loss, 31.2M of impairment and closing costs, and tariff refunds and supplier settlements. Adjusted EBITDA of $147.7M is well below the $224.3M of the prior year. Guidance of $180-200M adjusted EBITDA implies a modest recovery, so I use a gradual margin rebuild rather than the base-year margin. The 47.4M litigation settlement is non-recurring. Removing it as a one-off leaves a negative base-year earnings base, so I no longer list it. The margins and the wide ranges are my main protection against overvaluing the base year."
+    },
+    "value_at_old_defaults": 18.081193701251266,
+    "values": {
+     "base": 72.06245699975602,
+     "bear": 52.38362462169977,
+     "bull": 96.99755468975485
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 18.081193701251266,
+  "value_at_old_defaults_quoted": 18.081193701251266,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1475520668.1543996,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 22545123.0,
  "flags": [
   "The company sold assets of its Maple Street Biscuit Company (MSBC) business to a third party and closed the remaining MSBC locations. It recorded a loss on sale of business assets of $27,039 (thousands, per MD&A).",
   "In the fourth quarter of fiscal 2026 the company completed a sale and leaseback of 26 owned Cracker Barrel properties and recorded a net gain of $47,421 (thousands, per MD&A).",
   "The company recorded impairment charges of $21,968 in fiscal 2026 (thousands), compared with $19,772 in fiscal 2025. The 2026 charges covered nine Cracker Barrel locations and sixteen MSBC locations."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.10578180622416283,
+ "market_cap_at_publish": 1555058680,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "no usable tax rate in the filings",
+ "no_value_reason": null,
+ "price_at_publish": 69.57,
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 58.832430391579095,
+  "3000": 72.06245699975602
+ },
+ "seeds_agree": false,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -837,9 +1328,43 @@
    }
   ]
  },
+ "tax_range": {
+  "equity_value_alt": 1373865161.7389548,
+  "label": "statutory rate (company's filed rate), not measured",
+  "positive_pretax_years": 4,
+  "pretax_years": 4,
+  "rate": 0.21,
+  "rate_alt": 0.265,
+  "seed_base_alt": {
+   "1000": 54.750095258057776,
+   "3000": 67.1268323363452
+  },
+  "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
+  "status_alt": "ok",
+  "value_alt": {
+   "base": 60.93846379720149,
+   "bear": 45.119932968670184,
+   "bull": 79.5229848254672
+  },
+  "value_per_filed_share_alt": {
+   "base": 60.93846379720149,
+   "bear": 45.119932968670184,
+   "bull": 79.5229848254672
+  }
+ },
  "ticker": "CBRL",
+ "upside": -0.05114791671115615,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no usable tax rate in the filings"
+ "value_base": 65.44744369566756,
+ "value_bear": 48.55921486305163,
+ "value_bull": 85.36079597639988,
+ "value_per_filed_share": {
+  "base": 65.44744369566756,
+  "bear": 48.55921486305163,
+  "bull": 85.36079597639988
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_differs_at_alt_tax_rate": false,
+ "verdict_reason": "expected return -1.8 points a year against the required return over 3 years"
 }

@@ -1,11 +1,377 @@
 {
- "alpha_pts": 22.041149353011644,
+ "alpha_pts": 1.135848465702094,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 69,
  "claims_supported": 65,
  "date": "2026-11-17T07:43:24Z",
- "equity_value": 9804590939.712223,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 8 of 8"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.12127446361884618,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 4848735637.017157,
+     "implied_pb": 0.9668787154062682,
+     "seam_ratio": 1.257250000000001,
+     "tv_share": 0.5925096857914365
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.0,
+      0.065,
+      0.075,
+      0.075,
+      0.07
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.09,
+     "roe": [
+      0.05,
+      0.085,
+      0.095,
+      0.095,
+      0.09
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 65
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.05,
+      0.1
+     ],
+     "long_run_roe": [
+      0.07,
+      0.11
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Repurchases and retirements of common shares | (216,800,000)"
+       },
+       {
+        "id": "P4",
+        "quote": "repurchased and retired 103,827 of its common shares for $217"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 growth is about zero because common equity fell from $5,425 million to $5,353 million over nine months after $217 million of buybacks and unrealized losses. In later years growth is below ROE because the company keeps buying back stock and does little else with payout."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Undeployed capital remains at roughly $0.8 billion."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade reflects a diversified, opportunistic acquirer whose returns drift to a mid-cycle level slowly as new deployments mature, with substantial undeployed capital still to put to work."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "reduced writings in property as a result of the softening market conditions"
+       },
+       {
+        "id": "F1",
+        "quote": "Contingent consideration | 400,000,000.0 | 328,300,000"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Ark's combined ratio of 75-83% is strong, but the property market is softening and catastrophe or Iran-war losses can arrive. Contingent consideration, minority interests and unprofitable Distinguished dilute the group return, so the long-run return sits near the cost of equity."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "the net gain on sale of the Bamboo Group of approximately $320 per share"
+       },
+       {
+        "id": "P4",
+        "quote": "Results in the first nine months of 2026 were driven by solid operating company results, partially offset by unrealized losses due to the impact of higher interest rates and a decline in the MediaAlpha share price."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0705, p25 0.0543, median 0.1359, p75 0.2234, max 0.2468, last 0.2468."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The 2025 return was inflated by the Bamboo gain and the nine-month 2026 return is only about 3.5% of opening equity, so year 1 is low. It should recover toward roughly 9-10% as investment marks stop falling and Ark and the new businesses keep earning."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth is a nominal long-run figure, slightly below the anchor given the buyback-driven, capital-light and cyclical model."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_roe",
+      "risk": "Softer property pricing and large catastrophe or Iran-war losses lower Ark's profits for good, or investment marks keep falling"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "roe",
+      "risk": "Further unrealized losses (rates, MediaAlpha) and Distinguished impairments leave 2026 return very low"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "book_growth",
+      "risk": "Heavier buybacks and acquisitions funded by debt reduce equity growth"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.024999999999999994,
+       0.04000000000000001,
+       0.05,
+       0.05,
+       0.04500000000000001
+      ],
+      "long_run_roe": 0.07,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.02500000000000001,
+       0.09000000000000001,
+       0.1,
+       0.1,
+       0.09500000000000001
+      ],
+      "long_run_roe": 0.11,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 24.7% is not representative because it includes the one-off Bamboo sale gain. 2026 is running far lower: nine-month income to common is $133 million, held back by unrealized losses on bonds (higher rates) and the MediaAlpha stake, by Ark's contingent-consideration charge, by minority holders' share of profit, and by the loss-making Distinguished. Underlying earnings power is a strong Ark combined ratio and steady investment income, offset by a diversified holding company drag.",
+     "why": "White Mountains is a Bermuda holding company with roughly $0.8 billion of undeployed capital and an active buyback, so group-level capital does not limit book growth. Book growth is held down by buybacks and acquisitions rather than by regulation. Subsidiary-level regulatory and rating capital matters at Ark but is not shown to bind the group."
+    },
+    "value_at_old_defaults": 4062.1241812965413,
+    "values": {
+     "base": 2069.8827220791413,
+     "bear": 1693.3970730394599,
+     "bull": 2916.9820387616464
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 5474721500.541972,
+     "implied_pb": 1.0917055677853962,
+     "seam_ratio": 1.2960000000000091,
+     "tv_share": 0.6144037600912554
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 8 of 8"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.005,
+      0.07,
+      0.08,
+      0.08,
+      0.08
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.095,
+     "roe": [
+      0.045,
+      0.09,
+      0.1,
+      0.1,
+      0.1
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 65
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.05,
+      0.1
+     ],
+     "long_run_roe": [
+      0.08,
+      0.11
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "White Mountains repurchased and retired 103,827 of its common shares for $217"
+       },
+       {
+        "id": "F1",
+        "quote": "Total White Mountains\u2019s common shareholders\u2019 equity | 5,353,100,000 | 5,425,400,000"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 equity is roughly flat because buybacks ($217 million in nine months) consumed most of the earnings. Later growth follows ROE less a modest payout, mostly buybacks and a tiny dividend."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "pre-tax loss of $13 million and $41 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade reflects a mix of a strong specialty insurer and weaker, acquisition-driven units. These units' returns are uncertain and should converge slowly toward a modest excess over the cost of equity."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "reduced writings in property as a result of softening market conditions"
+       },
+       {
+        "id": "P3",
+        "quote": "Ark\u2019s combined ratio was 83% in both 2025 and 2024."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Ark's combined ratio is in the 80s, but the property cycle is softening, which should compress margins over time. A diversified holding company with drag from minorities and loss-making units should earn only slightly above the 9.36% cost of equity."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0705, p25 0.0543, median 0.1359, p75 0.2234, max 0.2468, last 0.2468."
+       },
+       {
+        "id": "P4",
+        "quote": "an increase of 3% for the first nine months of 2026, including dividends"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is low: nine-month income to common was only $133 million after investment losses, and the 2025 return was a one-off peak. I expect a recovery toward about 10% as Ark's underwriting profit continues and investment marks normalise, but with Distinguished losses and minority interests as drags."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, White Mountains\u2019s undeployed capital is roughly $0.8 billion."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "I set it slightly below the 3.75% long-run nominal anchor. The company returns capital via buybacks and has undeployed capital for acquisitions, so long-run book growth should track nominal growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.075,
+      "input_hit": "long_run_roe",
+      "risk": "Large catastrophe or Iran-war losses, or adverse reserve development, at Ark, with the property cycle softening faster"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "roe",
+      "risk": "Further unrealized investment losses (rates, MediaAlpha) and Distinguished goodwill impairment depress near-term returns"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "book_growth",
+      "risk": "Book growth stays low if buybacks and acquisition spending continue to outpace earnings"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.024999999999999998,
+       0.04000000000000001,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "long_run_roe": 0.08,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.025000000000000005,
+       0.09000000000000001,
+       0.1,
+       0.1,
+       0.1
+      ],
+      "long_run_roe": 0.11,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 24.7% is not a normal level: it includes an $849 million net gain on the Bamboo sale. The 2026 return is much lower, with nine-month income to common of $133 million on $5.4 billion of equity. Ark earns strong underwriting profits, but these are offset by unrealized investment losses (higher rates, the MediaAlpha decline), Distinguished's pre-tax losses, the contingent consideration charge at Ark, and minority interests. Returns swing widely with investment marks and disposals.",
+     "why": "The base year 2025 is inflated by the Bamboo gain, so it is not a run-rate. Year 1 (2026) is depressed by mark-to-market losses and buybacks that shrink equity. Capital looks ample, with about $0.8 billion undeployed and buybacks below book value, so payout rather than regulatory capital sets book growth. Ark's regulated insurers need capital, but the holding company is not the binding limit."
+    },
+    "value_at_old_defaults": 4062.1241812965413,
+    "values": {
+     "base": 2337.110597586272,
+     "bear": 1990.2003032461078,
+     "bull": 2991.55796279506
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 4062.1241812965413,
+  "value_at_old_defaults_quoted": 4062.1241812965413,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 5584321585.014028,
  "family": "financial",
  "far_from_price": false,
  "filed_shares": 2534300.0,
@@ -15,7 +381,7 @@
   "White Mountains repurchased and retired 103,827 common shares for $217 million in the first nine months of 2026."
  ],
  "in_code_book": false,
- "ke": 0.09390305732783658,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 5323904182,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +389,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 3868.7570294409593,
-  "3000": 3868.7570294409593
+  "1000": 2069.8827220791413,
+  "3000": 2337.110597586272
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -846,113 +1212,17 @@
   ]
  },
  "ticker": "WTM",
- "upside": 0.8416167167060076,
- "valuation": {
-  "annotations": [],
-  "departures": [
-   {
-    "driver": "cycle_downturn",
-    "evidence": [
-     "F2",
-     "P4.s15",
-     "F1",
-     "Y2025-12-31"
-    ],
-    "input": "roe.y1"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "none",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "none",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "down",
-   "roe.y2": "none",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "F1": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED BALANCE SHEETS - USD ($) | Sep. 30, 2026 | Dec. 31, 2025\nAssets\nCommon equity securities, at fair value | $ 549,000,000.0 | $ 483,000,000.0\nOther long-term investments | 3,417,500,000 | 2,958,500,000\nTotal investments | 8,280,900,000 | 8,323,900,000\nGoodwill and other intangible assets | 1,169,400,000 | 1,020,200,000\nTotal assets | 13,362,600,000 | 12,306,500,000\nLiabilities\nDebt | 928,600,000 | 837,000,000.0\nTotal liabilities | 7,136,300,000 | 6,051,400,000\nRedeemable noncontrolling interests | 131,500,000 | 131,500,000\nWhite Mountains\u2019s common shareholders\u2019 equity\nWhite Mountains\u2019s common shares at $1 par value per share - authorized 50,000,000 shares; issued and outstanding 2,386,823 and 2,479,677 shares | 2,400,000 | 2,500,000\nPaid-in surplus | 572,300,000 | 576,500,000\nRetained earnings | 4,777,100,000 | 4,845,600,000\nAccumulated other comprehensive income (loss), after-tax:\nNet unrealized gains (losses) from foreign currency translation | 1,300,000 | 800,000\nTotal White Mountains\u2019s common shareholders\u2019 equity | 5,353,100,000 | 5,425,400,000\nNonredeemable noncontrolling interests | 741,700,000 | 698,200,000\nTotal equity | 6,094,800,000 | 6,123,600,000\nTotal liabilities, redeemable noncontrolling interests and equity | 13,362,600,000 | 12,306,500,000\nOther Operations\nAssets\nFixed maturity investments, at fair value | 361,800,000 | 159,200,000\nCommon equity securities, at fair value | 204,000,000.0 | 30,700,000\nInvestment in MediaAlpha, at fair value | 170,900,000 | 231,200,000\nShort-term investments, at fair value | 236,800,000 | 806,900,000\nOther long-term investments | 1,230,400,000 | 977,400,000\nTotal investments | 2,203,900,000 | 2,205,400,000\nCash | 21,200,000 | 38,400,000\nGoodwill and other intangible assets | 47,900,000 | 50,800,000\nOther assets | 91,100,000 | 95,900,000\nTotal assets | 2,369,000,000 | 2,395,500,000\nLiabilities\nDebt | 17,300,000 | 18,900,000\nAccrued incentive compensation | 55,400,000 | 100,100,000\nOther liabilities | 49,000,000.0 | 55,400,000\nTotal liabilities | 125,400,000 | 178,000,000.0\nRedeemable noncontrolling interests | 0 | 0\nAccumulated other comprehensive income (loss), after-tax:\nTotal White Mountains\u2019s common shareholders\u2019 equity | 2,238,900,000 | 2,212,000,000\nNonredeemable noncontrolling interests | 4,700,000 | 5,500,000\nOther Operations | Other Disposal Group\nAssets\nTotal investments | 1,500,000 | 1,000,000.0\nAssets held for sale - Other | 4,900,000 | 5,000,000.0\nLiabilities\nLiabilities held for sale - Other | 3,700,000 | 3,600,000\nP&C Insurance and Reinsurance (Ark/WM Outrigger)\nLiabilities\nLoss and loss adjustment expense reserves | 2,747,400,000 | 2,481,000,000\nP&C Insurance and Reinsurance (Ark/WM Outrigger) | Operating Segments\nAssets\nFixed maturity investments, at fair value | 1,971,400,000 | 1,917,900,000\nCommon equity securities, at fair value | 345,000,000.0 | 452,300,000\nShort-term investments, at fair value | 633,100,000 | 866,600,000\nOther long-term investments | 868,000,000.0 | 689,700,000\nTotal investments | 3,817,500,000 | 3,926,500,000\nCash | 129,700,000 | 104,800,000\nReinsurance recoverables | 1,076,100,000 | 836,100,000\nInsurance premiums receivable | 1,222,100,000 | 848,400,000\nDeferred acquisition costs | 264,800,000 | 211,100,000\nGoodwill and other intangible assets | 292,500,000 | 292,500,000\nOther assets | 344,600,000 | 134,700,000\nTotal assets | 7,147,300,000 | 6,354,100,000\nLiabilities\nLoss and loss adjustment expense reserves | 2,747,400,000 | 2,481,000,000\nUnearned insurance premiums | 1,427,400,000 | 1,026,100,000\nDebt | 159,000,000.0 | 159,700,000\nReinsurance payable | 492,300,000 | 286,200,000\nContingent consideration | 400,000,000.0 | 328,300,000\nOther liabilities | 233,700,000 | 247,200,000\nTotal liabilities | 5,459,800,000 | 4,528,500,000\nRedeemable noncontrolling interests | 0 | 0\nAccumulated other comprehensive income (loss), after-tax:\nTotal White Mountains\u2019s common shareholders\u2019 equity | 1,197,600,000 | 1,360,400,000\nNonredeemable noncontrolling interests | 489,900,000 | 465,200,000\nAsset Management (Kudu) | Operating Segments\nAssets\nShort-term investments, at fair value | 120,900,000 | 21,900,000\nOther long-term investments | 1,319,100,000 | 1,291,400,000\nTotal investments | 1,440,000,000 | 1,313,300,000\nCash | 1,000,000.0 | 34,500,000\nAccrued investment income | 22,000,000.0 | 25,300,000\nGoodwill and other intangible assets | 7,600,000 | 7,700,000\nOther assets | 7,600,000 | 21,500,000\nTotal assets | 1,478,200,000 | 1,402,300,000\nLiabilities\nDebt | 350,900,000 | 350,400,000\nOther liabilities | 122,600,000 | 96,500,000\nTotal liabilities | 473,500,000 | 446,900,000\nRedeemable noncontrolling interests | 0 | 0\nAccumulated other comprehensive income (loss), after-tax:\nTotal White Mountains\u2019s common shareholders\u2019 equity | 863,900,000 | 814,200,000\nNonredeemable noncontrolling interests | 140,800,000 | 141,200,000\nHG Global | Operating Segments\nAssets\nFixed maturity investments, at fair value | 707,600,000 | 693,400,000\nShort-term investments, at fair value | 40,700,000 | 90,800,000\nTotal investments | 748,300,000 | 784,200,000\nCash | 600,000 | 100,000\nBAM Surplus Notes, at fair value | 335,500,000 | 339,000,000.0\nInsurance premiums receivable | 13,600,000 | 11,400,000\nDeferred acquisition costs | 102,000,000.0 | 96,900,000\nOther assets | 5,700,000 | 5,200,000\nTotal assets | 1,205,700,000 | 1,236,800,000\nLiabilities\nLoss and loss adjustment expense reserves | 0 | 0\nUnearned insurance premiums | 342,500,000 | 327,900,000\nDebt | 197,400,000 | 147,800,000\nOther liabilities | 26,700,000 | 23,800,000\nTotal liabilities | 566,600,000 | 499,500,000\nRedeemable noncontrolling interests | 0 | 0\nAccumulated other comprehensive income (loss), after-tax:\nTotal White Mountains\u2019s common shareholders\u2019 equity | 664,200,000 | 755,700,000\nNonredeemable noncontrolling interests | (25,100,000) | (18,400,000)\nSpecialty Insurance Distribution (Distinguished) | Operating Segments\nAssets\nShort-term investments, at fair value | 70,600,000 | 94,000,000.0\nTotal investments | 70,600,000 | 94,000,000.0\nCash | 4,300,000 | 2,700,000\nPremiums, commissions and fees receivable | 52,200,000 | 45,700,000\nGoodwill and other intangible assets | 558,700,000 | 577,700,000\nOther assets | 35,100,000 | 15,300,000\nTotal assets | 720,900,000 | 735,400,000\nLiabilities\nDebt | 140,900,000 | 140,800,000\nPremiums and commissions payable | 87,900,000 | 81,300,000\nOther liabilities | 88,600,000 | 85,000,000.0\nTotal liabilities | 317,400,000 | 307,100,000\nRedeemable noncontrolling interests | 131,500,000 | 131,500,000\nAccumulated other comprehensive income (loss), after-tax:\nTotal White Mountains\u2019s common shareholders\u2019 equity | 196,000,000.0 | 223,100,000\nNonredeemable noncontrolling interests | 76,000,000.0 | 73,700,000\nServices, Industrial and Consumer (WTM Partners) | Operating Segments\nAssets\nShort-term investments, at fair value | 600,000 | 500,000\nTotal investments | 600,000 | 500,000\nCash | 10,200,000 | 4,400,000\nAccounts receivable | 88,700,000 | 39,500,000\nContract assets | 37,100,000 | 17,800,000\nGoodwill and other intangible assets | 262,700,000 | 91,500,000\nOther assets | 42,200,000 | 28,700,000\nTotal assets | 441,500,000 | 182,400,000\nLiabilities\nDebt | 63,100,000 | 19,400,000\nContract liabilities | 43,200,000 | 24,800,000\nOther liabilities | 87,300,000 | 47,200,000\nTotal liabilities | 193,600,000 | 91,400,000\nRedeemable noncontrolling interests | 0 | 0\nAccumulated other comprehensive income (loss), after-tax:\nTotal White Mountains\u2019s common shareholders\u2019 equity | 192,500,000 | 60,000,000.0\nNonredeemable noncontrolling interests | $ 55,400,000 | $ 31,000,000.0"
-   },
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF OPERATIONS - USD ($) | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nRevenues:\nEarned insurance premiums | $ 517,700,000 | $ 557,800,000 | $ 1,328,000,000\nNet investment income | 70,600,000 | 59,200,000 | $ 212,900,000 | 180,200,000\nNet realized and unrealized investment gains (losses) | (123,000,000.0) | 83,900,000 | 31,600,000 | 251,200,000\nInterest income from BAM Surplus Notes | 6,800,000 | 7,500,000 | 20,600,000 | 22,500,000\nChange in fair value of BAM Surplus Notes | (16,100,000) | (16,100,000) | 0\nProduct and service revenues | 121,100,000 | 68,800,000 | 285,100,000 | 138,700,000\nNet gain on sale of the Bamboo Group | 2,400,000 | 0\nCommission and fee revenues | 59,300,000 | 82,300,000 | 193,700,000\nTotal revenues | 641,100,000 | 864,200,000 | 2,003,500,000 | 2,131,200,000\nExpenses:\nLoss and loss adjustment expenses | 230,400,000 | 258,500,000 | 686,800,000\nBroker commission expenses | 22,000,000.0 | 27,000,000.0 | 62,500,000 | 62,300,000\nInsurance acquisition expenses | 115,300,000 | 111,800,000 | 308,400,000\nCost of sales | 91,800,000 | 55,300,000 | 214,600,000 | 105,200,000\nChange in fair value of contingent consideration | 30,000,000.0 | 36,100,000 | 71,700,000 | 74,200,000\nInterest expense | 20,700,000 | 19,900,000 | 59,800,000 | 56,300,000\nTotal expenses | 664,300,000 | 685,400,000 | 1,796,200,000 | 1,703,500,000\nPre-tax income (loss) | (23,200,000) | 178,800,000 | 207,300,000 | 427,700,000\nIncome tax (expense) benefit | (6,400,000) | (17,100,000) | (32,000,000.0) | (39,600,000)\nNet income (loss) | (29,600,000) | 161,700,000 | 175,300,000 | 388,100,000\nNet (income) loss attributable to noncontrolling interests | (9,400,000) | (47,900,000) | (42,000,000.0) | (117,500,000)\nNet income (loss) attributable to White Mountains\u2019s common shareholders | (39,000,000.0) | 113,800,000 | 133,300,000 | 270,600,000\nProduct and service revenues\nRevenues:\nProduct and service revenues | 121,100,000 | 68,800,000 | 285,100,000 | 138,700,000\nOther Operations\nRevenues:\nEarned insurance premiums | 300,000 | 2,900,000 | 19,100,000\nNet investment income | 13,500,000 | 6,200,000 | 42,500,000 | 24,500,000\nInterest income from BAM Surplus Notes | 0 | 0 | 0 | 0\nChange in fair value of BAM Surplus Notes | 0 | 0\nNet gain on sale of the Bamboo Group | 0 | 0 | 2,400,000 | 0\nCommission and fee revenues | 4,100,000 | 4,300,000 | 12,400,000\nOther revenues | 4,400,000 | 7,700,000 | 15,800,000 | 32,500,000\nTotal revenues | 4,000,000.0 | 51,300,000 | 146,800,000 | 150,000,000.0\nExpenses:\nLoss and loss adjustment expenses | 300,000 | 600,000 | 18,800,000\nBroker commission expenses | 0 | 0 | 0 | 0\nInsurance acquisition expenses | 100,000 | 1,000,000.0 | 7,000,000.0\nCost of sales | 7,700,000 | 8,200,000 | 21,800,000 | 22,900,000\nGeneral and administrative expenses | 28,300,000 | 66,200,000 | 117,900,000 | 170,300,000\nChange in fair value of contingent consideration | 0 | 0 | 0 | 0\nInterest expense | 700,000 | 700,000 | 2,000,000.0 | 1,700,000\nTotal expenses | 36,700,000 | 75,100,000 | 141,700,000 | 194,900,000\nPre-tax income (loss) | (32,700,000) | (23,800,000) | 5,100,000 | (44,900,000)\nOther Operations | Product and service revenues\nRevenues:\nProduct and service revenues | 14,300,000 | 14,800,000 | 41,800,000 | 41,900,000\nInvestments, Excluding MediaAlpha\nRevenues:\nNet realized and unrealized investment gains (losses) | (69,400,000) | 76,200,000 | 92,000,000.0 | 249,600,000\nInvestments, Excluding MediaAlpha | Other Operations\nRevenues:\nNet realized and unrealized investment gains (losses) | 25,400,000 | 14,900,000 | 104,700,000 | 49,500,000\nMediaAlpha\nRevenues:\nNet realized and unrealized investment gains (losses) | (53,600,000) | 7,700,000 | (60,400,000) | 1,600,000\nMediaAlpha | Other Operations\nRevenues:\nNet realized and unrealized investment gains (losses) | (53,600,000) | 7,700,000 | (60,400,000) | 1,600,000\nP&C Insurance and Reinsurance (Ark/WM Outrigger)\nExpenses:\nLoss and loss adjustment expenses | 230,100,000 | 254,600,000 | 612,400,000 | 652,100,000\nP&C Insurance and Reinsurance (Ark/WM Outrigger) | Operating Segments\nRevenues:\nEarned insurance premiums | 508,800,000 | 542,200,000 | 1,258,800,000 | 1,264,400,000\nNet investment income | 27,800,000 | 27,200,000 | 84,500,000 | 77,000,000.0\nNet realized and unrealized investment gains (losses) | (40,300,000) | 17,800,000 | (42,700,000) | 98,400,000\nOther revenues | 4,500,000 | 2,300,000 | 16,100,000 | 10,800,000\nTotal revenues | 500,800,000 | 589,500,000 | 1,316,700,000 | 1,450,600,000\nExpenses:\nLoss and loss adjustment expenses | 230,100,000 | 254,600,000 | 612,400,000 | 652,100,000\nInsurance acquisition expenses | 113,100,000 | 106,800,000 | 315,600,000 | 287,500,000\nGeneral and administrative expenses | 59,500,000 | 61,700,000 | 151,400,000 | 154,100,000\nChange in fair value of contingent consideration | 30,000,000.0 | 36,100,000 | 71,700,000 | 74,200,000\nInterest expense | 4,200,000 | 4,400,000 | 12,400,000 | 12,900,000\nTotal expenses | 436,900,000 | 463,600,000 | 1,163,500,000 | 1,180,800,000\nAsset Management (Kudu) | Operating Segments\nRevenues:\nEarned insurance premiums | 0 | 0 | 0\nNet investment income | 20,700,000 | 18,000,000.0 | 60,500,000 | 56,700,000\nNet realized and unrealized investment gains (losses) | (25,700,000) | 36,100,000 | 66,000,000.0 | 80,900,000\nInterest income from BAM Surplus Notes | 0 | 0 | 0 | 0\nChange in fair value of BAM Surplus Notes | 0 | 0\nNet gain on sale of the Bamboo Group | 0\nCommission and fee revenues | 0 | 0 | 0\nOther revenues | 0 | 300,000 | 400,000 | 1,000,000.0\nTotal revenues | (5,000,000.0) | 54,400,000 | 126,900,000 | 138,600,000\nExpenses:\nLoss and loss adjustment expenses | 0 | 0 | 0\nBroker commission expenses | 0 | 0 | 0 | 0\nInsurance acquisition expenses | 0 | 0 | 0\nCost of sales | 0 | 0 | 0 | 0\nGeneral and administrative expenses | 2,900,000 | 4,700,000 | 11,800,000 | 12,300,000\nChange in fair value of contingent consideration | 0 | 0 | 0 | 0\nInterest expense | 7,400,000 | 6,100,000 | 21,700,000 | 18,600,000\nTotal expenses | 10,300,000 | 10,800,000 | 33,500,000 | 30,900,000\nPre-tax income (loss) | (15,300,000) | 43,600,000 | 93,400,000 | 107,700,000\nAsset Management (Kudu) | Operating Segments | Product and service revenues\nRevenues:\nProduct and service revenues | 0 | 0 | 0 | 0\nAsset Management (Kudu) | Investments, Excluding MediaAlpha | Operating Segments\nRevenues:\nNet realized and unrealized investment gains (losses) | (25,700,000) | 36,100,000 | 66,000,000.0 | 80,900,000\nAsset Management (Kudu) | MediaAlpha | Operating Segments\nRevenues:\nNet realized and unrealized investment gains (losses) | 0 | 0 | 0 | 0\nHG Global | Operating Segments\nRevenues:\nEarned insurance premiums | 8,600,000 | 7,500,000 | 24,000,000.0 | 22,800,000\nNet investment income | 7,900,000 | 7,000,000.0 | 23,400,000 | 19,800,000\nNet realized and unrealized investment gains (losses) | (28,800,000) | 7,200,000 | (36,000,000.0) | 20,300,000\nInterest income from BAM Surplus Notes | 6,800,000 | 7,500,000 | 20,600,000 | 22,500,000\nChange in fair value of BAM Surplus Notes | (16,100,000) | 0 | (16,100,000) | 0\nNet gain on sale of the Bamboo Group | 0\nCommission and fee revenues | 0 | 0 | 0\nOther revenues | 100,000 | 100,000 | 200,000 | 200,000\nTotal revenues | (21,500,000) | 29,300,000 | 16,100,000 | 85,600,000\nExpenses:\nLoss and loss adjustment expenses | 0 | 0 | 0 | 0\nBroker commission expenses | 0 | 0 | 0 | 0\nInsurance acquisition expenses | 2,100,000 | 2,000,000.0 | 6,300,000 | 5,900,000\nCost of sales | 0 | 0 | 0 | 0\nGeneral and administrative expenses | 400,000 | 1,000,000.0 | 5,300,000 | 2,600,000\nChange in fair value of contingent consideration | 0 | 0 | 0 | 0\nInterest expense | 3,800,000 | 4,300,000 | 11,100,000 | 13,400,000\nTotal expenses | 6,300,000 | 7,300,000 | 22,700,000 | 21,900,000\nPre-tax income (loss) | (27,800,000) | 22,000,000.0 | (6,600,000) | 63,700,000\nHG Global | Operating\n[\u2026 4,860 characters omitted \u2026]"
-   },
-   "P4.s15": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Results in the first nine months of 2026 were driven by solid operating company results, partially offset by unrealized losses due to the impact of higher interest rates and a decline in the MediaAlpha share price."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001628280-26-012603): book equity at year end $5,425.4 million; income to common $1,106.4 million; return on opening equity 24.7%."
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.13589900984814113,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.13589900984814113,
-   "roe.y1": 0.13589900984814113,
-   "roe.y2": 0.13589900984814113,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.13589900984814113,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.13589900984814113,
-   "roe.y1": 0.05433321542270959,
-   "roe.y2": 0.13589900984814113,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "neutral",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    0
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "p25",
-   "roe.y2": "median",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Fourth-quarter 2026 results are not in the evidence, so full-year 2026 income to common and return on equity cannot be stated.",
-   "Whether the higher interest rates and the MediaAlpha share price decline that drove the third-quarter unrealized losses will persist or reverse is not shown.",
-   "The Q3 10-Q risk factor section was not found in the packet.",
-   "The evidence gives no annual guidance for book value growth or return on equity, so no guidance option was used.",
-   "The effect of the November 4, 2026 MediaAlpha share sale on future results beyond the stated ownership level is not shown."
-  ],
-  "year": 3
- },
- "value_base": 3868.7570294409593,
- "value_bear": 3576.2197698447667,
- "value_bull": 4161.2942890371505,
+ "upside": 0.04891474266093909,
+ "valuation": null,
+ "value_base": 2203.4966598327064,
+ "value_bear": 1841.7986881427837,
+ "value_bull": 2954.2700007783533,
  "value_per_filed_share": {
-  "base": 3868.7570294409593,
-  "bear": 3576.2197698447667,
-  "bull": 4161.2942890371505
+  "base": 2203.4966598327064,
+  "bear": 1841.7986881427837,
+  "bull": 2954.2700007783533
  },
  "valued": true,
- "verdict": "BUY",
- "verdict_reason": "expected return +22.0 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +1.1 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

@@ -1,13 +1,395 @@
 {
- "alpha_pts": 24.49919909465728,
+ "alpha_pts": 4.740938435877662,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 98,
  "claims_supported": 90,
  "date": "2026-11-16T17:34:35Z",
- "equity_value": 30023683858.17991,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.2108, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.043390816602401065,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 16757199143.622746,
+     "implied_pb": 1.669145161032527,
+     "seam_ratio": 1.0290526315789463,
+     "tv_share": 0.4039999821593803
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.015,
+      0.03,
+      0.04,
+      0.04,
+      0.04
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.12,
+     "roe": [
+      0.115,
+      0.15,
+      0.145,
+      0.14,
+      0.135
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2108, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 90
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.0,
+      0.07
+     ],
+     "long_run_roe": [
+      0.095,
+      0.14
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Repurchased $310.1 million of common shares in Q3 2026"
+       },
+       {
+        "id": "F1",
+        "quote": "Total shareholders\u2019 equity attributable to RenaissanceRe"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Common equity fell during 2026 as repurchases of about $1.0 billion plus dividends exceeded retained earnings, so year 1 growth is slightly negative. Afterward I assume payout of most earnings through buybacks, leaving modest growth of 3-4%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Increased capital from competitors in the market has caused, and may in the future cause reductions in prices of our products"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive and cyclical forces should erode excess returns gradually, so ROE fades to its long-run level over about ten years."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.1867, p25 -0.0104, median 0.2108, p75 0.2694, max 0.5520, last 0.2694."
+       },
+       {
+        "id": "P3",
+        "quote": "we have generally experienced favorable development on prior accident years net claims and claim expenses in the last several years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A property-catastrophe and casualty reinsurer through the cycle should earn above its 9.4% cost of equity but below recent peak years. Softening pricing, 15% Bermuda tax, and casualty underperformance cap it near 12%. Prior-year reserve releases are not guaranteed to continue."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "annualized operating return on average common equity of 18.9%"
+       },
+       {
+        "id": "P2",
+        "quote": "We believe the reinsurance industry will remain cyclical, and that we may return to soft market conditions in the future."
+       },
+       {
+        "id": "P7",
+        "quote": "significantly higher new money yields will compound net investment income over time"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is 2026: nine-month income of $777 million is cut by mark-to-market losses, and I assume a normal Q4 to reach about 11.5%. Later years move toward operating ROE, which was 18.9% annualized in Q3, less allowance for softer pricing, large-loss normalization, and fewer reserve releases."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "We believe the reinsurance industry will remain cyclical, and that we may return to soft market conditions in the future."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Reinsurance premiums track nominal growth in insured exposure, but the business is cyclical and may return to soft market conditions, so I set perpetual growth slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Market softens faster than assumed, or major catastrophe, war or casualty reserve losses cut returns; Casualty and Specialty is already near break-even or loss-making."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "roe",
+      "risk": "Further mark-to-market losses or weak underwriting depress near-term returns, with third-party capital redemptions shrinking fees."
+     },
+     {
+      "bear_value": -0.02,
+      "input_hit": "book_growth",
+      "risk": "Continued heavy buybacks plus losses shrink common equity further."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.055,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "long_run_roe": 0.095,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.015000000000000006,
+       0.060000000000000005,
+       0.07,
+       0.07,
+       0.07
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is currently pulled down by mark-to-market losses on a large fixed-income book. Nine-month 2026 income to common was $777.4 million, with Q3 a net loss of $161.4 million on $879.8 million of mark-to-market losses. Underlying earnings are strong: a 75.1% nine-month combined ratio, with favorable prior-year reserve releases helping. 2025's 26.9% return was lifted by $1.18 billion of investment gains and $1.09 billion of favorable reserve development. Casualty and Specialty loses money underwriting, and Q3 carried $191 million of large-loss events. Falling premiums point to a softening market. Heavy buybacks are shrinking common equity.",
+     "why": "The company is buying back about $1 billion of stock a year while book value per share rises. This means regulatory capital is not binding and growth is set by management's payout choices and underwriting opportunities. Common equity at 30 Sep 2026 (about $10.6 billion after removing $750 million of preference shares) is already below the 2025 close, because buybacks exceed retained earnings. The 2025 base-year ROE is above a through-cycle level, so I fade it down toward a mid-teens figure, then toward about 12%."
+    },
+    "value_at_old_defaults": 780.4713968133354,
+    "values": {
+     "base": 389.92050398773694,
+     "bear": 315.1634116619873,
+     "bull": 516.658200396043
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 16045530529.96045,
+     "implied_pb": 1.5982575256602867,
+     "seam_ratio": 1.0570000000000008,
+     "tv_share": 0.4308552878876529
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.015,
+      0.04,
+      0.05,
+      0.05,
+      0.05
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.115,
+     "roe": [
+      0.108,
+      0.155,
+      0.145,
+      0.135,
+      0.125
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2108, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 90
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.0,
+      0.09
+     ],
+     "long_run_roe": [
+      0.09,
+      0.14
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "RenaissanceRe common share repurchases | (1,012,608) | (939,637)"
+       },
+       {
+        "id": "P7",
+        "quote": "Repurchased $310.1 million of common shares in Q3 2026; repurchased an additional $143.8 million of common shares from October 1, 2026 to October 23, 2026."
+       },
+       {
+        "id": "F1",
+        "quote": "Total shareholders\u2019 equity attributable to RenaissanceRe | 11,352,541 | 11,608,657"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 equity shrinks because buybacks plus dividends exceed income: common equity was about $10.6bn at Sept 30 against $10.86bn at year-end, and buybacks continued in October. Later growth is retained earnings after continued heavy repurchases, which is about 4-5% a year with ROE of 13-15%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We are at a relatively attractive point in the cycle, characterized by price adequacy and stable terms and conditions."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade is a mid-point for the pace at which excess returns erode as the cycle softens and competing capital enters, as the company itself says may happen."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We believe the reinsurance industry will remain cyclical, and that we may return to soft market conditions in the future."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Through-cycle ROE for a cat reinsurer should sit moderately above the cost of equity, because the company's underwriting and fee model earns excess returns, but the competition and cyclicality flagged in the filings cap that excess. 11.5% against r of 9.36% reflects this."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Annualized return on average common equity of (6.0)% and annualized operating return on average common equity of 18.9%."
+       },
+       {
+        "id": "P7",
+        "quote": "Mark-to-market losses of $879.8 million, primarily driven by $899.6 million of losses from fixed maturity-related investments."
+       },
+       {
+        "id": "P7",
+        "quote": "Weighted average yield to maturity of 5.8%, up 1.0 percentage point from December 31, 2025."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (FY2026) carries a Q3 mark-to-market loss and large-loss events, so 9M income to common is only $777m and full-year ROE is about 11%. Later years assume no MTM losses, a higher portfolio yield, and some pricing softening that erodes underwriting margins. Q3 operating ROE was 18.9% despite large losses, but with a normalised cat load and a softer cycle I assume 12-16%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run book growth is anchored to nominal growth of about 3.5%, slightly below the 3.75% anchor, given a mature, cyclical franchise with capital returned."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Hard market softens faster than expected, with falling premiums (9M gross premiums written already down) and weaker cat pricing, so ROE reverts toward the cost of equity."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "roe",
+      "risk": "A major cat year or reserve strengthening in long-tail casualty cuts near-term ROE sharply."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "book_growth",
+      "risk": "Buybacks continue at above-income pace, or earnings fall, so common equity shrinks further."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.065,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "long_run_roe": 0.09,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.024999999999999994,
+       0.07999999999999999,
+       0.09,
+       0.09,
+       0.09
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "FY2025 ROE of 0.2694 was boosted by favourable prior-year reserve releases, a soft-but-still-attractive cat pricing cycle and investment gains. In 2026 underwriting is still strong (9M combined ratio 75.1%), but Q3 GAAP income was a loss because fixed-income mark-to-market losses of $879.8m hit as yields rose. Operating ROE of 18.9% for Q3 includes about 9 points of large-loss drag. Premiums are shrinking and the cycle is softening, so I fade ROE from the high-20s toward the mid-teens. Investment income is supported by a 5.8% portfolio yield.",
+     "why": "2025 was an unusually good year: it carried large reserve releases and about $1.2bn of investment gains. Regulatory capital does not appear to bind, since 9M-2026 buybacks of $1,012.6m exceeded common income of $777.4m and common equity fell. Book growth is therefore set by management's payout choice, which depends on how much capital the underwriting cycle lets it deploy."
+    },
+    "value_at_old_defaults": 780.4713968133354,
+    "values": {
+     "base": 373.3608043545759,
+     "bear": 299.12195866477344,
+     "bull": 542.4694294426976
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 780.4713968133354,
+  "value_at_old_defaults_quoted": 780.4713968133354,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 17739802527.837864,
  "family": "financial",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 46483000.0,
  "flags": [
   "RenaissanceRe reported a net loss attributable to common shareholders of $161.4 million in the third quarter, driven by mark-to-market losses of $879.8 million, including $899.6 million of losses from fixed maturity-related investments.",
@@ -15,7 +397,7 @@
   "RenaissanceRe repurchased an additional $143.8 million of common shares following the end of the third quarter."
  ],
  "in_code_book": false,
- "ke": 0.0934350225480369,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 14231321010,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +405,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 645.9067585607622,
-  "3000": 577.5048564086276
+  "1000": 389.92050398773694,
+  "3000": 373.3608043545759
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1361,142 +1743,17 @@
   ]
  },
  "ticker": "RNR",
- "upside": 1.1096905787651759,
- "valuation": {
-  "annotations": [],
-  "departures": [
-   {
-    "driver": "regulation",
-    "evidence": [
-     "P3.s65",
-     "P3.s66",
-     "P3.s67",
-     "P7.s2"
-    ],
-    "input": "normalized.roe"
-   },
-   {
-    "driver": "competition",
-    "evidence": [
-     "P2.s57",
-     "P2.s58",
-     "P2.s89",
-     "P2.s91"
-    ],
-    "input": "long_run_roe"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "none",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "down",
-   "normalized.book_growth": "none",
-   "normalized.roe": "down",
-   "roe.y1": "none",
-   "roe.y2": "none",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "P2.s57": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "We believe the reinsurance industry will remain cyclical, and that we may return to soft market conditions in the future."
-   },
-   "P2.s58": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Additionally, it is possible that increased access to capital, new technologies, including artificial intelligence, and other factors may reduce the duration or eliminate or significantly lessen the impact of any current or future hard reinsurance underwriting market."
-   },
-   "P2.s89": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Competition for customers and access to risk has also increased and become more intense."
-   },
-   "P2.s91": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Increased capital from competitors in the market has caused, and may in the future cause reductions in prices of our products or the duration or amplitude of attractive portions of the historical market cycles."
-   },
-   "P3.s65": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Historically, the majority of our income has been earned in Bermuda, which did not have a corporate income tax, so the tax impact to our operations has been minimal."
-   },
-   "P3.s66": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "On December 27, 2023, the Government of Bermuda announced the implementation of a 15% CIT, which became effective on January 1, 2025."
-   },
-   "P3.s67": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Therefore, our profits generated on or after January 1, 2025 in Bermuda (except for profits earned by our joint ventures and managed funds) are subject to a 15% corporate income tax."
-   },
-   "P7.s2": {
-    "kind": "release",
-    "period": "2026-10-27",
-    "text": "\u2022Annualized return on average common equity of (6.0)% and annualized operating return on average common equity of 18.9%."
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.21079768564075782,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.21079768564075782,
-   "roe.y1": 0.21079768564075782,
-   "roe.y2": 0.21079768564075782,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.17079768564075784,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.19079768564075783,
-   "roe.y1": 0.21079768564075782,
-   "roe.y2": 0.21079768564075782,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "neutral",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    -2
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    -2
-   ],
-   "roe.y1": "median",
-   "roe.y2": "median",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Management provides no numerical forward guidance for return on equity or book equity growth.",
-   "Full-year 2026 return on equity and common book equity growth depend on fourth-quarter catastrophe activity, investment mark-to-market movements, and share repurchases after October 23, 2026, which are not reported.",
-   "Whether favorable prior-year reserve development will continue in future periods and the ultimate impact of social inflation on casualty lines cannot be determined from the filings.",
-   "The timing and extent of any shift toward soft reinsurance pricing conditions due to increased competitor capital are not quantified."
-  ],
-  "year": 3
- },
- "value_base": 645.9067585607622,
- "value_bear": 602.93336295867,
- "value_bull": 688.8801541628545,
+ "upside": 0.2465323855299546,
+ "valuation": null,
+ "value_base": 381.6406541711564,
+ "value_bear": 307.1426851633804,
+ "value_bull": 529.5638149193703,
  "value_per_filed_share": {
-  "base": 645.9067585607622,
-  "bear": 602.93336295867,
-  "bull": 688.8801541628545
+  "base": 381.6406541711564,
+  "bear": 307.1426851633804,
+  "bull": 529.5638149193703
  },
  "valued": true,
- "verdict": "BUY",
- "verdict_reason": "expected return +24.5 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +4.7 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

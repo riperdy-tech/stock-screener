@@ -1,11 +1,537 @@
 {
- "alpha_pts": 33.7895559103165,
+ "alpha_pts": 27.705552472774187,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 73,
  "claims_supported": 71,
  "date": "2026-11-17T23:41:14Z",
- "equity_value": 5662133489.540818,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The reported ETR was 91.2% in FY26 and management guides a non-GAAP rate of about 42-44%, with IRS litigation unresolved, so the rate is elevated and uncertain.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The filed 36.3% sits below the company's guided non-GAAP rate of about 42-44%, and the GAAP rate was 91.2% in FY2026 because of tax litigation charges.",
+   "run 3000: debt_level_representative_no: Debt of $3,552M at March 2026 is already being repaid (400 repaid in six months, $935M now current), so the level is likely to keep falling.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 15 of 15"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0454 and margin 0.0559, margin 0.0777 (persist), growth 0.0375, terminal RONIC 0.0830 (equity return r 0.1113), F 10",
+  "run_gap": 0.16205447356920416,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 169000000.0,
+       "printed": 169,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Pension and OPEB actuarial and settlement losses (gains) | 169 | (232) | 401"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Pension and OPEB actuarial and settlement losses recorded in other expense, a non-operating mark-to-market item that is not expected to recur at this size"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1737000000.0,
+     "excess_cash_before": 1737000000.0,
+     "k0_after": 566703686.3732387,
+     "k0_before": 735703686.3732387,
+     "k0_interest": 216000000.0,
+     "one_offs_charge": 169000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 808300351.8678396,
+     "x0_before": 700679492.972134
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3279111362.795677,
+     "seam_ratio": 0.9140073898840437,
+     "tv_share": 0.11807592117804826,
+     "wedge_rate_5": -0.008949875811820331
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The reported ETR was 91.2% in FY26 and management guides a non-GAAP rate of about 42-44%, with IRS litigation unresolved, so the rate is elevated and uncertain.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.02,
+     "fade_years": 10,
+     "long_run_op_margin": 0.07,
+     "op_margin": [
+      0.062,
+      0.06,
+      0.062,
+      0.065,
+      0.067
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      -0.05,
+      -0.04,
+      -0.02,
+      -0.005,
+      0.01
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth -0.0454 and margin 0.0559, margin 0.0777 (persist), growth 0.0375, terminal RONIC 0.0830 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 71
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.055,
+      0.08
+     ],
+     "rev_growth_y3": [
+      -0.05,
+      0.015
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0166"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (133) | (87)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled PP&E capex ratio is 1.66%, but first-half PP&E spend is running about 2.2% of revenue (133 of 6,033), and software and transition costs add more, so I use 2%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "While our core revenue recovery will take time"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin and growth normalise slowly because the revenue decline, GIS restructuring and leadership change play out over several years, so I use a 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-03-31 | $12,871.0 million | -0.0582 | 0.0792"
+       },
+       {
+        "id": "P2",
+        "quote": "the rapid adoption of AI technologies by our clients and competitors may reduce demand for certain of our traditional services"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Filed margins have stayed in a 7-8% band for several years, and the base rate says about half of a gap to the median persists. Competition from offshore providers and AI substitution limit recovery, so I settle slightly below the historical median of about 7.9%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Adjusted EBIT was $187 million, down 26.4% with a corresponding margin of 6.2%"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-03-31 | $12,644.0 million | -0.0176 | 0.0767"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q2 adjusted EBIT margin was 6.2%, below the 7.67% base year, and GIS profit is falling faster than revenue. I start near the current run-rate and recover only part of the gap as restructuring and SG&A cuts take hold."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0830."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 26.7% reflects a mostly written-down asset base. New investment in a competitive services market should earn well below that but above the 8.3% breakeven, so I use 15%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "YoY Organic Revenue % | ~(6.0)% | (5.5)% | (5.0)%"
+       },
+       {
+        "id": "P4",
+        "quote": "Book-to-bill ratio (contract awards divided by quarterly revenue) of 0.80x, compared to 0.85x in the prior-year period"
+       },
+       {
+        "id": "P5",
+        "quote": "DXC acknowledges ongoing discussions regarding a possible sale of its insurance business."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Management guides to further organic decline of about 5-6% this year, and book-to-bill below 1 points to continued shrinkage. I fade the decline over five years as cost-out and AI offerings stabilise the base. Insurance growth could be removed by a sale."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A shrinking IT services business with competitive pressure should not reach the 3.75% nominal anchor, so I set long-run growth at 2%, below inflation-like growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.04,
+      "input_hit": "rev_growth",
+      "risk": "Revenue decline persists or deepens because GIS keeps shrinking, bookings stay weak and AI substitutes for traditional services"
+     },
+     {
+      "bear_value": 0.055,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin compression continues as revenue falls against a fixed delivery cost base"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Sale of the growing Insurance segment and adverse IRS Tax Court rulings (about $655 million of cash tax exposure) reduce growth and cash"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.055,
+      "rev_growth": [
+       -0.08,
+       -0.07,
+       -0.05,
+       -0.035,
+       -0.020000000000000004
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       -0.015,
+       -0.0049999999999999975,
+       0.015000000000000003,
+       0.030000000000000002,
+       0.045000000000000005
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt was $3,552 million at the base year but fell with a $400 million repayment, and the evidence does not say how the $935 million of current maturities will be refinanced or repaid."
+     },
+     "margin_position": "The FILED RECORD margin of 7.67% for FY2026 matches adjusted EBIT, so it excludes amortization of acquired intangibles and restructuring. It is already sliding: Q2 FY27 adjusted EBIT margin was 6.2% because revenue is falling against a largely committed delivery cost base, and the largest segment (GIS) earns only 4.6%. Overhead cuts offset only part of this.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The reported ETR was 91.2% in FY26 and management guides a non-GAAP rate of about 42-44%, with IRS litigation unresolved, so the rate is elevated and uncertain."
+     },
+     "why": "FY2026 had revenue of $12,644 million and an adjusted margin of about 7.7%, but the current run-rate is weaker: Q2 revenue fell 4.0% organically, gross margin fell 280 basis points, and book-to-bill was 0.80x. GAAP pretax income in the base year was distorted by a $169 million pension loss and a 91.2% effective tax rate. First-half FY27 profit and free cash flow were lifted by a one-off TCS litigation gain. Revenue has fallen in 8 of the last 9 years, so I treat this as structural decline with a slow stabilisation, not a cycle."
+    },
+    "value_at_old_defaults": 33.43426087084867,
+    "values": {
+     "base": 29.346108738231962,
+     "bear": 24.01832844629746,
+     "bull": 37.359105070543144
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 169000000.0,
+       "printed": 169,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Pension and OPEB actuarial and settlement losses (gains) | 169 | (232)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "FY2026 pension and OPEB actuarial and settlement losses, a mark-to-market item in other expense that sits between operating income and pretax income and is not expected to recur at this size"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1737000000.0,
+     "excess_cash_before": 1737000000.0,
+     "k0_after": 566703686.3732387,
+     "k0_before": 735703686.3732387,
+     "k0_interest": 216000000.0,
+     "one_offs_charge": 169000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 808300351.8678396,
+     "x0_before": 700679492.972134
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2543985777.7159214,
+     "seam_ratio": 0.9109676284152843,
+     "tv_share": 0.13909767767206468,
+     "wedge_rate_5": 0.00034233106571536346
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The filed 36.3% sits below the company's guided non-GAAP rate of about 42-44%, and the GAAP rate was 91.2% in FY2026 because of tax litigation charges.",
+     "debt_level_representative_no: Debt of $3,552M at March 2026 is already being repaid (400 repaid in six months, $935M now current), so the level is likely to keep falling.",
+     "confidence_low",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.035,
+     "fade_years": 10,
+     "long_run_op_margin": 0.068,
+     "op_margin": [
+      0.06,
+      0.057,
+      0.058,
+      0.062,
+      0.066
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      -0.053,
+      -0.035,
+      -0.02,
+      -0.005,
+      0.01
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth -0.0454 and margin 0.0559, margin 0.0777 (persist), growth 0.0375, terminal RONIC 0.0830 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 71
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.08
+     ],
+     "rev_growth_y3": [
+      -0.05,
+      0.015
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "less capital expenditures of $535 million"
+       },
+       {
+        "id": "P4",
+        "quote": "less capital expenditures of $230 million"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0166"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The filed pooled capex ratio of 1.66% appears to count property and equipment only. Cash capex including software and transition costs was $535M, about 4.2% of FY2026 revenue, and $230M, about 3.8%, in the first half of FY2027. I use 3.5% to reflect the full cash cost and note the basis mismatch."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "While our core revenue recovery will take time"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The move from a shrinking business to a steady state, and a margin that is below its median and recovering, will take years. I use 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "the rapid adoption of AI technologies by our clients and competitors may reduce demand for certain of our traditional services."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-03-31 | $12,871.0 million | -0.0582 | 0.0792"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin is below its five-year median of about 7.9%. Base rates say about half of such a gap persists, and AI substitution and offshore competition argue against a full return. I use 6.8%, with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Adjusted EBIT was $187 million, down 26.4% with a corresponding margin of 6.2%"
+       },
+       {
+        "id": "P4",
+        "quote": "Revenue was $1,427 million, down 10.0% year-over-year on an organic basis."
+       },
+       {
+        "id": "REC",
+        "quote": "2026-03-31 | $12,644.0 million | -0.0176 | 0.0767"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Q2 adjusted EBIT margin was 6.2%, down from 7.7% in FY2026, with GIS at a 4.6% margin and gross margin falling. I start near 6% and trough around 5.7% as revenue keeps shrinking, then recover as restructuring and SG&A savings catch up. Margins stay below the FY2026 level."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2669"
+       },
+       {
+        "id": "REC",
+        "quote": "growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is very high (0.2669) because the business carries little tangible capital. New investment in a competitive, shrinking market should earn far less. I use 15%, above the 8.3% break-even but well below the base-year level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "YoY Organic Revenue % | ~(6.0)% | (5.5)% | (5.0)%"
+       },
+       {
+        "id": "P4",
+        "quote": "Book-to-bill ratio (contract awards divided by quarterly revenue) of 0.80x, compared to 0.85x in the prior-year period."
+       },
+       {
+        "id": "P5",
+        "quote": "While our core revenue recovery will take time"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Management guides FY2027 organic revenue down 5.0-5.5% and Q3 down about 6%, and bookings are below revenue. I assume the decline eases as GIS stabilizes and AI-based offerings ramp, with only slight growth by year 5. A sale of Insurance would lower the base further."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "DXC has shrunk every year since 2018, and the long-run anchor of 3.75% is too high for a company whose core services face AI substitution. I use 2%, which is a nominal rate below the anchor and roughly flat in real terms."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.05,
+      "input_hit": "rev_growth",
+      "risk": "Organic decline persists because bookings stay below revenue and AI substitution erodes the infrastructure and application services base"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "GIS margin keeps falling and cost cuts cannot keep pace with revenue loss, so the margin settles near 5%"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "An adverse U.S. Tax Court outcome forces a cash payment of up to about $655M and competes with debt maturities for cash"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Sale of the Insurance business removes the only growing, higher-margin segment and leaves the mix weighted to GIS and CES"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       -0.083,
+       -0.065,
+       -0.05,
+       -0.035,
+       -0.020000000000000004
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       -0.017999999999999995,
+       0.0,
+       0.015000000000000003,
+       0.030000000000000002,
+       0.045000000000000005
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt of $3,552M at March 2026 is already being repaid (400 repaid in six months, $935M now current), so the level is likely to keep falling."
+     },
+     "margin_position": "The filed operating margin of 7.67% matches adjusted EBIT ($970M on $12,644M), so it excludes restructuring and acquired-intangible amortization. It sits just below the five-year median of about 7.9% and is falling. Revenue is shrinking about 5% a year with book-to-bill below 1, and the largest segment, GIS (47% of revenue), earns a 4.6% margin and fell 10% organically. Overhead cuts only partly offset the loss of gross margin. This looks like structural pressure, not a cycle.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The filed 36.3% sits below the company's guided non-GAAP rate of about 42-44%, and the GAAP rate was 91.2% in FY2026 because of tax litigation charges."
+     },
+     "why": "FY2026 adjusted EBIT margin of 7.7% is above where the first half of FY2027 is running (Q2 adjusted EBIT margin 6.2%, with gross margin down 280 basis points). GAAP earnings are distorted by pension mark-to-market, a 91.2% effective tax rate and, in the first half of FY2027, a TCS litigation gain. A possible sale of Insurance, the only growing segment, could also change the mix, and I have not modelled it."
+    },
+    "value_at_old_defaults": 33.43426087084867,
+    "values": {
+     "base": 24.94689654351981,
+     "bear": 19.829307919320257,
+     "bull": 32.64444383974364
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 33.43426087084867,
+  "value_at_old_defaults_quoted": 33.43426087084867,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4849722696.792478,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 178650000.0,
@@ -15,7 +541,7 @@
   "DXC recorded a one-time impairment of transition and transformation costs tied to a customer contract modification, with a related one-time acceleration of software amortization. The amount of the impairment is not stated."
  ],
  "in_code_book": false,
- "ke": 0.11164375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 2217011895,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +549,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 30.527238771848786,
-  "3000": 31.694002180469177
+  "1000": 29.346108738231962,
+  "3000": 24.94689654351981
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -884,130 +1410,17 @@
   ]
  },
  "ticker": "DXC",
- "upside": 1.5539481778652426,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: op_margin.y1 0.0559",
-   "V7 shrinking_base_positive_terminal_growth: no return_to_growth or cycle_recovery departure"
-  ],
-  "departures": [
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P5.s10",
-     "P4.s28",
-     "V0"
-    ],
-    "input": "rev_growth.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "down",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P4.s28": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "\u2022Book-to-bill ratio (contract awards divided by quarterly revenue) of 0.80x, compared to 0.85x in the prior-year period."
-   },
-   "P5.s10": {
-    "kind": "release",
-    "period": "2026-10-29",
-    "text": "\"On the quarter, we delivered revenue, adjusted EBIT, and Non-GAAP diluted EPS above our expectations, while making progress with the agentic and AI-based solutions that we expect will contribute to future growth."
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2026-03-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2026-03-31.\nFiled operating margin record: min 0.0738, p25 0.0767, median 0.0787, p75 0.0792, max 0.0845, last 0.0767; persist 0.0777 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2023-03-31 -0.1128, 2024-03-31 -0.0529, 2025-03-31 -0.0582, 2026-03-31 -0.0176.\nBase-year revenue 12,644,000,000; tax rate 0.3632; return on opening capital 0.2669; capital expenditure 0.0166 and depreciation 0.0337 of revenue (pooled); the desk depreciates by the pooled rule.\nCost of equity 0.1116 (risk-free 0.0515, long-run growth anchor 0.0375, loading 1.261, equity premium 0.0477).\nYear 1 to date (10-Q 0001688568-26-000090, filed 2026-10-30): revenue 6,033,000,000 from 2026-04-01 to 2026-09-30 against 6,320,000,000 from 2025-04-01 to 2025-09-30, growth -0.0454; operating income 337,000,000, margin 0.0559.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd -0.0454; anchor -0.0039; record_median -0.0505; last -0.0315; zero -0.0227; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median -0.0556; last -0.0176; zero 0.0000; guidance\nop_margin.y1: ytd 0.0559; persist 0.0668; median 0.0673; p25 0.0663; p75 0.0675; last 0.0663; guidance\nop_margin.y2: persist 0.0777; median 0.0787; p25 0.0767; p75 0.0792; last 0.0767; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.0777; median 0.0787; p25 0.0767; p75 0.0792; last 0.0767; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0832; quarter 0.1005; half 0.1268; three_quarters 0.1719; ronic0 0.2669\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline -0.0556\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0166; record_last 0.0168; record_max 0.0193; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.01664353077550553,
-    0.01664353077550553,
-    0.01664353077550553,
-    0.01664353077550553,
-    0.01664353077550553
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07772055388316065,
-   "normalized.margin": 0.07772055388316065,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.05585943974805238,
-   "op_margin.y2": 0.07772055388316065,
-   "rev_growth.y1": -0.04541139240506331,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08317162302041554
-  },
-  "numbers": {
-   "capex": [
-    0.01664353077550553,
-    0.01664353077550553,
-    0.01664353077550553,
-    0.01664353077550553,
-    0.01664353077550553
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07772055388316065,
-   "normalized.margin": 0.07772055388316065,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.05585943974805238,
-   "op_margin.y2": 0.07772055388316065,
-   "rev_growth.y1": -0.04541139240506331,
-   "rev_growth.y2": -0.017636547276823844,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08317162302041554
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "last",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The full-year fiscal 2027 guidance text in the earnings release was partly omitted. The guidance table is read as organic revenue growth of (5.5)% to (5.0)%. Whether it applies to reported revenue is not confirmed.",
-   "No guidance on operating margin or capital expenditure is visible, so those inputs stay record-neutral.",
-   "The effect of a possible sale of the insurance business on revenue and margins is unknown. The release only says discussions are ongoing.",
-   "The ruling in the pending U.S. Tax Court matters and its cash-tax effect are unknown.",
-   "The outlook for revenue in fiscal 2028 is not given in the evidence. The year 2 choice rests on current bookings and the revenue trend."
-  ],
-  "year": 3
- },
- "value_base": 31.694002180469177,
- "value_bear": 30.360910288837943,
- "value_bull": 32.716745511085044,
+ "upside": 1.187504139120768,
+ "valuation": null,
+ "value_base": 27.146502640875887,
+ "value_bear": 21.92381818280886,
+ "value_bull": 35.00177445514339,
  "value_per_filed_share": {
-  "base": 31.694002180469177,
-  "bear": 30.360910288837943,
-  "bull": 32.716745511085044
+  "base": 27.146502640875887,
+  "bear": 21.92381818280886,
+  "bull": 35.00177445514339
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +33.8 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +27.7 points a year against the required return over 3 years"
 }

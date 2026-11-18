@@ -1,11 +1,488 @@
 {
- "alpha_pts": 47.009151284764734,
+ "alpha_pts": 35.56904952333042,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 89,
  "claims_supported": 88,
  "date": "2026-11-16T11:06:34Z",
- "equity_value": 813001965.7642846,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 15 of 15"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3184 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+  "run_gap": 0.03630183572453342,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 99077831.0,
+     "excess_cash_before": 99077831.0,
+     "k0_after": -1487814.9523546174,
+     "k0_before": -1487814.9523546174,
+     "k0_interest": 1583374.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 56620763.95235462,
+     "x0_before": 56620763.95235462
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 466748426.4596727,
+     "seam_ratio": 1.012742658804415,
+     "tv_share": 0.344285993460705,
+     "wedge_rate_5": 0.008560645093900674
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.17,
+     "fade_years": 10,
+     "long_run_op_margin": 0.22,
+     "op_margin": [
+      0.31,
+      0.28,
+      0.26,
+      0.24,
+      0.23
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      -0.03,
+      0.1,
+      0.08,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3184 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 88
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.16,
+      0.27
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.14
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1984"
+       },
+       {
+        "id": "F3",
+        "quote": "Vessels' acquisitions, advances for vessels under construction and improvement of vessels | (412,428) | (106,169,013) | (85,201)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex is very lumpy: 0.0024 in 2025 against 0.6347 in 2024, with a pooled five-year ratio of 0.1984. The four-vessel purchase in 2027 and ongoing fleet renewal imply a five-year average near 0.17, above depreciation at about 0.146 of revenue because the fleet is growing."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Residual values used in depreciation calculations are based on $350 per light weight ton."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Shipping cycles typically run 5 to 10 years, so the margin should mean-revert over a long fade rather than abruptly."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The international gas carrier market, including the transport of LPG, is cyclical with attendant volatility in profitability, charter rates and vessel values"
+       },
+       {
+        "id": "F2",
+        "quote": "Income from operations | 55,132,949 | 59,857,088 | 45,817,523"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Charter rates, utilisation and vessel values are cyclical, and the company's own median margin is well below the recent 0.32 to 0.36. I keep about half of the gap, plus a little for the debt-free, low-cost structure, giving about 0.22."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $173.2 million | 0.0353 | 0.3184"
+       },
+       {
+        "id": "P2",
+        "quote": "Beginning this year, 2026, and beyond there is a considerable number of vessels in the MGC segment on order scheduled for delivery that could lead to an oversupply of vessels."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins start near the 2025 level because about 60% of remaining 2026 days are on period charters and Q2 net income was $17.3 million on $42.9 million of revenue. They then step down as 2027 cover is only 17% and higher spot exposure lifts voyage costs. Newbuilding deliveries in MGCs and normalising trade routes add pressure."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0923; tax rate 0.0000"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Vessel purchases in a competitive, cyclical market earn roughly the cost of capital over a cycle. The filed return on tangible capital is 0.0923 and the cost of equity is 0.0946, so I use 0.09."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "The decrease in revenue is attributable to the decreased number of vessels."
+       },
+       {
+        "id": "P5",
+        "quote": "Eco Enchanted | 2024 | 40,000 | fully-refrigerated | South Korea | Mar-Sep 2027"
+       },
+       {
+        "id": "P3",
+        "quote": "49% of our anticipated fleet days were covered by period charter contracts for the remainder of 2026 and 17% for 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 shrinks slightly because the average owned fleet fell from 28.3 to 26.4 vessels and Eco Wizard is idle. Growth returns in 2027 and 2028 only if stockholders approve and the four acquired vessels (two 40,000 cbm and two 11,000 cbm) arrive Mar-Sep 2027. After that, growth is low because MGC oversupply and weak forward cover cap the upside."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, cyclical, fleet-based shipping business should grow below the 0.0375 nominal anchor. Fleet renewal is largely replacement, so I use 0.025."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "LPG charter rates fall back as MGC newbuildings arrive and Middle East disruption fades, with weak 2027 period cover"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Stockholders reject, or delivery delays, the four-vessel acquisition, so the fleet stays smaller and revenue does not recover"
+     },
+     {
+      "bear_value": 0.22,
+      "input_hit": "op_margin",
+      "risk": "Spot exposure, idle vessels (Eco Oracle, Eco Wizard) and high bunker costs compress near-term margins"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.16,
+      "rev_growth": [
+       -0.11,
+       0.020000000000000004,
+       0.0,
+       -0.06,
+       -0.06
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.030000000000000013,
+       0.16000000000000003,
+       0.14,
+       0.08000000000000002,
+       0.08000000000000002
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is zero and the fleet is unencumbered, but the four-vessel acquisition for Mar-Sep 2027 may be financed with new borrowing, and the evidence does not give its price or funding."
+     },
+     "margin_position": "The 2025 operating margin of 0.3184 is far above this company's own long-run level (17-year history mostly 0.05 to 0.25, with a 2021 loss). It reflects strong LPG charter rates since 2023, a debt-free fleet and a modest depreciation charge on an older, partly depreciated book. The base rate for cyclical companies says a margin above its own median keeps only about half of the gap 5 to 10 years later, so I fade it toward about 0.22.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The filed tax rate is 0.0000, which is consistent with a Marshall Islands shipping owner with no tax line in the income statement, and nothing in the evidence suggests that changes."
+     },
+     "why": "2025 is a near-peak year in a cyclical business, and the three prior years averaged an operating margin of about 0.33. The fleet is also changing: vessels were sold, Eco Wizard has been idle, and four vessels are due in 2027, so 2025 revenue and capacity are not a clean run-rate. Q1 and Q2 2026 revenue of $42.9 million each points to roughly flat to slightly lower 2026 revenue on a smaller fleet."
+    },
+    "value_at_old_defaults": 22.60084639987816,
+    "values": {
+     "base": 16.83515553568162,
+     "bear": 12.13287749596027,
+     "bull": 24.11266791808181
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 99077831.0,
+     "excess_cash_before": 99077831.0,
+     "k0_after": -1487814.9523546174,
+     "k0_before": -1487814.9523546174,
+     "k0_interest": 1583374.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 56620763.95235462,
+     "x0_before": 56620763.95235462
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 487389523.31200796,
+     "seam_ratio": 0.9879503714380448,
+     "tv_share": 0.37494399477027046,
+     "wedge_rate_5": 0.02145668864838174
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.17,
+     "fade_years": 8,
+     "long_run_op_margin": 0.23,
+     "op_margin": [
+      0.33,
+      0.3,
+      0.28,
+      0.26,
+      0.25
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.0,
+      0.06,
+      0.1,
+      0.0,
+      0.01
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3184 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 88
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.17,
+      0.3
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.18
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Vessels' acquisitions, advances for vessels under construction and improvement of vessels | (412,428) | (106,169,013) | (85,201)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.1984"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 cash capex was almost nil, but 2024 saw $106M of vessel purchases. Four more vessels are due in 2027, and the fleet needs renewal, so I use a level slightly below the 5-year pooled 0.1984."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Fleet operational utilization(7) | 96.6% | 95.4% | 91.8%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Charter cycles and fleet renewal play out over about a decade, so I use a medium-long fade to the through-cycle margin."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The international gas carrier market, including the transport of LPG, is cyclical with attendant volatility in profitability, charter rates and vessel values"
+       },
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $150.2 million | 0.0359 | -0.2065"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The market is cyclical and the margin is far above the company's long-run median (which includes a 2021 value of -0.2065). A cyclical margin above its median keeps about half the gap, which gives roughly 0.23-0.24."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "About 60% of fleet days for the remainder of 2026 are secured on period charters"
+       },
+       {
+        "id": "P2",
+        "quote": "Beginning this year, 2026, and beyond there is a considerable number of vessels in the MGC segment on order scheduled for delivery that could lead to an oversupply of vessels."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $173.2 million | 0.0353 | 0.3184"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Margins start near the current level, about 0.33 in 2026 given the Q2 profitability and about 60% period coverage. They then fade as older charters roll into a market where MGC newbuilds could cause oversupply, and as newly bought vessels carry depreciation."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0923; tax rate 0.0000"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Shipping returns tend to equal the cost of capital over a cycle. The base-year return on tangible capital is 0.0923, close to the 0.0946 level where growth adds no value, so I use 0.09."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Revenues recorded were $42.9 million in the second quarter, same as the previous quarter."
+       },
+       {
+        "id": "P5",
+        "quote": "Eco Enchanted | 2024 | 40,000 | fully-refrigerated | South Korea | Mar-Sep 2027"
+       },
+       {
+        "id": "P3",
+        "quote": "49% of our anticipated fleet days were covered by period charter contracts for the remainder of 2026 and 17% for 2027."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 revenue is roughly flat: first-half quarterly revenue was $42.9M in each quarter, and the owned fleet shrank from 28.3 to 26.4 vessels. Growth in 2027-2028 comes from the four acquired vessels due Mar-Sep 2027, if stockholders approve. That is offset by normalising rates, with only 17% of 2027 days covered."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "are expected to be limited in the period 2026-2027"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is a mature, cyclical Greek shipowner with small-vessel segment supply limited near term but with long-run oversupply and regulatory risks. I set growth below the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.16,
+      "input_hit": "long_run_op_margin",
+      "risk": "Charter rates fall as MGC deliveries arrive and Middle East disruption fades, taking the margin back to the 17-year median"
+     },
+     {
+      "bear_value": -0.05,
+      "input_hit": "rev_growth",
+      "risk": "Stockholders reject the vessel purchase or delivery slips, and the sold vessels are not replaced, so revenue shrinks"
+     },
+     {
+      "bear_value": 0.2,
+      "input_hit": "op_margin",
+      "risk": "Spot exposure and the 17% coverage for 2027 leave earnings open to idle time and higher bunker costs"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       -0.1,
+       -0.04000000000000001,
+       0.0,
+       -0.1,
+       -0.09000000000000001
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.3,
+      "rev_growth": [
+       0.07999999999999999,
+       0.13999999999999999,
+       0.18,
+       0.07999999999999999,
+       0.08999999999999998
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is zero and the fleet is unencumbered, but the four-vessel purchase for 2027 may be funded partly by new borrowing, which is not disclosed."
+     },
+     "margin_position": "The 2025 operating margin of 0.3184 is well above the company's own 17-year median of about 0.17. LPG charter rates are cyclical and have been supported by 2023-2026 trade disruption. The fleet is also largely depreciated, and the company has no debt. Part of the margin is cyclical and part reflects a leaner fleet.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The company reports a 0.0000 tax rate and is a Marshall Islands shipping company with no income tax line in its filed statements, so a zero rate looks sustainable."
+     },
+     "why": "2025 revenue of $173.2M and a margin of 0.318 are near the 2023-2025 level, but they sit well above the long-run history. Revenue is shrinking in 2026 as vessels are sold and the Eco Wizard sits idle. Four vessels are due in 2027, so fleet size will change materially. I expect the margin to keep roughly half of its gap above the long-run median."
+    },
+    "value_at_old_defaults": 22.60084639987816,
+    "values": {
+     "base": 17.457600534380056,
+     "bear": 12.128741585893614,
+     "bull": 27.990308399401748
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 22.60084639987816,
+  "value_at_old_defaults_quoted": 22.60084639987816,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 615501251.8552233,
  "family": "commodity",
  "far_from_price": true,
  "filed_shares": 35896867.0,
@@ -15,7 +492,7 @@
   "Following the March 2026 outbreak of war in the Middle East and the effective closure of the Strait of Hormuz, StealthGas's vessel Eco Oracle remained in the Persian Gulf and was unable to exit as of the annual report."
  ],
  "in_code_book": false,
- "ke": 0.09442594437424717,
+ "ke": 0.09462594437424718,
  "market_cap_at_publish": 295386011,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +500,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 22.64827082999429,
-  "3000": 22.64827082999429
+  "1000": 16.83515553568162,
+  "3000": 17.457600534380056
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1272,140 +1749,17 @@
   ]
  },
  "ticker": "GASS",
- "upside": 1.7523374008537074,
- "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.0000 valued at 0.0375"
-  ],
-  "departures": [
-   {
-    "driver": "volume",
-    "evidence": [
-     "P7.s12",
-     "P7.s7",
-     "P3.s10",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2025-12-31",
-    "text": "Consolidated Statements of Income - USD ($) | 12 Months Ended\nDec. 31, 2025 | Dec. 31, 2024 | Dec. 31, 2023\nRevenues\nRevenues | $ 173,161,478 | $ 167,262,185 | $ 143,527,769\nTotal revenues | 173,161,478 | 167,262,185 | 143,527,769\nExpenses\nVoyage expenses | 20,433,872 | 9,594,880 | 11,429,716\nVoyage expenses \u2013 related party | 2,097,322 | 2,063,228 | 1,779,488\nVessels' operating expenses | 52,980,264 | 48,961,137 | 52,206,248\nVessels' operating expenses \u2013 related party | 933,616 | 875,002 | 911,250\nDry-docking costs | 3,602,010 | 5,312,614 | 2,641,706\nManagement fees \u2013 related party | 4,445,120 | 4,258,240 | 4,531,920\nGeneral and administrative expenses (including $1,074,549, $1,049,452 and $1,122,233 to related party) | 8,333,449 | 10,309,693 | 5,331,029\nDepreciation | 25,252,476 | 26,076,687 | 23,707,797\nImpairment loss | 488,400 | 0 | 2,816,873\nNet gain on sale of vessels | (538,000) | (46,384) | (7,645,781)\nTotal expenses | 118,028,529 | 107,405,097 | 97,710,246\nIncome from operations | 55,132,949 | 59,857,088 | 45,817,523\nOther (expenses)/income\nInterest and finance costs | (2,241,719) | (9,062,562) | (9,956,712)\nGain on derivatives | 0 | 99,286 | 237,618\nInterest income | 2,953,442 | 3,416,221 | 3,712,239\nForeign exchange loss | (282,697) | (70,692) | (190,722)\nOther expenses, net | 429,026 | (5,617,747) | (6,197,577)\nIncome before equity in earnings of investees | 55,561,975 | 54,239,341 | 39,619,946\nEquity earnings in joint ventures | 5,086,641 | 15,622,836 | 12,316,883\nNet Income | $ 60,648,616 | $ 69,862,177 | $ 51,936,829\nEarnings per share\nBasic | $ 1.64 | $ 1.91 | $ 1.38\nDiluted | $ 1.64 | $ 1.9 | $ 1.37\nWeighted average number of shares\nBasic | 35,881,239 | 35,237,059 | 37,166,449\nDiluted | 35,896,867 | 35,333,160 | 37,236,951"
-   },
-   "P3.s10": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "We have agreed to sell one 5,025 cbm vessel with delivery scheduled in April 2026, and one 3,525 cbm vessel with delivery scheduled in September 2026 while our 40,551 cbm vessel, the Eco Wizard, has continued, since July 2025, to be unable to be employed as a result of an incident in a Russian port, which will leave us with 25 operating vessels in the water, including one JV vessel, aggregating 285,017 cbm."
-   },
-   "P7.s12": {
-    "kind": "six_k",
-    "period": "2026-09-03",
-    "text": "\u2022 | Revenues for the three months ended June 30, 2026, amounted to $42.9 million compared to revenues of $47.2 million for the three months ended June 30, 2025, based on an average of 26.4 vessels and 28.3 vessels owned by the Company, respectively. The decrease in revenue is attributable to the decreased number of vessels."
-   },
-   "P7.s7": {
-    "kind": "six_k",
-    "period": "2026-09-03",
-    "text": "\u2022 | Revenues recorded were $42.9 million in the second quarter, same as the previous quarter. TCE rates improved for the larger vessels but were slightly reduced for the smaller vessels due to idle time, representing an average daily TCE of $15,709."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.1983974870981508,
-    0.1983974870981508,
-    0.1983974870981508,
-    0.1983974870981508,
-    0.1983974870981508
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3183903812602015,
-   "normalized.margin": 0.3183903812602015,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.3183903812602015,
-   "op_margin.y2": 0.3183903812602015,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09442594437424717
-  },
-  "numbers": {
-   "capex": [
-    0.1983974870981508,
-    0.1983974870981508,
-    0.1983974870981508,
-    0.1983974870981508,
-    0.1983974870981508
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3183903812602015,
-   "normalized.margin": 0.3183903812602015,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.3183903812602015,
-   "op_margin.y2": 0.3183903812602015,
-   "rev_growth.y1": 0.0,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09442594437424717
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.0,
-    "model_option": "zero",
-    "record": 0.0375,
-    "record_option": "anchor"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "zero",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No filing or 6-K in the packet provides full-year 2026 guidance for revenue, operating margin, or capital expenditures, nor Q3 2026 results.",
-   "The purchase price and financing terms for the four-vessel acquisition scheduled for March to September 2027 are omitted from the 6-K extracts, and the transaction awaits stockholder approval on December 11, 2026.",
-   "Charter rates for uncovered 2026 and 2027 fleet days and the post-April 2026 status of the Eco Oracle in the Persian Gulf are not disclosed."
-  ],
-  "year": 3
- },
- "value_base": 22.64827082999429,
- "value_bear": 22.547737423992288,
- "value_bull": 23.18467438968547,
+ "upside": 1.0837183513582955,
+ "valuation": null,
+ "value_base": 17.146378035030835,
+ "value_bear": 12.130809540926943,
+ "value_bull": 26.05148815874178,
  "value_per_filed_share": {
-  "base": 22.64827082999429,
-  "bear": 22.547737423992288,
-  "bull": 23.18467438968547
+  "base": 17.146378035030835,
+  "bear": 12.130809540926943,
+  "bull": 26.05148815874178
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +47.0 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +35.6 points a year against the required return over 3 years"
 }

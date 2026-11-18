@@ -1,13 +1,514 @@
 {
- "alpha_pts": 41.707072889234134,
+ "alpha_pts": 25.022266637115127,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 78,
  "claims_supported": 67,
  "date": "2026-11-18T03:47:07Z",
- "equity_value": 246973219772.3143,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Debt has been paid down during 2026 (noncurrent debt of 83,806 against 92,979 at year-end), so the $98.9 billion in the filed record overstates the current level, and the spin-off may reallocate debt.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0675 (equity return r 0.0985), F 10",
+  "run_gap": 0.015833358605303126,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 9400000000.0,
+       "printed": 9.4,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "In June 2025, we sold our interest in Hulu, at which time we recognized the sale of our interest with a pre-tax gain of $9.4 billion"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "billions",
+       "sign": "gain",
+       "what": "Pre-tax gain on the 2025 sale of the Hulu interest, in other income, which will not recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 9495000000.0,
+     "excess_cash_before": 9495000000.0,
+     "k0_after": 4249028170.788952,
+     "k0_before": -5150971829.211048,
+     "k0_interest": 4409000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 9400000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 17783709778.86708,
+     "x0_before": 24956107512.31426
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 149986628737.5343,
+     "seam_ratio": 1.0044917200726589,
+     "tv_share": 0.33088350316743337,
+     "wedge_rate_5": 0.0017901836827751755
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.092,
+     "fade_years": 10,
+     "long_run_op_margin": 0.17,
+     "op_margin": [
+      0.163,
+      0.164,
+      0.166,
+      0.167,
+      0.168
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      -0.025,
+      0.008,
+      0.015,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0675 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 67
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.185
+     ],
+     "rev_growth_y3": [
+      -0.01,
+      0.03
+     ],
+     "terminal_growth": [
+      0.015,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0922"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (8,311) | (8,001)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled capex is 9.2% of revenue, and nine-month 2026 capex of 8,311 on revenue of 90,695 is about 9.2%, so I hold 9.2%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets wireless and Business Services growth gradually meet the structural declines in video and broadband. The spin-off in mid-2027 adds uncertainty but I do not model it."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $123,707.0 million | -0.0002 | 0.1671"
+       },
+       {
+        "id": "P3",
+        "quote": "Our customer relationship additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Ordinary-company base rates suggest only about half of the gap to the 5-year median closes, so I fade to about 17%. That is below the old 20%+ margins because linear video and broadband keep eroding, partly offset by wireless, Peacock profitability and lower acquisition amortization."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 5,320 | 5,534 | 14,616 | 17,184"
+       },
+       {
+        "id": "P6",
+        "quote": "Total Connectivity & Platforms Adjusted EBITDA Margin | 38.6% | 39.3% | (70) bps | (70) bps"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month 2026 operating income of 14,616 on revenue of 90,695 is a margin of about 16.1%. Connectivity margins are falling, but lower acquisition amortization and cost-saving initiatives should hold the GAAP margin near 16-17%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P3",
+        "quote": "which we expect will improve customer retention and strengthen our ability to compete for new customers, but will negatively impact average domestic broadband revenue per customer"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 23.8% reflects an old, heavily depreciated network. New spend on DOCSIS 4.0, fiber and theme parks is in a competitive market with the free wireless line trading revenue for retention, so I assume about 12%, above the 6.75% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Consolidated revenue remained consistent for the nine months ended September 30, 2026 compared to the same period in 2025"
+       },
+       {
+        "id": "P6",
+        "quote": "Pro Forma Revenue1 | $29,298 | $29,151 | 0.5%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) falls because Versant and Sky Germany leave the base: nine-month revenue is already down 0.8%, and Q4 2025 still carried Versant. Pro forma growth is only about +0.5%, because broadband and video declines offset wireless, Business Services and Peacock. I assume a slow recovery to about 2% growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Mature, competitive connectivity and media businesses with shrinking video should grow below the 3.75% long-run nominal anchor, so I use 2.5%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Accelerating broadband and video customer losses and price concessions compress connectivity revenue and margin"
+     },
+     {
+      "bear_value": -0.005,
+      "input_hit": "rev_growth",
+      "risk": "Revenue stays weak because linear cord-cutting, advertising decline and theme park softness outweigh wireless and Peacock gains"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Spin-off execution, financing or tax problems, or a lower-growth competitive environment, lower the long-run growth rate"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       -0.05,
+       -0.017,
+       -0.010000000000000002,
+       -0.005000000000000001,
+       -0.005000000000000001
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.185,
+      "rev_growth": [
+       -0.010000000000000002,
+       0.023,
+       0.03,
+       0.035,
+       0.035
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is already falling, from $98.9B at the base year to about $87.4B at September 2026, and the spin-off may reallocate it, so the right long-run level is not clear."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 16.7% sits below the 5-year median of about 17.9% and well below the 20-21% of 2008-2018. Linear video and broadband are shrinking, residential Adjusted EBITDA margin is eroding, and Epic Universe added depreciation. Peacock has only just turned profitable. Amortization of acquired intangibles is also a large GAAP charge, and part of it leaves with Versant.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 23.7% base-year rate is close to the 2026 nine-month rate of about 25% (2,983 on 11,791 pretax), so it is a rate the company can plausibly keep paying."
+     },
+     "why": "FY2025 includes Versant, sold Sky Germany and a $9.4B Hulu gain below the operating line. Revenue was flat in 2025 and has been shrinking in reported terms in 2026 because of the Versant separation and the Sky Germany sale. Pro forma Q3 revenue is up slightly, so the underlying base is roughly stable. The NBCUniversal and Sky spin-off in mid-2027 is another structural change that is not modelled."
+    },
+    "value_at_old_defaults": 73.9600783234559,
+    "values": {
+     "base": 46.49147132607574,
+     "bear": 36.62483394681922,
+     "bull": 54.82238610920819
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 9400000000.0,
+       "printed": 9.4,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "$9.4 billion pre-tax gain from the sale of our interest in Hulu in 2025"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "billions",
+       "sign": "gain",
+       "what": "Pre-tax gain on the sale of the Hulu interest, in 2025 other income"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 9495000000.0,
+     "excess_cash_before": 9495000000.0,
+     "k0_after": 4249028170.788952,
+     "k0_before": -5150971829.211048,
+     "k0_interest": 4409000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 9400000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 17783709778.86708,
+     "x0_before": 24956107512.31426
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 152519860232.5383,
+     "seam_ratio": 1.002928665118451,
+     "tv_share": 0.3954776327167736,
+     "wedge_rate_5": 0.0015775702879482294
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Debt has been paid down during 2026 (noncurrent debt of 83,806 against 92,979 at year-end), so the $98.9 billion in the filed record overstates the current level, and the spin-off may reallocate debt.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.092,
+     "fade_years": 8,
+     "long_run_op_margin": 0.17,
+     "op_margin": [
+      0.161,
+      0.162,
+      0.165,
+      0.167,
+      0.168
+     ],
+     "return_on_new_investment_long_run": 0.13,
+     "rev_growth": [
+      -0.025,
+      0.005,
+      0.015,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.028
+    },
+    "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0675 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 67
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.19
+     ],
+     "rev_growth_y3": [
+      -0.005,
+      0.03
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0922"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (8,311) | (8,001)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital expenditure is running at about 9.2% of revenue in 2026 (8,311 on 90,695), matching the five-year pooled average. DOCSIS 4.0 and network extension keep it elevated."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate fade of about 8 years allows for the spin-off, a slow margin recovery and the transition from video to wireless and enterprise."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $123,707.0 million | -0.0002 | 0.1671"
+       },
+       {
+        "id": "P3",
+        "quote": "Our customer relationship additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin was about 17-19% in recent normal years. Competition in broadband and the decline of linear video cap it, while falling acquisition amortization and cost initiatives help. I settle at 17%, below the pre-2020 level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 5,320 | 5,534 | 14,616 | 17,184"
+       },
+       {
+        "id": "P6",
+        "quote": "Total Connectivity & Platforms Adjusted EBITDA Margin | 38.6% | 39.3% | (70) bps | (70) bps"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month operating income of 14,616 on revenue of 90,695 is about 16.1%, against 18.8% a year earlier. Connectivity & Platforms Adjusted EBITDA margin is slipping. I assume a slow recovery as acquisition-related amortization runs off and cost savings arrive."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0675."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 23.8% is high for a capital-heavy cable and theme-park company that faces fiber and fixed-wireless competition. I assume new investment earns well above the 6.75% break-even but far below the current level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Pro Forma Revenue1 | $29,298 | $29,151 | 0.5%"
+       },
+       {
+        "id": "P4",
+        "quote": "Consolidated revenue remained consistent for the nine months ended September 30, 2026 compared to the same period in 2025 primarily driven by a decrease due to the Versant Separation"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) falls because Versant and Sky Germany have left. Nine-month revenue is already down, and the 2025 base includes both businesses. Later years recover only modestly: pro forma revenue was up 0.5% in Q3, wireless and Business Services grow, and video and broadband shrink."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, shrinking-video and ex-growth broadband business with a growing wireless and enterprise piece should grow below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Broadband customer losses and price pressure (free wireless line, fiber and fixed-wireless competition) erode Connectivity margins further"
+     },
+     {
+      "bear_value": -0.005,
+      "input_hit": "rev_growth",
+      "risk": "Linear video and advertising decline faster, and Theme Parks stay weak, keeping growth negative"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Spin-off dis-synergies or a taxable outcome, and lower returns on network capex"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       -0.045,
+       -0.015,
+       -0.005000000000000001,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.19,
+      "rev_growth": [
+       -0.010000000000000002,
+       0.02,
+       0.03,
+       0.035,
+       0.035
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt has been paid down during 2026 (noncurrent debt of 83,806 against 92,979 at year-end), so the $98.9 billion in the filed record overstates the current level, and the spin-off may reallocate debt."
+     },
+     "margin_position": "The 2025 operating margin of 16.7% sits below the 19-21% of 2013-2019. Impairments and amortization of acquired intangibles weigh on it, and the core business is shifting: video and broadband margins are eroding while wireless, which carries third-party access fees, grows. The 9-month 2026 margin is about 16.1%, and amortization is falling after the Versant separation, so I expect only a partial recovery.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 effective rate of 23.7% is close to the roughly 25% implied by 9-month 2026 tax of 2,983 on pretax income of 11,791, so a mid-20s rate looks sustainable."
+     },
+     "why": "The 2025 base year includes Versant and Sky Germany, which have since left. It also includes a $9.4 billion Hulu gain below operating income, which inflates pretax income. Reported revenue will fall in 2026 (9-month revenue was $90,695 million against $91,397 million) because of those exits. The NBCUniversal and Sky spin-off planned for mid-2027 adds further structural uncertainty that these inputs do not model."
+    },
+    "value_at_old_defaults": 73.9600783234559,
+    "values": {
+     "base": 47.23346156241647,
+     "bear": 38.10822977758977,
+     "bull": 57.759084581149416
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 73.9600783234559,
+  "value_at_old_defaults_quoted": 73.9600783234559,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 173812888041.70883,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 3709000000.0,
  "flags": [
   "Comcast completed the spin-off of Versant, a company holding certain former cable networks and digital platforms, as an independent public company.",
@@ -23,12 +524,12 @@
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
  "seed_base": {
-  "1000": 65.53652469183176,
-  "3000": 66.58754914325002
+  "1000": 46.49147132607574,
+  "3000": 47.23346156241647
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -918,141 +1419,17 @@
   ]
  },
  "ticker": "CMCSA",
- "upside": 1.7479339700320704,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: terminal_g (1000 down, 3000 none)"
-  ],
-  "departures": [
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P2.s33",
-     "P6.s15",
-     "V0"
-    ],
-    "input": "rev_growth.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "V0",
-     "Y2025-12-31",
-     "P6.s15"
-    ],
-    "input": "normalized.rev_growth"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "down",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "down",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P2.s33": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "As consumers increasingly turn to DTC streaming services in lieu of linear video services, which continue to experience accelerated net customer losses, our video customers and video revenues, and linear television network subscriber fees received from video service providers, each decrease."
-   },
-   "P6.s15": {
-    "kind": "release",
-    "period": "2026-10-22",
-    "text": "Pro Forma Revenue1 | $29,298 | $29,151 | 0.5%"
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min 0.1156, p25 0.1671, median 0.1789, p75 0.1883, max 0.1918, last 0.1671; persist 0.1730 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 0.0433, 2023-12-31 0.0012, 2024-12-31 0.0178, 2025-12-31 -0.0002.\nBase-year revenue 123,707,000,000; tax rate 0.2370; return on opening capital 0.2378; capital expenditure 0.0922 and depreciation 0.0729 of revenue (pooled); the desk depreciates by the vintages rule (filed plant ages).\nCost of equity 0.0985 (risk-free 0.0512, long-run growth anchor 0.0375, loading 0.991, equity premium 0.0477).\nYear 1 to date (10-Q 0001628280-26-066863, filed 2026-10-22): revenue 90,695,000,000 from 2026-01-01 to 2026-09-30 against 91,397,000,000 from 2025-01-01 to 2025-09-30, growth -0.0077; operating income 14,616,000,000, margin 0.1612.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd -0.0077; anchor 0.0041; record_median -0.0032; last -0.0057; zero -0.0057; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.0095; last -0.0002; zero 0.0000; guidance\nop_margin.y1: ytd 0.1612; persist 0.1642; median 0.1658; p25 0.1627; p75 0.1682; last 0.1627; guidance\nop_margin.y2: persist 0.1730; median 0.1789; p25 0.1671; p75 0.1883; last 0.1671; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.1730; median 0.1789; p25 0.1671; p75 0.1883; last 0.1671; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0675; quarter 0.0822; half 0.1052; three_quarters 0.1458; ronic0 0.2378\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0922; record_last 0.0950; record_max 0.1007; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001628280-26-004994): revenue $123,707.0 million; operating income $20,672.0 million; operating margin 16.7%; net income $19,998.0 million; depreciation and amortization $16,210.0 million; capital expenditure $11,750.0 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.09223956942892644,
-    0.09223956942892644,
-    0.09223956942892644,
-    0.09223956942892644,
-    0.09223956942892644
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1729838924123699,
-   "normalized.margin": 0.1729838924123699,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.16115552125254975,
-   "op_margin.y2": 0.1729838924123699,
-   "rev_growth.y1": -0.0076807772684004405,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06751910318964287
-  },
-  "numbers": {
-   "capex": [
-    0.09223956942892644,
-    0.09223956942892644,
-    0.09223956942892644,
-    0.09223956942892644,
-    0.09223956942892644
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1729838924123699,
-   "normalized.margin": 0.1729838924123699,
-   "normalized.rev_growth": 0.009476578279947634,
-   "op_margin.y1": 0.16115552125254975,
-   "op_margin.y2": 0.1729838924123699,
-   "rev_growth.y1": -0.0076807772684004405,
-   "rev_growth.y2": 0.009476578279947634,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06751910318964287
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "record_median",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "record_median",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No cited sentence gives guidance for year 1 revenue, operating margin or capital expenditure, so no guidance option is used.",
-   "The effect of the planned NBCUniversal and Sky spin-off (expected mid-2027) on future revenue, margins and capital is not quantified in the evidence.",
-   "The evidence does not say how fast the Versant separation and Sky Germany sale effects will roll off in the reported growth rates."
-  ],
-  "year": 3
- },
- "value_base": 66.58754914325002,
- "value_bear": 65.24650103858114,
- "value_bull": 67.46292335042503,
+ "upside": 0.9339195558106199,
+ "valuation": null,
+ "value_base": 46.86246644424611,
+ "value_bear": 37.366531862204496,
+ "value_bull": 56.2907353451788,
  "value_per_filed_share": {
-  "base": 66.58754914325002,
-  "bear": 65.24650103858114,
-  "bull": 67.46292335042503
+  "base": 46.86246644424611,
+  "bear": 37.366531862204496,
+  "bull": 56.2907353451788
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +41.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +25.0 points a year against the required return over 3 years"
 }

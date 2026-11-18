@@ -1,23 +1,525 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -0.015572511863512495,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 114,
  "claims_supported": 97,
  "date": "2026-11-16T23:16:51Z",
+ "decided": {
+  "flags": [
+   "run 1000: debt_level_representative_no: Long-term debt has already risen from 2,431.7 to 2,933.5 after $500.0M of new borrowing alongside heavy buybacks, so the base-year debt is below the current level.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0637 (equity return r 0.0781), F 10",
+  "run_gap": 0.06345549022681085,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 62000000.0,
+       "printed": 62.0,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "The insurance gain recognized in fiscal 2025 totaled $62.0 million compared to $30.0 million in fiscal 2024."
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Insurance gain on the destroyed Marietta distribution center, recorded in other income, net below operating income"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 717800000.0,
+     "excess_cash_before": 717800000.0,
+     "k0_after": 114403751.04838705,
+     "k0_before": 52403751.04838705,
+     "k0_interest": 125400000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 62000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 1157020260.104579,
+     "x0_before": 1203641064.032164
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 25133731486.496666,
+     "seam_ratio": 1.0490893724868333,
+     "tv_share": 0.5758435297833302,
+     "wedge_rate_5": 0.006385400211272684
+    },
+    "flags": [
+     "debt_level_representative_no: Long-term debt has already risen from 2,431.7 to 2,933.5 after $500.0M of new borrowing alongside heavy buybacks, so the base-year debt is below the current level.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 8,
+     "long_run_op_margin": 0.093,
+     "op_margin": [
+      0.098,
+      0.088,
+      0.09,
+      0.092,
+      0.093
+     ],
+     "return_on_new_investment_long_run": 0.16,
+     "rev_growth": [
+      0.065,
+      0.05,
+      0.045,
+      0.04,
+      0.038
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0637 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 17,
+     "kept": 97
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.08,
+      0.108
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.06
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our total estimated capital expenditures for fiscal 2026 are approximately $1.1 billion to $1.2 billion"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Fiscal 2026 capex is guided at $1.1-1.2B, about 5.5% of revenue, in line with the 5-year pooled ratio of 5.5%, as distribution centers and store renovations continue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "There are no significant economic barriers for others to enter our retail sector."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate-length fade fits a retailer with ample new-store runway but low barriers to entry, so excess returns erode gradually."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales through improved productivity, cost optimization, and right-sizing initiatives."
+       },
+       {
+        "id": "P3",
+        "quote": "Operating income margin | 8.5% | 8.3% | 10.6%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins have run 8.3-10.6% on continuing operations. Management targets lower corporate SG&A and multi-price margin expansion, but tariffs, shrink, wages and low-barrier competition cap the upside. Partial reversion toward the roughly 9.5% 5-year median supports about 9.3%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds"
+       },
+       {
+        "id": "P6",
+        "quote": "Increasing fiscal 2026 adjusted EPS outlook to a range of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is lifted by the one-off tariff refunds. The adjusted EPS outlook of $7.70-8.05 implies a GAAP margin near 10%. Year 2 drops back as the refunds, reinvestment and transition income roll off, then recovers slowly with multi-price mix and SG&A leverage."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0637."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2265;"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base return on tangible capital of 22.7% is high, but new capital goes to stores, distribution centers and technology at rising build-out costs. I assume a lower long-run return, well above the 6.4% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net sales increased 7.0% to $4,886.5 million primarily due to a 3.7% comparable store net sales increase and net sales of $225.9 million at non-comparable stores."
+       },
+       {
+        "id": "P6",
+        "quote": "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "First-half growth was about 7%, on a 3.7% comp plus non-comparable store sales. Management guides Q3 comps to 3-4%, and square footage growth is slowing to 3.4%, so I fade growth from about 6.5% to under 4%. Traffic is fragile after the fiscal 2025 price changes."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0781; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature U.S. discount-store base with slowing square footage growth supports growth somewhat below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariffs are reimposed or increased and the 85% of products priced at $2.00 or less cannot pass them through, so the margin stays near 8%"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "rev_growth",
+      "risk": "Further price increases or multi-price expansion hurt traffic, as they did in the back half of fiscal 2025, and growth stalls"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher build-out costs and weaker new-store productivity cut returns on new capital"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.045000000000000005,
+       0.030000000000000006,
+       0.025,
+       0.020000000000000004,
+       0.018000000000000002
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.108,
+      "rev_growth": [
+       0.08,
+       0.065,
+       0.06,
+       0.055,
+       0.053
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Long-term debt has already risen from 2,431.7 to 2,933.5 after $500.0M of new borrowing alongside heavy buybacks, so the base-year debt is below the current level."
+     },
+     "margin_position": "The base-year margin of 8.5% is below the 10.6% of fiscal 2023 because store payroll for the pricing initiatives, wage increases, higher shrink, markdowns and tariffs outran gross-margin gains. Fiscal 2026 is flattered by one-off tariff refunds (about 650bp in Q2) and by temporary Family Dollar transition income. The underlying margin is roughly 8.5-9%, with room to rise if multi-price and SG&A leverage work.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 24.8% base-year rate is close to the 25.0% effective rate in the latest quarter and the 24.7% prior-year rate."
+     },
+     "why": "Fiscal 2025 is a full 52-week year of continuing operations after the Family Dollar sale, with a 5.3% comp. It includes $54.9M of temporary transition-services income, and a $62.0M insurance gain sits below operating income. Fiscal 2026 is distorted upward by tariff refunds, so I use the base year as the cleaner anchor and treat year 1 as inflated."
+    },
+    "value_at_old_defaults": 102.76055143466573,
+    "values": {
+     "base": 132.78779386232603,
+     "bear": 100.05590258062308,
+     "bull": 175.34475627253607
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 62000000.0,
+       "printed": 62.0,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "The insurance gain recognized in fiscal 2025 totaled $62.0 million"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Insurance gain on the destroyed Marietta, Oklahoma distribution center, recorded in other income, net. It is non-operating and will not recur."
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 717800000.0,
+     "excess_cash_before": 717800000.0,
+     "k0_after": 114403751.04838705,
+     "k0_before": 52403751.04838705,
+     "k0_interest": 125400000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 62000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 1157020260.104579,
+     "x0_before": 1203641064.032164
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 26825185214.68924,
+     "seam_ratio": 1.048165551152933,
+     "tv_share": 0.5997362226876597,
+     "wedge_rate_5": 0.00583817946341739
+    },
+    "flags": [
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 8,
+     "long_run_op_margin": 0.094,
+     "op_margin": [
+      0.098,
+      0.087,
+      0.09,
+      0.092,
+      0.094
+     ],
+     "return_on_new_investment_long_run": 0.16,
+     "rev_growth": [
+      0.062,
+      0.05,
+      0.045,
+      0.042,
+      0.04
+     ],
+     "terminal_growth": 0.034
+    },
+    "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0637 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 17,
+     "kept": 97
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.08,
+      0.105
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.06
+     ],
+     "terminal_growth": [
+      0.028,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our total estimated capital expenditures for fiscal 2026 are approximately $1.1 billion to $1.2 billion"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0554"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY2026 capex is guided at $1.1-1.2 billion, about 5.5% of revenue, matching the five-year pooled average of 5.54% as the distribution-center build-out continues."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our multi-price strategy is designed to increase basket size and drive margin expansion"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Multi-price conversions and corporate cost work take several years to reach their full margin effect, so an eight-year fade is reasonable."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Operating income margin | 8.5% | 8.3% | 10.6%"
+       },
+       {
+        "id": "P3",
+        "quote": "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin was 10.6% in FY2023 and 8.5% in FY2025. Management targets lower corporate SG&A and multi-price margin expansion, but tariffs and the low price points limit pass-through. Roughly half the gap back toward the earlier level gives about 9.4%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds"
+       },
+       {
+        "id": "P6",
+        "quote": "Increasing fiscal 2026 adjusted EPS outlook to a range of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is lifted by one-time tariff refunds, and FY2026 adjusted EPS guidance of $7.70-8.05 implies a margin near 10%. Year 2 drops once the refunds, and eventually the transition services income, fall away. After that it rebuilds on multi-price, SG&A leverage and shrink improvement, partly offset by tariff and distribution-center costs."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2265"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Base-year return on tangible capital is 22.7%, but new investment now goes into distribution centers, renovations and modernization with a lower payback. I assume it falls toward the middle, well above the 6.4% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth"
+       },
+       {
+        "id": "P4",
+        "quote": "Net sales increased 7.0% to $4,886.5 million primarily due to a 3.7% comparable store net sales increase"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "H1 net sales grew about 7% and Q3 comps are guided to 3-4%, so year 1 is near 6%. After that, growth slows toward the comp plus roughly 3% square-footage growth, because new-store growth has eased from 8.0% to 3.4%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature U.S. discount retailer with about 9,400 stores should grow close to nominal GDP once store openings slow. I set it slightly below the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariffs persist or rise, and limited price bands plus China sourcing prevent pass-through, so the margin does not recover."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Price increases and multi-price changes hurt traffic again, as in Q3 and Q4 of fiscal 2025, slowing comps."
+     },
+     {
+      "bear_value": 0.028,
+      "input_hit": "terminal_growth",
+      "risk": "Weaker consumers shift further to lower-margin consumables, and competition lowers long-run growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.047,
+       0.035,
+       0.03,
+       0.027000000000000003,
+       0.025
+      ],
+      "terminal_growth": 0.028
+     },
+     "bull": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.077,
+       0.065,
+       0.06,
+       0.057,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt was $2,431.7 million at the base year but rose to $2,933.5 million after $500.0 million of new borrowing alongside heavy buybacks, so the future level relative to size is uncertain."
+     },
+     "margin_position": "The FY2025 margin of 8.5% is well below the 10.6% earned in FY2023. Higher store payroll, wage increases, tariff costs and price-change implementation costs held it down, while falling freight costs and better mark-on lifted gross margin. FY2026 is flattered by one-time tariff refunds, which gave a 650 basis point benefit in Q2. After that fades, the margin should settle between the FY2025 level and the FY2023 peak.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The effective tax rate was 24.8% in FY2025 and 25.0% in Q2 FY2026, which is a stable, normal rate."
+     },
+     "why": "FY2025 includes a $56.0 million slow-SKU write-off, tariff costs and price-change labor costs, which push the margin down. It also includes transition services agreement income that will end. The 10.4% revenue growth was boosted by Family Dollar conversions and a 5.3% comp, so it is above a sustainable pace. The base year is roughly a normal operating year, but not a clean one."
+    },
+    "value_at_old_defaults": 102.76055143466573,
+    "values": {
+     "base": 141.49001011725474,
+     "bear": 106.87289146288367,
+     "bull": 186.36659936047505
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 102.76055143466573,
+  "value_at_old_defaults_quoted": 102.76055143466573,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 28291755480.493755,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 206300000.0,
  "flags": [
   "Dollar Tree completed the sale of its Family Dollar business to 1959 Holdings, LLC, with total cash generated of approximately $793 million.",
   "The U.S. Supreme Court ruled that certain IEEPA tariffs were unlawful. The company is acting to preserve its rights to refunds of those tariffs.",
   "In the latest reported quarter, the company received $368.7 million of tariff refunds, which helped lift gross profit."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.0781318907508762,
+ "market_cap_at_publish": 26213831107,
  "model": "claude-opus-5-5",
- "no_value_reason": "debt is filed but interest expense is not",
+ "no_value_reason": null,
+ "price_at_publish": 139.71,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 132.78779386232603,
+  "3000": 141.49001011725474
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1406,8 +1908,17 @@
   ]
  },
  "ticker": "DLTR",
+ "upside": 0.07926824450085346,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "debt is filed but interest expense is not"
+ "value_base": 137.13890198979038,
+ "value_bear": 103.46439702175337,
+ "value_bull": 180.85567781650556,
+ "value_per_filed_share": {
+  "base": 137.13890198979038,
+  "bear": 103.46439702175337,
+  "bull": 180.85567781650556
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -0.0 points a year against the required return over 3 years"
 }

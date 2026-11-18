@@ -1,13 +1,484 @@
 {
- "alpha_pts": 52.26808240952931,
+ "alpha_pts": 27.282805038324543,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 83,
  "claims_supported": 82,
  "date": "2026-11-16T10:20:41Z",
- "equity_value": 11571392160.618769,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.2235 (persist), growth 0.0375, terminal RONIC 0.0806 (equity return r 0.0946), F 10",
+  "run_gap": 0.007821943088576776,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1051700000.0,
+     "excess_cash_before": 1051700000.0,
+     "k0_after": 403055059.6304635,
+     "k0_before": 403055059.6304635,
+     "k0_interest": 490600000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 503514855.07059145,
+     "x0_before": 503514855.07059145
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4768094138.471997,
+     "seam_ratio": 0.9509040929415203,
+     "tv_share": 0.133559042410587,
+     "wedge_rate_5": -0.05119056190410712
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.035,
+     "fade_years": 10,
+     "long_run_op_margin": 0.085,
+     "op_margin": [
+      0.19,
+      0.12,
+      0.09,
+      0.085,
+      0.085
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.1,
+      -0.06,
+      -0.02,
+      0.02,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.2235 (persist), growth 0.0375, terminal RONIC 0.0806 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 82
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.13
+     ],
+     "rev_growth_y3": [
+      -0.08,
+      0.04
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0433"
+       },
+       {
+        "id": "F3",
+        "quote": "Acquisition and capitalized expenditures of tangible assets, intangible assets and interest in investees | (217.7) | (214.1) | (115.7)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex/revenue of 4.3% is inflated by 2021's vessel purchases. Recent capex has run about $215m a year (roughly 2.5-3% of revenue) because vessels are leased, so I use 3.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin normalises over a multi-year cycle, and the pending merger adds uncertainty, so I use a moderate 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $5,162.2 million | -0.5890 | -0.4864"
+       },
+       {
+        "id": "P2",
+        "quote": "We charter-in most of our fleet, which makes us more sensitive to fluctuations in the charter market"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "ZIM owns little capacity and charters in most of its fleet, so it earns thin margins in normal years and loses money in downturns. The 2018-2019 margins were -0.7% and 4.6% and 2021-22 was exceptional, so I set a mid-cycle margin of 8.5%, well below the history's median of about 16%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "ZIM now expects to generate Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion for the full year 2026"
+       },
+       {
+        "id": "P3",
+        "quote": "dropped back to 1,400 on December 31, 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The guidance midpoint of $1.55bn Adjusted EBIT on roughly $7.6bn revenue implies about 20%; I take 19% GAAP after merger costs. I then fade it toward a mid-cycle level as rates normalise, consistent with the base-rate guidance on cyclical margins above the long-run level."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0806."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 10.4% and the break-even return for growth is 8.1%. Competitive freight markets should pull new-investment returns toward but slightly above break-even, so I use 9%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Revenues for the second quarter were $1.78bn, a year-over-year increase of 9%."
+       },
+       {
+        "id": "P3",
+        "quote": "according to Alphaliner, global container ship capacity is expected to increase by 3.7% in 2026"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 reflects 2026 growth of about 10%, with Q2 revenue up 9% and guidance raised in October. Capacity is expected to outgrow demand in 2026 and rates should ease after, so I model a decline in year 2 and a weak year 3 before a modest recovery."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Container shipping is mature and cyclical, so I set long-run growth slightly below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.04,
+      "input_hit": "long_run_op_margin",
+      "risk": "Freight rates collapse on the orderbook and capacity oversupply, driving the mid-cycle margin toward pre-COVID levels or below"
+     },
+     {
+      "bear_value": -0.08,
+      "input_hit": "rev_growth",
+      "risk": "Sharper revenue decline in 2027-28 as rates normalise after the 2026 spike"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "op_margin",
+      "risk": "Resumed US/China port fees, higher bunker costs and a failed or disrupted Hapag-Lloyd merger (labor unrest, partner loss) compress margins and growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       0.04000000000000001,
+       -0.12,
+       -0.08,
+       -0.039999999999999994,
+       -0.03
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.16,
+       0.0,
+       0.039999999999999994,
+       0.08,
+       0.09
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is almost entirely IFRS 16 vessel lease liabilities of about $5.6bn that roll with the charter book, so the level will move with fleet size, and the pending merger and new 2027-28 charters add further uncertainty."
+     },
+     "margin_position": "The 2025 operating margin of 14.7% sits between a loss year (2023, -48.6%) and a boom year (2024, 30.0%), and well below the 2021-22 peak of about 50%. 2026 guidance has been raised sharply on strong freight rates, so year 1 is another above-normal year. Over the filed history the margin swings widely with freight rates, and ZIM charters in about 87% of its fleet, so it has little control over its cost base through the cycle.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 17.85% rate is below the 23% Israeli statutory rate, and deferred tax liabilities jumped from 27.6 to 186.2, so the rate may rise as profits normalise or shipping-tax benefits change."
+     },
+     "why": "2025 was a middle point in a violent cycle: revenue fell 18% and the SCFI dropped from 2,505 to 1,400 over the year. 2026 guidance has been raised well above 2025 (Adjusted EBIT of $1.4-1.7bn against $884.8m in 2025). Meanwhile Alphaliner expects capacity growth to outpace demand, so rates should normalise after 2026. I therefore take year 1 as a peak-ish year and fade down to a mid-cycle margin well below the 2018-2025 median of about 16%, which is inflated by the 2021-22 boom."
+    },
+    "value_at_old_defaults": 142.40158280895815,
+    "values": {
+     "base": 51.55441607443276,
+     "bear": 36.78526649165889,
+     "bull": 88.23091370662361
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1051700000.0,
+     "excess_cash_before": 1051700000.0,
+     "k0_after": 403055059.6304635,
+     "k0_before": 403055059.6304635,
+     "k0_interest": 490600000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 503514855.07059145,
+     "x0_before": 503514855.07059145
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4813165615.864422,
+     "seam_ratio": 0.9270966741399107,
+     "tv_share": 0.17020023745720606,
+     "wedge_rate_5": -0.05091033317258614
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.035,
+     "fade_years": 8,
+     "long_run_op_margin": 0.09,
+     "op_margin": [
+      0.19,
+      0.12,
+      0.09,
+      0.09,
+      0.09
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.11,
+      -0.04,
+      -0.05,
+      0.01,
+      0.02
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.2235 (persist), growth 0.0375, terminal RONIC 0.0806 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 82
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.04,
+      0.14
+     ],
+     "rev_growth_y3": [
+      -0.12,
+      0.03
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0433"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | 0.0315 | 0.1863"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Recent capex runs at 2.2-3.2% of revenue (3.15% in 2025), against a 4.3% five-year pooled figure inflated by 2021. Containers and handling equipment and ongoing vessel purchases support about 3.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $5,162.2 million | -0.5890 | -0.4864"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A cyclical margin takes several years to settle, so I use a fade of about 8 years, in line with base rates for cyclical companies (40-60% of the gap kept 5-10 years later)."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2019-12-31 | $3,299.8 million | 0.0160 | 0.0464"
+       },
+       {
+        "id": "P3",
+        "quote": "Adjusted EBIT margin(3) | 12.8% | 30.3% | (8.2)%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company charters 87.5% of its vessels, so it has no ownership moat, and its pre-2020 margins were low (4.6% in 2019). The 2021-24 margins reflected exceptional conditions, so I fade to about 9%, well below the multi-year median but above the pre-COVID level. The wide range reflects the cycle."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "ZIM now expects to generate Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion for the full year 2026"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $6,904.2 million | -0.1807 | 0.1472"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Raised 2026 Adjusted EBIT guidance of 1.4-1.7bn on revenue of roughly 7.7bn implies a margin near 20%, a bit lower on a GAAP basis after merger and legal costs. Margins then fade as supply outpaces demand and bunker costs rise, consistent with cyclical mean reversion."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0806."
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.1036"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Most capacity is chartered, so tangible capital is small and the filed return is 10.4%. New investment faces competitive returns, so I use about 9%, just above the 8.1% at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Revenues for the second quarter were $1.78bn, a year-over-year increase of 9%."
+       },
+       {
+        "id": "P7",
+        "quote": "Freight rates: higher vs. 2025 Operated capacity: stable capacity YoY Volume: slightly higher vs. 2025 Bunker costs: meaningfully higher vs. 2025"
+       },
+       {
+        "id": "P3",
+        "quote": "global container ship capacity is expected to increase by 3.7% in 2026"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is raised on higher freight rates, slightly higher volume and stable capacity, with Q2 revenue already up 9%. After that, Alphaliner expects supply growth to exceed demand growth, which pressures rates and revenue in years 2-3 before a modest recovery."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P3",
+        "quote": "global container ship capacity is expected to increase by 3.7% in 2026"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Container shipping is mature, with demand growth projected at about 2.5%, so I set growth below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.04,
+      "input_hit": "long_run_op_margin",
+      "risk": "Overcapacity (3.7% capacity growth vs 2.5% demand growth, orderbook of 11.3m TEU) and fading Red Sea disruption push freight rates toward the 2019 level."
+     },
+     {
+      "bear_value": -0.1,
+      "input_hit": "rev_growth",
+      "risk": "Freight-rate collapse (the SCFI already fell from 2,505 to 1,400 in 2025) causes revenue to decline for several years."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "op_margin",
+      "risk": "Resumed U.S. and China port fees on non-local carriers cannot be recovered from customers, and merger-related customer, partner and labor disruption (the Israeli GCA ceased handling the approval) hurts operations."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.04,
+      "rev_growth": [
+       0.04000000000000001,
+       -0.10999999999999999,
+       -0.12,
+       -0.05999999999999999,
+       -0.04999999999999999
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.19,
+       0.04,
+       0.03,
+       0.09,
+       0.1
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt is almost entirely IFRS 16 charter lease liabilities that are renewed to keep the chartered-in fleet, so a debt level near 5-6bn is a recurring cost of operating the fleet."
+     },
+     "margin_position": "The 2025 operating margin of 14.7% is above the pre-2020 level (about 5% in 2019) but far below the 2021-22 peak of about 50%. It is mid-cycle after the Red Sea and tariff-driven spike of 2024 (30%). 2026 guidance has been raised sharply, so year 1 is a cyclical high before supply growth erodes it.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 17.9% rate is a blend of a low 2024 charge and a higher 2025 charge, and the filings do not explain the jump in income taxes or deferred tax liabilities."
+     },
+     "why": "2025 revenue fell 18% and the margin halved from 2024, and 2026 is guided much higher, so the base year is neither a peak nor a trough. The company swings from a margin of -0.49 in 2023 to +0.54 in 2021. Year 1 follows the raised guidance, and later years fade toward a lower through-cycle margin as capacity outgrows demand."
+    },
+    "value_at_old_defaults": 142.40158280895815,
+    "values": {
+     "base": 51.959255096828386,
+     "bear": 33.85419559963472,
+     "bull": 97.16641654368628
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 142.40158280895815,
+  "value_at_old_defaults_quoted": 142.40158280895815,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 6237519240.939858,
  "family": "commodity",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 120515854.0,
  "flags": [
   "ZIM entered into an Agreement and Plan of Merger with Hapag-Lloyd AG and Norazia (Israel) Ltd. under which ZIM will merge with Merger Sub to become a wholly owned subsidiary of Hapag-Lloyd AG for Merger Consideration of $35.00 per ordinary share and its ordinary shares will be delisted from the NYSE if consummated.",
@@ -15,7 +486,7 @@
   "ZIM received a letter from the Israeli Government Companies Authority stating that it determined to cease handling the pending application for approval of requested changes in the special state share for the Hapag-Lloyd merger because no detailed revised proposal was submitted by the deadline."
  ],
  "in_code_book": false,
- "ke": 0.09442594437424717,
+ "ke": 0.09462594437424718,
  "market_cap_at_publish": 3582071126,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +494,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 83.4853263393649,
-  "3000": 96.01551809622299
+  "1000": 51.55441607443276,
+  "3000": 51.959255096828386
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1174,155 +1645,17 @@
   ]
  },
  "ticker": "ZIM",
- "upside": 2.2303635951361533,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 down, 3000 none)",
-   "seeds_disagree: op_margin.y2 (1000 down, 3000 none)"
-  ],
-  "departures": [
-   {
-    "driver": "cycle_downturn",
-    "evidence": [
-     "P3.s22",
-     "P3.s23",
-     "P3.s62",
-     "Y2025-12-31"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "competition",
-    "evidence": [
-     "P2.s21",
-     "P3.s45",
-     "P3.s62",
-     "Y2025-12-31"
-    ],
-    "input": "long_run_op_margin"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "down",
-   "normalized.margin": "down",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P2.s21": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "\u2022 | The container shipping industry is highly competitive, and competition may intensify even further. Certain of our large competitors may be better positioned and have greater financial resources than us and may therefore be able to offer more attractive schedules, services and rates, which could negatively affect our market position and financial performance."
-   },
-   "P3.s22": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Following the peak levels reached during 2021 and the first quarter of 2022, freight rates have decreased in most trades throughout the remainder of the year 2022 and during 2023 as a result of reduced demand and increased capacity as well as the easing of both COVID-19 restrictions and congestion in ports, although some increases were demonstrated in certain trades towards the end of 2023, related to security concerns raised in the Red Sea."
-   },
-   "P3.s23": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "In 2024 average freight rates increased compared to 2023 due to several factors, including customer concerns of a long-term labor strike on the U.S. East Coast and new imposed tariffs on trade between the U.S. and China."
-   },
-   "P3.s45": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Freight rates are largely established by the freight market and we have a limited influence over these rates."
-   },
-   "P3.s62": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Therefore, the increase in ship capacity is expected to continue to be higher than the increase in demand for container shipping.There are certain cargo types that require more expertise; for example, we charge a premium over the base freight rate for handling specialized cargo, such as refrigerated, liquid, over-dimensional, or hazardous cargo, which require more complex handling and more costly equipment and are generally subject to greater risk of damage."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (20-F, accession 0001178913-26-000784): revenue $6,904.2 million; operating income $1,016.0 million; operating margin 14.7%; net income $479.2 million; depreciation and amortization $1,286.1 million; capital expenditure $217.7 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.04334906963943532,
-    0.04334906963943532,
-    0.04334906963943532,
-    0.04334906963943532,
-    0.04334906963943532
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.2235238176952606,
-   "normalized.margin": 0.2235238176952606,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.2235238176952606,
-   "op_margin.y2": 0.2235238176952606,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08046763789268883
-  },
-  "numbers": {
-   "capex": [
-    0.04334906963943532,
-    0.04334906963943532,
-    0.04334906963943532,
-    0.04334906963943532,
-    0.04334906963943532
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.14715680310535617,
-   "normalized.margin": 0.14715680310535617,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.2235238176952606,
-   "op_margin.y2": 0.2235238176952606,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08046763789268883
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "p25",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "anchor",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No full interim financial statements for 2026 are available in the evidence packet, and the Q2 2026 Form 6-K provides only summary release and presentation figures.",
-   "Full-year 2026 guidance states Adjusted EBITDA and Adjusted EBIT ranges only, with no numeric guidance for 2026 revenue, GAAP operating margin, or capital expenditures and no forward-looking IFRS reconciliation.",
-   "Whether and when the pending Hapag-Lloyd merger will obtain Israeli Special State Share approval after the Government Companies Authority ceased handling the March 2026 application in September 2026 is unknown.",
-   "Whether U.S. and China port fee regulations suspended until the last quarter of 2026 will resume and whether such costs could be recovered from customers is unknown."
-  ],
-  "year": 3
- },
- "value_base": 96.01551809622299,
- "value_bear": 89.72875655003506,
- "value_bull": 101.3534234342125,
+ "upside": 0.74131641207949,
+ "valuation": null,
+ "value_base": 51.75683558563057,
+ "value_bear": 35.319731045646805,
+ "value_bull": 92.69866512515495,
  "value_per_filed_share": {
-  "base": 96.01551809622299,
-  "bear": 89.72875655003506,
-  "bull": 101.3534234342125
+  "base": 51.75683558563057,
+  "bear": 35.319731045646805,
+  "bull": 92.69866512515495
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +52.3 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +27.3 points a year against the required return over 3 years"
 }

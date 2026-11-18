@@ -1,11 +1,518 @@
 {
- "alpha_pts": 8.453710111825242,
+ "alpha_pts": 14.427953479985547,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 129,
  "claims_supported": 128,
  "date": "2026-11-17T02:33:54Z",
- "equity_value": 3206268042.333975,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.0860 (filed 0.0243 to 0.0799)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.0900 (filed 0.0243 to 0.0799)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.0920 (filed 0.0243 to 0.0799)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.0930 (filed 0.0243 to 0.0799)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.0930 (filed 0.0243 to 0.0799)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.0850 (filed 0.0243 to 0.0799)",
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 15 of 15",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.0840 (filed 0.0243 to 0.0799)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.0900 (filed 0.0243 to 0.0799)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.0910 (filed 0.0243 to 0.0799)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.0910 (filed 0.0243 to 0.0799)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.0900 (filed 0.0243 to 0.0799)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.0830 (filed 0.0243 to 0.0799)",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0184 and margin 0.1065, margin 0.0785 (persist), growth 0.0375, terminal RONIC 0.0714 (equity return r 0.0781), F 10",
+  "run_gap": 0.03159559902383838,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 882488000.0,
+     "excess_cash_before": 882488000.0,
+     "k0_after": 72169074.46107236,
+     "k0_before": 72169074.46107236,
+     "k0_interest": 57697000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 154978452.08830076,
+     "x0_before": 154978452.08830076
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2599361806.483183,
+     "seam_ratio": 0.9649544234780169,
+     "tv_share": 0.48102024541133415,
+     "wedge_rate_5": -0.000852216427819434
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0860 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y2 0.0900 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y3 0.0920 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y4 0.0930 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y5 0.0930 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: long_run_op_margin 0.0850 (filed 0.0243 to 0.0799)",
+     "base_year_not_representative",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.017,
+     "fade_years": 8,
+     "long_run_op_margin": 0.085,
+     "op_margin": [
+      0.086,
+      0.09,
+      0.092,
+      0.093,
+      0.093
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      -0.045,
+      -0.03,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0184 and margin 0.1065, margin 0.0785 (persist), growth 0.0375, terminal RONIC 0.0714 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 128
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.073,
+      0.095
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital expenditures for fiscal 2026 are projected to be approximately $50 million, focused on maintenance, productivity initiatives, and targeted growth investments across both segments."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0205"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides FY2026 capex to about $50M, about 1.7% of revenue. That is below the five-year pooled average of 2.05%, which includes the heavier FY2021-22 spending."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We expect to continue to implement these initiatives over the next several years."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin gains from Cost and Simplicity and the pet distribution exit take several years to settle, and growth fades gradually toward a mature market. I use eight years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our operating margin improved to 8.0% in fiscal 2025 from 5.8% in fiscal 2024."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-09-27 | $3,129.1 million | -0.0223 | 0.0799"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year median is about 7.7% and the latest margin is higher. Following the base rate, about half the gap persists, and the structural mix improvement from the distribution exit supports a fade to about 8.5%. Retailer buying power, tariffs and weather cap the upside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Our operating margin improved from 14.1% in the prior year quarter to 14.3% in the current year quarter."
+       },
+       {
+        "id": "P4",
+        "quote": "gross margin improved due primarily to both the positive impact of the divestiture of our pet distribution business, which had lower margins, and our cost and simplicity initiatives in both segments"
+       },
+       {
+        "id": "P4",
+        "quote": "Corporate operating expense increased $7.0 million, or 28.9%, to $31.0 million for the three months ended June 27, 2026"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The nine-month FY2026 margin is about 10.7% against 10.5% a year earlier, but Q4 is seasonally a small loss, so the full year lands near 8.6%. The mix gain from exiting distribution and the cost program lift it to about 9.3%, partly offset by higher corporate spending on M&A and AI readiness."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2053"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0714."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is very high at 0.2053 because of an asset-light branded model, but new investment often comes through acquisitions at full prices and faces competition. I assume about 15%, well above the 0.0714 breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net sales decreased $79 million, or 8%, from the prior year quarter to $882 million, due to the exit of the Pet Distribution business, while organic net sales increased 2.4%."
+       },
+       {
+        "id": "P4",
+        "quote": "Pet Distribution's net sales in fiscal 2025 were $474 million."
+       },
+       {
+        "id": "P1",
+        "quote": "Over the past five years, net sales have grown at an average rate of 3.0% annually"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Reported sales fall in years 1-2 because the $474M pet distribution business is gone (only about $20M remained in Q3 FY2026), while organic growth runs about 2-3%. After the lap, growth is assumed at roughly the 3% five-year average. TRIXIE is excluded because it has not closed and its cash cost is not in the base."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "We expect the U.S. pet supplies market to continue to grow, supported by long-term trends, including demographics shifts, humanization and premiumization of pets, and heightened focus on health and wellness."
+       },
+       {
+        "id": "P2",
+        "quote": "The market shares of many of these key retailers have increased and may continue to increase in future years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pet supplies market is expected to grow on humanization and premiumization trends, but Central is mature, sells to a concentrated set of large retailers, and has weather-exposed Garden sales. I set terminal growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin gains reverse through tariffs, retailer price pressure, a weather-hit Garden season or commodity swings, so the margin falls back to the historical 7% level"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Loss of or adverse change with a key retailer (Walmart about 17%, Home Depot about 16%), or a weak value-oriented consumer, slows organic growth"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Acquisitions such as TRIXIE are made at returns closer to the cost of capital, so new investment adds little value"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.073,
+      "rev_growth": [
+       -0.065,
+       -0.049999999999999996,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       -0.024999999999999994,
+       -0.009999999999999995,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt has been flat at about $1.2B for two years against a growing equity base, though the TRIXIE cash payment could change net leverage."
+     },
+     "margin_position": "The FY2025 GAAP margin of 8.0% sits slightly above the five-year median of about 7.7%. It is lifted by Cost and Simplicity gains and held down by about $15M of closure costs. The permanent exit of low-margin pet distribution adds a further mix lift, since the nine-month FY2026 margin is about 10.7% against 10.5% a year earlier, and the Q3 margin was 14.3% against 14.1%. The Garden business is weather- and commodity-sensitive and the retail customers are concentrated, so I expect only part of the gain to persist.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The FY2025 effective rate of 24.4% is close to the nine-month FY2026 rate of about 24.1% (56,214 on 233,037 pretax)."
+     },
+     "why": "FY2025 revenue of $3.1B still includes about $474M of pet distribution sales that were divested in April 2026, so the base-year revenue and margin do not describe the go-forward company. Years 1 and 2 therefore show a reported revenue decline (exit lapping) even though organic sales are growing about 2-3%. I exclude the unclosed TRIXIE deal from growth, because including its revenue without the roughly \u20ac340M cash outflow would overstate value."
+    },
+    "value_at_old_defaults": 50.04716972528166,
+    "values": {
+     "base": 58.20820197856194,
+     "bear": 47.1858239106205,
+     "bull": 73.13481036703482
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 882488000.0,
+     "excess_cash_before": 882488000.0,
+     "k0_after": 72169074.46107236,
+     "k0_before": 72169074.46107236,
+     "k0_interest": 57697000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 154978452.08830076,
+     "x0_before": 154978452.08830076
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2493317030.845047,
+     "seam_ratio": 0.9698168153985532,
+     "tv_share": 0.43354155345211964,
+     "wedge_rate_5": 2.2015043468250766e-05
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0840 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y2 0.0900 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y3 0.0910 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y4 0.0910 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: op_margin.y5 0.0900 (filed 0.0243 to 0.0799)",
+     "margin_outside_filed_record: long_run_op_margin 0.0830 (filed 0.0243 to 0.0799)",
+     "base_year_not_representative",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.018,
+     "fade_years": 10,
+     "long_run_op_margin": 0.083,
+     "op_margin": [
+      0.084,
+      0.09,
+      0.091,
+      0.091,
+      0.09
+     ],
+     "return_on_new_investment_long_run": 0.14,
+     "rev_growth": [
+      -0.045,
+      -0.035,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0184 and margin 0.1065, margin 0.0785 (persist), growth 0.0375, terminal RONIC 0.0714 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 128
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.07,
+      0.095
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.045
+     ],
+     "terminal_growth": [
+      0.02,
+      0.038
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital expenditures for fiscal 2026 are projected to be approximately $50 million"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0205"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides FY2026 capex to about $50M, roughly 1.7% of a smaller revenue base. That is below the five-year pooled 2.05%, which includes the high-spend year FY2022."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "our non-GAAP operating margin improved to 8.5% in fiscal 2025 from 7.0% in fiscal 2024"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin gains from the Cost and Simplicity programme and the mix shift should converge toward the long-run level over about a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-09-27 | $3,129.1 million | -0.0223 | 0.0799"
+       },
+       {
+        "id": "P1",
+        "quote": "Walmart, our largest customer, accounted for approximately 17% of total net sales in fiscal 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 17-year history has a median near 7%, and the base rate says about half of an above-median gap persists. The mix shift away from distribution and the cost savings are partly permanent, so I set 8.3%. Retailer pricing power, tariffs and commodities limit how much of the gain holds."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our operating margin improved to 8.0% in fiscal 2025 from 5.8% in fiscal 2024."
+       },
+       {
+        "id": "P4",
+        "quote": "Corporate operating expense increased $7.0 million, or 28.9%, to $31.0 million"
+       },
+       {
+        "id": "P6",
+        "quote": "Raises fiscal 2026 outlook for non-GAAP diluted EPS from $2.70 or better to $2.85 or better"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The margin starts at 8.0%, and the nine-month and third-quarter FY2026 results show it rising as low-margin distribution leaves and costs fall. Rising corporate expense (M&A, AI readiness) and ongoing closure charges hold back the gain. I put FY2026 near 8.4% and FY2027 near 9%, then ease slightly."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2053"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0714."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is high (20.5%) because of heavy goodwill and intangibles from acquisitions. New capital, which is largely acquisitions and plant investment, should earn well above the 7.1% break-even but below the current return, so I use 14%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "due to the exit of the Pet Distribution business, while organic net sales increased 2.4%"
+       },
+       {
+        "id": "P4",
+        "quote": "Pet Distribution's net sales in fiscal 2025 were $474 million."
+       },
+       {
+        "id": "P1",
+        "quote": "Over the past five years, net sales have grown at an average rate of 3.0% annually"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Reported sales shrink in FY2026 and FY2027 because the $474M pet distribution business was contributed to the Phillips partnership. Underlying organic growth is about 2-3%, and the company's five-year average is 3.0%. I leave out TRIXIE because it has not closed."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, fragmented pet and garden supplies business with a stated long-term demand tailwind should grow near but below the 3.75% nominal anchor. I use 3.0%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins revert toward the historical median as retailers, tariffs, commodities or weather erode the Cost and Simplicity gains"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Loss of or price pressure from a concentrated key retailer (top five are about 54% of sales), or a poor garden season, cuts organic growth"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Weak consumer demand and a promotional retail environment slow long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       -0.065,
+       -0.055,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       -0.03,
+       -0.020000000000000004,
+       0.045,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.038
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt has been steady at about $1.2 billion with a 4.5% average rate and almost nothing current, though TRIXIE funding could change it."
+     },
+     "margin_position": "The FY2025 GAAP operating margin of 8.0% is above the 17-year range (about 2.4% to 8.0%, median near 7%). The lift comes from Cost and Simplicity savings, the lapping of grass seed and closure charges, and in FY2026 the exit of the low-margin pet distribution business. Part of the gain is structural mix and part is cost savings that may not all hold. Garden profit also depends on weather, retailers and commodities.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 24.35% base-year rate is in line with the 24.4% effective rate for fiscal 2025 and the nine-month FY2026 rate of about 24%."
+     },
+     "why": "FY2025 revenue and margin are not a clean run-rate. About $474M of low-margin pet distribution sales left in April 2026, so revenue falls for two years while margins rise. FY2025 also carried about $15M of closure charges. I model FY2026 revenue down about 4.5% and FY2027 down a further 3.5%, then roughly 3% organic growth. I exclude the unclosed TRIXIE deal, because its cash cost and earnings are unknown."
+    },
+    "value_at_old_defaults": 50.04716972528166,
+    "values": {
+     "base": 56.39768121301498,
+     "bear": 45.71025836474229,
+     "bull": 70.25450939567011
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 50.04716972528166,
+  "value_at_old_defaults_quoted": 50.04716972528166,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 3656787217.9352403,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 63815000.0,
@@ -15,7 +522,7 @@
   "In its Q3 fiscal 2026 earnings release, Central raised its fiscal 2026 outlook for non-GAAP diluted EPS from $2.70 or better to $2.85 or better. This is a guidance raise, not a withdrawal."
  ],
  "in_code_book": false,
- "ke": 0.07839992553067587,
+ "ke": 0.0781318907508762,
  "market_cap_at_publish": 2498696308,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +530,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 50.219970320540774,
-  "3000": 48.90147874255394
+  "1000": 58.20820197856194,
+  "3000": 56.39768121301498
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1557,144 +2064,17 @@
   ]
  },
  "ticker": "CENTA",
- "upside": 0.2831763636375353,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 none, 3000 down)",
-   "seeds_disagree: op_margin.y1 (1000 down, 3000 none)",
-   "ytd_outside_record: op_margin.y1 0.1065",
-   "margin_at_record_peak: normalized.margin 0.0785 at or above the record's p75 0.0779",
-   "margin_at_record_peak: long_run_op_margin 0.0785 at or above the record's p75 0.0779"
-  ],
-  "departures": [
-   {
-    "driver": "mix",
-    "evidence": [
-     "P4.s70",
-     "P6.s7",
-     "P6.s38"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s41"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "down",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P4.s70": {
-    "kind": "quarterly_section",
-    "period": "2026-06-27",
-    "text": "At the same time, gross margin improved due primarily to both the positive impact of the divestiture of our pet distribution business, which had lower margins, and our cost and simplicity initiatives in both segments."
-   },
-   "P6.s38": {
-    "kind": "release",
-    "period": "2026-08-05",
-    "text": "Reflecting year-to-date results and improved visibility into the balance of the year, Central raises its outlook for fiscal 2026 non-GAAP diluted EPS from $2.70 or better to $2.85 or better, driven by continued margin discipline, ongoing investment in growth initiatives, and portfolio optimization."
-   },
-   "P6.s41": {
-    "kind": "release",
-    "period": "2026-08-05",
-    "text": "Capital expenditures for fiscal 2026 are projected to be approximately $50 million, focused on maintenance, productivity initiatives, and targeted growth investments across both segments."
-   },
-   "P6.s7": {
-    "kind": "release",
-    "period": "2026-08-05",
-    "text": "\"Third quarter results showed continued strength across the business with improvements in both organic sales and margins versus last year, reflecting sharp execution and favorable margins due primarily to the exit of the pet distribution business earlier this year."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.02051698651735797,
-    0.02051698651735797,
-    0.02051698651735797,
-    0.02051698651735797,
-    0.02051698651735797
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07847130097913324,
-   "normalized.margin": 0.07847130097913324,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.10653575999205282,
-   "op_margin.y2": 0.07847130097913324,
-   "rev_growth.y1": -0.018360299091838672,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07157835167667898
-  },
-  "numbers": {
-   "capex": [
-    0.016277902666970306,
-    0.017337673629567223,
-    0.018397444592164136,
-    0.019457215554761053,
-    0.02051698651735797
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07847130097913324,
-   "normalized.margin": 0.07847130097913324,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.10653575999205282,
-   "op_margin.y2": 0.07990859991690902,
-   "rev_growth.y1": -0.018360299091838672,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07157835167667898
-  },
-  "of_record": {},
-  "options": {
-   "capex": "guidance",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No filing or release in the packet gives revenue guidance for fiscal 2026. The only guidance figures cover non-GAAP diluted EPS and capital expenditures.",
-   "Fourth-quarter fiscal 2026 results are not in the packet. The full-year effect of the April 2026 pet distribution divestiture and of seasonality is therefore not reported.",
-   "The TRIXIE acquisition had not closed as of the evidence. Its revenue, margin contribution, financing and closing timing are not quantified beyond the stated consideration and the expected close in the first half of fiscal 2027.",
-   "The evidence does not say how the 20% interest in the new Phillips partnership and the TRIXIE put/call rights for the Continuing Shareholders will affect future operating results."
-  ],
-  "year": 3
- },
- "value_base": 50.24317233148907,
- "value_bear": 49.014593742744005,
- "value_bull": 50.752310568437004,
+ "upside": 0.4634780570281454,
+ "valuation": null,
+ "value_base": 57.302941595788454,
+ "value_bear": 46.44804113768139,
+ "value_bull": 71.69465988135246,
  "value_per_filed_share": {
-  "base": 50.24317233148907,
-  "bear": 49.014593742744005,
-  "bull": 50.752310568437004
+  "base": 57.302941595788454,
+  "bear": 46.44804113768139,
+  "bull": 71.69465988135246
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +8.5 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +14.4 points a year against the required return over 3 years"
 }

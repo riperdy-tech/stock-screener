@@ -1,11 +1,506 @@
 {
- "alpha_pts": -52.94681970245101,
+ "alpha_pts": -23.928221108982807,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 117,
  "claims_supported": 97,
  "date": "2026-11-17T02:25:48Z",
- "equity_value": 12776242265.45697,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1250 (filed 0.0563 to 0.1210)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.1450 (filed 0.0563 to 0.1210)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.1450 (filed 0.0563 to 0.1210)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.1400 (filed 0.0563 to 0.1210)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.1350 (filed 0.0563 to 0.1210)",
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.3400 (filed -0.1295 to 0.2372)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1250 (filed 0.0563 to 0.1210)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.1480 (filed 0.0563 to 0.1210)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.1480 (filed 0.0563 to 0.1210)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.1420 (filed 0.0563 to 0.1210)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.1350 (filed 0.0563 to 0.1210)",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.3200 (filed -0.1295 to 0.2372)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.0797 (persist), growth 0.0375, terminal RONIC 0.0874 (equity return r 0.1113), F 10",
+  "run_gap": 0.07540147885249726,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 2947684000.0,
+     "excess_cash_before": 2947684000.0,
+     "k0_after": 170456847.58314466,
+     "k0_before": 170456847.58314466,
+     "k0_interest": 239186000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 1179379653.1074717,
+     "x0_before": 1179379653.1074717
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 25240467380.092876,
+     "seam_ratio": 1.0579229418739962,
+     "tv_share": 0.36650820370410925,
+     "wedge_rate_5": 0.018179417980101788
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1250 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y2 0.1450 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y3 0.1450 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y4 0.1400 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y5 0.1350 (filed 0.0563 to 0.1210)",
+     "growth_outside_filed_record: rev_growth.y1 0.3400 (filed -0.1295 to 0.2372)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.16,
+     "fade_years": 10,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.125,
+      0.145,
+      0.145,
+      0.14,
+      0.135
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.34,
+      0.12,
+      0.08,
+      0.06,
+      0.05
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.0797 (persist), growth 0.0375, terminal RONIC 0.0874 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 20,
+     "kept": 97
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.085,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.13
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1435"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | 0.2551 | 0.1045"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 25.5% of revenue in 2025, against a pooled 14.4% over five years. The company is still expanding capacity for advanced packaging amid 40%+ growth, so I hold 16%, above the pooled average, over years 1 to 5. Depreciation runs at about 10% of revenue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "We believe that overall growth and cyclical fluctuations will continue over the long term in the semiconductor industry."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin and growth normalization from an AI-driven peak is gradual, so I use a 10-year fade. This is consistent with an industry that has periodic cyclical swings."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $21,831.2 million | 0.0625 | 0.1210"
+       },
+       {
+        "id": "P1",
+        "quote": "The semiconductor industry is characterized by strong long-term growth, with periodic and sometimes severe cyclical downturns."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company's own 5-year median is about 8%, and its best year in the filed record was 12.1%. The base rate for cyclical firms above median is that 40 to 60% of the gap persists, but the structural shift toward advanced packaging and testing supports a level above the old median. I use about 10.5%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Operating margin was 13.6% in 3Q26, compared to 11.1% in 2Q26."
+       },
+       {
+        "id": "P6",
+        "quote": "Our consolidated 4th quarter operating margin should be between 14.5% to 15.5%."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Operating margin was 11.1% in 2Q26 and 13.6% in 3Q26, with Q4 guided to 14.5% to 15.5%. Assuming Q1 was around 9.5%, 2026 averages about 12.5%. I hold about 14.5% in 2027 and 2028 on the mix, then ease it as utilization normalizes and depreciation from the capex surge builds."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1362"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0874"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 13.6%, and growth adds no value below 8.7%. New capacity is capital-intensive and prices decline over time, so I assume a return modestly below the base year but above break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Net Revenues | 244,161 | 191,064 | 168,569 | +27.8% | +44.8%"
+       },
+       {
+        "id": "P6",
+        "quote": "In NT dollar terms, our consolidated 4th quarter revenue should grow by 6 to 8 percent quarter over quarter;"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q3 2026 revenue grew 44.8% year over year and Q4 is guided up another 6 to 8% sequentially. Taking Q1 2026 as about NT$180bn (my estimate), 2026 comes to roughly 35% growth in NT dollars and about 34% in USD. I fade growth quickly after that because the base is large and the industry is cyclical."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, cyclical outsourced-manufacturing business should grow roughly with nominal GDP, so I stay slightly below the code's anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "AI-driven advanced packaging demand reverses, leaving the new capacity underutilized with high fixed costs, so margins revert to the old 7-8% range"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Growth stalls after the 2026 surge, with price erosion and a cyclical downturn in year 3"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Returns on the debt-funded capex build fall toward the break-even return of 8.7%"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.085,
+      "rev_growth": [
+       0.29000000000000004,
+       0.06999999999999999,
+       0.03,
+       0.009999999999999995,
+       0.0
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.39,
+       0.16999999999999998,
+       0.13,
+       0.11,
+       0.1
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt rose sharply to fund a doubling of capex, and the 3Q26 balance sheet is not in the packet, so the sustainable level relative to size is unknown."
+     },
+     "margin_position": "The 2025 operating margin of about 8.0% sits near the company's own 5-year median (about 8.0%), but 2026 is running well above it. Gross margin was 22.1% in 3Q26 against 17.7% in 2025, and Q4 operating margin is guided to 14.5% to 15.5%. The lift comes from a mix shift to advanced packaging and testing, higher utilization and operating leverage on high fixed costs, so the current margin is above mid-cycle.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 19.7% base-year rate is near the R.O.C. 20% statutory rate, with Pillar Two and unappropriated-earnings tax partly offset by R&D credits."
+     },
+     "why": "FY2025 is a recovery year, and 2026 is on a very different run-rate: Q3 2026 revenue was up 44.8% year over year and October up 47.1%. 2025 capex was also unusually high at 25.5% of revenue, against a pooled 14.4%. Year 1 therefore needs a large step up in growth and margin from the base year. The 2026 figures are my estimate, since Q1 2026 is not in the packet."
+    },
+    "value_at_old_defaults": 2.892161036075225,
+    "values": {
+     "base": 6.918034454135308,
+     "bear": 4.60653759340241,
+     "bull": 10.94773384951518
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 2947684000.0,
+     "excess_cash_before": 2947684000.0,
+     "k0_after": 170456847.58314466,
+     "k0_before": 170456847.58314466,
+     "k0_interest": 239186000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 1179379653.1074717,
+     "x0_before": 1179379653.1074717
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 27428686727.226097,
+     "seam_ratio": 1.0691091398838426,
+     "tv_share": 0.37221920704334455,
+     "wedge_rate_5": 0.0132810910496181
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1250 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y2 0.1480 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y3 0.1480 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y4 0.1420 (filed 0.0563 to 0.1210)",
+     "margin_outside_filed_record: op_margin.y5 0.1350 (filed 0.0563 to 0.1210)",
+     "growth_outside_filed_record: rev_growth.y1 0.3200 (filed -0.1295 to 0.2372)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.16,
+     "fade_years": 10,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.125,
+      0.148,
+      0.148,
+      0.142,
+      0.135
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.32,
+      0.17,
+      0.09,
+      0.07,
+      0.06
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.0797 (persist), growth 0.0375, terminal RONIC 0.0874 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 20,
+     "kept": 97
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.085,
+      0.125
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.15
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1435"
+       },
+       {
+        "id": "F3",
+        "quote": "Payments for property, plant and equipment | (164,642,502) | (5,248,406) | (79,521,938) | (54,158,229)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2025 capex was 0.2551 of revenue after payments for PP&E doubled, and the build-out continues for advanced packaging. The ratio should stay elevated but fall as revenue scales, so 0.16 is used against a pooled 0.1435."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The semiconductor industry is characterized by strong long-term growth, with periodic and sometimes severe cyclical downturns."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years allows the margin and growth to move gradually from the AI-driven peak to the long-run level, consistent with cyclical mean reversion over 5 to 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The semiconductor industry is characterized by strong long-term growth, with periodic and sometimes severe cyclical downturns."
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $21,831.2 million | 0.0625 | 0.1210"
+       },
+       {
+        "id": "P5",
+        "quote": "Net revenues from packaging operations, testing operations, EMS operations, and others represented approximately 50%, 11%, 38%, and 1% of the total net revenues for the quarter, respectively."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "History runs from 5.6% to 12.1%, with a middle near 8%. The company is cyclical, so about half of the gap from today's 14 to 15% should persist given the mix shift toward advanced packaging and testing, while EMS (about 38% of revenue) stays thin, giving about 10.5%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Operating margin was 13.6% in 3Q26, compared to 11.1% in 2Q26."
+       },
+       {
+        "id": "P6",
+        "quote": "Our consolidated 4th quarter operating margin should be between 14.5% to 15.5%."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is a blend of Q2 at 11.1%, Q3 at 13.6% and Q4 guided to about 15%, with Q1 estimated lower. Margins peak around 15% in years 2 and 3 and then ease as the cycle normalizes and depreciation from the capex wave builds."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0874."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Base-year return on tangible capital is 0.1362 on a depressed margin. A long-run 0.12 sits above the 0.0874 level at which growth adds no value, but competition and price erosion limit returns on new capacity."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Net Revenues | 244,161 | 191,064 | 168,569 | +27.8% | +44.8%"
+       },
+       {
+        "id": "P6",
+        "quote": "In NT dollar terms, our consolidated 4th quarter revenue should grow by 6 to 8 percent quarter over quarter;"
+       },
+       {
+        "id": "P4",
+        "quote": "Net Revenues | 88,615 | 88,130 | 60,231 | +0.6% | +47.1%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (FY2026) growth is high because Q3 revenue grew 44.8% year over year and Q4 is guided up 6 to 8% sequentially, while Q1 2026 is not in the packet and is an estimate. Growth then slows as comparisons get tougher and the cycle matures, with a carry-over from the Q4 run-rate lifting year 2."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A slightly lower figure than the long-run nominal anchor reflects a mature, cyclical, price-eroding services business whose growth is partly offset by outsourcing trends."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "The cycle turns and AI-driven packaging demand normalizes while the debt-funded capacity (fixed costs) stays, so margins revert toward the 7 to 8% historical level."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Growth slows sharply after 2026 as the 45% year-over-year surge fades and EMS stays weak."
+     },
+     {
+      "bear_value": 0.21,
+      "input_hit": "capex_to_revenue",
+      "risk": "Capex stays near 2025 intensity because of continued capacity build-out, raising reinvestment needs."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.085,
+      "rev_growth": [
+       0.26,
+       0.11000000000000001,
+       0.03,
+       0.010000000000000009,
+       0.0
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.125,
+      "rev_growth": [
+       0.38,
+       0.23,
+       0.15,
+       0.13,
+       0.12
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Long-term borrowings rose from NT$121.8B to NT$202.6B to fund a doubling of capex, and the Q3 2026 balance sheet is not in the packet, so the level that persists relative to a larger revenue base is unknown."
+     },
+     "margin_position": "The 2025 operating margin of 0.0797 is near the nine-year middle, but 2026 is far above it. Q3 2026 was 13.6% and Q4 is guided to 14.5% to 15.5%, driven by advanced packaging and testing mix and high utilization. EMS dilutes the margin at about a 2% operating margin in Q4. The margin is therefore at a cyclical and AI-capex-driven high, and a share of that gap should persist.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 rate of 0.197 already includes Pillar Two and the unappropriated-earnings tax, and Q3 2026 tax of NT$4,831M on NT$32,710M pretax is lower, so it looks sustainable or slightly conservative."
+     },
+     "why": "FY2025 is not the right base for years 1 to 5 because 2026 has already stepped up sharply. Q3 2026 revenue was up 44.8% year over year and Q3 operating margin was 13.6%, against 8.0% for 2025. Capex in 2025 (0.2551 of revenue) was also well above the 5-year pool. The base year understates the current earnings level and overstates capital intensity relative to a normal year."
+    },
+    "value_at_old_defaults": 2.892161036075225,
+    "values": {
+     "base": 7.460100784190804,
+     "bear": 4.681347576179866,
+     "bull": 12.324712902006231
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 2.892161036075225,
+  "value_at_old_defaults_quoted": 5.803195215899947,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 31844356039.66657,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 4429553000.0,
@@ -15,7 +510,7 @@
   "GAPT's acquisition of a 16.48% shareholding of Hong Kong United Ascend Holdings Limited was completed in September 2024."
  ],
  "in_code_book": false,
- "ke": 0.11164375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 70267067905,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +518,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 0.2522595346591944,
-  "3000": 3.18577714564175
+  "1000": 6.918034454135308,
+  "3000": 7.460100784190804
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": "filed shares 4,429,553,000 against 2,207,573,607 quoted (x0.498); values are per quoted share",
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1386,106 +1881,17 @@
   ]
  },
  "ticker": "ASX",
- "upside": -0.8181759585766372,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y1 (1000 up, 3000 none)",
-   "seeds_disagree: rev_growth.y2 (1000 none, 3000 up)",
-   "seeds_disagree: op_margin.y2 (1000 none, 3000 up)",
-   "seeds_disagree: capex (1000 up, 3000 none)",
-   "value_far_from_record_neutral: bear 0.2313 against 2.8843 (0.08x)"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.14345694818350183,
-    0.14345694818350183,
-    0.14345694818350183,
-    0.14345694818350183,
-    0.14345694818350183
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07967431740151909,
-   "normalized.margin": 0.07967431740151909,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.07967431740151909,
-   "op_margin.y2": 0.07967431740151909,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08756264880882572
-  },
-  "numbers": {
-   "capex": [
-    0.14345694818350183,
-    0.14345694818350183,
-    0.14345694818350183,
-    0.14345694818350183,
-    0.14345694818350183
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07967431740151909,
-   "normalized.margin": 0.07967431740151909,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.07967431740151909,
-   "op_margin.y2": 0.07967431740151909,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08756264880882572
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "anchor",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The packet does not give first-quarter 2026 consolidated revenue or operating margin, so full-year 2026 cannot be assembled from reported quarters.",
-   "The fourth-quarter 2026 outlook is quarter-over-quarter guidance only, and no full-year 2026 or 2027 revenue, margin or capex guidance appears in the evidence.",
-   "Capital expenditure for 2026 is not stated in any item.",
-   "The 20-F risk factors section was not found, and the 6-K text is partly omitted."
-  ],
-  "year": 3
- },
- "value_base": 5.787459238505639,
- "value_bear": 0.46402022315089353,
- "value_bull": 6.248868566571944,
+ "upside": -0.5468096650522027,
+ "valuation": null,
+ "value_base": 14.42504836138839,
+ "value_bear": 9.318189773950404,
+ "value_bull": 23.34838032290028,
  "value_per_filed_share": {
-  "base": 2.884318635640429,
-  "bear": 0.23125556859969038,
-  "bull": 3.114273002272583
+  "base": 7.189067619163056,
+  "bear": 4.643942584791138,
+  "bull": 11.636223375760705
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -52.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -23.9 points a year against the required return over 3 years"
 }

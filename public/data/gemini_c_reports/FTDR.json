@@ -1,23 +1,449 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -23.520074763414904,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 61,
  "claims_supported": 57,
  "date": "2026-11-17T13:49:39Z",
+ "decided": {
+  "flags": [
+   "run 1000: roe_outside_filed_record: roe.y1 0.9900 (filed 1.0669 to 35.5000)",
+   "run 1000: roe_outside_filed_record: roe.y2 0.9800 (filed 1.0669 to 35.5000)",
+   "run 1000: roe_outside_filed_record: roe.y3 0.9700 (filed 1.0669 to 35.5000)",
+   "run 1000: roe_outside_filed_record: roe.y4 0.9600 (filed 1.0669 to 35.5000)",
+   "run 1000: roe_outside_filed_record: roe.y5 0.9500 (filed 1.0669 to 35.5000)",
+   "run 1000: roe_outside_filed_record: long_run_roe 0.9000 (filed 1.0669 to 35.5000)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: roe_outside_filed_record: roe.y1 0.9900 (filed 1.0669 to 35.5000)",
+   "run 3000: roe_outside_filed_record: roe.y2 0.9900 (filed 1.0669 to 35.5000)",
+   "run 3000: roe_outside_filed_record: roe.y3 0.9800 (filed 1.0669 to 35.5000)",
+   "run 3000: roe_outside_filed_record: roe.y4 0.9600 (filed 1.0669 to 35.5000)",
+   "run 3000: roe_outside_filed_record: roe.y5 0.9400 (filed 1.0669 to 35.5000)",
+   "run 3000: roe_outside_filed_record: long_run_roe 0.8500 (filed 1.0669 to 35.5000)",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "record_neutral_unavailable: rate_not_above_terminal_growth",
+  "route": "financial",
+  "run_gap": 0.032081444090728835,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2994348533.942154,
+     "implied_pb": 13.517368783471486,
+     "seam_ratio": 1.023842391304348,
+     "tv_share": 0.35303264301351395
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y1 0.9900 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y2 0.9800 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y3 0.9700 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y4 0.9600 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y5 0.9500 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: long_run_roe 0.9000 (filed 1.0669 to 35.5000)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.05,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.9,
+     "roe": [
+      0.99,
+      0.98,
+      0.97,
+      0.96,
+      0.95
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "record_neutral_unavailable: rate_not_above_terminal_growth",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 57
+    },
+    "ranges": {
+     "book_growth_y3": [
+      -0.05,
+      0.1
+     ],
+     "long_run_roe": [
+      0.5,
+      0.99
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Repurchases of common stock | (261) | (195)"
+       },
+       {
+        "id": "P6",
+        "quote": "We now expect to complete our current authorization in November."
+       },
+       {
+        "id": "P6",
+        "quote": "Company Announces New $1 Billion Share Repurchase Authorization"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Equity rose to $315M by September, but repurchases are running at about 80% of net income plus stock-based compensation. The current authorization is to be completed in November and a $1B authorization follows. Year 1 growth is therefore modest after fourth-quarter buybacks, and later growth is low as buybacks absorb most of the earnings."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "76 percent of our revenue in 2025 was generated through existing customer renewals"
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA(2) of $590 million to $600 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is a stable, recurring franchise, with 76% of revenue from renewals. Returns should fade gradually, not abruptly, toward the long-run level. Ten years is a middle choice given the leverage and competitive uncertainty."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Our business model generates strong Adjusted EBITDA margins and requires limited capital expenditures."
+       },
+       {
+        "id": "F1",
+        "quote": "Long-Term Debt | 1,125,000,000 | 1,144,000,000"
+       },
+       {
+        "id": "P4",
+        "quote": "unfavorable weather trends in 2026 as compared to 2025 resulted in a higher number of home warranty service requests per customer in the HVAC trade"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The model is capital-light, with limited capex and strong cash conversion, so returns on a small book stay very high. Over time, competition, claims inflation, weather and housing weakness should pull earnings per dollar of equity down. Leverage and equity that could drift near zero make this very uncertain, so the range is wide. The ceiling of 1 on this input is binding for the upper end."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net Income | 116 | 106 | 283 | 253"
+       },
+       {
+        "id": "P3",
+        "quote": "approximately 14 percent, 44 percent, 41 percent and 1 percent of our net income"
+       },
+       {
+        "id": "REC",
+        "quote": "Base year (the last filed fiscal year): ended 2025-12-31; common equity at its end, which opens year 1, $242.0 million"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 net income was $283M, up from $253M. Fourth-quarter earnings are close to nil, because only 1% of 2025 net income came in the fourth quarter. Full-year 2026 net income is therefore about $290M, about 1.2x the $242M opening equity. The input range is capped below 1, so I use values just under 1 and let them drift lower for weather, claims and competition risk. The true year-1 estimate is above the cap, so these inputs understate it."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "our compound annual revenue growth rate of seven percent from 2020 to 2025"
+       },
+       {
+        "id": "P4",
+        "quote": "Relatively unchanged existing home sales, driven by ongoing challenges in the real estate market, continue to constrain demand for home warranties."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is anchored near nominal GDP. The company has grown revenue at 7% a year since 2020, helped by pricing and acquisitions. Existing home sales are flat and the market is mature and competitive, so I assume somewhat below that rate, near the long-run anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.4,
+      "input_hit": "long_run_roe",
+      "risk": "Buybacks plus a weather- or inflation-driven claims shock push book equity toward zero or lower, or earnings fall, so return on equity is no longer meaningful or collapses."
+     },
+     {
+      "bear_value": 0.8,
+      "input_hit": "roe",
+      "risk": "Weak housing and heavier HVAC claims in a hot summer lower profits and put fiscal 2027 net income below plan."
+     },
+     {
+      "bear_value": -0.05,
+      "input_hit": "book_growth",
+      "risk": "Debt-funded buybacks or an earnings shortfall reduce book equity over the next few years."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.03,
+       -0.06,
+       -0.05,
+       -0.05,
+       -0.05
+      ],
+      "long_run_roe": 0.5,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.12000000000000001,
+       0.09000000000000001,
+       0.1,
+       0.1,
+       0.1
+      ],
+      "long_run_roe": 0.99,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Frontdoor is a home-warranty and builder-warranty services company, not a bank or insurer. Its return on book equity is extremely high (1.07 in 2025) because buybacks have shrunk the equity base, not because profits are unusual. Treasury stock of $988M offsets retained earnings of $1,068M, leaving equity of $315M against about $283M of nine-month net income. The ratio is a leverage and buyback artefact. Underlying earnings are steady and growing, with 2026 net income likely near $290M. Fourth-quarter earnings are tiny because of seasonality.",
+     "why": "Nothing in the evidence shows regulatory capital limiting the company. The 2-10 HBW insurance-backed warranty unit does carry some regulatory capital (deferred reinsurance, unearned premium), but it is small against the group. Book equity growth is set by the payout choice: nearly all free cash flow goes to repurchases, with a new $1B authorization. The risk is that equity stays very small or near zero while debt of about $1.15B remains."
+    },
+    "value_at_old_defaults": null,
+    "values": {
+     "base": 43.90876839731678,
+     "bear": 22.771068323009377,
+     "bull": 78.40080267317092
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2899802101.899116,
+     "implied_pb": 13.09055841901314,
+     "seam_ratio": 1.0322962962962967,
+     "tv_share": 0.2904145870111102
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y1 0.9900 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y2 0.9900 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y3 0.9800 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y4 0.9600 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: roe.y5 0.9400 (filed 1.0669 to 35.5000)",
+     "roe_outside_filed_record: long_run_roe 0.8500 (filed 1.0669 to 35.5000)",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.02,
+      0.03,
+      0.04,
+      0.04,
+      0.04
+     ],
+     "fade_years": 12,
+     "long_run_roe": 0.85,
+     "roe": [
+      0.99,
+      0.99,
+      0.98,
+      0.96,
+      0.94
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "record_neutral_unavailable: rate_not_above_terminal_growth",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 57
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.0,
+      0.08
+     ],
+     "long_run_roe": [
+      0.6,
+      0.98
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We now expect to complete our current authorization in November."
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchases of common stock | (261) | (195)"
+       },
+       {
+        "id": "F1",
+        "quote": "Total Shareholders' Equity | 315,000,000 | 242,000,000"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Equity moved from $242 million to $315 million in nine months, but repurchases of $261 million nearly absorb earnings. The current authorization finishes in November, and a new $1 billion authorization follows, so book equity should grow only a few percent a year. Year 1 is about 2 percent, because Q4 buybacks will take back much of the nine-month increase."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "approximately 14 percent, 44 percent, 41 percent and 1 percent of our net income"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The competitive position (leading nationwide provider, 17,000 contractor network, recurring renewals) supports a moderately long fade, but housing and claims-cost pressure argue against a permanent excess. Twelve years is a middle estimate. Earnings are concentrated in the summer quarters, which adds volatility around the path."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The home warranty category is highly competitive."
+       },
+       {
+        "id": "P6",
+        "quote": "Direct-to-consumer revenue declined 1%, due to lower realized price from our promotional pricing strategy"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A ROE near 1.0 comes from a capital-light business combined with aggressive buybacks, and I do not expect it to last forever. The market is highly competitive, there is promotional pricing pressure, and claims costs are inflating. I fade to about 0.85, still far above the 10.58 percent cost of equity, because the franchise is a scaled market leader with about 75 percent recurring renewals. The range is wide because the ratio depends on the capital structure chosen."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net Income | 116 | 106 | 283 | 253"
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA(2) of $590 million to $600 million"
+       },
+       {
+        "id": "REC",
+        "quote": "last 1.0669"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year-1 income of about $290 million (nine months already $283 million, Q4 seasonally small) on opening equity of $242 million implies a ratio above 1, but the allowed range stops below 1, so I enter 0.99. Revenue, Adjusted EBITDA and EPS are all growing and guidance was raised. Weather, claims inflation and promotional pricing cap the upside, so I let it drift down slightly."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "compound annual revenue growth rate of seven percent from 2020 to 2025"
+       },
+       {
+        "id": "P6",
+        "quote": "Revenue increased 6% to $655 million and was comprised of 3% from higher realized price and 3% from higher volume."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Revenue grew at a 7 percent CAGR from 2020 to 2025 and 6 percent in Q3 2026, with growth split between price and volume. Housing turnover is flat, which limits volume. A long-run growth rate of about 3 percent, slightly below the 3.75 percent anchor, reflects mature, price-led growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.8,
+      "input_hit": "roe",
+      "risk": "Adverse weather, tariff or parts inflation raises claims costs and cuts margins, while weak housing turnover and promotions limit pricing and volume."
+     },
+     {
+      "bear_value": 0.6,
+      "input_hit": "long_run_roe",
+      "risk": "Buybacks funded by debt, or earnings falling relative to equity, force a reset of capital structure, which would lower ROE through a higher equity base and higher interest costs."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Existing home sales stay weak and customer retention declines, so first-year sales no longer feed the renewal base."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.02,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "long_run_roe": 0.6,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.06,
+       0.07,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "long_run_roe": 0.98,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Frontdoor is a home-warranty and builder-warranty services company, not a bank or insurer in the regulatory sense. Its return on opening common equity (1.07 in 2025) is very high because buybacks have pushed treasury stock to $988 million, which holds book equity at only $315 million at September 2026. The ratio reflects buyback policy as well as profitability. Earnings are real: nine-month 2026 net income was $283 million. Q4 is seasonally tiny, with about 1 percent of 2025 net income. The true ratio is likely at or just above 1.0. The checker caps return on equity below 1, so the inputs below sit at the top of the allowed range.",
+     "why": "No regulatory capital limit binds. The 2-10 HBW insurance-backed warranties carry some regulatory capital, but it is small. Book equity growth is limited by management's choice to return nearly all free cash flow through buybacks, with about $1.15 billion of debt outstanding. Equity should stay near $240-260 million while income to common is about $290-340 million, so the true ROE stays near or above 1.0. I enter values just under the cap and treat that as a downward bias."
+    },
+    "value_at_old_defaults": null,
+    "values": {
+     "base": 42.52235083759973,
+     "bear": 28.575938134555845,
+     "bull": 64.05320978553097
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": null,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 3219559191.50064,
  "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 74500000.0,
  "flags": [
   "Frontdoor announced a new $1 Billion share repurchase authorization approved by its Board, saying the current authorization should be completed in November.",
   "Frontdoor raised its full-year 2026 outlook to revenue of $2.205 billion to $2.215 billion and Adjusted EBITDA of $590 million to $600 million.",
   "The Vice President, Chief Accounting Officer and Controller gave notice of her resignation, effective in September 2026. The company said it was not the result of any disagreement. The CFO took over principal accounting officer duties until a successor is appointed."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.10578180622416283,
+ "market_cap_at_publish": 6347910908,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "no usable growth anchor for this company",
+ "no_value_reason": null,
+ "price_at_publish": 93.92,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 43.90876839731678,
+  "3000": 42.52235083759973
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -771,8 +1197,17 @@
   ]
  },
  "ticker": "FTDR",
+ "upside": -0.4928159455667269,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no usable growth anchor for this company"
+ "value_base": 43.215559617458254,
+ "value_bear": 25.67350322878261,
+ "value_bull": 71.22700622935093,
+ "value_per_filed_share": {
+  "base": 43.215559617458254,
+  "bear": 25.67350322878261,
+  "bull": 71.22700622935093
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -23.5 points a year against the required return over 3 years"
 }

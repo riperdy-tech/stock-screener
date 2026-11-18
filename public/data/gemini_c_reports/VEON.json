@@ -1,11 +1,542 @@
 {
- "alpha_pts": 19.58398614699954,
+ "alpha_pts": 27.719456882838582,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 97,
  "claims_supported": 76,
  "date": "2026-11-18T00:05:23Z",
- "equity_value": 8689081395.298586,
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.1700 (filed -0.5695 to 0.1057)",
+   "run 1000: growth_outside_filed_record: rev_growth.y2 0.1200 (filed -0.5695 to 0.1057)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.1700 (filed -0.5695 to 0.1057)",
+   "run 3000: growth_outside_filed_record: rev_growth.y2 0.1200 (filed -0.5695 to 0.1057)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3022 (persist), growth 0.0375, terminal RONIC 0.1116 (equity return r 0.0985), F 10",
+  "run_gap": 0.04037613161344542,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 130000000.0,
+       "printed": 130,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Other non-operating (loss) / gain, net | (130) | 31 | 20"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Other non-operating loss, net, in 2025. The 20-F ties the Dhabi Group settlement provision to this line, so it is treated as non-recurring."
+      }
+     ],
+     "cash_interest_returned": 20733240.96385541,
+     "cash_not_free": {
+      "amount": 510000000.0,
+      "printed": 510,
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Cash and cash equivalents include USD 510 million relating to banking operations in Pakistan which is excluded for calculation of net debt."
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "Cash relating to Pakistan banking operations (backing customer deposits), excluded by the company from net debt. The figure is as of June 2026, not year-end 2025."
+     },
+     "excess_cash_after": 1222000000.0,
+     "excess_cash_before": 1732000000.0,
+     "k0_after": 652045645.7668236,
+     "k0_before": 802778886.730679,
+     "k0_interest": 535000000.0,
+     "one_offs_charge": 130000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 592471367.3271431,
+     "x0_before": 478989398.65244424
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 8027224309.12467,
+     "seam_ratio": 1.0213464049421803,
+     "tv_share": 0.3855280538754708,
+     "wedge_rate_5": -0.0077973917477987395
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.1700 (filed -0.5695 to 0.1057)",
+     "growth_outside_filed_record: rev_growth.y2 0.1200 (filed -0.5695 to 0.1057)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.17,
+     "fade_years": 10,
+     "long_run_op_margin": 0.24,
+     "op_margin": [
+      0.25,
+      0.255,
+      0.26,
+      0.26,
+      0.26
+     ],
+     "return_on_new_investment_long_run": 0.16,
+     "rev_growth": [
+      0.17,
+      0.12,
+      0.095,
+      0.075,
+      0.06
+     ],
+     "terminal_growth": 0.04
+    },
+    "old_defaults_inputs": "margin 0.3022 (persist), growth 0.0375, terminal RONIC 0.1116 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 21,
+     "kept": 76
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.2,
+      0.27
+     ],
+     "rev_growth_y3": [
+      0.05,
+      0.12
+     ],
+     "terminal_growth": [
+      0.03,
+      0.05
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1636"
+       },
+       {
+        "id": "P7",
+        "quote": "Capex intensity (excl. Ukraine) outlook maintained at 15% to 17% of revenues."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 16.4% of revenue and guidance is 15-17% excluding Ukraine. Including Ukraine and new Pakistan spectrum, I use 17%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Investing in frontier markets, where our operations are located, is subject to greater risks than investing in more developed markets"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin converge slowly because the digital mix shift and frontier-market growth run for years but the risk profile is high."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $4,399.0 million | 0.0987 | 0.3271"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin is lowered from the reported 2025 level because the gain-adjusted level is about 27% and does not hold as growth slows. Telecom competition, regulation and inflation in frontier markets argue for fading to about 24%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "EBITDA for the quarter increased 10.1% YoY to USD 577 million."
+       },
+       {
+        "id": "F2",
+        "quote": "Gain on disposal of subsidiaries | 400 | 145 | 0"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "EBITDA is growing more slowly than revenue and D&A is rising, so the recurring margin is about 25% rather than the 32.7% reported with disposal gains. Slight operating leverage from digital lifts it to about 26%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return of 0.36 is boosted by asset-light tower sales and disposal gains. New telecom and spectrum investment earns less, so I assume 16%, above the 11.2% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Revenue for 9M26 grew 17.1% YoY to USD 3,779 million."
+       },
+       {
+        "id": "P6",
+        "quote": "Targets 12\u201315% organic annual growth in USD revenue and EBITDA from 2026 to 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "9M26 revenue growth of 17.1% and raised 2026 guidance support about 17% in year 1. Growth should ease toward the 12-15% management target and then lower, because frontier-market currency depreciation and lower inflation pull USD growth down and part of 2026 growth comes from acquisitions."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The anchor is 3.75%. Frontier-market inflation and USD revenue growth support slightly above it, but currency depreciation offsets this, so I use 4%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "long_run_op_margin",
+      "risk": "Ukraine war escalation, adverse peace terms, sanctions or nationalization of Kyivstar (about 26% of revenue) impair cash flows"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "Local-currency depreciation against USD debt and revenue lowers reported USD growth"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "terminal_growth",
+      "risk": "Pakistan or Bangladesh tax, regulatory and political shocks and impairments cut growth in the terminal period"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.2,
+      "rev_growth": [
+       0.125,
+       0.075,
+       0.05,
+       0.03,
+       0.015
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.195,
+       0.145,
+       0.12,
+       0.09999999999999999,
+       0.08499999999999999
+      ],
+      "terminal_growth": 0.05
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "The record's 3,143 of debt differs from the balance-sheet debt and derivatives of 4,043 non-current plus 1,102 current, and 2026 refinancing (a USD 1.4 billion bond) changes the picture."
+     },
+     "margin_position": "The reported 2025 operating margin of 32.7% is inflated by a 400 gain on disposal of subsidiaries, mainly the Pakistan towers, and reduced by a 162 listing expense. Excluding both, it is about 27%. The 2026 margin should be lower, around 25%, because D&A is rising with growth and spectrum spending while EBITDA margin is roughly flat at about 43%.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 24.7% rate in the filed record is affected by an additional 122 Deodar tax charge and by untaxed disposal gains, so the sustainable rate is unclear."
+     },
+     "why": "2025 operating income of 1,439 includes a 400 gain on disposal of subsidiaries and a 162 listing expense. Stripping both gives roughly 1,200, or about 27% of revenue. 2024 also had a 145 disposal gain. The base-year margin therefore overstates what recurring operations earn, and I start year 1 near 25%."
+    },
+    "value_at_old_defaults": 4.374611727267582,
+    "values": {
+     "base": 5.54213126034373,
+     "bear": 3.2315450341797947,
+     "bull": 8.157166668103132
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 130000000.0,
+       "printed": 130,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Other non-operating (loss) / gain, net | (130) | 31 | 20"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Other non-operating loss, net, in 2025, which appears to include the Dhabi Group settlement provision and is unlikely to recur"
+      }
+     ],
+     "cash_interest_returned": 20733240.96385541,
+     "cash_not_free": {
+      "amount": 510000000.0,
+      "printed": 510,
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Cash and cash equivalents include USD 510 million relating to banking operations in Pakistan which is excluded for calculation of net debt."
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "Cash relating to Pakistan banking operations (customer-deposit backed), excluded by the company from net debt; the figure is from 30 June 2026, as no year-end 2025 figure is in the packet"
+     },
+     "excess_cash_after": 1222000000.0,
+     "excess_cash_before": 1732000000.0,
+     "k0_after": 652045645.7668236,
+     "k0_before": 802778886.730679,
+     "k0_interest": 535000000.0,
+     "one_offs_charge": 130000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 592471367.3271431,
+     "x0_before": 478989398.65244424
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 8404362995.147061,
+     "seam_ratio": 1.0356401196649234,
+     "tv_share": 0.37710290240430244,
+     "wedge_rate_5": -0.012720245756403348
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.1700 (filed -0.5695 to 0.1057)",
+     "growth_outside_filed_record: rev_growth.y2 0.1200 (filed -0.5695 to 0.1057)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.165,
+     "fade_years": 10,
+     "long_run_op_margin": 0.24,
+     "op_margin": [
+      0.27,
+      0.265,
+      0.26,
+      0.255,
+      0.25
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.17,
+      0.12,
+      0.1,
+      0.085,
+      0.07
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.3022 (persist), growth 0.0375, terminal RONIC 0.1116 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 21,
+     "kept": 76
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.21,
+      0.27
+     ],
+     "rev_growth_y3": [
+      0.06,
+      0.13
+     ],
+     "terminal_growth": [
+      0.028,
+      0.043
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1636;"
+       },
+       {
+        "id": "P5",
+        "quote": "Capex Intensity (ex-Ukraine) 15% - 17% (unchanged) 15.0%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 16.4% of revenue and 2026 guidance for capex intensity excluding Ukraine is 15-17%, while Ukraine runs higher. I use 16.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Aspires to reach 50% digital revenue mix"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets digital mix and telecom growth normalise gradually from the 2030 framework's 12-15% growth toward terminal growth."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Listing expense | (162) | 0 | 0"
+       },
+       {
+        "id": "P2",
+        "quote": "Investing in frontier markets, where our operations are located, is subject to greater risks than investing in more developed markets, including significant political, legal and economic risks."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company is a frontier-market telecom with currency, war and regulatory risk, and 2024-25 margins were helped by disposal gains and a listing expense that blur the picture. I fade to 24%, a haircut to the underlying 27%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Gain on disposal of subsidiaries | 400 | 145 | 0"
+       },
+       {
+        "id": "P5",
+        "quote": "EBITDA USD 1,069 million +11.5% YoY, 43.2% EBITDA Margin"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin resets from the reported 32.7% to the underlying level of about 27%, because 2025 had a 400 subsidiary-disposal gain. The EBITDA margin is around 43% with D&A near 14-15% of revenue. I let the margin drift down slightly because spectrum and lease costs and Pakistan capex rise."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.3644;"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1116."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 36% is inflated by an asset-light shift and a disposal gain. New spectrum, network and digital acquisitions earn less, and the break-even return is 11%, so I use 18%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Revenue for 9M26 grew 17.1% YoY to USD 3,779 million."
+       },
+       {
+        "id": "P6",
+        "quote": "Targets 12\u201315% organic annual growth in USD revenue and EBITDA from 2026 to 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue growth is 17.1%, helped by digital growth and acquisitions (Uklon, Tabletki.ua, OLX KZ) and by guidance of 16-18%. I fade growth toward the 12-15% management target and slightly below it, since USD growth depends on frontier-market currencies and 2026 inflation."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0985; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run nominal USD growth should sit slightly below the anchor, because local currencies tend to depreciate against the dollar even though nominal local growth is high."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.19,
+      "input_hit": "long_run_op_margin",
+      "risk": "Ukraine (about 26% of revenue) is hit by war escalation, an adverse settlement, sanctions or nationalization, which lowers revenue and margin"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "Depreciation of Pakistani rupee, Bangladeshi taka, hryvnia or tenge against the dollar cuts reported USD growth and raises the cost of dollar debt"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Bangladesh and Pakistan political, tax and regulatory stress (impairment, Deodar settlement) slows long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.21,
+      "rev_growth": [
+       0.13,
+       0.07999999999999999,
+       0.06,
+       0.045,
+       0.03
+      ],
+      "terminal_growth": 0.028
+     },
+     "bull": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.2,
+       0.15,
+       0.13,
+       0.115,
+       0.1
+      ],
+      "terminal_growth": 0.043
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "The record's total debt of 3,143 differs from the balance sheet debt and derivatives of 5,145, and HQ is refinancing and adding debt (a USD 1.4bn bond) while growing EBITDA, so the level relative to size is hard to pin down."
+     },
+     "margin_position": "The reported 2025 operating margin of 32.7% is flattered by a 400 gain on disposal of subsidiaries (partly offset by a 162 listing expense). Stripping those out, the underlying margin is about 27%, up from about 24% in 2024 on the same basis. That reflects telecom scale, digital growth and asset-light moves.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 24.7% rate includes a one-off Deodar tax charge but is lowered by untaxed disposal gains, while cash tax paid of 379 was far higher than the 194 book charge."
+     },
+     "why": "Base-year operating income of 1,439 includes a 400 disposal gain and a 162 listing expense, so the reported margin overstates the recurring level. The underlying margin is roughly 27%. Below operating income, a 130 other non-operating loss (likely including the Dhabi settlement provision) and a 122 Deodar tax charge also distort the base year."
+    },
+    "value_at_old_defaults": 4.374611727267582,
+    "values": {
+     "base": 5.770511639656897,
+     "bear": 3.6927445752257477,
+     "bull": 8.644455516111615
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 4.374611727267582,
+  "value_at_old_defaults_quoted": 113.96918243024878,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 10147440681.300562,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 1794000000.0,
@@ -23,12 +554,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 4.162188033383232,
-  "3000": 4.843412148995867
+  "1000": 5.54213126034373,
+  "3000": 5.770511639656897
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": "filed shares 1,794,000,000 against 68,861,189 quoted (x0.0384); values are per quoted share",
- "source": "on request (no-call fix rerun)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1145,153 +1676,17 @@
   ]
  },
  "ticker": "VEON",
- "upside": 0.6419331641753228,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y1 (1000 down, 3000 none)",
-   "seeds_disagree: op_margin.y2 (1000 down, 3000 none)",
-   "seeds_disagree: normalized.margin (1000 down, 3000 none)",
-   "seeds_disagree: long_run_op_margin (1000 down, 3000 none)",
-   "guidance_outside_record: rev_growth.y1 0.1700",
-   "guidance_outside_record: rev_growth.y2 0.1350",
-   "held_at_record: rev_growth.y1 model 0.1700 valued at 0.0375"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P7.s10",
-     "P5.s50"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s1",
-     "P7.s6"
-    ],
-    "input": "rev_growth.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "up",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P5.s50": {
-    "kind": "six_k_interim",
-    "period": "2026-06-30",
-    "text": "EARNINGS RELEASE & OPERATING HIGHLIGHTS 2Q26 & 1H26 15 2026 OUTLOOK, CAPITAL RETURN POLICY VEON is upgrading its FY26 revenue growth outlook to 15\u201318% YoY in USD terms (from 11\u201314% previously), and its FY26 EBITDA growth outlook to 9\u201312% YoY in USD terms (from 7\u201310% previously)."
-   },
-   "P6.s1": {
-    "kind": "six_k",
-    "period": "2026-11-16",
-    "text": "VEON Sets Out 2030 Growth and Shareholder Return Framework at Capital Markets Day Targets 12\u201315% organic annual growth in USD revenue and EBITDA from 2026 to 2030 Targets annual shareholder returns of at least USD 200 million Aspires to reach 50% digital revenue mix Dubai and New York, November 16, 2026 \u2013 VEON Ltd. (Nasdaq: VEON), a global digital operator, today presents its 2030 strategy and financial framework at its Capital Markets Day at the Nasdaq MarketSite in New York."
-   },
-   "P7.s10": {
-    "kind": "six_k",
-    "period": "2026-11-06",
-    "text": "Revenue growth outlook now 16%-18% YoY (previously 15%-18%), EBITDA growth outlook now 10%-12% YoY (previously 9% to 12%)."
-   },
-   "P7.s6": {
-    "kind": "six_k",
-    "period": "2026-11-06",
-    "text": "Revenue for 9M26 grew 17.1% YoY to USD 3,779 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.16360499340302445,
-    0.16360499340302445,
-    0.16360499340302445,
-    0.16360499340302445,
-    0.16360499340302445
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.30217128858865616,
-   "normalized.margin": 0.30217128858865616,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.30217128858865616,
-   "op_margin.y2": 0.30217128858865616,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.11161440046306828
-  },
-  "numbers": {
-   "capex": [
-    0.16360499340302445,
-    0.16360499340302445,
-    0.16360499340302445,
-    0.16360499340302445,
-    0.16360499340302445
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.30217128858865616,
-   "normalized.margin": 0.30217128858865616,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.30217128858865616,
-   "op_margin.y2": 0.30217128858865616,
-   "rev_growth.y1": 0.16999999999999998,
-   "rev_growth.y2": 0.135,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.11161440046306828
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.16999999999999998,
-    "model_option": "guidance",
-    "record": 0.0375,
-    "record_option": "anchor"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "guidance",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No 10-Q or 8-K Item 2.02 is in the packet, so year-1 operating margin to date is not available from a quarterly filing.",
-   "No guidance in the evidence states an operating margin or a total capex level. Capex intensity guidance is given only excluding Ukraine.",
-   "The 2030 growth target is described as organic and spans 2026 to 2030. How much of it falls in year 2 is not stated.",
-   "The 2025 operating profit includes a gain on disposal of subsidiaries. How much of the margin is repeatable in 2026 and later is not shown by the evidence."
-  ],
-  "year": 3
- },
- "value_base": 126.18256366687353,
- "value_bear": 117.48154574807774,
- "value_bull": 133.0230853333799,
+ "upside": 0.9175121774258257,
+ "valuation": null,
+ "value_base": 147.3608108351747,
+ "value_bear": 90.19721919265386,
+ "value_bull": 218.86138281727312,
  "value_per_filed_share": {
-  "base": 4.843412148995867,
-  "bear": 4.509430854973467,
-  "bull": 5.105979850762449
+  "base": 5.656321450000314,
+  "bear": 3.4621448047027714,
+  "bull": 8.400811092107373
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +19.6 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +27.7 points a year against the required return over 3 years"
 }

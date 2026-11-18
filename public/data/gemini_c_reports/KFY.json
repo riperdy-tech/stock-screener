@@ -1,11 +1,494 @@
 {
- "alpha_pts": 7.667353105628899,
+ "alpha_pts": 14.888740325127328,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 125,
  "claims_supported": 115,
  "date": "2026-11-16T13:51:03Z",
- "equity_value": 4796767277.427825,
+ "decided": {
+  "flags": [
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 15 of 15",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+  "run_gap": 0.02404762611288996,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1134359000.0,
+     "excess_cash_before": 1134359000.0,
+     "k0_after": 34799764.28162497,
+     "k0_before": 34799764.28162497,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 263392630.8519348,
+     "x0_before": 263392630.8519348
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4236226392.1589956,
+     "seam_ratio": 1.0264773200611523,
+     "tv_share": 0.41141380697678526,
+     "wedge_rate_5": 0.004940525546672108
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.027,
+     "fade_years": 10,
+     "long_run_op_margin": 0.115,
+     "op_margin": [
+      0.121,
+      0.123,
+      0.124,
+      0.125,
+      0.125
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.1,
+      0.08,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 10,
+     "kept": 115
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.1,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.07
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0234"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex/revenue was 3.06% in fiscal 2026 against a 5-year pooled 2.34%, reflecting technology platform spend. I use 2.7% as a compromise."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | $2,938.6 million | 0.0643 | 0.1275"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets the above-median margin and the acquisition-boosted growth converge to long-run levels at a moderate pace."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Adjusted EBITDA | $497,805 | 17.1% | $463,866 | 17.0% | $408,204 | 14.8%"
+       },
+       {
+        "id": "P2",
+        "quote": "There are no extensive barriers to entry into the executive search industry"
+       },
+       {
+        "id": "P3",
+        "quote": "Restructuring charges, net | \u2014 | \u2014 | 1,892 | 0.1 | 68,558 | 2.5"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Adjusted EBITDA margin rose from 14.8% to 17.1% in two years after restructuring, but this is a cyclical hiring-linked business whose 10-year margin median is lower. Executive search has low barriers to entry and AI-based competition. I assume about half of the gap above the long-run median persists."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Gain on modification of office lease | (13,907) | (0.5)"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 93,380 | 83,448"
+       },
+       {
+        "id": "P6",
+        "quote": "Integration/acquisition costs | $7.6 | $1.5"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Base-year operating margin includes a $13.9 million lease gain, and Q1 operating income was 93,380 on total revenue of 764,622, about 12.2%. AMS integration costs ($7.6 million in Q1, with more expected in Q2) and a likely lower-margin RPO mix hold year 1 slightly below the base, with a modest recovery after."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "F1",
+        "quote": "Long-term debt | 398,778 | 398,565"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light and people-based, with tangible capital near zero in the filed record, so returns are very high. The cost-of-equity break-even is 9.5%, so I use a conservative 30% rather than the capped 100%, allowing for competition and acquisition-style growth."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "This marks our sixth consecutive quarter of top line growth."
+       },
+       {
+        "id": "P6",
+        "quote": "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
+       },
+       {
+        "id": "P6",
+        "quote": "With AMS now part of Korn Ferry, we have brought together two iconic brands"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Momentum is strong: Q1 grew 7%, backlog is up 14%, and AMS adds Workforce Solutions revenue from year 1. AMS's size is not in the packet, so year 1 at 10% (organic about 6-7% plus a partial-year AMS contribution) is a wide-range estimate. Growth then fades toward mid-single digits as the AMS annualization ends and the cycle matures."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "approximately 82% of our assignments were with clients we had served in the prior three years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Mature global talent-services firm with 82% repeat-client revenue. Long-run growth should sit slightly below the nominal anchor because of AI insourcing risk to search and flat Digital revenue."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.095,
+      "input_hit": "long_run_op_margin",
+      "risk": "Hiring-cycle downturn or AI insourcing hits Search and RPO volumes and forces cost cuts, as in fiscal 2024."
+     },
+     {
+      "bear_value": 0.04,
+      "input_hit": "rev_growth",
+      "risk": "AMS integration disappoints, or AMS adds less revenue than assumed, so year 1-3 growth is lower."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Terminal growth is lower as AI tools erode search and recruiting demand."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       0.08,
+       0.06,
+       0.03,
+       0.024999999999999994,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.12000000000000001,
+       0.1,
+       0.07,
+       0.065,
+       0.060000000000000005
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is a steady $398.8 million, but the AMS purchase price and funding are not in the packet and could add debt."
+     },
+     "margin_position": "The GAAP operating margin of 12.75% is near the top of the company's own history (median about 9% over 17 years; 11% in fiscal 2023). It was lifted by a one-time lease gain of about 0.5 point and by revenue growth that has outpaced costs since the fiscal 2024 restructuring. It is likely to fade somewhat in a demand downturn.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 27.7% base-year rate is close to Q1 FY27's 24,648 / 94,145, about 26%, and is a normal blended rate for a global services firm."
+     },
+     "why": "Fiscal 2026 revenue grew 6.4% and the margin held at 12.75% after the fiscal 2024 restructuring, and Q1 FY27 shows the same run-rate. The margin includes a $13.9 million lease gain, so the underlying figure is about 12.3%. The AMS acquisition closed after the quarter-end balance sheet, so year 1 changes in scale, mix and integration cost. Search and staffing revenue is sensitive to the hiring cycle."
+    },
+    "value_at_old_defaults": 91.17984148411551,
+    "values": {
+     "base": 106.35653059910967,
+     "bear": 86.9097023478839,
+     "bull": 132.82020761795653
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1134359000.0,
+     "excess_cash_before": 1134359000.0,
+     "k0_after": 34799764.28162497,
+     "k0_before": 34799764.28162497,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 263392630.8519348,
+     "x0_before": 263392630.8519348
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4365613460.190927,
+     "seam_ratio": 1.030936331874728,
+     "tv_share": 0.3983499774546145,
+     "wedge_rate_5": 0.0050223521906682
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.027,
+     "fade_years": 10,
+     "long_run_op_margin": 0.12,
+     "op_margin": [
+      0.118,
+      0.12,
+      0.125,
+      0.127,
+      0.128
+     ],
+     "return_on_new_investment_long_run": 0.35,
+     "rev_growth": [
+      0.12,
+      0.09,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 10,
+     "kept": 115
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.1,
+      0.135
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "terminal_growth": [
+      0.024,
+      0.037
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0234"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (17,923) | (22,599)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 5-year pooled capex is 2.3% of revenue and the base year was 3.1%, with digital platform investment ongoing, so I use 2.7%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Adjusted EBITDA | $497,805 | 17.1% | $463,866 | 17.0% | $408,204 | 14.8%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Cyclical mean reversion plus AMS integration means margins and growth settle over about a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-04-30 | $2,795.5 million | -0.0239 | 0.0762"
+       },
+       {
+        "id": "P2",
+        "quote": "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market."
+       },
+       {
+        "id": "P2",
+        "quote": "such as the restructuring initiated in the first half of fiscal 2024"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The margin fell to 7.6% in the FY24 downturn and recovered to 12.5-12.75%. Expecting about half of the gap above the long-run median to persist, I fade to 12%, between mid-cycle and the current peak. Low barriers to entry and AI-based competitors limit the upside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Integration/acquisition costs | $7.6 | $1.5"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 93,380 | 83,448"
+       },
+       {
+        "id": "P6",
+        "quote": "Ending number of fee earners (e) | 1,811 | 1,830"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is held slightly below the base-year 12.75% because of AMS integration costs ($7.6M in Q1 alone) and the lower-margin RPO mix. Margins recover toward about 12.8% as productivity per fee earner rises and integration costs drop out."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.2771"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light with a base-year tangible return of 1.0, so new investment earns well above the 9.46% hurdle. I assume heavy competition erodes that to about 35%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
+       },
+       {
+        "id": "P6",
+        "quote": "With AMS now part of Korn Ferry, we have brought together two iconic brands to create a global leader in talent and organizational consulting."
+       },
+       {
+        "id": "P3",
+        "quote": "Fee revenue increased by $177.4 million, or 7%, to $2,907.5 million in fiscal 2026"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Organic growth is about 7% with growing backlog and bookings, and AMS adds inorganic revenue in FY27 and FY28. AMS's revenue is not in the packet, so years 1-2 are a wide estimate. Growth then fades toward a mid-single-digit cyclical rate."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature people-services business with cyclical, pay-linked search fees should grow somewhat below the nominal anchor, so I use 3.0%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_op_margin",
+      "risk": "Hiring downturn hits search and RPO volumes, with restructuring needed as in FY24"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "AMS integration disappoints or growth is weaker than assumed, and AI-enabled insourcing takes search share"
+     },
+     {
+      "bear_value": 0.024,
+      "input_hit": "terminal_growth",
+      "risk": "AMS funding raises debt and lowers terminal growth in a lasting slowdown"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       0.09,
+       0.06,
+       0.02,
+       0.014999999999999996,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.024
+     },
+     "bull": {
+      "long_run_op_margin": 0.135,
+      "rev_growth": [
+       0.15,
+       0.12,
+       0.08,
+       0.075,
+       0.07
+      ],
+      "terminal_growth": 0.037
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt was only $398.8 million at July 31, 2026, but AMS closed afterward and the packet does not say how it was funded, so the debt level may change."
+     },
+     "margin_position": "The FY26 operating margin of 12.75% is near the top of its own range: 0.0762 in FY24, 0.1254 in FY25, and a 5-year median of about 0.125. The recovery came from lower restructuring and a lower compensation ratio (64.2% of fee revenue versus 66.8% in FY24) on rising search volumes. Search and RPO revenue is tied to hiring cycles, so the margin is not a permanent level. The AMS acquisition adds lower-margin RPO work and integration costs.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 27.7% base-year rate is in line with the Q1 FY27 provision of 24,648 on pretax income of 94,145 (about 26%), so it looks sustainable."
+     },
+     "why": "FY26 is a growth year (revenue +6.4%) with no restructuring, so it is close to a mid-to-high-cycle year. Q1 FY27 operating margin was about 12.2% (93,380 on 764,622), so the run-rate matches the base year. The closed AMS acquisition changes the scale and mix from FY27, and its size, price and funding are not in the packet, so year 1 growth is a wide estimate."
+    },
+    "value_at_old_defaults": 91.17984148411551,
+    "values": {
+     "base": 108.94527931219748,
+     "bear": 82.78407770548834,
+     "bull": 146.5232474481831
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 91.17984148411551,
+  "value_at_old_defaults_quoted": 91.17984148411551,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 5653717877.36597,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 52519000.0,
@@ -15,7 +498,7 @@
   "Stockholders approved the Korn Ferry Amended and Restated Stock Incentive Plan. The plan adds 1,400,000 shares available for stock-based awards and extends the plan's term."
  ],
  "in_code_book": false,
- "ke": 0.09442594437424717,
+ "ke": 0.09462594437424718,
  "market_cap_at_publish": 4091913784,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +506,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 93.1277494799756,
-  "3000": 91.3339415721515
+  "1000": 106.35653059910967,
+  "3000": 108.94527931219748
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1506,102 +1989,17 @@
   ]
  },
  "ticker": "KFY",
- "upside": 0.17225521617388617,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 up, 3000 none)"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.02337564451777726,
-    0.02337564451777726,
-    0.02337564451777726,
-    0.02337564451777726,
-    0.02337564451777726
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1264760918825848,
-   "normalized.margin": 0.1264760918825848,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.12212570394260171,
-   "op_margin.y2": 0.1264760918825848,
-   "rev_growth.y1": 0.06858986811414547,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09442594437424717
-  },
-  "numbers": {
-   "capex": [
-    0.02337564451777726,
-    0.02337564451777726,
-    0.02337564451777726,
-    0.02337564451777726,
-    0.02337564451777726
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1264760918825848,
-   "normalized.margin": 0.1264760918825848,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.12212570394260171,
-   "op_margin.y2": 0.1264760918825848,
-   "rev_growth.y1": 0.06858986811414547,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09442594437424717
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The Outlook section of the Q1 FY'27 earnings release is cut from the packet, so no year-1 revenue, margin or capex guidance sentence is available.",
-   "The evidence does not give the purchase price, closing date or revenue and profit contribution of the AMS acquisition, so its effect on revenue growth and operating margin cannot be measured.",
-   "P6.s126 says the company cannot estimate the AMS integration and acquisition costs for the second quarter of fiscal 2027, so their size and their effect on the year-1 GAAP margin are unknown.",
-   "No evidence shows how the funding of the AMS acquisition affects debt, cash or interest expense after July 31, 2026."
-  ],
-  "year": 3
- },
- "value_base": 91.3339415721515,
- "value_bear": 89.92693490582283,
- "value_bull": 94.97807330353119,
+ "upside": 0.381680596368589,
+ "valuation": null,
+ "value_base": 107.65090495565357,
+ "value_bear": 84.84689002668611,
+ "value_bull": 139.67172753306983,
  "value_per_filed_share": {
-  "base": 91.3339415721515,
-  "bear": 89.92693490582283,
-  "bull": 94.97807330353119
+  "base": 107.65090495565357,
+  "bear": 84.84689002668611,
+  "bull": 139.67172753306983
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +7.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +14.9 points a year against the required return over 3 years"
 }
