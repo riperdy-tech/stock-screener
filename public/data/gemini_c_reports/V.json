@@ -1,24 +1,526 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -6.1911355900789555,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 74,
  "claims_supported": 69,
  "date": "2026-11-17T14:14:23Z",
+ "decided": {
+  "flags": [
+   "run 1000: tax_rate_representative_no: The FY26 effective rate of 16.3% included a one-time $314 million deferred tax benefit, Q4 ran at 18.5%, and global minimum tax and IRS exams are open, so about 18% is more sustainable.",
+   "run 1000: shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
+   "run 1000: shares_reconciled_with_class_eps",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 3000: tax_rate_representative_no: The 16.3% FY2026 rate includes a one-time $314 million deferred tax benefit and legal-settlement benefits, while the Q4 rate was 18.5% and global minimum taxes are phasing in.",
+   "run 3000: shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
+   "run 3000: shares_reconciled_with_class_eps",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0801 (equity return r 0.0936), F 10",
+  "run_gap": 0.002680063411740199,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 124000000.0,
+       "printed": 124,
+       "quotes": [
+        {
+         "id": "F3",
+         "quote": "(Gains) losses on equity investments, net | (124) | 87 | 94"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Net gains on equity investments in non-operating income, not expected to recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 12938000000.0,
+     "excess_cash_before": 12938000000.0,
+     "k0_after": 617956782.4000015,
+     "k0_before": 493956782.4000015,
+     "k0_interest": 758000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 124000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 23001209688.76483,
+     "x0_before": 23104954251.467285
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 639180217108.8817,
+     "seam_ratio": 1.0757412089874692,
+     "tv_share": 0.47228637453879646,
+     "wedge_rate_5": -0.03848230216092211
+    },
+    "flags": [
+     "tax_rate_representative_no: The FY26 effective rate of 16.3% included a one-time $314 million deferred tax benefit, Q4 ran at 18.5%, and global minimum tax and IRS exams are open, so about 18% is more sustainable.",
+     "shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
+     "shares_reconciled_with_class_eps",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.036,
+     "fade_years": 10,
+     "long_run_op_margin": 0.62,
+     "op_margin": [
+      0.62,
+      0.622,
+      0.624,
+      0.625,
+      0.625
+     ],
+     "return_on_new_investment_long_run": 0.6,
+     "rev_growth": [
+      0.12,
+      0.115,
+      0.105,
+      0.1,
+      0.09
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0801 (equity return r 0.0936), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 69
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.56,
+      0.66
+     ],
+     "rev_growth_y3": [
+      0.07,
+      0.125
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0350"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex has run at 3.2-3.7% of revenue over five years and was 3.6% in FY26, with continuing technology investment, so I hold it near the recent level."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "On an annual basis, we see more than $40 trillion(2) of addressable consumer spend, excluding Russia and China."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth runs well above terminal at year 5, and a large addressable market in cash, check and ACH conversion supports a long, gradual fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Continued pressures on pricing, incentives, fee discounts and rebates could moderate our growth."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Pricing and incentive pressure, regulation and competition cap the margin. Network economics and a litigation provision that continues at a lower rate suggest a margin near 62%, below the ex-litigation 65%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Litigation provision | 1,764 | 2,562 | 462"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-09-30 | $40,000.0 million | 0.1134 | 0.5998"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The GAAP margin of 61.2% carries a litigation provision of $1.76 billion that I assume continues at a lower share of revenue. Costs grow close to revenue, so I model a slight margin recovery to about 62.5%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 1.0000"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The network needs little tangible capital, so the base-year return on tangible capital is very high. I assume a long-run return well above the 8% break-even, but far below the base figure as acquisitions and competition erode returns."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Net revenue | $45,903 | $40,000 | $35,926 | 15% | 11%"
+       },
+       {
+        "id": "P3",
+        "quote": "Exchange rate movements increased our net revenue growth by approximately one percentage point."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY26 growth of 15% included about one point of FX help and event-driven marketing and other revenue growth, so I fade growth from 12% toward 9% as volume growth of about 9-10% and value-added services continue but the base grows and incentives rise."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nominal growth is slightly below the long-run anchor because Visa is already very large and faces regulation and alternative rails. The addressable spend is still large."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "rev_growth",
+      "risk": "U.S. debit interchange cap cut, the Credit Card Competition Act, routing mandates or loss of a large client reduce volume and pricing"
+     },
+     {
+      "bear_value": 0.56,
+      "input_hit": "long_run_op_margin",
+      "risk": "Client incentives keep growing faster than gross revenue, and litigation provisions stay high, compressing the margin"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Stablecoins, real-time payment networks, agentic commerce and sovereign payment systems disintermediate Visa and cut long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.56,
+      "rev_growth": [
+       0.085,
+       0.08000000000000002,
+       0.07,
+       0.06500000000000002,
+       0.05500000000000001
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.66,
+      "rev_growth": [
+       0.14,
+       0.135,
+       0.125,
+       0.12000000000000001,
+       0.11
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $22 billion is under one year of operating income and Visa has been refinancing maturities with new notes, so the level looks stable relative to size."
+     },
+     "margin_position": "The GAAP operating margin of 61.2% is below the 2024 level of 65.7%, mainly because of the interchange litigation provision (3.8% of revenue in FY26, 6.4% in FY25, 1.3% in FY24). Excluding that provision the margin is about 65%, and rising marketing, personnel and card-benefit costs are slowly eroding it. Visa is an asset-light network, so the margin is structurally high and not cyclical.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The FY26 effective rate of 16.3% included a one-time $314 million deferred tax benefit, Q4 ran at 18.5%, and global minimum tax and IRS exams are open, so about 18% is more sustainable."
+     },
+     "why": "FY26 revenue grew 15%, or 14% in constant dollars, helped by event-driven marketing services and other revenue growth of 40%. That is above the longer-run pace of about 10-11%. The GAAP margin includes a litigation provision that has recurred every year in different amounts, so I keep a provision in the forward margins instead of stripping it out. The base year is broadly representative but runs a little hot on growth."
+    },
+    "value_at_old_defaults": 181.93377659855688,
+    "values": {
+     "base": 345.92755094741904,
+     "bear": 233.757214137779,
+     "bull": 470.70825701685385
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 124000000.0,
+       "printed": 124,
+       "quotes": [
+        {
+         "id": "P4",
+         "quote": "$124 million of net gains from equity investments"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Net gains on equity investments, included in non-operating income and not expected to recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 12938000000.0,
+     "excess_cash_before": 12938000000.0,
+     "k0_after": 617956782.4000015,
+     "k0_before": 493956782.4000015,
+     "k0_interest": 758000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 124000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 23001209688.76483,
+     "x0_before": 23104954251.467285
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 637435242879.4984,
+     "seam_ratio": 1.0716246040323887,
+     "tv_share": 0.4691648203045877,
+     "wedge_rate_5": -0.036456546831836904
+    },
+    "flags": [
+     "tax_rate_representative_no: The 16.3% FY2026 rate includes a one-time $314 million deferred tax benefit and legal-settlement benefits, while the Q4 rate was 18.5% and global minimum taxes are phasing in.",
+     "shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
+     "shares_reconciled_with_class_eps",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.036,
+     "fade_years": 10,
+     "long_run_op_margin": 0.63,
+     "op_margin": [
+      0.625,
+      0.63,
+      0.633,
+      0.635,
+      0.635
+     ],
+     "return_on_new_investment_long_run": 0.6,
+     "rev_growth": [
+      0.125,
+      0.115,
+      0.105,
+      0.095,
+      0.085
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0801 (equity return r 0.0936), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 69
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.58,
+      0.66
+     ],
+     "rev_growth_y3": [
+      0.08,
+      0.13
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0350"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Pooled capex intensity is 3.5%, with recent years at about 3.6-3.7%, so I hold 3.6%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We face intense competition in our industry."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A very large, scaled network with a long runway from digital shift and cross-border growth supports a long fade, while competition and regulation limit it to 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-09-30 | $35,926.0 million | 0.1002 | 0.6568"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Pre-FY2025 margins were around 64-66%, but regulation, incentive growth and litigation provisions that keep recurring argue for fading to about 63%, a little below the median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-09-30 | $45,903.0 million | 0.1476 | 0.6124"
+       },
+       {
+        "id": "P3",
+        "quote": "Litigation provision | 1,764 | 2,562 | 462 | (31%) | NM"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base margin of 61.2% is below the history of 64-66% because of litigation and severance. I assume a partial recovery as the litigation provision eases, with core costs growing about as fast as revenue."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property, equipment and technology | (1,671) | (1,482) | (1,257)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The network is asset-light, so returns on new tangible capital are far above the 8% break-even. I assume 60% rather than the capped 100%, allowing for acquisitions and technology spend."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Net revenue | $45,903 | $40,000 | $35,926 | 15% | 11%"
+       },
+       {
+        "id": "P4",
+        "quote": "Net revenue of $12.1B, an increase of 13% on a nominal and constant-dollar basis"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY2026 growth was 15%, with Q4 at 13%, and part of the lift came from one-off events (World Cup, Olympics) and currency. I fade growth from 12.5% as volume growth near 9% is supported by cross-border and VAS, while the base grows and incentives rise faster than revenue."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth in line with the nominal growth anchor, with a modest haircut for competition from alternative rails."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "rev_growth",
+      "risk": "U.S. debit interchange caps cut sharply, the Credit Card Competition Act passes, or stablecoin and real-time rails divert volume, slowing growth"
+     },
+     {
+      "bear_value": 0.55,
+      "input_hit": "long_run_op_margin",
+      "risk": "Client incentives and litigation provisions keep rising faster than revenue, compressing the long-run margin"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Regulation, payment sovereignty and disintermediation lower long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.58,
+      "rev_growth": [
+       0.1,
+       0.09000000000000001,
+       0.08,
+       0.07,
+       0.06000000000000001
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.66,
+      "rev_growth": [
+       0.15000000000000002,
+       0.14,
+       0.13,
+       0.12000000000000001,
+       0.11000000000000001
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $22.1 billion is small against operating income of 28,110 million and is routinely refinanced, with $3.0 billion issued against maturities."
+     },
+     "margin_position": "The GAAP operating margin of 61.2% is below the 5-year median of about 64.2%. The gap comes mostly from the litigation provision (1,764 million, about 3.8% of revenue) and severance and Visa Foundation items. The core network margin is still very high. Incentives and non-GAAP costs grew slightly faster than revenue.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 16.3% FY2026 rate includes a one-time $314 million deferred tax benefit and legal-settlement benefits, while the Q4 rate was 18.5% and global minimum taxes are phasing in."
+     },
+     "why": "FY2026 revenue grew 15% (14% constant-dollar), driven by volume, transactions and cross-border activity. The GAAP margin carries a litigation charge that has recurred every year, so it is roughly a normal level, though slightly depressed by one-off severance and charitable items. VAS and other revenue growth of 31% and 40% was helped by one-off sponsorship events, so year-1 growth should step down."
+    },
+    "value_at_old_defaults": 181.93377659855688,
+    "values": {
+     "base": 345.00168386625614,
+     "bear": 262.94724512455315,
+     "bull": 450.07817156355327
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 181.93377659855688,
+  "value_at_old_defaults_quoted": 181.93377659855688,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 658801025394.8392,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 1907000000.0,
  "flags": [
   "Visa signed a definitive agreement to acquire BioCatch for $2.4 billion in cash. The deal is subject to closing conditions, including regulatory approvals.",
   "Visa acquired Prisma and Newpay in Argentina for total cash consideration of $1.5 billion.",
   "Visa issued fixed-rate senior notes in a public offering with an aggregate principal amount of $3.0 billion."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09360305732783658,
+ "market_cap_at_publish": 777609507548,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 416.77,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 345.92755094741904,
+  "3000": 345.00168386625614
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -901,8 +1403,17 @@
   ]
  },
  "ticker": "V",
+ "upside": -0.1527868178049855,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "value_base": 345.4646174068376,
+ "value_bear": 248.35222963116607,
+ "value_bull": 460.39321429020356,
+ "value_per_filed_share": {
+  "base": 345.4646174068376,
+  "bear": 248.35222963116607,
+  "bull": 460.39321429020356
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -6.2 points a year against the required return over 3 years"
 }

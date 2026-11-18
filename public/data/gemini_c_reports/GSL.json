@@ -1,24 +1,596 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 66.78184786849725,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 89,
  "claims_supported": 88,
  "date": "2026-11-16T10:07:59Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Gross debt of $694.7m will rise as the $1bn facility is drawn for the 15 newbuilds from late 2028, and further for the two additional ships, so the year-end 2025 level will not hold relative to size.",
+   "run 1000: shares_from_ix_class_members:0001140361-26-009637:CommonClassAMember",
+   "run 1000: shares_reconciled_with_class_eps",
+   "run 1000: quotes_verified: 14 of 15",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: shares_from_ix_class_members:0001140361-26-009637:CommonClassAMember",
+   "run 3000: shares_reconciled_with_class_eps",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.5505 (persist), growth 0.0375, terminal RONIC 0.0874 (equity return r 0.0946), F 10",
+  "run_gap": 0.14364415871555705,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 875000.0,
+       "printed": 875,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "include $875, $3,627 and $108 expenses relating to prepayment fees and acceleration of deferred financing costs"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "prepayment fees and acceleration of deferred financing costs inside 2025 interest and other finance expenses"
+      }
+     ],
+     "cash_interest_returned": 813068.2730923691,
+     "cash_not_free": {
+      "amount": 20000000.0,
+      "printed": 20.0,
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our credit facilities require that we maintain $20.0 million minimum liquidity at each quarter end on group basis."
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "minimum group liquidity the credit facilities require at each quarter end"
+     },
+     "excess_cash_after": 253876000.0,
+     "excess_cash_before": 273876000.0,
+     "k0_after": 28112926.04497989,
+     "k0_before": 29800994.31807226,
+     "k0_interest": 38966000.0,
+     "one_offs_charge": 875000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 407009073.9550201,
+     "x0_before": 405321005.68192774
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 5715140785.904856,
+     "seam_ratio": 1.0308504682992172,
+     "tv_share": 0.35559919755880426,
+     "wedge_rate_5": -0.21024354064374712
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Gross debt of $694.7m will rise as the $1bn facility is drawn for the 15 newbuilds from late 2028, and further for the two additional ships, so the year-end 2025 level will not hold relative to size.",
+     "shares_from_ix_class_members:0001140361-26-009637:CommonClassAMember",
+     "shares_reconciled_with_class_eps",
+     "quotes_verified: 14 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.05,
+     "fade_years": 10,
+     "long_run_op_margin": 0.4,
+     "op_margin": [
+      0.49,
+      0.48,
+      0.47,
+      0.45,
+      0.44
+     ],
+     "return_on_new_investment_long_run": 0.1,
+     "rev_growth": [
+      0.045,
+      0.02,
+      0.03,
+      0.09,
+      0.11
+     ],
+     "terminal_growth": 0.028
+    },
+    "old_defaults_inputs": "margin 0.5505 (persist), growth 0.0375, terminal RONIC 0.0874 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 88
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.33,
+      0.47
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.07
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0175"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed ratio of about 1.75% covers only vessel expenditures and excludes drydocking, which is paid inside operating cash flow. I use 5% for upgrades and scrubber or compliance spending, and growth capital is picked up through the return on new investment."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "100% contract cover for 2026, 98% for 2027, and 74% for 2028"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Charters of 3 to 4 years and an orderbook running to 2030 mean the margin and growth normalize over a long period, so I use a 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $766.5 million | 0.0779 | 0.5677"
+       },
+       {
+        "id": "P2",
+        "quote": "global containership orderbook to fleet ratio was 34.5%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is a cyclical lessor whose current margin sits above its own long-run median. The 2012-2018 record shows margins from 40% down to negative, and the orderbook-to-fleet ratio of 34.5% suggests future supply pressure. I assume about half the gap closes, which gives about 40%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Operating Income | 191.3 | 230.3"
+       },
+       {
+        "id": "P4",
+        "quote": "General and administrative expenses | 16.0 | 8.6"
+       },
+       {
+        "id": "P3",
+        "quote": "The average cost per ownership day for the year ended December 31, 2025 was $8,231, compared to $7,670 for the prior year period"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The base margin includes the sale gain. The first half of 2026 ran near 48% with higher G&A and operating costs. Cost per ownership day is rising 7%, the fleet is old, and the newbuilds add depreciation and early-life drag, so I let the margin slip gradually from about 49%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0874."
+       },
+       {
+        "id": "P7",
+        "quote": "for an aggregate contract price of approximately $163 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 22% base return on tangible capital reflects ships bought at lower prices and written down. New ships cost about $80m each at current prices, with no tax, so I assume about 10%, just above the 8.74% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "3Q 2026 operating revenue of $201.4 million. 9M 2026 operating revenue of $598.1 million."
+       },
+       {
+        "id": "P5",
+        "quote": "100% contract cover for 2026, 98% for 2027, and 74% for 2028"
+       },
+       {
+        "id": "P7",
+        "quote": "The Additional Newbuilds are scheduled to be delivered in the fourth quarter of 2029"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 is almost fully contracted, and 9M revenue of $598.1m points to about +4.5% for the year. 2027 is flat-to-low growth because the fleet is stable and cover is 98%. Newbuild deliveries start in late 2028 and mostly land in 2029-1Q30, which lifts growth in years 4-5. Older ships may be sold, so I assume partial offset."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P7",
+        "quote": "had an average age weighted by TEU capacity of 18.4 years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fleet growth depends on acquisitions and newbuilds and is cyclical, and the average fleet age is 18.4 years. I set growth a little below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.3,
+      "input_hit": "long_run_op_margin",
+      "risk": "Charter rates fall at rechartering as container supply grows, and margins revert toward the lower 2012-2018 levels"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Newbuild delays, unchartered additional ships, or the sale of old ships cut the expected growth in 2029-2030"
+     },
+     {
+      "bear_value": 0.4,
+      "input_hit": "op_margin",
+      "risk": "Trade disruption from tariffs, port fees or conflict hurts charterers and renewal rates"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.33,
+      "rev_growth": [
+       0.015,
+       -0.009999999999999998,
+       0.0,
+       0.06,
+       0.08
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.47,
+      "rev_growth": [
+       0.085,
+       0.06000000000000001,
+       0.07,
+       0.13,
+       0.15000000000000002
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Gross debt of $694.7m will rise as the $1bn facility is drawn for the 15 newbuilds from late 2028, and further for the two additional ships, so the year-end 2025 level will not hold relative to size."
+     },
+     "margin_position": "The 2025 operating margin of 56.8% is inflated by a $46.3m gain on vessel sales, worth about 6 points. Without it the margin is about 51%. That is still high against the 2012-2018 history, which includes years of negative margins, and it rests on a strong charter market and fixed-rate contracts signed at cyclical highs. Fixed-rate charters, not spot exposure, are what keep the margin steady in the near term.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "Income taxes were nil in 2025 and 2024 and negligible in 2023, which fits a Marshall Islands shipowner, though the filing warns that moving cash between jurisdictions could trigger tax."
+     },
+     "why": "2025 operating income includes a one-time vessel sale gain, so the base margin overstates what the fleet earns. The first half of 2026 shows a margin of about 48% (operating income 191.3 on revenue 396.8), with a 2025 comparison that also included a gain. Near-term cash flows are visible because 2026 and 2027 are almost fully contracted, but the margin should drift down as charters roll, costs inflate and newbuild depreciation rises."
+    },
+    "value_at_old_defaults": 185.16111147469837,
+    "values": {
+     "base": 179.09033666045497,
+     "bear": 134.83182938796614,
+     "bull": 255.2726112350065
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 4952000.0,
+       "printed": 4952,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Fair value adjustment on derivative asset | (4,952) | (5,170) | (5,372)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "fair value adjustment on derivative asset (interest rate cap premium); caps run only through 4Q 2026"
+      },
+      {
+       "amount": 875000.0,
+       "printed": 875,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "include $875, $3,627 and $108 expenses relating to prepayment fees"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "prepayment fees and acceleration of deferred financing costs within finance expenses"
+      }
+     ],
+     "cash_interest_returned": 813068.2730923691,
+     "cash_not_free": {
+      "amount": 20000000.0,
+      "printed": 20.0,
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our credit facilities require that we maintain $20.0 million minimum liquidity at each quarter end on group basis."
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "minimum group liquidity required at each quarter end under the credit facilities"
+     },
+     "excess_cash_after": 253876000.0,
+     "excess_cash_before": 273876000.0,
+     "k0_after": 23160926.044979893,
+     "k0_before": 29800994.31807226,
+     "k0_interest": 38966000.0,
+     "one_offs_charge": 5827000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 411961073.9550201,
+     "x0_before": 405321005.68192774
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4917773989.863042,
+     "seam_ratio": 1.0340436866449767,
+     "tv_share": 0.3868094687949478,
+     "wedge_rate_5": -0.07614141078770151
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "shares_from_ix_class_members:0001140361-26-009637:CommonClassAMember",
+     "shares_reconciled_with_class_eps",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.18,
+     "fade_years": 10,
+     "long_run_op_margin": 0.42,
+     "op_margin": [
+      0.5,
+      0.49,
+      0.48,
+      0.47,
+      0.46
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.045,
+      0.03,
+      0.02,
+      0.05,
+      0.08
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.5505 (persist), growth 0.0375, terminal RONIC 0.0874 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 88
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.33,
+      0.5
+     ],
+     "rev_growth_y3": [
+      -0.02,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "for an aggregate contract price of approximately $163 million"
+       },
+       {
+        "id": "P6",
+        "quote": "the scheduled dates for which span from late 2028 through 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed ratio of 0.0175 excludes vessel purchases. 2026-2030 includes payments on 17 newbuilds (the two options cost about $163M) delivering late 2028 to 2030, so I set a much higher ratio. The price of the 15 initial ships is not in the packet, so this is a wide estimate."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The charter rate that we will be able to achieve on renewal will be affected by market conditions at that time."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years lets the ship-lease margin and growth normalise as current charters roll off and the fleet is renewed."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2016-12-31 | $166.8 million | 0.0116 | -0.1239"
+       },
+       {
+        "id": "P2",
+        "quote": "The container shipping industry is cyclical and volatile"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The industry is cyclical, with operating margins negative in 2016-2018 and above 0.50 recently. Following the cyclical base rate, I keep about half of the gap above the long-run median, which gives roughly 0.42. Old ships are rechartered at market rates and newbuilds earn lower margins."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Gain on sale of vessels | (46,272) | 0 | 0"
+       },
+       {
+        "id": "P4",
+        "quote": "Operating Income | 191.3 | 230.3"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin was inflated by the vessel-sale gain, and H1 2026 operating income fell to 191.3 from 230.3 as the prior-year gain dropped out and G&A and vessel operating costs rose. I assume a gradual decline from about 0.50 as costs inflate, the fleet ages, and new vessels add depreciation."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0874."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The filed return on tangible capital of 0.22 reflects depreciated old ships bought cheaply, so it will not repeat. New vessels at current prices earn closer to cost of capital, though the breakeven is 0.0874, so I set 0.11."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "contracted revenue backlog of $3.4 billion over an average of 3.5 years"
+       },
+       {
+        "id": "P4",
+        "quote": "Time charter revenues | 384.1 | 376.3"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Cover is 100% for 2026 and 98% for 2027, and H1 2026 time charter revenue grew about 2% (384.1 vs 376.3), so near-term growth is modest, lifted by renewals and the three vessels bought in December 2025/January 2026. Growth picks up in 2029-2030 as 15 newbuilds (deliveries from late 2028) arrive, partly offset by retirement of old ships and rechartering risk in 2028."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "the global containership orderbook to fleet ratio was 34.5%"
+       },
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run growth is below the nominal anchor: container trade grows only modestly and GSL's newbuild orderbook (34.5% of fleet industry-wide) points to supply pressure. Fleet renewal is also needed to offset ageing ships."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.3,
+      "input_hit": "long_run_op_margin",
+      "risk": "Container charter rates fall on rechartering (orderbook oversupply, tariffs, port fees), compressing margins on 2028+ renewals"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Newbuild deliveries are delayed or Additional Newbuilds go uncharted, so growth stalls and capex is stranded"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Newbuilds funded at a cost above their returns (debt costs and prices), lowering returns on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.33,
+      "rev_growth": [
+       0.0049999999999999975,
+       -0.010000000000000002,
+       -0.02,
+       0.010000000000000002,
+       0.04
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.5,
+      "rev_growth": [
+       0.08499999999999999,
+       0.06999999999999999,
+       0.06,
+       0.09,
+       0.12
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of $694.7M is modest against EBIT, but the $1B facility for 15 newbuilds (drawn 2028-2030) and the 2027 notes refinancing will change the level."
+     },
+     "margin_position": "The 2025 operating margin of 0.5677 is the high end of GSL's history. It includes a $46.3M one-off vessel-sale gain; without it the margin is about 0.51. First-half 2026 was 0.48 (191.3/396.8) and the full year looks near 0.50. Margins were negative in 2016-2018, so current levels reflect a strong charter market and long fixed-rate contracts, and they should fade partway toward the long-run median.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "Income taxes were nil in 2025 and 2024 as a Marshall Islands shipping owner, which looks sustainable, although the 20-F warns of possible taxes."
+     },
+     "why": "2025 operating income includes a $46.3M gain on vessel sales, and revenue was lifted by $13.5M of non-cash charter-liability amortization. Underlying margin is therefore about 0.50-0.51, not 0.57. Charter cover of 100% for 2026 and 98% for 2027 keeps near-term earnings visible. The 2029-2030 newbuild deliveries and rechartering of old ships at 2028+ market rates are the key uncertainties."
+    },
+    "value_at_old_defaults": 185.16111147469837,
+    "values": {
+     "base": 155.088889742053,
+     "bear": 106.87235509276269,
+     "bull": 230.77345595839142
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 185.16111147469837,
+  "value_at_old_defaults_quoted": 185.16111147469837,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 6008899394.130892,
  "family": "commodity",
+ "far_from_price": true,
+ "filed_shares": 35962136.0,
  "flags": [
   "Global Ship Lease recorded impairment of vessels of 18,830 (table in thousands) in 2023.",
   "Global Ship Lease announced an increase in its supplemental quarterly dividend by $0.075 per Class A common share, representing a 16.7% increase on its quarterly dividend of $0.45 per Class A common share.",
   "Global Ship Lease entered into a loan agreement with UBS AG for $85.0 million at SOFR plus a margin of 2.15% per annum with a maturity of three years to refinance existing loans, and fully repaid its E.SUN ($5.9 million), Macquarie ($17.5 million), and HCOB-CACIB ($46.8 million) credit facilities."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09462594437424718,
+ "market_cap_at_publish": 1506834428,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "diluted share count not filed",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 41.81,
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 179.09033666045497,
+  "3000": 155.088889742053
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1260,8 +1832,17 @@
   ]
  },
  "ticker": "GSL",
+ "upside": 2.9877635408864522,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "diluted share count not filed"
+ "value_base": 167.089613201254,
+ "value_bear": 120.85209224036441,
+ "value_bull": 243.02303359669895,
+ "value_per_filed_share": {
+  "base": 167.089613201254,
+  "bear": 120.85209224036441,
+  "bull": 243.02303359669895
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +66.8 points a year against the required return over 3 years"
 }
