@@ -1,22 +1,811 @@
 {
  "alpha_pts": null,
- "analysis": "not run",
+ "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": null,
- "claims_supported": null,
- "date": "2026-11-16T14:38:23Z",
- "family": null,
- "flags": [],
+ "claims": 66,
+ "claims_supported": 63,
+ "date": "2026-11-18T00:19:34Z",
+ "family": "financial",
+ "flags": [
+  "The company cut the cession rate on its quota share reinsurance treaty from 40% to 25%, so it retains more premium and receives less ceding commission.",
+  "The company renewed its catastrophe excess of loss reinsurance program on June 1 at a risk-adjusted rate decrease at the upper end of 15-20% declines.",
+  "The company announced it began offering homeowners insurance in North Carolina, extending its footprint beyond Florida, Georgia and South Carolina."
+ ],
  "in_code_book": false,
  "ke": null,
- "model": "gemini-4-hydrogen-high",
- "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2007587/000200758726000136/R4.htm",
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
  "qwen_book": null,
+ "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "source": "screener list refresh",
- "tasks": {},
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the cited items",
+    "claim": "AII sells personal residential property insurance through its carrier subsidiary AIIC. Its customers are single-family homeowners and condominium owners, plus owners of vacant dwellings and investment properties. The business is predominantly in Florida, which was 91.1% of policies in-force at quarter end.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "we provide personal residential property insurance for single- family homeowners and condominium owners, as well as coverage for vacant dwellings and investment properties, predominantly in Florida.",
+     "Florida represented 91.1% of our policies in-force as of September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "AII runs a vertically integrated model and mainly writes in the 'Voluntary Market', where it chooses which risks to offer. That market was 75.5% of in-force premium at quarter end. Expansion states (South Carolina, Georgia and North Carolina) supported builder-agent relationships and were 6.9% of Voluntary Market in-force premium.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We employ a vertically integrated operating model whereby we control or manage substantially all aspects of insurance underwriting, actuarial analysis, pricing, distribution, and claims processing and adjudication.",
+     "As of September 30, 2026, 75.5% of our in-force premium was in the insurance market in which we underwrite and sell policies to policyholders where we choose to offer coverage without the assistance of residual market mechanisms"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (annual report)",
+    "claim": "Distribution runs through several channels: independent insurance agents, new-construction home builder agents, and national carriers that have restricted their Florida homeowners writing and refer business to AII.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We offer our insurance coverages through multiple distribution channels in the Voluntary Market, including independent insurance agents, new construction home builder agents, and national insurance carriers that have restricted their writing of residential homeowners insurance policies in Florida and refer business to us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the share of revenue is read from the income statement",
+    "claim": "Revenue is mostly net premiums earned, which is gross premiums earned less premiums ceded to reinsurers. In the third quarter, net premiums earned were 101,161 of total revenues of 113,492 (table in thousands). Policy fees of 3,535 and net investment income of 8,415 (table in thousands) made up most of the rest.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "We generate revenue primarily from insurance premiums earned, net of reinsurance ceded."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Reinsurance is a large cost layer between gross and net revenue. AII ceded 60.4% of gross premiums earned in the nine months, down from 72.0% a year earlier. Ceded premiums earned fell to 439,971 from 472,275 (table in thousands) while gross premiums earned rose to 728,036 from 655,844 (table in thousands).",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "We ceded 60.4% and 72.0% of our gross premiums earned in the nine months ended September 30, 2026 and September 30, 2025, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the expense comparison is read from the income statement",
+    "claim": "A change in the quota share treaty shifted how premium and costs show up. AII cut the quota share cession rate from 40% to 25%. It therefore keeps more premium but receives less ceding commission, which raises policy acquisition and general and administrative expenses. Third-quarter policy acquisition expenses were 18,043 versus 6,254, and general and administrative expenses were 17,564 versus 7,347 (table in thousands).",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%, which impacted the comparability of our results between periods.",
+     "A lower cession rate increases the amount of premiums we retain on policies we write, and the reduction in the cession rate also reduces the ceding commission received on our quota share reinsurance treaty, which increases policy acquisition expenses and general and administrative expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Revenue growth is driven by policy count and premium written. Management cites voluntary new business of about 41,000 policies in the third quarter, up 57% year over year. Policies in-force reached 481,446, up 18.6% over the prior year. Gross premiums written were 293,299 versus 239,100 (table in thousands).",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "writing approximately 41,000 voluntary new business policies, an increase of 57% year over year",
+     "Policies in-force and in-force premium were 481,446 and $1,069 million, respectively, up 18.6% and 17.4%, respectively, over September 30, 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Citizens take-outs are a secondary and shrinking growth source. AII assumed no Citizens policies in the third quarter because none met its standards, and it expects take-outs to be a smaller share of gross premiums written. Heavy take-out periods lower reported expense and loss ratios.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In 2026, we expect take-outs to be a smaller portion of our gross premiums written compared to 2024 and 2025.",
+     "As a result, periods of heavy take-out activity result in lower expense ratios and loss ratios."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Loss costs are the main variable expense and swing with hurricane and named-storm activity from June 1 to November 30. Third-quarter net losses and loss adjustment expenses were 38,267 (table in thousands), a 36.6% loss ratio. That included net catastrophe losses of 5,064 (table in thousands).",
+    "facts": [
+     "P3",
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "This seasonality may result in significant variability in our losses and loss adjustment expenses (\u201cLAE\u201d) depending on the number, location and strength of hurricanes and other named storms during these months as compared to other months."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items; the 15-20% figure is management's description in the second-quarter release",
+    "claim": "The catastrophe reinsurance program renews each June 1 and is a major cost driver. Its pricing and terms materially influence results. Management said the 2026-2027 renewal had a risk-adjusted rate decrease at the upper end of 15-20% declines. The ceded catastrophe excess of loss premiums ratio was 42.7% in the third quarter.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Our reinsurance purchasing, including our catastrophe excess of loss reinsurance coverages, which commence on June 1st annually, also materially influences our financial results and is impacted by changes in reinsurance rates or alterations in terms and conditions, including in attachment or loss retention levels.",
+     "Successfully renewed 2026-2027 catastrophe excess of loss reinsurance program on June 1, 2026 with a risk- adjusted rate decrease at the upper end of 15-20% declines"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (annual report)",
+    "claim": "Policy acquisition costs cover distribution commissions, third-party administrator fees, premium taxes and inspection fees. They are partly offset by ceding commission from quota share reinsurers.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Policy acquisition expenses are costs we incur in connection with the acquisition of an insurance policy including commissions paid to distribution partners at the time of policy issuance, policy administration fees paid to third-party administrators at the time of policy issuance, premium taxes, and inspection fees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated for the income definition; the link to unearned premiums is inferred from the balance sheet",
+    "claim": "Investment income is a smaller second revenue stream earned on cash and fixed-maturity holdings. Third-quarter net investment income was 8,415 versus 6,906 (table in thousands). The balance sheet held total investments of 529,688 and cash and cash equivalents of 247,354 (table in thousands), alongside unearned premiums of 593,416.",
+    "facts": [
+     "P2",
+     "F2",
+     "F1"
+    ],
+    "quotes": [
+     "Net investment income includes interest earned from cash, cash equivalents, fixed maturity securities and short-term investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Underwriting profit is tracked through the combined ratio, the sum of the loss ratio and the expense ratio. The third-quarter combined ratio was 70.6% versus 78.9%, with net income of 28,354 versus 13,163 (table in thousands).",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Combined ratio is a key business metric, defined as the sum of the loss ratio and the expense ratio."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the cited 10-K Item 1.",
+    "claim": "The company is a leading Florida residential property writer. It ranked sixth by policies in-force at the last 10-K year-end, with 421,866 policies in-force and $944.6 million of gross premiums written for that year.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We were the sixth largest writer of residential property insurance in Florida based on policies in-force (fifth excluding Citizens and national carriers) as of December 31, 2025",
+     "As of December 31, 2025, our policies in-force were 421,866, and for the year ended December 31, 2025, our gross premiums written were $944.6 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "The book is still growing. Policies in-force reached 481,446 and in-force premium $1,069 million at the latest quarter-end, up 18.6% and 17.4% on the prior year. Management also reports about 41,000 voluntary new business policies in the quarter, up 57%.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Policies in-force and in-force premium were 481,446 and $1,069 million, respectively, up 18.6% and 17.4%, respectively, over September 30, 2025",
+     "writing approximately 41,000 voluntary new business policies, an increase of 57% year over year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "Customer retention improved in the last full year, which supports the franchise: 82.8% versus 75.2% the year before.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We experienced policy retention rates of 82.8% during 2025, up from 75.2% during 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited filings; the comparison of the two percentages is inferred.",
+    "claim": "The mix has shifted toward voluntary-market business. It was 75.5% of in-force premium at the latest quarter-end, against 69.1% at the prior year-end. Management says it does not rely on Citizens take-outs for growth.",
+    "facts": [
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "As of September 30, 2026, 75.5% of our in-force premium was in the insurance market in which we underwrite and sell policies to policyholders"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items; the explanation is inferred from the expense ratio and the reinsurance disclosure.",
+    "claim": "Profitability is strong but mixed. The third-quarter combined ratio was 70.6% against 78.9% a year earlier. Over nine months it was 69.2% against 64.0%, and return on equity was 30.2% against 43.9%.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "\u2022Combined ratio of 70.6% compared to 78.9% in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A; figures for expenses are from the release tables.",
+    "claim": "The company has chosen to keep more of its own premium. It cut its quota share cession rate from 40% to 25%, and ceded 60.4% of gross premiums earned over nine months against 72.0%. This raises retained earnings power but also acquisition expenses and net risk.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%, which impacted the comparability of our results between periods.",
+     "A lower cession rate increases the amount of premiums we retain on policies we write, and the reduction in the cession rate also reduces the ceding commission received on our quota share reinsurance treaty, which increases policy acquisition expenses and general and administrative expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K release and 10-K MD&A.",
+    "claim": "Reinsurance costs are a named external pressure, though the latest renewal was favourable. The company reports a catastrophe excess of loss renewal with a risk-adjusted rate decrease at the upper end of 15-20% declines.",
+    "facts": [
+     "P7",
+     "P2"
+    ],
+    "quotes": [
+     "with a risk- adjusted rate decrease at the upper end of 15-20% declines",
+     "In recent years, reinsurance rates have significantly increased and terms and conditions have tightened (including reductions on what we are able to charge for claims administration), particularly for catastrophe exposed property lines of business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Percentages are stated in the cited items; the vulnerability is inferred from the concentration and the stated seasonality.",
+    "claim": "Geographic concentration in Florida is the main structural vulnerability. Florida was 93.7% of policies and 96.5% of in-force premium at the 10-K year-end, and 91.1% of policies at the latest quarter-end. Results are seasonal around hurricane season, and the third quarter included current-year net catastrophe losses of 5,064 (table in thousands) against none a year earlier.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Florida represented 93.7% of our policies in-force as of December 31, 2025 and 96.5% of our in-force premium as of December 31, 2025.",
+     "Florida represented 91.1% of our policies in-force as of September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q and release; the effect on ratios is stated for periods of heavy take-out activity.",
+    "claim": "Citizens take-outs, an earlier growth source, are fading. Management expects them to be a smaller share of gross premiums written, and none were assumed in the third quarter. This pushes growth toward voluntary-market writing.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In 2026, we expect take-outs to be a smaller portion of our gross premiums written compared to 2024 and 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the 10-Q; it is a management belief.",
+    "claim": "Florida's legislative reforms are cited as a tailwind that supports the company's competitive position.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Recent legislative changes, however, have improved operating conditions in the Florida insurance market, including a reduction in claims litigation activity since the reforms were enacted in December 2022."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1.",
+    "claim": "Competition may increase. Management says other carriers may re-enter or expand in Florida as market conditions improve.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "we believe other carriers may choose to re- enter or expand their business in Florida"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as management belief in the 10-K Item 1.",
+    "claim": "Management cites technology and in-house claims handling as differentiators, but the evidence offers no independent test of them.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We believe our investment in technology sets us apart from our competitors and positions us to identify emerging loss trends and to quickly and effectively adapt to changing market conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A; the link to standing with partners is inferred.",
+    "claim": "Financial strength ratings from Demotech and Kroll support the carrier's standing with distribution partners, regulators and reinsurers.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "AIIC, our statutory insurance carrier, maintains a Financial Stability Rating of \u201cA\u201d (Exceptional) by Demotech, and a financial strength rating of \u201cBBB+\u201d with a stable outlook from the Kroll Bond Rating Agency, LLC."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and release; the drivers are read from the cash flow and income statements.",
+    "claim": "Capital has grown. Shareholders' equity was 391,158 (table in thousands) against 337,022 (table in thousands) at the prior year-end. Book value per share was $19.96, up 23.7% on the prior year.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "\u2022Book value per share of $19.96, up 23.7% over September 30, 2025 and up 5.8% over June 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Counts are stated in the release; the effect on risk and rates is not shown.",
+    "claim": "New growth initiatives are scaling quickly but are recent. Voluntary new residential policies in the Tri-County region of Florida were 8,003 against 233 a year earlier. The company is also expanding in South Carolina, Georgia and North Carolina, which were 6.9% of voluntary-market in-force premium.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "8,003 voluntary new residential business policies in Tri-County region of Florida compared to 233 in the third quarter of 2025, a 34x increase"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet; the counter-point is inferred from the liability lines.",
+    "claim": "Liquidity at the latest quarter-end is sizeable. Cash and cash equivalents were 247,354 (table in thousands), up from 203,902 at the prior year-end. Restricted cash was 25,494 and total investments were 529,688.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and cash flow statement; the lease counter-point is stated on the balance sheet.",
+    "claim": "The company carries no financial debt at the latest quarter-end. Long-term debt was 0 against 618 at the prior year-end, and the cash flow statement shows a 618 repayment in the period.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the balance sheet; the characterisation as insurance-operating liabilities is inferred from the line items.",
+    "claim": "Total liabilities of 1,232,524 (table in thousands) are mostly insurance-operating items, set against shareholders' equity of 391,158. The largest are unearned premiums of 593,416, unpaid losses and loss adjustment expenses of 273,038, and reinsurance payable of 266,695, which was 96,555 at the prior year-end.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the cash flow statement; the quality assessment is inferred from the working-capital lines.",
+    "claim": "Operating cash generation was strong and well above reported earnings. Net cash provided by operating activities was 247,692 (table in thousands) over nine months, against 88,003 a year earlier and net income of 82,410.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the cash flow statement and earnings release; the interpretation is inferred from the reconciliation.",
+    "claim": "Earnings are largely cash-backed, with no large non-cash support. Stock-based compensation was 1,526 against 10,533 a year earlier, and income taxes paid were 32,394. The prior-year earnings contained one-time items. Adjusted net income was 83,059 against 83,364, while GAAP net income was 82,410 against 78,753.",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement; the 'first time' remark is inferred from a 0 for dividends in the prior-year column.",
+    "claim": "Cash was deployed mainly into investments and, for the first time in these periods, into dividends. Investing activities used 198,254 (table in thousands), including 210,377 of fixed-maturity purchases. Cash dividends paid were 19,971, and financing activities used 20,709 in total. Cash, cash equivalents and restricted cash still rose by 28,729.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Debt balance stated in the balance sheet; the absence of maturities and facilities is inferred from the packet, which does not cover the notes.",
+    "claim": "The company has no debt falling due in the evidence, so there is no refinancing need from borrowings. Any near-term obligations would be met from cash, investments and operating cash flow. The packet gives no debt maturity table, credit facility or covenant information.",
+    "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Additionally, the Company maintains a BB+ issuer rating, with a stable outlook, from the Kroll Bond Rating Agency, LLC."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Ratios and treaty change stated in the quarterly MD&A; the effect on capital is inferred; the recoverable is stated in the balance sheet.",
+    "claim": "Reinsurance dependence has eased, which raises retained risk and the call on the company's own capital. The company ceded 60.4% of gross premiums earned over nine months against 72.0% a year earlier. It cut its quota share cession rate from 40% to 25% from the start of 2026.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "We ceded 60.4% and 72.0% of our gross premiums earned in the nine months ended September 30, 2026 and September 30, 2025, respectively.",
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%, which impacted the comparability of our results between periods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet; the mechanism is inferred.",
+    "claim": "The investment portfolio carries unrealized losses. Fixed maturities were 457,660 at fair value against an amortized cost of 468,042, and accumulated other comprehensive income swung to (7,781) from 1,928 at the prior year-end.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited release; the conditions are inferred from the mechanism.",
+    "claim": "Voluntary-market new business is the main growth engine: about 41K new voluntary policies were sold in the third quarter, up 57% year over year, and policies in-force reached 481,446, up 18.6%. For this to continue, production must keep running above the pace of non-renewals and the book must stay profitable.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Growth accelerated with 41K voluntary new business policies sold in the third quarter, up 57% year-over- year",
+     "Policies in-force and in-force premium were 481,446 and $1,069 million, respectively, up 18.6% and 17.4%, respectively, over September 30, 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Counts stated in the release; the higher-premium intent is stated in the 10-K MD&A; the conditions are inferred.",
+    "claim": "Geographic and product mix shifts add to voluntary growth: 8,003 new voluntary residential policies in the Tri-County region of Florida, versus 233 a year earlier (a 34x increase). Management says it plans to capitalize on higher average premiums there. This continues only if Tri-County and middle-aged-home business is written at adequate prices and stays within the company's catastrophe exposure limits.",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "8,003 voluntary new residential business policies in Tri-County region of Florida compared to 233 in the third quarter of 2025, a 34x increase",
+     "we plan to capitalize on higher average premiums"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Percentages and the lower-rate statement are in the cited filings; the conditions are inferred.",
+    "claim": "Expansion beyond Florida adds a smaller increment: South Carolina, Georgia and North Carolina made up 6.9% of voluntary in-force premium at the latest quarter-end, versus 5.0% at the prior year-end. Continuation requires builder-agency relationships to keep producing, and the new states tend to carry lower average rates than Florida.",
+    "facts": [
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "6.9% was collectively in South Carolina, Georgia, and North Carolina, where we have strategically expanded to support and enhance our relationships with our builder agency network",
+     "the new states we are expanding into, including South Carolina, Georgia and North Carolina, tend to have lower average rates than Florida"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited MD&A and release; the exposure point is inferred.",
+    "claim": "A lower quota share cession is lifting net earned premium: the cession rate was cut from 40% to 25%, ceded premiums fell to 60.4% of gross premiums earned from 72.0% for the nine months, and net premiums earned rose 94.5% in the third quarter. For this to keep working, the company must be able to carry more retained risk and absorb the lower ceding commission.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%",
+     "Net premiums earned of $101.2 million, an increase of 94.5% compared to the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Renewal outcome stated in the August release; the ratio is from the third-quarter table; the conditions are inferred.",
+    "claim": "Lower catastrophe reinsurance cost is supporting retained earnings from growth: the company renewed its catastrophe excess of loss program with a risk-adjusted rate decrease at the upper end of 15-20% declines, and the ceded catastrophe excess of loss premiums ratio was 42.7% in the third quarter versus 48.0%. This depends on reinsurance pricing and capacity staying favorable at future renewals.",
+    "facts": [
+     "P7",
+     "P3"
+    ],
+    "quotes": [
+     "Successfully renewed 2026-2027 catastrophe excess of loss reinsurance program on June 1, 2026 with a risk- adjusted rate decrease at the upper end of 15-20% declines"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Management's view is stated in the 10-Q MD&A; the ratio change is from the cited tables; whether it persists is inferred.",
+    "claim": "Florida's legal and regulatory reforms underpin profitability of the growth: the loss ratio was 36.6% in the third quarter versus 54.1%, and the net underlying loss ratio was 31.7% versus 49.9%. For this to hold, claims litigation must stay subdued and no severe storm may disrupt results in the hurricane season.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Recent legislative changes, however, have improved operating conditions in the Florida insurance market, including a reduction in claims litigation activity since the reforms were enacted in December 2022."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited MD&A and release.",
+    "claim": "Citizens take-outs were an earlier growth source but are not expected to drive the current year: management expects them to be a smaller portion of gross premiums written, and none were assumed in the third quarter. Growth therefore depends on voluntary production rather than on assumed policies.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In 2026, we expect take-outs to be a smaller portion of our gross premiums written compared to 2024 and 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance and per-share figures are stated in the cited items; the link to growth capacity is inferred.",
+    "claim": "Capital is accumulating alongside growth: shareholders' equity rose to 391,158 (table in thousands) from 337,022, and book value per share was $19.96, up 23.7% over a year earlier. Continued growth requires earnings to keep building equity to support more written premium; the evidence does not give regulatory capital requirements.",
+    "facts": [
+     "F1",
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Book value per share of $19.96, up 23.7% over September 30, 2025 and up 5.8% over June 30, 2026"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item",
+    "claim": "The company cut the cession rate on its quota share reinsurance treaty from 40% to 25%, so it retains more premium and receives less ceding commission.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%, which impacted the comparability of our results between periods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (Q2 2026 earnings release headline)",
+    "claim": "The company renewed its catastrophe excess of loss reinsurance program on June 1 at a risk-adjusted rate decrease at the upper end of 15-20% declines.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Successfully renewed 2026-2027 catastrophe excess of loss reinsurance program on June 1, 2026 with a risk- adjusted rate decrease at the upper end of 15-20% declines"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The company announced it began offering homeowners insurance in North Carolina, extending its footprint beyond Florida, Georgia and South Carolina.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "in January 2026, we announced that we began offering our homeowners insurance product to North Carolina residents, representing a strategic extension of our footprint beyond Florida, Georgia, and South Carolina"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (cash flow statement)",
+    "claim": "The company paid cash dividends of 19,971 (table in thousands) in the nine months ended September 30, 2026, against 0 in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Cash dividends paid | (19,971) | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The company completed its IPO of 6,875,000 shares at $16.00 per share, 6,250,000 of them sold by the company, with gross proceeds to the company of $100 million.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "On May 9, 2025, we completed our initial public offering"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Concentration and seasonality are stated in the cited item. The loss mechanism is inferred from them.",
+    "claim": "Results depend on one hurricane-exposed state: Florida was 91.1% of policies in-force at the latest quarter-end, and earnings are described as highly seasonal.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Florida represented 91.1% of our policies in-force as of September 30, 2026.",
+     "Our financial results are highly seasonal due to the occurrence of hurricanes and tropical storms, which typically occur between June 1st and November 30th of each year in Florida and the other states in which we operate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The treaty change, the lower ceded share and the expense effect are stated in the cited item. The added loss exposure is inferred.",
+    "claim": "The company retains more risk and bears more cost after cutting its quota share cession rate from 40% to 25%. Ceded premiums fell to 60.4% of gross premiums earned from 72.0%, and the quarterly expense ratio rose to 34.0% from 24.8%.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%, which impacted the comparability of our results between periods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from balance sheet size; the evidence does not state any counterparty problem.",
+    "claim": "The balance sheet relies heavily on reinsurers: reinsurance recoverable is 264,703 (table in thousands) and prepaid reinsurance premiums are 414,559 (table in thousands), against shareholders' equity of 391,158 (table in thousands).",
+    "facts": [
+     "F1",
+     "P1"
+    ],
+    "quotes": [
+     "We purchase excess of loss, quota share, per risk and facultative reinsurance from highly rated third-party reinsurers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Growth figures are stated; the loss risk is inferred from the stated strategy.",
+    "claim": "Rapid growth in newer segments could outrun underwriting experience: voluntary new residential policies in the Tri-County region were 8,003 versus 233 a year earlier, and middle-aged Florida homes were 8,561 versus 568.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "However, through our continued expansion into the Tri-County region of Florida and into insuring middle-aged homes, we plan to capitalize on higher average premiums."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are stated in the statements. The explanation of the slowdown is inferred from the line items and the non-GAAP reconciliation.",
+    "claim": "Profit growth has slowed on a nine-month view: net income rose only 4.6% to 82,410 (table in thousands) from 78,753 (table in thousands), and return on equity fell to 30.2% from 43.9%.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The expected decline and the ratio effect are stated in the cited items. The impact on future ratios is inferred.",
+    "claim": "A past growth driver is fading and helped ratios: the company expects Citizens take-outs to be a smaller part of gross premiums written, and it assumed no Citizens policies in the third quarter.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In 2026, we expect take-outs to be a smaller portion of our gross premiums written compared to 2024 and 2025.",
+     "As a result, periods of heavy take-out activity result in lower expense ratios and loss ratios.",
+     "Assumed no policies from Citizens Property Insurance Corporation (\u201cCitizens\u201d), as we determined that no policies from Citizens met our underwriting and targeted profitability standards"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from balance sheet and cash flow line items; the evidence states no liquidity concern.",
+    "claim": "Operating cash flow of 247,692 (table in thousands) was boosted by a 170,140 (table in thousands) increase in reinsurance payable, and reinsurance payable now stands at 266,695 (table in thousands), up from 96,555 (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "The mechanism is stated in P3; the open question is inferred from the mixed quarterly and nine-month ratio comparisons.",
+    "claim": "How far the lower quota share cession rate (from 40% to 25%) will keep raising the expense ratio and lifting retained premium, and what that means for the combined ratio. Q3 combined ratio was 70.6% against 78.9% a year earlier, while the nine-month figure was 69.2% against 64.0%.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Effective January 1, 2026, we reduced the percentage of our cession rate on our quota share reinsurance treaty from 40% to 25%, which impacted the comparability of our results between periods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Seasonality is stated in P3; the catastrophe loss figure is in the P4 reconciliation; the open question is inferred.",
+    "claim": "Whether Q4 2026 brings hurricane losses, given that Q3 carried only a small net catastrophe loss of 5,064 (table in thousands) and the storm season runs to the end of November. Q3 results cannot show how the full season ends.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our business is seasonal, as hurricanes and other named storms typically occur in the geographies where we operate between June 1st and November 30th of each year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Take-out expectations are stated in P3 and P4; the effect on ratios is partly stated and partly inferred.",
+    "claim": "How growth and ratios hold up with no Citizens take-outs. Management expects take-outs to be a smaller share of gross premiums written, and none were assumed in Q3. Voluntary-market writings would have to carry growth instead.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In 2026, we expect take-outs to be a smaller portion of our gross premiums written compared to 2024 and 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Growth figures are stated in P4; loss quality is inferred and not addressed in the evidence.",
+    "claim": "Whether the sharp growth in voluntary new business in Tri-County Florida (8,003 policies against 233 a year earlier) and in middle-aged homes will earn acceptable loss experience. Claims on these newer segments are too young to show.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "8,003 voluntary new residential business policies in Tri-County region of Florida compared to 233 in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are printed in F2 and the P4 reconciliation; the tax-rate question is inferred.",
+    "claim": "What a normal effective tax rate is going forward. Nine-month income tax expense was 30,885 (table in thousands) against 7,027 a year earlier, when 2025 included a change in tax status item of 9,722 (table in thousands).",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Balances and flows are printed in F1 and F3; whether they reverse is inferred and not stated.",
+    "claim": "How much of the nine-month operating cash flow of 247,692 (table in thousands), against 88,003 a year earlier, is timing of reinsurance payables rather than earnings. Reinsurance payable rose to 266,695 from 96,555 (balance sheet in thousands), and a 170,140 inflow was recorded for the period (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The dividend amount is printed in F3; policy and sustainability are not stated in the packet.",
+    "claim": "Whether the 19,971 (table in thousands) of cash dividends paid in the nine months is a recurring policy and what the dividend and capital-return plan is. No dividends were paid in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances are in F1 and the reserve development line is in P4; adequacy is inferred, not stated.",
+    "claim": "Whether reserves of 273,038 (balance sheet in thousands) are adequate for the faster-growing book. Unpaid losses and LAE rose only modestly from 266,591 while gross premiums earned and policies in-force grew. The nine-month 2026 reconciliation shows no prior-year net reserve development.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "The renewal is stated in P7 and ceded ratios in P3; the net effect is inferred.",
+    "claim": "How much the June 1, 2026 catastrophe reinsurance renewal, at a lower risk-adjusted rate, will reduce ceded costs and lift net margins over the rest of the treaty year. This is separate from the lower quota share cession.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Successfully renewed 2026-2027 catastrophe excess of loss reinsurance program on June 1, 2026"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
  "ticker": "AII",
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2007587/000200758726000136/R4.htm"
+ "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
 }
