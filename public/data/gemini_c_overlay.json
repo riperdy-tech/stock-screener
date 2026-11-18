@@ -2,10 +2,10 @@
  "count": 175,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-18T04:05:52Z",
+ "generated_at": "2026-11-18T05:19:04Z",
  "list_covered": 160,
  "list_names": 160,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -435,25 +435,53 @@
   "BHC": {
    "alpha_pts": null,
    "analysis": "complete",
-   "claims": 113,
-   "claims_supported": 105,
-   "date": "2026-11-16T16:04:02Z",
+   "claims": 143,
+   "claims_supported": 138,
+   "date": "2026-11-18T05:03:11Z",
    "family": "operating",
    "flags": [
-    "Bausch Health recorded 1,426 (table in millions, USD) in goodwill impairments during the nine months ended Sep. 30, 2026.",
-    "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity, and completion remains subject to targeted debt leverage ratios and required approvals.",
-    "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in an initial public offering, and Bausch Health indirectly holds 310,449,643 common shares representing approximately 87% of Bausch + Lomb's outstanding common shares as of October 21, 2026."
+    "Bausch Health recorded goodwill impairments of 1,426 (table in USD millions) for the nine-month reporting period, and 0 for the three-month reporting period.",
+    "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity.",
+    "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in the Bausch + Lomb initial public offering."
    ],
    "in_code_book": false,
    "ke": null,
+   "loss_record": {
+    "cause": "cannot_tell",
+    "explanation": "The provided filings include income statement figures only for the three and nine months ended September 30, 2026 and 2025\u2014where the nine-month 2026 pretax loss coincides with both $1,426 million of goodwill impairments and $1,196 million of interest expense\u2014while omitting the statements of operations and MD&A results discussions for fiscal years 2018 through 2025. Without earnings, expense, interest, impairment, or discontinued-operations breakdowns for 2018 through 2025, the evidence does not establish why the multi-year profit record is thin.",
+    "label": "the filings in the packet do not say",
+    "quotes": [
+     {
+      "id": "F2",
+      "quote": "Goodwill impairments | 0 | 0 | 1,426 | 0"
+     },
+     {
+      "id": "F2",
+      "quote": "Operating income | 983 | 619 | 773 | 1,339"
+     },
+     {
+      "id": "F2",
+      "quote": "Interest expense | (398) | (412) | (1,196) | (1,207)"
+     },
+     {
+      "id": "F2",
+      "quote": "Income (loss) before income taxes | 597 | 218 | (409) | 311"
+     },
+     {
+      "id": "P1",
+      "quote": "Our revenues for 2025, 2024 and 2023 were $10,266 million, $9,625 million and $8,757 million, respectively."
+     }
+    ],
+    "version": "why_losses.v1 2026-11-18 WO_NC5"
+   },
    "model": "gemini-4-hydrogen-high",
-   "no_value_reason": "no usable tax rate in the filings",
+   "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
    "qwen_book": null,
-   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
-   "source": "screener list refresh",
+   "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+   "source": "on request (tax fallback rerun)",
    "valued": false,
    "verdict": "NO_CALL",
-   "verdict_reason": "no usable tax rate in the filings"
+   "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
   },
   "BJ": {
    "alpha_pts": -17.964873310245782,

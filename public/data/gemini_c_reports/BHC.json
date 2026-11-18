@@ -2,39 +2,96 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 113,
- "claims_supported": 105,
- "date": "2026-11-16T16:04:02Z",
+ "claims": 143,
+ "claims_supported": 138,
+ "date": "2026-11-18T05:03:11Z",
  "family": "operating",
  "flags": [
-  "Bausch Health recorded 1,426 (table in millions, USD) in goodwill impairments during the nine months ended Sep. 30, 2026.",
-  "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity, and completion remains subject to targeted debt leverage ratios and required approvals.",
-  "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in an initial public offering, and Bausch Health indirectly holds 310,449,643 common shares representing approximately 87% of Bausch + Lomb's outstanding common shares as of October 21, 2026."
+  "Bausch Health recorded goodwill impairments of 1,426 (table in USD millions) for the nine-month reporting period, and 0 for the three-month reporting period.",
+  "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity.",
+  "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in the Bausch + Lomb initial public offering."
  ],
  "in_code_book": false,
  "ke": null,
+ "loss_record": {
+  "cause": "cannot_tell",
+  "explanation": "The provided filings include income statement figures only for the three and nine months ended September 30, 2026 and 2025\u2014where the nine-month 2026 pretax loss coincides with both $1,426 million of goodwill impairments and $1,196 million of interest expense\u2014while omitting the statements of operations and MD&A results discussions for fiscal years 2018 through 2025. Without earnings, expense, interest, impairment, or discontinued-operations breakdowns for 2018 through 2025, the evidence does not establish why the multi-year profit record is thin.",
+  "label": "the filings in the packet do not say",
+  "quotes": [
+   {
+    "id": "F2",
+    "quote": "Goodwill impairments | 0 | 0 | 1,426 | 0"
+   },
+   {
+    "id": "F2",
+    "quote": "Operating income | 983 | 619 | 773 | 1,339"
+   },
+   {
+    "id": "F2",
+    "quote": "Interest expense | (398) | (412) | (1,196) | (1,207)"
+   },
+   {
+    "id": "F2",
+    "quote": "Income (loss) before income taxes | 597 | 218 | (409) | 311"
+   },
+   {
+    "id": "P1",
+    "quote": "Our revenues for 2025, 2024 and 2023 were $10,266 million, $9,625 million and $8,757 million, respectively."
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "no usable tax rate in the filings",
+ "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+ "source": "on request (tax fallback rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated directly in the Q3 2026 10-Q MD&A.",
-    "claim": "Bausch Health develops, manufactures, and markets branded, generic, and branded generic pharmaceuticals, OTC products, and medical and aesthetic devices across approximately 90 countries.",
+    "basis": "stated in P5 and P1 (P1 reported approximately 88% Bausch + Lomb ownership as of February 11, 2026)",
+    "claim": "Bausch Health develops, manufactures, and markets branded, generic, and branded generic pharmaceuticals, OTC products, and aesthetic medical devices primarily in GI, hepatology, neuroscience/neurology, and dermatology, plus eye health pharmaceuticals, OTC products, and medical devices through its approximately 87% ownership of Bausch + Lomb.",
     "facts": [
+     "P1",
      "P5"
     ],
     "quotes": [
-     "We are a global, diversified specialty pharmaceutical and medical device company that develops, manufactures and markets, primarily in the therapeutic areas of gastroenterology (\u201cGI\u201d), hepatology, neuroscience and dermatology, a broad range of branded, generic and branded generic pharmaceuticals, over-the-counter (\u201cOTC\u201d) products and aesthetic medical devices, and, through our approximately 87% ownership of Bausch + Lomb Corporation (\u201cBausch + Lomb\u201d or \u201cB+L\u201d), branded and branded generic pharmaceuticals, OTC products and medical devices (contact lenses, intraocular lenses, ophthalmic surgical equipment) in the therapeutic areas of eye health.",
+     "We are a global, diversified specialty pharmaceutical and medical device company that develops, manufactures and markets, primarily in the therapeutic areas of gastroenterology (\u201cGI\u201d), hepatology, neuroscience and dermatology, a broad range of branded, generic and branded generic pharmaceuticals, over-the-counter (\u201cOTC\u201d) products and aesthetic medical devices, and, through our approximately 87% ownership of Bausch + Lomb Corporation (\u201cBausch + Lomb\u201d or \u201cB+L\u201d), branded and branded generic pharmaceuticals, OTC products and medical devices (contact lenses, intraocular lenses, ophthalmic surgical equipment) in the therapeutic areas of eye health."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and P1",
+    "claim": "The company markets its products directly or indirectly in approximately 90 countries.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
      "Our products are marketed directly or indirectly in approximately 90 countries."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Q3 2026 10-Q MD&A.",
-    "claim": "Bausch Health organizes its product portfolio into reportable segments: Salix, International, Solta Medical, Diversified, and Bausch + Lomb.",
+    "basis": "stated in P1 and P2",
+    "claim": "The company sells through wholesalers, large distributor and retail customers, exclusive distribution arrangements such as Lundbeck LLC for Xenazine in the U.S., and direct outreach to medical aesthetic providers and consumers, with demand dependent on third-party payor reimbursement and formulary inclusion.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We continue to invest in expanding access to Solta Medical technologies for medical aesthetic providers and consumers in our key markets, including broadening the reach of Thermage\u00ae FLX and strengthening our sales force in North America, Europe and Asia.",
+     "In the U.S., Xenazine\u00ae is distributed for us by Lundbeck LLC under an exclusive marketing, distribution and supply agreement.",
+     "the decline in sales volumes or prices of our products as the result of the concentration of sales to wholesalers;",
+     "the effect of fluctuations in inventory levels or buying patterns by our large distributor and retail customers;",
+     "our dependence on reimbursements from governmental and other third-party payors;",
+     "the impact of potential exclusion from formularies developed by managed care organizations and third-party payors;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and P1",
+    "claim": "Operations are organized into five reportable segments: Salix, International, Solta Medical, Diversified, and Bausch + Lomb.",
     "facts": [
      "P1",
      "P5"
@@ -45,151 +102,158 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Q3 2026 10-Q MD&A.",
-    "claim": "The Salix segment sells GI products in the U.S., with the Xifaxan\u00ae product line representing approximately 85% of Salix segment revenues.",
-    "facts": [
-     "P1",
-     "P5"
-    ],
-    "quotes": [
-     "The Salix segment consists of sales in the U.S. of GI products.",
-     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Q3 2026 10-Q MD&A.",
-    "claim": "The International segment sells branded, branded generic, and OTC pharmaceuticals outside the U.S., while the Diversified segment sells U.S. neuroscience, dermatology, generic, and dentistry products.",
-    "facts": [
-     "P1",
-     "P5"
-    ],
-    "quotes": [
-     "The International segment consists of sales, with the exception of sales of Bausch + Lomb products and Solta Medical aesthetic medical devices, outside the U.S. of branded pharmaceutical products, branded generic pharmaceutical products and OTC products.",
-     "The Diversified segment consists of sales in the U.S. of: (i) pharmaceutical products in the areas of neuroscience and certain other therapeutic classes, (ii) dermatology products, (iii) generic pharmaceutical products and (iv) dentistry products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Q3 2026 10-Q MD&A.",
-    "claim": "The Solta Medical segment generates global revenue from aesthetic medical devices, primarily driven by its Thermage\u00ae skin tightening product line.",
-    "facts": [
-     "P1",
-     "P5"
-    ],
-    "quotes": [
-     "The Solta Medical segment consists of global sales of Solta Medical aesthetic medical devices.",
-     "Solta Medical\u2019s revenue is primarily attributable to the skin tightening market, which is driven by our Thermage\u00ae product line."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q3 2026 10-Q MD&A, 2025 10-K Item 1, and reflected in noncontrolling interest on the Q3 2026 balance sheet.",
-    "claim": "Through an approximately 87% ownership interest in Bausch + Lomb Corporation, Bausch Health operates the Bausch + Lomb segment selling global Vision Care, Surgical, and Pharmaceuticals eye health products.",
+    "basis": "stated in P1, P5, and P7",
+    "claim": "The Salix segment sells U.S. GI products\u2014led by Xifaxan, which represents approximately 85% of Salix segment revenues and generated $2,212 million in 2025\u2014and reported $831 million in revenue in the third quarter of 2026.",
     "facts": [
      "P1",
      "P5",
-     "F1"
-    ],
-    "quotes": [
-     "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026.",
-     "The Bausch + Lomb segment consists of global sales of Bausch + Lomb Vision Care, Surgical and Pharmaceuticals products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Q3 2026 10-Q Statements of Operations.",
-    "claim": "Consolidated revenues were $10,266 million in 2025 and reached $ 8,317 (table in millions) in the first nine months of 2026, primarily from product sales of $ 8,237 (table in millions).",
-    "facts": [
-     "P1",
-     "F2"
-    ],
-    "quotes": [
-     "Our revenues for 2025, 2024 and 2023 were $10,266 million, $9,625 million and $8,757 million, respectively.",
-     "Revenues | $ 2,941 | $ 2,681 | $ 8,317 | $ 7,470",
-     "Revenues | $ 2,912 | $ 2,657 | $ 8,237 | $ 7,388"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q3 2026 8-K earnings release.",
-    "claim": "In the third quarter of 2026, consolidated revenues of $2.94 billion came from Bausch + Lomb ($1.38 billion), Salix ($831 million), International ($299 million), Diversified ($271 million), and Solta Medical ($165 million).",
-    "facts": [
      "P7"
     ],
     "quotes": [
-     "Total consolidated reported revenues were $2.94 billion for the third quarter of 2026, compared with $2.68 billion in the third quarter of 2025, an increase of $260 million, or 10%.",
-     "Bausch + Lomb segment reported revenues were $1.38 billion for the third quarter of 2026, compared with $1.28 billion for the third quarter of 2025, an increase of $94 million, or 7%.",
-     "Salix segment reported revenues were $831 million for the third quarter of 2026, compared with $716 million for the third quarter of 2025, an increase of $115 million, or 16%.",
-     "International segment reported revenues were $299 million for the third quarter of 2026, compared with $286 million for the third quarter of 2025, an increase of $13 million, or 5%.",
-     "Diversified segment reported revenues were $271 million for the third quarter of 2026, compared with $258 million for the third quarter of 2025, an increase of $13 million, or 5%.",
+     "The Salix segment consists of sales in the U.S. of GI products.",
+     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
+     "Our Xifaxan\u00ae product accounted for revenues of $2,212 million, $1,993 million and $1,810 million for 2025, 2024 and 2023, respectively.",
+     "Salix segment reported revenues were $831 million for the third quarter of 2026, compared with $716 million for the third quarter of 2025, an increase of $115 million, or 16%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P5, and P7",
+    "claim": "The International segment sells branded, branded generic, and OTC pharmaceuticals outside the U.S. (excluding Bausch + Lomb and Solta Medical devices) across Canada, Europe, Asia, Latin America, Africa, and the Middle East, generating $299 million in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The International segment consists of sales, with the exception of sales of Bausch + Lomb products and Solta Medical aesthetic medical devices, outside the U.S. of branded pharmaceutical products, branded generic pharmaceutical products and OTC products.",
+     "Our International business includes, with the exception of our Bausch + Lomb and Solta Medical products, sales in Canada, Europe, Asia, Latin America, Africa and the Middle East of branded pharmaceutical products, branded generic pharmaceutical products and OTC products.",
+     "International segment reported revenues were $299 million for the third quarter of 2026, compared with $286 million for the third quarter of 2025, an increase of $13 million, or 5%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P5, and P7",
+    "claim": "The Solta Medical segment sells aesthetic medical devices globally\u2014primarily in the skin tightening market driven by Thermage\u2014and recorded $165 million in revenue in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The Solta Medical segment consists of global sales of Solta Medical aesthetic medical devices.",
+     "Solta Medical\u2019s revenue is primarily attributable to the skin tightening market, which is driven by our Thermage\u00ae product line.",
      "Solta Medical segment reported revenues were $165 million for the third quarter of 2026, compared with $140 million in the third quarter of 2025, an increase of $25 million, or 18% aided by the acquisition of our full service distributor in China."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Item 1A Risk Factors, and Q3 2026 8-K earnings release.",
-    "claim": "Bausch Health sells its products to wholesalers, large distributor and retail customers, medical aesthetic providers, and end consumers, with demand dependent on third-party payor and managed care formulary reimbursement.",
+    "basis": "stated in P1, P5, and P7",
+    "claim": "The Diversified segment sells U.S. neuroscience, dermatology, generic pharmaceutical, and dentistry products (with Arestin representing approximately 95% of Dentistry revenues), generating $271 million in the third quarter of 2026.",
     "facts": [
      "P1",
-     "P2",
+     "P5",
      "P7"
     ],
     "quotes": [
-     "We continue to invest in expanding access to Solta Medical technologies for medical aesthetic providers and consumers in our key markets, including broadening the reach of Thermage\u00ae FLX and strengthening our sales force in North America, Europe and Asia.",
-     "\u2022the decline in sales volumes or prices of our products as the result of the concentration of sales to wholesalers;",
-     "\u2022the effect of fluctuations in inventory levels or buying patterns by our large distributor and retail customers;",
-     "\u2022our dependence on reimbursements from governmental and other third-party payors;",
-     "\u2022the impact of potential exclusion from formularies developed by managed care organizations and third-party payors;"
+     "The Diversified segment consists of sales in the U.S. of: (i) pharmaceutical products in the areas of neuroscience and certain other therapeutic classes, (ii) dermatology products, (iii) generic pharmaceutical products and (iv) dentistry products.",
+     "Arestin\u00ae may be used as part of a periodontal maintenance program, which includes good oral hygiene and SRP and represents approximately 95% of Dentistry revenues.",
+     "Diversified segment reported revenues were $271 million for the third quarter of 2026, compared with $258 million for the third quarter of 2025, an increase of $13 million, or 5%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 8-K earnings release and 2025 10-K Item 1A Risk Factors.",
-    "claim": "Organic revenue performance is driven by product volumes and net pricing (gross selling price less sales deductions), while reported revenue is also moved by acquisitions, divestitures and discontinuations, and foreign exchange.",
+    "basis": "stated in P1, P5, and P7",
+    "claim": "The Bausch + Lomb segment sells Vision Care, Surgical, and Pharmaceuticals eye health products globally, generating $1.38 billion in revenue in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The Bausch + Lomb segment consists of global sales of Bausch + Lomb Vision Care, Surgical and Pharmaceuticals products.",
+     "Bausch + Lomb segment reported revenues were $1.38 billion for the third quarter of 2026, compared with $1.28 billion for the third quarter of 2025, an increase of $94 million, or 7%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and F2",
+    "claim": "Consolidated revenues were $8,757 million in 2023, $9,625 million in 2024, and $10,266 million in 2025; for the 9 months ended Sep. 30, 2026, consolidated revenues were $ 8,317 (table in millions), comprising $ 8,237 of product sales and 80 of other revenues (table in millions).",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "Our revenues for 2025, 2024 and 2023 were $10,266 million, $9,625 million and $8,757 million, respectively.",
+     "Revenues | $ 2,941 | $ 2,681 | $ 8,317 | $ 7,470",
+     "Revenues | $ 2,912 | $ 2,657 | $ 8,237 | $ 7,388",
+     "Revenues | 29 | 24 | 80 | 82"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 and P4",
+    "claim": "Organic revenue is driven by product volumes and net pricing, which reflects gross selling prices net of sales deductions such as provisions for product returns, rebates, chargebacks, discounts, allowances, and wholesaler distribution fees.",
     "facts": [
      "P2",
+     "P4",
      "P7"
     ],
     "quotes": [
      "Organic revenue (non-GAAP) is impacted by changes in product volumes and price.",
      "The price component is made up of two key drivers: (i) changes in product gross selling price and (ii) changes in sales deductions.",
-     "Excluding the impact of acquisitions of $37 million and divestitures and discontinuations of $11 million, revenue increased 8% on an organic1 basis compared with the third quarter of 2025.",
-     "\u2022the reduction of revenues in future fiscal periods due to our policies regarding returns, allowances, and chargebacks;"
+     "provisions for product returns, rebates, chargebacks, discounts and allowances and distribution fees paid to certain wholesalers"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 10-K Item 1 Business and Item 7 MD&A.",
-    "claim": "Bausch Health drives long-term revenue growth through internal R&D pipeline development, new product launches, direct-to-consumer and sales-force investments, and strategic bolt-on acquisitions.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "We allocate resources to promote our core businesses globally through: (i) R&D investment, (ii) strategic licensing agreements and (iii) strategic acquisitions.",
-     "We have continued our investment in Xifaxan\u00ae direct-to-consumer (\u201cDTC\u201d) advertising and new sales force capabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 10-K Item 1 and Item 1A Risk Factors and Q3 2026 10-Q MD&A.",
-    "claim": "Key revenue headwinds include generic competition and patent challenges on Xifaxan\u00ae and Trulance\u00ae, wholesaler inventory fluctuations, and CMS drug price negotiation for Xifaxan\u00ae under the Inflation Reduction Act effective in 2027.",
+    "basis": "stated in P1, P2, P5, and P7",
+    "claim": "Revenue durability faces downward pressure from generic Paragraph IV patent challenges on Xifaxan and Trulance as well as CMS drug price negotiations for Xifaxan under the IRA expected to become effective in 2027.",
     "facts": [
      "P1",
      "P2",
-     "P5"
+     "P5",
+     "P7"
     ],
     "quotes": [
      "The Company has filed lawsuits against third-party generic manufacturers that have sent the Company Notices of Paragraph IV Certification for Trulance\u00ae and Xifaxan\u00ae.",
-     "If we are not successful in defending an attack on our patents and maintaining exclusive rights to market one or more of our products still under patent protection, we could lose a significant portion of sales in a very short period.",
-     "\u2022the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;"
+     "the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;",
+     "the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 10-Q Condensed Consolidated Statements of Operations.",
-    "claim": "Operating expenses for the first nine months of 2026 were 7,544 (table in millions), led by SG&A of 2,602 (table in millions), product COGS of 2,195 (table in millions), goodwill impairments of 1,426 (table in millions), intangible amortization of 693 (table in millions), and R&D of 477 (table in millions).",
+    "basis": "stated in P1, P3, and P7",
+    "claim": "Revenue growth is supported by commercial investments (such as Xifaxan DTC advertising and sales force expansion), an internal R&D pipeline of approximately 80 projects as of December 31, 2025, and bolt-on acquisitions such as Shibo Zhenmei, which added $29 million to Solta Medical revenue in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "We have continued our investment in Xifaxan\u00ae direct-to-consumer (\u201cDTC\u201d) advertising and new sales force capabilities.",
+     "As of December 31, 2025, we had approximately 80 R&D projects in our pipeline.",
+     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "Segment revenues are also influenced by foreign exchange translation, customer and distributor inventory fluctuations, and the Generics business strategy of selling generic and authorized generic versions of branded assets facing loss of exclusivity.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The Company utilizes the Generics business to extend the long-term cash flows from a number of assets that are expected to decline over time due to their loss of exclusivity, by launching and selling generic versions of certain branded assets including authorized generics (\u201cAG\u201d).",
+     "foreign currency exposure on the translation into U.S. dollars of the financial results of our international operations;",
+     "the effect of fluctuations in inventory levels or buying patterns by our large distributor and retail customers;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2",
+    "claim": "In the 9 months ended Sep. 30, 2026, total expenses were 7,544 against revenues of $ 8,317 (table in millions), driven by SG&A of 2,602, product cost of goods sold of 2,195, goodwill impairments of 1,426, intangible amortization of 693, and R&D of 477 (table in millions).",
     "facts": [
      "F2"
     ],
@@ -204,8 +268,36 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 10-Q Balance Sheet and Statements of Operations.",
-    "claim": "Long-term debt of 19,771 non-current and 866 current (table in millions) drove interest expense of (1,196) (table in millions) in the first nine months of 2026, turning operating income of 773 (table in millions) into a pre-tax loss of (409) (table in millions).",
+    "basis": "stated in P2",
+    "claim": "Manufacturing and operating costs are sensitive to inflation, labor costs, reliance on a limited number of suppliers for certain finished products and raw materials, and duties, tariffs, and trade restrictions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our global business may be negatively affected by local economic conditions, including heightened inflation, increasing labor costs, potential recession, the imposition of or adverse amendments to duties, tariffs and other trade restrictions (including any retaliation to such measures) and currency exchange rate fluctuations, which could adversely affect our cost to manufacture and provide our products and services and revenues generated through sales of such products and services.",
+     "our dependence on a limited number of sources for certain of our finished products and raw materials;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, F3, and P2",
+    "claim": "Additional major cost and cash outflow drivers include internal R&D operations (approximately 1,400 R&D and quality assurance employees across 25 facilities as of December 31, 2025), payments of accrued legal settlements of (176) in the 9 months ended Sep. 30, 2026 (table in millions), and B+L Separation advisory and expected dyssynergy costs.",
+    "facts": [
+     "F3",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "As of December 31, 2025, approximately 1,400 dedicated R&D and quality assurance employees in 25 R&D facilities were involved in our R&D efforts internally.",
+     "Payments of accrued legal settlements | (176) | (198)",
+     "In addition, if the B+L Separation is not completed or if it is delayed or restructured, we will still be required to pay certain costs and expenses incurred in connection therewith, such as legal, accounting, and other professional and advisory fees.",
+     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and F2",
+    "claim": "Substantial debt obligations\u2014866 of current and 19,771 of non-current long-term debt as of Sep. 30, 2026 (table in millions)\u2014generate heavy interest expense of (1,196) in the 9 months ended Sep. 30, 2026 (table in millions), turning operating income of 773 into a net loss of (725) (table in millions).",
     "facts": [
      "F1",
      "F2"
@@ -215,58 +307,28 @@
      "Non-current portion of long-term debt | 19,771 | 20,592",
      "Operating income | 983 | 619 | 773 | 1,339",
      "Interest expense | (398) | (412) | (1,196) | (1,207)",
-     "Income (loss) before income taxes | 597 | 218 | (409) | 311"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 10-K Item 1A Risk Factors and Q3 2026 10-Q Statements of Operations and Cash Flows.",
-    "claim": "Cost and cash flow drivers also include inflation, labor costs, manufacturing and supply-chain disruptions, duties and tariffs, legal settlements, restructuring, and expenses and potential dyssynergies from the B+L Separation.",
-    "facts": [
-     "P2",
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Our global business may be negatively affected by local economic conditions, including heightened inflation, increasing labor costs, potential recession, the imposition of or adverse amendments to duties, tariffs and other trade restrictions (including any retaliation to such measures) and currency exchange rate fluctuations, which could adversely affect our cost to manufacture and provide our products and services and revenues generated through sales of such products and services.",
-     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant.",
-     "Restructuring, integration and separation costs | 10 | 17 | 32 | 49",
-     "Payments of accrued legal settlements | (176) | (198)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q3 2026 10-Q Condensed Consolidated Statements of Cash Flows.",
-    "claim": "Operating cash flow was 1,714 (table in millions) in the first nine months of 2026, while capital expenditures were (252) (table in millions) and financing cash flows included 2,930 of debt issuances and (3,082) of debt repayments (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 1,714 | 905",
-     "Purchases of property, plant and equipment | (252) | (305)",
-     "Issuance of long-term debt, net of discounts | 2,930 | 10,421",
-     "Repayments of long-term debt and other financial liabilities | (3,082) | (10,839)"
+     "Net income (loss) | 446 | 181 | (725) | 223"
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited items (10-K Item 1 Business and 10-Q Part I Item 2 MD&A)",
-    "claim": "Bausch Health markets approximately 1,000 products directly or indirectly in approximately 90 countries across five reportable segments: Salix, International, Solta Medical, Diversified, and Bausch + Lomb.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1 Business section.",
+    "claim": "Bausch Health markets approximately 1,000 products directly or indirectly in approximately 90 countries across its reportable segments: Salix, International, Solta Medical, Diversified, and Bausch + Lomb.",
     "facts": [
-     "P1",
-     "P5"
+     "P1"
     ],
     "quotes": [
-     "Currently, we have approximately 1,000 products in our portfolio of products, which fall into five reportable segments: (i) Salix, (ii) International, (iii) Solta Medical, (iv) Diversified and (v) Bausch + Lomb.",
-     "Our products are marketed directly or indirectly in approximately 90 countries."
+     "The Company\u2019s products are marketed directly or indirectly in approximately 90 countries.",
+     "Currently, we have approximately 1,000 products in our portfolio of products, which fall into five reportable segments:",
+     "Our portfolio of products falls into five reportable segments: (i) Salix, (ii) International, (iii) Solta Medical, (iv) Diversified and (v) Bausch + Lomb."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited items (10-K Item 1 Business and Item 7 MD&A)",
-    "claim": "Annual consolidated revenues expanded from $8,757 million in 2023 to $9,625 million in 2024 and $10,266 million in 2025.",
+    "basis": "Stated directly in the 2025 Form 10-K Items 1 and 7.",
+    "claim": "Bausch Health's consolidated revenues grew from $8,757 million in 2023 to $9,625 million in 2024 and $10,266 million in 2025.",
     "facts": [
      "P1",
      "P3"
@@ -277,109 +339,96 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (Q3 2026 8-K earnings release)",
-    "claim": "In the third quarter of 2026, consolidated revenues rose 10% reported and 8% organically to $2.94 billion, while excluding Bausch + Lomb the company recorded its fourteenth consecutive quarter of year-over-year revenue and Adjusted EBITDA growth.",
+    "basis": "Stated directly in the third quarter 2026 earnings release (Form 8-K EX-99.1).",
+    "claim": "In the third quarter of 2026, consolidated reported revenues increased 10% (8% on an organic basis) to $2.94 billion from $2.68 billion in the third quarter of 2025, while Bausch Health excluding Bausch + Lomb marked fourteen consecutive quarters of year-over-year revenue and Adjusted EBITDA growth.",
     "facts": [
      "P7"
     ],
     "quotes": [
      "Total consolidated reported revenues were $2.94 billion for the third quarter of 2026, compared with $2.68 billion in the third quarter of 2025, an increase of $260 million, or 10%.",
      "Excluding the impact of acquisitions of $37 million and divestitures and discontinuations of $11 million, revenue increased 8% on an organic1 basis compared with the third quarter of 2025.",
-     "Bausch Health, excluding Bausch + Lomb, delivered another solid quarter, marking fourteen consecutive quarters of year-over-year Revenue and Adjusted EBITDA growth."
+     "\"Bausch Health, excluding Bausch + Lomb, delivered another solid quarter, marking fourteen consecutive quarters of year-over-year Revenue and Adjusted EBITDA growth."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "stated in the cited items (10-Q Statement of Operations and Statement of Cash Flows)",
-    "claim": "Net cash provided by operating activities rose to 1,714 (table in millions) in the nine months ended September 30, 2026 from 905 (table in millions) in the prior-year period, despite a GAAP net loss of (725) (table in millions) that included 1,426 (table in millions) of goodwill impairments.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 1,714 | 905",
-     "Net income (loss) | 446 | 181 | (725) | 223",
-     "Goodwill impairments | 0 | 0 | 1,426 | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (10-K Item 1, 10-Q MD&A, and Q3 2026 earnings release)",
-    "claim": "The Salix segment is a primary growth driver, with third-quarter 2026 revenues rising 16% reported and 14% organically to $831 million, led by 16% revenue growth in Xifaxan, which represents approximately 85% of Salix revenues and generated $2,212 million in 2025.",
+    "basis": "Stated directly in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release.",
+    "claim": "Xifaxan\u00ae is the primary growth driver of the Salix segment, representing approximately 85% of Salix revenues and generating $2,212 million in 2025 (up from $1,810 million in 2023) along with 16% revenue growth in the third quarter of 2026.",
     "facts": [
      "P1",
      "P5",
      "P7"
     ],
     "quotes": [
-     "Salix segment reported revenues were $831 million for the third quarter of 2026, compared with $716 million for the third quarter of 2025, an increase of $115 million, or 16%.",
-     "Segment revenues increased 14% on an organic1 basis compared with the third quarter of 2025.",
-     "Xifaxan\u00ae was the primary contributor to growth, with 16% revenue growth in the third quarter of 2026.",
      "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
-     "Our Xifaxan\u00ae product accounted for revenues of $2,212 million, $1,993 million and $1,810 million for 2025, 2024 and 2023, respectively."
+     "Our Xifaxan\u00ae product accounted for revenues of $2,212 million, $1,993 million and $1,810 million for 2025, 2024 and 2023, respectively.",
+     "Xifaxan\u00ae was the primary contributor to growth, with 16% revenue growth in the third quarter of 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (10-Q MD&A and Q3 2026 earnings release)",
-    "claim": "Bausch Health indirectly holds 310,449,643 common shares of Bausch + Lomb, representing approximately 87% of its outstanding shares, whose eye health segment produced $1.38 billion in third-quarter 2026 revenues, up 7% reported and 7% organically.",
+    "basis": "Stated directly in the 2025 Form 10-K and Q3 2026 earnings release; market leadership characterization is company-reported without external market-share figures.",
+    "claim": "Solta Medical is described as a global leader in medical aesthetics driven primarily by Thermage\u00ae, with third quarter of 2026 reported revenues rising 18% to $165 million, aided by a China distributor acquisition, while organic revenues decreased 4%.",
     "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "Our Solta Medical business is a global leader in the medical aesthetic market focused on innovative aesthetic medical treatment technologies.",
+     "Solta Medical\u2019s revenue is primarily attributable to the skin tightening market, which is driven by our Thermage\u00ae product line.",
+     "Solta Medical segment reported revenues were $165 million for the third quarter of 2026, compared with $140 million in the third quarter of 2025, an increase of $25 million, or 18% aided by the acquisition of our full service distributor in China.",
+     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 Form 10-K Item 1 and Q3 2026 earnings release.",
+    "claim": "Within the Diversified segment, Bausch Health holds sole FDA-approved positioning for CABTREO\u00ae in acne and Arestin\u00ae in periodontitis, and Diversified revenues increased 5% to $271 million in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "CABTREO\u00ae (clindamycin phosphate, adapalene and benzoyl peroxide) topical gel is the first and only FDA approved fixed-dose, triple-combination topical treatment for acne.",
+     "Arestin\u00ae (minocycline hydrochloride) is the only FDA approved subgingival sustained-release antibiotic on the market.",
+     "Diversified segment reported revenues were $271 million for the third quarter of 2026, compared with $258 million for the third quarter of 2025, an increase of $13 million, or 5%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release.",
+    "claim": "Through its approximately 87% ownership of Bausch + Lomb, Bausch Health participates in eye health with integrated contact lens, surgical, consumer, and prescription lines including MIEBO\u00ae and XIIDRA\u00ae, with Bausch + Lomb revenues growing 7% to $1.38 billion in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P3",
      "P5",
      "P7"
     ],
     "quotes": [
      "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026.",
-     "Bausch + Lomb segment reported revenues were $1.38 billion for the third quarter of 2026, compared with $1.28 billion for the third quarter of 2025, an increase of $94 million, or 7%.",
-     "Excluding the impact of foreign exchange of $6 million, acquisitions of $8 million and divestitures and discontinuations of $2 million, segment revenues increased 7% on an organic1 basis compared with the third quarter of 2025."
+     "Our Bausch + Lomb business is a fully integrated eye health business with a portfolio of established lines of contact lenses, intraocular lenses (\u201cIOL\u201d) and other medical devices, surgical systems and devices, vitamin and mineral supplements, lens care products, prescription eye-medications and other consumer products.",
+     "MIEBO\u00ae is the first and only FDA approved treatment for DED that directly targets tear evaporation.",
+     "Bausch + Lomb segment reported revenues were $1.38 billion for the third quarter of 2026, compared with $1.28 billion for the third quarter of 2025, an increase of $94 million, or 7%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (10-K Item 1 Business and Item 7 MD&A)",
-    "claim": "The portfolio holds differentiated positions via products described as first or only FDA-approved therapies\u2014CABTREO for acne, Arestin in dentistry (representing approximately 95% of Dentistry revenues), MIEBO for tear-evaporation dry eye, and XIIDRA as a non-steroid dry eye drop\u2014alongside Solta Medical's aesthetic devices.",
+    "basis": "Stated directly in the 2025 Form 10-K Items 1 and 7.",
+    "claim": "To sustain its portfolio, Bausch Health maintains approximately 1,400 dedicated R&D and quality assurance employees across 25 R&D facilities working on approximately 80 pipeline projects, alongside bolt-on acquisitions and an authorized-generics strategy for products losing exclusivity.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "CABTREO\u00ae (clindamycin phosphate, adapalene and benzoyl peroxide) topical gel is the first and only FDA approved fixed-dose, triple-combination topical treatment for acne.",
-     "Arestin\u00ae (minocycline hydrochloride) is the only FDA approved subgingival sustained-release antibiotic on the market.",
-     "Arestin\u00ae may be used as part of a periodontal maintenance program, which includes good oral hygiene and SRP and represents approximately 95% of Dentistry revenues.",
-     "MIEBO\u00ae is the first and only FDA approved treatment for DED that directly targets tear evaporation.",
-     "In September 2023, Bausch + Lomb acquired XIIDRA\u00ae, the first and only non-steroid eye drop specifically approved to treat the signs and symptoms of dry eye disease focusing on inflammation associated with dry eye, and certain other ophthalmology assets from Novartis Pharma AG and Novartis Finance Corporation (together with Novartis Pharma AG, \u201cNovartis\u201d) (the \u201cXIIDRA Acquisition\u201d).",
-     "Our Solta Medical business is a global leader in the medical aesthetic market focused on innovative aesthetic medical treatment technologies."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in the cited item (10-K Item 7 MD&A)",
-    "claim": "Bausch Health invests in portfolio renewal through approximately 1,400 R&D and quality assurance employees across 25 R&D facilities managing approximately 80 pipeline projects, supplemented by targeted bolt-on acquisitions such as DURECT and China aesthetic distributor Shibo Zhenmei.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
      "As of December 31, 2025, approximately 1,400 dedicated R&D and quality assurance employees in 25 R&D facilities were involved in our R&D efforts internally.",
      "As of December 31, 2025, we had approximately 80 R&D projects in our pipeline.",
-     "In September 2025, we acquired DURECT, a biopharmaceutical company engaged in the development of epigenetic therapies that target dysregulated deoxyribonucleic acid methylation to transform the treatment of serious and life-threatening conditions, including acute organ injury.",
-     "Through this transaction, we assumed full responsibility for the distribution of Solta Medical\u2019s entire product portfolio, including Thermage\u00ae FLX as well as other aesthetic devices, within the Chinese market."
+     "The Company utilizes the Generics business to extend the long-term cash flows from a number of assets that are expected to decline over time due to their loss of exclusivity, by launching and selling generic versions of certain branded assets including authorized generics (\u201cAG\u201d)."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (10-K Item 1A Risk Factors and 10-Q MD&A)",
-    "claim": "CMS selected Xifaxan for the second round of Medicare drug price negotiations under the Inflation Reduction Act with negotiated prices expected to become effective in 2027, posing a direct pricing threat to Bausch Health's largest product.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "\u2022the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (10-K Item 1 Business and Item 1A Risk Factors)",
-    "claim": "Third-party generic manufacturers have submitted Notices of Paragraph IV Certification for Xifaxan and Trulance, exposing Bausch Health to patent litigation and rapid sales erosion if exclusivity is not maintained.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1 and Item 1A Risk Factors.",
+    "claim": "Generic competition and patent attacks threaten key revenue streams, with ongoing lawsuits against generic manufacturers that filed Paragraph IV notices for Xifaxan\u00ae and Trulance\u00ae and the risk of losing significant sales rapidly if patent exclusivity fails.",
     "facts": [
      "P1",
      "P2"
@@ -391,8 +440,21 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (10-K Item 7 MD&A)",
-    "claim": "In January 2026, both global clinical trials in the RED-C program evaluating the rifaximin SSD-40IR formulation to delay first occurrence of overt hepatic encephalopathy failed to achieve their primary endpoint.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1A Risk Factors and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Government drug pricing controls threaten Xifaxan\u00ae, which CMS selected for the second round of Medicare drug price negotiations under the Inflation Reduction Act with negotiated prices expected to take effect in 2027.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;",
+     "(viii) the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 Form 10-K Item 7 MD&A.",
+    "claim": "Pipeline execution is threatened by clinical trial risk, evidenced in January 2026 when both double-blind clinical trials in the RED-C program evaluating rifaximin soluble solid dispersion failed to achieve their primary endpoint.",
     "facts": [
      "P3"
     ],
@@ -403,20 +465,36 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (Q3 2026 8-K earnings release)",
-    "claim": "Solta Medical's third-quarter 2026 organic revenue fell 4% year-over-year, with Asia Pacific decreasing modestly, even though reported segment revenue rose 18% to $165 million due to the China distributor acquisition.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Bausch Health's commercial position faces threats from managed-care formulary exclusions, dependence on third-party and government payor reimbursements, price-increase limitations, wholesaler sales concentration, and revenue deductions from returns, allowances, and chargebacks.",
     "facts": [
-     "P7"
+     "P2"
     ],
     "quotes": [
-     "Solta Medical segment reported revenues were $165 million for the third quarter of 2026, compared with $140 million in the third quarter of 2025, an increase of $25 million, or 18% aided by the acquisition of our full service distributor in China.",
-     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly."
+     "the impact of potential exclusion from formularies developed by managed care organizations and third-party payors;",
+     "the decline in sales volumes or prices of our products as the result of the concentration of sales to wholesalers;",
+     "the effect of our commitment to the cessation of or limitation on pricing increases for certain of our products;",
+     "the reduction of revenues in future fiscal periods due to our policies regarding returns, allowances, and chargebacks;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (10-Q Balance Sheet, 10-Q Statement of Operations, and 10-K Item 1A)",
-    "claim": "Significant indebtedness constrains financial flexibility, with non-current long-term debt of 19,771 (table in millions), current long-term debt of 866 (table in millions), and total deficit of (341) (table in millions) at September 30, 2026 alongside nine-month 2026 interest expense of (1,196) (table in millions).",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Operational and competitive threats also include rivals developing or acquiring superior products, reliance on a limited number of sources for finished products and raw materials, manufacturing interruptions, counterfeit distribution, and lower-priced product imports.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "our ability to develop or acquire more competitive pharmaceutical or OTC products or medical devices than our competitors;",
+     "our dependence on a limited number of sources for certain of our finished products and raw materials;",
+     "the illegal distribution and sale of counterfeit versions of our products;",
+     "the reduction of profits due to imports from countries where our products are available at lower prices;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed directly in the Q3 2026 Form 10-Q balance sheet and income statement and stated in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "High leverage and debt service constrain financial flexibility, with 19,771 (table in millions) in non-current long-term debt, 866 (table in millions) in current long-term debt, a total deficit of (341) (table in millions) as of Sep. 30, 2026, interest expense of (1,196) (table in millions) in the 9 Months Ended Sep. 30, 2026, and restrictive debt covenants.",
     "facts": [
      "F1",
      "F2",
@@ -427,114 +505,58 @@
      "Current portion of long-term debt | 866 | 225",
      "Total (deficit) equity | (341) | 377",
      "Interest expense | (398) | (412) | (1,196) | (1,207)",
-     "\u2022the impact on our business of restrictions imposed by our significant indebtedness;"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items (10-K Item 1 and Item 1A, and 10-Q MD&A)",
-    "claim": "The planned separation of Bausch + Lomb faces execution uncertainties\u2014including leverage targets, Xifaxan litigation evaluation, collateral pledges on Bausch + Lomb shares, management distraction, potential tax liabilities, and expected dyssynergy costs.",
-    "facts": [
-     "P1",
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
-     "The B+L Separation has and will continue to require significant resources, time and attention from our senior management and employees, which could cause distractions and divert attention and resources away from other projects and the day-to-day operation of our business.",
-     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant."
+     "our ability to comply with restrictive covenants in our debt agreements;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (10-Q Part II Item 1A Risk Factors)",
-    "claim": "Bausch Health CEO Thomas Appio's appointments as chairman of Bausch + Lomb in August 2026 and interim CEO of Bausch + Lomb in October 2026 create competing demands on management time and potential conflicts of interest.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1A Risk Factors and Q3 2026 Form 10-Q Part II Item 1A Risk Factors.",
+    "claim": "Execution of the Bausch + Lomb separation and overlapping executive leadership pose strategic risks, including potential dyssynergy costs, collateral pledges of Bausch + Lomb shares under debt agreements, and competing demands or conflicts from Bausch Health's CEO also serving as interim CEO and chairman of Bausch + Lomb.",
     "facts": [
+     "P2",
      "P6"
     ],
     "quotes": [
-     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026.",
-     "In addition, in August 2026, Mr. Appio was appointed to the board of directors and as chairman of the board of directors of Bausch + Lomb.",
+     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant.",
      "The overlapping roles at the Company and Bausch + Lomb may create competing demands on management time and attention.",
      "In addition, these overlapping roles may result in conflicts, or the appearance of conflicts, with respect to matters involving or affecting both companies."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
-    "claim": "Commercial revenues face threats from reliance on government and third-party payor reimbursements, potential managed care formulary exclusions, wholesaler concentration, and distributor inventory fluctuations.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Macroeconomic and trade threats include heightened inflation that the Company may be unable to offset with price increases, foreign currency translation exposure, tariffs and retaliatory trade measures, and international conflicts including Russia-Ukraine and the Middle East.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "\u2022our dependence on reimbursements from governmental and other third-party payors;",
-     "\u2022the impact of potential exclusion from formularies developed by managed care organizations and third-party payors;",
-     "\u2022the decline in sales volumes or prices of our products as the result of the concentration of sales to wholesalers;",
-     "\u2022the effect of fluctuations in inventory levels or buying patterns by our large distributor and retail customers;"
+     "In a heightened inflationary environment, we may be unable to raise the prices of our products and services sufficiently to keep up with the rate of inflation.",
+     "the impact of the imposition of and adverse changes to duties, tariffs and other trade protection measures (including any retaliations to such measures);",
+     "foreign currency exposure on the translation into U.S. dollars of the financial results of our international operations;",
+     "risks associated with the ongoing international conflicts, including between Russia and Ukraine, and in the Middle East involving Israel, Hamas and other countries and militant groups in the region;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
-    "claim": "Supply reliability and pricing power are threatened by potential manufacturing interruptions, dependence on limited sources for certain raw materials and finished products, counterfeit products, and lower-priced imports.",
+    "basis": "Observed directly in the Q3 2026 Form 10-Q income and cash flow statements and stated in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Ongoing legal proceedings, accrued legal settlement outflows of (176) (table in millions) in the 9 Months Ended Sep. 30, 2026, and goodwill impairments of 1,426 (table in millions) in the same period weigh on profitability, cash flows, and reputation.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "\u2022the impact on our business of interruptions in our manufacturing processes;",
-     "\u2022our dependence on a limited number of sources for certain of our finished products and raw materials;",
-     "\u2022the illegal distribution and sale of counterfeit versions of our products;",
-     "\u2022the reduction of profits due to imports from countries where our products are available at lower prices;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (10-K Item 1A Risk Factors and Q3 2026 earnings release)",
-    "claim": "Global operations expose Bausch Health to duties, tariffs, and retaliatory trade measures, foreign currency translation volatility, inflation, and ongoing international conflicts.",
-    "facts": [
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "\u2022the impact of the imposition of and adverse changes to duties, tariffs and other trade protection measures (including any retaliations to such measures);",
-     "\u2022foreign currency exposure on the translation into U.S. dollars of the financial results of our international operations;",
-     "\u2022risks associated with the ongoing international conflicts, including between Russia and Ukraine, and in the Middle East involving Israel, Hamas and other countries and militant groups in the region;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (10-Q Balance Sheet, 10-Q Statement of Operations, and 10-K Item 1A)",
-    "claim": "Goodwill declined from 11,271 (table in millions) at December 31, 2025 to 9,767 (table in millions) at September 30, 2026, reflecting 1,426 (table in millions) of goodwill impairments recognized in the first nine months of 2026.",
-    "facts": [
-     "F1",
      "F2",
-     "P2"
-    ],
-    "quotes": [
-     "Goodwill | 9,767 | 11,271",
-     "Goodwill impairments | 0 | 0 | 1,426 | 0",
-     "\u2022the impact on our profitability from the potential impairment of goodwill and other intangible assets;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (10-Q Statement of Cash Flows and 10-K Item 1A Risk Factors)",
-    "claim": "Pending securities and other legal proceedings threaten reputation, federal program eligibility, and debt covenant compliance, while payments of accrued legal settlements totaled (176) (table in millions) in the nine months ended September 30, 2026 and (198) (table in millions) in the prior-year period.",
-    "facts": [
      "F3",
      "P2"
     ],
     "quotes": [
+     "we are currently still the subject of a number of other ongoing legal proceedings, including, but not limited to, a number of pending securities litigations, the allegations of which relate to, among other things, allegedly false and misleading statements by the Company and/or failures to disclose information about our business and prospects.",
      "Payments of accrued legal settlements | (176) | (198)",
-     "Some or all of these proceedings will likely result in damages, settlement payments, fines, penalties, consent orders or other administrative sanctions (including exclusion from federal programs) against the Company and/or certain of our directors and officers, any of which could be material, or in changes to our business practices, which, in turn, may result in or may contribute to an inability by us to meet the financial covenants applicable to the 2030 Revolving Credit Facility contained in our 2025 Credit Agreement (as such terms are defined in Note 10, \u201cFINANCING ARRANGEMENTS\u201d to our audited Consolidated Financial Statements)."
+     "Goodwill impairments | 0 | 0 | 1,426 | 0"
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the F1 10-Q condensed consolidated balance sheet.",
-    "claim": "As of Sep. 30, 2026, Bausch Health held $ 2,485 in cash and cash equivalents and 3 in restricted cash (table in millions), compared with $ 1,309 and 16, respectively, at Dec. 31, 2025.",
+    "basis": "stated in the cited item (F1 condensed consolidated balance sheets)",
+    "claim": "As of Sep. 30, 2026, Bausch Health held $ 2,485 in cash and cash equivalents and 3 in restricted cash (table in millions), up from $ 1,309 and 16 (table in millions) at Dec. 31, 2025.",
     "facts": [
      "F1"
     ],
@@ -545,8 +567,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the F1 10-Q condensed consolidated balance sheet.",
-    "claim": "Total current assets were 7,408 against total current liabilities of 4,749 at Sep. 30, 2026 (table in millions), compared with 6,157 and 4,180 at Dec. 31, 2025.",
+    "basis": "stated in the cited item (F1 condensed consolidated balance sheets)",
+    "claim": "Total current assets were 7,408 against total current liabilities of 4,749 (table in millions) as of Sep. 30, 2026, compared with 6,157 and 4,180 (table in millions) at Dec. 31, 2025.",
     "facts": [
      "F1"
     ],
@@ -557,71 +579,87 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the P3 10-K MD&A.",
-    "claim": "Liquidity facilities established in 2025 include a $500 million 2030 Revolving Credit Facility at Bausch Health and an $800 million B+L 2030 Revolving Credit Facility, while a $300 million accounts receivable credit facility was repaid using cash on hand and terminated on October 27, 2025.",
+    "basis": "stated in the cited item (P3 10-K Item 7 MD&A)",
+    "claim": "The company entered a $500 million 2030 Revolving Credit Facility in April 2025, and Bausch + Lomb entered an $800 million B+L 2030 Revolving Credit Facility in June 2025.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "On October 27, 2025, the outstanding amount of $300 million was repaid using cash on hand and the AR Credit Facility was terminated."
+     "On April 8, 2025, the Company and its indirect wholly-owned subsidiary, 1261229 B.C. Ltd., a company incorporated under the laws of British Columbia, Canada (\u201c126NumberCo\u201d), closed a series of transactions (the \u201cApril 2025 Refinancing Transactions\u201d) whereby it: (i) entered into a credit agreement which provides for new senior secured credit facilities (the \u201c2025 Credit Agreement\u201d) consisting of a five-year senior secured revolving credit facility in an amount of $500 million due April 8, 2030 (the \u201c2030 Revolving Credit Facility\u201d) and a $3,000 million 5.5-year senior secured term loan B facility due October 8, 2030 (the \u201c2030 Term Loan B Facility\u201d, and together with the 2030 Revolving Credit Facility, the \u201c2025 Senior Secured Credit Facilities\u201d) and (ii) issued $4,400 million aggregate principal amount of 10.00% senior secured notes due April 15, 2032 (the \u201c2032 Senior Secured Notes\u201d).",
+     "On June 26, 2025, Bausch + Lomb entered into a third amendment to its credit agreement (the \u201cB+L 2025 Credit Facility Amendment\u201d; the B+L Original Credit Agreement, as amended by the B+L September 2023 Credit Facility Amendment, the B+L November 2024 Credit Facility Amendment and the B+L 2025 Credit Facility Amendment, the \u201cB+L Amended Credit Agreement\u201d), whereby Bausch + Lomb entered into an $800 million revolving credit facility maturing June 26, 2030 (subject to customary \u201cspringing\u201d maturity provisions) (the \u201cB+L 2030 Revolving Credit Facility\u201d) and a new $2,325 million term B loan facility maturing January 15, 2031 (the \u201cB+L January 2031 Term Loan B Facility\u201d, and together with the B+L September 2028 Term Loan B Facility, the \u201cB+L Term Facilities\u201d; the B+L Term Facilities, together with the B+L 2030 Revolving Credit Facility, the \u201cB+L Senior Secured Credit Facilities\u201d) (these transactions together, the \u201cB+L 2025 Refinancing Activity\u201d)."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the F1 10-Q condensed consolidated balance sheet.",
-    "claim": "At Sep. 30, 2026, Bausch Health reported 19,771 in non-current portion of long-term debt, 866 in current portion of long-term debt, 61 in non-current portion of financial leases, and 17 in current financial leases, with total liabilities of 25,825 exceeding total assets of 25,484 and resulting in a total (deficit) equity of (341) (table in millions).",
+    "basis": "stated in the cited item (P3 10-K Item 7 MD&A)",
+    "claim": "On October 27, 2025, the company repaid the $300 million outstanding balance on its up to $600 million AR Credit Facility using cash on hand and terminated the facility.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The AR Facility Agreement provided for a maximum amount of up to $600 million, subject to certain borrowing base tests.",
+     "On October 27, 2025, the outstanding amount of $300 million was repaid using cash on hand and the AR Credit Facility was terminated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F1 condensed consolidated balance sheets)",
+    "claim": "Balance-sheet debt obligations at Sep. 30, 2026 comprised 866 in current portion of long-term debt and 19,771 in non-current portion of long-term debt (table in millions), compared with 225 and 20,592 at Dec. 31, 2025, plus 17 in current and 61 in non-current financial leases (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
      "Current portion of long-term debt | 866 | 225",
      "Non-current portion of long-term debt | 19,771 | 20,592",
+     "Financial leases | 17 | 11",
+     "Non-current portion of financial leases | 61 | 23"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F1 condensed consolidated balance sheets)",
+    "claim": "Total liabilities of 25,825 exceeded total assets of 25,484 (table in millions) at Sep. 30, 2026, resulting in a total deficit of (341) and Bausch Health shareholders' deficit of (1,328) (table in millions), compared with total equity of 377 at Dec. 31, 2025.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total assets | 25,484 | 26,366",
      "Total liabilities | 25,825 | 25,989",
+     "Total Bausch Health Companies Inc. shareholders\u2019 deficit | (1,328) | (554)",
      "Total (deficit) equity | (341) | 377"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the F1 10-Q balance sheet and S0 screener row.",
-    "claim": "At Sep. 30, 2026, Total Bausch Health Companies Inc. shareholders\u2019 deficit was (1,328) alongside noncontrolling interest of 987 (table in millions), while the screener reported a market capitalization of 3125127311 at a share price of 8.35 as of 2026-11-15 11:13.",
+    "basis": "stated in the cited items (P7 Q3 2026 earnings release and S0 screener row)",
+    "claim": "Management reported more than $500 million of net debt reduction during the third quarter of 2026, while equity market capitalization was 3170039224 (currency not stated in screener row) at a share price of 8.47 as of 2026-11-17 15:09.",
     "facts": [
-     "F1",
+     "P7",
      "S0"
     ],
     "quotes": [
-     "Total Bausch Health Companies Inc. shareholders\u2019 deficit | (1,328) | (554)",
-     "Noncontrolling interest | 987 | 931",
-     "marketCap: 3125127311"
+     "Our performance reflects disciplined execution across the portfolio, with healthy cash generation supporting more than $500 million of net debt reduction during the quarter.",
+     "marketCap: 3170039224",
+     "price: 8.47"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in the F2 10-Q condensed consolidated statements of operations.",
-    "claim": "Interest expense was (398) in the three months ended Sep. 30, 2026 and (1,196) in the nine months ended Sep. 30, 2026, compared with operating income of 983 and 773 in those respective periods (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Operating income | 983 | 619 | 773 | 1,339",
-     "Interest expense | (398) | (412) | (1,196) | (1,207)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the P1 10-K Item 1 and P2 10-K Item 1A.",
-    "claim": "Debt agreements impose restrictive covenants and pledge a portion of Bausch Health's Bausch + Lomb ownership as collateral under the 2025 Credit Agreement and 2032 Senior Secured Notes, while completion of the B+L Separation is subject to achieving targeted debt leverage ratios.",
+    "basis": "stated in the cited items (P1 10-K Item 1 and P2 10-K Item 1A)",
+    "claim": "Completion of the Bausch + Lomb separation requires achieving targeted debt leverage ratios, and ongoing legal proceedings could contribute to an inability to meet financial covenants on the 2030 Revolving Credit Facility.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals."
+     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
+     "Some or all of these proceedings will likely result in damages, settlement payments, fines, penalties, consent orders or other administrative sanctions (including exclusion from federal programs) against the Company and/or certain of our directors and officers, any of which could be material, or in changes to our business practices, which, in turn, may result in or may contribute to an inability by us to meet the financial covenants applicable to the 2030 Revolving Credit Facility contained in our 2025 Credit Agreement (as such terms are defined in Note 10, \u201cFINANCING ARRANGEMENTS\u201d to our audited Consolidated Financial Statements)."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the F3 10-Q condensed consolidated statements of cash flows.",
-    "claim": "In the nine months ended Sep. 30, 2026, net cash provided by operating activities rose to 1,714 from 905 in the prior-year period, while purchases of property, plant and equipment were (252) compared with (305) (table in millions).",
+    "basis": "stated in the cited item (F3 condensed consolidated statements of cash flows)",
+    "claim": "Net cash provided by operating activities rose to 1,714 in the nine months ended Sep. 30, 2026 from 905 in the prior-year period (table in millions), while purchases of property, plant and equipment were (252) versus (305) (table in millions).",
     "facts": [
      "F3"
     ],
@@ -632,67 +670,75 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the F3 10-Q condensed consolidated statements of cash flows.",
-    "claim": "Operating cash flow of 1,714 in the nine months ended Sep. 30, 2026 contrasted with a GAAP net loss of $ (725) primarily due to non-cash adjustments including goodwill impairments of 1,426, depreciation and amortization of intangible assets of 860, share-based compensation of 158, and deferred income taxes of 143 (table in millions).",
+    "basis": "stated in the cited item (P7 Q3 2026 earnings release)",
+    "claim": "In the third quarter of 2026, Bausch Health excluding Bausch + Lomb generated $581 million in cash provided by operating activities and $539 million in Adjusted Cash Flows from Operations, and consolidated Adjusted EBITDA attributable to Bausch Health reached $1,305 million, up 32% over the prior-year period.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "\u2022Generated $581 million in Cash Provided by Operating Activities and $539 million in Adjusted Cash Flows from Operations1",
+     "\u2022Consolidated Adjusted EBITDA Attributable to Bausch Health1 of $1,305 million, up 32% over the prior year period"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F3 condensed consolidated statements of cash flows)",
+    "claim": "Nine-month operating cash flow through Sep. 30, 2026 occurred alongside a GAAP net loss of $ (725) versus net income of $ 223 a year earlier (table in millions), driven by non-cash add-backs including 1,426 in goodwill impairments, 860 in depreciation and amortization of intangible assets, and 158 in share-based compensation (table in millions).",
     "facts": [
      "F3"
     ],
     "quotes": [
      "Net (loss) income | $ (725) | $ 223",
      "Goodwill impairments | 1,426 | 0",
-     "Depreciation and amortization of intangible assets | 860 | 918"
+     "Depreciation and amortization of intangible assets | 860 | 918",
+     "Share-based compensation | 158 | 132"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the F3 10-Q condensed consolidated statements of cash flows.",
-    "claim": "Cash generation in the nine months ended Sep. 30, 2026 also reflected cash outflows of (176) for payments of accrued legal settlements and (196) for trade receivables, partially offset by 123 from accounts payable, accrued and other liabilities (table in millions).",
+    "basis": "stated in the cited item (F3 condensed consolidated statements of cash flows)",
+    "claim": "Operating cash generation in the nine months ended Sep. 30, 2026 absorbed (176) in payments of accrued legal settlements and working capital outflows of (196) in trade receivables and (31) in inventories, partially offset by a 123 inflow from accounts payable, accrued and other liabilities (table in millions).",
     "facts": [
      "F3"
     ],
     "quotes": [
      "Payments of accrued legal settlements | (176) | (198)",
      "Trade receivables | (196) | (199)",
+     "Inventories | (31) | (7)",
      "Accounts payable, accrued and other liabilities | 123 | 208"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the P7 Q3 2026 earnings release.",
-    "claim": "Excluding Bausch + Lomb, Bausch Health generated $581 million in Cash Provided by Operating Activities and $539 million in Adjusted Cash Flows from Operations in the third quarter of 2026, supporting more than $500 million of net debt reduction during the quarter.",
+    "basis": "stated in the cited item (F2 condensed consolidated statements of operations)",
+    "claim": "Interest expense of (1,196) exceeded operating income of 773 (table in millions) for the nine months ended Sep. 30, 2026, whereas third-quarter operating income of 983 exceeded interest expense of (398) (table in millions).",
     "facts": [
-     "P7"
+     "F2"
     ],
     "quotes": [
-     "Our performance reflects disciplined execution across the portfolio, with healthy cash generation supporting more than $500 million of net debt reduction during the quarter."
+     "Operating income | 983 | 619 | 773 | 1,339",
+     "Interest expense | (398) | (412) | (1,196) | (1,207)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the P7 Q3 2026 earnings release.",
-    "claim": "Consolidated Adjusted EBITDA Attributable to Bausch Health reached $1,305 million in the third quarter of 2026, up 32% over the prior year period, and the Board authorized a $50 million share repurchase program to offset dilution from anticipated 2027 management equity award vesting.",
+    "basis": "stated in the cited items (P1 10-K Item 1, P2 10-K Item 1A, and P5 10-Q MD&A)",
+    "claim": "Cash flow durability faces product concentration and pricing headwinds because Xifaxan\u00ae represents approximately 85% of Salix segment revenues and generated $2,212 million in 2025, while CMS selected Xifaxan\u00ae for IRA drug price negotiations effective in 2027 and the drug faces generic Paragraph IV litigation.",
     "facts": [
-     "P7"
+     "P1",
+     "P2",
+     "P5"
     ],
     "quotes": [
-     "The Company also announced that its Board of Directors has authorized a $50 million share repurchase program, with the primary objective of offsetting dilution associated with the anticipated vesting of management equity awards in 2027."
+     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
+     "Our Xifaxan\u00ae product accounted for revenues of $2,212 million, $1,993 million and $1,810 million for 2025, 2024 and 2023, respectively.",
+     "The Company has filed lawsuits against third-party generic manufacturers that have sent the Company Notices of Paragraph IV Certification for Trulance\u00ae and Xifaxan\u00ae."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the F1 10-Q condensed consolidated balance sheet.",
-    "claim": "The current portion of long-term debt increased to 866 at Sep. 30, 2026 from 225 at Dec. 31, 2025 (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Current portion of long-term debt | 866 | 225"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the P3 10-K MD&A maturity table.",
-    "claim": "As of December 31, 2025, scheduled principal maturities of total debt obligations totaled $20,232 (table in millions), comprising $58 in 2026, $701 in 2027, $4,240 in 2028, $1,662 in 2029, $4,118 in 2030, and $9,453 thereafter.",
+    "basis": "stated in the cited item (P3 10-K Item 7 MD&A)",
+    "claim": "Principal debt maturities as of December 31, 2025 totaled $20,232 (table in millions), scheduled as $58 in 2026, $701 in 2027, $4,240 in 2028, $1,662 in 2029, $4,118 in 2030, and $9,453 thereafter.",
     "facts": [
      "P3"
     ],
@@ -702,21 +748,33 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the P3 10-K MD&A.",
-    "claim": "Refinancing and exchange transactions in 2025 and January 2026 extended approximately $6,870 million of maturities to the years 2030 through 2032, approximately $1,600 million of 2028 maturities to 2032, approximately $2,800 million of Bausch + Lomb 2027 maturities to 2031, and $2,802 million of Bausch + Lomb term loans to January 15, 2031.",
+    "basis": "stated in the cited item (P3 10-K Item 7 MD&A)",
+    "claim": "In 2025, the company extended approximately $6,870 million of maturities to 2030 through 2032 in April, repurchased $602 million of April 2026 notes in August, exchanged notes to extend approximately $1,600 million from 2028 to 2032 in December, and extended approximately $2,800 million of Bausch + Lomb maturities from 2027 to 2031.",
     "facts": [
      "P3"
     ],
     "quotes": [
      "The April 2025 Refinancing Transactions reduced our short-term cash requirements for debt service by extending approximately $6,870 million in aggregate debt maturities from the years 2025 through 2028 to the years 2030 through 2032.",
+     "In August 2025, we repurchased and retired our outstanding 9.25% Senior Unsecured Notes due April 2026 with an aggregate par value of approximately $602 million using cash on hand, for an aggregate cost of approximately $601 million (the \u201cAugust 2025 Repurchase Activity\u201d).",
      "The December 2025 Exchange reduced our short-term cash requirements for debt service by extending approximately $1,600 million in aggregate debt maturities from the year 2028 to the year 2032.",
      "The B+L 2025 Refinancing Activity reduced our short-term cash requirements for debt service by extending approximately $2,800 million in aggregate debt maturities from the year 2027 to the year 2031."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1, F3, P2, and P3.",
-    "claim": "Debt maturities and ongoing debt service can be met with $ 2,485 in cash and cash equivalents at Sep. 30, 2026, operating cash flow of 1,714 in the nine months ended Sep. 30, 2026, and capital markets refinancing, as reflected by 2,930 in long-term debt issuances against (3,082) in debt repayments over the nine-month period (tables in millions).",
+    "basis": "stated in the cited item (P3 10-K Item 7 MD&A)",
+    "claim": "In January 2026, Bausch + Lomb entered a $2,802 million refinancing term loan facility maturing January 15, 2031 to refinance its September 2028 and January 2031 term loan B facilities and lower interest rates.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The refinancing transaction consisted of entering into a term loan facility in the form of a refinancing amendment (the \u201cB+L January 2026 Credit Facility Amendment\u201d) to the existing B+L credit agreement, and consisted of $2,802 million of new term loans maturing on January 15, 2031 (the \u201cB+L January 2031 Refinancing Term Facility\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (F1 balance sheet, F3 cash flow statement, P2 10-K Risk Factors, and P3 10-K MD&A)",
+    "claim": "Debt obligations can be met through $ 2,485 in cash and cash equivalents, operating cash generation (1,714 in the nine months ended Sep. 30, 2026, table in millions), and potential debt or equity refinancings when conditions are favorable, though negative macroeconomic conditions could prevent future financing on acceptable terms.",
     "facts": [
      "F1",
      "F3",
@@ -724,29 +782,697 @@
      "P3"
     ],
     "quotes": [
-     "Issuance of long-term debt, net of discounts | 2,930 | 10,421",
-     "Repayments of long-term debt and other financial liabilities | (3,082) | (10,839)"
+     "Cash and cash equivalents | $ 2,485 | $ 1,309",
+     "Net cash provided by operating activities | 1,714 | 905",
+     "If the Company determines that conditions are favorable, the Company may refinance or repurchase existing debt or issue additional debt, equity or equity-linked securities.",
+     "Moreover, negative macroeconomic conditions could adversely impact our ability to obtain financing in the future on terms acceptable to us, or at all."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1, P2, and P5.",
-    "claim": "Bausch Health also holds 310,449,643 common shares of Bausch + Lomb, representing approximately 87% ownership as of October 21, 2026, and continues to evaluate monetizing all or a portion of that interest under the B+L Separation.",
+    "basis": "stated in the cited items (P1 10-K Item 1, P2 10-K Item 1A, and P5 10-Q MD&A)",
+    "claim": "Bausch Health holds 310,449,643 common shares of Bausch + Lomb (approximately 87% as of October 21, 2026) and may monetize all or a portion of that stake, though a portion of its Bausch + Lomb ownership is pledged as collateral under the 2025 Credit Agreement and 2032 Senior Secured Notes.",
     "facts": [
      "P1",
      "P2",
      "P5"
     ],
     "quotes": [
-     "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026."
+     "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026.",
+     "We continue to believe that the B+L Separation, which may include the monetization of all or a portion of our ownership interest in Bausch + Lomb, the transfer of all or a portion of our remaining direct or indirect equity interest in Bausch + Lomb to our shareholders, or a combination thereof, makes strategic sense."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated directly in [P1] and [P7].",
-    "claim": "Bausch Health grew annual revenues from $8,757 million in 2023 to $9,625 million in 2024 and $10,266 million in 2025, and grew third quarter 2026 revenues 10% reported (8% organic) to $2.94 billion versus $2.68 billion in the third quarter of 2025.",
+    "basis": "stated in the cited items (10-K Item 1 and Item 7)",
+    "claim": "Consolidated revenues grew from $8,757 million in 2023 to $9,625 million in 2024 and $10,266 million in 2025.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Our revenues for 2025, 2024 and 2023 were $10,266 million, $9,625 million and $8,757 million, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-Q Condensed Consolidated Statements of Operations)",
+    "claim": "For the 9 Months Ended Sep. 30, 2026, consolidated revenues were $ 8,317 (table in millions) compared with $ 7,470 (table in millions) in the prior-year period.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Revenues | $ 2,941 | $ 2,681 | $ 8,317 | $ 7,470"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (Q3 2026 earnings release)",
+    "claim": "In the third quarter of 2026, consolidated reported revenues increased 10% reported and 8% organically to $2.94 billion, while Bausch Health excluding Bausch + Lomb delivered 12% reported and 8% organic revenue growth.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Total consolidated reported revenues were $2.94 billion for the third quarter of 2026, compared with $2.68 billion in the third quarter of 2025, an increase of $260 million, or 10%.",
+     "Excluding the impact of acquisitions of $37 million and divestitures and discontinuations of $11 million, revenue increased 8% on an organic1 basis compared with the third quarter of 2025.",
+     "Delivered fourteenth consecutive quarter of year-over-year Revenue and Adjusted EBITDA1 growth, with 12% Reported and 8% Organic Revenue1 growth and 32% Adjusted EBITDA1 growth"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1, 10-Q MD&A, and Q3 2026 earnings release)",
+    "claim": "Salix segment revenue increased 16% reported and 14% organically in the third quarter of 2026 to $831 million, driven primarily by 16% growth in Xifaxan\u00ae, which represents approximately 85% of Salix revenues.",
+    "facts": [
+     "P1",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Salix segment reported revenues were $831 million for the third quarter of 2026, compared with $716 million for the third quarter of 2025, an increase of $115 million, or 16%.",
+     "Xifaxan\u00ae was the primary contributor to growth, with 16% revenue growth in the third quarter of 2026.",
+     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
+     "We have continued our investment in Xifaxan\u00ae direct-to-consumer (\u201cDTC\u201d) advertising and new sales force capabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1, 10-K Risk Factors, and 10-Q MD&A)",
+    "claim": "Continued Salix growth requires defending Xifaxan\u00ae and Trulance\u00ae patent exclusivity in ongoing Paragraph IV generic litigation.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The Company has filed lawsuits against third-party generic manufacturers that have sent the Company Notices of Paragraph IV Certification for Trulance\u00ae and Xifaxan\u00ae.",
+     "If we are not successful in defending an attack on our patents and maintaining exclusive rights to market one or more of our products still under patent protection, we could lose a significant portion of sales in a very short period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Risk Factors and 10-Q MD&A)",
+    "claim": "Continued Xifaxan\u00ae revenue growth depends on mitigating the impact of CMS negotiated drug prices under the Inflation Reduction Act, expected to become effective in 2027.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof",
+     "the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K MD&A and Q3 2026 earnings release)",
+    "claim": "Bausch + Lomb segment revenue grew 7% reported and 7% organically in the third quarter of 2026 to $1.38 billion, supported by product launches and acquisitions across dry eye, OTC eye care, and intraocular lens franchises.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Bausch + Lomb segment reported revenues were $1.38 billion for the third quarter of 2026, compared with $1.28 billion for the third quarter of 2025, an increase of $94 million, or 7%.",
+     "Excluding the impact of foreign exchange of $6 million, acquisitions of $8 million and divestitures and discontinuations of $2 million, segment revenues increased 7% on an organic1 basis compared with the third quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Risk Factors and 10-Q MD&A)",
+    "claim": "Sustaining Bausch + Lomb growth requires timely regulatory approvals, manufacturing and product quality compliance, and market acceptance for new and pipeline eye health products.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "the successful development, regulatory approval, manufacture and timing of launches and commercialization of pipeline and other products",
+     "the scope, duration and financial and operational impact of product quality matters and manufacturing facility compliance and certification matters",
+     "our ability to achieve or maintain expected levels of market acceptance for our new products;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1, 10-K Risk Factors, 10-Q MD&A, and 10-Q Risk Factors)",
+    "claim": "Retaining Bausch + Lomb as a consolidated growth driver depends on whether and when the planned B+L Separation occurs, which is subject to targeted debt leverage ratios, approvals, and evaluation of Xifaxan\u00ae litigation.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
+     "We continue the evaluation of all relevant factors and considerations relating to our investment in Bausch + Lomb, including the Xifaxan\u00ae Generics Litigation (see \u201cXifaxan\u00ae Paragraph IV Proceedings\u201d of Note 17, \u201cLEGAL PROCEEDINGS\u201d to our unaudited interim Condensed Consolidated Financial Statements).",
+     "The overlapping roles at the Company and Bausch + Lomb may create competing demands on management time and attention."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K MD&A and Q3 2026 earnings release)",
+    "claim": "Solta Medical segment revenue rose 18% reported in the third quarter of 2026 to $165 million, aided by $29 million from the December 2025 acquisition of its full-service distributor in China.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Solta Medical segment reported revenues were $165 million for the third quarter of 2026, compared with $140 million in the third quarter of 2025, an increase of $25 million, or 18% aided by the acquisition of our full service distributor in China.",
+     "Through this transaction, we assumed full responsibility for the distribution of Solta Medical\u2019s entire product portfolio, including Thermage\u00ae FLX as well as other aesthetic devices, within the Chinese market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the organic revenue decline in the Q3 2026 release combined with the regulatory pacing stated in 10-K Item 1",
+    "claim": "Continuing Solta Medical growth requires reversing its 4% organic revenue decline in the third quarter of 2026 and securing country-specific regulatory registrations for global expansion.",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly.",
+     "The latest generation, Thermage\u00ae FLX, has been launched in our key markets and expansion is expected to continue into other countries, paced by country-specific regulatory registrations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (Q3 2026 earnings release)",
+    "claim": "Diversified segment revenue increased 5% reported and 5% organically in the third quarter of 2026 to $271 million, driven primarily by double-digit growth in Dermatology.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Diversified segment reported revenues were $271 million for the third quarter of 2026, compared with $258 million for the third quarter of 2025, an increase of $13 million, or 5%.",
+     "The increase in organic1 revenue was primarily driven by double-digit growth in Dermatology."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (Q3 2026 earnings release)",
+    "claim": "International segment revenue increased 5% reported and 4% organically in the third quarter of 2026 to $299 million, led by Canada.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "International segment reported revenues were $299 million for the third quarter of 2026, compared with $286 million for the third quarter of 2025, an increase of $13 million, or 5%.",
+     "Excluding the impact of foreign exchange of $4 million, segment revenues grew 4% on an organic1 basis compared with the third quarter of 2025, led by Canada."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1, 10-K Risk Factors, and 10-Q MD&A)",
+    "claim": "Sustaining Diversified and International growth requires ongoing pipeline replenishment to offset products losing exclusivity while managing foreign currency, tariff, and macroeconomic headwinds.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Our continued success is dependent upon our ability to refresh our pipeline on an ongoing basis and bring new product solutions to the market that meet changing demands and replace other products that have lost momentum.",
+     "The Company utilizes the Generics business to extend the long-term cash flows from a number of assets that are expected to decline over time due to their loss of exclusivity, by launching and selling generic versions of certain branded assets including authorized generics (\u201cAG\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K MD&A)",
+    "claim": "Management allocates capital to approximately 80 internal R&D projects and selective bolt-on acquisitions, including DURECT Corporation and Larsucosterol, to drive long-term growth.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we had approximately 80 R&D projects in our pipeline.",
+     "In September 2025, we completed the acquisition of DURECT.",
+     "The FDA has granted a Breakthrough Therapy designation for this drug."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K MD&A)",
+    "claim": "Converting R&D investment into growth requires clinical trial success, whereas both Phase 3 RED-C trials for rifaximin SSD-40IR failed to achieve their primary endpoint in January 2026.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In January 2026, we received the results for the double-blind Phase 3 clinical trials for two global clinical programs evaluating our rifaximin soluble solid dispersion (\u201cSSD\u201d) formulation of rifaximin, known as rifaximin SSD-40IR, as part of our RED-C clinical trial program (\u201cRED-C\u201d).",
+     "While safe and well-tolerated, both clinical trials failed to achieve their primary endpoint."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-Q Balance Sheet, Income Statement, Cash Flow Statement, and MD&A)",
+    "claim": "Continuing to fund growth investments requires generating sufficient operating cash flow to service 866 (table in millions) of current and 19,771 (table in millions) of non-current long-term debt alongside (1,196) (table in millions) of interest expense for the 9 Months Ended Sep. 30, 2026.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P5"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 866 | 225",
+     "Non-current portion of long-term debt | 19,771 | 20,592",
+     "Interest expense | (398) | (412) | (1,196) | (1,207)",
+     "our ability to generate cash flows and access liquidity to meet working capital needs, satisfy debt maturities as they become due, reduce debt levels and comply with financial and other covenants under our financing arrangements"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated directly in the condensed consolidated statements of operations and cash flows.",
+    "claim": "Bausch Health recorded goodwill impairments of 1,426 (table in USD millions) for the nine-month reporting period, and 0 for the three-month reporting period.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Goodwill impairments | 0 | 0 | 1,426 | 0",
+     "Goodwill impairments | 1,426 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K and Q3 2026 Form 10-Q.",
+    "claim": "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity.",
+    "facts": [
+     "P1",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "On August 6, 2020, we announced our plan to separate our eye health business consisting of our Bausch + Lomb global Vision Care, Surgical and Pharmaceuticals businesses into an independent publicly traded entity, Bausch + Lomb (the \u201cB+L Separation\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K and Q3 2026 Form 10-Q.",
+    "claim": "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in the Bausch + Lomb initial public offering.",
+    "facts": [
+     "P1",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "On May 10, 2022, a wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb pursuant to the B+L IPO."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb acquired XIIDRA\u00ae and certain other ophthalmology assets from Novartis.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In September 2023, Bausch + Lomb acquired XIIDRA\u00ae, the first and only non-steroid eye drop specifically approved to treat the signs and symptoms of dry eye disease focusing on inflammation associated with dry eye, and certain other ophthalmology assets from Novartis Pharma AG and Novartis Finance Corporation (together with Novartis Pharma AG, \u201cNovartis\u201d) (the \u201cXIIDRA Acquisition\u201d)."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch Health repurchased and retired senior unsecured notes with an aggregate par value of $555 million for approximately $530 million using cash on hand.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During January 2024 and May 2024, through a series of transactions we repurchased and retired outstanding senior unsecured notes with an aggregate par value of $555 million for approximately $530 million using cash on hand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb acquired TearLab Corporation, doing business as Trukera Medical.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In July 2024, Bausch + Lomb acquired TearLab Corporation, d/b/a Trukera Medical (\u201cTrukera Medical\u201d), a U.S.-based privately held ophthalmic medical diagnostic company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb acquired Elios Vision, Inc., developer of the ELIOS\u00ae procedure.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In December 2024, Bausch + Lomb acquired Elios Vision, Inc., the developer of the ELIOS\u00ae procedure, the first clinically validated, minimally invasive glaucoma surgery procedure using an excimer laser."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb acquired Whitecap Biosciences, LLC.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In January 2025, Bausch + Lomb acquired Whitecap Biosciences, LLC which is currently developing two innovative therapies for potential use in glaucoma and geographic atrophy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7 and Q3 2026 Form 10-Q Item 2.",
+    "claim": "Bausch Health and an indirect subsidiary entered into $500 million and $3,000 million senior secured credit facilities and issued $4,400 million of senior secured notes, extending approximately $6,870 million in aggregate debt maturities.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "On April 8, 2025, the Company and its indirect wholly-owned subsidiary, 1261229 B.C. Ltd., a company incorporated under the laws of British Columbia, Canada (\u201c126NumberCo\u201d), closed a series of transactions (the \u201cApril 2025 Refinancing Transactions\u201d) whereby it: (i) entered into a credit agreement which provides for new senior secured credit facilities (the \u201c2025 Credit Agreement\u201d) consisting of a five-year senior secured revolving credit facility in an amount of $500 million due April 8, 2030 (the \u201c2030 Revolving Credit Facility\u201d) and a $3,000 million 5.5-year senior secured term loan B facility due October 8, 2030 (the \u201c2030 Term Loan B Facility\u201d, and together with the 2030 Revolving Credit Facility, the \u201c2025 Senior Secured Credit Facilities\u201d) and (ii) issued $4,400 million aggregate principal amount of 10.00% senior secured notes due April 15, 2032 (the \u201c2032 Senior Secured Notes\u201d).",
+     "The April 2025 Refinancing Transactions reduced our short-term cash requirements for debt service by extending approximately $6,870 million in aggregate debt maturities from the years 2025 through 2028 to the years 2030 through 2032."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb amended its credit agreement and issued \u20ac675 million of senior secured floating rate notes, extending approximately $2,800 million in aggregate debt maturities.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On June 26, 2025, certain of Bausch + Lomb\u2019s subsidiaries, Bausch + Lomb Netherlands B.V. and Bausch & Lomb Incorporated (the \u201cB+L Issuers\u201d), issued \u20ac675 million aggregate principal amount of Senior Secured Floating Rate Notes due January 2031 (the \u201cB+L January 2031 Senior Secured Notes\u201d).",
+     "The B+L 2025 Refinancing Activity reduced our short-term cash requirements for debt service by extending approximately $2,800 million in aggregate debt maturities from the year 2027 to the year 2031."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7 and Q3 2026 Form 10-Q Item 2.",
+    "claim": "Bausch Health repurchased and retired outstanding 9.25% senior unsecured notes with an aggregate par value of approximately $602 million for approximately $601 million using cash on hand.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "In August 2025, we repurchased and retired our outstanding 9.25% Senior Unsecured Notes due April 2026 with an aggregate par value of approximately $602 million using cash on hand, for an aggregate cost of approximately $601 million (the \u201cAugust 2025 Repurchase Activity\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Items 1 and 7.",
+    "claim": "Bausch Health completed the acquisition of DURECT Corporation.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In September 2025, we acquired DURECT, a biopharmaceutical company engaged in the development of epigenetic therapies that target dysregulated deoxyribonucleic acid methylation to transform the treatment of serious and life-threatening conditions, including acute organ injury."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch Health repaid the $300 million outstanding amount under its accounts receivable credit facility using cash on hand and terminated the facility.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On October 27, 2025, the outstanding amount of $300 million was repaid using cash on hand and the AR Credit Facility was terminated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7 and Q3 2026 Form 10-Q Item 2.",
+    "claim": "Bausch Health and an indirect subsidiary exchanged $797 million and $886 million of secured notes for $1,600 million of new senior secured notes, reducing outstanding debt principal value by $83 million.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "On December 26, 2025, the Company and 126NumberCo, completed offers to exchange (the \u201cDecember 2025 Exchange\u201d) $797 million aggregate principal amount of 4.875% Senior Secured Notes due in 2028 (the \u201cJune 2028 Senior Secured Notes\u201d) and $886 million aggregate principal amount of 11.00% First Lien Secured Notes due in 2028 (the \u201c11.00% First Lien Secured Notes\u201d), for $1,600 million in aggregate principal amount of new 10.00% Senior Secured Notes due April 2032, which form a single series with the 2032 Senior Secured Notes issued in April 2025 which reduced the outstanding principal value of our debt by $83 million.",
+     "The December 2025 Exchange reduced our short-term cash requirements for debt service by extending approximately $1,600 million in aggregate debt maturities from the year 2028 to the year 2032."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch Health completed the acquisition of Wuhan Shibo Zhenmei Technology Co., Ltd., the aesthetics distribution business of its distributor in China.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In December 2025, we completed the acquisition of Wuhan Shibo Zhenmei Technology Co., Ltd. (\u201cShibo Zhenmei\u201d), consisting of the aesthetics distribution business of our full\u2011service distributor in China, the Shibo Group."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb acquired manufacturing equipment, other assets, and assumed a manufacturing facility lease in Mexico.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In December 2025, Bausch + Lomb acquired certain manufacturing equipment, other assets and the assumption of a manufacturing facility lease in Mexico."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Bausch + Lomb entered into a refinancing amendment providing $2,802 million of new term loans to extend maturities and lower interest rates.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The refinancing transaction consisted of entering into a term loan facility in the form of a refinancing amendment (the \u201cB+L January 2026 Credit Facility Amendment\u201d) to the existing B+L credit agreement, and consisted of $2,802 million of new term loans maturing on January 15, 2031 (the \u201cB+L January 2031 Refinancing Term Facility\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7.",
+    "claim": "Both global clinical trials evaluating rifaximin soluble solid dispersion in the RED-C program failed to achieve their primary endpoint.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In January 2026, we received the results for the double-blind Phase 3 clinical trials for two global clinical programs evaluating our rifaximin soluble solid dispersion (\u201cSSD\u201d) formulation of rifaximin, known as rifaximin SSD-40IR, as part of our RED-C clinical trial program (\u201cRED-C\u201d).",
+     "While safe and well-tolerated, both clinical trials failed to achieve their primary endpoint."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q Part II Item 1A.",
+    "claim": "Bausch Health's chief executive officer, Thomas Appio, was appointed to the board of directors and as chairman of the board of directors of Bausch + Lomb.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In addition, in August 2026, Mr. Appio was appointed to the board of directors and as chairman of the board of directors of Bausch + Lomb."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q Part II Item 1A.",
+    "claim": "Bausch Health's chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Bausch Health achieved more than $500 million of net debt reduction during the third quarter.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Our performance reflects disciplined execution across the portfolio, with healthy cash generation supporting more than $500 million of net debt reduction during the quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Bausch Health updated consolidated full-year guidance and raised full-year Revenue, Adjusted EBITDA, and Adjusted Cash Flows from Operations guidance excluding Bausch + Lomb.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "The Company updated its Consolidated full year Revenue and Adjusted EBITDA1 guidance for 2026.",
+     "Bausch Health (excluding Bausch + Lomb) is raising its full year Revenue, Adjusted EBITDA1, and Adjusted Cash Flows from Operations1 guidance, which includes the currently estimated impact of applicable tariffs for the calendar year as of the date of this release."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Bausch Health's Board of Directors authorized a $50 million share repurchase program.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "The Company also announced that its Board of Directors has authorized a $50 million share repurchase program, with the primary objective of offsetting dilution associated with the anticipated vesting of management equity awards in 2027."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in [F1], [F2], [P2], [P3]; counterevidence stated in [F1], [F3], [P3], [P7]",
+    "claim": "Bausch Health carries 866 in current and 19,771 in non-current long-term debt (table in millions), incurred (1,196) in nine-month interest expense (table in millions), and faces risks around servicing debt and complying with debt covenants.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "our ability to generate cash in order to service our debt;",
+     "our ability to comply with restrictive covenants in our debt agreements;",
+     "The April 2025 Refinancing Transactions reduced our short-term cash requirements for debt service by extending approximately $6,870 million in aggregate debt maturities from the years 2025 through 2028 to the years 2030 through 2032."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P2], [P5]; counterevidence stated in [P1], [P5], [P7]",
+    "claim": "CMS selected Xifaxan\u00ae, which represents approximately 85% of Salix segment revenues, for IRA drug price negotiations with negotiated prices expected to become effective in 2027.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
+     "the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P2], [P5]; counterevidence stated in [P1], [P7]",
+    "claim": "Third-party generic manufacturers have filed Paragraph IV certifications challenging patents for Trulance\u00ae and Xifaxan\u00ae, threatening loss of exclusivity on key revenue products.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The Company has filed lawsuits against third-party generic manufacturers that have sent the Company Notices of Paragraph IV Certification for Trulance\u00ae and Xifaxan\u00ae.",
+     "If we are not successful in defending an attack on our patents and maintaining exclusive rights to market one or more of our products still under patent protection, we could lose a significant portion of sales in a very short period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P2], [P3], [P5]; counterevidence stated in [P1], [P2], [P7]",
+    "claim": "Completion of the planned separation of the Company's approximately 87% stake in Bausch + Lomb is uncertain and faces leverage, collateral-pledge, tax, and dyssynergy-cost risks.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
+     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant.",
+     "If such transactions, certain of which are outside the control of the Company and Bausch + Lomb, were to occur and to cause the Distribution to be taxable to us and/or to Bausch + Lomb, then we or Bausch + Lomb, as applicable, and, in some cases, both us and Bausch + Lomb, would be liable for a substantial amount of tax."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6] and [P2]; counterevidence stated in [P2]",
+    "claim": "Bausch Health's CEO also serves as interim CEO and chairman of Bausch + Lomb, creating competing demands on management attention and potential conflicts of interest.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The overlapping roles at the Company and Bausch + Lomb may create competing demands on management time and attention.",
+     "In addition, these overlapping roles may result in conflicts, or the appearance of conflicts, with respect to matters involving or affecting both companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2] and [F3]; counterevidence stated in [P2] and [F3]",
+    "claim": "Ongoing securities and other legal proceedings risk material liabilities and covenant pressure, following (176) and (198) in nine-month legal settlement payments (table in millions).",
+    "facts": [
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "we are currently still the subject of a number of other ongoing legal proceedings, including, but not limited to, a number of pending securities litigations, the allegations of which relate to, among other things, allegedly false and misleading statements by the Company and/or failures to disclose information about our business and prospects.",
+     "Some or all of these proceedings will likely result in damages, settlement payments, fines, penalties, consent orders or other administrative sanctions (including exclusion from federal programs) against the Company and/or certain of our directors and officers, any of which could be material, or in changes to our business practices, which, in turn, may result in or may contribute to an inability by us to meet the financial covenants applicable to the 2030 Revolving Credit Facility contained in our 2025 Credit Agreement (as such terms are defined in Note 10, \u201cFINANCING ARRANGEMENTS\u201d to our audited Consolidated Financial Statements)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1], [F2], [F3], [P2]; counterevidence stated in [F2], [F3]",
+    "claim": "Nine-month goodwill impairments of 1,426 drove a net loss of (725) and total deficit equity of (341) (tables in millions), while 9,767 in goodwill and 3,972 in net intangible assets remain exposed to future write-downs.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "the impact on our profitability from the potential impairment of goodwill and other intangible assets;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P2], [P3]; counterevidence stated in [P3]",
+    "claim": "Both global RED-C clinical trials evaluating the rifaximin SSD formulation failed to achieve their primary endpoint, highlighting pipeline execution risk for refreshing the product portfolio.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "While safe and well-tolerated, both clinical trials failed to achieve their primary endpoint.",
+     "Our continued success is dependent upon our ability to refresh our pipeline on an ongoing basis and bring new product solutions to the market that meet changing demands and replace other products that have lost momentum."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P2], [P5]; counterevidence stated in [P7]",
+    "claim": "International operations face tariffs, trade protection measures, inflation, supply chain constraints, and foreign currency fluctuations across global markets.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "the impact of the imposition of and adverse changes to duties, tariffs and other trade protection measures (including any retaliations to such measures);",
+     "In a heightened inflationary environment, we may be unable to raise the prices of our products and services sufficiently to keep up with the rate of inflation.",
+     "foreign currency exposure on the translation into U.S. dollars of the financial results of our international operations;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P7]",
+    "claim": "Outside GAAP revenues, full-year guidance is provided only on a non-GAAP basis without GAAP reconciliations, and actual GAAP results may be materially lower than projected non-GAAP measures.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Other than with respect to GAAP revenues, the Company only provides guidance on a non-GAAP basis.",
+     "The amounts of these adjustments may be material and, therefore, could result in the GAAP amount being materially different from (including materially less than) the projected non-GAAP measures."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2], [P5]; counterevidence stated in [P3], [P7]",
+    "claim": "Operations face risks from product quality and manufacturing facility compliance matters, limited raw-material and finished-product sourcing, and sales concentration to wholesalers.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "the scope, duration and financial and operational impact of product quality matters and manufacturing facility compliance and certification matters;",
+     "the decline in sales volumes or prices of our products as the result of the concentration of sales to wholesalers;"
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "Stated directly in [P1] and [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch Health grew annual revenues from $8,757 million in 2023 to $9,625 million in 2024 and $10,266 million in 2025, and grew third quarter 2026 revenues 10% reported (8% organic) to $2.94 billion versus $2.68 billion in the third quarter of 2025.",
     "facts": [
      "P1",
      "P7"
@@ -759,20 +1485,19 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P7].",
-    "claim": "Excluding Bausch + Lomb, Bausch Health achieved a fourteenth consecutive quarter of year-over-year revenue and Adjusted EBITDA growth in the third quarter of 2026, with 12% reported and 8% organic revenue growth.",
+    "basis": "Stated directly in [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: excluding Bausch + Lomb, Bausch Health achieved a fourteenth consecutive quarter of year-over-year revenue and Adjusted EBITDA growth in the third quarter of 2026, with 12% reported and 8% organic revenue growth.",
     "facts": [
      "P7"
     ],
     "quotes": [
-     "Bausch Health, excluding Bausch + Lomb, delivered another solid quarter, marking fourteen consecutive quarters of year-over-year Revenue and Adjusted EBITDA growth.",
      "Delivered fourteenth consecutive quarter of year-over-year Revenue and Adjusted EBITDA1 growth, with 12% Reported and 8% Organic Revenue1 growth and 32% Adjusted EBITDA1 growth"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P1], [P5], and [P7].",
-    "claim": "Salix segment revenue grew 16% reported and 14% organic to $831 million in the third quarter of 2026 from $716 million in the third quarter of 2025, driven primarily by 16% revenue growth in Xifaxan\u00ae, which represents approximately 85% of Salix segment revenues.",
+    "basis": "Stated directly in [P1], [P5], and [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Salix segment revenue grew 16% reported and 14% organic to $831 million in the third quarter of 2026 from $716 million in the third quarter of 2025, driven primarily by 16% revenue growth in Xifaxan\u00ae, which represents approximately 85% of Salix segment revenues.",
     "facts": [
      "P1",
      "P5",
@@ -787,8 +1512,8 @@
     "support": "supported"
    },
    {
-    "basis": "Risk and litigation stated in [P1], [P2], and [P3]; Salix continuation condition inferred from Xifaxan\u00ae comprising approximately 85% of Salix revenue.",
-    "claim": "For Salix growth to continue, Bausch Health must maintain patent protection and regulatory exclusivity and defend against Paragraph IV generic challenges to Xifaxan\u00ae and Trulance\u00ae.",
+    "basis": "Stated in [P1], [P2], and [P3]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Salix continuation depends on maintaining patent protection and regulatory exclusivity and defending against Paragraph IV generic challenges to Xifaxan\u00ae and Trulance\u00ae.",
     "facts": [
      "P1",
      "P2",
@@ -802,21 +1527,20 @@
     "support": "supported"
    },
    {
-    "basis": "Stated as a risk and forward-looking factor in [P2] and [P5]; continuation condition inferred from Xifaxan\u00ae's concentration in Salix.",
-    "claim": "For Salix growth to continue, Bausch Health must mitigate the revenue impact of CMS negotiated prices for Xifaxan\u00ae under the Inflation Reduction Act, expected to become effective in 2027.",
+    "basis": "Stated in [P2] and [P5]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch Health faces CMS negotiated prices for Xifaxan\u00ae under the Inflation Reduction Act expected to become effective in 2027 and relies on its ability to mitigate the impact.",
     "facts": [
      "P2",
      "P5"
     ],
     "quotes": [
-     "the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;",
-     "the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;"
+     "(viii) the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Segment growth stated in [P7]; product and acquisition drivers stated in [P1] and [P3].",
-    "claim": "Bausch + Lomb segment revenue grew 7% reported and 7% organic to $1.38 billion in the third quarter of 2026 from $1.28 billion in the third quarter of 2025, supported by dry eye franchise expansion and new eye health product launches.",
+    "basis": "Stated in [P1], [P3], and [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch + Lomb segment revenue grew 7% reported and 7% organic to $1.38 billion in the third quarter of 2026 from $1.28 billion in the third quarter of 2025, alongside dry eye franchise expansion and new eye health product launches.",
     "facts": [
      "P1",
      "P3",
@@ -830,8 +1554,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P1], [P2], [P3], [P5], and [P6].",
-    "claim": "For Bausch + Lomb growth to continue within Bausch Health and execute standalone launches, Bausch Health must resolve the timing and terms of the planned B+L Separation, commercialize B+L pipeline products, and manage competing demands on its CEO who also serves as B+L interim CEO and chairman.",
+    "basis": "Stated in [P1], [P2], [P3], [P5], and [P6]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch + Lomb plans and operations remain subject to uncertainties regarding the timing and terms of the B+L Separation, pipeline commercialization, and competing demands on Bausch Health's CEO who also serves as B+L interim CEO and chairman.",
     "facts": [
      "P1",
      "P2",
@@ -840,43 +1564,40 @@
      "P6"
     ],
     "quotes": [
-     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
-     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026.",
-     "The overlapping roles at the Company and Bausch + Lomb may create competing demands on management time and attention.",
-     "Bausch + Lomb is in the process of a preservative free lipid-based formulation for its Blink\u00ae Triple Care product, which is anticipated to launch in 2026."
+     "Unanticipated developments and other challenges could delay or prevent the completion of the B+L Separation (including the Distribution, as defined below), result in changes to the anticipated structure of the B+L Separation (whether by way of \u201cbutterfly reorganization\u201d rules in Section 55 of the Canadian Tax Act, return of capital or another form of sale or transfer of the Company\u2019s ownership interest in Bausch + Lomb), cause the B+L Separation to occur on terms or conditions that are different or less favorable than originally anticipated or affect our ability to realize some or all of the anticipated benefits of the B+L Separation.",
+     "Our chief executive officer also serves as interim chief executive officer and chairman of the board of directors of Bausch + Lomb, and these overlapping roles may create competing demands on management time and attention and actual or perceived conflicts of interest."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P3] and [P7].",
-    "claim": "Solta Medical segment reported revenue rose 18% to $165 million in the third quarter of 2026 from $140 million in the third quarter of 2025, aided by $29 million from acquiring its full-service distributor in China.",
+    "basis": "Stated directly in [P3] and [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Solta Medical segment reported revenue rose 18% to $165 million in the third quarter of 2026 from $140 million in the third quarter of 2025, aided by $29 million from acquiring its full-service distributor in China.",
     "facts": [
      "P3",
      "P7"
     ],
     "quotes": [
      "Solta Medical segment reported revenues were $165 million for the third quarter of 2026, compared with $140 million in the third quarter of 2025, an increase of $25 million, or 18% aided by the acquisition of our full service distributor in China.",
-     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly.",
-     "Through this transaction, we assumed full responsibility for the distribution of Solta Medical\u2019s entire product portfolio, including Thermage\u00ae FLX as well as other aesthetic devices, within the Chinese market."
+     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly."
     ],
     "support": "supported"
    },
    {
-    "basis": "Organic decline and regulatory pacing are stated in [P1] and [P7]; the requirement to restore organic growth once acquisition effects anniversary is inferred.",
-    "claim": "For Solta Medical growth to continue organically, the segment must reverse its 4% organic revenue decline in the third quarter of 2026 and secure country-specific regulatory registrations for device expansion.",
+    "basis": "Stated directly in [P1] and [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Solta Medical experienced a 4% organic revenue decline in the third quarter of 2026 and device expansion into additional countries is paced by country-specific regulatory registrations.",
     "facts": [
      "P1",
      "P7"
     ],
     "quotes": [
-     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly.",
-     "The latest generation, Thermage\u00ae FLX, has been launched in our key markets and expansion is expected to continue into other countries, paced by country-specific regulatory registrations."
+     "The latest generation, Thermage\u00ae FLX, has been launched in our key markets and expansion is expected to continue into other countries, paced by country-specific regulatory registrations.",
+     "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly."
     ],
     "support": "supported"
    },
    {
-    "basis": "Q3 2026 segment growth stated in [P7]; dermatology product commercialization stated in [P1] and [P3].",
-    "claim": "Diversified segment revenue grew 5% reported and 5% organic to $271 million in the third quarter of 2026 from $258 million in the third quarter of 2025, driven primarily by double-digit growth in Dermatology.",
+    "basis": "Stated directly in [P7] with product context in [P1] and [P3]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Diversified segment revenue grew 5% reported and 5% organic to $271 million in the third quarter of 2026 from $258 million in the third quarter of 2025, driven primarily by double-digit growth in Dermatology.",
     "facts": [
      "P1",
      "P3",
@@ -890,8 +1611,8 @@
     "support": "supported"
    },
    {
-    "basis": "Loss-of-exclusivity drag stated in [P1] and market acceptance/formulary risks stated in [P2]; offsetting requirement is inferred.",
-    "claim": "For Diversified segment growth to continue, new dermatology products must maintain market acceptance and third-party payor formulary access to offset branded assets declining from loss of exclusivity.",
+    "basis": "Stated in [P1] and [P2]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Diversified segment performance depends on market acceptance of new products and third-party payor formulary access while assets face expected declines due to loss of exclusivity.",
     "facts": [
      "P1",
      "P2"
@@ -904,8 +1625,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P7].",
-    "claim": "International segment revenue grew 5% reported and 4% organic to $299 million in the third quarter of 2026 from $286 million in the third quarter of 2025, led by Canada.",
+    "basis": "Stated directly in [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: International segment revenue grew 5% reported and 4% organic to $299 million in the third quarter of 2026 from $286 million in the third quarter of 2025, led by Canada.",
     "facts": [
      "P7"
     ],
@@ -916,35 +1637,35 @@
     "support": "supported"
    },
    {
-    "basis": "Stated as material risk factors in [P2] and forward-looking assumptions in [P5].",
-    "claim": "For International segment growth to continue, Bausch Health must manage foreign currency translation exposure, local economic conditions, and tariffs or trade protection measures.",
+    "basis": "Stated in [P2] and [P5]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: International operations remain exposed to foreign currency translation, local economic conditions, and duties, tariffs, or other trade protection measures.",
     "facts": [
      "P2",
      "P5"
     ],
     "quotes": [
-     "the impact of the imposition of and adverse changes to duties, tariffs and other trade protection measures (including any retaliations to such measures);",
-     "foreign currency exposure on the translation into U.S. dollars of the financial results of our international operations;"
+     "foreign currency exposure on the translation into U.S. dollars of the financial results of our international operations;",
+     "the impact of the imposition of and adverse changes to duties, tariffs and other trade protection measures (including any retaliations to such measures);"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P1] and [P3].",
-    "claim": "Bausch Health relies on internal R&D\u2014with approximately 80 pipeline projects as of December 31, 2025\u2014and selective bolt-on acquisitions such as DURECT Corporation in September 2025 to refresh its product portfolio.",
+    "basis": "Stated directly in [P1] and [P3]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch Health relies on internal R&D, with approximately 80 pipeline projects as of December 31, 2025, and selective bolt-on acquisitions such as DURECT Corporation in September 2025 to refresh its product portfolio.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
      "As of December 31, 2025, we had approximately 80 R&D projects in our pipeline.",
-     "Our continued success is dependent upon our ability to refresh our pipeline on an ongoing basis and bring new product solutions to the market that meet changing demands and replace other products that have lost momentum.",
-     "In September 2025, we acquired DURECT, a biopharmaceutical company engaged in the development of epigenetic therapies that target dysregulated deoxyribonucleic acid methylation to transform the treatment of serious and life-threatening conditions, including acute organ injury."
+     "In September 2025, we acquired DURECT, a biopharmaceutical company engaged in the development of epigenetic therapies that target dysregulated deoxyribonucleic acid methylation to transform the treatment of serious and life-threatening conditions, including acute organ injury.",
+     "We sometimes refer to these opportunities as \u201cbolt on\u201d acquisitions."
     ],
     "support": "supported"
    },
    {
-    "basis": "Pipeline plans, trial failure, and commercialization risk stated directly in [P2] and [P3].",
-    "claim": "For R&D and acquisition-driven growth to continue, pipeline candidates such as Larsucosterol must succeed in clinical trials, secure regulatory approvals, and achieve commercialization, after clinical trials in the RED-C program failed to achieve their primary endpoints in January 2026.",
+    "basis": "Stated in [P2] and [P3]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: pipeline growth depends on clinical trial execution, regulatory approvals, and commercialization for candidates such as Larsucosterol after both RED-C Phase 3 clinical trials failed to achieve their primary endpoint in January 2026.",
     "facts": [
      "P2",
      "P3"
@@ -958,8 +1679,8 @@
     "support": "supported"
    },
    {
-    "basis": "Financial figures and liquidity/capital allocation statements are directly in [F1], [F2], [F3], [P3], and [P5]; the funding constraint on future growth is inferred.",
-    "claim": "For Bausch Health to continue allocating capital to growth initiatives, it must sustain operating cash flows\u2014which reached 1,714 (table in millions) in the nine months ended Sep. 30, 2026\u2014to service 866 (table in millions) of current and 19,771 (table in millions) of non-current long-term debt and meet debt covenants.",
+    "basis": "Stated in [F1], [F3], [P3], and [P5]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: net cash provided by operating activities was 1,714 (table in millions) in the nine months ended Sep. 30, 2026 alongside 866 (table in millions) of current and 19,771 (table in millions) of non-current long-term debt and ongoing debt covenant compliance requirements.",
     "facts": [
      "F1",
      "F2",
@@ -971,299 +1692,13 @@
      "Net cash provided by operating activities | 1,714 | 905",
      "Current portion of long-term debt | 866 | 225",
      "Non-current portion of long-term debt | 19,771 | 20,592",
-     "Interest expense | (398) | (412) | (1,196) | (1,207)",
-     "our ability to generate cash flows and access liquidity to meet working capital needs, satisfy debt maturities as they become due, reduce debt levels and comply with financial and other covenants under our financing arrangements;"
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item: reported directly in the 10-Q Condensed Consolidated Statements of Operations and Cash Flows",
-    "claim": "Bausch Health recorded 1,426 (table in millions, USD) in goodwill impairments during the nine months ended Sep. 30, 2026.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS - USD ($) shares in Millions, $ in Millions | 3 Months Ended | 9 Months Ended",
-     "Goodwill impairments | 0 | 0 | 1,426 | 0",
-     "Goodwill impairments | 1,426 | 0"
+     "(ix) our ability to generate cash flows and access liquidity to meet working capital needs, satisfy debt maturities as they become due, reduce debt levels and comply with financial and other covenants under our financing arrangements;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item: disclosed in the 10-K Business and MD&A sections and 10-Q MD&A",
-    "claim": "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity, and completion remains subject to targeted debt leverage ratios and required approvals.",
-    "facts": [
-     "P1",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "On August 6, 2020, we announced our plan to separate our eye health business consisting of our Bausch + Lomb global Vision Care, Surgical and Pharmaceuticals businesses into an independent publicly traded entity, Bausch + Lomb (the \u201cB+L Separation\u201d).",
-     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in the 10-K Business and MD&A sections and 10-Q MD&A",
-    "claim": "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in an initial public offering, and Bausch Health indirectly holds 310,449,643 common shares representing approximately 87% of Bausch + Lomb's outstanding common shares as of October 21, 2026.",
-    "facts": [
-     "P1",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "On May 10, 2022, a wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb pursuant to the B+L IPO.",
-     "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb acquired XIIDRA\u00ae and certain other ophthalmology assets from Novartis with a $1,750 million upfront payment, financed by a $500 million term loan facility and $1,400 million of Senior Secured Notes.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In September 2023, Bausch + Lomb acquired XIIDRA\u00ae, the first and only non-steroid eye drop specifically approved to treat the signs and symptoms of dry eye disease focusing on inflammation associated with dry eye, and certain other ophthalmology assets from Novartis Pharma AG and Novartis Finance Corporation (together with Novartis Pharma AG, \u201cNovartis\u201d) (the \u201cXIIDRA Acquisition\u201d).",
-     "On September 29, 2023, Bausch + Lomb entered into a new term loan facility (\u201cB+L September 2028 Term Loan B Facility\u201d) of $500 million and issued new Senior Secured Notes (\u201cB+L October 2028 Senior Secured Notes\u201d) of $1,400 million to finance the $1,750 million upfront payment related to the acquisition of XIIDRA\u00ae and certain other ophthalmology assets from Novartis and associated acquisition-related transaction and financing costs (as discussed in \u201c\u2014Strategic Acquisitions\u201d below)."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch Health repurchased and retired outstanding senior unsecured notes with an aggregate par value of $555 million for approximately $530 million using cash on hand.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "During January 2024 and May 2024, through a series of transactions we repurchased and retired outstanding senior unsecured notes with an aggregate par value of $555 million for approximately $530 million using cash on hand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb acquired TearLab Corporation, d/b/a Trukera Medical, an ophthalmic medical diagnostic company.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In July 2024, Bausch + Lomb acquired TearLab Corporation, d/b/a Trukera Medical (\u201cTrukera Medical\u201d), a U.S.-based privately held ophthalmic medical diagnostic company."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb acquired Elios Vision, Inc., the developer of the ELIOS\u00ae minimally invasive glaucoma surgery procedure.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In December 2024, Bausch + Lomb acquired Elios Vision, Inc., the developer of the ELIOS\u00ae procedure, the first clinically validated, minimally invasive glaucoma surgery procedure using an excimer laser."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb acquired Whitecap Biosciences, LLC, a developer of therapies for potential use in glaucoma and geographic atrophy.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In January 2025, Bausch + Lomb acquired Whitecap Biosciences, LLC which is currently developing two innovative therapies for potential use in glaucoma and geographic atrophy."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A and 10-Q Part I Item 2 MD&A",
-    "claim": "Bausch Health and 126NumberCo closed refinancing transactions establishing a $500 million revolving credit facility, a $3,000 million term loan B facility, and $4,400 million of 10.00% senior secured notes due April 15, 2032, extending approximately $6,870 million in aggregate debt maturities.",
-    "facts": [
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "On April 8, 2025, the Company and its indirect wholly-owned subsidiary, 1261229 B.C. Ltd., a company incorporated under the laws of British Columbia, Canada (\u201c126NumberCo\u201d), closed a series of transactions (the \u201cApril 2025 Refinancing Transactions\u201d) whereby it: (i) entered into a credit agreement which provides for new senior secured credit facilities (the \u201c2025 Credit Agreement\u201d) consisting of a five-year senior secured revolving credit facility in an amount of $500 million due April 8, 2030 (the \u201c2030 Revolving Credit Facility\u201d) and a $3,000 million 5.5-year senior secured term loan B facility due October 8, 2030 (the \u201c2030 Term Loan B Facility\u201d, and together with the 2030 Revolving Credit Facility, the \u201c2025 Senior Secured Credit Facilities\u201d) and (ii) issued $4,400 million aggregate principal amount of 10.00% senior secured notes due April 15, 2032 (the \u201c2032 Senior Secured Notes\u201d).",
-     "The April 2025 Refinancing Transactions reduced our short-term cash requirements for debt service by extending approximately $6,870 million in aggregate debt maturities from the years 2025 through 2028 to the years 2030 through 2032."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb entered into a credit agreement amendment for an $800 million revolving credit facility and a $2,325 million term B loan facility, and certain subsidiaries issued \u20ac675 million of senior secured floating rate notes, extending approximately $2,800 million in aggregate debt maturities.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On June 26, 2025, Bausch + Lomb entered into a third amendment to its credit agreement (the \u201cB+L 2025 Credit Facility Amendment\u201d; the B+L Original Credit Agreement, as amended by the B+L September 2023 Credit Facility Amendment, the B+L November 2024 Credit Facility Amendment and the B+L 2025 Credit Facility Amendment, the \u201cB+L Amended Credit Agreement\u201d), whereby Bausch + Lomb entered into an $800 million revolving credit facility maturing June 26, 2030 (subject to customary \u201cspringing\u201d maturity provisions) (the \u201cB+L 2030 Revolving Credit Facility\u201d) and a new $2,325 million term B loan facility maturing January 15, 2031 (the \u201cB+L January 2031 Term Loan B Facility\u201d, and together with the B+L September 2028 Term Loan B Facility, the \u201cB+L Term Facilities\u201d; the B+L Term Facilities, together with the B+L 2030 Revolving Credit Facility, the \u201cB+L Senior Secured Credit Facilities\u201d) (these transactions together, the \u201cB+L 2025 Refinancing Activity\u201d).",
-     "On June 26, 2025, certain of Bausch + Lomb\u2019s subsidiaries, Bausch + Lomb Netherlands B.V. and Bausch & Lomb Incorporated (the \u201cB+L Issuers\u201d), issued \u20ac675 million aggregate principal amount of Senior Secured Floating Rate Notes due January 2031 (the \u201cB+L January 2031 Senior Secured Notes\u201d).",
-     "The B+L 2025 Refinancing Activity reduced our short-term cash requirements for debt service by extending approximately $2,800 million in aggregate debt maturities from the year 2027 to the year 2031."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A and 10-Q Part I Item 2 MD&A",
-    "claim": "Bausch Health repurchased and retired its outstanding 9.25% Senior Unsecured Notes due April 2026 with an aggregate par value of approximately $602 million for an aggregate cost of approximately $601 million using cash on hand.",
-    "facts": [
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "In August 2025, we repurchased and retired our outstanding 9.25% Senior Unsecured Notes due April 2026 with an aggregate par value of approximately $602 million using cash on hand, for an aggregate cost of approximately $601 million (the \u201cAugust 2025 Repurchase Activity\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 1 Business and Item 7 MD&A",
-    "claim": "Bausch Health completed the acquisition of DURECT Corporation, whose lead drug candidate Larsucosterol holds FDA Breakthrough Therapy designation for alcohol-associated hepatitis.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "In September 2025, we acquired DURECT, a biopharmaceutical company engaged in the development of epigenetic therapies that target dysregulated deoxyribonucleic acid methylation to transform the treatment of serious and life-threatening conditions, including acute organ injury.",
-     "DURECT\u2019s lead drug candidate, Larsucosterol, is a novel therapeutic molecule that has demonstrated promising results in Phase 2 trials for the treatment of AH and has been granted Breakthrough Therapy designation by the FDA."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch Health repaid the $300 million outstanding balance under its accounts receivable credit facility using cash on hand and terminated the facility.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On October 27, 2025, the outstanding amount of $300 million was repaid using cash on hand and the AR Credit Facility was terminated."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A and 10-Q Part I Item 2 MD&A",
-    "claim": "Bausch Health and 126NumberCo exchanged $797 million of 4.875% Senior Secured Notes due 2028 and $886 million of 11.00% First Lien Secured Notes due 2028 for $1,600 million of new 10.00% Senior Secured Notes due April 2032, reducing outstanding debt principal by $83 million and transferring 26,495,472 Bausch + Lomb common shares to 126NumberCo.",
-    "facts": [
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "On December 26, 2025, the Company and 126NumberCo, completed offers to exchange (the \u201cDecember 2025 Exchange\u201d) $797 million aggregate principal amount of 4.875% Senior Secured Notes due in 2028 (the \u201cJune 2028 Senior Secured Notes\u201d) and $886 million aggregate principal amount of 11.00% First Lien Secured Notes due in 2028 (the \u201c11.00% First Lien Secured Notes\u201d), for $1,600 million in aggregate principal amount of new 10.00% Senior Secured Notes due April 2032, which form a single series with the 2032 Senior Secured Notes issued in April 2025 which reduced the outstanding principal value of our debt by $83 million.",
-     "In connection with the December 2025 Exchange, 26,495,472 common shares of Bausch + Lomb were transferred to 126NumberCo, which owns, in the aggregate, 211,963,893 common shares of Bausch + Lomb following such transfer."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch Health completed the acquisition of Wuhan Shibo Zhenmei Technology Co., Ltd., assuming full responsibility for distributing Solta Medical's product portfolio in the Chinese market.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In December 2025, we completed the acquisition of Wuhan Shibo Zhenmei Technology Co., Ltd. (\u201cShibo Zhenmei\u201d), consisting of the aesthetics distribution business of our full\u2011service distributor in China, the Shibo Group.",
-     "Through this transaction, we assumed full responsibility for the distribution of Solta Medical\u2019s entire product portfolio, including Thermage\u00ae FLX as well as other aesthetic devices, within the Chinese market."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb acquired manufacturing equipment and other assets and assumed a manufacturing facility lease in Mexico.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In December 2025, Bausch + Lomb acquired certain manufacturing equipment, other assets and the assumption of a manufacturing facility lease in Mexico."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch + Lomb entered into a credit facility refinancing amendment consisting of $2,802 million of new term loans maturing January 15, 2031 to refinance its September 2028 and January 2031 term loan B facilities.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In January 2026, Bausch + Lomb entered into a refinancing transaction to extend its maturities and lower its interest rates.",
-     "The refinancing transaction consisted of entering into a term loan facility in the form of a refinancing amendment (the \u201cB+L January 2026 Credit Facility Amendment\u201d) to the existing B+L credit agreement, and consisted of $2,802 million of new term loans maturing on January 15, 2031 (the \u201cB+L January 2031 Refinancing Term Facility\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-K Item 7 MD&A",
-    "claim": "Bausch Health received results for two global double-blind Phase 3 clinical trials evaluating rifaximin SSD-40IR under the RED-C program, and both trials failed to achieve their primary endpoint.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In January 2026, we received the results for the double-blind Phase 3 clinical trials for two global clinical programs evaluating our rifaximin soluble solid dispersion (\u201cSSD\u201d) formulation of rifaximin, known as rifaximin SSD-40IR, as part of our RED-C clinical trial program (\u201cRED-C\u201d).",
-     "While safe and well-tolerated, both clinical trials failed to achieve their primary endpoint."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: referenced in 10-K Item 1A, 10-K Item 7, and 10-Q Part I Item 2",
-    "claim": "The Centers for Medicare & Medicaid Services selected Xifaxan\u00ae for the second round of drug price negotiations under the Inflation Reduction Act, with negotiated prices expected to become effective in 2027.",
-    "facts": [
-     "P2",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "\u2022the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;",
-     "(viii) the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: disclosed in 10-Q Part II Item 1A Risk Factors",
-    "claim": "Bausch Health CEO Thomas Appio was appointed to the board of directors and as chairman of the board of Bausch + Lomb in August 2026, and was appointed interim chief executive officer of Bausch + Lomb effective October 12, 2026.",
-    "facts": [
-     "P6",
-     "P5"
-    ],
-    "quotes": [
-     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026.",
-     "In addition, in August 2026, Mr. Appio was appointed to the board of directors and as chairman of the board of directors of Bausch + Lomb."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: announced in the Q3 2026 8-K earnings release",
-    "claim": "Bausch Health updated its Consolidated full year 2026 Revenue and Adjusted EBITDA guidance and raised full year Revenue, Adjusted EBITDA, and Adjusted Cash Flows from Operations guidance for Bausch Health excluding Bausch + Lomb.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The Company updated its Consolidated full year Revenue and Adjusted EBITDA1 guidance for 2026.",
-     "Bausch Health (excluding Bausch + Lomb) is raising its full year Revenue, Adjusted EBITDA1, and Adjusted Cash Flows from Operations1 guidance, which includes the currently estimated impact of applicable tariffs for the calendar year as of the date of this release."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: announced in the Q3 2026 8-K earnings release",
-    "claim": "Bausch Health announced that its Board of Directors authorized a $50 million share repurchase program primarily to offset dilution associated with anticipated vesting of management equity awards in 2027.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The Company also announced that its Board of Directors has authorized a $50 million share repurchase program, with the primary objective of offsetting dilution associated with the anticipated vesting of management equity awards in 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item: reported in the CEO statement in the Q3 2026 8-K earnings release",
-    "claim": "Bausch Health achieved more than $500 million of net debt reduction during the third quarter of 2026.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "Our performance reflects disciplined execution across the portfolio, with healthy cash generation supporting more than $500 million of net debt reduction during the quarter."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in 10-K Item 1 (P1), 10-K Item 1A (P2), 10-Q Item 2 (P5), and 8-K Q3 2026 earnings release (P7).",
-    "claim": "Xifaxan\u00ae accounts for approximately 85% of Salix segment revenues and generated $2,212 million in 2025, and CMS selected it for drug price negotiations with negotiated prices expected to take effect in 2027.",
+    "basis": "Stated directly in [P1], [P2], and [P5]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Xifaxan\u00ae accounts for approximately 85% of Salix segment revenues, generated $2,212 million in 2025, and was selected by CMS for drug price negotiations with negotiated prices expected to take effect in 2027.",
     "facts": [
      "P1",
      "P2",
@@ -1273,13 +1708,13 @@
     "quotes": [
      "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
      "Our Xifaxan\u00ae product accounted for revenues of $2,212 million, $1,993 million and $1,810 million for 2025, 2024 and 2023, respectively.",
-     "Xifaxan\u00ae was the primary contributor to growth, with 16% revenue growth in the third quarter of 2026."
+     "(viii) the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 1 (P1), 10-K Item 1A (P2), 10-Q Item 2 (P5), and 8-K Q3 2026 earnings release (P7).",
-    "claim": "Third-party generic manufacturers have sent Notices of Paragraph IV Certification for Xifaxan\u00ae and Trulance\u00ae, risking rapid sales erosion if patent protections are not upheld.",
+    "basis": "Stated in [P1] and [P2]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: third-party generic manufacturers have sent Notices of Paragraph IV Certification for Xifaxan\u00ae and Trulance\u00ae, creating sales loss risk if patent protections are not upheld.",
     "facts": [
      "P1",
      "P2",
@@ -1293,8 +1728,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-Q financial statements (F1, F2, F3), 10-K (P2, P3), and 8-K Q3 2026 earnings release (P7).",
-    "claim": "The company carries 866 (table in millions) in current long-term debt and 19,771 (table in millions) in non-current long-term debt, while nine-month interest expense of (1,196) (table in millions) exceeded operating income of 773 (table in millions).",
+    "basis": "Stated directly in [F1] and [F2]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch Health carries 866 (table in millions) in current long-term debt and 19,771 (table in millions) in non-current long-term debt, while nine-month 2026 interest expense of (1,196) (table in millions) exceeded operating income of 773 (table in millions).",
     "facts": [
      "F1",
      "F2",
@@ -1304,29 +1739,31 @@
      "P7"
     ],
     "quotes": [
-     "\u2022our ability to generate cash in order to service our debt;",
-     "\u2022our ability to comply with restrictive covenants in our debt agreements;",
-     "The April 2025 Refinancing Transactions reduced our short-term cash requirements for debt service by extending approximately $6,870 million in aggregate debt maturities from the years 2025 through 2028 to the years 2030 through 2032.",
-     "Upon the successful completion of major refinancing initiatives in the prior twelve-month period, the Company materially improved its debt maturity profile."
+     "Current portion of long-term debt | 866 | 225",
+     "Non-current portion of long-term debt | 19,771 | 20,592",
+     "Operating income | 983 | 619 | 773 | 1,339",
+     "Interest expense | (398) | (412) | (1,196) | (1,207)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-Q balance sheet (F1), 10-Q income statement (F2), and 10-K Item 1A (P2).",
-    "claim": "Nine-month goodwill impairments of 1,426 (table in millions) contributed to a nine-month net loss of (725) (table in millions) and pushed total (deficit) equity to (341) (table in millions) from 377 (table in millions).",
+    "basis": "Stated directly in [F1] and [F2]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: nine-month 2026 goodwill impairments of 1,426 (table in millions) contributed to a nine-month net loss of (725) (table in millions) and total (deficit) equity stood at (341) (table in millions) compared with 377 (table in millions) at year-end.",
     "facts": [
      "F1",
      "F2",
      "P2"
     ],
     "quotes": [
-     "\u2022the impact on our profitability from the potential impairment of goodwill and other intangible assets;"
+     "Goodwill impairments | 0 | 0 | 1,426 | 0",
+     "Net income (loss) | 446 | 181 | (725) | 223",
+     "Total (deficit) equity | (341) | 377"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 1 (P1), 10-K Item 1A (P2), 10-K Item 7 (P3), and 10-Q Item 2 (P5).",
-    "claim": "The planned separation of Bausch + Lomb, in which Bausch Health holds 310,449,643 shares or approximately 87%, faces execution, collateral pledge, tax, and dyssynergy uncertainties.",
+    "basis": "Stated in [P2] and [P5]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: the planned separation of Bausch + Lomb, in which Bausch Health holds 310,449,643 common shares or approximately 87%, faces execution, collateral pledge, tax, and dyssynergy uncertainties.",
     "facts": [
      "P1",
      "P2",
@@ -1334,53 +1771,52 @@
      "P5"
     ],
     "quotes": [
-     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
-     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant.",
-     "No assurance can be given as to whether and when the full B+L Separation will occur, on what terms or structure the B+L Separation will occur or whether the B+L Separation will achieve the benefits originally anticipated."
+     "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026.",
+     "Furthermore, the B+L Separation, if completed, is expected to result in dyssynergy costs, which may be greater than we anticipate and/or may be significant."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-Q Part II Item 1A (P6); governance safeguards stated in 10-K Item 1A (P2).",
-    "claim": "Bausch Health's chief executive officer also serves as interim chief executive officer and chairman of the board of Bausch + Lomb, creating competing demands on management time and potential conflicts of interest.",
+    "basis": "Stated directly in [P6]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: Bausch Health's chief executive officer also serves as interim chief executive officer and chairman of the board of directors of Bausch + Lomb, creating competing demands on management time and potential conflicts of interest.",
     "facts": [
      "P2",
      "P6"
     ],
     "quotes": [
-     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026.",
-     "The overlapping roles at the Company and Bausch + Lomb may create competing demands on management time and attention."
+     "Our chief executive officer also serves as interim chief executive officer and chairman of the board of directors of Bausch + Lomb, and these overlapping roles may create competing demands on management time and attention and actual or perceived conflicts of interest."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 1A (P2) and 10-Q cash flow statement (F3).",
-    "claim": "Ongoing legal proceedings, including pending securities litigations, could result in material liabilities, covenant breaches, and continued cash outflows after nine-month legal settlement payments of (176) (table in millions).",
+    "basis": "Stated in [F3] and [P2]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: ongoing legal proceedings, including pending securities litigations, could result in material liabilities and covenant impacts after nine-month 2026 payments of accrued legal settlements of (176) (table in millions).",
     "facts": [
      "F3",
      "P2"
     ],
     "quotes": [
-     "We are unable to predict how long such proceedings will continue, but we anticipate that we will continue to incur significant costs in connection with some or all of these matters and that some or all of these proceedings will result in a substantial distraction of management\u2019s time, regardless of the outcome."
+     "Payments of accrued legal settlements | (176) | (198)",
+     "we are currently still the subject of a number of other ongoing legal proceedings, including, but not limited to, a number of pending securities litigations, the allegations of which relate to, among other things, allegedly false and misleading statements by the Company and/or failures to disclose information about our business and prospects."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 7 (P3) and 10-K Item 1 (P1).",
-    "claim": "Both clinical trials in the RED-C rifaximin SSD program failed to achieve their primary endpoint.",
+    "basis": "Stated directly in [P3]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: both Phase 3 clinical trials in the RED-C rifaximin SSD program failed to achieve their primary endpoint.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "While safe and well-tolerated, both clinical trials failed to achieve their primary endpoint.",
-     "As of December 31, 2025, we had approximately 80 R&D projects in our pipeline."
+     "In January 2026, we received the results for the double-blind Phase 3 clinical trials for two global clinical programs evaluating our rifaximin soluble solid dispersion (\u201cSSD\u201d) formulation of rifaximin, known as rifaximin SSD-40IR, as part of our RED-C clinical trial program (\u201cRED-C\u201d).",
+     "While safe and well-tolerated, both clinical trials failed to achieve their primary endpoint."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 1 (P1), 10-K Item 1A (P2), 10-Q Item 2 (P5), and 8-K Q3 2026 earnings release (P7).",
-    "claim": "Tariffs, trade restrictions, inflation, and foreign exchange exposure across approximately 90 countries pose cost and revenue risks, while Solta Medical organic revenue decreased 4% in the third quarter.",
+    "basis": "Stated in [P1], [P2], [P5], and [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: tariffs, trade restrictions, inflation, and foreign exchange exposure across approximately 90 countries pose cost and revenue risks, while Solta Medical organic revenue decreased 4% in the third quarter of 2026.",
     "facts": [
      "P1",
      "P2",
@@ -1388,14 +1824,15 @@
      "P7"
     ],
     "quotes": [
-     "Our products are marketed directly or indirectly in approximately 90 countries.",
+     "The Company\u2019s products are marketed directly or indirectly in approximately 90 countries.",
+     "the impact of the imposition of and adverse changes to duties, tariffs and other trade protection measures (including any retaliations to such measures);",
      "Excluding a $2 million favorable impact from foreign exchange and acquisitions of $29 million, segment revenues decreased by 4% on an organic1 basis compared with the third quarter of 2025 with the Asia Pacific region decreasing modestly."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 8-K Q3 2026 earnings release (P7).",
-    "claim": "Management provides forward-looking Adjusted EBITDA and Adjusted Cash Flows from Operations guidance only on a non-GAAP basis without GAAP reconciliations, warning that excluded adjustments may be material.",
+    "basis": "Stated directly in [P7]; no evidence item in the packet became effective after 2026-11-16T16:04:02Z.",
+    "claim": "Unchanged by subsequent filings: management provides non-revenue forward-looking guidance only on a non-GAAP basis without GAAP reconciliations, warning that excluded adjustments may be material.",
     "facts": [
      "P7"
     ],
@@ -1406,11 +1843,10 @@
     "support": "supported"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in F1, F2, and F3 that goodwill declined from 11,271 to 9,767 (table in millions) and 1,426 (table in millions) of goodwill impairments was recorded in the nine months ended September 30, 2026, while the goodwill and segment notes are omitted.",
-    "claim": "Which reporting unit or units incurred the 1,426 (table in millions) goodwill impairment during the nine months ended September 30, 2026, and what triggering events or valuation assumptions caused it?",
+    "basis": "Stated in the cited statements (F1, F2, F3 show the impairment expense and reduced goodwill balance, while the footnotes explaining reporting units and assumptions are absent from the packet).",
+    "claim": "Which reporting units and assumptions drove the 1,426 (table in millions) goodwill impairment in the third-quarter year-to-date period, and what impairment risk remains on the 9,767 (table in millions) goodwill balance?",
     "facts": [
      "F1",
      "F2",
@@ -1423,66 +1859,53 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P1, P2, and P5 that completion depends on targeted debt leverage ratios, regulatory and shareholder approvals, tax structure choices, and collateral pledges on B+L shares, with no assurance on timing, structure, or terms.",
-    "claim": "Whether, when, and under what transaction and tax structure will Bausch Health separate its 310,449,643 common shares (approximately 87%) in Bausch + Lomb, and how will targeted debt leverage ratios and pledged-share collateral complications be satisfied?",
+    "basis": "Stated in the cited items (P1, P2, P3, and P5 explicitly describe the unsettled timing, structure, leverage targets, and collateral complications).",
+    "claim": "When and under what structure will Bausch Health complete the B+L Separation, and how will it satisfy targeted debt leverage ratios and resolve pledged Bausch + Lomb share collateral?",
     "facts": [
      "P1",
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Bausch Health currently indirectly holds 310,449,643 common shares of Bausch + Lomb, which represents approximately 87% of B+L\u2019s outstanding common shares as of October 21, 2026.",
-     "As a result, there can be no assurance as to the timing of the completion of the B+L Separation or its structure or terms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 that Mr. Appio's appointment as chief executive officer of Bausch + Lomb is interim and creates competing demands and potential conflicts of interest referenced in P2.",
-    "claim": "How long will Bausch Health chief executive officer Thomas Appio serve as interim chief executive officer and chairman of the board of Bausch + Lomb, and how are potential conflicts of interest between the two companies being managed?",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026.",
-     "In addition, these overlapping roles may result in conflicts, or the appearance of conflicts, with respect to matters involving or affecting both companies."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1 and P5 that Xifaxan represents approximately 85% of Salix segment revenues and is subject to Paragraph IV litigation detailed in omitted Note 21 (10-K) and Note 17 (10-Q).",
-    "claim": "What is the current procedural status, trial outcome, or settlement timeline of the Paragraph IV generic patent litigation over Xifaxan\u00ae, which accounts for approximately 85% of Salix segment revenues?",
-    "facts": [
-     "P1",
-     "P5"
-    ],
-    "quotes": [
-     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
-     "We continue the evaluation of all relevant factors and considerations relating to our investment in Bausch + Lomb, including the Xifaxan\u00ae Generics Litigation (see \u201cXifaxan\u00ae Paragraph IV Proceedings\u201d of Note 17, \u201cLEGAL PROCEEDINGS\u201d to our unaudited interim Condensed Consolidated Financial Statements)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2, P3, and P5 that Xifaxan was selected for CMS drug price negotiations with negotiated prices expected to become effective in 2027, without disclosing the negotiated price or quantified revenue impact.",
-    "claim": "What are the CMS-negotiated prices for Xifaxan\u00ae expected to become effective in 2027 under the Inflation Reduction Act, and what revenue impact is anticipated?",
-    "facts": [
      "P2",
      "P3",
      "P5"
     ],
     "quotes": [
-     "the expected impacts of the Inflation Reduction Act (\u201cIRA\u201d), and the impact of the negotiated prices for Xifaxan\u00ae, expected to become effective in 2027, under certain programs of the Centers for Medicare & Medicaid Services (\u201cCMS\u201d) and other healthcare reform measures and our ability to mitigate the impact thereof;",
+     "The completion of the B+L Separation is subject to the achievement of targeted debt leverage ratios and the receipt of any applicable shareholder and other necessary approvals.",
+     "No assurance can be given as to whether and when the full B+L Separation will occur, on what terms or structure the B+L Separation will occur or whether the B+L Separation will achieve the benefits originally anticipated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items (P1, P2, and P5 disclose Xifaxan\u00ae's Salix share and 2027 CMS price applicability without quantifying the financial effect).",
+    "claim": "What is the quantified revenue and margin impact of the CMS-negotiated prices for Xifaxan\u00ae expected to take effect in 2027, given Xifaxan\u00ae represents approximately 85% of Salix segment revenues?",
+    "facts": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Sales of the Xifaxan\u00ae product line currently represent approximately 85% of the Salix segment revenues.",
      "the impact of pricing controls, social or governmental pressure to lower the cost of drugs, and consolidation across the supply chain, such as IRA-related legislation and CMS\u2019s selection of Xifaxan\u00ae for the second round of drug price negotiations for initial applicability in 2027, and the outcome thereof;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1 that current portion of long-term debt increased from 225 to 866 (table in millions), while the Q3 2026 financing footnote and updated debt maturity schedule are omitted from P5.",
-    "claim": "Which specific debt obligations account for the increase in current portion of long-term debt from 225 (table in millions) at December 31, 2025 to 866 (table in millions) at September 30, 2026, and how will they be repaid or refinanced?",
+    "basis": "Stated in the cited items (P1 and P5 cross-reference Note 21 and Note 17 for litigation details that are not included in the packet).",
+    "claim": "What is the status and expected outcome of the Paragraph IV patent litigation against third-party generic manufacturers for Xifaxan\u00ae and Trulance\u00ae, and how does it affect the B+L Separation?",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "The Company has filed lawsuits against third-party generic manufacturers that have sent the Company Notices of Paragraph IV Certification for Trulance\u00ae and Xifaxan\u00ae.",
+     "We continue the evaluation of all relevant factors and considerations relating to our investment in Bausch + Lomb, including the Xifaxan\u00ae Generics Litigation (see \u201cXifaxan\u00ae Paragraph IV Proceedings\u201d of Note 17, \u201cLEGAL PROCEEDINGS\u201d to our unaudited interim Condensed Consolidated Financial Statements)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and P3, with the missing September 30, 2026 maturity breakdown inferred as residing in the omitted 10-Q financing footnote and liquidity section.",
+    "claim": "Which debt obligations comprise the 866 (table in millions) current portion of long-term debt, up from 225 (table in millions), and how will the Company refinance or repay them?",
     "facts": [
      "F1",
-     "P3",
-     "P5"
+     "P3"
     ],
     "quotes": [
      "Current portion of long-term debt | 866 | 225",
@@ -1491,48 +1914,20 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P7 that full-year 2026 guidance was raised and a $50 million share repurchase program was authorized, while the guidance tables and non-GAAP reconciliations were omitted from the excerpt.",
-    "claim": "What are the specific full-year 2026 guidance ranges for Revenue, Adjusted EBITDA, and Adjusted Cash Flows from Operations raised in the third-quarter earnings release, and what are the terms and duration of the $50 million share repurchase program?",
+    "basis": "Stated in P7 (the guidance table itself was omitted by truncation, and management explicitly states no forward-looking GAAP reconciliations are provided).",
+    "claim": "What are the raised full-year 2026 Revenue, Adjusted EBITDA, and Adjusted Cash Flows from Operations guidance figures, and how do they reconcile to GAAP net income (loss) and operating cash flows?",
     "facts": [
      "P7"
     ],
     "quotes": [
-     "Bausch Health (excluding Bausch + Lomb) is raising its full year Revenue, Adjusted EBITDA1, and Adjusted Cash Flows from Operations1 guidance, which includes the currently estimated impact of applicable tariffs for the calendar year as of the date of this release.",
-     "The Company also announced that its Board of Directors has authorized a $50 million share repurchase program, with the primary objective of offsetting dilution associated with the anticipated vesting of management equity awards in 2027."
+     "Other than with respect to GAAP revenues, the Company only provides guidance on a non-GAAP basis.",
+     "The Company does not provide a reconciliation of forward-looking Adjusted EBITDA1 to GAAP net income (loss) or forward-looking Adjusted Cash Flows from Operations1 to GAAP cash provided by operating activities, due to the inherent difficulty in forecasting and quantifying certain amounts that are necessary for such reconciliation."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 that pending securities and other legal proceedings remain ongoing and in F3 that (176) (table in millions) of accrued legal settlements was paid in the nine months ended September 30, 2026, while the legal proceedings notes are omitted.",
-    "claim": "What are the remaining accrued reserves, potential unaccrued loss contingencies, and expected timelines for the pending securities litigations and other ongoing legal proceedings following (176) (table in millions) of accrued legal settlement payments in the nine months ended September 30, 2026?",
-    "facts": [
-     "F1",
-     "F3",
-     "P2"
-    ],
-    "quotes": [
-     "Payments of accrued legal settlements | (176) | (198)",
-     "we are currently still the subject of a number of other ongoing legal proceedings, including, but not limited to, a number of pending securities litigations, the allegations of which relate to, among other things, allegedly false and misleading statements by the Company and/or failures to disclose information about our business and prospects."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1 that total (deficit) equity changed from 377 to (341) (table in millions) and in P4 that expected future cash flows are used for debt covenant compliance and going concern assessments, while the actual compliance and liquidity disclosures are omitted.",
-    "claim": "Following the shift in total (deficit) equity from 377 (table in millions) at December 31, 2025 to (341) (table in millions) at September 30, 2026, what is Bausch Health's financial covenant headroom under its credit facilities and management's latest going-concern assessment?",
-    "facts": [
-     "F1",
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "Total (deficit) equity | (341) | 377",
-     "expected future cash flows used in evaluating intangible assets for impairment, assessing compliance with debt covenants and making going concern assessments;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 (updated through February 18, 2026) that both RED-C trials failed their primary endpoint and a Larsucosterol Phase 3 program was planned for early 2026, with no subsequent 2026 pipeline update included in P5 or P7.",
-    "claim": "Following the failure of both RED-C Phase 3 clinical trials for rifaximin SSD-40IR in January 2026, what next steps are planned for the rifaximin SSD program, and did the planned early-2026 Phase 3 trial for Larsucosterol commence?",
+    "basis": "Stated in P3 (dated through February 18, 2026), with no subsequent pipeline status update included in the Q3 2026 excerpts.",
+    "claim": "Following the failure of both RED-C Phase 3 clinical trials for rifaximin SSD-40IR to achieve their primary endpoint, what is the program's future, and were the other 2026 pipeline regulatory and launch milestones met?",
     "facts": [
      "P3"
     ],
@@ -1543,17 +1938,65 @@
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in F1 that consolidated cash and cash equivalents is $ 2,485 (table in millions) and in P7 that Adjusted EBITDA excluding B+L exceeded $1 billion, while segment earnings tables and entity-level debt and cash splits are omitted.",
-    "claim": "How are consolidated cash and cash equivalents of $ 2,485 (table in millions) and consolidated debt allocated between Bausch Health excluding Bausch + Lomb and Bausch + Lomb, and what are the GAAP earnings by reportable segment?",
+    "basis": "Stated in P2 and F3; exact loss contingencies and balances reside in the omitted legal proceedings footnotes.",
+    "claim": "What are the remaining accrued legal settlement liabilities and reasonably possible loss estimates for pending securities and other legal proceedings, and could adverse outcomes breach 2030 Revolving Credit Facility financial covenants?",
+    "facts": [
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "We are unable to predict how long such proceedings will continue, but we anticipate that we will continue to incur significant costs in connection with some or all of these matters and that some or all of these proceedings will result in a substantial distraction of management\u2019s time, regardless of the outcome.",
+     "Payments of accrued legal settlements | (176) | (198)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6, which flags the October 12, 2026 appointment and risk without disclosing search timeline or conflict protocols.",
+    "claim": "How long will CEO Thomas Appio serve as interim chief executive officer of Bausch + Lomb, and what governance controls address competing time demands and potential conflicts of interest?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, our chief executive officer, Thomas Appio, was appointed interim chief executive officer of Bausch + Lomb, effective October 12, 2026.",
+     "In addition, these overlapping roles may result in conflicts, or the appearance of conflicts, with respect to matters involving or affecting both companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 and P5; the exact effective tax rate drivers are omitted from the packet.",
+    "claim": "Why did Bausch Health record a (316) (table in millions) income tax provision on a (409) (table in millions) pre-tax loss, and what are the quantified effects of the OBBBA and OECD tax measures?",
     "facts": [
      "F1",
-     "P1",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Income (loss) before income taxes | 597 | 218 | (409) | 311",
+     "Provision for income taxes | (151) | (37) | (316) | (88)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 and P7 without disclosing dollar amounts.",
+    "claim": "What is the quantified financial impact of tariffs, counter-tariffs, and trade restrictions, and how much in tariff payments is eligible for refund claims?",
+    "facts": [
      "P5",
      "P7"
     ],
     "quotes": [
-     "Cash and cash equivalents | $ 2,485 | $ 1,309",
-     "We also achieved an important milestone, with quarterly Adjusted EBITDA, excluding Bausch + Lomb, exceeding $1 billion for the first time."
+     "Bausch Health (excluding Bausch + Lomb) is raising its full year Revenue, Adjusted EBITDA1, and Adjusted Cash Flows from Operations1 guidance, which includes the currently estimated impact of applicable tariffs for the calendar year as of the date of this release.",
+     "the expected scope and impact of tariffs, counter\u2011tariffs and other trade restrictions and the effectiveness of mitigation actions and the Company\u2019s ability to recover any tariffs that are eligible for refund claims;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P7, which gives the program size and objective without execution window or covenant limits.",
+    "claim": "What are the timing, expiration terms, and debt-covenant constraints for executing the newly authorized $50 million share repurchase program?",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "The Company also announced that its Board of Directors has authorized a $50 million share repurchase program, with the primary objective of offsetting dilution associated with the anticipated vesting of management equity awards in 2027."
     ],
     "support": "supported"
    }
@@ -1563,5 +2006,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no usable tax rate in the filings"
+ "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
 }
