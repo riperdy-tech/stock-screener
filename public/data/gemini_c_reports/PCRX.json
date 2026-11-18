@@ -1,11 +1,558 @@
 {
- "alpha_pts": -19.415890353244315,
+ "alpha_pts": 3.0944248729200123,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 71,
  "claims_supported": 60,
  "date": "2026-11-17T13:18:08Z",
- "equity_value": 908949474.0501837,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Long-term debt fell from $372.2M to $293.6M after an $80M revolver repayment, and any change-of-control treatment under the merger is not in the evidence.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Long-term debt has already fallen to 293.6M after an 80M revolver repayment, below the 372.2M base-year level.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 9 of 9"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0319 and margin 0.0612, margin 0.0582 (persist), growth 0.0375, terminal RONIC 0.0746 (equity return r 0.0838), F 10",
+  "run_gap": 0.08503677915569137,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 983000.0,
+       "printed": 983,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on early extinguishment of debt | 0 | (983) | 0 | (983)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on early extinguishment of debt in 2025"
+      },
+      {
+       "amount": 11000000.0,
+       "printed": 11000,
+       "quotes": [
+        {
+         "id": "P6",
+         "quote": "Impairment on investment | \u2014 | 11,000 | \u2014 | 11,000"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Impairment on an investment in 2025, reported in other non-operating items"
+      },
+      {
+       "amount": 4227000.0,
+       "printed": 4227,
+       "quotes": [
+        {
+         "id": "P6",
+         "quote": "Realized gain on equity investment | \u2014 | \u2014 | \u2014 | (4,227)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Realized gain on an equity investment in 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 238424000.0,
+     "excess_cash_before": 238424000.0,
+     "k0_after": 4253749.497188751,
+     "k0_before": 12009749.49718875,
+     "k0_interest": 17446000.0,
+     "one_offs_charge": 11983000.0,
+     "one_offs_gain": 4227000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 53755336.786540255,
+     "x0_before": 47982751.86348515
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1492021082.0492513,
+     "seam_ratio": 0.8827730720012092,
+     "tv_share": 0.36615859221955416,
+     "wedge_rate_5": -0.025488439233865023
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Long-term debt fell from $372.2M to $293.6M after an $80M revolver repayment, and any change-of-control treatment under the merger is not in the evidence.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.15,
+     "op_margin": [
+      0.07,
+      0.1,
+      0.12,
+      0.13,
+      0.14
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.005,
+      0.03,
+      0.04,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0319 and margin 0.0612, margin 0.0582 (persist), growth 0.0375, terminal RONIC 0.0746 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 60
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.1,
+      0.19
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0354"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of fixed assets | (7,685) | (15,115)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Large-scale manufacturing suites are already built, and recent capex is 1.4-2.1% of revenue against a 3.5% pooled average, so I use 3% as a middle ground."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "all with an expiration date between January 2041 and July 2044"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "EXPAREL's 23 Orange Book patents run to 2041-2044, so there is a long runway before generic erosion, but the ANDA challenges justify a moderate fade of 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $541.5 million | 0.2604 | 0.1661"
+       },
+       {
+        "id": "P3",
+        "quote": "As part of the Flexion Acquisition and the MyoScience Acquisition, we acquired intangible assets consisting of developed technology intangible assets and customer relationships, with estimated useful lives between 9 and 14 years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pacira earned 13-17% in its better years (2021, 2023), and acquired-intangible amortization rolls off over 9-14 year lives. Generic challenges and the royalty keep me below the 2021 peak, at about 15%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 22,272 | 6,362 | 33,441 | 16,851"
+       },
+       {
+        "id": "P7",
+        "quote": "holding that the Company owes royalties on EXPAREL manufactured using its 200-liter process"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month 2026 operating margin is already about 6%, up from 2.6% in 2025. A reinstated RDF royalty on EXPAREL and generic-defense legal costs weigh on margins, while gross-margin gains, divested iovera\u00b0 costs and operating leverage on SG&A push them up. Amortization of about $55M a year is a large GAAP drag."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0746."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 13.5%, against a break-even of 7.5%. Competition erodes returns over time, so I use 12%, which is still above break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenues | $ 176,653 | $ 179,516 | $ 546,428 | $ 529,538"
+       },
+       {
+        "id": "P3",
+        "quote": "EXPAREL revenue increased 5% in 2025 versus 2024."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is nearly flat because iovera\u00b0 (about $24M a year) left in July and Q3 revenue fell year over year. After that, EXPAREL volume growth (about 5%) and new reimbursement and partner channels carry growth at about 3-4%, with flat ZILRETTA and net-price pressure holding it back."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature niche non-opioid analgesic franchise should grow roughly with nominal GDP, a little under the code anchor given generic and competitive pressure on EXPAREL."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_op_margin",
+      "risk": "Generic EXPAREL entry (WhiteOak/Qilu ANDAs) or a patent loss erodes the franchise, which supplies 79% of revenue"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "op_margin",
+      "risk": "The RDF royalty on EXPAREL is reinstated and the previously received $28.3M is partly clawed back, lowering margins"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "EXPAREL net price keeps falling from GPO allowances and ZILRETTA keeps losing volume, so growth stalls"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       -0.035,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       -0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.19,
+      "rev_growth": [
+       0.024999999999999998,
+       0.049999999999999996,
+       0.06,
+       0.06,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Long-term debt fell from $372.2M to $293.6M after an $80M revolver repayment, and any change-of-control treatment under the merger is not in the evidence."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 2.6% is depressed by about $57M of acquired-intangible amortization, heavy SG&A (51% of revenue), higher R&D, and one-off legal and impairment items. 2026 is recovering: nine-month operating margin is about 6.1%, with Q3 at about 12.6%, helped by lower SG&A and a one-off other operating gain. The company has a long record of margins between about 9% and 17% in good years.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate is 25.6%, but the 2026 nine-month tax expense is only $277 thousand after a valuation-allowance release, so the sustainable rate is uncertain."
+     },
+     "why": "2025 operating income was squeezed by a 25% SG&A rise, a 44% R&D rise and $14.1M of net restructuring, legal and impairment charges. 2026 includes the iovera\u00b0 divestiture, which removes about $24M of annual revenue, and a Q3 profit lifted by divestiture and contingent-consideration gains. The Viatris cash offer at $36.50 and the withdrawn guidance mean there is no management outlook, so the standalone margin path is a best estimate with wide error bars."
+    },
+    "value_at_old_defaults": 20.21463360653987,
+    "values": {
+     "base": 40.847477600892674,
+     "bear": 29.95498457032434,
+     "bull": 53.62098770699156
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 983000.0,
+       "printed": 983,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on early extinguishment of debt | 0 | (983)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on early extinguishment of debt in 2025, a non-operating item that will not recur"
+      },
+      {
+       "amount": 11000000.0,
+       "printed": 11000,
+       "quotes": [
+        {
+         "id": "F3",
+         "quote": "Investment impairment | 0 | 11,000"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Investment impairment in 2025 recorded in other, net, which will not recur"
+      },
+      {
+       "amount": 4227000.0,
+       "printed": 4227,
+       "quotes": [
+        {
+         "id": "P6",
+         "quote": "Realized gain on equity investment | \u2014 | \u2014 | \u2014 | (4,227)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Realized gain on an equity investment in 2025, which will not recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 238424000.0,
+     "excess_cash_before": 238424000.0,
+     "k0_after": 4253749.497188751,
+     "k0_before": 12009749.49718875,
+     "k0_interest": 17446000.0,
+     "one_offs_charge": 11983000.0,
+     "one_offs_gain": 4227000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 53755336.786540255,
+     "x0_before": 47982751.86348515
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1352199727.1134849,
+     "seam_ratio": 0.8716229396214085,
+     "tv_share": 0.3761861499618125,
+     "wedge_rate_5": -0.022967328027791802
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Long-term debt has already fallen to 293.6M after an 80M revolver repayment, below the 372.2M base-year level.",
+     "confidence_low",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.025,
+     "fade_years": 10,
+     "long_run_op_margin": 0.14,
+     "op_margin": [
+      0.058,
+      0.075,
+      0.09,
+      0.1,
+      0.11
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.012,
+      0.025,
+      0.04,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0319 and margin 0.0612, margin 0.0582 (persist), growth 0.0375, terminal RONIC 0.0746 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 11,
+     "kept": 60
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.18
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.065
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of fixed assets | (7,685) | (15,115)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex is running at about 1.4% of revenue in 2026, well below the 3.5% five-year pool, which was lifted by the manufacturing build-out. A moderate 2.5% allows for maintenance and some capacity spending."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "all with an expiration date between January 2041 and July 2044"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Listed EXPAREL patents run to 2041-2044, which supports a gradual 10-year convergence rather than a quick one, though generic challengers are already in litigation."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $675.0 million | 0.0122 | 0.1299"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company reached 13% in 2023 and 16.6% in 2021 with a smaller cost base. A long-run margin of 14% assumes partial reversion toward that level, held back by concentration in EXPAREL and eventual generic pressure."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 22,272 | 6,362 | 33,441 | 16,851"
+       },
+       {
+        "id": "P7",
+        "quote": "holding that the Company owes royalties on EXPAREL manufactured using its 200-liter process"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin rises from about 6% as SG&A growth stops, amortization declines and the larger-scale manufacturing suites lift gross margin. A renewed RDF royalty on EXPAREL and legal costs for patent defense offset part of the gain."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0746."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 13.5% against a 7.5% breakeven. A long-run return of 12% reflects a capital-light manufacturing and commercial model, with some fade from competition."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "EXPAREL revenue increased 5% in 2025 versus 2024."
+       },
+       {
+        "id": "F2",
+        "quote": "Total revenues | $ 176,653 | $ 179,516 | $ 546,428 | $ 529,538"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "EXPAREL grew 5% in 2025 on volume, but 2026 growth is low: Q3 revenue fell year over year and iovera\u00b0 (about $24M a year) left in July. Growth recovers to 3-4% as reimbursement widens and partners launch, with generic entry and ZILRETTA softness capping it."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, concentrated specialty pharma with a patent estate to 2044 should grow roughly at or just below the long-run nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_op_margin",
+      "risk": "Generic EXPAREL entry (WhiteOak and Qilu ANDAs) or a lost patent defense erodes volume and price on 79% of revenue"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "The RDF royalty on EXPAREL is reinstated and the earlier repayment is partly unwound, and ZILRETTA volume keeps declining"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Competing non-opioid analgesics and GPO pricing pressure slow long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       -0.018,
+       -0.0049999999999999975,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.037000000000000005,
+       0.05,
+       0.065,
+       0.065,
+       0.060000000000000005
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Long-term debt has already fallen to 293.6M after an 80M revolver repayment, below the 372.2M base-year level."
+     },
+     "margin_position": "The 2025 GAAP margin of 2.6% is depressed by heavy amortization of acquired intangibles ($57.3M), SG&A at 51% of revenue and R&D at 16%, plus one-off items. It is well below the 13% earned in 2023. The 2026 margin is recovering, with nine-month operating income of 33.4M on 546.4M revenue, about 6%.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2026 tax expense is almost nil because a deferred tax asset valuation allowance was released, so the 25.6% base-year rate may not match what is paid in the near term."
+     },
+     "why": "The 2025 operating margin was weighed down by a surge in sales and marketing spend, a rise in R&D, and one-off charges such as the IPR&D impairment, partly offset by a legal judgment gain. Nine-month 2026 operating income is roughly double the prior-year figure on only 3% more revenue. The iovera\u00b0 divestiture removes about $24M of annual revenue and the RDF royalty ruling may add cost, so the base year is a poor guide in both directions. Management withdrew guidance, so the standalone outlook rests on the filings alone."
+    },
+    "value_at_old_defaults": 20.21463360653987,
+    "values": {
+     "base": 37.51560550488032,
+     "bear": 28.169760952669872,
+     "bull": 49.08638006945431
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 20.21463360653987,
+  "value_at_old_defaults_quoted": 20.21463360653987,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1764814994.6251137,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 45042000.0,
@@ -15,7 +562,7 @@
   "Pacira completed the divestiture of its iovera\u00b0 business to Zimmer for up to $140.0 million; it received $73.6 million in cash at closing after purchase price adjustments."
  ],
  "in_code_book": false,
- "ke": 0.08408973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 1455997898,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +570,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 20.180042494786726,
-  "3000": 20.180042494786726
+  "1000": 40.847477600892674,
+  "3000": 37.51560550488032
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -896,103 +1443,17 @@
   ]
  },
  "ticker": "PCRX",
- "upside": -0.3757206138149358,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y1 (1000 none, 3000 down)"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.035361588492622886,
-    0.035361588492622886,
-    0.035361588492622886,
-    0.035361588492622886,
-    0.035361588492622886
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.05821690981770321,
-   "normalized.margin": 0.05821690981770321,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.06119927968552124,
-   "op_margin.y2": 0.05821690981770321,
-   "rev_growth.y1": 0.031895727974196264,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0748739097790697
-  },
-  "numbers": {
-   "capex": [
-    0.035361588492622886,
-    0.035361588492622886,
-    0.035361588492622886,
-    0.035361588492622886,
-    0.035361588492622886
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.05821690981770321,
-   "normalized.margin": 0.05821690981770321,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.06119927968552124,
-   "op_margin.y2": 0.05821690981770321,
-   "rev_growth.y1": 0.031895727974196264,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0748739097790697
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The 2026 guidance of $735 to $760 million total revenues was issued in August 2026 and then withdrawn on 2026-11-05, so year 1 does not use it.",
-   "The evidence gives no figures for fourth-quarter 2026 revenue or for revenue after the July 2026 iovera\u00b0 divestiture, so the effect on year 1 and year 2 revenue is not known.",
-   "The nine-month operating income includes other operating gains and a divestiture gain, and the evidence does not show how much of the margin is recurring.",
-   "The impact of the 2026-11-06 Ninth Circuit ruling on RDF royalties for the 200-liter EXPAREL process cannot be quantified from the evidence.",
-   "Whether the Viatris tender offer at $36.50 per share will close is not known, and the screener row carries no market price or valuation data."
-  ],
-  "year": 3
- },
- "value_base": 20.180042494786726,
- "value_bear": 20.062164831134673,
- "value_bull": 20.299001111734498,
+ "upside": 0.21209996048024093,
+ "valuation": null,
+ "value_base": 39.1815415528865,
+ "value_bear": 29.062372761497105,
+ "value_bull": 51.35368388822293,
  "value_per_filed_share": {
-  "base": 20.180042494786726,
-  "bear": 20.062164831134673,
-  "bull": 20.299001111734498
+  "base": 39.1815415528865,
+  "bear": 29.062372761497105,
+  "bull": 51.35368388822293
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -19.4 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +3.1 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

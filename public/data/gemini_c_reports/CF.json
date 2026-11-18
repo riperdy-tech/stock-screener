@@ -1,11 +1,515 @@
 {
- "alpha_pts": 13.501703155752542,
+ "alpha_pts": 10.596335516802654,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 96,
  "claims_supported": 95,
  "date": "2026-11-16T16:17:26Z",
- "equity_value": 27621732088.65345,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 19 of 19"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1642 and margin 0.4425, margin 0.3247 (persist), growth 0.0375, terminal RONIC 0.0829 (equity return r 0.0938), F 10",
+  "run_gap": 0.08135384989391617,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1982000000.0,
+     "excess_cash_before": 1982000000.0,
+     "k0_after": 568703541.9479923,
+     "k0_before": 568703541.9479923,
+     "k0_interest": 155000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 1390295235.1842384,
+     "x0_before": 1390295235.1842384
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 18654087580.08998,
+     "seam_ratio": 1.0135567028428953,
+     "tv_share": 0.348616970176797,
+     "wedge_rate_5": 0.0004256141526784109
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.11,
+     "fade_years": 10,
+     "long_run_op_margin": 0.285,
+     "op_margin": [
+      0.41,
+      0.33,
+      0.31,
+      0.3,
+      0.295
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.12,
+      -0.03,
+      0.0,
+      0.025,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1642 and margin 0.4425, margin 0.3247 (persist), growth 0.0375, terminal RONIC 0.0829 (equity return r 0.0938), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 95
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.22,
+      0.35
+     ],
+     "rev_growth_y3": [
+      -0.07,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0785"
+       },
+       {
+        "id": "P5",
+        "quote": "Expected CF funded capital expenditures(1)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled five-year ratio is 0.0785, but 2025 was 0.134 and Blue Point (consolidated) plus Common Facilities and the Yazoo City rebuild keep capex elevated through 2029. I use a constant 0.11 across the five years."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Low-carbon ammonia production is expected to begin in 2029."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The fade from cyclical-high margins to mid-cycle takes about a decade given multi-year project timelines, with Blue Point production not starting until 2029."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2017-12-31 | $4,130.0 million | n/a | 0.0567"
+       },
+       {
+        "id": "P2",
+        "quote": "the average selling price for our products declined 34%, from $314 per ton in 2015 to $207 per ton in 2017"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Filed history shows a median of about 0.28 to 0.29 with deep troughs of 0.06 to 0.17. The base rates say a margin above the median keeps roughly half of the gap, and low-cost gas and low-carbon premiums support a level slightly above the median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Litigation settlement gain | 0 | 0 | (170) | 0"
+       },
+       {
+        "id": "P5",
+        "quote": "$2.9B Mid-cycle EBITDA"
+       },
+       {
+        "id": "P5",
+        "quote": "$50/ton urea realized movement implies ~$800M change in Adjusted EBITDA on an annual basis"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is high because of 2026 pricing plus about $300M of one-off gains and recoveries in the nine months. Margins then fade toward the mid-cycle level as the price spike and supply disruptions normalise. Management's $50/ton urea sensitivity shows how large the swings can be."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P3",
+        "quote": "We estimate that the cost of the low-carbon ATR ammonia production facility with CCS technologies will be approximately $3.7 billion."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The existing asset base earns very high returns (0.4531 on tangible capital), but new capital goes to expensive decarbonization and greenfield projects with lower returns. I assume about 0.15, above the 0.0829 break-even level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net sales | $ 1,860 | $ 1,659 | $ 6,068 | $ 5,212"
+       },
+       {
+        "id": "P5",
+        "quote": "Yazoo City Expected to resume operations in 1H 2027"
+       },
+       {
+        "id": "P3",
+        "quote": "The average selling price for our products was $372 per ton in 2025 compared to $313 per ton in 2024."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 sales are $6,068M against $5,212M a year earlier, so year 1 is about +12%. Yazoo City restarts in 1H 2027, but pricing is expected to normalise from cyclical highs. Later years return to modest growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is a mature commodity producer with modest volume growth and inflation-linked pricing. I set it a bit below the long-run nominal anchor, with low-carbon ammonia as only a small upside."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "long_run_op_margin",
+      "risk": "Nitrogen oversupply from new global capacity or higher Chinese exports compresses prices and margins toward the 2015-2017 trough"
+     },
+     {
+      "bear_value": 0.25,
+      "input_hit": "op_margin",
+      "risk": "Natural gas cost advantage erodes (LNG exports, Gulf Coast demand), raising costs while price-setting marginal producers' gas costs fall"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Blue Point cost overruns or delays, or weak returns on decarbonization capital"
+     },
+     {
+      "bear_value": -0.08,
+      "input_hit": "rev_growth",
+      "risk": "Normalisation of the price spike leads to revenue decline in 2027-2028 larger than assumed"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       0.04999999999999999,
+       -0.1,
+       -0.07,
+       -0.045000000000000005,
+       -0.04000000000000001
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.35,
+      "rev_growth": [
+       0.16999999999999998,
+       0.020000000000000004,
+       0.05,
+       0.07500000000000001,
+       0.08
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Long-term debt has been flat at about $3.2B against $2.8B of cash and EBITDA of $3.8B, so leverage is low and the level is likely to be kept, although the quarterly jump in interest expense is unexplained."
+     },
+     "margin_position": "The 2025 operating margin of 0.3247 is a little above the company's own long-run median of roughly 0.28 to 0.29. The 2026 GAAP margin is much higher, about 0.44 over nine months, and about 0.40 after removing the litigation gain and insurance recoveries. The cause is strong nitrogen prices and cheap North American gas. Management's own mid-cycle EBITDA of $2.9B implies a margin near 0.28, so I expect it to fade.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 0.1970 is close to the 2026 nine-month rate of about 19% (491 on 2,556 pretax), and the company says the 2025 tax act does not materially change its tax expense."
+     },
+     "why": "Base-year 2025 revenue of $7,084M rose on a 19% price increase, and 2026 is stronger still. Nine-month 2026 operating earnings include a $170M litigation gain and $137M of insurance recoveries that will not recur. Management itself puts mid-cycle EBITDA well below the current LTM level, so the current margins sit above the mid-cycle level."
+    },
+    "value_at_old_defaults": 173.21755914191084,
+    "values": {
+     "base": 136.6336528077202,
+     "bear": 79.88597778743365,
+     "bull": 231.30431086714518
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1982000000.0,
+     "excess_cash_before": 1982000000.0,
+     "k0_after": 568703541.9479923,
+     "k0_before": 568703541.9479923,
+     "k0_interest": 155000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 1390295235.1842384,
+     "x0_before": 1390295235.1842384
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 20391388543.091553,
+     "seam_ratio": 1.0227370042646111,
+     "tv_share": 0.3577617949127295,
+     "wedge_rate_5": -0.011158842590542187
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 19 of 19"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.1,
+     "fade_years": 10,
+     "long_run_op_margin": 0.29,
+     "op_margin": [
+      0.41,
+      0.35,
+      0.32,
+      0.3,
+      0.3
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.12,
+      -0.03,
+      -0.02,
+      0.03,
+      0.05
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1642 and margin 0.4425, margin 0.3247 (persist), growth 0.0375, terminal RONIC 0.0829 (equity return r 0.0938), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 95
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.24,
+      0.34
+     ],
+     "rev_growth_y3": [
+      -0.1,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.038
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0785"
+       },
+       {
+        "id": "P5",
+        "quote": "~$400 million of the ~$950M is related to Blue Point"
+       },
+       {
+        "id": "F3",
+        "quote": "Additions to property, plant and equipment | (776.0) | (724.0)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Pooled capex is 7.9% of revenue, but 2025 was 13.4%. CF-funded capex of about $950M in 2026, with about $400M for Blue Point, excludes the Yazoo rebuild and the consolidated partner-funded spend. Capex stays elevated through the Blue Point build to 2029, so I use about 10%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Cycle duration expanding due to long lead times extending timeline for future new nitrogen capacity to be built"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Cyclical margins and growth need a long glide, but with a mid-cycle outlook already in hand about 10 years is enough."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "~9.5M tons Expected gross ammonia production $2.9B Mid-cycle EBITDA"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $7,084.0 million | 0.1934 | 0.3247"
+       },
+       {
+        "id": "P2",
+        "quote": "the average selling price for our products declined 34%, from $314 per ton in 2015 to $207 per ton in 2017"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Management's mid-cycle EBITDA is $2.9B. After D&A of roughly $0.85B and revenue of about $7B, that implies a mid-cycle operating margin near 30%, close to the 2018-2025 median. The 2015-17 price drop of 34% shows how far margins can fall in oversupply, so I hold below the current level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating earnings | 701 | 580 | 2,685 | 1,683"
+       },
+       {
+        "id": "F2",
+        "quote": "Litigation settlement gain | 0 | 0 | (170) | 0"
+       },
+       {
+        "id": "F2",
+        "quote": "Insurance recoveries\u2014business interruption | (62) | 0 | (112) | 0"
+       },
+       {
+        "id": "P5",
+        "quote": "$50/ton urea realized movement implies ~$800M change in Adjusted EBITDA on an annual basis"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "The nine-month operating earnings of $2,685M include $170M of litigation gain and $137M of insurance recoveries. The underlying margin is nearer 40% and fades as prices normalise. Each $50/ton urea move shifts adjusted EBITDA by about $800M, so margins are highly price-sensitive."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P4",
+        "quote": "We estimate that the cost of the Blue Point One joint venture\u2019s low-carbon ATR ammonia production facility with CCS technologies will be approximately $3.7 billion."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base return on tangible capital of 0.45 reflects peak-cycle earnings on a depreciated asset base and will not repeat on new money. New projects such as Blue Point (about $3.7B for 1.4Mt) earn far less. I assume 0.15, above the 0.0829 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net sales | $ 1,860 | $ 1,659 | $ 6,068 | $ 5,212"
+       },
+       {
+        "id": "P5",
+        "quote": "Global Nitrogen supply-demand balance remains constructive"
+       },
+       {
+        "id": "P5",
+        "quote": "Expected to resume operations in 1H 2027"
+       },
+       {
+        "id": "P4",
+        "quote": "Low-carbon ammonia production is expected to begin in 2029."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 (FY2026) is largely visible: 9M sales are $6,068M against $5,212M a year earlier, implying about 12% for the year. After that, prices should drift toward mid-cycle even though management calls fundamentals constructive. Yazoo City restarting in 1H27 and Blue Point production in 2029 add volume, which supports a recovery in years 4-5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P3",
+        "quote": "Average selling prices for all of our major products were higher in 2025 than in 2024"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nitrogen is a mature global commodity with demand growth tied to crops and population, so I set growth below the 0.0375 anchor. Low-carbon ammonia adds some upside."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.22,
+      "input_hit": "long_run_op_margin",
+      "risk": "Nitrogen oversupply, increased Chinese exports or new capacity pushes prices to trough levels, and margins fall below the median."
+     },
+     {
+      "bear_value": -0.1,
+      "input_hit": "rev_growth",
+      "risk": "Gas cost advantage erodes (LNG exports, Gulf Coast demand) and prices normalise faster than assumed, causing revenue declines in years 2-3."
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "capex_to_revenue",
+      "risk": "Blue Point cost overruns, tariffs or delays push capital intensity up and returns down."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.24,
+      "rev_growth": [
+       0.039999999999999994,
+       -0.11,
+       -0.1,
+       -0.05,
+       -0.03
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       0.2,
+       0.05,
+       0.06,
+       0.11,
+       0.13
+      ],
+      "terminal_growth": 0.038
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Long-term debt is flat at $3,217M against $2,820M of cash, and the Blue Point build is funded mainly by partner equity, though the unexplained jump in Q3 interest expense and income leaves some doubt."
+     },
+     "margin_position": "The margin is well above CF's own long-run level. In 2025 it was 0.3247, and over 2007-2025 it ranged from 0.057 to 0.499. The nine months of 2026 were higher still, at about 44%, because of about $284M of net one-off gains (litigation, insurance recoveries). Excluding those, the margin is about 40%, and Q3 excluding insurance was about 34%. Nitrogen prices are elevated by supply disruptions and North American gas is cheap relative to marginal producers. Mid-cycle EBITDA is stated by management at $2.9B, well below the $3.8B LTM figure.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 9M 2026 provision of $491M on $2,556M pretax is about 19%, in line with the 0.1970 base-year rate."
+     },
+     "why": "2025 revenue of $7,084M was lifted by a 19% price rise to $372 per ton, and 2026 is running higher again. Management's own mid-cycle EBITDA of $2.9B sits well below the recent $3.8B LTM level. Margins above the long-run median usually give back roughly half of the gap, so I fade from about 41% in year 1 to 29% long run."
+    },
+    "value_at_old_defaults": 173.21755914191084,
+    "values": {
+     "base": 148.2206498997709,
+     "bear": 83.74982725928083,
+     "bull": 295.28071156696166
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 173.21755914191084,
+  "value_at_old_defaults_quoted": 173.21755914191084,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 23101683949.57753,
  "family": "commodity",
  "far_from_price": false,
  "filed_shares": 162200000.0,
@@ -15,7 +519,7 @@
   "The Blue Point One joint venture executed agreements, including a long-term supply agreement, with a subsidiary of Linde plc to design, construct, own, operate and maintain an air separation unit at the Blue Point complex."
  ],
  "in_code_book": false,
- "ke": 0.09359484864903855,
+ "ke": 0.0938268138692389,
  "market_cap_at_publish": 17457641266,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +527,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 170.29427921487948,
-  "3000": 170.29427921487948
+  "1000": 136.6336528077202,
+  "3000": 148.2206498997709
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1344,191 +1848,17 @@
   ]
  },
  "ticker": "CF",
- "upside": 0.5822144393841304,
- "valuation": {
-  "annotations": [
-   "held_at_record: op_margin.y1 model 0.4114 valued at 0.4425"
-  ],
-  "departures": [
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "P2.s131",
-     "V0"
-    ],
-    "input": "op_margin.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "V0",
-     "P3.s55",
-     "P3.s143",
-     "P5.s31"
-    ],
-    "input": "terminal_ronic"
-   },
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "Y2025-12-31",
-     "F3",
-     "P4.s89",
-     "P5.s33"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "down",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "up"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF OPERATIONS - USD ($) shares in Millions, $ in Millions | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nNet sales | $ 1,860 | $ 1,659 | $ 6,068 | $ 5,212\nCost of sales | 1,140 | 1,027 | 3,457 | 3,253\nGross margin | 720 | 632 | 2,611 | 1,959\nSelling, general and administrative expenses | 87 | 88 | 279 | 273\nU.K. operations restructuring | 0 | 0 | 0 | 23\nAsset impairment | 0 | 0 | 23 | 0\nInsurance recoveries\u2014property damage | 0 | 0 | (25) | 0\nInsurance recoveries\u2014business interruption | (62) | 0 | (112) | 0\nLitigation settlement gain | 0 | 0 | (170) | 0\nOther operating income\u2014net | (2) | (30) | (52) | (8)\nTotal other operating expense (income)\u2014net | 23 | 58 | (57) | 288\nEquity in earnings of operating affiliate | 4 | 6 | 17 | 12\nOperating earnings | 701 | 580 | 2,685 | 1,683\nInterest expense | 168 | 41 | 257 | 114\nInterest income | (92) | (23) | (138) | (57)\nOther non-operating expense (income)\u2014net | 6 | (3) | 10 | (11)\nEarnings before income taxes | 619 | 565 | 2,556 | 1,637\nIncome tax provision | 99 | 105 | 491 | 334\nNet earnings | 520 | 460 | 2,065 | 1,303\nLess: Net earnings attributable to noncontrolling interests | 84 | 107 | 287 | 252\nNet earnings attributable to common stockholders | $ 436 | $ 353 | $ 1,778 | $ 1,051\nNet earnings per share attributable to common stockholders:\nBasic (in dollars per share) | $ 2.88 | $ 2.19 | $ 11.62 | $ 6.40\nDiluted (in dollars per share) | $ 2.87 | $ 2.19 | $ 11.60 | $ 6.39\nWeighted average common shares outstanding:\nBasic (in shares) | 151.2 | 161.0 | 153.0 | 164.2\nDiluted (in shares) | 151.6 | 161.2 | 153.3 | 164.3\nDividends declared per common share (in dollars per share) | $ 0.60 | $ 0.50 | $ 1.60 | $ 1.50"
-   },
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF CASH FLOWS - USD ($) $ in Millions | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nOperating Activities:\nNet earnings | $ 2,065.0 | $ 1,303.0\nAdjustments to reconcile net earnings to net cash provided by operating activities:\nDepreciation and amortization | 676.0 | 670.0\nDeferred income taxes | (34.0) | 13.0\nStock-based compensation expense | 29.0 | 35.0\nUnrealized net (gain) loss on natural gas derivatives | (3.0) | 1.0\nAsset impairment | 23.0 | 0.0\nGain on sale of emission credits | (5.0) | (8.0)\nLoss on disposal of property, plant and equipment | 13.0 | 2.0\nInsurance recoveries\u2014property damage | (25.0) | 0.0\nLoss on sale of Ince facility | 0.0 | 23.0\nUndistributed earnings of affiliate\u2014net of taxes | (7.0) | (7.0)\nPension settlement loss | 7.0 | 0.0\nChanges in assets and liabilities:\nAccounts receivable\u2014net | (148.0) | (215.0)\nInventories | (38.0) | (54.0)\nAccrued and prepaid income taxes | (51.0) | 19.0\nAccounts payable and accrued expenses | (38.0) | 60.0\nCustomer advances | 391.0 | 358.0\nOther\u2014net | (311.0) | 13.0\nNet cash provided by operating activities | 2,544.0 | 2,213.0\nInvesting Activities:\nAdditions to property, plant and equipment | (776.0) | (724.0)\nProceeds from sale of property, plant and equipment | 1.0 | 6.0\nProceeds from sale of Ince facility | 0.0 | 4.0\nInsurance proceeds for property, plant and equipment | 25.0 | 0.0\nPurchase of emission credits | (6.0) | (1.0)\nProceeds from sale of emission credits | 0.0 | 8.0\nNet cash used in investing activities | (756.0) | (707.0)\nFinancing Activities:\nFinancing fees | 0.0 | (1.0)\nDividends paid on common stock | (246.0) | (248.0)\nContributions from noncontrolling interests | 391.0 | 291.0\nDistributions to noncontrolling interests | (447.0) | (304.0)\nPurchases of treasury stock | (610.0) | (1,020.0)\nProceeds from issuances of common stock under employee stock plans | 1.0 | 1.0\nCash paid for shares withheld for taxes | (18.0) | (14.0)\nNet cash used in financing activities | (929.0) | (1,295.0)\nEffect of exchange rate changes on cash and cash equivalents | (21.0) | 13.0\nIncrease in cash and cash equivalents | 838.0 | 224.0\nCash and cash equivalents at beginning of period | 1,982.0 | 1,614.0\nCash and cash equivalents at end of period | $ 2,820.0 | $ 1,838.0"
-   },
-   "P2.s131": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "The strongest demand for our products in North America occurs during the spring planting season, with a second period of strong demand following the fall harvest."
-   },
-   "P3.s143": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "The development of additional natural gas reserves in North America has decreased natural gas costs in North America relative to the rest of the world, making North"
-   },
-   "P3.s55": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Our unique capabilities include: advantaged production, unmatched distribution and logistics network, operational excellence and disciplined capital stewardship."
-   },
-   "P4.s89": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "We estimate that the cost of the Blue Point One joint venture\u2019s low-carbon ATR ammonia production facility with CCS technologies will be approximately $3.7 billion."
-   },
-   "P5.s31": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "Canada/US tax matter) Q3 2026 LTM FCF/Adj EBITDA Conversion(7) $833M Q3 2026 Adjusted EBITDA(1) $3.8B Q3 2026 LTM Adjusted EBITDA(1) $3.1B Q3 2026 LTM Cash from Operations $2.0B Q3 2026 LTM Free Cash Flow(3) $1.3B Q3 2026 LTM Capital Returned to Shareholders(2) $1.1B Remaining in Current $2B Share Repurchase Authorization(4) $2.2B Q3 2026 LTM Net Earnings $436M Q3 2026 Net Earnings 10% Greater Capacity Utilization than North America Peers(8) 5-year rolling average ending 2025"
-   },
-   "P5.s33": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "6 Near and long-term outlook CF 2026 Outlook Long-term Outlook Market Outlook Global Nitrogen supply-demand balance remains constructive - European curtailments expected to accelerate - Geopolitical disruptions continue to constrain supply - Cycle duration expanding due to long lead times extending timeline for future new nitrogen capacity to be built Blue Point Construction commenced; total project cost remains ~$3.7B - Ammonia production expected to commence in 2029 - Common facilities expected to be ~$550 million Yazoo City Expected to resume operations in 1H 2027 (1) ~$400 million of the ~$950M is related to Blue Point and excludes the capital expenditures associated with the Yazoo City rebuild ~$950M Expected CF funded capital expenditures(1) ~9.5M tons Expected gross ammonia production $2.9B Mid-cycle EBITDA"
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min 0.2645, p25 0.2941, median 0.3247, p75 0.3363, max 0.4825, last 0.3247; persist 0.3247 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 0.7109, 2023-12-31 -0.4072, 2024-12-31 -0.1048, 2025-12-31 0.1934.\nBase-year revenue 7,084,000,000; tax rate 0.1970; return on opening capital 0.4531; capital expenditure 0.0785 and depreciation 0.1185 of revenue (pooled); the desk depreciates by the vintages rule (filed plant ages).\nCost of equity 0.0936 (risk-free 0.0510, long-run growth anchor 0.0375, loading 0.893, equity premium 0.0477).\nYear 1 to date (10-Q 0001324404-26-000025, filed 2026-11-05): revenue 6,068,000,000 from 2026-01-01 to 2026-09-30 against 5,212,000,000 from 2025-01-01 to 2025-09-30, growth 0.1642; operating income 2,685,000,000, margin 0.4425.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd 0.1642; anchor 0.1307; record_median 0.1325; last 0.1719; zero 0.1208; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.0443; last 0.1934; zero 0.0000; guidance\nop_margin.y1: ytd 0.4425; persist 0.4114; median 0.4114; p25 0.4033; p75 0.4144; last 0.4114; guidance\nop_margin.y2: persist 0.3247; median 0.3247; p25 0.2941; p75 0.3363; last 0.3247; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.3247; median 0.3247; p25 0.2941; p75 0.3363; last 0.3247; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0828; quarter 0.1040; half 0.1400; three_quarters 0.2139; ronic0 0.4531\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0785; record_last 0.1341; record_max 0.1341; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001324404-26-000007): revenue $7,084.0 million; operating income $2,300.0 million; operating margin 32.5%; net income $1,455.0 million; depreciation and amortization $898.0 million; capital expenditure $950.0 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.07850167224080268,
-    0.07850167224080268,
-    0.07850167224080268,
-    0.07850167224080268,
-    0.07850167224080268
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3246753246753247,
-   "normalized.margin": 0.3246753246753247,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.4424851680949242,
-   "op_margin.y2": 0.3246753246753247,
-   "rev_growth.y1": 0.1642363775901765,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08275920880744461
-  },
-  "numbers": {
-   "capex": [
-    0.13410502540937325,
-    0.13410502540937325,
-    0.13410502540937325,
-    0.13410502540937325,
-    0.13410502540937325
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3246753246753247,
-   "normalized.margin": 0.3246753246753247,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.411353035559423,
-   "op_margin.y2": 0.3246753246753247,
-   "rev_growth.y1": 0.1642363775901765,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10401312824053842
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.411353035559423,
-    "model_option": "persist",
-    "record": 0.4424851680949242,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "record_last",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "quarter"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No revenue or operating margin guidance is provided for full-year 2026 (including Q4 2026) or 2027.",
-   "Consolidated capital expenditure for 2026 through 2029 is not fully quantified because 2026 CF-funded capital expenditure outlook excludes the Yazoo City rebuild and joint venture partners' 60% share of Blue Point funding, and annual phasing of the Blue Point facility and Common Facilities spending is not disclosed.",
-   "The exact timing within 1H 2027 and full financial impact of the Yazoo City restart, as well as whether additional property damage or business interruption insurance recoveries will be recognized after Q3 2026, are not stated.",
-   "Future global nitrogen selling prices, North American versus global natural gas price differentials, low-carbon ammonia price premiums, and Section 45Q tax credit amounts are not quantified over the forecast period.",
-   "Quarterly risk factors for the Q3 2026 Form 10-Q were not found in the packet, and portions of the 10-K, 10-Q MD&A, and Q3 2026 earnings release were omitted."
-  ],
-  "year": 3
- },
- "value_base": 170.29427921487948,
- "value_bear": 154.00799193782464,
- "value_bull": 182.29764323785074,
+ "upside": 0.3232992703641875,
+ "valuation": null,
+ "value_base": 142.42715135374556,
+ "value_bear": 81.81790252335725,
+ "value_bull": 263.2925112170534,
  "value_per_filed_share": {
-  "base": 170.29427921487948,
-  "bear": 154.00799193782464,
-  "bull": 182.29764323785074
+  "base": 142.42715135374556,
+  "bear": 81.81790252335725,
+  "bull": 263.2925112170534
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +13.5 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +10.6 points a year against the required return over 3 years"
 }

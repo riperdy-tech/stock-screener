@@ -1,23 +1,513 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 19.06161628546323,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 136,
  "claims_supported": 122,
  "date": "2026-11-16T10:10:07Z",
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.6200 (filed 0.3250 to 0.4504)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.4600 (filed 0.3250 to 0.4504)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.7000 (filed 0.3250 to 0.4504)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.5500 (filed 0.3250 to 0.4504)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3639 (persist), growth 0.0375, terminal RONIC 0.0772 (equity return r 0.0846), F 10",
+  "run_gap": 0.06552251200722019,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 242009000.0,
+     "excess_cash_before": 242009000.0,
+     "k0_after": 103697511.13871086,
+     "k0_before": 103697511.13871086,
+     "k0_interest": 51750000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 232934172.87517008,
+     "x0_before": 232934172.87517008
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3840273668.969308,
+     "seam_ratio": 0.9811914280072548,
+     "tv_share": 0.390278954486307,
+     "wedge_rate_5": -0.054015249477579026
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.6200 (filed 0.3250 to 0.4504)",
+     "margin_outside_filed_record: op_margin.y2 0.4600 (filed 0.3250 to 0.4504)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.2,
+     "fade_years": 7,
+     "long_run_op_margin": 0.33,
+     "op_margin": [
+      0.62,
+      0.46,
+      0.38,
+      0.35,
+      0.34
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.3,
+      -0.14,
+      -0.06,
+      0.0,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.3639 (persist), growth 0.0375, terminal RONIC 0.0772 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 14,
+     "kept": 122
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.27,
+      0.4
+     ],
+     "rev_growth_y3": [
+      -0.16,
+      0.06
+     ],
+     "terminal_growth": [
+      0.015,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.2345"
+       },
+       {
+        "id": "P2",
+        "quote": "The Group will be required to make substantial capital expenditures in order to modernise the fleet"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 5-year pooled ratio of 0.2345 is inflated by the 2024 Avance purchase of 0.6253. Fleet renewal and drydocking remain substantial, but 2026 includes vessel sales and a high revenue base, so I use a slightly lower figure close to depreciation of about 0.21."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "with 2027 expected to see a particularly high level of deliveries"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Shipping cycles typically play out over 5-10 years, and the 2026 spike plus the 2027 delivery wave imply a gradual rather than abrupt return to mid-cycle margins."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "the short-term VLGC TCE rates for shipping LPG between the Middle East and Japan fluctuated between a high of US$175,874 per day to a low of US$6,243 per day"
+       },
+       {
+        "id": "P2",
+        "quote": "An oversupply of LPG shipping capacity may have an adverse effect on LPG freight rates"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company is highly cyclical, with margins of 0.325, 0.428, 0.450 and 0.343 over four years, a median near 0.385. Base rates say an above-median margin keeps about half its gap, but the 2026 spike is rate-driven and supply is rising. I settle slightly below the median because Product Services profit and vessel gains are volatile."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Operating profit | 140,367 | 58,839 | 360,047 | 137,790"
+       },
+       {
+        "id": "P8",
+        "quote": "Gross trading result: US$164 million"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,015.7 million | 0.0550 | 0.3427"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "H1 2026 operating profit of 360.0M and a Q3 Product Services gross result of US$164M point to a 2026 margin far above the 2025 level of 0.3427, aided by disposal gains. I fade it toward the mid-cycle level as spot rates mean-revert and supply grows."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.1144"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is 0.1144 and the break-even return is 0.0772. Vessels bought at cycle-high prices earn mid-cycle returns, so I assume new investment earns somewhat above break-even but below the current return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "For Q3, available fleet days are fixed at 92% at an average rate of ~US$88,000 per day"
+       },
+       {
+        "id": "P1",
+        "quote": "with 2027 expected to see a particularly high level of deliveries"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "H1 2026 shipping revenue is already about 25% above H1 2025, and Q3 is guided at about US$88,000 per day on 92% fixed days, so 2026 revenue should jump despite vessel sales. 2027 brings heavy newbuild deliveries and possible normalisation of Middle East flows, so I assume a decline in 2027-28 and flat-to-modest growth afterwards."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Growth in export volumes of LPG is expected to continue in the years ahead."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "LPG export volumes are expected to keep growing, but shipping is a mature, cyclical, capital-intensive business with a ageing-fleet replacement need, so I set growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.25,
+      "input_hit": "long_run_op_margin",
+      "risk": "Freight rates collapse as 2027 newbuild deliveries arrive and Hormuz trade normalises, leaving mid-cycle margins lower than assumed"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "US-China port fees are reimposed and tariffs persist, cutting demand and revenue growth in the middle years"
+     },
+     {
+      "bear_value": 0.3,
+      "input_hit": "capex_to_revenue",
+      "risk": "Fleet renewal needs force higher capex at elevated newbuild prices, with ageing vessels sold at cycle-high values"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.19999999999999998,
+       -0.24000000000000002,
+       -0.16,
+       -0.1,
+       -0.07
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.4,
+      "rev_growth": [
+       0.42,
+       -0.020000000000000018,
+       0.06,
+       0.12,
+       0.15
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $853.1M is modest against about $1.9B of equity and a stated target of book leverage below 60%, and net leverage fell further to 23.5% by mid-2026."
+     },
+     "margin_position": "The 2025 margin of 0.3427 is below the 2023-24 peak of 0.4277-0.4504 but near the middle of the 4-year range. 2026 is far above it: H1 operating profit was 360.0M on about 595M of shipping revenue, with spot rates at about US$74,000-88,000 per day against US$45,010 in 2025. Product Services trading profit and vessel-sale gains also sit inside operating profit, but its revenue is outside the revenue base. Both are volatile, and 2027 newbuild deliveries threaten rates.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 4.7% base-year rate is low but reflects shipping tax regimes and is close to the roughly 5% implied in H1 2026, although the filing flags tax-challenge risk."
+     },
+     "why": "2025 was a softer-rate year (spot rates down 10.9%) with a fully integrated Avance fleet, and its Product Services gross profit fell to 15.9M from 144.8M. 2026 is running well above that, helped by the Hormuz closure and longer voyages, and should not be extrapolated. I model a 2026 spike, then a fade toward a mid-cycle margin of about one-third as rates normalise and deliveries rise in 2027."
+    },
+    "value_at_old_defaults": 29.04802364382581,
+    "values": {
+     "base": 28.741478099277668,
+     "bear": 14.716882123085979,
+     "bull": 69.64575464325223
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 242009000.0,
+     "excess_cash_before": 242009000.0,
+     "k0_after": 103697511.13871086,
+     "k0_before": 103697511.13871086,
+     "k0_interest": 51750000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 232934172.87517008,
+     "x0_before": 232934172.87517008
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4115688006.1350946,
+     "seam_ratio": 0.9809083421762108,
+     "tv_share": 0.345213332201562,
+     "wedge_rate_5": -0.061796828260454455
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.7000 (filed 0.3250 to 0.4504)",
+     "margin_outside_filed_record: op_margin.y2 0.5500 (filed 0.3250 to 0.4504)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.2,
+     "fade_years": 8,
+     "long_run_op_margin": 0.35,
+     "op_margin": [
+      0.7,
+      0.55,
+      0.45,
+      0.4,
+      0.38
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.28,
+      -0.15,
+      -0.1,
+      0.0,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.3639 (persist), growth 0.0375, terminal RONIC 0.0772 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 14,
+     "kept": 122
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.28,
+      0.42
+     ],
+     "rev_growth_y3": [
+      -0.2,
+      0.0
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.2345; depreciation (without amortization of acquired intangibles) / revenue 0.2063."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 5-year pooled ratio is 0.2345 but is inflated by the 2024 Avance purchase of 1,050 million. Years 1-5 are mostly fleet renewal and drydocking, partly offset by vessel sales, so I use about 0.20, near depreciation."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Exports remain heavily restricted as the Strait of Hormuz remains closed"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Shipping cycles last several years and the 2026 spike may take about eight years to wash out into the long-run margin."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,015.7 million | 0.0550 | 0.3427"
+       },
+       {
+        "id": "P2",
+        "quote": "fluctuated between a high of US$175,874 per day to a low of US$6,243 per day from 2019 to the period ended 31 December 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed margins were 0.325, 0.428, 0.450 and 0.343 for 2022-25, a median of about 0.39. The base rates say a cyclical margin above its median keeps only part of the gap. I take 0.35, slightly below the median, because the filed revenue excludes Product Services while its profit counts."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Operating profit | 140,367 | 58,839 | 360,047 | 137,790"
+       },
+       {
+        "id": "P8",
+        "quote": "Gross trading result: US$164 million"
+       },
+       {
+        "id": "P7",
+        "quote": "the sale of BW Loyalty is expected to generate a gain on disposal of approximately US$52 million"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "H1 2026 operating profit was 360 million on about 595 million of Shipping revenue, and Q3 Product Services alone added a gross trading result of 164 million, with vessel-sale gains still to come. Year 1 is set at 0.70, a haircut for Q4 risk and for part of the Q3 gain being non-recurring. It then fades as spot rates normalise and Product Services trading profit shrinks."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1144; tax rate 0.0467"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0772."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Return on tangible capital was 11.4% in 2025 and only modestly above the 7.7% level at which growth adds no value. Newbuild or second-hand VLGCs in a cyclical market earn in line with cost of capital over a cycle, so I use 0.09."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "available fleet days are fixed at 92% at an average rate of ~US$88,000 per day"
+       },
+       {
+        "id": "P1",
+        "quote": "with 2027 expected to see a particularly high level of deliveries"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 Shipping revenue should jump: H1 was about 595 million against about 478 million of spot plus time charter revenue in H1 2025, and Q3 guidance is about 88,000 per day. Rates should then normalise as 2027 deliveries arrive and older ships are sold, so revenue falls in 2027-28 before stabilising."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Growth in export volumes of LPG is expected to continue in the years ahead."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "LPG export growth supports long-run shipping demand, but fleet supply is cyclical and new vessels add capacity. I set 0.03, below the 0.0375 anchor, because this is a mature asset-heavy shipping business."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.28,
+      "input_hit": "long_run_op_margin",
+      "risk": "Hormuz reopens and 2027 deliveries cause a rate collapse, so earnings fall back to or below the 2025 level"
+     },
+     {
+      "bear_value": 0.5,
+      "input_hit": "op_margin",
+      "risk": "Product Services trading losses or mark-to-market swings and margin calls erode the profit that sits in operating income"
+     },
+     {
+      "bear_value": -0.2,
+      "input_hit": "rev_growth",
+      "risk": "Fleet shrinks through vessel sales and rates fall, so revenue declines more than assumed"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.28,
+      "rev_growth": [
+       0.18000000000000002,
+       -0.25,
+       -0.2,
+       -0.1,
+       -0.07
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.42,
+      "rev_growth": [
+       0.38,
+       -0.04999999999999999,
+       0.0,
+       0.1,
+       0.13
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of 853 million is moderate against a 60% book-leverage ceiling and net leverage was falling to 23.5% in 2026, but vessel sales and further fleet renewal could move it either way."
+     },
+     "margin_position": "The filed margin is operating income over Shipping revenue only. Product Services revenue is not in the revenue line, but its gross profit and the disposal gains are in operating income, so the margin runs high and moves a lot. 2025 (0.3427) was below the 2023-24 level because spot rates fell and depreciation rose after the Avance fleet purchase. 2026 is far above that: the Strait of Hormuz closure and longer voyages lifted spot earnings, and Product Services trading and vessel sales added profit. Part of this will fade as new VLGC deliveries arrive.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 4.7% rate reflects a shipping tax regime and H1 2026 tax of 17.7 million on 325 million of profit is also low, though a tax dispute could raise it."
+     },
+     "why": "2025 was a mid-cycle-to-soft shipping year with weak Product Services profit and a full year of the enlarged fleet. 2026 is already much stronger on year-to-date results, with H1 operating profit of 360 million against 138 million a year earlier. Year 1 is therefore set well above the base year and then fades toward a lower long-run margin. The revenue line leaves out Product Services, so the margin is on an unusual base and carries wide uncertainty."
+    },
+    "value_at_old_defaults": 29.04802364382581,
+    "values": {
+     "base": 30.688478108897016,
+     "bear": 15.858182523608622,
+     "bull": 66.45548965363128
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 29.04802364382581,
+  "value_at_old_defaults_quoted": 29.04802364382581,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4513616029.076555,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 151897000.0,
  "flags": [
   "The Group agreed to acquire 12 VLGCs from Avance Gas for US$1,050 million, and all vessels were delivered before the end of that year.",
   "The company's common shares began trading on the NYSE under ticker BWLP, in addition to the OSE listing.",
   "The company completed its redomiciliation from Bermuda to Singapore, and its common shares were converted into ordinary shares."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08462083045154348,
+ "market_cap_at_publish": 3333848494,
  "model": "claude-opus-5-5",
- "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+ "no_value_reason": null,
+ "price_at_publish": 21.96,
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 28.741478099277668,
+  "3000": 30.688478108897016
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1635,8 +2125,17 @@
   ]
  },
  "ticker": "BWLP",
+ "upside": 0.3538755696906468,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+ "value_base": 29.714978104087344,
+ "value_bear": 15.2875323233473,
+ "value_bull": 68.05062214844176,
+ "value_per_filed_share": {
+  "base": 29.714978104087344,
+  "bear": 15.2875323233473,
+  "bull": 68.05062214844176
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +19.1 points a year against the required return over 3 years"
 }

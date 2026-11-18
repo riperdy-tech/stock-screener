@@ -1,11 +1,572 @@
 {
- "alpha_pts": -5.908479746395506,
+ "alpha_pts": 7.432852779620106,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 127,
  "claims_supported": 123,
  "date": "2026-11-16T22:58:37Z",
- "equity_value": 7142545887.351441,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1950 (filed 0.0416 to 0.1865)",
+   "run 1000: return_above_base_year: long-run 0.0800 against the base year's 0.0621",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year rate of 15.35% reflects a near-zero pretax profit; nine-month 2026 tax was 226,074 on pretax income of 1,020,712 (about 22%), which is closer to sustainable.",
+   "run 1000: debt_level_representative_no: Total debt of $3,937.5 million is being cut quickly, with management targeting year-end net debt at or below $3.0 billion, so the base level overstates future leverage.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.2000 (filed 0.0416 to 0.1865)",
+   "run 3000: return_above_base_year: long-run 0.0900 against the base year's 0.0621",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The base-year rate of 15.35% reflects depressed pretax income, while the nine-month FY2026 rate is about 22% (226,074 tax on 1,020,712 pretax income).",
+   "run 3000: debt_level_representative_no: Debt of $3.94 billion is falling, with management targeting net debt at or below $3.0 billion by year-end 2026, so the base-year level overstates the future level.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1446 and margin 0.2201, margin 0.0922 (persist), growth 0.0375, terminal RONIC 0.0642 (equity return r 0.0781), F 10",
+  "run_gap": 0.12804921357511387,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 2978000.0,
+       "printed": 2978,
+       "quotes": [
+        {
+         "id": "F3",
+         "quote": "Loss on early retirement of debt | 0 | 2,978"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on early retirement of debt in fiscal 2025 (shown in the nine-month comparative; the full-year amount is not separately printed)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 88671000.0,
+     "excess_cash_before": 88671000.0,
+     "k0_after": 221993617.15360823,
+     "k0_before": 224971617.15360823,
+     "k0_interest": 222279000.0,
+     "one_offs_charge": 2978000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 132431106.90644687,
+     "x0_before": 129910244.30040872
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 8600137546.77371,
+     "seam_ratio": 0.9688140790336284,
+     "tv_share": 0.3655334630905255,
+     "wedge_rate_5": -0.02615150869300178
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1950 (filed 0.0416 to 0.1865)",
+     "return_above_base_year: long-run 0.0800 against the base year's 0.0621",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate of 15.35% reflects a near-zero pretax profit; nine-month 2026 tax was 226,074 on pretax income of 1,020,712 (about 22%), which is closer to sustainable.",
+     "debt_level_representative_no: Total debt of $3,937.5 million is being cut quickly, with management targeting year-end net debt at or below $3.0 billion, so the base level overstates future leverage.",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.065,
+     "fade_years": 10,
+     "long_run_op_margin": 0.11,
+     "op_margin": [
+      0.195,
+      0.16,
+      0.14,
+      0.13,
+      0.12
+     ],
+     "return_on_new_investment_long_run": 0.08,
+     "rev_growth": [
+      0.1,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1446 and margin 0.2201, margin 0.0922 (persist), growth 0.0375, terminal RONIC 0.0642 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 123
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.075,
+      0.145
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0647"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (343,515) | (224,045)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled capex ratio is 6.5%, and nine-month 2026 capex of 343.5 million is about 6.8% of sales, so I hold 6.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Combined Adjusted EBITDA was $514.3 million, compared to $244.9 million for third quarter 2025"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin mean-reversion from a policy-driven peak plays out over several years, so I use 10."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Segment operating income/ (loss) | 215,208 | 151,790 | 3,355 | (96,913) | 273,440"
+       },
+       {
+        "id": "P2",
+        "quote": "Our renewable energy businesses, including the DGD Joint Venture, are highly dependent on government programs, incentives and regulatory frameworks, which are subject to change and uncertainty."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Operating margins ran about 14% to 19% in 2019 to 2023, then fell to 8% and 4.5%. The company is cyclical and policy-driven, and the current margin is far above its median. I assume it keeps roughly half of the gap, which gives about 11%, with the DGD equity share included in operating income."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Equity in net income/(loss) of Diamond Green Diesel | 165,636 | (45,844) | 623,029 | (70,367)"
+       },
+       {
+        "id": "P6",
+        "quote": "reaffirms fiscal year 2026 Combined Adjusted EBITDA guidance of $2.2-$2.3 billion"
+       },
+       {
+        "id": "P6",
+        "quote": "Q4 estimated production ~325 million gallons"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is about 19.5% because nine months already show 22% with DGD equity income of 623 million and a Q4 DGD outlook that management calls favorable. Years 2 to 5 fade toward the long-run level as DGD margins normalize and policy risk persists."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0621"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0642."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 6.2% is depressed by the DGD loss. New investment in rendering and collagen should earn modestly above the 6.4% break-even, but not far above it, because the business is capital intensive and commodity-exposed."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net sales | $ 1,791,116 | $ 1,563,966 | $ 5,066,015 | $ 4,426,078"
+       },
+       {
+        "id": "P4",
+        "quote": "The Company sold its natural casings business (known as CTH) in the third quarter of fiscal 2026."
+       },
+       {
+        "id": "P3",
+        "quote": "Fiscal 2025 includes an additional week of operations which occurs every five to six years."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (FY2026) is largely locked in: nine-month sales are 5,066 million against 4,426 million, so growth of about 10% is likely. Growth then slows because the casings and grease-trap businesses are sold and FY2025 had an extra week worth about $122 million."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0781; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, commodity-linked global rendering and collagen business should grow near nominal GDP, slightly below the anchor, given limited raw-material pool growth and divestitures."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.075,
+      "input_hit": "long_run_op_margin",
+      "risk": "DGD margins or renewable fuel policy (RFS, LCFS, 45Z, producer tax credit) deteriorate, as in FY2025, and equity income collapses"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "op_margin",
+      "risk": "Q4 and 2027 DGD recovery does not materialize, so year-1 and year-2 margins fall well short"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Commodity fat and protein prices fall and divestitures shrink the base, so growth stalls"
+     },
+     {
+      "bear_value": 0.064,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Growth investment earns only the break-even return (tariffs, DGD capital calls)"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.075,
+      "rev_growth": [
+       0.07,
+       -0.009999999999999998,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.145,
+      "rev_growth": [
+       0.125,
+       0.045,
+       0.055,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Total debt of $3,937.5 million is being cut quickly, with management targeting year-end net debt at or below $3.0 billion, so the base level overstates future leverage."
+     },
+     "margin_position": "The FY2025 operating margin of 4.5% is a trough. Darling's 50% share of Diamond Green Diesel (DGD) lost money that year (equity loss of 48.8 million) after policy and feedstock-tariff changes. In 2026 the DGD equity line swung to a large profit, so nine-month 2026 operating margin is about 22%, well above the company's own history. The margin is driven by one policy-dependent joint venture and should partly mean-revert.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 15.35% reflects a near-zero pretax profit; nine-month 2026 tax was 226,074 on pretax income of 1,020,712 (about 22%), which is closer to sustainable."
+     },
+     "why": "FY2025 had a DGD equity loss and 58 million of restructuring and impairment charges, so it understates normal earnings. It also had a 53rd week. Nine-month 2026 operating income of 1,115 million includes 623 million of DGD equity income, which is probably peak-like. Normal earning power lies between the two. Both years depend on RFS, LCFS and tax-credit policy."
+    },
+    "value_at_old_defaults": 42.81613520249613,
+    "values": {
+     "base": 57.87742603507004,
+     "bear": 38.28527027037997,
+     "bull": 86.49391203269725
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 2978000.0,
+       "printed": 2978,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on early retirement of debt | 0 | 0 | 0 | (2,978)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "loss on early retirement of debt in fiscal 2025 (booked in the nine months to Sep. 27, 2025)"
+      },
+      {
+       "amount": 1686000.0,
+       "printed": 1686,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Gain on sale of businesses | 63,473 | 1,686 | 63,473 | 1,686"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "gain on sale of businesses in fiscal 2025 (booked in the nine months to Sep. 27, 2025)"
+      }
+     ],
+     "cash_interest_returned": 629984.3350806448,
+     "cash_not_free": {
+      "amount": 15509000.0,
+      "printed": 15509,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash | 15,509 | 16,686"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "thousands",
+      "what": "restricted cash"
+     },
+     "excess_cash_after": 73162000.0,
+     "excess_cash_before": 88671000.0,
+     "k0_after": 223049632.81852758,
+     "k0_before": 224971617.15360823,
+     "k0_interest": 222279000.0,
+     "one_offs_charge": 2978000.0,
+     "one_offs_gain": 1686000.0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 131537194.75027303,
+     "x0_before": 129910244.30040872
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 9802599610.007313,
+     "seam_ratio": 0.9678690163731588,
+     "tv_share": 0.42267781427036916,
+     "wedge_rate_5": -0.03114771557932768
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.2000 (filed 0.0416 to 0.1865)",
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0621",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate of 15.35% reflects depressed pretax income, while the nine-month FY2026 rate is about 22% (226,074 tax on 1,020,712 pretax income).",
+     "debt_level_representative_no: Debt of $3.94 billion is falling, with management targeting net debt at or below $3.0 billion by year-end 2026, so the base-year level overstates the future level.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.065,
+     "fade_years": 8,
+     "long_run_op_margin": 0.12,
+     "op_margin": [
+      0.2,
+      0.17,
+      0.15,
+      0.14,
+      0.135
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.11,
+      0.015,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1446 and margin 0.2201, margin 0.0922 (persist), growth 0.0375, terminal RONIC 0.0642 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 123
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.15
+     ],
+     "rev_growth_y3": [
+      -0.01,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0647"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (343,515) | (224,045)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled ratio is 6.5%. Nine-month FY2026 capex of $343.5 million is about 6.8% of sales, so I hold 6.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our renewable energy businesses, including the DGD Joint Venture, are highly dependent on government programs, incentives and regulatory frameworks, which are subject to change and uncertainty"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "DGD earnings depend on government programmes that are subject to change, so I assume a gradual normalisation over about eight years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-30 | $6,788.1 million | 0.0392 | 0.1399"
+       },
+       {
+        "id": "P3",
+        "quote": "Segment operating income for the fiscal year ended January 3, 2026 was $273.4 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Core rendering and collagen earn mid-to-high single-digit GAAP operating margins, and DGD adds a policy-dependent increment. The filed history ranges from 4% to 19%, with FY2023 at 14.0%. A mid-cycle 12% keeps part of the current gap above the median, consistent with the cyclical base rate."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Equity in net income/(loss) of Diamond Green Diesel | 165,636 | (45,844) | 623,029 | (70,367)"
+       },
+       {
+        "id": "P6",
+        "quote": "reaffirms fiscal year 2026 Combined Adjusted EBITDA guidance of $2.2-$2.3 billion"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 reflects DGD equity income of $623.0 million in nine months, with Q4 guided strong, which gives a margin near 20%. I fade it as renewable-fuel margins and credit support normalise and the Valero-approved distribution and policy risks bite."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 6.2% is depressed by the DGD loss. With DGD profits and a growing share of margin from equity income, returns on new capital should clear the 6.4% breakeven, but I assume only a moderate level because the business is commodity-exposed."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net sales | $ 1,791,116 | $ 1,563,966 | $ 5,066,015 | $ 4,426,078"
+       },
+       {
+        "id": "P4",
+        "quote": "The Company sold its natural casings business (known as CTH) in the third quarter of fiscal 2026."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month FY2026 sales are up about 14.5%, so year 1 is about 11% after allowing for Q4 2025's extra week and the CTH and grease trap disposals. Growth then slows to about 1.5% in year 2, as the disposals remove revenue, and settles near 3% from year 3, with commodity-price-driven volatility."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth in a commodity-linked, mature rendering and collagen business should sit slightly below the nominal anchor, near 3%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "DGD margins and renewable-fuel credit support revert to the weak 2025 level, so equity income collapses."
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "op_margin",
+      "risk": "Q4 2026 and 2027 DGD and core results fall short of the reaffirmed guidance, so year 1-2 margins come in well below my path."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Finished-product commodity prices fall and the divestitures plus tariffs cut sales, so revenue growth is weak."
+     },
+     {
+      "bear_value": 0.064,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Growth investment earns returns near the breakeven level."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       0.07,
+       -0.025,
+       -0.010000000000000002,
+       -0.010000000000000002,
+       -0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.14,
+       0.045,
+       0.06,
+       0.06,
+       0.06
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt of $3.94 billion is falling, with management targeting net debt at or below $3.0 billion by year-end 2026, so the base-year level overstates the future level."
+     },
+     "margin_position": "The FY2025 base-year margin of 4.5% is trough-like. Darling's 50% share of Diamond Green Diesel (DGD) was a loss of $48.8 million that year, after a regulatory shift cut renewable-fuel incentives. In the nine months of FY2026 the DGD equity line swung to a profit of $623.0 million, which lifts GAAP operating margin to about 22%, far above the long-run median of roughly 11-14%. Most of that spike depends on government credits and renewable-diesel margins, so only part of it should persist.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 15.35% reflects depressed pretax income, while the nine-month FY2026 rate is about 22% (226,074 tax on 1,020,712 pretax income)."
+     },
+     "why": "FY2025 operating income included a DGD equity loss and $58.0 million of restructuring and impairment charges, so it understates normal earnings. The FY2026 run-rate is inflated by peak DGD earnings, tariff recoveries and a $63.5 million disposal gain. I take year 1 near the FY2026 run-rate and fade toward a mid-cycle margin. Divestitures of CTH and the grease trap business also trim revenue after year 1."
+    },
+    "value_at_old_defaults": 42.81613520249613,
+    "values": {
+     "base": 65.79553899112335,
+     "bear": 42.49489629344701,
+     "bull": 101.50007804144953
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 42.81613520249613,
+  "value_at_old_defaults_quoted": 42.81613520249613,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 9903545529.850027,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 160157000.0,
@@ -15,7 +576,7 @@
   "Darling sold the remaining portion of its grease trap collection and disposal business on October 30, 2026, after the quarter ended."
  ],
  "in_code_book": false,
- "ke": 0.0779318907508762,
+ "ke": 0.0781318907508762,
  "market_cap_at_publish": 8183670071,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +584,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 44.59715084168311,
-  "3000": 44.59715084168311
+  "1000": 57.87742603507004,
+  "3000": 65.79553899112335
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1530,130 +2091,17 @@
   ]
  },
  "ticker": "DAR",
- "upside": -0.12721971616841332,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y1 (1000 down, 3000 none)",
-   "ytd_outside_record: op_margin.y1 0.2201"
-  ],
-  "departures": [
-   {
-    "driver": "cycle_recovery",
-    "evidence": [
-     "P6.s62",
-     "F2",
-     "P6.s27"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-10-03",
-    "text": "Consolidated Statements of Operations - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nOct. 03, 2026 | Sep. 27, 2025 | Oct. 03, 2026 | Sep. 27, 2025\nNet sales | $ 1,791,116 | $ 1,563,966 | $ 5,066,015 | $ 4,426,078\nCosts and expenses:\nCost of sales and operating expenses (excludes depreciation and amortization, shown separately below) | 1,313,572 | 1,176,957 | 3,680,177 | 3,381,801\nLoss/(gain) on sale of assets | 572 | (375) | 659 | 639\nSelling, general and administrative expenses | 166,893 | 139,594 | 466,910 | 399,219\nRestructuring and asset impairment charges | 0 | 0 | 4,297 | 0\nAcquisition and integration costs | 5,782 | 6,156 | 23,970 | 11,073\nChange in fair value of contingent consideration | 995 | 0 | 995 | 18,024\nDepreciation and amortization | 135,667 | 124,064 | 396,756 | 368,961\nTotal costs and expenses | 1,623,481 | 1,446,396 | 4,573,764 | 4,179,717\nEquity in net income/(loss) of Diamond Green Diesel | 165,636 | (45,844) | 623,029 | (70,367)\nOperating income | 333,271 | 71,726 | 1,115,280 | 175,994\nOther expense:\nInterest expense | (51,460) | (56,925) | (161,103) | (166,765)\nLoss on early retirement of debt | 0 | 0 | 0 | (2,978)\nForeign currency gain | 462 | 1,067 | 3,813 | 1,018\nGain on sale of businesses | 63,473 | 1,686 | 63,473 | 1,686\nOther expense, net | (3,000) | (1,024) | (7,928) | (4,217)\nTotal other income/(expense) | 9,475 | (55,196) | (101,745) | (171,256)\nEquity in net income of other unconsolidated subsidiaries | 2,377 | 3,277 | 7,177 | 8,431\nIncome before income taxes | 345,123 | 19,807 | 1,020,712 | 13,169\nIncome tax expense/(benefit) | 76,810 | (1,248) | 226,074 | 1,663\nNet income | 268,313 | 21,055 | 794,638 | 11,506\nNet income attributable to noncontrolling interests | (1,327) | (1,692) | (6,027) | (5,642)\nNet income attributable to Darling | $ 266,986 | $ 19,363 | $ 788,611 | $ 5,864\nBasic income per share (in dollars per share) | $ 1.70 | $ 0.12 | $ 4.98 | $ 0.04\nDiluted income per share (in dollars per share) | $ 1.67 | $ 0.12 | $ 4.91 | $ 0.04\nNonrelated Party\nNet sales | $ 1,359,115 | $ 1,221,846 | $ 3,971,868 | $ 3,574,476\nRelated Party\nNet sales | $ 432,001 | $ 342,120 | $ 1,094,147 | $ 851,602"
-   },
-   "P6.s27": {
-    "kind": "release",
-    "period": "2026-10-28",
-    "text": "Reflecting this financial strength, Darling Ingredients reaffirms fiscal year 2026 Combined Adjusted EBITDA guidance of $2.2-$2.3 billion, positioning the business to carry strong momentum into 2027."
-   },
-   "P6.s62": {
-    "kind": "release",
-    "period": "2026-10-28",
-    "text": "Fuel Segment *Unaudited \u2022 Earning power substantially improved year -over- year due to robust RVO, margins expected to remain strong Q4 and 2027 \u2022 $171.0 million cash distributions from DGD \u2013 $33.4 million in dividends \u2013 $137.6 million from Production Tax Credit Sales \u2022 Q3 2026 production ~315 million gallons \u2022 Strong performance impacted by timing of SAF shipment, short -term hydrogen outage, feedstock lag, heating oil volatility, expected to reverse in Q4 \u2022 Q4 estimated production ~325 million gallons \u2022 Strong operational performance and improving market conditions support a favorable Q4 outlook US$ (in thousands) Q3 2026* Q3 2025* YTD 2026* YTD 2025* Total Net sales $ 168,616 $ 154,277 $"
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.06465002078548229,
-    0.06465002078548229,
-    0.06465002078548229,
-    0.06465002078548229,
-    0.06465002078548229
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.09223748520358364,
-   "normalized.margin": 0.09223748520358364,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.22014936789567344,
-   "op_margin.y2": 0.09223748520358364,
-   "rev_growth.y1": 0.14458330829235266,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06413777696499667
-  },
-  "numbers": {
-   "capex": [
-    0.06465002078548229,
-    0.06465002078548229,
-    0.06465002078548229,
-    0.06465002078548229,
-    0.06465002078548229
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.09223748520358364,
-   "normalized.margin": 0.09223748520358364,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.22014936789567344,
-   "op_margin.y2": 0.13991084371427562,
-   "rev_growth.y1": 0.14458330829235266,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06413777696499667
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "median",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No sentence in the evidence guides fiscal 2026 revenue; the only fiscal 2026 guidance covers Combined Adjusted EBITDA and net debt.",
-   "The evidence does not quantify how much revenue the divested natural casings and grease trap businesses contributed, or how their sale affects fourth-quarter sales.",
-   "The fiscal 2025 fourth quarter held an extra week, so its effect on fiscal 2026 fourth-quarter growth comparisons is noted but not measured for 2026.",
-   "How long the DGD equity income lasts beyond 2026 depends on government programs whose future the evidence does not settle.",
-   "The amount of tariff recoveries recorded in fiscal 2026 is not shown in the packet's text."
-  ],
-  "year": 3
- },
- "value_base": 44.59715084168311,
- "value_bear": 43.724626327331826,
- "value_bull": 45.4878944411663,
+ "upside": 0.21015943261748182,
+ "valuation": null,
+ "value_base": 61.8364825130967,
+ "value_bear": 40.39008328191349,
+ "value_bull": 93.99699503707339,
  "value_per_filed_share": {
-  "base": 44.59715084168311,
-  "bear": 43.724626327331826,
-  "bull": 45.4878944411663
+  "base": 61.8364825130967,
+  "bear": 40.39008328191349,
+  "bull": 93.99699503707339
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -5.9 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +7.4 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

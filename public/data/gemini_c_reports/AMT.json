@@ -1,23 +1,537 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -5.734668244772332,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 86,
  "claims_supported": 72,
  "date": "2026-11-17T22:55:34Z",
+ "decided": {
+  "flags": [
+   "run 1000: tax_rate_representative_no: The 0.0818 base-year rate is below the 2026 run rate of about 13% (379.0 provision on 2,925.8 pretax income for nine months) and the outlook's 490 provision.",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 1000: ffo_not_reported_or_not_found",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.4560 (filed 0.2560 to 0.4552)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.4570 (filed 0.2560 to 0.4552)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.4580 (filed 0.2560 to 0.4552)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.4580 (filed 0.2560 to 0.4552)",
+   "run 3000: tax_rate_representative_no: The base-year rate of 0.0818 is below the roughly 13% implied by the 2026 outlook (income tax provision 490), because REIT status shelters U.S. income while taxable subsidiaries and foreign operations are still taxed.",
+   "run 3000: quotes_verified: 13 of 13",
+   "run 3000: ffo_not_reported_or_not_found"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0461 and margin 0.4566, margin 0.3950 (persist), growth 0.0375, terminal RONIC 0.0477 (equity return r 0.0890), F 10",
+  "run_gap": 0.0054079036181109525,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1474800000.0,
+     "excess_cash_before": 1474800000.0,
+     "k0_after": 1969380834.3678842,
+     "k0_before": 1969380834.3678842,
+     "k0_interest": 1359400000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 3448691647.9785166,
+     "x0_before": 3448691647.9785166
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.08105412533166755,
+     "equity_value": 66272423656.83688,
+     "seam_ratio": 0.9990477151952575,
+     "tv_share": 0.38813079161513636,
+     "wedge_rate_5": -0.010019528988214206
+    },
+    "flags": [
+     "tax_rate_representative_no: The 0.0818 base-year rate is below the 2026 run rate of about 13% (379.0 provision on 2,925.8 pretax income for nine months) and the outlook's 490 provision.",
+     "quotes_verified: 14 of 14",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.05,
+     "fade_years": 10,
+     "long_run_op_margin": 0.44,
+     "op_margin": [
+      0.455,
+      0.455,
+      0.455,
+      0.453,
+      0.45
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.04,
+      0.03,
+      0.035,
+      0.04,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0461 and margin 0.4566, margin 0.3950 (persist), growth 0.0375, terminal RONIC 0.0477 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 14,
+     "kept": 72
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.4,
+      0.46
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.05
+     ],
+     "terminal_growth": [
+      0.022,
+      0.036
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Capital improvement | 170 | to | 180"
+       },
+       {
+        "id": "P5",
+        "quote": "Redevelopment | 315 | to | 345"
+       },
+       {
+        "id": "P1",
+        "quote": "we require relatively low amounts of annual capital expenditures to maintain our communications sites"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "True upkeep is only capital improvement plus corporate, about $190 million or 1.7% of revenue. Redevelopment of about $330 million is largely tenant-driven augmentation that supports the growth I assume. Discretionary builds, ground-lease purchases and the $695 million of data center development are growth spending, not upkeep, and are excluded. I use 5%, which includes redevelopment and some growth-related spend; no explicit upkeep figure is filed."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting"
+       },
+       {
+        "id": "P1",
+        "quote": "initial non-cancellable terms of five to ten years with multiple renewal terms"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Contracted lease revenue and multi-year terms with renewals make the margin and growth change gradually rather than abruptly. The margin only needs to drift from about 45% to 44% and growth from about 4% to 3%, so a 10-year fade is reasonable. Churn from DISH and uncertainty over the AT&T Mexico ruling argue against a very short fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Incremental operating costs associated with adding new tenants or equipment to an existing communications site are typically relatively minimal"
+       },
+       {
+        "id": "P5",
+        "quote": "Adjusted EBITDA Margin % | 65.8%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "New tenants add revenue at minimal cost, which supports high margins. Rising ground rent, power and property costs, a mix shift toward lower-margin pass-through revenue internationally, and data center growth justify fading modestly below the current 45.5%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "OPERATING INCOME | 1,269.0 | 1,233.3 | 3,777.0 | 3,685.1"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $10,644.6 million | 0.0511 | 0.4552"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income of 3,777.0 on revenue of 8,272.0 gives a margin of about 45.7%, in line with 2025. Property costs are growing faster than revenue and depreciation is rising, so I let the margin drift down slightly by year 5."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0477."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 0.40 base-year return reflects old, depreciated tower assets. New towers, ground-lease purchases and data center builds earn much lower yields, so I assume about 9% against the 4.77% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Total property revenue(1)(2) | $10,785 | to | $10,865 | 5.0%"
+       },
+       {
+        "id": "P5",
+        "quote": "1.1% Organic Tenant Billings Growth and 16.3% cash revenue growth in Data Centers"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides 2026 property revenue to +5.0% (about +4% for total revenue including shrinking services). Tower organic growth is only about 1% and the Canada, Philippines and Bangladesh sales trim the base. Data Centers and international new sites drive the rest, so I hold growth at 3-4%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "averaging approximately 3% in the United States"
+       },
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "US escalators average about 3% and most international leases are inflation-indexed, but churn and slow organic billings hold net growth near 3%. That is below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Further churn from DISH aftermath, carrier consolidation or network sharing, plus an adverse AT&T Mexico ruling, cuts tenant billings."
+     },
+     {
+      "bear_value": 0.4,
+      "input_hit": "long_run_op_margin",
+      "risk": "Higher interest and cost inflation, along with rent abatement, compress margins."
+     },
+     {
+      "bear_value": 0.022,
+      "input_hit": "terminal_growth",
+      "risk": "Slower long-run growth if escalators are overtaken by churn and carriers cut spending."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.4,
+      "rev_growth": [
+       0.024999999999999998,
+       0.014999999999999996,
+       0.02,
+       0.024999999999999998,
+       0.024999999999999998
+      ],
+      "terminal_growth": 0.022
+     },
+     "bull": {
+      "long_run_op_margin": 0.46,
+      "rev_growth": [
+       0.055,
+       0.045,
+       0.05,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.036
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "About $37.2 billion of debt is being rolled through new senior notes, and the company keeps refinancing at similar scale while also running buybacks, so leverage looks like a steady policy level."
+     },
+     "margin_position": "The 45.5% GAAP operating margin is high because towers and data centers are leased on long contracts with little incremental cost per added tenant. The jump from 31% in 2023 to 45% in 2024-25 also reflects lower impairment and other operating charges and lower depreciation (D&A fell from 29% of revenue in 2023 to 19% in 2025). The 2026 nine-month margin is about 45.7%, so the margin looks stable at this level.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 0.0818 base-year rate is below the 2026 run rate of about 13% (379.0 provision on 2,925.8 pretax income for nine months) and the outlook's 490 provision."
+     },
+     "why": "2025 operating margin of 0.4552 matches 2026 year-to-date operating income of 3,777.0 on revenue of 8,272.0, so the base year is a fair run-rate. Growth is thin, with Q3 organic tenant billings up 1.1%, and DISH churn and the AT&T Mexico dispute weigh on it. Data Centers growth of 16.3% and international growth offset part of that. Pending sales of Canada and other divestitures will shrink the base slightly."
+    },
+    "value_at_old_defaults": 88.81467974786305,
+    "values": {
+     "base": 155.5376306750432,
+     "bear": 125.4957765066221,
+     "bull": 187.77190683710242
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1474800000.0,
+     "excess_cash_before": 1474800000.0,
+     "k0_after": 1969380834.3678842,
+     "k0_before": 1969380834.3678842,
+     "k0_interest": 1359400000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 3448691647.9785166,
+     "x0_before": 3448691647.9785166
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.08105412533166755,
+     "equity_value": 65907615968.45259,
+     "seam_ratio": 0.995835982227119,
+     "tv_share": 0.3842013932415258,
+     "wedge_rate_5": -0.009260122886386163
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y2 0.4560 (filed 0.2560 to 0.4552)",
+     "margin_outside_filed_record: op_margin.y3 0.4570 (filed 0.2560 to 0.4552)",
+     "margin_outside_filed_record: op_margin.y4 0.4580 (filed 0.2560 to 0.4552)",
+     "margin_outside_filed_record: op_margin.y5 0.4580 (filed 0.2560 to 0.4552)",
+     "tax_rate_representative_no: The base-year rate of 0.0818 is below the roughly 13% implied by the 2026 outlook (income tax provision 490), because REIT status shelters U.S. income while taxable subsidiaries and foreign operations are still taxed.",
+     "quotes_verified: 13 of 13",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.05,
+     "fade_years": 10,
+     "long_run_op_margin": 0.45,
+     "op_margin": [
+      0.455,
+      0.456,
+      0.457,
+      0.458,
+      0.458
+     ],
+     "return_on_new_investment_long_run": 0.08,
+     "rev_growth": [
+      0.039,
+      0.032,
+      0.035,
+      0.036,
+      0.036
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0461 and margin 0.4566, margin 0.3950 (persist), growth 0.0375, terminal RONIC 0.0477 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 14,
+     "kept": 72
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.41,
+      0.47
+     ],
+     "rev_growth_y3": [
+      0.022,
+      0.048
+     ],
+     "terminal_growth": [
+      0.022,
+      0.037
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Capital improvement | 170 | to | 180"
+       },
+       {
+        "id": "P5",
+        "quote": "Redevelopment | 315 | to | 345"
+       },
+       {
+        "id": "P1",
+        "quote": "we require relatively low amounts of annual capital expenditures to maintain our communications sites"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "I count only upkeep: capital improvements, corporate, and the maintenance-like part of redevelopment, about $525 million, or roughly 5% of revenue. I exclude discretionary builds, ground lease purchases and data center development, which are growth spending. The filing gives no explicit upkeep figure, only the guided categories, so this is an estimate."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "we expect to generate over $54 billion of non-cancellable customer lease revenue over future periods"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth moves from about 3.6% to 3% over a decade because the long-lease contract base makes revenue visibility long and the transition gradual."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Adjusted EBITDA Margin % | 65.8%"
+       },
+       {
+        "id": "F2",
+        "quote": "Depreciation, amortization and accretion | 519.4 | 522.9 | 1,552.0 | 1,525.7"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I fade slightly below the current level because heavy-depreciation data center capex, carrier consolidation, RAN sharing and pricing pressure at renewals could trim margin. Tower economics remain very high margin."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "OPERATING INCOME | 1,269.0 | 1,233.3 | 3,777.0 | 3,685.1"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $10,644.6 million | 0.0511 | 0.4552"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month 2026 margin is about 0.457 and the Q3 margin about 0.456. Margin is held roughly flat with a small drift upward from data center operating leverage, offset by rising property costs and depreciation."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0477."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "New towers and data centers earn a stabilized after-tax yield of roughly 7-9% on tangible capital, far below the 0.40 average on the old asset base but above the 0.0477 break-even, so growth adds modest value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Total property revenue(1)(2) | $10,785 | to | $10,865 | 5.0%"
+       },
+       {
+        "id": "F2",
+        "quote": "Total operating revenues | $ 2,785.4 | $ 2,717.4 | $ 8,272.0 | $ 7,907.1"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 guidance is property revenue growth of 5.0% at the midpoint, but the nine-month total of 4.6% slowed to 2.5% in Q3 as services shrank, so I take about 3.9% for year 1. Later years rest on about 3% escalators, 1% organic billings, data center growth and new sites, less DISH churn and the divested markets."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "averaging approximately 3% in the United States"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0890; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run growth is anchored on escalators of about 3% plus modest new-site and data center additions, net of churn, held a little below the 3.75% nominal anchor because of the mature U.S. base."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "AT&T Mexico arbitration abatement, DISH recovery failure and carrier consolidation or RAN sharing raise churn and cut tenant billings and revenue"
+     },
+     {
+      "bear_value": 0.4,
+      "input_hit": "long_run_op_margin",
+      "risk": "Higher refinancing cost, data center depreciation and rising property costs compress operating margin"
+     },
+     {
+      "bear_value": 0.055,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "New builds and data center investment earn closer to the cost of capital"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.41,
+      "rev_growth": [
+       0.025999999999999995,
+       0.018999999999999996,
+       0.022,
+       0.022999999999999993,
+       0.022999999999999993
+      ],
+      "terminal_growth": 0.022
+     },
+     "bull": {
+      "long_run_op_margin": 0.47,
+      "rev_growth": [
+       0.052,
+       0.045,
+       0.048,
+       0.048999999999999995,
+       0.048999999999999995
+      ],
+      "terminal_growth": 0.037
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $37.2 billion is roughly 5x Adjusted EBITDA and is being rolled with new notes, so leverage looks stable relative to size, though buybacks and rising rates are pressure points."
+     },
+     "margin_position": "The GAAP operating margin is about 45%, high because long-lease tower rent carries little site-level cost and depreciation has fallen to about 19% of revenue from about 29-33% in 2022-2023. The 2024-2025 level is stable, and the nine-month 2026 margin is similar.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 0.0818 is below the roughly 13% implied by the 2026 outlook (income tax provision 490), because REIT status shelters U.S. income while taxable subsidiaries and foreign operations are still taxed."
+     },
+     "why": "The 2025 margin of 0.4552 matches the nine-month 2026 run-rate of 3,777.0 / 8,272.0, about 0.457. Revenue is contract-driven, but there are stresses to absorb: DISH churn, the AT&T Mexico dispute, and divestitures of the Philippines, Bangladesh and soon Canada. Base-year non-operating costs (foreign-exchange losses) were unusually large, but the full-year base-year amount is not in the evidence."
+    },
+    "value_at_old_defaults": 88.81467974786305,
+    "values": {
+     "base": 154.69876640791588,
+     "bear": 127.17748169121168,
+     "bull": 184.99547836217562
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 88.81467974786305,
+  "value_at_old_defaults_quoted": 88.81467974786305,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 72712741393.70833,
  "family": "family_not_built",
+ "far_from_price": false,
+ "filed_shares": 468757000.0,
  "flags": [
   "AMT delivered notices terminating its Strategic Collocation Agreement and related agreements with DISH, a U.S. customer that had been in default since January.",
   "DISH, an AMT customer, filed for chapter 11 bankruptcy relief. AMT continues to seek relief for DISH's non-compliance. This is a customer's bankruptcy, not AMT's.",
   "AMT recorded impairment charges related to DISH of $17.5 million in the nine months ended September 30, 2026."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08903203083918919,
+ "market_cap_at_publish": 84952203388,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "no_value_reason": null,
+ "price_at_publish": 183.18,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 155.5376306750432,
+  "3000": 154.69876640791588
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1031,8 +1545,17 @@
   ]
  },
  "ticker": "AMT",
+ "upside": -0.14407468560162817,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+ "value_base": 155.11819854147956,
+ "value_bear": 126.33662909891689,
+ "value_bull": 186.383692599639,
+ "value_per_filed_share": {
+  "base": 155.11819854147956,
+  "bear": 126.33662909891689,
+  "bull": 186.383692599639
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -5.7 points a year against the required return over 3 years"
 }

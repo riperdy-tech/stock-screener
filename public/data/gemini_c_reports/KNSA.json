@@ -1,13 +1,522 @@
 {
- "alpha_pts": -40.92882564260366,
+ "alpha_pts": -0.8482734230963768,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 59,
  "claims_supported": 53,
  "date": "2026-11-17T19:14:48Z",
- "equity_value": 1754180480.04238,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1250 (filed -4.0638 to 0.1140)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.1700 (filed -4.0638 to 0.1140)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.2100 (filed -4.0638 to 0.1140)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.2400 (filed -4.0638 to 0.1140)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.2600 (filed -4.0638 to 0.1140)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.2500 (filed -4.0638 to 0.1140)",
+   "run 1000: growth_outside_filed_record: rev_growth.y3 0.1600 (filed 0.2274 to 4.7124)",
+   "run 1000: growth_outside_filed_record: rev_growth.y4 0.1100 (filed 0.2274 to 4.7124)",
+   "run 1000: growth_outside_filed_record: rev_growth.y5 0.0800 (filed 0.2274 to 4.7124)",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year rate of 33.6% is above the 2026 nine-month provision of 27,514 on pretax income of 122,883, about 22%, and cash taxes are minimal.",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1600 (filed -4.0638 to 0.1140)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.2100 (filed -4.0638 to 0.1140)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.2500 (filed -4.0638 to 0.1140)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.2700 (filed -4.0638 to 0.1140)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.2800 (filed -4.0638 to 0.1140)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.2700 (filed -4.0638 to 0.1140)",
+   "run 3000: growth_outside_filed_record: rev_growth.y3 0.1700 (filed 0.2274 to 4.7124)",
+   "run 3000: growth_outside_filed_record: rev_growth.y4 0.1100 (filed 0.2274 to 4.7124)",
+   "run 3000: growth_outside_filed_record: rev_growth.y5 0.0700 (filed 0.2274 to 4.7124)",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.5645 and margin 0.1488, margin 0.0104 (persist), growth 0.0375, terminal RONIC 0.0838 (equity return r 0.0838), F 10",
+  "run_gap": 0.06426155748770973,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 414074000.0,
+     "excess_cash_before": 414074000.0,
+     "k0_after": 5186521.605622485,
+     "k0_before": 5186521.605622485,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 47828176.59517763,
+     "x0_before": 47828176.59517763
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4971266996.644303,
+     "seam_ratio": 1.0489496818568098,
+     "tv_share": 0.48893073683000426,
+     "wedge_rate_5": -0.05500837040768723
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1250 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y2 0.1700 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y3 0.2100 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y4 0.2400 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y5 0.2600 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: long_run_op_margin 0.2500 (filed -4.0638 to 0.1140)",
+     "growth_outside_filed_record: rev_growth.y3 0.1600 (filed 0.2274 to 4.7124)",
+     "growth_outside_filed_record: rev_growth.y4 0.1100 (filed 0.2274 to 4.7124)",
+     "growth_outside_filed_record: rev_growth.y5 0.0800 (filed 0.2274 to 4.7124)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate of 33.6% is above the 2026 nine-month provision of 27,514 on pretax income of 122,883, about 22%, and cash taxes are minimal.",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.002,
+     "fade_years": 10,
+     "long_run_op_margin": 0.25,
+     "op_margin": [
+      0.125,
+      0.17,
+      0.21,
+      0.24,
+      0.26
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.55,
+      0.25,
+      0.16,
+      0.11,
+      0.08
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.5645 and margin 0.1488, margin 0.0104 (persist), growth 0.0375, terminal RONIC 0.0838 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 53
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.33
+     ],
+     "rev_growth_y3": [
+      0.06,
+      0.26
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0015"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (1,004) | (935)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex is tiny because manufacturing is outsourced. Nine-month 2026 purchases of property and equipment were 1,004 on revenue of 743,836, and the pooled ratio is 0.0015."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "the FDA granted Orphan Drug exclusivity to ARCALYST in March 2021"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin are still scaling, with a possible KPL-387 launch in 2028/29. A 10-year fade is a middle case between ARCALYST maturing and exclusivity erosion."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Collaboration expenses | 105,828 | 63,307 | 269,474 | 159,515"
+       },
+       {
+        "id": "P2",
+        "quote": "we may never achieve significant and sustained profitability"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Regeneron's profit share is roughly 36% of revenue and COGS is about 10%, which caps the margin below typical specialty-pharma levels. Ongoing KPL-387 and pipeline R&D and the risk of eventual loss of exclusivity or biosimilar and payor pressure also weigh on it. I settle at 25% with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Kiniksa expects 2026 R&D expenses of between $160 million and $170 million and 2026 SG&A expenses of between $270 million and $280 million."
+       },
+       {
+        "id": "F2",
+        "quote": "Income from operations | 54,236 | 24,021 | 110,697 | 57,453"
+       },
+       {
+        "id": "P1",
+        "quote": "evenly split profits on sales as well as third party proceeds with Regeneron"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is held near 12.5% because the R&D guidance of $160-170M and SG&A guidance of $270-280M imply much higher Q4 spending than the 9-month run rate. Margins then expand with scale, since revenue grows faster than SG&A and R&D, but half of the profit goes to Regeneron."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2679"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light, and the base-year return on tangible capital is 26.8%. I fade this to 20% for competition and pipeline reinvestment, still well above the 8.4% cost of equity, so growth adds value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "ARCALYST 2026 expected net product revenue increased to $1.045 - $1.050 billion"
+       },
+       {
+        "id": "P7",
+        "quote": "approximately 23% of the 14,000 annual multiple-recurrence patients were actively on ARCALYST treatment"
+       },
+       {
+        "id": "P5",
+        "quote": "we expect to begin commercializing KPL-387 in 2028 or 2029"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is set by guidance of about $1.0475B on a $677.6M base, which is about 55%. Penetration of only about 23% of the core 14,000 patients leaves room, so growth decelerates over years 2-5 as the patient pool saturates. KPL-387 is expected to be commercial in 2028/2029 and could extend growth, but its outcome is unproven."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A single-product, small-population orphan franchise should grow slowly in perpetuity. I set growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Payor pricing pressure, most-favored-nation actions, biosimilars or loss of exclusivity compress ARCALYST net price and margin"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "Patient adoption slows or supply problems arise in the Samsung CDMO transition, so growth falls short of the penetration thesis"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Sole-product, single-country concentration and a competing therapy or KPL-387 failure limit terminal growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.45000000000000007,
+       0.15,
+       0.06,
+       0.009999999999999995,
+       -0.020000000000000004
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.33,
+      "rev_growth": [
+       0.65,
+       0.35,
+       0.26,
+       0.21000000000000002,
+       0.18
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company reports no debt and is cash flow positive, so zero debt is the sensible level."
+     },
+     "margin_position": "The FY2025 operating margin of 11.4% is still depressed by scaling. ARCALYST is a single product with a 50% profit share to Regeneron, and SG&A and R&D are being built ahead of revenue. The 9-month 2026 margin was about 15% and Q3 was about 19%, so the margin is rising as sales grow faster than costs. Q4 guidance for R&D and SG&A implies a dip in Q4.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 33.6% is above the 2026 nine-month provision of 27,514 on pretax income of 122,883, about 22%, and cash taxes are minimal."
+     },
+     "why": "FY2025 revenue of $677.6M is already well behind the run rate. 2026 guidance of $1.045-1.050B implies about 55% growth, and 9-month 2026 revenue is already above the full 2025 base. The company went from a loss in 2024 to profit in 2025, so the base margin understates the current run rate. Operating leverage should continue, but Regeneron's profit share and KPL-387 spending cap the long-run margin."
+    },
+    "value_at_old_defaults": 8.154615164228908,
+    "values": {
+     "base": 72.8025443801403,
+     "bear": 29.41187940915067,
+     "bull": 181.78906965267888
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 414074000.0,
+     "excess_cash_before": 414074000.0,
+     "k0_after": 5186521.605622485,
+     "k0_before": 5186521.605622485,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 47828176.59517763,
+     "x0_before": 47828176.59517763
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 5326947811.206711,
+     "seam_ratio": 1.0412999820295432,
+     "tv_share": 0.47840712825234966,
+     "wedge_rate_5": -0.05221579246497938
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1600 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y2 0.2100 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y3 0.2500 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y4 0.2700 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: op_margin.y5 0.2800 (filed -4.0638 to 0.1140)",
+     "margin_outside_filed_record: long_run_op_margin 0.2700 (filed -4.0638 to 0.1140)",
+     "growth_outside_filed_record: rev_growth.y3 0.1700 (filed 0.2274 to 4.7124)",
+     "growth_outside_filed_record: rev_growth.y4 0.1100 (filed 0.2274 to 4.7124)",
+     "growth_outside_filed_record: rev_growth.y5 0.0700 (filed 0.2274 to 4.7124)",
+     "base_year_not_representative",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.002,
+     "fade_years": 10,
+     "long_run_op_margin": 0.27,
+     "op_margin": [
+      0.16,
+      0.21,
+      0.25,
+      0.27,
+      0.28
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.545,
+      0.27,
+      0.17,
+      0.11,
+      0.07
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.5645 and margin 0.1488, margin 0.0104 (persist), growth 0.0375, terminal RONIC 0.0838 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 53
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.18,
+      0.34
+     ],
+     "rev_growth_y3": [
+      0.07,
+      0.27
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (1,004) | (935)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0015"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex is tiny: $1.0M over nine months of 2026, against pooled capex of about 0.15% of revenue. I use 0.2% to allow modest growth."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "expect to begin commercializing KPL-387 in 2028 or 2029"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin need about ten years to move from the high-growth adoption phase to maturity. KPL-387 launch in 2028/29 may extend the franchise, but it is unproven until Phase 3 data in 2H 2027."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "evenly split profits on sales as well as third party proceeds with Regeneron"
+       },
+       {
+        "id": "F2",
+        "quote": "Collaboration expenses | 105,828 | 63,307 | 269,474 | 159,515"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Collaboration expense is about 37% of revenue because profit is split evenly with Regeneron, and COGS is about 10%. That structurally caps the margin, so a long-run margin in the high 20s is reasonable. It is below a typical royalty-free specialty drug margin and exposed to pricing, biosimilar and exclusivity risk."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 54,236 | 24,021 | 110,697 | 57,453"
+       },
+       {
+        "id": "P7",
+        "quote": "Kiniksa expects 2026 R&D expenses of between $160 million and $170 million and 2026 SG&A expenses of between $270 million and $280 million."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q3 2026 operating income was $54.2M on $286.0M revenue (about 19%), with a nine-month margin near 15%. Guided R&D and SG&A imply a full-year margin of about 16%. The margin should expand as revenue outgrows opex, but half of profit goes to Regeneron and Phase 3 costs for KPL-387 are rising."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0838"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, with a base-year return on tangible capital of 0.2679, and new investment is mostly working capital and R&D that is expensed. I assume the return fades toward 20% as the franchise matures, still well above the 8.38% cost of equity."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "ARCALYST 2026 expected net product revenue increased to $1.045 - $1.050 billion"
+       },
+       {
+        "id": "P7",
+        "quote": "approximately 23% of the 14,000 annual multiple-recurrence patients were actively on ARCALYST treatment"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is anchored on the raised guidance, which is about 55% over the $677.6M base. Penetration of the core multiple-recurrence pool is only about 23%, so growth stays strong but decelerates as the base grows. Earlier-line use and KPL-387 (commercial 2028/29) add some support, but one-product, US-only and payer-pricing risks cap it."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "we may never achieve significant and sustained profitability"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A niche orphan market of about 40,000 patients and the MFN and payer pressure argue for growth at or below the long-run nominal anchor. I use 3%, a little below the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Net price erosion from payer actions, MFN pricing or biosimilar/competitor entry, plus margin pressure from the Regeneron profit share and the manufacturing transition"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "Adoption stalls well below the guided path, or supply and manufacturing transition problems arise, with one product and one country"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Loss of exclusivity or an unsuccessful KPL-387 trial leaves a shrinking franchise"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.44500000000000006,
+       0.17,
+       0.07,
+       0.009999999999999995,
+       -0.03
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       0.645,
+       0.37,
+       0.27,
+       0.21000000000000002,
+       0.17
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company reports no debt and a positive cash flow plan, so zero debt is plausible to keep."
+     },
+     "margin_position": "The 2025 operating margin of 11.4% is still depressed by a launch-phase cost base and by Regeneron's 50% profit share, which is booked as collaboration expense and scales with sales. Margin is rising quickly as revenue outgrows R&D and SG&A, reaching about 19% in Q3 2026. It is not a cyclical peak or trough.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate of 0.3360 is above the UK statutory rate and the company has low cash taxes and a large deferred tax asset, so the sustainable rate is not clear from the evidence."
+     },
+     "why": "Base-year 2025 revenue of $677.6M is well below the 2026 run rate, because 2026 net sales guidance is $1.045-1.050B, about 55% growth. The 2025 margin of 11.4% also understates the current margin of about 19% in Q3 2026. The base year is a low rung on a steep adoption curve, so the forecast must step up from it rather than treat it as steady state."
+    },
+    "value_at_old_defaults": 8.154615164228908,
+    "values": {
+     "base": 77.63626032873104,
+     "bear": 32.96815091630026,
+     "bull": 198.1067239136556
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 8.154615164228908,
+  "value_at_old_defaults_quoted": 8.154615164228908,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 5940755435.133045,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 78979030.0,
  "flags": [
   "Kiniksa raised its 2026 ARCALYST net product revenue guidance to between $1.045 and $1.050 billion, up from the prior range of between $980 and $995 million.",
@@ -15,7 +524,7 @@
   "Kiniksa announced that the pivotal Phase 3 trial of KPL-387 in recurrent pericarditis (PASTORALE) had begun enrolling and dosing patients. Data are expected in the second half of 2027, and commercialization is expected in 2028 or 2029."
  ],
  "in_code_book": false,
- "ke": 0.08408973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 7472955289,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +532,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 22.210711881905617,
-  "3000": 22.210711881905617
+  "1000": 72.8025443801403,
+  "3000": 77.63626032873104
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -756,178 +1265,17 @@
   ]
  },
  "ticker": "KNSA",
- "upside": -0.7652628160877011,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: op_margin.y1 0.1488",
-   "held_at_record: rev_growth.y1 model 0.5423 valued at 0.5645",
-   "margin_at_record_peak: normalized.margin 0.1140 at or above the record's p75 0.0444",
-   "margin_at_record_peak: long_run_op_margin 0.1140 at or above the record's p75 0.0444",
-   "value_far_from_record_neutral: base 22.2107 against 8.1506 (2.73x)",
-   "value_far_from_record_neutral: bear 16.4364 against 8.1506 (2.02x)",
-   "value_far_from_record_neutral: bull 30.8948 against 8.1506 (3.79x)"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P7.s38",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "volume",
-    "evidence": [
-     "F2",
-     "Y2025-12-31",
-     "V0"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "F2",
-     "P7.s35"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "F2",
-     "P7.s35"
-    ],
-    "inherited_from": "normalized.margin",
-    "input": "long_run_op_margin"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "up",
-   "normalized.margin": "up",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS AND COMPREHENSIVE INCOME - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nRevenue:\nRevenue | $ 285,970 | $ 180,855 | $ 743,836 | $ 475,437\nCosts and operating expenses:\nCost of goods sold | 27,759 | 20,257 | 72,127 | 56,728\nCollaboration expenses | 105,828 | 63,307 | 269,474 | 159,515\nResearch and development | 32,786 | 24,166 | 101,160 | 62,244\nSelling, general and administrative | 65,361 | 49,104 | 190,378 | 139,497\nTotal operating expenses | 231,734 | 156,834 | 633,139 | 417,984\nIncome from operations | 54,236 | 24,021 | 110,697 | 57,453\nOther income, net | 4,821 | 3,136 | 12,186 | 8,146\nIncome before income taxes | 59,057 | 27,157 | 122,883 | 65,599\nProvision for income taxes | (11,712) | (8,722) | (27,514) | (20,793)\nNet income | $ 47,345 | $ 18,435 | $ 95,369 | $ 44,806\nNet income per share attributable to ordinary shareholders, basic | $ 0.61 | $ 0.25 | $ 1.23 | $ 0.61\nNet income per share attributable to ordinary shareholders, diluted | $ 0.56 | $ 0.23 | $ 1.14 | $ 0.57\nWeighted average ordinary shares outstanding, basic | 78,192,603 | 74,714,846 | 77,435,077 | 73,605,690\nWeighted average ordinary shares outstanding, diluted | 84,920,060 | 80,035,400 | 83,713,015 | 78,027,370\nComprehensive income\nNet income | $ 47,345 | $ 18,435 | $ 95,369 | $ 44,806\nOther comprehensive income (loss)\nUnrealized gain (loss) on short-term investments and currency translation adjustments, net of tax | (1,367) | (102) | (2,722) | 8\nTotal other comprehensive income (loss) | (1,367) | (102) | (2,722) | 8\nTotal comprehensive income | 45,978 | 18,333 | 92,647 | 44,814\nProduct revenue, net\nRevenue:\nRevenue | $ 285,970 | $ 180,855 | $ 743,836 | $ 475,437"
-   },
-   "P7.s35": {
-    "kind": "release",
-    "period": "2026-10-27",
-    "text": "\u25cf | Net income for the third quarter of 2026 was $47.3 million, compared to $18.4 million for the third quarter of 2025."
-   },
-   "P7.s38": {
-    "kind": "release",
-    "period": "2026-10-27",
-    "text": "\u25cf | Kiniksa expects 2026 ARCALYST net product revenue of between $1.045 billion and $1.050 billion, compared to prior guidance of between $980 million and $995 million."
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min -4.0638, p25 -0.1078, median -0.0932, p75 0.0444, max 0.1140, last 0.1140; persist 0.0104 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 4.7124, 2023-12-31 0.2274, 2024-12-31 0.5660, 2025-12-31 0.6009.\nBase-year revenue 677,564,000; tax rate 0.3360; return on opening capital 0.2679; capital expenditure 0.0015 and depreciation 0.0063 of revenue (pooled); the desk depreciates by the pooled rule.\nCost of equity 0.0841 (risk-free 0.0515, long-run growth anchor 0.0375, loading 0.683, equity premium 0.0477).\nYear 1 to date (10-Q 0001104659-26-119186, filed 2026-10-27): revenue 743,836,000 from 2026-01-01 to 2026-09-30 against 475,437,000 from 2025-01-01 to 2025-09-30, growth 0.5645; operating income 110,697,000, margin 0.1488.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd 0.5645; anchor 0.4073; record_median 0.5702; last 0.5754; zero 0.3961; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.5835; last 0.6009; zero 0.0000; guidance\nop_margin.y1: ytd 0.1488; persist 0.1075; median 0.0766; p25 0.0723; p75 0.1177; last 0.1384; guidance\nop_margin.y2: persist 0.0104; median -0.0932; p25 -0.1078; p75 0.0444; last 0.1140; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.0104; median -0.0932; p25 -0.1078; p75 0.0444; last 0.1140; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0841; quarter 0.1015; half 0.1280; three_quarters 0.1732; ronic0 0.2679\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0015; record_last 0.0023; record_max 0.0108; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001104659-26-019168): revenue $677.6 million; operating income $77.2 million; operating margin 11.4%; net income $59.0 million; depreciation and amortization $1.6 million; capital expenditure $1.6 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.0015308758327780456,
-    0.0015308758327780456,
-    0.0015308758327780456,
-    0.0015308758327780456,
-    0.0015308758327780456
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.01036974105288438,
-   "normalized.margin": 0.01036974105288438,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.14881909453159028,
-   "op_margin.y2": 0.01036974105288438,
-   "rev_growth.y1": 0.5645311576507508,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08408973472633485
-  },
-  "numbers": {
-   "capex": [
-    0.0015308758327780456,
-    0.0015308758327780456,
-    0.0015308758327780456,
-    0.0015308758327780456,
-    0.0015308758327780456
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1139685697587239,
-   "normalized.margin": 0.1139685697587239,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.14881909453159028,
-   "op_margin.y2": 0.1139685697587239,
-   "rev_growth.y1": 0.5422897320400728,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08408973472633485
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.5422897320400728,
-    "model_option": "guidance",
-    "record": 0.5645311576507508,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "last",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence gives no 2027 revenue guidance, so year-2 growth is not supported by any company statement.",
-   "No operating margin guidance is given, only 2026 R&D and SG&A ranges, so margin choices rest on reported results.",
-   "The effect of KPL-387 (planned 2028/2029 launch), payor pricing actions and the manufacturing change on ARCALYST sales and margin cannot be quantified from the evidence.",
-   "The share of the Q4 2026 implied revenue that is demand versus inventory or channel timing is not stated."
-  ],
-  "year": 3
- },
- "value_base": 22.210711881905617,
- "value_bear": 16.436438244897374,
- "value_bull": 30.894774538801308,
+ "upside": -0.20503265369756918,
+ "valuation": null,
+ "value_base": 75.21940235443567,
+ "value_bear": 31.190015162725466,
+ "value_bull": 189.94789678316724,
  "value_per_filed_share": {
-  "base": 22.210711881905617,
-  "bear": 16.436438244897374,
-  "bull": 30.894774538801308
+  "base": 75.21940235443567,
+  "bear": 31.190015162725466,
+  "bull": 189.94789678316724
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -40.9 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -0.8 points a year against the required return over 3 years"
 }

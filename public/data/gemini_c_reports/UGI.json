@@ -1,11 +1,515 @@
 {
- "alpha_pts": 2.1769818018093967,
+ "alpha_pts": 2.2455111834091297,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 132,
  "claims_supported": 130,
  "date": "2026-11-16T19:17:36Z",
- "equity_value": 8792927808.93703,
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 12",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0015 and margin 0.1915, margin 0.1519 (persist), growth 0.0375, terminal RONIC 0.0625 (equity return r 0.0807), F 10",
+  "run_gap": 0.09174232988648713,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 10000000.0,
+       "printed": 10,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on extinguishments of debt | (15) | (10) | (15) | (10)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Pre-tax loss on extinguishments of debt in the FY2025 base year, which sits between operating income and pretax income and will not recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 335000000.0,
+     "excess_cash_before": 335000000.0,
+     "k0_after": 415182070.2811245,
+     "k0_before": 425182070.2811245,
+     "k0_interest": 411000000.0,
+     "one_offs_charge": 10000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 590073597.3364044,
+     "x0_before": 582161832.6305221
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7138153415.513714,
+     "seam_ratio": 1.0137585222213588,
+     "tv_share": 0.45884783197285456,
+     "wedge_rate_5": 0.009189691956181458
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 11 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.105,
+     "fade_years": 10,
+     "long_run_op_margin": 0.14,
+     "op_margin": [
+      0.155,
+      0.153,
+      0.152,
+      0.151,
+      0.15
+     ],
+     "return_on_new_investment_long_run": 0.08,
+     "rev_growth": [
+      -0.005,
+      -0.01,
+      0.02,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0015 and margin 0.1915, margin 0.1519 (persist), growth 0.0375, terminal RONIC 0.0625 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 130
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.12,
+      0.16
+     ],
+     "rev_growth_y3": [
+      -0.01,
+      0.045
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Expenditures for property, plant and equipment | (617) | (579)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex was 10.0% of revenue over the pooled five years and about 10.1% in the nine months of FY2026 (617 on 6,099). I use 10.5% because utility investment is rising as the LPG businesses are sold."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Over time, these various measures will impact fossil fuel consumption in Europe and the demand for our energy products."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade reflects a mixed portfolio: the regulated utility grows steadily, while LPG is structurally declining and is being divested."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-09-30 | $7,287.0 million | 0.0107 | 0.1519"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The FY2025 margin is above the company's 18-year median of roughly 12 to 13%. Base rates for cyclical companies say about half the gap persists, and the growing regulated utility share supports a margin above the median, so I settle near 14%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | (44) | (93) | 1,168 | 1,094"
+       },
+       {
+        "id": "P5",
+        "quote": "despite the ~$40 million impact of both the previously announced LPG divestitures and warmer than prior year weather"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month FY2026 operating margin is about 19% before a seasonally weak fourth quarter, so the full year is near 15.5%. I then fade it slowly down, because divestitures and AmeriGas weakness cost about $40 million of segment EBIT while rate increases only partly offset that."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0625."
+       },
+       {
+        "id": "P1",
+        "quote": "Further, our long-term goal to grow our earnings per share is driven by disciplined investments"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "New investment is increasingly in regulated utilities and fee-based midstream, which earn modest allowed returns, well below the 12% current return on tangible capital but above the 6.25% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "In April 2026, UGI Utilities entered into a definitive agreement to divest its Electric Utility for a sale price of $470"
+       },
+       {
+        "id": "P1",
+        "quote": "The retail LPG distribution industry in the U.S. and many of the European countries in which we operate is mature and has experienced either no or modest growth (or decline) the past few years"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month FY2026 revenue was flat, and sold LPG businesses plus the agreed Electric Utility sale remove revenue, so I assume small declines in years 1-2. Recovery to 2-3% comes from the PA gas rate increases and gas load growth. The retail LPG industry is mature, which caps volume growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "rising natural gas demand across our regions driven by economic development and load growth from data centers and power generation"
+       },
+       {
+        "id": "P1",
+        "quote": "Over time, these various measures will impact fossil fuel consumption in Europe and the demand for our energy products."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Gas demand from data centers and power generation helps, but European decarbonization erodes LPG demand over time. I set 3%, below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.13,
+      "input_hit": "op_margin",
+      "risk": "AmeriGas customer attrition and warm winters continue, and further impairments or margin erosion follow"
+     },
+     {
+      "bear_value": -0.01,
+      "input_hit": "rev_growth",
+      "risk": "Divestitures and the Electric Utility sale shrink revenue further, and LPG volumes keep falling with no offset from rate increases"
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher interest costs and refinancing pressure (the 2028 Notes springing maturity) reduce value, and the PA rate case is not approved as settled, so new investment earns less"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       -0.034999999999999996,
+       -0.04,
+       -0.009999999999999998,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.16,
+      "rev_growth": [
+       0.019999999999999997,
+       0.014999999999999998,
+       0.045,
+       0.05499999999999999,
+       0.05499999999999999
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of about $6.6 billion is high against EBIT, but it is typical of a regulated-utility-heavy capital base and is being refinanced and extended, with the Electric Utility sale proceeds a possible partial paydown."
+     },
+     "margin_position": "The FY2025 operating margin of 15.2% sits above the company's own 18-year median of roughly 12 to 13%. It was helped by a cold winter relative to FY2024, by a regulated utility and midstream mix, and by unrealized derivative gains inside operating income. It is partly offset by disposal losses. Heating-season weather and the AmeriGas customer attrition push the margin around, so I treat it as modestly above normal.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The FY2025 rate was lowered by valuation-allowance releases and investment tax credits, while the nine-month FY2026 rate was about 19.5% (166 on 850), so it is roughly sustainable but exposed if credits fade."
+     },
+     "why": "FY2025 revenue growth was only 1% and FY2025 operating income included a $54 million loss on disposals in the nine months, so it is not a clean year. FY2026 is being reshaped by LPG divestitures, the planned Electric Utility sale and warmer weather, which cut about $40 million from segment EBIT. Nine-month revenue was flat and adjusted EPS fell, so I expect a slight revenue decline in the near term, then recovery from rate increases and gas demand."
+    },
+    "value_at_old_defaults": 41.40536769675222,
+    "values": {
+     "base": 37.08063523279241,
+     "bear": 24.963908014397596,
+     "bull": 52.66331166148828
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 10000000.0,
+       "printed": 10,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on extinguishments of debt | (15) | (10) | (15) | (10)"
+        },
+        {
+         "id": "P2",
+         "quote": "Loss on extinguishments of debt (net of tax of $(2) and $(3), respectively) | 8 | 6"
+        }
+       ],
+       "quotes_given": 2,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Pre-tax loss on extinguishments of debt in FY2025 (net $8 million after tax of $2 million; the same $10 million is shown in the nine months to June 2025)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 335000000.0,
+     "excess_cash_before": 335000000.0,
+     "k0_after": 415182070.2811245,
+     "k0_before": 425182070.2811245,
+     "k0_interest": 411000000.0,
+     "one_offs_charge": 10000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 590073597.3364044,
+     "x0_before": 582161832.6305221
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7854017996.474899,
+     "seam_ratio": 1.0127936027626767,
+     "tv_share": 0.4577679826687646,
+     "wedge_rate_5": 0.008306412129026485
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.105,
+     "fade_years": 10,
+     "long_run_op_margin": 0.15,
+     "op_margin": [
+      0.155,
+      0.16,
+      0.158,
+      0.158,
+      0.158
+     ],
+     "return_on_new_investment_long_run": 0.075,
+     "rev_growth": [
+      -0.01,
+      0.005,
+      0.025,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0015 and margin 0.1915, margin 0.1519 (persist), growth 0.0375, terminal RONIC 0.0625 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 130
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.125,
+      0.17
+     ],
+     "rev_growth_y3": [
+      0.005,
+      0.045
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Expenditures for property, plant and equipment | (617) | (579)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1001"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex is running at about 10% of revenue in the nine months and was 11.5% in FY25, and utility investment continues. The five-year pooled figure is 10.0%, so about 10.5% is a balanced choice."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Further, our long-term goal to grow our earnings per share is driven by disciplined investments and is impacted by, among other things, our ability to increase investments in our regulated utilities businesses"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate 10-year fade reflects a business in transition, with portfolio pruning and investment in regulated assets, rather than a stable steady state."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-09-30 | $7,210.0 million | -0.1924 | 0.1068"
+       },
+       {
+        "id": "P1",
+        "quote": "The retail LPG distribution industry in the U.S. and many of the European countries in which we operate is mature and has experienced either no or modest growth (or decline) the past few years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year record is volatile (-16% to 32%) and 2024 was 10.7%. Mature, attriting LPG businesses and high depreciation pull the long-run margin slightly below the current 15%, partly offset by a growing regulated mix."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | (44) | (93) | 1,168 | 1,094"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-09-30 | $7,287.0 million | 0.0107 | 0.1519"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month FY26 operating margin of about 19% is flattered by the seasonal first half. The fourth quarter is a loss, so the full year lands near the 15.2% base. Rate increases and the Electric Utility sale gain give slight lift, while disposal losses fade."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1202"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0625."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Most new capital goes into regulated utilities and midstream, which earn modest allowed returns, well below the 12% base-year return on tangible capital (which is flattered by LPG assets) but above the 6.25% no-value-added line."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Revenues | $ 1,331 | $ 1,394 | $ 6,099 | $ 6,090"
+       },
+       {
+        "id": "P3",
+        "quote": "In April 2026, UGI Utilities entered into a definitive agreement to divest its Electric Utility for a sale price of $470, subject to changes in working capital and other adjustments."
+       },
+       {
+        "id": "P5",
+        "quote": "the settlement would permit a two-phase, $65 million distribution rate increase, with the first phase of $40 million effective in October 2026 and a second phase of $25 million effective in October 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month FY26 revenue was flat, and LPG divestitures plus the Electric Utility sale ($470 million, closing expected Q2 FY27) trim the base, so FY26-27 growth is about zero or slightly negative. Growth then recovers on rate increases and gas load growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The mix of regulated gas and midstream growth against a mature, declining LPG business argues for terminal growth below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.125,
+      "input_hit": "long_run_op_margin",
+      "risk": "AmeriGas customer attrition and warm weather keep propane volumes falling, pulling down segment margin, while the PA PUC could change the rate settlement."
+     },
+     {
+      "bear_value": 0.005,
+      "input_hit": "rev_growth",
+      "risk": "Portfolio shrinkage from divestitures plus structural LPG conservation in Europe leaves revenue flat."
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "New investment earns only close to the allowed regulated return, adding little value."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.125,
+      "rev_growth": [
+       -0.03,
+       -0.015,
+       0.005000000000000001,
+       0.009999999999999998,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.009999999999999997,
+       0.024999999999999998,
+       0.045,
+       0.049999999999999996,
+       0.049999999999999996
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "About $6.6 billion of debt is typical for a capital-intensive utility-heavy group that funds capex with debt, and recent filings show it being refinanced and extended rather than reduced."
+     },
+     "margin_position": "The FY2025 operating margin of 15.2% sits near the middle of recent years. The FY2021 and FY2023 swings came from derivative and impairment items, and FY2024 was depressed by an AmeriGas goodwill impairment and restructuring costs. Regulated Utilities and fee-based Midstream give a stable base, while weather, LPG attrition and disposal gains and losses move GAAP margin around it.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The FY25 rate was lowered by valuation allowance releases and investment tax credits from Midstream projects, and management cites higher taxes in the FY26 EPS decline."
+     },
+     "why": "FY2025 was near normal weather (Gas Utility 2.4% warmer than normal) and carried only modest one-offs (a $50 million Italy loss, a $17 million Hawaii gain). Revenue is being reshaped by LPG divestitures and the pending Electric Utility sale, so year-1 and year-2 revenue is flat to slightly down. Nine-month FY26 operating margin was 19.2%, but the fourth quarter is seasonally a loss, so full-year margin should stay near 15-16%."
+    },
+    "value_at_old_defaults": 41.40536769675222,
+    "values": {
+     "base": 40.64604877542471,
+     "bear": 28.8861656106515,
+     "bull": 56.52953265618058
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 41.40536769675222,
+  "value_at_old_defaults_quoted": 41.40536769675222,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 8517290033.620432,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 219160000.0,
@@ -15,7 +519,7 @@
   "UGI International completed the sale of its Czech Republic, Hungary, Poland and Slovakia LPG businesses, with a total loss of $71 (section currency in millions) for the nine months ended June 30, 2026."
  ],
  "in_code_book": false,
- "ke": 0.08052107358710303,
+ "ke": 0.08068910836690271,
  "market_cap_at_publish": 8028546690,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +527,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 40.12104311433214,
-  "3000": 40.12104311433214
+  "1000": 37.08063523279241,
+  "3000": 40.64604877542471
  },
- "seeds_agree": true,
+ "seeds_agree": false,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1576,131 +2080,15 @@
   ]
  },
  "ticker": "UGI",
- "upside": 0.09520790604470286,
- "valuation": {
-  "annotations": [],
-  "departures": [
-   {
-    "driver": "mix",
-    "evidence": [
-     "P3.s30",
-     "P3.s33",
-     "P3.s37",
-     "P3.s38"
-    ],
-    "input": "rev_growth.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "down",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P3.s30": {
-    "kind": "quarterly_section",
-    "period": "2026-06-30",
-    "text": "In April 2026, UGI Utilities entered into a definitive agreement to divest its Electric Utility for a sale price of $470, subject to changes in working capital and other adjustments."
-   },
-   "P3.s33": {
-    "kind": "quarterly_section",
-    "period": "2026-06-30",
-    "text": "The Company expects to recognize a gain upon closing, which is expected in the second quarter of Fiscal 2027, subject to customary closing conditions and applicable regulatory approvals."
-   },
-   "P3.s37": {
-    "kind": "quarterly_section",
-    "period": "2026-06-30",
-    "text": "In January 2026, UGI International, through a wholly-owned subsidiary, entered into a definitive agreement to divest its LPG distribution businesses in Czech Republic, Hungary, Poland, and Slovakia."
-   },
-   "P3.s38": {
-    "kind": "quarterly_section",
-    "period": "2026-06-30",
-    "text": "The sale was completed in May 2026, subject to customary post-closing working capital adjustments."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.1000780906828054,
-    0.1000780906828054,
-    0.1000780906828054,
-    0.1000780906828054,
-    0.1000780906828054
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1519143680526966,
-   "normalized.margin": 0.1519143680526966,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.19150680439416298,
-   "op_margin.y2": 0.1519143680526966,
-   "rev_growth.y1": 0.001477832512315258,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06246543670789653
-  },
-  "numbers": {
-   "capex": [
-    0.1000780906828054,
-    0.1000780906828054,
-    0.1000780906828054,
-    0.1000780906828054,
-    0.1000780906828054
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1519143680526966,
-   "normalized.margin": 0.1519143680526966,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.19150680439416298,
-   "op_margin.y2": 0.1519143680526966,
-   "rev_growth.y1": 0.001477832512315258,
-   "rev_growth.y2": 0.0,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06246543670789653
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "zero",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No item gives guidance for fiscal 2026 revenue; the only stated guidance is for adjusted diluted EPS (P5.s14).",
-   "Fourth-quarter fiscal 2026 results are not in the evidence, so full-year fiscal 2026 revenue and operating margin are not known.",
-   "The evidence does not give the revenue or earnings contribution of the Electric Utility being divested, nor of the LPG businesses sold in fiscal 2026.",
-   "Whether the PA PUC approved the gas base rate settlement, and on what terms, is not stated in the evidence.",
-   "The size and timing of any conversion of the 2028 Notes, and any borrowing under the new $300 million facility, are not known from the evidence."
-  ],
-  "year": 3
- },
- "value_base": 40.12104311433214,
- "value_bear": 37.95010782171739,
- "value_bull": 40.76081383918703,
+ "upside": 0.060875693010441045,
+ "valuation": null,
+ "value_base": 38.86334200410856,
+ "value_bear": 26.925036812524546,
+ "value_bull": 54.59642215883443,
  "value_per_filed_share": {
-  "base": 40.12104311433214,
-  "bear": 37.95010782171739,
-  "bull": 40.76081383918703
+  "base": 38.86334200410856,
+  "bear": 26.925036812524546,
+  "bull": 54.59642215883443
  },
  "valued": true,
  "verdict": "WATCH",

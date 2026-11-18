@@ -1,11 +1,454 @@
 {
- "alpha_pts": -3.7603431502697653,
+ "alpha_pts": 8.920140038660568,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 92,
  "claims_supported": 87,
  "date": "2026-11-16T14:38:52Z",
- "equity_value": 916198148.235174,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 7 of 7"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0959 and margin 0.0365, margin 0.0858 (persist), growth 0.0375, terminal RONIC 0.0985 (equity return r 0.0985), F 10",
+  "run_gap": 0.12073359180318281,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 365280000.0,
+     "excess_cash_before": 365280000.0,
+     "k0_after": 20550984.09510213,
+     "k0_before": 20550984.09510213,
+     "k0_interest": 2461000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 199012047.12712693,
+     "x0_before": 199012047.12712693
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 844830705.2228007,
+     "seam_ratio": 1.0303285183963762,
+     "tv_share": 0.47728161416182885,
+     "wedge_rate_5": 0.02039551339928417
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 8,
+     "long_run_op_margin": 0.075,
+     "op_margin": [
+      0.05,
+      0.05,
+      0.065,
+      0.08,
+      0.09
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      -0.095,
+      -0.03,
+      0.01,
+      0.03,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0959 and margin 0.0365, margin 0.0858 (persist), growth 0.0375, terminal RONIC 0.0985 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 87
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.1
+     ],
+     "rev_growth_y3": [
+      -0.03,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0460"
+       },
+       {
+        "id": "F3",
+        "quote": "Acquisition of intangible assets, property and equipment | (126,937) | (75,310)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled five-year capex is 4.6% of revenue, but 2026 capex is running far higher at 126.9M over nine months, about 10% of revenue. I assume 5.5% as spending normalises from the elevated level."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "As previously disclosed, our largest customer notified us that they will curtail the scope of future services commencing November 1, 2025."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin must move from about 9% in year 5 to 7.5% and growth from 4% to 3%, which is a modest gap that a fade of about eight years covers."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,944.9 million | 0.0060 | 0.1043"
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $2,017.0 million | -0.1052 | 0.0120"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2014-2025 filed history shows operating margins of roughly 5-7% in most years, with 10.4% only in 2025. I fade to a level between the long-run median and the 2025 peak, because the platform is mixing toward higher-margin retail media and self-service but faces walled-garden competition."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 20,953 | 51,629 | 46,361 | 130,251"
+       },
+       {
+        "id": "P4",
+        "quote": "Adjusted EBITDA for the three months ended September 30, 2026 decreased by (39)% to $64.5 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Operating income was $46.4M on $1,269M of revenue in the nine months ended September 30, 2026, against $130.3M the year before. Q3 Adjusted EBITDA fell 39%, so I assume about 5% in 2026-27 and a gradual rebuild as the cost base is cut and revenue stabilises."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The asset-light platform earns a very high base-year return on tangible capital, but competition and the shrinking base argue for a modest 15% on new investment, still above the 9.85% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "For the three months ended September 30, 2026, revenue decreased by (11)% to $416.5 million, compared to the same period in the prior year"
+       },
+       {
+        "id": "P7",
+        "quote": "Foreign exchange is expected to be a greater headwind in the fourth quarter 2026 than reflected in our prior guidance"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is FY2026: nine-month revenue is down 10% and the Q4 guidance still carries the Retail Media scope changes plus a larger FX headwind, so I assume about -9.5%. Growth then recovers slowly as the scope-change headwind laps and CTV, ChatGPT ads and retail media onsite build."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature ad-tech firm with a shrinking core in Performance Media should grow below the long-run nominal anchor. Retail media and CTV are growth pockets, but competition from larger platforms limits the long-run rate."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.05,
+      "input_hit": "rev_growth",
+      "risk": "Further client losses and weak Commerce Growth keep revenue shrinking beyond 2026, with possible goodwill impairment."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins stay at depressed 2026 levels because competition from walled gardens compresses fees and the revenue decline continues."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Structural decline of Performance Media lowers perpetual growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       -0.135,
+       -0.07,
+       -0.03,
+       -0.010000000000000002,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       -0.055,
+       0.010000000000000002,
+       0.05,
+       0.07,
+       0.08
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt is $0 and there is only a small current financial liability, so the company runs essentially unlevered apart from operating leases."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 10.4% is the highest in the filed history (5-7% in most years). In 2026 it has collapsed to about 3.7% over nine months and 5.0% in Q3, because revenue fell 10% while operating expenses fell much less. The margin is therefore above its long-run median on the base year but far below it now, and it is not clearly cyclical because the drop looks client-specific and structural.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate of 26.6% is plausible, but the nine-month 2026 provision of $23.2M on $49.6M of pretax income shows a much higher rate when profit is low."
+     },
+     "why": "FY2025 revenue was flat and the margin peaked at 10.4%, before the largest customer's curtailment began on November 1, 2025. Nine-month 2026 revenue is down 10% and operating income is down about 64%. Year 1 therefore starts from a much lower, shrinking base, and I assume only partial margin recovery toward the historical median."
+    },
+    "value_at_old_defaults": 27.550571544254332,
+    "values": {
+     "base": 23.408507856790884,
+     "bear": 15.776991437772528,
+     "bull": 35.77328437863463
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 365280000.0,
+     "excess_cash_before": 365280000.0,
+     "k0_after": 20550984.09510213,
+     "k0_before": 20550984.09510213,
+     "k0_interest": 2461000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 199012047.12712693,
+     "x0_before": 199012047.12712693
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 710334354.846513,
+     "seam_ratio": 1.127637164905992,
+     "tv_share": 0.5400718760916281,
+     "wedge_rate_5": 0.02446274750907275
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 7 of 7"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.06,
+     "fade_years": 8,
+     "long_run_op_margin": 0.072,
+     "op_margin": [
+      0.048,
+      0.05,
+      0.06,
+      0.068,
+      0.073
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      -0.097,
+      -0.02,
+      0.02,
+      0.03,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0959 and margin 0.0365, margin 0.0858 (persist), growth 0.0375, terminal RONIC 0.0985 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 87
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.1
+     ],
+     "rev_growth_y3": [
+      -0.03,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Acquisition of intangible assets, property and equipment | (126,937) | (75,310)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month 2026 capex of $126.9M is far above last year's $75.3M, about 10% of revenue, versus a pooled 4.6% over five years. I assume elevated spending persists somewhat but normalises toward 6%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Retail Media remains one of the fastest growing segments in digital advertising."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Retail media is a structurally growing segment that is being offset by Performance Media weakness, so the transition from current to mature margins and growth should take a medium span, which I put at 8 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,944.9 million | 0.0060 | 0.1043"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2025 margin of 10.4% was a peak, and history from 2014 to 2023 mostly sits at 5-7%. Competition from walled gardens and signal loss argue against holding the peak, while the mix shift toward retail media and cost discipline support something above the old median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from operations | 20,953 | 51,629 | 46,361 | 130,251"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month income from operations is $46.4M against $130.3M a year earlier, and Q3 margin is about 5%. I assume partial opex flexing and recovery as revenue stabilises, rising gradually toward the long-run level."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is extremely high because of little tangible capital, but competition and rising capex should pull incremental returns well down, while still staying above the 9.85% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "revenue decreased by (11)% to $416.5 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month revenue is down 10% and Q3 down 11%, so FY2026 lands near -10% even with a seasonally stronger Q4. The two Retail Media scope changes lap, and CTV, ChatGPT and retail media onsite give modest recovery, but Performance Media remains soft, so I assume stabilisation in 2027 and low-single-digit growth after."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Revenue has been roughly flat for seven years, but the company sits in growing digital and retail media markets. I set terminal growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.05,
+      "input_hit": "rev_growth",
+      "risk": "Further revenue decline from Commerce Growth enterprise clients and Retail Media scope changes, with no stabilisation in 2027."
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins stay structurally lower because of walled-garden competition, signal loss and fee compression, so the long-run margin is below history."
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "capex_to_revenue",
+      "risk": "Capex stays near its 2026 level of about 10% of revenue as platform and infrastructure investment continues."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       -0.14700000000000002,
+       -0.07,
+       -0.030000000000000002,
+       -0.020000000000000004,
+       -0.015
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       -0.05700000000000001,
+       0.019999999999999993,
+       0.06,
+       0.06999999999999999,
+       0.075
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The record shows zero funded debt and a net cash position, with only operating leases and a revolving credit facility amendment that does not indicate drawn debt."
+     },
+     "margin_position": "The 2025 operating margin of 10.4% is the highest in the filed history, whose other years run from 1.2% to 7.8%. It rested on lower traffic acquisition costs and lower server depreciation. In 2026 it has collapsed to about 3.7% over nine months (5.0% in Q3) as revenue fell about 10% against a largely fixed cost base. The company is therefore well below its 2025 level but above its weakest years.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate of 26.6% sits against a 9M 2026 provision of $23.2M on $49.6M pretax, a rate near 47%, so the sustainable rate is hard to read on depressed profits."
+     },
+     "why": "2025 was a peak-margin year, and 2026 is a sharp downturn: revenue fell 11% in Q3 on Commerce Growth weakness and Retail Media scope changes at two clients. Year 1 (FY2026) is already mostly observed, with 9M operating income of $46.4M against $130.3M a year earlier, so I set the near-term path from the nine-month run-rate plus a seasonally stronger Q4. The long-run margin sits between the 2025 peak and the 2014-2023 range of about 5-7%."
+    },
+    "value_at_old_defaults": 27.550571544254332,
+    "values": {
+     "base": 20.74321010960862,
+     "bear": 13.510896378113621,
+     "bull": 34.10235501973132
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 27.550571544254332,
+  "value_at_old_defaults_quoted": 27.550571544254332,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1209592386.3713317,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 54792540.0,
@@ -15,7 +458,7 @@
   "Criteo's largest customer, which accounted for 5% of total revenue in 2025, notified the company that it would curtail the scope of future services commencing on that date."
  ],
  "in_code_book": false,
- "ke": 0.09826177079828693,
+ "ke": 0.09846177079828694,
  "market_cap_at_publish": 912435783,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +466,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 16.721220593810287,
-  "3000": 15.3812730087874
+  "1000": 23.408507856790884,
+  "3000": 20.74321010960862
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1325,259 +1768,17 @@
   ]
  },
  "ticker": "CRTO",
- "upside": 0.004123430169303166,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.year (1000 3, 3000 4)"
-  ],
-  "departures": [
-   {
-    "driver": "competition",
-    "evidence": [
-     "P4.s27",
-     "P3.s151",
-     "P2.s20",
-     "F2"
-    ],
-    "input": "rev_growth.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "P4.s32",
-     "P5.s21",
-     "V0"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "Y2023-12-31",
-     "P2.s31",
-     "V0"
-    ],
-    "input": "normalized.margin"
-   },
-   {
-    "driver": "competition",
-    "evidence": [
-     "P3.s151",
-     "P2.s28",
-     "P4.s85",
-     "V0"
-    ],
-    "input": "normalized.rev_growth"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "F2",
-     "P2.s31",
-     "P4.s41",
-     "V0"
-    ],
-    "input": "long_run_op_margin"
-   },
-   {
-    "driver": "competition",
-    "evidence": [
-     "P1.s51",
-     "P7.s30",
-     "P2.s20",
-     "P3.s151"
-    ],
-    "input": "terminal_g"
-   },
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "F3",
-     "F1",
-     "Y2023-12-31",
-     "Y2025-12-31"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "down",
-   "normalized.margin": "down",
-   "normalized.rev_growth": "down",
-   "op_margin.y1": "none",
-   "op_margin.y2": "down",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "down",
-   "terminal_g": "down",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F1": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF FINANCIAL POSITION (UNAUDITED) - USD ($) $ in Thousands | Sep. 30, 2026 | Dec. 31, 2025\nCurrent assets:\nCash and cash equivalents | $ 274,841 | $ 342,038\nTrade receivables, net of allowances of $14.3 million and $25.9 million at September 30, 2026 and December 31, 2025, respectively. | 454,203 | 582,102\nIncome taxes | 18,472 | 14,233\nOther taxes | 49,169 | 57,050\nMarketable securities - current portion | 27,976 | 23,242\nPrepaid expenses and other current assets | 60,370 | 53,210\nTotal current assets | 885,031 | 1,071,875\nProperty and equipment, net | 196,946 | 139,330\nIntangible assets, net | 138,740 | 151,853\nGoodwill | 531,193 | 535,761\nRight of use assets - operating leases | 134,615 | 134,205\nMarketable securities - noncurrent portion | 22,710 | 23,500\nNoncurrent financial assets | 8,018 | 8,314\nDeferred tax assets | 76,531 | 90,689\nOther noncurrent assets | 41,081 | 45,680\nTotal noncurrent assets | 1,149,834 | 1,129,332\nTotal assets | 2,034,865 | 2,201,207\nCurrent liabilities:\nTrade payables | 464,516 | 566,046\nContingencies - current portion | 9,474 | 9,229\nIncome taxes | 1,729 | 27,528\nFinancial liabilities - current portion | 8,545 | 11,360\nLease liability - operating - current portion | 37,840 | 33,085\nOther taxes | 15,954 | 14,713\nEmployee - related payables | 75,686 | 114,416\nOther current liabilities | 74,851 | 68,277\nTotal current liabilities | 688,595 | 844,654\nDeferred tax liabilities | 5,116 | 5,285\nDefined benefit plans | 5,477 | 5,707\nLease liability - operating - noncurrent portion | 99,487 | 105,277\nContingencies - noncurrent portion | 23,614 | 22,729\nOther noncurrent liabilities | 29,952 | 31,826\nTotal noncurrent liabilities | 163,646 | 170,824\nTotal liabilities | 852,241 | 1,015,478\nShareholders' equity:\nCommon shares, \u20ac0.025 par value; 54,601,775 and 55,659,895 shares authorized; 49,228,895 and 55,659,895 shares issued; and 49,064,782 and 51,151,866 outstanding at September 30, 2026 and December 31, 2025, respectively. | 1,687 | 1,871\nTreasury stock, 164,113 and 4,508,029 shares at cost as of September 30, 2026 and December 31, 2025, respectively. | (3,520) | (120,853)\nAdditional paid-in capital | 692,429 | 706,321\nAccumulated other comprehensive loss | (76,669) | (68,879)\nRetained earnings | 530,188 | 630,750\nEquity attributable to the shareholders of Criteo S.A. | 1,144,115 | 1,149,210\nNoncontrolling interests | 38,509 | 36,519\nTotal shareholders' equity | 1,182,624 | 1,185,729\nTotal liabilities and shareholders' equity | $ 2,034,865 | $ 2,201,207"
-   },
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF INCOME (UNAUDITED) - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nRevenue | $ 416,469 | $ 469,660 | $ 1,269,126 | $ 1,403,765\nCost of revenue:\nTraffic acquisition costs | 176,108 | 181,526 | 522,924 | 559,190\nOther cost of revenue | 32,696 | 31,651 | 93,581 | 92,598\nGross profit | 207,665 | 256,483 | 652,621 | 751,977\nOperating expenses:\nResearch and development expenses | 57,205 | 67,678 | 198,833 | 208,037\nSales and operations expenses | 87,229 | 86,995 | 270,269 | 284,099\nGeneral and administrative expenses | 42,278 | 50,181 | 137,158 | 129,590\nTotal operating expenses | 186,712 | 204,854 | 606,260 | 621,726\nIncome from operations | 20,953 | 51,629 | 46,361 | 130,251\nFinancial and other income (expense) | 1,069 | (21) | 3,261 | 480\nIncome before taxes | 22,022 | 51,608 | 49,622 | 130,731\nProvision for income taxes | 15,892 | 11,531 | 23,161 | 27,723\nNet Income | 6,130 | 40,077 | 26,461 | 103,008\nNet income attributable to shareholders of Criteo S.A. | 5,578 | 37,782 | 24,585 | 96,960\nNet income attributable to noncontrolling interests | $ 552 | $ 2,295 | $ 1,876 | $ 6,048\nWeighted average shares outstanding used in computing per share amounts:\nBasic (in shares) | 48,867,420 | 52,565,601 | 49,620,440 | 53,170,066\nDiluted (in shares) | 49,795,181 | 53,760,200 | 50,428,024 | 55,356,346\nNet income allocated to shareholders per share:\nBasic (in USD per share) | $ 0.11 | $ 0.72 | $ 0.50 | $ 1.82\nDiluted (in USD per share) | $ 0.11 | $ 0.70 | $ 0.49 | $ 1.75"
-   },
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS (UNAUDITED) - USD ($) $ in Thousands | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash flows from operating activities\nNet income | $ 26,461 | $ 103,008\nNoncash and nonoperating items | 102,812 | 113,619\nAmortization and provisions | 78,442 | 97,119\nEquity awards compensation expense | 39,057 | 52,037\nGain on disposal of and impairment of long-lived assets | (523) | (59)\nChange in uncertain tax positions | 503 | 421\nChange in deferred taxes | 14,017 | 23,387\nChange in income taxes | (29,936) | (64,489)\nOther | 1,252 | 5,203\nChanges in assets and liabilities: | (3,825) | (66,083)\nTrade receivables | 134,624 | 261,726\nTrade payables | (96,023) | (299,713)\nOther assets | (4,720) | 5,325\nOther liabilities | (38,341) | (31,890)\nOperating lease liabilities and right of use assets | 635 | (1,531)\nNet cash provided by operating activities | 125,448 | 150,544\nCash flows from investing activities\nAcquisition of intangible assets, property and equipment | (126,937) | (75,310)\nDisposal of intangible assets, property and equipment | 1,063 | 1,079\nPurchases of investment securities | (22,801) | (23,179)\nMaturities and sales of investment securities | 17,161 | 28,287\nNet cash used in investing activities | (131,514) | (69,123)\nCash flows from financing activities\nProceeds from exercise of stock options | 0 | 1,897\nRepurchase of treasury stocks | (65,420) | (115,444)\nChange in other financing activities | (1,185) | (834)\nNet cash used in financing activities | (66,605) | (114,381)\nEffect of exchange rates changes on cash and cash equivalents | 5,824 | (2,648)\nNet decrease in cash and cash equivalents and restricted cash | (66,847) | (35,608)\nNet cash and cash equivalents and restricted cash at the beginning of the period | 342,359 | 290,943\nNet cash and cash equivalents and restricted cash at the end of the period | 275,512 | 255,335\nReconciliation of cash, cash equivalents, and restricted cash to the consolidated statement of financial position\nCash and Cash Equivalents | 274,841 | 255,014\nRestricted cash, included in other current assets | 671 | 321\nTotal cash, cash equivalents, and restricted cash | 275,512 | 255,335\nSupplemental disclosures of cash flow information\nCash paid for taxes, net of refunds | (35,154) | (68,404)\nCash paid for interest | (1,656) | (969)\nNoncash investing and financing activities\nIntangible assets, property and equipment acquired through payables | $ 27,715 | $ 10,552"
-   },
-   "P1.s51": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "In Retail Media, excluding Amazon and China, our Serviceable Available Market (\"SAM\") is expected to reach approximately $42 billion in advertising spend by 2026 and $50 billion by 2027, reflecting a compound annual growth rate of about 20%."
-   },
-   "P2.s20": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Certain internet and technology companies have significantly larger resources and capital than we do, and in many cases have advantageous competitive positions in popular products and services such as Amazon Advertising, Google Search, YouTube, Chrome, Meta Platforms, and Apple Search Ads , which they can use to their advantage."
-   },
-   "P2.s28": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Some large retailers, which could include our own clients, may develop retail media advertising technologies in-house, and may move some of their demand to a direct sales model such that they would do some of their own sales."
-   },
-   "P2.s31": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Any of these developments would make it more difficult for us to sell our offerings and could result in increased pricing pressure, reduced fees and gross margins, increased sales and marketing expense and/or the loss of market share."
-   },
-   "P3.s151": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Revenue at constant currency | $1,923,767 | $1,957,798 | $1,958,372 | \u2014% | \u2014%"
-   },
-   "P4.s27": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "For the three months ended September 30, 2026, revenue decreased by (11)% to $416.5 million, compared to the same period in the prior year, due to decreases in Performance Media reflecting soft performance in Commerce Growth largely driven by reduced spending from several large enterprise clients, and Retail Media reflecting the headwind from previously communicated scope changes with two clients."
-   },
-   "P4.s32": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Net income for the three months ended September 30, 2026 decreased by (85)% to $6.1 million, primarily driven by lower gross profit due to lower revenue, partially offset by lower operating expenses, primarily reflecting disciplined resource allocation, lower share-based compensation expense, and a lower bonus accrual."
-   },
-   "P4.s41": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Based on this assessment, the estimated fair values of both reporting units continued to exceed their respective carrying values, albeit with lower headroom compared to the previous annual impairment assessment."
-   },
-   "P4.s85": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Retail Media revenue decreased (23)%, or (22)% on a constant currency basis, to $52.1 million for the three months ended September 30, 2026, reflecting the impact of previously communicated scope changes with two specific Retail Media clients, partially offset by continued strength in Retail Media onsite."
-   },
-   "P5.s21": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "We expect to incur additional direct and indirect costs as a result of the Merger."
-   },
-   "P7.s30": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "\u2022Criteo expands its Performance Connected TV capabilities beyond the U.S., starting with Brazil and Mexico by year-end 2026, followed by Canada, the UK, France, Germany, Italy, Spain, Australia, and select additional markets in 2027."
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min 0.0120, p25 0.0396, median 0.0674, p75 0.0783, max 0.1043, last 0.1043; persist 0.0858 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 -0.1052, 2023-12-31 -0.0335, 2024-12-31 -0.0083, 2025-12-31 0.0060.\nBase-year revenue 1,944,901,000; tax rate 0.2662; return on opening capital 1.0000; capital expenditure 0.0460 and depreciation 0.0231 of revenue (pooled); the desk depreciates by the vintages rule (filed plant ages).\nCost of equity 0.0983 (risk-free 0.0510, long-run growth anchor 0.0375, loading 0.991, equity premium 0.0477).\nYear 1 to date (10-Q 0001576427-26-000107, filed 2026-11-04): revenue 1,269,126,000 from 2026-01-01 to 2026-09-30 against 1,403,765,000 from 2025-01-01 to 2025-09-30, growth -0.0959; operating income 46,361,000, margin 0.0365.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd -0.0959; anchor -0.0588; record_median -0.0750; last -0.0676; zero -0.0692; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median -0.0209; last 0.0060; zero 0.0000; guidance\nop_margin.y1: ytd 0.0365; persist 0.0502; median 0.0451; p25 0.0374; p75 0.0482; last 0.0554; guidance\nop_margin.y2: persist 0.0858; median 0.0674; p25 0.0396; p75 0.0783; last 0.1043; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.0858; median 0.0674; p25 0.0396; p75 0.0783; last 0.1043; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0983; quarter 0.1269; half 0.1789; three_quarters 0.3036; ronic0 1.0000\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline -0.0209\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0460; record_last 0.0528; record_max 0.0596; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   },
-   "Y2023-12-31": {
-    "kind": "filed_record",
-    "period": "2023-12-31",
-    "text": "Filed annual record, fiscal year ended 2023-12-31 (10-K, accession 0001576427-26-000014): revenue $1,949.4 million; operating income $77.2 million; operating margin 4.0%; net income $55.0 million; depreciation and amortization $51.4 million; capital expenditure $116.1 million."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001576427-26-000014): revenue $1,944.9 million; operating income $202.8 million; operating margin 10.4%; net income $144.2 million; depreciation and amortization $33.3 million; capital expenditure $102.7 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.04599077739469941,
-    0.04599077739469941,
-    0.04599077739469941,
-    0.04599077739469941,
-    0.04599077739469941
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.08581436988404247,
-   "normalized.margin": 0.08581436988404247,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03652986385906522,
-   "op_margin.y2": 0.08581436988404247,
-   "rev_growth.y1": -0.09591277742357163,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09826177079828693
-  },
-  "numbers": {
-   "capex": [
-    0.0595631064225972,
-    0.0595631064225972,
-    0.0595631064225972,
-    0.0595631064225972,
-    0.0595631064225972
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.06737407590601689,
-   "normalized.margin": 0.06737407590601689,
-   "normalized.rev_growth": 0.0,
-   "op_margin.y1": 0.03652986385906522,
-   "op_margin.y2": 0.06737407590601689,
-   "rev_growth.y1": -0.09591277742357163,
-   "rev_growth.y2": 0.0,
-   "terminal_g": 0.01875,
-   "terminal_ronic": 0.09826177079828693
-  },
-  "of_record": {},
-  "options": {
-   "capex": "record_max",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "median",
-    0
-   ],
-   "normalized.rev_growth": "zero",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "median",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "zero",
-   "terminal_g": "half_anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Fiscal year 2026 and fourth quarter 2026 quantitative guidance figures in the third-quarter earnings release were omitted from the evidence packet.",
-   "No quantitative operating margin or capital expenditure guidance was provided in the filings or releases in the packet.",
-   "The financial cost, indirect tax impact, and completion outcome of the proposed cross-border merger to redomicile to the United States are not quantified in the packet.",
-   "The duration and post-fourth-quarter revenue impact of Retail Media client scope changes and reduced enterprise client spending in Commerce Growth are not stated."
-  ],
-  "year": 3
- },
- "value_base": 16.721220593810287,
- "value_bear": 14.149939190969992,
- "value_bull": 19.20795671963356,
+ "upside": 0.32567399142798825,
+ "valuation": null,
+ "value_base": 22.07585898319975,
+ "value_bear": 14.643943907943076,
+ "value_bull": 34.937819699182974,
  "value_per_filed_share": {
-  "base": 16.721220593810287,
-  "bear": 14.149939190969992,
-  "bull": 19.20795671963356
+  "base": 22.07585898319975,
+  "bear": 14.643943907943076,
+  "bull": 34.937819699182974
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -3.8 points a year against the required return over 3 years"
+ "verdict": "BUY",
+ "verdict_reason": "expected return +8.9 points a year against the required return over 3 years"
 }

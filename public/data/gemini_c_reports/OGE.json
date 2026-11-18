@@ -1,11 +1,460 @@
 {
- "alpha_pts": -17.832587064460633,
+ "alpha_pts": -16.161977655282815,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 117,
  "claims_supported": 95,
  "date": "2026-11-17T03:10:04Z",
- "equity_value": 6003572924.767588,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.2550 (filed 0.1135 to 0.2497)",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.2550 (filed 0.1135 to 0.2497)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.2500 (filed 0.1135 to 0.2497)",
+   "run 3000: quotes_verified: 9 of 9"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0066 and margin 0.1503, margin 0.2442 (persist), growth 0.0375, terminal RONIC 0.0594 (equity return r 0.0807), F 10",
+  "run_gap": 0.014638841602690501,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 200000.0,
+     "excess_cash_before": 200000.0,
+     "k0_after": 238908130.6827309,
+     "k0_before": 238908130.6827309,
+     "k0_interest": 270300000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 470693171.967241,
+     "x0_before": 470693171.967241
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 5867961032.847897,
+     "seam_ratio": 1.120669897828868,
+     "tv_share": 0.5800660630297558,
+     "wedge_rate_5": 0.03246812598756607
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.2550 (filed 0.1135 to 0.2497)",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.37,
+     "fade_years": 10,
+     "long_run_op_margin": 0.24,
+     "op_margin": [
+      0.255,
+      0.248,
+      0.245,
+      0.243,
+      0.241
+     ],
+     "return_on_new_investment_long_run": 0.065,
+     "rev_growth": [
+      0.045,
+      0.05,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0066 and margin 0.1503, margin 0.2442 (persist), growth 0.0375, terminal RONIC 0.0594 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 22,
+     "kept": 95
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.215,
+      0.255
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.065
+     ],
+     "terminal_growth": [
+      0.022,
+      0.036
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Total | $1,385 | $1,525 | $1,530 | $1,445 | $1,400 | $7,285"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.3231"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year plan of $7,285 million implies about 0.39 of revenue, above the pooled 0.3231. Nine-month 2026 capex ran below plan, so I use 0.37."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "allows utilities to establish a regulatory asset to defer 90 percent of depreciation expense and return associated with qualified plant investments"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Rate cases and deferral mechanisms such as SB 998 phase changes in margin gradually over many years, so I use a 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Any failure to obtain commission approval to increase rates to fully recover costs, or a delay in the receipt of such approval, could have an adverse impact on OG&E's results of operations."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Allowed returns on a growing rate base keep the margin near its 2023 to 2025 level, but regulatory lag and rising depreciation create downside. I set 0.24, slightly below the 2025 level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $3,260.1 million | 0.0921 | 0.2452"
+       },
+       {
+        "id": "P6",
+        "quote": "OGE Energy now expects consolidated earnings between $2.62 to $2.68 per average diluted share."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin was 0.2452, and 2026 is running higher on weather (guidance raised). I use about 0.255 in year 1 and fade to a normal level as depreciation grows with the investment program and fuel pass-through inflates revenue."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0687"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0594."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "New rate-base investment earns an authorized return, which gives an after-tax return on tangible capital a little above the no-value-added threshold of 0.0594 and near the 0.0687 base-year level. I use 0.065."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "total retail load growth of approximately 4 to 6 percent;"
+       },
+       {
+        "id": "P4",
+        "quote": "targeting the consistent growth of consolidated earnings per share of five to seven percent through 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides to 4 to 6 percent retail load growth and rate recovery of the capital plan; part of it is fuel pass-through, which adds revenue without adding earnings. 2026 is lifted by weather, so I fade growth modestly from about 5 percent."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A regulated utility with a growing rate base and no wholesale exposure can grow slightly below the nominal anchor; I use 0.03."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.215,
+      "input_hit": "long_run_op_margin",
+      "risk": "Regulators deny or delay rate recovery of the large capital plan, or cut the allowed return"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Load growth from large new customers such as data centers falls short, and normal or mild weather removes the 2026 uplift"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Equity funding needs and a higher cost of capital reduce value creation from new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.215,
+      "rev_growth": [
+       0.024999999999999994,
+       0.03,
+       0.03,
+       0.024999999999999994,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.022
+     },
+     "bull": {
+      "long_run_op_margin": 0.255,
+      "rev_growth": [
+       0.06,
+       0.065,
+       0.065,
+       0.06,
+       0.055
+      ],
+      "terminal_growth": 0.036
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company funds a large capital plan with a mix of debt and new equity (an at-the-market program of up to $750 million) to hold investment-grade ratings, so leverage should stay roughly proportional to the rate base."
+     },
+     "margin_position": "Rates are set by regulators as cost of service plus an authorized return, and fuel is passed through, so the margin has held near 0.24 to 0.25 for 2023 to 2025. The 2026 margin is lifted by a very hot summer, which is weather rather than a cyclical commodity swing.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 0.1602 is close to the 2026 guided rate of about 16.8 percent, so it looks sustainable though low."
+     },
+     "why": "2025 operating margin of 0.2452 sits in line with 2023 and 2024 (0.2431 and 0.2497), so the base year is a normal year. 2026 is flattered by weather: guidance was raised to $2.62-$2.68 on warmer than normal weather. Revenue growth is driven by load growth, rate-base recovery and fuel pass-through."
+    },
+    "value_at_old_defaults": 29.78560155668332,
+    "values": {
+     "base": 31.025174620295992,
+     "bear": 23.747478102212128,
+     "bull": 37.58616682273828
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 200000.0,
+     "excess_cash_before": 200000.0,
+     "k0_after": 238908130.6827309,
+     "k0_before": 238908130.6827309,
+     "k0_interest": 270300000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 470693171.967241,
+     "x0_before": 470693171.967241
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 5954497315.031889,
+     "seam_ratio": 1.1339318184257092,
+     "tv_share": 0.581365763329559,
+     "wedge_rate_5": 0.023144704980420257
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.2550 (filed 0.1135 to 0.2497)",
+     "margin_outside_filed_record: op_margin.y2 0.2500 (filed 0.1135 to 0.2497)",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.37,
+     "fade_years": 10,
+     "long_run_op_margin": 0.23,
+     "op_margin": [
+      0.255,
+      0.25,
+      0.247,
+      0.244,
+      0.241
+     ],
+     "return_on_new_investment_long_run": 0.065,
+     "rev_growth": [
+      0.045,
+      0.06,
+      0.06,
+      0.055,
+      0.05
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0066 and margin 0.1503, margin 0.2442 (persist), growth 0.0375, terminal RONIC 0.0594 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 22,
+     "kept": 95
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.21,
+      0.25
+     ],
+     "rev_growth_y3": [
+      0.035,
+      0.08
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Total | $1,385 | $1,525 | $1,530 | $1,445 | $1,400 | $7,285"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The five-year plan has capex of $1,385M to $1,530M a year against revenue of about $3.4B to $4.2B, so 33-42%. This is above the 32% pooled average, and I use 37%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "targeting the consistent growth of consolidated earnings per share of five to seven percent through 2030"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Rate-base growth and regulatory lag mean growth and margin converge gradually, so I use a 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "will grant rate increases in the future or in the amounts requested"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Allowed returns are set by regulators, and cost recovery is a stated risk. Rising depreciation and pass-through fuel revenue push the margin below the recent 24-25%, so I settle at 23%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "OPERATING INCOME | 428.5 | 341.3 | 733.2 | 661.2"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $3,260.1 million | 0.0921 | 0.2452"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income is well above 2025 on hot weather, so 2026 is about 25.5% (Q4 is seasonally small). I fade the margin down toward 24% as weather normalises, depreciation rises with the capital plan, and fuel pass-through dilutes the ratio."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0687"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "New investment earns the authorised return. The base-year return on tangible capital is 6.9%, slightly above the 5.9% level at which growth adds no value. I use 6.5%, so growth adds modest value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "total retail load growth of approximately 4 to 6 percent"
+       },
+       {
+        "id": "P1",
+        "quote": "targeting the consistent growth of consolidated earnings per share of five to seven percent through 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is up 4.5%, with weather helping and wholesale transmission down. Management guides load growth of 4 to 6 percent, and rate recovery of capital investment adds price. I fade growth from about 6% to 5% because fuel pass-through is volatile and the load growth is unproven."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is a regulated utility with a growing rate base and load growth, but it cannot outgrow the economy forever. I set growth slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.205,
+      "input_hit": "long_run_op_margin",
+      "risk": "Regulators deny or delay rate recovery, so the allowed return and margin fall and the capital program earns less"
+     },
+     {
+      "bear_value": 0.035,
+      "input_hit": "rev_growth",
+      "risk": "2026 weather and load growth do not repeat, and the data-center and large-load growth thesis disappoints"
+     },
+     {
+      "bear_value": 0.055,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Recovery of new generation and transmission capital is delayed or disallowed, so the high capex earns below its cost"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.21,
+      "rev_growth": [
+       0.020000000000000004,
+       0.035,
+       0.035,
+       0.030000000000000006,
+       0.02500000000000001
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.25,
+      "rev_growth": [
+       0.065,
+       0.08,
+       0.08,
+       0.07500000000000001,
+       0.07
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt grows with the rate base to fund the capital plan, and management says it targets investment-grade ratings and funds part of growth with equity, so leverage should stay in the current range."
+     },
+     "margin_position": "The 2025 operating margin of 24.5% is the regulated return on a growing rate base after the Oklahoma rate review. Fuel and purchased power are passed through, so rising fuel costs inflate revenue and dilute the margin without changing profit. 2026 is lifted further by unusually hot weather, so the 2026 margin is above normal.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 16.0% base-year rate is close to management's own 2026 assumption of about 16.8%, which comes from a structurally low utility rate."
+     },
+     "why": "2025 had milder weather (cooling degree days down 11%) and a margin near the recent 24-25% band, so it is a fair base. 2026 is well above it because of weather, which management says is why guidance was raised. Revenue and margin are not unusually inflated or depressed in 2025."
+    },
+    "value_at_old_defaults": 29.78560155668332,
+    "values": {
+     "base": 31.482696028974058,
+     "bear": 23.98390228169272,
+     "bull": 40.37960855911907
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 29.78560155668332,
+  "value_at_old_defaults_quoted": 29.78560155668332,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 6328921903.238592,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 202500000.0,
@@ -15,7 +464,7 @@
   "OG&E's board named John Laws, currently Chief Commercial Officer, as OG&E Chief Operating Officer, effective January 4, 2027."
  ],
  "in_code_book": false,
- "ke": 0.0809891083669027,
+ "ke": 0.08068910836690271,
  "market_cap_at_publish": 10532688957,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +472,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 29.64727370255599,
-  "3000": 34.3770593378379
+  "1000": 31.025174620295992,
+  "3000": 31.482696028974058
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1415,163 +1864,17 @@
   ]
  },
  "ticker": "OGE",
- "upside": -0.4300056757322519,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: capex (1000 none, 3000 down)",
-   "held_at_record: rev_growth.y1 model 0.0304 valued at 0.0066",
-   "held_at_record: op_margin.y1 model 0.2234 valued at 0.1503"
-  ],
-  "departures": [
-   {
-    "driver": "volume",
-    "evidence": [
-     "P4.s124",
-     "P4.s137",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "volume",
-    "evidence": [
-     "F2",
-     "P4.s28",
-     "P3.s48"
-    ],
-    "input": "op_margin.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "up",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF INCOME AND COMPREHENSIVE INCOME (Unaudited) - USD ($) shares in Millions, $ in Millions | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nRevenues from contracts with customers | $ 1,162.9 | $ 1,028.4 | $ 2,587.6 | $ 2,489.2\nOther revenues | 19.9 | 16.6 | 59.7 | 45.1\nOperating revenues | 1,182.8 | 1,045.0 | 2,647.3 | 2,534.3\nFUEL, PURCHASED POWER AND DIRECT TRANSMISSION EXPENSE | 441.2 | 388.5 | 995.6 | 973.6\nOPERATING EXPENSES\nOther operation and maintenance | 137.1 | 143.3 | 412.3 | 392.2\nDepreciation and amortization | 149.2 | 146.7 | 423.7 | 424.7\nTaxes other than income | 26.8 | 25.2 | 82.5 | 82.6\nOperating expenses | 313.1 | 315.2 | 918.5 | 899.5\nOPERATING INCOME | 428.5 | 341.3 | 733.2 | 661.2\nOTHER INCOME (EXPENSE)\nAllowance for equity funds used during construction | 7.4 | 6.3 | 22.2 | 19.3\nOther net periodic benefit expense | (2.6) | (2.7) | (7.8) | (8.2)\nOther income | 17.5 | 6.1 | 46.4 | 30.3\nOther expense | (11.6) | (4.6) | (31.0) | (14.3)\nNet other income | 10.7 | 5.1 | 29.8 | 27.1\nINTEREST EXPENSE\nInterest on long-term debt | 71.7 | 66.4 | 209.6 | 194.4\nAllowance for borrowed funds used during construction | (3.5) | (3.7) | (10.5) | (11.9)\nInterest on short-term debt and other interest charges | (5.2) | 6.9 | (9.5) | 26.6\nInterest expense | 63.0 | 69.6 | 189.6 | 209.1\nINCOME BEFORE TAXES | 376.2 | 276.8 | 573.4 | 479.2\nINCOME TAX EXPENSE | 60.0 | 45.5 | 90.7 | 77.7\nNET INCOME | $ 316.2 | $ 231.3 | $ 482.7 | $ 401.5\nBASIC AVERAGE COMMON SHARES OUTSTANDING | 206.7 | 201.5 | 206.5 | 201.3\nDILUTED AVERAGE COMMON SHARES OUTSTANDING | 208.2 | 202.1 | 207.7 | 202.0\nBASIC EARNINGS PER AVERAGE COMMON SHARE | $ 1.53 | $ 1.15 | $ 2.34 | $ 1.99\nDILUTED EARNINGS PER AVERAGE COMMON SHARE | $ 1.52 | $ 1.14 | $ 2.32 | $ 1.99\nOther comprehensive income, net of tax | $ 0.0 | $ 0.1\nComprehensive income | 316.2 | 231.4 | $ 482.8 | $ 401.8\nOG&E [Member]\nRevenues from contracts with customers | 1,162.9 | 1,028.4 | 2,587.6 | 2,489.2\nOther revenues | 19.9 | 16.6 | 59.7 | 45.1\nOperating revenues | 1,182.8 | 1,045.0 | 2,647.3 | 2,534.3\nFUEL, PURCHASED POWER AND DIRECT TRANSMISSION EXPENSE | 441.2 | 388.5 | 995.6 | 973.6\nOPERATING EXPENSES\nOther operation and maintenance | 137.1 | 143.5 | 412.5 | 391.6\nDepreciation and amortization | 149.2 | 146.7 | 423.7 | 424.7\nTaxes other than income | 26.8 | 25.2 | 82.5 | 82.6\nOperating expenses | 313.1 | 315.4 | 918.7 | 898.9\nOPERATING INCOME | 428.5 | 341.1 | 733.0 | 661.8\nOTHER INCOME (EXPENSE)\nAllowance for equity funds used during construction | 7.4 | 6.3 | 22.2 | 19.3\nOther net periodic benefit expense | (2.5) | (2.7) | (7.5) | (7.8)\nOther income | 8.4 | 4.2 | 17.5 | 13.6\nOther expense | (0.8) | (0.5) | (2.2) | (1.9)\nNet other income | 12.5 | 7.3 | 30.0 | 23.2\nINTEREST EXPENSE\nInterest on long-term debt | 66.0 | 60.6 | 192.5 | 177.0\nAllowance for borrowed funds used during construction | (3.5) | (3.7) | (10.5) | (11.9)\nInterest on short-term debt and other interest charges | (6.8) | (2.7) | (17.9) | 9.3\nInterest expense | 55.7 | 54.2 | 164.1 | 174.4\nINCOME BEFORE TAXES | 385.3 | 294.2 | 598.9 | 510.6\nINCOME TAX EXPENSE | 64.4 | 51.3 | 100.0 | 89.0\nNET INCOME | 320.9 | 242.9 | 498.9 | 421.6\nOther comprehensive income, net of tax | 0.0 | 0.0 | 0.0 | 0.0\nComprehensive income | $ 320.9 | $ 242.9 | $ 498.9 | $ 421.6"
-   },
-   "P3.s48": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "OG&E experiences normal weather patterns for the year; OG&E has significant seasonality in its earnings; OG&E typically shows minimal earnings in the first and fourth quarters with a majority of its earnings in the third quarter due to the seasonal nature of air conditioning demand;"
-   },
-   "P4.s124": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Operating revenues increased $137.8 million, or 13.2 percent, and $113.0 million, or 4.5 percent, during the three and nine months ended September 30, 2026, respectively, primarily driven by the below factors."
-   },
-   "P4.s137": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Increased during the three and nine months ended September 30, 2026 primarily due to a 47 percent and 46 percent increase in cooling degree days, respectively."
-   },
-   "P4.s28": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "An increase in net income at OG&E of $78.0 million, or $0.34 per diluted share of OGE Energy's common stock, was primarily due to higher operating revenues (excluding the impact of recoverable fuel, purchased power and direct transmission expense not impacting earnings) driven by significantly warmer weather in OG&E's service territory and load growth, decreased other operation and maintenance expense, and higher net other income, partially offset by increased income tax expense."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.32308406116959576,
-    0.32308406116959576,
-    0.32308406116959576,
-    0.32308406116959576,
-    0.32308406116959576
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.24416812267357313,
-   "normalized.margin": 0.24416812267357313,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.15027903268668616,
-   "op_margin.y2": 0.24416812267357313,
-   "rev_growth.y1": 0.006553430520262138,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.059493172967480315
-  },
-  "numbers": {
-   "capex": [
-    0.32308406116959576,
-    0.32308406116959576,
-    0.32308406116959576,
-    0.32308406116959576,
-    0.32308406116959576
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.24416812267357313,
-   "normalized.margin": 0.24416812267357313,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.22343554112762679,
-   "op_margin.y2": 0.24416812267357313,
-   "rev_growth.y1": 0.030402441642894296,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.059493172967480315
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.22343554112762679,
-    "model_option": "last",
-    "record": 0.15027903268668616,
-    "record_option": "ytd"
-   },
-   "rev_growth.y1": {
-    "model": 0.030402441642894296,
-    "model_option": "anchor",
-    "record": 0.006553430520262138,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "last",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "anchor",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No filing sentence guides 2026 revenue. The 2026 outlook gives earnings per share, net income, retail load growth and operating expense assumptions, not revenue.",
-   "Fourth-quarter 2026 revenue and margin are not in the evidence. The 2026 outlook assumes normal weather for the rest of the year.",
-   "Nine-month 2026 capital expenditures in F3 are below the pace implied by the 2026 capital plan. Whether the full-year plan will be met is not stated.",
-   "How much stock will be sold under the $750,000,000 equity offering program, and when, is not stated.",
-   "The outcomes of pending regulatory proceedings and future rate reviews are not given in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 29.64727370255599,
- "value_bear": 29.53842400325038,
- "value_bull": 29.83062093080749,
+ "upside": -0.3991162248238228,
+ "valuation": null,
+ "value_base": 31.253935324635023,
+ "value_bear": 23.865690191952424,
+ "value_bull": 38.98288769092868,
  "value_per_filed_share": {
-  "base": 29.64727370255599,
-  "bear": 29.53842400325038,
-  "bull": 29.83062093080749
+  "base": 31.253935324635023,
+  "bear": 23.865690191952424,
+  "bull": 38.98288769092868
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -17.8 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -16.2 points a year against the required return over 3 years"
 }

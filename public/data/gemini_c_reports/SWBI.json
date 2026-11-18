@@ -1,11 +1,486 @@
 {
- "alpha_pts": -35.113958849744705,
+ "alpha_pts": -23.323920590728473,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 65,
  "claims_supported": 57,
  "date": "2026-11-17T13:55:30Z",
- "equity_value": 230364749.04963207,
+ "decided": {
+  "flags": [
+   "run 1000: return_above_base_year: long-run 0.0800 against the base year's 0.0543",
+   "run 1000: debt_level_representative_no: The FILED RECORD shows $0.0 million of debt, but the revolver was drawn to $40.0M and a $31.7M finance lease is carried, and the Savage funding is unknown.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: return_above_base_year: long-run 0.0900 against the base year's 0.0543",
+   "run 3000: debt_level_representative_no: The FILED RECORD shows $0.0 million debt, but the revolver went from $20.0M to $40.0M in Q1 and the Savage deal was funded in a way the evidence does not show.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.3234 and margin 0.0375, margin 0.0718 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+  "run_gap": 0.012658602303371529,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 28190000.0,
+     "excess_cash_before": 28190000.0,
+     "k0_after": 5230047.3560000025,
+     "k0_before": 5230047.3560000025,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 17678180.527074747,
+     "x0_before": 17678180.527074747
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 301520599.00608516,
+     "seam_ratio": 1.0230957478793619,
+     "tv_share": 0.47566790510980783,
+     "wedge_rate_5": -0.01251427249243531
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0800 against the base year's 0.0543",
+     "debt_level_representative_no: The FILED RECORD shows $0.0 million of debt, but the revolver was drawn to $40.0M and a $31.7M finance lease is carried, and the Savage funding is unknown.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.065,
+     "fade_years": 8,
+     "long_run_op_margin": 0.085,
+     "op_margin": [
+      0.065,
+      0.075,
+      0.08,
+      0.082,
+      0.083
+     ],
+     "return_on_new_investment_long_run": 0.08,
+     "rev_growth": [
+      0.08,
+      0.05,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.3234 and margin 0.0375, margin 0.0718 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 57
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.065,
+      0.105
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "We currently expect to spend $45.0 million to $50.0 million on capital expenditures in fiscal 2027."
+       },
+       {
+        "id": "P3",
+        "quote": "We currently expect to spend $40.0 to $45.0 million on capital expenditures in fiscal 2027."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guidance of $45-50M on revenue of roughly $560M implies about 8-9%, but capacity spending should ease after the Relocation and machinery additions, so I use 6.5% across years 1-5, between FY26's 4.5% and the pooled 8.7%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-04-30 | $474.7 million | -0.1142 | 0.0503"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margin and growth normalization from the current depressed, recovering state to a steady state should take about 8 years given the cyclical history."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | $523.8 million | 0.1036 | 0.0558"
+       },
+       {
+        "id": "P3",
+        "quote": "Operating income | $29,211 | $23,884 | $5,327 | 22.3% | $47,102"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The current margin is below the 5-year median (about 8.8%), and the base rate says a below-median margin returns toward the median. I fade to 8.5% because the COVID peak and tariff and labor cost pressure argue against the longer-run 10%+ levels."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Excluding the impact of tariff refunds, gross margin for the three months ended July 31, 2026 was 26.1%."
+       },
+       {
+        "id": "P4",
+        "quote": "Gross margin was also favorably impacted by fixed-cost absorption from higher production volumes, partially offset by higher labor costs."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fixed-cost absorption from higher volumes is lifting margin, but the Q1 gross margin excluding the refund was only 26.1%, so I step the margin up gradually from 5.6% toward the mid-8% range rather than adopting Q1's headline."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0543"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 5.4%, depressed by the low margin. With an 8.5% long-run margin on a capital-heavy manufacturing base, I expect new investment to earn about 8%, slightly below the 9.46% hurdle at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we continue to expect that our fiscal 2027 revenue will grow approximately 5-7% over fiscal 2026"
+       },
+       {
+        "id": "P7",
+        "quote": "On the Closing Date, the Company completed its acquisition of Savage pursuant to the Merger Agreement."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides FY27 growth of 5-7%, and I add a little for the partial-year Savage contribution (size unknown). After that, growth fades to low single digits as firearm demand reverts and political demand pull-forward softens."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "These concerns often result in an increase in near-term consumer demand for our products and subsequent softening of demand when these concerns subside."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A mature domestic firearm maker with a cyclical, politically driven market should grow roughly in line with or slightly below the nominal growth anchor, so I use 3.0%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Demand fades as political and social demand pull-forward subsides while inventory is being built, causing weak sell-through and price promotions"
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margins stay at the depressed ~5-6% level because of tariffs, labor inflation and weak absorption, and the Q1 tariff refund does not recur"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Savage integration and financing, elevated capex and negative free cash flow weaken returns on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.065,
+      "rev_growth": [
+       0.05,
+       0.020000000000000004,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.11,
+       0.08,
+       0.06,
+       0.06,
+       0.06
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The FILED RECORD shows $0.0 million of debt, but the revolver was drawn to $40.0M and a $31.7M finance lease is carried, and the Savage funding is unknown."
+     },
+     "margin_position": "The FY2026 operating margin of 5.6% is well below the company's own 5-year median of about 8.8%, which is inflated by the 2021-22 COVID-era spike (29-30%). Demand has normalized, with fixed-cost absorption weak at lower volumes, tariffs costing about 100 bp, and inflation in labor and materials. Q1 FY27 is recovering on volume, but its 3.7% margin includes about 260 bp from a non-recurring tariff refund.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The FY2026 effective rate of 26.3% sits between the 30.2% of FY2025 and the Q1 pre-discrete rate of 28.0%, so about 26-28% is sustainable."
+     },
+     "why": "FY2026 revenue of $523.8M is a normalized post-boom level, and the 5.6% margin is depressed relative to history, so it is a reasonable but low starting point. Q1 FY27 shows rising volume and operating leverage, but its headline margin is flattered by the one-off refund, and the Savage acquisition (closed Oct 21, 2026) is not sized in the evidence. Base rates say a below-median margin returns toward the median within about 2 years, but I temper this because the 2021-22 peak is not a normal reference."
+    },
+    "value_at_old_defaults": 5.158105611271803,
+    "values": {
+     "base": 7.680390519884211,
+     "bear": 5.893620016703753,
+     "bull": 9.93606185239779
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 28190000.0,
+     "excess_cash_before": 28190000.0,
+     "k0_after": 5230047.3560000025,
+     "k0_before": 5230047.3560000025,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 17678180.527074747,
+     "x0_before": 17678180.527074747
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 297390396.87623835,
+     "seam_ratio": 1.0450449324624376,
+     "tv_share": 0.544025373830886,
+     "wedge_rate_5": -0.009433185755232167
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0543",
+     "debt_level_representative_no: The FILED RECORD shows $0.0 million debt, but the revolver went from $20.0M to $40.0M in Q1 and the Savage deal was funded in a way the evidence does not show.",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.065,
+     "fade_years": 7,
+     "long_run_op_margin": 0.08,
+     "op_margin": [
+      0.065,
+      0.07,
+      0.075,
+      0.075,
+      0.075
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.1,
+      0.08,
+      0.04,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.3234 and margin 0.0375, margin 0.0718 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 57
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.055,
+      0.105
+     ],
+     "rev_growth_y3": [
+      -0.04,
+      0.09
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "We currently expect to spend $45.0 million to $50.0 million on capital expenditures in fiscal 2027."
+       },
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | 0.0453 | 0.0598"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY27 capex guidance of $45-50M is about 8% of revenue, which is elevated by capacity expansion. I expect it to ease toward the D&A level of about 6%, so the 5-year average is 6.5%, below the pooled 8.7% that includes the relocation spike."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "These concerns often result in an increase in near-term consumer demand for our products and subsequent softening of demand when these concerns subside."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin gap to the median closes only partly over time for ordinary companies, and demand cycles tied to politics and elections are multi-year, so I use a 7-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-04-30 | $474.7 million | -0.1142 | 0.0503"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-04-30 | $535.8 million | 0.1181 | 0.0879"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin is below the company's own median, so the base rates point to a recovery toward it. The median of the last five years is about 8.8%. The post-2022 structure of a smaller revenue base, tariffs and inflation limits that recovery, so I settle at 8% rather than the 10-11% of earlier cycles."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Excluding the impact of tariff refunds, gross margin for the three months ended July 31, 2026 was 26.1%."
+       },
+       {
+        "id": "P4",
+        "quote": "Operating income/(loss) | $4,217 | $(2,958)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q1 gross margin excluding the tariff refund was 26.1%. Operating leverage from higher volume supports a gradual rise from 5.6%, but the margin is held below the 8.8% FY2024 level because of tariffs, labor costs and higher legal expense."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0543"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is only 5.4%, below the 9.46% cost of equity. Capacity and efficiency spending should lift returns somewhat, but this is a heavy-capital, cyclical business, so I set the long-run return near the cost of capital at 9%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "our fiscal 2027 revenue will grow approximately 5-7% over fiscal 2026"
+       },
+       {
+        "id": "P7",
+        "quote": "the Company completed its acquisition of Savage pursuant to the Merger Agreement"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides FY27 growth of 5-7%, below Q1's 32%. I add some contribution from Savage, which closed on 2026-10-21 and whose size is not shown, so year 1 is 10% and year 2 is 8%. After that, growth reverts toward a cyclical, mid-single-digit-or-lower rate, since firearm demand is volatile."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P3",
+        "quote": "the U.S. firearm manufacturing industry grew at a 6.2% compound annual growth"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A mature domestic firearm maker in a market with a 6.2% unit CAGR over 2019-2024 that varied widely by year. I set growth slightly below the anchor, at 3%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.055,
+      "input_hit": "long_run_op_margin",
+      "risk": "Demand fades after the Q1 surge, leaving excess channel and company inventory and lower prices and margins."
+     },
+     {
+      "bear_value": -0.04,
+      "input_hit": "rev_growth",
+      "risk": "Revenue growth falls short of guidance as shipments into the sporting goods channel run ahead of consumer demand and then reverse."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Savage integration and financing weigh on margin and returns, since the evidence does not show its price, profit or funding."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.055,
+      "rev_growth": [
+       0.020000000000000004,
+       0.0,
+       -0.04,
+       -0.05,
+       -0.05
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.15,
+       0.13,
+       0.09,
+       0.07999999999999999,
+       0.07999999999999999
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The FILED RECORD shows $0.0 million debt, but the revolver went from $20.0M to $40.0M in Q1 and the Savage deal was funded in a way the evidence does not show."
+     },
+     "margin_position": "The FY2026 operating margin of 5.6% sits well below the long-run median. The company is in the post-COVID normalization phase, with tariffs costing about 100 basis points of gross margin, and fixed-cost absorption has been weak. Q1 FY27 showed recovery (3.7% operating margin versus -3.5%), but part of the gross margin gain was a one-time tariff refund.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 26.3% FY2026 rate is in line with the 28.0% rate before discrete items that the company reported for Q1 FY27."
+     },
+     "why": "FY2026 revenue of $523.8M and a 5.6% margin are close to the post-2023 run rate, so they are broadly normal for the current cycle. They are far below the 2021-22 peak, which was driven by the pandemic. The Savage acquisition closed on 2026-10-21 and will change the revenue base, but its size is not in the evidence."
+    },
+    "value_at_old_defaults": 5.158105611271803,
+    "values": {
+     "base": 7.583778994199196,
+     "bear": 4.5684722649053535,
+     "bull": 11.876863913148256
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 5.158105611271803,
+  "value_at_old_defaults_quoted": 5.158105611271803,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 342932464.38815486,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 44933000.0,
@@ -13,7 +488,7 @@
   "The company signed a merger agreement and completed its acquisition of Savage on the same day. Savage was merged into the company through a two-step merger, and the seller's designee was appointed to the board."
  ],
  "in_code_book": false,
- "ke": 0.0949579095944475,
+ "ke": 0.09462594437424718,
  "market_cap_at_publish": 867260163,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -21,12 +496,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 5.126849955481096,
-  "3000": 5.126849955481096
+  "1000": 7.680390519884211,
+  "3000": 7.583778994199196
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -800,131 +1275,17 @@
   ]
  },
  "ticker": "SWBI",
- "upside": -0.73437642027421,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y1 (1000 up, 3000 none)",
-   "ytd_outside_record: op_margin.y1 0.0375",
-   "held_at_record: rev_growth.y1 model 0.0600 valued at 0.3234"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s24",
-     "P6.s23"
-    ],
-    "input": "rev_growth.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P6.s23": {
-    "kind": "release",
-    "period": "2026-09-03",
-    "text": "Deana McPherson, Executive Vice President and Chief Financial Officer, commented, \"We continue to expect a normal seasonal environment and strong demand for our products, resulting in anticipated sales for the second quarter of roughly 10% above last year."
-   },
-   "P6.s24": {
-    "kind": "release",
-    "period": "2026-09-03",
-    "text": "For the full year, we continue to expect that our fiscal 2027 revenue will grow approximately 5-7% over fiscal 2026."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.08675275140936864,
-    0.08675275140936864,
-    0.08675275140936864,
-    0.08675275140936864,
-    0.08675275140936864
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07183346582103159,
-   "normalized.margin": 0.07183346582103159,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03745547887411513,
-   "op_margin.y2": 0.07183346582103159,
-   "rev_growth.y1": 0.32335413801615,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0949579095944475
-  },
-  "numbers": {
-   "capex": [
-    0.08675275140936864,
-    0.08675275140936864,
-    0.08675275140936864,
-    0.08675275140936864,
-    0.08675275140936864
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07183346582103159,
-   "normalized.margin": 0.07183346582103159,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03745547887411513,
-   "op_margin.y2": 0.07183346582103159,
-   "rev_growth.y1": 0.060000000000000005,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0949579095944475
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.060000000000000005,
-    "model_option": "guidance",
-    "record": 0.32335413801615,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The Savage acquisition closed on October 21, 2026, after the September 3 guidance. The evidence gives no revenue, margin or financing figures for Savage, so its effect on fiscal 2027 revenue and margins is not known.",
-   "It is not stated whether management has updated the 5-7% full-year revenue guidance since the acquisition.",
-   "The first-quarter margin includes a non-recurring $2.9 million tariff refund, and the first quarter is seasonally weak. The evidence does not give the full-year margin path.",
-   "Further tariff refunds, and their timing and size, are not known."
-  ],
-  "year": 3
- },
- "value_base": 5.126849955481096,
- "value_bear": 4.669732932453424,
- "value_bull": 5.277148609106584,
+ "upside": -0.6045794802774138,
+ "valuation": null,
+ "value_base": 7.632084757041704,
+ "value_bear": 5.231046140804553,
+ "value_bull": 10.906462882773024,
  "value_per_filed_share": {
-  "base": 5.126849955481096,
-  "bear": 4.669732932453424,
-  "bull": 5.277148609106584
+  "base": 7.632084757041704,
+  "bear": 5.231046140804553,
+  "bull": 10.906462882773024
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -35.1 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -23.3 points a year against the required return over 3 years"
 }

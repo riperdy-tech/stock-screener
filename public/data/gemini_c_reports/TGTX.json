@@ -1,13 +1,541 @@
 {
- "alpha_pts": -47.25581275478763,
+ "alpha_pts": 8.03837694000741,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 125,
  "claims_supported": 123,
  "date": "2026-11-16T09:24:56Z",
- "equity_value": 1660413987.7508245,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.2600 (filed -1799.9605 to 0.2001)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.3300 (filed -1799.9605 to 0.2001)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.3700 (filed -1799.9605 to 0.2001)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.3900 (filed -1799.9605 to 0.2001)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.4000 (filed -1799.9605 to 0.2001)",
+   "run 1000: margin_outside_filed_record: long_run_op_margin 0.3600 (filed -1799.9605 to 0.2001)",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 2025 rate of about 3% reflects a valuation allowance release, and the company now books normal tax expense of $18.4 million on $73.9 million of Q3 pretax income.",
+   "run 1000: debt_level_representative_no: Base-year debt of $245.6 million is stale: non-current loan payable is now $745.6 million after the 2026 refinancing and upsizing, partly offset by cash of $556.7 million.",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.2600 (filed -1799.9605 to 0.2001)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.3300 (filed -1799.9605 to 0.2001)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.3700 (filed -1799.9605 to 0.2001)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.3900 (filed -1799.9605 to 0.2001)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.4000 (filed -1799.9605 to 0.2001)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.3600 (filed -1799.9605 to 0.2001)",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The 2025 tax rate of 0.0299 reflects the valuation-allowance release, while 2026 nine-month tax expense was about 20% of pretax income.",
+   "run 3000: debt_level_representative_no: Non-current loan payable rose to 745,634 thousand from 245,645 thousand, so the base-year debt of $245.6 million understates the current level.",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.6643 and margin 0.2019, margin 0.1442 (persist), growth 0.0375, terminal RONIC 0.0868 (equity return r 0.0838), F 10",
+  "run_gap": 0.029181760329351943,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 55898.44377510038,
+     "cash_not_free": {
+      "amount": 1375000.0,
+      "printed": 1375,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash | 1,375 | 1,342"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "thousands",
+      "what": "restricted cash"
+     },
+     "excess_cash_after": 140595000.0,
+     "excess_cash_before": 141970000.0,
+     "k0_after": 21649666.69277108,
+     "k0_before": 21705565.13654618,
+     "k0_interest": 26727000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 98638581.5088964,
+     "x0_before": 98584352.05861941
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 10077031551.992924,
+     "seam_ratio": 1.0680220144802253,
+     "tv_share": 0.5605026294182406,
+     "wedge_rate_5": 0.006508680169585046
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.2600 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y2 0.3300 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y3 0.3700 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y4 0.3900 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y5 0.4000 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: long_run_op_margin 0.3600 (filed -1799.9605 to 0.2001)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 rate of about 3% reflects a valuation allowance release, and the company now books normal tax expense of $18.4 million on $73.9 million of Q3 pretax income.",
+     "debt_level_representative_no: Base-year debt of $245.6 million is stale: non-current loan payable is now $745.6 million after the 2026 refinancing and upsizing, partly offset by cash of $556.7 million.",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.001,
+     "fade_years": 10,
+     "long_run_op_margin": 0.36,
+     "op_margin": [
+      0.26,
+      0.33,
+      0.37,
+      0.39,
+      0.4
+     ],
+     "return_on_new_investment_long_run": 0.35,
+     "rev_growth": [
+      0.62,
+      0.24,
+      0.17,
+      0.12,
+      0.09
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.6643 and margin 0.2019, margin 0.1442 (persist), growth 0.0375, terminal RONIC 0.0868 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 123
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.28,
+      0.43
+     ],
+     "rev_growth_y3": [
+      0.08,
+      0.25
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property, plant and equipment | (626) | (147)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0006"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital spending is negligible because manufacturing is third-party; I use the pooled ratio rounded up slightly."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "which extended patent protection through 2042"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Patent protection through 2042 supports a roughly ten-year fade from the high-growth phase to steady state, given the pipeline and lifecycle extensions."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "we expect cost of revenue and gross margin to normalize to levels that reflect current commercial manufacturing costs, royalty payments, and supply chain expenses"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A single-product, in-licensed biotech pays royalties and faces gross-to-net, MFN and competitive pressure, so the long-run margin fades below the peak of about 40%. Normalizing cost of revenue is a further drag, and the 36% figure carries a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Reaffirms full year 2026 target operating expense (R&D and SG&A excluding non-cash compensation) guidance, of approximately $450 - $500 million including expenses associated with the subcutaneous BRIUMVI manufacturing costs and secondary manufacturer start-up costs"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 85,899 | 29,365 | 142,368 | 72,830"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 is about 26%. Revenue of about $1 billion and reaffirmed operating expense ex-stock compensation of $450-500 million, plus about $97 million of stock compensation and normalizing cost of revenue, imply about 26-27%. Margin should keep widening through 2030 as revenue outgrows opex."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0868."
+       },
+       {
+        "id": "F1",
+        "quote": "Accounts receivable, net | 416,821 | 305,628"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Manufacturing is outsourced and capex is tiny, so returns are very high, but receivables and inventory growth absorb capital. I assume a long-run return far below the base-year 80% and well above the 8.7% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Raises full-year 2026 total global revenue guidance to approximately $1 billion, from approximately $950 million"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $616.3 million | 0.8732 | 0.2001"
+       },
+       {
+        "id": "P6",
+        "quote": "a potential launch of simplified IV initiation in mid-2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is anchored on raised guidance of about $1 billion against $616.3 million in 2025, about 62% growth. Later growth slows as US penetration matures. Simplified IV initiation is cited for mid-2027 and subcutaneous for 2028, but both are pending and competition in RMS is intense."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P1",
+        "quote": "which extended patent protection through 2042"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A mature franchise that is protected by patents through 2042 but subject to competition should grow near the nominal anchor, slightly below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.25,
+      "input_hit": "long_run_op_margin",
+      "risk": "Single-product concentration: payor or competitive pressure, MFN-linked pricing or larger rebates erode BRIUMVI net price and margin."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "rev_growth",
+      "risk": "Subcutaneous Phase 3 or simplified-dosing launches slip or fail, and RMS share gains stall."
+     },
+     {
+      "bear_value": 0.2,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "The larger debt load and buybacks reduce flexibility, and growth needs more working capital, lowering returns on new investment."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Pressure from biosimilars or competing therapies after patent protection ends lowers perpetual growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.28,
+      "rev_growth": [
+       0.53,
+       0.14999999999999997,
+       0.08,
+       0.029999999999999985,
+       -1.3877787807814457e-17
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.43,
+      "rev_growth": [
+       0.7,
+       0.31999999999999995,
+       0.25,
+       0.19999999999999998,
+       0.16999999999999998
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $245.6 million is stale: non-current loan payable is now $745.6 million after the 2026 refinancing and upsizing, partly offset by cash of $556.7 million."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 20% is still rising. Revenue has scaled on one launched drug while R&D and SG&A grow more slowly, and the nine-month 2026 margin is about 20% with a Q3 margin near 33%. Cost of revenue is rising toward a normal level as pre-approval inventory is used up, and royalties owed to the licensor scale with sales.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 rate of about 3% reflects a valuation allowance release, and the company now books normal tax expense of $18.4 million on $73.9 million of Q3 pretax income."
+     },
+     "why": "2025 revenue of $616.3 million is well below the 2026 guidance of about $1 billion, so the base year understates the current scale and margin. Pre-approval inventory was depleted in early 2025, so cost of revenue is only now normalizing. The 2025 tax line is also distorted by a one-off valuation allowance release."
+    },
+    "value_at_old_defaults": 9.934717447085662,
+    "values": {
+     "base": 67.86435298430497,
+     "bear": 29.083366975486165,
+     "bull": 147.7904365905477
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 55898.44377510038,
+     "cash_not_free": {
+      "amount": 1375000.0,
+      "printed": 1375,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash | 1,375 | 1,342"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "thousands",
+      "what": "restricted cash"
+     },
+     "excess_cash_after": 140595000.0,
+     "excess_cash_before": 141970000.0,
+     "k0_after": 21649666.69277108,
+     "k0_before": 21705565.13654618,
+     "k0_interest": 26727000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 98638581.5088964,
+     "x0_before": 98584352.05861941
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 9783426631.649788,
+     "seam_ratio": 1.0643950424799735,
+     "tv_share": 0.5326108066997095,
+     "wedge_rate_5": 0.006712608319259706
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.2600 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y2 0.3300 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y3 0.3700 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y4 0.3900 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: op_margin.y5 0.4000 (filed -1799.9605 to 0.2001)",
+     "margin_outside_filed_record: long_run_op_margin 0.3600 (filed -1799.9605 to 0.2001)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 tax rate of 0.0299 reflects the valuation-allowance release, while 2026 nine-month tax expense was about 20% of pretax income.",
+     "debt_level_representative_no: Non-current loan payable rose to 745,634 thousand from 245,645 thousand, so the base-year debt of $245.6 million understates the current level.",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.001,
+     "fade_years": 10,
+     "long_run_op_margin": 0.36,
+     "op_margin": [
+      0.26,
+      0.33,
+      0.37,
+      0.39,
+      0.4
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.62,
+      0.28,
+      0.18,
+      0.13,
+      0.09
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.6643 and margin 0.2019, margin 0.1442 (persist), growth 0.0375, terminal RONIC 0.0868 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 123
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.25,
+      0.42
+     ],
+     "rev_growth_y3": [
+      0.1,
+      0.26
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property, plant and equipment | (626) | (147)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capital spending is tiny because manufacturing is third-party. I allow a little more than the pooled ratio for secondary manufacturer and facility needs."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "We face substantial competition, which may result in others commercializing drugs before or more successfully than we do"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade reflects a product that is still ramping but concentrated in one drug and exposed to competition and eventual loss of exclusivity."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "we expect cost of revenue and gross margin to normalize to levels that reflect current commercial manufacturing costs, royalty payments, and supply chain expenses"
+       },
+       {
+        "id": "P4",
+        "quote": "extended patent protection through 2042"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A single in-licensed product pays royalties and faces many RMS competitors, MFN pricing pressure and gross-to-net erosion. Patent protection through 2042 and low capital intensity support a still-high margin of about 36%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Reaffirms full year 2026 target operating expense (R&D and SG&A excluding non-cash compensation) guidance, of approximately $450 - $500 million"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 85,899 | 29,365 | 142,368 | 72,830"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 operating expense of $450-500 million excluding stock compensation, plus cost of revenue of about 16% of sales and stock compensation, implies roughly a 26% margin on $1 billion. Operating leverage then lifts the margin as revenue outgrows fixed costs, while rising stock compensation and royalties limit the gain."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0868."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Manufacturing is outsourced and the asset base is light, so the return on tangible capital is very high at 0.7992 now. I assume it falls to about 0.30 as competition and a larger working-capital build erode returns, still well above the 0.0868 value-neutral level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Raises full-year 2026 total global revenue guidance to approximately $1 billion, from approximately $950 million"
+       },
+       {
+        "id": "P6",
+        "quote": "a potential launch of simplified IV initiation in mid-2027"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is set by guidance of about $1 billion against $616.3 million in 2025, which is about 62% growth. Later growth slows as the U.S. base gets larger. Simplified IV initiation (mid-2027) and subcutaneous BRIUMVI (2028) support the middle years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature franchise should grow near but below the long-run nominal anchor, because patent expiry in 2042 and competition cap the long-run growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.25,
+      "input_hit": "long_run_op_margin",
+      "risk": "Competition, MFN or reference pricing and payer rebates erode BRIUMVI's net price and margin"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "rev_growth",
+      "risk": "The subcutaneous Phase 3 fails or is delayed, and the single product's growth stalls"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Earlier loss of exclusivity or class-wide competition or biosimilar pressure lowers long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.25,
+      "rev_growth": [
+       0.54,
+       0.20000000000000004,
+       0.1,
+       0.05000000000000002,
+       0.010000000000000009
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.42,
+      "rev_growth": [
+       0.7,
+       0.36000000000000004,
+       0.26,
+       0.21000000000000002,
+       0.17
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Non-current loan payable rose to 745,634 thousand from 245,645 thousand, so the base-year debt of $245.6 million understates the current level."
+     },
+     "margin_position": "The operating margin is still rising as BRIUMVI scales. It was 0.2001 in 2025, and nine-month 2026 operating income of 142,368 on revenue of 705,189 is about 20%. Q3 alone was about 33%. Most of the margin gain comes from fixed R&D and SG&A growing more slowly than revenue. Royalties owed to the licensor and normalized manufacturing costs cap the long-run level.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 tax rate of 0.0299 reflects the valuation-allowance release, while 2026 nine-month tax expense was about 20% of pretax income."
+     },
+     "why": "2025 revenue of $616.3 million is far below the roughly $1 billion guided for 2026, so the base year understates the current scale. The 2025 tax rate and the debt level were also unrepresentative. Growth is a launch ramp for a single product rather than a mature level, so I project it forward from the 2026 guidance."
+    },
+    "value_at_old_defaults": 9.934717447085662,
+    "values": {
+     "base": 65.91243194656305,
+     "bear": 28.980606000836396,
+     "bull": 148.38357730195327
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 9.934717447085662,
+  "value_at_old_defaults_quoted": 9.934717447085662,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 10796639103.371414,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 161412746.0,
  "flags": [
   "The company raised its full-year 2026 total global revenue guidance to approximately $1 billion from approximately $950 million, and its BRIUMVI U.S. net product revenue guidance to approximately $915\u2013920 million from $890\u2013905 million.",
@@ -15,7 +543,7 @@
   "The company repurchased approximately $100 million of its common stock in Q3 2026, approximately 2.0 million shares at an average price of $49.43 per share."
  ],
  "in_code_book": false,
- "ke": 0.08358973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 9478479136,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +551,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 15.266908745508182,
-  "3000": 10.28675881488829
+  "1000": 67.86435298430497,
+  "3000": 65.91243194656305
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1513,160 +2041,17 @@
   ]
  },
  "ticker": "TGTX",
- "upside": -0.8248227417155519,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.margin (1000 up, 3000 none)",
-   "seeds_disagree: long_run_op_margin (1000 up, 3000 none)",
-   "ytd_outside_record: op_margin.y1 0.2019",
-   "held_at_record: rev_growth.y1 model 0.6226 valued at 0.6643",
-   "margin_at_record_peak: normalized.margin 0.1442 at or above the record's p75 0.1274",
-   "margin_at_record_peak: long_run_op_margin 0.1442 at or above the record's p75 0.1274"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s38",
-     "P6.s3",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "volume",
-    "evidence": [
-     "F2",
-     "Y2025-12-31",
-     "P6.s10"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Operations - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nRevenue:\nTotal revenue | $ 259,936 | $ 161,709 | $ 705,189 | $ 423,713\nCosts and expenses:\nCost of revenue | 42,079 | 28,093 | 116,783 | 62,572\nResearch and development:\nStock-based compensation | 7,550 | 5,335 | 20,495 | 12,984\nOther research and development | 43,740 | 35,543 | 174,528 | 106,038\nTotal research and development | 51,290 | 40,878 | 195,023 | 119,022\nSelling, general and administrative:\nStock-based compensation | 17,153 | 12,351 | 52,033 | 36,035\nOther selling, general and administrative | 63,515 | 51,022 | 198,982 | 133,254\nTotal selling, general and administrative | 80,668 | 63,373 | 251,015 | 169,289\nTotal costs and expenses | 174,037 | 132,344 | 562,821 | 350,883\nOperating income | 85,899 | 29,365 | 142,368 | 72,830\nOther expense (income):\nInterest expense | 15,819 | 6,721 | 40,057 | 20,194\nLoss on extinguishment of debt | 0 | 0 | 9,153 | 0\nOther income | (3,782) | (3,265) | (11,301) | (9,661)\nTotal other expense | 12,037 | 3,456 | 37,909 | 10,533\nNet income before taxes | 73,862 | 25,909 | 104,459 | 62,297\nIncome tax (expense) benefit | (18,399) | 364,986 | (21,438) | 361,845\nNet income | $ 55,463 | $ 390,895 | $ 83,021 | $ 424,142\nNet income per common share\nBasic (in USD per share) | $ 0.39 | $ 2.69 | $ 0.58 | $ 2.90\nDiluted (in USD per share) | $ 0.35 | $ 2.43 | $ 0.52 | $ 2.62\nWeighted-average shares of common stock outstanding\nBasic (in shares) | 140,786,274 | 145,416,901 | 142,318,594 | 146,273,554\nDiluted (in shares) | 155,925,050 | 160,997,977 | 157,741,254 | 162,102,373\nProduct revenue, net\nRevenue:\nTotal revenue | $ 240,043 | $ 159,317 | $ 677,145 | $ 417,815\nLicense, milestone, royalty and other revenue\nRevenue:\nTotal revenue | $ 19,893 | $ 2,392 | $ 28,044 | $ 5,898"
-   },
-   "P6.s10": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "With continued momentum in our IV business, the potential to expand the BRIUMVI franchise through new dosing options, and a growing pipeline of development opportunities, we believe we are laying the foundation for sustained, long-term growth."
-   },
-   "P6.s3": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "Raises full-year 2026 total global revenue guidance to approximately $1 billion, from approximately $950 million"
-   },
-   "P6.s38": {
-    "kind": "release",
-    "period": "2026-11-09",
-    "text": "\u2022Raises full year 2026 target total global revenue to approximately $1 billion"
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001437749-26-006133): revenue $616.3 million; operating income $123.3 million; operating margin 20.0%; net income $447.2 million; depreciation and amortization $0.1 million; capital expenditure $0.2 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.0005671362229232422,
-    0.0005671362229232422,
-    0.0005671362229232422,
-    0.0005671362229232422,
-    0.0005671362229232422
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.14420541432165399,
-   "normalized.margin": 0.14420541432165399,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.20188630282094588,
-   "op_margin.y2": 0.14420541432165399,
-   "rev_growth.y1": 0.6643081519802319,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08665530790862341
-  },
-  "numbers": {
-   "capex": [
-    0.0005671362229232422,
-    0.0005671362229232422,
-    0.0005671362229232422,
-    0.0005671362229232422,
-    0.0005671362229232422
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.14420541432165399,
-   "normalized.margin": 0.14420541432165399,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.20188630282094588,
-   "op_margin.y2": 0.2001080665339363,
-   "rev_growth.y1": 0.6226206296741617,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08665530790862341
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.6226206296741617,
-    "model_option": "guidance",
-    "record": 0.6643081519802319,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence gives no revenue or margin guidance for 2027 or later.",
-   "The outcome of the subcutaneous BRIUMVI Phase 3 trial, expected around year-end 2026 or early 2027, is not known.",
-   "Whether a simplified IV initiation launch in mid-2027 will happen, and its effect on revenue, is not known.",
-   "The fourth-quarter 2026 operating margin cannot be derived from the operating expense guidance, which excludes non-cash compensation and cost of revenue.",
-   "The effect of competition, pricing pressure or MFN-style pricing policies on future BRIUMVI net prices is not quantified."
-  ],
-  "year": 3
- },
- "value_base": 10.28675881488829,
- "value_bear": 8.954344610958962,
- "value_bull": 15.449416227353652,
+ "upside": 0.13906872067322906,
+ "valuation": null,
+ "value_base": 66.88839246543401,
+ "value_bear": 29.03198648816128,
+ "value_bull": 148.08700694625048,
  "value_per_filed_share": {
-  "base": 10.28675881488829,
-  "bear": 8.954344610958962,
-  "bull": 15.449416227353652
+  "base": 66.88839246543401,
+  "bear": 29.03198648816128,
+  "bull": 148.08700694625048
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -47.3 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +8.0 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

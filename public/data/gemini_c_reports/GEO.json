@@ -1,11 +1,568 @@
 {
- "alpha_pts": -4.787865650293072,
+ "alpha_pts": -23.433025977998252,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 146,
  "claims_supported": 141,
  "date": "2026-11-16T09:41:45Z",
- "equity_value": 3996094098.556896,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year rate is 25.55%, while management guides to about 28% for 2026.",
+   "run 1000: debt_level_representative_no: About $678M of the secured notes are being redeemed with the Adelanto proceeds, so debt will fall well below the $1,670.9M base-year level, although buybacks and incremental debt capacity could partly rebuild it.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The base-year rate is 25.55%, while management guides an effective rate of about 28% for 2026.",
+   "run 3000: debt_level_representative_no: Base-year debt of $1.67B is about to fall, because the $650M 8.625% notes are being redeemed with Adelanto proceeds, although buybacks may offset some of that.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1427 and margin 0.1335, margin 0.1129 (persist), growth 0.0375, terminal RONIC 0.0819 (equity return r 0.0946), F 10",
+  "run_gap": 0.04911387819959968,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 232381000.0,
+       "printed": 232381,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Gain (loss) on asset divestiture/impairment | 0 | 232,381 | (673) | 232,381"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Gain on asset divestiture (Lawton Correctional Facility sale) in 2025"
+      },
+      {
+       "amount": 8446000.0,
+       "printed": 8446,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on extinguishment of debt | 0 | (7,851) | 0 | (8,446)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on extinguishment of debt in 2025 (nine-month figure; the full-year amount is not in the packet)"
+      },
+      {
+       "amount": 5514000.0,
+       "printed": 5514,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Other income | 0 | 0 | 0 | 5,514"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Other income in 2025 (nine-month figure; the full-year amount is not in the packet)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 68995000.0,
+     "excess_cash_before": 68995000.0,
+     "k0_after": 154161231.71899772,
+     "k0_before": -75287768.28100228,
+     "k0_interest": 160521000.0,
+     "one_offs_charge": 8446000.0,
+     "one_offs_gain": 237895000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 83851687.26897964,
+     "x0_before": 254675590.30748406
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1911269534.0222807,
+     "seam_ratio": 1.0104399133733741,
+     "tv_share": 0.3491973221937987,
+     "wedge_rate_5": 0.0004830680055285315
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate is 25.55%, while management guides to about 28% for 2026.",
+     "debt_level_representative_no: About $678M of the secured notes are being redeemed with the Adelanto proceeds, so debt will fall well below the $1,670.9M base-year level, although buybacks and incremental debt capacity could partly rebuild it.",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.045,
+     "fade_years": 10,
+     "long_run_op_margin": 0.115,
+     "op_margin": [
+      0.135,
+      0.135,
+      0.13,
+      0.125,
+      0.12
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.14,
+      0.08,
+      0.05,
+      0.035,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1427 and margin 0.1335, margin 0.1129 (persist), growth 0.0375, terminal RONIC 0.0819 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 141
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.08
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We expect total unreimbursed capital expenditures for the full year 2026 to be between $140 million and $150 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0420"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided 2026 unreimbursed capex of $140-150M is about 4.8% of guided revenue, against a pooled five-year ratio of 4.2% and D&A of about 4.8%. I use 4.5% to cover maintenance and growth spending."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "ICE and GEO entered into a 15-year contract on December 19, 2019"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Contracts are long and sticky (15-year ICE contracts), so the 2026 surge in margin and growth should fade only gradually, but political and policy risk argues against a very long fade. I use 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $2,376.7 million | 0.0532 | 0.1615"
+       },
+       {
+        "id": "P2",
+        "quote": "Public and political opposition to the use of public-private partnerships could have a material adverse effect on our business."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Filed history shows margins of 9.8-16.2% since 2012, with a median near 12%. The 2026 level is above that median, and the base rate says about half the gap persists. Political and tax risks (AB1633, state laws) argue against holding 13%+."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Guidance for FY26 Adjusted EBITDA Increased to $568-$573 Million"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,631.5 million | 0.0858 | 0.0978"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 GAAP margin is about 13.5%: YTD operating income of $293.4M on $2,198M of revenue, with full-year Adjusted EBITDA guided to $568-573M. I hold that level in year 2 and fade it toward the historical band as new-contract ramp benefits level off and the Adelanto sale and competition for contracts weigh on it."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0819."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1765"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is high at 17.65%, boosted by depreciated owned facilities, and the break-even return is 8.19%. New facilities are built at current cost and are exposed to contract and political risk, so I assume a return modestly above break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Guidance for FY26 Revenues of $2.975-$3.025 Billion"
+       },
+       {
+        "id": "P6",
+        "quote": "we have had an even more successful year, entering into new or expanded contracts with an overall value of approximately $500 million in incremental annual revenues"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is anchored on guidance, which implies about 14% growth from the 2025 base. Growth then slows. Q4 guidance implies a run-rate near $3.2B even after the Adelanto sale, and about $500M of new annual contracts are still ramping. The Adelanto contract's revenue after the sale is not stated, so I assume 8% in year 2, then fade."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business depends on government detention and monitoring demand, which grows roughly with nominal GDP at best and carries policy risk. I set growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "California AB1633 (50% tax on private detention gross receipts) is enacted, or federal or state policy turns against private detention, so ICE contracts are lost or cut"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Federal detention demand or funding falls short of expectations, or the Adelanto sale removes more revenue than assumed, so growth stalls after 2026"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Adverse Nwauzor ruling and similar litigation or lender and capital-market restrictions raise costs and cut returns on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       0.1,
+       0.04,
+       0.010000000000000002,
+       -0.0049999999999999975,
+       -0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.17,
+       0.11,
+       0.08,
+       0.065,
+       0.06
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "About $678M of the secured notes are being redeemed with the Adelanto proceeds, so debt will fall well below the $1,670.9M base-year level, although buybacks and incremental debt capacity could partly rebuild it."
+     },
+     "margin_position": "The 2025 GAAP margin of 9.8% is depressed by a $37.6M litigation reserve, ramp-up and staffing costs ahead of new ICE activations, and idle-facility carrying costs. 2026 is running near 13.5%, as new contracts fill beds and fixed costs are spread over more revenue. This is above the 2012-2025 median of roughly 12.2%, and the 2022-2023 level was 14.6-16%.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate is 25.55%, while management guides to about 28% for 2026."
+     },
+     "why": "The base-year revenue of $2.63B is well below 2026 guidance of $2.975-$3.025B, and the base-year margin carries a one-off $37.6M reserve plus ramp costs. The base-year pretax income also contains a $232M asset-sale gain and a debt extinguishment loss. The Adelanto sale and the redemption of the 8.625% secured notes change the asset and debt base after the base year."
+    },
+    "value_at_old_defaults": 28.628928359237225,
+    "values": {
+     "base": 15.301197864686813,
+     "bear": 10.120018895265062,
+     "bull": 20.924440431560306
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 232381000.0,
+       "printed": 232381,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Gain (loss) on asset divestiture/impairment | 0 | 232,381 | (673) | 232,381"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Gain on asset divestiture (Lawton sale), Q3 2025; the full-year figure may differ slightly"
+      },
+      {
+       "amount": 8446000.0,
+       "printed": 8446,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on extinguishment of debt | 0 | (7,851) | 0 | (8,446)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on extinguishment of debt, nine months 2025; the full-year figure may differ slightly"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 68995000.0,
+     "excess_cash_before": 68995000.0,
+     "k0_after": 148647231.71899772,
+     "k0_before": -75287768.28100228,
+     "k0_interest": 160521000.0,
+     "one_offs_charge": 8446000.0,
+     "one_offs_gain": 232381000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 87956839.18227765,
+     "x0_before": 254675590.30748406
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2010711770.2904353,
+     "seam_ratio": 0.9932769620530392,
+     "tv_share": 0.38473406907780866,
+     "wedge_rate_5": -0.002851562467258807
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year rate is 25.55%, while management guides an effective rate of about 28% for 2026.",
+     "debt_level_representative_no: Base-year debt of $1.67B is about to fall, because the $650M 8.625% notes are being redeemed with Adelanto proceeds, although buybacks may offset some of that.",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.04,
+     "fade_years": 8,
+     "long_run_op_margin": 0.12,
+     "op_margin": [
+      0.132,
+      0.134,
+      0.132,
+      0.128,
+      0.126
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.14,
+      0.04,
+      0.03,
+      0.025,
+      0.025
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1427 and margin 0.1335, margin 0.1129 (persist), growth 0.0375, terminal RONIC 0.0819 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 141
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.095,
+      0.14
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We expect total unreimbursed capital expenditures for the full year 2026 to be between $140 million and $150 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0420"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 unreimbursed capex guidance of $140-150M is about 4.8% of revenue. The pooled history is 4.2%, and the 2025 10-K splits spending between about $80-95M of maintenance and growth capex. Selling owned facilities and fewer new builds point to about 4%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Public and political opposition to the use of public-private partnerships could have a material adverse effect on our business."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margins and growth normalize over a moderate period, because contracts are multi-year but exposed to political cycles and renewal risk."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $2,376.7 million | 0.0532 | 0.1615"
+       },
+       {
+        "id": "P2",
+        "quote": "Public and political opposition to the use of public-private partnerships could have a material adverse effect on our business."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "GEO's own history ranges from about 9.8% to 16%, with a median near 12.8% over the last five years. The current peak reflects an unusually strong ICE demand cycle that is exposed to policy reversal, so I fade to 12%, slightly below the median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 102,389 | 40,700 | 293,391 | 173,657"
+       },
+       {
+        "id": "P6",
+        "quote": "Guidance for FY26 Adjusted EBITDA Increased to $568-$573 Million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income of $293M on $2.2B of revenue is about 13.3%. Q4 guidance implies about 13% for the full year. I hold margins near 13% and let them drift lower as political and cost pressure builds and revenue from the sold Adelanto Complex leaves."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1765"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0819."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is high at 0.1765, but it is flattered by older, depreciated owned assets. New facility investment faces a break-even return of 0.0819, so I assume 11%, well above break-even but below the current return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Guidance for FY26 Revenues of $2.975-$3.025 Billion"
+       },
+       {
+        "id": "P6",
+        "quote": "approximately $500 million in incremental annual revenues"
+       },
+       {
+        "id": "P8",
+        "quote": "for an aggregate purchase price of $950,000,000"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) follows guidance of about $3.0B, roughly 14% growth, driven by 2025 ICE activations and new contracts. Growth slows sharply in 2027 because the Adelanto Complex was sold to DHS. About $500M of new annualized contracts only partly offsets that loss. After that, growth reverts to low single digits."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Detention and monitoring demand is policy-driven and unlikely to outgrow the economy for ever. I set 3%, below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_op_margin",
+      "risk": "California AB1633 (a 50% gross-receipts tax on private detention operators) is enacted, or federal or state policy turns against private detention. Contracts are lost and margins compress."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "ICE detention demand falls back after the Adelanto sale and the 2026 peak, so revenue stalls and idle beds grow."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "New investment earns close to break-even returns, because idle facilities stay unactivated and new builds are self-financed."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       0.11000000000000001,
+       0.010000000000000002,
+       0.0,
+       -0.0049999999999999975,
+       -0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.17,
+       0.07,
+       0.06,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $1.67B is about to fall, because the $650M 8.625% notes are being redeemed with Adelanto proceeds, although buybacks may offset some of that."
+     },
+     "margin_position": "The 2025 GAAP margin of 9.8% sits below the 5-year median of about 12.8%. It was depressed by a $37.6M litigation reserve and by start-up and staffing costs ahead of new ICE activations. 2026 is already running near 13% as those contracts ramp.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate is 25.55%, while management guides an effective rate of about 28% for 2026."
+     },
+     "why": "Base-year 2025 carries the Nwauzor reserve and the $232M Lawton gain below operating income. Guidance for 2026 revenue of about $3.0B is roughly 14% above the base year, so 2025 understates the current run-rate. Selling the Adelanto Complex (a company-owned ICE site) will remove some revenue from 2027, and the filings do not say how much."
+    },
+    "value_at_old_defaults": 28.628928359237225,
+    "values": {
+     "base": 16.071618198130643,
+     "bear": 11.239985550979162,
+     "bull": 22.352447532714738
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 28.628928359237225,
+  "value_at_old_defaults_quoted": 28.628928359237225,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 2191751989.372522,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 139723000.0,
@@ -15,7 +572,7 @@
   "GEO entered into an Amended and Restated Credit Agreement. It keeps revolving commitments at $550.0 million, extends revolver maturity to July 14, 2031, and raises the Incremental Amount to $750.0 million."
  ],
  "in_code_book": false,
- "ke": 0.09442594437424717,
+ "ke": 0.09462594437424718,
  "market_cap_at_publish": 4317122028,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +580,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 28.825777224915075,
-  "3000": 28.600116649062045
+  "1000": 15.301197864686813,
+  "3000": 16.071618198130643
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1771,162 +2328,17 @@
   ]
  },
  "ticker": "GEO",
- "upside": -0.074361560169247,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y2 (1000 up, 3000 none)",
-   "guidance_outside_record: rev_growth.y1 0.1400",
-   "held_at_record: rev_growth.y1 model 0.1400 valued at 0.1427"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s11",
-     "P6.s42",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "P6.s44",
-     "P2.s125",
-     "F3"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Consolidated Statements of Operations (Unaudited) - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nRevenues | $ 761,062 | $ 682,341 | $ 2,198,347 | $ 1,923,854\nOperating expenses | 552,369 | 508,881 | 1,604,581 | 1,438,574\nDepreciation and amortization | 34,182 | 33,039 | 102,208 | 97,907\nGeneral and administrative expenses | 72,122 | 62,121 | 198,167 | 176,116\nContingent litigation reserve | 0 | 37,600 | 0 | 37,600\nOperating income | 102,389 | 40,700 | 293,391 | 173,657\nInterest income | 2,051 | 2,558 | 6,951 | 7,021\nInterest expense | (38,143) | (38,234) | (115,000) | (122,582)\nLoss on extinguishment of debt | 0 | (7,851) | 0 | (8,446)\nOther income | 0 | 0 | 0 | 5,514\nGain (loss) on asset divestiture/impairment | 0 | 232,381 | (673) | 232,381\nIncome before income taxes and equity in earnings of affiliates | 66,297 | 229,554 | 184,669 | 287,545\nProvision for income taxes | 17,910 | 56,391 | 51,814 | 68,771\nEquity in earnings of affiliates, net of income tax provision of $299, $219, $744 and $618, respectively | 816 | 759 | 2,114 | 3,764\nNet income | 49,203 | 173,922 | 134,969 | 222,538\nNet loss attributable to noncontrolling interests | 11 | 18 | 82 | 68\nNet income attributable to The GEO Group, Inc. | $ 49,214 | $ 173,940 | $ 135,051 | $ 222,606\nWeighted-average common shares outstanding:\nBasic | 129,969 | 138,283 | 131,052 | 137,992\nDiluted | 132,002 | 139,992 | 132,691 | 140,509\nBasic:\nNet income per common share attributable to The GEO Group Inc.-basic | $ 0.38 | $ 1.26 | $ 1.03 | $ 1.61\nDiluted:\nNet income per common share attributable to The GEO Group, Inc.-diluted | $ 0.37 | $ 1.24 | $ 1.02 | $ 1.58"
-   },
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Consolidated Statements of Cash Flows (Unaudited) - USD ($) $ in Thousands | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash Flow from Operating Activities:\nNet income | $ 134,969 | $ 222,538\nNet loss attributable to noncontrolling interests | 82 | 68\nNet income attributable to The GEO Group, Inc. | 135,051 | 222,606\nAdjustments to reconcile net income attributable to The GEO Group, Inc. to net cash provided by operating activities:\nDepreciation and amortization expense | 102,208 | 97,907\nStock-based compensation | 17,691 | 19,621\nLoss on extinguishment of debt | 0 | 8,446\nAmortization of debt issuance costs, discount and/or premium and other non-cash interest | 4,492 | 4,671\nEquity in earnings of affiliates, net of tax | (2,114) | (3,764)\nDividends received from unconsolidated joint ventures | 4,350 | 1,440\nGain on early lease termination | 0 | (828)\nRealized/unrealized loss (gain) on investments | 972 | (7,157)\nLoss on sale/disposal of property and equipment, net | 3,469 | 0\n(Gain) loss on asset divestitures/impairment | 673 | (232,381)\nChanges in assets and liabilities, net of effects of acquisitions:\nChanges in accounts receivable, prepaid expenses and other assets | 41,907 | (63,378)\nChanges in accounts payable, accrued expenses and other liabilities | 136,726 | 142,765\nNet cash provided by operating activities | 445,425 | 189,948\nCash Flow from Investing Activities:\nProceeds from sale of real estate and other assets | 1,203 | 321,050\nPurchases of marketable securities | (45,228) | (18,799)\nProceeds from sale of marketable securities | 32,837 | 2,810\nCapital expenditures | (74,710) | (161,286)\nNet cash (used in) provided by investing activities | (85,898) | 143,775\nCash Flow from Financing Activities:\nPayments on long-term debt | (1,016) | (321,870)\nPayments on revolver | (259,076) | (30,000)\nProceeds from revolver | 137,000 | 182,583\nPayments for call premiums | 0 | (1,320)\nTaxes paid related to net share settlements of equity awards | (6,519) | (24,431)\nProceeds from issuance of common stock in connection with ESPP | 119 | 127\nPayment for repurchases of common stock | (86,734) | (41,630)\nProceeds from the exercise of stock options | 5,033 | 4,390\nNet cash used in financing activities | (211,193) | (232,151)\nEffect of Exchange Rate Changes on Cash, Cash Equivalents and Restricted Cash and Cash Equivalents | 2,148 | 4,136\nNet Increase in Cash, Cash Equivalents and Restricted Cash and Cash Equivalents | 150,482 | 105,708\nCash, Cash Equivalents and Restricted Cash and Cash Equivalents, beginning of period | 123,635 | 125,864\nCash, Cash Equivalents and Restricted Cash and Cash Equivalents, end of period | 274,117 | 231,572\nNon-cash Investing and Financing activities:\nRight-of-use assets obtained from operating lease liabilities | 65,362 | 9,793\nRight-of-use asset written off due to early termination of lease | 0 | 16,021\nRight-of-use liability written off due to early termination of lease | 0 | 16,849\nCapital expenditures in accounts payable and accrued expenses | $ 5,440 | $ 2,663"
-   },
-   "P2.s125": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "We currently have several active projects that we anticipate spending approximately $120 to $155 million on capital expenditures in 2026."
-   },
-   "P6.s11": {
-    "kind": "release",
-    "period": "2026-11-05",
-    "text": "\u2022 | Guidance for FY26 Revenues of $2.975-$3.025 Billion"
-   },
-   "P6.s42": {
-    "kind": "release",
-    "period": "2026-11-05",
-    "text": "We increased full year 2026 Adjusted Net Income guidance to a range of $185 million to $190 million, or a range of $1.40 to $1.44 per diluted share, on annual revenues of $2.975 billion to $3.025 billion and based on an effective tax rate of approximately 28 percent, inclusive of known discrete items."
-   },
-   "P6.s44": {
-    "kind": "release",
-    "period": "2026-11-05",
-    "text": "We expect total unreimbursed capital expenditures for the full year 2026 to be between $140 million and $150 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.042029021075204204,
-    0.042029021075204204,
-    0.042029021075204204,
-    0.042029021075204204,
-    0.042029021075204204
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.11287025579680607,
-   "normalized.margin": 0.11287025579680607,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1334598223119462,
-   "op_margin.y2": 0.11287025579680607,
-   "rev_growth.y1": 0.14267870638832258,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08182075359936783
-  },
-  "numbers": {
-   "capex": [
-    0.04666666666666667,
-    0.045507255268801054,
-    0.04434784387093543,
-    0.04318843247306982,
-    0.042029021075204204
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.11287025579680607,
-   "normalized.margin": 0.11287025579680607,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1334598223119462,
-   "op_margin.y2": 0.11287025579680607,
-   "rev_growth.y1": 0.14001297334763674,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08182075359936783
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.14001297334763674,
-    "model_option": "guidance",
-    "record": 0.14267870638832258,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "guidance",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence does not say how much revenue and operating income the Adelanto Complex contributed or whether GEO keeps any role there after its sale to DHS.",
-   "The evidence does not give guidance for 2027 revenue, margin or capital expenditure.",
-   "The evidence does not say how much of the $1.25 billion repurchase authorization will be used or when.",
-   "The evidence does not say how the remaining Assets Held for Sale will be disposed of or what they earn.",
-   "The outcome and cost of the Nwauzor appeal are not known from the evidence."
-  ],
-  "year": 3
- },
- "value_base": 28.600116649062045,
- "value_bear": 28.269377591014127,
- "value_bull": 29.253592495455266,
+ "upside": -0.4923117819794641,
+ "valuation": null,
+ "value_base": 15.686408031408728,
+ "value_bear": 10.680002223122113,
+ "value_bull": 21.638443982137524,
  "value_per_filed_share": {
-  "base": 28.600116649062045,
-  "bear": 28.269377591014127,
-  "bull": 29.253592495455266
+  "base": 15.686408031408728,
+  "bear": 10.680002223122113,
+  "bull": 21.638443982137524
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -4.8 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -23.4 points a year against the required return over 3 years"
 }

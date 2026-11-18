@@ -1,11 +1,496 @@
 {
- "alpha_pts": -0.6167788394636747,
+ "alpha_pts": 5.249648364183618,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 119,
  "claims_supported": 112,
  "date": "2026-11-16T23:07:53Z",
- "equity_value": 10405898321.33555,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year tax rate of 6.9% is far below the 2026 nine-month provision of about 20% of pretax income (128,227 on 639,979), which is closer to what the company can keep paying.",
+   "run 1000: quotes_verified: 15 of 15",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The base-year tax rate of 6.9% is far below the roughly 20% implied by 9M 2026 (128,227 of tax on 639,979 pretax), so it cannot be kept.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0525 (equity return r 0.0985), F 10",
+  "run_gap": 0.015821862493210125,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1031299000.0,
+     "excess_cash_before": 1031299000.0,
+     "k0_after": 168467929.3546257,
+     "k0_before": 168467929.3546257,
+     "k0_interest": 147551000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 655773982.7051866,
+     "x0_before": 655773982.7051866
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 9898392294.41593,
+     "seam_ratio": 1.0240943176721933,
+     "tv_share": 0.3665104497494414,
+     "wedge_rate_5": -0.0004941569825979447
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year tax rate of 6.9% is far below the 2026 nine-month provision of about 20% of pretax income (128,227 on 639,979), which is closer to what the company can keep paying.",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.019,
+     "fade_years": 10,
+     "long_run_op_margin": 0.26,
+     "op_margin": [
+      0.288,
+      0.275,
+      0.272,
+      0.27,
+      0.268
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      -0.003,
+      0.01,
+      0.025,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0525 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 112
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.22,
+      0.29
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0184"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (54,651) | (42,100)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex is light and consistent: 2026 nine-month capex of 54,651 is about 2.1% of revenue against a 1.84% pooled average. I use 1.9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Tinder expects revenue to decrease in 2026 at a similar rate to the decrease in 2025"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The turnaround at Tinder and the Hinge expansion take time to settle, so I use a 10-year fade from 3% growth and a high-20s margin toward steady state."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The industry for social connection apps is competitive, with low switching costs and a consistent stream of new services and entrants"
+       },
+       {
+        "id": "P4",
+        "quote": "Cost of revenue decreased across all segments primarily due to Payers shifting from app store payments to alternate payment methods"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fee savings and cost cuts are partly durable, but low switching costs and large free competitors will force higher marketing, and Google fees may rise. I fade to 26%, about the 2023-2025 average, with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 268,569 | 221,334 | 750,435 | 587,848"
+       },
+       {
+        "id": "P6",
+        "quote": "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range"
+       },
+       {
+        "id": "P2",
+        "quote": "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 operating income of 750,435 on revenue of 2,608,271 is about 28.8%, and full-year guidance of a 38.8% Adjusted EBITDA margin supports about 29% for 2026. I fade the margin gently as the Google partnership expires in Q1 2027 and marketing is increased to support growth."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 1.0000"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0525."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light, so the filed return on tangible capital is very high and goodwill is excluded. Competition and the ongoing need for marketing mean new investment will not earn that, so I use 30%, well above the 5.25% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we expect Match Group full-year 2026 Total Revenue to be flat Y/Y"
+       },
+       {
+        "id": "P6",
+        "quote": "Daily Active Users returned to Y/Y growth in September for the first time in three and a half years"
+       },
+       {
+        "id": "P4",
+        "quote": "Hinge Direct Revenue grew 19%, driven by 23% Payer growth"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Guidance implies 2026 revenue flat, Tinder revenue is still declining, and E&E is shrinking, so year 1 is slightly negative. Tinder DAU turning positive and Hinge expansion should lift growth to the low single digits by 2028-2030, but payers are still falling at the group level."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "Declines in the number of Tinder users have adversely affected our revenue and financial results in recent years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company is mature, with a shrinking payer base offset by pricing, competition from free social platforms, and weak younger-generation demand. I set terminal growth somewhat below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.21,
+      "input_hit": "long_run_op_margin",
+      "risk": "Google in-app fees rise after the 2024 partnership expires in Q1 2027, and app-store policy (Apple/Google) worsens, eroding the fee savings."
+     },
+     {
+      "bear_value": -0.02,
+      "input_hit": "rev_growth",
+      "risk": "Tinder's user recovery does not turn into revenue and E&E payers keep falling, so group revenue keeps shrinking."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Free competitors (Facebook dating, AI-led entrants) and soft younger-generation demand cap long-run growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       -0.028,
+       -0.015000000000000001,
+       0.0,
+       0.0049999999999999975,
+       0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.29,
+      "rev_growth": [
+       0.022000000000000002,
+       0.035,
+       0.05,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Gross long-term debt of about $3.55 billion is essentially unchanged from year-end, since the 2026 exchangeable notes were repaid from cash and earlier new notes. Management keeps this leverage while returning cash to shareholders."
+     },
+     "margin_position": "GAAP operating margin was 25.0% in 2025 and is running near 29% in 2026. The rise comes from cost cuts and lower Apple/Google in-app fees as payers move to alternative payment methods, not from revenue growth. Revenue has been flat for about two years, so the margin is high against its own recent range (23.7% to 27.3% over 2023-2025) and only part of the gain is likely to last.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year tax rate of 6.9% is far below the 2026 nine-month provision of about 20% of pretax income (128,227 on 639,979), which is closer to what the company can keep paying."
+     },
+     "why": "2025 operating income carried a $60.5 million Tinder legal settlement and a $14.0 million FTC settlement in G&A, which depressed the margin. 2026 shows a structurally lower cost of revenue, so 2025 understates the near-term margin. Revenue is flat, with Tinder and Everyone Everywhere shrinking and Hinge growing, so near-term growth is close to zero."
+    },
+    "value_at_old_defaults": 39.570609203439574,
+    "values": {
+     "base": 44.87719723154428,
+     "bear": 33.24982870214129,
+     "bull": 61.9357934064655
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1031299000.0,
+     "excess_cash_before": 1031299000.0,
+     "k0_after": 168467929.3546257,
+     "k0_before": 168467929.3546257,
+     "k0_interest": 147551000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 655773982.7051866,
+     "x0_before": 655773982.7051866
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 9728100996.902008,
+     "seam_ratio": 1.0192207250803647,
+     "tv_share": 0.35916567260727544,
+     "wedge_rate_5": -0.0006227527141599977
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year tax rate of 6.9% is far below the roughly 20% implied by 9M 2026 (128,227 of tax on 639,979 pretax), so it cannot be kept.",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.018,
+     "fade_years": 10,
+     "long_run_op_margin": 0.25,
+     "op_margin": [
+      0.285,
+      0.275,
+      0.27,
+      0.27,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.4,
+     "rev_growth": [
+      0.0,
+      0.01,
+      0.025,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0525 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 112
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.2,
+      0.29
+     ],
+     "rev_growth_y3": [
+      -0.02,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (54,651) | (42,100)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0184"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 54.7M for 9M 2026 on revenue of 2.6B (about 2.1%), and the pooled history is 1.84% of revenue. I use 1.8%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Tinder expects revenue to decrease in 2026 at a similar rate to the decrease in 2025"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade reflects a slow reversion of the margin and of growth as Hinge matures and the Tinder turnaround plays out."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The industry for social connection apps is competitive, with low switching costs and a consistent stream of new services and entrants, and innovation by our competitors may disrupt our business."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $3,487.2 million | 0.0022 | 0.2502"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Competition has low switching costs, free rival offerings and platform fee risk, so I fade below the current peak to about 25%, in line with the 2025 margin and the 2023-2024 range of 24-27%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 268,569 | 221,334 | 750,435 | 587,848"
+       },
+       {
+        "id": "P6",
+        "quote": "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range"
+       },
+       {
+        "id": "P2",
+        "quote": "our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "9M 2026 operating margin is about 28.8% and the company guides a full-year Adjusted EBITDA margin of 38.8%. I fade the margin from 28.5% to 27% as Google fees rise after Q1 2027 and Tinder and Hinge marketing increases."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, with a base-year return on tangible capital of 1.0, but competition and marketing needs will erode returns. I assume 40%, well above the 5.25% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We expect Q4 Total Revenue for Match Group of $865 million to $875 million, down 1% to flat Y/Y."
+       },
+       {
+        "id": "P4",
+        "quote": "Hinge Direct Revenue grew 19%, driven by 23% Payer growth"
+       },
+       {
+        "id": "P4",
+        "quote": "E&E Direct Revenue declined 20%, including a $20 million decrease in revenue at Azar"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 is guided flat, Tinder revenue is still declining and Everyone Everywhere is shrinking, while Hinge grows about 20%. Tinder's DAU recovery should turn into modest growth from 2027, as management targets."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature subscription business with a shrinking payer base at Tinder and E&E and growth at Hinge, so long-run growth should sit below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "long_run_op_margin",
+      "risk": "Google fees rise after the partnership expires in Q1 2027 and Apple fee rules tighten, reversing the fee savings and compressing the margin"
+     },
+     {
+      "bear_value": -0.02,
+      "input_hit": "rev_growth",
+      "risk": "Tinder payers keep falling and E&E keeps shrinking, so revenue declines"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Competition from free social platforms and generative-AI entrants lowers long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.2,
+      "rev_growth": [
+       -0.045,
+       -0.034999999999999996,
+       -0.019999999999999997,
+       -0.015,
+       -0.015
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.29,
+      "rev_growth": [
+       0.034999999999999996,
+       0.045,
+       0.06,
+       0.065,
+       0.065
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $3.55B is roughly 3x EBITDA and the company has refinanced it routinely, with the 2026 exchangeable notes repaid from the 2033 note proceeds, so this leverage is likely to persist."
+     },
+     "margin_position": "The GAAP operating margin of 25.0% in 2025 is rising: 9M 2026 is about 28.8%. The rise comes from cost cuts, mainly lower app-store fees as payers move to alternative payments, and from lower G&A (the 2025 base included a $60.5M Tinder settlement and a $14.0M FTC settlement). Revenue is flat, so the margin gain is cost-driven. Part of it is exposed to the Google fee step-up and to higher marketing.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year tax rate of 6.9% is far below the roughly 20% implied by 9M 2026 (128,227 of tax on 639,979 pretax), so it cannot be kept."
+     },
+     "why": "The 2025 base understates the current margin: 9M 2026 operating income is 750.4M on revenue of 2,608.3M, against a 25.0% margin for 2025. Revenue is flat and management guides Q4 down 1% to flat. Year 1 (2026) is therefore built from 2026 actuals and guidance rather than from the 2025 margin. Part of the fee savings may reverse after the Google partnership ends, so I keep only part of the gain."
+    },
+    "value_at_old_defaults": 39.570609203439574,
+    "values": {
+     "base": 44.17272938456898,
+     "bear": 28.62343163144783,
+     "bull": 67.02614434257654
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 39.570609203439574,
+  "value_at_old_defaults_quoted": 39.570609203439574,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 11686689744.282164,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 262475000.0,
@@ -15,7 +500,7 @@
   "In Q1 2026 the company recorded an impairment of $25.2 million on the Azar trade name after updating Azar's forecast."
  ],
  "in_code_book": false,
- "ke": 0.09826177079828693,
+ "ke": 0.09846177079828694,
  "market_cap_at_publish": 9121656340,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +508,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 38.75110544017376,
-  "3000": 39.64529315681703
+  "1000": 44.87719723154428,
+  "3000": 44.17272938456898
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1442,105 +1927,17 @@
   ]
  },
  "ticker": "MTCH",
- "upside": 0.14079043689729165,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 down, 3000 none)",
-   "seeds_disagree: op_margin.y2 (1000 up, 3000 none)",
-   "ytd_outside_record: op_margin.y1 0.2877"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.01841164807248827,
-    0.01841164807248827,
-    0.01841164807248827,
-    0.01841164807248827,
-    0.01841164807248827
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.250209265493174,
-   "normalized.margin": 0.250209265493174,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.28771358497640775,
-   "op_margin.y2": 0.250209265493174,
-   "rev_growth.y1": -0.00035259971385770417,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05243038359621547
-  },
-  "numbers": {
-   "capex": [
-    0.01841164807248827,
-    0.01841164807248827,
-    0.01841164807248827,
-    0.01841164807248827,
-    0.01841164807248827
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.250209265493174,
-   "normalized.margin": 0.250209265493174,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.28771358497640775,
-   "op_margin.y2": 0.250209265493174,
-   "rev_growth.y1": -0.00035259971385770417,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05243038359621547
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The full-year 2026 revenue guidance in P6.s67 says only 'flat' and gives no figure, so the evidence supplies no numeric full-year revenue guide.",
-   "The Q4 2026 guidance covers Adjusted EBITDA only, not GAAP operating income, so the GAAP operating margin for year 1 is not guided.",
-   "The evidence gives no revenue or margin guidance for 2027.",
-   "The evidence does not say by how much Google fees may rise after the partnership expires in Q1 2027.",
-   "The evidence does not say whether Tinder's user improvements will turn into revenue growth."
-  ],
-  "year": 3
- },
- "value_base": 39.64529315681703,
- "value_bear": 38.390541219840934,
- "value_bull": 39.99229331519474,
+ "upside": 0.28120259179619156,
+ "valuation": null,
+ "value_base": 44.52496330805663,
+ "value_bear": 30.93663016679456,
+ "value_bull": 64.48096887452103,
  "value_per_filed_share": {
-  "base": 39.64529315681703,
-  "bear": 38.390541219840934,
-  "bull": 39.99229331519474
+  "base": 44.52496330805663,
+  "bear": 30.93663016679456,
+  "bull": 64.48096887452103
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -0.6 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +5.2 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

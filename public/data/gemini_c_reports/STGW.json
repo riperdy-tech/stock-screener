@@ -1,13 +1,546 @@
 {
- "alpha_pts": -28.005031171758045,
+ "alpha_pts": -22.166430277764377,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 131,
  "claims_supported": 122,
  "date": "2026-11-16T10:39:29Z",
- "equity_value": 1215382804.7864077,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0672 (equity return r 0.0985), F 10",
+  "run_gap": 0.004316839640237746,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 9937000.0,
+       "printed": 9937,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Bargain purchase gain | 9,937 | \u2014"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Bargain purchase gain in 2025, non-recurring and below operating income"
+      },
+      {
+       "amount": 2245000.0,
+       "printed": 2245,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on sale of business | (2,245) | \u2014"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on sale of business in 2025, non-recurring and below operating income"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 104537000.0,
+     "excess_cash_before": 104537000.0,
+     "k0_after": 104456471.17743826,
+     "k0_before": 96764471.17743826,
+     "k0_interest": 96438000.0,
+     "one_offs_charge": 2245000.0,
+     "one_offs_gain": 9937000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 132590059.11455001,
+     "x0_before": 137690887.53288698
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1214154727.7908468,
+     "seam_ratio": 0.9900953332717033,
+     "tv_share": 0.22832615589583335,
+     "wedge_rate_5": 0.0034559546790534587
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.035,
+     "fade_years": 10,
+     "long_run_op_margin": 0.058,
+     "op_margin": [
+      0.046,
+      0.052,
+      0.057,
+      0.06,
+      0.062
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.095,
+      0.05,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0672 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 122
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.045,
+      0.072
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capitalized software | (75,855) | (45,315)"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (27,405) | (26,338)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed pooled ratio of 0.87% excludes capitalized software, which rose sharply. At 9M 2026, capitalized software of 75,855 plus capex of 27,405 is about 4.5% of revenue. I assume investment stays elevated but eases to about 3.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "organic net revenue increased by $2.6 million, or 0.1%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin need time to normalize from the current acquisition and technology-led surge to a mature agency profile, so I use a medium fade of ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,909.0 million | 0.0239 | 0.0547"
+       },
+       {
+        "id": "P2",
+        "quote": "barriers to entry are minimal"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The ten-year filed history ranges from 0.1% to 9.4% and recent years sit around 4.7% to 5.5%. A mix shift toward software and digital transformation supports some improvement, but low barriers to entry and competitive discounting limit it. I use a modest premium to the history, consistent with partial persistence of the gap."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370"
+       },
+       {
+        "id": "P6",
+        "quote": "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "GAAP operating income fell to 69,247 for 9M against 102,370, while raised Adjusted EBITDA guidance implies a stronger Q4. I estimate about 4.6% for FY2026. Margins then recover gradually as technology revenue scales and Q3 shows 25% Adjusted EBITDA growth, but D&A, stock compensation and AI spend keep GAAP margins well below adjusted ones."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light and tangible capital is tiny, so the filed return is extreme, but growth has historically come from paid acquisitions and capitalized software, which dilutes returns. I assume a good but far lower return, well above the 6.72% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Q3 Revenue of $816 million, an increase of 10% versus the prior year period"
+       },
+       {
+        "id": "P6",
+        "quote": "TOTAL NET REVENUE GROWTH8% - 12%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is 2026, where 9M revenue is up about 10% and net revenue guidance is 8% to 12%. I assume about 9.5% for the year including the strong Q4 and acquisitions. Growth slows to about 5% in 2027 as even-year advocacy revenue reverses, then fades toward 4% as the Digital Transformation and Marketing Cloud surge normalizes."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, competitive, cyclical agency business should grow roughly with nominal GDP, a bit below the anchor given industry fragmentation and the AI disruption risk to services."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Revenue growth does not convert to profit: office and general costs, AI/software spend and stock compensation keep GAAP margins near 3% to 4%"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Technology and Digital Transformation momentum fades, Marketing Services keeps shrinking and odd-year political revenue falls away, so growth reverts toward the 2025 organic rate"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "capex_to_revenue",
+      "risk": "Capitalized software and capex stay near 4.5% of revenue without matching returns"
+     },
+     {
+      "bear_value": 0.022,
+      "input_hit": "terminal_growth",
+      "risk": "Competitive pressure and AI disruption of services lower long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.045,
+      "rev_growth": [
+       0.065,
+       0.02,
+       0.02,
+       0.014999999999999996,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.072,
+      "rev_growth": [
+       0.125,
+       0.08,
+       0.08,
+       0.075,
+       0.07
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Management reports net leverage of 2.7x and falling as EBITDA grows, with debt used for buybacks and acquisitions at a roughly stable multiple of earnings."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 5.47% is near the company's own range (3% to 9% over ten years). Margins are held down by heavy D&A on acquired intangibles, stock compensation, earn-out remeasurement and rising technology/AI spend. In 2026 the nine-month margin fell to about 3% even as Adjusted EBITDA rose. Cyclicality comes from client marketing budgets and the even-year political cycle in Communications.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 9M 2026 tax expense of 7,646 on pretax income of 2,882 shows a rate distorted by small pretax income and non-deductible items, so the record's 33.7% may not persist."
+     },
+     "why": "2025 organic net revenue grew only 0.1% and acquisitions drove most growth. 2026 is running well above it, with 9M revenue up about 10% and guidance raised. The base year also contains a bargain purchase gain and a loss on sale of a business that sit below operating income. Odd-year political weakness in Communications will reverse part of the 2026 boost in year 2."
+    },
+    "value_at_old_defaults": 4.726637356888023,
+    "values": {
+     "base": 5.379066969842769,
+     "bear": 3.9513105735153804,
+     "bull": 8.072999281158587
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 9937000.0,
+       "printed": 9937,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Bargain purchase gain | 9,937 | \u2014"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Bargain purchase gain in 2025, non-operating and non-recurring"
+      },
+      {
+       "amount": 2245000.0,
+       "printed": 2245,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Loss on sale of business | (2,245) | \u2014"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on sale of business in 2025, non-operating and non-recurring"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 104537000.0,
+     "excess_cash_before": 104537000.0,
+     "k0_after": 104456471.17743826,
+     "k0_before": 96764471.17743826,
+     "k0_interest": 96438000.0,
+     "one_offs_charge": 2245000.0,
+     "one_offs_gain": 9937000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 132590059.11455001,
+     "x0_before": 137690887.53288698
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1219823879.04027,
+     "seam_ratio": 1.0000640553214983,
+     "tv_share": 0.24727495153773793,
+     "wedge_rate_5": 0.003487776494940666
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.035,
+     "fade_years": 10,
+     "long_run_op_margin": 0.06,
+     "op_margin": [
+      0.049,
+      0.053,
+      0.055,
+      0.057,
+      0.058
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.09,
+      0.06,
+      0.05,
+      0.04,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0672 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 122
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.045,
+      0.075
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capitalized software | (75,855) | (45,315)"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (27,405) | (26,338)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capitalized software plus capital expenditures were about 4.5% of nine-month revenue, well above the pooled 0.87%. I assume spending stays elevated at about 3.5% as the software push continues."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Stagwell operates in a highly competitive and fragmented industry"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A fragmented industry with minimal barriers to entry and a business mix still shifting toward software suggests a gradual convergence of growth and margin over about ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,909.0 million | 0.0239 | 0.0547"
+       },
+       {
+        "id": "P1",
+        "quote": "Stagwell operates in a highly competitive and fragmented industry"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 10-year median is about 5%; I put the long-run level somewhat above it because of a growing share of software and Digital Transformation, but intense agency competition limits upside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370"
+       },
+       {
+        "id": "P6",
+        "quote": "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "GAAP operating income fell in 2026 year to date despite revenue growth, so year 1 is about 5% after a strong fourth quarter. Margin then recovers as the guided Adjusted EBITDA increase and operating leverage flow through, but heavy stock compensation, D&A and software spending cap the recovery."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, with people as the main asset, so returns on new tangible capital are high. Competition and acquisition-driven investment pull them well below the filed 1.0 return on tangible capital, but above the 6.7% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Q3 YoY Revenue Growth of 10% to $816 million"
+       },
+       {
+        "id": "P6",
+        "quote": "TOTAL NET REVENUE GROWTH8% - 12%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 revenue is growing about 10% with a guided net revenue growth of 8-12%, so year 1 is high. Growth then slows as acquisitions slow, the election-year Communications lift reverses in 2027 and Marketing Services shrinks. Technology and Digital Transformation growth keeps it above the 2025 level."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, cyclical, competitive marketing services business with some technology growth should grow a little below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Growth in Digital Transformation and The Marketing Cloud fades while Marketing Services keeps shrinking and Communications reverses after the election year"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Revenue growth does not convert to GAAP operating profit because office and general costs, stock compensation and software investment keep rising"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "capex_to_revenue",
+      "risk": "Heavy capitalized software spending persists without matching returns"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Leverage, earn-outs and the tax receivable agreement absorb cash, and acquisitions deliver low returns on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.045,
+      "rev_growth": [
+       0.06,
+       0.029999999999999995,
+       0.02,
+       0.009999999999999998,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.075,
+      "rev_growth": [
+       0.12,
+       0.09,
+       0.08,
+       0.07,
+       0.07
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of about $1.3-1.4 billion is roughly 2.7x net leverage per management and is rising via the revolver, while acquisitions and buybacks continue."
+     },
+     "margin_position": "GAAP operating margin was 5.47% in 2025, roughly at the 10-year median of about 5.1%. It is only about 3% in 2026 year to date (nine-month operating income 69,247 on revenue of 2,306,477) because office and general costs, stock compensation and earn-out remeasurement are rising faster than revenue. Fourth-quarter seasonality should lift the full-year figure to about 5%. Adjusted EBITDA is guided up sharply, so a gradual recovery in GAAP margin is plausible if the software and Digital Transformation mix scales.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2025 rate of 33.7% and the odd 2026 nine-month tax charge of 7,646 on pretax income of 2,882 suggest nondeductible items and a tax rate that is not clean."
+     },
+     "why": "2025 organic net revenue grew only 0.1%, and net acquisitions added 120,463 of the 131,009 net revenue increase. The 2025 pretax income included a bargain purchase gain and a loss on a sale of business. 2026 growth is much faster (nine-month revenue up 10%), driven by Digital Transformation and The Marketing Cloud, and is helped by election-year Communications revenue that should reverse in 2027. 2026 GAAP margin is lower than 2025 despite revenue growth."
+    },
+    "value_at_old_defaults": 4.726637356888023,
+    "values": {
+     "base": 5.402337767516609,
+     "bear": 3.852648298664178,
+     "bull": 8.249349208497499
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 4.726637356888023,
+  "value_at_old_defaults_quoted": 4.726637356888023,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1425964762.6702573,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 264523000.0,
  "flags": [
   "Stagwell acquired Freestar (Publisher First, Inc.) for $50.0 million, of which $30.0 million was paid in 3,442,043 shares of Class A Common Stock and $20.0 million in cash, with up to $60.0 million more in contingent consideration.",
@@ -15,7 +548,7 @@
   "Stagwell announced the largest multi-agency deal in its history, with ServiceNow, along with a first major federal government win and an expanded Palantir partnership."
  ],
  "in_code_book": false,
- "ke": 0.09826177079828693,
+ "ke": 0.09846177079828694,
  "market_cap_at_publish": 2784740136,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +556,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 4.594620523683792,
-  "3000": 4.594620523683792
+  "1000": 5.379066969842769,
+  "3000": 5.402337767516609
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1597,131 +2130,17 @@
   ]
  },
  "ticker": "STGW",
- "upside": -0.5635561145995536,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y1 (1000 none, 3000 up)",
-   "ytd_outside_record: op_margin.y1 0.0300"
-  ],
-  "departures": [
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "F3",
-     "Y2025-12-31",
-     "P1.s21"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF CASH FLOWS - USD ($) $ in Thousands | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash flows from operating activities:\nNet Income (Loss), Including Portion Attributable to Nonredeemable Noncontrolling Interest | $ (4,252) | $ 13,804\nAdjustment to Reconcile Net Income to Cash Provided by (Used in) Operating Activity [Abstract]\nStock-based compensation | 61,735 | 44,143\nDepreciation and amortization | 136,395 | 127,635\nOperating Lease, Right-of-Use Asset, Amortization Expense | 47,471 | 51,208\nGain (Loss) on Termination of Lease | (2,226) | (3,063)\nDeferred income taxes | 476 | 3,216\nAdjustment To Deferred Acquisition Consideration | 26,766 | (9,911)\nOther, net | 2,280 | 1,319\nChanges in working capital:\nAccounts receivable | (51,575) | (3,477)\nExpenditures billable to clients | 20,723 | 26,266\nOther current assets | (22,408) | (53,377)\nAccounts payable | (50,059) | (57,306)\nAccrued expenses and other liabilities | 5,297 | (117,118)\nAdvance billings | 35,360 | 67,964\nIncrease (Decrease) in Operating Lease Liability | (52,254) | (59,414)\nDeferred acquisition related payments | (1,450) | (1,176)\nNet Cash Provided by (Used in) Operating Activities, Total | 152,279 | 30,713\nCash flows from investing activities:\nCapitalized software | (75,855) | (45,315)\nCapital expenditures | (27,405) | (26,338)\nAcquisitions, net of cash acquired | (6,347) | (6,179)\nOther | (4,303) | (2,927)\nNet Cash Provided by (Used in) Investing Activities, Total | (113,910) | (80,759)\nCash flows from financing activities:\nRepayment of borrowings under revolving credit facility | (1,533,426) | (1,412,000)\nProceeds from borrowings under revolving credit facility | 1,619,780 | 1,586,326\nShares repurchased and cancelled | (90,716) | (105,183)\nDistributions to noncontrolling interests and RNCI | (3,903) | (5,018)\nPayment of deferred consideration | (337) | (16,103)\nProceeds from (Payments to) Noncontrolling Interests | 450 | 0\nTax Receivables Agreement payment | (2,554) | 0\nPayments of Financing Costs | 0 | (3,795)\nNet Cash Provided by (Used in) Financing Activities, Total | (11,606) | 44,227\nEffect of exchange rate changes on cash and cash equivalents | 897 | 6,718\nNet increase in cash and cash equivalents | 27,660 | 899\nCash and cash equivalents at beginning of period | 104,537 | 131,339\nCash and cash equivalents at end of period | 132,197 | 132,238\nSupplemental Cash Flow Information:\nCash income taxes paid | 17,245 | 18,291\nCash interest paid | 84,516 | 86,302\nNon-cash investing and financing activities:\nNon-cash payment on deferred acquisition | 483 | 0\nShares issued for business acquisitions | 7,625 | 15,300\nRight-of-use assets obtained in exchange for new operating lease liabilities | 13,163 | 33,322\nAddition to deferred tax asset related to exchange of Paired Units | 0 | 203,418\nAddition to Tax Receivables Agreement liability related to exchange of Paired Units | 0 | 200,274\nConversion of Class C to Class A shares | $ 0 | $ 447,562"
-   },
-   "P1.s21": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "We plan to continue investing in our core digital platforms, developing our suite of digital products in The Marketing Cloud, increasing our technology leadership through innovation and strategically investing in new solutions, technologies and capabilities to deliver value for our clients, employees, and shareholders."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0000876883-26-000010): revenue $2,909.0 million; operating income $159.0 million; operating margin 5.5%; net income $29.1 million; depreciation and amortization $171.2 million; capital expenditure $43.7 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.008713706360697631,
-    0.008713706360697631,
-    0.008713706360697631,
-    0.008713706360697631,
-    0.008713706360697631
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.05074658907828587,
-   "normalized.margin": 0.05074658907828587,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03002284436393686,
-   "op_margin.y2": 0.05074658907828587,
-   "rev_growth.y1": 0.09750917891314814,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0670871307312606
-  },
-  "numbers": {
-   "capex": [
-    0.01503643863870746,
-    0.01503643863870746,
-    0.01503643863870746,
-    0.01503643863870746,
-    0.01503643863870746
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.05074658907828587,
-   "normalized.margin": 0.05074658907828587,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03002284436393686,
-   "op_margin.y2": 0.05074658907828587,
-   "rev_growth.y1": 0.09750917891314814,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.0670871307312606
-  },
-  "of_record": {},
-  "options": {
-   "capex": "record_last",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The only full-year 2026 top-line guidance found is for total net revenue growth of 8% - 12% (P6.s109); there is no guidance for GAAP revenue, so it is not used for rev_growth.y1.",
-   "Part of the Financial Outlook text in the earnings release was omitted, so other guided figures may exist that are not in this packet.",
-   "The evidence does not quantify fourth-quarter 2026 operating income, which is seasonally the highest-revenue quarter.",
-   "The evidence does not show how much revenue or margin the October 2026 Freestar acquisition will contribute.",
-   "No item gives guidance for 2027 revenue, margin or capital spending, or quantifies the effect of the odd-year political advocacy cycle on 2027.",
-   "The evidence does not say whether the elevated capitalized software spending in 2026 will continue at the same level."
-  ],
-  "year": 3
- },
- "value_base": 4.594620523683792,
- "value_bear": 4.490870461324856,
- "value_bull": 4.894460703361354,
+ "upside": -0.4879361473496364,
+ "valuation": null,
+ "value_base": 5.390702368679689,
+ "value_bear": 3.9019794360897793,
+ "value_bull": 8.161174244828043,
  "value_per_filed_share": {
-  "base": 4.594620523683792,
-  "bear": 4.490870461324856,
-  "bull": 4.894460703361354
+  "base": 5.390702368679689,
+  "bear": 3.9019794360897793,
+  "bull": 8.161174244828043
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -28.0 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -22.2 points a year against the required return over 3 years"
 }

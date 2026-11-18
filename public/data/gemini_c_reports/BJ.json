@@ -1,11 +1,476 @@
 {
- "alpha_pts": -17.964873310245782,
+ "alpha_pts": -7.483675225617245,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 117,
  "claims_supported": 115,
  "date": "2026-11-16T23:24:41Z",
- "equity_value": 8246769389.214369,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.0470 (filed 0.0173 to 0.0416)",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.0430 (filed 0.0173 to 0.0416)",
+   "run 3000: debt_level_representative_no: The base-year debt of $399.1 million excludes revolver borrowings, and total debt was $629.2 million at August 1, 2026 as buybacks were partly funded on the ABL.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1286 and margin 0.0387, margin 0.0381 (persist), growth 0.0375, terminal RONIC 0.0756 (equity return r 0.0781), F 10",
+  "run_gap": 0.07620699608271751,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 46245000.0,
+     "excess_cash_before": 46245000.0,
+     "k0_after": 44248711.155241966,
+     "k0_before": 44248711.155241966,
+     "k0_interest": 31934000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 576990684.5758644,
+     "x0_before": 576990684.5758644
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 11334839134.683487,
+     "seam_ratio": 1.126538883586701,
+     "tv_share": 0.6291528672532892,
+     "wedge_rate_5": 0.012988271057383816
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0470 (filed 0.0173 to 0.0416)",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.038,
+     "op_margin": [
+      0.047,
+      0.0375,
+      0.0375,
+      0.038,
+      0.038
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.105,
+      0.045,
+      0.045,
+      0.042,
+      0.04
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1286 and margin 0.0387, margin 0.0381 (persist), growth 0.0375, terminal RONIC 0.0756 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 115
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.033,
+      0.042
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.06
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-01-31 | 0.0327 | 0.0134"
+       },
+       {
+        "id": "F3",
+        "quote": "Additions to property and equipment, net of disposals | (359,339) | (306,065)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex rose to 3.27% of revenue in FY2025 and ran about 3.0% of revenue in the first half of FY2026 on new clubs and supply chain. I hold 3.0%, between the 5-year pooled 2.5% and the current level."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "as demonstrated by over 25 consecutive years of membership fee income growth"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A long history of steady membership growth and ongoing club openings suggest a gradual fade of about 10 years to maturity."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-02-03 | $19,968.7 million | 0.0338 | 0.0401"
+       },
+       {
+        "id": "P2",
+        "quote": "Because we price our merchandise aggressively, the difference between the price at which we sell a given item and the cost at which we purchase it is often much smaller than it would be for our non-club competitors."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margin has stayed between 3.7% and 4.2% since FY2021, and the base year is at the median, so little mean reversion is needed. Membership fees and private label support it, while Costco and Sam's pricing pressure and gasoline mix cap it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "resulting in a one-time pre-tax benefit of approximately $240 million, net of associated legal fees"
+       },
+       {
+        "id": "P6",
+        "quote": "decreased by approximately 20 basis points compared to the second quarter of fiscal 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 includes the roughly $240 million interchange settlement gain, which I assume is booked in operating income (the filing does not say where). Underlying margin is about 3.7%, held down by price investment, gasoline mix and new-club costs. After year 1 the margin holds at about 3.75% to 3.8%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.5422"
+       },
+       {
+        "id": "P3",
+        "quote": "an increase in the number of owned clubs has resulted in increased depreciation expense year-over-year"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed return on tangible capital of 54% is flattered by negative working capital from vendor terms and by leased clubs kept off the balance sheet. New clubs increasingly involve owned real estate and heavy capex, so I use a much lower 20% that is still well above the 7.56% value-neutral level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net sales for the first six months of fiscal year 2026 were $11.62 billion, a 12.9% increase from net sales reported for the first six months of fiscal year 2025 of $10.29 billion."
+       },
+       {
+        "id": "P6",
+        "quote": "Comparable club sales(a), excluding gasoline sales, increased by 3.1% year-over-year"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is lifted by a 12.9% first-half sales gain that was inflated by higher gasoline prices and gallons, while merchandise comps were only 3.1%. Later years revert to merchandise comps of about 3%, unit growth of 4 to 5 clubs a year and membership fee growth near 9%, giving 4 to 4.5%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature regional club operator with a growing footprint and membership base should grow slightly below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": [
+       0.037,
+       0.0365,
+       0.0365,
+       0.037,
+       0.037
+      ],
+      "input_hit": "op_margin",
+      "risk": "The settlement gain is not in operating income, or gasoline-driven sales reverse, so year 1 growth and margin are lower than assumed."
+     },
+     {
+      "bear_value": 0.033,
+      "input_hit": "long_run_op_margin",
+      "risk": "Price competition from Costco and Sam's Club, plus continued price investment and gasoline mix, compress the long-run margin."
+     },
+     {
+      "bear_value": 0.028,
+      "input_hit": "terminal_growth",
+      "risk": "New-club growth slows or membership renewals weaken, and the New York metro area (23% of sales) underperforms."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.033,
+      "rev_growth": [
+       0.09,
+       0.03,
+       0.03,
+       0.027000000000000003,
+       0.025
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.042,
+      "rev_growth": [
+       0.12,
+       0.06,
+       0.06,
+       0.057,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Filed debt of $399.1 million excludes the larger revolver balance now outstanding (total debt $629.2 million) and about $2.1 billion of operating leases, so the level kept relative to size is uncertain."
+     },
+     "margin_position": "The FY2025 operating margin of 3.81% sits at the 5-year median (about 3.8%) of a stable, defensive grocery-heavy club business. Thin merchandise margins, price investment and a gasoline mix with low margins hold it there, while membership fees add profit.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 25.3% effective rate is near the roughly 26% to 27% implied by recent quarters, though credit benefits could fade."
+     },
+     "why": "FY2025 shows 4.7% revenue growth and a 3.81% margin, in line with the 3.77% to 4.01% of the last three years. It has no large one-offs in the filed numbers. FY2026 will be distorted by gasoline-inflated sales and a roughly $240 million settlement gain, so I treat year 1 separately."
+    },
+    "value_at_old_defaults": 71.4513867246416,
+    "values": {
+     "base": 91.44490877168441,
+     "bear": 67.32866891420674,
+     "bull": 122.43190622555268
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 46245000.0,
+     "excess_cash_before": 46245000.0,
+     "k0_after": 44248711.155241966,
+     "k0_before": 44248711.155241966,
+     "k0_interest": 31934000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 576990684.5758644,
+     "x0_before": 576990684.5758644
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 10499552051.040806,
+     "seam_ratio": 1.1128700106054712,
+     "tv_share": 0.5974391070229828,
+     "wedge_rate_5": 0.012962901507113482
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0430 (filed 0.0173 to 0.0416)",
+     "debt_level_representative_no: The base-year debt of $399.1 million excludes revolver borrowings, and total debt was $629.2 million at August 1, 2026 as buybacks were partly funded on the ABL.",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.038,
+     "op_margin": [
+      0.043,
+      0.038,
+      0.038,
+      0.0385,
+      0.039
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.105,
+      0.05,
+      0.045,
+      0.042,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1286 and margin 0.0387, margin 0.0381 (persist), growth 0.0375, terminal RONIC 0.0756 (equity return r 0.0781), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 115
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.034,
+      0.042
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.06
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0253"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-01-31 | 0.0327 | 0.0134"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has risen from 1.9% to 3.3% of revenue as more clubs are owned and supply chain work continues. First-half capex of $359 million is about 3% of revenue. Year-1 revenue is inflated by gasoline, so I hold 3.0% rather than the 3.27% of last year or the 2.53% five-year pooled figure."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "we have grown our footprint to 267 large-format, high-volume warehouse clubs and 206 gas stations spanning 22 states as of the date of this filing"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets the 4% growth from club openings taper to the terminal rate. The company is still opening clubs in new states, so growth should not drop abruptly."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-01-31 | $21,457.3 million | 0.0466 | 0.0381"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin has held in a narrow band since fiscal 2020. Competition from Costco and Sam's, thin margins and continued pricing investment limit upside, while membership fee growth and private label limit downside, so I settle near the recent level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "resulting in a one-time pre-tax benefit of approximately $240 million, net of associated legal fees"
+       },
+       {
+        "id": "P6",
+        "quote": "decreased by approximately 20 basis points compared to the second quarter of fiscal 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The first-half margin is about 3.87%, and the second half of fiscal 2025 ran lower at about 3.6%. Pricing investment is cutting the merchandise gross margin rate. The settlement gain of about $240 million could add about 1 point to GAAP operating margin in year 1, but the filings do not say where it will be booked. I include roughly half of that, then return to about 3.8% to 3.9%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0756."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The current return on tangible capital of 54% is flattered by leases held off the capital base and vendor-financed inventory. New clubs, which are increasingly owned, earn much less. I assume 18%, well above the 7.56% breakeven but far below the current level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net sales for the first six months of fiscal year 2026 were $11.62 billion, a 12.9% increase from net sales reported for the first six months of fiscal year 2025 of $10.29 billion."
+       },
+       {
+        "id": "P6",
+        "quote": "Comparable club sales(a), excluding gasoline sales, increased by 3.1% year-over-year"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "First-half revenue is up 12.9%, but much of it is gasoline; merchandise comps are about 3%. I take year 1 near 10.5% on a full year of that gas lift plus about 12 net new clubs. Growth then settles toward 4% to 5% from units, fee income of about 10% and merchandise comps of about 3%, with gas prices assumed to stop adding."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0781; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is a mature US grocery-led club operator with a long runway of new clubs, but the long-run rate should sit below the 3.75% anchor and above inflation. The cost of equity of 7.81% constrains how high this can go."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Gasoline prices and gallons reverse, so revenue growth falls back to merchandise-led growth of about 3% with little unit contribution."
+     },
+     {
+      "bear_value": 0.033,
+      "input_hit": "long_run_op_margin",
+      "risk": "Competition from Costco and Sam's, together with continued price investment, compresses the merchandise gross margin and the operating margin settles below 3.5%."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Capital intensity stays high as more clubs are owned, and returns on new investment fall toward the breakeven level."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.034,
+      "rev_growth": [
+       0.09,
+       0.035,
+       0.03,
+       0.027000000000000003,
+       0.025
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.042,
+      "rev_growth": [
+       0.12,
+       0.065,
+       0.06,
+       0.057,
+       0.055
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The base-year debt of $399.1 million excludes revolver borrowings, and total debt was $629.2 million at August 1, 2026 as buybacks were partly funded on the ABL."
+     },
+     "margin_position": "The operating margin of about 3.8% sits in the 3.7% to 4.2% band the company has held since fiscal 2020 (about 4.0% in fiscal 2023, 3.8% in fiscal 2024 and 2025), well above the 1.7% to 2.7% of 2017 to 2020. It is a thin-margin club model where membership fees carry the profit. Gasoline sales dilute the margin rate, and the company is spending margin on pricing, so I expect it to stay near the recent median rather than expand.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 25.3% is close to the prior year's 25.9% and the first-half fiscal 2026 rate of about 27%, so it is sustainable."
+     },
+     "why": "Fiscal 2025 revenue grew 4.66% and operating margin was 3.81%, in line with the last four years, with no non-operating one-offs. Fiscal 2026 will look different: first-half revenue is inflated by gasoline prices and gallons, and a roughly $240 million settlement gain lands in the third quarter. Those are year-1 effects, not base-year distortions."
+    },
+    "value_at_old_defaults": 71.4513867246416,
+    "values": {
+     "base": 84.73195402517167,
+     "bear": 64.85680873961905,
+     "bull": 111.42267072120168
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 71.4513867246416,
+  "value_at_old_defaults_quoted": 71.4513867246416,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 11633486781.064798,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 132066000.0,
@@ -15,7 +480,7 @@
   "Bill Werner was promoted to Executive Vice President, Chief Development Officer, adding business-to-business operations to his duties, and his annual base salary was raised to $800,000."
  ],
  "in_code_book": false,
- "ke": 0.0779318907508762,
+ "ke": 0.0781318907508762,
  "market_cap_at_publish": 14075246074,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +488,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 62.44430352410438,
-  "3000": 62.39901047536844
+  "1000": 91.44490877168441,
+  "3000": 84.73195402517167
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1429,132 +1894,17 @@
   ]
  },
  "ticker": "BJ",
- "upside": -0.41409412340947116,
- "valuation": {
-  "annotations": [],
-  "departures": [
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "Y2026-01-31",
-     "F3",
-     "P3.s233",
-     "P4.s16"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F3": {
-    "kind": "statement",
-    "period": "2026-08-01",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS - USD ($) $ in Thousands | 6 Months Ended\nAug. 01, 2026 | Aug. 02, 2025\nCASH FLOWS FROM OPERATING ACTIVITIES\nNet income | $ 316,593 | $ 300,473\nAdjustments to reconcile net income to net cash provided by operating activities:\nDepreciation and amortization | 155,335 | 141,598\nAmortization of debt issuance costs and accretion of original issue discount | 546 | 546\nStock-based compensation expense | 28,740 | 24,599\nDeferred income tax provision | 8,197 | 9,577\nChanges in operating leases and other non-cash items | (41,065) | (22,178)\nIncrease (decrease) in cash due to changes in:\nAccounts receivable, net | (40,219) | 12,243\nMerchandise inventories | (61,563) | (11,696)\nPrepaid expenses and other current assets | (30,292) | (18,589)\nOther assets | 2,895 | (1,158)\nAccounts payable | 120,500 | 10,696\nAccrued expenses and other current liabilities | 80,018 | (9,107)\nOther non-current liabilities | 1,754 | 20,953\nNet cash provided by operating activities | 541,439 | 457,957\nCASH FLOWS FROM INVESTING ACTIVITIES\nAdditions to property and equipment, net of disposals | (359,339) | (306,065)\nProceeds from sale-leaseback transactions | 0 | 2,995\nProceeds from assignment of purchase option (see Note 12) | 122,100 | 0\nPayment upon exercise of purchase option (see Note 12) | (80,718) | 0\nOther investing activities | (3,782) | (3,086)\nNet cash used in investing activities | (321,739) | (306,156)\nCASH FLOWS FROM FINANCING ACTIVITIES\nProceeds from revolving lines of credit | 496,000 | 131,000\nPayments on revolving lines of credit | (386,000) | (201,000)\nNet cash received from stock option exercises | 1,366 | 5,014\nNet cash received from ESPP | 4,874 | 4,449\nAcquisition of treasury stock | (348,761) | (82,895)\nNet proceeds from financing obligations | 2,894 | 14,804\nOther financing activities | (6,336) | (4,172)\nNet cash used in financing activities | (235,963) | (132,800)\nNet (decrease) increase in cash and cash equivalents | (16,263) | 19,001\nCash and cash equivalents at beginning of period | 46,245 | 28,272\nCash and cash equivalents at end of period | 29,982 | 47,273\nSupplemental cash flow information:\nInterest paid | 13,272 | 16,921\nIncome taxes paid | 131,969 | 104,626\nOperating lease liabilities arising from obtaining right-of-use assets and other non-cash lease-related operating items | 189,012 | 52,886\nNon-cash financing and investing activities:\nFinance lease liabilities arising from obtaining right-of-use assets | 81,444 | 4,431\nReceivables arising from failed sale-leaseback financing obligations | 15,847 | 5,822\nProperty additions included in accrued expenses | 61,462 | 42,098\nTreasury stock acquisitions included in accrued expenses | $ 3,039 | $ 53"
-   },
-   "P3.s233": {
-    "kind": "annual_section",
-    "period": "2026-01-31",
-    "text": "The increase in cash used was primarily driven by an increase in capital spending of $114.1 million as we continue to execute on our growth strategy with new clubs in our pipeline and expanded supply chain capabilities."
-   },
-   "P4.s16": {
-    "kind": "quarterly_section",
-    "period": "2026-08-01",
-    "text": "Since pioneering the warehouse club model in New England in 1984, we have grown our footprint to 267 large-format, high-volume warehouse clubs and 206 gas stations spanning 22 states as of the date of this filing."
-   },
-   "Y2026-01-31": {
-    "kind": "filed_record",
-    "period": "2026-01-31",
-    "text": "Filed annual record, fiscal year ended 2026-01-31 (10-K, accession 0001531152-26-000007): revenue $21,457.3 million; operating income $816.6 million; operating margin 3.8%; net income $578.4 million; depreciation and amortization $288.6 million; capital expenditure $702.0 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.025314003437066652,
-    0.025314003437066652,
-    0.025314003437066652,
-    0.025314003437066652,
-    0.025314003437066652
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.03805721080879146,
-   "normalized.margin": 0.03805721080879146,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03871693652103086,
-   "op_margin.y2": 0.03805721080879146,
-   "rev_growth.y1": 0.12857334486581817,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07542306962637954
-  },
-  "numbers": {
-   "capex": [
-    0.032718415209686005,
-    0.032718415209686005,
-    0.032718415209686005,
-    0.032718415209686005,
-    0.032718415209686005
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.03805721080879146,
-   "normalized.margin": 0.03805721080879146,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03871693652103086,
-   "op_margin.y2": 0.03805721080879146,
-   "rev_growth.y1": 0.12857334486581817,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07542306962637954
-  },
-  "of_record": {},
-  "options": {
-   "capex": "record_last",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The fiscal 2026 outlook lines other than adjusted EPS were cut from the release, so no numeric revenue or comparable-sales guidance is available; P6.s65 says comp sales guidance is maintained but prints no figure.",
-   "The evidence does not say whether the approximately $240 million one-time pre-tax interchange settlement benefit expected in third quarter fiscal 2026 results will be recorded within operating income.",
-   "The evidence does not show how much of the year-to-date revenue growth from higher gasoline prices will continue in the second half of fiscal 2026.",
-   "No capital expenditure guidance for fiscal 2026 appears in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 62.44430352410438,
- "value_bear": 58.66598904220174,
- "value_bull": 74.39088884271618,
+ "upside": -0.1734789772127434,
+ "valuation": null,
+ "value_base": 88.08843139842804,
+ "value_bear": 66.09273882691289,
+ "value_bull": 116.92728847337719,
  "value_per_filed_share": {
-  "base": 62.44430352410438,
-  "bear": 58.66598904220174,
-  "bull": 74.39088884271618
+  "base": 88.08843139842804,
+  "bear": 66.09273882691289,
+  "bull": 116.92728847337719
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -18.0 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -7.5 points a year against the required return over 3 years"
 }

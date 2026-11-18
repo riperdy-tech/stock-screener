@@ -1,11 +1,476 @@
 {
- "alpha_pts": 17.239220904101316,
+ "alpha_pts": 24.766494613557143,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 81,
  "claims_supported": 74,
  "date": "2026-11-16T14:11:43Z",
- "equity_value": 1296491528.9730735,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Base-year debt of $241.4 million predates the $500.0 million 2026 term loan, which left about $486 million of debt at Sep. 30, 2026.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 3000: debt_level_representative_no: Base-year debt of $241.4 million predates the March 2026 refinancing, which put in a $500.0 million term loan and raised long-term debt from 219,798 to 462,897 (thousands).",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0681 and margin 0.1119, margin 0.1059 (persist), growth 0.0375, terminal RONIC 0.1087 (equity return r 0.1113), F 10",
+  "run_gap": 0.01122399848240865,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 211676000.0,
+     "excess_cash_before": 211676000.0,
+     "k0_after": 12557351.988755018,
+     "k0_before": 12557351.988755018,
+     "k0_interest": 18385000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 110789047.66341865,
+     "x0_before": 110789047.66341865
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1181529422.4238799,
+     "seam_ratio": 1.0279867583741717,
+     "tv_share": 0.3620048522290981,
+     "wedge_rate_5": 0.008857225964230562
+    },
+    "flags": [
+     "base_year_not_representative",
+     "debt_level_representative_no: Base-year debt of $241.4 million predates the $500.0 million 2026 term loan, which left about $486 million of debt at Sep. 30, 2026.",
+     "confidence_low",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.04,
+     "fade_years": 8,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.113,
+      0.112,
+      0.11,
+      0.109,
+      0.108
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.056,
+      0.06,
+      0.06,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.032
+    },
+    "old_defaults_inputs": "year 1 growth 0.0681 and margin 0.1119, margin 0.1059 (persist), growth 0.0375, terminal RONIC 0.1087 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 74
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.12
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.09
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "purchase of property and equipment is expected to be approximately $45 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Guidance implies capex of about 3.6% of revenue in 2026, while the pooled 5-year average is 4.9% and site and AV field-service expansion adds pressure, so I use 4.0%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenue growth (YoY) at midpoint | 2.3% | 5.6%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 5-year explicit growth of 4.5-6% is already close to the terminal rate, and the margin move is small, so a moderate fade of 8 years is enough."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,183.5 million | 0.1895 | 0.1188"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2025 margin of 11.9% is the peak of the history, and the history includes a loss year (2021) and margins of 9-10% in other years. The base rate that about half of the gap to the median persists points to roughly 10.5%, supported by AI and automation pressure on lower-skill care work."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA Margin1 | ~19.5% | ~19.0%"
+       },
+       {
+        "id": "P4",
+        "quote": "Operating income | 104,034 | 102,541 | 1,493 | 1.5%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2026 margin is near 11.2-11.3% on a GAAP basis (9-month operating income $104.0 million on $929.9 million of revenue). Guided Adjusted EBITDA margin of about 19% is below the 2025 level, and personnel costs are rising faster than revenue, so I let the margin drift slightly lower toward the long-run median."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, which explains the very high base-year return on tangible capital, but competition and wage-driven pricing should pull incremental returns well down. I assume 0.30, which is still far above the 0.1087 level at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we are increasing our full-year 2026 revenue range to between $1.249 billion and $1.251 billion"
+       },
+       {
+        "id": "P4",
+        "quote": "Trust & Safety | 63,867 | 75,826 | (11,959) | (15.8)%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is anchored to the raised 2026 guidance of about 5.6% growth. Growth afterwards is held at moderate levels, since AI Services growth (+27.7% in Q3) and Digital CX growth (+7.1%) are offset by a shrinking Trust & Safety line (-15.8%) and the risk that the largest client automates work."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature offshore BPO and AI-services provider should converge to somewhat below the nominal growth anchor, given AI substitution risk for human-delivered services."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Largest client (26% of 2025 revenue) automates or cuts volume, and Trust & Safety keeps shrinking"
+     },
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_op_margin",
+      "risk": "Cost of services keeps outgrowing revenue as delivery shifts to higher-cost geographies, and AI substitution compresses pricing"
+     },
+     {
+      "bear_value": 0.022,
+      "input_hit": "terminal_growth",
+      "risk": "AI automation of lower-skill customer care lowers long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       0.026000000000000002,
+       0.03,
+       0.03,
+       0.020000000000000004,
+       0.015
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       0.086,
+       0.09,
+       0.09,
+       0.08,
+       0.075
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $241.4 million predates the $500.0 million 2026 term loan, which left about $486 million of debt at Sep. 30, 2026."
+     },
+     "margin_position": "The 2025 operating margin of 11.9% is the top of its range since 2019 and above the 7-year median of about 10.3%. In 2026 it has slipped to about 11.2% for nine months, because cost of services is growing faster than revenue as work shifts to higher-cost geographies and AV field services. The business is not commodity-cyclical, but it is exposed to client concentration and AI automation.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 effective rate of 25.2% is in line with the 25-26% nine-month 2026 provisions, although the Q3 2026 rate of 19.1% was lowered by the removal of BEAT."
+     },
+     "why": "2025 revenue growth of 19.0% was well above the 2026 pace of 6.8% for nine months and 5.6% guided for the full year. The 2025 margin peaked before cost pressure and the 2026 debt recap. The 2025 figures overstate both growth and margin relative to the current run-rate."
+    },
+    "value_at_old_defaults": 13.917960984528817,
+    "values": {
+     "base": 16.208316099853782,
+     "bear": 13.354499128309577,
+     "bull": 20.569568969380374
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 211676000.0,
+     "excess_cash_before": 211676000.0,
+     "k0_after": 12557351.988755018,
+     "k0_before": 12557351.988755018,
+     "k0_interest": 18385000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 110789047.66341865,
+     "x0_before": 110789047.66341865
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1197043798.4742212,
+     "seam_ratio": 1.0284433133294688,
+     "tv_share": 0.3204568506714544,
+     "wedge_rate_5": 0.008834433797673113
+    },
+    "flags": [
+     "debt_level_representative_no: Base-year debt of $241.4 million predates the March 2026 refinancing, which put in a $500.0 million term loan and raised long-term debt from 219,798 to 462,897 (thousands).",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.04,
+     "fade_years": 10,
+     "long_run_op_margin": 0.103,
+     "op_margin": [
+      0.113,
+      0.111,
+      0.11,
+      0.109,
+      0.108
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.056,
+      0.06,
+      0.06,
+      0.052,
+      0.045
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0681 and margin 0.1119, margin 0.1059 (persist), growth 0.0375, terminal RONIC 0.1087 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 74
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.088,
+      0.118
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.09
+     ],
+     "terminal_growth": [
+      0.028,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "purchase of property and equipment is expected to be approximately $45 million"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0491"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 capex is guided to about $45 million, or roughly 3.6% of revenue, against a five-year pooled average of 4.9%. I use 4.0% to allow for site expansion and field-service hardware."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our top client accounted for an aggregate of 26% of our revenue for the fiscal year ended December 31, 2025"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin and growth need a long fade because AI-driven change in demand makes the normal level uncertain, and the top client is 26% of revenue and could shift the mix."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Operating income | 140,626 | 92,424 | 48,202 | 52.2%"
+       },
+       {
+        "id": "P2",
+        "quote": "increasing reliance on technology and AI to improve customer experience and automate tasks;"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2022-2025 margins ranged from about 8.7% to 11.9%, centred near 10%. The business is labor-heavy with price pressure and AI substitution risk, so I fade toward the historical median rather than holding the 2025 peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 36,515 | 37,941 | 104,034 | 102,541"
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA Margin1 | ~19.5% | ~19.0%"
+       },
+       {
+        "id": "P4",
+        "quote": "The increase was primarily driven by higher personnel costs of $13.3 million associated with increased headcount and the operating shift to higher cost geographies."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 operating income was 104,034 on 929,868 revenue, about 11.2%, below the 11.9% of 2025. Guided Adjusted EBITDA margin of about 19.0% is below 2025's level, and cost pressure from higher-cost geographies continues, so I keep margins near 11% and drifting down slightly."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.7258"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light, with a base-year return on tangible capital of 0.7258, but competition and client price pressure should compress returns on new investment. I use 0.30, well above the 0.1087 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenue growth (YoY) at midpoint | 2.3% | 5.6%"
+       },
+       {
+        "id": "P4",
+        "quote": "Trust & Safety | 63,867 | 75,826 | (11,959) | (15.8)%"
+       },
+       {
+        "id": "P4",
+        "quote": "AI Services | 74,959 | 58,678 | 16,281 | 27.7%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 follows the company's raised guidance of about 5.6% growth, with Q4 guided to only 2.3%. After that, AI Services growth near 28% and Digital CX growth near 7% are weighed against a Trust & Safety decline and the risk that clients automate work or the largest client shrinks."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A global outsourcing business in structural transition should not outgrow the long-run nominal anchor, so I set it slightly below that anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "The largest client, 26% of revenue, cuts volume or automates work with generative AI, and Trust & Safety keeps shrinking"
+     },
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_op_margin",
+      "risk": "Higher-cost geography and field-service mix keeps cost of services growing faster than revenue and compresses margins"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Competition and AI automation pressure pricing and reduce the return on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.088,
+      "rev_growth": [
+       0.021000000000000005,
+       0.025,
+       0.025,
+       0.017,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.028
+     },
+     "bull": {
+      "long_run_op_margin": 0.118,
+      "rev_growth": [
+       0.086,
+       0.09,
+       0.09,
+       0.08199999999999999,
+       0.075
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $241.4 million predates the March 2026 refinancing, which put in a $500.0 million term loan and raised long-term debt from 219,798 to 462,897 (thousands)."
+     },
+     "margin_position": "The 2025 GAAP operating margin of about 11.9% is at the top of the company's 2022-2025 range of roughly 8.7% to 11.9%. It was helped by strong AI Services growth and lower litigation and stock-based compensation costs. In 2026 the margin is slipping because cost of services is growing faster than revenue as delivery shifts to higher-cost geographies and field services.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 25.2% base-year rate compares with a 19.1% Q3 2026 rate that reflects removal of the Base Erosion and Anti-Abuse Tax, so the sustainable rate is somewhere between the two."
+     },
+     "why": "2025 revenue grew 19.0%, but 2026 guidance implies only about 5.6%, with Q4 guided at 2.3%. The 2025 margin was a recent high and is already eroding, with nine-month 2026 operating income roughly flat on 6.8% revenue growth. Revenue growth rests on AI Services, offset by Trust & Safety declines and heavy concentration in one client."
+    },
+    "value_at_old_defaults": 13.917960984528817,
+    "values": {
+     "base": 16.39126492382223,
+     "bear": 13.236241440844713,
+     "bull": 20.617164414930237
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 13.917960984528817,
+  "value_at_old_defaults_quoted": 13.917960984528817,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1516291093.024137,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 93025189.0,
@@ -15,7 +480,7 @@
   "In conjunction with the Special Dividend, TaskUs made proportionate adjustments to outstanding equity awards under its incentive plans, resulting in $1.2 million of stock-based compensation expense and a $6.7 million reclassification from additional paid-in capital to accrued payroll and employee-related liabilities."
  ],
  "in_code_book": false,
- "ke": 0.11114375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 833841007,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +488,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 13.936994301329218,
-  "3000": 13.936994301329218
+  "1000": 16.208316099853782,
+  "3000": 16.39126492382223
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1153,155 +1618,17 @@
   ]
  },
  "ticker": "TASK",
- "upside": 0.5548426115880307,
- "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.0560 valued at 0.0681",
-   "margin_at_record_peak: normalized.margin 0.1059 at or above the record's p75 0.1028",
-   "margin_at_record_peak: long_run_op_margin 0.1059 at or above the record's p75 0.1028"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s48",
-     "P6.s40",
-     "P4.s68"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s55",
-     "F3"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "down",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Unaudited Condensed Consolidated Statements of Cash Flows - USD ($) $ in Thousands | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nCash flows from operating activities:\nNet income | $ 72,516 | $ 72,570\nAdjustments to reconcile net income to net cash provided by operating activities:\nDepreciation | 34,996 | 30,652\nAmortization of intangibles | 15,011 | 14,978\nAmortization of debt financing fees | 1,567 | 447\nLoss (gain) on disposal of assets | 2,729 | (49)\nProvision for credit losses | 446 | 678\nDeferred taxes | (402) | (3,231)\nStock-based compensation expense | 14,538 | 23,428\nChanges in operating assets and liabilities:\nAccounts receivable | (12,917) | (38,781)\nPrepaid expenses and other current assets | (3,876) | 6,035\nOperating lease right-of-use assets | 17,201 | 15,306\nOther noncurrent assets | (1,760) | (2,798)\nAccounts payable and accrued liabilities | (5,698) | (10,633)\nAccrued payroll and employee-related liabilities | 5,885 | 15,717\nOperating lease liabilities | (17,782) | (13,759)\nIncome tax payable | (7,559) | (2,455)\nDeferred revenue | 4,991 | (475)\nOther noncurrent liabilities | 205 | (81)\nNet cash provided by operating activities | 120,091 | 107,549\nCash flows from investing activities:\nPurchase of property and equipment | (29,362) | (43,753)\nNet cash used in investing activities | (29,362) | (43,753)\nCash flows from financing activities:\nProceeds from long-term debt | 500,000 | 0\nPayments for deferred business acquisition consideration | 0 | (150)\nPayments on long-term debt | (248,238) | (10,125)\nPayments for debt financing fees | (9,914) | 0\nProceeds from employee stock plans | 120 | 8,462\nPayments for taxes related to net share settlement | (5,374) | (9,907)\nPayments for stock repurchases | 0 | (27,783)\nDistribution of dividends | (332,788) | 0\nNet cash used in financing activities | (96,194) | (39,503)\nIncrease (decrease) in cash and cash equivalents | (5,465) | 24,293\nEffect of exchange rate changes on cash | (16,521) | (6,478)\nCash and cash equivalents at beginning of period | 211,676 | 192,166\nCash and cash equivalents at end of period | $ 189,690 | $ 209,981"
-   },
-   "P4.s68": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Trust & Safety | 63,867 | 75,826 | (11,959) | (15.8)%"
-   },
-   "P6.s40": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "\"As a result, we are increasing our full-year 2026 revenue range to between $1.249 billion and $1.251 billion and expect to earn full-year Adjusted EBITDA margins of approximately 19% at the midpoint of our revenue guidance."
-   },
-   "P6.s48": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "Revenue growth (YoY) at midpoint | 2.3% | 5.6%"
-   },
-   "P6.s55": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "At the midpoint of our guidance, net cash provided by operating activities for the full year 2026 is expected to be approximately $165 million and purchase of property and equipment is expected to be approximately $45 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.04907040479559975,
-    0.04907040479559975,
-    0.04907040479559975,
-    0.04907040479559975,
-    0.04907040479559975
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.10585363086251826,
-   "normalized.margin": 0.10585363086251826,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.11188039592716385,
-   "op_margin.y2": 0.10585363086251826,
-   "rev_growth.y1": 0.0680882297198111,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10851165934336794
-  },
-  "numbers": {
-   "capex": [
-    0.03600502249901048,
-    0.0392713680731578,
-    0.04253771364730512,
-    0.045804059221452434,
-    0.04907040479559975
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.10585363086251826,
-   "normalized.margin": 0.10585363086251826,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.11188039592716385,
-   "op_margin.y2": 0.10585363086251826,
-   "rev_growth.y1": 0.055999999999999994,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10851165934336794
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.055999999999999994,
-    "model_option": "guidance",
-    "record": 0.0680882297198111,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "guidance",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The filings and release provide no revenue, operating margin, or capital expenditure guidance beyond the fourth quarter and full year of the current fiscal year.",
-   "The evidence does not establish when revenue declines at the largest client and in Trust & Safety will stabilize, or whether client generative AI automation initiatives will reduce demand faster than AI Services expands.",
-   "Management guides only non-GAAP Adjusted EBITDA margin rather than GAAP operating margin and states that GAAP reconciliations cannot be calculated without unreasonable effort.",
-   "The multi-year margin and capital intensity impact of shifting delivery toward the United States and autonomous-vehicle field services is not quantified beyond recent quarterly commentary."
-  ],
-  "year": 3
- },
- "value_base": 13.936994301329218,
- "value_bear": 13.369025849088407,
- "value_bull": 14.80203427947434,
+ "upside": 0.8184415017911646,
+ "valuation": null,
+ "value_base": 16.299790511838005,
+ "value_bear": 13.295370284577146,
+ "value_bull": 20.593366692155307,
  "value_per_filed_share": {
-  "base": 13.936994301329218,
-  "bear": 13.369025849088407,
-  "bull": 14.80203427947434
+  "base": 16.299790511838005,
+  "bear": 13.295370284577146,
+  "bull": 20.593366692155307
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +17.2 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +24.8 points a year against the required return over 3 years"
 }

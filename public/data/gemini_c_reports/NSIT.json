@@ -1,11 +1,520 @@
 {
- "alpha_pts": -21.347117131848016,
+ "alpha_pts": -14.47408339439256,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 117,
  "claims_supported": 111,
  "date": "2026-11-16T13:09:24Z",
- "equity_value": 2671756859.1985383,
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0909 (equity return r 0.1113), F 10",
+  "run_gap": 0.015851280510767087,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 25100000.0,
+       "printed": 25.1,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a net loss on the revaluation of warrant settlement liabilities of $25.1 million recorded in 2025"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Net loss on revaluation of warrant settlement liabilities in other expense, non-recurring after the 2025 warrant settlement"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 358020000.0,
+     "excess_cash_before": 358020000.0,
+     "k0_after": 98558735.1566265,
+     "k0_before": 123658735.1566265,
+     "k0_interest": 84846000.0,
+     "one_offs_charge": 25100000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 234813204.73368934,
+     "x0_before": 215991089.92618573
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2606999698.6952925,
+     "seam_ratio": 1.0120381226586985,
+     "tv_share": 0.28838784277014357,
+     "wedge_rate_5": 0.0009916833569665613
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.0045,
+     "fade_years": 10,
+     "long_run_op_margin": 0.042,
+     "op_margin": [
+      0.04,
+      0.042,
+      0.043,
+      0.043,
+      0.043
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.13,
+      0.05,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0909 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 111
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.036,
+      0.048
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.07
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (21,012) | (17,551)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0051"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital spending is light: nine-month 2026 purchases were $21.0M on $7.0B of sales (about 0.3%), against a five-year pooled ratio of 0.51%. I use 0.45% as a blend."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years reflects a fragmented, competitive industry where pricing pressure and vendor direct-sales erode the services mix advantage only gradually."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Earnings from operations decreased to $334.9 million in 2025, a decrease of 14% compared to the prior year, which represented 4.1% of net sales."
+       },
+       {
+        "id": "P3",
+        "quote": "Consolidated gross margin expanded approximately 110 basis points to a record 21.4% of net sales in 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "GAAP margin was 4.5% in 2023-24 and 4.1% in 2025, with acquisition amortization of about $83M a year weighing on it. A long-run 4.2% sits near the middle of the 2023-26 range, with partial credit for services mix. Partner incentive changes and aggressive pricing limit upside."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Earnings from operations | 2.8 | 4.6 | 3.9 | 3.9"
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted earnings from operations of $166.9 million, or 6.8% of net sales, increased 23% year over year"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month GAAP margin is 3.9%, flat on last year, because adjusted gains were absorbed by earnouts and severance. The voluntary separation program should bring some savings in later years, and services mix helps gross margin, so a modest rise to about 4.3% is assumed. Hardware mix and earnout charges cap the improvement."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2649"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0909."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 26.5% reflects a capital-light, payables-funded model, but returns should fade on a competitive reseller business that also pays for acquisitions. I assume 18%, well above the 9.1% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net sales of $7.0 billion for the nine months ended September 30, 2026 increased 12%, year over year"
+       },
+       {
+        "id": "P4",
+        "quote": "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 growth is 12% and Q3 growth is 22%, so FY2026 should land near 13% with Q4 slowing against tougher comps. Hardware is boosted by memory-driven pricing and devices, and acquisitions add inorganic growth. Growth should fade toward 3% because software is shrinking, the company has no long-term vendor contracts, and the memory shortage is constraining supply."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Our 2025 net sales of $8.2 billion represented less than 1% of that highly diverse market."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Insight is under 1% of a fragmented, growing IT market, so growth can track nominal GDP and IT spending. I set it slightly below the 3.75% anchor because the business is a low-moat reseller exposed to vendor disintermediation."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.034,
+      "input_hit": "long_run_op_margin",
+      "risk": "Partner incentive changes (Microsoft, about 32% of purchases) or vendor direct sales cut services gross margin and GAAP margin"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Hardware demand reverses once the memory-driven pricing and refresh cycle fades, and software keeps shrinking"
+     },
+     {
+      "bear_value": 0.036,
+      "input_hit": "op_margin",
+      "risk": "Further earnout and severance charges keep GAAP margin depressed"
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Competition erodes returns on new capital and acquisitions"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.036,
+      "rev_growth": [
+       0.1,
+       0.020000000000000004,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.048,
+      "rev_growth": [
+       0.17,
+       0.09000000000000001,
+       0.07,
+       0.07,
+       0.07
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is mostly variable-rate ABL borrowing that rose to $1,498.9M while buybacks continue, so the level is plausible relative to a $8-9B revenue base but is trending up."
+     },
+     "margin_position": "The GAAP operating margin of 4.1% in 2025 is below the 4.5% of 2023-24 and well below the roughly 6% adjusted margin. GAAP is depressed by about $83M a year of acquisition amortization, earnout revaluations, severance and stock compensation. Gross margin is at a record 21.4% because of the mix shift to services. Opex has grown faster than gross profit.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2025 rate was 30.3% on non-deductible earnout and warrant losses and the nine-month 2026 rate is about 35%, so the sustainable rate depends on whether earnout charges keep recurring."
+     },
+     "why": "FY2025 revenue fell 5% while 2026 is running well ahead: nine-month sales rose 12% and Q3 rose 22%, helped by hardware demand, memory-driven pricing and the Sekuro and Inspire11 acquisitions. The 2025 GAAP margin carried a $25.1M warrant loss (non-operating), a $12.6M real estate impairment and $37.1M of severance. The base year therefore understates the current run-rate of sales but not necessarily GAAP margin. Year 1 growth is far above the base year; later years should normalise toward low single digits."
+    },
+    "value_at_old_defaults": 82.46823416303607,
+    "values": {
+     "base": 99.47840061661073,
+     "bear": 80.39270144251475,
+     "bull": 136.30587257817191
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 25100000.0,
+       "printed": 25.1,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a net loss on the revaluation of warrant settlement liabilities of $25.1 million recorded in 2025"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Net loss on revaluation of warrant settlement liabilities in 2025, in other (income) expense, net"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 358020000.0,
+     "excess_cash_before": 358020000.0,
+     "k0_after": 98558735.1566265,
+     "k0_before": 123658735.1566265,
+     "k0_interest": 84846000.0,
+     "one_offs_charge": 25100000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 234813204.73368934,
+     "x0_before": 215991089.92618573
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2560867644.676691,
+     "seam_ratio": 1.0071967697757294,
+     "tv_share": 0.3386904031760889,
+     "wedge_rate_5": 0.0008479410730984825
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.004,
+     "fade_years": 8,
+     "long_run_op_margin": 0.041,
+     "op_margin": [
+      0.039,
+      0.041,
+      0.042,
+      0.042,
+      0.042
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.14,
+      0.05,
+      0.04,
+      0.035,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0909 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 111
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.034,
+      0.05
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.07
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (21,012) | (17,551)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0051"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capital spending is light: nine-month 2026 capex of $21.0M is about 0.3% of sales. I use 0.4%, slightly above the recent run-rate and below the pooled average."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The IT industry is very fragmented and highly competitive."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The competitive, fragmented market and the shift of mix toward services point to a moderate fade of about eight years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "We believe this trend could continue into future periods as we focus on selling solutions and increasing our services net sales."
+       },
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $9,175.8 million | -0.1203 | 0.0458"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Services mix supports gross margin, but the company faces aggressive pricing, partner incentive changes and heavy earnout and amortization charges. The margin sits above the long-run median, so I expect only part of the gap to persist, giving about 4.1%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Earnings from operations | 2.8 | 4.6 | 3.9 | 3.9"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $8,247.2 million | -0.0522 | 0.0406"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month GAAP margin is 3.9%, held down by earnout and severance charges, with the voluntary separation program adding cost in Q3. I assume a gradual recovery to about 4.2% as services mix rises and one-offs ease."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2649"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0909."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is capital-light, which gives a high measured return on tangible capital. Competition and acquisition-driven growth should erode returns on new investment well below that level, but they stay above the 9.1% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net sales of $2.4 billion increased 22% compared to the three months ended September 30, 2025."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $8,247.2 million | -0.0522 | 0.0406"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is fiscal 2026. Nine-month sales are up 12% and Q3 is up 22%, driven by hardware and services plus Sekuro. I assume about 14% for the full year, then a fade as hardware refresh and memory-driven pricing normalise and software keeps migrating to net-reported cloud."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is a mature reseller and integrator in a fragmented market, so I set growth slightly below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Hardware and infrastructure demand reverses once the memory-chip price effect and refresh cycle pass, or partner incentives are cut, so growth and margin fall."
+     },
+     {
+      "bear_value": 0.032,
+      "input_hit": "long_run_op_margin",
+      "risk": "Partner incentive cuts, pricing pressure and persistent earnout and severance charges hold the operating margin near its long-run median."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Competition and acquisition-driven growth push returns on new investment down toward the break-even level."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.034,
+      "rev_growth": [
+       0.11000000000000001,
+       0.020000000000000004,
+       0.010000000000000002,
+       0.0050000000000000044,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       0.17,
+       0.08000000000000002,
+       0.07,
+       0.065,
+       0.060000000000000005
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is ABL-heavy and rising with receivables, from $1,361.3M at year-end 2025 to $1,498.9M at 30 September 2026, so it is likely to scale with sales rather than stay fixed."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 4.06% is above the 2009-2025 median of about 3%. It is below the 2023 peak of 4.58%. Gross margin is at a record because services are a larger share of the mix, but GAAP earnings are depressed by earnout revaluations, severance and amortization. Interest and tax costs weigh further on net earnings.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The FILED RECORD rate of 0.2501 is below the 30.3% effective rate reported for 2025, which was raised by non-deductible earnout and warrant losses, so the sustainable rate is uncertain."
+     },
+     "why": "2025 was a year of falling sales, down 5%. It included a $25.1M warrant loss, a $12.6M real estate impairment and $37.1M of severance. In 2026 sales are growing strongly, up 22% in Q3, helped by hardware demand and acquisitions. The base year therefore understates the current revenue level and mixes in one-off items."
+    },
+    "value_at_old_defaults": 82.46823416303607,
+    "values": {
+     "base": 97.91393993622083,
+     "bear": 77.77983176666882,
+     "bull": 133.55457019829245
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 82.46823416303607,
+  "value_at_old_defaults_quoted": 82.46823416303607,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 3192525019.9312215,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 32347000.0,
@@ -15,7 +524,7 @@
   "In the third quarter, the APAC segment recorded a 36,875 change in fair value of earnout liabilities (table in thousands), and APAC GAAP earnings from operations were $(22,302)."
  ],
  "in_code_book": false,
- "ke": 0.11114375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 4503651434,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +532,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 82.59674341356349,
-  "3000": 82.59674341356349
+  "1000": 99.47840061661073,
+  "3000": 97.91393993622083
  },
- "seeds_agree": true,
+ "seeds_agree": false,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1407,102 +1916,17 @@
   ]
  },
  "ticker": "NSIT",
- "upside": -0.40675762803748583,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: rev_growth.y1 0.1242"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.00507853296817435,
-    0.00507853296817435,
-    0.00507853296817435,
-    0.00507853296817435,
-    0.00507853296817435
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.0406106087171615,
-   "normalized.margin": 0.0406106087171615,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03893532394134992,
-   "op_margin.y2": 0.0406106087171615,
-   "rev_growth.y1": 0.12423367242130556,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09072916491648661
-  },
-  "numbers": {
-   "capex": [
-    0.00507853296817435,
-    0.00507853296817435,
-    0.00507853296817435,
-    0.00507853296817435,
-    0.00507853296817435
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.0406106087171615,
-   "normalized.margin": 0.0406106087171615,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03893532394134992,
-   "op_margin.y2": 0.0406106087171615,
-   "rev_growth.y1": 0.12423367242130556,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09072916491648661
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The 8-K says Insight raised its full-year 2026 outlook, but the guidance figures were cut from the packet, so no full-year revenue, margin or capex guidance can be cited.",
-   "Fourth-quarter 2026 results are not in the evidence, so full-year 2026 revenue growth and operating margin are not known.",
-   "The evidence does not show how long the earnout revaluation charges, the voluntary separation program costs or the memory chip shortage will last, or how large their effect on 2027 and later will be.",
-   "The evidence does not separate organic growth from growth contributed by the Inspire11 and Sekuro acquisitions for the nine months ended September 30, 2026."
-  ],
-  "year": 3
- },
- "value_base": 82.59674341356349,
- "value_bear": 78.9778554370684,
- "value_bull": 85.52769004506523,
+ "upside": -0.291125197694147,
+ "valuation": null,
+ "value_base": 98.69617027641578,
+ "value_bear": 79.08626660459178,
+ "value_bull": 134.93022138823218,
  "value_per_filed_share": {
-  "base": 82.59674341356349,
-  "bear": 78.9778554370684,
-  "bull": 85.52769004506523
+  "base": 98.69617027641578,
+  "bear": 79.08626660459178,
+  "bull": 134.93022138823218
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -21.3 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -14.5 points a year against the required return over 3 years"
 }

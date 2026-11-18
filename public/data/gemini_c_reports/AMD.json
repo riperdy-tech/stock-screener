@@ -1,11 +1,500 @@
 {
- "alpha_pts": -66.08416597598216,
+ "alpha_pts": -24.552251421513752,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 131,
  "claims_supported": 126,
  "date": "2026-11-16T10:48:47Z",
- "equity_value": 55319077165.47369,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.2300 (filed -0.1948 to 0.2220)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.2550 (filed -0.1948 to 0.2220)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.2650 (filed -0.1948 to 0.2220)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.2700 (filed -0.1948 to 0.2220)",
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: Total debt in the record was $3.2B, but long-term debt has since risen to $7.1B after the $4.75B note issue and more leases and guarantees have been added.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.2300 (filed -0.1948 to 0.2220)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.2600 (filed -0.1948 to 0.2220)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.2800 (filed -0.1948 to 0.2220)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.2900 (filed -0.1948 to 0.2220)",
+   "run 3000: margin_outside_filed_record: long_run_op_margin 0.2500 (filed -0.1948 to 0.2220)",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Total debt has more than doubled from about $3.2B in the base year to $7.1B after the August 2026 note issue, and further commitments and guarantees are building.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.4431 and margin 0.1791, margin 0.0902 (persist), growth 0.0375, terminal RONIC 0.1113 (equity return r 0.1113), F 10",
+  "run_gap": 0.2800757006186885,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 10552000000.0,
+     "excess_cash_before": 10552000000.0,
+     "k0_after": -42244270.967741966,
+     "k0_before": -42244270.967741966,
+     "k0_interest": 131000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 3214695070.6938777,
+     "x0_before": 3214695070.6938777
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 239538428576.9511,
+     "seam_ratio": 1.1006990081834493,
+     "tv_share": 0.4204827070528956,
+     "wedge_rate_5": -0.02890981891469804
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y2 0.2300 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: op_margin.y3 0.2550 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: op_margin.y4 0.2650 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: op_margin.y5 0.2700 (filed -0.1948 to 0.2220)",
+     "base_year_not_representative",
+     "debt_level_representative_no: Total debt in the record was $3.2B, but long-term debt has since risen to $7.1B after the $4.75B note issue and more leases and guarantees have been added.",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.04,
+     "fade_years": 10,
+     "long_run_op_margin": 0.22,
+     "op_margin": [
+      0.19,
+      0.23,
+      0.255,
+      0.265,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.45,
+      0.35,
+      0.25,
+      0.17,
+      0.12
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.4431 and margin 0.1791, margin 0.0902 (persist), growth 0.0375, terminal RONIC 0.1113 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 126
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.28
+     ],
+     "rev_growth_y3": [
+      0.12,
+      0.38
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (1,845) | (752)"
+       },
+       {
+        "id": "P7",
+        "quote": "Capital expenditures | $648 | $808 | $258 | $1,845 | $752"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 5-year pooled capex ratio of 2.4% understates the current build: nine-month capex of $1,845M is about 5% of revenue and is more than double last year's. I assume 4% as revenue scales."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The semiconductor industry is highly cyclical and has experienced significant downturns"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years lets growth and margin fade gradually from a high-growth, cyclical AI-driven position toward a mature state."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The semiconductor industry is highly cyclical and has experienced significant downturns"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-27 | $34,639.0 million | 0.3434 | 0.1066"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Semiconductors are cyclical, and a margin well above the company's own median usually retains only about half the gap. AMD's mix is shifting structurally to AI data center products, so I place the long-run margin well above the old median but below the year 5 peak. The wide range reflects pricing pressure from Nvidia, Intel, Arm and customers' own chips."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Operating margin | 21% | 14% | Up 7 ppts | 17% | Up 4 ppts"
+       },
+       {
+        "id": "P7",
+        "quote": "we are confident in our ability to sustain very strong revenue growth and expanding profitability over the coming years"
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $23,601.0 million | 0.4361 | 0.0536"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "GAAP operating margin has risen from 14% to 21% year over year, with Q2 at 17%. Management cites operating leverage as Data Center scales, so I assume a steady rise from about 19% in FY2026 to 27% by year 5. I stop short of management's confident outlook because the 2022 margin was only 5.4% and the industry is cyclical."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.3203; tax rate 0.1396; total debt $3,222.0 million"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1113."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 32%, but new investment faces competitive pressure and heavier capital needs, such as rising capex, leases and compute commitments. I assume the return fades toward, but stays above, the 11.1% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net revenue | $ 13,377 | $ 9,246 | $ 35,166 | $ 24,369"
+       },
+       {
+        "id": "P7",
+        "quote": "we expect growth to accelerate further in the fourth quarter"
+       },
+       {
+        "id": "P4",
+        "quote": "Data Center net revenue of $21.0 billion for the nine months ended September 26, 2026 increased by 87%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 revenue of $35.2B already exceeds all of FY2025, and management guides to faster Q4 growth, so year 1 is about 45%. Growth then fades as the MI450/Helios ramp and the OpenAI 6 GW deployment mature, with customer concentration and data center buildout risk limiting the later years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "I use a value slightly below the long-run nominal growth anchor, since AMD will be a very large company by then."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "rev_growth",
+      "risk": "AI accelerator demand or customer financing and buildout stalls, and the cyclical downturn hits because AMD depends on a few customers."
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "Competition from Nvidia, custom silicon and Arm, plus memory costs or export controls, compress margins back toward the historical median."
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Large capex, lease, compute-capacity commitments and partner guarantees lower returns on new capital."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.32,
+       0.21999999999999997,
+       0.12,
+       0.04000000000000001,
+       -0.010000000000000009
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.28,
+      "rev_growth": [
+       0.5800000000000001,
+       0.48,
+       0.38,
+       0.30000000000000004,
+       0.25
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Total debt in the record was $3.2B, but long-term debt has since risen to $7.1B after the $4.75B note issue and more leases and guarantees have been added."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 10.7% sits above AMD's own five-year median of about 7%, but it is climbing quickly. The 9-month 2026 margin is about 18%, and Q3 2026 was 21%, because high-margin Data Center revenue is scaling against slower-growing operating expenses. Acquisition amortization and stock compensation (the All Other loss of $1,076M in Q3) still depress the GAAP margin.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 13.96% rate in the record is close to the 13% normalized non-GAAP rate AMD projects for fiscal 2026, although reported GAAP tax has swung with one-time benefits."
+     },
+     "why": "FY2025 revenue of $34.6B is already far below the 9-month 2026 revenue of $35.2B, so the base year understates the current run rate. Data Center revenue is up 97% year over year and the company guides to accelerating Q4 growth. The base year also carries MI308 inventory charges and an unusual tax benefit."
+    },
+    "value_at_old_defaults": 31.377264671927517,
+    "values": {
+     "base": 167.25142169031847,
+     "bear": 66.83476232673914,
+     "bull": 480.35288175213077
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 10552000000.0,
+     "excess_cash_before": 10552000000.0,
+     "k0_after": -42244270.967741966,
+     "k0_before": -42244270.967741966,
+     "k0_interest": 131000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 3214695070.6938777,
+     "x0_before": 3214695070.6938777
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 320681397567.28186,
+     "seam_ratio": 1.1237048962865723,
+     "tv_share": 0.4457593865434766,
+     "wedge_rate_5": -0.04379434504604207
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y2 0.2300 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: op_margin.y3 0.2600 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: op_margin.y4 0.2800 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: op_margin.y5 0.2900 (filed -0.1948 to 0.2220)",
+     "margin_outside_filed_record: long_run_op_margin 0.2500 (filed -0.1948 to 0.2220)",
+     "base_year_not_representative",
+     "debt_level_representative_no: Total debt has more than doubled from about $3.2B in the base year to $7.1B after the August 2026 note issue, and further commitments and guarantees are building.",
+     "confidence_low",
+     "quotes_verified: 10 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.04,
+     "fade_years": 10,
+     "long_run_op_margin": 0.25,
+     "op_margin": [
+      0.19,
+      0.23,
+      0.26,
+      0.28,
+      0.29
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.46,
+      0.42,
+      0.3,
+      0.2,
+      0.14
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.4431 and margin 0.1791, margin 0.0902 (persist), growth 0.0375, terminal RONIC 0.1113 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 126
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.17,
+      0.31
+     ],
+     "rev_growth_y3": [
+      0.15,
+      0.4
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (1,845) | (752)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0236"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month capex of $1,845M is 5.2% of revenue, versus a 2.4% pooled average, as AMD builds out AI infrastructure and rack-scale capacity. I assume 4% for the next five years, between the pooled and current levels."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Competition is expected to remain intense, driven by rapid technological change"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competition from Nvidia, Intel, Arm and customers' own chips should erode excess growth and margin over about a decade rather than abruptly."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $23,601.0 million | 0.4361 | 0.0536"
+       },
+       {
+        "id": "P2",
+        "quote": "The semiconductor industry is highly cyclical and has experienced severe downturns."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "AMD's history is cyclical, with margins from -19% to 22% and a 5-year median near 7%. The base rate says a margin above the median keeps about half of the gap, but the Data Center mix shift is structural. I fade to 25% GAAP, below current non-GAAP margins near 29%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "Operating margin | 21% | 14% | Up 7 ppts | 17% | Up 4 ppts"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "GAAP operating margin rose from 14% to 21% year over year in Q3 on Data Center mix, and nine months is about 18%. Fiscal 2026 should land near 19%, with further operating leverage in later years as Data Center scales while acquisition amortization declines."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.3203"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1113."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 32%, but the company is now investing heavily in capacity, leases and acquisitions. Competition should pull returns toward the 11% hurdle, so I assume 25%, well above the hurdle given the franchise."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "we are confident in our ability to sustain very strong revenue growth and expanding profitability over the coming years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is $35.2B versus $24.4B a year earlier, and management guides to accelerating Q4 growth. Fiscal 2026 growth of roughly 46% is largely locked in. Growth decays as the MI450/Helios ramp matures and the law of large numbers and customer concentration bite."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature semiconductor leader should grow near nominal GDP in perpetuity. I set it slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "rev_growth",
+      "risk": "AI accelerator demand stalls or a key customer (for example OpenAI) cuts orders, or data center buildouts are delayed"
+     },
+     {
+      "bear_value": 0.17,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin reverts toward the historical median through Nvidia and custom-silicon competition, memory costs, or export controls"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "terminal_growth",
+      "risk": "Lower long-run nominal growth after the AI buildout cycle"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.31000000000000005,
+       0.27,
+       0.15,
+       0.05000000000000002,
+       -0.009999999999999981
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.31,
+      "rev_growth": [
+       0.56,
+       0.52,
+       0.4,
+       0.30000000000000004,
+       0.24000000000000005
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Total debt has more than doubled from about $3.2B in the base year to $7.1B after the August 2026 note issue, and further commitments and guarantees are building."
+     },
+     "margin_position": "The 2025 GAAP margin of 10.7% was depressed by about $2.3B of acquisition amortization, about $1.6B of stock-based compensation, and the MI308 export charges. The margin has since risen to 21% in Q3 2026 (17.9% for nine months) as higher-margin Data Center revenue scales. It is still well above the 5-year median of about 7%, but the mix has changed structurally.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "Reported GAAP tax has swung through benefits and one-time releases, while management uses a 13% normalized rate, and global minimum tax rules could push the long-run rate higher."
+     },
+     "why": "Base-year 2025 revenue of $34.6B is already exceeded by nine-month 2026 revenue of $35.2B, with Q3 growing 45% year over year. The 2025 margin of 10.7% understates the current run-rate of 21%. Year 1 (fiscal 2026) should therefore sit well above the base year on both growth and margin. The semiconductor cycle and heavy customer concentration argue for a fade rather than extrapolating the current peak."
+    },
+    "value_at_old_defaults": 31.377264671927517,
+    "values": {
+     "base": 221.72249245341888,
+     "bear": 76.76107942713348,
+     "bull": 502.4732794618248
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 31.377264671927517,
+  "value_at_old_defaults_quoted": 31.377264671927517,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 318180661769.57715,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 1636000000.0,
@@ -15,7 +504,7 @@
   "AMD entered into definitive agreements to acquire Taalas Inc. and World Labs Technologies, Inc.; closing is expected in the fourth fiscal quarter, subject to approvals."
  ],
  "in_code_book": false,
- "ke": 0.11114375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 833176575287,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +512,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 33.81361684931154,
-  "3000": 33.81361684931154
+  "1000": 167.25142169031847,
+  "3000": 221.72249245341888
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1603,172 +2092,17 @@
   ]
  },
  "ticker": "AMD",
- "upside": -0.9336046177889504,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: rev_growth.y1 0.4431"
-  ],
-  "departures": [
-   {
-    "driver": "backlog",
-    "evidence": [
-     "P1.s55",
-     "P3.s42",
-     "P7.s16"
-    ],
-    "input": "rev_growth.y2"
-   },
-   {
-    "driver": "mix",
-    "evidence": [
-     "P4.s24",
-     "P7.s17",
-     "P7.s105"
-    ],
-    "input": "op_margin.y2"
-   },
-   {
-    "driver": "capex_program",
-    "evidence": [
-     "F3",
-     "P7.s97"
-    ],
-    "input": "capex"
-   }
-  ],
-  "directions": {
-   "capex": "up",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "up",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F3": {
-    "kind": "statement",
-    "period": "2026-09-26",
-    "text": "Condensed Consolidated Statements of Cash Flows - USD ($) $ in Millions | 9 Months Ended\nSep. 26, 2026 | Sep. 27, 2025 | Dec. 27, 2025 | Dec. 28, 2024\nCash flows from operating activities:\nNet income | $ 6,108 | $ 2,824\nIncome from discontinued operations, net of tax | (3) | (175)\nAdjustments to reconcile net income to net cash provided by operating activities:\nDepreciation and amortization | 666 | 556\nAmortization of acquisition-related intangibles | 1,629 | 1,697\nStock-based compensation | 1,513 | 1,152\nGains from long-term investments, net | (616) | (61)\nNon-cash impact of warrants issued to customers, net | 1,179 | 0\nDeferred income taxes | (427) | 18\nRecovery of inventory loss at contract manufacturer | 0 | (67)\nOther | 105 | 90\nChanges in operating assets and liabilities:\nAccounts receivable, net | (2,894) | (7)\nInventories | (3,543) | (1,579)\nPrepaid expenses and other assets | (2,061) | (259)\nAccounts payable | 4,483 | 998\nAccrued and other liabilities | 384 | (998)\nCash Provided by (Used in) Operating Activity, Continuing Operation, Total | 6,523 | 4,189\nCash Provided by (Used in) Operating Activity, Discontinued Operation | 0 | 920\nNet cash provided by operating activities of continuing operations | 6,523 | 5,109\nCash flows from investing activities:\nPurchases of property and equipment | (1,845) | (752)\nPurchases of short-term investments | (6,754) | (2,110)\nProceeds from maturity of short-term investments | 3,044 | 982\nProceeds from sale of short-term investments | 366 | 66\nPurchases of long-term investments | (1,082) | (432)\nAcquisitions, net of cash acquired | (129) | (1,716)\nPayment for (Proceeds from) Other Investing Activity | (15) | 0\nNet cash used in investing activities of continuing operations | (6,415) | (3,962)\nPurchases of property and equipment | (30)\nPayment for working capital adjustment on divestiture | (243) | 0\nNet cash used in investing activities of discontinued operations | (243) | (30)\nNet cash used in investing activities | (6,658) | (3,992)\nCash flows from financing activities:\nProceeds from debt and commercial paper issuance, net of issuance costs | 4,726 | 2,441\nRepayments of Commercial Paper | (875) | (950)\nProceeds from sales of common stock through employee equity plans | 210 | 169\nRepurchases of common stock | (221) | (1,316)\nStock repurchases for tax withholding on employee equity plans | (1,836) | (447)\nProceeds from (Payment for) Other Financing Activity | (21) | 0\nNet cash provided by (used in) financing activities of continuing operations | 1,983 | (103)\nNet increase in cash, cash equivalents and restricted cash | 1,848 | 1,014\nCash, cash equivalents and restricted cash at beginning of period | $ 5,556 | $ 3,811\nCash, cash equivalents and restricted cash at end of period | 7,404 | 4,825\nSupplemental cash flow information:\nIncome Tax Paid, after Refund Received | 833 | 818\nNon-cash investing and financing activities:\nPurchases of property and equipment, accrued but not paid | 505 | 153\nStock Issued During Period, Value, Treasury Stock Reissued | 860\nAsset Acquisition, Contingent Consideration, Liability | 361\nRight-of-Use Asset Obtained in Exchange for Operating Lease Liability | 1,498 | 275\nReconciliation of cash, cash equivalents and restricted cash\nCash and cash equivalents | 7,404 | 4,808\nRestricted cash included in Prepaid expenses and other current assets | 0 | 17\nCash, cash equivalents and restricted cash at end of period | $ 7,404 | $ 4,825"
-   },
-   "P1.s55": {
-    "kind": "annual_section",
-    "period": "2025-12-27",
-    "text": "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
-   },
-   "P3.s42": {
-    "kind": "annual_section",
-    "period": "2025-12-27",
-    "text": "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
-   },
-   "P4.s24": {
-    "kind": "quarterly_section",
-    "period": "2026-09-26",
-    "text": "Gross margin for the three months ended September 26, 2026 was 54% compared to gross margin of 52% for the prior year period, a 2 percentage point increase primarily driven by a favorable product mix, including higher Data Center segment revenue."
-   },
-   "P7.s105": {
-    "kind": "release",
-    "period": "2026-11-03",
-    "text": "12 | | Q3 2026 FINANCIAL RESULTS \u2013 November 3, 2026 Q3 2026 Segment Results $ in millions Q3\u201926 Q3\u201925 Y/Y Q2\u201926 Q/Q Data Center Net Revenue $8,546 $4,341 Up 97% $6,718 Up 27% Operating Income $2,882 $1,074 Up 168% $2,103 Up 37% Client & Gaming Net Revenue $3,722 $4,048 Down 8% $3,841 Down 3% Operating Income $573 $867 Down 34% $582 Down 2% Embedded Net Revenue $1,109 $857 Up 29% $977 Up 14% Operating Income $453 $283 Up 60% $386 Up 17%"
-   },
-   "P7.s16": {
-    "kind": "release",
-    "period": "2026-11-03",
-    "text": "With our leadership product portfolio and deep customer and supply chain relationships, we are confident in our ability to sustain very strong revenue growth and expanding profitability over the coming years.\u201d"
-   },
-   "P7.s17": {
-    "kind": "release",
-    "period": "2026-11-03",
-    "text": "\u201cThird quarter revenue grew 45% year-over-year to a record $13.4 billion, while non-GAAP earnings per share grew 74%, demonstrating the significant operating leverage in our business model as our Data Center business drives scale,\u201d said Jean Hu, AMD executive vice president, chief financial officer and treasurer."
-   },
-   "P7.s97": {
-    "kind": "release",
-    "period": "2026-11-03",
-    "text": "Capital expenditures | $648 | $808 | $258 | $1,845 | $752"
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.023607467983335906,
-    0.023607467983335906,
-    0.023607467983335906,
-    0.023607467983335906,
-    0.023607467983335906
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.09016452658163897,
-   "normalized.margin": 0.09016452658163897,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1790934425297162,
-   "op_margin.y2": 0.09016452658163897,
-   "rev_growth.y1": 0.44306290779268753,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.11114375453902048
-  },
-  "numbers": {
-   "capex": [
-    0.02811859464765149,
-    0.02811859464765149,
-    0.02811859464765149,
-    0.02811859464765149,
-    0.02811859464765149
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.09016452658163897,
-   "normalized.margin": 0.09016452658163897,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.1790934425297162,
-   "op_margin.y2": 0.10664280146655504,
-   "rev_growth.y1": 0.44306290779268753,
-   "rev_growth.y2": 0.24014134740574533,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.11114375453902048
-  },
-  "of_record": {},
-  "options": {
-   "capex": "record_last",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "record_median",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The numeric fourth-quarter 2026 outlook was cut from the earnings release, so no sentence gives a revenue or margin guidance figure for year 1. Management states only that growth is expected to accelerate in the fourth quarter.",
-   "The packet does not show the revenue timing or value of the 6 gigawatt OpenAI GPU agreement beyond the first gigawatt.",
-   "The fair value of the warrant liability for customer warrants is not given, nor the cause of the $902 million other expense in the third quarter.",
-   "The packet does not quantify the cloud compute capacity commitments, data center leases and guarantees of commercial partners' obligations.",
-   "The purchase prices of the pending Taalas and World Labs acquisitions are not disclosed in the evidence.",
-   "One other 8-K (0000002488-26-000121) was trimmed out of the packet, so its content is unknown."
-  ],
-  "year": 3
- },
- "value_base": 33.81361684931154,
- "value_bear": 30.91713984841412,
- "value_bull": 35.47975217442235,
+ "upside": -0.6181113689376407,
+ "valuation": null,
+ "value_base": 194.4869570718687,
+ "value_bear": 71.7979208769363,
+ "value_bull": 491.4130806069778,
  "value_per_filed_share": {
-  "base": 33.81361684931154,
-  "bear": 30.91713984841412,
-  "bull": 35.47975217442235
+  "base": 194.4869570718687,
+  "bear": 71.7979208769363,
+  "bull": 491.4130806069778
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -66.1 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -24.6 points a year against the required return over 3 years"
 }

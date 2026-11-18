@@ -1,11 +1,488 @@
 {
- "alpha_pts": -10.20003620062592,
+ "alpha_pts": -10.07676320533552,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 90,
  "claims_supported": 85,
  "date": "2026-11-16T15:22:56Z",
- "equity_value": 290700006.08912635,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0319 and margin 0.0605, margin 0.0670 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+  "run_gap": 0.08846354037924235,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 16678000.0,
+     "excess_cash_before": 16678000.0,
+     "k0_after": -638340.1480000019,
+     "k0_before": -638340.1480000019,
+     "k0_interest": 22000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 32653444.68739602,
+     "x0_before": 32653444.68739602
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 250093530.07792825,
+     "seam_ratio": 1.0266110153180554,
+     "tv_share": 0.33486455710245394,
+     "wedge_rate_5": 0.0009671544951789357
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.009,
+     "fade_years": 10,
+     "long_run_op_margin": 0.06,
+     "op_margin": [
+      0.063,
+      0.063,
+      0.062,
+      0.061,
+      0.06
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.03,
+      0.035,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0319 and margin 0.0605, margin 0.0670 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 85
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.045,
+      0.075
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0092"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex is small (about 0.9% of sales) for an asset-light importer and Mexico assembler, consistent with the 5-year pooled average and with FY2026 capex of $3.9 million."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The most significant drivers of variability in the financial outlook are consumer demand and logistics and material cost inflation"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets the tariff, freight and peso cost pressure play out, and lets growth settle to the terminal rate."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "deferrable purchases for consumers during economic downturns"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-06-30 | $459.2 million | 0.0410 | 0.0927"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Furniture is a cyclical, fragmented, deferrable-purchase industry, and the margin is above the 5-year median of roughly 4%. Over half of the gap should mean-revert, but the better mix and the adjusted 7.5% argue for a level above the median, so I use 6%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "operating margin of 6.5% to 7%"
+       },
+       {
+        "id": "P3",
+        "quote": "primarily driven by a 200-bps benefit from the International Emergency Economic Powers Act"
+       },
+       {
+        "id": "P9",
+        "quote": "$34.4 million or 7.5% of net sales for the year"
+       },
+       {
+        "id": "P3",
+        "quote": "scheduled to increase to 30% effective January 1, 2027"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Q1 was 6.0% and Q2 is guided to 6.5-7.0%. The FY2026 9.3% was inflated by the refund, adjusted FY2026 was 7.5%, and the 25% tariff rising to 30% plus doubled ocean rates pressure margins. I hold about 6.3% drifting down to 6.0%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2555"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 25.6%, flattered by the refund-inflated margin and by working capital funded through payables. Competition should erode returns, so I use 18%, still above the 10.6% hurdle but well below the base year."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "twelfth consecutive quarter of year-over-year growth"
+       },
+       {
+        "id": "P6",
+        "quote": "expects sales growth of 1% to 4%"
+       },
+       {
+        "id": "P4",
+        "quote": "Sales order backlog was $77.7 million as of the quarter ended September 30, 2026"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Growth has run for twelve straight quarters, backlog is up 8.2%, and Q2 is guided to 1-4% growth. The exit of the homestyles line drags on total growth, and discretionary demand is soft, so I use about 3-3.5%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "The furniture industry is very competitive and fragmented."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A mature US furniture maker with fragmented competition should grow around nominal GDP or a bit below. I use 3%, just under the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariff increase to 30% on seating, freight and fuel inflation, and peso losses compress margins more than assumed, or IEEPA refund claims are clawed back"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Weak consumer confidence and affordability constraints stall demand for deferrable furniture"
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Competition from larger players erodes returns on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.045,
+      "rev_growth": [
+       -0.0050000000000000044,
+       0.0,
+       0.0,
+       -0.0050000000000000044,
+       -0.0050000000000000044
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.075,
+      "rev_growth": [
+       0.049999999999999996,
+       0.055,
+       0.055,
+       0.049999999999999996,
+       0.049999999999999996
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "The company carries no funded debt and has an undrawn revolver, and its leverage is operating leases, so zero debt is a reasonable steady level."
+     },
+     "margin_position": "The FY2026 GAAP operating margin of 9.3% is well above the company's own history and is inflated by a one-time IEEPA tariff refund worth about 200 bps of gross margin. Adjusted FY2026 operating margin was 7.5%. The latest quarter is 6.0%, with Q2 guided to 6.5-7.0%, and costs are rising from ocean freight, fuel, the peso and a Section 232 tariff step-up. The margin should settle at roughly 6%, which is above the 5-year median (about 4%) but in line with the longer-run 5-8% range.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 24.4% FY2026 rate and 21.8% Q1 rate bracket a normal US statutory-plus-state rate that the company can plausibly keep paying."
+     },
+     "why": "The FY2026 operating margin includes a non-recurring tariff refund benefit. Adjusted operating margin was 7.5%, and the first quarter of FY2027 ran at 6.0%. Revenue growth and backlog are real, but the margin base should be reset down to about 6-6.5%."
+    },
+    "value_at_old_defaults": 53.191861925955095,
+    "values": {
+     "base": 50.684382802663116,
+     "bear": 38.515223303799495,
+     "bull": 65.60928778412418
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 16678000.0,
+     "excess_cash_before": 16678000.0,
+     "k0_after": -638340.1480000019,
+     "k0_before": -638340.1480000019,
+     "k0_interest": 22000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 32653444.68739602,
+     "x0_before": 32653444.68739602
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 274727248.3359878,
+     "seam_ratio": 1.0040720332068374,
+     "tv_share": 0.3645008498882132,
+     "wedge_rate_5": -1.0562293693594846e-05
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.009,
+     "fade_years": 8,
+     "long_run_op_margin": 0.063,
+     "op_margin": [
+      0.066,
+      0.069,
+      0.071,
+      0.072,
+      0.072
+     ],
+     "return_on_new_investment_long_run": 0.16,
+     "rev_growth": [
+      0.03,
+      0.04,
+      0.04,
+      0.035,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0319 and margin 0.0605, margin 0.0670 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 85
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.075
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0092"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex has run at about 0.7-1.2% of revenue over five years, and the pooled figure is 0.92%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Ocean transportation rates have nearly doubled over the last six months"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margin and growth normalise over about 8 years as tariff and freight shocks work through and the cycle averages out."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-06-30 | $459.2 million | 0.0410 | 0.0927"
+       },
+       {
+        "id": "P2",
+        "quote": "deferrable purchases for consumers during economic downturns"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company's median operating margin since 2010 is about 5.3%, with a cyclical range from losses to about 8%. Recent structural gains in mix and cost justify some uplift, so I fade to about 6.3%, well below the FY26 peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "operating margin of 6.5% to 7%"
+       },
+       {
+        "id": "P3",
+        "quote": "The 250-bps increase was primarily driven by a 200-bps benefit from the International Emergency Economic Powers Act"
+       },
+       {
+        "id": "P3",
+        "quote": "scheduled to increase to 30% effective January 1, 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is built from Q1 at 6.0% and Q2 guided to 6.5-7.0%. Margins then recover slightly through productivity and pricing but stay below the inflated FY26 level, because of the tariff step-up and freight inflation."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2555"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The current return on tangible capital of 25.6% reflects a peak margin and an asset-light, lease-heavy model. In a competitive industry, new investment should earn less, but still above the 10.6% cost of equity."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "marking our twelfth consecutive quarter of year-over-year growth"
+       },
+       {
+        "id": "P4",
+        "quote": "an increase of 8.2% compared to $71.8 million in the prior year quarter"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Backlog and orders are up and Flexsteel-brand sales are growing about 5%. The homestyles exit and a discretionary, deferrable end-market cap growth at roughly 3-4%, and Q2 guidance is only 1-4%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "The furniture industry is very competitive and fragmented."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The mature, fragmented US furniture market and a recently shrunken share count argue for growth at or below the nominal anchor, so I use 3%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "The Section 232 tariff on seating rises to 30%, freight and fuel stay elevated, and the company cannot pass the cost through, so structural margin settles near the historical median or lower."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Consumer demand weakens and discretionary furniture orders fall, with growth stalling around year 3."
+     },
+     {
+      "bear_value": 0.055,
+      "input_hit": "op_margin",
+      "risk": "Peso strength and third-party claims on the IEEPA refunds reduce near-term profitability."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       -0.0049999999999999975,
+       -0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.075,
+      "rev_growth": [
+       0.049999999999999996,
+       0.06,
+       0.06,
+       0.055,
+       0.049999999999999996
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Funded debt is zero and the revolver is undrawn, but the company used $63.7 million of cash on buybacks and cut the facility to $30 million, so it may borrow seasonally; operating leases are not counted as debt."
+     },
+     "margin_position": "The FY2026 GAAP operating margin of 9.3% is above the company's own long-run median of about 5%. It was inflated by roughly 200 bps of one-time IEEPA tariff refunds in gross margin, and adjusted operating margin was 7.5%. Q1 FY27 has already fallen back to 6.0%, with Q2 guided to 6.5-7.0%, because of freight, fuel, peso and tariff pressure.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The FY2026 effective rate of 24.4% and the Q1 FY27 rate of 21.8% are in a normal range, with state and foreign taxes and the 162(m) limitation keeping it above 21%."
+     },
+     "why": "FY2026 revenue growth of 4.1% looks normal, but the margin is not representative, because the tariff refunds were non-recurring and 25% Section 232 tariffs on seating are due to rise to 30% in January 2027. The current run-rate margin is about 6-7%, not 9.3%. The business is a cyclical, deferrable-purchase furniture maker with a history of swinging between losses and 7-8% margins."
+    },
+    "value_at_old_defaults": 53.191861925955095,
+    "values": {
+     "base": 55.37560375436803,
+     "bear": 42.30937674627518,
+     "bull": 68.18511390015092
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 53.191861925955095,
+  "value_at_old_defaults_quoted": 53.191861925955095,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 289331643.327581,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 5456000.0,
@@ -15,7 +492,7 @@
   "Beginning in October 2025, substantially all seating products Flexsteel sources from Vietnam and manufactures in Mexico became subject to a 25% tariff under Section 232, superseding the previously applicable IEEPA tariffs."
  ],
  "in_code_book": false,
- "ke": 0.10561377144436315,
+ "ke": 0.10578180622416283,
  "market_cap_at_publish": 295708209,
  "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
@@ -23,12 +500,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 48.32130690953788,
-  "3000": 53.280792904898526
+  "1000": 50.684382802663116,
+  "3000": 55.37560375436803
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1265,106 +1742,17 @@
   ]
  },
  "ticker": "FLXS",
- "upside": -0.016936299901209928,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y2 (1000 down, 3000 none)",
-   "seeds_disagree: normalized.margin (1000 down, 3000 none)",
-   "seeds_disagree: long_run_op_margin (1000 down, 3000 none)",
-   "margin_at_record_peak: normalized.margin 0.0670 at or above the record's p75 0.0603",
-   "margin_at_record_peak: long_run_op_margin 0.0670 at or above the record's p75 0.0603"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.009157801256965309,
-    0.009157801256965309,
-    0.009157801256965309,
-    0.009157801256965309,
-    0.009157801256965309
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.06702318504510875,
-   "normalized.margin": 0.06702318504510875,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.060491725602372634,
-   "op_margin.y2": 0.06702318504510875,
-   "rev_growth.y1": 0.0319361819647046,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10561377144436315
-  },
-  "numbers": {
-   "capex": [
-    0.009157801256965309,
-    0.009157801256965309,
-    0.009157801256965309,
-    0.009157801256965309,
-    0.009157801256965309
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.06702318504510875,
-   "normalized.margin": 0.06702318504510875,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.060491725602372634,
-   "op_margin.y2": 0.06702318504510875,
-   "rev_growth.y1": 0.0319361819647046,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10561377144436315
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "Full-year fiscal 2027 quantitative revenue, operating margin, and capital expenditure guidance is not stated in the evidence, which provides quantitative outlook only for the second quarter of fiscal 2027.",
-   "Whether the Section 232 tariff rate of 25% on seating products from Vietnam and Mexico will increase to 30% on January 1, 2027 as scheduled or be modified prior to that date is unknown.",
-   "Whether retail partners, suppliers, distributors, or other parties will assert claims for reimbursement or credits relating to IEEPA tariff refunds received, and the financial impact of any such claims, is not known.",
-   "Whether or when Flexsteel will successfully sublease or utilize its idle Mexicali, Mexico facility, and whether any further impairment of that right-of-use asset will occur, cannot be determined from the evidence."
-  ],
-  "year": 3
- },
- "value_base": 53.280792904898526,
- "value_bear": 48.28522989899309,
- "value_bull": 57.728641021472576,
+ "upside": -0.021563708677492355,
+ "valuation": null,
+ "value_base": 53.029993278515576,
+ "value_bear": 40.41230002503734,
+ "value_bull": 66.89720084213755,
  "value_per_filed_share": {
-  "base": 53.280792904898526,
-  "bear": 48.28522989899309,
-  "bull": 57.728641021472576
+  "base": 53.029993278515576,
+  "bear": 40.41230002503734,
+  "bull": 66.89720084213755
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -10.2 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -10.1 points a year against the required return over 3 years"
 }

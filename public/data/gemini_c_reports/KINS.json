@@ -1,23 +1,420 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 22.01420886562202,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 86,
  "claims_supported": 80,
  "date": "2026-11-16T10:49:45Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "record_neutral_unavailable: no growth anchor or a median ROE <= 0",
+  "route": "financial",
+  "run_gap": 0.04446202265616164,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 445846268.34559464,
+     "implied_pb": 3.929151493691613,
+     "seam_ratio": 1.2241666666666629,
+     "tv_share": 0.5785123140640437
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.19,
+      0.22,
+      0.19,
+      0.16,
+      0.13
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.33,
+      0.28,
+      0.24,
+      0.21,
+      0.19
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "record_neutral_unavailable: no growth anchor or a median ROE <= 0",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 80
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.1,
+      0.25
+     ],
+     "long_run_roe": [
+      0.1,
+      0.18
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total stockholders' equity | 136,742,352 | 122,731,249"
+       },
+       {
+        "id": "F2",
+        "quote": "Other comprehensive (loss) income, net of tax | (9,689,736) | 2,186,029 | (12,130,242) | 5,430,946"
+       },
+       {
+        "id": "P2",
+        "quote": "As of December 31, 2025, the maximum allowable dividend that KICO may pay to KINS was $1,969,796 without DFS approval."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "High returns with a small payout produce fast equity growth. Year 1 is held back by the unrealized bond loss in AOCI (equity $136.7M at 9/30 against $122.7M at year-end). Growth fades as the return falls. Premium growth needs retained capital, and KICO's dividend capacity is small."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Beginning in the quarter ended September 30, 2024, we began seeing a sizable increase in our policies in force and direct written premiums from these non-renewed and cancelled policies."
+       },
+       {
+        "id": "P4",
+        "quote": "Policies In-Force | 86,579 | 78,026 | 8,553 | 11.0%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The market-dislocation tailwind, which came from competitor exits, should take several years to wear off, and the new California and Connecticut books need time to season. I use 10 years."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $36.2 million | $0.0 million | $36.2 million | $-22.5 million | -0.2977 | -0.5220"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The long-run return should settle well below the current level for a cat-exposed regional homeowners writer, but above the 9.36% cost of equity because of the Select platform and low expense base. The 2021-2023 losses show how quickly the return can collapse. I use 0.14 with a wide range."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Return on equity | 24% to 30% | 29% to 30%"
+       },
+       {
+        "id": "P6",
+        "quote": "Net income per share \u2013 diluted | $2.20 to $2.90 | $2.70 to $2.90"
+       },
+       {
+        "id": "P6",
+        "quote": "Effect of prior-year favorable reserve development | (6.1)% | \u2014% | (6.1)pts | (3.8)% | (0.6)% | (3.2)pts"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is anchored by guidance of 29% to 30% ROE and EPS of $2.70 to $2.90, roughly $41M of income on $122.7M of opening equity. Later years fade as catastrophe losses normalize, reserve releases stop, and the equity base grows. The company's own ROE is measured on average equity, so on opening equity the year 1 figure is higher."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "In 2025, we announced our 5-year goal of $500 million in direct written premium by 2029"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company is concentrated in New York and is a small player, so long-run growth should sit near or slightly below the nominal anchor once the $500M direct premium plan is complete."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "roe",
+      "risk": "A major hurricane or severe winter storm hits downstate New York. Catastrophe losses ran at 10.4% of premiums over nine months, and the company retains $5.5M per event. Reinsurance cost or limits could also worsen at renewal."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Competitor-exit tailwinds fade and soft pricing arrives, and the expansion into California and Connecticut misses on rate adequacy. The long-run return reverts toward the cost of equity."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "book_growth",
+      "risk": "Further unrealized bond losses, or adverse reserve development, including on the commercial run-off lines at 8.9% of net reserves, reduce equity growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.1,
+       0.13,
+       0.1,
+       0.07,
+       0.04000000000000001
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.25,
+       0.28,
+       0.25,
+       0.22,
+       0.19
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "base_year_representative_note": "2025 flatters the long-run level.",
+     "capital_constrained": "yes",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 0.611 on opening common equity is far above any normal level. It came from a hard market in downstate New York homeowners after competitors withdrew, almost no catastrophe losses (1.2% of premiums in 2025), a small opening equity base after the 2021-2023 losses, and ceding commission from heavy quota share. In 2026, catastrophe losses and a lower net combined ratio (guided 79% to 83%) bring the return down to roughly 0.33 on opening equity, even with favorable reserve development. Further normalization is expected as pricing and reserve releases fade, and equity grows into a larger base.",
+     "why": "Premium is growing 16% to 20% a year, with a $500M direct premium goal for 2029. Written premium is large against GAAP equity of $136.7M, and the insurer carries heavy catastrophe exposure. KICO's dividend capacity to the holding company is small, and the payout is only $0.06 per quarter. Retention therefore funds growth, so book growth stays high and payout stays low. The 2021-2023 history shows the earnings are volatile."
+    },
+    "value_at_old_defaults": null,
+    "values": {
+     "base": 34.09628591342178,
+     "bear": 20.009124604924875,
+     "bull": 66.58377461174696
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 426454147.9103198,
+     "implied_pb": 3.7582527234566534,
+     "seam_ratio": 1.296750000000003,
+     "tv_share": 0.6268724503275785
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.21,
+      0.23,
+      0.19,
+      0.16,
+      0.14
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.13,
+     "roe": [
+      0.34,
+      0.27,
+      0.23,
+      0.2,
+      0.18
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "record_neutral_unavailable: no growth anchor or a median ROE <= 0",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 80
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.12,
+      0.24
+     ],
+     "long_run_roe": [
+      0.1,
+      0.17
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Diluted book value per share rose 26% year-over-year to $9.21 despite $9.7 million of after-tax unrealized bond losses in the quarter."
+       },
+       {
+        "id": "P2",
+        "quote": "the maximum allowable dividend that KICO may pay to KINS was $1,969,796 without DFS approval"
+       },
+       {
+        "id": "P4",
+        "quote": "$500 million in direct written premium by 2029"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Book equity grows mostly through retention. Dividends are small ($0.06 per quarter), and AOCI losses (about -$18M at 9/30/26) hold back year 1. Growth tracks the roughly 15% premium growth plan and slows as ROE fades. The capital constraint is that surplus must support premium growth."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Consensus ROAE of 26.6% in FY26E and 25.5% in FY27E versus peer averages of 26.0% and 21.2%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The premium growth plan runs to 2029 and peer ROEs are lower than Kingstone's, so convergence from the high-teens ROE at year 5 to 13% is gradual. 10 years is used."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The property and casualty market is cyclical"
+       },
+       {
+        "id": "P6",
+        "quote": "Catastrophe loss ratio | 7.5% | 0.2% | 7.3pts | 10.4% | 0.8% | 9.6pts"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A concentrated, cat-exposed regional homeowners writer with a cyclical market should earn modestly above its 9.4% cost of equity once the post-exit windfall fades. 13% sits between that cost and the near-term consensus of mid-20s."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Return on equity | 24% to 30% | 29% to 30%"
+       },
+       {
+        "id": "P6",
+        "quote": "Weighted average diluted shares outstanding | 14.8 million"
+       },
+       {
+        "id": "REC",
+        "quote": "return on opening common equity 0.6111"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is anchored to 2026 guidance. Diluted EPS of $2.70-2.90 on about 14.8M shares gives roughly $41M of income on $122.7M of opening equity, so about 0.34 on opening equity. After that it fades as cat losses normalize, retained earnings grow the equity base, and the post-exit pricing tailwind fades."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Approximately 98% of our revenue during the year ended December 31, 2025 was derived from sources located in the State of New York"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth is set near the nominal anchor of 3.75%, and slightly below it because of New York concentration and limited room for expansion."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "roe",
+      "risk": "A major hurricane or winter storm, or a loss above the reinsurance retention, in downstate New York, or adverse reserve development including the run-off commercial lines"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Pricing softens, competitor dislocation fades, and expansion into California and Connecticut disappoints, so margins compress"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "book_growth",
+      "risk": "Statutory capital or dividend limits, or further rate-driven AOCI losses, slow the growth of book equity"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.13999999999999999,
+       0.16,
+       0.12,
+       0.09,
+       0.07
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.26,
+       0.28,
+       0.24,
+       0.21,
+       0.19
+      ],
+      "long_run_roe": 0.17,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "yes",
+     "institution": "insurer",
+     "roe_position": "The 61% return on opening equity in 2025 reflects a very low catastrophe year (1.2% cat ratio) and a small opening equity base, which was rebuilt after losses in 2021-2023. The business is a catastrophe-exposed New York homeowners writer that benefited from competitor exits and rate increases. 2026 guidance is a 29-30% ROE with an 8-9% cat load and about 2-3% favorable reserve development. Normalizing cat losses, softer pricing and a growing equity base should pull the return down toward the low-to-mid teens over time.",
+     "why": "2025 ROE of 61% is not representative, because cat losses were minimal and the base was small. Growth in premiums and in book equity depends on statutory surplus, and KICO's dividend capacity to the parent is limited (about $2.0M without DFS approval at year-end 2025). Most earnings are therefore retained at the insurer, and the payout is small relative to income."
+    },
+    "value_at_old_defaults": null,
+    "values": {
+     "base": 32.61326512851725,
+     "bear": 20.506435038947103,
+     "bull": 64.04414794884775
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": null,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 471742360.56923693,
  "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 14143173.0,
  "flags": [
   "Kingstone Companies, Inc. dismissed CBIZ CPAs P.C. as its independent registered public accounting firm and its Audit Committee approved engaging Deloitte & Touche LLP, subject to execution of an engagement letter.",
   "Marcum LLP resigned and CBIZ CPAs P.C. was appointed as Kingstone Companies, Inc.'s independent registered public accounting firm following CBIZ CPAs' acquisition of Marcum's attest business.",
   "CBIZ CPAs issued an adverse attestation report on the effectiveness of Kingstone's internal control over financial reporting due to a material weakness from not receiving a SOC 1 Type 2 report for its insurance premium quoting platform and general ledger systems."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09360305732783658,
+ "market_cap_at_publish": 318016970,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "no usable growth anchor for this company",
+ "no_value_reason": null,
+ "price_at_publish": 21.96,
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 34.09628591342178,
+  "3000": 32.61326512851725
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1233,8 +1630,17 @@
   ]
  },
  "ticker": "KINS",
+ "upside": 0.4833873820294463,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no usable growth anchor for this company"
+ "value_base": 33.35477552096951,
+ "value_bear": 20.25777982193599,
+ "value_bull": 65.31396128029735,
+ "value_per_filed_share": {
+  "base": 33.35477552096951,
+  "bear": 20.25777982193599,
+  "bull": 65.31396128029735
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +22.0 points a year against the required return over 3 years"
 }

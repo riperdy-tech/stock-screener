@@ -1,13 +1,542 @@
 {
- "alpha_pts": 17.3131623695021,
+ "alpha_pts": 30.908796153877727,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 96,
  "claims_supported": 92,
  "date": "2026-11-18T00:19:18Z",
- "equity_value": 1724806861.490331,
+ "decided": {
+  "flags": [
+   "run 1000: quotes_verified: 10 of 10",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0313 and margin 0.1926, margin 0.1440 (persist), growth 0.0375, terminal RONIC 0.0683 (equity return r 0.0807), F 10",
+  "run_gap": 0.05339311204695598,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 10213000.0,
+       "printed": 10213,
+       "quotes": [
+        {
+         "id": "P4",
+         "quote": "recorded an other-than-temporary impairment charge of $10,213"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Oberon Fuels investment impairment in Other, net (FY2025)"
+      },
+      {
+       "amount": 9595000.0,
+       "printed": 9595,
+       "quotes": [
+        {
+         "id": "P4",
+         "quote": "recorded an other-than-temporary impairment charge of $9,595"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Independence Hydrogen investment impairment in Other, net (FY2025)"
+      },
+      {
+       "amount": 6095000.0,
+       "printed": 6095,
+       "quotes": [
+        {
+         "id": "P4",
+         "quote": "recorded an other-than-temporary impairment charge of $6,095"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Impairment of another development-stage investee in Other, net (FY2025)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 405000.0,
+     "excess_cash_before": 405000.0,
+     "k0_after": 72507162.36491935,
+     "k0_before": 98410162.36491935,
+     "k0_interest": 76265000.0,
+     "one_offs_charge": 25903000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 144652138.0749323,
+     "x0_before": 119072691.55071948
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2197298552.9327955,
+     "seam_ratio": 1.0062168518167816,
+     "tv_share": 0.40435276669159276,
+     "wedge_rate_5": -0.0009984779253200608
+    },
+    "flags": [
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.045,
+     "fade_years": 10,
+     "long_run_op_margin": 0.136,
+     "op_margin": [
+      0.153,
+      0.15,
+      0.148,
+      0.146,
+      0.145
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      -0.021,
+      0.025,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth -0.0313 and margin 0.1926, margin 0.1440 (persist), growth 0.0375, terminal RONIC 0.0683 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 92
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.115,
+      0.152
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.05
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P9",
+        "quote": "With capital spending largely complete for our renewable natural gas facilities in Columbus, Ohio and Upstate New York"
+       },
+       {
+        "id": "P8",
+        "quote": "Growth | 13,111 | 8,047 | 59,453 | 48,375"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY2026 capex was about 6% of revenue because of RNG growth spending. Management says RNG capital spending is largely complete, so capex should fall toward maintenance plus propane growth, about 4.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The retail propane and fuel oil industries are mature and highly competitive."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature distribution business with slowly moving competitive dynamics warrants a moderate fade of about ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "9% warmer than normal for fiscal 2025, 13% warmer than normal for fiscal 2024"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margins have ranged from 0.04 to 0.18 and the long-run median is near 0.12. Mature, weather-exposed propane distribution should keep part of the recent premium, but not all of it. Persistent warm winters and PTC uncertainty argue for a figure between the median and the recent level."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "the benefit of $12.4 million from PTCs recognized during fiscal 2026 on RNG injections"
+       },
+       {
+        "id": "P8",
+        "quote": "increased $6.0 million, or 2.2%, to $284.0 million for fiscal 2026"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY2026 margin is about 0.153. It is lifted by tax credits and higher propane unit margins, and reduced by the goodwill impairment. I fade it gradually as the weather normalizes and the one-time PTC catch-up rolls off, with cost inflation a drag."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.3679"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is very high, but new investment in tanks, trucks, acquisitions, and RNG digesters earns far less. I use 0.12, above the 0.0683 breakeven but well below the historical level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Revenues | 219,864 | 211,376 | 1,402,835 | 1,432,518"
+       },
+       {
+        "id": "P2",
+        "quote": "We expect overall demand for propane and fuel oil to be relatively flat to moderately declining over the next several years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is the reported FY2026 decline of 2.1% on lower propane prices. After that, industry volumes are flat to declining, so growth comes from price pass-through, acquisitions, and RNG volume of 2.5-3% a year."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "relatively flat to moderately declining over the next several years"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The core propane and fuel oil industry is mature and flat to declining. Acquisitions and RNG add some growth, so I place long-run growth below the 3.75% anchor at about 2.5%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.115,
+      "input_hit": "long_run_op_margin",
+      "risk": "Persistently warm winters, or loss of RNG tax credits and environmental attributes, keep margins near the long-run median or below"
+     },
+     {
+      "bear_value": 0.005,
+      "input_hit": "rev_growth",
+      "risk": "Flat-to-declining propane demand, electrification, and natural gas pipeline expansion erode volumes"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Mature-industry long-run growth below expectations"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.115,
+      "rev_growth": [
+       -0.051000000000000004,
+       -0.0049999999999999975,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.152,
+      "rev_growth": [
+       -0.0009999999999999974,
+       0.045000000000000005,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $1.2 billion is roughly 4.1x leverage on Adjusted EBITDA, management is reducing it slowly, and the 2027 maturity has been refinanced out to 2035."
+     },
+     "margin_position": "The operating margin is weather-driven and sits above the long-run median of roughly 0.12. FY2025 was 0.144 and FY2026 is about 0.153 (214.9/1,402.8). FY2026 includes $12.4 million of one-time-catch-up RNG production tax credits and is net of a $7.9 million goodwill impairment. Only part of that gap above the median should persist, because winters were warmer than normal and propane demand is mature.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The partnership is a pass-through and only the small Corporate Entities subsidiaries pay income tax, so a rate near 1% is sustainable absent a change in partnership tax treatment."
+     },
+     "why": "FY2025 earnings include about $26 million of impairments below operating income and benefited from cold January-February weather and hurricane-related volumes. FY2026 is already reported and shows volumes up about 1%, revenue down 2.1% on lower propane prices, and margin up on unit margins and tax credits. I therefore start year 1 from the FY2026 actuals."
+    },
+    "value_at_old_defaults": 30.63409220546086,
+    "values": {
+     "base": 36.612829367410455,
+     "bear": 24.80779642667624,
+     "bull": 51.395293754546806
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 29891000.0,
+       "printed": 29891,
+       "quotes": [
+        {
+         "id": "P8",
+         "quote": "Equity in losses and impairment charges for investments in unconsolidated affiliates | 23,091 | 6,519 | 24,528 | 29,891"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Fiscal 2025 equity in losses and impairment charges on unconsolidated affiliates, recorded in Other, net (non-recurring write-downs of Oberon, IH and another investee)"
+      },
+      {
+       "amount": 6194000.0,
+       "printed": 6194,
+       "quotes": [
+        {
+         "id": "P8",
+         "quote": "Reversal of the earnout reserve established in connection with the RNG acquisition | \u2014 | (6,194) | \u2014 | (6,194)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Fiscal 2025 reversal of the RNG acquisition earnout reserve (one-time gain)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 405000.0,
+     "excess_cash_before": 405000.0,
+     "k0_after": 74713162.36491935,
+     "k0_before": 98410162.36491935,
+     "k0_interest": 76265000.0,
+     "one_offs_charge": 29891000.0,
+     "one_offs_gain": 6194000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 142473693.1445222,
+     "x0_before": 119072691.55071948
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2083009285.274886,
+     "seam_ratio": 1.0003880515757184,
+     "tv_share": 0.3951807701246431,
+     "wedge_rate_5": -0.000877295664705752
+    },
+    "flags": [
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.043,
+     "fade_years": 10,
+     "long_run_op_margin": 0.135,
+     "op_margin": [
+      0.1532,
+      0.15,
+      0.148,
+      0.146,
+      0.144
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      -0.0207,
+      0.025,
+      0.025,
+      0.024,
+      0.023
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth -0.0313 and margin 0.1926, margin 0.1440 (persist), growth 0.0375, terminal RONIC 0.0683 (equity return r 0.0807), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 92
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.115,
+      0.15
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.045
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P9",
+        "quote": "With capital spending largely complete for our renewable natural gas facilities in Columbus, Ohio and Upstate New York"
+       },
+       {
+        "id": "P8",
+        "quote": "Growth | 13,111 | 8,047 | 59,453 | 48,375"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fiscal 2026 capex was about 6% of revenue because of RNG growth spending, but management says RNG capex is largely complete. I assume maintenance of about 26M plus propane growth of about 25M plus modest RNG and technology spend, giving about 4.3%. That is above the 3.6% 5-year pooled average."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0683."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate fade of 10 years lets the above-median margin and the acquisition and RNG growth converge slowly to mature levels."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-09-28 | $1,327.2 million | -0.0714 | 0.1290"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-09-27 | $1,432.5 million | 0.0794 | 0.1440"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 18-year filed record is mostly 0.10 to 0.15, with a median near 0.12 to 0.13. Recent propane unit-margin gains and RNG tax credits justify a level somewhat above that median, but competition and electrification limit durability."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Operating (loss) income | (12,909) | (16,755) | 214,877 | 206,311"
+       },
+       {
+        "id": "P8",
+        "quote": "the benefit of $12.4 million from PTCs recognized during fiscal 2026 on RNG injections"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fiscal 2026 operating margin is the filed 214.9M on 1,402.8M revenue, including a 7.9M goodwill impairment and 12.4M of PTC benefit. I let the margin ease back toward the historical median because the PTC catch-up (covering January 2025 to September 2026) is partly one-time, weather is volatile, and cost inflation is running ahead of revenue."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.3679"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 0.37 is inflated because goodwill from acquisitions is excluded. New capital goes into tanks, trucks and acquisitions at purchase multiples, so I assume a much lower return, above the 0.068 breakeven but well below the base-year level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Revenues | 219,864 | 211,376 | 1,402,835 | 1,432,518"
+       },
+       {
+        "id": "P2",
+        "quote": "We expect overall demand for propane and fuel oil to be relatively flat to moderately declining over the next several years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is the filed fiscal 2026 result: revenue fell about 2% as propane prices dropped 7.1% while volumes rose 1%. Afterwards I expect modest growth from stable pricing, bolt-on acquisitions and a larger RNG platform. Management itself expects a mature, flat-to-declining industry."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0807; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "The retail propane and fuel oil industries are mature and highly competitive."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The core business is mature with flat-to-declining industry demand, so long-run growth sits well below the 3.75% anchor and close to inflation less volume erosion."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.115,
+      "input_hit": "long_run_op_margin",
+      "risk": "Warm winters persist and PTC or RIN/LCFS credit value is cut or delayed, pulling the margin back toward the long-run median or lower"
+     },
+     {
+      "bear_value": 0.012,
+      "input_hit": "terminal_growth",
+      "risk": "Volume erosion from electrification, natural gas expansion and customer conservation, with no acquisition offset"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Propane commodity price declines and warm weather keep revenue flat in the medium term"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.115,
+      "rev_growth": [
+       -0.045700000000000005,
+       0.0,
+       0.0,
+       -0.0010000000000000009,
+       -0.0020000000000000018
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       -0.0007000000000000027,
+       0.045,
+       0.045,
+       0.044,
+       0.043
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $1.2B at 4.13x leverage is stable (reduced by about $25M in fiscal 2026), and management is targeting lower leverage while paying out most free cash flow."
+     },
+     "margin_position": "The margin sits above the company's own long-run median of about 0.12 to 0.13. Fiscal 2026 was 0.153, including a 12.4M production-tax-credit benefit and two years of high-margin propane pricing. The business is weather- and commodity-spread-driven, so I expect partial mean reversion.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The Partnership is a pass-through, so only the small corporate subsidiaries pay tax (provision $1.3M on $107.9M pretax income), and this should persist."
+     },
+     "why": "Fiscal 2025 operating margin of 0.144 is close to the 5-year level (0.129 to 0.145), and the year was 9% warmer than normal, so it is not a peak-weather year. Fiscal 2026 actuals are already filed: revenue fell about 2% on lower propane prices while the margin rose to about 0.153. The base-year non-operating line is distorted by investee impairments."
+    },
+    "value_at_old_defaults": 30.63409220546086,
+    "values": {
+     "base": 34.70878781852118,
+     "bear": 24.408389589010433,
+     "bull": 48.37643348586093
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 30.63409220546086,
+  "value_at_old_defaults_quoted": 30.63409220546086,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 2338956774.804035,
  "family": "operating",
- "far_from_price": false,
+ "far_from_price": true,
  "filed_shares": 65589000.0,
  "flags": [
   "In the fourth quarter ended September 26, 2026, the Partnership recorded a goodwill impairment of 7,900 (scale omitted in the excerpted table) for its natural gas and electricity business.",
@@ -23,12 +552,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 26.29719711369789,
-  "3000": 26.29719711369789
+  "1000": 36.612829367410455,
+  "3000": 34.70878781852118
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "on request (no-call fix rerun)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1343,185 +1872,17 @@
   ]
  },
  "ticker": "SPH",
- "upside": 0.5084230750965404,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: op_margin.y1 0.1926",
-   "held_at_record: rev_growth.y1 model -0.0211 valued at -0.0313"
-  ],
-  "departures": [
-   {
-    "driver": "pricing",
-    "evidence": [
-     "P8.s72",
-     "P8.s29",
-     "P8.s25"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P2.s173",
-     "P2.s178",
-     "P8.s72",
-     "V0"
-    ],
-    "input": "rev_growth.y2"
-   },
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P2.s173",
-     "P2.s178",
-     "P2.s124",
-     "V0"
-    ],
-    "input": "normalized.rev_growth"
-   },
-   {
-    "driver": "secular_decline",
-    "evidence": [
-     "P2.s173",
-     "P2.s178",
-     "P2.s124",
-     "V0"
-    ],
-    "input": "terminal_g"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "down",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "down",
-   "terminal_g": "down",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P2.s124": {
-    "kind": "annual_section",
-    "period": "2025-09-27",
-    "text": "While our emerging renewable energy platform may benefit from additional incentives for the growth of renewable energy, our sale of propane, fuel oil and refined fuels, and natural gas may experience significant negative impact from the restrictions placed on the use of fossil fuels."
-   },
-   "P2.s173": {
-    "kind": "annual_section",
-    "period": "2025-09-27",
-    "text": "We expect overall demand for propane and fuel oil to be relatively flat to moderately declining over the next several years."
-   },
-   "P2.s178": {
-    "kind": "annual_section",
-    "period": "2025-09-27",
-    "text": "The gradual expansion of the nation\u2019s natural gas distribution systems has made natural gas available in areas that previously depended upon propane or fuel oil."
-   },
-   "P8.s25": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "Retail propane gallons sold in fiscal 2026 of 402.9 million gallons increased approximately 1% compared to the prior year."
-   },
-   "P8.s29": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "Average propane prices (basis Mont Belvieu, Texas) for fiscal 2026 decreased 7.1% compared to the prior year."
-   },
-   "P8.s72": {
-    "kind": "release",
-    "period": "2026-11-12",
-    "text": "Revenues | 219,864 | 211,376 | 1,402,835 | 1,432,518"
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-09-27",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-09-27.\nFiled operating margin record: min 0.1290, p25 0.1374, median 0.1440, p75 0.1447, max 0.1655, last 0.1440; persist 0.1440 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-09-24 0.1651, 2023-09-30 -0.0481, 2024-09-28 -0.0714, 2025-09-27 0.0794.\nBase-year revenue 1,432,518,000; tax rate 0.0125; return on opening capital 0.3679; capital expenditure 0.0359 and depreciation 0.0392 of revenue (pooled); the desk depreciates by the vintages rule (filed plant ages).\nCost of equity 0.0807 (risk-free 0.0512, long-run growth anchor 0.0375, loading 0.618, equity premium 0.0477).\nYear 1 to date (10-Q 0001005210-26-000011, filed 2026-08-06): revenue 1,182,971,000 from 2025-09-28 to 2026-06-27 against 1,221,142,000 from 2024-09-29 to 2025-06-28, growth -0.0313; operating income 227,786,000, margin 0.1926.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd -0.0313; anchor -0.0211; record_median -0.0243; last -0.0149; zero -0.0266; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.0156; last 0.0794; zero 0.0000; guidance\nop_margin.y1: ytd 0.1926; persist 0.1854; median 0.1854; p25 0.1844; p75 0.1855; last 0.1854; guidance\nop_margin.y2: persist 0.1440; median 0.1440; p25 0.1374; p75 0.1447; last 0.1440; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.1440; median 0.1440; p25 0.1374; p75 0.1447; last 0.1440; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0683; quarter 0.0858; half 0.1152; three_quarters 0.1755; ronic0 0.3679\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0359; record_last 0.0502; record_max 0.0502; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.03589930741825885,
-    0.03589930741825885,
-    0.03589930741825885,
-    0.03589930741825885,
-    0.03589930741825885
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1440198308153894,
-   "normalized.margin": 0.1440198308153894,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.19255417081230225,
-   "op_margin.y2": 0.1440198308153894,
-   "rev_growth.y1": -0.03125844496381258,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06830693508290774
-  },
-  "numbers": {
-   "capex": [
-    0.03589930741825885,
-    0.03589930741825885,
-    0.03589930741825885,
-    0.03589930741825885,
-    0.03589930741825885
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1440198308153894,
-   "normalized.margin": 0.1440198308153894,
-   "normalized.rev_growth": 0.015621320871644029,
-   "op_margin.y1": 0.19255417081230225,
-   "op_margin.y2": 0.1440198308153894,
-   "rev_growth.y1": -0.021112753906059156,
-   "rev_growth.y2": 0.015621320871644029,
-   "terminal_g": 0.01875,
-   "terminal_ronic": 0.06830693508290774
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": -0.021112753906059156,
-    "model_option": "anchor",
-    "record": -0.03125844496381258,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "record_median",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "anchor",
-   "rev_growth.y2": "record_median",
-   "terminal_g": "half_anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The fiscal 2026 Form 10-K is not in the packet, so the full-year balance sheet and cash flow statement as of September 26, 2026 are not reported.",
-   "The evidence does not state whether Section 45Z clean fuel production tax credits will be extended beyond December 31, 2029, what final Treasury regulations will specify, or when the local utility will complete commissioning at the Columbus, Ohio RNG site.",
-   "Future heating-season weather conditions, wholesale propane price volatility, and the specific breakdown of fourth-quarter fiscal 2026 unconsolidated affiliate losses and impairments cannot be determined from the packet."
-  ],
-  "year": 3
- },
- "value_base": 26.29719711369789,
- "value_bear": 22.45575420274415,
- "value_bull": 32.02158296351457,
+ "upside": 1.0455254727588916,
+ "valuation": null,
+ "value_base": 35.66080859296582,
+ "value_bear": 24.608093007843337,
+ "value_bull": 49.885863620203864,
  "value_per_filed_share": {
-  "base": 26.29719711369789,
-  "bear": 22.45575420274415,
-  "bull": 32.02158296351457
+  "base": 35.66080859296582,
+  "bear": 24.608093007843337,
+  "bull": 49.885863620203864
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +17.3 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +30.9 points a year against the required return over 3 years"
 }

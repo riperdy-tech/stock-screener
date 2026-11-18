@@ -1,18 +1,546 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 7.170863238476752,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 72,
  "claims_supported": 69,
  "date": "2026-11-18T05:53:54Z",
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y2 0.0800 (filed 0.0303 to 0.0650)",
+   "run 1000: growth_outside_filed_record: rev_growth.y3 0.0800 (filed 0.0303 to 0.0650)",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1250 (filed 0.0516 to 0.1190)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.1250 (filed 0.0516 to 0.1190)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.1220 (filed 0.0516 to 0.1190)",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.0200 (filed 0.0303 to 0.0650)",
+   "run 3000: growth_outside_filed_record: rev_growth.y2 0.0800 (filed 0.0303 to 0.0650)",
+   "run 3000: growth_outside_filed_record: rev_growth.y3 0.0900 (filed 0.0303 to 0.0650)",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.0953 (persist), growth 0.0375, terminal RONIC 0.1012 (equity return r 0.0846), F 10",
+  "run_gap": 0.1257678997842538,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 42000000.0,
+       "printed": 42,
+       "quotes": [
+        {
+         "id": "F3",
+         "quote": "Debt extinguishment costs of the 2027 Notes | 42 | 0"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Debt extinguishment costs on the 2027 Notes, a non-operating item that will not recur. It is assumed to sit within net finance costs."
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 81000000.0,
+     "excess_cash_before": 81000000.0,
+     "k0_after": 104292926.50602409,
+     "k0_before": 146292926.5060241,
+     "k0_interest": 124000000.0,
+     "one_offs_charge": 42000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 154709325.36987954,
+     "x0_before": 122495325.36987953
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2374271691.8554997,
+     "seam_ratio": 0.987658028236334,
+     "tv_share": 0.4041773614130298,
+     "wedge_rate_5": -0.020427303552827993
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y2 0.0800 (filed 0.0303 to 0.0650)",
+     "growth_outside_filed_record: rev_growth.y3 0.0800 (filed 0.0303 to 0.0650)",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.06,
+     "fade_years": 8,
+     "long_run_op_margin": 0.095,
+     "op_margin": [
+      0.115,
+      0.115,
+      0.112,
+      0.108,
+      0.104
+     ],
+     "return_on_new_investment_long_run": 0.13,
+     "rev_growth": [
+      0.05,
+      0.08,
+      0.08,
+      0.06,
+      0.05
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.0953 (persist), growth 0.0375, terminal RONIC 0.1012 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 69
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.075,
+      0.115
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.12
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The Company continues to target spending of $185 million to $195 million during 2026"
+       },
+       {
+        "id": "F3",
+        "quote": "Depreciation and amortization | 161 | 185"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed ratio of about 0.7% counts only PP&E additions and omits the growth in EI operating lease assets. 2026 guidance of $185 to $195 million, about 7% of revenue, includes organic growth, maintenance and ES infrastructure spending. Depreciation and amortization of 161 is about 6% of revenue, so I use 6%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "deliveries extending through 2028"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Eight years allows a gradual normalization of margin and growth after the backlog-driven period through 2028."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $2,414.0 million | 0.0303 | 0.0717"
+       },
+       {
+        "id": "F2",
+        "quote": "Gross margin | 582 | 504"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin is above the company's own median of about 7.2%. Cyclical base rates suggest roughly half of that gap persists, which gives about 9.5%. Structural gains from the power and service mix justify keeping some of it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 306 | 173"
+       },
+       {
+        "id": "P1",
+        "quote": "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The current margin of about 11.5% is held for two years on the strong backlog and Q3 profitability. It then drifts down as the cycle normalizes and the mix shifts toward lower-margin large equipment projects."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1012."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is high at 17%, but competition and cyclicality should pull new investment returns down. I assume 13%, above the 10.1% break-even, so growth still adds modest value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY"
+       },
+       {
+        "id": "P4",
+        "quote": "now exceeds 1.75 gigawatts, with deliveries extending through 2028"
+       },
+       {
+        "id": "P1",
+        "quote": "we completed the divestiture of the majority of our Asia Pacific operations"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "A record ES backlog of $2.1 billion and over 1.75 GW of behind-the-meter power backlog with deliveries through 2028 support above-trend growth in years 2 to 3. The Asia Pacific divestiture and the uncertainty of backlog conversion hold back year 1 and the later years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth fades to a rate below the long-run nominal anchor, since an equipment and services business tied to natural gas infrastructure should not outgrow the economy forever."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.072,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin normalizes fully to the pre-2025 level as the equipment cycle turns or the large data center contract is delayed or cancelled"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Backlog conversion slips, ES capacity expansion falls short, or concentration in one large data center project hurts growth"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Capital intensity stays high or returns on new EI and ES investment fall toward break-even"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.075,
+      "rev_growth": [
+       0.0,
+       0.03,
+       0.03,
+       0.009999999999999995,
+       0.0
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.115,
+      "rev_growth": [
+       0.09,
+       0.12,
+       0.12,
+       0.09999999999999999,
+       0.09
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of $654 million, including leases, is about 1.2x net debt to current EBITDA, and the 2031 Notes were issued to refinance the 2027 Notes, so leverage looks stable."
+     },
+     "margin_position": "The 2025 operating margin of 11.9% is well above the 5.2% (2023) and 7.2% (2024) margins and the roughly 7.2% median of the three filed years. SG&A fell while gross margin rose, so part of the gain is cost cutting and a strong equipment cycle. Part of it may not last in an oilfield equipment business.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The record's 23.3% rate conflicts with the filed income taxes of 99 on pretax earnings of 163, which is about 61%, so the sustainable rate is not clear."
+     },
+     "why": "2025 is a peak-like year for margin: operating income rose from 173 to 306 on revenue growth of only 6.5%. The Q3 2026 release shows the run-rate holding (Adjusted EBITDA of $129 million for the quarter). The filings give no full-year 2026 figures, and the Asia Pacific divestiture changes the revenue base. I assume margins partly fade toward the median, and growth is supported by a record backlog."
+    },
+    "value_at_old_defaults": 18.666715763952787,
+    "values": {
+     "base": 21.385822531537976,
+     "bear": 13.27373684235389,
+     "bull": 33.72059936315519
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 42000000.0,
+       "printed": 42,
+       "quotes": [
+        {
+         "id": "F3",
+         "quote": "Debt extinguishment costs of the 2027 Notes | 42 | 0"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Debt extinguishment costs of the 2027 Notes, a non-recurring financing cost"
+      },
+      {
+       "amount": 17000000.0,
+       "printed": 17,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Derecognition and unrealized (loss) gain on redemption options | (17) | 17"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Derecognition and unrealized loss on redemption options, a non-operating fair-value item"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 81000000.0,
+     "excess_cash_before": 81000000.0,
+     "k0_after": 87292926.50602409,
+     "k0_before": 146292926.5060241,
+     "k0_interest": 124000000.0,
+     "one_offs_charge": 59000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 167748325.36987954,
+     "x0_before": 122495325.36987953
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2703035545.5594935,
+     "seam_ratio": 0.9645154417182726,
+     "tv_share": 0.3574549789350195,
+     "wedge_rate_5": -0.027645079626589703
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1250 (filed 0.0516 to 0.1190)",
+     "margin_outside_filed_record: op_margin.y2 0.1250 (filed 0.0516 to 0.1190)",
+     "margin_outside_filed_record: op_margin.y3 0.1220 (filed 0.0516 to 0.1190)",
+     "growth_outside_filed_record: rev_growth.y1 0.0200 (filed 0.0303 to 0.0650)",
+     "growth_outside_filed_record: rev_growth.y2 0.0800 (filed 0.0303 to 0.0650)",
+     "growth_outside_filed_record: rev_growth.y3 0.0900 (filed 0.0303 to 0.0650)",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.05,
+     "fade_years": 8,
+     "long_run_op_margin": 0.1,
+     "op_margin": [
+      0.125,
+      0.125,
+      0.122,
+      0.119,
+      0.116
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.02,
+      0.08,
+      0.09,
+      0.05,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.0953 (persist), growth 0.0375, terminal RONIC 0.1012 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 69
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.08,
+      0.115
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.14
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The Company continues to target spending of $185 million to $195 million during 2026"
+       },
+       {
+        "id": "F3",
+        "quote": "EI assets - operating leases | (96) | (59)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 0.7% filed capex ratio counts only PP&E and omits the EI operating-lease asset additions of 96 that actually sustain the business. 2026 guidance of $185-195 million is about 7% of revenue and includes one-off ES expansion, so I use about 5% on average."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "now exceeds 1.75 gigawatts, with deliveries extending through 2028"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The step from the current elevated margin and backlog-driven growth to a steady state is gradual, so I use a medium-length fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $2,414.0 million | 0.0303 | 0.0717"
+       },
+       {
+        "id": "P1",
+        "quote": "RETURN ON CAPITAL EMPLOYED OF 15.8%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Using the base rate for a margin above its own median, I assume roughly half of the gap to the 5.2%-7.2% history persists, which gives about 10%. The mix shift toward power equipment and the contracted EI fleet supports a level above the earlier years."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,571.0 million | 0.0650 | 0.1190"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 306 | 173"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins start near the strong 2025 level and ease gradually. Q3 profitability is strong, but the 2025 jump came largely from lower SG&A, and the margin remains above the two prior years."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 0.1707 is high and should fade under competition. I set the long-run return slightly above the 0.1012 break-even, so growth adds only modest value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY"
+       },
+       {
+        "id": "P4",
+        "quote": "now exceeds 1.75 gigawatts, with deliveries extending through 2028"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Record ES backlog and over 1.75 GW of behind-the-meter power awards with deliveries through 2028 drive growth in 2027-2028. 2026 is held back by the Asia Pacific divestiture. Growth then slows as the backlog converts and the pipeline has to be replenished."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth is set below the 3.75% nominal anchor, because oil and gas equipment and services demand is cyclical and the AI power demand may normalise."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.075,
+      "input_hit": "long_run_op_margin",
+      "risk": "The margin reverts toward the 2023-2024 range of 5-7% as the SG&A savings and pricing are competed away, or the data center project is delayed or cancelled."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Concentration risk: more than one gigawatt of the backlog is tied to a single data center development, and the pipeline does not convert, so revenue growth stalls."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "capex_to_revenue",
+      "risk": "Growth capex stays at about 7% of revenue to build ES capacity and the EI fleet, with returns below expectations."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       -0.039999999999999994,
+       0.020000000000000004,
+       0.03,
+       -0.009999999999999995,
+       -0.019999999999999997
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.115,
+      "rev_growth": [
+       0.07000000000000002,
+       0.13,
+       0.14,
+       0.10000000000000002,
+       0.09000000000000002
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt was refinanced in 2025 into 2031 Notes, and long-term debt fell to 582 with net finance costs of 120, so the 654 total is a reasonable steady level against a business that generates cash."
+     },
+     "margin_position": "The 2025 operating margin of 11.9% is well above the 5.2% and 7.2% of the two prior years. It reflects a cut in SG&A, higher gross margin and lower depreciation, and the margin now sits above this oilfield-equipment-and-services company's own history. Record ES backlog and power-generation awards support some of the gain, but part of it is likely to fade.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "Income taxes of 99 on EBT of 163 in 2025 are far above a normal statutory rate, and the filed-record rate of 0.2330 is a computed figure the filings do not explain."
+     },
+     "why": "2025 operating income rose to 306 from 173 on revenue growth of only 6.5%, because SG&A fell from 327 to 272 and gross margin widened. Q3 2026 adjusted EBITDA of $129 million suggests earnings stayed strong. The margin is still above the 2023-2024 levels, so I assume partial mean reversion. Reported earnings also carry large financing and redemption-option items."
+    },
+    "value_at_old_defaults": 18.666715763952787,
+    "values": {
+     "base": 24.25595796955624,
+     "bear": 15.684050334679181,
+     "bull": 35.942604307274145
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 18.666715763952787,
+  "value_at_old_defaults_quoted": 18.666715763952787,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 2808252559.729851,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 123056223.0,
  "flags": [
   "Enerflex reported its third quarter 2026 financial and operational results, including Adjusted EBITDA of $129 MILLION, free cash flow of $102 MILLION, return on capital employed of 15.8%, and record ES bookings and backlog of $1.0 BILLION and $2.1 BILLION.",
   "Enerflex completed the divestiture of the majority of its Asia Pacific operations during the third quarter of 2026.",
   "Enerflex's Board of Directors elected to declare the quarterly dividend in U.S. Dollars and approved an increase of approximately 17% to $0.035 per common share, effective with the dividend payable in November 2026."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08462083045154348,
  "loss_record": {
   "cause": "cannot_tell",
   "explanation": "The provided 40-F financial statements only cover 2024 and 2025\u2014both of which report positive operating income and pretax earnings\u2014and the MD&A is absent from the packet. Because none of the evidence explains what drove the 2023 pretax loss of -52,000,000, the cause of the thin profit record cannot be determined from the evidence given.",
@@ -33,11 +561,19 @@
   ],
   "version": "why_losses.v1 2026-11-18 WO_NC5"
  },
+ "market_cap_at_publish": 2391995495,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
+ "no_value_reason": null,
+ "price_at_publish": 19.59,
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
- "source": "on request (tax fallback rerun)",
+ "seed_base": {
+  "1000": 21.385822531537976,
+  "3000": 24.25595796955624
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -992,9 +1528,43 @@
    }
   ]
  },
+ "tax_range": {
+  "equity_value_alt": 2650802332.556168,
+  "label": "statutory rate (company's filed rate), not measured",
+  "positive_pretax_years": 2,
+  "pretax_years": 3,
+  "rate": 0.233,
+  "rate_alt": 0.28800000000000003,
+  "seed_base_alt": {
+   "1000": 20.126542964194726,
+   "3000": 22.95624095248973
+  },
+  "source_tag": "ifrs-full:ApplicableTaxRate",
+  "status_alt": "ok",
+  "value_alt": {
+   "base": 21.541391958342228,
+   "bear": 13.634391201804977,
+   "bull": 33.000883834334694
+  },
+  "value_per_filed_share_alt": {
+   "base": 21.541391958342228,
+   "bear": 13.634391201804977,
+   "bull": 33.000883834334694
+  }
+ },
  "ticker": "EFXT",
+ "upside": 0.17402083975490545,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
+ "value_base": 22.82089025054711,
+ "value_bear": 14.478893588516534,
+ "value_bull": 34.83160183521467,
+ "value_per_filed_share": {
+  "base": 22.82089025054711,
+  "bear": 14.478893588516534,
+  "bull": 34.83160183521467
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_differs_at_alt_tax_rate": false,
+ "verdict_reason": "expected return +7.2 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

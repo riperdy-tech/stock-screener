@@ -1,13 +1,496 @@
 {
- "alpha_pts": -26.4198391076663,
+ "alpha_pts": -16.88218519537547,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 114,
  "claims_supported": 111,
  "date": "2026-11-17T02:16:57Z",
- "equity_value": 3626620877.437581,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 21.1% base-year rate was lowered by a $24M China valuation-allowance release, and the recent quarterly rate was about 24%.",
+   "run 1000: quotes_verified: 15 of 15",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The base-year 21.1% rate was lowered by a $24M China valuation allowance release, and the Q2 2026 rate was about 24%, so a mid-20s rate is more sustainable.",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1273 and margin 0.1050, margin 0.0456 (persist), growth 0.0375, terminal RONIC 0.0887 (equity return r 0.1058), F 10",
+  "run_gap": 0.007112326801685278,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 518000000.0,
+     "excess_cash_before": 518000000.0,
+     "k0_after": 119268970.71746385,
+     "k0_before": 119268970.71746385,
+     "k0_interest": 70000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 119733329.22975641,
+     "x0_before": 119733329.22975641
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4097987440.653535,
+     "seam_ratio": 0.9818652439456944,
+     "tv_share": 0.3022929565084363,
+     "wedge_rate_5": -0.011954097225567638
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 21.1% base-year rate was lowered by a $24M China valuation-allowance release, and the recent quarterly rate was about 24%.",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.032,
+     "fade_years": 8,
+     "long_run_op_margin": 0.065,
+     "op_margin": [
+      0.097,
+      0.078,
+      0.076,
+      0.074,
+      0.072
+     ],
+     "return_on_new_investment_long_run": 0.14,
+     "rev_growth": [
+      0.09,
+      0.05,
+      0.04,
+      0.035,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1273 and margin 0.1050, margin 0.0456 (persist), growth 0.0375, terminal RONIC 0.0887 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 111
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.08
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0297"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital Expenditures | (128) | (111)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is about 3.0% of revenue, and first-half 2026 capex of $128M (about 4% of first-half sales) shows store refresh and tech investment running higher, so I use 3.2%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Our Path to Potential strategy is working"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A moderate 8-year fade reflects a turnaround that is working but not yet proven over a full cycle."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-02-01 | $6,230.0 million | 0.0078 | 0.0498"
+       },
+       {
+        "id": "P3",
+        "quote": "Adjusted Operating Income | $403 | $373"
+       },
+       {
+        "id": "P2",
+        "quote": "Our ability to mitigate cost increases through pricing is limited by competitive dynamics and consumer price sensitivity."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The 5-year median is about 5% while the current adjusted margin is about 6-8%. Base rates say about half of the gap persists, and the company's discretionary, mall-exposed business is cyclical, so I fade to 6.5%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Forecasted Operating Income - GAAP | $689 to 719"
+       },
+       {
+        "id": "P6",
+        "quote": "Forecasted Adjusted Operating Income | $560 to 590"
+       },
+       {
+        "id": "P4",
+        "quote": "imposed new tariffs ranging from 10% to 12.5% under Section 301 of the Trade Act of 1974"
+       },
+       {
+        "id": "P6",
+        "quote": "We are increasing our strategic marketing investment to expand our reach, deepen customer connection"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 GAAP is guided at $689-719M on about $7.14B, roughly 9.9%, and includes a $136M one-time tariff refund. From year 2 the margin reverts to the adjusted level of about 8%, then drifts lower as new 10-12.5% tariffs and higher marketing spend weigh."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0887"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base return on tangible capital is high, at 19.6%, because the company is asset-light and partners fund international stores. I assume new investment earns 14%, above the 8.87% breakeven but below the current return as competition and store refresh costs bite."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The Company is now forecasting fiscal year 2026 net sales to be in the range of $7.100 billion to $7.180 billion"
+       },
+       {
+        "id": "P6",
+        "quote": "Total comparable sales for the second quarter of 2026 increased 9%."
+       },
+       {
+        "id": "P4",
+        "quote": "Net sales in our international channel increased 20% compared to the second quarter of 2025."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 follows raised guidance of $7.1-7.18B against $6.553B, about 9% growth. Growth then slows as the comparison base normalizes (Q2 2025 was depressed by the security incident), international expansion matures, and store count stays flat."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, flat-footprint specialty retailer with a growing international royalty stream should grow below the 3.75% nominal anchor, so I use 3%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariffs and promotions erode margin back toward the historical median, and the holiday quarter underdelivers after the heavy inventory build and marketing spend"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "rev_growth",
+      "risk": "Discretionary consumer weakness or mall traffic decline slows growth, and the Q2 comparison benefit from the 2025 security incident fades"
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher competition and further Adore Me or store investment lower returns on new capital"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       0.065,
+       0.025,
+       0.015,
+       0.010000000000000002,
+       0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.105,
+       0.065,
+       0.055,
+       0.05,
+       0.045
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $975M is modest against earnings and equity and has been falling, though lease liabilities of about $1.9B add debt-like fixed commitments."
+     },
+     "margin_position": "The GAAP margin is low in the base year (4.1%) because of a $120M Adore Me impairment and other one-offs, partly offset by a $69M interchange gain, and because of about $85M of net tariff cost. Adjusted margin was 6.2% in the base year and is guided to about 8% for fiscal 2026. Fiscal 2026 GAAP also includes a one-time $136M tariff refund. Underlying margin is above the 5-year median of about 5%, driven by less promotion and more full-price selling. Discretionary apparel is cyclical, and the 2020-2026 margin history swings widely.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 21.1% base-year rate was lowered by a $24M China valuation-allowance release, and the recent quarterly rate was about 24%."
+     },
+     "why": "The base-year GAAP operating margin is depressed by non-recurring charges, and net of the gain and charges the adjusted margin is about 6.2%. Fiscal 2026 is a stronger year, with sales growing about 9% and an adjusted margin of about 8%, but GAAP year 1 is inflated by the one-time tariff refund. The valuation should start from the guided year 1 and fade toward a margin between the 5-year median and the current adjusted level."
+    },
+    "value_at_old_defaults": 41.854033137085636,
+    "values": {
+     "base": 59.720643631369846,
+     "bear": 45.4543390028927,
+     "bull": 74.95304780782189
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 518000000.0,
+     "excess_cash_before": 518000000.0,
+     "k0_after": 119268970.71746385,
+     "k0_before": 119268970.71746385,
+     "k0_interest": 70000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 119733329.22975641,
+     "x0_before": 119733329.22975641
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4065555246.915062,
+     "seam_ratio": 0.9828084937786871,
+     "tv_share": 0.3042697535251726,
+     "wedge_rate_5": -0.01138218377982536
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year 21.1% rate was lowered by a $24M China valuation allowance release, and the Q2 2026 rate was about 24%, so a mid-20s rate is more sustainable.",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.033,
+     "fade_years": 8,
+     "long_run_op_margin": 0.065,
+     "op_margin": [
+      0.097,
+      0.078,
+      0.077,
+      0.075,
+      0.073
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      0.09,
+      0.045,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1273 and margin 0.1050, margin 0.0456 (persist), growth 0.0375, terminal RONIC 0.0887 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 111
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.08
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0297"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital Expenditures | (128) | (111)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled ratio is 3.0%, but first-half 2026 capex was 4.0% of sales with store refresh and technology investment, so I use 3.3%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our future success depends in part on our ability to successfully implement our long-term strategic growth plan."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margin and growth should normalize over roughly eight years, since the margin gap persists for ordinary companies and the Path to Potential outcome is uncertain."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-01-31 | $6,553.0 million | 0.0518 | 0.0414"
+       },
+       {
+        "id": "P3",
+        "quote": "Operating income in 2025 decreased $39 million, to $271 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fiscal 2023-2025 GAAP margins were 4-7.5%, and the current margin is lifted by regular-price selling and a tariff refund. I fade to 6.5%, between the historical median and the recent run-rate, because a discretionary mall-based retailer should only partly hold its gains."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Forecasted Operating Income - GAAP | $689 to 719"
+       },
+       {
+        "id": "P6",
+        "quote": "Forecasted Adjusted Operating Income | $560 to 590"
+       },
+       {
+        "id": "P4",
+        "quote": "In July 2026, the U.S. administration imposed new tariffs ranging from 10% to 12.5% under Section 301 of the Trade Act of 1974, effective July 24, 2026."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 GAAP margin of about 9.7% comes from guidance of $689-719M GAAP operating income on about $7.14B, which includes the one-time $136M refund. Years 2-5 reset to the adjusted run-rate of about 8%, then drift down because of Section 301 tariffs and higher marketing spend."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1959"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0887."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 19.6% is high because leased stores are off the tangible base. I assume new investment earns a lower 15% as competition and tariffs bite, still above the 8.87% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The Company is now forecasting fiscal year 2026 net sales to be in the range of $7.100 billion to $7.180 billion"
+       },
+       {
+        "id": "P4",
+        "quote": "Net sales in our international channel increased 20% compared to the second quarter of 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows the raised guidance of $7.10-7.18B against $6.553B, about 9% growth, driven by comparable sales, international and a weak Q2 2025 base. Growth then fades toward the low-single digits as comparisons normalize, stores stay roughly flat in square footage, and the base rate that margin gaps and growth revert applies."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature specialty retailer with a flat store fleet and growth coming from international and digital should grow somewhat below the long-run nominal anchor, so I use 3%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Section 301 tariffs and rising marketing spend compress margins, and the one-time refund-lifted level does not persist"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "op_margin",
+      "risk": "Weak holiday quarter or consumer slowdown with inventory markdowns cuts growth"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Mall traffic decline, partner failures or a fading brand revival slow revenue growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       0.065,
+       0.019999999999999997,
+       0.010000000000000002,
+       0.0049999999999999975,
+       0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.10999999999999999,
+       0.065,
+       0.055,
+       0.049999999999999996,
+       0.049999999999999996
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Funded debt of about $975M is flat to down against rising earnings and equity, and it is small beside operating lease obligations, so it looks stable relative to size."
+     },
+     "margin_position": "The filed 4.1% GAAP margin for the base year is depressed by a $120M Adore Me impairment and $36M of fulfillment restructuring, partly offset by a $69M litigation gain. Adjusted margin was about 6.2%, and the current-year run-rate is about 8%. That is well above the 7-year GAAP median of about 4.1%, so I expect partial reversion for a discretionary, mall-based specialty retailer facing new tariffs and higher marketing spend.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year 21.1% rate was lowered by a $24M China valuation allowance release, and the Q2 2026 rate was about 24%, so a mid-20s rate is more sustainable."
+     },
+     "why": "Fiscal 2025 GAAP operating income of $271M versus adjusted $403M shows large one-offs in both directions. Fiscal 2026 is also distorted by a $136M IEEPA tariff refund in GAAP operating income, which will not recur. Year 1 uses guidance, and later years fall back to an adjusted run-rate with some reversion."
+    },
+    "value_at_old_defaults": 41.854033137085636,
+    "values": {
+     "base": 59.29739603466944,
+     "bear": 44.99221385827599,
+     "bull": 76.9188691025995
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 41.854033137085636,
+  "value_at_old_defaults_quoted": 41.854033137085636,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4939248646.140631,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 83000000.0,
  "flags": [
   "The company received cash of $148 million for IEEPA tariff refund recoveries, including $4 million of interest, and recorded $140 million of pre-tax income, of which $135 million reduced costs of goods sold; the refunds represent over 95% of IEEPA tariffs it paid.",
@@ -15,7 +498,7 @@
   "The U.S. administration imposed new tariffs ranging from 10% to 12.5% under Section 301 of the Trade Act of 1974."
  ],
  "in_code_book": false,
- "ke": 0.10608180622416283,
+ "ke": 0.10578180622416283,
  "market_cap_at_publish": 7872710117,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +506,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 46.89212251618878,
-  "3000": 43.694227439007
+  "1000": 59.720643631369846,
+  "3000": 59.29739603466944
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1396,157 +1879,17 @@
   ]
  },
  "ticker": "VSXY",
- "upside": -0.5393427646209902,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.margin (1000 up, 3000 none)",
-   "seeds_disagree: long_run_op_margin (1000 up, 3000 none)",
-   "guidance_outside_record: rev_growth.y1 0.0896",
-   "held_at_record: rev_growth.y1 model 0.0896 valued at 0.1273"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s29",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "mix",
-    "evidence": [
-     "P6.s14",
-     "P6.s30",
-     "P3.s145"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-08-01",
-    "text": "CONSOLIDATED STATEMENTS OF INCOME (LOSS) - USD ($) $ in Millions | 3 Months Ended | 6 Months Ended\nAug. 01, 2026 | Aug. 02, 2025 | Aug. 01, 2026 | Aug. 02, 2025\nIncome Statement [Abstract]\nNet Sales | $ 1,611 | $ 1,459 | $ 3,170 | $ 2,812\nCosts of Goods Sold, Buying and Occupancy | (852) | (940) | (1,826) | (1,819)\nGross Profit | 759 | 519 | 1,344 | 993\nGeneral, Administrative and Store Operating Expenses | (502) | (478) | (1,011) | (932)\nOperating Income | 257 | 41 | 333 | 61\nInterest Expense | (15) | (18) | (30) | (35)\nOther Income | 6 | 1 | 9 | 4\nIncome Before Income Taxes | 248 | 24 | 312 | 30\nProvision for Income Taxes | 60 | 6 | 67 | 9\nNet Income | 188 | 18 | 245 | 21\nLess: Net Income Attributable to Noncontrolling Interest | 5 | 2 | 14 | 7\nNet Income Attributable to Victoria\u2019s Secret & Co. | $ 183 | $ 16 | $ 231 | $ 14\nNet Loss Per Basic Share Attributable to Victoria's Secret & Co. (in dollars per share) | $ 2.29 | $ 0.20 | $ 2.87 | $ 0.18\nNet Loss Per Diluted Share Attributable to Victoria's Secret & Co. (in dollars per share) | $ 2.18 | $ 0.20 | $ 2.73 | $ 0.18"
-   },
-   "P3.s145": {
-    "kind": "annual_section",
-    "period": "2026-01-31",
-    "text": "The increase in gross profit was primarily driven by an increase in net sales, a decrease in promotional activity and an increase in regular-priced selling, partially offset by an increase in net tariff costs."
-   },
-   "P6.s14": {
-    "kind": "release",
-    "period": "2026-09-03",
-    "text": "We continued to benefit from stronger regular-price selling and disciplined execution, while navigating ongoing tariff uncertainty."
-   },
-   "P6.s29": {
-    "kind": "release",
-    "period": "2026-09-03",
-    "text": "The Company is now forecasting fiscal year 2026 net sales to be in the range of $7.100 billion to $7.180 billion, an increase compared to the previously communicated guidance range of $7.030 billion to $7.130 billion, and compared to net sales of $6.553 billion in fiscal year 2025."
-   },
-   "P6.s30": {
-    "kind": "release",
-    "period": "2026-09-03",
-    "text": "At this forecasted level of net sales, the Company is now forecasting adjusted operating income for fiscal year 2026 to be in the range of $560 million to $590 million, an increase compared to previously communicated guidance range of $550 million to $580 million, and compared to fiscal year 2025 adjusted operating income of $403 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.029725182277061134,
-    0.029725182277061134,
-    0.029725182277061134,
-    0.029725182277061134,
-    0.029725182277061134
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.04555716703339287,
-   "normalized.margin": 0.04555716703339287,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.10504731861198738,
-   "op_margin.y2": 0.04555716703339287,
-   "rev_growth.y1": 0.12731152204836405,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08885802366048196
-  },
-  "numbers": {
-   "capex": [
-    0.029725182277061134,
-    0.029725182277061134,
-    0.029725182277061134,
-    0.029725182277061134,
-    0.029725182277061134
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.04555716703339287,
-   "normalized.margin": 0.04555716703339287,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.10504731861198738,
-   "op_margin.y2": 0.07534678436317781,
-   "rev_growth.y1": 0.08957729284297278,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08885802366048196
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.08957729284297278,
-    "model_option": "guidance",
-    "record": 0.12731152204836405,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "p75",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The packet holds no third- or fourth-quarter 2026 actual results, so it cannot show whether the raised full-year guidance was met.",
-   "Whether further IEEPA tariff refunds will be received is unknown; the company recorded no receivable for them.",
-   "The effect on margins of the Section 301 tariffs effective July 24, 2026 is not quantified in the evidence.",
-   "No capital expenditure guidance for fiscal 2026 or later is given.",
-   "The full-year operating income guidance is stated as a dollar range, not as an operating margin, so it cannot be used directly as margin guidance."
-  ],
-  "year": 3
- },
- "value_base": 43.694227439007,
- "value_bear": 34.75070785423035,
- "value_bull": 51.949809029198384,
+ "upside": -0.3726113914095447,
+ "valuation": null,
+ "value_base": 59.50901983301964,
+ "value_bear": 45.22327643058435,
+ "value_bull": 75.9359584552107,
  "value_per_filed_share": {
-  "base": 43.694227439007,
-  "bear": 34.75070785423035,
-  "bull": 51.949809029198384
+  "base": 59.50901983301964,
+  "bear": 45.22327643058435,
+  "bull": 75.9359584552107
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -26.4 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -16.9 points a year against the required return over 3 years"
 }

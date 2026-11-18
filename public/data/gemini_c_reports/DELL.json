@@ -1,11 +1,543 @@
 {
- "alpha_pts": -19.957673322804126,
+ "alpha_pts": -8.855014928908602,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 114,
  "claims_supported": 112,
  "date": "2026-11-17T00:00:19Z",
- "equity_value": 122259392607.30003,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1040 (filed -0.0528 to 0.0718)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.0970 (filed -0.0528 to 0.0718)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.0900 (filed -0.0528 to 0.0718)",
+   "run 1000: margin_outside_filed_record: op_margin.y4 0.0830 (filed -0.0528 to 0.0718)",
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.0780 (filed -0.0528 to 0.0718)",
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.6800 (filed -0.1356 to 0.2822)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1030 (filed -0.0528 to 0.0718)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.0970 (filed -0.0528 to 0.0718)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.0900 (filed -0.0528 to 0.0718)",
+   "run 3000: margin_outside_filed_record: op_margin.y4 0.0850 (filed -0.0528 to 0.0718)",
+   "run 3000: margin_outside_filed_record: op_margin.y5 0.0800 (filed -0.0528 to 0.0718)",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.6800 (filed -0.1356 to 0.2822)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.7085 and margin 0.0996, margin 0.0665 (persist), growth 0.0375, terminal RONIC 0.0619 (equity return r 0.1113), F 10",
+  "run_gap": 0.06869315397943902,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 200000000.0,
+       "printed": 0.2,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "resulting in a gain on sale of $0.2 billion recognized in interest and other, net in the Consolidated Statements of Income during Fiscal 2026"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "billions",
+       "sign": "gain",
+       "what": "Gain on sale of Secureworks recognized in interest and other, net in Fiscal 2026"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 11528000000.0,
+     "excess_cash_before": 11528000000.0,
+     "k0_after": 1548680215.2610445,
+     "k0_before": 1348680215.2610445,
+     "k0_interest": 1560000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 200000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 5803042577.751679,
+     "x0_before": 5966501203.6638365
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 130862215384.78503,
+     "seam_ratio": 1.0074700102326493,
+     "tv_share": 0.26167454356088116,
+     "wedge_rate_5": 0.0009704926779948145
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1040 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y2 0.0970 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y3 0.0900 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y4 0.0830 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y5 0.0780 (filed -0.0528 to 0.0718)",
+     "growth_outside_filed_record: rev_growth.y1 0.6800 (filed -0.1356 to 0.2822)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.024,
+     "fade_years": 10,
+     "long_run_op_margin": 0.065,
+     "op_margin": [
+      0.104,
+      0.097,
+      0.09,
+      0.083,
+      0.078
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.68,
+      0.14,
+      0.05,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.7085 and margin 0.0996, margin 0.0665 (persist), growth 0.0375, terminal RONIC 0.0619 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 112
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.05,
+      0.08
+     ],
+     "rev_growth_y3": [
+      -0.05,
+      0.12
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures and capitalized software development costs | (2,202) | (1,243)"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0276"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "H1 FY27 capex was about 2.4% of revenue (2,202 of 90,813), below the pooled 2.76% because revenue is surging faster than spend."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "which continues to drive variability in our revenue"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The AI cycle and the margin gap should normalize over roughly a decade, which is a medium-length fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-01-30 | $113,538.0 million | 0.1880 | 0.0718"
+       },
+       {
+        "id": "P2",
+        "quote": "Such pressures could result in the erosion of revenue and operating income and negatively affect ISG\u2019s results of operations."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is a cyclical hardware business whose operating margin never exceeded 7.2% over 12 years. The base rate says about half of the gap above the median persists, but AI server mix and competition imply a lower floor, so I settle only modestly above the historical peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "We expect margin growth, while balancing anticipated margin rate pressure resulting from a continuing shift in mix towards our AI-optimized servers offerings."
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 5,385 | 1,773 | 9,041 | 2,938"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "FY27 GAAP EPS guidance implies an operating margin of about 10.4%, against 10.0% in H1 and 11.5% in Q2. Management warns of mix-driven margin rate pressure and persistent component inflation, so I fade the margin from there."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 1.0000"
+       },
+       {
+        "id": "P2",
+        "quote": "Larger orders may also require greater commitments of working capital"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Dell's tangible capital is near zero because supplier payables and deferred revenue fund working capital, so the measured return is huge. I take a high but competitively limited return, well above the 0.0619 break-even, because the AI server buildout absorbs working capital and capex."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Full-year FY27 revenue guidance of $192.0 billion, up 69% year over year"
+       },
+       {
+        "id": "P4",
+        "quote": "there is inherent non-linearity in the timing of demand and subsequent shipments for our AI-optimized servers offerings"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows guidance (about +69%), shaded slightly down because H1 is already $90.8B and the record $95B backlog supports it. After that, AI shipment timing is non-linear and orders come from few large buyers, so growth drops quickly toward mid-single digits. Memory inflation also inflates revenue in the near term."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Mature hardware and infrastructure with exposure to PC replacement-cycle risk and to cloud substitution justifies growth just below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "AI order delay or cancellation, or a customer-concentration shock, leaves excess inventory and cuts growth after year 1"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Memory and component cost inflation plus AI mix compress margins back to the historical 5-6% range"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Public cloud substitution and slower PC refresh cut long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.05,
+      "rev_growth": [
+       0.5800000000000001,
+       0.04000000000000001,
+       -0.05,
+       -0.07,
+       -0.07
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.08,
+      "rev_growth": [
+       0.75,
+       0.21000000000000002,
+       0.12,
+       0.09999999999999999,
+       0.09999999999999999
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of $31.5B at the base year is low against FY27 revenue, but it keeps rising (long-term debt $25,985M versus $23,513M) and funds buybacks, so the future level is uncertain."
+     },
+     "margin_position": "The margin is far above Dell's own history. The 12-year filed record peaks at 7.18% in FY26, while Q2 FY27 reached 11.5%. The jump comes from a sharp mix shift to AI servers and traditional servers, a 15.0% ISG margin, and operating expenses falling as a share of revenue. AI orders are lumpy and concentrated in a few buyers, and memory costs are inflating, so I expect part of the gain to fade.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate is 18.27% and H1 FY27 ran at 16.6%, which looks low for a company with 45% of revenue outside the US, so some reversion upward is plausible."
+     },
+     "why": "FY26 revenue of $113.5B is far below the FY27 run rate: guidance is $192B, up 69%, and H1 already reached $90.8B. FY26 operating margin of 7.18% is also well below the current 10-11.5%. The base year therefore understates both the scale and the margin now being earned. It does contain a Secureworks gain in non-operating items."
+    },
+    "value_at_old_defaults": 177.3348930538604,
+    "values": {
+     "base": 224.97258770765754,
+     "bear": 125.3439924014339,
+     "bull": 400.2031758376543
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 200000000.0,
+       "printed": 0.2,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "resulting in a gain on sale of $0.2 billion recognized in interest and other, net in the Consolidated Statements of Income during Fiscal 2026"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "billions",
+       "sign": "gain",
+       "what": "Gain on sale of Secureworks recognized in interest and other, net in Fiscal 2026"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 11528000000.0,
+     "excess_cash_before": 11528000000.0,
+     "k0_after": 1548680215.2610445,
+     "k0_before": 1348680215.2610445,
+     "k0_interest": 1560000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 200000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 5803042577.751679,
+     "x0_before": 5966501203.6638365
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 140925152522.94318,
+     "seam_ratio": 1.0171865390329207,
+     "tv_share": 0.27839981732904856,
+     "wedge_rate_5": 0.0006951171167960327
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1030 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y2 0.0970 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y3 0.0900 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y4 0.0850 (filed -0.0528 to 0.0718)",
+     "margin_outside_filed_record: op_margin.y5 0.0800 (filed -0.0528 to 0.0718)",
+     "growth_outside_filed_record: rev_growth.y1 0.6800 (filed -0.1356 to 0.2822)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.0225,
+     "fade_years": 10,
+     "long_run_op_margin": 0.07,
+     "op_margin": [
+      0.103,
+      0.097,
+      0.09,
+      0.085,
+      0.08
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.68,
+      0.14,
+      0.05,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.7085 and margin 0.0996, margin 0.0665 (persist), growth 0.0375, terminal RONIC 0.0619 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 112
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.055,
+      0.085
+     ],
+     "rev_growth_y3": [
+      -0.04,
+      0.12
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0276"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures and capitalized software development costs | (2,202) | (1,243)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled history is 2.8%, but H1 capex of $2.2B on $90.8B revenue is about 2.4%. I assume about 2.25% as revenue scales faster than capex."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "exited the quarter with a record $95 billion backlog"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade lets the AI-driven growth and elevated margins normalize gradually, given backlog conversion over several years and a competitive hardware market."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-01-30 | $113,538.0 million | 0.1880 | 0.0718"
+       },
+       {
+        "id": "P2",
+        "quote": "are generally subject to intense competition and pricing pressure, which can have an impact on our gross margins"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 12-year history shows margins of 6-7% at peak, and the base rate says part of an above-median margin gap persists. I assume the margin settles around 7%, slightly below FY26, because AI servers and PCs are competitive and heavily price-pressured."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating income | 11.5% | 6.0% | 10.0% | 5.5%"
+       },
+       {
+        "id": "P4",
+        "quote": "We expect margin growth, while balancing anticipated margin rate pressure resulting from a continuing shift in mix towards our AI-optimized servers offerings."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "H1 FY27 operating margin is about 10% and Q2 is 11.5%, so year 1 is set near 10.3% on the guided EPS. Margins then drift down as mix shifts to lower-rate AI servers and component inflation persists."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P2",
+        "quote": "Larger orders may also require greater commitments of working capital"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Tangible capital is minimal because suppliers fund working capital, but AI deals require large inventory and receivable commitments that dilute returns. I assume a high but well-below-recorded return, well above the 6.2% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Full-year FY27 revenue guidance of $192.0 billion, up 69% year over year"
+       },
+       {
+        "id": "P6",
+        "quote": "exited the quarter with a record $95 billion backlog"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows the raised FY27 guidance of $192B (+69%), which is backed by a $95B AI backlog and H1 revenue already at $90.8B, shaded slightly for lumpy shipment timing. Growth then decays quickly, since AI buyers are concentrated and demand is non-linear."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature hardware business with exposure to cyclical IT spending should grow near or slightly below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.05,
+      "input_hit": "rev_growth",
+      "risk": "AI server demand is concentrated in a few large customers, and orders could be delayed or cancelled, leaving excess inventory and a reset of revenue"
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "long_run_op_margin",
+      "risk": "Memory and component inflation plus the AI mix shift compress margins back to the historical 5-6%"
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Supplier payables stop funding the inventory and receivable build, so returns on new investment fall"
+     },
+     {
+      "bear_value": 0.55,
+      "input_hit": "rev_growth",
+      "risk": "Component shortages or tariffs delay shipments, so year 1 misses the $192B guidance"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.055,
+      "rev_growth": [
+       0.5900000000000001,
+       0.05000000000000002,
+       -0.039999999999999994,
+       -0.049999999999999996,
+       -0.05499999999999999
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.085,
+      "rev_growth": [
+       0.75,
+       0.21000000000000002,
+       0.12,
+       0.10999999999999999,
+       0.105
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of $31.5B is small against FY27 revenue, but it is rising (long-term debt $25,985M vs $23,513M) to fund buybacks and a working-capital build on a shareholders' deficit."
+     },
+     "margin_position": "The 7.2% FY26 margin is a record in the filed history, and the first half of FY27 is higher at 10.0%, with Q2 at 11.5%. The lift comes from the mix shift toward AI servers and traditional servers during a refresh and AI buildout, plus operating expense leverage. Hardware margins tend to mean-revert, and management itself flags gross margin rate pressure from AI mix and memory cost inflation.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 18.3% base-year rate sits between the H1 FY27 rate of 16.6% and the Q2 rate of 19.5%, so it looks roughly sustainable but is not firmly anchored."
+     },
+     "why": "FY26 revenue of $113.5B is far below the FY27 guidance of $192B, so the base year is a poor guide to scale. H1 FY27 revenue of $90.8B is already 80% of the whole FY26 base. Margins sit at multi-year highs in a demand upcycle. Year 1 is therefore a very large step up, with a fade after the AI backlog converts."
+    },
+    "value_at_old_defaults": 177.3348930538604,
+    "values": {
+     "base": 240.97633837047732,
+     "bear": 138.90208561888227,
+     "bull": 416.58363024161264
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 177.3348930538604,
+  "value_at_old_defaults_quoted": 177.3348930538604,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 159354532718.7221,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 684000000.0,
@@ -15,7 +547,7 @@
   "The board declared a quarterly cash dividend of $0.63 per common share."
  ],
  "in_code_book": false,
- "ke": 0.11114375453902048,
+ "ke": 0.11134375453902048,
  "market_cap_at_publish": 205234000672,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +555,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 179.2650002718811,
-  "3000": 198.82595468195117
+  "1000": 224.97258770765754,
+  "3000": 240.97633837047732
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1385,166 +1917,17 @@
   ]
  },
  "ticker": "DELL",
- "upside": -0.40429269903142395,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.year (1000 4, 3000 3)",
-   "seeds_disagree: rev_growth.y2 (1000 none, 3000 up)",
-   "guidance_outside_record: rev_growth.y1 0.6900",
-   "ytd_outside_record: op_margin.y1 0.0996",
-   "held_at_record: rev_growth.y1 model 0.6900 valued at 0.7085",
-   "margin_at_record_peak: normalized.margin 0.0665 at or above the record's p75 0.0653",
-   "margin_at_record_peak: long_run_op_margin 0.0665 at or above the record's p75 0.0653"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s8",
-     "P6.s16",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "backlog",
-    "evidence": [
-     "P6.s11",
-     "P4.s45",
-     "Y2026-01-30"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-07-31",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF INCOME - USD ($) shares in Millions, $ in Millions | 3 Months Ended | 6 Months Ended\nJul. 31, 2026 | Aug. 01, 2025 | Jul. 31, 2026 | Aug. 01, 2025\nNet revenue:\nTotal net revenue | $ 46,971 | $ 29,776 | $ 90,813 | $ 53,154\nCost of net revenue:\nTotal cost of net revenue | 37,141 | 24,329 | 73,201 | 42,770\nGross margin | 9,830 | 5,447 | 17,612 | 10,384\nOperating expenses:\nSelling, general, and administrative | 3,336 | 2,889 | 6,479 | 5,853\nResearch and development | 1,109 | 785 | 2,092 | 1,593\nTotal operating expenses | 4,445 | 3,674 | 8,571 | 7,446\nOperating income | 5,385 | 1,773 | 9,041 | 2,938\nInterest and other, net | (254) | (333) | 38 | (415)\nIncome before income taxes | 5,131 | 1,440 | 9,079 | 2,523\nIncome tax expense | 998 | 276 | 1,508 | 394\nNet income | $ 4,133 | $ 1,164 | $ 7,571 | $ 2,129\nEarnings per share:\nBasic (in dollars per share) | $ 6.41 | $ 1.72 | $ 11.70 | $ 3.11\nDiluted (in dollars per share) | $ 6.34 | $ 1.70 | $ 11.58 | $ 3.07\nWeighted-average shares outstanding:\nBasic (in shares) | 645 | 678 | 647 | 685\nDiluted (in shares) | 652 | 686 | 654 | 694\nProducts\nNet revenue:\nTotal net revenue | $ 41,112 | $ 23,935 | $ 79,217 | $ 41,534\nCost of net revenue:\nTotal cost of net revenue | 33,990 | 21,044 | 66,842 | 36,160\nServices\nNet revenue:\nTotal net revenue | 5,859 | 5,841 | 11,596 | 11,620\nCost of net revenue:\nTotal cost of net revenue | $ 3,151 | $ 3,285 | $ 6,359 | $ 6,610"
-   },
-   "P4.s45": {
-    "kind": "quarterly_section",
-    "period": "2026-07-31",
-    "text": "\u2022Demand for AI-optimized servers: Our ISG business benefitted from substantial demand for our AI-optimized servers offerings as customers continue to adopt and further integrate AI, resulting in a significant increase in backlog as we exited the quarter."
-   },
-   "P6.s11": {
-    "kind": "release",
-    "period": "2026-09-01",
-    "text": "\u201cThat\u2019s clearest in our AI server business where we booked a record $60.9 billion in orders, recognized a record $16.4 billion in revenue and exited the quarter with a record $95 billion backlog."
-   },
-   "P6.s16": {
-    "kind": "release",
-    "period": "2026-09-01",
-    "text": "With AI momentum accelerating and our opportunity expanding across the portfolio, we\u2019re raising our full-year FY27 revenue outlook by $25 billion to $192 billion, up nearly 70% year over year.\u201d"
-   },
-   "P6.s8": {
-    "kind": "release",
-    "period": "2026-09-01",
-    "text": "\u2022Full-year FY27 revenue guidance of $192.0 billion, up 69% year over year"
-   },
-   "Y2026-01-30": {
-    "kind": "filed_record",
-    "period": "2026-01-30",
-    "text": "Filed annual record, fiscal year ended 2026-01-30 (10-K, accession 0001571996-26-000008): revenue $113,538.0 million; operating income $8,149.0 million; operating margin 7.2%; net income $5,936.0 million; depreciation and amortization $3,029.0 million; capital expenditure $2,633.0 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.027623206687051424,
-    0.027623206687051424,
-    0.027623206687051424,
-    0.027623206687051424,
-    0.027623206687051424
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.06648321424514458,
-   "normalized.margin": 0.06648321424514458,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.09955623093609946,
-   "op_margin.y2": 0.06648321424514458,
-   "rev_growth.y1": 0.7084885427249126,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.061894480157356206
-  },
-  "numbers": {
-   "capex": [
-    0.027623206687051424,
-    0.027623206687051424,
-    0.027623206687051424,
-    0.027623206687051424,
-    0.027623206687051424
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.06648321424514458,
-   "normalized.margin": 0.06648321424514458,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.09955623093609946,
-   "op_margin.y2": 0.07177332699184415,
-   "rev_growth.y1": 0.6900000000000001,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.061894480157356206
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.6900000000000001,
-    "model_option": "guidance",
-    "record": 0.7084885427249126,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The packet holds no operating margin or capital expenditure guidance for Fiscal 2027.",
-   "Third-quarter Fiscal 2027 results are not in the packet; only Q3 guidance from the September 1, 2026 release is available.",
-   "The evidence does not say how much of the $95 billion AI server backlog will ship in Fiscal 2027 versus Fiscal 2028.",
-   "The evidence does not quantify how much memory and component cost inflation will reduce margins in the second half or in Fiscal 2028.",
-   "There is no revenue or margin outlook for Fiscal 2028 or later."
-  ],
-  "year": 3
- },
- "value_base": 178.7418020574562,
- "value_bear": 172.68945570776518,
- "value_bull": 182.7376338417516,
+ "upside": -0.2235471111173306,
+ "valuation": null,
+ "value_base": 232.97446303906742,
+ "value_bear": 132.1230390101581,
+ "value_bull": 408.3934030396335,
  "value_per_filed_share": {
-  "base": 178.7418020574562,
-  "bear": 172.68945570776518,
-  "bull": 182.7376338417516
+  "base": 232.97446303906742,
+  "bear": 132.1230390101581,
+  "bull": 408.3934030396335
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -20.0 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -8.9 points a year against the required return over 3 years"
 }

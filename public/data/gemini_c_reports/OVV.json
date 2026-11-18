@@ -1,11 +1,502 @@
 {
- "alpha_pts": -10.553685528676931,
+ "alpha_pts": 3.5123100529132563,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 73,
  "claims_supported": 64,
  "date": "2026-11-17T07:31:48Z",
- "equity_value": 12787928362.032566,
+ "decided": {
+  "flags": [
+   "run 1000: return_above_base_year: long-run 0.0900 against the base year's 0.0715",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 2025 rate of 0.1683 came from a large tax recovery on a pretax profit of 770, and 2026 shows a swing in tax expense, so a normal blended US/Canada rate of about 22-25% is more likely.",
+   "run 1000: debt_level_representative_no: Debt of $5,202 million at end-2025 fell to $3,588 million after the Anadarko proceeds were applied to debt, although the pending all-cash Logan deal may add some back.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: return_above_base_year: long-run 0.0900 against the base year's 0.0715",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The 2025 result had a large tax recovery on pretax earnings of $770 million, while 2026 shows a 27% nine-month rate and a 32% Q3 rate.",
+   "run 3000: debt_level_representative_no: Debt of $5,202 million at the 2025 year-end has fallen to $3,588 million after the Anadarko proceeds were used to repay it, though Logan and buybacks may push it up somewhat.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.2050 and margin 0.1371, margin 0.1497 (persist), growth 0.0375, terminal RONIC 0.0767 (equity return r 0.0846), F 10",
+  "run_gap": 0.00336168301327842,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 280000000.0,
+     "excess_cash_before": 280000000.0,
+     "k0_after": 372382955.8232932,
+     "k0_before": 372382955.8232932,
+     "k0_interest": 376000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 630939442.8396658,
+     "x0_before": 630939442.8396658
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 15652826562.5812,
+     "seam_ratio": 1.079157320551553,
+     "tv_share": 0.47715359421644493,
+     "wedge_rate_5": 0.010361647964671634
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0715",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 rate of 0.1683 came from a large tax recovery on a pretax profit of 770, and 2026 shows a swing in tax expense, so a normal blended US/Canada rate of about 22-25% is more likely.",
+     "debt_level_representative_no: Debt of $5,202 million at end-2025 fell to $3,588 million after the Anadarko proceeds were applied to debt, although the pending all-cash Logan deal may add some back.",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.21,
+     "fade_years": 8,
+     "long_run_op_margin": 0.18,
+     "op_margin": [
+      0.17,
+      0.22,
+      0.2,
+      0.19,
+      0.19
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.2,
+      -0.02,
+      0.04,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.2050 and margin 0.1371, margin 0.1497 (persist), growth 0.0375, terminal RONIC 0.0767 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 64
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.14,
+      0.22
+     ],
+     "rev_growth_y3": [
+      -0.03,
+      0.09
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The Company plans to spend approximately $2,250 million to $2,350 million on its full year 2026 capital investment program"
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.1964"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 guidance of $2,250-2,350 million on about $10.7 billion of revenue is about 21%. That is close to the 0.1964 pooled history, with a little more to sustain the larger Montney footprint."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "The acquisition will add approximately 420 net well locations"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Eight years allows the elevated price-driven margin and the post-acquisition growth to converge to steady state as the Montney and Permian inventory is worked down."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $8,908.0 million | -0.0267 | 0.1270"
+       },
+       {
+        "id": "P2",
+        "quote": "A substantial or extended decline in oil, NGLs or natural gas prices"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins of 14.5%-27% across 2021-2025 with a 2020 collapse put the long-run median near 17%. A mid-cycle GAAP margin of about 18% reflects Permian and Montney scale and a cost-saving cube model, offset by full-cost write-downs in weak price periods."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Impairments | 0 | 141 | 1,485 | 871"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating Income (Loss) | 877 | 273 | 1,117 | 695"
+       },
+       {
+        "id": "P6",
+        "quote": "WTI | 85.79 | 64.93"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 includes $1,485 million of nine-month impairments, so the GAAP margin is about 17% even though the ex-impairment margin is roughly 30%. Years 2-5 assume partial mean reversion of prices, higher Canadian transport and processing cost per BOE, and some recurring impairment risk."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0767."
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0715"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 0.0715 against a breakeven of 0.0767. Low-cost inventory at $1.3-1.7 million per location and efficiency gains justify a modest premium, but not a large one in a commodity business."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total Revenues | 2,602 | 2,066 | 8,147 | 6,761"
+       },
+       {
+        "id": "P6",
+        "quote": "Total Production (MBOE/d) | 615 \u2013 640 | 630 \u2013 645"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 jumps on the NuVista close, higher realized prices and nine-month revenue of 8,147 against a 2025 base of 8,908. Year 2 dips slightly because Anadarko is gone for a full year and oil may ease from the elevated level. Later growth is modest, from Logan and inventory additions and guided production of 630-645 MBOE/d."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A depleting-asset producer in mature basins should grow below the 0.0375 nominal anchor, so I use about 2.5%. Inventory additions support some growth but long-run oil demand is uncertain."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.13,
+      "input_hit": "long_run_op_margin",
+      "risk": "Oil and gas prices fall back from the elevated 2026 level, cutting revenue and margin and triggering more ceiling-test impairments"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Montney midstream outages, Logan integration problems or an unfunded leveraged acquisition lower volumes and growth"
+     },
+     {
+      "bear_value": 0.26,
+      "input_hit": "capex_to_revenue",
+      "risk": "Higher capital intensity is needed to hold production after the Anadarko sale and as processing costs rise"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.13,
+       -0.09000000000000001,
+       -0.030000000000000006,
+       -0.04000000000000001,
+       -0.04000000000000001
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       0.25,
+       0.029999999999999995,
+       0.09,
+       0.07999999999999999,
+       0.07999999999999999
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt of $5,202 million at end-2025 fell to $3,588 million after the Anadarko proceeds were applied to debt, although the pending all-cash Logan deal may add some back."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 12.7% is depressed by ceiling-test impairments of $920 million and by lower 2025 oil prices. 2026 nine-month margin is also cut by $1,485 million of impairments, but ex-impairment operating income is about 32% of revenue because WTI rose to about $86. The underlying margin is therefore above its long-run median, and full-cost write-downs will recur when prices fall.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 rate of 0.1683 came from a large tax recovery on a pretax profit of 770, and 2026 shows a swing in tax expense, so a normal blended US/Canada rate of about 22-25% is more likely."
+     },
+     "why": "FY2025 mixes a weak price year with large impairments, a Uinta sale and a Montney purchase. FY2026 (year 1) has a different asset base: Anadarko sold, NuVista added, and oil prices much higher. I therefore set year 1 from the 2026 year-to-date results and fade the margin toward a mid-cycle level below the current peak."
+    },
+    "value_at_old_defaults": 49.43661089567141,
+    "values": {
+     "base": 65.81419992272122,
+     "bear": 38.57764742515694,
+     "bull": 108.86239030924833
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 280000000.0,
+     "excess_cash_before": 280000000.0,
+     "k0_after": 372382955.8232932,
+     "k0_before": 372382955.8232932,
+     "k0_interest": 376000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 630939442.8396658,
+     "x0_before": 630939442.8396658
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 15706412847.897419,
+     "seam_ratio": 1.084622665135439,
+     "tv_share": 0.46662687911060213,
+     "wedge_rate_5": 0.02493028137878254
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0715",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 result had a large tax recovery on pretax earnings of $770 million, while 2026 shows a 27% nine-month rate and a 32% Q3 rate.",
+     "debt_level_representative_no: Debt of $5,202 million at the 2025 year-end has fallen to $3,588 million after the Anadarko proceeds were used to repay it, though Logan and buybacks may push it up somewhat.",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.21,
+     "fade_years": 8,
+     "long_run_op_margin": 0.19,
+     "op_margin": [
+      0.18,
+      0.22,
+      0.2,
+      0.19,
+      0.19
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.2,
+      0.01,
+      0.02,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth 0.2050 and margin 0.1371, margin 0.1497 (persist), growth 0.0375, terminal RONIC 0.0767 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 64
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.14,
+      0.24
+     ],
+     "rev_growth_y3": [
+      -0.04,
+      0.07
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Capital Investment ($ Millions) | $550 \u2013 $600 | $2,250 \u2013 $2,350"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1964"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2026 capital guide of $2,250-$2,350 million on revenue near $10.8 billion gives about 21%, close to the 5-year pooled 19.6% and the 2023-2025 level of about 24-25%. E&P maintenance and growth capital stay high relative to revenue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Net Debt of $3.4 billion as of September 30, 2026, Net Debt to Adjusted EBITDA of 0.7x"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margins and growth normalize over several years as prices mean-revert and the portfolio changes settle, so I use an 8-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $8,908.0 million | -0.0267 | 0.1270"
+       },
+       {
+        "id": "P4",
+        "quote": "The oil and gas industry is cyclical and commodity prices are inherently volatile."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2025 margin of 12.7% was depressed by impairments at a lower price, and the Q3 2026 margin is a price-boosted peak. I use a mid-cycle 19%, a little above the historical median because of lower leverage and cost gains, with a wide band for prices and recurring ceiling-test write-offs."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Impairments | 0 | 141 | 1,485 | 871"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating Income (Loss) | 877 | 273 | 1,117 | 695"
+       },
+       {
+        "id": "P6",
+        "quote": "WTI | 85.79 | 64.93"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Q4 2026 should carry no impairments, which lifts the full-year 2026 margin to about 18%, while the nine-month margin is only 13.7% after $1,485 million of impairments. Hedged 2027 volumes keep the margin elevated in year 2, then I fade it toward a mid-cycle level that still allows for recurring full-cost impairments."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "P6",
+        "quote": "for an average cost of $1.3 million to $1.7 million per 10,000 foot equivalent drilling location"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 7.15%, against a no-value-from-growth threshold of 7.67%. Cheap inventory additions and cube-development efficiency support a modestly better long-run return of 9% at mid-cycle margins, but depletion and recurring full-cost write-downs limit it."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total Revenues | 2,602 | 2,066 | 8,147 | 6,761"
+       },
+       {
+        "id": "P6",
+        "quote": "Total Production (MBOE/d) | 615 \u2013 640 | 630 \u2013 645"
+       },
+       {
+        "id": "P4",
+        "quote": "is expected to close early in the first quarter of 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 growth is high because Q3 prices were much higher and NuVista volumes were added, partly offset by the Anadarko sale; nine-month revenue is already $8,147 million against $8,908 million for all of 2025. After that, growth is modest: Logan and the ground-game acreage add volume, while prices normalize and the production guide is flat to slightly up."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0846; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature North American shale producer with a depleting asset base should grow below the 3.75% nominal anchor. I use 2%, which is roughly inflation-like growth supported by inventory additions."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "Oil prices fall back to the 2025 level (WTI near $65), cutting both revenue and margin and bringing more ceiling-test impairments."
+     },
+     {
+      "bear_value": -0.04,
+      "input_hit": "rev_growth",
+      "risk": "Prices normalize quickly and the Montney outage persists, so revenue falls in 2027 instead of growing."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Acquisitions (Logan) and buybacks beyond free cash flow raise leverage, and new investment earns a low return."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.14,
+       -0.049999999999999996,
+       -0.039999999999999994,
+       -0.039999999999999994,
+       -0.039999999999999994
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.24,
+      "rev_growth": [
+       0.25,
+       0.060000000000000005,
+       0.07,
+       0.07,
+       0.07
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt of $5,202 million at the 2025 year-end has fallen to $3,588 million after the Anadarko proceeds were used to repay it, though Logan and buybacks may push it up somewhat."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 12.7% is below the 2021-2025 median (about 17%), mainly because of $920 million of full-cost ceiling-test impairments at a roughly $65 WTI. In 2026 the margin is pushed up by much higher oil prices (Q3 WTI $85.79 against $64.93), and nine-month impairments of $1,485 million still depress the reported figure. Pre-impairment margins are therefore much higher than reported now, but prices are above mid-cycle, so I fade back toward a mid-cycle level.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 result had a large tax recovery on pretax earnings of $770 million, while 2026 shows a 27% nine-month rate and a 32% Q3 rate."
+     },
+     "why": "The 2025 base year has weak prices, $920 million of impairments, and a portfolio that has since changed: Anadarko was sold, NuVista was bought and Logan is pending. 2026 revenue is already tracking about 20% higher on prices and the NuVista volumes. The base year understates the current earnings power but is also not a clean mid-cycle year."
+    },
+    "value_at_old_defaults": 49.43661089567141,
+    "values": {
+     "base": 66.03581890702141,
+     "bear": 39.31490563567906,
+     "bull": 111.50474782336947
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 49.43661089567141,
+  "value_at_old_defaults_quoted": 49.43661089567141,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 17120724945.04208,
  "family": "commodity",
  "far_from_price": false,
  "filed_shares": 259700000.0,
@@ -15,7 +506,7 @@
   "Ovintiv closed its acquisition of NuVista Energy Ltd., a cash and stock transaction valued at about $2.8 billion."
  ],
  "in_code_book": false,
- "ke": 0.08492083045154347,
+ "ke": 0.08462083045154348,
  "market_cap_at_publish": 17154323797,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +514,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 49.24115657309421,
-  "3000": 48.24605059967003
+  "1000": 65.81419992272122,
+  "3000": 66.03581890702141
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -920,102 +1411,17 @@
   ]
  },
  "ticker": "OVV",
- "upside": -0.2545361441604036,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: capex (1000 none, 3000 up)"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.19644520624510936,
-    0.19644520624510936,
-    0.19644520624510936,
-    0.19644520624510936,
-    0.19644520624510936
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.14974756033705855,
-   "normalized.margin": 0.14974756033705855,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.137105683073524,
-   "op_margin.y2": 0.14974756033705855,
-   "rev_growth.y1": 0.2049992604644284,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07691284692582541
-  },
-  "numbers": {
-   "capex": [
-    0.19644520624510936,
-    0.19644520624510936,
-    0.19644520624510936,
-    0.19644520624510936,
-    0.19644520624510936
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.14974756033705855,
-   "normalized.margin": 0.14974756033705855,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.137105683073524,
-   "op_margin.y2": 0.14974756033705855,
-   "rev_growth.y1": 0.2049992604644284,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07691284692582541
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No filing sentence guides 2026 revenue or revenue growth; the guidance items cover production, capital investment and unit costs only, so no revenue guidance option is available.",
-   "Fourth-quarter and 2027 commodity prices are not stated in the evidence, so the persistence of the higher realized prices seen in the first nine months of 2026 is unknown.",
-   "The nine-month 2026 operating margin includes a $1,485 million impairment charge and a $337 million divestiture loss, and the evidence does not say whether these will recur.",
-   "The revenue, cost and capital effects of the pending Logan acquisition (expected to close early in the first quarter of 2027) are not quantified beyond the stated deal value, so no departure is chosen for them."
-  ],
-  "year": 3
- },
- "value_base": 49.24115657309421,
- "value_bear": 39.41897562743455,
- "value_bull": 49.95152637027776,
+ "upside": -0.00195862293119331,
+ "valuation": null,
+ "value_base": 65.92500941487131,
+ "value_bear": 38.946276530418004,
+ "value_bull": 110.1835690663089,
  "value_per_filed_share": {
-  "base": 49.24115657309421,
-  "bear": 39.41897562743455,
-  "bull": 49.95152637027776
+  "base": 65.92500941487131,
+  "bear": 38.946276530418004,
+  "bull": 110.1835690663089
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -10.6 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +3.5 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

@@ -1,11 +1,488 @@
 {
- "alpha_pts": -71.65856797154014,
+ "alpha_pts": -61.595626987934814,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 69,
  "claims_supported": 67,
  "date": "2026-11-17T08:02:00Z",
- "equity_value": 222681852.0883988,
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: A 46.8% tax rate on a business with a small operating profit and large non-operating swings is unlikely to persist.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: A 46.8% base-year tax rate on a thin pretax base is above a normal statutory rate, and the income tax benefit this quarter was only $2,209 on a pretax loss of $33,346.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 15 of 15"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1530 and margin -0.5596, margin 0.0605 (persist), growth 0.0375, terminal RONIC 0.0552 (equity return r 0.0985), F 10",
+  "run_gap": 0.018166539280966922,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 164511000.0,
+     "excess_cash_before": 164511000.0,
+     "k0_after": 17076206.974000014,
+     "k0_before": 17076206.974000014,
+     "k0_interest": 21085000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 6270926.197501512,
+     "x0_before": 6270926.197501512
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 419027078.40119696,
+     "seam_ratio": 1.0213853061509623,
+     "tv_share": 0.5004425654522111,
+     "wedge_rate_5": -0.004352597148140529
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: A 46.8% tax rate on a business with a small operating profit and large non-operating swings is unlikely to persist.",
+     "confidence_low",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.002,
+     "fade_years": 8,
+     "long_run_op_margin": 0.08,
+     "op_margin": [
+      0.04,
+      0.06,
+      0.07,
+      0.08,
+      0.08
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      -0.3,
+      0.05,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1530 and margin -0.5596, margin 0.0605 (persist), growth 0.0375, terminal RONIC 0.0552 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 67
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.03,
+      0.12
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0017"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capital spending has been very low relative to revenue because the company does not own the arena, and the training center goes with the Rangers."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The Arena License Agreements have a term of 35 years and expire in June 2055."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Contracts such as the Garden license, which runs to 2055, and the multi-year media and suite deals make for a gradual convergence."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-06-30 | $1,027.1 million | 0.1574 | 0.1422"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company reached 14.2% in fiscal 2024 before the media fee cuts and the higher luxury tax rates. Half of the gap from the recent low is assumed to close, and a cut for the cheaper local media deal and tax is applied."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The Knicks were a luxury tax payer for the 2025-26 season"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-06-30 | $1,039.2 million | 0.0118 | 0.0142"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The Knicks-only margin should be above the combined 2.5%, but luxury tax and spin-off costs hold it back in year 1. The margin rises as one-off costs fall away. The Knicks are expected to remain a luxury tax payer."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business needs very little tangible capital, so returns on new investment are high. The long-run value is set well below the filed 1.0 because of competition for talent and luxury tax drag."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "the Company completed the spin-off of its New York Rangers"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-06-30 | $1,153.8 million | 0.1103 | 0.0250"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 steps down about 30% because the Rangers leave the revenue base. This is an estimate, since the Knicks' share of revenue is not disclosed. Afterwards growth follows contracted league media, suite and sponsorship escalators. The title-year playoff boost and the capped local media fees limit the upside."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A single, scarce, large-market franchise with league-pooled media rights should grow roughly in line with nominal growth. Possible NBA expansion would dilute the pooled share."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "The Knicks-only revenue base is smaller than assumed. The packet gives no segment split, so the year 1 step-down could be larger."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "long_run_op_margin",
+      "risk": "Luxury tax, revenue sharing and local media losses (including an MSG Networks default) hold the Knicks-only margin low."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Local media fees fall further after the 2028-29 expiry, and league expansion dilutes the pooled media share."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.03,
+      "rev_growth": [
+       -0.33,
+       0.02,
+       0.02,
+       0.014999999999999996,
+       0.009999999999999998
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       -0.27,
+       0.08,
+       0.08,
+       0.075,
+       0.07
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "The $258.5 million of debt is dated before the spin-off, and the packet does not say how debt was split afterwards."
+     },
+     "margin_position": "The base-year margin of 2.5% is low next to the 14.2% of fiscal 2024. It covers two teams, and the Knicks' championship run lifted revenue. The pressures on margin were the 28% cut in Knicks local media fees, luxury tax of $44.4 million, revenue sharing, and fixed Garden license fees. The company is now Knicks-only. The packet gives no segment split, so the standalone margin is a judgement.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "A 46.8% tax rate on a business with a small operating profit and large non-operating swings is unlikely to persist."
+     },
+     "why": "Fiscal 2026 revenue of $1,153.8 million includes the Rangers, which were distributed on October 26, 2026. The filings say Rangers results will move to discontinued operations. The market capitalisation in the prior read appears to be on a Knicks-only share count (an inference, not evidence), so the forecast must step revenue down in year 1. The size of that step is an estimate: the packet does not give the Knicks' share of revenue."
+    },
+    "value_at_old_defaults": 9.239024797799523,
+    "values": {
+     "base": 24.69515143574633,
+     "bear": 13.263595465953475,
+     "bull": 41.08638022359056
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 164511000.0,
+     "excess_cash_before": 164511000.0,
+     "k0_after": 17076206.974000014,
+     "k0_before": 17076206.974000014,
+     "k0_interest": 21085000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 6270926.197501512,
+     "x0_before": 6270926.197501512
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 429618414.58110005,
+     "seam_ratio": 1.0228338532388563,
+     "tv_share": 0.5071415395755965,
+     "wedge_rate_5": -0.00533357249485249
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: A 46.8% base-year tax rate on a thin pretax base is above a normal statutory rate, and the income tax benefit this quarter was only $2,209 on a pretax loss of $33,346.",
+     "confidence_low",
+     "quotes_verified: 15 of 15"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.002,
+     "fade_years": 8,
+     "long_run_op_margin": 0.08,
+     "op_margin": [
+      0.03,
+      0.05,
+      0.065,
+      0.075,
+      0.08
+     ],
+     "return_on_new_investment_long_run": 0.15,
+     "rev_growth": [
+      -0.3,
+      0.07,
+      0.06,
+      0.05,
+      0.05
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1530 and margin -0.5596, margin 0.0605 (persist), growth 0.0375, terminal RONIC 0.0552 (equity return r 0.0985), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 67
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.04,
+      0.12
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.09
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0017"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Pooled capex has been about 0.17% of revenue. The Knicks-only company likely no longer owns the training center, so I use a slightly higher ratio of 0.2% for the smaller revenue base."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The new NBA CBA expires after the 2029-30 season"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin recovery from a depressed level and the re-basing after the spin-off take several years to settle, so I use a medium fade of 8 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-06-30 | $1,153.8 million | 0.1103 | 0.0250"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-06-30 | $1,027.1 million | 0.1574 | 0.1422"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The FY2026 margin of 2.5% sits far below the 5-year median of about 9.6%. The base rate says about half the gap persists, which implies about 6%. A Knicks-only business with strong brand pull and the larger NBA media deal supports somewhat more, so I use 8%, with a wide range given no standalone history."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "expenses related to the spin-off transaction in the current year period of $3.6 million"
+       },
+       {
+        "id": "P2",
+        "quote": "Based on the current roster, the Knicks would also be a luxury tax payer for the 2026-27 season."
+       },
+       {
+        "id": "P3",
+        "quote": "the license fees are 103% of the license fees for the immediately preceding contract year"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 carries spin-off costs and restructuring, with an operating loss of $25.5 million in the seasonally weak quarter. Margins then rise as spin costs fade, the post-championship uplift builds and the new NBA media deal flows through. The Knicks are expected to be a luxury tax payer again, and arena fees escalate 3% a year, which caps the recovery."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0552"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (666) | (371)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light: net property and equipment is only about $27 million against over $1 billion of revenue. Incremental growth needs little tangible capital, so returns clear the 5.5% hurdle comfortably. I set 15% rather than the filed 1.0, which reflects a tiny tangible capital base."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "the Company distributed 100% of the outstanding common stock of MSG Rangers Corp. to its stockholders in the Rangers Distribution"
+       },
+       {
+        "id": "P5",
+        "quote": "higher Knicks merchandise revenues driven by ongoing demand from the team winning the 2025-26 NBA Championship"
+       },
+       {
+        "id": "P1",
+        "quote": "which took effect starting with the 2025-26 season, will expire following the 2035-36 season"
+       },
+       {
+        "id": "P2",
+        "quote": "any further expansion would dilute the revenue realized by the Knicks and/or the Rangers from such agreements"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 removes the Rangers (assumed about one-third of revenue; the packet gives no split), partly offset by championship-driven demand. Later growth rests on NBA media rights through 2035-36, ticket and suite escalators and merchandise, tempered by local media fees with no escalators and the risk of NBA expansion diluting pooled media revenue."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0985; long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P1",
+        "quote": "Long-term arena license agreements with MSG Entertainment"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A single scarce franchise in the largest media market with contracted league media through 2035-36 supports growth near the nominal anchor of 3.75%. Local media fees without escalators and possible expansion dilution argue for slightly below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "Knicks are a smaller share of base revenue than assumed, or the post-spin cost base is heavier, so year-1 revenue and margin re-base worse"
+     },
+     {
+      "bear_value": 0.04,
+      "input_hit": "long_run_op_margin",
+      "risk": "Luxury tax, revenue sharing and escalating arena fees keep the Knicks-only margin low"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "MSG Networks default or non-renewal after 2028-29, plus NBA expansion dilution, slows long-run growth"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Revolver reliance and negative equity limit financing, with debt split post-spin unknown"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.04,
+      "rev_growth": [
+       -0.33999999999999997,
+       0.030000000000000013,
+       0.020000000000000004,
+       0.010000000000000009,
+       0.010000000000000009
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       -0.27,
+       0.1,
+       0.09,
+       0.08,
+       0.08
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "The $258.5 million base-year debt predates the spin-off, and long-term debt had already risen to 282,000 by September 30, 2026; the post-spin split of debt is not in the packet."
+     },
+     "margin_position": "The FY2026 GAAP margin of 2.5% is well below the 2022-2024 level of roughly 10-14%. Costs are heavy: luxury tax, revenue sharing and fixed arena fees that escalate 3% a year. The margin also covers two teams, and the Rangers were spun off on October 26, 2026, so it is not the Knicks-only margin.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "A 46.8% base-year tax rate on a thin pretax base is above a normal statutory rate, and the income tax benefit this quarter was only $2,209 on a pretax loss of $33,346."
+     },
+     "why": "The base year of $1,153.8 million revenue includes the Rangers business, which was distributed after the quarter. The filings give no Knicks/Rangers split, so I assume the Knicks are about two-thirds of revenue and put a large negative year-1 growth to re-base. The margin should recover from the weak 2025-26 level, but not fully to the 2022-24 peak, given luxury tax and standalone costs."
+    },
+    "value_at_old_defaults": 9.239024797799523,
+    "values": {
+     "base": 25.147889213666524,
+     "bear": 14.055379204680124,
+     "bull": 41.99279390513293
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 9.239024797799523,
+  "value_at_old_defaults_quoted": 9.239024797799523,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 604396710.9147803,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 24252000.0,
@@ -15,7 +492,7 @@
   "The board was reduced in size, and five directors resigned effective at the Distribution date to become directors of the spun-off company. The distribution has since occurred, but the evidence does not separately confirm the board change took effect."
  ],
  "in_code_book": false,
- "ke": 0.09876177079828694,
+ "ke": 0.09846177079828694,
  "market_cap_at_publish": 7473277956,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +500,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 9.181999508840459,
-  "3000": 9.181999508840459
+  "1000": 24.69515143574633,
+  "3000": 25.147889213666524
  },
- "seeds_agree": true,
+ "seeds_agree": false,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -872,135 +1349,17 @@
   ]
  },
  "ticker": "MSGK",
- "upside": -0.9702029212081404,
- "valuation": {
-  "annotations": [
-   "held_at_record: op_margin.y1 model 0.0393 valued at -0.5596",
-   "value_far_from_record_neutral: bull 24.8137 against 9.1820 (2.70x)"
-  ],
-  "departures": [
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P3.s82",
-     "F2",
-     "Y2026-06-30"
-    ],
-    "input": "op_margin.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "up",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "CONSOLIDATED STATEMENTS OF OPERATIONS (Unaudited) - USD ($) shares in Thousands | 3 Months Ended\nSep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nRevenues | [1] | $ 45,489,000 | $ 39,454,000\nOperating expenses:\nDirect operating expenses | [2] | 8,824,000 | 8,279,000\nSelling, general and administrative expenses | [3] | 60,762,000 | 57,789,000\nDepreciation and amortization | 781,000 | 811,000\nRestructuring charges | 579,000 | 0\nOperating loss | (25,457,000) | (27,425,000)\nOther income (expense):\nInterest income | 473,000 | 578,000\nInterest expense | (4,699,000) | (5,591,000)\nMiscellaneous (expense) income, net | (3,663,000) | 15,085,000\nOther income (expense) | (7,889,000) | 10,072,000\nLoss before income taxes | (33,346,000) | (17,353,000)\nIncome tax benefit | 2,209,000 | 8,555,000\nNet loss | $ (31,137,000) | $ (8,798,000)\nBasic loss per common share attributable to MSG Knickerbockers Corp.\u2019s stockholders (in USD per share) | $ (1.29) | $ (0.37)\nDiluted loss per common share attributable to MSG Knickerbockers Corp.\u2019s stockholders (in USD per share) | $ (1.29) | $ (0.37)\nWeighted-average number of common shares outstanding:\nBasic (in shares) | 24,179 | 24,116\nDiluted (in shares) | 24,179 | 24,116\n[1] | Includes revenues from related parties of $6,902 and $6,760 for the three months ended September 30, 2026 and 2025, respectively.\n[2] | Includes net charges from related parties of $2,854 and $2,454 for the three months ended September 30, 2026 and 2025, respectively.\n[3] | Includes net charges from related parties of $15,300 and $14,732 for the three months ended September 30, 2026 and 2025, respectively."
-   },
-   "P3.s82": {
-    "kind": "annual_section",
-    "period": "2026-06-30",
-    "text": "In addition, due to the NBA and NHL playing seasons, revenues from our business are typically concentrated in the second and third quarters of each fiscal year."
-   },
-   "Y2026-06-30": {
-    "kind": "filed_record",
-    "period": "2026-06-30",
-    "text": "Filed annual record, fiscal year ended 2026-06-30 (10-K, accession 0001628280-26-056812): revenue $1,153.8 million; operating income $28.9 million; operating margin 2.5%; net income $7.8 million; depreciation and amortization $3.2 million; capital expenditure $1.4 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.001743155598548344,
-    0.001743155598548344,
-    0.001743155598548344,
-    0.001743155598548344,
-    0.001743155598548344
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.060497946424925515,
-   "normalized.margin": 0.060497946424925515,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": -0.5596298006111368,
-   "op_margin.y2": 0.060497946424925515,
-   "rev_growth.y1": 0.15296294418816858,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05529943340959961
-  },
-  "numbers": {
-   "capex": [
-    0.001743155598548344,
-    0.001743155598548344,
-    0.001743155598548344,
-    0.001743155598548344,
-    0.001743155598548344
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.060497946424925515,
-   "normalized.margin": 0.060497946424925515,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.039293185091235576,
-   "op_margin.y2": 0.060497946424925515,
-   "rev_growth.y1": 0.15296294418816858,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.05529943340959961
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.039293185091235576,
-    "model_option": "persist",
-    "record": -0.5596298006111368,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "persist",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence gives no revenue or margin guidance for fiscal 2027, so no guidance option is used.",
-   "The Rangers business was spun off on October 26, 2026 and will be shown as discontinued operations from the December 2026 quarter, but the evidence does not state the Knicks-only revenue, margin or the Rangers share of the base year, so the post-spin level and growth rate cannot be determined.",
-   "The 10-Q risk factors section was not found in the packet."
-  ],
-  "year": 3
- },
- "value_base": 9.181999508840459,
- "value_bear": 8.976738390528274,
- "value_bull": 24.813717695617477,
+ "upside": -0.9191256213841834,
+ "valuation": null,
+ "value_base": 24.921520324706428,
+ "value_bear": 13.6594873353168,
+ "value_bull": 41.53958706436174,
  "value_per_filed_share": {
-  "base": 9.181999508840459,
-  "bear": 8.976738390528274,
-  "bull": 24.813717695617477
+  "base": 24.921520324706428,
+  "bear": 13.6594873353168,
+  "bull": 41.53958706436174
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -71.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -61.6 points a year against the required return over 3 years"
 }

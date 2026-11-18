@@ -1,11 +1,511 @@
 {
- "alpha_pts": 17.690527162400606,
+ "alpha_pts": 25.079888107783653,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 105,
  "claims_supported": 100,
  "date": "2026-11-16T09:14:05Z",
- "equity_value": 5354302084.1779375,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.4900 (filed 0.0023 to 0.4595)",
+   "run 1000: growth_outside_filed_record: rev_growth.y2 -0.2000 (filed -0.1711 to 1.3299)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.5100 (filed 0.0023 to 0.4595)",
+   "run 3000: growth_outside_filed_record: rev_growth.y2 -0.2000 (filed -0.1711 to 1.3299)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3414 (persist), growth 0.0375, terminal RONIC 0.0740 (equity return r 0.0846), F 10",
+  "run_gap": 0.19160880959572354,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 219528.43373493967,
+     "cash_not_free": {
+      "amount": 5400000.0,
+      "printed": 5.4,
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "including restricted cash of USD 5.4m"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "restricted cash included in the total cash position"
+     },
+     "excess_cash_after": 152700000.0,
+     "excess_cash_before": 158100000.0,
+     "k0_after": 68030293.74757774,
+     "k0_before": 68249822.18131268,
+     "k0_interest": 74400000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 279285691.0169131,
+     "x0_before": 279073004.2552323
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4121923053.901523,
+     "seam_ratio": 1.0368962609360872,
+     "tv_share": 0.3674765588708669,
+     "wedge_rate_5": 0.03776123734692926
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.4900 (filed 0.0023 to 0.4595)",
+     "growth_outside_filed_record: rev_growth.y2 -0.2000 (filed -0.1711 to 1.3299)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.25,
+     "fade_years": 10,
+     "long_run_op_margin": 0.24,
+     "op_margin": [
+      0.49,
+      0.37,
+      0.3,
+      0.28,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.08,
+     "rev_growth": [
+      0.68,
+      -0.2,
+      -0.08,
+      0.0,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3414 (persist), growth 0.0375, terminal RONIC 0.0740 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 100
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.17,
+      0.3
+     ],
+     "rev_growth_y3": [
+      -0.18,
+      0.02
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.2838"
+       },
+       {
+        "id": "P2",
+        "quote": "Collectively, these investments establish a significant pipeline of future fleet deliveries through 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled historical capex/revenue is 0.28. The company has committed to a large newbuilding and resale programme, but higher revenue in 2026 dilutes the ratio in later years, so I use 0.25."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "A change in freight rates of USD/day 1,000 will, all else equal, impact EBITDA by approximately USD 4m."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Shipping margins revert over a cycle of several years, and a 10-year fade is a middle path given the fleet renewal programme and the uncertain persistence of the disruption."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $1,520.4 million | 0.0533 | 0.4595"
+       },
+       {
+        "id": "P2",
+        "quote": "This effectively reduced CPP-carrying capacity by around 4% compared with the start of the year"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Over the filed years the margin ranged from 0.0023 (2021) to 0.4595 (2023), with a median near 0.26. A cyclical peak keeps only part of its gap to the median. The fleet is now larger and newer, which supports a margin slightly below the peak years."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "As of 28 October 2026, TORM had covered 53% of the Q4 2026 earning days at an average rate of USD/day 78,419."
+       },
+       {
+        "id": "P2",
+        "quote": "The eventual normalization of Persian Gulf trade therefore does not necessarily imply an immediate normalization of the tanker market."
+       },
+       {
+        "id": "F2",
+        "quote": "Operating profit (EBIT) | 356.3 | 658.8 | 698.6"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "FY2026 EBITDA of about USD 1.35-1.5bn on revenue of about USD 2.3bn, less depreciation, implies a margin near 0.5. Forward cover is strong (53% of Q4 at USD/day 78,419), but rates should fade as trade normalises. Restocking demand could slow the decline, so I fade the margin only gradually toward the long-run level."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0740."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Vessels earn well above cost in strong markets but only near cost of capital over a full cycle. I set the long-run return slightly above the 0.074 break-even level, since new vessels bought at high cycle prices earn less."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "EBITDA is now expected to be in the range of USD 1,350 - 1,500m"
+       },
+       {
+        "id": "F2",
+        "quote": "Port expenses, bunkers, commissions, and other cost of goods and services sold | (421.6) | (418.5) | (430.3)"
+       },
+       {
+        "id": "P2",
+        "quote": "Collectively, these investments establish a significant pipeline of future fleet deliveries through 2030"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (FY2026) revenue should jump because 9M TCE was already USD 1,151m against USD 659m, and full-year TCE guidance is USD 1,750-1,900m. Gross revenue also includes voyage costs, which were 421.6 in FY2025. I expect a decline in 2027-2028 as the Gulf disruption normalises. Fleet additions then support a slow recovery."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Tanker revenue is cyclical and capital-intensive, so I set long-run growth below the 0.0375 nominal anchor, at a rate close to inflation plus modest fleet growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.3,
+      "input_hit": "op_margin",
+      "risk": "Persian Gulf flows normalise quickly, or vessel supply expands, and rates fall back to 2025 levels sooner than assumed"
+     },
+     {
+      "bear_value": 0.17,
+      "input_hit": "long_run_op_margin",
+      "risk": "Long-run product tanker margins revert to the low end of history"
+     },
+     {
+      "bear_value": -0.18,
+      "input_hit": "rev_growth",
+      "risk": "Revenue declines sharply in 2027-2028 as spot rates on open days drop"
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Newbuildings contracted at high-cycle prices earn less than their cost of capital"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.17,
+      "rev_growth": [
+       0.5800000000000001,
+       -0.3,
+       -0.18,
+       -0.09999999999999999,
+       -0.06999999999999999
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.3,
+      "rev_growth": [
+       0.78,
+       -0.1,
+       0.020000000000000004,
+       0.1,
+       0.13
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt fell in 2025 and the net loan-to-value ratio was 29.4%, but the newbuilding pipeline through 2030 will probably require new borrowing."
+     },
+     "margin_position": "The FY2025 margin of 0.266 is a mid-cycle-to-low reading after the 0.42-0.46 peak in 2022-2024. FY2026 is a spike year: 9M EBITDA was USD 891m and the full-year EBITDA guidance is USD 1,350-1,500m. That is driven by US-Iran disruption to oil trade flows, which the company says supports rates at historically strong levels. The margin is therefore far above the company's own long-run median of about 0.26.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year tax rate of 0.0312 is very low and the filings in this packet do not explain the tax regime, so I cannot say whether it is sustainable."
+     },
+     "why": "FY2025 is the last filed year, but FY2026 earnings are running far above it and will be the real first forecast year. Base-year revenue of USD 1,339.5m is gross revenue including voyage costs, and operating profit of 356.3 is well below 2026 run-rate earnings. The base year therefore understates year 1, while year 1 itself overstates a normal level."
+    },
+    "value_at_old_defaults": 52.36401535519774,
+    "values": {
+     "base": 45.742997341239246,
+     "bear": 23.6410009471819,
+     "bull": 102.98723149789278
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 158100000.0,
+     "excess_cash_before": 158100000.0,
+     "k0_after": 68249822.18131268,
+     "k0_before": 68249822.18131268,
+     "k0_interest": 74400000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 279073004.2552323,
+     "x0_before": 279073004.2552323
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 5020508713.159409,
+     "seam_ratio": 1.0344530650225023,
+     "tv_share": 0.4368735791545916,
+     "wedge_rate_5": 0.016356449537887247
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.5100 (filed 0.0023 to 0.4595)",
+     "growth_outside_filed_record: rev_growth.y2 -0.2000 (filed -0.1711 to 1.3299)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.22,
+     "fade_years": 8,
+     "long_run_op_margin": 0.27,
+     "op_margin": [
+      0.51,
+      0.36,
+      0.3,
+      0.28,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.085,
+     "rev_growth": [
+      0.72,
+      -0.2,
+      -0.08,
+      0.02,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.3414 (persist), growth 0.0375, terminal RONIC 0.0740 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 100
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.18,
+      0.34
+     ],
+     "rev_growth_y3": [
+      -0.2,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.2838"
+       },
+       {
+        "id": "P2",
+        "quote": "eight LR2 newbuildings to be held through a 50/50 joint venture structure"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled 5-year ratio of 0.28 reflects heavy fleet-acquisition years. With newbuildings, resale purchases and a joint venture in the pipeline, spending stays high, but a larger revenue base brings the ratio down to about 0.22."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "establish a significant pipeline of future fleet deliveries through 2030"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The newbuilding pipeline runs through 2030 and the market has to work through the cycle from the elevated level, so a moderately long fade of 8 years is reasonable."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $619.5 million | -0.1711 | 0.0023"
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $1,443.4 million | 1.3299 | 0.4167"
+       },
+       {
+        "id": "P4",
+        "quote": "the highly cyclical nature of the industry that we operate in"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The record shows a swing from 0.0023 in 2021 to 0.4167 in 2022, with a median near 0.27. The base-rate view is that above-median cyclical margins keep only part of the gap, and a larger, newer fleet carries more depreciation, so I settle at about the median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "EBITDA is now expected to be in the range of USD 1,350 - 1,500m"
+       },
+       {
+        "id": "P2",
+        "quote": "The eventual normalization of Persian Gulf trade therefore does not necessarily imply an immediate normalization of the tanker market."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided EBITDA of USD 1,350 - 1,500m less about USD 230m of depreciation on revenue near USD 2.3bn gives an operating margin of about 0.5 in 2026. Normalization of Gulf trade need not be immediate, so I fade the margin gradually rather than drop it to the median in one year."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0740."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Vessels earn about their cost of capital over the full cycle. The base-year return on tangible capital is 0.1009 and the break-even return is 0.074, so I set a modest premium of 0.085."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "full-year 2026 TCE is now expected to be in the range of USD 1,750 - 1,900m"
+       },
+       {
+        "id": "F2",
+        "quote": "Revenue | $ 1,339.5 | $ 1,559.2 | $ 1,520.4"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) revenue should jump: TCE guidance is about USD 1.8bn against roughly USD 0.9bn of FY2025 revenue net of voyage costs, and the guided TCE excludes voyage costs, which I add back at about 25% of revenue. After that, revenue falls as rates normalize, partly offset by fleet additions."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Shipping is a mature, cyclical business with fleet renewal rather than structural growth, so I set growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.18,
+      "input_hit": "long_run_op_margin",
+      "risk": "Persian Gulf trade normalizes and the shuttle and ship-to-ship inefficiencies disappear, so rates and margins revert to or below the median faster than I assume, and newbuilding capital committed at peak prices earns less."
+     },
+     {
+      "bear_value": -0.3,
+      "input_hit": "rev_growth",
+      "risk": "The revenue decline after 2026 is steeper than assumed, because the 4,060 open earning days and the 2027 fixings are exposed to a spot rate collapse."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Newbuilding commitments through 2030 are funded at peak vessel prices and the new investment earns below its cost of capital."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.6,
+       -0.32,
+       -0.2,
+       -0.1,
+       -0.09000000000000001
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       0.85,
+       -0.07,
+       0.05,
+       0.15,
+       0.16
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt fell in 2025, but 2026 cash flow is much higher and a large newbuilding pipeline is being added, so the future leverage path cannot be determined from this packet."
+     },
+     "margin_position": "The FY2025 margin of 0.266 sits at the 2015-2025 median (about 0.27) in the filed record. 2026 is far above it: 9M EBITDA was USD 891m and full-year EBITDA guidance is USD 1,350 - 1,500m. The cause is freight rates lifted by the US-Iran disruption, not a lasting change in cost structure. The 2026 margin is therefore a cycle peak that should fade toward the median.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 3.1% rate (tax of 9.2 on profit before tax of 295.2) is very low and probably reflects a shipping tax regime, but the filings in this packet do not explain it."
+     },
+     "why": "FY2025 revenue and EBIT (1,339.5 and 356.3) were mid-cycle, but 2026 is a record year, so the base year understates the near-term level. The first forecast years are set from 2026 guidance, not extrapolated from FY2025. Year 1 revenue is my estimate: guided TCE plus voyage costs, which are not guided in this packet."
+    },
+    "value_at_old_defaults": 52.36401535519774,
+    "values": {
+     "base": 55.436432383837285,
+     "bear": 25.409218708094407,
+     "bull": 149.1755682634862
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 52.36401535519774,
+  "value_at_old_defaults_quoted": 52.36401535519774,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 5064030457.740081,
  "family": "commodity",
  "far_from_price": false,
  "filed_shares": 100100000.0,
@@ -15,7 +515,7 @@
   "In Q3 2026 TORM sold two older vessels, TORM Venture and TORM Laura. After these sales its fleet comprised 95 vessels, excluding vessels on order."
  ],
  "in_code_book": false,
- "ke": 0.08438886523134312,
+ "ke": 0.08462083045154348,
  "market_cap_at_publish": 3465582572,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +523,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 53.489531310468905,
-  "3000": 53.489531310468905
+  "1000": 45.742997341239246,
+  "3000": 55.436432383837285
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1285,187 +1785,17 @@
   ]
  },
  "ticker": "TRMD",
- "upside": 0.5449933663210773,
- "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.3065 valued at 0.0375",
-   "held_at_record: op_margin.y1 model 0.4225 valued at 0.3414"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P2.s28",
-     "P2.s14",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "pricing",
-    "evidence": [
-     "P2.s14",
-     "P2.s11",
-     "P2.s29",
-     "F2"
-    ],
-    "input": "op_margin.y1"
-   },
-   {
-    "driver": "pricing",
-    "evidence": [
-     "P2.s38",
-     "P2.s33",
-     "Y2023-12-31"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "up",
-   "op_margin.y2": "up",
-   "rev_growth.y1": "up",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2025-12-31",
-    "text": "Consolidated Income Statement - USD ($) $ in Millions | 12 Months Ended\nDec. 31, 2025 | Dec. 31, 2024 | Dec. 31, 2023\nProfit or loss [abstract]\nRevenue | $ 1,339.5 | $ 1,559.2 | $ 1,520.4\nPort expenses, bunkers, commissions, and other cost of goods and services sold | (421.6) | (418.5) | (430.3)\nOperating expenses | (252.4) | (245.1) | (216.0)\nProfit from sale of vessels | 19.0 | 51.3 | 50.4\nAdministrative expenses | (113.8) | (95.6) | (82.9)\nOther operating income and expenses | 0.1 | (0.5) | 6.3\nDepreciation and amortization | (214.5) | (192.0) | (149.3)\nOperating profit (EBIT) | 356.3 | 658.8 | 698.6\nFinancial income | 13.3 | 24.8 | 14.3\nFinancial expenses | (74.4) | (74.1) | (60.9)\nProfit before tax | 295.2 | 609.5 | 652.0\nTax | (9.2) | 2.0 | (4.0)\nNet profit for the year | 286.0 | 611.5 | 648.0\nNet profit for the year attributable to:\nTORM plc shareholders | 285.3 | 612.5 | 648.3\nNon-controlling interest | $ 0.7 | $ (1.0) | $ (0.3)\nEarnings per share for TORM plc shareholders\nBasic earnings per share (in USD per share) | $ 2.91 | $ 6.54 | $ 7.75\nDiluted earnings per share (in USD per share) | $ 2.85 | $ 6.36 | $ 7.48"
-   },
-   "P2.s11": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "In this market, TORM achieved fleet-wide TCE rates of USD/day 40,102 on average (2025, same period: USD/day 31,012), and available earning days increased to 8,799 (2025, same period: 7,859)."
-   },
-   "P2.s14": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "Consequently, TORM delivered a strong financial performance in the first nine months of 2026, generating TCE earnings of USD 1,151m (2025, same period: USD 659m), EBITDA of USD 891m (2025, same period: USD 414m), and net profit of USD 660m (2025, same period: USD 199m)."
-   },
-   "P2.s28": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "Thus, full-year 2026 TCE is now expected to be in the range of USD 1,750 - 1,900m, compared with USD 1,700 - 1,900m following the guidance upgrade announced on 12 October 2026."
-   },
-   "P2.s29": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "EBITDA is now expected to be in the range of USD 1,350 - 1,500m, compared with USD 1,300 - 1,500m previously."
-   },
-   "P2.s33": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "In the third quarter of 2026, TORM generated time charter equivalent earnings (TCE) of USD 353m (2025, same period: USD 236m). EBITDA for the Group totaled USD 274m (2025, same period: USD 152m including unrealized losses on financial instruments of USD 7m), while net profit for the period amounted to USD 199m (2025, same period: USD 78m). During the quarter, tanker freight markets were supported by continued disruptions to global oil trade flows stemming from the conflict involving the US and Iran. Following the collapse of the temporary ceasefire in July, increasing volumes of crude and refined products were exported from the Persian Gulf through shuttle tanker and ship-to-ship operations, creating significant logistical inefficiencies and absorbing substantial tanker capacity. Combined with constrained Middle Eastern and Russian product exports, strong export activity from the US and Asia, and a continued shift of LR2 vessels into crude-related trades, these developments supported freight rates at historically strong levels. In this market, TORM achieved fleet-wide TCE rates of USD/ day 40,102 on average (2025, same period: USD/day 31,012), and available earning days increased to 8,799 (2025, same period: 7,859). Our vessel class LR2 achieved TCE rates of USD/day 52,575, the LR1 vessels achieved TCE rates of USD/ day 38,667, and the MR vessels achieved TCE rates of USD/ day 36,137. | For the third quarter of 2026, return on invested capital amounted to 26.3% (2025, same period: 13.8%) reflecting the exceptionally high freight rates and basic EPS amounted to USD 1.94 (2025, same period: USD 0.79). Consequently, TORM delivered a strong financial performance in the first nine months of 2026, generating TCE earnings of USD 1,151m (2025, same period: USD 659m), EBITDA of USD 891m (2025, same period: USD 414m), and net profit of USD 660m (2025, same period: USD 199m). Business Highlights In the third quarter of 2026, TORM sold the 2007-built LR1 vessel TORM Venture and the 2008-built MR vessel TORM Laura. Following these divestments TORM\u2019s fleet comprised 95 vessels, excluding vessels on order. During the third quarter, TORM continued to advance its fleet renewal and growth agenda. Following the acquisition of six MR resale vessels during the second quarter and the previously announced order of six MR newbuildings during the third quarter, TORM exercised options for an additional two MR newbuildings. Subsequent to quarter-end, TORM entered into agreements for eight LR2 newbuildings to be held through a 50/50 joint venture structure, and secured options for an additional two MR newbuildings. Collectively, these investments establish a significant pipeline of future fleet deliveries through 2030, reinforcing TORM's commitment to a modern and efficient fleet while supporting future earnings growth and long-term shareholder value creation. | Based on broker valuations as of 30 September 2026 of TORM\u2019s existing fleet in operation (excluding the value of newbuildings not yet delivered), TORM\u2019s fleet had a market value of USD 4,333m (2025, same date: USD 2,864m) and TORM\u2019s consolidated Net Asset Value (NAV) was USD 4,062m (2025, same date: USD 2,401m) translating into NAV per share of USD 39.60 (2025, same date: USD 24.50). Coverage As of 28 October 2026, TORM had covered 53% of the Q4 2026 earning days at an average rate of USD/day 78,419. By vessel class, coverage stood at 68% for LR2s at USD/day 112,150, 38% for LR1s at USD/day 106,271 and 49% for MRs at USD/day 59,722. For the full year 2026, 88% of the earning days have been fixed at an average rate of USD/day 50,487. The remaining part of the earning days in 2026 - equivalent to 4,060 days - remains open and thus subject to market fluctuations. A change in freight rates of USD/day 1,000 will, all else equal, impact EBITDA by approximately USD 4m."
-   },
-   "P2.s38": {
-    "kind": "six_k_interim",
-    "period": "2026-09-30",
-    "text": "Market Developments During the third quarter, tanker freight rates rose to unprecedented levels as the conflict involving the US and Iran continued to materially disrupt global oil trade flows. Following the collapse of the temporary US-Iran ceasefire in July, increasing volumes of crude oil were exported from the Persian Gulf using dedicated shuttle tankers and ship-to-ship (STS) transfers in the Gulf of Oman. Crude flows from the Gulf increased further following attacks on Saudi Arabia's East-West crude pipeline, which prompted the redirection of volumes previously exported through the Red Sea port of Yanbu. Despite continued threats and attacks on shipping, the number of VLCCs deployed in shuttle operations is estimated to have increased to more than 60 vessels by the start of the fourth quarter. While this redirection reduced ton-mile demand for some Saudi crude volumes, as cargoes previously shipped to Asia via the Suez Canal and around the Cape of Good Hope were instead loaded in the Persian Gulf, this was more than offset by the significant inefficiencies created by the shuttle and STS system. By the end of September, approximately 14m b/d of crude was transiting the Persian Gulf, only 13% below pre-conflict levels and sharply higher than less than 2m b/d in May. The combination of recovering crude flows and significant logistical inefficiencies drove crude tanker rates to all-time highs, with the VLCC benchmark for the Middle East to Asia route breaking USD 1m a day for the first time in history. The recovery in clean petroleum product (CPP) flows has been considerably slower. Persian Gulf product exports remained below half of pre-conflict levels during the quarter, although an increasing share of the volumes that did move also relied on shuttle operations, involving close to 20 LR2 vessels. shuttle operations, involving close to 20 LR2 vessels. Repeated attacks on Saudi Arabia's Jazan refinery and the outage of the crude pipeline supplying the Yanbu refineries further tightened an already constrained global product | market, exacerbated by Russia's export ban following attacks on its refining system. Strong product exports from the US and Asia, particularly China, partly compensated for the loss of Middle Eastern and Russian supply and provided additional support to product tanker demand and freight rates. At the same time, approximately two-thirds of the LR2 fleet continued to trade in the \"dirty\" segment during the third quarter. This effectively reduced CPP-carrying capacity by around 4% compared with the start of the year, adding another layer of supply-side tightness and supporting LR2 earnings at levels significantly above historical norms throughout the quarter. Market Outlook Normalizing crude volumes from the Persian Gulf mean higher feedstock availability for refineries globally and thereby create a foundation for a rebound in clean product exports. This will support product tankers from already elevated earnings level. | Concerns over a potential US diesel export ban prompted EU countries to release 50m barrels of diesel from strategic inventories. In the near term, releasing inventories in major diesel-importing markets does not in itself create additional seaborne trade volumes or ton-mile demand. However, it helps mitigate the risk of demand destruction from exceptionally high product prices and supports underlying consumption. Importantly, inventories released today will ultimately need to be replenished, creating incremental import requirements and tanker demand once market conditions allow. The eventual normalization of Persian Gulf trade therefore does not necessarily imply an immediate normalization of the tanker market. In addition to recovering underlying oil demand, substantial volumes will need to be moved to rebuild depleted inventories across the system. The resulting restocking cycle could provide a meaningful additional source of tanker demand and ton-miles, particularly if inventories are rebuilt beyond the levels prevailing before the Iran conflict."
-   },
-   "Y2023-12-31": {
-    "kind": "filed_record",
-    "period": "2023-12-31",
-    "text": "Filed annual record, fiscal year ended 2023-12-31 (20-F, accession 0001628280-26-011954): revenue $1,520.4 million; operating income $698.6 million; operating margin 45.9%; net income $648.3 million; depreciation and amortization $149.3 million; capital expenditure $509.7 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.2838147176797285,
-    0.2838147176797285,
-    0.2838147176797285,
-    0.2838147176797285,
-    0.2838147176797285
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3413595874449936,
-   "normalized.margin": 0.3413595874449936,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.3413595874449936,
-   "op_margin.y2": 0.3413595874449936,
-   "rev_growth.y1": 0.0375,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07385125591719202
-  },
-  "numbers": {
-   "capex": [
-    0.2838147176797285,
-    0.2838147176797285,
-    0.2838147176797285,
-    0.2838147176797285,
-    0.2838147176797285
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.3413595874449936,
-   "normalized.margin": 0.3413595874449936,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.42252437147255,
-   "op_margin.y2": 0.41672440072052097,
-   "rev_growth.y1": 0.3064576334453155,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.07385125591719202
-  },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.42252437147255,
-    "model_option": "p75",
-    "record": 0.3413595874449936,
-    "record_option": "persist"
-   },
-   "rev_growth.y1": {
-    "model": 0.3064576334453155,
-    "model_option": "guidance",
-    "record": 0.0375,
-    "record_option": "anchor"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "p75",
-   "op_margin.y2": "median",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The company guides full-year 2026 TCE earnings, not IFRS revenue. TCE is net of port expenses, bunkers and commissions, so using the guided TCE of USD 1,750m as a revenue level probably understates 2026 gross revenue.",
-   "No guidance states an operating margin or EBIT figure. The 2026 EBITDA guidance of USD 1,350 - 1,500m cannot be turned into an EBIT margin without the 2026 depreciation and gross revenue, which the packet does not give.",
-   "No 10-Q or reported 2026 IFRS revenue is in the packet; the 9M 2026 figures are TCE, EBITDA and net profit only.",
-   "No guidance gives 2027 or later revenue or margins. How long the disruption to Persian Gulf trade flows will keep freight rates elevated is not known from the evidence.",
-   "The capital cost of the newbuilding orders, including the eight LR2 newbuildings in the 50/50 joint venture, is not quantified in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 53.489531310468905,
- "value_bear": 51.456977836484434,
- "value_bull": 53.84242130764543,
+ "upside": 0.46123497349469034,
+ "valuation": null,
+ "value_base": 50.589714862538266,
+ "value_bear": 24.525109827638154,
+ "value_bull": 126.0813998806895,
  "value_per_filed_share": {
-  "base": 53.489531310468905,
-  "bear": 51.456977836484434,
-  "bull": 53.84242130764543
+  "base": 50.589714862538266,
+  "bear": 24.525109827638154,
+  "bull": 126.0813998806895
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +17.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +25.1 points a year against the required return over 3 years"
 }

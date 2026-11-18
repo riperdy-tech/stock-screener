@@ -1,11 +1,466 @@
 {
- "alpha_pts": -14.019029250472895,
+ "alpha_pts": -11.307058819079932,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 70,
  "claims_supported": 65,
  "date": "2026-11-18T03:40:12Z",
- "equity_value": 4488932304.382532,
+ "decided": {
+  "flags": [
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0384 and margin 0.0874, margin 0.0717 (persist), growth 0.0375, terminal RONIC 0.0648 (equity return r 0.1113), F 10",
+  "run_gap": 0.05739827318712078,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 182000000.0,
+     "excess_cash_before": 182000000.0,
+     "k0_after": 141304632.12851405,
+     "k0_before": 141304632.12851405,
+     "k0_interest": 101000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 400597414.388909,
+     "x0_before": 400597414.388909
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4386085147.984828,
+     "seam_ratio": 1.0030650209766507,
+     "tv_share": 0.3534117421779705,
+     "wedge_rate_5": 0.006073285112375122
+    },
+    "flags": [
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.005,
+     "fade_years": 7,
+     "long_run_op_margin": 0.078,
+     "op_margin": [
+      0.082,
+      0.082,
+      0.082,
+      0.082,
+      0.082
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.005,
+      0.01,
+      0.02,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0384 and margin 0.0874, margin 0.0717 (persist), growth 0.0375, terminal RONIC 0.0648 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.07,
+      0.085
+     ],
+     "rev_growth_y3": [
+      0.005,
+      0.04
+     ],
+     "terminal_growth": [
+      0.025,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0042"
+       },
+       {
+        "id": "F3",
+        "quote": "Expenditures for property, plant, and equipment | (24) | (15)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled five-year ratio is 0.42%, but first-half fiscal 2027 capital spending was 24 on revenue of 3,786 (0.63%), so I use 0.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Adjusting for the acquisition of SilverEdge, revenues contracted by approximately 3.3%."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A seven-year fade lets the margin and growth settle gradually, given a stable contract base but ongoing competitive repricing."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "which has led to greater competition and increased pricing pressure."
+       },
+       {
+        "id": "P3",
+        "quote": "As a percentage of revenues | 7.2% | 7.5% | 10.0%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Competitive bidding on multi-award vehicles and small-business set-asides press margins, and the mix is mostly lower-margin cost-reimbursable work. History before fiscal 2024 was 5.5-6.5% GAAP, so I fade modestly below the current level of about 8%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA Margin %(1) | 10.3% - 10.5% | 10.1% - 10.3%"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-01-30 | $7,262.0 million | -0.0290 | 0.0717"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided adjusted EBITDA margin of 10.3-10.5% less about 2.2 points of depreciation and amortization gives a GAAP margin of about 8.2%. The first half was higher, but it included a $13M gain, and the base year was 7.17%. I hold the margin flat because pricing pressure offsets cost gains."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0648."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is an asset-light services business, so the return on tangible capital is very high, and the growth-neutral return is only 6.5%. I assume 20% on new investment, well below the reported 1.0 because competition limits excess returns."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenue | $7.2B - $7.3B | $7.0B - $7.2B"
+       },
+       {
+        "id": "P6",
+        "quote": "quarterly book-to-bill ratio of 0.6; trailing twelve months book-to-bill ratio of 0.8"
+       },
+       {
+        "id": "P3",
+        "quote": "Adjusting for the acquisition of SilverEdge, revenues contracted by approximately 3.3%."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 follows the guided $7.2-7.3B against a base of $7,262M, i.e. roughly flat. Soft bookings (TTM book-to-bill 0.8) and a shrinking backlog limit the next two years. Growth recovers modestly later on added defense and border funding and awards such as COMET."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P3",
+        "quote": "In July 2025, Congress passed a budget reconciliation package that will add approximately $150 billion in new non-border defense spending, and $175 billion in new border security and enforcement spending"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A single government customer with a $22B backlog and added federal funding supports growth near nominal GDP, but budget and procurement-reform risk keep it below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.01,
+      "input_hit": "rev_growth",
+      "risk": "Bookings stay below revenue (book-to-bill 0.8), so backlog shrinks and growth stalls"
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "long_run_op_margin",
+      "risk": "Pricing pressure from multi-award vehicles, OTAs and set-asides erodes margin toward the pre-2024 level"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Federal budget cuts, shutdowns or contract reviews lower long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       -0.009999999999999998,
+       -0.004999999999999999,
+       0.005000000000000001,
+       0.015,
+       0.015
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.085,
+      "rev_growth": [
+       0.025,
+       0.03,
+       0.04,
+       0.05,
+       0.05
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $2.5B is a steady structure that was just refinanced (2028 notes replaced by 2034 notes) rather than reduced, and cash flow supports it."
+     },
+     "margin_position": "GAAP operating margin of 7.2% sits below the 9.7% adjusted margin because about $119M of acquired-intangible amortization and small one-off costs are charged. It is above the 5.5-6.5% range of fiscal 2020-2023, since fiscal 2024's 10.0% included a $240M divestiture gain. Contracts are mostly cost-reimbursable or time-and-materials, so margins are thin and steady rather than cyclical. Recent gains came from better contract profitability, and the fiscal 2027 guided adjusted EBITDA margin of 10.3-10.5% implies GAAP operating margin of about 8%.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The first-half effective rate was about 18% (47 on 264 pretax) and the fiscal 2026 rate was helped by an IRS audit settlement and R&D expensing, so the long-run rate is probably higher."
+     },
+     "why": "Fiscal 2026 revenue fell 2.9% and margin was 7.17%, with some one-off drag from executive transition costs and tax audit settlement costs. Fiscal 2027 is running slightly better: first-half revenue is up 4% and guidance was raised. The base year is a fair, slightly weak starting point, with revenue near the guided $7.2-7.3B for fiscal 2027."
+    },
+    "value_at_old_defaults": 96.53617858887166,
+    "values": {
+     "base": 106.55071538840437,
+     "bear": 90.32165734968794,
+     "bull": 131.55075425713557
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 182000000.0,
+     "excess_cash_before": 182000000.0,
+     "k0_after": 141304632.12851405,
+     "k0_before": 141304632.12851405,
+     "k0_interest": 101000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 400597414.388909,
+     "x0_before": 400597414.388909
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4132022369.169257,
+     "seam_ratio": 1.0047560905729664,
+     "tv_share": 0.3516855133926766,
+     "wedge_rate_5": 0.006174421249546515
+    },
+    "flags": [
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.005,
+     "fade_years": 7,
+     "long_run_op_margin": 0.074,
+     "op_margin": [
+      0.081,
+      0.08,
+      0.079,
+      0.078,
+      0.077
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.003,
+      0.01,
+      0.02,
+      0.025,
+      0.027
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0384 and margin 0.0874, margin 0.0717 (persist), growth 0.0375, terminal RONIC 0.0648 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.065,
+      0.082
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.035
+     ],
+     "terminal_growth": [
+      0.02,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Expenditures for property, plant, and equipment | (24) | (15)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex history is about 0.4% of revenue, but first-half fiscal 2027 spending was higher at $24 million against $15 million, so I use 0.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "which has led to greater competition and increased pricing pressure"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive multi-award vehicles pressure pricing and margins. A moderate fade period lets growth and margin converge gradually to the long-run level."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Cost-reimbursable and T&M contracts are generally less profitable than FFP contracts."
+       },
+       {
+        "id": "P3",
+        "quote": "Amortization of intangible assets | 119 | 115 | 115"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin fades to about the 5-year median of 7.2%, helped slightly by the roll-off of intangible amortization. Cost-reimbursable and time-and-materials work, 84% of revenue, caps profitability."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted EBITDA Margin %(1) | 10.3% - 10.5% | 10.1% - 10.3%"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-01-30 | $7,262.0 million | -0.0290 | 0.0717"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided adjusted EBITDA margin of 10.3%-10.5%, less about $160 million of D&A, plus the first-half $13 million gain, gives a GAAP margin near 8.1% in year 1. I then drift it down slightly on competitive pricing pressure, partly offset by declining amortization."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0648"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is an asset-light services business with tiny tangible capital, so incremental returns are very high. I haircut the filed return of 1.0 well above the 6.5% break-even for competition."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Revenue | $7.2B - $7.3B | $7.0B - $7.2B"
+       },
+       {
+        "id": "P6",
+        "quote": "trailing twelve months book-to-bill ratio of 0.8"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Raised guidance of $7.2B-$7.3B on a $7,262 million base implies about flat revenue in year 1. Bookings are below revenue, so growth builds only slowly from the budget tailwind."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "In July 2025, Congress passed a budget reconciliation package that will add approximately $150 billion in new non-border defense spending"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A single-customer U.S. government services business should grow somewhat below the 3.75% nominal anchor, with defense and border funding supportive but competition and set-asides limiting share."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.01,
+      "input_hit": "rev_growth",
+      "risk": "Book-to-bill stays below 1, backlog shrinks and revenue declines in years 2-4"
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "long_run_op_margin",
+      "risk": "Pricing pressure from multi-award vehicles, OTAs and set-asides, or adverse FAR cost-allowability changes, compresses margins"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Federal budget cuts, shutdowns or agency contract reviews lower long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.065,
+      "rev_growth": [
+       -0.017,
+       -0.01,
+       0.0,
+       0.005000000000000001,
+       0.006999999999999999
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.082,
+      "rev_growth": [
+       0.018000000000000002,
+       0.025,
+       0.035,
+       0.04000000000000001,
+       0.042
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $2.5 billion is roughly 3.3x adjusted EBITDA guidance, the company has just refinanced the 2028 notes into 2034 notes, and it keeps funding buybacks from cash flow rather than adding debt."
+     },
+     "margin_position": "GAAP operating margin of 7.2% in fiscal 2026 sits at the low end of the filed 5-year range. The fiscal 2024 figure of 10.0% was inflated by a $240 million divestiture gain. About $119 million a year of acquired-intangible amortization is charged inside GAAP operating income, while the adjusted margin was 9.7%. The margin reflects a mostly cost-reimbursable and time-and-materials mix with competitive pricing pressure, not a cycle.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The first-half fiscal 2027 effective rate is about 18% (47 on 264 of pretax income), while fiscal 2026's reported 7.5% was depressed by a one-time $47 million IRS settlement benefit, so the sustainable rate is uncertain."
+     },
+     "why": "Fiscal 2026 revenue fell 2.9% on contract completions, including about $26 million from the shutdown, and its operating margin of 7.2% is near the 5-year median. Fiscal 2027 is tracking slightly better: first-half revenue is up 4% and the margin is higher, partly from a $13 million operating gain. Guidance implies roughly flat full-year revenue, so the base year is a fair starting point with a modest margin lift."
+    },
+    "value_at_old_defaults": 96.53617858887166,
+    "values": {
+     "base": 100.6055105636013,
+     "bear": 80.39784567448369,
+     "bull": 122.59028975879569
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 96.53617858887166,
+  "value_at_old_defaults_quoted": 96.53617858887166,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4816382253.384132,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 46500000.0,
@@ -23,12 +478,12 @@
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
  "seed_base": {
-  "1000": 96.53617858887166,
-  "3000": 92.80025903303873
+  "1000": 106.55071538840437,
+  "3000": 100.6055105636013
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -862,131 +1317,17 @@
   ]
  },
  "ticker": "SAIC",
- "upside": -0.2597217187326314,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: rev_growth.y2 (1000 none, 3000 down)",
-   "held_at_record: rev_growth.y1 model -0.0017 valued at 0.0384"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s56",
-     "F2"
-    ],
-    "input": "rev_growth.y1"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-07-31",
-    "text": "CONDENSED CONSOLIDATED STATEMENTS OF INCOME - USD ($) $ in Millions | 3 Months Ended | 6 Months Ended\nJul. 31, 2026 | Aug. 01, 2025 | Jul. 31, 2026 | Aug. 01, 2025\nStatement of Comprehensive Income [Abstract]\nRevenues | $ 1,880 | $ 1,769 | $ 3,786 | $ 3,646\nCost of revenues | 1,641 | 1,554 | 3,298 | 3,222\nSelling, general and administrative expenses | 87 | 75 | 170 | 164\nOther operating (income) expense | 0 | 1 | (13) | 0\nOperating income | 152 | 139 | 331 | 260\nInterest expense, net | 33 | 31 | 66 | 61\nOther (income) expense, net | 0 | 0 | 1 | 5\nIncome before income taxes | 119 | 108 | 264 | 194\nIncome tax (expense) benefit | (17) | 19 | (47) | 1\nNet income | $ 102 | $ 127 | $ 217 | $ 195\nEarnings per share:\nBasic (in dollars per share) | $ 2.41 | $ 2.72 | $ 5.03 | $ 4.14\nDiluted (in dollars per share) | $ 2.38 | $ 2.71 | $ 5.00 | $ 4.12"
-   },
-   "P6.s56": {
-    "kind": "release",
-    "period": "2026-08-31",
-    "text": "Revenue | $7.2B - $7.3B | $7.0B - $7.2B"
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.00418421264383231,
-    0.00418421264383231,
-    0.00418421264383231,
-    0.00418421264383231,
-    0.00418421264383231
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07174332139906361,
-   "normalized.margin": 0.07174332139906361,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.08742736397253037,
-   "op_margin.y2": 0.07174332139906361,
-   "rev_growth.y1": 0.038398244651673075,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06477688866100258
-  },
-  "numbers": {
-   "capex": [
-    0.00418421264383231,
-    0.00418421264383231,
-    0.00418421264383231,
-    0.00418421264383231,
-    0.00418421264383231
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.07174332139906361,
-   "normalized.margin": 0.07174332139906361,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.08742736397253037,
-   "op_margin.y2": 0.07174332139906361,
-   "rev_growth.y1": -0.0016524373450840235,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06477688866100258
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": -0.0016524373450840235,
-    "model_option": "guidance",
-    "record": 0.038398244651673075,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "guidance",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The packet does not say why full-year guidance of $7.2B - $7.3B implies a second-half revenue decline after first-half growth.",
-   "The guidance table gives adjusted EBITDA margin, not GAAP operating margin, so it cannot set an operating margin input directly.",
-   "The first-half operating margin includes a $13 million other operating gain, and the packet does not say how much of the first-half margin will persist.",
-   "Capital expenditure guidance for fiscal 2027 is not in the packet.",
-   "The company's view of long-run growth and returns on new capital is not stated in the evidence."
-  ],
-  "year": 3
- },
- "value_base": 96.53617858887166,
- "value_bear": 92.52483015711222,
- "value_bull": 100.71365901305617,
+ "upside": -0.20572133088732258,
+ "valuation": null,
+ "value_base": 103.57811297600284,
+ "value_bear": 85.35975151208581,
+ "value_bull": 127.07052200796562,
  "value_per_filed_share": {
-  "base": 96.53617858887166,
-  "bear": 92.52483015711222,
-  "bull": 100.71365901305617
+  "base": 103.57811297600284,
+  "bear": 85.35975151208581,
+  "bull": 127.07052200796562
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -14.0 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -11.3 points a year against the required return over 3 years"
 }

@@ -1,13 +1,546 @@
 {
- "alpha_pts": 39.9155658241359,
+ "alpha_pts": 13.059175431267331,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 59,
  "claims_supported": 55,
  "date": "2026-11-17T18:56:01Z",
- "equity_value": 12422549822.123768,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.7000 (filed -0.4114 to 0.5742)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.7200 (filed -0.4114 to 0.5742)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 1.2174 and margin 0.7377, margin 0.4440 (persist), growth 0.0375, terminal RONIC 0.0819 (equity return r 0.0846), F 10",
+  "run_gap": 0.04575114859272703,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 300000.0,
+       "printed": 0.3,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a $0.3 million loss on extinguishment of debt"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Loss on extinguishment of debt in 2025 other income"
+      },
+      {
+       "amount": 1800000.0,
+       "printed": 1.8,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a $1.8 million write-off of unamortized deferred financing costs"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Write-off of unamortized deferred financing costs on Ocean Yield prepayment, 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 166922000.0,
+     "excess_cash_before": 166922000.0,
+     "k0_after": 41220949.11405623,
+     "k0_before": 43320949.11405623,
+     "k0_interest": 42704000.0,
+     "one_offs_charge": 2100000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 304164050.8859438,
+     "x0_before": 302064050.8859438
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "equity_value": 4402163331.475742,
+     "seam_ratio": 0.9733033497071403,
+     "tv_share": 0.28796610466722955,
+     "wedge_rate_5": -0.07658285433426863
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.7000 (filed -0.4114 to 0.5742)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.12,
+     "fade_years": 8,
+     "long_run_op_margin": 0.27,
+     "op_margin": [
+      0.7,
+      0.5,
+      0.38,
+      0.33,
+      0.3
+     ],
+     "return_on_new_investment_long_run": 0.1,
+     "rev_growth": [
+      1.1,
+      -0.33,
+      -0.18,
+      -0.04,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 1.2174 and margin 0.7377, margin 0.4440 (persist), growth 0.0375, terminal RONIC 0.0819 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 55
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.38
+     ],
+     "rev_growth_y3": [
+      -0.3,
+      0.0
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Expenditures for vessels, vessel improvements and vessels under construction | (199,309) | (188,546)"
+       },
+       {
+        "id": "F3",
+        "quote": "Payments for drydocking | (61,719) | (63,181)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The REC capex ratio of 0.0015 does not match filings: nine-month vessel capex was $199M plus $62M of drydocking on about $1.28B of revenue, or 0.20. Revenue is expected to fall back from the year-1 peak, so a through-cycle 0.12 covers fleet renewal and drydocks."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The tanker industry is both cyclical and volatile in terms of charter rates and profitability."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The cycle takes several years to mean-revert, and the company is mid-cycle in a fleet renewal. About 8 years lets margin and growth settle gradually."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "any such normalization could cause tanker rates to decline significantly"
+       },
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $1,071.8 million | 0.2395 | 0.5742"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed median is about 0.12, but 2022-2025 ran 0.41-0.57 and the company has since renewed its fleet and cut its cost base. Base rates suggest a cyclical margin above median keeps roughly 40-60% of the gap, which gives about 0.27. The 10-K warns that normalization could cut rates significantly."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from vessel operations | 351,328 | 78,683 | 941,241 | 207,223"
+       },
+       {
+        "id": "P5",
+        "quote": "it is unlikely that the charter rates will remain at these historically high levels"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is about 0.70, since nine-month income from vessel operations is $941M on $1,282M of revenue, helped by sale gains. Margins then compress as rates normalize, while vessel expenses and depreciation stay roughly fixed. Year 5 is still above the long-run median because the fleet is modern and has low break-evens."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "New vessels earn strong returns only in tight markets and average returns across the cycle. I set 0.10, modestly above the 0.0819 break-even, since management buys and sells vessels countercyclically."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Shipping revenues | $ 483,202 | $ 196,388 | $ 1,275,965 | $ 575,423"
+       },
+       {
+        "id": "P5",
+        "quote": "it is unlikely that the charter rates will remain at these historically high levels"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is near $1.78B: nine months are $1,276M and Q3 alone was $483M, with rates surging late in the quarter. Management expects rates to fall back, and spot exposure means revenue follows. Revenue therefore drops sharply in years 2-3, partly cushioned by the added Bruton VLCCs and LR1 newbuilds."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "The newbuilding order book of all classes of tankers"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Tanker fleets are mature and cyclical, so long-run growth should sit slightly below the nominal anchor. A rising order book adds supply pressure."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.35,
+      "input_hit": "rev_growth",
+      "risk": "Rates fall back faster and further than modeled, for example if the Middle East disruption ends and newbuild deliveries expand supply."
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Mid-cycle margins revert toward the long-run historical median, with the 2022-2025 strength a one-off."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Fleet supply growth from a larger order book depresses long-run industry growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.9800000000000001,
+       -0.45,
+       -0.3,
+       -0.16,
+       -0.09
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.38,
+      "rev_growth": [
+       1.28,
+       -0.15000000000000002,
+       0.0,
+       0.13999999999999999,
+       0.21
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Net loan-to-value is below 6% and debt is small against $2.37B of equity, so the REC debt level is conservative relative to fleet size."
+     },
+     "margin_position": "The 2025 margin of 0.41 is far above the 12-year median of about 0.12 (history runs from -0.41 to 0.57). The 2026 nine-month margin is roughly 0.74. It is inflated by Middle East war rates and by $141M of vessel-sale gains booked inside operating income. Costs are mostly fixed, so rate moves flow almost fully to operating income.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The tax charge is near zero ($446K on $344.7M pretax in Q3) after the Bermuda redomiciliation, but the 10-K warns of pending tax law changes that could add taxes."
+     },
+     "why": "FY2025 was a good but not peak year, and year 1 (FY2026) will be an extreme peak. Nine-month shipping revenue is already $1,276M against $843M for all of 2025. Management itself says current rates are unlikely to last, and about 82% of TCE revenue is spot. I therefore model a spike in year 1 and a decline over the following years toward a margin above the historical median but well below the peak."
+    },
+    "value_at_old_defaults": 288.08675820952226,
+    "values": {
+     "base": 98.69907268839788,
+     "bear": 53.227683288344785,
+     "bull": 333.1739690540634
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 300000.0,
+       "printed": 0.3,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "$0.3 million loss on extinguishment of debt"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Loss on extinguishment of debt in other income, 2025"
+      },
+      {
+       "amount": 1800000.0,
+       "printed": 1.8,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "$1.8 million write-off of unamortized deferred financing costs"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Write-off of unamortized deferred financing costs on Ocean Yield prepayment, 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 166922000.0,
+     "excess_cash_before": 166922000.0,
+     "k0_after": 41220949.11405623,
+     "k0_before": 43320949.11405623,
+     "k0_interest": 42704000.0,
+     "one_offs_charge": 2100000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 304164050.8859438,
+     "x0_before": 302064050.8859438
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "equity_value": 4198312175.7560472,
+     "seam_ratio": 0.9862268932884337,
+     "tv_share": 0.30173835729575577,
+     "wedge_rate_5": -0.03384178825909391
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.7200 (filed -0.4114 to 0.5742)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.17,
+     "fade_years": 8,
+     "long_run_op_margin": 0.27,
+     "op_margin": [
+      0.72,
+      0.45,
+      0.36,
+      0.32,
+      0.3
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      1.12,
+      -0.35,
+      -0.12,
+      0.0,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 1.2174 and margin 0.7377, margin 0.4440 (persist), growth 0.0375, terminal RONIC 0.0819 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 55
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.38
+     ],
+     "rev_growth_y3": [
+      -0.25,
+      0.05
+     ],
+     "terminal_growth": [
+      0.01,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Expenditures for vessels, vessel improvements and vessels under construction | (199,309) | (188,546)"
+       },
+       {
+        "id": "F3",
+        "quote": "Payments for drydocking | (61,719) | (63,181)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0015"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The record's pooled ratio of 0.0015 does not reflect actual fleet spending: nine-month 2026 vessel spending plus drydocking is about $261M on roughly $1.28B of revenue, and an ageing fleet needs continuous renewal. I use 0.17 of the revenue path for years 1-5."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Spot market rates are highly volatile"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Spot rates revert over a few years of the cycle and the fleet is renewed continuously, so about eight years is enough to fade from the year-5 margin to the long-run level."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $272.5 million | -0.3536 | -0.4114"
+       },
+       {
+        "id": "P1",
+        "quote": "Spot market rates are highly volatile"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "History swings from -0.41 to +0.57, with a median near 0.12. The post-2022 era, with a modern fleet, low leverage and a spot-heavy model, supports a margin above the median, and the base rate says 40-60% of a gap above median persists. I set 0.27 with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Income from vessel operations | 351,328 | 78,683 | 941,241 | 207,223"
+       },
+       {
+        "id": "P2",
+        "quote": "any such normalization could cause tanker rates to decline significantly"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month income from vessel operations of $941M, including $141M of sale gains, implies a margin near 0.74. Fixed vessel costs mean the margin will drop as rates normalise, and sale gains should shrink."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive freight markets should hold returns on new vessels near the cost of capital, a little above the 8.19% break-even, and well below the current 14% peak-cycle return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Shipping revenues | $ 483,202 | $ 196,388 | $ 1,275,965 | $ 575,423"
+       },
+       {
+        "id": "P5",
+        "quote": "it is unlikely that the charter rates will remain at these historically high levels"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 shipping revenue is $1,276M, and Q3 was $483M with rates surging late in the quarter, so 2026 should roughly double. Management says the high rates will not last, so revenue should fall sharply in 2027 and 2028 even with added VLCC capacity from Bruton, then stabilise."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "equaled approximately 17%, 14% and 7%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Tanker demand grows slowly while the newbuild order book is expanding, so I set long-run growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tanker rates normalise faster and further than assumed, for example if the Middle East disruption ends and the order book delivers"
+     },
+     {
+      "bear_value": -0.45,
+      "input_hit": "rev_growth",
+      "risk": "Revenue falls much more steeply in 2027 as spot rates collapse"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Fleet oversupply and slow oil demand growth depress long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.9900000000000001,
+       -0.48,
+       -0.25,
+       -0.13,
+       -0.1
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.38,
+      "rev_growth": [
+       1.29,
+       -0.18,
+       0.04999999999999999,
+       0.16999999999999998,
+       0.19999999999999998
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Leverage is low and net loan-to-value is under 6%, and debt of about $700M at September 30, 2026 is modest against the fleet, so it should stay near this level."
+     },
+     "margin_position": "The base-year margin of 0.41 is well above the 12-year median of about 0.12, and the 2026 margin is higher still, around 0.7, because Middle East war disruption pushed spot rates far above normal while vessel costs stayed flat and vessel sale gains added to operating income. The company is heavily spot-exposed, so the margin should fall back toward, but stay above, its long-run median.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The tax rate is near zero after the Bermuda redomiciliation, but the 10-K warns that pending tax law changes could bring significant additional taxes."
+     },
+     "why": "2025 was already a strong year, but 2026 is far above it: nine-month shipping revenue is $1,276M against $575M a year earlier. Year 1 (2026) is therefore a peak, not a normal year, and management itself says current rates will not last. Base-year revenue is shipping revenue of $843M, and the record's capex/revenue pool of 0.0015 looks like a tagging artefact, since real vessel and drydock spending runs near $260M over nine months."
+    },
+    "value_at_old_defaults": 288.08675820952226,
+    "values": {
+     "base": 94.28446346905315,
+     "bear": 48.790652949439675,
+     "bull": 296.90865212693967
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 288.08675820952226,
+  "value_at_old_defaults_quoted": 288.08675820952226,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4785600422.585226,
  "family": "commodity",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 49595945.0,
  "flags": [
   "INSW (the acquirer) completed its acquisition of Bruton Limited and its newbuilding VLCCs, paid mainly in INSW shares plus cash.",
@@ -15,7 +548,7 @@
   "INSW sold a Suezmax in the third quarter, with net proceeds of $74 million and a gain of $53 million."
  ],
  "in_code_book": false,
- "ke": 0.08492083045154347,
+ "ke": 0.08462083045154348,
  "market_cap_at_publish": 5083307357,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +556,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 250.475110860853,
-  "3000": 250.03073006656658
+  "1000": 98.69907268839788,
+  "3000": 94.28446346905315
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -768,123 +1301,17 @@
   ]
  },
  "ticker": "INSW",
- "upside": 1.4437927808982902,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: capex (1000 none, 3000 up)",
-   "ytd_outside_record: op_margin.y1 0.7377"
-  ],
-  "departures": [
-   {
-    "driver": "cycle_downturn",
-    "evidence": [
-     "P5.s97",
-     "V0"
-    ],
-    "input": "rev_growth.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "down",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "P5.s97": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Also, while charter rates for crude tankers and product carriers have increased significantly and remain historically high following the extended disruption to shipping in the Middle East areas noted above, it is unlikely that the charter rates will remain at these historically high levels."
-   },
-   "V0": {
-    "kind": "code_base",
-    "period": "2025-12-31",
-    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min -0.4114, p25 0.4096, median 0.4784, p75 0.5119, max 0.5742, last 0.4096; persist 0.4440 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 2.1725, 2023-12-31 0.2395, 2024-12-31 -0.1121, 2025-12-31 -0.1138.\nBase-year revenue 843,302,000; tax rate 0.0000; return on opening capital 0.1444; capital expenditure 0.0015 and depreciation 0.1596 of revenue (pooled); the desk depreciates by the pooled rule.\nCost of equity 0.0849 (risk-free 0.0515, long-run growth anchor 0.0375, loading 0.701, equity premium 0.0477).\nYear 1 to date (10-Q 0001104659-26-123078, filed 2026-11-05): revenue 1,275,965,000 from 2026-01-01 to 2026-09-30 against 575,423,000 from 2025-01-01 to 2025-09-30, growth 1.2174; operating income 941,241,000, margin 0.7377.\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: ytd 1.2174; anchor 0.8426; record_median 0.8509; last 0.7946; zero 0.8307; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.0637; last -0.1138; zero 0.0000; guidance\nop_margin.y1: ytd 0.7377; persist 0.6444; median 0.6553; p25 0.6334; p75 0.6660; last 0.6334; guidance\nop_margin.y2: persist 0.4440; median 0.4784; p25 0.4096; p75 0.5119; last 0.4096; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.4440; median 0.4784; p25 0.4096; p75 0.5119; last 0.4096; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0821; quarter 0.0921; half 0.1047; three_quarters 0.1214; ronic0 0.1444\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.0015; record_last 0.0017; record_max 0.0036; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.0014952917167532363,
-    0.0014952917167532363,
-    0.0014952917167532363,
-    0.0014952917167532363,
-    0.0014952917167532363
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.44396731651623855,
-   "normalized.margin": 0.44396731651623855,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.7376699204131775,
-   "op_margin.y2": 0.44396731651623855,
-   "rev_growth.y1": 1.217438301910073,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08212800544046474
-  },
-  "numbers": {
-   "capex": [
-    0.0014952917167532363,
-    0.0014952917167532363,
-    0.0014952917167532363,
-    0.0014952917167532363,
-    0.0014952917167532363
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.44396731651623855,
-   "normalized.margin": 0.44396731651623855,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.7376699204131775,
-   "op_margin.y2": 0.44396731651623855,
-   "rev_growth.y1": 1.217438301910073,
-   "rev_growth.y2": -0.11381832740830566,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08212800544046474
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "last",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No filing or 8-K in the packet gives numeric guidance for 2026 or 2027 revenue, margin or capex.",
-   "The fourth-quarter 2026 result is not in the evidence, so the full-year 2026 outcome and the year-1 margin are unknown. Year-to-date operating income includes $140,945 thousand of vessel-sale gains.",
-   "The evidence does not say how fast or how far charter rates will fall from their current historically high levels. Management only says they are unlikely to stay there.",
-   "The effect of the Bruton acquisition (four VLCC newbuildings, about three million shares plus cash) on future revenue and capital spending cannot be quantified from the packet."
-  ],
-  "year": 3
- },
- "value_base": 250.475110860853,
- "value_bear": 238.0179207020412,
- "value_bull": 278.4277797940855,
+ "upside": -0.05856559784936366,
+ "valuation": null,
+ "value_base": 96.49176807872551,
+ "value_bear": 51.009168118892234,
+ "value_bull": 315.04131059050155,
  "value_per_filed_share": {
-  "base": 250.475110860853,
-  "bear": 238.0179207020412,
-  "bull": 278.4277797940855
+  "base": 96.49176807872551,
+  "bear": 51.009168118892234,
+  "bull": 315.04131059050155
  },
  "valued": true,
- "verdict": "BUY",
- "verdict_reason": "expected return +39.9 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +13.1 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

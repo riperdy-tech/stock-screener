@@ -1,11 +1,385 @@
 {
- "alpha_pts": 2.636895423901306,
+ "alpha_pts": 10.798987261469573,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 64,
  "claims_supported": 57,
  "date": "2026-11-17T08:20:40Z",
- "equity_value": 2651805837.6313214,
+ "decided": {
+  "flags": [
+   "run 1000: roe_outside_filed_record: roe.y1 0.3600 (filed -0.1750 to 0.3347)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 8 of 8",
+   "run 3000: roe_outside_filed_record: roe.y1 0.3600 (filed -0.1750 to 0.3347)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.1642, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.022876523452891706,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2836203358.053281,
+     "implied_pb": 3.141443142895809,
+     "seam_ratio": 1.0980000000000028,
+     "tv_share": 0.4874851796731499
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y1 0.3600 (filed -0.1750 to 0.3347)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 8 of 8"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.155,
+      0.15,
+      0.12,
+      0.1,
+      0.08
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.36,
+      0.27,
+      0.22,
+      0.19,
+      0.17
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1642, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 57
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.06,
+      0.16
+     ],
+     "long_run_roe": [
+      0.1,
+      0.18
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "In the third quarter, the company repurchased approximately $27 million of its shares of common stock, bringing total repurchases through the first nine months of 2026 to approximately $73 million."
+       },
+       {
+        "id": "P1",
+        "quote": "we may allocate capital toward share repurchases"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Retained earnings are large, but buybacks (about $73 million in 9 months) and slowing ROE hold equity growth to a path that declines from about 15% in 2026. Year 1 growth is anchored by equity of 1,078.7 million at Sep 30 against 976.75 million at year-end."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Changes in recoveries | 208,771 | 11.8% | (89,740) | (6.8)% | (82,530) | (6.7)%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The earnings boost from collections over-performance and tight US supply should erode gradually as competition and pricing normalise, so a ten-year fade is reasonable."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-12-31 | $936.5 million | $0.0 million | $936.5 million | $-206.5 million | -0.1750 | -0.2061"
+       },
+       {
+        "id": "P4",
+        "quote": "With market supply remaining elevated, pricing in the third quarter remained at favorable levels, although portfolio pricing was slightly higher compared to prior quarters."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Through the cycle the return has ranged from -0.175 to 0.335, including impairment-driven losses in 2023 and 2024. With high leverage and price-led bidding competition, I expect a long-run return in the low-to-mid teens, above the cost of equity of 0.0936."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we now expect our EPS in 2026 to be in a range between $15.50 and $16.00 per share"
+       },
+       {
+        "id": "P3",
+        "quote": "We recorded $167.9 million in net negative change in expected future recoveries during the year ended December 31, 2024."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is nearly locked in: 9-month net income was 274 million and guidance implies roughly 350 million on 977 million of opening equity. Recoveries above forecast were unusually large in 2025 and 2026 and have reversed before, so the return fades toward the mid-teens."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A debt-funded portfolio buyer in mature US and UK markets should grow roughly with nominal GDP in the long run, close to the 0.0375 anchor but a bit below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "roe",
+      "risk": "Recoveries above forecast reverse or collections are pulled forward, as in 2024, and the ROE normalises sharply"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Higher portfolio pricing, competition or refinancing costs compress long-run returns on equity given heavy leverage"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "book_growth",
+      "risk": "Leverage limits or tight funding force deleveraging and cut equity growth"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.095,
+       0.09,
+       0.06,
+       0.04000000000000001,
+       0.020000000000000004
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.195,
+       0.19,
+       0.16,
+       0.14,
+       0.12000000000000001
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Encore is a leveraged buyer of defaulted consumer debt, so its return on equity swings with collections against forecast and with one-off charges. 2023 and 2024 were losses driven by goodwill impairments and negative changes in recoveries. 2025 jumped to a return of 0.3347 on large recoveries above forecast. 2026 is running higher still on record collections, with 9-month net income of 274 million and guided EPS of $15.50 to $16.00.",
+     "why": "Encore is not a bank or insurer, so no regulatory capital requirement caps growth in its book equity. Equity growth is limited by the company's leverage target range and by its funding access, which are not quantified in the evidence. Buybacks absorb a large share of earnings, so book growth is well below ROE. The base year 2025 is inflated by recoveries above forecast, so the ROE should fade."
+    },
+    "value_at_old_defaults": 101.36579930506127,
+    "values": {
+     "base": 130.38177062222664,
+     "bear": 87.86455278746676,
+     "bull": 206.39597052206724
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2901836560.4377756,
+     "implied_pb": 3.214139965918607,
+     "seam_ratio": 1.0854000000000015,
+     "tv_share": 0.4743967355782991
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y1 0.3600 (filed -0.1750 to 0.3347)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.15,
+      0.15,
+      0.12,
+      0.1,
+      0.08
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.36,
+      0.27,
+      0.23,
+      0.2,
+      0.18
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1642, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 57
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.06,
+      0.15
+     ],
+     "long_run_roe": [
+      0.1,
+      0.18
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total stockholders\u2019 equity | 1,078,682 | 976,750"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchase and retirement of common stock | (73,993) | (35,329)"
+       },
+       {
+        "id": "P1",
+        "quote": "we may allocate capital toward share repurchases"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Equity rose only from 976,750 to 1,078,682 in nine months despite 274 million of net income, because of buybacks and the cash settlement of the called convertible notes. Year 1 reaches about 15%, with Q4 earnings less repurchases. Later growth slows as return on equity falls and buybacks continue, and buybacks are allowed only when leverage is within or below target."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Pricing continues to remain competitive in our European footprint"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive advantages in the U.S. look durable but not permanent, and returns are cyclical, so a ten-year fade from the elevated year-5 return to the long-run level is reasonable."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Moreover, our competitors may elect to pay prices for portfolios that we determine are not economically sustainable"
+       },
+       {
+        "id": "F1",
+        "quote": "Borrowings | 4,237,800 | 4,001,293"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The returns come from heavy leverage, with borrowings of 4.24 billion against 1.08 billion of equity. Intense price-based bidding and cyclical recoveries should compress returns toward a mid-teens level, above the 9.36% cost of equity because of scale and data advantages, but with a wide range after the 2023-24 losses."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we now expect our EPS in 2026 to be in a range between $15.50 and $16.00 per share"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.1750, p25 -0.1487, median 0.1642, p75 0.2881, max 0.3347, last 0.3347."
+       },
+       {
+        "id": "P3",
+        "quote": "We recorded $167.9 million in net negative change in expected future recoveries during the year ended December 31, 2024."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is anchored on guided 2026 EPS of $15.50 to $16.00, roughly 350 million of net income on 976.8 million opening equity, or about 0.36. After that it fades as recoveries above forecast normalize and legal costs and higher U.S. pricing weigh. The history ranges from -0.175 to 0.335, so a fade is prudent."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "pricing in the third quarter remained at favorable levels, although portfolio pricing was slightly higher compared to prior quarters"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Receivable portfolio balances grow with purchases funded by debt, and long-run growth should converge near nominal GDP, a little below the 3.75% anchor given competition and regulatory pressure."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.16,
+      "input_hit": "roe",
+      "risk": "Changes in recoveries reverse as collections over-performance fades or was pulled forward, or a recession raises bankruptcies, cutting return on equity back toward its historical median."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Funding costs rise or refinancing is harder, and higher portfolio prices or competition compress returns on new purchases, lowering long-run returns."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "book_growth",
+      "risk": "Leverage constraints and higher purchase needs limit buybacks and retained growth, while portfolio balances grow slower than expected."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.09,
+       0.09,
+       0.06,
+       0.04000000000000001,
+       0.020000000000000004
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.18,
+       0.18,
+       0.15,
+       0.13,
+       0.11
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Encore is a leveraged buyer of defaulted consumer debt, not a bank. Its return on equity swings with collections against forecast and with impairments. It was 0.2881 in 2021 and 0.1642 in 2022. Goodwill impairments and negative changes in recoveries pushed it to -0.1750 in 2023 and -0.1487 in 2024. It then jumped to 0.3347 in 2025 on large recoveries above forecast. 2026 is running higher still, with nine-month net income of 274.3 million and guided EPS of $15.50 to $16.00, helped by a record 111.0 million of changes in recoveries in Q3 alone.",
+     "why": "2025 and 2026 are peak-like. They rest on estimate-driven changes in recoveries, a strong U.S. supply cycle and the absence of impairments, while 2023 and 2024 were deeply negative. There is no regulatory capital limit. Growth is bounded by debt funding capacity and by management's target leverage range, which gates buybacks, so book equity grows from retained earnings after buybacks. I expect return on equity to stay high near term and fade toward a mid-teens level above the 9.36% cost of equity."
+    },
+    "value_at_old_defaults": 101.36579930506127,
+    "values": {
+     "base": 133.398963699796,
+     "bear": 90.2271257823421,
+     "bull": 199.52125941031912
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 101.36579930506127,
+  "value_at_old_defaults_quoted": 101.36579930506127,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 3103907900.767241,
  "family": "financial",
  "far_from_price": false,
  "filed_shares": 23534000.0,
@@ -15,7 +389,7 @@
   "In its third quarter earnings release the company raised its full-year 2026 guidance for portfolio purchases, collections and EPS. The new EPS range is $15.50 to $16.00 per share."
  ],
  "in_code_book": false,
- "ke": 0.09390305732783658,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 2185749604,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +397,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 112.67977554310026,
-  "3000": 112.67977554310026
+  "1000": 130.38177062222664,
+  "3000": 133.398963699796
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -806,125 +1180,17 @@
   ]
  },
  "ticker": "ECPG",
- "upside": 0.21322489674865852,
- "valuation": {
-  "annotations": [],
-  "departures": [
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "F2",
-     "P6.s19"
-    ],
-    "input": "roe.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "Y2025-12-31",
-     "P6.s18",
-     "P4.s109"
-    ],
-    "input": "roe.y2"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "none",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "none",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "up",
-   "roe.y2": "up",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Income - USD ($) shares in Thousands, $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nRevenues\nPortfolio revenue | $ 414,414 | $ 370,126 | $ 1,204,675 | $ 1,076,518\nChanges in recoveries | 111,043 | 63,636 | 244,898 | 140,699\nTotal debt purchasing revenue | 525,457 | 433,762 | 1,449,573 | 1,217,217\nServicing revenue | 17,474 | 22,175 | 56,340 | 67,022\nOther revenues | 1,610 | 4,416 | 5,911 | 11,011\nTotal revenues | 544,541 | 460,353 | 1,511,824 | 1,295,250\nOperating expenses\nSalaries and employee benefits | 117,470 | 117,118 | 351,596 | 340,788\nCost of legal collections | 100,400 | 80,010 | 286,220 | 227,672\nGeneral and administrative expenses | 43,596 | 39,220 | 121,949 | 121,565\nOther operating expenses | 39,344 | 37,056 | 111,008 | 108,298\nCollection agency commissions | 6,016 | 6,601 | 18,472 | 21,848\nDepreciation and amortization | 7,110 | 7,170 | 21,080 | 21,825\nTotal operating expenses | 313,936 | 287,175 | 910,325 | 841,996\nIncome from operations | 230,605 | 173,178 | 601,499 | 453,254\nOther expense\nInterest expense | (72,299) | (74,242) | (219,256) | (218,715)\nLoss on extinguishment of debt | 0 | 0 | (30,533) | 0\nOther income | 2,482 | 929 | 3,657 | 3,802\nTotal other expense | (69,817) | (73,313) | (246,132) | (214,913)\nIncome before income taxes | 160,788 | 99,865 | 355,367 | 238,341\nProvision for income taxes | (36,775) | (25,205) | (81,112) | (58,164)\nNet income | $ 124,013 | $ 74,660 | $ 274,255 | $ 180,177\nEarnings per share:\nBasic (USD per share) | $ 5.80 | $ 3.22 | $ 12.73 | $ 7.66\nDiluted (USD per share) | $ 5.57 | $ 3.17 | $ 12.21 | $ 7.57\nWeighted average shares outstanding:\nBasic (shares) | 21,364 | 23,222 | 21,547 | 23,534\nDiluted (shares) | 22,255 | 23,520 | 22,454 | 23,789"
-   },
-   "P4.s109": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Collections from purchased receivables increased by $286.3 million, or 14.9%, to $2,209.1 million during the nine months ended September 30, 2026, as compared to $1,922.8 million during the nine months ended September 30, 2025."
-   },
-   "P6.s18": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "We now anticipate global portfolio purchases to be in a range between $1.50 billion and $1.55 billion, and global collections to be in a range between $2.90 billion and $2.95 billion, reflecting year-over-year growth of 12-14%."
-   },
-   "P6.s19": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "Additionally, we now expect our EPS in 2026 to be in a range between $15.50 and $16.00 per share, an increase of over 40% compared to 2025."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001084961-26-000009): book equity at year end $976.8 million; income to common $256.8 million; return on opening equity 33.5%."
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.16415287434581918,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.16415287434581918,
-   "roe.y1": 0.16415287434581918,
-   "roe.y2": 0.16415287434581918,
-   "terminal_g": 0.0375
-  },
-  "numbers": {
-   "book_growth.y1": 0.0375,
-   "book_growth.y2": 0.0375,
-   "fade_years": 10,
-   "long_run_roe": 0.16415287434581918,
-   "normalized.book_growth": 0.0375,
-   "normalized.roe": 0.16415287434581918,
-   "roe.y1": 0.3347108353500641,
-   "roe.y2": 0.28809107693116337,
-   "terminal_g": 0.0375
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "neutral",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    0
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "last",
-   "roe.y2": "p75",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The evidence gives no return-on-equity or book-equity growth guidance, so no guidance option is used.",
-   "Full-year 2026 book equity growth is not stated. Equity rose from $976,750 to $1,078,682 (thousands) over nine months, which is above the neutral 3.75%, but the 27.29% last-year figure may overstate it, so the neutral option is kept.",
-   "How long the 2025-2026 collections over-performance and high returns will last is not known.",
-   "The share of 2026 earnings that comes from recoveries above forecast, which varies from period to period, cannot be separated from the evidence given."
-  ],
-  "year": 3
- },
- "value_base": 112.67977554310026,
- "value_bear": 111.60801359622744,
- "value_bull": 113.06917749258773,
+ "upside": 0.42006563564599464,
+ "valuation": null,
+ "value_base": 131.89036716101134,
+ "value_bear": 89.04583928490443,
+ "value_bull": 202.95861496619318,
  "value_per_filed_share": {
-  "base": 112.67977554310026,
-  "bear": 111.60801359622744,
-  "bull": 113.06917749258773
+  "base": 131.89036716101134,
+  "bear": 89.04583928490443,
+  "bull": 202.95861496619318
  },
  "valued": true,
- "verdict": "WATCH",
- "verdict_reason": "expected return +2.6 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict": "BUY",
+ "verdict_reason": "expected return +10.8 points a year against the required return over 3 years"
 }

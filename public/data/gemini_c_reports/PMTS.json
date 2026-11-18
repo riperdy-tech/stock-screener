@@ -1,11 +1,492 @@
 {
- "alpha_pts": 9.261000076873227,
+ "alpha_pts": 9.436348462548395,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 94,
  "claims_supported": 90,
  "date": "2026-11-18T03:46:38Z",
- "equity_value": 382341921.33415073,
+ "decided": {
+  "flags": [
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 9 of 9"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1643 and margin 0.0847, margin 0.1197 (persist), growth 0.0375, terminal RONIC 0.0828 (equity return r 0.0936), F 10",
+  "run_gap": 0.002109115503857087,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 287000.0,
+       "printed": 287,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on debt extinguishment | (282) | (287) | (282) | (287)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on debt extinguishment in 2025 (redemption of $20.0 million of Senior Notes); non-recurring non-operating item"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 21700000.0,
+     "excess_cash_before": 21700000.0,
+     "k0_after": 33696179.076305225,
+     "k0_before": 33983179.076305225,
+     "k0_interest": 32360000.0,
+     "one_offs_charge": 287000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 17687843.183671206,
+     "x0_before": 17488712.180911317
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 326279809.8265201,
+     "seam_ratio": 1.0843313446996918,
+     "tv_share": 0.5024462439622158,
+     "wedge_rate_5": 0.0011105603457671098
+    },
+    "flags": [
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.11,
+     "op_margin": [
+      0.09,
+      0.092,
+      0.094,
+      0.095,
+      0.096
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.125,
+      0.07,
+      0.06,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1643 and margin 0.0847, margin 0.1197 (persist), growth 0.0375, terminal RONIC 0.0828 (equity return r 0.0936), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 90
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.09
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0266"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Pooled capital expenditure has been about 2.7% of revenue, but the new Indiana facility and finance-lease funded equipment push me slightly higher at 3%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The highly competitive, saturated and consolidated nature of our marketplace."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A competitive, consolidated market with customer concentration and contracts without volume commitments argues for a moderate fade period rather than a long or short one."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $475.7 million | 0.2683 | 0.1663"
+       },
+       {
+        "id": "P6",
+        "quote": "Integrated Paytech segment revenue increased 20% to $23.5 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins were 12-17% in 2020-2022 and 13-14% in 2023-2024, but they have slipped to about 10% as costs rose and tariffs and competition weigh. Growth in Integrated Paytech (gross margin above 55%) supports partial recovery, so I fade to 11%, below the 2020-2024 median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "CPI continues to expect low-to-mid single-digit Adjusted EBITDA growth as growth and diversification investments continue."
+       },
+       {
+        "id": "F2",
+        "quote": "Selling, general and administrative expenses | 34,597 | 27,975 | 104,349 | 85,264"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating margin of 8.5% is below the 2025 level because SG&A is growing much faster than gross profit. Management guides only low-to-mid single-digit Adjusted EBITDA growth against double-digit revenue growth, so I start at about 9% and let it rise slowly with mix and operating leverage."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2600"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0828."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 26%, helped by a small asset base and acquired intangibles, but new investment (including acquisitions at higher capital cost) should earn less, so I use 20%, well above the 8.3% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million"
+       },
+       {
+        "id": "F2",
+        "quote": "Revenue | $ 158,357 | $ 137,966 | $ 454,646 | $ 390,480"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (fiscal 2026) is anchored on nine-month growth of 16.4% and guidance of low-double-digit growth for the year, which looks conservative given nine-month growth and implies a flat-to-down Q4. Growth then fades as the Arroweye and TRISM acquisition contributions lap and the market, described as saturated, grows more slowly."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Card reissuance gives steady demand, but mobile payments and a saturated market limit long-run growth, so I sit just below the long-run nominal growth anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.03,
+      "input_hit": "rev_growth",
+      "risk": "Loss or reduction of a key customer (one customer was about 16% of revenue, no volume commitments) or a prepaid or consumer-spending downturn"
+     },
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariffs, SG&A growth and competitive pricing keep margins near 8-9%, and the tariff refunds do not recur"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Physical card demand erodes through mobile wallets and installment programs, lowering long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       0.095,
+       0.04000000000000001,
+       0.03,
+       0.020000000000000004,
+       0.015
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.155,
+       0.1,
+       0.09,
+       0.08,
+       0.075
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt is $286.7 million at the 2025 year-end, down to $251.1 million at September 2026, and management targets a net leverage ratio of 2.5x-3.0x, so debt is roughly stable relative to earnings."
+     },
+     "margin_position": "The 2025 operating margin of 10.1% is below the 2020-2022 level of 12-17%. Gross margin fell as sales mix shifted, depreciation and tariff costs rose, and Arroweye integration costs hit SG&A. Nine-month 2026 operating margin is 8.5%, because SG&A grew 22.4% against revenue growth of 16.4%. Higher-margin Integrated Paytech and operating leverage should help recovery, but corporate and investment spending is heavy.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 30.6% base-year rate was lifted by non-deductible acquisition costs and state taxes, and the nine-month 2026 rate is about 32% (4,604 on 14,177), so it may fall toward the mid-20s but this is not confirmed."
+     },
+     "why": "2025 revenue grew 13.1% with a 10.1% operating margin, which is not a peak or a trough. 2026 is running at faster growth and a lower margin because of acquisitions (TRISM, Arroweye) and investment spending. Tariff refunds of about $4.0 million flatter 2026 gross profit, so I am not building in a quick margin rebound."
+    },
+    "value_at_old_defaults": 32.72147014030882,
+    "values": {
+     "base": 31.43624874167515,
+     "bear": 18.221982258084807,
+     "bull": 52.51285354413279
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 287000.0,
+       "printed": 287,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Loss on debt extinguishment | (282) | (287) | (282) | (287)"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Loss on debt extinguishment (redemption of $20.0M of Senior Notes)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 21700000.0,
+     "excess_cash_before": 21700000.0,
+     "k0_after": 33696179.076305225,
+     "k0_before": 33983179.076305225,
+     "k0_interest": 32360000.0,
+     "one_offs_charge": 287000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 17687843.183671206,
+     "x0_before": 17488712.180911317
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 325550123.55480266,
+     "seam_ratio": 1.0405551852882924,
+     "tv_share": 0.45103893621805213,
+     "wedge_rate_5": 0.0007681245128490999
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.092,
+      0.096,
+      0.1,
+      0.103,
+      0.105
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      0.135,
+      0.07,
+      0.06,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.1643 and margin 0.0847, margin 0.1197 (persist), growth 0.0375, terminal RONIC 0.0828 (equity return r 0.0936), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 90
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.09,
+      0.12
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.09
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures for plant, equipment and leasehold improvements, net | (11,103) | (13,777)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month 2026 net capex is about 2.4% of revenue, and the 5-year pooled figure is 2.7%. Finance-lease equipment sits outside capex, so a slightly higher 3.0% is used."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our marketplace is highly competitive, relatively saturated and increasingly consolidated."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade lets the acquisition-driven growth and the margin recovery settle gradually; the company is mature, with a saturated and consolidating market."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Gross profit and gross profit margin decreased for the year ended December 31, 2025, primarily due to unfavorable sales mix and increased production costs, including increased depreciation and tariff expenses"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Half of the gap from the 2025 margin of 10.1% to the 13-16% of 2021-2024 is assumed to close. Tariffs, competition from larger global rivals and the investment spending limit the recovery."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "CPI continues to expect low-to-mid single-digit Adjusted EBITDA growth as growth and diversification investments continue."
+       },
+       {
+        "id": "F2",
+        "quote": "Income (loss) from operations | 15,655 | 13,018 | 38,513 | 36,545"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides low-to-mid single-digit Adjusted EBITDA growth because growth investments continue, and 9M operating margin is about 8.5%, so 2026 margin stays near 9%. Margin recovers gradually as Integrated Paytech (gross margin above 55%) grows and SG&A levers."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.2600"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0828."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Return on tangible capital is high at 26% because the asset base is light, but competition and acquired goodwill should pull the return on new investment well below that. 0.18 stays comfortably above the break-even return of 0.0828."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "2026 guidance is low-double-digit growth with 9M up 16.4%, helped by Arroweye and TRISM, so year 1 is about 13.5%. Growth then fades toward the high single digits and mid single digits as acquisition contributions lapse, with contactless mix, share gains and Integrated Paytech supporting it."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Card reissuance is a steady demand base, but mobile and biometric payments could erode physical cards, so terminal growth is set slightly below the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Loss or downsizing of the largest customer (about 16% of revenue) or other top-10 customers, which have no exclusivity or volume commitments"
+     },
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariff costs and pricing pressure keep margins at the 2025-2026 level (about 9-10%) with no recovery"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Substitution of physical cards by mobile, biometric and installment payments lowers long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       0.10500000000000001,
+       0.04000000000000001,
+       0.03,
+       0.020000000000000004,
+       0.015
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       0.165,
+       0.1,
+       0.09,
+       0.08,
+       0.075
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt fell to $251M at Sep 2026 and management targets net leverage of 2.5-3.0x, so the 2025 debt of $286.7M is somewhat high but near the level the company intends to keep."
+     },
+     "margin_position": "Operating margin was 10.1% in 2025, below the 13-17% of 2021-2024. Gross margin fell from 35.6% to 31.3% on unfavorable mix, tariffs and depreciation, and SG&A rose with the Arroweye integration. Nine-month 2026 margin is about 8.5%, held down by SG&A growth of 22.4% and helped by roughly $4.0M of tariff refunds. Margin is below its own multi-year median, so some recovery is likely but not all of it.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2025 rate of 30.6% was lifted by non-deductible acquisition costs and state taxes, but the 9M 2026 rate is still about 32% (4,604 on 14,177 pretax), so the sustainable rate is uncertain."
+     },
+     "why": "2025 revenue grew 13.1% on Arroweye and contactless volumes, while operating margin fell 12.7% in operating income terms because of tariff and integration costs. Interest of $32.4M absorbs most of operating income, so equity value is very sensitive to operating margin. 2026 is running ahead on revenue, with 9M revenue up 16.4% and guidance raised twice. Margin is flat to slightly lower because of investment spending, so 2025 is a fair base for margin but understates the 2026 revenue level."
+    },
+    "value_at_old_defaults": 32.72147014030882,
+    "values": {
+     "base": 31.37001590841872,
+     "bear": 19.988658198487286,
+     "bull": 48.90210252375206
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 32.72147014030882,
+  "value_at_old_defaults_quoted": 32.72147014030882,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 374384218.1876689,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 11921875.0,
@@ -23,12 +504,12 @@
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
  "seed_base": {
-  "1000": 32.647573198252765,
-  "3000": 32.07061987599692
+  "1000": 31.43624874167515,
+  "3000": 31.37001590841872
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1329,168 +1810,17 @@
   ]
  },
  "ticker": "PMTS",
- "upside": 0.2707909754423412,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: terminal_ronic (1000 up, 3000 none)",
-   "seeds_disagree: terminal_g (1000 down, 3000 none)",
-   "ytd_outside_record: op_margin.y1 0.0847",
-   "held_at_record: rev_growth.y1 model 0.1286 valued at 0.1643"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P6.s18",
-     "P7.s21",
-     "F2",
-     "P3.s170"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "mix",
-    "evidence": [
-     "F2",
-     "P3.s88",
-     "P6.s19",
-     "Y2025-12-31"
-    ],
-    "input": "op_margin.y2"
-   }
-  ],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "down",
-   "rev_growth.y1": "down",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2026-09-30",
-    "text": "Condensed Consolidated Statements of Operations and Comprehensive Income - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nIncome Statement [Abstract]\nRevenue | $ 158,357 | $ 137,966 | $ 454,646 | $ 390,480\nCost of goods sold | 108,105 | 96,973 | 311,784 | 268,671\nGross profit | 50,252 | 40,993 | 142,862 | 121,809\nSelling, general and administrative expenses | 34,597 | 27,975 | 104,349 | 85,264\nIncome (loss) from operations | 15,655 | 13,018 | 38,513 | 36,545\nOther expense, net:\nInterest, net | (8,011) | (8,746) | (23,072) | (24,500)\nLoss on debt extinguishment | (282) | (287) | (282) | (287)\nOther expense, net | (979) | (242) | (982) | (237)\nTotal other expense, net | (9,272) | (9,275) | (24,336) | (25,024)\nIncome before income taxes and equity in losses of unconsolidated affiliates | 6,383 | 3,743 | 14,177 | 11,521\nIncome tax expense | (1,309) | (1,435) | (4,604) | (3,921)\nEquity in losses of unconsolidated affiliates | (55) | 0 | (458) | 0\nNet income | $ 5,019 | $ 2,308 | $ 9,115 | $ 7,600\nBasic and diluted earnings per share:\nBasic earnings per share (in dollars per share) | $ 0.43 | $ 0.20 | $ 0.79 | $ 0.67\nDiluted earnings per share (in dollars per share) | $ 0.41 | $ 0.19 | $ 0.76 | $ 0.64\nBasic weighted-average shares outstanding (in shares) | 11,573,302 | 11,353,329 | 11,505,834 | 11,298,986\nDiluted weighted-average shares outstanding (in shares) | 12,166,439 | 11,853,630 | 12,050,670 | 11,937,369\nComprehensive income:\nNet income | $ 5,019 | $ 2,308 | $ 9,115 | $ 7,600\nTotal comprehensive income | $ 5,019 | $ 2,308 | $ 9,115 | $ 7,600"
-   },
-   "P3.s170": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "On May 6, 2025, we acquired Arroweye for a final purchase price of $45.8 million."
-   },
-   "P3.s88": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Gross profit and gross profit margin decreased for the year ended December 31, 2025, primarily due to unfavorable sales mix and increased production costs, including increased depreciation and tariff expenses, partially offset by benefits of operating leverage from increased revenue."
-   },
-   "P6.s18": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million, up from prior guidance of high-single-digit to low-double-digit revenue growth and $45 million to $50 million of Free Cash Flow."
-   },
-   "P6.s19": {
-    "kind": "release",
-    "period": "2026-11-04",
-    "text": "CPI continues to expect low-to-mid single-digit Adjusted EBITDA growth as growth and diversification investments continue."
-   },
-   "P7.s21": {
-    "kind": "other_8k",
-    "period": "2026-11-04",
-    "text": "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million, up from prior guidance of high-single-digit to low-double-digit revenue growth and $45 million to $50 million of Free Cash Flow."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0001104659-26-023812): revenue $543.5 million; operating income $54.8 million; operating margin 10.1%; net income $14.9 million; depreciation and amortization $22.5 million; capital expenditure $18.2 million."
-   }
-  },
-  "neutral": {
-   "capex": [
-    0.02663409132649234,
-    0.02663409132649234,
-    0.02663409132649234,
-    0.02663409132649234,
-    0.02663409132649234
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.11972131130652738,
-   "normalized.margin": 0.11972131130652738,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.08470986217848613,
-   "op_margin.y2": 0.11972131130652738,
-   "rev_growth.y1": 0.1643259577955336,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08279137437254244
-  },
-  "numbers": {
-   "capex": [
-    0.02663409132649234,
-    0.02663409132649234,
-    0.02663409132649234,
-    0.02663409132649234,
-    0.02663409132649234
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.11972131130652738,
-   "normalized.margin": 0.11972131130652738,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.08470986217848613,
-   "op_margin.y2": 0.10089709199424507,
-   "rev_growth.y1": 0.12861297545323747,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.08279137437254244
-  },
-  "of_record": {
-   "rev_growth.y1": {
-    "model": 0.12861297545323747,
-    "model_option": "anchor",
-    "record": 0.1643259577955336,
-    "record_option": "ytd"
-   }
-  },
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "last",
-   "rev_growth.y1": "anchor",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "2026 consolidated revenue growth guidance is stated qualitatively as low-double-digit growth without a numeric figure, and no guidance is provided for operating margin or capital expenditures.",
-   "The financial terms and standalone revenue contribution of the TRISM acquisition and the exact timing of margin recovery from ongoing growth and diversification investments are not disclosed in the provided excerpts.",
-   "Customer contracts generally lack exclusivity or specified order quantity commitments, so future multi-year order volumes are not determinable from the filings."
-  ],
-  "year": 3
- },
- "value_base": 32.07061987599692,
- "value_bear": 28.598592189765416,
- "value_bull": 39.29284498893031,
+ "upside": 0.2443419339443249,
+ "valuation": null,
+ "value_base": 31.403132325046933,
+ "value_bear": 19.105320228286047,
+ "value_bull": 50.70747803394242,
  "value_per_filed_share": {
-  "base": 32.07061987599692,
-  "bear": 28.598592189765416,
-  "bull": 39.29284498893031
+  "base": 31.403132325046933,
+  "bear": 19.105320228286047,
+  "bull": 50.70747803394242
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +9.3 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +9.4 points a year against the required return over 3 years"
 }

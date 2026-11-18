@@ -1,11 +1,496 @@
 {
- "alpha_pts": 20.316648520933136,
+ "alpha_pts": 17.280851710434813,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 69,
  "claims_supported": 65,
  "date": "2026-11-17T23:16:06Z",
- "equity_value": 6686833241.135385,
+ "decided": {
+  "flags": [
+   "run 1000: return_above_base_year: long-run 0.1000 against the base year's 0.0355",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 16 of 16",
+   "run 3000: return_above_base_year: long-run 0.1100 against the base year's 0.0355",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The 2025 effective rate was 28.2% and the nine-month 2026 rate was about 26%, both well above the 20.65% in the record.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.1236 and margin 0.0392, margin 0.1100 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+  "run_gap": 0.059967093658541096,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 3091744000.0,
+     "excess_cash_before": 3091744000.0,
+     "k0_after": 41515059.2620672,
+     "k0_before": 41515059.2620672,
+     "k0_interest": 33444000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 273835586.4764824,
+     "x0_before": 273835586.4764824
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2647961494.2643776,
+     "seam_ratio": 1.068464872495334,
+     "tv_share": 0.35387194368126546,
+     "wedge_rate_5": -0.04219262329984359
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.1000 against the base year's 0.0355",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 16 of 16"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.03,
+     "fade_years": 10,
+     "long_run_op_margin": 0.095,
+     "op_margin": [
+      0.032,
+      0.06,
+      0.075,
+      0.085,
+      0.09
+     ],
+     "return_on_new_investment_long_run": 0.1,
+     "rev_growth": [
+      -0.08,
+      0.06,
+      0.04,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth -0.1236 and margin 0.0392, margin 0.1100 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.07,
+      0.12
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.07
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0312"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (64,422) | (102,090)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is about 3.1% of revenue, but 2026 spend is running lower (nine-month capex of $64M against $102M a year earlier), so I use 3.0%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "to fully realize them by the end of 2027"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin recovery is expected to be mostly done by year 5, with remaining mix and HDFS improvement over about ten years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "HDMC gross margin that ranges from 25% to 30%"
+       },
+       {
+        "id": "P5",
+        "quote": "targets HDMC operating expense as a percent of HDMC revenue to be below 20% in the medium term"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $5,186.8 million | -0.1113 | 0.0803"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Targets of HDMC gross margin of 25-30% with operating expense below 20% of revenue imply HDMC operating margins of roughly 5-10%. Adding HDFS servicing and net interest income and subtracting the LiveWire drag gives about 9.5% for the group. That is well below the pre-2020 record, because the brand has lost share and the competitive position is weaker."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 37,304 | 474,758 | 136,806 | 747,695"
+       },
+       {
+        "id": "P5",
+        "quote": "total annual benefit of at least $225 million"
+       },
+       {
+        "id": "P3",
+        "quote": "approximately three times 2026 expected HDFS operating income in or around 2029"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month operating income was $136.8M, which includes a one-time tariff refund and a seasonally weak Q4 still to come, so year 1 is about 3%. Margins then rise as the at-least-$225M savings are fully realised by end-2027, volumes recover, and HDFS income grows toward about three times its 2026 level by 2029. Tariff costs (gross $105-120M) keep a lid on the recovery."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1058."
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0355"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Return on tangible capital is only 3.6% in the base year, depressed by the trough and a large cash and receivables base. Brand-driven, asset-light parts, apparel and licensing growth supports a return near the 10.6% breakeven, but I set it slightly below because competitive pressure caps it."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | 1,082,639 | 1,340,710 | 3,485,606 | 3,977,018"
+       },
+       {
+        "id": "P5",
+        "quote": "a path to achieve a mid-single-digit compound annualized growth rate (CAGR) target in worldwide dealer retail sales"
+       },
+       {
+        "id": "P5",
+        "quote": "Worldwide retail sales of new Harley-Davidson motorcycles in the third quarter of 2026 increased 5.4% compared to the third quarter of 2025."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 falls about 8% because HDFS revenue was cut by the receivables sale (nine-month 2026 revenue $3.49B against $3.98B) and Q4 2025 was a very low base for HDMC. After that, retail is growing and management guides to a mid-single-digit retail CAGR, helped by dealer inventory already being lean. I take somewhat less than that, because Europe is weak and shipments lag retail."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P3",
+        "quote": "Europe(c) | 431,390 | 516,260 | (84,870) | (16.4)%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A mature discretionary motorcycle brand with a shrinking U.S. rider base, losing share in Europe, should grow about with inflation, below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.065,
+      "input_hit": "long_run_op_margin",
+      "risk": "The Back to the Bricks cost savings and new-product plan under-deliver, so the margin stays near the 2026 trough, with tariffs rising further"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Retail demand recovery stalls on rates, tariff pricing or weak Europe, leaving revenue flat"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "op_margin",
+      "risk": "LiveWire failure and impairment, and the smaller HDFS loan book, keep near-term margins lower"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       -0.11,
+       0.03,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.12,
+      "rev_growth": [
+       -0.049999999999999996,
+       0.09,
+       0.07,
+       0.07,
+       0.065
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt fell sharply after the receivables sale, but HDFS is rebuilding its own loan book and will need more funding, so 2025 year-end debt is not a clear steady level."
+     },
+     "margin_position": "The 2025 margin of 8.6% is flattered by one-off HDFS benefits: a released credit-loss allowance and a securitization gain. HDMC itself lost money in 2025. The underlying margin is lower, and 2026 so far is about 4% before Q4. It is recovering from a cyclical trough in discretionary motorcycle demand, plus tariffs, low production volume and the loss of HDFS interest income. It sits well below the 2011-2019 range of 10-20%.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The effective rate was 28.2% in 2025 (distorted by valuation allowances) and 13.9% in 2024, so the 0.2065 in the record is neither stable nor clearly right."
+     },
+     "why": "2025 operating income of $386.6M includes a $191.4M credit-loss provision benefit and a $27.9M gain from the HDFS sale, while HDMC lost $28.7M. 2026 revenue falls because HDFS shifted to a capital-light model, so the base revenue is also not a clean run-rate. I build year 1 from the nine-month 2026 actuals plus a weak Q4, and then recover through retail growth, cost savings and HDFS rebuilding."
+    },
+    "value_at_old_defaults": 55.235988682186445,
+    "values": {
+     "base": 49.35412865890564,
+     "bear": 43.40528124241792,
+     "bull": 57.58697353979111
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 3091744000.0,
+     "excess_cash_before": 3091744000.0,
+     "k0_after": 41515059.2620672,
+     "k0_before": 41515059.2620672,
+     "k0_interest": 33444000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 273835586.4764824,
+     "x0_before": 273835586.4764824
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2986617693.2228947,
+     "seam_ratio": 1.0676795895734836,
+     "tv_share": 0.4009041920516945,
+     "wedge_rate_5": -0.051310117668418254
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.1100 against the base year's 0.0355",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 effective rate was 28.2% and the nine-month 2026 rate was about 26%, both well above the 20.65% in the record.",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.028,
+     "fade_years": 8,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.031,
+      0.06,
+      0.08,
+      0.092,
+      0.1
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      -0.1,
+      0.04,
+      0.045,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth -0.1236 and margin 0.0392, margin 0.1100 (persist), growth 0.0375, terminal RONIC 0.1058 (equity return r 0.1058), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.075,
+      0.135
+     ],
+     "rev_growth_y3": [
+      0.005,
+      0.075
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0312"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (64,422) | (102,090)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled ratio is 3.1%, but nine-month 2026 capex of $64M is well below prior-year levels, so I use a slightly lower ratio."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "to fully realize them by the end of 2027"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin recovery and the HDFS rebuild reach steady state gradually, so I use a mid-length fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "HDMC gross margin that ranges from 25% to 30%"
+       },
+       {
+        "id": "P5",
+        "quote": "targets HDMC operating expense as a percent of HDMC revenue to be below 20% in the medium term"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "HDMC targets gross margin of 25-30% with operating expense below 20% of revenue, which implies roughly 5-10% HDMC margin. HDFS and parts/apparel add to that. Consolidated margins were 15-20% in the 2010s but 8% in 2024-25, so I settle at about 10.5%, with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 37,304 | 474,758 | 136,806 | 747,695"
+       },
+       {
+        "id": "P5",
+        "quote": "reduce its costs by at least $150 million compared to its 2025 cost base"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 margin is about 3% (nine-month operating income $136.8M, with a weak Q4 for HDFS and LiveWire). It rises as the $150M cost cut and the extra $75M HDMC benefit are realised by end-2027, and as HDFS income rebuilds, partly offset by tariffs of $105-120M gross."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1058"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The brand earns solid returns on tangible capital when profitable, but the current return is only 3.6%. I assume a long-run return near the cost of equity, so growth adds little value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | 1,082,639 | 1,340,710 | 3,485,606 | 3,977,018"
+       },
+       {
+        "id": "P5",
+        "quote": "mid-single-digit compound annualized growth rate (CAGR) target in worldwide dealer retail sales"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) falls about 10% because HDFS revenue collapsed after the receivables sale (nine-month revenue $3,485.6M vs $3,977.0M). From 2027 growth follows retail recovery and HDFS rebuilding. Management targets mid-single-digit retail growth, which I haircut for execution risk and weak Europe."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Worldwide dealer retail unit sales of new Harley-Davidson motorcycles decreased 12.4% in 2025 compared to 2024."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is a mature, discretionary premium brand that lost share and saw retail sales fall 12.4% in 2025. Long-run growth should sit below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_op_margin",
+      "risk": "Back to the Bricks cost savings and new products fall short, tariffs persist, and HDMC margins stay in the mid single digits"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Retail recovery stalls (weak consumer, Europe decline, share loss), so shipments stay flat"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Long-run demand erodes (rider demographics, emissions regulation), lowering perpetual growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.075,
+      "rev_growth": [
+       -0.14,
+       0.0,
+       0.0049999999999999975,
+       0.0,
+       -0.0049999999999999975
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.135,
+      "rev_growth": [
+       -0.07,
+       0.07,
+       0.075,
+       0.07,
+       0.065
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt fell sharply after the HDFS receivables sale, but HDFS is rebuilding its own loan book and will need funding again, so the future level relative to revenue is uncertain."
+     },
+     "margin_position": "The 2025 margin of 8.6% is flattered by a one-time HDFS credit-loss release and gains, while the motorcycle business itself lost money (HDMC operating loss $28.7M). The 2026 run-rate is much lower, about 3%, because HDFS shrank to a capital-light model, HDMC shipments are down and tariffs are higher. Management cost cuts and a recovery in retail sales should lift it back toward high single digits to about 10% over several years.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 effective rate was 28.2% and the nine-month 2026 rate was about 26%, both well above the 20.65% in the record."
+     },
+     "why": "2025 operating income of $386.6M includes a HDFS allowance release and securitization gain from the 2025 HDFS Transaction. HDMC alone lost money, and HDFS earnings have since fallen about 90%. The nine months of 2026 (operating income $136.8M on revenue $3,485.6M) show the true starting level, which is a margin near 3%."
+    },
+    "value_at_old_defaults": 55.235988682186445,
+    "values": {
+     "base": 52.40523531390107,
+     "bear": 44.22086862046096,
+     "bull": 62.72917724958835
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 55.235988682186445,
+  "value_at_old_defaults_quoted": 55.235988682186445,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 6169517598.625312,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 121257000.0,
@@ -15,7 +500,7 @@
   "The Company raised its 2026 outlook for wholesale shipments and worldwide dealer retail sales, and raised HDMC and HDFS guidance."
  ],
  "in_code_book": false,
- "ke": 0.10608180622416283,
+ "ke": 0.10578180622416283,
  "market_cap_at_publish": 3360015931,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +508,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 55.14595644899168,
-  "3000": 48.00821388279186
+  "1000": 49.35412865890564,
+  "3000": 52.40523531390107
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -853,105 +1338,17 @@
   ]
  },
  "ticker": "HOG",
- "upside": 0.9901195049230809,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: op_margin.y2 (1000 none, 3000 down)",
-   "seeds_disagree: normalized.margin (1000 none, 3000 down)",
-   "seeds_disagree: long_run_op_margin (1000 none, 3000 down)",
-   "ytd_outside_record: op_margin.y1 0.0392"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.031198260050166442,
-    0.031198260050166442,
-    0.031198260050166442,
-    0.031198260050166442,
-    0.031198260050166442
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.10995971474088134,
-   "normalized.margin": 0.10995971474088134,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03924884223862364,
-   "op_margin.y2": 0.10995971474088134,
-   "rev_growth.y1": -0.1235629308190207,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10608180622416283
-  },
-  "numbers": {
-   "capex": [
-    0.031198260050166442,
-    0.031198260050166442,
-    0.031198260050166442,
-    0.031198260050166442,
-    0.031198260050166442
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.10995971474088134,
-   "normalized.margin": 0.10995971474088134,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.03924884223862364,
-   "op_margin.y2": 0.10995971474088134,
-   "rev_growth.y1": -0.1235629308190207,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.10608180622416283
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No cited sentence guides 2026 revenue or revenue growth. The guidance that is printed covers shipments and retail units, and HDMC and HDFS operating income. The October 29, 2026 revised HDMC and HDFS figures are omitted from the packet.",
-   "The fourth-quarter 2026 revenue base is not shown. The year-to-date revenue decline may not equal the full-year decline, because HDFS revenue fell after the 2025 receivables sale.",
-   "The revised 2026 capital investment figure is cut from the 10-Q text. Only the February 2026 range is visible, and nine-month capital expenditures were 64,422 (table in thousands).",
-   "The packet does not show whether the margin recovery in HDMC (gross margin 28.1%) persists beyond year 1, or how the Back to the Bricks plan affects year 2 margins."
-  ],
-  "year": 3
- },
- "value_base": 55.14595644899168,
- "value_bear": 54.8808187065251,
- "value_bull": 55.53476940971231,
+ "upside": 0.8361572460726858,
+ "valuation": null,
+ "value_base": 50.879681986403355,
+ "value_bear": 43.813074931439445,
+ "value_bull": 60.15807539468973,
  "value_per_filed_share": {
-  "base": 55.14595644899168,
-  "bear": 54.8808187065251,
-  "bull": 55.53476940971231
+  "base": 50.879681986403355,
+  "bear": 43.813074931439445,
+  "bull": 60.15807539468973
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +20.3 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +17.3 points a year against the required return over 3 years"
 }

@@ -1,13 +1,393 @@
 {
- "alpha_pts": -29.023726887094625,
+ "alpha_pts": 1.0854334589924353,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 69,
  "claims_supported": 64,
  "date": "2026-11-17T23:03:09Z",
- "equity_value": 28643012400.443855,
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 12",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.07863333687940474,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 64195784678.97628,
+     "implied_pb": 2.4276109669832766,
+     "seam_ratio": 1.031333333333335,
+     "tv_share": 0.3605922647583007
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 12"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.08,
+      0.05,
+      0.04,
+      0.04,
+      0.04
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.34,
+      0.24,
+      0.2,
+      0.175,
+      0.16
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 64
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.02,
+      0.06
+     ],
+     "long_run_roe": [
+      0.11,
+      0.17
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Treasury stock purchases | (2,904) | (799)"
+       },
+       {
+        "id": "F3",
+        "quote": "Dividends paid on common stock | (816) | (773)"
+       },
+       {
+        "id": "F1",
+        "quote": "Total accumulated other comprehensive (loss) income | (2,148) | 255"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Common equity was about $30.3bn at September 30, 2026, up about 6% from $28.6bn. Earnings were largely offset by buybacks, dividends and a swing to unrealised losses. Buybacks are running at more than three times the prior-year pace. Growth should stay well below the return on equity because most earnings are paid out, so I assume 4-5% a year once income normalises."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Combined ratio | 86.6 | 80.1 | 85.1 | 89.4"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The return needs a long fade, because it must come down from a peak near 40% to about 14% as the hard market softens. A 10-year fade is a middle estimate for a cyclical personal-lines business."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Certain states impose or are contemplating regulatory limitations on the amount of profit that insurance companies may earn."
+       },
+       {
+        "id": "P3",
+        "quote": "For the last ten years, the average annual impact of catastrophes on our loss ratio was 8.8 points"
+       },
+       {
+        "id": "P3",
+        "quote": "was 42.3%, an increase of 16.5 points from 25.8%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "A personal-lines insurer facing rate regulation, competition and catastrophe volatility should earn well above the 9.36% cost of equity but far below the current 40%+. About 14% reflects a combined ratio in the low-to-mid 90s plus investment income. The ten-year average catastrophe load is 8.8 points of loss ratio, and some states cap profits."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net income applicable to common shareholders, basic | 2,050 | 3,717 | 7,719 | 6,362"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0607, p25 -0.0204, median 0.0531, p75 0.2885, max 0.5229, last 0.5229."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (FY2026) is largely known: nine-month income to common was $7.7bn, and a normal Q4 gives about $9.5-10bn, or roughly 0.34 on $28.6bn opening equity. After that, returns fade as reserve releases shrink, the weather normalises and auto underlying margins weaken (Q3 auto underlying combined ratio 89.8 vs 86.0). The historical record shows how cyclical the return is."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Auto and homeowners insurance policies were 3.4% and 3.3% higher than last year, respectively"
+       },
+       {
+        "id": "P2",
+        "quote": "Increasing adoption of newer technologies such as advanced driver assistance systems and autonomous vehicles"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Policies in force are growing about 3-4%, but long-run equity growth should track nominal growth, with the anchor at 3.75%. I choose slightly below that because of heavy payout and the risk that autonomous-vehicle trends shrink the auto market."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Faster margin normalisation: softer pricing, auto severity inflation from oil, tariffs and attorney involvement, fewer reserve releases and heavier catastrophe years push returns down quickly."
+     },
+     {
+      "bear_value": 0.28,
+      "input_hit": "roe",
+      "risk": "Year-1 and year-2 income undershoot because Q4 catastrophe losses are heavy or reserve releases end."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "book_growth",
+      "risk": "Further unrealised bond losses or investment-market stress reduce book equity, while buybacks continue at the current pace."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.06,
+       0.030000000000000002,
+       0.02,
+       0.02,
+       0.02
+      ],
+      "long_run_roe": 0.11,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.1,
+       0.07,
+       0.06,
+       0.06,
+       0.06
+      ],
+      "long_run_roe": 0.17,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 52% and the 12-month return of 41% to September 2026 are far above normal for a personal-lines insurer. They reflect a hard-market margin recovery after the 2022-23 losses: rate increases pushed the combined ratio to about 85. Large prior-year reserve releases, higher investment income and a base year with disposition gains added to it. The opening equity base is also small because of the earlier loss years. The return should fade as rates, reserve releases and catastrophe losses normalise.",
+     "why": "2025 income to common of $10.2bn on opening common equity of $28.6bn is a cyclical peak. It includes disposition gains and $1.8bn of reserve releases, so it is not a through-cycle level. The company is returning capital quickly (nine-month buybacks of $2.9bn plus dividends) with flat debt, so equity growth is limited by payout choices, not regulatory capital. Subsidiary dividend limits and rate regulation remain background constraints."
+    },
+    "value_at_old_defaults": 45.88640778038408,
+    "values": {
+     "base": 260.0206744830571,
+     "bear": 214.20159001320604,
+     "bull": 338.6268232276866
+    }
+   },
+   "3000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 69450303620.92676,
+     "implied_pb": 2.6263144780235868,
+     "seam_ratio": 1.0452272727272716,
+     "tv_share": 0.4069386716991243
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.08,
+      0.09,
+      0.07,
+      0.06,
+      0.05
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.34,
+      0.26,
+      0.21,
+      0.18,
+      0.16
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 64
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.04,
+      0.09
+     ],
+     "long_run_roe": [
+      0.115,
+      0.17
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Treasury stock purchases | (2,904) | (799)"
+       },
+       {
+        "id": "F3",
+        "quote": "Dividends paid on common stock | (816) | (773)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Common equity was about $30.3bn at September 30 versus $28.6bn at the 2025 year-end base. Buybacks ($2.9bn in nine months, against $0.8bn a year earlier) and dividends absorb most earnings, so growth is held to about 5-9% a year. Unrealized bond losses also reduced equity in 2026."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted net income* | 2,493 | 2,976 | (16.2)% | 7,620 | 5,516 | 38.1%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The excess-return fade from about 16% to 14% is gradual because the franchise has scale and growing policy counts, but competition and rate regulation erode it over roughly a decade."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0607, p25 -0.0204, median 0.0531, p75 0.2885, max 0.5229, last 0.5229."
+       },
+       {
+        "id": "P4",
+        "quote": "Combined ratio | 86.6 | 80.1 | 85.1 | 89.4"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Allstate's through-cycle personal lines ROE is well below the current peak. The filed history shows a median of about 5% and a swing from negative to 52%, and auto and homeowners margins move with the catastrophe, inflation and rate-approval cycle. I use about 14%, above the 9.4% cost of equity because scale, a low-cost position and investment income support some excess return, but well below the current level. State profit limits and competition cap it."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net income increased $1.36 billion to $7.72 billion in the first nine months of 2026"
+       },
+       {
+        "id": "P4",
+        "quote": "Effect of prior year reserve reestimates on combined ratio | (5.0) | (2.9) | (5.3) | (2.5)"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $30,610.0 million | $2,001.0 million | $28,609.0 million | $10,165.0 million | 0.5229 | 0.4716"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month income to common is $7.72bn, which with a normal Q4 implies about 34% on opening common equity of $28.6bn for 2026. After that I fade the ROE as the equity base grows, reserve releases fade and the combined ratio moves back toward the low 90s."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P6",
+        "quote": "Total policies in force (in thousands) | 217,610 | 209,481 | 3.9%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is anchored near nominal GDP. Policies in force are growing about 3-4% and premiums are rising with inflation, but a mature market share and heavy payout limit book growth beyond the fade."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Underwriting margins normalize faster: heavier catastrophe losses, fewer reserve releases and auto severity or rate regulation squeeze the combined ratio."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "book_growth",
+      "risk": "Unrealized bond losses and a hard-market reversal cut earnings and slow equity growth, while buybacks still drain capital."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Nominal growth slows and the book shrinks in auto as technology and regulation reduce demand and returns."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.049999999999999996,
+       0.05999999999999999,
+       0.04,
+       0.029999999999999992,
+       0.019999999999999997
+      ],
+      "long_run_roe": 0.115,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.09999999999999999,
+       0.10999999999999999,
+       0.09,
+       0.07999999999999999,
+       0.06999999999999999
+      ],
+      "long_run_roe": 0.17,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Reported ROE is very high because the personal auto and homeowners underwriting cycle is near its peak. Combined ratios are in the mid-80s, there are large prior-year reserve releases, and net investment income is rising. The 2025 base year also includes disposition gains. The ROE is on a common equity base that was depressed by 2022-2023 losses, so it flatters the long-run level. I expect it to fade as rates normalize, reserve releases shrink, catastrophe losses revert and equity compounds.",
+     "why": "The 2025 ROE of 52% rests on a 2022-23 loss-depleted equity base, $1.5bn of disposition gains and $1.8bn of reserve releases, so it is not a run-rate. Capital does not appear to limit book growth: nine-month buybacks of $2.9bn plus dividends were funded from $10.0bn of operating cash flow with flat debt. Book equity growth is therefore set by earnings less a near-full payout, not by regulatory capital. Parent deployable capital and statutory surplus are not shown in the packet, so that conclusion carries some uncertainty."
+    },
+    "value_at_old_defaults": 45.88640778038408,
+    "values": {
+     "base": 281.30374729231295,
+     "bear": 227.7111508581114,
+     "bull": 365.3114292294751
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 45.88640778038408,
+  "value_at_old_defaults_quoted": 45.88640778038408,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 72293876528.10068,
  "family": "financial",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 267100000.0,
  "flags": [
   "Arity, an Allstate subsidiary, acquired substantially all of the assets of INRIX, Inc., a transportation intelligence and mobility analytics provider.",
@@ -15,7 +395,7 @@
   "Allstate closed the sale of its employer voluntary benefits business (American Heritage Life Insurance Company and American Heritage Service Company) and recorded a gain on the sale."
  ],
  "in_code_book": false,
- "ke": 0.09390305732783658,
+ "ke": 0.09360305732783658,
  "market_cap_at_publish": 66917762377,
  "model": "claude-sonnet-5-5",
  "no_value_reason": null,
@@ -23,12 +403,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 107.23703631764828,
-  "3000": 418.58449494100427
+  "1000": 260.0206744830571,
+  "3000": 281.30374729231295
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -849,119 +1229,17 @@
   ]
  },
  "ticker": "ALL",
- "upside": -0.5719669728483239,
- "valuation": {
-  "annotations": [
-   "seeds_disagree: normalized.roe (1000 none, 3000 up)",
-   "seeds_disagree: long_run_roe (1000 none, 3000 up)",
-   "value_far_from_record_neutral: base 107.2370 against 45.6930 (2.35x)",
-   "value_far_from_record_neutral: bull 123.3867 against 45.6930 (2.70x)"
-  ],
-  "departures": [
-   {
-    "driver": "guidance",
-    "evidence": [
-     "P4.s55",
-     "Y2025-12-31"
-    ],
-    "input": "roe.y1"
-   },
-   {
-    "driver": "record_persistence",
-    "evidence": [
-     "P4.s55",
-     "Y2024-12-31",
-     "Y2025-12-31"
-    ],
-    "input": "roe.y2"
-   }
-  ],
-  "directions": {
-   "book_growth.y1": "none",
-   "book_growth.y2": "none",
-   "fade_years": "none",
-   "long_run_roe": "none",
-   "normalized.book_growth": "none",
-   "normalized.roe": "none",
-   "roe.y1": "up",
-   "roe.y2": "up",
-   "terminal_g": "none"
-  },
-  "evidence": {
-   "P4.s55": {
-    "kind": "quarterly_section",
-    "period": "2026-09-30",
-    "text": "Return on average Allstate common shareholders\u2019 equity for the 12 months ended September 30, 2026, was 41.3%, an increase of 4.1 points from 37.2% for the 12 months ended September 30, 2025."
-   },
-   "Y2024-12-31": {
-    "kind": "filed_record",
-    "period": "2024-12-31",
-    "text": "Filed annual record, fiscal year ended 2024-12-31 (10-K, accession 0000899051-26-000031): book equity at year end $21,442.0 million; preferred stock $2,001.0 million; common equity $19,441.0 million; income to common $4,550.0 million; return on opening equity 28.9%."
-   },
-   "Y2025-12-31": {
-    "kind": "filed_record",
-    "period": "2025-12-31",
-    "text": "Filed annual record, fiscal year ended 2025-12-31 (10-K, accession 0000899051-26-000031): book equity at year end $30,610.0 million; preferred stock $2,001.0 million; common equity $28,609.0 million; income to common $10,165.0 million; return on opening equity 52.3%."
-   }
-  },
-  "neutral": {
-   "book_growth.y1": 0.026551492193861295,
-   "book_growth.y2": 0.026551492193861295,
-   "fade_years": 10,
-   "long_run_roe": 0.05310298438772259,
-   "normalized.book_growth": 0.026551492193861295,
-   "normalized.roe": 0.05310298438772259,
-   "roe.y1": 0.05310298438772259,
-   "roe.y2": 0.05310298438772259,
-   "terminal_g": 0.026551492193861295
-  },
-  "numbers": {
-   "book_growth.y1": 0.026551492193861295,
-   "book_growth.y2": 0.026551492193861295,
-   "fade_years": 10,
-   "long_run_roe": 0.05310298438772259,
-   "normalized.book_growth": 0.026551492193861295,
-   "normalized.roe": 0.05310298438772259,
-   "roe.y1": 0.413,
-   "roe.y2": 0.2885408079142622,
-   "terminal_g": 0.026551492193861295
-  },
-  "of_record": {},
-  "options": {
-   "book_growth.y1": "neutral",
-   "book_growth.y2": "neutral",
-   "fade_years": 10,
-   "long_run_roe": [
-    "normalized",
-    0
-   ],
-   "normalized.book_growth": "neutral",
-   "normalized.roe": [
-    "median",
-    0
-   ],
-   "roe.y1": "guidance",
-   "roe.y2": "p75",
-   "terminal_g": "neutral"
-  },
-  "reverts": [],
-  "unknowns": [
-   "How long the current underwriting margins will last, since the filings give no forecast and the record shows losses in 2022 and 2023.",
-   "Whether rate competition or regulatory profit caps will compress returns after 2026; the risk factors name them but give no figures.",
-   "The size of future share repurchases, which affect book equity growth. The nine months to Sep 30, 2026 show $2,904 (table in millions) of treasury stock purchases, but no later plan is stated.",
-   "Whether the elevated 2025 and 2026 return on equity, which includes the gain on selling businesses in 2025, can be repeated."
-  ],
-  "year": 3
- },
- "value_base": 107.23703631764828,
- "value_bear": 91.08738993646762,
- "value_bull": 123.38668269882895,
+ "upside": 0.08033912013992373,
+ "valuation": null,
+ "value_base": 270.66221088768503,
+ "value_bear": 220.95637043565873,
+ "value_bull": 351.9691262285809,
  "value_per_filed_share": {
-  "base": 107.23703631764828,
-  "bear": 91.08738993646762,
-  "bull": 123.38668269882895
+  "base": 270.66221088768503,
+  "bear": 220.95637043565873,
+  "bull": 351.9691262285809
  },
  "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -29.0 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +1.1 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

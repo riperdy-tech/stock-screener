@@ -1,13 +1,526 @@
 {
- "alpha_pts": -29.650599534180106,
+ "alpha_pts": -13.959263097418159,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 119,
  "claims_supported": 116,
  "date": "2026-11-16T12:59:29Z",
- "equity_value": 1725970530.121197,
+ "decided": {
+  "flags": [
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0633 (equity return r 0.0838), F 10",
+  "run_gap": 0.045648560566662215,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 46681000.0,
+       "printed": 46681,
+       "quotes": [
+        {
+         "id": "F3",
+         "quote": "Debt conversion inducement expense | 0 | 46,681"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "charge",
+       "what": "Debt conversion inducement expense on the 2028 convertible note exchange, recorded in Other loss, net in 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 17161000.0,
+     "excess_cash_before": 17161000.0,
+     "k0_after": 49884653.231726915,
+     "k0_before": 96565653.23172691,
+     "k0_interest": 43206000.0,
+     "one_offs_charge": 46681000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 193306350.0285617,
+     "x0_before": 155025964.45007434
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2632620592.3409433,
+     "seam_ratio": 1.0357434524208893,
+     "tv_share": 0.5392446371003077,
+     "wedge_rate_5": 0.008406415830927959
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 8,
+     "long_run_op_margin": 0.115,
+     "op_margin": [
+      0.068,
+      0.082,
+      0.095,
+      0.105,
+      0.11
+     ],
+     "return_on_new_investment_long_run": 0.16,
+     "rev_growth": [
+      -0.027,
+      0.03,
+      0.05,
+      0.055,
+      0.055
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0633 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 116
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.1,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0579"
+       },
+       {
+        "id": "F3",
+        "quote": "Acquisition of property, plant and equipment | (67,181) | (63,555)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex over the last five years is 5.8% of revenue, and nine-month 2026 capex of $67.2M is about 5.0% of sales; I use 5.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The CDMO industry has traditionally been highly fragmented amongst several hundred companies"
+       },
+       {
+        "id": "P2",
+        "quote": "We have long-term supply agreements with a majority, but not all, of our large customers"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I use an 8-year fade. The company operates in a fragmented industry where few rivals match its breadth, which supports a moderate competitive advantage that erodes slowly. Most large customers have long-term supply agreements, but many lack minimum purchase levels, so growth and margins should converge to the long-run level over several years rather than immediately."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,853.6 million | 0.0798 | 0.1194"
+       },
+       {
+        "id": "P2",
+        "quote": "In 2025, our top three customers collectively accounted for approximately 49% of our revenues."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins have run 10-13% in recent years, with 2025 at 11.9%. I set the long-run level slightly below that, at 11.5% after amortization of acquired intangibles, because of the pricing pressure and the three customers (49% of sales) with limited minimum purchase commitments."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "GAAP operating income from continuing operations totaled $28 million, a decrease of $28 million or 50%."
+       },
+       {
+        "id": "P2",
+        "quote": "we expect customer pressure for continued price reductions in future periods"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q3 GAAP operating income fell 50% on lower gross profit and higher SG&A and RD&E, so year 1 is set near 6.8%. Margins rebuild through volume leverage over years 2-5, but not fully, given customer price pressure and elevated ERP and restructuring costs."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0633."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2484"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The current return on tangible capital of 24.8% is flattered by acquired intangibles. New investment should earn well above the 6.3% break-even but below that level, given pricing pressure and capacity-heavy manufacturing, so I use 16%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Sales decreased 3.9% to $450 million. Organic sales decreased 2.2%."
+       },
+       {
+        "id": "P3",
+        "quote": "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
+       },
+       {
+        "id": "P1",
+        "quote": "We currently expect Portable Medical sales to wind down with the final sales and market exit occurring in 2026."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 sales are down 2.0% and Q3 is down 3.9%. Lower adoption of customer new products and the Portable Medical exit (final sales in 2026) drive year 1 to about -3%. Year 2 onward recovers to mid-single digits as the drag ends and the end markets grow, but the company gives no outlook, so this is an estimate."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth in implantable and interventional medical device components supports growth near the nominal anchor, but I set it a little below the anchor given customer concentration and in-sourcing risk."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_op_margin",
+      "risk": "The new-product adoption shortfall persists, or a major OEM in-sources or dual sources, so the volume recovery does not happen and fixed-cost under-absorption continues"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Prolonged weak demand and customer price cuts keep growth low in the middle years"
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "High leverage (3.3x) constrains growth investment and the standalone business is weakened if the KKR merger fails"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.1,
+      "rev_growth": [
+       -0.057,
+       -3.469446951953614e-18,
+       0.02,
+       0.024999999999999998,
+       0.024999999999999998
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       0.002999999999999999,
+       0.06,
+       0.08,
+       0.08499999999999999,
+       0.08499999999999999
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of $1.2B is 3.3x adjusted EBITDA, and the KKR take-private would likely reset the capital structure; the packet does not say how the debt will be treated."
+     },
+     "margin_position": "The GAAP operating margin is falling from 11.9% in 2025 to about 7% in 2026. Sales on three customer new products (two electrophysiology, one neuromodulation) are lower than expected, cost of sales is not falling with sales, and ERP, restructuring and impairment charges are rising. This is volume-driven under-absorption of a fixed manufacturing base, not a commodity cycle. The 2025 margin sat near the company's 2018-2025 range of roughly 10-13%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 effective rate was 18.0%, the same as 2024, though Pillar 2 minimum tax is creeping up and the 2026 nine-month rate is lower on discrete items."
+     },
+     "why": "The 2025 base year had 8% growth and a margin near the long-run range, but 2026 shows a clear break: nine-month sales are down 2.0% and operating income is down 42.8%. The 2025 pretax income also carries a $46.7M non-recurring debt conversion inducement charge. The base year is therefore a fair margin anchor but overstates the near-term starting point."
+    },
+    "value_at_old_defaults": 48.377214693435434,
+    "values": {
+     "base": 79.85064037138102,
+     "bear": 58.429983802210245,
+     "bull": 113.0986690470409
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 46700000.0,
+       "printed": 46.7,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "$46.7 million of debt conversion inducement expense recorded in 2025"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Debt conversion inducement expense in Other loss, net, from the 2028 convertible note exchange in Q1 2025; it does not recur."
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 17161000.0,
+     "excess_cash_before": 17161000.0,
+     "k0_after": 49865653.231726915,
+     "k0_before": 96565653.23172691,
+     "k0_interest": 43206000.0,
+     "one_offs_charge": 46700000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 193321930.8285872,
+     "x0_before": 155025964.45007434
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2756349984.15646,
+     "seam_ratio": 1.0389782358720636,
+     "tv_share": 0.4932282455000225,
+     "wedge_rate_5": 0.00815653457762253
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 10,
+     "long_run_op_margin": 0.115,
+     "op_margin": [
+      0.068,
+      0.085,
+      0.1,
+      0.108,
+      0.113
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      -0.027,
+      0.03,
+      0.055,
+      0.06,
+      0.055
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0633 (equity return r 0.0838), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 116
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.095,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0579"
+       },
+       {
+        "id": "F3",
+        "quote": "Acquisition of property, plant and equipment | (67,181) | (63,555)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 5.79% of revenue pooled over five years and about 4.96% in the nine months of 2026, so I use 5.5% as a sustaining and growth level."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "These markets are attractive to Integer because they have strong, long-term growth characteristics"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets growth and margin converge gradually, because the recovery from the new-product shortfall is uncertain and the markets served are long-lived."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $1,716.6 million | 0.1035 | 0.1213"
+       },
+       {
+        "id": "P2",
+        "quote": "we have reduced prices for some of our customers in recent years, and we expect customer pressure for continued price reductions in future periods"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I set the long-run margin slightly below the 2024-2025 level of about 12%. History spans 8% to 13% since 2017, and the customer price pressure and amortization of acquired intangibles in the GAAP margin argue against assuming full recovery."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "GAAP operating income from continuing operations totaled $28 million, a decrease of $28 million or 50%."
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 28,209 | 56,439 | 94,606 | 165,329"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 margin of about 6.8% follows the nine-month run rate of about 7.0%, with Q3 near 6.3%. It then recovers gradually as volumes return and ERP and restructuring charges fade, but it stays below the 2024-2025 level of about 12% for several years."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2484"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0633."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is high (0.2484), but that figure is flattered by amortized intangibles and 2025 margins. Competition and price pressure should pull returns on new investment lower, though still well above the 0.0633 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Sales decreased 3.9% to $450 million. Organic sales decreased 2.2%."
+       },
+       {
+        "id": "P3",
+        "quote": "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is negative: nine-month sales are down 2.0%, Q3 is down 3.9%, and Q4 2025 is a similar comparison. Growth then recovers as the new-product drag fades and the end markets (CRM, neuromodulation, EP, structural heart) grow, though the Portable Medical exit continues to weigh on Other Markets through 2026."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "These markets are attractive to Integer because they have strong, long-term growth characteristics"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I set terminal growth just below the 3.75% long-run nominal anchor, since medtech outsourcing supports growth near nominal GDP but customer concentration and price pressure limit it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Loss of, or insourcing and dual sourcing by, one of the three customers that each exceed 10% of sales and total 49%; many contracts have no minimum purchase levels. Further new-product adoption shortfalls would also cut volume."
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_op_margin",
+      "risk": "Fixed-cost deleverage and price-downs keep margins near the current 6-7% level, with tariffs and raw-material cost increases not recovered from customers."
+     },
+     {
+      "bear_value": 0.1,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Competition and intangible-heavy acquisitions lower the return on new investment well toward the break-even level."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       -0.062,
+       -0.0050000000000000044,
+       0.019999999999999997,
+       0.024999999999999994,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       -0.0019999999999999983,
+       0.055,
+       0.08,
+       0.08499999999999999,
+       0.08
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of $1.185 billion is about 3.3x adjusted EBITDA and rose in 2026, and a KKR take-private would likely reset the capital structure, but the filings do not say how the debt will be treated."
+     },
+     "margin_position": "The GAAP operating margin is far below the 2025 level of about 12% because 2026 sales are falling and cost of sales is not. Nine-month 2026 operating margin is about 7.0% (94.6 / 1,353.4) and Q3 is about 6.3%. Weak adoption of customer new products cuts volume, fixed capacity costs are left unabsorbed, and ERP, restructuring and other charges add cost. The margin looks depressed by company-specific problems rather than by an industry cycle.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 18.0% effective rate was stable in 2024 and 2025, but the nine-month 2026 rate is only about 9.9% (6,065 / 61,154), and management cites a Pillar 2 increase and discrete items."
+     },
+     "why": "FY2025 had 8% growth and a 11.9% margin, but 2026 has reversed: nine-month sales are down 2.0% and operating income is down 42.8%. Year 1 therefore starts from a lower base than the filed base year. Management described the new-product shortfall as 'highly unusual', which suggests a partial recovery over time rather than a permanent reset. The pending KKR cash deal means no outlook is given, so the recovery path is uncertain."
+    },
+    "value_at_old_defaults": 48.377214693435434,
+    "values": {
+     "base": 83.58084643333335,
+     "bear": 57.1265370617786,
+     "bull": 116.13335156054127
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 48.377214693435434,
+  "value_at_old_defaults_quoted": 48.377214693435434,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 2908590170.6635017,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 35594000.0,
  "flags": [
   "Integer entered into a merger agreement with affiliates of KKR-managed investment funds. Each common share will convert into the right to receive $127 in cash. After closing, the company will be delisted from NYSE and become privately held.",
@@ -15,7 +528,7 @@
   "The company received early termination of the Hart-Scott-Rodino waiting period for the merger. This satisfies one closing condition; other antitrust and foreign direct investment approvals remain."
  ],
  "in_code_book": false,
- "ke": 0.08358973472633485,
+ "ke": 0.08378973472633486,
  "market_cap_at_publish": 4316641834,
  "model": "claude-opus-5-5",
  "no_value_reason": null,
@@ -23,12 +536,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 48.490490816463364,
-  "3000": 48.490490816463364
+  "1000": 79.85064037138102,
+  "3000": 83.58084643333335
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "screener list refresh",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
  "tasks": {
   "business_model": [
    {
@@ -1438,102 +1951,17 @@
   ]
  },
  "ticker": "ITGR",
- "upside": -0.6001589669713614,
- "valuation": {
-  "annotations": [
-   "ytd_outside_record: op_margin.y1 0.0699"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.05789317741228627,
-    0.05789317741228627,
-    0.05789317741228627,
-    0.05789317741228627,
-    0.05789317741228627
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.11525386069059877,
-   "normalized.margin": 0.11525386069059877,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.06990499877710955,
-   "op_margin.y2": 0.11525386069059877,
-   "rev_growth.y1": -0.020430276416008697,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06314615391499491
-  },
-  "numbers": {
-   "capex": [
-    0.05789317741228627,
-    0.05789317741228627,
-    0.05789317741228627,
-    0.05789317741228627,
-    0.05789317741228627
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.11525386069059877,
-   "normalized.margin": 0.11525386069059877,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.06990499877710955,
-   "op_margin.y2": 0.11525386069059877,
-   "rev_growth.y1": -0.020430276416008697,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.06314615391499491
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "No numeric revenue guidance for 2026 is in the evidence. The 10-K (P3.s19) says only that three new products will weigh on 2026 sales growth, and gives no figure. The Q3 2026 release (P6.s15) says the company is not providing a financial outlook because of the pending KKR merger.",
-   "The evidence does not show how long the lower adoption of the two Electrophysiology products and the one Neuromodulation product will last. So it cannot say whether the margin decline seen in 2026 to date will continue into 2027 or later.",
-   "The evidence does not show whether or when the merger at $127 per share in cash will close. It says closing is expected by the end of 2026, subject to remaining regulatory approvals and to stockholder lawsuits that seek to enjoin the merger.",
-   "The evidence does not show how many 2028 Convertible Notes holders will convert during the conversion period ending December 31, 2026. It also does not say how the company will settle any conversion amount above principal."
-  ],
-  "year": 3
- },
- "value_base": 48.490490816463364,
- "value_bear": 40.87718473301094,
- "value_bull": 56.78057398005853,
+ "upside": -0.32619145101314384,
+ "valuation": null,
+ "value_base": 81.71574340235719,
+ "value_bear": 57.778260431994426,
+ "value_bull": 114.61601030379109,
  "value_per_filed_share": {
-  "base": 48.490490816463364,
-  "bear": 40.87718473301094,
-  "bull": 56.78057398005853
+  "base": 81.71574340235719,
+  "bear": 57.778260431994426,
+  "bull": 114.61601030379109
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -29.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -14.0 points a year against the required return over 3 years"
 }
