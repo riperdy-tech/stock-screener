@@ -2,421 +2,828 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 64,
- "claims_supported": 59,
- "date": "2026-11-17T07:04:15Z",
+ "claims": 94,
+ "claims_supported": 92,
+ "date": "2026-11-18T05:41:06Z",
  "family": "commodity",
  "flags": [
-  "The company signed definitive agreements to acquire Birch Permian Holdings and affiliated companies for an aggregate price of approximately $1.8 billion. Closing is expected in the fourth quarter and remains subject to customary closing conditions.",
-  "The company and Carlyle-managed funds formed DP Eagle to acquire producing Anadarko Basin properties from Camino. The company contributed $55 million in cash for a 40% equity interest.",
-  "A subsidiary signed the Fourth Amendment to the revolving credit agreement. It raised the borrowing base from $900 million to $1 billion, cut interest margins and replaced the administrative agent."
+  "Diversified Energy Company entered into definitive agreements to acquire Birch Permian Holdings, Inc. and certain affiliated companies for an aggregate purchase price of approximately $1.8 billion, expected to be funded by an asset-backed securitization of approximately $1.5 billion and revolving credit facility liquidity and to close in the fourth quarter of 2026.",
+  "Wholly owned subsidiary DP Mustang Holdco LLC redeemed in full its outstanding Class A and Class B ABS IX Notes totaling $62 million in aggregate principal amount using borrowings under the Credit Agreement, and the securing liens were released.",
+  "The Compensation Committee approved the adoption of the Diversified Gas & Oil Corporation Deferred Compensation Plan for select management, highly compensated employees, and non-employee directors."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
- "no_value_reason": "no usable tax rate in the filings",
+ "loss_record": {
+  "cause": "cannot_tell",
+  "explanation": "The provided evidence only includes interim income statements and MD&A for the three and nine months ended September 30, 2026 and 2025, along with the 2025 10-K Item 1 Business section, while the 2025 10-K MD&A is not in the packet and no annual income statements for 2021 through 2025 are provided. As a result, the evidence does not state what caused the losses in fiscal years 2021, 2022, and 2024 or why the five-year pretax profit record is thin.",
+  "label": "the filings in the packet do not say",
+  "quotes": [
+   {
+    "id": "F2",
+    "quote": "Condensed Consolidated Statements of Comprehensive Income (Loss) (Unaudited) - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended"
+   },
+   {
+    "id": "F2",
+    "quote": "Sep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025"
+   },
+   {
+    "id": "F2",
+    "quote": "Income (loss) before taxation | (334,283) | 125,767 | (260,408) | 104,326"
+   },
+   {
+    "id": "P1",
+    "quote": "PART I Item 1. Business Business Overview"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+ "source": "on request (tax fallback rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 business overview",
-    "claim": "The company sells natural gas, NGLs and oil produced from mature, long-life US assets. It also transports and markets these products.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We are engaged in the production, transportation, and marketing of natural gas, NGLs, and oil, managing a diversified portfolio of mature, long-life assets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement revenue lines; the ranking is read from those lines",
-    "claim": "Nine-month 2026 commodity revenue excluding derivatives was 1,529,482 (table in thousands), split among oil 654,631, natural gas 648,780 and NGLs 226,071. Midstream added 30,946 and other revenue 22,854. Oil and gas are the largest lines, and midstream is small.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 text; no segment note is in the packet",
-    "claim": "The filings describe operations by geographic operating area (Appalachian, Central, Other), not by reporting segment. Appalachia spans Ohio, Pennsylvania, Virginia, West Virginia, Kentucky, Tennessee and Alabama. The Central Region covers Texas, Oklahoma, New Mexico, Louisiana and Arkansas.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our assets are located in the United States within the following geographical operating areas:"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A; the mechanism is inferred from its price and volume table",
-    "claim": "Third-quarter commodity revenue rose year on year because of both higher realized prices and higher volumes. Management attributes the volume rise mainly to acquisitions and non-operated development.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The increase was primarily related to the 19% increase in average realized sales prices, excluding the impact of derivatives settled in cash, and the 5% increase in sold volumes primarily due to the acquisitions and non-operated development as discussed above."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and income statement; the mechanism is inferred from the derivative tables",
-    "claim": "Hedging is central to realized pricing. About 80% of production is fixed through derivatives over the next twelve months. In Q3 settlements cut the total realized price per Mcfe from $4.29 to $4.02, and mark-to-market losses pushed GAAP total revenue down to 108,512 (table in thousands).",
-    "facts": [
-     "P2",
-     "F2"
-    ],
-    "quotes": [
-     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K, the 10-Q MD&A and the 8-K",
-    "claim": "Growth comes mainly from buying producing wells rather than drilling. The company contributes limited development capital. A pending Birch Permian acquisition of about $1.8 billion is expected to close in Q4 2026.",
+    "basis": "stated in the cited item",
+    "claim": "Diversified Energy Company makes money by producing, transporting, and marketing natural gas, NGLs, and oil from a portfolio of mature, long-life U.S. assets.",
     "facts": [
      "P1",
-     "P2",
-     "P7"
+     "S0"
     ],
     "quotes": [
-     "We aim to obtain proved developed producing wells through acquisitions in accordance with our growth strategy rather than through development activities."
+     "We are engaged in the production, transportation, and marketing of natural gas, NGLs, and oil, managing a diversified portfolio of mature, long-life assets.",
+     "country: United States"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "Lease operating expense is the largest cash cost line. It was 135,916 (table in thousands) in Q3, or $1.24 per Mcfe against $1.21. Management ties the rise to the Canvas and Sheridan acquisitions and to greater liquids exposure.",
+    "basis": "stated in the cited item",
+    "claim": "For the nine months ended September 30, 2026, revenue excluding derivative gains and losses came from commodities ($ 1,529,482, table in thousands), midstream (30,946, table in thousands), and other revenue ($ 22,854, table in thousands), while GAAP total revenue was 947,564 (table in thousands) after a $ (635,718) (table in thousands) loss on derivatives.",
     "facts": [
-     "P2",
      "F2"
     ],
     "quotes": [
-     "The increase in LOE and LOE per Mcfe was primarily driven by the acquisition of Canvas in the fourth quarter of 2025 and the acquisition of Sheridan in the second quarter of 2026."
+     "Revenue, excluding gain (loss) on derivatives | $ 469,575 | $ 372,758 | $ 1,529,482 | $ 1,096,945",
+     "Total revenue | 108,512 | 499,770 | 947,564 | 1,148,982"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the statements; the link to acquisitions is inferred from the 10-Q MD&A",
-    "claim": "Other costs that track the asset base and acquisition-funded debt are depletion, interest and asset retirement. Nine-month DD&A was 317,127 and interest expense 185,851 (table in thousands). Accretion of asset retirement obligations was 40,100, against asset retirement obligations of 869,966 on the balance sheet. The company runs its own plugging subsidiary.",
+    "basis": "stated in the cited item",
+    "claim": "Within commodity revenue excluding derivatives for the nine months ended September 30, 2026 (table in thousands), oil generated 654,631, natural gas generated 648,780, and NGLs generated 226,071.",
     "facts": [
-     "F2",
-     "F1",
-     "P1"
+     "F2"
     ],
     "quotes": [
-     "In addition to our work on our producing wells, we have an extensive and innovative asset retirement program that consists of a vertically integrated plugging company based in our Appalachian Region."
+     "Revenue, excluding gain (loss) on derivatives | 170,935 | 173,525 | 648,780 | 594,966",
+     "Revenue, excluding gain (loss) on derivatives | 79,299 | 50,040 | 226,071 | 150,785",
+     "Revenue, excluding gain (loss) on derivatives | 219,341 | 149,193 | 654,631 | 351,194"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the release and statements; the mechanism is inferred",
-    "claim": "Financing relies heavily on asset-backed and amortizing debt, with a 2.66x leverage ratio against a 2.0x to 2.5x target. Long-term debt, net was 2,997,872 (table in thousands). Nine-month operating cash flow of 393,305 (table in thousands) covered capital expenditures of 137,674, dividends of 63,560 and buybacks of 94,680.",
+    "basis": "stated in the cited item",
+    "claim": "The company grows primarily by acquiring proved developed producing wells rather than heavy drilling, extending productive well life through optimization and retiring wells through a vertically integrated plugging subsidiary, Next Level Energy.",
     "facts": [
-     "P3",
-     "F1",
-     "F3"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end."
+     "We aim to obtain proved developed producing wells through acquisitions in accordance with our growth strategy rather than through development activities.",
+     "In addition to our work on our producing wells, we have an extensive and innovative asset retirement program that consists of a vertically integrated plugging company based in our Appalachian Region.",
+     "For purposes of comparability, excludes Other Revenue of $4M in 3Q26 and $4M in 3Q25, and Lease Operating Expense of $5M in 3Q26 and $4M in 3Q25 associated with Diversified\u2019s wholly owned plugging subsidiary, Next Level Energy."
     ],
-    "support": "number_not_listed"
-   }
-  ],
-  "competitive_position": [
+    "support": "supported"
+   },
    {
-    "basis": "Stated in the Q3 MD&A volume table and the earnings release.",
-    "claim": "Diversified operates at scale in U.S. natural gas, NGLs and oil. Q3 2026 average daily production was 1,189 MMcfepd, up 6% from 1,127 a year earlier, mainly from acquisitions (Canvas, Sheridan) and non-operated development.",
+    "basis": "stated in the cited item",
+    "claim": "The company also generates cash distributions and management fees through joint-venture ownership of producing assets, contributing $55 million for a 40% equity interest in DP Eagle with Carlyle and receiving approximately $8.6 million in the third quarter of 2026 ($6.6 million from residual operating cash flow and $2.0 million in management fees).",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "Average production: 1,189 MMcfepd (198 Mboepd)"
+     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest.",
+     "Distributions to Diversified included approximately $6.6 million from residual operating cash flow and approximately $2.0 million in management fees."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 text and reserve table.",
-    "claim": "The company describes its business as a diversified portfolio of mature, long-life assets, with a large well base and a mostly developed reserve base.",
+    "basis": "stated in the cited item",
+    "claim": "Diversified supplements operating cash flows through portfolio optimization by divesting non-core acreage, generating approximately $149 million in year-to-date acreage sales in 2026 after approximately $160 million of undeveloped acreage divestitures in 2025.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Value generated from year-to-date acreage sales has reached approximately $149 million.",
+     "In 2025, we divested certain non-core undeveloped acreage across our operating footprint for consideration of approximately $160 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Geographically, operations are organized across the Appalachian Region, the Central Region, and Other U.S. areas (Florida and Wyoming), comprising 69,156 net productive wells and 8,794,202 net acres as of December 31, 2025.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "managing a diversified portfolio of mature, long-life assets"
+     "Our operations are primarily concentrated within the Appalachian and Central regions of the United States.",
+     "Total net productive wells | 69,156"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K and earnings release. The top-15 claim is management's own statement.",
-    "claim": "Growth strategy rests on buying producing assets rather than drilling. The largest pending deal is the Birch Permian acquisition in the Midland Basin, which would add scale and a Permian position.",
+    "basis": "stated in the cited item",
+    "claim": "Production volume is a primary revenue driver: third-quarter 2026 production increased 5% year-over-year to 109,369 MMcfe (1,189 MMcfepd), driven by the Canvas and Sheridan acquisitions and non-operated development investment, partially offset by the Barnett asset sale and normal production declines.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The increase in production volumes for the three months ended September 30, 2026 compared to the three months ended September 30, 2025 was primarily related to the Canvas and Sheridan acquisitions in the fourth quarter of 2025 and second quarter of 2026, respectively, as well as our continued non-operated development investment.",
+     "These increases were partially offset by the Barnett asset sale in the second quarter of 2026 and normal production declines."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Commodity revenue moves with realized sales prices\u2014driven by Henry Hub natural gas, Mont Belvieu NGL, and WTI oil benchmarks, weather, U.S. LNG export demand, Middle East supply disruptions, and geographic basis differentials\u2014with a 19% year-over-year price increase before derivatives lifting third-quarter 2026 commodity revenue by 26%.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Commodity revenue for the three months ended September 30, 2026 increased 26% compared to the three months ended September 30, 2025.",
+     "The increase was primarily related to the 19% increase in average realized sales prices, excluding the impact of derivatives settled in cash, and the 5% increase in sold volumes primarily due to the acquisitions and non-operated development as discussed above.",
+     "In addition to these market-driven factors, our realized prices are affected by our derivative activities, commodity trades executed by non-physical trading entities, and geographic variances in market pricing, including basis differentials."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "A commodity hedging program fixed prices on approximately 80% of production over the next twelve months as of September 30, 2026, stabilizing cash flows while capping upside when prices rise (reducing average realized prices from $4.29 to $4.02 per Mcfe in the third quarter of 2026) and creating large mark-to-market GAAP revenue swings, including a (348,341) (table in thousands) loss on unsettled derivatives.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months.",
+     "However, our hedging program limited the impact of the higher prices.",
+     "The change in this metric was primarily driven by a decrease in the value of settled and unsettled derivatives due to increased liquids commodity prices both during the period and based on forward commodity pricing movement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "In the third quarter of 2026, total operating expenses were $343,765 (table in thousands, or $3.15 per Mcfe), comprising lease operating expenses ($135,916), depreciation, depletion and amortization (105,122), general and administrative expense (36,926), production taxes (25,912), transportation expenses (23,690), midstream operating expenses (20,430), and accretion of asset retirement obligation (13,371), partially offset by a (17,602) gain on natural gas and oil properties and equipment.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Total operating expenses | $343,765 | $3.15 | $318,886 | $3.07 | $24,879 | 8% | $0.08 | 3%",
+     "Lease operating expenses | $135,916 | $1.24 | $125,786 | $1.21 | $10,130 | 8% | $0.03 | 2%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Lease operating expense is driven by producing-property maintenance inputs\u2014direct and contract labor, repairs and maintenance, water hauling, compression, automobile, insurance, and materials and supplies\u2014and rises per Mcfe as the production mix shifts toward higher-cost liquids.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Such costs include direct and contract labor, repairs and maintenance, water hauling, compression, automobile, insurance, and materials and supplies expenses.",
+     "Specifically, the increase in LOE per Mcfe was primarily related to a greater exposure to liquids production.",
+     "Areas with higher liquids output tend to incur elevated operating costs, although they also benefit from higher realized prices."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Production taxes vary with output at fixed statutory severance and property tax rates, while tariffs on imported steel, aluminum, and derivative products, inflation, and labor availability create equipment and supply-chain cost uncertainty that vertical integration may partly mitigate.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Severance taxes are generally paid on produced natural gas, NGLs and oil production at fixed rates established by federal, state, or local taxing authorities.",
+     "Our vertically integrated operating model may reduce our exposure to certain cost and supply chain pressures, while our hedging program continues to mitigate our exposure to commodity price volatility and supports cash flow stability.",
+     "We also continued to monitor inflationary pressures, labor availability and supply chain conditions affecting the broader industry."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Because acquisitions are financed heavily with non-recourse asset-backed securitization notes and a revolving credit facility\u2014with 3,102,588 total debt as of September 30, 2026 (table in thousands)\u2014interest expense is a major non-operating cost at (185,851) for the nine months ended September 30, 2026 (table in thousands).",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end.",
+     "Total debt(1) | 3,102,588 | 2,611,863",
+     "Interest expense | (61,128) | (56,043) | (185,851) | (154,885)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 2025 Form 10-K Business section and well/acreage tables (P1).",
+    "claim": "Diversified manages a diversified U.S. portfolio of mature, long-life natural gas, NGLs, and oil assets, operating 69,156 net productive wells with 99.5% of its acreage held by production.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are engaged in the production, transportation, and marketing of natural gas, NGLs, and oil, managing a diversified portfolio of mature, long-life assets.",
+     "Total net productive wells | 69,156",
+     "Approximately 99.5% of our acreage was held by production at December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K reserve tables audited by Netherland, Sewell & Associates, Inc. (P1), Q3 2026 Form 10-Q MD&A (P2), and Q3 2026 earnings release (P3).",
+    "claim": "The company holds 6,082,483 MMcfe of estimated proved reserves and produced an average of 1,189 MMcfepd, weighted 72% to natural gas, 14% to oil, and 14% to NGLs.",
     "facts": [
      "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "As of December 31, 2025, our estimated proved reserves totaled 6,082,483 MMcfe, an increase of 68% from the prior year-end, with a Standardized Measure of $4.2 billion.",
+     "Average production: 1,189 MMcfepd (198 Mboepd)",
+     "Production Volume by Commodity: 72% Natural Gas, 14% Oil, and 14% NGLs"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K (P1), Q3 2026 Form 10-Q MD&A (P2), and Q3 2026 earnings release (P3).",
+    "claim": "Diversified uses a vertically integrated operating model\u2014including a wholly owned Appalachian plugging subsidiary and in-house marketing capabilities\u2014to manage operating costs and supply chain pressures.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In addition to our work on our producing wells, we have an extensive and innovative asset retirement program that consists of a vertically integrated plugging company based in our Appalachian Region.",
+     "Our vertically integrated operating model may reduce our exposure to certain cost and supply chain pressures, while our hedging program continues to mitigate our exposure to commodity price volatility and supports cash flow stability.",
+     "Birch\u2019s attractive cost structure and substantial cash generation provide a strong foundation, with further opportunities to improve margins through integration, portfolio optimization, and our in-house marketing capabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K (P1), Q3 2026 Form 10-Q MD&A (P2), Q3 2026 earnings release (P3), and September 2026 Form 8-K (P7); the top-15 U.S. producer rank is management's statement.",
+    "claim": "The company expands scale through acquisitions and asset integration, highlighted by the pending $1.8 billion Birch acquisition to add 46,000 net mineral acres and 500 gross operated wells in the Midland Basin.",
+    "facts": [
+     "P1",
+     "P2",
      "P3",
      "P7"
     ],
     "quotes": [
-     "We aim to obtain proved developed producing wells through acquisitions in accordance with our growth strategy rather than through development activities.",
+     "We have a proven track record of integrating new assets efficiently and realizing operational synergies.",
+     "On schedule for expected fourth quarter closing of the acquisition of Birch Resources (\"Birch\"), creating a top-15 U.S. publicly listed independent oil & gas company based on production, which includes a scaled, vertically integrated position in the Permian Basin.",
      "Pursuant to the Transactions, the Company will acquire approximately 46,000 net mineral acres in the Midland Basin, including 500 gross operated (480 net total) wells, as well as integrated midstream and water infrastructure assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 MD&A.",
-    "claim": "Hedging is a core protection. About 80% of production is fixed through derivatives over the next twelve months, which limited the benefit of higher oil prices in Q3.",
+    "basis": "Stated in the Q3 2026 income statement (F2), 2025 Form 10-K (P1), and Q3 2026 Form 10-Q MD&A (P2).",
+    "claim": "Diversified fixes approximately 80% of its next twelve months of production through commodity derivative contracts to support cash flow stability.",
     "facts": [
+     "F2",
+     "P1",
      "P2"
     ],
     "quotes": [
-     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
+     "We execute a disciplined commodity hedging program that is designed to mitigate price volatility.",
+     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months.",
+     "However, our hedging program limited the impact of the higher prices."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the income statement, MD&A and earnings release.",
-    "claim": "Derivative fair-value losses drove a large Q3 net loss despite higher commodity revenue, so reported earnings are volatile because of the hedge book.",
+    "basis": "Stated in the Q3 2026 financial statements (F1, F2), Q3 2026 earnings release (P3), and October 2026 Form 8-K (P6).",
+    "claim": "The company finances operations primarily through investment-grade non-recourse ABS and amortizing notes\u2014representing ~72% of consolidated debt\u2014alongside a credit facility upsized to a $1 billion borrowing base.",
     "facts": [
-     "P2",
+     "F1",
+     "F2",
      "P3",
-     "F2"
-    ],
-    "quotes": [
-     "Net Income (Loss): $(202)M, inclusive of a $(348)M loss on non-cash unsettled derivatives"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release. The comparison with the target is a direct reading of two printed figures.",
-    "claim": "Leverage is above the company's own target range, and liquidity is a monitored constraint, which is a threat to financial flexibility.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Leverage ratio(e): 2.66x as of September 30, 2026",
-     "Leverage Target | 2.0x to 2.5x"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K.",
-    "claim": "The revolving credit facility was upsized to a $1 billion borrowing base with lower margins, but its maturity could pull forward to January 8, 2029 if the Nordic bonds remain outstanding.",
-    "facts": [
      "P6"
     ],
     "quotes": [
-     "accordingly, if they remain outstanding, the facility would mature on January 8, 2029."
+     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end.",
+     "The Company's ABS notes have an investment grade rating and are intentionally structured to support higher leverage.",
+     "The Amendment increases the borrowing base from $900 million to $1 billion, establishes aggregate elected commitments of $1 billion, increases the aggregate maximum credit amounts from $1.5 billion to $2.5 billion, and replaces KeyBank with Truist as administrative agent and swing line lender."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the release table and MD&A. The link to margin compression is inferred from the printed figures.",
-    "claim": "Cost position is steady but margin is compressing. Adjusted operating cost per unit was flat at $2.08 per Mcfe, while Adjusted EBITDA margin fell to 56% from 66%.",
+    "basis": "Stated in the Q3 2026 income statement (F2), Q3 2026 Form 10-Q MD&A (P2), and Q3 2026 earnings release (P3).",
+    "claim": "Diversified also partners with institutional capital, holding a 40% equity interest in the DP Eagle joint venture with Carlyle to co-fund producing asset acquisitions.",
     "facts": [
+     "F2",
      "P2",
      "P3"
     ],
     "quotes": [
-     "Adjusted EBITDA Margin(9) | 56% | 66%"
+     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest.",
+     "Distributions to Diversified included approximately $6.6 million from residual operating cash flow and approximately $2.0 million in management fees."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the MD&A.",
-    "claim": "The business is exposed to commodity prices and geopolitics. Realized natural gas fell 4% to $2.17 per Mcf, and the MD&A cites volatility in Henry Hub and WTI prices.",
+    "basis": "Stated in the Q3 2026 Form 10-Q MD&A (P2).",
+    "claim": "Named external threats to competitive position include commodity oversupply, weather, geopolitical disruptions, macroeconomic shifts, and intensifying competition from other energy sources.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Commodity prices fluctuate due to a range of factors outside of our control or ability to predict."
+     "Commodity prices fluctuate due to a range of factors outside of our control or ability to predict.",
+     "These include, but are not limited to, increased natural gas, NGLs and oil production levels that exceed market demand, adverse or unseasonable weather conditions, geopolitical developments, macroeconomic events, and intensifying competition from other energy sources."
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Obligation figures are stated in the balance sheet. The cost-control benefit is inferred from the company's description.",
-    "claim": "A vertically integrated plugging operation is a differentiator, but the asset retirement obligation is a large liability and is growing.",
+    "basis": "Stated in the Q3 2026 Form 10-Q MD&A (P2).",
+    "claim": "Trade tariffs on imported steel, aluminum, and derivative products, together with industry inflation, labor availability, and supply chain conditions, threaten equipment and operating costs.",
     "facts": [
-     "P1",
-     "F1"
+     "P2"
     ],
     "quotes": [
-     "we have an extensive and innovative asset retirement program that consists of a vertically integrated plugging company based in our Appalachian Region"
+     "Domestically, continued growth in U.S. LNG export capacity supported demand for natural gas, while tariffs on certain imported steel, aluminum and derivative products contributed to uncertainty regarding the cost of certain equipment and materials.",
+     "We also continued to monitor inflationary pressures, labor availability and supply chain conditions affecting the broader industry."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 balance sheet (F1), 2025 Form 10-K Business section (P1), and Q3 2026 Form 10-Q MD&A (P2).",
+    "claim": "Operating a mature well portfolio creates long-term plugging obligations of 869,966 (table in thousands) in noncurrent asset retirement liabilities, while liquids-focused acquisitions increase unit operating costs.",
+    "facts": [
+     "F1",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Asset retirement obligations | 869,966 | 863,841",
+     "Over the initial 20 year period of the agreement, we plan to invest $70 million, which is held and guaranteed by OneNexus, an insurance provider for asset retirement obligations, to ensure we have provided financial assurance so that all of our wells in the state are safely retired.",
+     "Specifically, the increase in LOE per Mcfe was primarily related to a greater exposure to liquids production.",
+     "Areas with higher liquids output tend to incur elevated operating costs, although they also benefit from higher realized prices."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet (F1) and the earnings release (P3).",
-    "claim": "Reported liquidity is thin in cash terms and rests on the credit facility. Cash and cash equivalents were 5,794 (table in thousands) at Sep. 30, 2026, against 29,697 at Dec. 31, 2025. Management reports $506M of credit facility availability plus unrestricted cash.",
+    "basis": "stated in F1 and P3",
+    "claim": "As of September 30, 2026, Diversified held $ 5,794 (table in thousands) of unrestricted cash and cash equivalents and $506M of total liquidity including credit facility availability.",
     "facts": [
      "F1",
      "P3"
     ],
     "quotes": [
+     "Cash and cash equivalents | $ 5,794 | $ 29,697",
      "Liquidity: $506M of credit facility availability and unrestricted cash as of September 30, 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the balance sheet line items.",
-    "claim": "The balance sheet shows negative working capital. Total current assets were 661,323 (table in thousands) against total current liabilities of 1,250,224. Current liabilities include 285,517 of derivative liabilities and a current portion of long-term debt of 104,716.",
+    "basis": "stated in F1",
+    "claim": "Total current liabilities of 1,250,224 (table in thousands) exceeded total current assets of 661,323 (table in thousands) as of September 30, 2026.",
     "facts": [
      "F1"
     ],
-    "quotes": [],
+    "quotes": [
+     "Total current assets | 661,323 | 650,162",
+     "Total current liabilities | 1,250,224 | 1,075,694"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the release's non-GAAP reconciliation and 2026 guidance table.",
-    "claim": "Leverage is 2.66x net debt to pro forma TTM adjusted EBITDA, above the company's own 2.0x to 2.5x target. Net debt was 2,974,389 (table in thousands) against pro forma TTM adjusted EBITDA of 1,117,462. Total debt was 3,102,588.",
+    "basis": "stated in P6",
+    "claim": "On October 27, 2026, Diversified amended its revolving credit facility to increase the borrowing base and elected commitments from $900 million to $1 billion and maximum credit amounts from $1.5 billion to $2.5 billion.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Amendment increases the borrowing base from $900 million to $1 billion, establishes aggregate elected commitments of $1 billion, increases the aggregate maximum credit amounts from $1.5 billion to $2.5 billion, and replaces KeyBank with Truist as administrative agent and swing line lender."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "As of September 30, 2026, total debt was 3,102,588 (table in thousands) and net debt was 2,974,389 (table in thousands), giving a leverage ratio of 2.66x against the full-year guidance target of 2.0x to 2.5x.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Leverage ratio(e): 2.66x as of September 30, 2026",
+     "Total debt(1) | 3,102,588 | 2,611,863",
+     "Net debt | 2,974,389 | 2,465,088",
+     "Net debt-to-pro forma TTM adjusted EBITDA(3) | 2.66x | 2.42x",
      "Leverage Target | 2.0x to 2.5x"
     ],
     "support": "supported"
    },
    {
-    "basis": "Percentages and ABS paydown are stated in P3. Debt balances are from F1.",
-    "claim": "Most debt is structured to amortise without recourse to the parent. About 72% is non-recourse ABS and amortizing notes, and $313 million of certain ABS notes was retired in 2026. Balance-sheet long-term debt, net, rose to 2,997,872 (table in thousands) from 2,715,461.",
+    "basis": "stated in F1",
+    "claim": "On the balance sheet as of September 30, 2026, total liabilities stood at 5,798,174 (table in thousands) against total stockholders' equity of 733,635 (table in thousands), including 869,966 (table in thousands) in asset retirement obligations.",
     "facts": [
-     "P3",
      "F1"
     ],
     "quotes": [
-     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end."
+     "Asset retirement obligations | 869,966 | 863,841",
+     "Total liabilities | 5,798,174 | 5,173,969",
+     "Total stockholders' equity | 733,635 | 994,990"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement (F3) and the non-GAAP reconciliation (P3).",
-    "claim": "Operating cash generation grew in the nine months. Net cash provided by operating activities was 393,305 (table in thousands) against 282,379 a year earlier. Capital expenditures were 137,674, close to 137,500 a year earlier. Q3 operating cash flow was 135,789 and Q3 adjusted free cash flow was 152,730.",
+    "basis": "stated in P3",
+    "claim": "At quarter-end, ~72% of consolidated debt consisted of deleveraging non-recourse ABS and amortizing notes, and Diversified retired $313 million or approximately 11% in outstanding debt under certain ABS notes in 2026.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end.",
+     "ABS principal reduction: Retired $313 million or approximately 11% in outstanding debt under certain ABS notes in 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P3",
+    "claim": "In the nine months ended September 30, 2026, operating cash flow was 393,305 (table in thousands), capital expenditures were (137,674) (table in thousands), and free cash flow was $255,631 (table in thousands).",
     "facts": [
      "F3",
      "P3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Net cash provided by operating activities | 393,305 | 282,379",
+     "Capital expenditures | (137,674) | (137,500)",
+     "Free cash flow | $96,507 | $69,010 | $255,631 | $144,879"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the non-GAAP reconciliation and footnote (b).",
-    "claim": "Adjusted free cash flow flatters underlying cash generation. The nine-month figure of 426,884 (table in thousands) adds proceeds from divestitures of 149,208 and a working-capital item of 22,045 to free cash flow of 255,631.",
+    "basis": "stated in P3",
+    "claim": "Nine-month Adjusted FCF of $426,884 (table in thousands) exceeded free cash flow by adding 149,208 (table in thousands) in proceeds from divestitures and 22,045 (table in thousands) in working capital changes.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Adjusted Free Cash Flow represents net cash provided by operating activities excluding changes in cash from working capital less expenditures on natural gas and oil properties and equipment, and includes proceeds from divestitures related to asset optimization;"
+     "Free cash flow | $96,507 | $69,010 | $255,631 | $144,879",
+     "ADD: Proceeds from divestitures | 23,617 | 74,006 | 149,208 | 143,631",
+     "Changes in working capital | 32,606 | 31,034 | 22,045 | 77,456",
+     "Adjusted FCF | $152,730 | $174,050 | $426,884 | $365,966"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2, P2 and P3.",
-    "claim": "Reported earnings are depressed by non-cash derivative marks, while adjusted EBITDA fell year on year. Q3 net loss was (202,214) (table in thousands), including a (348,341) loss on fair value adjustments of unsettled derivatives. Q3 adjusted EBITDA was 255,546 against 285,179, and the margin was 56% against 66%.",
+    "basis": "stated in F2, F3, and P3",
+    "claim": "Nine-month GAAP net loss of (115,274) (table in thousands) reflected a $ (635,718) (table in thousands) derivative loss, including 393,832 (table in thousands) of non-cash unsettled fair value adjustments and (241,886) (table in thousands) of cash derivative settlement outflows.",
     "facts": [
      "F2",
-     "P2",
+     "F3",
      "P3"
     ],
     "quotes": [
-     "Net Income (Loss): $(202)M, inclusive of a $(348)M loss on non-cash unsettled derivatives"
+     "Net income (loss) | (202,214) | 171,252 | (115,274) | 146,347",
+     "Gain (loss) on derivatives | $ (378,369) | $ 111,048 | $ (635,718) | $ (4,165)",
+     "(Gain) loss on fair value adjustments of unsettled derivatives | 348,341 | (69,508) | 393,832 | 8,121",
+     "Cash proceeds (payments) on settlement of derivatives | (241,886) | 3,956"
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet balances are stated. The period of the settlement figure is inferred.",
-    "claim": "Hedge liabilities are a large balance-sheet claim on future cash. Derivative liabilities were 285,517 current and 573,278 noncurrent (table in thousands), against derivative assets of 114,356 current and 6,093 noncurrent. Cash settlements of derivatives were an outflow of (241,886) in the cash flow statement.",
+    "basis": "stated in F2 and F3",
+    "claim": "Operating cash flow quality also reflects property and equipment gains of 151,749 (table in thousands) backed out of operating cash, alongside (38,612) (table in thousands) in cash asset retirement settlements and (92,387) (table in thousands) in accounts receivable outflows.",
     "facts": [
-     "F1",
+     "F2",
      "F3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Gain (loss) on natural gas and oil properties and equipment | 17,602 | 14,216 | 151,749 | 78,174",
+     "Settlement of asset retirement costs | (38,612) | (17,805)",
+     "Accounts receivable, net | (92,387) | 57,641"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K (P6).",
-    "claim": "The revolving credit facility was extended and enlarged after quarter-end. On Oct. 27, 2026 the borrowing base rose from $900 million to $1 billion and margins fell by 25 basis points. The maturity moved to the earlier of October 27, 2030 and 91 days before the Nordic bonds mature if those bonds remain outstanding.",
+    "basis": "stated in F1 and P6",
+    "claim": "Current portion of long-term debt stood at 104,716 (table in thousands) on September 30, 2026, and Diversified redeemed $62 million of ABS IX Notes on October 26, 2026 using credit facility borrowings.",
     "facts": [
+     "F1",
      "P6"
     ],
     "quotes": [
-     "The Nordic bonds mature on April 9, 2029; accordingly, if they remain outstanding, the facility would mature on January 8, 2029."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K (P6). The comparison to the 2.66x figure is inferred.",
-    "claim": "The facility amendment added room for shareholder payments but also changed covenants. Restricted payments are allowed when pro forma net debt to EBITDAX is below 1.75 to 1.00 and liquidity exceeds 20% of the borrowing base. The cap on transaction-cost add-backs rose from 5% to 10% of EBITDAX.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "raising the cap on specified transaction-cost add-backs from 5% to 10% of EBITDAX for any four-quarter period"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A (P2) and the 8-K (P7).",
-    "claim": "The pending Birch acquisition is the main near-term funding need. The price is approximately $1.8 billion, to be funded by an asset-backed securitization of approximately $1.5 billion before closing plus liquidity under the credit facility. Closing is expected in the fourth quarter of 2026. A $50 million deposit has been paid.",
-    "facts": [
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "The acquisition is expected to close in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 and P1. The effect on remaining capacity is inferred.",
-    "claim": "Near-term debt maturities are being refinanced partly through the revolver. The ABS IX notes, with an aggregate outstanding principal amount of $62 million, were redeemed in full on Oct. 26, 2026 using borrowings under the Credit Agreement. The 9.75% Nordic bonds are due April 9, 2029 and were issued in April 2025 for $300 million.",
-    "facts": [
-     "P6",
-     "P1"
-    ],
-    "quotes": [
+     "Current portion of long-term debt, net | 104,716 | 236,553",
+     "On October 26, 2026, in connection with the Amendment, DP Mustang Holdco LLC (\u201cABS IX\u201d), a wholly owned subsidiary of the Company, redeemed in full its outstanding Class A and Class B asset-backed notes (the \u201cABS IX Notes\u201d), with an aggregate outstanding principal amount of $62 million.",
      "The redemption was funded with borrowings under the Credit Agreement prior to the effectiveness of the Amendment."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement; the interpretation of funding sources is inferred.",
-    "claim": "Capital deployed in the nine months exceeded the cash retained from operations and was financed with net borrowings. Cash spent on asset acquisitions was (481,916) (table in thousands) and on an equity method investment (55,827), against divestiture proceeds of 283,528. Buybacks were (94,680) and dividends (63,560). Borrowings were 2,885,009 against repayments of (2,727,588).",
+    "basis": "stated in P1 and P6",
+    "claim": "The amended credit facility matures on October 27, 2030, but accelerates to January 8, 2029\u201491 days before maturity\u2014if the $300 million of 9.75% Nordic bonds due April 9, 2029 remain outstanding.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the release's outlook table and footnote.",
-    "claim": "Full-year guidance gives a forward view of cash generation without Birch. Adjusted EBITDA is guided to $960 to $1,010 (millions) and adjusted free cash flow to about $440 (millions), with total capital expenditures of $225 to $255 (millions).",
-    "facts": [
-     "P3"
+     "P1",
+     "P6"
     ],
     "quotes": [
-     "The Birch acquisition is not included in the guidance figures below and remains on track to close during the fourth quarter 2026."
+     "\u2022In April 2025, we issued $300 million of new senior secured notes in the Nordic bond market at a 2% discount, resulting in net proceeds of $294 million (the \u201cNordic Bonds\u201d);",
+     "The Amendment changes the maturity date from March 14, 2029 to the earlier of October 27, 2030 and the date 91 days before the stated maturity of the 9.75% senior secured bonds due 2029 issued by Diversified Gas & Oil Corporation, a wholly owned subsidiary of the Company (the \u201cNordic bonds\u201d), or certain refinancing indebtedness, if the Nordic bonds remain outstanding on that date.",
+     "The Nordic bonds mature on April 9, 2029; accordingly, if they remain outstanding, the facility would mature on January 8, 2029."
     ],
     "support": "supported"
    },
    {
-    "basis": "Balances are stated in F1; the link to equity changes is inferred from the statement.",
-    "claim": "Long-dated asset retirement obligations add to the claims on future cash. They were 869,966 (table in thousands) noncurrent at Sep. 30, 2026, against 863,841 at Dec. 31, 2025. Total liabilities were 5,798,174 against total stockholders' equity of 733,635.",
+    "basis": "stated in P2 and P7",
+    "claim": "Diversified expects to close the Birch acquisition in the fourth quarter of 2026 for an aggregate purchase price of approximately $1.8 billion, funded by an expected asset-backed securitization of approximately $1.5 billion and credit facility liquidity.",
     "facts": [
-     "F1"
+     "P2",
+     "P7"
     ],
-    "quotes": [],
+    "quotes": [
+     "The aggregate purchase price for the Transactions is approximately $1.8 billion (inclusive of repayment of indebtedness), subject to adjustments in the Transaction Agreements, and is expected to be funded by an asset-backed securitization of approximately $1.5 billion in advance of closing , along with customary financing sources including the available liquidity under the Company\u2019s revolving credit facility.",
+     "The Transactions are expected to close simultaneously in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from liquidity, facility upsize, cash flows, and hedge disclosures in F3, P2, P3, and P6",
+    "claim": "Diversified can address near-term debt service and obligations using $506M of quarter-end liquidity, the upsized $1 billion credit facility borrowing base, 393,305 (table in thousands) of nine-month operating cash flow, and approximately 80% of next-twelve-month production fixed through commodity hedges.",
+    "facts": [
+     "F3",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Liquidity: $506M of credit facility availability and unrestricted cash as of September 30, 2026",
+     "The Amendment increases the borrowing base from $900 million to $1 billion, establishes aggregate elected commitments of $1 billion, increases the aggregate maximum credit amounts from $1.5 billion to $2.5 billion, and replaces KeyBank with Truist as administrative agent and swing line lender.",
+     "Net cash provided by operating activities | 393,305 | 282,379",
+     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
+    ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in P2 (10-Q MD&A).",
-    "claim": "Acquisitions are the main source of volume growth. Q3 2026 average daily production was 1,189 MMcfepd against 1,127 a year earlier, with total production up 5%. Management attributes the rise mainly to the Canvas and Sheridan acquisitions plus non-operated development.",
+    "basis": "Stated in the 2025 Form 10-K reserve tables and 3Q 2026 Form 10-Q MD&A.",
+    "claim": "Acquisitions of producing properties have been a primary driver of scale, adding 2,041,296 MMcfe of proved reserves in 2025 (lifting total proved reserves 68% to 6,082,483 MMcfe) and driving a 5% increase in net production volumes during the quarter ended September 30, 2026.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "During 2025, 2,041,296 MMcfe of purchases of reserves in place were associated with the Summit, Maverick, and Canvas acquisitions.",
+     "As of December 31, 2025, our estimated proved reserves totaled 6,082,483 MMcfe, an increase of 68% from the prior year-end, with a Standardized Measure of $4.2 billion.",
+     "The increase in production volumes for the three months ended September 30, 2026 compared to the three months ended September 30, 2025 was primarily related to the Canvas and Sheridan acquisitions in the fourth quarter of 2025 and second quarter of 2026, respectively, as well as our continued non-operated development investment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the September 2, 2026 Form 8-K, 3Q 2026 Form 10-Q MD&A, and November 4, 2026 earnings release.",
+    "claim": "The pending approximately $1.8 billion acquisition of Birch Permian Holdings, Inc. is expected to add approximately 46,000 net mineral acres and 500 gross operated wells in the Midland Basin, providing an estimated 55% increase in adjusted EBITDA and an increase of over 100% in adjusted free cash flow pro forma.",
+    "facts": [
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Pursuant to the Transactions, the Company will acquire approximately 46,000 net mineral acres in the Midland Basin, including 500 gross operated (480 net total) wells, as well as integrated midstream and water infrastructure assets.",
+     "Looking ahead, we are excited about the exceptional quality and scale of our Birch acquisition, which, pro forma, will establish Diversified as a top-15 U.S. publicly listed producer while providing an estimated 55% increase in adjusted EBITDA(c) and an increase of over 100% in adjusted free cash flow(d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 3Q 2026 Form 10-Q MD&A and September 2, 2026 Form 8-K.",
+    "claim": "For the Birch acquisition to contribute to growth, the transaction must satisfy customary closing conditions in the fourth quarter of 2026 and secure funding through an expected asset-backed securitization of approximately $1.5 billion plus liquidity under the Credit Facility.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "The aggregate purchase price for the acquisition is approximately $1.8 billion (inclusive of repayment of indebtedness), subject to customary adjustments, and is expected to be funded by an asset-backed securitization of approximately $1.5 billion in advance of closing and liquidity under the Company\u2019s Credit Facility.",
+     "The acquisition is expected to close in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the October 27, 2026 Form 8-K, November 4, 2026 earnings release, and 3Q 2026 Form 10-Q MD&A; condition inferred from financing structure.",
+    "claim": "Continued acquisition-led growth requires maintaining debt and credit facility capacity (recently upsized from $900 million to $1 billion), executing hedges on ABS-backed production, integrating acquired assets to realize synergies, and offsetting normal production declines.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "The Amendment increases the borrowing base from $900 million to $1 billion, establishes aggregate elected commitments of $1 billion, increases the aggregate maximum credit amounts from $1.5 billion to $2.5 billion, and replaces KeyBank with Truist as administrative agent and swing line lender.",
+     "The portion of the Birch production related to the ABS financing has been hedged prior to closing.",
+     "These increases were partially offset by the Barnett asset sale in the second quarter of 2026 and normal production declines."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 3Q 2026 Form 10-Q MD&A, 3Q 2026 Form 10-Q income statement, and November 4, 2026 earnings release.",
+    "claim": "Diversified is expanding cash flows and asset reach through partnership structures, contributing $55 million for a 40% equity interest in DP Eagle with Carlyle (which used $895 million of ABS notes to acquire Camino producing properties) alongside $170 million for Camino undeveloped acreage and ongoing non-operated development.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest.",
+     "DP Eagle issued $895 million of ABS notes, together with the equity contributions from the Company and Carlyle, to fund an acquisition of producing properties in the Anadarko Basin in Oklahoma from Camino.",
+     "In connection with the formation of DP Eagle, the Company acquired undeveloped acreage from Camino for approximately $170 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the November 4, 2026 earnings release; dependency inferred from SPV and CapEx disclosures.",
+    "claim": "For the partnership and non-operated development driver to continue generating growth, the Camino SPV must sustain residual operating cash flows and management fees (which delivered approximately $8.6 million in initial distributions in 3Q26) while Diversified continues funding its Non-Op JV Partnership capital program guided at $115 to $125 (table in millions) for 2026.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "3Q26 marked the initial quarter of cash flows received as part of our 40% ownership in the special purpose vehicle for the producing assets acquired in the Camino acquisition with Carlyle, with a total of approximately $8.6 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K and November 4, 2026 earnings release.",
+    "claim": "Diversified is selectively developing acquired undrilled locations, holding 381,975 MMcfe of proved undeveloped reserves as of December 31, 2025 and advancing a 20 gross well Oklahoma operated development program in 3Q26 to unlock reserve value and incremental cash flow.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we are actively engaged or have plans to engage in developing certain locations acquired in the Maverick and Canvas acquisitions.",
+     "During the quarter, we also made meaningful progress in our operated development program in Oklahoma, successfully drilling our first four wells, with completion activities underway and the program progressing on schedule.",
+     "These initial activities represent an important step in unlocking the additional reserve value of our existing acreage through measured, capital-disciplined investment, while also providing incremental growth in cash flow generation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K and 3Q 2026 Form 10-Q MD&A.",
+    "claim": "For operated development of undrilled locations to continue economically, projects must remain profitable and on schedule under prevailing natural gas and oil prices, service vendor availability, regulatory regimes, midstream markets, end user demand, and macro and micro financial conditions.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "When economic, we may engage third parties to complete the existing development activities or may participate in the development of acquired non-operated locations, and such reserves are included below as PUDs.",
+     "Whether or not undrilled acreage may be drilled and thereafter produce economic quantities of oil or gas is related to many factors which may change over time, including natural gas and oil prices, service vendor availability, regulatory regimes, midstream markets, end user demand, and macro and micro financial conditions; the undeveloped acreage described herein is presented without an opinion as to economic viability, as a result of the aforesaid factors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 3Q 2026 Form 10-Q income statement and MD&A.",
+    "claim": "Higher liquids production and stronger oil and NGL prices lifted commodity revenue before derivatives by 26% to $469,575 (table in thousands) in the quarter ended September 30, 2026, as oil and NGL volumes grew 12% and 14%, shifting natural gas share from 74% to 72%.",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Commodity revenue for the three months ended September 30, 2026 increased 26% compared to the three months ended September 30, 2025.",
+     "The increase was primarily related to the 19% increase in average realized sales prices, excluding the impact of derivatives settled in cash, and the 5% increase in sold volumes primarily due to the acquisitions and non-operated development as discussed above."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 3Q 2026 Form 10-Q income statement and MD&A.",
+    "claim": "For higher liquids prices and expanded liquids exposure to translate into cash flow and earnings growth, realized prices must outpace elevated lease operating expenses on liquids-rich assets ($1.24 per Mcfe vs. $1.21 per Mcfe a year earlier) and avoid adverse derivative settlement and mark-to-market losses (which reached $(378,369) (table in thousands) in the quarter ended September 30, 2026 with approximately 80% of next-twelve-month production hedged).",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Areas with higher liquids output tend to incur elevated operating costs, although they also benefit from higher realized prices.",
+     "However, our hedging program limited the impact of the higher prices.",
+     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K and November 4, 2026 earnings release.",
+    "claim": "Portfolio optimization through non-core undeveloped acreage divestitures supplements Adjusted Free Cash Flow and funds capital deployment, generating approximately $160 million in 2025 and approximately $149 million year-to-date in 2026, with approximately $150 million included in full-year 2026 guidance.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In 2025, we divested certain non-core undeveloped acreage across our operating footprint for consideration of approximately $160 million.",
+     "Value generated from year-to-date acreage sales has reached approximately $149 million.",
+     "Includes an estimate of cash proceeds for FY 2026 portfolio optimization of approximately $150 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K and 3Q 2026 Form 10-Q MD&A; dependency inferred.",
+    "claim": "Continued cash generation from portfolio optimization depends on maintaining marketable undeveloped acreage (813,981 gross and 462,473 net undeveloped acres at December 31, 2025, plus approximately $170 million of Camino undeveloped acreage acquired in 2026) and buyer demand, while divestitures of producing assets can offset production growth.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Undeveloped acres are acres on which wells have not been drilled or completed to a point that would permit the production of commercial quantities of oil or natural gas, regardless of whether such acreage contains proved reserves.",
+     "In connection with the formation of DP Eagle, the Company acquired undeveloped acreage from Camino for approximately $170 million.",
+     "These increases were partially offset by the Barnett asset sale in the second quarter of 2026 and normal production declines."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in P7 (and corroborated in P2 and P3)",
+    "claim": "Diversified Energy Company entered into definitive agreements to acquire Birch Permian Holdings, Inc. and certain affiliated companies for an aggregate purchase price of approximately $1.8 billion, expected to be funded by an asset-backed securitization of approximately $1.5 billion and revolving credit facility liquidity and to close in the fourth quarter of 2026.",
+    "facts": [
+     "P7",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "On September 2, 2026, Diversified Energy Company (the \u201cCompany\u201d) entered into definitive agreements to acquire Birch Permian Holdings, Inc. and certain affiliated companies.",
+     "The aggregate purchase price for the Transactions is approximately $1.8 billion (inclusive of repayment of indebtedness), subject to adjustments in the Transaction Agreements, and is expected to be funded by an asset-backed securitization of approximately $1.5 billion in advance of closing , along with customary financing sources including the available liquidity under the Company\u2019s revolving credit facility.",
+     "The Transactions are expected to close simultaneously in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Wholly owned subsidiary DP RBL Co LLC entered into the Fourth Amendment to its Revolving Credit Agreement, increasing the borrowing base from $900 million to $1 billion, establishing aggregate elected commitments of $1 billion, raising aggregate maximum credit amounts from $1.5 billion to $2.5 billion, replacing KeyBank with Truist as administrative agent, and reducing interest margins by 25 basis points.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On October 27, 2026, DP RBL Co LLC (the \u201cBorrower\u201d), a wholly owned subsidiary of Diversified Energy Company (the \u201cCompany\u201d), entered into the Fourth Amendment (the \u201cAmendment\u201d) to the Second Amended and Restated Revolving Credit Agreement, dated as of March 14, 2025 (as previously amended, the \u201cCredit Agreement\u201d), with the guarantors and lenders party thereto, KeyBank National Association (\u201cKeyBank\u201d), as existing administrative agent, Truist Bank (\u201cTruist\u201d), as successor administrative agent, and the other parties thereto.",
+     "The Amendment increases the borrowing base from $900 million to $1 billion, establishes aggregate elected commitments of $1 billion, increases the aggregate maximum credit amounts from $1.5 billion to $2.5 billion, and replaces KeyBank with Truist as administrative agent and swing line lender.",
+     "The Amendment reduces interest margins by 25 basis points."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Wholly owned subsidiary DP Mustang Holdco LLC redeemed in full its outstanding Class A and Class B ABS IX Notes totaling $62 million in aggregate principal amount using borrowings under the Credit Agreement, and the securing liens were released.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On October 26, 2026, in connection with the Amendment, DP Mustang Holdco LLC (\u201cABS IX\u201d), a wholly owned subsidiary of the Company, redeemed in full its outstanding Class A and Class B asset-backed notes (the \u201cABS IX Notes\u201d), with an aggregate outstanding principal amount of $62 million.",
+     "The liens securing the ABS IX Notes have been released."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "The Compensation Committee approved the adoption of the Diversified Gas & Oil Corporation Deferred Compensation Plan for select management, highly compensated employees, and non-employee directors.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "On November 3, 2026, the Compensation Committee of the Board of Directors of Diversified Energy Company (the \u201cCompany\u201d) approved the adoption of the Diversified Gas & Oil Corporation Deferred Compensation Plan, to be effective January 1, 2027 (the \u201cPlan\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Diversified declared a third-quarter dividend of $0.29 per share.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "\u20223Q26 dividend: $0.29 per share declared"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P3",
+    "claim": "In the third quarter, Diversified recorded a GAAP net loss of (202,214) (table in thousands), inclusive of a $(348)M loss on non-cash unsettled derivatives.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Net income (loss) | (202,214) | 171,252 | (115,274) | 146,347",
+     "\u2022Net Income (Loss): $(202)M, inclusive of a $(348)M loss on non-cash unsettled derivatives"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Diversified and Carlyle formed DP Eagle with cash equity contributions of $55 million for a 40% interest and $82 million for a 60% interest, respectively, and DP Eagle issued $895 million of ABS notes to acquire producing properties from Camino while Diversified separately acquired Camino undeveloped acreage for approximately $170 million.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In July 2026, the Company and funds and accounts managed by Carlyle formed DP Eagle.",
+     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest.",
+     "DP Eagle issued $895 million of ABS notes, together with the equity contributions from the Company and Carlyle, to fund an acquisition of producing properties in the Anadarko Basin in Oklahoma from Camino.",
+     "In connection with the formation of DP Eagle, the Company acquired undeveloped acreage from Camino for approximately $170 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Diversified completed the acquisition of Sheridan in the second quarter of 2026.",
     "facts": [
      "P2"
     ],
@@ -426,256 +833,290 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1).",
-    "claim": "The acquisition model is deliberate and has already scaled the company. 2025 production averaged 1,086 MMcfepd, up 37% from 791. The strategy is to buy producing wells rather than drill. For this to continue, suitable asset packages must keep being available and financeable.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We aim to obtain proved developed producing wells through acquisitions in accordance with our growth strategy rather than through development activities.",
-     "\u2022Average daily production of 1,086 MMcfepd representing an increase of 37% when compared to 791 MMcfepd for the same period in 2024;"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P2, P3 and P7. The EBITDA uplift is management's own estimate in P3.",
-    "claim": "The pending Birch acquisition is the next step-up in scale. It adds about 46,000 net mineral acres in the Midland Basin for about $1.8 billion, to be funded by an asset-backed securitization of about $1.5 billion plus credit facility liquidity. It is expected to close in Q4 2026 and is not in the 2026 guidance. For it to contribute, closing conditions must be met and the securitization must be completed before closing.",
-    "facts": [
-     "P2",
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "The acquisition is expected to close in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions.",
-     "The Birch acquisition is not included in the guidance figures below and remains on track to close during the fourth quarter 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2. The price dependence is inferred from the revenue bridge.",
-    "claim": "Higher realized oil and NGL prices are lifting revenue. Q3 commodity revenue rose 26%, driven by a 19% rise in average realized price and a 5% rise in volumes. The price effect was 67,180 (table in thousands) against 29,637 (table in thousands) from volume. Natural gas realized price fell. For the lift to continue, oil and NGL prices must stay elevated.",
+    "basis": "stated in P2",
+    "claim": "Diversified completed the Barnett asset sale in the second quarter of 2026.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Commodity revenue for the three months ended September 30, 2026 increased 26% compared to the three months ended September 30, 2025."
+     "These increases were partially offset by the Barnett asset sale in the second quarter of 2026 and normal production declines."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P3. The cap on upside is inferred from the before- and after-hedge prices.",
-    "claim": "Hedging stabilises cash flow but caps the benefit of higher prices. About 80% of production is fixed over the next twelve months. Q3 realized price was $4.29 per Mcfe before hedges and $4.02 after, against $3.99 a year earlier. For cash flow to stay stable, the hedge book must keep being maintained, including on acquired volumes.",
+    "basis": "stated in P3",
+    "claim": "Diversified retired $313 million, or approximately 11%, of outstanding debt under certain ABS notes in 2026.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "\u2022ABS principal reduction: Retired $313 million or approximately 11% in outstanding debt under certain ABS notes in 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Year-to-date acreage sales reached approximately $149 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "\u2022Portfolio Optimization: Value generated from year-to-date acreage sales has reached approximately $149 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Diversified repurchased 6,676,753 shares year-to-date, representing approximately 9% of shares outstanding.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months.",
-     "The portion of the Birch production related to the ABS financing has been hedged prior to closing."
+     "\u2022For the nine months ended September 30, 2026, we repurchased 6,676,753 shares, representing approximately 9% of the shares outstanding as of September 30, 2026.",
+     "\u2022YTD (through November 4, 2026): Repurchased 6,676,753(g) shares, representing ~9% of shares outstanding"
     ],
     "support": "supported"
    },
    {
-    "basis": "Statements are in F2, F3 and P3. The link between non-cash derivative losses and cash generation is inferred.",
-    "claim": "Cash generation funds buybacks and dividends, though earnings are distorted by derivatives. Nine-month operating cash flow was 393,305 (table in thousands) against 282,379, while the nine-month net loss was 115,274 (table in thousands). Nine-month adjusted EBITDA was 782,473 against 701,770. Q3 adjusted EBITDA fell to 255,546 from 285,179. For shareholder returns to continue, operating cash flow must hold up.",
+    "basis": "stated in P1",
+    "claim": "Diversified acquired Canvas Energy Inc. for total consideration of approximately $533 million, funded by issuing 3,718,209 common shares and approximately $399 million in cash primarily from issuing $400 million of ABS XI Notes.",
     "facts": [
-     "F2",
-     "F3",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "Net Income (Loss): $(202)M, inclusive of a $(348)M loss on non-cash unsettled derivatives"
+     "\u2022In November 2025, we acquired Canvas Energy Inc. (\u201cCanvas\u201d) for total consideration of approximately $533 million.",
+     "The transaction was funded through the issuance of 3,718,209 shares of common stock and approximately $399 million in cash.",
+     "The cash portion of the consideration was primarily funded through the issuance of the ABS XI Notes with a total principal amount of $400 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and P6. The link between capacity and growth is inferred.",
-    "claim": "Financing capacity supports acquisitions, but leverage is above target. The credit facility borrowing base was raised from $900 million to $1 billion, with lower margins. Leverage is 2.66x against a target of 2.0x to 2.5x. Further deals need continued access to the credit facility and securitization markets, and leverage may need to fall.",
+    "basis": "stated in P1",
+    "claim": "Diversified completed its U.S. Domestication, resulting in Diversified Energy Company, a Delaware corporation, becoming its publicly traded parent company.",
     "facts": [
-     "P3",
-     "P6"
+     "P1"
     ],
     "quotes": [
-     "Leverage Target | 2.0x to 2.5x",
-     "The Amendment reduces interest margins by 25 basis points."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in P2 and P3. The loss figure is from F2.",
-    "claim": "The Carlyle joint venture DP Eagle lets the company add producing assets with less of its own capital. It put in $55 million for a 40% interest, and the first-quarter distributions to the company were about $8.6 million. For this to add to growth, the vehicle must keep distributing and the equity stake must hold its value.",
-    "facts": [
-     "P2",
-     "P3",
-     "F2"
-    ],
-    "quotes": [
-     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest."
+     "\u2022In November 2025, we completed the U.S. Domestication, resulting in Diversified Energy Company, a Delaware corporation, becoming our publicly traded parent company;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3. The dependence on results is inferred.",
-    "claim": "The operated Oklahoma development program is an early-stage organic growth lever. Drilling of the first wells in a 20 gross well program is complete, with completions underway and the program on schedule. For it to contribute, completion results must justify further capital within the capital budget.",
+    "basis": "stated in P1",
+    "claim": "Diversified launched a well plugging fund with the state of West Virginia with a planned investment of $70 million over an initial 20 year period, held and guaranteed by OneNexus.",
     "facts": [
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "The Diversified team has now completed drilling of the first four wells in its 20 gross well Oklahoma development program, with completion activities underway."
+     "\u2022In October 2025, we launched a well plugging fund with the state of West Virginia dedicated to retiring oil and gas wells.",
+     "Over the initial 20 year period of the agreement, we plan to invest $70 million, which is held and guaranteed by OneNexus, an insurance provider for asset retirement obligations, to ensure we have provided financial assurance so that all of our wells in the state are safely retired."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and F3. The offset to acquisition spending is inferred.",
-    "claim": "Portfolio optimization (acreage sales) supplies cash that supports growth. Year-to-date value generated reached about $149 million, and nine-month proceeds from divestitures were 283,528 (table in thousands). For this to continue, non-core assets must keep selling at similar values.",
+    "basis": "stated in P1",
+    "claim": "Diversified issued $300 million of senior secured Nordic Bonds at a 2% discount for net proceeds of $294 million.",
     "facts": [
-     "P3",
-     "F3"
+     "P1"
     ],
     "quotes": [
-     "Portfolio Optimization: Value generated from year-to-date acreage sales has reached approximately $149 million."
+     "\u2022In April 2025, we issued $300 million of new senior secured notes in the Nordic bond market at a 2% discount, resulting in net proceeds of $294 million (the \u201cNordic Bonds\u201d);"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2, F1 and F2. The per-share effect is inferred.",
-    "claim": "Buybacks lower the share count, which supports per-share results. The company repurchased 6,676,753 shares in nine months, about 9% of shares outstanding. For this to continue, cash flow must cover repurchases, dividends and acquisition funding together.",
+    "basis": "stated in P1",
+    "claim": "Diversified acquired Maverick Natural Resources, LLC for net consideration of $666 million and gross transaction value of approximately $1.3 billion, funded with 21,194,213 common shares and approximately $211 million in cash while assuming approximately $518 million of ABS Maverick Notes and paying off $202 million on Maverick's credit facility.",
     "facts": [
-     "P2",
-     "F2",
-     "F1"
+     "P1"
     ],
     "quotes": [
-     "For the nine months ended September 30, 2026, we repurchased 6,676,753 shares, representing approximately 9% of the shares outstanding as of September 30, 2026."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "Stated in the 8-K body (P7). The 10-Q MD&A (P2) and the earnings release (P3) repeat it.",
-    "claim": "The company signed definitive agreements to acquire Birch Permian Holdings and affiliated companies for an aggregate price of approximately $1.8 billion. Closing is expected in the fourth quarter and remains subject to customary closing conditions.",
-    "facts": [
-     "P7",
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "The aggregate purchase price for the Transactions is approximately $1.8 billion (inclusive of repayment of indebtedness), subject to adjustments in the Transaction Agreements",
-     "The Transactions are expected to close simultaneously in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
+     "\u2022In March 2025, we acquired Maverick Natural Resources, LLC (\u201cMaverick\u201d) for net consideration of $666 million.",
+     "The gross value of the transaction was approximately $1.3 billion and was funded through the issuance of 21,194,213 shares of common stock direct to the unitholders of Maverick, and approximately $211 million in cash.",
+     "The transaction also included the assumption of approximately $518 million of ABS Maverick Notes outstanding and the payoff of $202 million outstanding on Maverick\u2019s credit facility on the acquisition date;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P2).",
-    "claim": "The company and Carlyle-managed funds formed DP Eagle to acquire producing Anadarko Basin properties from Camino. The company contributed $55 million in cash for a 40% equity interest.",
+    "basis": "stated in P1",
+    "claim": "Diversified amended and restated its revolving Credit Facility, increasing the borrowing base to $900 million and extending the maturity to March 2029.",
     "facts": [
-     "P2",
-     "F2",
-     "F3"
+     "P1"
     ],
     "quotes": [
-     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest."
+     "\u2022In March 2025, concurrent with the Maverick acquisition, we amended and restated the credit agreement governing our revolving loan facility (the \u201cCredit Facility\u201d), increasing the borrowing base to $900 million and extending the maturity to March 2029."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K body (P6).",
-    "claim": "A subsidiary signed the Fourth Amendment to the revolving credit agreement. It raised the borrowing base from $900 million to $1 billion, cut interest margins and replaced the administrative agent.",
+    "basis": "stated in P1",
+    "claim": "During its semi-annual redetermination, Diversified's Credit Facility borrowing base was reduced to $825 million.",
     "facts": [
-     "P6",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "The Amendment increases the borrowing base from $900 million to $1 billion, establishes aggregate elected commitments of $1 billion, increases the aggregate maximum credit amounts from $1.5 billion to $2.5 billion, and replaces KeyBank with Truist as administrative agent and swing line lender."
+     "During our semi-annual redetermination in October 2025, the borrowing base was reduced to $825 million;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K body (P6).",
-    "claim": "A subsidiary (ABS IX) redeemed in full its outstanding asset-backed notes, with an aggregate principal amount of $62 million. The redemption was funded with credit facility borrowings, and the liens securing the notes were released.",
+    "basis": "stated in P1",
+    "claim": "Diversified formed Diversified ABS Phase X LLC and issued asset-backed securities with a total principal amount of $530 million.",
     "facts": [
-     "P6"
+     "P1"
     ],
     "quotes": [
-     "The redemption was funded with borrowings under the Credit Agreement prior to the effectiveness of the Amendment."
+     "\u2022In February 2025, we formed Diversified ABS Phase X LLC, a limited-purpose, bankruptcy-remote, wholly-owned subsidiary (\u201cABS X\u201d), to issue asset-backed securities with a total principal amount of $530 million (the \u201cABS X Notes\u201d);"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P2). The earnings release (P3) repeats the figure through November 4.",
-    "claim": "The company repurchased 6,676,753 shares year to date, about 9% of shares outstanding at quarter end.",
+    "basis": "stated in P1",
+    "claim": "Diversified issued 8,500,000 shares of common stock at $14.50 per share for gross proceeds of $123 million.",
     "facts": [
-     "P2",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "For the nine months ended September 30, 2026, we repurchased 6,676,753 shares, representing approximately 9% of the shares outstanding as of September 30, 2026."
+     "\u2022In February 2025 , we issued 8,500,000 shares of common stock at $14.50 per share to raise gross proceeds of $123 million;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Diversified acquired upstream assets and related infrastructure in the Appalachian Region from Summit Natural Resources, LLC for $42 million.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "\u2022In February 2025, we acquired certain upstream assets and related infrastructure in the Appalachian Region from Summit Natural Resources, LLC (\u201cSummit\u201d) for $42 million; and"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Diversified divested non-core undeveloped acreage across its operating footprint for consideration of approximately $160 million.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "\u2022In 2025, we divested certain non-core undeveloped acreage across our operating footprint for consideration of approximately $160 million."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Leverage ratio and target are stated in the earnings release; the mechanism is inferred from the debt and cash figures.",
-    "claim": "Leverage of 2.66x at quarter end is above the company's 2.0x to 2.5x leverage target, with only 5,794 of cash (balance sheet in thousands) against total debt that the release puts at 3,102,588 (in thousands).",
+    "basis": "Inferred from the transaction funding structure in P7, balance sheet cash in F1, and credit facility expansions and hedging disclosures in P3 and P6.",
+    "claim": "Diversified faces financing execution risk on its pending Birch acquisition with an aggregate purchase price of approximately $1.8 billion, expected to rely on an asset-backed securitization of approximately $1.5 billion and credit facility liquidity while holding $ 5,794 (table in thousands) in unrestricted cash and cash equivalents as of September 30, 2026.",
     "facts": [
+     "P7",
+     "F1",
      "P3",
-     "F1"
+     "P6"
     ],
     "quotes": [
-     "Leverage ratio(e): 2.66x as of September 30, 2026",
-     "Leverage Target | 2.0x to 2.5x"
+     "The aggregate purchase price for the Transactions is approximately $1.8 billion (inclusive of repayment of indebtedness), subject to adjustments in the Transaction Agreements, and is expected to be funded by an asset-backed securitization of approximately $1.5 billion in advance of closing , along with customary financing sources including the available liquidity under the Company\u2019s revolving credit facility."
     ],
     "support": "supported"
    },
    {
-    "basis": "Price, funding plan, deposit and fee are stated in the 8-K and 10-Q; the financing-failure pathway is inferred.",
-    "claim": "The roughly $1.8 billion Birch acquisition depends on about $1.5 billion of ABS financing before closing, and the $50 million deposit and a $50 million termination fee are exposed if the company breaches. Closing is still pending.",
+    "basis": "Stated in the Merger Agreement summary in P7; closing progress stated in P3.",
+    "claim": "Under the Birch Merger Agreement, failure to close due to Diversified's material breach or failure to perform exposes the company to forfeiting its $50 million deposit and paying a $50 million termination fee.",
     "facts": [
      "P7",
-     "P2",
      "P3"
     ],
     "quotes": [
-     "The Transactions are expected to close simultaneously in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
+     "In the event the Merger Agreement is terminated by BPHI when BPHI is not in material breach of the Merger Agreement and all conditions to the Company\u2019s obligation to close have been satisfied or waived, and closing has failed to occur as a result of the Company\u2019s material breach or failure to perform its obligations under the Merger Agreement, BPHI will be entitled to payment of a termination fee of $50 million and to retain the deposit for its own account."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the statements and MD&A; the mechanism is inferred.",
-    "claim": "The hedge book creates large fair-value liabilities and swings in reported results. Q3 loss on derivatives of (378,369) (in thousands) pulled total revenue to 108,512 (in thousands), and derivative liabilities were 285,517 current and 573,278 noncurrent (in thousands) with about 80% of production hedged.",
+    "basis": "Stated in F1, P3, and P6; liquidity and refinancing pressure inferred from the current liability excess, above-target leverage, and springing maturity terms.",
+    "claim": "Diversified carries 3,102,588 (table in thousands) in total debt and a 2.66x leverage ratio above its 2.0x to 2.5x target, alongside current liabilities of 1,250,224 (table in thousands) exceeding current assets of 661,323 (table in thousands) and a springing credit facility maturity to January 8, 2029 if the 9.75% Nordic bonds remain outstanding.",
     "facts": [
-     "F2",
      "F1",
-     "P2"
+     "P3",
+     "P6"
     ],
     "quotes": [
+     "The Nordic bonds mature on April 9, 2029; accordingly, if they remain outstanding, the facility would mature on January 8, 2029.",
+     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, F1, F2, F3, and P3.",
+    "claim": "Commodity price volatility and rising liquids prices drove $(378,369) (table in thousands) in derivative losses and a $(202,214) (table in thousands) net loss in the three months ended September 30, 2026, while hedging capped realized oil prices at $67.29 per barrel versus $86.87 before hedges and unhedged natural gas realized $2.17 per Mcf versus $2.95 at Henry Hub.",
+    "facts": [
+     "P2",
+     "F2",
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Higher oil prices increased our average realized oil prices before the effect of derivative settlements.",
+     "However, our hedging program limited the impact of the higher prices.",
      "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
     ],
     "support": "supported"
    },
    {
-    "basis": "The figures are stated in the release and MD&A; the cause of the drop is partly inferred from the hedge and cost tables.",
-    "claim": "Q3 Adjusted EBITDA fell to 255,546 from 285,179 (in thousands) and Adjusted EBITDA margin fell to 56% from 66%, even though commodity revenue rose. Margin compression is a risk to the stable-cash-flow thesis.",
+    "basis": "Stated in P2, F2, and P3.",
+    "claim": "Tariffs on certain imported steel, aluminum and derivative products, inflationary pressures, and higher-cost liquids production contributed to lease operating expenses rising 8% to $135,916 (table in thousands) and Adjusted EBITDA margin declining from 66% to 56% in the three months ended September 30, 2026.",
     "facts": [
-     "P3",
+     "P2",
      "F2",
-     "P2"
+     "P3"
     ],
     "quotes": [
-     "Adjusted EBITDA Margin(9) | 56% | 66%"
+     "Domestically, continued growth in U.S. LNG export capacity supported demand for natural gas, while tariffs on certain imported steel, aluminum and derivative products contributed to uncertainty regarding the cost of certain equipment and materials.",
+     "Specifically, the increase in LOE per Mcfe was primarily related to a greater exposure to liquids production."
     ],
     "support": "supported"
    },
    {
-    "basis": "The springing maturity is stated in the 8-K; the refinancing-risk framing is inferred.",
-    "claim": "The amended revolving credit facility can mature earlier than its stated date if the Nordic bonds remain outstanding. That ties facility availability to refinancing those bonds.",
+    "basis": "Stated in F1, F3, P1, and P3; cash flow burden inferred from the increase in nine-month retirement settlements from (17,805) to (38,612) (table in thousands).",
+    "claim": "Diversified carries 869,966 (table in thousands) of asset retirement obligations across 90,677 gross (69,156 net) productive wells, with cash settlements of asset retirement costs rising to (38,612) (table in thousands) in the nine months ended September 30, 2026 alongside a $70 million West Virginia plugging fund commitment.",
     "facts": [
-     "P6"
+     "F1",
+     "F2",
+     "F3",
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "The Nordic bonds mature on April 9, 2029; accordingly, if they remain outstanding, the facility would mature on January 8, 2029."
+     "Over the initial 20 year period of the agreement, we plan to invest $70 million, which is held and guaranteed by OneNexus, an insurance provider for asset retirement obligations, to ensure we have provided financial assurance so that all of our wells in the state are safely retired."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P3.",
+    "claim": "Reserve estimates are inherently subjective, while 55,654 gross (796 net) undeveloped acres expire in 2026 and 63,962 gross (2,813 net) expire in 2027, and Diversified is executing a 20 gross well operated development program in Oklahoma despite historically contributing limited capital to development.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Reserves engineering is and must be recognized as a subjective process of estimating volumes of economically recoverable oil and natural gas that cannot be measured in an exact manner.",
+     "We accordingly contribute limited capital to development activities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, F2, P2, and P3; leverage amplification inferred from the $895 million ABS note issuance alongside $55 million and $82 million equity contributions.",
+    "claim": "After contributing $55 million for a 40% equity interest in DP Eagle (which issued $895 million of ABS notes), Diversified recorded an equity affiliate loss of (37,267) (table in thousands) in the three months ended September 30, 2026, leaving an investment carrying value of 8,389 (table in thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "DP Eagle issued $895 million of ABS notes, together with the equity contributions from the Company and Carlyle, to fund an acquisition of producing properties in the Anadarko Basin in Oklahoma from Camino."
     ],
     "support": "supported"
    }
@@ -683,112 +1124,188 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in the cited items. The funding split is not given, so it is inferred as open.",
-    "claim": "Will the Birch acquisition (about $1.8 billion) close in the fourth quarter as planned, and how will the roughly $1.5 billion securitization and the revolver split the funding, given $506M of credit facility availability and unrestricted cash at quarter end?",
+    "basis": "Stated in P2 and P7 that the transaction was pending as of the latest filings in the packet.",
+    "claim": "Will the pending Birch acquisition close on schedule, and what are the final financing terms, closing adjustments, and Credit Facility draw beyond the $1.5 billion asset-backed securitization for the $1.8 billion purchase price?",
     "facts": [
      "P2",
-     "P3",
      "P7"
     ],
     "quotes": [
+     "The aggregate purchase price for the Transactions is approximately $1.8 billion (inclusive of repayment of indebtedness), subject to adjustments in the Transaction Agreements, and is expected to be funded by an asset-backed securitization of approximately $1.5 billion in advance of closing , along with customary financing sources including the available liquidity under the Company\u2019s revolving credit facility.",
      "The Transactions are expected to close simultaneously in the fourth quarter of 2026, subject to the satisfaction of customary closing conditions."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated figures. The post-deal ratio is not given, so it is inferred as open.",
-    "claim": "Reported leverage was 2.66x against a stated target of 2.0x to 2.5x. What will leverage be after the Birch deal closes with its ABS and revolver funding?",
+    "basis": "Inferred from comparing the Credit Agreement covenant threshold stated in P6 against the consolidated leverage ratio stated in P3 without the Credit Agreement's definitions.",
+    "claim": "Does the Company satisfy the Credit Agreement's pro forma Net Debt to EBITDAX and 20% borrowing-base liquidity thresholds for restricted payments given its 2.66x reported leverage ratio?",
     "facts": [
-     "P3"
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Leverage ratio(e): 2.66x as of September 30, 2026",
-     "Leverage Target | 2.0x to 2.5x"
+     "The Amendment provides for the modification of certain covenants, including allowing for restricted payments to the extent the pro forma trailing four quarter Net Debt to EBITDAX (in each case as defined in the Credit Agreement) ratio is less than 1.75 to 1.00 and liquidity is greater than 20% of the borrowing base then in effect and raising the cap on specified transaction-cost add-backs from 5% to 10% of EBITDAX for any four-quarter period.",
+     "Leverage ratio(e): 2.66x as of September 30, 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the balance sheet and MD&A. The settlement schedule is not in the packet.",
-    "claim": "How much of the derivative liabilities (current 285,517; noncurrent 573,278, tables in thousands) and the (348,341) quarterly fair-value loss will become cash settlements, and when, with about 80% of production hedged?",
+    "basis": "Stated in F1, F2, F3, and P2; the underlying financial statements or derivative/impairment components of DP Eagle are omitted because Note 2 is not in the packet.",
+    "claim": "What drove the (37,267) (table in thousands) loss from equity affiliate that reduced Investment in equity affiliate to 8,389 (table in thousands) after a $55 million cash contribution for a 40% stake in DP Eagle, even as distributions of 7,000 (table in thousands) were received?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "The Company contributed $55 million in cash for a 40% equity interest in DP Eagle, and Carlyle contributed $82 million in cash for a 60% equity interest.",
+     "Income (loss) from equity affiliate | (37,267) | 0 | (37,267) | 0",
+     "Investment in equity affiliate | 8,389 | 0",
+     "Distributions received from equity affiliate | 7,000 | 6,571 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and P2; detailed hedge book schedules and counterparty/collateral terms in Note 7 are not in the packet.",
+    "claim": "What are the contract structures, strike prices, maturities, and collateral terms behind the 80% hedged production and the 285,517 current and 573,278 noncurrent derivative liabilities (table in thousands) after $(378,369) (table in thousands) of quarterly derivative losses?",
     "facts": [
      "F1",
      "P2"
     ],
     "quotes": [
-     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
+     "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months.",
+     "Total gain (loss) on derivatives | $(378,369) | $111,048 | $(489,417) | (441)%",
+     "Derivatives | 285,517 | 155,959",
+     "Derivatives | 573,278 | 440,567"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred. The two leverage definitions cannot be compared from the evidence.",
-    "claim": "Can dividends and buybacks continue at the current pace under the amended facility's restricted-payment test (Net Debt to EBITDAX below 1.75 to 1.00, liquidity above 20% of the borrowing base), given the company's own leverage ratio of 2.66x?",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "allowing for restricted payments to the extent the pro forma trailing four quarter Net Debt to EBITDAX (in each case as defined in the Credit Agreement) ratio is less than 1.75 to 1.00 and liquidity is greater than 20% of the borrowing base then in effect",
-     "including $94 million in share repurchases and approximately $63 million from its fixed dividend"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred. The cause of the loss is not stated in the excerpts.",
-    "claim": "What drove the (37,267) loss from the DP Eagle equity affiliate, and is the guided ~$15 of income from equity affiliates (guidance table in millions) still attainable?",
-    "facts": [
-     "F2",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Income (loss) from equity affiliate | (37,267) | 0 | (37,267) | 0",
-     "Income from equity affiliates(2) (millions) | ~$15"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item. No refinancing plan appears in the evidence.",
-    "claim": "Will the 9.75% Nordic bonds be refinanced or repaid before the credit facility's springing maturity of January 8, 2029, which applies if they remain outstanding?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The Nordic bonds mature on April 9, 2029; accordingly, if they remain outstanding, the facility would mature on January 8, 2029."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the statements. The tax note is not in the packet.",
-    "claim": "Deferred tax assets rose to 441,141 from 287,135 (table in thousands) after a tax benefit of 145,134 on a pre-tax loss. How much of that asset depends on future income, and is any valuation allowance needed?",
+    "basis": "Stated in F1 and F2; Note 4 referenced in P2 is omitted from the packet.",
+    "claim": "What permanent differences, tax credits, or valuation allowance adjustments explain the 145,134 nine-month income tax benefit on a (260,408) pre-tax loss (table in thousands) and the rise in deferred tax assets from 287,135 to 441,141 (table in thousands)?",
     "facts": [
      "F1",
      "F2"
     ],
     "quotes": [
-     "Income tax benefit (expense) | 132,069 | 45,485 | 145,134 | 42,021"
+     "Income (loss) before taxation | (334,283) | 125,767 | (260,408) | 104,326",
+     "Income tax benefit (expense) | 132,069 | 45,485 | 145,134 | 42,021",
+     "Deferred tax assets | 441,141 | 287,135"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred. The notes are not in the packet.",
-    "claim": "What were the price, funding and reserves behind the Sheridan acquisition and the Camino-related assets that sit behind 481,916 of asset-acquisition consideration for nine months (table in thousands)?",
+    "basis": "Stated in F1, P3, and P6; Note 15 detailing individual debt facilities and maturities is omitted.",
+    "claim": "What are the tranche-level interest rates, amortization schedules, and refinancing plans for the 2,997,872 noncurrent and 104,716 current net long-term debt (table in thousands), including the 9.75% Nordic bonds whose maturity can accelerate Credit Agreement maturity?",
     "facts": [
-     "P2",
-     "F3"
+     "F1",
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Canvas and Sheridan acquisitions in the fourth quarter of 2025 and second quarter of 2026, respectively"
+     "Long-term debt, net | 2,997,872 | 2,715,461",
+     "Current portion of long-term debt, net | 104,716 | 236,553",
+     "The Nordic bonds mature on April 9, 2029; accordingly, if they remain outstanding, the facility would mature on January 8, 2029.",
+     "Consolidated debt consisted of ~72% in deleveraging non-recourse ABS and amortizing notes at quarter end."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated figures. Any implied fourth-quarter outcome is not computed here.",
-    "claim": "Does the reiterated guidance, which excludes Birch, imply a slower fourth quarter, and what will combined-company guidance be after closing, given nine-month adjusted EBITDA of 782,473 and adjusted free cash flow of 426,884 (tables in thousands) against guidance of $960 to $1,010 and ~$440 (table in millions)?",
+    "basis": "Stated in F1; the notes explaining related-party balances are omitted from the packet.",
+    "claim": "What transactions or balances with affiliates account for the increase in related-party other current liabilities from 7,364 to 73,608 (table in thousands)?",
     "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Other current liabilities | 73,608 | 7,364"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, F3, and P1; Note 10 and restricted cash breakdowns are omitted from the packet.",
+    "claim": "What discount rate, inflation, and timing assumptions underlie the 869,966 asset retirement obligations (table in thousands) and (38,612) nine-month settlement of asset retirement costs (table in thousands), and how much of the 72,405 restricted cash (table in thousands) backs plugging assurances?",
+    "facts": [
+     "F1",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Asset retirement obligations | 869,966 | 863,841",
+     "Settlement of asset retirement costs | (38,612) | (17,805)",
+     "Restricted cash | 72,405 | 103,673 | 72,405 | 103,673",
+     "Over the initial 20 year period of the agreement, we plan to invest $70 million, which is held and guaranteed by OneNexus, an insurance provider for asset retirement obligations, to ensure we have provided financial assurance so that all of our wells in the state are safely retired."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, P2, and the packet header listing risk_factors, mdna, and quarterly_risk_factors as not found.",
+    "claim": "What material legal, environmental, or contractual contingencies exist under commitments and contingent liabilities, and what risk factors and historical annual management discussion were omitted from this packet?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Commitments and contingent liabilities (Note 13)",
+     "Refer to the Company\u2019s \u201cRisk Factors\u201d previously disclosed in Part I, Item 1A of our Annual Report on Form 10-K for the year ended December 31, 2025, as updated by our Quarterly Report on Form 10-Q for the quarter ended June 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4; participant election rates and estimated dollar obligations are not disclosed in the Form 8-K body.",
+    "claim": "What is the expected employer matching expense and balance sheet liability under the unfunded deferred compensation plan providing a 100% match up to 7% of eligible excess compensation?",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The Company will make fully vested matching contributions equal to 100% of a participant\u2019s deferrals of base salary and short-term incentive plan awards, up to 7% of such compensation in excess of the Code Section 401(a)(17) compensation limit; no match is provided on other deferrals."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1, P2, and P3; proved reserves are only updated annually in the Form 10-K.",
+    "claim": "How have total proved reserves and Standardized Measure changed from 6,082,483 MMcfe and $4.2 billion following the $170 million Camino undeveloped acreage acquisition, $149 million in year-to-date acreage sales, and the 20 gross well Oklahoma development program?",
+    "facts": [
+     "P1",
+     "P2",
      "P3"
     ],
     "quotes": [
-     "The Birch acquisition is not included in the guidance figures below and remains on track to close during the fourth quarter 2026."
+     "As of December 31, 2025, our estimated proved reserves totaled 6,082,483 MMcfe, an increase of 68% from the prior year-end, with a Standardized Measure of $4.2 billion.",
+     "In connection with the formation of DP Eagle, the Company acquired undeveloped acreage from Camino for approximately $170 million.",
+     "Value generated from year-to-date acreage sales has reached approximately $149 million.",
+     "The Diversified team has now completed drilling of the first four wells in its 20 gross well Oklahoma development program, with completion activities underway."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3, P2, and P3; Note 2 and transaction-level proceeds breakdowns are omitted from the packet.",
+    "claim": "Why does Adjusted Free Cash Flow include 149,208 in divestiture proceeds out of 283,528 total cash flow proceeds from divestitures alongside (481,916) in asset acquisitions (table in thousands), and what were the standalone terms of the Sheridan acquisition and Barnett sale?",
+    "facts": [
+     "F3",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Consideration for asset acquisitions, net of cash acquired | (481,916) | (49,989)",
+     "Proceeds from divestitures | 283,528 | 149,487",
+     "ADD: Proceeds from divestitures | 149,208 | 143,631",
+     "The increase in production volumes for the three months ended September 30, 2026 compared to the three months ended September 30, 2025 was primarily related to the Canvas and Sheridan acquisitions in the fourth quarter of 2025 and second quarter of 2026, respectively, as well as our continued non-operated development investment."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in S0 and F1; Note 11 and post-November 4, 2026 share counts are not in the packet.",
+    "claim": "Why does the screener's marketCap of 895746599 at a price of 13.08 differ from the implied value of 70,719,000 issued and outstanding shares, and how many shares were repurchased or held by the Employee Benefit Trust after quarter-end?",
+    "facts": [
+     "S0",
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "marketCap: 895746599",
+     "price: 13.08",
+     "Common stock ($0.01 par value; 350,000,000 authorized; 70,719,000 and 76,979,625 shares issued and outstanding) | 707 | 769"
     ],
     "support": "supported"
    }
@@ -798,5 +1315,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no usable tax rate in the filings"
+ "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
 }
