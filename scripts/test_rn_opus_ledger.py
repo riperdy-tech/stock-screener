@@ -145,10 +145,15 @@ def _read(complete, rows):
     return {"fill_complete": complete, "tickers": rows}
 
 
-def test_before_the_fill_is_complete_the_books_follow_claudes_valuation_alone():
+def test_without_a_read_file_the_books_follow_claudes_valuation_alone():
     o = overlay()["tickers"]
-    read = _read(False, {"TESTD": {"analysis": "complete", "verdict": "BUY", "model": "m"}})
-    assert tp.ai_verdicts(o, read) is o and tp.ai_verdicts(o, {}) is o and tp.ai_verdicts(o, None) is o
+    assert tp.ai_verdicts(o, None) is o and tp.ai_verdicts(o, {}) == o
+
+
+def test_a_new_list_name_not_yet_read_does_not_swing_the_books_back():
+    o = overlay()["tickers"]                              # fill_complete false: a name entered the list today
+    v = tp.ai_verdicts(o, _read(False, {"TESTD": {"analysis": "complete", "verdict": "BUY", "model": "m"}}))
+    assert v["TESTD"]["verdict"] == "BUY" and v["TESTA"] is o["TESTA"]
 
 
 def test_after_the_fill_the_reads_verdict_replaces_claudes_and_a_no_call_or_a_refusal_does_not():

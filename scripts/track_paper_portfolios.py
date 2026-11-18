@@ -179,13 +179,14 @@ AI_DIRECTION = {"BUY": "undervalued", "WATCH": "hold", "AVOID": "overvalued"}
 def ai_verdicts(opus_tk: dict, read: dict) -> dict:
     """The verdict rows the Claude books (rn_opus, rn_opus_watch) follow.
 
-    Until the filings read has covered the list (its file says `fill_complete`), Claude's valuation rows exactly as
-    they are. From then on (operator 2026-11-16: "have the claude paper book track gemini's after the full run
-    completes"), per name: the read's verdict when the read ran and gives BUY, WATCH or AVOID, else Claude's row.
+    Per name: the read's verdict when the read ran and gives BUY, WATCH or AVOID, else Claude's row (operator
+    2026-11-16: "have the claude paper book track gemini's after the full run completes"; the full run completed
+    2026-11-18 08:15 KST). The file's `fill_complete` is not consulted: it turns false each time a new name enters
+    the list until that name is read, and the books would then swing back to Claude's rows for a day.
     It is the site's rule for the AI filter (lib/desk/aiVerdict.ts): a read that did not run or ended in no call
     never replaces a verdict Claude's valuation has. Paper only.
     """
-    if not isinstance(read, dict) or read.get("fill_complete") is not True:
+    if not isinstance(read, dict):
         return opus_tk
     out = dict(opus_tk)
     for t, r in (read.get("tickers") or {}).items():
