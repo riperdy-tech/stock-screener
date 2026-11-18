@@ -1,10 +1,10 @@
 {
- "count": 175,
+ "count": 176,
  "effort": "high",
- "fill_complete": true,
- "generated_at": "2026-11-18T20:09:51Z",
- "list_covered": 160,
- "list_names": 160,
+ "fill_complete": false,
+ "generated_at": "2026-11-18T23:49:47Z",
+ "list_covered": 158,
+ "list_names": 159,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -323,6 +323,54 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "APLE": {
+   "alpha_pts": 1.900122389507479,
+   "analysis": "complete",
+   "claims": 88,
+   "claims_supported": 83,
+   "date": "2026-11-18T23:34:38Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v2 2026-11-19 WO_NC9a"
+   },
+   "equity_value": 4855298008.04671,
+   "family": "real_estate",
+   "far_from_price": false,
+   "filed_shares": 237789000.0,
+   "flags": [
+    "During the third quarter and nine months ended September 30, 2026, the Company recognized impairment of depreciable real estate of 4,317 and 6,636, respectively (table in thousands), including an impairment loss on one of four hotels classified as held for sale.",
+    "For 2025, the Company recorded impairment of depreciable real estate of approximately $5.7 million from impairment losses at two hotel properties identified in the third quarter of 2025.",
+    "During the third quarter of 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million, classifying the properties as assets held for sale at 38,121 (table in thousands) with closing expected in the fourth quarter of 2026."
+   ],
+   "in_code_book": false,
+   "ke": 0.08883203083918918,
+   "market_cap_at_publish": 4580390839,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "pending_offer": null,
+   "price_at_publish": 19.4,
+   "qwen_book": null,
+   "screener_commit": "715f77db58067c61fe551c9ad36633555af55470",
+   "seed_base": {
+    "1000": 20.286078937327908,
+    "3000": 20.550948915488757
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 0.06001827763386425,
+   "value_base": 20.41851392640833,
+   "value_bear": 15.172523210278328,
+   "value_bull": 25.724354016671953,
+   "value_per_filed_share": {
+    "base": 20.41851392640833,
+    "bear": 15.172523210278328,
+    "bull": 25.724354016671953
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +1.9 points a year against the required return over 3 years (BUY needs 4 or more)"
   },
   "ARLP": {
    "alpha_pts": 17.685937919601578,
@@ -6932,12 +6980,12 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +27.3 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 101,
+ "valued_count": 102,
  "verdict_counts": {
   "AVOID": 41,
   "BUY": 37,
   "NO_CALL": 81,
-  "WATCH": 16
+  "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }

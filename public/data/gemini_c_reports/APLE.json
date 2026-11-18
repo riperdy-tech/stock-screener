@@ -1,0 +1,1889 @@
+{
+ "alpha_pts": 1.900122389507479,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 88,
+ "claims_supported": 83,
+ "date": "2026-11-18T23:34:38Z",
+ "decided": {
+  "flags": [
+   "run 1000: return_above_base_year: long-run 0.0620 against the base year's 0.0538",
+   "run 1000: working_capital_unclassified_balance_sheet",
+   "run 1000: quotes_verified: 23 of 23",
+   "run 1000: ffo_derived_vs_reported: +0.8%",
+   "run 1000: ffo_derived_preferred_dividends_taken_as_0",
+   "run 3000: return_above_base_year: long-run 0.0620 against the base year's 0.0538",
+   "run 3000: working_capital_unclassified_balance_sheet",
+   "run 3000: quotes_verified: 21 of 22",
+   "run 3000: ffo_derived_vs_reported: +0.8%",
+   "run 3000: ffo_derived_preferred_dividends_taken_as_0"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0485 and margin 0.1918, margin 0.1825 (persist), growth 0.0375, terminal RONIC 0.0770 (equity return r 0.0888), F 10",
+  "run_gap": 0.012972049734642003,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 8515000.0,
+     "excess_cash_before": 8515000.0,
+     "k0_after": 81827163.81726909,
+     "k0_before": 81827163.81726909,
+     "k0_interest": 79758000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 175019718.9269036,
+     "x0_before": 175019718.9269036
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.09164289285747979,
+     "equity_value": 4467000325.998289,
+     "seam_ratio": 0.9987994511037342,
+     "tv_share": 0.4508272344256193,
+     "wedge_rate_5": -0.0710886934272045
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0620 against the base year's 0.0538",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 23 of 23",
+     "ffo_derived_vs_reported: +0.8%",
+     "ffo_derived_preferred_dividends_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.055,
+     "fade_years": 7,
+     "long_run_op_margin": 0.175,
+     "op_margin": [
+      0.182,
+      0.18,
+      0.18,
+      0.179,
+      0.178
+     ],
+     "return_on_new_investment_long_run": 0.062,
+     "rev_growth": [
+      0.049,
+      0.018,
+      0.04,
+      0.042,
+      0.033
+     ],
+     "terminal_growth": 0.028
+    },
+    "old_defaults_inputs": "year 1 growth 0.0485 and margin 0.1918, margin 0.1825 (persist), growth 0.0375, terminal RONIC 0.0770 (equity return r 0.0888), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 83
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.145,
+      0.195
+     ],
+     "rev_growth_y3": [
+      0.005,
+      0.065
+     ],
+     "terminal_growth": [
+      0.018,
+      0.035
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "derived_after_preferred": 360599000.0,
+      "derived_before_preferred": 360599000.0,
+      "gap_after_preferred": 0.008496452353584427,
+      "gap_before_preferred": 0.008496452353584427,
+      "not_filed": [
+       "preferred_dividends"
+      ],
+      "per_share_divisor": null,
+      "reported": {
+       "per": "total",
+       "printed": 357561,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Funds from operations | 357,561 | 384,930 | 363,318"
+        },
+        {
+         "id": "P3",
+         "quote": "The following table reconciles the Company\u2019s GAAP net income to FFO and MFFO for the years ended December 31, 2025, 2024 and 2023 (in thousands)."
+        }
+       ],
+       "scale": "thousands",
+       "value": 357561000.0,
+       "what": "Funds from operations (FFO), applicable only to common shareholders (no preferred stock issued)"
+      },
+      "status": "compared"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | 0.0547 | 0.1332"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital improvements | (66,706) | (58,809)"
+       },
+       {
+        "id": "P5",
+        "quote": "Capital expenditures | $85 Million | $95 Million"
+       },
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, the Company has capitalized $16.9 million related to the construction of the AC Hotel and Residence Inn."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "The filings do not state a separate recurring upkeep figure or fixed FF&E reserve policy apart from total capital improvements and 2026 capital expenditure guidance ($85-$95 million, which includes $16.9 million capitalized through September 30, 2026 on the Las Vegas development). Excluding the 2021 COVID trough and new Las Vegas construction, pre-development capital improvements in 2022-2024 averaged 5.3% of revenue (5.47% in 2024), so recurring hotel renovation and upkeep spending is estimated at 5.5% of revenue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The Company cannot predict the pace or duration of an economic recession or cycle, government shutdowns, or the cycles of the lodging industry."
+       },
+       {
+        "id": "P4",
+        "quote": "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 7-year fade allows the Las Vegas development (opening Q3 2028) and Anchorage acquisition (opening Q4 2027) to stabilize and captures a typical multi-year U.S. lodging cycle before reaching long-run steady-state economics."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The performance of the lodging industry has historically been highly cyclical and closely linked to the performance of the general economy both nationally and within local markets in the U.S."
+       },
+       {
+        "id": "P3",
+        "quote": "The Company continues to feel upward pressure on total payroll costs given a competitive labor market where the demand for strong hotel talent remains high."
+       },
+       {
+        "id": "REC",
+        "quote": "2019-12-31 | $1,266.6 million | -0.0031 | 0.1846"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Long-run property operating margin fades to 17.5% (excluding property sale gains), slightly below the 2019 and 2023-2025 ex-gain range (~17.3%-19.1%), to reflect full-cycle lodging downturns, ongoing hospitality wage and fixed-cost inflation, and third-party manager fees."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,412.4 million | -0.0133 | 0.1825"
+       },
+       {
+        "id": "P3",
+        "quote": "Gain on sale of real estate | 13,116 | 19,744 | -33.6% | - | n/a"
+       },
+       {
+        "id": "P5",
+        "quote": "Operating margin % (Actual) | 20.6% | 19.4% | 120 bps | 19.2% | 19.2% | 0 bps"
+       },
+       {
+        "id": "P5",
+        "quote": "Net income | $177 Million | $192 Million"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Setting Year 1 (2026) at 18.2% matches 9M 2026 performance (19.2% operating margin with negligible property sale gains) combined with seasonally softer Q4 implied by full-year Net income guidance of $177-$192 million. Years 2-5 exclude property sale gains (which boosted 2024-2025 margins by ~0.9%-1.4%) and settle gradually from 18.0% to 17.8% as RevPAR normalizes and labor, property tax, and insurance pressures offset portfolio upgrades."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0538; tax rate 0.0054; total debt $1,538.6 million; cash counted as excess $8.5 million; net debt (debt less that cash) $1,530.1 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0770."
+       },
+       {
+        "id": "P2",
+        "quote": "The Company competes with other investors who are engaged in the acquisition of hotels, and these competitors may affect the supply and demand dynamics and, accordingly, increase the price the Company must pay for hotels it seeks to acquire, or these competitors may succeed in acquiring those hotels."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Base-year GAAP after-tax return on tangible capital is 5.38% against a 7.70% leveraged value-creation hurdle; selective recycling out of impaired/lower-tier hotels into newer upscale rooms-focused properties supports a modest lift to 6.2%, constrained by competitive hotel acquisition pricing and high GAAP depreciation relative to upkeep."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Comparable Hotels RevPAR Change | 5.1% | 6.1%"
+       },
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, the Company owned 216 hotels with an aggregate of 29,459 guest rooms located in urban, high-end suburban and developing markets throughout 37 states and the District of Columbia, including four hotels with 387 guest rooms classified as held for sale, which are expected to be sold in the fourth quarter of 2026."
+       },
+       {
+        "id": "P4",
+        "quote": "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028."
+       },
+       {
+        "id": "P4",
+        "quote": "The hotel is under development as a 160-guest-room AC Hotel and is currently planned to be completed and opened for business in the fourth quarter of 2027."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 (2026) reflects 9M actual revenue growth of 4.9% and updated FY 2026 Comparable Hotels RevPAR guidance of 5.1%-6.1%, yielding ~4.9% total growth. Year 2 (2027) slows to 1.8% because four held-for-sale hotels ($50.3 million) and an October 2026 sale contract ($21.5 million) exit the portfolio in Q4 2026 before the Anchorage AC Hotel opens in Q4 2027; Years 3-5 lift to 4.0%-4.2% as Anchorage and the $143.7 million Las Vegas development (Q3 2028) come online, before moderating to 3.3%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0888; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "The Company has no foreign operations or assets, and its operating structure includes only one reportable segment."
+       },
+       {
+        "id": "P2",
+        "quote": "An increase in the number of competitive hotels, vacation ownership resorts and alternative lodging accommodations in a particular area could have a material adverse effect on the occupancy, ADR and RevPAR of the Company\u2019s hotels in that area and lower the Company\u2019s revenue and profitability."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "As a mature, U.S.-only lodging REIT that distributes substantially all taxable income and faces local hotel and short-term rental supply competition, long-run nominal revenue growth is set at 2.8%, roughly in line with inflation plus modest real ADR/portfolio growth and below the 3.75% overall economy anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.115,
+      "input_hit": "long_run_op_margin",
+      "risk": "Cyclical macroeconomic downturn reducing business, leisure, and government travel demand while relatively fixed property taxes, insurance, ground leases, and labor costs fail to scale down"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Local hotel overbuilding, short-term rental competition, or adverse changes in Marriott/Hilton franchise terms and loyalty channels eroding long-term RevPAR growth"
+     },
+     {
+      "bear_value": 0.075,
+      "input_hit": "capex_to_revenue",
+      "risk": "Aging hotel portfolio and franchisor brand-standard mandates combined with construction, labor, and tariff inflation increasing recurring renovation requirements"
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Cost overruns or delays on the $143.7 million Las Vegas development and $65.5 million Anchorage purchase, or competitive acquisition pricing, depressing incremental capital returns"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.145,
+      "rev_growth": [
+       0.013999999999999999,
+       -0.017000000000000005,
+       0.0049999999999999975,
+       0.006999999999999999,
+       -0.0020000000000000018
+      ],
+      "terminal_growth": 0.018
+     },
+     "bull": {
+      "long_run_op_margin": 0.195,
+      "rev_growth": [
+       0.07400000000000001,
+       0.043,
+       0.065,
+       0.067,
+       0.058
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Base-year total debt of $1,538.6 million is closely in line with September 30, 2026 net carrying debt of $1,479.1 million ($1,490.3 million gross) and management's stated policy of maintaining low leverage (27.5% net debt to total capitalization as of September 30, 2026)."
+     },
+     "margin_position": "Operating margin in 2025 was 18.25% as filed, reflecting a modest demand dip from weather and reduced government travel offset by lower executive incentive accruals and $13.1 million of property sale gains ($5.7 million of impairments); excluding property sale gains, property-level operating margin has held near 17.3%-19.1% across 2023-2026.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 0.54% effective tax rate in 2025 (and 0.49% in 9M 2026) reflects Apple Hospitality's structural election to be taxed as a REIT with taxable REIT subsidiaries and is sustainable as long as REIT compliance is maintained."
+     },
+     "why": "Excluding $13.1 million of property sale gains and $5.7 million of impairments, 2025 operating margin was ~17.7% (~17.3% ex-gains only), closely aligned with the 2021-2025 median of 18.25% and pre-pandemic 2019 margin of 18.46%. Although 2025 Comparable Hotels RevPAR dipped 1.6% on weather and government-travel headwinds and rebounded 5.1% in 9M 2026, corporate G&A in 2025 was unusually low at 2.3% of revenue versus 3.1% in 9M 2026, leaving overall 2025 property earning power broadly representative of mid-cycle performance."
+    },
+    "value_at_old_defaults": 15.046948191623306,
+    "values": {
+     "base": 20.286078937327908,
+     "bear": 14.755178571164308,
+     "bull": 25.336186713830568
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 8515000.0,
+     "excess_cash_before": 8515000.0,
+     "k0_after": 81827163.81726909,
+     "k0_before": 81827163.81726909,
+     "k0_interest": 79758000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 175019718.9269036,
+     "x0_before": 175019718.9269036
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.09364289285747976,
+     "equity_value": 4525427906.757433,
+     "seam_ratio": 1.0087320521014884,
+     "tv_share": 0.3626625705074579,
+     "wedge_rate_5": -0.06495241921115774
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0620 against the base year's 0.0538",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 21 of 22",
+     "ffo_derived_vs_reported: +0.8%",
+     "ffo_derived_preferred_dividends_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.053,
+     "fade_years": 10,
+     "long_run_op_margin": 0.175,
+     "op_margin": [
+      0.188,
+      0.185,
+      0.183,
+      0.18,
+      0.178
+     ],
+     "return_on_new_investment_long_run": 0.062,
+     "rev_growth": [
+      0.048,
+      0.022,
+      0.042,
+      0.036,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.0485 and margin 0.1918, margin 0.1825 (persist), growth 0.0375, terminal RONIC 0.0770 (equity return r 0.0888), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 83
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.145,
+      0.2
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.065
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "derived_after_preferred": 360599000.0,
+      "derived_before_preferred": 360599000.0,
+      "gap_after_preferred": 0.008496452353584427,
+      "gap_before_preferred": 0.008496452353584427,
+      "not_filed": [
+       "preferred_dividends"
+      ],
+      "per_share_divisor": null,
+      "reported": {
+       "per": "total",
+       "printed": 357561,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "Funds from operations | 357,561 | 384,930 | 363,318"
+        },
+        {
+         "id": "P3",
+         "quote": "The following table reconciles the Company\u2019s GAAP net income to FFO and MFFO for the years ended December 31, 2025, 2024 and 2023 (in thousands)."
+        },
+        {
+         "id": "F1",
+         "quote": "Preferred stock, authorized 30,000,000 shares; none issued and outstanding | 0 | 0"
+        }
+       ],
+       "scale": "thousands",
+       "value": 357561000.0,
+       "what": "Funds from operations, applicable only to common shareholders (no preferred stock issued)"
+      },
+      "status": "compared"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital improvements | (66,706) | (58,809)"
+       },
+       {
+        "id": "P5",
+        "quote": "Capital expenditures | $85 Million | $95 Million"
+       },
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, the Company has capitalized $16.9 million related to the construction of the AC Hotel and Residence Inn."
+       },
+       {
+        "id": "P2",
+        "quote": "The Company has ongoing needs for hotel renovations and capital improvements, including maintenance requirements and updates to brand standards under all of its hotel franchise and management agreements and certain loan agreements."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0505; depreciation (without amortization of acquired intangibles) / revenue 0.1466."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "The filings do not separate recurring hotel upkeep from new development inside cash flow Capital improvements ($66.7 million in 9M 2026) or 2026 Capital expenditures guidance ($85-$95 million, ~6.1% of revenue), though $16.9 million has been capitalized to date on the new Las Vegas development. Stripping out new development spending yields ~5.3% of revenue for recurring brand-mandated FF&E renewals and property upkeep, consistent with the 2022-2024 pre-development average and the 5.05% 5-year pooled ratio."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028."
+       },
+       {
+        "id": "P1",
+        "quote": "Substantially all of the Company\u2019s hotels operate under Marriott or Hilton brands"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Hotel properties are long-lived physical assets operated under multi-year Marriott and Hilton franchise agreements, and APLE's current development pipeline runs into 2028, so a 10-year fade appropriately bridges Year 5 (2030) to steady-state terminal economics."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The performance of the lodging industry has historically been highly cyclical and closely linked to the performance of the general economy both nationally and within local markets in the U.S."
+       },
+       {
+        "id": "P3",
+        "quote": "Impairment of depreciable real estate | 5,724 | 3,055 | 87.4% | 5,644 | -45.9%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Across the full hospitality cycle, APLE's pre-COVID (2016-2019) operating margins averaged ~18.8% and its 8-year median is ~18.3%, while periodic downturns (such as 2020's -16.95%) pull the through-cycle average lower. Excluding property sale gains, a long-run operating margin of 17.5% reflects normalized lodging profitability across cycles, with wide bounds [14.5%, 20.0%] for cyclicality and supply/cost pressure."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 82,198 | 72,497 | 218,365 | 208,207"
+       },
+       {
+        "id": "P5",
+        "quote": "Adjusted EBITDAre (2) | $482 Million | $493 Million"
+       },
+       {
+        "id": "P3",
+        "quote": "Gain on sale of real estate | 13,116 | 19,744 | -33.6% | - | n/a"
+       },
+       {
+        "id": "P2",
+        "quote": "In addition, many of the expenses associated with the Company\u2019s business, including certain personnel costs, interest expense, ground leases, property taxes, insurance and utilities, are relatively fixed."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Excluding real estate sale gains and impairments, 9M 2026 core operating margin was 19.8% ($218,365 thousand operating income less $112 thousand gain plus $6,636 thousand impairment on $1,138,626 thousand revenue), pointing to ~18.8% for full-year 2026 after seasonally softer Q4 and consistent with $482-$493 million Adjusted EBITDAre guidance less ~$198 million D&A. Margins then step down gradually from 18.5% to 17.8% over Years 2-5 as RevPAR growth normalizes and fixed/inflationary hotel operating expenses (labor, property taxes, insurance, utilities) weigh on operating leverage."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0538; tax rate 0.0054; total debt $1,538.6 million; cash counted as excess $8.5 million; net debt (debt less that cash) $1,530.1 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0770."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "On the filed GAAP tangible capital basis, APLE earned 5.38% in 2025 (with a 0.54% REIT tax rate) against a 7.70% cost-of-capital breakeven. Selective recycling and new rooms-focused builds should earn a modestly higher ~6.2% GAAP return on tangible capital than 2025's disrupted base, yet remain below 7.70% because real estate depreciation depresses GAAP EBIT relative to cash FFO."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | $ 398,332 | $ 373,878 | $ 1,138,626 | $ 1,085,950"
+       },
+       {
+        "id": "P5",
+        "quote": "Comparable Hotels RevPAR Change | 5.1% | 6.1%"
+       },
+       {
+        "id": "P4",
+        "quote": "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028."
+       },
+       {
+        "id": "P4",
+        "quote": "In addition, during the three months ended September 30, 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "Nine-month 2026 revenue grew 4.9% to $1,138.6 million and full-year Comparable Hotels RevPAR guidance was raised to 5.1%-6.1%, pointing to ~4.8% revenue growth in Year 1 after accounting for dispositions. Year 2 slows to 2.2% as 2026 hotel sales (four held for sale at $50.3 million plus one $21.5 million contract) trim room count before the Anchorage AC Hotel (Q4 2027) and Las Vegas dual-brand development (Q3 2028) lift growth in Years 3-4 toward a 3.0% pace in Year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "In 2026, the Company expects RevPAR to be similar for its Comparable Hotels as compared to 2025, which is consistent with broader expectations for applicable industry chain scale averages, and assuming the current macroeconomic environment continues."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0888; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Select-service U.S. hotel portfolios grow long-run nominal revenue roughly in line with inflation and modest room-rate growth (2.5%), below the 3.75% nominal GDP anchor because REIT distribution requirements limit retained reinvestment and local supply additions cap pricing power."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_op_margin",
+      "risk": "A U.S. recession, corporate/government travel pullback, or local hotel oversupply reduces occupancy and ADR while fixed property taxes, insurance, utilities, and labor costs remain sticky, compressing margins."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "capex_to_revenue",
+      "risk": "Higher construction inflation, tariffs, and stricter Marriott/Hilton brand renovation mandates raise ongoing FF&E and property upkeep spending above historical averages."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Growth of alternative short-term rentals and higher-fee third-party booking intermediaries structurally erodes long-run hotel pricing power and net revenue growth."
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Rising acquisition prices, development cost overruns (such as the $143.7M Las Vegas project), and replacement of expiring interest rate swaps at higher rates depress incremental returns on new capital."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.145,
+      "rev_growth": [
+       0.020999999999999998,
+       -0.0050000000000000044,
+       0.015,
+       0.008999999999999994,
+       0.0029999999999999957
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.2,
+      "rev_growth": [
+       0.07100000000000001,
+       0.045,
+       0.065,
+       0.059,
+       0.053
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Management explicitly targets low financial leverage (\"maintaining low leverage providing the Company with financial flexibility.\"), and total debt of $1,538.6 million at year-end 2025 (and $1,490.3 million at September 30, 2026, or 27.5% net debt to total capitalization) reflects its ongoing capital structure."
+     },
+     "margin_position": "Base-year 2025 GAAP operating margin of 18.25% sits right at the 5-year median (18.25%) and near the 8-year median (18.34%), though 2025 included a $13.1 million gain on real estate sales and $5.7 million in impairment, leaving core property operating margin around 17.7%; in 2026, strong business and leisure travel demand pushed 9M 2026 operating margin up to 19.2% GAAP (~19.8% excluding gains and impairments).",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "APLE has elected to be taxed as a REIT (\"The Company has elected to be treated as a REIT for U.S. federal income tax purposes.\"), so minimal corporate income taxes apply mainly to its taxable REIT subsidiaries, consistent with the 0.54% base-year tax rate."
+     },
+     "why": "Base-year 2025 revenue of $1,412.4 million was 1.3% below 2024 as weather disruptions, reduced government travel, and a prolonged government shutdown weighed modestly on occupancy, while GAAP operating margin of 0.1825 matched the 5-year median. Because 2025 GAAP operating income included $13,116 thousand in gains on real estate sales and $5,724 thousand of real estate impairment, underlying property earnings were slightly lower at roughly 17.7% of revenue, making 2025 broadly representative of mid-cycle operations rather than a pandemic trough or boom peak."
+    },
+    "value_at_old_defaults": 15.046948191623306,
+    "values": {
+     "base": 20.550948915488757,
+     "bear": 15.589867849392347,
+     "bull": 26.11252131951334
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 15.046948191623306,
+  "value_at_old_defaults_quoted": 15.046948191623306,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4855298008.04671,
+ "family": "real_estate",
+ "far_from_price": false,
+ "filed_shares": 237789000.0,
+ "flags": [
+  "During the third quarter and nine months ended September 30, 2026, the Company recognized impairment of depreciable real estate of 4,317 and 6,636, respectively (table in thousands), including an impairment loss on one of four hotels classified as held for sale.",
+  "For 2025, the Company recorded impairment of depreciable real estate of approximately $5.7 million from impairment losses at two hotel properties identified in the third quarter of 2025.",
+  "During the third quarter of 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million, classifying the properties as assets held for sale at 38,121 (table in thousands) with closing expected in the fourth quarter of 2026."
+ ],
+ "in_code_book": false,
+ "ke": 0.08883203083918918,
+ "market_cap_at_publish": 4580390839,
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 19.4,
+ "qwen_book": null,
+ "screener_commit": "715f77db58067c61fe551c9ad36633555af55470",
+ "seed_base": {
+  "1000": 20.286078937327908,
+  "3000": 20.550948915488757
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated directly in P1 (10-K Item 1 Business) and P4 (10-Q Overview).",
+    "claim": "Apple Hospitality REIT, Inc. is a self-advised U.S. REIT that generates income by owning hotels in the lodging sector, holding 216 hotels with 29,459 guest rooms across 37 states and the District of Columbia.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The Company, formed in November 2007 as a Virginia corporation, is a self-advised REIT that invests in income-producing real estate, primarily in the lodging sector, in the U.S.",
+     "As of September 30, 2026, the Company owned 216 hotels with an aggregate of 29,459 guest rooms located in urban, high-end suburban and developing markets throughout 37 states and the District of Columbia, including four hotels with 387 guest rooms classified as held for sale, which are expected to be sold in the fourth quarter of 2026."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated directly in P2 (10-K Risk Factors) and P4 (10-Q Overview).",
+    "claim": "Because REIT rules prohibit direct hotel operation, its taxable REIT subsidiaries operate hotels under brand franchise agreements while 15 unaffiliated third-party management companies manage the properties.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "To maintain its status as a REIT, the Company is not permitted to operate any of its hotels.",
+     "The Company\u2019s wholly-owned taxable REIT subsidiaries (\u201cTRSs\u201d) (or subsidiaries thereof) operate substantially all of its hotels pursuant to franchise or license agreements with nationally recognized hotel brands.",
+     "As of September 30, 2026, the hotels were operated and managed under separate management agreements with 15 hotel management companies, none of which are affiliated with the Company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F2 (10-Q Consolidated Statements of Operations) and P3 (10-K MD&A).",
+    "claim": "The company sells guest room stays along with food and beverage and other hotel services, generating total revenue of $ 1,138,626 (table in thousands) from $ 1,031,858 in room revenue, 51,467 in food and beverage, and 55,301 in other revenue.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "The Company\u2019s principal source of revenue is hotel revenue consisting of room, food and beverage, and other related revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 (10-K Risk Factors) and P3 (10-K MD&A).",
+    "claim": "Its hotels serve business, leisure, and government travelers, selling a majority of rooms through hotel franchisors' distribution channels and the remainder through third-party internet and travel intermediaries.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The lodging industry is also sensitive to government, business and personal discretionary spending levels.",
+     "Although a majority of rooms sold are sold through the hotel franchisors\u2019 distribution channels, many are sold through other channels or intermediaries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1 (10-K Item 1 Business).",
+    "claim": "The company has no foreign operations or assets and manages its business as a single reportable segment.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company has no foreign operations or assets, and its operating structure includes only one reportable segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1 (10-K Item 1 Business), P3 (10-K MD&A), and P5 (8-K Q3 2026 earnings release).",
+    "claim": "Hotel revenue performance is driven by occupancy, average daily rate (ADR), and revenue per available room (RevPAR), with Comparable Hotels RevPAR rising 5.1% to $128.24.",
+    "facts": [
+     "P1",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Average Daily Rate (\u201cADR\u201d) is calculated as room revenue divided by the number of rooms sold, and revenue per available room (\u201cRevPAR\u201d) is calculated as occupancy multiplied by ADR.",
+     "In evaluating financial condition and operating performance, the most important indicators on which the Company focuses are revenue measurements, such as average occupancy, ADR and RevPAR, and expenses, such as hotel operating expenses, general and administrative expenses and other expenses described below."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 (10-K Risk Factors), P3 (10-K MD&A), and P5 (8-K Q3 2026 earnings release).",
+    "claim": "Lodging revenue moves with cyclical economic conditions, business and leisure travel, government spending and shutdowns, weather disruptions, local hotel and short-term rental supply, and Marriott or Hilton brand strength.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "The performance of the lodging industry has historically been highly cyclical and closely linked to the performance of the general economy both nationally and within local markets in the U.S.",
+     "Substantially all of the Company\u2019s hotels operate under brands owned by Marriott or Hilton."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1 (10-K Item 1 Business) and P4 (10-Q MD&A).",
+    "claim": "Portfolio revenue capacity also shifts through active hotel acquisitions, dispositions, and development projects, including an approximately $143.7 million dual-branded hotel development and an approximately $8.7 million property sale.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "As a result, during the nine months ended September 30, 2026, the Company sold one hotel to an unrelated party for a gross sales price of approximately $8.7 million, resulting in a gain on the sale of approximately $0.2 million, net of transaction costs.",
+     "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P3 (10-K MD&A) and P4 (10-Q MD&A).",
+    "claim": "Hotel operating expense is the largest cost category at 663,993 (table in thousands), or 58.3% of total revenue, covering direct room costs, hotel administration, sales and marketing, utilities, repairs and maintenance, franchise fees, and management fees.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Hotel operating expense consists of direct room operating expense, hotel administrative expense, sales and marketing expense, utilities expense, repair and maintenance expense, franchise fees and management fees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1 (10-K Item 1 Business), P2 (10-K Risk Factors), and P3 (10-K MD&A).",
+    "claim": "Property-level costs are driven by hotel labor and wage pressures, contract labor usage, utilities, repair and maintenance, inflation, third-party distribution channel fees, and variable management fees of 2.5% to 3.5% of gross revenues at approximately 81% of hotels.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Under the variable fee structure, the management fee earned for each hotel is generally within a range of 2.5% to 3.5% of gross revenues.",
+     "The increase in hotel operating expense for the year ended December 31, 2025, as compared to the year ended December 31, 2024, was primarily driven by increased labor costs, utility costs, repair and maintenance costs and general inflationary pressures throughout the overall economy.",
+     "Rooms sold through non-franchisors\u2019 channels are generally less profitable (after associated fees) than rooms sold through franchisors\u2019 channels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 (10-K Risk Factors), P3 (10-K MD&A), and P4 (10-Q MD&A).",
+    "claim": "The company also incurs relatively fixed property and corporate expenses\u2014including property taxes, insurance, ground leases, corporate general and administrative costs, depreciation and amortization, and interest on fixed and variable-rate debt\u2014that do not decline proportionally when hotel revenues fall.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In addition, many of the expenses associated with the Company\u2019s business, including certain personnel costs, interest expense, ground leases, property taxes, insurance and utilities, are relatively fixed.",
+     "Interest expense related to the Company\u2019s debt instruments for the year ended December 31, 2025 increased compared to the year ended December 31, 2024 as a result of higher average borrowings associated with variable-rate debt and higher average interest rates on the Company\u2019s variable-rate debt."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 (P1) and Q3 2026 Form 10-Q Item 2 (P4).",
+    "claim": "Apple Hospitality REIT is one of the largest U.S. hospitality REITs, owning 216 hotels with 29,459 guest rooms across 37 states and the District of Columbia.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The Company is one of the largest hospitality REITs in the U.S., in both the number of hotels and guest rooms, with significant geographic and brand diversity.",
+     "As of September 30, 2026, the Company owned 216 hotels with an aggregate of 29,459 guest rooms located in urban, high-end suburban and developing markets throughout 37 states and the District of Columbia, including four hotels with 387 guest rooms classified as held for sale, which are expected to be sold in the fourth quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 (P1) and Q3 2026 Form 10-Q Item 2 (P4).",
+    "claim": "The company focuses on rooms-focused hotels operated predominantly under Marriott and Hilton brands and uses its scale to benchmark performance and negotiate vendor contracts.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "With an emphasis on upscale rooms-focused hotels, the Company utilizes its asset management experience and expertise to improve the quality and performance of its hotels by working with its property managers to aggressively manage revenue and expenses by benchmarking with internal and external data, using the Company\u2019s scale to help negotiate favorable vendor contracts, engaging industry leaders in hotel management, and franchising the hotels with leading brands and actively participating with the franchisors to strengthen the brands.",
+     "Substantially all of the Company\u2019s hotels operate under Marriott or Hilton brands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 (P1), with manager count updated in Q3 2026 Form 10-Q Item 2 (P4).",
+    "claim": "The company generally holds fee simple ownership of its hotels and structures 81% of its management agreements with variable fees of 2.5% to 3.5% of gross revenues to align manager incentives.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The Company has generally acquired fee simple ownership of its properties, with a focus on hotels that have or have the potential to have diverse demand generators, strong brand recognition, high levels of customer satisfaction and strong operating margins.",
+     "As of December 31, 2025, approximately 81% of the Company\u2019s hotels operated under a variable management fee agreement, with an average initial term of approximately one to two years, which the Company believes better aligns incentives for each hotel manager to maximize each property\u2019s performance than a base-plus-incentive management fee structure, as described below, which is more common throughout the industry.",
+     "Under the variable fee structure, the management fee earned for each hotel is generally within a range of 2.5% to 3.5% of gross revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7 (P3).",
+    "claim": "In 2025, the company\u2019s hotels produced operating results broadly consistent with applicable industry, brand, and chain scale averages, even as Comparable Hotels RevPAR decreased 1.6% to $117.95.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025, the Company\u2019s hotels, in general, have shown results that have been broadly consistent with applicable industry, brand and chain scale averages.",
+     "Compared to 2024, the Company\u2019s Comparable Hotels ADR generally remained unchanged while occupancy decreased by 1.6%, resulting in a decrease in Comparable Hotels RevPAR of 1.6%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release (P5) and supported by Q3 2026 Form 10-Q financial statements (F2) and MD&A (P4).",
+    "claim": "Operating momentum strengthened in 2026 as third-quarter Comparable Hotels RevPAR rose 7.3% to $133.60, Comparable Hotels Adjusted Hotel EBITDA Margin % expanded to 37.1%, and full-year 2026 Comparable Hotels RevPAR Change guidance was raised to 5.1% to 6.1%.",
+    "facts": [
+     "F2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The revised guidance range reflects the Company\u2019s stronger-than-anticipated third quarter 2026 performance and an increase in its outlook for the fourth quarter, driven by continued improvement in business and leisure travel demand.",
+     "As compared to the midpoint of previously provided 2026 guidance, the Company is increasing Net income by $19 million, increasing Adjusted EBITDAre by $23 million, increasing Comparable Hotels RevPAR Change by 235 bps, and increasing Comparable Hotels Adjusted Hotel EBITDA Margin % by 105 bps."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 (P1), Q3 2026 cash flow statement (F3), and Q3 2026 earnings release (P5).",
+    "claim": "To maintain its competitive advantage, the company continually reinvests in its hotels, reporting capital improvements outflows of (66,706) (table in thousands) year-to-date in 2026 and full-year 2026 capital expenditure guidance of $85 Million to $95 Million.",
+    "facts": [
+     "F3",
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "To maintain its competitive advantage in each market, the Company continually reinvests in its hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 (P1), Q3 2026 balance sheet (F1), and Q3 2026 earnings release (P5).",
+    "claim": "A low-leverage balance sheet provides financial flexibility, with total debt net of cash and cash equivalents equal to 27.5% of total capitalization and $42,674 (table in thousands) of cash and cash equivalents.",
+    "facts": [
+     "F1",
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "By maintaining a flexible balance sheet, with a total debt, net of cash, to total capitalization (total debt outstanding, net of cash, plus equity market capitalization based on the Company\u2019s December 31, 2025 closing share price) ratio at December 31, 2025 of 35.5%, the Company is not only positioned to opportunistically consider investments that further improve shareholder value, but management also believes it is equipped to address developments caused by adverse economic environments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 (P1) and Item 1A Risk Factors (P2).",
+    "claim": "Hotels face direct local competition from other hotels, vacation ownership resorts, short-term rental properties, and serviced apartments, as well as the threat of new hotel over-building.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Each of the Company\u2019s hotels competes for guests primarily with other hotels in its immediate vicinity and secondarily with other hotels or lodging facilities in its geographic market.",
+     "The Company also competes with numerous owners and operators of vacation ownership resorts, as well as alternative lodging companies, including third-party providers of short-term rental properties and serviced apartments that can be rented on a nightly, weekly or monthly basis.",
+     "An increase in the number of competitive hotels, vacation ownership resorts and alternative lodging accommodations in a particular area could have a material adverse effect on the occupancy, ADR and RevPAR of the Company\u2019s hotels in that area and lower the Company\u2019s revenue and profitability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2).",
+    "claim": "Because substantially all of its hotels operate under Marriott or Hilton brands, the company is exposed to brand perception damage, loyalty-program or policy changes, and strict franchise agreement restrictions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Substantially all of the Company\u2019s hotels operate under brands owned by Marriott or Hilton.",
+     "Also, if Marriott or Hilton alter certain policies, including their respective guest loyalty programs, this could reduce the Company\u2019s future revenues.",
+     "If the Company were to lose or was unable to renew a franchise or license agreement, the Company would be required to re-brand or de-flag the hotel, which could result in a decline in the value of the hotel, the loss of marketing support and participation in guest loyalty programs, and harm to the Company\u2019s relationship with the franchisor, impeding the Company\u2019s ability to operate other hotels under the same brand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2).",
+    "claim": "Growing guest bookings through non-franchisor distribution channels and intermediaries reduce room profitability and risk shifting consumer loyalty away from hotel brands.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Rooms sold through non-franchisors\u2019 channels are generally less profitable (after associated fees) than rooms sold through franchisors\u2019 channels.",
+     "As a result, consumers may develop brand loyalties to the intermediaries\u2019 offered brands, websites and reservations systems rather than to those of the Company\u2019s franchisors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2), with operator transitions and property recovery detailed in P1 and P4.",
+    "claim": "To maintain REIT status, the company cannot operate its hotels directly and must rely on unaffiliated third-party managers without day-to-day control over personnel or pricing.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "To maintain its status as a REIT, the Company is not permitted to operate any of its hotels.",
+     "Under the terms of the hotel management agreements, the Company\u2019s ability to participate in operating decisions regarding its hotels is limited to certain matters, and it does not have the authority to require any hotel to be operated in a particular manner (for instance, setting room rates).",
+     "A failure by the Company\u2019s hotel managers to successfully manage its hotels could lead to an increase in its operating expenses, a decrease in its revenues, or both and have a material adverse effect on the Company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2) and Item 7 (P3).",
+    "claim": "Relatively fixed hotel expenses, labor shortages, and inflationary pressures on wages, utilities, insurance, and property taxes threaten operating margins when revenues soften.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In addition, many of the expenses associated with the Company\u2019s business, including certain personnel costs, interest expense, ground leases, property taxes, insurance and utilities, are relatively fixed.",
+     "During a period of overall economic weakness, if the Company is unable to meaningfully decrease these costs as demand for its hotels decreases, or increase room rates to account for higher than expected costs, the Company\u2019s business operations and financial performance may be adversely affected.",
+     "Significant labor shortages could prohibit the Company\u2019s hotels from operating at full capacity which could result in a decrease in operating revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2) and Item 7 (P3).",
+    "claim": "Lodging demand is highly cyclical and sensitive to economic downturns, consumer and corporate spending pullbacks, weather events, and reduced government travel or shutdowns.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The performance of the lodging industry has historically been highly cyclical and closely linked to the performance of the general economy both nationally and within local markets in the U.S.",
+     "Declines in government and corporate budgets and consumer demand due to adverse general economic conditions, risks affecting or reducing travel patterns, lower consumer confidence or adverse political conditions, including government shutdowns, may lower the revenue and profitability of the Company\u2019s hotels and therefore the net operating profits of its investments.",
+     "Government demand softened late in the first quarter of 2025 following the current administration\u2019s efforts to curtail government spending; it remained soft through the rest of the year, particularly in October and November, due to the extended government shutdown."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2).",
+    "claim": "Mandatory brand renovations, new development cost overruns, and competition from other hotel buyers threaten returns on invested capital and portfolio growth.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Occupancy and ADR are often affected during periods of renovations and capital improvements at a hotel, especially if the Company encounters delays, or if the improvements require significant disruption at the hotel.",
+     "Construction delays and cost overruns, including increases in the cost of labor, goods and materials and delays and cost increases caused by supply chain disruptions or tariffs, have increased and may continue to increase renovation or development costs for the Company and have delayed and may in the future delay the acquisition or opening of hotels or the length of time that rooms are out of service.",
+     "The Company competes with other investors who are engaged in the acquisition of hotels, and these competitors may affect the supply and demand dynamics and, accordingly, increase the price the Company must pay for hotels it seeks to acquire, or these competitors may succeed in acquiring those hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors (P2).",
+    "claim": "Portfolio flexibility and operations are further constrained by real estate illiquidity, REIT limits on property sales, 14 hotel ground leases, and cybersecurity risks across manager and franchisor systems.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, 14 of the Company\u2019s properties were subject to ground leases, not including the Company\u2019s three parking lot ground leases.",
+     "This illiquidity will tend to limit the Company\u2019s ability to promptly vary its portfolio in response to changes in economic or other conditions.",
+     "In addition, provisions of the Code relating to REITs impose certain limits on the number of hotels the Company may sell in a calendar year.",
+     "The Company and its hotel managers and franchisors rely on information technology networks and systems, including the Internet, to process, transmit and store electronic information, and to manage or support a variety of business processes, including financial transactions and records, personally identifiable information, reservations, billing and operating data."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated directly in the consolidated balance sheet of F1.",
+    "claim": "As of Sep. 30, 2026, unrestricted cash and cash equivalents increased to 42,674 from 8,515 at Dec. 31, 2025, while restricted cash in furniture, fixtures and other escrows declined to 8,444 from 30,903 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | 42,674 | 8,515",
+     "Restricted cash-furniture, fixtures and other escrows | 8,444 | 30,903"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the consolidated balance sheet of F1.",
+    "claim": "As of Sep. 30, 2026, amounts due from third party managers, net rose to 61,915 from 32,952 at Dec. 31, 2025, while accounts payable and other liabilities rose to 129,374 from 103,905 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Due from third party managers, net | 61,915 | 32,952",
+     "Accounts payable and other liabilities | 129,374 | 103,905"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet (F1) and Q3 2026 MD&A portfolio disclosures (P4).",
+    "claim": "As of Sep. 30, 2026, the company held four hotels for sale at a carrying value of 38,121 (table in thousands) under agreements totaling $50.3 million in gross sales price expected to close in the fourth quarter of 2026, plus an October 2026 sale agreement for one hotel at approximately $21.5 million.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "Assets held for sale | 38,121 | 0",
+     "In addition, during the three months ended September 30, 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million.",
+     "Subsequent to the end of the quarter, in October 2026, the Company entered into a purchase and sale agreement with an unrelated party for the sale of one hotel for a gross sales price of approximately $21.5 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 balance sheet (F1) and Q3 2026 earnings release (P5).",
+    "claim": "As of Sep. 30, 2026, total debt outstanding was $1,490,262 and net carrying debt was 1,479,113, alongside 110,610 in finance lease liabilities and 3,151,050 in total shareholders' equity (tables in thousands).",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "Total debt outstanding | $1,490,262",
+     "Debt, net | 1,479,113 | 1,538,584",
+     "Finance lease liabilities | 110,610 | 111,094",
+     "Total Shareholders' Equity | 3,151,050 | 3,148,595"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 Form 10-K (P1) and Q3 2026 earnings release (P5).",
+    "claim": "Net total debt outstanding was $1,447,588 (table in thousands) at September 30, 2026, representing 27.5% of total capitalization at a $16.16 closing share price, down from 35.5% at December 31, 2025.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Total debt outstanding, net of cash and cash equivalents | $1,447,588",
+     "Total debt outstanding, net of cash and cash equivalents, to total capitalization (3) | 27.5%",
+     "Total debt outstanding, net of cash and cash equivalents (\u201cnet total debt outstanding\u201d), divided by net total debt outstanding plus equity market capitalization based on the Company\u2019s closing share price of $16.16 on September 30, 2026.",
+     "By maintaining a flexible balance sheet, with a total debt, net of cash, to total capitalization (total debt outstanding, net of cash, plus equity market capitalization based on the Company\u2019s December 31, 2025 closing share price) ratio at December 31, 2025 of 35.5%, the Company is not only positioned to opportunistically consider investments that further improve shareholder value, but management also believes it is equipped to address developments caused by adverse economic environments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the consolidated statements of operations (F2) and cash flows (F3).",
+    "claim": "For the nine months ended Sep. 30, 2026, interest and other expense, net was (62,356) and cash interest paid, net was 59,180, compared with operating income of 218,365 (tables in thousands).",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Operating income | 82,198 | 72,497 | 218,365 | 208,207",
+     "Interest and other expense, net | (21,467) | (21,375) | (62,356) | (61,735)",
+     "Interest paid, net | 59,180 | 59,895"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Risk Factors (P2) and MD&A (P3).",
+    "claim": "Existing secured and unsecured debt agreements impose financial covenants\u2014including minimum tangible net worth, maximum debt limits, and minimum interest and fixed charge coverage ratios\u2014and replacing expiring interest rate swaps is expected to occur at higher rates.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In addition, the Company\u2019s ability to borrow under its unsecured credit facilities is subject to compliance with its financial and other covenants, including, among others, a minimum tangible net worth, maximum debt limits, minimum interest and fixed charge coverage ratios, and restrictions on certain investments.",
+     "If the Company continues to replace expiring interest rate swaps in the current interest rate environment with new agreements, the Company anticipates those new agreements to generally be at higher rates than the expiring swap agreements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the consolidated cash flow statement (F3).",
+    "claim": "Net cash provided by operating activities increased to 309,447 in the nine months ended Sep. 30, 2026 from 284,379 in the prior-year nine-month period (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 309,447 | 284,379"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the operating cash flow reconciliation of F3.",
+    "claim": "Nine-month operating cash flow through Sep. 30, 2026 rested on 155,249 of net income and non-cash charges led by 148,998 of depreciation and amortization and 6,636 of real estate impairment, alongside a (28,963) working-capital outflow in due from third-party managers offset by a 25,754 increase in accounts payable and other liabilities (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net income | $ 60,473 | $ 50,880 | 155,249 | 145,749",
+     "Depreciation and amortization | 49,809 | 48,100 | 148,998 | 144,063",
+     "Impairment of depreciable real estate | 4,317 | 5,724 | 6,636 | 5,724",
+     "Decrease (increase) in due from third-party managers, net | (28,963) | (18,320)",
+     "Increase in accounts payable and other liabilities | 25,754 | 11,481"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release tables (P5).",
+    "claim": "Operating performance improved in the nine months ended September 30, 2026, with Comparable Hotels RevPAR rising 5.1%, Modified funds from operations increasing 9.5% to $321,603, and Adjusted EBITDAre rising 8.0% to $384,789 (table in thousands).",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Comparable Hotels RevPAR | $133.60 | $124.55 | 7.3% | $128.24 | $122.00 | 5.1%",
+     "Modified funds from operations (MFFO) | $117,950 | $101,721 | 16.0% | $321,603 | $293,735 | 9.5%",
+     "Adjusted EBITDAre | $139,684 | $123,338 | 13.3% | $384,789 | $356,194 | 8.0%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement (F3), Q3 2026 MD&A (P4), and Q3 2026 earnings release (P5).",
+    "claim": "Capital reinvestment used (66,706) in cash capital improvements in the nine months ended Sep. 30, 2026 with 22,615 in accrued capital expenditures (table in thousands), alongside 2026 capital expenditure guidance of $85 Million to $95 Million and commitments of approximately $65.5 million for an Anchorage hotel purchase contract and $143.7 million ($16.9 million capitalized to date) for a Las Vegas development.",
+    "facts": [
+     "F3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Capital improvements | (66,706) | (58,809)",
+     "Accrued capital expenditures | 22,615 | 4,576",
+     "Capital expenditures | $85 Million | $95 Million",
+     "Consistent with this strategy and the Company\u2019s focus on investing in rooms-focused hotels, as of September 30, 2026, the Company had one outstanding contract, which was entered into during the third quarter of 2025, for the potential purchase of a hotel in Anchorage, Alaska for an expected fixed purchase price of approximately $65.5 million.",
+     "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028.",
+     "As of September 30, 2026, the Company has capitalized $16.9 million related to the construction of the AC Hotel and Residence Inn."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the consolidated balance sheet (F1) and cash flow statement (F3).",
+    "claim": "Distributions paid to common shareholders totaled (169,843) in the nine months ended Sep. 30, 2026, while accumulated distributions greater than net income widened to (1,588,357) at Sep. 30, 2026 from (1,573,556) at Dec. 31, 2025 (tables in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Distributions paid to common shareholders | (56,600) | (56,800) | (169,843) | (183,477)",
+     "Accumulated distributions greater than net income | (1,588,357) | (1,573,556)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the financing activities section of F3.",
+    "claim": "Debt and lease financing flows during the nine months ended Sep. 30, 2026 consisted of 89,100 in proceeds and (150,100) in payments on the revolving credit facility, 30,000 in term loan and senior note proceeds, (24,003) in mortgage and other loan payments, (651) in finance lease principal payments, and (12,450) in financing costs (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from revolving credit facility | 89,100 | 173,000",
+     "Payments on revolving credit facility | (150,100) | (255,500)",
+     "Proceeds from term loans and senior notes | 30,000 | 385,000",
+     "Payments of mortgage debt and other loans | (24,003) | (39,071)",
+     "Principal payments on finance leases | (651) | (501)",
+     "Financing costs | (12,450) | (3,517)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K (P1, P2), Q3 2026 MD&A (P4), and August 2026 Form 8-K (P9).",
+    "claim": "Management relies on available cash, property disposition proceeds, unsecured credit facilities including the $650 million revolving credit facility, and its at-the-market equity distribution agreement (amended August 6, 2026) to fund obligations, though credit market volatility could prevent refinancing scheduled debt maturities on favorable terms.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4",
+     "P9"
+    ],
+    "quotes": [
+     "The Company plans to utilize its available cash, net proceeds from the sale of shares under the ATM program (as defined below), proceeds from the sales of properties or borrowings under its unsecured credit facilities for any future hotel acquisitions.",
+     "The Company used the net proceeds from the sale to repay amounts outstanding under the $650 million revolving credit facility.",
+     "If the Company is unable to refinance its debt, it may be forced to dispose of hotels or issue equity at inopportune times or on disadvantageous terms, which could result in higher costs of capital and may reduce the Company\u2019s profitability.",
+     "1.1 | Amendment No. 2 to Equity Distribution Agreement, dated August 6, 2026, by and among the Company, Jefferies LLC, Robert W. Baird & Co. Incorporated, BMO Capital Markets Corp., BofA Securities, Inc., BTIG, LLC, Huntington Securities, Inc., KeyBanc Capital Markets Inc., Regions Securities LLC, Truist Securities, Inc., and Wells Fargo Securities, LLC"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in the cited items (P4 operating results table and P5 Updated 2026 Outlook and Updated 2026 Guidance)",
+    "claim": "Improving business and leisure travel demand drove 4.9% total revenue growth to $1,138,626 (table in thousands) in the nine months ended September 30, 2026 and supports 2026 Comparable Hotels RevPAR Change guidance of 5.1% to 6.1%.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The revised guidance range reflects the Company\u2019s stronger-than-anticipated third quarter 2026 performance and an increase in its outlook for the fourth quarter, driven by continued improvement in business and leisure travel demand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 Risk Factors, P3 MD&A, and P4 Forward-Looking Statements)",
+    "claim": "For travel-demand-driven revenue and RevPAR growth to continue, business, leisure, and government travel demand must remain resilient without new hotel oversupply or economic recession.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Future revenues could be negatively impacted by, among other things, historical seasonal trends, deterioration of consumer sentiment, a recessionary macroeconomic environment, inflationary pressures or a continuation of reduced government travel.",
+     "An increase in the number of competitive hotels, vacation ownership resorts and alternative lodging accommodations in a particular area could have a material adverse effect on the occupancy, ADR and RevPAR of the Company\u2019s hotels in that area and lower the Company\u2019s revenue and profitability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P4 Recent Hotel Portfolio Activities)",
+    "claim": "Apple Hospitality is developing a dual-branded AC Hotel and Residence Inn in Las Vegas with an expected total spend of approximately $143.7 million, adding approximately 237 and 160 guest rooms.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028.",
+     "Upon completion, the AC Hotel and Residence Inn are expected to contain approximately 237 and 160 guest rooms, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P4 Recent Hotel Portfolio Activities)",
+    "claim": "A purchase contract entered in 2025 for a 160-guest-room AC Hotel under development in Anchorage, Alaska adds an expected $65.5 million acquisition opportunity planned to open in the fourth quarter of 2027.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The hotel is under development as a 160-guest-room AC Hotel and is currently planned to be completed and opened for business in the fourth quarter of 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 Risk Factors and P4 Recent Hotel Portfolio Activities)",
+    "claim": "To realize growth from development and acquisitions, sellers must satisfy closing conditions, construction must avoid cost overruns or delays, and funding must remain available on favorable terms.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Although the Company is working towards acquiring this hotel, there are a number of conditions to closing that have not yet been satisfied, and there can be no assurance that closing on this hotel will occur under the outstanding purchase contract.",
+     "Construction delays and cost overruns, including increases in the cost of labor, goods and materials and delays and cost increases caused by supply chain disruptions or tariffs, have increased and may continue to increase renovation or development costs for the Company and have delayed and may in the future delay the acquisition or opening of hotels or the length of time that rooms are out of service.",
+     "Any delay or failure on the Company\u2019s part to identify, negotiate, finance on favorable terms, consummate and integrate such acquisitions could materially impede the Company\u2019s growth."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited items (P1 Business, P3 MD&A, P4 MD&A, and P5 Updated 2026 Guidance)",
+    "claim": "Apple Hospitality recycles capital from hotel dispositions\u2014such as $73.3 million in 2025 sales and $50.3 million in properties held for sale as of September 30, 2026\u2014into acquisitions, debt reduction, and $85 Million to $95 Million of planned 2026 capital improvements.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "For its existing portfolio, the Company monitors each property\u2019s profitability, market conditions and capital requirements and attempts to maximize shareholder value by disposing of properties when it believes that superior value can be provided from the sale of the property.",
+     "To maintain its competitive advantage in each market, the Company continually reinvests in its hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 Risk Factors and P4 Recent Hotel Portfolio Activities)",
+    "claim": "Continued portfolio recycling and reinvestment require liquid hotel transaction markets to close dispositions and timely redeployment of proceeds without excessive renovation disruption.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Real estate investments are, in general, relatively difficult to sell due to, among other factors, the size of the required investment and the volatility in availability of adequate financing for a potential buyer.",
+     "Also, if the Company does not reinvest proceeds received from hotel dispositions into new properties in a timely manner, the Company\u2019s profitability could be negatively impacted.",
+     "Occupancy and ADR are often affected during periods of renovations and capital improvements at a hotel, especially if the Company encounters delays, or if the improvements require significant disruption at the hotel."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P1 Business, P4 Management Company Transitions, and P5 Selected Statistical and Financial Data)",
+    "claim": "Consolidating and transitioning third-party hotel management supports operating efficiency and Comparable Hotels Adjusted Hotel EBITDA Margin % expansion to 36.1% in the nine months ended September 30, 2026.",
+    "facts": [
+     "P1",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "In markets or regions where the Company owns multiple properties, it may consolidate hotels under specific third-party managers to leverage regional expertise, gain operating efficiencies, and enhance overall portfolio performance.",
+     "As of December 31, 2025, approximately 81% of the Company\u2019s hotels operated under a variable management fee agreement, with an average initial term of approximately one to two years, which the Company believes better aligns incentives for each hotel manager to maximize each property\u2019s performance than a base-plus-incentive management fee structure, as described below, which is more common throughout the industry."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 Risk Factors and P3 MD&A)",
+    "claim": "To sustain margin and operational gains, third-party managers and franchisors must control labor and operating costs while maintaining Marriott and Hilton brand standards and loyalty channels.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "To maintain its status as a REIT, the Company is not permitted to operate any of its hotels.",
+     "The Company could be materially and adversely affected if any of its third-party managers fail to effectively manage revenues and expenses, provide quality services and amenities, secure its data and systems, timely and accurately report financial results, or otherwise fail to manage its hotels in its best interest, and may be financially responsible for the actions and inactions of the managers.",
+     "Substantially all of the Company\u2019s hotels operate under brands owned by Marriott or Hilton."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (F3 Cash Flows, P1 Business, and P5 Selected Statistical and Financial Data)",
+    "claim": "Maintaining low leverage\u2014with net debt to total capitalization at 27.5% as of September 30, 2026\u2014provides financial flexibility to fund acquisitions, development, and share repurchases.",
+    "facts": [
+     "F3",
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "By maintaining a flexible balance sheet, with a total debt, net of cash, to total capitalization (total debt outstanding, net of cash, plus equity market capitalization based on the Company\u2019s December 31, 2025 closing share price) ratio at December 31, 2025 of 35.5%, the Company is not only positioned to opportunistically consider investments that further improve shareholder value, but management also believes it is equipped to address developments caused by adverse economic environments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 Risk Factors and P3 MD&A)",
+    "claim": "To preserve this financing capacity, the Company must comply with debt covenants, refinance scheduled maturities, and manage variable-rate interest exposure.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In addition, the Company\u2019s ability to borrow under its unsecured credit facilities is subject to compliance with its financial and other covenants, including, among others, a minimum tangible net worth, maximum debt limits, minimum interest and fixed charge coverage ratios, and restrictions on certain investments.",
+     "If the Company continues to replace expiring interest rate swaps in the current interest rate environment with new agreements, the Company anticipates those new agreements to generally be at higher rates than the expiring swap agreements."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in F2, F3, and P4",
+    "claim": "During the third quarter and nine months ended September 30, 2026, the Company recognized impairment of depreciable real estate of 4,317 and 6,636, respectively (table in thousands), including an impairment loss on one of four hotels classified as held for sale.",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "The fourth hotel held for sale was recorded at its estimated fair value less costs to sell, which was based on the contracted sales price, resulting in an impairment loss recognized during the third quarter of 2026.",
+     "Impairment of depreciable real estate | 4,317 | 5,724 | 6,636 | 5,724"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "For 2025, the Company recorded impairment of depreciable real estate of approximately $5.7 million from impairment losses at two hotel properties identified in the third quarter of 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Impairment of depreciable real estate was approximately $5.7 million for the year ended December 31, 2025, consisting of impairment losses at two hotel properties identified by the Company in the third quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and F1",
+    "claim": "During the third quarter of 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million, classifying the properties as assets held for sale at 38,121 (table in thousands) with closing expected in the fourth quarter of 2026.",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "In addition, during the three months ended September 30, 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million.",
+     "All four hotels are expected to be sold in the fourth quarter of 2026.",
+     "Assets held for sale | 38,121 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "In October 2026, the Company entered into a purchase and sale agreement with an unrelated party to sell one hotel for a gross sales price of approximately $21.5 million, with closing expected in the fourth quarter of 2026.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Subsequent to the end of the quarter, in October 2026, the Company entered into a purchase and sale agreement with an unrelated party for the sale of one hotel for a gross sales price of approximately $21.5 million.",
+     "The Company expects to complete the sale of this hotel in the fourth quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "On April 15, 2026, the Company sold one hotel to an unrelated party for a gross sales price of approximately $8.7 million, resulting in a gain on the sale of approximately $0.2 million, net of transaction costs.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "During the nine months ended September 30, 2026, the Company did not acquire any properties and sold one property on April 15, 2026.",
+     "As a result, during the nine months ended September 30, 2026, the Company sold one hotel to an unrelated party for a gross sales price of approximately $8.7 million, resulting in a gain on the sale of approximately $0.2 million, net of transaction costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "On November 5, 2026, the Company updated its 2026 guidance by increasing the midpoints for Net income by $19 million, Adjusted EBITDAre by $23 million, Comparable Hotels RevPAR Change by 235 bps, and Comparable Hotels Adjusted Hotel EBITDA Margin % by 105 bps.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "As compared to the midpoint of previously provided 2026 guidance, the Company is increasing Net income by $19 million, increasing Adjusted EBITDAre by $23 million, increasing Comparable Hotels RevPAR Change by 235 bps, and increasing Comparable Hotels Adjusted Hotel EBITDA Margin % by 105 bps."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P9",
+    "claim": "On August 6, 2026, the Company entered into Amendment No. 2 to its Equity Distribution Agreement with Jefferies LLC and other financial institutions.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "1.1 | Amendment No. 2 to Equity Distribution Agreement, dated August 6, 2026, by and among the Company, Jefferies LLC, Robert W. Baird & Co. Incorporated, BMO Capital Markets Corp., BofA Securities, Inc., BTIG, LLC, Huntington Securities, Inc., KeyBanc Capital Markets Inc., Regions Securities LLC, Truist Securities, Inc., and Wells Fargo Securities, LLC"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (and similarly in P1 and P3)",
+    "claim": "In January 2026, the Company transitioned the remaining nine hotels managed by affiliates of Marriott to separate management companies unaffiliated with Marriott, Hilton or Hyatt.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In January 2026, the Company transitioned the remaining nine hotels managed by affiliates of Marriott, as of December 31, 2025, to separate management companies that are not affiliated with Marriott, Hilton or Hyatt."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "During 2025, the Company acquired two hotels\u2014a 126-guest-room Homewood Suites in Tampa, Florida and a 260-guest-room Motto in Nashville, Tennessee\u2014for an aggregate purchase price of approximately $117.0 million.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Consistent with this strategy and the Company\u2019s focus on investing in rooms-focused hotels, during the year ended December 31, 2025, the Company acquired two hotels for an aggregate purchase price of approximately $117.0 million: an existing 126-guest-room Homewood Suites in Tampa, Florida and a newly constructed 260-guest-room Motto in Nashville, Tennessee that was purchased at the completion of development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "During 2025, the Company sold seven hotels to five unrelated parties for a combined gross sales price of approximately $73.3 million and a combined gain of approximately $13.1 million, net of transaction costs.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "As a result, during the year ended December 31, 2025, the Company sold seven hotels to five unrelated parties for a combined gross sales price of approximately $73.3 million, resulting in a combined gain on the sales of approximately $13.1 million, net of transaction costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (and P1, P3)",
+    "claim": "During the third quarter of 2025, the Company entered into a purchase contract for a 160-guest-room AC Hotel under development in Anchorage, Alaska for an expected fixed purchase price of approximately $65.5 million, planned to open in the fourth quarter of 2027.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Consistent with this strategy and the Company\u2019s focus on investing in rooms-focused hotels, as of September 30, 2026, the Company had one outstanding contract, which was entered into during the third quarter of 2025, for the potential purchase of a hotel in Anchorage, Alaska for an expected fixed purchase price of approximately $65.5 million.",
+     "The hotel is under development as a 160-guest-room AC Hotel and is currently planned to be completed and opened for business in the fourth quarter of 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (and P1, P3)",
+    "claim": "During the third quarter of 2025, the Company entered into a fixed-price contract to develop a dual-branded AC Hotel and Residence Inn on Company-owned land in Las Vegas, Nevada with expected total spending of approximately $143.7 million and planned opening in the third quarter of 2028.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "During the third quarter of 2025, the Company entered into a fixed-price contract with a third party to develop a dual-branded property, consisting of an AC Hotel and a Residence Inn, on Company-owned land in Las Vegas, Nevada, adjacent to its existing SpringHill Suites.",
+     "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (and P3, P4)",
+    "claim": "On April 4, 2025, following a third-party operator's failure to make lease payments and an April 2025 agreement to terminate the lease and mutually release claims, the Company recovered possession of its 209-guest-room New York Property and reinstated operations.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "On April 4, 2025, the Company recovered possession of the New York Property and reinstated operations of the hotel\u2019s 209 guest rooms through a third-party manager engaged by the Company.",
+     "In April 2025, the Company and the third-party hotel operator entered into an agreement to mutually release all claims, to terminate the lease and for the third-party hotel operator to voluntarily surrender possession of the property back to the Company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "In May 2025, the Company's Board of Directors approved a one-year extension of its Share Repurchase Program, authorizing share repurchases up to an aggregate of $262.6 million.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In May 2025, the Company\u2019s Board of Directors approved a one-year extension of its existing share repurchase program, authorizing share repurchases up to an aggregate of $262.6 million (the \u201cShare Repurchase Program\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "On January 15, 2025, the Company paid a special distribution of $0.05 per common share to shareholders of record as of December 31, 2024.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "For the nine months ended September 30, 2025, distributions included a special distribution of $0.05 per common share paid on January 15, 2025, to shareholders of record as of December 31, 2024."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in P2 and P3 regarding cyclicality, fixed costs, and 2025 demand softness, and stated in P4 and P5 regarding the 2026 rebound and updated guidance",
+    "claim": "Cyclical lodging demand, reduced government and discretionary travel, and relatively fixed operating costs expose revenues and profitability to economic downturns.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The performance of the lodging industry has historically been highly cyclical and closely linked to the performance of the general economy both nationally and within local markets in the U.S.",
+     "In addition, many of the expenses associated with the Company\u2019s business, including certain personnel costs, interest expense, ground leases, property taxes, insurance and utilities, are relatively fixed.",
+     "Compared to 2024, the Company\u2019s Comparable Hotels ADR generally remained unchanged while occupancy decreased by 1.6%, resulting in a decrease in Comparable Hotels RevPAR of 1.6%.",
+     "The revised guidance range reflects the Company\u2019s stronger-than-anticipated third quarter 2026 performance and an increase in its outlook for the fourth quarter, driven by continued improvement in business and leisure travel demand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, and P4",
+    "claim": "Substantially all of the Company's hotels operate under Marriott or Hilton franchise and license agreements, exposing it to brand-concentration, compliance, and renewal risks.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Substantially all of the Company\u2019s hotels operate under brands owned by Marriott or Hilton.",
+     "Failure to comply with these brand standards may result in monetary penalties or the termination of the applicable franchise or license agreement.",
+     "If the Company were to lose or was unable to renew a franchise or license agreement, the Company would be required to re-brand or de-flag the hotel, which could result in a decline in the value of the hotel, the loss of marketing support and participation in guest loyalty programs, and harm to the Company\u2019s relationship with the franchisor, impeding the Company\u2019s ability to operate other hotels under the same brand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, P3, and P4, with 2026 margin performance stated in P5",
+    "claim": "To preserve REIT status, the Company cannot operate its hotels directly and relies on 15 third-party management companies, limiting operational control and creating transition and default risks.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "To maintain its status as a REIT, the Company is not permitted to operate any of its hotels.",
+     "Under the terms of the hotel management agreements, the Company\u2019s ability to participate in operating decisions regarding its hotels is limited to certain matters, and it does not have the authority to require any hotel to be operated in a particular manner (for instance, setting room rates).",
+     "As of September 30, 2026, the hotels were operated and managed under separate management agreements with 15 hotel management companies, none of which are affiliated with the Company.",
+     "On April 4, 2025, the Company recovered possession of this property and reinstated operations of the hotel\u2019s 209 guest rooms through a third-party manager engaged by the Company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3, with 2026 expense ratios and margins stated in P4 and P5",
+    "claim": "Hospitality labor shortages, rising operating costs, and competition from new hotel supply, short-term rentals, and non-franchisor booking channels could erode hotel margins.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Significant labor shortages could prohibit the Company\u2019s hotels from operating at full capacity which could result in a decrease in operating revenues.",
+     "Rooms sold through non-franchisors\u2019 channels are generally less profitable (after associated fees) than rooms sold through franchisors\u2019 channels.",
+     "The Company also competes with numerous owners and operators of vacation ownership resorts, as well as alternative lodging companies, including third-party providers of short-term rental properties and serviced apartments that can be rented on a nightly, weekly or monthly basis.",
+     "The increase in hotel operating expense for the year ended December 31, 2025, as compared to the year ended December 31, 2024, was primarily driven by increased labor costs, utility costs, repair and maintenance costs and general inflationary pressures throughout the overall economy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P2, P3, and P5, with operating cash flow stated in F3",
+    "claim": "The Company holds $1,479,113 (table in thousands) of net debt and 110,610 (table in thousands) of finance lease liabilities, exposing it to credit-market refinancing, higher swap replacement rates, and financial covenant default risks.",
+    "facts": [
+     "F1",
+     "F3",
+     "P1",
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "The credit markets have historically been volatile and subject to increased regulation, and as a result, the Company may not be able to obtain debt financing to meet its cash requirements, including refinancing any scheduled debt maturities, which may adversely affect its ability to execute its business strategy.",
+     "The Company\u2019s failure to comply with the covenants in its existing or future indebtedness, or its inability to make required principal and interest payments, could cause a default under the applicable debt agreement, which could result in increased interest rates and the acceleration of the debt, or require the Company to repay such debt with capital obtained from other sources, which may not be available to the Company or may only be available on unfavorable terms.",
+     "If the Company continues to replace expiring interest rate swaps in the current interest rate environment with new agreements, the Company anticipates those new agreements to generally be at higher rates than the expiring swap agreements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, P3, P4, P5, and F3",
+    "claim": "Ongoing hotel renovations and commitments for a $143.7 million Las Vegas development project and a $65.5 million Anchorage acquisition contract expose the Company to cost overruns, delays, and room-out-of-service disruption.",
+    "facts": [
+     "F3",
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Construction delays and cost overruns, including increases in the cost of labor, goods and materials and delays and cost increases caused by supply chain disruptions or tariffs, have increased and may continue to increase renovation or development costs for the Company and have delayed and may in the future delay the acquisition or opening of hotels or the length of time that rooms are out of service.",
+     "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028.",
+     "Although the Company is working towards acquiring this hotel, there are a number of conditions to closing that have not yet been satisfied, and there can be no assurance that closing on this hotel will occur under the outstanding purchase contract."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P2, P3, and P4",
+    "claim": "Illiquidity of hotel properties and impairment write-downs, including 6,636 (table in thousands) of impairment of depreciable real estate in the nine-month period, can reduce net income and delay planned sales.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Real estate investments are, in general, relatively difficult to sell due to, among other factors, the size of the required investment and the volatility in availability of adequate financing for a potential buyer.",
+     "As a result of changes in an individual hotel\u2019s operating results or to the Company\u2019s planned hold period for a hotel, the Company may be, and has been, required to record an impairment loss for a property.",
+     "The fourth hotel held for sale was recorded at its estimated fair value less costs to sell, which was based on the contracted sales price, resulting in an impairment loss recognized during the third quarter of 2026.",
+     "There are many conditions to closing on the sale of this hotel that have not yet been satisfied, and there can be no assurance that closing on the sale of this hotel will occur under the outstanding purchase and sale agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "Ground leases on 14 properties create risks of losing property rights upon breach or non-renewal and restricting sales or financing without lessor consent.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, 14 of the Company\u2019s properties were subject to ground leases, not including the Company\u2019s three parking lot ground leases.",
+     "If the Company were to lose the right to use a property due to a breach or non-renewal of a ground lease, it would be unable to derive income from such property.",
+     "Finally, the Company may not be permitted to sell or finance a property subject to a ground lease without the consent of the lessor."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, and P4",
+    "claim": "Qualification as a REIT depends on compliance with complex Internal Revenue Code provisions, including limits on annual hotel sales and operating-structure restrictions.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "In addition, the Company\u2019s qualification as a REIT involves the application of highly technical and complex provisions of the Internal Revenue Code of 1986, as amended (the \u201cCode\u201d).",
+     "In addition, provisions of the Code relating to REITs impose certain limits on the number of hotels the Company may sell in a calendar year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Reliance on information technology systems across the Company, its hotel managers, and franchisors exposes the business to cyber-attacks, data breaches, operational disruption, and regulatory costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "A number of hospitality and consumer-facing brands have been subject to successful cyber-attacks, including those seeking guest credit card information.",
+     "The Company\u2019s corporate information technology systems are not used to process business transactions with its hotel guests, and those systems currently have no connectivity to hotel and/or third-party management and brand technology platforms."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated directly in [P6] Item 7.01, with the remainder of Exhibit 99.1 omitted.",
+    "claim": "What were the company's October and November 2026 hotel operating statistics, such as occupancy, ADR, and RevPAR, disclosed in the November 2026 investor presentation?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On November 13, 2026, the Company made available on its website an updated investor presentation for use at various conferences and meetings in the coming weeks containing, among other things, certain operating statistics for October and November 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1] balance sheet, [F3] financing cash flows, [P2] risk factors, and [P3] interest expense discussion.",
+    "claim": "What are the maturity schedule, interest rates, fixed-versus-variable mix, interest rate swap terms, and financial covenant headroom for the 1,479,113 (table in thousands) of Debt, net and 110,610 (table in thousands) of Finance lease liabilities?",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In addition, the Company\u2019s ability to borrow under its unsecured credit facilities is subject to compliance with its financial and other covenants, including, among others, a minimum tangible net worth, maximum debt limits, minimum interest and fixed charge coverage ratios, and restrictions on certain investments.",
+     "If the Company continues to replace expiring interest rate swaps in the current interest rate environment with new agreements, the Company anticipates those new agreements to generally be at higher rates than the expiring swap agreements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P4] Recent Hotel Portfolio Activities and reflected in [F1] Assets held for sale.",
+    "claim": "Did the sales of the four hotels held for sale for an aggregate gross sales price of $50.3 million and the additional hotel under contract for approximately $21.5 million close as expected, and what were the final net proceeds and gains or losses?",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "In addition, during the three months ended September 30, 2026, the Company entered into three purchase and sale agreements with two unrelated parties to sell four hotels for an aggregate gross sales price of $50.3 million.",
+     "Subsequent to the end of the quarter, in October 2026, the Company entered into a purchase and sale agreement with an unrelated party for the sale of one hotel for a gross sales price of approximately $21.5 million.",
+     "There are many conditions to closing on the sale of this hotel that have not yet been satisfied, and there can be no assurance that closing on the sale of this hotel will occur under the outstanding purchase and sale agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F2], [F3], and [P4]; [P4] explains one held-for-sale impairment in the third quarter and refers to omitted Note 3 for additional information.",
+    "claim": "Which specific hotel properties accounted for the 6,636 (table in thousands) of impairment of depreciable real estate recorded during the nine-month period, and what triggered the portion not tied to the fourth held-for-sale hotel?",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "The fourth hotel held for sale was recorded at its estimated fair value less costs to sell, which was based on the contracted sales price, resulting in an impairment loss recognized during the third quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed in [F2] and [P4] operating results tables with component context from [P3]; the detailed Q3 2026 MD&A expense commentary is omitted.",
+    "claim": "What caused General and administrative expense to rise 45.0% in the three-month period to 10,915 (table in thousands) and 40.5% in the nine-month period to 34,870 (table in thousands)?",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The principal components of general and administrative expense are payroll and related benefit costs, executive incentive compensation, legal fees, accounting fees and reporting expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P9] exhibit list and [P1]; Item 8.01 text and Exhibit 1.1 are omitted from the packet.",
+    "claim": "What are the authorized offering capacity, commission terms, and any post-quarter share issuance under Amendment No. 2 to the Equity Distribution Agreement?",
+    "facts": [
+     "P1",
+     "P9"
+    ],
+    "quotes": [
+     "The Company plans to utilize its available cash, net proceeds from the sale of shares under the ATM program (as defined below), proceeds from the sales of properties or borrowings under its unsecured credit facilities for any future hotel acquisitions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] Share Repurchases and [F3] financing cash flows; Q3 2026 equity footnotes and repurchase disclosures are omitted.",
+    "claim": "Was the Share Repurchase Program extended or replaced after its scheduled July 2026 end date, given Repurchases of common shares of 0 (table in thousands) in the nine-month cash flow statement?",
+    "facts": [
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "The Share Repurchase Program may be suspended or terminated at any time by the Company and will end in July 2026 if not terminated or extended earlier."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P1], [P3], and [P4]; Note 10 ('Contract Commitments') is omitted from the packet.",
+    "claim": "Why did the planned completion of the approximately $143.7 million Las Vegas development shift to the third quarter of 2028, and will closing conditions be satisfied for the approximately $65.5 million Anchorage hotel acquisition?",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The Company expects to spend a total of approximately $143.7 million to develop the hotels, which are currently planned to be completed and opened for business in the second quarter of 2028.",
+     "The Company expects to spend a total of approximately $143.7 million to develop the AC Hotel and Residence Inn, which are currently planned to be completed and opened for business in the third quarter of 2028.",
+     "Although the Company is working towards acquiring this hotel, there are a number of conditions to closing that have not yet been satisfied, and there can be no assurance that closing on this hotel will occur under the outstanding purchase contract."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P5] Updated 2026 Guidance; the guidance reconciliation tables referenced in footnote (1) are omitted from the packet.",
+    "claim": "What fourth-quarter assumptions for depreciation, interest expense, impairment, and property sales reconcile the updated 2026 Net income guidance of $177 Million to $192 Million with the Adjusted EBITDAre guidance of $482 Million to $493 Million?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The revised guidance range reflects the Company\u2019s stronger-than-anticipated third quarter 2026 performance and an increase in its outlook for the fourth quarter, driven by continued improvement in business and leisure travel demand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed directly in [F1] balance sheet and [F3] operating cash flows and cash reconciliation; Q3 2026 notes and Liquidity MD&A are omitted.",
+    "claim": "What drove the increase in Due from third party managers, net from 32,952 to 61,915 (table in thousands) and the decline in Restricted cash-furniture, fixtures and other escrows from 30,903 to 8,444 (table in thousands)?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Due from third party managers, net | 61,915 | 32,952",
+     "Restricted cash-furniture, fixtures and other escrows | 8,444 | 30,903"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] Risk Factors and reflected in [F1] Finance lease liabilities; the leases footnote is omitted from the packet.",
+    "claim": "What are the remaining lease terms, renewal option conditions, and future minimum payment schedules for the 14 properties (excluding parking lot ground leases) subject to ground leases?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, 14 of the Company\u2019s properties were subject to ground leases, not including the Company\u2019s three parking lot ground leases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P5] distributions table and footnote (2), [F3] financing cash flows, and [P4]; 2026 taxable income is not disclosed in the packet.",
+    "claim": "Will REIT taxable income require a special year-end distribution in addition to the $0.24 per-share distribution rate paid during the third quarter?",
+    "facts": [
+     "F3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "For the nine months ended September 30, 2025, distributions included a special distribution of $0.05 per common share paid on January 15, 2025, to shareholders of record as of December 31, 2024.",
+     "In addition, the Company\u2019s qualification as a REIT involves the application of highly technical and complex provisions of the Internal Revenue Code of 1986, as amended (the \u201cCode\u201d)."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "APLE",
+ "upside": 0.06001827763386425,
+ "valuation": null,
+ "value_base": 20.41851392640833,
+ "value_bear": 15.172523210278328,
+ "value_bull": 25.724354016671953,
+ "value_per_filed_share": {
+  "base": 20.41851392640833,
+  "bear": 15.172523210278328,
+  "bull": 25.724354016671953
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +1.9 points a year against the required return over 3 years (BUY needs 4 or more)"
+}
