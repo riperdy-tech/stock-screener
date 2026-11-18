@@ -2,10 +2,10 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-18T00:04:07Z",
+ "generated_at": "2026-11-18T00:04:57Z",
  "list_covered": 161,
  "list_names": 161,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -1808,26 +1808,47 @@
    "verdict_reason": "expected return -11.1 points a year against the required return over 3 years"
   },
   "FSM": {
-   "alpha_pts": null,
+   "alpha_pts": 4.265140463481449,
    "analysis": "complete",
-   "claims": 49,
-   "claims_supported": 42,
-   "date": "2026-11-17T22:38:58Z",
+   "claims": 58,
+   "claims_supported": 49,
+   "date": "2026-11-18T00:00:22Z",
+   "equity_value": 3206613409.3355036,
    "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 334896000.0,
    "flags": [
-    "Senegal's Ministry of Mines and Geology issued a Notice of Admissibility for the Diamba Sud Exploitation Permit application. The company expects the Government's internal approval for the final permit to be completed in the fourth quarter.",
-    "The company acquired the Bambadji Project in Senegal, where first drilling results at Kabewest were reported."
+    "Fortuna received the Notice of Admissibility for its Diamba Sud Exploitation Permit application from Senegal's Ministry of Mines and Geology. The final Exploitation Permit has not yet been granted.",
+    "Fortuna took a final investment decision in July on a 30% plant expansion at its S\u00e9gu\u00e9la mine. The CEO's statement of 2 November 2026 refers to it. The item prints no year for the decision.",
+    "Fortuna has acquired the Bambadji Project in Senegal, near the proposed Diamba Sud plant site. The item gives no date, price or terms."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.0938268138692389,
+   "market_cap_at_publish": 2586667583,
    "model": "claude-sonnet-5-5",
-   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "no_value_reason": null,
+   "price_at_publish": 8.74,
    "qwen_book": null,
    "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "a required figure is not filed (capex or working capital)"
+   "seed_base": {
+    "1000": 9.574952849050163,
+    "3000": 9.574952849050163
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "on request (no-call fix rerun)",
+   "upside": 0.239669693318882,
+   "value_base": 9.574952849050163,
+   "value_bear": 9.080703906054739,
+   "value_bull": 10.980495054062768,
+   "value_per_filed_share": {
+    "base": 9.574952849050163,
+    "bear": 9.080703906054739,
+    "bull": 10.980495054062768
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +4.3 points a year against the required return over 3 years; the two runs do not both reach BUY"
   },
   "FTDR": {
    "alpha_pts": null,
@@ -5120,12 +5141,12 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 65,
+ "valued_count": 66,
  "verdict_counts": {
   "AVOID": 34,
   "BUY": 25,
-  "NO_CALL": 102,
-  "WATCH": 6
+  "NO_CALL": 101,
+  "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }

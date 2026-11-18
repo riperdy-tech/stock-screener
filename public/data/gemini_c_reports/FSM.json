@@ -1,27 +1,39 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 4.265140463481449,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 49,
- "claims_supported": 42,
- "date": "2026-11-17T22:38:58Z",
+ "claims": 58,
+ "claims_supported": 49,
+ "date": "2026-11-18T00:00:22Z",
+ "equity_value": 3206613409.3355036,
  "family": "commodity",
+ "far_from_price": false,
+ "filed_shares": 334896000.0,
  "flags": [
-  "Senegal's Ministry of Mines and Geology issued a Notice of Admissibility for the Diamba Sud Exploitation Permit application. The company expects the Government's internal approval for the final permit to be completed in the fourth quarter.",
-  "The company acquired the Bambadji Project in Senegal, where first drilling results at Kabewest were reported."
+  "Fortuna received the Notice of Admissibility for its Diamba Sud Exploitation Permit application from Senegal's Ministry of Mines and Geology. The final Exploitation Permit has not yet been granted.",
+  "Fortuna took a final investment decision in July on a 30% plant expansion at its S\u00e9gu\u00e9la mine. The CEO's statement of 2 November 2026 refers to it. The item prints no year for the decision.",
+  "Fortuna has acquired the Bambadji Project in Senegal, near the proposed Diamba Sud plant site. The item gives no date, price or terms."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.0938268138692389,
+ "market_cap_at_publish": 2586667583,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
+ "price_at_publish": 8.74,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 9.574952849050163,
+  "3000": 9.574952849050163
+ },
+ "seeds_agree": false,
+ "share_unit_note": null,
+ "source": "on request (no-call fix rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the company release [P4]. The screener row lists the industry as Gold [S0].",
-    "claim": "Fortuna is a Canadian precious metals miner. It earns revenue by producing and selling gold and silver from three operating mines in Argentina, C\u00f4te d'Ivoire and Peru. Diamba Sud in Senegal is a feasibility-stage gold project.",
+    "basis": "Stated in the company release (P4); the screener row (S0) classifies it as Gold in Basic Materials. The statement that sales are of metal produced is inferred from the description and the Sales line.",
+    "claim": "Fortuna is a Canadian precious metals miner that produces gold and silver. It runs three operating mines in Argentina, C\u00f4te d'Ivoire and Peru and is developing the Diamba Sud gold project in Senegal.",
     "facts": [
      "P4",
      "S0"
@@ -33,8 +45,8 @@
     "support": "supported"
    },
    {
-    "basis": "Figures stated in the 40-F income statement. The margin interpretation is inferred from them.",
-    "claim": "Annual sales rose from 677,243 to 947,059 (table in thousands of USD). Cost of sales rose by less, from 443,882 to 480,161, so mine operating income went from 233,361 to 466,898.",
+    "basis": "Stated in the 40-F income statement (F2); the mechanism is inferred from comparing the two lines.",
+    "claim": "Sales are the single revenue line. They rose from 677,243 in 2024 to 947,059 in 2025 (table in thousands of US dollars), while cost of sales rose by a smaller amount, from 443,882 to 480,161. Mine operating income therefore went from 233,361 to 466,898.",
     "facts": [
      "F2"
     ],
@@ -42,8 +54,8 @@
     "support": "supported"
    },
    {
-    "basis": "Figures stated in the interim income statement [P1]. The margin comparison is inferred.",
-    "claim": "In the latest nine-month interim period, sales were 954,319 against 676,818 a year earlier, and mine operating income was 531,872 against 318,501 (table in thousands of USD). In the latest quarter, sales were 293,435 against 251,362, but cost of sales rose to 156,863 from 118,232, so mine operating income was only 136,572 against 133,130.",
+    "basis": "Stated in the unaudited interim income statement (P1); the margin comment is inferred from the printed lines.",
+    "claim": "Sales kept growing in 2026. Nine-month sales were 954,319 against 676,818 a year earlier, and third-quarter sales were 293,435 against 251,362 (tables in thousands of US dollars). Cost of sales also rose: 422,447 against 358,317 for the nine months, and 156,863 against 118,232 for the quarter.",
     "facts": [
      "P1"
     ],
@@ -51,96 +63,63 @@
     "support": "supported"
    },
    {
-    "basis": "Figures stated in the 40-F statements. The mechanism is a general inference.",
-    "claim": "Costs below mine operating income also move earnings. Annual general and administration expense rose from 68,087 to 97,740. Depletion and depreciation was 191,019. Current income tax expense was 125,095 (table in thousands of USD).",
+    "basis": "Stated in the cash flow statement (F3), the income statement (F2) and the interim income statement (P1).",
+    "claim": "The cost base includes non-cash depletion and depreciation of 191,019 in 2025 (table in thousands) and a heavy tax charge. Total tax expense was 111,398 in 2025, and nine-month 2026 income taxes were 175,398. Taxes absorb a large share of pre-tax income.",
     "facts": [
+     "F3",
      "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in the interim income statement [P1]. The jurisdictional link is inferred.",
-    "claim": "Income taxes take a large share of pre-tax income. In the latest nine-month period, income before income taxes was 431,386 and total income tax expense was 175,398 (table in thousands of USD). Current tax was 150,358, against 81,106 a year earlier.",
-    "facts": [
      "P1"
     ],
     "quotes": [],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Figures stated in the 40-F. Which subsidiaries are partly owned is not shown in the packet.",
-    "claim": "Part of earnings belongs to minority holders, so some operations are not wholly owned. Net income from continuing operations attributable to non-controlling interests was 19,063 for the year, out of 288,777 (table in thousands of USD).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in the cash flow statement. The funding link is inferred.",
-    "claim": "Staying in business needs continuing capital spending. Additions to mineral properties and property, plant and equipment were 178,004 for the year, against cash provided by continuing operating activities of 455,366 (table in thousands of USD).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Management's stated target and expectations in the release [P2]. The volume-driver link is inferred.",
-    "claim": "Management's growth plan is to raise gold output through a 30% plant expansion at the S\u00e9gu\u00e9la mine plus Diamba Sud. The target is approximately 60% growth to an annualized 500,000 ounces. Diamba Sud has received a Notice of Admissibility for its Exploitation Permit.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Together, these projects underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028.",
-     "Fortuna is pleased to report that it received the Notice of Admissibility for its Diamba Sud Exploitation Permit application from Senegal\u2019s Ministry of Mines and Geology on November 2, 2026, following initiation of the application process in February 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in the statements. What was discontinued is not named in the packet.",
-    "claim": "In 2025 a discontinued operation contributed net income of 22,287 (table in thousands of USD), shown separately from continuing results. The interim statements show none in the latest nine-month period, apart from the 22,287 in the prior-year comparison.",
+    "basis": "Amounts are stated in F2; the currency mechanism is inferred from the multi-country footprint and the FX line, not explained in the packet.",
+    "claim": "Other recurring costs are general and administration, which rose from 68,087 in 2024 to 97,740 in 2025, and a foreign exchange loss of 7,784 in 2025 (table in thousands). Foreign exchange losses appear every period shown.",
     "facts": [
      "F2",
      "P1"
     ],
     "quotes": [],
     "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "Stated in the FY2025 income statement; the mechanism is inferred from the line items.",
-    "claim": "Fortuna's FY2025 earnings power rose sharply: sales were 947,059 against 677,243 a year earlier, and mine operating income was 466,898 against 233,361 (USD, table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement; the funding conclusion is inferred.",
-    "claim": "The business generated cash in FY2025: net cash from continuing operating activities was 455,366, against additions to mineral properties and PP&E of 178,004 (USD, table in thousands).",
+    "basis": "Stated in the cash flow statement and balance sheet; the funding link is inferred.",
+    "claim": "The business is capital-intensive. Additions to mineral properties and property, plant and equipment were 178,004 in 2025 against 161,080 in 2024 (table in thousands). Mineral properties and property, plant and equipment of 1,518,676 are the largest asset class.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the balance sheet; the capacity to fund expansion is inferred.",
-    "claim": "The balance sheet strengthened: cash rose to 553,985 from 231,328, and debt was 134,410 at 31 December 2025 (USD, table in thousands).",
-    "facts": [
+     "F3",
      "F1"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the company boilerplate; the effect of diversification is inferred.",
-    "claim": "Fortuna is spread across several jurisdictions: three operating mines in Argentina, C\u00f4te d\u2019Ivoire and Peru, plus the feasibility-stage Diamba Sud project in Senegal.",
+    "basis": "Stated by the CEO in the release (P2); the revenue mechanism is inferred.",
+    "claim": "Management links growth to expanding S\u00e9gu\u00e9la and building Diamba Sud. It targets about 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Together, these projects underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the exploration release (P3); the link to future plant feed is inferred.",
+    "claim": "Exploration around Diamba Sud supports the Senegal growth path. At the Bambadji project's Kabewest prospect, drilling returned 1.9 g/t gold over 64 meters. An initial Inferred Mineral Resource estimate is planned for the first quarter of 2027.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Kabewest is the most advanced drill-defined prospect at Bambadji and is located approximately 2.3 kilometers from the proposed Diamba Sud Gold Project plant site."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "The footprint is stated in the company release. The diversification benefit is inferred.",
+    "claim": "Fortuna is a Canadian gold and silver producer spread across several jurisdictions: operating mines in Argentina, C\u00f4te d'Ivoire and Peru, plus the feasibility-stage Diamba Sud project in Senegal. This spreads operating risk across countries, but the evidence gives no asset-level data.",
     "facts": [
      "P4"
     ],
@@ -150,8 +129,53 @@
     "support": "supported"
    },
    {
-    "basis": "Stated by the CEO in the release; it is a forward-looking statement.",
-    "claim": "Management targets about 60% growth in annual gold production to an annualized 500,000 ounces from mid-2028, resting on the 30% S\u00e9gu\u00e9la plant expansion (final investment decision in July) and the Diamba Sud project.",
+    "basis": "Figures are stated in the 40-F income statement. The margin interpretation is inferred.",
+    "claim": "Fiscal 2025 profitability improved sharply: sales were 947,059 (table in thousands) against 677,243 a year earlier, while cost of sales rose less, from 443,882 to 480,161. Mine operating income reached 466,898 against 233,361.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the unaudited interim income statement.",
+    "claim": "The nine-month 2026 results continue the stronger earnings: sales were 954,319 (table in thousands) against 676,818 and mine operating income was 531,872 against 318,501.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Figures are stated. The margin-compression reading is inferred from them.",
+    "claim": "Third-quarter 2026 cost pressure is visible: sales rose to 293,435 (table in thousands) from 251,362, but cost of sales rose to 156,863 from 118,232. Mine operating income was nearly flat, at 136,572 against 133,130.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated. The funding-capacity point is inferred.",
+    "claim": "The balance sheet strengthened over 2025: cash rose to 553,985 (table in thousands) from 231,328, and debt was 134,410 against 126,031. Cash exceeds debt, which gives funding capacity for growth projects.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Figures are stated. The coverage comparison is inferred.",
+    "claim": "Operating cash generation in 2025 was strong: net cash from continuing operating activities was 455,366 (table in thousands) against 235,696. This covered additions to mineral properties and property, plant and equipment of 178,004.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by the CEO in the company release.",
+    "claim": "The growth plan is the main forward-looking support for the company's position. Management targets approximately 60% growth in annual gold production to an annualized 500,000 ounces from mid-2028, built on the 30% S\u00e9gu\u00e9la plant expansion and the Diamba Sud project.",
     "facts": [
      "P2"
     ],
@@ -161,8 +185,19 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the release; the link to extending Diamba Sud is the company's interpretation.",
-    "claim": "Near-mine exploration adds optionality: first Kabewest drilling at Bambadji returned 1.9 g/t gold over an estimated true width of 64 meters, at a prospect about 2.3 kilometers from the proposed Diamba Sud plant site.",
+    "basis": "The timing is stated in the company release. The delay risk is inferred from the permit still being pending.",
+    "claim": "Diamba Sud still faces a permitting threat. The Notice of Admissibility was received, but the final Exploitation Permit is not yet granted. The project timeline places FID in Q4 2026 and first gold in Q2/Q3 2028, so delays in government approval would push the growth path back.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "With this milestone completed, the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Drill results and plans are stated in the release. The processing-synergy mechanism is inferred from the stated proximity.",
+    "claim": "Exploration at the recently acquired Bambadji project adds optionality next to Diamba Sud. First Kabewest drilling returned 1.9 g/t gold over an estimated true width of 64 meters, and management plans an initial Inferred Mineral Resource estimate in the first quarter of 2027.",
     "facts": [
      "P3"
     ],
@@ -172,39 +207,20 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the release; the dependency chain is inferred from the milestone table.",
-    "claim": "A key threat is permitting and execution at Diamba Sud: the Exploitation Permit is not yet granted, and the company expects the Government's internal approval process to finish in the fourth quarter.",
+    "basis": "Figures are stated. The drag interpretation is inferred.",
+    "claim": "Rising tax and overhead costs weigh on the earnings advantage. Nine-month 2026 income taxes were 175,398 (table in thousands) against 73,858, and fiscal 2025 general and administration expense was 97,740 against 68,087.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the interim income statement.",
-    "claim": "Sales growth continued in 2026: nine-month sales were 954,319 against 676,818, and mine operating income was 531,872 against 318,501 (USD, table in thousands).",
-    "facts": [
-     "P1"
+     "P1",
+     "F2"
     ],
     "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the interim statement; the margin-pressure reading is inferred.",
-    "claim": "Costs and taxes press on margins: Q3 cost of sales was 156,863 against 118,232, and nine-month current income tax expense was 150,358 against 81,106 (USD, table in thousands).",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [],
-    "support": "supported"
+    "support": "number_not_listed"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1; the comparison of the two totals is read directly from the printed lines",
-    "claim": "Liquidity at the latest annual balance sheet date was strong: cash and cash equivalents rose to 553,985 from 231,328, and total current assets of 764,534 were well above total current liabilities of 256,376 (table in thousands of US dollars).",
+    "basis": "Stated in the balance sheet. The link to cash flow is inferred from F3.",
+    "claim": "Liquidity at 31 December 2025 was strong. Cash was 553,985 (table in thousands of USD), up from 231,328 a year earlier. Total current assets of 764,534 were well above total current liabilities of 256,376.",
     "facts": [
      "F1"
     ],
@@ -214,19 +230,8 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from the line items printed in F1",
-    "claim": "Identifiable near-term cash calls inside current liabilities are trade and other payables of 153,361, income taxes payable of 81,816 and the current portion of lease obligations of 21,199. The balance sheet shows no current-debt line (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Income taxes payable | 81,816 | 80,116"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the comparison of sizes is inferred from the printed lines",
-    "claim": "Leverage is modest against the equity base. Non-current debt was 134,410 (126,031 a year earlier) and total liabilities were 625,323, against total equity of 1,735,318. Non-current lease obligations added 55,687 (table in thousands).",
+    "basis": "Stated in the balance sheet; the comparison of cash with debt is read directly from two printed lines.",
+    "claim": "Leverage was modest. Non-current debt was 134,410 (table in thousands), against total liabilities of 625,323 and total equity of 1,735,318. Lease obligations were 55,687 non-current and 21,199 current. Cash of 553,985 exceeded the debt line.",
     "facts": [
      "F1"
     ],
@@ -236,21 +241,21 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F3; the comparison of the two flows is inferred",
-    "claim": "Operating cash generation roughly doubled. Net cash from continuing operating activities was 455,366 against 235,696, while additions to mineral properties and property, plant and equipment were 178,004 against 161,080 (table in thousands).",
+    "basis": "Stated in the cash flow statement.",
+    "claim": "Cash generation grew strongly in 2025. Cash provided by operating activities was 552,265 (table in thousands), against 286,017 in 2024. After income taxes paid of 101,269, interest paid of 9,504 and interest received of 13,874, net operating cash from continuing operations was 455,366. Additions to mineral properties and property, plant and equipment were 178,004.",
     "facts": [
      "F3"
     ],
     "quotes": [
-     "Net cash provided by operating activities - continuing operations | 455,366 | 235,696",
-     "Additions to mineral properties and property, plant and equipment | (178,004) | (161,080)"
+     "Net cash provided by operating activities - continuing operations | 455,366 | 235,696"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3; the interpretation of the working-capital swing is inferred",
-    "claim": "Cash conversion looks sound. Cash provided by operating activities before tax, interest paid and received was 552,265, against net income from continuing operations of 288,777. Depletion and depreciation of 191,019 is a large non-cash add-back. The change in working capital was only (15), compared with (57,035) a year earlier (table in thousands).",
+    "basis": "Figures are stated; the explanation of the gap is inferred from the cash flow line items.",
+    "claim": "Cash conversion looks good. Cash provided by operating activities of 552,265 (table in thousands) exceeded net income from continuing operations of 288,777. The gap is mainly depletion and depreciation of 191,019 and the income tax charge of 111,398 added back, with cash taxes of 101,269 deducted afterwards. Working capital changes were close to neutral at (15), against (57,035) in 2024.",
     "facts": [
+     "F2",
      "F3"
     ],
     "quotes": [
@@ -259,20 +264,31 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and P1; the link to profit growth is inferred",
-    "claim": "Cash taxes are a growing drain on cash generation. Income taxes paid were 101,269 against 38,953. In the nine-month interim statements, current income tax expense was 150,358 against 81,106 (table in thousands).",
+    "basis": "Classification is stated in the balance sheet; the ability to meet obligations from cash is inferred.",
+    "claim": "The balance sheet shows no separate current portion of debt at 31 December 2025. Debt of 134,410 (table in thousands) is classified as non-current. Current liabilities of 256,376 consist of trade and other payables of 153,361, income taxes payable of 81,816, and the current portion of lease obligations of 21,199. Near-term fixed obligations are therefore mostly taxes, payables and leases rather than borrowings.",
     "facts": [
-     "F3",
-     "P1"
+     "F1"
     ],
     "quotes": [
-     "Income taxes paid | (101,269) | (38,953)"
+     "Current portion of lease obligations | 21,199 | 19,761"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "Earnings continued in the 2026 interim period. Nine-month sales were 954,319, mine operating income 531,872 and net income 255,988 (table in thousands).",
+    "basis": "Inferred from cash flow sub-lines and the share counts; the instrument terms are not stated.",
+    "claim": "The cash flow statement shows past convertible note activity. The 2024 convertible notes line shows 172,500 issued (table in thousands), and a credit facility repayment of (233,000) appears alongside 68,000 of convertible notes issued. Diluted weighted average shares of 334,896 exceed basic shares of 306,862. This suggests dilutive instruments remain outstanding, which may affect how any debt is settled.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Convertible notes issued | 172,500"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the unaudited interim income statement.",
+    "claim": "Interim 2026 results show continued profitability and a low financing cost. For the nine months to 30 September 2026, income before income taxes was 431,386 (table in thousands). Interest and finance costs, net, were (8,041), against (9,622) a year earlier. Current income tax expense rose to (150,358) from (81,106).",
     "facts": [
      "P1"
     ],
@@ -280,75 +296,95 @@
     "support": "number_not_listed"
    },
    {
-    "basis": "stated for the flows in F3; the coverage conclusion is inferred from F1 and F3",
-    "claim": "No debt maturity is visible in the evidence. The cash flow statement shows past financing events: convertible notes issued of 172,500 under a 'Convertible notes 2024' heading, and credit facility repayment of (233,000). Only 10,267 was spent on share repurchases against 34,128 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Convertible notes issued | 172,500"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 for the timetable; the funding implication is inferred",
-    "claim": "Growth projects will draw on cash. The CEO cites the July final investment decision on the 30% S\u00e9gu\u00e9la plant expansion. The Diamba Sud milestone table schedules an FID and start of critical-path construction in Q4 2026, with first gold pour in Q2/Q3 2028. No spending amounts are given.",
+    "basis": "Project timing is stated; the link to funding is inferred.",
+    "claim": "Growth projects point to future capital needs. The company cites a July final investment decision on a 30% plant expansion at S\u00e9gu\u00e9la. It expects Diamba Sud to reach final investment decision in Q4 2026, with a first gold pour targeted for Q2/Q3 2028. The cost of these projects and how they will be funded are not stated.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Following our July final investment decision on the 30% plant expansion at our flagship S\u00e9gu\u00e9la mine"
+     "FID, commencement of critical-path construction activities, including earthworks for the process plant and power station, and placement of all long-lead equipment orders"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the income statements; the cause of the increase is not given.",
-    "claim": "Sales and mine operating income grew strongly. The 2026 nine-month sales were 954,319 against 676,818 a year earlier (table in thousands of US dollars), and mine operating income was 531,872 against 318,501. Full-year 2025 sales were 947,059 against 677,243 in 2024. For this to continue, realised prices and volumes must hold at or above the 2026 level. The packet does not say what drove the increase.",
-    "facts": [
-     "P1",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated by the CEO in the 2 November 2026 release; the conditions are inferred.",
-    "claim": "Management names the 30% plant expansion at S\u00e9gu\u00e9la as a growth driver. The CEO says it and Diamba Sud together underpin a target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028. For this to hold, the expansion must be built and commissioned on the July final investment decision and the 2028 timing, and it must perform at the expanded rate.",
+    "basis": "Stated in the 2 November 2026 company release (management target). The release gives no supporting detail for S\u00e9gu\u00e9la.",
+    "claim": "S\u00e9gu\u00e9la plant expansion: the company took a final investment decision in July on a 30% expansion of its flagship S\u00e9gu\u00e9la mine. It is one of two projects behind a target of about 60% growth in annual gold production, to an annualized 500,000 ounces from mid-2028.",
     "facts": [
      "P2"
     ],
     "quotes": [
+     "Following our July final investment decision on the 30% plant expansion at our flagship S\u00e9gu\u00e9la mine, and with Diamba Sud advancing through the final stages of permitting, we are progressing along a clear growth path.",
      "Together, these projects underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2 November 2026 release; the conditions are inferred from its milestone table.",
-    "claim": "The Diamba Sud gold project in Senegal is a second driver, and permitting is the near-term condition. The Ministry issued a Notice of Admissibility on November 2, 2026, and the company expects the internal government approval of the final Exploitation Permit during the fourth quarter of 2026. Its schedule then shows FID in Q4 2026 and first gold pour in Q2/Q3 2028. For this to continue, the permit must be granted, FID taken, and construction and procurement kept on the milestones.",
+    "basis": "Inferred from the stated target. The packet does not address S\u00e9gu\u00e9la delivery.",
+    "claim": "S\u00e9gu\u00e9la condition: the expansion has to be built and commissioned on time, and the mine has to keep operating. The packet gives no evidence on either point.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2 November 2026 release. The company describes the notice as a step toward the permit, not the permit.",
+    "claim": "Diamba Sud permitting: the company received a Notice of Admissibility for its Exploitation Permit application on 2 November 2026 and expects the Government's internal approval for the final permit in the fourth quarter. For Diamba Sud to add production, the final permit has to be granted.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "marking an important final step toward the granting of the Exploitation Permit"
+     "With this milestone completed, the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2 November 2026 release; the conditions are inferred.",
-    "claim": "Exploration at the newly acquired Bambadji Project, near Diamba Sud, is a possible extension driver. Early Kabewest drilling returned 1.9 g/t Au over an estimated true width of 64 meters in hole FBRC0008. The company plans an initial Inferred Mineral Resource estimate in the first quarter of 2027. For this to matter, the remaining assays must confirm the interpretation and a resource must be published and then converted into mine plans.",
+    "basis": "Stated in the company's milestone table. The delivery risk is inferred.",
+    "claim": "Diamba Sud build-out: the company's timeline has the FID and start of critical-path construction in Q4 2026, then plant commissioning, first gold pour and ramp-up in Q2/Q3 2028. The growth target depends on these steps keeping to schedule.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Q4 2026 | FID, commencement of critical-path construction activities, including earthworks for the process plant and power station, and placement of all long-lead equipment orders",
+     "Q2/Q3 2028 | Process plant commissioning, first gold pour and ramp-up to nameplate plant throughput"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2 November 2026 drilling release. The company's own interpretation of the results is stated, and the economics are not.",
+    "claim": "Bambadji / Kabewest exploration: first drilling at Kabewest, about 2.3 kilometers from the proposed Diamba Sud plant site, returned broad gold intervals, including 1.9 g/t Au over an estimated true width of 64 meters. The company plans an initial Inferred Mineral Resource estimate in the first quarter of 2027. This is a possible extension of Diamba Sud, not yet a resource.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "work toward an initial Inferred Mineral Resource estimate, planned for publication in the first quarter of 2027"
+     "Kabewest is the most advanced drill-defined prospect at Bambadji and is located approximately 2.3 kilometers from the proposed Diamba Sud Gold Project plant site.",
+     "We look forward to receiving the remaining assays in the coming weeks and incorporating the complete dataset into our work toward an initial Inferred Mineral Resource estimate, planned for publication in the first quarter of 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the 40-F statements; the funding link is inferred.",
-    "claim": "The balance sheet and cash flow at year-end 2025 could fund growth spending. Cash and cash equivalents were 553,985 against 231,328 (table in thousands of US dollars). Net cash from continuing operating activities was 455,366, against additions to mineral properties and property, plant and equipment of 178,004. Debt was 134,410. For this to continue, operating cash flow must keep covering capital spending as the two projects are built.",
+    "basis": "Taken from the 6-K interim income statement. Interpretation is inferred, and the MD&A is not in the packet.",
+    "claim": "Current earnings base: nine-month 2026 sales of 954,319 (table in thousands, US dollars) were above the 676,818 of the same period of 2025. Mine operating income was 531,872 against 318,501. Cost of sales rose to 422,447 from 358,317, a smaller step than sales. Existing mines are therefore generating the operating income that supports the growth plan.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Taken from the audited 40-F income statement. Interpretation is inferred.",
+    "claim": "Prior-year base: FY2025 sales were 947,059 (table in thousands) against 677,243 in 2024, and mine operating income was 466,898 against 233,361. Growth in the existing business was already under way before the expansion projects.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Taken from the 40-F statements. The link to project funding is inferred.",
+    "claim": "Funding capacity: cash and cash equivalents were 553,985 (table in thousands) at 31 December 2025, up from 231,328. Operating cash flow from continuing operations was 455,366, against 178,004 spent on mineral properties and property, plant and equipment. Debt was 134,410. This gives internal funding for the projects, and it holds only if cash generation continues.",
     "facts": [
      "F1",
      "F3"
@@ -357,89 +393,88 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the income statement; the interpretation is inferred.",
-    "claim": "Rising taxes cut how much of the growth reaches net income, so tax levels are a condition. Nine-month 2026 income taxes were 175,398 against 73,858, and net income from continuing operations was 255,988 against 214,789. Q3 net income from continuing operations fell to 52,295 from 128,200. The Q3 2025 figure included a 52,745 impairment reversal. For earnings to keep growing with sales, tax and cost pressure must not absorb the gains.",
+    "basis": "Inferred from the 6-K income statement. No explanation of cost or price drivers is in the packet.",
+    "claim": "Margin and cost condition: the gap between sales and cost of sales has to hold as new capacity comes in. Q3 2026 cost of sales of 156,863 (table in thousands) was above the 118,232 of Q3 2025, and income taxes rose to 175,398 for nine months from 73,858.",
     "facts": [
-     "P1",
-     "F2"
+     "P1"
     ],
     "quotes": [],
-    "support": "number_not_listed"
+    "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in P2",
-    "claim": "Senegal's Ministry of Mines and Geology issued a Notice of Admissibility for the Diamba Sud Exploitation Permit application. The company expects the Government's internal approval for the final permit to be completed in the fourth quarter.",
+    "basis": "stated in the cited item",
+    "claim": "Fortuna received the Notice of Admissibility for its Diamba Sud Exploitation Permit application from Senegal's Ministry of Mines and Geology. The final Exploitation Permit has not yet been granted.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "The notice confirms that the Ministry has completed the review of the application documentation, and the file complies with all regulatory requirements, marking an important final step toward the granting of the Exploitation Permit."
+     "Fortuna is pleased to report that it received the Notice of Admissibility for its Diamba Sud Exploitation Permit application from Senegal\u2019s Ministry of Mines and Geology on November 2, 2026, following initiation of the application process in February 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2; the month is printed without a year",
-    "claim": "The company took a final investment decision on a 30% plant expansion at its S\u00e9gu\u00e9la mine. It is part of the target of about 60% growth in annual gold production by mid-2028.",
+    "basis": "stated in the cited item, but the year is inferred from the November 2026 release date",
+    "claim": "Fortuna took a final investment decision in July on a 30% plant expansion at its S\u00e9gu\u00e9la mine. The CEO's statement of 2 November 2026 refers to it. The item prints no year for the decision.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Following our July final investment decision on the 30% plant expansion at our flagship S\u00e9gu\u00e9la mine, and with Diamba Sud advancing through the final stages of permitting, we are progressing along a clear growth path."
+     "Following our July final investment decision on the 30% plant expansion at our flagship S\u00e9gu\u00e9la mine"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P3 as 'recently acquired'; date and terms not stated",
-    "claim": "The company acquired the Bambadji Project in Senegal, where first drilling results at Kabewest were reported.",
+    "basis": "stated in the cited item; the description of it as recently acquired is the only support",
+    "claim": "Fortuna has acquired the Bambadji Project in Senegal, near the proposed Diamba Sud plant site. The item gives no date, price or terms.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "is pleased to report encouraging first drilling results from the Kabewest prospect at its recently acquired Bambadji Project in Senegal"
+     "its recently acquired Bambadji Project in Senegal"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "The permit status and expected timing are stated in P2. The delay mechanism is inferred.",
+    "claim": "The Diamba Sud Exploitation Permit has not yet been granted. Only a Notice of Admissibility has been received, and the final grant still depends on the Government's internal approval process, which the company expects in the fourth quarter.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and in the P1 income statement columns",
-    "claim": "The annual income statement shows a reversal of impairment of mineral properties, plant and equipment of 52,745 (table in thousands). The interim statements show the same amount in the three and nine months ended September 30, 2025 columns.",
+    "basis": "The target and schedule are stated in P2. The slippage risk is inferred from that schedule.",
+    "claim": "The growth target of about 60% more annual gold production, to an annualized 500,000 ounces from mid-2028, depends on the S\u00e9gu\u00e9la expansion and on Diamba Sud. Diamba Sud's own final investment decision is scheduled for later and is not yet taken.",
     "facts": [
-     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Together, these projects underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028.",
+     "FID, commencement of critical-path construction activities, including earthworks for the process plant and power station, and placement of all long-lead equipment orders"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in P1. The margin-squeeze reading is inferred from the quarter comparison.",
+    "claim": "Costs are growing faster than sales in the latest quarter. Q3 2026 cost of sales rose to 156,863 from 118,232 (table in thousands) while sales rose to 293,435 from 251,362, leaving mine operating income at 136,572 versus 133,130. That squeezes margin.",
+    "facts": [
      "P1"
     ],
     "quotes": [
      "Reversal of impairment of mineral properties, plant and equipment"
     ],
-    "support": "number_not_listed"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in P2; the consequence of a delay is inferred.",
-    "claim": "The Diamba Sud Exploitation Permit has not yet been granted. The company expects only the Senegalese government's internal approval process to finish in the fourth quarter, so the project still depends on a government decision.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "With this milestone completed, the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026."
-    ],
     "support": "supported"
    },
    {
-    "basis": "The target and milestones are stated in P2; the delay risk is inferred from the schedule.",
-    "claim": "The target of about 60% growth in annual gold production to an annualized 500,000 ounces from mid-2028 depends on two projects. One is the S\u00e9gu\u00e9la plant expansion and the other is Diamba Sud, which still has a final investment decision, construction and ramp-up ahead of it. Slippage in either would delay the target.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Together, these projects underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in P1; the margin-pressure reading is inferred by comparing the columns.",
-    "claim": "In the third quarter, cost of sales rose faster than sales, mine operating income was nearly flat, and net income fell sharply against the prior-year quarter. This points to margin pressure and a less profitable quarter.",
+    "basis": "Figures are stated in P1. The effect on cash available is inferred.",
+    "claim": "The income tax burden has risen sharply. Nine-month income tax expense was 175,398 versus 73,858 (table in thousands), on income before income taxes of 431,386 versus 288,647, which absorbs a larger share of pre-tax profit.",
     "facts": [
      "P1"
     ],
@@ -447,52 +482,76 @@
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in P1; the effective-rate reading is inferred.",
-    "claim": "The tax charge is taking a much larger share of pre-tax profit. Nine-month income taxes were 175,398 against 73,858 a year earlier, while income before income taxes was 431,386 against 288,647 (table in thousands).",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3; the downside is inferred.",
-    "claim": "The Bambadji/Kabewest exploration case, meant to expand Diamba Sud, rests on partial data. About 70 percent of assays are in, and the initial Inferred Mineral Resource estimate is not yet published.",
+    "basis": "The timing and assay status are stated in P3. The risk is inferred from the early-stage status.",
+    "claim": "The Bambadji/Kabewest exploration upside is unproven. It has no resource estimate yet, only an initial Inferred Mineral Resource estimate planned for the first quarter of 2027, and about 70 percent of assays have been received.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "We look forward to receiving the remaining assays in the coming weeks and incorporating the complete dataset into our work toward an initial Inferred Mineral Resource estimate, planned for publication in the first quarter of 2027."
-    ],
-    "support": "number_not_listed"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "stated in the cited item (the expectation and milestone schedule); whether it will be met is not in the evidence",
-    "claim": "Will the Diamba Sud Exploitation Permit be granted and the project FID taken in the fourth quarter, as the company's schedule assumes? The evidence only shows a Notice of Admissibility and a stated expectation.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "With this milestone completed, the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026."
+     "an initial Inferred Mineral Resource estimate, planned for publication in the first quarter of 2027"
     ],
     "support": "supported"
-   },
+   }
+  ],
+  "thesis_change": [
    {
-    "basis": "inferred from comparing the income statements; the cause is not stated in the packet",
-    "claim": "What drove the higher income tax expense against pre-tax income in the nine months of 2026 (175,398 on 431,386, in thousands of US dollars) compared with full-year 2025 (111,398 on 400,175, in thousands)? It is unclear whether the effective rate is lasting.",
+    "basis": "inferred from the task statement that no item became effective after 2026-11-17T22:38:58Z",
+    "claim": "No evidence became effective after the earlier analysis, so nothing newer speaks to the S\u00e9gu\u00e9la expansion as a growth driver. The point rests on the 2 November 2026 Diamba Sud release.",
     "facts": [
-     "P1",
-     "F2"
+     "P2"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "inferred from the income statement lines; the causes are in omitted sections",
-    "claim": "How much of the rise in third-quarter cost of sales (156,863 versus 118,232, in thousands of US dollars) is lasting, and how much of the fall in operating income (102,266 versus 154,596, in thousands) comes from the 52,745 impairment reversal in the prior-year quarter?",
+    "basis": "inferred from the absence of newer items; permitting status is as stated in P2",
+    "claim": "Nothing newer addresses Diamba Sud permitting, FID or the construction schedule. The latest item on it is the 2 November 2026 release, which says the government's internal approval is expected in the fourth quarter of 2026.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the absence of newer items; plans as stated in P3",
+    "claim": "No newer drilling results or resource update exist in the evidence for Bambadji. The latest item is the 2 November 2026 Kabewest release, which says remaining assays are due in the coming weeks and a first Inferred Mineral Resource estimate is planned for the first quarter of 2027.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the absence of newer items; the figures are as printed in F1 and F3",
+    "claim": "No newer evidence updates the year-end 2025 balance sheet and cash flow picture. The latest balance sheet and cash flow items are the 40-F statements for 2025.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "inferred from the absence of newer items; status as stated in P2",
+    "claim": "Nothing newer shows whether the Diamba Sud Exploitation Permit has been granted. The latest evidence says only that the Notice of Admissibility was received and internal approval is still expected.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the absence of newer items",
+    "claim": "No newer evidence on the S\u00e9gu\u00e9la expansion or Diamba Sud timing bears on the production growth target. The dependence on both projects is unchanged in the evidence.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the absence of newer items; the underlying figures are in P1",
+    "claim": "No newer results exist beyond the third quarter 2026 interim statements, so the margin pressure point is neither confirmed nor altered by later evidence.",
     "facts": [
      "P1"
     ],
@@ -500,8 +559,48 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from year-end 2025 statements and the project schedule; capital costs are not in the evidence",
-    "claim": "How will the S\u00e9gu\u00e9la expansion and Diamba Sud construction be funded, and what is the cash balance after the nine months? The packet gives only year-end 2025 cash (553,985, in thousands of US dollars) and 2025 capital additions (178,004, in thousands), not the project capital cost.",
+    "basis": "inferred from the absence of newer items; the underlying figures are in P1",
+    "claim": "No newer tax or earnings data exist beyond the nine-month interim statements, so the point about the tax share of pre-tax profit is not addressed by later evidence.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "unresolved_questions": [
+   {
+    "basis": "The company's expectation is stated in the cited item. The outcome is not known as of the decision time.",
+    "claim": "Will Senegal's final Diamba Sud Exploitation Permit be granted in the fourth quarter of 2026, and will the Q4 2026 final investment decision follow on schedule?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "the Company now expects the Government\u00b4s internal approval process for the final Exploitation Permit to be completed during the fourth quarter of 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are stated in the cited statement of income. The drivers are not given in the visible text.",
+    "claim": "What explains the rise in nine-month 2026 income tax expense to 175,398 from 73,858, and the fall in third-quarter net income from continuing operations to 52,295 from 128,200, given the 2025 quarter included a 52,745 impairment reversal (figures in thousands of US dollars)?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Inferred from a comparison of the two quarterly columns. The cause is not stated in the visible text.",
+    "claim": "Why did third-quarter cost of sales rise to 156,863 from 118,232 while sales rose only to 293,435 from 251,362, leaving mine operating income nearly flat (figures in thousands of US dollars)?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The year-end cash figure is stated in the balance sheet. The current position and project costs are not in the packet.",
+    "claim": "What is the current cash position, and how will the 30% S\u00e9gu\u00e9la plant expansion and the Diamba Sud build be funded, given year-end 2025 cash of 553,985 (thousands of US dollars)?",
     "facts": [
      "F1",
      "F3",
@@ -510,46 +609,169 @@
     "quotes": [
      "Following our July final investment decision on the 30% plant expansion at our flagship S\u00e9gu\u00e9la mine"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited item (plan and status); the outcome is not in the evidence",
-    "claim": "Will the remaining Kabewest assays confirm the broad mineralization and support an initial Inferred Mineral Resource that adds to Diamba Sud? Only part of the assay data has been reported.",
+    "basis": "Inferred from the share counts. The instruments are not named in the cited statements.",
+    "claim": "What is the current debt and convertible note position, and how much dilution do the convertible notes still carry, given debt of 134,410 and diluted shares of 334,896 against basic shares of 306,862 (shares in thousands)?",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The plan and the drill results are stated in the cited release. The resource outcome is not known.",
+    "claim": "Will the remaining Kabewest assays and the planned initial Inferred Mineral Resource estimate confirm the 1.9 g/t over 64 meters result and the view that Bambadji can expand Diamba Sud?",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "With approximately 70 percent of assays received, the results to date continue to build confidence in the interpreted controls on mineralization and in Bambadji\u2019s potential to expand Diamba Sud."
+     "planned for publication in the first quarter of 2027"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated target in the cited item; baseline and project contributions are not stated",
-    "claim": "What is the production baseline and expected contribution of each project behind the target of approximately 60% growth to an annualized 500,000 ounces from mid-2028? The packet gives no ounces by mine.",
+    "basis": "The target and the schedule are stated in the cited release. Delivery is inferred to depend on the permit, FID and ramp-up timing.",
+    "claim": "Can the company's target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028 be met, given that Diamba Sud first gold pour is scheduled for Q2/Q3 2028 and still needs permit and FID?",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Together, these projects underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028."
+     "approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028"
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the share-count and debt lines; instrument terms are not in the packet",
-    "claim": "What convertible instruments are outstanding, and could they dilute shares? Diluted weighted average shares (334,896 thousand) exceeded basic (306,862 thousand) in 2025, and the debt on the balance sheet was 134,410 (in thousands of US dollars).",
-    "facts": [
-     "F2",
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
     "support": "supported"
    }
   ]
  },
  "ticker": "FSM",
- "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "upside": 0.239669693318882,
+ "valuation": {
+  "annotations": [
+   "seeds_disagree: op_margin.y1 (1000 none, 3000 up)",
+   "held_at_record: rev_growth.y1 model 0.3984 valued at 0.0375",
+   "margin_at_record_peak: normalized.margin 0.3297 at or above the record's p75 0.2306",
+   "margin_at_record_peak: long_run_op_margin 0.3297 at or above the record's p75 0.2306"
+  ],
+  "departures": [
+   {
+    "driver": "record_persistence",
+    "evidence": [
+     "P1.s10",
+     "V0"
+    ],
+    "input": "rev_growth.y1"
+   }
+  ],
+  "directions": {
+   "capex": "none",
+   "fade_years": "none",
+   "long_run_op_margin": "none",
+   "normalized.margin": "none",
+   "normalized.rev_growth": "none",
+   "op_margin.y1": "none",
+   "op_margin.y2": "none",
+   "rev_growth.y1": "up",
+   "rev_growth.y2": "none",
+   "terminal_g": "none",
+   "terminal_ronic": "none"
+  },
+  "evidence": {
+   "P1.s10": {
+    "kind": "six_k",
+    "period": "2026-11-05",
+    "text": "Sales | 18 | \u200b | \u200b | 293,435 | \u200b | \u200b | 251,362 | \u200b | \u200b | 954,319 | \u200b | \u200b | 676,818"
+   },
+   "V0": {
+    "kind": "code_base",
+    "period": "2025-12-31",
+    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled operating margin record: min -0.1666, p25 -0.0005, median 0.2282, p75 0.2306, max 0.4312, last 0.4312; persist 0.3297 (the median plus half the gap from the median to the last year: about half such a gap has remained 2-5 years later in filed records).\nFiled yearly growth of revenue (consecutive fiscal years): 2022-12-31 0.1361, 2023-12-31 0.2362, 2024-12-31 -0.1961, 2025-12-31 0.3984.\nBase-year revenue 947,059,000; tax rate 0.2784; return on opening capital 0.2123; capital expenditure 0.2561 and depreciation 0.2335 of revenue (pooled); the desk depreciates by the pooled rule.\nCost of equity 0.0938 (risk-free 0.0512, long-run growth anchor 0.0375, loading 0.893, equity premium 0.0477).\nYear 1 to date: not available (no 10-Q of year 1 effective at T).\nMENU (option and the number code uses; the first option is the record-neutral one).\nrev_growth.y1: anchor 0.0375; record_median 0.1861; last 0.3984; zero 0.0000; ytd not available; guidance\nrev_growth.y2, normalized.rev_growth: anchor 0.0375; record_median 0.1861; last 0.3984; zero 0.0000; guidance\nop_margin.y1: persist 0.3297; median 0.2282; p25 -0.0005; p75 0.2306; last 0.4312; ytd not available; guidance\nop_margin.y2: persist 0.3297; median 0.2282; p25 -0.0005; p75 0.2306; last 0.4312; guidance\nnormalized.anchor and long_run_op_margin.anchor: persist 0.3297; median 0.2282; p25 -0.0005; p75 0.2306; last 0.4312; long_run_op_margin.anchor also normalized (the normalized number)\nnormalized.step and long_run_op_margin.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_ronic (return on new capital in the long run): no_growth_value 0.0938; quarter 0.1090; half 0.1301; three_quarters 0.1614; ronic0 0.2123\nterminal_g: anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\ncapex (capital expenditure over revenue, years 1-5): pooled 0.2561; record_last 0.1880; record_max 0.3687; guidance (a year-1 level, then to pooled by year 5)\nDeparture keys: rev_growth.y1, rev_growth.y2, op_margin.y1, op_margin.y2, normalized.margin, normalized.rev_growth, long_run_op_margin, fade_years, terminal_ronic, terminal_g, capex.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: revenue_level or revenue_growth (growth), op_margin, capex_level."
+   }
+  },
+  "neutral": {
+   "capex": [
+    0.25611100527897795,
+    0.25611100527897795,
+    0.25611100527897795,
+    0.25611100527897795,
+    0.25611100527897795
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.32970390141468475,
+   "normalized.margin": 0.32970390141468475,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.32970390141468475,
+   "op_margin.y2": 0.32970390141468475,
+   "rev_growth.y1": 0.0375,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.0938268138692389
+  },
+  "numbers": {
+   "capex": [
+    0.25611100527897795,
+    0.25611100527897795,
+    0.25611100527897795,
+    0.25611100527897795,
+    0.25611100527897795
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.32970390141468475,
+   "normalized.margin": 0.32970390141468475,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.32970390141468475,
+   "op_margin.y2": 0.32970390141468475,
+   "rev_growth.y1": 0.3984035272420683,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.0938268138692389
+  },
+  "of_record": {
+   "rev_growth.y1": {
+    "model": 0.3984035272420683,
+    "model_option": "last",
+    "record": 0.0375,
+    "record_option": "anchor"
+   }
+  },
+  "options": {
+   "capex": "pooled",
+   "fade_years": 10,
+   "long_run_op_margin": [
+    "normalized",
+    0
+   ],
+   "normalized.margin": [
+    "persist",
+    0
+   ],
+   "normalized.rev_growth": "anchor",
+   "op_margin.y1": "persist",
+   "op_margin.y2": "persist",
+   "rev_growth.y1": "last",
+   "rev_growth.y2": "anchor",
+   "terminal_g": "anchor",
+   "terminal_ronic": "no_growth_value"
+  },
+  "reverts": [],
+  "unknowns": [
+   "No sentence in the evidence guides year 1 revenue, revenue growth, operating margin or capex; the 60% growth target in P2 is for gold production from mid-2028, not revenue.",
+   "The nine-month 2026 results in P1 are cut off and come from a 6-K, so the menu offers no year-to-date option; the fourth-quarter 2026 result is not known.",
+   "Third-quarter 2026 operating margin (102,266 on sales of 293,435) is below the nine-month figure, so how far the high filed margin persists is unclear.",
+   "The size and timing of S\u00e9gu\u00e9la expansion and Diamba Sud construction capital spending cannot be taken from the evidence, so capex stays at the pooled level."
+  ],
+  "year": 3
+ },
+ "value_base": 9.574952849050163,
+ "value_bear": 9.080703906054739,
+ "value_bull": 10.980495054062768,
+ "value_per_filed_share": {
+  "base": 9.574952849050163,
+  "bear": 9.080703906054739,
+  "bull": 10.980495054062768
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +4.3 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }
