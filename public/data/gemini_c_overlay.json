@@ -1,11 +1,11 @@
 {
- "count": 174,
+ "count": 175,
  "effort": "high",
- "fill_complete": false,
- "generated_at": "2026-11-18T04:02:24Z",
- "list_covered": 159,
+ "fill_complete": true,
+ "generated_at": "2026-11-18T04:05:52Z",
+ "list_covered": 160,
  "list_names": 160,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -721,6 +721,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
+  "CBRL": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 67,
+   "claims_supported": 56,
+   "date": "2026-11-18T03:59:53Z",
+   "family": "operating",
+   "flags": [
+    "The company sold assets of its Maple Street Biscuit Company (MSBC) business to a third party and closed the remaining MSBC locations. It recorded a loss on sale of business assets of $27,039 (thousands, per MD&A).",
+    "In the fourth quarter of fiscal 2026 the company completed a sale and leaseback of 26 owned Cracker Barrel properties and recorded a net gain of $47,421 (thousands, per MD&A).",
+    "The company recorded impairment charges of $21,968 in fiscal 2026 (thousands), compared with $19,772 in fiscal 2025. The 2026 charges covered nine Cracker Barrel locations and sixteen MSBC locations."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no usable tax rate in the filings",
+   "qwen_book": null,
+   "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable tax rate in the filings"
   },
   "CCSI": {
    "alpha_pts": 12.876245608334186,
@@ -5445,7 +5468,7 @@
  "verdict_counts": {
   "AVOID": 36,
   "BUY": 30,
-  "NO_CALL": 101,
+  "NO_CALL": 102,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
