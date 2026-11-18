@@ -2,29 +2,227 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 52,
- "claims_supported": 47,
- "date": "2026-11-17T18:07:59Z",
+ "claims": 72,
+ "claims_supported": 69,
+ "date": "2026-11-18T05:53:54Z",
  "family": "operating",
  "flags": [
-  "Enerflex announced a major Engineered Systems award to design, engineer, fabricate and assemble over one gigawatt of behind-the-meter gas-fired power generation units for a North American data center. Its backlog of such units now exceeds 1.75 gigawatts, with deliveries through 2028.",
-  "Per the CFO, Enerflex completed the divestiture of the majority of its Asia Pacific operations during the third quarter of 2026. The exact date, price and terms are not in the cited text.",
-  "The Board approved an increase of about 17% in the quarterly dividend to $0.035 per common share, effective with the dividend payable in November 2026."
+  "Enerflex reported its third quarter 2026 financial and operational results, including Adjusted EBITDA of $129 MILLION, free cash flow of $102 MILLION, return on capital employed of 15.8%, and record ES bookings and backlog of $1.0 BILLION and $2.1 BILLION.",
+  "Enerflex completed the divestiture of the majority of its Asia Pacific operations during the third quarter of 2026.",
+  "Enerflex's Board of Directors elected to declare the quarterly dividend in U.S. Dollars and approved an increase of approximately 17% to $0.035 per common share, effective with the dividend payable in November 2026."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
- "no_value_reason": "no usable tax rate in the filings",
+ "loss_record": {
+  "cause": "cannot_tell",
+  "explanation": "The provided 40-F financial statements only cover 2024 and 2025\u2014both of which report positive operating income and pretax earnings\u2014and the MD&A is absent from the packet. Because none of the evidence explains what drove the 2023 pretax loss of -52,000,000, the cause of the thin profit record cannot be determined from the evidence given.",
+  "label": "the filings in the packet do not say",
+  "quotes": [
+   {
+    "id": "F2",
+    "quote": "Dec. 31, 2025 | Dec. 31, 2024"
+   },
+   {
+    "id": "F2",
+    "quote": "Operating income | 306 | 173"
+   },
+   {
+    "id": "F2",
+    "quote": "Earnings (loss) before income taxes (\"EBT\") | 163 | 81"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+ "source": "on request (tax fallback rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the company's boilerplate in the cited release",
-    "claim": "Enerflex describes itself as a provider of modular natural gas, power and treated water technology solutions.",
+    "basis": "stated in [S0] and [P2]",
+    "claim": "Enerflex Ltd. operates in the Energy sector within the Oil & Gas Equipment & Services industry and provides modular natural gas, power, and treated water technology solutions.",
     "facts": [
+     "S0",
      "P2"
+    ],
+    "quotes": [
+     "sector: Energy",
+     "industry: Oil & Gas Equipment & Services",
+     "Enerflex is a leading provider of modular natural gas, power, and treated water technology solutions, delivering value through disciplined execution and a deliberate approach to where we compete."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Through its Engineered Systems (\"ES\") business line and North American manufacturing operations, Enerflex designs, engineers, fabricates, and assembles low-emission behind-the-meter natural gas-fired power generation units for North American data center, artificial intelligence, and digital infrastructure customers.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The Company has been contracted to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development.",
+     "The projects will be executed through Enerflex's North American manufacturing operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Beyond initial equipment delivery, Enerflex pursues commissioning, installation, maintenance, and after-market services, including digital solutions via its ReliaCoreTMAsset Performance Management ecosystem.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Beyond the initial equipment scope, the Company\u2019s backlog of low-emission behind-the-meter natural gas-fired power generation units provides opportunities for future commissioning, installation, and after-market services support including digital solutions with Enerflex\u2019s ReliaCoreTMAsset Performance Management ecosystem, aligning with Enerflex\u2019s commercial initiatives to support the full lifecycle requirements of behind-the-meter power generation development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] and [P1]",
+    "claim": "Enerflex owns and leases Energy Infrastructure (\"EI\") assets under operating leases (686; table in USD millions) and finance leases (58 current and 180 non-current; table in USD millions) within a highly contracted EI product line.",
+    "facts": [
+     "F1",
+     "P1"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713",
+     "EI assets - finance leases receivable | 58 | 49",
+     "EI assets - finance leases receivable | 180 | 189",
+     "The increase reflects confidence in Enerflex\u2019s business, strong financial position and long-term growth outlook, supported by record ES backlog and the highly contracted EI product line."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in [P1] and [P4]",
+    "claim": "The packet references the Engineered Systems (\"ES\") business line, the Energy Infrastructure (\"EI\") product line, and after-market, digital, and maintenance services, while formal reporting segments are not disclosed in the provided items.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The increase reflects confidence in Enerflex\u2019s business, strong financial position and long-term growth outlook, supported by record ES backlog and the highly contracted EI product line.",
+     "To support the execution of the Company\u2019s behind-the-meter natural gas-fired power generation backlog and expected growth across Enerflex\u2019s core markets, the Company is investing in expanding the capabilities of its ES business line."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [S0], [P1], and [P2]",
+    "claim": "Headquartered in Canada and operating across a global footprint, Enerflex completed the divestiture of the majority of its Asia Pacific operations to sharpen focus on core operating regions.",
+    "facts": [
+     "S0",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "country: Canada",
+     "Our customer-focused delivery model supports operational excellence, innovation, and scalability across our global footprint with a focus on creating long-term shareholder value.",
+     "During the quarter, we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P4]",
+    "claim": "Revenue growth and future deliveries are driven by commercial project awards, including record ES bookings of $1.0 BILLION, ES backlog of $2.1 BILLION, and a behind-the-meter power generation backlog exceeding 1.75 gigawatts with deliveries extending through 2028.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY",
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1]",
+    "claim": "Billing and project delivery timing creates significant working-capital balances in deferred revenue (355 current and 13 non-current; table in USD millions) and unbilled revenue (164 current and 1 non-current; table in USD millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Deferred revenue | 355 | 375",
+     "Deferred revenue | 13 | 11",
+     "Unbilled revenue | 164 | 157",
+     "Unbilled revenue | 1 | 2"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2]",
+    "claim": "Cost of goods sold is the largest cost driver at 1,989 against Revenue of $ 2,571 for Gross margin of 582 (table in USD millions), compared with Revenue of $ 2,414, Cost of goods sold of 1,910, and Gross margin of 504 in the prior year (table in USD millions).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Revenue | $ 2,571 | $ 2,414",
+     "Cost of goods sold (\"COGS\") | 1,989 | 1,910",
+     "Gross margin | 582 | 504"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2] and [P4]",
+    "claim": "Selling, general and administrative expenses (\"SG&A\") represent the primary operating overhead at 272 compared with 327 in the prior year (table in USD millions), alongside ongoing initiatives to leverage scale and improve operational efficiency.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Selling, general and administrative expenses (\"SG&A\") | 272 | 327",
+     "These investments, combined with on-going initiatives to enhance collaboration, leverage scale, improve operational efficiency, and solidify capabilities, are expected to significantly increase revenue capacity of Enerflex\u2019s ES business line."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "Asset-intensive operations recorded 161 of depreciation and amortization, (96) of additions to EI assets - operating leases, and (19) of PP&E additions (table in USD millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Depreciation and amortization | 161 | 185",
+     "PP&E | (19) | (16)",
+     "EI assets - operating leases | (96) | (59)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P4]",
+    "claim": "For 2026, Enerflex targets organic capital expenditures of $185 million to $195 million\u2014comprising approximately $100 million for organic growth, approximately $55 million for maintenance, and $30 million to $40 million for PP&E and infrastructure\u2014supporting ES capacity expansion under approximately $100 million of authorized ES facility investments.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The Company continues to target spending of $185 million to $195 million during 2026, which includes: (1) organic growth capital expenditures of approximately $100 million (unchanged from prior guidance); (2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million); and (3) PP&E and infrastructure investments of $30 million to $40 million to support the Company's ES business line and activity in adjacent markets, including electric power generation (prior guidance of approximately $15 million).",
+     "As previously announced, Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities, $15 million of which is included in Enerflex\u2019s capital expenditure guidance for 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2]",
+    "claim": "Below operating income of 306, net earnings of 64 reflect net finance costs of 120, income taxes of 99, derecognition and unrealized loss on redemption options of (17), and foreign exchange loss of 4 (table in USD millions).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Operating income | 306 | 173",
+     "Foreign exchange (\"FX\") loss | 4 | 4",
+     "Derecognition and unrealized (loss) gain on redemption options | (17) | 17",
+     "Net finance costs | 120 | 98",
+     "Income taxes | 99 | 49",
+     "Net earnings (loss) | 64 | 32"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P2 (company description) and S0 (screener industry and country fields)",
+    "claim": "Enerflex is a Canada-based Oil & Gas Equipment & Services company that positions itself as a leading provider of modular natural gas, power, and treated water technology solutions.",
+    "facts": [
+     "P2",
+     "S0"
     ],
     "quotes": [
      "Enerflex is a leading provider of modular natural gas, power, and treated water technology solutions, delivering value through disciplined execution and a deliberate approach to where we compete."
@@ -32,111 +230,56 @@
     "support": "supported"
    },
    {
-    "basis": "ES and EI are named in the cited releases; the reading that they are the main reporting lines is inferred, because the business and MD&A sections were not found",
-    "claim": "The company's releases refer to two product lines, Engineered Systems (ES) and Energy Infrastructure (EI). ES designs and builds equipment on a project basis. EI is described as highly contracted. A formal segment breakdown is not in the evidence.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "supported by record ES backlog and the highly contracted EI product line"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited release",
-    "claim": "ES sells project-based equipment for behind-the-meter natural gas-fired power generation. The latest large award is for a North American data center development, and the power backlog exceeds 1.75 gigawatts with deliveries running through 2028.",
+    "basis": "stated in P4 (October 13, 2026 news release)",
+    "claim": "Enerflex holds a behind-the-meter natural gas-fired power generation backlog exceeding 1.75 gigawatts, anchored by a large-scale North American data center contract and additional awards.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "The Company has been contracted to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development."
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028.",
+     "Our success securing over 1.75 gigawatts of backlog highlights Enerflex's unique capabilities in providing an integrated design, engineering, full-scale fabrication, and project execution solutions for behind-the-meter power generation projects."
     ],
     "support": "supported"
    },
    {
-    "basis": "figures stated in the headline; the conversion mechanism is inferred",
-    "claim": "ES bookings and backlog are a key revenue driver. The third-quarter 2026 release reports record ES bookings of $1.0 billion and backlog of $2.1 billion.",
+    "basis": "stated in P1 (third quarter 2026 results release)",
+    "claim": "Enerflex reported record ES bookings of $1.0 BILLION and backlog of $2.1 BILLION, alongside a highly contracted EI product line.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY"
+     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY",
+     "The increase reflects confidence in Enerflex\u2019s business, strong financial position and long-term growth outlook, supported by record ES backlog and the highly contracted EI product line."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited release as an expectation",
-    "claim": "After the initial equipment sale, the company expects follow-on revenue from commissioning, installation, after-market services and digital solutions tied to its power backlog.",
+    "basis": "stated in P4",
+    "claim": "Enerflex leverages its behind-the-meter equipment backlog to pursue full-lifecycle commissioning, installation, after-market services, and digital solutions.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "provides opportunities for future commissioning, installation, and after-market services support"
+     "Beyond the initial equipment scope, the Company\u2019s backlog of low-emission behind-the-meter natural gas-fired power generation units provides opportunities for future commissioning, installation, and after-market services support including digital solutions with Enerflex\u2019s ReliaCoreTMAsset Performance Management ecosystem, aligning with Enerflex\u2019s commercial initiatives to support the full lifecycle requirements of behind-the-meter power generation development."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from balance sheet line items",
-    "claim": "EI is capital-heavy. The balance sheet carries EI assets leased to customers: operating leases of 686, non-current finance lease receivables of 180 and current finance lease receivables of 58 (table in millions). Revenue from these assets would be lease-type revenue.",
+    "basis": "stated in P4 and updated in P1 outlook",
+    "claim": "Enerflex authorized approximately $100 million of investments in its ES facilities and capabilities and guided to $30 million to $40 million in PP&E and infrastructure investments to expand ES revenue capacity.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement; the cause of the margin change is not given",
-    "claim": "Revenue rose to 2,571 from 2,414, and COGS was 1,989 against 1,910 (table in millions). Gross margin was 582, up from 504, so cost of goods sold is the largest cost line.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement; the interpretation is inferred",
-    "claim": "Below gross margin, SG&A fell to 272 from 327, and operating income was 306 against 173. Net finance costs of 120 (98 in the prior year) take a substantial share of operating income before tax (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet and cash flow statement; the link to finance and depreciation costs is inferred",
-    "claim": "The company is financed partly by debt. Long-term debt was 582 against 708, and depreciation and amortization of 161 is a large non-cash cost of its asset base (table in millions).",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from balance sheet items",
-    "claim": "The business is working-capital intensive and project-driven. Unbilled revenue was 164, inventories 280 and current deferred revenue 355 (table in millions), consistent with build-to-order contracts and customer advances.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited releases",
-    "claim": "Capital spending is a cost driver. The 2026 organic capex target is $185 million to $195 million, including about $100 million of growth capex and about $55 million of maintenance capex. The company is also investing in ES facilities to raise revenue capacity.",
-    "facts": [
-     "P1",
-     "P4"
+     "P4",
+     "P1"
     ],
     "quotes": [
-     "The Company continues to target spending of $185 million to $195 million during 2026"
+     "As previously announced, Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities, $15 million of which is included in Enerflex\u2019s capital expenditure guidance for 2026.",
+     "These investments, combined with on-going initiatives to enhance collaboration, leverage scale, improve operational efficiency, and solidify capabilities, are expected to significantly increase revenue capacity of Enerflex\u2019s ES business line."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the CFO commentary",
-    "claim": "The company is narrowing its geographic footprint. In the third quarter of 2026 it divested the majority of its Asia Pacific operations to focus on core regions.",
+    "basis": "stated in P1 (CFO commentary)",
+    "claim": "Enerflex divested the majority of its Asia Pacific operations to focus on its core operating regions.",
     "facts": [
      "P1"
     ],
@@ -144,309 +287,351 @@
      "During the quarter, we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions."
     ],
     "support": "supported"
-   }
-  ],
-  "competitive_position": [
+   },
    {
-    "basis": "stated in the cited item (company news release)",
-    "claim": "Enerflex reports a large and growing backlog of behind-the-meter natural gas-fired power generation, above 1.75 gigawatts, with deliveries extending through 2028. This is the strongest evidence of current demand for its Engineered Systems (ES) business.",
+    "basis": "stated in F2 (40-F Consolidated Statements of Earnings)",
+    "claim": "Enerflex's annual revenue rose from $ 2,414 to $ 2,571 (table in millions) and operating income increased from 173 to 306 (table in millions) year-over-year.",
     "facts": [
-     "P4"
+     "F2"
     ],
     "quotes": [
-     "Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028"
+     "Revenue | $ 2,571 | $ 2,414",
+     "Operating income | 306 | 173"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (headline of the company release)",
-    "claim": "Third-quarter 2026 results are presented as record ES bookings and backlog of $1.0 billion and $2.1 billion respectively. The company also reports adjusted EBITDA of $129 million, free cash flow of $102 million and return on capital employed of 15.8%.",
+    "basis": "stated in P1 (third quarter 2026 results release)",
+    "claim": "Enerflex achieved quarterly Adjusted EBITDA of $129 MILLION, free cash flow of $102 MILLION, and a return on capital employed of 15.8%.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY",
      "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (CEO comment); the competitive advantage is the company's claim",
-    "claim": "Enerflex describes an integrated model of design, engineering, fabrication and project execution. It won a power award of over one gigawatt for a North American data center. The company ties this model to later after-market, digital and maintenance services.",
+    "basis": "stated in F1 (40-F Consolidated Statements of Financial Position)",
+    "claim": "Enerflex held 686 (table in millions) of Energy Infrastructure assets under operating leases at year-end, compared with 713 (table in millions) the prior year.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (forward-looking information caveats)",
+    "claim": "Enerflex identifies uncertainty over whether and when ES investments will increase revenue capacity and whether it can convert its opportunity pipeline into commercial awards.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "Enerflex's unique capabilities in providing an integrated design, engineering, full-scale fabrication, and project execution solutions for behind-the-meter power generation projects"
+     "(iv)expectations pertaining to increases in revenue capacity of Enerflex\u2019s Engineered Systems business and the timing associated therewith, if at all; (v) the ability of the Company to capitalize and convert its opportunity pipeline into meaningful commercial awards, the terms and conditions of such awards, and the timing associated therewith, if at all"
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "quote stated in P1; the link to the balance-sheet lines is inferred",
-    "claim": "The energy infrastructure (EI) rental and lease base is described as highly contracted. The balance sheet carries EI assets under operating leases and finance-lease receivables, which supports recurring-revenue positioning.",
-    "facts": [
-     "P1",
-     "F1"
-    ],
-    "quotes": [
-     "supported by record ES backlog and the highly contracted EI product line"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited statements; interpretation as competitive strength is inferred",
-    "claim": "Fiscal 2025 results improved. Revenue was 2,571 against 2,414, gross margin 582 against 504, and operating income 306 against 173 (all in millions, from the statement tables). Cash provided by operating activities was 345 against 324.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Enerflex is narrowing its footprint. It completed the divestiture of the majority of its Asia Pacific operations, and the Board raised the quarterly dividend by about 17% to US$0.035 per share. Share repurchases of 23 (table in millions) were made in 2025.",
-    "facts": [
-     "P1",
-     "F3"
-    ],
-    "quotes": [
-     "we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated as forward-looking-statement caveats in P4; the link to competitive position is inferred",
-    "claim": "Execution and capacity are named threats. Growth depends on expanding ES facilities, with about $100 million authorized, $15 million of it in 2026 guidance. The company's own forward-looking list flags the timing of any increase in revenue capacity and the conversion of its pipeline into awards.",
-    "facts": [
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "expectations pertaining to increases in revenue capacity of Enerflex\u2019s Engineered Systems business and the timing associated therewith, if at all"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated figures in the cited statements; the causal reading is inferred",
-    "claim": "Financial leverage and financing cost are a pressure point. Long-term debt fell to 582 from 708 (table in millions). Net finance costs still rose to 120 from 98. The company repaid 576 of 2027 Notes, issued 400 of 2031 Notes and booked 42 of debt extinguishment costs.",
-    "facts": [
-     "F1",
-     "F2",
-     "F3"
-    ],
-    "quotes": [],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the cited balance sheet; the composition point is read from its line items.",
-    "claim": "Liquidity at the last year-end balance sheet: cash was $81 (table in millions) against $92 a year earlier, and current assets of 992 exceeded current liabilities of 879 (table in millions). Most current assets are receivables, unbilled revenue and inventories, not cash.",
+    "basis": "stated in the cited item (F1 Consolidated Statements of Financial Position)",
+    "claim": "At the end of 2025, Enerflex held $ 81 in cash and cash equivalents (down from $ 92 at the end of 2024) and 992 in total current assets against 879 in total current liabilities (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
+     "Cash and cash equivalents | $ 81 | $ 92",
      "Total current assets | 992 | 1,041",
      "Total current liabilities | 879 | 911"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited balance sheet.",
-    "claim": "Leverage fell over 2025: long-term debt was 582 (table in millions) against 708 a year earlier. Total liabilities were 1,601 (table in millions) against shareholders' equity of 1,093 (table in millions) and total assets of 2,694 (table in millions).",
+    "basis": "stated in the cited item (F1 Consolidated Statements of Financial Position)",
+    "claim": "At the end of 2025, current assets were concentrated in accounts receivable (345), inventories (280), and unbilled revenue (164), while current liabilities were led by accounts payable and accrued liabilities (396) and deferred revenue (355, table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Accounts receivable | 345 | 398",
+     "Unbilled revenue | 164 | 157",
+     "Inventories | 280 | 258",
+     "Accounts payable and accrued liabilities | 396 | 413",
+     "Deferred revenue | 355 | 375"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F1 Consolidated Statements of Financial Position)",
+    "claim": "Long-term debt decreased to 582 at the end of 2025 from 708 at the end of 2024, alongside 22 in current lease liabilities, 50 in non-current lease liabilities, and 1,093 in total shareholders' equity (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
      "Long-term debt | 582 | 708",
-     "Total liabilities | 1,601 | 1,742"
+     "Lease liabilities | 22 | 22",
+     "Lease liabilities | 50 | 47",
+     "Total shareholders' equity | 1,093 | 1,049"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement; the explanation of the gap is inferred from its adjustment lines.",
-    "claim": "Operating cash flow was 345 in 2025 against 324 in 2024 (table in millions), well above net earnings of 64 (table in millions). The gap comes mainly from non-cash add-backs: depreciation and amortization of 161, share-based compensation of 26 and debt extinguishment costs of 42 (table in millions).",
+    "basis": "stated in the cited item (F2 Consolidated Statements of Earnings and Comprehensive Income (Loss))",
+    "claim": "Net finance costs rose to 120 in 2025 from 98 in 2024, compared with EBIT of 283 in 2025 (179 in 2024) and net earnings of 64 (32 in 2024, table in millions).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Earnings before finance costs and income taxes (\"EBIT\") | 283 | 179",
+     "Net finance costs | 120 | 98",
+     "Net earnings (loss) | 64 | 32"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F3 Consolidated Statements Of Cash Flows)",
+    "claim": "Cash provided by operating activities increased to 345 in 2025 from 324 in 2024, as pre-working-capital adjustments rose to 326 (from 218) while working-capital inflows fell to 19 (from 106, table in millions).",
     "facts": [
      "F3"
     ],
     "quotes": [
      "Cash provided by operating activities | 345 | 324",
+     "Adjustments to reconcile profit (loss) other than changes in working capital | 326 | 218",
+     "Net change in working capital and other | 19 | 106"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F3 Consolidated Statements Of Cash Flows)",
+    "claim": "Cash used in investing activities increased to (103) in 2025 from (59) in 2024, driven by additions to EI assets - operating leases of (96) (up from (59) in 2024) and PP&E additions of (19) (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Cash used in investing activities | (103) | (59)",
+     "EI assets - operating leases | (96) | (59)",
+     "PP&E | (19) | (16)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F3 Consolidated Statements Of Cash Flows)",
+    "claim": "In 2025, financing outflows included (23) for lease liability principal repayments, (23) for share repurchases under the NCIB, and (17) for dividends, contributing to an (11) decrease in cash and cash equivalents (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Lease liability principal repayment | (23) | (20)",
+     "Dividends | (17) | (9)",
+     "Shares repurchased - NCIB | (23) | 0",
+     "Decrease in cash and cash equivalents | (11) | (3)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P1 Q3 2026 Form 6-K)",
+    "claim": "In the third quarter of 2026, Enerflex reported Adjusted EBITDA of $129 MILLION, free cash flow of $102 MILLION, and return on capital employed of 15.8%, and approved an approximately 17% quarterly dividend increase to US$0.035 per share.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%",
+     "QUARTERLY DIVIDEND INCREASED BY ~17% TO US$0.035 PER SHARE; SUPPORTS DIRECT SHAREHOLDER RETURNS",
+     "Enerflex\u2019s Board of Directors has elected to declare the Company\u2019s quarterly dividend in U.S. Dollars and approved an increase of approximately 17% to $0.035 per common share, effective with the dividend payable in November 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P1 Q3 2026 Form 6-K Outlook)",
+    "claim": "For 2026, Enerflex targets $185 million to $195 million in organic capital expenditures, consisting of approximately $100 million for organic growth, $55 million for maintenance, and $30 million to $40 million for PP&E and ES infrastructure investments.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company continues to target spending of $185 million to $195 million during 2026, which includes: (1) organic growth capital expenditures of approximately $100 million (unchanged from prior guidance); (2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million); and (3) PP&E and infrastructure investments of $30 million to $40 million to support the Company's ES business line and activity in adjacent markets, including electric power generation (prior guidance of approximately $15 million)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (F1 balance sheet and F3 cash flow statement)",
+    "claim": "During 2025, Enerflex repaid (576) of the 2027 Notes (with 42 in debt extinguishment costs) and (3) of the Revolving Credit Facility while issuing 400 of the 2031 Notes, leaving 582 in non-current long-term debt and no current long-term debt line item at the end of 2025 (table in millions).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Long-term debt | 582 | 708",
+     "Repayment of the Revolving Credit Facility | (3) | (41)",
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
      "Debt extinguishment costs of the 2027 Notes | 42 | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Cash generation was funded with growth spending on leased energy-infrastructure assets. In 2025 additions to EI assets under operating leases were (96) and PP&E additions (19) (table in millions), and cash used in investing activities was (103) against (59). Proceeds from disposing EI operating-lease assets were 22 (table in millions).",
+    "basis": "stated in the cited items (F1 balance sheet and P1 Q3 2026 Form 6-K)",
+    "claim": "Near-term funding sources evidenced in the packet include $ 81 in cash at the end of 2025 (table in millions), $102 MILLION in third-quarter 2026 free cash flow, and the completed divestiture of the majority of Enerflex's Asia Pacific operations in the third quarter of 2026.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Cash used in investing activities | (103) | (59)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Amounts are stated in the cash flow and income statements; the maturity-extension reading is inferred from the note names.",
-    "claim": "Debt falling due was addressed in 2025: the company repaid 576 of 2027 Notes and issued 400 of 2031 Notes (table in millions). It also repaid 3 on the Revolving Credit Facility and had no term loan repayment, against 130 in 2024. Net finance costs rose to 120 from 98 (table in millions).",
-    "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [
-     "Repayment of the 2027 Notes | (576) | (62)",
-     "Issuance of the 2031 Notes | 400 | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated by the company in the cited release; no statement figures for 2026 are available.",
-    "claim": "The Q3 2026 release reports adjusted EBITDA of $129 MILLION and free cash flow of $102 MILLION for the quarter, and the CFO says strong cash generation strengthened the financial position.",
-    "facts": [
+     "F1",
      "P1"
     ],
     "quotes": [
-     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited statement and release; the competing-use point is inferred.",
-    "claim": "Cash uses for shareholders and capex continue. In 2025 dividends were 17 and NCIB share repurchases 23 (table in millions). In October 2026 the quarterly dividend was raised to $0.035 per share, and 2026 organic capex is guided to $185 million to $195 million.",
-    "facts": [
-     "F3",
-     "P1"
-    ],
-    "quotes": [
-     "Shares repurchased - NCIB | (23) | 0",
-     "The Company continues to target spending of $185 million to $195 million during 2026"
+     "Cash and cash equivalents | $ 81 | $ 92",
+     "During the quarter, we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions.",
+     "Strong cash generation during the third quarter strengthened Enerflex\u2019s financial position and provides significant flexibility as we continue to progress towards our strategic objectives."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in P4 (backlog size and delivery period); the conversion condition is inferred from the same release.",
-    "claim": "Behind-the-meter natural gas-fired power generation is the most visible demand driver. Backlog now exceeds 1.75 gigawatts, tied to a large data center award. For it to continue, awarded projects must be built and delivered on schedule, and new awards must keep arriving.",
+    "basis": "Stated in P4 (October 13, 2026 project award announcement and CEO commentary).",
+    "claim": "Demand for reliable, non-grid prime power for artificial intelligence and digital infrastructure is driving behind-the-meter natural gas-fired power generation awards, bringing Enerflex's behind-the-meter backlog above 1.75 gigawatts.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "now exceeds 1.75 gigawatts, with deliveries extending through 2028"
+     "The demand for reliable, prime power that does not require grid connection, supporting artificial intelligence and digital infrastructure development, continues to grow.",
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the P1 headline; the conversion condition is inferred.",
-    "claim": "Engineered Systems (ES) bookings and backlog are at record levels. Continued growth requires that the backlog converts to revenue and bookings keep replenishing it.",
+    "basis": "Stated in P4 (CEO commentary and forward-looking information disclosures).",
+    "claim": "For behind-the-meter power generation growth to continue, demand for non-grid prime power from artificial intelligence and digital infrastructure must keep growing and Enerflex must convert its opportunity pipeline into commercial awards.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The demand for reliable, prime power that does not require grid connection, supporting artificial intelligence and digital infrastructure development, continues to grow.",
+     "We appreciate the support and trust in Enerflex shown by our client partners to execute these critical projects and look forward to continuing to convert our opportunity pipeline into meaningful greenfield expansion and after-market, digital, and maintenance services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (third quarter 2026 financial and operational results release).",
+    "claim": "Record Engineered Systems (ES) bookings of $1.0 BILLION and ES backlog of $2.1 BILLION, alongside the highly contracted Energy Infrastructure (EI) product line, support Enerflex's long-term growth outlook.",
     "facts": [
      "P1"
     ],
     "quotes": [
+     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY",
+     "The increase reflects confidence in Enerflex\u2019s business, strong financial position and long-term growth outlook, supported by record ES backlog and the highly contracted EI product line."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (revised 2026 capex outlook) and P4 (authorized ES investment disclosure).",
+    "claim": "Enerflex has authorized approximately $100 million in ES facility and capability investments and targets $185 million to $195 million in 2026 capital spending, including approximately $100 million of organic growth capex and $30 million to $40 million for ES PP&E and infrastructure, to expand ES revenue capacity.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "As previously announced, Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities, $15 million of which is included in Enerflex\u2019s capital expenditure guidance for 2026.",
+     "These investments, combined with on-going initiatives to enhance collaboration, leverage scale, improve operational efficiency, and solidify capabilities, are expected to significantly increase revenue capacity of Enerflex\u2019s ES business line.",
+     "The Company continues to target spending of $185 million to $195 million during 2026, which includes: (1) organic growth capital expenditures of approximately $100 million (unchanged from prior guidance); (2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million); and (3) PP&E and infrastructure investments of $30 million to $40 million to support the Company's ES business line and activity in adjacent markets, including electric power generation (prior guidance of approximately $15 million)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P1 (management commentary and forward-looking information).",
+    "claim": "For ES revenue capacity expansion to materialize, Enerflex must execute its North American manufacturing operations and deliver on facility investments, collaboration, scale leverage, and operational efficiency initiatives.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "The projects will be executed through Enerflex's North American manufacturing operations.",
+     "These investments, combined with on-going initiatives to enhance collaboration, leverage scale, improve operational efficiency, and solidify capabilities, are expected to significantly increase revenue capacity of Enerflex\u2019s ES business line.",
+     "We are very pleased with the progress to date and adoption of operational and efficiency initiatives across our integrated company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 (October 13, 2026 news release).",
+    "claim": "Enerflex's behind-the-meter power generation backlog creates follow-on growth opportunities in commissioning, installation, maintenance, and after-market digital services via its ReliaCoreTMAsset Performance Management ecosystem.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Beyond the initial equipment scope, the Company\u2019s backlog of low-emission behind-the-meter natural gas-fired power generation units provides opportunities for future commissioning, installation, and after-market services support including digital solutions with Enerflex\u2019s ReliaCoreTMAsset Performance Management ecosystem, aligning with Enerflex\u2019s commercial initiatives to support the full lifecycle requirements of behind-the-meter power generation development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from P4 characterizing lifecycle services as opportunities alongside pipeline-conversion forward-looking caveats.",
+    "claim": "For lifecycle services growth to continue beyond initial equipment delivery, Enerflex must convert its opportunity pipeline into after-market, digital, and maintenance service awards and support full lifecycle requirements.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We appreciate the support and trust in Enerflex shown by our client partners to execute these critical projects and look forward to continuing to convert our opportunity pipeline into meaningful greenfield expansion and after-market, digital, and maintenance services.",
+     "Beyond the initial equipment scope, the Company\u2019s backlog of low-emission behind-the-meter natural gas-fired power generation units provides opportunities for future commissioning, installation, and after-market services support including digital solutions with Enerflex\u2019s ReliaCoreTMAsset Performance Management ecosystem, aligning with Enerflex\u2019s commercial initiatives to support the full lifecycle requirements of behind-the-meter power generation development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (Q3 2026 highlights and CFO commentary).",
+    "claim": "Third-quarter 2026 cash generation\u2014including Adjusted EBITDA of $129 MILLION and Free Cash Flow of $102 MILLION\u2014along with the Asia Pacific divestiture provides financial flexibility to fund organic growth and evaluate selective tuck-in acquisitions.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%",
+     "Strong cash generation during the third quarter strengthened Enerflex\u2019s financial position and provides significant flexibility as we continue to progress towards our strategic objectives.",
+     "During the quarter, we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions.",
+     "We remain focused on maintaining balance sheet strength and disciplined capital allocation, including investing in organic growth and evaluating selective value-enhancing tuck-in acquisition opportunities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (CFO commentary on capital allocation) and supported by F1 (long-term debt reduction from 708 to 582, table in millions, in 2025).",
+    "claim": "For cash-funded organic growth and tuck-in acquisitions to add growth, Enerflex must maintain balance sheet strength and disciplined capital allocation while identifying value-enhancing acquisition opportunities.",
+    "facts": [
+     "P1",
+     "F1"
+    ],
+    "quotes": [
+     "We remain focused on maintaining balance sheet strength and disciplined capital allocation, including investing in organic growth and evaluating selective value-enhancing tuck-in acquisition opportunities.",
+     "Long-term debt | 582 | 708"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 and F3 (2025 Form 40-F audited financial statements).",
+    "claim": "Prior to 2026, Enerflex increased 2025 revenue from $ 2,414 (table in millions) to $ 2,571 (table in millions), operating income from 173 (table in millions) to 306 (table in millions), and cash provided by operating activities from 324 (table in millions) to 345 (table in millions).",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Revenue | $ 2,571 | $ 2,414",
+     "Operating income | 306 | 173",
+     "Cash provided by operating activities | 345 | 324"
+    ],
+    "support": "number_not_found"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in [P1]",
+    "claim": "Enerflex reported its third quarter 2026 financial and operational results, including Adjusted EBITDA of $129 MILLION, free cash flow of $102 MILLION, return on capital employed of 15.8%, and record ES bookings and backlog of $1.0 BILLION and $2.1 BILLION.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "CALGARY, Alberta, October 29, 2026 \u2013 Enerflex Ltd. (TSX: EFX) (NYSE: EFXT) (\u201cEnerflex\u201d or the \u201cCompany\u201d) today reported its financial and operational results for the three and nine months ended September 30, 2026.",
+     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%",
      "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 for the investment amounts; the link to delivery capacity is inferred.",
-    "claim": "ES capacity expansion is a condition for growth. The company has authorized about $100 million of ES facility and capability investment, of which $15 million is in its 2026 capital guidance. The expansion must be completed and must raise revenue capacity for the backlog to be delivered.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P1 and F3; the funding condition is inferred.",
-    "claim": "The 2026 organic capital programme is aimed at growth. Spending of $185 million to $195 million is targeted, including organic growth capital of about $100 million. Growth therefore depends on the company funding this spending from internal cash flow.",
-    "facts": [
-     "P1",
-     "F3"
-    ],
-    "quotes": [
-     "The Company continues to target spending of $185 million to $195 million during 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2; the continuation condition is inferred.",
-    "claim": "Earnings expanded in 2025 through higher gross margin and lower SG&A. Operating income was 306 against 173, and gross margin was 582 against 504 (tables in millions). To continue, margins and cost discipline must hold as volume grows.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Operating income | 306 | 173"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 (management commentary); the causal link to margins is inferred.",
-    "claim": "Efficiency initiatives and portfolio focus support margins. Management cites progress on strategic objectives and a completed divestiture of most Asia Pacific operations. For this to keep helping, the efficiency gains must persist and the remaining core regions must perform.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "we completed the divestiture of the majority of our Asia Pacific operations"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1, F3 and P1 for the figures; the net conclusion is inferred.",
-    "claim": "The contracted Energy Infrastructure (EI) fleet supports recurring earnings, and the company is adding to it. Operating-lease EI additions were 96 against 59, but the EI operating-lease asset balance was 686 against 713 (tables in millions). Growth in this base requires additions to outpace depreciation and disposals, and contracts to continue.",
-    "facts": [
-     "F3",
-     "F1",
-     "P1"
-    ],
-    "quotes": [
-     "supported by record ES backlog and the highly contracted EI product line"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1, F1 and F3; the continuation condition is inferred.",
-    "claim": "Financial flexibility is a condition for growth. Strong cash generation was reported for the quarter, with free cash flow of $102 MILLION. Long-term debt fell to 582 from 708 (table in millions), so the company can fund growth and distributions only if cash generation persists.",
-    "facts": [
-     "P1",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and F3; the dependency on cash generation is inferred.",
-    "claim": "Direct shareholder returns are rising. The quarterly dividend was increased by approximately 17% to $0.035 per share, which is a sign of management confidence rather than operating growth. It depends on cash generation continuing.",
-    "facts": [
-     "P1",
-     "F3"
-    ],
-    "quotes": [
-     "approved an increase of approximately 17% to $0.035 per common share"
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item (6-K news release of October 13, 2026)",
-    "claim": "Enerflex announced a major Engineered Systems award to design, engineer, fabricate and assemble over one gigawatt of behind-the-meter gas-fired power generation units for a North American data center. Its backlog of such units now exceeds 1.75 gigawatts, with deliveries through 2028.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The Company has been contracted to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (CFO commentary in the October 29, 2026 news release); the date is inferred only as within the quarter ended September 30, 2026",
-    "claim": "Per the CFO, Enerflex completed the divestiture of the majority of its Asia Pacific operations during the third quarter of 2026. The exact date, price and terms are not in the cited text.",
+    "basis": "stated in [P1]",
+    "claim": "Enerflex completed the divestiture of the majority of its Asia Pacific operations during the third quarter of 2026.",
     "facts": [
      "P1"
     ],
@@ -456,8 +641,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (October 29, 2026 news release); the item does not say whether the November payment has been made",
-    "claim": "The Board approved an increase of about 17% in the quarterly dividend to $0.035 per common share, effective with the dividend payable in November 2026.",
+    "basis": "stated in [P1]",
+    "claim": "Enerflex's Board of Directors elected to declare the quarterly dividend in U.S. Dollars and approved an increase of approximately 17% to $0.035 per common share, effective with the dividend payable in November 2026.",
     "facts": [
      "P1"
     ],
@@ -467,107 +652,223 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (October 29, 2026 news release)",
-    "claim": "Enerflex refined its 2026 organic capital expenditure guidance. It still targets $185 million to $195 million, but maintenance capex is now about $55 million (previously $70 million to $80 million) and PP&E and infrastructure investments are now $30 million to $40 million (previously about $15 million).",
+    "basis": "stated in [P1]",
+    "claim": "Enerflex refined its 2026 organic capital expenditure guidance, continuing to target spending of $185 million to $195 million while updating maintenance capital expenditures to approximately $55 million (from $70 million to $80 million) and PP&E and infrastructure investments to $30 million to $40 million (from approximately $15 million), with organic growth capital expenditures unchanged at approximately $100 million.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Enerflex is refining its organic capital expenditure guidance for 2026."
+     "Enerflex is refining its organic capital expenditure guidance for 2026.",
+     "The Company continues to target spending of $185 million to $195 million during 2026, which includes: (1) organic growth capital expenditures of approximately $100 million (unchanged from prior guidance); (2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million); and (3) PP&E and infrastructure investments of $30 million to $40 million to support the Company's ES business line and activity in adjacent markets, including electric power generation (prior guidance of approximately $15 million)."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (6-K news release of October 27, 2026)",
-    "claim": "Enerflex appointed two new independent directors, David Primrose and Mary Zappone, effective October 27, 2026. Primrose also joined the Audit Committee. The appointments follow the recent retirement of director Fernando Assing.",
+    "basis": "stated in [P2]",
+    "claim": "Enerflex appointed David Primrose and Mary Zappone to its Board of Directors and appointed Mr. Primrose as a member of the Audit Committee.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "announces the appointment of Mr. David Primrose and Ms. Mary Zappone to its Board of Directors (the \u201cBoard\u201d), effective today."
+     "CALGARY, Alberta, October 27, 2026 \u2013 Enerflex Ltd. (TSX: EFX) (NYSE: EFXT) (\u201cEnerflex\u201d or the \u201cCompany\u201d) announces the appointment of Mr. David Primrose and Ms. Mary Zappone to its Board of Directors (the \u201cBoard\u201d), effective today.",
+     "Mr. Primrose has also been appointed as a member of the Audit Committee."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement (40-F, period 2025-12-31); the funding mechanism is inferred from the line items",
-    "claim": "In fiscal 2025 Enerflex refinanced debt. It repaid the 2027 Notes (576, table in millions), issued the 2031 Notes (400, table in millions) and recorded debt extinguishment costs of the 2027 Notes (42, table in millions). Long-term debt fell between the two year-ends.",
+    "basis": "stated in [P2]",
+    "claim": "Fernando Assing retired from Enerflex's Board of Directors prior to the appointment of the new independent directors.",
     "facts": [
-     "F3",
-     "F1"
+     "P2"
     ],
     "quotes": [
+     "These appointments follow the recent retirement of Fernando Assing from its Board of Directors and on-going normal course board refreshment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Enerflex was awarded a major Engineered Systems contract to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development, bringing its behind-the-meter power generation backlog above 1.75 gigawatts with deliveries extending through 2028.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "CALGARY, Alberta, October 13, 2026 \u2013 Enerflex Ltd. (TSX: EFX) (NYSE: EFXT) (\u201cEnerflex\u201d or the \u201cCompany\u201d) today announces the award of a major Engineered Systems (\u201cES\u201d) project.",
+     "The Company has been contracted to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development.",
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Enerflex announced additional behind-the-meter natural gas-fired power generation project awards of approximately 450 megawatts.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Enerflex authorized approximately $100 million of investments in its ES facilities and capabilities, with $15 million included in its initial 2026 capital expenditure guidance.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "As previously announced, Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities, $15 million of which is included in Enerflex\u2019s capital expenditure guidance for 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "In the 12 Months Ended Dec. 31, 2025, Enerflex recorded (576) (table in USD $ in millions) for repayment of the 2027 Notes, 42 (table in USD $ in millions) in debt extinguishment costs of the 2027 Notes, and 400 (table in USD $ in millions) from issuance of the 2031 Notes.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repayment of the 2027 Notes | (576) | (62)",
      "Issuance of the 2031 Notes | 400 | 0",
      "Debt extinguishment costs of the 2027 Notes | 42 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "In the 12 Months Ended Dec. 31, 2025, Enerflex recorded (23) (table in USD $ in millions) for shares repurchased under its NCIB.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Shares repurchased - NCIB | (23) | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "In the 12 Months Ended Dec. 31, 2024, Enerflex recorded (130) (table in USD $ in millions) for repayment of the Term Loan.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repayment of the Term Loan | 0 | (130)"
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Inferred from the 2025 balance sheet, income statement and cash flow statement. The third-quarter 2026 balance sheet is not in the packet.",
-    "claim": "Debt service and a thin cash balance are a financial-flexibility risk. At Dec. 31, 2025 long-term debt was 582 (table in millions) against cash of 81 (table in millions), and 2025 net finance costs were 120 (table in millions). In 2025 the company repaid 576 (table in millions) of 2027 Notes and issued 400 (table in millions) of 2031 Notes.",
+    "basis": "stated in F1, F2, F3, and P1; stress-liquidity risk is inferred from balance sheet and finance-cost figures because debt maturity schedules, interest rates, and covenant terms are absent from the packet",
+    "claim": "Enerflex held 582 (table in millions) in long-term debt and 879 (table in millions) in total current liabilities against $ 81 (table in millions) in cash at Dec. 31, 2025, while 2025 net finance costs rose to 120 (table in millions) and debt extinguishment costs of the 2027 Notes reached 42 (table in millions).",
     "facts": [
      "F1",
      "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Partly stated: the forward-looking caveats are in the cited items. The execution mechanism is inferred.",
-    "claim": "Backlog conversion and concentration risk. The behind-the-meter power backlog exceeds 1.75 gigawatts with deliveries through 2028. One award covers over one gigawatt for a single data center development, and the company's own forward-looking caveats say timing and conversion may not occur.",
-    "facts": [
-     "P4",
+     "F3",
      "P1"
     ],
     "quotes": [
-     "Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028.",
-     "The Company has been contracted to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development."
+     "Cash and cash equivalents | $ 81 | $ 92",
+     "Long-term debt | 582 | 708",
+     "Net finance costs | 120 | 98",
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0",
+     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Amounts are stated in the cited items. The cash-drain mechanism is inferred.",
-    "claim": "Rising cash commitments. The company targets 2026 organic capital spending of $185 million to $195 million, plans about $100 million of Engineered Systems facility investment, and raised the quarterly dividend to $0.035 per share. Management is also evaluating tuck-in acquisitions.",
+    "basis": "stated in P1 and P4 (including P4 forward-looking disclaimers on whether ES revenue capacity increases occur at all); operational impact of lower maintenance spending is inferred",
+    "claim": "Enerflex authorized approximately $100 million in ES facility investments and raised 2026 ES-related PP&E and infrastructure guidance to $30 million to $40 million while cutting maintenance capital expenditure guidance to approximately $55 million, leaving execution and capacity-expansion timing uncertain.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "The Company continues to target spending of $185 million to $195 million during 2026",
-     "Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities"
+     "The Company continues to target spending of $185 million to $195 million during 2026, which includes: (1) organic growth capital expenditures of approximately $100 million (unchanged from prior guidance); (2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million); and (3) PP&E and infrastructure investments of $30 million to $40 million to support the Company's ES business line and activity in adjacent markets, including electric power generation (prior guidance of approximately $15 million).",
+     "As previously announced, Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities, $15 million of which is included in Enerflex\u2019s capital expenditure guidance for 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the 2025 income statement figures.",
-    "claim": "Thin net profit relative to operating profit. In 2025 earnings before income taxes were 163 (table in millions), income taxes were 99 (table in millions) and net earnings were 64 (table in millions). Finance costs and a high tax charge absorbed most of the operating profit.",
+    "basis": "stated in P4 and P1 (including P4 forward-looking disclaimers on backlog awards and pipeline conversion); counterparty and cancellation exposure are inferred because contract terms are not disclosed",
+    "claim": "Enerflex faces concentration and conversion risk on its behind-the-meter power generation backlog of more than 1.75 gigawatts through 2028, as over one gigawatt is tied to a single large-scale North American data center development.",
     "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "The Company has been contracted to design, engineer, fabricate, and assemble over one gigawatt of low emission behind-the-meter natural gas-fired power generation units for a large-scale North American data center development.",
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028.",
+     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F2, F3, and P1; impairment sensitivity is inferred because goodwill impairment-testing assumptions and regional carrying values are absent from the packet",
+    "claim": "Enerflex carried 430 (table in millions) in goodwill and 686 (table in millions) in EI operating-lease assets against 1,093 (table in millions) in shareholders' equity at Dec. 31, 2025, after recording 3 (table in millions) in EI asset impairments in 2025.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Goodwill | 430 | 422",
+     "Total shareholders' equity | 1,093 | 1,049",
+     "Impairment of EI assets | 3 | 1",
+     "During the quarter, we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F2, and F3; ongoing exposure is inferred because currency mix and hedging note disclosures are not in the packet",
+    "claim": "Currency translation and financial-instrument revaluations created earnings and equity swings in 2025, including a (17) (table in millions) loss on redemption options, a (12) (table in millions) foreign-operation translation loss, and (199) (table in millions) in accumulated other comprehensive loss.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Accumulated other comprehensive loss | (199) | (214)",
+     "Derecognition and unrealized (loss) gain on redemption options | (17) | 17",
+     "Unrealized gain (loss) on translation of financial statements of foreign operations | (12) | 22",
+     "Effect of exchange rate changes on cash and cash equivalents denominated in foreign currencies | (3) | (5)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and F2; whether the high tax burden persists is inferred as unknown because tax-rate reconciliation footnotes are absent from the packet",
+    "claim": "Income taxes were 99 (table in millions) on EBT of 163 (table in millions) in 2025, including 92 (table in millions) in current income taxes, alongside 80 (table in millions) of income taxes payable at Dec. 31, 2025.",
+    "facts": [
+     "F1",
      "F2"
     ],
-    "quotes": [],
+    "quotes": [
+     "Earnings (loss) before income taxes (\"EBT\") | 163 | 81",
+     "Current income taxes | 92 | 72",
+     "Income taxes | 99 | 49",
+     "Income taxes payable | 80 | 79"
+    ],
     "support": "supported"
    }
   ],
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "inferred from the release excerpt, where the statements and reconciliations were omitted",
-    "claim": "The Q3 2026 headline figures are given without the statements behind them. Revenue, margins, net earnings and the cash flow build are not in the packet, so it is unclear how the quarter compares with the FY2025 base.",
+    "basis": "Stated in [P1]; the news release reports non-GAAP metrics while the interim financial statements and MD&A sections of the filing are omitted from the packet.",
+    "claim": "What are the complete interim financial statements and GAAP reconciliations for Adjusted EBITDA of $129 MILLION, Free Cash Flow of $102 MILLION, and return on capital employed of 15.8% in 2026?",
     "facts": [
-     "P1",
-     "F2",
-     "F3"
+     "P1"
     ],
     "quotes": [
-     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%"
+     "ADJUSTED EBITDA OF $129 MILLION, FREE CASH FLOW OF $102 MILLION AND RETURN ON CAPITAL EMPLOYED OF 15.8%",
+     "CALGARY, Alberta, October 29, 2026 \u2013 Enerflex Ltd. (TSX: EFX) (NYSE: EFXT) (\u201cEnerflex\u201d or the \u201cCompany\u201d) today reported its financial and operational results for the three and nine months ended September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred; the release states the completion but the omitted sections would hold the terms",
-    "claim": "What did the divestiture of most of the Asia Pacific operations bring in (proceeds, gain or loss) and take out (revenue, backlog, assets) of the consolidated results, and how were the proceeds used?",
+    "basis": "Stated in [P1]; the divestiture is announced without financial terms or segment disclosures, which are omitted from the packet.",
+    "claim": "What were the sale proceeds, accounting gain or loss, and historical revenue and earnings contribution of the majority of Asia Pacific operations divested during the third quarter of 2026?",
     "facts": [
      "P1"
     ],
@@ -577,50 +878,115 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from FY2025 statements and the Q3 release excerpt, which lacks the Q3 balance sheet",
-    "claim": "How much room does the larger dividend leave alongside buybacks, tuck-in acquisitions and the capex plan, and what is the balance sheet position after Q3?",
+    "basis": "Stated in [P1] and [P4]; both filings disclose the guidance figures without explaining the driver of the revision or the post-2026 spending schedule.",
+    "claim": "Why did 2026 guidance for PP&E and infrastructure investments increase from $15 million to between $30 million and $40 million while maintenance capital expenditures decreased from between $70 million and $80 million to $55 million, and when will the remainder of the $100 million ES investment be spent?",
     "facts": [
      "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The Company continues to target spending of $185 million to $195 million during 2026, which includes: (1) organic growth capital expenditures of approximately $100 million (unchanged from prior guidance); (2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million); and (3) PP&E and infrastructure investments of $30 million to $40 million to support the Company's ES business line and activity in adjacent markets, including electric power generation (prior guidance of approximately $15 million).",
+     "As previously announced, Enerflex has authorized approximately $100 million of investments in its ES facilities and capabilities, $15 million of which is included in Enerflex\u2019s capital expenditure guidance for 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P4]; the releases report gigawatt capacity and total ES backlog but omit pricing, margins, customer concentration, and annual delivery cadence.",
+    "claim": "What are the contract value, margin profile, customer identity, and annual delivery schedule through 2028 for the behind-the-meter power generation backlog exceeding 1.75 gigawatts and total ES backlog of $2.1 BILLION?",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "RECORD ES BOOKINGS AND BACKLOG OF $1.0 BILLION AND $2.1 BILLION, RESPECTIVELY",
+     "Combined with additional project awards, including approximately 450 megawatts announced on October 1, 2026, Enerflex\u2019s backlog of behind-the-meter natural gas-fired power generation now exceeds 1.75 gigawatts, with deliveries extending through 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1], [F2], and [F3]; the statements show debt balances, note issuance and repayment, and net finance costs, while the 40-F footnotes and MD&A are missing from the packet.",
+    "claim": "What are the interest rates, maturity profile, covenants, and undrawn credit capacity on long-term debt of 582 (table in millions) at year-end 2025 after issuing 400 (table in millions) of 2031 Notes and repaying 576 (table in millions) of 2027 Notes?",
+    "facts": [
      "F1",
+     "F2",
      "F3"
     ],
     "quotes": [
-     "QUARTERLY DIVIDEND INCREASED BY ~17% TO US$0.035 PER SHARE; SUPPORTS DIRECT SHAREHOLDER RETURNS"
+     "Long-term debt | 582 | 708",
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Net finance costs | 120 | 98"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited releases for the backlog size and spending; margin and timing are not disclosed in the excerpts",
-    "claim": "On what contract terms, margins and delivery schedule will the behind-the-meter power generation backlog convert to revenue, and can ES capacity be expanded in time?",
+    "basis": "Stated in [F1] and [P1]; [F1] reports carrying values and [P1] refers to the omitted EI Contract Backlog section of the MD&A.",
+    "claim": "What are the remaining contract durations, counterparty credit profiles, and renewal terms underlying EI assets - operating leases of 686 (table in millions) and EI assets - finance leases receivable of 58 current and 180 non-current (table in millions) in 2025?",
     "facts": [
-     "P4",
+     "F1",
      "P1"
     ],
     "quotes": [
-     "now exceeds 1.75 gigawatts, with deliveries extending through 2028"
+     "EI assets - operating leases | 686 | 713",
+     "Energy infrastructure (\"EI\") assets - finance leases receivable | 58 | 49",
+     "EI assets - finance leases receivable | 180 | 189",
+     "4 Refer to the \u201cEI Contract Backlog\u201d section of the MD&A for further details."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the release for the figures; the reason for the change is not given in the excerpt",
-    "claim": "Why was maintenance capex guidance cut while PP&E and infrastructure investment guidance was raised, and does the total 2026 target of $185 million to $195 million rest on durable lower maintenance needs?",
+    "basis": "Stated in [F1]; the balance sheet reports deferred and unbilled revenue balances without contract-liability schedules or recognition timing footnotes.",
+    "claim": "What share of current deferred revenue of 355 (table in millions) and non-current deferred revenue of 13 (table in millions) in 2025 consists of customer progress billings versus prepaid service contracts, and when will it be recognized as revenue?",
     "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Deferred revenue | 355 | 375",
+     "Deferred revenue | 13 | 11",
+     "Unbilled revenue | 164 | 157"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1] and [P1]; [F1] shows goodwill without segment allocation or impairment assumptions, and [P1] omits the financial statement impact of the Asia Pacific sale.",
+    "claim": "How is goodwill of 430 (table in millions) at year-end 2025 allocated across operating segments, and was any portion impaired or derecognized in the 2026 Asia Pacific divestiture?",
+    "facts": [
+     "F1",
      "P1"
     ],
     "quotes": [
-     "(2) maintenance capital expenditures of approximately $55 million (prior guidance of $70 million to $80 million)"
+     "Goodwill | 430 | 422",
+     "Total assets | 2,694 | 2,791",
+     "During the quarter, we completed the divestiture of the majority of our Asia Pacific operations, further sharpening our focus on core operating regions."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "inferred from matching dates; the exhibit content is not in the evidence",
-    "claim": "What event did the Material Change Report filed in October 2026 describe, and does it relate to the major project award announced the same day?",
+    "basis": "Stated in [P3] and [P4]; [P3] provides only the Form 6-K cover page referencing Exhibit 99.1 without its text.",
+    "claim": "Does the Material Change Report in October 2026 contain project economics, counterparty terms, or risk disclosures beyond the news release issued on the same date?",
     "facts": [
      "P3",
      "P4"
     ],
     "quotes": [
-     "99.1 | Material Change Report"
+     "99.1 | Material Change Report",
+     "Date: October 13, 2026 | By: | /s/ Justin D. Pettigrew"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [S0], [F3], and [P1]; [S0] omits currency, timezone, and share count, and [P1] omits interim share count and NCIB repurchase disclosures.",
+    "claim": "What is the current share count and currency basis for the screener price of 19.59 and marketCap of 2391995476, and did share repurchases continue in 2026 alongside the 17% quarterly dividend increase to US$0.035 per share?",
+    "facts": [
+     "S0",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "price: 19.59",
+     "marketCap: 2391995476",
+     "Shares repurchased - NCIB | (23) | 0",
+     "QUARTERLY DIVIDEND INCREASED BY ~17% TO US$0.035 PER SHARE; SUPPORTS DIRECT SHAREHOLDER RETURNS"
     ],
     "support": "supported"
    }
@@ -630,5 +996,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no usable tax rate in the filings"
+ "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
 }
