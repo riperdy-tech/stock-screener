@@ -6,7 +6,7 @@
 
 import React, { useMemo } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
-import { fmtMd, pctText } from '@/lib/desk/health';
+import { pctText } from '@/lib/desk/health';
 import {
     confidenceText, macroTitle, MACRO_STATIC_USES, mriStale, ordinalPercentile, parseExplanation,
     regimeBars, sectorTilt, shockName,
@@ -27,6 +27,14 @@ function Section({ title, sub, children }: { title: string; sub?: string; childr
             {children}
         </section>
     );
+}
+
+/** "MM-DD HH:mm" in the viewer's own time zone from an ISO stamp (the build stamps are UTC, which read a day behind in Asia); "—" when absent or unreadable. */
+function localMdHm(stamp: string | null | undefined): string {
+    const d = stamp ? new Date(stamp) : null;
+    if (!d || Number.isNaN(d.getTime())) return DASH;
+    const two = (n: number) => String(n).padStart(2, '0');
+    return `${two(d.getMonth() + 1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`;
 }
 
 export function MacroPage() {
@@ -56,7 +64,7 @@ export function MacroPage() {
         <Shell tab="macro" onReload={invalidateDeskCache}>
             <div className="pb-6 pt-6">
                 <p className="font-mono text-[11px] uppercase tracking-[.03em] text-off">
-                    {fill(t('mcKicker'), { date: regime?.date ?? DASH, built: fmtMd(regime?.built_at) })}
+                    {fill(t('mcKicker'), { date: regime?.date ? regime.date.slice(0, 7) : DASH, built: localMdHm(regime?.built_at) })}
                     {regimeStale && <span className="text-warn"> · ● {t('mcStale')}</span>}
                 </p>
                 <h1 className="mt-1.5 text-[22px] font-bold leading-tight tracking-head text-ink sm:text-[24px]">
@@ -162,7 +170,7 @@ export function MacroPage() {
                                 </div>
                             </div>
                             <p className="mt-3 font-mono text-[11px] text-ink-2">
-                                {anchor?.asof ?? DASH}
+                                {anchor?.asof ? fill(t('mcAnchorAsOf'), { d: anchor.asof }) : DASH}
                                 {anchorStale && <span className="text-warn"> · ● {t('mcStale')}</span>}
                             </p>
                             <p className="mt-3 text-[13px] text-ink-2">{t('mcAnchorLine')}</p>

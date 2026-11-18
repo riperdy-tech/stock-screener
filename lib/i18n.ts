@@ -1062,7 +1062,8 @@ export const TRANSLATIONS = {
         portNoCoverage: "NO COVERAGE",
         // -- Stockpeak v3 Macro, Portfolio, On-demand (step 4a); ko/zh need native review --
         navMacro: "Macro",
-        mcKicker: "MACRO BACKDROP · AS OF {date} · BUILT {built}",
+        mcKicker: "MACRO BACKDROP · REGIME READ FOR {date} (MONTHLY DATA) · REBUILT {built}, YOUR TIME",
+        mcAnchorAsOf: "market data through {d} · rebuilt every morning after the US close; this page shows the copy taken at the nightly run",
         mcSub: "Confidence {c}. The machine uses this as background, not as a call on the market.",
         mcFileMissing: "{file} did not load; those fields show —.",
         mcLoading: "Loading the macro files…",
@@ -2224,7 +2225,8 @@ export const TRANSLATIONS = {
         portNoCoverage: "미커버",
         // -- Stockpeak v3 Macro, Portfolio, On-demand (step 4a); ko/zh need native review --
         navMacro: "매크로",
-        mcKicker: "매크로 배경 · 기준일 {date} · 생성 {built}",
+        mcKicker: "매크로 배경 · {date} 월간 데이터 기준 국면 · {built} 재생성 (현지 시간)",
+        mcAnchorAsOf: "시장 데이터 기준일 {d} · 매일 아침 미국 장 마감 후 재생성되며, 이 페이지는 야간 실행 때 복사된 사본을 보여줍니다",
         mcSub: "신뢰도 {c}. 시스템은 이것을 시장에 대한 판단이 아니라 배경 정보로만 사용합니다.",
         mcFileMissing: "{file} 파일을 불러오지 못해 해당 항목은 —로 표시됩니다.",
         mcLoading: "매크로 파일을 불러오는 중…",
@@ -3386,7 +3388,8 @@ export const TRANSLATIONS = {
         portNoCoverage: "未覆蓋",
         // -- Stockpeak v3 Macro, Portfolio, On-demand (step 4a); ko/zh need native review --
         navMacro: "總經",
-        mcKicker: "總經背景 · 資料日 {date} · 建立於 {built}",
+        mcKicker: "總經背景 · {date} 月度資料的景氣判讀 · {built} 重建（當地時間）",
+        mcAnchorAsOf: "市場資料截至 {d} · 每日美股收盤後重建，本頁顯示夜間執行時複製的版本",
         mcSub: "信心度 {c}。系統僅將此作為背景資訊，並非對市場的判斷。",
         mcFileMissing: "{file} 未能載入，相關欄位顯示為 —。",
         mcLoading: "正在載入總經檔案…",
