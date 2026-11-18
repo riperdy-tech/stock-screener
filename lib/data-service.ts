@@ -519,6 +519,40 @@ export interface QwenReport {
     valuation: { annotations?: string[]; unknowns?: string[] | null; departures?: { input: string; driver: string; evidence: string[] }[];
                  evidence?: Record<string, { text: string; kind: string; period: string | null }> } | null;
     authority: string;
+    /** The decided valuation (rs2-local tools/site/decided_value.py): present only for a name valued by it; then `valuation` is null. */
+    decided?: DecidedValuation | null;
+    /** A statutory tax-rate fallback: the value at a second rate. `value_alt` is per quoted share. */
+    tax_range?: { label?: string; rate?: number | null; rate_alt?: number | null; value_alt?: { bear?: number; base?: number; bull?: number } | null; status_alt?: string | null } | null;
+    /** Why a thin profit record is thin (rs2-local tools/site/why_losses.py); `label` is null when it could not be explained. */
+    loss_record?: { cause?: string | null; label?: string | null; explanation?: string | null; quotes?: DecidedQuote[] } | null;
+}
+
+export interface DecidedQuote { id: string; quote: string }
+export type DecidedInputKey = 'rev_growth' | 'op_margin' | 'long_run_op_margin' | 'terminal_growth' | 'fade_years' | 'return_on_new_investment_long_run' | 'capex_to_revenue';
+
+/** One run of the decided method: the inputs the AI set, why, and what code made of them. Values are per filed share. */
+export interface DecidedRun {
+    situation?: { cyclical?: string | null; margin_position?: string | null; base_year_representative?: string | null; why?: string | null };
+    inputs?: { rev_growth?: number[]; op_margin?: number[]; long_run_op_margin?: number; terminal_growth?: number; fade_years?: number;
+               return_on_new_investment_long_run?: number; capex_to_revenue?: number };
+    ranges?: { long_run_op_margin?: [number, number]; rev_growth_y3?: [number, number]; terminal_growth?: [number, number] };
+    risks?: { risk?: string; input_hit?: string; bear_value?: number | number[] | null }[];
+    confidence?: string | null;
+    reasons?: Partial<Record<DecidedInputKey, { why?: string | null; quotes?: DecidedQuote[]; quotes_given?: number }>>;
+    flags?: string[];
+    values?: { bear?: number; base?: number; bull?: number };
+}
+
+export interface DecidedValuation {
+    version?: string;
+    method?: string;
+    runs: Record<string, DecidedRun>;
+    run_gap?: number | null;
+    situation_unclear?: boolean;
+    flags?: string[];
+    value_at_old_defaults?: number | null;
+    value_at_old_defaults_quoted?: number | null;
+    old_defaults_inputs?: unknown;
 }
 
 /** A report's file name for a ticker. A ticker that is a Windows device name cannot be committed from the machine that
