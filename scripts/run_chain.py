@@ -227,6 +227,9 @@ def main():
     if ok and not run_step("score_factors_dual_door", ["scripts/score_factors_dual_door.py"], steps):
         print("FATAL: score_factors_dual_door failed.")
         ok = False
+    # Display-only analyst targets for the list (WO_ST1): never fatal; needs the network, so off in the offline mode.
+    if ok and not args.skip_macro and not run_step("fetch_analyst_targets", ["scripts/fetch_analyst_targets.py"], steps):
+        print("WARNING: fetch_analyst_targets failed; the analyst-target yardstick was not refreshed.")
     if ok and not run_step("build_valuation_models", ["scripts/build_valuation_models.py"], steps):
         print("FATAL: build_valuation_models failed.")
         ok = False
