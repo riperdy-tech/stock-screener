@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { DecidedRun, DecidedValuation } from '../data-service';
-import { inputRows, inputText, lossLine, mergedRisks, oldDefaultsValue, parseFlag, pct1, pctList, riskInputKey, riskValue, runSeeds, taxLine, withRange } from './decidedText';
+import { groupFlags, inputName, inputRows, inputText, lossLine, mergedRisks, oldDefaultsValue, parseFlag, pct1, pctList, riskValue, runSeeds, taxLine, withRange, yearsShape } from './decidedText';
 
 const run = (g: number): DecidedRun => ({
     inputs: { rev_growth: [g, 0.05, 0.04, 0.03, 0.02], op_margin: [0.2, 0.19, 0.18, 0.17, 0.16], long_run_op_margin: 0.15, terminal_growth: 0.025, fade_years: 8,
@@ -65,14 +65,18 @@ test('inputRows: seven rows in order, one cell and one reason per run in seed or
     assert.deepEqual(rows[4].whys[0], { text: '', quotes: [] });
 });
 
-test('riskValue and riskInputKey: years for the fade, percent otherwise, unknown input stays raw', () => {
+test('riskValue and inputName: years for the fade, percent otherwise, unknown input stays raw', () => {
     assert.equal(riskValue('fade_years', 12), '12');
     assert.equal(riskValue('rev_growth', 0.01), '1.0%');
     assert.equal(riskValue('rev_growth', [0.01, 0.02]), '1.0%, 2.0%');
     assert.equal(riskValue('capex_to_revenue', undefined), '—');
-    assert.equal(riskInputKey('capex_to_revenue'), 'dcInCapex');
-    assert.equal(riskInputKey('toString'), null);
-    assert.equal(riskInputKey('mystery'), null);
+    assert.deepEqual(inputName('capex_to_revenue'), { key: 'dcInCapex' });
+    assert.deepEqual(inputName('long_run_op_margin'), { key: 'dcInLongMargin' });
+    assert.deepEqual(inputName('rev_growth.y1'), { key: 'dcInGrowthYear', n: 1 });
+    assert.deepEqual(inputName('op_margin.y5'), { key: 'dcInMarginYear', n: 5 });
+    assert.deepEqual(inputName('rev_growth_y3'), { key: 'dcInGrowthYear', n: 3 });
+    assert.equal(inputName('toString'), null);
+    assert.equal(inputName('mystery'), null);
 });
 
 test('parseFlag: sentence key, detail after it, and the run it came from', () => {
@@ -90,6 +94,7 @@ test('parseFlag: quotes_verified reads as n of m; an unknown flag is shown whole
     assert.deepEqual(parseFlag('run 3000: quotes_verified: 13 of 14'), { key: 'dcFlagQuotes', detail: '', seed: '3000', n: 13, m: 14 });
     assert.deepEqual(parseFlag('some_new_flag: x'), { key: null, detail: 'some_new_flag: x', seed: null });
     assert.deepEqual(parseFlag('constructor'), { key: null, detail: 'constructor', seed: null });
+    assert.deepEqual(parseFlag('run 1000: odd_flag: y'), { key: null, detail: 'odd_flag: y', seed: '1000' });
 });
 
 test('taxLine: both values and both rates, else null', () => {
@@ -117,4 +122,67 @@ test('mergedRisks: one entry per risk text, marked with the runs that named it a
         { risk: 'A new rival', runs: [{ run: 1, input: 'capex_to_revenue', value: 0.2 }] },
     ]);
     assert.deepEqual(mergedRisks(dec()), []);
+});
+
+const SEEDS = ['1000', '3000'];
+test('groupFlags: outside-record years merge per kind and direction, with the run marks and the filed range once', () => {
+    const g = groupFlags([
+        'run 1000: growth_outside_filed_record: rev_growth.y1 0.0390 (filed 0.0432 to 0.2077)',
+        'run 1000: growth_outside_filed_record: rev_growth.y2 0.0400 (filed 0.0432 to 0.2077)',
+        'run 1000: growth_outside_filed_record: rev_growth.y3 0.0420 (filed 0.0432 to 0.2077)',
+        'run 3000: growth_outside_filed_record: rev_growth.y4 0.0420 (filed 0.0432 to 0.2077)',
+        'run 3000: growth_outside_filed_record: rev_growth.y1 0.0390 (filed 0.0432 to 0.2077)',
+        'run 3000: growth_outside_filed_record: rev_growth.y5 0.2500 (filed 0.0432 to 0.2077)',
+    ], SEEDS);
+    assert.equal(g.notes.length, 2);
+    const [below, above] = g.notes;
+    assert.deepEqual([below.key, below.subject, below.dir, below.lo, below.hi], ['dcNoteYears', 'rev_growth', 'below', '4.3%', '20.8%']);
+    assert.deepEqual(below.occ, [{ run: 0, years: [1, 2, 3] }, { run: 1, years: [1, 4] }]);
+    assert.deepEqual([above.dir, above.occ], ['above', [{ run: 1, years: [5] }]]);
+});
+
+test('groupFlags: margins split into year notes and the long-run note; the long-run one has no years', () => {
+    const g = groupFlags([
+        'run 1000: margin_outside_filed_record: op_margin.y5 0.1830 (filed 0.1394 to 0.1828)',
+        'run 1000: margin_outside_filed_record: long_run_op_margin 0.5000 (filed 0.1394 to 0.1828)',
+        'run 3000: margin_outside_filed_record: long_run_op_margin 0.5100 (filed 0.1394 to 0.1828)',
+    ], SEEDS);
+    assert.deepEqual(g.notes.map((n) => [n.key, n.subject, n.dir]), [['dcNoteYears', 'op_margin', 'above'], ['dcNoteLong', 'long_run_op_margin', 'above']]);
+    assert.deepEqual(g.notes[1].occ, [{ run: 0, years: [] }, { run: 1, years: [] }]);
+});
+
+test('groupFlags: simple flags merge over the runs, quotes are summed, situation_unclear is lifted out', () => {
+    const g = groupFlags(['situation_unclear', 'run 1000: confidence_low', 'run 3000: confidence_low', 'run 1000: base_year_not_representative',
+        'run 1000: quotes_verified: 13 of 13', 'run 3000: quotes_verified: 12 of 14'], SEEDS);
+    assert.equal(g.situation, true);
+    assert.deepEqual(g.quotes, { n: 25, m: 27 });
+    assert.deepEqual(g.notes.map((n) => [n.key, n.occ.map((o) => o.run)]), [['dcFlagConfidence', [0, 1]], ['dcFlagBaseYear', [0]]]);
+    assert.equal(groupFlags([], SEEDS).quotes, null);
+});
+
+test('groupFlags: return and scenario figures are formatted; runs with different figures stay separate lines', () => {
+    const g = groupFlags(["run 1000: return_above_base_year: long-run 0.1000 against the base year's 0.0800", "run 3000: return_above_base_year: long-run 0.1200 against the base year's 0.0800",
+        'run 1000: scenario_order_not_monotone: bear 5.0000, base 4.0000, bull 6.0000'], SEEDS);
+    assert.deepEqual(g.notes.map((n) => [n.key, n.vals]), [['dcNoteReturn', ['10.0%', '8.0%']], ['dcNoteReturn', ['12.0%', '8.0%']], ['dcNoteOrder', ['$5.00', '$4.00', '$6.00']]]);
+});
+
+test('groupFlags: a detail it does not recognise keeps the sentence and the raw detail; nothing is dropped', () => {
+    const g = groupFlags(['run 1000: margin_outside_filed_record: something new 0.5', 'run 3000: margin_outside_filed_record: something new 0.5',
+        'run 1000: growth_outside_filed_record: op_margin.y2 0.1 (filed 0.2 to 0.3)', 'run 1000: return_above_base_year: odd', 'run 1000: brand_new_flag: z',
+        'run 1000: growth_outside_filed_record: rev_growth.y1 0.0500 (filed 0.0400 to 0.0600)'], SEEDS);
+    assert.deepEqual(g.notes.map((n) => [n.key, n.detail, n.occ.map((o) => o.run)]), [
+        ['dcFlagMargin', 'something new 0.5', [0, 1]],
+        ['dcFlagGrowth', 'op_margin.y2 0.1 (filed 0.2 to 0.3)', [0]],
+        ['dcFlagReturn', 'odd', [0]],
+        [null, 'brand_new_flag: z', [0]],
+        ['dcFlagGrowth', 'rev_growth.y1 0.0500 (filed 0.0400 to 0.0600)', [0]],   // inside the range: no direction to state
+    ]);
+});
+
+test('yearsShape: one year, three or more in a row as a span, otherwise a list', () => {
+    assert.equal(yearsShape([]), null);
+    assert.deepEqual(yearsShape([2]), { kind: 'one', n: 2 });
+    assert.deepEqual(yearsShape([1, 2, 3, 4, 5]), { kind: 'span', a: 1, b: 5 });
+    assert.deepEqual(yearsShape([1, 2]), { kind: 'list', list: '1, 2' });
+    assert.deepEqual(yearsShape([1, 4]), { kind: 'list', list: '1, 4' });
 });
