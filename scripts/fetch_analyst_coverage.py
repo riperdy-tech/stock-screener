@@ -79,10 +79,11 @@ def clamp(value, lo, hi):
     return max(lo, min(hi, value))
 
 
-def safe_get_price_target(ticker_obj):
+def safe_get_price_target(ticker_obj, keys=("mean", "high", "low", "current")):
     """Safely extract price target dict from yfinance Ticker object.
 
     Returns dict with keys: mean, high, low, current (or None for missing).
+    `keys` lets a caller ask for more (fetch_analyst_targets.py adds "median").
     """
     try:
         pt = ticker_obj.analyst_price_targets
@@ -90,7 +91,7 @@ def safe_get_price_target(ticker_obj):
             return {}
         # pt might be a dict-like; handle both camelCase and snake_case
         result = {}
-        for key in ("mean", "high", "low", "current"):
+        for key in keys:
             # Try direct attribute, then dict get, then camelCase variant
             val = None
             if hasattr(pt, key):
