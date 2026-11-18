@@ -1,8 +1,8 @@
 'use client';
 
-// The stock page's right column (handoff 5.2): how the name got here, the market's expectations, the
+// The stock page's lower sections (handoff 5.2's right column): how the name got here, the market's expectations, the
 // price chart, key financials, verdict history and book membership. These blocks show for every
-// name, with or without a rebuilt verdict.
+// name, with or without a rebuilt verdict. Each is a disclosure, closed by default (WO_ST2).
 
 import React from 'react';
 import { useLanguage } from '@/components/LanguageContext';
@@ -89,7 +89,7 @@ function HowItGotHere({ row, d, mode, blocked }: { row: DeskRow; d: DeskVerdict 
     else lines.push({ glyph: '●', node: onList(row) ? t('pgWaitingAnalyst') : t('pgNotQueued') });
 
     return (
-        <Sec title={t('pgHow')} className="min-w-0">
+        <Sec collapsible title={t('pgHow')} className="min-w-0">
             {row.vetoed && (
                 <p className="mt-3 break-words border-l-2 border-off bg-page px-3 py-2 text-[13px] font-semibold text-ink">
                     {'✕'} {vetoText}
@@ -123,7 +123,7 @@ function Expectations({ val }: { val: (ValuationModel & { gap_basis?: string | n
     const { t } = useLanguage();
     if (!val || val.implied_growth == null) {
         return (
-            <Sec title={t('pgExpect')} className="mt-6">
+            <Sec collapsible title={t('pgExpect')} className="mt-6">
                 <p className="mt-3 text-[13px] leading-relaxed text-ink-2">
                     {fill(t('exNoModel'), { reason: val ? (val.reason ?? t('exNoGrowth')) : t('exMissing') })}
                 </p>
@@ -139,7 +139,7 @@ function Expectations({ val }: { val: (ValuationModel & { gap_basis?: string | n
     const named = bases.find(([k, v]) => k === val.gap_basis && v != null);
     const used = named ?? bases.find(([, v]) => v != null);
     return (
-        <Sec title={t('pgExpect')} className="mt-6">
+        <Sec collapsible title={t('pgExpect')} className="mt-6">
             <p className="mt-3 text-[13px] leading-relaxed text-ink">
                 {fill(t('exSentence'), { g: pct1(val.implied_growth), y: val.assumptions?.stage1_years ?? DASH })}
                 {' '}
@@ -157,7 +157,7 @@ function KeyFinancialsBlock({ row }: { row: DeskRow }) {
     const { t } = useLanguage();
     const k = keyFinancials(row);
     return (
-        <Sec title={t('kfTitle')} className="mt-6">
+        <Sec collapsible title={t('kfTitle')} className="mt-6">
             <dl className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-1.5">
                 {k.cells.map((c) => (
                     <React.Fragment key={c.labelKey}>
@@ -182,7 +182,7 @@ function History({ d }: { d: DeskVerdict | undefined }) {
     const { t } = useLanguage();
     const lines = verdictHistory(d);
     return (
-        <Sec title={t('pgHistory')} className="mt-6">
+        <Sec collapsible title={t('pgHistory')} className="mt-6">
             {lines.length === 0 ? (
                 <p className="mt-3 font-mono text-[12px] text-ink-2">{t('pgNoHistory')}</p>
             ) : (
@@ -211,7 +211,7 @@ function Books({ ledgers, ticker, live, monthly }: { ledgers: LedgersLike | null
     const { t } = useLanguage();
     const held = bookMembership(ledgers, ticker, live, monthly);
     return (
-        <Sec title={t('pgBooks')} className="mt-6">
+        <Sec collapsible title={t('pgBooks')} className="mt-6">
             {held.length === 0 ? (
                 <p className="mt-3 font-mono text-[12px] text-ink-2">{t('pgNotHeld')}</p>
             ) : (
@@ -250,7 +250,7 @@ export function StockRight({ row, d, mode, blocked, ledgers, live, monthly }: {
         <div className="min-w-0">
             <HowItGotHere row={row} d={d} mode={mode} blocked={blocked} />
             <Expectations val={row.val} />
-            <Sec title={t('pgChart')} className="mt-6"><PriceChart ticker={row.ticker} d={d} blocked={blocked} /></Sec>
+            <Sec collapsible title={t('pgChart')} className="mt-6"><PriceChart ticker={row.ticker} d={d} blocked={blocked} /></Sec>
             <KeyFinancialsBlock row={row} />
             <History d={historyRow} />
             <Books ledgers={ledgers} ticker={row.ticker} live={live} monthly={monthly} />

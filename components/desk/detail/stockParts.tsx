@@ -8,14 +8,36 @@ import clsx from 'clsx';
 
 export const DASH = '—';
 
-/** README 3.2 section header: 14 px 600 on a 1 px ink rule, optional 12 px ink-2 subline, optional right-aligned count. */
-export function Sec({ title, sub, count, className, children }: {
+/** README 3.2 section header: 14 px 600 on a 1 px ink rule, optional 12 px ink-2 subline, optional right-aligned count.
+ *  `collapsible` makes the header a `Title ▸` button and keeps the section closed until it is pressed. */
+export function Sec({ title, sub, count, className, children, collapsible = false }: {
     title: React.ReactNode;
     sub?: React.ReactNode;
     count?: React.ReactNode;
     className?: string;
     children?: React.ReactNode;
+    collapsible?: boolean;
 }) {
+    const [open, setOpen] = useState(false);
+    if (collapsible) {
+        return (
+            <section className={clsx('min-w-0', className)}>
+                <div className="border-t border-ink pt-3">
+                    <button
+                        type="button"
+                        aria-expanded={open}
+                        onClick={() => setOpen(!open)}
+                        className="flex w-full flex-wrap items-baseline gap-x-2.5 gap-y-0.5 text-left hover:bg-hover"
+                    >
+                        <span className="text-[14px] font-semibold text-ink">{title} <span aria-hidden>{open ? '▾' : '▸'}</span></span>
+                        {sub && <span className="text-[12px] text-ink-2">{sub}</span>}
+                        {count != null && <span className="ml-auto font-mono text-[12px] text-ink">{count}</span>}
+                    </button>
+                </div>
+                {open && children}
+            </section>
+        );
+    }
     return (
         <section className={clsx('min-w-0', className)}>
             <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-0.5 border-t border-ink pt-3">

@@ -87,6 +87,41 @@ export function FunnelRow({ counts, ready, phase, held, step, onStep }: {
     );
 }
 
+/** The funnel as one line: US stocks, pass safety, on the list (each selects its step's panel below), then the list
+ *  names with an AI verdict (a count only). A number that is not loaded yet reads "—", never a false 0. */
+export function FunnelLine({ counts, withVerdict, step, onStep }: {
+    counts: FunnelCounts;
+    /** List names with a BUY, WATCH or AVOID from `aiVerdict`; null while the data is loading. */
+    withVerdict: number | null;
+    step: FunnelStep;
+    onStep: (s: FunnelStep) => void;
+}) {
+    const { t } = useLanguage();
+    const items: { s: FunnelStep; n: number | null; label: string }[] = [
+        { s: 1, n: counts.universe, label: t('fnUs') },
+        { s: 2, n: counts.scored, label: t('fnSafe') },
+        { s: 3, n: counts.list, label: t('stFnList') },
+    ];
+    return (
+        <ol className="flex flex-wrap items-baseline gap-x-2 gap-y-1 font-mono text-[12px] text-ink-2">
+            {items.map((it) => (
+                <li key={it.s} className="flex items-baseline gap-x-2">
+                    <button
+                        type="button"
+                        onClick={() => onStep(it.s)}
+                        aria-pressed={step === it.s}
+                        className={clsx('hover:text-ink', step === it.s && 'underline underline-offset-4')}
+                    >
+                        <span className="font-semibold text-ink">{num(it.n)}</span> {it.label}
+                    </button>
+                    <span aria-hidden className="text-off">{'→'}</span>
+                </li>
+            ))}
+            <li><span className="font-semibold text-ink">{num(withVerdict)}</span> {t('stFnVerdict')}</li>
+        </ol>
+    );
+}
+
 // ── Summary panel ───────────────────────────────────────────────────────────
 
 function Chip({ color, children }: { color?: string; children: React.ReactNode }) {

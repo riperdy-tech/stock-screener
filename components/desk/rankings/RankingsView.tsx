@@ -8,11 +8,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { DepthVerdict, FactorScoresPayload, GeminiCRow, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { AnalystTargetsPayload, DepthVerdict, FactorScoresPayload, GeminiCRow, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
 import type { DeskData, StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
-import { deskSections, type DeskSections } from '@/lib/desk/sections';
+import { deskSections, onList, type DeskSections } from '@/lib/desk/sections';
 import { funnelCounts } from '@/lib/desk/funnel';
 import { DOOR_LABEL_KEY } from '@/lib/desk/doors';
 import {
@@ -21,9 +21,11 @@ import {
 } from '@/lib/desk/filters';
 import { fill } from '@/lib/desk/text';
 import { OPUS_VERDICT_KEY } from '@/lib/desk/opusText';
+import { aiCounts } from '@/lib/desk/yardstick';
 import { DeskTable } from './DeskTable';
+import { targetOf } from './ListRow';
 
-import { FunnelPanel, FunnelRow } from './Funnel';
+import { FunnelLine, FunnelPanel } from './Funnel';
 import { UniverseHits } from './UniverseHits';
 
 const sectionTotal = (s: DeskSections) =>
@@ -118,14 +120,12 @@ function GeminiCSummary({ m, onPick }: { m: NonNullable<DeskData['geminiCMeta']>
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus, opusMeta, geminiC, geminiCMeta }: {
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, qwen, opus, opusMeta, geminiC, geminiCMeta, analystTargets }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
     overlay: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any -- the untyped overlay-signals payload, passed through to buildRows unchanged
     stockInfo: Record<string, StockInfo>;
-    /** paper_ledgers.json; read only for the Qwen book's "held" figure under funnel step 5. */
-    ledgers: { ledgers?: { qwen_book?: { summary?: { open_positions?: number | null } } } } | null;
     /** qwen_overlay.json tickers: Qwen's analysis beside each list name (operator 2026-11-06). */
     qwen: Record<string, QwenOverlayRow>;
     /** opus_overlay.json tickers: the Opus valuation beside each list name (paper only). */
@@ -136,11 +136,16 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     geminiC: Record<string, GeminiCRow>;
     /** The Gemini file's own totals for the summary line; null when the file is absent. */
     geminiCMeta: DeskData['geminiCMeta'];
+    /** analyst_targets.json: the analysts' target beside each list name. An empty map when the file is absent. */
+    analystTargets: AnalystTargetsPayload;
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
     const urlState = useMemo(() => parseDeskUrl(params), [params]);
-    const { step, how } = urlState;
+    const { how } = urlState;
+    // Steps 4 and 5 were the Qwen counters, which left the front page: a saved ?step=4 or 5 shows the list step.
+    const step: FunnelStep = urlState.step > 3 ? 3 : urlState.step;
+    const [showSources, setShowSources] = useState(false);
 
     // The search box types fast: it keeps its own text and writes the URL with replaceState.
     const [q, setQ] = useState(urlState.filters.q);
@@ -191,25 +196,54 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const tr = factor?.band_transitions;
     const entered = tr?.entered_book?.length ?? 0;
     const left = tr?.left_book?.length ?? 0;
-    const held = ledgers?.ledgers?.qwen_book?.summary?.open_positions ?? null;
     const n = counts.actionable;
     const newest = Object.values(qwen).reduce((m, r) => (r.analysis !== 'not run' && r.date > m ? r.date : m), '');
+    const ai = useMemo(() => aiCounts(rows), [rows]);
+    const pick = (k: OpusVerdictCode, key: 'opLineBuy' | 'opLineWatch' | 'opLineAvoid', v: number) => (
+        <button type="button" onClick={() => setFilter({ ai: [k] })} className="text-accent hover:text-ink">{fill(t(key), { n: v })}</button>
+    );
+    // Where each row's analysts' target comes from, and the source and date the note above the table names.
+    const sources = { targets: analystTargets, overlayAsOf: opusMeta?.analyst_as_of, overlaySource: opusMeta?.analyst_source };
+    // The targets' dates differ by row (the file's fetch date, else the overlay's): the note gives the oldest and the newest.
+    const targetDate = useMemo(() => {
+        const days = rows.filter(onList).map((r) => targetOf(r, sources)?.asOf).filter((d): d is string => d != null).sort();
+        return days.length === 0 ? null : days[0] === days[days.length - 1] ? days[0] : `${days[0]} – ${days[days.length - 1]}`;
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- `sources` is rebuilt every render; its parts are listed
+    }, [rows, analystTargets, opusMeta]);
+    const targetSource = analystTargets.source ?? opusMeta?.analyst_source ?? t('stYahoo');
 
     return (
         <div>
-            {/* a. Gate status line */}
+            {/* a. One status line; the per-source lines sit behind "sources" */}
             {factor != null && (
-                <p className={clsx('font-mono text-[11px] font-semibold', counts.verdicts > 0 ? 'text-pos' : 'text-warn')}>
-                    <span aria-hidden>{'●'} </span>
-                    {fill(t('dqLine'), { a: counts.verdicts, n: counts.list ?? '—', v: n, d: newest ? newest.slice(5, 10) : '—' })}
+                <p className="font-mono text-[11px] font-semibold text-ink-2">
+                    {fill(t('stLineList'), { n: counts.list ?? '—' })}
+                    {' · '}{fill(t('stLineVerdicts'), { v: ai.verdicts })}
+                    {' ('}{pick('BUY', 'opLineBuy', ai.buy)}{' · '}{pick('WATCH', 'opLineWatch', ai.watch)}{' · '}{pick('AVOID', 'opLineAvoid', ai.avoid)}{')'}
+                    {' · '}{fill(t('stLineNewest'), { d: ai.newestRead ?? '—' })}
+                    {' · '}{t('stLinePaper')}
+                    {' · '}
+                    <button type="button" aria-expanded={showSources} aria-controls="desk-sources" onClick={() => setShowSources(!showSources)} className="text-accent hover:text-ink">
+                        {t('stSources')} {showSources ? '▴' : '▾'}
+                    </button>
                 </p>
             )}
-            {opusMeta && <OpusSummary m={opusMeta} onPick={(v) => setFilter({ ai: [v] })} />}
-            {geminiCMeta && <GeminiCSummary m={geminiCMeta} onPick={(v) => setFilter({ ai: [v] })} />}
+            {showSources && (
+                <div id="desk-sources" className="mt-1 border-l-2 border-rule-24 pl-3">
+                    {factor != null && (
+                        <p className={clsx('font-mono text-[11px] font-semibold', counts.verdicts > 0 ? 'text-pos' : 'text-warn')}>
+                            <span aria-hidden>{'●'} </span>
+                            {fill(t('dqLine'), { a: counts.verdicts, n: counts.list ?? '—', v: n, d: newest ? newest.slice(5, 10) : '—' })}
+                        </p>
+                    )}
+                    {opusMeta && <OpusSummary m={opusMeta} onPick={(v) => setFilter({ ai: [v] })} />}
+                    {geminiCMeta && <GeminiCSummary m={geminiCMeta} onPick={(v) => setFilter({ ai: [v] })} />}
+                </div>
+            )}
 
-            {/* b/c. Funnel and the selected step's panel */}
+            {/* b/c. The funnel as one line, and the selected step's panel (closed by default) */}
             <div className="mt-3">
-                <FunnelRow counts={counts} ready={factor != null} phase={phase} held={held} step={step} onStep={setStep} />
+                <FunnelLine counts={counts} withVerdict={factor != null ? ai.verdicts : null} step={step} onStep={setStep} />
                 <FunnelPanel rows={rows} factor={factor} stockInfo={stockInfo} counts={counts} step={step} how={how} onToggle={toggleHow} />
             </div>
 
@@ -268,8 +302,13 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                 </div>
             )}
 
+            <p className="mt-5 text-[11px] leading-relaxed text-ink-2">
+                {fill(t('stLegend'), { src: targetSource, d: targetDate ?? t('stDateUnknown') })}
+            </p>
+
             {/* e/f. The table and its sections */}
             <DeskTable
+                sources={sources}
                 sections={filtered}
                 phase={phase}
                 actionableCount={n}

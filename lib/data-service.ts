@@ -672,6 +672,23 @@ export async function fetchOpusOverlay(): Promise<OpusOverlayPayload | null> {
     return fetchJson<OpusOverlayPayload>('/data/opus_overlay.json');
 }
 
+// ── Analysts' targets (analyst_targets.json; the yardstick beside our value) ───────────────────────
+// Written by the data pipeline; the file may be absent. A missing or malformed file is an empty map, never an error.
+
+export interface AnalystTargetRow { mean?: number | null; median?: number | null; high?: number | null; low?: number | null; fetched_at?: string | null }
+
+export interface AnalystTargetsPayload {
+    schema?: string;
+    generated_at?: string;
+    source?: string;
+    tickers: Record<string, AnalystTargetRow>;
+}
+
+export async function fetchAnalystTargets(): Promise<AnalystTargetsPayload> {
+    const p = await fetchJson<AnalystTargetsPayload>('/data/analyst_targets.json');
+    return p && p.tickers && typeof p.tickers === 'object' ? p : { tickers: {} };
+}
+
 // ── MRI news candidates (MRI-15, Stage 1; operator decisions D1/D5 of 2026-10-22) ───────────────
 // A display index built by scripts/build_macro_events.py from MRI's event register. A candidate is a news report,
 // not a confirmed event; its market block says what the market did after it, not whether the news caused it.

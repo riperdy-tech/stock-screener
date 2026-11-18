@@ -1,16 +1,17 @@
 'use client';
 
-// The stock page (/t/[ticker], handoff 5.2): top bar, banners, then the verdict column on the left
-// and the screen column on the right (single column below 1024 px, right blocks following the left
-// in the same order). Layout and state only; the logic is lib/desk/stockPage.ts.
-// Old-analyst verdicts appear only in "Verdict history"; a name with only one is "awaiting".
+// The stock page (/t/[ticker], WO_ST2): the top bar; the AI verdict with one comparison strip (price, our value, the
+// analysts' target); the stored analyses as tabs; then everything else as disclosures, closed by default. The earlier
+// analyst's rebuilt verdict, where a name has one, is the last disclosure. Layout and state only; the logic is
+// lib/desk/stockPage.ts and lib/desk/yardstick.ts.
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageContext';
 import { fetchDepthReport, type DepthReportBundle } from '@/lib/data-service';
 import { fmtMoney } from '@/lib/desk/format';
-import { opusMoney } from '@/lib/desk/opusText';
+import { aiVerdict } from '@/lib/desk/aiVerdict';
+import { macroEventsFor } from '@/lib/desk/macroEvents';
 import { fill } from '@/lib/desk/text';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { livePrice } from '@/lib/desk/rowText';
@@ -24,10 +25,11 @@ import {
 import { Shell } from '../Shell';
 import { StockLeft } from './StockLeft';
 import { StockRight } from './StockRight';
-import { DASH } from './stockParts';
-import { OpusPanel } from './OpusPanel';
-import { QwenPanel } from './QwenPanel';
+import { DASH, Disclosure } from './stockParts';
 import { MacroEventsPanel } from './MacroEventsPanel';
+import { SourceTabs } from './SourceTabs';
+import { VerdictCard } from './VerdictCard';
+import { targetOf } from '../rankings/ListRow';
 
 const signedOne = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} %`;
 
@@ -117,7 +119,10 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     const fu = d ? followupWarning(d) : null;
     const ind = row.info?.industry;
     const op = data.opus[row.ticker];
-    const anTarget = op?.analyst?.target_mean != null ? opusMoney(op.analyst.target_mean, op.analyst.currency ?? op.currency) : null;
+    const gem = data.geminiC[row.ticker];
+    const news = macroEventsFor(data.macroEvents, row.ticker, row.info?.sector).length;
+    const ai = aiVerdict({ geminiC: gem, opus: op });
+    const target = targetOf({ ticker: row.ticker, opus: op }, { targets: data.analystTargets, overlayAsOf: data.opusMeta?.analyst_as_of, overlaySource: data.opusMeta?.analyst_source });
     // The price is the engine's (stocks.json); say which session it is for, and when this name's own last price is older.
     const sessionNote = live == null || !data.priceSession ? null
         : row.info?.priceOlderThan
@@ -126,6 +131,22 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     const priceNote = sessionNote ?? (live != null && atVerdict != null && Math.abs(live - atVerdict) >= 0.005
         ? fill(t('pgLiveAsOf'), { at: data.pricesAsOf ? data.pricesAsOf.slice(5, 16) : DASH })
         : d?.price_asof ? fill(t('pgPriceAsOf'), { at: mmdd(d.price_asof), src: d.price_source ?? DASH }) : null);
+
+    // The earlier analyst's banners (blocked by the gate, a follow-up warning) belong to its verdict, and sit with it.
+    const banners = (
+        <>
+            {blocked && (
+                <p className="break-words border-l-2 border-off bg-page px-4 py-3 text-[13px] leading-relaxed text-ink">
+                    <b className="font-semibold">{t('pgBlockedHead')}</b> {'—'} {glossed.join('; ')}. {t('pgBlockedTail')}
+                </p>
+            )}
+            {fu && (
+                <p className="mt-3 break-words border-l-2 border-warn px-4 py-3 text-[13px] leading-relaxed text-ink" style={{ background: 'color-mix(in oklch, var(--warn) 10%, var(--surface))' }}>
+                    {fu.key ? t(fu.key) : fu.raw}
+                </p>
+            )}
+        </>
+    );
 
     return shell(
         <div className="pb-6">
@@ -139,7 +160,6 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 <span className="flex-1" />
                 <span className="font-mono text-[18px] font-semibold text-ink">{live != null ? fmtMoney(live) : DASH}</span>
                 {priceNote && <span className="font-mono text-[11px] text-ink-2">{priceNote}</span>}
-                {anTarget && <span className="font-mono text-[11px] text-ink-2">{fill(t('opAnHeader'), { v: anTarget })}</span>}
                 <a
                     href={`https://www.tradingview.com/symbols/${encodeURIComponent(row.ticker)}/`}
                     target="_blank" rel="noopener noreferrer"
@@ -149,26 +169,43 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </a>
             </div>
 
-            {/* Banners */}
-            {blocked && (
-                <p className="mt-4 break-words border-l-2 border-off bg-page px-4 py-3 text-[13px] leading-relaxed text-ink">
-                    <b className="font-semibold">{t('pgBlockedHead')}</b> {'—'} {glossed.join('; ')}. {t('pgBlockedTail')}
-                </p>
-            )}
-            {fu && (
-                <p className="mt-3 break-words border-l-2 border-warn px-4 py-3 text-[13px] leading-relaxed text-ink" style={{ background: 'color-mix(in oklch, var(--warn) 10%, var(--surface))' }}>
-                    {fu.key ? t(fu.key) : fu.raw}
-                </p>
+            {/* The AI verdict and the comparison strip */}
+            <VerdictCard geminiC={gem} opus={op} live={live} priceDate={row.info?.priceOlderThan ?? data.priceSession} target={target} />
+
+            {/* A vetoed name says so in the open (the header only) */}
+            {mode === 'vetoed' && (
+                <div className="mt-5">
+                    <StockLeft row={row} d={d} mode={mode} bundle={bundle} live={live} atVerdict={atVerdict} blocked={blocked} />
+                </div>
             )}
 
-            {data.geminiC[row.ticker] && <QwenPanel gemini ticker={row.ticker} live={live} listed={onList(row)} monthly={null} />}
-            <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly} />
-            {data.opus[row.ticker] && <OpusPanel o={data.opus[row.ticker]} analystAsOf={data.opusMeta?.analyst_as_of} />}
-            <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
+            {/* The stored analyses, one tab open at a time */}
+            <SourceTabs
+                ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly}
+                hasAi={gem != null} hasQwen={data.qwen[row.ticker] != null} opus={op} analystAsOf={data.opusMeta?.analyst_as_of}
+                verdictTab={ai ? (ai.source === 'claude' ? 'claude' : 'ai') : null}
+            />
 
-            <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
-                <StockLeft row={row} d={d} mode={mode} bundle={bundle} live={live} atVerdict={atVerdict} blocked={blocked} />
+            {/* Everything else, each closed by default */}
+            <div className="mt-6 max-w-[720px]">
                 <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} monthly={data.monthly} />
+                {news > 0 && (
+                    <div className="mt-6">
+                        <Disclosure title={t('pgEvTitle')} sub={String(news)}>
+                            <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
+                        </Disclosure>
+                    </div>
+                )}
+                {mode === 'verdict' && d && (
+                    <div className="mt-6">
+                        <Disclosure title={t('stOldVerdict')} sub={fill(t('stOldVerdictSub'), { d: d.date ?? DASH })}>
+                            {banners}
+                            <div className="mt-4">
+                                <StockLeft row={row} d={d} mode={mode} bundle={bundle} live={live} atVerdict={atVerdict} blocked={blocked} />
+                            </div>
+                        </Disclosure>
+                    </div>
+                )}
             </div>
         </div>,
     );

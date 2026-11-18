@@ -27,6 +27,7 @@ import { Skel } from '../primitives';
 import { BandStrip } from './cells';
 import { AiChip, DoorMark, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
 import { opusClaudeRange, opusGap, opusMoney, opusNoCallText, opusRangeEnds } from '@/lib/desk/opusText';
+import { ListHeaders, ListRow, type TargetSources } from './ListRow';
 
 const DASH = '—';
 const AWAITING_PREVIEW = 5;
@@ -546,8 +547,10 @@ function DisqualifiedRow({ r }: { r: DeskRow }) {
     );
 }
 
-export function DeskTable({ sections, phase, actionableCount, queued, filtering, loaded }: {
+export function DeskTable({ sections, phase, actionableCount, queued, filtering, loaded, sources }: {
     sections: DeskSections;
+    /** Where each row's analysts' target comes from: the targets file, else the Claude overlay. */
+    sources: TargetSources;
     phase: 'A' | 'B' | 'C' | null;
     actionableCount: number;
     /** List size minus rebuilt verdicts on list names, for the empty Research now copy. */
@@ -588,7 +591,7 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
                     ? <div className="space-y-3 py-4" aria-busy="true"><Skel className="h-4 w-full" /><Skel className="h-4 w-11/12" /><Skel className="h-4 w-10/12" /></div>
                     : researchNow.length === 0
                     ? <p className="my-3 border border-dashed border-rule-24 px-3.5 py-3 text-[13px] text-ink-2">{emptyRn}</p>
-                    : <><QwenColumnHeaders />{researchNow.map((r) => <QwenRowView key={r.ticker} r={r} />)}</>}
+                    : <><ListHeaders />{researchNow.map((r) => <ListRow key={r.ticker} r={r} sources={sources} />)}</>}
             </section>
 
             {waiting.length > 0 && block(t('dsWait'), t('dsWaitSub'), waiting)}
@@ -598,8 +601,8 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
             {awaiting.length > 0 && (
                 <section>
                     <SectionHeader title={t('dqWl')} sub={t('dqWlSub')} count={awaiting.length} />
-                    <QwenColumnHeaders />
-                    {awaitingRows.map((r) => <QwenRowView key={r.ticker} r={r} />)}
+                    <ListHeaders />
+                    {awaitingRows.map((r) => <ListRow key={r.ticker} r={r} sources={sources} />)}
                     {awaitingRows.length < awaiting.length && (
                         <button type="button" onClick={() => setAllAwaiting(true)} className="py-3 font-mono text-[12px] text-accent hover:text-ink">
                             {fill(t('dsShowAll'), { n: awaiting.length })}
