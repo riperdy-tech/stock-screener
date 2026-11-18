@@ -2,7 +2,7 @@
  "count": 175,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-18T06:31:11Z",
+ "generated_at": "2026-11-18T06:48:56Z",
  "list_covered": 160,
  "list_names": 160,
  "model": "gemini-4-hydrogen-high",
@@ -4492,27 +4492,108 @@
    "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
   "SMTI": {
-   "alpha_pts": null,
+   "alpha_pts": -73.90064792982939,
    "analysis": "complete",
-   "claims": 73,
-   "claims_supported": 65,
-   "date": "2026-11-17T13:11:58Z",
+   "claims": 85,
+   "claims_supported": 82,
+   "date": "2026-11-18T06:31:36Z",
+   "equity_value": 17248215.993880108,
    "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 8623028.0,
    "flags": [
-    "Sanara signed a merger agreement under which it would become a wholly-owned subsidiary of MiMedx. Its shareholders have approved the Merger. It still needs the HSR waiting period to expire or end and other closing conditions to be met. The FTC issued a Second Request to both companies, which extends the HSR waiting period.",
-    "Sanara lowered its full-year net revenue guidance to $110 million to $115 million, from a previous range of $116 million to $121 million.",
-    "Sanara sold all assets of its discontinued Tissue Health Plus subsidiary to an unrelated third party for a purchase price of approximately $2,000,000, and received certain earnout rights."
+    "Sanara MedTech entered into an Agreement and Plan of Merger with MiMedx Group, Inc. and Mustang Merger Sub, Inc. under which Mustang Merger Sub will merge with and into Sanara MedTech, with Sanara MedTech surviving as a wholly-owned subsidiary of MiMedx Group, Inc.",
+    "Sanara MedTech shareholders approved the pending Merger with MiMedx Group, Inc.",
+    "Sanara MedTech and MiMedx Group, Inc. each received a Second Request from the Federal Trade Commission in connection with its review of the Merger, extending the waiting period under the HSR Act."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-sonnet-5-5",
-   "no_value_reason": "no usable tax rate in the filings",
+   "ke": 0.08378973472633486,
+   "loss_record": {
+    "cause": "financing_burden",
+    "explanation": "In every period with financial statements in the filings (FY 2024, FY 2025, and the first nine months of 2026), continuing operations generated positive operating profit before other expense ($1.26 million in FY 2024, $7.30 million in FY 2025, and $5.16 million in 9M 2026). Heavy interest expense ($3.13 million in FY 2024, $6.76 million in FY 2025, and $5.42 million in 9M 2026), together with equity-method investment losses, pushed continuing operations into net losses (the filings do not contain income statements for 2010\u20132023).",
+    "label": "the operations earn a profit before interest; interest or other financing cost made the loss",
+    "quotes": [
+     {
+      "id": "F2",
+      "quote": "Operating income | 736,005 | 2,941,240 | 5,162,963 | 6,254,079"
+     },
+     {
+      "id": "F2",
+      "quote": "Interest expense | (1,812,764) | (1,818,105) | (5,422,420) | (4,926,765)"
+     },
+     {
+      "id": "F2",
+      "quote": "Net income (loss) from continuing operations | (1,286,986) | 834,493 | (1,300,443) | 714,186"
+     },
+     {
+      "id": "P3",
+      "quote": "Other expense (1) | 7,697,662 | 3,196,424"
+     },
+     {
+      "id": "P3",
+      "quote": "Interest expense | 6,759,800 | 3,128,395"
+     },
+     {
+      "id": "P3",
+      "quote": "Net loss from continuing operations | $(393,124) | $(1,937,583)"
+     },
+     {
+      "id": "P3",
+      "quote": "Lower net loss from continuing operations for the year ended December 31, 2025 was primarily due to revenue growth, partially offset by SG&A and R&D increasing at a relatively lower rate, and higher interest expense related to the CRG Term Loan."
+     }
+    ],
+    "version": "why_losses.v1 2026-11-18 WO_NC5"
+   },
+   "market_cap_at_publish": 300553787,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 32.73,
    "qwen_book": null,
-   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no usable tax rate in the filings"
+   "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+   "seed_base": {
+    "1000": 2.0002504913448163,
+    "3000": 2.0002504913448163
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (tax fallback rerun)",
+   "tax_range": {
+    "equity_value_alt": 18132343.095895626,
+    "label": "statutory rate (company's filed rate), not measured",
+    "positive_pretax_years": 0,
+    "pretax_years": 5,
+    "rate": 0.21,
+    "rate_alt": 0.265,
+    "seed_base_alt": {
+     "1000": 2.102781423868231,
+     "3000": 2.102781423868231
+    },
+    "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
+    "status_alt": "ok",
+    "value_alt": {
+     "base": 2.102781423868231,
+     "bear": -1.5524102392233883,
+     "bull": 2.2422330844666085
+    },
+    "value_per_filed_share_alt": {
+     "base": 2.102781423868231,
+     "bear": -1.5524102392233883,
+     "bull": 2.2422330844666085
+    }
+   },
+   "upside": -0.9426118826648486,
+   "value_base": 2.0002504913448163,
+   "value_bear": -1.9354669520577936,
+   "value_bull": 2.1500806483865773,
+   "value_per_filed_share": {
+    "base": 2.0002504913448163,
+    "bear": -1.9354669520577936,
+    "bull": 2.1500806483865773
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_differs_at_alt_tax_rate": false,
+   "verdict_reason": "expected return -73.9 points a year against the required return over 3 years"
   },
   "SN": {
    "alpha_pts": -35.43235876316404,
@@ -5612,11 +5693,11 @@
    "verdict_reason": "expected return +52.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 74,
+ "valued_count": 75,
  "verdict_counts": {
-  "AVOID": 36,
+  "AVOID": 37,
   "BUY": 31,
-  "NO_CALL": 101,
+  "NO_CALL": 100,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
