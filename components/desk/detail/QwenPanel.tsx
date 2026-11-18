@@ -12,6 +12,7 @@ import { plainNoValueReason } from '@/lib/desk/qwenText';
 import { monthlyBookState, type MonthlyBooksLike } from '@/lib/desk/stockPage';
 import { fill } from '@/lib/desk/text';
 import { OpusChip } from '../rankings/DeskParts';
+import { DecidedSection } from './DecidedSection';
 import { DASH } from './stockParts';
 
 const TASKS = ['business_model', 'financial_health', 'competitive_position', 'growth_thesis', 'risks', 'thesis_change',
@@ -71,6 +72,7 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
                     {fill(t(q.analysis === 'not run' ? (gemini ? 'pgGcNotRun' : 'pgQwNotRun') : 'pgQwNoValue'), { reason: plainNoValueReason(q.no_value_reason) ?? DASH, m })}
                 </p>
             )}
+            {q.decided && <DecidedSection q={q} d={q.decided} price={price} />}
             {q.valued && q.far_from_price && <p className="font-mono text-[11px] text-warn">{t('pgQwFar')}</p>}
             {q.valued && q.seeds_agree === false && <p className="font-mono text-[11px] text-ink-3">{fill(t(gemini ? 'pgGcSeeds' : 'pgQwSeeds'), { m })}</p>}
             {q.share_unit_note && <p className="font-mono text-[11px] text-ink-3">{q.share_unit_note}</p>}
