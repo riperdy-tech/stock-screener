@@ -2,7 +2,7 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-18T00:12:43Z",
+ "generated_at": "2026-11-18T00:18:50Z",
  "list_covered": 161,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
@@ -3664,27 +3664,47 @@
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "PYPL": {
-   "alpha_pts": null,
+   "alpha_pts": 14.848631179395877,
    "analysis": "complete",
-   "claims": 80,
-   "claims_supported": 77,
-   "date": "2026-11-16T17:23:11Z",
+   "claims": 63,
+   "claims_supported": 54,
+   "date": "2026-11-18T00:13:27Z",
+   "equity_value": 83347117691.212,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 968000000.0,
    "flags": [
-    "PayPal announced a strategic reorganization of its business and executive leadership team expected to deliver at least $1.5 billion in gross annualized run-rate savings.",
-    "Management implemented a global workforce reduction to simplify operations by removing organizational layers and increasing spans of control, resulting in restructuring charges of $152 million and expected annualized employee-related cost savings of approximately $340 million.",
-    "PayPal recorded net losses and impairments on strategic investments that drove other income (expense), net to (240) (table in millions) compared with 111 (table in millions) in the prior-year nine-month period, with net losses on strategic investments of 181 (table in millions) in operating cash flow adjustments."
+    "The company announced a strategic reorganization of its business and executive leadership team. The program targets at least $1.5 billion in gross annualized run-rate savings over the next two to three years.",
+    "Management implemented a global workforce reduction (the 3Q 2026 Plan), with restructuring charges of $152 million in the three months ended September 30, 2026. It is expected to generate annualized employee-related savings of approximately $340 million.",
+    "The Board declared a cash dividend of $0.14 per share, payable on December 24, 2026. The earnings release is dated October 27, 2026, and the declaration date itself is not stated."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
-   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "ke": 0.09360305732783658,
+   "market_cap_at_publish": 48867630739,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 58.83,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "some filed figures are years older than the latest annual report"
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "seed_base": {
+    "1000": 86.10239430910332,
+    "3000": 86.10239430910332
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (no-call fix rerun)",
+   "upside": 0.7055690327277278,
+   "value_base": 86.10239430910332,
+   "value_bear": 85.38343254304156,
+   "value_bull": 87.1887315163801,
+   "value_per_filed_share": {
+    "base": 86.10239430910332,
+    "bear": 85.38343254304156,
+    "bull": 87.1887315163801
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +14.8 points a year against the required return over 3 years"
   },
   "R": {
    "alpha_pts": -18.116019454028915,
@@ -5161,11 +5181,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 67,
+ "valued_count": 68,
  "verdict_counts": {
   "AVOID": 34,
-  "BUY": 26,
-  "NO_CALL": 100,
+  "BUY": 27,
+  "NO_CALL": 99,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
