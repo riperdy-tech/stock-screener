@@ -1,24 +1,520 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -3.7442119143717743,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 102,
  "claims_supported": 94,
  "date": "2026-11-16T19:49:51Z",
- "family": "family_not_built",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: pretax_derived_from_net_income_nci_tax",
+   "run 1000: working_capital_unclassified_balance_sheet",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 1000: ffo_not_reported_or_not_found",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: pretax_derived_from_net_income_nci_tax",
+   "run 3000: working_capital_unclassified_balance_sheet",
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: ffo_not_reported_or_not_found"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0455 and margin 0.4342, margin 0.4342 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0890), F 10",
+  "run_gap": 0.17548427072665856,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 42287000.0,
+     "excess_cash_before": 42287000.0,
+     "k0_after": 177681110.90321285,
+     "k0_before": 177681110.90321285,
+     "k0_interest": 175962000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 214381924.53859147,
+     "x0_before": 214381924.53859147
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.11555574595865714,
+     "equity_value": 1164029789.7016094,
+     "seam_ratio": 0.9955976215824938,
+     "tv_share": 0.336764773512172,
+     "wedge_rate_5": -0.0013677861133450885
+    },
+    "flags": [
+     "base_year_not_representative",
+     "pretax_derived_from_net_income_nci_tax",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 10 of 10",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.1,
+     "fade_years": 10,
+     "long_run_op_margin": 0.3,
+     "op_margin": [
+      0.3,
+      0.31,
+      0.315,
+      0.32,
+      0.32
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.035,
+      0.01,
+      0.015,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.0455 and margin 0.4342, margin 0.4342 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 94
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.24,
+      0.35
+     ],
+     "rev_growth_y3": [
+      -0.01,
+      0.035
+     ],
+     "terminal_growth": [
+      0.015,
+      0.03
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "2026 Estimated maintenance capital/tenant allowances (1) | $55.0 | $65.0"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is upkeep: maintenance capital and tenant allowances of $55-65 million, about 10% of roughly $595 million of 2026 revenue. Redevelopment of $5-7 million and acquisitions are excluded, and the filed 0.1226 pooled ratio includes acquisitions."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall and York Galleria were designated as non-core."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The portfolio is still turning over and has many non-core assets in workout, so convergence to steady state takes a while. Ten years is a middle estimate with little evidence either way."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "depreciation (without amortization of acquired intangibles) / revenue 0.2156"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Property NOI margin of about 65% less G&A of about 12% gives EBITDA of about 53%. D&A should normalize at 22-25% of revenue as the fully depreciated fresh-start assets are replaced by new capex and acquired assets, which gives about 30%. Mall NOI is mature and faces fixed-CAM and gross-lease pressure."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total expenses | (102,734) | (109,415) | (315,779) | (336,097)"
+       },
+       {
+        "id": "F2",
+        "quote": "Depreciation and amortization | (35,084) | (39,900) | (109,465) | (125,143)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Excluding gains, 2026 nine-month revenue less GAAP expenses is about 28%, and recurring joint-venture income adds a few points. D&A is falling as fresh-start assets become fully amortized, which lifts the margin, but part of that is offset by rising property taxes and maintenance. Gains and the Treasury interest income are excluded from the margin."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0823."
+       },
+       {
+        "id": "P3",
+        "quote": "to invest in higher cash flow yielding opportunities"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company recycles proceeds into higher-yield malls and redevelopments, which can earn slightly above the cost of capital. The filed break-even return is 0.0823, so 9% adds modest value. Competition for mall assets and cost overruns limit the excess."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively"
+       },
+       {
+        "id": "P6",
+        "quote": "Volusia Mall has been removed from the same-center pool"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 benefits from a full year of the four malls bought in July 2025 and Gateway Mall, plus same-center NOI growth. After that, revenue is held back by deconsolidations and removals of non-core malls (Jefferson, Gettysburg, Volusia and more), so growth is modest."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Rental revenues at the comparable properties were relatively flat compared to the prior year."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Mid-tier enclosed malls have little organic growth beyond rent steps and leasing spreads, and comparable-property rental revenue was flat in 2025. A rate below the 3.75% nominal anchor is appropriate."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.02,
+      "input_hit": "rev_growth",
+      "risk": "More non-core malls are lost to lenders and the revenue base shrinks, or tenant bankruptcies hit occupancy and rent."
+     },
+     {
+      "bear_value": 0.22,
+      "input_hit": "long_run_op_margin",
+      "risk": "Operating cost inflation under fixed-CAM and gross leases, plus D&A normalizing upward, compresses the margin."
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "capex_to_revenue",
+      "risk": "Leasing costs and tenant improvements rise to hold occupancy in weaker malls."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.24,
+      "rev_growth": [
+       0.010000000000000002,
+       -0.015000000000000001,
+       -0.010000000000000002,
+       -0.005000000000000001,
+       -0.005000000000000001
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.35,
+      "rev_growth": [
+       0.05500000000000001,
+       0.030000000000000006,
+       0.035,
+       0.04000000000000001,
+       0.04000000000000001
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is falling (\"Mortgage and other indebtedness, net | 2,025,450 | 2,170,785\") and the 2025 interest figure includes non-cash accretion and default interest, so the level and the cost both change, and joint-venture debt sits outside the consolidated figure."
+     },
+     "margin_position": "The filed 2025 margin of 0.5377 is inflated by property-sale gains, a deconsolidation gain and a joint-venture sale gain. What the properties earn is roughly 25-30% of revenue after D&A and G&A. The margin should drift up slightly as fresh-start intangibles finish amortizing.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT the company pays almost no federal income tax, which fits the filed rate: \"tax rate 0.0035\"."
+     },
+     "why": "2025 net income of $134.5 million contains $74.2 million of gains on sales, $33.9 million of gain on deconsolidation and a joint-venture sale gain inside equity in earnings. Revenue also jumped 12% on the consolidation of three malls and the acquisition of four malls, so it is not a clean run-rate. Core same-center NOI is growing only 2-4% and the portfolio keeps turning over through acquisitions, sales and lender handbacks."
+    },
+    "value_at_old_defaults": 48.056468343755206,
+    "values": {
+     "base": 42.044450985103644,
+     "bear": 27.390279925752463,
+     "bull": 58.58835998468948
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 42287000.0,
+     "excess_cash_before": 42287000.0,
+     "k0_after": 177681110.90321285,
+     "k0_before": 177681110.90321285,
+     "k0_interest": 175962000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 214381924.53859147,
+     "x0_before": 214381924.53859147
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.11555574595865716,
+     "equity_value": 1395493930.7408361,
+     "seam_ratio": 0.997616711709866,
+     "tv_share": 0.3104147245271166,
+     "wedge_rate_5": -0.002886066262744999
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "pretax_derived_from_net_income_nci_tax",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 12 of 12",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.1,
+     "fade_years": 10,
+     "long_run_op_margin": 0.33,
+     "op_margin": [
+      0.36,
+      0.36,
+      0.36,
+      0.355,
+      0.35
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.035,
+      0.015,
+      0.015,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth 0.0455 and margin 0.4342, margin 0.4342 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 8,
+     "kept": 94
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.28,
+      0.37
+     ],
+     "rev_growth_y3": [
+      -0.01,
+      0.035
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "2026 Estimated maintenance capital/tenant allowances (1) | $55.0 | $65.0"
+       },
+       {
+        "id": "P6",
+        "quote": "2026 Estimated development/redevelopment expenditures | 5.0 | 7.0"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The spending is recurring upkeep: maintenance capital and tenant allowances of $55-65m on roughly $600m of revenue, about 10%. Acquisitions, development of $5-7m and loan amortization are excluded."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The portfolio is mid-transition, with many properties designated non-core and capital being recycled into malls. A 10-year fade lets this settle."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Rental revenues at the comparable properties were relatively flat compared to the prior year."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Rents are barely above inflation, and the fully amortized tenant improvements that depress D&A will need replacing. Fixed CAM reimbursements and the move to gross leases leave CBL carrying cost inflation. I fade to 0.33, between the 2024 and 2026 underlying levels."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Depreciation and amortization expense was $4.8 million lower;"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $578.4 million | 0.1218 | 0.5377"
+       },
+       {
+        "id": "F2",
+        "quote": "Equity in earnings of unconsolidated affiliates | 17,246 | 1,696 | 49,834 | 15,046"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Underlying property margin in 2026 is about 0.36 once the one-time gains are stripped out, helped by lower D&A and higher equity earnings. It drifts down as the D&A benefit fades, treasury interest income falls and capex needs rise. The filed 0.5377 is not used."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "New investment is mall acquisitions and anchor redevelopment at roughly 9-10% yields. That is only slightly above the 0.0823 break-even, so growth adds little value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Rental revenues were $18.7 million higher;"
+       },
+       {
+        "id": "P6",
+        "quote": "increased 3.8% and 2.6%, respectively"
+       },
+       {
+        "id": "P6",
+        "quote": "Volusia Mall has been removed from the same-center pool"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month rental revenue is up $18.7m and same-center NOI is up 2.6%, so 2026 growth is about 3.5%. Growth then slows because Volusia is leaving the same-center pool, many malls are designated non-core, and comparable-property revenue was flat in 2025."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature mall portfolio in mid-tier markets with modest rent steps should grow below the 0.0375 anchor, at about 2%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "More loan defaults and returns of malls to lenders shrink revenue and equity earnings, and refinancing happens at higher rates."
+     },
+     {
+      "bear_value": 0.27,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tenant bankruptcies, gross-lease conversion and cost inflation compress property margins."
+     },
+     {
+      "bear_value": 0.14,
+      "input_hit": "capex_to_revenue",
+      "risk": "Upkeep and tenant-allowance spending runs higher as fresh-start assets age."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.28,
+      "rev_growth": [
+       0.010000000000000002,
+       -0.010000000000000002,
+       -0.010000000000000002,
+       -0.005000000000000001,
+       -0.005000000000000001
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.37,
+      "rev_growth": [
+       0.05500000000000001,
+       0.035,
+       0.035,
+       0.04000000000000001,
+       0.04000000000000001
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "unclear",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Consolidated debt of $2,170.8m is falling and includes loans on malls being returned to lenders. Pro rata debt including joint ventures is larger, at $2,622.6m."
+     },
+     "margin_position": "The filed 2025 margin of 0.5377 is inflated by gains. These are $74.2m of sale gains, $33.9m on deconsolidation and about $33.6m of joint-venture sale gain inside equity earnings. Stripping them leaves about 0.29 for 2025 and about 0.33 for 2024. Property-level earnings are lifting in 2026 as D&A falls from fully amortized fresh-start assets and occupancy rises. Distressed malls are being handed back to lenders.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The filed tax rate of 0.0035 is that of a REIT that distributes its income, which it can keep paying."
+     },
+     "why": "The 2025 margin of 0.5377 includes large one-time gains on sales, a deconsolidation and a joint-venture sale, so it overstates what the properties earn. Underlying revenue growth was close to flat on comparable properties, and the 12% total growth came from acquisitions and consolidations. I therefore set margins from property earnings, not from the filed figure."
+    },
+    "value_at_old_defaults": 48.056468343755206,
+    "values": {
+     "base": 50.1322297867281,
+     "bear": 35.768802046259125,
+     "bull": 68.08974328467282
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 48.056468343755206,
+  "value_at_old_defaults_quoted": 48.056468343755206,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1421410505.8420315,
+ "family": "real_estate",
+ "far_from_price": false,
+ "filed_shares": 30841000.0,
  "flags": [
   "CBL emerged from bankruptcy and adopted fresh start accounting.",
   "The foreclosure process for Alamance Crossing East was completed; the property had an outstanding loan balance of $41.1 million prior to completion.",
   "Southpark Mall entered loan default, was placed into receivership, and was deconsolidated, with CBL recording a $33.9 million gain on deconsolidation and reporting an outstanding loan balance of $48.3 million at year-end."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08903203083918919,
+ "market_cap_at_publish": 1607373930,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 51.95,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 42.044450985103644,
+  "3000": 50.1322297867281
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1428,8 +1924,17 @@
   ]
  },
  "ticker": "CBL",
+ "upside": -0.11569394071108796,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+ "value_base": 46.08834038591587,
+ "value_bear": 31.579540986005796,
+ "value_bull": 63.339051634681155,
+ "value_per_filed_share": {
+  "base": 46.08834038591587,
+  "bear": 31.579540986005796,
+  "bull": 63.339051634681155
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -3.7 points a year against the required return over 3 years"
 }

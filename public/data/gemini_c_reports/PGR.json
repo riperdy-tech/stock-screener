@@ -1,24 +1,418 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -5.71136015264746,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 69,
  "claims_supported": 64,
  "date": "2026-11-17T19:26:43Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 1000: preferred_balance_not_filed_taken_as_0:2025-12-31",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10",
+   "run 3000: preferred_balance_not_filed_taken_as_0:2025-12-31"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.2510, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.022128904775200426,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 101269426745.23766,
+     "implied_pb": 3.613112152624762,
+     "seam_ratio": 1.0393888888888894,
+     "tv_share": 0.39097832806519733
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10",
+     "preferred_balance_not_filed_taken_as_0:2025-12-31"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.01,
+      0.08,
+      0.07,
+      0.06,
+      0.06
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.18,
+     "roe": [
+      0.37,
+      0.31,
+      0.28,
+      0.26,
+      0.24
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2510, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 64
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.03,
+      0.1
+     ],
+     "long_run_roe": [
+      0.14,
+      0.23
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Dividends payable on common shares | 58 | 7,972 | 59"
+       },
+       {
+        "id": "F1",
+        "quote": "Total accumulated other comprehensive income (loss) | (2,744) | 103 | 189"
+       },
+       {
+        "id": "P3",
+        "quote": "These increases were partially offset by the repurchase of 7.7 million of our common shares at a total cost of $1.6 billion."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is about flat. Accumulated other comprehensive income swung from +103 to -2,744, and the variable dividend (7,972 accrued at the end of 2025) plus buybacks absorb most earnings. Later years grow about 6-8%, which is roughly 25% retention of a 25-30% ROE with some AOCI recovery. This is well below the 18-29% growth of 2023-2025."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Debt-to-total capital ratio | 19.6%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive advantages from pricing models, scale and brand should erode gradually rather than abruptly. A 10-year fade is a middle choice given the 2022 cyclical trough and the current peak margins. Capital is ample (debt-to-capital of 19.6%), so nothing forces a faster move."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0392, p25 0.2009, median 0.2510, p75 0.4278, max 0.4419, last 0.4419."
+       },
+       {
+        "id": "P3",
+        "quote": "aggregate rate decreases taken over the last 12 months in response to increased"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Auto insurance is mature and competitive. Pricing power is eroding and personal auto retention is falling, so excess margins should compete away. Strong scale and pricing sophistication keep ROE above the 0.0936 cost of equity, and the filed median of 0.2510 is a mid-cycle reference. I use 0.18 with a wide range because the evidence cannot pin the long-run margin."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "producing a companywide underwriting profit margin of 11.3%"
+       },
+       {
+        "id": "P3",
+        "quote": "The increase in the loss and LAE ratio was primarily due to higher severity."
+       },
+       {
+        "id": "P4",
+        "quote": "Net income | 34.4%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 income should be about 11 billion on opening equity of 30.3 billion, which gives about 0.37. Trailing ROE is already 34.4%. Management says rates are being cut for competition, severity is rising and retention is weakening, so I let margins and ROE fade toward 0.24 by year 5. Equity is not rebuilt quickly because of heavy payouts, which keeps ROE above the filed median of 0.2510."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "both the trailing 3-month and 12-month total personal auto policy life expectancy decreased 9% year over year"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Policies in force are growing 6% but premium per policy is falling. Over the long run, growth of a mature, large-share insurer should sit near nominal GDP, so I stay close to the 0.0375 anchor, slightly below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "roe",
+      "risk": "Severity inflation and price competition compress auto margins faster than assumed, so ROE falls toward the 2022 level."
+     },
+     {
+      "bear_value": 0.13,
+      "input_hit": "long_run_roe",
+      "risk": "Long-run competitive erosion leaves ROE only modestly above the cost of equity."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "book_growth",
+      "risk": "Larger variable dividends and buybacks, or further unrealized bond losses, keep equity growth near zero."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.05000000000000001,
+       0.039999999999999994,
+       0.03,
+       0.01999999999999999,
+       0.01999999999999999
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.019999999999999997,
+       0.11,
+       0.1,
+       0.09,
+       0.09
+      ],
+      "long_run_roe": 0.23,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is far above its history because auto underwriting margins are very high (YTD combined ratio 87.5 against a 96 goal), and the large annual variable dividend keeps common equity low. The 2022 trough of 0.0392 shows how cyclical it is. Rate cuts, higher severity and falling retention point to margins coming down from here. Fixed-maturity mark-to-market losses (AOCI of -2,744) depress equity but not net income.",
+     "unclear_note": "",
+     "why": "Progressive paid 8,088 of dividends in nine months and bought back 1.5 billion of shares while still reporting underwriting profit well above goal and a 19.6% debt-to-capital ratio. Payout policy, not regulatory capital, sets how fast book equity grows. Year 1 is FY2026: the 7,972 dividend was already accrued at the end of 2025, and the 2026 variable dividend plus the AOCI loss should hold equity roughly flat. Base-year ROE of 0.4419 is a peak-margin year, so I fade it toward a mid-cycle level."
+    },
+    "value_at_old_defaults": 212.30044861076667,
+    "values": {
+     "base": 186.2955276382259,
+     "bear": 139.0612567078526,
+     "bull": 267.198071589408
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 103535480894.56512,
+     "implied_pb": 3.6939609146705665,
+     "seam_ratio": 1.0361842105263168,
+     "tv_share": 0.3896825043979499
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10",
+     "preferred_balance_not_filed_taken_as_0:2025-12-31"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.03,
+      0.05,
+      0.06,
+      0.06,
+      0.05
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.2,
+     "roe": [
+      0.37,
+      0.33,
+      0.29,
+      0.26,
+      0.24
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2510, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 64
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.02,
+      0.1
+     ],
+     "long_run_roe": [
+      0.15,
+      0.25
+     ],
+     "terminal_growth": [
+      0.03,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Dividends payable on common shares | 58 | 7,972 | 59"
+       },
+       {
+        "id": "F3",
+        "quote": "Dividends paid to common shareholders | (8,088) | (2,812)"
+       },
+       {
+        "id": "F3",
+        "quote": "Acquisition of treasury shares acquired in open market | (1,490) | (15)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is probably slightly negative because the 2026 annual variable dividend will be accrued in Q4, as 7,972 was at the end of 2025, and September equity of 34,485 is already well above the year-end 2025 level of 30,323. After that, high payouts and buybacks keep growth well below the return on equity. Growth is set by payout, not by capital limits."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Debt-to-total capital ratio | 19.6%"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margin normalisation through rate competition and shorter customer lives should take about a decade, not an instant reset."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The property and casualty insurance industry is a mature industry"
+       },
+       {
+        "id": "P3",
+        "quote": "producing a companywide underwriting profit margin of 11.3%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Progressive's record shows a very strong average but a deep trough in 2022. The industry is mature and competitive, and margins above the 4% goal are being competed away. I fade to a through-the-cycle return of about 20%, well above the 9.36% cost of equity, which reflects its pricing and cost edge."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net income | 2,542.0 | 2,615.0 | 8,671.0 | 8,357.0"
+       },
+       {
+        "id": "P3",
+        "quote": "aggregate rate decreases taken over the last 12 months in response to increased"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0392, p25 0.2009, median 0.2510, p75 0.4278, max 0.4419, last 0.4419."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month net income of 8,671 implies roughly 11,000-11,500 for 2026 on opening equity of 30,323, about 37%. The loss ratio is rising on severity and rates are being cut under competition, so I fade the return from the 2025 peak toward the mid-20s by year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "both the trailing 3-month and 12-month total personal auto policy life expectancy decreased 9% year over year."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth of equity should be near nominal economic growth. Policies in force are growing 6%, but retention is weakening and competition is rising, so growth should settle around the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_roe",
+      "risk": "The auto underwriting cycle turns: severity keeps rising while rates are cut, as in 2022, and the long-run return falls toward the low teens."
+     },
+     {
+      "bear_value": 0.18,
+      "input_hit": "roe",
+      "risk": "Catastrophe losses as property exposure restrictions are lifted, or a reserve shortfall, cut returns in years 2-5."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "book_growth",
+      "risk": "Mark-to-market losses on the 3.6-year-duration bond portfolio, or larger buybacks and dividends, keep common equity flat or falling."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.06999999999999999,
+       0.010000000000000009,
+       0.020000000000000004,
+       0.020000000000000004,
+       0.010000000000000009
+      ],
+      "long_run_roe": 0.15,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.010000000000000009,
+       0.09000000000000001,
+       0.1,
+       0.1,
+       0.09000000000000001
+      ],
+      "long_run_roe": 0.25,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is very high at present. Underwriting margins run well above the company's 4% goal, auto severity and rate trends have been favourable, and the book is small because most earnings are paid out through a large annual variable dividend. 2022 shows how low it can fall (3.9%) when loss costs outrun pricing. Margins are now narrowing: rates are being cut to defend growth, retention is falling, loss severity is rising and advertising spend is up, so I expect the return to fade toward a mid-cycle level.",
+     "why": "The 2025 return of 44% is a peak, helped by a low opening equity base and a very strong underwriting year, so it is not a base to extend. Growth in book equity is set by payout choices, not by regulatory capital. The company pays out most earnings through the annual variable dividend ($7,972 accrued at year-end 2025) and buys back shares, and its debt-to-capital ratio is 19.6%. Year-end 2026 equity will probably fall below the September level once the 2026 annual dividend is accrued, so year-1 growth is about zero or slightly negative."
+    },
+    "value_at_old_defaults": 212.30044861076667,
+    "values": {
+     "base": 190.46416734493386,
+     "bear": 139.2293017124444,
+     "bull": 299.3095676000015
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 212.30044861076667,
+  "value_at_old_defaults_quoted": 212.30044861076667,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 110786188309.79813,
  "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 588100000.0,
  "flags": [
   "Progressive issued $1.5 billion of senior notes in the first quarter of 2026, which raised its debt and total capital.",
   "In the first nine months of 2026 Progressive repurchased 7.7 million common shares at a total cost of $1.6 billion.",
   "Progressive paid its annual variable common share dividend in 2026. Cash dividends paid in the nine months were 8,088 (table in millions), against 2,812 a year earlier."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09360305732783658,
+ "market_cap_at_publish": 135958922771,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "preferred stock is not filed for every year needed",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 234.67,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 186.2955276382259,
+  "3000": 190.46416734493386
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -853,8 +1247,17 @@
   ]
  },
  "ticker": "PGR",
+ "upside": -0.1851495580293845,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "preferred stock is not filed for every year needed"
+ "value_base": 188.37984749157988,
+ "value_bear": 139.1452792101485,
+ "value_bull": 283.25381959470474,
+ "value_per_filed_share": {
+  "base": 188.37984749157988,
+  "bear": 139.1452792101485,
+  "bull": 283.25381959470474
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -5.7 points a year against the required return over 3 years"
 }

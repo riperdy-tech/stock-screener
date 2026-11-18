@@ -1,24 +1,510 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -20.788908601046604,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 86,
  "claims_supported": 81,
  "date": "2026-11-16T16:56:30Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: working_capital_unclassified_balance_sheet",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: working_capital_unclassified_balance_sheet",
+   "run 3000: quotes_verified: 11 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth -0.0217 and margin 0.2622, margin 0.2350 (persist), growth 0.0375, terminal RONIC 0.0515 (equity return r 0.0946), F 10",
+  "run_gap": 0.5130717671299581,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 201300000.0,
+     "excess_cash_before": 201300000.0,
+     "k0_after": 313915623.5570754,
+     "k0_before": 313915623.5570754,
+     "k0_interest": 272800000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 261146124.39534378,
+     "x0_before": 261146124.39534378
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1181579658.6822546,
+     "seam_ratio": 0.9846517557054244,
+     "tv_share": 0.3199074667138151,
+     "wedge_rate_5": -0.0003341679767708535
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.15,
+     "fade_years": 10,
+     "long_run_op_margin": 0.18,
+     "op_margin": [
+      0.24,
+      0.185,
+      0.195,
+      0.2,
+      0.2
+     ],
+     "return_on_new_investment_long_run": 0.065,
+     "rev_growth": [
+      -0.02,
+      0.1,
+      0.09,
+      0.06,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0217 and margin 0.2622, margin 0.2350 (persist), growth 0.0375, terminal RONIC 0.0515 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 81
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.21
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.14
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Net fleet investment of $300 million to $350 million"
+       },
+       {
+        "id": "P6",
+        "quote": "Operating and administrative capital expenditures of $55 million to $65 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled 0.0173 in the filed record covers only operating and administrative capex. The lease fleet needs net fleet investment guided at $300-350 million plus $55-65 million of other capex, against revenue of about $2.1 billion. I use roughly 0.15 of revenue as net investment, above depreciation of about 0.12-0.14."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we believe 2026 will mark the cyclical low point for industry deliveries"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin should converge to its mid-cycle level over about a decade as manufacturing volumes normalize and sale gains revert to trend."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $3,079.2 million | 0.0321 | 0.1596"
+       },
+       {
+        "id": "P3",
+        "quote": "Total operating profit margin, excluding lease portfolio sales and gain on divestiture of partially-owned leasing subsidiary | 35.0% | 35.6%"
+       },
+       {
+        "id": "P3",
+        "quote": "Operating profit margin | 5.2% | 7.8%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "This is a cyclical company whose margin sits well above its long-run median because of one-off gains. I assume about half the gap to the roughly 0.15 history persists. Leasing is now a larger share of the mix, which supports a margin slightly above the historical median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Gain on Divestiture of Partially-owned Leasing Subsidiary | 0.0 | 0.0 | 131.6 | 0.0"
+       },
+       {
+        "id": "P3",
+        "quote": "Includes a $194.2 million gain on the divestiture of Triumph for the year ended December 31, 2025"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,156.9 million | -0.2995 | 0.3010"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 is lifted by the $131.6 million divestiture gain and strong secondary-market gains. 2027 steps down once the divestiture gain drops out. After that the margin rebuilds with delivery volume and the operating leverage management cites, while elevated maintenance costs and the lower-margin services mix cap it."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0515."
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0755"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "New railcar investment earns leasing returns only modestly above the 0.0515 break-even, because lease rates have lagged asset values (FLRD of 0.1%) and the business is heavily leveraged. I set it slightly below the 0.0755 base-year return on tangible capital."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Revenues | $ 535.1 | $ 454.1 | $ 1,512.2 | $ 1,545.7"
+       },
+       {
+        "id": "P6",
+        "quote": "we believe 2026 will mark the cyclical low point for industry deliveries"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is slightly below the prior year, so 2026 is roughly -2%. Management calls 2026 the cyclical low for industry deliveries, and orders exceeded deliveries in Q3 with a $1.6 billion backlog. I model a recovery in 2027-2028 that tapers toward trend. Divestitures of partially-owned leasing subsidiaries remove some leasing revenue."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Railcar leasing and manufacturing grow roughly with North American freight and nominal GDP. I set growth slightly below the long-run anchor because the business is mature and cyclical."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "long_run_op_margin",
+      "risk": "Transactional gains normalize and the delivery recovery is delayed by tariffs, border issues or a weak economy, so margins stay near trough levels."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Orders and deliveries do not recover because of macro or trade-policy uncertainty, so revenue stays flat."
+     },
+     {
+      "bear_value": 0.0515,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Fleet investment must run higher than modeled to maintain the fleet, while returns on new railcars stay near break-even."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       -0.08,
+       0.04000000000000001,
+       0.03,
+       0.0,
+       -0.019999999999999997
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.21,
+      "rev_growth": [
+       0.030000000000000016,
+       0.15000000000000002,
+       0.14,
+       0.11000000000000001,
+       0.09000000000000002
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $5,442.5 million at year-end 2025 ($5,325.0 million at Sep 2026) is mostly nonrecourse debt secured on the lease fleet and is continually refinanced, which is the structural funding of a leasing business."
+     },
+     "margin_position": "The 2025 margin of 0.301 is far above Trinity's own long-run median of about 0.15. It includes a $194.2 million non-cash gain on the Triumph divestiture and $91.4 million of lease portfolio gains. Without the Triumph gain the margin is roughly 0.21. Rail Products earns only about 5% at the cyclical delivery trough, and Leasing earns about 35% before sale gains. 2026 is also inflated by a $131.6 million divestiture gain. Without it, the 2026 margin is in the high teens.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 24.2% is close to the 9-month 2026 rate of about 24.6% (49.1 of 199.4), though Q3 was higher at 29% on foreign income."
+     },
+     "why": "2025 operating profit of $649.2 million contains a one-time $194.2 million partnership divestiture gain. Revenue fell 30% as deliveries dropped from 17,570 to 9,500 railcars. So the base year mixes a manufacturing trough with large non-recurring gains and is not a clean run-rate. Management says 2026 is the cyclical low for industry deliveries, so manufacturing revenue should recover while the one-off gains fade."
+    },
+    "value_at_old_defaults": 33.78787984042539,
+    "values": {
+     "base": 17.857065216438087,
+     "bear": 9.857270202865585,
+     "bull": 34.03566629038581
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 201300000.0,
+     "excess_cash_before": 201300000.0,
+     "k0_after": 313915623.5570754,
+     "k0_before": 313915623.5570754,
+     "k0_interest": 272800000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 261146124.39534378,
+     "x0_before": 261146124.39534378
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 623182652.6561191,
+     "seam_ratio": 0.9787142237916734,
+     "tv_share": 0.2970345133434017,
+     "wedge_rate_5": 0.004062201575437209
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 11 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.15,
+     "fade_years": 10,
+     "long_run_op_margin": 0.16,
+     "op_margin": [
+      0.235,
+      0.17,
+      0.175,
+      0.175,
+      0.17
+     ],
+     "return_on_new_investment_long_run": 0.07,
+     "rev_growth": [
+      -0.03,
+      0.11,
+      0.09,
+      0.05,
+      0.04
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0217 and margin 0.2622, margin 0.2350 (persist), growth 0.0375, terminal RONIC 0.0515 (equity return r 0.0946), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 81
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.135,
+      0.18
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.14
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Net fleet investment of $300 million to $350 million"
+       },
+       {
+        "id": "P6",
+        "quote": "Operating and administrative capital expenditures of $55 million to $65 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed-record pooled ratio of 1.7% captures only operating and administrative capex, but the leasing fleet needs substantial net fleet investment. Guidance of $300-350M net fleet investment plus $55-65M of operating capex implies roughly 15-18% of revenue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The railcar industry has previously experienced sharp cyclical downturns and at such times operated with minimal backlog."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is in a cyclical recovery and its margins and growth normalise over several years; 10 years is a moderate fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Operating profit margin | 5.2% | 7.8%"
+       },
+       {
+        "id": "REC",
+        "quote": "2017-12-31 | $2,397.4 million | -0.2241 | 0.1536"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2008-2025 history shows a median near 15%, with leasing-heavy mix adding some support and manufacturing margins at 5-9% pulling down. Above-median margins in cyclical firms decay only partly, so I use 16%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Gain on Divestiture of Partially-owned Leasing Subsidiary | 0.0 | 0.0 | 131.6 | 0.0"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,156.9 million | -0.2995 | 0.3010"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 still carries the $131.6 million subsidiary divestiture gain plus higher secondary market gains, so year-1 margin stays high. From 2027 the gains fall away and the margin settles near the historical mid-teens, helped by manufacturing operating leverage on higher volumes."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0755"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0515."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is 7.55%, only modestly above the 5.15% level at which growth adds no value, because the business is highly levered fleet ownership. New fleet investment should earn a similar modest spread."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "A shrinking fleet and fewer railcars in storage point to a tightening market"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is slightly down: nine-month revenue is flat to down and two partially-owned leasing subsidiaries were deconsolidated. Management expects 2026 to be the industry delivery trough, with orders above deliveries and scrapping above new builds, so I expect recovery in 2027-2028 and then moderation."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature North American railcar fleet tracks freight volumes and inflation. I set growth below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.125,
+      "input_hit": "long_run_op_margin",
+      "risk": "Tariff, antidumping and customs duties on the integrated U.S.-Mexico manufacturing hit Rail Products margins and order volumes, which would keep the margin below the mid-teens"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "The industry recovery fails to materialise and orders and deliveries stay depressed, so growth remains low"
+     },
+     {
+      "bear_value": 0.13,
+      "input_hit": "op_margin",
+      "risk": "Secondary market gains and partnership transactions dry up, so the margin falls back toward the underlying core level"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.135,
+      "rev_growth": [
+       -0.09999999999999999,
+       0.04000000000000001,
+       0.020000000000000004,
+       -0.01999999999999999,
+       -0.029999999999999992
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.18,
+      "rev_growth": [
+       0.020000000000000018,
+       0.16000000000000003,
+       0.14,
+       0.10000000000000002,
+       0.09000000000000002
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt is structurally high because the leasing fleet is financed with non-recourse asset-backed debt; the base-year figure includes about $270.6M of partially-owned subsidiary debt since deconsolidated, so the current level is slightly lower."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 30.1% is well above the company's own long-run median of about 15%. It includes a $194.2 million non-cash gain on the Triumph divestiture and $91.4 million of lease portfolio sale gains, both episodic. Excluding the Triumph gain, the margin was about 21%. The manufacturing side is near a cyclical trough, with Rail Products margin at 5.2%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 24.2% 2025 effective rate is above the 21% statutory rate on state and foreign taxes, and Q3 2026 ran at 29%, so a mid-20s rate is sustainable."
+     },
+     "why": "2025 revenue fell 30% on much lower railcar deliveries while the operating profit was inflated by a one-time divestiture gain. 2026 also includes a $131.6 million divestiture gain. Revenue is cyclically depressed and the margin is boosted by gains, so neither is a steady-state base. Mean-reversion implies a lower margin than reported, but revenue should recover from the trough."
+    },
+    "value_at_old_defaults": 33.78787984042539,
+    "values": {
+     "base": 10.565625213659205,
+     "bear": 5.685825097195881,
+     "bull": 20.394966214991673
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 33.78787984042539,
+  "value_at_old_defaults_quoted": 33.78787984042539,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1178120518.3275328,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 82900000.0,
  "flags": [
   "On October 19, 2026, indirect wholly-owned subsidiary TRL-2026 entered into a Term Loan Agreement and completed initial funding of a $349.8 million term loan, with proceeds from the related portfolio sale used to repay warehouse borrowings and redeem in full $280.9 million of TRL-2019 Series 2019-2 Secured Railcar Equipment Notes.",
   "On October 29, 2026, Trinity announced third quarter 2026 earnings results, maintained full-year EPS guidance of $2.20 to $2.40, and raised full-year secondary market railcar gains expectations to a range of $180 million to $200 million.",
   "During the third quarter of 2026, Trinity sold a portion of its Longview manufacturing facility, recording a $13.4 million gain that increased Rail Products segment margin to 9.0% compared to 5.1% excluding the gain."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09462594437424718,
+ "market_cap_at_publish": 2331508913,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 29.82,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 17.857065216438087,
+  "3000": 10.565625213659205
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1246,8 +1732,17 @@
   ]
  },
  "ticker": "TRN",
+ "upside": -0.4946961121364013,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "value_base": 14.211345215048645,
+ "value_bear": 7.771547650030733,
+ "value_bull": 27.215316252688744,
+ "value_per_filed_share": {
+  "base": 14.211345215048645,
+  "bear": 7.771547650030733,
+  "bull": 27.215316252688744
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -20.8 points a year against the required return over 3 years"
 }

@@ -1,24 +1,570 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -10.030765133202344,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 67,
  "claims_supported": 63,
  "date": "2026-11-17T08:26:33Z",
- "family": "family_not_built",
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.1400 (filed -0.1994 to 0.1105)",
+   "run 1000: base_year_not_representative",
+   "run 1000: pretax_derived_from_net_income_nci_tax",
+   "run 1000: working_capital_unclassified_balance_sheet",
+   "run 1000: quotes_verified: 7 of 7",
+   "run 1000: ffo_not_reported_or_not_found",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.1450 (filed -0.1994 to 0.1105)",
+   "run 3000: base_year_not_representative",
+   "run 3000: pretax_derived_from_net_income_nci_tax",
+   "run 3000: working_capital_unclassified_balance_sheet",
+   "run 3000: quotes_verified: 11 of 11",
+   "run 3000: ffo_not_reported_or_not_found"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1726 and margin 0.4458, margin 0.4975 (persist), growth 0.0375, terminal RONIC 0.0499 (equity return r 0.0890), F 10",
+  "run_gap": 0.027908049579909687,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 2900000000.0,
+       "printed": 2.9,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a non-cash gain of $2.9 billion, or $7.56 per diluted share/unit"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "billions",
+       "sign": "gain",
+       "what": "Non-cash remeasurement gain on the previously held 88% TRG interest at the TRG Acquisition"
+      },
+      {
+       "amount": 86100000.0,
+       "printed": 86.1,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a net pre-tax loss in 2025 on the disposal, exchange, or revaluation of equity interests of $86.1 million"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Net pre-tax loss on disposal, exchange or revaluation of equity interests in 2025"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 823147000.0,
+     "excess_cash_before": 823147000.0,
+     "k0_after": 1377653096.3412914,
+     "k0_before": -1436246903.6587086,
+     "k0_interest": 974835000.0,
+     "one_offs_charge": 86100000.0,
+     "one_offs_gain": 2900000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 1790972152.021749,
+     "x0_before": 4594274297.349389
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.14693681629490715,
+     "equity_value": 49252072167.58647,
+     "seam_ratio": 1.0282458945239614,
+     "tv_share": 0.4260930169976208,
+     "wedge_rate_5": -0.0117410842317058
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.1400 (filed -0.1994 to 0.1105)",
+     "base_year_not_representative",
+     "pretax_derived_from_net_income_nci_tax",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 7 of 7",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.08,
+     "fade_years": 10,
+     "long_run_op_margin": 0.47,
+     "op_margin": [
+      0.446,
+      0.452,
+      0.455,
+      0.457,
+      0.458
+     ],
+     "return_on_new_investment_long_run": 0.075,
+     "rev_growth": [
+      0.14,
+      0.045,
+      0.04,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1726 and margin 0.4458, margin 0.4975 (persist), growth 0.0375, terminal RONIC 0.0499 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 63
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.44,
+      0.5
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.06
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures, net | (694,964) | (679,448)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Net capital expenditure of about $695M for nine months is roughly 13% of revenue, but it includes redevelopment and expansion. The filings give no upkeep-only figure, so my best estimate for recurring capex plus tenant improvements and leasing costs is about 8% of revenue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "primarily due to acquisition and development activity, the majority of which relates to the TRG Acquisition"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The step-up from TRG and the amortization of acquired in-place leases normalize over several years, so I use a 10-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Portfolio NOI increased 7.2% for the nine month period in 2026"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Portfolio NOI is growing and rents are rising, but depreciation on the larger consolidated base keeps the margin below its pre-TRG level near 0.50. I set the long-run margin at 0.47, with wide uncertainty."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "OPERATING INCOME BEFORE OTHER ITEMS | 804,450 | 812,914 | 2,390,710 | 2,284,727"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The nine-month 2026 margin is about 0.446 (2,390.7 / 5,362.2) against about 0.50 in 2025, because depreciation and amortization jumped. I let it recover slowly as rents rise and the acquisition-related amortization fades."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0499."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Simon earns higher initial rents ($76.03 psf on new leases) on redevelopment and acquisitions, so new investment should earn above the 0.0499 break-even, but well below the 0.2158 return on depreciated book capital."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | 1,814,556 | 1,601,572 | 5,362,247 | 4,573,043"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month 2026 revenue grew 17.3%, mostly from consolidating TRG from October 31, 2025. I estimate year 1 at about 14%, because the fourth quarter laps two months of TRG. After that, growth fades to the organic rate of about 3.5-4.5%, in line with NOI and rent growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature mall and outlet portfolio should grow near nominal GDP. I set 3.0%, below the 3.75% growth anchor, because e-commerce and anchor-tenant pressure cap long-run rent growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.015,
+      "input_hit": "rev_growth",
+      "risk": "Tenant bankruptcies, anchor closures or e-commerce reduce occupancy and rents, slowing growth"
+     },
+     {
+      "bear_value": 0.44,
+      "input_hit": "long_run_op_margin",
+      "risk": "Higher refinancing costs and rising operating costs plus depreciation keep the margin near its 2026 level"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Structural decline of physical retail lowers long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.44,
+      "rev_growth": [
+       0.125,
+       0.03,
+       0.025,
+       0.020000000000000004,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.5,
+      "rev_growth": [
+       0.16,
+       0.065,
+       0.06,
+       0.055,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of about $28.4 billion was flat through the nine months, investment-grade ratings are held, and the company states it refinances rather than repays."
+     },
+     "margin_position": "The record's 2025 operating margin of 0.4989 is operating income before other items over revenue, on a base before the full TRG consolidation. After TRG was consolidated, depreciation and amortization jumped, so the 2026 margin is about 0.445. It sits below the 2018-2025 range of roughly 0.50, mainly because of the larger depreciation and amortization base from the TRG purchase accounting.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT that distributes its taxable income, Simon pays very little corporate tax, so a rate near 0.4% is sustainable."
+     },
+     "why": "The 2025 revenue base holds only two months of TRG consolidation, and net income holds a roughly $2.9 billion non-cash remeasurement gain. Year 1 (2026) therefore shows a large step-up in revenue (nine months are up 17.3%) and a lower margin from higher depreciation. Underlying leasing is steady: occupancy is 96.5% and base rent is up 6.1%."
+    },
+    "value_at_old_defaults": 228.8361799297119,
+    "values": {
+     "base": 165.1871987667284,
+     "bear": 132.5472550001591,
+     "bull": 219.96970876495752
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 2900000000.0,
+       "printed": 2.9,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a non-cash gain of $2.9 billion, or $7.56 per diluted share/unit"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "billions",
+       "sign": "gain",
+       "what": "Non-cash gain on remeasurement of the previously held 88% TRG interest to fair value at the TRG Acquisition"
+      },
+      {
+       "amount": 86100000.0,
+       "printed": 86.1,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "a net pre-tax loss in 2025 on the disposal, exchange, or revaluation of equity interests of $86.1 million"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "Net pre-tax loss on disposal, exchange or revaluation of equity interests (Catalyst restructuring and equity instrument write-downs)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 823147000.0,
+     "excess_cash_before": 823147000.0,
+     "k0_after": 1377653096.3412914,
+     "k0_before": -1436246903.6587086,
+     "k0_interest": 974835000.0,
+     "one_offs_charge": 86100000.0,
+     "one_offs_gain": 2900000000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 1790972152.021749,
+     "x0_before": 4594274297.349389
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.15693681629490713,
+     "equity_value": 50667667038.76696,
+     "seam_ratio": 1.0277200348855762,
+     "tv_share": 0.4273372779268335,
+     "wedge_rate_5": -0.011665539233315462
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.1450 (filed -0.1994 to 0.1105)",
+     "base_year_not_representative",
+     "pretax_derived_from_net_income_nci_tax",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 11 of 11",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.07,
+     "fade_years": 10,
+     "long_run_op_margin": 0.46,
+     "op_margin": [
+      0.445,
+      0.448,
+      0.451,
+      0.454,
+      0.456
+     ],
+     "return_on_new_investment_long_run": 0.085,
+     "rev_growth": [
+      0.145,
+      0.045,
+      0.04,
+      0.038,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1726 and margin 0.4458, margin 0.4975 (persist), growth 0.0375, terminal RONIC 0.0499 (equity return r 0.0890), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 63
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.43,
+      0.49
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.06
+     ],
+     "terminal_growth": [
+      0.025,
+      0.035
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures, net | (694,964) | (679,448)"
+       },
+       {
+        "id": "P4",
+        "quote": "average tenant allowance on new leases of $54.12 per square foot"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed ratio of about 13% includes redevelopment and expansion, so I do not copy it. The filings give no upkeep figure; my estimate of 7% of revenue covers recurring maintenance capital, tenant improvements and allowances (new-lease allowance of $54.12 psf) and excludes acquisitions and major redevelopment."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Average base minimum rent for U.S. Malls and Premium Outlets increased 6.1% to $62.75 psf"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years lets the TRG-driven margin distortion and the above-trend rent growth normalize gradually to a steady state."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $6,364.5 million | 0.0672 | 0.4989"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The pre-TRG margin was around 0.50 (0.4989 in 2025), but TRG's purchase-accounting depreciation lowers the new run-rate to about 0.445. I fade partly toward the old level, to 0.46, as intangible amortization rolls off and rent growth continues."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Depreciation and amortization | 510,768 | 338,639 | 1,429,541 | 1,005,748"
+       },
+       {
+        "id": "F2",
+        "quote": "OPERATING INCOME BEFORE OTHER ITEMS | 804,450 | 812,914 | 2,390,710 | 2,284,727"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Consolidating TRG raised depreciation sharply: Q3 depreciation and amortization was 510,768 against 338,639 a year earlier, and Q3 operating income before other items fell to 804,450 from 812,914 despite higher revenue. I hold margin near 0.445 in year 1 and let it rise slowly as rents grow faster than costs."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0499."
+       },
+       {
+        "id": "P4",
+        "quote": "The average annual initial base minimum rent for new leases was $76.03 per square foot in 2026"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "New leases at $76.03 psf with falling allowances signal strong returns on redevelopment capital, but acquisitions and new projects earn roughly a high-single-digit after-tax yield, far below the 0.2158 book-based return. I set 0.085, above the 0.0499 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | 1,814,556 | 1,601,572 | 5,362,247 | 4,573,043"
+       },
+       {
+        "id": "P4",
+        "quote": "Portfolio NOI increased 7.2% for the nine month period in 2026"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is lifted by the full-year consolidation of TRG: nine-month revenue is up about 17%, and I assume Q4 grows more slowly because Q4 2025 already included two months of TRG. After that growth reverts to organic, about 4-4.5%, from rent per square foot up 6.1% and portfolio NOI up 7.2%, tempered by e-commerce and anchor risks."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0890; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature portfolio of premium U.S. retail space should grow roughly with inflation plus a little, below the 3.75% anchor, because e-commerce and limited development headroom cap long-run growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.015,
+      "input_hit": "rev_growth",
+      "risk": "Retail demand weakens through tenant bankruptcies, anchor closures or e-commerce share loss, cutting occupancy and rent growth"
+     },
+     {
+      "bear_value": 0.43,
+      "input_hit": "long_run_op_margin",
+      "risk": "Refinancing at higher rates and higher depreciation from further consolidations keep operating margin lower"
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher required returns and thinner development yields lower the return on new investment"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.43,
+      "rev_growth": [
+       0.13,
+       0.03,
+       0.025,
+       0.023,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.49,
+      "rev_growth": [
+       0.16499999999999998,
+       0.065,
+       0.06,
+       0.057999999999999996,
+       0.055
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $28.4B at year-end 2025 is essentially unchanged at $28.4B at Sep 30, 2026, and the company targets investment-grade ratings, so leverage is stable relative to the asset base."
+     },
+     "margin_position": "The filed 2025 margin of 0.4989 is operating income before other items over revenue. It is above the current run-rate of about 0.445 because TRG was consolidated only from Oct 31, 2025, and consolidation brings large depreciation and amortization. Margin sits below the pre-TRG level of about 0.50 for that reason, not because of weaker property economics.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT that distributes its taxable income, Simon pays almost no federal income tax, so the near-zero 0.0038 rate is sustainable."
+     },
+     "why": "The base year includes only two months of consolidated TRG, so revenue and margin both understate and overstate the new structure respectively. The $2.9B remeasurement gain is non-recurring and sits below operating income. Nine-month 2026 shows revenue up about 17% and operating margin near 0.446, which is a better guide to year 1."
+    },
+    "value_at_old_defaults": 228.8361799297119,
+    "values": {
+     "base": 169.8624904357261,
+     "bear": 140.51390412821232,
+     "bull": 215.26742849092182
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 228.8361799297119,
+  "value_at_old_defaults_quoted": 228.8361799297119,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 54674519308.82592,
+ "family": "real_estate",
+ "far_from_price": false,
+ "filed_shares": 326366632.0,
  "flags": [
   "Simon raised its full-year 2026 Real Estate FFO per diluted share outlook to $13.30 to $13.40, which is $0.10 above the previous estimate.",
   "The third-quarter earnings release announces a raised quarterly dividend. The visible text does not give the new amount or payment date.",
   "The Operating Partnership issued $400.0 million of 5.25% senior unsecured notes due 2032 and $400.0 million of 5.65% notes due 2036."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08903203083918919,
+ "market_cap_at_publish": 87153710646,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 230.24,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 165.1871987667284,
+  "3000": 169.8624904357261
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -813,8 +1359,17 @@
   ]
  },
  "ticker": "SPG",
+ "upside": -0.3726656168329735,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+ "value_base": 167.52484460122724,
+ "value_bear": 136.5305795641857,
+ "value_bull": 217.61856862793968,
+ "value_per_filed_share": {
+  "base": 167.52484460122724,
+  "bear": 136.5305795641857,
+  "bull": 217.61856862793968
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -10.0 points a year against the required return over 3 years"
 }

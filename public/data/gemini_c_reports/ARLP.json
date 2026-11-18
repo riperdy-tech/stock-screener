@@ -1,24 +1,525 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 17.685937919601578,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 112,
  "claims_supported": 106,
  "date": "2026-11-17T00:09:33Z",
+ "decided": {
+  "flags": [
+   "run 1000: debt_level_representative_no: Debt rose from about $451M to roughly $669M (549,705 long-term plus 119,151 current) after debt-funded acquisitions, so the base-year level understates current leverage.",
+   "run 1000: confidence_low",
+   "run 1000: shares_from_partnership_units_reconciled_with_per_unit_eps",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 3000: debt_level_representative_no: Debt was $450.8 million at base year-end, but long-term debt excluding current maturities is now $549,705 thousand plus $119,151 thousand current after the debt-funded acquisitions.",
+   "run 3000: shares_from_partnership_units_reconciled_with_per_unit_eps",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0068 and margin 0.1586, margin 0.1756 (persist), growth 0.0375, terminal RONIC 0.0840 (equity return r 0.0846), F 10",
+  "run_gap": 0.14203608363810058,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 28000000.0,
+       "printed": 28.0,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "During 2025, we recorded impairments totaling $28.0 million on our equity and debt investments in Ascend."
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "2025 impairment of equity and debt investments in Ascend, a non-operating item that does not recur"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 71212000.0,
+     "excess_cash_before": 71212000.0,
+     "k0_after": 30630050.467640758,
+     "k0_before": 58630050.46764076,
+     "k0_interest": 39735000.0,
+     "one_offs_charge": 28000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 334865982.88511217,
+     "x0_before": 308429663.0779607
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4146216372.40428,
+     "seam_ratio": 0.9826994211999242,
+     "tv_share": 0.3248109940096198,
+     "wedge_rate_5": -0.0011457153764490714
+    },
+    "flags": [
+     "debt_level_representative_no: Debt rose from about $451M to roughly $669M (549,705 long-term plus 119,151 current) after debt-funded acquisitions, so the base-year level understates current leverage.",
+     "confidence_low",
+     "shares_from_partnership_units_reconciled_with_per_unit_eps",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.125,
+     "fade_years": 10,
+     "long_run_op_margin": 0.16,
+     "op_margin": [
+      0.175,
+      0.183,
+      0.178,
+      0.172,
+      0.168
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.043,
+      0.04,
+      0.01,
+      0.0,
+      0.0
+     ],
+     "terminal_growth": 0.02
+    },
+    "old_defaults_inputs": "year 1 growth 0.0068 and margin 0.1586, margin 0.1756 (persist), growth 0.0375, terminal RONIC 0.0840 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 106
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.14,
+      0.19
+     ],
+     "rev_growth_y3": [
+      -0.02,
+      0.04
+     ],
+     "terminal_growth": [
+      0.01,
+      0.03
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (204,693) | (218,521)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Nine-month 2026 capex is about 12.3% of revenue, in line with the 2025 ratio of 0.12 and below the 5-year pooled 0.1321. I use 12.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "approximately 86.5% of our total coal sales were under long-term contracts with committed term expirations ranging from 2026 to 2030"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Contracts run through 2030 and 31.7M tons are committed for 2027, which gives visibility. A medium fade of 10 years lets margins and growth settle gradually."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,194.8 million | -0.1037 | 0.1756"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base margin equals the 5-year median, so little gap is expected. I fade slightly below the median because thermal coal faces structural demand and price pressure, which is only partly offset by a higher-margin royalty mix."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Asset impairments | 0 | 0 | 37,820 | 0"
+       },
+       {
+        "id": "P6",
+        "quote": "Segment Adjusted EBITDA Expense per ton sold at our Coal Operations improved 13.1% year-over-year and 7.9% sequentially"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2026 GAAP margin is held down by the $37.8M impairment, which is operating. Q3 was strong at about 24%, helped by lower costs per ton and royalties. The margin peaks in 2027 with the full-year royalty contribution, then drifts down as coal pricing resets lower."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0840."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The current return on tangible capital of 0.1595 is cyclically supported. New capital in underground mines and mineral acquisitions should earn only modestly above the 0.0840 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Record oil & gas royalty revenues and volumes, driven by $223.5 million of acquisitions completed during the quarter"
+       },
+       {
+        "id": "P3",
+        "quote": "Coal sales prices decreased by 7.5% as a result of lower domestic price realizations at several mines due to the continued roll-off of higher-priced contracts entered into during the energy crisis"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) gets a lift from the oil & gas acquisitions, with nine-month revenue of $1,670.6M and a fuller Q4. Year 2 adds the full-year AllDale contribution. After that, coal price roll-off and flat volumes hold growth near zero."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Extensive environmental laws and regulations could reduce demand for coal as a fuel source"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Thermal coal demand is structurally declining and utility reliance is concentrated. Royalty growth and inflation keep nominal growth positive, but below the long-run anchor of 0.0375."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_op_margin",
+      "risk": "Coal price roll-off continues and the Appalachia price collapse (-25.1% per ton) spreads to the Illinois Basin, compressing long-run margins toward trough levels"
+     },
+     {
+      "bear_value": -0.03,
+      "input_hit": "rev_growth",
+      "risk": "Unhedged oil & gas prices drop and operators slow drilling, while utility coal burn declines and the Mettiki customer loss spreads"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "terminal_growth",
+      "risk": "Structural thermal coal decline and regulation shrink the long-run revenue base"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.012999999999999998,
+       0.010000000000000002,
+       -0.019999999999999997,
+       -0.03,
+       -0.03
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.19,
+      "rev_growth": [
+       0.073,
+       0.07,
+       0.04,
+       0.03,
+       0.03
+      ],
+      "terminal_growth": 0.03
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt rose from about $451M to roughly $669M (549,705 long-term plus 119,151 current) after debt-funded acquisitions, so the base-year level understates current leverage."
+     },
+     "margin_position": "The 2025 operating margin of 0.1756 sits at the company's own 5-year median (0.1756). It is well below the 2022-23 energy-crisis peak of 0.26-0.28 and above the 2020 trough. Lower coal prices as crisis-era contracts roll off are offset by lower per-ton costs and growing oil & gas royalties.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 5.6% base-year rate reflects partnership status, but the nine-month 2026 expense of 27,968 on pretax income of 261,588 is about 10.7% as taxable oil & gas subsidiaries grow."
+     },
+     "why": "2025 revenue fell 10.4% on lower coal prices, but the margin held near its median because costs per ton fell. 2026 is a transition year: the AllDale III & IV acquisition lifts royalty income, Q3 coal prices per ton fell 8.3%, and a $37.8M impairment depresses nine-month GAAP operating income. The base year is a reasonable mid-cycle anchor, though its non-operating items are distorted by a $28.0M investment impairment."
+    },
+    "value_at_old_defaults": 38.4529548796455,
+    "values": {
+     "base": 35.24057264653354,
+     "bear": 27.432910510536956,
+     "bull": 47.5896271406806
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 28000000.0,
+       "printed": 28.0,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "we recorded impairments totaling $28.0 million on our equity and debt investments in Ascend"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "charge",
+       "what": "2025 impairment of equity and debt investments in Ascend (non-operating, below operating income)"
+      }
+     ],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 71212000.0,
+     "excess_cash_before": 71212000.0,
+     "k0_after": 30630050.467640758,
+     "k0_before": 58630050.46764076,
+     "k0_interest": 39735000.0,
+     "one_offs_charge": 28000000.0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 334865982.88511217,
+     "x0_before": 308429663.0779607
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4790286620.176859,
+     "seam_ratio": 0.9908123038444264,
+     "tv_share": 0.3574952798421046,
+     "wedge_rate_5": -0.01944895813886074
+    },
+    "flags": [
+     "debt_level_representative_no: Debt was $450.8 million at base year-end, but long-term debt excluding current maturities is now $549,705 thousand plus $119,151 thousand current after the debt-funded acquisitions.",
+     "shares_from_partnership_units_reconciled_with_per_unit_eps",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.12,
+     "fade_years": 10,
+     "long_run_op_margin": 0.16,
+     "op_margin": [
+      0.17,
+      0.185,
+      0.18,
+      0.175,
+      0.17
+     ],
+     "return_on_new_investment_long_run": 0.1,
+     "rev_growth": [
+      0.035,
+      0.06,
+      0.03,
+      0.02,
+      0.02
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.0068 and margin 0.1586, margin 0.1756 (persist), growth 0.0375, terminal RONIC 0.0840 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 106
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.13,
+      0.19
+     ],
+     "rev_growth_y3": [
+      -0.02,
+      0.06
+     ],
+     "terminal_growth": [
+      0.01,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.1321"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (204,693) | (218,521)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 capex was $204.7 million on revenue of $1,670.6 million, about 12%, in line with the 2025 ratio and below the 5-year pooled average of 13.2%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "expands and diversifies our portfolio of mineral and royalty interests"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is shifting toward oil & gas royalties and a coal mix that is normalizing, so convergence to the long-run margin takes about a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Coal sales prices decreased by 7.5% as a result of lower domestic price realizations at several mines due to the continued roll-off of higher-priced contracts entered into during the energy crisis"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Coal prices are still resetting down from energy-crisis levels, which argues for a margin below the 2025 level of about 0.18. A larger royalty mix partly offsets this, so I fade to 0.16, near the middle of the 2024-25 range of 0.16-0.18."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Asset impairments | 0 | 0 | 37,820 | 0"
+       },
+       {
+        "id": "P6",
+        "quote": "Segment Adjusted EBITDA Expense per ton sold at our Coal Operations improved 13.1% year-over-year and 7.9% sequentially"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month 2026 impairment of $37.8 million depresses 2026 margin, so year 1 is about 0.17 even with a strong Q3. 2027 improves with lower per-ton costs and the full-year oil & gas contribution, then drifts down as higher-priced coal contracts roll off."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Current return on tangible capital is 0.1595, but coal reinvestment faces falling prices. Royalty acquisitions at market prices earn modest returns, so I use 0.10, above the 0.0840 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "we are essentially fully committed at the midpoint of our 2026 sales volume guidance"
+       },
+       {
+        "id": "P6",
+        "quote": "With 31.7 million tons committed and priced for 2027"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 growth is modest because nine-month revenue is only 0.7% above 2025 and Q3 coal prices are lower. 2027 gets a full year of AllDale III & IV and the coal volume is largely committed. After that growth fades as coal pricing stays soft."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Extensive environmental laws and regulations could reduce demand for coal as a fuel source"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Coal is a structurally challenged fuel, but royalty and mineral acquisitions add diversified growth. I set terminal growth below the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_op_margin",
+      "risk": "Continued coal price roll-off, especially Appalachia where price per ton fell about 25%, compresses margins further"
+     },
+     {
+      "bear_value": -0.02,
+      "input_hit": "rev_growth",
+      "risk": "Unhedged oil & gas and gas prices fall, or operators slow drilling, undercutting the royalty growth"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "terminal_growth",
+      "risk": "Utility coal demand erodes through plant retirements or regulation, or a major customer renegotiates or terminates"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Higher leverage and acquisition integration reduce returns on the capital deployed"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.13,
+      "rev_growth": [
+       -0.015,
+       0.009999999999999995,
+       -0.020000000000000004,
+       -0.030000000000000002,
+       -0.030000000000000002
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.19,
+      "rev_growth": [
+       0.065,
+       0.09,
+       0.06,
+       0.05,
+       0.05
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Debt was $450.8 million at base year-end, but long-term debt excluding current maturities is now $549,705 thousand plus $119,151 thousand current after the debt-funded acquisitions."
+     },
+     "margin_position": "The 2025 operating margin of 0.1756 is close to the 5-year median (0.1756) and below the 2022-23 energy-crisis peak of 0.26-0.28. Coal prices are still falling as higher-priced contracts roll off. Costs per ton are improving, and higher-margin oil & gas royalties are growing as a share of the business.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate of 0.0558 reflects mostly pass-through partnership income, but nine-month 2026 tax expense is $27,968 thousand on $261,588 thousand of pretax income and taxable oil & gas subsidiaries are growing, so the rate is likely to rise."
+     },
+     "why": "The 2025 margin sits at the 5-year median, but revenue fell 10.4% on lower coal prices. 2026 is a transition year: the AllDale III & IV acquisition lifts royalty income, Mettiki longwall production ended and a $37.8 million impairment was booked. Q3 2026 margin (about 0.24) is a strong quarter and should not be extrapolated."
+    },
+    "value_at_old_defaults": 38.4529548796455,
+    "values": {
+     "base": 40.628656752794114,
+     "bear": 26.530043842188704,
+     "bull": 56.45738183366265
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 38.4529548796455,
+  "value_at_old_defaults_quoted": 38.4529548796455,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 4870345897.945116,
  "family": "commodity",
+ "far_from_price": false,
+ "filed_shares": 128387910.0,
  "flags": [
   "ARLP completed the acquisition of general partner and limited partner interests in AllDale III & IV for approximately $206.2 million, adding control of approximately 48,500 net royalty acres.",
   "The AllDale III & IV acquisition was funded partly by a new $150.0 million term loan at Alliance Minerals and by revolving credit facility borrowings.",
   "ARLP decided to cease longwall production at the Mettiki complex and moved the mine to continuous mining units."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08462083045154348,
+ "market_cap_at_publish": 3166293295,
  "model": "claude-opus-5-5",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 24.61,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 35.24057264653354,
+  "3000": 40.628656752794114
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1343,8 +1844,17 @@
   ]
  },
  "ticker": "ARLP",
+ "upside": 0.5381853303470157,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "value_base": 37.934614699663825,
+ "value_bear": 26.98147717636283,
+ "value_bull": 52.02350448717162,
+ "value_per_filed_share": {
+  "base": 37.934614699663825,
+  "bear": 26.98147717636283,
+  "bull": 52.02350448717162
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +17.7 points a year against the required return over 3 years"
 }

@@ -1,24 +1,490 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 47.52831578783747,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 62,
  "claims_supported": 59,
  "date": "2026-11-17T18:12:43Z",
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y1 1.6000 (filed -0.3827 to 1.3280)",
+   "run 1000: base_year_not_representative",
+   "run 1000: debt_level_representative_no: The base-year debt of $2,714 million is pre-merger, while Senior Notes were 6,614 at Sep 30, 2026 and net debt is about $6.0 billion.",
+   "run 1000: confidence_low",
+   "run 1000: debt_from_senior_notes_tags_parts_reconciled",
+   "run 1000: quotes_verified: 10 of 11",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 1.6200 (filed -0.3827 to 1.3280)",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Base-year debt of $2,714M is pre-merger, while Senior Notes, net, are now 6,614 and net debt is about $6.0 billion, so the base-year figure understates the post-merger debt.",
+   "run 3000: confidence_low",
+   "run 3000: debt_from_senior_notes_tags_parts_reconciled",
+   "run 3000: quotes_verified: 8 of 8"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 1.5108 and margin 0.2332, margin 0.3585 (persist), growth 0.0375, terminal RONIC 0.0730 (equity return r 0.0846), F 10",
+  "run_gap": 0.06602880070419997,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 368000000.0,
+     "excess_cash_before": 368000000.0,
+     "k0_after": 184960456.22489965,
+     "k0_before": 184960456.22489965,
+     "k0_interest": 173000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 636320029.3569459,
+     "x0_before": 636320029.3569459
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 16524849401.622967,
+     "seam_ratio": 1.0183764782300422,
+     "tv_share": 0.3978737005993713,
+     "wedge_rate_5": -0.006184817038276036
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 1.6000 (filed -0.3827 to 1.3280)",
+     "base_year_not_representative",
+     "debt_level_representative_no: The base-year debt of $2,714 million is pre-merger, while Senior Notes were 6,614 at Sep 30, 2026 and net debt is about $6.0 billion.",
+     "confidence_low",
+     "debt_from_senior_notes_tags_parts_reconciled",
+     "quotes_verified: 10 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.34,
+     "fade_years": 10,
+     "long_run_op_margin": 0.27,
+     "op_margin": [
+      0.22,
+      0.3,
+      0.3,
+      0.29,
+      0.28
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      1.6,
+      -0.1,
+      -0.02,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 1.5108 and margin 0.2332, margin 0.3585 (persist), growth 0.0375, terminal RONIC 0.0730 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 59
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.2,
+      0.34
+     ],
+     "rev_growth_y3": [
+      -0.12,
+      0.07
+     ],
+     "terminal_growth": [
+      0.01,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Capital Expenditures2 | ~$610 | ~$2,750"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Guided 2026 capex is about $2.75 billion on roughly $8.3 billion of revenue, which is about 33%. That is well above the pooled historical figure, which looks distorted by tagging. I hold about 34% on a lower 2027 revenue base."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Oil, gas, and NGL prices are volatile, and declines in prices may adversely affect our profitability, financial condition, cash flows, access to capital, and ability to grow."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The long-run margin is about 4 points below the year-5 margin of 28%, and a commodity business typically reverts over several years, so 10 years is reasonable."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Oil, gas, and NGL prices are volatile, and declines in prices may adversely affect our profitability, financial condition, cash flows, access to capital, and ability to grow."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is commodity-exposed, and the 2008-2025 margin history is volatile with a median well below the recent 30-40% levels. I fade to about 27%, which keeps part of the above-median gap, per the cyclical base rate."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net derivative (gain) loss | 684 | (45) | 1,109 | (107)"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $3,154.0 million | 0.1725 | 0.3171"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "GAAP margin in 2026 is depressed by a large derivative loss and one-time costs. 2027 onward assumes a recovery as derivative losses fade and synergies are captured, offset by lower prices and service-cost inflation. Margins then drift down gradually."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1100;"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0730."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 11%. Decline-curve reinvestment in shale earns less over a cycle, and the no-value-added threshold is 7.3%, so I use 9%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Equivalent (per Boe) | $54.23 | $53.86 | $41.23 | 1% | $51.15 | $43.15 | 19%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 reflects the Civitas merger (about 433 MBoe/d in Q3 2026 against about 207 in 2025) on top of high oil prices, so growth is very large. Later years assume full-year Civitas, no South Texas volume, and realized prices easing from the current level. That produces a decline in 2027 and roughly flat revenue in 2028, then low growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our proved reserve life index decreased to 8.9 years as of December 31, 2025, compared with 10.9 years as of December 31, 2024."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0846; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A depleting E&P with a short reserve life should grow below the nominal anchor, so I use 2.5% against the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.18,
+      "input_hit": "long_run_op_margin",
+      "risk": "Oil prices fall back toward the $60 strip from about $86 realized, compressing margins and risking impairments"
+     },
+     {
+      "bear_value": -0.2,
+      "input_hit": "rev_growth",
+      "risk": "Revenue declines more sharply than assumed in 2027 as prices normalize and Uinta takeaway constraints persist"
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Capital intensity stays high from service-cost inflation while returns fall"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.2,
+      "rev_growth": [
+       1.5,
+       -0.2,
+       -0.12,
+       -0.06999999999999999,
+       -0.06999999999999999
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       1.6900000000000002,
+       -0.009999999999999995,
+       0.07,
+       0.12000000000000001,
+       0.12000000000000001
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The base-year debt of $2,714 million is pre-merger, while Senior Notes were 6,614 at Sep 30, 2026 and net debt is about $6.0 billion."
+     },
+     "margin_position": "The 2025 operating margin of 31.7% sits above the 18-year history, which includes deep negative years. Nine-month 2026 GAAP margin is about 23% (1,434 on 6,149), pulled down by a 1,109 net derivative loss and one-off merger G&A. Underlying unit margins are high because realized oil is about $86 per Bbl. Hedges, merger costs and a possible oil price fade make 2026 a poor guide to a normal year.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 0.2193 is close to the nine-month 2026 effective rate of about 25% (273 on 1,102), though cash taxes are guided low at $100-$120 million by NOLs."
+     },
+     "why": "FY2025 is legacy SM only, with about 207 MBoe/d. Post-merger production is about 421 MBoe/d, so revenue in year 1 (2026) is roughly 2.6x the base. Year 1 revenue also includes a 260 divestiture gain and an elevated price deck. The base year does not show the current scale, the share count of about 236M, or the debt load."
+    },
+    "value_at_old_defaults": 313.8586723733046,
+    "values": {
+     "base": 157.53517813322622,
+     "bear": 67.05468743378273,
+     "bull": 365.8911884236338
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 368000000.0,
+     "excess_cash_before": 368000000.0,
+     "k0_after": 184960456.22489965,
+     "k0_before": 184960456.22489965,
+     "k0_interest": 173000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 636320029.3569459,
+     "x0_before": 636320029.3569459
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 15446704422.96598,
+     "seam_ratio": 1.0334099451090821,
+     "tv_share": 0.4190752547179189,
+     "wedge_rate_5": 0.008908513700938212
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 1.6200 (filed -0.3827 to 1.3280)",
+     "base_year_not_representative",
+     "debt_level_representative_no: Base-year debt of $2,714M is pre-merger, while Senior Notes, net, are now 6,614 and net debt is about $6.0 billion, so the base-year figure understates the post-merger debt.",
+     "confidence_low",
+     "debt_from_senior_notes_tags_parts_reconciled",
+     "quotes_verified: 8 of 8"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.36,
+     "fade_years": 10,
+     "long_run_op_margin": 0.26,
+     "op_margin": [
+      0.24,
+      0.29,
+      0.28,
+      0.27,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.1,
+     "rev_growth": [
+      1.62,
+      -0.1,
+      -0.02,
+      0.02,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 1.5108 and margin 0.2332, margin 0.3585 (persist), growth 0.0375, terminal RONIC 0.0730 (equity return r 0.0846), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 59
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.2,
+      0.32
+     ],
+     "rev_growth_y3": [
+      -0.12,
+      0.08
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (2,020) | (1,222)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2026 capital program of about $2.75 billion against revenue of roughly $7-8 billion implies a ratio of about 0.33-0.39. The pooled 5-year ratio of 0.16 reflects incomplete capex data and is not usable."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our proved reserve life index decreased to 8.9 years as of December 31, 2025, compared with 10.9 years as of December 31, 2024."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A reserve life of under 9 years and commodity cyclicality argue for a moderate fade of about ten years to the long-run margin."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $3,154.0 million | 0.1725 | 0.3171"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The FY2025 margin of 0.3171 is above the company's long-run median. Applying the commodity base rate of keeping 40-60% of the gap above median, I fade to about 0.26."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net derivative (gain) loss | 684 | (45) | 1,109 | (107)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2026 margin is depressed by derivative losses booked in operating expenses (1,109 for nine months). I assume a recovery to about 0.29 in 2027 as hedge losses shrink and prices ease, then slow erosion toward mid-cycle levels."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 0.11, and the break-even return is 0.073. Shale returns on new drilling are above the break-even but compete away over time, so I use about 0.10."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Average net daily equivalent production decreased two percent sequentially to 433.1 MBOE per day"
+       },
+       {
+        "id": "P5",
+        "quote": "Full-year capital expenditures are expected to be approximately $2.75 billion, or the midpoint of the prior guidance range."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Merger-driven volumes about doubled in 2026, so year 1 is very large. In 2027 I assume realized prices fall from the elevated 2026 levels and the divested South Texas volumes and the one-off gain drop out, followed by low growth from a roughly flat capital program."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "If we are unable to replace reserves and increase our reserve life index, we will not be able to sustain production."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "E&P production depletes and needs reinvestment just to replace reserves, so long-run growth sits below the nominal growth anchor, at about 2.5%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.18,
+      "input_hit": "long_run_op_margin",
+      "risk": "Oil prices fall well below the 2026 realized level, compressing margins and risking impairments"
+     },
+     {
+      "bear_value": 0.45,
+      "input_hit": "capex_to_revenue",
+      "risk": "Cost inflation and a reserve replacement burden raise capital intensity"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Depleting reserves and weak reinvestment returns limit long-run growth"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.2,
+      "rev_growth": [
+       1.52,
+       -0.2,
+       -0.12,
+       -0.07999999999999999,
+       -0.06999999999999999
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.32,
+      "rev_growth": [
+       1.7200000000000002,
+       0.0,
+       0.08,
+       0.12000000000000001,
+       0.13
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Base-year debt of $2,714M is pre-merger, while Senior Notes, net, are now 6,614 and net debt is about $6.0 billion, so the base-year figure understates the post-merger debt."
+     },
+     "margin_position": "The FY2025 operating margin of 0.3171 sits above the company's own long-run history, which ranges from deeply negative to about 0.47. It is a commodity-price-driven margin. 2026 is being dragged down by large derivative losses booked inside operating income, while realized oil prices are high. The Civitas merger has roughly doubled the asset base.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 tax rate of 0.2193 is close to the nine-month 2026 effective rate of 273/1,102, about 25%, so it is a plausible sustainable level."
+     },
+     "why": "FY2025 is the pre-merger company with about 207 MBoe/d of production. In 2026 production roughly doubled to about 430 MBoe/d after the Civitas Merger, so base-year revenue of $3,154M understates the new scale. FY2026 will also include a 260 divestiture gain and a large derivative loss. I therefore expect year-1 revenue growth of about 160%, then a fall in 2027 as prices mean-revert, the South Texas assets sold on April 30, 2026 drop out, and the gain does not recur."
+    },
+    "value_at_old_defaults": 313.8586723733046,
+    "values": {
+     "base": 147.46575521200268,
+     "bear": 62.20194936972052,
+     "bull": 374.8355341414379
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 313.8586723733046,
+  "value_at_old_defaults_quoted": 153.57781174168323,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 17537553667.35066,
  "family": "commodity",
+ "far_from_price": true,
+ "filed_shares": 115000000.0,
  "flags": [
   "SM Energy completed its merger with Civitas, issuing 124 million shares to Civitas holders. This was SM acquiring Civitas, not an acquisition of SM.",
   "SM completed the South Texas Divestiture. After the final post-closing settlement, total net cash proceeds were $894 million.",
   "SM redeemed all of its 6.625% Senior Notes due 2027 for $416,791,000 (voluntary redemption, not a default)."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08462083045154348,
+ "market_cap_at_publish": 7151636806,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 30.43,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 157.53517813322622,
+  "3000": 147.46575521200268
+ },
+ "seeds_agree": true,
+ "share_unit_note": "filed shares 115,000,000 against 235,019,284 quoted (x2.04); values are per quoted share",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -778,8 +1244,17 @@
   ]
  },
  "ticker": "SM",
+ "upside": 1.452243331573717,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "value_base": 74.62176457978822,
+ "value_bear": 31.624028871441784,
+ "value_bull": 181.22677364611263,
+ "value_per_filed_share": {
+  "base": 152.50046667261444,
+  "bear": 64.62831840175163,
+  "bull": 370.36336128253583
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +47.5 points a year against the required return over 3 years"
 }

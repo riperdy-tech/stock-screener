@@ -1,24 +1,494 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -24.619672114670855,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 123,
  "claims_supported": 116,
  "date": "2026-11-17T03:27:41Z",
+ "decided": {
+  "flags": [
+   "run 1000: debt_from_senior_notes_tags_parts_reconciled",
+   "run 1000: shares_unreconciled_no_eps",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: debt_from_senior_notes_tags_parts_reconciled",
+   "run 3000: shares_unreconciled_no_eps",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0611 and margin 0.6785, margin 0.6734 (persist), growth 0.0375, terminal RONIC 0.0528 (equity return r 0.1113), F 10",
+  "run_gap": 0.012442694138978569,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 580500000.0,
+     "excess_cash_before": 580500000.0,
+     "k0_after": 76099306.62650597,
+     "k0_before": 76099306.62650597,
+     "k0_interest": 77000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 807463268.6181507,
+     "x0_before": 807463268.6181507
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 11862084010.609911,
+     "seam_ratio": 1.039745847900966,
+     "tv_share": 0.3269721011159225,
+     "wedge_rate_5": -0.0102181790768224
+    },
+    "flags": [
+     "debt_from_senior_notes_tags_parts_reconciled",
+     "shares_unreconciled_no_eps",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.025,
+     "fade_years": 10,
+     "long_run_op_margin": 0.665,
+     "op_margin": [
+      0.675,
+      0.675,
+      0.675,
+      0.672,
+      0.67
+     ],
+     "return_on_new_investment_long_run": 0.5,
+     "rev_growth": [
+      0.062,
+      0.075,
+      0.065,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0611 and margin 0.6785, margin 0.6734 (persist), growth 0.0375, terminal RONIC 0.0528 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 116
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.62,
+      0.69
+     ],
+     "rev_growth_y3": [
+      0.04,
+      0.085
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0237"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (33.6) | (18.3)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled history is 2.4% of revenue, and nine-month 2026 capex of 33.6 is about 2.6% of revenue, so I use 2.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "must be renewed or extended by November 30, 2030"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin move gradually from the 2030 contract horizon to maturity, so I use a medium fade of 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Any loss or modification of our right to operate the .com and .net gTLDs could materially and adversely impact our ability to conduct our business and result in loss of revenues."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Pricing is capped by contract, and renewal in 2030 could bring terms matched to other large gTLDs and challenges to pricing. I fade slightly below today's level to allow for cost creep and some regulatory give-back."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Operating income | 66.9 | 67.8 | 67.8 | 67.9"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,656.6 million | 0.0637 | 0.6767"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin has held at 67-68%, and 2026 year-to-date is 67.8% with Q3 at 66.9%. SG&A, legal and security costs are rising slightly faster than revenue, so I hold it flat near 67.5% and edge it lower late in the period."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0528"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is capital-light, with a base-year return on tangible capital of 1.0. New investment such as .web may earn far less, so I assume 50% as a conservative long-run return, well above the 5.28% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "As of September 30, 2026, we had 182.5 million .com and .net registrations in the domain name base, which represents a 6.1% increase from September 30, 2025"
+       },
+       {
+        "id": "P4",
+        "quote": "On April 23, 2026, we announced that we will increase the annual registry-level wholesale fee for each new and renewal .com domain name registration from $10.26 to $10.97 effective November 1, 2026."
+       },
+       {
+        "id": "P7",
+        "quote": "from $10.91 to $12.00, effective March 1, 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is anchored by nine-month growth of 6% and a domain base up 6.1%. Year 2 gets a boost from the announced .com (about 7%) and .net (about 10%) fee increases, which are recognised over the registration term. Growth then fades as volume normalises and the 2029-2030 renewal dates near."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth is set below the 3.75% anchor. The domain base is mature, the price caps are set by agreement, and AI and social platforms may substitute for domain names."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Non-renewal or unfavourable renewal terms of the .com agreement (Nov 2030) or the .net agreement (June 2029), or successful challenges to pricing"
+     },
+     {
+      "bear_value": 0.035,
+      "input_hit": "rev_growth",
+      "risk": "Price increases and AI/social-platform substitutes cut registrations and renewals, so growth stalls"
+     },
+     {
+      "bear_value": 0.6,
+      "input_hit": "long_run_op_margin",
+      "risk": "Margin compression from rising security, legal and SG&A costs or from regulatory terms at renewal"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.62,
+      "rev_growth": [
+       0.037,
+       0.049999999999999996,
+       0.04,
+       0.025,
+       0.019999999999999997
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.69,
+      "rev_growth": [
+       0.082,
+       0.095,
+       0.085,
+       0.07,
+       0.065
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $1,788.2M, mostly fixed-rate notes due 2031-2032, is about 1.6x operating income, and the company refinances at roughly constant principal while returning cash."
+     },
+     "margin_position": "The operating margin is about 67-68% because Verisign is the sole .com registry operator, with a tiny cost base. Costs are about a third of revenue, and ICANN fees are small per-name amounts. The margin has risen from 0.6545 in 2019 to 0.6767 in 2025 and is at the top of its own history, but it comes from contractual exclusivity rather than a cycle.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 22.7% base-year rate is close to the nine-month 2026 rate of about 23.4% (197.0 of 840.6 pretax) and 2024's 23.1%, and the Act is not expected to move it."
+     },
+     "why": "2025 revenue grew 6.4% and the margin of 0.6767 is in line with 2023-2024. Nine months of 2026 show a similar 67.8% margin and 6% growth, so the base year is a fair starting point. The Q3 margin slipped to 66.9% on higher SG&A and a $7.5M held-for-sale loss, which is small."
+    },
+    "value_at_old_defaults": 119.36057303767367,
+    "values": {
+     "base": 144.95360297176168,
+     "bear": 113.34836647327491,
+     "bull": 181.17132525345124
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 580500000.0,
+     "excess_cash_before": 580500000.0,
+     "k0_after": 76099306.62650597,
+     "k0_before": 76099306.62650597,
+     "k0_interest": 77000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 807463268.6181507,
+     "x0_before": 807463268.6181507
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 11708858431.736233,
+     "seam_ratio": 1.037974504568662,
+     "tv_share": 0.3242880743249153,
+     "wedge_rate_5": -0.010299114634687932
+    },
+    "flags": [
+     "debt_from_senior_notes_tags_parts_reconciled",
+     "shares_unreconciled_no_eps",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.025,
+     "fade_years": 10,
+     "long_run_op_margin": 0.66,
+     "op_margin": [
+      0.677,
+      0.678,
+      0.678,
+      0.677,
+      0.676
+     ],
+     "return_on_new_investment_long_run": 0.5,
+     "rev_growth": [
+      0.058,
+      0.07,
+      0.06,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0611 and margin 0.6785, margin 0.6734 (persist), growth 0.0375, terminal RONIC 0.0528 (equity return r 0.1113), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 116
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.6,
+      0.68
+     ],
+     "rev_growth_y3": [
+      0.035,
+      0.075
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0237"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (33.6) | (18.3)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 2.4% of revenue over the last five years, and 9M 2026 capex of 33.6 is about 2.6% of revenue, so I use 2.5%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The current term of the .com Registry Agreement is six years and must be renewed or extended by November 30, 2030."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2030 .com renewal is a clear horizon after which margins and growth may normalise. A ten-year fade is a middle path between continued exclusivity and a changed regime."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Any loss or modification of our right to operate the .com and .net gTLDs could materially and adversely impact our ability to conduct our business and result in loss of revenues."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The ordinary-company base rate implies some mean reversion, and the 2030 renewal could bring pricing or term changes that would cost margin. I fade modestly below the current level, to 66%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 296.5 | 284.3 | 886.4 | 836.2"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,656.6 million | 0.0637 | 0.6767"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margin has been steady at 0.676 to 0.680 for three years, and 9M 2026 is 67.8%. Price rises add operating leverage, but higher SG&A and security costs offset it, so I hold it flat."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, so the filed return on tangible capital is very high. New investment is mostly small data centre and software spend, so I use a high but not extreme return, far above the 5.28% value-neutral level."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "On April 23, 2026, we announced that we will increase the annual registry-level wholesale fee for each new and renewal .com domain name registration from $10.26 to $10.97 effective November 1, 2026."
+       },
+       {
+        "id": "P4",
+        "quote": "we had 182.5 million .com and .net registrations in the domain name base, which represents a 6.1% increase from September 30, 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 9M 2026 growth rate is 6%, so year 1 is about 5.8%. The .com wholesale fee rises about 6.9% from Nov 1, 2026 and the .net fee about 10% from Mar 2027. Together with a base growing 6.1%, that supports a higher year 2. Growth then fades as volume gains normalise and price rises flow through the deferred-revenue book."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth is limited by contractual price caps, a mature domain base and substitution risk from social media and AI. I set it below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.5,
+      "input_hit": "long_run_op_margin",
+      "risk": "The .com or .net registry agreement is not renewed on current terms in 2029-2030, or the pricing provisions are challenged or tightened, cutting price growth and margin."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Substitution by AI, social media or alternative namespaces, and wholesale price rises, depress new registrations and renewals; the renewal rate has already slipped to 75.2%."
+     },
+     {
+      "bear_value": 0.035,
+      "input_hit": "rev_growth",
+      "risk": "The domain base growth recovery fades quickly, leaving only price-driven growth."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.6,
+      "rev_growth": [
+       0.03300000000000001,
+       0.04500000000000001,
+       0.035,
+       0.02500000000000001,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.68,
+      "rev_growth": [
+       0.07300000000000001,
+       0.085,
+       0.075,
+       0.065,
+       0.06
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of $1,788.2 million is about 1.6x operating income and has been kept roughly flat by refinancing maturing notes with new ones."
+     },
+     "margin_position": "The operating margin is structurally high, about 68%, because Verisign is the sole .com registry operator under a contract with capped price rises and a small cost base. Costs were 32.3% of revenue in 2025, and the margin has risen from 0.6545 in 2019 to 0.6767 in 2025. It is not a cyclical peak. Nine-month 2026 SG&A creep (14.6% of revenue vs 13.8%) is holding it flat.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 rate of 22.7% is close to the 9M 2026 rate (197.0 / 840.6, about 23.4%) and reflects the 21% federal rate plus state taxes."
+     },
+     "why": "2025 revenue grew 6% and the 0.6767 margin is in line with the 9M 2026 margin of about 67.8%. The domain base is recovering after the 2024 dip, and 2026 growth looks similar to 2025. The 2025 operating cash flow of $1,091.1 million was helped by a one-time tax-timing benefit, but that does not affect the margin."
+    },
+    "value_at_old_defaults": 119.36057303767367,
+    "values": {
+     "base": 143.16114115272615,
+     "bear": 110.83388917599368,
+     "bull": 172.16225724261258
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 119.36057303767367,
+  "value_at_old_defaults_quoted": 119.36057303767367,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 13512581499.43848,
  "family": "operating",
+ "far_from_price": true,
+ "filed_shares": 93800000.0,
  "flags": [
   "Verisign announced an increase in the .com registry-level wholesale fee from $10.26 to $10.97, effective November 1, 2026.",
   "Verisign announced an increase in the .net registry-level wholesale price from $10.91 to $12.00, effective March 1, 2027.",
   "Verisign issued $550 million of 5.10% Senior Notes due 2031."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.11134375453902048,
+ "market_cap_at_publish": 27421292561,
  "model": "claude-opus-5-5",
- "no_value_reason": "debt_unavailable",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 305.7,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 144.95360297176168,
+  "3000": 143.16114115272615
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1503,8 +1973,17 @@
   ]
  },
  "ticker": "VRSN",
+ "upside": -0.5072230286235018,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "debt_unavailable"
+ "value_base": 144.05737206224393,
+ "value_bear": 112.0911278246343,
+ "value_bull": 176.66679124803193,
+ "value_per_filed_share": {
+  "base": 144.05737206224393,
+  "bear": 112.0911278246343,
+  "bull": 176.66679124803193
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -24.6 points a year against the required return over 3 years"
 }

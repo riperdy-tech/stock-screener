@@ -1,24 +1,421 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 13.574925135160942,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 96,
  "claims_supported": 93,
  "date": "2026-11-16T12:29:41Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.1755, growth 0.0375, r 0.0936, F 10",
+  "route": "financial",
+  "run_gap": 0.11700958665944454,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 5225473117.114037,
+     "implied_pb": 2.0027288997053203,
+     "seam_ratio": 1.1664000000000014,
+     "tv_share": 0.5549014597579597
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.075,
+      0.09,
+      0.09,
+      0.085,
+      0.08
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.125,
+     "roe": [
+      0.17,
+      0.15,
+      0.14,
+      0.135,
+      0.13
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1755, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 93
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.06,
+      0.12
+     ],
+     "long_run_roe": [
+      0.1,
+      0.15
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Book value per share of $29.80, an increase of 4.6% compared to December 31, 2025;"
+       },
+       {
+        "id": "F3",
+        "quote": "Dividends on common shares paid | (199,495) | 0"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchases of common shares | (58,422) | (92,341)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Book value per share rose only 4.6% year to date after a $199m special dividend and buybacks, and equity is $2,935.9m at September against $2,822.1m at year-end. Year 1 growth is about 7-8% after Q4 earnings. After that, retaining most earnings with limited payouts gives growth of 8-9%, less than return on equity. Payouts are not obligatory, so growth could be faster if they stop."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "While growth in the E&S market is slowing"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets return on equity move gradually from the mid-teens to the long-run level, as the competitive pressure in property and specialty and the investment gains normalise."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Return on average common shareholders' equity | 22.4% | 18.3% | 13.9% | (5.7)% | 11.1%"
+       },
+       {
+        "id": "P1",
+        "quote": "the cyclical nature of the insurance and reinsurance business, which may result in declines in pricing and more competitive terms and conditions;"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run return is a mix of underwriting returns and Two Sigma returns on the investment portfolio. The underwriting margin is cyclical, with return on equity running from -5.7% to 22.4% since 2022, and the company has little record above 2023. I set it modestly above the 9.36% cost of equity, with a wide range."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Annualized return on average equity of 16.6% and annualized operating return on average equity of 23.4%;"
+       },
+       {
+        "id": "P4",
+        "quote": "We have observed a change in the trading environment in several insurance and reinsurance classes in recent months, particularly property and some specialty classes, which is creating more competitive market conditions."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0559, p25 0.1026, median 0.1755, p75 0.2086, max 0.2476, last 0.2476."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 return is already 16.6% annualized, so year 1 is about 17%. Q3 underwriting income fell to $15.5m and management reports more competitive trading conditions, so I fade return on equity toward the low teens. The FILED RECORD median of 17.6% includes strong investment years."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Hamilton Group expects to be exempt from the UTPR until January 1, 2030"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run growth of equity is set near nominal growth of 3.75%, with a slight discount for the insurance cycle and a possible tax top-up from 2030 under the Bermuda tax rules."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "Two Sigma Hamilton Fund returns reverse or fall, and fund-driven earnings fade faster than assumed (Hamilton cannot control the fund and has limited withdrawal rights)."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "roe",
+      "risk": "Reserve strengthening on long-tail casualty (about half of premiums), a large catastrophe or a softening cycle cuts earnings in the early years."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Equity grows more slowly because of non-controlling-interest allocation, larger special dividends or a sharper cycle downturn."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.045,
+       0.06,
+       0.06,
+       0.05500000000000001,
+       0.05
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.105,
+       0.12,
+       0.12,
+       0.115,
+       0.11
+      ],
+      "long_run_roe": 0.15,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is high now (24.8% in 2025, about 16.6% annualized in 2026) mainly because of strong Two Sigma Hamilton Fund returns on top of a combined ratio in the low-to-mid 90s. Underwriting income is thin relative to investment income (9-month underwriting income $102.2m against net investment income $323.3m), and the market is softening in property and some specialty lines. Return on equity should drift down toward a mid-teens or lower level as investment results normalise and pricing eases. It should still stay above the 9.36% cost of equity.",
+     "why": "The 2025 return of 24.8% is the top of the 2022-2025 range and was lifted by fund gains, so it is not a steady level. Hamilton paid a $2.00 special dividend and bought back stock while growing gross premiums written about 15%, so capital does not appear to limit growth in book equity. Book equity growth is therefore set mainly by earnings less payouts, and it is slowed by non-controlling-interest leakage and a soft Q3 underwriting result."
+    },
+    "value_at_old_defaults": 72.3034051861002,
+    "values": {
+     "base": 54.42682509465626,
+     "bear": 41.059773643519186,
+     "bull": 81.23884336272089
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 4647837140.983796,
+     "implied_pb": 1.781342579849093,
+     "seam_ratio": 1.1640000000000017,
+     "tv_share": 0.5545466174495471
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.075,
+      0.09,
+      0.09,
+      0.085,
+      0.08
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.115,
+     "roe": [
+      0.16,
+      0.14,
+      0.135,
+      0.13,
+      0.125
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1755, growth 0.0375, r 0.0936, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 93
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.05,
+      0.12
+     ],
+     "long_run_roe": [
+      0.09,
+      0.14
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Dividends on common shares paid | (199,495) | 0"
+       },
+       {
+        "id": "F1",
+        "quote": "Total shareholders\u2019 equity | 2,935,874 | 2,822,099"
+       },
+       {
+        "id": "P6",
+        "quote": "Repurchased common shares of $44.9 million in 2026."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Common equity rose only from $2,822.1 million to $2,935.9 million in nine months after the special dividend and buybacks. Year 1 is therefore about 7.5%. Later years assume a ROE of about 13-14% less a payout of roughly 35-40% through dividends and buybacks, giving growth of 8-9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "the cyclical nature of the insurance and reinsurance business, which may result in declines in pricing and more competitive terms and conditions;"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The current excess return is cycle- and investment-driven rather than a durable moat, so I use a medium fade of 10 years to the long-run ROE."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Return on average common shareholders' equity | 22.4% | 18.3% | 13.9% | (5.7)% | 11.1%"
+       },
+       {
+        "id": "F2",
+        "quote": "Net income (loss) attributable to non-controlling interest | 146,727 | 40,225 | 341,242 | 220,990"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Casualty pricing stays supportive, but property and specialty are softening, the cycle is turning, and part of the investment profit goes to the fund's other investors. A steady-state ROE of about 11.5% is only modestly above the 9.36% cost of equity. The uncertainty is wide because TSHF returns drive so much of the result."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Annualized return on average equity of 16.6% and annualized operating return on average equity of 23.4%;"
+       },
+       {
+        "id": "P6",
+        "quote": "Underwriting income of $15.5 million;"
+       },
+       {
+        "id": "P4",
+        "quote": "We have observed a change in the trading environment in several insurance and reinsurance classes in recent months, particularly property and some specialty classes, which is creating more competitive market conditions."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0559, p25 0.1026, median 0.1755, p75 0.2086, max 0.2476, last 0.2476."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Nine-month 2026 ROE is 16.6% annualized, down from 24.8% on opening equity in 2025, and Q3 was only 11.3% because fixed income lost money. Underwriting income fell and competition is rising, and results lean on a Two Sigma fund Hamilton cannot control. I expect a fade from about 16% to a low-teens ROE, still above the 9.36% cost of equity."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "On December 27, 2023, the Bermuda Government enacted a 15% corporate income tax that generally became effective for Bermuda domiciled entities on or after January 1, 2025."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run growth of common equity should sit near the nominal-growth anchor, a little below it, given a Bermuda specialty reinsurer with heavy payouts and the 15% Bermuda tax from 2030."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "roe",
+      "risk": "The Two Sigma Hamilton Fund underperforms or has a drawdown, or the company cannot withdraw capital from it. Investment profit drove most of 2025 and 2026 earnings."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_roe",
+      "risk": "Reserve strengthening in long-tail casualty (social inflation) or a major catastrophe, in a softening market, permanently lowers underwriting margins."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "Faster premium growth, or a reserve or rating shock, absorbs capital, or the company keeps paying large special dividends and buybacks, so book growth differs from my path."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.035,
+       0.05,
+       0.05,
+       0.04500000000000001,
+       0.04000000000000001
+      ],
+      "long_run_roe": 0.09,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.105,
+       0.12,
+       0.12,
+       0.115,
+       0.11
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is high because of strong investment gains, not underwriting alone. The Two Sigma Hamilton Fund (TSHF) returned $353.2 million year to date, against $102.2 million of underwriting income. Underwriting margins are thinning (Q3 combined ratio 97.3%, underwriting income $15.5 million) as property and specialty pricing softens. Part of the fund's profit goes to non-controlling interest, which lowers income to common. 2025 (24.8%) was the high point. I expect 2026 near 16% and a fade toward the low-to-mid teens.",
+     "why": "Hamilton paid a $2.00 special dividend (about $200 million in cash), bought back stock and still grew common equity, so regulatory capital is not binding on payouts. Gross premiums written grew 14.9% and the company is adding to its retained book, but Bermuda Monetary Authority (BMA) solvency ratios are not in the packet. Book growth is therefore set by earnings less discretionary dividends and buybacks. The special dividend probably will not repeat at the same size."
+    },
+    "value_at_old_defaults": 72.3034051861002,
+    "values": {
+     "base": 48.41035700906692,
+     "bear": 36.56308938987474,
+     "bull": 72.53212317488054
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 72.3034051861002,
+  "value_at_old_defaults_quoted": 72.3034051861002,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 5339512169.189515,
  "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 103844000.0,
  "flags": [
   "Hamilton Re, Ltd., Hamilton Corporate Member Limited, and Hamilton Insurance Group, Ltd. entered into an Amendment and Restatement Agreement amending an unsecured $330 million letter of credit facility in favor of Lloyd's.",
   "Hamilton Insurance Group, Ltd. entered into the First Amendment to the Second Amended and Restated Employment Agreement with Chief Executive Officer Giuseppina C. Albo to extend her employment term.",
   "The Company's Board of Directors declared a special dividend of $2.00 per share, or $205.8 million, which was paid to common shareholders."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09360305732783658,
+ "market_cap_at_publish": 3786956548,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "net income basis does not reconcile with filed EPS",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 38.46,
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 54.42682509465626,
+  "3000": 48.41035700906692
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1323,8 +1720,17 @@
   ]
  },
  "ticker": "HG",
+ "upside": 0.409974501030244,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "net income basis does not reconcile with filed EPS"
+ "value_base": 51.41859105186159,
+ "value_bear": 38.81143151669696,
+ "value_bull": 76.88548326880071,
+ "value_per_filed_share": {
+  "base": 51.41859105186159,
+  "bear": 38.81143151669696,
+  "bull": 76.88548326880071
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +13.6 points a year against the required return over 3 years"
 }
