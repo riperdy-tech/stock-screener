@@ -11,7 +11,9 @@ Which names, each run:
         the names the front page counts as scored_count) and is in stocks.json, when its entry is
         absent or older than 7 days; absent first, then oldest; at most --max-calls of them.
 A name Yahoo has no target for is stored with four nulls and its fetched_at, so it is not asked
-again inside its window. A name whose call fails keeps its previous entry. Entries of names that
+again inside its window. A name whose call fails keeps its previous entry. An empty answer for a name
+that has a stored target counts as a failed call (Yahoo throttles with empty answers): the stored
+target and its date stay. Entries of names that
 left both sets are kept.
 
 Usage:
@@ -139,6 +141,10 @@ def run(factor_tickers, stock_symbols, payload, now, fetch, max_calls=DEFAULT_MA
             try:
                 got = fetch(t)
                 entry = {k: got.get(k) for k in FIGURES}
+                old = entries.get(t)
+                if all(v is None for v in entry.values()) and isinstance(old, dict) and old.get("mean") is not None:
+                    # Yahoo answers a throttled call with nothing, not an error: an empty answer never wipes a target we hold
+                    raise ValueError("empty answer for a name that has a stored target; the stored one is kept")
                 entry["fetched_at"] = utc_iso(datetime.now(timezone.utc))
             except Exception as exc:
                 failed += 1

@@ -138,3 +138,11 @@ def test_atomic_write_failure_leaves_old_file(tmp_path):
     with pytest.raises(TypeError):
         fat.write_json_atomic(target, {"bad": object()})
     assert json.loads(target.read_text(encoding="utf-8")) == {"old": True}
+
+
+def test_an_empty_answer_never_wipes_a_stored_target():
+    nulls = {"mean": None, "median": None, "high": None, "low": None}
+    entries = {"RN1": entry(ago(hours=30), mean=42.0)}                    # due again, and Yahoo answers with nothing
+    payload, (nl, nr, failed, fresh) = go(entries, fetch=fake(figures={"RN1": nulls, "WL1": nulls}))
+    assert payload["RN1"] == entry(ago(hours=30), mean=42.0) and failed == 1
+    assert payload["WL1"]["mean"] is None                      # no stored target: the null entry is written
