@@ -2,59 +2,42 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 96,
- "claims_supported": 88,
- "date": "2026-11-16T16:45:19Z",
+ "claims": 123,
+ "claims_supported": 120,
+ "date": "2026-11-18T06:17:13Z",
  "family": "operating",
  "flags": [
-  "Homeowners of America Holding Corporation and Porch Insurance Reciprocal Exchange entered into a definitive Purchase Agreement to acquire Allied Trust Insurance Company, Allied Underwriters LLC, and Lonestar Lagniappe Reinsurance Holdings, LLC, with up to $20.0 million at closing and up to $50.0 million in deferred payments optionally payable in Porch common stock.",
-  "Porch and the Reciprocal entered into an at-the-market Distribution Agreement with StoneX Financial Inc. under which the Reciprocal may sell up to 10 million existing shares and Porch may issue and sell up to 5 million shares at a 1.5% sales commission, pursuant to a registration statement filed the same day.",
-  "Porch formed Porch Reciprocal Exchange and sold its legacy homeowners insurance carrier, Homeowners of America, to the Reciprocal for approximately $105 million less $58 million of prior surplus note obligations, financed by a surplus note bringing total surplus notes held by Porch to approximately $106 million, alongside the transfer of 18.3 million Porch shares."
+  "Homeowners of America Holding Corporation and Porch Insurance Reciprocal Exchange entered into a Purchase Agreement to acquire Allied Trust Insurance Company, Allied Underwriters LLC, and Lonestar Lagniappe Reinsurance Holdings, LLC.",
+  "Porch and the Reciprocal entered into an at-the-market distribution agreement with StoneX Financial Inc. under which the Reciprocal may sell up to 10 million existing Porch common shares and Porch may issue and sell up to 5 million common shares.",
+  "Porch reported quarterly results that exceeded expectations and raised full-year Porch-Owned Segments guidance for Revenue (Excluding Reciprocal) to $518m to $523m, Gross Profit (Excluding Reciprocal) to $438m to $443m, and Adjusted EBITDA (Excluding Reciprocal) to $135m to $140m."
  ],
  "in_code_book": false,
  "ke": null,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "no usable tax rate in the filings",
+ "no_value_reason": "minority interests take too large a share of income",
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+ "source": "on request (tax fallback rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in [S0], [P1], and [P4]",
-    "claim": "Porch Group, Inc. operates four reportable segments: Insurance Services, Software & Data, and Consumer Services (owned by Porch), plus the Reciprocal Segment (managed, not owned, by Porch).",
+    "basis": "stated in the 2025 Form 10-K (Item 1 and Item 7) and Q3 2026 Form 10-Q (Item 2)",
+    "claim": "Beginning in January 2025, Porch operates four reportable segments: three owned by Porch (Insurance Services, Software & Data, and Consumer Services, collectively called Porch Shareholder Interest) and the Reciprocal Segment, which Porch manages but does not own.",
     "facts": [
-     "S0",
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "We operate under four reportable segments that are also our operating segments.",
-     "Three of these segments are owned by Porch \u2014 Insurance Services, Software & Data, and Consumer Services.",
-     "The fourth segment, the Reciprocal Segment, is managed, but not owned, by Porch and, at this time, is consolidated for reporting purposes as described in the basis of presentation section in Note 1 of the unaudited Notes to Condensed Consolidated Financial Statements."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in [F1], [P1], [P3], and [P4]",
-    "claim": "In January 2025, Porch formed Porch Reciprocal Exchange, sold its legacy carrier Homeowners of America to the Reciprocal, and shifted to managing the policyholder-owned exchange while consolidating it as a variable interest entity.",
-    "facts": [
-     "F1",
      "P1",
      "P3",
      "P4"
     ],
     "quotes": [
-     "In January 2025, we completed the formation of the Reciprocal.",
-     "Following the sale, HOA became a wholly owned subsidiary of the Reciprocal.",
-     "The Reciprocal is a separate legal entity, owned by its member policyholders, and is not owned, wholly or in part, by the Company.",
-     "The Reciprocal is consolidated in our financial statements solely as a result of the Company's variable interest in, and status as primary beneficiary of, the entity."
+     "Beginning in January 2025, we operate under four reportable segments that are also our operating segments.",
+     "We collectively call these three segments, along with corporate functions, the \u201cPorch Shareholder Interest.\u201d",
+     "Our fourth segment, the Reciprocal Segment, is managed, but not owned, by Porch and, at this time, is consolidated for reporting purposes."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in [P1], [P3], [P4], and [P6]",
-    "claim": "The Insurance Services segment earns revenue by managing and operating the Reciprocal for commissions and fees, collecting policy fees from policyholders and lead fees from agencies, holding $106 million of Reciprocal surplus notes paying 9.75% plus SOFR interest, and providing captive reinsurance.",
+    "basis": "stated in the 2025 Form 10-K (Item 1, Item 1A, and Item 7), Q3 2026 Form 10-Q (Item 2), and Q3 2026 earnings release",
+    "claim": "The Insurance Services segment earns management fees and commissions from operating the Reciprocal, policy fees from policyholders, agency lead fees, interest on $106 million of surplus notes at 9.75% plus SOFR, and captive reinsurance premiums.",
     "facts": [
      "P1",
      "P3",
@@ -62,342 +45,317 @@
      "P6"
     ],
     "quotes": [
-     "Our Insurance Services segment manages and operates the Reciprocal, providing services related, but not limited, to underwriting, policy renewal, risk management, insurance portfolio management, financial management, and setting investment guidelines in exchange for commissions and fees.",
-     "The Insurance Services segment also holds the surplus notes issued by the Reciprocal and includes our captive reinsurer which provides reinsurance support to improve capital efficiency for the Reciprocal.",
-     "In exchange for these services, Porch receives policy fees from policyholders and ongoing commissions from the Reciprocal.",
-     "Porch now holds $106 million of surplus notes due from the Reciprocal which pay interest of 9.75% plus SOFR."
+     "Our Insurance Services segment earns management fees from the Reciprocal in exchange for managing and operating its business.",
+     "Porch now holds $106 million of surplus notes due from the Reciprocal which pay interest of 9.75% plus SOFR.",
+     "Porch earns management fees and quota share reinsurance premiums from the Reciprocal.",
+     "The Insurance Services segment also holds the surplus notes issued by the Reciprocal and includes our captive reinsurer which provides reinsurance support to improve capital efficiency for the Reciprocal."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1], [P3], and [P4]",
-    "claim": "The Software & Data segment sells subscription and predominantly transactional software to inspection, mortgage, title, and roofing companies, and sells Home Factors property insights and mover marketing data products to insurance carriers and other businesses.",
+    "basis": "stated in the 2025 Form 10-K (Item 1) and Q3 2026 Form 10-Q (Item 2)",
+    "claim": "The Software & Data segment sells subscription and predominantly transactional SaaS products to inspection, mortgage, title, and roofing companies, serving approximately 18 thousand companies.",
     "facts": [
      "P1",
-     "P3",
      "P4"
     ],
     "quotes": [
-     "Our Software & Data segment provides, on a subscription and predominantly transactional basis, software to inspection, mortgage, title, and roofing companies and data products to insurance and other types of companies.",
-     "With insights into approximately 90% of U.S. homes, Home Factors provides interior and exterior attributes and condition data to help insurance carriers improve underwriting, pricing, and risk selection."
+     "We provide software, on a subscription and predominantly transactional basis, to inspection, mortgage, title, and roofing companies.",
+     "Beyond insurance, Porch is a leader in the home software-as-a-service (\u201cSaaS\u201d) space, serving approximately 18 thousand companies across industries essential to the home-buying process\u2014home inspectors, title companies, mortgage providers, and more."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1], [P3], and [P4]",
-    "claim": "The Consumer Services segment sells home warranty products across 50 states and Washington, D.C., and provides moving-related services such as movers, TV/Internet, and security to consumers.",
+    "basis": "stated in the 2025 Form 10-K (Item 1 and Item 1A) and Q3 2026 Form 10-Q (Item 2)",
+    "claim": "Through Porch Group Media and Home Factors, the Software & Data segment sells property insights covering approximately 90% of U.S. homes and mover marketing products to insurance carriers and other businesses.",
     "facts": [
      "P1",
-     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Porch Group Media is a leading provider of data solutions, including Home Factors, our unique property insights product.",
+     "With insights into approximately 90% of U.S. homes, Home Factors provides interior and exterior attributes and condition data to help insurance carriers improve underwriting, pricing, and risk selection.",
+     "This segment includes several strategically important businesses, including home inspection software, title and mortgage software, Home Factors (our unique property insights product), and mover marketing products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K (Item 1) and Q3 2026 Form 10-Q (Item 2)",
+    "claim": "The Consumer Services segment sells whole-home, service line, and extended labor warranties across 50 states and Washington, D.C., alongside moving and home-setup services to consumers.",
+    "facts": [
+     "P1",
      "P4"
     ],
     "quotes": [
      "Our warranty business offers various products such as whole-home, service line, and extended labor warranties in 50 states and Washington, D.C.",
+     "Porch Moving Group includes the MovingPlace, HireAHelper, SML, and Moving Staffers brands, and is primarily a marketplace offering labor-only moving services which has recently expanded to offer full-service moving services.",
      "Our Consumer Services segment also provides moving-related services such as movers, TV/Internet, and security."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1], [P3], and [P4]",
-    "claim": "The Reciprocal Segment sells property-related insurance products to consumers in 20 states through Homeowners of America and Porch Reciprocal Exchange, generating revenue primarily from policy premiums.",
+    "basis": "stated in the 2025 Form 10-K (Item 1) and Q3 2026 Form 10-Q (Item 2)",
+    "claim": "The Reciprocal Segment, which includes HOA and the policyholder-owned Reciprocal, sells property-related insurance products in 20 states and earns revenue primarily from policy premiums.",
     "facts": [
      "P1",
-     "P3",
      "P4"
     ],
     "quotes": [
-     "The Reciprocal Segment provides consumers with insurance to protect their homes, earning revenue primarily through premiums collected on policies.",
-     "The Reciprocal offers property-related insurance products in 20 states."
+     "The Reciprocal Segment provides policyholders with insurance to protect their homes, earning revenue primarily through premiums collected on policies.",
+     "The Reciprocal offers property-related insurance products in 20 states.",
+     "The Reciprocal is a separate legal entity, owned by its member policyholders, and is not owned, wholly or in part, by the Company."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [F2] and [P3]",
-    "claim": "Consolidated revenue increased 10% in 2025 to $482,414 (table in thousands), and reached $ 405,865 (table in thousands) in the 9 months ended Sep. 30, 2026 versus $ 358,110 (table in thousands) in the prior-year period.",
+    "basis": "stated in the Q3 2026 earnings release (Exhibit 99.1)",
+    "claim": "In the Three Months Ended September 30, 2026, Consolidated Revenue was $143,860 (table in thousands) and Porch-Owned Segments Revenue (Excluding Reciprocal) was $140,785 (table in thousands), led by Insurance Services at $102,815 (table in thousands), Software & Data at $22,329 (table in thousands), and Consumer Services at $18,309 (table in thousands).",
     "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Total consolidated revenue including the Reciprocal increased by 10% compared to the prior year.",
-     "Revenue | $482,414 | $437,848 | $44,566 | 10%",
-     "Revenue | $ 143,860 | $ 127,288 | $ 405,865 | $ 358,110"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F2] and [P6]",
-    "claim": "In the three months ended September 30, 2026, segment revenues (table in thousands) were led by Insurance Services at $102,815, followed by the Reciprocal at $58,141, Software & Data at $22,329, and Consumer Services at $18,309, yielding $140,785 in Porch-Owned Segments Revenue (Excluding Reciprocal) and $143,860 in consolidated revenue after 55,066 of Reciprocal-related eliminations.",
-    "facts": [
-     "F2",
      "P6"
     ],
     "quotes": [
+     "Porch-Owned Segments Revenue (Excluding Reciprocal)\u00b2, representing the revenue contributions across the Porch-owned businesses, was $140.8 million, up 22% YoY, led by Insurance Services revenue of $102.8 million, up 39% YoY.",
      "Revenue | (a) | $102,815 | $22,329 | $18,309 | $58,141",
-     "Porch-Owned Segments Revenue (Excluding Reciprocal) | $140,785 | $115,074",
-     "Revenue Eliminations Related to Reciprocal Segment | 55,066 | 39,727",
-     "Consolidated Revenue | $143,860 | $127,288"
+     "Consolidated Revenue | $143,860 | $127,288",
+     "Porch-Owned Segments Revenue (Excluding Reciprocal) | $140,785 | $115,074"
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in [P6]",
-    "claim": "In the three months ended September 30, 2026, Porch-owned segments recorded $2.8 million of intercompany revenue among themselves and $39.7 million of intercompany revenue with the Reciprocal.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "(a)Includes $2.8 million of intercompany revenue between Insurance Services, Software & Data, and Consumer Services and $39.7 million of intercompany revenue between these segments and the Reciprocal."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in [P2], [P4], and [P6]",
-    "claim": "Insurance Services revenue is driven by Reciprocal premium and policy volume, with Q3 2026 Reciprocal Written Premium reaching $161.0 million and Reciprocal Policies Written growing 42% year-over-year alongside 114% growth in producing agency branch locations and 79% growth in quote volumes.",
+    "basis": "stated in the 2025 Form 10-K (Item 1A), Q3 2026 Form 10-Q (Item 2), and Q3 2026 earnings release",
+    "claim": "Insurance Services revenue is driven by Reciprocal Written Premium, producing agency branch locations, quote volumes, and customer conversion, with Reciprocal Policies Written growing 42% year-over-year on $161.0 million of Reciprocal Written Premium in 2026.",
     "facts": [
      "P2",
      "P4",
      "P6"
     ],
     "quotes": [
-     "A decline in the business of the Reciprocal almost certainly could have as a consequence a decline in the total premiums paid and a correspondingly adverse effect on the amount of the management fees received by our Insurance Services segment.",
-     "Top-of-funnel expansion continued, with Q3 2026 producing agency branch locations rising 114% from Q3 2025 and quote volumes rising 79% from Q3 2025."
+     "Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9.",
+     "Top-of-funnel expansion continued, with Q3 2026 producing agency branch locations rising 114% from Q3 2025 and quote volumes rising 79% from Q3 2025.",
+     "A decline in the business of the Reciprocal almost certainly could have as a consequence a decline in the total premiums paid and a correspondingly adverse effect on the amount of the management fees received by our Insurance Services segment."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1] and [P4]",
-    "claim": "Porch's SaaS relationships with approximately 18 thousand companies provide early visibility into approximately 90% of U.S. homebuyers and homes before a move, enabling cross-selling of insurance, warranties, and moving services.",
+    "basis": "stated in the 2025 Form 10-K (Item 1A and Item 7)",
+    "claim": "Consolidated revenue increases when Porch's captive reinsurer retains a higher proportion of premiums, reducing the external reinsurance costs that offset revenue.",
     "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "Beyond insurance, Porch is a leader in the home software-as-a-service (\u201cSaaS\u201d) space, serving approximately 18 thousand companies across industries essential to the home-buying process\u2014home inspectors, title companies, mortgage providers, and more.",
-     "Our deep relationships and proprietary data give us unique visibility into approximately 90% of U.S. homebuyers and approximately 90% of U.S. homes, enabling superior risk assessment and competitive pricing.",
-     "We know when homebuyers are moving approximately six weeks before they move due to our unique early insight."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P1] and [P3]",
-    "claim": "Software & Data and consolidated revenue also respond to SaaS pricing actions (such as Rynoh's 20% price increase in Q1 2025), new Home Factors data monetization, and the share of insurance premiums retained by Porch's captive reinsurer rather than ceded externally.",
-    "facts": [
-     "P1",
+     "P2",
      "P3"
     ],
     "quotes": [
+     "This increase was primarily attributable to lower external reinsurance costs offsetting revenue.",
+     "In 2025, our captive reinsurer retained a higher proportion of premiums than in the prior year.",
+     "Additionally, capital held by the captive cannot be used elsewhere within the Company without applicable regulatory pre-approval."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K (Item 1, Item 1A, and Item 7)",
+    "claim": "Non-insurance revenue is driven by early access to homebuyers before a move, SaaS utilization and price increases such as Rynoh's 20% price increase, Home Factors monetization, and U.S. housing market conditions.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We know when homebuyers are moving approximately six weeks before they move due to our unique early insight.",
      "In Software and Data, Rynoh implemented a 20% price increase in the first quarter, in line with strategic pricing goals.",
-     "We intend to add new categories of Home Factors, our property insights product, each quarter and further monetize Home Factors with third parties.",
-     "In 2025, our captive reinsurer retained a higher proportion of premiums than in the prior year."
+     "Our brands and businesses are sensitive to general economic events, trends and conditions, including those related to, without limitation, the housing and financial markets, which impacts the demand and costs for a portion of our products and services."
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in [F2], [P1], [P2], and [P3]",
-    "claim": "Consolidated cost of revenue was 119,568 (table in thousands) in the 9 months ended Sep. 30, 2026 versus 113,854 (table in thousands) in the prior-year period, and 142,424 (table in thousands) in 2025, driven primarily by claims experience, seasonal catastrophe weather, and repair-cost inflation.",
+    "basis": "stated in the 2025 Form 10-K (Item 1, Item 1A, and Item 7)",
+    "claim": "Consolidated cost of revenue is driven by insurance claims and loss adjustment expenses, which fluctuate with seasonal weather, catastrophes, and material and labor inflation, and fell 40% in 2025 to $142.4 million due to strong underwriting and fewer catastrophic weather events.",
     "facts": [
-     "F2",
      "P1",
      "P2",
      "P3"
     ],
     "quotes": [
-     "Cost of revenue | 35,991 | 31,135 | 119,568 | 113,854",
+     "Total consolidated cost of revenue including the Reciprocal decreased by $93.5 million, or 40%, from $235.9 million for the year ended December 31, 2024, to $142.4 million for the year ended December 31, 2025.",
      "The decrease was primarily the result of strong underwriting at the Reciprocal and fewer catastrophic weather events impacting the Reciprocal, which limited the number of claims.",
-     "Claims costs may be adversely affected by increases in costs of home repair as a result of inflated material costs, supply chain shortages, increases in labor costs, and demand surge during catastrophic events.",
-     "Property insurance claims fluctuate with seasonal weather; the highest exposure to catastrophic weather for the Reciprocal has historically occurred in the first half of the year."
+     "Claims costs may be adversely affected by increases in costs of home repair as a result of inflated material costs, supply chain shortages, increases in labor costs, and demand surge during catastrophic events."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2], [P3], and [P5]",
-    "claim": "Reinsurance costs and retention terms are a central risk-transfer driver, with third-party excess-of-loss catastrophe coverage starting at $25.0 million per occurrence up to $410.0 million and 7.5% third-party quota share reducing effective Reciprocal retention to $23.1 million per occurrence.",
+    "basis": "stated in the Q3 2026 Form 10-Q financial statements and 2025 Form 10-K (Item 1A and Item 7)",
+    "claim": "For the 9 Months Ended Sep. 30, 2026, operating expenses consisted of selling and marketing of 124,857 (table in thousands), general and administrative of 92,028 (table in thousands), and product and technology of 43,620 (table in thousands), driven by insurance agency incentives, digital marketing, software development payroll, and legal and partnership costs.",
     "facts": [
-     "P2",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "As of April 1, 2025, coverage for excess of loss catastrophe reinsurance starts at $25.0 million per occurrence up to a loss of $410.0 million.",
-     "Additionally, the third-party quota share reinsurance contracts start immediately at 7.5% of property and casualty (\u201cP&C\u201d) losses, which includes catastrophe events, bringing the effective retention for the Reciprocal from $25.0 million per occurrence to $23.1 million per occurrence.",
-     "The availability of reinsurance and its price are generally determined in the reinsurance market by conditions beyond our control and can be negatively impacted by such severe weather events and the effects of climate change, including, tornado and hail events, hurricanes, extensive wildfires, drought, flooding and other catastrophes, and the frequency of such events, as well as the impacts of future global pandemics and other health crises, may harm the insurance business we manage and operate."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F1], [F2], [P2], and [P3]",
-    "claim": "Operating expenses in the 9 months ended Sep. 30, 2026 were 124,857 in selling and marketing, 92,028 in general and administrative, and 43,620 in product and technology (table in thousands), alongside (44,507) in interest expense (table in thousands).",
-    "facts": [
-     "F1",
      "F2",
      "P2",
      "P3"
     ],
     "quotes": [
      "Selling and marketing | 43,461 | 39,386 | 124,857 | 102,542",
-     "Product and technology | 15,913 | 13,379 | 43,620 | 39,656",
-     "General and administrative | 30,405 | 27,053 | 92,028 | 81,940",
-     "Interest expense | (15,126) | (13,963) | (44,507) | (37,265)",
-     "The increase was primarily attributable to incentives to insurance agencies as part of our growth strategy, as well as increased marketing expenses related to new warranty products."
+     "The increase was primarily attributable to incentives to insurance agencies as part of our growth strategy, as well as increased marketing expenses related to new warranty products.",
+     "The increase was primarily driven by an increase in payroll expenses related to software development and an increase in overall software expense.",
+     "We have made, and expect to continue to make, significant marketing expenditures, primarily for digital marketing such as paid search engine marketing, display advertising and third-party affiliate agreements."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P5] and [P9]",
-    "claim": "Porch and the Reciprocal agreed to acquire Allied Trust's insurance carrier and managing general agency across Louisiana, Texas, South Carolina, and North Carolina, which is expected to operate under Porch's existing reciprocal and fee-based service structure if closed.",
+    "basis": "stated in the October 13, 2026 Form 8-K (Exhibit 99.1) and Q3 2026 Form 10-Q (Part II, Item 1A)",
+    "claim": "On October 13, 2026, Porch and the Reciprocal agreed to acquire Allied Trust's managing general agency and insurance carrier to expand the fee-and-commission insurance model into new states including Louisiana, subject to closing conditions and regulatory approval.",
     "facts": [
      "P5",
      "P9"
     ],
     "quotes": [
-     "Allied Trust is a regional insurance carrier operating in Louisiana, Texas, South Carolina and North Carolina.",
+     "Porch Group, Inc. (\u201cPorch Group\u201d, \u201cPorch\u201d or the \u201cCompany\u201d) (NASDAQ: PRCH), a new kind of homeowners insurance company, today announced that Porch Insurance Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group have entered into a definitive agreement to acquire Allied Trust\u2019s insurance carrier and managing general agency, respectively.",
      "Following closing, Allied Trust is expected to operate under the same structure as Porch Group\u2019s existing insurance business.",
-     "The Reciprocal will own the insurance carrier, collect premiums and pay claims, commissions, reinsurance costs and fees to Porch Group for operating services."
+     "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 Form 10-Q financial statements and 2025 Form 10-K (Item 1A)",
+    "claim": "Debt service is a significant non-operating cost, with interest expense of (44,507) (table in thousands) in the 9 Months Ended Sep. 30, 2026, on 12,376 of current debt and 391,879 of long-term debt (table in thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Interest expense | (15,126) | (13,963) | (44,507) | (37,265)",
+     "Long-term debt | 391,879 | 385,060",
+     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1 and the Q3 2026 Form 10-Q Part I Item 2.",
-    "claim": "Porch reports proprietary data and relationship visibility into approximately 90% of U.S. homebuyers and approximately 90% of U.S. homes.",
+    "basis": "Stated directly in the Business section of the 10-K and the MD&A Business Overview of the Q3 2026 10-Q.",
+    "claim": "Porch's home SaaS platform provides visibility into approximately 90% of U.S. homebuyers and approximately 90% of U.S. homes, with companies served reported as approximately 24 thousand in the annual report and approximately 18 thousand in the third-quarter report.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
+     "Beyond insurance, Porch is a leader in the home software-as-a-service (\u201cSaaS\u201d) space, serving approximately 24 thousand companies across industries essential to the home-buying process\u2014home inspectors, title companies, mortgage providers, and more.",
+     "Beyond insurance, Porch is a leader in the home software-as-a-service (\u201cSaaS\u201d) space, serving approximately 18 thousand companies across industries essential to the home-buying process\u2014home inspectors, title companies, mortgage providers, and more.",
      "Our deep relationships and proprietary data give us unique visibility into approximately 90% of U.S. homebuyers and approximately 90% of U.S. homes, enabling superior risk assessment and competitive pricing."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1.",
-    "claim": "Porch identifies moving homebuyers approximately six weeks before they move, enabling cross-selling of home services at the time of need.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We know when homebuyers are moving approximately six weeks before they move due to our unique early insight.",
-     "Therefore, we have the ability to cross-sell a variety of products at the time they are most needed."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 1, with company count comparison from the Q3 2026 Form 10-Q Part I Item 2.",
-    "claim": "In 2025, Porch's ISN brands represented roughly half of all U.S. home inspections and Rynoh software was utilized in approximately 40% of all real estate closings.",
+    "basis": "Stated directly in Item 1 and Item 7 of the 2025 Form 10-K.",
+    "claim": "Porch holds embedded software positions in home inspections and real estate closings, with ISN covering roughly half of U.S. home inspections in 2025 and Rynoh utilized in approximately 40% of real estate closings in 2025 while implementing a 20% price increase.",
     "facts": [
      "P1",
-     "P4"
-    ],
-    "quotes": [
-     "ISN brands provide a range of offerings for inspection businesses, and together represent roughly half of all U.S. home inspections in 2025.",
-     "Rynoh software was utilized in approximately 40% of all real estate closings in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 7.",
-    "claim": "In 2025, Rynoh implemented a 20% price increase in line with strategic pricing goals.",
-    "facts": [
      "P3"
     ],
     "quotes": [
+     "ISN brands provide a range of offerings for inspection businesses, and together represent roughly half of all U.S. home inspections in 2025.",
+     "Rynoh software was utilized in approximately 40% of all real estate closings in 2025.",
      "In Software and Data, Rynoh implemented a 20% price increase in the first quarter, in line with strategic pricing goals."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1.",
-    "claim": "Porch attributes improved underwriting accuracy to Home Factors data, citing an improvement in the Reciprocal's Attritional Loss Ratio from 22% in 2024 to 17% in 2025.",
+    "basis": "Stated directly in Item 1 of the 2025 Form 10-K.",
+    "claim": "Early mover visibility gives Porch lead time to cross-sell home services, while its warranty business operates across 50 states and Washington, D.C., pairing warranty protection with homeowners insurance.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "This data has enabled us to more accurately underwrite risk, and as a result, we have seen an improvement in the Reciprocal\u2019s Attritional Loss Ratio (see Non-GAAP Financial Measures in Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations for definition), which was 17% and 22% for the years ended December 31, 2025, and 2024, respectively."
+     "We know when homebuyers are moving approximately six weeks before they move due to our unique early insight.",
+     "Therefore, we have the ability to cross-sell a variety of products at the time they are most needed.",
+     "Our warranty business offers various products such as whole-home, service line, and extended labor warranties in 50 states and Washington, D.C."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1.",
-    "claim": "Porch pairs homeowners insurance offered by the Reciprocal in 20 states with warranty coverage offered in 50 states and Washington, D.C., alongside moving concierge services.",
+    "basis": "Stated directly in Item 1 of the 2025 Form 10-K.",
+    "claim": "Porch uses Home Factors property data to price risk and avoid adverse selection across the Reciprocal's 20 insurance states, evidenced by the Reciprocal's Attritional Loss Ratio improving from 22% in 2024 to 17% in 2025.",
     "facts": [
      "P1"
     ],
     "quotes": [
      "The Reciprocal offers property-related insurance products in 20 states.",
-     "Our warranty business offers various products such as whole-home, service line, and extended labor warranties in 50 states and Washington, D.C.",
-     "Through the Porch app, we provide a full moving concierge service, helping customers with moving logistics and essential home services like security, TV/Internet setup, and more."
+     "Our unique property data from Home Factors enhances our underwriting models and, where applicable, helps create a pricing advantage for well-maintained homes and prevent adverse selection for poorly maintained homes.",
+     "This data has enabled us to more accurately underwrite risk, and as a result, we have seen an improvement in the Reciprocal\u2019s Attritional Loss Ratio (see Non-GAAP Financial Measures in Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations for definition), which was 17% and 22% for the years ended December 31, 2025, and 2024, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 earnings release (Form 8-K Exhibit 99.1).",
-    "claim": "In the quarter ended September 30, 2026, producing agency branch locations rose 114%, quote volumes rose 79%, Reciprocal Policies Written grew 42%, and Insurance Services revenue grew 39% to $102.8 million year-over-year.",
+    "basis": "Stated directly in the Q3 2026 earnings release (Exhibit 99.1 to Form 8-K).",
+    "claim": "In the third quarter of 2026, distribution and conversion expanded sharply, with producing agency branch locations up 114%, quote volumes up 79%, Reciprocal Policies Written up 42%, and RWP from new customers up 178% year-over-year.",
     "facts": [
      "P6"
     ],
     "quotes": [
      "Top-of-funnel expansion continued, with Q3 2026 producing agency branch locations rising 114% from Q3 2025 and quote volumes rising 79% from Q3 2025.",
-     "Porch-Owned Segments Revenue (Excluding Reciprocal)\u00b2, representing the revenue contributions across the Porch-owned businesses, was $140.8 million, up 22% YoY, led by Insurance Services revenue of $102.8 million, up 39% YoY.",
+     "Conversion continued to track well above prior-year levels, supporting Q3 2026 RWP\u00b9 from new customers growth of 178% YoY.",
      "Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 earnings release (Form 8-K Exhibit 99.1).",
-    "claim": "Management states that Insurance Services is operating as a Rule of 80 business in a soft insurance market and raised full-year 2026 Porch-Owned Segments revenue guidance to $518m to $523m.",
+    "basis": "Observed directly in the Q3 2026 10-Q statement of operations and Q3 2026 earnings release.",
+    "claim": "For the 9 Months Ended Sep. 30, 2026, consolidated revenue rose to $ 405,865 from $ 358,110 (table in thousands) and operating income rose to 25,792 from 20,118 (table in thousands), led by third-quarter Insurance Services revenue of $102.8 million, up 39% YoY.",
     "facts": [
+     "F2",
      "P6"
     ],
     "quotes": [
-     "Importantly, Insurance Services is operating as a Rule of 80 business in a soft insurance market, reinforcing our confidence that the model we have built can perform across market cycles.",
-     "Our proprietary data, disciplined underwriting, expanding distribution, and largely fixed cost base are creating a powerful combination of growth and operating leverage."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q Condensed Consolidated Statements of Operations.",
-    "claim": "Consolidated GAAP revenue grew from $ 358,110 (table in thousands) in the 9 Months Ended Sep. 30, 2025 to $ 405,865 (table in thousands) in the 9 Months Ended Sep. 30, 2026, while net income attributable to Porch rose from $ 117 (table in thousands) to $ 13,075 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
      "Revenue | $ 143,860 | $ 127,288 | $ 405,865 | $ 358,110",
-     "Net income (loss) attributable to Porch | $ 12,185 | $ (10,857) | $ 13,075 | $ 117"
+     "Operating income | 18,090 | 16,335 | 25,792 | 20,118",
+     "Porch-Owned Segments Revenue (Excluding Reciprocal)\u00b2, representing the revenue contributions across the Porch-owned businesses, was $140.8 million, up 22% YoY, led by Insurance Services revenue of $102.8 million, up 39% YoY."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the October 13, 2026 Form 8-K Exhibit 99.1 and Q3 2026 Form 10-Q Part II Item 1A.",
-    "claim": "Porch and the Reciprocal agreed on October 13, 2026 to acquire Allied Trust's insurance carrier and MGA to enter Louisiana and add approximately $200 million in Reciprocal Written Premium and $25 million in Adjusted EBITDA (Excluding Reciprocal) in the full year following closing.",
+    "basis": "Stated directly in the October 13, 2026 Form 8-K announcement and Part II Item 1A of the Q3 2026 Form 10-Q.",
+    "claim": "Porch agreed to acquire Allied Trust to enter Louisiana and add approximately $200 million of Reciprocal Written Premium and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) in its first full year post-closing, though expansion into new Gulf Coast markets carries integration, catastrophe, and data-predictiveness risks.",
     "facts": [
-     "P5",
-     "P9"
+     "P9",
+     "P5"
     ],
     "quotes": [
      "Allied Trust is a regional insurance carrier operating in Louisiana, Texas, South Carolina and North Carolina.",
      "The acquisition is expected to add approximately $200 million of Reciprocal Written Premium (\u201cRWP\u201d)i and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) to Porch.",
-     "These expected contributions reflect the first full year following closing and planned portfolio optimization."
+     "The acquired businesses underwrite and write insurance policies in states in which we do not currently operate, including Louisiana, which will require us to maintain licenses, build distribution, and price risks in markets where we have limited operating experience and where regulatory, catastrophe, and litigation environments differ from those in which we operate today.",
+     "Our proprietary property data may prove less predictive in those markets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 1A.",
-    "claim": "Porch faces intense competition across fragmented, consolidating markets from rivals that may have stronger brands, greater scale, more developed software platforms, or better access to capital.",
+    "basis": "Stated directly in Item 1 and Item 1A Risk Factors of the 2025 Form 10-K.",
+    "claim": "Porch faces intense competition in a fragmented market from rivals with stronger brands, greater scale, more developed software, and better capital access, compounded by ongoing industry consolidation and vertical integration.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
+     "The home services industry is highly competitive, fragmented, and localized.",
      "Some of our competitors have stronger brand name recognition, better economies of scale, more developed software platforms or other intellectual property, and/or better access to capital.",
      "Additionally, the home and home-related services industries continue to undergo consolidation and vertical integration, which may make it more difficult to compete with existing competitors and new entrants."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1A.",
-    "claim": "The Reciprocal is highly dependent on third-party independent agents and agencies, exposing the business to reduced sales, policy attrition, price reductions, or higher commission demands if relationships weaken.",
+    "basis": "Stated directly in the 2025 Form 10-K Risk Factors, Q3 2026 Form 10-Q MD&A, and October 30, 2026 Form 8-K.",
+    "claim": "Because Porch does not own the Reciprocal, its revenue and profitability depend heavily on the Reciprocal's premium growth, management fee rates, financial strength ratings, and statutory surplus, which is sensitive to Porch's own stock price due to the Reciprocal holding approximately 16.2 million Porch shares.",
+    "facts": [
+     "P2",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Our operating results are, in large part, tied to the growth and financial condition of the Reciprocal.",
+     "If the management fee rate retained by Porch\u2019s insurance services businesses is reduced or if there is a significant decrease in the amount of gross premiums written by the Reciprocal, revenues and profitability of the Company could be materially adversely affected.",
+     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
+     "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Item 1A Risk Factors of the 2025 Form 10-K.",
+    "claim": "The Reciprocal relies heavily on third-party independent agents and agencies for distribution, exposing Porch to lost sales, policy attrition, price pressure, or higher commission demands if agency relationships deteriorate.",
     "facts": [
      "P2"
     ],
@@ -408,168 +366,141 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1A.",
-    "claim": "Porch's property data and targeted marketing depend on third-party data suppliers and commercial partners that could restrict data sharing, as well as privacy laws that could impair data collection and use.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In the future, any of these third parties could sever its relationship with us, change its data sharing policies, including making them more restrictive, or alter its own data collection practices, any of which could result in the loss of, or significant impairment to, our ability to access, collect and use personal information about their customers or consumers.",
-     "Our ability to access, collect and use personal information and property data provided by these parties may be adversely affected by federal and state laws and regulations that make it burdensome for us to collect or use personal information and property data."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 1A.",
-    "claim": "Customer acquisition relies on digital marketing channels and search engines whose pricing, operating dynamics, and policies can change unilaterally without advance notice.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our ability to market our brands on any given property or channel is subject to the policies of the relevant third-party seller or publisher of advertising or marketing affiliate.",
-     "In addition, our failure to respond to rapid and frequent changes in the pricing and operating dynamics of marketing channels, as well as changing policies and guidelines applicable to digital advertising, which may unilaterally be updated by search engines without advance notice, could adversely affect our digital marketing efforts and free search engine traffic."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 1A.",
-    "claim": "Porch's automated underwriting models and Home Factors data may prove ineffective, fail to replicate favorable results for third-party carriers, or face regulatory restrictions.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Models underlying automated underwriting and pricing decisions may not be effective or may subject us to other risks, including our ability to launch pricing models that benefit our businesses and increased regulatory scrutiny.",
-     "We may not be able to consistently replicate favorable results with the use of Home Factors in underwriting for carriers other than HOA and the Reciprocal, which may be due to carrier location, modeling capabilities, or business goals of other carriers, and we may also face risks with regulators impacting our ability to use Home Factors."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 1A and Q3 2026 Form 10-Q Part II Item 1A.",
-    "claim": "Severe weather and catastrophe events threaten underwriting results and reinsurance availability, and the pending Allied Trust acquisition would increase concentration in catastrophe-exposed Louisiana and Gulf Coast markets.",
+    "basis": "Stated directly in Item 1A of the 2025 Form 10-K and Part II Item 1A of the Q3 2026 Form 10-Q.",
+    "claim": "Severe weather catastrophes, rising home repair claim costs, and tighter or costlier reinsurance markets threaten the Reciprocal's underwriting capacity and margins, an exposure that will increase in catastrophe-prone Gulf Coast states if the Allied Trust acquisition closes.",
     "facts": [
      "P2",
      "P5"
     ],
     "quotes": [
      "Reinsurance may be unavailable at current levels and prices, which may limit the Reciprocal\u2019s ability to write new business.",
-     "The acquired businesses write residential property insurance in states exposed to hurricanes, windstorms, hail, severe weather events, and other catastrophe events, with a significant concentration in Louisiana and along the Gulf Coast."
+     "Claims costs may be adversely affected by increases in costs of home repair as a result of inflated material costs, supply chain shortages, increases in labor costs, and demand surge during catastrophic events.",
+     "Following the closing, the properties insured through the Reciprocal and the acquired businesses will be more concentrated in catastrophe-exposed regions than the Reciprocal\u2019s current book of business."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 1A.",
-    "claim": "Insurance cyclicality, claims cost inflation, and state regulation of rates and policy non-renewals can prevent passing higher claims costs to customers or exiting unprofitable markets.",
+    "basis": "Stated directly in Item 1A Risk Factors of the 2025 Form 10-K.",
+    "claim": "Porch's data and customer-acquisition advantages face threats from third-party data suppliers restricting access, intensifying federal and state privacy scrutiny, and unilateral policy changes by digital advertising and search platforms.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In the future, any of these third parties could sever its relationship with us, change its data sharing policies, including making them more restrictive, or alter its own data collection practices, any of which could result in the loss of, or significant impairment to, our ability to access, collect and use personal information about their customers or consumers.",
+     "Practices in this industry are under scrutiny by federal and state law enforcement agencies and regulators in light of new and proposed federal and state laws, and pressure from some lawmakers and privacy advocates regarding how consumer data is collected and used in the ad tech industry.",
+     "Our ability to market our brands on any given property or channel is subject to the policies of the relevant third-party seller or publisher of advertising or marketing affiliate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Item 1 and Item 1A Risk Factors of the 2025 Form 10-K.",
+    "claim": "State insurance regulators constrain how quickly the Reciprocal can reprice policies or exit unprofitable markets, and regulatory scrutiny or carrier differences could limit monetization of Home Factors with third-party insurers.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "To the extent such costs increase, the Reciprocal may be prevented, in whole or in part, from passing these cost increases through to our existing and prospective customers.",
-     "Regulations that limit policy cancellation and non-renewal may restrict the Reciprocal\u2019s ability to exit unprofitable markets."
+     "The speed with which we can change our rates in response to competition or in response to increasing costs depends, in part, on the willingness of state regulators to allow adequate rates for the business we write.",
+     "Regulations that limit policy cancellation and non-renewal may restrict the Reciprocal\u2019s ability to exit unprofitable markets.",
+     "We may not be able to consistently replicate favorable results with the use of Home Factors in underwriting for carriers other than HOA and the Reciprocal, which may be due to carrier location, modeling capabilities, or business goals of other carriers, and we may also face risks with regulators impacting our ability to use Home Factors."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1A, Q3 2026 Form 10-Q Part I Item 2, and October 30, 2026 Form 8-K.",
-    "claim": "Because Porch depends on the Reciprocal's financial health and the Reciprocal holds approximately 16.2 million Porch shares, a sustained decline in Porch's stock price would hurt the Reciprocal's statutory surplus and could require additional funding.",
+    "basis": "Stated directly in Item 1A Risk Factors of the 2025 Form 10-K.",
+    "claim": "Cyberattacks exposing sensitive consumer or property data, consumer backlash over using home data in risk scoring, and legal or regulatory risks from AI and machine learning could damage Porch's reputation and operations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If personal, confidential, or sensitive user information or property data that we maintain and store is breached or otherwise accessed by unauthorized persons, it may be costly to mitigate, and our reputation could be harmed.",
+     "Negative publicity and potential for reputational harm using home data to inform risk calculations.",
+     "Implementation of artificial intelligence (\u201cAI\u201d) and machine learning technologies may result in legal and regulatory risks, reputational harm or have other adverse consequences to our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed directly in the 2025 Form 10-K Risk Factors and Q3 2026 Form 10-Q financial statements.",
+    "claim": "Porch carries 391,879 (table in thousands) of long-term debt and incurred (44,507) (table in thousands) of interest expense for the 9 Months Ended Sep. 30, 2026, with 2028 Notes covenants and cash debt-service requirements potentially limiting operating flexibility.",
     "facts": [
      "P2",
-     "P4",
-     "P7"
+     "F1",
+     "F2"
     ],
     "quotes": [
-     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
-     "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q Part II Item 1A.",
-    "claim": "The pending Allied Trust acquisition carries integration risks, potential loss of employees, agents, or policyholders, and pricing or modeling risks in unfamiliar state markets.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "The acquired businesses underwrite and write insurance policies in states in which we do not currently operate, including Louisiana, which will require us to maintain licenses, build distribution, and price risks in markets where we have limited operating experience and where regulatory, catastrophe, and litigation environments differ from those in which we operate today.",
-     "Integration may take longer, cost more, or prove more complex than we expect, and may result in the loss of key employees, agents, or policyholders of the acquired businesses and the diversion of management\u2019s attention from our existing operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 1A.",
-    "claim": "Cyberattacks or unauthorized access to sensitive consumer or property data stored by Porch or third parties could require costly mitigation and harm its reputation.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We may not be able to protect our systems, technology and infrastructure from cyberattacks and cyberattacks experienced by third parties may adversely affect us.",
-     "If personal, confidential, or sensitive user information or property data that we maintain and store is breached or otherwise accessed by unauthorized persons, it may be costly to mitigate, and our reputation could be harmed."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 1A.",
-    "claim": "Demand and costs across Porch's businesses remain sensitive to housing and financial market conditions, with U.S. industry home sales in 2025 remaining relatively unchanged from 2024 despite higher interest rates and rising home prices.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our brands and businesses are sensitive to general economic events, trends and conditions, including those related to, without limitation, the housing and financial markets, which impacts the demand and costs for a portion of our products and services.",
-     "In 2025, the U.S. housing market began to stabilize despite increases in interest rates and rising home sales prices, with industry home sales remaining relatively unchanged from 2024."
+     "The indenture governing our 2028 Notes contains, and instruments governing any future indebtedness of ours would likely contain, restrictions that may limit our flexibility in operating our business, and any default on our 2028 Notes or other future secured indebtedness could result in foreclosure by our secured debtholders on our assets.",
+     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments.",
+     "Long-term debt | 391,879 | 385,060",
+     "Interest expense | (15,126) | (13,963) | (44,507) | (37,265)"
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q condensed consolidated balance sheet.",
-    "claim": "As of Sep. 30, 2026, consolidated total current assets were 117,665 against total current liabilities of 80,512 (table in $ thousands), up from 88,208 and 67,782 at Dec. 31, 2025, while consolidated cash and cash equivalents, including restricted, rose from 169,111 to 230,542 (table in $ thousands).",
+    "basis": "Stated directly in the Q3 2026 balance sheet, cash flow statement, and MD&A.",
+    "claim": "Consolidated cash and cash equivalents, including restricted cash, rose to 230,542 from 169,111 at the prior year-end, but 143,387 of that balance sits inside the consolidated variable interest entity not owned by Porch (table in thousands).",
+    "facts": [
+     "F1",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Cash and cash equivalents, including restricted | 230,542 | 169,111",
+     "Cash and cash equivalents, including restricted | [1] | 143,387 | 115,932",
+     "The Reciprocal is a separate legal entity, owned by its member policyholders, and is not owned, wholly or in part, by the Company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 condensed consolidated balance sheet.",
+    "claim": "Excluding the consolidated variable interest entity, Porch held 80,063 in unrestricted cash and cash equivalents, 7,092 in restricted cash, 5,212 in short-term investments, and 72,300 in long-term investments, with total current assets of 117,665 against total current liabilities of 80,512 (table in thousands).",
     "facts": [
      "F1"
     ],
     "quotes": [
-     "Total current assets | 117,665 | 88,208",
-     "Total current liabilities | 80,512 | 67,782",
-     "Cash and cash equivalents, including restricted | 230,542 | 169,111"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q balance sheet and Q3 2026 earnings release.",
-    "claim": "At Sep. 30, 2026, the entity excluding the consolidated VIE held 80,063 in cash and cash equivalents, 7,092 in restricted cash, 5,212 in short-term investments, and 72,300 in long-term investments (table in $ thousands), totaling $164.7 million for Porch-Owned Segments and corporate, while the Reciprocal VIE held 143,387 in cash and restricted cash, 20,109 in short-term investments, and 169,841 in long-term investments (table in $ thousands).",
-    "facts": [
-     "F1",
-     "P6"
-    ],
-    "quotes": [
      "Cash and cash equivalents | 80,063 | 44,676",
-     "Short-term investments | 5,212 | 12,616",
      "Restricted cash and cash equivalents | 7,092 | 8,503",
+     "Short-term investments | 5,212 | 12,616",
      "Long-term investments | 72,300 | 55,412",
-     "Cash and cash equivalents, including restricted | [1] | 143,387 | 115,932",
-     "Short-term investments | [1] | 20,109 | 7,664",
-     "Long-term investments | [1] | 169,841 | 172,978",
-     "At September 30, 2026, the total of cash, cash equivalents, restricted cash and cash equivalents, and investments of Porch-Owned Segments and corporate was $164.7 million."
+     "Total current assets | 117,665 | 88,208",
+     "Total current liabilities | 80,512 | 67,782"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors.",
-    "claim": "Insurance-related liquidity faces regulatory and market constraints because capital held by Porch's captive reinsurer cannot be used elsewhere within the Company without regulatory pre-approval and remains restricted during runoff obligations, and the Reciprocal and captive could be forced to sell investments to meet liquidity requirements.",
+    "basis": "Stated directly in the Q3 2026 earnings release, 2025 Form 10-K MD&A, and 2025 Form 10-K risk factors.",
+    "claim": "Porch-Owned Segments and corporate held $164.7 million in total cash, cash equivalents, restricted cash and cash equivalents, and investments, plus $106 million in surplus notes from the Reciprocal bearing interest at 9.75% plus SOFR.",
     "facts": [
+     "P6",
+     "P3",
      "P2"
     ],
     "quotes": [
-     "Additionally, capital held by the captive cannot be used elsewhere within the Company without applicable regulatory pre-approval.",
-     "If the Reciprocal were to cease using the captive, our access to its capital and assets would remain restricted while it has runoff reinsurance obligations.",
-     "The Reciprocal and our reinsurance captive could be forced to sell investments to meet liquidity requirements."
+     "At September 30, 2026, the total of cash, cash equivalents, restricted cash and cash equivalents, and investments of Porch-Owned Segments and corporate was $164.7 million.",
+     "Porch also holds $106 million surplus notes from the Reciprocal, which are eliminated in consolidation.",
+     "Porch now holds $106 million of surplus notes due from the Reciprocal which pay interest of 9.75% plus SOFR.",
+     "Additionally, capital held by the captive cannot be used elsewhere within the Company without applicable regulatory pre-approval."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q condensed consolidated balance sheet.",
-    "claim": "At Sep. 30, 2026, consolidated current debt was 12,376 and long-term debt was 391,879 against total liabilities of 836,805 and total stockholders' equity of 29,665 (table in $ thousands), with Porch stockholders' equity at 7,542 (up from a deficit of (24,619) at Dec. 31, 2025) and Reciprocal noncontrolling interest at 22,123 (table in $ thousands).",
+    "basis": "Stated directly in the October 30, 2026 Form 8-K and Q3 2026 Form 10-Q MD&A.",
+    "claim": "To address statutory investment limits on its approximately 16.2 million Porch shares, the Reciprocal entered an at-the-market agreement allowing it to sell up to 10 million shares into admitted cash assets, with Porch receiving no proceeds.",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law.",
+     "The Distribution Agreement provides the Reciprocal with an opportunity to convert a portion of these holdings into cash that qualify as fully admitted assets on its statutory financial statements.",
+     "The Company will not receive any proceeds from the sale of the Reciprocal ATM Shares."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 condensed consolidated balance sheet.",
+    "claim": "Consolidated debt consisted of 12,376 in current debt and 391,879 in long-term debt, alongside total liabilities of 836,805 against Porch stockholders' equity of 7,542 and total stockholders' equity of 29,665 (table in thousands).",
     "facts": [
      "F1"
     ],
@@ -578,118 +509,131 @@
      "Long-term debt | 391,879 | 385,060",
      "Total liabilities | 836,805 | 775,037",
      "Porch stockholders' equity (deficit) | 7,542 | (24,619)",
-     "Noncontrolling interest related to the Reciprocal | 22,123 | 47,005",
      "Total stockholders' equity | 29,665 | 22,386"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q statement of operations.",
-    "claim": "Consolidated interest expense of (44,507) exceeded consolidated operating income of 25,792 for the nine months ended Sep. 30, 2026 (table in $ thousands), whereas in the three months ended Sep. 30, 2026 operating income of 18,090 exceeded interest expense of (15,126) (table in $ thousands).",
+    "basis": "Stated directly in the Q3 2026 condensed consolidated statement of operations.",
+    "claim": "Interest expense of (44,507) during the nine-month period exceeded consolidated operating income of 25,792, resulting in a pre-tax loss of (1,806) (table in thousands).",
     "facts": [
      "F2"
     ],
     "quotes": [
      "Operating income | 18,090 | 16,335 | 25,792 | 20,118",
-     "Interest expense | (15,126) | (13,963) | (44,507) | (37,265)"
+     "Interest expense | (15,126) | (13,963) | (44,507) | (37,265)",
+     "Income (loss) before income taxes | 8,018 | 3,340 | (1,806) | 15,139"
     ],
     "support": "supported"
    },
    {
-    "basis": "Indenture and foreclosure risks stated in the 2025 Form 10-K; leverage ratio improvement stated in the Q3 2026 CEO summary.",
-    "claim": "The 2028 Notes indenture imposes operating restrictions and exposes assets to foreclosure by secured debtholders upon default, though management stated in Q3 2026 that Porch improved its leverage ratio to the low end of its targeted range.",
+    "basis": "Stated directly in the 2025 Form 10-K risk factors.",
+    "claim": "The indenture for the 2028 Notes and future debt instruments restrict operating flexibility, and any default on the 2028 Notes or other secured debt could result in asset foreclosure.",
     "facts": [
-     "P2",
-     "P6"
+     "P2"
     ],
     "quotes": [
      "The indenture governing our 2028 Notes contains, and instruments governing any future indebtedness of ours would likely contain, restrictions that may limit our flexibility in operating our business, and any default on our 2028 Notes or other future secured indebtedness could result in foreclosure by our secured debtholders on our assets.",
+     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated qualitatively in the CEO summary of the Q3 2026 earnings release; underlying metrics are absent.",
+    "claim": "Management stated that third-quarter performance further improved Porch's leverage ratio to the low end of its targeted range, though the numerical ratio and target range are not disclosed.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
      "In Q3, we rapidly grew Reciprocal Policies Written\u00b9 42% year-over-year, more than doubled Adjusted EBITDA (Excluding Reciprocal)\u00b2 versus the prior-year period, generated strong Adjusted EBITDA (Excluding Reciprocal)\u00b2 conversion to cash for Porch shareholders, further improved our leverage ratio to the low end of our targeted range, and raised our full-year outlook again."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q statement of cash flows.",
-    "claim": "Consolidated net cash provided by operating activities rose to 113,810 in the nine months ended Sep. 30, 2026 from 65,218 in the prior-year period, despite a consolidated net loss of $ (3,201) (table in $ thousands).",
+    "basis": "Stated directly in the Q3 2026 condensed consolidated statement of cash flows.",
+    "claim": "Consolidated net cash provided by operating activities grew to 113,810 from 65,218 in the prior-year period (table in thousands).",
     "facts": [
      "F3"
     ],
     "quotes": [
-     "Net income (loss) | $ (3,201) | $ 11,001",
      "Net cash provided by operating activities | 113,810 | 65,218"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q statement of cash flows.",
-    "claim": "Nine-month 2026 operating cash flow of 113,810 was driven heavily by non-cash add-backs\u2014including 36,931 of non-cash interest expense, 26,521 of stock-based compensation, and 20,844 of depreciation and amortization\u2014and working-capital inflows from deferred revenue of 34,142 and reinsurance balance due of 32,166, partly offset by outflows of (17,206) in accrued expenses and other current liabilities and (16,055) in deferred policy acquisition costs (table in $ thousands).",
+    "basis": "Stated directly in the Q3 2026 condensed consolidated statement of cash flows.",
+    "claim": "Despite a consolidated net loss of $ (3,201), operating cash flow was lifted by large non-cash add-backs including 36,931 of non-cash interest expense, 26,521 of stock-based compensation, and 20,844 of depreciation and amortization (table in thousands).",
     "facts": [
      "F3"
     ],
     "quotes": [
+     "Net income (loss) | $ (3,201) | $ 11,001",
      "Non-cash interest expense | 36,931 | 31,632",
+     "Cash paid for interest | 17,352 | 12,106",
      "Stock-based compensation | 26,521 | 20,091",
-     "Depreciation and amortization | 20,844 | 17,283",
+     "Depreciation and amortization | 20,844 | 17,283"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 cash flow statement and inferred as VIE-attributable from the VIE balance sheet breakdown in F1.",
+    "claim": "Operating cash flow also included substantial working-capital inflows from deferred revenue of 34,142, reinsurance balance due of 32,166, other current insurance liabilities of 10,024, and loss reserves of 8,761, partially offset by outflows in accrued expenses of (17,206) and deferred policy acquisition costs of (16,055) (table in thousands).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
      "Deferred revenue | 34,142 | (28,448)",
      "Reinsurance balance due | 32,166 | 55,449",
+     "Other insurance liabilities, current | 10,024 | (12,425)",
+     "Losses and loss adjustment expense reserves | 8,761 | (10,724)",
      "Accrued expenses and other current liabilities | (17,206) | 1,046",
      "Deferred policy acquisition costs | (16,055) | 6,955"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 Form 10-Q statement of cash flows.",
-    "claim": "In the nine months ended Sep. 30, 2026, capital outflows in investing activities included (915) for purchases of property and equipment and (12,003) for capitalized internal use software development costs, while supplemental cash payments included 17,352 for interest and $ 13,516 for income taxes (table in $ thousands).",
+    "basis": "Stated directly in the Q3 2026 condensed consolidated statement of cash flows.",
+    "claim": "Porch capitalized (12,003) of internal-use software development costs and spent (915) on property and equipment inside investing cash flows, compared with (10,513) and (362) in the prior-year period (table in thousands).",
     "facts": [
      "F3"
     ],
     "quotes": [
-     "Purchases of property and equipment | (915) | (362)",
      "Capitalized internal use software development costs | (12,003) | (10,513)",
-     "Cash paid for interest | 17,352 | 12,106",
-     "Income taxes paid | $ 13,516 | $ 451"
+     "Purchases of property and equipment | (915) | (362)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q, Q3 2026 earnings release, and 2025 Form 10-K.",
-    "claim": "Because the Reciprocal's net income and equity belong to its policyholder-members rather than Porch shareholders, shareholder-owned earnings are tracked separately: in Q3 2026, Porch-Owned Segments generated $44.5 million of Adjusted EBITDA (Excluding Reciprocal) and $12.2 million of net income attributable to Porch, while Porch also holds $106 million of Reciprocal surplus notes paying 9.75% plus SOFR interest whose payment is uncertain.",
+    "basis": "Stated directly in the Q3 2026 earnings release.",
+    "claim": "Porch-Owned Segments generated $44.5 million of Adjusted EBITDA (Excluding Reciprocal) in the third quarter, up 116% year-over-year, and management raised full-year guidance to $135m to $140m.",
     "facts": [
-     "P4",
-     "P6",
-     "P3",
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "Because the Company does not own the Reciprocal, the Reciprocal's results of operations, net income (loss), and equity are attributable to its member policyholders and do not accrue to the Company's shareholders.",
-     "\u2022Net income attributable to Porch was $12.2 million.",
-     "\u2022Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9.",
-     "Porch now holds $106 million of surplus notes due from the Reciprocal which pay interest of 9.75% plus SOFR.",
-     "The growth and financial health of the Reciprocal directly affect our operating revenue and the payment of interest and principal on surplus notes we hold is uncertain."
+     "Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9.",
+     "Adjusted EBITDA (Excluding Reciprocal)(b) | $135m to $140m | 76% to 83%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K, Q3 2026 earnings release, and Q3 2026 cash flow statement.",
-    "claim": "Porch addressed its 0.75% Convertible Senior Unsecured Notes due September 2026 by exchanging $96.8 million for $83.0 million of 9.00% Convertible Senior Unsecured Notes due 2030, issuing $51.0 million of 2030 Notes for cash, and leaving $7.8 million of 2026 Notes principal at December 31, 2025, which was repaid in Q3 2026 alongside (7,799) in total principal repayments for the nine months ended Sep. 30, 2026 (table in $ thousands).",
+    "basis": "Stated directly in the 2025 Form 10-K MD&A and Q3 2026 earnings release.",
+    "claim": "Porch repaid the remaining $7.8 million of its 0.75% Convertible Senior Unsecured Notes due 2026 in the third quarter, after exchanging $96.8 million of 2026 Notes for $83.0 million of 9.00% Convertible Senior Unsecured Notes due 2030 and issuing $51.0 million of additional 2030 Notes for cash in 2025.",
     "facts": [
-     "P3",
      "P6",
-     "F3"
+     "P3"
     ],
     "quotes": [
-     "On May 27, 2025, we completed a series of privately negotiated refinancing transactions with certain holders of our 0.75% Convertible Senior Unsecured Notes due in September 2026 (the \u201c2026 Notes\u201d).",
-     "\u2022Exchanged $96.8 million aggregate principal amount of 2026 Notes for $83.0 million aggregate principal amount of newly issued 9.00% Convertible Senior Unsecured Notes due 2030 (the \u201c2030 Notes\u201d),",
-     "\u2022Issued an additional $51.0 million aggregate principal amount of 2030 Notes for cash to the same investors that participated in the exchange, and",
-     "As of December 31, 2025, outstanding principal on the 2026 Notes was $7.8 million.",
      "The increase from June 30, 2026, was primarily driven by Adjusted EBITDA (Excluding Reciprocal)1 of $44.5 million, partially offset by the $7.8 million repayment of the 0.75% Convertible Senior Unsecured Notes due September 2026 (the \u201c2026 Notes\u201d).",
-     "Repayments of principal | (7,799) | (68,164)"
+     "As of December 31, 2025, outstanding principal on the 2026 Notes was $7.8 million.",
+     "Exchanged $96.8 million aggregate principal amount of 2026 Notes for $83.0 million aggregate principal amount of newly issued 9.00% Convertible Senior Unsecured Notes due 2030 (the \u201c2030 Notes\u201d),",
+     "Issued an additional $51.0 million aggregate principal amount of 2030 Notes for cash to the same investors that participated in the exchange, and"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q balance sheet and 2025 Form 10-K.",
-    "claim": "After repaying the 2026 Notes in Q3 2026, Porch's balance sheet at Sep. 30, 2026 still carried 12,376 in current debt and 391,879 in long-term debt (table in $ thousands), with filings referencing secured 2028 Notes and the 2030 Notes.",
+    "basis": "Balance sheet debt stated in F1; existence of 2028 Notes and 2030 Notes stated in P2 and P3.",
+    "claim": "Following the 2026 Notes repayment, Porch still carried 12,376 of current debt and 391,879 of long-term debt (table in thousands), including its 2028 Notes and 2030 Notes.",
     "facts": [
      "F1",
      "P2",
@@ -700,254 +644,347 @@
      "Long-term debt | 391,879 | 385,060",
      "The indenture governing our 2028 Notes contains, and instruments governing any future indebtedness of ours would likely contain, restrictions that may limit our flexibility in operating our business, and any default on our 2028 Notes or other future secured indebtedness could result in foreclosure by our secured debtholders on our assets."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 earnings release, October 30, 2026 Form 8-K, 2025 Form 10-K Risk Factors, and Q3 2026 Form 10-Q Item 1A.",
-    "claim": "Remaining debt service and refinancing needs can be met using $164.7 million of Porch-Owned Segments and corporate cash and investments, full-year 2026 Adjusted EBITDA (Excluding Reciprocal) guidance of $135m to $140m, and an October 30, 2026 ATM offering under which Porch may issue up to 5 million shares, though Porch warns of potential inability to access capital markets or generate sufficient cash flow and faces potential Allied Trust acquisition outlays.",
+    "basis": "Stated directly in the Q3 2026 earnings release, October 30, 2026 Form 8-K, and 2025 Form 10-K risk factors.",
+    "claim": "Near-term obligations can be met using Porch-owned cash and investments of $164.7 million, ongoing Porch-owned earnings, and an at-the-market agreement allowing Porch to issue and sell up to 5 million common shares.",
     "facts": [
      "P6",
      "P7",
-     "P2",
-     "P5"
+     "P2"
     ],
     "quotes": [
      "At September 30, 2026, the total of cash, cash equivalents, restricted cash and cash equivalents, and investments of Porch-Owned Segments and corporate was $164.7 million.",
-     "Adjusted EBITDA (Excluding Reciprocal)(b) | $135m to $140m | 76% to 83%",
      "On October 30, 2026, Porch Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group, Inc. (the \u201cCompany\u201d or \u201cPorch\u201d) entered into a distribution agreement (the \u201cDistribution Agreement\u201d) with StoneX Financial Inc., acting as sales agent (the \u201cSales Agent\u201d), pursuant to which (i) the Reciprocal may offer and sell up to 10 million shares of the Company\u2019s common stock (the \u201cCommon Stock\u201d), par value $0.0001 per share (the \u201cReciprocal ATM Shares\u201d) it currently holds and (ii) the Company may offer, issue and sell up to 5 million shares of the Company\u2019s Common Stock (the \u201cCompany ATM Shares\u201d and, together with the Reciprocal ATM Shares, the \u201cShares\u201d), in each case from time to time through the Sales Agent.",
-     "\u2022We may be unable to access the capital markets when needed, which could adversely affect the ability to take advantage of business opportunities as they arise. refinance our outstanding debt, and fund operations in a cost-effective manner.",
-     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments.",
-     "HOA Holdco may elect to satisfy up to $20.0 million of the amount payable at the closing of the Acquisition in shares of our common stock, which we expect would be newly issued from our authorized but unissued shares."
+     "Neither the Company nor the Reciprocal has an obligation to sell any of the Shares.",
+     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Part II, Item 1A Risk Factors of the Q3 2026 Form 10-Q.",
+    "claim": "For the pending Allied Trust acquisition, HOA Holdco may elect to pay up to $20.0 million of closing consideration in newly issued Porch shares and the Reciprocal may elect to pay up to $50.0 million of deferred payments in Porch shares it already holds.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "HOA Holdco may elect to satisfy up to $20.0 million of the amount payable at the closing of the Acquisition in shares of our common stock, which we expect would be newly issued from our authorized but unissued shares.",
+     "The Reciprocal may elect to satisfy up to $50.0 million of the deferred payments in shares of our common stock that it already holds, a significant portion of the value of which is treated as a non-admitted asset in the Reciprocal\u2019s statutory filings."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the Q3 2026 earnings release (P6) and Q2 2026 earnings release (P10).",
-    "claim": "Porch's primary revenue growth driver is its Insurance Services segment, where third-quarter Insurance Services revenue reached $102.8 million (up 39% YoY), driven by $161.0 million of Reciprocal Written Premium and 42% YoY growth in Reciprocal Policies Written.",
+    "basis": "stated in the cited item",
+    "claim": "Insurance Services revenue grew 39% year-over-year to $102.8 million in third quarter 2026, driven by 42% growth in Reciprocal Policies Written and $161.0 million in Reciprocal Written Premium.",
     "facts": [
-     "P6",
-     "P10"
+     "P6"
     ],
     "quotes": [
      "Porch-Owned Segments Revenue (Excluding Reciprocal)\u00b2, representing the revenue contributions across the Porch-owned businesses, was $140.8 million, up 22% YoY, led by Insurance Services revenue of $102.8 million, up 39% YoY.",
-     "Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9.",
-     "Insurance Services continues to run ahead of schedule, with Reciprocal Written Premium3 scaling, total Reciprocal Policies Written3 up 38% year-over-year, and strong earnings flow-through from premium into Adjusted EBITDA (Excluding Reciprocal)1."
+     "Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 1 (P1) and Q3 2026 earnings release (P6).",
-    "claim": "Insurance premium expansion is driven by recruiting third-party insurance agencies and sales execution, with producing agency branch locations rising 114% YoY, quote volumes rising 79% YoY, and Reciprocal Written Premium from new customers growing 178% YoY.",
+    "basis": "stated in the cited item",
+    "claim": "Top-of-funnel distribution and conversion expanded in 2026 versus 2025, with producing agency branch locations up 114%, quote volumes up 79%, and new-customer Reciprocal Written Premium up 178%.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "This includes expanding our offering within our existing states and into new states, and recruiting a high performing sales team who will increase our quote volumes and therefore insurance gross written premiums by expanding the number of third-party insurance agency relationships and building deeper relationships with existing third-party insurance agencies.",
      "Top-of-funnel expansion continued, with Q3 2026 producing agency branch locations rising 114% from Q3 2025 and quote volumes rising 79% from Q3 2025.",
      "Conversion continued to track well above prior-year levels, supporting Q3 2026 RWP\u00b9 from new customers growth of 178% YoY."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 1A Risk Factors (P2) and Q3 2026 10-Q MD&A (P4).",
-    "claim": "For Insurance Services growth to continue, the Reciprocal must maintain relationships with third-party independent agents and agencies, limit policy attrition, obtain reinsurance at favorable levels and pricing, and generate or raise sufficient statutory surplus.",
+    "basis": "stated in the cited item",
+    "claim": "Continued insurance growth requires maintaining third-party independent agency relationships, limiting policy attrition, and navigating insurance market pricing cycles.",
     "facts": [
      "P2",
      "P4"
     ],
     "quotes": [
      "The Reciprocal is highly dependent on maintaining successful relationships with third-party independent agents and agencies.",
-     "The insurance industry is highly competitive and regulated, and our growth depends on our ability to continue to obtain reinsurance at levels and pricing favorable to us, manage risk, limit policy attrition, obtain regulatory alignment on our business plans and financials, and continue to build generate surplus at the Reciprocal to support additional growth, which may require raising capital if unable to grow organically.",
      "A decline in the business of the Reciprocal almost certainly could have as a consequence a decline in the total premiums paid and a correspondingly adverse effect on the amount of the management fees received by our Insurance Services segment."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Risk Factors (P2), Q3 2026 10-Q MD&A (P4), and October 30, 2026 Form 8-K (P7).",
-    "claim": "Sustaining Reciprocal premium growth requires protecting its statutory surplus, which is exposed to declines in Porch's common stock price because the Reciprocal holds approximately 16.2 million Porch shares and entered an agreement allowing it to sell up to 10 million of those shares for cash.",
+    "basis": "stated in the cited item",
+    "claim": "To support additional premium growth, the Reciprocal must build statutory surplus and maintain regulatory alignment, including converting part of its approximately 16.2 million Porch shares into admitted cash assets.",
     "facts": [
      "P2",
-     "P4",
      "P7"
     ],
     "quotes": [
-     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
+     "The insurance industry is highly competitive and regulated, and our growth depends on our ability to continue to obtain reinsurance at levels and pricing favorable to us, manage risk, limit policy attrition, obtain regulatory alignment on our business plans and financials, and continue to build generate surplus at the Reciprocal to support additional growth, which may require raising capital if unable to grow organically.",
      "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law.",
-     "The Reciprocal may use its net proceeds from sales of the Reciprocal ATM Shares for general corporate purposes, which may include, but is not limited to, strengthening the Reciprocal's admitted surplus position, improving liquidity and asset diversification, financing acquisitions, otherwise meeting applicable regulatory requirements and maintaining its financial stability rating, or paying claims and expenses.",
-     "On October 30, 2026, Porch Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group, Inc. (the \u201cCompany\u201d or \u201cPorch\u201d) entered into a distribution agreement (the \u201cDistribution Agreement\u201d) with StoneX Financial Inc., acting as sales agent (the \u201cSales Agent\u201d), pursuant to which (i) the Reciprocal may offer and sell up to 10 million shares of the Company\u2019s common stock (the \u201cCommon Stock\u201d), par value $0.0001 per share (the \u201cReciprocal ATM Shares\u201d) it currently holds and (ii) the Company may offer, issue and sell up to 5 million shares of the Company\u2019s Common Stock (the \u201cCompany ATM Shares\u201d and, together with the Reciprocal ATM Shares, the \u201cShares\u201d), in each case from time to time through the Sales Agent."
+     "The Distribution Agreement provides the Reciprocal with an opportunity to convert a portion of these holdings into cash that qualify as fully admitted assets on its statutory financial statements."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 1 (P1) and Item 7 MD&A (P3).",
-    "claim": "Porch's proprietary Home Factors property data, covering approximately 90% of U.S. homes, drives growth by improving underwriting risk selection\u2014lowering the Reciprocal's Attritional Loss Ratio to 17% from 22%\u2014and through plans to add new data categories each quarter and monetize them with third parties.",
+    "basis": "stated in the cited item",
+    "claim": "Continued insurance growth requires securing adequate reinsurance at favorable pricing and managing severe weather and catastrophe losses.",
     "facts": [
-     "P1",
-     "P3"
+     "P2"
     ],
     "quotes": [
-     "With insights into approximately 90% of U.S. homes, Home Factors provides interior and exterior attributes and condition data to help insurance carriers improve underwriting, pricing, and risk selection.",
+     "While we intend to mitigate our risk via reinsurance, there can be no guarantee this will adequately reduce our exposure to losses due to various risks inherent in reinsurance generally and with our reinsurance program, including, but not limited to, the inability to negotiate reinsurance contracts at renewal at acceptable terms or at all, our limited number of reinsurance partners, large catastrophes that exceed aggregate reinsurance coverage limits, the inability or unwillingness of counterparties to pay reinsurance receivables we believe we are owed, multiple losses in a single year that exceed our ability to reinstate reinsurance contracts, and the potential for fraud or misrepresentation committed by our reinsurance partners."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Home Factors property data covering approximately 90% of U.S. homes supports underwriting selection\u2014improving the Reciprocal's Attritional Loss Ratio from 22% in 2024 to 17% in 2025\u2014and creates third-party data monetization opportunities.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "Our deep relationships and proprietary data give us unique visibility into approximately 90% of U.S. homebuyers and approximately 90% of U.S. homes, enabling superior risk assessment and competitive pricing.",
      "This data has enabled us to more accurately underwrite risk, and as a result, we have seen an improvement in the Reciprocal\u2019s Attritional Loss Ratio (see Non-GAAP Financial Measures in Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations for definition), which was 17% and 22% for the years ended December 31, 2025, and 2024, respectively.",
      "We intend to add new categories of Home Factors, our property insights product, each quarter and further monetize Home Factors with third parties."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 1A Risk Factors (P2).",
-    "claim": "For Home Factors and data-driven underwriting growth to continue, Porch must retain access to third-party property and consumer data suppliers, avoid restrictive privacy or regulatory limits on data use, and replicate favorable underwriting results without regulatory blocks.",
+    "basis": "stated in the cited item",
+    "claim": "Data-driven underwriting and monetization require continued third-party data access, compliance with privacy laws, regulatory acceptance of Home Factors, and effective pricing models.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "In the future, any of these third parties could sever its relationship with us, change its data sharing policies, including making them more restrictive, or alter its own data collection practices, any of which could result in the loss of, or significant impairment to, our ability to access, collect and use personal information about their customers or consumers.",
+     "If we are unable to collect information from our customers or our service providers and commercial partners do not continue to provide us with information of their customers, or if applicable laws prohibit or materially impair our use of such information, our ability to provide services to consumers and drive consumer access to service providers may be materially impacted.",
      "We may not be able to consistently replicate favorable results with the use of Home Factors in underwriting for carriers other than HOA and the Reciprocal, which may be due to carrier location, modeling capabilities, or business goals of other carriers, and we may also face risks with regulators impacting our ability to use Home Factors."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 1 (P1) and Item 7 (P3); segment revenue reported in Q3 2026 release (P6).",
-    "claim": "In Software & Data, growth is driven by launching new SaaS products and features, increasing product utilization, and raising prices while maintaining retention, such as Rynoh's 20% price increase.",
+    "basis": "stated in the cited item",
+    "claim": "The pending Allied Trust acquisition is expected to enter Louisiana and add approximately $200 million in Reciprocal Written Premium and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) in the first full year post-closing.",
     "facts": [
-     "P1",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "We plan to continue increasing utilization of our SaaS products and maintain high customer retention.",
-     "We expect to launch new products and features to meet the needs of our customers, while increasing prices and maintaining high customer retention rates.",
-     "In Software and Data, Rynoh implemented a 20% price increase in the first quarter, in line with strategic pricing goals."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the FY 2025 10-K Item 1 (P1) and Item 1A Risk Factors (P2).",
-    "claim": "For Software & Data growth to continue, Porch must maintain high customer retention while implementing price increases and navigate competition and transaction activity in the housing and financial markets.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "We expect to launch new products and features to meet the needs of our customers, while increasing prices and maintaining high customer retention rates.",
-     "Our brands and businesses are sensitive to general economic events, trends and conditions, including those related to, without limitation, the housing and financial markets, which impacts the demand and costs for a portion of our products and services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the FY 2025 10-K Item 1 (P1) and Item 7 MD&A (P3).",
-    "claim": "Consumer Services growth is driven by expanding partnerships with moving companies and major utilities to reach homebuyers early, cross-selling warranty and home setup services, and launching new offerings such as online packing services.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "By leveraging existing partnerships with moving companies, major utilities, and other partnerships, we are expanding access to high-value homebuyers early in their journey, and fostering long-term customer relationships.",
-     "Therefore, we have the ability to cross-sell a variety of products at the time they are most needed.",
-     "In Consumer Services, new services were launched including packing services online for movers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the FY 2025 10-K Item 1A Risk Factors (P2).",
-    "claim": "For Consumer Services growth to continue, Porch must increase revenue per customer through higher conversion rates and additional touchpoints, maintain access to cost-effective marketing channels, and manage inflation in parts, appliance, and home system costs.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our future growth also depends in part on increasing the revenue generated from each customer or consumer we serve.",
-     "As a result, we cannot assure you that these parties will not limit or prohibit us from purchasing certain types of advertising, advertising certain of our products and services and/or using one or more current or prospective marketing channels in the future.",
-     "Increases in parts, appliance and home system prices and other operating costs could adversely impact our business, financial position, results of operations and cash flows."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the October 13, 2026 Form 8-K Exhibit 99.1 (P9) and Q3 2026 earnings release (P6).",
-    "claim": "The pending acquisition of Allied Trust's carrier and managing general agency is expected to expand Insurance Services into Louisiana and add approximately $200 million of Reciprocal Written Premium and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) in the first full year after closing.",
-    "facts": [
-     "P6",
      "P9"
     ],
     "quotes": [
-     "The acquisition is expected to add approximately $200 million of Reciprocal Written Premium (\u201cRWP\u201d)i and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) to Porch.",
      "Louisiana represented almost half of Allied Trust\u2019s 2025 premiums and would be a new state for the Reciprocal.",
-     "This is a high-quality insurance business that would add scale, products, geographic reach, an experienced team, and more than a decade of operating data."
+     "The acquisition is expected to add approximately $200 million of Reciprocal Written Premium (\u201cRWP\u201d)i and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) to Porch.",
+     "These expected contributions reflect the first full year following closing and planned portfolio optimization."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 10-Q Part II Item 1A Risk Factors (P5).",
-    "claim": "For the Allied Trust growth contribution to materialize, the parties must receive regulatory approvals from the Texas Department of Insurance and other regulators, integrate operations into new states including Louisiana where Home Factors may be less predictive, and secure reinsurance for higher Gulf Coast catastrophe concentration.",
+    "basis": "stated in the cited item",
+    "claim": "Realizing Allied Trust growth requires Texas Department of Insurance and other regulatory approvals, successful operational integration, and managing higher Gulf Coast catastrophe exposure and reinsurance terms.",
     "facts": [
      "P5"
     ],
     "quotes": [
      "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties.",
      "The acquired businesses underwrite and write insurance policies in states in which we do not currently operate, including Louisiana, which will require us to maintain licenses, build distribution, and price risks in markets where we have limited operating experience and where regulatory, catastrophe, and litigation environments differ from those in which we operate today.",
-     "Our proprietary property data may prove less predictive in those markets.",
      "The combined policyholder count and geographic concentration may cause reinsurers to require higher premiums, higher attachment points or retentions, reduced limits, or less favorable terms when existing programs are renewed or new programs are placed for the combined operations, and reinsurance may not be available on acceptable terms or at all."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 7 MD&A (P3) and Item 1A Risk Factors (P2).",
-    "claim": "Porch's wholly owned captive reinsurer supports revenue and shareholder economics by retaining a higher proportion of non-catastrophic weather quota share premiums from the Reciprocal, which reduced external reinsurance cost offsets and helped increase consolidated revenue by 10%.",
+    "basis": "stated in the cited item",
+    "claim": "Software & Data growth is driven by launching new SaaS products and features, increasing product utilization, and implementing strategic price increases such as Rynoh's 20% price increase.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We expect to launch new products and features to meet the needs of our customers, while increasing prices and maintaining high customer retention rates.",
+     "In Software and Data, Rynoh implemented a 20% price increase in the first quarter, in line with strategic pricing goals."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Continued Software & Data growth requires maintaining customer satisfaction and retention despite price increases, competing effectively against software peers, and resilient housing market activity.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we are unable to compete effectively against competitors, services or products or if we are unable to establish or maintain a consumer brand that resonates with customers and/or enhance our existing brands and the brands of any acquired companies, or if we are unable to maintain high customer satisfaction or compete with the pricing offered by our competitors, the result could be decreases in the size and level of engagement of our consumer and service provider bases, any of which could adversely affect our business, financial condition and results of operations.",
+     "Our brands and businesses are sensitive to general economic events, trends and conditions, including those related to, without limitation, the housing and financial markets, which impacts the demand and costs for a portion of our products and services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Consumer Services grows by expanding moving and utility partnerships, launching new moving and warranty offerings, and cross-selling to homebuyers identified early in their moving journey.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We know when homebuyers are moving approximately six weeks before they move due to our unique early insight.",
+     "By leveraging existing partnerships with moving companies, major utilities, and other partnerships, we are expanding access to high-value homebuyers early in their journey, and fostering long-term customer relationships.",
+     "In Consumer Services, new services were launched including packing services online for movers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Continued Consumer Services growth requires increasing value-add touchpoints and revenue per consumer while maintaining cost-effective digital marketing and third-party affiliate channels.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our future growth also depends in part on increasing the revenue generated from each customer or consumer we serve.",
+     "We plan on increasing this revenue by increasing the number of value-add touchpoints with customers and consumers for whom we have access rights by offering new services and by improving conversion rates and revenue generation of both existing and new services.",
+     "As a result, we cannot assure you that these parties will not limit or prohibit us from purchasing certain types of advertising, advertising certain of our products and services and/or using one or more current or prospective marketing channels in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Porch's wholly owned captive reinsurer provides low-volatility quota share reinsurance to the Reciprocal, improving capital efficiency and retaining a higher proportion of premiums for Porch shareholders.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "Total consolidated revenue including the Reciprocal increased by 10% compared to the prior year.",
-     "In 2025, our captive reinsurer retained a higher proportion of premiums than in the prior year.",
-     "Our intent is to continue this quota share as we believe this is a long-term strategy to create capital efficiency for the Reciprocal and attractive, lower-risk economics for Porch shareholders."
+     "In addition, within our new Insurance Services segment, our wholly owned reinsurance captive provides reinsurance support to the Reciprocal to increase capital efficiency at the Reciprocal and increase revenue and profit for Porch Shareholder Interest.",
+     "In 2025, our captive reinsurer retained a higher proportion of premiums than in the prior year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY 2025 10-K Item 1A Risk Factors (P2).",
-    "claim": "For the captive reinsurance contribution to continue, attritional losses at the Reciprocal must not rise unexpectedly, the regulatory and tax environment must remain favorable, and third-party reinsurance pricing and capital levels must keep the Reciprocal using the captive.",
+    "basis": "stated in the cited item",
+    "claim": "Sustaining captive reinsurance earnings requires controlled attritional losses, continued annual renewal by the Reciprocal, a favorable regulatory and tax environment, and adequate collateral.",
     "facts": [
-     "P2"
+     "P2",
+     "P3"
     ],
     "quotes": [
      "The success of the Company\u2019s captive reinsurance program is dependent on a number of factors outside the control of the Company, including, but not limited to, continued access to financial solutions, losses of the Reciprocal increasing unexpectedly, in particular, attritional losses, a favorable regulatory environment, and the overall tax position of the Company.",
-     "Whether the Reciprocal will continue to use the captive reinsurer going forward depends upon a number of circumstances, including the availability and pricing of reinsurance from third parties, the amount of capital it holds and regulatory requirements."
+     "This contract was approved for an initial period of 10 years but can be cancelled by Porch or the Reciprocal each year."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in P5 and P9",
-    "claim": "Homeowners of America Holding Corporation and Porch Insurance Reciprocal Exchange entered into a definitive Purchase Agreement to acquire Allied Trust Insurance Company, Allied Underwriters LLC, and Lonestar Lagniappe Reinsurance Holdings, LLC, with up to $20.0 million at closing and up to $50.0 million in deferred payments optionally payable in Porch common stock.",
+    "basis": "Stated directly in Form 10-Q Part II Item 1A (P5) and Form 8-K Exhibit 99.1 (P9).",
+    "claim": "Homeowners of America Holding Corporation and Porch Insurance Reciprocal Exchange entered into a Purchase Agreement to acquire Allied Trust Insurance Company, Allied Underwriters LLC, and Lonestar Lagniappe Reinsurance Holdings, LLC.",
     "facts": [
      "P5",
      "P9"
     ],
     "quotes": [
      "The following risk factors relate to the pending acquisition by Homeowners of America Holding Corporation (\u201cHOA Holdco\u201d) and Porch Insurance Reciprocal Exchange (the \u201cReciprocal\u201d) of Allied Trust Insurance Company (\u201cATIC\u201d), Allied Underwriters LLC (\u201cAU MGA\u201d), and Lonestar Lagniappe Reinsurance Holdings, LLC (\u201cLonestar\u201d) pursuant to the Stock and Membership Interest Purchase Agreement, dated as of October 13, 2026 (the \u201cPurchase Agreement\u201d and such acquisition, the \u201cAcquisition\u201d).",
-     "HOA Holdco may elect to satisfy up to $20.0 million of the amount payable at the closing of the Acquisition in shares of our common stock, which we expect would be newly issued from our authorized but unissued shares.",
-     "The Reciprocal may elect to satisfy up to $50.0 million of the deferred payments in shares of our common stock that it already holds, a significant portion of the value of which is treated as a non-admitted asset in the Reciprocal\u2019s statutory filings.",
-     "On October 13, 2026, the Company issued a press release announcing the entry into the Purchase Agreement and the Acquisition."
+     "SEATTLE, October 13, 2026 (BUSINESS WIRE) \u2013 Porch Group, Inc. (\u201cPorch Group\u201d, \u201cPorch\u201d or the \u201cCompany\u201d) (NASDAQ: PRCH), a new kind of homeowners insurance company, today announced that Porch Insurance Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group have entered into a definitive agreement to acquire Allied Trust\u2019s insurance carrier and managing general agency, respectively.",
+     "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P7",
-    "claim": "Porch and the Reciprocal entered into an at-the-market Distribution Agreement with StoneX Financial Inc. under which the Reciprocal may sell up to 10 million existing shares and Porch may issue and sell up to 5 million shares at a 1.5% sales commission, pursuant to a registration statement filed the same day.",
+    "basis": "Stated directly in Form 8-K Item 1.01 (P7).",
+    "claim": "Porch and the Reciprocal entered into an at-the-market distribution agreement with StoneX Financial Inc. under which the Reciprocal may sell up to 10 million existing Porch common shares and Porch may issue and sell up to 5 million common shares.",
     "facts": [
      "P7"
     ],
     "quotes": [
      "On October 30, 2026, Porch Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group, Inc. (the \u201cCompany\u201d or \u201cPorch\u201d) entered into a distribution agreement (the \u201cDistribution Agreement\u201d) with StoneX Financial Inc., acting as sales agent (the \u201cSales Agent\u201d), pursuant to which (i) the Reciprocal may offer and sell up to 10 million shares of the Company\u2019s common stock (the \u201cCommon Stock\u201d), par value $0.0001 per share (the \u201cReciprocal ATM Shares\u201d) it currently holds and (ii) the Company may offer, issue and sell up to 5 million shares of the Company\u2019s Common Stock (the \u201cCompany ATM Shares\u201d and, together with the Reciprocal ATM Shares, the \u201cShares\u201d), in each case from time to time through the Sales Agent.",
-     "The Company or the Reciprocal, as applicable, will pay the Sales Agent a cash commission of 1.5% of the gross proceeds from sales of the Shares sold under the Distribution Agreement."
+     "The Shares, if any, will be issued (with respect to the Company ATM Shares) and offered and sold pursuant to the Company\u2019s registration statement on Form S-3 (Registration No. 333-299730), filed with the Securities and Exchange Commission (the \u201cCommission\u201d) under the Securities Act, on October 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P2, and P3",
-    "claim": "Porch formed Porch Reciprocal Exchange and sold its legacy homeowners insurance carrier, Homeowners of America, to the Reciprocal for approximately $105 million less $58 million of prior surplus note obligations, financed by a surplus note bringing total surplus notes held by Porch to approximately $106 million, alongside the transfer of 18.3 million Porch shares.",
+    "basis": "Stated directly in Form 8-K Item 2.02 Exhibit 99.1 (P6, P8).",
+    "claim": "Porch reported quarterly results that exceeded expectations and raised full-year Porch-Owned Segments guidance for Revenue (Excluding Reciprocal) to $518m to $523m, Gross Profit (Excluding Reciprocal) to $438m to $443m, and Adjusted EBITDA (Excluding Reciprocal) to $135m to $140m.",
+    "facts": [
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "SEATTLE, October 28, 2026 (BUSINESS WIRE) \u2013 Porch Group, Inc. (\u201cPorch,\u201d \u201cthe Company,\u201d \u201cwe,\u201d \u201cour,\u201d \u201cus\u201d) (NASDAQ: PRCH), a new kind of homeowners insurance company, today reported third quarter results through September 30, 2026, that exceeded our expectations.",
+     "As a result, the Company raised guidance for the remainder of the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 8-K Exhibit 99.1 (P6) and reflected in principal repayments on the 9-month cash flow statement (F3).",
+    "claim": "Porch completed a $7.8 million repayment of its convertible senior unsecured notes.",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "The increase from June 30, 2026, was primarily driven by Adjusted EBITDA (Excluding Reciprocal)1 of $44.5 million, partially offset by the $7.8 million repayment of the 0.75% Convertible Senior Unsecured Notes due September 2026 (the \u201c2026 Notes\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 8-K Exhibit 99.1 (P10).",
+    "claim": "Porch reported quarterly results that exceeded expectations and raised full-year guidance for the remainder of the year.",
+    "facts": [
+     "P10"
+    ],
+    "quotes": [
+     "SEATTLE, July 29, 2026 (BUSINESS WIRE) \u2013 Porch Group, Inc. (\u201cPorch,\u201d \u201cthe Company,\u201d \u201cwe,\u201d \u201cour,\u201d \u201cus\u201d) (NASDAQ: PRCH), a new kind of homeowners insurance company, today reported second quarter results through June 30, 2026, that exceeded our expectations.",
+     "As a result, the Company raised guidance for the remainder of the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 10-K Item 7 Recent Developments (P3).",
+    "claim": "Porch completed privately negotiated refinancing transactions exchanging $96.8 million of existing convertible notes for $83.0 million of newly issued 9.00% notes, issuing $51.0 million of additional notes for cash, and repurchasing $47.5 million of existing notes for $47.3 million in cash.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On May 27, 2025, we completed a series of privately negotiated refinancing transactions with certain holders of our 0.75% Convertible Senior Unsecured Notes due in September 2026 (the \u201c2026 Notes\u201d).",
+     "After funding the cash portion of the repurchase and related expenses, net cash proceeds were approximately $3.7 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 10-K Item 7 Recent Developments (P3).",
+    "claim": "Porch repurchased an additional $8.9 million aggregate principal amount of convertible notes for $8.4 million in cash.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We used these proceeds, along with existing cash on hand, to repurchase an additional $8.9 million aggregate principal amount of the 2026 Notes for $8.4 million cash in May 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 10-K Item 7 Recent Developments (P3).",
+    "claim": "Porch repurchased $12.8 million in aggregate principal amount of convertible notes for $12.3 million, representing 96.5% par value.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During the third quarter of 2025, we repurchased in a series of privately negotiated transactions $12.8 million in aggregate principal amount of our 2026 Notes for $12.3 million, representing 96.5% par value.",
+     "As a result, we recognized a gain on extinguishment of debt of $0.4 million during the third quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 10-K Item 1A (P2) and Item 7 (P3).",
+    "claim": "Porch's captive reinsurer began providing low-volatility reinsurance coverage to the Reciprocal alongside excess of loss catastrophe reinsurance starting at $25.0 million per occurrence up to a loss of $410.0 million.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Effective April 1, 2025, our captive reinsurer provides reinsurance coverage for the Reciprocal for risks with low earnings volatility, such as non-catastrophic weather quota share.",
+     "As of April 1, 2025, coverage for excess of loss catastrophe reinsurance starts at $25.0 million per occurrence up to a loss of $410.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 10-K Item 1 (P1), Item 1A (P2), and Item 7 (P3).",
+    "claim": "Porch completed the formation of Porch Reciprocal Exchange and sold Homeowners of America to the Reciprocal for HOA's estimated surplus of approximately $105 million less $58 million under a prior surplus note, financed by a surplus note bringing total surplus notes held to approximately $106 million.",
     "facts": [
      "P1",
      "P2",
@@ -956,13 +993,12 @@
     "quotes": [
      "Effective January 1, 2025, we sold HOA to the Reciprocal, a newly formed reciprocal insurance exchange.",
      "In connection with the formation, we completed the sale of our homeowners insurance carrier, Homeowners of America (\u201cHOA\u201d), to the Reciprocal for a purchase price equal to HOA\u2019s estimated surplus at December 31, 2024, of approximately $105 million, less $58 million of principal and unpaid interest under a surplus note issued by HOA to Porch in 2023.",
-     "The purchase price was financed by a surplus note issued by the Reciprocal to Porch, bringing the total surplus notes held by Porch to approximately $106 million.",
-     "Following the sale, HOA became a wholly owned subsidiary of the Reciprocal and, as part of the transaction, subsequently transferred certain economics to the Reciprocal following Texas Department of Insurance (\u201cTDI\u201d) approval, including the 18.3 million Porch shares held by HOA."
+     "The purchase price was financed by a surplus note issued by the Reciprocal to Porch, bringing the total surplus notes held by Porch to approximately $106 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P3",
+    "basis": "Stated directly in Form 10-K Item 1 (P1) and Item 7 (P3).",
     "claim": "Porch changed its reportable and operating segments from Vertical Software and Insurance to Insurance Services, Software & Data, Consumer Services, and the Reciprocal Segment.",
     "facts": [
      "P1",
@@ -973,132 +1009,111 @@
      "As a result, our reportable segments, that are also our operating segments, changed from Vertical Software and Insurance prior to 2025 to Insurance Services, Software & Data, Consumer Services, and the Reciprocal Segment."
     ],
     "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P3",
-    "claim": "Porch\u2019s captive reinsurer began providing non-catastrophic weather quota share reinsurance to the Reciprocal under a contract approved for an initial 10 years, alongside excess of loss catastrophe coverage from $25.0 million up to $410.0 million per occurrence.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Effective April 1, 2025, our captive reinsurer provides reinsurance coverage for the Reciprocal for risks with low earnings volatility, such as non-catastrophic weather quota share.",
-     "As of April 1, 2025, coverage for excess of loss catastrophe reinsurance starts at $25.0 million per occurrence up to a loss of $410.0 million.",
-     "This contract was approved for an initial period of 10 years but can be cancelled by Porch or the Reciprocal each year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Porch completed privately negotiated refinancing transactions exchanging $96.8 million of its 0.75% Convertible Senior Unsecured Notes for $83.0 million of newly issued 9.00% Convertible Senior Unsecured Notes, issuing $51.0 million of additional new notes for cash, and repurchasing $47.5 million of old notes for $47.3 million and an additional $8.9 million for $8.4 million in cash.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On May 27, 2025, we completed a series of privately negotiated refinancing transactions with certain holders of our 0.75% Convertible Senior Unsecured Notes due in September 2026 (the \u201c2026 Notes\u201d).",
-     "Exchanged $96.8 million aggregate principal amount of 2026 Notes for $83.0 million aggregate principal amount of newly issued 9.00% Convertible Senior Unsecured Notes due 2030 (the \u201c2030 Notes\u201d),",
-     "Issued an additional $51.0 million aggregate principal amount of 2030 Notes for cash to the same investors that participated in the exchange, and",
-     "Repurchased $47.5 million aggregate principal amount of 2026 Notes for $47.3 million in cash.",
-     "We used these proceeds, along with existing cash on hand, to repurchase an additional $8.9 million aggregate principal amount of the 2026 Notes for $8.4 million cash in May 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Porch repurchased $12.8 million in aggregate principal amount of its convertible notes for $12.3 million, representing 96.5% par value, in privately negotiated transactions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "During the third quarter of 2025, we repurchased in a series of privately negotiated transactions $12.8 million in aggregate principal amount of our 2026 Notes for $12.3 million, representing 96.5% par value."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Porch made a $7.8 million repayment of its 0.75% Convertible Senior Unsecured Notes.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The increase from June 30, 2026, was primarily driven by Adjusted EBITDA (Excluding Reciprocal)1 of $44.5 million, partially offset by the $7.8 million repayment of the 0.75% Convertible Senior Unsecured Notes due September 2026 (the \u201c2026 Notes\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P10",
-    "claim": "Porch raised its full-year financial guidance for the remainder of the year alongside reporting second-quarter results.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "As a result, the Company raised guidance for the remainder of the year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Porch raised its full-year guidance for Porch-Owned Segments to $518m to $523m in revenue, $438m to $443m in gross profit, and $135m to $140m in Adjusted EBITDA.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "As a result, the Company raised guidance for the remainder of the year.",
-     "Revenue (Excluding Reciprocal)(b) | $518m to $523m | 24% to 25%",
-     "Gross Profit (Excluding Reciprocal)(b) | $438m to $443m | 27% to 29%",
-     "Adjusted EBITDA (Excluding Reciprocal)(b) | $135m to $140m | 76% to 83%"
-    ],
-    "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the cited items (10-K Item 1A and 10-Q Part II Item 1A risk factors, with mitigation metrics in 10-K Item 7).",
-    "claim": "Severe weather and catastrophe events, amplified by the pending Allied Trust acquisition's concentration in Louisiana and along the Gulf Coast, could produce losses exceeding combined reserves, reinsurance, and capital.",
+    "basis": "stated in [P2] and [P4], with recent operating growth context from [P6]",
+    "claim": "Porch does not own the Reciprocal, and its Insurance Services revenue and surplus note recoveries depend on the Reciprocal's growth, premium volume, management fee rate, and financial health.",
     "facts": [
      "P2",
-     "P3",
-     "P5",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "The acquired businesses write residential property insurance in states exposed to hurricanes, windstorms, hail, severe weather events, and other catastrophe events, with a significant concentration in Louisiana and along the Gulf Coast.",
-     "A single catastrophe event, or a series of events, could produce claims that exceed the combined reserves, reinsurance recoveries, and capital resources available to the Reciprocal and the acquired businesses."
+     "A decline in the business of the Reciprocal almost certainly could have as a consequence a decline in the total premiums paid and a correspondingly adverse effect on the amount of the management fees received by our Insurance Services segment.",
+     "The growth and financial health of the Reciprocal directly affect our operating revenue and the payment of interest and principal on surplus notes we hold is uncertain.",
+     "If the management fee rate retained by Porch\u2019s insurance services businesses is reduced or if there is a significant decrease in the amount of gross premiums written by the Reciprocal, revenues and profitability of the Company could be materially adversely affected."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1A and 10-Q Part II Item 1A, with captive details in 10-K Item 7).",
-    "claim": "Reinsurance may become unavailable at acceptable pricing, limits, or terms upon renewal, or reinsurance counterparties may fail to pay recoveries.",
+    "basis": "stated in [P2] and [P5], with reinsurance and loss-ratio context stated in [P1] and [P3]",
+    "claim": "Catastrophe and severe weather losses could exceed the Reciprocal's reserves, reinsurance recoveries, and capital, with geographic concentration set to increase in Louisiana and the Gulf Coast if the Allied Trust acquisition closes.",
     "facts": [
+     "P1",
      "P2",
      "P3",
      "P5"
     ],
     "quotes": [
-     "Reinsurance may be unavailable at current levels and prices, which may limit the Reciprocal\u2019s ability to write new business.",
-     "The combined policyholder count and geographic concentration may cause reinsurers to require higher premiums, higher attachment points or retentions, reduced limits, or less favorable terms when existing programs are renewed or new programs are placed for the combined operations, and reinsurance may not be available on acceptable terms or at all."
+     "The incidence, frequency and severity of weather events, extensive wildfires, and other catastrophes, particularly occurring where the Porch Reciprocal Exchange (the \u201cReciprocal\u201d) has a concentration of homeowners insurance policyholders, or that adversely impact consumer confidence and spending behavior in the industries we serve, could have a material effect on our results of operations and financial condition.",
+     "A single catastrophe event, or a series of events, could produce claims that exceed the combined reserves, reinsurance recoveries, and capital resources available to the Reciprocal and the acquired businesses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1A, 10-Q Item 2, and Q3 2026 8-K earnings release).",
-    "claim": "Porch's revenues, profitability, and surplus note recoveries depend directly on the Reciprocal's premium growth, financial health, and management fee rates.",
+    "basis": "stated in [P2], with contract structure stated in [P3]",
+    "claim": "Reinsurance may become unavailable at current levels and prices or counterparties may fail to pay, while capital held in Porch's captive reinsurer is restricted from use elsewhere without regulatory pre-approval.",
     "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Reinsurance may be unavailable at current levels and prices, which may limit the Reciprocal\u2019s ability to write new business.",
+     "Additionally, capital held by the captive cannot be used elsewhere within the Company without applicable regulatory pre-approval."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P2], and [P4], with surplus and ATM conversion context in [P3] and [P7]",
+    "claim": "State insurance regulation limits rates, dividends, and market exits, and a sustained decline in Porch's common stock price would negatively impact the Reciprocal's statutory surplus and could require additional capital support.",
+    "facts": [
+     "P1",
      "P2",
      "P3",
      "P4",
-     "P6"
+     "P7"
     ],
     "quotes": [
-     "If the management fee rate retained by Porch\u2019s insurance services businesses is reduced or if there is a significant decrease in the amount of gross premiums written by the Reciprocal, revenues and profitability of the Company could be materially adversely affected.",
-     "A decline in the business of the Reciprocal almost certainly could have as a consequence a decline in the total premiums paid and a correspondingly adverse effect on the amount of the management fees received by our Insurance Services segment."
+     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
+     "The speed with which we can change our rates in response to competition or in response to increasing costs depends, in part, on the willingness of state regulators to allow adequate rates for the business we write."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-Q financial statements, 10-K Item 1A, and Q3 2026 8-K earnings release).",
-    "claim": "Porch carried 12,376 in current debt and 391,879 in long-term debt (table in thousands) and incurred (44,507) in nine-month interest expense (table in thousands), creating cash-flow pressure and foreclosure risk upon any default on secured debt.",
+    "basis": "stated in [P5], with organic standalone performance context in [P6]",
+    "claim": "The pending Allied Trust acquisition requires approvals from the Texas Department of Insurance and other regulators and could be delayed, conditioned on capital or dividend restrictions, or terminated.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties.",
+     "A failure to complete the Acquisition could adversely affect the trading price of our common stock and our ability to pursue other opportunities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P5], with expected operational synergies and financial targets stated in [P6] and [P9]",
+    "claim": "Integrating Allied Trust poses operational execution risks, and Porch's proprietary property data may prove less predictive in new states such as Louisiana.",
+    "facts": [
+     "P5",
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "Our proprietary property data may prove less predictive in those markets.",
+     "In addition, the financial and operating results of the acquired businesses, once integrated and reported on a basis consistent with ours, may differ from the results reflected in our due diligence, and we expect to record goodwill and intangible assets that may become impaired."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in [P5] and [P7]",
+    "claim": "Issuing up to 5 million new Company ATM Shares, selling up to 10 million Reciprocal ATM Shares, and electing to pay up to $20.0 million of Allied Trust closing consideration and $50.0 million of deferred payments in common stock could dilute shareholders and pressure the share price.",
+    "facts": [
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "On October 30, 2026, Porch Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group, Inc. (the \u201cCompany\u201d or \u201cPorch\u201d) entered into a distribution agreement (the \u201cDistribution Agreement\u201d) with StoneX Financial Inc., acting as sales agent (the \u201cSales Agent\u201d), pursuant to which (i) the Reciprocal may offer and sell up to 10 million shares of the Company\u2019s common stock (the \u201cCommon Stock\u201d), par value $0.0001 per share (the \u201cReciprocal ATM Shares\u201d) it currently holds and (ii) the Company may offer, issue and sell up to 5 million shares of the Company\u2019s Common Stock (the \u201cCompany ATM Shares\u201d and, together with the Reciprocal ATM Shares, the \u201cShares\u201d), in each case from time to time through the Sales Agent.",
+     "A decline in our share price would increase the number of shares required to satisfy a given dollar amount, increasing the potential dilution, and we cannot predict the number of shares that ultimately will be delivered."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "debt balances stated in [F1] and risks stated in [P2], with cash flow, interest, and refinancing context in [F2], [F3], [P3], and [P6]",
+    "claim": "Porch carries 12,376 (table in thousands) of current debt and 391,879 (table in thousands) of long-term debt, and any default on its 2028 Notes or future secured debt could allow debtholders to foreclose on its assets if operating cash flow or refinancing access is insufficient.",
     "facts": [
      "F1",
      "F2",
@@ -1114,67 +1129,37 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-Q Part II Item 1A and Oct. 13, 2026 8-K).",
-    "claim": "The pending Allied Trust acquisition requires approvals from the Texas Department of Insurance and other regulators, who may delay closing, impose adverse conditions, or prevent completion.",
+    "basis": "reserve balance stated in [F1] and risks stated in [P2] and [P3], with statutory oversight and loss-ratio context in [P1]",
+    "claim": "Consolidated losses and loss adjustment expense reserves of 57,920 (table in thousands) rely on actuarial estimates and may prove inadequate if repair material, labor, or demand-surge inflation raises actual claims above rate approvals.",
     "facts": [
-     "P4",
-     "P5",
-     "P9"
-    ],
-    "quotes": [
-     "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties.",
-     "The review process may take longer than we expect, and regulators may impose conditions in connection with their approval, including requirements relating to capital maintenance, restrictions on dividends or intercompany transactions, or limitations on the conduct of business, any of which could reduce the anticipated benefits of the Acquisition or, if sufficiently adverse, permit HOA Holdco and the Reciprocal not to close."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited items (10-K Item 1A, 10-Q Part II Item 1A, and Oct. 30, 2026 8-K).",
-    "claim": "A decline in Porch's stock price would impair the Reciprocal's statutory surplus and increase stockholder dilution from share-settled acquisition consideration of up to $20.0 million in new shares and up to $50.0 million in shares held by the Reciprocal, alongside at-the-market offerings of up to 5 million Company shares and up to 10 million Reciprocal shares.",
-    "facts": [
-     "P2",
-     "P4",
-     "P5",
-     "P7"
-    ],
-    "quotes": [
-     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
-     "A decline in our share price would increase the number of shares required to satisfy a given dollar amount, increasing the potential dilution, and we cannot predict the number of shares that ultimately will be delivered.",
-     "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited items (10-K Item 1 and Item 1A, with surplus and ATM details in 10-K Item 7 and Oct. 30, 2026 8-K).",
-    "claim": "State insurance regulations governing rate approvals, policy non-renewals, risk-based capital, and dividend or affiliate-transaction restrictions can constrain underwriting flexibility and capital mobility.",
-    "facts": [
+     "F1",
      "P1",
      "P2",
-     "P3",
-     "P7"
+     "P3"
     ],
     "quotes": [
-     "The speed with which we can change our rates in response to competition or in response to increasing costs depends, in part, on the willingness of state regulators to allow adequate rates for the business we write.",
-     "Failure to maintain the Reciprocal\u2019s risk-based capital at the required levels could adversely affect its ability to maintain regulatory authority to conduct business."
+     "The Reciprocal\u2019s and our insurance captive\u2019s loss reserves may be inadequate to cover actual losses.",
+     "Although the Reciprocal believes that the balance of these reserves is adequate, such liabilities are necessarily dependent on estimates, the ultimate expense may be more or less than the amounts presented."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-Q Part II Item 1A, Q3 2026 8-K, and Oct. 13, 2026 8-K).",
-    "claim": "Expanding into new states such as Louisiana through the Allied Trust acquisition exposes Porch to unfamiliar regulatory, catastrophe, and litigation environments where its proprietary property data may be less predictive.",
+    "basis": "goodwill balance stated in [F1], impairment methodology in [P3], and acquisition impairment risk in [P5]",
+    "claim": "Porch carries 191,907 (table in thousands) of goodwill and expects to record additional goodwill and intangible assets from the Allied Trust acquisition that could become impaired.",
     "facts": [
+     "F1",
+     "P3",
      "P5",
-     "P6",
-     "P9"
+     "P6"
     ],
     "quotes": [
-     "The acquired businesses underwrite and write insurance policies in states in which we do not currently operate, including Louisiana, which will require us to maintain licenses, build distribution, and price risks in markets where we have limited operating experience and where regulatory, catastrophe, and litigation environments differ from those in which we operate today.",
-     "Our proprietary property data may prove less predictive in those markets."
+     "In addition, the financial and operating results of the acquired businesses, once integrated and reported on a basis consistent with ours, may differ from the results reflected in our due diligence, and we expect to record goodwill and intangible assets that may become impaired."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1A, with counter-evidence in 10-K Item 1, 10-Q Item 2, and Q3 2026 8-K).",
-    "claim": "Porch relies heavily on third-party property and consumer data providers as well as independent insurance agents, creating vulnerability to lost data access, privacy regulation, and agency channel disruption.",
+    "basis": "stated in [P2], with internal SaaS data footprint and agency growth metrics in [P1], [P4], and [P6]",
+    "claim": "Porch depends on third-party data providers and independent insurance agencies, and restrictions on data access or disruptions in agency relationships could impair underwriting differentiation and policy growth.",
     "facts": [
      "P1",
      "P2",
@@ -1188,84 +1173,442 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1 and Item 1A, 10-Q income statement, and Q2/Q3 2026 8-K releases).",
-    "claim": "Porch had a prior history of net losses and faces seasonal weather volatility, reporting a consolidated nine-month net loss of (3,201) (table in thousands) driven by a (16,276) net loss attributable to the Reciprocal (table in thousands).",
+    "basis": "stated in [P2] and [F2], with Porch-owned profitability and guidance in [F2], [P3], and [P6]",
+    "claim": "Porch had a history of losses and reported a consolidated net loss of (3,201) (table in thousands) in the latest year-to-date period, leaving sustained profitability uncertain.",
     "facts": [
      "F2",
-     "P1",
      "P2",
-     "P6",
-     "P10"
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Prior to the fourth quarter of fiscal 2024, we had a history of losses, and we may be unable to sustain profitability.",
-     "Property insurance claims fluctuate with seasonal weather; the highest exposure to catastrophic weather for the Reciprocal has historically occurred in the first half of the year."
+     "Prior to the fourth quarter of fiscal 2024, we had a history of losses, and we may be unable to sustain profitability."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1A and Item 7).",
-    "claim": "Loss and loss adjustment expense reserves at the Reciprocal and Porch's captive reinsurer may be inadequate if repair materials, labor costs, or demand surges inflate actual claims above estimates.",
+    "basis": "stated in [P2] and [P4], with technology expense figure in [F2]",
+    "claim": "Cyberattacks or data breaches involving stored consumer and property information, as well as legal and regulatory risks from AI and machine learning deployment, could cause significant mitigation costs and reputational harm.",
+    "facts": [
+     "F2",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "If personal, confidential, or sensitive user information or property data that we maintain and store is breached or otherwise accessed by unauthorized persons, it may be costly to mitigate, and our reputation could be harmed.",
+     "Implementation of artificial intelligence (\u201cAI\u201d) and machine learning technologies may result in legal and regulatory risks, reputational harm or have other adverse consequences to our business."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Insurance Services led Porch-owned segment revenue growth in the third quarter with revenue of $102.8 million, up 39% YoY, supported by $161.0 million of Reciprocal Written Premium and 42% YoY growth in Reciprocal Policies Written.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Porch-Owned Segments Revenue (Excluding Reciprocal)\u00b2, representing the revenue contributions across the Porch-owned businesses, was $140.8 million, up 22% YoY, led by Insurance Services revenue of $102.8 million, up 39% YoY.",
+     "Adjusted EBITDA (Excluding Reciprocal)\u00b2 of $44.5 million grew 116% YoY, largely driven by $161.0 million of Reciprocal Written Premium (\u201cRWP\u201d)\u00b9 and 42% YoY growth in Reciprocal Policies Written\u00b9."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Insurance premium expansion remains driven by expanding third-party insurance agency relationships and sales execution, with producing agency branch locations up 114% YoY, quote volumes up 79% YoY, and Reciprocal Written Premium from new customers up 178% YoY.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "This includes expanding our offering within our existing states and into new states, and recruiting a high performing sales team who will increase our quote volumes and therefore insurance gross written premiums by expanding the number of third-party insurance agency relationships and building deeper relationships with existing third-party insurance agencies.",
+     "Top-of-funnel expansion continued, with Q3 2026 producing agency branch locations rising 114% from Q3 2025 and quote volumes rising 79% from Q3 2025.",
+     "Conversion continued to track well above prior-year levels, supporting Q3 2026 RWP\u00b9 from new customers growth of 178% YoY."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Continued growth in Insurance Services remains dependent on the Reciprocal maintaining third-party independent agency relationships, limiting policy attrition, obtaining reinsurance at favorable levels and pricing, and building or raising statutory surplus.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The Reciprocal is highly dependent on maintaining successful relationships with third-party independent agents and agencies.",
+     "The insurance industry is highly competitive and regulated, and our growth depends on our ability to continue to obtain reinsurance at levels and pricing favorable to us, manage risk, limit policy attrition, obtain regulatory alignment on our business plans and financials, and continue to build generate surplus at the Reciprocal to support additional growth, which may require raising capital if unable to grow organically.",
+     "If any events occurred that impaired the Reciprocal's ability to grow or sustain its financial condition, including but not limited to reduced financial strength ratings, disruption in the independent agency relationships, significant catastrophe losses, or products not meeting customer demands, the Reciprocal could find it more difficult to retain its existing business and attract new business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "The Reciprocal's statutory surplus remains exposed to declines in Porch's common stock price because the Reciprocal holds approximately 16.2 million Porch shares and has a distribution agreement permitting it to sell up to 10 million of those shares for cash.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
+     "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law.",
+     "The Distribution Agreement provides the Reciprocal with an opportunity to convert a portion of these holdings into cash that qualify as fully admitted assets on its statutory financial statements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Home Factors provides property insights into approximately 90% of U.S. homes, supported an improvement in the Reciprocal's Attritional Loss Ratio from 22% to 17%, and includes plans to add new categories each quarter and monetize them with third parties.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "With insights into approximately 90% of U.S. homes, Home Factors provides interior and exterior attributes and condition data to help insurance carriers improve underwriting, pricing, and risk selection.",
+     "This data has enabled us to more accurately underwrite risk, and as a result, we have seen an improvement in the Reciprocal\u2019s Attritional Loss Ratio (see Non-GAAP Financial Measures in Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations for definition), which was 17% and 22% for the years ended December 31, 2025, and 2024, respectively.",
+     "We intend to add new categories of Home Factors, our property insights product, each quarter and further monetize Home Factors with third parties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Data-driven underwriting growth remains contingent on maintaining third-party property and consumer data access, avoiding restrictive privacy or regulatory limits, and replicating favorable Home Factors underwriting results without regulatory blocks.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In the future, any of these third parties could sever its relationship with us, change its data sharing policies, including making them more restrictive, or alter its own data collection practices, any of which could result in the loss of, or significant impairment to, our ability to access, collect and use personal information about their customers or consumers.",
+     "Our ability to access, collect and use personal information and property data provided by these parties may be adversely affected by federal and state laws and regulations that make it burdensome for us to collect or use personal information and property data.",
+     "\u2022We may not be able to consistently replicate favorable results with the use of Home Factors in underwriting for carriers other than HOA and the Reciprocal, which may be due to carrier location, modeling capabilities, or business goals of other carriers, and we may also face risks with regulators impacting our ability to use Home Factors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Software & Data growth remains driven by increasing SaaS product utilization, launching new products and features, and implementing price increases while maintaining retention, including Rynoh's 20% price increase.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We expect to launch new products and features to meet the needs of our customers, while increasing prices and maintaining high customer retention rates.",
+     "\u2022In Software and Data, Rynoh implemented a 20% price increase in the first quarter, in line with strategic pricing goals."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Continued Software & Data growth still depends on maintaining high customer retention during price increases while navigating industry competition and sensitivity to housing and financial market conditions.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We plan to continue increasing utilization of our SaaS products and maintain high customer retention.",
+     "\u2022Our brands and businesses, including the insurance business we manage, operate in an especially competitive and evolving industry.",
+     "\u2022Our brands and businesses are sensitive to general economic events, trends and conditions, including those related to, without limitation, the housing and financial markets, which impacts the demand and costs for a portion of our products and services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Consumer Services growth remains driven by partnerships with moving companies and major utilities to reach homebuyers early, cross-selling warranty and moving-related services, and launching offerings such as online packing services for movers.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "By leveraging existing partnerships with moving companies, major utilities, and other partnerships, we are expanding access to high-value homebuyers early in their journey, and fostering long-term customer relationships.",
+     "\u2022In Consumer Services, new services were launched including packing services online for movers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Continued Consumer Services growth remains dependent on increasing revenue per customer via conversion rates and additional touchpoints, keeping marketing channels cost-effective, and managing cost increases in parts, appliances, and home systems.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We plan on increasing this revenue by increasing the number of value-add touchpoints with customers and consumers for whom we have access rights by offering new services and by improving conversion rates and revenue generation of both existing and new services.",
+     "These efforts may not be successful or cost-effective.",
+     "\u2022Increases in parts, appliance and home system prices and other operating costs could adversely impact our business, financial position, results of operations and cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "The pending acquisition of Allied Trust's insurance carrier and managing general agency is still expected to expand operations into Louisiana and add approximately $200 million of Reciprocal Written Premium and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) in the first full year post-closing.",
+    "facts": [
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "With that organic foundation firmly in place, we are excited to further accelerate our growth through the pending acquisition of Allied Trust.",
+     "Porch Group, Inc. (\u201cPorch Group\u201d, \u201cPorch\u201d or the \u201cCompany\u201d) (NASDAQ: PRCH), a new kind of homeowners insurance company, today announced that Porch Insurance Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group have entered into a definitive agreement to acquire Allied Trust\u2019s insurance carrier and managing general agency, respectively.",
+     "Louisiana represented almost half of Allied Trust\u2019s 2025 premiums and would be a new state for the Reciprocal.",
+     "The acquisition is expected to add approximately $200 million of Reciprocal Written Premium (\u201cRWP\u201d)i and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) to Porch."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Realizing the Allied Trust growth contribution remains contingent on regulatory approvals from the Texas Department of Insurance and other regulators, integrating operations in new states including Louisiana where proprietary property data may be less predictive, and securing reinsurance for Gulf Coast catastrophe concentration.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties.",
+     "Our proprietary property data may prove less predictive in those markets.",
+     "The acquired businesses write residential property insurance in states exposed to hurricanes, windstorms, hail, severe weather events, and other catastrophe events, with a significant concentration in Louisiana and along the Gulf Coast.",
+     "Our ability to manage this increased exposure depends on the availability, cost, and performance of reinsurance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Porch's captive reinsurer continues to provide low-volatility non-catastrophic weather quota share coverage for the Reciprocal, which retained a higher proportion of premiums, lowered external reinsurance cost offsets, and contributed to a 10% consolidated revenue increase.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "The Reciprocal\u2019s and our insurance captive\u2019s loss reserves may be inadequate to cover actual losses.",
-     "Claims costs may be adversely affected by increases in costs of home repair as a result of inflated material costs, supply chain shortages, increases in labor costs, and demand surge during catastrophic events."
+     "Our intent is to continue this quota share as we believe this is a long-term strategy to create capital efficiency for the Reciprocal and attractive, lower-risk economics for Porch shareholders.",
+     "Total consolidated revenue including the Reciprocal increased by 10% compared to the prior year.",
+     "In 2025, our captive reinsurer retained a higher proportion of premiums than in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Ongoing contribution from the captive reinsurer still depends on Reciprocal attritional losses not rising unexpectedly, a favorable regulatory and tax environment, and third-party reinsurance pricing, capital levels, and regulatory requirements.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The success of the Company\u2019s captive reinsurance program is dependent on a number of factors outside the control of the Company, including, but not limited to, continued access to financial solutions, losses of the Reciprocal increasing unexpectedly, in particular, attritional losses, a favorable regulatory environment, and the overall tax position of the Company.",
+     "Whether the Reciprocal will continue to use the captive reinsurer going forward depends upon a number of circumstances, including the availability and pricing of reinsurance from third parties, the amount of capital it holds and regulatory requirements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Severe weather and catastrophe risk remains unchanged, including the risk that the pending Allied Trust acquisition's concentration in Louisiana and along the Gulf Coast could produce claims exceeding combined reserves, reinsurance recoveries, and capital resources.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The acquired businesses write residential property insurance in states exposed to hurricanes, windstorms, hail, severe weather events, and other catastrophe events, with a significant concentration in Louisiana and along the Gulf Coast.",
+     "A single catastrophe event, or a series of events, could produce claims that exceed the combined reserves, reinsurance recoveries, and capital resources available to the Reciprocal and the acquired businesses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Reinsurance availability, pricing, terms upon renewal, and counterparty credit and recovery dispute risks remain unchanged.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Reinsurance may be unavailable at current levels and prices, which may limit the Reciprocal\u2019s ability to write new business.",
+     "We are also exposed to the credit risk of reinsurers and to disputes over recoveries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Porch's operating revenues, profitability, and surplus note principal and interest recoveries remain directly tied to the Reciprocal's premium volume, financial health, and management fee rates.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The growth and financial health of the Reciprocal directly affect our operating revenue and the payment of interest and principal on surplus notes we hold is uncertain.",
+     "\u2022If the management fee rate retained by Porch\u2019s insurance services businesses is reduced or if there is a significant decrease in the amount of gross premiums written by the Reciprocal, revenues and profitability of the Company could be materially adversely affected.",
+     "A decline in the business of the Reciprocal almost certainly could have as a consequence a decline in the total premiums paid and a correspondingly adverse effect on the amount of the management fees received by our Insurance Services segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Porch's debt and interest obligations remain unchanged at 12,376 of current debt and 391,879 of long-term debt (table in thousands) alongside nine-month interest expense of (44,507) (table in thousands), with ongoing cash-service demands and foreclosure risk on secured debt default.",
+    "facts": [
+     "F1",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Current debt | 12,376 | 7,772",
+     "Long-term debt | 391,879 | 385,060",
+     "Interest expense | (15,126) | (13,963) | (44,507) | (37,265)",
+     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Regulatory approval risks for the pending Allied Trust acquisition remain unchanged, as the Texas Department of Insurance and other regulators could delay closing, impose adverse conditions, or prevent completion.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The review process may take longer than we expect, and regulators may impose conditions in connection with their approval, including requirements relating to capital maintenance, restrictions on dividends or intercompany transactions, or limitations on the conduct of business, any of which could reduce the anticipated benefits of the Acquisition or, if sufficiently adverse, permit HOA Holdco and the Reciprocal not to close."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Statutory surplus sensitivity and potential stockholder dilution remain unchanged across share-settled acquisition consideration of up to $20.0 million in new shares and up to $50.0 million in Reciprocal-held shares, plus at-the-market agreements covering up to 5 million Company shares and up to 10 million Reciprocal shares.",
+    "facts": [
+     "P2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Regulatory factors could, and a sustained decline in the price of our common stock would, negatively impact the Reciprocal\u2019s statutory surplus, which may require it to raise additional funds to enable the Reciprocal to adhere to regulatory requirements and maintain its financial stability rating.",
+     "HOA Holdco may elect to satisfy up to $20.0 million of the amount payable at the closing of the Acquisition in shares of our common stock, which we expect would be newly issued from our authorized but unissued shares.",
+     "The Reciprocal may elect to satisfy up to $50.0 million of the deferred payments in shares of our common stock that it already holds, a significant portion of the value of which is treated as a non-admitted asset in the Reciprocal\u2019s statutory filings.",
+     "A decline in our share price would increase the number of shares required to satisfy a given dollar amount, increasing the potential dilution, and we cannot predict the number of shares that ultimately will be delivered.",
+     "On October 30, 2026, Porch Reciprocal Exchange (the \u201cReciprocal\u201d) and Porch Group, Inc. (the \u201cCompany\u201d or \u201cPorch\u201d) entered into a distribution agreement (the \u201cDistribution Agreement\u201d) with StoneX Financial Inc., acting as sales agent (the \u201cSales Agent\u201d), pursuant to which (i) the Reciprocal may offer and sell up to 10 million shares of the Company\u2019s common stock (the \u201cCommon Stock\u201d), par value $0.0001 per share (the \u201cReciprocal ATM Shares\u201d) it currently holds and (ii) the Company may offer, issue and sell up to 5 million shares of the Company\u2019s Common Stock (the \u201cCompany ATM Shares\u201d and, together with the Reciprocal ATM Shares, the \u201cShares\u201d), in each case from time to time through the Sales Agent."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "State insurance regulatory constraints on rate approvals, policy cancellations and non-renewals, risk-based capital, affiliate transactions, and captive or subsidiary dividend mobility remain unchanged.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Regulations that limit policy cancellation and non-renewal may restrict the Reciprocal\u2019s ability to exit unprofitable markets.",
+     "\u2022Failure to maintain the Reciprocal\u2019s risk-based capital at the required levels could adversely affect its ability to maintain regulatory authority to conduct business.",
+     "Additionally, capital held by the captive cannot be used elsewhere within the Company without applicable regulatory pre-approval."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Geographic expansion risk from the pending Allied Trust acquisition in unfamiliar markets such as Louisiana\u2014with different regulatory, catastrophe, and litigation environments where proprietary property data may be less predictive\u2014remains unchanged.",
+    "facts": [
+     "P5",
+     "P9"
+    ],
+    "quotes": [
+     "The acquired businesses underwrite and write insurance policies in states in which we do not currently operate, including Louisiana, which will require us to maintain licenses, build distribution, and price risks in markets where we have limited operating experience and where regulatory, catastrophe, and litigation environments differ from those in which we operate today.",
+     "Our proprietary property data may prove less predictive in those markets.",
+     "Louisiana represented almost half of Allied Trust\u2019s 2025 premiums and would be a new state for the Reciprocal."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Dependence on third-party property and consumer data providers, exposure to privacy laws and regulations, and reliance on independent insurance agents and agencies remain unchanged.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "\u2022The processing, storage, use and disclosure of personal data is subject to a variety of federal and state laws and regulations and could give rise to liabilities and increased costs.",
+     "The Reciprocal is highly dependent on maintaining successful relationships with third-party independent agents and agencies.",
+     "If any events occurred that impaired the Reciprocal's ability to grow or sustain its financial condition, including but not limited to reduced financial strength ratings, disruption in the independent agency relationships, significant catastrophe losses, or products not meeting customer demands, the Reciprocal could find it more difficult to retain its existing business and attract new business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Historical net loss risk and seasonal weather volatility remain unchanged, with consolidated nine-month net loss at (3,201) (table in thousands) reflecting a (16,276) net loss attributable to the Reciprocal (table in thousands).",
+    "facts": [
+     "F2",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Net income (loss) | 9,013 | (982) | (3,201) | 11,001",
+     "Less: Net income (loss) attributable to the Reciprocal | (3,172) | 9,875 | (16,276) | 10,884",
+     "Property insurance claims fluctuate with seasonal weather; the highest exposure to catastrophic weather for the Reciprocal has historically occurred in the first half of the year.",
+     "\u2022Prior to the fourth quarter of fiscal 2024, we had a history of losses, and we may be unable to sustain profitability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items, with no evidence items effective after 2026-11-16T16:45:19Z",
+    "claim": "Reserve adequacy risk at the Reciprocal and Porch's captive reinsurer remains unchanged, as inflated material costs, labor costs, or catastrophe demand surges can push actual claims above reserve estimates.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "\u2022The Reciprocal\u2019s and our insurance captive\u2019s loss reserves may be inadequate to cover actual losses.",
+     "Claims costs may be adversely affected by increases in costs of home repair as a result of inflated material costs, supply chain shortages, increases in labor costs, and demand surge during catastrophic events.",
+     "Although the Reciprocal believes that the balance of these reserves is adequate, such liabilities are necessarily dependent on estimates, the ultimate expense may be more or less than the amounts presented."
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated directly in [P5] and [P9], with full transaction terms in [P9] truncated from the packet.",
-    "claim": "Will the pending acquisition of Allied Trust Insurance Company, Allied Underwriters LLC, and Lonestar Lagniappe Reinsurance Holdings, LLC receive required insurance regulatory approvals and close, what are the total purchase price and deferred payment terms omitted from the announcement, and how many shares of common stock will be delivered to satisfy up to $20.0 million at closing and up to $50.0 million of deferred payments?",
+    "basis": "Stated in P4, P5, and P9 that the acquisition remains subject to regulatory approvals and closing conditions with a termination date.",
+    "claim": "Will the Texas Department of Insurance and other applicable insurance regulators approve the pending Allied Trust acquisition without restrictive conditions, and will closing occur before the termination deadline?",
     "facts": [
+     "P4",
      "P5",
      "P9"
     ],
     "quotes": [
      "Completion of the Acquisition is subject to conditions, including the receipt of required approvals from the Texas Department of Insurance and other applicable insurance regulators, the absence of any legal restraint, and the accuracy of representations and the performance of covenants by the parties.",
-     "HOA Holdco may elect to satisfy up to $20.0 million of the amount payable at the closing of the Acquisition in shares of our common stock, which we expect would be newly issued from our authorized but unissued shares.",
-     "The Reciprocal may elect to satisfy up to $50.0 million of the deferred payments in shares of our common stock that it already holds, a significant portion of the value of which is treated as a non-admitted asset in the Reciprocal\u2019s statutory filings.",
-     "A decline in our share price would increase the number of shares required to satisfy a given dollar amount, increasing the potential dilution, and we cannot predict the number of shares that ultimately will be delivered."
+     "If the Acquisition has not been completed by April 1, 2027, as such date may be extended, either party may terminate the Purchase Agreement, and the Purchase Agreement may also be terminated by mutual consent, following an uncured breach, or upon a final and non-appealable legal restraint."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P5] and [P9].",
-    "claim": "If the Allied Trust acquisition closes, will Porch realize the expected approximately $200 million in Reciprocal Written Premium and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) in the first full year after closing, or will Gulf Coast catastrophe exposure, Louisiana market entry, and higher reinsurance costs offset those contributions?",
+    "basis": "Stated in P5 that stock elections are capped at these amounts while P4 notes purchase price adjustments based on statutory surplus at closing, and the full Purchase Agreement is omitted from the packet.",
+    "claim": "What are the total purchase price, statutory surplus adjustments, and exact mix of cash versus up to $20.0 million in newly issued shares at closing and up to $50.0 million in Reciprocal-held shares for deferred payments in the Allied Trust acquisition?",
     "facts": [
+     "P4",
      "P5",
      "P9"
     ],
     "quotes": [
-     "The acquisition is expected to add approximately $200 million of Reciprocal Written Premium (\u201cRWP\u201d)i and approximately $25 million of Adjusted EBITDA (Excluding Reciprocal) to Porch.",
-     "Following the closing, the properties insured through the Reciprocal and the acquired businesses will be more concentrated in catastrophe-exposed regions than the Reciprocal\u2019s current book of business.",
-     "The combined policyholder count and geographic concentration may cause reinsurers to require higher premiums, higher attachment points or retentions, reduced limits, or less favorable terms when existing programs are renewed or new programs are placed for the combined operations, and reinsurance may not be available on acceptable terms or at all."
+     "HOA Holdco may elect to satisfy up to $20.0 million of the amount payable at the closing of the Acquisition in shares of our common stock, which we expect would be newly issued from our authorized but unissued shares.",
+     "The Reciprocal may elect to satisfy up to $50.0 million of the deferred payments in shares of our common stock that it already holds, a significant portion of the value of which is treated as a non-admitted asset in the Reciprocal\u2019s statutory filings."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P7].",
-    "claim": "How many of the up to 10 million Reciprocal ATM Shares and up to 5 million Company ATM Shares will actually be sold under the Distribution Agreement with StoneX Financial Inc., and at what prices and net proceeds after the 1.5% sales commission?",
+    "basis": "Stated in P7 that the agreement was entered on October 30, 2026 with no obligation to sell shares, and no actual sales results are in the packet.",
+    "claim": "How many of the up to 10 million Reciprocal ATM shares and up to 5 million Company ATM shares have been or will be sold under the StoneX Financial Inc. distribution agreement, at what prices, and for what net proceeds?",
     "facts": [
      "P7"
     ],
     "quotes": [
      "Neither the Company nor the Reciprocal has an obligation to sell any of the Shares.",
-     "The Company or the Reciprocal, as applicable, will pay the Sales Agent a cash commission of 1.5% of the gross proceeds from sales of the Shares sold under the Distribution Agreement.",
      "The Company will not receive any proceeds from the sale of the Reciprocal ATM Shares."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2], [P4], and [P7].",
-    "claim": "What is the Reciprocal's statutory surplus and regulatory capital position, what regulatory discount or admissibility limit applies to its approximately 16.2 million shares of Porch Common Stock, and could a share price decline require Porch to provide additional financial support?",
+    "basis": "Stated in F1, P2, P3, and P6; the debt footnote detailing individual tranches, terms, and maturities as of September 30, 2026 is omitted from the packet.",
+    "claim": "What specific debt instruments, principal balances, interest rates, maturity dates, and covenants comprise the 12,376 (table in thousands) of current debt and 391,879 (table in thousands) of long-term debt on the balance sheet?",
+    "facts": [
+     "F1",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "The indenture governing our 2028 Notes contains, and instruments governing any future indebtedness of ours would likely contain, restrictions that may limit our flexibility in operating our business, and any default on our 2028 Notes or other future secured indebtedness could result in foreclosure by our secured debtholders on our assets.",
+     "The increase from June 30, 2026, was primarily driven by Adjusted EBITDA (Excluding Reciprocal)1 of $44.5 million, partially offset by the $7.8 million repayment of the 0.75% Convertible Senior Unsecured Notes due September 2026 (the \u201c2026 Notes\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, P4, and P7 that share-price declines and affiliate stock limitations affect statutory surplus, while P3 only reports statutory surplus as of December 31, 2025.",
+    "claim": "What are the Reciprocal's current statutory surplus and risk-based capital levels, how much of its 16.2 million Porch shares is non-admitted, and what share-price decline would trigger regulatory requirements or additional capital support from Porch?",
     "facts": [
      "P2",
+     "P3",
      "P4",
      "P7"
     ],
@@ -1276,81 +1619,66 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2], [P3], and [P6].",
-    "claim": "Whether and when will the Reciprocal generate sufficient statutory surplus and receive regulatory approval to pay principal and 9.75% plus SOFR interest on the $106 million of surplus notes held by Porch?",
+    "basis": "Stated in F2, P2, and P6; the surplus note contractual terms and regulatory payment conditions are not disclosed in the packet.",
+    "claim": "What are the maturity, subordination, and regulatory approval terms governing interest and principal repayment on the $106 million of surplus notes held by Porch, given the Reciprocal's net loss of (3,172) (table in thousands) in the latest quarter and (16,276) (table in thousands) for the year-to-date period?",
     "facts": [
+     "F2",
      "P2",
-     "P3",
      "P6"
     ],
     "quotes": [
-     "The growth and financial health of the Reciprocal directly affect our operating revenue and the payment of interest and principal on surplus notes we hold is uncertain.",
      "Porch also holds $106 million surplus notes from the Reciprocal, which are eliminated in consolidation.",
-     "The surplus notes bear interest of SOFR +9.75%."
+     "The growth and financial health of the Reciprocal directly affect our operating revenue and the payment of interest and principal on surplus notes we hold is uncertain."
     ],
     "support": "supported"
    },
    {
-    "basis": "Raised by [F1] balance sheet debt totals and [P2] risk factor references to secured notes, because the debt footnotes are omitted from the packet.",
-    "claim": "What are the principal balances, interest rates, maturity dates, collateral, and restrictive covenants of the secured notes and convertible notes making up 12,376 (table in thousands) of current debt and 391,879 (table in thousands) of long-term debt on the balance sheet?",
-    "facts": [
-     "F1",
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "The indenture governing our 2028 Notes contains, and instruments governing any future indebtedness of ours would likely contain, restrictions that may limit our flexibility in operating our business, and any default on our 2028 Notes or other future secured indebtedness could result in foreclosure by our secured debtholders on our assets.",
-     "In addition, servicing our indebtedness requires a significant amount of cash, and we may not have sufficient cash flow from our business to make such payments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P2] and [P3].",
-    "claim": "Will the Reciprocal continue utilizing Porch's captive reinsurer given that the initial 10 years contract can be cancelled annually, and what attachment points, limits, and pricing apply to the Reciprocal's external catastrophe and quota share reinsurance programs after the prior $25.0 million per-occurrence threshold?",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "This contract was approved for an initial period of 10 years but can be cancelled by Porch or the Reciprocal each year.",
-     "Whether the Reciprocal will continue to use the captive reinsurer going forward depends upon a number of circumstances, including the availability and pricing of reinsurance from third parties, the amount of capital it holds and regulatory requirements.",
-     "If the Reciprocal were to cease using the captive, our access to its capital and assets would remain restricted while it has runoff reinsurance obligations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P6].",
-    "claim": "Will Porch-Owned Segments achieve its raised full-year guidance ranges of $518m to $523m in Revenue (Excluding Reciprocal), $438m to $443m in Gross Profit (Excluding Reciprocal), and $135m to $140m in Adjusted EBITDA (Excluding Reciprocal)?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Actual results may vary due to a number of factors, and there is no guarantee that the Company will be able to achieve these results.",
-     "Porch is not providing reconciliations of expected Porch-Owned Segments Revenue (Excluding Reciprocal), Porch-Owned Segments Gross Profit (Excluding Reciprocal), or Adjusted EBITDA (Excluding Reciprocal) for future periods to the most directly comparable measures prepared in accordance with GAAP because the Company is unable to provide these reconciliations without unreasonable effort because certain information necessary to calculate such measures on a GAAP basis is unavailable or dependent on the timing of future events outside of the Company\u2019s control."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Observed by comparing [P1] and [P3] against [P4]; the operating metrics discussion in [P4] was omitted from the packet.",
-    "claim": "Why did the number of companies served in the home software-as-a-service space decline from approximately 24 thousand reported in the annual filing to approximately 18 thousand reported in the third-quarter filing?",
+    "basis": "Stated in P1, P2, P4, and P6; exact fee rates, captive quota-share percentages, and captive restricted capital amounts are omitted from the packet.",
+    "claim": "What are the contractual management fee and commission rates between Porch and the Reciprocal underlying the 55,066 (table in thousands) of quarterly revenue eliminations, and what are the quota-share terms, reserve liabilities, and restricted capital balance of Porch's captive reinsurer?",
     "facts": [
      "P1",
-     "P3",
-     "P4"
+     "P2",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Beyond insurance, Porch is a leader in the home software-as-a-service (\u201cSaaS\u201d) space, serving approximately 24 thousand companies across industries essential to the home-buying process\u2014home inspectors, title companies, mortgage providers, and more.",
-     "Beyond insurance, Porch is a leader in the home software-as-a-service (\u201cSaaS\u201d) space, serving approximately 18 thousand companies across industries essential to the home-buying process\u2014home inspectors, title companies, mortgage providers, and more."
+     "If the management fee rate retained by Porch\u2019s insurance services businesses is reduced or if there is a significant decrease in the amount of gross premiums written by the Reciprocal, revenues and profitability of the Company could be materially adversely affected.",
+     "Additionally, capital held by the captive cannot be used elsewhere within the Company without applicable regulatory pre-approval."
     ],
     "support": "supported"
    },
    {
-    "basis": "Referenced on the balance sheet in [F1], while Note 16 is omitted from the packet.",
-    "claim": "What pending legal proceedings, regulatory matters, or off-balance-sheet commitments exist under the commitments and contingencies footnote referenced on the balance sheet?",
+    "basis": "Stated in P3 and P5; current-year reinsurance renewal terms and prospective combined-entity terms are not disclosed in the packet.",
+    "claim": "What are the attachment points, limits, retention, and cost of the Reciprocal's current reinsurance program compared with the prior $25.0 million per-occurrence attachment up to $410.0 million and 7.5% quota share, and how will adding Allied Trust's Gulf Coast exposure alter renewal terms?",
     "facts": [
-     "F1"
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "As of April 1, 2025, coverage for excess of loss catastrophe reinsurance starts at $25.0 million per occurrence up to a loss of $410.0 million.",
+     "Additionally, the third-party quota share reinsurance contracts start immediately at 7.5% of property and casualty (\u201cP&C\u201d) losses, which includes catastrophe events, bringing the effective retention for the Reciprocal from $25.0 million per occurrence to $23.1 million per occurrence.",
+     "The combined policyholder count and geographic concentration may cause reinsurers to require higher premiums, higher attachment points or retentions, reduced limits, or less favorable terms when existing programs are renewed or new programs are placed for the combined operations, and reinsurance may not be available on acceptable terms or at all."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and P3; the goodwill footnote is omitted from the packet and the annual test date falls after the September 30, 2026 balance sheet date.",
+    "claim": "How is the 191,907 (table in thousands) of goodwill allocated across Porch's reportable segments, and did the annual impairment test indicate any impairment or reduced headroom?",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "We have selected October 1 as the date to perform our annual impairment test."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the balance sheet reference in F1 and mention of increased legal expenses in P3; Note 16 is omitted from the packet.",
+    "claim": "What material legal proceedings, loss contingencies, or off-balance-sheet commitments are disclosed in the commitments and contingencies footnote of the quarterly financial statements?",
+    "facts": [
+     "F1",
+     "P3"
     ],
     "quotes": [
      "Commitments and contingencies (Note 16)"
@@ -1358,16 +1686,42 @@
     "support": "supported"
    },
    {
-    "basis": "Observed in [F2] and [F3], while the tax footnote and nine-month MD&A discussion are omitted from the packet.",
-    "claim": "Why did cash income taxes paid reach $ 13,516 (table in thousands) over the nine-month period despite a consolidated pre-tax loss of (1,806) (table in thousands) and GAAP income tax expense of (1,395) (table in thousands)?",
+    "basis": "Stated in F2, P3, P5, and P7; the EPS and equity footnotes explaining dilutive securities and share count changes are omitted from the packet.",
+    "claim": "What instruments account for the difference between 113,526 (table in thousands) basic and 126,298 (table in thousands) diluted weighted-average shares, and what caused the Reciprocal's holdings of Porch shares to decrease from 18.3 million to approximately 16.2 million?",
+    "facts": [
+     "F2",
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Following the sale, HOA became a wholly owned subsidiary of the Reciprocal and, as part of the transaction, subsequently transferred certain economics to the Reciprocal following Texas Department of Insurance (\u201cTDI\u201d) approval, including the 18.3 million Porch shares held by HOA.",
+     "Shares held by the Reciprocal are treated as treasury shares for accounting purposes and are not considered outstanding under Delaware law for quorum or voting purposes; however, shares delivered to the seller would become outstanding shares held by an unaffiliated third party.",
+     "The Reciprocal currently holds approximately 16.2 million shares of Porch Common Stock, a significant portion of which constitutes a non-admitted asset or is subject to statutory investment limitations applicable to affiliate holdings under Texas insurance law."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 and F3; the Income Taxes footnote explaining cash tax payments, valuation allowances, and tax allocation between Porch and the Reciprocal is omitted from the packet.",
+    "claim": "Why did cash income taxes paid rise to $ 13,516 (table in thousands) compared with $ 451 (table in thousands) in the prior-year period, while GAAP income tax expense was (1,395) (table in thousands) on a pre-tax loss of (1,806) (table in thousands)?",
     "facts": [
      "F2",
      "F3"
     ],
     "quotes": [
-     "Income taxes paid | $ 13,516 | $ 451",
-     "Income (loss) before income taxes | 8,018 | 3,340 | (1,806) | 15,139",
-     "Income tax benefit (expense) | 995 | (4,322) | (1,395) | (4,138)"
+     "Income taxes paid | $ 13,516 | $ 451"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P6, where large portions of MD&A and the segment and cash flow tables are omitted from the packet.",
+    "claim": "What were the year-to-date segment results, standalone Porch-Owned Segments cash flows, and current-year Reciprocal loss ratios omitted from the quarterly MD&A and earnings release?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The following tables provide certain details of cash flows of Porch and cash flows of the Reciprocal Segment for the three months ended September 30, 2026 and 2025."
     ],
     "support": "supported"
    }
@@ -1377,5 +1731,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no usable tax rate in the filings"
+ "verdict_reason": "minority interests take too large a share of income"
 }
