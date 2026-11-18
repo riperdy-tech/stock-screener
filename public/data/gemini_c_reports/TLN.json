@@ -2,341 +2,283 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 124,
- "claims_supported": 108,
- "date": "2026-11-16T18:14:58Z",
+ "claims": 101,
+ "claims_supported": 97,
+ "date": "2026-11-18T06:49:13Z",
  "family": "operating",
  "flags": [
-  "Talen completed the Cornerstone Acquisition of the Waterford, Darby and Lawrenceburg gas plants, agreed for an aggregate purchase price of $3.45 billion, and the nine-month cash flow shows a Cornerstone Acquisition, net outflow of (2,569) (table in millions).",
-  "A Talen subsidiary (TEM) closed a capacity monetization that sold rights to approximately $1.5 billion of future PJM capacity cash flows, and the net proceeds of $1.3 billion were used to fund accelerated share repurchases.",
-  "The Board upsized the share repurchase program from $1.5 billion to an aggregate remaining capacity of $3 billion."
+  "Talen emerged from restructuring and applied fresh start accounting.",
+  "Talen closed the ERCOT Sale, recognizing a $564 million gain.",
+  "Talen closed the AWS Data Campus Sale, recognizing a $324 million gain."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-opus-5-5",
- "no_value_reason": "no usable tax rate in the filings",
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": "no positive earnings base",
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+ "source": "on request (tax fallback rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "Talen is a wholesale power generator that sells electricity, capacity and ancillary services into U.S. wholesale power markets, not to retail customers.",
+    "basis": "Stated directly in S0 (country and industry) and P1 (Item 1 Business).",
+    "claim": "Talen Energy Corporation is a United States independent power producer that owns and operates approximately 13.1 GW of power infrastructure (including 2.2 GW of nuclear power) and sells electricity, capacity, and ancillary services into wholesale markets.",
     "facts": [
+     "S0",
      "P1"
     ],
     "quotes": [
+     "We own and operate approximately 13.1 GW of power infrastructure in the United States, including 2.2 GW of nuclear power and a significant dispatchable fossil fleet.",
      "We produce and sell electricity, capacity, and ancillary services into wholesale U.S. power markets, with our generation fleet principally located in the Mid-Atlantic, Ohio, and Montana."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1; later changes stated in P4",
-    "claim": "At the 10-K date the fleet was approximately 13.1 GW, including 2.2 GW of nuclear power and a large dispatchable fossil fleet.",
+    "basis": "Stated directly in P1 (Item 1 Business).",
+    "claim": "Approximately 13 GW of Talen's generation capacity is located in PJM, where it sells capacity via Base Residual Auctions, Incremental Auctions, or bilateral transactions and sells energy and ancillary services into day-ahead, real-time, and bilateral markets.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "We own and operate approximately 13.1 GW of power infrastructure in the United States, including 2.2 GW of nuclear power and a significant dispatchable fossil fleet."
+     "Specifically, approximately 13 GW of our generation capacity is located in the MAAC (Mid-Atlantic Area Council), BGE (Baltimore Gas and Electric), and AEP (American Electric Power) regions of PJM.",
+     "We sell capacity through PJM Base Residual Auctions and, to the extent we are unable to sell capacity through the PJM BRAs, we may sell uncleared capacity through PJM Incremental Auctions or bilateral capacity transactions.",
+     "We sell energy/ancillary services into these markets."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "Most generation capacity and most revenue are in the PJM market.",
+    "basis": "Stated directly in P1 (Item 1 Business).",
+    "claim": "The remainder of Talen's generation capacity is at the Colstrip facility in Montana within WECC, where there are no centralized energy or capacity markets and Talen sells energy through direct bilateral transactions.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The substantial majority of our generation capacity is located in, and accordingly the majority of our revenues are derived from, PJM."
+     "WECC does not operate energy or capacity markets.",
+     "We enter into bilateral transactions for the direct sale of energy from our portion of the generation from Colstrip."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement (F2) and the MD&A table (P4)",
-    "claim": "Operating revenue has three lines: Energy and other revenues, Capacity revenues and unrealized derivative gains or losses. In Q3 2026 these were $1,187, 323 and (183), for a total of 1,327 (table in millions).",
+    "basis": "Stated directly in P1 (Item 1 Business) and P2 (Item 1A Risk Factors).",
+    "claim": "Under an amended June 2025 power purchase agreement, Talen is contracted to supply AWS with carbon-free nuclear power from Susquehanna ramping up to 1,920 MW no later than 2032 and running through 2042 at fixed prices.",
     "facts": [
-     "F2",
-     "P4"
+     "P1",
+     "P2"
     ],
     "quotes": [
-     "Energy and other revenues | $1,187 | $604 | $583",
-     "Capacity revenues | 323 | 166 | 157"
+     "At the full contract quantity, we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042 (with options to further extend its duration) for operations at the AWS Data Campus adjacent to Susquehanna (with the ability to deliver to other sites throughout Pennsylvania).",
+     "The AWS PPA, which has minimum commitments, has a power delivery schedule that ramps up over time, which is expected to achieve the full volume no later than 2032, with the potential to meaningfully accelerate.",
+     "The AWS PPA requires Talen to deliver carbon-free power to AWS over a significant contract term at anticipated premium prices."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A (P4)",
-    "claim": "Energy revenue comes from sales to RTOs/ISOs and from wholesale bilateral contracts.",
+    "basis": "Stated directly in P1 (Item 1 Business).",
+    "claim": "From June 1, 2025 through May 31, 2029 (or until transmission upgrades enter service), Brandon Shores and H.A. Wagner operate under RMR agreements providing annual fixed-cost payments of $145 million ($312/MWd) and $35 million ($137/MWd), respectively, plus variable cost and approved project reimbursements.",
     "facts": [
-     "P4"
+     "P1"
     ],
     "quotes": [
+     "The Brandon Shores and H.A. Wagner RMR arrangements extend the operating life of these plants through May 31, 2029, or until such time the necessary transmission upgrades are placed into service.",
+     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance.",
+     "We also receive separate reimbursement for variable costs and approved project investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P7 (Form 8-K Item 8.01).",
+    "claim": "In November 2026, Talen subsidiaries entered into bilateral PJM capacity sales with an investment grade counterparty covering UCAP from Guernsey Power Station (including 750 MW UCAP expected to generate approximately $100 million per year) and Waterford Energy Center.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On November 9, 2026, certain indirect wholly owned subsidiaries of Talen Energy Corporation, a Delaware corporation (the \u201cCompany\u201d), entered into ordinary course capacity sale transactions with an investment grade counterparty in PJM.",
+     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P8 (Form 8-K Item 8.01).",
+    "claim": "In its September 2026 Capacity Monetization Transaction, Talen transferred rights to approximately $1.5 billion of 2027/2028 and 2028/2029 PJM capacity cash flows while retaining energy sales, operational obligations, performance bonus rights, and deficiency penalty risks.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "Under the terms of the Capacity Monetization Transaction, TEM transferred the rights of future cash flows for certain cleared capacity with volumes of approximately 6.5 GW and 6.0 GW for the 2027/2028 and 2028/2029 delivery years, respectively, and aggregate revenues of approximately $1.5 billion.",
+     "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties.",
+     "The Capacity Monetization Transaction is only for capacity and does not include the sale of energy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P4 (Q3 2026 MD&A) and P6 (Q3 2026 earnings release).",
+    "claim": "For the nine months ended September 30, 2026, Operating Revenues were 3,203 (table in millions), comprising Energy and other revenues of $2,943 from RTO/ISO and bilateral sales, Capacity revenues of 767, and Unrealized gain (loss) on derivative instruments of (507).",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Operating Revenues | 1,327 | 812 | 3,203 | 1,832",
+     "Energy and other revenues | $1,187 | $604 | $2,943 | $1,552",
+     "Capacity revenues | 323 | 166 | 767 | 303",
+     "Unrealized gain (loss) on derivative instruments | (183) | 42 | (507) | (23)",
      "\u201cEnergy and other revenues\u201d relate to sales to an RTO or ISO, and sales under wholesale bilateral contracts."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "Capacity is sold mainly through PJM Base Residual Auctions. Uncleared capacity can be sold through Incremental Auctions or bilateral deals.",
+    "basis": "Stated directly in P2 (Item 1A Risk Factors) and P4 (Q3 2026 MD&A).",
+    "claim": "Energy revenues and margins are driven by wholesale power prices, which correlate strongly with natural gas prices (as gas plants often set marginal clearing prices) and rise or fall with winter and summer weather.",
     "facts": [
-     "P1"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "We sell capacity through PJM Base Residual Auctions and, to the extent we are unable to sell capacity through the PJM BRAs, we may sell uncleared capacity through PJM Incremental Auctions or bilateral capacity transactions."
+     "Because natural gas facilities often serve as the marginal, price-setting generating units, there is a strong positive correlation between the price of natural gas and the wholesale market price of electricity in the competitive power markets in which we operate.",
+     "During the third quarter 2026, PJM market conditions were influenced by weather, as periods of above-average temperatures increased electricity demand and contributed to higher settled on-peak power prices.",
+     "Conversely, mild winter or summer temperatures in the Mid-Atlantic tend to suppress electric demand and may result in lower overall settled prices that reduce our energy margin."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P3",
-    "claim": "For the 2028/2029 PJM Capacity Year the company cleared 10,180 MW at $325.00/MWd. For 2027/2028 it cleared 8,745 MW at $333.44/MWd.",
+    "basis": "Stated directly in P4 (Q3 2026 MD&A) and P6 (Q3 2026 earnings release).",
+    "claim": "Generation volume rose to 53.5 TWh (64.3% capacity factor) in the nine months ended September 30, 2026 from 28.1 TWh (47.2% capacity factor) in the same 2025 period, propelled by the Freedom, Guernsey, and Cornerstone acquisitions and higher output at Susquehanna and fossil units.",
     "facts": [
      "P4",
-     "P3"
+     "P6"
     ],
     "quotes": [
-     "In July 2026, the Company cleared 10,180 MW in the PJM BRA for the 2028/2029 PJM Capacity Year at a price of $325.00/MWd.",
-     "Talen cleared 8,745 MW at a price of $333.44/MWd."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Q3 2026 capacity revenue rose by $157 million. Management attributes this to higher cleared capacity prices and capacity from acquired plants.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Capacity revenues. $157 million favorable increase."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1; risk stated in P2",
-    "claim": "Talen has a long-term fixed-price contract with AWS for up to 1,920 MW of nuclear power from Susquehanna through 2042.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The Brandon Shores and H.A. Wagner plants run under reliability-must-run (RMR) agreements. These pay fixed annual amounts of $145 million and $35 million respectively, plus reimbursement of variable costs, until May 31, 2029 or until transmission upgrades are in service.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K (P7)",
-    "claim": "In November 2026, subsidiaries signed bilateral capacity sales with an investment-grade counterparty. These include 750 MW UCAP from Guernsey for the 2029/2030 through 2035/2036 delivery years, expected to bring about $100 million per year in revenue.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P4 and P8",
-    "claim": "Talen sold the rights to about $1.5 billion of future PJM capacity cash flows for 2027/2028 and 2028/2029 for net proceeds of $1.3 billion. It keeps the obligation to perform as a capacity resource.",
-    "facts": [
-     "P4",
-     "P8"
-    ],
-    "quotes": [
-     "The Capacity Monetization Transaction is only for capacity and does not include the sale of energy."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K risk factors (P2)",
-    "claim": "Energy margin depends mainly on the spread between power prices and natural gas prices.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our energy margin is influenced by the relationship between the prices of electricity and natural gas and, to a lesser extent, other fuels like coal and uranium."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "In Q3 2026 the PJM West Hub Day Ahead Peak price averaged $100.51/MWh, against $61.89 a year earlier. TETCO M-3 gas averaged 1.88 $/MMBtu, against 2.27.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "PJM West Hub Day Ahead Peak - $/MWh | $100.51 | $61.89"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Management attributes the Q3 2026 rise in energy revenue net of fuel to more generation from acquired plants and to higher prices and volumes at Susquehanna and the fossil fleet.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
+     "Total Generation (TWh) (a) | 23.9 | 11.1 | 53.5 | 28.1",
+     "Capacity Factor | 75.4% | 56.6% | 64.3% | 47.2%",
      "This is primarily related to: (i) an increase in generation volumes as a result of the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition that was completed in June 2026; and (ii) an increase in realized prices and generation volumes at Susquehanna and our other dispatchable fossil generation facilities."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release (P6)",
-    "claim": "Total generation was 23.9 TWh in Q3 2026, against 11.1 a year earlier. Capacity factor was 75.4%, against 56.6%.",
+    "basis": "Stated directly in P4 (Q3 2026 MD&A) and P6 (Q3 2026 earnings release).",
+    "claim": "Capacity revenues rose to 767 (table in millions) in the nine months ended September 30, 2026 from 303 in 2025 as PJM BRA cleared capacity prices for MAAC and PPL jumped from $49.49/MWd in 2024/2025 to $269.92 in 2025/2026, $329.17 in 2026/2027, $333.44 in 2027/2028, and $325.00 in 2028/2029.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Total Generation (TWh) (a) | 23.9 | 11.1 | 53.5 | 28.1",
-     "Capacity Factor | 75.4% | 56.6% | 64.3% | 47.2%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and P4",
-    "claim": "Fuel and energy purchases are the largest cost line. They were (626) in Q3 2026, against (259) a year earlier (table in millions).",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "Fuel and energy purchases | (626) | (259) | (367)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Susquehanna nuclear output in 2025 was about 17 TWh at an all-in cost of about $27 per MWh.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "at a low all-in cost of approximately $27 per MWh"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Nuclear fuel supply is fully contracted through the 2028 fuel load, which limits near-term exposure to uranium-cycle costs.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our nuclear fuel cycle is fully contracted through the 2028 fuel load, more than 50% contracted through 2029, and over 20% contracted through 2030."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and P4",
-    "claim": "Depreciation, amortization and accretion rose to (157) in Q3 2026 from (61) a year earlier (table in millions). Management attributes this to the acquired plants.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "This is primarily due to an increase in depreciation associated with the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition completed in June 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2, F3 and P6",
-    "claim": "Interest expense rose to (148) in Q3 2026 from (67) a year earlier (table in millions), as the acquisitions were funded with debt.",
-    "facts": [
-     "F2",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Such amounts were outweighed by unrealized mark-to-market losses on commodity derivative contracts and an increase in interest expense associated with acquisition financings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P2",
-    "claim": "Hedging produces mark-to-market swings in reported revenue. Unrealized derivative revenue was (183) in Q3 2026 against 42 a year earlier (table in millions), driven by higher forward power prices.",
-    "facts": [
-     "F2",
      "P4",
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "This is primarily related to the impact of higher forward power prices on the fair value of mark-to-market contracts that were entered into during the period.",
-     "Additionally, our commercial risk management activities could contribute to significant volatility in our financial results."
+     "Capacity revenues | 323 | 166 | 767 | 303",
+     "MAAC and PPL | $325.00 | $333.44 | $329.17 | $269.92 | $49.49",
+     "This is primarily related to: (i) higher cleared capacity prices, partially offset by lower volumes cleared through the 2026/2027 PJM BRA compared to the 2025/2026 PJM BRA; and (ii) higher capacity revenue due to the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition that was completed in June 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P4",
-    "claim": "Weather drives demand and prices. Hot summers and cold winters tend to raise revenue, and mild weather tends to lower it.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "In general, below-average temperatures in the winter and above-average temperatures in the summer tend to increase electricity demand, energy prices, and revenues."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1, with the countervailing risk in P2",
-    "claim": "Management expects PJM demand growth, led by data centers, to support capacity and energy prices.",
+    "basis": "Stated directly in P1 (Item 1 Business) and P2 (Item 1A Risk Factors).",
+    "claim": "Wholesale power demand in PJM is forecasted to grow at an average of 3.6% per year over the next 10-year period (approximately 66 GW of summer peak load by 2036), driven by data centers, high-performance computing, manufacturing re-shoring, and electrification.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
+     "Summer peak load is forecasted to grow by approximately 66 GW by 2036, or an average of 3.6% per year over the next 10-year period.",
      "Fundamental demand growth in PJM is expected to come from multiple sources, most notably high-performance computing and data center demand, continued re-shoring in the wake of the COVID-19 pandemic and associated supply chain disruptions, and continued electrification of the U.S. economy."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "The Nuclear PTC is a price-floor support for Susquehanna. It earned no credits in 2025 because market prices were above the threshold.",
+    "basis": "Stated directly in P2, P3, P4, and P6.",
+    "claim": "Hedging derivatives introduce large non-cash mark-to-market revenue swings\u2014such as (507) (table in millions) in unrealized derivative losses in Operating Revenues during the nine months ended September 30, 2026\u2014while Susquehanna's Nuclear PTC provides revenue support only below $44.60/MWh.",
     "facts": [
-     "P3"
+     "P2",
+     "P3",
+     "P4",
+     "P6"
     ],
     "quotes": [
+     "As a result, during periods of extreme price volatility or significant changes in market prices, our quarterly and annual results may be subject to fluctuations due to changes in fair values of commercial transactions caused by changes in market prices.",
+     "Unrealized gain (loss) on derivative instruments | (183) | 42 | (507) | (23)",
+     "The credit provides support beginning when annual gross receipts decline below an equivalent $44.60/MWh, increases ratably up to $3/MWh when annual gross receipts are equivalent to $26/MWh, and is subject to potential adjustments including inflation escalators and a five-times increase in value (up to $15/MWh) for meeting prevailing wage requirements (which we expect to meet).",
      "However, as prevailing market prices exceeded the PTC recognition threshold during the year ended December 31, 2025 (Successor), no such tax credits were earned for the period."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2",
-    "claim": "PJM Capacity Performance rules expose the company to penalties if its plants fail to perform during emergency events.",
+    "basis": "Stated directly in P1, P2, P4, and P6.",
+    "claim": "Fuel and energy purchases are Talen's largest operating cost\u2014reaching (1,546) (table in millions) in the nine months ended September 30, 2026 versus (677) in 2025\u2014and are driven by generation volume and volatile natural gas, coal, oil, uranium, transportation, and replacement power prices.",
     "facts": [
-     "P2"
+     "P1",
+     "P2",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "For example, certain of our generation facilities incurred Capacity Performance penalties for failing to meet PJM\u2019s Capacity Performance requirements during Winter Storm Elliott in 2022."
+     "Fuel and energy purchases | (626) | (259) | (1,546) | (677)",
+     "Market prices for electricity, capacity, ancillary services, natural gas, uranium, coal, and fuel oil are unpredictable and fluctuate substantially over relatively short periods.",
+     "A significant portion of our natural gas needs are satisfied through short-term transactions on a spot basis."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2, P3, P4, and P6 (and reflected in F1 balance sheet AROs).",
+    "claim": "Operation, maintenance and development expenses\u2014(542) (table in millions) in the nine months ended September 30, 2026\u2014are driven by operating costs at acquired facilities, planned Susquehanna refueling and fossil maintenance outages, regulatory compliance, PJM Capacity Performance penalties, and environmental/ARO remediation.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Operation, maintenance and development | (167) | (131) | (542) | (469)",
+     "This is primarily related to higher generation facility operating costs due to: (i) an increase associated with the Freedom and Guernsey acquisitions and the Cornerstone Acquisition, which were completed in November 2025 and June 2026, respectively; and (ii) operations and routine maintenance projects at our dispatchable fossil generation facilities.",
+     "Non-nuclear AROs and accrued environmental costs are expected to be funded with available cash on hand.",
+     "Under PJM\u2019s Capacity Performance model, we may be (and have in the past been) subject to substantial monetary penalties for failing to meet the Capacity Performance requirements set forth by PJM in certain emergency events, including extreme weather events."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated directly in P4 (Q3 2026 MD&A) and P6 (Q3 2026 earnings release).",
+    "claim": "General and administrative expenses increased to (198) (table in millions) in the nine months ended September 30, 2026 from (113) in 2025, driven primarily by higher stock-based compensation ($(120) versus $(42), table in millions) from higher RSU grant-date stock prices and PSU fair values.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "General and administrative (Includes stock-based compensation of $(51), $(15), $(120) and $(42)) | (76) | (38) | (198) | (113)",
+     "This is primarily due to an increase in grant date stock price of RSUs and grant date fair value of PSUs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F1 (10-Q balance sheet), P4 (Q3 2026 MD&A), and P6 (Q3 2026 earnings release).",
+    "claim": "Acquisition-related debt issuances and plant additions increased Long-term debt to 9,540 (table in millions) at September 30, 2026 from 6,782 at December 31, 2025, driving nine-month 2026 Depreciation, amortization and accretion up to (352) and Interest expense and other finance charges up to (481) (table in millions).",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Long-term debt (Notes 10 and 11) | 9,540 | 6,782",
+     "Depreciation, amortization and accretion | (157) | (61) | (352) | (205)",
+     "Interest expense and other finance charges | (148) | (67) | (481) | (203)",
+     "This is primarily due to an increase in depreciation associated with the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition completed in June 2026.",
+     "This is primarily related to the: (i) TLB-3 and the Unsecured Notes due 2034 and 2036, each issued in the fourth quarter 2025 in connection with the Freedom and Guernsey acquisitions that were completed in November 2025; and (ii) combined effect of financing transactions in April 2026 that included the issuances of the Unsecured Notes due 2031 and 2033 and redemption of the Secured Notes."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "Talen is an independent power producer with about 13.1 GW of US power infrastructure, including 2.2 GW of nuclear and a large dispatchable fossil fleet.",
+    "basis": "stated in P1",
+    "claim": "Talen owns and operates approximately 13.1 GW of U.S. power infrastructure, anchored by over 5.7 GW of low- and zero-carbon baseload generation including a 90% interest in the 2.5 GW Susquehanna nuclear facility.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "We own and operate approximately 13.1 GW of power infrastructure in the United States, including 2.2 GW of nuclear power and a significant dispatchable fossil fleet."
+     "We own and operate approximately 13.1 GW of power infrastructure in the United States, including 2.2 GW of nuclear power and a significant dispatchable fossil fleet.",
+     "We own and operate over 5.7 GW of low- and zero-carbon baseload generation, including a 90% interest in, the 2.5 GW Susquehanna facility, the seventh largest nuclear-powered generation facility in the U.S."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated by the company in the 10-K; there is no peer cost comparison",
-    "claim": "The Susquehanna nuclear plant is a low-cost baseload asset: about 17 TWh in 2025 at an all-in cost of about $27 per MWh.",
+    "basis": "stated in P1",
+    "claim": "In 2025, Susquehanna produced approximately 17 TWh of zero-carbon power at a low all-in cost of approximately $27 per MWh.",
     "facts": [
      "P1"
     ],
@@ -346,96 +288,36 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "A long-term, fixed-price PPA with AWS commits up to 1,920 MW of Susquehanna nuclear power through 2042.",
+    "basis": "stated in P1, P3, and P4",
+    "claim": "Talen expanded its natural gas fleet by adding 2.8 GW through Freedom and Guernsey in November 2025 and completing the Cornerstone Acquisition of approximately 2.5 GW in June 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "While Susquehanna has typically comprised approximately half of our total annual generation, we recently added an additional 2.8 GW of low-carbon generation\u2014the equivalent of more than the entire Susquehanna plant\u2014through our recent acquisitions of Freedom and Guernsey, which are some of the new newest, most highly-efficient H-class combined-cycle baseload natural gas facilities in the market.",
+     "In November 2025, the Company consummated the Freedom and Guernsey Acquisitions for an aggregate $3.8 billion which is subject to certain post-closing adjustments for net working capital and other customary items.",
+     "The addition of these assets to Talen\u2019s portfolio will increase generation capacity by approximately 2.5 GW of natural gas generation, substantially expanding Talen\u2019s presence in the western PJM market and adding additional efficient baseload generation assets to its fleet.",
+     "This is primarily related to higher generation facility operating costs due to: (i) an increase associated with the Freedom and Guernsey acquisitions and the Cornerstone Acquisition, which were completed in November 2025 and June 2026, respectively; and (ii) operations and routine maintenance projects at our dispatchable fossil generation facilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Approximately 13 GW of Talen's generation capacity is located in PJM, with natural gas plants situated near the Marcellus and Utica shale regions of Pennsylvania and Ohio.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "At the full contract quantity, we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042 (with options to further extend its duration) for operations at the AWS Data Campus adjacent to Susquehanna (with the ability to deliver to other sites throughout Pennsylvania)."
+     "Specifically, approximately 13 GW of our generation capacity is located in the MAAC (Mid-Atlantic Area Council), BGE (Baltimore Gas and Electric), and AEP (American Electric Power) regions of PJM.",
+     "Further, our natural gas generation assets are situated near the Marcellus and Utica shale regions of Pennsylvania and Ohio, which provide access to fuel from some of the largest producing natural gas regions in the U.S."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "RMR agreements pay fixed annual amounts to keep Brandon Shores and H.A. Wagner running until May 31, 2029.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A; the $3.45 billion aggregate Cornerstone purchase price is stated in the 10-K MD&A",
-    "claim": "Acquisitions of Freedom and Guernsey (November 2025) and Cornerstone (June 2026) expanded the fleet and drove Q3 2026 energy margin growth.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "This is primarily related to: (i) an increase in generation volumes as a result of the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition that was completed in June 2026; and (ii) an increase in realized prices and generation volumes at Susquehanna and our other dispatchable fossil generation facilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet and cash flow statement; the link to acquisitions is inferred from the cash flow line",
-    "claim": "Net property, plant and equipment rose to 11,858 from 7,546 (table in millions) between Dec. 31, 2025 and Sep. 30, 2026, reflecting a larger asset base.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release; volumes include acquired facilities only for periods owned",
-    "claim": "Q3 2026 total generation was 23.9 TWh versus 11.1, and capacity factor was 75.4% versus 56.6%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Capacity Factor | 75.4% | 56.6% | 64.3% | 47.2%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q income statement",
-    "claim": "Q3 2026 operating revenues were 1,327 versus 812, and capacity revenues were 323 versus 166 (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q and 10-K MD&A",
-    "claim": "Talen cleared 10,180 MW in the 2028/2029 PJM capacity auction at $325.00/MWd, after clearing 8,745 MW at $333.44/MWd for 2027/2028.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "In July 2026, the Company cleared 10,180 MW in the PJM BRA for the 2028/2029 PJM Capacity Year at a price of $325.00/MWd.",
-     "Talen cleared 8,745 MW at a price of $333.44/MWd."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 8-K dated November 2026",
-    "claim": "New multi-year capacity sales from Guernsey and Waterford to an investment-grade counterparty extend contracted revenue into 2029/2030 and later years.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K, which cites PJM forecasts",
-    "claim": "The company expects strong PJM demand growth, with supply additions skewed to intermittent rather than dispatchable resources.",
+    "basis": "stated in P1",
+    "claim": "PJM summer peak load is forecasted to grow by approximately 66 GW by 2036, or 3.6% per year, while the PJM new-build queue is predominantly intermittent and coal retirements continue.",
     "facts": [
      "P1"
     ],
@@ -446,374 +328,614 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "Fuel supply is a stated advantage: gas plants sit near the Marcellus and Utica shale regions, and nuclear fuel is fully contracted through the 2028 fuel load.",
+    "basis": "stated in P1",
+    "claim": "Under its June 2025 amended AWS PPA, Talen committed to supply up to 1,920 MW of carbon-free nuclear power from Susquehanna through 2042 at anticipated premium prices.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Further, our natural gas generation assets are situated near the Marcellus and Utica shale regions of Pennsylvania and Ohio, which provide access to fuel from some of the largest producing natural gas regions in the U.S.",
+     "The AWS PPA requires Talen to deliver carbon-free power to AWS over a significant contract term at anticipated premium prices.",
+     "At the full contract quantity, we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042 (with options to further extend its duration) for operations at the AWS Data Campus adjacent to Susquehanna (with the ability to deliver to other sites throughout Pennsylvania)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "In November 2026, Talen entered bilateral PJM capacity sales with an investment grade counterparty from Guernsey and Waterford for delivery years 2029/2030 through 2035/2036, including 750 MW UCAP expected to generate approximately $100 million per year.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On November 9, 2026, certain indirect wholly owned subsidiaries of Talen Energy Corporation, a Delaware corporation (the \u201cCompany\u201d), entered into ordinary course capacity sale transactions with an investment grade counterparty in PJM.",
+     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Talen operates 2.0 GW of capacity at Brandon Shores and H.A. Wagner under RMR agreements until May 31, 2029, earning annual fixed-cost payments of $145 million and $35 million plus variable cost reimbursement.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are currently running our H.A. Wagner and Brandon Shores facilities, totaling 2.0 GW of capacity, under RMR agreements pursuant to which we receive fixed monthly payments in exchange for continuing to operate those facilities until May 31, 2029 (beyond their previously scheduled 2025 retirement dates) to maintain grid and transmission reliability in the Baltimore area until upgrades can be completed.",
+     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P4",
+    "claim": "Cleared PJM capacity prices in the MAAC and PPL zones (table in $/MWd) increased from $49.49 in 2024/2025 to $333.44 in 2027/2028 and $325.00 in 2028/2029, where Talen cleared 10,180 MW.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "For the 2027/2028 PJM Capacity Year, the Company cleared 8,745 MW at a price of $333.44/MWd.",
+     "In July 2026, the Company cleared 10,180 MW in the PJM BRA for the 2028/2029 PJM Capacity Year at a price of $325.00/MWd."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "For the quarter ended September 30, 2026, Talen generated 23.9 TWh at a 75.4% capacity factor and grew Adjusted EBITDA by $306 million year over year to $669 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "For the quarter ended September 30, 2026, Talen reported GAAP Net Income (Loss) Attributable to Stockholders of $138 million, Adjusted EBITDA of $669 million, and Adjusted Free Cash Flow of $433 million.",
+     "Adjusted EBITDA increased by $306 million primarily due to the contribution of acquired generation facilities, higher settled power prices and generation volumes (net of realized hedges), and higher capacity revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "Talen's first-lien hedging program limits margin posting requirements, while its nuclear fuel cycle is fully contracted through the 2028 fuel load and over 50% contracted through 2029.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Specifically, our hedging strategy prioritizes a first lien-based hedging program, in which hedging counterparties are granted a lien in the same collateral securing our first-lien debt obligations, while minimizing exchange-based hedging and the associated margin requirements.",
      "Our nuclear fuel cycle is fully contracted through the 2028 fuel load, more than 50% contracted through 2029, and over 20% contracted through 2030."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "Q3 2026 market conditions were favourable: PJM West Hub peak power settled at $100.51 versus $61.89, while TETCO M-3 gas settled at 1.88 versus 2.27.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "PJM West Hub Day Ahead Peak - $/MWh | $100.51 | $61.89"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Threat: competitors may have more resources, newer plants or lower costs, and Talen has no regulated rate of return.",
+    "basis": "stated in P2",
+    "claim": "Talen lacks an assured regulated rate of return and competes in wholesale markets against rivals that may possess greater resources, newer facilities, lower costs, or more experience.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Some of our competitors may have advantages over us through access to greater resources, newer generation facilities, lower costs, or more experience.",
-     "Our business model depends on us successfully operating in a competitive environment and, unlike regulated utilities, we are not assured of any rate of return on capital investments through a regulated rate structure."
+     "Our business model depends on us successfully operating in a competitive environment and, unlike regulated utilities, we are not assured of any rate of return on capital investments through a regulated rate structure.",
+     "Some of our competitors may have advantages over us through access to greater resources, newer generation facilities, lower costs, or more experience."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Threat: the expected demand growth from data centers and other sources may not happen or last.",
+    "basis": "stated in P1 and P2",
+    "claim": "Talen's competitive position faces threats from government subsidies favoring competing generation technologies, state re-regulation proposals, and changes to PJM market rules.",
     "facts": [
+     "P1",
      "P2"
     ],
     "quotes": [
-     "Expected demand growth from the technology sector, manufacturing, and other uses of electricity, which has driven recent improvements in the outlook for the competitive wholesale power generation market, may not actually occur or be sustained."
+     "Competition may also be impacted by the actions of environmental and other governmental authorities, including but not limited to the establishment of legislation or subsidies favoring one form of generation over another (such as investment tax credits, production tax credits, and other factors); for example, the Inflation Reduction Act contains a number of tax credits and incentives relating to renewable energy projects and clean energy technologies.",
+     "PJM, the primary market in which we operate, is a competitive market and has from time-to-time considered new market rules, while some states have considered re-regulation measures that could result in more limited opportunities for competitive energy suppliers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Threat: more renewable generation can depress wholesale prices and hurt the economics of dispatchable units.",
+    "basis": "stated in P2",
+    "claim": "Expected demand growth from data centers and manufacturing may not be sustained, and renewable penetration, energy efficiency, or generation oversupply could depress wholesale power prices and dispatchable unit economics.",
     "facts": [
      "P2"
     ],
     "quotes": [
+     "A general economic slowdown or recession, a downturn in technology, manufacturing, or other sectors, an oversupply of generation resources or natural gas, or various other economic conditions could reduce electricity demand and prices.",
      "Furthermore, the penetration of renewable generation resources has, and may continue to have, negative effects on wholesale power prices and the economics of dispatchable generation units."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K and 10-Q",
-    "claim": "Threat: the business is concentrated in PJM and exposed to PJM market restructuring and auction delays.",
-    "facts": [
-     "P1",
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "The substantial majority of our generation capacity is located in, and accordingly the majority of our revenues are derived from, PJM.",
-     "Recently, PJM has delayed its auctions, which has resulted in less than 3 years between each auction and the start of the relevant PJM Capacity Year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Threat: Susquehanna supplies a large share of generation and earnings, so an outage there could significantly hurt the business.",
+    "basis": "stated in P2",
+    "claim": "Because natural gas units often set marginal wholesale electricity prices, declines or volatility in natural gas prices can compress Talen's energy margins and revenues.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Because Susquehanna accounts for a substantial amount of our generation and associated earnings, any adverse development in Susquehanna\u2019s operations, such as an unplanned outage or catastrophic event, could have a significant impact on our business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors and the 8-K dated 2026-09-25",
-    "claim": "Threat: PJM Capacity Performance penalties apply when units fail during emergencies, and Talen has incurred them before.",
-    "facts": [
-     "P2",
-     "P8"
-    ],
-    "quotes": [
-     "For example, certain of our generation facilities incurred Capacity Performance penalties for failing to meet PJM\u2019s Capacity Performance requirements during Winter Storm Elliott in 2022."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Threat: changes in gas prices affect energy margin, because gas units usually set PJM power prices.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
+     "Because natural gas facilities often serve as the marginal, price-setting generating units, there is a strong positive correlation between the price of natural gas and the wholesale market price of electricity in the competitive power markets in which we operate.",
      "A decline, or significant volatility, in the price of natural gas or other fuels could negatively impact energy margin and energy revenues."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q income statement and MD&A",
-    "claim": "Hedge mark-to-market losses reduced reported results: Q3 2026 unrealized derivative revenue was (183) versus 42 (table in millions), driven by higher forward power prices.",
+    "basis": "stated in P2 and P8",
+    "claim": "Unplanned outages or reduced output can cause lost margin, replacement power costs, PJM Capacity Performance penalties, and contractual remedies under the AWS PPA, even on monetized capacity.",
     "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "This is primarily related to the impact of higher forward power prices on the fair value of mark-to-market contracts that were entered into during the period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q statements; P4 attributes the interest increase to acquisition-related debt",
-    "claim": "Financial leverage rose: long-term debt was 9,540 versus 6,782, and Q3 interest expense was (148) versus (67) (tables in millions).",
-    "facts": [
-     "F1",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and the 8-K",
-    "claim": "Talen sold the rights to about $1.5 billion of future 2027/2028 and 2028/2029 PJM capacity cash flows and used the $1.3 billion of net proceeds for share buybacks, while keeping its operating and performance obligations.",
-    "facts": [
-     "P4",
+     "P2",
      "P8"
     ],
     "quotes": [
+     "Any unexpected failure, including those associated with breakdowns or forced outages, could result in reduced profitability, including from lost energy margin, costs to cover power at then-current market prices to satisfy our commitments, and additional repair and (or) ongoing maintenance costs.",
+     "Additionally, under the AWS PPA, we have committed to certain delivery quantities over time with agreed reliability standards and AWS may be entitled to contractual or other remedies in the event of our non-performance.",
      "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 8-K earnings release",
-    "claim": "Management's 2027 guidance cites strong PJM fundamentals and a full year from acquired assets.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We are also introducing our 2027 guidance that reflects strong PJM fundamentals and a full year of contributions from our recently acquired assets"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q Part II Item 1A",
-    "claim": "The Q3 2026 10-Q adds no new risk factors and refers back to the 2025 Annual Report.",
+    "basis": "stated in P1 and P2",
+    "claim": "Because Susquehanna accounts for a substantial share of generation and earnings, nuclear operational disruptions, limited fuel component suppliers, and permanent spent fuel disposal uncertainty pose concentrated risks.",
     "facts": [
-     "P5"
+     "P1",
+     "P2"
     ],
     "quotes": [
-     "For information related to the Company\u2019s risk factors, see"
+     "Because Susquehanna accounts for a substantial amount of our generation and associated earnings, any adverse development in Susquehanna\u2019s operations, such as an unplanned outage or catastrophic event, could have a significant impact on our business.",
+     "In addition, the costs associated with the nuclear fuel cycle are substantial, and suppliers of certain components and other materials required to produce nuclear fuel are limited."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Geographic concentration in the Mid-Atlantic and PJM exposes Talen to mild weather suppressing demand, regional disasters, and transmission congestion or outages that reduce realized plant prices.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Furthermore, as a significant portion of our power generation facilities are geographically concentrated in the mid-Atlantic area of the United States, we face increased risk that a natural or man-made disaster in that area could adversely affect a large part of our operations.",
+     "Furthermore, transmission constraints and outages, including line maintenance outages, can cause transmission congestion that negatively impacts energy prices at our facilities, which could affect the realized margins of our generation fleet."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Extensive regulatory and environmental compliance costs, cyberattacks, hedging collateral demands during price swings, and counterparty credit defaults could constrain liquidity or curtail operations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The costs of compliance with these requirements may be substantial, and any non-compliance or inability to comply could result in the suspension or curtailment of our electricity sales and power delivery; the cessation, suspension, delay, or limitation of our operations; premature unit retirements; and (or) monetary penalties, increased compliance obligations, or other types of sanctions.",
+     "The effectiveness of our commercial strategy may be dependent on the amount of collateral available to support our hedging arrangements, and these collateral requirements may be greater than we anticipate or are able to meet."
+    ],
+    "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the F1 balance sheet.",
-    "claim": "Unrestricted cash fell to 335 from 689 (table in millions) between the year-end and the latest quarter-end balance sheet.",
+    "basis": "stated in the cited item",
+    "claim": "As of September 30, 2026, Talen held $335 (table in millions) in cash and cash equivalents and 14 (table in millions) in restricted cash and cash equivalents, down from $689 and 63 (table in millions), respectively, at December 31, 2025, while total current liabilities of 1,290 (table in millions) exceeded total current assets of 1,152 (table in millions).",
     "facts": [
-     "F1"
+     "F1",
+     "P6"
     ],
     "quotes": [
-     "Cash and cash equivalents | $ 335 | $ 689"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1. Reading the line items as the cause is inferred.",
-    "claim": "Total current liabilities of 1,290 exceeded total current assets of 1,152 (table in millions) at the latest quarter-end; at year-end, current assets of 1,349 exceeded current liabilities of 1,050.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
+     "Cash and cash equivalents | $335 | $689",
+     "Restricted cash and cash equivalents | 14 | 63",
      "Total current assets | 1,152 | 1,349",
      "Total current liabilities | 1,290 | 1,050"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A.",
-    "claim": "At year-end 2025, total available liquidity was $1,589, made up of $689 of unrestricted cash and 900 of unutilized revolving credit capacity, plus $652 of additional letter-of-credit capacity (dollars in millions).",
+    "basis": "stated in the cited item",
+    "claim": "At December 31, 2025, total available liquidity was $1,589 (table in millions), comprising $689 (table in millions) of unrestricted cash and 900 (table in millions) of unutilized RCF capacity, alongside $652 (table in millions) of additional unutilized LC capacity after TES increased its RCF to $900 million and its LCF to $1.1 billion in November 2025.",
     "facts": [
      "P3"
     ],
     "quotes": [
      "Total available liquidity | $1,589 | $1,028",
-     "Unutilized RCF capacity (a) | 900 | 700"
+     "Unutilized RCF capacity (a) | 900 | 700",
+     "Additional unutilized LC capacity (b) | $652 | $526",
+     "Additionally, TES increased its RCF (including its revolving LC capacity) from $700 million to $900 million and increased its LCF from $900 million to $1.1 billion and extended its maturity from December 2026 to December 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6. The effect on the cash balance is inferred.",
-    "claim": "After the quarter-end, the $1.5 billion accelerated share repurchase was funded with $1.3 billion of net proceeds from the capacity monetization plus cash on hand.",
+    "basis": "stated in the cited item",
+    "claim": "On October 1, 2026, Talen closed a capacity monetization agreement transferring rights to approximately $1.5 billion in future PJM capacity cash flows for the 2027/2028 and 2028/2029 capacity years for net proceeds of $1.3 billion, which it used with cash on hand to fund a $1.5 billion accelerated share repurchase program.",
     "facts": [
+     "P4",
      "P6",
-     "P4"
-    ],
-    "quotes": [
-     "The repurchases were funded by net proceeds of $1.3 billion from the capacity monetization and cash on hand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Terms stated in the 8-K. The debt-like character is inferred from the financing-rate discount and the risks Talen retains.",
-    "claim": "The capacity monetization is a cash advance against future PJM capacity revenue, discounted at SOFR plus 200 basis points, and Talen keeps the performance obligations and penalty risk.",
-    "facts": [
      "P8"
     ],
     "quotes": [
-     "In exchange, TEM was advanced proceeds equal to the aggregate capacity revenues less a rate of SOFR plus 200 basis points, with SOFR to be calculated on October 1, 2026.",
+     "On October 1, 2026, TEM closed on a capacity monetization agreement to sell rights to approximately $1.5 billion in future PJM capacity cash flows for the 2027/2028 and 2028/2029 PJM Capacity Years and the Company used the net proceeds of $1.3 billion to fund accelerated share repurchases.",
+     "On October 1, 2026, Talen closed on a capacity monetization agreement to sell rights to approximately $1.5 billion in future PJM capacity cash flows for the 2027/2028 and 2028/2029 PJM capacity years and used the net proceeds of $1.3 billion to fund the ASR.",
      "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in F1.",
-    "claim": "Long-term debt rose to 9,540 from 6,782 (table in millions), with 29 due within one year.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Long-term debt (Notes 10 and 11) | 9,540 | 6,782",
-     "Long-term debt, due within one year (Notes 10 and 11) | 29 | 29"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1 and S0. The interpretation is inferred.",
-    "claim": "Total equity of 1,603 sits against total liabilities of 13,484 (table in millions), and accumulated deficit widened to (947) from (612).",
+    "basis": "stated in the cited item",
+    "claim": "Balance sheet debt increased in 2026 as long-term debt rose to 9,540 (table in millions) at September 30, 2026 from 6,782 (table in millions) at December 31, 2025, alongside $29 (table in millions) of long-term debt due within one year, $13,484 (table in millions) of total liabilities, and 1,603 (table in millions) of total equity.",
     "facts": [
-     "F1"
+     "F1",
+     "P6"
     ],
     "quotes": [
-     "Total Liabilities | 13,484 | 9,812",
+     "Long-term debt, due within one year | $29 | $29",
+     "Long-term debt | 9,540 | 6,782",
+     "Total Liabilities | $13,484 | $9,812",
      "Total Equity | 1,603 | 1,093"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2 and P4.",
-    "claim": "Interest expense and other finance charges more than doubled, to (148) from (67) for the quarter and to (481) from (203) for nine months (table in millions).",
+    "basis": "stated in the cited item",
+    "claim": "During the nine months ended September 30, 2026, Talen recorded 4,000 (table in millions) of debt issuances against (1,222) (table in millions) of debt repayments, while interest expense and other finance charges increased to (481) (table in millions) from (203) (table in millions) in the prior-year period.",
     "facts": [
      "F2",
-     "P4"
+     "F3",
+     "P4",
+     "P6"
     ],
     "quotes": [
+     "Debt issuances (Note 10) | 4,000 | 0",
+     "Debt repayments (Note 10) | (1,222) | (13)",
      "Interest expense and other finance charges (Note 10) | (148) | (67) | (481) | (203)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6 and F2. No coverage ratio is computed here.",
-    "claim": "Q3 Adjusted EBITDA was $669 million, against GAAP interest expense of 148 for the quarter (table in millions).",
+    "basis": "stated in the cited item",
+    "claim": "Beyond debt, Talen carried 500 (table in millions) in asset retirement obligations and accrued environmental costs and 734 (table in millions) in acquired contract liabilities at September 30, 2026, and had $228 (table in millions) of outstanding surety bonds at December 31, 2025.",
     "facts": [
-     "P6",
-     "F2"
+     "F1",
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Third quarter Adjusted EBITDA of $669 million and Adjusted Free Cash Flow of $433 million."
+     "Asset retirement obligations and accrued environmental costs (Note 8) | 500 | 494",
+     "Acquired contract liabilities (Note 17) | 734 | 662",
+     "Outstanding surety bonds | $228 | $234"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F3 and F1. The one-off nature of the settlement is inferred.",
-    "claim": "Nine-month operating cash flow was 490 versus 424 (table in millions), after a (500) cash settlement of stock-based awards.",
+    "basis": "stated in the cited item",
+    "claim": "Cash generation grew in the nine months ended September 30, 2026, with net cash provided by operating activities of 490 (table in millions) versus 424 (table in millions) a year earlier, Adjusted EBITDA of 1,516 (table in millions) versus 653 (table in millions), and Adjusted Free Cash Flow of 995 (table in millions) versus 232 (table in millions).",
     "facts": [
-     "F3"
+     "F3",
+     "P6"
     ],
     "quotes": [
      "Net cash provided by (used in) operating activities | 490 | 424",
-     "Cash settlement of stock-based awards (Note 13) | (500) | 0"
+     "Adjusted EBITDA | 669 | 363 | 1,516 | 653",
+     "Adjusted Free Cash Flow | 433 | 223 | 995 | 232"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F3. The timing interpretation is inferred.",
-    "claim": "Operating cash flow was helped by a 109 rise in accrued interest and offset by 68 of net collateral posted (table in millions).",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Accrued interest | 109 | 36",
-     "Collateral received (posted), net | (68) | (7)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F3 and F1. The cash implication is inferred.",
-    "claim": "GAAP net income of 109 for nine months was depressed by non-cash items: unrealized derivative losses of 535 were added back in operating cash flow (table in millions).",
-    "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [
-     "Unrealized (gains) losses on derivative instruments (Note 2) | 535 | 68"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the P6 reconciliation.",
-    "claim": "Nine-month Adjusted Free Cash Flow was 995 versus 232 (millions of dollars), after interest and finance charge payments of (303).",
+    "basis": "stated in the cited item",
+    "claim": "Talen reaffirmed 2026E guidance of $2,050 to $2,200 (table in millions) for Adjusted EBITDA and $1,225 to $1,325 (table in millions) for Adjusted Free Cash Flow, and introduced 2027E guidance of $2,500 to $2,850 (table in millions) for Adjusted EBITDA and $1,500 to $1,750 (table in millions) for Adjusted Free Cash Flow.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Interest and finance charge payments | (149) | (36) | (303) | (143)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6.",
-    "claim": "Talen reaffirmed 2026 guidance of $2,050 million - $2,200 million Adjusted EBITDA and $1,225 million - $1,325 million Adjusted Free Cash Flow; its 2027 guidance assumes interest payments of (585) to (615) (millions of dollars).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Reaffirming 2026 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges to $2,050 million - $2,200 million and $1,225 million - $1,325 million, respectively."
+     "Adjusted EBITDA | $2,050 | $2,200 | $2,500 | $2,850",
+     "Adjusted Free Cash Flow | $1,225 | $1,325 | $1,500 | $1,750"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in F3.",
-    "claim": "Nine-month cash uses included the Cornerstone Acquisition (2,569), PP&E capex (348), nuclear fuel (101) and share repurchases (502), funded by debt issuances of 4,000 net of repayments of (1,222) (table in millions).",
+    "basis": "stated in the cited item",
+    "claim": "Cash generation quality in the nine months ended September 30, 2026 reflects large non-cash and working-capital adjustments: GAAP net income was $109 (table in millions) after 535 (table in millions) of unrealized derivative losses, while operating cash flow of 490 (table in millions) absorbed a (500) (table in millions) cash settlement of stock-based awards alongside (348) (table in millions) of property, plant, and equipment expenditures and (101) (table in millions) of nuclear fuel expenditures.",
     "facts": [
-     "F3"
+     "F3",
+     "P6"
     ],
     "quotes": [
-     "Cornerstone Acquisition, net (Note 17) | (2,569) | 0",
-     "Debt issuances (Note 10) | 4,000 | 0",
-     "Share repurchases (Note 15) | (502) | (103)"
+     "Net Income (Loss) | $109 | $144",
+     "Unrealized (gains) losses on derivative instruments | 535 | 68",
+     "Cash settlement of stock-based awards | (500) | \u2014",
+     "Property, plant and equipment expenditures | (348) | (72)",
+     "Nuclear fuel expenditures | (101) | (94)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1. The ability to cover it is inferred.",
-    "claim": "Near-term maturities are small: 29 (table in millions) of long-term debt is due within one year.",
+    "basis": "stated in the cited item",
+    "claim": "Revenue visibility supporting future cash flow comes from the AWS PPA for 1,920 MW through 2042, RMR fixed-cost payments of $145 million and $35 million annually through May 31, 2029, cleared PJM capacity of 8,745 MW at $333.44/MWd and 10,180 MW at $325.00/MWd, and a 750 MW UCAP Guernsey capacity sale expected to generate approximately $100 million per year.",
     "facts": [
-     "F1"
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P7",
+     "P8"
     ],
     "quotes": [
-     "Long-term debt, due within one year (Notes 10 and 11) | 29 | 29"
+     "At the full contract quantity, we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042 (with options to further extend its duration) for operations at the AWS Data Campus adjacent to Susquehanna (with the ability to deliver to other sites throughout Pennsylvania).",
+     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance.",
+     "Talen cleared 8,745 MW at a price of $333.44/MWd.",
+     "In July 2026, the Company cleared 10,180 MW in the PJM BRA for the 2028/2029 PJM Capacity Year at a price of $325.00/MWd.",
+     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and P4.",
-    "claim": "Known long-dated debt includes $1.4 billion of 6.25% notes due 2034 and $1.3 billion of 6.50% notes due 2036, plus unsecured notes due 2031 and 2033 issued in the April refinancing that redeemed the Secured Notes.",
+    "basis": "stated in the cited item",
+    "claim": "Disclosed debt maturities include $29 (table in millions) of long-term debt due within one year at September 30, 2026, the $1.1 billion LCF maturing in December 2027, $1.4 billion of 6.25% Senior Unsecured Notes due 2034, and $1.3 billion of 6.50% Senior Unsecured Notes due 2036, which management expects to meet via financing activities, cash on hand, and operating cash flows.",
     "facts": [
+     "F1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Long-term debt, due within one year | $29 | $29",
+     "Additionally, TES increased its RCF (including its revolving LC capacity) from $700 million to $900 million and increased its LCF from $900 million to $1.1 billion and extended its maturity from December 2026 to December 2027.",
+     "In October 2025, TES issued (i) $1.4 billion in aggregate principal amount of 6.25% Senior Unsecured Notes due 2034, and (ii) $1.3 billion in aggregate principal amount of 6.50% Senior Unsecured Notes due 2036.",
+     "Based on current and anticipated levels of operations, industry conditions, and market environments in which we transact, we believe available liquidity from financing activities, cash on hand, and cash flows from operations (including changes in working capital) will be adequate to meet working capital, debt service, capital expenditures, and (or) other future requirements for the next twelve months and beyond."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in the cited items (10-K Items 1 and 7, 10-Q Item 2 MD&A, and Q3 2026 8-K earnings release)",
+    "claim": "Acquisitions of Freedom and Guernsey (2.8 GW) in 2025 for $3.8 billion and Cornerstone in June 2026 drove a $306 million year-over-year increase in third-quarter 2026 Adjusted EBITDA and underpin 2027 Adjusted EBITDA guidance of $2,500 million - $2,850 million (approximately 26% midpoint growth).",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "While Susquehanna has typically comprised approximately half of our total annual generation, we recently added an additional 2.8 GW of low-carbon generation\u2014the equivalent of more than the entire Susquehanna plant\u2014through our recent acquisitions of Freedom and Guernsey, which are some of the new newest, most highly-efficient H-class combined-cycle baseload natural gas facilities in the market.",
+     "In November 2025, the Company consummated the Freedom and Guernsey Acquisitions for an aggregate $3.8 billion which is subject to certain post-closing adjustments for net working capital and other customary items.",
+     "This is primarily related to: (i) an increase in generation volumes as a result of the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition that was completed in June 2026; and (ii) an increase in realized prices and generation volumes at Susquehanna and our other dispatchable fossil generation facilities.",
+     "Adjusted EBITDA increased by $306 million primarily due to the contribution of acquired generation facilities, higher settled power prices and generation volumes (net of realized hedges), and higher capacity revenues.",
+     "Introducing 2027 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges of $2,500 million - $2,850 million and $1,500 million - $1,750 million, representing approximately 26% and 27% growth at the midpoints compared with 2026 guidance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 (10-Q balance sheet), P2 (10-K Risk Factors), and P6 (Q3 2026 8-K earnings release); linkage to ongoing cash flow sustainability is inferred from debt growth and risk disclosures",
+    "claim": "Sustaining generation and cash flow growth from acquired and existing plants requires avoiding unplanned outages or fuel and transmission disruptions while servicing higher acquisition debt, as Long-term debt rose from 6,782 to 9,540 (table in millions) as of Sep. 30, 2026.",
+    "facts": [
+     "F1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Long-term debt (Notes 10 and 11) | 9,540 | 6,782",
+     "Any unexpected failure, including those associated with breakdowns or forced outages, could result in reduced profitability, including from lost energy margin, costs to cover power at then-current market prices to satisfy our commitments, and additional repair and (or) ongoing maintenance costs.",
+     "Adjusted Free Cash Flow increased by $210 million primarily due to the contribution of acquired generation facilities, higher settled power prices and generation volumes (net of realized hedges), and higher capacity revenues, which were partially offset by higher cash interest payments associated with acquisition financings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1 Business summarizing PJM long-term load forecasts)",
+    "claim": "PJM forecasts summer peak load growth of approximately 66 GW by 2036, or an average of 3.6% per year, driven by data center demand, re-shoring, and electrification while new-build supply is predominately intermittent and coal plants retire.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Summer peak load is forecasted to grow by approximately 66 GW by 2036, or an average of 3.6% per year over the next 10-year period.",
+     "Fundamental demand growth in PJM is expected to come from multiple sources, most notably high-performance computing and data center demand, continued re-shoring in the wake of the COVID-19 pandemic and associated supply chain disruptions, and continued electrification of the U.S. economy.",
+     "This demand growth is not currently well matched with increases in supply, as the PJM queue for new-build generation is predominately intermittent rather than dispatchable in nature.",
+     "In addition, continued PJM coal plant retirements are expected through the end of the decade."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors)",
+    "claim": "Demand-driven margin expansion depends on expected technology and manufacturing load growth actually materializing without being offset by economic slowdowns, energy efficiency, renewable generation penetration, mild weather, or lower natural gas prices.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Expected demand growth from the technology sector, manufacturing, and other uses of electricity, which has driven recent improvements in the outlook for the competitive wholesale power generation market, may not actually occur or be sustained.",
+     "A general economic slowdown or recession, a downturn in technology, manufacturing, or other sectors, an oversupply of generation resources or natural gas, or various other economic conditions could reduce electricity demand and prices.",
+     "Furthermore, the penetration of renewable generation resources has, and may continue to have, negative effects on wholesale power prices and the economics of dispatchable generation units."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 (10-Q income statement), P3 (10-K MD&A), and P4 (10-Q MD&A)",
+    "claim": "Capacity revenues reached 767 in the 9 months ended Sep. 30, 2026 versus 303 in the 2025 period (table in millions), supported by PJM BRA prices rising from $49.49 in 2024/2025 (table in $/MWd) to $333.44/MWd for 8,745 MW in 2027/2028 and $325.00/MWd for 10,180 MW in 2028/2029.",
+    "facts": [
+     "F2",
      "P3",
      "P4"
     ],
     "quotes": [
-     "In October 2025, TES issued (i) $1.4 billion in aggregate principal amount of 6.25% Senior Unsecured Notes due 2034, and (ii) $1.3 billion in aggregate principal amount of 6.50% Senior Unsecured Notes due 2036.",
-     "combined effect of financing transactions in April 2026 that included the issuances of the Unsecured Notes due 2031 and 2033 and redemption of the Secured Notes."
+     "Operating revenues | 323 | 166 | 767 | 303",
+     "Capacity revenues | 767 | 303 | 464",
+     "For the 2027/2028 PJM Capacity Year, the Company cleared 8,745 MW at a price of $333.44/MWd.",
+     "In July 2026, the Company cleared 10,180 MW in the PJM BRA for the 2028/2029 PJM Capacity Year at a price of $325.00/MWd.",
+     "MAAC and PPL | $325.00 | $333.44 | $329.17 | $269.92 | $49.49"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3. The renewal need is inferred.",
-    "claim": "At the 10-K date, the revolving credit facility was $900 million and the LC facility $1.1 billion, with the LC facility maturity extended to December 2027.",
+    "basis": "stated in P2 (10-K Risk Factors), P3 (10-K MD&A), and P8 (8-K Item 8.01)",
+    "claim": "Sustaining capacity revenue growth requires stable PJM auction rules without adverse regulatory or state interventions, and maintaining unit availability during emergency events to avoid Capacity Performance deficiency penalties\u2014risks Talen retained on its monetized 2027/2028 and 2028/2029 capacity.",
+    "facts": [
+     "P2",
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "Additionally, capacity prices may be affected by regulatory proceedings and (or) interventions by government stakeholders.",
+     "Furthermore, under PJM\u2019s Capacity Performance model, we may be (and have in the past been) subject to substantial monetary penalties for failing to meet the Capacity Performance requirements set forth by PJM in certain emergency events, including extreme weather events.",
+     "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1 Business) and P7 (November 12, 2026 Form 8-K)",
+    "claim": "Long-term contracted revenue growth is anchored by the AWS nuclear PPA ramping to 1,920 MW by 2032 through 2042, the RMR contracts providing $145 million and $35 million annually through May 31, 2029, and the November 9, 2026 Guernsey 7-Year Capacity Sale of 750 MW UCAP expected to generate approximately $100 million per year for 2029/2030 through 2035/2036.",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "At the full contract quantity, we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042 (with options to further extend its duration) for operations at the AWS Data Campus adjacent to Susquehanna (with the ability to deliver to other sites throughout Pennsylvania).",
+     "The AWS PPA, which has minimum commitments, has a power delivery schedule that ramps up over time, which is expected to achieve the full volume no later than 2032, with the potential to meaningfully accelerate.",
+     "The Brandon Shores and H.A. Wagner RMR arrangements extend the operating life of these plants through May 31, 2029, or until such time the necessary transmission upgrades are placed into service.",
+     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance.",
+     "On November 9, 2026, certain indirect wholly owned subsidiaries of Talen Energy Corporation, a Delaware corporation (the \u201cCompany\u201d), entered into ordinary course capacity sale transactions with an investment grade counterparty in PJM.",
+     "Specifically, the Company\u2019s wholly owned indirect subsidiary, Guernsey Power Station LLC, a Delaware limited liability company (\u201cGuernsey\u201d), entered into two capacity sale transactions with the investment grade counterparty, for the sale of available installed capacity (\u201cICAP\u201d) that converts to Unit-Specific Accredited Unforced Capacity (\u201cUCAP\u201d) from Guernsey Power Station, an 1,836 megawatts (\u201cMW\u201d) (summer rating) natural gas-fired combined cycle generation plant located in Guernsey County, Ohio, for (a) 750 MW UCAP for PJM Delivery Years 2029/2030 through 2035/2036 (the \u201cGuernsey 7-Year Capacity Sale\u201d); and (b) the remainder of 588 MW UCAP from Guernsey Power Station for PJM Delivery Year 2029/2030.",
+     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1 Business) and P2 (10-K Item 1A Risk Factors)",
+    "claim": "Realizing long-term contracted revenue growth requires timely transmission reconfiguration for the AWS PPA's spring 2027 front-of-the-meter transition, reliable operation of Susquehanna without extended refueling or unplanned outages, and counterparty performance under the contracts.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The existing Susquehanna co-located load AWS PPA between us and AWS will begin transitioning to a \u201cfront-of-the-meter\u201d arrangement after the completion of transmission reconfiguration projects expected to occur in spring 2026 with full transition expected to occur in spring 2027.",
+     "In addition, a significant operational disruption at Susquehanna could impair our ability to meet our PJM Capacity Performance requirements and our obligations under long-term power supply contracts, including under the AWS PPA.",
+     "Additionally, under the AWS PPA, we have committed to certain delivery quantities over time with agreed reliability standards and AWS may be entitled to contractual or other remedies in the event of our non-performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (10-Q MD&A) and P6 (Q3 2026 8-K earnings release)",
+    "claim": "Management targets Adjusted Free Cash Flow per share growth through an upsized $3.0 billion share repurchase program through December 31, 2028, including a $1.5 billion accelerated share repurchase program under which 3,811,460 shares were retired on October 1, 2026.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "He continued, \u201cGrowing demand across PJM strengthens the outlook for our fleet and supports our focus on increasing Adjusted Free Cash Flow per share over the coming years.\u201d",
+     "Announced $1.5 billion accelerated share repurchase program (\u201cASR\u201d) expected to be complete by the end of the first quarter 2027. Upsized share repurchase program (\u201cSRP\u201d) to $3.0 billion through December 31, 2028 (including the ASR).",
+     "On October 1, 2026, the Company received and retired 3,811,460 shares of TEC common stock repurchased under ASR program with multiple dealers, which is equivalent to 80% of the aggregate $1.5 billion value of the ASR program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 (10-Q balance sheet) and P2 (10-K Risk Factors); constraint on future repurchases is inferred from lower cash balance and negative working capital at September 30, 2026",
+    "claim": "Continuing share repurchases without straining liquidity depends on sustained operating cash flow and manageable hedge collateral demands, given Cash and cash equivalents decreased to $ 335 from $ 689 (table in millions) while Total current liabilities of 1,290 exceeded Total current assets of 1,152 (table in millions) as of Sep. 30, 2026.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 335 | $ 689",
+     "Total current assets | 1,152 | 1,349",
+     "Total current liabilities | 1,290 | 1,050",
+     "Our ability to increase liquidity could be limited by the terms of our debt or other agreements, unwillingness of financing sources to extend us credit or other capital, overall financial market conditions, or other factors.",
+     "Furthermore, significant movements in market prices may require us to provide cash collateral or LCs in very large amounts (for instance, as happened prior to the Restructuring)."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in P3",
+    "claim": "Talen emerged from restructuring and applied fresh start accounting.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The operating results for the period from May 18 through December 31, 2023 (Successor) and for the period from January 1 through May 17, 2023 (Predecessor) are not comparable with the operating results for the years presented in this MD&A due to the application of fresh start accounting after our Emergence from Restructuring in May 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Talen closed the ERCOT Sale, recognizing a $564 million gain.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "This primarily consisted of: (i) $564 million gain from the ERCOT Sale and (ii) $324 million gain from the AWS Data Campus Sale, both of which closed in 2024; and (iii) a $22 million gain from the sale of the Camden and Dartmouth in September 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Talen closed the AWS Data Campus Sale, recognizing a $324 million gain.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "This primarily consisted of: (i) $564 million gain from the ERCOT Sale and (ii) $324 million gain from the AWS Data Campus Sale, both of which closed in 2024; and (iii) a $22 million gain from the sale of the Camden and Dartmouth in September 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Brandon Shores and H.A. Wagner began operating under RMR arrangements providing annual fixed-cost payments of $145 million and $35 million, respectively.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Beginning June 1, 2025, the RMR arrangements provide an annual fixed-cost payment of $145 million ($312/MWd) for Brandon Shores and $35 million ($137/MWd) for H.A. Wagner, which includes a performance \u201chold back\u201d of $5 million per year for Brandon Shores and $2.5 million per year for H.A. Wagner, each to be paid out based on unit performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Talen entered into an amended AWS PPA to supply up to 1,920 MW of carbon-free nuclear power from Susquehanna.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In June 2025, we entered into an amended AWS PPA to expand, and eventually replace, the existing PPA with AWS.",
+     "At the full contract quantity, we will provide AWS with 1,920 MW of carbon-free nuclear power through 2042 (with options to further extend its duration) for operations at the AWS Data Campus adjacent to Susquehanna (with the ability to deliver to other sites throughout Pennsylvania)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Talen derecognized its Nautilus assets, reducing amortization and depreciation.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "This is primarily due to a decrease in amortization and depreciation because of the derecognition of Nautilus assets in June 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Talen sold Camden and Dartmouth, recognizing a $22 million gain.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "This primarily consisted of: (i) $564 million gain from the ERCOT Sale and (ii) $324 million gain from the AWS Data Campus Sale, both of which closed in 2024; and (iii) a $22 million gain from the sale of the Camden and Dartmouth in September 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "TES issued $1.4 billion of 6.25% Senior Unsecured Notes and $1.3 billion of 6.50% Senior Unsecured Notes.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In October 2025, TES issued (i) $1.4 billion in aggregate principal amount of 6.25% Senior Unsecured Notes due 2034, and (ii) $1.3 billion in aggregate principal amount of 6.50% Senior Unsecured Notes due 2036."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P3, and P4",
+    "claim": "Talen consummated the Freedom and Guernsey Acquisitions for an aggregate $3.8 billion, adding 2.8 GW of low-carbon natural gas generation.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In November 2025, the Company consummated the Freedom and Guernsey Acquisitions for an aggregate $3.8 billion which is subject to certain post-closing adjustments for net working capital and other customary items.",
+     "While Susquehanna has typically comprised approximately half of our total annual generation, we recently added an additional 2.8 GW of low-carbon generation\u2014the equivalent of more than the entire Susquehanna plant\u2014through our recent acquisitions of Freedom and Guernsey, which are some of the new newest, most highly-efficient H-class combined-cycle baseload natural gas facilities in the market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "TES increased its RCF from $700 million to $900 million, increased its LCF from $900 million to $1.1 billion, and extended its maturity.",
     "facts": [
      "P3"
     ],
@@ -823,107 +945,46 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K.",
-    "claim": "Talen hedges mainly through first-lien arrangements to limit margin calls, but warns that collateral needs can lower available liquidity.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Our strong balance sheet provides ample capacity and counterparty appetite for lien-based hedging, which limits the use of margin posting requirements.",
-     "Because we are required to collateralize hedges that settle in future delivery periods, but do not receive settlements for electric generation until delivery, collateral requirements could result in periods of lower available liquidity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3. No updated 10-Q liquidity statement is in the packet.",
-    "claim": "In the 10-K, management stated that liquidity would be adequate for the next twelve months and beyond.",
+    "basis": "stated in P3",
+    "claim": "Talen cleared 8,745 MW in the PJM Base Residual Auction at a price of $333.44/MWd.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Based on current and anticipated levels of operations, industry conditions, and market environments in which we transact, we believe available liquidity from financing activities, cash on hand, and cash flows from operations (including changes in working capital) will be adequate to meet working capital, debt service, capital expenditures, and (or) other future requirements for the next twelve months and beyond."
+     "In December 2025, PJM announced the results of the 2027/2028 PJM BRA.",
+     "Talen cleared 8,745 MW at a price of $333.44/MWd."
     ],
     "support": "supported"
-   }
-  ],
-  "growth_thesis": [
+   },
    {
-    "basis": "Stated in P4 and P6",
-    "claim": "Driver: acquired generation. Third-quarter total generation rose to 23.9 TWh from 11.1 TWh, and capacity factor rose to 75.4% from 56.6%. Management attributes the energy margin gain to the Freedom, Guernsey and Cornerstone acquisitions and to higher volumes at existing plants.",
+    "basis": "stated in P3 and P4",
+    "claim": "Talen completed the Cornerstone Acquisition of approximately 2.5 GW of natural gas generation (Waterford, Darby, and Lawrenceburg) under an agreement for $3.45 billion, consisting of $2.55 billion in cash and 2,400,000 shares.",
     "facts": [
-     "P6",
+     "P3",
      "P4"
     ],
     "quotes": [
+     "On January 15, 2026, we entered into the Cornerstone Merger Agreement to acquire from affiliates of Energy Capital Partners (\u201cECP\u201d) the 875 MW Waterford Energy Center and 456 MW Darby Generating Station, both located in Ohio, and the 1,120 MW Lawrenceburg Power Plant located in Indiana, for an aggregate purchase price of $3.45 billion, consisting of $2.55 billion in cash, subject to working capital and other customary adjustments, and 2,400,000 shares of Talen common stock, valued at approximately $900 million at the time of the entry into the Cornerstone Merger Agreement.",
+     "The addition of these assets to Talen\u2019s portfolio will increase generation capacity by approximately 2.5 GW of natural gas generation, substantially expanding Talen\u2019s presence in the western PJM market and adding additional efficient baseload generation assets to its fleet.",
      "This is primarily related to: (i) an increase in generation volumes as a result of the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition that was completed in June 2026; and (ii) an increase in realized prices and generation volumes at Susquehanna and our other dispatchable fossil generation facilities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1 and F3",
-    "claim": "The asset base grew through acquisition. Property, plant and equipment, net was 11,858 against 7,546 (table in millions). The Cornerstone Acquisition used (2,569) of investing cash in nine months (table in millions).",
+    "basis": "stated in P4",
+    "claim": "Talen completed financing transactions that included issuances of Unsecured Notes and redemption of the Secured Notes.",
     "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1, F2 and P6",
-    "claim": "Condition: acquisition-driven growth must outrun its financing cost. Long-term debt rose to 9,540 from 6,782, and third-quarter interest expense rose to (148) from (67) (tables in millions). Management says the higher interest outweighed operating gains in GAAP net income.",
-    "facts": [
-     "F1",
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "Such amounts were outweighed by unrealized mark-to-market losses on commodity derivative contracts and an increase in interest expense associated with acquisition financings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4; figures from F2 and P4",
-    "claim": "Driver: higher PJM power prices. Third-quarter energy and other revenues were 1,187 against 604 (table in millions). PJM West Hub Day Ahead Peak averaged $100.51 against $61.89 per MWh.",
-    "facts": [
-     "F2",
      "P4"
     ],
     "quotes": [
-     "During the third quarter 2026, PJM market conditions were influenced by weather, as periods of above-average temperatures increased electricity demand and contributed to higher settled on-peak power prices."
+     "This is primarily related to the: (i) TLB-3 and the Unsecured Notes due 2034 and 2036, each issued in the fourth quarter 2025 in connection with the Freedom and Guernsey acquisitions that were completed in November 2025; and (ii) combined effect of financing transactions in April 2026 that included the issuances of the Unsecured Notes due 2031 and 2033 and redemption of the Secured Notes."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2; forward figures from P4",
-    "claim": "Condition: the spread between power and gas prices must persist. Energy margin depends on that relationship. The forward PJM West Hub ATC spark spread for October through December was $52.76 at Sep. 30, against $26.00 a year earlier.",
+    "basis": "stated in P4",
+    "claim": "Talen cleared 10,180 MW in the PJM Base Residual Auction at a price of $325.00/MWd.",
     "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "Our energy margin is influenced by the relationship between the prices of electricity and natural gas and, to a lesser extent, other fuels like coal and uranium."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in P4; figures from F2",
-    "claim": "Counter to the price driver: rising forward prices produced unrealized derivative losses. These were (183) of operating revenues in the third quarter against 42 a year earlier, and (507) over nine months (table in millions).",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "This is primarily related to the impact of higher forward power prices on the fair value of mark-to-market contracts that were entered into during the period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4; figures from F2 and P4",
-    "claim": "Driver: capacity prices and volumes. Third-quarter capacity revenues were 323 against 166 (table in millions). The company cleared 10,180 MW for the 2028/2029 capacity year at $325.00/MWd.",
-    "facts": [
-     "F2",
      "P4"
     ],
     "quotes": [
@@ -932,133 +993,70 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P8",
-    "claim": "Condition: capacity cash for the next two delivery years has largely been sold forward. Rights to about $1.5 billion of capacity revenue for 2027/2028 and 2028/2029 were transferred. The company kept the obligation to perform and the risk of performance penalties.",
+    "basis": "stated in P4",
+    "claim": "Talen sold interests in the Keystone generation facility and certain related assets.",
     "facts": [
-     "P8",
      "P4"
     ],
     "quotes": [
-     "Under the terms of the Capacity Monetization Transaction, TEM transferred the rights of future cash flows for certain cleared capacity with volumes of approximately 6.5 GW and 6.0 GW for the 2027/2028 and 2028/2029 delivery years, respectively, and aggregate revenues of approximately $1.5 billion.",
-     "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
+     "This is primarily related to the September 2026 sale of interests in the Keystone generation facility and certain related assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P7",
-    "claim": "Driver: longer-dated contracted capacity. Guernsey sold 750 MW UCAP for delivery years 2029/2030 through 2035/2036. That sale is expected to bring about $100 million per year.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1",
-    "claim": "Driver: the AWS PPA. It provides for 1,920 MW of nuclear power from Susquehanna through 2042. Deliveries ramp up to full volume no later than 2032.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The AWS PPA, which has minimum commitments, has a power delivery schedule that ramps up over time, which is expected to achieve the full volume no later than 2032, with the potential to meaningfully accelerate."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and P1",
-    "claim": "Condition: Susquehanna must run reliably and keep its fuel supply to meet the AWS and PJM obligations. The fuel cycle is fully contracted only through the 2028 fuel load.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "Because Susquehanna accounts for a substantial amount of our generation and associated earnings, any adverse development in Susquehanna\u2019s operations, such as an unplanned outage or catastrophic event, could have a significant impact on our business.",
-     "Our nuclear fuel cycle is fully contracted through the 2028 fuel load, more than 50% contracted through 2029, and over 20% contracted through 2030."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Forecast attributed to PJM in P1; risk stated in P2",
-    "claim": "Condition: PJM demand growth must actually occur. Summer peak load is forecast to grow by about 66 GW by 2036, an average of 3.6% per year.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Summer peak load is forecasted to grow by approximately 66 GW by 2036, or an average of 3.6% per year over the next 10-year period.",
-     "Various factors including but not limited to unfavorable macroeconomic conditions, increases in energy efficiency or supply, or advances in technology, could result in lower-than-expected electricity demand and unfavorable market conditions for our business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and P6",
-    "claim": "Driver: per-share growth through buybacks. On October 1, 2026 the company retired 3,811,460 shares under a $1.5 billion ASR. The ASR is funded by $1.3 billion of capacity monetization proceeds and cash on hand.",
+    "basis": "stated in P4 and P6",
+    "claim": "The Board of Directors approved upsizing the existing share repurchase program from $1.5 billion to an aggregate remaining capacity of $3.0 billion.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "The accelerated share repurchases are being funded by net proceeds of $1.3 billion from the capacity monetization transaction and cash on hand.",
-     "Share repurchases remain the benchmark against which we evaluate capital allocation."
+     "In September 2026, the Board of Directors approved the upsizing of the Company\u2019s existing SRP from $1.5 billion to an aggregate remaining capacity of $3.0 billion, subject to utilization under the ASR program."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in P6 as company guidance",
-    "claim": "Management guides 2027 Adjusted EBITDA to $2,500 million - $2,850 million, about 26% growth at the midpoint. It attributes this to PJM fundamentals and a full year from the acquired assets.",
+    "basis": "stated in P4 and P6",
+    "claim": "Separate from the ASR program, Talen repurchased and retired 600,000 shares of common stock for $204 million at a weighted average price of $339.48 per share.",
     "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [
-     "We are also introducing our 2027 guidance that reflects strong PJM fundamentals and a full year of contributions from our recently acquired assets"
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in P4 (completion) and P3 (terms); cash outflow stated in F3",
-    "claim": "Talen completed the Cornerstone Acquisition of the Waterford, Darby and Lawrenceburg gas plants, agreed for an aggregate purchase price of $3.45 billion, and the nine-month cash flow shows a Cornerstone Acquisition, net outflow of (2,569) (table in millions).",
-    "facts": [
-     "P3",
-     "P4",
-     "F3"
-    ],
-    "quotes": [
-     "the Cornerstone Acquisition that was completed in June 2026",
-     "Cornerstone Acquisition, net (Note 17) | (2,569) | 0"
+     "During the three months ended September 30, 2026, the Company repurchased and retired 600,000 shares of TEC\u2019s outstanding common stock under the SRP, separate from the ASR program.",
+     "The aggregate purchase price, including transaction fees, was $204 million at a weighted average price of $339.48 per share."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P8",
-    "claim": "A Talen subsidiary (TEM) closed a capacity monetization that sold rights to approximately $1.5 billion of future PJM capacity cash flows, and the net proceeds of $1.3 billion were used to fund accelerated share repurchases.",
+    "basis": "stated in P8",
+    "claim": "Talen announced that Terry L. Nutt will become CEO and President and join the Board, while current CEO Mark \"Mac\" A. McFarland will step down and serve as Senior Advisor until retirement.",
     "facts": [
-     "P4",
      "P8"
     ],
     "quotes": [
-     "On October 1, 2026, TEM closed on a capacity monetization agreement to sell rights to approximately $1.5 billion in future PJM capacity cash flows for the 2027/2028 and 2028/2029 PJM Capacity Years and the Company used the net proceeds of $1.3 billion to fund accelerated share repurchases."
+     "On September 29, 2026, as part of its coordinated, on-going succession and retention planning, Talen Energy Corporation (the \u201cCompany\u201d) announced that the Company\u2019s board of directors (the \u201cBoard\u201d) has named Terry L. Nutt as the Company\u2019s next Chief Executive Officer (\u201cCEO\u201d) and President, effective January 1, 2027 (the \u201cEffective Date\u201d), at which time Mr. Nutt will also join the Board.",
+     "In addition, Mark \u201cMac\u201d A. McFarland, the Company\u2019s current CEO, has given the Company notice of his intent to step down as CEO and as a member of the Board, effective on the Effective Date."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "The Board upsized the share repurchase program from $1.5 billion to an aggregate remaining capacity of $3 billion.",
+    "basis": "stated in P4, P6, and P8",
+    "claim": "TEM closed a capacity monetization agreement selling rights to approximately $1.5 billion in future PJM capacity cash flows (6.5 GW and 6.0 GW of cleared capacity) for net proceeds of $1.3 billion.",
     "facts": [
      "P4",
-     "P6"
+     "P6",
+     "P8"
     ],
     "quotes": [
-     "In September 2026, the Board of Directors approved the upsizing of the Company\u2019s existing SRP from $1.5 billion to an aggregate remaining capacity of $3 billion, subject to utilization under the ASR program."
+     "On October 1, 2026, TEM closed on a capacity monetization agreement to sell rights to approximately $1.5 billion in future PJM capacity cash flows for the 2027/2028 and 2028/2029 PJM Capacity Years and the Company used the net proceeds of $1.3 billion to fund accelerated share repurchases.",
+     "Under the terms of the Capacity Monetization Transaction, TEM transferred the rights of future cash flows for certain cleared capacity with volumes of approximately 6.5 GW and 6.0 GW for the 2027/2028 and 2028/2029 delivery years, respectively, and aggregate revenues of approximately $1.5 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "Under the accelerated share repurchase program, the Company received and retired 3,811,460 shares, equal to 80% of the $1.5 billion program value.",
+    "basis": "stated in P4 and P6",
+    "claim": "Talen received and retired 3,811,460 shares under a $1.5 billion accelerated share repurchase program, equivalent to 80% of the program value, with final settlement pending.",
     "facts": [
      "P4",
      "P6"
@@ -1070,433 +1068,342 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "In the September 2026 quarter, the Company repurchased and retired 600,000 shares for $204 million at a weighted average price of $339.48 per share, separate from the ASR.",
+    "basis": "stated in P6",
+    "claim": "Talen reaffirmed 2026 Adjusted EBITDA guidance of $2,050 million - $2,200 million and Adjusted Free Cash Flow guidance of $1,225 million - $1,325 million, and introduced 2027 Adjusted EBITDA guidance of $2,500 million - $2,850 million and Adjusted Free Cash Flow guidance of $1,500 million - $1,750 million.",
     "facts": [
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "During the three months ended September 30, 2026, the Company repurchased and retired 600,000 shares of TEC\u2019s outstanding common stock under the SRP, separate from the ASR program.",
-     "The aggregate purchase price, including transaction fees, was $204 million at a weighted average price of $339.48 per share."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P8",
-    "claim": "The Board named President Terry L. Nutt as the next CEO, and current CEO Mac McFarland gave notice that he will step down as CEO and director.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "has given the Company notice of his intent to step down as CEO and as a member of the Board, effective on the Effective Date"
+     "HOUSTON, November 3, 2026 \u2013 Talen Energy Corporation (\u201cTalen,\u201d \u201cTEC,\u201d the \u201cCompany,\u201d \u201cwe,\u201d or \u201cour\u201d) (NASDAQ: TLN), a leading independent power producer, today reported its third quarter 2026 financial results and other highlights.",
+     "Reaffirming 2026 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges to $2,050 million - $2,200 million and $1,225 million - $1,325 million, respectively.",
+     "Introducing 2027 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges of $2,500 million - $2,850 million and $1,500 million - $1,750 million, representing approximately 26% and 27% growth at the midpoints compared with 2026 guidance."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P7",
-    "claim": "The Guernsey and Waterford subsidiaries entered capacity sale transactions with an investment grade counterparty, including a 750 MW UCAP Guernsey 7-year sale expected to generate approximately $100 million per year in revenue.",
+    "claim": "Guernsey Power Station LLC entered into two PJM capacity sale transactions with an investment grade counterparty for 750 MW UCAP (expected to generate approximately $100 million per year in revenue) and 588 MW UCAP.",
     "facts": [
      "P7"
     ],
     "quotes": [
+     "Specifically, the Company\u2019s wholly owned indirect subsidiary, Guernsey Power Station LLC, a Delaware limited liability company (\u201cGuernsey\u201d), entered into two capacity sale transactions with the investment grade counterparty, for the sale of available installed capacity (\u201cICAP\u201d) that converts to Unit-Specific Accredited Unforced Capacity (\u201cUCAP\u201d) from Guernsey Power Station, an 1,836 megawatts (\u201cMW\u201d) (summer rating) natural gas-fired combined cycle generation plant located in Guernsey County, Ohio, for (a) 750 MW UCAP for PJM Delivery Years 2029/2030 through 2035/2036 (the \u201cGuernsey 7-Year Capacity Sale\u201d); and (b) the remainder of 588 MW UCAP from Guernsey Power Station for PJM Delivery Year 2029/2030.",
      "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue.",
      "The capacity sale transactions are not subject to any closing conditions."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "The Company cleared 10,180 MW in the PJM 2028/2029 Base Residual Auction at $325.00/MWd.",
+    "basis": "stated in P7",
+    "claim": "Waterford Power, LLC entered into a PJM capacity sale transaction with an investment grade counterparty for all UCAP from the 869 MW Waterford Energy Center.",
     "facts": [
-     "P4"
+     "P7"
     ],
     "quotes": [
-     "In July 2026, the Company cleared 10,180 MW in the PJM BRA for the 2028/2029 PJM Capacity Year at a price of $325.00/MWd."
+     "In addition, the Company\u2019s wholly owned indirect subsidiary, Waterford Power, LLC, a Delaware limited liability company (\u201cWaterford\u201d), entered into a capacity sale transaction with the investment grade counterparty for the sale of all UCAP from the Waterford Energy Center, an 869 MW combined cycle gas turbine facility located in Waterford, Ohio, for the PJM Delivery Years 2029/2030 through 2031/2032.",
+     "The capacity sale transactions are not subject to any closing conditions."
     ],
     "support": "supported"
-   },
-   {
-    "basis": "stated in P4; gain figure from F2",
-    "claim": "The Company sold its interests in the Keystone generation facility and related assets; quarterly gain on sale of assets, net was 66 (table in millions).",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "This is primarily related to the September 2026 sale of interests in the Keystone generation facility and certain related assets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; figures from F3",
-    "claim": "The Company issued new Unsecured Notes and redeemed its Secured Notes; nine-month debt issuances were 4,000 and debt repayments (1,222) (table in millions).",
-    "facts": [
-     "P4",
-     "F3"
-    ],
-    "quotes": [
-     "combined effect of financing transactions in April 2026 that included the issuances of the Unsecured Notes due 2031 and 2033 and redemption of the Secured Notes"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated as line items in F3 and F1; characterising it as material is inferred from its size relative to operating cash flow",
-    "claim": "The Company paid a cash settlement of stock-based awards of (500) (table in millions), and stock-based compensation liabilities fell from 501 to 2.",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Cash settlement of stock-based awards (Note 13) | (500) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "The Company reaffirmed current-year Adjusted EBITDA guidance of $2,050 million - $2,200 million and introduced next-year Adjusted EBITDA guidance of $2,500 million - $2,850 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Reaffirming 2026 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges to $2,050 million - $2,200 million and $1,225 million - $1,325 million, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The Company consummated the Freedom and Guernsey Acquisitions for an aggregate $3.8 billion.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In November 2025, the Company consummated the Freedom and Guernsey Acquisitions for an aggregate $3.8 billion which is subject to certain post-closing adjustments for net working capital and other customary items."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "TES issued $1.4 billion of 6.25% and $1.3 billion of 6.50% Senior Unsecured Notes to fund the Freedom and Guernsey acquisitions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In October 2025, TES issued (i) $1.4 billion in aggregate principal amount of 6.25% Senior Unsecured Notes due 2034, and (ii) $1.3 billion in aggregate principal amount of 6.50% Senior Unsecured Notes due 2036."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The Company cleared 8,745 MW in the PJM 2027/2028 Base Residual Auction at $333.44/MWd.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Talen cleared 8,745 MW at a price of $333.44/MWd."
-    ],
-    "support": "number_not_listed"
    }
   ],
   "risks": [
    {
-    "basis": "stated in F1, F2 and P4",
-    "claim": "Long-term debt rose to 9,540 from 6,782 (table in millions) between Dec. 31, 2025 and Sep. 30, 2026. Third-quarter interest expense and other finance charges were (148) versus (67) a year earlier (table in millions).",
-    "facts": [
-     "F1",
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "This is primarily related to the: (i) TLB-3 and the Unsecured Notes due 2034 and 2036, each issued in the fourth quarter 2025 in connection with the Freedom and Guernsey acquisitions that were completed in November 2025; and (ii) combined effect of financing transactions in April 2026 that included the issuances of the Unsecured Notes due 2031 and 2033 and redemption of the Secured Notes."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and P4; collateral mechanism stated in P2; counter stated in P3 (\"Our strong balance sheet provides ample capacity and counterparty appetite for lien-based hedging, which limits the use of margin posting requirements.\")",
-    "claim": "Cash and cash equivalents fell to 335 from 689 (table in millions). A $1.5 billion ASR was then funded by capacity monetization proceeds and cash on hand.",
-    "facts": [
-     "F1",
-     "P4",
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "The accelerated share repurchases are being funded by net proceeds of $1.3 billion from the capacity monetization transaction and cash on hand.",
-     "Because we are required to collateralize hedges that settle in future delivery periods, but do not receive settlements for electric generation until delivery, collateral requirements could result in periods of lower available liquidity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P8",
-    "claim": "Talen sold future PJM capacity cash flows for two delivery years. It kept the obligation to perform and the risk of performance deficiency penalties.",
-    "facts": [
-     "P8",
-     "P4"
-    ],
-    "quotes": [
-     "Under the terms of the Capacity Monetization Transaction, TEM transferred the rights of future cash flows for certain cleared capacity with volumes of approximately 6.5 GW and 6.0 GW for the 2027/2028 and 2028/2029 delivery years, respectively, and aggregate revenues of approximately $1.5 billion.",
-     "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1, F2, P4; timing mechanism stated in P2",
-    "claim": "Unrealized losses on derivative instruments in operating revenues were (183) for Q3 2026 and (507) for nine months (table in millions). Current derivative liabilities rose to 617 from 101.",
-    "facts": [
-     "F2",
-     "F1",
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "This is primarily related to the impact of higher forward power prices on the fair value of mark-to-market contracts that were entered into during the period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2; counter stated in P1",
-    "claim": "Susquehanna accounts for a substantial amount of generation. Non-performance under the AWS PPA could trigger contractual remedies.",
+    "basis": "stated in P2 for the demand risk, and stated in P1, P4, and P7 for the counterevidence",
+    "claim": "Expected electricity demand growth from data centers, manufacturing re-shoring, and electrification may not materialize or be sustained, which would reduce wholesale power prices and generation dispatch.",
     "facts": [
      "P2",
-     "P1"
-    ],
-    "quotes": [
-     "Additionally, under the AWS PPA, we have committed to certain delivery quantities over time with agreed reliability standards and AWS may be entitled to contractual or other remedies in the event of our non-performance.",
-     "Because Susquehanna accounts for a substantial amount of our generation and associated earnings, any adverse development in Susquehanna\u2019s operations, such as an unplanned outage or catastrophic event, could have a significant impact on our business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1; counter stated in P4 and P7",
-    "claim": "PJM market restructuring and auction delays approved by FERC could change capacity revenue visibility.",
-    "facts": [
      "P1",
      "P4",
      "P7"
     ],
     "quotes": [
-     "PJM BRAs are typically conducted three years prior to the start of the applicable capacity year (which runs from June 1\u2013May 31), but the FERC has accepted requests by PJM to delay certain PJM BRAs in order to propose additional changes to the PJM Reliability Pricing Model.",
-     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
+     "Expected demand growth from the technology sector, manufacturing, and other uses of electricity, which has driven recent improvements in the outlook for the competitive wholesale power generation market, may not actually occur or be sustained.",
+     "A general economic slowdown or recession, a downturn in technology, manufacturing, or other sectors, an oversupply of generation resources or natural gas, or various other economic conditions could reduce electricity demand and prices."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2; counter stated in P1",
-    "claim": "The company states that the expected growth in electricity demand from data centers and other sources may not occur or be sustained.",
+    "basis": "stated in F1, F2, F3, P3, and P6; near-term liquidity pressure inferred from current liabilities exceeding current assets alongside higher debt and interest expense",
+    "claim": "Long-term debt rose from 6,782 to 9,540 and cash and cash equivalents fell from $ 689 to $ 335 while total current liabilities of 1,290 exceeded total current assets of 1,152 (table in millions).",
     "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "Expected demand growth from the technology sector, manufacturing, and other uses of electricity, which has driven recent improvements in the outlook for the competitive wholesale power generation market, may not actually occur or be sustained."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in P6; size of required fourth quarter inferred from comparing them",
-    "claim": "The 2026E net income guidance low end is $960 (table in millions), against nine-month net income of $109. The 2026E Adjusted EBITDA guidance is $2,050 - $2,200, against nine-month Adjusted EBITDA of 1,516.",
-    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Reaffirming 2026 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges to $2,050 million - $2,200 million and $1,225 million - $1,325 million, respectively."
+     "Long-term debt (Notes 10 and 11) | 9,540 | 6,782",
+     "Total current liabilities | 1,290 | 1,050",
+     "Adjusted Free Cash Flow increased by $210 million primarily due to the contribution of acquired generation facilities, higher settled power prices and generation volumes (net of realized hedges), and higher capacity revenues, which were partially offset by higher cash interest payments associated with acquisition financings.",
+     "Based on current and anticipated levels of operations, industry conditions, and market environments in which we transact, we believe available liquidity from financing activities, cash on hand, and cash flows from operations (including changes in working capital) will be adequate to meet working capital, debt service, capital expenditures, and (or) other future requirements for the next twelve months and beyond."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P8",
-    "claim": "The CEO will step down on January 1, 2027, and the President becomes CEO.",
+    "basis": "stated in P2, F1, F2, P3, and P6",
+    "claim": "Commodity price swings can trigger large cash collateral or letter-of-credit demands that constrain liquidity and cause mark-to-market earnings volatility, reflected in unrealized derivative operating revenue losses of $ (507) (table in millions).",
     "facts": [
-     "P8"
+     "P2",
+     "F1",
+     "F2",
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Following the Effective Date, Mr. McFarland will serve as a Senior Advisor to the Company beginning on January 1, 2027 until his retirement on March 1, 2027 (the \u201cSeparation Date\u201d)."
+     "Furthermore, significant movements in market prices may require us to provide cash collateral or LCs in very large amounts (for instance, as happened prior to the Restructuring).",
+     "As a result, during periods of extreme price volatility or significant changes in market prices, our quarterly and annual results may be subject to fluctuations due to changes in fair values of commercial transactions caused by changes in market prices.",
+     "Specifically, our hedging strategy prioritizes a first lien-based hedging program, in which hedging counterparties are granted a lien in the same collateral securing our first-lien debt obligations, while minimizing exchange-based hedging and the associated margin requirements."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3; lock-up expiry timing inferred from the June 2026 closing in P4",
-    "claim": "The Cornerstone Acquisition paid 2,400,000 Talen shares, subject to lock-ups of 90 and 180 days, plus a registration rights agreement.",
+    "basis": "stated in P2, P8, and P1; heightened cash-flow asymmetry on monetized capacity inferred from combining P8 and P2",
+    "claim": "Unplanned outages or reduced output can trigger PJM Capacity Performance penalties and contractual remedies under the AWS PPA, while Talen retained performance deficiency penalty risks on approximately $1.5 billion of monetized future PJM capacity revenues.",
     "facts": [
+     "P2",
+     "P8",
+     "P1"
+    ],
+    "quotes": [
+     "Under PJM\u2019s Capacity Performance model, we may be (and have in the past been) subject to substantial monetary penalties for failing to meet the Capacity Performance requirements set forth by PJM in certain emergency events.",
+     "Additionally, under the AWS PPA, we have committed to certain delivery quantities over time with agreed reliability standards and AWS may be entitled to contractual or other remedies in the event of our non-performance.",
+     "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P1, P3, and P4",
+    "claim": "Ongoing PJM market reforms, capacity auction delays, state re-regulation proposals, and extensive energy and environmental regulations could raise compliance costs, depress capacity revenue visibility, or restrict operations.",
+    "facts": [
+     "P2",
+     "P1",
      "P3",
      "P4"
     ],
     "quotes": [
-     "The stock consideration will be subject to lock-ups of 90 days on 50% of the stock consideration and 180 days on the remaining stock consideration."
+     "The costs of compliance with these requirements may be substantial, and any non-compliance or inability to comply could result in the suspension or curtailment of our electricity sales and power delivery; the cessation, suspension, delay, or limitation of our operations; premature unit retirements; and (or) monetary penalties, increased compliance obligations, or other types of sanctions.",
+     "Recently, PJM has delayed its auctions, which has resulted in less than 3 years between each auction and the start of the relevant PJM Capacity Year.",
+     "PJM, the primary market in which we operate, is a competitive market and has from time-to-time considered new market rules, while some states have considered re-regulation measures that could result in more limited opportunities for competitive energy suppliers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P4",
-    "claim": "The company says lower or volatile natural gas prices could hurt energy margin; Q3 2026 TETCO M-3 gas averaged 1.88 versus 2.27 a year earlier.",
+    "basis": "stated in P2, P1, and P3",
+    "claim": "Volatile natural gas, fuel, and wholesale electricity prices, alongside mild winter or summer temperatures, can compress energy margins because Talen lacks a regulated rate of return.",
     "facts": [
      "P2",
-     "P4"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "A decline, or significant volatility, in the price of natural gas or other fuels could negatively impact energy margin and energy revenues."
+     "A decline, or significant volatility, in the price of natural gas or other fuels could negatively impact energy margin and energy revenues.",
+     "Our business model depends on us successfully operating in a competitive environment and, unlike regulated utilities, we are not assured of any rate of return on capital investments through a regulated rate structure.",
+     "Conversely, mild winter or summer temperatures in the Mid-Atlantic tend to suppress electric demand and may result in lower overall settled prices that reduce our energy margin."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P1, F1, and P3",
+    "claim": "Because Susquehanna accounts for a substantial share of generation and earnings, an extended or unplanned nuclear outage, fuel-cycle disruption, or unrecovered spent nuclear fuel storage costs could materially hurt earnings.",
+    "facts": [
+     "P2",
+     "P1",
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "Because Susquehanna accounts for a substantial amount of our generation and associated earnings, any adverse development in Susquehanna\u2019s operations, such as an unplanned outage or catastrophic event, could have a significant impact on our business.",
+     "Furthermore, there remains substantial uncertainty regarding the nuclear industry\u2019s permanent disposal of SNF, which could result in substantial additional costs to us that cannot be predicted.",
+     "Consequently, the government is required to reimburse Susquehanna for certain SNF storage costs through 2025 under a related settlement agreement, which we are currently in the process of seeking to extend through 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P1, and P3",
+    "claim": "Geographic concentration in the mid-Atlantic, third-party transmission congestion, and cyber-based security threats expose Talen to regional disruptions and lower realized energy margins.",
+    "facts": [
+     "P2",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Furthermore, as a significant portion of our power generation facilities are geographically concentrated in the mid-Atlantic area of the United States, we face increased risk that a natural or man-made disaster in that area could adversely affect a large part of our operations.",
+     "Furthermore, transmission constraints and outages, including line maintenance outages, can cause transmission congestion that negatively impacts energy prices at our facilities, which could affect the realized margins of our generation fleet.",
+     "We are also subject to cyber-based security disruption and integrity risk, which could result in an adverse impact to our results of operations or business reputation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P8; transition execution risk inferred from the CEO departure",
+    "claim": "Talen faces an executive leadership transition as CEO Mark McFarland steps down from the CEO role and the Board, with President Terry L. Nutt becoming CEO.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "In addition, Mark \u201cMac\u201d A. McFarland, the Company\u2019s current CEO, has given the Company notice of his intent to step down as CEO and as a member of the Board, effective on the Effective Date.",
+     "On September 29, 2026, as part of its coordinated, on-going succession and retention planning, Talen Energy Corporation (the \u201cCompany\u201d) announced that the Company\u2019s board of directors (the \u201cBoard\u201d) has named Terry L. Nutt as the Company\u2019s next Chief Executive Officer (\u201cCEO\u201d) and President, effective January 1, 2027 (the \u201cEffective Date\u201d), at which time Mr. Nutt will also join the Board."
+    ],
+    "support": "supported"
    }
   ],
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P4 that settlement is still pending.",
-    "claim": "How many more shares will Talen receive at final settlement of the $1.5 billion ASR, beyond the 3,811,460 shares already received for 80% of its value, and at what average price?",
+    "basis": "Stated in [F3], [P3], and [P4]; the cash flow statement reports 4,000 (table in millions) in debt issuances and (2,569) (table in millions) for the Cornerstone Acquisition, while [P4] refers to Note 10 (omitted from the packet) for debt transaction details.",
+    "claim": "What are the interest rates, maturities, and covenants of the 4,000 (table in millions) in 2026 debt issuances\u2014including the April 2026 Unsecured Notes due 2031 and 2033\u2014and what was the final purchase price allocation for the Cornerstone Acquisition?",
     "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The final settlement is expected to be completed no later than the first quarter of 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the transaction terms in P8. P4 points to Note 3, which is not in the packet.",
-    "claim": "Is the capacity monetization, which advanced proceeds against approximately $1.5 billion of future PJM capacity revenues, accounted for as debt, deferred revenue or a sale of receivables?",
-    "facts": [
-     "P8",
-     "P4"
-    ],
-    "quotes": [
-     "In exchange, TEM was advanced proceeds equal to the aggregate capacity revenues less a rate of SOFR plus 200 basis points, with SOFR to be calculated on October 1, 2026.",
-     "The Company remains responsible for operating its generation facilities, retains the obligation to perform as a PJM generation capacity resource with respect to the capacity sold in the transaction, has retained its rights for any earned capacity performance bonus payments, and has retained the risks associated with performance deficiency penalties."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred. The guidance reconciliation in P6 does not address the monetization.",
-    "claim": "Does the 2027 Adjusted Free Cash Flow guidance of $1,500 million - $1,750 million count capacity cash flows for 2027/2028 that were already sold in the monetization?",
-    "facts": [
-     "P6",
-     "P8"
-    ],
-    "quotes": [
-     "Introducing 2027 Adjusted EBITDA and Adjusted Free Cash Flow guidance ranges of $2,500 million - $2,850 million and $1,500 million - $1,750 million, representing approximately 26% and 27% growth at the midpoints compared with 2026 guidance."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Inferred from the structure of the P6 guidance reconciliation.",
-    "claim": "What explains guided 2026 net income of $960 to $1,080 (table in millions of dollars) against nine-month net income of $109 (table in millions of dollars), and does the guidance leave out unrealized derivative results?",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Net Income (Loss) | $960 | $1,080 | $1,105 | $1,405"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in the F1 balances and the P2 risk factor. The settlement profile is not disclosed.",
-    "claim": "How much of the derivative liabilities of 617 current and 243 noncurrent (table in millions), up from 101 and 67, will settle in cash, and could they require collateral?",
-    "facts": [
-     "F1",
-     "F2",
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "As a result, during periods of extreme price volatility or significant changes in market prices, our quarterly and annual results may be subject to fluctuations due to changes in fair values of commercial transactions caused by changes in market prices."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 that cash on hand was used. The amount is not given.",
-    "claim": "How much liquidity remained after the ASR, which was funded partly with cash on hand, given cash and cash equivalents of 335 (table in millions) at quarter end?",
-    "facts": [
-     "F1",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The accelerated share repurchases are being funded by net proceeds of $1.3 billion from the capacity monetization transaction and cash on hand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred. The allocation note is not in the packet.",
-    "claim": "What is the final purchase price allocation for the Cornerstone Acquisition, which used (2,569) (table in millions) of net cash and coincided with net PP&E rising from 7,546 to 11,858 (table in millions)?",
-    "facts": [
-     "F1",
      "F3",
      "P3",
      "P4"
     ],
     "quotes": [
-     "This is primarily due to an increase in depreciation associated with the Freedom and Guernsey acquisitions that were completed in November 2025 and the Cornerstone Acquisition completed in June 2026."
+     "See Note 10 to the Interim Financial Statements for additional information on long-term debt transactions, including the issuances associated with the Cornerstone Acquisition.",
+     "The Company expects the cash portion of the purchase price to be funded from the proceeds of new indebtedness."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4 that these notes exist. Their terms are not in the packet.",
-    "claim": "What are the coupons, maturities and covenants of the debt behind long-term debt of 9,540 (table in millions), including the Unsecured Notes due 2031 and 2033?",
+    "basis": "Stated in [P4] and [P8]; [P8] leaves the third party unnamed and sets SOFR to be calculated on October 1, 2026, while [P4] directs readers to Note 3 of the Interim Financial Statements, which is omitted from the packet.",
+    "claim": "Who is the unaffiliated third party in the Capacity Monetization Transaction for approximately $1.5 billion in future PJM capacity revenues, what SOFR rate was calculated on October 1, 2026 for the SOFR plus 200 basis points discount, and how is the transaction accounted for in the Interim Financial Statements?",
+    "facts": [
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "In exchange, TEM was advanced proceeds equal to the aggregate capacity revenues less a rate of SOFR plus 200 basis points, with SOFR to be calculated on October 1, 2026.",
+     "See Note 3 to the Interim Financial Statements for additional information."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in [P4] and [P6]; only 80% of the $1.5 billion ASR had been delivered as of October 1, 2026, with final settlement pending up to the first quarter of 2027.",
+    "claim": "How many additional shares will be received and retired upon final settlement of the $1.5 billion ASR program after the initial 3,811,460 shares (80% of the aggregate value), and what will the final settlement price be by the first quarter of 2027?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On October 1, 2026, the Company received and retired 3,811,460 shares of TEC common stock repurchased under ASR program with multiple dealers, which is equivalent to 80% of the aggregate $1.5 billion value of the ASR program.",
+     "The final settlement is expected to be completed no later than the first quarter of 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1] and [P4], with [P6] omitting the Balance Sheet and Liquidity and Update on Hedging Activities sections and Notes 2, 10, and 11 omitted from the packet.",
+    "claim": "Which contract delivery periods and forward positions drove current derivative liabilities to 617 (table in millions) and noncurrent derivative liabilities to 243 (table in millions) as of September 30, 2026, and what were Talen's hedged volumes, hedge prices, and remaining available liquidity on that date?",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "This is primarily related to the impact of higher forward power prices on the fair value of mark-to-market contracts that were entered into during the period.",
+     "Derivative instruments (Notes 2 and 11) | 617 | 101"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1]; the FY 2025 Form 10-K reports the spring 2026 expected transition start and omits contracted dollar prices, annual minimum volumes, and LC amounts.",
+    "claim": "What are the contracted fixed prices, annual minimum delivery commitments, and LC collateral amounts under the amended AWS PPA for up to 1,920 MW through 2042, and did the transmission reconfiguration projects begin transitioning the arrangement to front-of-the-meter in spring 2026 as expected?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The existing Susquehanna co-located load AWS PPA between us and AWS will begin transitioning to a \u201cfront-of-the-meter\u201d arrangement after the completion of transmission reconfiguration projects expected to occur in spring 2026 with full transition expected to occur in spring 2027.",
+     "The AWS PPA, which has minimum commitments, has a power delivery schedule that ramps up over time, which is expected to achieve the full volume no later than 2032, with the potential to meaningfully accelerate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P7]; the Form 8-K discloses expected annual revenue only for the Guernsey 7-Year Capacity Sale and omits revenue, pricing, Waterford UCAP volume, and counterparty identity for the remaining transactions.",
+    "claim": "Who is the investment grade counterparty in the November 2026 capacity sales, and what are the contracted prices, UCAP volumes, and expected revenues for the Waterford Energy Center sale and the 588 MW UCAP Guernsey Power Station sale?",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue.",
+     "In addition, the Company\u2019s wholly owned indirect subsidiary, Waterford Power, LLC, a Delaware limited liability company (\u201cWaterford\u201d), entered into a capacity sale transaction with the investment grade counterparty for the sale of all UCAP from the Waterford Energy Center, an 869 MW combined cycle gas turbine facility located in Waterford, Ohio, for the PJM Delivery Years 2029/2030 through 2031/2032."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P8]; the Form 8-K states that both agreements are described below, but the subsequent 6,617 characters are omitted from the packet.",
+    "claim": "What are the compensation, equity award, and severance or retirement terms of Terry L. Nutt's Employment Agreement and Mark A. McFarland's Transition Agreement effective January 1, 2027?",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "As further described below, Mr. Nutt has entered into a second amended and restated employment agreement (the \u201cEmployment Agreement\u201d) reflecting his new responsibilities as CEO and continued responsibilities as President that will become effective on the Effective Date.",
+     "As further described below, Mr. McFarland has entered into a transition and retirement agreement with the Company (the \u201cTransition Agreement\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F2], [F3], and [P4]; the financial statements report aggregate asset sale gains and proceeds under Note 17, which is omitted from the packet.",
+    "claim": "Who purchased Talen's interests in the Keystone generation facility and related assets in September 2026, what ownership percentage was sold, and how much of the 66 (table in millions) third-quarter gain and 73 (table in millions) nine-month asset sale proceeds is attributable to Keystone?",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "This is primarily related to the September 2026 sale of interests in the Keystone generation facility and certain related assets.",
+     "Proceeds from the sale of assets (Note 17) | 73 | 40"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1], [F3], and [P4]; the balance sheet and cash flow statement cross-reference Note 13 (omitted from the packet) for award settlement and liability classification details.",
+    "claim": "Which stock-based awards were settled for (500) (table in millions) in cash and (141) (table in millions) in net-settlement tax payments during the nine months ended September 30, 2026, reducing stock-based compensation liabilities from 501 to 2 (table in millions), and what awards remain outstanding?",
     "facts": [
      "F1",
      "F3",
      "P4"
     ],
     "quotes": [
-     "combined effect of financing transactions in April 2026 that included the issuances of the Unsecured Notes due 2031 and 2033 and redemption of the Secured Notes"
+     "Cash settlement of stock-based awards (Note 13) | (500) | 0",
+     "Stock-based compensation liabilities (Note 13) | 2 | 501"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P7, which gives a value only for the seven-year sale.",
-    "claim": "What revenue do the 588 MW Guernsey sale and the Waterford capacity sale carry, given that only the 750 MW seven-year Guernsey sale has a disclosed value?",
+    "basis": "Stated in [P1], [P2], and [P4]; [P4] refers to Note 9 of the Interim Financial Statements and [P1] and [P2] refer to the Regulatory, Environmental, and Legal Risks section of Item 1A, both omitted from the packet.",
+    "claim": "What specific PJM capacity market reforms, auction delays, and related legal actions are active as of September 30, 2026, and how could they affect future PJM capacity auctions and market seller offer caps?",
     "facts": [
-     "P7"
+     "P1",
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "The Guernsey 7-Year Capacity Sale is expected to generate approximately $100 million per year in revenue."
+     "See Note 9 to the Interim Financial Statements for additional information on the PJM capacity market, systemic risks, auction delays, and related legal actions.",
+     "Recently, PJM has delayed its auctions, which has resulted in less than 3 years between each auction and the start of the relevant PJM Capacity Year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred. The Q3 MD&A excerpt does not mention the AWS transition.",
-    "claim": "Did the AWS PPA begin its transition to front-of-the-meter delivery on the timetable the 10-K expected, and what volumes are now delivered?",
+    "basis": "Stated in [P1] and [P3]; the FY 2025 Form 10-K states that the SNF extension was in process and zero Nuclear PTC was earned in 2025, while 2026 interim footnotes are omitted from the packet.",
+    "claim": "Was the U.S. government settlement agreement reimbursing Susquehanna for SNF storage costs extended from 2025 through 2028, and were any Nuclear PTC revenues earned or expected under 2026 market prices?",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Consequently, the government is required to reimburse Susquehanna for certain SNF storage costs through 2025 under a related settlement agreement, which we are currently in the process of seeking to extend through 2028.",
+     "However, as prevailing market prices exceeded the PTC recognition threshold during the year ended December 31, 2025 (Successor), no such tax credits were earned for the period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P4]; [P1] cites Item 2 (omitted) for details on each minority coal-fired facility and leaves the transmission upgrade in-service date unspecified.",
+    "claim": "When are the transmission upgrades that would terminate the Brandon Shores and H.A. Wagner RMR arrangements prior to May 31, 2029 expected to enter service, and which minority coal-fired interests out of approximately 800 MW remain after the September 2026 Keystone sale?",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "The existing Susquehanna co-located load AWS PPA between us and AWS will begin transitioning to a \u201cfront-of-the-meter\u201d arrangement after the completion of transmission reconfiguration projects expected to occur in spring 2026 with full transition expected to occur in spring 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P8 that the agreements exist. Their details are in omitted text.",
-    "claim": "What are the compensation and retention terms of Mr. Nutt's new employment agreement and Mr. McFarland's transition agreement?",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Following the Effective Date, Mr. McFarland will serve as a Senior Advisor to the Company beginning on January 1, 2027 until his retirement on March 1, 2027 (the \u201cSeparation Date\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 that the sale occurred. The terms are not in the packet.",
-    "claim": "What were the terms of the Keystone interest sale behind the 66 (table in millions) quarterly gain on asset sales?",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "This is primarily related to the September 2026 sale of interests in the Keystone generation facility and certain related assets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the F1 balance. No explanation is given.",
-    "claim": "What gave rise to the new noncontrolling interests of 23 (table in millions)?",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Noncontrolling interests | 23 | 0"
+     "The Brandon Shores and H.A. Wagner RMR arrangements extend the operating life of these plants through May 31, 2029, or until such time the necessary transmission upgrades are placed into service.",
+     "We also own minority interests, totaling approximately 800 MW, in three coal-fired generation facilities in PJM and WECC, and we are exploring ways to maximize the value of these assets in the context of changing market conditions."
     ],
     "support": "supported"
    }
@@ -1506,5 +1413,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no usable tax rate in the filings"
+ "verdict_reason": "no positive earnings base"
 }
