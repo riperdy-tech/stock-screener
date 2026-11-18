@@ -119,7 +119,7 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
 
     manifest = {
         "copied_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source_dir": str(outputs_dir),
+        "source_dir": Path(outputs_dir).name,   # the folder's name only: this file is published, and the full path names a user account
         "files": files,
     }
     # The cloud files are fetched by a separate step (sync_cloud_files); keep what it recorded.

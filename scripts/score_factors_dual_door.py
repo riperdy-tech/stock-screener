@@ -50,7 +50,7 @@ import depth_conviction
 import tradability
 import peer_paths
 from issuer_securities import secondary_share_classes
-from mri_sync import sync_mri_snapshot
+from mri_sync import sync_cloud_files, sync_mri_snapshot
 
 STOCKS_JSON = DATA / "stocks.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
@@ -1535,6 +1535,8 @@ def main():
         print("MRI snapshot sync: MRI outputs directory not found, snapshot left as-is.")
     else:
         print(f"MRI snapshot sync: {len(sync_result['files'])} files copied from {sync_result['source_dir']}")
+    cloud_result = sync_cloud_files()          # the macro page's cloud-fed panels; a file that cannot be fetched is skipped, never fatal
+    print(f"MRI cloud files: {len(cloud_result['fetched'])} fetched, {len(cloud_result['skipped'])} skipped")
 
     stocks_raw = load_json(STOCKS_JSON, {})
     if isinstance(stocks_raw, list):
