@@ -13,11 +13,12 @@ import { useAuth } from '@/lib/useAuth';
 import {
     fetchAnalystTargets, fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
+    fetchMriDailySummary, fetchMriMacroFeatures, fetchMriRegimeTimeline, fetchMriRiskState, fetchMriSectorRanking, fetchMriSectorValidation,
     fetchOpusOverlay, fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
     fetchValuationModels,
     type AnalystTargetsPayload, type ChainManifest, type DepthOverlayPayload, type EnginePrices, type DepthVerdict, type FactorScoresPayload,
     type GeminiCOverlayPayload, type GeminiCRow, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
-    type MonthlyBooksPayload, type OpusOverlayPayload, type OpusVerdict, type QwenOverlayPayload, type QwenOverlayRow,
+    type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict, type QwenOverlayPayload, type QwenOverlayRow,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -318,6 +319,44 @@ export function useMacroData(): MacroData {
             cached('regime', fetchMriRegime).then((v) => settle('regime', v)).catch(() => settle('regime', null));
             cached('anchor', fetchMriCostOfCapital).then((v) => settle('anchor', v)).catch(() => settle('anchor', null));
             cached('factor', fetchFactorScores).then((v) => settle('factor', v)).catch(() => settle('factor', null));
+        };
+        run();
+        invalidationListeners.add(run);
+        return () => { alive = false; invalidationListeners.delete(run); };
+    }, []);
+    return state;
+}
+
+/** The six extra MRI files the Macro page's tabs read (WO_MP1). Same shape as `useMacroData`: a null with `loaded` true means "did not load". */
+export interface MacroPanelData {
+    daily: MriDailySummary | null;
+    timeline: MriRegimeTimeline | null;
+    features: MriMacroFeatures | null;
+    ranking: MriSectorRanking | null;
+    validation: MriSectorValidation | null;
+    risk: MriRiskState | null;
+    loaded: Record<'daily' | 'timeline' | 'features' | 'ranking' | 'validation' | 'risk', boolean>;
+}
+
+export function useMacroPanelData(): MacroPanelData {
+    const [state, setState] = useState<MacroPanelData>({
+        daily: null, timeline: null, features: null, ranking: null, validation: null, risk: null,
+        loaded: { daily: false, timeline: false, features: false, ranking: false, validation: false, risk: false },
+    });
+    useEffect(() => {
+        let alive = true;
+        const settle = (key: keyof MacroPanelData['loaded'], value: unknown) => {
+            if (alive) setState((prev) => ({ ...prev, [key]: value, loaded: { ...prev.loaded, [key]: true } }));
+        };
+        const load = (key: keyof MacroPanelData['loaded'], loader: () => Promise<unknown>) =>
+            cached(`macro_${key}`, loader).then((v) => settle(key, v)).catch(() => settle(key, null));
+        const run = () => {
+            load('daily', fetchMriDailySummary);
+            load('timeline', fetchMriRegimeTimeline);
+            load('features', fetchMriMacroFeatures);
+            load('ranking', fetchMriSectorRanking);
+            load('validation', fetchMriSectorValidation);
+            load('risk', fetchMriRiskState);
         };
         run();
         invalidationListeners.add(run);

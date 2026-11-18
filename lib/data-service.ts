@@ -864,6 +864,29 @@ export interface MriRegime {
     explanation?: string[] | null;
     active_shocks_on_date?: string[] | null;
     disclaimer?: string | null;
+    /** The label before the transition filter; differs from reported_regime when the filter held the old one. */
+    raw_dominant_regime?: string | null;
+    /** One entry per dimension scored on the date (the level). */
+    factors?: Record<string, MriDimensionFactor> | null;
+    /** Direction beside level (engine commit 9b25a1d, 2026-11-19). Absent from a copy built before it. */
+    dimension_direction?: Record<string, MriDimensionDirection> | null;
+}
+
+export interface MriDimensionFactor {
+    score?: number | null;
+    valid?: boolean | null;
+    coverage?: number | null;
+    reason?: string | null;
+}
+
+/** Change of a dimension's score over 3 and 6 months (d3, d6) and the same changes in units of their own spread (z3, z6). A null names its reason in `reasons`. */
+export interface MriDimensionDirection {
+    d3?: number | null;
+    d6?: number | null;
+    z3?: number | null;
+    z6?: number | null;
+    as_of?: string | null;
+    reasons?: Record<string, string> | null;
 }
 
 export interface MriCostOfCapital {
@@ -885,6 +908,127 @@ export async function fetchMriRegime(): Promise<MriRegime | null> {
 
 export async function fetchMriCostOfCapital(): Promise<MriCostOfCapital | null> {
     return fetchJson<MriCostOfCapital>('/data/mri/cost_of_capital_anchor.json');
+}
+
+// ── The rest of the MRI panels on /macro (WO_MP1). Every field is optional: the page shows "not available" for a gap. ──
+export interface MriDailySummary {
+    run_date?: string | null;
+    run_id?: string | null;
+    status?: string | null;
+    warnings?: string[] | null;
+    errors?: string[] | null;
+    non_fatal_failures?: string[] | null;
+    macro?: { date?: string | null; confidence?: number | null; reported_regime?: string | null; raw_dominant_regime?: string | null } | null;
+    feature_freshness?: { gap_days?: number | null; max_feature_date?: string | null; stale?: boolean | null } | null;
+    step_statuses?: Record<string, string> | null;
+}
+
+export interface MriTimelinePoint {
+    date?: string | null;
+    reported_regime?: string | null;
+    raw_dominant_regime?: string | null;
+    confidence?: number | null;
+    valid?: boolean | null;
+    probabilities?: Record<string, number> | null;
+}
+
+export interface MriRegimeTimeline {
+    start_date?: string | null;
+    end_date?: string | null;
+    points?: MriTimelinePoint[] | null;
+}
+
+export interface MriFeatureSeries {
+    feature_id?: string | null;
+    series_id?: string | null;
+    points?: { date?: string | null; value?: number | null }[] | null;
+}
+
+export interface MriMacroFeatures {
+    end_date?: string | null;
+    dimensions?: { dimension_id?: string | null; features?: MriFeatureSeries[] | null }[] | null;
+}
+
+export interface MriSectorComponent {
+    component_id?: string | null;
+    component_type?: string | null;
+    contribution?: number | null;
+}
+
+export interface MriSectorRow {
+    rank?: number | null;
+    sector_id?: string | null;
+    label?: string | null;
+    proxy_ticker?: string | null;
+    raw_sector_score?: number | null;
+    confidence_adjusted_score?: number | null;
+    top_supporting_components?: MriSectorComponent[] | null;
+    top_opposing_components?: MriSectorComponent[] | null;
+}
+
+export interface MriSectorRanking {
+    date?: string | null;
+    macro_confidence?: number | null;
+    sector_ranking?: MriSectorRow[] | null;
+}
+
+export interface MriValidationRow {
+    cross_section?: string | null;
+    horizon?: string | null;
+    observation_count?: number | null;
+    rank_ic_spearman?: number | null;
+    top_minus_bottom_spread?: number | null;
+    hit_rate_top_positive?: number | null;
+}
+
+export interface MriSectorValidation {
+    valid?: boolean | null;
+    reason?: string | null;
+    score_start_date?: string | null;
+    score_end_date?: string | null;
+    summary?: MriValidationRow[] | null;
+}
+
+/** The shadow risk dial (risk_state.json, whose date key is `asof`). A part the run could not build is null and named in `reasons`. */
+export interface MriRiskState {
+    asof?: string | null;
+    status?: string | null;
+    dial?: { state?: 'full' | 'half' | null; rule?: string | null; since?: string | null } | null;
+    price_rule?: { spy_close?: number | null; mean_200?: number | null; below?: boolean | null } | null;
+    macro_reading?: {
+        month?: string | null;
+        recession_plus_stagflation?: number | null;
+        top_third_threshold?: number | null;
+        in_top_third?: boolean | null;
+    } | null;
+    vix_alarm?: { active?: boolean | null } | null;
+    evidence?: { verdict?: string | null; n_months?: number | null } | null;
+    degraded?: boolean | null;
+    reasons?: string[] | null;
+}
+
+export async function fetchMriDailySummary(): Promise<MriDailySummary | null> {
+    return fetchJson<MriDailySummary>('/data/mri/daily_diagnostic_summary.json');
+}
+
+export async function fetchMriRegimeTimeline(): Promise<MriRegimeTimeline | null> {
+    return fetchJson<MriRegimeTimeline>('/data/mri/regime_timeline.json');
+}
+
+export async function fetchMriMacroFeatures(): Promise<MriMacroFeatures | null> {
+    return fetchJson<MriMacroFeatures>('/data/mri/macro_features_timeline.json');
+}
+
+export async function fetchMriSectorRanking(): Promise<MriSectorRanking | null> {
+    return fetchJson<MriSectorRanking>('/data/mri/current_sector_ranking.json');
+}
+
+export async function fetchMriSectorValidation(): Promise<MriSectorValidation | null> {
+    return fetchJson<MriSectorValidation>('/data/mri/sector_validation.json');
+}
+
+export async function fetchMriRiskState(): Promise<MriRiskState | null> {
+    return fetchJson<MriRiskState>('/data/mri/risk_state.json');
 }
 
 export async function fetchValuationModels(): Promise<{ generated_at: string; disclaimer: string; tickers: Record<string, ValuationModel> } | null> {

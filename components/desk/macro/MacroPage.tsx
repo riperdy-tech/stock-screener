@@ -4,7 +4,7 @@
 // Handoff README 5.5. A missing file shows "—" per field and one "did not load" line; the page
 // always renders. Nothing here is a call on the market.
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import { pctText } from '@/lib/desk/health';
 import {
@@ -12,22 +12,27 @@ import {
     regimeBars, sectorTilt, shockName,
 } from '@/lib/desk/macro';
 import { fill } from '@/lib/desk/text';
-import { invalidateDeskCache, useMacroData } from '@/lib/desk/useDeskData';
+import { invalidateDeskCache, useMacroData, useMacroPanelData } from '@/lib/desk/useDeskData';
+import { Chip } from '../primitives';
 import { Shell } from '../Shell';
+import {
+    DimensionsPanel, DirectionPanel, IndicatorsPanel, LatestRunPanel, MacroStatsPanel, MethodologyTab, ProbabilityHistoryPanel,
+    QuadrantPanel, ReadingLines, RibbonPanel, RiskDialPanel, Section, SectorsTab, SourceHealthPanel, Unavailable, WarningsPanel,
+} from './MacroPanels';
 
 const DASH = '—';
 
-function Section({ title, sub, children }: { title: string; sub?: string; children: React.ReactNode }) {
-    return (
-        <section className="border-t border-ink pt-3">
-            <h2 className="text-[14px] font-semibold text-ink">
-                {title}
-                {sub && <span className="ml-2 text-[12px] font-normal text-ink-2">{sub}</span>}
-            </h2>
-            {children}
-        </section>
-    );
-}
+const TABS = [
+    { id: 'overview', key: 'mcTabOverview' },
+    { id: 'macro', key: 'mcTabMacro' },
+    { id: 'sectors', key: 'mcTabSectors' },
+    { id: 'news', key: 'mcTabNews' },
+    { id: 'monitoring', key: 'mcTabMonitoring' },
+    { id: 'history', key: 'mcTabHistory' },
+    { id: 'method', key: 'mcTabMethod' },
+] as const;
+
+type TabId = (typeof TABS)[number]['id'];
 
 /** "MM-DD HH:mm" in the viewer's own time zone from an ISO stamp (the build stamps are UTC, which read a day behind in Asia); "—" when absent or unreadable. */
 function localMdHm(stamp: string | null | undefined): string {
@@ -40,6 +45,23 @@ function localMdHm(stamp: string | null | undefined): string {
 export function MacroPage() {
     const { t } = useLanguage();
     const { regime, anchor, factor, loaded } = useMacroData();
+    const panels = useMacroPanelData();
+    const [tab, setTab] = useState<TabId>('overview');
+    // The tab lives in the address (/macro#sectors), read after mount so the server and first client render agree.
+    useEffect(() => {
+        const fromHash = () => {
+            const id = window.location.hash.replace('#', '');
+            const found = TABS.find((x) => x.id === id);
+            if (found) setTab(found.id);
+        };
+        fromHash();
+        window.addEventListener('hashchange', fromHash);
+        return () => window.removeEventListener('hashchange', fromHash);
+    }, []);
+    const selectTab = (id: TabId) => {
+        setTab(id);
+        window.history.replaceState(null, '', `#${id}`);
+    };
     const now = useMemo(() => Date.now(), []);
 
     const bars = regimeBars(regime);
@@ -83,8 +105,17 @@ export function MacroPage() {
                 {!allLoaded && missing.length === 0 && (
                     <p className="mt-2 font-mono text-[11px] text-off">{t('mcLoading')}</p>
                 )}
+                <ReadingLines panels={panels} />
 
-                <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+                <div className="mt-5 flex gap-1.5 overflow-x-auto pb-1" role="tablist" aria-label={t('mcTabsAria')}>
+                    {TABS.map((x) => (
+                        <Chip key={x.id} role="tab" aria-selected={tab === x.id} active={tab === x.id} className="shrink-0" onClick={() => selectTab(x.id)}>
+                            {t(x.key)}
+                        </Chip>
+                    ))}
+                </div>
+
+                {tab === 'overview' && <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,1fr)_340px]">
                     <div className="min-w-0 space-y-6">
                         <Section title={t('mcRegimes')}>
                             {bars.length === 0
@@ -106,6 +137,15 @@ export function MacroPage() {
                                     </ul>
                                 )}
                         </Section>
+
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
+                            <QuadrantPanel regime={regime} panels={panels} />
+                            <DimensionsPanel panels={panels} />
+                        </div>
+
+                        <RiskDialPanel risk={panels.risk} loaded={panels.loaded.risk} />
+
+                        <Unavailable title={t('mcuDataHealth')} file="data_health.json" />
 
                         <Section title={t('mcWhy')}>
                             {why.length === 0
@@ -193,7 +233,44 @@ export function MacroPage() {
                             <p className="mt-4 font-mono text-[11px] leading-relaxed text-off">{regime?.disclaimer ?? DASH}</p>
                         </Section>
                     </aside>
-                </div>
+                </div>}
+
+                {tab === 'macro' && (
+                    <div className="mt-6 max-w-4xl space-y-6">
+                        <MacroStatsPanel regime={regime} panels={panels} />
+                        <DirectionPanel regime={regime} loaded={loaded.regime} />
+                        <ProbabilityHistoryPanel panels={panels} />
+                        <IndicatorsPanel panels={panels} />
+                        <SourceHealthPanel panels={panels} />
+                    </div>
+                )}
+                {tab === 'sectors' && <div className="mt-6 max-w-4xl"><SectorsTab panels={panels} /></div>}
+                {tab === 'news' && (
+                    <div className="mt-6 max-w-4xl space-y-6">
+                        <Unavailable title={t('mcuThemes')} file="news_score_report.json" />
+                        <Unavailable title={t('mcuLowConf')} file="news_score_report.json" />
+                        <Unavailable title={t('mcuCombined')} file="combined_sector_diagnostic.json" />
+                        <Unavailable title={t('mcuSources')} file="news_sources.json" />
+                        <Unavailable title={t('mcuSourceHealth')} file="news_health (daily_diagnostic_summary.json)" />
+                    </div>
+                )}
+                {tab === 'monitoring' && (
+                    <div className="mt-6 max-w-4xl space-y-6">
+                        <LatestRunPanel panels={panels} />
+                        <WarningsPanel panels={panels} />
+                        <Unavailable title={t('mcuReadiness')} file="news_accumulation_report.json" />
+                        <Unavailable title={t('mcuClassify')} file="news_monitoring_report.json" />
+                        <Unavailable title={t('mcuCoverage')} file="news_source_coverage_report.json" />
+                    </div>
+                )}
+                {tab === 'history' && (
+                    <div className="mt-6 max-w-4xl space-y-6">
+                        <RibbonPanel panels={panels} />
+                        <Unavailable title={t('mcuRunHistory')} file="history_index.json" />
+                        <Unavailable title={t('mcuNber')} file="nber_benchmark.json" />
+                    </div>
+                )}
+                {tab === 'method' && <div className="mt-6"><MethodologyTab /></div>}
             </div>
         </Shell>
     );

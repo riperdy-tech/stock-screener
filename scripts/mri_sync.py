@@ -41,6 +41,13 @@ SNAPSHOT_FILES = (
     # The MRI's shadow risk dial. Its month_decision block drives the screener's one paper-only book, equal_dial
     # (operator 2026-11-13). The document's date key is `asof`.
     "risk_state.json",
+    # The /macro page (WO_MP1, operator 2026-11-18: the MRI site's panels move to the stockpeak macro page). These four are
+    # written by the local daily run, so they are fresh. Optional: a missing file is skipped. macro_features_timeline.json
+    # is the largest (about 0.8 MB, it ships to the browser); the page needs it for the indicator lines.
+    "daily_diagnostic_summary.json",
+    "regime_timeline.json",
+    "macro_features_timeline.json",
+    "sector_validation.json",
 )
 
 
@@ -76,6 +83,8 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
             doc = json.loads(raw.decode("utf-8"))
             # the shock register says `asof`, the event register's run record `as_of_date`; the others `date`
             mri_date = doc.get("date") or doc.get("asof") or doc.get("as_of_date")
+            # the daily summary says `run_date`, the two timelines `end_date`, the sector validation `score_end_date`
+            mri_date = mri_date or doc.get("run_date") or doc.get("end_date") or doc.get("score_end_date")
         except Exception:
             mri_date = None
         files[name] = {"mri_date": mri_date, "sha256": source_sha256}
