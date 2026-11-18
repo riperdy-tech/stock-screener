@@ -1,13 +1,463 @@
 {
- "alpha_pts": 15.359522017241133,
+ "alpha_pts": 22.05373167117837,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 63,
  "claims_supported": 54,
  "date": "2026-11-18T00:13:27Z",
- "equity_value": 83347117691.212,
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y5 0.1830 (filed 0.1394 to 0.1828)",
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.0390 (filed 0.0432 to 0.2077)",
+   "run 1000: growth_outside_filed_record: rev_growth.y2 0.0400 (filed 0.0432 to 0.2077)",
+   "run 1000: growth_outside_filed_record: rev_growth.y3 0.0420 (filed 0.0432 to 0.2077)",
+   "run 1000: growth_outside_filed_record: rev_growth.y4 0.0400 (filed 0.0432 to 0.2077)",
+   "run 1000: growth_outside_filed_record: rev_growth.y5 0.0380 (filed 0.0432 to 0.2077)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.0390 (filed 0.0432 to 0.2077)",
+   "run 3000: growth_outside_filed_record: rev_growth.y4 0.0420 (filed 0.0432 to 0.2077)",
+   "run 3000: growth_outside_filed_record: rev_growth.y5 0.0400 (filed 0.0432 to 0.2077)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 14 of 14"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0458 and margin 0.1685, margin 0.1754 (persist), growth 0.0375, terminal RONIC 0.0936 (equity return r 0.0936), F 10",
+  "run_gap": 0.005852303783313696,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "equity_value": 79844106882.97162,
+     "seam_ratio": 1.0107418577611305,
+     "tv_share": 0.3924540034857705,
+     "wedge_rate_5": -0.019692483766157794
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y5 0.1830 (filed 0.1394 to 0.1828)",
+     "growth_outside_filed_record: rev_growth.y1 0.0390 (filed 0.0432 to 0.2077)",
+     "growth_outside_filed_record: rev_growth.y2 0.0400 (filed 0.0432 to 0.2077)",
+     "growth_outside_filed_record: rev_growth.y3 0.0420 (filed 0.0432 to 0.2077)",
+     "growth_outside_filed_record: rev_growth.y4 0.0400 (filed 0.0432 to 0.2077)",
+     "growth_outside_filed_record: rev_growth.y5 0.0380 (filed 0.0432 to 0.2077)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.024,
+     "fade_years": 10,
+     "long_run_op_margin": 0.172,
+     "op_margin": [
+      0.168,
+      0.175,
+      0.18,
+      0.182,
+      0.183
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.039,
+      0.04,
+      0.042,
+      0.04,
+      0.038
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0458 and margin 0.1685, margin 0.1754 (persist), growth 0.0375, terminal RONIC 0.0936 (equity return r 0.0936), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 54
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.155,
+      0.185
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.055
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0256"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (600) | (658)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pooled capex is 2.6% of revenue, and nine-month 2026 capex is 600 against 25,619 of revenue, about 2.3%. I use 2.4%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The global payments industry is highly competitive, dynamic, innovative, and subject to regulatory scrutiny and oversight."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The industry is highly competitive and fast-changing, so excess returns and growth should fade over a moderately long period rather than abruptly. I use 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $27,518.0 million | 0.0846 | 0.1394"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $33,172.0 million | 0.0432 | 0.1828"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year median of 2021-2025 GAAP margin is about 16.75%. I set a slight premium for cost savings, but intense competition and rising transaction expense limit the upside. The 2025 peak of 18.3% is not assumed to persist."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "GAAP operating margin contracted 173 basis points to 16.3%"
+       },
+       {
+        "id": "P4",
+        "quote": "is expected to deliver at least $1.5 billion in gross annualized run-rate savings over the next two to three years"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is held near the nine-month 2026 GAAP margin (16.3% in Q3) because of restructuring and transaction expense growth. The margin then recovers as the savings program of at least $1.5 billion is realised, partly reinvested, and as restructuring charges fade."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.6392"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0936."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of about 64% reflects an asset-light network. New investment includes credit and technology spending with more normal returns, and competition should erode them. I assume 25%, well above the 9.36% break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "The increase in net revenues was driven primarily by growth in TPV of 9%."
+       },
+       {
+        "id": "P6",
+        "quote": "Net revenues increased 2% to $8.6 billion"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $33,172.0 million | 0.0432 | 0.1828"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 revenue is up about 4.6%, with TPV up 9% over nine months, but Q3 revenue growth slowed to 2% and monetization lags volume. I assume roughly 4% a year, close to the 2025 rate of 4.3%, with Braintree and credit offsetting weaker transaction take rates."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature payments franchise should grow roughly in line with nominal GDP in the long run, slightly below the code's anchor to allow for share pressure from competing wallets, stablecoins and real-time payments."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Transaction expense keeps growing faster than revenue and the savings are reinvested or competed away, so margins stay near the 2026 level or lower."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "rev_growth",
+      "risk": "Revenue growth stays near the Q3 2026 pace of about 2% because take rates fall, accounts stagnate and competition from wallets, BNPL and stablecoins intensifies."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Credit losses rise and the partner revenue share falls below its minimum return threshold, while new investment earns far lower returns than the current base."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.155,
+      "rev_growth": [
+       0.026999999999999996,
+       0.027999999999999997,
+       0.03,
+       0.027999999999999997,
+       0.025999999999999995
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.185,
+      "rev_growth": [
+       0.052,
+       0.053,
+       0.055,
+       0.053,
+       0.051
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "base_year_representative_note": "Base year is above both the 2026 run-rate and the five-year median.",
+     "cyclical": "no",
+     "margin_position": "The GAAP operating margin was 18.3% in 2025, near the top of its 13.9% to 18.3% range over 2021-2025. It is running lower in 2026 (16.9% for nine months) because transaction expense is growing faster than revenue and restructuring charges are high. Management's cost program should lift it again.",
+     "why": "2025 was flattered by a 17% effective tax rate and by a lower transaction expense rate. Those items do not affect operating margin directly, but the 2026 nine-month GAAP margin is already lower. Restructuring charges of 442 in nine months also depress 2026. I treat 2025 as a high point and 2026 as a trough that includes one-time restructuring costs. The long-run margin sits near the five-year median, slightly above it, because of the savings program."
+    },
+    "value_at_old_defaults": 86.10239430910332,
+    "values": {
+     "base": 100.02495650488477,
+     "bear": 86.45401015596681,
+     "bull": 116.46618828380613
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "equity_value": 80369278858.25215,
+     "seam_ratio": 1.0136106160764153,
+     "tv_share": 0.3976745276482023,
+     "wedge_rate_5": -0.019784742522147063
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.0390 (filed 0.0432 to 0.2077)",
+     "growth_outside_filed_record: rev_growth.y4 0.0420 (filed 0.0432 to 0.2077)",
+     "growth_outside_filed_record: rev_growth.y5 0.0400 (filed 0.0432 to 0.2077)",
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 14 of 14"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.024,
+     "fade_years": 10,
+     "long_run_op_margin": 0.172,
+     "op_margin": [
+      0.167,
+      0.171,
+      0.175,
+      0.178,
+      0.18
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.039,
+      0.045,
+      0.045,
+      0.042,
+      0.04
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0458 and margin 0.1685, margin 0.1754 (persist), growth 0.0375, terminal RONIC 0.0936 (equity return r 0.0936), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 54
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.195
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.06
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Purchases of property and equipment | (600) | (658)"
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0256"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex was 600 over nine months of 2026 against 25,619 of revenue, about 2.3%. The five-year pooled ratio is 2.56%, so I use 2.4%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The global payments industry is highly competitive, dynamic, innovative, and subject to regulatory scrutiny and oversight."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth and margin drift toward steady state over about ten years, because competition from banks, networks, wallets, BNPL providers and stablecoins is intense and slow to resolve."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our operating margin was 18% and 17% for 2025 and 2024, respectively, reflecting the positive impact of a lower transaction expense growth rate."
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $27,518.0 million | 0.0846 | 0.1394"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "This is not a cyclical business, so about half of the gap between the 2025 margin (18.3%) and the five-year median (about 16.75%) should persist. Competition and funding-mix costs argue against holding the 2025 level, while the cost program supports some recovery, so I take about 17.2%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "is expected to deliver at least $1.5 billion in gross annualized run-rate savings over the next two to three years"
+       },
+       {
+        "id": "P6",
+        "quote": "GAAP operating margin contracted 173 basis points to 16.3%"
+       },
+       {
+        "id": "P4",
+        "quote": "Operating margin | 16% | 18% | ** | ** | 17% | 19% | ** | **"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month GAAP margin is 17% against 19% a year earlier, and Q4 GAAP EPS guidance of ~$1.37 is below the prior-year $1.53, so 2026 lands near 16.7%. Margin then rises as restructuring charges fall and the targeted $1.5 billion of gross savings arrive, partly reinvested and partly offset by transaction expense growth."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.6392"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0936"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is very high (0.64) because the business is asset-light and customer funds sit outside corporate capital. I assume competition erodes the return on new investment to about 0.25, still well above the 0.0936 return at which growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Net revenues increased 2% to $8.6 billion"
+       },
+       {
+        "id": "P4",
+        "quote": "The increase in net revenues was driven primarily by growth in TPV of 9%."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $33,172.0 million | 0.0432 | 0.1828"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month revenue is up 5% but Q3 slowed to 2% as TPV growth converts to revenue at a lower rate; Q4 2025 was a tougher comparison. I use about 3.9% for 2026, then 4-4.5% as transaction growth and credit revenue continue, with accounts nearly flat."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature global payments network with nearly flat accounts, so long-run growth should sit slightly below the nominal growth anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Transaction expense keeps growing faster than revenue and the restructuring savings are mostly reinvested, so the margin stays near the 2026 level or lower"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "rev_growth",
+      "risk": "Competition from other wallets, BNPL providers and AI agents, or a weaker credit-partner revenue share, slows revenue growth"
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Share loss and lower rates compress long-run growth toward inflation"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.019000000000000003,
+       0.025,
+       0.025,
+       0.022000000000000006,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.195,
+      "rev_growth": [
+       0.054,
+       0.06,
+       0.06,
+       0.057,
+       0.055
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_note": "",
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "margin_position": "GAAP operating margin was 18.3% in 2025, the top of its 2021-2025 range (13.9% to 18.3%, median about 16.75%). In 2026 it fell back to about 16.9% over nine months. Transaction expense is growing faster than revenue and restructuring charges are high. Planned restructuring savings should offset part of this.",
+     "why": "The 2025 margin of 18.3% was above the five-year median, helped by lower transaction expense growth and low restructuring. The 2026 nine-month margin is lower, and revenue growth has slowed to 2-5%. I start year 1 at about 16.7% and let the margin recover only part of the way as the cost program lands. Evidence is limited on how much of the savings are reinvested and on transaction expense, so ranges are wide."
+    },
+    "value_at_old_defaults": 86.10239430910332,
+    "values": {
+     "base": 100.61205086353223,
+     "bear": 80.0530126698086,
+     "bull": 122.40621384919693
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 86.10239430910332,
+  "version": "decided.v1 2026-11-18 WO_NC7"
+ },
+ "equity_value": 97108311566.31384,
  "family": "operating",
- "far_from_price": false,
+ "far_from_price": true,
  "filed_shares": 968000000.0,
  "flags": [
   "The company announced a strategic reorganization of its business and executive leadership team. The program targets at least $1.5 billion in gross annualized run-rate savings over the next two to three years.",
@@ -23,12 +473,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 86.10239430910332,
-  "3000": 86.10239430910332
+  "1000": 100.02495650488477,
+  "3000": 100.61205086353223
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "on request (no-call fix rerun)",
+ "source": "on request (new valuation method, example; valuation inputs decided by claude-sonnet-5-5)",
  "tasks": {
   "business_model": [
    {
@@ -804,102 +1254,17 @@
   ]
  },
  "ticker": "PYPL",
- "upside": 0.7267014986635614,
- "valuation": {
-  "annotations": [
-   "margin_at_record_peak: normalized.margin 0.1754 at or above the record's p75 0.1689",
-   "margin_at_record_peak: long_run_op_margin 0.1754 at or above the record's p75 0.1689"
-  ],
-  "departures": [],
-  "directions": {
-   "capex": "none",
-   "fade_years": "none",
-   "long_run_op_margin": "none",
-   "normalized.margin": "none",
-   "normalized.rev_growth": "none",
-   "op_margin.y1": "none",
-   "op_margin.y2": "none",
-   "rev_growth.y1": "none",
-   "rev_growth.y2": "none",
-   "terminal_g": "none",
-   "terminal_ronic": "none"
-  },
-  "evidence": {},
-  "neutral": {
-   "capex": [
-    0.02555053546389937,
-    0.02555053546389937,
-    0.02555053546389937,
-    0.02555053546389937,
-    0.02555053546389937
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1754109964357085,
-   "normalized.margin": 0.1754109964357085,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.16850774815566572,
-   "op_margin.y2": 0.1754109964357085,
-   "rev_growth.y1": 0.045844219464402425,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09360305732783658
-  },
-  "numbers": {
-   "capex": [
-    0.02555053546389937,
-    0.02555053546389937,
-    0.02555053546389937,
-    0.02555053546389937,
-    0.02555053546389937
-   ],
-   "fade_years": 10,
-   "long_run_op_margin": 0.1754109964357085,
-   "normalized.margin": 0.1754109964357085,
-   "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.16850774815566572,
-   "op_margin.y2": 0.1754109964357085,
-   "rev_growth.y1": 0.045844219464402425,
-   "rev_growth.y2": 0.0375,
-   "terminal_g": 0.0375,
-   "terminal_ronic": 0.09360305732783658
-  },
-  "of_record": {},
-  "options": {
-   "capex": "pooled",
-   "fade_years": 10,
-   "long_run_op_margin": [
-    "normalized",
-    0
-   ],
-   "normalized.margin": [
-    "persist",
-    0
-   ],
-   "normalized.rev_growth": "anchor",
-   "op_margin.y1": "ytd",
-   "op_margin.y2": "persist",
-   "rev_growth.y1": "ytd",
-   "rev_growth.y2": "anchor",
-   "terminal_g": "anchor",
-   "terminal_ronic": "no_growth_value"
-  },
-  "reverts": [],
-  "unknowns": [
-   "The 3Q'26 earnings release gives guidance only for GAAP and non-GAAP EPS and for transaction margin dollars. No cited sentence guides year 1 revenue, so no revenue guidance entry is possible.",
-   "The cost savings from the strategic reorganization (at least $1.5 billion gross annualized run-rate over two to three years, with a significant portion to be reinvested) cannot be turned into a net operating margin effect from the evidence.",
-   "Nine-month operating margin (17%) and third-quarter margin (16%) are below the prior-year periods (19% and 18%). The evidence does not show whether restructuring and transaction expense growth will persist, so the record-neutral margin options are kept."
-  ],
-  "year": 3
- },
- "value_base": 86.10239430910332,
- "value_bear": 85.38343254304156,
- "value_bull": 87.1887315163801,
+ "upside": 1.0117920302350392,
+ "valuation": null,
+ "value_base": 100.31850368420851,
+ "value_bear": 83.2535114128877,
+ "value_bull": 119.43620106650152,
  "value_per_filed_share": {
-  "base": 86.10239430910332,
-  "bear": 85.38343254304156,
-  "bull": 87.1887315163801
+  "base": 100.31850368420851,
+  "bear": 83.2535114128877,
+  "bull": 119.43620106650152
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +15.4 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +22.1 points a year against the required return over 3 years"
 }
