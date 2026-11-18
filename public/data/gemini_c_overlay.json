@@ -1,9 +1,9 @@
 {
- "count": 172,
+ "count": 173,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-18T03:53:38Z",
- "list_covered": 157,
+ "generated_at": "2026-11-18T03:59:31Z",
+ "list_covered": 158,
  "list_names": 160,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -5136,6 +5136,29 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -26.4 points a year against the required return over 3 years"
   },
+  "WLKP": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 65,
+   "claims_supported": 59,
+   "date": "2026-11-18T03:54:03Z",
+   "family": "commodity",
+   "flags": [
+    "The Partnership and OpCo each amended their senior unsecured revolving credit agreements with Westlake, extending the maturities to July 2031.",
+    "The board of the general partner approved a third-quarter 2026 distribution of $0.4714 per common unit, payable December 1, 2026. It is described as the 49th consecutive quarterly distribution.",
+    "OpCo and Westlake renewed the Ethylene Sales Agreement, and also the Feedstock Supply Agreement, through December 31, 2027. This is a renewal, not a loss of the contract."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "minority interests take too large a share of income",
+   "qwen_book": null,
+   "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "minority interests take too large a share of income"
+  },
   "WLY": {
    "alpha_pts": -9.148517070964543,
    "analysis": "complete",
@@ -5379,7 +5402,7 @@
  "verdict_counts": {
   "AVOID": 36,
   "BUY": 29,
-  "NO_CALL": 100,
+  "NO_CALL": 101,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
