@@ -1,11 +1,11 @@
 {
- "count": 167,
+ "count": 168,
  "effort": "high",
- "fill_complete": false,
- "generated_at": "2026-11-18T00:35:00Z",
- "list_covered": 156,
+ "fill_complete": true,
+ "generated_at": "2026-11-18T00:41:15Z",
+ "list_covered": 157,
  "list_names": 157,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -1395,6 +1395,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -19.7 points a year against the required return over 3 years"
+  },
+  "DHT": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 69,
+   "claims_supported": 63,
+   "date": "2026-11-18T00:34:52Z",
+   "family": "commodity",
+   "flags": [
+    "DHT Bauhinia, a 2007-built VLCC, was delivered to its new owner. The Company booked a gain of $34.2 million on the sale in the third quarter.",
+    "The Company took delivery of the newbuilding VLCC DHT Impala, the fourth and final newbuilding delivered in 2026. The vessel entered the spot market.",
+    "The Company entered into time charter agreements for DHT Jaguar and DHT Panther with global energy companies. These are new employment contracts for those two vessels."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "a1a423c31f5fd1c953026f621dc9800211531b76",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
   },
   "DLTR": {
    "alpha_pts": null,
@@ -5225,7 +5248,7 @@
  "verdict_counts": {
   "AVOID": 35,
   "BUY": 28,
-  "NO_CALL": 97,
+  "NO_CALL": 98,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
