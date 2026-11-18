@@ -2,10 +2,10 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-17T23:59:58Z",
+ "generated_at": "2026-11-18T00:04:07Z",
  "list_covered": 161,
  "list_names": 161,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -1153,27 +1153,45 @@
    "verdict_reason": "no usable tax rate in the filings"
   },
   "DAC": {
-   "alpha_pts": null,
+   "alpha_pts": 38.65973394225624,
    "analysis": "complete",
-   "claims": 69,
-   "claims_supported": 63,
-   "date": "2026-11-17T14:08:51Z",
+   "claims": 73,
+   "claims_supported": 65,
+   "date": "2026-11-17T23:49:26Z",
+   "equity_value": 7138535608.541667,
    "family": "commodity",
+   "far_from_price": true,
+   "filed_shares": 18480301.0,
    "flags": [
-    "Danaos announced in a 6-K that it is exploring a carve-out and sale of a minority stake in its dry bulk segment, with a possible equity placement and listing in the Norwegian market. It has mandated investment banks, and the filing says no transaction is assured.",
-    "Danaos entered into additional JOLCO financing arrangements for six operating container vessels. They are accounted for as failed sale-leasebacks and financing arrangements, so the vessels stay on the balance sheet and the proceeds are recorded as financing liabilities.",
-    "Certain container vessels' time charters were ended early under termination agreements. This produced a $5.1 million gain recorded in voyage expenses, because bunkers were retained on redelivery at no consideration."
+    "Danaos announced that it is exploring a carve-out and sale of a minority stake in its dry bulk segment and has mandated investment banking firms to advise on a potential equity placement and listing in the Norwegian market."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-sonnet-5-5",
-   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "ke": 0.09462594437424718,
+   "market_cap_at_publish": 2687574715,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 147.64,
    "qwen_book": null,
    "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "some filed figures are years older than the latest annual report"
+   "seed_base": {
+    "1000": 386.27810275068936,
+    "3000": 386.27810275068936
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "on request (no-call fix rerun)",
+   "upside": 1.6561254534431304,
+   "value_base": 386.27810275068936,
+   "value_bear": 219.0284582083622,
+   "value_bull": 471.6986033171561,
+   "value_per_filed_share": {
+    "base": 386.27810275068936,
+    "bear": 219.0284582083622,
+    "bull": 471.6986033171561
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +38.7 points a year against the required return over 3 years"
   },
   "DAO": {
    "alpha_pts": null,
@@ -5102,11 +5120,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 64,
+ "valued_count": 65,
  "verdict_counts": {
   "AVOID": 34,
-  "BUY": 24,
-  "NO_CALL": 103,
+  "BUY": 25,
+  "NO_CALL": 102,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
