@@ -4,8 +4,9 @@
 // tested (2026-11-12) and showed no skill at predicting returns, so nothing here is a signal.
 
 import type {
-    MriDimensionDirection, MriFeatureSeries, MriMacroFeatures, MriRegime, MriRegimeTimeline, MriSectorComponent,
-    MriSectorRanking, MriSectorRow, MriSectorValidation, MriTimelinePoint, MriValidationRow,
+    MriCloudDaily, MriCombinedDiagnostic, MriDataHealthInput, MriDimensionDirection, MriFeatureSeries, MriHistoryIndex, MriHistoryRun,
+    MriMacroFeatures, MriNberBenchmark, MriNewsScoreReport, MriRegime, MriRegimeTimeline, MriScoredItem, MriSectorComponent,
+    MriSectorRanking, MriSectorRow, MriSectorValidation, MriSnapshotManifest, MriTimelinePoint, MriValidationRow,
 } from '@/lib/data-service';
 
 export const DASH = '—';
@@ -323,3 +324,179 @@ export function validationSections(v: MriSectorValidation | null | undefined): {
 /** The largest absolute rank correlation among rows, used for the one-word result. */
 export const bestAbsIc = (rows: MriValidationRow[]): number =>
     rows.reduce((m, r) => Math.max(m, typeof r.rank_ic_spearman === 'number' ? Math.abs(r.rank_ic_spearman) : 0), 0);
+
+// ── Files from the cloud news job (WO_MP2) ────────────────────────────────────────────────────────
+
+/**
+ * A cloud file older than this many days is called out on its panel. Three: the cloud job runs once a day, so one weekend
+ * (two days with no run) plus one missed run is still ordinary; a fourth day without a new file means something stopped.
+ */
+export const CLOUD_STALE_DAYS = 3;
+
+const DAY_MS = 86_400_000;
+
+/** Whole days between a YYYY-MM-DD date (read as UTC midnight) and `now`; null when the date is absent or unreadable. Never negative. */
+export function cloudAgeDays(date: string | null | undefined, now: number): number | null {
+    if (!date) return null;
+    const t = Date.parse(`${date.slice(0, 10)}T00:00:00Z`);
+    if (Number.isNaN(t)) return null;
+    return Math.max(0, Math.floor((now - t) / DAY_MS));
+}
+
+/** True only when the age is known and more than CLOUD_STALE_DAYS; an unknown date is not called stale (the panel says it is unknown). */
+export const cloudStale = (date: string | null | undefined, now: number): boolean => {
+    const age = cloudAgeDays(date, now);
+    return age !== null && age > CLOUD_STALE_DAYS;
+};
+
+/** The file's own date as the sync recorded it in the snapshot manifest, or null. */
+export const cloudDate = (manifest: MriSnapshotManifest | null | undefined, file: string): string | null =>
+    manifest?.cloud_files?.[file]?.date ?? null;
+
+const ACRONYMS = new Set(['ai', 'bbc', 'bls', 'cnbc', 'dol', 'eia', 'gdelt', 'rss', 'scmp', 'sec', 'us']);
+
+/** "cnbc_retail" -> "CNBC Retail", "technology_ai" -> "Technology AI": a news group or source id for people. Names stay in English. */
+export const prettyId = (id: string): string =>
+    id.split('_').map((w) => (ACRONYMS.has(w) ? w.toUpperCase() : w ? w.charAt(0).toUpperCase() + w.slice(1) : w)).join(' ');
+
+/** Only an http or https address may become a link; anything else in a file fetched from the internet is shown as text. */
+export function safeHttpUrl(url: string | null | undefined): string | null {
+    if (!url) return null;
+    try {
+        const u = new URL(url);
+        return u.protocol === 'https:' || u.protocol === 'http:' ? u.href : null;
+    } catch {
+        return null;
+    }
+}
+
+/** sector_id to label, from the sector ranking (the cloud files carry ids only). */
+export function sectorLabels(ranking: MriSectorRanking | null | undefined): Record<string, string> {
+    const out: Record<string, string> = {};
+    for (const r of ranking?.sector_ranking ?? []) if (r.sector_id && r.label) out[r.sector_id] = r.label;
+    return out;
+}
+
+export const labelOf = (id: string | null | undefined, labels: Record<string, string>): string =>
+    id ? labels[id] ?? sectorName({ sector_id: id, label: null }) : DASH;
+
+export interface ScoreRow { key: string; id: string; score: number; items: number | null }
+
+const scoreRows = (...lists: (MriScoredItem[] | null | undefined)[]): ScoreRow[] =>
+    lists
+        .flatMap((l) => l ?? [])
+        .filter((i): i is MriScoredItem & { id: string; score: number } => Boolean(i.id) && typeof i.score === 'number' && Number.isFinite(i.score))
+        .sort((a, b) => b.score - a.score)
+        .map((i, n) => ({ key: `${i.id}-${n}`, id: i.id, score: i.score, items: typeof i.item_count === 'number' ? i.item_count : null }));
+
+/** The macro themes, positive and negative together, strongest first. */
+export const newsThemeRows = (r: MriNewsScoreReport | null | undefined): ScoreRow[] =>
+    scoreRows(r?.top_positive_macro_themes, r?.top_negative_macro_themes);
+
+/** The sectors with the strongest news tailwinds and headwinds together, strongest first. Not every sector. */
+export const newsSectorRows = (r: MriNewsScoreReport | null | undefined): ScoreRow[] =>
+    scoreRows(r?.top_sector_news_tailwinds, r?.top_sector_news_headwinds);
+
+export const NEWS_ITEMS_SHOWN = 8;
+
+/** The items the classifier was least sure of, as the file lists them (at most NEWS_ITEMS_SHOWN). */
+export const lowConfidenceItems = (r: MriNewsScoreReport | null | undefined) =>
+    (r?.low_confidence_items ?? []).filter((i) => i.title || i.summary).slice(0, NEWS_ITEMS_SHOWN);
+
+export interface OverlayMove { id: string; from: number; to: number; thin: boolean }
+
+/**
+ * Macro-only rank against combined rank over the same sectors. The macro-only rank is the rank of each row's own macro score
+ * (the ranking numbers parent sectors and sub-industries separately). A sector is "thin" when the overlay gives its news no
+ * weight. Empty when any row lacks an id, a rank or a macro score: a partial slope would mislead.
+ */
+export function overlayMoves(c: MriCombinedDiagnostic | null | undefined): OverlayMove[] {
+    const rows = c?.combined_experimental_ranking ?? [];
+    if (rows.length === 0 || rows.some((r) => !r.sector_id || typeof r.rank !== 'number' || typeof r.sector_macro_score !== 'number')) return [];
+    const byMacro = [...rows].sort((a, b) => (b.sector_macro_score as number) - (a.sector_macro_score as number));
+    const macroRank = new Map(byMacro.map((r, i) => [r.sector_id as string, i + 1]));
+    return rows.map((r) => ({
+        id: r.sector_id as string,
+        from: macroRank.get(r.sector_id as string) as number,
+        to: r.rank as number,
+        thin: (r.news_component_weight ?? 0) === 0,
+    }));
+}
+
+/** The smallest and largest share of a sector's combined score that comes from news; null when the rows carry none. */
+export function newsWeightRange(c: MriCombinedDiagnostic | null | undefined): { min: number; max: number } | null {
+    const w = (c?.combined_experimental_ranking ?? []).map((r) => r.news_component_weight).filter((v): v is number => typeof v === 'number');
+    return w.length ? { min: Math.min(...w), max: Math.max(...w) } : null;
+}
+
+export const maxRankChange = (moves: OverlayMove[]): number => moves.reduce((m, r) => Math.max(m, Math.abs(r.from - r.to)), 0);
+
+/** The four steps of the news-history readiness track, in order: the id the engine writes, and the strings for its name, what it needs and what it means. */
+export const READINESS_STEPS = [
+    { id: 'insufficient_history', label: 'mcrdInsufficient', range: 'mcrdInsufficientRange', meaning: 'mcrdMeanInsufficient' },
+    { id: 'early_history', label: 'mcrdEarly', range: 'mcrdEarlyRange', meaning: 'mcrdMeanEarly' },
+    { id: 'monitor_ready', label: 'mcrdMonitor', range: 'mcrdMonitorRange', meaning: 'mcrdMeanMonitor' },
+    { id: 'validation_candidate', label: 'mcrdValidation', range: 'mcrdValidationRange', meaning: 'mcrdMeanValidation' },
+] as const;
+
+/** One source group: how many of its configured sources reported ok in the cloud run. */
+export interface CoverageRow { id: string; ok: number; total: number; uncovered: boolean }
+
+/** From the cloud run's news health: per group, the sources reporting ok (and not dead) out of those configured. */
+export function coverageRows(d: MriCloudDaily | null | undefined): CoverageRow[] {
+    const health = d?.news_health;
+    const status = new Map((health?.sources ?? []).map((s) => [s.source_id ?? '', s]));
+    return (health?.groups ?? []).map((g) => {
+        const ids = g.sources ?? [];
+        const ok = ids.filter((id) => {
+            const s = status.get(id);
+            return s?.status === 'ok' && !s.dead;
+        }).length;
+        return { id: g.group ?? '', ok, total: ids.length, uncovered: g.uncovered === true };
+    });
+}
+
+/**
+ * Why an input in the data-health file was extended, as an i18n key and fill values; null when it was not. The one series the
+ * engine knows by name is the narrow dollar index, which the Fed stopped publishing and the engine extends with the broad one.
+ * `months` is "" or a number; the string carries its own wording.
+ */
+export function fallbackNote(input: Pick<MriDataHealthInput, 'series_id' | 'extended_by_fallback' | 'fallback_months'>): ReasonText | null {
+    if (input.extended_by_fallback !== true) return null;
+    const months = typeof input.fallback_months === 'number' ? input.fallback_months : null;
+    const key = input.series_id === 'NNUSBIS' ? 'mcfbNarrow' : 'mcfbGeneric';
+    return { key: months === null ? key : `${key}Months`, vars: { n: months ?? '' } };
+}
+
+/** The NBER recession spans for the ribbon; none unless the benchmark file says its status is ok. */
+export function recessionSpans(n: MriNberBenchmark | null | undefined): { start: string; end: string }[] {
+    if (n?.status !== 'ok') return [];
+    return (n.nber_recessions ?? []).flatMap((r) => (r.start && r.end ? [{ start: r.start, end: r.end }] : []));
+}
+
+/** Median of the lead or lag, in months, between the label crossing its threshold and the NBER start (negative is early); null if none. */
+export function medianLeadMonths(n: MriNberBenchmark | null | undefined): number | null {
+    const leads = (n?.recession_detection ?? [])
+        .map((r) => r.lead_lag_months)
+        .filter((v): v is number => typeof v === 'number')
+        .sort((a, b) => a - b);
+    if (leads.length === 0) return null;
+    return (leads[Math.floor((leads.length - 1) / 2)] + leads[Math.ceil((leads.length - 1) / 2)]) / 2;
+}
+
+export type RunFilter = 'all' | 'live' | 'replay';
+
+export const RUNS_SHOWN = 30;
+
+/** The newest RUNS_SHOWN runs that match the filter, and how many matched in all. */
+export function filterRuns(h: MriHistoryIndex | null | undefined, filter: RunFilter, limit = RUNS_SHOWN): { rows: MriHistoryRun[]; total: number } {
+    const all = h?.runs ?? [];
+    const kept = all.filter((r) => (filter === 'all' ? true : filter === 'replay' ? r.run_mode === 'replay' : r.run_mode !== 'replay'));
+    return { rows: kept.slice(0, limit), total: kept.length };
+}
+
+/** "03:59 UTC" from a run id like 20261118T035925Z-b08d849a (several runs can share a date); null when the id does not carry a time. */
+export function runTimeUtc(runId: string | null | undefined): string | null {
+    const m = runId?.match(/^\d{8}T(\d{2})(\d{2})\d{2}Z/);
+    return m ? `${m[1]}:${m[2]} UTC` : null;
+}

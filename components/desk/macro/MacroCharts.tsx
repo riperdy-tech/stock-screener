@@ -1,7 +1,7 @@
 'use client';
 
 // Small hand-drawn charts for the /macro tabs: the growth and inflation quadrant, the regime probability
-// area, the indicator lines, signed bars and the regime ribbon. Same house rules as the rest of the desk:
+// area, the indicator lines, signed bars, the macro-only to combined rank slope and the regime ribbon. Same house rules as the rest of the desk:
 // square corners, rules and whitespace, colours from the CSS tokens. Each time chart reads out the month
 // under the pointer in a line beneath it, which also works by touch.
 
@@ -245,7 +245,7 @@ export function MiniLine({ points }: { points: { date?: string | null; value?: n
 
 // ── Signed bars ───────────────────────────────────────────────────────────────────────────────────
 
-export function DivergingBars({ rows }: { rows: { key: string; label: string; value: number }[] }) {
+export function DivergingBars({ rows }: { rows: { key: string; label: string; value: number; note?: string }[] }) {
     const { t } = useLanguage();
     if (rows.length === 0) return <p className="font-mono text-[11px] text-off">{t('mcNotAvailable')}</p>;
     const max = rows.reduce((m, r) => Math.max(m, Math.abs(r.value)), 0) || 1;
@@ -253,7 +253,10 @@ export function DivergingBars({ rows }: { rows: { key: string; label: string; va
         <ul className="space-y-1.5">
             {rows.map((r) => (
                 <li key={r.key} className="grid grid-cols-[minmax(0,110px)_minmax(0,1fr)_52px] items-center gap-x-3 text-[13px] sm:grid-cols-[minmax(0,170px)_minmax(0,1fr)_56px]">
-                    <span className="min-w-0 break-words text-ink-2">{r.label}</span>
+                    <span className="min-w-0 break-words text-ink-2">
+                        {r.label}
+                        {r.note && <span className="block font-mono text-[10.5px] text-off">{r.note}</span>}
+                    </span>
                     <span aria-hidden className="relative h-3.5 bg-track-12">
                         <span className="absolute left-1/2 top-0 h-full w-px bg-rule-24" />
                         <span
@@ -272,9 +275,50 @@ export function DivergingBars({ rows }: { rows: { key: string; label: string; va
     );
 }
 
+// ── Macro-only rank to combined rank ──────────────────────────────────────────────────────────────
+
+export interface SlopeRow { id: string; label: string; from: number; to: number; thin: boolean }
+
+/**
+ * One line per sector from its macro-only rank (left) to its combined rank (right). A sector whose news carries no weight
+ * is drawn faint; the largest mover is drawn in the accent colour. The drawing keeps a minimum width and scrolls inside
+ * its own box on a narrow screen, so the labels stay readable.
+ */
+export function SlopeChart({ rows }: { rows: SlopeRow[] }) {
+    const { t } = useLanguage();
+    if (rows.length === 0) return <p className="font-mono text-[11px] text-off">{t('mcNotAvailable')}</p>;
+    const step = 24;
+    const top = 16;
+    const width = 560;
+    const left = 190;
+    const right = width - 190;
+    const height = top * 2 + step * (rows.length - 1);
+    const maxMove = rows.reduce((m, r) => Math.max(m, Math.abs(r.from - r.to)), 0);
+    const yOf = (rank: number) => top + (rank - 1) * step;
+    return (
+        <div className="overflow-x-auto">
+            <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={t('mcslAria')} className="block h-auto w-full min-w-[540px]">
+                {rows.map((r) => {
+                    const move = Math.abs(r.from - r.to);
+                    const colour = r.thin ? 'var(--off)' : move > 0 && move === maxMove ? 'var(--accent)' : 'var(--ink-2)';
+                    return (
+                        <g key={r.id} style={{ color: colour }}>
+                            <line x1={left} y1={yOf(r.from)} x2={right} y2={yOf(r.to)} stroke="currentColor" strokeWidth={move > 0 && move === maxMove ? 2 : 1.2} strokeOpacity={r.thin ? 0.55 : 1} />
+                            <circle cx={left} cy={yOf(r.from)} r={3} fill="currentColor" />
+                            <circle cx={right} cy={yOf(r.to)} r={3} fill="currentColor" />
+                            <text x={left - 9} y={yOf(r.from) + 4} textAnchor="end" fontSize={11} fill="currentColor">{r.from} {r.label}</text>
+                            <text x={right + 9} y={yOf(r.to) + 4} fontSize={11} fill="currentColor">{r.to} {r.label}</text>
+                        </g>
+                    );
+                })}
+            </svg>
+        </div>
+    );
+}
+
 // ── Reported regime by month ──────────────────────────────────────────────────────────────────────
 
-export function RegimeRibbon({ points }: { points: MriTimelinePoint[] }) {
+export function RegimeRibbon({ points, recessions = [] }: { points: MriTimelinePoint[]; recessions?: { start: string; end: string }[] }) {
     const { t } = useLanguage();
     const n = points.length;
     const { index, bind } = useHoverIndex(n);
@@ -282,25 +326,41 @@ export function RegimeRibbon({ points }: { points: MriTimelinePoint[] }) {
     const runs = regimeRuns(points);
     const cell = n <= 1 ? W : W / (n - 1);
     const hovered = index === null ? null : points[index];
+    // NBER recession months sit on a thin strip under the ribbon, placed by date; the first and last point set the scale.
+    const startT = Date.parse(points[0]?.date ?? '');
+    const span = Date.parse(points[n - 1]?.date ?? '') - startT;
+    const px = (month: string) => (span > 0 ? Math.max(0, Math.min(W, ((Date.parse(`${month}-01`) - startT) / span) * W)) : 0);
+    const H = recessions.length > 0 ? 36 : 26;
+    const hoveredMonth = hovered?.date?.slice(0, 7) ?? '';
+    const inRecession = recessions.some((r) => hoveredMonth >= r.start && hoveredMonth <= r.end);
     return (
         <div>
             <div className="relative" {...bind} style={{ touchAction: 'pan-y' }}>
-                <svg viewBox={`0 0 ${W} 26`} preserveAspectRatio="none" role="img" aria-label={t('mcrAria')} className="block h-[26px] w-full">
+                <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={t('mcrAria')} className="block w-full" style={{ height: H }}>
                     {runs.map((run, i) => (
                         <rect key={i} x={Math.max((run.start / Math.max(n - 1, 1)) * W - cell / 2, 0)} y={0} width={Math.min(run.len * cell, W)} height={26} style={{ fill: regimeColor(run.regime) }} />
                     ))}
+                    {recessions.map((r, i) => (
+                        <rect key={`n${i}`} x={px(r.start)} y={30} width={Math.max(px(r.end) - px(r.start), 2)} height={6} style={{ fill: 'var(--ink)' }} />
+                    ))}
                 </svg>
                 {index !== null && (
-                    <span aria-hidden className="pointer-events-none absolute top-0 h-[26px] w-px bg-ink" style={{ left: `${pctOf(index, n)}%` }} />
+                    <span aria-hidden className="pointer-events-none absolute top-0 w-px bg-ink" style={{ left: `${pctOf(index, n)}%`, height: H }} />
                 )}
             </div>
             <XAxis dates={points.map((p) => p.date)} count={6} />
             <Readout>
                 {hovered
-                    ? `${monthYear(hovered.date)} · ${hovered.reported_regime ? titleCase(hovered.reported_regime) : DASH}${typeof hovered.confidence === 'number' ? ` · ${t('mcrConfidence')} ${hovered.confidence.toFixed(2)}` : ''}`
+                    ? `${monthYear(hovered.date)} · ${hovered.reported_regime ? titleCase(hovered.reported_regime) : DASH}${typeof hovered.confidence === 'number' ? ` · ${t('mcrConfidence')} ${hovered.confidence.toFixed(2)}` : ''}${inRecession ? ` · ${t('mcrNber')}` : ''}`
                     : null}
             </Readout>
             <RegimeLegend />
+            {recessions.length > 0 && (
+                <p className="mt-1 flex items-center gap-1.5 font-mono text-[11px] text-ink-2">
+                    <span aria-hidden className="h-1.5 w-4 bg-ink" />
+                    {t('mcrNber')}
+                </p>
+            )}
         </div>
     );
 }

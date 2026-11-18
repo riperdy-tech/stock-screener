@@ -95,7 +95,21 @@ def mri_outputs_dir():
     return (base / "outputs") if base else None
 
 
+# Where the MRI's cloud job publishes its data files (the news reports, run history, NBER benchmark, data health).
+# This is a URL, not a folder, but it answers the same question as the functions above - "where does the MRI's
+# output live" - and it follows the same rule: MRI_CLOUD_DATA_URL, if set, is used verbatim; otherwise the public
+# default. It is the `data/` folder of the `gh-pages` branch of the MRI repository, served as raw file content.
+_MRI_CLOUD_DATA_URL = "https://raw.githubusercontent.com/riperdy-tech/Macro-Regime-Identifier/gh-pages/data"
+
+
+def mri_cloud_data_url():
+    """Base URL (no trailing slash) the cloud job's published files are fetched from; read by mri_sync only."""
+    env = (os.environ.get("MRI_CLOUD_DATA_URL") or "").strip()
+    return (env or _MRI_CLOUD_DATA_URL).rstrip("/")
+
+
 if __name__ == "__main__":
+    print(f"{'mri_cloud_data_url':24s} = {mri_cloud_data_url()}")
     for label, value in (("STOCKS_ROOT candidates", _candidate_roots()),
                          ("mri_dir", mri_dir()),
                          ("mri_env_file", mri_env_file()),

@@ -4,8 +4,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { MriRegime } from '../data-service';
 import {
-    componentBars, convictionKey, dimensionAverages, directionReason, directionRows, quadrantOf, quadrantTrail,
-    regimeRuns, signed, sourceHealth, unchangedMonths, validationSections,
+    CLOUD_STALE_DAYS, cloudAgeDays, cloudDate, cloudStale, componentBars, convictionKey, coverageRows, dimensionAverages, directionReason,
+    directionRows, fallbackNote, filterRuns, labelOf, lowConfidenceItems, maxRankChange, medianLeadMonths, newsSectorRows, newsThemeRows,
+    newsWeightRange, overlayMoves, prettyId, quadrantOf, quadrantTrail, recessionSpans, regimeRuns, runTimeUtc, safeHttpUrl, sectorLabels, signed,
+    sourceHealth, unchangedMonths, validationSections,
 } from './macroPanels';
 
 const regime = (patch: Partial<MriRegime>): MriRegime => ({ ...patch }) as MriRegime;
@@ -120,4 +122,151 @@ test('validationSections groups by cross-section in file order', () => {
     ] });
     assert.deepEqual(s.map((x) => [x.section, x.rows.length]), [['gics_11', 2], ['pooled_17', 1]]);
     assert.deepEqual(validationSections(null), []);
+});
+
+// ── The cloud news job's files (WO_MP2) ──
+
+const noon = (day: string) => Date.parse(`${day}T12:00:00Z`);
+
+test('cloud age: whole days from the file date, never negative, null when unreadable', () => {
+    assert.equal(cloudAgeDays('2026-11-18', noon('2026-11-18')), 0);
+    assert.equal(cloudAgeDays('2026-11-18', noon('2026-11-21')), 3);
+    assert.equal(cloudAgeDays('2026-11-18', noon('2026-11-10')), 0);      // a date in the future is not a negative age
+    assert.equal(cloudAgeDays('2026-11-18T04:22:00', noon('2026-11-19')), 1);
+    assert.equal(cloudAgeDays(null, noon('2026-11-19')), null);
+    assert.equal(cloudAgeDays('not a date', noon('2026-11-19')), null);
+});
+
+test('cloud stale: older than three days, not at three; an unknown date is not called stale', () => {
+    assert.equal(CLOUD_STALE_DAYS, 3);
+    assert.equal(cloudStale('2026-11-18', noon('2026-11-21')), false);    // 3 days
+    assert.equal(cloudStale('2026-11-18', noon('2026-11-22')), true);     // 4 days
+    assert.equal(cloudStale(null, noon('2026-11-22')), false);
+});
+
+test('cloudDate: the date the sync recorded for a file, or null', () => {
+    const manifest = { cloud_files: { 'news_score_report.json': { date: '2026-11-18' }, 'data_health.json': { date: null } } };
+    assert.equal(cloudDate(manifest, 'news_score_report.json'), '2026-11-18');
+    assert.equal(cloudDate(manifest, 'data_health.json'), null);
+    assert.equal(cloudDate(manifest, 'nber_benchmark.json'), null);
+    assert.equal(cloudDate(null, 'news_score_report.json'), null);
+});
+
+test('safeHttpUrl: only http and https become links', () => {
+    assert.equal(safeHttpUrl('https://www.federalreserve.gov/feeds/press_all.xml'), 'https://www.federalreserve.gov/feeds/press_all.xml');
+    assert.equal(safeHttpUrl('http://example.com/a'), 'http://example.com/a');
+    assert.equal(safeHttpUrl('javascript:alert(1)'), null);
+    assert.equal(safeHttpUrl('data:text/html,hi'), null);
+    assert.equal(safeHttpUrl('not a url'), null);
+    assert.equal(safeHttpUrl(null), null);
+});
+
+test('news theme and sector rows: both lists together, strongest first, a score of 0 kept, rows without a score dropped', () => {
+    const rows = newsThemeRows({
+        top_positive_macro_themes: [{ id: 'inflation_pressure', score: 7.8, item_count: 195 }, { id: 'flat', score: 0, item_count: 3 }],
+        top_negative_macro_themes: [{ id: 'growth_momentum', score: -2.1 }, { id: 'broken', score: null }, { score: 4 }],
+    });
+    assert.deepEqual(rows.map((r) => [r.id, r.score, r.items]), [['inflation_pressure', 7.8, 195], ['flat', 0, 3], ['growth_momentum', -2.1, null]]);
+    const sectors = newsSectorRows({
+        top_sector_news_tailwinds: [{ id: 'energy', score: 3, item_count: 10 }],
+        top_sector_news_headwinds: [{ id: 'real_estate', score: -6, item_count: 12 }],
+    });
+    assert.deepEqual(sectors.map((r) => r.id), ['energy', 'real_estate']);
+    assert.deepEqual(newsThemeRows(null), []);
+});
+
+test('lowConfidenceItems: at most eight, items with no text dropped', () => {
+    const items = Array.from({ length: 12 }, (_, i) => ({ news_id: `n${i}`, title: `t${i}` }));
+    assert.equal(lowConfidenceItems({ low_confidence_items: items }).length, 8);
+    assert.equal(lowConfidenceItems({ low_confidence_items: [{ news_id: 'x' }] }).length, 0);
+    assert.deepEqual(lowConfidenceItems(null), []);
+});
+
+test('sector labels: the ranking supplies them, an unknown id is title-cased', () => {
+    const labels = sectorLabels({ sector_ranking: [{ sector_id: 'energy', label: 'Energy' }, { sector_id: 'x' }] } as never);
+    assert.equal(labelOf('energy', labels), 'Energy');
+    assert.equal(labelOf('consumer_staples', labels), 'Consumer staples');
+    assert.equal(labelOf('oil_gas_ep', labels), 'Oil & Gas E&P');
+    assert.equal(labelOf(null, labels), '—');
+});
+
+test('overlay moves: macro-only rank from the macro score, thin when the news weight is 0, empty when a row is incomplete', () => {
+    const combined = {
+        combined_experimental_ranking: [
+            { sector_id: 'a', rank: 1, sector_macro_score: 0.5, news_component_weight: 0 },
+            { sector_id: 'b', rank: 2, sector_macro_score: 1.5, news_component_weight: 0.25 },
+            { sector_id: 'c', rank: 3, sector_macro_score: -1, news_component_weight: 0 },
+        ],
+    };
+    const moves = overlayMoves(combined);
+    assert.deepEqual(moves.map((m) => [m.id, m.from, m.to, m.thin]), [['a', 2, 1, true], ['b', 1, 2, false], ['c', 3, 3, true]]);
+    assert.equal(maxRankChange(moves), 1);
+    assert.deepEqual(newsWeightRange(combined), { min: 0, max: 0.25 });
+    assert.deepEqual(overlayMoves({ combined_experimental_ranking: [{ sector_id: 'a', rank: 1 }] }), []);
+    assert.deepEqual(overlayMoves(null), []);
+    assert.equal(newsWeightRange({ combined_experimental_ranking: [{ sector_id: 'a' }] }), null);
+});
+
+test('coverage rows: sources ok and not dead, out of those configured, per group', () => {
+    const rows = coverageRows({
+        news_health: {
+            groups: [{ group: 'labor', sources: ['bls', 'dol'] }, { group: 'real_estate', sources: ['hw'], uncovered: true }],
+            sources: [
+                { source_id: 'bls', status: 'ok', dead: false },
+                { source_id: 'dol', status: 'ok', dead: true },
+                { source_id: 'hw', status: 'degraded' },
+            ],
+        },
+    });
+    assert.deepEqual(rows, [{ id: 'labor', ok: 1, total: 2, uncovered: false }, { id: 'real_estate', ok: 0, total: 1, uncovered: true }]);
+    assert.deepEqual(coverageRows({ news_health: {} }), []);
+    assert.deepEqual(coverageRows(null), []);
+});
+
+test('fallback note: only an extended input has one; the narrow dollar index is named; months are optional', () => {
+    assert.equal(fallbackNote({ series_id: 'DGS10', extended_by_fallback: false }), null);
+    assert.equal(fallbackNote({ series_id: 'DGS10' }), null);
+    assert.deepEqual(fallbackNote({ series_id: 'NNUSBIS', extended_by_fallback: true, fallback_months: 3 }), { key: 'mcfbNarrowMonths', vars: { n: 3 } });
+    assert.deepEqual(fallbackNote({ series_id: 'NNUSBIS', extended_by_fallback: true }), { key: 'mcfbNarrow', vars: { n: '' } });
+    assert.deepEqual(fallbackNote({ series_id: 'X', extended_by_fallback: true, fallback_months: 0 }), { key: 'mcfbGenericMonths', vars: { n: 0 } });
+});
+
+test('NBER: spans only when the status is ok; median timing from the detections', () => {
+    const nber = {
+        status: 'ok',
+        nber_recessions: [{ start: '2001-03', end: '2001-11' }, { start: '2020-02' }],
+        recession_detection: [{ lead_lag_months: -6 }, { lead_lag_months: 0 }, { lead_lag_months: -2 }, { lead_lag_months: null }],
+    };
+    assert.deepEqual(recessionSpans(nber), [{ start: '2001-03', end: '2001-11' }]);
+    assert.deepEqual(recessionSpans({ ...nber, status: 'error' }), []);
+    assert.deepEqual(recessionSpans(null), []);
+    assert.equal(medianLeadMonths(nber), -2);
+    assert.equal(medianLeadMonths({ recession_detection: [{ lead_lag_months: -4 }, { lead_lag_months: 2 }] }), -1);
+    assert.equal(medianLeadMonths({ recession_detection: [] }), null);
+});
+
+test('run history: filter by mode, newest first as given, capped, with the full count', () => {
+    const runs = [
+        ...Array.from({ length: 40 }, (_, i) => ({ run_id: `d${i}`, run_mode: 'daily' })),
+        { run_id: 'r1', run_mode: 'replay' },
+    ];
+    const all = filterRuns({ runs }, 'all');
+    assert.equal(all.rows.length, 30);
+    assert.equal(all.total, 41);
+    assert.equal(filterRuns({ runs }, 'live').total, 40);
+    assert.deepEqual(filterRuns({ runs }, 'replay').rows.map((r) => r.run_id), ['r1']);
+    assert.deepEqual(filterRuns(null, 'all'), { rows: [], total: 0 });
+});
+
+test('run time: the UTC time from a run id, null when absent', () => {
+    assert.equal(runTimeUtc('20261118T035925Z-b08d849a'), '03:59 UTC');
+    assert.equal(runTimeUtc('replay-2026-11'), null);
+    assert.equal(runTimeUtc(null), null);
+});
+
+test('prettyId: acronyms in capitals, other words capitalised', () => {
+    assert.equal(prettyId('cnbc_retail'), 'CNBC Retail');
+    assert.equal(prettyId('technology_ai'), 'Technology AI');
+    assert.equal(prettyId('credit_financial_conditions'), 'Credit Financial Conditions');
+    assert.equal(prettyId(''), '');
 });

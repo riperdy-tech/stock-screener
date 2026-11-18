@@ -1031,6 +1031,187 @@ export async function fetchMriRiskState(): Promise<MriRiskState | null> {
     return fetchJson<MriRiskState>('/data/mri/risk_state.json');
 }
 
+// ── The cloud news job's files (WO_MP2). Written by the MRI's cloud run, copied in by scripts/mri_sync.py. Every field is
+// optional: the page shows what is there and says so when something is not. ──────────────────────────────────────────
+
+/** The snapshot manifest. `cloud_files[name].date` is the file's own date (YYYY-MM-DD), so the page can say how old it is. */
+export interface MriSnapshotManifest {
+    cloud_source?: string | null;
+    cloud_fetched_at?: string | null;
+    cloud_files?: Record<string, { date?: string | null; bytes?: number | null; fetched_at?: string | null }> | null;
+}
+
+export interface MriDataHealthInput {
+    feature_id?: string | null;
+    series_id?: string | null;
+    observation_date?: string | null;
+    age_days?: number | null;
+    used?: boolean | null;
+    reason?: string | null;
+    extended_by_fallback?: boolean | null;
+    fallback_months?: number | null;
+}
+
+export interface MriDataHealthGroup {
+    group?: string | null;
+    oldest_input_date?: string | null;
+    oldest_input_age_days?: number | null;
+    carried_forward_count?: number | null;
+    inputs?: MriDataHealthInput[] | null;
+}
+
+/** data_health.json: how old the inputs behind the latest reading are and what the daily run warned about. */
+export interface MriDataHealth {
+    generated_at?: string | null;
+    reading_date?: string | null;
+    input_groups?: MriDataHealthGroup[] | null;
+    input_groups_reason?: string | null;
+    carried_forward?: { group?: string | null; feature_id?: string | null; series_id?: string | null; observation_date?: string | null; age_days?: number | null }[] | null;
+    daily?: {
+        status?: string | null;
+        warning_count?: number | null;
+        warnings?: { warning?: string | null; count?: number | null }[] | null;
+        errors?: string[] | null;
+        non_fatal_failures?: string[] | null;
+        feature_freshness?: { gap_days?: number | null; stale?: boolean | null } | null;
+    } | null;
+    sector_prices?: {
+        last_price_date?: string | null;
+        age_days?: number | null;
+        fresh?: boolean | null;
+        fresh_within_days?: number | null;
+        market_observed?: boolean | null;
+        reasons?: string[] | null;
+    } | null;
+}
+
+export interface MriScoredItem {
+    id?: string | null;
+    score?: number | null;
+    item_count?: number | null;
+}
+
+export interface MriNewsItem {
+    news_id?: string | null;
+    title?: string | null;
+    summary?: string | null;
+    confidence?: number | null;
+}
+
+/** news_score_report.json: AI-classified themes and sector tailwinds and headwinds. A description of the news, not a signal. */
+export interface MriNewsScoreReport {
+    latest_news_scoring_date?: string | null;
+    top_positive_macro_themes?: MriScoredItem[] | null;
+    top_negative_macro_themes?: MriScoredItem[] | null;
+    top_sector_news_tailwinds?: MriScoredItem[] | null;
+    top_sector_news_headwinds?: MriScoredItem[] | null;
+    low_confidence_items?: MriNewsItem[] | null;
+}
+
+export interface MriCombinedRow {
+    sector_id?: string | null;
+    rank?: number | null;
+    sector_macro_score?: number | null;
+    news_component_weight?: number | null;
+}
+
+/** combined_sector_diagnostic.json: the macro-only ranking beside the one with the news overlay. */
+export interface MriCombinedDiagnostic {
+    diagnostic_date?: string | null;
+    combined_experimental_ranking?: MriCombinedRow[] | null;
+    warnings?: string[] | null;
+}
+
+/** news_monitoring_report.json: how well the AI classification and the overlay ran. */
+export interface MriNewsMonitoring {
+    classification_quality?: { success_rate?: number | null; quality_status?: string | null } | null;
+    input_quality?: {
+        raw_item_count?: number | null;
+        unique_item_count?: number | null;
+        details_json?: { unmapped_pct?: number | null } | null;
+    } | null;
+    overlay_monitoring?: { overlay_status?: string | null; news_item_count?: number | null; max_rank_change?: number | null } | null;
+}
+
+/** news_accumulation_report.json: how much news history has built up. */
+export interface MriNewsAccumulation {
+    readiness_label?: string | null;
+    total_classified_items?: number | null;
+    latest_run?: { classified_items?: number | null; readiness_label?: string | null } | null;
+}
+
+export interface MriHistoryRun {
+    run_id?: string | null;
+    run_date?: string | null;
+    run_mode?: string | null;
+    macro_regime?: string | null;
+    top_combined_sectors?: string[] | null;
+    guardrail_status?: string | null;
+    warning_count?: number | null;
+}
+
+/** history_index.json: one entry per archived daily run, newest first. */
+export interface MriHistoryIndex {
+    runs?: MriHistoryRun[] | null;
+    total_runs?: number | null;
+}
+
+/** nber_benchmark.json: the regime label set against the NBER recession dates, on revised data. */
+export interface MriNberBenchmark {
+    status?: string | null;
+    auroc?: number | null;
+    label?: string | null;
+    disclaimer?: string | null;
+    nber_recessions?: { start?: string | null; end?: string | null }[] | null;
+    recession_detection?: { lead_lag_months?: number | null }[] | null;
+    label_metrics?: { reported?: { recession_hit_rate?: number | null } | null } | null;
+}
+
+export interface MriNewsSources {
+    groups?: { group?: string | null; sources?: { name?: string | null; url?: string | null }[] | null }[] | null;
+}
+
+export interface MriNewsHealthSource {
+    source_id?: string | null;
+    status?: string | null;
+    dead?: boolean | null;
+    items_new?: number | null;
+    last_new_at?: string | null;
+    consecutive_bad_runs?: number | null;
+}
+
+/** The cloud run's own daily summary (cloud_daily_diagnostic_summary.json). Only the parts the news panels read. */
+export interface MriCloudDaily {
+    run_date?: string | null;
+    errors?: string[] | null;
+    warnings?: string[] | null;
+    step_statuses?: { guardrail_status?: string | null } | null;
+    news_health?: {
+        status?: string | null;
+        reasons?: string[] | null;
+        groups?: { group?: string | null; sources?: string[] | null; uncovered?: boolean | null }[] | null;
+        sources?: MriNewsHealthSource[] | null;
+    } | null;
+}
+
+/** The cloud job's own export manifest (cloud_export_manifest.json). */
+export interface MriCloudExport {
+    generated_at?: string | null;
+    data_status?: string | null;
+}
+
+export const fetchMriSnapshotManifest = () => fetchJson<MriSnapshotManifest>('/data/mri/manifest.json');
+export const fetchMriDataHealth = () => fetchJson<MriDataHealth>('/data/mri/data_health.json');
+export const fetchMriNewsScores = () => fetchJson<MriNewsScoreReport>('/data/mri/news_score_report.json');
+export const fetchMriCombined = () => fetchJson<MriCombinedDiagnostic>('/data/mri/combined_sector_diagnostic.json');
+export const fetchMriNewsMonitoring = () => fetchJson<MriNewsMonitoring>('/data/mri/news_monitoring_report.json');
+export const fetchMriNewsAccumulation = () => fetchJson<MriNewsAccumulation>('/data/mri/news_accumulation_report.json');
+export const fetchMriHistoryIndex = () => fetchJson<MriHistoryIndex>('/data/mri/history_index.json');
+export const fetchMriNber = () => fetchJson<MriNberBenchmark>('/data/mri/nber_benchmark.json');
+export const fetchMriNewsSources = () => fetchJson<MriNewsSources>('/data/mri/news_sources.json');
+export const fetchMriCloudDaily = () => fetchJson<MriCloudDaily>('/data/mri/cloud_daily_diagnostic_summary.json');
+export const fetchMriCloudExport = () => fetchJson<MriCloudExport>('/data/mri/cloud_export_manifest.json');
+
 export async function fetchValuationModels(): Promise<{ generated_at: string; disclaimer: string; tickers: Record<string, ValuationModel> } | null> {
     return fetchJson('/data/valuation_models.json');
 }

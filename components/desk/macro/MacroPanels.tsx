@@ -8,14 +8,14 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { MacroPanelData } from '@/lib/desk/useDeskData';
+import type { MacroCloudData, MacroPanelData } from '@/lib/desk/useDeskData';
 import type { MriRegime, MriRiskState } from '@/lib/data-service';
 import { fill } from '@/lib/desk/text';
 import { pctText } from '@/lib/desk/health';
 import {
     bestAbsIc, componentBars, convictionKey, CROSS_SECTION_LABELS, DASH, dimensionAverages, dimensionName, directionRows,
-    featureLabel, lastValue, quadrantOf, quadrantTrail, regimeRuns, sectorName, sectorRows, seriesName, signed, sourceHealth,
-    timelinePoints, titleCase, unchangedMonths, validationSections, type DirectionCell,
+    fallbackNote, featureLabel, lastValue, quadrantOf, quadrantTrail, recessionSpans, regimeRuns, sectorName, sectorRows, seriesName,
+    signed, sourceHealth, timelinePoints, titleCase, unchangedMonths, validationSections, type DirectionCell,
 } from '@/lib/desk/macroPanels';
 import { Chip, Micro, Tag } from '../primitives';
 import { DivergingBars, MiniLine, ProbabilityHistory, QuadrantMap, RegimeRibbon } from './MacroCharts';
@@ -35,12 +35,12 @@ export function Section({ title, sub, right, children }: { title: string; sub?: 
     );
 }
 
-const Note = ({ children }: { children: React.ReactNode }) => (
+export const Note = ({ children }: { children: React.ReactNode }) => (
     <p className="mt-2 text-[12.5px] leading-relaxed text-ink-2">{children}</p>
 );
 
 /** One label and value line, with the label wrapping and the value kept on its own side. */
-function Row({ label, sub, value }: { label: React.ReactNode; sub?: React.ReactNode; value: React.ReactNode }) {
+export function Row({ label, sub, value }: { label: React.ReactNode; sub?: React.ReactNode; value: React.ReactNode }) {
     return (
         <li className="flex items-baseline justify-between gap-x-4 border-b border-rule-10 py-1.5 text-[13px] last:border-b-0">
             <span className="min-w-0 text-ink-2">
@@ -52,7 +52,7 @@ function Row({ label, sub, value }: { label: React.ReactNode; sub?: React.ReactN
     );
 }
 
-function Metric({ label, value, sub }: { label: React.ReactNode; value: React.ReactNode; sub?: React.ReactNode }) {
+export function Metric({ label, value, sub }: { label: React.ReactNode; value: React.ReactNode; sub?: React.ReactNode }) {
     return (
         <div className="min-w-0">
             <Micro className="block">{label}</Micro>
@@ -62,23 +62,13 @@ function Metric({ label, value, sub }: { label: React.ReactNode; value: React.Re
     );
 }
 
-/** The panel's slot when its file is not there. The file name says what is missing, in the same voice as the rest of the page. */
-export function Unavailable({ title, file }: { title: string; file: string }) {
-    const { t } = useLanguage();
-    return (
-        <Section title={title}>
-            <p className="mt-3 font-mono text-[11px] text-off">{DASH} {fill(t('mcuLine'), { file })}</p>
-        </Section>
-    );
-}
-
 const NotAvailable = () => {
     const { t } = useLanguage();
     return <p className="mt-3 font-mono text-[11px] text-off">{t('mcNotAvailable')}</p>;
 };
 
 /** A panel whose file did not load yet or at all: "loading" until its request settles, then "not available". */
-function Gate({ loaded, ok, children }: { loaded: boolean; ok: boolean; children: React.ReactNode }) {
+export function Gate({ loaded, ok, children }: { loaded: boolean; ok: boolean; children: React.ReactNode }) {
     const { t } = useLanguage();
     if (!ok) return loaded ? <NotAvailable /> : <p className="mt-3 font-mono text-[11px] text-off">{t('mcLoading')}</p>;
     return <>{children}</>;
@@ -297,7 +287,7 @@ export function ProbabilityHistoryPanel({ panels }: { panels: MacroPanelData }) 
     );
 }
 
-export function IndicatorsPanel({ panels }: { panels: MacroPanelData }) {
+export function IndicatorsPanel({ panels, cloud }: { panels: MacroPanelData; cloud: MacroCloudData }) {
     const { t } = useLanguage();
     const order = dimensionAverages(panels.features).map((d) => d.id);   // the engine's dimension order
     const sorted = (panels.features?.dimensions ?? [])
@@ -305,6 +295,14 @@ export function IndicatorsPanel({ panels }: { panels: MacroPanelData }) {
         .sort((a, b) => order.indexOf(a.dimension_id ?? '') - order.indexOf(b.dimension_id ?? ''));
     const [pick, setPick] = useState<string | null>(null);
     const active = sorted.find((d) => d.dimension_id === pick) ?? sorted[0];
+    // Inputs the engine extended with a fallback series (from the cloud job's data-health file), for the dimension on show.
+    const fallbackNotes = (cloud.health?.input_groups ?? [])
+        .filter((g) => g.group === active?.dimension_id)
+        .flatMap((g) => g.inputs ?? [])
+        .flatMap((input) => {
+            const note = fallbackNote(input);
+            return note ? [`${seriesName(input.series_id || input.feature_id || '')} ${fill(t(note.key as Parameters<typeof t>[0]), note.vars)}`] : [];
+        });
     return (
         <Section title={t('mcIndicators')}>
             <Gate loaded={panels.loaded.features} ok={active !== undefined}>
@@ -331,6 +329,7 @@ export function IndicatorsPanel({ panels }: { panels: MacroPanelData }) {
                     ))}
                 </div>
                 <Note>{t('mcIndicatorsNote')}</Note>
+                {fallbackNotes.map((n) => <Note key={n}>{n}</Note>)}
             </Gate>
         </Section>
     );
@@ -462,7 +461,8 @@ export function SectorsTab({ panels }: { panels: MacroPanelData }) {
 
 // ── Monitoring and history ────────────────────────────────────────────────────────────────────────
 
-export function LatestRunPanel({ panels }: { panels: MacroPanelData }) {
+/** `extra` is more rows for the list (the cloud export rows, which come from a file this module does not load). */
+export function LatestRunPanel({ panels, extra }: { panels: MacroPanelData; extra?: React.ReactNode }) {
     const { t } = useLanguage();
     const d = panels.daily;
     const fresh = d?.feature_freshness;
@@ -483,6 +483,7 @@ export function LatestRunPanel({ panels }: { panels: MacroPanelData }) {
                         label={t('mcNonFatal')}
                         value={d?.non_fatal_failures == null ? DASH : d.non_fatal_failures.length === 0 ? t('mcNone') : d.non_fatal_failures.join(', ')}
                     />
+                    {extra}
                 </ul>
                 <Note>{t('mcLatestRunNote')}</Note>
             </Gate>
@@ -510,7 +511,7 @@ export function WarningsPanel({ panels }: { panels: MacroPanelData }) {
     );
 }
 
-export function RibbonPanel({ panels }: { panels: MacroPanelData }) {
+export function RibbonPanel({ panels, cloud }: { panels: MacroPanelData; cloud: MacroCloudData }) {
     const { t } = useLanguage();
     const points = timelinePoints(panels.timeline);
     const since = points[0]?.date?.slice(0, 4);
@@ -518,7 +519,7 @@ export function RibbonPanel({ panels }: { panels: MacroPanelData }) {
     return (
         <Section title={since ? fill(t('mcRibbonSince'), { y: since }) : t('mcRibbon')} sub={runs.length > 0 ? fill(t('mcRibbonRuns'), { n: runs.length, m: points.length }) : undefined}>
             <Gate loaded={panels.loaded.timeline} ok={points.length > 1}>
-                <div className="mt-3"><RegimeRibbon points={points} /></div>
+                <div className="mt-3"><RegimeRibbon points={points} recessions={recessionSpans(cloud.nber)} /></div>
                 <Note>{t('mcRibbonNote')}</Note>
             </Gate>
         </Section>

@@ -14,10 +14,14 @@ import {
     fetchAnalystTargets, fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
     fetchMriDailySummary, fetchMriMacroFeatures, fetchMriRegimeTimeline, fetchMriRiskState, fetchMriSectorRanking, fetchMriSectorValidation,
+    fetchMriCloudDaily, fetchMriCloudExport, fetchMriCombined, fetchMriDataHealth, fetchMriHistoryIndex, fetchMriNber, fetchMriNewsAccumulation,
+    fetchMriNewsMonitoring, fetchMriNewsScores, fetchMriNewsSources, fetchMriSnapshotManifest,
     fetchOpusOverlay, fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
     fetchValuationModels,
     type AnalystTargetsPayload, type ChainManifest, type DepthOverlayPayload, type EnginePrices, type DepthVerdict, type FactorScoresPayload,
     type GeminiCOverlayPayload, type GeminiCRow, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
+    type MriCloudDaily, type MriCloudExport, type MriCombinedDiagnostic, type MriDataHealth, type MriHistoryIndex, type MriNberBenchmark,
+    type MriNewsAccumulation, type MriNewsMonitoring, type MriNewsScoreReport, type MriNewsSources, type MriSnapshotManifest,
     type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict, type QwenOverlayPayload, type QwenOverlayRow,
 } from '@/lib/data-service';
 
@@ -361,6 +365,64 @@ export function useMacroPanelData(): MacroPanelData {
         run();
         invalidationListeners.add(run);
         return () => { alive = false; invalidationListeners.delete(run); };
+    }, []);
+    return state;
+}
+
+/**
+ * The files the MRI's cloud news job writes (WO_MP2), plus the snapshot manifest that carries each one's own date. Same shape as
+ * `useMacroPanelData`: a null with `loaded` true means "did not load".
+ */
+export interface MacroCloudData {
+    manifest: MriSnapshotManifest | null;
+    health: MriDataHealth | null;
+    newsScores: MriNewsScoreReport | null;
+    combined: MriCombinedDiagnostic | null;
+    monitoring: MriNewsMonitoring | null;
+    accumulation: MriNewsAccumulation | null;
+    history: MriHistoryIndex | null;
+    nber: MriNberBenchmark | null;
+    sources: MriNewsSources | null;
+    cloudDaily: MriCloudDaily | null;
+    cloudExport: MriCloudExport | null;
+    loaded: Record<Exclude<keyof MacroCloudData, 'loaded'>, boolean>;
+}
+
+const CLOUD_LOADERS: Record<Exclude<keyof MacroCloudData, 'loaded'>, () => Promise<unknown>> = {
+    manifest: fetchMriSnapshotManifest,
+    health: fetchMriDataHealth,
+    newsScores: fetchMriNewsScores,
+    combined: fetchMriCombined,
+    monitoring: fetchMriNewsMonitoring,
+    accumulation: fetchMriNewsAccumulation,
+    history: fetchMriHistoryIndex,
+    nber: fetchMriNber,
+    sources: fetchMriNewsSources,
+    cloudDaily: fetchMriCloudDaily,
+    cloudExport: fetchMriCloudExport,
+};
+
+export function useMacroCloudData(): MacroCloudData {
+    const keys = Object.keys(CLOUD_LOADERS) as (keyof MacroCloudData['loaded'])[];
+    const [state, setState] = useState<MacroCloudData>(() => ({
+        manifest: null, health: null, newsScores: null, combined: null, monitoring: null, accumulation: null, history: null,
+        nber: null, sources: null, cloudDaily: null, cloudExport: null,
+        loaded: Object.fromEntries(keys.map((k) => [k, false])) as MacroCloudData['loaded'],
+    }));
+    useEffect(() => {
+        let alive = true;
+        const settle = (key: keyof MacroCloudData['loaded'], value: unknown) => {
+            if (alive) setState((prev) => ({ ...prev, [key]: value, loaded: { ...prev.loaded, [key]: true } }));
+        };
+        const run = () => {
+            for (const key of keys) {
+                cached(`macro_cloud_${key}`, CLOUD_LOADERS[key]).then((v) => settle(key, v)).catch(() => settle(key, null));
+            }
+        };
+        run();
+        invalidationListeners.add(run);
+        return () => { alive = false; invalidationListeners.delete(run); };
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- `keys` is a constant list
     }, []);
     return state;
 }

@@ -12,13 +12,17 @@ import {
     regimeBars, sectorTilt, shockName,
 } from '@/lib/desk/macro';
 import { fill } from '@/lib/desk/text';
-import { invalidateDeskCache, useMacroData, useMacroPanelData } from '@/lib/desk/useDeskData';
+import { invalidateDeskCache, useMacroCloudData, useMacroData, useMacroPanelData } from '@/lib/desk/useDeskData';
 import { Chip } from '../primitives';
 import { Shell } from '../Shell';
 import {
     DimensionsPanel, DirectionPanel, IndicatorsPanel, LatestRunPanel, MacroStatsPanel, MethodologyTab, ProbabilityHistoryPanel,
-    QuadrantPanel, ReadingLines, RibbonPanel, RiskDialPanel, Section, SectorsTab, SourceHealthPanel, Unavailable, WarningsPanel,
+    QuadrantPanel, ReadingLines, RibbonPanel, RiskDialPanel, Section, SectorsTab, SourceHealthPanel, WarningsPanel,
 } from './MacroPanels';
+import {
+    ClassifyPanel, CloudExportRows, CombinedPanel, CoveragePanel, DataHealthPanel, LowConfidencePanel, NberPanel, NewsSourceHealthPanel,
+    NewsSourcesPanel, NewsThemesPanel, ReadinessPanel, RunHistoryPanel, type CloudCtx,
+} from './MacroCloudPanels';
 
 const DASH = '—';
 
@@ -46,6 +50,7 @@ export function MacroPage() {
     const { t } = useLanguage();
     const { regime, anchor, factor, loaded } = useMacroData();
     const panels = useMacroPanelData();
+    const cloud = useMacroCloudData();
     const [tab, setTab] = useState<TabId>('overview');
     // The tab lives in the address (/macro#sectors), read after mount so the server and first client render agree.
     useEffect(() => {
@@ -63,6 +68,7 @@ export function MacroPage() {
         window.history.replaceState(null, '', `#${id}`);
     };
     const now = useMemo(() => Date.now(), []);
+    const ctx: CloudCtx = { cloud, panels, now };
 
     const bars = regimeBars(regime);
     const title = macroTitle(regime);
@@ -145,7 +151,7 @@ export function MacroPage() {
 
                         <RiskDialPanel risk={panels.risk} loaded={panels.loaded.risk} />
 
-                        <Unavailable title={t('mcuDataHealth')} file="data_health.json" />
+                        <DataHealthPanel ctx={ctx} />
 
                         <Section title={t('mcWhy')}>
                             {why.length === 0
@@ -240,34 +246,34 @@ export function MacroPage() {
                         <MacroStatsPanel regime={regime} panels={panels} />
                         <DirectionPanel regime={regime} loaded={loaded.regime} />
                         <ProbabilityHistoryPanel panels={panels} />
-                        <IndicatorsPanel panels={panels} />
+                        <IndicatorsPanel panels={panels} cloud={cloud} />
                         <SourceHealthPanel panels={panels} />
                     </div>
                 )}
                 {tab === 'sectors' && <div className="mt-6 max-w-4xl"><SectorsTab panels={panels} /></div>}
                 {tab === 'news' && (
                     <div className="mt-6 max-w-4xl space-y-6">
-                        <Unavailable title={t('mcuThemes')} file="news_score_report.json" />
-                        <Unavailable title={t('mcuLowConf')} file="news_score_report.json" />
-                        <Unavailable title={t('mcuCombined')} file="combined_sector_diagnostic.json" />
-                        <Unavailable title={t('mcuSources')} file="news_sources.json" />
-                        <Unavailable title={t('mcuSourceHealth')} file="news_health (daily_diagnostic_summary.json)" />
+                        <NewsThemesPanel ctx={ctx} />
+                        <LowConfidencePanel ctx={ctx} />
+                        <CombinedPanel ctx={ctx} />
+                        <NewsSourcesPanel ctx={ctx} />
+                        <NewsSourceHealthPanel ctx={ctx} />
                     </div>
                 )}
                 {tab === 'monitoring' && (
                     <div className="mt-6 max-w-4xl space-y-6">
-                        <LatestRunPanel panels={panels} />
+                        <LatestRunPanel panels={panels} extra={<CloudExportRows ctx={ctx} />} />
                         <WarningsPanel panels={panels} />
-                        <Unavailable title={t('mcuReadiness')} file="news_accumulation_report.json" />
-                        <Unavailable title={t('mcuClassify')} file="news_monitoring_report.json" />
-                        <Unavailable title={t('mcuCoverage')} file="news_source_coverage_report.json" />
+                        <ReadinessPanel ctx={ctx} />
+                        <ClassifyPanel ctx={ctx} />
+                        <CoveragePanel ctx={ctx} />
                     </div>
                 )}
                 {tab === 'history' && (
                     <div className="mt-6 max-w-4xl space-y-6">
-                        <RibbonPanel panels={panels} />
-                        <Unavailable title={t('mcuRunHistory')} file="history_index.json" />
-                        <Unavailable title={t('mcuNber')} file="nber_benchmark.json" />
+                        <RibbonPanel panels={panels} cloud={cloud} />
+                        <RunHistoryPanel ctx={ctx} />
+                        <NberPanel ctx={ctx} />
                     </div>
                 )}
                 {tab === 'method' && <div className="mt-6"><MethodologyTab /></div>}
