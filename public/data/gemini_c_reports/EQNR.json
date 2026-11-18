@@ -1,37 +1,73 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 11.126394898304644,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 74,
- "claims_supported": 63,
- "date": "2026-11-17T19:32:29Z",
+ "claims": 81,
+ "claims_supported": 72,
+ "date": "2026-11-17T23:53:49Z",
+ "equity_value": 140959505123.11145,
  "family": "commodity",
+ "far_from_price": false,
+ "filed_shares": 2601000000.0,
  "flags": [
-  "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. It will be accounted for as an equity-method joint venture in the Power segment. The item does not say the deal has closed.",
-  "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to approvals.",
-  "A transaction involving Equinor's non-operated interests in Bandurria Sur and Bajo del Toro closed in the second quarter of 2026. The fair value of the consideration was USD 1,425 million, and a pre-tax gain of USD 467 million was recognised in E&P International as Other Income."
+  "Equinor recognised net impairments in E&P Norway and E&P International in the third quarter, mainly tied to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf.",
+  "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. The investment is to be accounted for as an equity-method joint venture in the Power segment.",
+  "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to regulatory and legal approvals."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08462083045154348,
+ "market_cap_at_publish": 97131638508,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
+ "price_at_publish": 41.05,
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 54.194350297236234,
+  "3000": 54.194350297236234
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (no-call fix rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Screener fields give sector Energy, industry Oil & Gas Integrated and country Norway. The description of the activities is inferred from the segment list in P1.",
-    "claim": "Equinor ASA is classed as an integrated oil and gas company in the Energy sector, based in Norway.",
+    "basis": "The classification is stated in the screener row. The description of how it earns money is inferred from the segment names.",
+    "claim": "Equinor ASA is a Norway-based integrated oil and gas company in the Energy sector.",
     "facts": [
      "S0"
     ],
-    "quotes": [],
+    "quotes": [
+     "industry: Oil & Gas Integrated"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Note 2 of the Q3 2026 interim report.",
-    "claim": "Equinor reports five segments: E&P Norway, E&P International, E&P USA, Marketing, Midstream & Processing (MMP) and Power (PWR). The remaining business areas are grouped under Other.",
+    "basis": "Stated in the segment note of the interim report.",
+    "claim": "It sells crude oil, gas and related products. Internal sales between segments are priced off market prices. Revenues from contracts with customers mainly reflect sales by the Marketing, Midstream & Processing segment (MMP).",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Transactions between the segments, mainly from the sale of crude oil, gas, and related products, are performed at defined internal prices which have been derived from market prices.",
+     "Revenues from contracts with customers mainly reflect such revenues from the reporting segment MMP."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in note 4 of the interim report.",
+    "claim": "Customer revenue is concentrated by selling entity: Norway accounted for 79% and the USA for 18% of third-quarter revenues from contracts with customers, attributed by the country of the legal entity executing the sale.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Norway and the USA accounted for 79% and 18%, respectively"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in note 2 Segments of the interim report.",
+    "claim": "Reporting segments are E&P Norway, E&P International, E&P USA, MMP and Power (PWR). Projects, Drilling & Procurement, Technology, Digital & Innovation and corporate functions are combined into Other. Most of the costs of the first two are allocated to the other segments.",
     "facts": [
      "P1"
     ],
@@ -41,42 +77,41 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in Note 2 of the Q3 2026 interim report.",
-    "claim": "Power became a separate reportable segment from the first quarter of 2026. It covers all power activities, including the former Renewables business, flexible power assets moved from MMP, and Danske Commodities' power trading.",
+    "basis": "Stated in the segment description and note 2.",
+    "claim": "Power is a new reportable segment, presented from the first quarter of this year. It covers all power activities: the former Renewables business, flexible power assets moved from MMP, and the Danske Commodities power trading business. Earlier figures were restated.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "With effect from the first quarter 2026, the Power business area (PWR) is presented as a reportable segment in Equinor\u2019s financial statements."
+     "With effect from the first quarter of 2026, the new Power business area (PWR) is presented as a reportable segment in Equinor\u2019s financial statements."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 report.",
-    "claim": "Upstream volume is a core revenue driver. Q3 2026 equity production was 2,166 MBOE/D, up 2% year on year. Norwegian Continental Shelf production was stable, while the international segment rose 21% on Adura in the UK and Bacalhau in Brazil. Management raised 2026 production guidance to ~4%.",
+    "basis": "Stated in the quarterly review.",
+    "claim": "Upstream volume is a main revenue driver. Third-quarter equity production was 2,166 mboe per day, 2% above the same quarter a year earlier. International production rose 21% as Adura in the UK and Bacalhau in Brazil were added. Norwegian Continental Shelf (NCS) production was stable.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Production on the NCS remained high, and was stable compared to the third quarter in 2025.",
-     "Increased 2026 production guiding to ~4%"
+     "Equinor delivered high production in the third quarter with a total equity production of 2,166 mboe per day."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Note 4 of the Q3 2026 report.",
-    "claim": "Revenues from contracts with customers mainly come from the MMP segment. Attributed by the country of the selling legal entity, Norway accounted for 79% and the USA for 18% in Q3 2026.",
+    "basis": "Stated in the CEO quote and the outlook section.",
+    "claim": "Prices also move revenue. The CEO said high production let Equinor capture additional value from higher prices. The outlook names realised prices, price differentials, tolls and tariffs among the factors that will affect cash flow and liquidity.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Revenues from contracts with customers mainly reflect such revenues from the reporting segment MMP."
+     "High production in the third quarter enabled us to capture additional value from higher prices."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 highlights. The mechanism is inferred from the segment name and Note 4.",
-    "claim": "MMP, which includes the Mongstad refinery, was a notable contributor in Q3 2026, with a record refinery contribution.",
+    "basis": "Stated in the quarterly highlights.",
+    "claim": "Refining and marketing add earnings beyond upstream: MMP posted strong third-quarter results, with a record contribution from the Mongstad refinery.",
     "facts": [
      "P1"
     ],
@@ -86,8 +121,8 @@
     "support": "supported"
    },
    {
-    "basis": "Figures taken directly from the 2025 consolidated income statement.",
-    "claim": "In 2025 Equinor had revenues of 105,828 (table in millions) and net operating income of 25,352. After income tax of (20,030), net income was 5,058, so tax absorbed most of pre-tax income.",
+    "basis": "Stated in the consolidated statement of income.",
+    "claim": "Revenues were 105,828 (table in millions of USD) in the latest annual period, against 102,502 and 106,848 in the two prior years. Revenue has been roughly flat over the three years.",
     "facts": [
      "F2"
     ],
@@ -95,8 +130,30 @@
     "support": "supported"
    },
    {
-    "basis": "Line items are stated. The link to marketing and trading is inferred.",
-    "claim": "The largest cost line is purchases net of inventory variation, at (55,164) in 2025 against (50,040) in 2024. Depreciation, amortisation and net impairment was (12,318), up from (9,835). Operating expenses were (11,571).",
+    "basis": "Figures are stated in the income statement. The mechanism is inferred from the line name and the segment description.",
+    "claim": "Purchases net of inventory variation are the largest cost line: 55,164 (table in millions of USD) of total operating expenses of 81,109, up from 50,040 the year before. Depreciation, amortisation and net impairment was 12,318, and operating expenses were 11,571.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Purchases [net of inventory variation]"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in note 2. The size of the impairment is not in the excerpt.",
+    "claim": "Impairments can add to costs. In the third quarter, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the NCS.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the income statement. The reading of tax as a main drag is inferred from the ratio.",
+    "claim": "Income tax takes most of pre-tax profit. In the latest annual period the tax line was (20,030) (table in millions of USD) on income before tax of 25,088, leaving net income of 5,058. Net operating income fell from 35,770 to 30,927 to 25,352 over the three years.",
     "facts": [
      "F2"
     ],
@@ -104,8 +161,524 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the CEO comment and the outlook section of the Q3 2026 report. No sensitivity figures are given in the cited text.",
-    "claim": "Prices are a stated driver of results. Management said high Q3 production let it capture additional value from higher prices, and that future financial performance depends on realised prices, differentials, tolls and tariffs, and on geopolitical and macroeconomic conditions.",
+    "basis": "Stated in the cash flow statement. The funding reading is inferred.",
+    "claim": "Operating cash flow was 19,971 (table in millions of USD) in the latest year. Taxes paid were (20,460), capital expenditures and investments were (13,994), dividends paid were (4,791) and share buy-backs were (5,916). New finance debt of 5,915 was raised.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the quarterly results text.",
+    "claim": "Third-quarter results were adjusted operating income of USD 12.35 billion and net operating income of USD 11.95 billion. Net income was USD 2.54 billion, and cash flow from operations after taxes paid was USD 8.1 billion.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor delivered an adjusted operating income* of USD 12.35 billion in the third quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the quarterly report. The buy-back and dividend notices are consistent with it.",
+    "claim": "Shareholder returns are part of how the business is run. A third-quarter cash dividend of USD 0.39 per share was announced, together with a share buy-back of up to USD 3 billion for the year. A fourth buy-back tranche of up to USD 1,125 million is under way.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Share buy-back of up to USD 3 billion for 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in note 3. The Peregrino sale is subject to approvals.",
+    "claim": "The portfolio is being reshaped. Equinor agreed to acquire 87.71% of the Class A shares of the Lackawanna Energy Center gas-fired power plant in the US, to be held through the equity method in Power. It also agreed to sell its remaining 20% interest in the Peregrino field in Brazil.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 20-F income statement.",
+    "claim": "Equinor operates at large scale. 2025 revenues were 105,828 (table in millions, USD) and net operating income was 25,352 (table in millions, USD). Net income after tax was 5,058 (table in millions, USD).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 20-F cash flow statement; the comparison is inferred.",
+    "claim": "Operating cash flow covered both investment and shareholder distributions in 2025. Cash flow from operating activities was 19,971 (table in millions, USD) against capital expenditures and investments of 13,994. Dividends paid were 4,791 and share buy-backs were 5,916. The company also raised 5,915 of new finance debt in 2025.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K.",
+    "claim": "Recent operating momentum is strong. Q3 2026 equity production was 2,166 MBOE/D, up 2% on the prior-year quarter, and the 2026 production growth guidance was raised.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Increased 2026 production guiding to ~4%",
+     "This is a 2% increase compared to the same quarter last year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K.",
+    "claim": "Growth comes from the international segment while the Norwegian shelf (NCS) is stable. International oil and gas production rose 21% year on year, driven by Adura in the UK and Bacalhau in Brazil plus lower turnaround activity.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Production on the NCS remained high, and was stable compared to the third quarter in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K.",
+    "claim": "The marketing, midstream and processing business is a supporting strength. Equinor reported strong results with a record contribution from the Mongstad refinery in Q3 2026.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Strong Marketing, Midstream and Processing results with record contribution from the Mongstad refinery"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K; adjusted measures are non-GAAP.",
+    "claim": "Q3 2026 earnings and cash generation were large. Adjusted operating income was USD 12.35 billion, net operating income was USD 11.95 billion, and cash flow from operations after taxes paid was USD 8.1 billion.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor delivered an adjusted operating income* of USD 12.35 billion in the third quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Computed by comparing printed line items; the causes are inferred from the income statement lines.",
+    "claim": "Profitability weakened in 2025 despite higher revenue. Net operating income fell from 30,927 (table in millions, USD) in 2024 to 25,352. Income tax took 20,030 of 25,088 income before tax.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K.",
+    "claim": "Equinor is diversifying beyond oil and gas into power. A Power segment was introduced from Q1 2026, and in August 2026 it agreed to acquire a stake in a US gas-fired power plant.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "With effect from the first quarter of 2026, the new Power business area (PWR) is presented as a reportable segment in Equinor\u2019s financial statements.",
+     "On 6 August 2026, Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K.",
+    "claim": "The company is actively high-grading its portfolio. It sold interests in Bandurria Sur and Bajo del Toro (consideration fair value USD 1,425 million) and agreed to sell its remaining 20% of Peregrino.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K; the concentration reading is inferred.",
+    "claim": "Revenue is concentrated geographically. Norway and the USA accounted for 79% and 18% of revenues from contracts with customers in Q3 2026.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Norway and the USA accounted for 79% and 18%, respectively"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F balance sheet; the link to debt issuance is inferred.",
+    "claim": "The balance sheet carries more debt than a year earlier. Non-current finance debt was 23,763 (table in millions, USD) at end-2025 versus 19,361 at end-2024. Total equity was 40,497 versus 42,380.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K and the buy-back 6-K.",
+    "claim": "Capital return continues. A Q3 2026 dividend of USD 0.39 per share was announced and a share buy-back of up to USD 3 billion for 2026 is planned. The fourth tranche was under way in November 2026.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Share buy-back of up to USD 3 billion for 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 6-K.",
+    "claim": "Operational reliability is a threat. Unplanned losses at Johan Castberg and Troll held back NCS production. Net impairments in Q3 2026 related to updated production profiles on a cross-border producing asset on the NCS.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "New fields, such as Halten East and Verdande, and contribution from new wells offset natural decline and unplanned losses from Johan Castberg and Troll.",
+     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the outlook section of the Q3 2026 6-K; the full risk factors section was not found in the packet.",
+    "claim": "External threats named by the company are geopolitical and macroeconomic conditions, regulatory and policy changes, realised prices and differentials, and tolls and tariffs. Production-specific risks are deferral of production, gas off-take, timing of new capacity, operational regularity, and industry product supply, demand and pricing.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our future financial performance, including cash flow and liquidity, will be affected by geopolitical and macroeconomic conditions, changes in the regulatory and policy landscape, the development in realised prices, including price differentials, tolls and tariffs and other factors discussed elsewhere in the report."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the 20-F balance sheet; the comparison of current assets to current liabilities is read directly from the table.",
+    "claim": "Liquidity at 31 December 2025 was sizeable: cash and cash equivalents of 5,036 plus current financial investments of 14,297 (table in millions, USD). Total current assets of 38,034 exceeded total current liabilities of 30,601. The largest current liability was current tax payable of 10,994.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Financial investments | 14,297 | 15,335 | 29,224"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F balance sheet; the direction of change is read from the comparative columns.",
+    "claim": "Leverage at 31 December 2025: finance debt was 23,763 non-current and 4,047 current, plus lease liabilities of 2,221 non-current and 1,190 current (table in millions, USD). Total equity was 40,497 against total liabilities of 91,230. Non-current finance debt rose from 19,361 a year earlier, while current finance debt fell from 7,223.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F cash flow statement.",
+    "claim": "Cash generation is large. Cash flows provided by operating activities were 19,971 in 2025, against 19,465 in 2024 and 29,257 in 2023 (table in millions, USD). Capital expenditures and investments were 13,994 in 2025, so operating cash flow exceeded capex.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F income statement and cash flow statement; the link between tax and the profit/cash gap is inferred from those lines.",
+    "claim": "Quality of cash generation: operating cash flow before taxes and working capital was 38,439 in 2025, but taxes paid of 20,460 absorbed a large part of it. Income tax of 20,030 left net income at 5,058, so operating cash flow of 19,971 was far above reported profit. Working capital released 1,992 and cash collaterals for commodity derivatives contributed 962, which are less repeatable items.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F balance sheet and cash flow statement; the maturity reading is inferred from the current and non-current split.",
+    "claim": "Debt falling due within a year at 31 December 2025 was current finance debt of 4,047 (table in millions, USD), plus current lease liabilities of 1,190. During 2025 the company repaid 2,400 of finance debt and raised 5,915 of new finance debt, having raised none in 2024 or 2023.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from balance sheet and cash flow figures plus the third-quarter 2026 release; no financing plan is stated.",
+    "claim": "The packet suggests three ways the near-term debt could be met: cash of 5,036, current financial investments of 14,297, and operating cash flow of 19,971 (table in millions, USD). Operating cash flow after taxes was also strong in the third quarter of 2026, at USD 8.1 billion.",
+    "facts": [
+     "F1",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Cash flow from operations after taxes paid* of USD 8.1 billion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and the third-quarter 2026 release.",
+    "claim": "Shareholder distributions compete with debt service for cash. 2025 dividends paid were 4,791 and the share buy-back was 5,916 (table in millions, USD). For 2026 the company announced a buy-back of up to USD 3 billion and a third-quarter cash dividend of USD 0.39 per share.",
+    "facts": [
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Share buy-back of up to USD 3 billion for 2026",
+     "Third quarter cash dividend of USD 0.39 per share"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the third-quarter 2026 interim report; the cash-flow effect is inferred.",
+    "claim": "Known commitments that may affect cash: Equinor agreed on 6 August 2026 to acquire 87.71% of the Class A shares of Lackawanna Energy Center. It also agreed to sell its remaining 20% interest in Peregrino, with assets held for sale of USD 916 million and associated liabilities of USD 164 million at 30 September 2026.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited item (results text and CEO statement).",
+    "claim": "Equity oil and gas production is the main growth driver shown: Q3 2026 production was 2,166 mboe per day, up 2% on the prior-year quarter. Management raised its 2026 production growth guidance to about 4%.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor delivered high production in the third quarter with a total equity production of 2,166 mboe per day.",
+     "Increased 2026 production guiding to ~4%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Growth rate and drivers are stated in the cited item. The conditions for continuation are inferred from the stated drivers.",
+    "claim": "International oil and gas production grew 21% against the same quarter last year. The cited drivers are new production from Adura in the UK and Bacalhau in Brazil, plus lower turnaround activity. For this to continue, these new assets must keep producing at current levels and later turnarounds must not be heavier.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Production increased by 21% for the international oil and gas reporting segment compared to the same quarter last year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item. The continuation condition is inferred.",
+    "claim": "Norwegian Continental Shelf (NCS) production was stable year on year. New fields and wells only offset natural decline and unplanned losses, so growth on the NCS depends on new volumes keeping pace with decline.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "New fields, such as Halten East and Verdande, and contribution from new wells offset natural decline and unplanned losses from Johan Castberg and Troll."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the CEO quote. The condition on prices is inferred.",
+    "claim": "Higher prices supported Q3 2026 earnings. Adjusted operating income was USD 12.35 billion, and the CEO linked production to capturing additional value from higher prices. This holds only while realised prices stay elevated.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "High production in the third quarter enabled us to capture additional value from higher prices."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item. The conditions are inferred.",
+    "claim": "Marketing, Midstream and Processing is a second earnings driver. Q3 2026 results were strong, with a record contribution from the Mongstad refinery. Continuation requires the refinery to keep operating well and refining conditions to stay favourable.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Strong Marketing, Midstream and Processing results with record contribution from the Mongstad refinery"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Transactions and segment change are stated in the cited item. Contribution to growth is inferred and not quantified.",
+    "claim": "Expansion into power and new resource positions is presented as strategic growth. The Power business area is now a reportable segment. Equinor agreed to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired plant in Pennsylvania. It also took new exploration acreage in Namibia and progressed Bay du Nord. Contribution depends on these deals closing and the projects delivering.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "On 6 August 2026, Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the cited items. The funding relationship is inferred.",
+    "claim": "Growth and distributions rely on cash generation. Q3 2026 cash flow from operations after taxes paid was USD 8.1 billion. In 2025, operating cash flow was 19,971 against capital expenditures and investments of 13,994 (table in millions). New finance debt of 5,915 (table in millions) was also raised in 2025. For the growth programme to be funded, operating cash flow must keep covering capex and payouts.",
+    "facts": [
+     "P1",
+     "F3"
+    ],
+    "quotes": [
+     "Cash flow from operations after taxes paid* of USD 8.1 billion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Programme and dividend are stated in the cited items. The per-share effect is inferred.",
+    "claim": "Capital returns continue alongside growth. Equinor announced a Q3 cash dividend of USD 0.39 per share and a share buy-back of up to USD 3 billion for 2026. The buy-back is running, with the fourth tranche under way. Continuing it requires cash flow to cover payouts as well as capex.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Share buy-back of up to USD 3 billion for 2026",
+     "Third quarter cash dividend of USD 0.39 per share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the cited statement. The interpretation is inferred.",
+    "claim": "Revenue growth has not turned into profit growth. 2025 revenues were 105,828 against 102,502 in 2024, but net operating income fell to 25,352 from 30,927 and net income fell to 5,058 from 8,829 (table in millions). Income tax of 20,030 (table in millions) was taken against income before tax of 25,088 (table in millions). Growth in volumes and prices therefore only lifts net income if costs, depreciation and tax do not absorb it.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item",
+    "claim": "Equinor recognised net impairments in E&P Norway and E&P International in the third quarter, mainly tied to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; pending status inferred from the note wording 'will be classified'",
+    "claim": "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. The investment is to be accounted for as an equity-method joint venture in the Power segment.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to regulatory and legal approvals.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; direction of the deal inferred",
+    "claim": "A transaction involving Equinor's Argentine non-operated interests closed, with consideration of USD 1,425 million at fair value. Equinor recognised a pre-tax gain of USD 467 million in E&P International as Other Income.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "A gain before tax of USD 467 million has been recognised in the second quarter within the E&P International segment and reported as Other Income in the Consolidated Statement of Income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; date taken from the item's public time",
+    "claim": "Equinor raised its 2026 oil and gas production growth guidance from 3 to around 4 per cent.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "we are increasing our 2026 guiding for oil and gas production growth from 3 to around 4 per cent."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Equinor announced a fourth share buy-back tranche of up to USD 1,125 million within a programme of up to USD 3 billion for 2026. Purchases began on 29 October and run to no later than 1 February 2027.",
+    "facts": [
+     "P1",
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "Fourth tranche of the share buy-back of up to USD 1,125 million",
+     "The duration of the buy-back tranche: 29 October 2026 to no later than 1 February 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the quarter label is inconsistent across items",
+    "claim": "Equinor's shares traded ex-dividend on the NYSE from 16 November 2026 for a cash dividend of USD 0.39 per share.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Ex. date: 16. November 2026",
+     "Dividend amount: 0.39"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in the income statement; the mechanism is inferred from the line items",
+    "claim": "Annual profit fell in each of the three years shown: net operating income went from 35,770 to 30,927 to 25,352, and net income from 11,904 to 8,829 to 5,058 (table in millions, oldest year first).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "balance sheet and cash flow figures are stated; the risk reading is inferred",
+    "claim": "Balance sheet flexibility narrowed in 2025: non-current finance debt was 23,763 against 19,361 a year earlier, 5,915 of new finance debt was raised after 0 in the two prior years, and cash and cash equivalents were 5,036 against 5,903 (table in millions).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P1; the link between impairments and future earnings is inferred",
+    "claim": "Impairment and depreciation charges are rising and can reduce operating income further. Depreciation, amortisation and net impairment were 12,318 against 9,835 (table in millions), and Q3 2026 net impairments mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf.",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the outlook text; the possibility of a cut is inferred",
+    "claim": "The raised 2026 production guide depends on operational regularity and other factors the company names as risks, and unplanned losses at Johan Castberg and Troll already occurred in Q3.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Deferral of production to create future value, gas off-take, timing of new capacity coming on stream and operational regularity and levels of industry product supply, demand and pricing represent the most significant risks related to the foregoing production guidance.",
+     "New fields, such as Halten East and Verdande, and contribution from new wells offset natural decline and unplanned losses from Johan Castberg and Troll."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the release; the effect on earnings is inferred",
+    "claim": "Results and cash flow depend on realised prices and geopolitical conditions. Management credits higher prices for part of the Q3 2026 result, and the outlook warns that prices, policy and macro conditions will affect cash flow and liquidity.",
     "facts": [
      "P1"
     ],
@@ -116,130 +689,97 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 report.",
-    "claim": "Q3 2026 net operating income was USD 11.95 billion, adjusted operating income USD 12.35 billion, net income USD 2.54 billion, and cash flow from operations after taxes paid USD 8.1 billion.",
+    "basis": "tax and pre-tax figures are stated; the regulatory risk is inferred",
+    "claim": "A very large share of pre-tax income goes to tax, so changes in the fiscal or regulatory regime could affect net income. Income tax of 20,030 was charged on income before tax of 25,088 (table in millions).",
     "facts": [
+     "F2",
      "P1"
-    ],
-    "quotes": [
-     "Equinor reported a net operating income of USD 11.95 billion and a net income of USD 2.54 billion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Taken from the 2025 cash flow statement.",
-    "claim": "Operations generate cash that mainly funds investment and shareholder returns. In 2025 operating cash flow was 19,971 (table in millions), against capital expenditures and investments of (13,994), dividends paid of (4,791) and share buy-backs of (5,916).",
-    "facts": [
-     "F3"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 capital distribution highlights.",
-    "claim": "For 2026 Equinor announced a Q3 cash dividend of USD 0.39 per share and a share buy-back of up to USD 3 billion.",
+    "basis": "stated in the cited items; the comparability concern is inferred",
+    "claim": "Reported comparatives have been reclassified or restated. Prior-period cash and cash equivalents were restated for a change in the classification of cash collaterals for commodity derivatives, and segment figures were restated for the new Power segment, which limits like-for-like comparison.",
     "facts": [
+     "F1",
      "P1"
     ],
     "quotes": [
-     "Share buy-back of up to USD 3 billion for 2026"
+     "Amounts as at 1 January 2024 and 31 December 2024 have been restated due to a change in classification of cash collaterals for commodity derivative transactions."
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Note 3 of the Q3 2026 report.",
-    "claim": "Equinor is reshaping its portfolio. It agreed to buy 87.71% of the Lackawanna gas-fired power plant in the US, to be equity-accounted within Power. It also agreed to sell its remaining 20% of the Peregrino field in Brazil, and it recorded a gain before tax of USD 467 million on an Argentine asset deal.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Taken from the 31 December 2025 balance sheet.",
-    "claim": "The business is capital-intensive and carries debt. At end-2025 property, plant and equipment was 61,241 (table in millions), non-current finance debt 23,763 and current finance debt 4,047.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
     "support": "supported"
    }
   ],
-  "competitive_position": [
+  "thesis_change": [
    {
-    "basis": "stated in the screener row",
-    "claim": "The screener classes Equinor as an integrated oil and gas company in the Energy sector, based in Norway. The evidence offers no peer ranking or market-share data.",
-    "facts": [
-     "S0"
-    ],
-    "quotes": [
-     "industry: Oil & Gas Integrated"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 6-K interim report",
-    "claim": "Equinor operates at large scale in upstream production. Third-quarter 2026 equity production was 2,166 mboe per day, 2% above the same quarter a year earlier.",
+    "basis": "stated in P1; no later item exists to test it",
+    "claim": "No evidence became effective after the earlier analysis, so the newer evidence does not address G1. The cited Q3 2026 report still shows production up 2% to 2,166 MBOE/D and 2026 guidance raised to ~4%.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Equinor delivered high production in the third quarter with a total equity production of 2,166 mboe per day.",
-     "This is a 2% increase compared to the same quarter last year."
+     "Increased 2026 production guiding to ~4%"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 6-K interim report",
-    "claim": "International production is a growth driver. International oil and gas production rose 21% year on year, helped by Adura in the UK, Bacalhau in Brazil and lower turnaround activity.",
+    "basis": "stated in P1; no later item exists to test it",
+    "claim": "No newer evidence addresses G2. P1 still shows international production up 21% year on year, driven by Adura, Bacalhau and lower turnaround activity.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Production increased by 21% for the international oil and gas reporting segment compared to the same quarter last year.",
-     "Main drivers were the addition of production from Adura in the UK and Bacalhau in Brazil, as well as lower turnaround activity."
+     "Production increased by 21% for the international oil and gas reporting segment compared to the same quarter last year."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated by the CEO in the 6-K",
-    "claim": "Management raised its 2026 production growth guidance from 3 to around 4 per cent, citing safe and efficient operations. This signals confidence in the asset base.",
+    "basis": "stated in P1; no later item exists to test it",
+    "claim": "No newer evidence addresses G3. P1 still describes NCS production as stable, with new fields and wells offsetting decline and unplanned losses at Johan Castberg and Troll.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Based on safe and efficient operations we are increasing our 2026 guiding for oil and gas production growth from 3 to around 4 per cent."
+     "Production on the NCS remained high, and was stable compared to the third quarter in 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 6-K; the integration benefit is inferred",
-    "claim": "The downstream and trading business adds to the integrated position. Marketing, Midstream and Processing had strong third-quarter results, with a record contribution from the Mongstad refinery.",
+    "basis": "stated in P1; completion status is not in the evidence",
+    "claim": "No newer evidence addresses G5. P1 still shows an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, and the packet does not say whether it has completed.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Strong Marketing, Midstream and Processing results with record contribution from the Mongstad refinery"
+     "On 6 August 2026, Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 6-K",
-    "claim": "Third-quarter 2026 earnings were strong. Adjusted operating income was USD 12.35 billion, and cash flow from operations after taxes paid was USD 8.1 billion.",
+    "basis": "stated in P1; no later item exists to test it",
+    "claim": "No newer evidence addresses G6. P1 still lists Bay du Nord progress, Namibia exploration acreage and an NCS exploration collaboration. The evidence does not show sanction, funding or exploration results.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Equinor delivered an adjusted operating income* of USD 12.35 billion in the third quarter of 2026.",
-     "Cash flow from operations after taxes paid* of USD 8.1 billion"
+     "\u2022Progressing Bay du Nord with new partner in October"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 20-F income statement; the cost drivers are read from line items",
-    "claim": "Annual profitability has fallen for two years. Net operating income was 35,770, then 30,927, then 25,352 for 2023, 2024 and 2025 (table in millions). Revenues stayed in a narrow range over the same period.",
+    "basis": "stated in F3; no later cash flow statement is in the packet",
+    "claim": "No newer evidence addresses G8. The 2025 cash flow statement still shows operating cash flow of 19,971 against capital expenditures and investments of 13,994 (12,177 in 2024). Dividends were 4,791, share buy-back 5,916 and new finance debt 5,915 (table in millions).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in F2; the Q3 2026 profit figures in P1 pre-date the cutoff of the earlier analysis",
+    "claim": "No newer evidence addresses G9. The 2025 income statement still shows revenues of 105,828 against 102,502, net operating income of 25,352 against 30,927, and net income of 5,058 against 8,829 (table in millions).",
     "facts": [
      "F2"
     ],
@@ -247,26 +787,17 @@
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in the 20-F income statement; the mechanism is inferred",
-    "claim": "Income tax takes most of pre-tax profit. Income tax was 20,030 against income before tax of 25,088 in 2025 (table in millions), leaving net income of 5,058.",
+    "basis": "stated in F2",
+    "claim": "No newer evidence addresses R1. F2 still shows net operating income of 25,352, 30,927 and 35,770, and net income of 5,058, 8,829 and 11,904, for 2025, 2024 and 2023 (table in millions).",
     "facts": [
      "F2"
     ],
     "quotes": [],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the 20-F cash flow statement",
-    "claim": "Operating cash flow funds investment and shareholder returns. In 2025, cash flows from operating activities were 19,971, capital expenditures and investments were 13,994, dividends paid were 4,791 and share buy-back was 5,916 (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 20-F balance sheet and cash flow statement; the link between the new debt and the increase is inferred",
-    "claim": "Balance sheet capacity is sizeable but leverage rose. Non-current finance debt was 23,763 at end-2025 against 19,361 a year earlier. Current financial investments were 14,297, cash was 5,036 and total equity was 40,497 (table in millions).",
+    "basis": "stated in F1 and F3",
+    "claim": "No newer evidence addresses R2. In 2025 new finance debt of 5,915 coexisted with dividends of 4,791 and buy-backs of 5,916. Year-end cash was 5,036 against 5,903, and non-current finance debt was 23,763 against 19,361 (table in millions).",
     "facts": [
      "F1",
      "F3"
@@ -275,56 +806,20 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 6-K and in the buy-back notice",
-    "claim": "Equinor continues to return capital. It declared a third-quarter dividend of USD 0.39 per share and a share buy-back of up to USD 3 billion for 2026. The fourth tranche is up to USD 1,125 million.",
+    "basis": "stated in P1 and F2",
+    "claim": "No newer evidence addresses R5. P1 still ties Q3 2026 net impairments to updated production profiles on a cross-border producing asset. F2 still shows depreciation, amortisation and net impairment of 12,318 against 9,835 (table in millions).",
     "facts": [
      "P1",
-     "P3"
+     "F2"
     ],
     "quotes": [
-     "Third quarter cash dividend of USD 0.39 per share",
-     "Share buy-back of up to USD 3 billion for 2026"
+     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 6-K",
-    "claim": "Equinor is widening into power and new regions. Power became a separate reportable segment from Q1 2026. It agreed to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a US gas-fired plant. It also accessed Namibia exploration acreage and progressed Bay du Nord with a new partner.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "With effect from the first quarter of 2026, the new Power business area (PWR) is presented as a reportable segment in Equinor\u2019s financial statements.",
-     "On 6 August 2026, Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US.",
-     "Accessed attractive exploration acreage in Namibia, and established a strategic exploration collaboration on the NCS"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 6-K; the portfolio-high-grading reading is inferred",
-    "claim": "Equinor is high-grading its portfolio by selling assets. It has agreed to sell its remaining 20% of the Peregrino field in Brazil, with completion expected in Q4 2026 or Q1 2027.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in note 4 of the 6-K",
-    "claim": "Revenue from contracts with customers is concentrated by legal-entity country. Norway accounted for 79% and the USA for 18% in Q3 2026. These revenues mainly reflect the Marketing, Midstream and Processing segment.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Norway and the USA accounted for 79% and 18%, respectively"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the outlook section of the 6-K",
-    "claim": "Threat: commodity prices and market conditions. The company says future cash flow and liquidity depend on geopolitical and macroeconomic conditions, regulatory and policy changes, and realised prices including differentials, tolls and tariffs.",
+    "basis": "stated in P1",
+    "claim": "No newer evidence addresses R6. P1 still says future cash flow and liquidity depend on geopolitical and macroeconomic conditions, policy and realised prices. P1 also shows Norway and the USA at 79% and 18% of Q3 2026 revenues from contracts with customers.",
     "facts": [
      "P1"
     ],
@@ -332,22 +827,37 @@
      "Our future financial performance, including cash flow and liquidity, will be affected by geopolitical and macroeconomic conditions, changes in the regulatory and policy landscape, the development in realised prices, including price differentials, tolls and tariffs and other factors discussed elsewhere in the report."
     ],
     "support": "supported"
-   },
+   }
+  ],
+  "unresolved_questions": [
    {
-    "basis": "stated in the 6-K",
-    "claim": "Threat: operational and delivery risk to the production plan. The most significant risks named are deferral of production, gas off-take, timing of new capacity, operational regularity and industry supply, demand and pricing. Unplanned losses at Johan Castberg and Troll already reduced NCS output.",
+    "basis": "inferred from the two differing labels in the cited items",
+    "claim": "Is the USD 0.39 dividend that went ex-dividend on the NYSE the second-quarter dividend or the third-quarter dividend? One item labels it second quarter and the interim report labels a 0.39 dividend as third quarter.",
     "facts": [
+     "P2",
      "P1"
     ],
     "quotes": [
-     "Deferral of production to create future value, gas off-take, timing of new capacity coming on stream and operational regularity and levels of industry product supply, demand and pricing represent the most significant risks related to the foregoing production guidance.",
-     "New fields, such as Halten East and Verdande, and contribution from new wells offset natural decline and unplanned losses from Johan Castberg and Troll."
+     "Equinor ASA: Ex. dividend second quarter 2026 today - NYSE",
+     "Third quarter cash dividend of USD 0.39 per share"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in note 2 of the 6-K",
-    "claim": "Threat: asset quality on the Norwegian shelf. In Q3 2026 net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset.",
+    "basis": "inferred: the quarterly figures are stated in P1, and the tax pattern is taken from the annual statement in F2",
+    "claim": "What explains the gap between the quarter's net operating income and its net income? The extracted text gives no tax or financial-items figures for the quarter.",
+    "facts": [
+     "P1",
+     "F2"
+    ],
+    "quotes": [
+     "Equinor reported a net operating income of USD 11.95 billion and a net income of USD 2.54 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 for the two headline figures; the composition of the gap is not stated",
+    "claim": "How large were the net impairments and other adjustments that separate adjusted operating income from net operating income in the quarter? Only the impairment cause is described, not its size.",
     "facts": [
      "P1"
     ],
@@ -357,166 +867,43 @@
     "support": "supported"
    },
    {
-    "basis": "stated by the CEO in the 6-K; no specific channel of impact is given",
-    "claim": "Threat: geopolitical tension. The CEO describes the period as one of continued geopolitical tension, while the company says it remains committed to safe and reliable operations.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In a period of continued geopolitical tension, we remain committed to safe and reliable operations, supplying the products our customers need."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in the balance sheet F1",
-    "claim": "Cash on hand at the latest annual balance sheet was modest and fell: cash and cash equivalents were 5,036 (table in millions) against 5,903 a year earlier. Current financial investments of 14,297 (table in millions) sit on top of this.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | [1],[2] | 5,036 | 5,903 | 8,070",
-     "Financial investments | 14,297 | 15,335 | 29,224"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet F1; the comparison is inferred from the printed totals",
-    "claim": "Current assets exceed current liabilities, but the cushion narrowed: total current assets were 38,034 against 30,601 of current liabilities (table in millions). A year earlier the figures were 45,967 and 35,023.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 38,034 | 45,967 | 60,990",
-     "Total current liabilities | 30,601 | 35,023 | 35,719"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet F1",
-    "claim": "Finance debt rose at the non-current level and fell at the current level: non-current finance debt was 23,763 against 19,361 a year earlier, and current finance debt was 4,047 against 7,223 (table in millions). Lease liabilities add 2,221 non-current and 1,190 current.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Finance debt | 23,763 | 19,361 | 22,230",
-     "Finance debt | 4,047 | 7,223 | 5,996"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet F1",
-    "claim": "The equity base shrank while total liabilities grew. Total equity was 40,497 against 42,380 a year earlier, and total liabilities were 91,230 against 88,761, on total assets of 131,727 (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total equity | 40,497 | 42,380 | 48,500",
-     "Total liabilities | 91,230 | 88,761 | 95,080"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and the footnote of F3; the comparison is inferred",
-    "claim": "Interest cost is small relative to operating income: interest expenses and other financial expenses were (1,436) against net operating income of 25,352 (table in millions). Total interest paid including capitalised interest was USD 1,463 million.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Interest expenses and other financial expenses | (1,436) | (1,582) | (1,660)",
-     "Net operating income/(loss) | 25,352 | 30,927 | 35,770"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement F3; the mechanism is inferred from printed lines",
-    "claim": "Operating cash generation is large and stable year on year but well below the earlier peak: cash flows provided by operating activities were 19,971 against 19,465 in the prior year and 29,257 two years earlier (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Cash flows provided by operating activities | 19,971 | 19,465 | 29,257"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and F3; the link between them is inferred",
-    "claim": "Reported profit understates cash generation because of non-cash charges and a heavy tax burden. Net income was 5,058 against operating cash flow of 19,971. Depreciation, amortisation and impairments added back were 12,473. Income tax of 20,030 was charged on income before tax of 25,088 (table in millions).",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Net income/(loss) | 5,058 | 8,829 | 11,904",
-     "Income/(loss) before tax | 25,088 | 30,986 | 37,884"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the reversibility is inferred",
-    "claim": "Part of operating cash flow came from items that can reverse: a working capital inflow of 1,992 and a cash collateral inflow for commodity derivatives of 962 (table in millions). The collateral inflow was an outflow of 645 in the prior year.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "(Increase)/decrease in working capital | 1,992 | 2,218 | 4,960",
-     "Cash collaterals for commodity derivative transactions | [1] | 962 | (645) | 4,556"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated line items in F3; the funding link is inferred",
-    "claim": "Capital spending and shareholder payouts used more than operating cash flow left over, so the gap was met with new debt and financial investments. Capital expenditures were 13,994, dividends paid 4,791 and share buy-back 5,916 against operating cash flow of 19,971. New finance debt of 5,915 was raised, against none in the two prior years, and financial investments gave 1,571 (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "New finance debt | 5,915 | 0 | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 6-K P1; the comparability caveat is inferred from the asterisk",
-    "claim": "The latest quarterly report shows strong cash generation: cash flow from operations after taxes paid was USD 8.1 billion for the third quarter, with net operating income of USD 11.95 billion.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Cash flow from operations after taxes paid* of USD 8.1 billion"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1; the funding implication is inferred",
-    "claim": "Capital distribution commitments continue and claim cash: a third quarter cash dividend of USD 0.39 per share, a fourth buy-back tranche of up to USD 1,125 million, and a 2026 buy-back of up to USD 3 billion.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Third quarter cash dividend of USD 0.39 per share",
-     "Fourth tranche of the share buy-back of up to USD 1,125 million"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "inferred from balance sheet and cash flow line items; no maturity table is in the packet",
-    "claim": "Near-term debt maturities at the latest annual balance sheet were 4,047 of current finance debt, which is below the 5,036 of cash and the 14,297 of current financial investments (table in millions). In the year, 2,400 of finance debt was repaid and 5,915 of new debt raised.",
+    "basis": "inferred from annual figures in F1 and F3 and a description of the ratio in P1; the ratio value is not given",
+    "claim": "Where does leverage stand after the latest quarter, given planned distributions and acquisitions? The packet has non-current finance debt of 23,763 (table in millions) at the last annual balance sheet and new finance debt of 5,915 (table in millions) raised in the last annual period, but no current net debt ratio.",
     "facts": [
      "F1",
-     "F3"
+     "F3",
+     "P1"
     ],
     "quotes": [
-     "Repayment of finance debt | (2,400) | (2,592) | (2,818)"
+     "Additionally, lease liabilities are further excluded in calculating the net debt to capital employed adjusted ratio."
     ],
     "support": "supported"
-   }
-  ],
-  "growth_thesis": [
+   },
    {
-    "basis": "Stated in the 6-K Q3 2026 report; the conditions are inferred from the stated production risks.",
-    "claim": "Volume growth is the main driver shown. Equity oil and gas production rose 2% year on year to 2,166 MBOE/D in Q3 2026, and 2026 production growth guidance was raised to ~4%. For this to continue, production must keep rising against natural decline, and operational regularity and industry demand must hold.",
+    "basis": "stated in P1 for the agreement; price and timing are absent from the extracted text",
+    "claim": "What is the purchase price of the 87.71% interest in the Lackawanna Energy Center gas plant, and when will it close? The extracted note gives no consideration or closing date.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "On 6 August 2026, Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 for the agreement and the held-for-sale carrying amount; the price is not stated",
+    "claim": "Will the sale of the remaining 20% Peregrino interest complete in the stated window, and for how much? Assets held for sale were USD 916 million but the proceeds are not given.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 for the quarterly figure and the guidance; the earlier quarters are not shown",
+    "claim": "Will full-year production growth reach the raised ~4% guidance, given that quarterly growth was 2%? The nine-month growth rate is not in the extracted text.",
     "facts": [
      "P1"
     ],
@@ -527,343 +914,128 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 6-K; the condition on future turnarounds is inferred.",
-    "claim": "International production is the fastest-growing part, up 21% year on year. This rests on added volumes from Adura (UK) and Bacalhau (Brazil) plus lower turnaround activity. Continuation requires these new volumes to stay on stream and turnaround activity not to rise again.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Production increased by 21% for the international oil and gas reporting segment compared to the same quarter last year.",
-     "Main drivers were the addition of production from Adura in the UK and Bacalhau in Brazil, as well as lower turnaround activity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 6-K; the condition is inferred.",
-    "claim": "Norwegian Continental Shelf (NCS) production was stable, not growing. New fields and wells offset decline and unplanned losses, so NCS output holds only if new fields keep replacing decline and unplanned losses at Johan Castberg and Troll stay limited.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "New fields, such as Halten East and Verdande, and contribution from new wells offset natural decline and unplanned losses from Johan Castberg and Troll."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 6-K and the CEO quote; the price-persistence condition is inferred.",
-    "claim": "Higher prices and midstream results added to Q3 2026 earnings. The CEO said high production let the company capture additional value from higher prices, and the report cites a record contribution from the Mongstad refinery. Adjusted operating income was USD 12.35 billion. Continuation requires realised prices and refinery performance to stay supportive.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "High production in the third quarter enabled us to capture additional value from higher prices.",
-     "Strong Marketing, Midstream and Processing results with record contribution from the Mongstad refinery"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in note 3 of the 6-K; completion and earnings are not stated.",
-    "claim": "A US power asset adds to the Power segment, which is newly reported. Equinor agreed to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant, to be accounted for under the equity method. This contributes only if the transaction completes and the plant earns its returns.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Based on the governing arrangements, the investment will be classified as a joint venture and accounted for using the equity method within the Power segment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as strategy delivery in the 6-K; conditions are inferred.",
-    "claim": "Future resource and project options are being added: Bay du Nord progressed with a new partner, new exploration acreage in Namibia, and an exploration collaboration on the NCS. These produce growth only if the projects are sanctioned, funded and executed, and exploration succeeds.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Progressing Bay du Nord with new partner in October",
-     "Accessed attractive exploration acreage in Namibia, and established a strategic exploration collaboration on the NCS"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in note 3 of the 6-K; the use of proceeds is inferred.",
-    "claim": "Portfolio high-grading continues alongside growth: Equinor agreed to sell its remaining 20% interest in the Peregrino field, with assets held for sale of USD 916 million. Funding growth this way requires the sale to get regulatory and legal approvals and to complete.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Figures are stated in the 20-F cash flow statement and balance sheet; the funding relationship is inferred.",
-    "claim": "Growth spending has been funded from operating cash flow, with financing and disposals filling the gap. In 2025 operating cash flow was 19,971 (table in millions) against capital expenditures and investments of 13,994 (table in millions), up from 12,177 in 2024. Dividends paid were 4,791 and share buy-back was 5,916, and new finance debt was 5,915. Continuation requires operating cash flow to cover capex and distributions or debt to keep rising.",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the 20-F income statement; the interpretation is inferred.",
-    "claim": "Volume and revenue growth has not yet shown up as profit growth in the annual accounts. In 2025 revenues rose to 105,828 (table in millions) from 102,502, but net operating income fell to 25,352 from 30,927 and net income fell to 5,058 from 8,829. Depreciation, amortisation and net impairment rose to 12,318 from 9,835, and income tax was 20,030. For production growth to lift earnings, margins, depreciation and the tax burden must stop absorbing the gains.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item (Note 3 of the third quarter 2026 6-K). Closing status is not given in the retained text.",
-    "claim": "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. It will be accounted for as an equity-method joint venture in the Power segment. The item does not say the deal has closed.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "On 6 August 2026, Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania, US."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item. The agreement date is not printed in the retained text.",
-    "claim": "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to approvals.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Equinor has agreed to sell its remaining 20% interest in the Peregrino field."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item. The exact closing date is not given, only the second quarter of 2026.",
-    "claim": "A transaction involving Equinor's non-operated interests in Bandurria Sur and Bajo del Toro closed in the second quarter of 2026. The fair value of the consideration was USD 1,425 million, and a pre-tax gain of USD 467 million was recognised in E&P International as Other Income.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "A gain before tax of USD 467 million has been recognised in the second quarter within the E&P International segment and reported as Other Income in the Consolidated Statement of Income."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (Note 2 Segments).",
-    "claim": "Equinor recorded net impairments in E&P Norway and E&P International in the third quarter of 2026. They mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf. The amount is not in the retained text.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items.",
-    "claim": "Equinor announced a fourth share buy-back tranche of up to USD 1,125 million, within a 2026 programme of up to USD 3 billion. The tranche runs from 29 October 2026 to no later than 1 February 2027. Purchases were reported on 3 November and 10 November 2026.",
-    "facts": [
-     "P1",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Fourth tranche of the share buy-back of up to USD 1,125 million",
-     "Date on which the buy-back tranche was announced: 28 October 2026."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item (third quarter 2026 results summary, published 2026-10-29).",
-    "claim": "With the third quarter 2026 results, Equinor raised its 2026 oil and gas production growth guidance from 3 to around 4 per cent. This is not a guidance withdrawal.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Increased 2026 production guiding to ~4%"
-    ],
-    "support": "number_not_listed"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in the F2 income statement; the mechanism is inferred from the expense lines.",
-    "claim": "Annual profit fell for two years running: net operating income was 25,352 in 2025 against 30,927 in 2024 and 35,770 in 2023, and net income was 5,058 against 8,829 and 11,904 (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the F1 balance sheet and F3 cash flow statement; no item states a liquidity concern.",
-    "claim": "In 2025 Equinor raised 5,915 of new finance debt while paying 4,791 in dividends and 5,916 in share buy-backs. Year-end cash fell to 5,036 from 5,903, and non-current finance debt rose to 23,763 from 19,361 (table in millions).",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the F2 income statement lines.",
-    "claim": "Income tax takes most of pre-tax profit: 2025 income tax was 20,030 against income before tax of 25,088 (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in the Q3 2026 6-K outlook passage; the horizon is inferred from the guidance year.",
-    "claim": "The raised 2026 production guidance depends on factors the company itself lists as risks, such as production deferral, gas off-take, timing of new capacity and operational regularity.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Deferral of production to create future value, gas off-take, timing of new capacity coming on stream and operational regularity and levels of industry product supply, demand and pricing represent the most significant risks related to the foregoing production guidance."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Impairment cause stated in P1; link to the 2025 line is inferred.",
-    "claim": "Asset-quality risk: Q3 2026 net impairments in E&P Norway and E&P International related to updated production profiles on a cross-border producing asset. Depreciation, amortisation and net impairment was 12,318 in 2025 against 9,835 in 2024 (table in millions).",
-    "facts": [
-     "P1",
-     "F2"
-    ],
-    "quotes": [
-     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 6-K outlook and Note 4; no specific scenario is quantified.",
-    "claim": "Future cash flow and liquidity are exposed to geopolitical conditions, regulatory and policy changes and realised prices, and revenues come mainly from Norway and the USA.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our future financial performance, including cash flow and liquidity, will be affected by geopolitical and macroeconomic conditions, changes in the regulatory and policy landscape, the development in realised prices, including price differentials, tolls and tariffs and other factors discussed elsewhere in the report."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Timing and conditions are stated in P1; the consequences are inferred.",
-    "claim": "The sale of the remaining interest in the Peregrino field in Brazil is subject to regulatory and legal approvals and could slip beyond the expected window.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The sale is expected to be completed in the fourth quarter of 2026 or in the first quarter of 2027, subject to regulatory and legal approvals."
-    ],
-    "support": "number_not_found"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "inferred from the mismatch between the two items' labels",
-    "claim": "The ex-dividend notice labels a USD 0.39 dividend as the second quarter dividend, while the third quarter report announces a USD 0.39 dividend as the third quarter one. Which quarter's dividend went ex, and is the label a mistake?",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Equinor ASA: Ex. dividend second quarter 2026 today - NYSE",
-     "Third quarter cash dividend of USD 0.39 per share"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the third quarter headline figures and the annual income statement",
-    "claim": "Third quarter net operating income was USD 11.95 billion but net income was USD 2.54 billion. How much of the gap comes from income tax versus financial items? In 2025 income tax was 20,030 against income before tax of 25,088 (table in millions).",
-    "facts": [
-     "P1",
-     "F2"
-    ],
-    "quotes": [
-     "Equinor reported a net operating income of USD 11.95 billion and a net income of USD 2.54 billion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred; the impairment amount is not stated in the cited text",
-    "claim": "How large were the third quarter net impairments tied to updated production profiles on a cross-border producing asset on the Norwegian shelf, and how do they affect the reported net operating income?",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In the third quarter 2026, net impairments in E&P Norway and E&P International mainly related to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the annual statements; the third quarter ratio is not in the evidence",
-    "claim": "Non-current finance debt rose to 23,763 from 19,361 at year-end 2025 (table in millions), with new finance debt of 5,915 alongside 4,791 of dividends and 5,916 of buy-backs. Where does net debt to capital employed stand after the third quarter, and how are distributions being funded?",
-    "facts": [
-     "F1",
-     "F3",
-     "P1"
-    ],
-    "quotes": [
-     "The table Calculation of capital employed and net debt to capital employed ratio later in this report details the calculations for these non-GAAP measures and reconciles them with the most directly comparable IFRS Accounting Standards financial measure or measures."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the balance sheet and the third quarter acquisition note",
-    "claim": "Equity accounted investments rose to 8,504 from 2,471 in 2025 (table in millions). What drove the increase, and how will the planned equity-method stake in Lackawanna Energy Center add to it?",
-    "facts": [
-     "F1",
-     "P1"
-    ],
-    "quotes": [
-     "Based on the governing arrangements, the investment will be classified as a joint venture and accounted for using the equity method within the Power segment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "When will the sale of the remaining 20% of Peregrino complete, and will regulatory and legal approvals be obtained? Assets held for sale of 916 million and liabilities of 164 million were recorded at the end of September (as printed, in millions).",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The sale is expected to be completed in the fourth quarter of 2026 or in the first quarter of 2027, subject to regulatory and legal approvals."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "inferred from the daily price table in the buy-back reports",
-    "claim": "The weekly buy-back average price fell from NOK 432.9401 on 2 November to NOK 394.4364 on 6 November. Is the decline company-specific or market-wide, and does it affect the pace of the fourth tranche?",
+    "basis": "stated in P3, P4 and P1 for volumes and the window; completion is not yet known",
+    "claim": "Will the fourth buy-back tranche be completed within its stated window, and what will the pace of repurchases be? Cumulative purchases of 974,300 shares were reported through 6 November, against a 2026 programme of up to USD 3 billion.",
     "facts": [
      "P3",
-     "P4"
+     "P4",
+     "P1"
     ],
     "quotes": [
-     "From 2 November to 6 November 2026, Equinor ASA has purchased a total of 709,000 own shares at an average price of NOK 412.6135 per share."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "inferred by comparing a third quarter announcement with the annual cash flow statement",
-    "claim": "The 2026 buy-back is up to USD 3 billion, against 5,916 paid in 2025 (table in millions). What explains the lower programme size, and what distribution level applies beyond 2026?",
-    "facts": [
-     "P1",
-     "F3"
-    ],
-    "quotes": [
+     "The duration of the buy-back tranche: 29 October 2026 to no later than 1 February 2027.",
      "Share buy-back of up to USD 3 billion for 2026"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "inferred: the balance sheet shows the movement in F1, and F3 describes a separate \u00d8rsted investment",
+    "claim": "What drove equity accounted investments from 2,471 to 8,504 (table in millions) during the last annual period? The balance sheet shows the rise but the cause is not in the packet.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Equity accounted investments | 8,504 | 2,471 | 2,508"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "EQNR",
- "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "upside": 0.4512213248775956,
+ "valuation": {
+  "annotations": [],
+  "departures": [],
+  "directions": {
+   "capex": "none",
+   "fade_years": "none",
+   "long_run_op_margin": "none",
+   "normalized.margin": "none",
+   "normalized.rev_growth": "none",
+   "op_margin.y1": "none",
+   "op_margin.y2": "none",
+   "rev_growth.y1": "none",
+   "rev_growth.y2": "none",
+   "terminal_g": "none",
+   "terminal_ronic": "none"
+  },
+  "evidence": {},
+  "neutral": {
+   "capex": [
+    0.095761347784097,
+    0.095761347784097,
+    0.095761347784097,
+    0.095761347784097,
+    0.095761347784097
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.2859441185544839,
+   "normalized.margin": 0.2859441185544839,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.2859441185544839,
+   "op_margin.y2": 0.2859441185544839,
+   "rev_growth.y1": 0.0375,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.05500708301362389
+  },
+  "numbers": {
+   "capex": [
+    0.095761347784097,
+    0.095761347784097,
+    0.095761347784097,
+    0.095761347784097,
+    0.095761347784097
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.2859441185544839,
+   "normalized.margin": 0.2859441185544839,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.2859441185544839,
+   "op_margin.y2": 0.2859441185544839,
+   "rev_growth.y1": 0.0375,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.05500708301362389
+  },
+  "of_record": {},
+  "options": {
+   "capex": "pooled",
+   "fade_years": 10,
+   "long_run_op_margin": [
+    "normalized",
+    0
+   ],
+   "normalized.margin": [
+    "persist",
+    0
+   ],
+   "normalized.rev_growth": "anchor",
+   "op_margin.y1": "persist",
+   "op_margin.y2": "persist",
+   "rev_growth.y1": "anchor",
+   "rev_growth.y2": "anchor",
+   "terminal_g": "anchor",
+   "terminal_ronic": "no_growth_value"
+  },
+  "reverts": [],
+  "unknowns": [
+   "No filed sentence guides year 1 revenue level or growth; the 2026 guidance in the evidence concerns oil and gas production, not revenue, so rev_growth.y1 stays at the neutral anchor.",
+   "Third-quarter 2026 revenue and nine-month figures are not in the packet (the relevant parts of the 6-K are omitted), so the year 1 operating margin cannot be computed. Only the quarterly net operating income and the CEO's comment on higher prices support lifting it from the persist value to the record median.",
+   "No year 1 to date figures from a 10-Q are available at T.",
+   "The business, risk factors and MD&A sections of the annual report are not in the packet, so drivers of long-run margin, capex and return on new capital are unknown."
+  ],
+  "year": 3
+ },
+ "value_base": 54.194350297236234,
+ "value_bear": 54.07452853824681,
+ "value_bull": 57.6303360454538,
+ "value_per_filed_share": {
+  "base": 54.194350297236234,
+  "bear": 54.07452853824681,
+  "bull": 57.6303360454538
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +11.1 points a year against the required return over 3 years"
 }

@@ -2,7 +2,7 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-17T23:53:27Z",
+ "generated_at": "2026-11-17T23:59:58Z",
  "list_covered": 161,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
@@ -1658,27 +1658,47 @@
    "verdict_reason": "operating income for the latest year is not filed under a standard tag"
   },
   "EQNR": {
-   "alpha_pts": null,
+   "alpha_pts": 11.126394898304644,
    "analysis": "complete",
-   "claims": 74,
-   "claims_supported": 63,
-   "date": "2026-11-17T19:32:29Z",
+   "claims": 81,
+   "claims_supported": 72,
+   "date": "2026-11-17T23:53:49Z",
+   "equity_value": 140959505123.11145,
    "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 2601000000.0,
    "flags": [
-    "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. It will be accounted for as an equity-method joint venture in the Power segment. The item does not say the deal has closed.",
-    "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to approvals.",
-    "A transaction involving Equinor's non-operated interests in Bandurria Sur and Bajo del Toro closed in the second quarter of 2026. The fair value of the consideration was USD 1,425 million, and a pre-tax gain of USD 467 million was recognised in E&P International as Other Income."
+    "Equinor recognised net impairments in E&P Norway and E&P International in the third quarter, mainly tied to updated production profiles on a cross-border producing asset on the Norwegian Continental Shelf.",
+    "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. The investment is to be accounted for as an equity-method joint venture in the Power segment.",
+    "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to regulatory and legal approvals."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.08462083045154348,
+   "market_cap_at_publish": 97131638508,
    "model": "claude-sonnet-5-5",
-   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "no_value_reason": null,
+   "price_at_publish": 41.05,
    "qwen_book": null,
    "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "a required figure is not filed (capex or working capital)"
+   "seed_base": {
+    "1000": 54.194350297236234,
+    "3000": 54.194350297236234
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (no-call fix rerun)",
+   "upside": 0.4512213248775956,
+   "value_base": 54.194350297236234,
+   "value_bear": 54.07452853824681,
+   "value_bull": 57.6303360454538,
+   "value_per_filed_share": {
+    "base": 54.194350297236234,
+    "bear": 54.07452853824681,
+    "bull": 57.6303360454538
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +11.1 points a year against the required return over 3 years"
   },
   "ESEA": {
    "alpha_pts": null,
@@ -5082,11 +5102,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 63,
+ "valued_count": 64,
  "verdict_counts": {
   "AVOID": 34,
-  "BUY": 23,
-  "NO_CALL": 104,
+  "BUY": 24,
+  "NO_CALL": 103,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
