@@ -1,11 +1,11 @@
 {
  "count": 167,
  "effort": "high",
- "fill_complete": true,
- "generated_at": "2026-11-18T00:25:20Z",
- "list_covered": 161,
- "list_names": 161,
- "model": "claude-sonnet-5-5",
+ "fill_complete": false,
+ "generated_at": "2026-11-18T00:35:00Z",
+ "list_covered": 156,
+ "list_names": 157,
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -4235,27 +4235,47 @@
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "SPH": {
-   "alpha_pts": null,
+   "alpha_pts": 17.41085003909829,
    "analysis": "complete",
-   "claims": 123,
-   "claims_supported": 120,
-   "date": "2026-11-16T23:33:25Z",
+   "claims": 96,
+   "claims_supported": 92,
+   "date": "2026-11-18T00:19:18Z",
+   "equity_value": 1724806861.490331,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 65589000.0,
    "flags": [
-    "The latest fiscal fourth-quarter results include a goodwill impairment of the natural gas and electricity business of 7,900 (table scale not stated).",
-    "In the latest fiscal fourth quarter, equity in losses and impairment charges for investments in unconsolidated affiliates was 23,091 (table scale not stated), versus 6,519 a year earlier.",
-    "The Partnership recorded an other-than-temporary impairment of $9,595 on its Independence Hydrogen investment, writing it down to an estimated fair value of $21,589."
+    "In the fourth quarter ended September 26, 2026, the Partnership recorded a goodwill impairment of 7,900 (scale omitted in the excerpted table) for its natural gas and electricity business.",
+    "The Partnership determined its 38% equity and convertible note investment in Oberon Fuels, Inc. was fully impaired as of December 28, 2024, and recorded an other-than-temporary impairment charge of $10,213 (no scale printed in the passage) during the first quarter of fiscal 2025 to write its carrying value down to $0.",
+    "During the first quarter of fiscal 2025, the Partnership recorded an other-than-temporary impairment charge of $9,595 (no scale printed in the passage) to write down its 19% equity and convertible note investment in Independence Hydrogen, Inc. to an estimated fair value of $21,589."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-opus-5-5",
-   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "ke": 0.08068910836690271,
+   "market_cap_at_publish": 1140781915,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 17.1,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "a required figure is not filed (capex or working capital)"
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "seed_base": {
+    "1000": 26.29719711369789,
+    "3000": 26.29719711369789
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (no-call fix rerun)",
+   "upside": 0.5119514420863964,
+   "value_base": 26.29719711369789,
+   "value_bear": 22.45575420274415,
+   "value_bull": 32.02158296351457,
+   "value_per_filed_share": {
+    "base": 26.29719711369789,
+    "bear": 22.45575420274415,
+    "bull": 32.02158296351457
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +17.4 points a year against the required return over 3 years"
   },
   "SSD": {
    "alpha_pts": null,
@@ -5201,11 +5221,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 69,
+ "valued_count": 70,
  "verdict_counts": {
   "AVOID": 35,
-  "BUY": 27,
-  "NO_CALL": 98,
+  "BUY": 28,
+  "NO_CALL": 97,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
