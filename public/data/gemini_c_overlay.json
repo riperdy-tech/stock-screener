@@ -2,10 +2,10 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-18T00:18:50Z",
+ "generated_at": "2026-11-18T00:18:56Z",
  "list_covered": 161,
  "list_names": 161,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -3071,27 +3071,47 @@
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "MSGE": {
-   "alpha_pts": null,
+   "alpha_pts": -32.47985322890245,
    "analysis": "complete",
-   "claims": 66,
-   "claims_supported": 64,
-   "date": "2026-11-17T12:27:58Z",
+   "claims": 96,
+   "claims_supported": 95,
+   "date": "2026-11-18T00:04:21Z",
+   "equity_value": 1370919872.9743412,
    "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 48002000.0,
    "flags": [
-    "The Company announced a non-binding memorandum of understanding with the Penn Station Master Developer. It contemplates transferring the Infosys Theater at Madison Square Garden to the Master Developer and is subject to binding Developer Agreements.",
-    "The income statement shows an impairment of long-lived assets of 13,782 (table in thousands) in the three months ended Sep. 30, 2025. None was recorded in the three months ended Sep. 30, 2026.",
-    "The 10-K reports restructuring charges of 13,986 (table in thousands) for Fiscal Year 2026, up from the prior year."
+    "The Company announced it had entered into a non-binding memorandum of understanding with the Master Developer for the proposed redevelopment of Penn Station, contemplating the transfer of the Infosys Theater at Madison Square Garden subject to definitive documentation and binding agreements.",
+    "The Company recorded impairment of long-lived assets of (13,782) (table in thousands) in Fiscal Year 2026.",
+    "The Company recorded impairment of long-lived assets of (11,202) (table in thousands) in Fiscal Year 2025."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-sonnet-5-5",
-   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "ke": 0.09846177079828694,
+   "market_cap_at_publish": 3789823231,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 79.91,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "a required figure is not filed (capex or working capital)"
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "seed_base": {
+    "1000": 28.559640701936193,
+    "3000": 28.41237111330088
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "on request (no-call fix rerun)",
+   "upside": -0.6382628451478978,
+   "value_base": 28.559640701936193,
+   "value_bear": 24.721968696439873,
+   "value_bull": 29.835345196470048,
+   "value_per_filed_share": {
+    "base": 28.559640701936193,
+    "bear": 24.721968696439873,
+    "bull": 29.835345196470048
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -32.5 points a year against the required return over 3 years"
   },
   "MSGK": {
    "alpha_pts": -71.8272797442937,
@@ -5181,11 +5201,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 68,
+ "valued_count": 69,
  "verdict_counts": {
-  "AVOID": 34,
+  "AVOID": 35,
   "BUY": 27,
-  "NO_CALL": 99,
+  "NO_CALL": 98,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
