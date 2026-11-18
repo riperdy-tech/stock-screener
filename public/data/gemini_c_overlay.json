@@ -1,10 +1,10 @@
 {
- "count": 168,
+ "count": 169,
  "effort": "high",
- "fill_complete": true,
- "generated_at": "2026-11-18T00:41:15Z",
- "list_covered": 157,
- "list_names": 157,
+ "fill_complete": false,
+ "generated_at": "2026-11-18T03:39:49Z",
+ "list_covered": 154,
+ "list_names": 160,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -5200,6 +5200,28 @@
    "verdict": "NO_CALL",
    "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
+  "ZETA": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 60,
+   "claims_supported": 54,
+   "date": "2026-11-18T03:34:47Z",
+   "family": "family_not_built",
+   "flags": [
+    "The company entered a new $1.0 billion senior secured credit facility that replaced its existing credit agreement, and repaid $200.0 million of obligations under the old agreement the same day.",
+    "The company closed its acquisition of Marigold's Enterprise Business. The 10-K ties the rise in acquisition-related expenses to this deal."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "ZIM": {
    "alpha_pts": 53.3350248001613,
    "analysis": "complete",
@@ -5248,7 +5270,7 @@
  "verdict_counts": {
   "AVOID": 35,
   "BUY": 28,
-  "NO_CALL": 98,
+  "NO_CALL": 99,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
