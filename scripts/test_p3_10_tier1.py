@@ -340,6 +340,7 @@ def test_stale_annual_data_flag_rides_through_to_fct_flags(tmp_path, monkeypatch
     monkeypatch.setattr(sfdd, "OUT_JSON", out_dual)
     monkeypatch.setattr(sfdd, "FACTOR_SCORES_COMPAT_JSON", out_compat)
     monkeypatch.setattr(sfdd, "sync_mri_snapshot", lambda: None)
+    monkeypatch.setattr(sfdd, "sync_cloud_files", lambda: {"fetched": {}, "skipped": {}})
 
     sfdd.main()
 

@@ -52,6 +52,7 @@ def _run(tmp_path: Path, monkeypatch, slopes: dict) -> dict:
     monkeypatch.setattr(sfdd, "OUT_JSON", tmp_path / "factor_scores_dual_door.json")
     monkeypatch.setattr(sfdd, "FACTOR_SCORES_COMPAT_JSON", out_compat)
     monkeypatch.setattr(sfdd, "sync_mri_snapshot", lambda: None)
+    monkeypatch.setattr(sfdd, "sync_cloud_files", lambda: {"fetched": {}, "skipped": {}})
     sfdd.main()
     return json.loads(out_compat.read_text(encoding="utf-8"))["tickers"]
 

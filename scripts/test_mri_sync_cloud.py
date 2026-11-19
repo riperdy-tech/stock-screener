@@ -175,5 +175,17 @@ class TestCloudSync(unittest.TestCase):
             self.assertEqual(mri_cloud_data_url(), "https://mirror.invalid/d")
 
 
+class TestScorerHarnessesMakeNoCloudFetch(unittest.TestCase):
+    def test_every_harness_that_stubs_the_local_sync_stubs_the_cloud_fetch_too(self):
+        """The scorer's main() fetches the cloud files into public/data/mri. A test harness that runs main() must stub that
+        beside the local sync, or every test run reaches the network and rewrites tracked data files (found 2026-11-19)."""
+        scripts = Path(__file__).resolve().parent
+        missing = [p.relative_to(scripts).as_posix() for p in list(scripts.glob("*.py")) + list(scripts.glob("tools/*.py"))
+                   if p.name not in ("mri_sync.py", "score_factors_dual_door.py", Path(__file__).name)
+                   and "sync_mri_snapshot\", lambda" in p.read_text(encoding="utf-8").replace("sync_mri_snapshot = lambda", "sync_mri_snapshot\", lambda")
+                   and "sync_cloud_files" not in p.read_text(encoding="utf-8")]
+        self.assertEqual(missing, [])
+
+
 if __name__ == "__main__":
     unittest.main()

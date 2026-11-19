@@ -140,6 +140,8 @@ def run_sifter(
 
     # Suppress mri_sync snapshot copying to public/data/mri
     mod.sync_mri_snapshot = lambda: None
+    # ... and the cloud files' fetch into it (in main() since 2026-11-19): no network, no write
+    mod.sync_cloud_files = lambda: {"fetched": {}, "skipped": {}}
 
     # Redirect inputs if custom data_dir is provided
     if data_dir is not None:

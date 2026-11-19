@@ -40,6 +40,8 @@ def run_live_sifter(tmp_path, monkeypatch, stocks, fundamentals=None, battery=No
     monkeypatch.setattr(sfdd, "OUT_JSON", out_dual)
     monkeypatch.setattr(sfdd, "FACTOR_SCORES_COMPAT_JSON", out_compat)
     monkeypatch.setattr(sfdd, "sync_mri_snapshot", lambda: None)
+    # No network and no write into the repository's public/data/mri from a test (the cloud sync joined main() on 2026-11-19).
+    monkeypatch.setattr(sfdd, "sync_cloud_files", lambda: {"fetched": {}, "skipped": {}})
     with contextlib.redirect_stdout(io.StringIO()):
         sfdd.main()
     return (json.loads(out_compat.read_text(encoding="utf-8")),

@@ -103,6 +103,7 @@ def _run_scorer(tmp_path, monkeypatch, stocks, cik_map, extra_files=()):
     monkeypatch.setattr(sfdd, "OUT_JSON", out_dual)
     monkeypatch.setattr(sfdd, "FACTOR_SCORES_COMPAT_JSON", out_compat)
     monkeypatch.setattr(sfdd, "sync_mri_snapshot", lambda: None)
+    monkeypatch.setattr(sfdd, "sync_cloud_files", lambda: {"fetched": {}, "skipped": {}})
     sfdd.main()
     return json.loads(out_compat.read_text(encoding="utf-8"))["tickers"]
 
