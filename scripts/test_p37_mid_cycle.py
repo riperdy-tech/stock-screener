@@ -111,3 +111,64 @@ def test_mid_cycle_window_default_3y_cluster():
             flags.append("mid_cycle_short_history")
 
         assert "mid_cycle_short_history" not in flags
+
+
+# ---- 2026-11-19: an industry's own window, and the EBIT yield is mid-cycle too ---------------------------------------------
+
+from industry_taxonomy import INDUSTRY_RULES
+from live_sifter_fixture import run_live_sifter
+
+
+def test_mid_cycle_mean_averages_the_filed_years_of_the_window_and_counts_them():
+    ydata = {"2021": {"operating_income": 10.0}, "2022": {"operating_income": None}, "2023": {"operating_income": 0.0},
+             "2024": {"operating_income": 50.0}, "2025": {}}
+    years = [2021, 2022, 2023, 2024, 2025]
+    assert sfdd.mid_cycle_mean(ydata, years, 8, "operating_income") == (20.0, 3)      # a filed 0.0 is a value
+    assert sfdd.mid_cycle_mean(ydata, years, 2, "operating_income") == (50.0, 1)      # the window is the last 2 years
+    assert sfdd.mid_cycle_mean(ydata, years, 8, "fcf") == (None, 0)
+
+
+def test_industry_windows_are_real_commodity_industries_and_follow_the_recorded_measurement():
+    """A key that is not an industry of the commodity archetype would do nothing, silently."""
+    cfg = json.loads((SCRIPTS_DIR / "sifter_config.json").read_text(encoding="utf-8"))["mid_cycle_window"]
+    windows = sfdd._load_mid_cycle_industry_years()
+    assert windows == cfg["industry_years"] and windows["Marine Shipping"] == 8 and "Trucking" not in windows
+    for industry in windows:
+        assert INDUSTRY_RULES[industry][2] == "commodity_cyclical", industry
+        assert cfg["industry_swings"][industry] > cfg["industry_bar"], industry
+    for industry, s in cfg["industry_swings"].items():                 # the rule, both ways
+        cluster_has_it = INDUSTRY_RULES[industry][0] in cfg["cluster_years"]
+        assert (industry in windows) == (s > cfg["industry_bar"] and not cluster_has_it), industry
+
+
+def _universe(industry, sector, histories):
+    """Names that differ only in their operating-income history (the latest year is the same for all)."""
+    stocks, fundamentals = {}, {}
+    for name, ops in histories.items():
+        stocks[name] = {"symbol": name, "sector": sector, "industry": industry, "marketCap": 5e9, "price": 50.0,
+                        "volume": 2e6, "metrics": {"adv_20d_usd": 1e8}}
+        fundamentals[name] = {str(2026 - len(ops) + i): {"revenue": 1e9, "operating_income": op, "net_income": 0.8 * op,
+                                                         "debt_lt_noncurrent": 0.0, "debt_current": 0.0, "cash": 1e7}
+                              for i, op in enumerate(ops)}
+    return stocks, fundamentals
+
+
+HISTORIES = {"FLAT": [2e8] * 8, "PEAK": [2e7] * 7 + [2e8], "MID": [1e8] * 7 + [2e8]}
+
+
+def test_a_commodity_name_at_a_peak_year_scores_lower_on_value_than_one_that_earned_it_every_year(tmp_path, monkeypatch):
+    stocks, fundamentals = _universe("Marine Shipping", "Industrials", HISTORIES)
+    compat, _ = run_live_sifter(tmp_path, monkeypatch, stocks, fundamentals, {t: {} for t in stocks}, {t: {} for t in stocks})
+    rows = compat["tickers"]
+    value = {t: rows[t]["fct_z"]["value"] for t in stocks}
+    assert value["FLAT"] > value["MID"] > value["PEAK"], value                 # the same latest year, three histories
+    for t in stocks:                                                           # no capital-spending figure: no cash-flow years
+        assert (rows[t]["mid_cycle_window_years"], rows[t]["mid_cycle_years_used"], rows[t]["mid_cycle_op_years_used"]) == (8, 0, 8)
+
+
+def test_a_general_company_is_scored_on_its_latest_year_whatever_its_history(tmp_path, monkeypatch):
+    stocks, fundamentals = _universe("Software-Application", "Technology", HISTORIES)
+    compat, _ = run_live_sifter(tmp_path, monkeypatch, stocks, fundamentals, {t: {} for t in stocks}, {t: {} for t in stocks})
+    value = {t: compat["tickers"][t]["fct_z"]["value"] for t in stocks}
+    assert value["FLAT"] == value["MID"] == value["PEAK"], value
+    assert compat["tickers"]["FLAT"]["mid_cycle_op_years_used"] is None

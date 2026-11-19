@@ -43,7 +43,40 @@
       "mat_chemicals": 0.032,
       "mat_construction": 0.020
     },
-    "all_cluster_median_swing": 0.041
+    "all_cluster_median_swing": 0.041,
+    "_note_industry": "2026-11-19. An industry's own window takes precedence over its cluster's. Measured by scripts/measure_mid_cycle_swing.py on the data scored 2026-11-18: |3y mean - 10y mean| of OPERATING margin, median over names with at least 8 years, industries with at least 5 names; bar = median of the cluster medians of the whole scored universe (industry_bar). A commodity-archetype industry above the bar whose cluster does not already have the 8-year window takes it. Operating margin, not owner cash flow, because owner cash flow needs a capital-spending figure that 15 of the 20 long-history marine shipping names do not file in a standard tag; per industry, because the freight cluster averages shipping (0.080) with trucking (0.026).",
+    "industry_years": {
+      "Marine Shipping": 8,
+      "Airlines": 8,
+      "Solar": 8,
+      "Metal Fabrication": 8,
+      "Farm Products": 8,
+      "Agricultural Inputs": 8,
+      "Recreational Vehicles": 8
+    },
+    "industry_swings": {
+      "Oil & Gas E&P": 0.203,
+      "Oil & Gas Drilling": 0.191,
+      "Gold": 0.171,
+      "Oil & Gas Equipment & Services": 0.121,
+      "Marine Shipping": 0.08,
+      "Airlines": 0.057,
+      "Solar": 0.052,
+      "Metal Fabrication": 0.048,
+      "Oil & Gas Integrated": 0.046,
+      "Farm Products": 0.042,
+      "Agricultural Inputs": 0.037,
+      "Recreational Vehicles": 0.037,
+      "Other Industrial Metals & Mining": 0.035,
+      "Residential Construction": 0.03,
+      "Steel": 0.028,
+      "Trucking": 0.026,
+      "Farm & Heavy Construction Machinery": 0.022,
+      "Chemicals": 0.019,
+      "Furnishings, Fixtures & Appliances": 0.01,
+      "Oil & Gas Refining & Marketing": 0.007
+    },
+    "industry_bar": 0.032
   },
   "ADV_ENFORCE": true,
   "_note_adv_enforce": "C4 (PHASE_3_APPROVAL.md, orchestrator ruling 2026-09-24) - switch for the $300k ADV liquidity veto. Switched ON 2026-11-13 by the coordinator, as that ruling prescribes ('switches it on after measuring the count once the data fills'): since 2026-11-12 the refresh writes a 20-day dollar volume for every name; measured on the run of 2026-11-13, 2,850 of 2,854 scored names have a figure, 32 are under $300k (one on the list, WLKP at $289,891 a day), 6 have none. While false, names below $300k only carried the flag below_min_adv.",

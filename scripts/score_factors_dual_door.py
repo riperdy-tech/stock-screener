@@ -158,6 +158,20 @@ def _load_mid_cycle_config(config_path: Optional[Path] = None) -> Tuple[int, Dic
     return def_yrs, {k: int(v) for k, v in cl_yrs.items()}
 
 
+def _load_mid_cycle_industry_years(config_path: Optional[Path] = None) -> Dict[str, int]:
+    """An industry's own mid-cycle window (2026-11-19). It takes precedence over its cluster's: a cluster can
+    hold industries that swing very differently (freight holds trucking and marine shipping). Absent -> none."""
+    cfg = _load_sifter_config(config_path)
+    return {k: int(v) for k, v in cfg.get("mid_cycle_window", {}).get("industry_years", {}).items()}
+
+
+def mid_cycle_mean(ydata: Dict[str, Any], years: List[int], window: int, field: str) -> Tuple[Optional[float], int]:
+    """(mean of `field` over the last `window` fiscal years in which it is filed, the number of those years).
+    A filed 0.0 is a value and is averaged; no year with the field -> (None, 0)."""
+    vals = [v for v in (num(ydata.get(str(y), {}).get(field)) for y in years[-window:]) if v is not None]
+    return (sum(vals) / len(vals), len(vals)) if vals else (None, 0)
+
+
 def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
     """P3.14 (PHASE_3_ADDENDUM.md): Door 3 'trend leaders' constants."""
     cfg = _load_sifter_config(config_path)
@@ -1485,6 +1499,7 @@ def main():
     rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
     sector_floor_keep_points = _load_sector_floor_keep_points(sifter_cfg_path)
     default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
+    industry_cycle_windows = _load_mid_cycle_industry_years(sifter_cfg_path)
     veto_switches = globals().get("VETO_SWITCHES", _load_veto_switches(sifter_cfg_path))
     default_altman_min, sector_altman_map = _load_altman_thresholds()
     sector_altman_map = {**sector_altman_map, **_load_altman_sector_overrides(sifter_cfg_path)}
@@ -1982,7 +1997,7 @@ def main():
         elif archetype == "commodity_cyclical":
             # Commodity Cyclicals: Normalized Mid-Cycle Cash Flow by Cluster (P3.7)
             cluster = tax["cluster"]
-            target_window = cluster_cycle_windows.get(cluster, default_cycle_window)
+            target_window = industry_cycle_windows.get(ind, cluster_cycle_windows.get(cluster, default_cycle_window))
             window_years = years[-target_window:]
             past_fcfs = []
             for y in window_years:
@@ -2003,16 +2018,24 @@ def main():
                 if "mid_cycle_short_history" not in cur_flags:
                     cur_flags.append("mid_cycle_short_history")
 
+            # 2026-11-19: the EBIT yield is mid-cycle too. Until now only the cash-flow yields were averaged, so
+            # a name with no capital-spending figure (76 of 375 scored commodity names; ship purchases are filed
+            # under company tags) had no averaged figure at all and its value pillar was the latest year's
+            # operating income alone. The quality ratio below keeps the latest year (review 2026-11-12, B4).
+            mid_cycle_op, op_years_used = mid_cycle_mean(ydata, years, target_window, "operating_income")
+
             ticker_mid_cycle[t] = {
                 "window_years": target_window,
                 "years_used": years_used,
+                "op_years_used": op_years_used,
             }
 
             if mid_cycle_fcf is not None and mcap > 0:
                 raw["fcf_yield"][t] = mid_cycle_fcf / mcap
                 raw["owner_yield"][t] = mid_cycle_fcf / mcap
+            if mid_cycle_op is not None and ev > 0:
+                raw["ebit_yield"][t] = mid_cycle_op / ev
             if op is not None and ev > 0:
-                raw["ebit_yield"][t] = op / ev
                 raw["roic_proxy"][t] = op / ev
 
         else:
@@ -2272,6 +2295,7 @@ def main():
             "fct_flag_detail": ticker_flag_detail.get(t, {}),
             "mid_cycle_window_years": ticker_mid_cycle.get(t, {}).get("window_years") if t in ticker_mid_cycle else None,
             "mid_cycle_years_used": ticker_mid_cycle.get(t, {}).get("years_used") if t in ticker_mid_cycle else None,
+            "mid_cycle_op_years_used": ticker_mid_cycle.get(t, {}).get("op_years_used") if t in ticker_mid_cycle else None,
             "mcap_derived": "mcap_derived" in cur_flags,
         }
         scored_profiles[t] = cand_data
@@ -2791,6 +2815,7 @@ def main():
             "archetype": prof.get("archetype"),
             "mid_cycle_window_years": prof.get("mid_cycle_window_years"),
             "mid_cycle_years_used": prof.get("mid_cycle_years_used"),
+            "mid_cycle_op_years_used": prof.get("mid_cycle_op_years_used"),
             "mcap_derived": prof.get("mcap_derived", False),
         }
 

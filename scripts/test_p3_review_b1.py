@@ -185,7 +185,10 @@ def test_b1_door3_never_demotes_door12_nominee_and_band_counts_are_real(tmp_path
     # excluded Technology names have a negative revisions z. The baseline held OTH_6_6 as a
     # Door-1/2 nominee; the working tree holds all seven as Door-3 names, flagged, on top of the
     # Door-1/2 book. Nothing the baseline held is missing from the working book.
-    assert door3_added == ["TECH_15", "TECH_16", "TECH_17", "TECH_18", "TECH_19", "TECH_20"]
+    # 2026-11-19 (mid-cycle EBIT yield, industry windows): TECH_19 was the sixth of these. It is a Solar name
+    # (commodity archetype, 8-year window): its value pillar now rests on the average of its four filed years of
+    # operating income, not on its latest and highest year, and it no longer reaches the book.
+    assert door3_added == ["TECH_15", "TECH_16", "TECH_17", "TECH_18", "TECH_20"]
     assert lost == []
     # The fix still never displaces a Door-1/2 nominee: every one of those seven ranks outside
     # the working tree's own Door-1/2 top 135 (Door 3 adds slots, it takes no Door-1/2 rank).
