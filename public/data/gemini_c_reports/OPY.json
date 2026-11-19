@@ -1,23 +1,1546 @@
 {
- "alpha_pts": null,
- "analysis": "not run",
+ "alpha_pts": 13.898618735071992,
+ "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": null,
- "claims_supported": null,
- "date": "2026-11-19T00:49:33Z",
- "family": null,
- "flags": [],
+ "claims": 78,
+ "claims_supported": 71,
+ "date": "2026-11-19T04:34:42Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.0907, growth 0.0375, r 0.0934, F 10",
+  "route": "financial",
+  "run_gap": 0.043369056244694414,
+  "runs": {
+   "1000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 1137464575.5260386,
+     "implied_pb": 1.251267138943485,
+     "seam_ratio": 1.0896799999999993,
+     "tv_share": 0.5479585967647042
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.03,
+      0.06,
+      0.065,
+      0.065,
+      0.06
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.102,
+     "roe": [
+      0.042,
+      0.095,
+      0.105,
+      0.11,
+      0.11
+     ],
+     "terminal_growth": 0.038
+    },
+    "old_defaults_inputs": "roe 0.0907, growth 0.0375, r 0.0934, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 71
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.02,
+      0.105
+     ],
+     "long_run_roe": [
+      0.075,
+      0.13
+     ],
+     "terminal_growth": [
+      0.025,
+      0.05
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total Oppenheimer Holdings Inc. stockholders' equity | 991,061 | 983,823"
+       },
+       {
+        "id": "P3",
+        "quote": "Our solid operating results and capital position allowed us to return additional value to shareholders in the form of a $1.00 per share special dividend in early January 2026."
+       },
+       {
+        "id": "P7",
+        "quote": "Regulatory excess net capital (2) | $441.5 | $351.7"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Through 9M 2026, Oppenheimer's common equity grew just 0.74% (from $983.8 million to $991.1 million) after paying $16.7 million in dividends (including the $1.00/share special dividend) and absorbing weak GAAP net income, pointing to ~3.0% full-year Year 1 book growth. With $441.5 million of excess regulatory net capital, Years 2-5 book growth normalizes to 6.0%-6.5%\u2014below ROE so OPY continues returning excess cash via regular/special dividends while retaining capital for advisor recruiting, technology, and bolt-on acquisitions, consistent with its 2020-2025 ~7.5% historical equity CAGR."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "At September 30, 2026, client assets under management (\"AUM\") totaled $59.6 billion."
+       },
+       {
+        "id": "P2",
+        "quote": "Many of the Company's competitors have substantially greater resources to invest in technological improvements. Failure to successfully keep pace with technological change affecting the financial services industry could have a material adverse impact on the Company's business and, in turn, the Company's financial condition and results of operations."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 10-year fade reflects the multi-year stickiness of Oppenheimer's 926 financial advisors and $59.6 billion advisory AUM base, balanced against competitive erosion from larger rivals with greater technology and AI investment capacity and cyclicality in middle-market investment banking."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0380, p25 0.0393, median 0.0907, p75 0.1745, max 0.2318, last 0.1745."
+       },
+       {
+        "id": "P3",
+        "quote": "Pre-tax Margin | 28.2% | 27.3% | 3.3"
+       },
+       {
+        "id": "P3",
+        "quote": "Compensation and related expenses as a percentage of revenue was 62.1% for the year ended December 31, 2025 compared with 65.4% for the year ended December 31, 2024"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Historical 2021-2025 ROE has ranged widely from 3.80% to 23.18% with a median of 9.07% and an arithmetic mean of ~11.5%, straddling the 9.34% cost of equity. A 10.2% long-run ROE credits the high-margin, recurring Wealth Management advisory franchise ($59.6 billion AUM, 28.2% segment pre-tax margin in 2025) while tempering expectations for Capital Markets cyclicality, high compensation ratios (62.1% of 2025 revenue), and recurring legal/regulatory and OARs drags."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "For the nine months ended September 30, 2026, adjusted net income (a), which also excludes the $70 million pre-tax legal accrual related to the settlement of the Company's \"cash sweep\" litigation recorded in the first quarter of 2026, was $114.1 million or $10.68 adjusted basic earnings per share (a), compared with $88.1 million or $8.39 adjusted basic earnings per share (a) for the same period in 2025."
+       },
+       {
+        "id": "P7",
+        "quote": "Third quarter 2026 results were impacted by a $21.0 million pre-tax expense associated with a long-term employee incentive compensation program for financial advisors that is directly tied to the OPY stock price, which increased by $12.42 per share of Class A Stock during the quarter (from $105.54 to $117.96), compared to an $8.14 per share increase (from $65.77 to $73.91) during the same period last year."
+       },
+       {
+        "id": "P7",
+        "quote": "Capital Markets reported revenue for the current quarter of $114.0 million, 29.7% lower when compared with the prior year period. The pre-tax loss was $9.9 million compared with pre-tax income of $12.3 million in the prior year period."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) GAAP ROE is depressed near 4.2% after 9M 2026 net income to common fell to $12.2 million under the $70 million cash sweep litigation accrual, $68.1 million of liability-based stock appreciation rights (OARs) expense, and a $9.9 million Q3 Capital Markets pre-tax loss. Years 2-5 recover toward 9.5%-11.0% as the one-off litigation charge rolls off, the 2026 OARs formula change gradually dampens share-price-driven comp swings, and record Wealth Management AUM ($59.6 billion) plus a 3.75%-4.00% fed funds range support earnings near the 2021-2025 cycle average."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0934; long-run nominal growth anchor g_anchor 0.0375. Growth of book equity adds value only where the return on equity is above r."
+       },
+       {
+        "id": "P7",
+        "quote": "The $4.5 billion increase in AUM from the prior year period was comprised of higher asset values of $6.2 billion on existing client holdings, offset by net distributions of $1.7 billion"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run book equity growth of 3.8% sits right at the 3.75% nominal growth anchor, reflecting fee-based Wealth Management asset appreciation offset by ongoing net client distributions ($1.7 billion over the trailing year to 3Q 2026), mature Capital Markets penetration, and regular capital returns to shareholders."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.038,
+      "input_hit": "roe",
+      "risk": "Prolonged equity market downturn, stalled IPO/M&A activity, and falling short-term interest rates compressing advisory AUM, underwriting fees, and bank deposit sweep income back toward 2022-2023 trough levels."
+     },
+     {
+      "bear_value": 0.065,
+      "input_hit": "long_run_roe",
+      "risk": "Persistent competitive fee compression, technology/AI underinvestment relative to larger wealth platforms, and recurring regulatory/litigation settlements eroding normalized returns below the cost of equity."
+     },
+     {
+      "bear_value": -0.035,
+      "input_hit": "book_growth",
+      "risk": "Concentrated margin loan credit loss (two largest customer accounts ~47.8% of margin loans) or withdrawal of uncommitted bank call loans ($222.3M at 3Q26) forcing asset liquidation or capital retention losses."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Accelerating net client asset outflows and structural loss of retail advisor share to larger digital/RIA platforms reducing secular AUM and equity compounding below nominal GDP."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.015,
+       0.015,
+       0.020000000000000004,
+       0.020000000000000004,
+       0.015
+      ],
+      "long_run_roe": 0.075,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.06999999999999999,
+       0.09999999999999999,
+       0.105,
+       0.105,
+       0.09999999999999999
+      ],
+      "long_run_roe": 0.13,
+      "terminal_growth": 0.05
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Return on equity spiked to 17.45% in 2025 on record investment banking and advisory revenues before collapsing in 9M 2026 to $12.2 million of GAAP net income due to a $70 million cash sweep litigation settlement, $68.1 million of stock-price-linked stock appreciation rights expense, and a Q3 Capital Markets pre-tax loss, while core Wealth Management remains profitable on $59.6 billion of AUM and a 3.75%-4.00% fed funds target.",
+     "why": "Oppenheimer Holdings Inc. is a middle-market investment bank, full-service broker-dealer, and wealth/asset manager rather than a traditional deposit-taking bank or insurer. Its 2025 base-year ROE of 0.1745 sits at the 75th percentile of its 2021-2025 record (median 0.0907) and reflects peak market-cycle tailwinds rather than mid-cycle earning power, as confirmed by 9M 2026 GAAP net income falling 83.5% year over year. Capital does not constrain growth: common equity reached a record $991.1 million at September 30, 2026 with $441.5 million of broker-dealer regulatory excess net capital and a $1.00 per share special dividend paid in January 2026."
+    },
+    "value_at_old_defaults": 88.91957962124303,
+    "values": {
+     "base": 108.14367354433327,
+     "bear": 83.39247054814855,
+     "bull": 181.16999585958905
+    }
+   },
+   "3000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 1187888765.4426687,
+     "implied_pb": 1.3067362350437708,
+     "seam_ratio": 1.0631249999999974,
+     "tv_share": 0.5142078717077418
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.03,
+      0.065,
+      0.06,
+      0.055,
+      0.05
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.105,
+     "roe": [
+      0.04,
+      0.11,
+      0.115,
+      0.115,
+      0.11
+     ],
+     "terminal_growth": 0.0375
+    },
+    "old_defaults_inputs": "roe 0.0907, growth 0.0375, r 0.0934, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 71
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.03,
+      0.09
+     ],
+     "long_run_roe": [
+      0.075,
+      0.135
+     ],
+     "terminal_growth": [
+      0.02,
+      0.055
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total Oppenheimer Holdings Inc. stockholders' equity | 991,061 | 983,823"
+       },
+       {
+        "id": "F3",
+        "quote": "Cash dividends paid on Class A non-voting and Class B voting common stock | (16,697) | (5,682)"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchase of Class A non-voting common stock for cancellation | 0 | (671)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Through September 30, 2026, common equity grew just 0.7% (from $983.8 million to $991.1 million) as low GAAP earnings and $16.7 million in dividends (including the $1.00/share special dividend) offset share-based additions, pointing to roughly 3.0% growth for full-year 2026. Over Years 2-5, Oppenheimer retains most normalized earnings\u2014having repurchased zero shares in 9M 2026\u2014to fund advisor hiring, margin receivables, and targeted acquisitions, driving 5.0%-6.5% annual equity growth."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "The Company changed the program formula beginning in 2026 to reduce the number of grants awarded, although it will take several years for the impact of the revised program formula to be fully reflected."
+       },
+       {
+        "id": "P3",
+        "quote": "The Company's long-term growth plan is to continue to expand existing offices by hiring experienced professionals as well as expand through the purchase of operating branch offices from other broker-dealers or the opening of new branch offices in attractive locations, and to continue to grow and develop the existing trading, investment banking, investment advisory and other businesses."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 10-year fade period captures the multi-year runoff of legacy stock appreciation rights grants following the 2026 formula revision as well as Oppenheimer's gradual advisor, private markets, and Swiss custody platform expansion. At the same time, fierce middle-market competition and cyclicality prevent assuming an extended multi-decade excess-return moat."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0934; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P5",
+        "quote": "At September 30, 2026, client assets under management (\"AUM\") totaled $59.6 billion."
+       },
+       {
+        "id": "P2",
+        "quote": "Many of the Company's competitors have substantially greater resources to invest in technological improvements."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "A long-run ROE of 10.5% sits modestly above the 9.34% cost of equity and the 2021-2025 median of 9.07%, reflecting structural improvement from Wealth Management scaling to $59.6 billion in AUM at roughly 28% pre-tax margins. However, Oppenheimer cannot sustain its 17.45% base-year ROE indefinitely because Capital Markets remains volatile and larger competitors possess far greater resources to invest in technology and AI."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "For the nine months ended September 30, 2026, adjusted net income (3), which also excludes the $70 million pre-tax legal accrual related to the settlement of the Company's \"cash sweep\" litigation recorded in the first quarter of 2026, was $114.1 million or $10.68 adjusted basic earnings per share (3), compared with $88.1 million or $8.39 adjusted basic earnings per share (3) for the same period in 2025."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0380, p25 0.0393, median 0.0907, p75 0.1745, max 0.2318, last 0.1745."
+       },
+       {
+        "id": "P5",
+        "quote": "The Company changed the program formula beginning in 2026 to reduce the number of grants awarded, although it will take several years for the impact of the revised program formula to be fully reflected."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) ROE is compressed near 4.0% because 9M 2026 GAAP net income fell to $12.2 million after the $70 million cash sweep litigation accrual and $68.1 million of SARs mark-to-market expense, even though underlying adjusted net income rose to $114.1 million. As one-off litigation drops out and the 2026 SARs formula change reduces grant volatility, ROE should normalize to 11.0%-11.5% in Years 2-5\u2014above the 5-year historical median of 9.07% given higher Wealth Management AUM ($59.6 billion), though tempered by cyclical Capital Markets swings."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0934; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P7",
+        "quote": "Regulatory excess net capital (2) | $441.5 | $351.7"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Setting terminal book equity growth equal to the 3.75% nominal growth anchor implies retaining roughly 36% of earnings at a 10.5% long-run ROE to support steady nominal asset, margin lending, and branch expansion in line with long-run economic growth. Because Oppenheimer holds $441.5 million of excess regulatory net capital, it can distribute the remaining ~64% through regular or special dividends without starving operations."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.038,
+      "input_hit": "roe",
+      "risk": "Prolonged equity market downturn and capital markets freeze compressing AUM-based advisory fees, wiping out investment banking underwriting, and triggering Capital Markets operating losses similar to 2022-2023."
+     },
+     {
+      "bear_value": -0.02,
+      "input_hit": "book_growth",
+      "risk": "Default or collateral shortfall on concentrated margin loans (two accounts represented 47.8% of margin loans at YE2025) or disruption of uncommitted bank call loan facilities ($222.3 million at Q3 2026) alongside higher clearing deposit demands."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_roe",
+      "risk": "Sustained lower short-term interest rates compressing bank deposit sweep income and margin lending spreads while larger Fintech and wirehouse rivals outspend Oppenheimer on AI and technology, eroding long-term structural profitability."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Escalating regulatory enforcement and class-action litigation (following the $70 million cash sweep settlement and prior $13 million regulatory settlement) imposing recurring non-deductible penalties and higher compliance costs."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.0,
+       0.035,
+       0.03,
+       0.025,
+       0.020000000000000004
+      ],
+      "long_run_roe": 0.075,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.06,
+       0.095,
+       0.09,
+       0.08499999999999999,
+       0.08
+      ],
+      "long_run_roe": 0.135,
+      "terminal_growth": 0.055
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Oppenheimer's base-year 2025 ROE of 17.45% sits near cyclical highs driven by surging equity markets, 51.0% growth in investment banking revenue, and record Wealth Management advisory fees, whereas 9M 2026 GAAP ROE collapsed due to a $70 million cash sweep litigation settlement, $68.1 million of stock-price-driven liability SARs expense, and a Q3 Capital Markets swing to a pre-tax loss.",
+     "why": "Oppenheimer Holdings Inc. is a middle-market investment bank, full-service broker-dealer, and wealth manager rather than a traditional deposit-taking bank or insurer, so its ROE is anchored by recurring AUM-based Wealth Management earnings ($292.1 million pre-tax in 2025) and swung sharply by cyclical Capital Markets deal flow. Its 2025 ROE of 17.45% is well above the 5-year median of 9.07% and has already reversed in 9M 2026 GAAP earnings due to legal and stock-appreciation-rights charges alongside slower Q3 underwriting. With record stockholders' equity of $991.1 million, $441.5 million in subsidiary regulatory excess net capital at Q3 2026, and capacity to pay a $1.00 per share special dividend in January 2026, capital does not constrain book equity growth."
+    },
+    "value_at_old_defaults": 88.91957962124303,
+    "values": {
+     "base": 112.93771922312695,
+     "bear": 85.77530161030175,
+     "bull": 191.92728716027236
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 88.91957962124303,
+  "value_at_old_defaults_quoted": 88.91957962124303,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 1258311276.703132,
+ "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 11383240.0,
+ "flags": [
+  "Oppenheimer recorded a $70 million pre-tax legal accrual and expense for the settlement of its cash sweep program litigation.",
+  "Oppenheimer returned additional value to shareholders through a $1.00 per share special dividend.",
+  "Oppenheimer recorded a non-deductible $13.0 million regulatory settlement."
+ ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.0934350225480369,
+ "market_cap_at_publish": 920520926,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=200 https://www.sec.gov/Archives/edgar/data/791963/000162828026071942/0001628280-26-071942.txt larger than 80000000 bytes",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 85.94,
  "qwen_book": null,
- "source": "on request (operator)",
- "tasks": {},
+ "screener_commit": "715f77db58067c61fe551c9ad36633555af55470",
+ "seed_base": {
+  "1000": 108.14367354433327,
+  "3000": 112.93771922312695
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in P1 and P5",
+    "claim": "Oppenheimer Holdings Inc. operates through subsidiaries including Oppenheimer & Co. Inc. and Oppenheimer Asset Management Inc. as a middle-market investment bank and full-service broker-dealer offering retail brokerage, institutional sales and trading, market-making, research, investment banking, asset management, and trust services.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Oppenheimer Holdings Inc. (\"OPY\" or the \"Parent\"), through its Operating Subsidiaries (together, the \"Company\", the \"Firm\", \"we\", \"our\" or \"us\"), is a leading middle-market investment bank and full service broker-dealer incorporated in the State of Delaware in the United States.",
+     "Oppenheimer Holdings Inc., through its operating subsidiaries, is a leading middle market investment bank and full-service broker-dealer that is engaged in a broad range of activities in the securities industry, including retail securities brokerage, institutional sales and trading, market-making, research, investment banking (both corporate and public finance), investment advisory and asset management services and trust services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "The Company reports three business segments\u2014Wealth Management, Capital Markets, and Corporate/Other\u2014after combining its former Private Client and Asset Management segments into Wealth Management in the fourth quarter of 2024.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Effective in the fourth quarter of 2024, the Company combined the former Private Client and Asset Management business segments to form the Wealth Management segment.",
+     "Our Capital Markets and Corporate/Other segments were not impacted by these changes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P5",
+    "claim": "Wealth Management serves high-net-worth individuals, families, corporate executives, and public and private businesses through 926 financial advisors as of September 30, 2026, providing transaction-based full-service brokerage, asset-based fee advisory accounts, wealth planning, trust services, and margin lending.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Clients include high-net-worth individuals and families, corporate executives, and public and private businesses.",
+     "Clients may choose a variety of ways to establish a relationship and conduct business including brokerage accounts with transaction-based pricing and/or investment advisory accounts with asset-based fee pricing.",
+     "At September 30, 2026, the Company employed 3,009 employees, of whom 926 were financial advisors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P5",
+    "claim": "Advisory fees in Wealth Management are typically billed monthly in advance on prior-month fee-based AUM\u2014which reached $59.6 billion alongside $153.7 billion in AUA at September 30, 2026\u2014supplemented by management and incentive fee revenue-sharing on alternative investments.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "These fees are typically billed monthly in advance, and are calculated based on all fee-based AUM balances at the end of the prior month.",
+     "OAM also receives income from revenue-sharing arrangements that are derived from management and incentive fees on alternative investments and are calculated on a pre-determined basis with registered and private investment companies.",
+     "At September 30, 2026, client assets under management (\"AUM\") totaled $59.6 billion.",
+     "Client assets under administration (\"AUA\") as of September 30, 2026 totaled $153.7 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Capital Markets' Investment Banking unit provides M&A advisory, equity and debt underwriting, restructuring, and fund placement services to emerging-growth and middle-market companies and financial sponsors, while its public finance group raises capital for state and local governments, public agencies, developers, and non-profits.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Oppenheimer's investment banking business provides strategic advisory services and capital markets services to emerging growth and middle market companies as well as financial sponsors.",
+     "Oppenheimer's public finance group raises capital for state and local governments, public agencies, private developers, non-profit organizations and other borrowers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Capital Markets' Equities and Taxable Fixed Income divisions earn commissions, principal mark-ups or mark-downs, and trading gains by providing research, market-making, institutional trade execution, derivatives, prime and custody services, and fixed-income trading to institutional investors such as investment advisers, banks, mutual funds, insurers, hedge funds, and pension plans.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Oppenheimer's clients include domestic and international investors such as investment advisers, banks, mutual funds, insurance companies, hedge funds, and pension and profit sharing plans that are attracted by the research products, insights and market intelligence provided by our sales and trading staff as well as by the quality of our execution (measured by volume, timing, price and other factors), and competitive negotiated commission rates.",
+     "When an order is in a security in which Oppenheimer makes a market, Oppenheimer normally acts as principal and purchases from or sells to its brokerage customers at a price which is approximately equal to the current inter-dealer market price plus or minus a mark-up or mark-down."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "In 2025, Wealth Management generated $1,035.4 million of revenue and $292.1 million of pre-tax income, Capital Markets generated $591.3 million of revenue and $56.2 million of pre-tax income, and Corporate/Other recorded 11,353 (table in thousands) of revenue and a (137,041) (table in thousands) pre-tax loss against total firm revenue of 1,638,071 (table in thousands).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Wealth Management reported revenue of $1,035.4 million for the year ended December 31, 2025, 6.5% higher compared with the prior year.",
+     "Pre-tax income was $292.1 million, an increase of 9.9% from the prior year.",
+     "Capital Markets reported revenue of $591.3 million for the year ended December 31, 2025, 32.1% higher compared with the prior year.",
+     "Pre-tax income was $56.2 million compared with a pre-tax loss of $39.6 million for the prior year.",
+     "Corporate/Other | 2,432 | 2,577 | (5.6) | 11,353 | 12,865 | (11.8)",
+     "Corporate/Other | (45,708) | (31,666) | 44.3 | (137,041) | (120,386) | 13.8",
+     "Total | 472,630 | 375,417 | 25.9 | 1,638,071 | 1,432,496 | 14.4"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "In the third quarter of 2026, Wealth Management produced $266.2 million of revenue and $55.6 million of pre-tax income, whereas Capital Markets revenue fell 29.7% year over year to $114.0 million with a $9.9 million pre-tax loss due to lower advisory and underwriting activity.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Wealth Management reported revenue for the current quarter of $266.2 million, 2.5% higher compared with the prior year period.",
+     "Pre-tax income was $55.6 million in the current quarter, a decrease of 11.0% compared with the prior year period.",
+     "Capital Markets reported revenue for the current quarter of $114.0 million, 29.7% lower when compared with the prior year period.",
+     "The pre-tax loss was $9.9 million compared with pre-tax income of $12.3 million in the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P7",
+    "claim": "Consolidated revenue comes primarily from advisory fees (442,235, table in thousands), commissions ($371,774, table in thousands), investment banking (215,246, table in thousands), interest (116,333, table in thousands), bank deposit sweep income (76,629, table in thousands), and principal transactions, net (32,426, table in thousands), out of 1,281,975 (table in thousands) total revenue for the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "Commissions | $115,895 | $120,684 | (4.0) | $371,774 | $341,587 | 8.8",
+     "Advisory fees | 154,952 | 134,404 | 15.3 | 442,235 | 388,835 | 13.7",
+     "Investment banking | 33,194 | 77,488 | (57.2) | 215,246 | 168,644 | 27.6",
+     "Total revenue | 382,004 | 424,438 | (10.0) | 1,281,975 | 1,165,441 | 10.0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, and P7",
+    "claim": "Market conditions, equity and fixed-income asset valuations, and transaction and deal volumes drive revenue across both segments by changing billable AUM, retail and institutional trading commissions, M&A advisory fees, equity and debt underwriting activity, and principal trading gains.",
+    "facts": [
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "The results of our Capital Markets business segment, particularly results relating to our involvement in primary and secondary markets for all types of financial products, are subject to substantial market fluctuations due to a variety of factors that we cannot control or predict with great certainty.",
+     "During periods of unfavorable market or economic conditions, the level of individual investor participation in the global markets, as well as the level of client assets, may also decrease, which would negatively impact the results of our Wealth Management business segment.",
+     "The favorable market conditions benefited our Wealth Management business, as rising asset values underpinned increased client trading activity and lifted assets under management to record levels, resulting in higher related fees compared with the prior-year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P5, and P7",
+    "claim": "Short-term interest rates and client cash and margin balances drive bank deposit sweep income and interest revenue: lower rates reduce sweep fees and margin loan interest (such as the $2.8 million year-over-year sweep income drop in the third quarter of 2026), while higher rates and larger margin loan or trading inventory balances raise interest-sensitive revenue.",
+    "facts": [
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Lower rates reduce fees earned from FDIC-insured client deposits through our sweep program, though this impact may be partially offset if the cash sweep balances rise as clients encounter fewer attractive alternatives for those balances.",
+     "Rate reductions also decrease the interest we charge on customer margin loans and earn on other interest-sensitive assets, negatively affecting earnings.",
+     "Bank deposit sweep income decreased $2.8 million from a year ago due to lower average short-term interest rates compared with the prior year period"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "Margin lending is collateralized by customer cash and securities with loans capped at 65% of securities fair value, though margin receivables carry concentration risk with the two largest customer accounts representing approximately 47.8% of margin loans as of December 31, 2025.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Oppenheimer extends credit to its customers, collateralized by securities and cash in the customer's account, for a portion of the purchase price, and receives income from interest on such extensions of credit at interest rates derived from Oppenheimer's base rate as adjusted, from time to time.",
+     "While Oppenheimer limits customer loans to an amount not greater than 65% of the fair value of the securities, our two largest customer accounts collectively comprise approximately 47.8% of the margin loans as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P2, P3, and P7",
+    "claim": "Compensation and related expenses are the largest cost, representing 62.1% of revenue ($1,016.5 million) in 2025 and 867,897 (table in thousands) in the first nine months of 2026, driven by production payouts, incentive accruals, salaries, and stock appreciation rights expense tied to OPY's share price (including a $21.0 million pre-tax expense in the third quarter of 2026).",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Compensation and related expenses totaled $1,016.5 million during the year ended December 31, 2025, an increase of 8.5% compared with the year ended December 31, 2024 primarily due to higher production-related expenses and incentive compensation accruals.",
+     "Compensation and related expenses as a percentage of revenue was 62.1% for the year ended December 31, 2025 compared with 65.4% for the year ended December 31, 2024",
+     "Additionally, increases in the fair value of OPY Class A non-voting common stock generally result in higher compensation expense associated with the Oppenheimer stock appreciation rights (\u201cOARs\u201d) offered to certain employees as part of their compensation package.",
+     "Third quarter 2026 results were impacted by a $21.0 million pre-tax expense associated with a long-term employee incentive compensation program for financial advisors that is directly tied to the OPY stock price, which increased by $12.42 per share of Class A Stock during the quarter (from $105.54 to $117.96), compared to an $8.14 per share increase (from $65.77 to $73.91) during the same period last year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P3",
+    "claim": "Non-compensation expenses ($410.4 million in 2025) consist of communications and technology, occupancy and equipment, clearing and exchange fees, interest expense on funding, underwriting costs, and legal or regulatory charges, including a $70 million expense in the nine months ended September 30, 2026 for the cash sweep litigation settlement.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Non-compensation expenses were $410.4 million during the year ended December 31, 2025, an increase of 5.2% compared with $389.9 million during the year ended December 31, 2024 due to higher underwriting and technology-related expenses",
+     "Included in other expenses for the nine months ended September 30, 2026 was a $70 million expense related to the settlement of the \u201ccash sweep\u201d program litigation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P2",
+    "claim": "The Company finances its trading inventories, customer receivables, and clearing operations largely through secured external funding\u2014including 1,021,669 (table in thousands) of securities sold under agreements to repurchase, net, 733,303 (table in thousands) of payables to brokers, dealers and clearing organizations, 340,873 (table in thousands) of payables to customers, and 222,300 (table in thousands) of uncommitted bank call loans at September 30, 2026.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Liquidity is essential to our businesses and we rely on external sources to finance a significant portion of our operations.",
+     "The Company has uncommitted short-term lines of credit in the form of bank call loans with multiple third-party financial institutions.",
+     "Securities sold under agreements to repurchase, net | 1,021,669 | 997,192",
+     "Bank call loans | 222,300 | 76,800"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the cited 10-K business description and 10-Q MD&A.",
+    "claim": "Oppenheimer operates as a middle-market investment bank and full-service broker-dealer spanning wealth management, capital markets, research, and asset management.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Oppenheimer Holdings Inc., through its operating subsidiaries, is a leading middle market investment bank and full-service broker-dealer that is engaged in a broad range of activities in the securities industry, including retail securities brokerage, institutional sales and trading, market-making, research, investment banking (both corporate and public finance), investment advisory and asset management services and trust services.",
+     "Oppenheimer is a leading underwriter of mid- and small-cap equity offerings, where it may act as a Lead Book runner, Joint Book runner or Co-Manager as the case may be."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "As of September 30, 2026, Oppenheimer operated 88 offices across 25 U.S. states plus international offices and employed 3,009 employees, including 926 financial advisors.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we provided our services from 88 offices in 25 states located throughout the United States and offices in Puerto Rico, Tel Aviv, Israel, Hong Kong, China, London, England, St. Helier, Isle of Jersey and Geneva, Switzerland.",
+     "At September 30, 2026, the Company employed 3,009 employees, of whom 926 were financial advisors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1 business description.",
+    "claim": "Its Capital Markets platform includes over 200 investment banking professionals, 36 senior research analysts covering approximately 675 equity securities, over 75 equity sales and trading professionals, and over 148 fixed income sales and trading professionals.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Oppenheimer employs over 200 investment banking professionals in the United States, the United Kingdom and Israel.",
+     "Oppenheimer employs 36 senior research analysts covering approximately 675 equity securities, primarily listed in the U.S. and over 75 dedicated equity sales and trading professionals in offices throughout the U.S. and in the UK (London), Switzerland (Geneva), and Asia (Hong Kong).",
+     "Oppenheimer employs over 148 dedicated fixed income sales and trading professionals in offices in the U.S., the United Kingdom (London), the Isle of Jersey (St. Helier) and Asia (Hong Kong)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A, 10-Q MD&A, and Q3 2026 earnings release.",
+    "claim": "Client assets under management reached a record $59.6 billion at September 30, 2026 (up from $55.2 billion at December 31, 2025), while client assets under administration reached $153.7 billion (up from $143.3 billion at December 31, 2025).",
+    "facts": [
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "At September 30, 2026, client assets under management (\"AUM\") totaled $59.6 billion.",
+     "Client assets under administration (\"AUA\") as of September 30, 2026 totaled $153.7 billion.",
+     "At December 31, 2025, client assets under management (\"AUM\") totaled $55.2 billion.",
+     "Client assets under administration (\"CAUA\") as of December 31, 2025 totaled $143.3 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement, 10-K MD&A, 10-Q MD&A, and Q3 2026 earnings release.",
+    "claim": "Full-year 2025 total revenue reached a record 1,638,071 (table in thousands), and nine-month 2026 revenue grew 10.0% year over year to 1,281,975 (table in thousands), supported by advisory fees of 442,235 (table in thousands).",
+    "facts": [
+     "F2",
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Revenues and earnings per share reached a new record, our balance sheet remains conservatively positioned, and our stockholders\u2019 equity and book value per share metrics reached fresh highs.",
+     "Year to date revenue totaled $1,282.0 million, an increase of 10.0%, compared with $1,165.4 million for the same period in 2025.",
+     "Our Wealth Management business benefited from record high AUM levels, which drove increased advisory fee revenues, although reduced retail trading activity resulted in lower transaction-based revenues."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "In the third quarter of 2026, Capital Markets revenue declined 29.7% year over year to $114.0 million with a pre-tax loss of $9.9 million, while Wealth Management retail commissions decreased 13.9%.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Capital Markets reported revenue for the current quarter of $114.0 million, 29.7% lower when compared with the prior year period.",
+     "The pre-tax loss was $9.9 million compared with pre-tax income of $12.3 million in the prior year period.",
+     "Retail commissions decreased 13.9% from the prior year period primarily due to lower retail trading activity",
+     "Our Capital Markets business was impacted by lower advisory and underwriting activity as corporate clients took a more cautious approach to strategic transactions and capital raising initiatives were largely unavailable to smaller issuers during the quarter, while pockets of volatility provided opportunities for certain of our trading businesses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "The Company ended the third quarter of 2026 with record stockholders' equity attributable to Oppenheimer Holdings Inc. of $991.1 million, subsidiary regulatory net capital of $477.9 (table in millions), and regulatory excess net capital of $441.5 (table in millions).",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Stockholders' equity (1) reached a record $991.1 million at September 30, 2026",
+     "Our financial strength provides us with the flexibility to continue investing in our businesses and our people while pursuing opportunities for growth across the Firm."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "Oppenheimer faces overwhelming demand for entry into its employee training programs and is expanding via experienced hires, targeted acquisitions, and a planned Swiss non-U.S. custody platform.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "We find that we have overwhelming demand for entrance into each of these programs.",
+     "In that regard, we have a plan under way to establish a platform in Switzerland for global high net worth clients interested in non-US custody and investment solutions.",
+     "We are focused on growing our wealth management business through strategic additions of experienced financial advisors in our existing branch system and employment of experienced money management personnel in our asset management business as well as deploying our capital for expansion through targeted acquisitions or new branch openings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors and 10-Q MD&A.",
+    "claim": "Rapid technological change, Fintech competition, and emerging AI and extended-hours market structures threaten the Company because many competitors possess substantially greater resources to invest in technology.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The financial services industry is continually undergoing rapid technological change with frequent introductions of new technology-driven products and services, driven by the emergence of the Fintech industry.",
+     "Many of the Company's competitors have substantially greater resources to invest in technological improvements.",
+     "Failure to successfully keep pace with technological change affecting the financial services industry could have a material adverse impact on the Company's business and, in turn, the Company's financial condition and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors.",
+    "claim": "Large, undiversified securities positions in market-making, underwriting, and lending create concentrated market risk during adverse markets or when conditions favor competitors.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As a market maker and dealer, the Company may own large positions in specific securities, and these undiversified holdings concentrate the risk of market fluctuations and may result in greater losses than would be the case if the Company's holdings were more diversified.",
+     "Concentration of risk may reduce revenues or result in losses in our market-making, investing, underwriting, block trading, and lending businesses in the event of unfavorable market movements, or when market conditions are more favorable for our competitors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors, 10-K MD&A, and Q3 2026 earnings release.",
+    "claim": "Lower short-term interest rates or declining cash sweep balances threaten profitability by reducing bank deposit sweep income and margin lending interest.",
+    "facts": [
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "If interest rates continue to decrease in immediate future periods, and/or balances within our cash sweep products decrease, the Company's profitability will be negatively impacted.",
+     "Bank deposit sweep income for the year ended December 31, 2025 decreased $24.0 million or 17.3% from the prior year due to lower average cash sweep balances and lower short-term interest rates",
+     "Bank deposit sweep income decreased $2.8 million from a year ago due to lower average short-term interest rates compared with the prior year period"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors.",
+    "claim": "Credit exposure is concentrated in Wealth Management margin lending, where the two largest customer accounts comprised approximately 47.8% of margin loans at December 31, 2025, alongside cash deposits exceeding FDIC insurance limits.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "While Oppenheimer limits customer loans to an amount not greater than 65% of the fair value of the securities, our two largest customer accounts collectively comprise approximately 47.8% of the margin loans as of December 31, 2025.",
+     "A substantial majority of our cash is held with a large, global systemically important bank, often in balances that exceed the current FDIC insurance limits."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q balance sheet and 10-K Risk Factors.",
+    "claim": "Liquidity is exposed to uncommitted short-term bank call loans\u2014which rose to 222,300 at September 30, 2026 from 76,800 at December 31, 2025 (table in thousands)\u2014that lenders may decline at their discretion, as well as higher clearing organization deposit requirements.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Under these arrangements, lenders are not contractually obligated to make loans to us and may decline to fund any requested loan in their sole discretion.",
+     "It is possible that our lenders exit these uncommitted relationships or reduce the amount of our available funding, which could have a material adverse effect on our available liquidity and our ability to meet short-term obligations.",
+     "With the increase in the value of financial assets (particularly equity securities), clearing organizations, of which we are a member, have significantly increased their deposit requirements, which are purported to reflect the risks to the financial system of members unable to meet their settlement obligations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors.",
+    "claim": "Cybersecurity breaches, operational or technology migration failures, and reliance on a handful of third-party data holders threaten business continuity, regulatory standing, and client trust.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Furthermore, the concentration of Company and personal information held by a handful of third parties increases the risk that a breach at a key third party may cause an industry-wide data breach that could significantly increase the cost and risk of conducting business.",
+     "The occurrence of any failures, interruptions or security breaches of the Company's information systems could damage the Company's reputation, result in a loss of customer business, subject the Company to additional regulatory scrutiny, or expose the Company to civil litigation and possible financial liability, any of which could have a material adverse effect on the Company's financial condition and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement footnote and 10-K legal/regulatory risk disclosure.",
+    "claim": "Intensifying regulatory scrutiny and litigation pose ongoing financial and reputational threats, as illustrated by a $70 million expense in the nine months ended September 30, 2026 to settle cash sweep program litigation.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Included in other expenses for the nine months ended September 30, 2026 was a $70 million expense related to the settlement of the \u201ccash sweep\u201d program litigation.",
+     "Regulatory oversight of the securities industry has become increasingly intense over the past several years and the Company, as well as others in the industry, have been directly affected by this increased regulatory scrutiny."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors and Q3 2026 earnings release.",
+    "claim": "Stock-appreciation-rights awards tied to OPY's Class A share price create compensation volatility, generating a $21.0 million pre-tax expense in the third quarter of 2026.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "Additionally, increases in the fair value of OPY Class A non-voting common stock generally result in higher compensation expense associated with the Oppenheimer stock appreciation rights (\u201cOARs\u201d) offered to certain employees as part of their compensation package.",
+     "Third quarter 2026 results were impacted by a $21.0 million pre-tax expense associated with a long-term employee incentive compensation program for financial advisors that is directly tied to the OPY stock price, which increased by $12.42 per share of Class A Stock during the quarter (from $105.54 to $117.96), compared to an $8.14 per share increase (from $65.77 to $73.91) during the same period last year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A and 10-Q MD&A.",
+    "claim": "Geopolitical conflicts in the Middle East and Venezuela and uncertain U.S. tariff policies threaten trading volumes, capital markets deal activity, and asset values.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Changes or adverse developments to U.S. trade policies may also depress trading volumes as well as capital market and deal making activities, reducing our related commissions and investment banking revenues.",
+     "Continued or escalating hostilities could contribute to regional instability, further disrupt global trade routes and energy flows, intensify inflationary pressures, and adversely affect commodity prices, financial markets and economic activity."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in [F1]",
+    "claim": "At Sep. 30, 2026, Oppenheimer Holdings Inc. held cash and cash equivalents of $ 38,007 (table in thousands), deposits with clearing organizations of 131,933 (table in thousands), and securities owned at fair value of 1,403,807 (table in thousands), including $1,160,913 pledged.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 38,007 | $ 38,405",
+     "Deposits with clearing organizations | 131,933 | 107,607",
+     "Securities owned, including amounts pledged of $1,160,913 ($1,179,503 in 2025), at fair value | 1,403,807 | 1,250,802"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P7]",
+    "claim": "At 3Q-26, wholly owned broker-dealer subsidiary Oppenheimer & Co. Inc. held regulatory net capital of $477.9 (table in millions) and regulatory excess net capital of $441.5 (table in millions), up from $383.0 and $351.7 (table in millions) in 3Q-25.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Regulatory net capital (2) | $477.9 | $383.0",
+     "Regulatory excess net capital (2) | $441.5 | $351.7",
+     "The Company ended the quarter with stockholders' equity reaching a record high and ample levels of liquidity and capital."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "Oppenheimer relies on external sources to finance a significant portion of its operations, holds a substantial majority of its cash at one large global systemically important bank often above FDIC insurance limits, and faces higher deposit requirements from clearing organizations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Liquidity is essential to our businesses and we rely on external sources to finance a significant portion of our operations.",
+     "A substantial majority of our cash is held with a large, global systemically important bank, often in balances that exceed the current FDIC insurance limits.",
+     "With the increase in the value of financial assets (particularly equity securities), clearing organizations, of which we are a member, have significantly increased their deposit requirements, which are purported to reflect the risks to the financial system of members unable to meet their settlement obligations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] and [P7]",
+    "claim": "At Sep. 30, 2026, total assets were 4,088,925 (table in thousands) against total liabilities of 3,084,704 (table in thousands) and total stockholders' equity of 1,004,221 (table in thousands), with Oppenheimer Holdings Inc. stockholders' equity reaching a record $991.1 million.",
+    "facts": [
+     "F1",
+     "P7"
+    ],
+    "quotes": [
+     "Total Assets | 4,088,925 | 3,722,415",
+     "Total Liabilities | 3,084,704 | 2,725,386",
+     "Total Stockholders' Equity | 1,004,221 | 997,029",
+     "\u2022Stockholders' equity (1) reached a record $991.1 million at September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1]",
+    "claim": "Balance sheet liabilities at Sep. 30, 2026 showed no separate long-term debt line item and were led by repurchase agreements of 1,021,669 (table in thousands), payables to brokers, dealers and clearing organizations of 733,303 (table in thousands), bank call loans of 222,300 (table in thousands, up from 76,800 at Dec. 31, 2025), and lease liabilities of 141,361 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Securities sold under agreements to repurchase, net | 1,021,669 | 997,192",
+     "Payables to brokers, dealers and clearing organizations | 733,303 | 397,997",
+     "Bank call loans | 222,300 | 76,800",
+     "Lease liabilities | 141,361 | 154,928"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] and [P2]",
+    "claim": "Receivables from customers reached 1,652,159 (table in thousands) at Sep. 30, 2026 (up from 1,415,049 at Dec. 31, 2025), and as of December 31, 2025 two customer accounts comprised approximately 47.8% of margin loans, with customer loans capped at 65% of securities fair value.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Receivables from customers, net of allowance for credit losses of $162 ($131 in 2025) | 1,652,159 | 1,415,049",
+     "While Oppenheimer limits customer loans to an amount not greater than 65% of the fair value of the securities, our two largest customer accounts collectively comprise approximately 47.8% of the margin loans as of December 31, 2025.",
+     "Both accounts are significantly over collateralized."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "In the 9 Months Ended Sep. 30, 2026, operating activities used (112,652) (table in thousands) in cash and investing activities used (3,492) (table in thousands), funded by 115,746 (table in thousands) provided by financing activities, yielding a net cash change of (398) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Cash (used in)/provided by operating activities | (112,652) | 11,752",
+     "Cash used in investing activities | (3,492) | (618)",
+     "Cash provided by/(used in) financing activities | 115,746 | (5,996)",
+     "Net (decrease)/increase in cash and cash equivalents | (398) | 5,138"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "Financing cash inflows of 115,746 (table in thousands) in the 9 Months Ended Sep. 30, 2026 were driven by a 145,500 (table in thousands) increase in bank call loans, partially offset by common stock dividends paid of (16,697) (table in thousands) and employee tax withholding payments on vested share-based awards of (13,057) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Cash provided by/(used in) financing activities | 115,746 | (5,996)",
+     "Increase in bank call loans | 145,500 | 10,200",
+     "Cash dividends paid on Class A non-voting and Class B voting common stock | (16,697) | (5,682)",
+     "Payments for employee taxes withheld related to vested share-based awards | (13,057) | (9,843)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "Operating cash flow of (112,652) (table in thousands) in the 9 Months Ended Sep. 30, 2026 diverged from net income of $ 12,186 (table in thousands) and a non-cash share-based compensation add-back of 81,603 (table in thousands) because of large trading and brokerage balance swings, including outflows for customer receivables of (237,141) and securities owned of (152,736) (table in thousands) partly offset by broker-dealer payables of 335,306 (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Cash (used in)/provided by operating activities | (112,652) | 11,752",
+     "Net income | $ 12,186 | $ 74,041",
+     "Share-based compensation | 81,603 | 28,936",
+     "Receivables from customers | (237,141) | (105,637)",
+     "Securities owned | (152,736) | (207,744)",
+     "Payables to brokers, dealers and clearing organizations | 335,306 | 68,523"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in [F2] and [P7]",
+    "claim": "For the nine months ended September 30, 2026, GAAP net income attributable to Oppenheimer Holdings Inc. fell to $ 12,232 from $ 74,041 (table in thousands) primarily due to a $70 million cash sweep litigation settlement expense and 68,142 (table in thousands) of liability-based stock appreciation rights expense, while Non-GAAP adjusted net income rose to $114,126 from $88,105 (table in thousands).",
+    "facts": [
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "Net income attributable to Oppenheimer Holdings Inc. | $ 5,459 | $ 21,712 | $ 12,232 | $ 74,041",
+     "Included in other expenses for the nine months ended September 30, 2026 was a $70 million expense related to the settlement of the \u201ccash sweep\u201d program litigation.",
+     "Class action sweep litigation settlement | \u2014 | \u2014 | 70,000 | \u2014",
+     "Liability-based stock appreciation rights expense | 20,963 | 13,474 | 68,142 | 19,013",
+     "Adjusted net income attributable to Oppenheimer Holdings Inc. (Non-GAAP) | $20,921 | $31,679 | $114,126 | $88,105"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2] and [F3]",
+    "claim": "In the 9 Months Ended Sep. 30, 2026, interest revenue of 116,333 (table in thousands) exceeded interest expense of 60,298 (table in thousands), while cash paid for interest was 59,473 (table in thousands) and bank deposit sweep income fell to 76,629 from 87,078 (table in thousands).",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Interest | 39,509 | 38,859 | 116,333 | 113,245",
+     "Interest | 21,730 | 22,496 | 60,298 | 66,421",
+     "Cash paid during the period for interest | 59,473 | 66,510",
+     "Bank deposit sweep income | 25,556 | 28,349 | 76,629 | 87,078"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in [F1] and [P2]",
+    "claim": "Oppenheimer's bank call loans of 222,300 (table in thousands) at Sep. 30, 2026 sit under uncommitted short-term lines of credit fully collateralized by marketable securities, where lenders are not contractually obligated to fund and may decline requests in their sole discretion.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Bank call loans | 222,300 | 76,800",
+     "The Company has uncommitted short-term lines of credit in the form of bank call loans with multiple third-party financial institutions.",
+     "All of these arrangements are secured in nature, with the Company fully collateralizing any drawdowns with marketable securities.",
+     "Under these arrangements, lenders are not contractually obligated to make loans to us and may decline to fund any requested loan in their sole discretion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] and [P2]",
+    "claim": "If external or secured funding is disrupted, Oppenheimer would rely on its contingency funding plan and likely finance or liquidate unencumbered assets such as investment portfolios, trading assets, or company-owned life insurance (116,231 in thousands at Sep. 30, 2026) to meet maturing liabilities or other obligations.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "We have a contingency funding plan that would guide our actions in the event the Company\u2019s liquidity sources used in the ordinary course of business are disrupted.",
+     "If we are unable to raise funding using the methods described above, we would likely need to finance or liquidate unencumbered assets, such as our investment portfolios, trading assets or company-owned life insurance policies, to meet maturing liabilities or other obligations.",
+     "We may be unable to sell some of our assets or we may have to sell assets at a discount to market value, either of which could adversely affect our results of operations, cash flows and financial condition.",
+     "Company-owned life insurance | 116,231 | 109,094"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in the cited items (10-K MD&A, 10-Q MD&A, and Q3 2026 earnings release)",
+    "claim": "Wealth Management advisory fee growth has been driven by higher billable assets under management (AUM), which reached a record $59.6 billion, and increased incentive fees from alternative investments.",
+    "facts": [
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The favorable market conditions benefited our Wealth Management business, as rising asset values underpinned increased client trading activity and lifted assets under management to record levels, resulting in higher related fees compared with the prior-year period.",
+     "Alternative Investments also benefited from certain sponsored hedge funds surpassing prior high-water marks, which generated meaningful incentive fees in the fourth quarter of 2025.",
+     "At September 30, 2026, client assets under management (\"AUM\") totaled $59.6 billion.",
+     "Our Wealth Management business benefited from record high AUM levels, which drove increased advisory fee revenues, although reduced retail trading activity resulted in lower transaction-based revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the billing mechanism and risk disclosures stated in 10-K Item 1A, 10-K MD&A, and Q3 2026 earnings release",
+    "claim": "For AUM-driven advisory fee growth to continue, financial market asset values must remain supportive and client capital must stay allocated to fee-based AUM rather than eroding through market declines or net distributions like the $1.7 billion recorded against prior-year AUM.",
+    "facts": [
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Substantial market fluctuations could also cause variations in the value of our investments in our funds, the flow of investment capital into or from Assets Under Management (\"AUM\"), and the way customers allocate capital among money market, equity, fixed income or other investment alternatives, which could negatively impact our Wealth Management business segment.",
+     "While the recent changes to U.S. trade policies have not had a significant impact on the Company\u2019s financial results to date, adverse changes or sudden policy announcements, including retaliatory tariffs, could adversely impact the financial markets, reducing the value of our assets under management and related advisory fees.",
+     "\u2022The $4.5 billion increase in AUM from the prior year period was comprised of higher asset values of $6.2 billion on existing client holdings, offset by net distributions of $1.7 billion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K Item 1 and 10-Q MD&A",
+    "claim": "Wealth Management expansion is also pursued through client shifts to fee-based accounts, strategic hiring of experienced financial advisors and money managers, new branch openings, and a planned Swiss platform for global high-net-worth clients.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "In recent years, an increasing number of clients have chosen to do business through fee-based accounts.",
+     "We are focused on growing our wealth management business through strategic additions of experienced financial advisors in our existing branch system and employment of experienced money management personnel in our asset management business as well as deploying our capital for expansion through targeted acquisitions or new branch openings.",
+     "In that regard, we have a plan under way to establish a platform in Switzerland for global high net worth clients interested in non-US custody and investment solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from regulatory, cybersecurity, and operational risk disclosures in 10-K Item 1A, 10-K gc_note, and 10-Q MD&A",
+    "claim": "For advisor hiring, branch expansion, and the Swiss non-U.S. custody platform to drive growth, the Company must attract and retain experienced professionals and high-net-worth clients while meeting extensive and potentially conflicting regulations across jurisdictions.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "We recognize the importance of compliance with applicable regulatory requirements and are committed to performing rigorous and ongoing assessments of our compliance and risk management effort, and investing in people and programs, while providing a platform with first class investment programs and services.",
+     "The Company is subject to extensive regulation in the different jurisdictions in which it conducts its activities.",
+     "Additionally, we are subject to complex and evolving laws and regulations governing cybersecurity, privacy and data protection, which may differ and potentially conflict, in various jurisdictions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K MD&A and 10-Q MD&A",
+    "claim": "Sponsoring and investing in private market opportunities and alternative investments expands client solutions and generates management and incentive fees when sponsored funds surpass high-water marks.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "We are increasingly creating, sponsoring and investing in private market opportunities on our own behalf and on behalf of qualified clients as we believe these investments provide access to attractive long-term growth opportunities and expand the range of investment solutions available to our clients.",
+     "Alternative Investments also benefited from certain sponsored hedge funds surpassing prior high-water marks, which generated meaningful incentive fees in the fourth quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K Item 1A Risk Factors",
+    "claim": "For private markets and alternative investments to continue driving growth, fund performance, valuations, and market liquidity must remain sufficient to sustain asset values, monetization, and performance-based incentive fees.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Subsequent valuations in future periods, in light of factors then prevailing, may result in significant changes in the values of these instruments and may adversely impact historical or prospective fees and performance-based fees (also known as incentive fees, which include carried interest) in respect of certain businesses.",
+     "Market volatility, illiquid market conditions and disruptions in the credit markets may make it extremely difficult to value and monetize certain of our financial instruments, particularly during periods of market displacement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-Q income statement, 10-K MD&A, and 10-Q MD&A",
+    "claim": "Capital Markets revenue rose 32.1% to $591.3 million in the full-year period, and nine-month investment banking revenue increased to 215,246 (table in thousands) from 168,644 (table in thousands), driven by M&A and underwriting activity alongside hiring experienced bankers and institutional teams.",
+    "facts": [
+     "F2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Capital Markets reported revenue of $591.3 million for the year ended December 31, 2025, 32.1% higher compared with the prior year.",
+     "Investment banking | 33,194 | 77,488 | 215,246 | 168,644",
+     "We are also focused on opportunities in our capital markets businesses, including integrating new technology platforms to expand the suite of services offered to our clients and onboarding experienced personnel and/or small units that will improve our ability to attract institutional clients in both equities and fixed income without significantly raising our risk profile.",
+     "In investment banking, we are committed to growing our footprint by adding experienced bankers in the U.S. and U.K. within our existing industry practices as well as new industry practices where we believe we can be successful."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in Q3 2026 earnings release and 10-K MD&A",
+    "claim": "For Capital Markets growth to continue, corporate M&A appetite, IPO reception, and capital-raising access for smaller issuers must recover rather than remaining constrained by interest rate, inflation, election, or trade policy uncertainty.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "However, trading activity moderated from the elevated levels experienced during the prior year and IPO activity slowed as issuers faced an uncertain reception, and investors navigated an environment marked by interest rate uncertainty, continued inflation concerns and the approaching U.S. midterm election cycle.",
+     "Our Capital Markets business was impacted by lower advisory and underwriting activity as corporate clients took a more cautious approach to strategic transactions and capital raising initiatives were largely unavailable to smaller issuers during the quarter, while pockets of volatility provided opportunities for certain of our trading businesses.",
+     "Changes or adverse developments to U.S. trade policies may also depress trading volumes as well as capital market and deal making activities, reducing our related commissions and investment banking revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-Q MD&A and Q3 2026 earnings release",
+    "claim": "Backed by record stockholders' equity of $991.1 million and ample liquidity, the Company intends to pursue growth through targeted business acquisitions and minority private investments out of excess capital.",
+    "facts": [
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Our long-term intention is to pursue growth by acquisition where we can find a comfortable match in terms of corporate goals and personnel at a price that would provide our stockholders with incremental value.",
+     "In addition, the Company may from time to time make an acquisition of 100% of a business, acquire a controlling financial interest in a business, increase its ownership in existing minority investments, or make new minority private investments out of excess capital in allied or unrelated businesses with the goal of either syndicating the investment to eligible clients or retaining ownership because we believe such investments may offer attractive financial returns or contribute to the Company's strategic, technological, operational or infrastructure objectives.",
+     "The Company ended the quarter with stockholders' equity reaching a record high and ample levels of liquidity and capital.",
+     "\u2022Stockholders' equity (1) reached a record $991.1 million at September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from acquisition criteria in 10-Q MD&A and liquidity risks in 10-K Item 1A",
+    "claim": "For acquisition and principal investment growth to succeed, the Company must find targets with compatible goals and personnel at incremental-value prices while preserving excess capital and access to external secured and uncommitted funding.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Our long-term intention is to pursue growth by acquisition where we can find a comfortable match in terms of corporate goals and personnel at a price that would provide our stockholders with incremental value.",
+     "Liquidity is essential to our businesses and we rely on external sources to finance a significant portion of our operations.",
+     "It is possible that our lenders exit these uncommitted relationships or reduce the amount of our available funding, which could have a material adverse effect on our available liquidity and our ability to meet short-term obligations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-Q balance sheet, 10-Q income statement, and Q3 2026 earnings release",
+    "claim": "Interest revenue growth has been supported by higher average margin loan balances, with nine-month interest revenue increasing to 116,333 (table in thousands) from 113,245 (table in thousands) and net customer receivables rising to 1,652,159 (table in thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "Interest | 39,509 | 38,859 | 116,333 | 113,245",
+     "Receivables from customers, net of allowance for credit losses of $162 ($131 in 2025) | 1,652,159 | 1,415,049",
+     "\u2022Interest revenue increased 5.4% from a year ago primarily due to higher average margin loan balances"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K Item 1A Risk Factors and 10-Q MD&A",
+    "claim": "For interest-based revenue to grow rather than decline, short-term interest rates and client margin or sweep balances must hold up, and concentrated margin borrowers\u2014where the two largest customer accounts represented approximately 47.8% of margin loans\u2014must remain over-collateralized without defaulting.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Rate reductions also decrease the interest we charge on customer margin loans and earn on other interest-sensitive assets, negatively affecting earnings.",
+     "Lower rates reduce fees earned from FDIC-insured client deposits through our sweep program, though this impact may be partially offset if the cash sweep balances rise as clients encounter fewer attractive alternatives for those balances.",
+     "While Oppenheimer limits customer loans to an amount not greater than 65% of the fair value of the securities, our two largest customer accounts collectively comprise approximately 47.8% of the margin loans as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-Q MD&A",
+    "claim": "Ongoing technology platform upgrades and selective integration of artificial intelligence and emerging market-structure capabilities aim to enhance client service, employee productivity, and shared-service operations.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "We continuously invest in and improve our technology platform to support client service and to remain competitive, while continuously managing expenses.",
+     "We are also evaluating and selectively integrating artificial intelligence (\"A.I.\") solutions across our platform, with the goal of improving client service, increasing employee productivity and supporting our shared services, including our technology, risk management, accounting and compliance functions.",
+     "We also continue to evaluate evolving market structure developments, including extended trading hours, developments in digital asset and tokenization frameworks and changing client expectations, and may selectively invest in our platform and capabilities where we believe such investments support our long-term strategic objectives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K Item 1A Risk Factors",
+    "claim": "For technology and AI initiatives to drive growth, the Company must implement upgrades without system failures, cyber breaches, or prohibitive AI compliance costs while keeping pace with competitors that have substantially greater investment resources.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Many of the Company's competitors have substantially greater resources to invest in technological improvements.",
+     "Failure of our technology systems, which could result from events beyond our control, or an inability to effectively upgrade those systems or implement new technology-driven products or services, could result in financial losses, liability to clients, and violations of applicable privacy and other applicable laws and regulatory sanctions.",
+     "Several states have introduced or proposed regulations governing the use of artificial intelligence which may limit our ability to use these technologies and/or may result in increased compliance and operational costs."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in F2, P5, and P7",
+    "claim": "Oppenheimer recorded a $70 million pre-tax legal accrual and expense for the settlement of its cash sweep program litigation.",
+    "facts": [
+     "F2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Included in other expenses for the nine months ended September 30, 2026 was a $70 million expense related to the settlement of the \u201ccash sweep\u201d program litigation.",
+     "For the nine months ended September 30, 2026, adjusted net income (3), which also excludes the $70 million pre-tax legal accrual related to the settlement of the Company's \"cash sweep\" litigation recorded in the first quarter of 2026, was $114.1 million or $10.68 adjusted basic earnings per share (3), compared with $88.1 million or $8.39 adjusted basic earnings per share (3) for the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Oppenheimer returned additional value to shareholders through a $1.00 per share special dividend.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our solid operating results and capital position allowed us to return additional value to shareholders in the form of a $1.00 per share special dividend in early January 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Oppenheimer recorded a non-deductible $13.0 million regulatory settlement.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The effective income tax rate for the year ended December 31, 2024 was 32.6% compared with 35.3% for the year ended December 31, 2023 primarily due to the absence of the non-deductible $13.0 million regulatory settlement, which was recorded in 2023"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in 10-K Item 1A (P2), 10-Q balance sheet (F1), 10-Q cash flow statement (F3), and 3Q 2026 earnings release (P7).",
+    "claim": "The Company relies on uncommitted bank call loans that lenders may decline to fund at their discretion, while bank call loans rose to 222,300 from 76,800 (table in thousands) and operating cash flow was (112,652) (table in thousands).",
+    "facts": [
+     "P2",
+     "F1",
+     "F3",
+     "P7"
+    ],
+    "quotes": [
+     "Under these arrangements, lenders are not contractually obligated to make loans to us and may decline to fund any requested loan in their sole discretion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A (P5), 10-Q income statement (F2), and 3Q 2026 earnings release (P7).",
+    "claim": "Capital Markets activity weakened in the third quarter, driving a 10.0% decline in total revenue to $382,004 (table in thousands) and a Capital Markets pre-tax loss of $(9,885) (table in thousands).",
+    "facts": [
+     "P5",
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Our Capital Markets business was impacted by lower advisory and underwriting activity as corporate clients took a more cautious approach to strategic transactions and capital raising initiatives were largely unavailable to smaller issuers during the quarter, while pockets of volatility provided opportunities for certain of our trading businesses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K liquidity and regulatory passages (P4), 10-Q income statement (F2), 10-Q MD&A (P5), and 3Q 2026 earnings release (P7).",
+    "claim": "Intensified regulatory scrutiny and litigation pose enforcement and financial risks, evidenced by a $70 million expense for the cash sweep litigation settlement that contributed to nine-month GAAP net income falling to 12,186 from 74,041 (table in thousands).",
+    "facts": [
+     "P4",
+     "F2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Timely and accurate compliance with the increased volume of regulatory requests has become increasingly problematic within the industry, and regulators have tended to bring enforcement proceedings in relation to such matters.",
+     "Included in other expenses for the nine months ended September 30, 2026 was a $70 million expense related to the settlement of the \u201ccash sweep\u201d program litigation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A (P2), 10-K MD&A (P3), 10-Q MD&A (P5), and 3Q 2026 earnings release (P7).",
+    "claim": "Interest rate cuts or lower sweep balances reduce bank deposit sweep income, which fell to 76,629 from 87,078 (table in thousands) over nine months, while share price gains triggered a $21.0 million third-quarter stock appreciation rights expense.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "If interest rates continue to decrease in immediate future periods, and/or balances within our cash sweep products decrease, the Company's profitability will be negatively impacted."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A (P2) and 10-Q balance sheet (F1).",
+    "claim": "Oppenheimer faces concentrated credit risk because its two largest customer accounts represented approximately 47.8% of margin loans and receivables from customers increased to 1,652,159 from 1,415,049 (table in thousands).",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "While Oppenheimer limits customer loans to an amount not greater than 65% of the fair value of the securities, our two largest customer accounts collectively comprise approximately 47.8% of the margin loans as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A (P2) and 10-Q MD&A (P5).",
+    "claim": "Cyber-attacks, system failures, human error, or flawed AI deployment could disrupt high-volume daily trade processing, expose sensitive client data, or trigger regulatory and legal liability.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Although cybersecurity incidents among financial services firms are on the rise, we have not experienced any material losses relating to cyber-attacks or other information security breaches, although such attacks are occurring more frequently and with increased sophistication."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 (P1), 10-K MD&A (P3), and 10-Q MD&A (P5).",
+    "claim": "Middle East hostilities threatening oil transits, U.S. actions in Venezuela, and shifting U.S. tariff policies could heighten market volatility, inflation, and capital markets disruption.",
+    "facts": [
+     "P1",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Threats to the Strait of Hormuz and the Red Sea transits for oil are likely to continue to threaten the worldwide economy for the near future."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in F1, F2, P5, and P7",
+    "claim": "What are the settlement terms, court approval status, cash payment timing, and any remaining legal contingencies behind the $70 million cash sweep program litigation expense?",
+    "facts": [
+     "F1",
+     "F2",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Included in other expenses for the nine months ended September 30, 2026 was a $70 million expense related to the settlement of the \u201ccash sweep\u201d program litigation.",
+     "Commitments and contingencies (Note 13)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in S0, P5, and P7",
+    "claim": "How did the revised program formula change grant sizing for the financial advisor stock appreciation rights program, and how much of the $21.0 million third-quarter expense and 68,142 (table in thousands) nine-month expense would reverse if Class A shares remain near 87.2 rather than $117.96?",
+    "facts": [
+     "S0",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The Company changed the program formula beginning in 2026 to reduce the number of grants awarded, although it will take several years for the impact of the revised program formula to be fully reflected.",
+     "price: 87.2"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F3, and P2",
+    "claim": "What are the interest rates, lender credit limits, pledged collateral, and funding drivers behind bank call loans rising from 76,800 to 222,300 (table in thousands), an increase of 145,500 (table in thousands), given that these short-term facilities are uncommitted?",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "The Company has uncommitted short-term lines of credit in the form of bank call loans with multiple third-party financial institutions.",
+     "Under these arrangements, lenders are not contractually obligated to make loans to us and may decline to fund any requested loan in their sole discretion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P2",
+    "claim": "What share of the 1,652,159 (table in thousands) in net customer receivables remains concentrated in the largest customer margin accounts compared with the prior 47.8% concentration level, and what collateral ratios support them?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "While Oppenheimer limits customer loans to an amount not greater than 65% of the fair value of the securities, our two largest customer accounts collectively comprise approximately 47.8% of the margin loans as of December 31, 2025.",
+     "Both accounts are significantly over collateralized."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P2",
+    "claim": "What is the asset composition and fair value hierarchy of the 1,403,807 (table in thousands) in securities owned\u2014including $1,160,913 (table in thousands) pledged\u2014and what trading or financing activity drove payables to brokers, dealers and clearing organizations from 397,997 to 733,303 (table in thousands)?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Market volatility, illiquid market conditions and disruptions in the credit markets may make it extremely difficult to value and monetize certain of our financial instruments, particularly during periods of market displacement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and P7",
+    "claim": "What regulatory proceedings or compliance matters are active in Regulatory Matters and Developments, and what unallocated expenses explain the Corporate/Other segment's pre-tax losses after its (137,041) (table in thousands) full-year loss?",
+    "facts": [
+     "P3",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Regulatory oversight of the securities industry has become increasingly intense over the past several years and the Company, as well as others in the industry, have been directly affected by this increased regulatory scrutiny.",
+     "See further discussion of these risks in \"Management's Discussion and Analysis of Financial Condition and Results of Operations \u2014 Regulatory Matters and Developments\" in Item 7."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F2, and P3",
+    "claim": "Who holds voting control through the 99,665 Class B shares, which awards drive the dilution from 10,709,025 basic to 11,586,145 diluted weighted average shares, and what ongoing dividend or share repurchase policy applies following the $1.00 per share special dividend?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Our solid operating results and capital position allowed us to return additional value to shareholders in the form of a $1.00 per share special dividend in early January 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "What are the required capital commitment, Swiss regulatory approval status, launch schedule, and expected revenue contribution for the planned platform in Switzerland?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "In that regard, we have a plan under way to establish a platform in Switzerland for global high net worth clients interested in non-US custody and investment solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and P7",
+    "claim": "How much will the 25 basis points federal funds target increase to 3.75% to 4.00% expand net sweep economics relative to deposit pass-through, after bank deposit sweep income declined to $25,556 (table in thousands) on $2.7 (table in billions) of cash sweep balances?",
+    "facts": [
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "The Federal Reserve maintained the federal funds target range at 3.50% to 3.75% throughout most of 2026 before increasing the target range by 25 basis points to 3.75% to 4.00% in September 2026.",
+     "Conversely, higher rates generally increase revenue earned on client cash balances, margin lending activities and other interest-sensitive assets, although they may also increase funding costs and influence client asset allocation decisions."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
  "ticker": "OPY",
+ "upside": 0.36695564561574345,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=200 https://www.sec.gov/Archives/edgar/data/791963/000162828026071942/0001628280-26-071942.txt larger than 80000000 bytes"
+ "value_base": 110.54069638373011,
+ "value_bear": 84.58388607922515,
+ "value_bull": 186.5486415099307,
+ "value_per_filed_share": {
+  "base": 110.54069638373011,
+  "bear": 84.58388607922515,
+  "bull": 186.5486415099307
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +13.9 points a year against the required return over 3 years"
 }
