@@ -1,9 +1,9 @@
 {
- "count": 180,
+ "count": 181,
  "effort": "high",
- "fill_complete": false,
- "generated_at": "2026-11-19T13:03:11Z",
- "list_covered": 158,
+ "fill_complete": true,
+ "generated_at": "2026-11-19T13:14:38Z",
+ "list_covered": 159,
  "list_names": 159,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -4723,6 +4723,30 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -16.3 points a year against the required return over 3 years"
   },
+  "OKTA": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 90,
+   "claims_supported": 85,
+   "date": "2026-11-19T13:03:41Z",
+   "family": "family_not_built",
+   "flags": [
+    "Emilie Choi provided notice that she would resign as a Class I director of Okta, Inc.'s Board of Directors effective that day, and her resignation was not the result of any disagreement with the Company.",
+    "The Board appointed Helen Riley as an independent Class I director and member of the Audit Committee, with annual Board compensation of $35,000, Audit Committee compensation of $13,000, and an initial grant of 2,907 restricted stock units.",
+    "During the quarter ended July 31, 2026, Okta settled the remaining principal amount of the 2026 Notes for $350 million in cash, reducing convertible senior notes, net on the balance sheet from 350 to 0 (table in millions)."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "pending_offer": null,
+   "qwen_book": null,
+   "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "OPY": {
    "alpha_pts": 13.898618735071992,
    "analysis": "complete",
@@ -7323,7 +7347,7 @@
  "verdict_counts": {
   "AVOID": 44,
   "BUY": 44,
-  "NO_CALL": 75,
+  "NO_CALL": 76,
   "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
