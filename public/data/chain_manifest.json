@@ -3,14 +3,14 @@
     "stocks": 7047
   },
   "fetch_run": {
-    "newest_last_updated_age_days": 0.45,
+    "newest_last_updated_age_days": 0.49,
     "processed": 6549,
     "refreshed": 6549,
     "scan_logged_at": "2026-11-19 00:51:53",
     "skipped": 0,
     "skipped_share": 0.0
   },
-  "finished_at": "2026-11-19T02:43:04Z",
+  "finished_at": "2026-11-19T03:45:25Z",
   "invariants": [
     {
       "detail": "newest row Last_Updated is 0.5 days old (max 8)",
@@ -103,10 +103,10 @@
       "ok": true
     },
     {
-      "detail": "paper ledger latest row 2026-11-17 (expect >= price session 2026-11-18)",
+      "detail": "paper ledger latest row 2026-11-18 (expect >= price session 2026-11-18)",
       "level": "soft",
       "name": "paper_ledger_updated",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "mine ledger idle (no My Portfolio snapshot saved yet)",
@@ -117,45 +117,45 @@
   ],
   "ok": true,
   "price_asof": "2026-11-18",
-  "run_id": "20261119T024156Z",
+  "run_id": "20261119T034116Z",
   "steps": [
     {
-      "duration_s": 2.5,
+      "duration_s": 2.3,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.2,
+      "duration_s": 2.7,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 1.0,
+      "duration_s": 1.2,
       "name": "filter_tier1_hygiene",
       "returncode": 0
     },
     {
-      "duration_s": 18.2,
+      "duration_s": 28.1,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.6,
+      "duration_s": 0.7,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.5,
+      "duration_s": 3.1,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 38.0,
+      "duration_s": 200.8,
       "name": "fetch_analyst_targets",
       "returncode": 0
     },
     {
-      "duration_s": 0.9,
+      "duration_s": 1.1,
       "name": "build_valuation_models",
       "returncode": 0
     },
@@ -165,7 +165,7 @@
       "returncode": 0
     },
     {
-      "duration_s": 1.2,
+      "duration_s": 8.3,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
