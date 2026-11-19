@@ -270,3 +270,15 @@ test('prettyId: acronyms in capitals, other words capitalised', () => {
     assert.equal(prettyId('credit_financial_conditions'), 'Credit Financial Conditions');
     assert.equal(prettyId(''), '');
 });
+
+test('series and dimension names follow the reader\'s language and fall back to English for an id without a key', async () => {
+    const { seriesLabel, dimensionLabel, featureLabel } = await import('./macroPanels');
+    const { TRANSLATIONS } = await import('../i18n');
+    const tOf = (lang: 'en' | 'ko' | 'zh') => (key: string) => (TRANSLATIONS[lang] as Record<string, string>)[key] || (TRANSLATIONS.en as Record<string, string>)[key] || key;
+    assert.equal(seriesLabel(tOf('en') as never, 'ICSA'), 'Initial jobless claims');
+    assert.equal(seriesLabel(tOf('ko') as never, 'ICSA'), '신규 실업수당 청구');
+    assert.equal(dimensionLabel(tOf('zh') as never, 'credit_liquidity'), '金融狀況');
+    assert.equal(seriesLabel(tOf('ko') as never, 'UNKNOWN1'), 'UNKNOWN1');
+    assert.equal(dimensionLabel(tOf('ko') as never, 'some_new_dimension'), 'Some new dimension');
+    assert.equal(featureLabel({ feature_id: 'icsa_level', series_id: 'ICSA' }, (id) => seriesLabel(tOf('ko') as never, id)), '신규 실업수당 청구 · level');
+});

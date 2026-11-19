@@ -13,8 +13,8 @@ import type { MriRegime, MriRiskState } from '@/lib/data-service';
 import { fill } from '@/lib/desk/text';
 import { pctText } from '@/lib/desk/health';
 import {
-    bestAbsIc, componentBars, convictionKey, CROSS_SECTION_LABELS, DASH, dimensionAverages, dimensionName, directionRows,
-    fallbackNote, featureLabel, lastValue, quadrantOf, quadrantTrail, recessionSpans, regimeRuns, sectorName, sectorRows, seriesName,
+    bestAbsIc, componentBars, convictionKey, CROSS_SECTION_LABELS, DASH, dimensionAverages, dimensionLabel, directionRows,
+    fallbackNote, featureLabel, lastValue, quadrantOf, quadrantTrail, recessionSpans, regimeRuns, sectorName, sectorRows, seriesLabel,
     signed, sourceHealth, timelinePoints, titleCase, unchangedMonths, validationSections, type DirectionCell,
 } from '@/lib/desk/macroPanels';
 import { Chip, Micro, Tag } from '../primitives';
@@ -124,7 +124,7 @@ export function DimensionsPanel({ panels }: { panels: MacroPanelData }) {
         <Section title={t('mcDimensions')}>
             <Gate loaded={panels.loaded.features} ok={avgs.length > 0}>
                 <ul className="mt-3">
-                    {avgs.map((d) => <Row key={d.id} label={dimensionName(d.id)} value={signed(lastValue(d))} />)}
+                    {avgs.map((d) => <Row key={d.id} label={dimensionLabel(t, d.id)} value={signed(lastValue(d))} />)}
                 </ul>
                 <Note>{t('mcDimensionsNote')}</Note>
             </Gate>
@@ -258,7 +258,7 @@ export function DirectionPanel({ regime, loaded }: { regime: MriRegime | null; l
                         <tbody>
                             {rows.map((r) => (
                                 <tr key={r.id} className="border-b border-rule-10 last:border-b-0">
-                                    <td className="px-2 py-1.5 align-top text-[13px] text-ink-2">{dimensionName(r.id)}</td>
+                                    <td className="px-2 py-1.5 align-top text-[13px] text-ink-2">{dimensionLabel(t, r.id)}</td>
                                     {cell(r.level)}
                                     {cell(r.d3)}
                                     {cell(r.d6)}
@@ -301,7 +301,7 @@ export function IndicatorsPanel({ panels, cloud }: { panels: MacroPanelData; clo
         .flatMap((g) => g.inputs ?? [])
         .flatMap((input) => {
             const note = fallbackNote(input);
-            return note ? [`${seriesName(input.series_id || input.feature_id || '')} ${fill(t(note.key as Parameters<typeof t>[0]), note.vars)}`] : [];
+            return note ? [`${seriesLabel(t, input.series_id || input.feature_id || '')} ${fill(t(note.key as Parameters<typeof t>[0]), note.vars)}`] : [];
         });
     return (
         <Section title={t('mcIndicators')}>
@@ -316,14 +316,14 @@ export function IndicatorsPanel({ panels, cloud }: { panels: MacroPanelData; clo
                             className="shrink-0"
                             onClick={() => setPick(d.dimension_id ?? null)}
                         >
-                            {dimensionName(d.dimension_id ?? '')}
+                            {dimensionLabel(t, d.dimension_id ?? '')}
                         </Chip>
                     ))}
                 </div>
                 <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
                     {(active?.features ?? []).map((f, i) => (
                         <div key={`${f.feature_id}-${i}`} className="min-w-0">
-                            <Micro className="block break-words normal-case tracking-normal" title={f.series_id ?? f.feature_id ?? ''}>{featureLabel(f)}</Micro>
+                            <Micro className="block break-words normal-case tracking-normal" title={f.series_id ?? f.feature_id ?? ''}>{featureLabel(f, (id) => seriesLabel(t, id))}</Micro>
                             <div className="mt-1"><MiniLine points={f.points ?? []} /></div>
                         </div>
                     ))}
@@ -345,7 +345,7 @@ export function SourceHealthPanel({ panels }: { panels: MacroPanelData }) {
                     {items.map((s) => (
                         <Tag key={s.id} className={s.stale ? 'border-warn/60 text-warn' : undefined}>
                             <span title={s.id} className="normal-case tracking-normal">
-                                {seriesName(s.id)}{s.stale ? ` · ${t('mcLast')} ${s.last.slice(0, 7)}` : ''}
+                                {seriesLabel(t, s.id)}{s.stale ? ` · ${t('mcLast')} ${s.last.slice(0, 7)}` : ''}
                             </span>
                         </Tag>
                     ))}

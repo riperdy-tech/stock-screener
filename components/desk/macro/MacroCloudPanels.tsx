@@ -14,9 +14,9 @@ import type { MacroCloudData, MacroPanelData } from '@/lib/desk/useDeskData';
 import { fill } from '@/lib/desk/text';
 import { pctText } from '@/lib/desk/health';
 import {
-    cloudAgeDays, cloudDate, CLOUD_STALE_DAYS, cloudStale, coverageRows, DASH, dimensionName, fallbackNote, filterRuns, labelOf,
+    cloudAgeDays, cloudDate, CLOUD_STALE_DAYS, cloudStale, coverageRows, DASH, dimensionLabel, fallbackNote, filterRuns, labelOf,
     lowConfidenceItems, maxRankChange, medianLeadMonths, newsSectorRows, newsThemeRows, newsWeightRange, overlayMoves,
-    prettyId, READINESS_STEPS, runTimeUtc, safeHttpUrl, sectorLabels, seriesName, signed, titleCase, type RunFilter,
+    prettyId, READINESS_STEPS, runTimeUtc, safeHttpUrl, sectorLabels, seriesLabel, signed, titleCase, type RunFilter,
 } from '@/lib/desk/macroPanels';
 import { Chip, Micro, Tag } from '../primitives';
 import { DivergingBars, SlopeChart } from './MacroCharts';
@@ -80,8 +80,8 @@ export function DataHealthPanel({ ctx }: { ctx: CloudCtx }) {
                     {(carried ?? []).map((c, i) => (
                         <Row
                             key={i}
-                            label={seriesName(c.series_id || c.feature_id || '')}
-                            sub={fill(t('mchdCarriedItem'), { g: dimensionName(c.group ?? '') })}
+                            label={seriesLabel(t, c.series_id || c.feature_id || '')}
+                            sub={fill(t('mchdCarriedItem'), { g: dimensionLabel(t, c.group ?? '') })}
                             value={`${c.observation_date ?? DASH} · ${dayText(t, c.age_days)}`}
                         />
                     ))}
@@ -94,16 +94,16 @@ export function DataHealthPanel({ ctx }: { ctx: CloudCtx }) {
                                 const inputs = g.inputs ?? [];
                                 const flags = [
                                     ...(g.carried_forward_count ? [fill(t('mchdCarriedCount'), { n: g.carried_forward_count })] : []),
-                                    ...inputs.filter((i) => i.used === false).map((i) => fill(t('mchdNotUsed'), { name: seriesName(i.series_id || i.feature_id || ''), why: i.reason ?? DASH })),
+                                    ...inputs.filter((i) => i.used === false).map((i) => fill(t('mchdNotUsed'), { name: seriesLabel(t, i.series_id || i.feature_id || ''), why: i.reason ?? DASH })),
                                     ...inputs.flatMap((i) => {
                                         const note = fallbackNote(i);
-                                        return note ? [`${seriesName(i.series_id || i.feature_id || '')} ${fill(t(note.key as K), note.vars)}`] : [];
+                                        return note ? [`${seriesLabel(t, i.series_id || i.feature_id || '')} ${fill(t(note.key as K), note.vars)}`] : [];
                                     }),
                                 ];
                                 return (
                                     <Row
                                         key={g.group}
-                                        label={dimensionName(g.group ?? '')}
+                                        label={dimensionLabel(t, g.group ?? '')}
                                         sub={flags.length ? flags.join(' · ') : undefined}
                                         value={`${g.oldest_input_date ?? DASH} · ${dayText(t, g.oldest_input_age_days)}`}
                                     />

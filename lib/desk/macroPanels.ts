@@ -55,11 +55,22 @@ const SERIES_NAMES: Record<string, string> = {
 
 export const seriesName = (id: string): string => SERIES_NAMES[id] ?? id;
 
+/** The translation function of the desk, taken loosely: the name keys are built from data ids. It returns the key itself for a key it lacks. */
+type Translate = (key: never) => string;
+const translated = (t: Translate, key: string, fallback: string): string => {
+    const v = t(key as never);
+    return v === key ? fallback : v;
+};
+
+/** A series or dimension name in the reader's language (keys mcSer_<id>, mcDim_<id>); an id without a key keeps its English name. */
+export const seriesLabel = (t: Translate, id: string): string => translated(t, `mcSer_${id}`, seriesName(id));
+export const dimensionLabel = (t: Translate, id: string): string => translated(t, `mcDim_${id}`, dimensionName(id));
+
 /** "Consumer prices (CPI) · YoY": the series name with the transform the feature id carries. */
-export function featureLabel(f: Pick<MriFeatureSeries, 'feature_id' | 'series_id'>): string {
+export function featureLabel(f: Pick<MriFeatureSeries, 'feature_id' | 'series_id'>, name: (id: string) => string = seriesName): string {
     const id = f.feature_id ?? '';
     const tag = /yoy/.test(id) ? 'YoY' : /12m/.test(id) ? '12m Δ' : /6m/.test(id) ? '6m Δ' : /level/.test(id) ? 'level' : '';
-    return `${seriesName(f.series_id || id)}${tag ? ` · ${tag}` : ''}`;
+    return `${name(f.series_id || id)}${tag ? ` · ${tag}` : ''}`;
 }
 
 /** "+0.27" / "−0.47" / "—". Zero shows as "0.00". */
