@@ -1,24 +1,506 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 21.691935162081677,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 119,
  "claims_supported": 115,
  "date": "2026-11-17T00:28:13Z",
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.8200 (filed -0.0504 to 0.5864)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: ix_read:capex:0001596993-26-000025:lpg:PaymentsForVesselsUnderConstruction",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.7800 (filed -0.0504 to 0.5864)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: ix_read:capex:0001596993-26-000025:lpg:PaymentsForVesselsUnderConstruction",
+   "run 3000: quotes_verified: 13 of 13"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.9649 and margin 0.8751, margin 0.4365 (persist), growth 0.0375, terminal RONIC 0.0790 (equity return r 0.0845), F 10",
+  "run_gap": 0.0025190745825904273,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 327409120.0,
+     "excess_cash_before": 327409120.0,
+     "k0_after": 29327051.344771087,
+     "k0_before": 29327051.344771087,
+     "k0_interest": 29249142.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 180848457.6552289,
+     "x0_before": 180848457.6552289
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2199851935.02941,
+     "seam_ratio": 0.9967772582737201,
+     "tv_share": 0.37627304446809223,
+     "wedge_rate_5": -0.13503078746824115
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.8200 (filed -0.0504 to 0.5864)",
+     "base_year_not_representative",
+     "confidence_low",
+     "ix_read:capex:0001596993-26-000025:lpg:PaymentsForVesselsUnderConstruction",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.12,
+     "fade_years": 7,
+     "long_run_op_margin": 0.3,
+     "op_margin": [
+      0.82,
+      0.4,
+      0.34,
+      0.33,
+      0.33
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      0.42,
+      -0.35,
+      -0.05,
+      0.04,
+      0.09
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.9649 and margin 0.8751, margin 0.4365 (persist), growth 0.0375, terminal RONIC 0.0790 (equity return r 0.0845), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 115
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.22,
+      0.38
+     ],
+     "rev_growth_y3": [
+      -0.2,
+      0.08
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "three 90,000 cbm dual-fuel Panamax VLGCs for delivery in June, September, and December of 2030 for a total price of approximately $345 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Four dual-fuel Panamax newbuildings (three for about $345 million) are payable ahead of 2029 and 2030 delivery, and the filed pooled ratio is 0.1044 with FY2026 at 0.1949. I use 0.12, as the ratio is spread over a revenue base that falls after year 1."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The spot market is very volatile and there have been and will be periods when spot charter rates decline below the operating cost of vessels."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The cycle and fleet renewal take several years to work through, so I allow seven years for the margin and growth to settle."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-03-31 | $481.5 million | 0.3627 | 0.4365"
+       },
+       {
+        "id": "P6",
+        "quote": "a further 160 VLGCs/VLACs\u2014equivalent to approximately 14.4 million cbm of carrying capacity\u2014are scheduled for delivery through calendar year 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed history has a median operating margin near 0.355, with a range from -0.05 to 0.59. The base-rate pattern says an above-median margin keeps about half the gap, which implies roughly 0.40. A smaller fleet, chartered-in hire costs and an oversupplied orderbook argue lower, so I use 0.30."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "the cumulative gain on sale of the vessels is expected to be approximately $88.6 million"
+       },
+       {
+        "id": "P6",
+        "quote": "Completed the sale of our 2014-built VLGC Corsair in July 2026, generating proceeds of $80.8 million net of commission, recognizing a gain on sale of $30.1 million."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 includes $93.7 million of gains in the first half plus an expected $88.6 million in the second half, all booked in operating income, which lifts the GAAP margin far above the core level. From year 2 the margin reverts toward the cyclical median as rates fall. Fixed charter-hire, vessel operating and depreciation costs keep it from collapsing."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0790."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Newbuilds ordered at high prices should earn only modestly above the 0.079 break-even return, well below the 0.164 earned on depreciated, cheaply bought vessels."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "TCE rates rose by $43,265 per available day from $53,725 for the three months ended September 30, 2025 to $96,990 for the three months ended September 30, 2026"
+       },
+       {
+        "id": "P4",
+        "quote": "The twenty-two VLGCs in our fleet, including the five time chartered-in vessels, as of October 30, 2026, have an aggregate carrying capacity of approximately 1.9 million cbm"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (FY2027) is already about 60% booked: the six-month revenue is $409 million against a $481.5 million base, and the fleet is smaller for the second half. Year 2 falls as spot rates revert from record levels with fewer ships. Years 4 and 5 recover modestly as the 2029 and 2030 newbuildings deliver."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, cyclical single-segment shipowner should grow below the long-run nominal anchor, so I use 0.03."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "long_run_op_margin",
+      "risk": "Spot freight rates fall sharply because of orderbook oversupply, pushing pool earnings toward operating cost"
+     },
+     {
+      "bear_value": -0.5,
+      "input_hit": "rev_growth",
+      "risk": "Year 2 revenue falls much more than expected as rates revert and the fleet is smaller"
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Newbuilding spend runs at a higher ratio than assumed, or new vessels earn only the break-even return"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       0.26999999999999996,
+       -0.5,
+       -0.2,
+       -0.11000000000000001,
+       -0.060000000000000026
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.38,
+      "rev_growth": [
+       0.55,
+       -0.21999999999999997,
+       0.08,
+       0.17,
+       0.22
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt of $560.4 million at March 2026 has since fallen through prepayments and the new $368.4 million facility, but newbuild commitments will add borrowing later."
+     },
+     "margin_position": "The FY2026 operating margin of 0.4365 is above the 12-year filed median of about 0.355 and well above the trough years of 2017 to 2019. It is a freight-cycle high. The current quarter is higher still, because spot rates are at record levels and vessel-sale gains sit inside GAAP operating income. I expect the margin to fall back toward the long-run median as rates normalise and newbuild supply arrives.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The filed tax rate of 0.0000 is consistent with a Marshall Islands shipping owner, though the US headquarters and PFIC/tax-law changes leave some residual risk."
+     },
+     "why": "FY2026 revenue of $481.5 million came from a strong but not peak freight year. The fleet has since shrunk from 27 to 22 vessels, and the six-month FY2027 results are far above FY2026 on record rates and $93.7 million of vessel-sale gains. Years 1 to 5 must reflect a smaller fleet, a spot-rate reversion and lumpy sale gains."
+    },
+    "value_at_old_defaults": 154.25252718806644,
+    "values": {
+     "base": 62.0241092856105,
+     "bear": 31.68362100987155,
+     "bull": 143.53066014223413
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 327409120.0,
+     "excess_cash_before": 327409120.0,
+     "k0_after": 29327051.344771087,
+     "k0_before": 29327051.344771087,
+     "k0_interest": 29249142.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 180848457.6552289,
+     "x0_before": 180848457.6552289
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2193534784.752797,
+     "seam_ratio": 1.0140582351706247,
+     "tv_share": 0.39037356016874125,
+     "wedge_rate_5": -0.07925017572508768
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.7800 (filed -0.0504 to 0.5864)",
+     "base_year_not_representative",
+     "confidence_low",
+     "ix_read:capex:0001596993-26-000025:lpg:PaymentsForVesselsUnderConstruction",
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.15,
+     "fade_years": 8,
+     "long_run_op_margin": 0.34,
+     "op_margin": [
+      0.78,
+      0.42,
+      0.34,
+      0.33,
+      0.34
+     ],
+     "return_on_new_investment_long_run": 0.1,
+     "rev_growth": [
+      0.38,
+      -0.3,
+      -0.1,
+      0.03,
+      0.06
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.9649 and margin 0.8751, margin 0.4365 (persist), growth 0.0375, terminal RONIC 0.0790 (equity return r 0.0845), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 115
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.27,
+      0.42
+     ],
+     "rev_growth_y3": [
+      -0.25,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.1044"
+       },
+       {
+        "id": "P8",
+        "quote": "for a total price of approximately $345 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Newbuilding payments (four 90,000 cbm Panamaxes for 2029-30), drydockings and vessel upgrades push capex above the pooled 0.10 over years 1-5, partly offset by a larger revenue base in year 1."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "build three 90,000 cbm dual-fuel Panamax VLGCs for delivery in June, September, and December of 2030 for a total price of approximately $345 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The cycle, orderbook deliveries and fleet renewal take years to settle, so a medium fade of 8 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The spot market is very volatile and there have been and will be periods when spot charter rates decline below the operating cost of vessels."
+       },
+       {
+        "id": "REC",
+        "quote": "2019-03-31 | $158.0 million | -0.0082 | -0.0504"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 12-year median margin is about 0.35, and base rates say an above-median margin keeps only part of its gap. Spot rates fall below vessel operating cost in downturns, and the fleet now relies more on chartered-in tonnage, so I fade to 0.34."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "the cumulative gain on sale of the vessels is expected to be approximately $88.6 million"
+       },
+       {
+        "id": "P4",
+        "quote": "Excluding non-capitalizable drydock-related operating expenses, daily operating expenses increased by $799, or 8.4%"
+       },
+       {
+        "id": "P1",
+        "quote": "Demand for our vessels therefore may be stronger in our quarters ending June 30 and September 30 and relatively weaker during our quarters ending December 31 and March 31"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is high because sale gains sit in GAAP operating income (the $88.6M expected from the October sales will land in H2). The margin then falls toward mid-cycle as rates revert and charter-hire and operating costs rise."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0790."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 0.1638 is cyclically high, and newbuilds are bought at full price. I set 0.10, a little above the 0.0790 break-even return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenues | 221,347,756 | 124,064,281 | 409,232,604 | 208,276,247"
+       },
+       {
+        "id": "P4",
+        "quote": "TCE rates rose by $43,265 per available day from $53,725 for the three months ended September 30, 2025 to $96,990 for the three months ended September 30, 2026."
+       },
+       {
+        "id": "P4",
+        "quote": "Our fleet currently consists of twenty-two VLGC carriers"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 captures the record first half ($409.2M) plus a seasonally weaker second half on a fleet cut to 22 vessels. Then revenue falls as spot rates normalise against a large orderbook, and recovers slightly as the newbuildings deliver in 2029-2030."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "the combined VLGC/VLAC orderbook has increased to around 36.4% of the existing fleet"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature cyclical pure-play shipping business, with a fleet that must be renewed and a heavy orderbook, should grow below the 0.0375 nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.25,
+      "input_hit": "long_run_op_margin",
+      "risk": "Spot rates collapse faster or further as the 160-vessel orderbook delivers, taking pool earnings toward or below break-even."
+     },
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "Year-2/3 revenue falls much more than assumed, with TCE returning to prior-year levels."
+     },
+     {
+      "bear_value": 0.22,
+      "input_hit": "capex_to_revenue",
+      "risk": "Cost inflation (crew, repairs, chartered-in hire) and heavy newbuilding capex squeeze free cash flow."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.23,
+       -0.44999999999999996,
+       -0.25,
+       -0.12,
+       -0.09
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.42,
+      "rev_growth": [
+       0.53,
+       -0.14999999999999997,
+       0.05000000000000002,
+       0.18000000000000002,
+       0.21000000000000002
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Total debt of $560.4M in the record is already being cut by prepayments and refinanced, and cash now exceeds debt, while four newbuildings will need funding."
+     },
+     "margin_position": "The base-year margin of 0.4365 is above the company's own 12-year median of about 0.35. The current run is far above it: H1 FY2027 operating income of $358.1M on $409.2M revenue includes $93.7M of vessel-sale gains, and Q2 TCE of $96,990 per day is a record spot-driven peak. The fleet is also shrinking and its costs are rising, so the margin should revert toward mid-cycle as new vessels deliver.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The filed tax rate is 0.0000, consistent with a Marshall Islands shipping company that has shown no tax charge, so it is plausibly sustainable, though this is not tested against law changes."
+     },
+     "why": "FY2026 revenue of $481.5M and margin of 0.4365 are mid-to-high cycle, and the current year is much stronger. Year-1 operating income is lifted by sale gains booked within operating income. Fleet shrinkage (27 to 22 vessels) and a large orderbook argue against extrapolating the current peak."
+    },
+    "value_at_old_defaults": 154.25252718806644,
+    "values": {
+     "base": 61.868062475178235,
+     "bear": 30.65296398246614,
+     "bull": 172.61717847611388
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 154.25252718806644,
+  "value_at_old_defaults_quoted": 154.25252718806644,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 2639758424.220379,
  "family": "commodity",
+ "far_from_price": false,
+ "filed_shares": 42613805.0,
  "flags": [
   "The company completed the sales of the VLGCs Captain John NP and Clermont, receiving total net proceeds of $167.4 million.",
   "The board declared an irregular cash dividend of $1.25 per share totaling $53.7 million, payable on or about November 24, 2026.",
   "The company repaid $16.0 million plus accrued interest related to the Clermont under the 2026 Debt Facility's revolver."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.0844527956717438,
+ "market_cap_at_publish": 1946236326,
  "model": "claude-opus-5-5",
- "no_value_reason": "some filed figures are years older than the latest annual report",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 45.3,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 62.0241092856105,
+  "3000": 61.868062475178235
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -1483,8 +1965,17 @@
   ]
  },
  "ticker": "LPG",
+ "upside": 0.3563401263019992,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "some filed figures are years older than the latest annual report"
+ "value_base": 61.946085880394364,
+ "value_bear": 31.168292496168846,
+ "value_bull": 158.07391930917402,
+ "value_per_filed_share": {
+  "base": 61.946085880394364,
+  "bear": 31.168292496168846,
+  "bull": 158.07391930917402
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +21.7 points a year against the required return over 3 years"
 }

@@ -1,24 +1,514 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 32.315385525507516,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 78,
  "claims_supported": 65,
  "date": "2026-11-17T08:38:17Z",
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.1750 (filed 0.2151 to 25.6459)",
+   "run 1000: growth_outside_filed_record: rev_growth.y2 0.1100 (filed 0.2151 to 25.6459)",
+   "run 1000: growth_outside_filed_record: rev_growth.y3 0.0800 (filed 0.2151 to 25.6459)",
+   "run 1000: growth_outside_filed_record: rev_growth.y4 0.0500 (filed 0.2151 to 25.6459)",
+   "run 1000: growth_outside_filed_record: rev_growth.y5 0.0100 (filed 0.2151 to 25.6459)",
+   "run 1000: ix_read:da:0001104659-26-018859:us-gaap:DepreciationAndAmortization[us-gaap:StatementBusinessSegmentsAxis=hrmy:RareNeurologicalDiseasesSegmentMember]",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.1750 (filed 0.2151 to 25.6459)",
+   "run 3000: growth_outside_filed_record: rev_growth.y2 0.1200 (filed 0.2151 to 25.6459)",
+   "run 3000: growth_outside_filed_record: rev_growth.y3 0.0900 (filed 0.2151 to 25.6459)",
+   "run 3000: growth_outside_filed_record: rev_growth.y4 0.0600 (filed 0.2151 to 25.6459)",
+   "run 3000: growth_outside_filed_record: rev_growth.y5 0.0000 (filed 0.2151 to 25.6459)",
+   "run 3000: ix_read:da:0001104659-26-018859:us-gaap:DepreciationAndAmortization[us-gaap:StatementBusinessSegmentsAxis=hrmy:RareNeurologicalDiseasesSegmentMember]",
+   "run 3000: quotes_verified: 12 of 12"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.1936 and margin 0.2425, margin 0.2573 (persist), growth 0.0375, terminal RONIC 0.0836 (equity return r 0.0836), F 10",
+  "run_gap": 0.08442638793120323,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 775340000.0,
+     "excess_cash_before": 775340000.0,
+     "k0_after": 24925217.742971867,
+     "k0_before": 24925217.742971867,
+     "k0_interest": 14649000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 135429510.1691637,
+     "x0_before": 135429510.1691637
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2828196941.071047,
+     "seam_ratio": 0.9761145228012145,
+     "tv_share": 0.35727732290351455,
+     "wedge_rate_5": -0.03728162215648124
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.1750 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y2 0.1100 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y3 0.0800 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y4 0.0500 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y5 0.0100 (filed 0.2151 to 25.6459)",
+     "ix_read:da:0001104659-26-018859:us-gaap:DepreciationAndAmortization[us-gaap:StatementBusinessSegmentsAxis=hrmy:RareNeurologicalDiseasesSegmentMember]",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.001,
+     "fade_years": 10,
+     "long_run_op_margin": 0.2,
+     "op_margin": [
+      0.235,
+      0.24,
+      0.24,
+      0.235,
+      0.22
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      0.175,
+      0.11,
+      0.08,
+      0.05,
+      0.01
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.1936 and margin 0.2425, margin 0.2573 (persist), growth 0.0375, terminal RONIC 0.0836 (equity return r 0.0836), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.14,
+      0.27
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.12
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0008"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company has almost no capital expenditure, as shown by the pooled history. Manufacturing and distribution are outsourced."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "ruling is expected around the time of the 30-month stay (February 2027)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Generic erosion, formulation transitions and pipeline success or failure take roughly a decade to play out, so a 10-year fade is used."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Utility patents filed to extend pitolisant franchise into the 2040s"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $868.5 million | 0.2151 | 0.2400"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "After a single-product company loses exclusivity, margin should settle below today's 24%. Pitolisant GR/HD patents to the 2040s and a possible business-development deal partly offset the loss. The base rates suggest about half of any gap to the 5-year median persists. The 5-year median is about 27%, so the fade is to a modestly lower margin."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 54,197 | 65,487 | 180,804 | 169,912"
+       },
+       {
+        "id": "P8",
+        "quote": "Invest in R&D pipeline, especially BP-205 development plan"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month margin is about 24% (180.8 / 745.6). Q3 was held down by a $25M milestone and higher cost of goods. Margins stay near 24% with higher R&D (BP-205, EPX-100) and fall in year 5 as generic competition begins."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.5669"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is asset-light, with outsourced manufacturing and a base return on tangible capital of 0.5669. New investment is mainly R&D and licensing, so the long-run return is set well below the base but above the 8.4% cost of equity."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Reiterates Full Year Guidance of $1.0B to $1.04B"
+       },
+       {
+        "id": "P8",
+        "quote": "WAKIX Exclusivity to March 2030"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 guidance of $1.0B to $1.04B implies about 17% growth on $868.5M, and patient adds of about 400 a quarter support double-digit growth afterwards. Growth slows as penetration rises. Year 5 is cut sharply because generic entry is possible from March 2030, weighted for the chance exclusivity holds."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, concentrated neuro franchise with a possible follow-on formulation grows around or slightly below the long-run nominal anchor, at 3%."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "An adverse ruling in the AET ANDA litigation, or failed preliminary injunction proceedings, leads to early generic pitolisant entry before March 2030."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Net patient additions slow, or rebates and pricing pressure rise, and revenue falls short of the $1.0B to $1.04B guidance."
+     },
+     {
+      "bear_value": 0.18,
+      "input_hit": "op_margin",
+      "risk": "Cost of goods, royalties and R&D milestone charges keep growing faster than revenue and compress margins in years 1 to 5."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       0.11499999999999999,
+       0.05,
+       0.020000000000000004,
+       -0.009999999999999995,
+       -0.049999999999999996
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.27,
+      "rev_growth": [
+       0.21499999999999997,
+       0.15,
+       0.12,
+       0.09,
+       0.049999999999999996
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt is $163.7 million, falling by scheduled repayments, against about $1.05 billion of cash and investments, so it is small relative to the business."
+     },
+     "margin_position": "The 24.0% operating margin for 2025 sits below the 2023 peak of 33.0% and 2024's 26.7%. Royalty and cost of goods are rising as a share of sales, and R&D plus in-licensing charges are growing faster than revenue. Nine-month 2026 margin is about 24%, so it is stable.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate of 26.2% is higher than the nine-month 2026 rate of about 18.8% (36,086 of 192,201), and the reason for the gap is not in the evidence."
+     },
+     "why": "2025 is a fair base: revenue grew 21.5% with a margin of 24%, and the 2026 nine-month margin is similar. R&D and IPR&D charges are lumpy, but they recur each year. The base year does not include the exclusivity cliff or the pipeline payoffs."
+    },
+    "value_at_old_defaults": 67.81317954674645,
+    "values": {
+     "base": 65.08732075068264,
+     "bear": 41.551665868360445,
+     "bull": 104.0265692106227
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 775340000.0,
+     "excess_cash_before": 775340000.0,
+     "k0_after": 24925217.742971867,
+     "k0_before": 24925217.742971867,
+     "k0_interest": 14649000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 135429510.1691637,
+     "x0_before": 135429510.1691637
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3141178763.4157677,
+     "seam_ratio": 0.9821723951362371,
+     "tv_share": 0.3678506435774634,
+     "wedge_rate_5": -0.03377173058799712
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.1750 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y2 0.1200 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y3 0.0900 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y4 0.0600 (filed 0.2151 to 25.6459)",
+     "growth_outside_filed_record: rev_growth.y5 0.0000 (filed 0.2151 to 25.6459)",
+     "ix_read:da:0001104659-26-018859:us-gaap:DepreciationAndAmortization[us-gaap:StatementBusinessSegmentsAxis=hrmy:RareNeurologicalDiseasesSegmentMember]",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.001,
+     "fade_years": 10,
+     "long_run_op_margin": 0.24,
+     "op_margin": [
+      0.235,
+      0.24,
+      0.25,
+      0.255,
+      0.235
+     ],
+     "return_on_new_investment_long_run": 0.3,
+     "rev_growth": [
+      0.175,
+      0.12,
+      0.09,
+      0.06,
+      0.0
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.1936 and margin 0.2425, margin 0.2573 (persist), growth 0.0375, terminal RONIC 0.0836 (equity return r 0.0836), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 65
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.15,
+      0.3
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.14
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0008"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex is negligible because manufacturing is outsourced. The pooled figure over the last five years is 0.0008, and I use about 0.001."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Utility patents filed to extend pitolisant franchise into the 2040s"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade reflects a gradual move from patent-protected growth to a mature or generic-exposed state, with patent extensions into the 2040s."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $868.5 million | 0.2151 | 0.2400"
+       },
+       {
+        "id": "P8",
+        "quote": "Utility patents filed to extend pitolisant franchise into the 2040s"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The margin has run between 24% and 33% since 2021 and fell to 24.0% in 2025. After exclusivity ends, I assume it settles slightly below the current level. Franchise extension and business development offset erosion, but royalties and R&D keep costs high."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income | 54,197 | 65,487 | 180,804 | 169,912"
+       },
+       {
+        "id": "P8",
+        "quote": "this was primarily driven by a $25.0 million charge related to a milestone achieved for the MSN license agreement"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month margin of about 24% is held back by higher cost of sales and a rising R&D burden. Margin edges up in 2027-29 on operating leverage from field investment already in the run-rate, then dips in 2030 on generic erosion."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
+       },
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.5669"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The business is capital-light (outsourced manufacturing, tiny capex), so the return on tangible capital is very high at 0.5669. New investment is mostly R&D and licensing, which are expensed or low-return. I assume 0.30, far above the 0.0836 break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "Reiterated full year guidance of $1.0 billion to $1.04 billion."
+       },
+       {
+        "id": "P8",
+        "quote": "Estimated average number of patients grew by 400 to 9,350 in Q3"
+       },
+       {
+        "id": "P8",
+        "quote": "WAKIX exclusivity to March 2030"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) follows reiterated guidance of $1.0-1.04 billion on 868.5 million, about +17.5%. Net patient additions of about 400 a quarter and low brand penetration support continued but slowing growth. Growth fades toward flat by 2030 as WAKIX exclusivity ends in March 2030, partly offset by the GR and HD formulations."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0836; long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, concentrated pharma franchise with some pitolisant lifecycle extension grows below the long-run nominal anchor of 0.0375. I set it at 2.5% to allow for generic and pricing pressure."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.15,
+      "input_hit": "rev_growth",
+      "risk": "Adverse AET ANDA ruling or failed preliminary injunction (decisions around February 2027) leads to earlier generic pitolisant entry and a revenue decline well before 2030"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_op_margin",
+      "risk": "Post-exclusivity margin collapses to a generic-exposed level because the pipeline fails to replace WAKIX, and royalty and R&D costs stay high"
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Growth slows sharply because net patient additions drop, pricing and rebate pressure builds, or competitors take share"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.15,
+      "rev_growth": [
+       0.11499999999999999,
+       0.06,
+       0.03,
+       0.0,
+       -0.06
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.3,
+      "rev_growth": [
+       0.225,
+       0.17,
+       0.14,
+       0.11000000000000001,
+       0.05000000000000002
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt is being amortized ($20.0 million current portion) and is small against $1.05 billion of cash and investments, so it may fall further or be replaced by deal financing."
+     },
+     "margin_position": "Operating margin was 24.0% in 2025, down from 33.0% in 2023, because royalties, R&D and sales spending are growing faster than revenue. Nine-month 2026 margin is about 24.2%. The margin is high because WAKIX is a single-product, patent-protected orphan drug with outsourced manufacturing. It is expected to stay around 23-26% until generic entry.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 26.2% base-year rate compares with 36,086 of tax on 192,201 of pretax income (about 18.8%) over nine months of 2026, and the filings do not explain the drop."
+     },
+     "why": "2025 was a clean year, with revenue up 21.5% and a margin close to the 2026 run-rate. The base year's non-operating items are small. The main distortions are lumpy R&D milestone charges (a $25.0 million MSN charge in Q3 2026) and a rising royalty tier. Exclusivity to March 2030 and the AET ruling in February 2027 are the main discontinuities for the long-run view."
+    },
+    "value_at_old_defaults": 67.81317954674645,
+    "values": {
+     "base": 70.82459689238638,
+     "bear": 42.76674907524325,
+     "bull": 117.63029360354588
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 67.81317954674645,
+  "value_at_old_defaults_quoted": 67.81317954674645,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 3978452388.1444445,
  "family": "operating",
+ "far_from_price": true,
+ "filed_shares": 58544570.0,
  "flags": [
   "The company announced a CEO succession. Dr. Dayno will retire as President and CEO and leave the board at year-end, and COO Peter Anastasiou will succeed him on the next day.",
   "US patent approval for the licensed MSN patents triggered a $25.0 million milestone payment, which the company expects to pay in the fourth quarter of 2026.",
   "The FDA accepted the Pitolisant GR NDA for full review and a target PDUFA date has been set."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08362169994653518,
+ "market_cap_at_publish": 1938452830,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "some filed figures are years older than the latest annual report",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 33.01,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 65.08732075068264,
+  "3000": 70.82459689238638
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -967,8 +1457,17 @@
   ]
  },
  "ticker": "HRMY",
+ "upside": 1.052385452239477,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "some filed figures are years older than the latest annual report"
+ "value_base": 67.95595882153451,
+ "value_bear": 42.15920747180185,
+ "value_bull": 110.82843140708428,
+ "value_per_filed_share": {
+  "base": 67.95595882153451,
+  "bear": 42.15920747180185,
+  "bull": 110.82843140708428
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +32.3 points a year against the required return over 3 years"
 }

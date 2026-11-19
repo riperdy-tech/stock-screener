@@ -1,24 +1,586 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -0.5791725498936542,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 64,
  "claims_supported": 64,
  "date": "2026-11-17T12:46:44Z",
- "family": "operating",
+ "decided": {
+  "flags": [
+   "run 1000: return_above_base_year: long-run 0.0700 against the base year's 0.0571",
+   "run 1000: working_capital_unclassified_balance_sheet",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 1000: ffo_not_reported_or_not_found",
+   "run 3000: return_above_base_year: long-run 0.0700 against the base year's 0.0571",
+   "run 3000: working_capital_unclassified_balance_sheet",
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: ffo_not_reported_or_not_found"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0514 and margin 0.0678, margin 0.0974 (persist), growth 0.0375, terminal RONIC 0.0744 (equity return r 0.0888), F 10",
+  "run_gap": 0.010206530605370578,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 40000000.0,
+       "printed": 40.0,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "resulting in a gain on sale of $40.0 million"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Gain on sale of the Fairmont Dallas hotel in April 2025, between operating income and pretax income"
+      }
+     ],
+     "cash_interest_returned": 3451596.7795180706,
+     "cash_not_free": {
+      "amount": 84903000.0,
+      "printed": 84903,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash and escrows | 84,903 | 82,682"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "thousands",
+      "what": "Restricted cash and escrows, set aside primarily to maintain the hotels"
+     },
+     "excess_cash_after": 55524000.0,
+     "excess_cash_before": 140427000.0,
+     "k0_after": 85390480.5020963,
+     "k0_before": 48842077.281614356,
+     "k0_interest": 86722000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 40000000.0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 21691498.197250843,
+     "x0_before": 57495446.46269265
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.07738985470228316,
+     "equity_value": 1928288140.9316483,
+     "seam_ratio": 1.016452633860606,
+     "tv_share": 0.41140335689238156,
+     "wedge_rate_5": -0.019000198221931504
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0700 against the base year's 0.0571",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 11 of 11",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.06,
+     "fade_years": 10,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.083,
+      0.108,
+      0.113,
+      0.114,
+      0.113
+     ],
+     "return_on_new_investment_long_run": 0.07,
+     "rev_growth": [
+      0.055,
+      0.04,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0514 and margin 0.0678, margin 0.0974 (persist), growth 0.0375, terminal RONIC 0.0744 (equity return r 0.0888), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 64
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.095,
+      0.118
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.035
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Capital Expenditures | $70 | $75 | $70 | $80 | $(2.5)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Spending is mostly renovation and upkeep of existing hotels, with no acquisitions. Full-year 2026 guidance is $70-75M, about 6.4% of revenue, and includes some redevelopment. The filings give no separate upkeep figure, so I estimate about 6% as the recurring need."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The lodging industry is highly cyclical in nature."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The cycle-driven margin and growth gap should close over roughly a decade for a hotel owner whose earnings swing with the economy."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $1,039.0 million | 0.0133 | 0.0836"
+       },
+       {
+        "id": "P2",
+        "quote": "The lodging industry is highly cyclical in nature."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Reported margins ranged from 0.0836 to 0.1117 over 2022-2025, and the current underlying margin is above the median in a cyclical business. Following the base rate, I assume about half of the excess persists, so the long-run margin lands near 10.5%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Impairment and other losses | 0 | 0 | 39,251 | 279"
+       },
+       {
+        "id": "P5",
+        "quote": "Same-Property Hotel EBITDA Margin: 22.9%, increased 295 basis points compared to the third quarter of 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is held down by the $39.3M nine-month impairment, which sits in GAAP operating income (nine-month operating income was 57.9M against 80.8M). It then rebounds to about 11% as same-property hotel EBITDA margin expands and renovation disruption fades, then eases slightly as fixed costs and fees absorb part of the gain."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.0571"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0744."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is 5.7%, below the 7.44% at which growth adds no value. Hotel renovation returns can be modestly better than that, so I assume 7.0% for new investment, close to break-even."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Same-Property Total RevPAR Change (vs. 2025) | 7.00% | 7.50% | 5.00% | 6.50% | 150 bps"
+       },
+       {
+        "id": "F2",
+        "quote": "Total revenues | $ 263,835 | $ 236,417 | $ 854,735 | $ 812,923"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month revenue is up 5.2%, October same-property RevPAR is up about 8%, and full-year same-property total RevPAR guidance is +7.0% to +7.5%. Year 1 is held to about 5.5% because Fairmont Dallas and RiverPlace were sold, which removes revenue. After that, growth fades toward low single digits as the comparisons toughen and one-off event demand does not repeat."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Luxury and upper upscale hotels grow roughly with nominal GDP, but supply additions and a flat portfolio limit growth. I set it slightly below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_op_margin",
+      "risk": "Demand reversal or recession hits the cyclical, high fixed-cost luxury hotels, and the 2026 strength proves one-off event demand"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "RevPAR growth stalls and the portfolio shrinks through disposals"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Refinancing of 2028-2030 debt at higher rates and equity dilution reduce value"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       0.034999999999999996,
+       0.019999999999999997,
+       0.015,
+       0.009999999999999995,
+       0.009999999999999995
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.118,
+      "rev_growth": [
+       0.07,
+       0.055,
+       0.05,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $1.42B was cut to $1.36B by September 2026 through a mortgage payoff, and the remaining senior notes and term loans are staggered from 2028 to 2030, so the level is roughly the structural one."
+     },
+     "margin_position": "The GAAP operating margin of 0.0997 in 2025 sits at about the 2022-2025 median (0.0836 to 0.1117). 2026 is depressed by a $39.3M impairment, which is non-recurring but still an operating item on this basis. Underlying same-property hotel margins are rising: nine-month same-property hotel EBITDA margin is 27.4%, up 145 bps. That puts the underlying margin above the median, and a cyclical margin above the median should give back part of the gap over time.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT, the company pays only small TRS and state taxes (about 2% effective rate), and guidance assumes income tax expense of about $1M."
+     },
+     "why": "2025 revenue grew 3.8% and the operating margin of 0.0997 is close to the recent median, so it is a fair base. The $40.0M gain on the Fairmont Dallas sale is non-operating and is listed separately as a one-off. The 2025 portfolio was larger (30 hotels vs 29 now), and 2026 is much stronger on the demand side, so base-year growth is partly a mix effect."
+    },
+    "value_at_old_defaults": 11.098461665221755,
+    "values": {
+     "base": 21.95978413163699,
+     "bear": 17.145116085194196,
+     "bull": 26.640817210978383
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 40000000.0,
+       "printed": 40.0,
+       "quotes": [
+        {
+         "id": "P3",
+         "quote": "resulting in a gain on sale of $40.0 million"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "millions",
+       "sign": "gain",
+       "what": "Gain on sale of Fairmont Dallas in April 2025, a non-recurring item below operating income"
+      }
+     ],
+     "cash_interest_returned": 3361305.547791163,
+     "cash_not_free": {
+      "amount": 82682000.0,
+      "printed": 82682,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash and escrows | 84,903 | 82,682"
+       },
+       {
+        "id": "P1",
+        "quote": "$82.7 million of restricted cash primarily set aside to maintain our hotels"
+       }
+      ],
+      "quotes_given": 2,
+      "scale": "thousands",
+      "what": "Restricted cash and escrows, primarily set aside to maintain the hotels, at the base-year balance sheet date (December 31, 2025)"
+     },
+     "excess_cash_after": 57745000.0,
+     "excess_cash_before": 140427000.0,
+     "k0_after": 85480771.7338232,
+     "k0_before": 48842077.281614356,
+     "k0_interest": 86722000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 40000000.0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 21603046.108931936,
+     "x0_before": 57495446.46269265
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.07738985470228314,
+     "equity_value": 1906122931.9952343,
+     "seam_ratio": 1.013688661377281,
+     "tv_share": 0.45444098599513627,
+     "wedge_rate_5": -0.017266767733920586
+    },
+    "flags": [
+     "return_above_base_year: long-run 0.0700 against the base year's 0.0571",
+     "working_capital_unclassified_balance_sheet",
+     "quotes_verified: 12 of 12",
+     "ffo_not_reported_or_not_found"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.06,
+     "fade_years": 8,
+     "long_run_op_margin": 0.102,
+     "op_margin": [
+      0.11,
+      0.112,
+      0.112,
+      0.111,
+      0.11
+     ],
+     "return_on_new_investment_long_run": 0.07,
+     "rev_growth": [
+      0.052,
+      0.04,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0514 and margin 0.0678, margin 0.0974 (persist), growth 0.0375, terminal RONIC 0.0744 (equity return r 0.0888), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 64
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.088,
+      0.115
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.05
+     ],
+     "terminal_growth": [
+      0.022,
+      0.037
+     ]
+    },
+    "real_estate": {
+     "ffo": {
+      "status": "not_reported_or_not_found"
+     },
+     "property_business": "owns_or_operates",
+     "version": "decided.real_estate.v2 2026-11-19"
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Capital Expenditures | $70 | $75 | $70 | $80 | $(2.5)"
+       },
+       {
+        "id": "P3",
+        "quote": "We invested approximately $86.6 million in portfolio improvements"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Guided 2026 capital expenditure of $70-75M is mainly renovations and upkeep, about 6.2% of revenue. The pooled 9.5% in the record includes the 2023-2024 transformative renovation, such as Grand Hyatt Scottsdale, and a land purchase. The filings state no separate upkeep reserve figure, so 6% is my best estimate."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Demand and economic conditions - Consumer demand for lodging, especially business travel, is closely linked to the performance of the overall economy"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The above-median margin and the demand surge need several years to normalise, so I use an 8-year fade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $1,039.0 million | 0.0133 | 0.0836"
+       },
+       {
+        "id": "P2",
+        "quote": "The lodging industry is highly cyclical in nature."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Lodging is highly cyclical, and the post-COVID margins of 8.4% to 11.2% have a median near 9.5-10%. The current margin is above that median, so I assume it keeps about half of the gap and fades to about 10.2%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Impairment and other losses | 0 | 0 | 39,251 | 279"
+       },
+       {
+        "id": "P5",
+        "quote": "Adjusted EBITDAre | $278 | $284 | $267 | $279 | $8"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The nine-month operating income of 57.9M includes a one-off 39.3M impairment. Excluding it, the margin is about 11%, and guided Adjusted EBITDAre of $278-284M supports that level. I set the years on property earnings without the impairment and hold them near 11% before a slight easing."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.0571"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0744."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is low at about 5.7%, and hotel renovation returns tend to sit near the cost of capital. I set the long-run return just below the break-even level of 7.44%, so growth adds little value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Same-Property Total RevPAR Change (vs. 2025) | 7.00% | 7.50% | 5.00% | 6.50% | 150 bps"
+       },
+       {
+        "id": "F2",
+        "quote": "Total revenues | $ 263,835 | $ 236,417 | $ 854,735 | $ 812,923"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 revenue is up about 5.1%, and guidance raises same-property total RevPAR growth to 7.0-7.5% for 2026. The sale of an 85-room hotel and the shrunken portfolio hold reported growth to about 5%. Growth should fade toward 3% as the rate and event-driven gains lap and supply stays limited."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Hotel revenue in the long run follows nominal GDP and ADR inflation, with no acquisition-led growth planned. I set it a little under the code's nominal growth anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.088,
+      "input_hit": "long_run_op_margin",
+      "risk": "Demand reversal or recession hits margins hard because many hotel costs are fixed"
+     },
+     {
+      "bear_value": 0.022,
+      "input_hit": "terminal_growth",
+      "risk": "The 2026 RevPAR surge was event-driven and the industry cycle turns, slowing long-run growth"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "capex_to_revenue",
+      "risk": "Renovation and brand-standard spending stays elevated, keeping capex near the recent pooled level"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.088,
+      "rev_growth": [
+       0.031999999999999994,
+       0.019999999999999997,
+       0.015,
+       0.009999999999999995,
+       0.009999999999999995
+      ],
+      "terminal_growth": 0.022
+     },
+     "bull": {
+      "long_run_op_margin": 0.115,
+      "rev_growth": [
+       0.067,
+       0.055,
+       0.05,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.037
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $1,422.9M at year-end 2025 fell to $1,359.0M after a mortgage payoff, and the unsecured structure with 2028-2030 maturities looks like a stable level relative to a roughly $2.4B net property base."
+     },
+     "margin_position": "The 2025 margin of about 10% is near the middle of the 2022-2025 range of 8.4% to 11.2%. The 2026 margin ex-impairment is running above that, near 11%, because same-property occupancy and rate are up strongly and fixed costs are spread over more revenue. That peak-like level is partly cyclical and partly event-driven.",
+     "property_business": "owns_or_operates",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "As a REIT with a small taxable REIT subsidiary, the tax rate of about 2% is structurally low and can be kept."
+     },
+     "why": "2025 revenue of $1,078.5M grew 3.8% with an operating margin of 0.0997. This is close to the post-COVID run-rate and is not distorted by large operating items. The $40.0M gain on the Fairmont Dallas sale sits below operating income, so it does not inflate the margin. 2026 is stronger, so the base year is a reasonable but slightly low starting point."
+    },
+    "value_at_old_defaults": 11.098461665221755,
+    "values": {
+     "base": 21.73678892650313,
+     "bear": 17.01170422300249,
+     "bull": 26.747650276914555
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 11.098461665221755,
+  "value_at_old_defaults_quoted": 11.098461665221755,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 2122842332.988218,
+ "family": "real_estate",
+ "far_from_price": false,
+ "filed_shares": 97162875.0,
  "flags": [
   "The company recorded impairment and other losses of 39,251 (table in thousands) in the nine months ended Sep 30, 2026, none in the third quarter. The full-year guidance reconciliation also lists an impairment of investment property.",
   "The company paid off a $52 million mortgage loan secured by Hotel Beauden, Autograph Collection.",
   "The company sold the Kimpton RiverPlace Hotel for $11 million."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.08883203083918918,
+ "market_cap_at_publish": 2199134863,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 22.22,
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 21.95978413163699,
+  "3000": 21.73678892650313
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -803,8 +1365,17 @@
   ]
  },
  "ticker": "XHR",
+ "upside": -0.03469206518226253,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "a required figure is not filed (capex or working capital)"
+ "value_base": 21.84828652907006,
+ "value_bear": 17.078410154098343,
+ "value_bull": 26.69423374394647,
+ "value_per_filed_share": {
+  "base": 21.84828652907006,
+  "bear": 17.078410154098343,
+  "bull": 26.69423374394647
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -0.6 points a year against the required return over 3 years"
 }

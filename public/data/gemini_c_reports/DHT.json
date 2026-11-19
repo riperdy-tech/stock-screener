@@ -1,24 +1,550 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 13.841906188850928,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "claims": 69,
  "claims_supported": 63,
  "date": "2026-11-18T00:34:52Z",
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.7800 (filed 0.0007 to 0.4538)",
+   "run 1000: margin_outside_filed_record: op_margin.y2 0.6000 (filed 0.0007 to 0.4538)",
+   "run 1000: margin_outside_filed_record: op_margin.y3 0.4700 (filed 0.0007 to 0.4538)",
+   "run 1000: growth_outside_filed_record: rev_growth.y1 1.6500 (filed -0.5719 to 0.5350)",
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: ix_read:capex:0001140361-26-010407:dht:InvestmentInVesselsUnderConstruction+dht:InvestmentsInVessels+dht:PurchaseOfOtherPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.7900 (filed 0.0007 to 0.4538)",
+   "run 3000: margin_outside_filed_record: op_margin.y2 0.6000 (filed 0.0007 to 0.4538)",
+   "run 3000: margin_outside_filed_record: op_margin.y3 0.5000 (filed 0.0007 to 0.4538)",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 1.6000 (filed -0.5719 to 0.5350)",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: ix_read:capex:0001140361-26-010407:dht:InvestmentInVesselsUnderConstruction+dht:InvestmentsInVessels+dht:PurchaseOfOtherPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3979 (persist), growth 0.0375, terminal RONIC 0.0699 (equity return r 0.0845), F 10",
+  "run_gap": 0.04627033305301922,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 1219602.4096385536,
+     "cash_not_free": {
+      "amount": 30000000.0,
+      "printed": 30,
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "unencumbered consolidated cash shall be at least the higher of (i) $30 million and (ii) 6% of our gross interest-bearing debt"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "Minimum unencumbered cash required by the credit facility covenants (the higher of $30 million and 6% of gross debt; 6% of $428.7 million is below $30 million)"
+     },
+     "excess_cash_after": 49034000.0,
+     "excess_cash_before": 79034000.0,
+     "k0_after": 15459144.985536367,
+     "k0_before": 16678747.39517492,
+     "k0_interest": 9614000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 209103495.34675786,
+     "x0_before": 207886275.8746107
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3369277916.1409736,
+     "seam_ratio": 0.9515222340827,
+     "tv_share": 0.20508044391026573,
+     "wedge_rate_5": 0.0200502374169891
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.7800 (filed 0.0007 to 0.4538)",
+     "margin_outside_filed_record: op_margin.y2 0.6000 (filed 0.0007 to 0.4538)",
+     "margin_outside_filed_record: op_margin.y3 0.4700 (filed 0.0007 to 0.4538)",
+     "growth_outside_filed_record: rev_growth.y1 1.6500 (filed -0.5719 to 0.5350)",
+     "base_year_not_representative",
+     "confidence_low",
+     "ix_read:capex:0001140361-26-010407:dht:InvestmentInVesselsUnderConstruction+dht:InvestmentsInVessels+dht:PurchaseOfOtherPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+     "quotes_verified: 12 of 12"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.18,
+     "fade_years": 10,
+     "long_run_op_margin": 0.32,
+     "op_margin": [
+      0.78,
+      0.6,
+      0.47,
+      0.4,
+      0.36
+     ],
+     "return_on_new_investment_long_run": 0.085,
+     "rev_growth": [
+      1.65,
+      -0.32,
+      -0.22,
+      -0.1,
+      -0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3979 (persist), growth 0.0375, terminal RONIC 0.0699 (equity return r 0.0845), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 63
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.22,
+      0.42
+     ],
+     "rev_growth_y3": [
+      -0.4,
+      -0.05
+     ],
+     "terminal_growth": [
+      0.01,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.3282"
+       },
+       {
+        "id": "P5",
+        "quote": "In November 2026, the Company entered into an agreement with Hanwha Ocean Co., Ltd. for the construction of a VLCC."
+       },
+       {
+        "id": "P3",
+        "quote": "During 2026, seven of our vessels are scheduled to be drydocked and capital expenditures related to these drydockings are estimated to be $17.3 million."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The pooled ratio of 0.33 is inflated by the 2025 newbuild payments. Ahead, capex is about $17 million of drydocking per year plus continued renewal, including a newbuild contract signed in November 2026, against revenue much larger than the base year. I use about 18% of revenue, close to depreciation."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $295.9 million | -0.5719 | 0.0007"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The margin must come down from a cyclical peak to a mid-cycle level, and tanker cycles take several years to fully normalise, so I use 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "The orderbook for supply of new ships is benign with some 22% of capacity scheduled for delivery over the coming five years."
+       },
+       {
+        "id": "P5",
+        "quote": "Limited effective fleet supply growth due to an aging fleet, a growing share of vessels operating outside mainstream trades, and a limited near-term newbuilding delivery schedule."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company's own history swings from near 0% to 45%, with a median near 26%. For commodity cyclicals, a margin above the median typically retains about half of the gap. Management cites a tight supply backdrop that argues for a margin above the median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Profit after tax for the first nine months of 2026 reached $633.7 million"
+       },
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $295.9 million | -0.5719 | 0.0007"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 margin is about 80% including sale gains, because 9-month 2026 revenue is $803.9 million with a $94.2 million sale gain against modest costs. I fade it as rates normalise toward the earlier 32-35% range of 2023-2025, ex-gains, which is also the cost structure that fewer, newer vessels support."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0699."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competitive vessel markets push the return on new ships toward the cost of capital; I set it modestly above the 6.99% break-even and below the 15.9% base-year return on tangible capital."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Shipping revenues | $332,126 | 107,151 | 803,230 | 353,266"
+       },
+       {
+        "id": "P5",
+        "quote": "Thus far in the fourth quarter of 2026, 68% of the available VLCC spot days have been booked at an average rate of $579,900 per day on a discharge-to-discharge basis."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) revenue is already $803 million for nine months, with Q4 spot days heavily booked at very high rates, so growth versus the $498 million base is very large. After that I assume rates normalise over 2027-2029 as disruption eases and the 2025 fleet shrinkage and rate declines reverse only partly, so revenue falls from the 2026 peak."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0845; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A single-commodity tanker owner has little structural growth, and VLCC revenue is rate-driven; I set it below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "long_run_op_margin",
+      "risk": "Freight rates collapse faster than assumed once logistical disruption eases, with a deeper post-2026 revenue fall and no premium margin."
+     },
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "Revenue in 2027-2029 falls more sharply as spot rates revert to 2025 levels (about $47k per day)."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Failure to earn above-cost returns on the newbuild and renewal programme, and a drop in vessel values that triggers repayments under covenants."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       1.47,
+       -0.5,
+       -0.4,
+       -0.28,
+       -0.21000000000000002
+      ],
+      "terminal_growth": 0.01
+     },
+     "bull": {
+      "long_run_op_margin": 0.42,
+      "rev_growth": [
+       1.8199999999999998,
+       -0.15000000000000002,
+       -0.05000000000000002,
+       0.06999999999999998,
+       0.13999999999999999
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $428.7 million at the end of 2025 (about $499 million at Q3 2026) is modest against a $1.4 billion fleet and equity of $1.4 billion, and the company keeps adding and prepaying debt around that level."
+     },
+     "margin_position": "The 2025 margin of 45% is above the company's own multi-year median of about 26%, and 2026 is far higher still. It is lifted by vessel-sale gains booked inside operating income and by a freight spike, with VLCC spot rates of $167,100 per day against $38,700 a year earlier. The long-run margin should return toward, but stay somewhat above, the old median, because the fleet is newer and carries less debt.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "Income tax is about 0.2% of pretax profit under the shipping tax regime, which should persist, with the Norwegian taxation risk flagged as a tail."
+     },
+     "why": "2025 operating income includes a $52.9 million vessel-sale gain, and 2025 revenue is far below the 2026 run-rate, so the base year understates current revenue and overstates through-cycle margin. 9-month 2026 shipping revenue is already $803.2 million against $497.2 million for all of 2025, and Q4 spot bookings are at about $580k per day. I assume a roughly 1.65x revenue jump in 2026, then a normalisation of rates over 2027-2029. This estimate is rough: Q4 2026 revenue is my own extrapolation from partial bookings, and the evidence shows no rates beyond Q4."
+    },
+    "value_at_old_defaults": 16.95888108431698,
+    "values": {
+     "base": 22.81550781737582,
+     "bear": 11.25532262130461,
+     "bull": 68.9956050335095
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 1219602.4096385536,
+     "cash_not_free": {
+      "amount": 30000000.0,
+      "printed": 30,
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "unencumbered consolidated cash shall be at least the higher of (i) $30 million and (ii) 6% of our gross interest-bearing debt"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "millions",
+      "what": "minimum unencumbered consolidated cash required by the credit facility covenants"
+     },
+     "excess_cash_after": 49034000.0,
+     "excess_cash_before": 79034000.0,
+     "k0_after": 15459144.985536367,
+     "k0_before": 16678747.39517492,
+     "k0_interest": 9614000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 209103495.34675786,
+     "x0_before": 207886275.8746107
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3531029897.990772,
+     "seam_ratio": 0.9352795354806401,
+     "tv_share": 0.2484972376953995,
+     "wedge_rate_5": 0.05073250413892899
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.7900 (filed 0.0007 to 0.4538)",
+     "margin_outside_filed_record: op_margin.y2 0.6000 (filed 0.0007 to 0.4538)",
+     "margin_outside_filed_record: op_margin.y3 0.5000 (filed 0.0007 to 0.4538)",
+     "growth_outside_filed_record: rev_growth.y1 1.6000 (filed -0.5719 to 0.5350)",
+     "base_year_not_representative",
+     "confidence_low",
+     "ix_read:capex:0001140361-26-010407:dht:InvestmentInVesselsUnderConstruction+dht:InvestmentsInVessels+dht:PurchaseOfOtherPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.2,
+     "fade_years": 8,
+     "long_run_op_margin": 0.33,
+     "op_margin": [
+      0.79,
+      0.6,
+      0.5,
+      0.43,
+      0.39
+     ],
+     "return_on_new_investment_long_run": 0.09,
+     "rev_growth": [
+      1.6,
+      -0.28,
+      -0.2,
+      -0.1,
+      -0.04
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "margin 0.3979 (persist), growth 0.0375, terminal RONIC 0.0699 (equity return r 0.0845), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 63
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.25,
+      0.4
+     ],
+     "rev_growth_y3": [
+      -0.32,
+      -0.05
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.3282"
+       },
+       {
+        "id": "P5",
+        "quote": "In November 2026, the Company entered into an agreement with Hanwha Ocean Co., Ltd. for the construction of a VLCC."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The pooled ratio of 0.33 is inflated by the newbuilding programme. Year 1 still carries the final instalments, and a further VLCC was ordered in November 2026 for April 2029 delivery. Fleet renewal and drydockings continue at lower revenue, so I use about 0.20."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The tanker industry historically has been highly cyclical."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The tanker cycle is long and volatile, so the margin and growth take several years to settle. I use 8 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $295.9 million | -0.5719 | 0.0007"
+       },
+       {
+        "id": "P3",
+        "quote": "The orderbook for supply of new ships is benign with some 22% of capacity scheduled for delivery over the coming five years."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Margins have swung from 0.0007 to 0.45 over the cycle, with a median of about 0.26. Base rates say an above-median margin keeps about half of the gap. A modern, low-leverage fleet with an ageing global fleet and a small orderbook supports a long-run margin of about 0.33."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $498.4 million | -0.1283 | 0.4514"
+       },
+       {
+        "id": "P5",
+        "quote": "Gain, sale of vessels | (34,163)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is about 0.79 because it includes $94.2 million of sale gains and peak rates. Margins then fade as rates normalise, while depreciation rises with the new ships and operating costs stay roughly fixed. Year 5 is about 0.39, still above the company's historical median."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0699."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 0.159 is cycle-assisted. New ships are bought at market prices and earn mid-cycle returns, which I put somewhat above the 0.0699 level where growth adds no value."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "VLCC spot rate per day | $167,100"
+       },
+       {
+        "id": "P5",
+        "quote": "Thus far in the fourth quarter of 2026, 68% of the available VLCC spot days have been booked at an average rate of $579,900 per day on a discharge-to-discharge basis."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "9M 2026 revenue is $803.9 million, and the Q4 outlook is very strong (68% of spot days booked at $579,900), so 2026 revenue is about $1.3 billion, up roughly 160%. After that, rates should mean-revert toward mid-cycle on a fleet of about 23 ships, with the contracted time charters cushioning the decline. Revenue settles near $650 million by year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Tanker freight is a mature, cyclical, ex-growth business with a nominal growth anchor of 3.75%. I set it below that, at 2.5%, because fleet growth is limited and rates are cyclical."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": -0.4,
+      "input_hit": "rev_growth",
+      "risk": "Freight rates fall back faster than assumed once Hormuz and logistics disruption eases, so spot rates return to the 2025 level of about $47,000 per day."
+     },
+     {
+      "bear_value": 0.25,
+      "input_hit": "long_run_op_margin",
+      "risk": "The long-run margin reverts to the weak-cycle median of about 0.26 or below."
+     },
+     {
+      "bear_value": 0.07,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Returns on new vessels fall toward the breakeven level as newbuilding deliveries lift supply."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.25,
+      "rev_growth": [
+       1.48,
+       -0.4,
+       -0.32,
+       -0.22,
+       -0.16
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.4,
+      "rev_growth": [
+       1.75,
+       -0.13,
+       -0.04999999999999999,
+       0.05000000000000002,
+       0.11000000000000001
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $428.7 million at year-end 2025 and $498.7 million at Q3 2026 is modest against equity of $1.4 billion and is being prepaid with spare cash."
+     },
+     "margin_position": "The 2025 operating margin of 0.4514 is above the company's own median of about 0.26 since 2017, and it includes a $52.9 million vessel sale gain. Without that gain it is roughly 0.35. 2026 margins are far higher still because VLCC rates have spiked (spot $167,100 per day in Q3 against $38,700 a year earlier). This is a peak-cycle margin, not a durable one.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The tax rate of about 0.2% fits an international shipping owner, but Norwegian taxation is flagged as a risk."
+     },
+     "why": "2025 was a mid-cycle year, with spot rates of $47,300 per day, and it was flattered by sale gains booked in operating income. The real earnings jump is in 2026, which will be the first forecast year. The 9M 2026 revenue of $803.9 million already exceeds all of 2025. Base-year figures understate year 1 and overstate normal margins."
+    },
+    "value_at_old_defaults": 16.95888108431698,
+    "values": {
+     "base": 23.896190742289804,
+     "bear": 13.923385822441569,
+     "bull": 58.684432985181274
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 16.95888108431698,
+  "value_at_old_defaults_quoted": 16.95888108431698,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 3754996472.5485096,
  "family": "commodity",
+ "far_from_price": false,
+ "filed_shares": 160773279.0,
  "flags": [
   "DHT Bauhinia, a 2007-built VLCC, was delivered to its new owner. The Company booked a gain of $34.2 million on the sale in the third quarter.",
   "The Company took delivery of the newbuilding VLCC DHT Impala, the fourth and final newbuilding delivered in 2026. The vessel entered the spot market.",
   "The Company entered into time charter agreements for DHT Jaguar and DHT Panther with global energy companies. These are new employment contracts for those two vessels."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.0844527956717438,
+ "market_cap_at_publish": 3461727406,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "some filed figures are years older than the latest annual report",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 21.47,
  "qwen_book": null,
  "screener_commit": "a1a423c31f5fd1c953026f621dc9800211531b76",
- "source": "screener list refresh",
+ "seed_base": {
+  "1000": 22.81550781737582,
+  "3000": 23.896190742289804
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
  "tasks": {
   "business_model": [
    {
@@ -840,8 +1366,17 @@
   ]
  },
  "ticker": "DHT",
+ "upside": 0.08471755056166597,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "some filed figures are years older than the latest annual report"
+ "value_base": 23.35584927983281,
+ "value_bear": 12.589354221873089,
+ "value_bull": 63.84001900934539,
+ "value_per_filed_share": {
+  "base": 23.35584927983281,
+  "bear": 12.589354221873089,
+  "bull": 63.84001900934539
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +13.8 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }
