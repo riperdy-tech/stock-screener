@@ -1,22 +1,20 @@
 {
- "alpha_pts": -31.52526747020804,
+ "alpha_pts": -19.818557072029037,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 62,
- "claims_supported": 61,
- "date": "2026-11-17T12:57:54Z",
+ "claims": 91,
+ "claims_supported": 90,
+ "date": "2026-11-19T08:35:24Z",
  "decided": {
   "flags": [
-   "run 1000: margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
-   "run 1000: confidence_low",
-   "run 1000: quotes_verified: 14 of 15",
+   "run 1000: margin_outside_filed_record: op_margin.y1 -0.0350 (filed 0.0036 to 0.2021)",
+   "run 1000: quotes_verified: 20 of 20",
    "run 3000: margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
-   "run 3000: confidence_low",
-   "run 3000: quotes_verified: 13 of 13"
+   "run 3000: quotes_verified: 25 of 25"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0781 (equity return r 0.0781), F 10",
-  "run_gap": 0.012636135721713288,
+  "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0779 (equity return r 0.0779), F 10",
+  "run_gap": 0.09776673207841434,
   "runs": {
    "1000": {
     "adjustments": {
@@ -34,133 +32,148 @@
      "x0_after": 103240202.24973218,
      "x0_before": 103240202.24973218
     },
-    "confidence": "low",
+    "confidence": "medium",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 550885650.8084506,
-     "seam_ratio": 0.5525848300873889,
-     "tv_share": 1.1805909513090467,
-     "wedge_rate_5": 0.06093189464325211
+     "equity_value": 982766917.9982522,
+     "seam_ratio": -1.0626529934616507,
+     "tv_share": 1.0696876962155721,
+     "wedge_rate_5": 0.05586295068501183
     },
     "flags": [
-     "margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
-     "confidence_low",
-     "quotes_verified: 14 of 15"
+     "margin_outside_filed_record: op_margin.y1 -0.0350 (filed 0.0036 to 0.2021)",
+     "quotes_verified: 20 of 20"
     ],
     "inputs": {
-     "capex_to_revenue": 0.035,
-     "fade_years": 10,
-     "long_run_op_margin": 0.075,
+     "capex_to_revenue": 0.032,
+     "fade_years": 5,
+     "long_run_op_margin": 0.085,
      "op_margin": [
-      -0.033,
+      -0.035,
       0.068,
       0.072,
-      0.074,
-      0.075
+      0.076,
+      0.08
      ],
-     "return_on_new_investment_long_run": 0.12,
+     "return_on_new_investment_long_run": 0.14,
      "rev_growth": [
-      -0.035,
-      -0.015,
-      0.0,
-      0.01,
-      0.015
+      -0.03,
+      -0.01,
+      0.005,
+      0.015,
+      0.02
      ],
      "terminal_growth": 0.025
     },
-    "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0781 (equity return r 0.0781), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0779 (equity return r 0.0779), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 1,
-     "kept": 61
+     "kept": 90
     },
     "ranges": {
      "long_run_op_margin": [
       0.055,
-      0.095
+      0.115
      ],
      "rev_growth_y3": [
-      -0.03,
-      0.025
+      -0.025,
+      0.035
      ],
      "terminal_growth": [
-      0.015,
-      0.035
+      0.005,
+      0.0375
      ]
     },
     "reasons": {
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "P6",
-        "quote": "Capital Spending ($ million) | $55 to $70 | $60 to $80"
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0402; depreciation (without amortization of acquired intangibles) / revenue -0.0311."
        },
        {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0402"
+        "id": "P6",
+        "quote": "Capital Spending ($ million) | $55 to $70 | $60 to $80"
        }
       ],
       "quotes_given": 2,
-      "why": "Guidance for 2026 capital spending is $55-70 million, about 3% of revenue, against a 5-year pooled ratio of 4.0%. 3.5% is assumed because owned breweries need maintenance spending."
+      "why": "Although the 5-year pooled capex-to-revenue ratio is 4.02% due to heavy 2021 capacity expansion (6.73%), capex normalized to 2.61%-3.57% in 2023-2025 and 2026 guidance of $55 million to $70 million (~3.1% of revenue) aligns closely with the 3.11% pooled depreciation rate. Holding 3.2% captures ongoing maintenance and efficiency investments across owned breweries."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P2",
-        "quote": "The two largest brewers in the United States, AB InBev and Molson Coors, participate actively in the US Beer Market"
+        "quote": "Currently, the Company believes it can meet its volume targets in 2026 and return to volume growth in future years, but there is no guarantee its efforts will be successful or profitable."
        }
       ],
       "quotes_given": 1,
-      "why": "Competition from larger brewers and a gradual brand-mix shift toward spirits RTDs argue for a moderate fade of 10 years rather than a fast convergence."
+      "why": "A 5-year fade after Year 5 is appropriate because Year 5 revenue growth (2.0%) and operating margin (8.0%) are already near long-run equilibrium, while fast-shifting drinker preferences and short-notice independent distributor risk limit longer-duration excess-return fade visibility."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Operating income | 144,882 | 20.29 | 7.4% | 75,973 | 10.14 | 3.8%"
+        "id": "REC",
+        "quote": "2025-12-27 | $2,087.3 million | -0.0236 | 0.0694"
        },
        {
-        "id": "REC",
-        "quote": "2021-12-25 | $2,196.7 million | 0.1862 | 0.0036"
+        "id": "P3",
+        "quote": "Gross margin was 48.5% for the year ended December 27, 2025, as compared to 44.4% for the year ended December 28, 2024."
+       },
+       {
+        "id": "P3",
+        "quote": "Advertising, promotional and selling expenses were 31.0% of net revenue, or $85.43 per barrel, for the year ended December 27, 2025, as compared to 27.4% of net revenue, or $73.67 per barrel, for the year ended December 28, 2024."
        }
       ],
-      "quotes_given": 2,
-      "why": "The 2021-2025 margins were 0.4-6.9%, against 11-20% before 2020. Base rates say about half of the gap above the median persists. Structural savings and Sun Cruiser mix support a margin slightly above the recent median, while shrinking categories and rising competition from larger rivals cap it."
+      "quotes_given": 3,
+      "why": "A long-run GAAP operating margin of 8.5% sits modestly above 2025's 6.94% as supply chain transformation, reduced shortfall fees, and 49%-50% net-revenue gross margins mature, while remaining far below 2009-2020 levels because competitive brand support has permanently pushed advertising, promotional, and selling expenses above 31% of net revenue. The [5.5%, 11.5%] range reflects downside from prolonged volume deleverage/tariff inflation and upside if volume growth returns."
      },
      "op_margin": {
       "quotes": [
        {
+        "id": "F2",
+        "quote": "Operating income (loss) | 56,329 | 62,049 | (63,359) | 177,895"
+       },
+       {
         "id": "P4",
-        "quote": "the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute"
+        "quote": "For the thirty-nine weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million."
        },
        {
         "id": "P6",
         "quote": "GAAP EPS (Income/ (Loss)) | ($5.76) to ($4.26) | ($6.23) to ($4.23)"
        },
        {
-        "id": "REC",
-        "quote": "2025-12-27 | $2,087.3 million | -0.0236 | 0.0694"
+        "id": "P6",
+        "quote": "Non GAAP EPS | $9.00 to $10.50 | $8.50 to $10.50"
+       },
+       {
+        "id": "P2",
+        "quote": "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026."
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 includes the $194.5 million litigation charge. This charge is unpaid and its cash cost is not in the base-year balance sheet. GAAP EPS guidance of a loss of roughly $4.26 to $5.76 implies an operating margin of about -3% on gross revenue. After that, margin is about 6.8% in year 2 and rises with supply-chain savings, offset by aluminum and freight inflation and the fixed cost of owned breweries."
+      "quotes_given": 5,
+      "why": "Year 1 (2026) GAAP operating margin is modeled at -3.5% because 9M 2026 already incurred a $63.4 million operating loss driven by $194.5 million in non-recurring supplier litigation expense (and $5.8 million legal fees), consistent with full-year GAAP EPS guidance of ($5.76) to ($4.26). From Year 2 onward, removing the one-time judgment restores GAAP operating margins to ~6.8%-8.0% on gross revenue as owned-brewery insourcing (>90% in 2026) and procurement savings lift gross margin against elevated freight and marketing expenses."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "return on tangible capital 0.1794"
+        "quote": "Base year: return on tangible capital 0.1785; tax rate 0.2932; total debt $1.1 million; cash counted as excess $223.4 million; net debt (debt less that cash) $-222.3 million."
        },
        {
-        "id": "P2",
-        "quote": "The Company on an overall basis has yet to see any operating cost leverage from these investments and there is no guarantee that it will."
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0779."
        }
       ],
       "quotes_given": 2,
-      "why": "The base-year return on tangible capital is high at 17.9%, but new brewery capacity earns less when volumes are falling and fixed costs are high. A return of 12% is assumed, still above the 7.8% cost of equity."
+      "why": "Boston Beer earned a 17.85% after-tax return on tangible capital in 2025 against a 7.79% cost of equity due to strong brand positions and high asset turnover. In the long run, heavier owned-brewery capital requirements and intense competition from larger brewers and non-alcoholic beverage entrants should compress incremental returns toward 14.0%, still well above the 7.79% value-neutral hurdle."
      },
      "rev_growth": {
       "quotes": [
+       {
+        "id": "P4",
+        "quote": "Net revenue decreased by $56.9 million, or 3.6%, to $1.522 billion for the thirty-nine weeks ended September 26, 2026, as compared to $1.579 billion for the thirty-nine weeks ended September 27, 2025, primarily due to decreased sales volume impacts of $84.5 million and increased sales incentives of $6.1 million, partially offset by increased pricing of $19.1 million and favorable product mix of $17.4 million."
+       },
        {
         "id": "P6",
         "quote": "Depletions and Shipments Percentage Change | Down mid-single digits | Down low-single digits to mid-single digits"
@@ -168,65 +181,78 @@
        {
         "id": "P6",
         "quote": "Price Increases | 1% to 2% | 1% to 2%"
+       },
+       {
+        "id": "P1",
+        "quote": "The Sun Cruiser brand was launched in 2024 and has grown quickly to be the fifth largest spirits RTD brand."
        }
       ],
-      "quotes_given": 3,
-      "why": "Year-to-date revenue is down about 3% and management guides shipments down mid-single digits with price up 1-2%, so FY2026 is about -3.5%. Growth is assumed to improve slowly as Sun Cruiser grows and declines in Twisted Tea and Truly ease, returning to small positive growth by year 4."
+      "quotes_given": 4,
+      "why": "Year 1 (2026) reflects 9M net revenue down 3.6% and full-year guidance for shipments down mid-single digits partially offset by 1% to 2% price increases and favorable Sun Cruiser mix. Over Years 2-5, volume declines are modeled to gradually stabilize from -1.0% to +2.0% as spirits RTD (Sun Cruiser) and cider growth offsets core Twisted Tea, Truly, and craft beer contraction."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion"
+        "id": "REC",
+        "quote": "Cost of equity r 0.0779; long-run nominal growth anchor g_anchor 0.0375."
        },
        {
         "id": "P2",
-        "quote": "The US Beer Market has experienced a decline in shipments over the last ten years."
+        "quote": "The US Beer Market has experienced a decline in shipments over the last ten years. More recently in 2025 these declines accelerated to an approximate decline of 4% in volume."
+       },
+       {
+        "id": "P1",
+        "quote": "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion with Beyond beer increasing 4.4% to $10.7 billion and Traditional beer declining 2.8% to $36.3 billion."
        }
       ],
-      "quotes_given": 2,
-      "why": "The US beer market is flat to shrinking and alcohol consumption per person is declining. Long-run growth is therefore set below the 3.75% anchor, close to inflation-level pricing with slight volume decline."
+      "quotes_given": 3,
+      "why": "Terminal nominal growth of 2.5% sits below the 3.75% nominal GDP anchor because the overall US Beer Market has declined for a decade and dropped ~4% in volume in 2025, even though Beyond Beer (86% of SAM's volume) grew 4.4% in dollars. Modest long-run pricing/mix and category innovation should yield low single-digit nominal growth rather than full GDP growth."
      }
     },
     "risks": [
      {
-      "bear_value": -0.03,
-      "input_hit": "rev_growth",
-      "risk": "Volume declines in Twisted Tea, Truly and Samuel Adams persist at about -5% a year, and fixed costs at owned breweries cut margin"
-     },
-     {
-      "bear_value": 0.05,
-      "input_hit": "long_run_op_margin",
-      "risk": "Aluminum, freight and tariff inflation and competitive promotion outrun savings, pushing margin back toward the 2021-2025 median"
-     },
-     {
-      "bear_value": 0.01,
+      "bear_value": 0.0,
       "input_hit": "terminal_growth",
-      "risk": "Beer and the Beyond beer categories shrink for good as moderation and cannabis or hemp beverages take share"
+      "risk": "Accelerating secular US beer volume decline (-4% in 2025), generational moderation, and cannabis/hemp competition cause Twisted Tea and Truly declines to outweigh Sun Cruiser growth permanently."
+     },
+     {
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Volume deleverage at >90% owned breweries combined with aluminum/tariff inflation ($18-$22M tariffs in 2026), elevated freight rates, and competitive A&P spending (>31% of net revenue) compresses margins back to 2022-2024 levels."
+     },
+     {
+      "bear_value": 0.075,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "SKU complexity, excess inventory obsolescence, brewery impairments, and high owned-facility fixed costs depress incremental capital efficiency below cost of capital."
+     },
+     {
+      "bear_value": 0.055,
+      "input_hit": "capex_to_revenue",
+      "risk": "Peak-season owned-brewery bottlenecks or disruption at third-party partner City Brewing (14% of 2025 domestic volume) force renewed capital-spending spikes toward 2021-2022 intensity."
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.055,
       "rev_growth": [
-       -0.065,
-       -0.045,
-       -0.03,
-       -0.019999999999999997,
-       -0.015
+       -0.06,
+       -0.04,
+       -0.025,
+       -0.015000000000000003,
+       -0.010000000000000002
       ],
-      "terminal_growth": 0.015
+      "terminal_growth": 0.005
      },
      "bull": {
-      "long_run_op_margin": 0.095,
+      "long_run_op_margin": 0.115,
       "rev_growth": [
-       -0.010000000000000002,
-       0.010000000000000002,
-       0.025,
+       3.469446951953614e-18,
+       0.020000000000000004,
        0.035,
-       0.04
+       0.045,
+       0.05
       ],
-      "terminal_growth": 0.035
+      "terminal_growth": 0.0375
      }
     },
     "situation": {
@@ -234,20 +260,20 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "The company reports no debt and a $150 million unused facility, and it funds buybacks from cash flow."
+      "why": "Boston Beer carries virtually no debt ($1.1 million in finance lease obligations against $223.4 million cash at year-end 2025 and $308.1 million cash at Q3 2026), giving it ample cash and operating cash flow plus an undrawn $150.0 million credit facility to absorb the $194.5 million litigation accrual without taking on structural leverage."
      },
-     "margin_position": "The FY2025 operating margin of 6.9% is above the 2021-2025 median of about 4.1%, because supply-chain savings, price and mix lifted gross margin. It is still far below the 12-22% margins of 2009-2020. FY2026 GAAP margin is pushed negative by a one-time $194.5 million litigation charge, while underlying margin is roughly flat at about 6.5-7%.",
+     "margin_position": "Base-year (2025) GAAP operating margin of 6.94% represents a partial recovery from 2021-2024 troughs (0.36%-4.69%) as gross margin expanded to 48.5% of net revenue on supply chain savings and insourcing, but remains well below pre-2021 margins (10.9%-20.2%) due to volume declines, 31.0% advertising/promotional/selling spend, and input/tariff inflation.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The record's 29.3% tax rate is close to the 29% to 30% non-GAAP rate that management guides for 2026."
+      "why": "Fiscal 2025's 29.32% effective tax rate sits directly inside management's full-year 2026 Non-GAAP tax rate guidance of 29% to 30%."
      },
-     "why": "FY2025 has no big one-offs. Impairments are small and the 2024 intangible impairment and contract settlement did not recur. Margin is better than the 5-year median, but this reflects real cost savings rather than a cyclical peak. Volume is falling about 5% a year, so the base year does not signal growth. The litigation judgment is an operating item and is put in year 1 margin, since its cash cost is not in the Dec-2025 balance sheet."
+     "why": "Unlike fiscal 2024 (which had $42.6 million in intangible impairments and $26.1 million in contract settlement costs) and fiscal 2026 (distorted by $194.5 million of non-recurring supplier litigation expense), fiscal 2025 reflects clean ongoing operations aside from $7.0 million in recurring-scale brewery asset write-offs. Its 6.94% operating margin also closely matches the underlying ex-litigation run-rate implied by 2026 Non-GAAP EPS guidance of $9.00 to $10.50. While insourcing above 90% of domestic volume and mix shift offer modest margin tailwinds, ongoing volume contraction and elevated freight and marketing costs anchor near-term profitability near the 2025 level."
     },
-    "value_at_old_defaults": 31.277433152244424,
+    "value_at_old_defaults": 31.526737497198628,
     "values": {
-     "base": 74.28261538052348,
-     "bear": 34.11972363775701,
-     "bull": 138.43090879548615
+     "base": 116.53007980521845,
+     "bear": 49.49034326083875,
+     "bull": 231.65089359824637
     }
    },
    "3000": {
@@ -266,80 +292,91 @@
      "x0_after": 103240202.24973218,
      "x0_before": 103240202.24973218
     },
-    "confidence": "low",
+    "confidence": "medium",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 541345109.8833535,
-     "seam_ratio": 0.41686918648844984,
-     "tv_share": 1.1083373501903153,
-     "wedge_rate_5": 0.05626357996400544
+     "equity_value": 871695605.2122834,
+     "seam_ratio": -5.082369804360555,
+     "tv_share": 0.9233181107759657,
+     "wedge_rate_5": 0.05461649719674624
     },
     "flags": [
      "margin_outside_filed_record: op_margin.y1 -0.0330 (filed 0.0036 to 0.2021)",
-     "confidence_low",
-     "quotes_verified: 13 of 13"
+     "quotes_verified: 25 of 25"
     ],
     "inputs": {
-     "capex_to_revenue": 0.03,
+     "capex_to_revenue": 0.031,
      "fade_years": 10,
-     "long_run_op_margin": 0.075,
+     "long_run_op_margin": 0.085,
      "op_margin": [
       -0.033,
-      0.062,
-      0.066,
-      0.07,
-      0.072
+      0.072,
+      0.077,
+      0.081,
+      0.085
      ],
-     "return_on_new_investment_long_run": 0.12,
+     "return_on_new_investment_long_run": 0.14,
      "rev_growth": [
-      -0.035,
-      -0.02,
-      -0.005,
-      0.01,
-      0.015
+      -0.033,
+      -0.01,
+      0.005,
+      0.015,
+      0.02
      ],
-     "terminal_growth": 0.02
+     "terminal_growth": 0.025
     },
-    "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0781 (equity return r 0.0781), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0319 and margin -0.0390, margin 0.0551 (persist), growth 0.0375, terminal RONIC 0.0779 (equity return r 0.0779), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 1,
-     "kept": 61
+     "kept": 90
     },
     "ranges": {
      "long_run_op_margin": [
-      0.055,
-      0.095
+      0.06,
+      0.11
      ],
      "rev_growth_y3": [
-      -0.025,
-      0.015
+      -0.02,
+      0.03
      ],
      "terminal_growth": [
       0.01,
-      0.03
+      0.035
      ]
     },
     "reasons": {
      "capex_to_revenue": {
       "quotes": [
        {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0402; depreciation (without amortization of acquired intangibles) / revenue -0.0311."
+       },
+       {
         "id": "P6",
         "quote": "Capital Spending ($ million) | $55 to $70 | $60 to $80"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of property, plant, and equipment | (31,234) | (36,717)"
        }
       ],
-      "quotes_given": 1,
-      "why": "2026 capital spending guidance is $55M to $70M, about 3% of revenue. This is below the 4.0% pooled average and below D&A, because the owned-brewery build-out is largely done."
+      "quotes_given": 3,
+      "why": "Although the 5-year pooled capex-to-revenue ratio is 4.02% due to the 2021 expansion peak (6.73%), capex fell to 2.61% of revenue in 2025 and 2026 guidance of $55-$70 million implies ~3.1% of gross revenue. With over 90% of domestic production already insourced into owned breweries, ongoing maintenance and efficiency capex should remain near depreciation at 3.1% of revenue."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "The Company is the second largest supplier in Beyond beer at a 20% market"
+        "quote": "In 2025, approximately 86% of the Company\u2019s volume is in Beyond beer with the remainder in Traditional beer."
+       },
+       {
+        "id": "P1",
+        "quote": "the spirits RTD category in dollars increased approximately 24% in 2024 and 29% in 2025."
        }
       ],
-      "quotes_given": 1,
-      "why": "Ten years: the company holds the number two position in Beyond beer, but its largest categories are shrinking and its brand base is changing, so convergence to steady state is gradual."
+      "quotes_given": 2,
+      "why": "A 10-year fade reflects durable national brand positions (#1 in flavored malt beverages via Twisted Tea, #1 in cider via Angry Orchard, and #5 in fast-growing spirits RTDs via Sun Cruiser) alongside a proven innovation engine, balanced against low distributor switching barriers and fast-changing category tastes."
      },
      "long_run_op_margin": {
       "quotes": [
@@ -349,11 +386,23 @@
        },
        {
         "id": "P3",
-        "quote": "Advertising, promotional, and selling expenses | 609,953 | 85.43 | 31.0%"
+        "quote": "Gross margin was 48.5% for the year ended December 27, 2025, as compared to 44.4% for the year ended December 28, 2024."
+       },
+       {
+        "id": "P3",
+        "quote": "Advertising, promotional and selling expenses were 31.0% of net revenue, or $85.43 per barrel, for the year ended December 27, 2025, as compared to 27.4% of net revenue, or $73.67 per barrel, for the year ended December 28, 2024."
+       },
+       {
+        "id": "P4",
+        "quote": "Advertising, promotional and selling expenses increased by $29.2 million, or 6.3%, to $491.1 million for the thirty-nine weeks ended September 26, 2026, as compared to $462.0 million for thirty-nine weeks ended September 27, 2025. Resulting from higher freight costs of $20.6 million as freight rates increased more than offsetting the benefit of lower shipment volumes, and increased brand local marketing investments of $8.5 million."
+       },
+       {
+        "id": "P2",
+        "quote": "Many of the Company\u2019s competitors, including AB InBev, Molson Coors, Constellation, Heineken and Mark Anthony Brands, have substantially greater financial resources, marketing strength and distribution networks than the Company."
        }
       ],
-      "quotes_given": 2,
-      "why": "The 2025 margin of 6.94% is above the five-year median of about 4%, but it was lifted by structural savings (contract renegotiation, brewery efficiency). Advertising, promotion and selling still absorb 31% of net revenue, and volume is falling. I assume 7.5% in the long run, below the 2010s level, with wide uncertainty."
+      "quotes_given": 5,
+      "why": "Supply-chain restructuring and insourcing raised gross margin to 48.5% in 2025 and 49%-50% guided for 2026, supporting a long-run GAAP operating margin on gross revenue of 8.5%\u2014above the 2025 base (6.94%) once shortfall fees subside. However, a structurally higher advertising/selling/freight ratio (31.0% of net revenue in 2025, rising in 2026) and intense competition from global brewers prevent a return to the 13%-20% margins of 2009-2016."
      },
      "op_margin": {
       "quotes": [
@@ -362,33 +411,53 @@
         "quote": "Operating income (loss) | 56,329 | 62,049 | (63,359) | 177,895"
        },
        {
+        "id": "P4",
+        "quote": "For the thirty-nine weeks ended September 26, 2026, the combined pre-tax expense related to the supplier dispute litigation of $200.3 million consists of legal expenses of $5.8 million, recorded in general and administrative expenses, and litigation expense of $194.5 million."
+       },
+       {
         "id": "P6",
         "quote": "GAAP EPS (Income/ (Loss)) | ($5.76) to ($4.26) | ($6.23) to ($4.23)"
        },
        {
         "id": "P6",
-        "quote": "Gross Margin (including Tariffs) | 49% to 50% | 48.5% to 50%"
+        "quote": "Non GAAP EPS | $9.00 to $10.50 | $8.50 to $10.50"
+       },
+       {
+        "id": "P2",
+        "quote": "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026."
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 is GAAP and includes about $196M of litigation expense. The nine-month operating loss is (63,359), and guided GAAP EPS of ($5.76) to ($4.26) implies a full-year operating loss near 3% of revenue. From year 2 the underlying margin of about 6-7% (non-GAAP, litigation excluded) rebuilds slowly, helped by gross margin and capped by freight, aluminum and fixed brewery costs."
+      "quotes_given": 5,
+      "why": "Year 1 GAAP operating margin drops to -3.3% because 9M 2026 includes $194.5 million of non-recurring supplier litigation expense (plus $5.8 million of related legal fees) driving full-year GAAP EPS guidance to $(5.76)-$(4.26), even though underlying ex-litigation operating margin remains ~6.7%. In Years 2-5, removing the litigation charge and reaching >90% owned-brewery production lifts GAAP operating margin from 7.2% toward 8.5% on gross revenue, tempered by elevated freight and marketing costs."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.1794"
+        "quote": "Base year: return on tangible capital 0.1785; tax rate 0.2932; total debt $1.1 million; cash counted as excess $223.4 million; net debt (debt less that cash) $-222.3 million."
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0779."
+       },
+       {
+        "id": "P2",
+        "quote": "Several large non-alcoholic beverage companies including Coke, Pepsi, Monster and Arizona have entered the alcoholic beverage market directly or through licensing agreements with alcoholic beverage companies to develop alcohol versions of existing traditional non-alcohol brands."
        }
       ],
-      "quotes_given": 2,
-      "why": "The base-year return on tangible capital of 17.9% reflects an owned-brewery base that is underutilized as volume falls. New investment faces a competitive, declining-volume market, so I use 12%, above the 7.8% breakeven but well below the current return."
+      "quotes_given": 3,
+      "why": "Boston Beer earned a 17.85% return on tangible capital in 2025 against a 7.79% cost of equity, supported by national brand equity and lower incremental brewery capex needs. Long-run incremental returns should stay above cost of capital at ~14.0%, fading modestly below 2025 levels as major brewers and non-alcoholic beverage entrants compete aggressively for shelf space and innovation."
      },
      "rev_growth": {
       "quotes": [
+       {
+        "id": "F2",
+        "quote": "Revenue | $ 555,458 | $ 571,476 | $ 1,624,792 | $ 1,678,258"
+       },
+       {
+        "id": "P4",
+        "quote": "Total shipment volume decreased by 5.4% to 5,448,000 barrels for the thirty-nine weeks ended September 26, 2026, as compared to 5,756,000 barrels for the thirty-nine weeks ended September 27, 2025, primarily due to decreases in Twisted Tea, Truly, Samuel Adams, Hard Mountain Dew and Dogfish Head brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands."
+       },
        {
         "id": "P6",
         "quote": "Depletions and Shipments Percentage Change | Down mid-single digits | Down low-single digits to mid-single digits"
@@ -396,65 +465,74 @@
        {
         "id": "P6",
         "quote": "Price Increases | 1% to 2% | 1% to 2%"
-       },
-       {
-        "id": "P4",
-        "quote": "Net revenue decreased by $56.9 million, or 3.6%, to $1.522 billion"
        }
       ],
-      "quotes_given": 3,
-      "why": "Management guides 2026 shipments and depletions down mid-single digits with 1% to 2% pricing, and nine-month net revenue is already down 3.6%. I fade the decline as Sun Cruiser and Angry Orchard growth narrows the loss in Twisted Tea, Truly and Samuel Adams, reaching small growth by year 4."
+      "quotes_given": 4,
+      "why": "Year 1 (FY 2026) tracks 9M gross revenue down 3.2% as mid-single-digit shipment declines across Twisted Tea, Truly, and Samuel Adams outweigh 1%-2% price increases and Sun Cruiser/Angry Orchard growth. Revenue growth should improve from -1.0% in Year 2 to +2.0% by Year 5 as Sun Cruiser scales, Truly becomes a smaller drag, and pricing adds 1.5%-2.0% annually."
      },
      "terminal_growth": {
       "quotes": [
        {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0779; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion with Beyond beer increasing 4.4% to $10.7 billion and Traditional beer declining 2.8% to $36.3 billion."
+       },
+       {
         "id": "P2",
-        "quote": "The US Beer Market has experienced a decline in shipments over the last ten years."
+        "quote": "The US Beer Market has experienced a decline in shipments over the last ten years. More recently in 2025 these declines accelerated to an approximate decline of 4% in volume."
        }
       ],
-      "quotes_given": 1,
-      "why": "The US beer market has shrunk for a decade as alcohol consumption declines, though Beyond beer, where most company volume sits, is growing. I set long-run growth at 2%, below the 3.75% nominal anchor."
+      "quotes_given": 3,
+      "why": "Terminal nominal growth of 2.5% sits below the 3.75% nominal anchor because the overall U.S. beer market is experiencing secular volume declines (-4% in 2025) from demographic moderation and alternative beverages. Boston Beer's 86% exposure to Beyond Beer (growing 4.4% in measured off-premise dollars) and 1%-2% annual pricing power allow it to roughly match inflation over the long run."
      }
     },
     "risks": [
      {
-      "bear_value": -0.03,
-      "input_hit": "rev_growth",
-      "risk": "Volume declines in Twisted Tea, Truly and Samuel Adams persist beyond 2026 and Sun Cruiser cannot offset them."
+      "bear_value": 0.045,
+      "input_hit": "long_run_op_margin",
+      "risk": "Accelerated volume declines in Twisted Tea and Truly amid secular U.S. beer contraction (-4% in 2025) and competition from larger brewers/non-alcoholic entrants cause fixed-cost deleveraging at owned breweries (>90% of domestic production) and force higher promotional spending."
+     },
+     {
+      "bear_value": 0.005,
+      "input_hit": "terminal_growth",
+      "risk": "Moderation trends among younger cohorts, hemp/cannabis beverage substitution, and failure of Sun Cruiser or new launches to offset legacy brand erosion keep long-run nominal revenue flat or shrinking."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Rising distributor leverage, SKU complexity, and aggressive entry by Coke, Pepsi, Monster, AB InBev, and Constellation erode pricing power and force higher capital and marketing outlays per barrel of new volume."
      },
      {
       "bear_value": 0.05,
-      "input_hit": "long_run_op_margin",
-      "risk": "Aluminum, freight and tariff inflation, plus fixed owned-brewery costs on lower volume, keep margin near the 2022-2024 level of about 4%."
-     },
-     {
-      "bear_value": 0.01,
-      "input_hit": "terminal_growth",
-      "risk": "Structural decline in alcohol consumption and competition from cannabis/hemp and spirits reduce long-run category growth."
+      "input_hit": "capex_to_revenue",
+      "risk": "Peak-season capacity bottlenecks at the Pennsylvania and other owned breweries or disruption at third-party partner City Brewing force renewed heavy brewery capital expenditure."
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.055,
+      "long_run_op_margin": 0.06,
       "rev_growth": [
-       -0.05500000000000001,
-       -0.04,
-       -0.025,
-       -0.01,
+       -0.058,
+       -0.035,
+       -0.02,
+       -0.010000000000000002,
        -0.005000000000000001
       ],
       "terminal_growth": 0.01
      },
      "bull": {
-      "long_run_op_margin": 0.095,
+      "long_run_op_margin": 0.11,
       "rev_growth": [
-       -0.015000000000000003,
-       0.0,
-       0.015,
+       -0.008000000000000004,
+       0.014999999999999998,
        0.03,
-       0.035
+       0.039999999999999994,
+       0.045
       ],
-      "terminal_growth": 0.03
+      "terminal_growth": 0.035
      }
     },
     "situation": {
@@ -462,85 +540,241 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "The company reports no debt and funds itself from cash flow, with a $150M undrawn revolver as backstop."
+      "why": "Boston Beer carries minimal lease obligations ($1.1 million total debt in the base year) and ended Q3 2026 with $308.1 million in cash and no debt, consistent with its longstanding debt-free capital structure."
      },
-     "margin_position": "The 2025 operating margin of 6.9% is well below the 12-20% of 2010-2020. Volume has fallen since the hard seltzer boom ended, brewery and supply-chain costs rose, and advertising and freight are about 31% of net revenue. Gross margin is recovering through savings, price and mix, and 2026 GAAP margin turns negative only because of a one-off $194.5M litigation charge.",
+     "margin_position": "Base-year 2025 GAAP operating margin of 6.94% on gross revenue recovered from the 2021-2024 trough (0.36%-4.69%) via brewery insourcing, contract savings, and pricing, yet remains well below the 2009-2020 11%-20% range due to higher advertising/freight spend, volume declines, and tariffs, while 2026 YTD GAAP margin turned negative due to a $194.5 million supplier litigation charge.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The base-year rate of 29.3% matches management's non-GAAP guide of 29% to 30%, though the GAAP rate is distorted in 2026 by the pre-tax loss."
+      "why": "The 29.32% base-year effective tax rate aligns with management's full-year 2026 Non-GAAP tax rate guidance of 29% to 30% once the non-recurring litigation loss distortion is excluded."
      },
-     "why": "Fiscal 2025 has no litigation charge or intangible impairment, and its gross margin of 48.5% is close to the 2026 guide of 49% to 50%. It is a fair base for underlying earnings, but 2026 GAAP will look very different because of the supplier judgment, and volume is still shrinking."
+     "why": "Boston Beer operates in a non-cyclical consumer defensive category but is navigating a multi-year product-mix transition as Beyond Beer (86% of 2025 volume) shifts from declining hard seltzer and maturing Twisted Tea toward fast-growing spirits RTDs (Sun Cruiser). Base-year 2025 cleanly reflects post-restructuring operations without 2024's $42.6 million Dogfish Head impairment and $26.1 million Rauch settlement or 2026's $200.3 million YTD supplier dispute litigation expenses. Although gross margin expanded to 48.5% in 2025 and 50.5% in 9M 2026 as owned-brewery production moved above 86%, elevated freight and marketing investments keep underlying operating margins near 6.7%-7.0%."
     },
-    "value_at_old_defaults": 31.277433152244424,
+    "value_at_old_defaults": 31.526737497198628,
     "values": {
-     "base": 73.34986336136575,
-     "bear": 39.06980340189383,
-     "bull": 126.51790634408367
+     "base": 105.66827623365988,
+     "bear": 51.50730042544457,
+     "bull": 194.86701839751538
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 31.277433152244424,
-  "value_at_old_defaults_quoted": 31.277433152244424,
+  "value_at_old_defaults": 31.526737497198628,
+  "value_at_old_defaults_quoted": 31.526737497198628,
   "version": "decided.v2 2026-11-19 WO_NC9a"
  },
- "equity_value": 807328210.0000212,
+ "equity_value": 1215091709.9986062,
  "family": "operating",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 10937000.0,
  "flags": [
-  "The Company recorded a non-recurring pre-tax litigation expense of $194.5 million for the supplier dispute, made up of a judgment of $175.5 million plus pre-judgment and post-judgment interest. The balance sheet carries a matching accrued litigation liability of 194,471 (table in thousands), and the nine-month period shows an operating loss.",
-  "The Treasurer and Chief Financial Officer informed the Company he was stepping down. The Board launched a search for a permanent replacement and approved the Chief Accounting Officer as interim CFO and Treasurer.",
-  "With its third-quarter results, the Company updated its full-year 2026 guidance. Management said it was raising the low end of its gross margin and earnings guidance."
+  "For the thirty-nine weeks ended September 26, 2026, the Company recorded $194.5 million in non-recurring pre-tax litigation expense related to a supplier dispute, comprising a $175.5 million judgment, $15.5 million in pre-judgment interest, and $3.5 million in post-judgment interest, plus $5.8 million of legal fees in general and administrative expenses.",
+  "Diego Reynoso informed the Company that he was stepping down as Treasurer and Chief Financial Officer, remaining through September 30, 2026 while the Board of Directors launched a formal search for a permanent replacement.",
+  "The Board of Directors approved on August 20, 2026 the appointment of Chief Accounting Officer Matthew D. Murphy as interim Treasurer and Chief Financial Officer effective September 15, 2026, with a cash transition bonus of up to $700,000."
  ],
  "in_code_book": false,
- "ke": 0.0781318907508762,
+ "ke": 0.0779318907508762,
  "market_cap_at_publish": 2268334772,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 223.48,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+ "screener_commit": "715f77db58067c61fe551c9ad36633555af55470",
  "seed_base": {
-  "1000": 74.28261538052348,
-  "3000": 73.34986336136575
+  "1000": 116.53007980521845,
+  "3000": 105.66827623365988
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "screener list refresh",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 business description",
-    "claim": "Boston Beer makes and sells alcohol beverages: flavored malt beverages (Twisted Tea), hard seltzer (Truly), beer (Samuel Adams, Dogfish Head), hard cider (Angry Orchard), spirits RTDs (Sun Cruiser) and some distilled spirits. It brews at its own breweries and cidery and under contract at other producers' facilities.",
+    "basis": "stated in P1",
+    "claim": "The Boston Beer Company produces and sells flavored malt beverages, hard seltzer, beer, hard cider, spirits-based ready-to-drink beverages, and distilled spirits.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The Company produces alcohol beverages, including flavored malt beverages, hard seltzer, beer, hard cider, spirits based ready to drink beverages"
+     "The Company produces alcohol beverages, including flavored malt beverages, hard seltzer, beer, hard cider, spirits based ready to drink beverages (\u201cspirits RTDs\u201d) and distilled spirits at Company-owned breweries and its cidery and under contract arrangements at other production facilities."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 and Item 1A",
-    "claim": "Customers are mainly independent distributors, not drinkers. The company sells to a network of over 300 wholesalers, who sell on to retailers such as grocery, club, convenience and liquor stores, bars and restaurants. The largest distributor was about 3% of gross sales and the top three about 7%, so distributor concentration is low.",
+    "basis": "stated in P1",
+    "claim": "Its primary national brands are Twisted Tea, Truly Hard Seltzer, Samuel Adams, Angry Orchard, Sun Cruiser, and Dogfish Head, with Beyond beer accounting for approximately 86% of its volume in 2025.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company\u2019s primary brands which include the Twisted Tea, Truly Hard Seltzer, Samuel Adams, Angry Orchard, Sun Cruiser and Dogfish Head brands are all available nationally.",
+     "In 2025, approximately 86% of the Company\u2019s volume is in Beyond beer with the remainder in Traditional beer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "The Company also sells Hard Mountain Dew under a licensing agreement with PepsiCo, Inc. (approximately 2% of net revenue in 2024 and 2025), pilots cannabis beverages in Canada, and operates retail tap rooms, a restaurant, and a boutique inn.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "the Company sells most of its alcohol beverages to independent beer Distributors for distribution to retailers and, ultimately, to drinkers",
-     "During 2025, the Company\u2019s largest individual Distributor accounted for approximately 3% of the Company\u2019s gross sales."
+     "While the Company believes this agreement represents a strategic opportunity to increase volume in the longer term, the Hard Mountain Dew brand represented approximately 2% of net revenue in 2024 and 2025, respectively.",
+     "The Company currently does not have plans to produce or sell any cannabis products outside of Canada.",
+     "The Company currently operates nine retail locations where its beverages are sold and consumed on-premise, including six brewery tap rooms, an apple orchard and innovation cidery, a restaurant and a boutique inn."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 and Item 1A",
-    "claim": "The business is mostly in the United States, where approximately 94% of beverages are sold. About 86% of 2025 volume was in Beyond beer, with the rest in Traditional beer, and the company ranks second in Beyond beer with a 20% share.",
+    "basis": "stated in P1 and P2",
+    "claim": "Most sales are made to a network of over 300 independent U.S. wholesalers and foreign distributors, with approximately 94% of beverages sold in the United States and the top three distributors accounting for approximately 7% of gross sales in 2025.",
     "facts": [
      "P1",
      "P2"
+    ],
+    "quotes": [
+     "As dictated by the legal and regulatory environment, most all the Company\u2019s sales are made to a network of over 300 wholesalers in the United States and to a network of foreign wholesalers, importers or other agencies (collectively referred to as \u201cDistributors\u201d).",
+     "In the United States, where approximately 94% of its beverages are sold, the Company sells most of its alcohol beverages to independent beer Distributors for distribution to retailers and, ultimately, to drinkers.",
+     "The top three individual Distributors collectively accounted for approximately 7% of the Company\u2019s gross sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "All beverages are sold by the Company's sales force to similar customers and channels under comparable production and regulatory conditions, and the Company has one reporting unit for goodwill impairment testing.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The Company\u2019s beverages are sold by the Company\u2019s sales force to the same types of customers and drinkers in similar size quantities, at similar price points and through substantially the same channels of distribution.",
+     "These beverages are manufactured using similar production processes, have comparable alcohol content and generally fall within the same regulatory environment.",
+     "The Company has one reporting unit."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Net revenue is driven by shipment volumes, pricing, product mix, and sales incentives; in the thirty-nine weeks ended September 26, 2026, net revenue fell 3.6% to $1.522 billion as volume declines of $84.5 million and higher incentives of $6.1 million outweighed pricing of $19.1 million and mix of $17.4 million.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Net revenue decreased by $56.9 million, or 3.6%, to $1.522 billion for the thirty-nine weeks ended September 26, 2026, as compared to $1.579 billion for the thirty-nine weeks ended September 27, 2025, primarily due to decreased sales volume impacts of $84.5 million and increased sales incentives of $6.1 million, partially offset by increased pricing of $19.1 million and favorable product mix of $17.4 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P4",
+    "claim": "Shipment volume reflects diverging brand trends, with declines in Twisted Tea, Truly, Samuel Adams, Hard Mountain Dew, and Dogfish Head partially offset by growth in Sun Cruiser and Angry Orchard, while distributor inventory is managed to between three and five weeks of sales on hand.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "Total shipment volume decreased by 5.4% to 5,448,000 barrels for the thirty-nine weeks ended September 26, 2026, as compared to 5,756,000 barrels for the thirty-nine weeks ended September 27, 2025, primarily due to decreases in Twisted Tea, Truly, Samuel Adams, Hard Mountain Dew and Dogfish Head brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands.",
+     "The Company works with its distributors closely and has designed its internal supply chain systems and process to manage and maintain distributor inventories at between three and five weeks of sales on hand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P3",
+    "claim": "Gross revenue is reduced to net revenue by excise taxes (102,423 in the 9 Months Ended Sep. 26, 2026, table in thousands), distributor promotional discount reimbursements, and stale beer return reserves.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Less excise taxes | 35,357 | 33,982 | 102,423 | 98,948",
+     "The reimbursements for discounts to Distributors are recorded as reductions to net revenue.",
+     "Stale beer expense is reflected in the accompanying financial statements as a reduction of revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (counter stated in P1)",
+    "claim": "Overall U.S. beer market volume declines (approximately 4% in 2025), shifting consumer preferences toward moderation and wellness, and competition from large brewers and non-alcoholic beverage entrants act as headwinds to demand.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "More recently in 2025 these declines accelerated to an approximate decline of 4% in volume.",
+     "The Company believes that this decline is due to declining alcohol consumption per person in the population, economic uncertainty, health and wellness trends and increased competition from wine, spirits and other beverage companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Production costs depend on the mix between Company-owned breweries (74% of domestic volume in 2024, 86% in 2025, and over 90% estimated in 2026) and third-party contract producers such as City Brewing Company, LLC.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026.",
+     "Despite these increases, third party-owned production facilities remain a critical part of the Company\u2019s production strategy and the Company is reliant on them, particularly City Brewing Company, LLC, and its subsidiaries, to meet demand.",
+     "The third quarter gross margin of 51.7% includes $1.6 million of shortfall fees and non-cash expense of third-party production pre-payments in total, which negatively impacted gross margin by approximately 31 basis points on an absolute basis."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Cost of goods sold is moved by commodity and packaging inflation (mainly aluminum) and tariffs ($39.1 million inflationary impact including $7.6 million from tariffs in the thirty-nine weeks ended September 26, 2026), offset by contract renegotiations, recipe optimization, brewery efficiencies, and lower inventory waste.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Inflationary impacts of $39.1 million consist primarily of increased material costs, mainly from aluminum, of $31.6 million, inclusive of $7.6 million impact from tariffs, and increased internal brewery costs of $3.0 million.",
+     "The 2026 cost of goods sold per barrel was flat to 2025 primarily due to inflationary impacts of $39.1 million, or $7.18 per barrel, offset by contract renegotiations and recipe optimization savings of $14.1 million, or $2.59 per barrel, brewery efficiencies of $12.6 million, or $2.31 per barrel, inventory waste reduction and network optimization savings of $6.0 million, or $1.10 per barrel and lower third-party production payment amortization of $5.3 million, or $0.97 per barrel."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Unhedged Euro-denominated contracts for European hops and apples, together with agricultural weather and crop risks, expose ingredient costs to exchange-rate and supply volatility.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The Company\u2019s contracts for certain hops and apples are payable in Euros, and therefore, the Company is subject to the risk that the currencies may fluctuate adversely against the U.S. dollar.",
+     "The Company has, as a practice, not hedged this exposure, although this practice is regularly reviewed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Advertising, promotional, and selling expenses include finished-goods freight to distributors and marketing spend (net of distributor contributions of 2% to 3% of net sales), with higher freight rates adding $20.6 million in the thirty-nine weeks ended September 26, 2026.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The Company includes freight charges related to the movement of finished goods from its manufacturing locations to distributor locations in its advertising, promotional and selling expense line item.",
+     "Resulting from higher freight costs of $20.6 million as freight rates increased more than offsetting the benefit of lower shipment volumes, and increased brand local marketing investments of $8.5 million.",
+     "Historically, contributions from distributors for advertising and promotional activities have amounted to between 2% and 3% of net sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Operating costs are also driven by general and administrative expenses, brewery asset impairments, and non-recurring items such as $200.3 million in combined pre-tax supplier dispute litigation expenses in the thirty-nine weeks ended September 26, 2026.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "For the thirty-nine weeks ended September 26, 2026, the combined pre-tax expense related to the supplier dispute litigation of $200.3 million consists of legal expenses of $5.8 million, recorded in general and administrative expenses, and litigation expense of $194.5 million.",
+     "Impairment of brewery assets of $3.1 million decreased by $3.3 million from 2025, due to decreased write-offs of equipment at third party and Company-owned production facilities."
+    ],
+    "support": "quote_not_found"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P1",
+    "claim": "In 2025, approximately 86% of the Company's volume was in Beyond beer, where it was the second largest supplier with a 20% market share.",
+    "facts": [
+     "P1"
     ],
     "quotes": [
      "In 2025, approximately 86% of the Company\u2019s volume is in Beyond beer with the remainder in Traditional beer."
@@ -548,620 +782,883 @@
     "support": "supported"
    },
    {
-    "basis": "stated in 10-K Item 1 category data",
-    "claim": "Category trends set the demand backdrop. In 2025 the flavored malt beverage category declined 4% and hard seltzer declined 4.5%, while spirits RTDs grew approximately 29%. The company's largest brands sit in the declining categories, and Sun Cruiser sits in the growing one.",
+    "basis": "stated in P1",
+    "claim": "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion, while Beyond beer increased 4.4% to $10.7 billion (23% of the US Beer Market) and Traditional beer declined 2.8% to $36.3 billion.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Since 2021, the category has seen significant declines in volume."
+     "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion with Beyond beer increasing 4.4% to $10.7 billion and Traditional beer declining 2.8% to $36.3 billion.",
+     "Beyond beer is 23% of the US Beer Market and the Company believes Beyond beer is positioned to continue to grow and gain share from Traditional beer."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from the one-reporting-unit statement and the description of shared customers and channels; no segment note is in the evidence",
-    "claim": "The company reports one reporting unit for goodwill, and its beverages are sold to the same types of customers through substantially the same channels with similar production processes. The excerpts give no separate segment table, so this points to a single business, but I am inferring that.",
+    "basis": "stated in P1",
+    "claim": "Since 2022, Twisted Tea has been the largest selling flavored malt beverage brand in the United States, competing in a $4.5 billion measured off-premise category representing approximately 42% of Beyond beer.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Twisted Tea brand family was first introduced in 2001 and since 2022, Twisted Tea has been the largest selling flavored malt beverage brand in the United States.",
+     "The FMB category is $4.5 billion in measured off-premise channels and comprises approximately 42% of Beyond beer and the FMB category grew in dollars approximately 6% in 2024 and declined 4% in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Since 2013, Angry Orchard has been the largest selling hard cider in the United States, competing in a $0.5 billion measured off-premise category.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Angry Orchard brand was launched in 2011 and since 2013, Angry Orchard has been the largest selling hard cider in the United States.",
+     "The hard cider category is $0.5 billion in measured off-premise channels and comprises approximately 4% of Beyond beer and the cider category in dollars declined 2% in 2024 and increased 4% in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Truly Hard Seltzer maintained its place as one of the leading brands in the $3.0 billion measured off-premise hard seltzer category in 2025, even as the category declined 8% in dollars in 2024 and 4.5% in 2025.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2016, the Company began national distribution of the Truly Hard Seltzer brand and it maintained its place as one of the leading brands in the hard seltzer category in 2025.",
+     "The Hard Seltzer category is $3.0 billion in measured off-premise channels and comprises approximately 28% of Beyond beer and the hard seltzer category declined in dollars approximately 8% in 2024 and 4.5% in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P6",
+    "claim": "Launched in 2024, Sun Cruiser grew to become the fifth largest spirits RTD brand in a $1.7 billion measured off-premise category that grew 29% in dollars in 2025, and continued growing in 2026.",
     "facts": [
      "P1",
-     "P3"
+     "P6"
     ],
     "quotes": [
-     "The Company has one reporting unit.",
-     "The Company\u2019s beverages are sold by the Company\u2019s sales force to the same types of customers and drinkers in similar size quantities, at similar price points and through substantially the same channels of distribution."
+     "The Sun Cruiser brand was launched in 2024 and has grown quickly to be the fifth largest spirits RTD brand.",
+     "The spirits RTD category is $1.7 billion in measured off-premise channels and comprises approximately 16% of Beyond beer and the spirits RTD category in dollars increased approximately 24% in 2024 and 29% in 2025.",
+     "Shipment volume for the quarter was approximately 1.8 million barrels, a 4.9% decrease compared to the third quarter of the prior year, driven by declines in Twisted Tea, Truly, and Samuel Adams that were partially offset by growth in the Sun Cruiser and Angry Orchard brands."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement (table in thousands)",
-    "claim": "Net revenue is gross revenue less excise taxes. In the nine months to Sep. 26, 2026, revenue of 1,624,792 less excise taxes of 102,423 left net revenue of 1,522,369 (all figures in thousands of USD).",
+    "basis": "stated in P1",
+    "claim": "Samuel Adams is recognized as one of the largest craft beer brands and Dogfish Head as an innovative craft beer and spirits brand, though the $3.4 billion measured off-premise craft beer category declined 2% in 2024 and 3% in 2025.",
     "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 10-Q MD&A, with the price guidance in the earnings release",
-    "claim": "Revenue moves with volume, price and product mix. In Q3 2026, net revenue fell $17.4 million, or 3.2%, to $520.1 million. A volume effect of $26.4 million was partly offset by favorable mix of $7.7 million and pricing of $4.9 million.",
-    "facts": [
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "Net revenue decreased by $17.4 million, or 3.2%, to $520.1 million for the thirteen weeks ended September 26, 2026"
+     "The Samuel Adams brand began in 1984 and the brand is recognized as one of the largest and most respected craft beer brands with a particular focus on lagers and seasonal beers.",
+     "The Dogfish Head brand began in 1995 and is recognized as one of the most innovative and respected craft beer and spirits brand with a particular focus on India Pale Ales (\u201cIPAs\u201d).",
+     "The craft beer category is $3.4 billion in measured off-premise channels and comprises approximately 9% of traditional beer and the craft beer category in dollars declined 2% in 2024 and 3% in 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in 10-Q MD&A",
-    "claim": "Volume is the main swing factor and is falling. Q3 shipments fell 4.9% to 1,841,000 barrels, driven by Twisted Tea, Truly, Samuel Adams and Hard Mountain Dew, partly offset by Sun Cruiser and Angry Orchard. The company says demand remains challenging.",
+    "basis": "stated in P1",
+    "claim": "The Company's primary brands are available nationally through a network of over 300 wholesalers in the United States, where its largest individual Distributor accounted for approximately 3% and the top three accounted for approximately 7% of 2025 gross sales.",
     "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company\u2019s primary brands which include the Twisted Tea, Truly Hard Seltzer, Samuel Adams, Angry Orchard, Sun Cruiser and Dogfish Head brands are all available nationally.",
+     "As dictated by the legal and regulatory environment, most all the Company\u2019s sales are made to a network of over 300 wholesalers in the United States and to a network of foreign wholesalers, importers or other agencies (collectively referred to as \u201cDistributors\u201d).",
+     "During 2025, the Company\u2019s largest individual Distributor accounted for approximately 3% of the Company\u2019s gross sales.",
+     "The top three individual Distributors collectively accounted for approximately 7% of the Company\u2019s gross sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Evidencing volume pressure on its market position, depletions declined 5% in 2022, 6% in 2023, 2% in 2024, and 4% in 2025, and in Year-to-date 2026 depletions fell 5% while net revenue fell 3.6% to $1.522 billion.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Beginning in the second half of 2021, the market for hard seltzer products experienced decelerating growth trends, which contributed to the Company\u2019s depletion volume decline of 5% in 2022, 6% in 2023 (5% decline on a 52-week comparable basis), 2% in 2024 and 4% in 2025.",
+     "Depletions decreased 5% and shipments decreased 5.4%",
+     "Net revenue of $1.522 billion decreased 3.6%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Despite lower volumes, net revenue per barrel rose 2.4% to $275.21 in 2025 and 1.8% to $282.51 in the third quarter of 2026, while gross margin expanded from 44.4% in 2024 to 48.5% in 2025 and 51.7% in the third quarter of 2026.",
+    "facts": [
+     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "The decrease was primarily driven by decreases in Twisted Tea, Truly, Samuel Adams and Hard Mountain Dew brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands."
+     "The net revenue per barrel increased by 2.4% to $275.21 per barrel for the year ended December 27, 2025, as compared to $268.64 per barrel for the year ended December 28, 2024, primarily due to price increases and favorable product mix.",
+     "Gross margin was 48.5% for the year ended December 27, 2025, as compared to 44.4% for the year ended December 28, 2024.",
+     "Net revenue per barrel increased by 1.8% to $282.51 per barrel for the thirteen weeks ended September 26, 2026, as compared to $277.63 per barrel for the comparable period in 2025, primarily due to favorable product mix and increased pricing.",
+     "Gross margin of 51.7% increased from the 50.8% margin realized in the third quarter of 2025, or an increase of 90 basis points year over year.",
+     "Gross margin primarily benefited from favorable product mix, price increases, procurement savings and improved brewery efficiencies, which were partially offset by inflationary commodity and tariff costs."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in 10-Q MD&A and the earnings release",
-    "claim": "Cost of goods per barrel is held roughly flat by cost savings offsetting inflation. In Q3 it was $136.35 per barrel against $136.56. Inflation of $10.2 million, mainly aluminum, was offset by savings from contract renegotiations, brewery efficiencies and lower third-party production payment amortization. Gross margin was 51.7%.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Inflationary impacts of $10.2 million consist primarily of increased material costs, mainly from aluminum, of $7.6 million, inclusive of $0.8 million impact from tariffs, and increased internal brewery costs of $0.5 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 10-K Item 1A",
-    "claim": "Production is increasingly in company-owned breweries, which makes costs more fixed. Own breweries made 86% of domestic volume in 2025, up from 74% in 2024, and the company expects over 90% in 2026. About 14% was still made at City Brewing in 2025.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 10-Q MD&A and the income statement",
-    "claim": "Advertising, promotional and selling expense is the largest operating cost and includes freight. It was flat at $165 million in Q3, at 31.8% of net revenue. Higher freight of $9.5 million was offset by a $9.0 million cut in advertising.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "The Company includes freight charges related to the movement of finished goods from its manufacturing locations to distributor locations in its advertising, promotional and selling expense line item."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 10-Q MD&A and the financial statements",
-    "claim": "A supplier-dispute judgment drove the nine-month loss and is not part of the normal operating model. The company recorded $194.5 million of litigation expense, shown on the balance sheet as accrued litigation of 194,471 (in thousands). Net loss for the nine months was (50,529) (in thousands), against net income of 131,000 a year earlier.",
-    "facts": [
-     "P4",
-     "F1",
-     "F2"
-    ],
-    "quotes": [
-     "the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement and earnings release",
-    "claim": "The company turns operations into cash and uses much of it to repurchase stock. Nine-month operating cash flow was 194,202 (in thousands), capital spending was (31,234) and share repurchases were (75,338). It ended Q3 with $308.1 million in cash and no debt.",
+    "basis": "stated in F3 and P6",
+    "claim": "The Company ended the third quarter of 2026 with $308.1 million in cash and no debt, and generated 194,202 (table in thousands) in operating cash flow during the 2026 year-to-date period to fund brand investments.",
     "facts": [
      "F3",
      "P6"
     ],
     "quotes": [
-     "Ended the third quarter with $308.1 million in cash and no debt"
-    ],
-    "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in the cited item (10-K Item 1)",
-    "claim": "The company holds a large position in the Beyond beer segment. It is the second largest supplier there at a 20% share, and about 86% of its volume is in that segment.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The Company is the second largest supplier in Beyond beer at a 20% market"
+     "Ended the third quarter with $308.1 million in cash and no debt",
+     "\u201cWe are encouraged by the strong performance of Sun Cruiser and remain focused on marketplace execution, while our continued emphasis on productivity and strong cash generation provide a solid foundation to invest behind our brands and drive long-term value.\u201d",
+     "Net cash provided by operating activities | 194,202 | 230,218"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (10-K Item 1)",
-    "claim": "Several brands lead their categories: Twisted Tea has been the largest selling flavored malt beverage brand since 2022, and Angry Orchard has been the largest selling hard cider since 2013.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "since 2022, Twisted Tea has been the largest selling flavored malt beverage brand in the United States"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; the link to spirits RTD growth is inferred from the category figures in 10-K Item 1",
-    "claim": "The company's segment is growing against a shrinking overall market, but the growth is concentrated in spirits RTDs, not in its larger categories. The US Beer Market fell 1.2% to $47.0 billion in 2025 while Beyond beer rose 4.4% to $10.7 billion, and the spirits RTD category rose 29%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion with Beyond beer increasing 4.4% to $10.7 billion and Traditional beer declining 2.8% to $36.3 billion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; the link between category declines and brand volume is inferred",
-    "claim": "The company's two biggest Beyond beer categories are shrinking. The flavored malt beverage category (about 42% of Beyond beer) declined 4% in 2025 and the hard seltzer category (about 28%) declined 4.5%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "the FMB category grew in dollars approximately 6% in 2024 and declined 4% in 2025",
-     "the hard seltzer category declined in dollars approximately 8% in 2024 and 4.5% in 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the market share inference is drawn from the CEO's wording, and no share figures for 2026 are given",
-    "claim": "Volume is declining in 2026. Q3 shipments fell 4.9% to 1,841,000 barrels and depletions fell 5%, with year-to-date shipments down 5.4%. The CEO says management is working to improve market share trends.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "we are prioritizing actions within our control to strengthen our business and improve market share trends"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the 29% figure comes from P1",
-    "claim": "Sun Cruiser is a growth pocket. It was launched in 2024, has become the fifth largest spirits RTD brand, and is offsetting part of the declines elsewhere in the portfolio.",
-    "facts": [
-     "P1",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The Sun Cruiser brand was launched in 2024 and has grown quickly to be the fifth largest spirits RTD brand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the pricing-power reading is inferred",
-    "claim": "The company is showing some pricing and mix strength. Q3 net revenue per barrel rose 1.8% to $282.51 from $277.63, and gross margin rose to 51.7% from 50.8% despite lower volume.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Net revenue per barrel increased by 1.8% to $282.51 per barrel for the thirteen weeks ended September 26, 2026, as compared to $277.63 per barrel for the comparable period in 2025, primarily due to favorable product mix and increased pricing.",
-     "Gross margin of 51.7% up 90 basis points year over year"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Input and freight costs are a threat to margins. Q3 inflationary impacts were $10.2 million, mostly aluminum, and higher freight rates added $9.5 million to advertising, promotional and selling expense.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Inflationary impacts of $10.2 million consist primarily of increased material costs, mainly from aluminum, of $7.6 million, inclusive of $0.8 million impact from tariffs, and increased internal brewery costs of $0.5 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the competitive-cost reading is inferred",
-    "claim": "Competing for shelf and distributor attention costs the company heavily. Year-to-date advertising, promotional and selling expense rose 6.3% to $491.1 million, while Q3 advertising spend was cut by $9.0 million.",
-    "facts": [
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "Advertising, promotional and selling expenses increased by $29.2 million, or 6.3%, to $491.1 million for the thirty-nine weeks ended September 26, 2026, as compared to $462.0 million for thirty-nine weeks ended September 27, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (10-K risk factors)",
-    "claim": "Named competitors have greater resources: AB InBev, Molson Coors, Constellation, Heineken and Mark Anthony Brands. Large non-alcoholic beverage companies (Coke, Pepsi, Monster, Arizona) are also entering alcohol.",
+    "basis": "stated in P2",
+    "claim": "The Company faces intense competition from AB InBev, Molson Coors, Constellation Brands, Heineken, and Mark Anthony Brands, which may have substantially greater financial resources, marketing strength, and distribution networks, alongside aggressively competing imported beers.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Many of the Company\u2019s competitors, including AB InBev, Molson Coors, Constellation, Heineken and Mark Anthony Brands, have substantially greater financial resources, marketing strength and distribution networks than the Company."
+     "Many of the Company\u2019s competitors, including AB InBev, Molson Coors, Constellation, Heineken and Mark Anthony Brands, have substantially greater financial resources, marketing strength and distribution networks than the Company.",
+     "Imported beers, such as Modelo Especial\u00ae, Corona\u00ae, Heineken\u00ae, Guinness\u00ae, and Stella Artois\u00ae, continue to compete aggressively in the United States and have gained market share over the last ten years."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The company depends on independent distributors and is not a primary brand for most of them. It sells through over 300 distributors, the largest is about 3% of gross sales and the top three about 7%, and agreements are generally terminable on short notice.",
+    "basis": "stated in P2",
+    "claim": "Major non-alcoholic beverage companies including Coke, Pepsi, Monster, and Arizona have entered the alcoholic beverage market directly or via licensing, threatening to raise competing costs, reduce available contract brewing capacity, and increase distributor leverage.",
     "facts": [
-     "P1",
      "P2"
     ],
     "quotes": [
-     "With few exceptions, the Company\u2019s products are not the primary brands in its Distributors\u2019 portfolios.",
-     "Contributing to distribution risk is the fact that the Company\u2019s distribution agreements are generally terminable by the Distributor on relatively short notice."
+     "Several large non-alcoholic beverage companies including Coke, Pepsi, Monster and Arizona have entered the alcoholic beverage market directly or through licensing agreements with alcoholic beverage companies to develop alcohol versions of existing traditional non-alcohol brands.",
+     "Due to the increased leverage that the larger, alcohol and non-alcohol beverage companies may have in distribution and sales and marketing expenses, the costs to the Company of competing could increase.",
+     "Also, consolidation in the industry could also reduce the contract brewing capacity that is available to the Company."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Production is shifting toward company-owned breweries, which raises the fixed-cost risk if volume keeps falling. Owned-brewery share of domestic volume rose from 74% in 2024 to 86% in 2025 and is estimated to exceed 90% in 2026, and third-party producer City Brewing remains important.",
+    "basis": "stated in P2",
+    "claim": "Secular US Beer Market volume declines accelerated to approximately 4% in 2025 as younger generations embrace moderation or abstinence, wellness trends, and non-alcoholic alternatives, alongside competition from wine and spirits.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "More recently in 2025 these declines accelerated to an approximate decline of 4% in volume.",
+     "More recently, younger generations including Millennials and Gen Z, are embracing moderation or abstinence, influenced by wellness trends and the rise of non-alcoholic alternatives.",
+     "The Company believes that this decline is due to declining alcohol consumption per person in the population, economic uncertainty, health and wellness trends and increased competition from wine, spirits and other beverage companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Legal cannabis, reclassified federally to Schedule III in 2025, and hemp-derived beverages in certain states compete with alcohol for shelf space and drinkers, though federal rules restrict hemp-derived beverage availability after November 2026.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In December 2025, cannabis was reclassified from a Schedule I controlled substance to Schedule III by the federal government, reflecting its recognized medical use and lower potential for abuse.",
+     "In certain states hemp derived beverages are competing with alcoholic beverages for shelf space and drinkers, despite recent federal regulations which restrict their availability after November 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "With approximately 94% of its beverages sold in the United States through independent Distributors, the Company is exposed to short-notice distributor termination rights and major brewers' influence over shared distributors.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In the United States, where approximately 94% of its beverages are sold, the Company sells most of its alcohol beverages to independent beer Distributors for distribution to retailers and, ultimately, to drinkers.",
+     "Contributing to distribution risk is the fact that the Company\u2019s distribution agreements are generally terminable by the Distributor on relatively short notice.",
+     "The Company\u2019s ability to maintain its existing distribution arrangements may be adversely affected by the fact that many of its Distributors are reliant on one of the major beer producers for a large percentage of their revenue and, therefore, they may be influenced by such producers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Launching new products to defend market share risks cannibalizing the Company's existing brands, adding operational complexity across production and marketing, and failing to generate stable long-term volume.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The development of new products by the Company to meet these challenges may lead to reduced sales of the Company\u2019s existing brands and there is no guarantee that these new product initiatives will generate stable long term volume.",
+     "These additional brands, styles, reformulations and locations, along with the increases in demand for certain existing brands, have added to the complexity of the Company\u2019s product development process, as well as its brewing, fermenting, distilling, packaging, marketing and selling processes, and retail operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Shifting domestic production at Company-owned breweries from 74% in 2024 to 86% in 2025 and over 90% estimated in 2026 creates peak-month capacity constraints and fixed-cost risk if volumes fall, while 14% of 2025 volume still relied on City Brewing Company, LLC.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026.",
+     "While, on balance, the Company views greater reliance on its own breweries favorably, this reliance on its own breweries exposes the Company to capacity constraints and risk of disruption of supply, as these breweries are operating at or close to current capacity in peak months.",
+     "Also as noted above, during 2025, approximately 14% of the Company\u2019s annual domestic shipment volume was produced under production service agreements with City Brewing Company, LLC and its subsidiaries.",
      "In an uncertain volume environment, the Company faces the risk of not being able to support the owned brewery operating costs, if volumes were to decline further."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the settlement timing and funding are not stated",
-    "claim": "The company has financial room to keep competing, but a supplier-dispute judgment is a cash claim on it. It ended Q3 2026 with $308.1 million in cash and no debt, and recorded $194.5 million of litigation expense accrued as a current liability.",
+    "basis": "stated in P2 and P4",
+    "claim": "The Company faces single-source supplier dependencies, unhedged Euro exposure for hops and apples, $39.1 million of inflationary impacts including $7.6 million from tariffs in the 2026 year-to-date period, and $20.6 million in higher freight costs.",
     "facts": [
-     "P6",
-     "P4",
-     "F1"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "Ended the third quarter with $308.1 million in cash and no debt"
+     "In 2024 and 2025, certain flavorings, crowns, and labels were each supplied by single sources.",
+     "The Company\u2019s contracts for certain hops and apples are payable in Euros, and therefore, the Company is subject to the risk that the currencies may fluctuate adversely against the U.S. dollar.",
+     "Inflationary impacts of $39.1 million consist primarily of increased material costs, mainly from aluminum, of $31.6 million, inclusive of $7.6 million impact from tariffs, and increased internal brewery costs of $3.0 million.",
+     "Resulting from higher freight costs of $20.6 million as freight rates increased more than offsetting the benefit of lower shipment volumes, and increased brand local marketing investments of $8.5 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Leadership turnover is a named risk. The CEO position changed in both 2024 and 2025, and the Treasurer and Chief Financial Officer announced in August 2026 that he was stepping down, with the Chief Accounting Officer named interim.",
+    "basis": "stated in P2 and P8",
+    "claim": "Senior leadership turnover, including CEO transitions in 2024 and 2025 and a CFO departure announced in 2026, risks losing key institutional knowledge and execution continuity.",
     "facts": [
      "P2",
-     "P7"
+     "P8"
     ],
     "quotes": [
      "During both 2024 and 2025 the Company has had transition of its Chief Executive Officer.",
-     "Diego Reynoso informed the Company that he was stepping down as the Company\u2019s Treasurer and Chief Financial Officer"
+     "On August 17, 2026, Diego Reynoso informed the Company that he was stepping down as the Company\u2019s Treasurer and Chief Financial Officer.",
+     "The departure of key leadership personnel can take from the Company significant knowledge and experience."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Although the Company increased advertising and promotion spending by $61.0 million or 13.6% in 2025, it states that correlating such investments with sales results is difficult and brand-building returns are not guaranteed.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "During 2025 the Company significantly increased its spending on advertising and promotion by $61.0 million or 13.6% and during 2026 the Company currently estimates it will further increase spending by between $20 million and $40 million.",
+     "While the Company attempts to invest only in effective advertising and promotional activities, it is difficult to correlate such investments with sales results, and there is no guarantee that the Company\u2019s expenditures will be effective in building brand equity or growing long term sales."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in the balance sheet F1",
-    "claim": "Liquidity is solid at the Sep 26, 2026 quarter end. Cash was 308,072 (table in thousands), up from 223,378 at the prior year-end. Total current assets were 515,946 against total current liabilities of 456,364, and current liabilities were 252,534 at year-end.",
+    "basis": "stated in P4 and P6",
+    "claim": "The company ended the third quarter on September 26, 2026 with $308.1 million in cash and no debt, up from $223.4 million as of December 27, 2025.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Ended the third quarter with $308.1 million in cash and no debt",
+     "Cash increased to $308.1 million as of September 26, 2026 from $223.4 million as of December 27, 2025,"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1",
+    "claim": "As of September 26, 2026, total current assets were 515,946 against total current liabilities of 456,364 (table in thousands), compared with 417,579 and 252,534 as of December 27, 2025, with current liabilities reflecting 194,471 in accrued litigation expenses.",
     "facts": [
      "F1"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 (no debt) and F1 (balance sheet lines)",
-    "claim": "Leverage is low. The company reports no debt, and the balance sheet shows no borrowings line. Total liabilities were 503,658 (table in thousands) against stockholders' equity of 735,730. The liabilities include operating lease liabilities of 7,871 (current) and 21,667 (non-current).",
-    "facts": [
-     "F1",
-     "P6"
-    ],
     "quotes": [
-     "Ended the third quarter with $308.1 million in cash and no debt"
+     "Total current assets | 515,946 | 417,579",
+     "Total current liabilities | 456,364 | 252,534",
+     "Accrued litigation expenses | 194,471"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1 and P4; the point that interest keeps accruing is inferred from the quarterly post-judgment interest charge",
-    "claim": "A large unpaid litigation obligation sits in current liabilities. Accrued litigation expenses were 194,471 (table in thousands), and there was no such item at year-end. It is made up of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest of $3.5 million. Post-judgment interest expense of $1.8 million was booked in the third quarter alone.",
+    "basis": "stated in P3 and P4",
+    "claim": "Primary sources of liquidity are existing cash balances, operating cash flows, and amounts available under a revolving credit facility, which was a $150.0 million agreement with no covenant violations as of the annual report on Form 10-K filing.",
     "facts": [
-     "F1",
-     "F2",
+     "P3",
      "P4"
     ],
     "quotes": [
-     "the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement F3",
-    "claim": "Nine-month operating cash flow was 194,202 (table in thousands), against 230,218 a year earlier. Purchases of property, plant, and equipment were (31,234), against (36,717).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the add-back line in F3 and the accrued litigation line in F1",
-    "claim": "Reported operating cash flow does not yet bear the litigation cost. The 194,471 litigation expense is added back as a non-cash item and sits unpaid in accrued liabilities. Nine-month operating cash flow of 194,202 is therefore positive despite a net loss of (50,529) (table in thousands).",
-    "facts": [
-     "F1",
-     "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated line items in F3; the interpretation is inferred",
-    "claim": "Other items flatter or burden operating cash flow. Net cash income taxes paid were (9,150), against (54,215) a year earlier, and the income tax receivable gave an inflow of 22,163. Accounts receivable consumed (25,961). Depreciation and amortization of 63,478 is a non-cash add-back (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3, P6 and P8; the discretionary point is inferred",
-    "claim": "Cash returned to shareholders was lower than last year. Repurchases of Class A stock were (75,338) over nine months (table in thousands), against (152,423). The company reports $79.5 million repurchased from year-start to October 16, and has a plan to repurchase up to $25 million in the fourth quarter. Full-year capital spending guidance is $55 to $70 (guidance table in $ million).",
-    "facts": [
-     "F3",
-     "P6",
-     "P8"
-    ],
-    "quotes": [
-     "Repurchased $79.5 million in shares from December 28, 2025 to October 16, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P6; that the facility is undrawn is inferred from the no-debt statement",
-    "claim": "No debt maturities are shown in the evidence, since the company reports no debt. A $150.0 million credit facility is available as a backstop, and the company said it was not in violation of its covenants.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
+     "The Company\u2019s primary sources of liquidity are its existing cash balances, cash flows from operating activities and amounts available under its revolving credit facility.",
+     "The Company expects that its cash balance as of December 27, 2025 of $223.4 million and future operating cash flows, along with its $150.0 million credit facility agreement, will be sufficient to fund future cash requirements.",
      "As of the date of this filing, the Company was not in violation of any of its covenants to the lender under the credit facility."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from the F1 balance sheet lines and the facility mentioned in P3",
-    "claim": "The litigation accrual of 194,471 is smaller than the cash balance of 308,072 (table in thousands). On the balance sheet alone, the obligation can therefore be met from cash on hand, with the credit facility as a further source.",
+    "basis": "stated in F1 and P6",
+    "claim": "With no debt reported as of September 26, 2026, total liabilities of 503,658 consisted primarily of accrued litigation expenses of 194,471, accrued expenses and other current liabilities of 146,382, accounts payable of 107,640, deferred income taxes of 21,524, current operating lease liabilities of 7,871, and non-current operating lease liabilities of 21,667, against total stockholders' equity of 735,730 (table in thousands).",
     "facts": [
      "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Ended the third quarter with $308.1 million in cash and no debt",
+     "Total liabilities | 503,658 | 347,315",
+     "Total stockholders' equity | 735,730 | 846,280"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and inferred from absence of a separate finance lease line in F1",
+    "claim": "Although no separate finance lease liability line appears on the balance sheet, the cash flow statement reports cash paid on finance leases of (1,092) and right-of-use assets obtained in exchange for finance lease obligations of 271 (table in thousands) during the nine months ended September 26, 2026.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Cash paid on finance leases | (1,092) | (1,288)",
+     "Right-of-use-assets obtained in exchange for finance lease obligations | 271"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P3",
+    "claim": "Operating activities generated 194,202 in net cash (table in thousands) during the nine months ended September 26, 2026, down from 230,218 in the prior-year period, following $270.2 million in operating cash flow for the fiscal year ended December 27, 2025.",
+    "facts": [
+     "F3",
      "P3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Net cash provided by operating activities | 194,202 | 230,218",
+     "Cash provided by operating activities for the year ended December 27, 2025 was $270.2 million and consisted of net income of $108.5 million, non-cash items of $114.7 million, and an inflow of $47.0 million from a net decrease in operating assets and liabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F3, and P4",
+    "claim": "During the nine months ended September 26, 2026, operating cash flow of 194,202 remained positive despite a GAAP net loss of $ (50,529) (table in thousands) primarily because the 194,471 litigation expense was an unpaid non-cash accrual.",
+    "facts": [
+     "F1",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Net (loss) income | $ (50,529) | $ 131,000",
+     "Litigation expense | 194,471",
+     "For the thirty-nine weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "In the nine months ended September 26, 2026, operating cash flow was also supported by depreciation and amortization of 63,478, stock-based compensation of 15,126, and inflows from income tax receivable of 22,163 and accounts payable of 14,320, partially offset by deferred income taxes of (43,261), accounts receivable outflows of (25,961), operating lease liability outflows of (9,450), and inventory outflows of (6,585) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Depreciation and amortization | 63,478 | 67,726",
+     "Deferred income taxes | (43,261) | (15,496)",
+     "Accounts receivable | (25,961) | (22,866)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3, P6, P7, and P9",
+    "claim": "Purchases of property, plant, and equipment were (31,234) and Class A common stock repurchases were (75,338) (table in thousands) in the nine months ended September 26, 2026, with full-year 2026 capital spending guided at $55 to $70 (table in millions) and subsequent repurchase plans of up to $25 million and $37.5 million.",
+    "facts": [
+     "F3",
+     "P6",
+     "P7",
+     "P9"
+    ],
+    "quotes": [
+     "Purchases of property, plant, and equipment | (31,234) | (36,717)",
+     "Capital Spending ($ million) | $55 to $70 | $60 to $80",
+     "On August 10, 2026, the Company entered into a 10b5-1 plan to repurchase up to $25 million of the Company\u2019s Class A Common Stock during the period commencing September 28, 2026 and ending December 25, 2026.",
+     "On November 9, 2026, the Company entered into a 10b5-1 plan to repurchase up to $37.5 million of the Company\u2019s Class A Common Stock during the period commencing December 28, 2026 and ending March 26, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P4, and P6",
+    "claim": "Because the company has no debt as of September 26, 2026, it faces no debt maturities requiring refinancing, while near-term obligations such as 7,871 in current operating lease liabilities and 194,471 in accrued litigation expenses (table in thousands) sit alongside $308.1 million in cash, positive operating cash flows, and the revolving credit facility.",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Ended the third quarter with $308.1 million in cash and no debt",
+     "Current operating lease liabilities | 7,871 | 12,762",
+     "Accrued litigation expenses | 194,471",
+     "The Company\u2019s primary sources of liquidity are its existing cash balances, cash flows from operating activities and amounts available under its revolving credit facility."
+    ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the cited 10-Q MD&A and earnings release.",
-    "claim": "Sun Cruiser and Angry Orchard are the brands whose volume grew in the third quarter, partly offsetting a 4.9% decline in total shipments. Overall volume growth needs these two to keep growing faster than Twisted Tea, Truly, Samuel Adams and Hard Mountain Dew shrink.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The decrease was primarily driven by decreases in Twisted Tea, Truly, Samuel Adams and Hard Mountain Dew brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Category figures are stated in the 10-K Item 1; the link to continued Sun Cruiser growth is inferred.",
-    "claim": "The spirits RTD category, where Sun Cruiser competes, is the fastest-growing category the company describes: $1.7 billion in measured off-premise channels, with dollars up approximately 29% in the latest full year. For Sun Cruiser to keep growing, the category has to keep growing and the brand has to keep its national distribution.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "the spirits RTD category in dollars increased approximately 24% in 2024 and 29% in 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited 10-Q and earnings release; the condition for continuation is inferred.",
-    "claim": "Pricing and product mix lift revenue per barrel. Net revenue per barrel rose 1.8% to $282.51 from $277.63 in the third quarter, which cushions the volume decline. This continues only if price increases keep holding without accelerating volume losses; management guides price increases of 1% to 2%.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Net revenue per barrel increased by 1.8% to $282.51 per barrel for the thirteen weeks ended September 26, 2026, as compared to $277.63 per barrel for the comparable period in 2025, primarily due to favorable product mix and increased pricing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Margin figures and drivers are stated in the cited items; the condition is inferred.",
-    "claim": "Gross margin expansion from supply-chain savings is the main profit driver. Third-quarter gross margin was 51.7% against 50.8%, and full-year guidance moved to 49% to 50% from 48.5% to 50%. It continues only if contract, recipe and brewery-efficiency savings keep outrunning input inflation, mainly aluminum, which was $10.2 million of inflationary impact in the quarter.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Gross margin of 51.7% increased from the 50.8% margin realized in the third quarter of 2025, or an increase of 90 basis points year over year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors; the margin link is inferred from the MD&A cost discussion.",
-    "claim": "Moving more production into company-owned breweries supports margin. The domestic volume share produced in owned breweries rose from 74% to 86%, with over 90% expected. This holds only if volume is enough to cover the owned breweries' fixed costs and they avoid disruption.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Share counts and the repurchase plan are stated; the EPS effect is inferred from the income statement.",
-    "claim": "Per-share results are supported by share repurchases. Third-quarter diluted weighted-average shares fell to 10,224 from 10,830 (shares in thousands). Diluted EPS therefore held near $4.21 against $4.25 even though net income fell. Continuing this needs ongoing cash generation and repurchase capacity; a plan to repurchase up to $25 million runs through December 25, 2026.",
-    "facts": [
-     "F2",
-     "P8"
-    ],
-    "quotes": [
-     "entered into a 10b5-1 plan to repurchase up to $25 million of the Company\u2019s Class A Common Stock"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balances are stated in the cited items; the cash-draw reasoning is inferred.",
-    "claim": "The balance sheet funds buybacks and investment, but the litigation accrual draws on it. Cash was $308.1 million with no debt, against accrued litigation expenses of 194,471 (table in thousands) in current liabilities. The cash cushion supports repurchases and investment only to the extent it remains after that obligation is settled.",
-    "facts": [
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Ended the third quarter with $308.1 million in cash and no debt"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The expectation is stated in the 10-K; the counter comes from the 10-Q.",
-    "claim": "Management expects new products to contribute: Twisted Tea Light and Twisted Tea Extreme are expected to be positive contributors for the Twisted Tea brand. This needs those items to offset base Twisted Tea declines, which the third-quarter evidence does not yet show.",
+    "basis": "stated in the cited items (10-K Item 1, 10-K Item 7, and 10-Q Item 2)",
+    "claim": "The Company generates approximately 86% of its 2025 volume in Beyond beer, a category that grew 4.4% to $10.7 billion in measured off-premise channels in 2025 while Traditional beer declined 2.8%.",
     "facts": [
      "P1",
+     "P3",
      "P4"
     ],
     "quotes": [
-     "The Company expects Twisted Tea Light and Twisted Tea Extreme to be positive contributors for the Twisted Tea brand in 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Market figures are stated in the 10-K; the dependence on share gains is inferred.",
-    "claim": "The company's category mix is a tailwind: Beyond beer, where about 86% of company volume sits, grew 4.4% to $10.7 billion while Traditional beer fell 2.8%. This continues only if Beyond beer keeps gaining share from Traditional beer and the company's own Beyond beer brands, not only the category, grow.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
+     "In 2025, approximately 86% of the Company\u2019s volume is in Beyond beer with the remainder in Traditional beer.",
      "In measured off-premise channels in 2025, the US Beer Market decreased 1.2% to $47.0 billion with Beyond beer increasing 4.4% to $10.7 billion and Traditional beer declining 2.8% to $36.3 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "Guidance is stated in the earnings release; the interpretation is inferred.",
-    "claim": "Guidance does not rely on volume growth: depletions and shipments are guided down mid-single digits, while the low end of non-GAAP EPS guidance rose to $9.00 from $8.50. For the guided earnings to be reached, margin, price, mix and buyback effects must carry the result in a shrinking-volume year.",
+    "basis": "stated in the cited items (10-K Item 1 and Item 1A)",
+    "claim": "For Beyond beer exposure to continue driving growth, Beyond beer must keep gaining share from Traditional beer while the Company defends market share against major brewers and non-alcoholic beverage entrants.",
     "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Beyond beer is 23% of the US Beer Market and the Company believes Beyond beer is positioned to continue to grow and gain share from Traditional beer.",
+     "Several large non-alcoholic beverage companies including Coke, Pepsi, Monster and Arizona have entered the alcoholic beverage market directly or through licensing agreements with alcoholic beverage companies to develop alcohol versions of existing traditional non-alcohol brands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1, 10-K Item 7, 10-Q Item 2, and Q3 2026 earnings release)",
+    "claim": "Sun Cruiser, launched in 2024, competes in a spirits RTD category that grew approximately 24% in 2024 and 29% in 2025, and partially offset core brand volume declines in 2025 and 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "Depletions and Shipments Percentage Change | Down mid-single digits | Down low-single digits to mid-single digits",
-     "Non GAAP EPS | $9.00 to $10.50 | $8.50 to $10.50"
+     "The Sun Cruiser brand was launched in 2024 and has grown quickly to be the fifth largest spirits RTD brand.",
+     "The spirits RTD category is $1.7 billion in measured off-premise channels and comprises approximately 16% of Beyond beer and the spirits RTD category in dollars increased approximately 24% in 2024 and 29% in 2025.",
+     "Shipment volume for the quarter was approximately 1.8 million barrels, a 4.9% decrease compared to the third quarter of the prior year, driven by declines in Twisted Tea, Truly, and Samuel Adams that were partially offset by growth in the Sun Cruiser and Angry Orchard brands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1 and Item 1A)",
+    "claim": "For Sun Cruiser to sustain growth, the spirits RTD category must remain robust and the Company must defend against large domestic, international, and craft competitors without eroding existing brands.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "This category is highly competitive and includes large international and domestic competitors, as well as many small regional and local craft distilling companies.",
+     "The development of new products by the Company to meet these challenges may lead to reduced sales of the Company\u2019s existing brands and there is no guarantee that these new product initiatives will generate stable long term volume."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1, 10-K Item 7, and 10-Q Item 2)",
+    "claim": "Angry Orchard contributed volume growth in 2025 and 2026 as the hard cider category grew 4% in dollars in 2025.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The Angry Orchard brand was launched in 2011 and since 2013, Angry Orchard has been the largest selling hard cider in the United States.",
+     "The hard cider category is $0.5 billion in measured off-premise channels and comprises approximately 4% of Beyond beer and the cider category in dollars declined 2% in 2024 and increased 4% in 2025.",
+     "Total shipment volume decreased by 5.4% to 5,448,000 barrels for the thirty-nine weeks ended September 26, 2026, as compared to 5,756,000 barrels for the thirty-nine weeks ended September 27, 2025, primarily due to decreases in Twisted Tea, Truly, Samuel Adams, Hard Mountain Dew and Dogfish Head brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1 and Item 1A)",
+    "claim": "For Angry Orchard to continue growing, it must withstand competition from regional and local cideries and secure limited-availability European and domestic specialty apple varieties.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "This category is small and highly competitive and the competition consists mostly of many small regional and local hard cider companies.",
+     "There is limited availability of these apples and many outside factors, including weather conditions, farmers rotating from apples to other crops, government regulations and legislation affecting agriculture, could affect both price and supply."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1)",
+    "claim": "The Company drives new volume opportunities through ongoing product innovation, launching new brands and extensions across spirits RTDs, flavored malt beverages, hard seltzers, non-alcoholic beer, and Canadian cannabis beverages.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company\u2019s most significant innovations in 2025 were the introduction of new Sun Cruiser styles and packages including Sun Cruiser vodka based lemonade, as well as the launch of Truly Unruly Lemonade Mix Pack, Dogfish Head Grateful Dead Juicy Pale Ale and Sinless Vodka Cocktails, a new spirits RTD brand.",
+     "The Company plans to launch additional Samuel Adams non-alcoholic styles during 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1A)",
+    "claim": "For product innovation to generate net growth, new launches must build durable demand without cannibalizing existing brands or overwhelming brewing, packaging, and ingredient supply chains.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "These additional brands, styles, reformulations and locations, along with the increases in demand for certain existing brands, have added to the complexity of the Company\u2019s product development process, as well as its brewing, fermenting, distilling, packaging, marketing and selling processes, and retail operations.",
+     "The Company\u2019s new product development can also be constrained by any limited availability of the desired ingredients."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 7, 10-Q Item 2, and Q3 2026 earnings release)",
+    "claim": "Price increases and favorable product mix raised net revenue per barrel by 2.4% in 2025 to $275.21 and by 1.8% year-to-date in 2026 to $279.44, with full-year 2026 guidance projecting 1% to 2% price increases.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The net revenue per barrel increased by 2.4% to $275.21 per barrel for the year ended December 27, 2025, as compared to $268.64 per barrel for the year ended December 28, 2024, primarily due to price increases and favorable product mix.",
+     "Net revenue per barrel increased by 1.8% to $279.44 per barrel for the thirty-nine weeks ended September 26, 2026, as compared to $274.38 per barrel for the comparable period in 2025, primarily due to increased pricing and favorable product mix.",
+     "Price Increases | 1% to 2% | 1% to 2%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1A and 10-Q Item 2)",
+    "claim": "For pricing and mix to continue expanding revenue per barrel, drinkers must accept higher prices without accelerating volume declines and promotional incentives must remain contained.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The potential for growth in the sales of flavored malt beverages, hard seltzers, domestic beers, imported beers and spirits RTDs is expected to increase the competition in the market for Beyond beer and Traditional beer occasions within the United States and, as a result, the Company may well face competitive pricing pressures and the demand for and market share of the Company\u2019s products may fluctuate and possibly decline.",
+     "Net revenue decreased by $56.9 million, or 3.6%, to $1.522 billion for the thirty-nine weeks ended September 26, 2026, as compared to $1.579 billion for the thirty-nine weeks ended September 27, 2025, primarily due to decreased sales volume impacts of $84.5 million and increased sales incentives of $6.1 million, partially offset by increased pricing of $19.1 million and favorable product mix of $17.4 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1A, 10-K Item 7, and Q3 2026 earnings release)",
+    "claim": "Supply chain savings, brewery efficiencies, and insourcing production expanded gross margin from 44.4% in 2024 to 48.5% in 2025 and 50.5% year-to-date in 2026, helping raise 2025 operating income by 90.7%.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Gross margin was 48.5% for the year ended December 27, 2025, as compared to 44.4% for the year ended December 28, 2024.",
+     "Gross margin primarily benefited from contract renegotiations and recipe optimization savings, improved brewery efficiencies, price increases and favorable product mix.",
+     "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026.",
+     "Gross margin of 50.5% up 80 basis points year over year",
+     "Operating income | 144,882 | 20.29 | 7.4% | 75,973 | 10.14 | 3.8% | 68,909 | 90.7% | 10.15 | >100%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1A, 10-Q Item 2, and Q3 2026 earnings release)",
+    "claim": "For gross margin and earnings expansion to continue, supply chain savings must outweigh aluminum, tariff, and freight cost inflation while owned breweries and third-party partner City Brewing operate without disruption or volume deleverage.",
+    "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In an uncertain volume environment, the Company faces the risk of not being able to support the owned brewery operating costs, if volumes were to decline further.",
+     "A production interruption caused by an acquisition or change of control or bankruptcy of City Brewing Company, LLC, or its subsidiaries, or a simultaneous interruption at several of the Company\u2019s other production locations would likely cause significant disruption, increased costs and, potentially, lost sales.",
+     "Freight costs remain elevated due to higher transportation rates, labor constraints within the transportation industry and higher fuel costs, while energy costs also impact aluminum input costs, given the energy intensive nature of aluminum production."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1 and 10-K Item 7)",
+    "claim": "The Company invests in advertising, promotional programs, and its sales force to grow market share, increasing 2025 advertising, promotional, and selling expenses by 10.5% to $610.0 million.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The Company\u2019s business goal is to grow market share in the US Beer Market by creating and offering high quality alcohol beverages.",
+     "With the support of a large, well-trained sales organization and world-class brewers, the Company strives to achieve this goal by offering consumer-responsive beverages, increasing brand availability and awareness through traditional media and digital advertising, point-of-sale, promotional programs, and drinker education and engagement.",
+     "Advertising, promotional and selling expenses, increased $57.9 million, or 10.5%, to $610.0 million for the year ended December 27, 2025, as compared to $552.0 million for the year ended December 28, 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1 and Item 1A)",
+    "claim": "For marketing and sales investments to drive growth, campaigns must convert into drinker demand and maintain support across over 300 independent distributors.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Although the Company currently has arrangements with over 300 Distributors, sustained growth will require it to maintain such relationships and possibly enter into agreements with additional Distributors.",
+     "While the Company attempts to invest only in effective advertising and promotional activities, it is difficult to correlate such investments with sales results, and there is no guarantee that the Company\u2019s expenditures will be effective in building brand equity or growing long term sales."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited items (10-Q MD&A, balance sheet and income statement)",
-    "claim": "The Company recorded a non-recurring pre-tax litigation expense of $194.5 million for the supplier dispute, made up of a judgment of $175.5 million plus pre-judgment and post-judgment interest. The balance sheet carries a matching accrued litigation liability of 194,471 (table in thousands), and the nine-month period shows an operating loss.",
+    "basis": "stated in [P4], [F1], and [F2]",
+    "claim": "For the thirty-nine weeks ended September 26, 2026, the Company recorded $194.5 million in non-recurring pre-tax litigation expense related to a supplier dispute, comprising a $175.5 million judgment, $15.5 million in pre-judgment interest, and $3.5 million in post-judgment interest, plus $5.8 million of legal fees in general and administrative expenses.",
     "facts": [
      "P4",
      "F1",
      "F2"
     ],
     "quotes": [
-     "For the thirty-nine weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million."
+     "For the thirty-nine weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million.",
+     "For the thirty-nine weeks ended September 26, 2026, the combined pre-tax expense related to the supplier dispute litigation of $200.3 million consists of legal expenses of $5.8 million, recorded in general and administrative expenses, and litigation expense of $194.5 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 8-K Item 5.02",
-    "claim": "The Treasurer and Chief Financial Officer informed the Company he was stepping down. The Board launched a search for a permanent replacement and approved the Chief Accounting Officer as interim CFO and Treasurer.",
+    "basis": "stated in [P8]",
+    "claim": "Diego Reynoso informed the Company that he was stepping down as Treasurer and Chief Financial Officer, remaining through September 30, 2026 while the Board of Directors launched a formal search for a permanent replacement.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "On August 17, 2026, Diego Reynoso informed the Company that he was stepping down as the Company\u2019s Treasurer and Chief Financial Officer.",
+     "To support an orderly transition, Mr. Reynoso will remain at the Company through September 30, 2026.",
+     "The Company\u2019s Board of Directors has launched a formal search process to identify Mr. Reynoso\u2019s permanent replacement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P8] and [P6]",
+    "claim": "The Board of Directors approved on August 20, 2026 the appointment of Chief Accounting Officer Matthew D. Murphy as interim Treasurer and Chief Financial Officer effective September 15, 2026, with a cash transition bonus of up to $700,000.",
+    "facts": [
+     "P8",
+     "P6"
+    ],
+    "quotes": [
+     "On August 20, 2026, the Company\u2019s Board of Directors approved the appointment of Matthew D. Murphy, age 57, to serve as interim Treasurer and Chief Financial Officer, effective September 15, 2026, and until such time as the Company appoints Mr. Reynoso\u2019s permanent successor.",
+     "Additionally, the Company agreed to grant Mr. Murphy a cash bonus of up to $700,000, payable in four installments, the first of which will be payable on December 31, 2026, and the fourth on March 1, 2028, with payment of each installment contingent upon continued employment with the Company, except as otherwise provided in the Offer Letter.",
+     "\u201cWe delivered strong gross margin expansion and are raising the low end of our gross margin and earnings guidance, while managing through a dynamic consumer demand and input cost environment,\u201d said Interim CFO and Chief Accounting Officer Matt Murphy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "The Company had transitions of its Chief Executive Officer during both 2024 and 2025.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "During both 2024 and 2025 the Company has had transition of its Chief Executive Officer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P9]",
+    "claim": "The Company entered into a 10b5-1 plan to repurchase up to $25 million of its Class A Common Stock during the period from September 28, 2026 to December 25, 2026.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "On August 10, 2026, the Company entered into a 10b5-1 plan to repurchase up to $25 million of the Company\u2019s Class A Common Stock during the period commencing September 28, 2026 and ending December 25, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P7]",
+    "claim": "The Company entered into a 10b5-1 plan to repurchase up to $37.5 million of its Class A Common Stock during the period from December 28, 2026 to March 26, 2027.",
     "facts": [
      "P7"
     ],
     "quotes": [
-     "On August 17, 2026, Diego Reynoso informed the Company that he was stepping down as the Company\u2019s Treasurer and Chief Financial Officer."
+     "On November 9, 2026, the Company entered into a 10b5-1 plan to repurchase up to $37.5 million of the Company\u2019s Class A Common Stock during the period commencing December 28, 2026 and ending March 26, 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "With its third-quarter results, the Company updated its full-year 2026 guidance. Management said it was raising the low end of its gross margin and earnings guidance.",
+    "basis": "stated in [P1]",
+    "claim": "The Company announced it will close its local Angel City Brewery in Los Angeles, California effective April 30, 2026.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company announced it will close its local brewery in Los Angeles, California (the \u201cAngel City Brewery\") effective April 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "In fiscal 2024, the Company recorded a $42.6 million non-cash intangible impairment charge ($29.1 million net of tax) primarily related to the Dogfish Head brand and reclassified the trademark as finite-lived, amortizing the remaining $14.4 million carrying value over 10 years.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In fiscal 2024, the Company recorded a $42.6 million non\u2011cash impairment charge ($29.1 million net of tax) primarily related to the Dogfish Head brand, based on the Company\u2019s annual impairment assessment performed as of September 1, 2024.",
+     "Effective in the fourth quarter of fiscal 2024, the Company began amortizing the trademark\u2019s remaining carrying value of $14.4 million over an estimated useful life of 10 years on a straight\u2011line basis."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3], [P4], and [F2]",
+    "claim": "The Company recorded brewery asset impairment charges of $7.0 million in fiscal 2025, $7.2 million in fiscal 2024, and $3.1 million in the thirty-nine weeks ended September 26, 2026 from equipment write-offs at Company-owned and third-party production facilities.",
+    "facts": [
+     "P3",
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Impairment of brewery assets of $7.0 million decreased by $0.2 million from the prior fiscal year, due to lower write-offs of equipment at third party and Company-owned production facilities.",
+     "Impairment charges included in operating expenses related to brewery assets classified as property, plant, and equipment were $6.4 million, $7.2 million, and $5.0 million for fiscal years 2025, 2024, and 2023, respectively.",
+     "Impairment of brewery assets of $3.1 million decreased by $3.3 million from 2025, due to decreased write-offs of equipment at third party and Company-owned breweries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "In fiscal 2024, the Company recorded $26 million in contract settlement costs due to an amendment and restatement in its entirety of an existing production agreement with third-party supplier Rauch.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In fiscal 2024, the Company recorded contract settlement costs of $26 million due to an amendment and restatement in its entirety of an existing production agreement with a third-party supplier, Rauch."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "The Company updated its full-year 2026 financial guidance, raising the low end of gross margin guidance to 49% to 50% and Non-GAAP EPS guidance to $9.00 to $10.50, with GAAP EPS guided at ($5.76) to ($4.26).",
     "facts": [
      "P6"
     ],
     "quotes": [
      "The Company has updated its financial guidance for the full year 2026.",
-     "are raising the low end of our gross margin and earnings guidance"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 8-K Item 8.01",
-    "claim": "The Company entered into a 10b5-1 plan to repurchase up to $25 million of Class A Common Stock. The plan period runs from September 28, 2026 to December 25, 2026.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "On August 10, 2026, the Company entered into a 10b5-1 plan to repurchase up to $25 million of the Company\u2019s Class A Common Stock during the period commencing September 28, 2026 and ending December 25, 2026."
+     "\u201cWe delivered strong gross margin expansion and are raising the low end of our gross margin and earnings guidance, while managing through a dynamic consumer demand and input cost environment,\u201d said Interim CFO and Chief Accounting Officer Matt Murphy."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the 10-Q MD&A and the earnings release; the thesis-break label is an inference.",
-    "claim": "Volumes keep falling: year-to-date shipments are down 5.4% and depletions down 5%. Management calls the demand environment challenging and guides full-year shipments and depletions to down mid-single digits.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "The demand environment remains challenging, and we are prioritizing actions within our control to strengthen our business and improve market share trends",
-     "Down mid-single digits"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the balance sheet and 10-Q MD&A; the payment timing and funding effect are inferred.",
-    "claim": "A large accrued litigation liability from a supplier dispute sits in current liabilities and has not been paid, and post-judgment interest is still accruing. Cash is large and the company reports no debt, so the evidence does not show a liquidity strain.",
+    "basis": "Stated directly in F1, F2, F3, P3, P4, P6, P7, and P9; liquidity strain is inferred from comparing the current litigation accrual against cash and operating cash flow.",
+    "claim": "A supplier dispute judgment resulted in $194.5 million of non-recurring pre-tax litigation expense and a 194,471 (table in thousands) current accrued litigation liability against $308.1 million in cash and cash equivalents.",
     "facts": [
      "F1",
+     "F2",
+     "F3",
+     "P3",
      "P4",
-     "P6"
+     "P6",
+     "P7",
+     "P9"
     ],
     "quotes": [
+     "For the thirty-nine weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million.",
      "Ended the third quarter with $308.1 million in cash and no debt"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A and the earnings release.",
-    "claim": "Input and freight cost inflation, mainly aluminum and freight rates, is pressuring costs. Management says freight remains elevated and that energy costs also affect aluminum inputs.",
+    "basis": "Stated directly in P1, P2, P3, P4, and P6.",
+    "claim": "Depletion and shipment volumes continue to contract, with depletions down 5% and shipments down 4.9% in the third quarter and shipments down 5.4% year to date, following a 4% depletion decline in the prior fiscal year.",
     "facts": [
+     "P1",
+     "P2",
+     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Freight costs remain elevated due to higher transportation rates, labor constraints within the transportation industry and higher fuel costs, while energy costs also impact aluminum input costs, given the energy intensive nature of aluminum production."
+     "Beginning in the second half of 2021, the market for hard seltzer products experienced decelerating growth trends, which contributed to the Company\u2019s depletion volume decline of 5% in 2022, 6% in 2023 (5% decline on a 52-week comparable basis), 2% in 2024 and 4% in 2025.",
+     "Total shipment volume decreased by 4.9% to 1,841,000 barrels for the thirteen weeks ended September 26, 2026, as compared to 1,936,000 barrels for the thirteen weeks ended September 27, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "The 8-K states the facts; the operational impact is inferred from the 10-K risk factor.",
-    "claim": "Finance leadership is in transition: the CFO is stepping down, an interim CFO is in place, and a permanent search is under way. The 10-K also flags CEO turnover in prior years as a risk.",
+    "basis": "Stated directly in P1 and P2.",
+    "claim": "The Company faces intense competition across Beyond beer and Traditional beer from larger brewers and non-alcoholic beverage entrants with substantially greater financial resources, marketing strength, and distribution networks.",
     "facts": [
-     "P7",
+     "P1",
      "P2"
     ],
     "quotes": [
+     "Many of the Company\u2019s competitors, including AB InBev, Molson Coors, Constellation, Heineken and Mark Anthony Brands, have substantially greater financial resources, marketing strength and distribution networks than the Company.",
+     "Several large non-alcoholic beverage companies including Coke, Pepsi, Monster and Arizona have entered the alcoholic beverage market directly or through licensing agreements with alcoholic beverage companies to develop alcohol versions of existing traditional non-alcohol brands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1 and P2.",
+    "claim": "Potential alcohol advertising restrictions, labeling mandates, sales limits, or higher excise taxes, alongside competition from legal cannabis and hemp-derived beverages following federal cannabis reclassification, could adversely affect demand and compliance costs.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "In December 2025, cannabis was reclassified from a Schedule I controlled substance to Schedule III by the federal government, reflecting its recognized medical use and lower potential for abuse.",
+     "In certain states hemp derived beverages are competing with alcoholic beverages for shelf space and drinkers, despite recent federal regulations which restrict their availability after November 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F2, P2, P3, P4, and P6.",
+    "claim": "Although owned-brewery production reached 86% of domestic volume in the prior fiscal year, the Company still relies on third-party facilities\u2014principally City Brewing Company, LLC, which produced 14% of domestic shipment volume\u2014and incurred $1.6 million in third-party shortfall fees and pre-payment amortization in the third quarter.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "A production interruption caused by an acquisition or change of control or bankruptcy of City Brewing Company, LLC, or its subsidiaries, or a simultaneous interruption at several of the Company\u2019s other production locations would likely cause significant disruption, increased costs and, potentially, lost sales.",
+     "In an uncertain volume environment, the Company faces the risk of not being able to support the owned brewery operating costs, if volumes were to decline further."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2, P4, and P6.",
+    "claim": "Cost of goods sold faced $39.1 million in inflationary impacts, including $7.6 million from tariffs, and freight costs rose $20.6 million in the thirty-nine-week period, while unhedged Euro ingredient contracts and single-sourced flavorings, crowns, and labels expose the Company to supply and currency shocks.",
+    "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In 2024 and 2025, certain flavorings, crowns, and labels were each supplied by single sources.",
+     "The Company\u2019s contracts for certain hops and apples are payable in Euros, and therefore, the Company is subject to the risk that the currencies may fluctuate adversely against the U.S. dollar.",
+     "Inflationary impacts of $39.1 million consist primarily of increased material costs, mainly from aluminum, of $31.6 million, inclusive of $7.6 million impact from tariffs, and increased internal brewery costs of $3.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1, P2, P4, and P6.",
+    "claim": "Approximately 94% of beverages are sold in the United States through over 300 independent distributors whose agreements are generally terminable by the distributor on short notice and where state laws often restrict the Company's termination rights.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Contributing to distribution risk is the fact that the Company\u2019s distribution agreements are generally terminable by the Distributor on relatively short notice.",
+     "The Company\u2019s ability to maintain its existing distribution arrangements may be adversely affected by the fact that many of its Distributors are reliant on one of the major beer producers for a large percentage of their revenue and, therefore, they may be influenced by such producers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 and P8.",
+    "claim": "Following recent CEO transitions, the Company is operating under an interim Chief Financial Officer and Treasurer while its Board conducts a formal search for a permanent successor.",
+    "facts": [
+     "P2",
+     "P8"
+    ],
+    "quotes": [
+     "During both 2024 and 2025 the Company has had transition of its Chief Executive Officer.",
+     "On August 17, 2026, Diego Reynoso informed the Company that he was stepping down as the Company\u2019s Treasurer and Chief Financial Officer.",
      "The Company\u2019s Board of Directors has launched a formal search process to identify Mr. Reynoso\u2019s permanent replacement."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors; the supplier is not tied to the litigation in the evidence.",
-    "claim": "The company still depends on third-party production, particularly City Brewing, for part of its domestic volume. A disruption there would hurt supply and costs.",
+    "basis": "Stated directly in P1, P2, P3, P4, and P6.",
+    "claim": "Expanding product complexity across new brands, beverage styles, and retail taprooms alongside heavy advertising, promotional, and selling expenses\u2014at 32.3% of net revenue year to date\u2014may fail to drive durable sales growth and risks inventory obsolescence or brand cannibalization.",
     "facts": [
-     "P2"
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Despite these increases, third party-owned production facilities remain a critical part of the Company\u2019s production strategy and the Company is reliant on them, particularly City Brewing Company, LLC, and its subsidiaries, to meet demand."
+     "The development of new products by the Company to meet these challenges may lead to reduced sales of the Company\u2019s existing brands and there is no guarantee that these new product initiatives will generate stable long term volume.",
+     "The Company invests in advertising and promotional campaigns that it believes will be effective, but there is no guarantee that such investments will generate sales growth."
     ],
     "support": "supported"
    }
@@ -1169,113 +1666,193 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Liability and interest expense are stated in F1 and P4. Payment timing and appeal status are not in the evidence; the question is inferred from that gap.",
-    "claim": "When and how the accrued litigation liability of 194,471 (table in thousands) will be paid, and whether the supplier judgment is under appeal, is not stated; post-judgment interest of $1.8 million was still being booked in the quarter.",
+    "basis": "stated in F1 and P4: F1 references Note I and reports the accrual, and P4 breaks down the judgment and interest without naming the supplier, appeal status, or payment date",
+    "claim": "Who is the counterparty in the supplier dispute, whether the $175.5 million judgment is being appealed, and when the 194,471 (table in thousands) accrued litigation expense will be paid?",
     "facts": [
      "F1",
-     "F2",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "For the thirteen weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $1.8 million, related to the supplier dispute, consisting of post-judgment interest expense."
+     "Accrued litigation expenses | 194,471",
+     "Commitments and Contingencies (See Note I)",
+     "For the thirty-nine weeks ended September 26, 2026, the Company recorded non-recurring pre-tax litigation expense of $194.5 million, related to the supplier dispute, consisting of the judgment of $175.5 million, pre-judgment interest of $15.5 million and post-judgment interest expense of $3.5 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Volume figures and guidance are stated in P6 and P4. The 2027 outlook is not given; its absence is inferred.",
-    "claim": "Whether volume declines ease is unresolved: Q3 depletions fell 5% and shipments fell 4.9%, and full-year guidance is down mid-single digits, but the demand trend into 2027 is not shown.",
+    "basis": "stated in P8 and P6: P8 discloses the formal search for a permanent successor to Diego Reynoso, and P6 shows Matthew D. Murphy remained Interim CFO as of October 22, 2026",
+    "claim": "Who will be appointed as permanent Treasurer and Chief Financial Officer to replace Diego Reynoso, and when will the Board's formal search process conclude?",
     "facts": [
+     "P2",
      "P6",
-     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "The Company\u2019s Board of Directors has launched a formal search process to identify Mr. Reynoso\u2019s permanent replacement.",
+     "On August 20, 2026, the Company\u2019s Board of Directors approved the appointment of Matthew D. Murphy, age 57, to serve as interim Treasurer and Chief Financial Officer, effective September 15, 2026, and until such time as the Company appoints Mr. Reynoso\u2019s permanent successor."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P8: the filing incorporates the Bonus Scale and transition bonus exceptions by reference to documents not included in the packet",
+    "claim": "What performance targets govern the Bonus Scale, and what exceptions in the Offer Letter allow payment of the $700,000 transition bonus installments if employment ends?",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "His bonus potential will be determined by the Company\u2019s performance against its \u201cBonus Scale\u201d, which is described in the Form 8-K filed by the Company on February 17, 2026.",
+     "The full details of the cash bonus are outlined under the heading \u201cInterim CFO Transition Bonus\u201d in the Offer Letter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3: Note K is referenced for facility terms and covenant status is stated only as of the FY2025 Form 10-K filing date",
+    "claim": "What are the maturity, pricing, and financial covenant terms of the $150.0 million credit facility agreement, and whether the Company remained in covenant compliance after recording the litigation accrual?",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Refer to Note K of the Notes to the Consolidated Financial Statements within Part II, Item 8 of this Form 10-K for further details of the terms of the credit facility agreement.",
+     "As of the date of this filing, the Company was not in violation of any of its covenants to the lender under the credit facility.",
+     "Ended the third quarter with $308.1 million in cash and no debt"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P6, P7, and P9: P6 reports repurchases only through October 16, 2026, while P9 and P7 cover plans extending through March 26, 2027",
+    "claim": "How much Class A Common Stock has been repurchased under the $25 million repurchase plan since mid-October, and how much of the $228.4 million remaining authorization will be utilized by the $37.5 million plan?",
+    "facts": [
+     "P3",
+     "P6",
+     "P7",
+     "P9"
+    ],
+    "quotes": [
+     "As of December 27, 2025, the Company had repurchased a cumulative total of approximately 15.8 million shares of its Class A Common Stock for an aggregate purchase price of approximately $1.37 billion and had approximately $228.4 million remaining on the $1.6 billion stock repurchase expenditure limit set by the Board of Directors.",
+     "Repurchased $79.5 million in shares from December 28, 2025 to October 16, 2026",
+     "On August 10, 2026, the Company entered into a 10b5-1 plan to repurchase up to $25 million of the Company\u2019s Class A Common Stock during the period commencing September 28, 2026 and ending December 25, 2026.",
+     "On November 9, 2026, the Company entered into a 10b5-1 plan to repurchase up to $37.5 million of the Company\u2019s Class A Common Stock during the period commencing December 28, 2026 and ending March 26, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2: the Form 10-K explicitly states it is not possible to predict the impact of legal cannabis and hemp-derived beverages on alcohol sales",
+    "claim": "How will federal restrictions on hemp-derived beverages and the reclassification of cannabis to Schedule III affect demand and shelf space for the Company's alcohol beverages?",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "Depletions decreased 5% and shipments decreased 4.9%",
+     "In certain states hemp derived beverages are competing with alcoholic beverages for shelf space and drinkers, despite recent federal regulations which restrict their availability after November 2026.",
+     "Currently, it is not possible to predict the impact of this on sales of alcohol, but it is possible that legal cannabis and hemp derived beverage consumption could adversely impact the demand for the Company\u2019s products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P6: P6 explicitly defers 2027 financial guidance to February 2027, and P2 states there is no guarantee of returning to volume growth",
+    "claim": "What are the Company's full-year 2027 financial targets for shipments, depletions, margins, and earnings, and whether volume declines will reverse?",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Currently, the Company believes it can meet its volume targets in 2026 and return to volume growth in future years, but there is no guarantee its efforts will be successful or profitable.",
      "The Company is planning to provide full year 2027 financial guidance during its fourth quarter earnings call in February 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P7 and P2. The outcome of the search is not in the evidence.",
-    "claim": "Who will become permanent CFO and when is unresolved. The CFO is leaving, an interim CFO is in place, and the 10-K says the CEO role changed hands in both of the prior two years.",
+    "basis": "stated in P4 and P6: P6 notes results are highly sensitive to tariff policy and that most shortfall fees are expensed in the fourth quarter",
+    "claim": "What fourth-quarter tariff charges and supplier shortfall fees will be incurred in 2026, given full-year tariff cost guidance of $18 to $22 (table in $ million) after a $3 million refund and $7.6 million year-to-date tariff impact?",
     "facts": [
-     "P7",
-     "P2",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "The Company\u2019s Board of Directors has launched a formal search process to identify Mr. Reynoso\u2019s permanent replacement.",
-     "During both 2024 and 2025 the Company has had transition of its Chief Executive Officer."
+     "Inflationary impacts of $39.1 million consist primarily of increased material costs, mainly from aluminum, of $31.6 million, inclusive of $7.6 million impact from tariffs, and increased internal brewery costs of $3.0 million.",
+     "Tariff cost projections below, which are net of a $3 million refund received in the third quarter, are consistent with tariffs currently being charged by the Company\u2019s suppliers and that the Company currently expects to continue for the remainder of 2026.",
+     "Tariff Costs ($ million) | $18 to $22 | $20 to $30",
+     "At the midpoint of the full year guidance range, the Company expects year-over-year gross margin rate improvement to be the most meaningful in the fourth quarter as shortfall fees are expected to be lower in 2026 versus 2025 and the Company typically expenses the majority of its shortfall fees in the fourth quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the cited items. Remaining repurchase authorization and post-quarter cash are not in the evidence; this is inferred from that gap.",
-    "claim": "Whether buybacks continue at the 2026 pace after the litigation payment is unresolved: repurchases were $79.5 million through October 16, 2026, cash was 308,072 (table in thousands) against 194,471 (table in thousands) of accrued litigation, and a plan covers up to $25 million to December 25, 2026.",
+    "basis": "stated in F1, F3, and P2: the statements show note receivable reductions via supplier shortfall fees and remaining prepayments without identifying the counterparty or contract terms",
+    "claim": "Who is the borrower on the 7,826 (table in thousands) note receivable, how are supplier shortfall fees applied against it, and how will the 5,324 (table in thousands) third-party production prepayments be utilized as owned-brewery production exceeds 90%?",
     "facts": [
-     "P6",
-     "P8",
      "F1",
-     "F3"
+     "F3",
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "Repurchased $79.5 million in shares from December 28, 2025 to October 16, 2026",
-     "On August 10, 2026, the Company entered into a 10b5-1 plan to repurchase up to $25 million of the Company\u2019s Class A Common Stock during the period commencing September 28, 2026 and ending December 25, 2026."
+     "Third-party production prepayments | 5,324 | 7,099",
+     "Note receivable | 7,826 | 11,218",
+     "Non-cash investing activity - application of supplier shortfall fees to reduce notes receivable and accrued expenses | $ 3,937 | $ 6,008",
+     "The Company has increased the percentage of its domestic volume produced at Company owned breweries from 74% in 2024 to 86% in 2025 and is currently estimating a further increase to over 90% in 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Management's expectation is stated in P6. The actual fourth-quarter outcome is not available and is inferred as unknown.",
-    "claim": "Whether full-year gross margin lands in the 49% to 50% guidance range is unresolved. It depends on lower fourth-quarter shortfall fees and on aluminum and freight cost trends.",
+    "basis": "stated in P1 and P4: P1 announces the Angel City Brewery closure and P4 reports equipment write-offs at Company-owned breweries without naming the sites or closure costs",
+    "claim": "Which Company-owned breweries accounted for the $2.9 million third-quarter impairment of brewery assets, and what closure or lease-exit costs resulted from closing Angel City Brewery?",
     "facts": [
-     "P6",
+     "F2",
+     "P1",
      "P4"
     ],
     "quotes": [
-     "the Company typically expenses the majority of its shortfall fees in the fourth quarter"
+     "The Company announced it will close its local brewery in Los Angeles, California (the \u201cAngel City Brewery\") effective April 30, 2026.",
+     "Impairment of brewery assets of $2.9 million increased by $1.5 million from 2025, due to write-offs of equipment at Company-owned breweries."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from comparing the 10-K estimate in P2 with the Q3 explanation in P4 and the guidance table in P6.",
-    "claim": "How advertising effort is changing is unclear. Q3 advertising spend fell $9.0 million and selling expense guidance is approximately flat, while the 10-K estimated a further increase of between $20 million and $40 million in advertising and promotion for 2026, and the evidence does not reconcile the two.",
+    "basis": "stated in P4 and P6: P4 cites a 12.4% effective tax rate and non-deductible expenses without stating the deductibility or cash tax timing of the litigation accrual",
+    "claim": "What portion of the litigation expense is tax-deductible, and what cash tax refund or reduction will occur when the accrued litigation judgment is paid?",
     "facts": [
+     "F1",
+     "F2",
+     "F3",
      "P4",
-     "P6",
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "a $9.0 million reduction in advertising spend."
+     "The Company\u2019s effective tax rate of 12.4% decreased from 28.8% in the prior year.",
+     "The decrease is primarily due to a pre-tax loss in 2026 compared to pre-tax income in 2025 and the change in impact of non-deductible expenses.",
+     "GAAP Tax Rate (Benefit)/ Provision | (11.0%) to (12.0%) | (11.0%) to (12.0%)"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Direction is stated in P4 and P6. The size of the contribution is missing and inferred as unknown.",
-    "claim": "How much Sun Cruiser growth is contributing to results, and whether it can offset declines in Twisted Tea, Truly and Samuel Adams, is not quantified in the evidence.",
+    "basis": "stated in P1 and P4: the filings give directional brand drivers for 2026 without disaggregating revenue or barrel volume by brand",
+    "claim": "What are the individual shipment volumes and net revenues of Twisted Tea, Truly Hard Seltzer, Sun Cruiser, Samuel Adams, Angry Orchard, and Dogfish Head in 2026?",
     "facts": [
-     "P6",
+     "P1",
      "P4",
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "We are encouraged by the strong performance of Sun Cruiser"
+     "Total shipment volume decreased by 5.4% to 5,448,000 barrels for the thirty-nine weeks ended September 26, 2026, as compared to 5,756,000 barrels for the thirty-nine weeks ended September 27, 2025, primarily due to decreases in Twisted Tea, Truly, Samuel Adams, Hard Mountain Dew and Dogfish Head brands that were partially offset by increases in Sun Cruiser and Angry Orchard brands.",
+     "In 2025, approximately 86% of the Company\u2019s volume is in Beyond beer with the remainder in Traditional beer."
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "SAM",
- "upside": -0.6440877158144533,
+ "upside": -0.4643243470948273,
  "valuation": null,
- "value_base": 73.81623937094461,
- "value_bear": 36.59476351982542,
- "value_bull": 132.47440756978492,
+ "value_base": 111.09917801943917,
+ "value_bear": 50.498821843141656,
+ "value_bull": 213.2589559978809,
  "value_per_filed_share": {
-  "base": 73.81623937094461,
-  "bear": 36.59476351982542,
-  "bull": 132.47440756978492
+  "base": 111.09917801943917,
+  "bear": 50.498821843141656,
+  "bull": 213.2589559978809
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -31.5 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -19.8 points a year against the required return over 3 years"
 }
