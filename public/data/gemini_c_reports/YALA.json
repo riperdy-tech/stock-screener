@@ -1,0 +1,1500 @@
+{
+ "alpha_pts": 24.517715955883823,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 61,
+ "claims_supported": 59,
+ "date": "2026-11-19T12:49:41Z",
+ "decided": {
+  "flags": [
+   "run 1000: growth_outside_filed_record: rev_growth.y1 0.0050 (filed 0.0067 to 1.1260)",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 2.62% base-year tax rate in 2025 fell sharply from 9.40% in 2024 and relies on UAE Qualifying Free Zone Person 0% status and avoiding PRC resident enterprise treatment (25%), making a higher future effective rate likely.",
+   "run 1000: quotes_verified: 21 of 21",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 0.0050 (filed 0.0067 to 1.1260)",
+   "run 3000: tax_rate_representative_no: The 2.62% base-year effective tax rate is well below 2024's 9.4% rate because it relied on Qualifying Free Zone Person 0% status in the UAE, whereas non-qualifying UAE income is taxed at 9% and PRC entities face 15%-25% (with a 25% global tax risk if offshore entities were deemed PRC tax residents).",
+   "run 3000: quotes_verified: 17 of 17"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.3307 (persist), growth 0.0375, terminal RONIC 0.1111 (equity return r 0.1111), F 10",
+  "run_gap": 0.11374771639973018,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 3310028.0,
+       "printed": 3310028,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Investment income (loss) | 3,310,028 | (2,805,945) | 1,728,308"
+        },
+        {
+         "id": "P2",
+         "quote": "Our investment income was US$3.3 million in 2025, compared to an investment loss of US$2.8 million in 2024, primarily due to changes in the fair value of wealth management products."
+        }
+       ],
+       "quotes_given": 2,
+       "scale": "units",
+       "sign": "gain",
+       "what": "Investment income from fair value changes of wealth management products in 2025 (which swung from a loss in 2024)"
+      }
+     ],
+     "cash_interest_returned": 66083.14023092367,
+     "cash_not_free": {
+      "amount": 1625525.0,
+      "printed": 1625525,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash | 1,625,525 | 1,975,616"
+       },
+       {
+        "id": "F1",
+        "quote": "CONSOLIDATED BALANCE SHEETS - USD ($) | Dec. 31, 2025 | Dec. 31, 2024"
+       }
+      ],
+      "quotes_given": 2,
+      "scale": "units",
+      "what": "Restricted cash on the December 31, 2025 balance sheet"
+     },
+     "excess_cash_after": 666597622.0,
+     "excess_cash_before": 668223147.0,
+     "k0_after": 506316.86835098267,
+     "k0_before": -2737627.9914180934,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 3310028.0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 118526071.86595152,
+     "x0_before": 121685132.48140684
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1018674875.825367,
+     "seam_ratio": 1.0123433297931737,
+     "tv_share": 0.34451299199696434,
+     "wedge_rate_5": -0.005796042873072025
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.0050 (filed 0.0067 to 1.1260)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2.62% base-year tax rate in 2025 fell sharply from 9.40% in 2024 and relies on UAE Qualifying Free Zone Person 0% status and avoiding PRC resident enterprise treatment (25%), making a higher future effective rate likely.",
+     "quotes_verified: 21 of 21"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.005,
+     "fade_years": 8,
+     "long_run_op_margin": 0.25,
+     "op_margin": [
+      0.28,
+      0.275,
+      0.275,
+      0.27,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.28,
+     "rev_growth": [
+      0.005,
+      0.025,
+      0.035,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "margin 0.3307 (persist), growth 0.0375, terminal RONIC 0.1111 (equity return r 0.1111), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 59
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.19,
+      0.31
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.07
+     ],
+     "terminal_growth": [
+      0.015,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0044; depreciation (without amortization of acquired intangibles) / revenue 0.0040."
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (1,976,915) | (705,863) | (1,275,612)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Product and game development costs are expensed in technology and product development rather than capitalized, keeping physical capital expenditures very small at $1.98 million (0.58% of revenue) in 2025 and 0.44% pooled over 2021-2025. Modeling 0.5% of revenue in years 1-5 matches this five-year historical run rate and depreciation."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues."
+       },
+       {
+        "id": "P2",
+        "quote": "Our revenues increased by 6.5% from US$318.9 million in 2023 to US$339.7 million in 2024 and further increased by 0.7% to US$341.9 million in 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "An 8-year fade reflects Yalla's entrenched cultural localization and community network effects in MENA voice chat and casual board games, balanced against intensifying entertainment competition and shorter product lifecycles in mid-core and hard-core mobile gaming."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Therefore, we do not incur significant content acquisition cost, such as incentive fees to key users or costs for acquiring media content. Our user acquisition channels have been cost-effective. As a result, we are able to achieve high profitability."
+       },
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $303.6 million | 0.1116 | 0.2592"
+       },
+       {
+        "id": "P1",
+        "quote": "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Yalla's peer-to-peer social leisure model avoids significant media or creator content acquisition costs, supporting structurally above-average software margins over time. However, increasing reliance on mid-core/hard-core games and competitive MENA user acquisition should pull long-run operating margins down to 25.0%, below the 2021-2025 median of 30.40% and 2022's 25.92%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Technology and product development expenses as a percentage of our total revenues increased from 8.5% in 2024 to 10.0% in 2025."
+       },
+       {
+        "id": "P4",
+        "quote": "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency."
+       },
+       {
+        "id": "P3",
+        "quote": "Net income was US$32.7 million in the third quarter of 2026, compared with US$40.7 million in the third quarter of 2025. Net margin1 was 36.2% in the third quarter of 2026."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Although 2025 operating margin held at 35.74% aided by lower third-party payment commissions, Q2 and Q3 2026 net margins dropped roughly 7 to 9 percentage points YoY (to 35.5% and 36.2%) as Yalla doubled selling and marketing expenses and grew R&D headcount to launch new games. Operating margin is therefore modeled at 28.0% in year 1 and ~27.0%-27.5% in years 2-5 as new product user acquisition remains elevated."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.8390; tax rate 0.0262; total debt $0.0 million; cash counted as excess $668.2 million; net debt (debt less that cash) $-668.2 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1111."
+       },
+       {
+        "id": "F1",
+        "quote": "Property and equipment, net | 14,976,818 | 13,962,393"
+       },
+       {
+        "id": "F1",
+        "quote": "Deferred revenue, current | 55,178,093 | 58,081,649"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Yalla earned an 83.90% return on tangible capital in 2025 because its asset-light software model requires minimal fixed assets ($15.0 million net PP&E) and operates with negative working capital driven by $55.2 million of current deferred revenue. While incremental returns on new gaming investments will normalize well below 83.90% as competition rises, low capital intensity should preserve a 28.0% long-run incremental return, comfortably above the 11.11% cost of equity."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $341.9 million | 0.0067 | 0.3574"
+       },
+       {
+        "id": "P4",
+        "quote": "Revenues were US$82.6 million in the second quarter of 2026, compared with US$84.6 million in the second quarter of 2025."
+       },
+       {
+        "id": "P3",
+        "quote": "Revenues were US$90.4 million in the third quarter of 2026, representing an increase of 0.9% from the third quarter of 2025."
+       },
+       {
+        "id": "P3",
+        "quote": "Revenues once again exceeded the upper end of our guidance, with game services revenue increasing by 13.7% year over year."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Growth decelerated to 0.67% in 2025, fell to -2.4% YoY in Q2 2026, and edged up 0.9% YoY in Q3 2026 as legacy chatting services matured while games services grew 13.7% YoY. As the faster-growing gaming segment (now over 40% of revenue) and new titles gain weight alongside 8%-12% MAU growth, top-line growth should modestly re-accelerate from ~0.5% in 2026 toward 3.5% by years 3-5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1111; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "Our average MAUs increased by 14.4% from 36.2 million in the three months ended December 31, 2023 to 41.4 million in the three months ended December 31, 2024, and further increased by 8.2% to 44.8 million in the three months ended December 31, 2025."
+       },
+       {
+        "id": "P3",
+        "quote": "Meanwhile, our new gaming initiatives began contributing to revenues as anticipated, complementing our core business and diversifying our growth drivers."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Yalla continues to expand its MENA user base (average MAUs up 8.2% YoY in Q4 2025 and 47.2 million in Q3 2026) and broaden its gaming portfolio, supporting durable nominal cash flow growth. Because flagship voice-chat revenues have already flattened and gaming relies on ongoing hit replacement, perpetual growth is set at 3.0%, modestly below the 3.75% nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.16,
+      "input_hit": "long_run_op_margin",
+      "risk": "Sustained escalation in user acquisition marketing and R&D spending\u2014or loss of payment-channel fee savings\u2014if legacy Yalla chatting erodes faster and new games require heavy promotion to scale"
+     },
+     {
+      "bear_value": 0.005,
+      "input_hit": "terminal_growth",
+      "risk": "New mid-core/hard-core gaming titles fail to scale sufficiently to offset mature flagship voice-chat attrition or MENA macroeconomic/regional disruption"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Competitive pressure in mobile gaming forces higher capital/working-capital intensity and lower monetization efficiency on incremental investments"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.19,
+      "rev_growth": [
+       -0.030000000000000002,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.31,
+      "rev_growth": [
+       0.04,
+       0.060000000000000005,
+       0.07,
+       0.07,
+       0.07
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Yalla reported zero borrowings in 2024, 2025, and as of September 30, 2026 alongside large cash, term deposit, and investment balances, with no indication of plans to take on debt."
+     },
+     "margin_position": "Operating margin stood at 35.74% in both 2024 and 2025, above the 2021-2025 five-year median of 30.40%, because Yalla's user-generated voice rooms avoid creator/media content costs and payment-channel diversification reduced 2025 cost of revenues to 32.7%; however, Q2 and Q3 2026 net margins compressed by roughly 7 to 9 percentage points as selling and marketing doubled year over year to promote new products.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2.62% base-year tax rate in 2025 fell sharply from 9.40% in 2024 and relies on UAE Qualifying Free Zone Person 0% status and avoiding PRC resident enterprise treatment (25%), making a higher future effective rate likely."
+     },
+     "why": "While 2025 achieved a 35.74% operating margin and a 2.62% effective tax rate, revenue growth decelerated to 0.7% in 2025 and turned slightly negative (-2.4% YoY) in Q2 2026 before +0.9% YoY in Q3 2026. More importantly, 2026 marks a deliberate step-up in reinvestment\u2014doubling selling and marketing expenses in Q2 2026 alongside an 18% R&D expansion in 2025\u2014which compressed Q2 and Q3 2026 net margins to 35.5% and 36.2%, respectively. In addition, the 2.62% base-year tax rate reflects UAE Qualifying Free Zone Person relief that is sensitive to statutory compliance and regional tax rules."
+    },
+    "value_at_old_defaults": 11.568887688645331,
+    "values": {
+     "base": 9.911263595879063,
+     "bear": 8.012405165339295,
+     "bull": 13.155251606648859
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 3310028.0,
+       "printed": 3310028,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Investment income (loss) | 3,310,028 | (2,805,945) | 1,728,308"
+        },
+        {
+         "id": "P2",
+         "quote": "Our investment income was US$3.3 million in 2025, compared to an investment loss of US$2.8 million in 2024, primarily due to changes in the fair value of wealth management products."
+        }
+       ],
+       "quotes_given": 2,
+       "scale": "units",
+       "sign": "gain",
+       "what": "Investment income from fair-value changes of wealth management products"
+      }
+     ],
+     "cash_interest_returned": 66083.14023092367,
+     "cash_not_free": {
+      "amount": 1625525.0,
+      "printed": 1625525,
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Restricted cash | 1,625,525 | 1,975,616"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "units",
+      "what": "restricted cash"
+     },
+     "excess_cash_after": 666597622.0,
+     "excess_cash_before": 668223147.0,
+     "k0_after": 506316.86835098267,
+     "k0_before": -2737627.9914180934,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 3310028.0,
+     "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted"
+     ],
+     "x0_after": 118526071.86595152,
+     "x0_before": 121685132.48140684
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1214771741.9138908,
+     "seam_ratio": 1.0126139325522334,
+     "tv_share": 0.36695329721113146,
+     "wedge_rate_5": -0.008233340714395465
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 0.0050 (filed 0.0067 to 1.1260)",
+     "tax_rate_representative_no: The 2.62% base-year effective tax rate is well below 2024's 9.4% rate because it relied on Qualifying Free Zone Person 0% status in the UAE, whereas non-qualifying UAE income is taxed at 9% and PRC entities face 15%-25% (with a 25% global tax risk if offshore entities were deemed PRC tax residents).",
+     "quotes_verified: 17 of 17"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.005,
+     "fade_years": 8,
+     "long_run_op_margin": 0.29,
+     "op_margin": [
+      0.295,
+      0.3,
+      0.305,
+      0.31,
+      0.31
+     ],
+     "return_on_new_investment_long_run": 0.25,
+     "rev_growth": [
+      0.005,
+      0.035,
+      0.045,
+      0.04,
+      0.038
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.3307 (persist), growth 0.0375, terminal RONIC 0.1111 (equity return r 0.1111), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 59
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.22,
+      0.34
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.09
+     ],
+     "terminal_growth": [
+      0.015,
+      0.042
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0044; depreciation (without amortization of acquired intangibles) / revenue 0.0040."
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (1,976,915) | (705,863) | (1,275,612)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Yalla's software-only platform requires minimal physical capital, with capex-to-revenue averaging 0.44% over 2021-2025 and standing at 0.58% in 2025, supporting a 0.50% forecast."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Leveraging the above advantages, we have built a large and vibrant Yalla community and are the largest MENA-based online social networking and gaming company in terms of revenue in 2022 according to Frost and Sullivan."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "An 8-year fade reflects meaningful community lock-in and Arabic cultural localization in Yalla's core MENA voice-chat and Ludo franchises, balanced against faster product-cycle obsolescence in mobile gaming."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Our innovative business model focuses on users\u2019 interactions and social networking experience on our platform. Therefore, we do not incur significant content acquisition cost, such as incentive fees to key users or costs for acquiring media content. Our user acquisition channels have been cost-effective. As a result, we are able to achieve high profitability."
+       },
+       {
+        "id": "P2",
+        "quote": "Our cost of revenues decreased by 7.1% from US$120.5 million in 2024 to US$111.9 million in 2025, mainly due to lower commission fees paid to third-party payment platforms by US$4.9 million from 2024 to 2025 as a result of diversified payment channels."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run operating margin fades to 29.0%, slightly below the 5-year median of 30.40%, balancing Yalla's structural lack of content-acquisition or creator-payout costs against a higher permanent mix of competitive mid-core/hard-core gaming requiring ongoing R&D and paid user acquisition."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2021-12-31 | $273.1 million | 1.0243 | 0.3040"
+       },
+       {
+        "id": "P4",
+        "quote": "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency."
+       },
+       {
+        "id": "P3",
+        "quote": "Net income was US$32.7 million in the third quarter of 2026, compared with US$40.7 million in the third quarter of 2025. Net margin1 was 36.2% in the third quarter of 2026."
+       },
+       {
+        "id": "P2",
+        "quote": "Technology and product development expenses as a percentage of our total revenues increased from 8.5% in 2024 to 10.0% in 2025."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Operating margin steps down from 35.74% in 2025 to 29.5% in Year 1 because selling and marketing expenses doubled year over year in Q2 2026 and R&D headcount expanded, compressing Q2 and Q3 2026 net margins by ~800-900 bps. As new games scale past launch marketing, margins recover modestly toward the 30.40% 5-year median while remaining below 2024-2025 peaks."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.8390; tax rate 0.0262; total debt $0.0 million; cash counted as excess $668.2 million; net debt (debt less that cash) $-668.2 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1111."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is 83.90% due to minimal fixed assets and negative working capital from deferred revenue, but incremental returns on new capital will compress toward 25% (still well above the 11.11% zero-value hurdle) as expansion shifts into capital- and marketing-intensive gaming."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $341.9 million | 0.0067 | 0.3574"
+       },
+       {
+        "id": "P4",
+        "quote": "Revenues were US$82.6 million in the second quarter of 2026, compared with US$84.6 million in the second quarter of 2025."
+       },
+       {
+        "id": "P3",
+        "quote": "Revenues were US$90.4 million in the third quarter of 2026, representing an increase of 0.9% from the third quarter of 2025."
+       },
+       {
+        "id": "P3",
+        "quote": "Revenues once again exceeded the upper end of our guidance, with game services revenue increasing by 13.7% year over year."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 growth of 0.5% reflects 2025's 0.67% deceleration and 2026 YTD results where Q2 revenue dipped 2.4% year over year before Q3 returned to +0.9% growth. Years 2-5 modestly re-accelerate to 3.5%-4.5% as new gaming initiatives (+13.7% YoY in Q3 2026) and growing MAUs offset mature legacy chatting before converging toward the 3.75% nominal anchor."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1111; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "In the fourth quarter of 2025, approximately 44.8 million users visited our platform on average each month, and the number of paying users on our platform reached 10.4 million during the same period."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Terminal growth of 3.5% sits just below the 3.75% nominal growth anchor, reflecting healthy long-term MENA mobile internet demographics tempered by maturing flagship chat revenues and game-lifecycle competition."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.2,
+      "input_hit": "long_run_op_margin",
+      "risk": "New mid-core/hard-core games fail to achieve profitable scale while elevated user-acquisition marketing and R&D headcount become permanent, structurally compressing operating margins."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Maturing flagship apps (Yalla and Yalla Ludo) lose paying users or MENA competitive pressure erodes ARPPU without offsetting new-title revenue, pushing perpetual growth toward stagnation."
+     },
+     {
+      "bear_value": 0.11,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "New product diversification and rising customer-acquisition costs earn near or below the 11.11% cost of capital on incremental investment."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.22,
+      "rev_growth": [
+       -0.04,
+       -0.009999999999999995,
+       0.0,
+       -0.0049999999999999975,
+       -0.006999999999999999
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.34,
+      "rev_growth": [
+       0.049999999999999996,
+       0.08,
+       0.09,
+       0.08499999999999999,
+       0.08299999999999999
+      ],
+      "terminal_growth": 0.042
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Yalla carries zero financial debt alongside $527.0 million of cash and cash equivalents and $137.5 million of operating cash flow in 2025, so its asset-light platform has no structural need for leverage."
+     },
+     "margin_position": "Operating margin reached 35.74% in both 2024 and 2025, above the 2021-2025 median of 30.40%, because peer-to-peer voice chat rooms avoid creator or media content acquisition costs and diversified payment channels lowered payment processing commissions, though 2026 new-game marketing and R&D investments are pulling margins back down.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2.62% base-year effective tax rate is well below 2024's 9.4% rate because it relied on Qualifying Free Zone Person 0% status in the UAE, whereas non-qualifying UAE income is taxed at 9% and PRC entities face 15%-25% (with a 25% global tax risk if offshore entities were deemed PRC tax residents)."
+     },
+     "why": "Yalla operates a localized MENA mobile social networking and casual gaming platform rather than a cyclical commodity business, though monetization fluctuates with third-party payment promotions and game launches. While 2025 operating margin matched 2024 at 35.74%, revenue growth slowed to 0.67% and 2026 has seen selling and marketing expenses double year over year in Q2 alongside net margin compression to 35.5%-36.2% in Q2 and Q3. In addition, 2025 pre-tax and net income benefited from a $3.3 million fair-value investment gain and a drop in the effective tax rate to 2.62%."
+    },
+    "value_at_old_defaults": 11.568887688645331,
+    "values": {
+     "base": 11.106632434362531,
+     "bear": 8.440758436315093,
+     "bull": 14.783513243673292
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 11.568887688645331,
+  "value_at_old_defaults_quoted": 11.568887688645331,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 1892480888.7068756,
+ "family": "operating",
+ "far_from_price": true,
+ "filed_shares": 180082810.0,
+ "flags": [],
+ "in_code_book": false,
+ "ke": 0.11114375453902048,
+ "market_cap_at_publish": 901864187,
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 5.94,
+ "qwen_book": null,
+ "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
+ "seed_base": {
+  "1000": 9.911263595879063,
+  "3000": 11.106632434362531
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in P2",
+    "claim": "Yalla Group Limited operates a mobile social networking and gaming platform where users access basic group chatting functions for free and can purchase virtual currencies to buy virtual items, upgrade services, or play games.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We operate a social networking and gaming platform using a revenue model whereby users can get free access to the basic functions on the platform for our group chatting service but have the options to purchase virtual currencies.",
+     "Individual users consume virtual currencies to purchase virtual items and upgrade services or play games on our platform."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "The platform sells virtual items consisting mainly of virtual gifts and chat room or game privileges, along with upgrade services such as VIP rights or premium memberships, none of which are convertible into real money or resalable between users.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Virtual items primarily consist of various virtual gifts and privileges in chat rooms or games.",
+     "Upgrade services primarily consist of VIP rights or premium membership on our platform.",
+     "While our users may receive virtual gifts and accumulate virtual currencies on our platform, none of the virtual gifts and virtual currencies are convertible into real money under any circumstance and our users are unable to sell such virtual items to other users through our platform."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "The company serves individual users primarily in the Middle East and North Africa (MENA), particularly Arabic-speaking users, with products localized to regional customs and offline social leisure traditions.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "A substantial number of our users are Arabic-speaking, and activities on our platform mirror popular offline social leisure activities in MENA.",
+     "In addition, we launched three more casual game mobile applications targeting different regions, namely Yalla Baloot, a card game designed for Saudi Arabian users, 101 Okey Yalla, a board game designed for Turkish users, and Yalla Parchis, a South American version of Yalla Ludo."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "Although Yalla has added Yalla Game Limited for mid-core and hard-core games alongside Yalla Baloot, 101 Okey Yalla, Yalla Parchis, YallaChat, and WeMuslim, its two flagship apps\u2014Yalla and Yalla Ludo\u2014still contribute the majority of revenues.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We operate two flagship mobile applications, Yalla, a voice-centric group chat platform, and Yalla Ludo, a casual gaming application featuring online versions of board games popular in MENA, with in-game voice chat and localized majlis functions.",
+     "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in F2, P3, and P4",
+    "claim": "The annual consolidated income statement reports a single Revenues line ($ 341,938,110 in 2025), whereas quarterly releases disaggregate revenue into chatting services (US$50.3 million in the third quarter of 2026) and games services (US$38.4 million in the third quarter of 2026), with management referring to games services as a segment (41.4% of total revenue in the second quarter of 2026).",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Revenues | $ 341,938,110 | $ 339,675,845 | $ 318,877,564",
+     "Revenues generated from chatting services in the third quarter of 2026 were US$50.3 million.",
+     "Revenues generated from games services in the third quarter of 2026 were US$38.4 million.",
+     "Total revenues were US$82.6 million, with revenues from games services growing to US$34.2 million, increasing the segment\u2019s contribution to 41.4%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Expanding the active user base drives revenue potential, with average MAUs rising 14.4% to 41.4 million in the fourth quarter of 2024, 8.2% to 44.8 million in the fourth quarter of 2025, and reaching 47,241 (table in thousands) in the third quarter of 2026.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our average MAUs increased by 14.4% from 36.2 million in the three months ended December 31, 2023 to 41.4 million in the three months ended December 31, 2024, and further increased by 8.2% to 44.8 million in the three months ended December 31, 2025.",
+     "Average MAUs (in thousands) | 43,420 | 47,241"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Revenues are directly affected by paying users and ARPPU: in the fourth quarter of 2025 paying users fell from 12.3 million to 10.4 million due to fewer third-party payment platform promotions while ARPPU rose from US$7.2 to US$7.9, before paying users increased 6.2% year over year to 12.1 million in the third quarter of 2026.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our revenues are primarily affected by the number of paying users and ARPPU.",
+     "The number of paying users decreased from 12.3 million for the fourth quarter of 2024 to 10.4 million for the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms in the same period.",
+     "Our ARPPU increased from US$7.2 in the fourth quarter of 2024 to US$7.9 in the same period of 2025 mainly because our enhanced social and gamification features derive users to spend more on our platform.",
+     "Our flagship products continued to demonstrate strong user engagement and community loyalty, driving a year-over-year increase of 6.2% in paying users to 12.1 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Because the platform centers on user-to-user interactions, the company avoids significant content acquisition costs such as incentive fees to key users or media content purchases, while benefiting from organic word-of-mouth user referrals.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "As our platform promotes users\u2019 interactions, we do not incur significant content acquisition cost, such as incentive fees to key users or costs for acquiring media content.",
+     "We benefit from organic user acquisition through word-of-mouth referrals, and we will also continue to focus on cost-effective user acquisition channels to manage selling and marketing expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Cost of revenues consists mainly of third-party payment platform commission fees and platform operations staff costs, decreasing 7.1% from US$120.5 million in 2024 to US$111.9 million in 2025 primarily because diversified payment channels lowered commission fees by US$4.9 million.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our cost of revenues consists primarily of (i) commission fees paid to third party payment platforms and (ii) staff cost and expenses related to the operations of our mobile platform.",
+     "Our cost of revenues decreased by 7.1% from US$120.5 million in 2024 to US$111.9 million in 2025, mainly due to lower commission fees paid to third-party payment platforms by US$4.9 million from 2024 to 2025 as a result of diversified payment channels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P4",
+    "claim": "Selling and marketing expenses are driven primarily by advertising and market promotion alongside staff, rental, and depreciation costs, increasing 10.2% from US$31.3 million in 2024 to US$34.6 million in 2025 as advertising and promotion rose US$7.3 million, and doubling year over year in the second quarter of 2026 to promote new products.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Our selling and marketing expenses consist primarily of (i) advertising costs and market promotion expenses and (ii) staff cost, rental and depreciation related to selling and marketing functions.",
+     "Our selling and marketing expenses increased by 10.2% from US$31.3 million in 2024 to US$34.6 million in 2025, mainly due to an increase in advertising and market promotion expenses by US$7.3 million from 2024 to 2025 attributable to our continued user acquisition efforts and expanding product portfolio, and partially offset by a decrease of US$2.9 million in salaries and benefits for our selling and marketing staff.",
+     "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Technology and product development expenses consist mainly of staff and related costs for designing new platform features and self-developed games, growing 18.0% from US$29.0 million in 2024 to US$34.3 million in 2025 on a US$5.4 million rise in staff salaries and benefits from headcount expansion.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our technology and product development expenses consist primarily of (i) staff cost and (ii) related expenses for the employees involved in designing and developing new features for our mobile platform and self-developed mobile games.",
+     "Our technology and product development expenses increased by 18.0% from US$29.0 million in 2024 to US$34.3 million in 2025, mainly due to an increase in salaries and benefits for our technology and product development staff by US$5.4 million from 2024 to 2025, driven by an increase in the headcount of our technology and product development staff to support the development of new businesses and expansion of our product portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "General and administrative expenses consist primarily of staff costs, rental, depreciation, professional service fees, and corporate expenses, rising 4.1% from US$37.4 million in 2024 to US$39.0 million in 2025 mainly due to a US$2.1 million increase in foreign exchange loss.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our general and administrative expenses consist primarily of (i) staff cost, rental and depreciation related to general and administrative personnel, (ii) professional service fees and (iii) other corporate expenses.",
+     "The increase was mainly due to an increase in foreign exchange loss of US$2.1 million from 2024 to 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the cited items",
+    "claim": "Yalla states it was the largest MENA-based online social networking and gaming company by revenue in 2022 according to Frost and Sullivan, and continues to describe itself as the largest in MENA in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Leveraging the above advantages, we have built a large and vibrant Yalla community and are the largest MENA-based online social networking and gaming company in terms of revenue in 2022 according to Frost and Sullivan.",
+     "Yalla Group Limited (\u201cYalla\u201d or the \u201cCompany\u201d) (NYSE: YALA), the largest Middle East and North Africa (MENA)-based online social networking and gaming company, today announced its unaudited financial results for the third quarter ended September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Yalla's competitive position is anchored by its flagship applications Yalla and Yalla Ludo, which continue to generate the majority of revenues despite newer product launches.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We operate two flagship mobile applications, Yalla, a voice-centric group chat platform, and Yalla Ludo, a casual gaming application featuring online versions of board games popular in MENA, with in-game voice chat and localized majlis functions.",
+     "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Management differentiates Yalla from other platforms through deep MENA cultural localization and an equal-status, active-participation community design.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our ability to faithfully preserve the traditional flavors of local offline social life also differentiates us from other platforms.",
+     "There are no differences of influencers and followers, or gurus and newbies.",
+     "We believe these social interactions foster a sense of community among users and enable our platform to attract and retain users more effectively compared to other platforms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Yalla's user-interaction model avoids significant content acquisition costs and relies on organic word-of-mouth referrals and cost-effective user acquisition to support profitability.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Therefore, we do not incur significant content acquisition cost, such as incentive fees to key users or costs for acquiring media content.",
+     "We benefit from organic user acquisition through word-of-mouth referrals, and we will also continue to focus on cost-effective user acquisition channels to manage selling and marketing expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Average MAUs grew from 36.2 million in the three months ended December 31, 2023 to 44.8 million in the three months ended December 31, 2025, and reached 47,241 (table in thousands) in the three months ended September 30, 2026.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our average MAUs increased by 14.4% from 36.2 million in the three months ended December 31, 2023 to 41.4 million in the three months ended December 31, 2024, and further increased by 8.2% to 44.8 million in the three months ended December 31, 2025.",
+     "Average MAUs (in thousands) | 43,420 | 47,241"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Paying users fell from 12.3 million in the fourth quarter of 2024 to 10.4 million in the fourth quarter of 2025 before rising 6.2% year over year to 12.1 million in the third quarter of 2026, while ARPPU rose from US$7.2 to US$7.9 between those fourth quarters.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The number of paying users decreased from 12.3 million for the fourth quarter of 2024 to 10.4 million for the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms in the same period.",
+     "Our ARPPU increased from US$7.2 in the fourth quarter of 2024 to US$7.9 in the same period of 2025 mainly because our enhanced social and gamification features derive users to spend more on our platform.",
+     "Our flagship products continued to demonstrate strong user engagement and community loyalty, driving a year-over-year increase of 6.2% in paying users to 12.1 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Revenue growth slowed from 6.5% in 2024 to 0.7% in 2025 (US$341.9 million) and 0.9% year over year in the third quarter of 2026 (US$90.4 million), while game services revenue grew 13.7% year over year in the third quarter of 2026.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our revenues increased by 6.5% from US$318.9 million in 2023 to US$339.7 million in 2024 and further increased by 0.7% to US$341.9 million in 2025.",
+     "Revenues were US$90.4 million in the third quarter of 2026, representing an increase of 0.9% from the third quarter of 2025.",
+     "Revenues once again exceeded the upper end of our guidance, with game services revenue increasing by 13.7% year over year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Net income grew 10.4% to US$148.1 million in 2025, whereas net margin narrowed to 35.5% in the second quarter of 2026 and 36.2% in the third quarter of 2026 as selling and marketing expenses doubled year over year in the second quarter of 2026.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "As a result of the foregoing, our net income increased by 10.4% from US$134.2 million in 2024 to US$148.1 million in 2025.",
+     "Net margin1 was 35.5% in the second quarter of 2026.",
+     "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency.",
+     "Net margin1 was 36.2% in the third quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Yalla ended 2025 with $ 526,972,019 in cash and cash equivalents, 84,800,000 in term deposits, and 141,251,128 in short-term investments against 94,172,576 in total liabilities, providing balance sheet liquidity to fund expansion.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 526,972,019 | $ 488,379,894",
+     "Term deposits | 84,800,000 | 94,983,813",
+     "Short-term investments | 141,251,128 | 70,932,713",
+     "Total liabilities | 94,172,576 | 103,822,653",
+     "Our balance sheet and cash flow remain ample to support our investments in business expansion as well as consistent shareholder returns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Management identifies the MENA competitive landscape, competition among different forms of entertainment, shifting user preferences, and regional political, economic, and social conditions as threats to demand and operating results.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "social networking and gaming habits and trends in MENA, including competition among different forms of entertainment; and",
+     "growth and competitive landscape of the social networking and gaming industry in MENA.",
+     "Changes in any of these general industry conditions could affect demand for our services, as well as our results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Future performance is threatened if Yalla cannot continue expanding its user base, broadening content offerings, converting non-paying users, and maintaining cost-effective user acquisition channels.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our ability to expand user base depends on our abilities to, among other things, deliver superior user experience, raise brand recognition, utilize cost-effective user acquisition channels and increase attractiveness and breadth of content offerings.",
+     "Our results of operations mainly depend on our ability to monetize our user base by converting non-paying users into paying users and keeping them active."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Yalla depends on third-party payment platforms that charge commission fees in cost of revenues and whose reduced promotional events caused paying users to decline in the fourth quarter of 2025.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our cost of revenues consists primarily of (i) commission fees paid to third party payment platforms and (ii) staff cost and expenses related to the operations of our mobile platform.",
+     "The number of paying users decreased from 12.3 million for the fourth quarter of 2024 to 10.4 million for the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms in the same period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Diversifying beyond flagship applications has required higher investment, with technology and product development expenses rising 18.0% in 2025 and selling and marketing expenses doubling year over year in the second quarter of 2026.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Our technology and product development expenses increased by 18.0% from US$29.0 million in 2024 to US$34.3 million in 2025, mainly due to an increase in salaries and benefits for our technology and product development staff by US$5.4 million from 2024 to 2025, driven by an increase in the headcount of our technology and product development staff to support the development of new businesses and expansion of our product portfolio.",
+     "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Yalla faces tax-rate threats if UAE subsidiaries fail Qualifying Free Zone Person conditions (subjecting them to a 9% corporate tax rate instead of 0%) or if PRC authorities deem its offshore entities PRC tax residents subject to a 25% rate.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Certain of our UAE subsidiaries apply 0% tax rate on their qualifying income, as QFZP for the years ended December 31, 2024 and 2025, while other UAE subsidiaries are subject to the corporate tax at a rate of 9%.",
+     "If a free zone person does not meet all the conditions, it will be subject to a rate of 9% on its taxable income.",
+     "If the PRC tax authorities subsequently determine that our company and our subsidiaries registered outside the mainland China are deemed resident enterprises, our company and our subsidiaries registered outside the mainland China will be subject to the PRC income tax at a rate of 25%."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in the cited item: consolidated balance sheet lines in F1 and P3",
+    "claim": "Yalla held 807,899,914 (US$) in total current assets against 81,020,694 (US$) in total current liabilities as of September 30, 2026, compared with 796,307,898 (US$) and 88,315,651 (US$) as of December 31, 2025.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "Total current assets | 796,307,898 | 807,899,914",
+     "Total current liabilities | 88,315,651 | 81,020,694",
+     "Total current assets | 796,307,898 | 691,702,024"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item: unaudited balance sheet in P3",
+    "claim": "Between December 31, 2025 and September 30, 2026, cash and cash equivalents decreased from 526,972,019 (US$) to 264,779,796 (US$), while term deposits rose from 84,800,000 (US$) to 216,640,733 (US$), short-term investments rose from 141,251,128 (US$) to 288,934,364 (US$), and long-term investments rose from 82,053,772 (US$) to 139,883,487 (US$).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | 526,972,019 | 264,779,796",
+     "Term deposits | 84,800,000 | 216,640,733",
+     "Short-term investments | 141,251,128 | 288,934,364",
+     "Long-term investments | 82,053,772 | 139,883,487"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (liability, equity, and asset totals in F1 and P3) and inferred (absence of borrowings from no debt line items appearing on the balance sheets)",
+    "claim": "The consolidated balance sheets report no short-term or long-term debt or borrowings, with total liabilities of 94,172,576 (USD) versus total equity of 802,046,915 (USD) as of Dec. 31, 2025, and total liabilities of 87,626,751 (US$) against total assets of 969,935,906 (US$) as of September 30, 2026.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "Total liabilities | 94,172,576 | 103,822,653",
+     "Total equity | 802,046,915 | 697,807,607",
+     "Total liabilities | 94,172,576 | 87,626,751",
+     "Total assets | 896,219,491 | 969,935,906"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item: balance sheet liability breakdown in P3",
+    "claim": "Reported liabilities consist primarily of operational obligations such as current deferred revenue of 48,766,033 (US$) and accrued expenses and other current liabilities of 28,764,386 (US$) as of September 30, 2026, while the only debt-like obligations shown are current operating lease liabilities of 1,790,810 (US$) and non-current operating lease liabilities of 1,912,916 (US$).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Deferred revenue, current | 55,178,093 | 48,766,033",
+     "Accrued expenses and other current liabilities | 30,350,120 | 28,764,386",
+     "Operating lease liabilities, current | 357,525 | 1,790,810",
+     "Operating lease liabilities, non-current | 1,095,245 | 1,912,916"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item: consolidated statements of cash flows in F3",
+    "claim": "Net cash provided by operating activities was 137,536,580 (USD) in 2025, 172,816,826 (USD) in 2024, and 139,319,553 (USD) in 2023, against purchases of property and equipment of (1,976,915) (USD), (705,863) (USD), and (1,275,612) (USD), respectively.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 137,536,580 | 172,816,826 | 139,319,553",
+     "Purchase of property and equipment | (1,976,915) | (705,863) | (1,275,612)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item: quarterly financial results releases in P3 and P4",
+    "claim": "Yalla reported net income of US$29.3 million in the second quarter of 2026 and US$32.7 million in the third quarter of 2026, and management stated in the second quarter release that its balance sheet and cash flow remained ample.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Net income was US$29.3 million in the second quarter of 2026, compared with US$36.5 million in the second quarter of 2025.",
+     "Net income was US$32.7 million in the third quarter of 2026, compared with US$40.7 million in the third quarter of 2025.",
+     "Our balance sheet and cash flow remain ample to support our investments in business expansion as well as consistent shareholder returns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item: operating cash flow reconciliation in F3",
+    "claim": "In 2025, net cash provided by operating activities of 137,536,580 (USD) fell below net income of $ 148,139,844 (USD) as the non-cash share-based compensation add-back of 10,316,583 (USD) was offset by non-cash investment income of (3,310,028) (USD), held-to-maturity debt security interest income of (2,372,957) (USD), and cash outflows for income taxes payable of (7,764,815) (USD) and prepayments and other current assets of (6,479,225) (USD).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net income | $ 148,139,844 | $ 134,151,207 | $ 113,058,436",
+     "Share-based compensation | 10,316,583 | 14,691,737 | 17,929,842",
+     "Income taxes payable | (7,764,815) | 8,197,819 | (19,911)",
+     "Net cash provided by operating activities | 137,536,580 | 172,816,826 | 139,319,553"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item: consolidated income statement in F2 and operating review in P2",
+    "claim": "Income before income taxes of 152,120,375 (USD) in 2025 included 25,661,745 (USD) of interest income alongside 122,217,195 (USD) of operating income, supported by a model that Yalla states does not incur significant content acquisition costs.",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Operating income | 122,217,195 | 121,401,613 | 96,354,189",
+     "Interest income | 25,661,745 | 28,673,905 | 19,833,520",
+     "Income before income taxes | 152,120,375 | 148,069,733 | 115,743,892",
+     "Therefore, we do not incur significant content acquisition cost, such as incentive fees to key users or costs for acquiring media content."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (current liabilities, cash, term deposits, and short-term investments in P3; financing cash flows in F3) and inferred (absence of refinancing need from no reported debt)",
+    "claim": "Yalla has no reported debt maturities requiring refinancing, as its only current lease obligation as of September 30, 2026 is current operating lease liabilities of 1,790,810 (US$) within total current liabilities of 81,020,694 (US$), which can be met from 264,779,796 (US$) in cash and cash equivalents, 216,640,733 (US$) in term deposits, and 288,934,364 (US$) in short-term investments.",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "Operating lease liabilities, current | 357,525 | 1,790,810",
+     "Total current liabilities | 88,315,651 | 81,020,694",
+     "Cash and cash equivalents | 526,972,019 | 264,779,796",
+     "Net cash used in financing activities | (55,464,200) | (12,822,964) | (7,553,518)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in the cited items (MAU figures and growth percentages are directly reported in P2, P3, and P4)",
+    "claim": "User base expansion is a core growth driver: average MAUs increased by 14.4% to 41.4 million in the fourth quarter of 2024, by 8.2% to 44.8 million in the fourth quarter of 2025, and by 12.3% year-over-year to 47.6 million in the second quarter of 2026, reaching 47,241 (table in thousands) in the third quarter of 2026.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our average MAUs increased by 14.4% from 36.2 million in the three months ended December 31, 2023 to 41.4 million in the three months ended December 31, 2024, and further increased by 8.2% to 44.8 million in the three months ended December 31, 2025.",
+     "Average MAUs have grown rapidly, primarily due to continued efforts in user acquisition to penetrate the market.",
+     "Meanwhile, our core products continued to build momentum, with refined operations and targeted marketing driving a sequential rebound in paying users for Yalla Ludo and a 12.3% year-over-year increase in overall average MAUs to 47.6 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 explicitly states the conditions for user base expansion; P2 and P4 show rising marketing spend)",
+    "claim": "For user base expansion to continue, Yalla must maintain superior user experience, brand recognition, cost-effective user acquisition channels, broader content offerings, and penetration of existing and underserved markets.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "We seek to further expand our user base by penetrating our existing markets and expanding into other underserved markets.",
+     "Our ability to expand user base depends on our abilities to, among other things, deliver superior user experience, raise brand recognition, utilize cost-effective user acquisition channels and increase attractiveness and breadth of content offerings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2 reports ARPPU figures and attributes the rise to social and gamification features)",
+    "claim": "Monetization gains have also driven growth, with ARPPU rising from US$6.6 in the fourth quarter of 2023 to US$7.2 in the fourth quarter of 2024 and US$7.9 in the fourth quarter of 2025 due to enhanced social and gamification features.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our ARPPU also increased from US$6.6 in the three months ended December 31, 2023 to US$7.2 in the same period in 2024.",
+     "Our ARPPU increased from US$7.2 in the fourth quarter of 2024 to US$7.9 in the same period of 2025 mainly because our enhanced social and gamification features derive users to spend more on our platform."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 identifies conversion, activity, virtual items, and upgrade services as monetization drivers and notes the effect of fewer third-party promotions)",
+    "claim": "For monetization growth to continue, Yalla must keep converting non-paying users into active paying users, introduce new virtual items and upgrade services, and sustain spending without relying on third-party payment platform promotions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our results of operations mainly depend on our ability to monetize our user base by converting non-paying users into paying users and keeping them active.",
+     "We will also continue to introduce new virtual items and upgrade services on our platform.",
+     "The number of paying users decreased from 12.3 million for the fourth quarter of 2024 to 10.4 million for the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms in the same period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P1 describes the gaming expansion; P3 and P4 report games services revenue growth and new gaming revenue contributions)",
+    "claim": "Games services and new gaming initiatives are a current growth driver, with games services revenue rising 11.6% year-over-year to US$34.2 million (41.4% of revenue) in the second quarter of 2026 and reaching US$38.4 million in the third quarter of 2026 after 13.7% year-over-year growth.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Through our subsidiary, Yalla Game Limited, we have expanded our capabilities in mid-core and hard-core games in the MENA region, leveraging our local expertise to bring innovative gaming content to our users.",
+     "Our revenues exceeded the upper end of our guidance, driven by an 11.6% year-over-year increase in revenues from games services.",
+     "Total revenues were US$82.6 million, with revenues from games services growing to US$34.2 million, increasing the segment\u2019s contribution to 41.4%.",
+     "Revenues generated from games services in the third quarter of 2026 were US$38.4 million.",
+     "Meanwhile, our new gaming initiatives began contributing to revenues as anticipated, complementing our core business and diversifying our growth drivers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from P1, P2, and P4 (flagship concentration in P1, rising R&D expense share in P2, and doubled marketing expense with lower GAAP net income in P4)",
+    "claim": "For gaming and portfolio expansion to sustain growth, new products must diversify revenues beyond Yalla and Yalla Ludo while Yalla funds higher development headcount and new-product marketing without eroding profitability.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues.",
+     "Technology and product development expenses as a percentage of our total revenues increased from 8.5% in 2024 to 10.0% in 2025.",
+     "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P1 and P2 describe cultural localization, absence of content acquisition costs, and word-of-mouth referrals)",
+    "claim": "Yalla's culturally localized MENA social-interaction model drives organic word-of-mouth acquisition and high profitability by avoiding significant content acquisition costs.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We have developed the leading social networking and gaming platform tailored to the local cultures of our target markets, particularly MENA.",
+     "Therefore, we do not incur significant content acquisition cost, such as incentive fees to key users or costs for acquiring media content.",
+     "We benefit from organic user acquisition through word-of-mouth referrals, and we will also continue to focus on cost-effective user acquisition channels to manage selling and marketing expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 lists MENA mobile internet penetration, user preference adaptation, and entertainment competition as general factors affecting results)",
+    "claim": "For this core model to keep compounding, mobile internet penetration in MENA must grow and Yalla must adapt to shifting user preferences and entertainment competition.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our business and operating results are affected by general factors affecting the social networking and gaming industry in our target markets, particularly MENA.",
+     "Changes in any of these general industry conditions could affect demand for our services, as well as our results of operations."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [],
+  "risks": [
+   {
+    "basis": "stated in the cited items (20-F Item 5 and second and third quarter 2026 6-K releases)",
+    "claim": "Revenue growth slowed from 6.5% in 2024 to 0.7% in 2025, and revenues declined from US$84.6 million in the second quarter of 2025 to US$82.6 million in the second quarter of 2026.",
+    "facts": [
+     "P2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Our revenues increased by 6.5% from US$318.9 million in 2023 to US$339.7 million in 2024 and further increased by 0.7% to US$341.9 million in 2025.",
+     "Revenues were US$82.6 million in the second quarter of 2026, compared with US$84.6 million in the second quarter of 2025.",
+     "Revenues were US$90.4 million in the third quarter of 2026, representing an increase of 0.9% from the third quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (20-F Item 5 and second and third quarter 2026 6-K releases)",
+    "claim": "Paying users decreased from 12.3 million in the fourth quarter of 2024 to 10.4 million in the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms, and declined to 10,861 (table in thousands) in the second quarter of 2026 from 11,186 (table in thousands) in the second quarter of 2025.",
+    "facts": [
+     "P2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "The number of paying users decreased from 12.3 million for the fourth quarter of 2024 to 10.4 million for the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms in the same period.",
+     "Our ARPPU increased from US$7.2 in the fourth quarter of 2024 to US$7.9 in the same period of 2025 mainly because our enhanced social and gamification features derive users to spend more on our platform.",
+     "Our flagship products continued to demonstrate strong user engagement and community loyalty, driving a year-over-year increase of 6.2% in paying users to 12.1 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (20-F Item 5 and second and third quarter 2026 6-K releases); causal link to 2026 net income decline is partly inferred because full 2026 expense lines are omitted",
+    "claim": "Higher user acquisition and product development spending compressed profitability, with 2025 non-GAAP operating income dipping to 132,534 (table in US$ thousands) from 136,093 (table in US$ thousands) in 2024, second-quarter 2026 net income falling to US$29.3 million from US$36.5 million in 2025 while selling and marketing expenses doubled year over year, and third-quarter 2026 net income falling to US$32.7 million from US$40.7 million in 2025.",
+    "facts": [
+     "P2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Our technology and product development expenses increased by 18.0% from US$29.0 million in 2024 to US$34.3 million in 2025, mainly due to an increase in salaries and benefits for our technology and product development staff by US$5.4 million from 2024 to 2025, driven by an increase in the headcount of our technology and product development staff to support the development of new businesses and expansion of our product portfolio.",
+     "Net income was US$29.3 million in the second quarter of 2026, compared with US$36.5 million in the second quarter of 2025.",
+     "Net income was US$32.7 million in the third quarter of 2026, compared with US$40.7 million in the third quarter of 2025.",
+     "While doubling our selling and marketing expenses year over year to support the promotion of new products, we maintained a healthy non-GAAP net margin of 41.7% through increased efficiency."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (20-F Item 4 and Item 5 and second and third quarter 2026 6-K releases)",
+    "claim": "Revenues remain concentrated in the flagship mobile applications Yalla and Yalla Ludo and in the MENA region, where political, economic, social, user-preference, and competitive shifts could reduce demand.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues.",
+     "Our business and operating results are affected by general factors affecting the social networking and gaming industry in our target markets, particularly MENA.",
+     "Changes in any of these general industry conditions could affect demand for our services, as well as our results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (20-F Item 5)",
+    "claim": "UAE subsidiaries applying a 0% Qualifying Free Zone Person tax rate in 2024 and 2025 would become subject to a 9% UAE corporate tax rate on taxable income above AED375,000 if they fail to meet all statutory conditions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Under the CT Law, corporate tax is applicable to (amongst others) legal persons in the UAE at the rate of 9% on taxable income above AED375,000.",
+     "Certain of our UAE subsidiaries apply 0% tax rate on their qualifying income, as QFZP for the years ended December 31, 2024 and 2025, while other UAE subsidiaries are subject to the corporate tax at a rate of 9%.",
+     "If a free zone person does not meet all the conditions, it will be subject to a rate of 9% on its taxable income."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited item (20-F Item 5)",
+    "claim": "If PRC tax authorities determine that Yalla Group Limited and its non-mainland China subsidiaries have a de facto management body in mainland China and are deemed PRC resident enterprises, they will be subject to PRC income tax at a rate of 25% on global income.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "A PRC resident enterprise is generally subject to certain Chinese tax reporting obligations and a uniform 25% enterprise income tax rate on its global income.",
+     "If the PRC tax authorities subsequently determine that our company and our subsidiaries registered outside the mainland China are deemed resident enterprises, our company and our subsidiaries registered outside the mainland China will be subject to the PRC income tax at a rate of 25%.",
+     "As of December 31, 2024, we had not received any inquiry or notice from the tax authorities of mainland China in respect of the tax resident status of its offshore entities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (20-F Item 5 and third quarter 2026 6-K release)",
+    "claim": "Non-operating returns expose pre-tax income to deposit-rate and fair-value swings, as interest income fell from US$28.7 million in 2024 to US$25.7 million in 2025 and investment results shifted from a US$2.8 million loss in 2024 and US$2.5 million impairment in 2023 to US$3.3 million income in 2025.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our interest income decreased from US$28.7 million in 2024 to US$25.7 million in 2025, primarily due to the decreased position of term deposits.",
+     "Our investment income was US$3.3 million in 2025, compared to an investment loss of US$2.8 million in 2024, primarily due to changes in the fair value of wealth management products.",
+     "Our impairment loss of long-term investments was nil in 2024, compared to US$2.5 million in 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (20-F Item 5 and Consolidated Statements of Cash Flows)",
+    "claim": "Foreign exchange losses rose by US$2.1 million in 2025 while net cash provided by operating activities fell to 137,536,580 (table in USD) in 2025 from 172,816,826 (table in USD) in 2024 as income taxes paid rose to 11,022,556 (table in USD) and deferred revenue declined.",
+    "facts": [
+     "P2",
+     "F3"
+    ],
+    "quotes": [
+     "The increase was mainly due to an increase in foreign exchange loss of US$2.1 million from 2024 to 2025.",
+     "For the year ended December 31, 2025, income taxes paid amounted to US$7,999,564 in the United Arab Emirates (the \u201cUAE\u201d), and US$3,022,992 in mainland China."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in P2, which points to Item 3. Key Information\u2014D. Risk Factors while the risk_factors section is not in the packet",
+    "claim": "What specific risk factors referenced in the Risk Factors section of the annual report could cause actual results to differ materially from Yalla's forward-looking statements?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our actual results may differ materially from those anticipated in these forward-looking statements as a result of various factors, including those set forth under \u201cItem 3. Key Information\u2014D. Risk Factors\u201d or in other parts of this annual report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, which provides the inquiry status only as of December 31, 2024 even though the filing period is December 31, 2025",
+    "claim": "Has Yalla received any inquiry or notice from mainland China tax authorities after December 31, 2024 regarding whether its offshore entities are treated as PRC resident enterprises subject to a 25% enterprise income tax rate?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If the PRC tax authorities subsequently determine that our company and our subsidiaries registered outside the mainland China are deemed resident enterprises, our company and our subsidiaries registered outside the mainland China will be subject to the PRC income tax at a rate of 25%.",
+     "As of December 31, 2024, we had not received any inquiry or notice from the tax authorities of mainland China in respect of the tax resident status of its offshore entities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and F2; P2 states management's belief that qualifying subsidiaries meet QFZP conditions without providing the tax rate reconciliation note",
+    "claim": "What subsidiary-level income mix or prior-year adjustments caused income tax expense to fall from US$13.9 million in 2024 to US$4.0 million in 2025, and have UAE tax authorities confirmed QFZP 0% tax eligibility for the qualifying subsidiaries?",
+    "facts": [
+     "P2",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Our income tax expense decreased from US$13.9 million in 2024 to US$4.0 million in 2025, primarily due to a decrease in UAE corporate tax.",
+     "We believe that the subsidiaries are more likely than not that satisfying all the conditions for QFZP prescribed in the CT Law."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, F1, and P2; the balance sheets report asset shifts across cash, deposits, and investments without footnotes detailing the underlying instruments",
+    "claim": "What specific financial instruments, maturities, and issuers comprise Yalla's short-term investments of 288,934,364 (table in US$) and long-term investments of 139,883,487 (table in US$) as of September 30, 2026, while cash and cash equivalents moved from 526,972,019 (table in US$) at December 31, 2025 to 264,779,796 (table in US$) at September 30, 2026?",
+    "facts": [
+     "F1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our investment income was US$3.3 million in 2025, compared to an investment loss of US$2.8 million in 2024, primarily due to changes in the fair value of wealth management products.",
+     "Our investment loss was US$2.8 million in 2024, compared to an investment income of US$1.7 million in 2023, primarily due to changes in fair value of certain debt securities recognized in 2024.",
+     "Short-term investments | 141,251,128 | 288,934,364"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, where the expense commentary, condensed income statement, and outlook estimates are omitted from the excerpt",
+    "claim": "What cost and non-operating line items caused net income to decline from US$40.7 million in the third quarter of 2025 to US$32.7 million in the third quarter of 2026 despite revenues of US$90.4 million, and what is management's omitted outlook?",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Revenues were US$90.4 million in the third quarter of 2026, representing an increase of 0.9% from the third quarter of 2025.",
+     "Net income was US$32.7 million in the third quarter of 2026, compared with US$40.7 million in the third quarter of 2025.",
+     "The above outlook is based on current market conditions and reflects the Company management\u2019s current and preliminary estimates of market and operating conditions and customer demand, which are all subject to change."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and F3; the equity lines after Additional paid-in capital and the cash flow statement are omitted in P3",
+    "claim": "How much cash did Yalla spend on share repurchases and what were the treasury stock and retained earnings balances as of September 30, 2026, given Class A Ordinary Shares changed from 13,441 (table in US$) at December 31, 2025 to 12,791 (table in US$) at September 30, 2026?",
+    "facts": [
+     "P3",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Class A Ordinary Shares | 13,441 | 12,791",
+     "Repurchase of ordinary shares | (56,564,713) | (13,911,356) | (8,512,608)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P1; P3 breaks out only chatting and games services without product-level revenue figures or the remaining revenue category",
+    "claim": "What products or services generated the remainder of the US$90.4 million total revenues beyond chatting services (US$50.3 million) and games services (US$38.4 million) in the third quarter of 2026, and how much did new gaming initiatives contribute relative to Yalla and Yalla Ludo?",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Revenues generated from chatting services in the third quarter of 2026 were US$50.3 million.",
+     "Revenues generated from games services in the third quarter of 2026 were US$38.4 million.",
+     "Meanwhile, our new gaming initiatives began contributing to revenues as anticipated, complementing our core business and diversifying our growth drivers.",
+     "Though we expect that these various new products will enable us to further diversify our revenue streams in the future, currently our flagship mobile applications, Yalla and Yalla Ludo, still contribute to the majority of our revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, F1, F3, and P1; the statements present share counts, two share classes, and option exercise proceeds without the EPS and share capital footnotes",
+    "claim": "What equity awards or other dilutive securities account for the gap between 155,977,062 basic weighted average shares and 180,082,810 diluted weighted average shares in 2025, and what are the voting rights and conversion terms of Class A versus Class B ordinary shares?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Our ADSs, each representing one of our Class A ordinary share, have been listed on the New York Stock Exchange since September 30, 2020 under the symbol \u201cYALA.\u201d",
+     "-Basic | 155,977,062 | 160,429,693 | 159,264,843",
+     "-Diluted | 180,082,810 | 183,156,324 | 181,800,240"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, F1, and F2; P1 notes 60% ownership of Yalla Game Limited while F1 and F2 report aggregate non-controlling interest balances without naming minority owners",
+    "claim": "Which subsidiaries generated the (8,231,786) (table in USD) non-controlling interests equity deficit and 1,695,147 (table in USD) net loss attributable to non-controlling interests in 2025, and who holds the remaining interest in 60%-owned Yalla Game Limited?",
+    "facts": [
+     "F1",
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "In addition, we established FYXTECH Play Limited in the British Virgin Islands in August 2021 to hold 60% of interests of Yalla Game Limited, which was established under the laws of the Cayman Islands in August 2021.",
+     "Non-controlling interests | (8,231,786) | (6,544,517)",
+     "Net loss attributable to non-controlling interests | 1,695,147 | 1,533,034 | 4,284,341"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, which attributes both paying user fluctuations and commission savings to third-party payment platforms without naming the platforms or channel shares",
+    "claim": "Which third-party payment platforms charge Yalla's commission fees and host the promotional events affecting paying user counts, and how sustainable is the cost-of-revenues reduction from diversified payment channels?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The number of paying users decreased from 12.3 million for the fourth quarter of 2024 to 10.4 million for the fourth quarter of 2025, primarily due to fewer promotion events held by third-party payment platforms in the same period.",
+     "Our cost of revenues decreased by 7.1% from US$120.5 million in 2024 to US$111.9 million in 2025, mainly due to lower commission fees paid to third-party payment platforms by US$4.9 million from 2024 to 2025 as a result of diversified payment channels."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "YALA",
+ "upside": 1.098410066600056,
+ "valuation": null,
+ "value_base": 10.508948015120797,
+ "value_bear": 8.226581800827194,
+ "value_bull": 13.969382425161076,
+ "value_per_filed_share": {
+  "base": 10.508948015120797,
+  "bear": 8.226581800827194,
+  "bull": 13.969382425161076
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +24.5 points a year against the required return over 3 years"
+}
