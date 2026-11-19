@@ -1,0 +1,1776 @@
+{
+ "alpha_pts": -17.55226021282972,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 85,
+ "claims_supported": 83,
+ "date": "2026-11-19T12:34:49Z",
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.1300 (filed 0.0514 to 0.1207)",
+   "run 1000: debt_level_representative_no: Total debt has already declined from $18.5 million at year-end 2025 to $13.1 million at September 30, 2026 against $24.5 million of cash, and management expects cash from 2026 and Q1 2027 operations to pay off the remaining term loan balance at its January 21, 2027 maturity while relying on the revolver only seasonally.",
+   "run 1000: quotes_verified: 19 of 19",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1270 (filed 0.0514 to 0.1207)",
+   "run 3000: debt_level_representative_no: Total debt has already declined from $18.5 million at year-end 2025 to $13.1 million at September 30, 2026 (against $24.5 million in cash), and management expects 2026 and Q1 2027 operating cash flows to pay off the remaining term loan in full by its January 21, 2027 maturity.",
+   "run 3000: quotes_verified: 18 of 18"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "year 1 growth 0.0084 and margin 0.1476, margin 0.0788 (persist), growth 0.0375, terminal RONIC 0.1027 (equity return r 0.1055), F 10",
+  "run_gap": 0.026875352424845764,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 11878000.0,
+     "excess_cash_before": 11878000.0,
+     "k0_after": 1187881.2473895587,
+     "k0_before": 1187881.2473895587,
+     "k0_interest": 836000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 15076359.895101301,
+     "x0_before": 15076359.895101301
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 151419220.80885348,
+     "seam_ratio": 1.0284284296741661,
+     "tv_share": 0.419823686061735,
+     "wedge_rate_5": 0.0032699734451446267
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1300 (filed 0.0514 to 0.1207)",
+     "debt_level_representative_no: Total debt has already declined from $18.5 million at year-end 2025 to $13.1 million at September 30, 2026 against $24.5 million of cash, and management expects cash from 2026 and Q1 2027 operations to pay off the remaining term loan balance at its January 21, 2027 maturity while relying on the revolver only seasonally.",
+     "quotes_verified: 19 of 19"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.015,
+     "fade_years": 5,
+     "long_run_op_margin": 0.078,
+     "op_margin": [
+      0.13,
+      0.083,
+      0.082,
+      0.081,
+      0.08
+     ],
+     "return_on_new_investment_long_run": 0.115,
+     "rev_growth": [
+      0.01,
+      0.025,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.0084 and margin 0.1476, margin 0.0788 (persist), growth 0.0375, terminal RONIC 0.1027 (equity return r 0.1055), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 83
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.062,
+      0.094
+     ],
+     "rev_growth_y3": [
+      -0.01,
+      0.06
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0133; depreciation (without amortization of acquired intangibles) / revenue 0.0113."
+       },
+       {
+        "id": "P3",
+        "quote": "In 2026, the Company has budgeted capital expenditures in the range of approximately $4.2 million to $5.2 million."
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (2,245) | (1,267)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Escalade's 5-year pooled capex-to-revenue ratio is 1.33% (slightly above its 1.13% non-acquisition depreciation rate), while 2026 capex stepped up to $2.245 million through nine months (vs $1.267 million in 9M 2025) against a $4.2-$5.2 million full-year budget. Setting capex at 1.5% of revenue captures the recent step-up in domestic manufacturing investment without assuming full-budget spending every year."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Escalade is a leader in table tennis tables, residential in-ground basketball goals and in archery bows."
+       },
+       {
+        "id": "P2",
+        "quote": "The Company does not enter into long-term supply contracts with these suppliers, and has no current plans to do so in the future."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 5-year fade after Year 5 is appropriate because by Year 5 both revenue growth (3.0%) and operating margin (8.0%) are already close to their long-run equilibrium values (2.5% and 7.8%), and Escalade's established retail distribution and niche brands face ongoing competitive pressure without long-term supply agreements."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $240.2 million | -0.0451 | 0.0780"
+       },
+       {
+        "id": "P2",
+        "quote": "Some of the current and potential competitors are larger than Escalade and have substantially greater financial resources that may be devoted to sourcing, promoting and selling their products, and may discount prices more heavily than the Company can afford."
+       },
+       {
+        "id": "P4",
+        "quote": "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Across 2012-2025, Escalade's operating margin has mean-reverted tightly around an 8.0% median (7.95% 5-year median, 7.80% in 2025). I anchor the terminal operating margin at 7.8%\u2014preserving part of recent footprint efficiencies while recognizing that larger competitors, lack of long-term supplier contracts, and new Trade Act tariffs prevent permanently elevated margins."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Tariff recovery | (1,594) | 0 | (11,469) | 0"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating Income | 8,667 | 7,301 | 26,436 | 13,574"
+       },
+       {
+        "id": "P4",
+        "quote": "For the nine months ended September 30, 2026, gross margin increased to 28.8% compared to 26.6% for the same period in 2025."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) GAAP operating margin is set at 13.0% because 9M 2026 already includes $11.469 million of IEEPA tariff recoveries inside $26.436 million of operating income (an 8.36% ex-recovery margin) plus an assumed ~8.0% underlying Q4 margin. Once the one-time tariff recoveries roll off in Year 2, operating margin normalizes to 8.3% and gradually eases to 8.0% by Year 5 as acquisition-related SG&A and new Trade Act tariffs counterbalance 28.8% gross margins."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1285; tax rate 0.2398; total debt $18.5 million; cash counted as excess $11.9 million; net debt (debt less that cash) $6.6 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1027."
+       },
+       {
+        "id": "P2",
+        "quote": "The Company has two major customers, each of which accounted for more than ten percent, and together accounted for thirty percent, of consolidated gross sales in the Company\u2019s 2025 fiscal year."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Escalade earned 12.85% on tangible capital in 2025 versus its 10.27% value-neutral hurdle rate, supported by leading niche brands and retail channel leverage across bolt-on product lines. In the long run, competition from larger rivals and customer concentration (30% of 2025 gross sales from two customers) should compress incremental returns partway toward the hurdle rate, to 11.5%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "For the nine months ended September 30, 2026, net sales increased 0.8% compared with the same period in the prior year."
+       },
+       {
+        "id": "P2",
+        "quote": "A majority of the Company\u2019s products are in markets that are experiencing low growth rates."
+       },
+       {
+        "id": "P8",
+        "quote": "On August 24, 2026, Escalade, Inc. acquired substantially all the assets of ASL Solutions, Inc."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 net sales edged up just 0.8% despite incremental contributions from Gold Tip and AllCornhole, pointing to ~1.0% full-year 2026 growth as softer basketball, indoor games, and table tennis demand offsets archery and safety gains. Growth recovers modestly to 2.5%-3.0% over years 2-5 with full-year contributions from ASL Solutions and new product introductions, capped by mature, low-growth sporting goods categories."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "A majority of the Company\u2019s products are in markets that are experiencing low growth rates."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1055; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "I set perpetual growth at 2.5%, below the 3.75% nominal growth anchor, because Escalade discloses that most of its sporting goods categories experience low growth rates and multi-year organic expansion has been modest without acquisitions."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.055,
+      "input_hit": "long_run_op_margin",
+      "risk": "New Trade Act tariffs on Chinese and Asian imports, Middle East shipping disruptions, and supplier price increases without long-term supply contracts compress gross and operating margins."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Loss or material order reduction from either of the two major customers (accounting for 30% of 2025 gross sales) or heavy price discounting by larger competitors depresses long-term revenue growth."
+     },
+     {
+      "bear_value": 0.085,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Integration difficulties across recent acquisitions (Gold Tip, AllCornhole, ASL Solutions) or markdowns on $77.8 million of inventories push returns on new capital below the cost of capital."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.062,
+      "rev_growth": [
+       -0.03,
+       -0.015,
+       -0.010000000000000002,
+       -0.010000000000000002,
+       -0.010000000000000002
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.094,
+      "rev_growth": [
+       0.04,
+       0.055,
+       0.06,
+       0.06,
+       0.06
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Total debt has already declined from $18.5 million at year-end 2025 to $13.1 million at September 30, 2026 against $24.5 million of cash, and management expects cash from 2026 and Q1 2027 operations to pay off the remaining term loan balance at its January 21, 2027 maturity while relying on the revolver only seasonally."
+     },
+     "margin_position": "Base-year 2025 operating margin of 7.80% sits near Escalade's 14-year historical median of roughly 8.0%, reflecting post-pandemic demand normalization and CEO transition costs offset by gross margin expansion from a smaller manufacturing footprint; headline 9M 2026 operating margin of 14.8% is temporarily elevated by $11.5 million of one-time IEEPA tariff recoveries, while ex-recovery 9M 2026 operating margin is 8.36%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year effective tax rate of 23.98% (24.0% as reported) reflects the federal statutory rate plus state taxes and nondeductible expenses and is consistent with the 22.9% effective tax rate in the first nine months of 2026."
+     },
+     "why": "Escalade operates in Consumer Cyclical sporting goods where revenue surged 51.6% in 2020 before declining three consecutive years through 2025 (-4.51%), yet its 2025 operating margin of 7.80% closely matches both its 2012-2025 median (~8.00%) and its 9M 2026 operating margin excluding one-time IEEPA tariff recoveries (8.36%). While 2025 SG&A absorbed CEO transition expenses and subsequent bolt-on acquisitions (Gold Tip, AllCornhole, ASL Solutions) plus facility exits in Mexico and Orlando are lifting gross margins, newly imposed Trade Act tariffs and freight inflation provide an offsetting headwind. Base-year 2025 is therefore broadly representative of mid-cycle earnings power, whereas 2026 headline results are distorted by non-recurring tariff refunds."
+    },
+    "value_at_old_defaults": 13.206671314863431,
+    "values": {
+     "base": 12.794527794245685,
+     "bear": 10.84950280973809,
+     "bull": 15.474666618846909
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 11878000.0,
+     "excess_cash_before": 11878000.0,
+     "k0_after": 1187881.2473895587,
+     "k0_before": 1187881.2473895587,
+     "k0_interest": 836000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 15076359.895101301,
+     "x0_before": 15076359.895101301
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 155840174.48706335,
+     "seam_ratio": 1.0237782733134602,
+     "tv_share": 0.34074316288495454,
+     "wedge_rate_5": 0.001953653568810903
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1270 (filed 0.0514 to 0.1207)",
+     "debt_level_representative_no: Total debt has already declined from $18.5 million at year-end 2025 to $13.1 million at September 30, 2026 (against $24.5 million in cash), and management expects 2026 and Q1 2027 operating cash flows to pay off the remaining term loan in full by its January 21, 2027 maturity.",
+     "quotes_verified: 18 of 18"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.014,
+     "fade_years": 8,
+     "long_run_op_margin": 0.08,
+     "op_margin": [
+      0.127,
+      0.084,
+      0.083,
+      0.082,
+      0.081
+     ],
+     "return_on_new_investment_long_run": 0.115,
+     "rev_growth": [
+      0.01,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.0275
+    },
+    "old_defaults_inputs": "year 1 growth 0.0084 and margin 0.1476, margin 0.0788 (persist), growth 0.0375, terminal RONIC 0.1027 (equity return r 0.1055), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 2,
+     "kept": 83
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.065,
+      0.095
+     ],
+     "rev_growth_y3": [
+      -0.02,
+      0.07
+     ],
+     "terminal_growth": [
+      0.015,
+      0.0375
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0133; depreciation (without amortization of acquired intangibles) / revenue 0.0113."
+       },
+       {
+        "id": "P3",
+        "quote": "In 2026, the Company has budgeted capital expenditures in the range of approximately $4.2 million to $5.2 million. Actual expenditures may be higher or lower than budgeted amounts."
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (2,245) | (1,267)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Over the last five fiscal years, pooled capital expenditure averaged 1.33% of revenue (exceeding non-acquisition depreciation of 1.13%), and 9M 2026 property and equipment purchases of $2.25 million represent 1.25% of 9M sales. Setting capex at 1.40% of revenue captures this low-capital-intensity manufacturing/import model while allowing slightly higher domestic tooling and molding investment consistent with management's $4.2-$5.2 million 2026 capex budget."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Escalade is a leader in table tennis tables, residential in-ground basketball goals and in archery bows."
+       },
+       {
+        "id": "P1",
+        "quote": "The Company has an agreement and contract with STIGA Sports AB for the exclusive right and license to distribute and produce table tennis equipment under the brand name STIGA\u00ae for North America."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "An 8-year fade period reflects Escalade's 95+ year operating history, niche leadership positions (table tennis, in-ground basketball goals, archery), and exclusive STIGA North America license, which give it moderate staying power. However, because it competes in fragmented categories without long-term supplier contracts and with 30% revenue concentration in two customers, any excess margin or growth above steady state should fade over less than a decade."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $240.2 million | -0.0451 | 0.0780"
+       },
+       {
+        "id": "P6",
+        "quote": "The operational improvements we have made, together with our continued discipline in cost controls and inventory management, have established a margin structure that we believe is sustainable through the cycle."
+       },
+       {
+        "id": "P2",
+        "quote": "The market for sporting goods is highly fragmented and intensely competitive. A majority of the Company\u2019s products are in markets that are experiencing low growth rates."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Escalade's 14-year (2012-2025) and 5-year (2021-2025) median GAAP operating margins both sit at ~8.0%, demonstrating strong mean-reversion around that level across cycles. While footprint cuts and favorable mix lifted 9M 2026 gross margin to 28.8%, intense competition from larger rivals and lack of long-term supplier contracts are likely to cap steady-state operating margin near the historical 8.0% median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "During the nine months ended September 30, 2026, the Company recognized $11.9 million of tariff recoveries. Approximately $11.5 million was recognized in operating income and $0.4 million was recognized in interest income."
+       },
+       {
+        "id": "P4",
+        "quote": "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions."
+       },
+       {
+        "id": "P3",
+        "quote": "The overall gross margin increased to 26.9% in 2025 compared with 24.7% in 2024. Gross margins were favorably impacted by lower manufacturing costs due to a smaller operational footprint, when compared to the prior-year period."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) GAAP operating margin of 12.7% incorporates the $11.5 million of IEEPA tariff recoveries already booked in 9M 2026 GAAP operating income ($26.4 million on $179.1 million sales, or 8.36% ex-recovery) alongside an estimated ~7-7.5% Q4 margin. In Year 2 (2027), the one-time recovery disappears and GAAP margin normalizes to 8.4%-preserving part of the 2025-2026 gross-margin expansion from footprint rationalization against new Trade Act tariffs and elevated SG&A-before fading gradually toward 8.1% by Year 5."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.1285; tax rate 0.2398; total debt $18.5 million; cash counted as excess $11.9 million; net debt (debt less that cash) $6.6 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1027."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Escalade earned a 12.85% after-tax return on tangible capital in 2025 against a 10.27% zero-NPV hurdle, supported by low fixed-asset intensity and established retail distribution for its owned brands. Long-run incremental returns are faded modestly to 11.5% as competitive discounting, Trade Act tariffs, and working-capital demands compress marginal returns closer to cost of capital."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "For the nine months ended September 30, 2026, net sales increased 0.8% compared with the same period in the prior year."
+       },
+       {
+        "id": "P4",
+        "quote": "Sales decreased 3.2% for the third quarter of 2026, compared with the same period in the prior year. Sales decreased primarily due to lower sales in our basketball, indoor games and table tennis categories against a prior year period that reflected tariff-related order timing."
+       },
+       {
+        "id": "P2",
+        "quote": "A majority of the Company\u2019s products are in markets that are experiencing low growth rates."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) growth of 1.0% reflects the actual +0.8% pace through 9M 2026, where Gold Tip, archery, safety, and outdoor games offset Q3 declines in basketball, indoor games, and table tennis plus exited low-margin lines. Over Years 2-5, growth recovers modestly to 2.0%-3.0% as tariff-timing comparisons lap and recent bolt-ons (AllCornhole, ASL Solutions) contribute, constrained by low growth across core sporting goods markets."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1055; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "Some of the current and potential competitors are larger than Escalade and have substantially greater financial resources that may be devoted to sourcing, promoting and selling their products, and may discount prices more heavily than the Company can afford."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Terminal nominal growth of 2.75% sits 100 bps below the 3.75% nominal GDP anchor because most of Escalade's sporting goods categories face low secular growth and price competition from larger competitors. Historical revenue grew at a 2.9% CAGR from 2012 to 2019 and 3.8% through 2025 only with frequent bolt-on acquisitions, implying organic long-run growth roughly in line with inflation plus modest category expansion."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.055,
+      "input_hit": "long_run_op_margin",
+      "risk": "New Trade Act tariffs on Chinese/Asian imports, supplier price hikes without long-term supply contracts, and Middle East shipping/energy disruptions compress margins permanently if costs cannot be passed through."
+     },
+     {
+      "bear_value": -0.08,
+      "input_hit": "rev_growth",
+      "risk": "Loss or material order reduction by either of the two largest customers (19% and 11% of 2025 revenue; 23% of receivables with one customer) amid retail consolidation."
+     },
+     {
+      "bear_value": 0.075,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Aggressive discounting by larger competitors in low-growth sporting goods categories or poor integration of recent acquisitions (Gold Tip, AllCornhole, ASL Solutions) erodes incremental returns below cost of capital."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Prolonged consumer discretionary weakness, housing market stagnation, or loss/non-renewal of key licenses (such as STIGA) reduces long-term category growth."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "op_margin",
+      "risk": "Inventory markdowns on the $77.8 million inventory balance, product safety recalls, or elevated SG&A/CEO transition disruption depress near-term operating profitability."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.065,
+      "rev_growth": [
+       -0.04,
+       -0.030000000000000002,
+       -0.020000000000000004,
+       -0.020000000000000004,
+       -0.020000000000000004
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.095,
+      "rev_growth": [
+       0.05000000000000001,
+       0.06000000000000001,
+       0.07,
+       0.07,
+       0.07
+      ],
+      "terminal_growth": 0.0375
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "Total debt has already declined from $18.5 million at year-end 2025 to $13.1 million at September 30, 2026 (against $24.5 million in cash), and management expects 2026 and Q1 2027 operating cash flows to pay off the remaining term loan in full by its January 21, 2027 maturity."
+     },
+     "margin_position": "Base-year 2025 operating margin of 7.80% sits right on Escalade's long-run ~8.0% historical median as footprint-rationalization gross margin gains (26.9% vs. 24.7% in 2024) offset softer sales (-4.5%) and CEO transition costs in SG&A; 9M 2026 GAAP operating margin spiked to 14.8% primarily from $11.5 million of non-recurring IEEPA tariff recoveries (8.36% excluding recoveries).",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 2025 effective tax rate of 24.0% (0.2398) reflects the federal statutory rate plus recurring state taxes and nondeductible expenses and aligns closely with the 22.9% rate recorded in the first nine months of 2026."
+     },
+     "why": "Base-year 2025 operating margin of 7.80% closely matches Escalade's 5-year (7.95%) and 14-year (8.00%) historical medians and avoids both 2024's one-time asset-sale gain (1.6% of sales) and 2026's non-recurring $11.5 million IEEPA tariff recovery. While 2025 revenue fell 4.5% during post-pandemic normalization and absorbed CEO transition expenses plus only partial-year contributions from late-2025 acquisitions (Gold Tip and AllCornhole), it represents a clean mid-cycle earnings anchor. Subsequent 2026 performance shows higher gross margins (28.8% in 9M 2026) offset by elevated SG&A (19.4%) and ongoing Trade Act tariff headwinds."
+    },
+    "value_at_old_defaults": 13.206671314863431,
+    "values": {
+     "base": 13.143068819266498,
+     "bear": 11.103676915310075,
+     "bull": 16.283293183108775
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 13.206671314863431,
+  "value_at_old_defaults_quoted": 13.206671314863431,
+  "version": "decided.v2 2026-11-19 WO_NC9a"
+ },
+ "equity_value": 179773482.12825295,
+ "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 13862000.0,
+ "flags": [
+  "Escalade's Board of Directors approved a quarterly dividend of $0.1525 per share to be paid to shareholders of record on January 4, 2027 and disbursed on January 11, 2027.",
+  "Following U.S. Supreme Court and U.S. Court of International Trade rulings invalidating IEEPA tariffs and entitling importers to refunds, Escalade recognized $11.9 million of tariff recoveries during the nine months ended September 30, 2026, with approximately $11.5 million in operating income and $0.4 million in interest income.",
+  "The U.S. government initiated new tariffs under various sections of the Trade Act after the Supreme Court struck down IEEPA tariffs, creating ongoing tariff challenges for Escalade."
+ ],
+ "in_code_book": false,
+ "ke": 0.10554984100396249,
+ "market_cap_at_publish": 304995662,
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 22.17,
+ "qwen_book": null,
+ "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
+ "seed_base": {
+  "1000": 12.794527794245685,
+  "3000": 13.143068819266498
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated explicitly in the 2025 Form 10-K Item 1 and Item 7.",
+    "claim": "Escalade operates in one reportable business segment, Sporting Goods (Escalade Sports), which is identical to its single reporting unit.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Escalade, Incorporated (Escalade, the Company, we, us or our) operates in one business segment: Sporting Goods (Escalade Sports).",
+     "The Company has one reporting unit that is identical to our operating segment, Sporting Goods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 product table and Licenses, Trademarks and Brand Names section.",
+    "claim": "Escalade manufactures, imports, and distributes sporting goods brands across basketball goals, archery, table tennis, pickleball, play systems, fitness, safety, game tables, water sports, billiards, darting, and outdoor games, and holds an exclusive North American license for STIGA table tennis equipment.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Headquartered in Evansville, Indiana, Escalade Sports manufactures, imports, and distributes widely recognized sporting goods brands in basketball goals, archery, indoor and outdoor game recreation and fitness products through major sporting goods retailers, specialty dealers, key on-line retailers, direct-to-consumer e-commerce, traditional department stores and mass merchants.",
+     "The Company has an agreement and contract with STIGA Sports AB for the exclusive right and license to distribute and produce table tennis equipment under the brand name STIGA\u00ae for North America."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 7 and the August 26, 2026 Form 8-K.",
+    "claim": "Escalade expands its product portfolio through strategic acquisitions, acquiring Gold Tip (archery) in September 2025, AllCornhole (outdoor games) in December 2025, and substantially all the assets of insulated pet house manufacturer ASL Solutions, Inc. in August 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "In September 2025, Escalade acquired the assets of Gold Tip, a leading brand of products for target archery and bow and crossbow hunting from Revelyst, Inc., strengthening the Company\u2019s market position in archery.",
+     "In December 2025, Escalade acquired AllCornhole, a leading brand and supplier of cornhole bags and equipment for competitive cornhole play.",
+     "On August 24, 2026, Escalade, Inc. acquired substantially all the assets of ASL Solutions, Inc."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 1A.",
+    "claim": "Escalade sells to major sporting goods retailers, specialty dealers, online retailers, direct-to-consumer e-commerce, traditional department stores, and mass merchants, while working to expand sales to specialty, dealer, and online channels.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The Company has historically sold a large percentage of its sporting goods products to mass merchandisers and has increasingly attempted to expand sales to specialty retailer and dealer markets and to on-line retailers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 1A.",
+    "claim": "Revenue and receivables are concentrated in a small number of large customers: in 2025 and 2024, one customer accounted for approximately 19% of revenues and another customer accounted for approximately 11% and 13%, respectively, while one customer accounted for approximately 23% of total accounts receivable at year-end 2025 (25% at year-end 2024).",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "During 2025 and 2024, the Company had one customer that accounted for approximately 19% of the Company\u2019s revenues.",
+     "During 2025 and 2024 the Company had another customer which accounted for approximately 11% and 13%, respectively, of the Company\u2019s revenues.",
+     "As of December 31, 2025, the Company had approximately 23% of its total accounts receivable with one customer.",
+     "The Company has two major customers, each of which accounted for more than ten percent, and together accounted for thirty percent, of consolidated gross sales in the Company\u2019s 2025 fiscal year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1, with weather sensitivity stated in Item 1A.",
+    "claim": "Sales are based primarily on standard purchase orders typically shipped within the same month received, leaving immaterial year-end backlog, and management states that revenues have not been seasonal due to product category diversity.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Sales are based primarily on standard purchase orders and in most cases, orders are shipped within the same month received.",
+     "Unshipped orders at the end of the fiscal year (backlog) were not material and therefore are not an indicator of future results.",
+     "Due to diversity in product categories, revenues have not been seasonal and are not expected to be so in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 and Item 1A and the Q3 2026 Form 10-Q Item 2.",
+    "claim": "Escalade manufactures in the United States and imports finished goods and raw materials\u2014including wood, steel, aluminum, plastics, fiberglass, and packaging\u2014from third-party contract manufacturers and suppliers in China, Vietnam, Indonesia, Brazil, Mexico, and other Asian and South American countries without long-term supply contracts.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Escalade Sports currently manufactures in the USA and imports products from South America and Asia, where the Company utilizes a number of contract manufacturers.",
+     "The Company sources many of its products and raw materials from Mexico, Brazil, China, Vietnam and other Asian countries.",
+     "The Company does not enter into long-term supply contracts with these suppliers, and has no current plans to do so in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7, Q3 2026 Form 10-Q Statement of Operations and Item 2, and Q3 2026 earnings release.",
+    "claim": "Revenue is driven by consumer demand across sporting goods categories, acquisition contributions, tariff-related order timing, and exits from lower-margin product lines: net sales fell 4.5% in 2025 to $240,158 (table in thousands) on softer demand, while nine-month 2026 net sales edged up 0.8% to $ 179,095 (table in thousands) even as third-quarter 2026 sales fell 3.2% to $65.6 million.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Net sales decreased 4.5% in 2025 compared to 2024.",
+     "The Company recognized declines in sales across multiple categories due to softer consumer demand, partially offset by improved demand in the archery, billiards, and fitness categories.",
+     "For the nine months ended September 30, 2026, net sales increased 0.8% compared with the same period in the prior year.",
+     "Sales decreased primarily due to lower sales in our basketball, indoor games and table tennis categories against a prior year period that reflected tariff-related order timing.",
+     "These decreases were partially offset by increases in our archery category, including strong vertical bow demand and the incremental contribution from our September 2025 acquisition of Gold Tip assets, as well as increased demand in the safety and outdoor games categories."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7, Q3 2026 Form 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "Cost of products sold is Escalade's largest expense (73.1% of net sales in 2025 and 71.2% in the first nine months of 2026), and gross margin expanded from 24.7% in 2024 to 26.9% in 2025 and to 29.4% in the third quarter of 2026 on a smaller operational footprint, better fixed-cost absorption, and favorable customer and sales mix, despite higher freight and material-related costs.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The overall gross margin increased to 26.9% in 2025 compared with 24.7% in 2024.",
+     "Gross margins were favorably impacted by lower manufacturing costs due to a smaller operational footprint, when compared to the prior-year period.",
+     "Gross margin increased 123 basis points to 29.4% for the third quarter of 2026 compared to 28.1% for the same period in 2025, primarily driven by better absorption and a favorable customer and sales mix.",
+     "\u201cGross margin improvement reflected a favorable sales mix and improved fixed-cost absorption resulting from the acquisitions we completed during 2025, which offset higher freight and material related costs incurred during the quarter,\u201d continued Griffin."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 7 and Q3 2026 Form 10-Q Item 2.",
+    "claim": "Selling, administrative and general expenses totaled $43.6 million (18.2% of net sales) in 2025 and $34.8 million (19.4% of net sales) in the first nine months of 2026, driven by CEO transition costs in 2025 and by acquisition-related selling, marketing, professional fees, and higher advertising expenses in 2026.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Selling, general and administrative expenses (SG&A) were $43.6 million in 2025 compared to $43.3 million in 2024, an increase of $0.3 million or 0.7%.",
+     "The increase in SG&A was primarily related to CEO transition costs incurred during 2025.",
+     "For the nine months ended September 30, 2026, SG&A were $34.8 million compared to $32.0 million for the same period in the prior year.",
+     "The increase in SG&A is largely driven by selling and marketing expenses related to recent acquisitions, acquisition-related professional fees and an increase in advertising expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q Statement of Operations and Item 2.",
+    "claim": "Trade policy and global shipping disruptions materially affect Escalade's costs and earnings: U.S. tariffs and Middle East shipping disruptions raise import and freight risks, while IEEPA tariff refunds added $11.9 million in recoveries during the first nine months of 2026 ($11.5 million in operating income and $0.4 million in interest income).",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions.",
+     "Additionally, hostilities in the Middle East have adversely affected shipping routes and oil prices.",
+     "During the nine months ended September 30, 2026, the Company recognized $11.9 million of tariff recoveries.",
+     "Approximately $11.5 million was recognized in operating income and $0.4 million was recognized in interest income."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in [P1].",
+    "claim": "Escalade operates a single Sporting Goods segment backed by more than 95 years of industry experience and holds leadership positions in table tennis tables, residential in-ground basketball goals, and archery bows.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Escalade, Incorporated (Escalade, the Company, we, us or our) operates in one business segment: Sporting Goods (Escalade Sports).",
+     "Escalade and its predecessors have more than 95 years of manufacturing and selling experience in this industry.",
+     "Escalade is a leader in table tennis tables, residential in-ground basketball goals and in archery bows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1], [P3], and [P4].",
+    "claim": "Escalade has built a market presence in niche sporting goods categories and is unaware of any single competitor producing the same range of products.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Within the sporting goods industry, the Company has successfully built a robust market presence in several niche markets.",
+     "The Company is not aware of any other single company that is engaged in the same product lines as Escalade or that produces the same range of products as Escalade."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1].",
+    "claim": "Escalade owns registered trademarks and brand names across multiple sporting goods categories and holds an exclusive North American license to produce and distribute STIGA\u00ae table tennis equipment.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company owns several registered trademarks and brand names including but not limited to Goalrilla\u2122, Goalsetter\u00ae, Bear Archery\u00ae, Gold Tip\u2122, Bee Stinger\u2122, Brunswick Billiards\u00ae, Onix\u00ae, Ping-Pong\u00ae, The Step\u00ae, Lifeline\u00ae and Woodplay\u00ae.",
+     "The Company has an agreement and contract with STIGA Sports AB for the exclusive right and license to distribute and produce table tennis equipment under the brand name STIGA\u00ae for North America."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] and [P4].",
+    "claim": "Established relationships with major retail customers and manufacturing and import experience enable Escalade to bring products to market cost-effectively as a reliable, low-cost supplier.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "A key strategic advantage is the Company\u2019s established relationships with major customers that allow the Company to bring new products to market in a cost-effective manner while maintaining a diversified portfolio of products to meet the demands of consumers.",
+     "In addition to strategic customer relations, the Company has substantial manufacturing and import experience that enable it to be a reliable and low-cost supplier."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3], [P4], and [P6].",
+    "claim": "Gross margin expanded from 24.7% in 2024 to 26.9% in 2025, and rose to 28.8% for the nine-month 2026 period versus 26.6% in the 2025 period, reaching 29.4% in the third quarter of 2026.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The overall gross margin increased to 26.9% in 2025 compared with 24.7% in 2024.",
+     "For the nine months ended September 30, 2026, gross margin increased to 28.8% compared to 26.6% for the same period in 2025.",
+     "Escalade reported third quarter gross margin of 29.4%, an increase of 123 basis points versus the prior-year period, primarily driven by better absorption and a favorable customer and sales mix."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] and [P4].",
+    "claim": "Despite margin gains, net sales decreased 4.5% in 2025 and 3.2% in the third quarter of 2026, while nine-month 2026 net sales increased 0.8%.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Net sales decreased 4.5% in 2025 compared to 2024.",
+     "Sales decreased 3.2% for the third quarter of 2026, compared with the same period in the prior year.",
+     "For the nine months ended September 30, 2026, net sales increased 0.8% compared with the same period in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P8].",
+    "claim": "Escalade completed acquisitions in 2025 and 2026\u2014Gold Tip, AllCornhole, and ASL Solutions\u2014to strengthen archery and outdoor games and add domestic rotational molding capabilities for entry into the pet market.",
+    "facts": [
+     "P1",
+     "P8"
+    ],
+    "quotes": [
+     "In September 2025, Escalade acquired the assets of Gold Tip, a leading brand of products for target archery and bow and crossbow hunting from Revelyst, Inc., strengthening the Company\u2019s market position in archery.",
+     "In December 2025, Escalade acquired AllCornhole, a leading brand and supplier of cornhole bags and equipment for competitive cornhole play.",
+     "ASL Solutions\u2019 rotational molding expertise and durable, fully insulated dog houses expand Escalade\u2019s domestic production capabilities while providing a meaningful entry into the growing pet market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P2].",
+    "claim": "Escalade faces intense competition in highly fragmented, low-growth sporting goods markets from larger competitors with substantially greater financial resources who can discount prices more heavily.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The market for sporting goods is highly fragmented and intensely competitive.",
+     "A majority of the Company\u2019s products are in markets that are experiencing low growth rates.",
+     "Some of the current and potential competitors are larger than Escalade and have substantially greater financial resources that may be devoted to sourcing, promoting and selling their products, and may discount prices more heavily than the Company can afford."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P2].",
+    "claim": "Two major customers each accounted for more than ten percent and together accounted for thirty percent of consolidated gross sales in 2025, with one customer at approximately 19% of revenues and 23% of accounts receivable and another at approximately 11% of revenues, while industry consolidation heightens replacement risk.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The Company has two major customers, each of which accounted for more than ten percent, and together accounted for thirty percent, of consolidated gross sales in the Company\u2019s 2025 fiscal year.",
+     "During 2025 and 2024, the Company had one customer that accounted for approximately 19% of the Company\u2019s revenues.",
+     "During 2025 and 2024 the Company had another customer which accounted for approximately 11% and 13%, respectively, of the Company\u2019s revenues.",
+     "As of December 31, 2025, the Company had approximately 23% of its total accounts receivable with one customer.",
+     "Our customers continue to experience industry consolidation, which increases our risk that we may be unable to find sufficient alternative customers."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Financial distress or bankruptcy among customers could impair collection of receivables and force Escalade to write off substantial amounts.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "From time to time, one or more of the Company\u2019s customers have experienced, are experiencing, or may in the future experience financial difficulties that impair their ability to pay all amounts owed to the Company.",
+     "When this occurs, the Company may not be able to collect the full amount owed to it by the customer, and in severe situations may have to write off all or a substantial portion of those customer receivables."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P2].",
+    "claim": "Escalade relies on third-party foreign and domestic suppliers without long-term supply contracts, leaving suppliers free to alter prices, change terms, or stop supplying.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The Company does not enter into long-term supply contracts with these suppliers, and has no current plans to do so in the future.",
+     "These suppliers are not required to sell to the Company and are free to change the prices and other terms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P4].",
+    "claim": "Substantial imports from China and other foreign countries expose Escalade to newly imposed Trade Act tariffs, trade-policy and retaliatory-tariff uncertainties, and Middle East shipping disruptions that can raise costs or limit product availability.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The United States Government has made a series of announcements concerning tariffs enacted and/or proposed to be enacted on the importation of goods into the United States including a baseline tariff rate and individualized higher rates on many countries including countries that supply goods to the Company, including China from which the Company imports a substantial amount of goods.",
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions.",
+     "Additionally, hostilities in the Middle East have adversely affected shipping routes and oil prices."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Committing to manufacture products months before customer delivery exposes Escalade to lost sales and inventory markdowns if consumer preferences shift or unseasonable weather reduces demand.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The Company often makes commitments to manufacture products months in advance of the proposed delivery to customers.",
+     "The Company may have to take significant inventory markdowns on unpopular products that are overproduced and/or miss opportunities for other products that may rise in popularity, both of which could have a negative impact on profitability.",
+     "The Company\u2019s business is susceptible to unseasonable weather conditions, particularly as it relates to sports equipment and recreational outdoor products, which could lead to lost sales or greater than expected markdowns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Failure to protect intellectual property could allow competitors to duplicate Escalade's products, and expiration or termination of material trademarks or licensing agreements could result in loss of brand investments.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If the Company fails to adequately protect intellectual property through patents, trademarks and copyrights, its intellectual property rights may be misappropriated by others, invalidated or challenged, and our competitors could duplicate the Company\u2019s products or may otherwise limit any competitive design or manufacturing advantages.",
+     "The expiration or termination of one or more of the Company\u2019s material trademarks, patents or licensing agreements could result in the loss of such intellectual property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Product safety defects and recalls can harm Escalade's brands and sales, as seen following voluntary recalls of Ping Pong Avenger tables in 2021 and certain Goalsetter wall-mounted basketball goals in 2022.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Although recalls of our products have been infrequent, the Company\u2019s subsidiaries voluntarily recalled the Ping Pong Avenger table tennis table in 2021 due to concerns that it could create a potential fall risk to consumers and certain Goalsetter wall-mounted basketball goals in 2022 that could detach and fall to the ground unexpectedly if not installed correctly.",
+     "Our sales of such wall-mounted basketball goals have been adversely impacted as well."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Escalade's acquisition strategy risks operational inefficiencies, debt incurrence, or goodwill and intangible write-offs if acquired personnel, systems, or distribution are not successfully integrated.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The Company may not be able to successfully integrate operations that it acquires, including personnel, financial and information systems, cybersecurity measures, distribution, and operating procedures.",
+     "In addition, acquisitions may result in the incurrence of debt, contingent liabilities, amortization expense or write-offs of goodwill or other intangibles, any of which could affect the Company\u2019s financial position."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Falling behind rivals in adopting artificial intelligence could create competitive disadvantages, while cybersecurity threats against Escalade's networks have increased.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Additionally, we may face competitive disadvantages if we do not match our competitors development and use of artificial intelligence.",
+     "The Company has experienced an increase in cybersecurity threats and attempts to breach the Company\u2019s security networks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P6].",
+    "claim": "Executive leadership turnover initiated in 2025 and competition for qualified management and key personnel create operational disruption and retention risks.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "On October 30, 2025, the Company announced the appointment of an Interim President and Chief Executive Officer and the immediate departure of its prior President and Chief Executive Officer.",
+     "This change in executive management may result in some changes and/or disruptions to the Company\u2019s ordinary course of operations.",
+     "If the Company is not able to hire and retain its executives and key personnel, or if the compensation costs required to attract and retain such individuals becomes more expensive, the Company may suffer adverse consequences to its business, operations, and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Escalade's growth strategy depends on expanding its direct-to-consumer e-commerce distribution channel.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our growth strategy also depends on our ability to grow our e-commerce business, including continued expansion and development of our own direct to consumer e-commerce distribution channel."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A (P4) and Q3 2026 earnings release (P6).",
+    "claim": "As of September 30, 2026, Escalade held $24.5 million in cash and cash equivalents and had $60.0 million in availability on its senior secured revolving credit facility, with no balance drawn under the revolving facility.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Total cash and equivalents as of September 30, 2026 was $24.5 million, while availability on the senior secured revolving credit facility maturing in 2027 was $60.0 million.",
+     "As of September 30, 2026, the outstanding principal amount of the term loan was $13.1 million and total amount drawn under the revolving facility was zero."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 balance sheet (F1) and 2025 Form 10-K MD&A (P3).",
+    "claim": "As of Sep. 30, 2026, total current assets were 155,245 (table in thousands) compared to total current liabilities of 51,648 (table in thousands), versus 130,575 and 30,483 (table in thousands) at Dec. 31, 2025, when the current ratio was 4.3.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "TOTAL CURRENT ASSETS | 155,245 | 130,575 | 141,277",
+     "TOTAL CURRENT LIABILITIES | 51,648 | 30,483 | 42,850",
+     "The current ratio, a basic measure of liquidity (current assets divided by current liabilities), for 2025 was 4.3, compared to 3.9 in 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A (P4) and Q3 2026 balance sheet (F1).",
+    "claim": "Total debt fell by $5.4 million from December 31, 2025 to $13.1 million as of September 30, 2026, equal to 7.0% of stockholders' equity compared with 10.7% at December 31, 2025 and 11.7% at September 30, 2025.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "Total debt as of September 30, 2026 was $13.1 million, a decrease of $5.4 million from December 31, 2025.",
+     "As a percentage of stockholders\u2019 equity, total debt was 7.0%, 10.7% and 11.7% at September 30, 2026, December 31, 2025, and September 30, 2025 respectively."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A (P4).",
+    "claim": "As of September 30, 2026, Escalade complied with its Restated Credit Agreement covenants, which require a minimum interest coverage ratio of 3.50 to 1:00 and cap trailing twelve-month cash dividends and share repurchases at $12.0 million if the Funded Debt to EBITDA Ratio exceeds 1.75 to 1.0.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The fixed charge ratio covenant was replaced by a new minimum interest coverage ratio covenant of 3.50 to 1:00 effective September 30, 2024.",
+     "The Fifth Amendment further revised the restricted payments covenant to provide that if at any time the Company\u2019s Funded Debt to EBITDA Ratio would exceed 1.75 to 1.0, then the aggregate combined total of cash dividends and Company share repurchases may not exceed $12.0 million in any trailing twelve month period.",
+     "The Company was in compliance with the debt covenants set forth in the Restated Credit Agreement as of September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 cash flow statement (F3) and Q3 2026 earnings release (P6).",
+    "claim": "Net cash provided by operating activities rose to 29,735 (table in thousands) in the nine months ended Sep. 30, 2026 from 16,118 (table in thousands) in the prior-year period, including $14.9 million generated in the third quarter of 2026.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 29,735 | 16,118",
+     "During the third quarter of 2026, the Company generated $14.9 million in cash flow from operations, compared to cash used of $1.0 million in the prior-year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 cash flow statement (F3) and 2025 Form 10-K MD&A (P3).",
+    "claim": "Cash outflows in the nine months ended Sep. 30, 2026 included (2,245) for property and equipment purchases, (1,941) for acquisitions, (6,259) for cash dividends, and (1,281) for stock purchases (table in thousands), while 2026 capital expenditures were budgeted at approximately $4.2 million to $5.2 million.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Purchase of property and equipment | (2,245) | (1,267)",
+     "Acquisitions | (1,941) | (1,800)",
+     "Cash dividends paid | (6,259) | (6,207)",
+     "Purchase of stock | (1,281) | (2,171)",
+     "In 2026, the Company has budgeted capital expenditures in the range of approximately $4.2 million to $5.2 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 income statement (F2), Q3 2026 Form 10-Q MD&A (P4), and Q2 2026 earnings release (P9).",
+    "claim": "Nine-month 2026 earnings included $11.9 million of recognized IEEPA tariff recoveries\u2014approximately $11.5 million in operating income and $0.4 million in interest income\u2014compared with reported net income of $ 20,545 (table in thousands).",
+    "facts": [
+     "F2",
+     "P4",
+     "P9"
+    ],
+    "quotes": [
+     "During the nine months ended September 30, 2026, the Company recognized $11.9 million of tariff recoveries.",
+     "Approximately $11.5 million was recognized in operating income and $0.4 million was recognized in interest income.",
+     "Net Income | $ 6,733 | $ 5,554 | $ 20,545 | $ 9,998",
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 balance sheet (F1), Q3 2026 cash flow statement (F3), and 2025 Form 10-K Item 1 (P1).",
+    "claim": "Operating cash flow in the nine months ended Sep. 30, 2026 also reflected 3,441 from changes in assets and liabilities, 3,808 in depreciation and amortization, and 1,353 in stock-based compensation (table in thousands), while trade accounts payable increased from 9,150 at Dec. 31, 2025 to 21,880 at Sep. 30, 2026 (table in thousands).",
+    "facts": [
+     "F1",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Changes in assets and liabilities | 3,441 | 6",
+     "Depreciation and amortization | 3,808 | 3,767",
+     "Stock-based compensation | 1,353 | 1,468",
+     "Trade accounts payable | 21,880 | 9,150 | 21,119"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A (P4) and Q3 2026 balance sheet (F1).",
+    "claim": "Both the $13.1 million remaining term loan principal and the $60.0 million senior secured revolving credit facility mature on January 21, 2027, leaving no non-current long-term debt as of September 30, 2026.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "As of September 30, 2026, the outstanding principal amount of the term loan was $13.1 million and total amount drawn under the revolving facility was zero.",
+     "The term loan and revolving facility have a maturity date of January 21, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A (P4), Q3 2026 earnings release (P6), and 2025 Form 10-K MD&A (P3).",
+    "claim": "Escalade expects cash generated from its 2026 and Q1 2027 operations to be sufficient to pay the remaining term loan balance due on January 21, 2027, supplemented by $24.5 million in cash and equivalents and $60.0 million of revolving facility availability as of September 30, 2026.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The Company expects that cash generated from its 2026 and Q1 2027 operations will be sufficient to pay the remaining term loan balance due on January 21, 2027.",
+     "Total cash and equivalents as of September 30, 2026 was $24.5 million, while availability on the senior secured revolving credit facility maturing in 2027 was $60.0 million."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in the cited items (P1, P3, P8)",
+    "claim": "Escalade drives growth through strategic acquisitions that expand existing product lines\u2014such as Gold Tip in September 2025 and AllCornhole in December 2025\u2014and enter adjacent categories like the pet market via ASL Solutions in August 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "In addition, the Company has embarked on a strategy of acquiring companies or product lines that complement or expand the Company's existing product lines or provide expansion into new or emerging categories in sporting goods.",
+     "In September 2025, Escalade acquired the assets of Gold Tip, a leading brand of products for target archery and bow and crossbow hunting from Revelyst, Inc., strengthening the Company\u2019s market position in archery.",
+     "ASL provides a meaningful entry point into the growing pet market, which is a natural adjacency to our sporting goods and recreation markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2), with credit facility maturity context from P4",
+    "claim": "For acquisition-led growth to continue, Escalade must successfully integrate acquired operations and maintain adequate operating cash flow or external capital under its revolving credit facility.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The Company may not be able to successfully integrate operations that it acquires, including personnel, financial and information systems, cybersecurity measures, distribution, and operating procedures.",
+     "The rate of expansion will also depend on the availability of adequate capital, which in turn will depend in large part on cash flow generated by the business and the availability of equity and debt capital."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P3, P4, P6, P9)",
+    "claim": "Category demand in archery, safety, and outdoor games, supported by new product introductions, drove 6.2% net sales growth in the second quarter of 2026 and 0.8% net sales growth through September 30, 2026.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "Total net sales increased 6.2% on a year-over-year basis in the second quarter, primarily driven by increases in our archery categories, including the incremental contribution from our September 2025 acquisition of Gold Tip.",
+     "These decreases were partially offset by increases in our archery category, including strong vertical bow demand and the incremental contribution from our September 2025 acquisition of Gold Tip, as well as increased demand in the safety and outdoor games categories.",
+     "For the nine months ended September 30, 2026, net sales increased 0.8% compared with the same period in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P1, P2)",
+    "claim": "For product-led revenue growth to continue, Escalade must accurately anticipate consumer preferences and defend market share against larger competitors with greater financial resources across mostly low-growth sporting goods categories.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "A majority of the Company\u2019s products are in markets that are experiencing low growth rates.",
+     "Success depends in part on the ability to anticipate and respond in a timely manner to changing consumer demand and preferences regarding sporting goods.",
+     "Some of the current and potential competitors are larger than Escalade and have substantially greater financial resources that may be devoted to sourcing, promoting and selling their products, and may discount prices more heavily than the Company can afford."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2, P4)",
+    "claim": "Expanding distribution channels, including Escalade's own direct-to-consumer e-commerce channel, and leveraging established relationships with major retail customers serve as a core growth driver.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Our growth strategy also depends on our ability to grow our e-commerce business, including continued expansion and development of our own direct to consumer e-commerce distribution channel.",
+     "A key strategic advantage is the Company\u2019s established relationships with major customers that allow the Company to bring new products to market in a cost effective manner while maintaining a diversified portfolio of products to meet the demands of consumers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P1, P2)",
+    "claim": "For distribution-led growth to continue, Escalade must retain and diversify beyond its largest customers\u2014which accounted for 19% and 11% of 2025 revenues\u2014and scale its operational and financial systems.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "During 2025 and 2024, the Company had one customer that accounted for approximately 19% of the Company\u2019s revenues.",
+     "During 2025 and 2024 the Company had another customer which accounted for approximately 11% and 13%, respectively, of the Company\u2019s revenues.",
+     "If sales to one or more of the large customers would be lost or materially reduced, there can be no assurance that the Company will be able to replace such revenues, which could have a material adverse effect on the Company's business, results of operations and financial condition.",
+     "If the Company is not successful in continuing to support operational and financial systems, expanding the management team and increasing and effectively managing customers and suppliers, growth may result in operational inefficiencies and ineffective management of the Company\u2019s business, which could adversely affect its business and financial performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P3, P4, P6)",
+    "claim": "Gross margin expansion\u2014from 24.7% in 2024 to 26.9% in 2025 and 29.4% in the third quarter of 2026\u2014has driven earnings growth via a smaller operational footprint, fixed-cost absorption, and favorable sales mix.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "The overall gross margin increased to 26.9% in 2025 compared with 24.7% in 2024.",
+     "Gross margins were favorably impacted by lower manufacturing costs due to a smaller operational footprint, when compared to the prior-year period.",
+     "Gross margin increased 123 basis points to 29.4% for the third quarter of 2026 compared to 28.1% for the same period in 2025, primarily driven by better absorption and a favorable customer and sales mix.",
+     "\u201cGross margin improvement reflected a favorable sales mix and improved fixed-cost absorption resulting from the acquisitions we completed during 2025, which offset higher freight and material related costs incurred during the quarter,\u201d continued Griffin."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P1, P2, P4, P6)",
+    "claim": "For margin and earnings expansion to continue, Escalade must mitigate newly initiated Trade Act tariffs, Middle East shipping and oil-price disruptions, and price changes from foreign third-party suppliers with whom it holds no long-term contracts.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions.",
+     "Additionally, hostilities in the Middle East have adversely affected shipping routes and oil prices.",
+     "The Company does not enter into long-term supply contracts with these suppliers, and has no current plans to do so in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (F1, P4, P6)",
+    "claim": "For margin-driven earnings growth to continue, Escalade must maintain inventory and SG&A discipline even as inventories rose from 68,474 (table in thousands) at year-end 2025 to 77,757 (table in thousands) as of Sep. 30, 2026 and third-quarter SG&A increased 3.6%.",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The operational improvements we have made, together with our continued discipline in cost controls and inventory management, have established a margin structure that we believe is sustainable through the cycle.",
+     "Selling, general and administrative expenses (SG&A) were $11.6 million for the third quarter of 2026 compared to $11.2 million for the same period in the prior year, an increase of $0.4 million or 3.6%.",
+     "The increase in SG&A is largely driven by selling and marketing expenses related to recent acquisitions, acquisition-related professional fees and an increase in advertising expenses."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in P7 (Form 8-K Item 8.01)",
+    "claim": "Escalade's Board of Directors approved a quarterly dividend of $0.1525 per share to be paid to shareholders of record on January 4, 2027 and disbursed on January 11, 2027.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On October 27, 2026, the Board of Directors of Escalade approved a quarterly dividend of fifteen and twenty-five hundredths cents $0.1525 per share would be paid to all shareholders of record on January 4, 2027 and disbursed on January 11, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (Form 10-Q MD&A)",
+    "claim": "Following U.S. Supreme Court and U.S. Court of International Trade rulings invalidating IEEPA tariffs and entitling importers to refunds, Escalade recognized $11.9 million of tariff recoveries during the nine months ended September 30, 2026, with approximately $11.5 million in operating income and $0.4 million in interest income.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "While the United States Supreme Court issued a ruling earlier this year striking down tariffs previously imposed under the International Emergency Economic Powers Act (\u201cIEEPA\u201d), the U.S. government has since initiated new tariffs under various sections of the Trade Act.",
+     "During the nine months ended September 30, 2026, the Company recognized $11.9 million of tariff recoveries.",
+     "Approximately $11.5 million was recognized in operating income and $0.4 million was recognized in interest income.",
+     "During the three months ended September 30, 2026, the Company recognized $1.7 million of tariff recoveries related to the U.S. Court of International Trade ruling stating importers who paid IEEPA tariffs were entitled to refunds plus interest."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (Form 10-Q MD&A)",
+    "claim": "The U.S. government initiated new tariffs under various sections of the Trade Act after the Supreme Court struck down IEEPA tariffs, creating ongoing tariff challenges for Escalade.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "While the United States Supreme Court issued a ruling earlier this year striking down tariffs previously imposed under the International Emergency Economic Powers Act (\u201cIEEPA\u201d), the U.S. government has since initiated new tariffs under various sections of the Trade Act.",
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P9 (Form 8-K Item 8.01)",
+    "claim": "Escalade's Board of Directors approved a quarterly dividend of $0.1525 per share for shareholders of record on October 6, 2026, scheduled for disbursement on October 13, 2026.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "On July 29, 2026, the Board of Directors of Escalade approved a quarterly dividend of fifteen and twenty-five hundredths cents $0.1525 per share would be paid to all shareholders of record on October 6, 2026 and disbursed on October 13, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3 (Form 10-K)",
+    "claim": "Escalade acquired AllCornhole, a brand and supplier of cornhole bags and equipment for competitive cornhole play.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In December 2025, Escalade acquired AllCornhole, a leading brand and supplier of cornhole bags and equipment for competitive cornhole play."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Form 10-K Item 1A)",
+    "claim": "Escalade's prior President and Chief Executive Officer departed immediately and an Interim President and Chief Executive Officer was appointed, as announced on October 30, 2025.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "On October 30, 2025, the Company announced the appointment of an Interim President and Chief Executive Officer and the immediate departure of its prior President and Chief Executive Officer.",
+     "Both changes were effective as of October 29, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3 (Form 10-K)",
+    "claim": "Escalade acquired the assets of Gold Tip, an archery and bowhunting brand, from Revelyst, Inc.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In September 2025, Escalade acquired the assets of Gold Tip, a leading brand of products for target archery and bow and crossbow hunting from Revelyst, Inc., strengthening the Company\u2019s market position in archery."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (Form 10-Q MD&A) and P3 (Form 10-K MD&A)",
+    "claim": "Escalade entered into the Fifth Amendment to its Amended and Restated Credit Agreement, reducing maximum revolving facility availability from $75.0 million to $60.0 million with an $85.0 million accordion, replacing the fixed charge coverage covenant with a 3.50 to 1:00 minimum interest coverage ratio covenant, and capping combined cash dividends and share repurchases at $12.0 million over any trailing twelve month period if the Funded Debt to EBITDA Ratio exceeds 1.75 to 1.0.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "On October 11, 2024, the Company entered into the Fifth Amendment (the \u201cFifth Amendment\u201d) to its Amended and Restated Credit Agreement with its issuing bank, JPMorgan Chase Bank, N.A. and the other lenders identified therein (the \u201cRestated Credit Agreement\u201d).",
+     "The Fifth Amendment eliminated the fixed charge coverage ratio covenant and related provisions.",
+     "The fixed charge ratio covenant was replaced by a new minimum interest coverage ratio covenant of 3.50 to 1:00 effective September 30, 2024.",
+     "Under the terms of the Fifth Amendment, the Company and the Lender also agreed to decrease the maximum availability under the senior revolving credit facility from $75.0 million to $60.0 million, but added an accordion feature that could increase the facility in an amount not to exceed $85.0 million.",
+     "The Fifth Amendment further revised the restricted payments covenant to provide that if at any time the Company\u2019s Funded Debt to EBITDA Ratio would exceed 1.75 to 1.0, then the aggregate combined total of cash dividends and Company share repurchases may not exceed $12.0 million in any trailing twelve month period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (Form 10-K MD&A)",
+    "claim": "Escalade completed the discontinuance of its Mexico and Orlando, FL operations, sold its Mexican facilities, and terminated its long-term lease for the Orlando, FL facility.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Consistent with that philosophy, the Company completed the discontinuance of its Mexico operations, sale of its Mexican facilities, discontinuance of its Orlando, FL operations and terminated its long-term lease for the Orlando, FL facility in 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Form 10-K Item 1A)",
+    "claim": "Escalade's subsidiaries voluntarily recalled certain Goalsetter wall-mounted basketball goals that could detach and fall to the ground unexpectedly if not installed correctly.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Although recalls of our products have been infrequent, the Company\u2019s subsidiaries voluntarily recalled the Ping Pong Avenger table tennis table in 2021 due to concerns that it could create a potential fall risk to consumers and certain Goalsetter wall-mounted basketball goals in 2022 that could detach and fall to the ground unexpectedly if not installed correctly."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Form 10-K Item 1A)",
+    "claim": "Escalade's subsidiaries voluntarily recalled the Ping Pong Avenger table tennis table due to concerns that it could create a potential fall risk to consumers.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Although recalls of our products have been infrequent, the Company\u2019s subsidiaries voluntarily recalled the Ping Pong Avenger table tennis table in 2021 due to concerns that it could create a potential fall risk to consumers and certain Goalsetter wall-mounted basketball goals in 2022 that could detach and fall to the ground unexpectedly if not installed correctly."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in 10-Q Item 2 [P4] regarding Trade Act tariffs, China imports, IEEPA recoveries, and Middle East shipping disruptions, and in 10-K Item 1 [P1] and Item 1A [P2] regarding sourcing countries.",
+    "claim": "Newly initiated Trade Act tariffs, international trade policy uncertainties, and disrupted Middle East shipping routes could raise product costs and reduce profitability.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions.",
+     "Tariffs, restrictions on trade, rising energy costs and disrupted shipping routes have in the past and may again in the future result in increased costs and/or the unavailability of goods purchased by the Company, which in turn may result in lower profitability and/or a decline in sales as well as the loss of goodwill among customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 [P1] and Item 1A [P2].",
+    "claim": "Escalade had a customer accounting for approximately 19% of revenues and another customer accounting for approximately 11% of revenues in 2025.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The Company has two major customers, each of which accounted for more than ten percent, and together accounted for thirty percent, of consolidated gross sales in the Company\u2019s 2025 fiscal year.",
+     "During 2025 and 2024, the Company had one customer that accounted for approximately 19% of the Company\u2019s revenues.",
+     "During 2025 and 2024 the Company had another customer which accounted for approximately 11% and 13%, respectively, of the Company\u2019s revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q balance sheet [F1], 10-Q cash flow statement [F3], 10-K Item 1A [P2], 10-K Item 7 [P3], and 10-Q Item 2 [P4].",
+    "claim": "Escalade's remaining $13.1 million term loan and its senior revolving credit facility face an upcoming maturity, while credit agreement covenants restrict additional indebtedness, asset sales, and combined dividends and buybacks if leverage exceeds 1.75 to 1.0.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "As of September 30, 2026, the outstanding principal amount of the term loan was $13.1 million and total amount drawn under the revolving facility was zero.",
+     "The term loan and revolving facility have a maturity date of January 21, 2027.",
+     "Our current senior secured revolving credit facility contains provisions that limit our ability to incur additional indebtedness or make substantial asset sales, which might otherwise be used to finance our operations.",
+     "The Fifth Amendment further revised the restricted payments covenant to provide that if at any time the Company\u2019s Funded Debt to EBITDA Ratio would exceed 1.75 to 1.0, then the aggregate combined total of cash dividends and Company share repurchases may not exceed $12.0 million in any trailing twelve month period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q Item 2 [P4] and Q2 2026 earnings release [P9]; underlying income statement figures in [F2] and Q3 margin commentary in [P6].",
+    "claim": "Nine-month 2026 operating income and net income benefited from $11.9 million in IEEPA tariff recoveries that management states are not necessarily indicative of full-year results.",
+    "facts": [
+     "F2",
+     "P4",
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "During the nine months ended September 30, 2026, the Company recognized $11.9 million of tariff recoveries.",
+     "Excluding the tariff recovery, second quarter 2026 net income was $2.6 million, or $0.19 per diluted share.",
+     "Due to the above circumstances and as described generally in this Form 10-Q, the Company\u2019s results of operations for the period ended September 30, 2026 are not necessarily indicative of the results to be expected for fiscal year 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A [P2] and Item 1 [P1]; domestic manufacturing expansion stated in 8-K [P8].",
+    "claim": "Escalade does not enter into long-term supply contracts with its third-party suppliers, leaving suppliers free to alter prices, change terms, or cease supplying.",
+    "facts": [
+     "P1",
+     "P2",
+     "P8"
+    ],
+    "quotes": [
+     "The Company does not enter into long-term supply contracts with these suppliers, and has no current plans to do so in the future.",
+     "These suppliers are not required to sell to the Company and are free to change the prices and other terms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 [P1], Item 1A [P2], Item 7 [P3], 10-Q Item 2 [P4], and Q3 2026 earnings release [P6].",
+    "claim": "Escalade competes in fragmented, low-growth sporting goods markets against larger rivals, and recorded a 4.5% net sales decline in 2025 and a 3.2% decline in third-quarter 2026.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The market for sporting goods is highly fragmented and intensely competitive.",
+     "A majority of the Company\u2019s products are in markets that are experiencing low growth rates.",
+     "Sales decreased 3.2% for the third quarter of 2026, compared with the same period in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 [P1] and Item 1A [P2].",
+    "claim": "Escalade is subject to Consumer Product Safety Commission recall authority and product liability claims, following voluntary product recalls in 2021 and 2022.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Although recalls of our products have been infrequent, the Company\u2019s subsidiaries voluntarily recalled the Ping Pong Avenger table tennis table in 2021 due to concerns that it could create a potential fall risk to consumers and certain Goalsetter wall-mounted basketball goals in 2022 that could detach and fall to the ground unexpectedly if not installed correctly.",
+     "Our sales of such wall-mounted basketball goals have been adversely impacted as well.",
+     "If our warranty reserves and/or insurance coverage are inadequate to cover future warranty claims and/or potential product liability claims, our financial condition and operating results may be harmed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 [P1], Item 1A [P2], and Item 7 [P3].",
+    "claim": "Expiration or termination of material trademarks or licensing agreements, such as the exclusive North American STIGA distribution and production license, could impair brand revenues.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The Company has an agreement and contract with STIGA Sports AB for the exclusive right and license to distribute and produce table tennis equipment under the brand name STIGA\u00ae for North America.",
+     "The expiration or termination of one or more of the Company\u2019s material trademarks, patents or licensing agreements could result in the loss of such intellectual property.",
+     "The loss of such intellectual property and related rights could have a material adverse effect on the Company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A [P2] and Q3 2026 earnings release [P6]; inventory balances in 10-Q balance sheet [F1].",
+    "claim": "Manufacturing commitments made months in advance expose Escalade to excess inventory and markdowns if consumer demand shifts, with inventories at 77,757 (table in thousands) as of the third quarter of 2026.",
+    "facts": [
+     "F1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The Company often makes commitments to manufacture products months in advance of the proposed delivery to customers.",
+     "The Company may have to take significant inventory markdowns on unpopular products that are overproduced and/or miss opportunities for other products that may rise in popularity, both of which could have a negative impact on profitability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A [P2], 10-K Item 7 [P3], 10-Q Item 2 [P4], Q3 2026 release [P6], and 8-K [P8]; asset balances in [F1].",
+    "claim": "Recent acquisitions increase integration demands and SG&A expenses while creating risk of future write-offs against goodwill of 42,326 and net intangibles of 24,440 (table in thousands).",
+    "facts": [
+     "F1",
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "If the Company fails to successfully integrate acquisitions, the Company\u2019s business could suffer.",
+     "In addition, acquisitions may result in the incurrence of debt, contingent liabilities, amortization expense or write-offs of goodwill or other intangibles, any of which could affect the Company\u2019s financial position.",
+     "The increase in SG&A is largely driven by selling and marketing expenses related to recent acquisitions, acquisition-related professional fees and an increase in advertising expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A [P2], 10-K Item 7 [P3], 10-Q Item 2 [P4], and Q3 2026 release [P6].",
+    "claim": "The executive leadership transition following the prior CEO's departure in 2025 could disrupt ordinary operations and divert Board and management attention.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On October 30, 2025, the Company announced the appointment of an Interim President and Chief Executive Officer and the immediate departure of its prior President and Chief Executive Officer.",
+     "This change in executive management may result in some changes and/or disruptions to the Company\u2019s ordinary course of operations.",
+     "The increase in SG&A was primarily related to CEO transition costs incurred during 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A [P2].",
+    "claim": "Increasingly sophisticated cybersecurity threats and expanding use of artificial intelligence expose Escalade to operational disruption, data theft, liability, and compliance costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The Company has experienced an increase in cybersecurity threats and attempts to breach the Company\u2019s security networks.",
+     "Loss of customer or business information could disrupt operations, damage the Company\u2019s reputation, and expose the Company to claims from customers, financial institutions, payment card associations and other persons, any of which could have an adverse effect on the Company\u2019s business, results of operations and financial condition.",
+     "If our use of artificial intelligence yields results that are incomplete, inaccurate, biased, controversial, or otherwise deficient, we may face legal liability, reputational harm, or other adverse consequences."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A [P2], 8-K [P7], and 10-Q cash flow statement [F3]; market capitalization of 304995662 stated in screener row [S0].",
+    "claim": "Escalade's quarterly dividend is discretionary and depends on future operating cash flows, while its relatively low market capitalization contributes to low trading volume and stock price volatility.",
+    "facts": [
+     "S0",
+     "F3",
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "Our ability to pay dividends will depend on our ability to generate sufficient cash flows from operations in the future.",
+     "Our Board of Directors (Board) may, at its discretion, increase or decrease the intended level of dividends or entirely discontinue the payment of dividends at any time.",
+     "The market price of the Company\u2019s common stock is likely to be highly volatile as the stock market in general can be highly volatile."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated directly in P4 and P6 regarding maturity date, balances, and management expectations; refinancing terms are absent from the packet.",
+    "claim": "Will the Company renew or replace its $60.0 million senior secured revolving credit facility and generate enough cash flow to pay off the $13.1 million term loan balance at maturity?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The term loan and revolving facility have a maturity date of January 21, 2027.",
+     "The Company expects that cash generated from its 2026 and Q1 2027 operations will be sufficient to pay the remaining term loan balance due on January 21, 2027.",
+     "Total cash and equivalents as of September 30, 2026 was $24.5 million, while availability on the senior secured revolving credit facility maturing in 2027 was $60.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P4 that additional IEEPA claims may be recovered and that newly imposed tariff impacts remain uncertain.",
+    "claim": "How much more will the Company recover from IEEPA tariff claims after recognizing $11.9 million year-to-date, and how severely will newly initiated Trade Act tariffs and retaliatory restrictions affect costs and demand?",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Although the Company has recognized and received recoveries of certain IEEPA tariffs and may recover additional IEEPA claims as well, the Company still faces challenges from these newly imposed tariffs and uncertainties regarding international trade policy and practices including retaliatory tariffs and trade restrictions.",
+     "During the nine months ended September 30, 2026, the Company recognized $11.9 million of tariff recoveries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P2 for 2024 and 2025; no interim 2026 customer-concentration breakdown is provided in the packet.",
+    "claim": "Have the revenue shares of the two largest customers (19% and 11%) or the 23% single-customer accounts receivable concentration shifted in the current year, and which retailers are these customers?",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "During 2025 and 2024, the Company had one customer that accounted for approximately 19% of the Company\u2019s revenues.",
+     "During 2025 and 2024 the Company had another customer which accounted for approximately 11% and 13%, respectively, of the Company\u2019s revenues.",
+     "As of December 31, 2025, the Company had approximately 23% of its total accounts receivable with one customer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P6 that Gold Tip contributed incrementally and gross margin reached 28.8%, while exact standalone acquisition dollars are not disclosed.",
+    "claim": "How much of the nine-month 0.8% net sales growth and 28.8% gross margin came from the Gold Tip and AllCornhole acquisitions rather than organic demand, and is that margin level sustainable?",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "For the nine months ended September 30, 2026, net sales increased 0.8% compared with the same period in the prior year.",
+     "For the nine months ended September 30, 2026, gross margin increased to 28.8% compared to 26.6% for the same period in 2025.",
+     "The operational improvements we have made, together with our continued discipline in cost controls and inventory management, have established a margin structure that we believe is sustainable through the cycle."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed in F1, F3, P1, and P8; the financial statement footnotes explaining acquisition accounting are omitted from the packet.",
+    "claim": "What were the purchase price allocations and standalone earnings of Gold Tip, AllCornhole, and ASL Solutions, and why do both (1,941) and (1,800) (tables in thousands) appear under the ASL Solutions, Inc. member on the cash flow statement?",
+    "facts": [
+     "F1",
+     "F3",
+     "P1",
+     "P8"
+    ],
+    "quotes": [
+     "On August 24, 2026, Escalade, Inc. acquired substantially all the assets of ASL Solutions, Inc.",
+     "This asset acquisition is not material to Escalade as it does not involve a significant amount of assets for financial reporting purposes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the difference between the Interim CEO risk factor in P2 and the President and Chief Executive Officer title in P6 and P8.",
+    "claim": "When and under what compensation and governance terms did Patrick J. Griffin transition from Interim to permanent President and Chief Executive Officer, and have all transition costs ended?",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "On October 30, 2025, the Company announced the appointment of an Interim President and Chief Executive Officer and the immediate departure of its prior President and Chief Executive Officer.",
+     "The increase in SG&A was primarily related to CEO transition costs incurred during 2025.",
+     "\u201cOur third quarter results demonstrated the resilience of our more efficient operating model, with gross margin expanding 123 basis points year-over-year to 29.4% and strong cash flow from operations,\u201d stated Patrick J. Griffin, President and Chief Executive Officer of Escalade."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the control-environment remediation wording in P3 and P4; neither Item 9A nor Item 4 is included in the packet.",
+    "claim": "What underlying control deficiency prompted the remediation efforts referenced in management's risk disclosures, and has management concluded that internal control over financial reporting is effective?",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "the evaluation and implementation of remediation efforts designed and implemented to enhance the Company\u2019s control environment; the potential identification of one or more additional material weaknesses in the Company\u2019s internal control of which the Company is not currently aware or that have not yet been detected;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, F3, P2, and P3; fourth-quarter working-capital and capital-spending outcomes are not yet reported.",
+    "claim": "Does the rise in inventories from 68,474 to 77,757 and trade accounts payable from 9,150 to 21,880 (table in thousands) reflect normal seasonal restocking or slower demand, and will capital spending reach the $4.2 million to $5.2 million budget?",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "During 2024 and 2025, the Company successfully reduced inventory to more normalized levels across most of its categories.",
+     "In 2026, the Company has budgeted capital expenditures in the range of approximately $4.2 million to $5.2 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and P3; 2026 impairment test inputs and fair-value headroom are not disclosed in the Q3 2026 items.",
+    "claim": "What were the fair-value headroom, discount rate, and cash flow assumptions in the annual impairment review for the 42,326 (table in thousands) of goodwill?",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "The results of the quantitative impairment assessment of the Escalade Sports reporting unit indicated that the fair value of the reporting unit was greater than the carrying value as of September 1, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3, P2, P4, and P6; exact remaining share repurchase capacity and covenant ratio figures are not reported in the packet.",
+    "claim": "How much authorization remains under the share repurchase program, and what is the Company's current Funded Debt to EBITDA Ratio relative to its restricted-payments threshold?",
+    "facts": [
+     "F3",
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Furthermore, although the Board has authorized a share repurchase program, we are not obligated to make any purchases under the program, and the Board may discontinue the program at any time.",
+     "The Fifth Amendment further revised the restricted payments covenant to provide that if at any time the Company\u2019s Funded Debt to EBITDA Ratio would exceed 1.75 to 1.0, then the aggregate combined total of cash dividends and Company share repurchases may not exceed $12.0 million in any trailing twelve month period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed in F1, F2, and P4; the underlying interest-income breakdown and tax footnotes are omitted from the packet.",
+    "claim": "What generated the portion of 709 (table in thousands) in nine-month interest income beyond IEEPA recoveries, and what drove the deferred income tax liability increase from 3,302 to 6,303 (table in thousands)?",
+    "facts": [
+     "F1",
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Approximately $11.5 million was recognized in operating income and $0.4 million was recognized in interest income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P3; contract expiration dates, renewal terms, and per-licensor obligations are not disclosed in the packet.",
+    "claim": "What are the counterparties, expiration dates, and terms behind the 5,621 (table in thousands) step-up in minimum purchase, royalty, and license obligations, including the STIGA\u00ae license?",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The Company has an agreement and contract with STIGA Sports AB for the exclusive right and license to distribute and produce table tennis equipment under the brand name STIGA\u00ae for North America."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "ESCA",
+ "upside": -0.41057036369175326,
+ "valuation": null,
+ "value_base": 12.968798306756092,
+ "value_bear": 10.976589862524083,
+ "value_bull": 15.878979900977843,
+ "value_per_filed_share": {
+  "base": 12.968798306756092,
+  "bear": 10.976589862524083,
+  "bull": 15.878979900977843
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -17.6 points a year against the required return over 3 years"
+}
