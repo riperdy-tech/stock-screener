@@ -25,6 +25,7 @@ import { Shell } from '../Shell';
 import { StockLeft } from './StockLeft';
 import { StockRight } from './StockRight';
 import { DASH, Disclosure } from './stockParts';
+import { DriverFlagsPanel } from './DriverFlagsPanel';
 import { MacroEventsPanel } from './MacroEventsPanel';
 import { SourceTabs } from './SourceTabs';
 import { VerdictCard } from './VerdictCard';
@@ -188,6 +189,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
             {/* Everything else, each closed by default */}
             <div className="mt-6 max-w-[720px]">
                 <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} monthly={data.monthly} />
+                <DriverFlagsPanel p={data.driverFlags} ticker={row.ticker} />
                 {news > 0 && (
                     <div className="mt-6">
                         <Disclosure title={t('pgEvTitle')} sub={String(news)}>

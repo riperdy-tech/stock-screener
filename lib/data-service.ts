@@ -962,6 +962,9 @@ export interface MriSectorRanking {
     date?: string | null;
     macro_confidence?: number | null;
     sector_ranking?: MriSectorRow[] | null;
+    /** `retired_no_skill` once the ranking is withdrawn; `status_note` is then the file's own sentence, shown as written. */
+    status?: string | null;
+    status_note?: string | null;
 }
 
 export interface MriValidationRow {
@@ -1022,6 +1025,85 @@ export async function fetchMriSectorValidation(): Promise<MriSectorValidation | 
 export async function fetchMriRiskState(): Promise<MriRiskState | null> {
     return fetchJson<MriRiskState>('/data/mri/risk_state.json');
 }
+
+// ── The five files of the market-state review (WO_MS1). Written by the MRI, copied in by scripts/mri_sync.py. Every field
+// is optional. The date key is `asof` in the first two files and `as_of` in the other three. ───────────────────────────
+
+export interface MriSeriesFact { level?: number | null; change_unit?: string | null; change_5?: number | null; change_21?: number | null; change_63?: number | null }
+
+/** The daily market state (market_state.json): the stress step, what drives it, and the facts behind it. */
+export interface MriMarketState {
+    asof?: string | null;
+    built_at?: string | null;
+    step?: string | null;
+    since?: string | null;
+    driver?: string | null;
+    driver_window?: number | null;
+    backdrop?: string | null;
+    summary?: string | null;
+    facts?: {
+        spy?: { below_200d?: boolean | null; drawdown_pct?: number | null; return_5?: number | null; return_21?: number | null; return_63?: number | null } | null;
+        vix?: MriSeriesFact | null;
+        breadth_below_200d_pct?: number | null;
+        series?: Record<string, MriSeriesFact | undefined> | null;
+        sectors?: Record<string, { sector_id?: string | null; relative_21?: number | null } | undefined> | null;
+    } | null;
+}
+
+export type MriMonthValue = { value?: number | null; month?: string | null } | null;
+
+/** The economy in four words (economy_state.json). */
+export interface MriEconomyState {
+    asof?: string | null;
+    summary?: string | null;
+    inflation?: { level?: string | null; direction?: string | null; series?: Record<string, { rate_12?: MriMonthValue } | undefined> | null } | null;
+    policy?: { direction?: string | null; funds_rate?: MriMonthValue; change_6m?: MriMonthValue } | null;
+    jobs?: { state?: string | null; unemployment?: MriMonthValue; rise_from_low?: MriMonthValue } | null;
+    growth?: { state?: string | null; direction?: string | null; payrolls_rate_12?: MriMonthValue } | null;
+}
+
+export interface MriDriverMove { change?: number | null; moved?: boolean | null }
+
+/** What the driver moves explain, by driver and by sector fund (driver_exposures.json). */
+export interface MriDriverExposures {
+    as_of?: string | null;
+    summary?: string | null;
+    drivers?: Record<string, { unit?: string | null; windows?: Record<string, MriDriverMove | undefined> | null } | undefined> | null;
+    funds?: Record<string, {
+        sector_id?: string | null;
+        readings?: Record<string, { realised?: number | null; implied_total?: number | null; unexplained?: number | null } | undefined> | null;
+    } | undefined> | null;
+}
+
+/** The news read of the day (daily_read.json). Status `fresh`, `kept_previous` or `none`. */
+export interface MriDailyRead {
+    as_of?: string | null;
+    status?: string | null;
+    carried_from?: string | null;
+    detail?: string | null;
+    agree?: boolean | null;
+    model?: string | null;
+    read?: {
+        driver?: string | null;
+        why?: string | null;
+        changed_since_previous?: string | null;
+        exposed?: { what?: string | null; direction?: string | null; reason?: string | null }[] | null;
+    } | null;
+    prices?: { driver?: string | null } | null;
+    quotes?: { text?: string | null; source?: string | null; source_url?: string | null; published_at?: string | null }[] | null;
+}
+
+/** Per-stock sensitivities to the drivers (stock_driver_flags.json). `exposures` null means the stock was not fitted. */
+export interface StockDriverFlags {
+    as_of?: string | null;
+    tickers?: Record<string, { exposures?: Record<string, unknown> | null; flags?: { text?: string | null }[] | null } | undefined> | null;
+}
+
+export const fetchMriMarketState = () => fetchJson<MriMarketState>('/data/mri/market_state.json');
+export const fetchMriEconomyState = () => fetchJson<MriEconomyState>('/data/mri/economy_state.json');
+export const fetchMriDriverExposures = () => fetchJson<MriDriverExposures>('/data/mri/driver_exposures.json');
+export const fetchMriDailyRead = () => fetchJson<MriDailyRead>('/data/mri/daily_read.json');
+export const fetchStockDriverFlags = () => fetchJson<StockDriverFlags>('/data/mri/stock_driver_flags.json');
 
 // ── The cloud news job's files (WO_MP2). Written by the MRI's cloud run, copied in by scripts/mri_sync.py. Every field is
 // optional: the page shows what is there and says so when something is not. ──────────────────────────────────────────

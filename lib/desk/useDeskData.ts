@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
     fetchAnalystTargets, fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
-    fetchMriRegime, fetchOverlaySignals,
+    fetchMriRegime, fetchOverlaySignals, fetchMriMarketState, fetchMriEconomyState, fetchMriDriverExposures, fetchMriDailyRead, fetchStockDriverFlags,
     fetchMriDailySummary, fetchMriMacroFeatures, fetchMriRegimeTimeline, fetchMriRiskState, fetchMriSectorRanking, fetchMriSectorValidation,
     fetchMriCloudDaily, fetchMriCloudExport, fetchMriCombined, fetchMriDataHealth, fetchMriHistoryIndex, fetchMriNber, fetchMriNewsAccumulation,
     fetchMriNewsMonitoring, fetchMriNewsScores, fetchMriNewsSources, fetchMriSnapshotManifest,
@@ -22,7 +22,7 @@ import {
     type GeminiCOverlayPayload, type GeminiCRow, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
     type MriCloudDaily, type MriCloudExport, type MriCombinedDiagnostic, type MriDataHealth, type MriHistoryIndex, type MriNberBenchmark,
     type MriNewsAccumulation, type MriNewsMonitoring, type MriNewsScoreReport, type MriNewsSources, type MriSnapshotManifest,
-    type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict,
+    type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriMarketState, type MriEconomyState, type MriDriverExposures, type MriDailyRead, type StockDriverFlags, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -83,6 +83,8 @@ export interface DeskData {
     monthly: MonthlyBooksPayload | null;
     /** MRI news candidates index (display only). Null when the file is absent. */
     macroEvents: MacroEventsPayload | null;
+    /** Measured sensitivities by ticker (display only). Null when the file is absent. */
+    driverFlags: StockDriverFlags | null;
     ledgers: any | null;
     stockInfo: Record<string, StockInfo>;
     /** Pipeline status files. Each is null when its file did not load; none blocks the page. */
@@ -97,7 +99,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, geminiC: {}, geminiCMeta: null, analystTargets: { tickers: {} }, monthly: null, macroEvents: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, geminiC: {}, geminiCMeta: null, analystTargets: { tickers: {} }, monthly: null, macroEvents: null, driverFlags: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null, priceSession: null,
 };
@@ -145,7 +147,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, gc, mb, ep, at] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, gc, mb, ep, at, dfl] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -161,6 +163,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('monthly', fetchMonthlyBooks),
         optional('enginePrices', fetchEnginePrices),
         optional('analystTargets', fetchAnalystTargets),
+        optional('driverFlags', fetchStockDriverFlags),
     ]);
 
     const stockInfo: Record<string, StockInfo> = {};
@@ -215,6 +218,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         analystTargets: at ?? { tickers: {} },
         monthly: (mb as MonthlyBooksPayload | null) ?? null,
         macroEvents: (me as MacroEventsPayload | null) ?? null,
+        driverFlags: (dfl as StockDriverFlags | null) ?? null,
         ledgers: pl,
         stockInfo,
         manifest, regime, anchor,
@@ -335,13 +339,21 @@ export interface MacroPanelData {
     ranking: MriSectorRanking | null;
     validation: MriSectorValidation | null;
     risk: MriRiskState | null;
-    loaded: Record<'daily' | 'timeline' | 'features' | 'ranking' | 'validation' | 'risk', boolean>;
+    market: MriMarketState | null;
+    economy: MriEconomyState | null;
+    exposures: MriDriverExposures | null;
+    dailyRead: MriDailyRead | null;
+    loaded: Record<'daily' | 'timeline' | 'features' | 'ranking' | 'validation' | 'risk' | 'market' | 'economy' | 'exposures' | 'dailyRead', boolean>;
 }
 
 export function useMacroPanelData(): MacroPanelData {
     const [state, setState] = useState<MacroPanelData>({
         daily: null, timeline: null, features: null, ranking: null, validation: null, risk: null,
-        loaded: { daily: false, timeline: false, features: false, ranking: false, validation: false, risk: false },
+        market: null, economy: null, exposures: null, dailyRead: null,
+        loaded: {
+            daily: false, timeline: false, features: false, ranking: false, validation: false, risk: false,
+            market: false, economy: false, exposures: false, dailyRead: false,
+        },
     });
     useEffect(() => {
         let alive = true;
@@ -357,6 +369,10 @@ export function useMacroPanelData(): MacroPanelData {
             load('ranking', fetchMriSectorRanking);
             load('validation', fetchMriSectorValidation);
             load('risk', fetchMriRiskState);
+            load('market', fetchMriMarketState);
+            load('economy', fetchMriEconomyState);
+            load('exposures', fetchMriDriverExposures);
+            load('dailyRead', fetchMriDailyRead);
         };
         run();
         invalidationListeners.add(run);

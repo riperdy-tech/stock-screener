@@ -11,6 +11,7 @@ import {
     confidenceText, macroTitle, MACRO_STATIC_USES, mriStale, ordinalPercentile, parseExplanation,
     regimeBars, sectorTilt, shockName,
 } from '@/lib/desk/macro';
+import { driverPhrase, isWarnStep, marketStale, stepKey } from '@/lib/desk/marketState';
 import { fill } from '@/lib/desk/text';
 import { invalidateDeskCache, useMacroCloudData, useMacroData, useMacroPanelData } from '@/lib/desk/useDeskData';
 import { Chip } from '../primitives';
@@ -19,6 +20,7 @@ import {
     DimensionsPanel, DirectionPanel, IndicatorsPanel, LatestRunPanel, MacroStatsPanel, MethodologyTab, ProbabilityHistoryPanel,
     QuadrantPanel, ReadingLines, RibbonPanel, RiskDialPanel, Section, SectorsTab, SourceHealthPanel, WarningsPanel,
 } from './MacroPanels';
+import { TodaySection, useDriverText } from './TodayPanels';
 import {
     ClassifyPanel, CloudExportRows, CombinedPanel, CoveragePanel, DataHealthPanel, LowConfidencePanel, NberPanel, NewsSourceHealthPanel,
     NewsSourcesPanel, NewsThemesPanel, ReadinessPanel, RunHistoryPanel, type CloudCtx,
@@ -69,6 +71,11 @@ export function MacroPage() {
     };
     const now = useMemo(() => Date.now(), []);
     const ctx: CloudCtx = { cloud, panels, now };
+    const driverText = useDriverText();
+    // The headline is the market state when its file loaded and names a step this page knows; else it is the monthly regime, as before.
+    const ms = panels.market;
+    const stepK = stepKey(ms?.step);
+    const live = ms != null && stepK !== null;
 
     const bars = regimeBars(regime);
     const title = macroTitle(regime);
@@ -91,18 +98,37 @@ export function MacroPage() {
     return (
         <Shell tab="macro" onReload={invalidateDeskCache}>
             <div className="pb-6 pt-6">
-                <p className="font-mono text-[11px] uppercase tracking-[.03em] text-off">
-                    {fill(t('mcKicker'), { date: regime?.date ? regime.date.slice(0, 7) : DASH, built: localMdHm(regime?.built_at) })}
-                    {regimeStale && <span className="text-warn"> · ● {t('mcStale')}</span>}
-                </p>
-                <h1 className="mt-1.5 text-[22px] font-bold leading-tight tracking-head text-ink sm:text-[24px]">
-                    {title.head === null
-                        ? DASH
-                        : <>{title.head}{title.strength && <> — {t(title.strength)}</>}</>}
-                </h1>
-                <p className="mt-1.5 text-[13.5px] text-ink-2">
-                    {fill(t('mcSub'), { c: confidenceText(regime?.confidence) })}
-                </p>
+                {live ? (
+                    <>
+                        <p className="font-mono text-[11px] uppercase tracking-[.03em] text-off">
+                            {fill(t('mcTKicker'), { date: ms.asof ?? DASH, built: localMdHm(ms.built_at) })}
+                            {marketStale(ms.asof, now) && <span className="text-warn"> · ● {t('mcStale')}</span>}
+                        </p>
+                        <h1 className={`mt-1.5 text-[22px] font-bold leading-tight tracking-head sm:text-[24px] ${isWarnStep(ms.step) ? 'text-warn' : 'text-ink'}`}>
+                            {[
+                                t(stepK),
+                                ms.since ? fill(t('mcTSince'), { date: ms.since }) : null,
+                                ms.driver ? driverText(driverPhrase(ms.driver)) : null,
+                            ].filter(Boolean).join(' · ')}
+                        </h1>
+                        {ms.summary && <p className="mt-1.5 text-[13.5px] text-ink-2">{ms.summary}</p>}
+                    </>
+                ) : (
+                    <>
+                        <p className="font-mono text-[11px] uppercase tracking-[.03em] text-off">
+                            {fill(t('mcKicker'), { date: regime?.date ? regime.date.slice(0, 7) : DASH, built: localMdHm(regime?.built_at) })}
+                            {regimeStale && <span className="text-warn"> · ● {t('mcStale')}</span>}
+                        </p>
+                        <h1 className="mt-1.5 text-[22px] font-bold leading-tight tracking-head text-ink sm:text-[24px]">
+                            {title.head === null
+                                ? DASH
+                                : <>{title.head}{title.strength && <> — {t(title.strength)}</>}</>}
+                        </h1>
+                        <p className="mt-1.5 text-[13.5px] text-ink-2">
+                            {fill(t('mcSub'), { c: confidenceText(regime?.confidence) })}
+                        </p>
+                    </>
+                )}
                 {missing.length > 0 && (
                     <p className="mt-2 font-mono text-[11px] text-warn">
                         {fill(t('mcFileMissing'), { file: missing.join(', ') })}
@@ -111,7 +137,7 @@ export function MacroPage() {
                 {!allLoaded && missing.length === 0 && (
                     <p className="mt-2 font-mono text-[11px] text-off">{t('mcLoading')}</p>
                 )}
-                <ReadingLines panels={panels} />
+                {!live && <ReadingLines panels={panels} />}
 
                 <div className="mt-5 flex gap-1.5 overflow-x-auto pb-1" role="tablist" aria-label={t('mcTabsAria')}>
                     {TABS.map((x) => (
@@ -123,7 +149,22 @@ export function MacroPage() {
 
                 {tab === 'overview' && <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,1fr)_340px]">
                     <div className="min-w-0 space-y-6">
-                        <Section title={t('mcRegimes')}>
+                        <TodaySection
+                            market={panels.market} economy={panels.economy} exposures={panels.exposures} dailyRead={panels.dailyRead}
+                            loaded={panels.loaded.dailyRead}
+                        />
+
+                        <Section title={t('mcTSlowTitle')}>
+                            <p className="mt-2 text-[12.5px] text-ink-2">{t('mcTSlowSub')}</p>
+                            {live && (
+                                <>
+                                    <p className="mt-2 text-[13.5px] font-semibold text-ink">
+                                        {title.head === null ? DASH : <>{title.head}{title.strength && <> — {t(title.strength)}</>}</>}
+                                        <span className="ml-2 font-normal text-ink-2">{fill(t('mcSub'), { c: confidenceText(regime?.confidence) })}</span>
+                                    </p>
+                                    <ReadingLines panels={panels} />
+                                </>
+                            )}
                             {bars.length === 0
                                 ? <p className="mt-3 font-mono text-[11px] text-off">{DASH}</p>
                                 : (

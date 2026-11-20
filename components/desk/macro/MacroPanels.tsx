@@ -373,6 +373,9 @@ export function SectorsTab({ panels }: { panels: MacroPanelData }) {
     const spread = active?.top_minus_bottom_spread;
     return (
         <div className="space-y-6">
+            {panels.ranking?.status === 'retired_no_skill' && panels.ranking.status_note && (
+                <p className="text-[13px] leading-relaxed text-warn">{panels.ranking.status_note}</p>
+            )}
             <Section title={t('mcSectorRanking')} right={<Tag>{t('mcContextOnly')}</Tag>}>
                 <Note>{t('mcEvSector')}</Note>
                 <Gate loaded={panels.loaded.ranking} ok={rows.length > 0}>
@@ -553,6 +556,7 @@ export function MethodologyTab() {
     return (
         <div className="max-w-3xl space-y-6">
             <p className="text-[13.5px] leading-relaxed text-ink-2">{t('mmIntro')}</p>
+            <p className="text-[13.5px] leading-relaxed text-ink-2">{t('mcTMethod')}</p>
             {METHOD_SECTIONS.map((s) => (
                 <Section key={s.title} title={t(s.title)}>
                     <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[13px] leading-relaxed text-ink-2">
