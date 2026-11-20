@@ -1,9 +1,9 @@
 {
- "count": 185,
+ "count": 186,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-20T00:39:03Z",
- "list_covered": 156,
+ "generated_at": "2026-11-20T00:50:21Z",
+ "list_covered": 157,
  "list_names": 160,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -4970,6 +4970,39 @@
    "verdict": "WATCH",
    "verdict_reason": "expected return +4.8 points a year against the required return over 3 years; the two runs do not both reach BUY"
   },
+  "PBR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-11-18T00:03:58.000Z",
+    "accepted_utc": "2026-11-18T05:03:58Z",
+    "accession": "0001292814-26-005346",
+    "decision_time": "2026-11-20T00:39:27Z",
+    "form": "6-K",
+    "period": "2026-09-30"
+   },
+   "claims": 85,
+   "claims_supported": 80,
+   "date": "2026-11-20T00:39:27Z",
+   "family": "commodity",
+   "flags": [
+    "In 2025, Petrobras recorded net impairment of assets of 1,519 (table in millions USD).",
+    "Brazil introduced an Export Tax on crude oil and road diesel in March 2026 and maintained crude oil export taxation through the end of 2026, resulting in R$ 6.9 billion of Export Tax payments by Petrobras through September 2026.",
+    "Petrobras announced the upcoming Board of Directors approval submission and investor webcast for its new 2027-2031 Business Plan."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "diluted share count not filed",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "diluted share count not filed"
+  },
   "PCRX": {
    "alpha_pts": 3.0944248729200123,
    "analysis": "complete",
@@ -7535,7 +7568,7 @@
  "verdict_counts": {
   "AVOID": 45,
   "BUY": 44,
-  "NO_CALL": 79,
+  "NO_CALL": 80,
   "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
