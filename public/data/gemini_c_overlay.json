@@ -1,10 +1,10 @@
 {
- "count": 182,
+ "count": 183,
  "effort": "high",
- "fill_complete": true,
- "generated_at": "2026-11-19T18:20:53Z",
- "list_covered": 159,
- "list_names": 159,
+ "fill_complete": false,
+ "generated_at": "2026-11-20T00:14:38Z",
+ "list_covered": 154,
+ "list_names": 160,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -6811,6 +6811,39 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -3.9 points a year against the required return over 3 years"
   },
+  "VALE": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-10-30T17:43:33.000Z",
+    "accepted_utc": "2026-10-30T21:43:33Z",
+    "accession": "0001292814-26-005070",
+    "decision_time": "2026-11-20T00:04:41Z",
+    "form": "6-K",
+    "period": "2026-09-30"
+   },
+   "claims": 69,
+   "claims_supported": 64,
+   "date": "2026-11-20T00:04:41Z",
+   "family": "commodity",
+   "flags": [
+    "For the fiscal year ended Dec. 31, 2025, Vale recorded net impairment and disposal losses on non-current assets of (4,599) (table in USD millions).",
+    "During the fiscal year ended Dec. 31, 2025, Vale recorded cash outflows for payments related to the Samarco dam failure of (2,298) (table in USD millions).",
+    "During the fiscal year ended Dec. 31, 2025, Vale recorded cash outflows for partial repurchase and remuneration of participative shareholder's debentures of (945) (table in USD millions)."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
+  },
   "VEON": {
    "alpha_pts": 29.22565883630352,
    "analysis": "complete",
@@ -7436,7 +7469,7 @@
  "verdict_counts": {
   "AVOID": 45,
   "BUY": 44,
-  "NO_CALL": 76,
+  "NO_CALL": 77,
   "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
