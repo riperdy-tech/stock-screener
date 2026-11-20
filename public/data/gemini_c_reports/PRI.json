@@ -1,0 +1,1116 @@
+{
+ "alpha_pts": 6.111149314132041,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-05T19:11:34.000Z",
+  "accepted_utc": "2026-11-06T00:11:34Z",
+  "accession": "0001193125-26-449402",
+  "decision_time": "2026-11-20T10:09:33Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 58,
+ "claims_supported": 57,
+ "date": "2026-11-20T10:09:33Z",
+ "decided": {
+  "flags": [
+   "run 1000: quotes_verified: 13 of 13",
+   "run 3000: quotes_verified: 8 of 8"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.2839, growth 0.0375, r 0.0931, F 10",
+  "route": "financial",
+  "run_gap": 0.034592301811056075,
+  "runs": {
+   "1000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 9900160322.004566,
+     "implied_pb": 4.380478263879432,
+     "seam_ratio": 1.0176399999999999,
+     "tv_share": 0.3941590073364329
+    },
+    "flags": [
+     "quotes_verified: 13 of 13"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.15,
+      0.03,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.25,
+     "roe": [
+      0.328,
+      0.29,
+      0.29,
+      0.285,
+      0.28
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.2839, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 57
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.0,
+      0.06
+     ],
+     "long_run_roe": [
+      0.2,
+      0.29
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total stockholders' equity | 2,826,594 | 2,445,902"
+       },
+       {
+        "id": "F1",
+        "quote": "Effect of change in discount rate assumptions on the liability for future policy benefits | 550,437 | 134,594"
+       },
+       {
+        "id": "F3",
+        "quote": "Common stock repurchased | (392,314) | (376,062)"
+       },
+       {
+        "id": "P5",
+        "quote": "Adjusted stockholders' equity | $2,496,450 | $2,400,631 | 4%"
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Year 1 growth is large because of AOCI: total equity is already 2,826.6 million at September 2026 against 2,445.9 million at year-end. Most of that rise is the discount-rate effect, so I haircut it for possible Q4 reversal. After that, buybacks and dividends absorb most earnings, so book growth is only about 3% a year."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Primerica Life Insurance Company's estimated statutory risk-based capital ratio was approximately 445% as of September 30, 2026"
+       },
+       {
+        "id": "P5",
+        "quote": "Returned $159 million to stockholders during the quarter, including $122 million of share repurchases and $37 million of dividends paid"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The moat is distribution scale and reinsurance structure, which should erode slowly. A 10-year fade reflects a durable but not permanent ROE premium, with a stable RBC ratio and ratings."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Growth of book equity adds value only where the return on equity is above r."
+       },
+       {
+        "id": "P4",
+        "quote": "The number of life-licensed independent sales representatives as of September 30, 2026 was lower compared to December 31, 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The asset-light, reinsured and fee-based model supports ROE well above the 9.31% cost of equity. Recruiting is weakening, regulatory risk to the independent-contractor model is real, and competition will pull returns down over time, so I fade to about 25%, below the record median of 0.2839."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Return on stockholders' equity (ROE) was 31.3%; adjusted net operating income return on adjusted stockholders' equity (ROAE) was 33.9%"
+       },
+       {
+        "id": "REC",
+        "quote": "return on opening common equity 0.3325"
+       },
+       {
+        "id": "F2",
+        "quote": "Net income | $ 209,127 | $ 206,793 | $ 601,501 | $ 554,187"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Recent returns are about 31-34% on both GAAP and adjusted equity. Year 1 uses opening equity of 2,445.9 million with roughly 800 million of income, which gives about 0.33. From year 2 the opening base is inflated by AOCI (equity 2,826.6 million vs adjusted 2,496.5 million), so GAAP ROE steps down to about 0.29 even if earnings hold. Term Life margin pressure is offset by ISP growth."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Our ISP segment is expected to benefit over the long term from favorable demographic trends."
+       },
+       {
+        "id": "P4",
+        "quote": "New policies issued during the three and nine months ended September 30, 2026 decreased compared to the same periods in 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is anchored to long-run nominal growth of about 3.75%, trimmed because the sales force and term life sales are shrinking. ISP demographics support continued expansion of fee revenue. The company returns most of its capital, so book growth stays modest."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.15,
+      "input_hit": "long_run_roe",
+      "risk": "Reclassification of independent sales representatives as employees, or new franchise or earnings-claims rules, raises costs and impairs recruiting, cutting long-run returns."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "book_growth",
+      "risk": "The AOCI gain reverses as rates fall, or an equity-market downturn cuts ISP fees. Year 1 book growth would then be far lower than my estimate."
+     },
+     {
+      "bear_value": 0.24,
+      "input_hit": "roe",
+      "risk": "The sales force keeps shrinking and term life lapses stay elevated, so Term Life profit erodes faster than ISP grows."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.12,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "long_run_roe": 0.2,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.18,
+       0.06,
+       0.06,
+       0.06,
+       0.06
+      ],
+      "long_run_roe": 0.29,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "ROE is very high (about 31-33%) because Primerica is mainly a distribution and fee business. It cedes most mortality risk to reinsurers, so little capital is tied up, and it pays out most of its earnings. Reported ROE is also flattered by buybacks that keep the equity base small. The 2021 and 2022 swings in the record reflect equity restructuring and AOCI effects. In 2026 GAAP equity jumped from AOCI, mainly the discount-rate effect on policy liabilities, which will dilute GAAP ROE and may reverse.",
+     "why": "Primerica Life's statutory RBC ratio is about 445%, and nine-month buybacks plus dividends were about 505 million against net income of 601.5 million, so capital is not the limit on payouts. Book equity grows slowly because most earnings are returned. The 2026 GAAP equity increase is mostly a volatile AOCI item, not retained earnings, and could unwind if rates fall. Term Life profit is softening as the sales force shrinks, but ISP growth offsets it, so ROE should stay far above the cost of equity and drift down modestly."
+    },
+    "value_at_old_defaults": 358.88466434810164,
+    "values": {
+     "base": 327.8525259051172,
+     "bear": 244.95939393220456,
+     "bull": 462.78892967796764
+    }
+   },
+   "3000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 10248657312.376791,
+     "implied_pb": 4.5346761194393945,
+     "seam_ratio": 1.0359130434782597,
+     "tv_share": 0.4149887248929138
+    },
+    "flags": [
+     "quotes_verified: 8 of 8"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.15,
+      0.05,
+      0.05,
+      0.045,
+      0.045
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.24,
+     "roe": [
+      0.325,
+      0.29,
+      0.285,
+      0.28,
+      0.275
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.2839, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 57
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "long_run_roe": [
+      0.19,
+      0.28
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total stockholders' equity | 2,826,594 | 2,445,902"
+       },
+       {
+        "id": "F3",
+        "quote": "Common stock repurchased | (392,314) | (376,062)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Equity was already $2,826.6 million at September 30 against $2,445.9 million at year-end 2025 (up 16%), mainly from AOCI. Afterwards, buybacks and dividends take most of earnings, leaving adjusted equity growing only about 4-5% a year."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Primerica Life Insurance Company's estimated statutory risk-based capital ratio was approximately 445% as of September 30, 2026"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The distribution franchise and the large in-force block are durable, but a 33% ROE is unlikely to persist, so a medium-length fade of about ten years fits."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "generate substantial cash flow and contribute to strong returns on invested capital"
+       },
+       {
+        "id": "P4",
+        "quote": "New policies issued during the three and nine months ended September 30, 2026 decreased compared to the same periods in 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Fee-like revenue and heavy reinsurance support returns far above the 9.3% cost of equity for a long time. Competition, sales-force erosion and regulatory pressure on the independent-contractor model should erode it gradually, so I fade it to about 0.24."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "ROAE) was 33.9%"
+       },
+       {
+        "id": "REC",
+        "quote": "last 0.3325"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year-to-date net income of about $600 million plus a normal Q4 implies about 0.33 on the opening $2,445.9 million of equity. From year 2 the larger equity base (AOCI gains lift it), a weakening Term Life segment and a shrinking sales force pull the ratio toward the high 0.20s."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Book equity cannot grow much faster than the economy once the sales force is saturated and most earnings are distributed. I set it slightly below the 0.0375 nominal anchor because Term Life volume is weak."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.18,
+      "input_hit": "long_run_roe",
+      "risk": "The sales force keeps shrinking and Term Life profit keeps falling, so returns revert toward the 2023-2024 levels."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "book_growth",
+      "risk": "AOCI gains reverse as rates fall, or equity markets weaken and cut asset-based fees, so year 1 book growth and later returns come in lower."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Reclassification of representatives as employees, or new business-opportunity rules, raises costs and slows recruiting."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.12,
+       0.02,
+       0.02,
+       0.014999999999999996,
+       0.014999999999999996
+      ],
+      "long_run_roe": 0.19,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.18,
+       0.08,
+       0.08,
+       0.075,
+       0.075
+      ],
+      "long_run_roe": 0.28,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is very high (about 31-33%) because Primerica is mostly a fee-like distribution business. It reinsures most mortality risk, pays its sales force on commission, and pays out most of its earnings, so equity stays small. Year 1 is flattered by earnings on a base that excludes the large 2026 rise in accumulated other comprehensive income (AOCI); that rise raises equity and should pull the ratio down slightly from year 2. Term Life profit is slipping while Investment and Savings Products profit grows.",
+     "why": "Primerica Life's statutory risk-based capital ratio is about 445%, ratings are stable, and the company returned most of its earnings through buybacks and dividends, so payout is a choice and not a constraint. Base-year ROE of 0.3325 sits at the top of the company's 2022-2025 range (0.2277-0.5101) but is close to the current run rate. Equity grows slowly because most income is distributed, apart from AOCI swings that could reverse if rates fall."
+    },
+    "value_at_old_defaults": 358.88466434810164,
+    "values": {
+     "base": 339.39331058412034,
+     "bear": 249.59201648620936,
+     "bull": 485.77320843362145
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 358.88466434810164,
+  "value_at_old_defaults_quoted": 358.88466434810164,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 10902796968.23414,
+ "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 32680000.0,
+ "flags": [
+  "The Board of Directors approved a quarterly dividend of $1.20 per share, with the payment date and record date set out in the Q3 2026 earnings release.",
+  "The Senior Health business (e-TeleQuote) was disposed of and is reported in discontinued operations."
+ ],
+ "in_code_book": false,
+ "ke": 0.09310305732783658,
+ "market_cap_at_publish": 8949823725,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 294.92,
+ "qwen_book": null,
+ "release_truncated": [
+  "0001193125-26-447427"
+ ],
+ "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+ "seed_base": {
+  "1000": 327.8525259051172,
+  "3000": 339.39331058412034
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in P1 (10-K Item 1)",
+    "claim": "Primerica sells financial products to middle-income households in the US and Canada through a network of 151,524 life-licensed independent sales representatives (as of the latest 10-K). It underwrites term life insurance itself and distributes mutual funds, annuities and managed investments mainly for third parties.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "is a leading provider of financial products and services to middle-income households in the United States and Canada",
+     "which we distribute primarily on behalf of third parties"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P4",
+    "claim": "The company reports three segments: Term Life Insurance, Investment and Savings Products (ISP), and Corporate and Other Distributed Products. The first two are the primary operating segments.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "We use three operating segments to organize, evaluate and manage our business: Term Life Insurance; Investment and Savings Products; and Corporate and Other Distributed Products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1; the variable-cost inference follows the text on compensation tied to sales",
+    "claim": "Distribution runs through independent contractors who recruit other representatives. Pay is tied to sales, so a large part of the cost base varies with production.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Independent sales representatives are independent contractors building and operating their own businesses.",
+     "We have developed an innovative system for compensating the independent sales force that is contingent upon product sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures from F2; description stated in P1",
+    "claim": "Term Life earns recurring premiums on a large in-force block. In the third quarter, direct premiums were 876,839 and net premiums were 453,630 after ceded premiums (table in thousands).",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "with a substantial portion of revenues generated from recurring premiums"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Reinsurance keeps claims expense largely fixed and reduces earnings volatility. The company reinsures up to 90% of the mortality risk on existing policies.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Since we reinsure up to 90% of the mortality risk of our existing life insurance policies, claims expense is largely fixed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and in the P5 supplement table",
+    "claim": "At its IPO the company ceded between 80% and 90% of an older block of term policies to coinsurers. Premiums ceded to those IPO coinsurers fell to 173,221 in the third quarter from 185,392 a year earlier (table in thousands).",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "to cede between 80% and 90% of the risks and rewards of our term life insurance policies that were in force at year-end 2009"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P5",
+    "claim": "Term Life volume depends on the size and productivity of the sales force. The life-licensed force was 147,058 at the end of the third quarter, down from 151,524 at the prior year-end. New policies issued were 73,813, against 79,379 a year earlier. Management cites cost-of-living pressure on middle-income families.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "sales of new term life insurance policies were lower versus the comparable period in 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3; the balance is from F1",
+    "claim": "Term Life costs are mainly claims, amortization of deferred acquisition costs and insurance expenses. Acquisition costs are paid up front and then amortized, so policy sales hit cash flow before revenue. The deferred policy acquisition cost asset was 4,032,097 at quarter end (table in thousands).",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "we incur significant cash outflows at or about the time policies are issued, including the payment of sales commissions and underwriting costs"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "ISP revenue is fee-based: sales commissions on product sales, plus ongoing fees on client asset values and on recordkeeping positions. Fees tied to asset values and positions are paid on balances already held.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Revenues in this segment are entirely fee-based, which include sales commissions and investment advisory and administrative service fees.",
+     "The Investment and Savings Products segment results are primarily driven by sales, the value of assets in client accounts for which we earn ongoing management, marketing and support, and distribution fees, and the number of transfer agent recordkeeping positions and non-bank custodial fee-generating accounts we administer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5; income statement figures from F2",
+    "claim": "ISP is the growth driver this year. Third-quarter ISP sales rose 19% to $4.4 billion and client asset values reached $140 billion. Total commissions and fees were 386,717 against 325,490 a year earlier (table in thousands).",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "Client asset values ended the quarter at $140 billion, up 10% YoY"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the P5 segment table",
+    "claim": "Segment profit is shifting from Term Life to ISP. Third-quarter adjusted operating income before taxes was 152,693 for Term Life, against 172,685 a year earlier, and 114,054 for ISP, against 94,222 (table in thousands).",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P5",
+    "claim": "Corporate and Other Distributed Products holds net investment income and smaller distributed products such as prepaid legal, mortgage origination and closed insurance blocks. Its third-quarter adjusted operating income before taxes was 5,334, against 3,799 a year earlier (table in thousands).",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The Corporate and Other Distributed Products segment includes net investment income earned on cash, cash equivalents, and our invested asset portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures from F2; commentary stated in P4",
+    "claim": "Net investment income was 45,740 in the third quarter, after 12,345 of interest expense on the surplus note (table in thousands). Management says higher interest rates let the company earn more on new fixed-maturity purchases and cash balances.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Elevated interest rates have also led to increases in net investment income as we are able to earn higher returns on our new fixed-maturity securities purchases and cash balances."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures from F2; the comparison of growth is inferred from those figures",
+    "claim": "Over nine months, commissions and fees (1,112,069) rose from 928,478 and overtook net premiums (1,345,490) in growth terms, in total revenues of 2,639,414 (table in thousands). Fee-type revenue is therefore a growing share of the mix.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "figures from F2; the link to ISP growth is inferred from the P5 supplement's commission lines",
+    "claim": "Costs scale with sales. Sales commissions were 210,916 in the third quarter against 174,688 a year earlier. Amortization of deferred policy acquisition costs was 86,592 against 81,498 (table in thousands). The supplement shows asset-based and sales-based sales commissions both up year over year.",
+    "facts": [
+     "F2",
+     "P5"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "figures from F3 and P5; description stated in P1",
+    "claim": "The model produces cash that is largely returned to holders. Over nine months operating cash flow was 641,998, with 392,314 of stock repurchased and 112,659 of dividends paid (table in thousands). The company reports a return on stockholders' equity of 31.3% for the third quarter.",
+    "facts": [
+     "F3",
+     "P5",
+     "P1"
+    ],
+    "quotes": [
+     "generate substantial cash flow and contribute to strong returns on invested capital"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the 10-K Item 1 (business description)",
+    "claim": "Primerica reaches middle-income households through a large independent sales force: 151,524 life-licensed representatives at the 10-K year-end, over 5.5 million lives insured and approximately 3.1 million client investment accounts.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We insured over 5.5 million lives and had approximately 3.1 million client investment accounts as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the 10-K risk factors",
+    "claim": "The life-licensed sales force has shrunk to 147,058 at the latest quarter end from 151,524 at year-end, and Q3 recruits were 90,818 against 101,156 a year earlier.",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "The number of life-licensed independent sales representatives as of September 30, 2026 was lower compared to December 31, 2025 as the number of new life-licensed representatives did not keep pace with the level of agent non-renewal and termination activity experienced during the first nine months of 2026.",
+     "As is typical with distribution businesses, we experience a high rate of turnover among part-time independent sales representatives, which requires us to attract, retain and motivate a large number of independent sales representatives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated by management in the 10-Q MD&A",
+    "claim": "New term life sales are weakening: policies issued over nine months were 226,771 against 255,644, and monthly productivity per representative was 0.17 against 0.19.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "New policies issued during the three and nine months ended September 30, 2026 decreased compared to the same periods in 2025, which we believe is attributable to the lower level of newly life-licensed independent sales representatives as well as macro level uncertainty that challenged demand for new policies.",
+     "In the first nine months of 2026, overall policy lapse rates of term life insurance products remained above long-term historical levels and sales of new term life insurance policies were lower versus the comparable period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A table",
+    "claim": "The in-force term life book is large and still growing slightly, at $968,672 (table in millions) of face amount against $967,024 (table in millions) a year earlier. Issued face amount in Q3 fell to 25,708 (table in millions) from 27,067 (table in millions).",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The face amount of term life insurance policies in-force increased for the three and nine months ended September 30, 2026 as the face amount issued exceeded the face amount terminated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Heavy reinsurance of mortality risk is a structural feature: claims expense is described as largely fixed, which reduces earnings volatility.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Since we reinsure up to 90% of the mortality risk of our existing life insurance policies, claims expense is largely fixed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "risk stated in the 10-K, balance figure from the 10-Q balance sheet",
+    "claim": "Reinsurance creates counterparty exposure: reinsurance recoverables were 2,287,256 (table in thousands) at the latest balance sheet date, and the company bears credit risk on its reinsurers.",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "Since death benefit claims may be paid long after a policy is issued, we bear credit risk with respect to our reinsurers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release and the 10-Q MD&A",
+    "claim": "The Investment and Savings Products business is gaining momentum: Q3 ISP sales rose 19% to $4.4 billion and client asset values ended the quarter at $140 billion, up 10%.",
+    "facts": [
+     "P5",
+     "P4"
+    ],
+    "quotes": [
+     "ISP sales increased 19% YoY to $4.4 billion",
+     "Client asset values ended the quarter at $140 billion, up 10% YoY"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release segment table; the remeasurement link is inferred from the release's own mention of it",
+    "claim": "Segment profit is shifting toward ISP: Q3 adjusted operating income before taxes was $114,054 (table in thousands) against $94,222 (table in thousands), up 21%. Term Life fell to $152,693 (table in thousands) from $172,685 (table in thousands), down 12%.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "including a pre-tax remeasurement gain of $12 million versus a $23 million pre-tax remeasurement gain in the prior year period"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "inferred from the 10-Q income statement lines",
+    "claim": "Growth in distribution revenue comes with higher payouts to the sales force: Q3 commissions and fees were 386,717 (table in thousands) against 325,490, while sales commissions were 210,916 against 174,688.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release and financial supplement",
+    "claim": "Financial strength and returns are strong: ROE was 31.3% and adjusted ROAE 33.9% in Q3, and the Primerica Life statutory RBC ratio was approximately 445%. Insurer and holding-company ratings were unchanged across the seven quarters shown.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Return on stockholders' equity (ROE) was 31.3%; adjusted net operating income return on adjusted stockholders' equity (ROAE) was 33.9%",
+     "Primerica Life Insurance Company's estimated statutory risk-based capital ratio was approximately 445% as of September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors; the company describes these as risks, not current findings",
+    "claim": "The independent-contractor distribution model faces legal and regulatory threats. The company says a regulator or court could disagree with its classification of representatives or its view that business-opportunity or franchise laws do not apply.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "There may be adverse tax, legal or financial consequences if the classification of the independent contractor sales representatives is changed.",
+     "A number of laws and regulations could apply to our independent contractor distribution model, which could require us to modify our distribution structure."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K",
+    "claim": "ISP depends on third-party products. It is described as heavily dependent on a limited platform of mutual fund and annuity products from a relatively small number of companies and managers.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Our Investment and Savings Products segment is heavily dependent on a limited platform of mutual fund and annuity products offered by a relatively small number of companies and managers.",
+     "which we distribute primarily on behalf of third parties"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A, figures from the balance sheet",
+    "claim": "Rising interest rates are increasing unrealized losses in the investment portfolio. Net unrealized losses on available-for-sale securities in accumulated other comprehensive income were (220,293) (table in thousands) against (89,323) at year-end.",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "In addition, interest rate increases in the third quarter of 2026 have contributed to higher unrealized losses in our investment portfolio at September 30, 2026 compared to the end of 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the 10-Q balance sheet (F1).",
+    "claim": "Liquidity on the balance sheet is sizeable: cash and cash equivalents were 782,723 (table in thousands) at the latest quarter-end, up from 756,227 at the prior year-end, alongside total investments of 4,457,196.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the cash flow statement (F3). The description of the quality of cash is inferred from its line items.",
+    "claim": "Operating cash generation is strong and above reported earnings. Nine-month net cash from operating activities was 641,998 (table in thousands), versus 562,934 a year earlier and net income of 601,501.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement (F3). The coverage statement compares printed figures and is inferred.",
+    "claim": "Operating cash covered the nine-month shareholder returns. Dividends paid were 112,659 and common stock repurchased was 392,314 (table in thousands), within a net financing outflow of (515,436). Cash still rose by 26,496.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances are stated (F1, P5). The link between the two items is inferred from matching movements.",
+    "claim": "Financial debt consists of a note payable of 595,917 and a surplus note of 1,018,167 (table in thousands). The surplus note fell from 1,175,119 at the prior year-end, in step with the held-to-maturity security, which fell from 1,175,380 to 1,018,380.",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Ratios are stated in the earnings release supplement (P5). The explanation of the gap is inferred from the equity reconciliation.",
+    "claim": "Leverage has eased on the company's own ratio. Debt-to-capital was 17.4% at the latest quarter-end versus 19.6% at the prior year-end. Excluding accumulated other comprehensive income it was 19.1% versus 19.8%.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement (F2). The comparison of the figures is inferred.",
+    "claim": "Interest costs are small relative to earnings. For the nine months, interest expense was 17,443 and interest expense on the surplus note was 38,431, against income before income taxes of 779,549 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet (F1) and the 10-Q MD&A (P4).",
+    "claim": "The available-for-sale bond portfolio carries unrealized losses that grew in the quarter. Fair value was 3,281,333 against amortized cost of 3,561,027 (table in thousands), and net unrealized losses in accumulated other comprehensive income were (220,293), up from (89,323).",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "In addition, interest rate increases in the third quarter of 2026 have contributed to higher unrealized losses in our investment portfolio at September 30, 2026 compared to the end of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release (P5).",
+    "claim": "Regulatory capital at the main insurer is reported as comfortable. Primerica Life's estimated statutory risk-based capital ratio was approximately 445%, and the supplement shows its financial strength ratings and the holding company senior debt ratings unchanged across the seven quarters shown.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Primerica Life Insurance Company's estimated statutory risk-based capital ratio was approximately 445% as of September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances and ratings are stated (F1, F3, P2, P3). The way maturities could be met is inferred, because maturity terms are not given.",
+    "claim": "No debt maturity dates appear in the evidence, so the amount falling due cannot be stated. The note payable stands at 595,917 (table in thousands). The company says its capital structure includes senior unsecured notes, a redundant reserve financing transaction and a Revolving Credit Facility. Sources to meet obligations include cash of 782,723 and operating cash flow of 641,998, and the 10-K says the parent holds investment grade credit ratings.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The Parent Company currently has investment grade credit ratings"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P4 and P5; the conditions for continuation are management's own wording.",
+    "claim": "Investment and Savings Products (ISP) sales are the main growth driver: they rose 19% year over year to $4.4 billion in the third quarter. To continue, demographic demand for retirement and annuity products, expanded product offerings and supportive equity markets must persist.",
+    "facts": [
+     "P5",
+     "P4"
+    ],
+    "quotes": [
+     "ISP sales increased 19% YoY to $4.4 billion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in P5; the market-dependence condition is stated in P3. The relative size of inflows versus market effect is inferred from the two figures.",
+    "claim": "Growing client asset values drive asset-based fee revenue. Client asset values ended the quarter at $140 billion, up 10% year over year, with net inflows of $407 million. Asset-based commissions and fees were 209,261 against 172,286 a year earlier (table in thousands). Continuation requires equity markets to hold up and net flows to stay positive.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "Volatility in equity markets will impact the value of assets in client accounts and, as a result, the revenue we earn on those assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F2 and P5. The link to the smaller remeasurement gain and lower Term Life profit is inferred from the cited figures.",
+    "claim": "ISP profit growth has not yet lifted consolidated pre-tax income. ISP pre-tax operating income grew 21% to 114,054 from 94,222 (table in thousands). Consolidated income before income taxes was 271,912 against 271,679, as sales commissions rose to 210,916 from 174,688. For ISP growth to raise total earnings, commission costs and Term Life profit must not absorb the gain.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "Net income of $209 million increased 1% year over year (YoY)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in P5; the lapse comment is stated in P4.",
+    "claim": "Term Life Insurance is a stable base rather than a growth engine. Adjusted direct premiums rose 3% to 699,352 (table in thousands), but segment pre-tax income was 152,693 against 172,685. For the base to hold, persistency and new policy sales must not weaken further.",
+    "facts": [
+     "P5",
+     "P4"
+    ],
+    "quotes": [
+     "Net premiums were consistent, while adjusted direct premiums increased 3% YoY",
+     "overall policy lapse rates of term life insurance products remained above long-term historical levels"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and the explanation are stated in P4. The dependence of all drivers on the force follows from the P1 business description.",
+    "claim": "Every distribution-led driver depends on the independent sales force, and recruiting is currently weakening. Recruits were 90,818 against 101,156, and the life-licensed force was 147,058 against 151,524 at the end of December 2025. For growth to continue, recruiting and licensing must at least offset agent non-renewals.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "did not keep pace with the level of agent non-renewal and termination activity experienced during the first nine months of 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F2, F3 and P5. The attribution of EPS growth to buybacks is inferred from the share counts and net income.",
+    "claim": "Share repurchases lift per-share results. Diluted EPS rose to $6.76 from $6.35 while diluted weighted-average shares fell to 30,820 from 32,451 (thousands). The company repurchased 392,314 of stock over nine months (table in thousands), against operating cash flow of 641,998. This requires continued cash generation and capital capacity.",
+    "facts": [
+     "F2",
+     "F3",
+     "P5"
+    ],
+    "quotes": [
+     "Returned $159 million to stockholders during the quarter, including $122 million of share repurchases and $37 million of dividends paid"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and F2; the unrealized-loss counterpoint is from F1.",
+    "claim": "Higher net investment income adds a smaller contribution. It was 45,740 against 42,431 (table in thousands), helped by higher yields on new purchases and cash balances. This requires interest rates to stay elevated.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Elevated interest rates have also led to increases in net investment income as we are able to earn higher returns on our new fixed-maturity securities purchases and cash balances."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item; the board approval date is not printed.",
+    "claim": "The Board of Directors approved a quarterly dividend of $1.20 per share, with the payment date and record date set out in the Q3 2026 earnings release.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The Board of Directors approved a dividend of $1.20 per share payable on December 14, 2026 to stockholders of record on November 20, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K MD&A passage.",
+    "claim": "The Senior Health business (e-TeleQuote) was disposed of and is reported in discontinued operations.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "that was disposed of as of September 30, 2024, and is now reported in discontinued operations for all periods presented"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in the 10-Q MD&A and the earnings release tables; the link to segment earnings is inferred.",
+    "claim": "The life-licensed sales force shrank from 151,524 to 147,058 and nine-month new policies fell from 255,644 to 226,771. Q3 Term Life adjusted operating income before taxes fell to 152,693 from 172,685, down (12)% (table in thousands).",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The number of life-licensed independent sales representatives as of September 30, 2026 was lower compared to December 31, 2025 as the number of new life-licensed representatives did not keep pace with the level of agent non-renewal and termination activity experienced during the first nine months of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q and 10-K MD&A; the profit impact is inferred.",
+    "claim": "Cost-of-living pressure on middle-income households may be hurting term life persistency and demand. Lapse rates remained above long-term historical levels and new policy sales were lower than a year earlier.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "In the first nine months of 2026, overall policy lapse rates of term life insurance products remained above long-term historical levels and sales of new term life insurance policies were lower versus the comparable period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A for the sensitivity; the exposure level is inferred from F2 and the release.",
+    "claim": "Growth in the Investment and Savings Products segment depends on equity markets. Commissions and fees rose to 386,717 from 325,490 in Q3 (table in thousands), so a market downturn would hit this revenue.",
+    "facts": [
+     "F2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Volatility in equity markets will impact the value of assets in client accounts and, as a result, the revenue we earn on those assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and the 10-Q MD&A; the realization mechanism is inferred.",
+    "claim": "Net unrealized losses on available-for-sale securities widened to (220,293) from (89,323) (table in thousands), and management links this to Q3 2026 interest rate increases. Available-for-sale securities carry at 3,281,333 against an amortized cost of 3,561,027.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "In addition, interest rate increases in the third quarter of 2026 have contributed to higher unrealized losses in our investment portfolio at September 30, 2026 compared to the end of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors; no current event is shown.",
+    "claim": "A reclassification of independent sales representatives as employees, or application of business-opportunity, franchise or earnings-claims rules, could force changes to the distribution model and add costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "There may be adverse tax, legal or financial consequences if the classification of the independent contractor sales representatives is changed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors and the balance sheet; the exposure size is read from F1.",
+    "claim": "Reinsurer and coinsurer credit exposure is material. Reinsurance recoverables were 2,287,256 (table in thousands), and the company stays liable to policyholders if a reinsurer fails to pay.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Reinsurance does not relieve us of our direct liability to our policyholders, even when the reinsurer is liable to us."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "inferred from the balance sheet changes and the release sentence; no item quantifies the drivers",
+    "claim": "What drove future policy benefits down from 6,818,179 to 6,286,925 (table in thousands) while the discount-rate AOCI effect rose from 134,594 to 550,437, and how much of this came from the annual actuarial assumption changes versus the discount rate?",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "Results included the impact of the annual actuarial assumption changes that are recognized in the third quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A; the future direction is not stated",
+    "claim": "Will the life-licensed sales force keep shrinking from 151,524 at the prior year-end to 147,058, and does that explain the drop in new policies issued to 226,771 from 255,644 over nine months?",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "New policies issued during the three and nine months ended September 30, 2026 decreased compared to the same periods in 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the supplement's segment table; the release does not attribute the decline",
+    "claim": "How much of the Term Life segment's lower pretax income (152,692 versus 172,684) comes from the smaller remeasurement gain ((9,491) versus (23,392)), and how much from underlying margin pressure?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "including a pre-tax remeasurement gain of $12 million versus a $23 million pre-tax remeasurement gain in the prior year period"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from matching balance sheet and cash flow lines; no item explains the cause",
+    "claim": "What caused the surplus note to fall from 1,175,119 to 1,018,167 and the held-to-maturity security from 1,175,380 to 1,018,380, alongside 131,418 of cash received from redemption of a deposit asset?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Cash received from redemption of deposit asset"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated drivers in the 10-Q MD&A; sustainability is inferred and not stated",
+    "claim": "Can record Investment and Savings Products sales (19% higher, to $4.4 billion) and client asset values of $140 billion be sustained if equity markets weaken, and how large is the offset to the Term Life decline?",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Client asset values ended the quarter at $140 billion, up 10% YoY"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "PRI",
+ "upside": 0.21821359875265478,
+ "valuation": null,
+ "value_base": 333.62291824461875,
+ "value_bear": 247.27570520920696,
+ "value_bull": 474.28106905579455,
+ "value_per_filed_share": {
+  "base": 333.62291824461875,
+  "bear": 247.27570520920696,
+  "bull": 474.28106905579455
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +6.1 points a year against the required return over 3 years; the two runs do not both reach BUY"
+}
