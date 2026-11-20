@@ -1,566 +1,82 @@
 {
- "alpha_pts": -3.3636163712996257,
+ "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 102,
- "claims_supported": 94,
- "date": "2026-11-16T19:49:51Z",
- "decided": {
-  "flags": [
-   "run 1000: base_year_not_representative",
-   "run 1000: pretax_derived_from_net_income_nci_tax",
-   "run 1000: working_capital_unclassified_balance_sheet",
-   "run 1000: quotes_verified: 10 of 10",
-   "run 1000: ffo_not_reported_or_not_found",
-   "run 3000: base_year_not_representative",
-   "run 3000: confidence_low",
-   "run 3000: pretax_derived_from_net_income_nci_tax",
-   "run 3000: working_capital_unclassified_balance_sheet",
-   "run 3000: quotes_verified: 12 of 12",
-   "run 3000: ffo_not_reported_or_not_found"
-  ],
-  "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0455 and margin 0.4342, margin 0.4342 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0890), F 10",
-  "run_gap": 0.17548427072665856,
-  "runs": {
-   "1000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 42287000.0,
-     "excess_cash_before": 42287000.0,
-     "k0_after": 177681110.90321285,
-     "k0_before": 177681110.90321285,
-     "k0_interest": 175962000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 214381924.53859147,
-     "x0_before": 214381924.53859147
-    },
-    "confidence": "medium",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.11555574595865714,
-     "equity_value": 1164029789.7016094,
-     "seam_ratio": 0.9955976215824938,
-     "tv_share": 0.336764773512172,
-     "wedge_rate_5": -0.0013677861133450885
-    },
-    "flags": [
-     "base_year_not_representative",
-     "pretax_derived_from_net_income_nci_tax",
-     "working_capital_unclassified_balance_sheet",
-     "quotes_verified: 10 of 10",
-     "ffo_not_reported_or_not_found"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.1,
-     "fade_years": 10,
-     "long_run_op_margin": 0.3,
-     "op_margin": [
-      0.3,
-      0.31,
-      0.315,
-      0.32,
-      0.32
-     ],
-     "return_on_new_investment_long_run": 0.09,
-     "rev_growth": [
-      0.035,
-      0.01,
-      0.015,
-      0.02,
-      0.02
-     ],
-     "terminal_growth": 0.025
-    },
-    "old_defaults_inputs": "year 1 growth 0.0455 and margin 0.4342, margin 0.4342 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0890), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 8,
-     "kept": 94
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.24,
-      0.35
-     ],
-     "rev_growth_y3": [
-      -0.01,
-      0.035
-     ],
-     "terminal_growth": [
-      0.015,
-      0.03
-     ]
-    },
-    "real_estate": {
-     "ffo": {
-      "status": "not_reported_or_not_found"
-     },
-     "property_business": "owns_or_operates",
-     "version": "decided.real_estate.v2 2026-11-19"
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "2026 Estimated maintenance capital/tenant allowances (1) | $55.0 | $65.0"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "This is upkeep: maintenance capital and tenant allowances of $55-65 million, about 10% of roughly $595 million of 2026 revenue. Redevelopment of $5-7 million and acquisitions are excluded, and the filed 0.1226 pooled ratio includes acquisitions."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall and York Galleria were designated as non-core."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The portfolio is still turning over and has many non-core assets in workout, so convergence to steady state takes a while. Ten years is a middle estimate with little evidence either way."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "depreciation (without amortization of acquired intangibles) / revenue 0.2156"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Property NOI margin of about 65% less G&A of about 12% gives EBITDA of about 53%. D&A should normalize at 22-25% of revenue as the fully depreciated fresh-start assets are replaced by new capex and acquired assets, which gives about 30%. Mall NOI is mature and faces fixed-CAM and gross-lease pressure."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Total expenses | (102,734) | (109,415) | (315,779) | (336,097)"
-       },
-       {
-        "id": "F2",
-        "quote": "Depreciation and amortization | (35,084) | (39,900) | (109,465) | (125,143)"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Excluding gains, 2026 nine-month revenue less GAAP expenses is about 28%, and recurring joint-venture income adds a few points. D&A is falling as fresh-start assets become fully amortized, which lifts the margin, but part of that is offset by rising property taxes and maintenance. Gains and the Treasury interest income are excluded from the margin."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0823."
-       },
-       {
-        "id": "P3",
-        "quote": "to invest in higher cash flow yielding opportunities"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The company recycles proceeds into higher-yield malls and redevelopments, which can earn slightly above the cost of capital. The filed break-even return is 0.0823, so 9% adds modest value. Competition for mall assets and cost overruns limit the excess."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively"
-       },
-       {
-        "id": "P6",
-        "quote": "Volusia Mall has been removed from the same-center pool"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 benefits from a full year of the four malls bought in July 2025 and Gateway Mall, plus same-center NOI growth. After that, revenue is held back by deconsolidations and removals of non-core malls (Jefferson, Gettysburg, Volusia and more), so growth is modest."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Rental revenues at the comparable properties were relatively flat compared to the prior year."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Mid-tier enclosed malls have little organic growth beyond rent steps and leasing spreads, and comparable-property rental revenue was flat in 2025. A rate below the 3.75% nominal anchor is appropriate."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": -0.02,
-      "input_hit": "rev_growth",
-      "risk": "More non-core malls are lost to lenders and the revenue base shrinks, or tenant bankruptcies hit occupancy and rent."
-     },
-     {
-      "bear_value": 0.22,
-      "input_hit": "long_run_op_margin",
-      "risk": "Operating cost inflation under fixed-CAM and gross leases, plus D&A normalizing upward, compresses the margin."
-     },
-     {
-      "bear_value": 0.14,
-      "input_hit": "capex_to_revenue",
-      "risk": "Leasing costs and tenant improvements rise to hold occupancy in weaker malls."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.24,
-      "rev_growth": [
-       0.010000000000000002,
-       -0.015000000000000001,
-       -0.010000000000000002,
-       -0.005000000000000001,
-       -0.005000000000000001
-      ],
-      "terminal_growth": 0.015
-     },
-     "bull": {
-      "long_run_op_margin": 0.35,
-      "rev_growth": [
-       0.05500000000000001,
-       0.030000000000000006,
-       0.035,
-       0.04000000000000001,
-       0.04000000000000001
-      ],
-      "terminal_growth": 0.03
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "unclear",
-     "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Debt is falling (\"Mortgage and other indebtedness, net | 2,025,450 | 2,170,785\") and the 2025 interest figure includes non-cash accretion and default interest, so the level and the cost both change, and joint-venture debt sits outside the consolidated figure."
-     },
-     "margin_position": "The filed 2025 margin of 0.5377 is inflated by property-sale gains, a deconsolidation gain and a joint-venture sale gain. What the properties earn is roughly 25-30% of revenue after D&A and G&A. The margin should drift up slightly as fresh-start intangibles finish amortizing.",
-     "property_business": "owns_or_operates",
-     "tax_rate_representative": {
-      "answer": "yes",
-      "why": "As a REIT the company pays almost no federal income tax, which fits the filed rate: \"tax rate 0.0035\"."
-     },
-     "why": "2025 net income of $134.5 million contains $74.2 million of gains on sales, $33.9 million of gain on deconsolidation and a joint-venture sale gain inside equity in earnings. Revenue also jumped 12% on the consolidation of three malls and the acquisition of four malls, so it is not a clean run-rate. Core same-center NOI is growing only 2-4% and the portfolio keeps turning over through acquisitions, sales and lender handbacks."
-    },
-    "value_at_old_defaults": 48.056468343755206,
-    "values": {
-     "base": 42.044450985103644,
-     "bear": 27.390279925752463,
-     "bull": 58.58835998468948
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 42287000.0,
-     "excess_cash_before": 42287000.0,
-     "k0_after": 177681110.90321285,
-     "k0_before": 177681110.90321285,
-     "k0_interest": 175962000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 214381924.53859147,
-     "x0_before": 214381924.53859147
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.11555574595865716,
-     "equity_value": 1395493930.7408361,
-     "seam_ratio": 0.997616711709866,
-     "tv_share": 0.3104147245271166,
-     "wedge_rate_5": -0.002886066262744999
-    },
-    "flags": [
-     "base_year_not_representative",
-     "confidence_low",
-     "pretax_derived_from_net_income_nci_tax",
-     "working_capital_unclassified_balance_sheet",
-     "quotes_verified: 12 of 12",
-     "ffo_not_reported_or_not_found"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.1,
-     "fade_years": 10,
-     "long_run_op_margin": 0.33,
-     "op_margin": [
-      0.36,
-      0.36,
-      0.36,
-      0.355,
-      0.35
-     ],
-     "return_on_new_investment_long_run": 0.09,
-     "rev_growth": [
-      0.035,
-      0.015,
-      0.015,
-      0.02,
-      0.02
-     ],
-     "terminal_growth": 0.02
-    },
-    "old_defaults_inputs": "year 1 growth 0.0455 and margin 0.4342, margin 0.4342 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0890), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 8,
-     "kept": 94
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.28,
-      0.37
-     ],
-     "rev_growth_y3": [
-      -0.01,
-      0.035
-     ],
-     "terminal_growth": [
-      0.01,
-      0.03
-     ]
-    },
-    "real_estate": {
-     "ffo": {
-      "status": "not_reported_or_not_found"
-     },
-     "property_business": "owns_or_operates",
-     "version": "decided.real_estate.v2 2026-11-19"
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "2026 Estimated maintenance capital/tenant allowances (1) | $55.0 | $65.0"
-       },
-       {
-        "id": "P6",
-        "quote": "2026 Estimated development/redevelopment expenditures | 5.0 | 7.0"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The spending is recurring upkeep: maintenance capital and tenant allowances of $55-65m on roughly $600m of revenue, about 10%. Acquisitions, development of $5-7m and loan amortization are excluded."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The portfolio is mid-transition, with many properties designated non-core and capital being recycled into malls. A 10-year fade lets this settle."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Rental revenues at the comparable properties were relatively flat compared to the prior year."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Rents are barely above inflation, and the fully amortized tenant improvements that depress D&A will need replacing. Fixed CAM reimbursements and the move to gross leases leave CBL carrying cost inflation. I fade to 0.33, between the 2024 and 2026 underlying levels."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Depreciation and amortization expense was $4.8 million lower;"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $578.4 million | 0.1218 | 0.5377"
-       },
-       {
-        "id": "F2",
-        "quote": "Equity in earnings of unconsolidated affiliates | 17,246 | 1,696 | 49,834 | 15,046"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Underlying property margin in 2026 is about 0.36 once the one-time gains are stripped out, helped by lower D&A and higher equity earnings. It drifts down as the D&A benefit fades, treasury interest income falls and capex needs rise. The filed 0.5377 is not used."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "New investment is mall acquisitions and anchor redevelopment at roughly 9-10% yields. That is only slightly above the 0.0823 break-even, so growth adds little value."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Rental revenues were $18.7 million higher;"
-       },
-       {
-        "id": "P6",
-        "quote": "increased 3.8% and 2.6%, respectively"
-       },
-       {
-        "id": "P6",
-        "quote": "Volusia Mall has been removed from the same-center pool"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Nine-month rental revenue is up $18.7m and same-center NOI is up 2.6%, so 2026 growth is about 3.5%. Growth then slows because Volusia is leaving the same-center pool, many malls are designated non-core, and comparable-property revenue was flat in 2025."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A mature mall portfolio in mid-tier markets with modest rent steps should grow below the 0.0375 anchor, at about 2%."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.0,
-      "input_hit": "rev_growth",
-      "risk": "More loan defaults and returns of malls to lenders shrink revenue and equity earnings, and refinancing happens at higher rates."
-     },
-     {
-      "bear_value": 0.27,
-      "input_hit": "long_run_op_margin",
-      "risk": "Tenant bankruptcies, gross-lease conversion and cost inflation compress property margins."
-     },
-     {
-      "bear_value": 0.14,
-      "input_hit": "capex_to_revenue",
-      "risk": "Upkeep and tenant-allowance spending runs higher as fresh-start assets age."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.28,
-      "rev_growth": [
-       0.010000000000000002,
-       -0.010000000000000002,
-       -0.010000000000000002,
-       -0.005000000000000001,
-       -0.005000000000000001
-      ],
-      "terminal_growth": 0.01
-     },
-     "bull": {
-      "long_run_op_margin": 0.37,
-      "rev_growth": [
-       0.05500000000000001,
-       0.035,
-       0.035,
-       0.04000000000000001,
-       0.04000000000000001
-      ],
-      "terminal_growth": 0.03
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "unclear",
-     "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Consolidated debt of $2,170.8m is falling and includes loans on malls being returned to lenders. Pro rata debt including joint ventures is larger, at $2,622.6m."
-     },
-     "margin_position": "The filed 2025 margin of 0.5377 is inflated by gains. These are $74.2m of sale gains, $33.9m on deconsolidation and about $33.6m of joint-venture sale gain inside equity earnings. Stripping them leaves about 0.29 for 2025 and about 0.33 for 2024. Property-level earnings are lifting in 2026 as D&A falls from fully amortized fresh-start assets and occupancy rises. Distressed malls are being handed back to lenders.",
-     "property_business": "owns_or_operates",
-     "tax_rate_representative": {
-      "answer": "yes",
-      "why": "The filed tax rate of 0.0035 is that of a REIT that distributes its income, which it can keep paying."
-     },
-     "why": "The 2025 margin of 0.5377 includes large one-time gains on sales, a deconsolidation and a joint-venture sale, so it overstates what the properties earn. Underlying revenue growth was close to flat on comparable properties, and the 12% total growth came from acquisitions and consolidations. I therefore set margins from property earnings, not from the filed figure."
-    },
-    "value_at_old_defaults": 48.056468343755206,
-    "values": {
-     "base": 50.1322297867281,
-     "bear": 35.768802046259125,
-     "bull": 68.08974328467282
-    }
-   }
-  },
-  "situation_unclear": false,
-  "value_at_old_defaults": 48.056468343755206,
-  "value_at_old_defaults_quoted": 48.056468343755206,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+ "based_on": {
+  "accepted": "2026-11-09T20:23:57.000Z",
+  "accepted_utc": "2026-11-10T01:23:57Z",
+  "accession": "0001193125-26-453440",
+  "decision_time": "2026-11-20T09:23:08Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
  },
- "equity_value": 1421410505.8420315,
+ "claims": 125,
+ "claims_supported": 121,
+ "date": "2026-11-20T09:23:08Z",
  "family": "real_estate",
- "far_from_price": false,
- "filed_shares": 30841000.0,
  "flags": [
   "CBL emerged from bankruptcy and adopted fresh start accounting.",
-  "The foreclosure process for Alamance Crossing East was completed; the property had an outstanding loan balance of $41.1 million prior to completion.",
-  "Southpark Mall entered loan default, was placed into receivership, and was deconsolidated, with CBL recording a $33.9 million gain on deconsolidation and reporting an outstanding loan balance of $48.3 million at year-end."
+  "The five-year recognition period under Section 382 of the Internal Revenue Code following CBL's emergence from bankruptcy expired, ending limitations on recognizing certain tax deductions from the 2021 ownership change.",
+  "The foreclosure process for Alamance Crossing East was completed on a property that had an outstanding loan balance of $41.1 million prior to completion."
  ],
  "in_code_book": false,
- "ke": 0.08903203083918919,
- "market_cap_at_publish": 1590047087,
+ "ke": null,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": null,
+ "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
  "pending_offer": null,
- "price_at_publish": 51.39,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "seed_base": {
-  "1000": 42.044450985103644,
-  "3000": 50.1322297867281
- },
- "seeds_agree": true,
- "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
+ "release_truncated": [
+  "0001193125-26-450022"
+ ],
+ "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the 10-K Item 1 Business section and screener record.",
-    "claim": "CBL & Associates Properties, Inc. is a self-managed retail REIT that owns, develops, acquires, leases, manages, and operates regional shopping malls, outlet centers, lifestyle centers, open-air centers, and other properties.",
+    "basis": "stated in S0 and P1",
+    "claim": "CBL & Associates Properties, Inc. is a self-managed, self-administered, fully integrated REIT in the retail REIT industry that owns, develops, acquires, leases, manages, and operates regional shopping malls, outlet centers, lifestyle centers, open-air centers, and other properties including office buildings, outparcels, and hotels.",
     "facts": [
      "S0",
      "P1"
     ],
     "quotes": [
      "We are a self-managed, self-administered, fully integrated real estate investment trust (\"REIT\").",
-     "We own, develop, acquire, lease, manage, and operate regional shopping malls, outlet centers, lifestyle centers, open-air centers and other properties."
+     "We own, develop, acquire, lease, manage, and operate regional shopping malls, outlet centers, lifestyle centers, open-air centers and other properties.",
+     "The other property type (the \"All Other\" or \"All Other Properties\") is made up of office buildings, outparcels and hotels.",
+     "industry: REIT - Retail"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the November 4, 2026 8-K Exhibit 99.1 and the 10-K Item 1 Business section.",
-    "claim": "CBL owns and manages a portfolio of 85 properties totaling 54.8 million square feet across 23 states, concentrated primarily in the southeastern and midwestern United States.",
+    "basis": "stated in P1 and P3",
+    "claim": "CBL owns interests in 86 properties across 22 states, primarily in the southeastern and midwestern United States, led by 47 malls and 25 open-air centers.",
     "facts": [
      "P1",
-     "P7"
+     "P3"
     ],
     "quotes": [
-     "CBL\u2019s owned and managed portfolio is comprised of 85 properties totaling 54.8 million square feet across 23 states, including 54 high-quality enclosed malls, outlet centers and lifestyle retail centers as well as more than 20 open-air centers and other assets.",
-     "At December 31, 2025, our properties are located in 22 states, but are primarily in the southeastern and midwestern United States."
+     "As of December 31, 2025, we own interests in 86 properties, consisting of 47 malls, 25 open-air centers, five outlet centers, four lifestyle centers and five other properties, including single-tenant and multi-tenant outparcels.",
+     "As of December 31, 2025, our shopping centers are located in 22 states, and are primarily in the southeastern and midwestern United States."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business and Item 1A Risk Factors sections.",
-    "claim": "CBL conducts substantially all business through its Operating Partnership, in which it held a 99.98% combined interest, conducts property management and development through its Management Company, and also holds partial interests in joint-venture properties.",
+    "basis": "stated in P1",
+    "claim": "CBL conducts substantially all of its business through CBL & Associates Limited Partnership (holding a 99.98% combined interest) and conducts property management and development activities through its wholly owned subsidiary CBL & Associates Management, Inc.",
     "facts": [
-     "P1",
-     "P2"
+     "P1"
     ],
     "quotes": [
      "We conduct substantially all our business through CBL & Associates Limited Partnership (the \"Operating Partnership\"), which is a variable interest entity (\"VIE\").",
      "At December 31, 2025, CBL Holdings I, Inc. owned a 1.0% general partner interest and CBL Holdings II, Inc. owned a 98.98% limited partner interest in the Operating Partnership, for a combined interest held by us of 99.98%.",
      "We conduct our property management and development activities through CBL & Associates Management, Inc. (the \"Management Company\") to comply with certain requirements of the Internal Revenue Code of 1986, as amended (the \"Internal Revenue Code\").",
-     "We own partial interests in 4 malls, 5 outlet centers, 1 lifestyle center, 11 open-air centers, 2 office buildings and 2 hotels."
+     "The Operating Partnership owns 100% of the Management Company\u2019s outstanding stock."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business section.",
-    "claim": "CBL generates rental revenues primarily from leases with retail tenants, consisting of fixed minimum rents, sales-based percentage rents, and tenant reimbursements for real estate taxes, insurance, common area maintenance, and other recoverable operating and capital expenses.",
+    "basis": "stated in P1",
+    "claim": "CBL earns rental revenues primarily from leases with retail tenants, collecting fixed minimum rents, percentage rents based on tenant sales volumes, and reimbursements for real estate taxes, insurance, common area maintenance (CAM), operating expenses, and certain capital expenditures.",
     "facts": [
      "P1"
     ],
@@ -570,51 +86,22 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business section.",
-    "claim": "The company's top 25 tenants accounted for 34.15% of its share of total revenues across 1,253 stores, led by Victoria's Secret & Co. at 2.67%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our top 25 tenants based on percentage of total revenues were as follows for the year ended December 31, 2025:",
-     "1 | Victoria's Secret & Co. | 46 | 379,689 | 2.67%",
-     "1,253 | 11,453,890 | 34.15%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Item 1 Business and Item 1A Risk Factors sections.",
-    "claim": "CBL's top five markets by share of total revenues were Chattanooga at 6.7%, St. Louis at 6.5%, Nashville at 5.0%, Lexington at 4.3%, and Kansas City at 4.2%, exposing operations to regional economic conditions in those markets.",
+    "basis": "stated in P1 and P4",
+    "claim": "CBL also generates revenues from non-retail tenants (service, dining, entertainment, office, and hotel users), temporary leases and license agreements, advertising and sponsorships, property management, leasing, and development fees, and sales of peripheral land and operating real estate.",
     "facts": [
      "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Chattanooga, TN | 6.7%",
-     "St. Louis, MO | 6.5%",
-     "Nashville, TN | 5.0%",
-     "Lexington, KY | 4.3%",
-     "Kansas City, KS | 4.2%",
-     "Our properties are located principally in the southeastern and midwestern United States, so our business is subject generally to economic conditions in these regions and, in particular, to adverse economic developments affecting the operating results of our properties in our five largest markets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Item 1 Business section and reflected in the 10-Q Statements of Operations.",
-    "claim": "In addition to rental revenues, CBL earns management, development, and leasing fees, ancillary revenues from short-term leases, license agreements, sponsorships, and advertising, and gains or proceeds from peripheral land and real estate asset sales.",
-    "facts": [
-     "P1",
-     "F2"
+     "P4"
     ],
     "quotes": [
      "We also generate revenues from management, leasing and development fees, sponsorships, sales of peripheral land at our properties and from sales of operating real estate assets when it is determined that we can realize an appropriate value for the assets.",
-     "We pursue opportunities to generate ancillary revenues at our properties when space is available for shorter terms through temporary leases and license agreements, as well as advertising including sponsorships and promotional activities."
+     "We pursue opportunities to generate ancillary revenues at our properties when space is available for shorter terms through temporary leases and license agreements, as well as advertising including sponsorships and promotional activities.",
+     "Our focus is on continuing to execute our strategy to improve occupancy, drive rent growth and transform the offerings available at our properties to include a targeted mix of retail, service, dining, entertainment and other non-retail uses, primarily through the re-tenanting of former anchor locations as well as diversification of in-line tenancy."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q Condensed Consolidated Statements of Operations.",
-    "claim": "In the latest nine-month period, rental revenues were $ 427,252 (table in thousands) out of total revenues of 441,144 (table in thousands), while management, development and leasing fees were 4,367 (table in thousands) and other revenues were 9,525 (table in thousands).",
+    "basis": "stated in F2",
+    "claim": "Total revenues were 441,144 (table in thousands), consisting of $ 427,252 in rental revenues, 4,367 in management, development and leasing fees, and 9,525 in other revenues.",
     "facts": [
      "F2"
     ],
@@ -627,9 +114,10 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 7 MD&A Operational Review section.",
-    "claim": "Malls generated 72.2% of CBL's revenues, followed by open-air centers at 9.9%, lifestyle centers at 7.7%, outlet centers at 5.4%, and all other properties at 4.8%.",
+    "basis": "stated in P1 and P3",
+    "claim": "Malls generate the majority of CBL's revenues at 72.2% of total revenues, followed by Open-Air Centers at 9.9%, Lifestyle Centers at 7.7%, Outlet Centers at 5.4%, and All Other Properties at 4.8%, while non-enclosed mall assets generated approximately 30% of same-center NOI.",
     "facts": [
+     "P1",
      "P3"
     ],
     "quotes": [
@@ -638,181 +126,129 @@
      "Open-Air Centers | 9.9% | 11.0%",
      "Lifestyle Centers | 7.7% | 7.8%",
      "Outlet Centers | 5.4% | 5.5%",
-     "All Other Properties | 4.8% | 5.7%"
+     "All Other Properties | 4.8% | 5.7%",
+     "Approximately 30% of our 2025 same-center net operating income (\"NOI\") was generated by non-enclosed mall assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business section and MD&A disaggregation tables in the 10-K and 10-Q.",
-    "claim": "CBL disaggregates property revenues and operating expenses across Malls, Outlet Centers, Lifestyle Centers, Open-Air Centers, and All Other (office buildings, outparcels, and hotels), while pointing to an omitted footnote for reportable segment information.",
+    "basis": "stated in P1",
+    "claim": "CBL's top 25 tenants accounted for 34.15% of total revenues across 1,253 stores and 11,453,890 square feet, led by Victoria's Secret & Co. at 2.67% and Signet Group, PLC at 2.60%.",
     "facts": [
-     "P1",
-     "P3",
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "See Note 11 to the consolidated financial statements for information about our reportable segments.",
-     "The other property type (the \"All Other\" or \"All Other Properties\") is made up of office buildings, outparcels and hotels.",
-     "Rental revenues | $143,865 | $134,786 | $9,079 | $9,549 | $(1,015) | $22 | $450 | $73"
+     "1,253 | 11,453,890 | 34.15%",
+     "1 | Victoria's Secret & Co. | 46 | 379,689 | 2.67%",
+     "2 | Signet Group, PLC (2) | 107 | 156,889 | 2.60%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business and Item 1A Risk Factors sections and the Q3 2026 earnings release.",
-    "claim": "Organic rental revenue growth is driven by occupancy gains, contractual embedded rent increases, and positive lease spreads, with portfolio occupancy reaching 91.5% and comparable average gross rent spreads reaching 6.8% in the third quarter.",
+    "basis": "stated in P1",
+    "claim": "CBL's top five markets by share of total revenues were Chattanooga, TN (6.7%), St. Louis, MO (6.5%), Nashville, TN (5.0%), Lexington, KY (4.3%), and Kansas City, KS (4.2%).",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Chattanooga, TN | 6.7%",
+     "St. Louis, MO | 6.5%",
+     "Nashville, TN | 5.0%",
+     "Lexington, KY | 4.3%",
+     "Kansas City, KS | 4.2%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P6",
+    "claim": "Revenue and same-center NOI growth are driven by rising portfolio occupancy\u2014reaching 91.5%, up 130 bps year over year\u2014along with contractual rent increases and comparable lease spreads averaging 6.8% on average gross rent per square foot.",
     "facts": [
      "P1",
-     "P2",
      "P6"
     ],
     "quotes": [
-     "We incorporate contractual rent increases in our leases and negotiate increases in rental rates as leases mature, when possible.",
+     "Portfolio occupancy was 91.5% as of September 30, 2026, an increase of 130 bps from portfolio occupancy of 90.2% as of September 30, 2025 and 110 bps sequentially.",
      "Growth was driven by embedded rent increases, rental increases in renewal leasing and higher occupancy.",
-     "Same-Center NOI Up 3.8%; Portfolio Occupancy Up 130 bps to 91.5%; Comparable Lease Spreads of 6.8%; Trailing Twelve-Month Same-Center Sales per Square Foot Up 3.6% to $463"
+     "More than 930,000 square feet of leases were signed in Q3 2026, including approximately 460,000 square feet of comparable new and renewal leases signed at a 6.8% increase in average gross rents versus prior rents."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business and Item 1A Risk Factors sections and the Q3 2026 earnings release.",
-    "claim": "Tenant sales volumes and fourth-quarter holiday seasonality drive percentage rents, short-term temporary rents, and seasonal occupancy peaks, with trailing twelve-month same-center sales per square foot rising 3.6% to $463.",
+    "basis": "stated in P1, P3, and P6",
+    "claim": "Tenant sales support percentage rents and sustainable occupancy costs, with trailing twelve-month same-center sales rising 3.6% to $463 per square foot, while fourth-quarter holiday shopping drives peak occupancy, sales, percentage rents, and temporary rents.",
     "facts": [
      "P1",
-     "P2",
+     "P3",
      "P6"
     ],
     "quotes": [
+     "Same-center tenant sales per square foot for the rolling 12 months ended September 30, 2026, of $463, increased 3.6% as compared with the prior-year period.",
      "The shopping center business is, to some extent, seasonal in nature with tenants typically achieving the highest levels of sales during the fourth quarter due to the holiday season, which generally results in higher percentage rent income in the fourth quarter.",
-     "Additionally, our properties earn most of their \u201ctemporary\u201d rents (rents from short-term tenants) during the holiday period.",
-     "Same-center tenant sales per square foot rose 3.6% for the rolling twelve months to $463 as traffic continues to increase across our portfolio."
+     "Thus, occupancy levels and revenue production are generally the highest in the fourth quarter of each year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 7 and 10-Q Item 2 MD&A sections.",
-    "claim": "Portfolio recycling moves consolidated rental revenues as mall acquisitions added $5.7 million while property sales or deconsolidations removed $2.8 million in the third quarter.",
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Consolidated revenues also shift with active portfolio recycling\u2014selling open-air centers, outparcels, and non-core properties to fund mall acquisitions\u2014and with deconsolidations when mortgaged non-core properties enter receivership.",
     "facts": [
      "P3",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
+     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling.",
      "Rental revenues increased partially due to the acquisition of four malls in July 2025 and one mall in March 2026, which resulted in an increase of $5.7 million during the current period.",
-     "The increase was partially offset by $2.8 million of rental revenues associated with properties sold or deconsolidated since the prior period.",
-     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling."
+     "The increase was partially offset by $2.8 million of rental revenues associated with properties sold or deconsolidated since the prior period."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 Business and Item 1A Risk Factors sections and 10-Q Item 2 MD&A.",
-    "claim": "CBL seeks to grow property cash flows by re-tenanting former anchor spaces and densifying unused parking fields with retail, service, dining, entertainment, and non-retail uses.",
-    "facts": [
-     "P1",
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "Our focus is on continuing to execute our strategy to improve occupancy, drive rent growth and transform the offerings available at our properties to include a targeted mix of retail, service, dining, entertainment and other non-retail uses, primarily through the re-tenanting of former anchor locations as well as diversification of in-line tenancy.",
-     "We actively evaluate unused parking fields and available land for primarily non-retail densification projects, which provides us with the opportunity to capitalize on the embedded equity value of our land and increase the overall value of our properties."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q Statements of Operations and Cash Flows and 10-K Item 1A Risk Factors.",
-    "claim": "CBL also earns income and cash distributions from unconsolidated joint-venture affiliates, recording equity in earnings of 49,834 (table in thousands) and receiving 44,097 (table in thousands) in earnings distributions over the latest nine-month period.",
+    "basis": "stated in F2, P2, and P3",
+    "claim": "Property-level expenses totaled (81,371) for property operating, (42,851) for real estate taxes, and (34,549) for maintenance and repairs (table in thousands), driven by acquisitions, utilities, snow removal, and tax adjustments, while fixed CAM reimbursements and gross leases expose CBL to unrecovered expense inflation and vacant-space costs.",
     "facts": [
      "F2",
-     "F3",
-     "P2"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "Equity in earnings of unconsolidated affiliates | 17,246 | 1,696 | 49,834 | 15,046",
-     "Distributions of earnings from unconsolidated affiliates | 44,097 | 13,547",
-     "The third-party partner of each of these properties controls the cash flow distributions, although our approval is required for certain major decisions."
+     "Property operating | (27,341) | (27,383) | (81,371) | (76,844)",
+     "Real estate taxes | (14,730) | (12,970) | (42,851) | (43,728)",
+     "Maintenance and repairs | (11,375) | (9,594) | (34,549) | (33,432)",
+     "The majority of our current leases require an equal periodic tenant reimbursement amount for our cost recoveries, which serves to fix our tenants\u2019 CAM contributions to us.",
+     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q Condensed Consolidated Statements of Operations.",
-    "claim": "CBL's primary operating expenses over the latest nine-month period were depreciation and amortization of (109,465) (table in thousands), property operating costs of (81,371) (table in thousands), general and administrative expenses of (47,573) (table in thousands), real estate taxes of (42,851) (table in thousands), and maintenance and repairs of (34,549) (table in thousands).",
+    "basis": "stated in F2, P1, and P4",
+    "claim": "Depreciation and amortization of (109,465) and general and administrative expense of (47,573) (table in thousands) are major operating costs, driven by tangible and intangible lease assets from acquisitions, fresh-start accounting asset runoff, stock-based compensation, professional fees, and a Management Company workforce of 408 full-time and 92 part-time employees.",
     "facts": [
-     "F2"
+     "F2",
+     "P1",
+     "P4"
     ],
     "quotes": [
      "Depreciation and amortization | (35,084) | (39,900) | (109,465) | (125,143)",
-     "Property operating | (27,341) | (27,383) | (81,371) | (76,844)",
      "General and administrative | (14,204) | (17,787) | (47,573) | (53,682)",
-     "Real estate taxes | (14,730) | (12,970) | (42,851) | (43,728)",
-     "Maintenance and repairs | (11,375) | (9,594) | (34,549) | (33,432)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Item 1A Risk Factors section.",
-    "claim": "Because most leases fix tenant CAM reimbursements and more tenants are shifting to gross leases, CBL absorbs unrecovered operating cost inflation as well as operating expenses allocable to vacant spaces.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The majority of our current leases require an equal periodic tenant reimbursement amount for our cost recoveries, which serves to fix our tenants\u2019 CAM contributions to us.",
-     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses.",
-     "Additionally, in the event that our properties are not fully occupied, we would be required to pay the portion of any operating, redevelopment or renovation expenses allocable to the vacant space(s) that would otherwise typically be paid by the residing tenant(s)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Item 7 and 10-Q Item 2 MD&A sections.",
-    "claim": "Property operating costs move with portfolio additions and disposals as well as real estate taxes, maintenance and repairs, utilities, weather-driven snow removal, and prior-period tax refunds, with recent mall acquisitions adding $2.8 million and sold or deconsolidated properties offsetting $2.1 million in the third quarter.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Total property operating expenses increased during the current period primarily due to higher real estate tax and maintenance and repair expenses.",
-     "The acquisition of four malls in July 2025 and one mall in March 2026 resulted in an increase of $2.8 million during the current period, which was partially offset by $2.1 million related to properties sold or deconsolidated since the prior period.",
-     "Property operating expenses increased in the current year primarily due to one-time real estate and franchise tax refunds received in the prior year as well as higher utility and maintenance expense."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in the 10-Q Item 2 MD&A section.",
-    "claim": "Depreciation and amortization is driven by new tangible and intangible lease assets from property acquisitions and consolidations, which added $1.5 million in the third quarter, partially offset as fresh-start accounting assets and prior tenant improvements become fully depreciated.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Depreciation and amortization expense decreased primarily due to tenant improvement and intangible in-place lease assets recognized upon consolidation of three malls in December 2024, as well as the adoption of fresh start accounting on November 1, 2021, becoming fully depreciated or amortized since the prior period.",
-     "The decrease was partially offset by the addition of tangible assets and intangible lease assets recognized upon the acquisition of four malls in July 2025 and one mall in March 2026, which resulted in an increase of $1.5 million during the current period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Item 1 and Item 7 and 10-Q Item 2 MD&A sections.",
-    "claim": "General and administrative expenses are driven primarily by Management Company workforce compensation, stock-based compensation awards, and third-party professional and loan-modification fees.",
-    "facts": [
-     "P1",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "To attract, retain and develop our high-performing team members, we offer compensation programs that include a mix of salaries, variable incentive bonuses and equity-based awards.",
      "General and administrative expense decreased primarily due to lower stock-based compensation expense in the current period as compared to the prior period, as well as lower professional fees expense in the current period.",
-     "General and administrative expense increased $1.8 million primarily due to fees paid to third parties associated with the modification of the 2032 non-recourse bank loan (previously referred to as the \"open-air centers and outparcels loan\"), as well as higher stock compensation expense in the current year due to awards granted since the prior year."
+     "As of December 31, 2025, our Management Company had 408 full-time and 92 part-time employees that represented the following voluntarily provided demographics:"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q Balance Sheet, Statements of Operations, and MD&A sections and 10-K MD&A and Risk Factors.",
-    "claim": "With 2,025,450 (table in thousands) of net mortgage and other debt, interest expense of (148,742) (table in thousands) is a major cost driven by property-level refinancing rates, debt paydowns, variable interest rates, and non-cash default interest on matured loans.",
+    "basis": "stated in F1, F2, P4, and P6",
+    "claim": "Substantial leverage\u20142,025,450 (table in thousands) of consolidated net mortgage and other indebtedness and a 6.44% weighted-average interest rate on pro rata debt\u2014drove (148,742) (table in thousands) of interest expense, reflecting refinancing rates, variable-rate debt at 7.72%, debt discount accretion, and non-cash default interest on matured loans.",
     "facts": [
      "F1",
      "F2",
-     "P2",
-     "P3",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "Mortgage and other indebtedness, net | 2,025,450 | 2,170,785",
      "Interest expense | (66,127) | (44,779) | (148,742) | (132,963)",
+     "Weighted-average interest rate | 6.28% | 7.72% | 6.44%",
      "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021.",
      "Also, the increase is attributable to property loan interest expense due to refinancings with higher interest rates as compared to the prior period."
     ],
@@ -821,73 +257,35 @@
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the November 4, 2026 Form 8-K press release and 2025 Form 10-K Item 1 Business.",
-    "claim": "CBL owns and manages a portfolio of 85 market-dominant retail properties totaling 54.8 million square feet across 23 states, concentrated in mid-tier southeastern and midwestern markets.",
-    "facts": [
-     "P7",
-     "P1"
-    ],
-    "quotes": [
-     "Headquartered in Chattanooga, TN, CBL Properties owns and manages a national portfolio of market-dominant properties located in dynamic and growing communities.",
-     "CBL\u2019s owned and managed portfolio is comprised of 85 properties totaling 54.8 million square feet across 23 states, including 54 high-quality enclosed malls, outlet centers and lifestyle retail centers as well as more than 20 open-air centers and other assets.",
-     "Our assets are located in strong mid-tier markets with a focus in the growing southeast and midwest."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 Form 10-K Item 1 Business and Item 7 MD&A.",
-    "claim": "Malls generate 72.2% of CBL's revenues, while non-enclosed mall assets such as outlet, lifestyle, and open-air centers generated approximately 30% of same-center NOI.",
+    "basis": "Stated in 10-K Item 1 Business and Item 7 MD&A.",
+    "claim": "CBL owns interests in 86 properties across 22 states, including 47 malls and 25 open-air centers focused in southeastern and midwestern mid-tier markets.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "Approximately 30% of our 2025 same-center net operating income (\"NOI\") was generated by non-enclosed mall assets.",
-     "We derive the majority of our revenues from our malls."
+     "As of December 31, 2025, we own interests in 86 properties, consisting of 47 malls, 25 open-air centers, five outlet centers, four lifestyle centers and five other properties, including single-tenant and multi-tenant outparcels.",
+     "As of December 31, 2025, our shopping centers are located in 22 states, and are primarily in the southeastern and midwestern United States.",
+     "Our assets are located in strong mid-tier markets with a focus in the growing southeast and midwest."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 8-K earnings release occupancy table, with exclusion rule stated in 2025 Form 10-K Item 7 MD&A.",
-    "claim": "Portfolio occupancy increased from 90.2% to 91.5% year-over-year, with malls rising from 87.6% to 89.7% and open-air centers at 94.3%.",
+    "basis": "Stated in 10-K Item 1 Operating Strategy and Item 7 Operational Review revenue-by-property-type table.",
+    "claim": "Enclosed malls generate 72.2% of CBL's revenues, while non-enclosed mall assets generate approximately 30% of same-center NOI.",
     "facts": [
-     "P6",
+     "P1",
      "P3"
     ],
     "quotes": [
-     "Same-Center NOI Up 3.8%; Portfolio Occupancy Up 130 bps to 91.5%; Comparable Lease Spreads of 6.8%; Trailing Twelve-Month Same-Center Sales per Square Foot Up 3.6% to $463"
+     "We derive the majority of our revenues from our malls.",
+     "Approximately 30% of our 2025 same-center net operating income (\"NOI\") was generated by non-enclosed mall assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 8-K earnings release and 2025 Form 10-K Item 7 MD&A.",
-    "claim": "Comparable average gross rent spreads were 6.8% in the third quarter, supported by 27.0% new-lease spreads, 2.0% renewal spreads, and rolling twelve-month same-center tenant sales rising 3.6% to $463 per square foot.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Growth was driven by embedded rent increases, rental increases in renewal leasing and higher occupancy.",
-     "Same-center tenant sales per square foot rose 3.6% for the rolling twelve months to $463 as traffic continues to increase across our portfolio."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 8-K earnings release and Q3 2026 Form 10-Q Condensed Consolidated Statements of Operations.",
-    "claim": "Same-center NOI increased 3.8% in the third quarter and 2.6% over the first nine months, while consolidated total revenues reached 148,697 (table in thousands) in the third quarter.",
-    "facts": [
-     "P6",
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively, compared with the prior-year periods."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 Form 10-K Item 1 Business Top 25 Tenants table.",
-    "claim": "CBL's top 25 tenants represent 34.15% of total revenues across 1,253 stores, with no single tenant exceeding Victoria's Secret & Co.'s 2.67% share.",
+    "basis": "Stated in 10-K Item 1 Top Five Markets and Top 25 Tenants tables.",
+    "claim": "CBL's top 25 tenants account for 34.15% of total revenues across 1,253 stores, led by Victoria's Secret & Co. at 2.67%, while its largest market represents 6.7% of total revenues.",
     "facts": [
      "P1"
     ],
@@ -897,62 +295,128 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1 Business and Q3 2026 Form 10-Q Item 2 MD&A.",
-    "claim": "CBL reinforces its market positioning through anchor re-tenanting, non-retail land densification, and capital recycling, acquiring Gateway Mall for approximately $43.8 million while selling Hammock Landing and York Town Center for $128.7 million in gross proceeds.",
+    "basis": "Stated in the Q3 2026 earnings release and 10-K Item 7 In-Line Store Occupancy disclosure.",
+    "claim": "Portfolio occupancy rose 130 bps year over year to 91.5%, and mall occupancy increased 210 basis points despite approximately 68,000 square feet of bankruptcy-related store closures.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Portfolio occupancy was 91.5% as of September 30, 2026, an increase of 130 bps from portfolio occupancy of 90.2% as of September 30, 2025 and 110 bps sequentially.",
+     "Mall occupancy increased 210 basis points year over year despite bankruptcy-related store closures of approximately 68,000 square feet, which reduced mall occupancy by nearly 50 basis points.",
+     "Our portfolio in-line store occupancy is summarized in the below table (Excluded Properties are not included in occupancy metrics)."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and 10-K Item 7 Operational Review.",
+    "claim": "Same-center tenant sales per square foot reached $463, up 3.6% year over year, following 10.6% mall in-line tenant occupancy costs.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Same-center tenant sales per square foot for the rolling 12 months ended September 30, 2026, of $463, increased 3.6% as compared with the prior-year period.",
+     "Inline and adjacent freestanding store sales include reporting mall, lifestyle center and outlet center tenants of 10,000 square feet or less and exclude license agreements, which are retail leases that are temporary or short-term in nature and generally last more than three months but less than twelve months."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and 10-K Item 7 leasing tables.",
+    "claim": "CBL signed more than 930,000 square feet of leases at 6.8% comparable rent spreads and grew same-center NOI by 3.8% quarterly and 2.6% year-to-date.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "More than 930,000 square feet of leases were signed in Q3 2026, including approximately 460,000 square feet of comparable new and renewal leases signed at a 6.8% increase in average gross rents versus prior rents.",
+     "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively, compared with the prior-year periods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business, Q3 2026 10-Q Item 2 MD&A, and Q3 2026 earnings release.",
+    "claim": "CBL reinforces property traffic and portfolio quality by re-tenanting former anchors, densifying unused land with non-retail uses, and recycling non-core asset sales into malls.",
     "facts": [
      "P1",
      "P4",
-     "P3"
+     "P6"
     ],
     "quotes": [
-     "We actively evaluate unused parking fields and available land for primarily non-retail densification projects, which provides us with the opportunity to capitalize on the embedded equity value of our land and increase the overall value of our properties.",
-     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling."
+     "Our strategy of owning a diverse portfolio of dynamic properties in strong mid-tier markets has served the company well as CBL\u2019s dominant locations generate significant demand from retail and non-retail users alike.",
+     "Redevelopments may result from acquiring or regaining possession of Anchor space (such as former department stores) and re-leasing to a single user, subdividing it into multiple spaces or razing the building for new development.",
+     "By exiting non-core assets that contribute little to earnings, CBL is improving the overall quality of its portfolio and generating cash to redeploy into higher-yielding opportunities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1 Business and Item 1A Risk Factors.",
-    "claim": "CBL faces direct competition from other shopping facilities for tenants and from online shopping, discount centers, outlet centers, and wholesale clubs for consumer spending.",
+    "basis": "Stated in 10-K Item 1 Competition and Item 1A Risk Factors.",
+    "claim": "Online shopping alternatives, discount centers, outlet centers, wholesale clubs, and competing retail developments threaten tenant demand and CBL's properties.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "Our properties compete with various shopping facilities in attracting retailers to lease space.",
-     "In addition, retailers at our properties face competition from online shopping alternatives, discount shopping centers, outlet centers, wholesale clubs, direct mail, television shopping networks and other retail shopping developments."
+     "In addition, retailers at our properties face competition from online shopping alternatives, discount shopping centers, outlet centers, wholesale clubs, direct mail, television shopping networks and other retail shopping developments.",
+     "Competition from other retail facilities, and from alternatives to traditional retail such as online shopping."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A Risk Factors.",
-    "claim": "Tenant bankruptcies, lease rejections, rent concessions, fixed CAM reimbursements, and a tenant shift toward gross leases threaten CBL's ability to maintain rental rates and recover rising operating expenses.",
+    "basis": "Stated in 10-K Item 1A Risk Factors and evidenced by Q3 2026 bankruptcy closures in the earnings release.",
+    "claim": "Retail tenant bankruptcies, industry consolidations, and lease non-renewals threaten occupancy and may force rent abatements, tenant improvement concessions, or lower rental rates.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Potential loss of one or more significant tenants, due to bankruptcies or consolidations in the retail industry.",
+     "There can be no assurance that our leases will be renewed, that bankrupt tenants will assume our leases, or that vacant space will be re-leased at rates equal to or above the current average net effective rental rates or that substantial rent abatements, tenant improvements, early termination rights or below market renewal options will not be offered to attract new tenants or retain existing tenants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Fixed CAM reimbursements, a tenant trend toward gross leases, and vacant spaces expose CBL to unrecovered increases in operating expenses and real estate taxes.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "If the rental rates decrease, if our existing tenants do not renew their leases, reject our leases in bankruptcy, or if we do not re-lease a significant portion of our available space and space for which leases will expire, our financial condition and results of operations could be adversely affected.",
+     "The majority of our current leases require an equal periodic tenant reimbursement amount for our cost recoveries, which serves to fix our tenants\u2019 CAM contributions to us.",
      "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Q3 2026 Form 10-Q Item 2 MD&A, Q3 2026 Form 8-K earnings release, and 2025 Form 10-K Item 7 MD&A.",
-    "claim": "Multiple properties face debt distress and lender workouts, with CBL designating Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall, and York Galleria as non-core and deconsolidating or relinquishing several troubled malls.",
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Inflation and trade tariffs threaten consumer spending, tenant merchandise and operating margins, CBL's construction costs, and real NOI growth.",
     "facts": [
-     "P4",
-     "P6",
-     "P3",
-     "F1"
+     "P2"
     ],
     "quotes": [
-     "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall and York Galleria were designated as non-core.",
-     "Volusia Mall has been removed from the same-center pool, reflecting CBL's cooperation with the lender on a sale, foreclosure or conveyance of the property."
+     "Inflationary price increases could have an adverse effect on consumer spending, which could impact our tenants\u2019 sales and, in turn, our tenants\u2019 business operations.",
+     "In addition, if the rate of inflation exceeds the scheduled rent increases included in our leases, then our net operating income and our profitability would decrease.",
+     "Many of our tenants sell imported goods, and tariffs or other trade restrictions could materially increase costs for these tenants."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1 Business and Item 1A Risk Factors.",
-    "claim": "Regional concentration in the southeastern and midwestern United States exposes CBL to localized downturns, particularly in its largest markets led by Chattanooga, TN at 6.7% and St. Louis, MO at 6.5% of total revenues.",
+    "basis": "Stated in 10-K Item 1A Risk Factors, Q3 2026 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "Substantial encumbered indebtedness and distressed assets affect CBL's portfolio, with non-recourse loans aggregating approximately $266.7 million at CBL's share in lender-directed sale, foreclosure, or conveyance processes.",
+    "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Six non-recourse loans aggregating approximately $266.7 million (at CBL's share) are in the process of being resolved through lender-directed sale, foreclosure or conveyance.",
+     "Our indebtedness is substantial and many of our assets are encumbered by property-level indebtedness."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors and Item 1 Top Five Markets.",
+    "claim": "Geographic concentration in the southeastern and midwestern United States exposes CBL to regional economic downturns, particularly in its largest markets.",
     "facts": [
      "P1",
      "P2"
@@ -963,257 +427,230 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A Risk Factors.",
-    "claim": "Inflation, elevated interest rates, and U.S. or retaliatory trade tariffs threaten consumer spending, tenant import margins, redevelopment construction costs, and CBL's borrowing costs.",
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Joint venture ownership structures limit CBL's operational control over certain properties where third-party partners manage operations or hold approval rights.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Inflationary price increases could have an adverse effect on consumer spending, which could impact our tenants\u2019 sales and, in turn, our tenants\u2019 business operations.",
-     "International trade disputes, including threatened or implemented tariffs imposed by the United States and threatened or implemented tariffs imposed by foreign countries in retaliation, could adversely impact our business."
+     "Certain of our properties are subject to ownership interests held by third parties, whose interests may conflict with ours and thereby constrain us from taking actions concerning these properties which otherwise would be in the best interests of the Company and our stockholders.",
+     "With respect to those properties for which we do not serve as managing general partner (or equivalent), we do not have day-to-day operational control or control over certain major decisions, including leasing and the timing and amount of distributions, which could result in decisions by the managing entity that do not fully reflect our interests."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A Risk Factors.",
-    "claim": "Third-party ownership in jointly held properties\u2014including 4 malls, 5 outlet centers, 1 lifestyle center, and 11 open-air centers\u2014along with property-level mortgage encumbrances and real estate illiquidity can constrain leasing, financing, and asset sales.",
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "CBL also faces operational and compliance threats from cyberattacks, AI adoption risks, climate-change regulations and weather events, and potential future public health emergencies.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "We own partial interests in 4 malls, 5 outlet centers, 1 lifestyle center, 11 open-air centers, 2 office buildings and 2 hotels.",
-     "With respect to those properties for which we do not serve as managing general partner (or equivalent), we do not have day-to-day operational control or control over certain major decisions, including leasing and the timing and amount of distributions, which could result in decisions by the managing entity that do not fully reflect our interests.",
-     "Because real estate investments are relatively illiquid, our ability to quickly sell one or more properties in our portfolio in response to changing economic, financial and investment conditions is limited."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Q3 2026 Form 10-Q balance sheet and MD&A, and November 4, 2026 Form 8-K.",
-    "claim": "Refinancing the $634.0 million secured term loan to extend maturities, reducing net mortgage and other indebtedness to 2,025,450 (table in thousands), and holding over $366.0 million in cash support CBL's capacity to reinvest in its properties.",
-    "facts": [
-     "P4",
-     "P7",
-     "F1"
-    ],
-    "quotes": [
-     "During the first nine months of 2026, we reduced our debt balance and extended our debt maturity schedule through refinancings, such as the refinancing of the $634.0 million secured term loan with two new loans, which extended the maturity date five years.",
-     "With a stronger balance sheet, no major debt maturities until 2028, and a cash balance of over $366.0 million, we are well positioned to buy back shares while exploring additional opportunities to create value for shareholders."
+     "We use artificial intelligence (\"AI\") in our business and its use involves technological and legal risk.",
+     "We may become subject to laws or regulations related to climate change, which could cause our business, results of operations and financial condition to be impacted adversely.",
+     "Any future pandemic or a similar threat, and governmental responses thereto, could materially and adversely impact or disrupt our financial condition, results of operations, cash flows and performance."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1",
-    "claim": "As of September 30, 2026, CBL held 60,955 in cash and cash equivalents, 289,937 in available-for-sale securities at fair value, and 102,750 in restricted cash (table in thousands), compared with 42,287, 293,087, and 110,665 as of December 31, 2025.",
+    "basis": "Stated in the Q3 2026 earnings release and the 2025 Form 10-K MD&A.",
+    "claim": "Unrestricted cash and marketable securities totaled $366.7 million, including $15.8 million of CBL's share of joint venture cash, up from $335.4 million in unrestricted cash and U.S. Treasury securities at the end of the prior year.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | [1] | 60,955 | 42,287",
-     "Restricted cash | [1] | 102,750 | 110,665",
-     "Available-for-sale securities - at fair value (amortized cost of $290,311 and $292,646 as of September 30, 2026 and December 31, 2025, respectively) | [1] | 289,937 | 293,087"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "At December 31, 2025, CBL held $335.4 million in unrestricted cash and U.S. Treasury securities, alongside $75.9 million in escrow and cash-management restricted cash and $34.8 million in restricted cash tied to properties securing its corporate term loan and non-recourse bank loan.",
-    "facts": [
+     "P6",
      "P3"
     ],
     "quotes": [
-     "As of December 31, 2025, we had $335.4 million available in unrestricted cash and U.S. Treasury securities.",
-     "We had $75.9 million in restricted cash at December 31, 2025 related to cash held in escrow accounts for insurance, real estate taxes, capital expenditures and tenant allowances as required by the terms of certain mortgage notes payable, as well as amounts related to cash management agreements with lenders of certain property-level mortgage indebtedness, which are designated for debt service and operating expense obligations."
+     "As of September 30, 2026, the Company had $366.7 million of unrestricted cash and marketable securities, including CBL's share of joint venture cash of $15.8 million.",
+     "As of December 31, 2025, we had $335.4 million available in unrestricted cash and U.S. Treasury securities."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P7",
-    "claim": "On November 4, 2026, management reported a cash balance of over $366.0 million while authorizing a new $25.0 million common stock repurchase program through December 31, 2027.",
+    "basis": "Stated in the Q3 2026 Form 10-Q balance sheet and cash flow statement.",
+    "claim": "Consolidated balance sheet liquidity included 60,955 in cash and cash equivalents, 289,937 in available-for-sale securities at fair value, and 102,750 in restricted cash, alongside 217,579 in accounts payable and accrued liabilities (table in thousands).",
     "facts": [
-     "P7"
+     "F1",
+     "F3"
     ],
     "quotes": [
-     "With a stronger balance sheet, no major debt maturities until 2028, and a cash balance of over $366.0 million, we are well positioned to buy back shares while exploring additional opportunities to create value for shareholders.",
-     "Under the new common stock repurchase program, the Company may purchase up to $25.0 million of its common stock from time to time on the open market, in privately negotiated transactions or otherwise, depending on market prices and other conditions, through December 31, 2027."
+     "Cash and cash equivalents | [1] | 60,955 | 42,287",
+     "Available-for-sale securities - at fair value (amortized cost of $290,311 and $292,646 as of September 30, 2026 and December 31, 2025, respectively) | [1] | 289,937 | 293,087",
+     "Restricted cash | [1] | 102,750 | 110,665",
+     "Accounts payable and accrued liabilities | 217,579 | 193,640"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "As of September 30, 2026, mortgage and other indebtedness, net declined to 2,025,450 from 2,170,785 at December 31, 2025, compared with total equity of 417,789 and total assets of 2,660,818 (table in thousands).",
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Year-to-date refinancings removed cash management sweeps on Northwoods Mall and West County Center and modified term loan cash flows, adding over $45.0 million in annual free cash flow.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "With nearly $1.0 billion in new financings completed year-to-date, we have no major maturities until 2028 and added over $45.0 million in annual free cash flow.",
+     "The refinancing also removes the cash management sweep, unlocking more than $7.0 million of annual free cash flow."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q balance sheet.",
+    "claim": "Consolidated mortgage and other indebtedness, net, decreased to 2,025,450 from 2,170,785, while total equity increased to 417,789 from 364,674 (table in thousands).",
     "facts": [
      "F1"
     ],
     "quotes": [
      "Mortgage and other indebtedness, net | 2,025,450 | 2,170,785",
-     "Total equity | 417,789 | 364,674",
-     "Total assets | [1] | 2,660,818 | 2,729,099"
+     "Total equity | 417,789 | 364,674"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1 and P3",
-    "claim": "Off-balance-sheet joint ventures add to economic leverage, with total pro rata debt excluding unamortized financing costs and debt discounts at $2,622.6 million at December 31, 2025, while consolidated liabilities at September 30, 2026 include $174,402 (table in thousands) of non-recourse consolidated VIE liabilities.",
+    "basis": "Stated in the Q3 2026 earnings release supplemental debt table; the unit scale in thousands is inferred by matching Consolidated debt net ($2,025,450) in P6 to F1's balance sheet (2,025,450, table in thousands), as the P6 table header was omitted.",
+    "claim": "CBL's share of consolidated, unconsolidated, and other debt totaled $2,503,974 ($2,417,085 net) versus $2,679,377 ($2,583,748 net) a year earlier, while the weighted-average interest rate rose from 5.99% to 6.44%.",
     "facts": [
-     "F1",
-     "P3"
+     "P6",
+     "F1"
     ],
     "quotes": [
-     "Our total pro rata share of debt, excluding unamortized deferred financing costs and debt discounts, at December 31, 2025 was $2,622.6 million.",
+     "Company's share of consolidated, unconsolidated and other debt | $2,227,503 | $276,471 | $2,503,974 | $(30,193) | $(56,696) | $2,417,085",
+     "Company's share of consolidated, unconsolidated and other debt | $1,920,134 | $759,243 | $2,679,377 | $(13,182) | $(82,447) | $2,583,748",
+     "Weighted-average interest rate | 6.28% | 7.72% | 6.44%",
+     "Weighted-average interest rate | 5.47% | 7.29% | 5.99%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release supplemental debt table; scale in thousands is inferred from F1 as noted above.",
+    "claim": "CBL reduced its pro rata variable-rate debt from $759,243 to $276,471, while its weighted-average fixed interest rate increased from 5.47% to 6.28% and its weighted-average variable rate rose from 7.29% to 7.72%.",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "Company's share of consolidated, unconsolidated and other debt | $2,227,503 | $276,471 | $2,503,974 | $(30,193) | $(56,696) | $2,417,085",
+     "Weighted-average interest rate | 6.28% | 7.72% | 6.44%",
+     "Weighted-average interest rate | 5.47% | 7.29% | 5.99%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Risk Factors and Q3 2026 Form 10-Q balance sheet footnote.",
+    "claim": "CBL's indebtedness is substantial and many properties are encumbered by property-level debt, though $174,402 (table in thousands) of consolidated variable interest entity liabilities lack recourse to the Company's general credit.",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "Our indebtedness is substantial and many of our assets are encumbered by property-level indebtedness.",
      "As of September 30, 2026, includes $155,197 of assets related to consolidated variable interest entities that can be used only to settle obligations of the consolidated variable interest entities and $174,402 of liabilities of consolidated variable interest entities for which creditors do not have recourse to the general credit of the Company."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2, P4, and P6",
-    "claim": "GAAP interest expense rose to (66,127) in the third quarter ended September 30, 2026 versus (44,779) in the prior-year quarter, and to (148,742) for the nine months ended September 30, 2026 versus (132,963) a year earlier (table in thousands).",
-    "facts": [
-     "F2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Interest expense | (66,127) | (44,779) | (148,742) | (132,963)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "CBL discloses that its indebtedness is substantial and many properties are encumbered by property-level mortgages, while debt covenants restrict business operations and limit lien releases on property sales.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our indebtedness is substantial and many of our assets are encumbered by property-level indebtedness.",
-     "Various covenants in agreements governing our debt impose restrictions that may affect our ability to operate our business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Operating cash flow increased in the first nine months of 2026, with net cash provided by operating activities of 224,307 compared with 169,520 in the prior-year period (table in thousands).",
+    "basis": "Stated in the Q3 2026 Form 10-Q cash flow statement.",
+    "claim": "Net cash provided by operating activities rose to 224,307 from 169,520 in the prior-year period, covering $ 101,722 in cash paid for interest net of amounts capitalized (table in thousands).",
     "facts": [
      "F3"
     ],
     "quotes": [
-     "Net cash provided by operating activities | 224,307 | 169,520"
+     "Net cash provided by operating activities | 224,307 | 169,520",
+     "Cash paid for interest, net of amounts capitalized | $ 101,722 | $ 102,563"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2, F3, P4, and P6",
-    "claim": "Nine-month 2026 operating cash flow of 224,307 exceeded GAAP net income of $ 104,551 (table in thousands), aided by a 42,321 inflow from accounts payable and accrued liabilities and 44,097 in distributions of earnings from unconsolidated affiliates, while cash paid for interest was $ 101,722 versus (148,742) in GAAP interest expense.",
-    "facts": [
-     "F2",
-     "F3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Net income | $ 104,551 | $ 85,605",
-     "Accounts payable and accrued liabilities | 42,321 | 4,120",
-     "Distributions of earnings from unconsolidated affiliates | 44,097 | 13,547",
-     "Cash paid for interest, net of amounts capitalized | $ 101,722 | $ 102,563"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in F3 and P6",
-    "claim": "Capital spending, dividends, and scheduled principal payments absorb a large share of operating cash flow: nine-month 2026 additions to real estate assets used (47,285), acquisitions used (43,761), and common dividends used (58,019) (table in thousands), while full-year 2026 maintenance capital/tenant allowances are estimated at $55.0 to $65.0 million and principal amortization at 58.0 to 63.0 (table in millions).",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Additions to real estate assets | (47,285) | (38,712)",
-     "Acquisitions of real estate assets | (43,761) | (185,988)",
-     "Dividends paid to common shareholders | (58,019) | (63,374)",
-     "2026 Estimated maintenance capital/tenant allowances (1) | $55.0 | $65.0",
-     "2026 Estimated principal amortization (including est. term loan ECF) | 58.0 | 63.0"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Core property cash generation improved in the nine months ended September 30, 2026, with same-center NOI rising 2.6% to $284,989 (table in thousands), portfolio occupancy reaching 91.5% versus 90.2% a year earlier, and FFO, as adjusted, growing 12% to $5.52 per diluted share.",
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Operating performance improved with same-center NOI rising 3.8% in the third quarter and 2.6% over nine months, portfolio occupancy reaching 91.5%, and FFO, as adjusted, increasing to $1.90 per share for the quarter and $5.52 per share for nine months.",
     "facts": [
      "P6"
     ],
     "quotes": [
      "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively, compared with the prior-year periods.",
-     "FFO, as adjusted, per share for the nine months ended September 30, 2026, was $5.52 compared with $4.94 per share for the prior-year period, an increase of 12%.",
-     "Total portfolio same-center NOI | $284,989 | $277,634",
-     "Total portfolio | 91.5% | 90.2%"
+     "Portfolio occupancy was 91.5% as of September 30, 2026, an increase of 130 bps from portfolio occupancy of 90.2% as of September 30, 2025 and 110 bps sequentially.",
+     "FFO, as adjusted, per share for Q3 2026 was $1.90, compared with $1.55 per share for the prior-year period, an increase of 23%.",
+     "FFO, as adjusted, per share for the nine months ended September 30, 2026, was $5.52 compared with $4.94 per share for the prior-year period, an increase of 12%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P2",
-    "claim": "Cash flow quality faces structural risks from tenants shifting to gross leases or fixed CAM reimbursements that expose CBL to operating-expense inflation and vacant-space costs, as well as fourth-quarter holiday seasonality and tenant bankruptcies.",
+    "basis": "Stated in the Q3 2026 Form 10-Q income statement, MD&A, and earnings release.",
+    "claim": "GAAP net income of 104,551 over nine months and 11,845 in the third quarter (table in thousands) included large non-operating gains and non-cash default interest rather than purely recurring cash earnings.",
     "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Net income | 11,845 | 75,060 | 104,551 | 85,605",
+     "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q cash flow statement, Q3 2026 earnings release, and 2025 Form 10-K Risk Factors.",
+    "claim": "Capital spending and shareholder dividends absorb significant cash, with nine-month real estate additions of (47,285) and common dividends paid of (58,019) (table in thousands), and full-year estimated capital items of $118.0 to $135.0 (table in millions).",
+    "facts": [
+     "F3",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Additions to real estate assets | (47,285) | (38,712)",
+     "Dividends paid to common shareholders | (58,019) | (63,374)",
+     "Total Estimate | $118.0 | $135.0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Having closed nearly $1.0 billion of new financings year-to-date to address 2026 maturities, CBL has no major debt maturities until 2028, when loans secured by three high-performing properties come due.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Year-to-date, CBL has closed nearly $1.0 billion of new financings, addressing its 2026 loan maturities.",
+     "The Company has no major maturities until 2028, when loans secured by three high-performing properties come due."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Six non-recourse loans totaling approximately $266.7 million at CBL's share are being resolved via lender-directed sale, foreclosure, or conveyance, including Volusia Mall ($31.7 million), whose maturity was extended to January 2027.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Six non-recourse loans aggregating approximately $266.7 million (at CBL's share) are in the process of being resolved through lender-directed sale, foreclosure or conveyance.",
+     "As part of these discussions, in October, CBL closed on a modification of the loan secured by Volusia Mall in Daytona Beach, FL, extending its maturity to January 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and 2025 Form 10-K Business and Risk Factors.",
+    "claim": "Future obligations can be met through $366.7 million of unrestricted cash and marketable securities, unlocked free cash flow, asset-sale proceeds of more than $101.3 million year-to-date plus a contracted $11.3 million Eastland Mall sale, and non-recourse property surrenders.",
+    "facts": [
+     "P6",
      "P1",
      "P2"
     ],
     "quotes": [
-     "The majority of our current leases require an equal periodic tenant reimbursement amount for our cost recoveries, which serves to fix our tenants\u2019 CAM contributions to us.",
-     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses."
+     "Year-to-date, CBL has generated gross sales proceeds at CBL\u2019s share of more than $101.3 million, including the sale of Hammock Landing in May, the August sale of York Town Center in York, PA, and the sale of Old Hickory Mall in Jackson, TN, in early November.",
+     "In addition, CBL is under firm contract to sell Eastland Mall in Bloomington, IL, for $11.3 million.",
+     "Once completed, these transactions will eliminate the associated debt and simplify CBL\u2019s portfolio and balance sheet."
     ],
     "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P7",
-    "claim": "During the first nine months of 2026, CBL refinanced its $634.0 million secured term loan with two new loans extending maturity by five years, and management stated on November 4, 2026 that there are no major debt maturities until 2028.",
-    "facts": [
-     "P4",
-     "P7"
-    ],
-    "quotes": [
-     "During the first nine months of 2026, we reduced our debt balance and extended our debt maturity schedule through refinancings, such as the refinancing of the $634.0 million secured term loan with two new loans, which extended the maturity date five years.",
-     "With a stronger balance sheet, no major debt maturities until 2028, and a cash balance of over $366.0 million, we are well positioned to buy back shares while exploring additional opportunities to create value for shareholders."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3, P4, and P6",
-    "claim": "Despite having no major corporate maturities until 2028, certain property-level loans are already past maturity or in default, generating 26,931 of non-cash default interest expense in the first nine months of 2026 (table in thousands) and resulting in receivership, deconsolidation, or lender conveyance processes.",
-    "facts": [
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021.",
-     "The accrued non-cash default interest is expected to be resolved when the respective property is either sold or conveyed to the lender in satisfaction of the debt.",
-     "Non-cash default interest expense (4) | 25,342 | (1,326) | 26,931 | (446)"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "inferred from F1, F3, P1, P4, and P7",
-    "claim": "CBL can meet upcoming principal amortization and future debt maturities using its cash and available-for-sale Treasury securities (60,955 and 289,937 in thousands at September 30, 2026; over $366.0 million cash stated November 4, 2026), operating cash flow (224,307 in thousands in nine-month 2026), asset-sale proceeds ($128.7 million gross in 2026), and open-market refinancings or loan modifications.",
-    "facts": [
-     "F1",
-     "F3",
-     "P1",
-     "P4",
-     "P7"
-    ],
-    "quotes": [
-     "Proceeds from such sales are generally used to retire related indebtedness, reduce outstanding balances on our indebtedness and for general corporate purposes.",
-     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling.",
-     "We are exploring refinancing opportunities in the open lending market, as appropriate, in addition to working with our current lenders toward favorable modifications of existing loans."
-    ],
-    "support": "number_not_listed"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated directly in the Q3 2026 earnings release (P6).",
-    "claim": "Third-quarter same-center NOI increased 3.8% and nine-month same-center NOI increased 2.6%, driven by embedded rent increases, renewal rental increases, and higher occupancy.",
+    "basis": "stated in P6 and P1",
+    "claim": "Same-center NOI grew 3.8% in the third quarter of 2026, driven by embedded rent increases, rental increases in renewal leasing, and higher occupancy.",
     "facts": [
-     "P6"
+     "P6",
+     "P1"
     ],
     "quotes": [
      "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively, compared with the prior-year periods.",
@@ -1222,36 +659,10 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 earnings release (P6).",
-    "claim": "Portfolio occupancy reached 91.5%, comparable average gross rent per square foot rose 6.8% in the third quarter, and trailing twelve-month same-center tenant sales per square foot rose 3.6% to $463.",
+    "basis": "stated in P2",
+    "claim": "For internal same-center NOI growth to continue, scheduled contractual rent increases must outpace inflation in unrecovered property operating expenses.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Same-Center NOI Up 3.8%; Portfolio Occupancy Up 130 bps to 91.5%; Comparable Lease Spreads of 6.8%; Trailing Twelve-Month Same-Center Sales per Square Foot Up 3.6% to $463",
-     "Same-center tenant sales per square foot rose 3.6% for the rolling twelve months to $463 as traffic continues to increase across our portfolio."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 Form 10-K Risk Factors (P2), reaffirmed as unchanged in the Q3 2026 Form 10-Q (P5).",
-    "claim": "Continued internal growth requires renewing expiring leases and re-leasing vacant space on favorable rental terms without major tenant bankruptcies or rent concessions.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Our results of operations depend on our ability to continue to lease space in our properties, including vacant space and re-leasing space in properties where leases are expiring, optimizing our tenant mix, or leasing properties on economically favorable terms.",
-     "There have been no material changes to such risk factors since the filing of our Annual Report."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 Form 10-K Risk Factors (P2), reaffirmed as unchanged in the Q3 2026 Form 10-Q (P5).",
-    "claim": "For NOI growth to continue, scheduled rent increases and tenant cost recoveries must keep pace with operating expense inflation and shifts toward gross leases.",
-    "facts": [
-     "P2",
-     "P5"
+     "P2"
     ],
     "quotes": [
      "In addition, if the rate of inflation exceeds the scheduled rent increases included in our leases, then our net operating income and our profitability would decrease.",
@@ -1260,103 +671,155 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K (P3) and Q3 2026 Form 10-Q MD&A (P4).",
-    "claim": "CBL grows cash flow and rental revenues by recycling proceeds from asset sales into enclosed mall acquisitions, which added $5.7 million to quarterly rental revenues.",
+    "basis": "stated in P6",
+    "claim": "Leasing momentum and positive rent spreads are expanding revenue, with comparable leases in the third quarter of 2026 signed at a 6.8% increase in average gross rents and portfolio occupancy reaching 91.5%.",
     "facts": [
-     "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "The acquisition represents significant progress in the execution of our portfolio optimization strategy as we utilize proceeds from sales of non-core assets and open-air centers, such as the sales of two open-air centers, The Promenade and Fremaux Town Center, to invest in higher cash flow yielding opportunities.",
-     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling.",
-     "Rental revenues increased partially due to the acquisition of four malls in July 2025 and one mall in March 2026, which resulted in an increase of $5.7 million during the current period."
+     "More than 930,000 square feet of leases were signed in Q3 2026, including approximately 460,000 square feet of comparable new and renewal leases signed at a 6.8% increase in average gross rents versus prior rents.",
+     "Portfolio occupancy was 91.5% as of September 30, 2026, an increase of 130 bps from portfolio occupancy of 90.2% as of September 30, 2025 and 110 bps sequentially."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K Risk Factors (P2) and Q3 2026 Form 10-Q (P4, P5).",
-    "claim": "Sustaining capital recycling requires finding buyers for relatively illiquid shopping center assets, obtaining mortgage lien releases on favorable terms, and sourcing accretive mall acquisition opportunities.",
+    "basis": "stated in P2",
+    "claim": "For leasing-driven revenue growth to continue, existing tenants must renew without bankruptcy rejections and vacant or expiring space must be re-leased without substantial rent concessions or below-market options.",
     "facts": [
-     "P2",
+     "P2"
+    ],
+    "quotes": [
+     "Our results of operations depend on our ability to continue to lease space in our properties, including vacant space and re-leasing space in properties where leases are expiring, optimizing our tenant mix, or leasing properties on economically favorable terms.",
+     "There can be no assurance that our leases will be renewed, that bankrupt tenants will assume our leases, or that vacant space will be re-leased at rates equal to or above the current average net effective rental rates or that substantial rent abatements, tenant improvements, early termination rights or below market renewal options will not be offered to attract new tenants or retain existing tenants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 and P3",
+    "claim": "Rising tenant sales per square foot, up 3.6% to $463 for the rolling 12 months ended September 30, 2026, support rent affordability and higher percentage rents.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Same-center tenant sales per square foot for the rolling 12 months ended September 30, 2026, of $463, increased 3.6% as compared with the prior-year period.",
+     "A $1.4 million increase in percentage rents and higher rental revenue from occupancy improvements and contractual rent escalation contributed to the $9.5 million increase in rental revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "For tenant sales and traffic growth to continue, consumer spending must hold up against inflation, online competition, and potential tariff cost pressures on retail tenants.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "To the extent our tenants are unable to pass these costs on to their customers, our tenants\u2019 operations could be adversely impacted, which among other things, could weaken demand by those tenants for our real estate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4, P1, and P6",
+    "claim": "CBL is driving property productivity by re-tenanting former anchor locations, diversifying into dining, service, and entertainment uses, and selling land parcels for multi-family densification.",
+    "facts": [
      "P4",
-     "P5"
-    ],
-    "quotes": [
-     "Because real estate investments are relatively illiquid, our ability to quickly sell one or more properties in our portfolio in response to changing economic, financial and investment conditions is limited.",
-     "In addition, because many of our properties are mortgaged to secure our debts, we may not be able to obtain a release of a lien on a mortgaged property without the payment of the associated debt or release price, and/or a substantial prepayment penalty, or transfer of debt to a buyer, which restricts our ability to dispose of a property, even though the sale might otherwise be desirable.",
-     "inability to consummate acquisition or disposition opportunities and other risks associated with acquisitions and dispositions"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 Form 10-K (P1, P3) and Q3 2026 Form 10-Q (P4).",
-    "claim": "CBL seeks to drive rent growth and traffic by redeveloping and re-tenanting former anchor spaces and pursuing non-retail densification on unused parking fields and land.",
-    "facts": [
      "P1",
-     "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
      "Our focus is on continuing to execute our strategy to improve occupancy, drive rent growth and transform the offerings available at our properties to include a targeted mix of retail, service, dining, entertainment and other non-retail uses, primarily through the re-tenanting of former anchor locations as well as diversification of in-line tenancy.",
-     "We actively evaluate unused parking fields and available land for primarily non-retail densification projects, which provides us with the opportunity to capitalize on the embedded equity value of our land and increase the overall value of our properties.",
-     "In January 2025, we acquired four Macy's stores for $6.2 million, which include land, buildings and improvements, for future redevelopment at the respective properties."
+     "We actively evaluate unused parking fields and available land for primarily non-retail densification projects, which provides us with the opportunity to capitalize on the embedded equity value of our land and increase the overall value of our properties."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K Risk Factors (P2), reaffirmed as unchanged in the Q3 2026 Form 10-Q (P5).",
-    "claim": "For redevelopment and densification to contribute profitably, CBL must control construction costs, secure required anchor, lender, and partner approvals, and achieve projected post-completion rents and occupancy.",
+    "basis": "stated in P2",
+    "claim": "For redevelopment and densification projects to add profitable growth, construction costs must stay within estimates, completed spaces must achieve projected rents and occupancy, and anchor, lender, and partner approvals must be obtained.",
     "facts": [
-     "P2",
-     "P5"
+     "P2"
     ],
     "quotes": [
-     "Developments, redevelopments or expansions also include the risk that construction costs of a project may exceed original estimates, possibly making the project unprofitable.",
      "Other risks include the risk that we may not be able to refinance construction loans which are generally with full recourse to us, the risk that occupancy rates and rents at a completed project will not meet projections and will be insufficient to make the project profitable, and the risk that we will not be able to obtain Anchor, mortgage lender and property partner approvals for certain expansion activities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 balance sheet (F1), Q3 2026 Form 10-Q (P4), and November 4, 2026 Form 8-K (P7).",
-    "claim": "CBL supports net cash flow and capital deployment by reducing mortgage and other indebtedness, net from 2,170,785 (table in thousands) to 2,025,450 (table in thousands) and extending maturities so no major debt maturities occur until 2028.",
+    "basis": "stated in P4, P3, and F3",
+    "claim": "CBL is growing its mall revenue base through capital recycling, using asset sale proceeds to acquire higher cash-flow-yielding malls including Gateway Mall for approximately $43.8 million in 2026.",
     "facts": [
-     "F1",
      "P4",
-     "P7"
+     "P3",
+     "F3"
     ],
     "quotes": [
-     "Mortgage and other indebtedness, net | 2,025,450 | 2,170,785",
-     "This operational strategy is also supported by our balance sheet strategy of reducing overall debt, extending our debt maturity schedule and lowering our overall cost of borrowings to limit maturity risk, as well as improving net cash flow and enhancing enterprise value.",
-     "With a stronger balance sheet, no major debt maturities until 2028, and a cash balance of over $366.0 million, we are well positioned to buy back shares while exploring additional opportunities to create value for shareholders."
+     "Additionally, we acquired Gateway Mall in Lincoln, NE for approximately $43.8 million.",
+     "The acquisition represents significant progress in the execution of our portfolio optimization strategy as we utilize proceeds from sales of non-core assets and open-air centers, such as the sales of two open-air centers, The Promenade and Fremaux Town Center, to invest in higher cash flow yielding opportunities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K Risk Factors (P2) and Q3 2026 Form 10-Q (P4, P5).",
-    "claim": "To sustain net cash flow improvement, CBL must retain credit-market access to refinance substantial property-level debt without incurring prohibitively higher interest rates.",
+    "basis": "stated in P2 and inferred from P4",
+    "claim": "For capital recycling growth to continue, CBL must locate willing buyers for illiquid retail assets at acceptable prices, obtain mortgage lien releases, and source attractively priced acquisitions.",
     "facts": [
      "P2",
-     "P4",
-     "P5"
+     "P4"
     ],
     "quotes": [
-     "Our indebtedness is substantial and many of our assets are encumbered by property-level indebtedness.",
-     "Also, the increase is attributable to property loan interest expense due to refinancings with higher interest rates as compared to the prior period."
+     "In addition, prevailing economic and capital market conditions might make it more difficult for us to sell properties or might adversely affect the price we receive for properties that we do sell, as prospective buyers might experience increased costs of debt financing or other difficulties in obtaining debt financing."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K Business and Risk Factors (P1, P2), reaffirmed as unchanged in the Q3 2026 Form 10-Q (P5).",
-    "claim": "Continued tenant sales and rent growth depend on consumer spending and economic health in CBL's southeastern and midwestern markets alongside tenants withstanding online retail competition and tariff-driven cost pressures.",
+    "basis": "stated in P6 and P4",
+    "claim": "Debt refinancings completed in 2026 unlocked over $45.0 million in annual free cash flow and removed cash management sweeps, helping lift FFO, as adjusted, per share by 23% in the third quarter of 2026.",
     "facts": [
-     "P1",
-     "P2",
-     "P5"
+     "P6",
+     "P4"
     ],
     "quotes": [
-     "At December 31, 2025, our properties are located in 22 states, but are primarily in the southeastern and midwestern United States.",
-     "Our properties are located principally in the southeastern and midwestern United States, so our business is subject generally to economic conditions in these regions and, in particular, to adverse economic developments affecting the operating results of our properties in our five largest markets.",
-     "Many of our tenants sell imported goods, and tariffs or other trade restrictions could materially increase costs for these tenants."
+     "With nearly $1.0 billion in new financings completed year-to-date, we have no major maturities until 2028 and added over $45.0 million in annual free cash flow.",
+     "FFO, as adjusted, per share for Q3 2026 was $1.90, compared with $1.55 per share for the prior-year period, an increase of 23%.",
+     "The refinancing also removes the cash management sweep, unlocking more than $7.0 million of annual free cash flow."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6, P4, and P2",
+    "claim": "For refinancing-driven cash flow and FFO per share gains to be sustained, credit markets must remain accessible on workable terms ahead of 2028 debt maturities without excessive interest rate increases.",
+    "facts": [
+     "P6",
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "The Company has no major maturities until 2028, when loans secured by three high-performing properties come due.",
+     "A deterioration of the capital and credit markets could adversely affect our ability to access funds and the capital needed to refinance debt or obtain new debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Following the expiration of bankruptcy-emergence tax limitations in 2026, CBL gained flexibility to monetize non-core assets and authorized a $25.0 million common stock repurchase program.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As further described in the Equity section of CBL\u2019s most recent Annual Report on Form 10-K, the five-year recognition period under Section 382 of the Internal Revenue Code that followed CBL\u2019s emergence from bankruptcy expired on November 1, 2026.",
+     "CBL now has flexibility to optimize its portfolio composition, monetize non-core assets, and return capital to shareholders more tax efficiently.",
+     "On November 4, 2026, CBL's Board of Directors authorized a stock repurchase program under which the Company may repurchase up to $25.0 million of its common stock."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 and P2",
+    "claim": "For tax-efficient capital returns and asset-loss harvesting to materialize, CBL must complete asset sales with significant losses without adverse changes to the Internal Revenue Code and retain sufficient Operating Partnership distributions.",
+    "facts": [
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Future tax treatment and individual shareholder taxation are subject to changes in the Internal Revenue Code, the completion of asset sales with significant losses, and other factors that CBL cannot guarantee or predict with accuracy.",
+     "Our ability to pay dividends on our common stock depends on the distributions we receive from our Operating Partnership, through which we conduct substantially all our business."
     ],
     "support": "supported"
    }
@@ -1370,13 +833,26 @@
      "P4"
     ],
     "quotes": [
+     "The increase was partially offset by tenant improvement and intangible in-place lease assets recognized upon the adoption of fresh start accounting on November 1, 2021 becoming fully depreciated or amortized since the prior year.",
      "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021."
     ],
     "support": "supported"
    },
    {
+    "basis": "stated in P6",
+    "claim": "The five-year recognition period under Section 382 of the Internal Revenue Code following CBL's emergence from bankruptcy expired, ending limitations on recognizing certain tax deductions from the 2021 ownership change.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As further described in the Equity section of CBL\u2019s most recent Annual Report on Form 10-K, the five-year recognition period under Section 382 of the Internal Revenue Code that followed CBL\u2019s emergence from bankruptcy expired on November 1, 2026.",
+     "CBL\u2019s ability to recognize certain tax deductions is no longer limited by the 2021 ownership change."
+    ],
+    "support": "supported"
+   },
+   {
     "basis": "stated in P3",
-    "claim": "The foreclosure process for Alamance Crossing East was completed; the property had an outstanding loan balance of $41.1 million prior to completion.",
+    "claim": "The foreclosure process for Alamance Crossing East was completed on a property that had an outstanding loan balance of $41.1 million prior to completion.",
     "facts": [
      "P3"
     ],
@@ -1387,77 +863,86 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "Southpark Mall entered loan default, was placed into receivership, and was deconsolidated, with CBL recording a $33.9 million gain on deconsolidation and reporting an outstanding loan balance of $48.3 million at year-end.",
+    "basis": "stated in P3 and P6",
+    "claim": "Southpark Mall entered default, was placed into receivership, and was deconsolidated, resulting in a $33.9 million gain on deconsolidation on a property secured by a $48.3 million loan.",
     "facts": [
      "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
      "In July 2025, Southpark Mall entered default and the property was placed into receivership.",
+     "As of December 31, 2025, the loan secured by Southpark Mall had an outstanding balance of $48.3 million.",
      "For the year ended December 31, 2025, we recorded a $33.9 million gain on deconsolidation related to Southpark Mall.",
-     "As of December 31, 2025, the loan secured by Southpark Mall had an outstanding balance of $48.3 million."
+     "In July 2025, Southpark Mall in Colonial Heights, VA, was placed into receivership and was deconsolidated due to the loss of control."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 (maturity default notice during 2025) and P4 (deconsolidation in May 2026)",
-    "claim": "CBL received notice from the lender that the loan secured by The Outlet Shoppes at Gettysburg was in maturity default, and the property was subsequently deconsolidated.",
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Following a maturity default notice, The Outlet Shoppes at Gettysburg was placed into receivership and deconsolidated while CBL cooperates with the lender to facilitate foreclosure on the $9.7 million non-recourse loan at CBL's share.",
     "facts": [
      "P3",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "During the year ended December 31, 2025, we were notified by the lender that the loan secured by The Outlet Shoppes at Gettysburg was in maturity default and we anticipate returning the property to the lender.",
-     "The Outlet Shoppes at Gettysburg | Gettysburg, PA | May 2026"
+     "In May, The Outlet Shoppes at Gettysburg in Gettysburg, PA, was placed into receivership.",
+     "CBL is cooperating with the lender to facilitate a foreclosure of the asset, which is secured by a $9.7 million non-recourse loan (at CBL's share)."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "CBL was notified by the lender that the loan secured by Jefferson Mall was in default, and the property was placed into receivership and deconsolidated.",
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Jefferson Mall entered loan default, was placed into receivership, and was deconsolidated while CBL cooperates with the lender to facilitate foreclosure on the $48.6 million non-recourse loan.",
     "facts": [
      "P3",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "Subsequent to December 31, 2025, we were notified by the lender that the loan secured by Jefferson Mall was in default and the property was placed into receivership.",
-     "Jefferson Mall | Louisville, KY | February 2026"
+     "In February, Jefferson Mall in Louisville, KY, was placed into receivership and was deconsolidated due to the loss of control.",
+     "CBL is cooperating with the lender to facilitate a foreclosure of the asset, which is secured by a $48.6 million non-recourse loan."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 (for the three months ended September 30, 2026) and P6",
-    "claim": "CBL accrued increased non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest was retroactive under a prior forbearance agreement.",
+    "basis": "stated in P4 and P6",
+    "claim": "Six non-recourse loans aggregating approximately $266.7 million at CBL's share\u2014including loans on Arbor Place Mall ($81.6 million), Parkdale Mall and Crossing ($46.8 million), and Volusia Mall ($31.7 million)\u2014are in the process of resolution through lender-directed sale, foreclosure, or conveyance, with loans past maturity incurring non-cash default interest expense.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021."
+     "Six non-recourse loans aggregating approximately $266.7 million (at CBL's share) are in the process of being resolved through lender-directed sale, foreclosure or conveyance.",
+     "CBL is in discussions with the lenders for Arbor Place Mall in Douglasville, GA ($81.6 million), Parkdale Mall and Crossing in Beaumont, TX ($46.8 million), and Volusia Mall in Daytona Beach, FL ($31.7 million), and intends to cooperate with the sale, foreclosure or conveyance of the properties in satisfaction of the debt.",
+     "As part of these discussions, in October, CBL closed on a modification of the loan secured by Volusia Mall in Daytona Beach, FL, extending its maturity to January 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 (dated November 5, 2026)",
-    "claim": "CBL removed Volusia Mall from its same-center pool as it cooperates with the lender on a sale, foreclosure, or conveyance of the property.",
+    "basis": "stated in P3, F2, and P4",
+    "claim": "CBL recorded losses on impairment of $3.2 million in 2025 related to sales of 840 Greenbrier Circle and a land parcel and $1.5 million in 2024 related to two outparcels sold below carrying value.",
     "facts": [
-     "P6"
+     "P3",
+     "F2",
+     "P4"
     ],
     "quotes": [
-     "Volusia Mall has been removed from the same-center pool, reflecting CBL's cooperation with the lender on a sale, foreclosure or conveyance of the property."
+     "During the year ended December 31, 2025, we recorded loss on impairment of $3.2 million related to the sales of 840 Greenbrier Circle and a land parcel, which were sold for less than their carrying values.",
+     "During the year ended December 31, 2024, we recorded loss on impairment of $1.5 million related to two outparcels we sold for less than each asset's carrying value."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P3",
-    "claim": "CBL acquired its joint venture partner's 50% interests in CoolSprings Galleria, Oak Park Mall, and West County Center, resulting in their consolidation and a $26.7 million gain on consolidation.",
+    "claim": "CBL acquired its joint venture partner's 50% interests in CoolSprings Galleria, Oak Park Mall, and West County Center, consolidating those properties and recognizing a $26.7 million gain on consolidation.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "For the year ended December 31, 2024, we recognized a $26.7 million gain on consolidation related to the acquisition of our partner's 50% joint venture interests in CoolSprings Galleria, Oak Park Mall and West County Center.",
-     "CoolSprings Galleria | Nashville, TN | December 2024"
+     "For the year ended December 31, 2024, we recognized a $26.7 million gain on consolidation related to the acquisition of our partner's 50% joint venture interests in CoolSprings Galleria, Oak Park Mall and West County Center."
     ],
     "support": "supported"
    },
@@ -1474,7 +959,7 @@
    },
    {
     "basis": "stated in P3 and P4",
-    "claim": "CBL closed on the acquisition of four malls\u2014Ashland Town Center, Mesa Mall, Paddock Mall, and Southgate Mall\u2014for $179.7 million including transaction costs.",
+    "claim": "CBL closed the acquisition of four malls (Ashland Town Center, Mesa Mall, Paddock Mall, and Southgate Mall) for $179.7 million including transaction costs.",
     "facts": [
      "P3",
      "P4"
@@ -1486,42 +971,20 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "CBL acquired Gateway Mall in Lincoln, NE for approximately $43.8 million.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Additionally, we acquired Gateway Mall in Lincoln, NE for approximately $43.8 million.",
-     "Gateway Mall | Lincoln, NE | March 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 (for the year ended December 31, 2025)",
-    "claim": "CBL sold six properties, six outparcels, three land parcels, and two anchor parcels, generating gross proceeds of $240.7 million at its share.",
+    "basis": "stated in P3",
+    "claim": "During 2025, CBL sold six properties, six outparcels, three land parcels, and two anchor parcels, generating gross proceeds of $240.7 million at CBL's share and recognizing $74.2 million of gain on sales of real estate assets.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "During the year ended December 31, 2025, we sold six properties, six outparcels, three land parcels and two anchor parcels, which generated gross proceeds of $240.7 million at our share."
+     "During the year ended December 31, 2025, we sold six properties, six outparcels, three land parcels and two anchor parcels, which generated gross proceeds of $240.7 million at our share.",
+     "During the year ended December 31, 2025, we recognized $74.2 million of gain on sales of real estate assets related to the sales of The Promenade, Imperial Valley Mall, Monroeville Mall, Annex at Monroeville, three outparcels associated with the Monroeville Mall properties, a land parcel associated with Imperial Valley Mall, an outparcel and two land parcels."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 (dispositions table lists May 2026 for Hammock Landing and August 2026 for York Town Center)",
-    "claim": "CBL sold Hammock Landing and York Town Center for $128.7 million in total gross proceeds.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 (during the year ended December 31, 2025)",
-    "claim": "CBL modified the loans secured by Coastal Grand Mall and Coastal Grand Crossing and its non-recourse bank loan, extending maturities, increasing interest rates, and increasing the non-recourse bank loan's principal balance by $110.0 million.",
+    "basis": "stated in P3",
+    "claim": "During 2025, CBL modified loans secured by Coastal Grand Mall, Coastal Grand Crossing, and the 2032 non-recourse bank loan, extending maturities, increasing interest rates, and increasing the 2032 loan principal balance by $110.0 million to fund the July 2025 mall acquisitions.",
     "facts": [
      "P3"
     ],
@@ -1531,67 +994,143 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4 (during the first nine months of 2026)",
-    "claim": "CBL refinanced its $634.0 million secured term loan with two new loans, extending the maturity date by five years.",
+    "basis": "stated in P4",
+    "claim": "CBL acquired Gateway Mall in Lincoln, NE for approximately $43.8 million.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "During the first nine months of 2026, we reduced our debt balance and extended our debt maturity schedule through refinancings, such as the refinancing of the $634.0 million secured term loan with two new loans, which extended the maturity date five years."
+     "Additionally, we acquired Gateway Mall in Lincoln, NE for approximately $43.8 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 (for the year ended December 31, 2025) and reflected in F2",
-    "claim": "CBL recorded a $3.2 million loss on impairment related to the sales of a property and a land parcel sold below their carrying values.",
+    "basis": "stated in P4 and P6",
+    "claim": "CBL refinanced its existing $634.0 million secured term loan through a $425.0 million non-recourse financing and a $176.1 million floating-rate bank loan, extending the maturity date by five years.",
     "facts": [
-     "P3",
-     "F2"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "During the year ended December 31, 2025, we recorded loss on impairment of $3.2 million related to the sales of 840 Greenbrier Circle and a land parcel, which were sold for less than their carrying values."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 (paid during the first quarter of 2025)",
-    "claim": "CBL's board of directors declared a special cash dividend of $0.80 per share, which was paid during the first quarter.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Additionally, our board of directors declared a special dividend of $0.80 per share, which was paid in cash during the first quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P7",
-    "claim": "CBL's board of directors authorized a common stock repurchase program of up to $25.0 million, which was later replaced.",
-    "facts": [
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "In November 2025, our board of directors authorized the repurchase of up to $25.0 million of the Company's common stock.",
-     "The new common stock repurchase program replaces the existing program authorized on November 5, 2025."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in P7",
-    "claim": "CBL's Board of Directors authorized and announced a new common stock repurchase program to purchase up to $25.0 million of its common stock.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On November 4, 2026, the Company issued a press release announcing that the Company\u2019s Board of Directors authorized a new common stock repurchase program.",
-     "Under the new common stock repurchase program, the Company may purchase up to $25.0 million of its common stock from time to time on the open market, in privately negotiated transactions or otherwise, depending on market prices and other conditions, through December 31, 2027."
+     "During the first nine months of 2026, we reduced our debt balance and extended our debt maturity schedule through refinancings, such as the refinancing of the $634.0 million secured term loan with two new loans, which extended the maturity date five years.",
+     "In March, CBL refinanced its existing $634.0 million term loan through two transactions including a $425.0 million non-recourse financing secured by a pool of primarily mall properties and a $176.1 million floating-rate bank loan primarily secured by a pool of open-air lifestyle centers."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P6",
-    "claim": "CBL raised its full-year FFO, as adjusted, guidance to $7.34 - $7.44 per share and full-year same-center NOI growth guidance to 0.75% to 2.25%.",
+    "claim": "CBL closed a $43.0 million fixed-rate 9.1% non-recourse loan secured by Northwoods Mall to retire an existing $46.8 million loan, and closed a $6.6 million ($3.3 million at CBL's share) non-recourse loan secured by Dick's Sporting Goods at Coastal Grand Mall.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In April, CBL closed on a $43.0 million non-recourse loan secured by Northwoods Mall in N. Charleston, SC.",
+     "The new five-year loan bears a fixed interest rate of 9.1%.",
+     "Proceeds from the loan, as well as approximately $7.5 million of existing escrows, were used to retire the existing $46.8 million loan secured by the property, which was scheduled to mature in April.",
+     "Additionally in April, CBL and its joint venture partner closed on a $6.6 million ($3.3 million at CBL's share) non-recourse, five-year loan secured by Dick's Sporting Goods at Coastal Grand Mall."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL closed a $71.9 million non-recourse loan at a 6.8% fixed rate on Hamilton Place replacing an $85.5 million loan, and refinanced Fayette Mall's $98.6 million loan with a $97.5 million non-recourse CMBS loan at an approximately 7.25% fixed rate.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In May, CBL closed a $71.9 million non\u2011recourse loan secured by Hamilton Place in Chattanooga, TN.",
+     "The five\u2011year loan bears a fixed interest rate of 6.8% and replaces the property\u2019s existing $85.5 million loan, which was scheduled to mature in June.",
+     "The financing replaces the existing $98.6 million loan with a new $97.5 million, five\u2011year non-recourse CMBS loan with a fixed interest rate of approximately 7.25%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL and its joint venture partner extended and modified the $30.7 million loan (at 100%) secured by The Outlet Shoppes at Laredo, reducing the loan balance by $850,000 and extending maturity through the end of November 2026.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August, CBL and its joint venture partner closed on the extension and modification of the $30.7 million loan (at 100%) secured by The Outlet Shoppes at Laredo in Laredo, TX.",
+     "At closing, the loan balance was reduced by $850,000 and the maturity extended through the end of November 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL closed a $135.0 million five-year non-recourse refinancing at a 7.4% fixed interest rate on West County Center, replacing an existing $136.4 million loan and removing the cash management sweep.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October, CBL closed a $135.0 million refinancing of the mortgage loan secured by West County Center, a dominant regional mall located in St. Louis, MO.",
+     "The new non-recourse loan replaces an existing $136.4 million loan that was scheduled to mature in December 2026.",
+     "The new loan carries a five-year term with a fixed interest rate of 7.4%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "Year-to-date in 2026, CBL sold Hammock Landing, York Town Center, Old Hickory Mall, and ten land parcels and other outparcels, generating more than $101.3 million in gross sales proceeds at CBL's share.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Year-to-date, CBL has generated gross sales proceeds at CBL\u2019s share of more than $101.3 million, including the sale of Hammock Landing in May, the August sale of York Town Center in York, PA, and the sale of Old Hickory Mall in Jackson, TN, in early November.",
+     "CBL has also completed the sale of ten land parcels and other outparcels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL is under firm contract with a non-refundable buyer deposit to sell Eastland Mall in Bloomington, IL for $11.3 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In addition, CBL is under firm contract to sell Eastland Mall in Bloomington, IL, for $11.3 million.",
+     "The buyer\u2019s deposit is non-refundable, and the sale is expected to close in November, subject to customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL's Board of Directors approved a fourth-quarter cash dividend of $0.625 per common share, representing an annual dividend of $2.50 per share.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On October 14, 2026, CBL's Board of Directors approved a dividend of $0.625 per common share for the fourth quarter of 2026, representing an annual dividend of $2.50 per share.",
+     "The dividend is payable on December 31, 2026, to shareholders of record as of December 14, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "CBL's board of directors authorized the repurchase of up to $25.0 million of the Company's common stock.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In November 2025, our board of directors authorized the repurchase of up to $25.0 million of the Company's common stock."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL's Board of Directors authorized a new stock repurchase program of up to $25.0 million of its common stock.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On November 4, 2026, CBL's Board of Directors authorized a stock repurchase program under which the Company may repurchase up to $25.0 million of its common stock."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "CBL raised its full-year 2026 guidance for FFO, as adjusted, to a range of $7.34 to $7.44 per share and anticipates same-center NOI growth in the range of 0.75% to 2.25%.",
     "facts": [
      "P6"
     ],
@@ -1604,129 +1143,115 @@
   ],
   "risks": [
    {
-    "basis": "Stated in F1, P2, P3, P4, P6, and P7.",
-    "claim": "CBL carries 2,025,450 (table in thousands) in net mortgage and other indebtedness as of September 30, 2026, and has experienced property-level loan defaults, foreclosures, and receiverships on non-core properties.",
+    "basis": "Stated in [F1], [P2], and [P6].",
+    "claim": "CBL carried 2,025,450 (table in thousands) of net mortgage and other indebtedness and had six non-recourse loans totaling approximately $266.7 million in lender-directed sale, foreclosure, or conveyance processes, plus a $30.7 million loan extended only through November 2026.",
     "facts": [
      "F1",
      "P2",
-     "P3",
-     "P4",
-     "P6",
-     "P7"
+     "P6"
     ],
     "quotes": [
      "Our indebtedness is substantial and many of our assets are encumbered by property-level indebtedness.",
-     "A deterioration of the capital and credit markets could adversely affect our ability to access funds and the capital needed to refinance debt or obtain new debt.",
-     "Volusia Mall has been removed from the same-center pool, reflecting CBL's cooperation with the lender on a sale, foreclosure or conveyance of the property."
+     "Six non-recourse loans aggregating approximately $266.7 million (at CBL's share) are in the process of being resolved through lender-directed sale, foreclosure or conveyance.",
+     "At closing, the loan balance was reduced by $850,000 and the maturity extended through the end of November 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2, F3, P2, and P4.",
-    "claim": "Rising interest rates and higher-rate refinancings increase borrowing costs, with interest expense rising $21.3 million in the third quarter of 2026 compared to the prior-year period.",
+    "basis": "Stated in [P2], [P4], and [P6].",
+    "claim": "Interest expense rose $21.3 million in the third quarter of 2026 compared to the prior-year period, and the weighted-average interest rate on CBL's share of debt increased from 5.99% to 6.44% as refinancings carried higher rates and defaulted loans accrued non-cash default interest.",
     "facts": [
-     "F2",
-     "F3",
      "P2",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "Rising interest rates could both increase our borrowing costs, thereby adversely affecting our cash flows and the amounts available for distributions to our stockholders, and decrease our stock price, if investors seek higher yields through other investments.",
-     "Interest expense increased $21.3 million during the three months ended September 30, 2026 as compared to the prior period."
+     "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021.",
+     "Also, the increase is attributable to property loan interest expense due to refinancings with higher interest rates as compared to the prior period."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2, P3, and P4.",
-    "claim": "Substantially all consolidated assets are illiquid real estate properties, and mortgage encumbrances can restrict or penalize timely property sales.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Substantially all our consolidated assets consist of investments in real estate properties.",
-     "Because real estate investments are relatively illiquid, our ability to quickly sell one or more properties in our portfolio in response to changing economic, financial and investment conditions is limited.",
-     "In addition, because many of our properties are mortgaged to secure our debts, we may not be able to obtain a release of a lien on a mortgaged property without the payment of the associated debt or release price, and/or a substantial prepayment penalty, or transfer of debt to a buyer, which restricts our ability to dispose of a property, even though the sale might otherwise be desirable."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1, P2, and P6.",
-    "claim": "CBL's top 25 tenants generated 34.15% of total revenues for the year ended December 31, 2025, exposing earnings to tenant bankruptcies, lease non-renewals, and online retail competition.",
+    "basis": "Stated in [P1], [P2], and [P6], with 2025 negative initial renewal spreads (-3.4% for malls, lifestyle centers and outlet centers) stated in [P3].",
+    "claim": "CBL faces tenant bankruptcies, lease renewal pressure, and competition from online shopping, experiencing approximately 68,000 square feet of bankruptcy-related store closures in the third quarter of 2026.",
     "facts": [
      "P1",
      "P2",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Potential loss of one or more significant tenants, due to bankruptcies or consolidations in the retail industry.",
-     "In addition, retailers at our properties face competition from online shopping alternatives, discount shopping centers, outlet centers, wholesale clubs, direct mail, television shopping networks and other retail shopping developments.",
-     "There can be no assurance that our leases will be renewed, that bankrupt tenants will assume our leases, or that vacant space will be re-leased at rates equal to or above the current average net effective rental rates or that substantial rent abatements, tenant improvements, early termination rights or below market renewal options will not be offered to attract new tenants or retain existing tenants."
+     "There can be no assurance that our leases will be renewed, that bankrupt tenants will assume our leases, or that vacant space will be re-leased at rates equal to or above the current average net effective rental rates or that substantial rent abatements, tenant improvements, early termination rights or below market renewal options will not be offered to attract new tenants or retain existing tenants.",
+     "Mall occupancy increased 210 basis points year over year despite bankruptcy-related store closures of approximately 68,000 square feet, which reduced mall occupancy by nearly 50 basis points.",
+     "In addition, retailers at our properties face competition from online shopping alternatives, discount shopping centers, outlet centers, wholesale clubs, direct mail, television shopping networks and other retail shopping developments."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2, P2, P4, and P6.",
-    "claim": "Inflation and tenant shifts toward fixed CAM reimbursements and gross leases can prevent CBL from recovering rising operating expenses, real estate taxes, and maintenance costs.",
+    "basis": "Stated in [P2] and [P4], with same-center NOI counter-evidence stated in [P6].",
+    "claim": "Fixed tenant CAM reimbursements, a shift toward gross leases, and requests for deferrals or rent abatements expose CBL to unrecovered operating expense increases when inflation or vacancies raise costs, as seen with increases of $1.8 million each in real estate taxes and maintenance and repairs expenses in the third quarter of 2026.",
     "facts": [
-     "F2",
      "P2",
      "P4",
      "P6"
     ],
     "quotes": [
-     "The majority of our current leases require an equal periodic tenant reimbursement amount for our cost recoveries, which serves to fix our tenants\u2019 CAM contributions to us.",
-     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses.",
-     "In addition, if the rate of inflation exceeds the scheduled rent increases included in our leases, then our net operating income and our profitability would decrease."
+     "Increased expenses, decreased occupancy rates, tenants converting to gross leases and requesting deferrals and rent abatements may not allow us to recover the majority of our CAM, real estate taxes and other operating expenses from our tenants, which could adversely affect our financial position, results of operations and funds available for future distributions.",
+     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in F2, P3, P4, and P6.",
-    "claim": "CBL's non-core property list expanded by September 30, 2026, while quarterly net income fell to 11,845 (table in thousands) from 75,060 (table in thousands) in the prior-year period as asset sale and deconsolidation gains declined.",
+    "basis": "Stated in [P2], [F1], [F2], and [F3].",
+    "claim": "CBL holds partial interests in 4 malls, 5 outlet centers, 1 lifestyle center, 11 open-air centers, 2 office buildings, and 2 hotels\u2014with 74,629 (table in thousands) in investments in unconsolidated affiliates\u2014exposing it to partner conflicts, lack of operational control, and partner bankruptcy delays.",
     "facts": [
-     "F2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "We consider properties undergoing major redevelopment, properties being considered for repositioning, properties where we intend to renegotiate the terms of the debt secured by the related property or return the property to the lender as non-core.",
-     "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall and York Galleria were designated as non-core."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1, P2, and P7.",
-    "claim": "CBL's portfolio is geographically concentrated in the southeastern and midwestern United States and in top markets led by Chattanooga, TN at 6.7% of total revenues.",
-    "facts": [
-     "P1",
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "Our properties are located principally in the southeastern and midwestern United States, so our business is subject generally to economic conditions in these regions and, in particular, to adverse economic developments affecting the operating results of our properties in our five largest markets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F2, F3, and P2.",
-    "claim": "Third-party joint venture partners manage and control distributions at several properties and pose risks of conflicting interests or partner bankruptcy.",
-    "facts": [
+     "F1",
      "F2",
      "F3",
      "P2"
     ],
     "quotes": [
-     "With respect to those properties for which we do not serve as managing general partner (or equivalent), we do not have day-to-day operational control or control over certain major decisions, including leasing and the timing and amount of distributions, which could result in decisions by the managing entity that do not fully reflect our interests.",
-     "The bankruptcy of one of the other investors in any of our jointly owned shopping centers could materially and adversely affect the relevant property or properties."
+     "We own partial interests in 4 malls, 5 outlet centers, 1 lifestyle center, 11 open-air centers, 2 office buildings and 2 hotels.",
+     "To the extent such approvals or consents are required, we may experience difficulty in, or may be prevented from, implementing our plans with respect to expansion, development, financing or other similar transactions with respect to such properties.",
+     "Bankruptcy of joint venture partners could impose delays and costs on us with respect to the jointly owned retail properties."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P6.",
-    "claim": "U.S. and retaliatory trade tariffs could raise merchandise costs for retail tenants and increase construction and supply costs for CBL's redevelopment projects.",
+    "basis": "Stated in [F1], [P1], [P2], [P3], and [P6].",
+    "claim": "Substantially all consolidated assets are illiquid real estate (1,867,122 out of 2,660,818 total assets, table in thousands) concentrated in the southeastern and midwestern United States, with Chattanooga, TN at 6.7% and St. Louis, MO at 6.5% as the largest markets.",
+    "facts": [
+     "F1",
+     "P1",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Our properties are located principally in the southeastern and midwestern United States, so our business is subject generally to economic conditions in these regions and, in particular, to adverse economic developments affecting the operating results of our properties in our five largest markets.",
+     "Because real estate investments are relatively illiquid, our ability to quickly sell one or more properties in our portfolio in response to changing economic, financial and investment conditions is limited."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P6].",
+    "claim": "CBL faces regulatory and tax-compliance risks, including REIT qualification and minimum distribution rules, uncertainty over future Internal Revenue Code changes and asset-loss tax treatment, and potential compliance costs or penalties from environmental, climate-change, ADA, and AI regulations.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Complying with REIT requirements might cause us to forego otherwise attractive opportunities, and failing to qualify as a REIT would reduce our funds available for distribution to stockholders.",
+     "We may become subject to laws or regulations related to climate change, which could cause our business, results of operations and financial condition to be impacted adversely.",
+     "Additionally, we may need to expend additional resources to modify and maintain our use of AI to comply with applicable law, and failure to do so may lead to regulatory fines or penalties.",
+     "Future tax treatment and individual shareholder taxation are subject to changes in the Internal Revenue Code, the completion of asset sales with significant losses, and other factors that CBL cannot guarantee or predict with accuracy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Risk stated in [P2]; sales counter-evidence stated in [P6].",
+    "claim": "International trade disputes and U.S. or retaliatory tariffs could raise costs for retail tenants selling imported goods and increase construction material costs for CBL's redevelopment projects.",
     "facts": [
      "P2",
      "P6"
@@ -1736,44 +1261,372 @@
      "Many of our tenants sell imported goods, and tariffs or other trade restrictions could materially increase costs for these tenants."
     ],
     "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "stated in P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: third-quarter same-center NOI increased 3.8% and nine-month same-center NOI increased 2.6%, driven by embedded rent increases, renewal rental increases, and higher occupancy.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Same-center NOI for Q3 2026 and the nine months ended September 30, 2026, increased 3.8% and 2.6%, respectively, compared with the prior-year periods.",
+     "Growth was driven by embedded rent increases, rental increases in renewal leasing and higher occupancy."
+    ],
+    "support": "supported"
    },
    {
-    "basis": "Stated in F3, P1, P2, P3, and P7.",
-    "claim": "REIT tax qualification rules and minimum distribution requirements constrain cash retention and create uncertainty over future dividend payments.",
+    "basis": "stated in P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: portfolio occupancy was 91.5%, comparable average gross rents rose 6.8%, and rolling twelve-month same-center tenant sales per square foot increased 3.6% to $463.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Portfolio occupancy was 91.5% as of September 30, 2026, an increase of 130 bps from portfolio occupancy of 90.2% as of September 30, 2025 and 110 bps sequentially.",
+     "More than 930,000 square feet of leases were signed in Q3 2026, including approximately 460,000 square feet of comparable new and renewal leases signed at a 6.8% increase in average gross rents versus prior rents.",
+     "Same-center tenant sales per square foot for the rolling 12 months ended September 30, 2026, of $463, increased 3.6% as compared with the prior-year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and reaffirmed in P5; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: operating results depend on renewing expiring leases and re-leasing vacant space on economically favorable terms without tenant lease rejections in bankruptcy or substantial rent abatements.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Our results of operations depend on our ability to continue to lease space in our properties, including vacant space and re-leasing space in properties where leases are expiring, optimizing our tenant mix, or leasing properties on economically favorable terms.",
+     "There have been no material changes to such risk factors since the filing of our Annual Report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and reaffirmed in P5; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: net operating income and cost recoveries are exposed if inflation exceeds scheduled rent increases or more tenants move to gross leases.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "In addition, if the rate of inflation exceeds the scheduled rent increases included in our leases, then our net operating income and our profitability would decrease.",
+     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses.",
+     "There have been no material changes to such risk factors since the filing of our Annual Report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P4; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: CBL recycles proceeds from asset sales into enclosed mall acquisitions, which increased quarterly rental revenues by $5.7 million.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The acquisition represents significant progress in the execution of our portfolio optimization strategy as we utilize proceeds from sales of non-core assets and open-air centers, such as the sales of two open-air centers, The Promenade and Fremaux Town Center, to invest in higher cash flow yielding opportunities.",
+     "Rental revenues increased partially due to the acquisition of four malls in July 2025 and one mall in March 2026, which resulted in an increase of $5.7 million during the current period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P4, and P5; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: capital recycling faces risks from property illiquidity, mortgage lien-release restrictions, and the inability to consummate acquisitions or dispositions.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Because real estate investments are relatively illiquid, our ability to quickly sell one or more properties in our portfolio in response to changing economic, financial and investment conditions is limited.",
+     "In addition, because many of our properties are mortgaged to secure our debts, we may not be able to obtain a release of a lien on a mortgaged property without the payment of the associated debt or release price, and/or a substantial prepayment penalty, or transfer of debt to a buyer, which restricts our ability to dispose of a property, even though the sale might otherwise be desirable.",
+     "There have been no material changes to such risk factors since the filing of our Annual Report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P3, and P4; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: CBL pursues rent growth and occupancy by re-tenanting former anchor locations and evaluating unused parking fields and land for non-retail densification.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "We actively evaluate unused parking fields and available land for primarily non-retail densification projects, which provides us with the opportunity to capitalize on the embedded equity value of our land and increase the overall value of our properties.",
+     "Our focus is on continuing to execute our strategy to improve occupancy, drive rent growth and transform the offerings available at our properties to include a targeted mix of retail, service, dining, entertainment and other non-retail uses, primarily through the re-tenanting of former anchor locations as well as diversification of in-line tenancy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P5; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: redevelopment profitability depends on controlling construction costs, obtaining anchor, lender, and partner approvals, and meeting projected occupancy and rents.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Developments, redevelopments or expansions also include the risk that construction costs of a project may exceed original estimates, possibly making the project unprofitable.",
+     "Other risks include the risk that we may not be able to refinance construction loans which are generally with full recourse to us, the risk that occupancy rates and rents at a completed project will not meet projections and will be insufficient to make the project profitable, and the risk that we will not be able to obtain Anchor, mortgage lender and property partner approvals for certain expansion activities.",
+     "There have been no material changes to such risk factors since the filing of our Annual Report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P4, and P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: mortgage and other indebtedness, net declined from 2,170,785 (table in thousands) to 2,025,450 (table in thousands), and CBL has no major maturities until 2028.",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "During the first nine months of 2026, we reduced our debt balance and extended our debt maturity schedule through refinancings, such as the refinancing of the $634.0 million secured term loan with two new loans, which extended the maturity date five years.",
+     "The Company has no major maturities until 2028, when loans secured by three high-performing properties come due."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P4, and P5; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: refinancing substantial property-level debt depends on capital and credit market access on favorable terms without excessive borrowing costs.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "A deterioration of the capital and credit markets could adversely affect our ability to access funds and the capital needed to refinance debt or obtain new debt.",
+     "Our indebtedness is substantial and many of our assets are encumbered by property-level indebtedness.",
+     "There have been no material changes to such risk factors since the filing of our Annual Report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, and P5; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: tenant performance depends on southeastern and midwestern economic conditions alongside competition from online shopping alternatives and tariff cost pressures.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "In addition, retailers at our properties face competition from online shopping alternatives, discount shopping centers, outlet centers, wholesale clubs, direct mail, television shopping networks and other retail shopping developments.",
+     "Our properties are located principally in the southeastern and midwestern United States, so our business is subject generally to economic conditions in these regions and, in particular, to adverse economic developments affecting the operating results of our properties in our five largest markets.",
+     "Many of our tenants sell imported goods, and tariffs or other trade restrictions could materially increase costs for these tenants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P2, P3, P4, and P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: CBL carries 2,025,450 (table in thousands) in mortgage and other indebtedness, net and faces defaults, receiverships, and foreclosures on non-core properties.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In July 2025, Southpark Mall entered default and the property was placed into receivership.",
+     "Six non-recourse loans aggregating approximately $266.7 million (at CBL's share) are in the process of being resolved through lender-directed sale, foreclosure or conveyance.",
+     "In February, Jefferson Mall in Louisville, KY, was placed into receivership and was deconsolidated due to the loss of control."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, F3, P2, and P4; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: higher-rate refinancings and rising interest rates raise borrowing costs, with quarterly interest expense increasing $21.3 million year over year.",
+    "facts": [
+     "F2",
+     "F3",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Interest expense increased $21.3 million during the three months ended September 30, 2026 as compared to the prior period.",
+     "Also, the increase is attributable to property loan interest expense due to refinancings with higher interest rates as compared to the prior period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, and P4; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: consolidated assets are concentrated in relatively illiquid real estate properties, and mortgage encumbrances can restrict property dispositions.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Substantially all our consolidated assets consist of investments in real estate properties.",
+     "In addition, because many of our properties are mortgaged to secure our debts, we may not be able to obtain a release of a lien on a mortgaged property without the payment of the associated debt or release price, and/or a substantial prepayment penalty, or transfer of debt to a buyer, which restricts our ability to dispose of a property, even though the sale might otherwise be desirable."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, and P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: CBL's top 25 tenants represented 34.15% of total revenues, creating exposure to tenant bankruptcies, lease non-renewals, and online retail competition.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Potential loss of one or more significant tenants, due to bankruptcies or consolidations in the retail industry.",
+     "Mall occupancy increased 210 basis points year over year despite bankruptcy-related store closures of approximately 68,000 square feet, which reduced mall occupancy by nearly 50 basis points."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P2, P4, and P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: inflation, fixed CAM reimbursements, and tenant shifts toward gross leases can prevent recovery of rising operating expenses, real estate taxes, and maintenance costs.",
+    "facts": [
+     "F2",
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Increased operating expenses, decreased occupancy rates, tenants converting to gross leases and requesting deferrals and rent abatements may not allow us to recover the majority of our CAM, real estate taxes and other operating expenses from our tenants, which could adversely affect our financial position, results of operations and funds available for future distributions.",
+     "The majority of our current leases require an equal periodic tenant reimbursement amount for our cost recoveries, which serves to fix our tenants\u2019 CAM contributions to us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P3, P4, and P6; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: CBL's non-core property list expanded while quarterly net income declined from 75,060 (table in thousands) to 11,845 (table in thousands) alongside lower asset sale and deconsolidation gains.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "As of December 31, 2025, Brookfield Square, Harford Mall, Laurel Park Place and Southpark Mall were designated as non-core.",
+     "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall and York Galleria were designated as non-core."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: properties are concentrated in the southeastern and midwestern United States, led by Chattanooga, TN at 6.7% of total revenues.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "At December 31, 2025, our properties are located in 22 states, but are primarily in the southeastern and midwestern United States.",
+     "Our properties are located principally in the southeastern and midwestern United States, so our business is subject generally to economic conditions in these regions and, in particular, to adverse economic developments affecting the operating results of our properties in our five largest markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, F3, and P2; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: third-party joint venture partners manage and control distributions at certain properties and pose risks of conflicting interests or partner bankruptcy.",
+    "facts": [
+     "F2",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "The third-party partner of each of these properties controls the cash flow distributions, although our approval is required for certain major decisions.",
+     "Bankruptcy of joint venture partners could impose delays and costs on us with respect to the jointly owned retail properties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: U.S. and retaliatory trade tariffs could increase merchandise costs for retail tenants and raise material costs for redevelopment projects.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Many of our tenants sell imported goods, and tariffs or other trade restrictions could materially increase costs for these tenants.",
+     "In addition, international trade disputes, including those related to tariffs, could result in inflationary pressures that directly impact our costs, such as costs for steel, lumber and other materials applicable to our redevelopment projects."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3, P1, P2, and P3; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: REIT minimum distribution requirements limit cash retention and CBL cannot assure future dividend payments.",
     "facts": [
      "F3",
      "P1",
      "P2",
-     "P3",
-     "P7"
+     "P3"
     ],
     "quotes": [
-     "Complying with REIT requirements might cause us to forego otherwise attractive opportunities, and failing to qualify as a REIT would reduce our funds available for distribution to stockholders.",
      "We must satisfy minimum distribution requirements to maintain our status as a REIT, which may limit the amount of cash available for use in growing our business.",
      "We cannot assure you of our ability to pay dividends or distributions in the future or the amount of any dividends or distributions."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 and P2.",
-    "claim": "CBL faces operational, legal, and compliance cost risks from artificial intelligence use, potential cyberattacks, climate change laws, and evolving sustainability reporting standards.",
+    "basis": "stated in P1 and P2; no evidence items in the packet became effective after 2026-11-16T19:49:51Z",
+    "claim": "With no post-cutoff evidence, the point remains unchanged: CBL faces technological, legal, operational, and compliance risks from artificial intelligence use, potential cyberattacks, climate change regulation, and sustainability reporting.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "We use artificial intelligence (\"AI\") in our business and its use involves technological and legal risk.",
-     "While cybersecurity attacks, to date, have not materially impacted our financial results, future cyberattacks, cyberintrusions or other disruptions of our information technology networks - including any loss of access to cloud computing services or other critical vendors - could disrupt our operations, compromise confidential information and adversely impact our financial condition, and the cost of preventative measures - which may not be effective in all cases - continues to increase.",
-     "Although these laws and regulations have not had any known material adverse effects on our business to date, they could result in substantial costs, including compliance costs, increased energy costs, retrofit costs and construction costs, including monitoring and reporting costs, and capital expenditures for environmental control facilities and other new equipment."
+     "We use AI in our business and its use involves technological and legal risk.",
+     "An increasingly complex and shifting landscape related to reporting sustainability factors and metrics may impose additional costs and expose us to new risks."
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "stated in F1 and F3, which refer to Note 8 that is omitted from the packet",
-    "claim": "Which specific properties or entities account for the $155,197 in assets and $174,402 in non-recourse liabilities of consolidated variable interest entities (table in thousands), and what are the terms of those obligations?",
+    "basis": "Stated in P6 that Eastland Mall was under firm contract and expected to close in November subject to customary closing conditions.",
+    "claim": "Did the contracted $11.3 million sale of Eastland Mall close in November as expected, and what were the final net proceeds and gain or loss?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In addition, CBL is under firm contract to sell Eastland Mall in Bloomington, IL, for $11.3 million.",
+     "The buyer\u2019s deposit is non-refundable, and the sale is expected to close in November, subject to customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that the loan maturity was extended through the end of November 2026 while refinancing, conveyance, and sale options remain under evaluation.",
+    "claim": "Which option\u2014refinancing, conveyance, or sale\u2014will CBL and its joint venture partner execute for The Outlet Shoppes at Laredo and its $30.7 million loan before its extended maturity at the end of November 2026?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August, CBL and its joint venture partner closed on the extension and modification of the $30.7 million loan (at 100%) secured by The Outlet Shoppes at Laredo in Laredo, TX.",
+     "CBL and its joint venture partner are currently evaluating a range of options for the loan, including a potential refinancing or conveyance or a sale of the property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that these loans are in the process of resolution, with no completion dates or final accounting impacts specified.",
+    "claim": "When and on what final financial terms will the non-recourse loans aggregating approximately $266.7 million (at CBL's share) be resolved through lender-directed sale, foreclosure, or conveyance?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Six non-recourse loans aggregating approximately $266.7 million (at CBL's share) are in the process of being resolved through lender-directed sale, foreclosure or conveyance.",
+     "Once completed, these transactions will eliminate the associated debt and simplify CBL\u2019s portfolio and balance sheet."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 that non-cash default interest accrued retroactively on one loan and is expected to be resolved upon sale or conveyance, without naming the property or cumulative accrued balance, while footnote (4) in P6 is omitted.",
+    "claim": "Which specific property loan incurred retroactive non-cash default interest under a prior forbearance agreement, what is the total accrued default interest balance, and when will a sale or conveyance resolve it?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021.",
+     "The accrued non-cash default interest is expected to be resolved when the respective property is either sold or conveyed to the lender in satisfaction of the debt."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in F1 and F3 footnote [1], which cross-references Note 8 that is not included in the packet.",
+    "claim": "Which specific consolidated variable interest entities and obligations comprise the $155,197 of restricted VIE assets and $174,402 of non-recourse VIE liabilities (tables in thousands)?",
     "facts": [
      "F1",
      "F3"
@@ -1785,156 +1638,102 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1, P4, and P7, with the detailed debt and maturity schedules listed in the P6 table of contents but omitted from the packet",
-    "claim": "What are the interest rates, covenants, collateral pools, and maturity schedule for the new loans that refinanced the $634.0 million secured term loan and for the remaining 2,025,450 in mortgage and other indebtedness, net (table in thousands)?",
+    "basis": "Stated in P6 summary text and table of contents, while the debt and maturity schedules on pages 18\u201321 of Exhibit 99.1 were omitted from the packet.",
+    "claim": "Which three high-performing properties secure the major debt maturities in 2028, and what are the property-level interest rates, covenants, and maturity schedules across CBL's debt, including the $425.0 million and $176.1 million March refinancings?",
     "facts": [
-     "F1",
-     "P4",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "During the first nine months of 2026, we reduced our debt balance and extended our debt maturity schedule through refinancings, such as the refinancing of the $634.0 million secured term loan with two new loans, which extended the maturity date five years.",
-     "With a stronger balance sheet, no major debt maturities until 2028, and a cash balance of over $366.0 million, we are well positioned to buy back shares while exploring additional opportunities to create value for shareholders.",
-     "Schedule of Mortgage and Other Indebtedness | 18",
-     "Schedule of Maturities | 20"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P6, which disclose the retroactive default interest and Volusia Mall lender cooperation without identifying the specific loan or carrying debt balances",
-    "claim": "Which property loan triggered the retroactive non-cash default interest expense under the prior forbearance agreement, and what debt balances and lender workout terms apply to Volusia Mall and the other properties designated as non-core?",
-    "facts": [
-     "P4",
      "P6"
     ],
     "quotes": [
-     "The increase was primarily due to an increase in non-cash default interest expense on loans past their maturity date, including one loan for which non-cash default interest expense was retroactive to November 1, 2020, pursuant to the terms of a prior forbearance agreement entered into in connection with our emergence from bankruptcy on November 1, 2021.",
-     "The accrued non-cash default interest is expected to be resolved when the respective property is either sold or conveyed to the lender in satisfaction of the debt.",
-     "Volusia Mall has been removed from the same-center pool, reflecting CBL's cooperation with the lender on a sale, foreclosure or conveyance of the property."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in F2, P3, and P4, which report the combined nine-month deconsolidation gain and list both properties under deconsolidations without per-property gain amounts",
-    "claim": "How is the 41,152 gain on deconsolidation (table in thousands) split between Jefferson Mall and The Outlet Shoppes at Gettysburg, and do any foreclosure or receivership contingencies remain?",
-    "facts": [
-     "F2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "During the year ended December 31, 2025, we were notified by the lender that the loan secured by The Outlet Shoppes at Gettysburg was in maturity default and we anticipate returning the property to the lender.",
-     "Subsequent to December 31, 2025, we were notified by the lender that the loan secured by Jefferson Mall was in default and the property was placed into receivership."
+     "The Company has no major maturities until 2028, when loans secured by three high-performing properties come due.",
+     "In March, CBL refinanced its existing $634.0 million term loan through two transactions including a $425.0 million non-recourse financing secured by a pool of primarily mall properties and a $176.1 million floating-rate bank loan primarily secured by a pool of open-air lifestyle centers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1, P3, and P7, where the November release reports a consolidated cash figure without detailing cash equivalents versus U.S. Treasury securities",
-    "claim": "How is the over $366.0 million cash balance composed across unrestricted cash, restricted cash, and available-for-sale securities compared with the 60,955 in cash and cash equivalents, 102,750 in restricted cash, and 289,937 in available-for-sale securities (table in thousands) at quarter-end?",
+    "basis": "Stated in P6 combined financial statements of unconsolidated affiliates and P2 risk factors; entity-level joint venture breakdowns and footnote (2) are omitted from the packet.",
+    "claim": "Which unconsolidated joint ventures drove combined owners' equity to (15,520) (table in thousands) and triggered the negative-investment FFO adjustments, and what recourse or funding exposure does CBL face on their $697,999 (table in thousands) of net debt?",
     "facts": [
-     "F1",
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "With a stronger balance sheet, no major debt maturities until 2028, and a cash balance of over $366.0 million, we are well positioned to buy back shares while exploring additional opportunities to create value for shareholders.",
-     "As of December 31, 2025, our U.S. Treasury securities have maturities through October 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3, P3, and P7, which show nine-month cash outflows and program caps without share counts, average prices, or purchase commitments",
-    "claim": "How many shares were repurchased for the (1,336) cash outflow (table in thousands) and subsequent activity under the prior $25.0 million program, and what pace of buybacks will occur under the new $25.0 million authorization?",
-    "facts": [
-     "F3",
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "In November 2025, our board of directors authorized the repurchase of up to $25.0 million of the Company's common stock.",
-     "Under the new common stock repurchase program, the Company may purchase up to $25.0 million of its common stock from time to time on the open market, in privately negotiated transactions or otherwise, depending on market prices and other conditions, through December 31, 2027.",
-     "The repurchase program does not obligate the Company to acquire any particular amount of shares, and the repurchase program may be suspended or discontinued at any time at the Company\u2019s discretion."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in F1, F2, P2, P4, and P6, with the unconsolidated financial statements and debt share tables listed in the P6 table of contents but omitted from the packet",
-    "claim": "How much of the 49,834 in equity in earnings of unconsolidated affiliates (table in thousands) came from property sales gains versus operations, and what is CBL's pro rata share of joint venture debt behind the 74,629 investment balance (table in thousands)?",
-    "facts": [
-     "F1",
-     "F2",
      "P2",
-     "P4",
      "P6"
     ],
     "quotes": [
-     "The third-party partner of each of these properties controls the cash flow distributions, although our approval is required for certain major decisions.",
-     "Also, we sold Hammock Landing and York Town Center, totaling $128.7 million in gross proceeds, consistent with our strategic focus on growing our mall portfolio and increasing cash flow through capital recycling.",
-     "Share of Consolidated and Unconsolidated Debt | 13",
-     "Condensed Combined Financial Statements - Unconsolidated Affiliates | 15"
+     "Total owners' equity | (15,520) | 78,771",
+     "Mortgage and other indebtedness, net | $697,999 | $715,013",
+     "If the relevant joint venture through which we have invested in a property has incurred recourse obligations, the discharge in bankruptcy of one of the other investors might result in our ultimate liability for a greater portion of those obligations than we would otherwise bear."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P6, which reference excess CID proceeds at an unnamed property and omit the explanatory FFO footnote",
-    "claim": "Which property received the excess proceeds from community improvement district bonds that contributed to the $5.2 million increase in quarterly interest and other income, and are any restrictions or repayment conditions attached?",
+    "basis": "Stated in P6 that future tax treatment depends on asset sales with significant losses and factors CBL cannot guarantee or predict with accuracy.",
+    "claim": "Which assets with large tax losses will CBL dispose of in 2027 following the Section 382 recognition-period expiration, and what share of future dividends will qualify as return of capital?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As further described in the Equity section of CBL\u2019s most recent Annual Report on Form 10-K, the five-year recognition period under Section 382 of the Internal Revenue Code that followed CBL\u2019s emergence from bankruptcy expired on November 1, 2026.",
+     "In 2027, CBL may be able to use this flexibility by disposing of assets with large tax losses.",
+     "Future tax treatment and individual shareholder taxation are subject to changes in the Internal Revenue Code, the completion of asset sales with significant losses, and other factors that CBL cannot guarantee or predict with accuracy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that the board authorized up to $25.0 million of repurchases on November 4, 2026, without disclosing execution pace or an expiration date as P3 did for the prior program.",
+    "claim": "How much of the newly authorized $25.0 million common stock repurchase program will CBL execute, and does the program carry an expiration date?",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "On November 4, 2026, CBL's Board of Directors authorized a stock repurchase program under which the Company may repurchase up to $25.0 million of its common stock.",
+     "The authorized share repurchase program has an expiration date of November 5, 2026 and replaces the existing program authorized in May 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred by comparing P4's non-core list against P6, which details sales or lender-directed resolutions for other non-core properties but gives no property-level disposition or debt-resolution status for Brookfield Square, Harford Mall, Laurel Park Place, or York Galleria beyond a land parcel sale at Harford Mall.",
+    "claim": "What specific disposition, restructuring, or repositioning plans and timelines apply to the remaining non-core properties\u2014Brookfield Square, Harford Mall, Laurel Park Place, and York Galleria?",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "Interest and other income increased $5.2 million in the current period primarily related to excess proceeds received at one of our properties related to bonds issued by the community improvement district where the property is located."
+     "As of September 30, 2026, Arbor Place, Brookfield Square, Eastland Mall, Harford Mall, Jefferson Mall, Laurel Park Place, Old Hickory Mall, Parkdale Mall, Parkdale Crossing, Southpark Mall, The Outlet Shoppes at Gettysburg, Volusia Mall and York Galleria were designated as non-core.",
+     "We consider properties undergoing major redevelopment, properties being considered for repositioning, properties where we intend to renegotiate the terms of the debt secured by the related property or return the property to the lender as non-core."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2, P1, P2, and P6, which cross-reference Note 3, Item 2 lease expiration tables, and supplemental schedules omitted from the packet",
-    "claim": "What is CBL's current breakdown of rental revenues across minimum rents, percentage rents, and tenant reimbursements, and what portion of leases is expiring or structured as gross leases?",
+    "basis": "Stated in P6 that the 2026 full-year figures are guidance ranges subject to fourth-quarter operating comparisons.",
+    "claim": "Will full-year 2026 FFO, as adjusted, per share and same-center NOI growth finish within management's raised guidance ranges of $7.34 to $7.44 and 0.75% to 2.25%?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "CBL is increasing FFO, as adjusted, guidance for 2026 to the range of $7.34 - $7.44 per share.",
+     "Management now anticipates same-center NOI for full-year 2026 in the range of 0.75% to 2.25%.",
+     "While fourth quarter comparisons will reflect tax refunds and bad debt recoveries recognized in the prior-year period, our leasing momentum and disciplined approach to capital allocation position CBL to close the year well."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 and P4 via cross-references to omitted Notes 3 and 1, and in the P6 table of contents listing Property List, Operating Metrics by Collateral Pool, and Top 25 Tenants on omitted pages 22\u201329.",
+    "claim": "How are 2026 revenues disaggregated by source, and what are the updated property-level holdings, collateral pool metrics, and top tenant concentrations following current-year portfolio changes?",
     "facts": [
      "F2",
-     "P1",
-     "P2",
+     "P4",
      "P6"
     ],
     "quotes": [
      "See Note 3 for information on the Company\u2019s revenues disaggregated by revenue source.",
-     "Rental revenues are primarily derived from leases with retail tenants and generally include fixed minimum rents, percentage rents based on tenants\u2019 sales volumes and reimbursements from tenants for expenditures related to real estate taxes, insurance, common area maintenance (\"CAM\") and other recoverable operating expenses, as well as certain capital expenditures.",
-     "There is also a trend of more tenants moving to gross leases with periodic increases, which provide that the tenant pays a single specified amount, with no additional payments for reimbursements of the tenant\u2019s portion of operating expenses.",
-     "For more information on lease expirations see Mall Lease Expirations, Outlet Center Lease Expirations, Lifestyle Center Lease Expirations and Open-Air Center Lease Expirations under Item 2 - Properties in this report.",
-     "Components of Rental Revenues | 17"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from F3, P2, and P3, which establish the REIT distribution requirement and a prior-year special dividend without disclosing current-year REIT taxable income",
-    "claim": "Will the regular common dividend rate reflected in the (58,019) nine-month dividend outflow (table in thousands) satisfy REIT minimum distribution requirements, or will a special dividend like the prior-year $0.80 per share payout be required?",
-    "facts": [
-     "F3",
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "We must satisfy minimum distribution requirements to maintain our status as a REIT, which may limit the amount of cash available for use in growing our business.",
-     "Additionally, our board of directors declared a special dividend of $0.80 per share, which was paid in cash during the first quarter of 2025.",
-     "The special dividend was made to ensure that we meet the minimum requirement to maintain our status as a REIT."
+     "See Note 1 to the condensed consolidated financial statements for information on our property interests as of September 30, 2026."
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "CBL",
- "upside": -0.10605760202746028,
  "valuation": null,
- "value_base": 46.08834038591587,
- "value_bear": 31.579540986005796,
- "value_bull": 63.339051634681155,
- "value_per_filed_share": {
-  "base": 46.08834038591587,
-  "bear": 31.579540986005796,
-  "bull": 63.339051634681155
- },
- "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -3.4 points a year against the required return over 3 years"
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
 }

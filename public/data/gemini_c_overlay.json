@@ -2,7 +2,7 @@
  "count": 189,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-20T09:22:37Z",
+ "generated_at": "2026-11-20T09:45:21Z",
  "list_covered": 160,
  "list_names": 160,
  "model": "gemini-4-hydrogen-high",
@@ -1145,52 +1145,39 @@
    "verdict_reason": "expected return -19.1 points a year against the required return over 3 years"
   },
   "CBL": {
-   "alpha_pts": -3.3636163712996257,
+   "alpha_pts": null,
    "analysis": "complete",
-   "claims": 102,
-   "claims_supported": 94,
-   "date": "2026-11-16T19:49:51Z",
-   "decided": {
-    "method": "decided.v1",
-    "version": "decided.v2 2026-11-19 WO_NC9a"
+   "based_on": {
+    "accepted": "2026-11-09T20:23:57.000Z",
+    "accepted_utc": "2026-11-10T01:23:57Z",
+    "accession": "0001193125-26-453440",
+    "decision_time": "2026-11-20T09:23:08Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
    },
-   "equity_value": 1421410505.8420315,
+   "claims": 125,
+   "claims_supported": 121,
+   "date": "2026-11-20T09:23:08Z",
    "family": "real_estate",
-   "far_from_price": false,
-   "filed_shares": 30841000.0,
    "flags": [
     "CBL emerged from bankruptcy and adopted fresh start accounting.",
-    "The foreclosure process for Alamance Crossing East was completed; the property had an outstanding loan balance of $41.1 million prior to completion.",
-    "Southpark Mall entered loan default, was placed into receivership, and was deconsolidated, with CBL recording a $33.9 million gain on deconsolidation and reporting an outstanding loan balance of $48.3 million at year-end."
+    "The five-year recognition period under Section 382 of the Internal Revenue Code following CBL's emergence from bankruptcy expired, ending limitations on recognizing certain tax deductions from the 2021 ownership change.",
+    "The foreclosure process for Alamance Crossing East was completed on a property that had an outstanding loan balance of $41.1 million prior to completion."
    ],
    "in_code_book": false,
-   "ke": 0.08903203083918919,
-   "market_cap_at_publish": 1590047087,
+   "ke": null,
    "model": "gemini-4-hydrogen-high",
-   "no_value_reason": null,
+   "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
    "pending_offer": null,
-   "price_at_publish": 51.39,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "seed_base": {
-    "1000": 42.044450985103644,
-    "3000": 50.1322297867281
-   },
-   "seeds_agree": true,
-   "share_unit_note": null,
-   "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method; inputs recovered 2026-11-19)",
-   "upside": -0.10605760202746028,
-   "value_base": 46.08834038591587,
-   "value_bear": 31.579540986005796,
-   "value_bull": 63.339051634681155,
-   "value_per_filed_share": {
-    "base": 46.08834038591587,
-    "bear": 31.579540986005796,
-    "bull": 63.339051634681155
-   },
-   "valued": true,
-   "verdict": "AVOID",
-   "verdict_reason": "expected return -3.4 points a year against the required return over 3 years"
+   "release_truncated": [
+    "0001193125-26-450022"
+   ],
+   "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+   "source": "on request (method_changed)",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
   },
   "CBRL": {
    "alpha_pts": -7.850379320108897,
@@ -7997,11 +7984,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +31.1 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 112,
+ "valued_count": 111,
  "verdict_counts": {
-  "AVOID": 46,
+  "AVOID": 45,
   "BUY": 46,
-  "NO_CALL": 84,
+  "NO_CALL": 85,
   "WATCH": 13
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
