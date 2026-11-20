@@ -1,8 +1,7 @@
 'use client';
 
-// On-demand analyses: a ticker requested here or with Telegram /analyze goes to the Qwen worker on the operator's
-// PC (rs2-local tools/site/qwen_ondemand.py, operator 2026-11-06). Queued requests run before the worker's refresh
-// of the screener's research-now and watchlist names. Each result is the stock page's Qwen panel; this page lists
+// On-demand analyses: a ticker requested here or with Telegram /analyze is analysed by the Gemini worker (gemini_c_overlay.json
+// rows whose source starts with "on request"). Each result is the stock page's AI panel; this page lists
 // the newest ones. Paper only: on-demand names never join a paper book.
 
 import React, { useEffect, useState } from 'react';
@@ -11,7 +10,7 @@ import { Shell } from '@/components/desk/Shell';
 import { Micro } from '@/components/desk/primitives';
 import Link from 'next/link';
 import { plainNoValueReason } from '@/lib/desk/qwenText';
-import { fetchQwenOverlay, type OndemandQueueRow, type QwenOverlayPayload } from '@/lib/data-service';
+import { fetchGeminiCOverlay, type GeminiCOverlayPayload, type OndemandQueueRow } from '@/lib/data-service';
 
 const money = (v: number | null | undefined) =>
     v == null ? '—' : Math.abs(v) >= 100 ? `$${Math.round(v)}` : `$${v.toFixed(2)}`;
@@ -55,8 +54,7 @@ function RequestForm({ onSubmitted }: { onSubmitted: () => void }) {
         <div className="mt-6 border-t border-rule-22 pt-5">
             <Micro className="font-semibold text-ink">Request an analysis</Micro>
             <Micro className="mt-0.5 block text-ink-3">
-                Qwen runs on the operator&apos;s PC (GPU time, not a cloud call): about 20 minutes a name, requests
-                before the list refresh. The result appears on the stock page.
+                The AI analyst reads the company&apos;s SEC filings. The result appears on the stock page.
             </Micro>
             <div className="mt-3 flex flex-wrap items-center gap-2">
                 <input
@@ -102,7 +100,7 @@ function QueueStrip({ queue }: { queue: OndemandQueueRow[] }) {
     );
 }
 
-function Row({ ticker, r }: { ticker: string; r: QwenOverlayPayload['tickers'][string] }) {
+function Row({ ticker, r }: { ticker: string; r: GeminiCOverlayPayload['tickers'][string] }) {
     const ran = r.analysis !== 'not run';
     return (
         <Link href={`/t/${encodeURIComponent(ticker)}`}
@@ -121,7 +119,7 @@ function Row({ ticker, r }: { ticker: string; r: QwenOverlayPayload['tickers'][s
 }
 
 export function OndemandReports() {
-    const [overlay, setOverlay] = useState<QwenOverlayPayload | null>(null);
+    const [overlay, setOverlay] = useState<GeminiCOverlayPayload | null>(null);
     const [loaded, setLoaded] = useState(false);
     const [queue, setQueue] = useState<OndemandQueueRow[]>([]);
 
@@ -133,7 +131,7 @@ export function OndemandReports() {
     };
 
     useEffect(() => {
-        fetchQwenOverlay().then((x) => { setOverlay(x); setLoaded(true); });
+        fetchGeminiCOverlay().then((x) => { setOverlay(x); setLoaded(true); });
         loadQueue();
         const iv = setInterval(loadQueue, 20000);
         return () => clearInterval(iv);
@@ -149,7 +147,7 @@ export function OndemandReports() {
             <div className="pt-8">
                 <h1 className="text-[16px] font-extrabold uppercase tracking-section">On-Demand Analyses</h1>
                 <Micro className="mt-1 block max-w-2xl text-ink-3">
-                    Qwen&apos;s reading of any ticker&apos;s SEC filings, on request, plus its rolling refresh of the
+                    The AI analyst&apos;s reading of any ticker&apos;s SEC filings, on request, plus its rolling refresh of the
                     screener&apos;s research-now and watchlist names. Paper only; on-demand names never join a paper book.
                 </Micro>
 
@@ -160,7 +158,7 @@ export function OndemandReports() {
 
                 {loaded && rows.length === 0 && (
                     <p className="mt-8 text-[12.5px] text-ink-q">
-                        No Qwen analyses on request yet: request one with the form above, or{' '}
+                        No AI analyses on request yet: request one with the form above, or{' '}
                         <span className="font-mono">/analyze TICKER</span> on Telegram.
                     </p>
                 )}

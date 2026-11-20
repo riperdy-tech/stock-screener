@@ -53,7 +53,7 @@ const STEPS: Step[] = [
         id: 'analyst',
         title: { en: 'Analyst', ko: '애널리스트', zh: '分析師' },
         desc: {
-            en: <>Qwen, a local AI, reads each company&apos;s filings and writes claims by topic; code checks each claim against the filing and, where the filings allow, computes a value from Qwen&apos;s choices. Qwen has not been graded on returns.</>,
+            en: <>The AI analyst, a cloud AI, reads each company&apos;s filings and writes claims by topic; code checks each claim against the filing and, where the filings allow, computes a value from the AI analyst&apos;s choices. The AI analyst has not been graded on returns.</>,
             ko: <>AI가 리서치하고 모든 입력값을 고르며, 파이썬이 모든 계산을 하고, 코드가 답을 검증합니다. 판정은 주가가 <Term term="iv-band" />에 대해 어디에 있는가이고, <Term term="crux" />은 주가가 틀린 단 하나의 입력값입니다.</>,
             zh: <>AI 負責研究並選定每一項輸入，Python 做每一項計算，程式碼再檢查答案。判定就是股價相對於<Term term="iv-band" />的位置；<Term term="crux" />則是股價錯估的那一個輸入。</>,
         },
@@ -88,7 +88,7 @@ const STEPS: Step[] = [
         id: 'grading',
         title: { en: 'Grading', ko: '평가', zh: '評分' },
         desc: {
-            en: <>Two monthly paper books, Code and Qwen, are marked every day against QQQ, <Term term="spy" /> and <Term term="iwm" />, beside the <Term term="control-book" /> and yours, with real prices and assumed costs. The earlier analyst&apos;s verdicts were graded at 30, 91, 182 and 365 days.</>,
+            en: <>Two monthly paper books, Code and AI, are marked every day against QQQ, <Term term="spy" /> and <Term term="iwm" />, beside the <Term term="control-book" /> and yours, with real prices and assumed costs. The earlier analyst&apos;s verdicts were graded at 30, 91, 182 and 365 days.</>,
             ko: <>각 판정은 30일, 91일, 182일, 365일 뒤 <Term term="iwm" />, <Term term="spy" />, QQQ와 비교해 평가됩니다. 세 개의 페이퍼 북 — AI 북, <Term term="control-book" />, 내 북 — 이 실제 가격과 가정한 비용으로 매일 거래합니다.</>,
             zh: <>每個判定會在 30、91、182 與 365 天後對照<Term term="iwm" />、<Term term="spy" />與 QQQ 評分。三個紙上帳本——AI 帳本、<Term term="control-book" />與你自己的帳本——每天以真實價格與假設成本交易。</>,
         },
@@ -101,9 +101,9 @@ const TEXT = {
     inputs: { en: 'inputs', ko: '입력', zh: '輸入' },
     output: { en: 'hands on', ko: '넘기는 것', zh: '交給下一步' },
     footer: {
-        en: 'Each step hands the next only a data file. The cloud part re-runs on a schedule via GitHub Actions; Qwen runs on a local computer.',
-        ko: '각 단계는 다음 단계에 데이터 파일만 넘깁니다. 클라우드 부분은 GitHub Actions로 일정에 따라 재실행되고, AI 애널리스트는 로컬 컴퓨터에서 실행됩니다.',
-        zh: '每一步只把一個資料檔交給下一步。雲端部分透過 GitHub Actions 依排程重新執行；AI 分析師則在本機電腦上執行。',
+        en: 'Each step hands the next only a data file. The cloud part re-runs on a schedule via GitHub Actions; the AI analyst runs separately.',
+        ko: '각 단계는 다음 단계에 데이터 파일만 넘깁니다. 클라우드 부분은 GitHub Actions로 일정에 따라 재실행되고, AI 애널리스트는 따로 실행됩니다.',
+        zh: '每一步只把一個資料檔交給下一步。雲端部分透過 GitHub Actions 依排程重新執行；AI 分析師則另外執行。',
     },
 } as const;
 

@@ -106,7 +106,7 @@ export function HealthDrawer({ status, fresh, onClose }: {
                 <Section title={t('hdAnalyst')}>
                     <Row label={t('hdState')}>
                         {fresh.phase === null ? '—'
-                            : phaseA ? <span className="text-warn">{t('hdStateNotLive')}</span> : (fresh.qwenLoaded ? t('hdStateQwen') : t('hdStateDepth'))}
+                            : phaseA ? <span className="text-warn">{t('hdStateNotLive')}</span> : (fresh.aiLoaded ? t('hdStateAi') : t('hdStateDepth'))}
                     </Row>
                     <Row label={t('hdBaseline')}>
                         {fresh.phase === null ? '—' : `${fresh.rebuiltCount} of ${fresh.listSize ?? '—'}`}

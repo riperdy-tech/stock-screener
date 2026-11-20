@@ -16,13 +16,13 @@ import {
     fetchMriDailySummary, fetchMriMacroFeatures, fetchMriRegimeTimeline, fetchMriRiskState, fetchMriSectorRanking, fetchMriSectorValidation,
     fetchMriCloudDaily, fetchMriCloudExport, fetchMriCombined, fetchMriDataHealth, fetchMriHistoryIndex, fetchMriNber, fetchMriNewsAccumulation,
     fetchMriNewsMonitoring, fetchMriNewsScores, fetchMriNewsSources, fetchMriSnapshotManifest,
-    fetchOpusOverlay, fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
+    fetchOpusOverlay, fetchPaperLedgers, fetchStocks,
     fetchValuationModels,
     type AnalystTargetsPayload, type ChainManifest, type DepthOverlayPayload, type EnginePrices, type DepthVerdict, type FactorScoresPayload,
     type GeminiCOverlayPayload, type GeminiCRow, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
     type MriCloudDaily, type MriCloudExport, type MriCombinedDiagnostic, type MriDataHealth, type MriHistoryIndex, type MriNberBenchmark,
     type MriNewsAccumulation, type MriNewsMonitoring, type MriNewsScoreReport, type MriNewsSources, type MriSnapshotManifest,
-    type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict, type QwenOverlayPayload, type QwenOverlayRow,
+    type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -73,15 +73,13 @@ export interface DeskData {
     opus: Record<string, OpusVerdict>;
     /** The Opus file's own totals, for the Desk's summary line. Null when the file is absent. */
     opusMeta: Pick<OpusOverlayPayload, 'generated_at' | 'count' | 'verdict_counts' | 'analyst_as_of' | 'analyst_source'> | null;
-    /** Qwen's analysis by ticker (qwen_overlay.json, operator 2026-11-06): the Desk's AI column. Empty when the file is absent. */
-    qwen: Record<string, QwenOverlayRow>;
-    /** Gemini's analysis by ticker (gemini_c_overlay.json): the Qwen row plus a verdict. Empty when the file is absent. */
+    /** The AI analysis by ticker (gemini_c_overlay.json): the Desk's AI column, with a verdict. Empty when the file is absent. */
     geminiC: Record<string, GeminiCRow>;
     /** The Gemini file's own totals, for the Desk's summary line. Null when the file is absent. */
     geminiCMeta: Pick<GeminiCOverlayPayload, 'generated_at' | 'count' | 'valued_count' | 'verdict_counts'> | null;
     /** The analysts' targets by ticker (analyst_targets.json). An empty map when the file is absent. */
     analystTargets: AnalystTargetsPayload;
-    /** The monthly Code and Qwen books of record (m3o_books.json). Null when the file is absent. */
+    /** The monthly Code and AI books of record (m3o_books.json). Null when the file is absent. */
     monthly: MonthlyBooksPayload | null;
     /** MRI news candidates index (display only). Null when the file is absent. */
     macroEvents: MacroEventsPayload | null;
@@ -99,7 +97,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, qwen: {}, geminiC: {}, geminiCMeta: null, analystTargets: { tickers: {} }, monthly: null, macroEvents: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, geminiC: {}, geminiCMeta: null, analystTargets: { tickers: {} }, monthly: null, macroEvents: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null, priceSession: null,
 };
@@ -147,7 +145,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, qw, gc, mb, ep, at] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, gc, mb, ep, at] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -159,7 +157,6 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('anchor', fetchMriCostOfCapital),
         optional('opus', fetchOpusOverlay),
         optional('macroEvents', fetchMacroEvents),
-        optional('qwen', fetchQwenOverlay),
         optional('geminiC', fetchGeminiCOverlay),
         optional('monthly', fetchMonthlyBooks),
         optional('enginePrices', fetchEnginePrices),
@@ -213,7 +210,6 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         },
         opus: (op as OpusOverlayPayload | null)?.tickers ?? {},
         opusMeta: opusPayload ? { generated_at: opusPayload.generated_at, count: opusPayload.count, verdict_counts: opusPayload.verdict_counts, analyst_as_of: opusPayload.analyst_as_of, analyst_source: opusPayload.analyst_source } : null,
-        qwen: (qw as QwenOverlayPayload | null)?.tickers ?? {},
         geminiC: geminiCPayload?.tickers ?? {},
         geminiCMeta: geminiCPayload ? { generated_at: geminiCPayload.generated_at, count: geminiCPayload.count, valued_count: geminiCPayload.valued_count, verdict_counts: geminiCPayload.verdict_counts } : null,
         analystTargets: at ?? { tickers: {} },
@@ -231,7 +227,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
 export interface DeskStatus {
     factor: FactorScoresPayload | null;
     depth: DepthOverlayPayload | null;
-    qwen: QwenOverlayPayload | null;
+    geminiC: GeminiCOverlayPayload | null;
     ledgers: any | null;  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw paper_ledgers.json
     manifest: ChainManifest | null;
     regime: MriRegime | null;
@@ -242,7 +238,7 @@ export interface DeskStatus {
 }
 
 const EMPTY_STATUS: DeskStatus = {
-    factor: null, depth: null, qwen: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null, pricesRefreshedAt: null,
+    factor: null, depth: null, geminiC: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null, pricesRefreshedAt: null,
 };
 
 /**
@@ -259,7 +255,7 @@ export function useDeskStatus(): DeskStatus {
         const run = () => {
             cached('factor', fetchFactorScores).then((factor) => put({ factor })).catch(() => { });
             cached('depth', fetchDepthOverlay).then((depth) => put({ depth })).catch(() => { });
-            cached('qwen', fetchQwenOverlay).then((qwen) => put({ qwen })).catch(() => { });
+            cached('geminiC', fetchGeminiCOverlay).then((geminiC) => put({ geminiC })).catch(() => { });
             cached('ledgers', fetchPaperLedgers).then((ledgers) => put({ ledgers })).catch(() => { });
             cached('manifest', fetchChainManifest).then((manifest) => put({ manifest })).catch(() => { });
             cached('regime', fetchMriRegime).then((regime) => put({ regime })).catch(() => { });

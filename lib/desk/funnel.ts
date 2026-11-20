@@ -21,11 +21,11 @@ export interface FunnelCounts {
     watchlistBand: number | null;
     /** `band_counts.pass`: scored but cleared no door. */
     noDoor: number | null;
-    /** List names Qwen has read (an analysis that ran), operator 2026-11-06. */
+    /** List names the AI analyst has read (an analysis that ran). */
     verdicts: number;
-    /** List names Qwen's analysis gave a value of record. */
+    /** List names the AI analysis gave a value of record. */
     actionable: number;
-    /** List size minus names Qwen has read; null while the list size is unknown. */
+    /** List size minus names the AI analyst has read; null while the list size is unknown. */
     queued: number | null;
 }
 
@@ -33,7 +33,7 @@ export function funnelCounts(rows: DeskRow[], factor: FactorScoresPayload | null
     const bc = factor?.band_counts;
     const list = bc && (bc.research_now != null || bc.watchlist != null)
         ? (bc.research_now ?? 0) + (bc.watchlist ?? 0) : null;
-    const verdicts = rows.filter((r) => onList(r) && r.qwen && r.qwen.analysis !== 'not run').length;
+    const verdicts = rows.filter((r) => onList(r) && r.geminiC && r.geminiC.analysis !== 'not run').length;
     return {
         universe: factor ? Object.keys(factor.tickers).length : null,
         scored: factor?.scored_count ?? null,
@@ -43,7 +43,7 @@ export function funnelCounts(rows: DeskRow[], factor: FactorScoresPayload | null
         watchlistBand: bc?.watchlist ?? null,
         noDoor: bc?.pass ?? null,
         verdicts,
-        actionable: rows.filter((r) => onList(r) && r.qwen?.valued === true).length,
+        actionable: rows.filter((r) => onList(r) && r.geminiC?.valued === true).length,
         queued: list == null ? null : list - verdicts,
     };
 }

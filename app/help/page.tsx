@@ -136,7 +136,7 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'What is under Research now?', ko: 'Research now가 비어 있는 이유는 무엇인가요?', zh: 'Research now 為什麼是空的？' },
         a: {
-            en: <>The screener&apos;s top names by rank, roughly the first 50 to 60, with Qwen&apos;s reading beside each. It is a list of names worth your research time, not a buy list. The earlier verdict analyst, whose verdicts used to place names here, is stopped. See <A href="#relaunch">What is live, stopped and next</A>.</>,
+            en: <>The screener&apos;s top names by rank, roughly the first 50 to 60, with the AI analyst&apos;s reading beside each. It is a list of names worth your research time, not a buy list. The earlier verdict analyst, whose verdicts used to place names here, is stopped. See <A href="#relaunch">What is live, stopped and next</A>.</>,
             ko: <>게이트를 통과하고 저평가라고 말하는 판정만 그곳에 놓일 수 있습니다. 재구축된 애널리스트가 첫 판정을 게시하기 시작했지만 아직 게이트를 통과한 것이 없어서, 모두 게이트에 차단됨 아래에 있습니다. 애널리스트를 기다리는 종목은 심사 대기 아래에 있습니다. <A href="#relaunch">가동 때 달라지는 것</A>을 참조하세요.</>,
             zh: <>只有通過<A href="#gate">閘門</A>且判定為低估的判定才能放在那裡。重建後的分析師已開始發布第一批判定，但還沒有任何一個通過閘門，所以每一個都在「被閘門擋下」之下。排隊等候分析師的股票則在「等待承銷評估」之下。請見<A href="#relaunch">上線後的變化</A>。</>,
         },
@@ -184,9 +184,9 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'What if the screen and the analyst disagree?', ko: '스크린과 애널리스트의 판정이 엇갈리면 어떻게 되나요?', zh: '如果篩選和分析師意見不同怎麼辦？' },
         a: {
-            en: 'They are two separate readings. One is pure math over financial statements and prices; the other is Qwen, a local AI model that reads the filings. The analysis it writes is on each stock page and does not place names on the list. When the two strongly disagree, one of them may be wrong — those are the interesting names. A safety veto is never overridden.',
-            ko: '둘은 서로 다른 두 개의 분석입니다. 하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 공시를 읽는 로컬 AI 모델 Qwen입니다. Qwen의 분석은 각 종목 페이지에 있으며 종목을 목록에 올리지는 않습니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 종목이 흥미로운 종목입니다. 안전 베토는 절대 뒤집히지 않습니다.',
-            zh: '兩者是兩種各自獨立的分析。一個是對財務報表與價格的純數學；另一個是 Qwen，一個在本機運行、閱讀申報文件的 AI 模型。Qwen 的分析在每檔股票的頁面上，不會決定哪些股票進入名單。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的股票。安全否決絕不會被推翻。',
+            en: 'They are two separate readings. One is pure math over financial statements and prices; the other is the AI analyst, a cloud AI model that reads the filings. The analysis it writes is on each stock page and does not place names on the list. When the two strongly disagree, one of them may be wrong — those are the interesting names. A safety veto is never overridden.',
+            ko: '둘은 서로 다른 두 개의 분석입니다. 하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 공시를 읽는 클라우드 AI 모델인 AI 애널리스트입니다. AI 애널리스트의 분석은 각 종목 페이지에 있으며 종목을 목록에 올리지는 않습니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 종목이 흥미로운 종목입니다. 안전 베토는 절대 뒤집히지 않습니다.',
+            zh: '兩者是兩種各自獨立的分析。一個是對財務報表與價格的純數學；另一個是 AI 分析師，一個閱讀申報文件的雲端 AI 模型。AI 分析師的分析在每檔股票的頁面上，不會決定哪些股票進入名單。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的股票。安全否決絕不會被推翻。',
         },
     },
     {
@@ -200,7 +200,7 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'How can I trust the track record?', ko: '트랙 레코드를 어떻게 믿을 수 있나요?', zh: '我怎麼能相信績效紀錄？' },
         a: {
-            en: <>You should not treat it as proof yet. It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates, but it is a short paper record. The Code and Qwen books began on 6 November 2026, so there is almost nothing to read yet. Read it as an early scoreboard; see <Term term="not-yet-proven" />.</>,
+            en: <>You should not treat it as proof yet. It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates, but it is a short paper record. The Code and AI books began on 6 November 2026, so there is almost nothing to read yet. Read it as an early scoreboard; see <Term term="not-yet-proven" />.</>,
             ko: <>아직은 증거로 여기지 마세요. 날마다 앞으로 쌓아 가고(<Term term="point-in-time" />), <Term term="transaction-costs" />를 포함하며, 벤치마크는 같은 날짜로 측정하지만, 짧은 페이퍼 기록입니다. 재구축된 애널리스트가 가동되면 AI 기록은 0에서 다시 시작합니다. 초기 점수판으로 읽으세요. <Term term="not-yet-proven" />을 참조하세요.</>,
             zh: <>目前不應把它當作證明。它是逐日往前建立的（<Term term="point-in-time" />），包含<Term term="transaction-costs" />，且基準以相同日期衡量，但它是一份短期的紙上紀錄。重建後的分析師上線時，AI 紀錄會從零重新開始。請把它當作早期的計分板；請見<Term term="not-yet-proven" />。</>,
         },
@@ -513,12 +513,12 @@ export default function HelpPage() {
                                     <p>
                                         StockPeak publishes the output of a research system. It is not investment advice, not a
                                         recommendation to buy or sell any security, and not personalised to your circumstances.
-                                        Qwen&apos;s analyses and values, like the earlier analyst&apos;s verdicts, are model outputs
+                                        The AI analyst&apos;s analyses and values, like the earlier analyst&apos;s verdicts, are model outputs
                                         built on assumptions; they can be wrong. Track records shown are <b>paper (simulated) portfolios</b>, include
                                         assumed costs, cover a short period, and have not been shown to predict future returns.
                                         Historical macro data are revised data, not point-in-time. The site is not a trading bot and
                                         not a crystal ball: the screen works on average over years, not on every stock every month,
-                                        and Qwen&apos;s analysis has not been graded on returns. Do your own research; you
+                                        and the AI analyst&apos;s analysis has not been graded on returns. Do your own research; you
                                         can lose money.
                                     </p>
                                 )}

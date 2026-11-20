@@ -2,7 +2,7 @@
 // payloads in useDeskStatus; nothing here fetches. Missing data is null/undefined and renders "—";
 // 0 is a value (never `||`-defaulted).
 
-import type { ChainManifest, DepthOverlayPayload, FactorScoresPayload, MriCostOfCapital, MriRegime, QwenOverlayPayload } from '@/lib/data-service';
+import type { ChainManifest, DepthOverlayPayload, FactorScoresPayload, GeminiCOverlayPayload, MriCostOfCapital, MriRegime } from '@/lib/data-service';
 import { deskPhase, isRebuiltRow, type DeskPhase } from './phase';
 
 const HOUR = 3_600_000;
@@ -51,8 +51,8 @@ export interface PaperAlert {
 export interface StatusInput {
     factor: FactorScoresPayload | null;
     depth: DepthOverlayPayload | null;
-    /** qwen_overlay.json: when it loads, Qwen is the live analyst (operator 2026-11-06) and its stamp is the verdict stamp. */
-    qwen?: QwenOverlayPayload | null;
+    /** gemini_c_overlay.json: when it loads, the AI analyst is live and its stamp is the verdict stamp. */
+    geminiC?: GeminiCOverlayPayload | null;
     ledgers: { alerts?: PaperAlert[] | null } | null;
     manifest: ChainManifest | null;
     regime: MriRegime | null;
@@ -77,8 +77,8 @@ export interface Freshness {
     rebuiltCount: number;
     /** Rebuilt-analyst rows with `actionable === true`. */
     actionableCount: number;
-    /** True when Qwen's analysis file is loaded (the numbers above are Qwen's); false when they come from depth rows. */
-    qwenLoaded: boolean;
+    /** True when the AI analysis file (gemini_c_overlay.json) is loaded (the numbers above are its); false when they come from depth rows. */
+    aiLoaded: boolean;
     listSize: number | null;          // research_now + watchlist, the book the analyst underwrites
 }
 
@@ -91,19 +91,19 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
     const listSize = bc && (bc.research_now != null || bc.watchlist != null)
         ? (bc.research_now ?? 0) + (bc.watchlist ?? 0)
         : null;
-    if (st.qwen) {
-        // Qwen is live: phase C, the stamp is its newest publish, "actionable" is its valued names.
+    if (st.geminiC) {
+        // The AI analyst is live: phase C, the stamp is its newest publish, "actionable" is its valued names.
         return {
             phase: 'C',
             pricesAsOf: st.pricesAsOf,
             pricesStale: pricesAreStale(st, now),
             bookScoredAt: st.factor?.generated_at ?? null,
             bookStale: isStale(st.factor?.generated_at, BOOK_STALE_MS, now),
-            verdictAt: st.qwen.generated_at,
-            verdictStale: isStale(st.qwen.generated_at, VERDICT_STALE_MS, now),
-            rebuiltCount: st.qwen.count,
-            actionableCount: st.qwen.valued_count,
-            qwenLoaded: true,
+            verdictAt: st.geminiC.generated_at,
+            verdictStale: isStale(st.geminiC.generated_at, VERDICT_STALE_MS, now),
+            rebuiltCount: st.geminiC.count,
+            actionableCount: st.geminiC.valued_count,
+            aiLoaded: true,
             listSize,
         };
     }
@@ -118,7 +118,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
         verdictStale: phase !== null && phase !== 'A' && isStale(verdictAt, VERDICT_STALE_MS, now),
         rebuiltCount,
         actionableCount,
-        qwenLoaded: false,
+        aiLoaded: false,
         listSize,
     };
 }

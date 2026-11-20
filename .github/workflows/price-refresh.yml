@@ -60,9 +60,9 @@ jobs:
         run: |
           AGE_H=$(python3 - <<'EOF'
           import json, datetime
-          # qwen_overlay.json (the live overlay; depth_overlay.json is retired) stamps
+          # gemini_c_overlay.json (the live overlay; depth_overlay.json is retired) stamps
           # generated_at in UTC with a trailing 'Z' (e.g. 2026-11-09T15:39:02.204625Z).
-          ts = json.load(open("public/data/qwen_overlay.json"))["generated_at"]
+          ts = json.load(open("public/data/gemini_c_overlay.json"))["generated_at"]
           dt = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
           print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600))
           EOF
@@ -71,9 +71,9 @@ jobs:
           # The overlay producer refreshes continuously; 36h still fires only when the
           # producer/PC/push has genuinely been down across more than a day.
           if [ "$AGE_H" -gt 36 ]; then
-            echo "::warning::qwen_overlay.json is ${AGE_H}h old (>36h)"
+            echo "::warning::AI analysis overlay is ${AGE_H}h old (>36h)"
             if [ -n "$TG_TOKEN" ]; then
-              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage"                 -d chat_id="${TG_CHAT}"                 -d text="[RS2 ops] qwen_overlay.json is ${AGE_H}h old (>36h) - overlay producer/PC/push may be down." >/dev/null
+              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage"                 -d chat_id="${TG_CHAT}"                 -d text="[RS2 ops] AI analysis overlay is ${AGE_H}h old (>36h) - overlay producer/PC/push may be down." >/dev/null
               echo "telegram alert sent"
             fi
           fi

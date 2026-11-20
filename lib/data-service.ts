@@ -579,10 +579,6 @@ export function reportStem(ticker: string): string {
     return WINDOWS_RESERVED.test(t) ? `${t}_` : t;
 }
 
-export async function fetchQwenReport(ticker: string): Promise<QwenReport | null> {
-    return fetchJson<QwenReport>(`/data/qwen_reports/${encodeURIComponent(reportStem(ticker))}.json`);
-}
-
 /** One name's row in qwen_overlay.json: the report without its claims and valuation detail. */
 export type QwenOverlayRow = Omit<QwenReport, 'ticker' | 'tasks' | 'valuation' | 'authority'>;
 
@@ -592,10 +588,6 @@ export interface QwenOverlayPayload {
     count: number;
     valued_count: number;
     tickers: Record<string, QwenOverlayRow>;
-}
-
-export async function fetchQwenOverlay(): Promise<QwenOverlayPayload | null> {
-    return fetchJson<QwenOverlayPayload>('/data/qwen_overlay.json');
 }
 
 // ── Gemini analysis (Gemini doing the Qwen job, name by name; files may be absent at first) ─────────

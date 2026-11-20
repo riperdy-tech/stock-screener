@@ -474,7 +474,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'The kind of AI that does the research for the analyst.',
         definition:
-            'A large language model is an AI that reads and writes text. The analyst runs one on a local computer, not a cloud service. It reads the filings, does the research and chooses every valuation input. It does not do the arithmetic — Python code does every calculation — and code then checks the answer against outside anchors.',
+            'A large language model is an AI that reads and writes text. The AI analyst runs one in the cloud (Gemini, with Claude as the fallback). It reads the filings, does the research and chooses every valuation input. It does not do the arithmetic — Python code does every calculation — and code then checks the answer against outside anchors.',
         related: ['iv-band', 'street-fence', 'actionable'],
     },
     'iv-band': {
@@ -717,7 +717,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'The paper book that followed the earlier analyst’s passing verdicts. Stopped.',
         definition:
-            'It held equal amounts of every name on the list whose verdict was undervalued and passed the gate. The earlier analyst was stopped in October 2026 after it was ruled invalid, so the book holds only cash and its record allows no conclusion. It is shown on the Track page as the old AI book. It is not the Qwen book, which follows the monthly picks (see Record reset).',
+            'It held equal amounts of every name on the list whose verdict was undervalued and passed the gate. The earlier analyst was stopped in October 2026 after it was ruled invalid, so the book holds only cash and its record allows no conclusion. It is shown on the Track page as the old AI book. It is not the current AI book, which follows the monthly picks (see Record reset).',
         related: ['actionable', 'track-record', 'record-reset', 'control-book'],
     },
 
@@ -791,7 +791,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'data',
         plain: 'The cloud automation that re-runs the data pipeline on a schedule.',
         definition:
-            'A CI/CD service that automatically runs the data fetch, the scoring chain and the paper-trading books on a schedule. The AI analyst runs separately, on a local computer.',
+            'A CI/CD service that automatically runs the data fetch, the scoring chain and the paper-trading books on a schedule. The AI analyst runs separately.',
         related: ['pipeline'],
     },
     pipeline: {
@@ -799,7 +799,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'data',
         plain: 'The ordered chain of steps from raw data to a graded record.',
         definition:
-            'The end-to-end chain: the macro backdrop → the screener (safety filters, three doors, bands) → the AI analyst → the gate → the daily follow-up (being rebuilt, not running) → grading and the paper books. The analyst step is Qwen reading filings; the gate belonged to the earlier verdict analyst, which is stopped. Each step hands the next only a data file. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the list.',
+            'The end-to-end chain: the macro backdrop → the screener (safety filters, three doors, bands) → the AI analyst → the gate → the daily follow-up (being rebuilt, not running) → grading and the paper books. The analyst step is the AI analyst reading filings; the gate belonged to the earlier verdict analyst, which is stopped. Each step hands the next only a data file. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the list.',
         related: ['github-actions', 'reverse-engine'],
     },
     'reverse-engine': {
@@ -989,7 +989,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'Which generation of the earlier verdict analyst wrote a verdict.',
         definition:
-            'The first verdict analyst was ruled invalid and replaced. Its verdicts carry the gate reason “made by the old analyst”, are kept off the desk, and remain on each stock page under verdict history. A rebuilt version published a few first verdicts in October, stamped with a pack revision and a gate version, none of which passed the gate. The verdict analyst was then stopped in October 2026. Qwen, which reads filings and does not issue verdicts, is the analyst that is live today.',
+            'The first verdict analyst was ruled invalid and replaced. Its verdicts carry the gate reason “made by the old analyst”, are kept off the desk, and remain on each stock page under verdict history. A rebuilt version published a few first verdicts in October, stamped with a pack revision and a gate version, none of which passed the gate. The verdict analyst was then stopped in October 2026. The AI analyst, which reads filings and does not issue verdicts, is the analyst that is live today.',
         related: ['record-reset', 'gate-reason', 'actionable'],
     },
     'record-reset': {
@@ -997,7 +997,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'A planned restart of the AI paper record that did not happen.',
         definition:
-            'It was planned that the AI book’s record would restart from zero when a rebuilt verdict analyst went live. That analyst was stopped instead, so there was no restart. The old AI book stays on the Track page, labelled as the stopped analyst’s. The Code book and the Qwen book, which began on 6 November 2026, are separate records.',
+            'It was planned that the AI book’s record would restart from zero when a rebuilt verdict analyst went live. That analyst was stopped instead, so there was no restart. The old AI book stays on the Track page, labelled as the stopped analyst’s. The Code book and the AI book, which began on 6 November 2026, are separate records.',
         related: ['rn-depth', 'rebuilt-analyst', 'track-record'],
     },
     'graded-pending': {
@@ -1029,7 +1029,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'The system’s own status line about its performance.',
         definition:
-            'Nothing in this system has been shown to beat the market. The paper records are short, the verdicts graded so far come from the earlier analyst, which was ruled invalid, and Qwen has not been graded on returns. The site shows counts — graded and pending — rather than a headline, and nothing here should be read as proof.',
+            'Nothing in this system has been shown to beat the market. The paper records are short, the verdicts graded so far come from the earlier analyst, which was ruled invalid, and the AI analyst has not been graded on returns. The site shows counts — graded and pending — rather than a headline, and nothing here should be read as proof.',
         related: ['graded-pending', 'observations', 'track-record'],
     },
 };

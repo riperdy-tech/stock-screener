@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { AnalystTargetsPayload, DepthVerdict, FactorScoresPayload, GeminiCRow, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { AnalystTargetsPayload, DepthVerdict, FactorScoresPayload, GeminiCRow, OpusVerdict, OpusVerdictCode, ValuationModel } from '@/lib/data-service';
 import type { DeskData, StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
@@ -120,19 +120,17 @@ function GeminiCSummary({ m, onPick }: { m: NonNullable<DeskData['geminiCMeta']>
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, qwen, opus, opusMeta, geminiC, geminiCMeta, analystTargets }: {
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, opus, opusMeta, geminiC, geminiCMeta, analystTargets }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
     overlay: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any -- the untyped overlay-signals payload, passed through to buildRows unchanged
     stockInfo: Record<string, StockInfo>;
-    /** qwen_overlay.json tickers: Qwen's analysis beside each list name (operator 2026-11-06). */
-    qwen: Record<string, QwenOverlayRow>;
     /** opus_overlay.json tickers: the Opus valuation beside each list name (paper only). */
     opus: Record<string, OpusVerdict>;
     /** The Opus file's own totals for the summary line; null when the file is absent. */
     opusMeta: DeskData['opusMeta'];
-    /** gemini_c_overlay.json tickers: Gemini's analysis and verdict beside each list name. Empty when the file is absent. */
+    /** gemini_c_overlay.json tickers: the AI analysis and verdict beside each list name. Empty when the file is absent. */
     geminiC: Record<string, GeminiCRow>;
     /** The Gemini file's own totals for the summary line; null when the file is absent. */
     geminiCMeta: DeskData['geminiCMeta'];
@@ -143,7 +141,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, qw
     const params = useSearchParams();
     const urlState = useMemo(() => parseDeskUrl(params), [params]);
     const { how } = urlState;
-    // Steps 4 and 5 were the Qwen counters, which left the front page: a saved ?step=4 or 5 shows the list step.
+    // Steps 4 and 5 were the old AI counters, which left the front page: a saved ?step=4 or 5 shows the list step.
     const step: FunnelStep = urlState.step > 3 ? 3 : urlState.step;
     const [showSources, setShowSources] = useState(false);
 
@@ -168,14 +166,13 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, qw
 
     const rows = useMemo(
         () => buildRows({ factor, depth, valuations, overlay, stockInfo })
-            .map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r))
             .map((r) => (opus[r.ticker] ? { ...r, opus: opus[r.ticker] } : r))
             .map((r) => (geminiC[r.ticker] ? { ...r, geminiC: geminiC[r.ticker] } : r)),
-        [factor, depth, valuations, overlay, stockInfo, qwen, opus, geminiC],
+        [factor, depth, valuations, overlay, stockInfo, opus, geminiC],
     );
     const sectors = useMemo(() => sectorsOf(rows), [rows]);
-    const qwenLive = Object.keys(qwen).length > 0;
-    const phase = useMemo(() => (qwenLive ? 'C' as const : Object.keys(depth).length || factor ? deskPhase(depth) : null), [qwenLive, depth, factor]);
+    const aiLive = Object.keys(geminiC).length > 0;
+    const phase = useMemo(() => (aiLive ? 'C' as const : Object.keys(depth).length || factor ? deskPhase(depth) : null), [aiLive, depth, factor]);
     const counts = useMemo(() => funnelCounts(rows, factor), [rows, factor]);
 
     const all = useMemo(() => deskSections(rows), [rows]);
@@ -197,7 +194,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, qw
     const entered = tr?.entered_book?.length ?? 0;
     const left = tr?.left_book?.length ?? 0;
     const n = counts.actionable;
-    const newest = Object.values(qwen).reduce((m, r) => (r.analysis !== 'not run' && r.date > m ? r.date : m), '');
+    const newest = Object.values(geminiC).reduce((m, r) => (r.analysis !== 'not run' && r.date > m ? r.date : m), '');
     const ai = useMemo(() => aiCounts(rows), [rows]);
     const pick = (k: OpusVerdictCode, key: 'opLineBuy' | 'opLineWatch' | 'opLineAvoid', v: number) => (
         <button type="button" onClick={() => setFilter({ ai: [k] })} className="text-accent hover:text-ink">{fill(t(key), { n: v })}</button>

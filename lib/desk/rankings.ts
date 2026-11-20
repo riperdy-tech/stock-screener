@@ -4,7 +4,7 @@
 // depth (band-direction) verdict when one exists, the reverse-DCF model, and the
 // overlay signals. The lenses only choose ordering and which columns to show.
 
-import type { BandTransitions, DepthVerdict, FactorEntry, GeminiCRow, OpusVerdict, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { BandTransitions, DepthVerdict, FactorEntry, GeminiCRow, OpusVerdict, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from './useDeskData';
 import { isActionable, isBlocked } from './tone';
 
@@ -17,11 +17,9 @@ export interface DeskRow {
     info: StockInfo | undefined;
     fct: FactorEntry;
     depth: DepthVerdict | undefined;
-    /** Qwen's analysis of the name (qwen_overlay.json), attached by the Desk; undefined when it has none yet. */
-    qwen?: QwenOverlayRow;
     /** The Opus valuation of the name (opus_overlay.json, paper only), attached by the Desk; undefined when it has none. */
     opus?: OpusVerdict;
-    /** Gemini's analysis and verdict of the name (gemini_c_overlay.json), attached by the Desk; undefined when it has none yet. */
+    /** The AI analysis and verdict of the name (gemini_c_overlay.json), attached by the Desk; undefined when it has none yet. */
     geminiC?: GeminiCRow;
     /** `mos_vs_median_pct` exactly as stored in the overlay; `depth.mos_vs_median_pct` is re-marked to the live price. */
     storedMos: number | null;

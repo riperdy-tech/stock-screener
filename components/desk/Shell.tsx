@@ -250,7 +250,7 @@ export function Shell({ tab, loading, onReload, children }: {
                 anchor={status.anchor}
                 onOpenHealth={() => setShowHealth(true)}
             />
-            <NoticeBanner notice={deskNotice(fresh.phase, fresh.actionableCount, fresh.qwenLoaded)} />
+            <NoticeBanner notice={deskNotice(fresh.phase, fresh.actionableCount, fresh.aiLoaded)} />
 
             <main className="mx-auto max-w-desk px-5 pb-8 sm:px-10">{children}</main>
 

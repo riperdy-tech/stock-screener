@@ -15,7 +15,6 @@ import { macroEventsFor } from '@/lib/desk/macroEvents';
 import { fill } from '@/lib/desk/text';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { livePrice } from '@/lib/desk/rowText';
-import { onList } from '@/lib/desk/sections';
 import { gateReasonLabel } from '@/lib/desk/tone';
 import { rebuiltVerdict } from '@/lib/desk/verdict';
 import { useDeskData } from '@/lib/desk/useDeskData';
@@ -181,8 +180,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
             {/* The stored analyses, one tab open at a time */}
             <SourceTabs
-                ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly}
-                hasAi={gem != null} hasQwen={data.qwen[row.ticker] != null} opus={op} analystAsOf={data.opusMeta?.analyst_as_of}
+                ticker={row.ticker} live={live}
+                hasAi={gem != null} opus={op} analystAsOf={data.opusMeta?.analyst_as_of}
                 verdictTab={ai ? (ai.source === 'claude' ? 'claude' : 'ai') : null}
             />
 

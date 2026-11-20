@@ -21,7 +21,7 @@ export function EnglishHelpBody() {
                 <p>
                     Stockpeak is a research system published as a website. Every day a computer reads the financial
                     reports and price history of roughly <b>7,000 US-listed stocks</b> and narrows them to a short
-                    list. A local AI model, Qwen, then reads the filings of the names on that list, one company at a
+                    list. The AI analyst, a cloud AI model, then reads the filings of the names on that list, one company at a
                     time, and its analysis appears on each stock page. This handbook explains how each step works, what
                     every label on the screen means, and what the system has <i>not</i> proven.
                 </p>
@@ -36,14 +36,14 @@ export function EnglishHelpBody() {
                     <ul className="mt-1.5 list-disc space-y-1 pl-5">
                         <li>
                             The screener picks a monthly book of roughly 50 to 60 stocks. Two paper books follow it from 6
-                            November 2026: the Code book (the screener&apos;s picks alone) and the Qwen book (the same
-                            picks, with a slot held as cash when Qwen&apos;s reading of the filings finds a material
+                            November 2026: the Code book (the screener&apos;s picks alone) and the AI book (the same
+                            picks, with a slot held as cash when the AI analyst&apos;s reading of the filings finds a material
                             event). Both are simulated; no real money is involved.
                         </li>
                         <li>
-                            Qwen reads the filings of the names on the screener&apos;s list. Its analysis is on each stock
+                            The AI analyst reads the filings of the names on the screener&apos;s list. Its analysis is on each stock
                             page, with a value only where one can be computed. Many names have no value, and many values
-                            sit far from the market price, so read the analysis before the number. Qwen has not been graded
+                            sit far from the market price, so read the analysis before the number. The AI analyst has not been graded
                             on returns. See <A href="#analyst">The AI analyst</A>.
                         </li>
                         <li>
@@ -56,7 +56,7 @@ export function EnglishHelpBody() {
                             running yet. Real-money mirroring is halted; this site never trades.
                         </li>
                         <li>
-                            Nothing here is proven yet. The comparison that matters, whether the Qwen book beats the Code
+                            Nothing here is proven yet. The comparison that matters, whether the AI book beats the Code
                             book, has not been measured. See <A href="#validation">How it is validated</A>.
                         </li>
                     </ul>
@@ -89,9 +89,9 @@ export function EnglishHelpBody() {
                         <A href="#screen">The quant screen</A> and <A href="#bands">Bands, vetoes &amp; warnings</A>.
                     </li>
                     <li>
-                        <b>Analyst — reads each name.</b> Qwen, an AI model on a local computer with one GPU, reads one
+                        <b>Analyst — reads each name.</b> The AI analyst, a cloud AI model (Gemini, with Claude as the fallback), reads one
                         listed company&apos;s filings at a time and writes claims by topic; code checks each claim against
-                        the filing. Where the filings allow it, code computes a value from Qwen&apos;s choices. See{' '}
+                        the filing. Where the filings allow it, code computes a value from the AI analyst&apos;s choices. See{' '}
                         <A href="#analyst">The AI analyst</A>.
                     </li>
                     <li>
@@ -105,9 +105,9 @@ export function EnglishHelpBody() {
                         <b>Not running yet.</b> See <A href="#followup">The daily follow-up</A>.
                     </li>
                     <li>
-                        <b>Grading — scores the record.</b> Two monthly paper books, Code and Qwen, are marked every day
+                        <b>Grading — scores the record.</b> Two monthly paper books, Code and AI, are marked every day
                         against benchmarks, beside a control book and your own holdings. The earlier analyst&apos;s verdicts
-                        were graded against later prices; Qwen has not been graded on returns. See{' '}
+                        were graded against later prices; the AI analyst has not been graded on returns. See{' '}
                         <A href="#track">Track record</A>.
                     </li>
                 </ol>
@@ -130,11 +130,11 @@ export function EnglishHelpBody() {
                         <b>A notice</b>, when something needs saying.
                     </li>
                     <li>
-                        <b>The status line</b> — one sentence: how many list names Qwen has read, how many have a value,
+                        <b>The status line</b> — one sentence: how many list names the AI analyst has read, how many have a value,
                         and the date of the newest reading.
                     </li>
                     <li>
-                        <b>The funnel</b> — five counts: US stocks → pass safety → make the list → Qwen read → valued.
+                        <b>The funnel</b> — five counts: US stocks → pass safety → make the list → AI read → valued.
                         Clicking a step only <i>selects</i> it: the summary below changes, and &ldquo;show
                         how&rdquo; opens the detail. It does not filter the table. Where a step removes names, its detail
                         panel says why.
@@ -159,15 +159,15 @@ export function EnglishHelpBody() {
                     </li>
                 </ul>
                 <p>
-                    Qwen&apos;s reading sits beside each name. Verdicts from the <Term term="rebuilt-analyst">earlier analyst</Term> no
+                    The AI analyst&apos;s reading sits beside each name. Verdicts from the <Term term="rebuilt-analyst">earlier analyst</Term> no
                     longer place names; one quiet line counts them, and each stays on its stock page under verdict history.
                 </p>
 
                 <SubHeading>Reading a row</SubHeading>
                 <p>
-                    Each row shows the company, today&apos;s price and the screener&apos;s rank. Qwen&apos;s reading sits beside
+                    Each row shows the company, today&apos;s price and the screener&apos;s rank. The AI analyst&apos;s reading sits beside
                     it: when it was read, the value and its range where one could be computed (otherwise the reason),
-                    the gap between that value and the price, and how many of Qwen&apos;s claims were checked against the
+                    the gap between that value and the price, and how many of the AI analyst&apos;s claims were checked against the
                     filings. A large gap is a reason to read the analysis, not a signal: many values sit far from the
                     price. The screener side shows the door that listed the name, and five small bars for the pillars Q M R V
                     G — quality, momentum, revisions, value and expectations gap. A bar grows up when the stock is above its
@@ -177,9 +177,9 @@ export function EnglishHelpBody() {
                     Opening a name leads to its stock page.
                 </p>
 
-                <SubHeading>Qwen&apos;s value and range</SubHeading>
+                <SubHeading>The AI analyst&apos;s value and range</SubHeading>
                 <p>
-                    Where code can compute a value from Qwen&apos;s choices, the stock page shows a bear, base and bull value
+                    Where code can compute a value from the AI analyst&apos;s choices, the stock page shows a bear, base and bull value
                     against today&apos;s price. A value far from the price is labelled, because the inputs may be wrong: read
                     the analysis first. Some companies cannot be valued yet, and the reason is shown instead of a number.
                     The price shown is the one the screener scored, and it is dated by the trading session it is for.
@@ -187,14 +187,13 @@ export function EnglishHelpBody() {
 
                 <SubHeading>The stock page</SubHeading>
                 <p>
-                    The page for one name opens with Qwen&apos;s analysis: when it was read, its claims by topic with how many
-                    were confirmed in the filings, its value where there is one, and whether the Code book and the Qwen
-                    book hold the name. A verdict from the earlier analyst, if the name has one, stays under verdict history.
+                    The page for one name opens with the AI analyst&apos;s analysis: when it was read, its claims by topic with how many
+                    were confirmed in the filings, and its value where there is one. A verdict from the earlier analyst, if the name has one, stays under verdict history.
                     The right column shows how the stock got on the list, what the price expects, a 400-day price chart, key
                     financials and which paper books hold it.
                 </p>
                 <p>
-                    Under <b>⋯ → On-demand</b> is the request form and the list of Qwen&apos;s readings, each linking to its
+                    Under <b>⋯ → On-demand</b> is the request form and the list of the AI analyst&apos;s readings on request, each linking to its
                     stock page.
                 </p>
 
@@ -381,16 +380,16 @@ export function EnglishHelpBody() {
             </Section>
 
             {/* Analyst */}
-            <Section id="analyst" title="The AI analyst — Qwen today, and the earlier verdict analyst">
+            <Section id="analyst" title="The AI analyst — today, and the earlier verdict analyst">
                 <Callout kind="info">
-                    <b>Qwen is the analyst that is live today.</b> Qwen is an AI model running on a local computer, not a
-                    cloud service. For each name on the screener&apos;s list it reads the company&apos;s SEC filings and writes
+                    <b>The AI analyst is the analyst that is live today.</b> It is a cloud AI model: Gemini, with Claude as the
+                    fallback. For each name on the screener&apos;s list it reads the company&apos;s SEC filings and writes
                     claims by topic, such as business model, financial health, competitive position, growth and risks. Code
                     checks each claim against the filing text, and the stock page shows how many claims were confirmed. Where
-                    the filings are complete enough, code computes a bear, base and bull value from Qwen&apos;s choices, but
-                    only when two runs of Qwen agree; otherwise no value is shown and the reason is given. A value far from
-                    the price is labelled: read the analysis before the number. Qwen&apos;s analysis is research material,
-                    not a call to buy or sell, and Qwen has not been graded on returns. A name can also be requested on the
+                    the filings are complete enough, code computes a bear, base and bull value from the AI analyst&apos;s choices, but
+                    only when two runs of the AI analyst agree; otherwise no value is shown and the reason is given. A value far from
+                    the price is labelled: read the analysis before the number. The AI analyst&apos;s analysis is research material,
+                    not a call to buy or sell, and it has not been graded on returns. A name can also be requested on the
                     On-demand page.
                 </Callout>
                 <Callout kind="warn">
@@ -452,7 +451,7 @@ export function EnglishHelpBody() {
             {/* Crux */}
             <Section id="crux" title="The crux — what the price gets wrong">
                 <Callout kind="warn">
-                    This describes the earlier verdict analyst, which is stopped. Qwen&apos;s analysis does not use a crux.
+                    This describes the earlier verdict analyst, which is stopped. The AI analyst&apos;s analysis does not use a crux.
                 </Callout>
                 <p>
                     A buy or sell call has to name the <b>one input</b> that today&apos;s price gets wrong. That is the{' '}
@@ -566,8 +565,8 @@ export function EnglishHelpBody() {
                 <p>Where each part of the system stands on 12 November 2026:</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>Live.</b> The screener and its daily scoring; Qwen&apos;s analysis on the stock pages; and the Code
-                        book and the Qwen book, marked every day on paper from 6 November 2026.
+                        <b>Live.</b> The screener and its daily scoring; the AI analyst&apos;s analysis on the stock pages; and the Code
+                        book and the AI book, marked every day on paper from 6 November 2026.
                     </li>
                     <li>
                         <b>Stopped.</b> The earlier verdict analyst and its gate. Its AI paper book holds only cash. Its
@@ -581,7 +580,7 @@ export function EnglishHelpBody() {
                     </li>
                     <li>
                         <b>Next.</b> A new monthly book is formed each month; the next is due on 30 November 2026. Whether
-                        the Qwen book beats the Code book has not been measured, and it cannot be read until the books have
+                        the AI book beats the Code book has not been measured, and it cannot be read until the books have
                         several months of marks.
                     </li>
                 </ul>
@@ -602,8 +601,8 @@ export function EnglishHelpBody() {
                 </p>
                 <SubHeading>The earlier analyst&apos;s verdict scoreboard</SubHeading>
                 <p>
-                    It comes first, before any returns, and it is the stopped analyst&apos;s record, not Qwen&apos;s: nothing on
-                    this page grades Qwen. It shows three counts — verdicts graded from the valid analyst,
+                    It comes first, before any returns, and it is the stopped analyst&apos;s record, not the AI analyst&apos;s: nothing on
+                    this page grades the AI analyst. It shows three counts — verdicts graded from the valid analyst,
                     verdicts graded from the old analyst (labelled legacy and inconclusive), and verdicts still pending
                     (<Term term="graded-pending" />) — then four horizon tiles (30, 91, 182 and 365 days) with how many are
                     gradeable at each. The method is printed under it: entry is the first close on or after the verdict
@@ -613,18 +612,18 @@ export function EnglishHelpBody() {
                 </p>
                 <SubHeading>The banner</SubHeading>
                 <p>
-                    A banner at the top says that every book on the page is paper, that the Code book and the Qwen book
-                    began on 6 November 2026 and have run far too short a time to show anything, that Qwen has not been
+                    A banner at the top says that every book on the page is paper, that the Code book and the AI book
+                    began on 6 November 2026 and have run far too short a time to show anything, that the AI analyst has not been
                     graded on returns, and that the scoreboard and the old AI book belong to the stopped analyst.
                 </p>
                 <SubHeading>The paper books</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>Qwen book</b> — the Code book&apos;s picks, with a slot held as cash when Qwen&apos;s reading of the
+                        <b>AI book</b> — the Code book&apos;s picks, with a slot held as cash when the AI analyst&apos;s reading of the
                         filings finds a material event. Formed monthly, equal weight per slot.
                     </li>
                     <li>
-                        <b>Code book</b> — the screener&apos;s monthly picks alone, the same names before Qwen&apos;s check.
+                        <b>Code book</b> — the screener&apos;s monthly picks alone, the same names before the AI analyst&apos;s check.
                     </li>
                     <li>
                         <b>Old AI book (stopped)</b> — followed the earlier analyst&apos;s verdicts that passed the gate
@@ -656,7 +655,7 @@ export function EnglishHelpBody() {
                 <p>
                     Growth of 100 plots the books and the benchmarks (<Term term="qqq" />, <Term term="spy" />, <Term term="iwm" /> and a few
                     more) from the same start, with a window selector and a what-if cost box that re-costs every trade. The ledger
-                    lists the Qwen book&apos;s trades with a plain reason (for example &ldquo;entered at the monthly
+                    lists the AI book&apos;s trades with a plain reason (for example &ldquo;entered at the monthly
                     formation&rdquo;) and shows days with no trade as &ldquo;no changes&rdquo;.
                 </p>
                 <SubHeading>Honest rules</SubHeading>
@@ -668,7 +667,7 @@ export function EnglishHelpBody() {
                 <SubHeading>How to read it</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li><b>Control vs QQQ</b> — the stock selection works only if the picks beat the <Term term="benchmark" />, QQQ.</li>
-                    <li><b>Qwen book vs Code book</b> — Qwen&apos;s filing check earns its keep only if its book beats the Code book. This has not been measured: the books began on 6 November 2026.</li>
+                    <li><b>AI book vs Code book</b> — the AI analyst&apos;s filing check earns its keep only if its book beats the Code book. This has not been measured: the books began on 6 November 2026.</li>
                     <li><b>My book vs the others</b> — your own deviations show up as the <Term term="behavior-gap" />.</li>
                 </ul>
                 <Callout kind="info">
@@ -694,7 +693,7 @@ export function EnglishHelpBody() {
                     <li><b>NO PLAUSIBLE RUN</b> — no run was usable.</li>
                 </ul>
                 <p>
-                    Stances come from the earlier analyst&apos;s verdicts, and that analyst is stopped; Qwen&apos;s reading is on
+                    Stances come from the earlier analyst&apos;s verdicts, and that analyst is stopped; the AI analyst&apos;s reading is on
                     each stock page and is not part of the stance. BUY and REDUCE are the machine&apos;s labels on a
                     research list, never advice to you. Where they exist, the thesis and follow-up status sit beside each
                     holding. The footer gives your total, your cash share, a warning if one sector is over the 25 % rule,
@@ -732,9 +731,9 @@ export function EnglishHelpBody() {
                         name are treated as correlated, not independent.
                     </li>
                     <li>
-                        <b>A control.</b> The sharpest question is whether Qwen&apos;s reading adds anything on top of the
-                        screen. The Code book and the Qwen book exist to answer it: if the Qwen book cannot beat the Code
-                        book, Qwen&apos;s filing check adds nothing to the picks. That comparison has not been measured.
+                        <b>A control.</b> The sharpest question is whether the AI analyst&apos;s reading adds anything on top of the
+                        screen. The Code book and the AI book exist to answer it: if the AI book cannot beat the Code
+                        book, the AI analyst&apos;s filing check adds nothing to the picks. That comparison has not been measured.
                     </li>
                     <li>
                         <b>Paper books.</b> The <A href="#track">track record</A> books trade daily with real prices and
@@ -747,7 +746,7 @@ export function EnglishHelpBody() {
                 </p>
                 <Callout kind="warn">
                     <b>No conclusion yet.</b> <Term term="not-yet-proven" />: every graded verdict so far is from the earlier
-                    analyst, which was ruled invalid, and Qwen has not been graded on returns. No conclusion can be drawn
+                    analyst, which was ruled invalid, and the AI analyst has not been graded on returns. No conclusion can be drawn
                     about either until the monthly books have enough months of marks.
                 </Callout>
             </Section>
@@ -763,8 +762,8 @@ export function EnglishHelpBody() {
                 <SubHeading>Two clocks</SubHeading>
                 <p>
                     The scoring chain re-runs in the cloud several times each weekday, with a refresh after the close.
-                    Cloud schedulers can run late, so every file carries its own timestamp. Qwen runs separately on a local
-                    computer with one GPU, and publishes its analysis on its own clock.
+                    Cloud schedulers can run late, so every file carries its own timestamp. The AI analyst runs
+                    separately and publishes its analysis on its own clock.
                 </p>
                 <SubHeading id="health">System health</SubHeading>
                 <p>
@@ -773,9 +772,9 @@ export function EnglishHelpBody() {
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
                         <b>Three stamps</b> — <i>prices as of</i> (the trading session the prices are for), <i>book scored</i> and{' '}
-                        <i>Qwen analysis</i> (its newest publish). A stamp turns amber with a ● when it is past its expected
+                        <i>AI analysis</i> (its newest publish). A stamp turns amber with a ● when it is past its expected
                         age: prices when the post-close refresh is more than 3 days old, the book after 36 hours and the
-                        Qwen analysis after 14 days.
+                        AI analysis after 14 days.
                     </li>
                     <li>
                         <b>The health dot</b> — green when all is well. Amber for a stale stamp, a discount rate that did

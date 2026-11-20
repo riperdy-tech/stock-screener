@@ -18,9 +18,9 @@ export interface DeskNotice {
  * actionable: it has started publishing and nothing passes the gate yet. Any actionable rebuilt
  * verdict: no notice. Null phase (overlay not loaded yet): no notice, so nothing flashes.
  */
-export function deskNotice(phase: DeskPhase | null, actionableCount: number, qwenLoaded = false): DeskNotice | null {
+export function deskNotice(phase: DeskPhase | null, actionableCount: number, aiLoaded = false): DeskNotice | null {
     if (phase === null) return null;
     if (phase === 'A') return { severity: 'warn', messageKey: 'noticeAnalystRebuild', since: '2026-09-24' };
     if (actionableCount > 0) return null;
-    return { severity: 'warn', messageKey: qwenLoaded ? 'noticeQwenNoValue' : 'noticeDepthNoneActionable', since: null };
+    return { severity: 'warn', messageKey: aiLoaded ? 'noticeAiNoValue' : 'noticeDepthNoneActionable', since: null };
 }

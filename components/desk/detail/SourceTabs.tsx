@@ -1,8 +1,8 @@
 'use client';
 
 // The stored analyses of a name as tabs, one open at a time: "AI read" (the Gemini / Claude Opus / Claude Sonnet read
-// of the filings), "Qwen" and "Claude quick valuation". A tab exists only when that source has a stored result for the
-// name; each holds that source's own panel, unchanged. The open tab is in the URL (?src=ai|qwen|claude) so a link
+// of the filings) and "Claude quick valuation". A tab exists only when that source has a stored result for the
+// name; each holds that source's own panel, unchanged. The open tab is in the URL (?src=ai|claude) so a link
 // opens the same tab; without it the tab of the source that gave the verdict opens.
 
 import React from 'react';
@@ -10,22 +10,18 @@ import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
 import type { OpusVerdict } from '@/lib/data-service';
-import type { MonthlyBooksLike } from '@/lib/desk/stockPage';
 import { OpusPanel } from './OpusPanel';
 import { QwenPanel } from './QwenPanel';
 
-export type SourceTab = 'ai' | 'qwen' | 'claude';
-const ORDER: SourceTab[] = ['ai', 'qwen', 'claude'];
-const LABEL = { ai: 'stTabAi', qwen: 'stTabQwen', claude: 'stTabClaude' } as const;
+export type SourceTab = 'ai' | 'claude';
+const ORDER: SourceTab[] = ['ai', 'claude'];
+const LABEL = { ai: 'stTabAi', claude: 'stTabClaude' } as const;
 
-export function SourceTabs({ ticker, live, listed, monthly, hasAi, hasQwen, opus, analystAsOf, verdictTab }: {
+export function SourceTabs({ ticker, live, hasAi, opus, analystAsOf, verdictTab }: {
     ticker: string;
     live: number | null;
-    listed: boolean;
-    monthly: MonthlyBooksLike | null;
-    /** The name has a row in gemini_c_overlay.json / qwen_overlay.json. */
+    /** The name has a row in gemini_c_overlay.json. */
     hasAi: boolean;
-    hasQwen: boolean;
     /** The name's row in opus_overlay.json, when it has one. */
     opus: OpusVerdict | undefined;
     analystAsOf?: string;
@@ -34,7 +30,7 @@ export function SourceTabs({ ticker, live, listed, monthly, hasAi, hasQwen, opus
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
-    const tabs = ORDER.filter((k) => (k === 'ai' ? hasAi : k === 'qwen' ? hasQwen : opus != null));
+    const tabs = ORDER.filter((k) => (k === 'ai' ? hasAi : opus != null));
     if (tabs.length === 0) return <p className="mt-4 text-[12px] text-ink-2">{t('stNoTabs')}</p>;
 
     const asked = params.get('src') as SourceTab | null;
@@ -65,8 +61,7 @@ export function SourceTabs({ ticker, live, listed, monthly, hasAi, hasQwen, opus
                 ))}
             </div>
             <div role="tabpanel" id="src-panel" aria-labelledby={`src-tab-${open}`}>
-                {open === 'ai' && <QwenPanel gemini ticker={ticker} live={live} listed={listed} monthly={null} />}
-                {open === 'qwen' && <QwenPanel ticker={ticker} live={live} listed={listed} monthly={monthly} />}
+                {open === 'ai' && <QwenPanel ticker={ticker} live={live} />}
                 {open === 'claude' && opus && <OpusPanel o={opus} analystAsOf={analystAsOf} />}
             </div>
         </div>

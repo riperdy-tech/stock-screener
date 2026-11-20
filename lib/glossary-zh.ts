@@ -389,7 +389,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'LLM（大型語言模型）',
         plain: '替分析師做研究的那類 AI。',
         definition:
-            '大型語言模型是會閱讀與撰寫文字的 AI。分析師在本機電腦上執行一個，而不是雲端服務。它閱讀申報文件、做研究，並選定每一項估值輸入。它不做算術——所有計算都由 Python 程式碼完成——之後程式碼再拿外部錨點來檢查答案。',
+            '大型語言模型是會閱讀與撰寫文字的 AI。AI 分析師在雲端執行一個（Gemini，以 Claude 為備援）。它閱讀申報文件、做研究，並選定每一項估值輸入。它不做算術——所有計算都由 Python 程式碼完成——之後程式碼再拿外部錨點來檢查答案。',
         related: ['iv-band', 'street-fence', 'actionable'],
     },
 
@@ -577,7 +577,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'GitHub Actions',
         plain: '依排程重新執行資料流程的雲端自動化。',
         definition:
-            '依排程自動執行資料擷取、評分鏈與紙上帳本的 CI/CD 服務。AI 分析師則另外在本機電腦上執行。',
+            '依排程自動執行資料擷取、評分鏈與紙上帳本的 CI/CD 服務。AI 分析師則另外執行。',
         related: ['pipeline'],
     },
     pipeline: {
