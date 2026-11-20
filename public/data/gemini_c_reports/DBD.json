@@ -1,0 +1,700 @@
+{
+ "alpha_pts": null,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-10-28T20:05:17.000Z",
+  "accepted_utc": "2026-10-29T00:05:17Z",
+  "accession": "0000028823-26-000040",
+  "decision_time": "2026-11-20T10:40:41Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 57,
+ "claims_supported": 46,
+ "date": "2026-11-20T10:40:41Z",
+ "family": "operating",
+ "flags": [
+  "The company published an updated full-year outlook that lowers adjusted EBITDA to $490M - $510M from $510M - $535M and adjusted EPS to $4.50 - $4.85 from $5.25 - $5.75.",
+  "The Board authorized a new $250 million share repurchase program.",
+  "The company began winding down a non-core Turkey operation, expected to be completed by year-end."
+ ],
+ "in_code_book": false,
+ "ke": null,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": "some filed figures are years older than the latest annual report",
+ "pending_offer": null,
+ "qwen_book": null,
+ "release_truncated": [],
+ "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated in the company's 'About Diebold Nixdorf' paragraph in the Q3 2026 release. The 10-K business section was not found in the packet.",
+    "claim": "The company sells technology and services to banks and retailers, covering automated banking hardware and checkout hardware plus the services that support them.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "automates, digitizes and transforms the way people bank and shop"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Segment figures are stated in the release's segment table. The share comparison is inferred from them.",
+    "claim": "Results are reported in two segments, Banking and Retail. In Q3 2026 Banking net sales were $698.2 and Retail net sales were $296.1 (table in millions). Banking is about 70% of the total by this split, but that share is my reading and not a printed figure.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Gross Margin by Segment - Unaudited"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Figures stated in the income statement and release. The description of what each line contains is inferred from the line names and the deal examples.",
+    "claim": "Revenue comes from two lines, Services and Products. In Q3 2026 Services revenue was $565.0 and Products revenue was $429.3, for total revenue of $994.3 (table in millions).",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Key Third Quarter Business Highlights. The link from wins to revenue is inferred.",
+    "claim": "Product revenue is driven by customer deals for banking and retail hardware. Examples are cash recyclers, ATMs, point-of-sale lanes and self-checkout units. Retail also has a services agreement for electronic shelf label technology.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Signed contract for more than 500 DN Series\u00ae cash recyclers with one of the largest banks in North America"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release. The offset reading is inferred from the segment table.",
+    "claim": "Retail was the faster-growing area in Q3 2026, with 16% revenue growth. Total revenue grew 5%. Banking nine-month net sales were $1,960.6 against $1,999.0 a year earlier, while Retail was $856.2 against $702.5 (table in millions).",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Retail: Expansion in North America and European leadership position deliver 16% revenue growth YoY"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Margins and the management commentary are stated in the release. The mix mechanism is as management describes it.",
+    "claim": "Margins differ by revenue line. In Q3 2026 Services gross margin was 26.9% and Products gross margin was 22.2%, against 27.3% for Products a year earlier. Product mix and raw material costs are the stated pressure on profit.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "we are updating our full-year outlook to reflect a change in revenue mix and cost pressures in raw materials"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the income statement and the non-GAAP reconciliation. The cost grouping is read from the line items.",
+    "claim": "The main costs are cost of sales, selling and administrative expense, and research and development. In Q3 2026 cost of sales was 747.1 against revenue of $994.3, selling and administrative expense was 172.2 and R&D was 19.8 (table in millions).",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Non-GAAP notes.",
+    "claim": "A cost savings program is running, aimed at simplifying operations and automating processes. Restructuring and other savings initiative expenses were 34.5 in Q3 2026 (table in millions), and they explain much of the gap between GAAP and adjusted profit.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "relate to the cost savings initiative focused on operational simplification and automation of processes"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the cash flow statement and balance sheet. The interpretation of the drivers is inferred, apart from the German tax point, which the release states.",
+    "claim": "Cash generation is affected by working capital and taxes. Operating cash flow was (29.3) for the nine months to 30 September 2026, against 83.2 a year earlier (table in millions). Inventories used (51.1) of cash and deferred revenue used (50.1), and the deferred revenue balance fell from 325.8 to 254.1.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the financial statements and release.",
+    "claim": "The company runs with debt and returns cash through buybacks. Long-term debt was 949.3 at 30 September 2026 and Q3 interest expense was 26.7 (table in millions). Treasury share activity used (154.9) over nine months, and the board authorized a new $250 million repurchase program.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the guidance table and commentary of the Q3 2026 release.",
+    "claim": "Management lowered its full-year 2026 guidance. Adjusted EBITDA is now $490M - $510M, down from $510M - $535M. Free cash flow is now $190M - $210M, down from $255M - $270M. Management ties this to product mix, raw material costs and working capital.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The revised free cash flow outlook reflects the combined impact of lower expected earnings and working capital requirements."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the earnings release and income statement",
+    "claim": "Q3 2026 revenue of $994.3 million rose 5% year over year, which points to continued demand across the company's Banking and Retail franchises.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "Revenue increased 5% year-over-year, led by continued double-digit growth in Retail"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release segment table and highlights",
+    "claim": "Retail is the growth engine: the company reports 16% Retail revenue growth, and Q3 Retail net sales were $296.1 (table in millions) against $255.0 a year earlier.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Retail: Expansion in North America and European leadership position deliver 16% revenue growth YoY"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the segment table; the interpretation of trend is inferred from the figures",
+    "claim": "Banking, the larger segment, is flat to slightly down over nine months, at $1,960.6 (table in millions) against $1,999.0, though Q3 sales edged up to $698.2 from $690.2. Management cites improvement in Banking and new automation wins.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Won a competitive deal for 1,450 ATMs and expanded the install base for a major customer in Asia"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release tables",
+    "claim": "Services is a strengthening area: Q3 Services revenue was $565.0 (table in millions) against $544.2, and Services gross margin rose to 26.9% from 25.0%.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "continued improvements in our Services business"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the release; the mix link is the company's own explanation",
+    "claim": "Product margins are under pressure: Q3 Products gross margin fell to 22.2% from 27.3%, and management attributes lower profit expectations to product mix and raw material costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "adjusted EBITDA expectations now reflect product mix and cost pressures in raw materials"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the guidance table",
+    "claim": "The company cut its full-year 2026 guidance: adjusted EBITDA from $510M - $535M to $490M - $510M, and free cash flow from $255M - $270M to $190M - $210M.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The revised free cash flow outlook reflects the combined impact of lower expected earnings and working capital requirements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement and the non-GAAP reconciliation",
+    "claim": "Q3 GAAP operating profit fell to $38.8 (table in millions) from $73.8, driven by restructuring costs and an impairment, while adjusted EBITDA rose to $127.8 from $121.9 at a steady 12.9% margin.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "Net income (GAAP) of $7.1 million; adjusted EBITDA (non-GAAP) of $127.8 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the company boilerplate",
+    "claim": "The company has global scale, with a presence in more than 100 countries and approximately 20,000 employees.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The company has a presence in more than 100 countries with approximately 20,000 employees worldwide."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the financial statements and release; the flexibility implication is inferred",
+    "claim": "Cash was drawn down while the company returned capital: cash fell to 184.9 from 387.3 (table in millions), treasury share activity used (154.9), and operating cash flow was (29.3) against 83.2. A new $250 million buyback was authorized. This limits financial flexibility against competitors.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the forward-looking statement factors, which are generic and not quantified",
+    "claim": "Named threats include competitive pressure, including from less traditional competitors, and the shift away from cash, which could reduce ATM usage.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "the impact of competitive pressures, including pricing and the introduction of new products and services by our competitors, as well as from less traditional competitors",
+     "the impact of the proliferation of payment options other than cash, which could result in a reduced need for cash in the marketplace and a resulting decline in the usage of ATMs"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the risk factor list and commentary",
+    "claim": "Supply and trade risks are named: reliance on suppliers and raw material availability, tariffs, and rising raw material costs, with raw material cost pressure already cited in the guidance cut.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "developments from recent and potential changes to trade policies by the U.S. or other countries, including tariffs",
+     "reliance on suppliers, subcontractors and availability of raw materials and other components"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet and cash flow statement.",
+    "claim": "Cash, cash equivalents and restricted cash fell to 184.9 at Sep. 30 from 387.3 at Dec. 31, and short-term investments went from 29.1 to 0.0 (table in millions). The 9-month change in cash was (202.4).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the balance sheet; the comment on composition is inferred from the line items.",
+    "claim": "Current assets of 1,655.2 exceed current liabilities of 1,303.2 at Sep. 30, but current assets are mostly receivables, inventories and other items, with cash only 184.9 (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the company's net debt table (a non-GAAP measure); the cause is inferred from the figures shown.",
+    "claim": "Leverage rose. Net debt was $(791.5) at Sep. 30 against $(554.3) at the prior year-end, with debt instruments of (976.4) against (970.7) (table in millions). The rise comes mainly from lower cash, not from more debt.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the balance sheet.",
+    "claim": "Long-term debt is 949.3 against total equity of 944.1 and total liabilities of 2,719.3 (table in millions). Long-term debt was 938.5 at the prior year-end, and equity was lower than the prior year-end 1,104.8.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement, cash flow statement and earnings release.",
+    "claim": "Interest cost is rising. Quarterly interest expense was (26.7) against (21.8) a year earlier, and 9-month interest expense was (74.1) against (65.1). Cash paid for interest in the 9 months was 76.4 against 58.8 (table in millions).",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cash flow statement and release; the working-capital breakdown is read from the cash flow lines.",
+    "claim": "Operating cash flow turned negative. It was (29.3) for the 9 months against 83.2 a year earlier (table in millions). Free cash flow (non-GAAP) was (68.5) against 43.3, and (36.2) excluding discrete tax payments of 32.3.",
+    "facts": [
+     "F3",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the release and cash flow statement.",
+    "claim": "Cash generation is weighed down by German cash taxes. The company says it is now a German cash taxpayer and expects further discrete payments in Q4. Cash paid for income taxes in the 9 months was 75.1 against 35.9 (table in millions).",
+    "facts": [
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "As a result, the Company is now expected to be a cash taxpayer in Germany going forward"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cash flow statement and release. Funding of the new program is not stated.",
+    "claim": "The company spent more on share repurchases than operating cash flow supplied. Treasury share activity was (154.9) against (79.6) a year earlier (table in millions), and the board authorized a new $250 million repurchase program.",
+    "facts": [
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release. The comparison with nine-month results is inferred.",
+    "claim": "Management cut its full-year free cash flow outlook to $190M - $210M from $255M - $270M. Its adjusted EBITDA outlook was lowered to $490M - $510M from $510M - $535M.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The revised free cash flow outlook reflects the combined impact of lower expected earnings and working capital requirements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement. What it implies for available capacity is inferred.",
+    "claim": "Liquidity access: the company borrowed 37.0 on its revolving credit facility and repaid 37.0 within the 9 months, leaving no net revolver draw (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K passage.",
+    "claim": "The company went through Chapter 11 and Dutch Scheme proceedings and applied fresh start accounting on emergence. The 10-K passage shows this history; the packet does not show current going-concern language.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "the Company qualified for and applied fresh start accounting (Fresh Start Accounting)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Figures are stated in the cited release. The continuation conditions are inferred from the listed wins.",
+    "claim": "Retail is the clearest growth driver. Q3 Retail net sales were 296.1 (table in millions) against 255.0, and nine-month Retail net sales were 856.2 against 702.5. Management cites 16% Retail revenue growth. To continue, Retail wins such as the North America grocer and European self-checkout and shelf-label work must turn into delivered revenue.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Retail: Expansion in North America and European leadership position deliver 16% revenue growth YoY"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the release and income statement. The margin-persistence condition is inferred.",
+    "claim": "Services is a second driver. Q3 Services revenue rose to 565.0 (table in millions) from 544.2, and Services gross margin was 26.9% against 25.0%. Continuation requires that Services margin gains persist and that service agreements, such as the new one valued at more than $25 million, are executed.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "continued improvements in our Services business"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the release. The conversion condition is inferred.",
+    "claim": "Banking is stable rather than growing on a nine-month view, but it carries new contract wins. Q3 Banking net sales were 698.2 (table in millions) against 690.2, while nine-month Banking net sales were 1,960.6 against 1,999.0. For Banking to contribute to growth, wins such as the 1,450 ATM deal in Asia must convert to revenue and offset weaker nine-month product sales.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Won a competitive deal for 1,450 ATMs and expanded the install base for a major customer in Asia"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and the guidance change are stated in the release. The offset condition is inferred.",
+    "claim": "Operating-expense discipline supports profit growth. Q3 adjusted EBITDA was 127.8 (table in millions) against 121.9, and non-GAAP selling and administrative expense was 138.1 against 140.7. Continuation requires opex discipline to keep offsetting raw-material cost pressure and the weaker product mix.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "disciplined operating expense management"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Margins and the cause of the guidance cut are stated. The link to Retail mix is inferred from the segment tables.",
+    "claim": "Margin on products is a condition for growth turning into profit. Q3 Products gross margin fell to 22.2% from 27.3%, so product-led revenue growth has not kept its margin. Growth in profit requires that the product mix and raw-material cost pressure ease or be offset.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "adjusted EBITDA expectations now reflect product mix and cost pressures in raw materials"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the statements and release. The dependence on working capital is inferred.",
+    "claim": "Cash conversion must improve for growth to be funded. Nine-month operating cash flow was (29.3) (table in millions) against 83.2, and cash fell to 184.9 from 387.3. Management guides to free cash flow of $190M - $210M, and the guidance range depends on working capital and cash tax normalising.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Management remains focused on cash conversion, inventory efficiency and disciplined execution as the company closes the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Share counts, treasury activity and the authorisation are stated. The dependence on cash is inferred from the forward-looking factor list.",
+    "claim": "Per-share results are supported by share repurchases, but this depends on cash and debt capacity. Q3 diluted weighted shares were 34.6 (table in millions) against 37.0, and nine-month treasury share activity was (154.9). A new $250 million program was authorised, and continuing it requires sufficient cash flow while net debt is (791.5).",
+    "facts": [
+     "F2",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (guidance table and text)",
+    "claim": "The company published an updated full-year outlook that lowers adjusted EBITDA to $490M - $510M from $510M - $535M and adjusted EPS to $4.50 - $4.85 from $5.25 - $5.75.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Diebold Nixdorf has updated its full-year 2026 financial outlook."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (release headline bullet)",
+    "claim": "The Board authorized a new $250 million share repurchase program.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the link between the $21.7 and the other impairments is inferred from the adjustments table",
+    "claim": "The company recorded an impairment of an unconsolidated subsidiary after deciding to pursue a future exit of the investment. It was $16.9 in the quarter and in the nine months (release tables in millions), and the nine-month cash flow statement shows total impairment of $21.7 (table in millions).",
+    "facts": [
+     "P2",
+     "F3"
+    ],
+    "quotes": [
+     "Represents the loss on an unconsolidated subsidiary following the Company's decision in the third quarter of 2026 to pursue a future exit of the investment."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item (footnote 4 to the EBITDA reconciliation)",
+    "claim": "The company began winding down a non-core Turkey operation, expected to be completed by year-end.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In the first quarter 2026, the Company began to wind down operations of a non-core Turkey operation, which is expected to be completed by the end of 2026."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Figures are stated in the balance sheet, cash flow statement and release. The mechanism is inferred from those figures.",
+    "claim": "Cash, cash equivalents and restricted cash fell to 184.9 from 387.3 (table in millions) in nine months. Operating cash flow was (29.3) and treasury share activity was (154.9), and the board authorized a new $250 million buyback, so further cash outflow is possible.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release guidance table and commentary.",
+    "claim": "Management cut its full-year 2026 outlook. Adjusted EBITDA guidance fell from $510M - $535M to $490M - $510M, and free cash flow guidance fell from $255M - $270M to $190M - $210M, citing product mix and raw material cost pressure.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The company is narrowing its revenue outlook while adjusted EBITDA expectations now reflect product mix and cost pressures in raw materials, partially offset by ongoing productivity improvements and operating expense discipline."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Margins are stated in the release table. The link to mix and raw materials is stated by management. The persistence of the pressure is inferred.",
+    "claim": "Product gross margin compressed in the third quarter to 22.2% from 27.3%, a pressure management links to revenue mix and raw material costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "we are updating our full-year outlook to reflect a change in revenue mix and cost pressures in raw materials"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release footnotes. The (68.0) is from the cash flow statement.",
+    "claim": "German cash taxes are a new recurring cash drain. The company is now expected to be a cash taxpayer in Germany, owes further catch-up payments in Q4 2026, and estimates about $50 million of 2026 payments for the 2024 and 2025 tax years. Nine-month operating cash flow already includes income taxes of (68.0).",
+    "facts": [
+     "P2",
+     "F3"
+    ],
+    "quotes": [
+     "the Company is now expected to be a cash taxpayer in Germany going forward"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Segment sales are stated in the release table. The structural ATM risk is a generic forward-looking factor and is not tied to a measured effect in the evidence.",
+    "claim": "Banking, the larger segment, shows nine-month net sales of $1,960.6 versus $1,999.0 (table in millions) a year earlier, so group growth depends on Retail. The company lists declining ATM usage from non-cash payment options as a risk.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "the impact of the proliferation of payment options other than cash, which could result in a reduced need for cash in the marketplace and a resulting decline in the usage of ATMs"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Figures are stated in the release and income statement. Whether the charges recur is inferred, and the filings do not say.",
+    "claim": "GAAP results diverge sharply from adjusted results. Third-quarter GAAP diluted EPS was $0.19 versus $1.11 a year earlier, with restructuring of 34.5 and a unconsolidated-subsidiary impairment of 16.9 (table in millions) excluded from adjusted measures.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "EPS of $0.19 (GAAP), compared with $1.11 in the prior year"
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Inferred from the guidance table and nine-month cash flow figures; the evidence does not state how Q4 reaches the outlook.",
+    "claim": "Can full-year free cash flow reach the cut outlook, given nine-month free cash flow excluding discrete tax payments was negative and Q4 still carries German tax payments?",
+    "facts": [
+     "P2",
+     "F3"
+    ],
+    "quotes": [
+     "The revised free cash flow outlook reflects the combined impact of lower expected earnings and working capital requirements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the cash flow and balance sheet figures; the separate buyback release is not in the packet.",
+    "claim": "How and how fast will the new $250 million repurchase program be funded, given falling cash, negative operating cash flow and large buybacks already made?",
+    "facts": [
+     "P2",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Board authorizes new $250 million share repurchase program"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Margins are stated in the release; the split between mix, raw materials and tariffs is not stated.",
+    "claim": "Is the sharp fall in Products gross margin a lasting result of mix and raw material costs, or a one-quarter effect?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "adjusted EBITDA expectations now reflect product mix and cost pressures in raw materials"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Charges and program description are stated; total program cost and expected savings are not in the packet.",
+    "claim": "How long will restructuring and savings-initiative charges continue, and what savings do they produce? They are excluded from adjusted results but are large against GAAP profit.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "Restructuring and other savings initiative expenses incurred during 2026 and 2025 relate to the cost savings initiative focused on operational simplification and automation of processes, and include severance and payroll of employees transitioning out of the organization and the costs of third-parties assisting with the execution of the program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and cash flow statement; the future run-rate of cash tax is not stated.",
+    "claim": "How large will recurring German cash taxes be after the net operating loss carryforward was used, and how will they affect cash conversion?",
+    "facts": [
+     "P2",
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "As a result, the Company is now expected to be a cash taxpayer in Germany going forward"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated only as a risk-factor item and a non-GAAP adjustment note; no terms are given.",
+    "claim": "What are the terms and financial effect of the possible Euronet collaboration and of the planned exit from the unconsolidated Chinese subsidiary?",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "a strategic collaboration with Euronet Worldwide, Inc."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances are stated; maturities, covenants and revolver size are not in the packet because the debt note and MD&A sections were not found.",
+    "claim": "What are the debt maturities, covenants and revolver availability, given lower cash, higher net debt and larger interest expense?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "ability to generate sufficient cash flows to service our indebtedness, fund our operations, make adequate capital investments and return capital to stockholders, including through discretionary share repurchases"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "DBD",
+ "valuation": null,
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "some filed figures are years older than the latest annual report"
+}
