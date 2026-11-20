@@ -318,3 +318,34 @@ def test_late_resize_run_twice_on_the_same_session_writes_nothing_new():
     snap = copy.deepcopy((led["state"], led["trades"], led["closed"]))
     run(led, "2026-11-03", risk())
     assert (led["state"], led["trades"], led["closed"]) == snap
+
+
+# -- market state recorded on each ledger row (WO_MW1): annotation for later attribution, no effect on the book --
+
+def test_the_row_records_the_market_state_and_nothing_else_changes(tmp_path, monkeypatch):
+    path = tmp_path / "market_state.json"
+    path.write_text('{"asof": "2026-11-19", "step": "stress", "driver": "sector_led:AAA"}', encoding="utf-8")
+    monkeypatch.setattr(tp, "MARKET_STATE_JSON", path)
+    assert tp.market_state_record("2026-11-20") == {"step": "stress", "driver": "sector_led:AAA", "as_of": "2026-11-19"}
+    assert tp.market_state_record("2026-11-26")["step"] == "stress"            # seven days old: still read
+    led = tp.empty_ledger()
+    tp.prices_holder["prices"] = {}
+    tp.finalize_ledger(led, 100.0, [], {}, "2026-11-20", "2026-11-01")
+    row = led["nav_series"][-1]
+    assert row["market_state"]["step"] == "stress"
+    assert {k: v for k, v in row.items() if k != "market_state"} == {
+        "date": "2026-11-20", "nav": 100.0, "bench": None, "benches": {}, "stale_marks": [], "price_session": "2026-11-20"}
+
+
+def test_the_market_state_is_null_with_a_reason_when_missing_old_or_unreadable(tmp_path):
+    null = {"step": None, "driver": None, "as_of": None}
+    assert tp.market_state_record("2026-11-20", tmp_path / "none.json") == {**null, "reason": "market_state.json missing or unreadable"}
+    old = tmp_path / "old.json"
+    old.write_text('{"asof": "2026-11-12", "step": "calm"}', encoding="utf-8")
+    assert tp.market_state_record("2026-11-20", old) == {**null, "reason": "market_state.json is 8 days old"}
+    bad = tmp_path / "bad.json"
+    bad.write_text("[1]", encoding="utf-8")
+    assert tp.market_state_record("2026-11-20", bad)["step"] is None
+    noasof = tmp_path / "noasof.json"
+    noasof.write_text('{"step": "calm"}', encoding="utf-8")
+    assert tp.market_state_record("2026-11-20", noasof)["reason"] == "market_state.json has no readable as-of"

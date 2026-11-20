@@ -222,6 +222,9 @@ def main():
     if ok:
         if not run_step("build_daily_price_history", ["scripts/build_daily_price_history.py"], steps):
             print("WARN: build_daily_price_history failed (non-fatal; cache or fallback will be used).")
+        # Each stock's measured driver sensitivities (WO_MW1): annotation only, never fatal; an old or missing exposures file writes an empty list.
+        if not run_step("build_stock_driver_flags", ["scripts/build_stock_driver_flags.py"], steps):
+            print("WARN: build_stock_driver_flags failed (non-fatal; the stock pages show no driver flags).")
         if not run_step("build_momentum_state", ["scripts/build_momentum_state.py"], steps):
             print("WARN: build_momentum_state failed (non-fatal; sifter will use inline fallback).")
     if ok and not run_step("score_factors_dual_door", ["scripts/score_factors_dual_door.py"], steps):

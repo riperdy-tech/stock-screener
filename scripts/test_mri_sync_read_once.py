@@ -75,7 +75,8 @@ class TestMRISnapshotReadOnce(unittest.TestCase):
             self.assertEqual(manifest["files"][name]["mri_date"], date)
             self.assertEqual(manifest["files"][name]["sha256"], sha256(raw).hexdigest())
             self.assertEqual((self.snapshot / name).read_bytes(), raw)
-        self.assertEqual(set(manifest), {"copied_at", "source_dir", "files"})
+        self.assertEqual(set(manifest), {"copied_at", "source_dir", "files", "missing"})
+        self.assertEqual(manifest["missing"], [n for n in self.files if n not in payloads])
 
     def test_missing_optional_and_unparseable_original(self):
         invalid = b"not valid json\xff"
@@ -131,6 +132,31 @@ class TestMRISnapshotReadOnce(unittest.TestCase):
             manifest = mri_sync.sync_mri_snapshot()
         self.assertEqual((self.snapshot / "risk_state.json").read_bytes(), raw)
         self.assertEqual(manifest["files"]["risk_state.json"]["mri_date"], "2026-11-12")
+
+    def test_the_new_state_files_are_allow_listed_with_their_own_dates(self):
+        # market_state and economy_state say `asof`, driver_exposures says `as_of`; daily_read does not exist yet
+        names = ("market_state.json", "economy_state.json", "driver_exposures.json", "daily_read.json")
+        for name in names:
+            self.assertIn(name, type(self).real_snapshot_files)
+        for name, key in zip(names[:3], ("asof", "asof", "as_of")):
+            (self.originals / name).write_bytes(json.dumps({key: "2026-11-19"}).encode())
+        with patch.object(mri_sync, "SNAPSHOT_FILES", names):
+            manifest = mri_sync.sync_mri_snapshot()
+        for name in names[:3]:
+            self.assertEqual(manifest["files"][name]["mri_date"], "2026-11-19")
+        self.assertNotIn("daily_read.json", manifest["files"])
+        self.assertEqual(manifest["missing"], ["daily_read.json"])
+
+    def test_a_missing_source_is_skipped_recorded_and_keeps_the_copy_already_in_the_snapshot(self):
+        self.snapshot.mkdir()
+        kept = self.snapshot / "daily_read.json"
+        kept.write_bytes(b'{"as_of":"2026-11-18"}')
+        (self.originals / "market_state.json").write_bytes(b'{"asof":"2026-11-19"}')
+        with patch.object(mri_sync, "SNAPSHOT_FILES", ("market_state.json", "daily_read.json")):
+            manifest = mri_sync.sync_mri_snapshot()
+        self.assertEqual(manifest["missing"], ["daily_read.json"])
+        self.assertEqual(kept.read_bytes(), b'{"as_of":"2026-11-18"}')
+        self.assertEqual(json.loads(self.manifest_path.read_text()), manifest)
 
 
 if __name__ == "__main__":

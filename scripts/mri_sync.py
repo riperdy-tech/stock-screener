@@ -50,6 +50,13 @@ SNAPSHOT_FILES = (
     "regime_timeline.json",
     "macro_features_timeline.json",
     "sector_validation.json",
+    # The market state, the economy state, the measured driver exposures and the daily read (WO_MW1, operator 2026-11-20). Each
+    # is optional: a missing source file is skipped and named under `missing` in the manifest; the copy already in the snapshot
+    # is left as it was. The first three carry their own date as `asof` or `as_of`.
+    "market_state.json",
+    "economy_state.json",
+    "driver_exposures.json",
+    "daily_read.json",
 )
 
 # The cloud-only files (WO_MP2). The MRI's cloud job (GitHub Actions) writes these and publishes them to the `data/` folder
@@ -96,9 +103,11 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
 
     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
     files: Dict[str, Any] = {}
+    missing = []
     for name in SNAPSHOT_FILES:
         src = outputs_dir / name
         if not src.exists():
+            missing.append(name)
             continue
         # One original read owns the snapshot bytes, metadata and source digest.
         raw = src.read_bytes()
@@ -110,7 +119,7 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
         try:
             doc = json.loads(raw.decode("utf-8"))
             # the shock register says `asof`, the event register's run record `as_of_date`; the others `date`
-            mri_date = doc.get("date") or doc.get("asof") or doc.get("as_of_date")
+            mri_date = doc.get("date") or doc.get("asof") or doc.get("as_of_date") or doc.get("as_of")
             # the daily summary says `run_date`, the two timelines `end_date`, the sector validation `score_end_date`
             mri_date = mri_date or doc.get("run_date") or doc.get("end_date") or doc.get("score_end_date")
         except Exception:
@@ -121,6 +130,7 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
         "copied_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "source_dir": Path(outputs_dir).name,   # the folder's name only: this file is published, and the full path names a user account
         "files": files,
+        "missing": missing,
     }
     # The cloud files are fetched by a separate step (sync_cloud_files); keep what it recorded.
     manifest.update({k: v for k, v in _read_manifest().items() if k.startswith("cloud_")})

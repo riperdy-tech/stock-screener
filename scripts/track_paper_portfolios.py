@@ -69,6 +69,7 @@ PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum s
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
 DIVIDENDS_JSON = DATA / "dividends.json"
+MARKET_STATE_JSON = DATA / "mri" / "market_state.json"        # the MRI's market state; each ledger row records the day's step (annotation only)
 RISK_STATE_JSON = DATA / "mri" / "risk_state.json"            # the MRI's risk dial; its month_decision block drives equal_dial (paper only)
 
 # Ex-dividend calendar for the run, {ticker: [[ex_date, per_share_amount], ...]}.
@@ -1208,12 +1209,33 @@ def ledger_row_due(ledger, as_of, rewrite_same_session=False):
     return as_of > d or (rewrite_same_session and as_of == d and last.get("price_session") == as_of)
 
 
+def market_state_record(session, path=None):
+    """The MRI's market state for a session as {step, driver, as_of}, or the same keys null with a `reason` when the file is
+    missing, unreadable or its as-of is more than DIAL_STALE_DAYS before the session. For later attribution only: it changes
+    no holding, weight, exposure or return."""
+    none = {"step": None, "driver": None, "as_of": None}
+    try:
+        doc = load_json(path or MARKET_STATE_JSON, None)
+    except (OSError, ValueError):
+        doc = None
+    if not isinstance(doc, dict):
+        return {**none, "reason": "market_state.json missing or unreadable"}
+    try:
+        age = (date.fromisoformat(session) - date.fromisoformat(str(doc.get("asof"))[:10])).days
+    except ValueError:
+        return {**none, "reason": "market_state.json has no readable as-of"}
+    if age > DIAL_STALE_DAYS:
+        return {**none, "reason": f"market_state.json is {age} days old"}
+    return {"step": doc.get("step"), "driver": doc.get("driver"), "as_of": str(doc["asof"])[:10]}
+
+
 def finalize_ledger(led, nav, stale, benches, as_of, inception):
     """Append today's NAV point, backfill post-exit marks, recompute summary."""
     led["nav_series"].append({"date": as_of, "nav": round(nav, 4) if nav is not None else None,
                               "bench": benches.get(PRIMARY_BENCHMARK),  # back-compat (IWM)
                               "benches": benches, "stale_marks": stale,
-                              "price_session": as_of})
+                              "price_session": as_of,
+                              "market_state": market_state_record(as_of)})
     backfill_post_exit(led, prices_holder.get("prices", {}), as_of)
     led["summary"] = compute_summary(led["nav_series"], led["trades"], led["closed"], inception)
     led["summary"]["open_positions"] = len(led["state"]["holdings"])
