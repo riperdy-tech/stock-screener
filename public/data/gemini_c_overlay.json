@@ -1,9 +1,9 @@
 {
- "count": 187,
+ "count": 188,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-20T01:06:44Z",
- "list_covered": 158,
+ "generated_at": "2026-11-20T01:27:34Z",
+ "list_covered": 159,
  "list_names": 160,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -6790,6 +6790,41 @@
    "verdict": "NO_CALL",
    "verdict_reason": "minority interests take too large a share of income"
   },
+  "TX": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-11-04T11:57:40.000Z",
+    "accepted_utc": "2026-11-04T16:57:40Z",
+    "accession": "0001342874-26-000052",
+    "decision_time": "2026-11-20T01:07:12Z",
+    "form": "6-K",
+    "period": "2026-09-30"
+   },
+   "claims": 100,
+   "claims_supported": 95,
+   "date": "2026-11-20T01:07:12Z",
+   "family": "commodity",
+   "flags": [
+    "Ternium Investments acquired the NSC Group's remaining participation in the Usiminas control group totaling 153.1 million ordinary shares, increasing Ternium's participation from 51.5% to 83.1%, with investing cash outflows of (315,216) (table in $ thousands).",
+    "Ternium recognized a $405 million write-down of Usiminas' accumulated deferred tax assets as an income tax charge.",
+    "Ternium recorded a $19 million impairment charge on certain mining and fixed assets from Las Encinas, with total annual impairment charges of 18,757 (table in $ thousands)."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [
+    "0001342874-26-000052"
+   ],
+   "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
+  },
   "UGI": {
    "alpha_pts": 1.6430598023748995,
    "analysis": "complete",
@@ -7625,7 +7660,7 @@
  "verdict_counts": {
   "AVOID": 45,
   "BUY": 45,
-  "NO_CALL": 80,
+  "NO_CALL": 81,
   "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
