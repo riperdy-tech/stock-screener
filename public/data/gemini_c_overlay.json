@@ -2,7 +2,7 @@
  "count": 189,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-20T08:09:26Z",
+ "generated_at": "2026-11-20T08:24:59Z",
  "list_covered": 160,
  "list_names": 160,
  "model": "gemini-4-hydrogen-high",
@@ -681,34 +681,35 @@
    "verdict_reason": "expected return +21.2 points a year against the required return over 3 years"
   },
   "BHC": {
-   "alpha_pts": 61.436046975288896,
+   "alpha_pts": null,
    "analysis": "complete",
-   "claims": 143,
-   "claims_supported": 138,
-   "date": "2026-11-18T05:03:11Z",
-   "decided": {
-    "method": "decided.v1",
-    "version": "decided.v2 2026-11-19 WO_NC9a"
+   "based_on": {
+    "accepted": "2026-10-28T22:08:22.000Z",
+    "accepted_utc": "2026-10-29T02:08:22Z",
+    "accession": "0000885590-26-000123",
+    "decision_time": "2026-11-20T08:09:50Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
    },
-   "equity_value": 11693513378.396757,
+   "claims": 136,
+   "claims_supported": 131,
+   "date": "2026-11-20T08:09:50Z",
    "family": "operating",
-   "far_from_price": true,
-   "filed_shares": 375000000.0,
    "flags": [
-    "Bausch Health recorded goodwill impairments of 1,426 (table in USD millions) for the nine-month reporting period, and 0 for the three-month reporting period.",
-    "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity.",
-    "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in the Bausch + Lomb initial public offering."
+    "Bausch Health recorded goodwill impairments of 1,426 (table in millions) during the nine months ended Sep. 30, 2026, compared with 0 in the prior-year nine-month period.",
+    "Both double-blind Phase 3 clinical trials in the RED-C program evaluating rifaximin SSD-40IR failed to achieve their primary endpoint.",
+    "CMS selected Xifaxan\u00ae for the second round of Medicare drug price negotiation, with negotiated prices expected to become effective in 2027."
    ],
    "in_code_book": false,
-   "ke": 0.08378973472633486,
+   "ke": null,
    "loss_record": {
     "cause": "cannot_tell",
-    "explanation": "The provided filings include income statement figures only for the three and nine months ended September 30, 2026 and 2025\u2014where the nine-month 2026 pretax loss coincides with both $1,426 million of goodwill impairments and $1,196 million of interest expense\u2014while omitting the statements of operations and MD&A results discussions for fiscal years 2018 through 2025. Without earnings, expense, interest, impairment, or discontinued-operations breakdowns for 2018 through 2025, the evidence does not establish why the multi-year profit record is thin.",
+    "explanation": "The provided filings include no annual income statements or results-of-operations breakdowns for fiscal years 2018 through 2025, so the evidence does not establish what caused the 2018-2023 pretax losses or thin 2024-2025 pretax profits. The only income statement in the packet covers the three and nine months ended September 30, 2026 and 2025, where both heavy interest expense and a $1,426 million goodwill impairment appear.",
     "label": "the filings in the packet do not say",
     "quotes": [
      {
-      "id": "F2",
-      "quote": "Goodwill impairments | 0 | 0 | 1,426 | 0"
+      "id": "P3",
+      "quote": "The following section generally discusses 2025 and 2024 items and comparisons between 2025 and 2024."
      },
      {
       "id": "F2",
@@ -716,70 +717,31 @@
      },
      {
       "id": "F2",
-      "quote": "Interest expense | (398) | (412) | (1,196) | (1,207)"
+      "quote": "Goodwill impairments | 0 | 0 | 1,426 | 0"
      },
      {
       "id": "F2",
-      "quote": "Income (loss) before income taxes | 597 | 218 | (409) | 311"
+      "quote": "Interest expense | (398) | (412) | (1,196) | (1,207)"
      },
      {
-      "id": "P1",
-      "quote": "Our revenues for 2025, 2024 and 2023 were $10,266 million, $9,625 million and $8,757 million, respectively."
+      "id": "P7",
+      "quote": "It is also noted that, in recent periods, our GAAP Net income (loss) was significantly lower than our Adjusted net income (non-GAAP)."
      }
     ],
     "version": "why_losses.v1 2026-11-18 WO_NC5"
    },
-   "market_cap_at_publish": 3267348103,
    "model": "gemini-4-hydrogen-high",
-   "no_value_reason": null,
+   "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
    "pending_offer": null,
-   "price_at_publish": 8.73,
    "qwen_book": null,
-   "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
-   "seed_base": {
-    "1000": 32.43278034835082,
-    "3000": 29.93262433643189
-   },
-   "seeds_agree": true,
-   "share_unit_note": null,
-   "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
-   "tax_range": {
-    "equity_value_alt": 11153293089.693108,
-    "label": "statutory rate (company's filed rate), not measured",
-    "positive_pretax_years": 2,
-    "pretax_years": 5,
-    "rate": 0.25,
-    "rate_alt": 0.305,
-    "seed_base_alt": {
-     "1000": 30.904027857592933,
-     "3000": 28.58020195410364
-    },
-    "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
-    "status_alt": "ok",
-    "value_alt": {
-     "base": 29.742114905848286,
-     "bear": 16.214929905595728,
-     "bull": 52.1804505646157
-    },
-    "value_per_filed_share_alt": {
-     "base": 29.742114905848286,
-     "bear": 16.214929905595728,
-     "bull": 52.1804505646157
-    }
-   },
-   "upside": 2.5789003833598434,
-   "value_base": 31.18270234239135,
-   "value_bear": 16.695074612178857,
-   "value_bull": 55.26779660493983,
-   "value_per_filed_share": {
-    "base": 31.18270234239135,
-    "bear": 16.695074612178857,
-    "bull": 55.26779660493983
-   },
-   "valued": true,
-   "verdict": "BUY",
-   "verdict_differs_at_alt_tax_rate": false,
-   "verdict_reason": "expected return +61.4 points a year against the required return over 3 years"
+   "release_truncated": [
+    "0000885590-26-000121"
+   ],
+   "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+   "source": "on request (method_changed)",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
   },
   "BIP": {
    "alpha_pts": null,
@@ -8032,11 +7994,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +31.1 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 114,
+ "valued_count": 113,
  "verdict_counts": {
   "AVOID": 47,
-  "BUY": 47,
-  "NO_CALL": 82,
+  "BUY": 46,
+  "NO_CALL": 83,
   "WATCH": 13
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
