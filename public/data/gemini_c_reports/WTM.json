@@ -1,7 +1,15 @@
 {
- "alpha_pts": 1.296983393764961,
+ "alpha_pts": -0.026883039468095227,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-05T13:17:51.000Z",
+  "accepted_utc": "2026-11-05T18:17:51Z",
+  "accession": "0001628280-26-070628",
+  "decision_time": "2026-11-17T07:43:24Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
  "claims": 69,
  "claims_supported": 65,
  "date": "2026-11-17T07:43:24Z",
@@ -9,57 +17,240 @@
   "flags": [
    "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 9 of 9",
+   "run 1000: quotes_verified: 11 of 11",
    "run 3000: base_year_not_representative",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 8 of 8"
+   "run 3000: quotes_verified: 10 of 10"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0936, F 10",
+  "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0931, F 10",
   "route": "financial",
-  "run_gap": 0.12127446361884618,
+  "run_gap": 0.021721615949239402,
   "runs": {
    "1000": {
     "confidence": "low",
     "diagnostics": {
-     "equity_value": 4848735637.017157,
-     "implied_pb": 0.9668787154062682,
-     "seam_ratio": 1.257250000000001,
-     "tv_share": 0.5925096857914365
+     "equity_value": 4828097246.616226,
+     "implied_pb": 0.9623761191556705,
+     "seam_ratio": 1.1483333333333345,
+     "tv_share": 0.5605041663754181
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 9 of 9"
+     "quotes_verified: 11 of 11"
     ],
     "inputs": {
      "book_growth": [
-      0.0,
+      0.005,
+      0.055,
       0.065,
-      0.075,
-      0.075,
-      0.07
+      0.065,
+      0.06
      ],
      "fade_years": 10,
      "long_run_roe": 0.09,
      "roe": [
-      0.05,
-      0.085,
-      0.095,
-      0.095,
+      0.045,
+      0.08,
+      0.09,
+      0.09,
       0.09
      ],
      "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0936, F 10",
+    "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0931, F 10",
     "prior_read_claims": {
      "dropped_unsupported": 4,
      "kept": 65
     },
     "ranges": {
      "book_growth_y3": [
-      0.05,
-      0.1
+      0.03,
+      0.09
+     ],
+     "long_run_roe": [
+      0.075,
+      0.11
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Repurchases and retirements of common shares | (216,800,000) | (9,900,000)"
+       },
+       {
+        "id": "F1",
+        "quote": "Total White Mountains\u2019s common shareholders\u2019 equity | 5,353,100,000 | 5,425,400,000"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is the return less payout. Dividends are negligible, but buybacks are sizeable ($217 million in nine months against $5.4 billion of equity), and year-1 equity is about flat. Later years retain the return less buybacks of roughly 2-3% of equity."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "reduced writings in property as a result of softening market conditions"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years is a middle choice. A diversified acquirer's return should drift to a mature level, but the wide historical dispersion does not justify a long fade."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "Kudu grew adjusted EBITDA, but its trailing 12 months return on equity declined to 8%"
+       },
+       {
+        "id": "P2",
+        "quote": "have historically been cyclical, experiencing periods of severe price competition and less selective underwriting standards (soft markets)"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0931; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "A blend of Ark's specialty underwriting, Kudu at about 8% trailing return on equity, loss-making Distinguished and a volatile investment book points to a return near the 9.3% cost of equity. Ark's top-quartile underwriting could push it higher, but cyclicality caps that."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "White Mountains reported book value per share of $2,243 as of September 30, 2026, a decrease of 1% for the third quarter of 2026 and an increase of 3% for the first nine months of 2026, including dividends."
+       },
+       {
+        "id": "P4",
+        "quote": "combined ratio was 75% and 83% in the third quarter and first nine months of 2026"
+       },
+       {
+        "id": "P3",
+        "quote": "driven primarily by the net gain on sale of the Bamboo Group of approximately $320 per share"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (2026) is mostly known: a 3% annualised nine-month return, with the fourth quarter assumed to be better. Later years recover to about the cost of equity. Ark's combined ratio is strong, but soft property markets, contingent-consideration charges, Distinguished losses and rate-driven marks limit the return."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P3",
+        "quote": "In 2025, White Mountains repurchased and retired 100,581 of its common shares for $203 million"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The long-run nominal anchor is 3.75%. I set growth slightly below it because the company recycles capital through buybacks and sells businesses, which keeps book growth below the return."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_roe",
+      "risk": "Softer property pricing, further Iran-war or catastrophe losses, or the end of favorable reserve development erode Ark's underwriting margin and the group's return."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "roe",
+      "risk": "Further rate-driven or MediaAlpha mark-to-market losses, or goodwill impairment at Distinguished or WTM Partners, keep earnings and book growth low."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "book_growth",
+      "risk": "Heavy buybacks and acquisitions at the group level, plus the rising Ark contingent consideration, slow net book growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.030000000000000002,
+       0.019999999999999997,
+       0.03,
+       0.03,
+       0.024999999999999994
+      ],
+      "long_run_roe": 0.075,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.029999999999999995,
+       0.07999999999999999,
+       0.09,
+       0.09,
+       0.08499999999999999
+      ],
+      "long_run_roe": 0.11,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 24.7% was a one-off. It was lifted by the Bamboo sale gain of about $320 per share, not by operations. In 2026 the nine-month income to common was only $133.3 million on $5,425.4 million of opening equity, about 3% annualised. Unrealized losses from higher rates and the MediaAlpha decline offset solid operating results, and the Ark contingent-consideration charge and the Distinguished losses also weigh. The history is lumpy, with a return of -7% in 2021 and 5% in 2024.",
+     "why": "White Mountains is a holding company with roughly $0.8 billion of undeployed capital. It pays almost no dividend and returns capital through buybacks, so payout is a choice and not a constraint. Ark's regulatory and rating capital matters at the subsidiary level, but nothing in the evidence shows it limiting group book growth. The base year is distorted by the Bamboo gain, so I fade the return to roughly the cost of equity."
+    },
+    "value_at_old_defaults": 4097.003997083987,
+    "values": {
+     "base": 2060.243616330811,
+     "bear": 1832.8051961033602,
+     "bull": 2866.2495234370845
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 4934122844.431065,
+     "implied_pb": 0.9835100147970056,
+     "seam_ratio": 1.198400000000001,
+     "tv_share": 0.5776086659856405
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.0,
+      0.055,
+      0.065,
+      0.07,
+      0.07
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.09,
+     "roe": [
+      0.043,
+      0.08,
+      0.09,
+      0.095,
+      0.095
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 65
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.03,
+      0.09
      ],
      "long_run_roe": [
       0.07,
@@ -75,106 +266,110 @@
       "quotes": [
        {
         "id": "F3",
-        "quote": "Repurchases and retirements of common shares | (216,800,000)"
+        "quote": "Repurchases and retirements of common shares"
        },
        {
         "id": "P4",
-        "quote": "repurchased and retired 103,827 of its common shares for $217"
+        "quote": "undeployed capital is roughly $0.8 billion"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 growth is about zero because common equity fell from $5,425 million to $5,353 million over nine months after $217 million of buybacks and unrealized losses. In later years growth is below ROE because the company keeps buying back stock and does little else with payout."
+      "why": "Year 1 growth is about zero because roughly $217 million of buybacks absorb most of the low earnings. Later growth is earnings minus continued repurchases and a tiny dividend, so it runs below ROE."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P5",
-        "quote": "Undeployed capital remains at roughly $0.8 billion."
+        "id": "P4",
+        "quote": "undeployed capital is roughly $0.8 billion"
        }
       ],
       "quotes_given": 1,
-      "why": "A ten-year fade reflects a diversified, opportunistic acquirer whose returns drift to a mid-cycle level slowly as new deployments mature, with substantial undeployed capital still to put to work."
+      "why": "A diversified holding company with segments at different maturity (Distinguished loss-making, WTM Partners small and growing) needs a long fade to a steady-state return."
      },
      "long_run_roe": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "reduced writings in property as a result of the softening market conditions"
+        "id": "P2",
+        "quote": "The property and casualty insurance and reinsurance industries are highly competitive and have historically been cyclical"
        },
        {
-        "id": "F1",
-        "quote": "Contingent consideration | 400,000,000.0 | 328,300,000"
+        "id": "P4",
+        "quote": "reduced writings in property as a result of softening market conditions"
        }
       ],
       "quotes_given": 2,
-      "why": "Ark's combined ratio of 75-83% is strong, but the property market is softening and catastrophe or Iran-war losses can arrive. Contingent consideration, minority interests and unprofitable Distinguished dilute the group return, so the long-run return sits near the cost of equity."
+      "why": "Ark is a strong underwriter, but the industry is cyclical and property is softening. Group equity also carries lower-return assets, goodwill and mark-to-market holdings, so the long-run return sits slightly below the 9.3% cost of equity."
      },
      "roe": {
       "quotes": [
        {
         "id": "P3",
-        "quote": "the net gain on sale of the Bamboo Group of approximately $320 per share"
+        "quote": "The increase in book value per share was driven primarily by the net gain on sale of the Bamboo Group of approximately $320 per share"
+       },
+       {
+        "id": "F2",
+        "quote": "Net income (loss) attributable to White Mountains\u2019s common shareholders"
        },
        {
         "id": "P4",
-        "quote": "Results in the first nine months of 2026 were driven by solid operating company results, partially offset by unrealized losses due to the impact of higher interest rates and a decline in the MediaAlpha share price."
-       },
-       {
-        "id": "REC",
-        "quote": "Return on opening common equity over the years above: min -0.0705, p25 0.0543, median 0.1359, p75 0.2234, max 0.2468, last 0.2468."
+        "quote": "Ark\u2019s combined ratio was 75% and 83% in the third quarter and first nine months of 2026"
        }
       ],
       "quotes_given": 3,
-      "why": "The 2025 return was inflated by the Bamboo gain and the nine-month 2026 return is only about 3.5% of opening equity, so year 1 is low. It should recover toward roughly 9-10% as investment marks stop falling and Ark and the new businesses keep earning."
+      "why": "Year 1 (FY2026) is depressed: 9M income to common was $133 million against a 2025 base inflated by the Bamboo gain. Later years recover toward a normalized high-single-digit return, with Ark's profitability offset by investment volatility and Distinguished losses."
      },
      "terminal_growth": {
       "quotes": [
        {
+        "id": "P1",
+        "quote": "making opportunistic and value-oriented acquisitions of businesses and assets in the insurance, financial services and related sectors"
+       },
+       {
         "id": "REC",
-        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Base year (the last filed fiscal year): ended 2025-12-31"
        }
       ],
-      "quotes_given": 1,
-      "why": "Growth is a nominal long-run figure, slightly below the anchor given the buyback-driven, capital-light and cyclical model."
+      "quotes_given": 2,
+      "why": "Growth tracks the long-run nominal anchor. Capital recycling through acquisitions and dispositions supports modest compounding, but buybacks and cyclicality limit it."
      }
     },
     "risks": [
      {
+      "bear_value": 0.06,
+      "input_hit": "roe",
+      "risk": "Soft property cycle, catastrophes or Iran war losses erode Ark's combined ratio"
+     },
+     {
       "bear_value": 0.07,
       "input_hit": "long_run_roe",
-      "risk": "Softer property pricing and large catastrophe or Iran-war losses lower Ark's profits for good, or investment marks keep falling"
+      "risk": "Higher rates or weak markets keep investment marks negative, and Distinguished or Kudu goodwill is impaired, lowering permanent returns"
      },
      {
-      "bear_value": 0.02,
-      "input_hit": "roe",
-      "risk": "Further unrealized losses (rates, MediaAlpha) and Distinguished impairments leave 2026 return very low"
-     },
-     {
-      "bear_value": 0.02,
-      "input_hit": "book_growth",
-      "risk": "Heavier buybacks and acquisitions funded by debt reduce equity growth"
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Buybacks and acquisitions are less accretive, so the growth anchor is lower"
      }
     ],
     "route": "financial",
     "scenarios": {
      "bear": {
       "book_growth": [
-       -0.024999999999999994,
-       0.04000000000000001,
-       0.05,
-       0.05,
-       0.04500000000000001
+       -0.035,
+       0.019999999999999997,
+       0.03,
+       0.035,
+       0.035
       ],
       "long_run_roe": 0.07,
       "terminal_growth": 0.025
      },
      "bull": {
       "book_growth": [
-       0.02500000000000001,
-       0.09000000000000001,
-       0.1,
-       0.1,
-       0.09500000000000001
+       0.024999999999999994,
+       0.07999999999999999,
+       0.09,
+       0.095,
+       0.095
       ],
       "long_run_roe": 0.11,
       "terminal_growth": 0.045
@@ -184,194 +379,23 @@
      "base_year_representative": "no",
      "capital_constrained": "no",
      "institution": "insurer",
-     "roe_position": "The 2025 return of 24.7% is not representative because it includes the one-off Bamboo sale gain. 2026 is running far lower: nine-month income to common is $133 million, held back by unrealized losses on bonds (higher rates) and the MediaAlpha stake, by Ark's contingent-consideration charge, by minority holders' share of profit, and by the loss-making Distinguished. Underlying earnings power is a strong Ark combined ratio and steady investment income, offset by a diversified holding company drag.",
-     "why": "White Mountains is a Bermuda holding company with roughly $0.8 billion of undeployed capital and an active buyback, so group-level capital does not limit book growth. Book growth is held down by buybacks and acquisitions rather than by regulation. Subsidiary-level regulatory and rating capital matters at Ark but is not shown to bind the group."
+     "roe_position": "The 2025 return of 24.7% is inflated by the Bamboo Group sale gain, about $320 per share of book value. Underlying returns are lower and lumpy. In 9M 2026, income to common was only $133 million on $5.4 billion of equity, because higher interest rates and the MediaAlpha decline produced unrealized losses. Ark earns well (combined ratio 83% for the nine months), but a large share of equity sits in lower-yielding or marked-to-market assets and in loss-making Distinguished.",
+     "why": "White Mountains is a Bermuda holding company with roughly $0.8 billion of undeployed capital and active buybacks, so regulatory capital is not what limits book growth. Growth is limited by earnings, which are volatile, and by repurchases that shrink the share count and equity. Subsidiary-level rating and regulatory needs at Ark and BAM matter locally but do not bind the group."
     },
-    "value_at_old_defaults": 4062.1241812965413,
+    "value_at_old_defaults": 4097.003997083987,
     "values": {
-     "base": 2069.8827220791413,
-     "bear": 1693.3970730394599,
-     "bull": 2916.9820387616464
-    }
-   },
-   "3000": {
-    "confidence": "low",
-    "diagnostics": {
-     "equity_value": 5474721500.541972,
-     "implied_pb": 1.0917055677853962,
-     "seam_ratio": 1.2960000000000091,
-     "tv_share": 0.6144037600912554
-    },
-    "flags": [
-     "base_year_not_representative",
-     "confidence_low",
-     "quotes_verified: 8 of 8"
-    ],
-    "inputs": {
-     "book_growth": [
-      0.005,
-      0.07,
-      0.08,
-      0.08,
-      0.08
-     ],
-     "fade_years": 10,
-     "long_run_roe": 0.095,
-     "roe": [
-      0.045,
-      0.09,
-      0.1,
-      0.1,
-      0.1
-     ],
-     "terminal_growth": 0.035
-    },
-    "old_defaults_inputs": "roe 0.1359, growth 0.0375, r 0.0936, F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 4,
-     "kept": 65
-    },
-    "ranges": {
-     "book_growth_y3": [
-      0.05,
-      0.1
-     ],
-     "long_run_roe": [
-      0.08,
-      0.11
-     ],
-     "terminal_growth": [
-      0.025,
-      0.04
-     ]
-    },
-    "reasons": {
-     "book_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "White Mountains repurchased and retired 103,827 of its common shares for $217"
-       },
-       {
-        "id": "F1",
-        "quote": "Total White Mountains\u2019s common shareholders\u2019 equity | 5,353,100,000 | 5,425,400,000"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 equity is roughly flat because buybacks ($217 million in nine months) consumed most of the earnings. Later growth follows ROE less a modest payout, mostly buybacks and a tiny dividend."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "pre-tax loss of $13 million and $41 million"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A ten-year fade reflects a mix of a strong specialty insurer and weaker, acquisition-driven units. These units' returns are uncertain and should converge slowly toward a modest excess over the cost of equity."
-     },
-     "long_run_roe": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "reduced writings in property as a result of softening market conditions"
-       },
-       {
-        "id": "P3",
-        "quote": "Ark\u2019s combined ratio was 83% in both 2025 and 2024."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Ark's combined ratio is in the 80s, but the property cycle is softening, which should compress margins over time. A diversified holding company with drag from minorities and loss-making units should earn only slightly above the 9.36% cost of equity."
-     },
-     "roe": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on opening common equity over the years above: min -0.0705, p25 0.0543, median 0.1359, p75 0.2234, max 0.2468, last 0.2468."
-       },
-       {
-        "id": "P4",
-        "quote": "an increase of 3% for the first nine months of 2026, including dividends"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 is low: nine-month income to common was only $133 million after investment losses, and the 2025 return was a one-off peak. I expect a recovery toward about 10% as Ark's underwriting profit continues and investment marks normalise, but with Distinguished losses and minority interests as drags."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "As of September 30, 2026, White Mountains\u2019s undeployed capital is roughly $0.8 billion."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "I set it slightly below the 3.75% long-run nominal anchor. The company returns capital via buybacks and has undeployed capital for acquisitions, so long-run book growth should track nominal growth."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.075,
-      "input_hit": "long_run_roe",
-      "risk": "Large catastrophe or Iran-war losses, or adverse reserve development, at Ark, with the property cycle softening faster"
-     },
-     {
-      "bear_value": 0.03,
-      "input_hit": "roe",
-      "risk": "Further unrealized investment losses (rates, MediaAlpha) and Distinguished goodwill impairment depress near-term returns"
-     },
-     {
-      "bear_value": 0.03,
-      "input_hit": "book_growth",
-      "risk": "Book growth stays low if buybacks and acquisition spending continue to outpace earnings"
-     }
-    ],
-    "route": "financial",
-    "scenarios": {
-     "bear": {
-      "book_growth": [
-       -0.024999999999999998,
-       0.04000000000000001,
-       0.05,
-       0.05,
-       0.05
-      ],
-      "long_run_roe": 0.08,
-      "terminal_growth": 0.025
-     },
-     "bull": {
-      "book_growth": [
-       0.025000000000000005,
-       0.09000000000000001,
-       0.1,
-       0.1,
-       0.1
-      ],
-      "long_run_roe": 0.11,
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "capital_constrained": "no",
-     "institution": "insurer",
-     "roe_position": "The 2025 return of 24.7% is not a normal level: it includes an $849 million net gain on the Bamboo sale. The 2026 return is much lower, with nine-month income to common of $133 million on $5.4 billion of equity. Ark earns strong underwriting profits, but these are offset by unrealized investment losses (higher rates, the MediaAlpha decline), Distinguished's pre-tax losses, the contingent consideration charge at Ark, and minority interests. Returns swing widely with investment marks and disposals.",
-     "why": "The base year 2025 is inflated by the Bamboo gain, so it is not a run-rate. Year 1 (2026) is depressed by mark-to-market losses and buybacks that shrink equity. Capital looks ample, with about $0.8 billion undeployed and buybacks below book value, so payout rather than regulatory capital sets book growth. Ark's regulated insurers need capital, but the holding company is not the binding limit."
-    },
-    "value_at_old_defaults": 4062.1241812965413,
-    "values": {
-     "base": 2337.110597586272,
-     "bear": 1990.2003032461078,
-     "bull": 2991.55796279506
+     "base": 2105.486814615347,
+     "bear": 1762.6399592967978,
+     "bull": 2960.2263674163523
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 4062.1241812965413,
-  "value_at_old_defaults_quoted": 4062.1241812965413,
+  "value_at_old_defaults": 4097.003997083987,
+  "value_at_old_defaults_quoted": 4097.003997083987,
   "version": "decided.fin.v1 2026-11-18 WO_NC9b"
  },
- "equity_value": 5584321585.014028,
+ "equity_value": 5278605315.573424,
  "family": "financial",
  "far_from_price": false,
  "filed_shares": 2534300.0,
@@ -390,12 +414,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 2069.8827220791413,
-  "3000": 2337.110597586272
+  "1000": 2060.243616330811,
+  "3000": 2105.486814615347
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1213,17 +1237,17 @@
   ]
  },
  "ticker": "WTM",
- "upside": 0.05351035786164515,
+ "upside": -0.004164554214839078,
  "valuation": null,
- "value_base": 2203.4966598327064,
- "value_bear": 1841.7986881427837,
- "value_bull": 2954.2700007783533,
+ "value_base": 2082.865215473079,
+ "value_bear": 1797.722577700079,
+ "value_bull": 2913.2379454267184,
  "value_per_filed_share": {
-  "base": 2203.4966598327064,
-  "bear": 1841.7986881427837,
-  "bull": 2954.2700007783533
+  "base": 2082.865215473079,
+  "bear": 1797.722577700079,
+  "bull": 2913.2379454267184
  },
  "valued": true,
- "verdict": "WATCH",
- "verdict_reason": "expected return +1.3 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -0.0 points a year against the required return over 3 years"
 }

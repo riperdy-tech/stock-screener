@@ -1,82 +1,177 @@
 {
- "alpha_pts": 12.347416739690692,
+ "alpha_pts": -2.660082398138547,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-10-29T20:01:06.000Z",
+  "accepted_utc": "2026-10-30T00:01:06Z",
+  "accession": "0001628280-26-068200",
+  "decision_time": "2026-11-17T23:28:29Z",
+  "form": "10-Q",
+  "period": "2026-10-29"
+ },
  "claims": 90,
  "claims_supported": 90,
  "date": "2026-11-17T23:28:29Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
-   "run 1000: confidence_low",
    "run 1000: quotes_verified: 12 of 12",
+   "run 1000: capital_event_read_differs_from_xbrl: disposals_received xbrl 62,700,000, read 40,500,000",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 374,200,000, 20.4% of the market cap 1,837,844,041",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_outstanding_at_interim_not_found_base_count_kept",
    "run 3000: base_year_not_representative",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 13 of 13"
+   "run 3000: quotes_verified: 16 of 16",
+   "run 3000: capital_event_read_differs_from_xbrl: disposals_received xbrl 62,700,000, read 40,500,000",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 374,200,000, 20.4% of the market cap 1,837,844,041",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_outstanding_at_interim_not_found_base_count_kept"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0292 and margin 0.0324, margin 0.0269 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.1058), F 10",
-  "run_gap": 0.47748813063319706,
+  "old_defaults_inputs": "year 1 growth 0.0292 and margin 0.0324, margin 0.0269 (persist), growth 0.0375, terminal RONIC 0.0944 (equity return r 0.1053), F 10",
+  "run_gap": 0.07431832028542733,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": -242100000.0,
+      "excess_cash_before": 6300000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001628280-26-068200",
+        "amount": 169300000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 169300000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001628280-26-068200",
+        "amount": 142000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 142000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "accn": "0001628280-26-068200",
+        "amount": 62700000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 40500000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinesses"
+       },
+       "shares_issued_proceeds": {
+        "amount": 200000.0,
+        "printed": 200,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Issuance of shares under stock compensation plans | 200 | 500"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: disposals_received xbrl 62,700,000, read 40,500,000",
+       "capital_events_over_5pct_of_market_cap: events sum to 374,200,000, 20.4% of the market cap 1,837,844,041"
+      ],
+      "gross_events": 374200000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 1837844041.0,
+      "net_effect_on_excess_cash": -248400000.0,
+      "shares": {
+       "after": 34700000.0,
+       "before": 34700000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 6300000.0,
+     "excess_cash_after": -242100000.0,
      "excess_cash_before": 6300000.0,
      "k0_after": 194956116.5060241,
      "k0_before": 194956116.5060241,
      "k0_interest": 189500000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
+     ],
      "x0_after": 127107565.26922904,
      "x0_before": 127107565.26922904
     },
-    "confidence": "low",
+    "confidence": "medium",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 1988126186.4833746,
-     "seam_ratio": 1.0222956916914898,
-     "tv_share": 0.3278105772792559,
-     "wedge_rate_5": 0.0010988124039363072
+     "equity_value": 1906267945.4435482,
+     "seam_ratio": 1.019102656847213,
+     "tv_share": 0.32625619029733943,
+     "wedge_rate_5": 0.0007930675487528936
     },
     "flags": [
      "base_year_not_representative",
-     "confidence_low",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 12 of 12",
+     "capital_event_read_differs_from_xbrl: disposals_received xbrl 62,700,000, read 40,500,000",
+     "capital_events_over_5pct_of_market_cap: events sum to 374,200,000, 20.4% of the market cap 1,837,844,041",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
-     "capex_to_revenue": 0.016,
+     "capex_to_revenue": 0.015,
      "fade_years": 10,
-     "long_run_op_margin": 0.028,
+     "long_run_op_margin": 0.027,
      "op_margin": [
-      0.031,
-      0.031,
-      0.0305,
       0.03,
-      0.03
+      0.0295,
+      0.029,
+      0.029,
+      0.029
      ],
      "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
-      0.027,
       0.03,
+      0.035,
       0.03,
       0.03,
       0.03
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0292 and margin 0.0324, margin 0.0269 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.1058), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0292 and margin 0.0324, margin 0.0269 (persist), growth 0.0375, terminal RONIC 0.0944 (equity return r 0.1053), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 0,
      "kept": 90
     },
     "ranges": {
      "long_run_op_margin": [
-      0.025,
+      0.022,
       0.032
      ],
      "rev_growth_y3": [
@@ -84,7 +179,312 @@
       0.05
      ],
      "terminal_growth": [
+      0.02,
+      0.038
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue -0.0152"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchases of land, property and equipment | (223,700) | (112,600)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The five-year pooled capex is 1.5% of revenue, and 2026 nine-month land, property and equipment purchases of 223.7M (about 1.9% of revenue) are well above the prior year, so I use 1.5% as a middle value."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The retail automotive industry remains highly fragmented"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The industry is described as fragmented, and the margin and growth mix is shifting between segments, so I use a moderate 10-year fade to the steady state."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "has trended downwards as inventory, particularly for new vehicles, has become more readily available"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $15,153.6 million | 0.0653 | 0.0243"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Dealer margins above the long-run median tend to partly revert. The company itself says per-unit profit is trending down toward pre-pandemic levels, and the 17-year history sits around 2-3%. Fixed Operations and F&I support a level somewhat above the old median, so I choose 2.7%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | 112,400 | 122,700 | 376,700 | 244,300"
+       },
+       {
+        "id": "P3",
+        "quote": "Impairment charges were approximately $173.8 million and $3.9 million in 2025 and 2024, respectively."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month operating income of 376.7M on 11.6B revenue is about 3.2%, but Q3 was 2.8% and slipping. Year 1 is therefore about 3.0% (Q4 is seasonally weaker), with a gentle fade as new vehicle GPU and EchoPark conversion stay under pressure. The 2025 figure carried a large impairment."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0944."
+       },
+       {
+        "id": "P2",
+        "quote": "We do not have any cost advantage in purchasing new vehicles from manufacturers due to economies of scale or otherwise."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Return on tangible capital is 14.7% now, but competitive pressure and no purchasing cost advantage should pull incremental returns down, and heavy EchoPark and acquisition capital earns low returns. I set 12%, above the 9.4% breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "All-time record quarterly total revenues of $4.0 billion, up 0.4% year-over-year"
+       },
+       {
+        "id": "F2",
+        "quote": "Revenues | $ 3,988,800 | $ 3,973,800 | $ 11,611,300 | $ 11,282,300"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Consolidated growth is slow: Q3 revenue was up only 0.4%, with franchised new vehicle declines offset by EchoPark, which is growing quickly, and by Powersports acquisitions. Nine-month growth is about 2.9%, and the April Harley-Davidson stores add to year 1 and year 2. Management's own 2026 industry volume outlook is flat to down, so I assume about 3% a year after that."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1053; long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature, fragmented retailer should grow roughly with nominal GDP minus some drag. Consolidation by acquisition is already priced through the acquisition cash figures, so I stay below the 3.75% anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.022,
+      "input_hit": "long_run_op_margin",
+      "risk": "Further new vehicle price competition and inventory build erode franchised gross profit and SG&A leverage"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Affordability, tariffs and rates cut unit volumes, so growth stalls"
+     },
+     {
+      "bear_value": 0.095,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "EchoPark and acquisition capital earn poor returns, with negative operating cash flow and thin liquidity"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.022,
+      "rev_growth": [
+       0.010000000000000002,
+       0.015000000000000006,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.032,
+      "rev_growth": [
+       0.05,
+       0.05500000000000001,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "terminal_growth": 0.038
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Debt has risen in 2026 through a 190M term debt issue, larger finance leases and heavy buybacks and capex funded by borrowing, so the base-year 1,615M probably understates the level the company will carry."
+     },
+     "margin_position": "The 2025 GAAP operating margin of 2.43% is depressed by a $173.8M franchise-asset impairment. Without it the margin would be about 3.6%. The 2026 nine-month margin is about 3.2%, above the 17-year range of roughly 2-3%. Margins are drifting down as new vehicle gross profit per unit shrinks with rising inventory and SG&A takes a higher share of gross profit.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 26.3% is close to the 28.5% implied for the 2026 nine months (63.5M tax on 222.9M pretax), a plausible blended US federal and state rate."
+     },
+     "why": "FY2025 includes the large non-cash impairment and a $40M cyber insurance recovery that cut SG&A, so the reported 2.43% mixes a one-time hit and a one-time benefit. Nine-month 2026 operating income of 376.7M is flattered by comparison with the impaired prior year, and Q3 operating income fell to 112.4M from 122.7M. I expect the margin to settle near 2.9-3.0% and then drift toward the long-run median."
+    },
+    "value_at_old_defaults": 93.46465800473139,
+    "values": {
+     "base": 53.01416621372676,
+     "bear": 36.088270672613376,
+     "bull": 76.6851043389565
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": -242100000.0,
+      "excess_cash_before": 6300000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001628280-26-068200",
+        "amount": 169300000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 169300000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001628280-26-068200",
+        "amount": 142000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 142000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "accn": "0001628280-26-068200",
+        "amount": 62700000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 40500000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinesses"
+       },
+       "shares_issued_proceeds": {
+        "amount": 200000.0,
+        "printed": 200,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Issuance of shares under stock compensation plans | 200 | 500"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: disposals_received xbrl 62,700,000, read 40,500,000",
+       "capital_events_over_5pct_of_market_cap: events sum to 374,200,000, 20.4% of the market cap 1,837,844,041"
+      ],
+      "gross_events": 374200000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 1837844041.0,
+      "net_effect_on_excess_cash": -248400000.0,
+      "shares": {
+       "after": 34700000.0,
+       "before": 34700000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": -242100000.0,
+     "excess_cash_before": 6300000.0,
+     "k0_after": 194956116.5060241,
+     "k0_before": 194956116.5060241,
+     "k0_interest": 189500000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
+     ],
+     "x0_after": 127107565.26922904,
+     "x0_before": 127107565.26922904
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 2036293990.9764276,
+     "seam_ratio": 1.0373852312490532,
+     "tv_share": 0.35020825131422567,
+     "wedge_rate_5": 0.0011918896263794696
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 16 of 16",
+     "capital_event_read_differs_from_xbrl: disposals_received xbrl 62,700,000, read 40,500,000",
+     "capital_events_over_5pct_of_market_cap: events sum to 374,200,000, 20.4% of the market cap 1,837,844,041",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.016,
+     "fade_years": 10,
+     "long_run_op_margin": 0.029,
+     "op_margin": [
+      0.031,
+      0.03,
+      0.03,
+      0.0295,
+      0.029
+     ],
+     "return_on_new_investment_long_run": 0.12,
+     "rev_growth": [
+      0.03,
+      0.035,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0292 and margin 0.0324, margin 0.0269 (persist), growth 0.0375, terminal RONIC 0.0944 (equity return r 0.1053), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 90
+    },
+    "ranges": {
+     "long_run_op_margin": [
       0.025,
+      0.033
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.055
+     ],
+     "terminal_growth": [
+      0.02,
       0.035
      ]
     },
@@ -101,59 +501,67 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Nine-month 2026 capex of 223,700 is about 1.9% of revenue, nearly double last year's, while the five-year pooled ratio is 1.5%. I assume about 1.6% as real estate and EchoPark spending stays elevated."
+      "why": "Capital spending is rising, with nine-month 2026 purchases of property and equipment at 223.7M against 112.6M a year earlier, or about 1.9% of revenue. The five-year pooled average is 1.5%, so I use 1.6% (entered as a positive fraction), assuming spending moderates somewhat."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Expect same store fixed operations gross profit growth between 2% - 3% in FY 2026 (previously mid single digit percentage growth)"
+        "quote": "Expect same store fixed operations gross profit growth between 2% - 3% in FY 2026"
        }
       ],
       "quotes_given": 1,
-      "why": "The fade is a 10-year judgement rather than evidence-derived. Fixed Operations and F&I are steady, but the cyclical, competitive core justifies a moderate fade period."
+      "why": "Growth and margins converge to a mature state over about 10 years, given a mix of steady Fixed Operations and F&I plus cyclical vehicle sales and ongoing acquisitions."
      },
      "long_run_op_margin": {
       "quotes": [
-       {
-        "id": "P2",
-        "quote": "If gross profit per unit continues to decline, as we anticipate it may"
-       },
-       {
-        "id": "P4",
-        "quote": "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The company itself expects vehicle gross profit per unit to keep declining as inventory normalizes, and the franchised segment is losing new vehicle volume. I fade to 2.8%, slightly above the historical median of about 2.6-2.9%, supported by Fixed Operations and F&I."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $15,153.6 million | 0.0653 | 0.0243"
-       },
        {
         "id": "P3",
         "quote": "Impairment charges were approximately $173.8 million and $3.9 million in 2025 and 2024, respectively."
        },
        {
-        "id": "F2",
-        "quote": "Operating income (loss) | 112,400 | 122,700 | 376,700 | 244,300"
+        "id": "P2",
+        "quote": "has trended downwards as inventory, particularly for new vehicles, has become more readily available."
+       },
+       {
+        "id": "P3",
+        "quote": "Fixed Operations gross margin increased 60 basis points, to 51.0%, in 2025"
        }
       ],
       "quotes_given": 3,
-      "why": "2025 operating margin was 2.43% after the $173.8M impairment. Without it and with 2026 nine-month operating income of 376,700 on 11,611,300 of revenue, the run-rate is about 3.1%. Margins ease slowly as new vehicle gross profit per unit compresses and SG&A stays high."
+      "why": "The 2025 reported margin was pulled down by a large impairment. The company says gross profit per unit remains above pre-COVID levels but has been trending down, and it has no scale purchasing advantage. I settle at about 2.9%, in the middle of the 2.2-4.3% range seen in recent years, which includes the post-COVID peak."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Operating income (loss) | 112,400 | 122,700 | 376,700 | 244,300"
+       },
+       {
+        "id": "P4",
+        "quote": "Retail new vehicle gross profit decreased 7% and 13% during the three and nine months ended September 30, 2026, respectively"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $15,153.6 million | 0.0653 | 0.0243"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 operating income is 376.7 on 11,611.3 of revenue (about 3.2%), while Q3 operating income fell to 112.4 from 122.7 on pressure in new-vehicle gross profit. I start at 3.1% and drift down to 2.9% as per-unit gross profit continues to normalize."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
+        "quote": "Base year: return on tangible capital 0.1467"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0944."
        }
       ],
-      "quotes_given": 1,
-      "why": "Current return on tangible capital is 14.7% against a break-even of 9.5%. Dealership acquisitions carry large intangible and goodwill premiums and competition is intense, so new investment earns less, about 12%, though still above break-even."
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 14.7% reflects thin tangible capital, since inventory is funded by floor plan debt. New investment in acquisitions, real estate and EchoPark earns less, and EchoPark segment income is low. I use 12%, above the 9.44% break-even and below the base-year return."
      },
      "rev_growth": {
       "quotes": [
@@ -164,287 +572,67 @@
        {
         "id": "P4",
         "quote": "We currently estimate the 2026 new vehicle industry volume will be between 15.8 million vehicles (a decrease of 3% compared to 2025) and 16.2 million vehicles (a decrease of 1% compared to 2025)."
+       },
+       {
+        "id": "P1",
+        "quote": "we plan to continue to enhance our nationwide EchoPark distribution network to reach 90% of the U.S. population at maturity"
        }
       ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 revenue is up about 2.9%, with franchised new vehicle volume falling while EchoPark, used and Powersports acquisitions add growth. Management guides to a flat-to-down industry (15.8 to 16.2 million vehicles), so I assume about 3% growth with roughly 2.7% in 2026."
+      "quotes_given": 3,
+      "why": "Nine-month 2026 revenue is up about 2.9% (11,611.3 vs 11,282.3), with EchoPark and Powersports growth offsetting falling franchised new-vehicle volume. Management expects flat-to-lower industry volume in 2026, so I assume about 3% growth in year 1 and a modest 3-3.5% afterwards, helped by Powersports acquisitions, EchoPark expansion and inflation."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "The retail automotive industry remains highly fragmented, and we believe that further consolidation may occur."
+        "id": "REC",
+        "quote": "Cost of equity r 0.1053; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "Large and well-capitalized technology-focused companies have continued to enter into the automotive space in recent years."
        }
       ],
-      "quotes_given": 1,
-      "why": "A fragmented industry with ongoing consolidation supports growth around nominal GDP, but direct-to-consumer threats and mature unit volumes argue for a rate below the 3.75% anchor."
+      "quotes_given": 2,
+      "why": "A mature, fragmented-industry retailer with acquisition optionality and a steady Fixed Operations business should grow roughly with nominal GDP. I set 3.0%, below the 3.75% anchor, because direct-to-consumer and technology entrants and flat unit volumes limit organic growth."
      }
     },
     "risks": [
      {
-      "bear_value": 0.024,
+      "bear_value": 0.025,
       "input_hit": "long_run_op_margin",
-      "risk": "Franchised new vehicle gross profit per unit and volume keep falling as days' supply rises, compressing margins toward the 2018-2022 range."
+      "risk": "Continued erosion of franchised new-vehicle gross profit per unit and volume, as days' supply rises and price competition grows, pushing the margin below my path"
      },
      {
       "bear_value": 0.01,
       "input_hit": "rev_growth",
-      "risk": "Affordability, tariffs, or a weak auto cycle cut industry volumes, and EchoPark and Powersports fail to offset the franchised decline."
+      "risk": "Weak affordability, tariffs and interest rates cut industry volume, and EchoPark and Powersports growth fails to offset the franchised decline"
      },
      {
-      "bear_value": 0.095,
+      "bear_value": 0.09,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Tight liquidity (negative operating cash flow, rising near-term maturities) forces costly refinancing or constrains growth spending, lowering returns on new investment."
+      "risk": "Inventory build and negative operating cash flow strain floor plan and credit availability, forcing slower growth or costly financing"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.025,
       "rev_growth": [
-       0.007000000000000003,
-       0.010000000000000002,
-       0.010000000000000002,
-       0.010000000000000002,
-       0.010000000000000002
-      ],
-      "terminal_growth": 0.025
-     },
-     "bull": {
-      "long_run_op_margin": 0.032,
-      "rev_growth": [
-       0.047,
-       0.05,
-       0.05,
-       0.05,
-       0.05
-      ],
-      "terminal_growth": 0.035
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Debt outside floor plan rose with a 190,000 issuance and current maturities jumped to 193,300, while buybacks and capex ran ahead of negative operating cash flow, so the future level relative to size is uncertain."
-     },
-     "margin_position": "The 2025 GAAP operating margin of 2.43% is depressed by a $173.8M franchise-asset impairment, about 1.1 points of revenue, partly offset by $40.0M of cyber insurance proceeds that reduced SG&A. Nine-month 2026 operating margin is about 3.2% (376.7/11,611.3). Q3 slipped to about 2.8% as new vehicle gross profit per unit fell and SG&A rose. That sits near or slightly above the long-run median of about 2.6-2.9%, with the franchised new vehicle business softening.",
-     "tax_rate_representative": {
-      "answer": "yes",
-      "why": "The base-year rate of 26.3% is close to the nine-month 2026 rate of 28.5% (63.5 of 222.9), so a mid-to-high 20s rate looks sustainable."
-     },
-     "why": "2025 operating income was cut by a large non-cash impairment, so the base-year margin understates normal earnings. Underlying margin in 2026 is higher, near 3%. New vehicle gross profit per unit is trending down and used and EchoPark volumes are growing at thin margins. I therefore model a margin near 3% fading toward the long-run median."
-    },
-    "value_at_old_defaults": 93.11385833482487,
-    "values": {
-     "base": 62.77367450375613,
-     "bear": 49.42426298319407,
-     "bull": 82.90544258245114
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 6300000.0,
-     "excess_cash_before": 6300000.0,
-     "k0_after": 194956116.5060241,
-     "k0_before": 194956116.5060241,
-     "k0_interest": 189500000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 127107565.26922904,
-     "x0_before": 127107565.26922904
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 3238770279.3184237,
-     "seam_ratio": 0.9727875115234932,
-     "tv_share": 0.2081576877551899,
-     "wedge_rate_5": -0.011690416006777966
-    },
-    "flags": [
-     "base_year_not_representative",
-     "confidence_low",
-     "quotes_verified: 13 of 13"
-    ],
-    "inputs": {
-     "capex_to_revenue": -0.016,
-     "fade_years": 10,
-     "long_run_op_margin": 0.028,
-     "op_margin": [
-      0.03,
-      0.0295,
-      0.0295,
-      0.029,
-      0.029
-     ],
-     "return_on_new_investment_long_run": 0.12,
-     "rev_growth": [
-      0.03,
-      0.035,
-      0.035,
-      0.035,
-      0.033
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0292 and margin 0.0324, margin 0.0269 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.1058), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 0,
-     "kept": 90
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.024,
-      0.032
-     ],
-     "rev_growth_y3": [
-      0.01,
-      0.05
-     ],
-     "terminal_growth": [
-      0.022,
-      0.035
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "F3",
-        "quote": "Purchases of land, property and equipment | (223,700) | (112,600)"
-       },
-       {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue -0.0152"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 capex of 223.7M is about 1.9% of revenue, well above the 1.0% base-year level, because of owned real estate and EchoPark and Powersports expansion. The pooled five-year figure is 1.5%, so I use 1.6% (negative sign, matching the FILED RECORD convention)."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2024-12-31 | $14,224.3 million | -0.0103 | 0.0324"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Margin and growth normalization from cyclical-high gross profit per unit should take roughly a decade, so I use 10 years."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "If gross profit per unit continues to decline, as we anticipate it may, it could adversely affect our business and results of operation."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Vehicle gross profit per unit is normalizing from post-COVID highs and management itself anticipates further declines, so I fade the margin below the current level to around the long-run median of about 2.5-2.9%."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Operating income (loss) | 112,400 | 122,700 | 376,700 | 244,300"
-       },
-       {
-        "id": "P3",
-        "quote": "Impairment charges were approximately $173.8 million and $3.9 million in 2025 and 2024, respectively."
-       },
-       {
-        "id": "P4",
-        "quote": "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "The 2025 margin is distorted by the impairment. Nine-month 2026 operating income is 376,700 on 11,611,300 of revenue, and Q3 is weaker than a year ago. I set about 3.0% for 2026 and keep it near there, since new-vehicle gross profit per unit is under pressure but fixed operations and the EchoPark and Powersports mix provide some offset."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0946."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The base-year return on tangible capital of 14.7% is above the 9.46% level at which growth adds no value. Competition and floor-plan-heavy capital should erode the spread, so I use 12%."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "total revenues of $4.0 billion, up 0.4% year-over-year"
-       },
-       {
-        "id": "P4",
-        "quote": "We currently estimate the 2026 new vehicle industry volume will be between 15.8 million vehicles (a decrease of 3% compared to 2025) and 16.2 million vehicles (a decrease of 1% compared to 2025)."
-       },
-       {
-        "id": "P6",
-        "quote": "EchoPark Segment revenues of $596.0 million, up 14% year-over-year"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Nine-month revenue is up about 2.9% and Q3 was only up 0.4%, as franchised new-vehicle declines are offset by EchoPark and Powersports growth. Year 1 is about 3% including the April Harley-Davidson acquisitions. Later years run at roughly 3.5% on EchoPark and Powersports growth plus fixed operations, while industry volume guidance is soft."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "The retail automotive industry remains highly fragmented, and we believe that further consolidation may occur."
-       },
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "A fragmented industry with consolidation potential supports growth near nominal GDP. I set it below the 3.75% anchor because of direct-to-consumer and mature-market risks."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.023,
-      "input_hit": "long_run_op_margin",
-      "risk": "Further new-vehicle gross profit per unit erosion and falling franchised volumes, with inventory days' supply up to 65, push the margin to the low-2% range."
-     },
-     {
-      "bear_value": 0.01,
-      "input_hit": "rev_growth",
-      "risk": "Consumer affordability, tariffs and weak industry volume keep franchised new-vehicle sales shrinking, and EchoPark volume growth does not turn into profit, so revenue growth stalls."
-     },
-     {
-      "bear_value": -0.02,
-      "input_hit": "capex_to_revenue",
-      "risk": "Higher capital intensity from owned real estate and new-market openings, funded by debt while operating cash flow is negative, raises the capex burden."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.024,
-      "rev_growth": [
        0.0049999999999999975,
        0.010000000000000002,
        0.010000000000000002,
-       0.010000000000000002,
-       0.008
+       0.0049999999999999975,
+       0.0049999999999999975
       ],
-      "terminal_growth": 0.022
+      "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.032,
+      "long_run_op_margin": 0.033,
       "rev_growth": [
-       0.045,
-       0.05,
-       0.05,
-       0.05,
-       0.048
+       0.049999999999999996,
+       0.055,
+       0.055,
+       0.049999999999999996,
+       0.049999999999999996
       ],
       "terminal_growth": 0.035
      }
@@ -454,29 +642,29 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Non-floor-plan debt of $1.6B at the base year has risen in 2026 (long-term debt 1,556,400 plus current maturities 193,300) as acquisitions, capex and buybacks were funded by borrowing, and operating cash flow was negative, so the base-year level may understate the ongoing level."
+      "why": "Non-floor-plan debt rose with a 190,000 issuance in 2026, and finance leases and floor plan notes are large and tied to inventory, so the filed $1,615.4M may understate the level going forward."
      },
-     "margin_position": "The 2025 GAAP operating margin of 2.4% is depressed by a $173.8M impairment (about 1.1 points of revenue) and flattered by $40M of cyber insurance proceeds booked in SG&A. Excluding both, the underlying margin was about 3.2-3.5%. In 2026 the margin runs near 3.2% for nine months and fell to about 2.8% in Q3, as new-vehicle gross profit per unit shrinks and SG&A rises. This is above the long-run median of about 2.5-2.9%, so it should drift down toward that median.",
+     "margin_position": "The 2025 GAAP operating margin of 2.43% is depressed by a $173.8M franchise-asset impairment and flattered by $40M of cyber insurance proceeds. Excluding both, the underlying margin is about 3.3-3.5%. In 2026 the margin runs near 3.2% for nine months, with Q3 at 2.8% (112.4/3,988.8) as franchised new-vehicle gross profit and volume decline and SG&A rises. This is a thin-margin, cyclical retailer whose per-unit profits are normalizing down from the post-COVID highs.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The base-year rate of 26.3% is close to the 2026 nine-month provision of 63,500 on pretax income of 222,900 (about 28.5%), so a rate in the high 20s looks sustainable."
+      "why": "The 26.3% base-year rate is close to the 28.5% implied by nine-month 2026 (63.5 tax on 222.9 pretax), which is a plausible range for a U.S. state-and-federal taxpayer."
      },
-     "why": "The base-year operating margin includes a $173.8M non-cash impairment, and the cyber insurance gain partly offsets it. Neither is a run-rate item. Year 1 (2026) is better represented by the nine-month figures, where operating income is 376,700 on revenue of 11,611,300. The Q3 margin is weakening, so I set 2026 and later margins on a normalized basis."
+     "why": "The 2025 reported margin includes a large non-cash impairment and a one-time insurance gain, so it understates the underlying run-rate. Year 1 (2026) is better anchored on the nine-month 2026 margin, which is about 3.2% and falling in Q3. Gross profit per unit is trending down as inventory normalizes, so I use a long-run margin slightly below the 2026 level."
     },
-    "value_at_old_defaults": 93.11385833482487,
+    "value_at_old_defaults": 93.46465800473139,
     "values": {
-     "base": 102.14766572819374,
-     "bear": 80.88432079895907,
-     "bull": 122.7342899529554
+     "base": 57.10614447351953,
+     "bear": 39.51926799869759,
+     "bull": 77.9656886579423
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 93.11385833482487,
-  "value_at_old_defaults_quoted": 93.11385833482487,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 93.46465800473139,
+  "value_at_old_defaults_quoted": 93.46465800473139,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 2861385253.02433,
+ "equity_value": 1910587390.423723,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 34700000.0,
@@ -495,12 +683,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 62.77367450375613,
-  "3000": 102.14766572819374
+  "1000": 53.01416621372676,
+  "3000": 57.10614447351953
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1545,17 +1733,17 @@
   ]
  },
  "ticker": "SAH",
- "upside": 0.49395917414489143,
+ "upside": -0.0024623364112941193,
  "valuation": null,
- "value_base": 82.46067011597493,
- "value_bear": 65.15429189107657,
- "value_bull": 102.81986626770328,
+ "value_base": 55.060155343623144,
+ "value_bear": 37.80376933565549,
+ "value_bull": 77.32539649844941,
  "value_per_filed_share": {
-  "base": 82.46067011597493,
-  "bear": 65.15429189107657,
-  "bull": 102.81986626770328
+  "base": 55.060155343623144,
+  "bear": 37.80376933565549,
+  "bull": 77.32539649844941
  },
  "valued": true,
- "verdict": "WATCH",
- "verdict_reason": "expected return +12.3 points a year against the required return over 3 years; the two runs do not both reach BUY"
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -2.7 points a year against the required return over 3 years"
 }

@@ -1,38 +1,138 @@
 {
- "alpha_pts": 63.76072220286411,
+ "alpha_pts": 24.274479560187753,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-04T21:22:42.000Z",
+  "accepted_utc": "2026-11-05T02:22:42Z",
+  "accession": "0001922446-26-000108",
+  "decision_time": "2026-11-18T05:41:06Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
  "claims": 94,
  "claims_supported": 92,
  "date": "2026-11-18T05:41:06Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
-   "run 1000: debt_level_representative_no: Debt was $2.7B at the end of 2025 and $3.1B at Sep 2026, and the Birch acquisition adds about $1.5B of ABS, so debt rises with acquisition-driven scale.",
+   "run 1000: debt_level_representative_no: Debt rose from $2,715.5M at the base year to $3,102,588 thousand at 2026-09-30, and the pending Birch deal would add roughly $1.5B of ABS debt.",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 9 of 9",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 1000: capital_event_read_differs_from_xbrl: acquisitions_paid xbrl 0, read 481,916,000",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 860,124,000, 96.0% of the market cap 895,746,599",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
    "run 3000: base_year_not_representative",
-   "run 3000: debt_level_representative_no: Total debt was $2,715.5M at the end of 2025 and was already $3,102.6M at September 30, 2026, and the roughly $1.8B Birch deal adds about $1.5B of ABS debt, so debt will be well above the base year relative to base-year size.",
+   "run 3000: debt_level_representative_no: Debt rose from $2.7B at year-end 2025 to $3.1B at September 2026 and is set to rise by roughly $1.8B more if the Birch deal closes, so the base-year level understates the go-forward debt relative to size.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 13 of 13"
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: capital_event_read_differs_from_xbrl: acquisitions_paid xbrl 0, read 481,916,000",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 860,124,000, 96.0% of the market cap 895,746,599",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.1753 and margin -0.0148, margin 0.0821 (persist), growth 0.0375, terminal RONIC 0.0803 (equity return r 0.0846), F 10",
-  "run_gap": 0.22314448811696935,
+  "old_defaults_inputs": "year 1 growth -0.1753 and margin -0.0148, margin 0.0821 (persist), growth 0.0375, terminal RONIC 0.0802 (equity return r 0.0841), F 10",
+  "run_gap": 0.23845596072539982,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": -263371000.0,
+      "excess_cash_before": 29697000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 481916000.0,
+        "printed": 481916,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Consideration for asset acquisitions, net of cash acquired | (481,916) | (49,989)"
+         }
+        ],
+        "read_above_xbrl": true,
+        "scale": "thousands",
+        "source": "read",
+        "xbrl_amount": 0.0,
+        "xbrl_tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "amount": 94680000.0,
+        "printed": 94680,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Repurchases of common stock (stock repurchase program) | (94,680) | (43,519)"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "disposals_received": {
+        "accn": "0001922446-26-000108",
+        "amount": 283528000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-04",
+        "form": "10-Q",
+        "read_amount": 283528000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinesses"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: acquisitions_paid xbrl 0, read 481,916,000",
+       "capital_events_over_5pct_of_market_cap: events sum to 860,124,000, 96.0% of the market cap 895,746,599"
+      ],
+      "gross_events": 860124000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 895746599.0,
+      "net_effect_on_excess_cash": -293068000.0,
+      "shares": {
+       "after": 70719000.0,
+       "before": 74478592.0,
+       "change": -3759592.0,
+       "explained_range": [
+        -14477064.220183486,
+        -3619266.0550458715
+       ],
+       "interim": 70719000.0,
+       "price_used": 13.08,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 29697000.0,
+     "excess_cash_after": -263371000.0,
      "excess_cash_before": 29697000.0,
      "k0_after": 235867689.48859233,
      "k0_before": 235867689.48859233,
      "k0_interest": 209967000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
      "x0_after": 236327955.30401206,
      "x0_before": 236327955.30401206
     },
@@ -40,39 +140,44 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2709342153.883652,
-     "seam_ratio": 0.9523457968619173,
-     "tv_share": 0.2859513197939985,
-     "wedge_rate_5": -0.02966442205709223
+     "equity_value": 1536392679.3129535,
+     "seam_ratio": 0.9635838002324635,
+     "tv_share": 0.3493092530698816,
+     "wedge_rate_5": -0.028408229985134568
     },
     "flags": [
      "base_year_not_representative",
-     "debt_level_representative_no: Debt was $2.7B at the end of 2025 and $3.1B at Sep 2026, and the Birch acquisition adds about $1.5B of ABS, so debt rises with acquisition-driven scale.",
+     "debt_level_representative_no: Debt rose from $2,715.5M at the base year to $3,102,588 thousand at 2026-09-30, and the pending Birch deal would add roughly $1.5B of ABS debt.",
      "confidence_low",
-     "quotes_verified: 9 of 9"
+     "quotes_verified: 13 of 13",
+     "capital_event_read_differs_from_xbrl: acquisitions_paid xbrl 0, read 481,916,000",
+     "capital_events_over_5pct_of_market_cap: events sum to 860,124,000, 96.0% of the market cap 895,746,599",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.1,
-     "fade_years": 10,
-     "long_run_op_margin": 0.22,
+     "capex_to_revenue": 0.12,
+     "fade_years": 8,
+     "long_run_op_margin": 0.2,
      "op_margin": [
-      0.09,
-      0.27,
-      0.26,
-      0.25,
-      0.24
+      0.07,
+      0.22,
+      0.22,
+      0.21,
+      0.21
      ],
      "return_on_new_investment_long_run": 0.09,
      "rev_growth": [
-      -0.22,
-      0.62,
-      0.03,
-      0.0,
-      -0.01
+      -0.23,
+      0.25,
+      0.01,
+      0.02,
+      0.02
      ],
-     "terminal_growth": 0.025
+     "terminal_growth": 0.015
     },
-    "old_defaults_inputs": "year 1 growth -0.1753 and margin -0.0148, margin 0.0821 (persist), growth 0.0375, terminal RONIC 0.0803 (equity return r 0.0846), F 10",
+    "old_defaults_inputs": "year 1 growth -0.1753 and margin -0.0148, margin 0.0821 (persist), growth 0.0375, terminal RONIC 0.0802 (equity return r 0.0841), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 2,
      "kept": 92
@@ -80,15 +185,15 @@
     "ranges": {
      "long_run_op_margin": [
       0.1,
-      0.3
+      0.28
      ],
      "rev_growth_y3": [
-      -0.05,
-      0.1
+      -0.06,
+      0.08
      ],
      "terminal_growth": [
-      0.015,
-      0.035
+      0.0,
+      0.03
      ]
     },
     "reasons": {
@@ -100,51 +205,63 @@
        },
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0686"
+        "quote": "capital expenditure / revenue 0.0686"
        }
       ],
       "quotes_given": 2,
-      "why": "The 2026 guide of $225-255M is high relative to the depressed GAAP revenue, while the pooled history is 0.0686 and 2025 was 0.1009. With revenue rising after Birch, I use about 0.10."
+      "why": "2026 guided capex of $225-255M against underlying revenue of about $1.8B is roughly 13%, well above the pooled 6.9%. I use 12% because the declining base needs maintenance spending plus non-operated and Oklahoma development."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P3",
-        "quote": "an estimated 55% increase in adjusted EBITDA(c)"
+        "quote": "Leverage Target | 2.0x to 2.5x"
        }
       ],
       "quotes_given": 1,
-      "why": "Margins and growth should normalize over about a decade after the Birch integration, given the cyclical commodity exposure."
+      "why": "The margin and growth normalisation after the hedge distortion and the acquisition wave should take several years, so I use 8."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P2",
-        "quote": "approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months"
+        "id": "REC",
+        "quote": "2025-12-31 | $1,829.1 million | 1.4154 | 0.2925"
+       },
+       {
+        "id": "P1",
+        "quote": "managing a diversified portfolio of mature, long-life assets"
        }
       ],
-      "quotes_given": 1,
-      "why": "Commodity prices set margins, and hedges fix about 80% of the next twelve months, so realized margins stay below spot-driven peaks. I fade to 0.22, below the 0.29 base year because DD&A is rising and gas realizations are weak."
+      "quotes_given": 2,
+      "why": "A mature, hedged, gas-weighted producer faces high depletion and accretion charges and a commodity price cycle. The 5-year GAAP median is meaningless because of hedge marks, so I fade to a mid-cycle margin of about 20%, slightly below the near-term underlying level."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "F2",
-        "quote": "Gain (loss) on derivatives | $ (378,369) | $ 111,048 | $ (635,718) | $ (4,165)"
+        "quote": "Income (loss) from operations | (235,253) | 180,884 | (14,019) | 284,153"
+       },
+       {
+        "id": "P3",
+        "quote": "Adjusted EBITDA margin | 56% | 66% | 58% | 61%"
        }
       ],
-      "quotes_given": 1,
-      "why": "Year 1 is depressed by $393.8M of unsettled derivative marks recorded through Q3. From year 2 I assume no marks, a margin near the roughly 0.28 pre-mark level, then slight erosion from DD&A growth and liquids-heavy LOE."
+      "quotes_given": 2,
+      "why": "Year 1 is depressed by the $394M unsettled derivative loss, which leaves a margin of about 7%. From year 2 I use an underlying margin of about 22%. This reflects Q3 revenue ex-marks of about $457M against operating expenses of about $344M, which implies roughly 20-25%, with some continuing property-sale gains. The margin drifts down slightly as hedges roll off and liquids-heavy LOE rises."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0802."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2132"
        }
       ],
-      "quotes_given": 1,
-      "why": "Buying producing properties and levered ABS financing support returns modestly above the 0.0803 break-even, but not near the 0.2132 base-year return on tangible capital."
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital (0.2132) is inflated by derivative marks and acquired reserves, and acquisitions are made at market prices. New investment should earn only slightly above the 0.0802 break-even and near the 0.0841 cost of equity."
      },
      "rev_growth": {
       "quotes": [
@@ -154,38 +271,47 @@
        },
        {
         "id": "P3",
-        "quote": "an estimated 55% increase in adjusted EBITDA(c)"
+        "quote": "(Gain) loss on fair value adjustments of unsettled derivatives | 348,341 | (69,508) | 393,832 | 8,121"
        }
       ],
       "quotes_given": 2,
-      "why": "FY2026 GAAP revenue falls well below 2025 because 9-month revenue is only $947.6M after the derivative loss, with little offset in Q4 if marks are flat. Year 2 jumps on a full year of Birch, which management says adds about 55% to adjusted EBITDA. After that, growth is flat to slightly negative because acquired assets decline, with growth only from acquisitions."
+      "why": "Year 1 GAAP revenue falls about 23% because the nine-month derivative loss pulls reported revenue down, and I assume no further mark in Q4. Year 2 recovers as marks revert to zero and a full year of Sheridan and Camino is included. After that, growth is near flat because normal declines offset development and non-operated drilling. Birch is excluded because its purchase price is not in the since-base-year figures."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "P2",
-        "quote": "the Barnett asset sale in the second quarter of 2026 and normal production declines"
+        "quote": "normal production declines"
+       },
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
-      "quotes_given": 1,
-      "why": "A mature gas-weighted producer with normal declines and growth only through acquisitions grows below the 0.0375 nominal anchor."
+      "quotes_given": 2,
+      "why": "The assets are mature and decline naturally, and growth comes only from acquisitions that must be paid for separately. I therefore set growth well below the 3.75% anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.0,
-      "input_hit": "rev_growth",
-      "risk": "Birch acquisition fails to close or ABS financing is not completed, so year-2 growth does not occur"
-     },
-     {
       "bear_value": 0.12,
       "input_hit": "long_run_op_margin",
-      "risk": "Gas and liquids prices fall or hedge losses persist, compressing the long-run margin"
+      "risk": "Lower oil, NGL or gas prices or rolled-off hedges compress the underlying margin."
      },
      {
-      "bear_value": 0.01,
+      "bear_value": 0.17,
+      "input_hit": "capex_to_revenue",
+      "risk": "Higher required maintenance and development capex, plus plugging and ARO cash costs, exceed my assumption."
+     },
+     {
+      "bear_value": 0.0,
       "input_hit": "terminal_growth",
-      "risk": "Acquisition pipeline stalls and declines on mature wells dominate, lowering terminal growth"
+      "risk": "Production declines and the Barnett sale are not offset, so organic growth stays negative."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "op_margin",
+      "risk": "Further large derivative marks or the Birch financing push year 1-2 margins well below my estimates."
      }
     ],
     "scenarios": {
@@ -193,23 +319,23 @@
       "long_run_op_margin": 0.1,
       "rev_growth": [
        -0.3,
-       0.54,
-       -0.05,
-       -0.08,
-       -0.09
+       0.18,
+       -0.05999999999999999,
+       -0.04999999999999999,
+       -0.04999999999999999
       ],
-      "terminal_growth": 0.015
+      "terminal_growth": 0.0
      },
      "bull": {
-      "long_run_op_margin": 0.3,
+      "long_run_op_margin": 0.28,
       "rev_growth": [
-       -0.15,
-       0.69,
-       0.1,
-       0.07,
-       0.060000000000000005
+       -0.16,
+       0.32,
+       0.08,
+       0.09000000000000001,
+       0.09000000000000001
       ],
-      "terminal_growth": 0.035
+      "terminal_growth": 0.03
      }
     },
     "situation": {
@@ -217,20 +343,20 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "no",
-      "why": "Debt was $2.7B at the end of 2025 and $3.1B at Sep 2026, and the Birch acquisition adds about $1.5B of ABS, so debt rises with acquisition-driven scale."
+      "why": "Debt rose from $2,715.5M at the base year to $3,102,588 thousand at 2026-09-30, and the pending Birch deal would add roughly $1.5B of ABS debt."
      },
-     "margin_position": "The filed margin of 0.2925 for 2025 is GAAP operating income over revenue, and revenue includes derivative marks. Marks swung margins from -0.46 to +0.57 over five years. In 2026 a $635.7M derivative loss cut 9-month GAAP revenue to $947.6M, so year 1 is far below the underlying margin of roughly 0.28 before marks. Gas is about 72% of volumes at weak realized prices. Margins then rise as the Birch acquisition adds scale.",
+     "margin_position": "The GAAP operating margin swings with mark-to-market gains and losses on hedges that cover about 80% of production. It was 0.2925 in 2025 and is about -1.5% for the first nine months of 2026, only because of a large unsettled derivative loss. Excluding that loss, the underlying margin is roughly 20-28%, and it is exposed to oil, NGL and gas price swings and to hedges rolling off.",
      "tax_rate_representative": {
       "answer": "unclear",
-      "why": "The 0.21 rate sits against a nine-month benefit of $145M on a pretax loss, and the deferred tax assets rose, so the sustainable cash rate is not evident."
+      "why": "The 21% filed rate is roughly statutory, but 2026 shows a large tax benefit on a pretax loss, and the evidence does not explain the drivers."
      },
-     "why": "2025 revenue of $1,829.1M jumped 142% on the Maverick and Canvas acquisitions and includes derivative gains. FY2026 GAAP revenue will fall sharply on unsettled derivative losses, and Birch (~$1.8B, expected Q4 2026) will reset scale again. The base year is therefore not a steady-state reference for either growth or margin."
+     "why": "Reported revenue and operating margin are distorted by non-cash derivative marks. The 5-year margins run from -0.46 to +0.57, so the median is not a stable anchor. Large acquisitions (Maverick, Canvas, Sheridan, Camino) changed the scale of the business in 2025 and 2026. Year 1 (2026) GAAP revenue falls sharply because of a $394M unsettled derivative loss, not because of operations. I exclude the pending Birch deal from the forecast because its cost is not in the interim figures."
     },
-    "value_at_old_defaults": -7.562375453325316,
+    "value_at_old_defaults": -7.628310931611196,
     "values": {
-     "base": 39.47870960166452,
-     "bear": 12.8416787346824,
-     "bull": 94.36022624804028
+     "base": 19.605628778672386,
+     "bear": 1.3236484692638764,
+     "bull": 62.15875133619395
     }
    },
    "3000": {
@@ -248,12 +374,90 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "charge",
-       "what": "Loss on debt extinguishment recorded in 2025 (nine-month figure; the full-year amount is not in the packet and may be larger)"
+       "what": "Loss on debt extinguishment (the 2025 figure shown is for the nine months, and the filed non-operating residual of about $26M suggests it matches the full year)"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -263371000.0,
+      "excess_cash_before": 29697000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 481916000.0,
+        "printed": 481916,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Consideration for asset acquisitions, net of cash acquired | (481,916) | (49,989)"
+         }
+        ],
+        "read_above_xbrl": true,
+        "scale": "thousands",
+        "source": "read",
+        "xbrl_amount": 0.0,
+        "xbrl_tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "amount": 94680000.0,
+        "printed": 94680,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Repurchases of common stock (stock repurchase program) | (94,680) | (43,519)"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "disposals_received": {
+        "accn": "0001922446-26-000108",
+        "amount": 283528000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-04",
+        "form": "10-Q",
+        "read_amount": 283528000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinesses"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: acquisitions_paid xbrl 0, read 481,916,000",
+       "capital_events_over_5pct_of_market_cap: events sum to 860,124,000, 96.0% of the market cap 895,746,599"
+      ],
+      "gross_events": 860124000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 895746599.0,
+      "net_effect_on_excess_cash": -293068000.0,
+      "shares": {
+       "after": 70719000.0,
+       "before": 74478592.0,
+       "change": -3759592.0,
+       "explained_range": [
+        -14477064.220183486,
+        -3619266.0550458715
+       ],
+       "interim": 70719000.0,
+       "price_used": 13.08,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 29697000.0,
+     "excess_cash_after": -263371000.0,
      "excess_cash_before": 29697000.0,
      "k0_after": 208896689.48859233,
      "k0_before": 235867689.48859233,
@@ -262,7 +466,10 @@
      "one_offs_gain": 0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 257635045.30401206,
      "x0_before": 236327955.30401206
@@ -271,54 +478,59 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 3396784914.5579805,
-     "seam_ratio": 0.9589610650627399,
-     "tv_share": 0.436980424181074,
-     "wedge_rate_5": -0.029413996054628504
+     "equity_value": 1261311256.8995724,
+     "seam_ratio": 0.9376089831561492,
+     "tv_share": 0.3086680541521424,
+     "wedge_rate_5": -0.02475250697683986
     },
     "flags": [
      "base_year_not_representative",
-     "debt_level_representative_no: Total debt was $2,715.5M at the end of 2025 and was already $3,102.6M at September 30, 2026, and the roughly $1.8B Birch deal adds about $1.5B of ABS debt, so debt will be well above the base year relative to base-year size.",
+     "debt_level_representative_no: Debt rose from $2.7B at year-end 2025 to $3.1B at September 2026 and is set to rise by roughly $1.8B more if the Birch deal closes, so the base-year level understates the go-forward debt relative to size.",
      "confidence_low",
-     "quotes_verified: 13 of 13"
+     "quotes_verified: 12 of 12",
+     "capital_event_read_differs_from_xbrl: acquisitions_paid xbrl 0, read 481,916,000",
+     "capital_events_over_5pct_of_market_cap: events sum to 860,124,000, 96.0% of the market cap 895,746,599",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
      "capex_to_revenue": 0.12,
-     "fade_years": 6,
-     "long_run_op_margin": 0.22,
+     "fade_years": 8,
+     "long_run_op_margin": 0.17,
      "op_margin": [
-      0.06,
-      0.26,
-      0.25,
-      0.24,
-      0.23
+      0.08,
+      0.2,
+      0.2,
+      0.19,
+      0.18
      ],
-     "return_on_new_investment_long_run": 0.1,
+     "return_on_new_investment_long_run": 0.09,
      "rev_growth": [
       -0.22,
-      0.85,
+      0.25,
       0.02,
-      0.02,
-      0.02
+      0.0,
+      -0.01
      ],
      "terminal_growth": 0.02
     },
-    "old_defaults_inputs": "year 1 growth -0.1753 and margin -0.0148, margin 0.0821 (persist), growth 0.0375, terminal RONIC 0.0803 (equity return r 0.0846), F 10",
+    "old_defaults_inputs": "year 1 growth -0.1753 and margin -0.0148, margin 0.0821 (persist), growth 0.0375, terminal RONIC 0.0802 (equity return r 0.0841), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 2,
      "kept": 92
     },
     "ranges": {
      "long_run_op_margin": [
-      0.1,
-      0.32
+      0.08,
+      0.26
      ],
      "rev_growth_y3": [
-      -0.04,
-      0.08
+      -0.06,
+      0.1
      ],
      "terminal_growth": [
-      0.01,
+      0.0,
       0.03
      ]
     },
@@ -331,21 +543,21 @@
        },
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0686"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0686"
        }
       ],
       "quotes_given": 2,
-      "why": "2026 capex guidance of $225-255M is about 17% of depressed 2026 revenue. Against the larger post-Birch revenue base, including the Oklahoma development program, I use 12%, above the 6.9% pooled history."
+      "why": "2026 capex guidance of $225-255M against a GAAP revenue base of roughly $1.4-1.8B is about 0.13-0.15 of revenue, above the pooled 0.0686. I use 0.12 as growth capex (Oklahoma program, non-operated JV) is balanced against asset sales."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P2",
-        "quote": "approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months"
+        "quote": "These increases were partially offset by the Barnett asset sale in the second quarter of 2026 and normal production declines."
        }
       ],
       "quotes_given": 1,
-      "why": "The hedge book (about 80% of the next 12 months) and the Birch integration smooth the path, so margins and growth converge to normal over about six years, not abruptly."
+      "why": "Normal declines and acquisition-driven volume swings mean the shift to steady-state growth and margins takes a moderate number of years."
      },
      "long_run_op_margin": {
       "quotes": [
@@ -354,107 +566,103 @@
         "quote": "2023-12-31 | $1,948.8 million | 0.0153 | 0.5691"
        },
        {
-        "id": "REC",
-        "quote": "2024-12-31 | $757.3 million | -0.6114 | -0.1282"
+        "id": "P2",
+        "quote": "As of September 30, 2026, approximately 80% of our production was fixed through commodity derivative contracts over the next twelve months."
        }
       ],
       "quotes_given": 2,
-      "why": "Reported GAAP margins span -0.13 to 0.57 across the cycle, and the base year is above the median. Cyclical base rates say an above-median margin keeps roughly half its gap, but about 80% of production is hedged and assets are low-decline. I set a normalised GAAP margin of about 0.22, with a wide range."
+      "why": "Margins have swung from -0.35 to +0.57 over the filed history, and a margin above the long-run median tends to keep only part of the gap. Around 80% of production is hedged, which caps upside, and DD&A and accretion rise as acquisitions are added. I fade to 0.17, below the 2025 level."
      },
      "op_margin": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Adjusted EBITDA margin | 56% | 66%"
-       },
-       {
-        "id": "P3",
-        "quote": "providing an estimated 55% increase in adjusted EBITDA"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The 2026 margin is crushed by non-cash derivative losses. From 2027 the margin recovers toward the cash-margin level, with Birch adding EBITDA, but DD&A and accretion keep it well below the 56% Adjusted EBITDA margin. I assume a modest drift down as realized prices normalise and liquids-heavy LOE rises."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "We aim to obtain proved developed producing wells through acquisitions in accordance with our growth strategy"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The company buys producing wells and invests little in drilling, which gives decent but cyclical returns. The base-year return of 0.21 is inflated by the cycle and the acquisition accounting, so I use about 0.10, modestly above the 0.0803 level at which growth adds no value."
-     },
-     "rev_growth": {
       "quotes": [
        {
         "id": "F2",
         "quote": "Gain (loss) on derivatives | $ (378,369) | $ 111,048 | $ (635,718) | $ (4,165)"
        },
        {
-        "id": "P2",
-        "quote": "The acquisition is expected to close in the fourth quarter of 2026"
+        "id": "P3",
+        "quote": "Adjusted EBITDA Margin(9) | 56% | 66%"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 (2026) falls because the 9-month derivative loss cuts GAAP revenue to $947.6M against $1,149M a year earlier. Year 2 jumps with a full year of Birch, expected to close in Q4 2026, and with 2026 hedge marks not repeating. After that, growth is low because the assets are mature and decline, and further growth depends on acquisitions."
+      "why": "Year 1 is low because the nine-month derivative loss of $635,718 is already booked. From year 2 I assume a roughly 20% underlying margin with no further net derivative losses, then a slow drift down as the Q3 EBITDA margin fell to 56% from 66% on liquids-heavy cost growth."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0802."
+       },
+       {
+        "id": "P1",
+        "quote": "We aim to obtain proved developed producing wells through acquisitions in accordance with our growth strategy rather than through development activities."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth comes from buying producing wells at market prices and from limited development capital, so returns should sit only modestly above the 0.0802 break-even rather than at the 0.21 base-year return."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | 108,512 | 499,770 | 947,564 | 1,148,982"
+       },
+       {
+        "id": "P7",
+        "quote": "The aggregate purchase price for the Transactions is approximately $1.8 billion (inclusive of repayment of indebtedness)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) falls because GAAP revenue carries large derivative losses: nine-month total revenue was $948M against $1,829M for 2025, and Q4 is unlikely to close the gap. Year 2 rebounds as marks normalise and the Sheridan and Camino deals run for a full year. After that, flat to slightly positive growth reflects mature declines offset by small development and acquisitions. Birch is excluded because it is not yet paid for."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "diversified portfolio of mature, long-life assets"
-       },
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "managing a diversified portfolio of mature, long-life assets"
        }
       ],
-      "quotes_given": 2,
-      "why": "A portfolio of mature, long-life, declining natural-gas-weighted assets supports growth below the long-run nominal anchor, so I set it near 2%."
+      "quotes_given": 1,
+      "why": "The asset base is mature, long-life gas-weighted production with natural declines, so growth sits below the 0.0375 anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.15,
-      "input_hit": "rev_growth",
-      "risk": "Birch acquisition fails to close or its financing fails, so the year-2 revenue step-up does not occur"
-     },
-     {
-      "bear_value": 0.1,
+      "bear_value": 0.08,
       "input_hit": "long_run_op_margin",
-      "risk": "Low gas prices (Henry Hub about $2.95) plus hedge settlement losses and impairments keep GAAP margins low"
+      "risk": "Commodity price decline and hedge-cap effects keep underlying margins well below the base year"
      },
      {
-      "bear_value": 0.01,
+      "bear_value": -0.06,
+      "input_hit": "rev_growth",
+      "risk": "Further derivative mark-to-market losses or weaker realized prices keep GAAP revenue depressed"
+     },
+     {
+      "bear_value": 0.0,
       "input_hit": "terminal_growth",
-      "risk": "Leverage of 2.66x and the springing credit-facility maturity force asset sales, and growth stalls as declines are not replaced"
+      "risk": "Leverage rises and the Nordic bond springing maturity forces refinancing at higher cost, with little growth in mature assets"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.1,
+      "long_run_op_margin": 0.08,
       "rev_growth": [
-       -0.28,
-       0.79,
-       -0.039999999999999994,
-       -0.039999999999999994,
-       -0.039999999999999994
+       -0.3,
+       0.16999999999999998,
+       -0.06,
+       -0.08,
+       -0.09
       ],
-      "terminal_growth": 0.01
+      "terminal_growth": 0.0
      },
      "bull": {
-      "long_run_op_margin": 0.32,
+      "long_run_op_margin": 0.26,
       "rev_growth": [
-       -0.16,
-       0.9099999999999999,
+       -0.14,
+       0.33,
+       0.1,
        0.08,
-       0.08,
-       0.08
+       0.07
       ],
       "terminal_growth": 0.03
      }
@@ -464,31 +672,31 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "no",
-      "why": "Total debt was $2,715.5M at the end of 2025 and was already $3,102.6M at September 30, 2026, and the roughly $1.8B Birch deal adds about $1.5B of ABS debt, so debt will be well above the base year relative to base-year size."
+      "why": "Debt rose from $2.7B at year-end 2025 to $3.1B at September 2026 and is set to rise by roughly $1.8B more if the Birch deal closes, so the base-year level understates the go-forward debt relative to size."
      },
-     "margin_position": "The 2025 GAAP operating margin of 0.2925 sits well above the 5-year median of about -0.13. GAAP revenue includes derivative gains and losses, so margins swing with mark-to-market hedge values and impairments, not only with operations. 2026 is depressed: the 9-month derivative loss of $635.7M leaves 9-month operating income at about -$14M on $947.6M of revenue, even though cash margins are strong (Adjusted EBITDA margin 56-66%).",
+     "margin_position": "GAAP operating margin swings with non-cash derivative marks booked inside revenue: 2023 was 0.5691, 2024 was -0.1282 and 2025 was 0.2925. The 9-month 2026 margin is about -1.5% after a $394M unsettled-derivative loss. The underlying margin before those marks is about 17-25% (Q3 2026 adjusted EBITDA margin was 56%, but DD&A, accretion and interest-like costs absorb much of it). The 2025 margin of 0.29 is likely above the sustainable level.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 21% base-year rate is roughly statutory, although the 2026 benefit of $145M on a pretax loss shows deferred-tax noise."
+      "why": "The 0.21 rate is the US statutory rate, though the 9-month 2026 benefit of 145,134 on a pre-tax loss shows the effective rate is noisy."
      },
-     "why": "2025 revenue jumped 142% on the Maverick and Canvas acquisitions and on derivative swings, and the 2023-2025 margins range from -0.13 to 0.57. 2026 revenue will fall on hedge mark-to-market losses, and 2027 will step up with the Birch acquisition if it closes in Q4 2026. I model a trough in year 1, a large rebound in year 2, and a normalised margin of about 0.22-0.25 after that."
+     "why": "2025 revenue of $1,829M was inflated by a 142% growth step from the Maverick and Canvas acquisitions and includes derivative marks that swing sign each year. The 2026 GAAP revenue base is depressed by large derivative losses, so base-year levels are not a reliable run-rate. I excluded the pending Birch deal (about $1.8B, debt-funded, not yet paid) from the forecast. Its price is not in the since-base-year figures, so counting its earnings would overstate value."
     },
-    "value_at_old_defaults": -7.562375453325316,
+    "value_at_old_defaults": -7.628310931611196,
     "values": {
-     "base": 49.394492158734735,
-     "bear": 15.16524432334426,
-     "bull": 116.88939523320009
+     "base": 15.428571800049628,
+     "bear": 1.3898360970043455,
+     "bull": 55.97383411772749
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": -7.562375453325316,
-  "value_at_old_defaults_quoted": -7.562375453325316,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": -7.628310931611196,
+  "value_at_old_defaults_quoted": -7.628310931611196,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 3309575466.823229,
+ "equity_value": 1304648965.4744005,
  "family": "commodity",
- "far_from_price": true,
+ "far_from_price": false,
  "filed_shares": 74478592.0,
  "flags": [
   "Diversified Energy Company entered into definitive agreements to acquire Birch Permian Holdings, Inc. and certain affiliated companies for an aggregate purchase price of approximately $1.8 billion, expected to be funded by an asset-backed securitization of approximately $1.5 billion and revolving credit facility liquidity and to close in the fourth quarter of 2026.",
@@ -529,12 +737,12 @@
  "qwen_book": null,
  "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
  "seed_base": {
-  "1000": 39.47870960166452,
-  "3000": 49.394492158734735
+  "1000": 19.605628778672386,
+  "3000": 15.428571800049628
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1805,42 +2013,42 @@
   ]
  },
  "tax_range": {
-  "equity_value_alt": 3134382321.9500585,
+  "equity_value_alt": 1224744089.5481484,
   "label": "statutory rate (company's filed rate), not measured",
   "positive_pretax_years": 2,
   "pretax_years": 5,
   "rate": 0.21,
   "rate_alt": 0.265,
   "seed_base_alt": {
-   "1000": 37.52969085814662,
-   "3000": 46.638987356126236
+   "1000": 18.39688508125459,
+   "3000": 14.4916015740288
   },
   "source_tag": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
   "status_alt": "ok",
   "value_alt": {
-   "base": 42.08433910713643,
-   "bear": 13.292703275468849,
-   "bull": 100.75364674965164
+   "base": 16.444243327641697,
+   "bear": 1.1619972640625114,
+   "bull": 56.49666057159271
   },
   "value_per_filed_share_alt": {
-   "base": 42.08433910713643,
-   "bear": 13.292703275468849,
-   "bull": 100.75364674965164
+   "base": 16.444243327641697,
+   "bear": 1.1619972640625114,
+   "bull": 56.49666057159271
   }
  },
  "ticker": "DEC",
- "upside": 2.7319880968399555,
+ "upside": 0.4711658514856534,
  "valuation": null,
- "value_base": 44.43660088019963,
- "value_bear": 14.003461529013329,
- "value_bull": 105.62481074062018,
+ "value_base": 17.517100289361007,
+ "value_bear": 1.356742283134111,
+ "value_bull": 59.066292726960725,
  "value_per_filed_share": {
-  "base": 44.43660088019963,
-  "bear": 14.003461529013329,
-  "bull": 105.62481074062018
+  "base": 17.517100289361007,
+  "bear": 1.356742283134111,
+  "bull": 59.066292726960725
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_differs_at_alt_tax_rate": false,
- "verdict_reason": "expected return +63.8 points a year against the required return over 3 years"
+ "verdict_differs_at_alt_tax_rate": true,
+ "verdict_reason": "expected return +24.3 points a year against the required return over 3 years"
 }

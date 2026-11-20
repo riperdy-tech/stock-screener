@@ -1,22 +1,41 @@
 {
- "alpha_pts": 9.770840181737213,
+ "alpha_pts": 4.8990049151636805,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-04T21:15:05.000Z",
+  "accepted_utc": "2026-11-05T02:15:05Z",
+  "accession": "0002035304-26-000125",
+  "decision_time": "2026-11-20T02:55:21Z",
+  "form": "6-K",
+  "period": "2026-09-30"
+ },
  "claims": 118,
  "claims_supported": 102,
  "date": "2026-11-17T02:08:24Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
-   "run 1000: confidence_low",
-   "run 1000: quotes_verified: 12 of 12",
+   "run 1000: debt_level_representative_no: Total debt of $462.4M at end-2025 rose to $579.5M at September 2026, with net debt at 1.43x trailing EBITDA, after the Keystone purchase.",
+   "run 1000: quotes_verified: 11 of 12",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 275,972,000, 13.3% of the market cap 2,074,200,138",
+   "run 1000: buybacks_paid_not_filed_taken_as_0",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
    "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Total debt rose to $579.5 million and net debt to $531.2 million (1.43x EBITDA) at September 30, 2026 after the Keystone purchase, well above the $462.4 million in the filed record.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 8 of 8"
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 275,972,000, 13.3% of the market cap 2,074,200,138",
+   "run 3000: buybacks_paid_not_filed_taken_as_0",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "margin 0.1544 (persist), growth 0.0375, terminal RONIC 0.0827 (equity return r 0.0938), F 10",
-  "run_gap": 0.05309559663220983,
+  "old_defaults_inputs": "margin 0.1544 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0933), F 10",
+  "run_gap": 0.0455416371094224,
   "runs": {
    "1000": {
     "adjustments": {
@@ -33,12 +52,66 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "gain",
-       "what": "Gain on the STET divestiture, reported as other non-operating income in 2025"
+       "what": "Gain on STET divestiture, recorded in other non-operating income, which will not recur"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -64222000.0,
+      "excess_cash_before": 211750000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 275972000.0,
+        "printed": 275972,
+        "quotes": [
+         {
+          "id": "P5",
+          "quote": "Acquisition, net of cash acquired | (275,972) | \u2014"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "buybacks_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_events_over_5pct_of_market_cap: events sum to 275,972,000, 13.3% of the market cap 2,074,200,138"
+      ],
+      "gross_events": 275972000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2074200138.0,
+      "net_effect_on_excess_cash": -275972000.0,
+      "shares": {
+       "after": 183463266.0,
+       "before": 183463266.0,
+       "interim": 184373341.0,
+       "replaced": false,
+       "source": "read"
+      },
+      "stamps": [
+       "buybacks_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 211750000.0,
+     "excess_cash_after": -64222000.0,
      "excess_cash_before": 211750000.0,
      "k0_after": 34429360.34136546,
      "k0_before": 31877360.341365457,
@@ -47,63 +120,72 @@
      "one_offs_gain": 2552000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "buybacks_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0"
      ],
      "x0_after": 176986340.4834854,
      "x0_before": 178919180.14334768
     },
-    "confidence": "low",
+    "confidence": "medium",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2258617941.6789217,
-     "seam_ratio": 1.0389328339299968,
-     "tv_share": 0.43089366929324446,
-     "wedge_rate_5": 0.006735174711928191
+     "equity_value": 2221167565.014042,
+     "seam_ratio": 1.0413089954709032,
+     "tv_share": 0.44022947183369243,
+     "wedge_rate_5": 0.01041258411744478
     },
     "flags": [
      "base_year_not_representative",
-     "confidence_low",
-     "quotes_verified: 12 of 12"
+     "debt_level_representative_no: Total debt of $462.4M at end-2025 rose to $579.5M at September 2026, with net debt at 1.43x trailing EBITDA, after the Keystone purchase.",
+     "quotes_verified: 11 of 12",
+     "capital_events_over_5pct_of_market_cap: events sum to 275,972,000, 13.3% of the market cap 2,074,200,138",
+     "buybacks_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0"
     ],
     "inputs": {
-     "capex_to_revenue": 0.085,
+     "capex_to_revenue": 0.09,
      "fade_years": 10,
-     "long_run_op_margin": 0.147,
+     "long_run_op_margin": 0.15,
      "op_margin": [
-      0.127,
+      0.125,
       0.135,
-      0.142,
-      0.148,
-      0.152
+      0.145,
+      0.15,
+      0.155
      ],
-     "return_on_new_investment_long_run": 0.14,
+     "return_on_new_investment_long_run": 0.13,
      "rev_growth": [
-      0.055,
       0.05,
       0.045,
+      0.04,
       0.04,
       0.04
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "margin 0.1544 (persist), growth 0.0375, terminal RONIC 0.0827 (equity return r 0.0938), F 10",
+    "old_defaults_inputs": "margin 0.1544 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0933), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 16,
      "kept": 102
     },
     "ranges": {
      "long_run_op_margin": [
-      0.12,
+      0.13,
       0.165
      ],
      "rev_growth_y3": [
       0.02,
-      0.065
+      0.06
      ],
      "terminal_growth": [
       0.025,
-      0.037
+      0.035
      ]
     },
     "reasons": {
@@ -112,66 +194,62 @@
        {
         "id": "REC",
         "quote": "capital expenditure / revenue 0.0861"
+       },
+       {
+        "id": "P5",
+        "quote": "Investments in property, plant and equipment | (155,313) | (119,081)"
        }
       ],
-      "quotes_given": 1,
-      "why": "Capex has run at 8.6% of revenue pooled and 9.65% in 2025, and the planned 2030 capacity expansions plus Keystone integration keep spending elevated. I use 8.5%, a little below the 2025 level."
+      "quotes_given": 2,
+      "why": "Capex is rising on the capacity expansions at Pennsuco and Roanoke (nine-month PP&E investment of $155.3M versus $119.1M), above the 8.6% five-year pooled ratio. I assume 9% over years 1-5."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "expect will increase to over 2.9 million tons by 2030"
+        "id": "P5",
+        "quote": "deteriorating conditions in an already soft residential sector weighed heavily on performance, particularly in Florida"
        }
       ],
       "quotes_given": 1,
-      "why": "A 10-year fade lets margin and growth move gradually from the cyclical trough-and-recovery path to the long-run level."
+      "why": "The current margin shortfall comes from cyclical and temporary factors (Florida residential softness, an outage, integration), so convergence to the long-run level should take about a decade."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P2",
-        "quote": "our products are fairly commoditized"
-       },
-       {
         "id": "REC",
-        "quote": "2022-12-31 | $1,364.1 million | n/a | 0.0711"
+        "quote": "2024-12-31 | $1,634.4 million | 0.0269 | 0.1538"
        }
       ],
       "quotes_given": 2,
-      "why": "Products are commoditized and competition is on price, so margins should revert to the roughly 14.8% median of the filed years rather than hold the 2025 peak. Vertical integration and scarce import terminals support a margin in the mid-teens."
+      "why": "Margins of 14.2%, 15.4% and 16.1% in 2023-2025 point to a median near 15%. Commoditised cement with energy exposure and a cyclical Florida concentration argue against holding the 2025 peak, while synergies and vertical integration support roughly the median."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P5",
-        "quote": "We also anticipate Adjusted EBITDA Margin will decline by approximately 250 to 300 basis points year over year."
+        "quote": "Adjusted EBITDA Margin will decline by approximately 250 to 300 basis points year over year"
        },
        {
         "id": "P5",
-        "quote": "Operating income | 60,711 | 86,620 | 173,229 | 208,088"
-       },
-       {
-        "id": "P5",
-        "quote": "it is expected to deliver at a run-rate exceeding $50 million by year-end 2029"
+        "quote": "Project Cornerstone has already generated approximately $20 million in cost savings year-to-date in 2026"
        }
       ],
-      "quotes_given": 3,
-      "why": "2026 is guided to a 250 to 300 bps Adjusted EBITDA margin decline, and nine-month operating income is only 13.0% of revenue. Recovery to about 15% by year 5 depends on Project Cornerstone savings and Keystone synergies, helped by the cost programmes."
+      "quotes_given": 2,
+      "why": "Guidance of a 250-300bp Adjusted EBITDA margin decline from 23.4% implies a 2026 operating margin of about 12.5%. I assume a gradual recovery as Cornerstone savings, Keystone synergies and normalised outages and weather lift the margin, but not back to 16% quickly."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0827."
+        "quote": "return on tangible capital 0.2071"
        },
        {
-        "id": "P5",
-        "quote": "Property, plant, equipment and mineral deposits, net | 1,264,816 | 930,012"
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0823"
        }
       ],
       "quotes_given": 2,
-      "why": "The 2025 return on tangible capital of 20.7% was at a peak margin and before Keystone raised PP&E from $930 million to $1,265 million. New investment in plants and terminals should earn well below that but above the 8.3% breakeven."
+      "why": "The base-year return on tangible capital of 20.7% is cycle-high and flattered by an old asset base. New plant expansion and acquired assets with low pre-synergy contribution should earn less, still above the 8.2% break-even."
      },
      "rev_growth": {
       "quotes": [
@@ -181,11 +259,11 @@
        },
        {
         "id": "P5",
-        "quote": "deteriorating conditions in an already soft residential sector weighed heavily on performance, particularly in Florida"
+        "quote": "of which approximately $30 million was attributable to the acquired Keystone Cement operations"
        }
       ],
       "quotes_given": 2,
-      "why": "Management guides 2026 to mid-single-digit growth including Keystone, and the nine-month figure is +5.7%. Keystone annualization helps 2027, then growth settles toward 4% as Florida residential demand stays soft. Cement volume is limited until the 2030 capacity expansions."
+      "why": "Management guides 2026 to mid-single-digit growth including Keystone, with like-for-like revenue slightly down. Year 2 gets a full year of Keystone (about $30M a quarter) on top of roughly 2% underlying growth, then growth settles near 4% as Florida housing recovers and capacity expands."
      },
      "terminal_growth": {
       "quotes": [
@@ -195,69 +273,69 @@
        }
       ],
       "quotes_given": 1,
-      "why": "Long-run growth is set a little under the 3.75% anchor, since the company is concentrated in one region and cyclical, though housing shortfall and infrastructure demand support it."
+      "why": "A mature regional building-materials business tied to population and construction growth should grow slightly below the 3.75% nominal anchor, so I use 3%."
      }
     },
     "risks": [
      {
-      "bear_value": 0.12,
+      "bear_value": 0.125,
       "input_hit": "long_run_op_margin",
-      "risk": "Florida residential downturn persists and energy costs stay unhedged and high, so margins do not recover."
+      "risk": "Lasting Florida residential downturn, with Florida about 60% of operations, plus unhedged energy costs and plant outages keep margins depressed"
      },
      {
       "bear_value": 0.02,
       "input_hit": "rev_growth",
-      "risk": "Plant outages and weak Florida volumes cut growth, with Keystone integration slow."
+      "risk": "Growth stays weak: Florida volumes keep falling and Keystone adds little beyond its first full year"
      },
      {
       "bear_value": 0.09,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Keystone and capacity expansion earn low returns on the larger tangible capital base."
+      "risk": "Capacity expansion and maintenance capex stay elevated and returns on new investment disappoint"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.12,
+      "long_run_op_margin": 0.13,
       "rev_growth": [
        0.030000000000000002,
-       0.025000000000000005,
+       0.024999999999999998,
        0.02,
-       0.015000000000000003,
-       0.015000000000000003
+       0.02,
+       0.02
       ],
       "terminal_growth": 0.025
      },
      "bull": {
       "long_run_op_margin": 0.165,
       "rev_growth": [
-       0.07500000000000001,
        0.07,
        0.065,
-       0.060000000000000005,
-       0.060000000000000005
+       0.06,
+       0.06,
+       0.06
       ],
-      "terminal_growth": 0.037
+      "terminal_growth": 0.035
      }
     },
     "situation": {
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Year-end 2025 debt of $462 million sits beside $212 million of cash, but cash fell to $48.4 million by September 2026 and PP&E rose sharply with Keystone, so current debt is not in the packet."
+      "answer": "no",
+      "why": "Total debt of $462.4M at end-2025 rose to $579.5M at September 2026, with net debt at 1.43x trailing EBITDA, after the Keystone purchase."
      },
-     "margin_position": "The 2025 operating margin of 16.1% is the high point of the filed record, up from 7.1% in 2022. It is now falling: nine-month 2026 operating income is 13.0% of revenue, with energy and material costs up, Florida weak and unplanned plant outages. Keystone also dilutes the margin until synergies arrive. Management guides the Adjusted EBITDA margin down 250 to 300 bps for 2026.",
+     "margin_position": "The 2025 operating margin of 16.1% is above the 2022-2025 median of about 14.8% and well above 2026 run-rate. 2026 nine-month operating income was $173.2M on $1,330.7M revenue (about 13%), because Florida residential demand weakened, energy costs rose and the Roanoke plant had an outage. Keystone also contributes little before synergies. The margin is now below its own median, so a partial recovery is plausible.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 24.3% base-year rate is close to the 23.4% Q3 2026 rate, with some added tax from the Keystone reorganization."
+      "why": "The 24.3% base-year rate is close to the 2026 nine-month rate of about 26.7% ($42.3M tax on $158.4M pretax), so a mid-20s rate looks sustainable."
      },
-     "why": "2025 was a peak-margin year for a commodity, construction-driven business. By Q3 2026 the margin was falling, and the company cut its 2026 outlook. Base-year net income is also flattered by offsetting FX and derivative lines and a one-off gain, so 2026 is the better starting point. Year 1 margin is set well below 2025, and the fade ends near the 4-year median."
+     "why": "FY2025 predates the Keystone acquisition (about $276M cash), the Florida downturn and the 2026 energy and outage cost pressure. Management guides 2026 Adjusted EBITDA margin down 250-300bp. FY2025 EBIT overstates the near-term run-rate, and the balance sheet has also changed: cash fell from $211.8M to $48.4M and debt rose."
     },
-    "value_at_old_defaults": 13.621536647172876,
+    "value_at_old_defaults": 13.704469351921405,
     "values": {
-     "base": 14.475495505697165,
-     "bear": 10.760932269246412,
-     "bull": 18.634040858451215
+     "base": 12.754718054343725,
+     "bear": 9.769661015064997,
+     "bull": 16.35203251242172
     }
    },
    "3000": {
@@ -275,12 +353,66 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "gain",
-       "what": "Gain on STET divestiture, recorded as other non-operating income"
+       "what": "Gain on the STET divestiture, booked as other non-operating income in 2025"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -64222000.0,
+      "excess_cash_before": 211750000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 275972000.0,
+        "printed": 275972,
+        "quotes": [
+         {
+          "id": "P5",
+          "quote": "Acquisition, net of cash acquired | (275,972) | \u2014"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "buybacks_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_events_over_5pct_of_market_cap: events sum to 275,972,000, 13.3% of the market cap 2,074,200,138"
+      ],
+      "gross_events": 275972000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2074200138.0,
+      "net_effect_on_excess_cash": -275972000.0,
+      "shares": {
+       "after": 183463266.0,
+       "before": 183463266.0,
+       "interim": 184373341.0,
+       "replaced": false,
+       "source": "read"
+      },
+      "stamps": [
+       "buybacks_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 211750000.0,
+     "excess_cash_after": -64222000.0,
      "excess_cash_before": 211750000.0,
      "k0_after": 34429360.34136546,
      "k0_before": 31877360.341365457,
@@ -289,7 +421,11 @@
      "one_offs_gain": 2552000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "buybacks_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0"
      ],
      "x0_after": 176986340.4834854,
      "x0_before": 178919180.14334768
@@ -298,49 +434,55 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2131675019.0511224,
-     "seam_ratio": 1.0349451213676726,
-     "tv_share": 0.4812708655466396,
-     "wedge_rate_5": 0.011050003463832753
+     "equity_value": 2124905974.3703558,
+     "seam_ratio": 1.0430400980304961,
+     "tv_share": 0.44577497912117303,
+     "wedge_rate_5": 0.015824988340354427
     },
     "flags": [
      "base_year_not_representative",
+     "debt_level_representative_no: Total debt rose to $579.5 million and net debt to $531.2 million (1.43x EBITDA) at September 30, 2026 after the Keystone purchase, well above the $462.4 million in the filed record.",
      "confidence_low",
-     "quotes_verified: 8 of 8"
+     "quotes_verified: 12 of 12",
+     "capital_events_over_5pct_of_market_cap: events sum to 275,972,000, 13.3% of the market cap 2,074,200,138",
+     "buybacks_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0"
     ],
     "inputs": {
-     "capex_to_revenue": 0.09,
-     "fade_years": 8,
-     "long_run_op_margin": 0.145,
+     "capex_to_revenue": 0.095,
+     "fade_years": 10,
+     "long_run_op_margin": 0.15,
      "op_margin": [
       0.127,
       0.135,
-      0.145,
-      0.152,
+      0.143,
+      0.15,
       0.155
      ],
      "return_on_new_investment_long_run": 0.13,
      "rev_growth": [
-      0.055,
+      0.05,
       0.04,
       0.04,
       0.04,
-      0.038
+      0.035
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "margin 0.1544 (persist), growth 0.0375, terminal RONIC 0.0827 (equity return r 0.0938), F 10",
+    "old_defaults_inputs": "margin 0.1544 (persist), growth 0.0375, terminal RONIC 0.0823 (equity return r 0.0933), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 16,
      "kept": 102
     },
     "ranges": {
      "long_run_op_margin": [
-      0.12,
+      0.125,
       0.165
      ],
      "rev_growth_y3": [
-      0.02,
+      0.015,
       0.06
      ],
      "terminal_growth": [
@@ -352,115 +494,131 @@
      "capex_to_revenue": {
       "quotes": [
        {
+        "id": "P5",
+        "quote": "net capital expenditures were $153.0 million"
+       },
+       {
         "id": "REC",
         "quote": "capital expenditure / revenue 0.0861"
        }
       ],
-      "quotes_given": 1,
-      "why": "Capex was 9.65% of revenue in 2025 and the pooled average is 8.6%, with cement capacity expansions to 2030, Keystone and rising capital spending ahead. I use about 9%."
+      "quotes_given": 2,
+      "why": "Capex is running above the pooled 8.6% average because of capacity expansion at Pennsuco and Roanoke, and nine-month 2026 net capex was about 11.5% of revenue. I hold 9.5% for years 1 to 5 as the expansions are completed."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P2",
-        "quote": "our products are fairly commoditized"
+        "quote": "Prices in these markets are subject to material changes in response to relatively minor fluctuations in supply and demand"
        }
       ],
       "quotes_given": 1,
-      "why": "Products are commoditized and competitive, so the margin and growth convergence takes a medium period; I use 8 years."
+      "why": "Margins and growth in this cyclical, price-sensitive business drift back toward the mean over a long period, so I use ten years."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "2023-12-31 | $1,591.6 million | 0.1667 | 0.1418"
+        "id": "P5",
+        "quote": "it is expected to deliver at a run-rate exceeding $50 million by year-end 2029"
+       },
+       {
+        "id": "P2",
+        "quote": "our products are fairly commoditized and our ability to price them in a profitable manner is constrained by a competitive price environment"
        }
       ],
-      "quotes_given": 1,
-      "why": "The margin history is 14.2%, 15.4% and 16.1% in 2023-2025 after 7.1% in 2022. For a cyclical, commoditized business, I fade to near the multi-year median rather than the 2025 peak, partly helped by cost savings."
+      "quotes_given": 2,
+      "why": "This sits near the 2023-2025 average of about 15%, below the 2025 peak. Cost savings and synergies support it, while commoditized pricing and unhedged energy limit it."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P5",
-        "quote": "Adjusted EBITDA Margin will decline by approximately 250 to 300 basis points year over year"
+        "quote": "We also anticipate Adjusted EBITDA Margin will decline by approximately 250 to 300 basis points year over year."
        },
        {
         "id": "P5",
-        "quote": "it is expected to deliver at a run-rate exceeding $50 million by year-end 2029"
+        "quote": "Operating income | 60,711 | 86,620 | 173,229 | 208,088"
        }
       ],
       "quotes_given": 2,
-      "why": "The 2026 margin falls to about 12.7% (Adjusted EBITDA margin down 250-300 bps from 23.4%, and 9M operating margin about 13%). It then recovers gradually as Project Cornerstone savings and Keystone synergies build and the outages do not recur, but it stays below the 2025 peak."
+      "why": "Management guides the Adjusted EBITDA margin down 250 to 300 bps in 2026, and nine-month operating income is $173.2 million on $1,330.7 million of revenue, about 13%. I recover margin gradually as outages end, Cornerstone savings and Keystone synergies phase in, and the Florida cycle normalizes."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Return on Average Capital Employed(2) | 19.5% | 21.3% | 20.7%"
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0823."
+       },
+       {
+        "id": "P5",
+        "quote": "the low pre-synergy contribution from the acquired Keystone assets"
        }
       ],
-      "quotes_given": 1,
-      "why": "Current ROACE is about 19.5% and the base-year return on tangible capital is 0.207, but new capacity and import terminals face competitive pricing and outage risk. I assume a lower long-run return that still clears the 0.0827 break-even."
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 20.7% is inflated by an old asset base and falling margins, and Keystone adds purchased tangible capital at a low pre-synergy contribution. I assume 13%, above the 8.2% break-even but well below the current return."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P5",
         "quote": "we now expect mid-single-digit revenue growth compared to 2025"
+       },
+       {
+        "id": "P5",
+        "quote": "On a like for like basis, revenue for the three months ended September 30, 2026 decreased by approximately $5 million"
        }
       ],
-      "quotes_given": 1,
-      "why": "Management guides to mid-single-digit growth in 2026 including Keystone; 9M growth was 5.7%. After that, growth slows to about 4% as Keystone is annualized and Florida residential stays soft, with price and capacity additions supporting it."
+      "quotes_given": 2,
+      "why": "Management guides 2026 to mid-single-digit growth, helped by Keystone, while like-for-like Q3 revenue fell about $5 million. Keystone annualizes in 2027 and pricing in ready-mix is positive, but Florida housing is soft, so I fade growth to the high 3% to 4% range."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "P5",
-        "quote": "attractive long-term growth expectations fueled by the secular trends of sustained infrastructure investment"
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
       "quotes_given": 1,
-      "why": "Management cites secular infrastructure and housing-shortage demand on the East Coast, but the business is cyclical and Florida-concentrated, so I set growth below the 3.75% anchor."
+      "why": "A cement and aggregates business tied to East Coast population and infrastructure growth should grow near nominal GDP, but I stay below the 3.75% anchor given cyclicality and commoditization."
      }
     },
     "risks": [
      {
       "bear_value": 0.12,
       "input_hit": "long_run_op_margin",
-      "risk": "Florida residential downturn persists and energy and material costs stay elevated, keeping margins near the 2026 trough"
+      "risk": "The Florida residential downturn proves lasting and energy and material costs stay high, so margins do not recover"
      },
      {
-      "bear_value": 0.02,
+      "bear_value": 0.01,
       "input_hit": "rev_growth",
-      "risk": "Pricing pressure and plant outages cut volumes, so growth stalls"
+      "risk": "Further plant outages, a weak Keystone integration and soft volumes slow revenue growth"
      },
      {
-      "bear_value": 0.105,
-      "input_hit": "capex_to_revenue",
-      "risk": "Keystone integration and capacity expansion require more capital than planned, or earn lower returns"
+      "bear_value": 0.09,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Heavy expansion capex continues with weaker returns, or the Keystone price is not earned back"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.12,
+      "long_run_op_margin": 0.125,
       "rev_growth": [
-       0.035,
-       0.02,
-       0.02,
-       0.02,
-       0.018
+       0.025,
+       0.015,
+       0.015,
+       0.015,
+       0.010000000000000002
       ],
       "terminal_growth": 0.025
      },
      "bull": {
       "long_run_op_margin": 0.165,
       "rev_growth": [
-       0.075,
+       0.07,
        0.06,
        0.06,
        0.06,
-       0.057999999999999996
+       0.055
       ],
       "terminal_growth": 0.04
      }
@@ -469,30 +627,30 @@
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Cash fell to $48.4M from $211.8M and PP&E rose to $1,264.8M with the Keystone acquisition, so the year-end 2025 debt of $462.4M may not be the 2026 level and the filings here do not give September 2026 debt."
+      "answer": "no",
+      "why": "Total debt rose to $579.5 million and net debt to $531.2 million (1.43x EBITDA) at September 30, 2026 after the Keystone purchase, well above the $462.4 million in the filed record."
      },
-     "margin_position": "The 2025 operating margin of 16.1% is the highest in the filed record, up from 7.1% in 2022, and sits above the 2023-2025 range of 14-16%. In 2026 it is falling: nine-month operating income is $173.2M on $1,330.7M revenue, about 13%, against about 16.5% a year earlier. Causes are Florida weakness, higher unhedged energy and material costs, the Roanoke outage and the low-margin Keystone assets. This is a cyclical, commodity business, and a margin above its median tends to give back part of the gap.",
+     "margin_position": "The 2025 operating margin of 16.1% was above the 2023 level of 14.2% and far above 2022, so it sat at the high end of its own history. In 2026 it has dropped to about 13% because of soft Florida residential demand, higher energy and material costs, plant outages and a low-margin Keystone start. Sub-median margins in cyclical businesses tend to revert quickly, though Florida weakness may last longer than weather alone.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The base-year rate of about 24% is close to the Q3 2026 rate of about 23% (12,113 tax on 51,874 pretax), and the higher 9M 2026 rate looks driven by a one-off Keystone reorganization."
+      "why": "The base-year rate of 24.3% is close to the 2026 nine-month rate of about 26.7% (42,335 on 158,385 of pretax income), so it is a rate the company can keep paying."
      },
-     "why": "2025 was a peak-margin year with a growing Florida market and cheap inputs. 2026 guidance for Adjusted EBITDA margin shows it deteriorating by 250-300 bps, and Keystone changes the asset base. 2025 net income also contains large offsetting FX and derivative swings."
+     "why": "2025 was a peak-like year: the margin was at a multi-year high and net debt was low after the IPO. Since then the Keystone acquisition has changed the asset base, debt and cash, and nine-month 2026 operating income is well below 2025. The base year therefore overstates near-term earnings power and understates current leverage."
     },
-    "value_at_old_defaults": 13.621536647172876,
+    "value_at_old_defaults": 13.704469351921405,
     "values": {
-     "base": 13.726786997742046,
-     "bear": 10.632665853293577,
-     "bull": 18.04329859881746
+     "base": 12.186779733728795,
+     "bear": 8.751759412705203,
+     "bull": 16.243658024394104
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 13.621536647172876,
-  "value_at_old_defaults_quoted": 13.621536647172876,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 13.704469351921405,
+  "value_at_old_defaults_quoted": 13.704469351921405,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 2587041428.367807,
+ "equity_value": 2287924321.56578,
  "family": "commodity",
  "far_from_price": false,
  "filed_shares": 183463266.0,
@@ -511,12 +669,12 @@
  "qwen_book": null,
  "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
  "seed_base": {
-  "1000": 14.475495505697165,
-  "3000": 13.726786997742046
+  "1000": 12.754718054343725,
+  "3000": 12.186779733728795
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1901,17 +2059,17 @@
   ]
  },
  "ticker": "TTAM",
- "upside": 0.2675281668434508,
+ "upside": 0.12097490569390157,
  "valuation": null,
- "value_base": 14.101141251719605,
- "value_bear": 10.696799061269996,
- "value_bull": 18.338669728634336,
+ "value_base": 12.470748894036259,
+ "value_bear": 9.260710213885101,
+ "value_bull": 16.29784526840791,
  "value_per_filed_share": {
-  "base": 14.101141251719605,
-  "bear": 10.696799061269996,
-  "bull": 18.338669728634336
+  "base": 12.470748894036259,
+  "bear": 9.260710213885101,
+  "bull": 16.29784526840791
  },
  "valued": true,
- "verdict": "BUY",
- "verdict_reason": "expected return +9.8 points a year against the required return over 3 years"
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +4.9 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

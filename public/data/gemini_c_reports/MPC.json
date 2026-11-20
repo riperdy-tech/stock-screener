@@ -1,7 +1,15 @@
 {
- "alpha_pts": 2.610307900361872,
+ "alpha_pts": 6.604680422959716,
  "analysis": "analysis_incomplete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-03T18:03:45.000Z",
+  "accepted_utc": "2026-11-03T23:03:45Z",
+  "accession": "0001510295-26-000071",
+  "decision_time": "2026-11-16T10:29:30Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
  "claims": 92,
  "claims_supported": 83,
  "date": "2026-11-16T10:29:30Z",
@@ -9,32 +17,126 @@
   "flags": [
    "run 1000: margin_outside_filed_record: op_margin.y1 0.1300 (filed -0.1755 to 0.1210)",
    "run 1000: base_year_not_representative",
-   "run 1000: tax_rate_representative_no: The 2025 rate of 16.2% benefits from permanent tax benefits tied to noncontrolling interests, and the 2026 nine-month rate is about 21.5% (3,912 on 18,179 pretax), so a somewhat higher rate is more likely going forward.",
+   "run 1000: tax_rate_representative_no: The 2025 rate of 16.2% is held down by permanent benefits from noncontrolling interests, and the 2026 nine-month provision of 3,912 on pretax income of 18,179 implies about 21.5%.",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 12 of 12",
-   "run 3000: margin_outside_filed_record: op_margin.y1 0.1250 (filed -0.1755 to 0.1210)",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 1000: share_count_change_unexplained: shares 306,000,000 to 272,282,280 (-33,717,720); issuing and buying back at 414.65 (half to double) explains -30,314,723 to -7,578,681",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 6,325,000,000, 5.6% of the market cap 112,901,839,234",
+   "run 1000: acquisitions_paid: acquisitions_paid_negative_as_filed",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.1300 (filed -0.1755 to 0.1210)",
    "run 3000: base_year_not_representative",
-   "run 3000: tax_rate_representative_no: The 2025 rate of 16.2% was helped by permanent benefits from noncontrolling interests, and the 2026 nine-month rate is about 21.5% on the much higher pre-tax income.",
+   "run 3000: tax_rate_representative_no: The 16.2% base-year rate reflects permanent benefits from MPLX noncontrolling interests, and the 2026 nine-month rate has already risen to about 21.5% (3,912 on 18,179 pretax) as profit mix shifts to the parent.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 10 of 10"
+   "run 3000: quotes_verified: 15 of 15",
+   "run 3000: share_count_change_unexplained: shares 306,000,000 to 272,282,280 (-33,717,720); issuing and buying back at 414.65 (half to double) explains -30,314,723 to -7,578,681",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 6,325,000,000, 5.6% of the market cap 112,901,839,234",
+   "run 3000: acquisitions_paid: acquisitions_paid_negative_as_filed",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.4205 and margin 0.1348, margin 0.0625 (persist), growth 0.0375, terminal RONIC 0.0570 (equity return r 0.0846), F 10",
-  "run_gap": 0.08518644420287065,
+  "old_defaults_inputs": "year 1 growth 0.4205 and margin 0.1348, margin 0.0625 (persist), growth 0.0375, terminal RONIC 0.0568 (equity return r 0.0841), F 10",
+  "run_gap": 0.08698073685677835,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": -2579000000.0,
+      "excess_cash_before": 3672000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001510295-26-000071",
+        "amount": -14000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001510295-26-000071",
+        "amount": 6288000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "read_amount": 6288000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 20000000.0,
+        "printed": 20,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Disposal of assets | 20 | 20"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "accn": "0001510295-26-000071",
+        "amount": 3000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "read_amount": 3000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromIssuanceOfCommonStock"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 306,000,000 to 272,282,280 (-33,717,720); issuing and buying back at 414.65 (half to double) explains -30,314,723 to -7,578,681",
+       "capital_events_over_5pct_of_market_cap: events sum to 6,325,000,000, 5.6% of the market cap 112,901,839,234"
+      ],
+      "gross_events": 6325000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 112901839234.0,
+      "net_effect_on_excess_cash": -6251000000.0,
+      "shares": {
+       "after": 272282280.0,
+       "before": 306000000.0,
+       "change": -33717720.0,
+       "explained_range": [
+        -30314723.260581214,
+        -7578680.8151453035
+       ],
+       "interim": 272282280.0,
+       "price_used": 414.65,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid: acquisitions_paid_negative_as_filed",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 3672000000.0,
+     "excess_cash_after": -2579000000.0,
      "excess_cash_before": 3672000000.0,
      "k0_after": 1425279334.9397593,
      "k0_before": 1425279334.9397593,
      "k0_interest": 1489000000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "acquisitions_paid: acquisitions_paid_negative_as_filed",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
      "x0_after": 5979992026.974212,
      "x0_before": 5979992026.974212
     },
@@ -42,40 +144,45 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 96739059958.02855,
-     "seam_ratio": 1.0124303740547518,
-     "tv_share": 0.3328324699154267,
-     "wedge_rate_5": 0.0003198989298706511
+     "equity_value": 93091007542.19547,
+     "seam_ratio": 1.0143567644617784,
+     "tv_share": 0.36406105160817426,
+     "wedge_rate_5": -0.00017315397624339515
     },
     "flags": [
      "margin_outside_filed_record: op_margin.y1 0.1300 (filed -0.1755 to 0.1210)",
      "base_year_not_representative",
-     "tax_rate_representative_no: The 2025 rate of 16.2% benefits from permanent tax benefits tied to noncontrolling interests, and the 2026 nine-month rate is about 21.5% (3,912 on 18,179 pretax), so a somewhat higher rate is more likely going forward.",
+     "tax_rate_representative_no: The 2025 rate of 16.2% is held down by permanent benefits from noncontrolling interests, and the 2026 nine-month provision of 3,912 on pretax income of 18,179 implies about 21.5%.",
      "confidence_low",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 13 of 13",
+     "share_count_change_unexplained: shares 306,000,000 to 272,282,280 (-33,717,720); issuing and buying back at 414.65 (half to double) explains -30,314,723 to -7,578,681",
+     "capital_events_over_5pct_of_market_cap: events sum to 6,325,000,000, 5.6% of the market cap 112,901,839,234",
+     "acquisitions_paid: acquisitions_paid_negative_as_filed",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.026,
+     "capex_to_revenue": 0.024,
      "fade_years": 10,
-     "long_run_op_margin": 0.055,
+     "long_run_op_margin": 0.05,
      "op_margin": [
       0.13,
-      0.085,
-      0.068,
-      0.06,
-      0.057
+      0.07,
+      0.055,
+      0.05,
+      0.05
      ],
      "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
-      0.45,
-      -0.2,
-      -0.08,
+      0.42,
+      -0.17,
+      -0.04,
       0.02,
       0.025
      ],
-     "terminal_growth": 0.025
+     "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.4205 and margin 0.1348, margin 0.0625 (persist), growth 0.0375, terminal RONIC 0.0570 (equity return r 0.0846), F 10",
+    "old_defaults_inputs": "year 1 growth 0.4205 and margin 0.1348, margin 0.0625 (persist), growth 0.0375, terminal RONIC 0.0568 (equity return r 0.0841), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 9,
      "kept": 83
@@ -83,240 +190,14 @@
     "ranges": {
      "long_run_op_margin": [
       0.04,
-      0.065
+      0.06
      ],
      "rev_growth_y3": [
-      -0.15,
-      0.0
+      -0.1,
+      0.03
      ],
      "terminal_growth": [
-      0.015,
-      0.035
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "F3",
-        "quote": "Additions to property, plant and equipment | (3,226) | (2,305)"
-       },
-       {
-        "id": "REC",
-        "quote": "capital expenditure / revenue 0.0164"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "2026 nine-month capex (including MPLX) is 3,226 and 2025 capex/revenue was 2.6%, above the five-year pooled 1.6% as MPLX growth projects and Gulf Coast refinery projects continue. Because revenue falls back in years 2-3 while capex stays, I hold 2.6%."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "we entered into a definitive agreement to divest our St. Paul Park, Minnesota and Mandan, North Dakota refineries and related midstream assets for $4.2 billion in cash"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A 10-year fade gives the elevated margin time to mean-revert, in line with the 5-10 year persistence of above-median margins for commodity companies. The portfolio is also being reshaped, with the Mid-Continent sale and reinvestment in the Gulf Coast."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "Historically, refined product margins have been volatile, and we believe they will continue to be volatile."
-       },
-       {
-        "id": "P3",
-        "quote": "Refining & Marketing | $6,138 | $5,703"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Refining margins are volatile and mean-revert; the 2021-2025 median margin of 6.25% is itself inflated by the 2022-2023 spike. A growing, fee-based MPLX midstream segment lifts the floor above the pre-2020 4-5%, so I use 5.5%, keeping part of the gap above the long-run level."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Income from operations | 10,450 | 2,713 | 19,176 | 5,597"
-       },
-       {
-        "id": "P3",
-        "quote": "Blended crack spread sensitivity(a) (per $1.00/barrel change) | $1,125"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 margin is about 13%, since nine-month income from operations was 19,176 on 142,226 of sales and Q4 is guided to lower turnaround costs. Margins then fall toward the long-run level as crack spreads normalise, with the per-barrel sensitivity showing how large that swing is."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0570"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The base-year return on tangible capital of 22% reflects a strong cycle, while the breakeven return is 5.7%. Refining reinvestment is mostly sustaining and yield projects, so I assume a long-run return of 12%, well above breakeven but far below the cycle-peak level."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "higher product prices driven by global crude oil supply disruptions as a result of increasing regional conflicts, particularly in the Middle East and Russia"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $132,699.0 million | -0.0444 | 0.0625"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 sales of 142,226 are already above full-year 2025 (132,699), and Q3 alone was 56,032 on conflict-elevated product prices, so year 1 is up about 45%. If prices normalise, revenue falls back in years 2-3, and the sale of St. Paul Park and Mandan removes some volume before growth settles near 2%."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Longer term, global demand growth is expected to outpace the net impact of refining capacity additions and rationalizations through the end of the decade."
-       },
-       {
-        "id": "P2",
-        "quote": "Together, these developments have had and are expected to continue to have an adverse effect on sales of our liquid transportation fuels"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Management expects demand to outpace capacity changes this decade, but it also says electrification and efficiency rules are weighing on liquid fuel sales. I therefore set terminal growth below the 3.75% anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.05,
-      "input_hit": "op_margin",
-      "risk": "Conflict-driven crack spreads collapse faster than assumed, so margins revert to the 2024-2025 level by year 2"
-     },
-     {
-      "bear_value": -0.15,
-      "input_hit": "rev_growth",
-      "risk": "Product prices and revenue fall back to the 2024-2025 level sooner and further, with no sustained growth"
-     },
-     {
-      "bear_value": 0.04,
-      "input_hit": "long_run_op_margin",
-      "risk": "Structural demand erosion from electrification and efficiency rules, combined with a lower normal margin"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.04,
-      "rev_growth": [
-       0.38,
-       -0.27,
-       -0.15,
-       -0.04999999999999999,
-       -0.04499999999999999
-      ],
-      "terminal_growth": 0.015
-     },
-     "bull": {
-      "long_run_op_margin": 0.065,
-      "rev_growth": [
-       0.53,
-       -0.12000000000000001,
-       0.0,
-       0.1,
-       0.10500000000000001
-      ],
-      "terminal_growth": 0.035
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Total debt of about $33 billion includes MPLX borrowings and is roughly stable, with long-term debt of 32,894 and near-term maturities of only 128, and the company keeps refinancing it."
-     },
-     "margin_position": "The 2025 GAAP operating margin of 6.25% is already near the top of the 2021-2025 range, and 2026 is far above it. Nine-month 2026 operating income was 19,176 against 5,597 a year earlier, driven by crack spreads and product prices that management ties to conflict-related crude supply disruptions. The company's own history (about 4-5% in normal years, 12% in 2022) suggests this is a peak-type margin that will partly mean-revert.",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The 2025 rate of 16.2% benefits from permanent tax benefits tied to noncontrolling interests, and the 2026 nine-month rate is about 21.5% (3,912 on 18,179 pretax), so a somewhat higher rate is more likely going forward."
-     },
-     "why": "2025 is a mid-cycle-to-slightly-elevated year, but the forecast period starts from a 2026 that is a margin and revenue spike (Q3 R&M margin of $45.70/bbl against $17.60). Year 1 therefore sits well above the base year and the fade has to be modelled explicitly. Revenue also swings with product prices, not just volumes. The Mid-Continent refinery sale will cut capacity modestly."
-    },
-    "value_at_old_defaults": 490.5706867194593,
-    "values": {
-     "base": 351.47597332001004,
-     "bear": 207.8326432902134,
-     "bull": 700.7699328583147
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 3672000000.0,
-     "excess_cash_before": 3672000000.0,
-     "k0_after": 1425279334.9397593,
-     "k0_before": 1425279334.9397593,
-     "k0_interest": 1489000000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 5979992026.974212,
-     "x0_before": 5979992026.974212
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 88555466314.54517,
-     "seam_ratio": 1.0159910410596478,
-     "tv_share": 0.34313837306053924,
-     "wedge_rate_5": 0.00014680416763858278
-    },
-    "flags": [
-     "margin_outside_filed_record: op_margin.y1 0.1250 (filed -0.1755 to 0.1210)",
-     "base_year_not_representative",
-     "tax_rate_representative_no: The 2025 rate of 16.2% was helped by permanent benefits from noncontrolling interests, and the 2026 nine-month rate is about 21.5% on the much higher pre-tax income.",
-     "confidence_low",
-     "quotes_verified: 10 of 10"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.025,
-     "fade_years": 10,
-     "long_run_op_margin": 0.052,
-     "op_margin": [
-      0.125,
-      0.07,
-      0.055,
-      0.052,
-      0.052
-     ],
-     "return_on_new_investment_long_run": 0.12,
-     "rev_growth": [
-      0.43,
-      -0.18,
-      -0.06,
-      0.0,
-      0.025
-     ],
-     "terminal_growth": 0.025
-    },
-    "old_defaults_inputs": "year 1 growth 0.4205 and margin 0.1348, margin 0.0625 (persist), growth 0.0375, terminal RONIC 0.0570 (equity return r 0.0846), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 9,
-     "kept": 83
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.04,
-      0.065
-     ],
-     "rev_growth_y3": [
-      -0.15,
-      0.04
-     ],
-     "terminal_growth": [
-      0.015,
+      0.02,
       0.035
      ]
     },
@@ -333,7 +214,7 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Capital spending has risen with MPLX growth projects and refinery investments (nine-month capex $3.2bn, plus the $1.5bn MPC-only outlook), and the ratio is higher than the pooled average because revenue should fall back from the 2026 peak."
+      "why": "Nine-month 2026 capex of 3,226 is about 2.3% of sales, and 2025 was 2.6%. Spending is rising with the Galveston Bay and Garyville projects plus MPLX growth. At lower revenue in years 2-5 the ratio holds near 2.4%, above the 1.6% pooled average."
      },
      "fade_years": {
       "quotes": [
@@ -343,41 +224,49 @@
        }
       ],
       "quotes_given": 1,
-      "why": "Margin normalization and the portfolio reshaping take several years, and management describes a constructive multi-year outlook through the end of the decade, so a medium fade is used."
+      "why": "A 10-year fade lets the post-2026 margin and growth settle gradually from a cyclical peak to mid-cycle levels. Capacity changes and demand shifts play out over that horizon."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P2",
-        "quote": "Historically, refined product margins have been volatile, and we believe they will continue to be volatile."
+        "id": "P1",
+        "quote": "Market conditions in the oil and gas industry are cyclical and subject to global economic and political events and new and changing governmental regulations."
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $138,864.0 million | -0.0641 | 0.0489"
        }
       ],
-      "quotes_given": 1,
-      "why": "Refining margins are volatile and mean-revert. The elevated level should keep only part of its gap above the long-run median, and the Midstream segment and fee-based MPLX agreements add some stability, so I use a mid-cycle level slightly above the long-run history."
+      "quotes_given": 2,
+      "why": "Margins have ranged widely, and the 2015-2025 non-2020 years cluster around 4-6.5% with 2022 as a spike. The industry is cyclical, and above-median margins partly mean-revert. A long-run 5% reflects the median plus modest structural support from MPLX and advantaged Gulf Coast assets."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P6",
-        "quote": "R&M segment adjusted EBITDA was $34.15 per barrel for the third quarter of 2026, versus $6.37 per barrel for the third quarter of 2025."
+        "id": "F2",
+        "quote": "Income from operations | 10,450 | 2,713 | 19,176 | 5,597"
        },
        {
-        "id": "P4",
-        "quote": "higher product prices driven by global crude oil supply disruptions as a result of increasing regional conflicts, particularly in the Middle East and Russia"
+        "id": "P6",
+        "quote": "Results were driven primarily by higher market crack spreads in all regions."
        }
       ],
       "quotes_given": 2,
-      "why": "Q3 per-barrel R&M EBITDA is about five times the prior year because of conflict-driven crack spreads. Year 1 margin is high (9M is about 13.5%, with Q4 expected lower), then it fades toward mid-cycle as spreads normalize."
+      "why": "Nine-month income from operations of 19,176 on 142,226 of sales is about 13.5%, driven by crack spreads. Year 1 is set near 13%, then margins fade as spreads normalize toward mid-cycle levels. Renewable Diesel and MPLX growth keep the floor somewhat above the pre-2026 margin."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0570."
+        "quote": "return on tangible capital 0.2237"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0568"
        }
       ],
-      "quotes_given": 1,
-      "why": "Base-year return on tangible capital is high (0.22) but cyclical and helped by depreciated assets. New investment is mostly high-return refinery projects and MPLX growth, but competition should pull returns down, so I use a value well above break-even and well below the base year."
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 22% reflects a favorable year and a depreciated asset base. New refining and midstream investment should earn well above the 5.7% break-even but far less than 22%. Management says most projects are targeted as high-return, but the cyclicality caps that."
      },
      "rev_growth": {
       "quotes": [
@@ -386,61 +275,70 @@
         "quote": "Sales and other operating revenues | [1] | $ 56,032 | $ 34,809 | $ 142,226 | $ 100,125"
        },
        {
-        "id": "P4",
-        "quote": "for $4.2 billion in cash, subject to working capital, inventory and other closing adjustments"
+        "id": "P3",
+        "quote": "Longer term, global demand growth is expected to outpace the net impact of refining capacity additions and rationalizations through the end of the decade."
        }
       ],
       "quotes_given": 2,
-      "why": "Nine-month 2026 revenue is already $142bn against $100bn a year earlier, so FY2026 should be up roughly 40-45% on conflict-driven product prices. I then assume prices normalize in 2027, and the sale of the two Mid-Continent refineries removes volume, giving a decline in 2027 and 2028 and low growth afterwards."
+      "why": "Nine-month 2026 sales are already 142,226 against 132,699 for all of 2025, with Q3 sales up about 61% on higher product prices. That implies roughly 40% or more growth for 2026. Prices should then normalize, and the sale of two refineries cuts volumes, so years 2 and 3 decline before a modest recovery."
      },
      "terminal_growth": {
       "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
        {
         "id": "P2",
         "quote": "Together, these developments have had and are expected to continue to have an adverse effect on sales of our liquid transportation fuels"
        }
       ],
-      "quotes_given": 1,
-      "why": "Management expects global demand to outpace capacity changes, but electrification and efficiency rules are expected to keep weighing on fuel demand, so long-run nominal growth is set below the anchor."
+      "quotes_given": 2,
+      "why": "Fuel demand faces efficiency and electrification headwinds, so long-run nominal growth is set below the 3.75% anchor. It is still positive because of inflation, MPLX growth and export demand."
      }
     },
     "risks": [
      {
-      "bear_value": 0.04,
+      "bear_value": 0.045,
       "input_hit": "op_margin",
-      "risk": "Conflict-driven crack spreads collapse quickly, so margins fall straight back to or below the 2025 level"
+      "risk": "Conflict-driven crack spreads fade quickly, so margins fall back to or below the historical median faster than assumed"
      },
      {
-      "bear_value": 0.04,
+      "bear_value": 0.035,
       "input_hit": "long_run_op_margin",
-      "risk": "Structural fuel demand erosion and lower mid-cycle refining margins reduce the long-run margin"
+      "risk": "Structural margin is lower because of electrification, efficiency and capacity additions"
      },
      {
-      "bear_value": -0.3,
+      "bear_value": -0.12,
       "input_hit": "rev_growth",
-      "risk": "Product prices fall sharply, so revenue declines more than assumed after the 2026 spike"
+      "risk": "Product prices and revenue fall sharply in year 2 and 3 as supply disruptions ease and the Mid-Continent refineries are sold"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Fuel demand erosion lowers long-run growth"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.04,
       "rev_growth": [
-       0.33999999999999997,
-       -0.27,
-       -0.15,
-       -0.09,
-       -0.065
+       0.36,
+       -0.23,
+       -0.1,
+       -0.04000000000000001,
+       -0.035
       ],
-      "terminal_growth": 0.015
+      "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.065,
+      "long_run_op_margin": 0.06,
       "rev_growth": [
-       0.53,
-       -0.07999999999999999,
-       0.04000000000000001,
-       0.1,
-       0.125
+       0.49,
+       -0.1,
+       0.030000000000000006,
+       0.09000000000000001,
+       0.095
       ],
       "terminal_growth": 0.035
      }
@@ -450,41 +348,356 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "yes",
-      "quotes": [
-       {
-        "id": "F1",
-        "quote": "Long-term debt | 32,894 | 30,505"
-       }
-      ],
-      "why": "Debt of about $33bn is consolidated with MPLX and is stable year over year, with refinancing flows nearly offsetting, so it looks like a level the company will keep, though it is small against 2026 earnings."
+      "why": "Total debt of about $33.3 billion is largely long-dated and partly sits at MPLX, and MPC refinances it in the ordinary course, so the level looks sustainable relative to a business of this size."
      },
-     "margin_position": "The 2026 margin is far above this company's own history. Q3 2026 refining crack spreads were very wide because of conflict-driven crude supply disruptions, and 9M 2026 GAAP operating margin is about 13.5% against 6.25% in 2025 and a long-run median near 5%. Midstream (MPLX) adds a steadier floor.",
+     "margin_position": "The 2025 operating margin of 6.25% sits near the middle of MPC's own history. The 2026 margin is far above it, about 13% over nine months, because Q3 crack spreads jumped on crude supply disruptions tied to regional conflicts. Refining margins are cyclical and are not contracted.",
      "tax_rate_representative": {
       "answer": "no",
+      "why": "The 2025 rate of 16.2% is held down by permanent benefits from noncontrolling interests, and the 2026 nine-month provision of 3,912 on pretax income of 18,179 implies about 21.5%."
+     },
+     "why": "The base year is a mid-cycle year, but the first forecast year, 2026, is already largely reported at a much higher margin and revenue level. The first-year inputs therefore need to follow the nine-month actuals. Later years should fade back toward the roughly 5% long-run margin, since management itself ties the Q3 strength to disruptions that may ease. The pending sale of the St. Paul Park and Mandan refineries trims Mid-Continent capacity, while MPLX growth gives some offset."
+    },
+    "value_at_old_defaults": 493.2685151064572,
+    "values": {
+     "base": 357.5073657339195,
+     "bear": 215.0206477098757,
+     "bull": 675.3145881190327
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": -2579000000.0,
+      "excess_cash_before": 3672000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001510295-26-000071",
+        "amount": -14000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001510295-26-000071",
+        "amount": 6288000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "read_amount": 6288000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 20000000.0,
+        "printed": 20,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Disposal of assets | 20 | 20"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "accn": "0001510295-26-000071",
+        "amount": 3000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "read_amount": 3000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromIssuanceOfCommonStock"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 306,000,000 to 272,282,280 (-33,717,720); issuing and buying back at 414.65 (half to double) explains -30,314,723 to -7,578,681",
+       "capital_events_over_5pct_of_market_cap: events sum to 6,325,000,000, 5.6% of the market cap 112,901,839,234"
+      ],
+      "gross_events": 6325000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 112901839234.0,
+      "net_effect_on_excess_cash": -6251000000.0,
+      "shares": {
+       "after": 272282280.0,
+       "before": 306000000.0,
+       "change": -33717720.0,
+       "explained_range": [
+        -30314723.260581214,
+        -7578680.8151453035
+       ],
+       "interim": 272282280.0,
+       "price_used": 414.65,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid: acquisitions_paid_negative_as_filed",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": -2579000000.0,
+     "excess_cash_before": 3672000000.0,
+     "k0_after": 1425279334.9397593,
+     "k0_before": 1425279334.9397593,
+     "k0_interest": 1489000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "acquisitions_paid: acquisitions_paid_negative_as_filed",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
+     "x0_after": 5979992026.974212,
+     "x0_before": 5979992026.974212
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 101337799999.75217,
+     "seam_ratio": 1.0107629851244289,
+     "tv_share": 0.33292284097341046,
+     "wedge_rate_5": -0.0011104941598377093
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.1300 (filed -0.1755 to 0.1210)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 16.2% base-year rate reflects permanent benefits from MPLX noncontrolling interests, and the 2026 nine-month rate has already risen to about 21.5% (3,912 on 18,179 pretax) as profit mix shifts to the parent.",
+     "confidence_low",
+     "quotes_verified: 15 of 15",
+     "share_count_change_unexplained: shares 306,000,000 to 272,282,280 (-33,717,720); issuing and buying back at 414.65 (half to double) explains -30,314,723 to -7,578,681",
+     "capital_events_over_5pct_of_market_cap: events sum to 6,325,000,000, 5.6% of the market cap 112,901,839,234",
+     "acquisitions_paid: acquisitions_paid_negative_as_filed",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.023,
+     "fade_years": 10,
+     "long_run_op_margin": 0.055,
+     "op_margin": [
+      0.13,
+      0.085,
+      0.07,
+      0.062,
+      0.058
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.44,
+      -0.18,
+      -0.08,
+      0.02,
+      0.03
+     ],
+     "terminal_growth": 0.025
+    },
+    "old_defaults_inputs": "year 1 growth 0.4205 and margin 0.1348, margin 0.0625 (persist), growth 0.0375, terminal RONIC 0.0568 (equity return r 0.0841), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 83
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.042,
+      0.07
+     ],
+     "rev_growth_y3": [
+      -0.16,
+      0.02
+     ],
+     "terminal_growth": [
+      0.015,
+      0.035
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Additions to property, plant and equipment | (3,226) | (2,305)"
+       },
+       {
+        "id": "P6",
+        "quote": "MPC\u2019s 2026 capital spending outlook (excluding MPLX) is $1.5 billion."
+       },
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0164"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 capex of $3.2bn already exceeds the prior year's, including MPLX growth projects, and runs near 2.2-2.6% of revenue against a pooled 1.6%. I hold 2.3% as revenue normalises and MPLX expansion continues."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Longer term, global demand growth is expected to outpace the net impact of refining capacity additions and rationalizations through the end of the decade."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade lets elevated and cyclical margins and growth settle gradually. The industry cycle and MPLX growth projects run on multi-year horizons."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2022-12-31 | $177,453.0 million | 0.4790 | 0.1210"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $138,864.0 million | -0.0641 | 0.0489"
+       },
+       {
+        "id": "P2",
+        "quote": "Historically, refined product margins have been volatile, and we believe they will continue to be volatile."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "The company's own history shows 12.1% in 2022 falling to 4.9% in 2024, and management calls refining margins volatile. I settle slightly below the 2025 level of 6.25%, helped by growing MPLX earnings and Gulf Coast investments and offset by structural demand pressure. This keeps only part of the current gap above the median, since the 2026 spike looks shock-driven."
+     },
+     "op_margin": {
       "quotes": [
        {
         "id": "F2",
-        "quote": "Provision for income taxes | 2,285 | 460 | 3,912 | 765"
+        "quote": "Income from operations | 10,450 | 2,713 | 19,176 | 5,597"
+       },
+       {
+        "id": "P6",
+        "quote": "Results were driven primarily by higher market crack spreads in all regions."
        }
       ],
-      "why": "The 2025 rate of 16.2% was helped by permanent benefits from noncontrolling interests, and the 2026 nine-month rate is about 21.5% on the much higher pre-tax income."
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income of 19,176 is a roughly 13.5% margin on a refining spike that management attributes to higher crack spreads. I assume Q4 is lower, then a fade toward mid-cycle over years 2-5, consistent with the quick retreat after 2022."
      },
-     "why": "2025 is a middling year (6.25% margin) that sits well below the 2026 spike, so it neither shows the current earnings level nor the mid-cycle level cleanly. Year 1 (2026) will show a large revenue and margin jump from price-driven refining margins that management itself ties to supply disruptions. I fade margins toward a mid-cycle level, keeping part of the gap, consistent with the cyclical base rate. The sale of the St. Paul Park and Mandan refineries also shrinks the asset base from Q4 2026."
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0568."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.2237"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 22% reflects a cyclical high. Over the cycle I assume a mid-teens-or-lower return, set well above the 5.7% value-neutral threshold given high-return refinery and midstream projects but well below the peak."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Sales and other operating revenues | [1] | $ 56,032 | $ 34,809 | $ 142,226 | $ 100,125"
+       },
+       {
+        "id": "P4",
+        "quote": "On November 2, 2026, we entered into a definitive agreement to divest our St. Paul Park, Minnesota and Mandan, North Dakota refineries and related midstream assets for $4.2 billion in cash"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Revenue is driven by product prices. Nine-month 2026 sales are already $142.2bn against $132.7bn for all of 2025, so year 1 is up sharply. Revenue then falls as prices ease and the St. Paul Park and Mandan refineries are sold (expected to close in Q4 2026), before modest growth resumes."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Together, these developments have had and are expected to continue to have an adverse effect on sales of our liquid transportation fuels"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0841; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management sees global demand outgrowing capacity, but also says electrification and efficiency are cutting demand for liquid fuels. That points to long-run growth below the 3.75% anchor."
+     }
     },
-    "value_at_old_defaults": 490.5706867194593,
+    "risks": [
+     {
+      "bear_value": 0.04,
+      "input_hit": "long_run_op_margin",
+      "risk": "Conflict-driven crack spreads collapse back to 2024-25 levels faster than assumed, so margins revert to the low-to-mid single digits."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "op_margin",
+      "risk": "Year-2 margin normalises immediately instead of staying elevated, while the 2026 working-capital inflow reverses."
+     },
+     {
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Faster structural demand decline from electrification and vehicle efficiency, plus a larger revenue loss from refinery sales."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.042,
+      "rev_growth": [
+       0.36,
+       -0.26,
+       -0.16,
+       -0.06,
+       -0.05
+      ],
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       0.54,
+       -0.07999999999999999,
+       0.020000000000000004,
+       0.12000000000000001,
+       0.13
+      ],
+      "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of about $33bn is roughly flat against year-end 2025 (long-term debt 32,894 versus 30,505) and is mostly term debt across MPC and MPLX, so it is a stable structural level against a large asset base."
+     },
+     "margin_position": "The 2026 margin is far above MPC's own history. Nine-month operating margin is about 13.5% against 6.25% in 2025 and roughly 5% in 2024. Management ties the jump to higher crack spreads from conflict-driven crude supply disruptions, which are shock-driven rather than structural. In 2022-2024 the margin fell from 12.1% to 4.9% within two years.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 16.2% base-year rate reflects permanent benefits from MPLX noncontrolling interests, and the 2026 nine-month rate has already risen to about 21.5% (3,912 on 18,179 pretax) as profit mix shifts to the parent."
+     },
+     "why": "The base year 2025 (revenue $132.7bn, margin 6.25%) is a middling year, but year 1 (2026) will be much higher on both revenue and margin. Nine-month 2026 sales already total $142.2bn and operating income $19.2bn. I model a sharp spike in year 1, then normalisation as prices and cracks ease, plus the loss of the St. Paul Park and Mandan refineries (about 6% of crude capacity) after the expected Q4 2026 close. Evidence on how long the margins last is thin, so the ranges are wide."
+    },
+    "value_at_old_defaults": 493.2685151064572,
     "values": {
-     "base": 322.75816875810614,
-     "bear": 177.55500349717397,
-     "bull": 777.4332375977245
+     "base": 390.0174974428588,
+     "bear": 214.3360815420391,
+     "bull": 971.4845969414251
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 490.5706867194593,
-  "value_at_old_defaults_quoted": 490.5706867194593,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 493.2685151064572,
+  "value_at_old_defaults_quoted": 493.2685151064572,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 103157823737.95178,
+ "equity_value": 114371304066.04709,
  "family": "commodity",
  "far_from_price": false,
  "filed_shares": 306000000.0,
@@ -503,12 +716,12 @@
  "qwen_book": null,
  "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 351.47597332001004,
-  "3000": 322.75816875810614
+  "1000": 357.5073657339195,
+  "3000": 390.0174974428588
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1612,17 +1825,17 @@
   ]
  },
  "ticker": "MPC",
- "upside": 0.01338350984281389,
+ "upside": 0.1235405065753643,
  "valuation": null,
- "value_base": 337.1170710390581,
- "value_bear": 192.6938233936937,
- "value_bull": 739.1015852280196,
+ "value_base": 373.7624315883892,
+ "value_bear": 214.67836462595739,
+ "value_bull": 823.3995925302289,
  "value_per_filed_share": {
-  "base": 337.1170710390581,
-  "bear": 192.6938233936937,
-  "bull": 739.1015852280196
+  "base": 373.7624315883892,
+  "bear": 214.67836462595739,
+  "bull": 823.3995925302289
  },
  "valued": true,
  "verdict": "WATCH",
- "verdict_reason": "expected return +2.6 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict_reason": "expected return +6.6 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }

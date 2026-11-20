@@ -1,27 +1,45 @@
 {
- "alpha_pts": 2.6142901883537686,
+ "alpha_pts": -0.6295064419545693,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-09-04T14:34:44.000Z",
+  "accepted_utc": "2026-09-04T18:34:44Z",
+  "accession": "0001628280-26-060632",
+  "decision_time": "2026-11-17T13:37:32Z",
+  "form": "10-Q",
+  "period": "2026-07-31"
+ },
  "claims": 66,
  "claims_supported": 62,
  "date": "2026-11-17T13:37:32Z",
  "decided": {
   "flags": [
-   "run 1000: tax_rate_representative_no: The FY2026 GAAP rate was a benefit because of a roughly $70M valuation allowance release, and the adjusted rate was 24.4%, so a normalized rate near 24% is more sustainable.",
-   "run 1000: debt_level_representative_no: Total debt of $683.4M in the record predates the Emerald acquisition, and long-term debt has since risen to $1,277.5M, so the level going forward is roughly double.",
-   "run 1000: confidence_low",
-   "run 1000: quotes_verified: 11 of 11",
+   "run 1000: tax_rate_representative_no: The FY2026 GAAP rate was distorted by a valuation allowance release, while the adjusted effective rate was higher at 24.4%.",
+   "run 1000: debt_level_representative_no: Debt was $683.4 million at the base year but long-term debt rose to 1,277,516 thousand at July 31, 2026 after the Emerald purchase.",
+   "run 1000: quotes_verified: 10 of 11",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 465,580,000, 18.2% of the market cap 2,553,456,441",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_outstanding_at_interim_not_found_base_count_kept",
    "run 3000: margin_outside_filed_record: op_margin.y3 0.1700 (filed -0.0296 to 0.1651)",
    "run 3000: margin_outside_filed_record: op_margin.y4 0.1700 (filed -0.0296 to 0.1651)",
    "run 3000: margin_outside_filed_record: op_margin.y5 0.1700 (filed -0.0296 to 0.1651)",
-   "run 3000: tax_rate_representative_no: The GAAP rate was negative (-3.0%) because of the valuation allowance release, while the adjusted rate was 24.4%, which is a better guide to what the company will keep paying.",
-   "run 3000: debt_level_representative_no: The filed record's $683.4 million of debt predates the Emerald acquisition, and long-term debt has since roughly doubled to $1,277.5 million.",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The filed rate of about 21% sits below the 24.4% non-GAAP adjusted rate, and the GAAP FY2026 rate was distorted by the valuation-allowance release.",
+   "run 3000: debt_level_representative_no: Total debt of $683.4 million in the record predates the Emerald purchase, and long-term debt has since risen to $1,277.5 million.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 13 of 13"
+   "run 3000: quotes_verified: 10 of 10",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 465,580,000, 18.2% of the market cap 2,553,456,441",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_outstanding_at_interim_not_found_base_count_kept"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.0263 and margin 0.0076, margin 0.1352 (persist), growth 0.0375, terminal RONIC 0.0769 (equity return r 0.0985), F 10",
-  "run_gap": 0.05089721703376822,
+  "old_defaults_inputs": "year 1 growth -0.0263 and margin 0.0076, margin 0.1352 (persist), growth 0.0375, terminal RONIC 0.0766 (equity return r 0.0980), F 10",
+  "run_gap": 0.0779312515668391,
   "runs": {
    "1000": {
     "adjustments": {
@@ -38,78 +56,160 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "charge",
-       "what": "Net loss on sale of businesses, assets, and impairment charges related to assets held-for-sale (divestiture-related, non-recurring, sits below operating income)"
+       "what": "net loss on sale of businesses, assets, and impairment charges related to assets held-for-sale in FY2026 (non-recurring disposals)"
       }
      ],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 75622000.0,
+     "capital_events": {
+      "excess_cash_after": -390008000.0,
+      "excess_cash_before": 75572000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001628280-26-060632",
+        "amount": 450351000.0,
+        "end": "2026-07-31",
+        "filed": "2026-09-04",
+        "form": "10-Q",
+        "read_amount": 450351000.0,
+        "source": "xbrl",
+        "start": "2026-05-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001628280-26-060632",
+        "amount": 15229000.0,
+        "end": "2026-07-31",
+        "filed": "2026-09-04",
+        "form": "10-Q",
+        "read_amount": 15229000.0,
+        "source": "xbrl",
+        "start": "2026-05-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_events_over_5pct_of_market_cap: events sum to 465,580,000, 18.2% of the market cap 2,553,456,441"
+      ],
+      "gross_events": 465580000.0,
+      "interim_end": "2026-07-31",
+      "market_cap": 2553456441.0,
+      "net_effect_on_excess_cash": -465580000.0,
+      "shares": {
+       "after": 53247000.0,
+       "before": 53247000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
+     "cash_interest_returned": 1931.6200000000017,
+     "cash_not_free": {
+      "amount": 50000.0,
+      "printed": 50,
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Restricted cash included in Prepaid expenses and other current assets | 50 | 50"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "thousands",
+      "what": "restricted cash included in prepaid expenses and other current assets"
+     },
+     "excess_cash_after": -390008000.0,
      "excess_cash_before": 75622000.0,
-     "k0_after": 59866459.35280001,
+     "k0_after": 59864527.732800014,
      "k0_before": 64694459.35280001,
      "k0_interest": 43848000.0,
      "one_offs_charge": 4828000.0,
      "one_offs_gain": 0,
      "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
      ],
-     "x0_after": 213372816.4887853,
+     "x0_after": 213374342.7490508,
      "x0_before": 209557995.47747758
     },
-    "confidence": "low",
+    "confidence": "medium",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2579497378.76535,
-     "seam_ratio": 0.9737324292633179,
-     "tv_share": 0.32608081803622335,
-     "wedge_rate_5": -0.020277560300761187
+     "equity_value": 2749007270.1630096,
+     "seam_ratio": 0.9876558148688295,
+     "tv_share": 0.290213125024153,
+     "wedge_rate_5": -0.020845635149283632
     },
     "flags": [
-     "tax_rate_representative_no: The FY2026 GAAP rate was a benefit because of a roughly $70M valuation allowance release, and the adjusted rate was 24.4%, so a normalized rate near 24% is more sustainable.",
-     "debt_level_representative_no: Total debt of $683.4M in the record predates the Emerald acquisition, and long-term debt has since risen to $1,277.5M, so the level going forward is roughly double.",
-     "confidence_low",
-     "quotes_verified: 11 of 11"
+     "tax_rate_representative_no: The FY2026 GAAP rate was distorted by a valuation allowance release, while the adjusted effective rate was higher at 24.4%.",
+     "debt_level_representative_no: Debt was $683.4 million at the base year but long-term debt rose to 1,277,516 thousand at July 31, 2026 after the Emerald purchase.",
+     "quotes_verified: 10 of 11",
+     "capital_events_over_5pct_of_market_cap: events sum to 465,580,000, 18.2% of the market cap 2,553,456,441",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
      "capex_to_revenue": 0.035,
-     "fade_years": 8,
-     "long_run_op_margin": 0.155,
+     "fade_years": 10,
+     "long_run_op_margin": 0.15,
      "op_margin": [
-      0.135,
-      0.15,
-      0.16,
+      0.14,
+      0.158,
       0.165,
-      0.165
+      0.165,
+      0.163
      ],
-     "return_on_new_investment_long_run": 0.12,
+     "return_on_new_investment_long_run": 0.18,
      "rev_growth": [
-      0.045,
-      0.025,
-      0.025,
-      0.025,
-      0.025
+      0.04,
+      0.037,
+      0.03,
+      0.03,
+      0.028
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth -0.0263 and margin 0.0076, margin 0.1352 (persist), growth 0.0375, terminal RONIC 0.0769 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0263 and margin 0.0076, margin 0.1352 (persist), growth 0.0375, terminal RONIC 0.0766 (equity return r 0.0980), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 4,
      "kept": 62
     },
     "ranges": {
      "long_run_op_margin": [
-      0.13,
-      0.175
+      0.12,
+      0.17
      ],
      "rev_growth_y3": [
-      0.005,
-      0.04
+      0.015,
+      0.045
      ],
      "terminal_growth": [
       0.02,
-      0.037
+      0.035
      ]
     },
     "reasons": {
@@ -117,11 +217,15 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0384"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0384"
+       },
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | 0.0305 | 0.0856"
        }
       ],
-      "quotes_given": 1,
-      "why": "Pooled capex runs about 3.8% of revenue, falling to 3.05% last year. The enterprise modernization program (ERP, Research publishing infrastructure) keeps it near 3.5%."
+      "quotes_given": 2,
+      "why": "Capex intensity has fallen from 4.3% to 3.05% as the company slimmed its operations. A modestly higher level than the latest year reflects platform modernization and product development spending."
      },
      "fade_years": {
       "quotes": [
@@ -131,13 +235,13 @@
        }
       ],
       "quotes_given": 1,
-      "why": "The journal franchise is durable with long society contracts, but Learning erosion and AI uncertainty argue against a long period of excess growth, so a moderate fade of 8 years."
+      "why": "A 10-year fade fits a business with about half of revenue recurring under multi-year contracts, which keeps the transition from the year-5 state to steady state gradual. Learning's print decline and AI uncertainty argue against a longer fade, while the Research franchise argues against a shorter one."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "annualized cost savings of approximately $125 million"
+        "id": "REC",
+        "quote": "2026-04-30 | $1,676.5 million | -0.0006 | 0.1651"
        },
        {
         "id": "REC",
@@ -145,21 +249,17 @@
        }
       ],
       "quotes_given": 2,
-      "why": "The history shows margins as low as 2.8% in FY2023 and a median near 10.5%, while the restructured, divested portfolio plus about $125M of annualized savings supports a structurally higher level. I assume part of the FY2026 peak fades to about 15.5%."
+      "why": "The FY2026 margin of 16.5% sits far above the recent median, which was depressed by FY2023-24 impairments and restructuring. Base rates say about half of that gap persists, but structural cost savings and a Research-heavy mix justify a long-run margin near 15%, with a wide range."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P6",
         "quote": "Adjusted EBITDA Margin | 24.0% | 26.2% | 26.5% to 27.5%"
-       },
-       {
-        "id": "P4",
-        "quote": "Operating income for the three months ended July 31, 2026 of $2.9 million decreased $28.0 million"
        }
       ],
       "quotes_given": 2,
-      "why": "Management guides FY2027 Adjusted EBITDA margin up to 26.5-27.5%, but GAAP margin in year 1 is cut by restructuring, integration costs and higher Emerald amortization (Q1 GAAP operating income was only $2.9M). Margins rebuild as the cost savings and Emerald synergies come through."
+      "why": "FY2027 guides to a 26.5% to 27.5% adjusted EBITDA margin, but GAAP operating margin is held down in year 1 by restructuring, integration costs and higher intangible amortization from Emerald. It recovers toward 16% as charges fade and the roughly $125 million of savings run through."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
@@ -169,81 +269,72 @@
        }
       ],
       "quotes_given": 1,
-      "why": "Wiley is asset-light with high returns on tangible capital, but growth is increasingly bought through acquisitions such as Emerald, which dilutes returns. I assume a moderate 12%, well above the 7.7% break-even."
+      "why": "Publishing and licensing need little tangible capital, so returns on tangible capital are high, but acquisitions such as Emerald cost far above book value. I assume 18%, comfortably above the 7.66% break-even."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Low-to-mid single digit growth (Research: mid-single digit growth)"
+        "quote": "Organic Revenue Growth* | Low-to-mid single digit growth (Research: mid-single digit growth)"
        },
        {
         "id": "P4",
-        "quote": "contributions from Emerald Publishing of $13.3 million"
+        "quote": "including the contributions from Emerald Publishing of $13.3 million which was acquired on June 1, 2026"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 adds about 11 months of Emerald (about $13.3M for two months, roughly 4% of revenue) to low-to-mid single digit organic growth. Learning is shrinking and AI licensing is lumpy, so growth settles near 2.5%, led by Research open access."
+      "why": "Year 1 gets about four months less than a full year of Emerald uplift (about 4 points on an $80 million annual run-rate) plus low organic growth. Research grows mid-single digit, while Learning is shrinking and AI licensing is lumpy. After Emerald annualizes, growth settles near 3%."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "48% of revenue is recurring"
-       },
-       {
-        "id": "P2",
-        "quote": "AI Technologies could significantly disrupt the markets in which we operate"
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
-      "quotes_given": 2,
-      "why": "Recurring, multi-year research subscriptions support growth near nominal GDP. Print decline in Learning and AI disruption risk keep it below the 3.75% anchor."
+      "quotes_given": 1,
+      "why": "The business is a mature publisher with recurring subscription revenue and open access growth, but print and AI disruption risks cap long-run growth below the nominal anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.005,
+      "bear_value": 0.01,
       "input_hit": "rev_growth",
-      "risk": "Learning keeps shrinking and AI licensing stays at the lower Q1 run-rate, so growth stalls"
+      "risk": "Learning keeps shrinking and AI licensing stays at the lower Q1 run-rate, so total growth stalls"
      },
      {
-      "bear_value": 0.12,
+      "bear_value": 0.11,
       "input_hit": "long_run_op_margin",
-      "risk": "Margin gains fade toward the historical median because restructuring savings do not stick and integration costs recur"
-     },
-     {
-      "bear_value": 0.08,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "The November 2027 facility maturity forces refinancing at worse terms with leverage at 2.7x, raising interest costs and limiting reinvestment"
+      "risk": "Restructuring savings do not stick and AI/open-access competition erodes Research pricing, so margins revert to the historical median"
      },
      {
       "bear_value": 0.02,
       "input_hit": "terminal_growth",
-      "risk": "AI substitution and US research funding cuts erode the long-run growth of the content franchise"
+      "risk": "Higher debt and the November 2027 credit facility maturity force refinancing on worse terms, and AI disrupts content markets, lowering terminal growth"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.13,
+      "long_run_op_margin": 0.12,
       "rev_growth": [
-       0.024999999999999998,
-       0.005000000000000001,
-       0.005000000000000001,
-       0.005000000000000001,
-       0.005000000000000001
+       0.025,
+       0.022,
+       0.015,
+       0.015,
+       0.013000000000000001
       ],
       "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.175,
+      "long_run_op_margin": 0.17,
       "rev_growth": [
-       0.06,
-       0.04,
-       0.04,
-       0.04,
-       0.04
+       0.055,
+       0.052,
+       0.045,
+       0.045,
+       0.043
       ],
-      "terminal_growth": 0.037
+      "terminal_growth": 0.035
      }
     },
     "situation": {
@@ -251,20 +342,20 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "no",
-      "why": "Total debt of $683.4M in the record predates the Emerald acquisition, and long-term debt has since risen to $1,277.5M, so the level going forward is roughly double."
+      "why": "Debt was $683.4 million at the base year but long-term debt rose to 1,277,516 thousand at July 31, 2026 after the Emerald purchase."
      },
-     "margin_position": "The FY2026 GAAP operating margin of 16.5% is the highest in the filed history. The prior-year 13.2% and the earlier 2.8% were depressed by impairments, restructuring and divested loss-making businesses. The rise comes from about $110M of realised cost savings, a 6% cut in operating and administrative expenses, and strong Research growth. It is partly structural, because the portfolio is smaller and the cost base lower. It is above the 5-year median of about 10.5%, so some of it should be given back, especially with Learning weakening and integration costs coming.",
+     "margin_position": "The FY2026 GAAP operating margin of 16.5% is the highest in the filed history. It is well above the 5-year median of about 10.5%. Divested low-margin businesses, a restructuring program with about $110 million of savings realized in FY2026, and growth in Research lifted it. About half of the gap to the median is likely to persist. The savings look structural, but Learning is weak and FY2027 carries restructuring, integration and extra amortization costs.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The FY2026 GAAP rate was a benefit because of a roughly $70M valuation allowance release, and the adjusted rate was 24.4%, so a normalized rate near 24% is more sustainable."
+      "why": "The FY2026 GAAP rate was distorted by a valuation allowance release, while the adjusted effective rate was higher at 24.4%."
      },
-     "why": "FY2026 revenue was flat at $1,676.5M and operating margin was 16.5% after cost cuts. FY2027 starts weaker: Q1 GAAP operating margin was 0.8% on restructuring ($16.5M) and Emerald integration costs ($11.0M), and Learning revenue fell 19%. Emerald adds debt, interest and amortization. The base year is a reasonable but flattering starting point."
+     "why": "FY2026 reflects a cleaner portfolio and the savings run-rate, and revenue was flat. It excludes Emerald, which closed June 1, 2026 and adds roughly $80 million of annual revenue, with debt-funded interest and amortization. Q1 FY2027 GAAP operating margin was only 0.8%, depressed by restructuring and integration costs and a lumpy AI licensing comparison. The base year is a reasonable earnings anchor for margin, but not for the capital structure or the tax rate."
     },
-    "value_at_old_defaults": 38.75659528154251,
+    "value_at_old_defaults": 38.93223306718959,
     "values": {
-     "base": 52.43541251297813,
-     "bear": 41.18210982854624,
-     "bull": 63.80669213192881
+     "base": 47.03036538155582,
+     "bear": 34.996334985095174,
+     "bull": 59.38038668114154
     }
    },
    "3000": {
@@ -282,81 +373,165 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "charge",
-       "what": "Net loss on sale of businesses, assets, and impairment charges related to assets held-for-sale (non-operating, from completed divestitures)"
+       "what": "net loss on sale of businesses, assets, and impairment charges related to assets held-for-sale"
       }
      ],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 75622000.0,
+     "capital_events": {
+      "excess_cash_after": -390008000.0,
+      "excess_cash_before": 75572000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001628280-26-060632",
+        "amount": 450351000.0,
+        "end": "2026-07-31",
+        "filed": "2026-09-04",
+        "form": "10-Q",
+        "read_amount": 450351000.0,
+        "source": "xbrl",
+        "start": "2026-05-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001628280-26-060632",
+        "amount": 15229000.0,
+        "end": "2026-07-31",
+        "filed": "2026-09-04",
+        "form": "10-Q",
+        "read_amount": 15229000.0,
+        "source": "xbrl",
+        "start": "2026-05-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_events_over_5pct_of_market_cap: events sum to 465,580,000, 18.2% of the market cap 2,553,456,441"
+      ],
+      "gross_events": 465580000.0,
+      "interim_end": "2026-07-31",
+      "market_cap": 2553456441.0,
+      "net_effect_on_excess_cash": -465580000.0,
+      "shares": {
+       "after": 53247000.0,
+       "before": 53247000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
+     "cash_interest_returned": 1931.6200000000017,
+     "cash_not_free": {
+      "amount": 50000.0,
+      "printed": 50,
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Restricted cash included in Prepaid expenses and other current assets | 50 | 50"
+       }
+      ],
+      "quotes_given": 1,
+      "scale": "thousands",
+      "what": "restricted cash included in prepaid expenses and other current assets"
+     },
+     "excess_cash_after": -390008000.0,
      "excess_cash_before": 75622000.0,
-     "k0_after": 59866459.35280001,
+     "k0_after": 59864527.732800014,
      "k0_before": 64694459.35280001,
      "k0_interest": 43848000.0,
      "one_offs_charge": 4828000.0,
      "one_offs_gain": 0,
      "stamps": [
+      "cash_not_free_taken_out_of_excess_cash",
+      "interest_on_cash_not_free_returned_to_the_earnings_base",
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
      ],
-     "x0_after": 213372816.4887853,
+     "x0_after": 213374342.7490508,
      "x0_before": 209557995.47747758
     },
     "confidence": "low",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2717965394.26451,
-     "seam_ratio": 0.9742291475338185,
-     "tv_share": 0.3278294075631091,
-     "wedge_rate_5": -0.02033664082566007
+     "equity_value": 2941887845.8911643,
+     "seam_ratio": 0.989961591171801,
+     "tv_share": 0.2952210666234868,
+     "wedge_rate_5": -0.021342341892861803
     },
     "flags": [
      "margin_outside_filed_record: op_margin.y3 0.1700 (filed -0.0296 to 0.1651)",
      "margin_outside_filed_record: op_margin.y4 0.1700 (filed -0.0296 to 0.1651)",
      "margin_outside_filed_record: op_margin.y5 0.1700 (filed -0.0296 to 0.1651)",
-     "tax_rate_representative_no: The GAAP rate was negative (-3.0%) because of the valuation allowance release, while the adjusted rate was 24.4%, which is a better guide to what the company will keep paying.",
-     "debt_level_representative_no: The filed record's $683.4 million of debt predates the Emerald acquisition, and long-term debt has since roughly doubled to $1,277.5 million.",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The filed rate of about 21% sits below the 24.4% non-GAAP adjusted rate, and the GAAP FY2026 rate was distorted by the valuation-allowance release.",
+     "debt_level_representative_no: Total debt of $683.4 million in the record predates the Emerald purchase, and long-term debt has since risen to $1,277.5 million.",
      "confidence_low",
-     "quotes_verified: 13 of 13"
+     "quotes_verified: 10 of 10",
+     "capital_events_over_5pct_of_market_cap: events sum to 465,580,000, 18.2% of the market cap 2,553,456,441",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
      "capex_to_revenue": 0.035,
-     "fade_years": 8,
+     "fade_years": 10,
      "long_run_op_margin": 0.155,
      "op_margin": [
       0.145,
-      0.16,
+      0.165,
       0.17,
       0.17,
       0.17
      ],
-     "return_on_new_investment_long_run": 0.15,
+     "return_on_new_investment_long_run": 0.2,
      "rev_growth": [
-      0.045,
-      0.035,
-      0.025,
-      0.025,
-      0.025
+      0.055,
+      0.04,
+      0.03,
+      0.03,
+      0.03
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth -0.0263 and margin 0.0076, margin 0.1352 (persist), growth 0.0375, terminal RONIC 0.0769 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0263 and margin 0.0076, margin 0.1352 (persist), growth 0.0375, terminal RONIC 0.0766 (equity return r 0.0980), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 4,
      "kept": 62
     },
     "ranges": {
      "long_run_op_margin": [
-      0.125,
+      0.13,
       0.18
      ],
      "rev_growth_y3": [
       0.01,
-      0.04
+      0.045
      ],
      "terminal_growth": [
       0.02,
-      0.035
+      0.04
      ]
     },
     "reasons": {
@@ -364,15 +539,11 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0384"
-       },
-       {
-        "id": "F3",
-        "quote": "Additions to technology, property and equipment | (11,197) | (12,005)"
+        "quote": "capital expenditure / revenue 0.0384"
        }
       ],
-      "quotes_given": 2,
-      "why": "Capex has fallen from 4.3% to 3.05% of revenue. The Q1 quarter shows technology capex of $11.2 million plus product development, and the multiyear ERP and research platform modernization should hold capex above the latest low, so I use 3.5%."
+      "quotes_given": 1,
+      "why": "Capex has fallen from 4.3% to 3.05% of revenue. The five-year pool averages 3.84%, and enterprise modernization and Emerald integration argue against the lowest figure, so I use about 3.5%."
      },
      "fade_years": {
       "quotes": [
@@ -382,21 +553,21 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A fade of 8 years is a mid-length transition from the post-Emerald, post-restructuring growth path to the mature one, given that the Research growth runway is long but Learning is in decline."
+      "why": "Ten years lets the post-restructuring margin and the Emerald-boosted growth fade gradually toward long-run levels."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Non-GAAP Adjusted OI | $296,170 | $250,548"
+        "id": "REC",
+        "quote": "2025-04-30 | $1,677.6 million | -0.1043 | 0.1320"
        },
        {
-        "id": "P4",
-        "quote": "We anticipate to yield annualized cost savings of approximately $125 million"
+        "id": "P3",
+        "quote": "Non-GAAP Adjusted OI | $296,170 | $250,548"
        }
       ],
       "quotes_given": 2,
-      "why": "Part of the 16.5% base-year margin comes from cost savings and part from a cyclical-style peak above the 5-year median. Learning is deteriorating and Emerald adds amortization. I therefore fade to about 15.5%, between the old range of 11-13% and the current 16.5-17.7%."
+      "why": "Today's margin is above the company's history, and base rates suggest about half the gap persists. I credit the structural cost savings and the Research mix shift but allow for AI disruption and Learning erosion, so I set it below the current margin."
      },
      "op_margin": {
       "quotes": [
@@ -405,26 +576,22 @@
         "quote": "Adjusted EBITDA Margin | 24.0% | 26.2% | 26.5% to 27.5%"
        },
        {
-        "id": "F2",
-        "quote": "Restructuring and related charges | 16,525 | 3,038"
+        "id": "P3",
+        "quote": "we expect to incur additional restructuring charges in future periods"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 GAAP margin is cut by Emerald integration costs, elevated restructuring charges and higher intangible amortization. The Q1 GAAP margin was only 0.8%, although the Adjusted EBITDA margin outlook is 26.5% to 27.5%. The margin recovers as one-off costs fall and about $120 million of savings are realised."
+      "why": "Guided Adjusted EBITDA margin of 26.5-27.5% implies adjusted operating margin of roughly 18%. Restructuring and integration charges bring year 1 GAAP margin to about 14.5%, with recovery as savings arrive and charges fade."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
-       },
-       {
-        "id": "REC",
-        "quote": "return on tangible capital 1.0000"
+        "quote": "growth adds no value (code, after the company's leverage): 0.0766"
        }
       ],
-      "quotes_given": 2,
-      "why": "The business is asset-light, so the base-year return on tangible capital is very high. New investment includes acquisitions such as Emerald at goodwill-heavy prices, so I use 15%, well above the 7.69% break-even but far below the 100% printed."
+      "quotes_given": 1,
+      "why": "Publishing is asset-light, with advance-paid subscriptions and low capex, so incremental returns on tangible capital are high. I use a value well above the 7.66% break-even but far below the degenerate 1.0 base-year figure."
      },
      "rev_growth": {
       "quotes": [
@@ -434,96 +601,92 @@
        },
        {
         "id": "P4",
-        "quote": "including the contributions from Emerald Publishing of $13.3 million which was acquired on June 1, 2026"
+        "quote": "contributions from Emerald Publishing of $13.3 million"
        }
       ],
       "quotes_given": 2,
-      "why": "Management guides to low-to-mid single digit organic growth. Year 1 adds about ten months of Emerald, which contributed $13.3 million in two months. Growth then settles around 2.5% as Research growth (open access output up about 25%) is partly offset by the Learning decline (-7% in FY2026, -19% in Q1) and lumpy AI licensing."
+      "why": "Year 1 combines about 11 months of Emerald (roughly $13.3 million in two months) with guided low-to-mid single digit organic growth. Research is growing, Learning is shrinking and AI licensing is lumpy, so growth then settles near 3%."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
         "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       },
-       {
-        "id": "P2",
-        "quote": "Technological developments in AI could disrupt the markets in which we operate"
        }
       ],
-      "quotes_given": 2,
-      "why": "Wiley is a mature publisher with recurring research revenue and structural print decline in Learning. AI could disrupt or cannibalize its content, so I set long-run growth below the 3.75% anchor."
+      "quotes_given": 1,
+      "why": "Research growth and AI licensing are offset by declining Learning print and AI disruption risk, so I set growth slightly below the long-run anchor."
      }
     },
     "risks": [
      {
       "bear_value": 0.01,
       "input_hit": "rev_growth",
-      "risk": "Learning keeps shrinking and AI licensing stays lumpy or low, so growth stays near zero"
+      "risk": "Learning keeps declining and AI licensing stays weak, so growth stalls"
      },
      {
       "bear_value": 0.12,
       "input_hit": "long_run_op_margin",
-      "risk": "Restructuring savings are offset by reinvestment and a weaker Learning mix, so the margin reverts toward the 5-year median"
+      "risk": "AI disruption, funding cuts or failed cost savings erode the margin back toward the historical 12%"
      },
      {
-      "bear_value": 0.02,
-      "input_hit": "terminal_growth",
-      "risk": "AI disruption or US research funding cuts erode the content franchise"
+      "bear_value": 0.12,
+      "input_hit": "op_margin",
+      "risk": "Higher debt and refinancing of the November 2027 facilities lower the value of the equity and constrain investment"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.125,
+      "long_run_op_margin": 0.13,
       "rev_growth": [
-       0.03,
+       0.035,
        0.020000000000000004,
-       0.01,
-       0.01,
-       0.01
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
       ],
       "terminal_growth": 0.02
      },
      "bull": {
       "long_run_op_margin": 0.18,
       "rev_growth": [
-       0.06,
-       0.05,
-       0.04,
-       0.04,
-       0.04
+       0.07,
+       0.055,
+       0.045,
+       0.045,
+       0.045
       ],
-      "terminal_growth": 0.035
+      "terminal_growth": 0.04
      }
     },
     "situation": {
-     "base_year_representative": "unclear",
+     "base_year_representative": "no",
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "no",
-      "why": "The filed record's $683.4 million of debt predates the Emerald acquisition, and long-term debt has since roughly doubled to $1,277.5 million."
+      "why": "Total debt of $683.4 million in the record predates the Emerald purchase, and long-term debt has since risen to $1,277.5 million."
      },
-     "margin_position": "The FY2026 GAAP operating margin of 16.5% is the highest in the filed series. It is lifted by about $110 million of realised restructuring savings and by lower operating and administrative costs on flat revenue. It sits well above the 5-year median of about 10.5%, which includes the restructuring and impairment years FY2023-24. Part of the lift is structural, since Research is growing at a 33% Adjusted EBITDA margin, but part is a catch-up from cost cuts. FY2027 GAAP margin is pushed down by Emerald integration costs, restructuring charges and higher amortization.",
+     "margin_position": "The FY2026 GAAP operating margin of 16.5% is well above Wiley's own history, where it was roughly 11-14% in most years. The lift comes from the divested low-margin businesses and a restructuring program that cut operating and administrative costs. Research is growing at a 33% Adjusted EBITDA margin, while Learning is shrinking. Part of the gap should persist, because the cost savings are structural, but the Q1 FY2027 GAAP margin of 0.8% shows how much restructuring and integration charges can depress it.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The GAAP rate was negative (-3.0%) because of the valuation allowance release, while the adjusted rate was 24.4%, which is a better guide to what the company will keep paying."
+      "why": "The filed rate of about 21% sits below the 24.4% non-GAAP adjusted rate, and the GAAP FY2026 rate was distorted by the valuation-allowance release."
      },
-     "why": "FY2026 revenue was flat at $1,676.5 million and operating income rose 25% on cost savings, so the margin is a post-restructuring peak rather than a steady-state level. The year also includes a roughly $70 million valuation allowance release that affects net income, not operating margin. Emerald (about $450 million of debt-funded purchase price) and the Learning slump change the go-forward revenue mix and capital structure, so the base year only partly represents the future."
+     "why": "FY2026 revenue was flat at $1,676.5 million, and its tax line was distorted by a valuation-allowance release. The business is changing: Emerald was acquired on June 1, 2026 for about $462.7 million of consideration, debt rose sharply, and restructuring was expanded again. Year 1 should therefore show higher revenue, higher interest and temporarily heavy one-off charges."
     },
-    "value_at_old_defaults": 38.75659528154251,
+    "value_at_old_defaults": 38.93223306718959,
     "values": {
-     "base": 55.173920296407275,
-     "bear": 43.5362311923971,
-     "bull": 67.99048110716278
+     "base": 50.84410538312251,
+     "bear": 37.34850824929911,
+     "bull": 67.96854585120411
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 38.75659528154251,
-  "value_at_old_defaults_quoted": 38.75659528154251,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 38.93223306718959,
+  "value_at_old_defaults_quoted": 38.93223306718959,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 2864937072.0506725,
+ "equity_value": 2605760972.403414,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 53247000.0,
@@ -540,12 +703,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 52.43541251297813,
-  "3000": 55.173920296407275
+  "1000": 47.03036538155582,
+  "3000": 50.84410538312251
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1385,17 +1548,17 @@
   ]
  },
  "ticker": "WLY",
- "upside": 0.12399182635382511,
+ "upside": 0.022310075493843007,
  "valuation": null,
- "value_base": 53.8046664046927,
- "value_bear": 42.35917051047167,
- "value_bull": 65.8985866195458,
+ "value_base": 48.93723538233917,
+ "value_bear": 36.172421617197145,
+ "value_bull": 63.67446626617283,
  "value_per_filed_share": {
-  "base": 53.8046664046927,
-  "bear": 42.35917051047167,
-  "bull": 65.8985866195458
+  "base": 48.93723538233917,
+  "bear": 36.172421617197145,
+  "bull": 63.67446626617283
  },
  "valued": true,
- "verdict": "WATCH",
- "verdict_reason": "expected return +2.6 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -0.6 points a year against the required return over 3 years"
 }

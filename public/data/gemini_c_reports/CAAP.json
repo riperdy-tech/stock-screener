@@ -1,12 +1,12 @@
 {
- "alpha_pts": 11.735288900761637,
+ "alpha_pts": 8.800819305683955,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "based_on": {
   "accepted": "2026-11-17T21:45:52.000Z",
   "accepted_utc": "2026-11-18T02:45:52Z",
   "accession": "0001104659-26-129109",
-  "decision_time": "2026-11-19T17:46:37Z",
+  "decision_time": "2026-11-20T02:53:26Z",
   "form": "6-K",
   "period": "2026-09-30"
  },
@@ -15,27 +15,331 @@
  "date": "2026-11-19T17:46:37Z",
  "decided": {
   "flags": [
-   "run 1000: tax_rate_representative_no: The 22.53% effective tax rate in 2025 is well below 9M 2026's 27.59% ($85,309 thousand on $309,235 thousand pretax income) and swung sharply in prior years (49.25% in 2024 and a net tax benefit in 2023) due to large deferred tax adjustments and Argentine hyperinflation accounting.",
+   "situation_unclear",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The 2025 effective rate was 22.5%, but the first nine months of 2026 show income tax of 85,309 on pretax income of 309,235 (27.6%), and Argentina's statutory rate is higher.",
+   "run 1000: confidence_low",
    "run 1000: interest_ifrs_expense_for_finance_costs:refused=ifrs-full:FinanceCosts:used=ifrs-full:InterestExpense",
-   "run 1000: quotes_verified: 17 of 17",
-   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: quotes_verified: 9 of 9",
    "run 1000: buybacks_paid_not_filed_taken_as_0",
    "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
    "run 1000: special_distributions_not_filed_taken_as_0",
    "run 1000: shares_outstanding_at_interim_not_found_base_count_kept",
-   "run 3000: tax_rate_representative_no: The 22.53% base-year tax rate is below the 27.59% effective rate in 9M 2026 ($85,309 thousand on $309,235 thousand pre-tax income) and 29.51% in 9M 2025, and historical rates swing widely due to deferred taxes and Argentine IAS 29 inflation adjustments (49.25% in 2024 and a net tax benefit in 2023).",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
    "run 3000: interest_ifrs_expense_for_finance_costs:refused=ifrs-full:FinanceCosts:used=ifrs-full:InterestExpense",
-   "run 3000: quotes_verified: 26 of 26",
+   "run 3000: quotes_verified: 11 of 11",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
    "run 3000: buybacks_paid_not_filed_taken_as_0",
    "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
    "run 3000: special_distributions_not_filed_taken_as_0",
    "run 3000: shares_outstanding_at_interim_not_found_base_count_kept"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "margin 0.2457 (persist), growth 0.0375, terminal RONIC 0.0867 (equity return r 0.0944), F 10",
-  "run_gap": 0.026172953046795806,
+  "old_defaults_inputs": "margin 0.2457 (persist), growth 0.0375, terminal RONIC 0.0865 (equity return r 0.0942), F 10",
+  "run_gap": 0.010766919087813893,
   "runs": {
    "1000": {
+    "adjustments": {
+     "base_year_one_offs": [
+      {
+       "amount": 31083000.0,
+       "printed": 31083,
+       "quotes": [
+        {
+         "id": "F2",
+         "quote": "Share of income / (loss) in associates | 31,083 | (996) | 7,108"
+        }
+       ],
+       "quotes_given": 1,
+       "scale": "thousands",
+       "sign": "gain",
+       "what": "Share of income in associates, which jumped from a loss in 2024; probably the Kunter Wasi ICSID settlement gain. It does not recur: the nine months of 2026 show a loss in associates."
+      }
+     ],
+     "capital_events": {
+      "excess_cash_after": 591875000.0,
+      "excess_cash_before": 592759000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 915000.0,
+        "printed": 915,
+        "quotes": [
+         {
+          "id": "P4",
+          "quote": "Additional acquisitions in subsidiaries | (915)"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "buybacks_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "disposals_received": {
+        "amount": 31000.0,
+        "printed": 31,
+        "quotes": [
+         {
+          "id": "P4",
+          "quote": "Net cash inflow on disposal of subsidiaries | 31 | 292"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 946000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 3863734145.0,
+      "net_effect_on_excess_cash": -884000.0,
+      "shares": {
+       "after": 162451000.0,
+       "before": 162451000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "buybacks_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 591875000.0,
+     "excess_cash_before": 592759000.0,
+     "k0_after": 223684933.1191445,
+     "k0_before": 192601933.1191445,
+     "k0_interest": 90827000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 31083000.0,
+     "stamps": [
+      "base_year_one_offs_taken_out_of_k0",
+      "ronic0_not_readjusted",
+      "buybacks_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
+     ],
+     "x0_after": 204977146.09587294,
+     "x0_before": 229056235.66789666
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3791254223.9120855,
+     "seam_ratio": 1.0132757897801352,
+     "tv_share": 0.3676557672462878,
+     "wedge_rate_5": -0.029428937035573286
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The 2025 effective rate was 22.5%, but the first nine months of 2026 show income tax of 85,309 on pretax income of 309,235 (27.6%), and Argentina's statutory rate is higher.",
+     "confidence_low",
+     "interest_ifrs_expense_for_finance_costs:refused=ifrs-full:FinanceCosts:used=ifrs-full:InterestExpense",
+     "quotes_verified: 9 of 9",
+     "buybacks_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.11,
+     "fade_years": 10,
+     "long_run_op_margin": 0.22,
+     "op_margin": [
+      0.228,
+      0.232,
+      0.235,
+      0.235,
+      0.235
+     ],
+     "return_on_new_investment_long_run": 0.11,
+     "rev_growth": [
+      0.19,
+      0.075,
+      0.06,
+      0.055,
+      0.05
+     ],
+     "terminal_growth": 0.032
+    },
+    "old_defaults_inputs": "margin 0.2457 (persist), growth 0.0375, terminal RONIC 0.0865 (equity return r 0.0942), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 75
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.19,
+      0.24
+     ],
+     "rev_growth_y3": [
+      0.03,
+      0.09
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Acquisition of Intangible assets | (203,165) | (212,573) | (149,436)"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The filed-record ratio of 0.76% captures only PP&E. Real reinvestment is the IFRIC 12 concession capex, about 10-11% of revenue, which is deducted inside operating cash flow. It must be netted against the non-cash construction revenue included in operating income."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Our concession agreements may be terminated at any time by the relevant governments or agencies."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years reflects the long but finite concession lives, with termination risk and buy-out rights held by governments."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $1,962.1 million | 0.0645 | 0.2489"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "I fade to 22%, the middle of the historical 21-24% non-crisis band. Single-till and regulatory resets in Argentina, which is over half of revenue, cap upside, and the Brazil and Italy segments earn lower returns."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Operating income | 142,640 | 146,947 | 391,340 | 356,187"
+       },
+       {
+        "id": "P4",
+        "quote": "Cost of fuel | (74,955) | (36,901) | (157,350) | (83,229)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating income grew slower than revenue, so the margin is down about 2.5 points. Fuel costs in Armenia, which resell at low margin, roughly doubled. I assume a modest recovery from about 22.8% in year 1 to 23.5%."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "return on tangible capital 0.1434"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 14.3% reflects old, largely amortised concession assets. New IFRIC 12 investment earns regulated, pass-through-type returns, so I use 11%, between the 8.65% break-even and 14.3%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "Revenue | 4 | 614,975 | 527,272 | 1,704,532 | 1,399,522"
+       },
+       {
+        "id": "P3",
+        "quote": "In 2025, air traffic increased 9.8% in terms of number of passengers"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) growth is high because nine-month revenue is already well above the prior year. Traffic growth, higher tariffs, Armenian fuel pass-through and construction revenue all contribute. Growth should fade toward mid-single digits as translation and inflation effects normalise."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "extending its term for an additional 35 years, until December 31, 2067"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Concessions run to 2038 (Argentina), 2053 (Uruguay) and 2067 (Armenia), and the cash flows are inflation-linked, so I set nominal growth slightly below the 3.75% anchor. Finite, renewable terms and emerging-market exposure justify the haircut."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.17,
+      "input_hit": "long_run_op_margin",
+      "risk": "An Argentine regulatory tariff reset or a government buy-out of AA2000 compresses margin and cash flows."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Argentine macro or FX stress cuts traffic, and a Middle East escalation lifts fuel prices and reduces demand."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Concession terms are not extended or renegotiation fails (Brazil, Neuqu\u00e9n, AA2000), shortening the cash flow horizon."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.19,
+      "rev_growth": [
+       0.16,
+       0.045,
+       0.03,
+       0.025,
+       0.020000000000000004
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.24,
+      "rev_growth": [
+       0.22,
+       0.105,
+       0.09,
+       0.08499999999999999,
+       0.08
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Borrowings of about 1.1bn are modest and falling, but the concession fee payable of about 1.0bn is a debt-like obligation not included in the total debt figure."
+     },
+     "margin_position": "The 2025 operating margin of 24.9% sits in the middle of a 21-24% pre-COVID band. The 2023 figure of 38.6% was inflated by a one-time impairment reversal. The nine months of 2026 show a lower margin of about 23.0%, against 25.5% a year earlier, because low-margin fuel resale in Armenia and IFRIC 12 construction pass-through revenue are growing fast.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The 2025 effective rate was 22.5%, but the first nine months of 2026 show income tax of 85,309 on pretax income of 309,235 (27.6%), and Argentina's statutory rate is higher."
+     },
+     "why": "Airport traffic is cyclical and exposed to shocks. 2020 revenue fell 61% and the 2020 operating margin was -27%. 2025 revenue includes about 10% construction pass-through revenue. It also includes a large associate gain, probably the ICSID settlement, below operating income. 2026 revenue is running about 22% above 2025 for the first nine months, so the base year understates the current scale."
+    },
+    "value_at_old_defaults": 32.43485390682258,
+    "values": {
+     "base": 28.92187219954777,
+     "bear": 20.57587330582938,
+     "bull": 39.802091954135086
+    }
+   },
+   "3000": {
     "adjustments": {
      "base_year_one_offs": [
       {
@@ -48,13 +352,13 @@
         },
         {
          "id": "P1",
-         "quote": "In December 2025, Kunter Wasi, a company in which we indirectly hold a 50% equity interest, received a favorable ruling in an ICSID arbitration proceeding that resulted in a final settlement of U.S.$91.2 million in December 2025, related to the unilateral termination in 2017 by the Peruvian government of a concession agreement."
+         "quote": "received a favorable ruling in an ICSID arbitration proceeding that resulted in a final settlement of U.S.$91.2 million in December 2025"
         }
        ],
        "quotes_given": 2,
        "scale": "thousands",
        "sign": "gain",
-       "what": "Share of income in associates from the December 2025 Kunter Wasi ICSID arbitration settlement"
+       "what": "Share of income in associates, inflated in 2025 by the Kunter Wasi ICSID settlement (USD 91.2 million, 50% owned) and not expected to recur at this level"
       }
      ],
      "capital_events": {
@@ -131,19 +435,20 @@
      "x0_after": 204977146.09587294,
      "x0_before": 229056235.66789666
     },
-    "confidence": "medium",
+    "confidence": "low",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 3964056634.242163,
-     "seam_ratio": 1.0276444901284782,
-     "tv_share": 0.33916485450404726,
-     "wedge_rate_5": -0.024594960023721628
+     "equity_value": 3743955982.720616,
+     "seam_ratio": 1.0142652726026464,
+     "tv_share": 0.33076417223489674,
+     "wedge_rate_5": -0.0315875577155579
     },
     "flags": [
-     "tax_rate_representative_no: The 22.53% effective tax rate in 2025 is well below 9M 2026's 27.59% ($85,309 thousand on $309,235 thousand pretax income) and swung sharply in prior years (49.25% in 2024 and a net tax benefit in 2023) due to large deferred tax adjustments and Argentine hyperinflation accounting.",
+     "base_year_not_representative",
+     "confidence_low",
      "interest_ifrs_expense_for_finance_costs:refused=ifrs-full:FinanceCosts:used=ifrs-full:InterestExpense",
-     "quotes_verified: 17 of 17",
+     "quotes_verified: 11 of 11",
      "acquisitions_paid_not_filed_taken_as_0",
      "buybacks_paid_not_filed_taken_as_0",
      "shares_issued_proceeds_not_filed_taken_as_0",
@@ -151,389 +456,42 @@
      "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
-     "capex_to_revenue": 0.118,
+     "capex_to_revenue": 0.1,
      "fade_years": 12,
-     "long_run_op_margin": 0.23,
+     "long_run_op_margin": 0.22,
      "op_margin": [
-      0.23,
-      0.233,
-      0.235,
-      0.238,
-      0.24
+      0.228,
+      0.225,
+      0.225,
+      0.224,
+      0.224
      ],
-     "return_on_new_investment_long_run": 0.115,
+     "return_on_new_investment_long_run": 0.11,
      "rev_growth": [
-      0.19,
-      0.075,
-      0.065,
-      0.055,
-      0.05
+      0.18,
+      0.07,
+      0.06,
+      0.05,
+      0.045
      ],
-     "terminal_growth": 0.03
+     "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "margin 0.2457 (persist), growth 0.0375, terminal RONIC 0.0867 (equity return r 0.0944), F 10",
+    "old_defaults_inputs": "margin 0.2457 (persist), growth 0.0375, terminal RONIC 0.0865 (equity return r 0.0942), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 6,
      "kept": 75
     },
     "ranges": {
      "long_run_op_margin": [
-      0.185,
-      0.265
+      0.18,
+      0.25
      ],
      "rev_growth_y3": [
-      0.015,
-      0.105
-     ],
-     "terminal_growth": [
-      0.015,
-      0.042
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "F3",
-        "quote": "Acquisition of Intangible assets | (203,165) | (212,573) | (149,436)"
-       },
-       {
-        "id": "F3",
-        "quote": "Acquisition of Property, plant and equipment | (16,708) | (12,218) | (9,661)"
-       },
-       {
-        "id": "P4",
-        "quote": "Capital Expenditure | 199,852 | - | - | 199,852 | 226,785 | - | 2 | 226,787"
-       },
-       {
-        "id": "P4",
-        "quote": "The total capital investments program, during the term of the extended concession is expected to be approximately USD 7.3 billion (including VAT) to be primarily funded by certain trusts, and of which approximately USD 1.5 billion shall be deployed during the 2027\u20132031 period across the airports covered by the AA2000 concession."
-       }
-      ],
-      "quotes_given": 4,
-      "why": "The filed record's 0.0076 pooled capex ratio captures only PP&E and omits IFRIC 12 concession intangible additions classified in operating cash flows ($203.2 million in 2025 and $184.7 million in 9M 2026), even though its 0.1022 depreciation ratio includes concession amortization; including concession capex (consolidated 2025 Capital Expenditure of $226,787 thousand, or 11.56% of revenue, and 9M 2026 $199,852 thousand, or 11.72%) plus major master plans in Argentina, Italy, and Armenia requires 11.8% of revenue."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "In December 2020, we executed an amendment to the AA2000 Concession Agreement extending the concession term for an additional ten years, until February 13, 2038."
-       },
-       {
-        "id": "P3",
-        "quote": "Argentina | 1,069.5 | 54.5% | 1,043.9 | 56.6% | 640.6 | 45.5%"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "A 12-year fade after Year 5 extends the explicit plus fade window to 2042, capturing the 2038 maturity of CAAP's largest concession (AA2000, 54.5% of 2025 revenue) while recognizing the multi-decade horizons of its Uruguay (2053), Italy (2045-2048), and Armenia (2067) concessions."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $1,962.1 million | 0.0645 | 0.2489"
-       },
-       {
-        "id": "P1",
-        "quote": "Single till model (Argentina): a certain return shall be achieved over the life of the concession, and for the calculation, all revenues (aeronautical and commercial) as well as operating expenses and capital expenditures are considered."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Long-run operating margin fades to 23.0%, aligned with the 9M 2026 run-rate (22.96%) and slightly below 2024-2025 (24.26%-24.89%) to reflect Argentina's single-till economic-equilibrium return cap, regulated Italian aeronautical returns, and persistent exposure to wage inflation and low-margin construction services."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Operating income | 142,640 | 146,947 | 391,340 | 356,187"
-       },
-       {
-        "id": "P4",
-        "quote": "Cost of fuel | (74,955) | (36,901) | (157,350) | (83,229)"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 operating margin compressed to 22.96% ($391,340 thousand on $1,704,532 thousand revenue) from 25.45% in 9M 2025 because low-margin Armenia fuel costs nearly doubled and construction service revenue rose 51%. As those mix drags stabilize and high-margin international commercial revenues scale, operating margin is projected at 23.0% in Year 1 rising modestly to 24.0% by Year 5."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Base year: return on tangible capital 0.1434; tax rate 0.2253; total debt $1,095.2 million; cash counted as excess $592.8 million; net debt (debt less that cash) $502.5 million."
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0867."
-       },
-       {
-        "id": "P1",
-        "quote": "Dual till model (Italy): this model provides a guaranteed return in connection with aeronautical activities. Only aeronautical revenues are considered to cover aeronautical operating expenses and capital expenditures. There is an established WACC for the regulated part of the business."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Base-year return on tangible capital is 14.34% against an 8.67% value-neutral hurdle, but incremental returns will compress toward 11.5% as Argentina's single-till framework and Italy's WACC-regulated aeronautical regime cap excess returns on large capital programs while competitive commercial terminal assets keep overall returns moderately above cost of capital."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Revenue | 4 | 614,975 | 527,272 | 1,704,532 | 1,399,522"
-       },
-       {
-        "id": "P3",
-        "quote": "In 2025, air traffic increased 9.8% in terms of number of passengers, increased 6.4% in terms of aircraft movements, and increased 1.4% in terms of cargo volume handled."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 revenue grew 21.8% year over year to $1,704,532 thousand (driven by Argentina traffic/tariffs, Armenia fuel/commercial growth, and higher IFRIC 12 construction revenue), supporting ~19% full-year growth in Year 1. Growth is projected to normalize to 5.0%-7.5% over Years 2-5 as fuel pass-through step-ups lap and AA2000, Italy, and Armenia capital programs sustain passenger capacity and inflation-indexed tariffs."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0944; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "P1",
-        "quote": "In January 2026, the fifth amendment to the Concession Agreement was executed with the Government of Armenia extending its term for an additional 35 years, until December 31, 2067."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Terminal growth of 3.0% sits modestly below the 3.75% nominal anchor because CAAP operates finite government concessions (with AA2000 expiring in 2038 and TAGSA in 2031) where long-term expansion depends on competitive re-bidding or regulatory extensions rather than perpetual ownership, partly offset by long-dated franchises in Uruguay (2053) and Armenia (2067)."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.165,
-      "input_hit": "long_run_op_margin",
-      "risk": "Severe Argentine macroeconomic instability, ARS devaluation, or adverse ORSNA tariff and concession-fee resets compressing profitability in CAAP's 54.5%-revenue core market"
-     },
-     {
-      "bear_value": 0.005,
-      "input_hit": "terminal_growth",
-      "risk": "Exercise of the Argentine Government's AA2000 buy-out option or failure to secure concession renewals and pending awards in Iraq and Angola"
-     },
-     {
-      "bear_value": 0.155,
-      "input_hit": "capex_to_revenue",
-      "risk": "Cost overruns or higher direct funding requirements across the AA2000 ($1.5B in 2027-2031), Italy (\u20ac576M), and Armenia ($425M) capital investment plans"
-     },
-     {
-      "bear_value": 0.085,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Prolonged permitting delays at Florence Airport, unresolved Brazilian concession losses, and regulatory disallowance of past capital expenditures"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.185,
-      "rev_growth": [
-       0.14,
-       0.024999999999999994,
-       0.015,
-       0.0049999999999999975,
-       0.0
-      ],
-      "terminal_growth": 0.015
-     },
-     "bull": {
-      "long_run_op_margin": 0.265,
-      "rev_growth": [
-       0.22999999999999998,
-       0.11499999999999999,
-       0.105,
-       0.095,
-       0.09
-      ],
-      "terminal_growth": 0.042
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Total borrowings of $1,095.2 million at December 31, 2025 edged down to $1,058.5 million at September 30, 2026 while revenue and operating cash flow expanded, representing a stable ongoing leverage profile alongside recurring concession capex commitments."
-     },
-     "margin_position": "Base-year 2025 operating margin of 24.89% reflects strong post-pandemic international traffic recovery, 41.4% commercial revenue mix, and Argentina price/tariff normalization, partially offset by low-margin IFRIC 12 construction services (10.5% of revenue) and Armenia fuel sales that expanded further in 9M 2026 and brought 9M 2026 operating margin to 22.96%.",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The 22.53% effective tax rate in 2025 is well below 9M 2026's 27.59% ($85,309 thousand on $309,235 thousand pretax income) and swung sharply in prior years (49.25% in 2024 and a net tax benefit in 2023) due to large deferred tax adjustments and Argentine hyperinflation accounting."
-     },
-     "why": "Fiscal 2025 revenue of $1,962.1 million (+6.45%) and operating margin of 24.89% are free of the major impairment reversal that inflated 2023 (38.62%) and sit in line with 2024 (24.26%). Nine-month 2026 results show revenue accelerating +21.8% year over year to $1,704.5 million while operating margin eased to 22.96% due to higher pass-through fuel sales in Armenia and higher construction revenue. Below operating income, however, 2025 included a non-recurring $31.1 million share of income in associates tied to Kunter Wasi's arbitration settlement."
-    },
-    "value_at_old_defaults": 32.357117954612725,
-    "values": {
-     "base": 30.078890329454584,
-     "bear": 17.188884780728873,
-     "bull": 48.692431378030996
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [
-      {
-       "amount": 31083000.0,
-       "printed": 31083,
-       "quotes": [
-        {
-         "id": "F2",
-         "quote": "Share of income / (loss) in associates | 31,083 | (996) | 7,108"
-        },
-        {
-         "id": "P1",
-         "quote": "In December 2025, Kunter Wasi, a company in which we indirectly hold a 50% equity interest, received a favorable ruling in an ICSID arbitration proceeding that resulted in a final settlement of U.S.$91.2 million in December 2025, related to the unilateral termination in 2017 by the Peruvian government of a concession agreement."
-        }
-       ],
-       "quotes_given": 2,
-       "scale": "thousands",
-       "sign": "gain",
-       "what": "Share of income in associates in 2025, driven by the December 2025 Kuntur Wasi ICSID arbitration settlement of U.S.$91.2 million (whereas associates produced net losses of $996 thousand in 2024 and $2,533 thousand in 9M 2026)"
-      }
-     ],
-     "capital_events": {
-      "excess_cash_after": 591875000.0,
-      "excess_cash_before": 592759000.0,
-      "figures": {
-       "acquisitions_paid": {
-        "amount": 915000.0,
-        "printed": 915,
-        "quotes": [
-         {
-          "id": "P4",
-          "quote": "Additional acquisitions in subsidiaries | (915) | -"
-         },
-         {
-          "id": "P4",
-          "quote": "while on July 1, 2026, TA acquired the non-controlling participation of Jet Fuel Co. S.r.l., for a total amount of EUR 0.8 million (equivalent to USD 0.9 million) increasing its participation from 51% to 100%."
-         }
-        ],
-        "scale": "thousands",
-        "source": "read"
-       },
-       "buybacks_paid": {
-        "amount": 0.0,
-        "source": "none"
-       },
-       "disposals_received": {
-        "amount": 31000.0,
-        "printed": 31,
-        "quotes": [
-         {
-          "id": "P4",
-          "quote": "Net cash inflow on disposal of subsidiaries | 31 | 292"
-         },
-         {
-          "id": "P4",
-          "quote": "Additionally, on May 4, 2026, CAAP sold its equity interest in CAER, resulting in the loss of control over the subsidiary, for a total consideration of USD 720, which has been fully collected"
-         }
-        ],
-        "scale": "thousands",
-        "source": "read"
-       },
-       "shares_issued_proceeds": {
-        "amount": 0.0,
-        "source": "none"
-       },
-       "special_distributions": {
-        "amount": 0.0,
-        "source": "none"
-       }
-      },
-      "flags": [],
-      "gross_events": 946000.0,
-      "interim_end": "2026-09-30",
-      "market_cap": 3863734145.0,
-      "net_effect_on_excess_cash": -884000.0,
-      "shares": {
-       "after": 162451000.0,
-       "before": 162451000.0,
-       "interim": null,
-       "replaced": false,
-       "source": null
-      },
-      "stamps": [
-       "buybacks_paid_not_filed_taken_as_0",
-       "shares_issued_proceeds_not_filed_taken_as_0",
-       "special_distributions_not_filed_taken_as_0",
-       "shares_outstanding_at_interim_not_found_base_count_kept"
-      ]
-     },
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 591875000.0,
-     "excess_cash_before": 592759000.0,
-     "k0_after": 223684933.1191445,
-     "k0_before": 192601933.1191445,
-     "k0_interest": 90827000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 31083000.0,
-     "stamps": [
-      "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted",
-      "buybacks_paid_not_filed_taken_as_0",
-      "shares_issued_proceeds_not_filed_taken_as_0",
-      "special_distributions_not_filed_taken_as_0",
-      "shares_outstanding_at_interim_not_found_base_count_kept"
-     ],
-     "x0_after": 204977146.09587294,
-     "x0_before": 229056235.66789666
-    },
-    "confidence": "medium",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 4084542560.3165703,
-     "seam_ratio": 1.0228671473308104,
-     "tv_share": 0.3916676948376433,
-     "wedge_rate_5": -0.02686248272121613
-    },
-    "flags": [
-     "tax_rate_representative_no: The 22.53% base-year tax rate is below the 27.59% effective rate in 9M 2026 ($85,309 thousand on $309,235 thousand pre-tax income) and 29.51% in 9M 2025, and historical rates swing widely due to deferred taxes and Argentine IAS 29 inflation adjustments (49.25% in 2024 and a net tax benefit in 2023).",
-     "interest_ifrs_expense_for_finance_costs:refused=ifrs-full:FinanceCosts:used=ifrs-full:InterestExpense",
-     "quotes_verified: 26 of 26",
-     "buybacks_paid_not_filed_taken_as_0",
-     "shares_issued_proceeds_not_filed_taken_as_0",
-     "special_distributions_not_filed_taken_as_0",
-     "shares_outstanding_at_interim_not_found_base_count_kept"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.115,
-     "fade_years": 10,
-     "long_run_op_margin": 0.235,
-     "op_margin": [
-      0.23,
-      0.235,
-      0.238,
-      0.24,
-      0.24
-     ],
-     "return_on_new_investment_long_run": 0.115,
-     "rev_growth": [
-      0.19,
-      0.08,
-      0.065,
-      0.055,
-      0.05
-     ],
-     "terminal_growth": 0.0325
-    },
-    "old_defaults_inputs": "margin 0.2457 (persist), growth 0.0375, terminal RONIC 0.0867 (equity return r 0.0944), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 6,
-     "kept": 75
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.195,
-      0.27
-     ],
-     "rev_growth_y3": [
-      0.025,
-      0.105
-     ],
-     "terminal_growth": [
       0.02,
+      0.1
+     ],
+     "terminal_growth": [
+      0.025,
       0.045
      ]
     },
@@ -541,68 +499,40 @@
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0076; depreciation (without amortization of acquired intangibles) / revenue 0.1022."
-       },
-       {
         "id": "F3",
         "quote": "Acquisition of Intangible assets | (203,165) | (212,573) | (149,436)"
        },
        {
-        "id": "F3",
-        "quote": "Acquisition of Property, plant and equipment | (16,708) | (12,218) | (9,661)"
-       },
-       {
         "id": "P4",
-        "quote": "Capital Expenditure | 199,852 | - | - | 199,852 | 226,785 | - | 2 | 226,787"
-       },
-       {
-        "id": "P1",
-        "quote": "We treat our investments related to improvements and upgrades to be performed in connection with our concession agreements under the intangible asset model established by IFRIC 12."
+        "quote": "Acquisition of intangible assets | (184,733) | (131,468)"
        }
       ],
-      "quotes_given": 5,
-      "why": "The pooled 0.76% figure in the filed record captures only PP&E in investing cash flows and omits mandatory IFRIC 12 concession asset additions recorded in operating cash flows ($203.2 million in 2025). Total segment Capital Expenditure was $226.8 million in 2025 (11.56% of revenue) and $199.9 million in 9M 2026 (11.72% of revenue), closely matching D&A/revenue (10.22%-11.67%) and supporting an 11.5% economic capex-to-revenue assumption."
+      "quotes_given": 2,
+      "why": "The filed ratio of 0.76% captures only PP&E. The real investment is IFRIC 12 concession intangibles, about 10% of revenue (203m in 2025 and 184.7m in the first nine months of 2026), which the cash flow statement books inside operating activities. I use 10% so free cash flow is not overstated."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P1",
         "quote": "In December 2020, we executed an amendment to the AA2000 Concession Agreement extending the concession term for an additional ten years, until February 13, 2038."
-       },
-       {
-        "id": "P1",
-        "quote": "In November 2021, we executed an amendment to the Carrasco Concession Agreement (the \u201cAmended Carrasco Concession Agreement\u201d) extending the concession term for an additional 20 years, until 2053"
-       },
-       {
-        "id": "P1",
-        "quote": "Argentina is our largest and most established market where we operate and manage 37 of the 56 airports in Argentina\u2019s national airport system, including Argentina\u2019s two largest airports, Ezeiza and Aeroparque."
        }
       ],
-      "quotes_given": 3,
-      "why": "A 10-year fade reflects the long contractual visibility and local monopoly status of CAAP's major gateway concessions (AA2000 extended to 2038, Italy to 2045-2048, Carrasco to 2053, Armenia to 2067), balanced against mid-term regulatory reset and concession expiry horizons."
+      "quotes_given": 1,
+      "why": "Concession tariffs and traffic converge to steady growth over about a decade, with Argentina's 2038 concession end and renewal risk shaping the horizon."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2024-12-31 | $1,843.3 million | 0.3166 | 0.2426"
-       },
-       {
-        "id": "REC",
         "quote": "2025-12-31 | $1,962.1 million | 0.0645 | 0.2489"
        },
        {
-        "id": "P1",
-        "quote": "Single till model (Argentina): a certain return shall be achieved over the life of the concession, and for the calculation, all revenues (aeronautical and commercial) as well as operating expenses and capital expenditures are considered."
-       },
-       {
-        "id": "P1",
-        "quote": "Dual till model (Italy): this model provides a guaranteed return in connection with aeronautical activities."
+        "id": "P2",
+        "quote": "Pursuant to the AA2000 Concession Agreement, since February 2018, the Argentine Government may buy out our concession, which would materially affect our revenues and operations."
        }
       ],
-      "quotes_given": 4,
-      "why": "A 23.5% long-run operating margin sits in the middle of CAAP's normalized pre-pandemic range (23.05%-24.28% in 2015-2017) and recent 2024-9M 2026 range (22.96%-24.89%), balancing high-margin commercial/duty-free monetization against regulated single-till and dual-till return frameworks."
+      "quotes_given": 2,
+      "why": "Single-till regulation in Argentina, the possibility of a government buy-out, and the Brazil losses limit upside, while growth in commercial revenue and the long Armenia extension support it. I fade slightly below the 2025 level of 24.9% to allow for the pass-through mix and regulatory mean-reversion."
      },
      "op_margin": {
       "quotes": [
@@ -613,152 +543,120 @@
        {
         "id": "P4",
         "quote": "Cost of fuel | (74,955) | (36,901) | (157,350) | (83,229)"
-       },
-       {
-        "id": "P4",
-        "quote": "Construction service revenue | 78,845 | 55,165 | 186,570 | 123,402"
-       },
-       {
-        "id": "P4",
-        "quote": "Construction services cost | (76,085) | (52,737) | (179,134) | (115,423)"
        }
       ],
-      "quotes_given": 4,
-      "why": "Year 1 is anchored to 9M 2026 operating margin of 22.96% ($391,340 thousand / $1,704,532 thousand), down from 25.45% in 9M 2025 because Armenia fuel costs nearly doubled and low-margin construction service revenue expanded. Margins recover modestly toward 24.0% by Year 4-5 on international passenger and commercial operating leverage, tempered by ongoing low-margin IFRIC 12 construction activity."
+      "quotes_given": 2,
+      "why": "The nine-month 2026 operating margin is about 23.0%, below 25.5% a year earlier, because fuel and construction pass-through grew faster than high-margin revenue. I hold year 1 at about 22.8% (Q4 2025 was also lower) and keep roughly 22.5% thereafter."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.1434; tax rate 0.2253; total debt $1,095.2 million; cash counted as excess $592.8 million; net debt (debt less that cash) $502.5 million."
+        "quote": "return on tangible capital 0.1434"
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0867."
-       },
-       {
-        "id": "P1",
-        "quote": "There is an established WACC for the regulated part of the business. Non-aeronautical revenues are not currently regulated."
-       },
-       {
-        "id": "P3",
-        "quote": "We and the Italian aviation authority (ENAC) are currently in discussions to develop a \u20ac576 million infrastructure plan for the Florence and Pisa Airports."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0865."
        }
       ],
-      "quotes_given": 4,
-      "why": "Base-year return on tangible capital of 14.34% exceeds the 8.67% zero-value hurdle, but long-run incremental returns fade to 11.5% because regulated single-till and dual-till aeronautical investments cap returns near allowed WACC while unregulated commercial activities and inflation-based concessions retain modest economic rents."
+      "quotes_given": 2,
+      "why": "Base-year return on tangible capital is 14.3% against a no-value-added hurdle of 8.65%. Concession capex is largely tariff-recovered but subject to regulator approval (ORSNA) and Brazilian losses, so I assume a moderate premium of 11%."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P4",
         "quote": "Revenue | 4 | 614,975 | 527,272 | 1,704,532 | 1,399,522"
-       },
-       {
-        "id": "P3",
-        "quote": "In 2025, air traffic increased 9.8% in terms of number of passengers, increased 6.4% in terms of aircraft movements, and increased 1.4% in terms of cargo volume handled."
-       },
-       {
-        "id": "REC",
-        "quote": "Base year (the last filed fiscal year): ended 2025-12-31; base-year revenue $1,962.1 million."
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 reflects 9M 2026 revenue already up 21.8% YoY to $1,704.5 million (Q3 up 16.6%), boosted by strong traffic, Armenia fuel sales, and IFRIC 12 construction revenue. Years 2-5 moderate from 8.0% toward 5.0% as fuel/construction surges normalize and growth settles into passenger traffic expansion, inflation-indexed tariffs, and multi-year capex deployment without baking in unfinalized Iraq or Angola awards."
+      "quotes_given": 1,
+      "why": "Nine-month 2026 revenue is up 21.8%, driven by Argentina traffic and pricing, Armenia (including fuel resale) and construction revenue. Implied full-year 2026 growth is about 18%. It then fades toward traffic growth plus inflation, with growth also supported by the Armenia extension to 2067, the new Baghdad and Angola awards, and Italian and Armenian capital plans, though the awards are not yet contracted."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Cost of equity r 0.0944; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "P1",
-        "quote": "Our business consists of acquiring, developing and operating airport concessions, which are granted by governmental authorities for a limited period of time."
-       },
-       {
-        "id": "P1",
-        "quote": "In January 2026, the fifth amendment to the Concession Agreement was executed with the Government of Armenia extending its term for an additional 35 years, until December 31, 2067."
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
-      "quotes_given": 3,
-      "why": "Terminal growth of 3.25% sits slightly below the 3.75% nominal growth anchor: while air travel and inflation-adjusted tariffs support nominal growth, CAAP operates finite-life government concessions (such as AA2000 until 2038, TAGSA until 2031, and ANSA in 2026) that require periodic renewals or replacements."
+      "quotes_given": 1,
+      "why": "A USD-reporting multi-country concession portfolio with long terms (Armenia to 2067, Uruguay to 2053, AA2000 to 2038) supports growth near the long-run nominal anchor. Finite concession lives and the Argentine buy-out right argue for staying slightly below it."
      }
     },
     "risks": [
      {
-      "bear_value": 0.16,
+      "bear_value": 0.17,
       "input_hit": "long_run_op_margin",
-      "risk": "Adverse ORSNA tariff/capex determinations, Argentine macroeconomic/FX shocks, or exercise of the Argentine Government's AA2000 buyout option (Argentina generated 54.5% of 2025 revenue)"
+      "risk": "Argentine government buy-out or an unfavorable ORSNA tariff/capex reset on AA2000, which is 54.5% of revenue"
      },
      {
-      "bear_value": 0.16,
-      "input_hit": "capex_to_revenue",
-      "risk": "Higher-than-expected mandatory concession capex across AA2000 ($1.5B in 2027-2031, $600M non-trust direct investments), Italy (\u20ac576M), Armenia ($425M), or Brazil renegotiation commitments without offsetting tariff relief"
+      "bear_value": 0.205,
+      "input_hit": "op_margin",
+      "risk": "Fuel-pass-through and construction mix, plus Middle East or other conflict-driven traffic and fuel shocks, keep margins near 21% instead of recovering"
      },
      {
-      "bear_value": 0.015,
-      "input_hit": "terminal_growth",
-      "risk": "Non-renewal or early termination of key concessions (e.g., AA2000 in 2038, TAGSA in 2031, ANSA in 2026) or prolonged war/airspace disruptions in Eurasia and the Middle East"
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Argentine peso depreciation and hyperinflation, or a traffic downturn, cut USD growth sharply"
      },
      {
-      "bear_value": 0.085,
+      "bear_value": 0.08,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Failure of the Brazilian ICAB concession renegotiation, ongoing segment impairment losses, or permitting delays on the Florence Airport master plan compressing incremental returns to cost of capital"
+      "risk": "Capex burden is higher than assumed (AA2000 program of about USD 7.3 billion, Florence/Pisa and Armenia plans) and returns are lower"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.195,
+      "long_run_op_margin": 0.18,
       "rev_growth": [
-       0.15,
-       0.04,
-       0.025,
-       0.015,
-       0.010000000000000002
+       0.14,
+       0.030000000000000013,
+       0.020000000000000004,
+       0.010000000000000009,
+       0.0050000000000000044
       ],
-      "terminal_growth": 0.02
+      "terminal_growth": 0.025
      },
      "bull": {
-      "long_run_op_margin": 0.27,
+      "long_run_op_margin": 0.25,
       "rev_growth": [
-       0.22999999999999998,
-       0.12,
-       0.105,
-       0.095,
-       0.09
+       0.22,
+       0.11000000000000001,
+       0.1,
+       0.09000000000000001,
+       0.085
       ],
       "terminal_growth": 0.045
      }
     },
     "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "yes",
+     "base_year_representative": "no",
+     "cyclical": "unclear",
      "debt_level_representative": {
-      "answer": "yes",
-      "why": "Total borrowings of $1,095.2 million at year-end 2025 remained broadly consistent at $1,058.5 million as of September 30, 2026, reflecting an ongoing moderately levered concession capital structure balanced against multi-year infrastructure investment commitments."
+      "answer": "unclear",
+      "why": "Borrowings of about 1.06 billion are modest against EBITDA of roughly 0.7 billion, but the concession fee payable (about 1.05 billion, mainly Brazil) is a debt-like liability not in the reported debt."
      },
-     "margin_position": "Base-year 2025 operating margin of 24.89% sits just above the 5-year median of 24.26% and pre-pandemic 2015-2017 levels (23.05%-24.28%), driven by passenger growth (+9.8%) and higher-margin commercial revenue (+10.1%), though 9M 2026 operating margin eased to 22.96% on a higher mix of low-margin Armenia fuel sales and IFRIC 12 construction revenue.",
+     "margin_position": "The 2025 operating margin of 24.9% is near the 2023-2025 range outside the 2023 reversal spike, and well above the 2020-21 pandemic trough. In the first nine months of 2026 the margin fell to about 23% because low-margin jet-fuel resale in Armenia and construction-service revenue grew faster than the rest.",
      "tax_rate_representative": {
-      "answer": "no",
-      "why": "The 22.53% base-year tax rate is below the 27.59% effective rate in 9M 2026 ($85,309 thousand on $309,235 thousand pre-tax income) and 29.51% in 9M 2025, and historical rates swing widely due to deferred taxes and Argentine IAS 29 inflation adjustments (49.25% in 2024 and a net tax benefit in 2023)."
+      "answer": "unclear",
+      "why": "The base-year rate of 22.5% followed a 49% charge in 2024, and the nine months to September 2026 show about 27.6% (85,309 on 309,235 pretax), so the sustainable rate is likely higher than the base year."
      },
-     "why": "2025 operating performance reflects normalized post-pandemic airport operations across CAAP's 52 airports without the $102.8 million non-financial asset impairment reversal that distorted 2023's 38.62% operating margin. Revenue grew 6.45% to $1,962.1 million on 86.7 million passengers and operating margin was 24.89%, closely matching 2024's 24.26%. However, 2025 pre-tax income included a non-recurring $31.1 million share of income in associates from the Kuntur Wasi ICSID arbitration settlement, and 9M 2026 shows higher revenue growth (+21.8% YoY) alongside slightly lower operating margin (22.96%) due to fuel and construction mix."
+     "why": "2025 operating income is sound, but below the line it holds a one-off swing in associates income (31.1m versus a 1.0m loss in 2024). Revenue is also growing far faster in 2026 (nine months +21.8%), driven partly by pass-through fuel and construction revenue at thin margins. Argentina is 54.5% of revenue and runs under hyperinflation accounting, so the reported margin depends on regulatory and FX outcomes."
     },
-    "value_at_old_defaults": 32.357117954612725,
+    "value_at_old_defaults": 32.43485390682258,
     "values": {
-     "base": 30.876582696177127,
-     "bear": 19.50070766115672,
-     "bull": 49.528944681445395
+     "base": 28.612140171549328,
+     "bear": 18.108199840286673,
+     "bull": 45.05813440247124
     }
    }
   },
-  "situation_unclear": false,
-  "value_at_old_defaults": 32.357117954612725,
-  "value_at_old_defaults_quoted": 32.357117954612725,
-  "version": "decided.v3 2026-11-20 WO_NC10a"
+  "situation_unclear": true,
+  "value_at_old_defaults": 32.43485390682258,
+  "value_at_old_defaults_quoted": 32.43485390682258,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 4951138774.243448,
+ "equity_value": 4673228921.848547,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 162451000.0,
@@ -775,17 +673,14 @@
  "pending_offer": null,
  "price_at_publish": 23.65,
  "qwen_book": null,
- "release_truncated": [
-  "0001104659-26-129109"
- ],
  "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
  "seed_base": {
-  "1000": 30.078890329454584,
-  "3000": 30.876582696177127
+  "1000": 28.92187219954777,
+  "3000": 28.612140171549328
  },
- "seeds_agree": true,
+ "seeds_agree": false,
  "share_unit_note": null,
- "source": "new filing (new_filing:6-K:0001104659-26-129109)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1881,17 +1776,17 @@
   ]
  },
  "ticker": "CAAP",
- "upside": 0.2814388639365677,
+ "upside": 0.20951107080293263,
  "valuation": null,
- "value_base": 30.477736512815856,
- "value_bear": 18.344796220942797,
- "value_bull": 49.1106880297382,
+ "value_base": 28.76700618554855,
+ "value_bear": 19.342036573058024,
+ "value_bull": 42.43011317830316,
  "value_per_filed_share": {
-  "base": 30.477736512815856,
-  "bear": 18.344796220942797,
-  "bull": 49.1106880297382
+  "base": 28.76700618554855,
+  "bear": 19.342036573058024,
+  "bull": 42.43011317830316
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +11.7 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +8.8 points a year against the required return over 3 years"
 }

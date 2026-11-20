@@ -1,7 +1,15 @@
 {
- "alpha_pts": 0.6558634819942205,
+ "alpha_pts": 3.477674219122659,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-10-28T10:45:14.000Z",
+  "accepted_utc": "2026-10-28T14:45:14Z",
+  "accession": "0001140625-26-000027",
+  "decision_time": "2026-11-20T02:54:17Z",
+  "form": "6-K",
+  "period": "2026-09-30"
+ },
  "claims": 81,
  "claims_supported": 72,
  "date": "2026-11-17T23:53:49Z",
@@ -9,28 +17,103 @@
   "flags": [
    "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 14 of 14",
+   "run 1000: quotes_verified: 12 of 12",
+   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_outstanding_at_interim_not_found_base_count_kept",
+   "run 1000: interim_cash_flow_statement_not_in_evidence: the interim for 2026-09-30 holds no cash-flow statement; capital events taken as 0 may be missing",
    "run 3000: base_year_not_representative",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 11 of 11"
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_outstanding_at_interim_not_found_base_count_kept",
+   "run 3000: interim_cash_flow_statement_not_in_evidence: the interim for 2026-09-30 holds no cash-flow statement; capital events taken as 0 may be missing"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "margin 0.2859 (persist), growth 0.0375, terminal RONIC 0.0550 (equity return r 0.0846), F 10",
-  "run_gap": 0.14292094691982288,
+  "old_defaults_inputs": "margin 0.2859 (persist), growth 0.0375, terminal RONIC 0.0547 (equity return r 0.0841), F 10",
+  "run_gap": 0.06056374459575125,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 2267000000.0,
+      "excess_cash_before": 5036000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "amount": 3491000000.0,
+        "printed": 3491,
+        "quotes": [
+         {
+          "id": "P1",
+          "quote": "Equinor acquired and settled shares in the market under the 2025 and 2026 share buy-back programmes for USD 3,491 million"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "disposals_received": {
+        "amount": 722000000.0,
+        "printed": 722,
+        "quotes": [
+         {
+          "id": "P1",
+          "quote": "comprising USD 722 million in cash including interim period adjustments"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 4213000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 97131632629.0,
+      "net_effect_on_excess_cash": -2769000000.0,
+      "shares": {
+       "after": 2601000000.0,
+       "before": 2601000000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 5036000000.0,
+     "excess_cash_after": 2267000000.0,
      "excess_cash_before": 5036000000.0,
      "k0_after": 521374152.1568413,
      "k0_before": 521374152.1568413,
      "k0_interest": 665000000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
+     ],
      "x0_after": 7075117653.475998,
      "x0_before": 7075117653.475998
     },
@@ -38,38 +121,43 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 93921247060.40135,
-     "seam_ratio": 1.036374285048278,
-     "tv_share": 0.4313314737365021,
-     "wedge_rate_5": 0.011990306259575699
+     "equity_value": 90421996021.46286,
+     "seam_ratio": 1.024747704687676,
+     "tv_share": 0.38535860103266006,
+     "wedge_rate_5": 0.011466260892441673
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 14 of 14"
+     "quotes_verified: 12 of 12",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept",
+     "interim_cash_flow_statement_not_in_evidence: the interim for 2026-09-30 holds no cash-flow statement; capital events taken as 0 may be missing"
     ],
     "inputs": {
-     "capex_to_revenue": 0.115,
+     "capex_to_revenue": 0.11,
      "fade_years": 10,
-     "long_run_op_margin": 0.23,
+     "long_run_op_margin": 0.24,
      "op_margin": [
-      0.3,
+      0.34,
       0.27,
       0.25,
       0.24,
-      0.235
+      0.24
      ],
      "return_on_new_investment_long_run": 0.1,
      "rev_growth": [
-      0.06,
+      0.2,
+      -0.12,
+      -0.05,
       0.0,
-      0.01,
-      0.015,
-      0.02
+      0.01
      ],
-     "terminal_growth": 0.025
+     "terminal_growth": 0.02
     },
-    "old_defaults_inputs": "margin 0.2859 (persist), growth 0.0375, terminal RONIC 0.0550 (equity return r 0.0846), F 10",
+    "old_defaults_inputs": "margin 0.2859 (persist), growth 0.0375, terminal RONIC 0.0547 (equity return r 0.0841), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 9,
      "kept": 72
@@ -77,192 +165,254 @@
     "ranges": {
      "long_run_op_margin": [
       0.17,
-      0.29
+      0.3
      ],
      "rev_growth_y3": [
-      -0.06,
-      0.06
+      -0.11,
+      0.03
      ],
      "terminal_growth": [
       0.01,
-      0.035
+      0.03
      ]
     },
     "reasons": {
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "F3",
-        "quote": "Capital expenditures and investments | [2] | (13,994) | (12,177) | (10,575)"
-       },
-       {
         "id": "REC",
         "quote": "Pooled over those years: capital expenditure / revenue 0.0958"
+       },
+       {
+        "id": "P1",
+        "quote": "Additions to PP&E, intangibles and equity accounted investments | 5,463 | 1,907 | 974 | 1,400 | 1,791 | 136 | \u2014 | 11,671"
        }
       ],
       "quotes_given": 2,
-      "why": "Capex and investments have risen from 10,575 to 13,994 and are above the 0.0958 five-year pool, with new fields and power assets being funded. I hold 0.115 for years 1 to 5."
+      "why": "Capex ran at 0.1314 of revenue in 2025 and 0.0958 pooled over five years. Revenue is higher in 2026 and then falls, while nine-month additions of 11,671 point to roughly 15 billion a year, so about 0.11 of revenue is consistent over the five years."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2025-12-31 | $106,462.0 million | 0.0259 | 0.2381"
+        "quote": "2020-12-31 | $45,818.0 million | -0.2881 | -0.0747"
        }
       ],
       "quotes_given": 1,
-      "why": "Ten years lets prices, production and margins normalise gradually, since the cyclical gap closes slowly for above-median years."
+      "why": "A commodity cycle and the loss of the price-driven margin take years to work through, and the record shows margins moving widely over a decade. A 10-year fade lets the margin reach the long-run level gradually."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2025-12-31 | $106,462.0 million | 0.0259 | 0.2381"
+        "quote": "2021-12-31 | $90,924.0 million | 0.9845 | 0.3702"
        },
        {
-        "id": "F2",
-        "quote": "Depreciation, amortisation and net impairment | (12,318) | (9,835) | (10,634)"
+        "id": "REC",
+        "quote": "2025-12-31 | $106,462.0 million | 0.0259 | 0.2381"
        }
       ],
       "quotes_given": 2,
-      "why": "The 5-year median is inflated by 2022; pre-spike years ran about 0.15 to 0.25. I take 0.23, near the 2025 level, allowing for refining and trading strength and for rising depreciation."
+      "why": "The 11-year margin record has a median of about 0.24 and ranges from -0.07 to 0.52. The base rate says an above-median cyclical margin retains perhaps half its gap over 5 to 10 years, which would be higher. I set the long-run margin at the median because high-price years such as 2022 and 2026 are not a durable level and depletion and the energy transition limit upside."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "F2",
-        "quote": "Net operating income/(loss) | 25,352 | 30,927 | 35,770"
+        "id": "P1",
+        "quote": "Net operating income/(loss) | 11,955 | 12,993 | 5,270 | >100% | 33,731 | 19,866 | 70%"
        },
        {
-        "id": "P1",
-        "quote": "Equinor reported a net operating income of USD 11.95 billion and a net income of USD 2.54 billion."
+        "id": "REC",
+        "quote": "2025-12-31 | $106,462.0 million | 0.0259 | 0.2381"
        }
       ],
       "quotes_given": 2,
-      "why": "Operating income has fallen for three years while Q3 2026 shows a sharp rebound on prices. I start at 0.30 and fade toward mid-cycle as prices normalise, since the base rate says a margin above the long-run level keeps only part of the gap."
+      "why": "Nine-month net operating income of 33,731 on revenue of 96,210 gives about 35%, so year 1 is set near 0.34. The margin then falls toward the median as prices normalise, following the base rate that a cyclical margin above its median keeps only part of the gap over time. Rising depreciation and recent impairments add some drag."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.1253; tax rate 0.7151;"
+        "quote": "Base year: return on tangible capital 0.1253"
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0550."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0547"
        }
       ],
       "quotes_given": 2,
-      "why": "The base-year return on tangible capital is 0.1253 after a very high tax rate. New investment in lower-return power and international assets should earn somewhat less but stay above the 0.055 break-even, so I use 0.10."
+      "why": "The base-year return on tangible capital is 12.5%, but this is a price-cycle-dependent figure and the tax take is very high. New investment is spread across lower-return power and international projects, so I use 10%, well above the 5.47% break-even level."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "Increased 2026 production guiding to ~4%"
+        "quote": "Average Brent oil price (USD/bbl) | 97.0 | 104.5 | 69.1 | 40% | 94.0 | 70.9 | 33%"
        },
        {
         "id": "P1",
-        "quote": "High production in the third quarter enabled us to capture additional value from higher prices."
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $106,462.0 million | 0.0259 | 0.2381"
+        "quote": "Total revenues and other income | 33,190 | 35,177 | 26,049 | 27% | 96,210 | 81,115 | 19%"
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 gets a lift from about 4% production growth guidance and higher prices; Q3 production grew 2%, with the NCS flat and international up. After that, revenue follows flat-to-low-growth commodity prices and volumes, since the NCS only offsets decline."
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is lifted by the oil and gas price spike: nine-month revenue is up 19% and Brent is up 33%, so a full-year rise near 20% is likely. Years 2 and 3 assume prices ease from about 94 toward a lower level, partly offset by 2026 production growth guided to about 4%. After that, growth is roughly flat to slightly positive as Norwegian shelf output is stable and international and power additions are modest."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Cost of equity r 0.0846; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "P1",
-        "quote": "Production on the NCS remained high, and was stable compared to the third quarter in 2025."
+        "quote": "Cost of equity r 0.0841; long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
-      "quotes_given": 2,
-      "why": "A mature integrated oil and gas company with a flat NCS base and a long-run energy transition should grow below the 0.0375 anchor, so I use 0.025."
+      "quotes_given": 1,
+      "why": "This is a mature producer on a depleting shelf, with limited volume growth beyond new fields and power additions, so I use 2%, below the 3.75% nominal anchor. Long-run growth is mostly price inflation, and the portfolio is slowly shifting toward power."
      }
     },
     "risks": [
      {
       "bear_value": 0.17,
       "input_hit": "long_run_op_margin",
-      "risk": "Oil and gas prices fall back, and the Q3 2026 price uplift reverses while the high tax take and fixed costs remain"
+      "risk": "Oil and gas prices fall back faster and further than assumed, and the margin reverts to a low-price level"
      },
      {
-      "bear_value": -0.04,
-      "input_hit": "rev_growth",
-      "risk": "NCS decline, unplanned outages or further production-profile cuts offset new fields, and revenue contracts"
+      "bear_value": 0.2,
+      "input_hit": "op_margin",
+      "risk": "Revenue falls more steeply after the 2026 price spike"
      },
      {
-      "bear_value": 0.07,
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Depletion and energy-transition pressure cap long-run growth"
+     },
+     {
+      "bear_value": 0.06,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Tax or regulatory changes, or low-return power and international investment, reduce returns on new capital"
+      "risk": "New investment, including power assets, earns close to its cost of capital after the very high tax take"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.17,
       "rev_growth": [
-       -0.009999999999999995,
-       -0.06999999999999999,
-       -0.05999999999999999,
-       -0.05499999999999999,
-       -0.04999999999999999
+       0.14,
+       -0.18,
+       -0.11,
+       -0.06,
+       -0.049999999999999996
       ],
       "terminal_growth": 0.01
      },
      "bull": {
-      "long_run_op_margin": 0.29,
+      "long_run_op_margin": 0.3,
       "rev_growth": [
-       0.10999999999999999,
-       0.049999999999999996,
-       0.06,
-       0.065,
-       0.06999999999999999
+       0.28,
+       -0.039999999999999994,
+       0.03,
+       0.08,
+       0.09
       ],
-      "terminal_growth": 0.035
+      "terminal_growth": 0.03
      }
     },
     "situation": {
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "yes",
-      "why": "Total debt of about USD 30 billion against equity of about USD 40 billion and operating cash flow near USD 20 billion looks like a sustained level, although 2025 borrowing rose."
+      "answer": "unclear",
+      "why": "Gross debt of about 30 billion is similar to a year earlier, but net debt to capital employed adjusted fell from 17.8% to 3.8% on high-price cash flow, so the long-run level depends on prices and payouts."
      },
-     "margin_position": "The 2025 margin of about 0.238 is below the 5-year median (about 0.33), which is lifted by the 2022 price spike. It is down from 0.298 in 2024 and 0.334 in 2023 because purchases and depreciation/impairment rose on flat revenue. Q3 2026 operating income of USD 11.95 billion on higher prices points to a stronger 2026 margin that should fade back toward a mid-cycle level.",
+     "margin_position": "The filed 2025 margin of 0.2381 sits at the 11-year median. The 2026 margin is well above it: nine-month net operating income of 33,731 on revenue of 96,210 is about 35%. Brent averaged 94.0 against 70.9 a year earlier, and European piped gas reached 16.17 USD/mmbtu. That is a commodity price spike, not a structural margin gain.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 0.7151 rate reflects the Norwegian petroleum tax regime on a business that is mostly Norwegian, and it should persist unless the fiscal terms or the mix change."
+      "why": "The 71.5% rate reflects the petroleum tax regime on Norwegian Continental Shelf profits, and the interim effective rate on adjusted operating income of 70.8% to 71.4% is similar, so it looks sustainable while the Norwegian mix stays dominant."
      },
-     "why": "2025 is a soft-price year: operating income fell for three straight years while revenue was flat, and depreciation and net impairment rose to 12,318. Q3 2026 shows a clear rebound from higher prices and a production beat, so year 1 should sit above the base-year margin. Only Q3 2026 is in the packet, so the size of the 2026 uplift is uncertain and the long-run margin is set below the five-year median."
+     "why": "Equinor is an integrated oil and gas producer whose revenue and margin follow commodity prices, as the record swings from -0.0747 in 2020 to 0.5226 in 2022 show. The 2025 base year was a mid-cycle, lower-price year, and 2026 is a high-price year with revenue up 19% for nine months. Year 1 should therefore step up sharply, then drift back toward the median as prices normalise. A very high tax take of about 71% on petroleum profits caps what reaches shareholders."
     },
-    "value_at_old_defaults": 54.194350297236234,
+    "value_at_old_defaults": 54.556149119938446,
     "values": {
-     "base": 40.7198352616709,
-     "bear": 22.06983771339803,
-     "bull": 71.76382791187133
+     "base": 38.21991832476364,
+     "bear": 22.26428115997856,
+     "bull": 81.05883410752635
     }
    },
    "3000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 2267000000.0,
+      "excess_cash_before": 5036000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "amount": 3491000000.0,
+        "printed": 3491,
+        "quotes": [
+         {
+          "id": "P1",
+          "quote": "In the first nine months of 2026, Equinor acquired and settled shares in the market under the 2025 and 2026 share buy-back programmes for USD 3,491 million"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "disposals_received": {
+        "amount": 722000000.0,
+        "printed": 722,
+        "quotes": [
+         {
+          "id": "P1",
+          "quote": "comprising USD 722 million in cash including interim period adjustments"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 4213000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 97131632629.0,
+      "net_effect_on_excess_cash": -2769000000.0,
+      "shares": {
+       "after": 2601000000.0,
+       "before": 2601000000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 5036000000.0,
+     "excess_cash_after": 2267000000.0,
      "excess_cash_before": 5036000000.0,
      "k0_after": 521374152.1568413,
      "k0_before": 521374152.1568413,
      "k0_interest": 665000000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
+     ],
      "x0_after": 7075117653.475998,
      "x0_before": 7075117653.475998
     },
@@ -270,50 +420,55 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 80767761952.58401,
-     "seam_ratio": 1.0235297321949988,
-     "tv_share": 0.42763910456386484,
-     "wedge_rate_5": 0.010490909782715427
+     "equity_value": 84982617123.39946,
+     "seam_ratio": 1.0226106160053396,
+     "tv_share": 0.36403593766725423,
+     "wedge_rate_5": 0.0036164330510200524
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 11 of 11"
+     "quotes_verified: 12 of 12",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept",
+     "interim_cash_flow_statement_not_in_evidence: the interim for 2026-09-30 holds no cash-flow statement; capital events taken as 0 may be missing"
     ],
     "inputs": {
-     "capex_to_revenue": 0.11,
-     "fade_years": 8,
+     "capex_to_revenue": 0.1,
+     "fade_years": 10,
      "long_run_op_margin": 0.21,
      "op_margin": [
-      0.3,
+      0.34,
       0.27,
-      0.25,
-      0.235,
-      0.225
+      0.23,
+      0.215,
+      0.21
      ],
      "return_on_new_investment_long_run": 0.09,
      "rev_growth": [
-      0.06,
-      -0.03,
-      -0.02,
+      0.19,
+      -0.13,
+      -0.05,
       0.0,
-      0.015
+      0.02
      ],
      "terminal_growth": 0.02
     },
-    "old_defaults_inputs": "margin 0.2859 (persist), growth 0.0375, terminal RONIC 0.0550 (equity return r 0.0846), F 10",
+    "old_defaults_inputs": "margin 0.2859 (persist), growth 0.0375, terminal RONIC 0.0547 (equity return r 0.0841), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 9,
      "kept": 72
     },
     "ranges": {
      "long_run_op_margin": [
-      0.17,
+      0.15,
       0.26
      ],
      "rev_growth_y3": [
-      -0.07,
-      0.03
+      -0.1,
+      0.04
      ],
      "terminal_growth": [
       0.01,
@@ -328,38 +483,28 @@
         "quote": "Pooled over those years: capital expenditure / revenue 0.0958"
        },
        {
-        "id": "REC",
-        "quote": "2025-12-31 | 0.1314 | 0.0924"
+        "id": "P1",
+        "quote": "Capital expenditures and Investments | 2,872 | 2,872 | 3,420 | (16%) | 8,860 | 9,848 | (10%)"
        }
       ],
       "quotes_given": 2,
-      "why": "Capex has risen from 0.0884 in 2021 to 0.1314 in 2025, above the 5-year pooled 0.0958, as growth projects and power acquisitions proceed. About 0.11 reflects some moderation from the 2025 peak."
+      "why": "The pooled five-year ratio is 9.6% and 2025 was 13.1%. With 2026 revenue much higher, nine-month capex of 8,860 is about 9% of revenue, and spending on power and the upstream pipeline continues, so I use 10%."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "Equinor reported a net operating income of USD 11.95 billion"
+        "quote": "Deferral of production to create future value, gas off-take, timing of new capacity coming on stream and operational regularity"
        }
       ],
       "quotes_given": 1,
-      "why": "Margin and growth normalisation after a commodity-driven year plausibly takes most of a decade as new fields replace decline, so 8 years."
+      "why": "Ten years reflects that new capacity and projects (Bay du Nord, Bacalhau, Adura) shift the asset base gradually rather than all at once. The company's own outlook flags timing of new capacity as a key risk."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
         "quote": "2022-12-31 | $150,806.0 million | 0.6586 | 0.5226"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Long-run margin is set near the 11-year median of about 0.23, trimmed for rising depreciation and for the mix shift toward lower-margin power and trading. The 2022 peak of 0.5226 is treated as non-recurring."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "Equinor reported a net operating income of USD 11.95 billion"
        },
        {
         "id": "REC",
@@ -367,35 +512,49 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Q3 2026 net operating income was very strong, so 2026 margin is set well above the 2025 level of 0.2381. It then fades toward a mid-cycle level as prices normalise and depreciation and impairments stay elevated, in line with the base rate that a margin above the long-run median keeps only part of the gap."
+      "why": "The 11-year filed history runs from negative to 52%, with a median near 24%. For a commodity company, the margin above median in 2026 should keep roughly half its gap over time. A mid-cycle price and higher depreciation point to about 21%, a bit under the median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Net operating income/(loss) | 11,955 | 12,993 | 5,270 | >100% | 33,731 | 19,866 | 70%"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $106,462.0 million | 0.0259 | 0.2381"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 operating margin is about 35% (Q3 net operating income of 11,955 on 33,190), so year 1 is about 34%. It fades toward the long-run level as prices normalise. Rising depreciation (12,318 in 2025) and impairments weigh on margins at lower prices."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0550"
+        "quote": "return on tangible capital 0.1253"
        },
        {
         "id": "REC",
-        "quote": "return on tangible capital 0.1253"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0547"
        }
       ],
       "quotes_given": 2,
-      "why": "The base-year return on tangible capital of 0.1253 benefited from an asset base partly depreciated and from price strength. New investment in power, international and deepwater projects should earn less, but still above the 0.0550 break-even."
+      "why": "Base-year return on tangible capital is 12.5% after a 71% tax rate, and growth adds no value at 5.5%. New investment is diversifying into power (low or negative current margins), so I assume a return of about 9%, below the current level but above breakeven."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "Increased 2026 production guiding to ~4%"
+        "quote": "Total revenues and other income | 33,190 | 35,177 | 26,049 | 27% | 96,210 | 81,115 | 19%"
        },
        {
         "id": "P1",
-        "quote": "Production growth of 2%"
+        "quote": "Average Brent oil price (USD/bbl) | 97.0 | 104.5 | 69.1 | 40% | 94.0 | 70.9 | 33%"
        }
       ],
       "quotes_given": 2,
-      "why": "Production growth guidance was raised to about 4% and Q3 prices were higher, so year 1 (2026) growth is strong. Later years assume price normalisation, with modest volume growth only partly offsetting it. Q3 volume growth was 2%, below the full-year guide, which tempers the volume assumption."
+      "why": "Year 1 (2026) revenue is far above 2025 because of price: nine-month revenue is up 19% and Brent averaged 94.0 against 70.9. I assume prices ease from Q3 levels, so revenue falls in years 2 and 3. After that, growth is roughly flat to low as ~4% production growth in 2026 fades and NCS output stays stable."
      },
      "terminal_growth": {
       "quotes": [
@@ -405,46 +564,46 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A mature integrated oil and gas producer with a declining NCS base should grow below the 0.0375 nominal anchor, so about 2% is used."
+      "why": "A mature integrated oil and gas producer with a stable NCS and a transition toward power should grow below the 3.75% nominal anchor. I use 2%, about inflation, since the evidence shows volumes only offsetting decline in Norway."
      }
     },
     "risks": [
      {
       "bear_value": 0.15,
       "input_hit": "long_run_op_margin",
-      "risk": "Oil and gas prices fall back toward the lower end of the cycle, compressing margins well below the 2021-2025 median"
+      "risk": "Oil and gas prices fall back to 2025 levels or lower, so the 2026 margin spike does not persist and the mid-cycle margin is lower"
      },
      {
-      "bear_value": -0.05,
-      "input_hit": "rev_growth",
-      "risk": "Unplanned outages, faster NCS decline, or further impairments on updated production profiles cut volumes and revenue"
-     },
-     {
-      "bear_value": 0.22,
+      "bear_value": 0.2,
       "input_hit": "op_margin",
-      "risk": "Margins in the near years revert faster to the 2025 level than assumed, with 2026 price strength proving temporary"
+      "risk": "Further impairments and production-profile cuts (as in Q3 2026 on a cross-border NCS asset) combined with unplanned outages lower margins in the near years"
+     },
+     {
+      "bear_value": -0.1,
+      "input_hit": "rev_growth",
+      "risk": "Price decline is sharper than assumed and NCS decline outpaces new fields, so revenue falls more in years 2 to 3"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.17,
+      "long_run_op_margin": 0.15,
       "rev_growth": [
-       0.009999999999999995,
-       -0.08,
-       -0.07,
+       0.14,
+       -0.18,
+       -0.1,
        -0.05,
-       -0.035
+       -0.030000000000000002
       ],
       "terminal_growth": 0.01
      },
      "bull": {
       "long_run_op_margin": 0.26,
       "rev_growth": [
-       0.11,
-       0.020000000000000004,
-       0.030000000000000002,
-       0.05,
-       0.065
+       0.28,
+       -0.04000000000000001,
+       0.039999999999999994,
+       0.09,
+       0.11
       ],
       "terminal_growth": 0.03
      }
@@ -453,30 +612,30 @@
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "yes",
-      "why": "Debt of about USD 30 billion against USD 40 billion equity and about USD 20 billion of operating cash flow is moderate, though 2025 saw new borrowing of 5,915 after none in the two prior years."
-     },
-     "margin_position": "The 2025 operating margin of 0.2381 is below the 5-year median of 0.3338, which is lifted by the 2021-2022 price spike, and close to the 11-year median of about 0.23. It has fallen each year since 2022 as prices normalised and depreciation and purchases rose. Q3 2026 net operating income of USD 11.95 billion suggests 2026 margins are well above 2025 on higher prices.",
-     "tax_rate_representative": {
       "answer": "unclear",
-      "why": "Income tax took most of pre-tax income (20,030 of 25,088) because of high Norwegian petroleum taxation, which is likely to persist on the shelf, but the mix shift toward international and power assets could lower it."
+      "why": "Total debt of 30,146 was raised in 2025, but net debt to capital employed has since fallen to 3.8% from 17.8%, so the 2025 level is probably higher than the company will carry at current prices."
      },
-     "why": "2025 was a mid-to-low point in the commodity cycle (net operating income 25,352 against 35,770 in 2023), and the 2026 interim results show a strong rebound on higher prices and production. Below-median margins in cyclical names tend to revert quickly, so year 1 is set above the base year and then fades back toward a mid-cycle level. A 2026 price boost is not assumed to persist."
+     "margin_position": "The 2025 margin of 23.8% sits below the company's own 11-year median (about 0.24) and well below the 2021-2024 levels. Oil and gas prices were weak in 2025 and depreciation and impairments rose. 2026 is running far above that, with Brent at 94.0 for nine months and nine-month net operating income of 33,731 on 96,210 of revenue (about 35%). The 2026 margin is a price spike, not a base to extrapolate.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The 71.5% base-year rate is driven by Norwegian petroleum taxation on the NCS, and the nine-month 2026 rate on adjusted operating income was 70.8%, so it looks sustainable while NCS dominates the earnings mix."
+     },
+     "why": "2025 was a low-price year with high impairments, and 2026 revenue and margins are sharply higher because of price. Neither year is a mid-cycle level. I forecast a spike in year 1 that mean-reverts toward a margin near the long-run median, not the 2022 peak."
     },
-    "value_at_old_defaults": 54.194350297236234,
+    "value_at_old_defaults": 54.556149119938446,
     "values": {
-     "base": 35.28826073496491,
-     "bear": 23.63261649930366,
-     "bull": 57.416740632953896
+     "base": 35.97321144373427,
+     "bear": 22.844954036621626,
+     "bull": 78.36740682629141
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 54.194350297236234,
-  "value_at_old_defaults_quoted": 54.194350297236234,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 54.556149119938446,
+  "value_at_old_defaults_quoted": 54.556149119938446,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 98848528843.62486,
+ "equity_value": 96488165263.93153,
  "family": "commodity",
  "far_from_price": false,
  "filed_shares": 2601000000.0,
@@ -495,12 +654,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 40.7198352616709,
-  "3000": 35.28826073496491
+  "1000": 38.21991832476364,
+  "3000": 35.97321144373427
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1414,17 +1573,17 @@
   ]
  },
  "ticker": "EQNR",
- "upside": 0.041360616654666726,
+ "upside": 0.016494392527374835,
  "valuation": null,
- "value_base": 38.0040479983179,
- "value_bear": 22.851227106350844,
- "value_bull": 64.59028427241262,
+ "value_base": 37.096564884248956,
+ "value_bear": 22.55461759830009,
+ "value_bull": 79.71312046690889,
  "value_per_filed_share": {
-  "base": 38.0040479983179,
-  "bear": 22.851227106350844,
-  "bull": 64.59028427241262
+  "base": 37.096564884248956,
+  "bear": 22.55461759830009,
+  "bull": 79.71312046690889
  },
  "valued": true,
  "verdict": "WATCH",
- "verdict_reason": "expected return +0.7 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict_reason": "expected return +3.5 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

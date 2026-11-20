@@ -1,24 +1,45 @@
 {
- "alpha_pts": 31.103462412740374,
+ "alpha_pts": 35.82459469903092,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-03-26T19:54:19.000Z",
+  "accepted_utc": "2026-03-26T23:54:19Z",
+  "accession": "0001104659-26-035151",
+  "decision_time": "2026-11-20T02:54:29Z",
+  "form": "40-F",
+  "period": "2025-12-31"
+ },
  "claims": 58,
  "claims_supported": 49,
  "date": "2026-11-18T00:00:22Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
-   "run 1000: tax_rate_representative_no: The 2025 rate of 0.2784 is low against a nine-month 2026 charge that is much heavier relative to pretax income, so I expect the rate to stay higher.",
+   "run 1000: tax_rate_representative_no: The filed rate of 0.2784 is well below the nine-month 2026 charge of 175,398 on pretax income of 431,386 (about 41%), so a higher rate is likely to persist.",
+   "run 1000: debt_level_representative_no: The filed record shows zero debt, but the balance sheet carries debt of 134,410 plus lease obligations, and the growth projects may change the funding mix.",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 13 of 13",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: buybacks_paid_not_filed_taken_as_0",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_outstanding_at_interim_not_found_base_count_kept",
    "run 3000: base_year_not_representative",
-   "run 3000: tax_rate_representative_no: The filed base-year rate of 27.8% is below the nine-month 2026 charge, where income taxes of 175,398 were about 41% of income before income taxes of 431,386, so a higher rate is likely to persist.",
+   "run 3000: tax_rate_representative_no: The 0.2784 base-year rate is well below the 2026 nine-month charge of 175,398 on pretax income of 431,386, about 41%, so a higher rate is likely to persist.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 14 of 14"
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
+   "run 3000: buybacks_paid_not_filed_taken_as_0",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_outstanding_at_interim_not_found_base_count_kept"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "margin 0.3297 (persist), growth 0.0375, terminal RONIC 0.0938 (equity return r 0.0938), F 10",
-  "run_gap": 0.03517202641673986,
+  "old_defaults_inputs": "margin 0.3297 (persist), growth 0.0375, terminal RONIC 0.0933 (equity return r 0.0933), F 10",
+  "run_gap": 0.06113584721992778,
   "runs": {
    "1000": {
     "adjustments": {
@@ -52,6 +73,52 @@
        "what": "Gain on derivatives in 2025, non-operating and not expected to recur"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 553985000.0,
+      "excess_cash_before": 553985000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 0.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2586667155.0,
+      "net_effect_on_excess_cash": 0.0,
+      "shares": {
+       "after": 334896000.0,
+       "before": 334896000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "buybacks_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
      "excess_cash_after": 553985000.0,
@@ -63,7 +130,13 @@
      "one_offs_gain": 4062000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "acquisitions_paid_not_filed_taken_as_0",
+      "buybacks_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
      ],
      "x0_after": 245998719.88506505,
      "x0_before": 248929967.89905894
@@ -72,39 +145,46 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 4442887011.796684,
-     "seam_ratio": 0.9923801218629978,
-     "tv_share": 0.2970912204095997,
-     "wedge_rate_5": -0.07462544642769055
+     "equity_value": 4609415799.043236,
+     "seam_ratio": 0.9953037307298528,
+     "tv_share": 0.32421684655919386,
+     "wedge_rate_5": -0.07395134018558402
     },
     "flags": [
      "base_year_not_representative",
-     "tax_rate_representative_no: The 2025 rate of 0.2784 is low against a nine-month 2026 charge that is much heavier relative to pretax income, so I expect the rate to stay higher.",
+     "tax_rate_representative_no: The filed rate of 0.2784 is well below the nine-month 2026 charge of 175,398 on pretax income of 431,386 (about 41%), so a higher rate is likely to persist.",
+     "debt_level_representative_no: The filed record shows zero debt, but the balance sheet carries debt of 134,410 plus lease obligations, and the growth projects may change the funding mix.",
      "confidence_low",
-     "quotes_verified: 13 of 13"
+     "quotes_verified: 10 of 10",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "buybacks_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
      "capex_to_revenue": 0.2,
      "fade_years": 10,
-     "long_run_op_margin": 0.3,
+     "long_run_op_margin": 0.29,
      "op_margin": [
-      0.43,
-      0.4,
+      0.42,
       0.38,
       0.36,
-      0.34
+      0.34,
+      0.33
      ],
-     "return_on_new_investment_long_run": 0.12,
+     "return_on_new_investment_long_run": 0.15,
      "rev_growth": [
       0.32,
-      0.02,
+      0.03,
       0.1,
-      0.15,
+      0.17,
       0.04
      ],
-     "terminal_growth": 0.025
+     "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "margin 0.3297 (persist), growth 0.0375, terminal RONIC 0.0938 (equity return r 0.0938), F 10",
+    "old_defaults_inputs": "margin 0.3297 (persist), growth 0.0375, terminal RONIC 0.0933 (equity return r 0.0933), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 9,
      "kept": 49
@@ -112,15 +192,15 @@
     "ranges": {
      "long_run_op_margin": [
       0.22,
-      0.38
+      0.36
      ],
      "rev_growth_y3": [
       0.0,
-      0.18
+      0.2
      ],
      "terminal_growth": [
-      0.015,
-      0.035
+      0.02,
+      0.04
      ]
     },
     "reasons": {
@@ -136,7 +216,7 @@
        }
       ],
       "quotes_given": 2,
-      "why": "The five-year pooled ratio is 0.2561, and 2025 was lower at 0.188 on much higher revenue. Years 1-5 include the S\u00e9gu\u00e9la expansion and the Diamba Sud build, but revenue is now larger, so I use 0.20."
+      "why": "Capex was 0.188 of revenue in 2025 and 0.2561 on average over five years. The S\u00e9gu\u00e9la expansion and the Diamba Sud build raise spending in 2027-2028, while revenue is much higher, so I use 0.20."
      },
      "fade_years": {
       "quotes": [
@@ -146,67 +226,55 @@
        }
       ],
       "quotes_given": 1,
-      "why": "The margin is well above its median and the growth projects run through about 2029, so I use a ten-year fade from the 2030 margin to the long-run margin."
+      "why": "The growth projects ramp up through 2028-2029, so growth and margins need about ten years to settle at long-run levels."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
         "quote": "2024-12-31 | $677.2 million | -0.1961 | 0.2306"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $947.1 million | 0.3984 | 0.4312"
        }
       ],
-      "quotes_given": 2,
-      "why": "The base rate for a cyclical company above its median is to keep roughly half of the gap. The ten-year median is near 0.23 and the 2025 margin is 0.43, which gives about 0.33. I shade this to 0.30 because the margin was negative or near zero in 2022-23 and the third-quarter 2026 margin has already dropped."
+      "quotes_given": 1,
+      "why": "The ten-year median is about 0.23 and 2025 is 0.43. Keeping roughly half of the gap, in line with the base rate for commodity companies, gives about 0.29-0.33, and I take the lower end because higher tax and costs are rising."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "F2",
-        "quote": "Mine operating income | 466,898 | 233,361"
+        "id": "REC",
+        "quote": "2025-12-31 | $947.1 million | 0.3984 | 0.4312"
        },
        {
         "id": "REC",
-        "quote": "2025-12-31 | $947.1 million | 0.3984 | 0.4312"
+        "quote": "2022-12-31 | $681.5 million | 0.1361 | -0.1666"
        }
       ],
       "quotes_given": 2,
-      "why": "Margin starts near the 2025 level of 0.43 and fades toward the long-run level as gold-price strength and cost pressure normalise. Mine operating income more than doubled in 2025 on much higher sales, a pattern typical of a commodity upswing."
+      "why": "2025 is a peak at 0.4312 and 2026 is similar at the start, but the third quarter was weaker (about 0.35) as cost of sales rose faster than sales. I fade it toward the median because a margin above the median keeps only part of the gap over 5-10 years, and the new Diamba Sud mine adds start-up costs."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "return on tangible capital 0.2123"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0938"
+        "quote": "Base year: return on tangible capital 0.2123"
        }
       ],
-      "quotes_given": 2,
-      "why": "The 2025 return on tangible capital of 0.2123 reflects peak prices. New mines and expansions should earn a lower return, still above the 0.0938 break-even, so I use 0.12."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 0.2123 reflects peak gold prices on a mature asset base, so I assume new mines earn a lower after-tax return of about 0.15, still above the 0.0933 cost of equity."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "954,319"
+        "id": "F2",
+        "quote": "Sales | $ 947,059 | $ 677,243"
        },
        {
         "id": "P2",
-        "quote": "approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028"
-       },
-       {
-        "id": "P2",
-        "quote": "Q2/Q3 2028 | Process plant commissioning, first gold pour and ramp-up to nameplate plant throughput"
+        "quote": "underpin our target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028"
        }
       ],
-      "quotes_given": 3,
-      "why": "Nine-month 2026 sales of 954,319 (thousands) already equal all of 2025, so year 1 (2026) growth is about 32% with a normal fourth quarter. After that I assume flat gold prices, with the S\u00e9gu\u00e9la expansion lifting 2028 and Diamba Sud first gold in Q2/Q3 2028 lifting 2029. Diamba Sud still needs its permit and FID, so I discount that timing."
+      "quotes_given": 2,
+      "why": "Nine-month 2026 sales are already above full-year 2025, so year 1 growth is large, roughly 0.32 if the fourth quarter is near the third. Growth then slows in 2027 and picks up in 2028-2029 as the S\u00e9gu\u00e9la expansion and Diamba Sud (first gold in Q2/Q3 2028) come in, assuming flat gold prices and permit and FID on schedule."
      },
      "terminal_growth": {
       "quotes": [
@@ -216,24 +284,24 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A mining company depletes reserves and relies on exploration and projects for growth, so I set long-run growth below the anchor of 0.0375."
+      "why": "A gold miner depletes reserves, so I set long-run growth below the 0.0375 anchor, closer to inflation, at 0.03."
      }
     },
     "risks": [
      {
       "bear_value": 0.2,
       "input_hit": "long_run_op_margin",
-      "risk": "Gold price falls back and margins revert to the historical median or below"
+      "risk": "Gold price falls and the margin returns to the 2019-2024 median or below"
      },
      {
       "bear_value": 0.0,
       "input_hit": "rev_growth",
-      "risk": "Diamba Sud permit or FID delayed, or gold price lower, so growth after 2026 stalls"
+      "risk": "Diamba Sud permit or FID is delayed, or the S\u00e9gu\u00e9la expansion slips, pushing back the production growth"
      },
      {
       "bear_value": 0.3,
       "input_hit": "op_margin",
-      "risk": "Cost of sales keeps growing faster than sales and the tax burden stays high"
+      "risk": "Cost of sales keeps rising faster than sales and the tax burden stays near 40%, lowering margins"
      }
     ],
     "scenarios": {
@@ -241,44 +309,44 @@
       "long_run_op_margin": 0.22,
       "rev_growth": [
        0.22,
-       -0.08,
+       -0.07,
        0.0,
-       0.04999999999999999,
+       0.07,
        -0.060000000000000005
       ],
-      "terminal_growth": 0.015
+      "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.38,
+      "long_run_op_margin": 0.36,
       "rev_growth": [
-       0.4,
-       0.09999999999999999,
-       0.18,
-       0.22999999999999998,
-       0.12
+       0.42000000000000004,
+       0.13,
+       0.2,
+       0.27,
+       0.14
       ],
-      "terminal_growth": 0.035
+      "terminal_growth": 0.04
      }
     },
     "situation": {
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "unclear",
-      "why": "The filed record shows zero debt, but the balance sheet shows debt of 134,410 plus lease obligations, and two growth projects may need funding."
+      "answer": "no",
+      "why": "The filed record shows zero debt, but the balance sheet carries debt of 134,410 plus lease obligations, and the growth projects may change the funding mix."
      },
-     "margin_position": "The margin is far above the company's own history. Operating margin was 0.4312 in 2025, against 0.2306 in 2024 and a ten-year median near 0.23, with losses in 2022-23. Sales rose 39.8% while cost of sales rose only about 8%, which looks like a higher realised gold price rather than a permanent cost advantage. In the third quarter of 2026 cost of sales grew faster than sales, so the margin is already slipping from its peak.",
+     "margin_position": "The 2025 operating margin of 0.4312 is far above the company's own ten-year median of about 0.23 and well above 2022-2023, when the margin was near zero or negative. The earnings are mainly driven by the gold and silver price and by mine costs, and the third quarter of 2026 shows costs rising faster than sales.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The 2025 rate of 0.2784 is low against a nine-month 2026 charge that is much heavier relative to pretax income, so I expect the rate to stay higher."
+      "why": "The filed rate of 0.2784 is well below the nine-month 2026 charge of 175,398 on pretax income of 431,386 (about 41%), so a higher rate is likely to persist."
      },
-     "why": "2025 is a peak-margin year for a price-taking gold and silver producer. Nine-month 2026 sales of 954,319 (thousands) already match all of 2025, so the 2026 revenue base will be roughly a third higher. The margin should fade toward a level between the long-run median and the current peak, not hold at 0.43."
+     "why": "2025 sales rose 40% and the operating margin nearly doubled from 0.23 to 0.43, which is a peak-type year for a commodity producer. The nine months of 2026 are even higher at about 0.46, but the third quarter slipped to about 0.35 as cost of sales rose faster than sales. Part of the margin should fade toward the median, while the S\u00e9gu\u00e9la expansion and Diamba Sud add volume from 2027-2028."
     },
-    "value_at_old_defaults": 9.574952849050163,
+    "value_at_old_defaults": 9.62370209565111,
     "values": {
-     "base": 16.012909726166026,
-     "bear": 8.190383626000342,
-     "bull": 30.709520495245577
+     "base": 16.552379020696364,
+     "bear": 8.25969649370452,
+     "bull": 37.54958756590793
     }
    },
    "3000": {
@@ -296,76 +364,120 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "gain",
-       "what": "Investment gains in 2025, a non-recurring non-operating item"
-      },
-      {
-       "amount": 698000.0,
-       "printed": 698,
-       "quotes": [
-        {
-         "id": "F2",
-         "quote": "Gain on derivatives | 698"
-        }
-       ],
-       "quotes_given": 1,
-       "scale": "thousands",
-       "sign": "gain",
-       "what": "Gain on derivatives in 2025"
+       "what": "Investment gains in 2025, non-operating and not expected to recur at this size"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 553985000.0,
+      "excess_cash_before": 553985000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 0.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2586667155.0,
+      "net_effect_on_excess_cash": 0.0,
+      "shares": {
+       "after": 334896000.0,
+       "before": 334896000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "buybacks_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
      "excess_cash_after": 553985000.0,
      "excess_cash_before": 553985000.0,
-     "k0_after": 67496338.27137929,
+     "k0_after": 66798338.27137929,
      "k0_before": 63434338.27137929,
      "k0_interest": 0.0,
      "one_offs_charge": 0,
-     "one_offs_gain": 4062000.0,
+     "one_offs_gain": 3364000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "acquisitions_paid_not_filed_taken_as_0",
+      "buybacks_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
      ],
-     "x0_after": 245998719.88506505,
+     "x0_after": 246502415.3832846,
      "x0_before": 248929967.89905894
     },
     "confidence": "low",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 4271630784.2392607,
-     "seam_ratio": 0.9800259696136396,
-     "tv_share": 0.2968653608340838,
-     "wedge_rate_5": -0.05839333363935708
+     "equity_value": 4305612533.910124,
+     "seam_ratio": 0.9777861788569618,
+     "tv_share": 0.3458198164723677,
+     "wedge_rate_5": -0.05500020935545493
     },
     "flags": [
      "base_year_not_representative",
-     "tax_rate_representative_no: The filed base-year rate of 27.8% is below the nine-month 2026 charge, where income taxes of 175,398 were about 41% of income before income taxes of 431,386, so a higher rate is likely to persist.",
+     "tax_rate_representative_no: The 0.2784 base-year rate is well below the 2026 nine-month charge of 175,398 on pretax income of 431,386, about 41%, so a higher rate is likely to persist.",
      "confidence_low",
-     "quotes_verified: 14 of 14"
+     "quotes_verified: 12 of 12",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "buybacks_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
      "capex_to_revenue": 0.21,
-     "fade_years": 10,
+     "fade_years": 8,
      "long_run_op_margin": 0.3,
      "op_margin": [
       0.43,
-      0.41,
-      0.39,
+      0.4,
       0.38,
-      0.37
+      0.36,
+      0.34
      ],
      "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
       0.31,
-      0.04,
-      0.08,
+      0.05,
       0.12,
+      0.14,
       0.03
      ],
-     "terminal_growth": 0.03
+     "terminal_growth": 0.025
     },
-    "old_defaults_inputs": "margin 0.3297 (persist), growth 0.0375, terminal RONIC 0.0938 (equity return r 0.0938), F 10",
+    "old_defaults_inputs": "margin 0.3297 (persist), growth 0.0375, terminal RONIC 0.0933 (equity return r 0.0933), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 9,
      "kept": 49
@@ -376,12 +488,12 @@
       0.38
      ],
      "rev_growth_y3": [
-      0.0,
-      0.16
+      -0.05,
+      0.25
      ],
      "terminal_growth": [
-      0.02,
-      0.04
+      0.015,
+      0.035
      ]
     },
     "reasons": {
@@ -397,7 +509,7 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Pooled capex is 0.2561 of revenue, but 2025 was 0.188 on peak revenue. S\u00e9gu\u00e9la expansion and Diamba Sud construction add spending, while 2026-2027 revenue is higher, so I use 0.21."
+      "why": "2025 capex was 178,004 (0.188 of revenue), below the five-year pooled average of 0.2561. The S\u00e9gu\u00e9la expansion and Diamba Sud construction raise spending in years 1-5, but revenue is also larger, so I use 0.21."
      },
      "fade_years": {
       "quotes": [
@@ -407,7 +519,7 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A ten-year fade is reasonable: the projects land by 2028, and the margin and growth then normalise as mine lives mature and prices revert."
+      "why": "The expansion and Diamba Sud ramp to nameplate only by Q2/Q3 2028, and prices and margins need time to normalize, so a mid-length fade of 8 years is used."
      },
      "long_run_op_margin": {
       "quotes": [
@@ -417,11 +529,11 @@
        },
        {
         "id": "REC",
-        "quote": "2024-12-31 | $677.2 million | -0.1961 | 0.2306"
+        "quote": "2023-12-31 | $842.4 million | 0.2362 | -0.0005"
        }
       ],
       "quotes_given": 2,
-      "why": "The company's own history is mixed: 2021-2025 margins of 0.2282, -0.1666, -0.0005, 0.2306 and 0.4312, with a median of about 0.23. Gold-miner margins above the median keep roughly half of the gap, which gives about 0.30-0.33. I choose 0.30 because of rising costs and taxes."
+      "why": "Ten-year history is volatile, ranging from negative to 0.43, with most years between 0.13 and 0.23. For a commodity producer well above its median, base rates suggest keeping about half the gap, so I fade to about 0.30. That is above the median because of a larger, lower-cost C\u00f4te d'Ivoire and Senegal asset base, but with wide uncertainty."
      },
      "op_margin": {
       "quotes": [
@@ -432,14 +544,10 @@
        {
         "id": "F2",
         "quote": "Reversal of impairment of mineral properties, plant and equipment | (52,745)"
-       },
-       {
-        "id": "F2",
-        "quote": "General and administration | 97,740 | 68,087"
        }
       ],
-      "quotes_given": 3,
-      "why": "The margin starts near the 2026 run-rate, which includes a lower third-quarter margin. It then eases as cost of sales grows faster than sales, G&A rises, and the commodity cycle mean-reverts. The 2025 figure was lifted by an impairment reversal."
+      "quotes_given": 2,
+      "why": "The 2025 margin of 0.4312 includes a 52.7 million impairment reversal, and 2026 runs at a similar or slightly higher level on strong prices. I let the margin decline gradually as cost of sales grows faster than sales and as prices normalize."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
@@ -449,29 +557,25 @@
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0938"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0933."
        }
       ],
       "quotes_given": 2,
-      "why": "The base-year return on tangible capital of 0.2123 reflects peak prices. Marginal returns on new mines and expansions should fall toward the breakeven return of 0.0938 but stay above it because of S\u00e9gu\u00e9la's record, so I set 0.12."
+      "why": "The current return on tangible capital of 0.2123 reflects peak prices. New mine capacity earns lower returns once prices normalize, so I use 0.12, above the 0.0933 break-even but well below current."
      },
      "rev_growth": {
       "quotes": [
        {
+        "id": "P2",
+        "quote": "target of approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028"
+       },
+       {
         "id": "F2",
         "quote": "Sales | $ 947,059 | $ 677,243"
-       },
-       {
-        "id": "P2",
-        "quote": "approximately 60% growth in annual gold production to an annualized rate of 500,000 ounces from mid-2028"
-       },
-       {
-        "id": "P2",
-        "quote": "Q2/Q3 2028 | Process plant commissioning, first gold pour and ramp-up to nameplate plant throughput"
        }
       ],
-      "quotes_given": 3,
-      "why": "Nine-month 2026 sales of 954,319 against a 2025 full year of 947,059 imply 2026 growth of about 30% or more. Growth then slows to the pace of the S\u00e9gu\u00e9la expansion and picks up when Diamba Sud pours first gold in Q2/Q3 2028. I do not assume gold prices keep rising. Permit and FID timing are not yet confirmed."
+      "quotes_given": 2,
+      "why": "Year 1 (FY2026) is largely visible: nine-month sales were already 954 million against 947 million for all of 2025, so about 31% growth follows. Growth is then modest in 2027, and in 2028-2029 it rises with the S\u00e9gu\u00e9la expansion and Diamba Sud ramp-up, which management ties to a roughly 60% production increase at constant prices. This depends on the permit, FID and construction schedule and on gold prices, so the path is uncertain."
      },
      "terminal_growth": {
       "quotes": [
@@ -481,48 +585,48 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A mine producer's long-run growth is capped by depletion and reserve replacement, so I set it slightly below the nominal anchor of 0.0375."
+      "why": "A mining company depletes reserves and needs continual reinvestment to grow, so long-run growth is set below the 0.0375 anchor, near inflation."
      }
     },
     "risks": [
      {
-      "bear_value": 0.18,
+      "bear_value": 0.2,
       "input_hit": "long_run_op_margin",
-      "risk": "Gold price falls and margins revert to the below-median levels of 2022-2024"
+      "risk": "Gold and silver prices fall back, so the margin reverts to the historical 0.13-0.23 range sooner and further than assumed"
      },
      {
-      "bear_value": 0.02,
+      "bear_value": 0.03,
       "input_hit": "rev_growth",
-      "risk": "Diamba Sud Exploitation Permit or FID is delayed, or the S\u00e9gu\u00e9la expansion slips"
+      "risk": "Diamba Sud permit, FID or construction slips, or the S\u00e9gu\u00e9la expansion is delayed, so the production growth does not arrive"
      },
      {
-      "bear_value": 0.3,
-      "input_hit": "op_margin",
-      "risk": "Cost of sales keeps rising faster than sales and the cash tax rate stays near 40%"
+      "bear_value": 0.28,
+      "input_hit": "capex_to_revenue",
+      "risk": "Growth projects, cost inflation and higher tax require more capital per unit of revenue"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.22,
       "rev_growth": [
-       0.22999999999999998,
-       -0.04,
-       0.0,
-       0.039999999999999994,
-       -0.05
+       0.14,
+       -0.11999999999999998,
+       -0.04999999999999999,
+       -0.02999999999999997,
+       -0.13999999999999999
       ],
-      "terminal_growth": 0.02
+      "terminal_growth": 0.015
      },
      "bull": {
       "long_run_op_margin": 0.38,
       "rev_growth": [
-       0.39,
-       0.12,
-       0.16,
-       0.2,
-       0.11
+       0.44,
+       0.18,
+       0.25,
+       0.27,
+       0.16
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.035
      }
     },
     "situation": {
@@ -530,29 +634,29 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "The FILED RECORD shows total debt of $0.0 million, but the balance sheet shows Debt of 134,410 plus lease obligations, and the 2026 growth projects may change borrowing."
+      "why": "The FILED RECORD shows zero total debt, but the balance sheet carries 134,410 of debt plus lease obligations, and the growth projects (S\u00e9gu\u00e9la expansion, Diamba Sud) may be funded from cash or new borrowing."
      },
-     "margin_position": "The 2025 operating margin of 43% is far above the company's own history, with a median of about 23% over 2021-2025 and losses in 2022-2023. It reflects strong gold and silver sales prices and volumes, and it includes a 52.7 million impairment reversal; without that reversal the margin is about 37.5%. Nine-month 2026 mine-level margins stay high, but third-quarter cost of sales is rising faster than sales.",
+     "margin_position": "The 2025 operating margin of 0.4312 is the highest in the ten filed years and well above the 2016-2025 range of about -0.17 to 0.43, which is mostly 0.13 to 0.23. It reflects a strong gold and silver price year with sales up 40% on cost of sales up only 8%, and it includes a 52.7 million impairment reversal worth about 5.6 points. Nine-month 2026 operating margin is about 46%, but Q3 2026 cost of sales rose faster than sales, so the margin should drift back toward the historical median.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The filed base-year rate of 27.8% is below the nine-month 2026 charge, where income taxes of 175,398 were about 41% of income before income taxes of 431,386, so a higher rate is likely to persist."
+      "why": "The 0.2784 base-year rate is well below the 2026 nine-month charge of 175,398 on pretax income of 431,386, about 41%, so a higher rate is likely to persist."
      },
-     "why": "2025 revenue rose 40% and the margin is at a ten-year high, which fits a commodity upcycle and not a steady state. The impairment reversal adds to operating income. The 2026 interim statements show revenue still growing sharply, so the base year understates 2026 revenue but is not a normal margin year."
+     "why": "FY2025 sales of 947.1 million and mine operating income of 466.9 million came in a very strong price and margin year, with a one-off impairment reversal inside operating income. The 2026 nine-month sales of 954.3 million already match all of 2025, so year 1 (FY2026) is much larger than the base year. Earlier years show margins as low as -0.17 in 2022, so the peak should not be extrapolated."
     },
-    "value_at_old_defaults": 9.574952849050163,
+    "value_at_old_defaults": 9.62370209565111,
     "values": {
-     "base": 15.459436627492199,
-     "bear": 8.759848658620873,
-     "bull": 29.73349629447069
+     "base": 15.570450812227673,
+     "bear": 5.920035796745227,
+     "bull": 38.99221243637848
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 9.574952849050163,
-  "value_at_old_defaults_quoted": 9.574952849050163,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 9.62370209565111,
+  "value_at_old_defaults_quoted": 9.62370209565111,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 5269981452.227363,
+ "equity_value": 5378903609.863464,
  "family": "commodity",
  "far_from_price": true,
  "filed_shares": 334896000.0,
@@ -571,12 +675,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 16.012909726166026,
-  "3000": 15.459436627492199
+  "1000": 16.552379020696364,
+  "3000": 15.570450812227673
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1194,17 +1298,17 @@
   ]
  },
  "ticker": "FSM",
- "upside": 1.1505503595945514,
+ "upside": 1.1949988244317722,
  "valuation": null,
- "value_base": 15.736173176829112,
- "value_bear": 8.475116142310608,
- "value_bull": 30.221508394858134,
+ "value_base": 16.06141491646202,
+ "value_bear": 7.089866145224874,
+ "value_bull": 38.270900001143204,
  "value_per_filed_share": {
-  "base": 15.736173176829112,
-  "bear": 8.475116142310608,
-  "bull": 30.221508394858134
+  "base": 16.06141491646202,
+  "bear": 7.089866145224874,
+  "bull": 38.270900001143204
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +31.1 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +35.8 points a year against the required return over 3 years"
 }

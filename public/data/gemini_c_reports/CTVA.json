@@ -1,40 +1,142 @@
 {
- "alpha_pts": 35.77404324563282,
+ "alpha_pts": 35.75635212537464,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-12T22:12:38.000Z",
+  "accepted_utc": "2026-11-13T03:12:38Z",
+  "accession": "0001755672-26-000035",
+  "decision_time": "2026-11-17T18:02:02Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
  "claims": 66,
  "claims_supported": 60,
  "date": "2026-11-17T18:02:02Z",
  "decided": {
   "flags": [
-   "run 1000: growth_outside_filed_record: rev_growth.y1 -0.5800 (filed -0.0309 to 0.1150)",
+   "run 1000: growth_outside_filed_record: rev_growth.y1 -0.5900 (filed -0.0309 to 0.1150)",
    "run 1000: base_year_not_representative",
-   "run 1000: debt_level_representative_no: The record's $2,580 million of total debt is the pre-separation consolidated figure, while pro forma New Corteva shows long-term debt of 944 and short-term borrowings of 60 at September 30, 2026.",
+   "run 1000: tax_rate_representative_no: The filed rate of 0.2234 differs from the 2025 effective rate of 28.7% (Brazil valuation allowance), and pro forma nine-month tax of 244 on pretax income of 356 is far higher, so the rate is unstable.",
+   "run 1000: debt_level_representative_no: The filed debt of $2,580M is a consolidated, seasonal pre-spin figure, while pro forma New Corteva shows short-term borrowings of 60 and long-term debt of 944; the filed cash of $4,530M also largely left with Vylor.",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 12 of 12",
-   "run 3000: growth_outside_filed_record: rev_growth.y1 -0.5850 (filed -0.0309 to 0.1150)",
+   "run 1000: quotes_verified: 14 of 14",
+   "run 1000: share_count_change_unexplained: shares 681,400,000 to 667,323,000 (-14,077,000); issuing and buying back at 9.04 (half to double) explains -102,212,389 to -25,553,097",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 591,000,000, 9.8% of the market cap 6,032,600,118",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 -0.5900 (filed -0.0309 to 0.1150)",
    "run 3000: base_year_not_representative",
-   "run 3000: debt_level_representative_no: The filed debt and net cash are consolidated and pre-spin, while New Corteva's pro forma balance sheet shows long-term debt of 944 and short-term borrowings of 60, so the remaining net cash is much smaller.",
+   "run 3000: tax_rate_representative_no: The filed 22.3% rate is the consolidated rate, while pro forma New Corteva shows a 244 tax provision on 356 pretax for nine months, so the standalone rate is unclear and likely higher near term.",
+   "run 3000: debt_level_representative_no: The filed debt of $2,580M is the year-end consolidated level, while Sep-30 consolidated debt was far higher seasonally and pro forma New Corteva debt is about 1,004.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 15 of 15"
+   "run 3000: quotes_verified: 12 of 12",
+   "run 3000: share_count_change_unexplained: shares 681,400,000 to 667,323,000 (-14,077,000); issuing and buying back at 9.04 (half to double) explains -102,212,389 to -25,553,097",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 591,000,000, 9.8% of the market cap 6,032,600,118",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0186 and margin 0.0983, margin 0.0983 (persist), growth 0.0375, terminal RONIC 0.0938 (equity return r 0.0938), F 10",
-  "run_gap": 0.0415590030269656,
+  "old_defaults_inputs": "year 1 growth 0.0186 and margin 0.0983, margin 0.0983 (persist), growth 0.0375, terminal RONIC 0.0933 (equity return r 0.0933), F 10",
+  "run_gap": 0.05923318324268046,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 4035000000.0,
+      "excess_cash_before": 4530000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001755672-26-000035",
+        "amount": 43000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-12",
+        "form": "10-Q",
+        "read_amount": 43000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001755672-26-000035",
+        "amount": 500000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-12",
+        "form": "10-Q",
+        "read_amount": 500000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 10000000.0,
+        "printed": 10,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from sales of property, businesses, and consolidated companies - net of cash divested | 10 | 26"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 38000000.0,
+        "printed": 38,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from Exercise of Stock Options | 38 | 75"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 681,400,000 to 667,323,000 (-14,077,000); issuing and buying back at 9.04 (half to double) explains -102,212,389 to -25,553,097",
+       "capital_events_over_5pct_of_market_cap: events sum to 591,000,000, 9.8% of the market cap 6,032,600,118"
+      ],
+      "gross_events": 591000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 6032600118.0,
+      "net_effect_on_excess_cash": -495000000.0,
+      "shares": {
+       "after": 667323000.0,
+       "before": 681400000.0,
+       "change": -14077000.0,
+       "explained_range": [
+        -102212389.38053098,
+        -25553097.345132746
+       ],
+       "interim": 667323000.0,
+       "price_used": 9.04,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 4530000000.0,
+     "excess_cash_after": 4035000000.0,
      "excess_cash_before": 4530000000.0,
      "k0_after": 378323520.3867059,
      "k0_before": 378323520.3867059,
      "k0_interest": 180000000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
      "x0_after": 1156943966.6902907,
      "x0_before": 1156943966.6902907
     },
@@ -42,258 +144,37 @@
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 7606610970.298084,
-     "seam_ratio": 0.9865602950440131,
-     "tv_share": 0.2812856864877363,
-     "wedge_rate_5": -0.0367900420328831
+     "equity_value": 8382736700.151704,
+     "seam_ratio": 0.9826336052448633,
+     "tv_share": 0.27905048628502754,
+     "wedge_rate_5": -0.040792000505515645
     },
     "flags": [
-     "growth_outside_filed_record: rev_growth.y1 -0.5800 (filed -0.0309 to 0.1150)",
+     "growth_outside_filed_record: rev_growth.y1 -0.5900 (filed -0.0309 to 0.1150)",
      "base_year_not_representative",
-     "debt_level_representative_no: The record's $2,580 million of total debt is the pre-separation consolidated figure, while pro forma New Corteva shows long-term debt of 944 and short-term borrowings of 60 at September 30, 2026.",
+     "tax_rate_representative_no: The filed rate of 0.2234 differs from the 2025 effective rate of 28.7% (Brazil valuation allowance), and pro forma nine-month tax of 244 on pretax income of 356 is far higher, so the rate is unstable.",
+     "debt_level_representative_no: The filed debt of $2,580M is a consolidated, seasonal pre-spin figure, while pro forma New Corteva shows short-term borrowings of 60 and long-term debt of 944; the filed cash of $4,530M also largely left with Vylor.",
      "confidence_low",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 14 of 14",
+     "share_count_change_unexplained: shares 681,400,000 to 667,323,000 (-14,077,000); issuing and buying back at 9.04 (half to double) explains -102,212,389 to -25,553,097",
+     "capital_events_over_5pct_of_market_cap: events sum to 591,000,000, 9.8% of the market cap 6,032,600,118",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.038,
-     "fade_years": 10,
-     "long_run_op_margin": 0.105,
-     "op_margin": [
-      0.066,
-      0.085,
-      0.095,
-      0.1,
-      0.103
-     ],
-     "return_on_new_investment_long_run": 0.18,
-     "rev_growth": [
-      -0.58,
-      0.01,
-      0.03,
-      0.035,
-      0.035
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0186 and margin 0.0983, margin 0.0983 (persist), growth 0.0375, terminal RONIC 0.0938 (equity return r 0.0938), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 6,
-     "kept": 60
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.085,
-      0.125
-     ],
-     "rev_growth_y3": [
-      0.0,
-      0.055
-     ],
-     "terminal_growth": [
-      0.025,
-      0.035
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "capital expenditure / revenue 0.0350"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Pooled consolidated capex was 3.5% of revenue, and crop protection manufacturing, with its footprint restructuring, is likely a bit more capital-intensive than Seed."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Full-year 2026 guidance updated reflecting weaker market conditions than previously anticipated in Brazil"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A 10-year fade lets the post-spin business move from Brazil-depressed margins to a mid-cycle level and then converge to terminal growth."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Depreciation and amortization | 316 | 5.9% | 312 | 5.8%"
-       },
-       {
-        "id": "P3",
-        "quote": "achieving an estimated $180 million of savings on a run rate basis by 2027"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Adjusted EBITDA margin is about 15-17% less D&A of about 6% gives roughly 10% GAAP operating margin. Restructuring savings support this, while generic competition on older molecules limits upside. The base rate for margins below the company median is a return to the median within about two years, so I set the long-run margin at the top of recent consolidated results."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Pro forma income (loss) from continuing operations before income taxes (GAAP) | 356 | 6.6% | 500 | 9.2%"
-       },
-       {
-        "id": "P6",
-        "quote": "expects Adjusted Pro Forma Operating EBITDA1 to be in the range of $1.1 to $1.125 billion."
-       },
-       {
-        "id": "P4",
-        "quote": "an estimated $115 million to $125 million of savings on a run rate basis by 2027"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Pro forma nine-month pretax income of 356 plus interest of 85 on sales of 5,357 gives about 8%, and the year-end guidance implies a weak fourth quarter, so 2026 GAAP margin is about 6.6% after significant items. Margins recover as restructuring savings arrive and the significant-items charges fade, but Brazil pricing caps the pace."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "return on tangible capital 0.3211"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The consolidated tangible-capital return of 0.3211 was lifted by Seed, so I cut it for a more capital-intensive crop protection manufacturing base. It stays well above the 0.0938 hurdle because the tangible asset base is small relative to profit."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "the company completed its previously announced separation into two independent, publicly traded companies"
-       },
-       {
-        "id": "P6",
-        "quote": "Net sales | $1,591 | $1,742 | $5,357 | $5,419"
-       },
-       {
-        "id": "P6",
-        "quote": "Pricing declined 7%, driven by competitive pressure on molecules late in their lifecycle in Brazil and U.S. acetochlor."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "The Seed spin on October 1, 2026 removes about 58% of the base revenue, so year 1 growth is set near -0.58 against the $17.4B base. Pro forma nine-month crop protection sales were roughly flat, and the Brazil weakness and price erosion mean 2027 growth stays low. Growth then recovers on new products, with large uncertainty around the perimeter estimate."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Crop protection is a mature, price-pressured market, so I set long-run growth slightly below the anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.085,
-      "input_hit": "long_run_op_margin",
-      "risk": "Brazil crop protection weakness and generic pricing pressure persist, holding margins well below my path"
-     },
-     {
-      "bear_value": 0.02,
-      "input_hit": "terminal_growth",
-      "risk": "State litigation against the separation, with its restraining order on dividends and buybacks, leads to injunctive relief or fraudulent conveyance claims that raise costs and cap terminal growth"
-     },
-     {
-      "bear_value": 0.12,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Returns on new investment fall as price erosion and generics hit new crop protection products"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.085,
-      "rev_growth": [
-       -0.61,
-       -0.019999999999999997,
-       0.0,
-       0.0050000000000000044,
-       0.0050000000000000044
-      ],
-      "terminal_growth": 0.025
-     },
-     "bull": {
-      "long_run_op_margin": 0.125,
-      "rev_growth": [
-       -0.5549999999999999,
-       0.035,
-       0.055,
-       0.060000000000000005,
-       0.060000000000000005
-      ],
-      "terminal_growth": 0.035
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "no",
-      "why": "The record's $2,580 million of total debt is the pre-separation consolidated figure, while pro forma New Corteva shows long-term debt of 944 and short-term borrowings of 60 at September 30, 2026."
-     },
-     "margin_position": "The FILED RECORD margin of 10.7% in 2025 is for the old Seed plus Crop Protection company, and Seed has now left. The remaining New Corteva is crop protection only. Its pro forma pretax margin plus interest was about 8% for nine months of 2026, down from about 11% a year earlier, because Brazil pricing and late-lifecycle molecule pressure are cutting price. The current margin is therefore below the crop-protection run-rate, and I assume it recovers partly through restructuring savings.",
-     "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The record's 22.3% differs from the 28.7% reported for 2025, and the pro forma provision of 244 on 356 pretax is distorted by items I cannot see, so the sustainable rate is unclear."
-     },
-     "why": "The base year revenue of $17,401 million includes Seed, which was distributed as Vylor on October 1, 2026. The company being valued is crop protection only, with pro forma nine-month sales of $5,357 million, so year 1 growth must carry the perimeter shrink. I estimate FY2026 New Corteva revenue at about $7.2B, but the evidence gives only nine months, so this is a rough estimate with wide uncertainty."
-    },
-    "value_at_old_defaults": 36.13118830037399,
-    "values": {
-     "base": 18.72739708412429,
-     "bear": 15.043280615550053,
-     "bull": 23.6189729741618
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 4530000000.0,
-     "excess_cash_before": 4530000000.0,
-     "k0_after": 378323520.3867059,
-     "k0_before": 378323520.3867059,
-     "k0_interest": 180000000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 1156943966.6902907,
-     "x0_before": 1156943966.6902907
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 8107118686.0133295,
-     "seam_ratio": 0.9883654150740027,
-     "tv_share": 0.29409042580072753,
-     "wedge_rate_5": -0.03556610962194076
-    },
-    "flags": [
-     "growth_outside_filed_record: rev_growth.y1 -0.5850 (filed -0.0309 to 0.1150)",
-     "base_year_not_representative",
-     "debt_level_representative_no: The filed debt and net cash are consolidated and pre-spin, while New Corteva's pro forma balance sheet shows long-term debt of 944 and short-term borrowings of 60, so the remaining net cash is much smaller.",
-     "confidence_low",
-     "quotes_verified: 15 of 15"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.04,
+     "capex_to_revenue": 0.035,
      "fade_years": 10,
      "long_run_op_margin": 0.115,
      "op_margin": [
-      0.065,
-      0.085,
-      0.1,
-      0.108,
-      0.112
+      0.07,
+      0.09,
+      0.105,
+      0.113,
+      0.115
      ],
-     "return_on_new_investment_long_run": 0.15,
+     "return_on_new_investment_long_run": 0.14,
      "rev_growth": [
-      -0.585,
+      -0.59,
       0.02,
       0.04,
       0.04,
@@ -301,7 +182,7 @@
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0186 and margin 0.0983, margin 0.0983 (persist), growth 0.0375, terminal RONIC 0.0938 (equity return r 0.0938), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0186 and margin 0.0983, margin 0.0983 (persist), growth 0.0375, terminal RONIC 0.0933 (equity return r 0.0933), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 6,
      "kept": 60
@@ -309,15 +190,338 @@
     "ranges": {
      "long_run_op_margin": [
       0.09,
-      0.135
+      0.14
      ],
      "rev_growth_y3": [
       0.01,
       0.07
      ],
      "terminal_growth": [
+      0.022,
+      0.037
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0350"
+       },
+       {
+        "id": "F3",
+        "quote": "Capital expenditures | (354) | (369)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex has been steady at about 3.4-3.7% of revenue over five years, and nine-month 2026 capex of 354 is in line, so I hold the pooled level."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Demand for the Company\u2019s differentiated new products remains strong, and regional performance outside Latin America has been resilient."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Ten years is a moderate fade for margin and growth convergence in a business facing both pipeline-driven growth and generic erosion."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Adjusted Pro Forma Operating EBITDA margin expanded 30 basis points to 17.6%."
+       },
+       {
+        "id": "P6",
+        "quote": "Pricing pressure was concentrated in North America and Latin America, reflecting an anticipated acetochlor headwind and competitive dynamics on molecules late in their lifecycle, respectively"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Pro forma nine-month adjusted EBITDA margin is 17.6%, and D&A at about 6% leaves an adjusted operating margin near 11-12%. Pricing pressure on older molecules and generic risk cap it, while productivity savings and new products support it."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Income (loss) from continuing operations before income taxes | 63 | 97 | 356 | 500"
+       },
+       {
+        "id": "P6",
+        "quote": "to be in the range of $1.1 to $1.125 billion"
+       },
+       {
+        "id": "P4",
+        "quote": "achieving an estimated $115 million to $125 million of savings on a run rate basis by 2027"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is low because guided adjusted EBITDA of about $1.1B is roughly 16% of sales before D&A of about $420M and significant items. Nine-month pro forma pretax income of 356 against 500 a year earlier shows the squeeze. Margins recover as Brazil normalizes and restructuring savings arrive, in line with the base rate that a below-median margin returns to the median within about 2 years."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Net property, plant and equipment | 1,729"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0933."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The filed 0.3211 return belongs to the consolidated company, which was heavily weighted to Seed. New Corteva has net PP&E of 1,729 plus working capital that peaks seasonally, implying a lower but still value-adding return above the 0.0933 breakeven."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P4",
+        "quote": "On October 1, 2026, the company completed its previously announced separation into two independent, publicly traded companies"
+       },
+       {
+        "id": "P6",
+        "quote": "Net sales | $1,591 | $1,742 | $5,357 | $5,419"
+       },
+       {
+        "id": "P6",
+        "quote": "Full-year 2026 guidance updated reflecting weaker market conditions than previously anticipated in Brazil"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Seed left on 1 October 2026, so year 1 revenue drops to the crop-protection base of roughly $7.1B (nine months $5,357M plus an assumed weaker Q4), about -0.59 versus the consolidated base. Later growth is low to mid single digit: new products and a Brazil recovery offset price erosion on late-lifecycle molecules and acetochlor."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature crop-protection business with new-product launches grows roughly with agricultural input demand, slightly below the nominal anchor, because generics and price competition limit growth."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.01,
+      "input_hit": "rev_growth",
+      "risk": "Brazil crop-protection weakness (farmer liquidity, financing costs, price pressure) persists, keeping Latin America sales down and growth low."
+     },
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_op_margin",
+      "risk": "Price erosion from late-lifecycle molecules, acetochlor and generics keeps long-run margins near the 2026 level."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "op_margin",
+      "risk": "State litigation over the separation, and any lifting of the stay, restricts distributions and asset moves, and adds legal costs."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.09,
+      "rev_growth": [
+       -0.62,
+       -0.009999999999999998,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.022
+     },
+     "bull": {
+      "long_run_op_margin": 0.14,
+      "rev_growth": [
+       -0.5599999999999999,
+       0.05,
+       0.07,
+       0.07,
+       0.065
+      ],
+      "terminal_growth": 0.037
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "no",
+      "why": "The filed debt of $2,580M is a consolidated, seasonal pre-spin figure, while pro forma New Corteva shows short-term borrowings of 60 and long-term debt of 944; the filed cash of $4,530M also largely left with Vylor."
+     },
+     "margin_position": "The FY2025 consolidated margin of 0.1074 includes Seed, which was spun off as Vylor on 1 October 2026. The remaining New Corteva is crop protection only. Its 2026 margin is depressed by Brazil price and volume weakness, U.S. acetochlor pricing, restructuring and about $250M of significant items in nine months. The adjusted EBITDA margin is still about 17.6% year to date, so the GAAP margin sits below its likely mid-cycle level.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The filed rate of 0.2234 differs from the 2025 effective rate of 28.7% (Brazil valuation allowance), and pro forma nine-month tax of 244 on pretax income of 356 is far higher, so the rate is unstable."
+     },
+     "why": "The FY2025 base year ($17,401M revenue) consolidates Seed, which now belongs to Vylor. Year 1 revenue therefore has to fall to roughly the crop-protection scale of about $7.1B, which I estimated from nine-month pro forma sales of $5,357M plus an assumed Q4, so growth is about -0.59. Margins after the spin are crop-protection margins, which are more cyclical and carry price pressure."
+    },
+    "value_at_old_defaults": 36.26859942190102,
+    "values": {
+     "base": 19.633701188337714,
+     "bear": 15.380676192416193,
+     "bull": 26.167560916994294
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 4035000000.0,
+      "excess_cash_before": 4530000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001755672-26-000035",
+        "amount": 43000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-12",
+        "form": "10-Q",
+        "read_amount": 43000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001755672-26-000035",
+        "amount": 500000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-12",
+        "form": "10-Q",
+        "read_amount": 500000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 10000000.0,
+        "printed": 10,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from sales of property, businesses, and consolidated companies - net of cash divested | 10 | 26"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 38000000.0,
+        "printed": 38,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from Exercise of Stock Options | 38 | 75"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 681,400,000 to 667,323,000 (-14,077,000); issuing and buying back at 9.04 (half to double) explains -102,212,389 to -25,553,097",
+       "capital_events_over_5pct_of_market_cap: events sum to 591,000,000, 9.8% of the market cap 6,032,600,118"
+      ],
+      "gross_events": 591000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 6032600118.0,
+      "net_effect_on_excess_cash": -495000000.0,
+      "shares": {
+       "after": 667323000.0,
+       "before": 681400000.0,
+       "change": -14077000.0,
+       "explained_range": [
+        -102212389.38053098,
+        -25553097.345132746
+       ],
+       "interim": 667323000.0,
+       "price_used": 9.04,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 4035000000.0,
+     "excess_cash_before": 4530000000.0,
+     "k0_after": 378323520.3867059,
+     "k0_before": 378323520.3867059,
+     "k0_interest": 180000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
+     "x0_after": 1156943966.6902907,
+     "x0_before": 1156943966.6902907
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 7685871071.6505375,
+     "seam_ratio": 0.9880829930212586,
+     "tv_share": 0.29206023364532074,
+     "wedge_rate_5": -0.034977160334596163
+    },
+    "flags": [
+     "growth_outside_filed_record: rev_growth.y1 -0.5900 (filed -0.0309 to 0.1150)",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The filed 22.3% rate is the consolidated rate, while pro forma New Corteva shows a 244 tax provision on 356 pretax for nine months, so the standalone rate is unclear and likely higher near term.",
+     "debt_level_representative_no: The filed debt of $2,580M is the year-end consolidated level, while Sep-30 consolidated debt was far higher seasonally and pro forma New Corteva debt is about 1,004.",
+     "confidence_low",
+     "quotes_verified: 12 of 12",
+     "share_count_change_unexplained: shares 681,400,000 to 667,323,000 (-14,077,000); issuing and buying back at 9.04 (half to double) explains -102,212,389 to -25,553,097",
+     "capital_events_over_5pct_of_market_cap: events sum to 591,000,000, 9.8% of the market cap 6,032,600,118",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.04,
+     "fade_years": 10,
+     "long_run_op_margin": 0.105,
+     "op_margin": [
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.105
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      -0.59,
+      0.03,
+      0.04,
+      0.04,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0186 and margin 0.0983, margin 0.0983 (persist), growth 0.0375, terminal RONIC 0.0933 (equity return r 0.0933), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 60
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.085,
+      0.13
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.065
+     ],
+     "terminal_growth": [
       0.02,
-      0.04
+      0.0375
      ]
     },
     "reasons": {
@@ -326,30 +530,26 @@
        {
         "id": "REC",
         "quote": "capital expenditure / revenue 0.0350"
-       },
-       {
-        "id": "P6",
-        "quote": "Total Assets | $19,589"
        }
       ],
-      "quotes_given": 2,
-      "why": "The consolidated ratio was 3.5%. Crop protection holds more than half of gross PP&E but only about 40% of revenue, so I assume a somewhat higher intensity."
+      "quotes_given": 1,
+      "why": "The pooled consolidated ratio is 3.5%. The crop protection business is more manufacturing-heavy relative to its sales than Seed, and the Asturias and Pittsburg footprint changes add spending, so I use 4%."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P6",
-        "quote": "Latin America | (221) | (28)% | (242) | (31)%"
+        "id": "P2",
+        "quote": "Corteva can lose a major portion of revenues for that product"
        }
       ],
       "quotes_given": 1,
-      "why": "A ten-year fade lets the margin move gradually from the post-restructuring level to the long-run level, given the uncertain Brazil recovery and the ongoing footprint restructuring."
+      "why": "Patent expiries erode revenue on older molecules while new products ramp, so convergence to the long-run margin is gradual over about ten years."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Adjusted Pro Forma Operating EBITDA margin expanded 30 basis points to 17.6%"
+        "quote": "Pro Forma Operating EBITDA (Non-GAAP) 5 | $960 | 17.9% | $963 | 17.8%"
        },
        {
         "id": "P6",
@@ -357,49 +557,45 @@
        }
       ],
       "quotes_given": 2,
-      "why": "The pro forma adjusted EBITDA margin is 17.6% and D&A is about 5.9% of sales, which implies an adjusted EBIT margin of about 11.7%. Late-lifecycle price erosion and generic exposure limit how much of that I assume the company keeps, so I settle at 11.5%."
+      "why": "Nine-month pro forma EBITDA margin of 17.9% less D&A of 5.9% gives about 12% in a seasonally strong period. A full-year trough of about 15% EBITDA less D&A suggests about 9-10%. I settle at 10.5%, allowing for generic and price pressure on aging molecules against productivity savings."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "to be in the range of $1.1 to $1.125 billion"
+        "quote": "Adjusted Pro Forma Operating EBITDA1 to be in the range of $1.1 to $1.125 billion"
        },
        {
         "id": "P6",
-        "quote": "Pro forma income (loss) from continuing operations before income taxes (GAAP) | 356 | 6.6% | 500 | 9.2%"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $17,401.0 million | 0.0292 | 0.1074"
+        "quote": "Significant items (benefit) charge 3 | 250 | 4.7% | 16 | 0.3%"
        }
       ],
-      "quotes_given": 3,
-      "why": "The 2026 GAAP margin is held down by significant items and weak Q4 (adjusted EBITDA guided to about $1.1 billion). It recovers gradually as restructuring savings arrive and the charges fall away. It is held below the consolidated 2025 level because Seed was the higher-margin segment."
+      "quotes_given": 2,
+      "why": "Guided adjusted EBITDA of about $1.1B on roughly $7.1B of sales, less D&A of about 6%, plus about 250 of nine-month significant items, gives a GAAP-type margin near 7% in 2026. I assume margins rebuild gradually as restructuring savings arrive and Brazil normalises."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0938."
+        "id": "P6",
+        "quote": "Net property, plant and equipment | 1,729"
        },
        {
-        "id": "P6",
-        "quote": "Long-term debt | 944"
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value"
        }
       ],
       "quotes_given": 2,
-      "why": "The filed return on tangible capital is consolidated and Seed-heavy, which lowers its relevance. Crop protection has more manufacturing assets and heavy R&D, so I assume a return above the 0.0938 breakeven but well below 0.32."
+      "why": "Crop protection is asset-light, with pro forma net PP&E of only 1,729. Incremental returns are high but should fade toward the cost of equity under competition, so I use 20%, well below the consolidated 32%."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P6",
-        "quote": "Pro Forma Net Sales (GAAP) | $5,357"
-       },
-       {
         "id": "P4",
         "quote": "On October 1, 2026, the company completed its previously announced separation into two independent, publicly traded companies"
+       },
+       {
+        "id": "P6",
+        "quote": "Net sales | $1,591 | $1,742 | $5,357 | $5,419"
        },
        {
         "id": "P6",
@@ -407,62 +603,58 @@
        }
       ],
       "quotes_given": 3,
-      "why": "Year 1 (2026) shows continuing revenue of about $7.2 billion against the $17.4 billion consolidated base, because Seed is deconsolidated; I estimate this from the pro forma nine-month sales of $5,357 million plus a seasonally small Q4. After that, growth is modest. New-product volume is offset by price erosion and a soft Brazil."
+      "why": "Seed left on October 1, 2026, so year 1 steps down to about $7.1B of crop protection sales (nine-month pro forma $5,357M against $17,401M base). After that I assume modest recovery: Brazil stabilises, new products add volume, and late-lifecycle molecule and acetochlor pricing keeps growth below 4%."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
         "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       },
-       {
-        "id": "P6",
-        "quote": "Price declined 4%, primarily reflecting pressure on molecules late in their lifecycle in Brazil and acetochlor in the U.S."
        }
       ],
-      "quotes_given": 2,
-      "why": "Crop protection is a mature, pricing-pressured business with a new-product pipeline, so I use a rate below the long-run nominal anchor."
+      "quotes_given": 1,
+      "why": "Crop protection is a mature market with generic erosion on older molecules, so I set growth below the 3.75% anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.085,
+      "bear_value": 0.08,
       "input_hit": "long_run_op_margin",
-      "risk": "Brazil crop protection weakness and price erosion on older molecules become permanent, and generics take share."
+      "risk": "Brazil crop protection weakness and price erosion on late-lifecycle molecules persist, keeping margins depressed."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Growth stalls: Latin America keeps falling and acetochlor and generic pricing pressure offsets new-product volume."
      },
      {
       "bear_value": 0.02,
       "input_hit": "terminal_growth",
-      "risk": "The state litigation or an unwind of the separation blocks capital returns, and the remaining business grows slower than assumed."
-     },
-     {
-      "bear_value": 0.05,
-      "input_hit": "capex_to_revenue",
-      "risk": "Crop protection manufacturing needs more capex than assumed, for example from the Asturias exit and Pittsburg site work."
+      "risk": "State litigation and fraudulent-conveyance claims over the separation block capital returns or add costs, and generics weigh on terminal growth."
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.09,
+      "long_run_op_margin": 0.085,
       "rev_growth": [
-       -0.615,
-       -0.009999999999999998,
-       0.010000000000000002,
-       0.010000000000000002,
-       0.0050000000000000044
+       -0.63,
+       -0.010000000000000002,
+       0.0,
+       0.0,
+       -0.0049999999999999975
       ],
       "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.135,
+      "long_run_op_margin": 0.13,
       "rev_growth": [
-       -0.5549999999999999,
-       0.05,
-       0.07,
-       0.07,
-       0.065
+       -0.565,
+       0.055,
+       0.065,
+       0.065,
+       0.060000000000000005
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.0375
      }
     },
     "situation": {
@@ -470,29 +662,29 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "no",
-      "why": "The filed debt and net cash are consolidated and pre-spin, while New Corteva's pro forma balance sheet shows long-term debt of 944 and short-term borrowings of 60, so the remaining net cash is much smaller."
+      "why": "The filed debt of $2,580M is the year-end consolidated level, while Sep-30 consolidated debt was far higher seasonally and pro forma New Corteva debt is about 1,004."
      },
-     "margin_position": "The FY2025 filed margin of 0.1074 is a consolidated figure that includes Seed, which was spun off as Vylor on 1 October 2026. The company that remains is crop protection only. Its pro forma pre-tax margin is lower (about 8% before interest), and it is under price pressure from late-lifecycle molecules in Brazil and from U.S. acetochlor. Crop protection margins are cyclical, so they swing with channel conditions, farmer credit and generic competition.",
+     "margin_position": "The FY2025 filed margin of about 10.7% is for the consolidated company, including Seed. After the October 1, 2026 Vylor spin, the continuing business is crop protection only. Its 2026 margin is depressed by weak Brazil, acetochlor and late-lifecycle molecule price erosion, and by about 250 of significant items in nine months. It sits below the 17-18% nine-month adjusted EBITDA margin that fell to 14.0% in Q3.",
      "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The consolidated 2025 effective rate was distorted by a Brazil valuation allowance, and the pro forma nine-month tax of 244 on pre-tax income of 356 is clearly not a steady-state rate."
+      "answer": "no",
+      "why": "The filed 22.3% rate is the consolidated rate, while pro forma New Corteva shows a 244 tax provision on 356 pretax for nine months, so the standalone rate is unclear and likely higher near term."
      },
-     "why": "The FY2025 base year of $17,401 million revenue includes the Seed business, which left the company on 1 October 2026. Continuing revenue is only about $7 billion on a pro forma basis, so I put the deconsolidation into year 1 as a large negative revenue step. The filed net cash, debt and tax rate are consolidated and predate the spin, so they overstate what the remaining company holds. The margin path is therefore built from the pro forma New Corteva figures, with wide uncertainty."
+     "why": "The base year (revenue $17,401M) includes the Seed segment, which left on October 1, 2026, so the ongoing company is only about 40% of base revenue. I model New Corteva (crop protection): nine-month pro forma sales of $5,357M imply about $7.1B for FY2026, so year-1 growth is strongly negative by construction. The consolidated base-year net cash and returns do not describe the standalone business, which has pro forma cash of 1,798 and debt of about 1,004. Confidence is low because the Q4 and full-year pro forma are not given."
     },
-    "value_at_old_defaults": 36.13118830037399,
+    "value_at_old_defaults": 36.26859942190102,
     "values": {
-     "base": 19.52220474318498,
-     "bear": 15.350539211089451,
-     "bull": 25.789108587267936
+     "base": 18.504186930618232,
+     "bear": 13.883472506542132,
+     "bull": 24.536478095385956
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 36.13118830037399,
-  "value_at_old_defaults_quoted": 36.13118830037399,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 36.26859942190102,
+  "value_at_old_defaults_quoted": 36.26859942190102,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 13031639342.564268,
+ "equity_value": 12993578482.12829,
  "family": "operating",
  "far_from_price": true,
  "filed_shares": 681400000.0,
@@ -511,12 +703,12 @@
  "qwen_book": null,
  "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
  "seed_base": {
-  "1000": 18.72739708412429,
-  "3000": 19.52220474318498
+  "1000": 19.633701188337714,
+  "3000": 18.504186930618232
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
  "tasks": {
   "business_model": [
    {
@@ -1290,15 +1482,15 @@
   ]
  },
  "ticker": "CTVA",
- "upside": 1.3359133140812984,
+ "upside": 1.3290909283245504,
  "valuation": null,
- "value_base": 19.124800913654635,
- "value_bear": 15.196909913319752,
- "value_bull": 24.70404078071487,
+ "value_base": 19.06894405947797,
+ "value_bear": 14.632074349479161,
+ "value_bull": 25.352019506190125,
  "value_per_filed_share": {
-  "base": 19.124800913654635,
-  "bear": 15.196909913319752,
-  "bull": 24.70404078071487
+  "base": 19.06894405947797,
+  "bear": 14.632074349479161,
+  "bull": 25.352019506190125
  },
  "valued": true,
  "verdict": "BUY",
