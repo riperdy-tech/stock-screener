@@ -1,0 +1,1277 @@
+{
+ "alpha_pts": -13.25938757003819,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-10-22T20:12:34.000Z",
+  "accepted_utc": "2026-10-23T00:12:34Z",
+  "accession": "0001669162-26-000050",
+  "decision_time": "2026-11-20T10:17:21Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 67,
+ "claims_supported": 61,
+ "date": "2026-11-20T10:17:21Z",
+ "decided": {
+  "flags": [
+   "run 1000: roe_outside_filed_record: roe.y4 0.2200 (filed 0.2275 to 0.4133)",
+   "run 1000: roe_outside_filed_record: roe.y5 0.2050 (filed 0.2275 to 0.4133)",
+   "run 1000: roe_outside_filed_record: long_run_roe 0.1700 (filed 0.2275 to 0.4133)",
+   "run 1000: book_growth_outside_filed_record: book_growth.y1 0.0050 (filed 0.0659 to 0.4580)",
+   "run 1000: book_growth_outside_filed_record: book_growth.y4 0.0650 (filed 0.0659 to 0.4580)",
+   "run 1000: book_growth_outside_filed_record: book_growth.y5 0.0600 (filed 0.0659 to 0.4580)",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 3000: roe_outside_filed_record: roe.y4 0.2150 (filed 0.2275 to 0.4133)",
+   "run 3000: roe_outside_filed_record: roe.y5 0.2000 (filed 0.2275 to 0.4133)",
+   "run 3000: roe_outside_filed_record: long_run_roe 0.1600 (filed 0.2275 to 0.4133)",
+   "run 3000: book_growth_outside_filed_record: book_growth.y1 -0.0100 (filed 0.0659 to 0.4580)",
+   "run 3000: book_growth_outside_filed_record: book_growth.y2 0.0600 (filed 0.0659 to 0.4580)",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 9 of 9"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.3395, growth 0.0375, r 0.0931, F 10",
+  "route": "financial",
+  "run_gap": 0.04875737391196808,
+  "runs": {
+   "1000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 5692879038.06984,
+     "implied_pb": 3.1440297523746707,
+     "seam_ratio": 1.0526896551724134,
+     "tv_share": 0.42942899556559483
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y4 0.2200 (filed 0.2275 to 0.4133)",
+     "roe_outside_filed_record: roe.y5 0.2050 (filed 0.2275 to 0.4133)",
+     "roe_outside_filed_record: long_run_roe 0.1700 (filed 0.2275 to 0.4133)",
+     "book_growth_outside_filed_record: book_growth.y1 0.0050 (filed 0.0659 to 0.4580)",
+     "book_growth_outside_filed_record: book_growth.y4 0.0650 (filed 0.0659 to 0.4580)",
+     "book_growth_outside_filed_record: book_growth.y5 0.0600 (filed 0.0659 to 0.4580)",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.005,
+      0.07,
+      0.07,
+      0.065,
+      0.06
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.17,
+     "roe": [
+      0.26,
+      0.25,
+      0.235,
+      0.22,
+      0.205
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.3395, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 61
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.04,
+      0.1
+     ],
+     "long_run_roe": [
+      0.13,
+      0.21
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Payments for Repurchase of Common Stock | (263,078) | (39,999)"
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive loss | $ (187,160) | $ (30,692)"
+       },
+       {
+        "id": "P6",
+        "quote": "During the third quarter of 2026, the Company repurchased 269,004 shares of its common stock in the open market at an average price of $371.74 per share for a total cost of $100.0 million."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 growth is near zero because equity fell from $1,959.6 million to $1,919.0 million as buybacks and a wider unrealized bond loss absorbed nine-month earnings. Later years assume earnings of roughly $500 million with most of it paid out through buybacks and dividends, which leaves growth of about 6-7%. A partial recovery of the bond losses would add to this."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our return on equity was 29.3% for the year ended December 31, 2025 compared to 32.3% for the year ended December 31, 2024."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A ten-year fade lets the above-cost return decay gradually as competition erodes the advantage, without assuming it vanishes quickly."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "Further, this cyclical market pattern can be more pronounced in the E&S market than in the standard insurance market."
+       },
+       {
+        "id": "P6",
+        "quote": "Our underwriting results this quarter demonstrate discipline in a competitive market"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "E&S margins are cyclical, and a 76% combined ratio should not last for ever as competitors, including standard carriers, take property business. The company's low expense ratio and in-house underwriting still support returns well above the 9.3% cost of equity. I fade to 17% with a wide range."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Annualized operating return on equity(7) was 25.6% for the nine months ended September 30, 2026"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.2275, p25 0.2649, median 0.3395, p75 0.3817, max 0.4133, last 0.3395."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is about 26%, in line with the 25.6% nine-month operating ROE, with the Q3 repositioning loss offset by Q4 earnings. After that it drifts down as property pricing softens and higher retention lifts the expense ratio. It stays well above the filed median of 0.3395 only if the cycle holds, so I fade it toward the low 20s by year 5."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Gross written premiums decreased by 4.8% to $462.9 million, and net written premiums decreased by 1.5% to $399.1 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "This is close to the long-run nominal growth anchor. The company has a roughly 1.5% share of a $130 billion E&S market, but near-term premium growth has turned negative, so I do not go above the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_roe",
+      "risk": "The soft market spreads from property to casualty, or reserves prove inadequate, so the combined ratio moves toward 90% or higher"
+     },
+     {
+      "bear_value": 0.18,
+      "input_hit": "roe",
+      "risk": "Premium decline deepens and earnings fall faster than assumed in years 2-5"
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "book_growth",
+      "risk": "Buybacks slow or reserve strengthening cuts earnings, so equity grows faster than assumed relative to earnings, or capital is retained to cover weaker results"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.025000000000000005,
+       0.04,
+       0.04,
+       0.034999999999999996,
+       0.029999999999999992
+      ],
+      "long_run_roe": 0.13,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.034999999999999996,
+       0.1,
+       0.1,
+       0.095,
+       0.09
+      ],
+      "long_run_roe": 0.21,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "yes",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The return on equity is very high because the combined ratio is about 76% in a niche specialty market, with reserve releases and a large investment float adding to it. Part of the margin comes from a favourable E&S cycle that is now softening in property. Reported ROE in the last two quarters was pulled down by a one-off $37.6 million portfolio repositioning loss. The 2022 low of 22.75% and the 41% peak show that returns move with the cycle.",
+     "why": "FY2025 ROE of 33.95% on opening equity is the median of the filed record, but it sits at the top of what a softening E&S cycle can sustain. Operating ROE of about 26% in 2026 shows returns settling lower as retention rises and equity builds. Buybacks of $263 million in nine months, plus dividends, show that regulatory capital is not limiting payouts, so book equity grows much more slowly than earnings."
+    },
+    "value_at_old_defaults": 495.1604770121325,
+    "values": {
+     "base": 264.886162528381,
+     "bear": 198.3539106623554,
+     "bull": 376.3929112292482
+    }
+   },
+   "3000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 5421914954.738904,
+     "implied_pb": 2.9943833021127952,
+     "seam_ratio": 1.0658846153846158,
+     "tv_share": 0.43121409775748887
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y4 0.2150 (filed 0.2275 to 0.4133)",
+     "roe_outside_filed_record: roe.y5 0.2000 (filed 0.2275 to 0.4133)",
+     "roe_outside_filed_record: long_run_roe 0.1600 (filed 0.2275 to 0.4133)",
+     "book_growth_outside_filed_record: book_growth.y1 -0.0100 (filed 0.0659 to 0.4580)",
+     "book_growth_outside_filed_record: book_growth.y2 0.0600 (filed 0.0659 to 0.4580)",
+     "base_year_not_representative",
+     "quotes_verified: 9 of 9"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.01,
+      0.06,
+      0.07,
+      0.07,
+      0.07
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.16,
+     "roe": [
+      0.26,
+      0.245,
+      0.23,
+      0.215,
+      0.2
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.3395, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 6,
+     "kept": 61
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.03,
+      0.11
+     ],
+     "long_run_roe": [
+      0.13,
+      0.19
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "At September 30, 2026, the Company had $237.5 million of capacity remaining under its share repurchase program."
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive loss | $ (187,160) | $ (30,692)"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 growth is slightly negative: equity fell from $1,959.6 million to $1,919.0 million through September, as $263 million of buybacks and a wider AOCI loss outweighed earnings. Later years assume buybacks and dividends take a large share of earnings, with growth of about 6-7% and some AOCI recovery possible. Ample dividend capacity from the subsidiary and $237.5 million of remaining repurchase authorization support continued payouts."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "The decrease in gross written premiums was primarily due to heightened competition in the Company's property divisions"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Returns are well above the cost of equity because of a cost advantage in a niche market. A ten-year fade allows competition to erode that gradually without assuming an abrupt collapse."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "this cyclical market pattern can be more pronounced in the E&S market than in the standard insurance market"
+       },
+       {
+        "id": "P1",
+        "quote": "Our return on equity and combined ratios were 29.3% and 75.9%, respectively, for the year ended December 31, 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Low expense ratio, in-house underwriting and claims, and technology support a return well above the 9.31% cost of equity, and I allow for cyclical softening and reserve risk. I fade it to about 16%, below today's mid-20s level, because E&S cyclicality is more pronounced than in standard insurance and the fade covers a full cycle."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Annualized operating return on equity(7) was 25.6% for the nine months ended September 30, 2026"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.2275, p25 0.2649, median 0.3395, p75 0.3817, max 0.4133, last 0.3395."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 is already mostly reported: nine-month operating ROE of 25.6% and net income of $386.6 million point to about 26% on opening equity of $1,959.6 million. After that I fade it gradually, because property competition and softening E&S pricing should erode margins and the reserve-release benefit may shrink. The filed record shows returns have ranged from 0.2275 to 0.4133."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "our current market share is approximately 1.5%"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0931; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Kinsale has only about 1.5% of a large E&S market, so it can grow with nominal GDP, but I keep terminal growth near the long-run nominal anchor of 3.75% because heavy payouts limit equity growth. I set it slightly below the anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_roe",
+      "risk": "Soft-market pricing spreads from property to casualty, and reserve releases turn into adverse development (construction defect, social inflation), compressing underwriting margins"
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "book_growth",
+      "risk": "Further property premium declines and a reserve strengthening reduce earnings and book value, and buybacks plus AOCI losses keep equity flat"
+     },
+     {
+      "bear_value": 0.18,
+      "input_hit": "roe",
+      "risk": "Near-term returns fall faster than assumed as the combined ratio rises toward the low 80s and investment repositioning costs recur"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.05000000000000001,
+       0.01999999999999999,
+       0.03,
+       0.03,
+       0.03
+      ],
+      "long_run_roe": 0.13,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.029999999999999992,
+       0.09999999999999999,
+       0.11,
+       0.11,
+       0.11
+      ],
+      "long_run_roe": 0.19,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "Return on equity is very high because the combined ratio is in the mid-70s, there is almost no debt, and investment income on a growing float adds to it. The 2025 return of 29.3% and the 9-month 2026 annualized operating return of 25.6% are both lower than the 34% on opening equity in the filed record, because equity is growing faster than it is paid out. Reported income also carries investment marks and a $37.6 million Q3 repositioning loss, and favorable reserve development of about 4.5 points on the loss ratio helps margins. Property pricing is softening, and E&S is cyclical.",
+     "why": "The 2025 return of 0.3395 on opening equity is near the top of the filed range and was helped by favorable prior-year reserve development, rising investment income and equity gains. Gross written premiums are now falling on property competition, so returns should drift down toward a still-high long-run level. Capital does not limit growth: the subsidiary can pay $444.3 million of dividends without approval, debt is small, and the company is buying back stock heavily, which slows book growth."
+    },
+    "value_at_old_defaults": 495.1604770121325,
+    "values": {
+     "base": 252.27837027834804,
+     "bear": 191.07330514786426,
+     "bull": 362.60345273308116
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 495.1604770121325,
+  "value_at_old_defaults_quoted": 495.1604770121325,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 6014364934.275856,
+ "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 23259000.0,
+ "flags": [
+  "Kinsale announced that its CFO, Bryan Petrucelli, will retire from his executive role effective March 2, 2027. He was elected to the Board, and Christopher Tangard will succeed him as CFO on that date.",
+  "In the third quarter of 2026 Kinsale repositioned part of its investment portfolio. It sold fixed-maturity securities at a realized loss and sold equity holdings at a gain. The repositioning reduced third-quarter pre-tax earnings by $37.6 million.",
+  "Kinsale repurchased 269,004 shares in the open market during the third quarter of 2026 for a total cost of $100.0 million."
+ ],
+ "in_code_book": false,
+ "ke": 0.09310305732783658,
+ "market_cap_at_publish": 8969537691,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 398.47,
+ "qwen_book": null,
+ "release_truncated": [],
+ "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+ "seed_base": {
+  "1000": 264.886162528381,
+  "3000": 252.27837027834804
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated in the 10-K Item 1 (P1); the 10-Q overview (P4) describes the same market focus and distribution.",
+    "claim": "Kinsale is a property and casualty insurer that writes only in the U.S. excess and surplus lines (E&S) market, covering hard-to-place risks. It sells in all 50 states, DC, Puerto Rico and the U.S. Virgin Islands, mainly through independent brokers.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "We sell these insurance products in all 50 states, the District of Columbia, the Commonwealth of Puerto Rico and the U.S. Virgin Islands primarily through a network of independent insurance brokers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1 (P1). The claim about less competition and better pricing is management's belief, not a measured fact.",
+    "claim": "The core customer is the small- to medium-sized account, and the average premium per policy was $13,400 in 2025. Typical E&S risks include newly established companies, high-risk operations and insureds with poor loss histories.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our core client focus is small- to medium-sized accounts, which we believe are subject to less competition and have better pricing.",
+     "The average premium per policy written by us in 2025 was $13,400."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A (P3). The 10-Q (P4) repeats one reportable segment.",
+    "claim": "The company reports a single segment, Excess and Surplus Lines Insurance, so there is no segment-level profit split. Revenue is tracked by underwriting division instead.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "We have one reportable segment, our Excess and Surplus Lines Insurance segment, which offers P&C insurance products through the E&S market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 (2025 full year) and P4 (nine months 2026).",
+    "claim": "The premium mix leans to casualty and is moving further that way. Casualty was 70.7% and property 29.3% of 2025 gross written premiums. In the first nine months of 2026 casualty was 74.7% and property 25.3%. Homeowners (personal lines) was 2.6% of the nine-month total.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "For the first nine months of 2026, the percentage breakdown of our gross written premiums was 74.7% casualty and 25.3% property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Read directly from the 10-Q income statement (F2). Ranking the lines is an inference from the printed figures.",
+    "claim": "Net earned premiums are the largest revenue line, followed by net investment income. For the nine months ended Sep. 30, 2026, total revenues were 1,470,026 (table in thousands). Of that, net earned premiums were 1,247,928 and net investment income was 169,428.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A (P4).",
+    "claim": "Premium volume is driven by new business submissions, conversion of those submissions into policies, renewals, and the average size and rate of bound policies. Premiums are earned pro rata over a policy term that is generally one year.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We earn insurance premiums on a pro rata basis over the term of the policy.",
+     "The volume of our gross written premiums in any given period is generally influenced by:"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release (P6); the premium figures also appear in F2.",
+    "claim": "Gross written premiums fell 3.5% in the first nine months of 2026 to $1,472.5 million. Management attributes this mainly to heightened competition in property divisions, where premiums declined 18.7% overall and 29.8% in Commercial Property.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "The decrease in gross written premiums was primarily due to heightened competition in the Company's property divisions, where premiums declined 19.3% and 18.7% in the third quarter and first nine months of 2026, respectively, including declines of 26.8% and 29.8% in the Commercial Property Division."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release (P6).",
+    "claim": "Casualty premiums partly offset the property decline. They grew 3.0% in the first nine months of 2026, which management ties to more bound accounts and a shift toward smaller accounts.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Gross written premiums in the Company's casualty business increased 0.9% for the third quarter of 2026 and 3.0% for the first nine months of 2026 compared to the prior-year periods, primarily due to an increase in bound accounts offset in part by a change in business mix towards smaller accounts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P6. The last sentence quoted is management's own assessment.",
+    "claim": "Reinsurance sets how much written premium Kinsale keeps. Net earned premiums are gross premiums earned less the share ceded to reinsurers. Higher retention has lowered ceding commissions, which pushed up the expense ratio.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Net earned premiums represent the earned portion of our gross written premiums, less that portion of our gross written premiums that is ceded to third-party reinsurers under our reinsurance agreements.",
+     "The economic effect of lower ceding commissions was more than offset by the retention of incremental underwriting margin and higher investment income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 (cost drivers) and P6 (ratios and catastrophe effect).",
+    "claim": "The largest cost is losses and loss adjustment expenses. These depend on claim frequency and severity, business mix, legal and regulatory change, defense costs and several kinds of inflation. They are set by actuarial estimates and revised for prior years. The nine-month loss ratio was 54.5% against 56.9% a year earlier, and the 2025 period carried 2.3 points of catastrophe losses.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Losses and loss adjustment expenses are based on an actuarial analysis of the estimated losses, including losses incurred during the period and changes in estimates from prior periods.",
+     "The loss ratio for the first nine months of 2025 included 2.3 points of net catastrophe losses, primarily related to the Palisades Fire."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4, P3 and P6.",
+    "claim": "The second cost block is underwriting, acquisition and insurance expenses. These are mainly broker commissions net of ceding commissions, plus general and administrative costs. Direct commissions averaged 14.8% of gross written premiums in 2025, and the 2025 expense ratio was 20.8%. The expense ratio was 21.6% in the first nine months of 2026, against 20.6% a year earlier.",
+    "facts": [
+     "P4",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Policy acquisition costs are principally composed of the commissions we pay our brokers, net of ceding commissions we receive on business ceded under certain reinsurance contracts.",
+     "The increase in the expense ratio for both the third quarter and first nine months of 2026 compared to the prior-year periods was primarily due to lower ceding commissions as a result of higher retention on the Company\u2019s reinsurance treaties."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the earnings release (P6). Underwriting income is a non-GAAP measure.",
+    "claim": "Underwriting profit is the main earnings engine. Nine-month 2026 underwriting income was $307.0 million with a combined ratio of 76.1%, against $268.6 million and 77.5% a year earlier. Management credits growth in net earned premiums, lower catastrophe losses and more favorable prior-year reserve development.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Underwriting income(2) was $307.0 million, resulting in a combined ratio(5) of 76.1% for the first nine months of 2026 compared to $268.6 million and a combined ratio(5) of 77.5% for the first nine months of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6. The cash-flow link is supported by operating cash flow in F3.",
+    "claim": "Investment income is a second profit source that grows with the portfolio. Net investment income was $169.4 million in the first nine months of 2026, up 21.1%, driven by portfolio growth from strong operating cash flows. The annualized gross investment return was 4.4%.",
+    "facts": [
+     "P6",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "These increases were driven by growth in the Company's investment portfolio generated largely from the investment of strong operating cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 and P4; the income statement (F2) shows the same net income figures.",
+    "claim": "Reported net income also moves with investment marks and sales, not just insurance results. In Q3 2026 net income was $98.1 million, against $141.6 million a year earlier. Net operating earnings, which exclude those items, were $128.3 million, against $121.2 million. Management says a portfolio repositioning reduced Q3 pre-tax earnings by $37.6 million.",
+    "facts": [
+     "P6",
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "The repositioning reduced third quarter pre-tax earnings by $37.6 million as the equity gains were recorded through earnings in the period of appreciation and the bond losses were recorded through earnings upon sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors (P2); P1 names the largest brokers.",
+    "claim": "Distribution is concentrated in a select group of brokers. In 2025, 60.6% of gross written premiums, or $1.2 billion, came through a few of about 227 brokers. Losing one could reduce premiums.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Of our 2025 gross written premiums, 60.6%, or $1.2 billion, were distributed through five of our approximately 227 brokers, three of which accounted for 47.6%, or $941.4 million, of our 2025 gross written premiums."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The cycle description is stated in P2. Linking it to the property decline is an inference from P3 and P6, where management cites rate declines and competition.",
+    "claim": "Revenue and margins are cyclical. E&S pricing and volume swing between soft and hard markets, and the cycle can be more pronounced in E&S than in standard insurance. Recent premium declines in property, which management ties to competition, are consistent with a softening in that area.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Historically, the financial performance of the P&C insurance industry has tended to fluctuate in cyclical periods of price competition and excess capacity (known as a soft market) followed by periods of high premium rates and shortages of underwriting capacity (known as a hard market)."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 10-K Item 1 (management's own figures and belief).",
+    "claim": "Kinsale competes only in the U.S. excess and surplus lines (E&S) market, writing hard-to-place risks. The 10-K puts its share of that market at about 1.5%, based on a market of $129.8 billion of direct written premiums in 2024.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Based on our 2025 gross written premiums of $2.0 billion, our current market share is approximately 1.5%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K earnings release (P6).",
+    "claim": "Underwriting profitability is strong. The nine-month 2026 combined ratio was 76.1% against 77.5% a year earlier, and the loss ratio was 54.5% against 56.9%. The Q3 combined ratio was 75.4% against 74.9%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We continue to produce exceptional underwriting margins and strong investment income which allows us to return capital to stockholders."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1; the comparison to competitors is management's assertion.",
+    "claim": "The company reports a low expense ratio and attributes it to its proprietary technology platform and expense control. The 2025 expense ratio was 20.8%.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025, our expense ratio was 20.8%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1.",
+    "claim": "Underwriting and claims control stays in-house. Brokers are given no underwriting or claims authority, and all claims are handled internally. This is presented as a differentiator.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We manage all of our claims in-house and do not delegate claims management authority to third parties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and the 8-K release.",
+    "claim": "2025 returns were high, with return on equity of 29.3% and a combined ratio of 75.9%. Nine-month 2026 annualized return on equity was 26.6% and annualized operating return on equity was 25.6%.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Our return on equity and combined ratios were 29.3% and 75.9%, respectively, for the year ended December 31, 2025."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 8-K release; the premium figures match the 10-Q income statement.",
+    "claim": "Premium growth is slowing and has turned negative, which is the most visible competitive pressure. Q3 2026 gross written premiums fell 4.8% to $462.9 million. The release attributes the decline to heightened competition in property divisions, where premiums fell 19.3% in Q3 and 18.7% over nine months. Commercial Property fell 26.8% in Q3 and 29.8% over nine months.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "heightened competition in the Company's property divisions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "The property competition began before 2026. The 10-K reported that Commercial Property premiums fell 17.9% in 2025 on rate declines and an increasingly competitive environment including from standard carriers. Average premium per policy fell to $13,400 from $15,100.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "due to rate declines and an increasingly competitive environment including from standard carriers"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the 8-K release.",
+    "claim": "Casualty is the larger and steadier part of the book. It was 74.7% of gross written premiums in the first nine months of 2026, with premiums up 3.0% on more bound accounts but a shift toward smaller accounts.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Gross written premiums in the Company's casualty business increased 0.9% for the third quarter of 2026 and 3.0% for the first nine months of 2026 compared to the prior-year periods"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. The 10-Q says there were no material changes to them.",
+    "claim": "E&S market cyclicality is a named threat. The risk factors say that as conditions soften, customers can return to the admitted market, which deepens rate declines. They add that cyclicality can be more pronounced in E&S than in standard insurance.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "many customers that were previously driven into the E&S market may return to the admitted market"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Distribution is concentrated. Three brokers produced 47.6% of 2025 gross written premiums, or $941.4 million, and any of these relationships can end at any time.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our relationship with any of these firms may be discontinued at any time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K (reserve percentages and risk language); the favorable-development figures are from the 8-K release and the 10-K MD&A.",
+    "claim": "Reserve adequacy is a threat to the earnings record. Most of the net loss reserves are for claims incurred but not reported, so they rest on estimates. The 10-K warns that the ultimate liability may differ from the estimate.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, our reserves for claims incurred but not reported were approximately 91.2% of our total net loss reserves."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K release; the ceded premium figures are in the 10-Q income statement.",
+    "claim": "Higher reinsurance retention is raising the expense ratio. The nine-month 2026 expense ratio was 21.6% against 20.6%, and the Q3 ratio was 22.0% against 21.0%. The company says the effect is more than offset by retaining more underwriting margin and by higher investment income.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "lower ceding commissions as a result of higher retention"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "The company relies on its A.M. Best financial strength rating, and a downgrade is a named threat. The risk factors say a downgrade could lead brokers and insureds to choose competitors, raise reinsurance costs or limit its ability to write business.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "A.M. Best periodically reviews our financial strength rating and may revise it downward or revoke it at its sole discretion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K (P7) and the 10-K risk factors (P2).",
+    "claim": "Leadership continuity is a point to watch. The CFO, Bryan Petrucelli, plans to retire from the executive role, remains on the Board, and will be succeeded by the current Chief Accounting Officer.",
+    "facts": [
+     "P7",
+     "P2"
+    ],
+    "quotes": [
+     "Christopher R. Tangard will succeed Mr. Petrucelli as Executive Vice President, Chief Financial Officer and Treasurer"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet and the earnings release.",
+    "claim": "Cash and cash equivalents were 160,508 (table in thousands) at the latest quarter-end, little changed from 163,361 at year-end. Cash and invested assets together were $5.5 billion, up from $5.2 billion at year-end.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Cash and invested assets totaled $5.5 billion at September 30, 2026 and $5.2 billion at December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "At the holding company, cash and investments were $50.0 million at the last year-end, up from $12.3 million a year earlier. The insurance subsidiary can pay the holding company up to $444.3 million of dividends in the current year without regulatory approval. Management says liquidity is sufficient for the next 12 months.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "As of December 31, 2025, our holding company had $50.0 million in cash and investments, compared to $12.3 million as of December 31, 2024.",
+     "The maximum amount of dividends Kinsale Insurance can pay us during 2026 without regulatory approval is $444.3 million.",
+     "Management believes there is sufficient liquidity available at the holding company and in its insurance subsidiary, Kinsale Insurance, as well as in its other operating subsidiaries, to meet its operating cash needs and obligations for the next 12 months."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Read directly from the balance sheet. The comparison to equity and assets is inferred, and no ratio is computed.",
+    "claim": "Debt was 224,604 (table in thousands) against total stockholders' equity of 1,919,011. Total liabilities were 4,512,092 against total assets of 6,431,103. Debt is small relative to equity and to the balance sheet.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet figures are stated. The link to liquidity is inferred.",
+    "claim": "Reserves for unpaid losses and loss adjustment expenses, the largest liability, rose to 3,324,276 (table in thousands) from 2,890,870 at year-end. Future claim payments are therefore the main call on liquidity.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Reserves do not represent an exact calculation of liability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated. The mechanism is inferred from the cash flow statement and the balance sheet.",
+    "claim": "Net cash provided by operating activities for the nine months was 754,886 (table in thousands), down from 802,344 a year earlier, against net income of 386,557.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | $ 754,886 | $ 802,344"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement and the earnings release.",
+    "claim": "Net investment income rose to 169,428 (table in thousands) for the nine months from 139,896. The company attributes this to portfolio growth from investing strong operating cash flows.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "These increases were driven by growth in the Company's investment portfolio generated largely from the investment of strong operating cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the earnings release.",
+    "claim": "Third-quarter net income fell to 98,129 (table in thousands) from 141,646, mainly because of a $37.6 million pre-tax portfolio repositioning loss and swings in equity fair values. Net operating earnings rose to $128.3 million from $121.2 million. The earnings dip reflects investment accounting, not weaker underwriting.",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The repositioning reduced third quarter pre-tax earnings by $37.6 million.",
+     "There was no impact to book value."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and the earnings release. The 472,069 investing outflow is read from the cash flow statement.",
+    "claim": "Nine-month share repurchases were 263,078 (table in thousands), against 39,999 a year earlier, and dividends paid were 17,048. Financing outflows therefore rose to 285,670 from 42,544. The company had $237.5 million of repurchase capacity remaining.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "At September 30, 2026, the Company had $237.5 million of capacity remaining under its share repurchase program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated. The effect on liquidity is inferred.",
+    "claim": "The fixed-maturity portfolio is carried below cost. Fair value was 4,497,325 (table in thousands) against amortized cost of $4,736,687. Accumulated other comprehensive loss widened to (187,160) from (30,692). The portfolio's weighted average duration was 4.4 years against 4.0 years at year-end.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "the weighted average duration of the fixed-maturity investment portfolio, including cash equivalents, was 4.4 years and 4.0 years at September 30, 2026 and December 31, 2025, respectively"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balance and flows are stated. The ability to meet debt is inferred, because the evidence does not set out the maturity schedule.",
+    "claim": "Debt of 224,604 (table in thousands) is on the balance sheet. The evidence gives no maturity schedule. The company has a Note Purchase Agreement authorizing senior notes up to $200.0 million, and it drew and repaid 30,000 on lines of credit within the nine months.",
+    "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "In September 2023, we entered into an amendment to the Note Purchase Agreement, which increased the authorized aggregate principal amount of senior promissory notes that may be issued thereunder to $200.0 million.",
+     "Proceeds from Lines of Credit | 30,000 | 15,000"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P6 (growth and cause) and P4 (mix).",
+    "claim": "Casualty premiums are the growth engine. Casualty gross written premiums rose 3.0% in the first nine months of 2026 (0.9% in the third quarter), mainly from more bound accounts. Casualty is 74.7% of nine-month gross written premiums.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "the percentage breakdown of our gross written premiums was 74.7% casualty and 25.3% property",
+     "primarily due to an increase in bound accounts offset in part by a change in business mix towards smaller accounts"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6.",
+    "claim": "For growth to continue, casualty gains must outweigh the property decline. Total gross written premiums fell 4.8% to $462.9 million in the third quarter, and 3.5% in the first nine months. Property premiums fell 19.3% in the quarter and 18.7% in the nine months, with Commercial Property down 26.8% and 29.8%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The decrease in gross written premiums was primarily due to heightened competition in the Company's property divisions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Growth figures are stated in P6. The lag logic is inferred from the policy-term description in P4 and the 2025 explanation in P3.",
+    "claim": "Net earned premiums are still growing, up 3.0% to $423.5 million in the third quarter. This is earned growth from earlier written premiums. For it to continue, written premiums must stop shrinking, because net written premiums fell 1.5% to $399.1 million.",
+    "facts": [
+     "P6",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Net earned premiums increased by 3.0% to $423.5 million",
+     "net written premiums decreased by 1.5% to $399.1 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6. The ceded premium fall is also visible in F2.",
+    "claim": "Higher retention on reinsurance treaties keeps net premium roughly flat despite lower gross premium. Net written premiums fell 1.5% against a 4.8% fall in gross. The cost was a higher expense ratio, 22.0% against 21.0%. Management says the extra margin retained and higher investment income more than offset that cost.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "The economic effect of lower ceding commissions was more than offset by the retention of incremental underwriting margin and higher investment income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6.",
+    "claim": "Underwriting profitability must hold. Underwriting income was $307.0 million for nine months with a combined ratio of 76.1%, against 77.5% a year earlier. The third-quarter combined ratio was 75.4%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The increase in underwriting income(2) was largely due to growth in net earned premiums, lower catastrophe losses and higher favorable development of loss reserves from prior accident years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet figures are stated in F1. The reserve-risk language is stated in P2.",
+    "claim": "The reserve cushion must prove adequate for favorable development to continue. Reserves for unpaid losses and loss adjustment expenses rose to 3,324,276 (table in thousands) at September 30, 2026 from 2,890,870 at December 31, 2025. The 10-K states that reserves are estimates and may prove inadequate.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Reserves do not represent an exact calculation of liability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Income growth and its cause are stated in P6. The cash flow figures are in F3 and the other comprehensive loss figures in F1.",
+    "claim": "Net investment income is a second growth driver, up 17.5% to $58.3 million in the third quarter and up 21.1% for nine months. Management attributes it to portfolio growth funded by operating cash flows. For it to continue, cash must keep flowing in; nine-month operating cash flow was 754,886 (table in thousands) against 802,344 a year earlier.",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "These increases were driven by growth in the Company's investment portfolio generated largely from the investment of strong operating cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Per-share and capacity figures are stated in P6. Share counts are in F2 and repurchase cash in F3.",
+    "claim": "Share repurchases lift per-share results. Diluted operating earnings per share were $5.70 against $5.21 in the third quarter. Diluted weighted shares were 22,504 (shares in thousands) against 23,271. The company had $237.5 million of repurchase capacity left at September 30, 2026.",
+    "facts": [
+     "P6",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "At September 30, 2026, the Company had $237.5 million of capacity remaining under its share repurchase program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The company states its cost advantage in P1 as a belief. The 2026 ratio is stated in P6.",
+    "claim": "A low-cost technology platform underpins the margins. The 10-K gives a 20.8% expense ratio for 2025. The third-quarter 2026 ratio was 22.0%, so expense discipline must hold for margins to persist.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Significantly lower expense ratio than our competitors."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P2.",
+    "claim": "Distribution depends on a few brokers. Three brokers accounted for 47.6%, or $941.4 million, of 2025 gross written premiums. Growth requires these relationships to continue.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "three of which accounted for 47.6%, or $941.4 million, of our 2025 gross written premiums"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cycle risk is stated in P2 and the competitive-market remark in P6. Their link to current growth is inferred.",
+    "claim": "Growth also depends on the E&S market cycle. The 10-K warns that when conditions soften, customers may return to the admitted market. The CEO describes the current environment as a competitive market.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Similarly, when conditions begin to soften, many customers that were previously driven into the E&S market may return to the admitted market, exacerbating the effects of rate decreases.",
+     "Our underwriting results this quarter demonstrate discipline in a competitive market"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited 8-K (Item 5.02 and Exhibit 99.1)",
+    "claim": "Kinsale announced that its CFO, Bryan Petrucelli, will retire from his executive role effective March 2, 2027. He was elected to the Board, and Christopher Tangard will succeed him as CFO on that date.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Mr. Petrucelli intends to retire from such positions, effective March 2, 2027.",
+     "Christopher R. Tangard will succeed Mr. Petrucelli as Executive Vice President, Chief Financial Officer and Treasurer, effective March 2, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited earnings release and 10-Q MD&A",
+    "claim": "In the third quarter of 2026 Kinsale repositioned part of its investment portfolio. It sold fixed-maturity securities at a realized loss and sold equity holdings at a gain. The repositioning reduced third-quarter pre-tax earnings by $37.6 million.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "The repositioning reduced third quarter pre-tax earnings by $37.6 million.",
+     "Net income includes a $37.6 million pre-tax realized loss on the sale of fixed-maturity securities due to a strategic repositioning of the investment portfolio expected to improve long-term returns"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited earnings release",
+    "claim": "Kinsale repurchased 269,004 shares in the open market during the third quarter of 2026 for a total cost of $100.0 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the Company repurchased 269,004 shares of its common stock in the open market at an average price of $371.74 per share for a total cost of $100.0 million."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in the cited release and 10-K. The link to future earnings is inferred.",
+    "claim": "Gross written premiums fell 4.8% in the third quarter, mainly because of property competition, with Commercial Property down 26.8%. If the soft-market pressure continues, premium growth could stay weak.",
+    "facts": [
+     "P6",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "The decrease in gross written premiums was primarily due to heightened competition in the Company's property divisions, where premiums declined 19.3% and 18.7% in the third quarter and first nine months of 2026, respectively, including declines of 26.8% and 29.8% in the Commercial Property Division."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Reserve balances and the risk language are stated. That the increase signals a risk is inferred.",
+    "claim": "Loss reserves are estimates and have grown, and most are incurred-but-not-reported. Adverse development or higher inflation assumptions could force reserve increases that cut earnings and equity.",
+    "facts": [
+     "F1",
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Reserves do not represent an exact calculation of liability.",
+     "As of December 31, 2025, our reserves for claims incurred but not reported were approximately 91.2% of our total net loss reserves.",
+     "This favorable development was offset in part by adverse development primarily in our construction liability business in the 2016 through 2019 accident years and adjustments to actuarial assumptions in the 2020 through 2024 accident years to reflect inflation uncertainty around construction defect exposures."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and management's explanation are stated. Treating the swings as an ongoing risk is inferred.",
+    "claim": "Investment results add earnings volatility and balance-sheet pressure. Accumulated other comprehensive loss widened and a portfolio repositioning cut third-quarter pre-tax earnings by $37.6 million.",
+    "facts": [
+     "F1",
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The repositioning reduced third quarter pre-tax earnings by $37.6 million.",
+     "There was no impact to book value."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The expense effect is stated. The higher net-loss exposure is inferred from higher retention and the 10-K risk language.",
+    "claim": "Higher retention on reinsurance treaties lowered ceding commissions and raised the expense ratio to 22.0% from 21.0% in the third quarter. It also leaves the company bearing more of each loss on a net basis.",
+    "facts": [
+     "P6",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "The increase in the expense ratio for both the third quarter and first nine months of 2026 compared to the prior-year periods was primarily due to lower ceding commissions as a result of higher retention on the Company\u2019s reinsurance treaties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Concentration figures and risk language are stated. No event is evidenced, so the risk is potential only.",
+    "claim": "Premium distribution is concentrated in a few brokers. Three brokers produced $941.4 million, or 47.6%, of 2025 gross written premiums, and the relationships can be ended at any time.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Of our 2025 gross written premiums, 60.6%, or $1.2 billion, were distributed through five of our approximately 227 brokers, three of which accounted for 47.6%, or $941.4 million, of our 2025 gross written premiums.",
+     "Our relationship with any of these firms may be discontinued at any time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The transition is stated in the 8-K. The effect on the business is inferred and may be minimal.",
+    "claim": "A change of Chief Financial Officer is scheduled. The sitting CFO intends to retire and an internal successor is named, which brings some transition risk in financial reporting and capital management.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Mr. Petrucelli intends to retire from such positions, effective March 2, 2027."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "The decline and its stated cause are stated in P6. The open question about duration is inferred because no item gives a forward view.",
+    "claim": "Will the decline in property premiums, led by Commercial Property, continue? Property premiums fell 19.3% in the third quarter and 18.7% in the first nine months of 2026, and the evidence does not say whether the competition has stabilised.",
+    "facts": [
+     "P6",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "heightened competition in the Company's property divisions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet and development figures are stated in F1 and P6. The 2025 construction-liability offset is stated in P3. Its relevance to 2026 is inferred, because the quarterly roll-forward is not in the packet.",
+    "claim": "How much of the rise in loss reserves, from 2,890,870 (table in thousands) at Dec. 31, 2025 to 3,324,276 (table in thousands) at Sep. 30, 2026, reflects growth and how much reflects changed assumptions? Favorable prior-year development of (57,763) (table in thousands) has been partly offset by construction-liability adverse development, and the evidence does not show whether that offset is growing.",
+    "facts": [
+     "F1",
+     "P6",
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "adverse development primarily in our construction liability business in the 2016 through 2019 accident years"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Amortized cost of $4,736,687 (table in thousands), AOCI and the $37.6 million effect are stated in F1 and P6. Whether further repositioning is planned is not stated.",
+    "claim": "How much unrealized loss remains in the fixed-maturity portfolio after the third-quarter repositioning? Accumulated other comprehensive loss was (187,160) (table in thousands) at Sep. 30, 2026 versus (30,692) at Dec. 31, 2025, amortized cost exceeded fair value, and it is unclear whether further sales would realize more losses.",
+    "facts": [
+     "F1",
+     "F2",
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "The repositioning reduced third quarter pre-tax earnings by $37.6 million as the equity gains were recorded through earnings in the period of appreciation and the bond losses were recorded through earnings upon sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Repurchase amounts are stated in F3 and P6. Future pace is not stated and is an open question.",
+    "claim": "Will repurchases continue at the 2026 pace? Cash paid for repurchases was 263,078 (table in thousands) in the first nine months of 2026 versus 39,999 a year earlier, and $237.5 million of authorization remained at Sep. 30, 2026.",
+    "facts": [
+     "F3",
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "At September 30, 2026, the Company had $237.5 million of capacity remaining under its share repurchase program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The ratios and the management assertion are stated in P6. The risk of higher retention is inferred from the risk-factor discussion of reinsurance in P2.",
+    "claim": "How will higher retention on reinsurance treaties affect results going forward? The expense ratio rose to 22.0% from 21.0% in the third quarter because of lower ceding commissions, and the company says the economic effect was more than offset, but the evidence does not show the 2027 treaty terms or the volatility effect.",
+    "facts": [
+     "P6",
+     "P4",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "The economic effect of lower ceding commissions was more than offset by the retention of incremental underwriting margin and higher investment income."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Growth figures and mix commentary are stated in P6. Whether growth is decelerating is inferred from comparing the quarterly and nine-month rates.",
+    "claim": "Can casualty growth offset the property decline? Casualty gross written premiums rose only 0.9% in the third quarter versus 3.0% for the first nine months, with a mix shift toward smaller accounts, and the evidence does not show casualty pricing or margins by line.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "primarily due to an increase in bound accounts offset in part by a change in business mix towards smaller accounts"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Transition facts are stated in P7. Any effect on practice is not addressed and is an open question.",
+    "claim": "Does the CFO transition, with Petrucelli moving to the board and Tangard becoming CFO effective March 2, 2027, change financial reporting or capital-allocation practice? The evidence gives no information on this.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Mr. Petrucelli intends to retire from such positions, effective March 2, 2027."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "KNSL",
+ "upside": -0.32946767810445265,
+ "valuation": null,
+ "value_base": 258.58226640336454,
+ "value_bear": 194.71360790510982,
+ "value_bull": 369.4981819811647,
+ "value_per_filed_share": {
+  "base": 258.58226640336454,
+  "bear": 194.71360790510982,
+  "bull": 369.4981819811647
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -13.3 points a year against the required return over 3 years"
+}
