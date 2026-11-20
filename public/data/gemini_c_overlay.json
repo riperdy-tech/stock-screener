@@ -1,9 +1,9 @@
 {
- "count": 184,
+ "count": 185,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-20T00:26:53Z",
- "list_covered": 155,
+ "generated_at": "2026-11-20T00:39:03Z",
+ "list_covered": 156,
  "list_names": 160,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -251,6 +251,39 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -26.0 points a year against the required return over 3 years"
+  },
+  "AMR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-11-06T12:34:30.000Z",
+    "accepted_utc": "2026-11-06T17:34:30Z",
+    "accession": "0001704715-26-000042",
+    "decision_time": "2026-11-20T00:27:18Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 94,
+   "claims_supported": 90,
+   "date": "2026-11-20T00:27:18Z",
+   "family": "commodity",
+   "flags": [
+    "A stacker reclaimer machine at Dominion Terminal Associates in Newport News sustained significant damage from a high-wind storm, and the company expects a lengthy replacement timeline without significant capital outlays due to ongoing insurance discussions.",
+    "A planned equipment outage at Dominion Terminal Associates delayed certain shipments into the following quarter.",
+    "Alpha committed approximately 3.5 million tons of metallurgical coal to domestic customers for shipment in 2027 at an average price of $135.48 per ton."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no positive earnings base",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no positive earnings base"
   },
   "AMT": {
    "alpha_pts": -6.040730600198117,
@@ -7502,7 +7535,7 @@
  "verdict_counts": {
   "AVOID": 45,
   "BUY": 44,
-  "NO_CALL": 78,
+  "NO_CALL": 79,
   "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
