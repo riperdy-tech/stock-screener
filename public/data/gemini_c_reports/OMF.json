@@ -1,0 +1,1175 @@
+{
+ "alpha_pts": 9.766376827646367,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-10-30T20:09:05.000Z",
+  "accepted_utc": "2026-10-31T00:09:05Z",
+  "accession": "0001584207-26-000041",
+  "decision_time": "2026-11-20T10:25:17Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 65,
+ "claims_supported": 61,
+ "date": "2026-11-20T10:25:17Z",
+ "decided": {
+  "flags": [
+   "situation_unclear",
+   "run 1000: quotes_verified: 8 of 9",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 8 of 9"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.2454, growth 0.0375, r 0.0931, F 10",
+  "route": "financial",
+  "run_gap": 0.019603651685524227,
+  "runs": {
+   "1000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 8020864819.296545,
+     "implied_pb": 2.5523070454534302,
+     "seam_ratio": 1.0156249999999993,
+     "tv_share": 0.41690011644182196
+    },
+    "flags": [
+     "quotes_verified: 8 of 9"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.0,
+      0.03,
+      0.04,
+      0.04,
+      0.04
+     ],
+     "fade_years": 8,
+     "long_run_roe": 0.16,
+     "roe": [
+      0.22,
+      0.21,
+      0.21,
+      0.2,
+      0.2
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.2454, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 61
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.01,
+      0.07
+     ],
+     "long_run_roe": [
+      0.13,
+      0.19
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Common stock repurchased | (173) | (70)"
+       },
+       {
+        "id": "P7",
+        "quote": "Declared quarterly dividend of $1.05 per share"
+       },
+       {
+        "id": "P7",
+        "quote": "Net leverage (net adjusted debt to adjusted capital) | 5.5x | 5.5x | 5.4x | 5.4x | 5.5x"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Book equity was flat in 2026 because dividends and buybacks absorbed earnings. With a $1.05 quarterly dividend and ongoing repurchases, year 1 growth is about zero. Later years assume modest retention of 3-4% to keep leverage near 5.5x as receivables grow 7-9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "strong demand for consumer credit"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Eight years allows the current ROE advantage from growth and scale to erode gradually toward a more normal level under competition and regulation."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "we generally charge these customers higher interest rates"
+       },
+       {
+        "id": "P8",
+        "quote": "allowing OneMain to maintain its diverse business offerings and retain its non-bank status"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nonprime consumer lending is competitive and cyclical, and funding costs are rising. The 2021-2025 record fell from 38% to 16-25%, so a fade to about 16% is above the 9.3% cost of equity but well below recent levels. The new bank charter could cut funding costs, but it is unquantified and not yet open."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "median 0.2454"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month 2026 net income is $563m, down from $579m, and Q3 pretax fell on a higher provision. Adding a Q4 near $190m gives about $750m on $3,401m opening equity, or about 22%, below the 24.5% of 2025. Years 2-5 ease slightly as funding costs and normalising credit weigh, while growth and operating leverage partly offset."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Long-run book growth is set a little below the nominal anchor of 3.75%, because a mature consumer lender in a competitive, regulated market grows with receivables and nominal income."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "roe",
+      "risk": "Credit deterioration in the nonprime book (unemployment rise) lifts charge-offs and provisions, cutting earnings."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_roe",
+      "risk": "Funding squeeze or loss of capital-market access forces slower growth, with fixed-rate loans that cannot be repriced against rising cost of funds."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "book_growth",
+      "risk": "Management keeps buybacks high and leverage rises, so book equity stays flat."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.03,
+       0.0,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "long_run_roe": 0.13,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.030000000000000006,
+       0.060000000000000005,
+       0.07,
+       0.07,
+       0.07
+      ],
+      "long_run_roe": 0.19,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "bear_note": "none",
+     "capital_constrained": "unclear",
+     "institution": "other",
+     "roe_position": "ROE is high because common book equity is small (about $3.4bn) against $26.3bn of receivables, so a 22.6% yield on nonprime loans less funding and loss costs lands on a thin equity base. 2025 ROE of 24.5% was lifted by lower charge-offs than 2024 (2024 ROE was 16.0%). In 2026 the provision is rising with growth and a higher charge-off ratio (Q3 provision $615m vs $488m), and funding cost is up, so ROE is drifting down to about 22%. No large one-offs are visible, apart from debt-repurchase losses that are now small.",
+     "why": "OMF is a non-bank lender with no parent-level regulatory capital ratio in the packet, but net leverage of 5.5x adjusted capital and debt covenants limit how far equity can lag receivables growth. Dividends of about $4.20 a share plus buybacks absorb nearly all earnings, so book equity was flat in 2026 (3,401 to 3,391). Growth of 7-9% in receivables will probably require a slower buyback pace or retention of more earnings, which would lift book growth a little. The packet does not show covenant headroom or debt maturities."
+    },
+    "value_at_old_defaults": 115.37403952202011,
+    "values": {
+     "base": 72.78025787104454,
+     "bear": 57.93776751212575,
+     "bull": 99.34683484579726
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 7865152840.856679,
+     "implied_pb": 2.502758176523806,
+     "seam_ratio": 1.0183064516129032,
+     "tv_share": 0.3694407776160514
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 8 of 9"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.005,
+      0.03,
+      0.035,
+      0.035,
+      0.035
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.16,
+     "roe": [
+      0.22,
+      0.205,
+      0.2,
+      0.195,
+      0.19
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.2454, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 4,
+     "kept": 61
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.01,
+      0.055
+     ],
+     "long_run_roe": [
+      0.12,
+      0.19
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Cash dividends | (371) | (376)"
+       },
+       {
+        "id": "F3",
+        "quote": "Common stock repurchased | (173) | (70)"
+       },
+       {
+        "id": "F1",
+        "quote": "Total shareholders\u2019 equity | 3,391 | 3,401"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Equity was flat over nine months as buybacks of 173 and dividends of 371 absorbed most of the 563 of earnings. Receivables are growing about 7-9%, which at constant leverage needs some equity growth, so growth should rise to about 3-4% after 2026."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P8",
+        "quote": "OneMain Bank will be required to complete its organization plan and satisfy applicable regulatory requirements before opening for business."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The above-cost-of-equity return reflects an established branch, digital and dealer franchise with scale in nonprime credit, so it should erode only slowly. The OneMain Bank charter, which is still conditional and about a year from opening, adds uncertainty to that fade rather than shortening it."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.1598, p25 0.2126, median 0.2454, p75 0.2871, max 0.3819, last 0.2454."
+       },
+       {
+        "id": "P7",
+        "quote": "Net leverage (net adjusted debt to adjusted capital) | 5.5x | 5.5x | 5.4x | 5.4x | 5.5x"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 2021-2025 history ranges from 0.1598 to 0.3819 and is falling over time. Consumer-lending returns should fade towards a level above the 9.31% cost of equity but below the recent 0.20-0.25. Competitors with lower funding costs and the planned bank charter cap and also support this."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P7",
+        "quote": "The provision for finance receivable losses was $615 million in the third quarter of 2026, up from $488 million compared to the prior year period."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Nine-month net income of 563 against 579 a year earlier, with the provision rising faster than revenue, points to about 0.22 for 2026 on the 3,401 opening equity. A gradual slide follows as the growth-driven provision and higher funding costs persist."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0931; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature nonprime lender with 7-9% receivables growth today should grow more slowly over the long run. The nominal growth anchor of 0.0375 is a ceiling for sustainable growth and I set a little below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.14,
+      "input_hit": "roe",
+      "risk": "A credit downturn among nonprime borrowers or an allowance build above receivables growth lowers returns for several years."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_roe",
+      "risk": "Higher funding costs on fixed-rate loans, or weaker access to debt markets, compress the spread and return on equity for good."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Lower receivables growth, or a regulatory or covenant constraint, slows equity growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.02,
+       0.0049999999999999975,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "long_run_roe": 0.12,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.024999999999999998,
+       0.049999999999999996,
+       0.055,
+       0.055,
+       0.055
+      ],
+      "long_run_roe": 0.19,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "base_year_representative_note": "2025 was above the 2024 trough and the 2026 run-rate is lower.",
+     "capital_constrained": "yes",
+     "institution": "other",
+     "roe_position": "Return on equity of 0.2454 in 2025 is high for a lender with 5.5x net leverage. It was lifted by a 2025 rebound from the 2024 trough of 0.1598, when provisions and Foursight-related items weighed. In 2026 the provision is rising faster than interest income because the allowance is built up front on fast receivables growth. Nine-month net income was 563 against 579 a year earlier, so the 2026 return should drift down to about 0.22. Funding costs are also rising, and charge-offs are still elevated.",
+     "why": "Book equity is roughly flat (3,391 at September 2026 against 3,401 at December 2025) because dividends and buybacks absorb most of earnings. The business is funded with debt at 5.5x net leverage and grows receivables about 7-9% a year, so equity growth is limited by leverage and by the payout policy. This is a non-bank lender; the covenants and funding markets set the limit rather than a bank capital ratio. Equity growth should therefore be modest, about 0.5% in 2026 and 3-4% a year afterwards."
+    },
+    "value_at_old_defaults": 115.37403952202011,
+    "values": {
+     "base": 71.36734814126083,
+     "bear": 55.79081371610228,
+     "bull": 93.06331448698027
+    }
+   }
+  },
+  "situation_unclear": true,
+  "value_at_old_defaults": 115.37403952202011,
+  "value_at_old_defaults_quoted": 115.37403952202011,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 8596138409.97229,
+ "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 119268556.0,
+ "flags": [
+  "The Utah Department of Financial Institutions and the FDIC approved, subject to customary conditions, OneMain's applications to establish OneMain Bank, a Utah state-chartered, FDIC-insured industrial bank subsidiary. The bank must complete its organization plan and meet regulatory requirements before it can open.",
+  "OMFC issued $600 million of 7.125% Senior Notes due 2034. The 10-Q lists this as a recent development in unsecured debt."
+ ],
+ "in_code_book": false,
+ "ke": 0.09310305732783658,
+ "market_cap_at_publish": 6579254313,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 57.48,
+ "qwen_book": null,
+ "release_truncated": [],
+ "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+ "seed_base": {
+  "1000": 72.78025787104454,
+  "3000": 71.36734814126083
+ },
+ "seeds_agree": false,
+ "share_unit_note": null,
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated in the 10-K Item 1 business description.",
+    "claim": "OneMain is a consumer lender whose core business is originating, underwriting and servicing personal loans and auto finance loans, and it also buys credit card receivables and sells optional insurance and other products. Its customers are mainly nonprime consumers.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We provide origination, underwriting, and servicing of consumer loans, consisting of personal loans and auto finance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1.",
+    "claim": "At the last fiscal year-end the company held $24.8 billion of finance receivables from approximately 3.6 million customer accounts. It reaches them through branches, digital channels and auto dealerships in 48 states.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "At December 31, 2025, we had $24.8 billion of finance receivables due from approximately 3.6 million customer accounts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1.",
+    "claim": "The company runs a branch network of more than 1,300 locations, complemented by digital lending and central operations.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our branch network of more than 1,300 locations is staffed by experienced loan specialists."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the 10-K MD&A.",
+    "claim": "OneMain reports a single segment, Consumer and Insurance (C&I). It covers consumer loans, credit cards and optional products. The small remaining 'Other' piece is liquidating SpringCastle servicing and legacy real estate loans.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "At September 30, 2026, Consumer and Insurance (\u201cC&I\u201d) is our only reportable segment, which includes consumer loans, credit cards, and optional products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "Personal loans are the largest product, at $22.1 billion of net finance receivables, with 57% secured by titled property. They are fixed-rate, non-revolving loans with terms generally of three to six years.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had approximately 2.4 million personal loans totaling $22.1 billion of net finance receivables, of which 57% were secured by titled property, compared to approximately 2.4 million personal loans totaling $21.4 billion of net finance receivables, of which 53% were secured by titled property at December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "The smaller products are growing. Auto finance receivables rose to $2.8 billion from $2.5 billion at the last year-end, and BrightWay credit card receivables rose to $1.4 billion from $936 million.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had approximately 1.5 million open credit card customer accounts, totaling $1.4 billion of net finance receivables, compared to approximately 1.1 million open credit card customer accounts, totaling $936 million of net finance receivables at December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A and the 10-Q income statement. The link to yield is as stated.",
+    "claim": "Interest income is by far the largest revenue line. It rose to 1,491 (table in millions) in the third quarter from 1,392 a year earlier. The 10-K attributes interest income growth to larger average receivables and higher yield, with a $462 million or 9% annual increase.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Interest income increased $462 million or 9% in 2025 when compared to 2024 due to growth in average net receivables and an increase in yield."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1. The yield figure comes from the earnings release metrics table.",
+    "claim": "Customers are mainly nonprime, a higher credit risk, so the company generally charges higher interest rates. Consumer loan yield was 22.6% in the latest quarter.",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "As a result, we generally charge these customers higher interest rates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release. The 10-K risk factors support the rate-sensitivity point.",
+    "claim": "Interest expense is the main funding cost. It was $345 million in the third quarter, up 8% from $320 million, because of more average debt and a higher average cost of funds.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Interest expense was $345 million in the third quarter of 2026, up 8% from $320 million in the prior year quarter, due to an increase in average debt to support our receivables growth and a higher average cost of funds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release. Debt on the balance sheet is consistent with it.",
+    "claim": "The company funds itself mostly with debt, about half of it secured. Principal debt was $24.4 billion, 52% of it secured, backed by an undrawn corporate revolver, conduit and card funding facilities, and unencumbered receivables.",
+    "facts": [
+     "P7",
+     "F1"
+    ],
+    "quotes": [
+     "As of September 30, 2026, the Company had principal debt balances outstanding of $24.4 billion, 52% of which was secured."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and the income statement. The mechanism is the 10-K's description of the allowance.",
+    "claim": "Credit losses are the largest swing cost. The provision for finance receivable losses rose to 615 (table in millions) in the third quarter from 488, and the allowance grew by $146 million, which the company attributes to receivables growth.",
+    "facts": [
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the allowance for finance receivable losses increased $146 million driven by receivables growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the income statement lines and stated in the earnings release.",
+    "claim": "Provision growth outpaced revenue growth in the latest quarter, lowering earnings. Net interest income after provision was 531 (table in millions) versus 584, and diluted EPS was $1.60 versus $1.67.",
+    "facts": [
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "Earnings per diluted share were $1.60 in the third quarter of 2026, compared to $1.67 in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Operating costs scale with the business. Operating expense was $453 million in the third quarter, up 6% from $427 million, reflecting receivable growth and strategic investments.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Operating expense for the third quarter of 2026 was $453 million, up 6% from $427 million in the prior year quarter reflecting receivable growth and strategic investments in the business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Insurance revenue is from the income statement. The distribution dependence and the counterpoint are stated in the 10-K.",
+    "claim": "Insurance is a fee-like adjunct to lending. Insurance revenue was 113 (table in millions) in the third quarter. The insurance subsidiaries depend mainly on the lending operations for business and distribution.",
+    "facts": [
+     "F2",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Moreover, our insurance companies are predominately dependent on our lending operations as the primary source of business and product distribution."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q and 10-K. The cash flow figure comes from the cash flow statement.",
+    "claim": "OneMain also services loans for whole loan sale partners and sells finance receivables, which adds gain-on-sale revenue and servicing income. Proceeds from sales of finance receivables were 1,118 (table in millions) in the nine months.",
+    "facts": [
+     "P5",
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "We also service personal loans for our whole loan sale partners."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the November 8-K press release. Any funding-cost effect is not stated.",
+    "claim": "The company is adding a bank-like channel. UDFI and FDIC approved a Utah industrial bank, OneMain Bank, which is expected to open in about a year and offer personal loans, auto finance and credit cards.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "When it opens in approximately one year, OneMain Bank will build on OneMain\u2019s core strengths by offering personal loans, auto finance and credit cards to hardworking Americans nationwide."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 10-K business section as management's own description. No third-party market-share data is in the evidence.",
+    "claim": "OneMain describes itself as one of the nation's leaders in lending to nonprime consumers. It serves them through a branch network of more than 1,300 locations in 48 states, plus digital and dealer channels.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "As one of the nation\u2019s leaders in offering nonprime consumers responsible access to credit",
+     "Our branch network of more than 1,300 locations is staffed by experienced loan specialists."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Managed receivables grew to $28.1 billion at September 30, 2026, up 9% from $25.9 billion a year earlier. This is evidence of continued scale growth.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Managed receivables, which includes loans serviced for our whole loan sale partners and auto finance loans originated by third parties, were $28.1 billion at September 30, 2026, up 9% from $25.9 billion at September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release. The characterisation is management's.",
+    "claim": "The company has broad funding and liquidity resources. Undrawn committed capacity and unencumbered receivables support its ability to keep lending.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Cash and cash equivalents, together with the Company\u2019s $1.0 billion of undrawn committed capacity from an unsecured corporate revolver, $6.5 billion of undrawn committed capacity under revolving conduit facilities and credit card variable funding note facilities, and $12.3 billion of unencumbered receivables, provides significant liquidity resources."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 10-Q MD&A.",
+    "claim": "Credit card receivables are growing quickly and diversify the product set beyond personal loans and auto finance. Open accounts rose to about 1.5 million and balances to $1.4 billion, from $936 million at December 31, 2025.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had approximately 1.5 million open credit card customer accounts, totaling $1.4 billion of net finance receivables, compared to approximately 1.1 million open credit card customer accounts, totaling $936 million of net finance receivables at December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q. The loss-severity link is inferred.",
+    "claim": "Personal loans are increasingly secured by titled property. The share rose to 57% at September 30, 2026 from 53% at December 31, 2025.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had approximately 2.4 million personal loans totaling $22.1 billion of net finance receivables, of which 57% were secured by titled property, compared to approximately 2.4 million personal loans totaling $21.4 billion of net finance receivables, of which 53% were secured by titled property at December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K and press release dated November 17, 2026. Any funding-cost benefit is not quantified.",
+    "claim": "The company has received UDFI and FDIC approval to establish OneMain Bank, a Utah industrial bank. It would offer personal loans, auto finance and credit cards, with management saying it supports a more resilient business and lets the company retain its non-bank status.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "OneMain Bank will be required to complete its organization plan and satisfy applicable regulatory requirements before opening for business.",
+     "Looking ahead, OneMain Bank will further strengthen our financial foundation, enhance the resilience of our business, and position us to serve more customers for generations to come."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are from the 10-Q statements and MD&A table. The causal reading is partly inferred.",
+    "claim": "Credit losses are a pressure point. The Q3 2026 provision was 615 against 488 a year earlier, and pretax income fell to 233 from 263 (table in millions). The Q3 net charge-off ratio rose to 7.24% from 7.00%.",
+    "facts": [
+     "F2",
+     "P5"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 release delinquency table.",
+    "claim": "Consumer loan delinquency improved year over year at September 30, 2026. The 30+ day ratio was 5.34% against 5.55% a year earlier, which tempers the concern about rising losses.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "The expense change is stated in the release. The spread implication is inferred from the 10-K risk factor on loan rate limits.",
+    "claim": "Funding cost is rising with debt growth. Q3 interest expense was $345 million, up 8% from $320 million, driven by higher average debt and a higher average cost of funds. This squeezes spread if loan yields do not rise to offset it.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Interest expense was $345 million in the third quarter of 2026, up 8% from $320 million in the prior year quarter, due to an increase in average debt to support our receivables growth and a higher average cost of funds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. The evidence names no specific competitors.",
+    "claim": "Competition is a named threat. The 10-K says some competitors may have a lower cost of funds and funding sources that OneMain cannot access.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The consumer finance industry is highly competitive.",
+     "Some competitors may also have a lower cost of funds and access to funding sources that may not be available to us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "The nonprime customer base is more exposed to macroeconomic stress. This is a named threat to credit performance.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Moreover, our customers are primarily nonprime borrowers, who have historically been more likely to be affected, or more severely affected, by adverse macroeconomic conditions than prime borrowers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Heavy regulation of lending and insurance is a named threat. State and federal regulators can examine and take enforcement action against the company, including penalties and limits on products.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our businesses are subject to numerous federal, state, and local laws and regulations, and various state authorities regulate and supervise our lending business and insurance operations."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in the cited item",
+    "claim": "Reported cash was $936 million, but $268 million of it sits at regulated insurance subsidiaries or is otherwise unavailable for general corporate purposes. Cash that is freely usable is therefore smaller than the headline figure.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "The Company had $936 million of cash and cash equivalents, which included $268 million of cash and cash equivalents held at regulated insurance subsidiaries or for other operating activities that are unavailable for general corporate purposes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the dependence on covenant compliance comes from P4",
+    "claim": "Beyond cash, the company reports $1.0 billion undrawn on its unsecured corporate revolver, $6.5 billion undrawn on conduit and credit card VFN facilities, and $12.3 billion of unencumbered receivables. Management describes these as significant liquidity resources.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "provides significant liquidity resources."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Principal debt outstanding was $24.4 billion, 52% of it secured. Long-term debt on the balance sheet was 24,074 against 22,694 at the prior year-end, and shareholders' equity was 3,391 against 3,401 (table in millions). Debt grew while equity was roughly flat.",
+    "facts": [
+     "P7",
+     "F1"
+    ],
+    "quotes": [
+     "As of September 30, 2026, the Company had principal debt balances outstanding of $24.4 billion, 52% of which was secured.",
+     "Total shareholders\u2019 equity | 3,391 | 3,401"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Net leverage, defined as net adjusted debt to adjusted capital, was 5.5x at the latest quarter-end and 5.4x at the prior year-end. Net adjusted debt was 23,234 and adjusted capital was 4,200 (table in millions).",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Net leverage (net adjusted debt to adjusted capital) | 5.5x | 5.5x | 5.4x | 5.4x | 5.5x"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Net cash provided by operating activities was 2,347 over the nine months, against 2,267 a year earlier (table in millions). Net income over the same period was 563.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 2,347 | 2,267"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the structure of the cash flow statement",
+    "claim": "The quality of operating cash flow is limited. The provision add-back is 1,689, but the loans behind it are funded elsewhere: net principal originations and purchases of finance receivables used (4,086) in investing, partly offset by 1,118 of proceeds from sales of finance receivables (table in millions). Net cash used for investing was (3,056).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Provision for finance receivable losses | 615 | 488 | 1,689 | 1,454"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the explanation of the divergence is inferred from the stated definition",
+    "claim": "Capital generation, the company's own non-GAAP measure, was $284 million in the quarter against $272 million a year earlier. GAAP net income fell to 185 from 199 and C&I adjusted diluted EPS fell to $1.51 from $1.90, so the two measures point in different directions.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Capital generation was $284 million for the third quarter of 2026, compared to $272 million the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Credit costs are rising with growth. The quarterly provision was 615 against 488, and the allowance for finance receivable losses increased $146 million, which management attributes to receivables growth. The consolidated net charge-off ratio was 7.24% against 7.00%, while the consumer-loan 30+ delinquency ratio was 5.34% against 5.55% a year earlier.",
+    "facts": [
+     "P7",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "the allowance for finance receivable losses increased $146 million driven by receivables growth"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item; the funding interpretation is inferred",
+    "claim": "Over the nine months the company borrowed more than it repaid: proceeds from long-term debt were 5,724 against repayments and repurchases of 4,381 (table in millions). It also paid dividends of (371) and repurchased common stock of (173). Net financing inflow was 783, which together with operating cash flow covered the receivables growth in investing.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by financing activities | 783 | 351"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Refinancing activity in the latest period shows ongoing access to both unsecured and secured markets. The company completed the redemption of its 7.125% Senior Notes due 2026 for a net $436 million, issued $600 million of 7.125% Senior Notes due 2034, and completed several new securitizations.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "On August 20, 2026, OMFC issued a total of $600 million aggregate principal amount of 7.125% Senior Notes due 2034."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The company's own risk disclosure warns that an event of default or acceleration under one debt agreement could trigger default and acceleration under other agreements. It says such acceleration would materially affect liquidity and its ability to continue as a going concern.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "An event of default or declaration of acceleration under one of our existing debt agreements could also result in an event of default and declaration of acceleration under certain of our other existing debt agreements."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited items.",
+    "claim": "Receivables growth is the base driver: net finance receivables were 26,273 against 24,833 at the prior year-end (table in millions), and managed receivables were $28.1 billion, up 9% from $25.9 billion a year earlier. To continue, borrowers must keep demanding credit and the company must keep funding and underwriting new loans.",
+    "facts": [
+     "F1",
+     "P7"
+    ],
+    "quotes": [
+     "Managed receivables, which includes loans serviced for our whole loan sale partners and auto finance loans originated by third parties, were $28.1 billion at September 30, 2026, up 9% from $25.9 billion at September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Interest income is growing because of receivables growth. Third-quarter interest income was $1.5 billion, up 7% from $1.4 billion, and the filing attributes the increase to receivables growth. It continues only if the balance keeps rising or yield holds.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "The increase was driven by receivables growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Origination volume is feeding the receivables growth: consumer loan originations were $4.5 billion in the third quarter, up 17% from $3.9 billion. To continue, application flow and approval rates must hold without loosening credit discipline.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Consumer loan originations totaled $4.5 billion in the third quarter of 2026, up 17% from $3.9 billion in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q and 10-K.",
+    "claim": "Credit cards are a fast-growing product line, now about 1.5 million open accounts and $1.4 billion of net receivables against $936 million at the prior year-end. To continue, the third-party bank partner arrangement must remain in place and card losses must stay manageable.",
+    "facts": [
+     "P5",
+     "P1"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had approximately 1.5 million open credit card customer accounts, totaling $1.4 billion of net finance receivables"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q.",
+    "claim": "Auto finance is growing: about 163 thousand loans totaling $2.8 billion of net receivables, against about 148 thousand loans and $2.5 billion at the prior year-end. To continue, the dealer origination network must keep supplying volume.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had approximately 163 thousand auto finance loans totaling $2.8 billion of net finance receivables"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and 10-K, with the balance sheet as the statement source.",
+    "claim": "Growth is funded with debt, so continued access to funding is a condition. Long-term debt was 24,074 against 22,694 at the prior year-end (table in millions). The company reports principal debt of $24.4 billion, 52% secured, plus $6.5 billion of undrawn conduit and card facilities and $12.3 billion of unencumbered receivables.",
+    "facts": [
+     "F1",
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "$12.3 billion of unencumbered receivables, provides significant liquidity resources."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release; the earnings effect is inferred from the income statement.",
+    "claim": "Credit losses must stay contained for growth to turn into earnings. The third-quarter provision was $615 million, up from $488 million, with the allowance up $146 million on receivables growth. Net income fell even as revenue rose.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the allowance for finance receivable losses increased $146 million driven by receivables growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the income statement; no cited text explains the Other line.",
+    "claim": "Other revenues are a second source of growth: 212 in the third quarter against 163 a year earlier (table in millions), with the 'Other' line at 59 against 47. The line must keep growing to offset the higher provision.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Capital generation supports growth and shareholder returns: $284 million in the third quarter against $272 million. To continue, capital generation must keep covering receivables growth, dividends and buybacks.",
+    "facts": [
+     "P7",
+     "F3"
+    ],
+    "quotes": [
+     "Capital generation was $284 million for the third quarter of 2026, compared to $272 million the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the statements and release; the link to EPS is inferred.",
+    "claim": "Share repurchases lift per-share results: weighted diluted shares were 115,483,795 against 119,420,044, and diluted EPS was $1.60 against $1.67 despite lower net income. Repurchases were 173 over nine months against 70 a year earlier (table in millions). This needs excess capital to continue.",
+    "facts": [
+     "F2",
+     "F3",
+     "P7"
+    ],
+    "quotes": [
+     "During the quarter, the Company repurchased approximately 538 thousand shares of common stock for $34 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K; any effect on growth is not stated.",
+    "claim": "A prospective bank subsidiary is a possible future funding and product channel. Regulators approved OneMain Bank subject to customary conditions, and it must complete its organization plan and meet regulatory requirements before opening about a year out.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "OneMain Bank will be required to complete its organization plan and satisfy applicable regulatory requirements before opening for business."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated in the 8-K Item 8.01 text and the attached press release.",
+    "claim": "The Utah Department of Financial Institutions and the FDIC approved, subject to customary conditions, OneMain's applications to establish OneMain Bank, a Utah state-chartered, FDIC-insured industrial bank subsidiary. The bank must complete its organization plan and meet regulatory requirements before it can open.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "OneMain Bank will be required to complete its organization plan and satisfy applicable regulatory requirements before opening for business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A Recent Developments section.",
+    "claim": "OMFC issued $600 million of 7.125% Senior Notes due 2034. The 10-Q lists this as a recent development in unsecured debt.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On August 20, 2026, OMFC issued a total of $600 million aggregate principal amount of 7.125% Senior Notes due 2034."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "The provision figures are stated in the cited items. The mechanism is inferred from the 10-K risk factors.",
+    "claim": "Credit costs rose in the third quarter of 2026: the provision for finance receivable losses was $615 million, up from $488 million a year earlier. This weighs on a customer base the 10-K describes as primarily nonprime borrowers.",
+    "facts": [
+     "P7",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "The provision for finance receivable losses was $615 million in the third quarter of 2026, up from $488 million compared to the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are stated in the release. The cause is inferred from the provision and expense lines.",
+    "claim": "Third-quarter 2026 C&I adjusted earnings fell year on year: adjusted pretax income was $232 million against $303 million, and adjusted diluted EPS was $1.51 against $1.90.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Adjusted earnings per diluted share were $1.51 for the third quarter of 2026, compared to $1.90 in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The debt and leverage figures are stated. The rupture mechanism comes from the 10-K risk-factor language, and its likelihood is not assessed in the evidence.",
+    "claim": "The company relies heavily on debt funding. Long-term debt was 24,074 (table in millions) at September 30, 2026, up from 22,694 (table in millions) at December 31, 2025, and net leverage was 5.5x. The 10-K warns that acceleration of debt could threaten its ability to continue as a going concern.",
+    "facts": [
+     "F1",
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "Such an acceleration of our debt would have a material adverse effect on our liquidity and our ability to continue as a going concern."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The interest figures are stated. The margin-squeeze mechanism is described in the 10-K risk factors.",
+    "claim": "Funding costs are rising: third-quarter interest expense was $345 million, up 8% from $320 million, from higher average debt and a higher average cost of funds.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Interest expense was $345 million in the third quarter of 2026, up 8% from $320 million in the prior year quarter, due to an increase in average debt to support our receivables growth and a higher average cost of funds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. No specific action is evidenced.",
+    "claim": "The 10-K says the business is subject to regular examination and potential enforcement by state and federal regulators, which could bring penalties, remediation, and limits on products.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our operations are subject to regular examination by state regulators and U.S. federal and foreign regulators."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K. The delay risk is inferred from the conditions.",
+    "claim": "The newly approved OneMain Bank industrial-bank charter is still conditional and not yet operating: it opens in about one year and must complete its organization plan and meet regulatory requirements first.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "OneMain Bank will be required to complete its organization plan and satisfy applicable regulatory requirements before opening for business."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in P7 for the driver; the missing split is inferred from the absence of an allowance roll-forward in the packet",
+    "claim": "The Q3 provision was $615 million against $488 million a year earlier, and management attributes the $146 million allowance increase to receivables growth. It is not clear how much of the provision rise comes from growth and how much from a weaker loss outlook or changed macro assumptions.",
+    "facts": [
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the allowance for finance receivable losses increased $146 million driven by receivables growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the quarterly ratios in P7; no seasonality analysis is in the packet",
+    "claim": "The consumer loan net charge-off ratio fell to 6.89% in Q3 from 7.77% in Q2, but it is above the 6.67% of Q3 2025. It is unclear whether the Q3 drop is seasonal or a lasting improvement in credit.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from receivable balances in P7 and the year-end card delinquency data in P3; Q3 2026 card credit metrics are not in the packet",
+    "claim": "Credit card receivables grew to $1,383 million from $834 million a year earlier (table in millions). The 10-K showed higher delinquency and allowance ratios for cards than for consumer loans, and the packet does not show how newer card cohorts are performing.",
+    "facts": [
+     "P7",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "inferred from F3 and the leverage table in P7; no remaining authorization or forward plan is stated in the packet",
+    "claim": "Share repurchases were 173 (table in millions) in the nine months against 70 a year earlier, while net leverage was 5.5x and receivables kept growing. The evidence does not say how much of the $1.0 billion authorization remains or whether the pace of capital return will continue.",
+    "facts": [
+     "F3",
+     "P7",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P7 for the balances; the missing maturity detail is inferred from the omitted MD&A text",
+    "claim": "Principal debt was $24.4 billion, 52% of it secured. The packet does not show the maturity schedule, covenant headroom or refinancing needs.",
+    "facts": [
+     "P7",
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "As of September 30, 2026, the Company had principal debt balances outstanding of $24.4 billion, 52% of which was secured."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the note reference in F1; the note text is not in the packet",
+    "claim": "The balance sheet carries a Contingencies note (Note 12), but the packet does not include its content. It cannot be determined whether any legal or regulatory matter is material.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Contingencies (Note 12)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P8 for the approval and conditions; economic effects are inferred as unknown from the absence of figures",
+    "claim": "OneMain Bank received approval subject to customary conditions and must still complete its organization plan. The evidence does not show the effect on funding cost, capital, expenses or the company's non-bank status.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "OneMain Bank will be required to complete its organization plan and satisfy applicable regulatory requirements before opening for business."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "OMF",
+ "upside": 0.3065520803759041,
+ "valuation": null,
+ "value_base": 72.07380300615269,
+ "value_bear": 56.86429061411401,
+ "value_bull": 96.20507466638877,
+ "value_per_filed_share": {
+  "base": 72.07380300615269,
+  "bear": 56.86429061411401,
+  "bull": 96.20507466638877
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +9.8 points a year against the required return over 3 years"
+}
