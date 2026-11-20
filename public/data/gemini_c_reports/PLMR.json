@@ -1,0 +1,1294 @@
+{
+ "alpha_pts": -9.679717460778775,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-06T02:55:43.000Z",
+  "accepted_utc": "2026-11-06T07:55:43Z",
+  "accession": "0001193125-26-450504",
+  "decision_time": "2026-11-20T10:32:11Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 69,
+ "claims_supported": 69,
+ "date": "2026-11-20T10:32:11Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.2058, growth 0.0375, r 0.0931, F 10",
+  "route": "financial",
+  "run_gap": 0.08186628262344345,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2948892700.8755693,
+     "implied_pb": 3.3854703984285153,
+     "seam_ratio": 1.1452941176470604,
+     "tv_share": 0.5444672100323563
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.09,
+      0.13,
+      0.12,
+      0.11,
+      0.1
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.155,
+     "roe": [
+      0.235,
+      0.225,
+      0.21,
+      0.195,
+      0.185
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2058, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 69
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.07,
+      0.16
+     ],
+     "long_run_roe": [
+      0.13,
+      0.185
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Repurchases of common stock | (72,991) | (37,277)"
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive loss | (66,266) | (2,506)"
+       },
+       {
+        "id": "P6",
+        "quote": "On October 29, 2026, the Company\u2019s Board of Directors declared a quarterly cash dividend of $0.45 per share of common stock"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 growth is held down by the $64 million unrealized loss on bonds and by buybacks and dividends: nine-month equity growth was only about 4.5%, and I assume Q4 earnings lift the year to about 9%. After that, retained earnings at a 20%+ ROE with a payout of roughly half give 10-13%, helped if AOCI stabilizes."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Gross written premiums increased by 28.4% to $767.0 million"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The company is young, with differentiated products and a diversified book, so excess returns should erode slowly rather than abruptly. I use 10 years, with wide uncertainty."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "There is intense competition for business in our industry"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0931"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company's niche underwriting and diversification support returns above the 9.3% cost of equity, but competition and softer pricing cycles should pull the return toward the mid-teens. Cat-exposed and reinsurance-dependent specialty insurers rarely hold ROEs above 20% indefinitely."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Annualized return on equity | 22.3% | 23.4%"
+       },
+       {
+        "id": "P6",
+        "quote": "Loss ratio | 41.5% | 32.3%"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.1261, p25 0.1324, median 0.2058, p75 0.2495, max 0.2703, last 0.2703."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 ROE of 22.3% is below 2025's 23.6% (annual) and the underlying loss ratio is rising, so I expect year 1 near 23.5% and then a gradual fade as margins normalize, catastrophe losses revert toward their average, and interest and intangible amortization weigh on earnings. The record shows 2025's 27.0% on opening equity was a peak."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature specialty insurer's book equity should grow roughly with nominal premium growth, slightly above the long-run anchor, given the company's still-expanding addressable market against a $1 trillion U.S. P&C market. I set it slightly below the anchor of 0.0375."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.17,
+      "input_hit": "roe",
+      "risk": "Attritional loss ratio keeps rising with the shift to Crop and Casualty, or reserves prove inadequate, compressing underwriting margins."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_roe",
+      "risk": "Severe catastrophe or reinsurance-market hardening and competition push long-run returns down towards the cost of equity."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "book_growth",
+      "risk": "Further bond mark-to-market losses, debt service, acquisition integration problems or ratings pressure slow equity accumulation."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.04000000000000001,
+       0.08000000000000002,
+       0.07,
+       0.06000000000000001,
+       0.05000000000000002
+      ],
+      "long_run_roe": 0.13,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.13,
+       0.17,
+       0.16,
+       0.15000000000000002,
+       0.14
+      ],
+      "long_run_roe": 0.185,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_note": "2025 ROE of 0.2703 is above the 2026 run-rate.",
+     "base_year_representative": "no",
+     "capital_constrained": "unclear",
+     "institution": "insurer",
+     "roe_position": "Return on opening equity has risen from 12.6% in 2021 to 27.0% in 2025. The drivers were rapid premium growth, a retained share of premium that rose as cession percentages fell, and very light catastrophe losses (a catastrophe loss ratio of -0.1% in 2025). In 2026 the loss ratio rose sharply (Q3 41.5% against 32.3%) on faster-growing attritional lines such as Crop and Casualty. The new term loan and acquisition intangibles add interest and amortization. Nine-month GAAP annualized ROE of 22.3% is still high, but the trend is down from the 2025 peak.",
+     "why": "2025 was a benign catastrophe year and the highest-return year in the record, so it overstates a normal return. Premium growth of about 32% needs capital, and the company has added a $294 million term loan and absorbed an unrealized bond loss in equity. Even so, it is paying dividends and repurchasing shares, which suggests capital is not binding today, though the evidence does not show subsidiary statutory surplus or ratings headroom."
+    },
+    "value_at_old_defaults": 112.37955797418499,
+    "values": {
+     "base": 116.11214102383688,
+     "bear": 81.10149913023373,
+     "bull": 187.80133984500387
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 2716971097.369054,
+     "implied_pb": 3.119213262930076,
+     "seam_ratio": 1.1707142857142894,
+     "tv_share": 0.5613088057515594
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.09,
+      0.12,
+      0.12,
+      0.11,
+      0.1
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.15,
+     "roe": [
+      0.23,
+      0.205,
+      0.19,
+      0.18,
+      0.17
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.2058, growth 0.0375, r 0.0931, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 69
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.07,
+      0.16
+     ],
+     "long_run_roe": [
+      0.12,
+      0.18
+     ],
+     "terminal_growth": [
+      0.03,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive loss | (66,266) | (2,506)"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchases of common stock | (72,991) | (37,277)"
+       },
+       {
+        "id": "F3",
+        "quote": "Dividends paid | (11,846) | 0"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 growth is held down by a $63.8M unrealized loss on available-for-sale bonds, $73.0M of buybacks and the new dividend, even though earnings are strong. Later years return to about 10-12% as earnings retention exceeds payouts. Growth is high because ROE is high and about 40% of income is paid out."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "Our current reinsurance program limits our pre-tax net loss from any single event to $20.0 million for earthquakes and $11.0 million for hurricanes"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Moving from the current 17-20% ROE and 10% growth to mid-teens ROE and 3.5% growth takes a long fade. 10 years reflects a franchise with some competitive edge that is gradually competed away."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Total loss ratio of 41.5% compared to 32.3% in the third quarter of 2025"
+       },
+       {
+        "id": "F1",
+        "quote": "Term loan | 294,038 | 0"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The company has a differentiated, analytics-led franchise, but long-run catastrophe loads, competition and new debt and intangibles should push ROE toward mid-teens. That is still above the 9.3% cost of equity. The loss ratio is already rising, which supports fading."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "For the full year 2026, the Company expects to achieve adjusted net income of $280 million to $285 million. This includes an estimate of $8 million to $12 million of catastrophe losses for the year."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $942.7 million | $0.0 million | $942.7 million | $197.1 million | 0.2703 | 0.2930"
+       },
+       {
+        "id": "P3",
+        "quote": "Catastrophe loss ratio | -0.1% | 5.5%"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 net income of $160.9M and guidance for adjusted net income of $280-285M imply year-1 GAAP ROE of about 23% on the opening $942.7M. After that I fade ROE as catastrophe losses normalise from a very low base, attritional losses rise and interest costs run for a full year."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0931; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P6",
+        "quote": "Gross written premiums increased by 28.4% to $767.0 million compared to $597.2 million in the third quarter of 2025"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Long-run book growth should converge close to the nominal anchor of 3.75%, slightly below it given a maturing premium base. The company is still growing premiums at 28-32%, which supports staying near the anchor rather than far below it."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.12,
+      "input_hit": "roe",
+      "risk": "A severe catastrophe or reserve shortfall, or a continued rise in attritional losses, would cut ROE sharply. Catastrophe losses are currently very low."
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "long_run_roe",
+      "risk": "The long-run ROE falls to a normal specialty-insurer level as the catastrophe load normalises, competition rises and acquisition debt and intangibles weigh."
+     },
+     {
+      "bear_value": 0.06,
+      "input_hit": "book_growth",
+      "risk": "Growth is slower because a reinsurance or capital limit, a rating issue, or a further AOCI loss restricts how fast equity can grow."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.04000000000000001,
+       0.07,
+       0.07,
+       0.06000000000000001,
+       0.05000000000000002
+      ],
+      "long_run_roe": 0.12,
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "book_growth": [
+       0.13,
+       0.16,
+       0.16,
+       0.15000000000000002,
+       0.14
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "unclear",
+     "institution": "insurer",
+     "roe_position": "ROE is high because Palomar is a fast-growing specialty P&C insurer with a low combined ratio, heavy reinsurance and modest catastrophe losses. 2025 catastrophe losses were slightly negative. 2026 catastrophe losses are guided to only $8-12 million. Attritional losses are rising with the shift to Crop and Casualty, and new acquisition debt adds interest cost, so ROE should drift down from the 27% peak as catastrophe loads normalise.",
+     "why": "The 2025 ROE of 27% rests on benign catastrophe experience, a falling expense ratio and a rapidly growing book. Growth of about 30% in written premium draws on capital, and equity is cut by AOCI losses, buybacks and a new dividend. The filings show no statutory capital ratios or dividend limits, so the constraint cannot be judged. The company has in effect chosen to return capital while using debt to fund acquisitions."
+    },
+    "value_at_old_defaults": 112.37955797418499,
+    "values": {
+     "base": 106.98026792284975,
+     "bear": 73.64033374950925,
+     "bull": 164.9457510560829
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 112.37955797418499,
+  "value_at_old_defaults_quoted": 112.37955797418499,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 3065875316.5009594,
+ "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 27485250.0,
+ "flags": [
+  "Palomar completed its acquisition of Gray Surety, a Treasury-listed surety carrier, and renamed it Palomar Casualty & Surety Company (PCSC).",
+  "To fund the Gray Surety acquisition, Palomar entered into a credit agreement for unsecured credit facilities. The nine-month cash flow statement shows term loan proceeds.",
+  "In its third-quarter results release, Palomar gave full-year adjusted net income guidance of $280 million to $285 million. The CEO described this as the fourth increase to that guidance range."
+ ],
+ "in_code_book": false,
+ "ke": 0.09310305732783658,
+ "market_cap_at_publish": 4139876626,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 157.44,
+ "qwen_book": null,
+ "release_truncated": [],
+ "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
+ "seed_base": {
+  "1000": 116.11214102383688,
+  "3000": 106.98026792284975
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated in the 10-K Item 1 and the 10-Q MD&A overview.",
+    "claim": "Palomar is a specialty property and casualty insurer selling to both individuals and businesses, in the admitted and excess and surplus (E&S) lines markets.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "We are a specialty insurance company that provides property and casualty insurance products to individuals and businesses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the 10-K Item 1.",
+    "claim": "In the latest 10-Q the product lines are Earthquake, Inland Marine and Property, Casualty, Crop, and Surety & Credit. Fronting is no longer reported as a separate line.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "five product categories: Earthquake, Inland Marine and Property, Casualty, Crop, and Surety & Credit"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1 and the risk factor summary.",
+    "claim": "Products reach customers through retail agents, program administrators, wholesale brokers and partnerships with other insurers, so premium volume depends on those intermediaries.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We distribute our products through multiple channels, including retail agents, program administrators, wholesale brokers, and strategic partnerships with other insurance companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release segment note.",
+    "claim": "The company reports a single segment, so the evidence gives no segment profit split. Product, state and subsidiary breakdowns are given for gross written premiums only.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Company has a single reportable segment and offers specialty insurance products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement.",
+    "claim": "Revenue is mainly net earned premiums. For the nine months, net earned premiums were 913,781 of total revenues of 979,952 (table in thousands). Net investment income was 60,340 (table in thousands) and commission and other income was 3,664 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement and the earnings release table.",
+    "claim": "The volume driver is gross written premiums, which were 2,027,330 for the nine months against 1,535,623 a year earlier (table in thousands), a 32.0% increase.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release product table and the 10-Q MD&A.",
+    "claim": "Crop is the fastest-growing large line. In the third quarter Crop was 226,668 of gross written premiums, or 29.6% (table in thousands), up 89.3%. Crop premium is recognised mostly in the third quarter, so interim results can be uneven.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "The majority of our Crop written premiums are recognized in the third quarter, as we receive the requisite reporting from insureds at that time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release product table.",
+    "claim": "For the nine months, Casualty was the largest line by gross written premiums at 580,576 (28.7%). Earthquake was 438,442 (21.6%), and Surety & Credit was 119,504 (5.9%), up 196.9% (table in thousands).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release state table; the risk factor is in the 10-Q.",
+    "claim": "California is still the largest state but is a shrinking share of premiums. It was 498,429, or 24.6% of nine-month gross written premiums (table in thousands), against 30.8% a year earlier.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the 10-Q; the cession ratio comes from comparing the printed figures. The mechanism is stated in the MD&A.",
+    "claim": "The company cedes about half of its gross premium to reinsurers. Nine-month ceded written premiums were 975,669 against gross written premiums of 2,027,330, leaving net written premiums of 1,051,661 (table in thousands). Reinsurance is a major cost and risk-transfer lever.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Ceded written premiums are the amount of gross written premiums ceded to reinsurers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. The 10-Q risk factors excerpt is cut off before any updated retention figure.",
+    "claim": "Catastrophe exposure is capped by reinsurance. The 10-K states event retentions of $20 million for earthquake and $11 million for hurricane and all other perils.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our catastrophe event retention is currently $20 million for earthquake events and $11 million for hurricane events and all other perils."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the 10-Q and the earnings release; the mechanism is stated in the MD&A.",
+    "claim": "The largest cost is losses and loss adjustment expenses. These were 337,732 for the nine months and 151,646 in the third quarter, against 72,812 a year earlier (table in thousands). The third-quarter loss ratio was 41.5% against 32.3%, mostly attritional.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Losses and loss adjustment expenses for the third quarter were $151.6 million, comprised of $147.2 million of attritional losses and $4.5 million of catastrophe losses from hurricane and flood events in Hawaii and flood events in the Midwest."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the MD&A, the income statement and the earnings release.",
+    "claim": "Acquisition expenses are mostly commissions paid to agents and brokers, net of ceding commissions and fronting fees received. They were 213,923 for the nine months (table in thousands). The third-quarter expense ratio was 39.3% against 45.8%.",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Acquisition expenses are principally comprised of the commissions we pay retail agents, program administrators and wholesale brokers, net of ceding commissions and fronting fees we receive on business ceded under quota share and fronting reinsurance agreements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the 10-Q income statement; the cost description is in the MD&A.",
+    "claim": "Other underwriting expenses cover salaries, technology, rent, stock-based compensation and professional fees. They were 207,057 for the nine months against 129,563 (table in thousands), rising with the business.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q balance sheet and income statement and the MD&A.",
+    "claim": "The investment portfolio is a second income source. Total investments were 1,758,031 (table in thousands) and nine-month net investment income was 60,340. Net investment income depends on portfolio size, yield and management expenses.",
+    "facts": [
+     "F1",
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "The principal factors that influence net investment income are the size of our investment portfolio, the yield on that portfolio, and investment management expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1, the 10-Q statements and the cash flow statement; the link from loan to acquisition is stated in the 10-K.",
+    "claim": "Acquisitions are adding a new cost driver, debt. A term loan of 294,038 and credit borrowings of 21,000 appear on the balance sheet. Interest expense was 13,243 for the nine months against 304 (table in thousands). Goodwill and intangibles rose to 228,426 from 61,054.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "To facilitate this acquisition, the Company entered into a credit agreement providing for unsecured credit facilities totaling $450 million maturing on January 27, 2031."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the cited item (P1); the share trend is inferred from the P6 product table.",
+    "claim": "Palomar describes itself as a specialty insurer with a leading earthquake franchise, ranked 2nd in California and 3rd in the United States.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "we have grown to become the 2nd largest earthquake insurer in California and the 3rd largest earthquake insurer in the United States"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P1) as management's belief.",
+    "claim": "Management says its pricing and underwriting rest on proprietary, automated, granular modelling that competitors lack.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our proprietary models enable automated pricing of risks at the geocode or ZIP code level, in contrast to our competitors who we believe use less granular analytics and more manual underwriting processes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items (F2, P6).",
+    "claim": "Premium growth continues: nine-month gross written premiums rose 32.0% to $2,027,330 (table in thousands) from $1,535,623.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Gross written premiums increased by 28.4% to $767.0 million compared to $597.2 million in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Product shares are stated in P6; the uncorrelated-lines claim is management's belief in P1.",
+    "claim": "The book is diversified across five product categories, and the mix is shifting away from earthquake toward Crop and Surety & Credit.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Our major product lines and exposures are uncorrelated, such that events contributing to a loss in one product line are not expected to generate material losses in our other product lines."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in P6; attributing growth to the acquisition is inferred from the PCSC row and P1.",
+    "claim": "Surety & Credit is a fast-growing line, partly through the PCSC acquisition.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "In January 2026, we acquired The Gray Casualty & Surety Company"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P6).",
+    "claim": "Underwriting profitability remains strong but weakened in 2026, with the loss ratio and combined ratio both up.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Total loss ratio of 41.5% compared to 32.3% in the third quarter of 2025",
+     "Combined ratio of 80.8% compared to 78.1% in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P5. The retention figures come from the 10-K and the exhaustion points from the later 10-Q.",
+    "claim": "A large reinsurance program caps the retained loss from any single catastrophe event and is part of the model.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Our current reinsurance program limits our pre-tax net loss from any single event to $20.0 million for earthquakes and $11.0 million for hurricanes",
+     "Our reinsurance coverage currently exhausts at $3.9 billion for earthquake events and $135 million for continental U.S. hurricane events"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance-sheet figures are stated in F1; the risk language is stated in P2.",
+    "claim": "Reliance on reinsurers is a threat: reinsurance recoverables on unpaid losses grew, and reinsurers may pay late or not at all.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Our reinsurers may not pay claims on a timely basis, or at all",
+     "Hard market cycles may increase our cost of reinsurance, force us to increase our loss retention, or limit the amount of reinsurance we are able to purchase"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P2), as a risk factor.",
+    "claim": "Competition is named as a threat that could compress pricing and margins or shift market share.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "There is intense competition for business in our industry, which may result in pricing pressure, reduced underwriting margins, or changes in market share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P2).",
+    "claim": "The business depends on a select group of brokers and program administrators, which is a named distribution threat.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We rely on a select group of brokers and program administrators, and such relationships may not continue or may not perform as expected"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Risk language is stated in P5; shares are stated in P6.",
+    "claim": "California is a concentration risk, though its share of premiums has fallen as the book diversified.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "A significant portion of our business is generated in California, and as a result, we are more significantly exposed to California loss activity and regulatory environments"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F1 and F2; the link between the debt and the acquisition is stated in P1.",
+    "claim": "The Gray Surety acquisition was financed with debt and added intangibles, so leverage and interest cost are now part of the competitive picture.",
+    "facts": [
+     "F1",
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "To facilitate this acquisition, the Company entered into a credit agreement providing for unsecured credit facilities totaling $450 million maturing on January 27, 2031."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 and P6.",
+    "claim": "Catastrophe exposure is a named threat, with hurricane and flood events producing small catastrophe losses in the third quarter.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Claims arising from unpredictable and severe catastrophe events, including those caused by global climate change, could reduce or eliminate our earnings and stockholders\u2019 equity"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in the balance sheet; the link to cash uses is inferred from F3",
+    "claim": "Liquidity: cash and cash equivalents were 55,627 (table in thousands) at the latest balance sheet, down from 106,875 at the prior year-end. Total investments were 1,758,031, of which available-for-sale fixed maturities were 1,565,619 at fair value. Most of the liquid resources therefore sit in the investment portfolio, not in cash.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | 55,627 | 106,875"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "balance sheet figures are stated; the purpose of the debt is from P1 and F3 (acquisition outflow and term loan proceeds)",
+    "claim": "Leverage: the company carried no borrowings at the prior year-end but now reports a term loan of 294,038 and borrowings from credit agreements of 21,000 (table in thousands). Total liabilities were 3,184,272 against total stockholders' equity of 984,972, and the latter is above the prior year-end figure of 942,667. Most liabilities are insurance obligations such as loss reserves and unearned premiums, not financial debt.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Term loan | 294,038 | 0",
+     "Borrowings from credit agreements | 21,000 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and F3",
+    "claim": "The new debt now carries a visible cost: nine-month interest expense was 13,243 versus 304 a year earlier (table in thousands). Q3 interest expense was 5,138 against income before income taxes of 84,732. Cash paid for interest was 12,379 versus 228.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Interest expense | 5,138 | 133 | 13,243 | 304",
+     "Cash paid for interest | 12,379 | 228"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement and income statement",
+    "claim": "Cash generation: net cash provided by operating activities was 334,759 for the nine months (table in thousands), up from 291,705 a year earlier. This is above the nine-month net income of 160,874.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | $ 334,759 | $ 291,705"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from balance sheet movements; the evidence does not give a working-capital breakdown",
+    "claim": "Quality of cash generation: operating cash flow exceeding net income is consistent with the insurance float building up. Loss reserves rose to 1,104,974 from 688,231 and unearned premiums to 1,257,218 from 988,143, while premiums receivable also grew to 667,166 from 452,908 (table in thousands). Reserves may include acquired balances, and claims paid on these reserves will use cash later.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Reserve for losses and loss adjustment expenses | 1,104,974 | 688,231"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement",
+    "claim": "The cash flow statement shows how operating cash was used and how the gap was financed. Investing outflows were 623,043 (table in thousands), including acquisitions net of cash acquired of 246,321. Financing brought in 237,019, from term loan proceeds of 300,000 and line-of-credit proceeds of 208,000 against repayments of 187,000, after share repurchases of 72,991 and dividends paid of 11,846. Cash and restricted cash still fell by 51,265.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash used in investing activities | (623,043) | (230,435)",
+     "Proceeds from term loan | 300,000 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "maturity and facility size are stated in P1; the 3,738 term loan payment is stated in F3",
+    "claim": "Refinancing needs: the only stated maturity is for the credit agreement taken out for the Gray Surety acquisition. It provides unsecured credit facilities totaling $450 million maturing on January 27, 2031, so the filings show no near-term maturity wall. The company also made payments on the term loan of 3,738 (table in thousands) during the nine months.",
+    "facts": [
+     "P1",
+     "F3"
+    ],
+    "quotes": [
+     "the Company entered into a credit agreement providing for unsecured credit facilities totaling $450 million maturing on January 27, 2031"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from F1 and F3; the revolver's existence is stated in P4",
+    "claim": "How debt can be met: operating cash flow of 334,759 for nine months (table in thousands) and the 1,758,031 investment portfolio are the visible sources, and a revolving facility exists under the 2026 credit agreement. The revolver was used and repaid during the period, with proceeds of 208,000 and payments of 187,000.",
+    "facts": [
+     "F3",
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "including the Term Loan and Revolving Facility under our 2026 Credit Agreement"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Premium figures are stated in F2 and P6; the drivers come from the prior-year 10-K MD&A (P3), so applying them to 2026 is inferred.",
+    "claim": "Gross written premiums are the base of the growth: third-quarter premiums were 767,046 against 597,171 (table in thousands), up 28.4%, and nine-month premiums were 2,027,330 against 1,535,623 (table in thousands), up 32.0%. To continue, new business with existing and new partners must keep arriving and renewals must hold.",
+    "facts": [
+     "F2",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Gross written premiums increased by 28.4% to $767.0 million compared to $597.2 million in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Premium amounts and seasonality are stated in P6 and P4; the sustainability condition is inferred from the cited risk factor.",
+    "claim": "Crop is the fastest-growing large line this year: third-quarter crop premiums were 226,668 against 119,757 (table in thousands), up 89.3%. Crop is recognized mainly in the third quarter, so for this growth to continue the full-year crop book must keep its pace and crop prices must stay stable.",
+    "facts": [
+     "P6",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The majority of our Crop written premiums are recognized in the third quarter, as we receive the requisite reporting from insureds at that time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in P6; the integration condition is stated in the release's safe-harbor text.",
+    "claim": "Surety & Credit is a growing line built on acquisitions: nine-month premiums were 119,504 against 40,249 (table in thousands), up 196.9%, and the acquired PCSC contributed 60,685 (table in thousands). Continued growth requires the Gray Surety acquisition to be integrated and its benefits realized.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "a Treasury-listed surety carrier specializing in contract bonds for mid-sized and emerging contractors nationwide",
+     "our ability to integrate PCSC and realize the anticipated benefits of acquisitions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the statements; the link between the loan and the acquisition is inferred from the 10-K's credit-agreement description (P1).",
+    "claim": "Acquisition growth has been funded with debt, which must be serviced from earnings. Cash paid for acquisitions was 246,321 (table in thousands) and term loan proceeds were 300,000 (table in thousands). Interest expense rose to 13,243 from 304 (table in thousands) over nine months, and goodwill and intangibles rose to 228,426 from 61,054 (table in thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The 62.3% and 28.4% are stated in P6; the cession explanation is stated in P3 for the prior year, so its application to 2026 is inferred.",
+    "claim": "Retaining more of each premium dollar has amplified earned-premium growth: third-quarter net earned premiums were 365,391 against 225,147 (table in thousands), up 62.3% versus 28.4% for gross written premiums. For this to continue, reinsurance must remain available on acceptable terms and cession percentages must stay lower.",
+    "facts": [
+     "F2",
+     "P6",
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "premiums earned in the current period were subject to lower quota share or XOL cession percentages compared to premiums earned in the prior period",
+     "Our ability to grow our business is dependent in part on our ability to secure reinsurance for a substantial portion of the risk associated with our policies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Growth rates are stated in P6 tables; the dependence on other lines is inferred from comparing line growth rates.",
+    "claim": "The evidence shows growth across all five product categories, but earthquake, the original line, is growing slowly, so growth depends on the other lines. Third-quarter premium growth was 3.0% for Earthquake, 3.4% for Casualty and 13.4% for Inland Marine and Property, and nine-month Earthquake growth was 1.6%. California's share of third-quarter premiums fell to 22.9% from 28.3%.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "We were especially pleased with written premium growth across all five product categories this quarter"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The guidance is stated by management in P6; the conditions are inferred from the cited definitions and risk text.",
+    "claim": "Management guides to continued profit growth: full-year adjusted net income of $280 million to $285 million, with an estimate of $8 million to $12 million of catastrophe losses. Delivering it requires catastrophe losses to stay near that estimate and the combined ratio to stay below 100%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "the Company expects to achieve adjusted net income of $280 million to $285 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in P6; the attribution of the loss-ratio rise to premium mix is inferred from the 10-K's explanation of non-catastrophe losses (P3).",
+    "claim": "Profit is growing more slowly than premiums because the loss ratio has risen. Nine-month underwriting income was 158,733 against 131,561 (table in thousands), up 20.7%, versus 60.5% growth in net earned premiums. Continued growth needs loss ratios not to rise further; the nine-month loss ratio was 37.0% against 27.7%.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Total loss ratio of 41.5% compared to 32.3% in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "All figures are stated in the statements and release; the dependence on yields is stated in P6.",
+    "claim": "Investment income is a second growth driver, rising with the portfolio and with cash generated from operations. Third-quarter net investment income was 22,406 against 14,572 (table in thousands), up 53.8%, and total investments were 1,758,031 against 1,352,023 (table in thousands). Nine-month operating cash flow was 334,759 against 291,705 (table in thousands).",
+    "facts": [
+     "F2",
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "The increase was primarily due to higher yields on invested assets and a higher average balance of investments held during the three months ended September 30, 2026 due to cash generated from operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet and cash flow figures are stated in F1 and F3; the capital-to-rating-to-growth link is stated in the 10-K risk factors (P2).",
+    "claim": "Growth must be supported by capital, loss reserves and the insurer rating. Stockholders' equity was 984,972 (table in thousands) after buybacks of 72,991 (table in thousands), while loss reserves rose to 1,104,974 from 688,231 (table in thousands). A rating downgrade could limit the ability to write new and renewal business.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Severely limiting or preventing us from writing new and renewal insurance contracts"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the 10-K Item 1 Recent Developments section",
+    "claim": "Palomar completed its acquisition of Gray Surety, a Treasury-listed surety carrier, and renamed it Palomar Casualty & Surety Company (PCSC).",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In January 2026, we acquired The Gray Casualty & Surety Company (\u201cGray Surety\u201d), a Treasury-listed surety carrier specializing in contract bonds for mid-sized and emerging contractors nationwide."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 for the agreement; term loan proceeds stated in F3",
+    "claim": "To fund the Gray Surety acquisition, Palomar entered into a credit agreement for unsecured credit facilities. The nine-month cash flow statement shows term loan proceeds.",
+    "facts": [
+     "P1",
+     "F3"
+    ],
+    "quotes": [
+     "To facilitate this acquisition, the Company entered into a credit agreement providing for unsecured credit facilities totaling $450 million maturing on January 27, 2031.",
+     "Proceeds from term loan | 300,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K earnings release",
+    "claim": "In its third-quarter results release, Palomar gave full-year adjusted net income guidance of $280 million to $285 million. The CEO described this as the fourth increase to that guidance range.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "For the full year 2026, the Company expects to achieve adjusted net income of $280 million to $285 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K earnings release",
+    "claim": "The Board declared a quarterly cash dividend of $0.45 per share, payable on December 2, 2026 (after the decision date).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On October 29, 2026, the Company\u2019s Board of Directors declared a quarterly cash dividend of $0.45 per share of common stock, payable on December 2, 2026, to stockholders of record as of November 17, 2026."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in F2 and P6. The timing and mix reading is inferred.",
+    "claim": "Q3 2026 underwriting margin worsened. The loss ratio was 41.5% against 32.3% a year earlier, and losses and loss adjustment expenses were 151,646 against 72,812 (table in thousands).",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Total loss ratio of 41.5% compared to 32.3% in the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances and interest expense are stated in F1, F2 and F3. The mechanism is inferred.",
+    "claim": "The acquisition financing added debt and interest cost. A term loan of 294,038 and borrowings of 21,000 (table in thousands) sit on the Sep 30, 2026 balance sheet, with none at Dec 31, 2025. Q3 interest expense was 5,138 against 133, and cash fell to 55,627 from 106,875.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "the Company entered into a credit agreement providing for unsecured credit facilities totaling $450 million maturing on January 27, 2031"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 and P6.",
+    "claim": "Catastrophe events could cause losses beyond the retention. The company's retention is $20 million for earthquake and $11 million for hurricane, and the filing says hurricane activity typically rises between June and November.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Our catastrophe event retention is currently $20 million for earthquake events and $11 million for hurricane events and all other perils.",
+     "Hurricane activity typically increases between June and November of each year, though the actual occurrence and magnitude of such events is uncertain."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances and the quotes are stated. Linking the reserve increase to growth is inferred.",
+    "claim": "The reserve for losses and loss adjustment expenses rose to 1,104,974 from 688,231 (table in thousands). Q3 included $4.0 million of attritional unfavorable prior-year development, so reserve adequacy is a risk.",
+    "facts": [
+     "F1",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "which may be inadequate to cover actual incurred losses",
+     "Additionally, our third quarter results include $4.0 million of attritional unfavorable prior year development primarily related to Crop losses reallocated between calendar years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances and the risk language are stated. No specific reinsurer problem appears in the evidence.",
+    "claim": "Reinsurer credit exposure is large. Reinsurance recoverable on unpaid losses was 604,411 against 412,273 at year-end 2025 (table in thousands), and the company stays primarily liable if reinsurers do not pay.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Our reinsurers may not pay claims on a timely basis, or at all, which may materially adversely affect our business, financial condition, and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and duration are stated. The capital effect is inferred.",
+    "claim": "Unrealized losses on available-for-sale bonds are eroding equity. Accumulated other comprehensive loss was (66,266) against (2,506) at year-end, Q3 unrealized securities losses were (51,107), and portfolio duration was 4.61 years.",
+    "facts": [
+     "F1",
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Unrealized gains and losses on available-for-sale fixed maturity securities are recognized as a component of other comprehensive income and do not impact our net income.",
+     "The weighted average duration of the fixed-maturity investment portfolio, including cash equivalents, was 4.61 years at September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P6. The run-rate implication is inferred.",
+    "claim": "Crop is a growing, seasonal and weather-sensitive source of premium. It was 29.6% of Q3 gross written premiums against 20.1% a year earlier. The company says interim results may not indicate full-year performance.",
+    "facts": [
+     "P4",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "This pattern reflects the seasonal nature of the Crop business, which typically results in a disproportionate amount of Crop premiums being recognized in the third quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances and the quote are stated. The impairment mechanism is inferred.",
+    "claim": "Acquisition integration and balance-sheet intangibles pose a risk. Goodwill and intangible assets rose to 228,426 from 61,054, and nine-month acquisition outflow was (246,321) (table in thousands).",
+    "facts": [
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "our ability to integrate PCSC and realize the anticipated benefits of acquisitions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The guidance and growth figures are stated in P6. The miss scenario is inferred.",
+    "claim": "The full-year outlook rests on an adjusted measure and a modest catastrophe assumption. The company expects adjusted net income of $280 million to $285 million, including $8 million to $12 million of catastrophe losses. GAAP net income grew 27.0% in Q3 against 47.4% for adjusted.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "For the full year 2026, the Company expects to achieve adjusted net income of $280 million to $285 million.",
+     "This includes an estimate of $8 million to $12 million of catastrophe losses for the year."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "The ratios and the development amount are stated in P6. The open question is inferred because no item decomposes the increase.",
+    "claim": "Is the rise in the Q3 attritional loss ratio only a mix shift toward Crop and Casualty, or does it also show weaker reserve experience, given the unfavorable prior-year development that was described as Crop losses reallocated between calendar years?",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Additionally, our third quarter results include $4.0 million of attritional unfavorable prior year development primarily related to Crop losses reallocated between calendar years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balances are stated in F1. The question is inferred from the absence of a rollforward in the packet; P2 describes reserve inadequacy as a risk.",
+    "claim": "How much of the increase in the loss reserve and in reinsurance recoverable on unpaid losses came from the acquired surety carrier and from organic growth, and are the reserves adequate?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Reserve for losses and loss adjustment expenses | 1,104,974 | 688,231"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balances and facility size are stated in F1, F2, F3 and P1. The covenant gap is inferred because no item in the packet gives the covenant terms.",
+    "claim": "What are the covenant terms, remaining capacity and repayment plan for the new debt, and how much of the interest expense increase is permanent?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "To facilitate this acquisition, the Company entered into a credit agreement providing for unsecured credit facilities totaling $450 million maturing on January 27, 2031."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balances and duration are stated in F1, F2 and P6. The reversal question is inferred, since no item gives the unrealized loss detail.",
+    "claim": "Will the unrealized loss on available-for-sale fixed maturities reverse or become realized, and what is the portfolio's credit and maturity profile?",
+    "facts": [
+     "F1",
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "The weighted average duration of the fixed-maturity investment portfolio, including cash equivalents, was 4.61 years at September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The outlook and the missing reconciliation are stated in P6. The implied GAAP figure cannot be derived from the packet.",
+    "claim": "What GAAP net income is implied by the adjusted net income outlook, given that the company gave no reconciliation and the gap between adjusted and GAAP net income widened in Q3?",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "The Company has not provided a reconciliation of its full year 2026 adjusted net income outlook to net income, the most directly comparable GAAP financial measure, because it is unable to predict, without unreasonable efforts, certain reconciling items which could be material to net income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The guidance and year-to-date catastrophe losses are stated in P6, and the seasonality in P2. Q4 outcomes are not in the evidence.",
+    "claim": "Will full-year catastrophe losses come within the company's estimate, given that hurricane season runs into November and the year is not finished?",
+    "facts": [
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "This includes an estimate of $8 million to $12 million of catastrophe losses for the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balances are stated in F1, F3 and P6. The performance question is inferred, as the packet has no PCSC profit data.",
+    "claim": "How is the Palomar Casualty & Surety acquisition performing in premium, underwriting results and purchase accounting, and is the added goodwill and intangible balance supported?",
+    "facts": [
+     "F1",
+     "F3",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "our ability to integrate PCSC and realize the anticipated benefits of acquisitions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The seasonality statement and the Crop figures are stated in P4 and P6. How much of the growth is permanent is inferred.",
+    "claim": "How much of Q3 gross written premium growth reflects seasonal Crop timing rather than a lasting run-rate, and how will Crop losses develop?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "This pattern reflects the seasonal nature of the Crop business, which typically results in a disproportionate amount of Crop premiums being recognized in the third quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The cash flows are stated in F3 and F1. The holding company liquidity question is inferred, as the packet has no parent-only or statutory data.",
+    "claim": "How do share repurchases, a new dividend and acquisition debt fit with parent-company liquidity and insurance subsidiary capital, given that cash and equivalents fell during the nine months?",
+    "facts": [
+     "F3",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Dividends paid | (11,846) | 0"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "PLMR",
+ "upside": -0.2594283372489663,
+ "valuation": null,
+ "value_base": 111.54620447334332,
+ "value_bear": 77.3709164398715,
+ "value_bull": 176.3735454505434,
+ "value_per_filed_share": {
+  "base": 111.54620447334332,
+  "bear": 77.3709164398715,
+  "bull": 176.3735454505434
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -9.7 points a year against the required return over 3 years"
+}
