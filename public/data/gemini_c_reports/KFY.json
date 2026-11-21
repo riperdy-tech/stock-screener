@@ -1,34 +1,131 @@
 {
- "alpha_pts": 15.876944799635199,
+ "alpha_pts": 15.908200912075198,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 125,
- "claims_supported": 115,
- "date": "2026-11-16T13:51:03Z",
+ "based_on": {
+  "accepted": "2026-09-09T20:16:05.000Z",
+  "accepted_utc": "2026-09-10T00:16:05Z",
+  "accession": "0000056679-26-000031",
+  "decision_time": "2026-11-21T23:24:46Z",
+  "form": "10-Q",
+  "period": "2026-07-31"
+ },
+ "claims": 88,
+ "claims_supported": 88,
+ "date": "2026-11-21T23:24:46Z",
  "decided": {
   "flags": [
+   "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 15 of 15",
-   "run 3000: confidence_low",
-   "run 3000: quotes_verified: 14 of 14"
+   "run 1000: quotes_verified: 23 of 23",
+   "run 1000: capital_event_read_differs_from_xbrl: shares_outstanding xbrl 54,558,851, read 50,790,000",
+   "run 1000: share_count_change_unexplained: shares 52,519,000 to 54,558,851 (+2,039,851); issuing and buying back at 73.84 (half to double) explains +22,474 to +89,897",
+   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
+   "run 3000: quotes_verified: 25 of 25",
+   "run 3000: capital_event_read_differs_from_xbrl: shares_outstanding xbrl 54,558,851, read 50,790,000",
+   "run 3000: share_count_change_unexplained: shares 52,519,000 to 54,558,851 (+2,039,851); issuing and buying back at 73.84 (half to double) explains +22,474 to +89,897",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
-  "run_gap": 0.02404762611288996,
+  "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0939 (equity return r 0.0939), F 10",
+  "run_gap": 0.04759574675147896,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 1137678000.0,
+      "excess_cash_before": 1134359000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000056679-26-000031",
+        "amount": 746000.0,
+        "end": "2026-07-31",
+        "filed": "2026-09-09",
+        "form": "10-Q",
+        "read_amount": 746000.0,
+        "source": "xbrl",
+        "start": "2026-05-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 4065000.0,
+        "printed": 4065,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from issuance of common stock in connection with an employee stock purchase plan | 4,065 | 4,158"
+         },
+         {
+          "id": "F3",
+          "quote": "CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS (unaudited) - USD ($) $ in Thousands | 3 Months Ended"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: shares_outstanding xbrl 54,558,851, read 50,790,000",
+       "share_count_change_unexplained: shares 52,519,000 to 54,558,851 (+2,039,851); issuing and buying back at 73.84 (half to double) explains +22,474 to +89,897"
+      ],
+      "gross_events": 4811000.0,
+      "interim_end": "2026-07-31",
+      "market_cap": 4028625372.0,
+      "net_effect_on_excess_cash": 3319000.0,
+      "shares": {
+       "after": 54558851.0,
+       "before": 52519000.0,
+       "change": 2039851.0,
+       "explained_range": [
+        22474.26868905742,
+        89897.07475622967
+       ],
+       "interim": 54558851.0,
+       "price_used": 73.84,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 1134359000.0,
+     "excess_cash_after": 1137678000.0,
      "excess_cash_before": 1134359000.0,
      "k0_after": 34799764.28162497,
      "k0_before": 34799764.28162497,
      "k0_interest": 0.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
      "x0_after": 263392630.8519348,
      "x0_before": 263392630.8519348
     },
@@ -36,288 +133,60 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 4236226392.1589956,
-     "seam_ratio": 1.0264773200611523,
-     "tv_share": 0.41141380697678526,
-     "wedge_rate_5": 0.004940525546672108
+     "equity_value": 4327858547.081436,
+     "seam_ratio": 1.0377665347960638,
+     "tv_share": 0.5031316752714163,
+     "wedge_rate_5": 0.004692613736222378
     },
     "flags": [
+     "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 15 of 15"
+     "quotes_verified: 23 of 23",
+     "capital_event_read_differs_from_xbrl: shares_outstanding xbrl 54,558,851, read 50,790,000",
+     "share_count_change_unexplained: shares 52,519,000 to 54,558,851 (+2,039,851); issuing and buying back at 73.84 (half to double) explains +22,474 to +89,897",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.027,
-     "fade_years": 10,
-     "long_run_op_margin": 0.115,
+     "capex_to_revenue": 0.025,
+     "fade_years": 7,
+     "long_run_op_margin": 0.105,
      "op_margin": [
-      0.121,
-      0.123,
-      0.124,
-      0.125,
-      0.125
+      0.11,
+      0.115,
+      0.114,
+      0.111,
+      0.108
      ],
-     "return_on_new_investment_long_run": 0.3,
+     "return_on_new_investment_long_run": 0.45,
      "rev_growth": [
+      0.18,
       0.1,
-      0.08,
       0.05,
       0.045,
       0.04
      ],
      "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0939 (equity return r 0.0939), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 10,
-     "kept": 115
+     "dropped_unsupported": 0,
+     "kept": 88
     },
     "ranges": {
      "long_run_op_margin": [
-      0.1,
-      0.13
+      0.085,
+      0.125
      ],
      "rev_growth_y3": [
-      0.03,
-      0.07
+      0.015,
+      0.085
      ],
      "terminal_growth": [
-      0.03,
-      0.04
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0234"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Capex/revenue was 3.06% in fiscal 2026 against a 5-year pooled 2.34%, reflecting technology platform spend. I use 2.7% as a compromise."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2026-04-30 | $2,938.6 million | 0.0643 | 0.1275"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A 10-year fade lets the above-median margin and the acquisition-boosted growth converge to long-run levels at a moderate pace."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Adjusted EBITDA | $497,805 | 17.1% | $463,866 | 17.0% | $408,204 | 14.8%"
-       },
-       {
-        "id": "P2",
-        "quote": "There are no extensive barriers to entry into the executive search industry"
-       },
-       {
-        "id": "P3",
-        "quote": "Restructuring charges, net | \u2014 | \u2014 | 1,892 | 0.1 | 68,558 | 2.5"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Adjusted EBITDA margin rose from 14.8% to 17.1% in two years after restructuring, but this is a cyclical hiring-linked business whose 10-year margin median is lower. Executive search has low barriers to entry and AI-based competition. I assume about half of the gap above the long-run median persists."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Gain on modification of office lease | (13,907) | (0.5)"
-       },
-       {
-        "id": "F2",
-        "quote": "Operating income | 93,380 | 83,448"
-       },
-       {
-        "id": "P6",
-        "quote": "Integration/acquisition costs | $7.6 | $1.5"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Base-year operating margin includes a $13.9 million lease gain, and Q1 operating income was 93,380 on total revenue of 764,622, about 12.2%. AMS integration costs ($7.6 million in Q1, with more expected in Q2) and a likely lower-margin RPO mix hold year 1 slightly below the base, with a modest recovery after."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "F1",
-        "quote": "Long-term debt | 398,778 | 398,565"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The business is asset-light and people-based, with tangible capital near zero in the filed record, so returns are very high. The cost-of-equity break-even is 9.5%, so I use a conservative 30% rather than the capped 100%, allowing for competition and acquisition-style growth."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "This marks our sixth consecutive quarter of top line growth."
-       },
-       {
-        "id": "P6",
-        "quote": "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
-       },
-       {
-        "id": "P6",
-        "quote": "With AMS now part of Korn Ferry, we have brought together two iconic brands"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Momentum is strong: Q1 grew 7%, backlog is up 14%, and AMS adds Workforce Solutions revenue from year 1. AMS's size is not in the packet, so year 1 at 10% (organic about 6-7% plus a partial-year AMS contribution) is a wide-range estimate. Growth then fades toward mid-single digits as the AMS annualization ends and the cycle matures."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "P1",
-        "quote": "approximately 82% of our assignments were with clients we had served in the prior three years"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Mature global talent-services firm with 82% repeat-client revenue. Long-run growth should sit slightly below the nominal anchor because of AI insourcing risk to search and flat Digital revenue."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.095,
-      "input_hit": "long_run_op_margin",
-      "risk": "Hiring-cycle downturn or AI insourcing hits Search and RPO volumes and forces cost cuts, as in fiscal 2024."
-     },
-     {
-      "bear_value": 0.04,
-      "input_hit": "rev_growth",
-      "risk": "AMS integration disappoints, or AMS adds less revenue than assumed, so year 1-3 growth is lower."
-     },
-     {
-      "bear_value": 0.025,
-      "input_hit": "terminal_growth",
-      "risk": "Terminal growth is lower as AI tools erode search and recruiting demand."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.1,
-      "rev_growth": [
-       0.08,
-       0.06,
-       0.03,
-       0.024999999999999994,
-       0.019999999999999997
-      ],
-      "terminal_growth": 0.03
-     },
-     "bull": {
-      "long_run_op_margin": 0.13,
-      "rev_growth": [
-       0.12000000000000001,
-       0.1,
-       0.07,
-       0.065,
-       0.060000000000000005
-      ],
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Debt is a steady $398.8 million, but the AMS purchase price and funding are not in the packet and could add debt."
-     },
-     "margin_position": "The GAAP operating margin of 12.75% is near the top of the company's own history (median about 9% over 17 years; 11% in fiscal 2023). It was lifted by a one-time lease gain of about 0.5 point and by revenue growth that has outpaced costs since the fiscal 2024 restructuring. It is likely to fade somewhat in a demand downturn.",
-     "tax_rate_representative": {
-      "answer": "yes",
-      "why": "The 27.7% base-year rate is close to Q1 FY27's 24,648 / 94,145, about 26%, and is a normal blended rate for a global services firm."
-     },
-     "why": "Fiscal 2026 revenue grew 6.4% and the margin held at 12.75% after the fiscal 2024 restructuring, and Q1 FY27 shows the same run-rate. The margin includes a $13.9 million lease gain, so the underlying figure is about 12.3%. The AMS acquisition closed after the quarter-end balance sheet, so year 1 changes in scale, mix and integration cost. Search and staffing revenue is sensitive to the hiring cycle."
-    },
-    "value_at_old_defaults": 91.17984148411551,
-    "values": {
-     "base": 106.35653059910967,
-     "bear": 86.9097023478839,
-     "bull": 132.82020761795653
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 1134359000.0,
-     "excess_cash_before": 1134359000.0,
-     "k0_after": 34799764.28162497,
-     "k0_before": 34799764.28162497,
-     "k0_interest": 0.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 263392630.8519348,
-     "x0_before": 263392630.8519348
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "vintages",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 4365613460.190927,
-     "seam_ratio": 1.030936331874728,
-     "tv_share": 0.3983499774546145,
-     "wedge_rate_5": 0.0050223521906682
-    },
-    "flags": [
-     "confidence_low",
-     "quotes_verified: 14 of 14"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.027,
-     "fade_years": 10,
-     "long_run_op_margin": 0.12,
-     "op_margin": [
-      0.118,
-      0.12,
-      0.125,
-      0.127,
-      0.128
-     ],
-     "return_on_new_investment_long_run": 0.35,
-     "rev_growth": [
-      0.12,
-      0.09,
-      0.05,
-      0.045,
-      0.04
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0946 (equity return r 0.0946), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 10,
-     "kept": 115
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.1,
-      0.135
-     ],
-     "rev_growth_y3": [
       0.02,
-      0.08
-     ],
-     "terminal_growth": [
-      0.024,
-      0.037
+      0.045
      ]
     },
     "reasons": {
@@ -325,49 +194,61 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0234"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0234; depreciation (without amortization of acquired intangibles) / revenue 0.0193."
+       },
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | 0.0306 | 0.0336"
        },
        {
         "id": "F3",
         "quote": "Purchase of property and equipment | (17,923) | (22,599)"
        }
       ],
-      "quotes_given": 2,
-      "why": "The 5-year pooled capex is 2.3% of revenue and the base year was 3.1%, with digital platform investment ongoing, so I use 2.7%."
+      "quotes_given": 3,
+      "why": "Capital expenditure averaged 2.34% of revenue over FY22-FY26 and equaled 2.34% in Q1 FY27 ($17,923 thousand on $764,622 thousand), up to 3.06% in FY26 on Digital/AI investments; holding 2.5% over Years 1-5 reflects continued AI/Talent Suite platform investment partly diluted by lower-capex AMS Workforce Solutions revenue."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Adjusted EBITDA | $497,805 | 17.1% | $463,866 | 17.0% | $408,204 | 14.8%"
+        "id": "P1",
+        "quote": "In fiscal 2026, approximately 82% of our assignments were with clients we had served in the prior three years\u2014reflecting strong loyalty and long-term engagement."
+       },
+       {
+        "id": "P2",
+        "quote": "In fiscal 2026, our top six consultants combined generated business equal to approximately 3% of our total fee revenues. Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues."
        }
       ],
-      "quotes_given": 1,
-      "why": "Cyclical mean reversion plus AMS integration means margins and growth settle over about a decade."
+      "quotes_given": 2,
+      "why": "A 7-year fade balances Korn Ferry's durable client loyalty (82% repeat assignments and 350 Marquee/Diamond accounts) and proprietary data assets against low entry barriers in executive search, portable consultant relationships, and rapid AI competition."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2024-04-30 | $2,795.5 million | -0.0239 | 0.0762"
+        "quote": "2026-04-30 | $2,938.6 million | 0.0643 | 0.1275"
+       },
+       {
+        "id": "P3",
+        "quote": "For fiscal 2026, Adjusted EBITDA excluded $4.4 million of integration/acquisition costs and $13.9 million of gain on the modification of an office lease."
+       },
+       {
+        "id": "P1",
+        "quote": "In fiscal 2026, approximately 82% of our assignments were with clients we had served in the prior three years\u2014reflecting strong loyalty and long-term engagement."
        },
        {
         "id": "P2",
         "quote": "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market."
-       },
-       {
-        "id": "P2",
-        "quote": "such as the restructuring initiated in the first half of fiscal 2024"
        }
       ],
-      "quotes_given": 3,
-      "why": "The margin fell to 7.6% in the FY24 downturn and recovered to 12.5-12.75%. Expecting about half of the gap above the long-run median to persist, I fade to 12%, between mid-cycle and the current peak. Low barriers to entry and AI-based competitors limit the upside."
+      "quotes_given": 4,
+      "why": "Korn Ferry's 17-year historical GAAP operating margin median is 9.20%, while cyclical FY26 reached 12.75% with help from a $13.9 million lease modification gain and post-FY24 restructuring cost cuts. Fading to 10.5% preserves roughly 37% of the gap above the long-run median\u2014crediting sticky enterprise relationships (82% 3-year repeat rate) and higher-margin Digital subscriptions ($148.6 million)\u2014while accounting for AMS Workforce Solutions mix dilution, ongoing intangible amortization, and low Search entry barriers."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P6",
-        "quote": "Integration/acquisition costs | $7.6 | $1.5"
+        "id": "F2",
+        "quote": "Total revenue | $ 764,622 | $ 715,543"
        },
        {
         "id": "F2",
@@ -375,90 +256,477 @@
        },
        {
         "id": "P6",
-        "quote": "Ending number of fee earners (e) | 1,811 | 1,830"
+        "quote": "Q2 FY'27 adjusted EBITDA margin is expected to range from 16.8% to 17.2%; and"
+       },
+       {
+        "id": "P6",
+        "quote": "the Company is not able to estimate with reasonable certainty the integration and acquisition costs it will incur in connection with the AMS acquisition during the second quarter of fiscal 2027."
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 is held slightly below the base-year 12.75% because of AMS integration costs ($7.6M in Q1 alone) and the lower-margin RPO mix. Margins recover toward about 12.8% as productivity per fee earner rises and integration costs drop out."
+      "quotes_given": 4,
+      "why": "Although Q1 FY27 GAAP operating margin was 12.21% ($93,380 thousand on $764,622 thousand) and Q2 FY27 Adjusted EBITDA margin is guided at 16.8%-17.2%, unquantified AMS integration costs ($7.6 million already in Q1) and incremental AMS intangible asset amortization will compress Year 1 GAAP operating margin to 11.0%. As integration expenses recede in Year 2, margins recover to 11.5% before gradually easing to 10.8% by Year 5 as Workforce Solutions mix increases and Search normalizes."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.2771"
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.2771; total debt $398.6 million; cash counted as excess $1,134.4 million; net debt (debt less that cash) $-735.8 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0939."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0234; depreciation (without amortization of acquired intangibles) / revenue 0.0193."
        }
       ],
-      "quotes_given": 1,
-      "why": "The business is asset-light with a base-year tangible return of 1.0, so new investment earns well above the 9.46% hurdle. I assume heavy competition erodes that to about 35%."
+      "quotes_given": 3,
+      "why": "Because Korn Ferry operates an asset-light consulting and IP model whose base-year return on tangible capital hits the 1.0000 cap with low net capex (0.0234 capex/revenue vs 0.0193 depreciation/revenue), marginal returns on new tangible investment remain well above the 0.0939 cost of equity, though tempered to 45% by growing Digital/AI software capex, working capital receivables, and competitive pressure."
      },
      "rev_growth": {
       "quotes": [
+       {
+        "id": "P6",
+        "quote": "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency."
+       },
        {
         "id": "P6",
         "quote": "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
        },
        {
         "id": "P6",
-        "quote": "With AMS now part of Korn Ferry, we have brought together two iconic brands to create a global leader in talent and organizational consulting."
+        "quote": "Q2 FY\u201927 fee revenue is expected to be in the range of $860 million and $878 million;"
        },
        {
-        "id": "P3",
-        "quote": "Fee revenue increased by $177.4 million, or 7%, to $2,907.5 million in fiscal 2026"
+        "id": "P1",
+        "quote": "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric."
        }
       ],
-      "quotes_given": 3,
-      "why": "Organic growth is about 7% with growing backlog and bookings, and AMS adds inorganic revenue in FY27 and FY28. AMS's revenue is not in the packet, so years 1-2 are a wide estimate. Growth then fades toward a mid-single-digit cyclical rate."
+      "quotes_given": 4,
+      "why": "Q1 FY27 fee revenue grew 7% YoY with backlog up 14% to $1.9 billion, and Q2 FY27 fee revenue guidance jumps to $860-$878 million on two months of AMS, implying ~18% total revenue growth in Year 1 and ~10% in Year 2 as AMS annualizes alongside ~4-5% organic growth. Years 3-5 moderate to 5.0%, 4.5%, and 4.0% organic growth as cross-solution referrals (27% of fee revenue) and Digital subscriptions (+7.9%) offset cyclical hiring moderation and Search competition."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Cost of equity r 0.0946; long-run nominal growth anchor g_anchor 0.0375."
+        "quote": "Cost of equity r 0.0939; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025."
+       },
+       {
+        "id": "P2",
+        "quote": "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities."
        }
       ],
-      "quotes_given": 1,
-      "why": "A mature people-services business with cyclical, pay-linked search fees should grow somewhat below the nominal anchor, so I use 3.0%."
+      "quotes_given": 3,
+      "why": "With 94% of the S&P 100 and 82% of the S&P 500 as clients, Korn Ferry's mature enterprise penetration and AI-assisted insourcing/freelancing headwinds constrain perpetual growth slightly below the 3.75% nominal macro anchor at 3.5%, supported by recurring Talent Suite subscriptions and outsourced Workforce Solutions."
      }
     },
     "risks": [
      {
-      "bear_value": 0.1,
+      "bear_value": 0.075,
       "input_hit": "long_run_op_margin",
-      "risk": "Hiring downturn hits search and RPO volumes, with restructuring needed as in FY24"
+      "risk": "AMS integration execution failures, client/consultant attrition, and ongoing intangible amortization combined with Search margin compression from AI tools and freelancing platforms push long-run GAAP operating margin back down to FY24 recessionary levels."
      },
      {
-      "bear_value": 0.03,
-      "input_hit": "rev_growth",
-      "risk": "AMS integration disappoints or growth is weaker than assumed, and AI-enabled insourcing takes search share"
-     },
-     {
-      "bear_value": 0.024,
+      "bear_value": 0.015,
       "input_hit": "terminal_growth",
-      "risk": "AMS funding raises debt and lowers terminal growth in a lasting slowdown"
+      "risk": "AI-enabled recruiting platforms and client insourcing structurally shrink Executive Search and RPO fee pools, reducing nominal perpetual revenue growth below inflation."
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Rising AI/software capitalization requirements, slower client receivable collections, and dilutive integration spending depress marginal after-tax return on new tangible capital toward cost of capital."
+     },
+     {
+      "bear_value": 0.032,
+      "input_hit": "capex_to_revenue",
+      "risk": "Sustained Digital technology platform replacement costs, firm-wide AI infrastructure investments, and AMS systems integration keep capex elevated above FY26 levels."
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.1,
+      "long_run_op_margin": 0.085,
       "rev_growth": [
-       0.09,
-       0.06,
-       0.02,
-       0.014999999999999996,
-       0.009999999999999998
+       0.145,
+       0.065,
+       0.015,
+       0.009999999999999995,
+       0.0049999999999999975
       ],
-      "terminal_growth": 0.024
+      "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.135,
+      "long_run_op_margin": 0.125,
       "rev_growth": [
-       0.15,
-       0.12,
+       0.215,
+       0.135,
+       0.085,
        0.08,
-       0.075,
-       0.07
+       0.07500000000000001
       ],
-      "terminal_growth": 0.037
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Long-term debt held steady at $398.6 million to $398.8 million through July 31, 2026, but the Q2 FY27 outlook flags incremental net interest expense from the September 1, 2026 AMS closing without disclosing whether new debt was incurred or how much cash was spent."
+     },
+     "margin_position": "Base-year FY26 GAAP operating margin of 12.75% reflects a cyclical rebound in higher-margin Executive Search and Professional Search & Interim alongside FY24 restructuring cost discipline, further lifted by a $13.9 million lease modification gain partly offset by $4.4 million of integration/acquisition costs, leaving it 355 bps above the 17-year historical median of 9.20%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The FY26 effective tax rate of 27.71% aligns closely with the 26.18% rate recorded in Q1 FY27 ($24,648 thousand tax provision on $94,145 thousand pretax income) and reflects Korn Ferry's ongoing global geographic mix."
+     },
+     "why": "Base-year FY26 revenue ($2,938.6 million, +6.43%) and GAAP operating margin (12.75%) reflect cyclical Search strength and a net non-recurring benefit from a $13.9 million office lease modification gain less $4.4 million of integration/acquisition costs. More importantly, the acquisition of Auxey Holdco Limited (AMS) closed on September 1, 2026\u2014after both the FY26 year-end and the July 31, 2026 Q1 balance sheet\u2014materially enlarging Workforce Solutions while adding undisclosed purchase price, incremental intangible amortization, integration costs, incremental net interest expense, and incremental shares."
+    },
+    "value_at_old_defaults": 91.86160518032378,
+    "values": {
+     "base": 104.27611432643043,
+     "bear": 72.97917452130689,
+     "bull": 154.98668055985206
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 1137678000.0,
+      "excess_cash_before": 1134359000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000056679-26-000031",
+        "amount": 746000.0,
+        "end": "2026-07-31",
+        "filed": "2026-09-09",
+        "form": "10-Q",
+        "read_amount": 746000.0,
+        "source": "xbrl",
+        "start": "2026-05-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 4065000.0,
+        "printed": 4065,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from issuance of common stock in connection with an employee stock purchase plan | 4,065 | 4,158"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: shares_outstanding xbrl 54,558,851, read 50,790,000",
+       "share_count_change_unexplained: shares 52,519,000 to 54,558,851 (+2,039,851); issuing and buying back at 73.84 (half to double) explains +22,474 to +89,897"
+      ],
+      "gross_events": 4811000.0,
+      "interim_end": "2026-07-31",
+      "market_cap": 4028625372.0,
+      "net_effect_on_excess_cash": 3319000.0,
+      "shares": {
+       "after": 54558851.0,
+       "before": 52519000.0,
+       "change": 2039851.0,
+       "explained_range": [
+        22474.26868905742,
+        89897.07475622967
+       ],
+       "interim": 54558851.0,
+       "price_used": 73.84,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 1137678000.0,
+     "excess_cash_before": 1134359000.0,
+     "k0_after": 34799764.28162497,
+     "k0_before": 34799764.28162497,
+     "k0_interest": 0.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
+     "x0_after": 263392630.8519348,
+     "x0_before": 263392630.8519348
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 4591610871.06208,
+     "seam_ratio": 1.0325616849832502,
+     "tv_share": 0.47165166780536083,
+     "wedge_rate_5": 0.00433442865898118
+    },
+    "flags": [
+     "quotes_verified: 25 of 25",
+     "capital_event_read_differs_from_xbrl: shares_outstanding xbrl 54,558,851, read 50,790,000",
+     "share_count_change_unexplained: shares 52,519,000 to 54,558,851 (+2,039,851); issuing and buying back at 73.84 (half to double) explains +22,474 to +89,897",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.025,
+     "fade_years": 8,
+     "long_run_op_margin": 0.11,
+     "op_margin": [
+      0.115,
+      0.118,
+      0.122,
+      0.118,
+      0.115
+     ],
+     "return_on_new_investment_long_run": 0.35,
+     "rev_growth": [
+      0.185,
+      0.1,
+      0.055,
+      0.048,
+      0.042
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "year 1 growth 0.0686 and margin 0.1221, margin 0.1265 (persist), growth 0.0375, terminal RONIC 0.0939 (equity return r 0.0939), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 88
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.092,
+      0.125
+     ],
+     "rev_growth_y3": [
+      0.025,
+      0.08
+     ],
+     "terminal_growth": [
+      0.025,
+      0.042
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0234; depreciation (without amortization of acquired intangibles) / revenue 0.0193."
+       },
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | 0.0306 | 0.0336"
+       },
+       {
+        "id": "F3",
+        "quote": "Purchase of property and equipment | (17,923) | (22,599)"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Capex was 2.34% of revenue on a 5-year pooled basis and 2.34% in Q1 FY27 ($17,923 thousand on $764,622 thousand revenue), after spiking to 3.06% in FY26; holding 2.5% in Years 1-5 captures normalized hardware/office needs plus ongoing Talent Suite, AI, and AMS platform investments."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "As of fiscal year-end 2026, our 350 Marquee and Diamond accounts represented approximately 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception."
+       },
+       {
+        "id": "P2",
+        "quote": "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "An 8-year fade after Year 5 (13 years from base year) reflects durable multi-year enterprise relationships across Marquee and Diamond accounts alongside multi-year exposure to cyclical hiring normalization and evolving AI-enabled competition in Executive Search."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2026-04-30 | $2,938.6 million | 0.0643 | 0.1275"
+       },
+       {
+        "id": "REC",
+        "quote": "2024-04-30 | $2,795.5 million | -0.0239 | 0.0762"
+       },
+       {
+        "id": "P3",
+        "quote": "For fiscal 2026, Adjusted EBITDA excluded $4.4 million of integration/acquisition costs and $13.9 million of gain on the modification of an office lease."
+       },
+       {
+        "id": "P3",
+        "quote": "Compensation and benefits | 64.2 | 64.4 | 66.8"
+       },
+       {
+        "id": "P1",
+        "quote": "As of fiscal year-end 2026, our 350 Marquee and Diamond accounts represented approximately 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "Base-year operating margin of 12.75% (~12.43% excluding the $13.9 million lease modification gain and $4.4 million integration costs) sits ~2.5 percentage points above the 10-year historical median (~10.0%), and empirical base rates for cyclical firms indicate roughly 40%-60% of an above-median gap persists long term (~11.0%-11.2%). Post-FY24 restructuring savings, 350 Marquee and Diamond accounts (40% of fee revenue), and Digital scale support structurally better profitability than the 2010s, balanced by low search entry barriers, AI-enabled insourcing, and cyclical downturns like FY24 (7.62%)."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Total revenue | $ 764,622 | $ 715,543"
+       },
+       {
+        "id": "F2",
+        "quote": "Operating income | 93,380 | 83,448"
+       },
+       {
+        "id": "P6",
+        "quote": "Integration/acquisition costs | $7.6 | $1.5"
+       },
+       {
+        "id": "P6",
+        "quote": "Q2 FY'27 adjusted EBITDA margin is expected to range from 16.8% to 17.2%; and"
+       },
+       {
+        "id": "P6",
+        "quote": "Adjusted diluted earnings per share includes the net after tax impact of two months of incremental intangible asset amortization, incremental net interest expense and incremental shares issued in connection with the acquisition of AMS which closed on September 1, 2026."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "Q1 FY27 GAAP operating margin was 12.21% ($93,380/$764,622), already reflecting $7.6 million (~1.0% of revenue) of integration/acquisition costs, and while Q2 FY27 Adjusted EBITDA margin guidance holds at 16.8%-17.2%, Year 1-2 GAAP operating margins compress to 11.5%-11.8% due to AMS integration expenses, incremental intangible amortization, and higher Workforce Solutions mix. Margins recover toward 12.2% in Year 3 as integration costs roll off before easing back to 11.5% by Year 5 under competitive and cyclical normalization."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.2771; total debt $398.6 million; cash counted as excess $1,134.4 million; net debt (debt less that cash) $-735.8 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0234; depreciation (without amortization of acquired intangibles) / revenue 0.0193."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0939."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Korn Ferry is an asset-light human-capital and IP business with base-year return on tangible capital capped at 100% and 5-year pooled net capex above depreciation of just 0.41% of revenue (2.34% capex vs 1.93% depreciation). Long-run RONIC of 35% remains well above the 9.39% zero-value hurdle while fading below the 100% cap to reflect higher software/AI capex, RPO/Interim working capital needs, and competitive talent retention costs."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency."
+       },
+       {
+        "id": "P6",
+        "quote": "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
+       },
+       {
+        "id": "P6",
+        "quote": "Q2 FY\u201927 fee revenue is expected to be in the range of $860 million and $878 million;"
+       },
+       {
+        "id": "P1",
+        "quote": "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Q1 FY27 fee revenue grew 7% YoY with remaining fees under existing contracts up 14% to $1.9 billion, and Q2 FY27 fee revenue guidance jumps to $860M-$878M from two months of AMS (closed September 1, 2026), implying ~18.5% total revenue growth in Year 1 (8 months of AMS) and ~10.0% in Year 2 (4 months of AMS annualization plus ~5% organic growth). From Year 3 onward, growth normalizes from 5.5% to 4.2% as cross-solution referrals (27% of fee revenue) and Digital subscriptions (+7.9%) are balanced by cyclical hiring sensitivity and AI/recruiting competition."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0939; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025."
+       },
+       {
+        "id": "P2",
+        "quote": "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Terminal nominal growth of 3.5% sits slightly below the 3.75% nominal anchor, reflecting global enterprise consulting and Digital subscription growth balanced against mature scale post-AMS and structural recruiting disintermediation from AI-enabled platforms and client insourcing."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_op_margin",
+      "risk": "Cyclical hiring downturn, RPO contract losses, or prolonged AMS integration friction compressing operating margins back toward FY24/historical trough levels"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "Structural disintermediation of executive and professional search by AI-enabled tools, social networks, and client insourcing reducing secular volume growth"
+     },
+     {
+      "bear_value": 0.18,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Rising consultant compensation, retention costs, and working-capital intensity in Workforce Solutions eroding incremental capital efficiency"
+     },
+     {
+      "bear_value": 0.035,
+      "input_hit": "capex_to_revenue",
+      "risk": "Sustained elevated capital spending required to defend Talent Suite and build AI-enabled platforms against well-capitalized HR technology competitors"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.092,
+      "rev_growth": [
+       0.155,
+       0.07,
+       0.025,
+       0.018000000000000002,
+       0.012000000000000004
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.125,
+      "rev_growth": [
+       0.21,
+       0.125,
+       0.08,
+       0.07300000000000001,
+       0.067
+      ],
+      "terminal_growth": 0.042
      }
     },
     "situation": {
@@ -466,1071 +734,215 @@
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Debt was only $398.8 million at July 31, 2026, but AMS closed afterward and the packet does not say how it was funded, so the debt level may change."
+      "why": "While long-term debt held steady at $398.6 million at FY26 year-end and $398.8 million at July 31, 2026, Q2 FY27 guidance notes incremental net interest expense from the September 1, 2026 AMS acquisition and the filings in this packet omit debt terms and AMS financing details."
      },
-     "margin_position": "The FY26 operating margin of 12.75% is near the top of its own range: 0.0762 in FY24, 0.1254 in FY25, and a 5-year median of about 0.125. The recovery came from lower restructuring and a lower compensation ratio (64.2% of fee revenue versus 66.8% in FY24) on rising search volumes. Search and RPO revenue is tied to hiring cycles, so the margin is not a permanent level. The AMS acquisition adds lower-margin RPO work and integration costs.",
+     "margin_position": "Base-year (FY26) GAAP operating margin of 12.75% sits just above the 5-year median (12.54%) and well above the 10-year and 17-year medians (~10.0% and 9.2%), supported by post-FY24 restructuring cost discipline (compensation and benefits falling from 66.8% of fee revenue in FY24 to 64.2% in FY26 and 63.1% in Q1 FY27), higher-margin Executive Search and Digital mix, and a $13.9 million office lease modification gain in FY26 partially offset by $4.4 million of integration/acquisition costs.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 27.7% base-year rate is in line with the Q1 FY27 provision of 24,648 on pretax income of 94,145 (about 26%), so it looks sustainable."
+      "why": "The base-year tax rate of 27.71% is consistent with FY25 (27.21%) and Q1 FY27 (26.18%, $24,648 thousand on $94,145 thousand pretax income) across Korn Ferry's global geographic mix."
      },
-     "why": "FY26 is a growth year (revenue +6.4%) with no restructuring, so it is close to a mid-to-high-cycle year. Q1 FY27 operating margin was about 12.2% (93,380 on 764,622), so the run-rate matches the base year. The closed AMS acquisition changes the scale and mix from FY27, and its size, price and funding are not in the packet, so year 1 growth is a wide estimate."
+     "why": "FY26 revenue ($2,938.6 million, +6.43%) and underlying operating margin (~12.43% excluding the $13.9 million lease modification gain and $4.4 million of integration/acquisition costs) align closely with FY25 (12.54%) and reflect a normalized post-restructuring operating baseline rather than a cyclical trough or boom. The effective tax rate (27.71% in FY26, 26.18% in Q1 FY27) is also steady. However, on September 1, 2026 Korn Ferry closed the acquisition of AMS, whose purchase price, standalone financials, incremental debt, and share issuance are not disclosed in this packet, creating uncertainty around FY27 step-up scale, amortization, and leverage."
     },
-    "value_at_old_defaults": 91.17984148411551,
+    "value_at_old_defaults": 91.86160518032378,
     "values": {
-     "base": 108.94527931219748,
-     "bear": 82.78407770548834,
-     "bull": 146.5232474481831
+     "base": 109.36020438764717,
+     "bear": 81.26025666686452,
+     "bull": 144.0356490450507
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 91.17984148411551,
-  "value_at_old_defaults_quoted": 91.17984148411551,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 91.86160518032378,
+  "value_at_old_defaults_quoted": 91.86160518032378,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 5653717877.36597,
+ "equity_value": 5827876040.454936,
  "family": "operating",
  "far_from_price": false,
- "filed_shares": 52519000.0,
+ "filed_shares": 54558851.0,
  "flags": [
-  "Korn Ferry has completed its acquisition of AMS (Auxey Holdco Limited), which the CEO describes as now part of Korn Ferry and expanding its Workforce Solutions.",
-  "Korn Ferry realigned its reportable segments from a solution-based presentation to three geographic segments: Americas, EMEA and APAC. It then filed recast historical segment information, which it says is not a restatement.",
-  "Stockholders approved the Korn Ferry Amended and Restated Stock Incentive Plan. The plan adds 1,400,000 shares available for stock-based awards and extends the plan's term."
+  "Korn Ferry closed the acquisition of Auxey Holdco Limited (AMS).",
+  "Korn Ferry realigned its organizational reporting structure from a solution-based presentation to a geographic model with three reportable segments: Americas, EMEA, and APAC.",
+  "Korn Ferry's Board of Directors declared a quarterly cash dividend of $0.55 per share payable on October 15, 2026 to stockholders of record on September 22, 2026."
  ],
  "in_code_book": false,
- "ke": 0.09462594437424718,
+ "ke": 0.09385790959444751,
  "market_cap_at_publish": 3995890059,
- "model": "claude-opus-5-5",
+ "model": "gemini-4-hydrogen-high",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 73.24,
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 106.35653059910967,
-  "3000": 108.94527931219748
+  "1000": 104.27611432643043,
+  "3000": 109.36020438764717
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1",
-    "claim": "Korn Ferry describes itself as a global consulting firm whose services cover people and organizational matters, from strategy and leadership to hiring, development and rewards.",
+    "basis": "stated in P1 and P3",
+    "claim": "Korn Ferry is a global talent and organizational consulting firm that earns fee revenue from consulting services, digital software and data products, retained executive and professional search, interim talent placement, and recruitment process outsourcing (RPO).",
     "facts": [
-     "P1"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "is a global consulting firm that powers individual and business performance",
-     "Korn Ferry works across the full organization\u2014from strategy and leadership to hiring, development, rewards, and the roles, skills and workforce models needed for the future."
+     "Korn Ferry (referred to herein as the \u201cCompany\u201d or in the first-person notations \u201cwe,\u201d \u201cour\u201d and \u201cus\u201d) is a global consulting firm that powers individual and business performance.",
+     "Substantially all fee revenue is derived from talent and organizational consulting services and digital sales, stand-alone or as part of a solution, fees for professional services related to executive and professional recruitment performed on a retained basis, interim services and RPO."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P1",
-    "claim": "Its talent acquisition capability sells hiring at all levels through executive search, professional recruiting, interim talent and recruitment process outsourcing (RPO).",
+    "claim": "The firm delivers its offerings through advisory engagements, technology-enabled embedded solutions, and licensed subscription-based offerings, balancing project-based work with recurring revenue.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Sourcing and hiring talent across all levels through executive search, professional recruiting, interim talent and Recruitment Process Outsourcing"
+     "This diversified model balances project-based work with recurring revenue streams while maintaining flexibility to meet varying client needs.",
+     "3.Subscription-based offerings \u2013 licensed offerings that provide clients direct access to Korn Ferry's talent intelligence."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P1",
-    "claim": "It sells through three engagement models: advisory engagements, embedded technology-enabled solutions and subscription-based licensed offerings. The mix combines project work with recurring revenue.",
+    "claim": "Korn Ferry sells to large global enterprises as well as private, public, and not-for-profit organizations, with 350 Marquee and Diamond accounts representing approximately 40% of consolidated fee revenue.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "This diversified model balances project-based work with recurring revenue streams while maintaining flexibility to meet varying client needs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Its clients are concentrated among large companies: across fiscal 2025 and 2026 it worked with 94% of the S&P 100 and 82% of the S&P 500.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Across fiscal years 2025 and 2026, Korn Ferry worked with 94% of the S&P 100, 82% of the S&P 500, 86% of the S&P Europe 350, and 96% of Fortune\u2019s Top 50 World\u2019s Most Admired."
+     "As of fiscal year-end 2026, our 350 Marquee and Diamond accounts represented approximately 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception.",
+     "Across fiscal years 2025 and 2026, Korn Ferry worked with 94% of the S&P 100, 82% of the S&P 500, 86% of the S&P Europe 350, and 96% of Fortune\u2019s Top 50 World\u2019s Most Admired.",
+     "Our clients come from the private, public and not-for-profit sectors, across every major industry and represent diverse business challenges."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P1 and P3",
-    "claim": "A key-account program of 350 Marquee and Diamond accounts generated about 40% of consolidated fee revenue in fiscal 2026. That revenue grew 8% year over year.",
+    "claim": "Revenue is heavily supported by repeat clients and cross-selling, with approximately 82% of assignments for prior clients, over 75% of fee revenues from multi-solution clients, and approximately 27% of consolidated fee revenue from cross-solution referrals.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "As of fiscal year-end 2026, our 350 Marquee and Diamond accounts represented approximately 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception.",
-     "Our fiscal 2026 Marquee and Diamond Accounts fee revenue generated approximately 40% of our consolidated fee revenue and grew 8% compared to fiscal year 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Revenue relies heavily on repeat clients. In fiscal 2026 about 82% of assignments were for clients served in the prior three years.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "In fiscal 2026, approximately 82% of our assignments were with clients we had served in the prior three years\u2014reflecting strong loyalty and long-term engagement."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Cross-selling is a revenue driver. Cross-solution referrals supplied about 27% of consolidated fee revenue in fiscal 2026, up from 14% in 2018.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
+     "We have built strong client loyalty, with approximately 82% of the assignments performed during fiscal 2026 having been on behalf of clients for whom we had conducted assignments in the previous three fiscal years.",
+     "More than 75% of our fee revenues were generated from clients that have utilized multiple solutions.",
      "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "Through fiscal 2026 the company reported five solution areas that mapped to eight reportable segments. Executive Search was split into four geographic segments.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "These solutions reflect the breadth of our expertise and correspond to eight reportable segments supported by centralized corporate functions"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 table",
-    "claim": "Fiscal 2026 fee revenue by solution was: Consulting $691,654, Digital 363,523, Total Executive Search 924,104, Professional Search & Interim 561,077 and RPO 367,111, for a total of 2,907,469 (table in thousands).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4, P8 and P9",
-    "claim": "Starting in fiscal 2027, the reportable segments are geographic: Americas, EMEA and APAC. Each segment delivers three Solution groups: Search, Talent & Organizational Solutions and Workforce Solutions.",
+    "basis": "stated in P4, P8, and P9",
+    "claim": "Korn Ferry realigned its reportable segments from a solution-based presentation to a geographic model\u2014Americas, EMEA, and APAC\u2014delivering Search, Talent & Organizational Solutions, and Workforce Solutions.",
     "facts": [
      "P4",
      "P8",
      "P9"
     ],
     "quotes": [
-     "Beginning in fiscal 2027, we reassessed and realigned our organizational structure from a solution-based presentation to a reporting model by geography"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P6 tables",
-    "claim": "First-quarter fiscal 2027 fee revenue was 442,129 in the Americas, 227,670 in EMEA and 86,697 in APAC, for a total of 756,496 (table in thousands). The Americas accounted for 58.4% of fee revenue.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P6 table",
-    "claim": "In the first quarter of fiscal 2027, fee revenue by Solution Group was: Search $307,898 (up 10.4%), Talent & Organizational Solutions 259,220 (\u2014%) and Workforce Solutions 189,378 (up 11.1%) (table in thousands).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Search fees are generally one-third of the placed candidate's estimated first-year cash compensation, plus a percentage to cover indirect expenses.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Fee revenue from executive and professional search activities is generally one-third of the estimated first-year cash compensation of the placed candidate, plus a percentage of the fee to cover indirect engagement-related expenses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Search revenue is driven by fee per engagement and engagement volume. Executive Search North America grew on a 6% rise in weighted-average fee per engagement and a 3% rise in engagements billed.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "North America\u2019s fee revenue increased primarily due to a 6% increase in the weighted-average fee billed per engagement (calculated using local currency) and a 3% increase in the number of engagements billed in fiscal 2026 compared to fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Executive search is focused on senior roles: about 80% of fiscal 2026 executive searches were for board, chief executive and other senior positions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Approximately 80% of the executive searches we performed in fiscal 2026 were for board level, chief executive and other senior executive and general management positions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P3",
-    "claim": "Consulting revenue is earned on hours worked, so headcount and bill rate drive it. Consulting had 1,522 consulting and execution staff with an average bill rate of $458 per hour.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Consulting fee revenue is primarily recognized as services are rendered, measured by total hours incurred as a percentage of the total estimated hours at completion.",
-     "The number of consulting and execution staff at year-end was 1,522 with an average bill rate (fee revenue divided by the number of hours worked by consultants and execution staff) of $458 per hour."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P3",
-    "claim": "Digital sells software, subscriptions and IP licenses. Subscription/license revenue was $148.6 million, up 7.9%, while Digital fee revenue as a whole was essentially flat at $363.5 million.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025.",
-     "Revenue also comes from the sale of our product subscriptions, which are considered symbolic IP due to the dynamic nature of the content."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "RPO earns implementation fees plus fixed and variable recruiting fees, recognized as services are performed.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The post-implementation recruitment phase represents end-to-end recruiting services to clients for which there are both fixed and variable fees, which are recognized over the period that the related recruiting services are performed."
+     "Beginning in fiscal 2027, we reassessed and realigned our organizational structure from a solution-based presentation to a reporting model by geography, with the following three reportable segments: (i) Americas, (ii) Europe, Middle East and Africa (\u201cEMEA\u201d), and (iii) Asia Pacific (\u201cAPAC\u201d and collectively with Americas and EMEA, the \u201cRegions\u201d).",
+     "Through these reportable segments we deliver services through three Solution groups: (i) Search (Executive Search and Professional Search), (ii) Talent & Organizational Solutions (Consulting and Digital), and (iii) Workforce Solutions (RPO and Interim)."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P6",
-    "claim": "Contracted backlog and new bookings support future revenue. Estimated remaining fees under existing contracts were $1,915.0 versus $1,674.1, and new business was $832.3 versus $742.2 (table in millions).",
+    "claim": "Consolidated fee revenue was $756.5 million, with Americas generating $442.1 million, EMEA generating $227.7 million, and APAC generating $86.7 million.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
+     "The Company reported fee revenue in Q1 FY'27 of $756.5 million, an increase of 7% year-over-year at both actual and constant currency.",
+     "Fee revenue was $442.1 million in Q1 FY'27 compared to $404.1 million in Q1 FY'26, an increase of $38.0 million or 9% year-over-year at both actual and constant currency.",
+     "Fee revenue was $227.7 million in Q1 FY'27 compared to $219.0 million in Q1 FY'26, an increase of $8.7 million or 4% year-over-year at both actual and constant currency.",
+     "Fee revenue was $86.7 million in Q1 FY'27 compared to $85.5 million in Q1 FY'26, an increase of $1.2 million or 1% (up 2% at constant currency)."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 table",
-    "claim": "Fee-earner productivity is a revenue driver. Productivity rose to $1,840 from $1,610 (in thousands), while ending fee earners fell to 1,811 from 1,830.",
+    "basis": "stated in P6",
+    "claim": "By solution group, Search generated $307,898 (table in thousands), Talent & Organizational Solutions generated 259,220 (table in thousands), and Workforce Solutions generated 189,378 (table in thousands) of the $756,496 (table in thousands) consolidated fee revenue.",
     "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [
-     "(d)New business divided by average number of fee earners in the period annualized."
+     "Search | $307,898 | $278,924 | 10.4%",
+     "Talent & Organizational Solutions | 259,220 | 259,160 | \u2014%",
+     "Workforce Solutions | 189,378 | 170,529 | 11.1%",
+     "Total fee revenue | $756,496 | $708,613 | 6.8%"
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P3",
-    "claim": "Currency moves affect reported revenue: exchange rates added $48.1 million, or 2%, to fiscal 2026 fee revenue.",
+    "claim": "Executive and professional search fees are generally priced at one-third of a placed candidate's estimated first-year cash compensation plus an expense percentage and uptick fees, driven by engagement volume and average fee per engagement.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Exchange rates favorably impacted fee revenue by $48.1 million, or 2%, in fiscal 2026 compared to fiscal 2025."
+     "Fee revenue from executive and professional search activities is generally one-third of the estimated first-year cash compensation of the placed candidate, plus a percentage of the fee to cover indirect engagement-related expenses.",
+     "In addition to the search retainer, an uptick fee is billed when the actual compensation awarded by the client for a placement is higher than the estimated compensation.",
+     "North America\u2019s fee revenue increased primarily due to a 6% increase in the weighted-average fee billed per engagement (calculated using local currency) and a 3% increase in the number of engagements billed in fiscal 2026 compared to fiscal 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and P4",
-    "claim": "Compensation and benefits is the dominant cost. It was 477,362 of 671,242 total operating expenses in the latest quarter (table in thousands), equal to 63.1% of fee revenue versus 65.1% a year earlier.",
+    "basis": "stated in P1, P2, and P3",
+    "claim": "Consulting fee revenue is recognized as hours are incurred relative to total estimated hours, driven by consultant utilization and billing rates, with Consulting averaging $458 per hour across 1,522 consulting and execution staff.",
     "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Profitability depends on how fully professionals are utilized and on their billing rates.",
-    "facts": [
-     "P2"
+     "P1",
+     "P2",
+     "P3"
     ],
     "quotes": [
+     "Consulting fee revenue is primarily recognized as services are rendered, measured by total hours incurred as a percentage of the total estimated hours at completion.",
+     "The number of consulting and execution staff at year-end was 1,522 with an average bill rate (fee revenue divided by the number of hours worked by consultants and execution staff) of $458 per hour.",
      "Our profitability depends, to a large extent, on the utilization and billing rates of our professionals."
     ],
     "support": "supported"
    },
    {
-    "basis": "figures stated; any link between the two is not stated",
-    "claim": "General and administrative expenses rose to 80,231 from 63,874 (table in thousands), or 10.6% of fee revenue versus 9.0%. Integration/acquisition costs over the same quarter were $7.6 million versus $1.5 million.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "For the three months ended July 31, 2026 and 2025, Adjusted EBITDA excluded integration/acquisition costs of $7.6 million and $1.5 million, respectively."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P3 table; Adjusted EBITDA is non-GAAP",
-    "claim": "Margins differ by business. In fiscal 2026 Adjusted EBITDA margin was 31.1% in Digital, 25.7% in Total Executive Search, 21.6% in Professional Search & Interim, 17.1% in Consulting and 15.7% in RPO. Corporate Adjusted EBITDA was (149,904) (table in thousands).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; non-GAAP",
-    "claim": "In the first quarter of fiscal 2027, regional Adjusted EBITDA margins were 26.3% in the Americas, 16.4% in EMEA and 22.2% in APAC.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from equal revenue and cost lines in F2",
-    "claim": "Reimbursed out-of-pocket engagement expenses are a pass-through: revenue of 8,126 matches reimbursed expense cost of 8,126 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated; the payout explanation is inferred from the drop in compensation payable",
-    "claim": "Cash flow is seasonal within the year. Operating cash flow in the first quarter was (247,630), driven by (291,349) of payable and accrued liability outflows, and compensation and benefits payable fell to 299,408 from 570,242 (table in thousands).",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The workforce is the main delivery asset: 8,965 full-time professionals, of whom 3,092 work in RPO.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "As of April 30, 2026, Korn Ferry employed 8,965 full-time professionals."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Departing consultants can take client revenue with them. The top ten consultants generated about 4% of total fee revenues.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2; P5 reports no material change",
-    "claim": "Pricing faces competitive pressure. The company says executive search has low entry barriers and names AI-based and online tools as competitors.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; balance-sheet figures from F1",
-    "claim": "The AMS acquisition expands Workforce Solutions, and it brings long-term contracted client relationships.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "AMS is a world-class firm that complements and meaningfully expands our Workforce Solutions and propels our We Are Korn Ferry strategy\u2014to be the world\u2019s conductor of talent and organizational orchestration."
-    ],
-    "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in P1 (company-reported)",
-    "claim": "Korn Ferry reports serving a large majority of major index and ranking constituents (94%, 82%, 86% and 96% of the listed groups).",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Across fiscal years 2025 and 2026, Korn Ferry worked with 94% of the S&P 100, 82% of the S&P 500, 86% of the S&P Europe 350, and 96% of Fortune\u2019s Top 50 World\u2019s Most Admired."
-    ],
-    "support": "supported"
-   },
-   {
     "basis": "stated in P1 and P3",
-    "claim": "Client loyalty is high: about 82% of assignments were for clients served in the prior three years.",
+    "claim": "Digital fee revenue comes from IP-based software consumed directly or through consulting engagements, with subscription and license revenue contributing $148.6 million out of Digital's $363.5 million fee revenue.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "In fiscal 2026, approximately 82% of our assignments were with clients we had served in the prior three years\u2014reflecting strong loyalty and long-term engagement."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1, P3 and P4",
-    "claim": "The 350 Marquee and Diamond accounts generated about 40% of consolidated fee revenue, and fee revenue from these accounts grew 8%.",
-    "facts": [
-     "P1",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "As of fiscal year-end 2026, our 350 Marquee and Diamond accounts represented approximately 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception.",
-     "Our fiscal 2026 Marquee and Diamond Accounts fee revenue generated approximately 40% of our consolidated fee revenue and grew 8% compared to fiscal year 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Cross-solution referrals supplied about 27% of consolidated fee revenue, up from 14% when tracking began.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "More than 75% of fee revenue came from clients that used multiple solutions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "More than 75% of our fee revenues were generated from clients that have utilized multiple solutions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 as management's view",
-    "claim": "The company cites proprietary data assets, including more than 12 billion data points and more than 115 million assessments, as a differentiator.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "More than 115 million assessments conducted across industries, functions and geographies.",
-     "Korn Ferry\u2019s differentiation lies in its ability to leverage its Foundational Assets into its technology-enabled service offerings, creating unique and differentiated insights and end-to-end solutions that connect strategy and talent to drive business outcomes."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Executive search is focused on senior roles: about 80% of searches were for board level, chief executive and other senior executive and general management positions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Approximately 80% of the executive searches we performed in fiscal 2026 were for board level, chief executive and other senior executive and general management positions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3; the pricing-power reading is inferred",
-    "claim": "Executive Search North America growth came from both pricing and volume: a 6% rise in the weighted-average fee per engagement and a 3% rise in engagements billed.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "North America\u2019s fee revenue increased primarily due to a 6% increase in the weighted-average fee billed per engagement (calculated using local currency) and a 3% increase in the number of engagements billed in fiscal 2026 compared to fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Digital subscription/license revenue was $148.6 million, up 7.9%, with a Digital Adjusted EBITDA margin of 31.1%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025.",
-     "Adjusted EBITDA was $113.1 million, and Adjusted EBITDA margin was 31.1%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Total Digital fee revenue was flat at $363.5 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Digital reported fee revenue of $363.5 million in fiscal 2026, essentially flat compared to $363.5 million in fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; consistent with F2",
-    "claim": "In the latest reported quarter, fee revenue was $756.5 million, up 7%, which the company describes as its sixth consecutive quarter of top-line growth.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency.",
-     "This marks our sixth consecutive quarter of top line growth."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Fee revenue grew in all regions, led by Search at 10% and Workforce Solutions at 11%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Fee revenue grew in all regions year-over-year, led by double digit growth in Search and Workforce Solutions of 10% and 11%, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 table",
-    "claim": "Talent & Organizational Solutions (Consulting and Digital) fee revenue was flat in the latest quarter, at 259,220 vs 259,160 (scale heading omitted in excerpt).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Talent & Organizational Solutions | 259,220 | 259,160 | \u2014%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; scale stated in P4",
-    "claim": "In the Americas, Talent & Organizational Solutions fee revenue fell to 106,853 from 110,061, a change shown as (2.9%) (table in thousands per P4).",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Talent & Organizational Solutions | 106,853 | 110,061 | (2.9%)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Estimated remaining fees under existing contracts were $1.9 billion, up 14%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "New business productivity per fee earner rose to $1,840 from $1,610 (in thousands), while ending fee earners were 1,811 vs 1,830.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Fee earner new business productivity (d) - in thousands | $1,840 | $1,610",
-     "Ending number of fee earners (e) | 1,811 | 1,830"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P6",
-    "claim": "Adjusted EBITDA margin was 17.1% for the full year vs 17.0% the prior year, and 17.0% in both the latest quarter and the year-ago quarter.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Adjusted EBITDA | $497,805 | 17.1% | $463,866 | 17.0% | $408,204 | 14.8%",
-     "Adjusted EBITDA margin | 17.0% | 17.0%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The company has a global footprint of 98 offices in 51 countries.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "As of April 30, 2026, we had 98 offices in 51 countries."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 as CEO view; risk stated in P4",
-    "claim": "The AMS acquisition is described as meaningfully expanding Workforce Solutions.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "AMS is a world-class firm that complements and meaningfully expands our Workforce Solutions and propels our We Are Korn Ferry strategy\u2014to be the world\u2019s conductor of talent and organizational orchestration."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Integration/acquisition costs excluded from Adjusted EBITDA rose to $7.6 million from $1.5 million, and AMS integration is a named risk.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "For the three months ended July 31, 2026 and 2025, Adjusted EBITDA excluded integration/acquisition costs of $7.6 million and $1.5 million, respectively.",
-     "our ability to successfully integrate acquired businesses, including the operations and employees of AMS"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 risk factors",
-    "claim": "Threat: HR consulting competitors are often significantly larger and better resourced.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Many of these competitors are significantly larger than Korn Ferry and have considerable resources at their disposal, allowing for potentially significant investment to grow their human resource consulting business."
+     "Digital fee revenue is generated from IP-based software products enabling large-scale talent programs for pay, talent development, engagement, and assessment and is consumed directly by an end user or indirectly through a consulting engagement.",
+     "Fee revenue was $363.5 million.",
+     "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P2 and P3",
-    "claim": "Threat: AI-enabled and web-based providers may help companies insource recruiting.",
+    "claim": "RPO fee revenue is earned across an implementation phase and a post-implementation end-to-end recruitment phase combining fixed and variable fees, making fee revenue sensitive to the timing of large contract commencements and terminations.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities.",
-     "changes in demand for our services as a result of automation"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: executive search has no extensive barriers to entry.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: competition could force lower prices or cause lost market share.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For example, increased competition could require us to charge lower prices, and/or cause us to lose market share, each of which could reduce our fee revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: some organizations may build internal talent acquisition solutions that compete with the company's offerings.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In addition, some organizations have developed or may develop internal solutions to address talent acquisition that may be competitive with our solutions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: off-limit agreements restrict recruiting from clients and can lose search opportunities to competitors.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "These off-limit agreements can cause us to lose search opportunities to our competition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: consultants' client relationships are portable, though the top six and top ten consultants generated only about 3% and 4% of fee revenues.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In fiscal 2026, our top six consultants combined generated business equal to approximately 3% of our total fee revenues.",
-     "Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: evolving AI regulation may require significant resources to comply with as AI is incorporated into the business.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Several jurisdictions around the globe, including Europe and certain U.S. states, have already proposed or enacted laws governing AI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5",
-    "claim": "The latest 10-Q reports no material changes to the 10-K risk factors.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "As of the date of this report, there have been no material changes to the risk factors described in our Form 10-K."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in F1",
-    "claim": "Cash and cash equivalents fell to 800,852 at the latest quarter-end from 1,095,445 at the prior fiscal year-end (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 800,852 | $ 1,095,445"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the evidence does not say whether the non-current securities are restricted or tied to deferred compensation",
-    "claim": "Besides cash, the company held current marketable securities of 15,439 and non-current marketable securities of 234,778 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Marketable securities, non-current | 234,778 | 247,132"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "Total current assets of 1,638,968 exceeded total current liabilities of 691,217 at the latest quarter-end (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 1,638,968 | 1,905,977",
-     "Total current liabilities | 691,217 | 982,010"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "Long-term debt was 398,778 against total stockholders' equity of 2,001,277 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Long-term debt | 398,778 | 398,565",
-     "Total stockholders' equity | 2,001,277 | 1,978,903"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the F1 line items",
-    "claim": "The debt balance barely moved, from 398,565 to 398,778, and the balance sheet shows no current debt line among current liabilities (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Long-term debt | 398,778 | 398,565"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2",
-    "claim": "Quarterly interest expense, net was (4,342) against operating income of 93,380 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Interest expense, net | (4,342) | (3,516)",
-     "Operating income | 93,380 | 83,448"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "For the full fiscal year, interest expense, net was 19,998 against Adjusted EBITDA of 497,805 (dollars in thousands).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Adjusted EBITDA | $497,805 | 17.1% | $463,866 | 17.0% | $408,204 | 14.8%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Operations used cash of (247,630) in the latest quarter, compared with (237,367) in the same quarter a year earlier (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash used in operating activities | (247,630) | (237,367)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in F1 and F3; the seasonal reading is inferred from the matching prior-year pattern",
-    "claim": "The operating cash outflow was driven by a change in accounts payable and accrued liabilities of (291,349), as compensation and benefits payable fell from 570,242 to 299,408 (table in thousands).",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Accounts payable and accrued liabilities | (291,349) | (276,906)",
-     "Compensation and benefits payable | 299,408 | 570,242"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and F3",
-    "claim": "Receivables due from clients rose to 615,274 from 573,350, which absorbed (47,079) of operating cash in the quarter (table in thousands).",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Receivables due from clients | (47,079) | (39,900)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and F3",
-    "claim": "Earnings include non-cash and non-operating items: stock-based compensation of 12,448 was added back, a gain on marketable securities of (4,837) was removed, and other income, net fell to 5,107 from 12,752 (table in thousands).",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Stock-based compensation expense | 12,448 | 11,009",
-     "Gain on marketable securities | (4,837) | (12,324)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Investing activities provided 9,455 in the quarter, as proceeds of 46,161 from sales and maturities of marketable securities exceeded capital expenditure of (17,923) (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Proceeds from sales/maturities of marketable securities | 46,161 | 13,543",
-     "Purchase of property and equipment | (17,923) | (22,599)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Financing uses in the quarter were dividends of (30,222), tax withholdings on restricted stock of (24,912) and share repurchases of (746) (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Dividends paid to stockholders | (30,222) | (26,209)",
-     "Repurchases of common stock | (746) | (10,298)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P10",
-    "claim": "The board declared a further quarterly dividend of $0.55 per share.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "declared a cash dividend of $0.55 per share"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "In the prior fiscal year the company spent $84.7 million on capital expenditures and $18.5 million on debt service, and returned $116.1 million through repurchases and $104.6 million through dividends.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We continued with our balanced approach to capital allocation and for the full year, the Company invested $84.7 million in capital expenditures (excluding leasehold improvements and furniture & fixtures), $18.5 million on debt service costs, and returned $116.1 million and $104.6 million to shareholders in the form of share repurchases and dividends, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from F1 line items",
-    "claim": "The deferred compensation and other retirement plans liability of 531,991 sits alongside the cash surrender value of company-owned life insurance of 304,906 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Deferred compensation and other retirement plans | 531,991 | 510,774",
-     "Cash surrender value of company-owned life insurance policies, net of loans | 304,906 | 289,058"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P6",
-    "claim": "The AMS acquisition is complete; integration and acquisition costs were $7.6 million in the quarter, and management cannot estimate the next quarter's costs.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "With AMS now part of Korn Ferry, we have brought together two iconic brands to create a global leader in talent and organizational consulting.",
-     "because the Company is not able to estimate with reasonable certainty the integration and acquisition costs it will incur in connection with the AMS acquisition during the second quarter of fiscal 2027."
+     "RPO fee revenue is generated through two distinct phases: 1) the implementation phase and 2) the post-implementation recruitment phase.",
+     "The post-implementation recruitment phase represents end-to-end recruiting services to clients for which there are both fixed and variable fees, which are recognized over the period that the related recruiting services are performed.",
+     "Utilization of our professionals is affected by a number of factors, including: the number and size of client engagements; the timing of the commencement, completion and termination of engagements (for example, the commencement or termination of multiple RPO engagements could have a significant impact on our business, including significant fluctuations in our fee revenue, since these types of engagements are generally larger, in terms of both staffing and fee revenue generated, than our other engagements); our ability to transition our consultants efficiently from completed engagements to new engagements; the hiring of additional consultants because there is generally a transition period for new consultants that results in a temporary drop in our utilization rate; unanticipated changes in the scope of client engagements; our ability to forecast demand for our services and thereby maintain an appropriate level of consultants; and conditions affecting the industries in which we practice, as well as general economic conditions."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P6",
-    "claim": "Estimated remaining fees under existing contracts were $1,915.0 versus $1,674.1 a year earlier (table in millions).",
+    "claim": "Fee revenue is driven by fee-earner capacity, productivity, new business wins, and contracted backlog, with 1,811 ending fee earners generating $1,840 (table in thousands) in annualized productivity, $832.3 (table in millions) in new business, and $1.9 billion in estimated remaining fees under existing contracts.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Estimated remaining fees under existing contracts (b) | $1,915.0 | $1,674.1"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P5",
-    "claim": "Management warns that a mismatch between costs and revenue could lead to negative cash flows and a need for additional financing, and the latest 10-Q reports no material change to the risk factors.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Failing to maintain a balance between our cost structure and our revenue could adversely affect our business, financial condition, and results of operations and lead to negative cash flows, which in turn might require us to obtain additional financing to meet our capital needs.",
-     "As of the date of this report, there have been no material changes to the risk factors described in our Form 10-K."
-    ],
-    "support": "supported"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "stated in P6",
-    "claim": "Top-line growth is current and broad: Q1 FY'27 fee revenue was $756.5 million, up 7% at both actual and constant currency, and management calls it the sixth consecutive quarter of top line growth.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency.",
-     "This marks our sixth consecutive quarter of top line growth."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 segment table",
-    "claim": "Search is a growth driver: Search fee revenue grew 10.4% in Q1 FY'27, from 278,924 to 307,898 (table in thousands).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Search | $307,898 | $278,924 | 10.4%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Executive Search growth in FY2026 came from both pricing and volume: in North America the weighted-average fee per engagement rose 6% and the number of engagements billed rose 3%.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "North America\u2019s fee revenue increased primarily due to a 6% increase in the weighted-average fee billed per engagement (calculated using local currency) and a 3% increase in the number of engagements billed in fiscal 2026 compared to fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated as a risk factor in P2",
-    "claim": "Condition for Search growth: Korn Ferry must hold its position against AI-enabled and online competitors that may help clients bring recruiting in-house.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 segment table",
-    "claim": "Workforce Solutions (RPO and Interim) is a growth driver: it grew 11.1% in Q1 FY'27, and Americas Workforce Solutions grew 14.1%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Workforce Solutions | 189,378 | 170,529 | 11.1%",
-     "Workforce Solutions | 125,951 | 110,351 | 14.1%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6; the inference about timing is drawn from F1 goodwill and from P6 mentioning AMS integration costs in Q2 FY'27",
-    "claim": "The AMS acquisition is presented as expanding Workforce Solutions, and it was described as part of Korn Ferry when results were released on September 9, 2026.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "AMS is a world-class firm that complements and meaningfully expands our Workforce Solutions and propels our We Are Korn Ferry strategy\u2014to be the world\u2019s conductor of talent and organizational orchestration."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 forward-looking statements and the P6 table (dollars in millions)",
-    "claim": "Condition for AMS-driven growth: Korn Ferry must integrate AMS and realize the expected benefits. Integration/acquisition costs rose to $7.6 million in Q1 FY'27, and Q2 costs could not be estimated.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "our ability to successfully integrate acquired businesses, including the operations and employees of AMS",
-     "Integration/acquisition costs | $7.6 | $1.5"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Contracted backlog supports near-term revenue: estimated remaining fees under existing contracts were $1.9 billion, up 14% year-over-year.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "New business grew to $832.3 from $742.2 (dollars in millions), and fee earner productivity rose to $1,840 from $1,610 (in thousands), while fee earners fell to 1,811 from 1,830.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
+     "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year.",
      "New business (c) | $832.3 | $742.2",
      "Fee earner new business productivity (d) - in thousands | $1,840 | $1,610",
      "Ending number of fee earners (e) | 1,811 | 1,830"
@@ -1538,194 +950,590 @@
     "support": "supported"
    },
    {
-    "basis": "stated as a risk factor in P2",
-    "claim": "Condition for productivity-led growth: Korn Ferry must keep utilization and billing rates adequate and retain productive consultants. Its top ten consultants generated business equal to approximately 4% of fee revenues.",
+    "basis": "stated in P2, P3, and P6",
+    "claim": "Top-line performance is also moved by foreign exchange fluctuations, macroeconomic and labor market conditions, competitive pricing pressures, and acquisitions such as AMS.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Exchange rates favorably impacted fee revenue by $48.1 million, or 2%, in fiscal 2026 compared to fiscal 2025.",
+     "AMS is a world-class firm that complements and meaningfully expands our Workforce Solutions and propels our We Are Korn Ferry strategy\u2014to be the world\u2019s conductor of talent and organizational orchestration.",
+     "For example, increased competition could require us to charge lower prices, and/or cause us to lose market share, each of which could reduce our fee revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2",
+    "claim": "Operating expenses are led by compensation and benefits at 477,362 (table in thousands), followed by cost of services of 83,328 (table in thousands), general and administrative expenses of 80,231 (table in thousands), depreciation and amortization of 22,195 (table in thousands), and pass-through reimbursed expenses of $ 8,126 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Compensation and benefits | 477,362 | 461,411",
+     "Cost of services | 83,328 | 77,194",
+     "General and administrative expenses | 80,231 | 63,874",
+     "Depreciation and amortization | 22,195 | 22,686",
+     "Cost of services | $ 8,126 | $ 6,930"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P4",
+    "claim": "Costs are driven by competition for experienced consultants during wage inflation, consultant utilization and hiring ramp-up, cost-structure restructuring, and acquisition integration costs of $7.6 million.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Competition for these consultants typically increases during periods of wage inflation, labor constraints, and/or low unemployment and can result in material increases to our costs and stock usage under authorized employee stock plans, among other impacts.",
+     "When actual or projected fee revenues are negatively impacted by weakening customer demand, we have and may again find it necessary to take cost cutting measures so that we can minimize the impact on our profitability, such as the restructuring initiated in the first half of fiscal 2024.",
+     "For the three months ended July 31, 2026 and 2025, Adjusted EBITDA excluded integration/acquisition costs of $7.6 million and $1.5 million, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Fee revenue changes flow through to profitability alongside compensation and general and administrative cost movements, producing net income attributable to Korn Ferry of $69.0 million, a 9.1% margin, Adjusted EBITDA of $128.2 million, and a 17.0% Adjusted EBITDA margin.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Net income attributable to Korn Ferry was $69.0 million with a margin of 9.1% in Q1 FY'27, compared to net income attributable to Korn Ferry of $66.6 million with a margin of 9.4% in Q1 FY'26.",
+     "Adjusted EBITDA was $128.2 million in Q1 FY'27 compared to $120.4 million in Q1 FY'26.",
+     "Adjusted EBITDA margin in the quarter was 17.0%, flat year-over-year.",
+     "Net income attributable to Korn Ferry and Adjusted EBITDA increased primarily due to an increase in fee revenue, partially offset by increases in compensation and benefits expenses and general and administrative expenses."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Korn Ferry operates globally with 98 offices in 51 countries and 8,965 full-time professionals.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "As of April 30, 2026, we had 98 offices in 51 countries.",
+     "As of April 30, 2026, Korn Ferry employed 8,965 full-time professionals."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Korn Ferry serves leading global enterprises, working with 94% of the S&P 100, 82% of the S&P 500, 86% of the S&P Europe 350, and 96% of Fortune\u2019s Top 50 World\u2019s Most Admired.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Across fiscal years 2025 and 2026, Korn Ferry worked with 94% of the S&P 100, 82% of the S&P 500, 86% of the S&P Europe 350, and 96% of Fortune\u2019s Top 50 World\u2019s Most Admired."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 MD&A.",
+    "claim": "Korn Ferry's search practice focuses heavily on senior leadership, with approximately 80% of executive searches for board, chief executive, and senior management roles across more than 3,700 search engagement clients.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Approximately 80% of the executive searches we performed in fiscal 2026 were for board level, chief executive and other senior executive and general management positions.",
+     "Our more than 3,700 search engagement clients in fiscal 2026 included many of the world\u2019s largest and most prestigious public and private companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Management states that Korn Ferry differentiates through proprietary Foundational Assets built on more than 12 billion data points, including more than 115 million assessments and compensation data from more than 29 million professionals across 31,000 organizations.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Built on more than 12 billion proprietary data points and decades of real-world application, we combine our expertise with our Foundational Assets\u2014data, intellectual property (\"IP\") and behavioral science\u2014to help organizations identify opportunity and drive results.",
+     "Korn Ferry\u2019s differentiation lies in its ability to leverage its Foundational Assets into its technology-enabled service offerings, creating unique and differentiated insights and end-to-end solutions that connect strategy and talent to drive business outcomes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business and Item 7 MD&A.",
+    "claim": "Cross-solution adoption is a major commercial driver, with more than 75% of fee revenues coming from multi-solution clients and approximately 27% of consolidated fee revenue from cross-solution referrals, up from 14% in 2018.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric.",
+     "More than 75% of our fee revenues were generated from clients that have utilized multiple solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business, 10-K Item 7 MD&A, and 10-Q Item 2 MD&A.",
+    "claim": "Client relationships exhibit repeat engagement and key-account concentration, with approximately 82% of assignments from clients served in the prior three years and 350 Marquee and Diamond accounts generating almost 40% of consolidated fee revenue.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In fiscal 2026, approximately 82% of our assignments were with clients we had served in the prior three years\u2014reflecting strong loyalty and long-term engagement.",
+     "As of July 31, 2026, our 350 Marquee and Diamond accounts represented almost 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Korn Ferry's Digital segment provides high-margin recurring technology revenue, generating $363.5 million in fee revenue, $148.6 million in subscription/license revenue (up 7.9%), and a 31.1% Adjusted EBITDA margin across more than 7,600 clients.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025.",
+     "Adjusted EBITDA was $113.1 million, and Adjusted EBITDA margin was 31.1%.",
+     "In fiscal 2026, Digital engaged with more than 7,600 clients globally with 34% of Digital's fiscal 2026 fee revenue being referred from Korn Ferry's other solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "In Consulting, Korn Ferry had 1,522 consulting and execution staff earning an average bill rate of $458 per hour.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The number of consulting and execution staff at year-end was 1,522 with an average bill rate (fee revenue divided by the number of hours worked by consultants and execution staff) of $458 per hour."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 MD&A and 8-K Q1 FY'27 earnings release.",
+    "claim": "Korn Ferry recorded its sixth consecutive quarter of top-line growth, with annual fee revenue up 7% to $2,907.5 million, recent quarterly fee revenue up 7% to $756.5 million, and estimated remaining fees under existing contracts up 14% to $1.9 billion.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Fee revenue was $2,907.5 million, an increase of 7% year-over-year, led by Professional Search & Interim, Executive Search and Consulting.",
+     "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency.",
+     "This marks our sixth consecutive quarter of top line growth.",
+     "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q Item 2 MD&A and 8-K Q1 FY'27 earnings release.",
+    "claim": "Korn Ferry expanded its Workforce Solutions capabilities by closing the acquisition of AMS, adding technology-enabled talent solutions and long-term contracted client relationships.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "AMS is a world-class firm that complements and meaningfully expands our Workforce Solutions and propels our We Are Korn Ferry strategy\u2014to be the world\u2019s conductor of talent and organizational orchestration.",
+     "AMS brings profound operational capability, delivering technology-enabled talent solutions at scale, supported by long-term contracted client relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors and reaffirmed in 10-Q Part II Item 1A.",
+    "claim": "Korn Ferry faces intense competition across all business lines from larger consulting firms, well-funded HR technology vendors, and search and RPO specialists, creating pricing and market-share risks.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "We continue to face significant competition within each of our services and product offerings.",
+     "Many of these competitors are significantly larger than Korn Ferry and have considerable resources at their disposal, allowing for potentially significant investment to grow their human resource consulting business.",
+     "For example, increased competition could require us to charge lower prices, and/or cause us to lose market share, each of which could reduce our fee revenue.",
+     "As of the date of this report, there have been no material changes to the risk factors described in our Form 10-K."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Executive search has no extensive barriers to entry, and AI-enabled tools, social networking sites, and freelancing platforms threaten demand by facilitating new entrants and client insourcing.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market.",
+     "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Off-limits agreements restrict Korn Ferry from recruiting candidates out of existing clients, causing lost search opportunities to specialty or smaller competitors with fewer such constraints.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "These off-limit agreements can cause us to lose search opportunities to our competition.",
+     "Additionally, specialty firms can focus on regional or functional markets or on particular industries and executive search firms that have a smaller client base are subject to fewer off-limits arrangements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Korn Ferry depends on retaining key consultants whose client relationships are portable, with its top six and top ten consultants generating approximately 3% and 4% of total fee revenues, respectively.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In fiscal 2026, our top six consultants combined generated business equal to approximately 3% of our total fee revenues.",
+     "Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues.",
+     "Failing to limit departing consultants from moving business or recruiting our consultants to a competitor could adversely affect our business, financial condition and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Because a majority of new engagements originate from existing clients and referrals, reputational harm or client dissatisfaction threatens both future client wins and consultant hiring.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We obtain a majority of our new engagements from existing clients or from referrals by those clients.",
+     "If any factor, including poor performance or negative publicity, whether or not true, hurts our reputation, we may experience difficulties in competing successfully for both new engagements and qualified consultants, which could seriously harm our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors and 10-Q Item 2 MD&A.",
+    "claim": "Expanding into new services, coordinating cross-solution integration, and integrating acquisitions such as AMS expose Korn Ferry to operational disruption, inexperience, and execution risks.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "This strategy may not be effective or timely executed, due to disruptions or operational challenges that may arise from efforts to consolidate or coordinate new teams, areas of the business, marketing, technical expertise or business operations.",
+     "Our inexperience may result in costly decisions that could harm our profit and operating results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Evolving AI, data privacy, and cybersecurity regulations across jurisdictions could restrict Korn Ferry's technology-enabled offerings or impose prohibitive compliance costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As we incorporate AI and machine learning into our business there are uncertainties in the legal regulatory regime relating to AI that may require significant resources to modify and maintain business practices to comply with U.S. and non-U.S. laws, the nature of which cannot be determined at this time.",
+     "Other jurisdictions may decide to adopt similar or more restrictive legislation that may render the use of such technologies challenging, impossible or financially prohibitive."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Profitability and cash flow depend on maintaining consultant utilization and billing rates and aligning costs with fee revenue during demand slowdowns.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Our profitability depends, to a large extent, on the utilization and billing rates of our professionals.",
-     "Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Large enterprise accounts are a growth driver: the Marquee and Diamond Accounts generated approximately 40% of consolidated fee revenue in fiscal 2026 and grew 8%.",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "Our fiscal 2026 Marquee and Diamond Accounts fee revenue generated approximately 40% of our consolidated fee revenue and grew 8% compared to fiscal year 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Cross-selling is a growth driver: approximately 27% of fiscal 2026 consolidated fee revenue came from cross-solution referrals, up from 14% in 2018.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P2",
-    "claim": "Condition for relationship-driven growth: client loyalty must hold. Approximately 82% of fiscal 2026 assignments were with clients served in the prior three years.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "In fiscal 2026, approximately 82% of our assignments were with clients we had served in the prior three years\u2014reflecting strong loyalty and long-term engagement."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 and P3",
-    "claim": "Talent & Organizational Solutions (Consulting and Digital) is not currently a growth driver: its Q1 FY'27 fee revenue was flat at 259,220 versus 259,160 (table in thousands), and Digital was essentially flat in fiscal 2026.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Talent & Organizational Solutions | 259,220 | 259,160 | \u2014%",
-     "Digital reported fee revenue of $363.5 million in fiscal 2026, essentially flat compared to $363.5 million in fiscal 2025."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Digital subscription revenue is growing within a flat Digital line: subscription/license revenue was $148.6 million in fiscal 2026, up 7.9%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P6",
-    "claim": "Currency helped fiscal 2026 growth: exchange rates added $48.1 million, or 2%, to fee revenue. Q1 FY'27 growth was the same at actual and constant currency.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Exchange rates favorably impacted fee revenue by $48.1 million, or 2%, in fiscal 2026 compared to fiscal 2025."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "F2 figures; the 4% is stated in P6",
-    "claim": "Earnings grew more slowly than revenue in Q1 FY'27: general and administrative expenses rose to 80,231 from 63,874 (table in thousands), and net income attributable to Korn Ferry rose 4%.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "General and administrative expenses | 80,231 | 63,874"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "inferred from the F1 and F3 statements",
-    "claim": "Condition for funding growth: Q1 operating cash flow is seasonally negative and cash fell from 1,095,445 to 800,852 (table in thousands), with long-term debt of 398,778.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Net cash used in operating activities | (247,630) | (237,367)",
-     "Long-term debt | 398,778 | 398,565"
+     "Failing to maintain a balance between our cost structure and our revenue could adversely affect our business, financial condition, and results of operations and lead to negative cash flows, which in turn might require us to obtain additional financing to meet our capital needs."
     ],
     "support": "supported"
    }
   ],
-  "material_events": [
+  "financial_health": [
    {
-    "basis": "Stated in the CEO quote in the 8-K earnings release (P6). The 10-Q MD&A (P4) names the acquired company as Auxey Holdco Limited (AMS). The closing date and price are not given.",
-    "claim": "Korn Ferry has completed its acquisition of AMS (Auxey Holdco Limited), which the CEO describes as now part of Korn Ferry and expanding its Workforce Solutions.",
+    "basis": "stated in F1",
+    "claim": "As of July 31, 2026, Korn Ferry held $ 800,852 in cash and cash equivalents, 15,439 in current marketable securities, and 234,778 in non-current marketable securities (table in thousands), down from $ 1,095,445, 38,914, and 247,132, respectively, as of April 30, 2026.",
     "facts": [
-     "P6",
-     "P4"
+     "F1"
     ],
     "quotes": [
-     "With AMS now part of Korn Ferry, we have brought together two iconic brands to create a global leader in talent and organizational consulting.",
-     "AMS is a world-class firm that complements and meaningfully expands our Workforce Solutions and propels our We Are Korn Ferry strategy\u2014to be the world\u2019s conductor of talent and organizational orchestration."
+     "Cash and cash equivalents | $ 800,852 | $ 1,095,445",
+     "Marketable securities | 15,439 | 38,914",
+     "Marketable securities, non-current | 234,778 | 247,132"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K filings (P8, P9) and the 10-Q MD&A (P4).",
-    "claim": "Korn Ferry realigned its reportable segments from a solution-based presentation to three geographic segments: Americas, EMEA and APAC. It then filed recast historical segment information, which it says is not a restatement.",
+    "basis": "stated in F1",
+    "claim": "Total current assets were 1,638,968 against total current liabilities of 691,217 as of July 31, 2026, compared with 1,905,977 and 982,010 as of April 30, 2026 (table in thousands), as compensation and benefits payable declined from 570,242 to 299,408 while net client receivables rose from 573,350 to 615,274.",
     "facts": [
-     "P8",
-     "P9",
-     "P4"
+     "F1"
     ],
     "quotes": [
-     "This realignment had no impact on the Company\u2019s historical consolidated financial position, results of operations or cash flows.",
-     "The information in this Form 8-K is not an amendment or restatement of the Original Report."
+     "Total current assets | 1,638,968 | 1,905,977",
+     "Total current liabilities | 691,217 | 982,010",
+     "Compensation and benefits payable | 299,408 | 570,242",
+     "Receivables due from clients, net of allowance for doubtful accounts of $44,591 and $42,527 at July 31, 2026 and April 30, 2026, respectively | 615,274 | 573,350"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K Item 5.02 and 5.07 filing (P7).",
-    "claim": "Stockholders approved the Korn Ferry Amended and Restated Stock Incentive Plan. The plan adds 1,400,000 shares available for stock-based awards and extends the plan's term.",
+    "basis": "stated in F1",
+    "claim": "As of July 31, 2026, Korn Ferry carried 398,778 in long-term debt, 30,621 in current operating lease liabilities, 163,701 in non-current operating lease liabilities, and 531,991 in deferred compensation and other retirement plans against 2,001,277 of total stockholders' equity (table in thousands), with no separate short-term debt line item.",
     "facts": [
-     "P7"
+     "F1"
     ],
     "quotes": [
-     "The Company\u2019s stockholders approved the Plan at the 2026 Annual Meeting of Stockholders held on September 24, 2026 (the \u201c2026 Annual Meeting\u201d)."
+     "Long-term debt | 398,778 | 398,565",
+     "Operating lease liability, current | 30,621 | 28,111",
+     "Operating lease liability, non-current | 163,701 | 164,899",
+     "Deferred compensation and other retirement plans | 531,991 | 510,774",
+     "Total stockholders' equity | 2,001,277 | 1,978,903"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K Item 8.01 filing (P10). The evidence does not confirm that the payment was made.",
-    "claim": "The Board declared a quarterly cash dividend of $0.55 per share, payable on the date stated in the filing.",
+    "basis": "stated in F2, P1, and P3",
+    "claim": "Net interest expense was (4,342) against operating income of 93,380 for the three months ended July 31, 2026 (table in thousands), while full-year fiscal 2026 net interest expense was 19,998 (table in thousands) and debt service costs were $18.5 million.",
     "facts": [
+     "F2",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Operating income | 93,380 | 83,448",
+     "Interest expense, net | (4,342) | (3,516)",
+     "Interest expense, net | 19,998 | 0.7 | 20,363 | 0.8 | 20,968 | 0.8",
+     "We continued with our balanced approach to capital allocation and for the full year, the Company invested $84.7 million in capital expenditures (excluding leasehold improvements and furniture & fixtures), $18.5 million on debt service costs, and returned $116.1 million and $104.6 million to shareholders in the form of share repurchases and dividends, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "For the three months ended July 31, 2026, Korn Ferry recorded net cash used in operating activities of (247,630) despite net income of $ 69,497 (table in thousands), compared with net cash used in operating activities of (237,367) and net income of $ 67,434 in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net income | $ 69,497 | $ 67,434",
+     "Net cash used in operating activities | (247,630) | (237,367)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "The operating cash outflow in the three months ended July 31, 2026 was driven by working capital outflows including (291,349) in accounts payable and accrued liabilities, (47,079) in receivables due from clients, and (24,659) in unearned compensation, partially offset by 22,195 of depreciation and amortization, 12,448 of stock-based compensation expense, and 23,426 in deferred compensation (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Accounts payable and accrued liabilities | (291,349) | (276,906)",
+     "Receivables due from clients | (47,079) | (39,900)",
+     "Unearned compensation | (24,659) | (20,236)",
+     "Depreciation and amortization | 22,195 | 22,686",
+     "Stock-based compensation expense | 12,448 | 11,009",
+     "Deferred compensation | 23,426 | 27,763"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P1",
+    "claim": "Net income for the three months ended July 31, 2026 included non-cash gains of (4,837) on marketable securities and (2,497) on cash surrender value of life insurance policies (table in thousands), while full-year fiscal 2026 produced $277.4 million in net income attributable to Korn Ferry and $497.8 million in Adjusted EBITDA.",
+    "facts": [
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Gain on marketable securities | (4,837) | (12,324)",
+     "Gain on cash surrender value of life insurance policies | (2,497) | (2,569)",
+     "Net Income Attributable to Korn Ferry was $277.4 million with a margin of 9.5%, a 50bps increase compared to fiscal 2025.",
+     "Adjusted EBITDA* was $497.8 million with a margin of 17.1%, a 10bps increase compared to fiscal 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "In the three months ended July 31, 2026, net cash provided by investing activities was 9,455 (table in thousands) as 46,161 in marketable securities sales and maturities offset (17,923) in property and equipment purchases and (13,474) in life insurance premiums, while financing activities used (52,490) led by (30,222) in dividends and (24,912) in restricted stock tax withholdings.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by (used in) investing activities | 9,455 | (32,181)",
+     "Proceeds from sales/maturities of marketable securities | 46,161 | 13,543",
+     "Purchase of property and equipment | (17,923) | (22,599)",
+     "Premium on company-owned life insurance policies | (13,474) | (13,502)",
+     "Net cash used in financing activities | (52,490) | (51,552)",
+     "Dividends paid to stockholders | (30,222) | (26,209)",
+     "Payments of tax withholdings on restricted stock | (24,912) | (18,704)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P10",
+    "claim": "In fiscal 2026, Korn Ferry invested $84.7 million in capital expenditures (excluding leasehold improvements and furniture & fixtures) and returned $116.1 million via share repurchases and $104.6 million via dividends, and on September 8, 2026 declared a quarterly cash dividend of $0.55 per share.",
+    "facts": [
+     "P1",
      "P10"
     ],
     "quotes": [
+     "We continued with our balanced approach to capital allocation and for the full year, the Company invested $84.7 million in capital expenditures (excluding leasehold improvements and furniture & fixtures), $18.5 million on debt service costs, and returned $116.1 million and $104.6 million to shareholders in the form of share repurchases and dividends, respectively.",
      "On September 8, 2026, the Board of Directors (the \u201cBoard\u201d) of Korn Ferry (the \u201cCompany\u201d) declared a cash dividend of $0.55 per share that will be paid on October 15, 2026 to holders of the Company\u2019s common stock of record at the close of business on September 22, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K earnings release (P6) and consistent with the 10-Q income statement (F2). The integration-cost figures come from the 10-Q MD&A (P4).",
-    "claim": "Korn Ferry announced first-quarter fiscal 2027 results, with fee revenue of $756.5 million, up 7% year over year.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Figures stated in F1 and F3; the risk language is stated in P2; the seasonal reading is inferred from the prior-year comparison and the change in compensation payable.",
-    "claim": "In the quarter ended July 31, 2026, operations used cash of (247,630) (table in thousands), and cash and cash equivalents fell from 1,095,445 to 800,852 (table in thousands).",
+    "basis": "stated in F3 and P6",
+    "claim": "The cash flow statement for the three months ended July 31, 2026 shows no debt issuances or debt principal repayments other than (588) in finance lease principal payments and (87) in life insurance policy loan payments (table in thousands), while the AMS acquisition closed on September 1, 2026 and introduced incremental net interest expense and incremental shares.",
     "facts": [
      "F3",
-     "F1",
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "Failing to maintain a balance between our cost structure and our revenue could adversely affect our business, financial condition, and results of operations and lead to negative cash flows, which in turn might require us to obtain additional financing to meet our capital needs."
+     "Principal payments on finance leases | (588) | (499)",
+     "Payments on life insurance policy loans | (87) | 0",
+     "Adjusted diluted earnings per share includes the net after tax impact of two months of incremental intangible asset amortization, incremental net interest expense and incremental shares issued in connection with the acquisition of AMS which closed on September 1, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4 and P6.",
-    "claim": "Integration and acquisition costs tied to the AMS acquisition rose to $7.6 million from $1.5 million, and management says it cannot reliably estimate the costs for Q2 FY27.",
+    "basis": "stated in P6",
+    "claim": "In the first quarter of fiscal 2027, estimated remaining fees under existing contracts rose to $1,915.0 from $1,674.1 in the prior-year period (table in millions), while Adjusted EBITDA of $128.2 excluded $7.6 of integration/acquisition costs (table in millions).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Estimated remaining fees under existing contracts (b) | $1,915.0 | $1,674.1",
+     "Adjusted EBITDA | $128.2 | $120.4",
+     "Integration/acquisition costs | $7.6 | $1.5"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in [P1] and [P3] as reported operating metrics.",
+    "claim": "Cross-solution referrals under the We Are Korn Ferry go-to-market model grew from 14% to 27% of consolidated fee revenue, while more than 75% of fee revenues came from clients using multiple solutions.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In fiscal 2026, approximately 27% of our consolidated fee revenue came from cross-solution referrals, up from 14% in 2018 when we began tracking this metric.",
+     "More than 75% of our fee revenues were generated from clients that have utilized multiple solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] Item 1A Risk Factors.",
+    "claim": "For cross-solution growth to continue, Korn Ferry must coordinate teams across solutions and regions without operational disruption while demand for integrated offerings holds up against competition and economic shifts.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "This strategy may not be effective or timely executed, due to disruptions or operational challenges that may arise from efforts to consolidate or coordinate new teams, areas of the business, marketing, technical expertise or business operations.",
+     "Even if this strategy is effectively executed, it may prove insufficient in light of changes in market or economic conditions, workforce trends, technology, competitive pressures or other external factors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1], [P3], and [P4] as reported program and retention figures.",
+    "claim": "The 350 Marquee and Diamond accounts grew 8% year-over-year to represent approximately 40% of consolidated fee revenue, alongside 82% repeat assignments from recent clients.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our fiscal 2026 Marquee and Diamond Accounts fee revenue generated approximately 40% of our consolidated fee revenue and grew 8% compared to fiscal year 2025.",
+     "We have built strong client loyalty, with approximately 82% of the assignments performed during fiscal 2026 having been on behalf of clients for whom we had conducted assignments in the previous three fiscal years.",
+     "As of July 31, 2026, our 350 Marquee and Diamond accounts represented almost 40% of consolidated fee revenue\u2014more than double their contribution at the Program\u2019s inception."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] Item 1A Risk Factors.",
+    "claim": "For account-led and repeat-client growth to continue, Korn Ferry must protect its brand reputation and retain key consultants who hold portable client relationships.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We obtain a majority of our new engagements from existing clients or from referrals by those clients.",
+     "Because client responsibility is so concentrated, the loss of key consultants may lead to the loss of client relationships.",
+     "In fiscal 2026, our top six consultants combined generated business equal to approximately 3% of our total fee revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3], [P4], and [P6] financial results.",
+    "claim": "Consolidated fee revenue grew 7% year-over-year to $2,907.5 million in the prior fiscal year and 7% year-over-year to $756.5 million in the latest quarter, led by 10% Search and 11% Workforce Solutions growth.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Fee revenue was $2,907.5 million, an increase of 7% year-over-year, led by Professional Search & Interim, Executive Search and Consulting.",
+     "Korn Ferry reports Q1 FY'27 fee revenue of $756.5 million, an increase of 7% year-over-year at both actual and constant currency.",
+     "Fee revenue grew in all regions year-over-year, led by double digit growth in Search and Workforce Solutions of 10% and 11%, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6] Q1 FY'27 Selected Financial Results.",
+    "claim": "New business awards increased to $832.3 (table in millions) and estimated remaining fees under existing contracts rose 14% to $1.9 billion.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Estimated remaining fees under existing contracts at the end of the first quarter were $1.9 billion, up 14% year-over-year.",
+     "New business (c) | $832.3 | $742.2"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] Item 1A Risk Factors.",
+    "claim": "For Search and Workforce Solutions growth to continue, Korn Ferry must sustain consultant utilization, billing rates, and client demand against low-barrier recruiting competition.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our profitability depends, to a large extent, on the utilization and billing rates of our professionals.",
+     "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market.",
+     "When actual or projected fee revenues are negatively impacted by weakening customer demand, we have and may again find it necessary to take cost cutting measures so that we can minimize the impact on our profitability, such as the restructuring initiated in the first half of fiscal 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1]; broader flat segment totals stated in [P3] and [P4].",
+    "claim": "Digital subscription and license revenue grew 7.9% to $148.6 million, supported by direct Talent Suite access, integrated delivery, and firm-wide AI initiatives.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Subscription/license revenue was $148.6 million, an increase of 7.9% compared to fiscal 2025.",
+     "Subscription and license growth was driven by both direct access to the Talent Suite platform, as well as integrated delivery in partnership with our other solutions, driving increased client utilization and stickiness.",
+     "In fiscal 2026, we accelerated firm-wide AI transformation initiatives designed to embed AI into key workflows and digital platforms across our solutions and enterprise functions, improving consultant effectiveness, efficiency, quality, and client outcomes while maintaining strong standards for security, transparency and responsible use."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] Item 1A Risk Factors.",
+    "claim": "For Digital and AI-enabled growth to continue, Korn Ferry must differentiate Talent Suite against larger or specialized HR technology rivals and comply with evolving AI and data privacy laws.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Competitors in the digital marketplace are a combination of large, well-capitalized firms and niche players who have received multiple rounds of private financing.",
+     "As we incorporate AI and machine learning into our business there are uncertainties in the legal regulatory regime relating to AI that may require significant resources to modify and maintain business practices to comply with U.S. and non-U.S. laws, the nature of which cannot be determined at this time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6] CEO remarks and Q2 FY'27 Outlook.",
+    "claim": "The AMS acquisition expands Workforce Solutions with contracted client relationships and supports projected next-quarter fee revenue of $860 million to $878 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "AMS brings profound operational capability, delivering technology-enabled talent solutions at scale, supported by long-term contracted client relationships.",
+     "Q2 FY\u201927 fee revenue is expected to be in the range of $860 million and $878 million;",
+     "Adjusted diluted earnings per share includes the net after tax impact of two months of incremental intangible asset amortization, incremental net interest expense and incremental shares issued in connection with the acquisition of AMS which closed on September 1, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P4] and [P6] MD&A and Q2 FY'27 Outlook disclosures.",
+    "claim": "For acquisition-driven growth to continue, Korn Ferry must successfully integrate AMS, retain its clients and key employees, and manage integration and acquisition costs.",
     "facts": [
      "P4",
      "P6"
@@ -1735,116 +1543,261 @@
      "The information necessary to present those GAAP measures on a forward-looking basis is not accessible without unreasonable efforts, because the Company is not able to estimate with reasonable certainty the integration and acquisition costs it will incur in connection with the AMS acquisition during the second quarter of fiscal 2027."
     ],
     "support": "supported"
-   },
+   }
+  ],
+  "material_events": [
    {
-    "basis": "The risk is stated in P2; the flat Digital revenue is stated in P3; the Search growth is stated in P6.",
-    "claim": "AI-enabled and web-based competitors may help clients insource recruiting, while Digital fee revenue was flat at $363.5 million in fiscal 2026.",
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry closed the acquisition of Auxey Holdco Limited (AMS).",
     "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities.",
-     "Digital reported fee revenue of $363.5 million in fiscal 2026, essentially flat compared to $363.5 million in fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and P6.",
-    "claim": "Revenue depends on retaining consultants: the top ten generated about 4% of fee revenues, and fee earners fell to 1,811 from 1,830.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F2, P4 and P6.",
-    "claim": "Q1 FY27 net income margin attributable to Korn Ferry slipped to 9.1% from 9.4% as G&A rose to 80,231 from 63,874 and other income fell to 5,107 from 12,752 (table in thousands).",
-    "facts": [
-     "F2",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Net income attributable to Korn Ferry was $69.0 million, an increase of 4% year-over-year, with a margin of 9.1%."
+     "Similarly, statements that describe our objectives, plans or goals, including the timing and anticipated impacts of our business strategy, expected demand for and relevance of our products and services, expected benefits and synergies of the acquisition of Auxey Holdco Limited (\u201cAMS\u201d) and expected results of our business diversification strategy, are also forward-looking statements.",
+     "Adjusted diluted earnings per share includes the net after tax impact of two months of incremental intangible asset amortization, incremental net interest expense and incremental shares issued in connection with the acquisition of AMS which closed on September 1, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P5.",
-    "claim": "Emerging AI laws in Europe and some U.S. states may require significant resources to comply with and could restrict the company's use of AI.",
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry realigned its organizational reporting structure from a solution-based presentation to a geographic model with three reportable segments: Americas, EMEA, and APAC.",
     "facts": [
-     "P2",
-     "P5"
+     "P4",
+     "P8",
+     "P9"
     ],
     "quotes": [
-     "Several jurisdictions around the globe, including Europe and certain U.S. states, have already proposed or enacted laws governing AI."
+     "As previously disclosed, beginning in fiscal 2027, Korn Ferry (the \u201cCompany\u201d) realigned its organizational structure from a solution-based presentation to a reporting model by geography, with the following three reportable segments: (i) Americas, (ii) Europe, Middle East and Africa, and (iii) Asia Pacific.",
+     "As mentioned in the Original Report, effective May 1, 2026 for the Company\u2019s fiscal year 2027, the Company realigned its organizational structure and reportable business segments by geography into three reportable segments: (i) Americas, (ii) Europe, Middle East and Africa and (iii) Asia Pacific."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P8 and P9.",
-    "claim": "Historical segment information was recast to a geographic structure for FY27, which reduces comparability with prior solution-based reporting.",
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry's Board of Directors declared a quarterly cash dividend of $0.55 per share payable on October 15, 2026 to stockholders of record on September 22, 2026.",
     "facts": [
-     "P9",
-     "P8"
+     "P10"
     ],
     "quotes": [
-     "The information in this Form 8-K is not an amendment or restatement of the Original Report."
+     "On September 8, 2026, the Board of Directors (the \u201cBoard\u201d) of Korn Ferry (the \u201cCompany\u201d) declared a cash dividend of $0.55 per share that will be paid on October 15, 2026 to holders of the Company\u2019s common stock of record at the close of business on September 22, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P10 and F3.",
-    "claim": "The dividend of $0.55 per share is discretionary and can be changed or suspended.",
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry's Board adopted and stockholders approved the Amended and Restated 2022 Stock Incentive Plan, increasing common shares available for stock-based awards by 1,400,000 shares and extending its term to September 24, 2036.",
     "facts": [
-     "P10",
-     "F3"
+     "P7"
     ],
     "quotes": [
-     "The Company may amend, revoke or suspend the dividend policy at any time and for any reason at its discretion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P7, F2 and F3.",
-    "claim": "Stockholders approved adding 1,400,000 shares to the stock incentive plan.",
-    "facts": [
-     "P7",
-     "F2",
-     "F3"
-    ],
-    "quotes": [
+     "On August 4, 2026, the Board of Directors (the \u201cBoard\u201d) of Korn Ferry (the \u201cCompany\u201d) unanimously adopted and approved the Korn Ferry Amended and Restated 2022 Stock Incentive Plan (the \u201cPlan\u201d), subject to stockholder approval, to increase the total number of shares of the Company\u2019s common stock available for stock-based awards by 1,400,000 shares, extend the term of the Plan to September 24, 2036, revise the limit on non-employee director compensation to be expressed in terms of an annual cash limit rather than an annual share limit, and make certain other administrative changes.",
      "The Company\u2019s stockholders approved the Plan at the 2026 Annual Meeting of Stockholders held on September 24, 2026 (the \u201c2026 Annual Meeting\u201d)."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2, P3 and P6.",
-    "claim": "Weaker client demand has previously forced cost cuts, including fiscal 2024 restructuring charges of 68,558 (table in thousands).",
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry initiated a restructuring in the first half of fiscal 2024, recording $68.6 million of net restructuring charges in fiscal 2024 and $1.9 million in fiscal 2025.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "When actual or projected fee revenues are negatively impacted by weakening customer demand, we have and may again find it necessary to take cost cutting measures so that we can minimize the impact on our profitability, such as the restructuring initiated in the first half of fiscal 2024.",
+     "For fiscal 2024, Adjusted EBITDA excluded $68.6 million of restructuring charges, net, $14.9 million of integration/acquisition costs, $1.6 million impairment of right-of-use assets and $1.6 million impairment of fixed assets.",
+     "For fiscal 2025, Adjusted EBITDA excluded $8.8 million of integration/acquisition costs, $4.6 million of management separation charges due to contractual obligations upon an executive's death, $2.5 million of impairment of right-of-use assets, $1.9 million of restructuring charges, net, and $0.5 million of impairment of fixed assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry recorded a $13.9 million gain on the modification of an office lease in fiscal 2026.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "For fiscal 2026, Adjusted EBITDA excluded $4.4 million of integration/acquisition costs and $13.9 million of gain on the modification of an office lease."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry decided to sunset its digital technology platform, resulting in $2.0 million of accelerated depreciation in the three months ended July 31, 2025.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "(1)Depreciation and amortization includes $2.0 million of accelerated depreciation associated with the decision to sunset the digital technology platform in the three months ended July 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Korn Ferry recorded $4.6 million of management separation charges in fiscal 2025 due to contractual obligations upon an executive's death.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "For fiscal 2025, Adjusted EBITDA excluded $8.8 million of integration/acquisition costs, $4.6 million of management separation charges due to contractual obligations upon an executive's death, $2.5 million of impairment of right-of-use assets, $1.9 million of restructuring charges, net, and $0.5 million of impairment of fixed assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "In fiscal 2026, Korn Ferry was named a Founding Partner of the LA28 Olympic and Paralympic Games and the Official Talent and Organizational Consulting Partner.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In fiscal 2026, Korn Ferry was named a Founding Partner of the LA28 Olympic and Paralympic Games and the Official Talent and Organizational Consulting Partner."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in the cited item (P2 states the competition and insourcing risks; P1, P3, and P6 state revenue growth, proprietary data assets, and repeat-client metrics).",
+    "claim": "Korn Ferry faces significant competition across its consulting, digital, and talent acquisition offerings from larger advisory firms, HR technology vendors, and AI-enabled or freelancing platforms that could reduce market share, demand, and pricing.",
+    "facts": [
+     "P2",
+     "P1",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Competition in our industries could result in lost market share, reduced demand for our services, and/or require us to charge lower prices for our services, which could adversely affect our operating results and future growth.",
+     "There are no extensive barriers to entry into the executive search industry and new recruiting firms continue to enter the market.",
+     "We believe the continuing development and increased availability of information technology will continue to attract new competitors, especially AI-enabled companies, web-enabled professional and social networking website providers, and these providers may be facilitating a company\u2019s ability to insource their recruiting capabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the retention, concentration, and portability risks; P1, P3, and P6 state account-program concentration and productivity figures).",
+    "claim": "Failure to recruit and retain qualified consultants could cause client losses and fee revenue declines because client relationships are concentrated and portable.",
+    "facts": [
+     "P2",
+     "P1",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Failure to recruit and retain qualified and experienced consultants could result in a loss of clients which in turn could cause a decline in our revenue and harm to our business.",
+     "In fiscal 2026, our top six consultants combined generated business equal to approximately 3% of our total fee revenues.",
+     "Furthermore, our top ten consultants combined generated business equal to approximately 4% of our total fee revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the off-limit risk; P3 and P6 state Search revenue growth).",
+    "claim": "Off-limit agreements with clients restrict Korn Ferry from recruiting candidates from those clients, which could cause lost search opportunities to less constrained competitors.",
     "facts": [
      "P2",
      "P3",
      "P6"
     ],
     "quotes": [
-     "When actual or projected fee revenues are negatively impacted by weakening customer demand, we have and may again find it necessary to take cost cutting measures so that we can minimize the impact on our profitability, such as the restructuring initiated in the first half of fiscal 2024."
+     "We are limited in our ability to recruit candidates from certain of our clients due to off-limit agreements with those clients and for client relation and marketing purposes.",
+     "These off-limit agreements can cause us to lose search opportunities to our competition."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6.",
-    "claim": "APAC was the weakest region in Q1 FY27: Adjusted EBITDA margin fell to 22.2% from 23.1%, and estimated remaining fees were $226.0 against $226.6 (dollars in millions).",
+    "basis": "stated in the cited item (P4 and P6 state the AMS closing, integration costs, and outlook limitations; P2 states expansion and integration risks).",
+    "claim": "Korn Ferry faces execution and cost risks in integrating Auxey Holdco Limited (AMS) and retaining its customers and key employees, with $7.6 million of integration/acquisition costs recorded and unquantified AMS integration costs preventing a GAAP outlook.",
     "facts": [
+     "P4",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "For the three months ended July 31, 2026 and 2025, Adjusted EBITDA excluded integration/acquisition costs of $7.6 million and $1.5 million, respectively.",
+     "The information necessary to present those GAAP measures on a forward-looking basis is not accessible without unreasonable efforts, because the Company is not able to estimate with reasonable certainty the integration and acquisition costs it will incur in connection with the AMS acquisition during the second quarter of fiscal 2027.",
+     "As we develop new services, obtain clients, enter new practices and lines of business, and focus more of our business on providing a full range of client solutions, the demands on our business and our operating and legal risks may increase."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the RPO utilization and revenue-fluctuation risk; P1, P3, and P6 state RPO headcount, contracted backlog, and segment revenue).",
+    "claim": "The commencement or termination of multiple Recruitment Process Outsourcing (RPO) engagements could cause significant fluctuations in fee revenue and consultant utilization because RPO engagements are larger in staffing and fee revenue than other engagements.",
+    "facts": [
+     "P2",
+     "P1",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Fee revenue grew in all regions year-over-year, led by double digit growth in Search and Workforce Solutions of 10% and 11%, respectively."
+     "Our profitability depends, to a large extent, on the utilization and billing rates of our professionals.",
+     "Utilization of our professionals is affected by a number of factors, including: the number and size of client engagements; the timing of the commencement, completion and termination of engagements (for example, the commencement or termination of multiple RPO engagements could have a significant impact on our business, including significant fluctuations in our fee revenue, since these types of engagements are generally larger, in terms of both staffing and fee revenue generated, than our other engagements); our ability to transition our consultants efficiently from completed engagements to new engagements; the hiring of additional consultants because there is generally a transition period for new consultants that results in a temporary drop in our utilization rate; unanticipated changes in the scope of client engagements; our ability to forecast demand for our services and thereby maintain an appropriate level of consultants; and conditions affecting the industries in which we practice, as well as general economic conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the regulatory and AI compliance risks; P1 states centralized governance and responsible-AI standards).",
+    "claim": "Evolving government regulations across jurisdictions, including emerging AI, data privacy, cybersecurity, and corporate responsibility laws, could increase compliance costs, restrict services, or trigger fines and liability.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Our failure to comply with applicable laws and regulations could restrict our ability to provide certain services including to federal, state, local and foreign governments or result in the imposition of fines and penalties, substantial regulatory and compliance costs, litigation expense, adverse publicity, and loss of revenue.",
+     "As we incorporate AI and machine learning into our business there are uncertainties in the legal regulatory regime relating to AI that may require significant resources to modify and maintain business practices to comply with U.S. and non-U.S. laws, the nature of which cannot be determined at this time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the legal liability and insurance risks; P5 confirms no material changes to risk factors in the Q1 FY'27 Form 10-Q).",
+    "claim": "Korn Ferry is exposed to legal claims from clients, candidates, employees, and stockholders for which insurance coverage may be unavailable or insufficient.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "We are subject to potential legal liability from clients, employees, candidates for employment, stockholders and others.",
+     "Insurance coverage may not be available to cover all of our potential liability and available coverage may not be sufficient to cover all claims that we may incur."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the cost-alignment and financing risk; F1, F3, P4, and P10 state liquidity, cash flow components, and dividend discretion).",
+    "claim": "If weakening demand prevents Korn Ferry from aligning its cost structure with revenue, negative cash flows could require additional financing that may be unavailable or only available on unfavorable terms.",
+    "facts": [
+     "P2",
+     "F1",
+     "F3",
+     "P4",
+     "P10"
+    ],
+    "quotes": [
+     "Failing to maintain a balance between our cost structure and our revenue could adversely affect our business, financial condition, and results of operations and lead to negative cash flows, which in turn might require us to obtain additional financing to meet our capital needs.",
+     "If we are unable to secure such additional financing on favorable terms, or at all, our ability to fund our operations could be impaired, which could have a material adverse effect on our results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the reputational and referral dependence risk; P1 and P3 state client loyalty and S&P 100 reach).",
+    "claim": "Damage to Korn Ferry's professional reputation or brand goodwill from poor service delivery or negative publicity could impair new client engagements and consultant hiring.",
+    "facts": [
+     "P2",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Failing to maintain our professional reputation and the goodwill associated with our brand name could seriously harm our business.",
+     "We obtain a majority of our new engagements from existing clients or from referrals by those clients."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 states the business continuity and California concentration risks; P1 states the global office footprint).",
+    "claim": "Disasters, extreme weather, infrastructure outages, or security breaches\u2014particularly affecting corporate staff concentrated in California\u2014could interrupt operations and cause financial, client, or data losses.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "For example, a large number of our corporate staff are based in California, which has a high level of risk and past damages from wildfires and earthquakes.",
+     "A disaster on a significant scale or affecting certain of our key operating areas within or across regions, or our inability to successfully recover should we experience a disaster, pandemic or other business continuity problem, could materially interrupt our business operations and cause material financial loss, loss of human capital, regulatory actions, reputational harm, damaged client relationships or legal liability."
     ],
     "support": "supported"
    }
@@ -1852,153 +1805,193 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Inferred from the AMS references in P4 and P6 and from the unchanged goodwill and debt lines in F1",
-    "claim": "What did the AMS (Auxey Holdco Limited) acquisition cost, how was it paid for (cash, debt or stock), and on what date did it close?",
+    "basis": "Stated in P6 that AMS closed on September 1, 2026 with incremental intangible asset amortization, net interest expense, and shares issued; inferred that deal terms and standalone financials are unresolved because no acquisition filing or post-close 10-Q is in the packet.",
+    "claim": "What were the purchase price, consideration mix, incremental shares issued, and standalone financial contribution of the AMS acquisition?",
     "facts": [
      "P4",
      "P6",
-     "F1"
+     "S0"
     ],
     "quotes": [
-     "expected benefits and synergies of the acquisition of Auxey Holdco Limited",
+     "Adjusted diluted earnings per share includes the net after tax impact of two months of incremental intangible asset amortization, incremental net interest expense and incremental shares issued in connection with the acquisition of AMS which closed on September 1, 2026.",
      "With AMS now part of Korn Ferry, we have brought together two iconic brands to create a global leader in talent and organizational consulting."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6. Management says it cannot estimate these costs.",
-    "claim": "How large will AMS integration and acquisition costs become, after they rose to $7.6 million from $1.5 million in the first quarter?",
+    "basis": "Stated in P6 that GAAP outlook measures were omitted because AMS integration and acquisition costs could not be estimated with reasonable certainty; inferred that actual Q2 results remain unknown because the latest statements in the packet end July 31, 2026.",
+    "claim": "What were Korn Ferry's actual GAAP results and AMS integration and acquisition costs during the second quarter of fiscal 2027?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Company is not providing an outlook for consolidated net income attributable to Korn Ferry margin or consolidated diluted earnings per share, the most directly comparable GAAP measures, or a quantitative reconciliation of those GAAP measures to the corresponding non-GAAP measures.",
+     "The information necessary to present those GAAP measures on a forward-looking basis is not accessible without unreasonable efforts, because the Company is not able to estimate with reasonable certainty the integration and acquisition costs it will incur in connection with the AMS acquisition during the second quarter of fiscal 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in S0 (price and marketCap as of November 20, 2026), F1 (shares outstanding at July 31, 2026), and P6 (incremental shares issued for AMS); exact post-July 31 share count is not in the packet.",
+    "claim": "What is Korn Ferry's current common share count, given a screener marketCap of 4028625372 at a price of 73.84 compared with 50,790 (table in thousands) shares outstanding on the latest balance sheet?",
+    "facts": [
+     "S0",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "marketCap: 4028625372",
+     "price: 73.84",
+     "Common stock: $0.01 par value, 150,000 shares authorized, 80,165 and 79,203 shares issued and 50,790 and 50,225 shares outstanding at July 31, 2026 and April 30, 2026, respectively | 276,212 | 284,370"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 (long-term debt carrying value), F2 (net interest expense), and P6 (incremental net interest expense for AMS); debt instrument terms and credit facility availability are in omitted footnotes and MD&A.",
+    "claim": "What are the interest rate, maturity, covenants, and undrawn credit facility availability on Korn Ferry's long-term debt of 398,778 (table in thousands), and how did the AMS acquisition change total debt?",
+    "facts": [
+     "F1",
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Long-term debt | 398,778 | 398,565",
+     "Interest expense, net | (4,342) | (3,516)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3 (Q1 operating cash flow and accrued liability outflow) and F1 (decline in compensation and benefits payable); the MD&A liquidity discussion in P4 is omitted.",
+    "claim": "How much of the (247,630) (table in thousands) net cash used in operating activities and (291,349) (table in thousands) accounts payable and accrued liabilities outflow reflects annual bonus payouts versus underlying cash generation?",
+    "facts": [
+     "F1",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Net cash used in operating activities | (247,630) | (237,367)",
+     "Accounts payable and accrued liabilities | (291,349) | (276,906)",
+     "Compensation and benefits payable | 299,408 | 570,242"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P8 and P9 that recast historical segment schedules were furnished in those exhibits; the detailed quarterly and annual recast tables are omitted from the packet.",
+    "claim": "What were the full quarterly fee revenue and Adjusted EBITDA results for each realigned geographic segment and solution group across fiscal 2026?",
     "facts": [
      "P4",
-     "P6"
+     "P8",
+     "P9"
     ],
     "quotes": [
-     "the Company is not able to estimate with reasonable certainty the integration and acquisition costs it will incur in connection with the AMS acquisition during the second quarter of fiscal 2027"
+     "The Company is furnishing herewith as Exhibit 99.1 recast unaudited fee revenue for each quarter of fiscal 2026 for each of its new geographic reporting segments and further disaggregated by Solutions Group.",
+     "This realignment had no impact on the Company\u2019s historical consolidated financial position, results of operations or cash flows."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the omitted Outlook text in P6, which refers to outlook measures without showing them",
-    "claim": "What second-quarter outlook did management give for fee revenue, adjusted EBITDA margin and adjusted diluted EPS? The Outlook text in the release is cut from the packet.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Consolidated adjusted EBITDA margin and consolidated adjusted diluted earnings per share are non-GAAP financial measures."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred. The new grouping combines Consulting and Digital, so the evidence cannot show which one drove the result.",
-    "claim": "Why was Talent & Organizational Solutions fee revenue flat, at 259,220 against 259,160 (table in thousands), with Americas down (2.9%)? Is Digital, which was flat at $363.5 million for the full year, the cause?",
+    "basis": "Stated in P6 as estimated fee revenue under signed contracts not yet recognized; the timing and cancellability terms are not included in the packet.",
+    "claim": "Over what periods will the $1,915.0 (table in millions) of estimated remaining fees under existing contracts be recognized as revenue, and what portion is subject to cancellation?",
     "facts": [
      "P6",
      "P3"
     ],
     "quotes": [
-     "Digital reported fee revenue of $363.5 million in fiscal 2026, essentially flat compared to $363.5 million in fiscal 2025."
+     "Estimated remaining fees under existing contracts (b) | $1,915.0 | $1,674.1",
+     "(b)Estimated fee revenue associated with signed contracts for which revenue has not yet been recognized."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred. P6 lists the integration costs, but no item places them in a specific expense line.",
-    "claim": "What drove general and administrative expenses up to 80,231 from 63,874 (table in thousands), and how much of the increase is the 7,554 of integration/acquisition costs?",
+    "basis": "Stated in F1 (balance sheet carrying amounts); plan funding rules, policy loan balances, and income-statement offset mechanics are in omitted footnotes.",
+    "claim": "How closely do cash surrender value of company-owned life insurance policies of 304,906 (table in thousands) and non-current marketable securities of 234,778 (table in thousands) hedge the 531,991 (table in thousands) deferred compensation liability?",
     "facts": [
-     "F2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "General and administrative expenses | 10.6 | 9.0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred by comparing S0 with F1. The cause of the gap is not stated anywhere.",
-    "claim": "Why does the screener market capitalization of 4121921703 at a price of 75.55 not match the 50,790 (thousand) shares outstanding at the end of the quarter? Were new shares issued after that date?",
-    "facts": [
-     "S0",
-     "F1"
-    ],
-    "quotes": [
-     "marketCap: 4121921703",
-     "80,165 and 79,203 shares issued and 50,790 and 50,225 shares outstanding at July 31, 2026 and April 30, 2026, respectively"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred. No item gives a reason for the lower buybacks.",
-    "claim": "Why did share repurchases fall to (746) from (10,298) (table in thousands), after $116.1 million of repurchases in fiscal 2026, and how much repurchase authorization remains?",
-    "facts": [
-     "F3",
-     "P1"
-    ],
-    "quotes": [
-     "Repurchases of common stock | (746) | (10,298)",
-     "returned $116.1 million and $104.6 million to shareholders in the form of share repurchases and dividends, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the matching line items in F2 and F3",
-    "claim": "How much of the drop in other income, net, to 5,107 from 12,752 (table in thousands) comes from smaller gains on marketable securities of (4,837) against (12,324)? Is that change offset inside compensation expense?",
-    "facts": [
+     "F1",
      "F2",
      "F3"
     ],
     "quotes": [
-     "Other income, net | 5,107 | 12,752",
-     "Gain on marketable securities | (4,837) | (12,324)"
+     "Cash surrender value of company-owned life insurance policies, net of loans | 304,906 | 289,058",
+     "Marketable securities, non-current | 234,778 | 247,132",
+     "Deferred compensation and other retirement plans | 531,991 | 510,774"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred. P6 reports the counts but gives no explanation.",
-    "claim": "Is the drop in fee earners to 1,811 from 1,830, including EMEA at 556 from 578, a deliberate reduction, and can productivity keep rising if it continues?",
+    "basis": "Stated in F1 (total goodwill) and P4 (segment realignment); reporting-unit goodwill allocation and impairment test headroom are not in the packet.",
+    "claim": "How is the 945,837 (table in thousands) goodwill balance allocated across the realigned geographic reporting units, and what is the impairment headroom?",
+    "facts": [
+     "F1",
+     "P4",
+     "P9"
+    ],
+    "quotes": [
+     "Goodwill | 945,837 | 950,636",
+     "Beginning in fiscal 2027, we reassessed and realigned our organizational structure from a solution-based presentation to a reporting model by geography, with the following three reportable segments: (i) Americas, (ii) Europe, Middle East and Africa (\u201cEMEA\u201d), and (iii) Asia Pacific (\u201cAPAC\u201d and collectively with Americas and EMEA, the \u201cRegions\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 that Korn Ferry is a Founding Partner and Official Talent and Organizational Consulting Partner; financial terms and sponsorship commitments are omitted.",
+    "claim": "What are the revenue, fee structure, and financial commitment obligations associated with Korn Ferry's Founding Partner role for the Olympic and Paralympic Games?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In fiscal 2026, Korn Ferry was named a Founding Partner of the LA28 Olympic and Paralympic Games and the Official Talent and Organizational Consulting Partner.",
+     "Entrusted to build and align the 5,000+ people who will power the Games, Korn Ferry is helping shape the workforce, leadership structure and organizational capabilities required to deliver one of the world's most visible and operationally complex global events, work that reflects our broader role in helping organizations to succeed in high-stakes environments at pace and scale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P10 (dividend declaration and board discretion) and F3 (Q1 share repurchases); remaining buyback authorization and post-AMS capital allocation priorities are not disclosed.",
+    "claim": "What share repurchase authorization remains available, and how does the AMS acquisition affect share repurchases and the $0.55 quarterly dividend policy?",
+    "facts": [
+     "P1",
+     "P6",
+     "P10",
+     "F3"
+    ],
+    "quotes": [
+     "On September 8, 2026, the Board of Directors (the \u201cBoard\u201d) of Korn Ferry (the \u201cCompany\u201d) declared a cash dividend of $0.55 per share that will be paid on October 15, 2026 to holders of the Company\u2019s common stock of record at the close of business on September 22, 2026.",
+     "The Company may amend, revoke or suspend the dividend policy at any time and for any reason at its discretion.",
+     "Repurchases of common stock | (746) | (10,298)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P7 that available shares increased by 1,400,000 and the director limit moved to an annual cash limit, with terms referenced to Exhibit 10.1 which is not in the packet.",
+    "claim": "What is the revised annual cash limit for non-employee director compensation and the total remaining share reserve after increasing shares available for stock-based awards by 1,400,000 shares?",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On August 4, 2026, the Board of Directors (the \u201cBoard\u201d) of Korn Ferry (the \u201cCompany\u201d) unanimously adopted and approved the Korn Ferry Amended and Restated 2022 Stock Incentive Plan (the \u201cPlan\u201d), subject to stockholder approval, to increase the total number of shares of the Company\u2019s common stock available for stock-based awards by 1,400,000 shares, extend the term of the Plan to September 24, 2036, revise the limit on non-employee director compensation to be expressed in terms of an annual cash limit rather than an annual share limit, and make certain other administrative changes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that accelerated depreciation in Q1 FY2026 resulted from deciding to sunset the digital technology platform; replacement spending and lifecycle details are omitted.",
+    "claim": "What are the total remaining migration costs, replacement capital expenditures, and expected revenue impact of the decision to sunset the digital technology platform?",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Ending number of fee earners (e) | 1,811 | 1,830"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred. P7 states the size of the increase but not when or how fast awards will be granted.",
-    "claim": "How much dilution could the 1,400,000 extra shares added to the stock incentive plan cause, compared with the 50,351 (thousand) basic weighted-average shares?",
-    "facts": [
-     "P7",
-     "F2"
-    ],
-    "quotes": [
-     "to increase the total number of shares of the Company\u2019s common stock available for stock-based awards by 1,400,000 shares"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the omitted exhibit content in P8 and P9",
-    "claim": "What were the recast fiscal 2026 quarterly Adjusted EBITDA and margins for each new region? The exhibits are cut from the packet.",
-    "facts": [
-     "P8",
-     "P9"
-    ],
-    "quotes": [
-     "The Company is also furnishing certain recast unaudited historical financial information for each quarter of fiscal year 2026, attached hereto as Exhibit 99.2."
+     "(1)Depreciation and amortization includes $2.0 million of accelerated depreciation associated with the decision to sunset the digital technology platform in the three months ended July 31, 2025."
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "KFY",
- "upside": 0.41488324100209417,
+ "upside": 0.4584675640233715,
  "valuation": null,
- "value_base": 107.65090495565357,
- "value_bear": 84.84689002668611,
- "value_bull": 139.67172753306983,
+ "value_base": 106.81815935703881,
+ "value_bear": 77.1197155940857,
+ "value_bull": 149.5111648024514,
  "value_per_filed_share": {
-  "base": 107.65090495565357,
-  "bear": 84.84689002668611,
-  "bull": 139.67172753306983
+  "base": 106.81815935703881,
+  "bear": 77.1197155940857,
+  "bull": 149.5111648024514
  },
  "valued": true,
  "verdict": "BUY",
