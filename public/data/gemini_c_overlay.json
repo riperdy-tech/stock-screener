@@ -1,8 +1,8 @@
 {
- "count": 232,
+ "count": 233,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-21T12:59:50Z",
+ "generated_at": "2026-11-21T13:06:12Z",
  "list_covered": 155,
  "list_names": 158,
  "model": "claude-sonnet-5-5",
@@ -4191,6 +4191,47 @@
    "valued": true,
    "verdict": "WATCH",
    "verdict_reason": "expected return +6.4 points a year against the required return over 3 years; the two runs do not both reach BUY"
+  },
+  "GOLD": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-11-05T19:50:11.000Z",
+    "accepted_utc": "2026-11-06T00:50:11Z",
+    "accession": "0001193125-26-449473",
+    "decision_time": "2026-11-21T13:00:43Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 69,
+   "claims_supported": 68,
+   "date": "2026-11-21T13:00:43Z",
+   "family": "operating",
+   "flags": [
+    "The Audit Committee dismissed Grant Thornton as independent auditor and engaged KPMG for the fiscal year ending June 30, 2027. Grant Thornton's reports were not adverse or qualified, and the company reports no disagreements.",
+    "The company signed a Second Amended and Restated Credit Agreement. It converts the facility to an uncommitted revolving line payable on demand, cuts it from $427,500,000 to $250,000,000, and removes a number of caps and covenants.",
+    "CFO Cary Dickson submitted his resignation, effective September 18, 2026. Controller Jill Van became Chief Financial Officer on that date, and the press release describes his exit as a planned retirement."
+   ],
+   "in_code_book": false,
+   "interest_from_filing": {
+    "fy0": "2026-06-30",
+    "kd_tagged": 34.379746835443036,
+    "status": "cannot_tell",
+    "tagged_value": 61110000.0,
+    "version": "interest_from_filing.v1 2026-11-18 WO_NC8",
+    "why": "The tagged InterestExpense appears to be total interest expense, which per the MD&A covers lines of credit, notes payable, product financing arrangements, and borrowed-metals/precious-metals leases, so dividing it by the small notes-payable balance gives a meaningless ratio, and the fiscal 2026 evidence shown does not break out interest on borrowings alone."
+   },
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "implied borrowing cost outside the allowed range",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+   "source": "on request (operator)",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "implied borrowing cost outside the allowed range"
   },
   "GRDN": {
    "alpha_pts": null,
@@ -10114,7 +10155,7 @@
  "verdict_counts": {
   "AVOID": 51,
   "BUY": 57,
-  "NO_CALL": 102,
+  "NO_CALL": 103,
   "WATCH": 22
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
