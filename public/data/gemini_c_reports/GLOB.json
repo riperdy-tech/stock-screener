@@ -1,0 +1,1683 @@
+{
+ "alpha_pts": 6.394119896016318,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-02-27T22:04:41.000Z",
+  "accepted_utc": "2026-02-28T03:04:41Z",
+  "accession": "0001628280-26-012910",
+  "decision_time": "2026-11-21T10:31:59Z",
+  "form": "20-F",
+  "period": "2025-12-31"
+ },
+ "claims": 81,
+ "claims_supported": 80,
+ "date": "2026-11-21T10:31:59Z",
+ "decided": {
+  "flags": [
+   "run 1000: margin_outside_filed_record: op_margin.y1 0.0620 (filed 0.0700 to 0.1535)",
+   "run 1000: growth_outside_filed_record: rev_growth.y1 -0.0040 (filed 0.0162 to 0.5932)",
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 17 of 17",
+   "run 3000: margin_outside_filed_record: op_margin.y1 0.0600 (filed 0.0700 to 0.1535)",
+   "run 3000: growth_outside_filed_record: rev_growth.y1 -0.0040 (filed 0.0162 to 0.5932)",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 22 of 22"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "margin 0.0824 (persist), growth 0.0375, terminal RONIC 0.1065 (equity return r 0.1107), F 10",
+  "run_gap": 0.069534957144722,
+  "runs": {
+   "1000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": null,
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 243742000.0,
+     "excess_cash_before": 243742000.0,
+     "k0_after": 43885306.29259467,
+     "k0_before": 43885306.29259467,
+     "k0_interest": 40608000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 95514972.80568492,
+     "x0_before": 95514972.80568492
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1633998799.2698264,
+     "seam_ratio": 1.023822545615264,
+     "tv_share": 0.3383379053601926,
+     "wedge_rate_5": -0.006245240929596094
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0620 (filed 0.0700 to 0.1535)",
+     "growth_outside_filed_record: rev_growth.y1 -0.0040 (filed 0.0162 to 0.5932)",
+     "base_year_not_representative",
+     "quotes_verified: 17 of 17"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.012,
+     "fade_years": 10,
+     "long_run_op_margin": 0.09,
+     "op_margin": [
+      0.062,
+      0.078,
+      0.085,
+      0.09,
+      0.092
+     ],
+     "return_on_new_investment_long_run": 0.2,
+     "rev_growth": [
+      -0.004,
+      0.035,
+      0.055,
+      0.05,
+      0.045
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.0824 (persist), growth 0.0375, terminal RONIC 0.1065 (equity return r 0.1107), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 80
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.065,
+      0.115
+     ],
+     "rev_growth_y3": [
+      0.015,
+      0.095
+     ],
+     "terminal_growth": [
+      0.02,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0181; depreciation (without amortization of acquired intangibles) / revenue 0.0147."
+       },
+       {
+        "id": "P1",
+        "quote": "Capital expenditures related to internal development, software license acquisitions, and the development of our delivery centers are expected to remain stable or decrease in absolute terms, as we do not anticipate opening new locations and expect only limited headcount growth."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "On the FILED RECORD's property and equipment basis, capex/revenue declined from 3.30% in 2021 to 0.78% in 2025 (1.81% 5-year pooled). Holding 1.2% in years 1\u20135 aligns with 2024's 1.15% level and management's guidance that delivery-center and equipment spending will remain stable or decrease with no new office openings."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our top ten customers for the year ended December 31, 2025 have been working with us for, on average, eleven years."
+       },
+       {
+        "id": "P3",
+        "quote": "Our focus on delivering quality to our clients is reflected in the fact that existing clients from 2024 contributed 96.0% of our revenues in 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 10-year fade reflects durable enterprise client relationships (96.0% revenue from prior-year clients and 11-year average tenure among top ten accounts) and the ramp of Glob.AI subscriptions, tempered by non-exclusive short-term project contracts and rapid technological change."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $2,415.7 million | 0.1526 | 0.0933"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,454.9 million | 0.0162 | 0.0700"
+       },
+       {
+        "id": "P2",
+        "quote": "Because we conduct a substantial part of our operations through our operating subsidiaries located in Argentina, Colombia, M\u00e9xico and India, our costs are subject to wage inflation and other local market conditions in these countries, which have increased significantly in recent years."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Long-run GAAP operating margin settles at 9.0%, close to the 2021\u20132025 median of 9.49% and 2025's ex-optimization operating margin of 9.11% (reflecting the ordinary-company base rate adjusted for the one-time $52.0 million charge). Lower M&A activity should ease acquired-intangible amortization over time, balanced against persistent LatAm/India wage inflation and intense IT services pricing competition."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "IFRS Profit from Operations Margin was 3.2% compared to 1.0% in the second quarter of 2025."
+       },
+       {
+        "id": "P6",
+        "quote": "Fiscal year 2026 Non-IFRS Adjusted Profit from Operations Margin is estimated to be in the range of 13.5% to 14.5%."
+       },
+       {
+        "id": "P3",
+        "quote": "Cost related to the Business Optimization Plan was $52.0 million for the year ended December 31, 2025. The activities associated with this plan were communicated, started and substantially completed during the second quarter of fiscal year 2025."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (6.2%) reflects Q2 2026's 3.2% IFRS operating margin and full-year Non-IFRS operating margin guidance of 13.5%\u201314.5% less ~6.1% of recurring share-based compensation and acquisition-related charges plus residual 2026 optimization drag. Once restructuring concludes, operating margins recover gradually toward 9.2% by year 5, though held below 2021\u20132022 peaks (11.1%\u201311.6%) by gross margin pressure (33.9% in Q2 2026) and wage/FX headwinds."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.3397; tax rate 0.2529; total debt $473.6 million; cash counted as excess $243.7 million; net debt (debt less that cash) $229.9 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1065."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Because Globant operates an asset-light services model (most invested capital sits in goodwill and acquired intangibles rather than tangible assets), it generated a 33.97% return on tangible capital even in depressed 2025. Long-run incremental returns fade substantially toward 20.0%\u2014still comfortably above the 10.65% value-neutral hurdle\u2014as competition and working capital needs cap excess returns on organic growth."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Fiscal year 2026 Revenues are estimated to be in the range of $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year revenue growth."
+       },
+       {
+        "id": "P6",
+        "quote": "Glob.AI ARR reached $52.8 million in the second quarter, up 61% quarter-over-quarter, and we now expect no less than $110 million exiting 2026."
+       },
+       {
+        "id": "P1",
+        "quote": "We expect capital expenditures related to strategic acquisitions to decrease in absolute terms over the next twelve months."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 (-0.4%) sits at the midpoint of management's full-year 2026 revenue guidance ($2,428 million to $2,462 million) following flat first-half 2026 sales. Growth recovers modestly to 3.5%\u20135.5% in years 2\u20133 as Glob.AI ARR scales past the $110 million 2026 exit target, before moderating to 4.5% in year 5 given lower planned M&A and limited headcount additions."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1107; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "The market for technology and IT services is intensely competitive, highly fragmented and subject to rapid change and evolving industry standards and we expect competition to intensify."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Globant's global enterprise footprint and AI-enabled services support perpetual growth near nominal economic growth, set at 3.5%\u2014slightly below the 3.75% nominal anchor to account for AI-driven productivity deflation in traditional billable hours and intensifying competition."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.055,
+      "input_hit": "long_run_op_margin",
+      "risk": "Wage inflation in Argentina, Colombia, Mexico, and India and appreciation of EUR, GBP, and LatAm currencies cannot be passed through in time-and-materials rates, while cost overruns on fixed-price contracts (28.0% of 2025 revenue) and unproven AI Pod subscription pricing permanently depress margins."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Generative AI coding automation and client insourcing shrink demand for traditional time-and-materials software engineering faster than Glob.AI / AI Pods replace it, stunting long-term organic growth."
+     },
+     {
+      "bear_value": 0.11,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Loss or scope reduction at top accounts (The Walt Disney Company at 8.7% of revenue; top ten clients at 29.2% on non-exclusive short-term contracts) lowers utilization and forces competitive pricing concessions that erode returns on incremental capital."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.065,
+      "rev_growth": [
+       -0.044,
+       -0.0049999999999999975,
+       0.015,
+       0.010000000000000002,
+       0.0049999999999999975
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.115,
+      "rev_growth": [
+       0.036000000000000004,
+       0.07500000000000001,
+       0.095,
+       0.09,
+       0.08499999999999999
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Total debt including leases rose to $473.6 million in 2025 (with borrowings up from $292.5 million to $366.7 million) while management expects strategic acquisition capex to decrease and entered into Amendment No. 2 to its credit agreement in October 2026 without disclosed revised facility limits in the packet."
+     },
+     "margin_position": "Base-year 2025 GAAP operating margin of 7.00% sits well below the 5-year median of 9.49% primarily because $52.0 million (2.12% of revenue) of Business Optimization Plan severance and office-closure costs, rising intangible amortization ($121.3 million vs. $67.1 million in 2023), and gross margin compression from wage inflation and currency appreciation weighed on results.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2025 effective tax rate of 25.29% jumped from 19.7% in 2024 and 20.0% in 2023 on depressed pre-tax income ($139.1 million vs. $210.4 million in 2024), and Risk Factors warn that losing country-specific tax benefits or facing tax law changes across operating jurisdictions could materially alter future rates."
+     },
+     "why": "2025 operating margin of 7.00% was depressed by $52.0 million in one-time Business Optimization Plan charges; excluding those charges, operating margin would have been 9.11%, closer to 2024's 9.33%. Revenue growth also slowed sharply to 1.62% from 15.26% in 2024 as client IT budgets tightened and IT headcount fell 7.9% from 29,198 to 26,906. Meanwhile, property and equipment capex fell to 0.78% of revenue versus the 1.81% 5-year pooled average as office expansion paused."
+    },
+    "value_at_old_defaults": 36.95100742875992,
+    "values": {
+     "base": 45.27989407563067,
+     "bear": 30.55443596077642,
+     "bull": 70.64442342283758
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": null,
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 243742000.0,
+     "excess_cash_before": 243742000.0,
+     "k0_after": 43885306.29259467,
+     "k0_before": 43885306.29259467,
+     "k0_interest": 40608000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [],
+     "x0_after": 95514972.80568492,
+     "x0_before": 95514972.80568492
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 1767703732.2395926,
+     "seam_ratio": 1.0223189451447565,
+     "tv_share": 0.4341431796324881,
+     "wedge_rate_5": -0.007109328359399172
+    },
+    "flags": [
+     "margin_outside_filed_record: op_margin.y1 0.0600 (filed 0.0700 to 0.1535)",
+     "growth_outside_filed_record: rev_growth.y1 -0.0040 (filed 0.0162 to 0.5932)",
+     "base_year_not_representative",
+     "quotes_verified: 22 of 22"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.012,
+     "fade_years": 7,
+     "long_run_op_margin": 0.1,
+     "op_margin": [
+      0.06,
+      0.078,
+      0.088,
+      0.094,
+      0.098
+     ],
+     "return_on_new_investment_long_run": 0.18,
+     "rev_growth": [
+      -0.004,
+      0.035,
+      0.055,
+      0.055,
+      0.05
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "margin 0.0824 (persist), growth 0.0375, terminal RONIC 0.1065 (equity return r 0.1107), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 1,
+     "kept": 80
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.07,
+      0.125
+     ],
+     "rev_growth_y3": [
+      0.01,
+      0.095
+     ],
+     "terminal_growth": [
+      0.02,
+      0.045
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0181; depreciation (without amortization of acquired intangibles) / revenue 0.0147."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | 0.0078 | 0.0137"
+       },
+       {
+        "id": "P1",
+        "quote": "We expect capital expenditures related to strategic acquisitions to decrease in absolute terms over the next twelve months. Capital expenditures related to internal development, software license acquisitions, and the development of our delivery centers are expected to remain stable or decrease in absolute terms, as we do not anticipate opening new locations and expect only limited headcount growth."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "On the same PP&E basis as the filed record (where depreciation excludes intangible amortization and is 1.47% pooled), capital expenditure fell from 3.30% in 2021 to 0.78% in 2025 (1.81% pooled), and management expects internal development, software license, and delivery-center capex to remain stable or decrease with no new locations and limited headcount growth. Setting capex_to_revenue at 1.2% reflects normalized PP&E maintenance near 2024's 1.15% plus a modest net reinvestment buffer without double-counting software amortization already deducted in operating margin."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Our top ten customers for the year ended December 31, 2025 have been working with us for, on average, eleven years."
+       },
+       {
+        "id": "P3",
+        "quote": "Our focus on delivering quality to our clients is reflected in the fact that existing clients from 2024 contributed 96.0% of our revenues in 2025."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 7-year fade after Year 5 reflects a competitive, fragmented IT services market undergoing an AI delivery transition, tempered by sticky enterprise client relationships (96.0% of 2025 revenue from existing 2024 clients and an average 11-year tenure across the top ten clients) that allow gradual rather than abrupt competitive convergence."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Adjusted profit from operations margin percentage | 15.2% | 15.4% | 15.2%"
+       },
+       {
+        "id": "P6",
+        "quote": "IFRS Gross Profit Margin was 33.9% compared to 35.4% in the second quarter of 2025."
+       },
+       {
+        "id": "P2",
+        "quote": "Typically, we do not have the ability to increase our hourly rates to offset salary and other costs increases."
+       },
+       {
+        "id": "P2",
+        "quote": "Revenues from our fixed-price contracts represented 28.0%, 25.1% and 18.3% of our total revenues for the years ended December 31, 2025, 2024 and 2023, respectively."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "A long-run GAAP operating margin of 10.0% sits near Globant's 5-year median (9.49%) and slightly below its 10-year median (10.73%), consistent with Non-IFRS operating margins stabilizing near ~14.0%-14.5% (below 2023-2025's 15.2%-15.4%) less ~3.0% SBC and ~1.2% steady-state non-operating-capex intangible amortization. Wage inflation without T&M rate pass-through, higher fixed-price mix (28.0%), and gross margin compression to 33.9% in Q2 2026 prevent a full return to 2016-2022 margins of 11%-15%."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "IFRS Profit from Operations Margin was 3.2% compared to 1.0% in the second quarter of 2025."
+       },
+       {
+        "id": "P6",
+        "quote": "Fiscal year 2026 Non-IFRS Adjusted Profit from Operations Margin is estimated to be in the range of 13.5% to 14.5%."
+       },
+       {
+        "id": "P3",
+        "quote": "Share-based compensation expense - Equity settled | 77,732 | 82,770 | 72,171"
+       },
+       {
+        "id": "P3",
+        "quote": "Acquisition-related charges, net (1) | 71,818 | 63,231 | 46,993"
+       },
+       {
+        "id": "P3",
+        "quote": "The Company initiated a Business Optimization Plan in April 2025 to strategically transform its organization and operations. These costs are primarily related to employee severance and the discontinuation of physical office spaces. Cost related to the Business Optimization Plan was $52.0 million for the year ended December 31, 2025."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "FY 2026 GAAP operating margin is modeled at 6.0% given Q2 2026 IFRS operating margin of 3.2%, FY 2026 Non-IFRS operating margin guidance of 13.5%-14.5%, and the ~6% structural GAAP deduction for equity-settled SBC and acquisition-related charges plus residual first-half optimization costs. Across Years 2-5, margins recover from 7.8% to 9.8% as Business Optimization Plan savings stick, AI Pods scale, and acquired-intangible amortization rolls down with reduced M&A."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 0.3397; tax rate 0.2529; total debt $473.6 million; cash counted as excess $243.7 million; net debt (debt less that cash) $229.9 million."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1065."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Globant earned a 33.97% return on tangible capital in 2025 even with $52.0 million in optimization costs because its delivery model requires minimal tangible fixed capital beyond working capital. As organic growth requires ongoing engineering, platform, and working-capital investment in a competitive market, long-run incremental return on tangible capital should moderate to 18.0%, still well above the 10.65% zero-value hurdle."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $2,454.9 million | 0.0162 | 0.0700"
+       },
+       {
+        "id": "P6",
+        "quote": "Fiscal year 2026 Revenues are estimated to be in the range of $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year revenue growth. This expected growth includes a positive FX impact of 70 basis points."
+       },
+       {
+        "id": "P6",
+        "quote": "Glob.AI ARR reached $52.8 million in the second quarter, up 61% quarter-over-quarter, and we now expect no less than $110 million exiting 2026."
+       },
+       {
+        "id": "P2",
+        "quote": "In recent periods, we have been unable to achieve anticipated growth. Several factors, including macroeconomic conditions, clients\u2019 IT spending reductions, intense competition and the evolution of products with AI capabilities, have adversely affected, and may continue to adversely affect, clients\u2019 demand for our services. As a result, our anticipated growth has slowed and could continue to slow for an indefinite period, which could adversely affect our results of operations."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "FY 2026 guidance implies -0.4% growth at the midpoint ($2,428M-$2,462M vs. $2,454.9M in 2025), extending the slowdown from 1.62% in 2025 as client IT budgets stay cautious and acquisition capex decreases. Over Years 2-5, revenue should recover modestly toward 3.5%-5.5% as Glob.AI ARR ($52.8M in Q2 2026, guided >=$110M exiting 2026) and Europe/New Markets scale, though remaining well below the M&A-fueled 15%-59% pace of 2021-2024."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.1107; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P2",
+        "quote": "We face intense competition from technology and IT services providers, and an increase in competition, our inability to compete successfully, pricing pressures or loss of market share could materially adversely affect our revenues, results of operations and financial condition."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Terminal nominal growth of 3.5% sits just below the 3.75% nominal growth anchor, balancing secular enterprise AI and digital transformation demand against intense IT services competition, non-exclusive short-term client contracts, and potential cannibalization of billable hours by generative and agentic AI."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.06,
+      "input_hit": "long_run_op_margin",
+      "risk": "AI coding automation cannibalizes billable time-and-materials hours faster than metered AI Pods scale, while shift to fixed-price contracts (28.0%) and LatAm/India wage inflation without hourly rate pass-through permanently compress operating margins."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Loss or scope reduction at major clients on short-term non-exclusive contracts (top client The Walt Disney Company at 8.7% and top 10 at 29.2%) combined with prolonged enterprise IT budget restraint keeps growth structurally depressed."
+     },
+     {
+      "bear_value": 0.115,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Intensifying AI platform competition and EU AI Act compliance (enforceable August 2026, fines up to 7% of worldwide turnover) force higher ongoing platform/compliance investment relative to incremental profit."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "capex_to_revenue",
+      "risk": "Delivery infrastructure and proprietary AI platform capital intensity rises above recent depressed PP&E levels if AI compute, tooling, and capitalized software needs accelerate."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.07,
+      "rev_growth": [
+       -0.049,
+       -0.009999999999999995,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.125,
+      "rev_growth": [
+       0.036000000000000004,
+       0.07500000000000001,
+       0.095,
+       0.095,
+       0.09
+      ],
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Total debt of $473.6 million ($229.9 million net of cash) is modest against $2,161.6 million of total equity and $301.2 million of 2025 operating cash flow, and management expects lower acquisition spending while funding 2026 needs from operations, existing cash, and the credit facility amended in October 2026."
+     },
+     "margin_position": "2025 GAAP operating margin fell to 7.00% from 9.33% in 2024 primarily due to $51,990 thousand (2.12% of revenue) in one-time Business Optimization Plan severance and office-closure charges, alongside ongoing gross margin compression from wage inflation, non-USD currency appreciation, rising fixed-price contract mix (28.0% vs. 18.3% in 2023), and higher intangible amortization from prior acquisitions; in Q2 2026, gross margin compressed another 150 bps YoY to 33.9% and IFRS operating margin was 3.2%.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The 2025 effective tax rate jumped to 25.29% from 19.69% in 2024 and 19.95% in 2023 as pretax income fell on $52.0 million of optimization charges, and management warns of potential loss of country-specific tax benefits without guiding a normalized rate."
+     },
+     "why": "2025 revenue growth decelerated sharply to 1.62% from 15.26% in 2024 as client IT spending slowed and M&A fell, while GAAP operating income ($171,732 thousand) was depressed by $51,990 thousand of one-time Business Optimization Plan costs. Even excluding that charge (~9.11% underlying GAAP operating margin), Q2 2026 results and FY 2026 guidance show further gross margin compression (33.9% vs. 35.4% YoY) and Non-IFRS operating margin guidance stepping down to 13.5%-14.5% from 15.2% in 2025. Therefore, 2025 reflects neither a clean post-restructuring cost base nor the lower 2026 run-rate profitability."
+    },
+    "value_at_old_defaults": 36.95100742875992,
+    "values": {
+     "base": 48.54183917608134,
+     "bear": 31.14707054508515,
+     "bull": 73.94470886601339
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 36.95100742875992,
+  "value_at_old_defaults_quoted": 36.95100742875992,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
+ },
+ "equity_value": 2111223552.4966493,
+ "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 45005000.0,
+ "flags": [
+  "Globant, LLC and Globant S.A. entered into Amendment No. 2 to the Fourth Amended and Restated Credit Agreement with HSBC Bank USA, National Association and the lenders, providing commitments and consenting to Globant S.A.'s accession as an additional borrower.",
+  "Globant S.A. appointed Fernando Matzkin, previously Chief Revenue Officer, as its Chief Operating Officer.",
+  "Globant announced second-quarter and first-half financial results, reporting second-quarter revenue of $614.4 million and issuing its third-quarter and full-year financial outlook."
+ ],
+ "in_code_book": false,
+ "ke": 0.11067161541982182,
+ "market_cap_at_publish": 1797564879,
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": null,
+ "pending_offer": null,
+ "price_at_publish": 41.63,
+ "qwen_book": null,
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+ "seed_base": {
+  "1000": 45.27989407563067,
+  "3000": 48.54183917608134
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in S0 (industry classification) and P1 (Item 4 Business Overview)",
+    "claim": "Globant S.A. provides technology services and solutions in Information Technology Services, supporting organizations in their AI and digital transformation initiatives.",
+    "facts": [
+     "S0",
+     "P1"
+    ],
+    "quotes": [
+     "We provide technology services and solutions that support organizations in their AI and digital transformation initiatives, combining software engineering, innovation, design at scale capabilities and industry expertise, and are continuously evolving in parallel with technological advances."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (Cross-Functional Power at Scale)",
+    "claim": "In 2025, Globant reorganized its operating model around its Core Studios (Digital Studio, GUT Studio, and Enterprise Studio), AI Industry Studios, AI Pods, and the Globant Enterprise AI agentic platform.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "During 2025, we reorganized our operating model around four pillars:",
+     "Globant Enterprise AI is our Agentic Innovation Platform and productivity booster."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (Our Delivery Model) and P3 (Revenues by Contract type)",
+    "claim": "Globant generates revenue primarily under time-and-materials contracts at $1,638,501 (table in thousands) or 66.7% of 2025 revenues, alongside fixed-price contracts at 686,358 (table in thousands) or 28.0% and licenses, resales and others at 130,018 (table in thousands) or 5.3%.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "During 2025, we delivered our services primarily under time-and-materials contracts, which represent the substantial majority of our engagements and, to a lesser extent under fixed-price contracts.",
+     "In addition, we generate a limited portion of our revenues from the sale of technology solutions, software licenses and other contractual arrangements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Risk Factors), P3 (Revenues by Contract type), and P6 (Q2 2026 financial results)",
+    "claim": "Fixed-price contracts rose from 18.3% of revenues in 2023 to 28.0% in 2025 as time-and-materials fell from 78.9% to 66.7%, while Globant introduced AI Pods subscriptions in 2025 and opened Glob.AI in 2026 to reach $52.8 million in second-quarter ARR.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Revenues from our fixed-price contracts represented 28.0%, 25.1% and 18.3% of our total revenues for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "Last week we opened Glob.AI to the entire market, a single platform where any enterprise can deploy AI Pods and pay on the output or consumption they receive rather than on the hours behind it."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Risk Factors) and P3 (Revenues; Revenues by Client Concentration)",
+    "claim": "Globant serves medium to large-sized companies globally, with 944 customers generating over one hundred thousand U.S. dollars in 2025, existing 2024 clients contributing 96.0% of 2025 revenues, and The Walt Disney Company accounting for 8.7% of revenues.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Revenues are derived primarily from providing technology services to our clients, which are medium to large-sized companies globally.",
+     "Our focus on delivering quality to our clients is reflected in the fact that existing clients from 2024 contributed 96.0% of our revenues in 2025.",
+     "During the years ended December 31, 2025, 2024 and 2023, our largest customer based on revenues, The Walt Disney Company, accounted for 8.7% of our revenues in each such year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (Revenues by Client Location)",
+    "claim": "In 2025, Globant sourced 54.3% of its revenues from North America ($1,333,403, table in thousands), 20.1% from Latin America (492,537, table in thousands), 19.1% from Europe (469,409, table in thousands), and 6.5% from New Markets (159,528, table in thousands).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our revenues are sourced from the following four regions: North America, Latin America, Europe and New Markets.",
+     "We present our revenues by client location based on the location of the specific client site that we serve, irrespective of the location of the headquarters of the client or the location of the delivery center where the work is performed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (Revenues by Industry Vertical)",
+    "claim": "Globant's 2025 revenues were led by Banks, Financial Services and Insurance at $502,707 (table in thousands) or 20.5%, Media and Entertainment at 490,469 (table in thousands) or 20.0%, and Consumer, Retail & Manufacturing at 461,460 (table in thousands) or 18.8%, alongside Travel & Hospitality (12.8%), Professional Services (9.5%), Technology & Telecommunications (9.3%), Health Care (7.1%), and Other Verticals (2.0%).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our largest industry during 2025 was Banks, Financial Services and Insurance, fueled by increased engagement with global financial institutions and a strategic pivot toward digital banking infrastructure.",
+     "At the same time, both the Professional Services and Technology & Telecommunications verticals faced headwinds, as clients in these sectors slowed their tech spend."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (History and Development of the Company) and P3 (Factors Affecting Our Results of Operations)",
+    "claim": "Globant operates in 31 countries using an integrated global delivery platform that blends onsite client presence with decentralized delivery centers in Latin America and Asia.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Through organic growth and strategic acquisitions, we have expanded our network of locations and are now present in 31 countries.",
+     "Our integrated global delivery platform allows us to deliver our services through a blend of onsite and offsite methods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Risk Factors), P3 (Revenues), and P6 (Q2 2026 financial results)",
+    "claim": "Total revenues grew 1.6% in 2025 to $2,454,877 (table in thousands) from $2,415,689 (table in thousands) in 2024, driven by cross-selling, client penetration, and acquisitions, though macroeconomic conditions, reduced client IT spending, and competition slowed growth.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025, revenues increased by 1.6% to $2.5 billion from $2.4 billion for the year ended December 31, 2024.",
+     "Several factors, including macroeconomic conditions, clients\u2019 IT spending reductions, intense competition and the evolution of products with AI capabilities, have adversely affected, and may continue to adversely affect, clients\u2019 demand for our services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Risk Factors) and P3 (Factors Affecting Our Results of Operations; Cost of Revenues)",
+    "claim": "Cost of revenues rose 2.8% to $1,595.6 million in 2025 (65.0% of revenues, with gross profit margin at 35.0% versus 35.7% in 2024), driven primarily by IT professional salaries of $(1,370.6) (table in millions) and currency appreciation.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The principal components of our cost of revenues are salaries, professional services and share-based compensation plans (equity settled).",
+     "Salaries of our IT professionals are allocated to cost of revenues regardless of whether they are actually performing services during a given period.",
+     "The increase in salaries, employee benefits and social security taxes is primarily attributable to the appreciation of the EUR, GBP and Latin American currencies (mainly COP, PEN, CLP, MXN and BRL), as well as salary adjustments and promotion cycles."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (Risk Factors) and P3 (Factors Affecting Our Results of Operations; Business Optimization Costs)",
+    "claim": "Globant's IT professional headcount fell from 29,198 at the end of 2024 to 26,906 at the end of 2025 while total attrition rose to 13.6% from 9.5%, alongside $52.0 million in 2025 Business Optimization Plan costs for severance and office closures.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our IT professional headcount was 26,906 as of December 31, 2025, 29,198 as of December 31, 2024 and 27,116 as of December 31, 2023.",
+     "The total attrition rate among our Globers was 13.6%, 9.5% and 8.1% for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "These costs are primarily related to employee severance and the discontinuation of physical office spaces."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 (Cash Flows) and P3 (SG&A; Finance Expense)",
+    "claim": "Selling, general and administrative expenses declined 0.6% to $629.3 million in 2025 (25.6% of revenues), while intangible amortization rose to 121,250 (table in thousands) and finance expense rose to $40.6 million from higher borrowing interest.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Selling, general and administrative expense was $629.3 million for 2025, representing an decrease of $3.7 million, or 0.6%, from $633.0 million for 2024.",
+     "The decrease of salaries, employee benefits, social security taxes and share-based compensation was primarily attributable to the implementation of the Business Optimization Plan where our global workforce was reduced; partially offset by the currency appreciations of the EUR, GBP and Latin American currencies.",
+     "The increase of finance expense up to $40.6 million for the year ended December 31, 2025 from $32.2 million for the year ended December 31, 2024 was due to an increase in interest on borrowings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (Capital Expenditures) and P3 (Liquidity and Capital Resources)",
+    "claim": "Capital expenditures amounted to $89.5, $110.7 and $126.5 millions in 2025, 2024, and 2023, respectively, for internal development, software licenses, strategic acquisitions, and delivery centers, and are expected to remain stable or decrease in 2026.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Our capital expenditures for the years ended December 31, 2025, 2024 and 2023 amounted to $89.5, $110.7 and $126.5 millions, respectively.",
+     "Capital expenditures related to internal development, software license acquisitions, and the development of our delivery centers are expected to remain stable or decrease in absolute terms, as we do not anticipate opening new locations and expect only limited headcount growth.",
+     "Our primary sources of liquidity are cash flows from operating activities."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the cited items (P1 and P3 geographic revenue table)",
+    "claim": "Globant operates in 31 countries and generated 54.3% of its 2025 revenues in North America, 20.1% in Latin America, 19.1% in Europe, and 6.5% in New Markets.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Through organic growth and strategic acquisitions, we have expanded our network of locations and are now present in 31 countries.",
+     "Our revenues are sourced from the following four regions: North America, Latin America, Europe and New Markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Industry analysts recognized Globant as a Worldwide Leader in AI Services and Software Engineering Services in 2023, a Leader in Experience Design and Build Services in 2025, and the 5th strongest IT brand globally by Brand Finance.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "During 2023, we were named a Worldwide Leader in both AI Services and Software Engineering Services according to IDC MarketScape vendor assessments.",
+     "Lastly, we were recognized by Brand Finance as the Fastest Growing IT Brand and the 5th strongest IT brand globally.",
+     "Lastly, IDC MarketScape recognized us as a Leader in both Worldwide Experience Design Services and Worldwide Experience Build Services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P6",
+    "claim": "Globant holds major cloud and software partner designations and agreements, including AWS Premier Tier Partner and Managed Service Provider status, a Google Cloud Strategic Partner Agreement, Adobe Platinum Partner status, and AI collaborations with OpenAI, Anthropic, and Vercel.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Our achievements included achieving Amazon Web Services (\u201cAWS\u201d) Premier Tier Partner status within the AWS Partner Network.",
+     "We also expanded our partner ecosystem through a Strategic Partner Agreement with Google Cloud, recognition through Google Cloud Partner Awards, Adobe Platinum Partner status, and Salesforce expert-level implementation recognition.",
+     "In 2025, we introduced AI Pods, a subscription-based model designed to support enterprise AI adoption and announced a collaboration with OpenAI focused on advancing responsible AI solutions.",
+     "Supported by partnerships with Anthropic, Vercel and OpenAI, among others"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "In 2025, Globant reorganized its operating model around Core Studios, AI Industry Studios, subscription-based AI Pods, and the Globant Enterprise AI platform.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "During 2025, we reorganized our operating model around four pillars:",
+     "Our AI Pods consist of a subscription-based delivery model for AI-powered services that complements our traditional delivery approach.",
+     "Globant Enterprise AI is our Agentic Innovation Platform and productivity booster."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Glob.AI ARR reached $52.8 million in the second quarter of 2026, up 61% quarter-over-quarter, as Globant opened Glob.AI to the market for output- or consumption-based AI Pods.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Glob.AI ARR reached $52.8 million in the second quarter, up 61% quarter-over-quarter, and we now expect no less than $110 million exiting 2026.",
+     "Last week we opened Glob.AI to the entire market, a single platform where any enterprise can deploy AI Pods and pay on the output or consumption they receive rather than on the hours behind it."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Existing clients from 2024 contributed 96.0% of 2025 revenues, and clients generating over $5.0 million in annual revenues increased from 89 in 2024 to 92 in 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our focus on delivering quality to our clients is reflected in the fact that existing clients from 2024 contributed 96.0% of our revenues in 2025.",
+     "As evidence of the increase in scope of engagement within our client base, the number of clients that each accounted for over $5.0 million of our annual revenues increased (92 in 2025 and 89 in 2024)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "Globant has expanded its geographic reach, client relationships, and capabilities since 2008 through strategic acquisitions, including Exusia and Blankfactor in 2024 and Omni.Pro in 2025.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Since 2008, we have complemented our significant organic growth with strategic acquisitions.",
+     "The focus of our M&A strategy has been on enhancing relationships with key clients, expanding our technology capabilities, broadening our service offerings, and increasing the reach of our delivery centers worldwide.",
+     "We expect capital expenditures related to strategic acquisitions to decrease in absolute terms over the next twelve months."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "The Walt Disney Company accounted for 8.7% of revenues in 2025, 2024, and 2023, and Globant relies on major clients whose mostly short-term, discrete, non-exclusive contracts confer pricing leverage.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "During the years ended December 31, 2025, 2024 and 2023, our largest customer based on revenues, The Walt Disney Company, accounted for 8.7% of our revenues in each such year.",
+     "However, most of our client's contracts are limited to short-term, discrete projects without any commitment to a specific volume of business or future work, and the volume of work performed for a specific client is likely to vary from year to year, especially since we are generally not our clients' exclusive technology services provider.",
+     "In addition, our reliance on any individual client for a significant portion of our revenues may give that client a certain degree of pricing leverage against us when negotiating contracts and terms of service."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Globant faces intense competition in a fragmented market from larger global consulting and outsourcing firms, emerging-market competitors with lower cost structures, new entrants, and clients' internal development teams.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The market for technology and IT services is intensely competitive, highly fragmented and subject to rapid change and evolving industry standards and we expect competition to intensify.",
+     "We face competition primarily from large global consulting and outsourcing firms, digital agencies and design firms, traditional technology outsourcing providers, and the in-house product development departments of our clients and potential clients.",
+     "Companies based in some emerging markets also present significant price competition due to their competitive cost structures and tax advantages."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, and P6",
+    "claim": "Globant has been unable to achieve anticipated growth in recent periods, with 2025 revenue rising 1.6%, second-quarter 2026 revenue at $614.4 million remaining generally unchanged year-over-year, and 2026 revenue guided to a 1.1% decline to 0.3% growth.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "In recent periods, we have been unable to achieve anticipated growth.",
+     "Several factors, including macroeconomic conditions, clients\u2019 IT spending reductions, intense competition and the evolution of products with AI capabilities, have adversely affected, and may continue to adversely affect, clients\u2019 demand for our services.",
+     "For the year ended December 31, 2025, revenues increased by 1.6% to $2.5 billion from $2.4 billion for the year ended December 31, 2024.",
+     "Revenues were $614.4 million, remaining generally unchanged from the prior year quarter.",
+     "Fiscal year 2026 Revenues are estimated to be in the range of $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year revenue growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Rapidly evolving AI markets and the introduction of monthly, token-based, metered AI Pods subscriptions expose Globant to demand uncertainty, competitive AI offerings, and unproven market acceptance.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The markets and use cases for products with AI capabilities have been rapidly evolving, are difficult to predict and may impact demand for our products and services, pricing and margin.",
+     "These new AI Pods provide clients with access to agentic AI capabilities through monthly, token-based, metered subscriptions.",
+     "We cannot provide assurance that this subscription-based pricing model will achieve market acceptance, that client demand for our AI-powered services will develop or grow as expected, that revenues generated under this model will meet our expectations, or that any revenue growth will be sustainable or indicative of continued customer demand or broad adoption of this model."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Time-and-materials contracts generally prevent hourly rate increases to offset wage inflation in Argentina, Colombia, M\u00e9xico, and India, while fixed-price contracts rose from 18.3% of revenues in 2023 to 28.0% in 2025 as gross profit margin fell from 36.1% to 35.0%.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Typically, we do not have the ability to increase our hourly rates to offset salary and other costs increases.",
+     "Because we conduct a substantial part of our operations through our operating subsidiaries located in Argentina, Colombia, M\u00e9xico and India, our costs are subject to wage inflation and other local market conditions in these countries, which have increased significantly in recent years.",
+     "Revenues from our fixed-price contracts represented 28.0%, 25.1% and 18.3% of our total revenues for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "Gross profit margin was 35.0%, 35.7% and 36.1% for the years ended December 31, 2025, 2024 and 2023, respectively and adjusted gross profit margin was 37.9%, 38.2% and 38.1% for the years ended December 31, 2025, 2024 and 2023, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Total employee attrition rose from 8.1% in 2023 to 13.6% in 2025 and IT professional headcount fell from 29,198 in 2024 to 26,906 in 2025, with management warning the April 2025 Business Optimization Plan could increase key-talent attrition.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The total attrition rate among our Globers was 13.6%, 9.5% and 8.1% for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "Our IT professional headcount was 26,906 as of December 31, 2025, 29,198 as of December 31, 2024 and 27,116 as of December 31, 2023.",
+     "The Business Optimization Plan may increase the risk of employee attrition, particularly among key personnel, senior leadership, or employees with critical technical, industry or client-specific expertise."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "The EU AI Act, whose core transparency and high-risk provisions become enforceable in August 2026 with fines up to 7% of worldwide annual turnover, could restrict AI deployments or increase compliance costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Under the EU AI Act, non-compliant companies may be subject to administrative fines of up to 35 million Euros or 7% of a company\u2019s total worldwide annual turnover for the preceding financial year, whichever amount is higher.",
+     "The regulatory environment surrounding the impact of the implementation of AI on our products and services may adversely affect our ability to provide our services and as a result may cause harm to our reputation and financial liability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P5",
+    "claim": "Departure of senior executives or key employees with close client relationships could trigger client and know-how losses, and non-compete agreements face legal and practical enforceability limits.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Certain of our senior executives and employees maintain close relationships with our clients, and their departure could increase the risk of client losses.",
+     "Although we have entered into non-competition, non-solicitation and nondisclosure agreements with certain of our founders, senior executives and key employees, the enforceability of such agreements may be subject to legal, jurisdictional and practical limitations, and such agreements may not provide effective protection to us.",
+     "On August 20, 2026, Globant S.A. (the \u201cCompany\u201d) appointed Fernando Matzkin as its Chief Operating Officer."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in F1 consolidated statements of financial position",
+    "claim": "At year-end 2025, Globant held $ 243,742 in cash and cash equivalents, 6,594 in current investments, and 953,757 in total current assets against 580,293 in total current liabilities (table in thousands), compared with $ 142,093 in cash and cash equivalents, 838,546 in total current assets, and 507,163 in total current liabilities at year-end 2024.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 243,742 | $ 142,093",
+     "Total current assets | 953,757 | 838,546",
+     "Total current liabilities | 580,293 | 507,163"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 Capital Resources and F1 consolidated statements of financial position",
+    "claim": "Operating cash flows are Globant's primary source of liquidity, while its primary cash needs are capital expenditures, working capital to finance payroll-related liabilities between service delivery and trade receivable collection, and potential acquisitions; trade receivables were 577,673 and current payroll and social security taxes payable were 203,395 at year-end 2025 (table in thousands).",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "Our primary sources of liquidity are cash flows from operating activities.",
+     "Our primary cash needs are for capital expenditures (consisting of additions to property and equipment and to intangible assets) and working capital.",
+     "Trade receivables | 577,673 | 605,002",
+     "Payroll and social security taxes payable | 203,395 | 239,440"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 consolidated statements of financial position",
+    "claim": "At year-end 2025, Globant carried 19,666 in current borrowings, 347,040 in non-current borrowings, 28,511 in current lease liabilities, 78,428 in non-current lease liabilities, 169,605 in current other financial liabilities, and 90,499 in non-current other financial liabilities against 2,161,636 in total equity (table in thousands), compared with 1,601 in current borrowings, 290,935 in non-current borrowings, and 2,033,349 in total equity at year-end 2024.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Borrowings | 19,666 | 1,601",
+     "Borrowings | 347,040 | 290,935",
+     "Total equity | 2,161,636 | 2,033,349"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 Finance Expense, F2 income statement, and F3 cash flow statement",
+    "claim": "Finance expense increased to $40.6 million in 2025 from $32.2 million in 2024 due to higher interest on borrowings, with income-statement finance expense of (40,608) in 2025 versus (32,202) in 2024 and (23,753) in 2023 and cash interest paid of (20,762) in 2025 versus (12,196) in 2024 and (4,106) in 2023 (tables in thousands).",
+    "facts": [
+     "P3",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "The increase of finance expense up to $40.6 million for the year ended December 31, 2025 from $32.2 million for the year ended December 31, 2024 was due to an increase in interest on borrowings.",
+     "Finance expense | (40,608) | (32,202) | (23,753)",
+     "Interest paid (note 21) | (20,762) | (12,196) | (4,106)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 Amendment No. 2",
+    "claim": "Under Amendment No. 2 dated October 29, 2026 to the Fourth Amended and Restated Credit Agreement, Globant S.A. acceded as an additional borrower alongside Globant, LLC, with reaffirmed subsidiary guaranties and collateral liens that are only suspended upon obtaining an investment-grade rating from at least two of Moody's, S&P, and Fitch with a stable or better outlook and no Event of Default.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The parties acknowledge and agree that neither this Amendment nor the accession of Parent releases, limits or otherwise impairs any guarantee, Lien or other credit support provided by any Loan Party, except as expressly agreed in writing by the Administrative Agent.",
+     "\u201cCollateral Suspension Event\u201d means the Parent has obtained an Investment Grade Rating from at least two of Moody\u2019s, S&P and Fitch, in each case with a stable or better outlook, and no Event of Default has occurred and is continuing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 consolidated statements of cash flows",
+    "claim": "Globant generated 301,176 in net cash provided by operating activities in 2025 (table in thousands), up from 248,727 in 2024 and compared with 318,524 in 2023, even as net income fell to $ 103,956 in 2025 from $ 169,003 in 2024 and $ 158,508 in 2023 (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 301,176 | 248,727 | 318,524",
+     "Net income for the year | $ 103,956 | $ 169,003 | $ 158,508"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 consolidated statements of cash flows",
+    "claim": "In 2025, operating cash flow of 301,176 exceeded net income of $ 103,956 primarily due to non-cash add-backs including 121,250 of intangible amortization, 75,679 of share-based compensation, 33,668 of property and equipment depreciation, and 32,864 of right-of-use asset depreciation, while a 36,238 working-capital inflow from trade receivables was offset by (60,773) in lower payroll and social security taxes payable and (66,891) in income tax paid (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Share-based compensation expense | 75,679 | 81,796 | 72,941",
+     "Amortization of intangible assets (note 16) | 121,250 | 88,699 | 67,119",
+     "Net (decrease) increase in payroll and social security taxes payable | (60,773) | 2,042 | (37,402)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 Business Optimization Costs and Net impairment losses on financial assets",
+    "claim": "Earnings and credit quality in 2025 were also affected by $52.0 million in one-time Business Optimization Plan charges for employee severance and office closures excluded from non-IFRS results, as well as $7.6 million in expected credit loss allowances on financial assets driven by higher risk-client allowances.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Cost related to the Business Optimization Plan was $52.0 million for the year ended December 31, 2025.",
+     "During the years ended December 31, 2025 and 2024, we recorded a loss of $7.6 million and $7.0 million, respectively, related to the recognition of the allowance for expected credit losses.",
+     "The increase in the allowance for expected credit losses was driven by an increase in risk clients allowance despite the improvement in the Company's DSO."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 consolidated statements of cash flows",
+    "claim": "In 2025, net cash used in investing activities fell to (134,510) from (403,904) in 2024 as business acquisitions net of cash acquired declined to (32,931) from (278,173), while cash outflows included (19,223) for property and equipment, (70,262) for intangible assets, (56,126) for share repurchases, and (27,060) for non-controlling interest call/put options (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash used in investing activities | (134,510) | (403,904) | (350,361)",
+     "Cash outflows for intangible assets | [3] | (70,262) | (85,889) | (81,691)",
+     "Repurchase of shares | (56,126) | (10,675) | (11,523)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 Q2 2026 earnings release",
+    "claim": "In the second quarter of 2026, Globant reported free cash flow of $12.6 million compared to negative $2.9 million a year earlier, capping what management called its strongest first half of cash generation on record.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Alongside that, Globant\u2019s revenue for Q2 reached $614.4 million and free cash flow reached $12.6 million in the quarter, compared to negative $2.9 million a year ago, capping our strongest first half of cash generation on record."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 consolidated statements of financial position and F3 consolidated statements of cash flows",
+    "claim": "Near-term obligations at year-end 2025 included 19,666 in current borrowings, 28,511 in current lease liabilities, and 169,605 in current other financial liabilities (table in thousands), alongside 2025 borrowing turnover of 260,170 in borrowing proceeds and (186,198) in borrowing repayments plus (28,589) in lease principal payments (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Borrowings | 19,666 | 1,601",
+     "Proceeds from borrowings (note 21) | 260,170 | 440,662 | 395,621",
+     "Repayment of borrowings (note 21) | (186,198) | (347,348) | (271,783)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 Capital Expenditures, F1 balance sheet, P4 Amendment No. 2, and P2 Risk Factors",
+    "claim": "Management anticipates funding 2026 capital expenditures\u2014with strategic acquisition capex expected to decrease and internal development, software license, and delivery center capex expected to remain stable or decrease\u2014using operating cash flows, existing cash and cash equivalents ($ 243,742 at year-end 2025, table in thousands), and available borrowings under the Fourth A&R Credit Agreement Amendment, which was amended on October 29, 2026.",
+    "facts": [
+     "P1",
+     "F1",
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "We anticipate that our capital expenditures in 2026 will be financed through cash generated from operations, existing cash and cash equivalents, and available borrowings under the Fourth A&R Credit Agreement Amendment.",
+     "We expect capital expenditures related to strategic acquisitions to decrease in absolute terms over the next twelve months.",
+     "Further, if the equity and credit markets deteriorate, including as a result of political unrest or war, it may make any necessary debt or equity financing more difficult to obtain in a timely manner or on favorable terms, more costly or more dilutive."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited items (P1 describes the 2025 launch of AI Pods and Globant Enterprise AI; P6 reports Q2 2026 Glob.AI ARR and exit expectations).",
+    "claim": "Growth in AI-powered services and subscription-based AI Pods is a stated driver, with Glob.AI ARR reaching $52.8 million in the second quarter of 2026 (up 61% quarter-over-quarter) and management expecting no less than $110 million exiting 2026.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Glob.AI ARR reached $52.8 million in the second quarter, up 61% quarter-over-quarter, and we now expect no less than $110 million exiting 2026.",
+     "Last week we opened Glob.AI to the entire market, a single platform where any enterprise can deploy AI Pods and pay on the output or consumption they receive rather than on the hours behind it."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P2 Item 3.D Risk Factors).",
+    "claim": "For AI-powered services and AI Pods growth to continue, the subscription-based pricing model must achieve market acceptance and client demand, and Globant must compete against established rivals while complying with AI regulations such as the EU AI Act.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We cannot provide assurance that this subscription-based pricing model will achieve market acceptance, that client demand for our AI-powered services will develop or grow as expected, that revenues generated under this model will meet our expectations, or that any revenue growth will be sustainable or indicative of continued customer demand or broad adoption of this model."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P3 Item 5 revenue breakdown tables and narrative).",
+    "claim": "Expansion of engagement scope with existing clients and growth in fixed-price contracts supported revenues in 2025, with 96.0% of 2025 revenues from 2024 existing clients, clients over $5.0 million rising from 89 to 92, and fixed-price revenues increasing from 606,860 to 686,358 (table in thousands).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We have increased our revenues by expanding the scope and size of our engagements, and we have grown our key client base primarily through our business development efforts and referrals from our existing clients.",
+     "Our focus on delivering quality to our clients is reflected in the fact that existing clients from 2024 contributed 96.0% of our revenues in 2025.",
+     "As evidence of the increase in scope of engagement within our client base, the number of clients that each accounted for over $5.0 million of our annual revenues increased (92 in 2025 and 89 in 2024)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P2 Item 3.D Risk Factors).",
+    "claim": "For client expansion and fixed-price growth to continue profitably, major clients must maintain or renew short-term project work and cost, resource, and timeline assumptions on fixed-price contracts must remain accurate.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "However, most of our client's contracts are limited to short-term, discrete projects without any commitment to a specific volume of business or future work, and the volume of work performed for a specific client is likely to vary from year to year, especially since we are generally not our clients' exclusive technology services provider.",
+     "As a result, the actual resources, time and costs required may materially differ from our expectations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P3 Item 5 Industry Vertical table and narrative).",
+    "claim": "Industry vertical growth in 2025 was led by Banks, Financial Services and Insurance (rising from $443,972 to $502,707, table in thousands) and Travel & Hospitality (rising from 281,178 to 315,052, table in thousands).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our largest industry during 2025 was Banks, Financial Services and Insurance, fueled by increased engagement with global financial institutions and a strategic pivot toward digital banking infrastructure.",
+     "We observed notable momentum in the Travel & Hospitality vertical, benefiting from a sustained global recovery in corporate and leisure mobility."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items (P2 Item 3.D Risk Factors; P3 Item 5 vertical discussion).",
+    "claim": "For industry vertical expansion to continue, clients must sustain IT services budgets rather than cutting or delaying spend due to macroeconomic uncertainty, inflation, tariffs, or sector headwinds.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Several factors, including macroeconomic conditions, clients\u2019 IT spending reductions, intense competition and the evolution of products with AI capabilities, have adversely affected, and may continue to adversely affect, clients\u2019 demand for our services.",
+     "Adverse macroeconomic conditions may result in decreased or delayed spending on IT-related services by our current and prospective customers and business partners, reduced demand for or usage of our products and services, longer or delayed sales cycles, including current and prospective customers delaying contract signing or contract renewals, reduced budgets or minimum commitments related to the products that we offer, or delays in customer payments or our ability to collect accounts receivable, all of which could negatively affect our revenue and business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items (P3 Item 5 geography table and Liquidity section; P1 Item 4 Middle East expansion).",
+    "claim": "Geographic expansion outside the Americas drove growth, with Europe revenues rising from 310,114 in 2023 to 419,073 in 2024 and 469,409 in 2025, and New Markets rising from 76,630 to 117,309 to 159,528 (table in thousands), alongside opening a Middle East regional headquarters in Riyadh.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Additionally, we expanded our geographic presence by opening our Middle East regional headquarters in Riyadh and entering into a partnership with Red Sea Global."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item (P2 Item 3.D Risk Factors).",
+    "claim": "For geographic expansion to continue, Globant must mitigate unfamiliar market, operational, regulatory, tax, and currency risks across international jurisdictions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "However, as we restructure our Studios, introduce new services or enter new markets, we may face new market, technological and operational risks and challenges with which we are unfamiliar, and which we may not be able to successfully mitigate, limiting our ability to grow these services or markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items (P1 Item 4 Strategic Acquisitions and History; P6 Q2 2026 release).",
+    "claim": "Strategic acquisitions and an expanded cloud and technology partner ecosystem (including AWS, Google Cloud, Adobe, Salesforce, OpenAI, Anthropic, and Vercel) have supported capability and geographic growth.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Since 2008, we have complemented our significant organic growth with strategic acquisitions.",
+     "We strengthened our relationships with major cloud providers by entering into a Strategic Collaboration Agreement with AWS, achieving AWS Managed Service Provider designation, and obtaining multiple AWS competencies across Media and Entertainment, Financial Services and Managed Security Services.",
+     "We also expanded our partner ecosystem through a Strategic Partner Agreement with Google Cloud, recognition through Google Cloud Partner Awards, Adobe Platinum Partner status, and Salesforce expert-level implementation recognition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items (P1 Item 4 Capital Expenditures; P2 Item 3.D Risk Factors; P3 Item 5 headcount disclosure).",
+    "claim": "Because acquisition capital expenditures are expected to decrease, continuing growth depends on organic execution, recruiting and retaining skilled IT professionals, and containing workforce attrition (which rose to 13.6% in 2025 from 9.5% in 2024).",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We expect capital expenditures related to strategic acquisitions to decrease in absolute terms over the next twelve months.",
+     "Our future growth also depends on our ability to recruit, hire and train technology professionals, grow our international operations, expand our delivery capabilities, add effective sales staff and management personnel, expand service offerings, maintain existing clients and win new business.",
+     "The total attrition rate among our Globers was 13.6%, 9.5% and 8.1% for the years ended December 31, 2025, 2024 and 2023, respectively."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated directly in Form 6-K Exhibit 99.1 (Amendment No. 2).",
+    "claim": "Globant, LLC and Globant S.A. entered into Amendment No. 2 to the Fourth Amended and Restated Credit Agreement with HSBC Bank USA, National Association and the lenders, providing commitments and consenting to Globant S.A.'s accession as an additional borrower.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "WHEREAS, the Lenders have agreed to provide the Commitments set forth opposite their respective names on Schedule 2.1 to the Amended Credit Agreement, to consent to the accession of Parent as an additional Borrower and the reaffirmation by each of Globant S.A. (Spain) and Globant IT of its obligations as a Guarantor, under the Spanish Guaranty Agreement or the Globant IT Guaranty Agreement, as applicable, and to amend the Credit Agreement, in each case on the terms and subject to the conditions set forth herein;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 6-K dated August 20, 2026.",
+    "claim": "Globant S.A. appointed Fernando Matzkin, previously Chief Revenue Officer, as its Chief Operating Officer.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On August 20, 2026, Globant S.A. (the \u201cCompany\u201d) appointed Fernando Matzkin as its Chief Operating Officer.",
+     "Mr. Matzkin served as the Company\u2019s Chief Revenue Officer from July 2025 through the date of his appointment as Chief Operating Officer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 6-K Exhibit 99.1 dated August 13, 2026.",
+    "claim": "Globant announced second-quarter and first-half financial results, reporting second-quarter revenue of $614.4 million and issuing its third-quarter and full-year financial outlook.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "LUXEMBOURG / August 13, 2026 - Globant (NYSE: GLOB) today announced results for the three and six months ended June 30, 2026.",
+     "Alongside that, Globant\u2019s revenue for Q2 reached $614.4 million and free cash flow reached $12.6 million in the quarter, compared to negative $2.9 million a year ago, capping our strongest first half of cash generation on record.",
+     "Fiscal year 2026 Revenues are estimated to be in the range of $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year revenue growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly by Globant's CEO in Form 6-K Exhibit 99.1 dated August 13, 2026.",
+    "claim": "Globant opened its Glob.AI platform to the entire market so enterprises can deploy AI Pods on an output or consumption pricing basis.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Last week we opened Glob.AI to the entire market, a single platform where any enterprise can deploy AI Pods and pay on the output or consumption they receive rather than on the hours behind it."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 3.D and Item 5.",
+    "claim": "Globant initiated and substantially completed a Business Optimization Plan involving headcount reductions, employee severance, and discontinuation of physical office spaces, recording $52.0 million in related costs.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The Company initiated a Business Optimization Plan in April 2025 to strategically transform its organization and operations.",
+     "These costs are primarily related to employee severance and the discontinuation of physical office spaces.",
+     "Cost related to the Business Optimization Plan was $52.0 million for the year ended December 31, 2025.",
+     "The activities associated with this plan were communicated, started and substantially completed during the second quarter of fiscal year 2025.",
+     "In addition, in April 2025, we launched a business optimization plan (the \"Business Optimization Plan\") to strategically transform our operations, which is expected to generate cost savings for the Company, including by examining practices and efficiencies in methods of working, reduction in headcount and optimizing external spend."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant introduced AI Pods, a subscription-based model for enterprise AI adoption, and announced a collaboration with OpenAI focused on advancing responsible AI solutions.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2025, we introduced AI Pods, a subscription-based model designed to support enterprise AI adoption and announced a collaboration with OpenAI focused on advancing responsible AI solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant acquired Omni.Pro, a consultancy focused on delivering Adobe-based digital transformation services.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2025, we acquired Omni.Pro, a consultancy focused on delivering Adobe-based digital transformation services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant acquired Exusia, a U.S.-based AI-first digital transformation company specializing in AI, data engineering, cloud migration, and analytics capabilities.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2024, we acquired Exusia, an AI-first digital transformation company based in the U.S. that specializes in full lifecycle AI, data engineering, cloud migration, and analytics capabilities, including strategy, implementation, and managed services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant acquired Blankfactor, a U.S.-headquartered IT services consulting firm specializing in product engineering, data engineering, and enterprise AI solutions.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Additionally, we acquired Blankfactor, a U.S.-headquartered IT services consulting firm specialized in delivering consulting-led product engineering, data engineering, and enterprise AI solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant acquired ExperienceIT, a U.S.-based consultancy with healthcare expertise.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2023, we further expanded our North American footprint and enhanced our healthcare solutions services by acquiring ExperienceIT, a U.S.-based consultancy with deep healthcare expertise."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant acquired Pentalog, a digital transformation company delivering technology solutions across industries.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We also strengthened our presence in France and continued our European expansion with the acquisition of Pentalog, a digital transformation company that delivers high-quality technology solutions for various industries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant acquired Iteris Holding Ltda., a Brazilian-based digital transformation consultancy, and a majority stake in creative agency GUT.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Additionally, we acquired Iteris Holding Ltda., a Brazilian-based technology consultancy focused on digital transformation, and a majority stake in GUT, an independent creative agency recognized as the Independent Network of the Year at Cannes Lions 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Form 20-F Item 4.",
+    "claim": "Globant completed the acquisition of a service contract in Italy from Chili Tech, the technological division of Chili Group.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We also completed the acquisition of a service contract in Italy from Chili Tech, the technological division of Chili Group."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in 20-F Item 3.D Risk Factors (P2), 20-F Item 5 (P3), and Q2 2026 Form 6-K Exhibit 99.1 (P6).",
+    "claim": "Globant has been unable to achieve anticipated growth in recent periods and estimates fiscal year 2026 revenues at $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year growth.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "In recent periods, we have been unable to achieve anticipated growth.",
+     "Several factors, including macroeconomic conditions, clients\u2019 IT spending reductions, intense competition and the evolution of products with AI capabilities, have adversely affected, and may continue to adversely affect, clients\u2019 demand for our services.",
+     "Third quarter 2026 Revenues are estimated to be in the range of $607 million to $615 million, representing a 1.6% to 0.3% year-over-year decline.",
+     "Fiscal year 2026 Revenues are estimated to be in the range of $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year revenue growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 20-F Item 3.D Risk Factors (P2), 20-F Item 5 (P3), and Q2 2026 Form 6-K Exhibit 99.1 (P6).",
+    "claim": "Gross profit margin declined from 36.1% in 2023 to 35.0% in 2025 and 33.9% in the second quarter of 2026, while fixed-price contracts rose to 28.0% of 2025 revenues and the AI Pods subscription model remains unproven.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Typically, we do not have the ability to increase our hourly rates to offset salary and other costs increases.",
+     "We cannot provide assurance that this subscription-based pricing model will achieve market acceptance, that client demand for our AI-powered services will develop or grow as expected, that revenues generated under this model will meet our expectations, or that any revenue growth will be sustainable or indicative of continued customer demand or broad adoption of this model.",
+     "Gross profit margin was 35.0%, 35.7% and 36.1% for the years ended December 31, 2025, 2024 and 2023, respectively and adjusted gross profit margin was 37.9%, 38.2% and 38.1% for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "IFRS Gross Profit Margin was 33.9% compared to 35.4% in the second quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 20-F Item 3.D Risk Factors (P2) and 20-F Item 5 (P3).",
+    "claim": "The Walt Disney Company accounted for 8.7% of revenues and the top ten clients accounted for 29.2% of revenues in 2025, while most client contracts are short-term, discrete projects without volume commitments.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "During the years ended December 31, 2025, 2024 and 2023, our largest customer based on revenues, The Walt Disney Company, accounted for 8.7% of our revenues in each such year.",
+     "During the years ended December 31, 2025, 2024 and 2023, our ten largest clients accounted for 29.2%, 29.3% and 32.0% of our revenues, respectively.",
+     "However, most of our client's contracts are limited to short-term, discrete projects without any commitment to a specific volume of business or future work, and the volume of work performed for a specific client is likely to vary from year to year, especially since we are generally not our clients' exclusive technology services provider."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 20-F Item 3.D Risk Factors (P2), 20-F Item 5 (P3), and Form 6-K (P5).",
+    "claim": "Total attrition among Globers rose from 8.1% in 2023 and 9.5% in 2024 to 13.6% in 2025, while IT professional headcount fell from 29,198 in 2024 to 26,906 in 2025 alongside the Business Optimization Plan.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "The total attrition rate among our Globers was 13.6%, 9.5% and 8.1% for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "The Business Optimization Plan may increase the risk of employee attrition, particularly among key personnel, senior leadership, or employees with critical technical, industry or client-specific expertise.",
+     "Our IT professional headcount was 26,906 as of December 31, 2025, 29,198 as of December 31, 2024 and 27,116 as of December 31, 2023.",
+     "On August 20, 2026, Globant S.A. (the \u201cCompany\u201d) appointed Fernando Matzkin as its Chief Operating Officer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 20-F Item 3.D Risk Factors (P2) and 20-F Item 4 (P1).",
+    "claim": "The EU AI Act makes most compliance obligations enforceable in August 2026 and remaining high-risk obligations effective in August 2027, with non-compliance fines of up to 35 million Euros or 7% of total worldwide annual turnover.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Under the EU AI Act, non-compliant companies may be subject to administrative fines of up to 35 million Euros or 7% of a company\u2019s total worldwide annual turnover for the preceding financial year, whichever amount is higher.",
+     "In August 2026, the majority of the EU AI Act\u2019s provisions, including extensive transparency requirements and obligations for most high-risk systems (e.g., in critical infrastructure, law enforcement, and education) will become fully enforceable; while all remaining obligations for high-risk AI systems will take effect in August 2027, requiring comprehensive compliance across all AI use cases.",
+     "Through the Corporate Hub, we assist clients by connecting data, processes, transactions, and industry knowledge into a trusted source of memory, governance, and compliance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 20-F financial statements (F1, F3), 20-F Item 5 (P3), Form 6-K Amendment No. 2 (P4), and Q2 2026 Form 6-K (P6).",
+    "claim": "Non-current borrowings rose to 347,040 (table in thousands) and current borrowings rose to 19,666 (table in thousands) in 2025, while finance expense increased to $40.6 million in 2025 from $32.2 million in 2024 and credit-agreement obligations remain secured by liens.",
+    "facts": [
+     "F1",
+     "F3",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The increase of finance expense up to $40.6 million for the year ended December 31, 2025 from $32.2 million for the year ended December 31, 2024 was due to an increase in interest on borrowings.",
+     "During the years ended December 31, 2025 and 2024, we recorded a loss of $7.6 million and $7.0 million, respectively, related to the recognition of the allowance for expected credit losses.",
+     "The Original Borrower hereby (a) ratifies and reaffirms each of its Obligations under the Credit Agreement and the other Loan Documents, (b) ratifies and reaffirms its prior grants of Liens on the Collateral to secure the Secured Obligations and (c) confirms that such Liens continue in full force and effect after giving effect to this Amendment, in each case subject to the terms of the Amended Credit Agreement.",
+     "Alongside that, Globant\u2019s revenue for Q2 reached $614.4 million and free cash flow reached $12.6 million in the quarter, compared to negative $2.9 million a year ago, capping our strongest first half of cash generation on record."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in [P6] as management's August 13, 2026 outlook; no third quarter 2026 financial release or interim 6-K appears in the packet before decision time.",
+    "claim": "Did Globant meet its third quarter 2026 revenue estimate of $607 million to $615 million and Non-IFRS Adjusted Diluted EPS estimate of $1.43 to $1.53?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Third quarter 2026 Revenues are estimated to be in the range of $607 million to $615 million, representing a 1.6% to 0.3% year-over-year decline.",
+     "Third quarter 2026 Non-IFRS Adjusted Diluted EPS is estimated to be in the range of $1.43 to $1.53 (assuming an average of 43.2 million diluted shares outstanding during the third quarter)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6] as full-year 2026 guidance and management expectations as of August 13, 2026, prior to fiscal year-end.",
+    "claim": "Will Globant achieve its fiscal year 2026 revenue estimate of $2,428 million to $2,462 million and Glob.AI ARR of no less than $110 million exiting 2026?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Fiscal year 2026 Revenues are estimated to be in the range of $2,428 million to $2,462 million, implying a 1.1% year-over-year decline to 0.3% year-over-year revenue growth.",
+     "Glob.AI ARR reached $52.8 million in the second quarter, up 61% quarter-over-quarter, and we now expect no less than $110 million exiting 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P4] that commitments are set forth on Schedule 2.1 and in [F1] as year-end 2025 borrowings, while the body and schedules of the amended Credit Agreement are omitted from the packet.",
+    "claim": "What are the lender commitment amounts, interest terms, maturity dates, and covenants under the Credit Agreement amendment entered into in 2026 alongside existing borrowings of 19,666 current and 347,040 non-current (table in thousands)?",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "WHEREAS, the Lenders have agreed to provide the Commitments set forth opposite their respective names on Schedule 2.1 to the Amended Credit Agreement, to consent to the accession of Parent as an additional Borrower and the reaffirmation by each of Globant S.A. (Spain) and Globant IT of its obligations as a Guarantor, under the Spanish Guaranty Agreement or the Globant IT Guaranty Agreement, as applicable, and to amend the Credit Agreement, in each case on the terms and subject to the conditions set forth herein;",
+     "Borrowings | 19,666 | 1,601",
+     "Borrowings | 347,040 | 290,935"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P4] as the definition of a Collateral Suspension Event, without disclosure in the packet of whether Globant S.A. holds those ratings.",
+    "claim": "Has Globant S.A. obtained the credit ratings required to trigger a Collateral Suspension Event under the amended Credit Agreement?",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "\u201cCollateral Suspension Event\u201d means the Parent has obtained an Investment Grade Rating from at least two of Moody\u2019s, S&P and Fitch, in each case with a stable or better outlook, and no Event of Default has occurred and is continuing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6] that quantitative forward-looking reconciliations are omitted due to uncertainty over these items, while historical reconciliation items are stated in [P3].",
+    "claim": "What share-based compensation, acquisition-related charges, and business optimization costs account for the gap between IFRS Diluted EPS of $0.04 and Non-IFRS Adjusted Diluted EPS of $1.40, and between IFRS and Non-IFRS guidance for 2026?",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "\u00b7 | IFRS Diluted EPS was $0.04 compared to $(0.05) in the second quarter of 2025.",
+     "\u00b7 | Non-IFRS Adjusted Diluted EPS was $1.40 compared to $1.53 in the second quarter of 2025.",
+     "Globant is not providing a quantitative reconciliation of forward-looking Non-IFRS Adjusted Profit from Operations Margin or Non-IFRS Adjusted Diluted EPS to the most directly comparable IFRS measure because it is unable to predict with reasonable certainty the ultimate outcome of certain significant items without unreasonable effort."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] as an explicit risk regarding adoption and sustainability, alongside second quarter 2026 gross margin compression stated in [P6].",
+    "claim": "Will the AI Pods subscription and consumption-based pricing model achieve broad market acceptance and sustain revenue growth without diluting gross profit margin below 33.9%?",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "We cannot provide assurance that this subscription-based pricing model will achieve market acceptance, that client demand for our AI-powered services will develop or grow as expected, that revenues generated under this model will meet our expectations, or that any revenue growth will be sustainable or indicative of continued customer demand or broad adoption of this model.",
+     "Last week we opened Glob.AI to the entire market, a single platform where any enterprise can deploy AI Pods and pay on the output or consumption they receive rather than on the hours behind it.",
+     "\u00b7 | IFRS Gross Profit Margin was 33.9% compared to 35.4% in the second quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from comparing 2025 diluted shares in [F2] and 2025 share repurchases in [F3] against 2026 diluted share assumptions in [P6]; 2026 cash flow and share count statements are omitted from the packet.",
+    "claim": "What share repurchase volume or other equity changes reduced assumed diluted shares to 43.2 million for the third quarter of 2026 from 45,005 (table in thousands) in 2025?",
+    "facts": [
+     "F2",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Third quarter 2026 Non-IFRS Adjusted Diluted EPS is estimated to be in the range of $1.43 to $1.53 (assuming an average of 43.2 million diluted shares outstanding during the third quarter).",
+     "Diluted (in shares) | 45,005 | 44,589 | 43,594",
+     "Repurchase of shares | (56,126) | (10,675) | (11,523)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P3] for 2025, with no 2026 attrition, headcount, or litigation updates in the packet.",
+    "claim": "Have attrition rates moderated from 13.6% in 2025 and have any wrongful termination claims or recurring cost savings materialized from the Business Optimization Plan?",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The total attrition rate among our Globers was 13.6%, 9.5% and 8.1% for the years ended December 31, 2025, 2024 and 2023, respectively.",
+     "The Business Optimization Plan may increase the risk of employee attrition, particularly among key personnel, senior leadership, or employees with critical technical, industry or client-specific expertise.",
+     "In addition, as part of such optimization efforts, we may in the future face wrongful termination, discrimination or other legal claims from employees affected by ongoing changes in our workforce.",
+     "Cost related to the Business Optimization Plan was $52.0 million for the year ended December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from [F1] goodwill carrying value, [S0] market capitalization, and growth disclosures in [P2] and [P6]; financial statement footnotes are not included in the packet.",
+    "claim": "How much headroom remains in impairment testing for Goodwill of 1,601,523 (table in thousands) given slowing revenue growth and a marketCap of 1726318589?",
+    "facts": [
+     "F1",
+     "S0",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Goodwill | 1,601,523 | 1,483,443",
+     "marketCap: 1726318589",
+     "In recent periods, we have been unable to achieve anticipated growth.",
+     "Third quarter 2026 Revenues are estimated to be in the range of $607 million to $615 million, representing a 1.6% to 0.3% year-over-year decline."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] that most EU AI Act provisions become enforceable in August 2026 (prior to the November 2026 decision time), with no post-August 2026 compliance disclosure in the packet.",
+    "claim": "What compliance costs or restrictions on deploying high-risk AI systems have arisen since EU AI Act provisions became enforceable in August 2026?",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In August 2026, the majority of the EU AI Act\u2019s provisions, including extensive transparency requirements and obligations for most high-risk systems (e.g., in critical infrastructure, law enforcement, and education) will become fully enforceable; while all remaining obligations for high-risk AI systems will take effect in August 2027, requiring comprehensive compliance across all AI use cases.",
+     "There is still limited guidance on the EU AI Act, but it could, depending on how provisions are interpreted and enforced, limit the ability to create and deploy AI systems for uses deemed high-risk in the EU or add increased compliance costs associated with developing, marketing and/or implementing AI systems.",
+     "Europe | $469,409 | 19.1% | $419,073 | 17.3% | $310,114 | 14.8%"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in [P5] that Mr. Matzkin served as Chief Revenue Officer through his August 20, 2026 COO appointment, without naming a successor.",
+    "claim": "Who succeeded Fernando Matzkin as Chief Revenue Officer following his appointment as Chief Operating Officer in August 2026?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On August 20, 2026, Globant S.A. (the \u201cCompany\u201d) appointed Fernando Matzkin as its Chief Operating Officer.",
+     "Mr. Matzkin served as the Company\u2019s Chief Revenue Officer from July 2025 through the date of his appointment as Chief Operating Officer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P3] for 2025, with no 2026 client concentration update provided in the packet.",
+    "claim": "Have Globant's largest client at 8.7% of 2025 revenues and top ten clients at 29.2% of 2025 revenues maintained their spending under short-term contracts?",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "During the years ended December 31, 2025, 2024 and 2023, our largest customer based on revenues, The Walt Disney Company, accounted for 8.7% of our revenues in each such year.",
+     "During the years ended December 31, 2025, 2024 and 2023, our ten largest clients accounted for 29.2%, 29.3% and 32.0% of our revenues, respectively.",
+     "However, most of our client's contracts are limited to short-term, discrete projects without any commitment to a specific volume of business or future work, and the volume of work performed for a specific client is likely to vary from year to year, especially since we are generally not our clients' exclusive technology services provider."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "GLOB",
+ "upside": 0.1744908777207197,
+ "valuation": null,
+ "value_base": 46.910866625856,
+ "value_bear": 30.850753252930787,
+ "value_bull": 72.29456614442549,
+ "value_per_filed_share": {
+  "base": 46.910866625856,
+  "bear": 30.850753252930787,
+  "bull": 72.29456614442549
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +6.4 points a year against the required return over 3 years; the two runs do not both reach BUY"
+}
