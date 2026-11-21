@@ -1,22 +1,39 @@
 {
- "alpha_pts": -19.544704160719544,
+ "alpha_pts": -17.468971219197503,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 131,
- "claims_supported": 122,
- "date": "2026-11-16T10:39:29Z",
+ "based_on": {
+  "accepted": "2026-10-29T19:34:36.000Z",
+  "accepted_utc": "2026-10-29T23:34:36Z",
+  "accession": "0000876883-26-000033",
+  "decision_time": "2026-11-21T14:06:14Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 62,
+ "claims_supported": 59,
+ "date": "2026-11-21T14:06:14Z",
  "decided": {
   "flags": [
-   "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 11 of 12",
-   "run 3000: base_year_not_representative",
+   "run 1000: shares_unreconciled_no_eps",
+   "run 1000: quotes_verified: 9 of 10",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
+   "run 3000: tax_rate_representative_no: The FY2025 rate of 33.7% and the 265% YTD 2026 GAAP rate are distorted by non-deductible items, while the company uses a 26.5% normalized rate.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 11 of 11"
+   "run 3000: shares_unreconciled_no_eps",
+   "run 3000: quotes_verified: 7 of 7",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0672 (equity return r 0.0985), F 10",
-  "run_gap": 0.004316839640237746,
+  "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0668 (equity return r 0.0976), F 10",
+  "run_gap": 0.1935297148248701,
   "runs": {
    "1000": {
     "adjustments": {
@@ -33,7 +50,7 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "gain",
-       "what": "Bargain purchase gain in 2025, non-recurring and below operating income"
+       "what": "Bargain purchase gain (non-operating, will not recur)"
       },
       {
        "amount": 2245000.0,
@@ -47,12 +64,76 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "charge",
-       "what": "Loss on sale of business in 2025, non-recurring and below operating income"
+       "what": "Loss on sale of business (non-operating, will not recur)"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 7474000.0,
+      "excess_cash_before": 104537000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0000876883-26-000033",
+        "amount": 6347000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 6347000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0000876883-26-000033",
+        "amount": 90716000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 90716000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 97063000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2561564272.0,
+      "net_effect_on_excess_cash": -97063000.0,
+      "shares": {
+       "after": 247973313.0,
+       "before": 264523000.0,
+       "change": -16549687.0,
+       "explained_range": [
+        -17563601.161665052,
+        -4390900.290416263
+       ],
+       "interim": 247973313.0,
+       "price_used": 10.33,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 104537000.0,
+     "excess_cash_after": 7474000.0,
      "excess_cash_before": 104537000.0,
      "k0_after": 104456471.17743826,
      "k0_before": 96764471.17743826,
@@ -61,7 +142,11 @@
      "one_offs_gain": 9937000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 132590059.11455001,
      "x0_before": 137690887.53288698
@@ -70,28 +155,32 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 1214154727.7908468,
-     "seam_ratio": 0.9900953332717033,
-     "tv_share": 0.22832615589583335,
-     "wedge_rate_5": 0.0034559546790534587
+     "equity_value": 1476979987.7321222,
+     "seam_ratio": 1.006597931812372,
+     "tv_share": 0.28475955190708063,
+     "wedge_rate_5": 0.004337219848156939
     },
     "flags": [
-     "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 11 of 12"
+     "shares_unreconciled_no_eps",
+     "quotes_verified: 9 of 10",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.035,
+     "capex_to_revenue": 0.04,
      "fade_years": 10,
-     "long_run_op_margin": 0.058,
+     "long_run_op_margin": 0.07,
      "op_margin": [
-      0.046,
-      0.052,
-      0.057,
-      0.06,
-      0.062
+      0.055,
+      0.058,
+      0.062,
+      0.065,
+      0.067
      ],
-     "return_on_new_investment_long_run": 0.2,
+     "return_on_new_investment_long_run": 0.15,
      "rev_growth": [
       0.095,
       0.05,
@@ -101,22 +190,22 @@
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0672 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0668 (equity return r 0.0976), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 9,
-     "kept": 122
+     "dropped_unsupported": 3,
+     "kept": 59
     },
     "ranges": {
      "long_run_op_margin": [
-      0.045,
-      0.072
+      0.05,
+      0.085
      ],
      "rev_growth_y3": [
       0.02,
-      0.08
+      0.07
      ],
      "terminal_growth": [
-      0.025,
+      0.02,
       0.04
      ]
     },
@@ -126,24 +215,20 @@
        {
         "id": "F3",
         "quote": "Capitalized software | (75,855) | (45,315)"
-       },
-       {
-        "id": "F3",
-        "quote": "Capital expenditures | (27,405) | (26,338)"
        }
       ],
-      "quotes_given": 2,
-      "why": "The filed pooled ratio of 0.87% excludes capitalized software, which rose sharply. At 9M 2026, capitalized software of 75,855 plus capex of 27,405 is about 4.5% of revenue. I assume investment stays elevated but eases to about 3.5%."
+      "quotes_given": 1,
+      "why": "Capitalized software has risen sharply (75.9M YTD, vs 45.3M) on top of 27.4M of capex, about 4.5% of revenue combined. The filed capex ratio of about 1% alone understates the investment need."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "organic net revenue increased by $2.6 million, or 0.1%"
+        "id": "P2",
+        "quote": "barriers to entry are minimal"
        }
       ],
       "quotes_given": 1,
-      "why": "Growth and margin need time to normalize from the current acquisition and technology-led surge to a mature agency profile, so I use a medium fade of ten years."
+      "why": "A people-based, competitive industry with minimal barriers to entry means margins and growth should converge to their long-run levels over about a decade."
      },
      "long_run_op_margin": {
       "quotes": [
@@ -157,7 +242,7 @@
        }
       ],
       "quotes_given": 2,
-      "why": "The ten-year filed history ranges from 0.1% to 9.4% and recent years sit around 4.7% to 5.5%. A mix shift toward software and digital transformation supports some improvement, but low barriers to entry and competitive discounting limit it. I use a modest premium to the history, consistent with partial persistence of the gap."
+      "why": "Historical GAAP margins ranged from 0.1% to 9.4% with a median near 4-5%. A mix shift toward software and digital transformation supports about 7%, but low barriers to entry and price competition cap it."
      },
      "op_margin": {
       "quotes": [
@@ -171,68 +256,59 @@
        }
       ],
       "quotes_given": 2,
-      "why": "GAAP operating income fell to 69,247 for 9M against 102,370, while raised Adjusted EBITDA guidance implies a stronger Q4. I estimate about 4.6% for FY2026. Margins then recover gradually as technology revenue scales and Q3 shows 25% Adjusted EBITDA growth, but D&A, stock compensation and AI spend keep GAAP margins well below adjusted ones."
+      "why": "YTD GAAP operating margin is about 3% (69.2M on 2,306M), but Q4 is the seasonal peak, and guidance of $490-540M adjusted EBITDA implies a strong Q4. I assume about 5.5% for 2026, then gradual gains as the technology mix grows and software investment is absorbed."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0668."
        }
       ],
-      "quotes_given": 2,
-      "why": "The business is asset-light and tangible capital is tiny, so the filed return is extreme, but growth has historically come from paid acquisitions and capitalized software, which dilutes returns. I assume a good but far lower return, well above the 6.72% break-even."
+      "quotes_given": 1,
+      "why": "The business is asset-light, but growth relies on acquisitions and capitalized software, so returns on new capital should be well above the 6.7% breakeven but far below the 100% shown for tangible capital."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Q3 Revenue of $816 million, an increase of 10% versus the prior year period"
-       },
-       {
-        "id": "P6",
-        "quote": "TOTAL NET REVENUE GROWTH8% - 12%"
+        "quote": "Reiterate Total Net Revenue growth of 8% to 12%"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 is 2026, where 9M revenue is up about 10% and net revenue guidance is 8% to 12%. I assume about 9.5% for the year including the strong Q4 and acquisitions. Growth slows to about 5% in 2027 as even-year advocacy revenue reverses, then fades toward 4% as the Digital Transformation and Marketing Cloud surge normalizes."
+      "why": "2026 revenue is up about 10% YTD, helped by election-year advocacy work, Digital Transformation, The Marketing Cloud and acquisitions, and guidance is 8-12% net revenue growth. I assume 2026 lands near 9.5%, then growth slows to about 5% in 2027 as Communications loses its political lift while Marketing Services keeps shrinking."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Cost of equity r 0.0976; long-run nominal growth anchor g_anchor 0.0375."
        }
       ],
       "quotes_given": 1,
-      "why": "A mature, competitive, cyclical agency business should grow roughly with nominal GDP, a bit below the anchor given industry fragmentation and the AI disruption risk to services."
+      "why": "A mature, cyclical agency business with AI disruption risk should grow somewhat below the long-run nominal anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.045,
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Legacy Marketing Services and Media & Commerce keep shrinking, post-election Communications falls, and growth stalls"
+     },
+     {
+      "bear_value": 0.05,
       "input_hit": "long_run_op_margin",
-      "risk": "Revenue growth does not convert to profit: office and general costs, AI/software spend and stock compensation keep GAAP margins near 3% to 4%"
+      "risk": "GAAP margins stay compressed by amortization, earn-outs, software costs and AI-driven price pressure"
      },
      {
       "bear_value": 0.02,
-      "input_hit": "rev_growth",
-      "risk": "Technology and Digital Transformation momentum fades, Marketing Services keeps shrinking and odd-year political revenue falls away, so growth reverts toward the 2025 organic rate"
-     },
-     {
-      "bear_value": 0.045,
-      "input_hit": "capex_to_revenue",
-      "risk": "Capitalized software and capex stay near 4.5% of revenue without matching returns"
-     },
-     {
-      "bear_value": 0.022,
       "input_hit": "terminal_growth",
-      "risk": "Competitive pressure and AI disruption of services lower long-run growth"
+      "risk": "AI disruption erodes agency fee pools in the long run"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.045,
+      "long_run_op_margin": 0.05,
       "rev_growth": [
        0.065,
        0.02,
@@ -240,39 +316,39 @@
        0.014999999999999996,
        0.009999999999999998
       ],
-      "terminal_growth": 0.025
+      "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.072,
+      "long_run_op_margin": 0.085,
       "rev_growth": [
-       0.125,
-       0.08,
-       0.08,
-       0.075,
-       0.07
+       0.115,
+       0.07,
+       0.07,
+       0.065,
+       0.060000000000000005
       ],
       "terminal_growth": 0.04
      }
     },
     "situation": {
-     "base_year_representative": "no",
+     "base_year_representative": "unclear",
      "cyclical": "yes",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "Management reports net leverage of 2.7x and falling as EBITDA grows, with debt used for buybacks and acquisitions at a roughly stable multiple of earnings."
+      "why": "Debt of $1.33B (about $1.41B at September 2026) is roughly 2.7x net leverage on adjusted EBITDA and has been a stable revolver-based level, though it is rising slightly with buybacks and acquisitions."
      },
-     "margin_position": "The 2025 GAAP operating margin of 5.47% is near the company's own range (3% to 9% over ten years). Margins are held down by heavy D&A on acquired intangibles, stock compensation, earn-out remeasurement and rising technology/AI spend. In 2026 the nine-month margin fell to about 3% even as Adjusted EBITDA rose. Cyclicality comes from client marketing budgets and the even-year political cycle in Communications.",
+     "margin_position": "The GAAP operating margin (5.5% in 2025) sits well below the adjusted margin because large amortization of acquired intangibles, stock-based pay and earn-out charges are deducted. The 2025 margin is also a post-election-year figure: Communications fell sharply that year. Even-year 2026 political work lifts revenue, but 2026 YTD GAAP margin is only about 3%, because office and general costs and earn-out charges rose.",
      "tax_rate_representative": {
       "answer": "unclear",
-      "why": "The 9M 2026 tax expense of 7,646 on pretax income of 2,882 shows a rate distorted by small pretax income and non-deductible items, so the record's 33.7% may not persist."
+      "why": "The filed rate of 33.7% differs from the 26.5% normalized non-GAAP rate and from GAAP rates that swing widely (265.3% YTD 2026), so the sustainable rate is uncertain."
      },
-     "why": "2025 organic net revenue grew only 0.1% and acquisitions drove most growth. 2026 is running well above it, with 9M revenue up about 10% and guidance raised. The base year also contains a bargain purchase gain and a loss on sale of a business that sit below operating income. Odd-year political weakness in Communications will reverse part of the 2026 boost in year 2."
+     "why": "2025 was an off-election year with Communications net revenue down 16.5% organically, and it included a bargain purchase gain. 2026 revenue is running about 10% higher on election work, technology growth and acquisitions. Neither year is clean, so I blend them and expect 2027 growth to slow after the election."
     },
-    "value_at_old_defaults": 4.726637356888023,
+    "value_at_old_defaults": 4.754849655100859,
     "values": {
-     "base": 5.379066969842769,
-     "bear": 3.9513105735153804,
-     "bull": 8.072999281158587
+     "base": 6.501447823082197,
+     "bear": 4.2814605446305185,
+     "bull": 9.293392849000886
     }
    },
    "3000": {
@@ -290,7 +366,7 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "gain",
-       "what": "Bargain purchase gain in 2025, non-operating and non-recurring"
+       "what": "FY2025 bargain purchase gain, non-operating, not recurring"
       },
       {
        "amount": 2245000.0,
@@ -304,12 +380,76 @@
        "quotes_given": 1,
        "scale": "thousands",
        "sign": "charge",
-       "what": "Loss on sale of business in 2025, non-operating and non-recurring"
+       "what": "FY2025 loss on sale of business, non-operating, not recurring"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 7474000.0,
+      "excess_cash_before": 104537000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0000876883-26-000033",
+        "amount": 6347000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 6347000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0000876883-26-000033",
+        "amount": 90716000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 90716000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 97063000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2561564272.0,
+      "net_effect_on_excess_cash": -97063000.0,
+      "shares": {
+       "after": 247973313.0,
+       "before": 264523000.0,
+       "change": -16549687.0,
+       "explained_range": [
+        -17563601.161665052,
+        -4390900.290416263
+       ],
+       "interim": 247973313.0,
+       "price_used": 10.33,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 104537000.0,
+     "excess_cash_after": 7474000.0,
      "excess_cash_before": 104537000.0,
      "k0_after": 104456471.17743826,
      "k0_before": 96764471.17743826,
@@ -318,7 +458,11 @@
      "one_offs_gain": 9937000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 132590059.11455001,
      "x0_before": 137690887.53288698
@@ -327,45 +471,50 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 1219823879.04027,
-     "seam_ratio": 1.0000640553214983,
-     "tv_share": 0.24727495153773793,
-     "wedge_rate_5": 0.003487776494940666
+     "equity_value": 1215145537.6271992,
+     "seam_ratio": 0.9940429423004806,
+     "tv_share": 0.2418646696012528,
+     "wedge_rate_5": 0.0032235792821449028
     },
     "flags": [
-     "base_year_not_representative",
+     "tax_rate_representative_no: The FY2025 rate of 33.7% and the 265% YTD 2026 GAAP rate are distorted by non-deductible items, while the company uses a 26.5% normalized rate.",
      "confidence_low",
-     "quotes_verified: 11 of 11"
+     "shares_unreconciled_no_eps",
+     "quotes_verified: 7 of 7",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
      "capex_to_revenue": 0.035,
      "fade_years": 10,
      "long_run_op_margin": 0.06,
      "op_margin": [
-      0.049,
-      0.053,
+      0.047,
+      0.05,
       0.055,
-      0.057,
-      0.058
+      0.058,
+      0.06
      ],
-     "return_on_new_investment_long_run": 0.2,
+     "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
       0.09,
+      0.03,
       0.06,
       0.05,
-      0.04,
-      0.04
+      0.045
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0672 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0975 and margin 0.0300, margin 0.0507 (persist), growth 0.0375, terminal RONIC 0.0668 (equity return r 0.0976), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 9,
-     "kept": 122
+     "dropped_unsupported": 3,
+     "kept": 59
     },
     "ranges": {
      "long_run_op_margin": [
-      0.045,
+      0.05,
       0.075
      ],
      "rev_growth_y3": [
@@ -383,14 +532,10 @@
        {
         "id": "F3",
         "quote": "Capitalized software | (75,855) | (45,315)"
-       },
-       {
-        "id": "F3",
-        "quote": "Capital expenditures | (27,405) | (26,338)"
        }
       ],
-      "quotes_given": 2,
-      "why": "Capitalized software plus capital expenditures were about 4.5% of nine-month revenue, well above the pooled 0.87%. I assume spending stays elevated at about 3.5% as the software push continues."
+      "quotes_given": 1,
+      "why": "Capitalized software has stepped up sharply, from $45M to $76M over nine months, on top of ordinary capex of $27M, so total investment is about 4.5% of revenue. I assume it eases to 3.5%."
      },
      "fade_years": {
       "quotes": [
@@ -400,59 +545,47 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A fragmented industry with minimal barriers to entry and a business mix still shifting toward software suggests a gradual convergence of growth and margin over about ten years."
+      "why": "Competitive advantage from AI and software products is unproven against the larger holding companies, so growth and margins converge to maturity over about ten years."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
         "quote": "2025-12-31 | $2,909.0 million | 0.0239 | 0.0547"
-       },
-       {
-        "id": "P1",
-        "quote": "Stagwell operates in a highly competitive and fragmented industry"
        }
       ],
-      "quotes_given": 2,
-      "why": "The 10-year median is about 5%; I put the long-run level somewhat above it because of a growing share of software and Digital Transformation, but intense agency competition limits upside."
+      "quotes_given": 1,
+      "why": "The FY2025 margin of 5.5% was the highest in five years, and the 10-year median is about 4%. I fade toward 6%, since software mix helps but price competition and wage inflation cap it."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "F2",
-        "quote": "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370"
-       },
-       {
         "id": "P6",
-        "quote": "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million"
+        "quote": "Raise Adjusted EBITDA to $490 million to $540 million"
        }
       ],
-      "quotes_given": 2,
-      "why": "GAAP operating income fell in 2026 year to date despite revenue growth, so year 1 is about 5% after a strong fourth quarter. Margin then recovers as the guided Adjusted EBITDA increase and operating leverage flow through, but heavy stock compensation, D&A and software spending cap the recovery."
+      "quotes_given": 1,
+      "why": "Guided adjusted EBITDA of $490-540M implies a Q4 EBITDA of about $170M, but D&A, stock-based pay and earn-out charges keep the GAAP margin near 4.7% for 2026. It then recovers gradually as the software mix and cost control improve."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0668."
        }
       ],
       "quotes_given": 1,
-      "why": "The business is asset-light, with people as the main asset, so returns on new tangible capital are high. Competition and acquisition-driven investment pull them well below the filed 1.0 return on tangible capital, but above the 6.7% breakeven."
+      "why": "The business is asset-light with a tiny tangible capital base, but growth depends on acquisitions and capitalized software. I assume a return modestly above the 6.7% break-even."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Q3 YoY Revenue Growth of 10% to $816 million"
-       },
-       {
-        "id": "P6",
-        "quote": "TOTAL NET REVENUE GROWTH8% - 12%"
+        "quote": "Reiterate Total Net Revenue growth of 8% to 12%"
        }
       ],
-      "quotes_given": 2,
-      "why": "2026 revenue is growing about 10% with a guided net revenue growth of 8-12%, so year 1 is high. Growth then slows as acquisitions slow, the election-year Communications lift reverses in 2027 and Marketing Services shrinks. Technology and Digital Transformation growth keeps it above the 2025 level."
+      "quotes_given": 1,
+      "why": "2026 growth of about 9% reflects YTD revenue up 10% and guided net revenue growth of 8-12%, helped by election-year Communications work. In 2027 that political work fades, so I assume about 3%, then growth recovers to 4.5-6% on technology and digital transformation work, partly offset by shrinking Marketing Services."
      },
      "terminal_growth": {
       "quotes": [
@@ -462,173 +595,125 @@
        }
       ],
       "quotes_given": 1,
-      "why": "A mature, cyclical, competitive marketing services business with some technology growth should grow a little below the nominal anchor."
+      "why": "A fragmented, competitive agency industry argues for terminal growth slightly below the nominal growth anchor."
      }
     },
     "risks": [
      {
       "bear_value": 0.02,
       "input_hit": "rev_growth",
-      "risk": "Growth in Digital Transformation and The Marketing Cloud fades while Marketing Services keeps shrinking and Communications reverses after the election year"
+      "risk": "Marketing Services and Media & Commerce keep shrinking and the post-election Communications drop is deeper than assumed, so growth stays weak"
      },
      {
       "bear_value": 0.045,
       "input_hit": "long_run_op_margin",
-      "risk": "Revenue growth does not convert to GAAP operating profit because office and general costs, stock compensation and software investment keep rising"
+      "risk": "Cost growth in office and general expenses, earn-outs and stock-based pay keeps outpacing revenue, so GAAP margin does not expand"
      },
      {
-      "bear_value": 0.045,
-      "input_hit": "capex_to_revenue",
-      "risk": "Heavy capitalized software spending persists without matching returns"
-     },
-     {
-      "bear_value": 0.1,
+      "bear_value": 0.07,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Leverage, earn-outs and the tax receivable agreement absorb cash, and acquisitions deliver low returns on new investment"
+      "risk": "Capitalized software and acquisitions need to stay high without earning a return above break-even"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.045,
+      "long_run_op_margin": 0.05,
       "rev_growth": [
-       0.06,
-       0.029999999999999995,
-       0.02,
-       0.009999999999999998,
-       0.009999999999999998
+       0.05,
+       -0.009999999999999995,
+       0.020000000000000004,
+       0.010000000000000009,
+       0.0050000000000000044
       ],
       "terminal_growth": 0.025
      },
      "bull": {
       "long_run_op_margin": 0.075,
       "rev_growth": [
-       0.12,
-       0.09,
+       0.11,
+       0.05,
        0.08,
        0.07,
-       0.07
+       0.065
       ],
       "terminal_growth": 0.04
      }
     },
     "situation": {
-     "base_year_representative": "no",
+     "base_year_representative": "unclear",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Debt of about $1.3-1.4 billion is roughly 2.7x net leverage per management and is rising via the revolver, while acquisitions and buybacks continue."
+      "answer": "yes",
+      "why": "Debt of about $1.4B is roughly 2.7x net leverage and was funded alongside buybacks and acquisitions, so it should stay at that level relative to size."
      },
-     "margin_position": "GAAP operating margin was 5.47% in 2025, roughly at the 10-year median of about 5.1%. It is only about 3% in 2026 year to date (nine-month operating income 69,247 on revenue of 2,306,477) because office and general costs, stock compensation and earn-out remeasurement are rising faster than revenue. Fourth-quarter seasonality should lift the full-year figure to about 5%. Adjusted EBITDA is guided up sharply, so a gradual recovery in GAAP margin is plausible if the software and Digital Transformation mix scales.",
+     "margin_position": "The FY2025 GAAP operating margin of 5.5% sits above the 10-year median of roughly 4%. It is still far below the adjusted EBITDA margin because of heavy amortization of acquired intangibles, stock-based pay, earn-out charges and restructuring. In 2026 the nine-month GAAP margin is only about 3%, even though adjusted EBITDA rose 17%, because those below-the-line items grew faster.",
      "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The 2025 rate of 33.7% and the odd 2026 nine-month tax charge of 7,646 on pretax income of 2,882 suggest nondeductible items and a tax rate that is not clean."
+      "answer": "no",
+      "why": "The FY2025 rate of 33.7% and the 265% YTD 2026 GAAP rate are distorted by non-deductible items, while the company uses a 26.5% normalized rate."
      },
-     "why": "2025 organic net revenue grew only 0.1%, and net acquisitions added 120,463 of the 131,009 net revenue increase. The 2025 pretax income included a bargain purchase gain and a loss on a sale of business. 2026 growth is much faster (nine-month revenue up 10%), driven by Digital Transformation and The Marketing Cloud, and is helped by election-year Communications revenue that should reverse in 2027. 2026 GAAP margin is lower than 2025 despite revenue growth."
+     "why": "FY2025 was a non-election year with Communications down organically by 16.5%, and it held a $9.9M bargain purchase gain below operating income. FY2026 is an election year with 9% YTD revenue growth and raised EBITDA guidance, so it is not a clean base either. I model a political step-down in year 2, then growth driven by Digital Transformation and The Marketing Cloud against shrinking Marketing Services."
     },
-    "value_at_old_defaults": 4.726637356888023,
+    "value_at_old_defaults": 4.754849655100859,
     "values": {
-     "base": 5.402337767516609,
-     "bear": 3.852648298664178,
-     "bull": 8.249349208497499
+     "base": 5.354234421188231,
+     "bear": 3.8618607895747283,
+     "bull": 7.743714357500667
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 4.726637356888023,
-  "value_at_old_defaults_quoted": 4.726637356888023,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 4.754849655100859,
+  "value_at_old_defaults_quoted": 4.754849655100859,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 1425964762.6702573,
+ "equity_value": 1469946401.9935067,
  "family": "operating",
  "far_from_price": false,
- "filed_shares": 264523000.0,
+ "filed_shares": 247973313.0,
  "flags": [
-  "Stagwell acquired Freestar (Publisher First, Inc.) for $50.0 million, of which $30.0 million was paid in 3,442,043 shares of Class A Common Stock and $20.0 million in cash, with up to $60.0 million more in contingent consideration.",
-  "Stagwell raised its full-year 2026 Adjusted EBITDA guidance to $490 million to $540 million and its Adjusted EPS guidance to $1.07 to $1.21.",
-  "Stagwell announced the largest multi-agency deal in its history, with ServiceNow, along with a first major federal government win and an expanded Palantir partnership."
+  "Stagwell acquired all of the stock of Publisher First, Inc. (Freestar) for $50.0 million, made up of $30.0 million in Class A shares and $20.0 million in cash. The 10-Q says the purchase price allocation is still being evaluated.",
+  "In its Q3 2026 earnings release, Stagwell raised full-year Adjusted EBITDA guidance to $490 million to $540 million. It also raised Adjusted EPS guidance to $1.07 - $1.21.",
+  "The Board authorized an extension and a $350.0 million increase to the share repurchase program. The program now allows repurchases of up to an aggregate $725.0 million of Class A shares."
  ],
  "in_code_book": false,
- "ke": 0.09846177079828694,
+ "ke": 0.09762980557808662,
  "market_cap_at_publish": 2549165502,
- "model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 10.28,
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+ "release_truncated": [
+  "0000876883-26-000030"
+ ],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 5.379066969842769,
-  "3000": 5.402337767516609
+  "1000": 6.501447823082197,
+  "3000": 5.354234421188231
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1",
-    "claim": "Stagwell sells marketing services and technology to marketers in five areas: Marketing Services, Digital Transformation, Media & Commerce, Communications (including Advocacy), and SaaS/DaaS tools in The Marketing Cloud.",
+    "basis": "Stated in the 10-K Item 1 text.",
+    "claim": "Stagwell sells marketing and technology services (marketing services, digital transformation, media and commerce, communications including advocacy, and SaaS/DaaS tools) to more than 4,500 clients across over 34 countries.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Stagwell offers the capabilities marketers need in the digital age: Marketing Services, Digital Transformation, Media & Commerce, Communications (which includes Advocacy services), and \u201csoftware as a service\u201d (\u201cSaaS\u201d) and \u201cdata as a service\u201d (\u201cDaaS\u201d) technology tools within The Marketing Cloud."
+     "Stagwell offers the capabilities marketers need in the digital age: Marketing Services, Digital Transformation, Media & Commerce, Communications (which includes Advocacy services), and \u201csoftware as a service\u201d (\u201cSaaS\u201d) and \u201cdata as a service\u201d (\u201cDaaS\u201d) technology tools within The Marketing Cloud.",
+     "to drive effectiveness and improve business results for our more than 4,500 clients as of December 31, 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "The customer base is more than 4,500 clients served by specialists in over 34 countries, and most of it is large multinational companies.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Led by entrepreneurs, our specialists in over 34 countries have a unified purpose: to drive effectiveness and improve business results for our more than 4,500 clients as of December 31, 2025.",
-     "To date, these solutions appear more geared towards addressing the needs of small and medium size businesses, rather than the large, multi-national companies that form the majority of Stagwell\u2019s customer base."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P2",
-    "claim": "Agency work is billed as fees, and the company competes for large contracts, including multi-region contracts with annual fees above $10 million.",
+    "basis": "Segment list stated in P1; segment revenue read from the schedule in P6.",
+    "claim": "Revenue is reported in five segments. For the nine months to September 2026, revenue was 786,650 in Marketing Services, 349,756 in Digital Transformation, 534,561 in Media & Commerce, 552,767 in Communications and 110,963 in The Marketing Cloud, against total revenue of 2,306,477 (table in thousands).",
     "facts": [
      "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our increasing global scale allows us to compete for many of the largest marketing contracts available, including multi-region contracts with annual fees in excess of $10 million.",
-     "Certain of our Brands often enter into contractual commitments with media providers and production companies and incur expenses on behalf of our clients for productions and in order to secure a variety of media time and space, in exchange for which they receive a fee."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The Marketing Cloud segment sells SaaS and DaaS technology directly to in-house marketers, alongside the service businesses.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The Marketing Cloud segment delivers a comprehensive suite of technology solutions for in-house marketers, combining SaaS and DaaS offerings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The company operates through owned agency Brands, almost all of them wholly owned and the rest majority owned, with Brand management holding the remaining equity.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Stagwell holds a 100% ownership position in substantially all of its Brands, and the remainder are majority owned with management of the Brands owning the remaining equity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P4",
-    "claim": "The company reports five operating and reportable segments: Marketing Services, Digital Transformation, Media & Commerce, Communications and The Marketing Cloud.",
-    "facts": [
-     "P1",
-     "P4"
+     "P6"
     ],
     "quotes": [
      "The Company brings itself to market and organizes its Brands into five reportable segments: \u201cMarketing Services,\u201d \u201cDigital Transformation,\u201d \u201cMedia & Commerce,\u201d \u201cCommunications,\u201d and \u201cThe Marketing Cloud.\u201d"
@@ -636,19 +721,23 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3 segment revenue table",
-    "claim": "In 2025, segment revenue (table in thousands) was Marketing Services $1,134,821, Media & Commerce 690,675, Communications 592,577, Digital Transformation 393,499 and The Marketing Cloud 106,537, for total revenue of $2,909,000.",
+    "basis": "Segment description stated in P1; EBITDA figures read from P6 schedules 5 and 7; the mechanism is partly inferred from P3.",
+    "claim": "The Marketing Cloud segment sells SaaS and DaaS technology to in-house marketers. Its nine-month Adjusted EBITDA was 17,378, compared with (4,618) a year earlier (table in thousands).",
     "facts": [
-     "P3"
+     "P1",
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "The Marketing Cloud segment delivers a comprehensive suite of technology solutions for in-house marketers, combining SaaS and DaaS offerings."
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "Management tracks net revenue, which is revenue excluding billable costs. In 2025, net revenue was $2,427,671 and billable costs were 481,329 (table in thousands).",
+    "basis": "The definition is stated in P4; the figures are from the P6 Schedule 4 segment table; the pass-through mechanism is inferred from the P2 discussion of media buying and production costs.",
+    "claim": "Reported revenue includes pass-through billable costs; management focuses on net revenue, which excludes them. In Q3 2026, revenue of 816,027 less billable costs of 152,010 gave net revenue of 664,017 (table in thousands). Billable costs were heaviest in Communications, at 87,229 of its 210,913 revenue.",
     "facts": [
-     "P3"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "\u201cNet revenue\u201d refers to revenue excluding billable costs."
@@ -656,546 +745,295 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P6",
-    "claim": "In the third quarter of 2026, revenue was $816 million and net revenue was $664 million.",
+    "basis": "Stated in P4 and P2.",
+    "claim": "Management names client wins and losses as a main revenue driver. It cites clients' decisions to change agencies and demand for the Brands' digital and data-driven products as the two most significant factors.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We believe the two most significant factors are (i) our clients\u2019 desire to change marketing communication firms, and (ii) the digital and data-driven products that our portfolio of marketing services firms, which we refer to as \u201cBrands,\u201d offer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Read from the P6 Schedule 2 table; the interpretation is inferred.",
+    "claim": "Growth differs sharply by segment. In Q3 2026, organic net revenue rose 23.1% in Digital Transformation, 108.4% in The Marketing Cloud and 20.0% in Communications, but fell (7.5)% in Marketing Services and (2.1)% in Media & Commerce. Total organic net revenue growth was 7.4%.",
     "facts": [
      "P6"
     ],
-    "quotes": [
-     "Q3 YoY Revenue Growth of 10% to $816 million; Q3 YoY Net Revenue Growth of 8% to $664 million"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 geographic table and P2",
-    "claim": "Revenue is concentrated in the United States. In 2025, US net revenue was $1,874,216 of $2,427,671 (table in thousands), and operations outside the United States were about 23% of revenue.",
+    "basis": "Stated in P2, P3 and P4; the figures are from P3 and P6.",
+    "claim": "Revenue is seasonal and election-driven. The fourth quarter is usually the highest revenue quarter, and the advocacy Brands in Communications are cyclical. Communications organic net revenue fell (16.5)% in FY2025 after the election year, then grew 20.0% organically in Q3 2026.",
     "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Operations outside the United States represent a significant portion of our revenues and represented approximately 23% of our revenues in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Revenue is moderately concentrated: the top ten clients were about 18% of 2025 revenue, and no single customer exceeded 4%.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In the aggregate, our top ten clients based on revenue accounted for approximately 18% of our revenue for the year ended December 31, 2025.",
-     "No customer represented more than 4% of total revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Demand depends on client marketing budgets, which move with macroeconomic conditions.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Advertising, marketing and communications expenditures are sensitive to global, national and regional macroeconomic conditions, including inflationary pressures, currency fluctuations, geopolitical uncertainty and elevated interest rates, as well as specific budgeting levels and buying patterns."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3/P4 and P6",
-    "claim": "Revenue moves with client wins and losses. Management names two main factors: clients' desire to change firms, and the Brands' digital and data products. The company reported net new business of $168 million in the third quarter of 2026.",
-    "facts": [
+     "P2",
      "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "We believe the two most significant factors are (i) our clients\u2019 desire to change marketing communication firms, and (ii) the digital and data-driven products that our portfolio of marketing services firms, which we refer to as \u201cBrands,\u201d offer.",
-     "Net New Business of $168 million in Q3; LTM Net New Business of $586 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P4",
-    "claim": "Revenue is seasonal. The fourth quarter is typically the highest, and political advertising lifts revenue in election cycles, most in even years.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
      "Historically, we typically generate the highest quarterly revenue during the fourth quarter of each year.",
-     "Political advertising and related activity have also historically caused our revenue to increase during election cycles, which is most pronounced in even years, in particular during the third and fourth quarters of such years, and to decrease during other periods."
+     "primarily reflecting lower Advocacy revenue due to political seasonality following the 2024 presidential election cycle"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "The political cycle mainly hits Communications. In 2025, that segment's organic net revenue fell (16.5)%, which management attributed mainly to lower Advocacy revenue after the presidential election cycle.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "These increases were partially offset by a decrease in the Communications segment, primarily reflecting lower Advocacy revenue due to political seasonality following the 2024 presidential election cycle, as well as more measured client spending and timing of project activity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 net revenue bridge",
-    "claim": "Acquisitions are a major source of revenue growth. In 2025, net acquisitions added $120,463 to the net revenue change while organic growth added $2,576 (table in thousands), or 0.1%.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "For the year ended December 31, 2025, organic net revenue increased by $2.6 million, or 0.1%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Acquisitions continued after year-end, including Freestar, a publisher monetization business, bought on October 23, 2026 for $50.0 million plus up to $60.0 million in contingent consideration.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "In 2026, growth came mainly from Digital Transformation, with $119 million of third-quarter net revenue up 23% organically, and The Marketing Cloud, with $56 million up 108% organically.",
+    "basis": "Figures read from P6 Schedule 5; the claim that staff is the largest line is inferred from comparing the lines; the mechanism is drawn from P2.",
+    "claim": "Staff costs are the largest cost line below net revenue. For the nine months to September 2026, net revenue of 1,880,224 carried staff costs of 1,150,185, administrative costs of 239,473 and unbillable and other costs of 147,358, leaving Adjusted EBITDA of 343,208 (table in thousands).",
     "facts": [
      "P6"
     ],
-    "quotes": [
-     "Q3 Digital Transformation Net Revenue of $119 million, an organic increase of 23% versus the prior year period;",
-     "Q3 The Marketing Cloud Net Revenue of $56 million, an organic increase of 108% versus the prior year period;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2",
-    "claim": "Cost of services is the largest expense line. In the third quarter of 2026 it was 511,698 of total operating costs of 767,968, against office and general expenses of 206,942 and depreciation and amortization of 48,300 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "figures stated in P3; that people are the main cost is inferred from staff costs being the largest component in the P3 bridge",
-    "claim": "People are the main cost. In 2025, staff costs were 1,526,896 against net revenue of $2,427,671 (table in thousands), and the company cites wage inflation and talent competition as cost pressures.",
+    "basis": "Stated in the F2, F3 and P6 schedules; the link to acquisitions is inferred.",
+    "claim": "Large non-cash and acquisition-related charges sit between Adjusted EBITDA and operating income. Nine-month operating income was 69,247 against Adjusted EBITDA of 343,208, after depreciation and amortization of 136,395, stock-based compensation of 61,735 and deferred acquisition consideration of 26,766 (table in thousands).",
     "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Additionally, we may be unable to hire and retain people with the skills necessary to meet the increasing client demand, and we have in the past experienced and may continue to experience wage inflation and other increases to compensation expense, which puts upward pressure on our costs and may adversely affect our profitability if we are unable to recover these increased costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P3",
-    "claim": "Spending on technology and AI is a rising cost. Capitalized software was 75,855 in the nine months to September 30, 2026, versus 45,315 a year earlier (table in thousands).",
-    "facts": [
+     "F2",
      "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Excluding the addition of expenses of acquired entities of $12.0 million, Office and general expenses increased $10.2 million, primarily attributable to higher software license fees due to investments in automation and AI intended to improve workflow efficiency and support future margin expansion and higher staff costs to support the growth in the business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2; counter stated in P6",
-    "claim": "Operating costs grew faster than revenue in the third quarter of 2026. Revenue rose to 816,027 from 742,998, while office and general expenses rose to 206,942 from 166,422 and operating income fell to 48,059 from 60,913 (table in thousands).",
-    "facts": [
-     "F2"
+     "P6"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "figures stated in F3; mechanism inferred from P3 and P4 descriptions of deferred acquisition consideration",
-    "claim": "Non-cash and acquisition-linked charges also move costs. In the nine months to September 30, 2026, stock-based compensation was 61,735 versus 44,143, and the deferred acquisition consideration adjustment was 26,766 versus (9,911) (table in thousands).",
+    "basis": "Stated in P4 and P2.",
+    "claim": "Acquisitions are part of the model. Freestar, a publisher monetization business, was bought for $50.0 million, made up of $30.0 million in Class A shares and $20.0 million in cash, with up to $60.0 million of additional contingent consideration.",
     "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Stagwell\u2019s strategy is to build, grow, and acquire market-leading businesses that deliver the modern suite of services that marketers need to thrive in a rapidly evolving business environment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in F1 and F3; the working-capital mechanism is inferred from the line items.",
+    "claim": "The business converts earnings into cash through working capital, and it reinvests heavily in software. Nine-month operating cash flow was 152,279 versus 30,713, capitalized software was 75,855 and share repurchases were 90,716, while long-term debt stood at 1,414,574 (cash flow and balance sheet in thousands).",
+    "facts": [
+     "F1",
      "F3"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F1 and P2",
-    "claim": "Media and production buying on clients' behalf creates large working-capital balances. At September 30, 2026, accounts receivable were 772,787, accrued media 228,612 and advance billings 365,529 (table in thousands).",
+    "basis": "Stated in P1 and P2.",
+    "claim": "Stagwell competes with the large holding companies and with independent agencies and consultancies. Client concentration is modest: the top ten clients were about 18% of revenue and no client exceeded 4%.",
     "facts": [
-     "F1",
+     "P1",
      "P2"
     ],
     "quotes": [
-     "The difference between the gross production costs and media purchases and the revenue earned by us can be significant, and primarily affects our levels of accounts receivable, expenditures billable to clients, accounts payable and accrued liabilities.",
-     "We are generally paid in arrears for our services, and if we are unable to meet our contractual requirements, we may experience delays in collection of and/or be unable to collect our client balances."
+     "Stagwell\u2019s Brands compete for business and talent with the operating subsidiaries of large global holding companies such as Omnicom Group Inc., WPP plc, Publicis Groupe SA, Dentsu Inc. and Havas SA, as well as with numerous independent agencies that operate in multiple markets.",
+     "No customer represented more than 4% of total revenue."
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and F1",
-    "claim": "Debt adds a financing cost below operating income: net interest expense was (69,587) in the nine months to September 30, 2026, with long-term debt of 1,414,574 at that date (table in thousands).",
-    "facts": [
-     "F2",
-     "F1"
-    ],
-    "quotes": [],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item (company self-description in the 10-K)",
-    "claim": "Stagwell describes itself as a global challenger network that is transforming marketing through AI.",
+    "basis": "Stated in the 10-K business section. The advantage is management's own belief, not a measured result.",
+    "claim": "Stagwell describes itself as a digital-first, AI-focused challenger to the large legacy holding companies, with specialists in over 34 countries and more than 4,500 clients at year-end 2025.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Stagwell Inc. is the global challenger network transforming marketing through artificial intelligence (\u201cAI\u201d)."
+     "our specialists in over 34 countries",
+     "Stagwell operates in a highly competitive and fragmented industry"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "At the end of 2025 the company reported specialists in over 34 countries serving more than 4,500 clients.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Led by entrepreneurs, our specialists in over 34 countries have a unified purpose: to drive effectiveness and improve business results for our more than 4,500 clients as of December 31, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item as management belief",
-    "claim": "Management claims an advantage over legacy holding companies because it can work across business lines and geographies. It calls the traditional holding company model outdated.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We believe our ability to work across business lines and geographies gives us a competitive advantage relative to many of the legacy holding company competitors.",
-     "While legacy models still accounted for a significant share of the market in 2025, we see the traditional holding company model as outdated in this rapidly evolving industry landscape."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company says its global scale lets it compete for the largest marketing contracts, including multi-region contracts with annual fees above $10 million.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our increasing global scale allows us to compete for many of the largest marketing contracts available, including multi-region contracts with annual fees in excess of $10 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company admits it is smaller than many of its larger competitors, in an industry where broad geographic and service coverage is an important competitive factor.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We are smaller than many of our larger industry competitors, and an agency\u2019s ability to serve clients, particularly large international clients, on a broad geographic basis and across a range of services and technologies is an important competitive consideration."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The named competitors are large global holding companies (Omnicom, WPP, Publicis, Dentsu, Havas), independent agencies, consultancies such as Accenture and Deloitte, tech platforms and media companies.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Stagwell\u2019s Brands compete for business and talent with the operating subsidiaries of large global holding companies such as Omnicom Group Inc., WPP plc, Publicis Groupe SA, Dentsu Inc. and Havas SA, as well as with numerous independent agencies that operate in multiple markets.",
-     "Our Brands also face competition from consultancies, such as Accenture and Deloitte, tech platforms, media companies and other services firms that offer related services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Large IT-implementation consulting firms have entered marketing services and together hold significant market share. Management believes their lack of creative and media expertise limits them.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In recent years, a number of large consulting firms with information technology implementation backgrounds have entered the marketing services market and, collectively, achieved significant market share."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Major technology companies such as Amazon and Meta offer alternative marketing solutions. The company says these so far target small and medium businesses rather than its large multinational client base.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Additionally, major technology companies, such as Amazon and Meta, have entered the market, offering alternative marketing solutions to clients.",
-     "To date, these solutions appear more geared towards addressing the needs of small and medium size businesses, rather than the large, multi-national companies that form the majority of Stagwell\u2019s customer base."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Barriers to entry are described as minimal because an agency's main asset is its people. Small brands can sometimes take business from larger competitors.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We also compete with smaller businesses that operate in local or regional markets, and because an agency\u2019s principal asset is often its people, barriers to entry are minimal, and relatively small brands are, on occasion, able to take all or some portion of a client\u2019s business from a larger competitor."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Competitors may discount their services, which could force the company to accept lower margins or lose clients.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Price competition could force us to choose between lowering our prices (and suffering reduced operating margins) or losing a client\u2019s business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Clients put their business up for competitive review from time to time, and the company has lost accounts in such reviews.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Many companies, including companies with which we have long-standing relationships, put their advertising and marketing communications business up for competitive review from time to time, and we have lost client accounts in the past as a result of such reviews."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The top ten clients were about 18% of 2025 revenue, and no single customer exceeded 4%.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In the aggregate, our top ten clients based on revenue accounted for approximately 18% of our revenue for the year ended December 31, 2025.",
-     "No customer represented more than 4% of total revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Competitors have directly targeted the company's employees who have skills in new technologies.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "There is competition for scarce talent with market-leading skills and capabilities in new technologies, and our competitors have directly targeted our employees with such skills and will likely continue to do so."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The business is described as highly dependent on CEO and Chairman Mark Penn. His employment term was later extended to 2029.",
-    "facts": [
-     "P2",
-     "P10"
-    ],
-    "quotes": [
-     "Our business is highly dependent on the services of Mark Penn, our CEO and Chairman.",
-     "The Amendment extends the term of Mr. Penn\u2019s employment with the Company until July 31, 2029."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Operations outside the United States were about 23% of 2025 revenue. Listed international risks include competitors who understand local markets better.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Operations outside the United States represent a significant portion of our revenues and represented approximately 23% of our revenues in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In 2025, total organic net revenue grew only 0.1%. Growth in Marketing Services and Digital Transformation was offset by a decline in Communications.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "For the year ended December 31, 2025, organic net revenue increased by $2.6 million, or 0.1%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item's net revenue components table",
-    "claim": "Most of The Marketing Cloud's 2025 net revenue increase came from acquisitions: 62,229 from net acquisitions out of a 74,221 total change (table in thousands).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The Marketing Cloud | 32,265 | 941 | 62,229 | 11,051 | 74,221 | 106,486 | 34.3% | 230.0%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items; the revenue figure matches F2",
-    "claim": "Q3 2026 revenue rose 10% to $816 million and net revenue rose 8% to $664 million year over year.",
+    "basis": "Stated in the 8-K release; revenue is consistent with the 10-Q income statement.",
+    "claim": "Reported momentum was strong in Q3 2026. Revenue grew 10% to $816 million, net revenue grew 8% to $664 million, and net revenue grew 7% organically.",
     "facts": [
      "P6",
      "F2"
     ],
     "quotes": [
-     "Q3 YoY Revenue Growth of 10% to $816 million; Q3 YoY Net Revenue Growth of 8% to $664 million"
+     "Q3 YoY Revenue Growth of 10% to $816 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (company earnings release)",
-    "claim": "Growth in Q3 2026 was led by Digital Transformation, with 23% organic net revenue growth, and The Marketing Cloud, with 108% organic net revenue growth. Enterprise technology products contracted to date reached $59 million.",
+    "basis": "Taken from the segment schedule and the management quote in the release; the explanation of the pivot is management's.",
+    "claim": "Growth is concentrated in technology-led segments. Q3 organic net revenue grew 23.1% in Digital Transformation and 108.4% in The Marketing Cloud, but fell (7.5)% in Marketing Services and (2.1)% in Media & Commerce.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Q3 YoY Digital Transformation Organic Net Revenue Growth of 23%; Q3 YoY The Marketing Cloud Organic Net Revenue Growth of 108%; Enterprise Technology Products Contracted to Date of $59 million More Than Double Initial 2026 Goal"
+     "Q3 YoY Digital Transformation Organic Net Revenue Growth of 23%"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item as management commentary",
-    "claim": "The CEO describes a pivot from primarily marketing services to AI-powered marketing transformation, driven by software products and Digital Transformation.",
+    "basis": "Stated in the release; the definition is in the non-GAAP section.",
+    "claim": "New-business indicators support the competitive position. Net new business was $168 million in Q3 and $586 million over the last twelve months, and enterprise technology products contracted to date reached $59 million, more than double the initial 2026 goal.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Software products, like our agentic Stagwell Machines, and the Digital Transformation segment are driving our business as we pivot from primarily marketing services to AI-powered marketing transformation."
+     "Net New Business of $168 million in Q3; LTM Net New Business of $586 million"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited item; net new business is a company-defined measure not reconciled in the packet",
-    "claim": "The company reported $168 million of net new business in Q3 2026 and $586 million over the last twelve months. It also cited a multi-agency deal with ServiceNow, a first major federal government win and an expanded Palantir partnership.",
+    "basis": "Stated in the release.",
+    "claim": "Adjusted EBITDA is rising and guidance was raised. Q3 Adjusted EBITDA grew 25% to $145 million, and full-year guidance was raised to $490 million to $540 million.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Net New Business of $168 million in Q3; LTM Net New Business of $586 million",
-     "Largest Multi-Agency Deal in Stagwell History With ServiceNow; Secured First Major Federal Government Win; Expanded Partnership with Palantir"
+     "Q3 Adjusted EBITDA Growth YoY of 25% to $145 million",
+     "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from the column layout of the extracted earnings-presentation table, cross-checked against the 108% figure for The Marketing Cloud and the 23% figure for Digital Transformation",
-    "claim": "Marketing Services appears to have declined in Q3 2026, with net revenue growth of (9.3%) and organic net revenue growth of (7.5%).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "(2.9%)(2.2%)(9.3%)(7.5%)Marketing Services"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Operating income fell year over year despite revenue growth: 48,059 vs 60,913 for Q3 and 69,247 vs 102,370 for the nine months (table in thousands).",
+    "basis": "Figures are from the 10-Q income statement; the cost explanation is inferred from the 10-K discussion of investment.",
+    "claim": "GAAP profitability weakened even as adjusted measures rose. Q3 operating income was 48,059 against 60,913 a year earlier, and office and general expenses rose to 206,942 from 166,422 (table in thousands).",
     "facts": [
      "F2"
     ],
-    "quotes": [
-     "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Investment in technology products increased: capitalized software was (75,855) in the first nine months of 2026 vs (45,315) a year earlier (table in thousands). The company calls such new initiatives inherently risky.",
+    "basis": "Stated in the 10-K business and risk sections.",
+    "claim": "Stagwell faces the large global holding companies, which are bigger. The 10-K names Omnicom, WPP, Publicis, Dentsu and Havas, as well as consultancies, tech platforms and media companies.",
     "facts": [
-     "F3",
+     "P1",
      "P2"
     ],
     "quotes": [
-     "Capitalized software | (75,855) | (45,315)",
-     "Our new initiatives are inherently risky, as each involves development of new software platforms or other product offerings, unproven business strategies and technologies with which we may have limited prior development or operating experience."
+     "compete for business and talent with the operating subsidiaries of large global holding companies such as Omnicom Group Inc., WPP plc, Publicis Groupe SA, Dentsu Inc. and Havas SA",
+     "We are smaller than many of our larger industry competitors"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "On October 23, 2026 the company acquired Freestar, which helps online publishers monetize their sites, for $50.0 million.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Low barriers to entry and price competition threaten margins. The 10-K says competitors may discount their services, which could force Stagwell to lower prices or lose clients.",
     "facts": [
-     "P4"
+     "P2"
     ],
     "quotes": [
-     "On October 23, 2026, the Company acquired all of the outstanding stock of Publisher First, Inc., doing business as Freestar, which assists online publishers in monetizing the media on their sites, for $50.0 million: $30.0 million in 3,442,043 shares of Class A Common Stock, par value $0.001 per share (the \u201cClass A Common Stock\u201d) and $20.0 million in cash, subject to post-closing adjustments."
+     "barriers to entry are minimal",
+     "Price competition could force us to choose between lowering our prices (and suffering reduced operating margins) or losing a client\u2019s business."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "The Q3 2026 10-Q reports no material changes to the risk factors in the 2025 10-K.",
+    "basis": "Stated in the 10-K; the assessment of the threat is management's.",
+    "claim": "New entrants and technology platforms are a named threat. The 10-K cites consulting firms and major technology companies such as Amazon and Meta entering the market, though it says their solutions currently look aimed at small and medium-sized businesses.",
     "facts": [
-     "P5"
+     "P1"
     ],
     "quotes": [
-     "There have been no material changes to the risk factors in Part I, Item 1A \u201cRisk Factors\u201d of our 2025 Form 10-K."
+     "major technology companies, such as Amazon and Meta, have entered the market"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Client concentration is modest, which limits single-client risk. The top ten clients were about 18% of 2025 revenue and none exceeded 4%. Client concentration still rises in election years because of the advocacy brands.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "No customer represented more than 4% of total revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The 2025 decline and the stated seasonality are in the 10-K. The link to the 2026 gain is inferred from the timing.",
+    "claim": "Communications revenue is cyclical. Its organic net revenue fell (16.5)% in 2025 after the 2024 election cycle and rose 20.0% organically in Q3 2026, which is consistent with the stated even-year political seasonality.",
+    "facts": [
+     "P3",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "lower Advocacy revenue due to political seasonality following the 2024 presidential election cycle"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Rival AI products could undercut Stagwell's technology push. The 10-K calls the new initiatives, including The Machine and the Palantir partnership, risky, and says products developed by others could make its offerings noncompetitive or obsolete.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Our new initiatives are inherently risky",
+     "It is also possible that products and offerings developed by others will render our new products and offerings noncompetitive or obsolete."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are from the 10-Q cash flow statement and the CFO quote in the release. The link to capability building is inferred.",
+    "claim": "Stagwell is investing heavily in technology. Capitalized software spending was 75,855 in the first nine months of 2026 against 45,315 a year earlier (table in thousands), and Q3 net leverage was 2.7x, an improvement of 0.7x year over year.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Net leverage now stands at 2.7x, a 0.7x improvement year-over-year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and consistent with the 10-Q cash flow statement.",
+    "claim": "Cash generation improved. Year-to-date operating cash flow rose 396% to $152 million and free cash flow rose 227% to $52 million, which funds the investment in capabilities.",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "Year-to-Date Net Cash Provided by Operating Activities Increased 396% YoY to $152 million; Year-to-Date Free Cash Flow Increased 227% YoY to $52 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The deal terms are in the 10-Q MD&A; the risks are in the 10-K.",
+    "claim": "Acquisitions are a route to broaden capabilities. After quarter end the company bought Freestar for $50.0 million, with up to $60.0 million of contingent consideration. This adds integration and dilution risk, since part of the price was paid in Class A shares.",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "which assists online publishers in monetizing the media on their sites"
+    ],
+    "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1",
-    "claim": "Cash and cash equivalents rose to $ 132,197 at September 30, 2026 from $ 104,537 at December 31, 2025 (table in thousands).",
+    "basis": "Figures are stated in the balance sheet. The reading of the working-capital structure is inferred from the line items.",
+    "claim": "Liquidity is thin on a balance-sheet basis. Cash and cash equivalents were 132,197 (table in thousands) against 104,537 at the prior year-end. Current liabilities of 1,511,603 exceeded current assets of 1,223,931.",
     "facts": [
      "F1"
     ],
-    "quotes": [
-     "Cash and cash equivalents | $ 132,197 | $ 104,537"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F1; the reading of the mechanism is inferred from the F1 line items and the P2 client-default risk factor",
-    "claim": "Total current liabilities of 1,511,603 exceeded total current assets of 1,223,931 at September 30, 2026; at December 31, 2025 the figures were 1,480,011 and 1,162,292 (table in thousands).",
+    "basis": "The balances are stated in the balance sheet. The 'no current debt' point is inferred from the absence of a line.",
+    "claim": "Long-term debt rose to 1,414,574 (table in thousands) from 1,326,013 at the prior year-end. The balance sheet shows no separate current-portion-of-debt line, so none of the debt is presented as due within a year.",
     "facts": [
      "F1"
     ],
-    "quotes": [
-     "Assets, Current, Total | 1,223,931 | 1,162,292",
-     "Liabilities, Current, Total | 1,511,603 | 1,480,011"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Long-term debt rose to 1,414,574 at September 30, 2026 from 1,326,013 at December 31, 2025 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Long-term debt | 1,414,574 | 1,326,013"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; linking these flows to the debt increase is inferred from F1 and F3",
-    "claim": "Net revolver borrowing contributed to the debt increase: in the nine months, revolver proceeds were 1,619,780 and repayments were 1,533,426 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Proceeds from borrowings under revolving credit facility | 1,619,780 | 1,586,326",
-     "Repayment of borrowings under revolving credit facility | (1,533,426) | (1,412,000)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 by the CFO",
-    "claim": "Management states that net leverage is 2.7x, a 0.7x improvement year-over-year.",
+    "basis": "Stated by the CFO in the earnings release. The counter is inferred from the balance sheet.",
+    "claim": "Management states net leverage of 2.7x, 0.7x better than a year earlier and the lowest ever for a third quarter. The definition and the debt and EBITDA inputs are not given in the evidence.",
     "facts": [
      "P6"
     ],
@@ -1205,314 +1043,143 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1; the comparison is inferred",
-    "claim": "Shareholders' equity of 710,297 is small compared with goodwill of 1,598,491 and other intangible assets of 795,689 at September 30, 2026 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total shareholders\u2019 equity | 710,297 | 776,367",
-     "Goodwill | 1,598,491 | 1,595,238",
-     "Other intangible assets, net | 795,689 | 834,248"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and F3; the comparison is inferred",
-    "claim": "Nine-month net interest expense of 69,587 roughly matched nine-month operating income of 69,247, and cash interest paid was 84,516 (tables in thousands).",
+    "basis": "Figures are stated in the statements. The comparison of operating income with interest is inferred from them.",
+    "claim": "The interest burden is material. Net interest expense for the nine months was 69,587 (table in thousands), and cash interest paid was 84,516, against operating income of 69,247.",
     "facts": [
      "F2",
      "F3"
     ],
-    "quotes": [
-     "Interest expense, net | (23,993) | (25,196) | (69,587) | (72,007)",
-     "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370",
-     "Cash interest paid | 84,516 | 86,302"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and P6",
-    "claim": "Operating cash flow rose to 152,279 in the nine months from 30,713 a year earlier (table in thousands), and the company reports year-to-date free cash flow of $52 million.",
+    "basis": "Stated in the cash flow statement and the earnings release.",
+    "claim": "Operating cash flow was 152,279 (table in thousands) for the nine months, against 30,713 a year earlier. The company reports free cash flow of $52 million, up 227%. Capitalized software of 75,855 and capital expenditures of 27,405 absorbed much of operating cash flow.",
     "facts": [
      "F3",
      "P6"
     ],
     "quotes": [
-     "Net Cash Provided by (Used in) Operating Activities, Total | 152,279 | 30,713",
-     "Year-to-Date Net Cash Provided by Operating Activities Increased 396% YoY to $152 million; Year-to-Date Free Cash Flow Increased 227% YoY to $52 million"
+     "Year-to-Date Free Cash Flow Increased 227% YoY to $52 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3; the quality interpretation is inferred",
-    "claim": "Operating cash flow came despite a nine-month net loss of (4,252), and relied on non-cash add-backs including stock-based compensation of 61,735 and a deferred acquisition consideration adjustment of 26,766 (table in thousands).",
+    "basis": "Line items are stated in the cash flow statement. The quality assessment is inferred.",
+    "claim": "Operating cash flow is not backed by GAAP profit. The company had a net loss of (4,252) (table in thousands) yet operating cash flow of 152,279. Depreciation and amortization of 136,395 and stock-based compensation of 61,735 are non-cash add-backs.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are stated in the cash flow statement. The contribution to the improvement is inferred from the comparison.",
+    "claim": "Working-capital movements were mixed. Accounts receivable used (51,575) (table in thousands) and accounts payable used (50,059), while advance billings added 35,360. A large prior-year outflow in accrued expenses and other liabilities of (117,118) was only 5,297 this year.",
     "facts": [
      "F3"
     ],
-    "quotes": [
-     "Stock-based compensation | 61,735 | 44,143",
-     "Adjustment To Deferred Acquisition Consideration | 26,766 | (9,911)"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F3; attributing the improvement to these lines is inferred",
-    "claim": "Part of the year-over-year operating cash flow improvement came from working capital: accrued expenses and other liabilities contributed 5,297 versus (117,118) a year earlier, while accounts receivable used (51,575) versus (3,477) (table in thousands).",
+    "basis": "Figures are stated in the cash flow statement. The funding reading is inferred.",
+    "claim": "Operating cash flow of 152,279 (table in thousands) funded investing outflows of (113,910). Financing was a net use of (11,606), which included share repurchases of (90,716). Revolver borrowings of 1,619,780 exceeded repayments of (1,533,426). Cash rose by 27,660.",
     "facts": [
      "F3"
     ],
-    "quotes": [
-     "Accrued expenses and other liabilities | 5,297 | (117,118)",
-     "Accounts receivable | (51,575) | (3,477)"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and P4",
-    "claim": "Investment in capitalized software rose to 75,855 from 45,315, alongside capital expenditures of 27,405 (table in thousands); free cash flow is defined net of both.",
-    "facts": [
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Capitalized software | (75,855) | (45,315)",
-     "Capital expenditures | (27,405) | (26,338)",
-     "\u201cFree Cash Flow\u201d is defined as consolidated net cash flow from operations less cash outflow from capital expenditures and capitalized software, excluding material nonrecurring capital purchases."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P3; the comparison with the $52 million free cash flow in P6 is inferred",
-    "claim": "Share repurchases of 90,716 in the nine months exceeded the reported free cash flow, and the authorized repurchase program totals up to $725.0 million.",
-    "facts": [
-     "F3",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Shares repurchased and cancelled | (90,716) | (105,183)",
-     "Under the Repurchase Program, as amended, we may repurchase up to an aggregate of $725.0 million of shares of our outstanding Class A Common Stock, with any previous purchases under the Repurchase Program continuing to count against that limit."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and F3",
-    "claim": "Other non-debt obligations include a long-term tax receivable agreement liability of 252,390, current deferred acquisition consideration that rose to 42,871 from 15,446, and long-term deferred acquisition consideration of 21,494 (table in thousands).",
+    "basis": "Balances and deal terms are stated in the filings. The timing of the tax receivable agreement payments is not stated in the evidence.",
+    "claim": "Contingent and deferred obligations add to near-term cash calls. The current portion of deferred acquisition consideration was 42,871 (table in thousands) against 15,446 at the prior year-end, and the long-term tax receivable agreement liability was 252,390. The Freestar deal closed after quarter end for $20.0 million in cash and $30.0 million in shares, with up to $60.0 million of contingent consideration.",
     "facts": [
      "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Long-term tax receivable agreement liability | 252,390 | 252,390",
-     "Current portion of deferred acquisition consideration | 42,871 | 15,446",
-     "Tax Receivables Agreement payment | (2,554) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "After the quarter, the Freestar acquisition required $20.0 million in cash plus up to $60.0 million in contingent consideration.",
-    "facts": [
      "P4"
     ],
     "quotes": [
-     "$20.0 million in cash, subject to post-closing adjustments",
-     "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets."
+     "The Company may settle part of the contingent consideration in stock, and payments to certain holders are subject to their continued employment."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P10; describing it as a cash obligation is inferred",
-    "claim": "The CEO was granted 2,000,000 SARs with a base price of $8.45 that are settleable only in cash, creating a potential future cash obligation.",
+    "basis": "Stated in the earnings release.",
+    "claim": "Management guides full-year free cash flow conversion of 50% to 60% of Adjusted EBITDA and has raised Adjusted EBITDA guidance to $490 million to $540 million.",
     "facts": [
-     "P10"
+     "P6"
     ],
     "quotes": [
-     "The SARs are settleable only in cash."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 and P4",
-    "claim": "The company guides to EBITDA conversion on free cash flow of 50% - 60% and Adjusted EBITDA of $490M - $540M for 2026, and Q4 is seasonally the highest revenue quarter.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Historically, we typically generate the highest quarterly revenue during the fourth quarter of each year."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P2 and P5",
-    "claim": "The 10-K identifies elevated interest rates as increasing the cost of capital, and adverse conditions as possibly limiting access to credit.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "In addition, elevated interest rates have had and may continue to have the effect of further increasing economic uncertainty and heightening these risks, as well as increasing the cost of capital."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the absence of a current debt line in F1",
-    "claim": "The balance sheet shows no separate current portion of debt, which suggests no debt is classified as due within twelve months of September 30, 2026.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Long-term debt | 1,414,574 | 1,326,013"
+     "Reiterate Free Cash Flow Conversion of 50% to 60%"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "Q3 revenue grew 10% to $816 million and net revenue grew 8% to $664 million year over year.",
+    "basis": "Stated in the Q3 2026 earnings release; the conditions for continuation are inferred.",
+    "claim": "Digital Transformation is a growth driver: Q3 net revenue was $119 million, up 23% organically. For this to continue, clients must keep buying AI-enabled digital build and integration work at the current pace.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Q3 YoY Revenue Growth of 10% to $816 million; Q3 YoY Net Revenue Growth of 8% to $664 million"
+     "Q3 Digital Transformation Net Revenue of $119 million, an organic increase of 23% versus the prior year period;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6; the definition of organic growth is stated in P4",
-    "claim": "Q3 growth was mostly organic: revenue rose 11% organically and net revenue 7% organically.",
+    "basis": "Growth and bookings are stated in the release. The segment operating loss is read from Schedule 5. Continuation conditions are inferred from the 10-K risk factor.",
+    "claim": "The Marketing Cloud (SaaS/DaaS and enterprise technology products) is a growth driver: Q3 organic net revenue grew 108%, and enterprise technology products contracted to date reached $59 million. Contracted bookings must keep converting to recognised revenue and the products must reach profitability.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Q3 Revenue increased 11% organically versus the prior year period",
-     "Q3 Net Revenue increased 7% organically versus the prior year period"
+     "YTD enterprise technology products contracted to date of $59 million, more than double initial FY26 target;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "Driver: the Digital Transformation segment, with Q3 net revenue of $119 million and organic growth of 23%.",
+    "basis": "Figures and the seasonality statement are stated. Attributing the 2026 gain to the election cycle is inferred.",
+    "claim": "Communications (advocacy and political work) is a growth driver in 2026: Q3 organic net revenue grew 20.0%. This depends on continued election-cycle activity, because the same segment fell (16.5)% organically in 2025 after the prior presidential cycle.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Q3 Digital Transformation Net Revenue of $119 million, an organic increase of 23% versus the prior year period",
-     "Two-Year Net Revenue Growth Stack for Digital Transformation of 38%, Two-Year Organic Net Revenue Growth Stack for Digital Transformation of 30%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A",
-    "claim": "Digital Transformation was already growing organically 9.2% in the year ended December 31, 2025, driven by new client wins, expanded scope and demand for AI-enabled offerings.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The increase was driven by growth in the Marketing Services and Digital Transformation segments, reflecting new client wins, expanded scope with existing clients, and increased demand for AI enabled offerings across the retail, financial, technology, and communications sectors."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited earnings release",
-    "claim": "Driver: The Marketing Cloud, with Q3 net revenue of $56 million and organic growth of 108%, plus $59 million of enterprise technology products contracted year to date.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Q3 The Marketing Cloud Net Revenue of $56 million, an organic increase of 108% versus the prior year period",
-     "YTD enterprise technology products contracted to date of $59 million, more than double initial FY26 target"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by the CEO in P6; this is a management view",
-    "claim": "Management states that software products and Digital Transformation are driving the business as it pivots to AI-powered marketing transformation.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Software products, like our agentic Stagwell Machines, and the Digital Transformation segment are driving our business as we pivot from primarily marketing services to AI-powered marketing transformation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors; P5 says there are no material changes",
-    "claim": "Condition for the technology drivers: client demand for the new products must exist and be sustained, and the products must not be made obsolete by competitors.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "There can be no assurance that client demand for our new products, and technologies will exist or be sustained at the levels that we anticipate, or that any of these initiatives will gain sufficient traction or market acceptance to generate sufficient revenue to offset any new expenses or liabilities associated with these new investments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in F3; linking them to the growth drivers is inferred",
-    "claim": "Condition for the technology drivers: continued investment, shown by capitalized software of (75,855) against (45,315) in the prior nine months (table in thousands).",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "primarily attributable to higher software license fees due to investments in automation and AI intended to improve workflow efficiency and support future margin expansion"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the column order of the P6 slide; the reading is consistent because The Marketing Cloud's 108.4% in the same position matches the 108% stated elsewhere",
-    "claim": "Driver: Communications grew in the Q3 election-year period, with net revenue growth of 28.0% and organic growth of 20.0% on the segment slide.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K",
-    "claim": "Condition for Communications: political spending is cyclical and strongest in even years, so this growth depends on the election cycle.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Political advertising and related activity have also historically caused our revenue to increase during election cycles, which is most pronounced in even years, in particular during the third and fourth quarters of such years, and to decrease during other periods.",
-     "These increases were partially offset by a decrease in the Communications segment, primarily reflecting lower Advocacy revenue due to political seasonality following the 2024 presidential election cycle, as well as more measured client spending and timing of project activity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited earnings release",
-    "claim": "Driver: new business wins, with net new business of $168 million in Q3 and $586 million over the last twelve months.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Net New Business of $168 million in Q3; LTM Net New Business of $586 million",
-     "Largest Multi-Agency Deal in Stagwell History With ServiceNow; Secured First Major Federal Government Win; Expanded Partnership with Palantir"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Condition for new business: the company must retain clients, who can leave on short notice and are concentrated, with the top ten clients at about 18% of revenue.",
-    "facts": [
+     "P6",
+     "P3",
      "P2"
     ],
     "quotes": [
-     "In the aggregate, our top ten clients based on revenue accounted for approximately 18% of our revenue for the year ended December 31, 2025."
+     "Political advertising and related activity have also historically caused our revenue to increase during election cycles, which is most pronounced in even years, in particular during the third and fourth quarters of such years, and to decrease during other periods."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "Driver: acquisitions, including Freestar for $50.0 million after the quarter end.",
+    "basis": "Figures and the definition are stated. How quickly wins convert to revenue is not given.",
+    "claim": "Net new business supports the revenue outlook: $168 million in Q3 and $586 million over the last twelve months, including a ServiceNow multi-agency deal. For this to feed growth, wins must convert to billed revenue and offset weakness elsewhere, such as Marketing Services, which fell (7.5)% organically in Q3.",
     "facts": [
-     "P4"
+     "P6"
+    ],
+    "quotes": [
+     "Net new business of $168 million in the third quarter, last twelve-month net new business of $586 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and guidance are stated. The cost-control condition is inferred from the segment schedules.",
+    "claim": "Earnings growth is a driver: Q3 Adjusted EBITDA was $145 million, up 25%, and full-year Adjusted EBITDA guidance was raised to $490 million to $540 million. This requires net revenue growth to stay within the reiterated 8% to 12% while costs stay controlled.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Deal terms are stated. The growth contribution is inferred and not quantified in the packet.",
+    "claim": "Acquisitions add to growth and are continuing: Freestar was acquired on October 23, 2026 for $50.0 million, with up to $60.0 million in contingent consideration. This depends on the acquired earnings targets being met and on the integration succeeding.",
+    "facts": [
+     "P4",
+     "P2"
     ],
     "quotes": [
      "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets."
@@ -1520,40 +1187,81 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A table",
-    "claim": "Acquisitions drove most net revenue growth in the year ended December 31, 2025: net acquisitions contributed 120,463 of the 131,009 increase (table in thousands), while organic net revenue grew 0.1%.",
+    "basis": "Figures are stated in the financial statements and release. That cash flow must keep covering these uses is inferred.",
+    "claim": "Cash generation funds the investment: nine-month operating cash flow was 152,279 against 30,713 a year earlier (table in thousands). Capitalized software spending rose to 75,855 from 45,315 (table in thousands), and net leverage is 2.7x. Cash flow must stay strong enough to cover software investment, buybacks and acquisitions without raising leverage.",
+    "facts": [
+     "F3",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Net leverage now stands at 2.7x, a 0.7x improvement year-over-year, and our lowest ever third quarter ratio."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (10-Q Recent Developments)",
+    "claim": "Stagwell acquired all of the stock of Publisher First, Inc. (Freestar) for $50.0 million, made up of $30.0 million in Class A shares and $20.0 million in cash. The 10-Q says the purchase price allocation is still being evaluated.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "On October 23, 2026, the Company acquired all of the outstanding stock of Publisher First, Inc., doing business as Freestar"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K earnings release)",
+    "claim": "In its Q3 2026 earnings release, Stagwell raised full-year Adjusted EBITDA guidance to $490 million to $540 million. It also raised Adjusted EPS guidance to $1.07 - $1.21.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Raise Adjusted EBITDA to $490 million to $540 million",
+     "Raise Adjusted EPS to $1.07 - $1.21"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K MD&A Recent Developments)",
+    "claim": "The Board authorized an extension and a $350.0 million increase to the share repurchase program. The program now allows repurchases of up to an aggregate $725.0 million of Class A shares.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "For the year ended December 31, 2025, organic net revenue increased by $2.6 million, or 0.1%."
+     "On March 4, 2026, the Board authorized an extension and a $350.0 million increase in the size of our previously approved stock repurchase program"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Condition for acquisition-led growth: acquired businesses must be integrated successfully; acquisitions may also dilute shareholders.",
+    "basis": "stated in the cited item (10-K MD&A Recent Developments)",
+    "claim": "Stagwell acquired Wavelength, a digital advocacy and communications company, for an estimated purchase price of $10.2 million.",
     "facts": [
-     "P2"
+     "P3"
     ],
     "quotes": [
-     "We may not realize the expected benefits from strategic transactions.",
-     "Strategic transactions may result in dilution to our stockholders and consume resources that are necessary to sustain our business."
+     "On January 30, 2026, the Company acquired Wavelength, a digital advocacy and communications company, for an estimated purchase price of $10.2 million"
     ],
     "support": "supported"
-   },
+   }
+  ],
+  "risks": [
    {
-    "basis": "inferred from the column order of the garbled P6 segment slide",
-    "claim": "Counter to the growth picture: Marketing Services net revenue fell (9.3%) in Q3, with organic net revenue down (7.5%).",
+    "basis": "Debt and cash figures are stated in F1 and F3. The risk framing is inferred; the packet gives no debt maturities or covenant terms.",
+    "claim": "Leverage and reliance on the revolver: long-term debt was 1,414,574 against cash of 132,197 (table in thousands), and nine-month revolver borrowings of 1,619,780 exceeded repayments of 1,533,426. Long-term debt rose from 1,326,013 at year-end 2025.",
     "facts": [
+     "F1",
+     "F3",
      "P6"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in the F2 income statement",
-    "claim": "Counter: revenue growth has not reached GAAP operating income, which was 48,059 in Q3 against 60,913 a year earlier, as office and general expenses rose to 206,942 from 166,422 (table in thousands).",
+    "basis": "Figures are stated in F2. The causal link to cost growth is inferred from the line items. The counter is stated in P6 and P3.",
+    "claim": "GAAP profitability weakened even as revenue grew. Q3 operating income was 48,059 against 60,913 a year earlier (table in thousands), while revenue rose to 816,027 from 742,998. Office and general expenses rose to 206,942 from 166,422, and the nine-month net loss was (4,252).",
     "facts": [
      "F2"
     ],
@@ -1561,229 +1269,20 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1, F3 and P6",
-    "claim": "Funding capacity: nine-month operating cash flow rose to 152,279 from 30,713, while long-term debt rose to 1,414,574 from 1,326,013 (tables in thousands); management reports net leverage of 2.7x.",
-    "facts": [
-     "F3",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Net leverage now stands at 2.7x, a 0.7x improvement year-over-year, and our lowest ever third quarter ratio."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited release; this is management's guidance, not an analyst forecast",
-    "claim": "Management raised full-year Adjusted EBITDA guidance to $490 million to $540 million.",
+    "basis": "Guidance figures and the forecasting risk are stated in P6. The probability of a miss is not assessed; the horizon is inferred from 'Full-Year'.",
+    "claim": "Full-year guidance was raised to Adjusted EBITDA of $490 million to $540 million and Adjusted EPS of $1.07 to $1.21. Year-to-date Adjusted EBITDA was $343 million, so the outlook still depends on Q4 delivery, and the company flags the risk of inaccurate guidance.",
     "facts": [
      "P6"
-    ],
-    "quotes": [
-     "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million; Raise Full-Year Adjusted EPS Guidance to $1.07 to $1.21"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K and the 8-K",
-    "claim": "Condition: continued leadership by the CEO, on whom the business is stated to depend; his employment term was extended.",
-    "facts": [
-     "P2",
-     "P10"
-    ],
-    "quotes": [
-     "Our business is highly dependent on the services of Mark Penn, our CEO and Chairman.",
-     "The Amendment extends the term of Mr. Penn\u2019s employment with the Company until July 31, 2029."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Condition: macroeconomic conditions must not cut client marketing budgets.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our revenues are highly susceptible to declines as a result of unfavorable economic conditions."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "Stated in the 10-Q MD&A Recent Developments section.",
-    "claim": "Stagwell acquired Freestar (Publisher First, Inc.) for $50.0 million, of which $30.0 million was paid in 3,442,043 shares of Class A Common Stock and $20.0 million in cash, with up to $60.0 million more in contingent consideration.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "On October 23, 2026, the Company acquired all of the outstanding stock of Publisher First, Inc., doing business as Freestar, which assists online publishers in monetizing the media on their sites, for $50.0 million: $30.0 million in 3,442,043 shares of Class A Common Stock, par value $0.001 per share (the \u201cClass A Common Stock\u201d) and $20.0 million in cash, subject to post-closing adjustments.",
-     "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 2.02 earnings release headline.",
-    "claim": "Stagwell raised its full-year 2026 Adjusted EBITDA guidance to $490 million to $540 million and its Adjusted EPS guidance to $1.07 to $1.21.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million; Raise Full-Year Adjusted EPS Guidance to $1.07 to $1.21"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K earnings release headline, with no further detail.",
-    "claim": "Stagwell announced the largest multi-agency deal in its history, with ServiceNow, along with a first major federal government win and an expanded Palantir partnership.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Largest Multi-Agency Deal in Stagwell History With ServiceNow; Secured First Major Federal Government Win; Expanded Partnership with Palantir"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 5.02.",
-    "claim": "Director Bradley J. Gross resigned from the Board, and the company stated the resignation was not the result of any disagreement.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "On October 2, 2026, Bradley J. Gross notified the Board of Directors (the \u201cBoard\u201d) of Stagwell Inc. (the \u201cCompany\u201d) that he is resigning from the Board effective October 16, 2026.",
-     "The resignation of Mr. Gross is not the result of any disagreement with the Company on any matter relating to the Company\u2019s operations, policies or practices."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 5.02.",
-    "claim": "Beth J. Kaplan was appointed as an independent director.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "On July 29, 2026, the Board of Directors (the \u201cBoard\u201d) of Stagwell Inc. (the \u201cCompany\u201d), upon the recommendation of the Board\u2019s Nominating and Corporate Governance Committee, appointed Beth J. Kaplan to serve as a director of the Company effective July 31, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K/A Item 5.02.",
-    "claim": "Beth J. Kaplan was appointed to the Board's Human Resources and Compensation Committee.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On October 28, 2026, the Board of the Company, on the recommendation of the Board\u2019s Nominating and Corporate Governance Committee, appointed Beth J. Kaplan to the Human Resources and Compensation Committee of the Board effective immediately."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 5.02.",
-    "claim": "CEO Mark Penn's employment agreement was amended to extend his term, and his annual base salary was raised from $1,260,000 to $1,400,000.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "The Amendment extends the term of Mr. Penn\u2019s employment with the Company until July 31, 2029."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 5.02.",
-    "claim": "The company granted CEO Mark Penn 2,000,000 cash-settled stock appreciation rights with a base price of $8.45 per share.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "The SARs have a base price of $8.45 per share and vest in three installments with 1,000,000 SARs vesting on the first anniversary of the date of grant and 500,000 SARs vesting on each of the second and third anniversaries of the date of grant.",
-     "The SARs are settleable only in cash."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A Recent Developments section.",
-    "claim": "Stagwell acquired Wavelength, a digital advocacy and communications company, for an estimated purchase price of $10.2 million, with contingent consideration of up to $24.8 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On January 30, 2026, the Company acquired Wavelength, a digital advocacy and communications company, for an estimated purchase price of $10.2 million, of which approximately $4.6 million was paid in cash and approximately $5.6 million was paid in 863,624 shares of the Company\u2019s Class A Common Stock subject to post-closing adjustments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A Recent Developments section.",
-    "claim": "The Board extended the stock repurchase program and increased it by $350.0 million, to an aggregate of up to $725.0 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On March 4, 2026, the Board authorized an extension and a $350.0 million increase in the size of our previously approved stock repurchase program (the \u201cRepurchase Program\u201d).",
-     "Under the Repurchase Program, as amended, we may repurchase up to an aggregate of $725.0 million of shares of our outstanding Class A Common Stock, with any previous purchases under the Repurchase Program continuing to count against that limit."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A Recent Developments section.",
-    "claim": "The company repurchased 6,198,425 Class A shares at $6.1677 per share, for a total of $38.2 million, from executive officers and other employees to cover their tax obligations from the Class C Exchange.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On March 11, 2026, pursuant to a resolution approved by the Board, the Company repurchased 6,198,425 shares of Class A Common Stock at a price of $6.1677 per share, for a total of $38.2 million."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Inferred from balance sheet and cash flow figures; leverage improvement stated in P6. No debt maturity or covenant data in the packet.",
-    "claim": "Long-term debt rose to 1,414,574 at Sep. 30, 2026 from 1,326,013 at Dec. 31, 2025 (table in thousands), and cash interest paid was 84,516 for the nine months.",
-    "facts": [
-     "F1",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Long-term debt | 1,414,574 | 1,326,013",
-     "Cash interest paid | 84,516 | 86,302",
-     "Net leverage now stands at 2.7x, a 0.7x improvement year-over-year, and our lowest ever third quarter ratio."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F2 and F3 figures; the counter is stated in P6.",
-    "claim": "GAAP operating income fell to 48,059 in Q3 2026 from 60,913 and to 69,247 for nine months from 102,370 (table in thousands), while office and general expenses rose; the nine-month result attributable to shareholders was a loss of (2,970).",
-    "facts": [
-     "F2",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370",
-     "Office and general expenses | 206,942 | 166,422 | 611,323 | 528,845",
-     "Q3 Adjusted EBITDA of $145 million, an increase of 25% versus the prior year period"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Guidance and risk wording stated in P6; dependence on Q4 inferred from the P3 seasonality statement.",
-    "claim": "The company raised full-year 2026 Adjusted EBITDA guidance to $490 million to $540 million and Adjusted EPS guidance to $1.07 to $1.21, and lists its ability to forecast and give accurate guidance as a risk.",
-    "facts": [
-     "P6",
-     "P3"
     ],
     "quotes": [
      "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million; Raise Full-Year Adjusted EPS Guidance to $1.07 to $1.21",
-     "the Company\u2019s ability to accurately forecast its future financial performance and provide accurate guidance;",
-     "Historically, we typically generate the highest quarterly revenue during the fourth quarter of each year."
+     "the Company\u2019s ability to accurately forecast its future financial performance and provide accurate guidance;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P3; the 2026 Communications figures are from P6, with the column mapping uncertain.",
-    "claim": "Advocacy and political revenue is cyclical; in 2025, after the 2024 election, Communications organic net revenue fell (16.5)%.",
+    "basis": "Seasonality is stated in P2. The 2025 decline is stated in P3. The Q3 2026 figure is in P6. That the 2026 growth is partly cyclical is inferred.",
+    "claim": "Political-cycle dependence in Communications: the segment's Q3 2026 organic net revenue rose 20.0%, after an organic decline of (16.5)% in 2025 following the 2024 presidential cycle. The 10-K says political activity lifts revenue in election years and lowers it in other periods.",
     "facts": [
      "P2",
      "P3",
@@ -1795,123 +1294,23 @@
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in the P2 risk factors.",
-    "claim": "The top ten clients accounted for approximately 18% of 2025 revenue, and clients may end contracts on a relatively short time frame.",
+    "basis": "Segment figures are stated in Schedules 2 and 3 of P6. The risk interpretation is inferred.",
+    "claim": "Marketing Services, the largest segment by Q3 net revenue at 217,681 (table in thousands), shrank organically by (7.5)% in Q3 2026 and (2.2)% over nine months. Media & Commerce was also down (2.1)% organically in Q3.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In the aggregate, our top ten clients based on revenue accounted for approximately 18% of our revenue for the year ended December 31, 2025.",
-     "No customer represented more than 4% of total revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures printed in P6; which column belongs to which period is unclear in the extracted table.",
-    "claim": "The Q3 2026 earnings presentation prints negative net revenue growth figures for Marketing Services, the largest segment by 2025 net revenue.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "(2.9%)(2.2%)(9.3%)(7.5%)Marketing Services"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance sheet figures stated; impairment risk named in P2; the comparison is inferred.",
-    "claim": "Goodwill of 1,598,491 and other intangible assets of 795,689 at Sep. 30, 2026 compare with total shareholders\u2019 equity of 710,297 (table in thousands), which fell from 776,367.",
-    "facts": [
-     "F1",
-     "F2",
-     "P2"
-    ],
-    "quotes": [
-     "Goodwill | 1,598,491 | 1,595,238",
-     "Total shareholders\u2019 equity | 710,297 | 776,367",
-     "become subject to adverse tax consequences, substantial depreciation or amortization expenses, impairment of goodwill and/or purchased long-lived assets, restructuring charges, deferred compensation or other acquisition-related accounting charges."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4, F1 and F3; the Wavelength earn-out of up to $24.8 million is stated in P3.",
-    "claim": "The Freestar acquisition was paid partly in 3,442,043 shares and carries up to $60.0 million of contingent consideration, and the current portion of deferred acquisition consideration rose to 42,871 from 15,446 (table in thousands).",
-    "facts": [
-     "P4",
-     "F1",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets.",
-     "Current portion of deferred acquisition consideration | 42,871 | 15,446",
-     "Shares repurchased and cancelled | (90,716) | (105,183)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1 and F3; the payment schedule is not in the packet.",
-    "claim": "A long-term tax receivable agreement liability of 252,390 (table in thousands) remains on the balance sheet.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Long-term tax receivable agreement liability | 252,390 | 252,390",
-     "Tax Receivables Agreement payment | (2,554) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and P10.",
-    "claim": "The 10-K states the business is highly dependent on CEO and Chairman Mark Penn.",
-    "facts": [
-     "P2",
-     "P10"
-    ],
-    "quotes": [
-     "Our business is highly dependent on the services of Mark Penn, our CEO and Chairman.",
-     "The Amendment extends the term of Mr. Penn\u2019s employment with the Company until July 31, 2029."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Terms stated in P10; the exposure is inferred from the S0 price.",
-    "claim": "On August 1, 2026 the CEO was granted 2,000,000 cash-settled SARs with a base price of $8.45, while the screener price is 11.27.",
-    "facts": [
-     "P10",
-     "S0"
-    ],
-    "quotes": [
-     "The SARs are settleable only in cash.",
-     "The SARs have a base price of $8.45 per share and vest in three installments with 1,000,000 SARs vesting on the first anniversary of the date of grant and 500,000 SARs vesting on each of the second and third anniversaries of the date of grant."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2, F3 and P6.",
-    "claim": "Capitalized software spending rose to (75,855) from (45,315) (table in thousands), and the company calls its new technology initiatives inherently risky.",
-    "facts": [
-     "F3",
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "Our new initiatives are inherently risky, as each involves development of new software platforms or other product offerings, unproven business strategies and technologies with which we may have limited prior development or operating experience.",
-     "Capitalized software | (75,855) | (45,315)"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P5.",
-    "claim": "The 10-K describes the conflict in Iran and the Middle East as disrupting travel to the Brands' regional offices, with operations outside the US at approximately 23% of 2025 revenue.",
+    "basis": "Balances and deal terms are stated in F1 and P4. The strain on liquidity is inferred.",
+    "claim": "Acquisition-related obligations are growing. The current portion of deferred acquisition consideration rose to 42,871 from 15,446 (table in thousands). The Freestar deal (announced October 2026) adds $50.0 million of consideration and up to $60.0 million of contingent payments.",
     "facts": [
-     "P2",
-     "P5"
+     "F1",
+     "P4"
     ],
     "quotes": [
-     "The conflict in Iran and the Middle East is ongoing, and its duration is uncertain.",
-     "Operations outside the United States represent a significant portion of our revenues and represented approximately 23% of our revenues in 2025."
+     "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets."
     ],
     "support": "supported"
    }
@@ -1919,229 +1318,115 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "inferred from the GAAP statement in F2 and the non-GAAP headline in P6; the reconciliation itself is not in the packet",
-    "claim": "Which items reconcile Q3 operating income of 48,059 versus 60,913 (table in thousands) with Adjusted EBITDA rising 25% to $145 million?",
+    "basis": "inferred from the income statement and the segment reconciliation in the earnings release; the causal split is not stated",
+    "claim": "Why did Q3 operating income fall to 48,059 (table in thousands) from 60,913 while Adjusted EBITDA grew 25% to $145 million? Office and general expenses and deferred acquisition consideration moved, but the evidence does not isolate what drove the gap.",
     "facts": [
      "F2",
      "P6"
     ],
     "quotes": [
-     "Operating Income (Loss), Total | 48,059 | 60,913 | 69,247 | 102,370",
-     "Office and general expenses | 206,942 | 166,422 | 611,323 | 528,845",
-     "Q3 Adjusted EBITDA of $145 million, an increase of 25% versus the prior year period"
+     "Q3 Adjusted EBITDA Growth YoY of 25% to $145 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from the line items; the evidence does not say which Brands or earnout terms are involved",
-    "claim": "What drove the 26,766 (table in thousands) deferred acquisition consideration charge in 9M 2026, and why did its current portion rise from 15,446 to 42,871?",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Adjustment To Deferred Acquisition Consideration | 26,766 | (9,911)",
-     "Current portion of deferred acquisition consideration | 42,871 | 15,446"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "the definition is stated in P4; the reconciliation is in omitted text",
-    "claim": "How is the YTD free cash flow of $52 million derived, and were any material nonrecurring capital purchases excluded?",
+    "basis": "inferred from the guidance and YTD figures; the release gives no quantitative reconciliation of guidance",
+    "claim": "What Q4 result is needed to reach the raised full-year Adjusted EBITDA guidance of $490 million to $540 million, given YTD Adjusted EBITDA of $343 million, and how much of the guidance depends on acquisitions such as Freestar?",
     "facts": [
      "P6",
-     "P4",
-     "F3"
-    ],
-    "quotes": [
-     "Year-to-Date Free Cash Flow Increased 227% YoY to $52 million",
-     "is defined as consolidated net cash flow from operations less cash outflow from capital expenditures and capitalized software, excluding material nonrecurring capital purchases."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred; P1 describes investment in The Marketing Cloud and The Machine, but no item links the spend to specific products",
-    "claim": "Which products or programmes account for capitalized software of 75,855 versus 45,315 (table in thousands) in 9M 2026?",
-    "facts": [
-     "F3",
-     "P1"
-    ],
-    "quotes": [
-     "Capitalized software | (75,855) | (45,315)"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "the ratio is stated by the CFO in P6; its inputs and the debt terms are not in the packet",
-    "claim": "How is net leverage of 2.7x calculated while long-term debt rose to 1,414,574 from 1,326,013 (table in thousands), and what are the covenant terms and maturities?",
-    "facts": [
-     "P6",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Net leverage now stands at 2.7x, a 0.7x improvement year-over-year, and our lowest ever third quarter ratio.",
-     "Long-term debt | 1,414,574 | 1,326,013"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "guidance is stated in P6; the outcome falls after T",
-    "claim": "Will full-year 2026 results land within the raised guidance of $490 million to $540 million Adjusted EBITDA and $1.07 to $1.21 Adjusted EPS?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million; Raise Full-Year Adjusted EPS Guidance to $1.07 to $1.21"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 that the allocation is pending",
-    "claim": "What purchase price allocation and contingent consideration fair value will be recorded for the Freestar acquisition?",
-    "facts": [
      "P4"
     ],
     "quotes": [
-     "Due to the timing of the acquisition, the Company is currently evaluating the purchase price allocation, including the fair value of the consideration transferred and the assets acquired and liabilities assumed.",
-     "The sellers can also earn up to $60.0 million in contingent consideration if future earnings targets are met, plus a share of earnings above those targets."
+     "Raise Full-Year Adjusted EBITDA Guidance to $490 million to $540 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "the figure is stated in P6; no item gives its definition or timing",
-    "claim": "How is enterprise technology products contracted of $59 million defined, and when does it convert to revenue?",
+    "basis": "inferred from the cash flow statement; no item explains the working capital swing",
+    "claim": "Is the jump in YTD operating cash flow to 152,279 from 30,713 (table in thousands) lasting, or does it reflect working capital timing? Accrued expenses and other liabilities moved from (117,118) to 5,297, while capitalized software spending rose to (75,855) from (45,315).",
     "facts": [
+     "F3",
      "P6"
     ],
     "quotes": [
-     "YTD enterprise technology products contracted to date of $59 million, more than double initial FY26 target"
+     "Year-to-Date Free Cash Flow Increased 227% YoY to $52 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 without a definition",
-    "claim": "How is net new business of $168 million in Q3 and $586 million LTM measured, and how does it relate to reported revenue?",
+    "basis": "inferred from the balance sheet, the cash flow statement and the Freestar disclosure; debt terms are not in the packet",
+    "claim": "How will rising debt, buybacks and acquisition obligations be funded? Long-term debt rose to 1,414,574 from 1,326,013, current deferred acquisition consideration rose to 42,871 from 15,446 (table in thousands), and Freestar adds $20.0 million cash plus up to $60.0 million contingent consideration.",
     "facts": [
+     "F1",
+     "F3",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "Net New Business of $168 million in Q3; LTM Net New Business of $586 million"
+     "Net leverage now stands at 2.7x"
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred column mapping; the Marketing Cloud row (108.4% organic) matches the stated Q3 108% figure, which places these values in the 3Q columns",
-    "claim": "What caused the Marketing Services Q3 net revenue decline of (9.3%), with organic decline of (7.5%)?",
+    "basis": "inferred from the segment tables; the reasons are not stated in the available excerpts",
+    "claim": "What explains the decline in Marketing Services net revenue, down (7.5)% organically in Q3, against Digital Transformation up 23.1%? Is it client losses, project timing or a shift of work between segments?",
     "facts": [
      "P6"
     ],
-    "quotes": [
-     "(2.9%)(2.2%)(9.3%)(7.5%)Marketing Services"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "the seasonality is stated in P2; the advocacy share of growth is not given, and the column mapping is inferred",
-    "claim": "How much of Communications Q3 organic net revenue growth of 20.0% is election-cycle advocacy that may reverse in odd years?",
+    "basis": "inferred from the 10-K seasonality language and the Q3 segment table; the split is not disclosed",
+    "claim": "How much of the 20.0% Q3 organic net revenue growth in Communications reflects the 2026 election-cycle effect rather than lasting demand?",
     "facts": [
      "P6",
      "P2",
      "P3"
     ],
     "quotes": [
-     "16.6%12.7%28.0%20.0%Communications",
      "Political advertising and related activity have also historically caused our revenue to increase during election cycles, which is most pronounced in even years, in particular during the third and fourth quarters of such years, and to decrease during other periods."
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "the terms are stated in P10; the accounting treatment is not in the packet",
-    "claim": "What liability and expense are recognised for the CEO's 2,000,000 cash-settled SARs with a base price of $8.45, and are they excluded from Adjusted EBITDA?",
-    "facts": [
-     "P10",
-     "S0"
-    ],
-    "quotes": [
-     "The SARs are settleable only in cash."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "the line item is stated in F3; no explanation is in the packet",
-    "claim": "What drove stock-based compensation of 61,735 versus 44,143 (table in thousands) for 9M?",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Stock-based compensation | 61,735 | 44,143"
-    ],
     "support": "number_not_listed"
    },
    {
-    "basis": "inferred from the statement figures; the tax rate drivers are not disclosed in the packet",
-    "claim": "Why was 9M income tax expense 7,646 on pretax income of 2,882 (table in thousands)?",
+    "basis": "inferred from the income statement and the EPS reconciliation footnotes; the tax note is not in the packet",
+    "claim": "What drives the very high GAAP effective tax rate of 265.3% YTD (37.7% in Q3), and how does it interact with the 252,390 (table in thousands) tax receivable agreement liability?",
     "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Income tax expense | 10,882 | 9,555 | 7,646 | 13,950"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "the balances are stated; the timing is not in the packet",
-    "claim": "What is the payment schedule for the long-term tax receivable agreement liability of 252,390 (table in thousands), following the first payment of 2,554?",
-    "facts": [
+     "F2",
      "F1",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "Long-term tax receivable agreement liability | 252,390 | 252,390",
-     "Tax Receivables Agreement payment | (2,554) | 0"
+     "at an effective tax rate of 265.3% on a GAAP basis"
     ],
     "support": "supported"
    },
    {
-    "basis": "the authorization and the cash outflow are stated; cumulative usage is not",
-    "claim": "How much capacity remains under the $725.0 million repurchase program after 9M repurchases of 90,716 (table in thousands)?",
+    "basis": "inferred from the release; the conversion of contracted amounts to revenue is not stated",
+    "claim": "How much of the $59 million of contracted enterprise technology products will turn into recognized revenue and profit in The Marketing Cloud, whose YTD Adjusted EBITDA was only 17,378 (table in thousands)?",
     "facts": [
-     "P3",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "Under the Repurchase Program, as amended, we may repurchase up to an aggregate of $725.0 million of shares of our outstanding Class A Common Stock, with any previous purchases under the Repurchase Program continuing to count against that limit.",
-     "Shares repurchased and cancelled | (90,716) | (105,183)"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "the resignation is stated in P8; no replacement is disclosed",
-    "claim": "Will the board seat vacated by Bradley J. Gross be filled, and how will board size change?",
-    "facts": [
-     "P8",
-     "P9",
-     "P7"
-    ],
-    "quotes": [
-     "The resignation of Mr. Gross is not the result of any disagreement with the Company on any matter relating to the Company\u2019s operations, policies or practices."
+     "Enterprise Technology Products Contracted to Date of $59 million More Than Double Initial 2026 Goal"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "STGW",
- "upside": -0.4406150712648953,
+ "upside": -0.42336172334035194,
  "valuation": null,
- "value_base": 5.390702368679689,
- "value_bear": 3.9019794360897793,
- "value_bull": 8.161174244828043,
+ "value_base": 5.927841122135214,
+ "value_bear": 4.071660667102623,
+ "value_bull": 8.518553603250776,
  "value_per_filed_share": {
-  "base": 5.390702368679689,
-  "bear": 3.9019794360897793,
-  "bull": 8.161174244828043
+  "base": 5.927841122135214,
+  "bear": 4.071660667102623,
+  "bull": 8.518553603250776
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -19.5 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -17.5 points a year against the required return over 3 years"
 }
