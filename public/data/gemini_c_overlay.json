@@ -1,11 +1,11 @@
 {
- "count": 229,
+ "count": 230,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-21T12:37:08Z",
+ "generated_at": "2026-11-21T12:44:46Z",
  "list_covered": 155,
  "list_names": 158,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -6199,6 +6199,41 @@
    "verdict": "NO_CALL",
    "verdict_reason": "share count does not reconcile with filed EPS"
   },
+  "NEM": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-10-22T20:46:01.000Z",
+    "accepted_utc": "2026-10-23T00:46:01Z",
+    "accession": "0001164727-26-000043",
+    "decision_time": "2026-11-21T12:38:12Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 70,
+   "claims_supported": 59,
+   "date": "2026-11-21T12:38:12Z",
+   "family": "commodity",
+   "flags": [
+    "Newmont and Barrick amended the Nevada Gold Mines joint venture. Newmont agreed to contribute $1.95 billion in cash within 30 days after the Fourmile property is contributed. That contribution had not yet taken place at the 10-Q date.",
+    "Operations at the Cadia mine were temporarily suspended after seismic activity was recorded near the operation.",
+    "Ghana's Parliament enacted legislation, effective early March 2026, replacing the fixed 5% gold royalty with a sliding scale of 5% to 12%. It also cut the Growth and Sustainability Levy to 1%, effective April 1, 2026."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [
+    "0001164727-26-000041"
+   ],
+   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+   "source": "on request (operator)",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
   "NGVT": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -9987,7 +10022,7 @@
  "verdict_counts": {
   "AVOID": 50,
   "BUY": 57,
-  "NO_CALL": 100,
+  "NO_CALL": 101,
   "WATCH": 22
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
