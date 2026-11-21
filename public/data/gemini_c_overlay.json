@@ -2,10 +2,10 @@
  "count": 240,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-21T14:12:04Z",
+ "generated_at": "2026-11-21T14:32:51Z",
  "list_covered": 156,
  "list_names": 158,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -5751,52 +5751,37 @@
    "verdict_reason": "expected return +13.4 points a year against the required return over 3 years"
   },
   "LAMR": {
-   "alpha_pts": -9.646922526656452,
+   "alpha_pts": null,
    "analysis": "complete",
-   "claims": 99,
-   "claims_supported": 96,
-   "date": "2026-11-16T20:13:08Z",
-   "decided": {
-    "method": "decided.v1",
-    "version": "decided.v2 2026-11-19 WO_NC9a"
+   "based_on": {
+    "accepted": "2026-11-05T15:59:01.000Z",
+    "accepted_utc": "2026-11-05T20:59:01Z",
+    "accession": "0001090425-26-000030",
+    "decision_time": "2026-11-21T14:12:31Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
    },
-   "equity_value": 11501476574.356634,
-   "family": "family_not_built",
-   "far_from_price": false,
-   "filed_shares": 101634142.0,
+   "claims": 120,
+   "claims_supported": 109,
+   "date": "2026-11-21T14:12:31Z",
+   "family": "real_estate",
    "flags": [
-    "Lamar Media Corp. and its special purpose subsidiaries entered into the Eighth Amendment to the Receivables Financing Agreement, extending the maturity date of the Accounts Receivable Securitization Program to October 1, 2029 and providing additional flexibility for eligibility of certain receivables.",
-    "Lamar updated its 2026 guidance issued in August 2026, raising expected full-year diluted AFFO per share to between $8.87 and $8.97 and expecting full-year diluted earnings per share between $6.01 and $6.04.",
-    "Lamar announced third quarter 2026 operating results, reporting net revenues of $624.5 million (a 6.6% increase), net income of $165.0 million (a 14.5% increase), and Adjusted EBITDA of $306.9 million (a 9.3% increase)."
+    "Lamar Media Corp. and its special purpose subsidiaries entered into the Eighth Amendment to the Receivables Financing Agreement, extending the Accounts Receivable Securitization Program maturity date to October 1, 2029.",
+    "Lamar Advertising Company's Board of Directors declared a quarterly cash dividend of $1.65 per share payable on September 30, 2026 to Class A and Class B common stockholders of record on September 21, 2026.",
+    "Lamar updated its fiscal year 2026 guidance to expect diluted earnings per share between $6.01 and $6.04 and diluted AFFO per share between $8.87 and $8.97."
    ],
    "in_code_book": false,
-   "ke": 0.08903203083918919,
-   "market_cap_at_publish": 15457480518,
+   "ke": null,
    "model": "gemini-4-hydrogen-high",
-   "no_value_reason": null,
+   "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
    "pending_offer": null,
-   "price_at_publish": 152.17,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "seed_base": {
-    "1000": 119.3534649191001,
-    "3000": 106.97749725612316
-   },
-   "seeds_agree": true,
-   "share_unit_note": null,
-   "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
-   "upside": -0.2559281209532601,
-   "value_base": 113.16548108761162,
-   "value_bear": 88.72316060528848,
-   "value_bull": 145.77621459077858,
-   "value_per_filed_share": {
-    "base": 113.16548108761162,
-    "bear": 88.72316060528848,
-    "bull": 145.77621459077858
-   },
-   "valued": true,
-   "verdict": "AVOID",
-   "verdict_reason": "expected return -9.6 points a year against the required return over 3 years"
+   "release_truncated": [],
+   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+   "source": "on request (method_changed)",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
   },
   "LFST": {
    "alpha_pts": null,
@@ -10545,11 +10530,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +32.1 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 145,
+ "valued_count": 144,
  "verdict_counts": {
-  "AVOID": 54,
+  "AVOID": 53,
   "BUY": 59,
-  "NO_CALL": 104,
+  "NO_CALL": 105,
   "WATCH": 23
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
