@@ -1,0 +1,1199 @@
+{
+ "alpha_pts": -14.188803745589428,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "based_on": {
+  "accepted": "2026-11-06T19:42:47.000Z",
+  "accepted_utc": "2026-11-07T00:42:47Z",
+  "accession": "0001172052-26-000032",
+  "decision_time": "2026-11-21T05:02:06Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 62,
+ "claims_supported": 59,
+ "date": "2026-11-21T05:02:06Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 11",
+   "run 3000: base_year_not_representative",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.0879, growth 0.0375, r 0.0927, F 10",
+  "route": "financial",
+  "run_gap": 0.014973922247150185,
+  "runs": {
+   "1000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 911696168.9240955,
+     "implied_pb": 1.1056798402644823,
+     "seam_ratio": 1.044642857142857,
+     "tv_share": 0.4788606396970845
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.02,
+      0.04,
+      0.043,
+      0.042,
+      0.04
+     ],
+     "fade_years": 8,
+     "long_run_roe": 0.093,
+     "roe": [
+      0.088,
+      0.098,
+      0.1,
+      0.098,
+      0.096
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.0879, growth 0.0375, r 0.0927, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 59
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.02,
+      0.06
+     ],
+     "long_run_roe": [
+      0.08,
+      0.105
+     ],
+     "terminal_growth": [
+      0.025,
+      0.042
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive loss, net of taxes | (67,278) | (17,133)"
+       },
+       {
+        "id": "P5",
+        "quote": "book value per share decreased to $58.29 at September 30, 2026 from $60.98 at December 31, 2025"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 equity is down because accumulated other comprehensive loss widened to (67,278) from (17,133) and dividends take most of earnings. Later growth is retained earnings of about 35-40% of income, plus some recovery of bond marks. Per-share dividends of $0.92 a quarter continue."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0927"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "ROE is near the cost of equity of 0.0927, so the fade matters little for value. About 8 years reflects a gradual return from the cyclical high-ROE years toward the long-run level."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0232, p25 0.0502, median 0.0879, p75 0.1198, max 0.1477, last 0.1198."
+       },
+       {
+        "id": "P3",
+        "quote": "Combined ratio | 99.0% | 101.1% | 107.7%"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "The 6-year median of 0.0879 and a 99-101% through-cycle combined ratio point to a mid-single-digit underwriting margin plus about 4% portfolio yield. That supports a long-run ROE near the 0.0927 cost of equity. The A.M. Best A rating and a concentrated one-state business do not justify a persistent premium to it."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "The increase in losses during the nine months ended September 30, 2026 is due to the impact of two severe winter weather events that occurred during the quarter ended March 31, 2026."
+       },
+       {
+        "id": "P5",
+        "quote": "Loss, expense, and combined ratios calculated for the quarter ended September 30, 2026 were 67.2%, 29.1%, and 96.3%, respectively"
+       },
+       {
+        "id": "P5",
+        "quote": "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market, in addition to the cancellation of certain underperforming agency relationships."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 reflects the winter-storm hit: nine-month income was 50.2M against 79.1M. Q3 improved, so ROE recovers toward about 0.10 in the following years. A softer market and slowing rate gains keep it below the 2025 peak."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P5",
+        "quote": "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Growth is set slightly below the long-run nominal anchor. It is consistent with ROE of about 0.093 and a retention of about 35-40%, in a single-state market where written premium is currently shrinking."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "roe",
+      "risk": "Severe weather or claim inflation in a concentrated Massachusetts auto and home book pushes combined ratios back above 100%, as in 2023-24"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_roe",
+      "risk": "Soft-market competition from large direct writers permanently compresses margins and ROE"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "book_growth",
+      "risk": "Further rate-driven bond losses and a deal break or regulatory block limit equity growth"
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.043,
+       0.017000000000000005,
+       0.02,
+       0.019000000000000006,
+       0.017000000000000005
+      ],
+      "long_run_roe": 0.08,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       -0.002999999999999999,
+       0.057,
+       0.06,
+       0.059000000000000004,
+       0.057
+      ],
+      "long_run_roe": 0.105,
+      "terminal_growth": 0.042
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "ROE has swung with the underwriting cycle: the combined ratio was 107.7% in 2023, 101.1% in 2024 and 99.0% in 2025, and ROE moved from 2.3% to 12.0% over that span. 2026 is weaker at the nine-month mark because of two Q1 winter storms (nine-month combined ratio 101.7%), although Q3 improved to 96.3%. Part of the 2025 ROE came from investment gains and strong partnership income, and a softening market now limits pricing.",
+     "why": "2025 ROE of 0.1198 sits at the top of the 6-year range (median 0.0879), helped by a benign catastrophe year, rate increases earning in and realized gains. The company pays out roughly two-thirds of earnings as dividends and carries only 50,000 of debt, so regulatory capital does not appear to bind book growth. The Massachusetts dividend limits on the subsidiary are a general constraint, not an evidenced binding one. A pending $105 cash merger overrides any standalone path, so these inputs describe the standalone business."
+    },
+    "value_at_old_defaults": 59.8086407591349,
+    "values": {
+     "base": 66.91094744508713,
+     "bear": 60.20535751540891,
+     "bull": 78.16630089986799
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 925450816.9858968,
+     "implied_pb": 1.1223610961370545,
+     "seam_ratio": 1.0412600806451597,
+     "tv_share": 0.45462655991795947
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 10 of 10"
+    ],
+    "inputs": {
+     "book_growth": [
+      -0.025,
+      0.035,
+      0.035,
+      0.035,
+      0.035
+     ],
+     "fade_years": 8,
+     "long_run_roe": 0.095,
+     "roe": [
+      0.088,
+      0.093,
+      0.098,
+      0.098,
+      0.097
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.0879, growth 0.0375, r 0.0927, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 3,
+     "kept": 59
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.01,
+      0.055
+     ],
+     "long_run_roe": [
+      0.08,
+      0.11
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive loss, net of taxes | (67,278) | (17,133)"
+       },
+       {
+        "id": "P5",
+        "quote": "book value per share decreased to $58.29 at September 30, 2026 from $60.98 at December 31, 2025"
+       },
+       {
+        "id": "P5",
+        "quote": "Today, our Board of Directors approved a $0.92 per share quarterly cash dividend"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Equity fell from $892.3 million to $855.8 million in nine months, driven by the accumulated other comprehensive loss, so year 1 is negative. After that, growth is earnings less a dividend of about $3.68 per share, roughly 65% of earnings, with some pull-to-par recovery on bonds."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The return is already near its long-run level, so the fade is short to moderate. Competitive softening and regulated pricing argue against a long period of excess returns."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Loss, expense, and combined ratios calculated under U.S. GAAP for the year ended December 31, 2025 were 70.0%, 29.0%, and 99.0%"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0232, p25 0.0502, median 0.0879, p75 0.1198, max 0.1477, last 0.1198."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A single-state, auto-heavy book with a combined ratio near 99% earns an ROE close to the 9.27% cost of equity, helped by investment income. I fade to 0.095, slightly above the 0.0879 six-year median."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "P5",
+        "quote": "The increase in the combined ratio during the nine months ended September 30, 2026 was primarily driven by the increase in losses discussed above."
+       },
+       {
+        "id": "P5",
+        "quote": "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0232, p25 0.0502, median 0.0879, p75 0.1198, max 0.1477, last 0.1198."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Year 1 is held down by the Q1 2026 storms, with nine-month net income well below last year. Later years recover toward a mid-cycle level below 2025's peak, because the market is softening and policy counts are falling."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0927; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Growth is concentrated in one regulated state and a returns-near-cost-of-equity business, so long-run book growth sits below the 0.0375 anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.07,
+      "input_hit": "long_run_roe",
+      "risk": "Soft market and claim inflation hold the combined ratio above 100%, cutting ROE."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "book_growth",
+      "risk": "Further bond-price declines widen the accumulated other comprehensive loss, and weather losses recur, keeping equity flat."
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "terminal_growth",
+      "risk": "The Mapfre merger fails and the stock re-prices to standalone results, with competition and regulation in Massachusetts limiting growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.05,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002,
+       0.010000000000000002
+      ],
+      "long_run_roe": 0.08,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       -0.0050000000000000044,
+       0.055,
+       0.055,
+       0.055,
+       0.055
+      ],
+      "long_run_roe": 0.11,
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "The 2025 return of 0.1198 was lifted by earned rate increases, a 99.0% combined ratio and realized gains. 2026 is weaker: two severe Q1 winter storms pushed the nine-month combined ratio to 101.7% and nine-month net income fell to $50.2 million from $79.1 million. Q3 recovered to a 96.3% combined ratio, and investment income is at a record. Premiums are shrinking in a softer market and rate gains are slowing, so I expect a return around the 6-year median, not the 2025 peak.",
+     "why": "Debt is only $50 million against $856 million of equity, and the company pays out most of its earnings in dividends, so book equity grows slowly by choice, not because of capital limits. Subsidiary dividends are subject to Massachusetts law, but nothing in the packet shows that binding. Year 1 book equity shrinks because unrealized bond losses (accumulated other comprehensive loss) widened sharply. The Mapfre merger at $105 per share is a separate matter; these inputs describe the standalone book and return."
+    },
+    "value_at_old_defaults": 59.8086407591349,
+    "values": {
+     "base": 67.92042468647442,
+     "bear": 60.76507620737528,
+     "bull": 81.68476623907634
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 59.8086407591349,
+  "value_at_old_defaults_quoted": 59.8086407591349,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 994052718.0006957,
+ "family": "financial",
+ "far_from_price": false,
+ "filed_shares": 14745125.0,
+ "flags": [
+  "Safety signed a merger agreement under which an affiliate of Mapfre will buy the company for $105 in cash per share, a deal valued at approximately $1.54 billion. Shareholders have voted in favor, and the HSR waiting period has expired. The deal still needs other regulatory approvals, including that of the Massachusetts Commissioner of Insurance.",
+  "Severe winter weather events in the first quarter of 2026 raised nine-month losses and loss adjustment expenses to $640.2 million, up 8.6%."
+ ],
+ "in_code_book": false,
+ "ke": 0.09273912688743591,
+ "market_cap_at_publish": 1533229711,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": null,
+ "pending_offer": {
+  "claim": "Safety signed a merger agreement under which an affiliate of Mapfre will buy the company for $105 in cash per share, a deal valued at approximately $1.54 billion. Shareholders have voted in favor, and the HSR waiting period has expired. The deal still needs other regulatory approvals, including that of the Massachusetts Commissioner of Insurance.",
+  "date": "July 23, 2026"
+ },
+ "price_at_publish": 104.44,
+ "qwen_book": null,
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+ "seed_base": {
+  "1000": 66.91094744508713,
+  "3000": 67.92042468647442
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (operator)",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated in the 10-K business and MD&A sections.",
+    "claim": "Safety is a property and casualty insurer. It sells private passenger auto, commercial auto and homeowners insurance, plus smaller lines such as dwelling fire, umbrella and business owner policies. Private passenger auto is the largest line at 54.9% of 2025 direct written premiums, followed by homeowners at 25.2% and commercial auto at 15.2%.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We are a leading provider of private passenger automobile, commercial automobile, and homeowners insurance in Massachusetts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K tables and risk factors.",
+    "claim": "The business is geographically concentrated. It operates only in Massachusetts, New Hampshire and Maine, and Massachusetts produced $1,204,809 of $1,278,605 total 2025 direct written premiums (dollars in thousands).",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "A majority of our direct written premiums are currently generated in Massachusetts."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K.",
+    "claim": "Customers are reached exclusively through independent agents. The 10-K counts 797 agents in 1,063 locations during 2025. Agents are paid commissions and profit-sharing programs, and the company tries to be one of the top two carriers in each agency.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We distribute our products exclusively through independent agents, unlike some of our competitors who use multiple distribution channels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Taken directly from the income statement. The roles of the smaller streams are inferred from the line names.",
+    "claim": "Revenue comes mainly from net earned premiums, with smaller streams from investments and fees. For the nine months to Sep. 30, 2026, net earned premiums were 876,509 of total revenue of 968,118. Net investment income was 51,469, finance and other service income was 17,353, and commission income was 6,700 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release. The volume-times-price mechanism is inferred.",
+    "claim": "Premium volume is currently shrinking while price per policy rises. Q3 2026 direct written premiums fell 4.3% to $319.7 million from $334.2 million, which management attributes to a softer, more competitive market and cancelled underperforming agencies. Average written premium per policy rose 2.0% in private passenger auto, 6.0% in commercial auto and 9.7% in homeowners (nine months).",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market, in addition to the cancellation of certain underperforming agency relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release. The forward effect is inferred.",
+    "claim": "Earned premium lags written premium, so past rate increases keep lifting reported revenue. Net earned premiums rose 3.6% to $876.5 million for the nine months from $845.8 million, even though written premiums fell.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "The increase in net earned premium is the result of rate increases earning into top-line results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors and MD&A rate table.",
+    "claim": "Prices are regulated, which limits how quickly premium can rise. The 10-K lists approval or filing of premium rates and policy forms among the regulation the company must comply with. Its rate-change table shows a 1.3% Massachusetts private passenger auto change effective January 1, 2026, versus 5.3% on January 1, 2025.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "approval or filing of premium rates and policy forms;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Taken from the income statement. The cost composition is inferred from the line names.",
+    "claim": "The largest cost is claims. For the nine months, losses and loss adjustment expenses were 640,234 of total expenses of 903,838, and underwriting, operating and related expenses were 251,541 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release.",
+    "claim": "Underwriting results swing with weather and claim frequency. The nine-month combined ratio was 101.7% versus 98.9% a year earlier, driven by two severe winter storms in Q1 2026. The Q3 combined ratio improved to 96.3% from 98.9%, helped by better private passenger auto frequency.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The increase in losses during the nine months ended September 30, 2026 is due to the impact of two severe winter weather events that occurred during the quarter ended March 31, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and the release.",
+    "claim": "Inflation in claim costs is a recurring cost driver. The 10-K says the 2025 rise in losses came from larger policy counts and inflationary effects on the private passenger auto book, and that loss reserves are estimates that could prove inadequate.",
+    "facts": [
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "The increase in losses for both periods ended December 31, 2025 is primarily driven by our larger policy counts and current market conditions, specifically inflationary impacts on our Private Passenger Automobile book of business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet and release figures are stated. The float link between reserves and investments is inferred.",
+    "claim": "Investing premiums held before claims are paid is a second profit source. Total investments were 1,703,896 against loss reserves of 820,025 and unearned premium reserves of 666,959 (table in thousands). Q3 net investment income rose 15.0% to $17.9 million, with an annualized yield of 4.2%.",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "The increase is primarily driven by higher assets under management, reinvestment rates that exceeded the yields on maturing securities, and strong alternative asset returns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K. The 2026 reinsurance program is not in the evidence.",
+    "claim": "Reinsurance caps volatility. For 2025 the company bought three layers of catastrophe reinsurance covering $675,000 of property losses above $75,000, up to $750,000, and it also participates in the Massachusetts commercial auto residual market pool run by CAR (dollars in thousands).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "As of January 1, 2025, we purchased three layers of excess catastrophe reinsurance providing $675,000 of coverage for property losses in excess of $75,000 up to a maximum of $750,000."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q risk factors, the 8-K and the release.",
+    "claim": "Operations are now running under a pending all-cash acquisition by an affiliate of Mapfre at $105.00 per share. The merger agreement requires ordinary-course operation, and Q3 other expense included about $3.8 million of related legal fees.",
+    "facts": [
+     "P4",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "Other expenses for the quarter ended September 30, 2026 included approximately $3.8 million of legal fees incurred in connection with the proposed transaction, which are excluded from the calculation of the expense ratio."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P1 and P3 (company-cited CAR statistics)",
+    "claim": "Safety holds a leading regional position in Massachusetts: the filing ranks it as a top-four private passenger auto carrier and the largest commercial auto carrier there, with 9.4% and 13.0% market shares, and a third-ranked homeowners carrier with a 7.0% share.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "the fourth largest private passenger automobile carrier and the largest commercial automobile carrier in Massachusetts"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1; the counter is stated in P2 and P5",
+    "claim": "The company sells only through independent agents (797 agents in 1,063 locations) in a market where agents account for 68.8% of personal lines versus 39.0% nationwide, so the strength of its agent relationships is central to its position.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "our strategy is centered around, and we sell exclusively through, a network of independent agents"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P3",
+    "claim": "Company-reported profitability history is cited as a strength: the company says it has been profitable in nearly every year since inception. The GAAP combined ratio was 99.0% for the latest full year and 101.1% the year before, and the 10-K lists 107.7% for the earlier year in its ratio table.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In 44 out of 45 years since our inception in 1979, we have been profitable."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "Current-period underwriting improved in the third quarter: the combined ratio fell to 96.3% from 98.9%, which management attributes to earlier premium growth earning in and improved private passenger auto loss frequency.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "our combined ratio improved to 96.3% compared to 98.9% in the same period in the prior year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and F2; the weather link is the company's own explanation",
+    "claim": "Over the nine months the combined ratio rose to 101.7% from 98.9% and net income fell, which the company attributes to losses from severe winter weather in the first quarter. This shows exposure to weather events.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "Loss, expense, and combined ratios calculated for the nine months ended September 30, 2026 were 73.0%, 28.7%, and 101.7%, respectively, compared to 69.7%, 29.2%, and 98.9%, respectively, for the comparable 2025 period.",
+     "The increase in losses during the nine months ended September 30, 2026 is due to the impact of two severe winter weather events that occurred during the quarter ended March 31, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "Premium volume is shrinking in a softer market: third-quarter direct written premiums fell 4.3% to $319.7 million from $334.2 million, and nine-month direct written premiums fell 1.8%. Management cites a softening, more competitive market and cancelled agency relationships.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market, in addition to the cancellation of certain underperforming agency relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and P3; the slowing is inferred from comparing the two",
+    "claim": "Pricing gains are slowing in private passenger auto: average written premium per policy rose 2.0% in the nine months, against an 8.1% rise in the prior full year. The company still reports 6.0% in commercial auto and 9.7% in homeowners.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "Average written premium per policy increased 2.0%, 6.0% and 9.7% in Private Passenger Automobile, Commercial Automobile and Homeowners lines, respectively, compared to the same period in 2025 reflecting the result of rate increases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P1",
+    "claim": "Business is concentrated in one state and one line: a majority of direct written premiums come from Massachusetts, and private passenger auto was 54.9% of direct written premiums, so adverse regulatory or competitive changes there would have a disproportionate effect.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "A majority of our direct written premiums are currently generated in Massachusetts.",
+     "Approximately 54.9% of our direct written premiums for the year ended December 31, 2025 were generated from private passenger automobile insurance policies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Large direct-to-consumer insurers already compete in the company's core auto market, and the company says many competitors have substantially greater resources.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Progressive Corporation, GEICO and Allstate, large insurers that market directly to policyholders rather than through agents, along with other carriers have entered the Massachusetts private passenger automobile insurance market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2; the counter figures are stated in P3",
+    "claim": "Inflation in loss costs is a named threat, especially in private passenger auto, and the company may not be able to offset it with price increases.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Inflation in recent periods has significantly increased our loss costs across all lines of business, especially private passenger automobile."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Financial strength is rated A (Excellent) by A.M. Best, but the company says this is lower than some competitors' ratings, which could weaken its competitive standing if it were reduced.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our A.M. Best rating is lower than those of some of our competitors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and F1",
+    "claim": "Capital position weakened modestly in the period: book value per share fell to $58.29 from $60.98, mainly because fixed maturity values dropped. Accumulated other comprehensive loss widened to (67,278) from (17,133), in a balance sheet stated in thousands of dollars.",
+    "facts": [
+     "P5",
+     "F1"
+    ],
+    "quotes": [
+     "book value per share decreased to $58.29 at September 30, 2026 from $60.98 at December 31, 2025, primarily due to decreases in the value of our fixed maturity portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7, P4, P5 and P6",
+    "claim": "The company has agreed to be acquired by MAPFRE U.S.A. Corp. for $105.00 per share in cash. Shareholders have approved, but closing still needs regulatory approvals including the Massachusetts Commissioner of Insurance. Pendency is a named risk to employee, customer and partner relationships and limits strategic flexibility.",
+    "facts": [
+     "P7",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "converted into the right to receive $105.00 in cash, without interest",
+     "Uncertainty about the effect of the Merger on our employees, customers, and other parties may have an adverse effect on our business, financial condition, and results of operations regardless of whether the Merger is completed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "In commercial auto the company is a CAR servicing carrier, and its re-appointment is a position of strength. Results of the residual-market reinsurance pool are shared among all Massachusetts commercial auto insurers, so the pool can produce a profit or a deficit.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Safety was reappointed for this program for an additional five-year term effective January 1, 2027."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet; the reading of the investment portfolio as the larger liquidity pool is inferred from the balance sheet.",
+    "claim": "Liquidity: cash fell to 56,017 (balance sheet in thousands) at the latest quarter-end from 73,901 at the prior year-end. The company also holds total investments of 1,703,896, which are the larger liquidity pool.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | 56,017 | 73,901"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet figures are stated. Describing the reserves as insurance obligations is inferred from the line items.",
+    "claim": "Leverage: financial debt is small. Long-term debt is 50,000 (balance sheet in thousands), unchanged between the two balance sheet dates, against total shareholders' equity of 855,772. Total liabilities of 1,659,071 are mostly insurance obligations: loss reserves of 820,025 and unearned premium reserves of 666,959.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Long-term debt | 50,000 | 50,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and the earnings release.",
+    "claim": "Shareholders' equity fell to 855,772 (balance sheet in thousands) from 892,311, mainly because accumulated other comprehensive loss widened to (67,278) from (17,133). Fixed maturities were carried at fair value of 1,383,059 against amortized cost of 1,468,572.",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "Safety\u2019s book value per share decreased to $58.29 at September 30, 2026 from $60.98 at December 31, 2025, primarily due to decreases in the value of our fixed maturity portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated. The winter-storm explanation for losses is stated in the earnings release; its link to cash flow is inferred.",
+    "claim": "Cash generation: operating cash flow for the nine months was 78,991 (table in thousands), down from 120,948 a year earlier. Net income fell to 50,213 from 79,143 over the same period.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 78,991 | 120,948"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are stated. The characterization of reserve build as flattering cash flow is inferred.",
+    "claim": "Quality of cash generation: operating cash flow was higher than net income, but the gap is helped by a build in loss reserves of 58,286 (table in thousands). Unearned premium reserves added far less than a year earlier (12,156 against 55,949), consistent with the premium decline the release reports. Reserve build adds cash now but is owed to claimants later.",
+    "facts": [
+     "F3",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Losses and loss adjustment expense reserves | 58,286 | 48,143"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the statements; the reading about partnership cash is inferred from the gap between the two lines.",
+    "claim": "Quality of earnings: nine-month net income includes investment items. Net realized gains of 18,402 (table in thousands) are deducted in the cash flow reconciliation, while a 15,276 unrealized loss on equity securities is added back as non-cash. Earnings from partnership investments of 13,312 are reported in the income statement, but the cash flow reconciliation shows (10,301) for the same line, so part of that income was not received in cash.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Earnings from partnership investments | (10,301) | 1,996"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and the earnings release.",
+    "claim": "Uses of cash: dividends paid to shareholders were 40,318 (table in thousands) for the nine months. Operating cash flow of 78,991 covered this, but cash still fell by (17,884) after net investing outflows of (56,557). A quarterly dividend of $0.92 per share was approved.",
+    "facts": [
+     "F3",
+     "P5"
+    ],
+    "quotes": [
+     "Dividends paid to shareholders | (40,318) | (40,413)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated; the possible links to borrowing are not established by the evidence.",
+    "claim": "Interest cost: interest expense for the nine months was 2,053 (table in thousands), up from 972 a year earlier, while long-term debt on the balance sheet is unchanged at 50,000.",
+    "facts": [
+     "F2",
+     "F1"
+    ],
+    "quotes": [
+     "Interest expense | 621 | 426 | 2,053 | 972"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Absence of maturity terms is a gap in the evidence. The possible sources of repayment are inferred.",
+    "claim": "Refinancing: the packet gives no maturity date, interest rate or repayment schedule for the 50,000 of long-term debt (balance sheet in thousands), so debt falling due cannot be determined. The cash flow statement shows no net financing inflow or outflow other than dividends.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Net cash used for financing activities | (40,318) | (40,413)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors; the consolidated cash figures do not show how much is held at the parent.",
+    "claim": "Constraint on moving cash: the parent depends on dividends from its insurance subsidiary, which are limited by Massachusetts insurance law. The parent's own debt service and dividends therefore depend on subsidiary capacity as well as consolidated cash.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The ability of Safety Insurance Company to pay dividends is subject to limits under Massachusetts insurance law."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q risk factors. The $3,766 is printed without a scale in that passage, and the 10-Q table scale is in thousands, so the scale is not confirmed.",
+    "claim": "The pending merger bears on financing risk. The company may owe a termination fee of $46.2 million under specified circumstances, and the other party may owe $111.8 million if regulatory approvals are not received in time. Legal fees of $3,766 had been incurred by the quarter-end, with more expected.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "the Company may be required to pay Parent a termination fee of $46.2 million"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P5 (per-policy increases and their cause). The rate-change comparison is read from the table in P3; the conclusion that continuation needs further approved rate increases is inferred.",
+    "claim": "Rate increases lifting average premium per policy are the main revenue driver shown for 2026: average written premium per policy rose 2.0% in private passenger auto, 6.0% in commercial auto and 9.7% in homeowners.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "Average written premium per policy increased 2.0%, 6.0% and 9.7% in Private Passenger Automobile, Commercial Automobile and Homeowners lines, respectively, compared to the same period in 2025 reflecting the result of rate increases."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "The percentages are stated in P5 and the earned premium figures appear in F2. The lag from written to earned premium is an inference from how the release describes the increase.",
+    "claim": "Net earned premiums are still growing, but only slowly: up 1.0% in the third quarter and 3.6% in the nine months, while direct written premiums fell 4.3% in the third quarter. Continued earned-premium growth requires written premium to stop declining.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "Net earned premiums for the quarter ended September 30, 2026 increased by $2.9 million, or 1.0%, to $293.9 million from $291.0 million for the comparable 2025 period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5. What must stay true is inferred from the causes management gives.",
+    "claim": "Underwriting profitability improved in the third quarter, with the combined ratio at 96.3% against 98.9% a year earlier. Management attributes this to improved private passenger auto loss frequency and earlier premium growth earning in. Continuing it requires loss frequency to stay low and no repeat of severe-weather losses.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "For the quarter ended September 30, 2026, our combined ratio improved to 96.3% compared to 98.9% in the same period in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 for the amount and causes. The balance sheet and cash flow comparisons come from F1 and F3. The sustaining conditions are inferred from the stated causes.",
+    "claim": "Investment income is a growth driver: third-quarter net investment income rose 15.0% to $17.9 million. Management attributes this to higher assets under management, reinvestment above maturing yields and strong alternative asset returns. Continuing it requires reinvestment rates to stay above maturing yields and asset growth to continue.",
+    "facts": [
+     "P5",
+     "F2",
+     "F1"
+    ],
+    "quotes": [
+     "The increase is primarily driven by higher assets under management, reinvestment rates that exceeded the yields on maturing securities, and strong alternative asset returns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Policy count direction is stated in P5. The reappointment and 15.2% share are stated in P1. That commercial growth is too small to offset the other lines is an inference, because policy counts are not given.",
+    "claim": "Commercial auto is the one line shown growing in policy count in 2026, while private passenger auto and homeowners policy counts fell. Commercial auto was 15.2% of 2025 direct written premiums, and the company was reappointed as a servicing carrier in the CAR commercial auto program for an additional term.",
+    "facts": [
+     "P5",
+     "P1"
+    ],
+    "quotes": [
+     "For the nine months ended September 30, 2026, the Company experienced policy count declines in Private Passenger Automobile and Homeowners lines, partially offset by growth in Commercial Automobile policies, compared to the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Premium figures are stated in P1 and P3, and the table does not give a scale. That the states act as a growth driver is inferred from the year-over-year increases.",
+    "claim": "Premium growth in New Hampshire and Maine was a 2025 contributor: Maine direct written premiums rose to 16,130 from 10,708 and New Hampshire to 57,666 from 52,095. Both remain small next to a total of 1,278,605. Continuing this requires regulators to keep approving rates and the company to keep winning agents in those states.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Our Insurance Subsidiaries began writing insurance in New Hampshire during 2008 and Maine in 2016."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "The 2026 causes are stated in P5. The exclusive agent distribution and competition risk are stated in P1 and P2. The condition for growth is inferred.",
+    "claim": "Growth depends on the independent-agent channel and market conditions. In 2026 written premiums fell because of a softer, more competitive market and the cancellation of certain underperforming agency relationships. Growth would need that competition to ease or agent quality to be restored.",
+    "facts": [
+     "P5",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market, in addition to the cancellation of certain underperforming agency relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4, P5, P6 and P7. The link to growth is an inference from the ordinary-course covenant.",
+    "claim": "Any standalone growth path is overshadowed by the pending acquisition at $105.00 per share. The merger agreement requires ordinary-course operation, and closing still needs Massachusetts Commissioner of Insurance approval.",
+    "facts": [
+     "P4",
+     "P6",
+     "P7",
+     "P5"
+    ],
+    "quotes": [
+     "the Merger remains subject to certain other regulatory approvals, including the approval of the Massachusetts Commissioner of Insurance."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited items (10-Q risk factors, 8-K filings and earnings release)",
+    "claim": "Safety signed a merger agreement under which an affiliate of Mapfre will buy the company for $105 in cash per share, a deal valued at approximately $1.54 billion. Shareholders have voted in favor, and the HSR waiting period has expired. The deal still needs other regulatory approvals, including that of the Massachusetts Commissioner of Insurance.",
+    "facts": [
+     "P4",
+     "P5",
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "On July 23, 2026, we entered into the Merger Agreement.",
+     "On November 3, 2026, Safety\u2019s shareholders voted in favor of the transaction which remains subject to regulatory approval."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited earnings release; the loss totals also appear in the income statement",
+    "claim": "Severe winter weather events in the first quarter of 2026 raised nine-month losses and loss adjustment expenses to $640.2 million, up 8.6%.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "The increase in losses during the nine months ended September 30, 2026 is due to the impact of two severe winter weather events that occurred during the quarter ended March 31, 2026."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in the cited items (P4 risk factors, P6 8-K, P5 release); the likelihood of approval is not stated",
+    "claim": "The Merger has not closed. It still needs other regulatory approvals, including that of the Massachusetts Commissioner of Insurance, who may impose conditions or withhold approval.",
+    "facts": [
+     "P4",
+     "P6",
+     "P5"
+    ],
+    "quotes": [
+     "the Merger remains subject to certain other regulatory approvals, including the approval of the Massachusetts Commissioner of Insurance"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (company's own warning); the link to the screener price in S0 is inferred",
+    "claim": "The share price of 104.41 is close to the $105.00 per share cash consideration. The company warns the price may fall if the Merger is not completed.",
+    "facts": [
+     "S0",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "may decline to the extent that the current market price of the common stock reflects an assumption that the Merger will be completed"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "If the Merger Agreement is terminated under specified circumstances, the company may owe Parent a termination fee of $46.2 million, and deal costs are partly payable even if the deal fails.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "the Company may be required to pay Parent a termination fee of $46.2 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5; the effect on future earned premium is inferred",
+    "claim": "Direct written premiums fell 4.3% in the third quarter and 1.8% over nine months, which the company attributes to a softening, more competitive market and cancelled agency relationships.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market, in addition to the cancellation of certain underperforming agency relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 and P2; the conclusion about earnings pressure is inferred from F2",
+    "claim": "The nine-month combined ratio rose to 101.7% from 98.9%, which the company attributes to two severe winter weather events in the first quarter of 2026. Weather and catastrophe losses remain a stated risk.",
+    "facts": [
+     "P5",
+     "P2"
+    ],
+    "quotes": [
+     "The increase in losses during the nine months ended September 30, 2026 is due to the impact of two severe winter weather events that occurred during the quarter ended March 31, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P5; the capital-capacity effect is inferred",
+    "claim": "Unrealized losses on the bond portfolio reduced capital. Accumulated other comprehensive loss widened to (67,278) from (17,133), and book value per share fell to $58.29 from $60.98.",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "primarily due to decreases in the value of our fixed maturity portfolio"
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in P4 and P6 that regulatory approvals remain outstanding; the outcome is not in any item.",
+    "claim": "Will the Mapfre Merger receive the Massachusetts Commissioner of Insurance's approval and close, and on what terms and timing? Stockholders approved it and the HSR waiting period has expired, but other regulatory approvals are still pending.",
+    "facts": [
+     "P4",
+     "P5",
+     "P6",
+     "S0"
+    ],
+    "quotes": [
+     "the Merger remains subject to certain other regulatory approvals, including the approval of the Massachusetts Commissioner of Insurance"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Price from S0 and consideration from P7; the interpretation of the gap is inferred, and no closing date is stated in the excerpts.",
+    "claim": "What is the expected closing timeframe, and what does the quoted price of 104.41 against the $105.00 cash consideration say about the timing or risk the market sees? The excerpts give no expected closing date or outside date.",
+    "facts": [
+     "S0",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "converted into the right to receive $105.00 in cash, without interest"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Both causes are stated in P5; the split between them is not provided.",
+    "claim": "How much of the 4.3% drop in third-quarter direct written premium comes from a softer, more competitive market, and how much from cancelling underperforming agency relationships? Will the decline continue? The release gives both causes but does not split them.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The decreases in direct written premiums and net written premiums are due to a softening, more competitive market, in addition to the cancellation of certain underperforming agency relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The attribution is stated in P5; the catastrophe loss amount is not in the packet.",
+    "claim": "How large were the two severe winter weather events in the first quarter of 2026, and how much of the nine-month combined ratio of 101.7% do they explain? The release attributes the increase in nine-month losses to them without a dollar amount.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "The increase in losses during the nine months ended September 30, 2026 is due to the impact of two severe winter weather events that occurred during the quarter ended March 31, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Ratios and development are stated in P5; the reserve balances are in F1; the relative contributions are inferred and not quantified.",
+    "claim": "How much of the third-quarter loss ratio improvement (67.2% from 70.4%) is lasting frequency improvement in private passenger auto, and how much is prior-year favorable development of $10.1 million? Reserves also rose over the nine months, so reserve adequacy is open.",
+    "facts": [
+     "P5",
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "driven by improved loss frequency in our private passenger automobile line"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are in F3; the period and terms are not given, so the refinancing explanation is inferred.",
+    "claim": "When were the $30,000 Citizens loan proceeds and the $30,000 FHLB loan payment made? Why does long-term debt stay at 50,000 while interest expense rose to 2,053 from 972 over nine months? The cash flow rows show one value each without a clear period or terms.",
+    "facts": [
+     "F3",
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "Proceeds from Citizens loan | 30,000",
+     "Payments on FHLB loan | (30,000)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet values are in F1 and the release attribution is in P5; the credit versus rate split is not given.",
+    "claim": "How much of the decline in the fixed maturity portfolio's value reflects interest-rate movement rather than credit concerns? Book value per share fell, and accumulated other comprehensive loss grew to (67,278) from (17,133) (table in thousands). The excerpts do not give the unrealized loss detail.",
+    "facts": [
+     "P5",
+     "F1"
+    ],
+    "quotes": [
+     "book value per share decreased to $58.29 at September 30, 2026 from $60.98 at December 31, 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Legal fees are stated in P4 and P5; other fee categories are not quantified in the packet.",
+    "claim": "What is the full cost of the Merger to the company, including advisory fees that may be contingent on closing? Only legal fees are quantified, and other expense rose in the third quarter.",
+    "facts": [
+     "P4",
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "we have incurred approximately $3,766 in legal fees through September 30, 2026"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "SAFT",
+ "upside": -0.35166093451687896,
+ "valuation": null,
+ "value_base": 67.41568606578078,
+ "value_bear": 60.4852168613921,
+ "value_bull": 79.92553356947217,
+ "value_per_filed_share": {
+  "base": 67.41568606578078,
+  "bear": 60.4852168613921,
+  "bull": 79.92553356947217
+ },
+ "valued": true,
+ "verdict": "NO_CALL",
+ "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: AVOID, expected return -14.2 points a year against the required return over 3 years)"
+}

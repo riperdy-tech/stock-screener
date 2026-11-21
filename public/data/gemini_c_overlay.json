@@ -1,8 +1,8 @@
 {
- "count": 205,
+ "count": 206,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-21T05:01:16Z",
+ "generated_at": "2026-11-21T05:08:19Z",
  "list_covered": 155,
  "list_names": 158,
  "model": "claude-sonnet-5-5",
@@ -6706,6 +6706,65 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -12.0 points a year against the required return over 3 years"
   },
+  "SAFT": {
+   "alpha_pts": -14.188803745589428,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-11-06T19:42:47.000Z",
+    "accepted_utc": "2026-11-07T00:42:47Z",
+    "accession": "0001172052-26-000032",
+    "decision_time": "2026-11-21T05:02:06Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 62,
+   "claims_supported": 59,
+   "date": "2026-11-21T05:02:06Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+   },
+   "equity_value": 994052718.0006957,
+   "family": "financial",
+   "far_from_price": false,
+   "filed_shares": 14745125.0,
+   "flags": [
+    "Safety signed a merger agreement under which an affiliate of Mapfre will buy the company for $105 in cash per share, a deal valued at approximately $1.54 billion. Shareholders have voted in favor, and the HSR waiting period has expired. The deal still needs other regulatory approvals, including that of the Massachusetts Commissioner of Insurance.",
+    "Severe winter weather events in the first quarter of 2026 raised nine-month losses and loss adjustment expenses to $640.2 million, up 8.6%."
+   ],
+   "in_code_book": false,
+   "ke": 0.09273912688743591,
+   "market_cap_at_publish": 1533229711,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": null,
+   "pending_offer": {
+    "claim": "Safety signed a merger agreement under which an affiliate of Mapfre will buy the company for $105 in cash per share, a deal valued at approximately $1.54 billion. Shareholders have voted in favor, and the HSR waiting period has expired. The deal still needs other regulatory approvals, including that of the Massachusetts Commissioner of Insurance.",
+    "date": "July 23, 2026"
+   },
+   "price_at_publish": 104.44,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+   "seed_base": {
+    "1000": 66.91094744508713,
+    "3000": 67.92042468647442
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (operator)",
+   "upside": -0.35166093451687896,
+   "value_base": 67.41568606578078,
+   "value_bear": 60.4852168613921,
+   "value_bull": 79.92553356947217,
+   "value_per_filed_share": {
+    "base": 67.41568606578078,
+    "bear": 60.4852168613921,
+    "bull": 79.92553356947217
+   },
+   "valued": true,
+   "verdict": "NO_CALL",
+   "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: AVOID, expected return -14.2 points a year against the required return over 3 years)"
+  },
   "SAH": {
    "alpha_pts": -1.5138671594343955,
    "analysis": "complete",
@@ -8827,11 +8886,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +31.6 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 123,
+ "valued_count": 124,
  "verdict_counts": {
   "AVOID": 45,
   "BUY": 52,
-  "NO_CALL": 89,
+  "NO_CALL": 90,
   "WATCH": 19
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
