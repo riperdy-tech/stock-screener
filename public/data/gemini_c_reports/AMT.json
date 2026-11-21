@@ -1,1263 +1,841 @@
 {
- "alpha_pts": -5.92731479685513,
+ "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 86,
- "claims_supported": 72,
- "date": "2026-11-17T22:55:34Z",
- "decided": {
-  "flags": [
-   "run 1000: tax_rate_representative_no: The 0.0818 base-year rate is below the 2026 run rate of about 13% (379.0 provision on 2,925.8 pretax income for nine months) and the outlook's 490 provision.",
-   "run 1000: quotes_verified: 14 of 14",
-   "run 1000: ffo_not_reported_or_not_found",
-   "run 3000: margin_outside_filed_record: op_margin.y2 0.4560 (filed 0.2560 to 0.4552)",
-   "run 3000: margin_outside_filed_record: op_margin.y3 0.4570 (filed 0.2560 to 0.4552)",
-   "run 3000: margin_outside_filed_record: op_margin.y4 0.4580 (filed 0.2560 to 0.4552)",
-   "run 3000: margin_outside_filed_record: op_margin.y5 0.4580 (filed 0.2560 to 0.4552)",
-   "run 3000: tax_rate_representative_no: The base-year rate of 0.0818 is below the roughly 13% implied by the 2026 outlook (income tax provision 490), because REIT status shelters U.S. income while taxable subsidiaries and foreign operations are still taxed.",
-   "run 3000: quotes_verified: 13 of 13",
-   "run 3000: ffo_not_reported_or_not_found"
-  ],
-  "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0461 and margin 0.4566, margin 0.3950 (persist), growth 0.0375, terminal RONIC 0.0477 (equity return r 0.0890), F 10",
-  "run_gap": 0.0054079036181109525,
-  "runs": {
-   "1000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 1474800000.0,
-     "excess_cash_before": 1474800000.0,
-     "k0_after": 1969380834.3678842,
-     "k0_before": 1969380834.3678842,
-     "k0_interest": 1359400000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 3448691647.9785166,
-     "x0_before": 3448691647.9785166
-    },
-    "confidence": "medium",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.08105412533166755,
-     "equity_value": 66272423656.83688,
-     "seam_ratio": 0.9990477151952575,
-     "tv_share": 0.38813079161513636,
-     "wedge_rate_5": -0.010019528988214206
-    },
-    "flags": [
-     "tax_rate_representative_no: The 0.0818 base-year rate is below the 2026 run rate of about 13% (379.0 provision on 2,925.8 pretax income for nine months) and the outlook's 490 provision.",
-     "quotes_verified: 14 of 14",
-     "ffo_not_reported_or_not_found"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.05,
-     "fade_years": 10,
-     "long_run_op_margin": 0.44,
-     "op_margin": [
-      0.455,
-      0.455,
-      0.455,
-      0.453,
-      0.45
-     ],
-     "return_on_new_investment_long_run": 0.09,
-     "rev_growth": [
-      0.04,
-      0.03,
-      0.035,
-      0.04,
-      0.04
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0461 and margin 0.4566, margin 0.3950 (persist), growth 0.0375, terminal RONIC 0.0477 (equity return r 0.0890), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 14,
-     "kept": 72
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.4,
-      0.46
-     ],
-     "rev_growth_y3": [
-      0.02,
-      0.05
-     ],
-     "terminal_growth": [
-      0.022,
-      0.036
-     ]
-    },
-    "real_estate": {
-     "ffo": {
-      "status": "not_reported_or_not_found"
-     },
-     "property_business": "owns_or_operates",
-     "version": "decided.real_estate.v2 2026-11-19"
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P5",
-        "quote": "Capital improvement | 170 | to | 180"
-       },
-       {
-        "id": "P5",
-        "quote": "Redevelopment | 315 | to | 345"
-       },
-       {
-        "id": "P1",
-        "quote": "we require relatively low amounts of annual capital expenditures to maintain our communications sites"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "True upkeep is only capital improvement plus corporate, about $190 million or 1.7% of revenue. Redevelopment of about $330 million is largely tenant-driven augmentation that supports the growth I assume. Discretionary builds, ground-lease purchases and the $695 million of data center development are growth spending, not upkeep, and are excluded. I use 5%, which includes redevelopment and some growth-related spend; no explicit upkeep figure is filed."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting"
-       },
-       {
-        "id": "P1",
-        "quote": "initial non-cancellable terms of five to ten years with multiple renewal terms"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Contracted lease revenue and multi-year terms with renewals make the margin and growth change gradually rather than abruptly. The margin only needs to drift from about 45% to 44% and growth from about 4% to 3%, so a 10-year fade is reasonable. Churn from DISH and uncertainty over the AT&T Mexico ruling argue against a very short fade."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "Incremental operating costs associated with adding new tenants or equipment to an existing communications site are typically relatively minimal"
-       },
-       {
-        "id": "P5",
-        "quote": "Adjusted EBITDA Margin % | 65.8%"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "New tenants add revenue at minimal cost, which supports high margins. Rising ground rent, power and property costs, a mix shift toward lower-margin pass-through revenue internationally, and data center growth justify fading modestly below the current 45.5%."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "OPERATING INCOME | 1,269.0 | 1,233.3 | 3,777.0 | 3,685.1"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $10,644.6 million | 0.0511 | 0.4552"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 operating income of 3,777.0 on revenue of 8,272.0 gives a margin of about 45.7%, in line with 2025. Property costs are growing faster than revenue and depreciation is rising, so I let the margin drift down slightly by year 5."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0477."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The 0.40 base-year return reflects old, depreciated tower assets. New towers, ground-lease purchases and data center builds earn much lower yields, so I assume about 9% against the 4.77% break-even."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P5",
-        "quote": "Total property revenue(1)(2) | $10,785 | to | $10,865 | 5.0%"
-       },
-       {
-        "id": "P5",
-        "quote": "1.1% Organic Tenant Billings Growth and 16.3% cash revenue growth in Data Centers"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Management guides 2026 property revenue to +5.0% (about +4% for total revenue including shrinking services). Tower organic growth is only about 1% and the Canada, Philippines and Bangladesh sales trim the base. Data Centers and international new sites drive the rest, so I hold growth at 3-4%."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "averaging approximately 3% in the United States"
-       },
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "US escalators average about 3% and most international leases are inflation-indexed, but churn and slow organic billings hold net growth near 3%. That is below the 3.75% anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.02,
-      "input_hit": "rev_growth",
-      "risk": "Further churn from DISH aftermath, carrier consolidation or network sharing, plus an adverse AT&T Mexico ruling, cuts tenant billings."
-     },
-     {
-      "bear_value": 0.4,
-      "input_hit": "long_run_op_margin",
-      "risk": "Higher interest and cost inflation, along with rent abatement, compress margins."
-     },
-     {
-      "bear_value": 0.022,
-      "input_hit": "terminal_growth",
-      "risk": "Slower long-run growth if escalators are overtaken by churn and carriers cut spending."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.4,
-      "rev_growth": [
-       0.024999999999999998,
-       0.014999999999999996,
-       0.02,
-       0.024999999999999998,
-       0.024999999999999998
-      ],
-      "terminal_growth": 0.022
-     },
-     "bull": {
-      "long_run_op_margin": 0.46,
-      "rev_growth": [
-       0.055,
-       0.045,
-       0.05,
-       0.055,
-       0.055
-      ],
-      "terminal_growth": 0.036
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "About $37.2 billion of debt is being rolled through new senior notes, and the company keeps refinancing at similar scale while also running buybacks, so leverage looks like a steady policy level."
-     },
-     "margin_position": "The 45.5% GAAP operating margin is high because towers and data centers are leased on long contracts with little incremental cost per added tenant. The jump from 31% in 2023 to 45% in 2024-25 also reflects lower impairment and other operating charges and lower depreciation (D&A fell from 29% of revenue in 2023 to 19% in 2025). The 2026 nine-month margin is about 45.7%, so the margin looks stable at this level.",
-     "property_business": "owns_or_operates",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The 0.0818 base-year rate is below the 2026 run rate of about 13% (379.0 provision on 2,925.8 pretax income for nine months) and the outlook's 490 provision."
-     },
-     "why": "2025 operating margin of 0.4552 matches 2026 year-to-date operating income of 3,777.0 on revenue of 8,272.0, so the base year is a fair run-rate. Growth is thin, with Q3 organic tenant billings up 1.1%, and DISH churn and the AT&T Mexico dispute weigh on it. Data Centers growth of 16.3% and international growth offset part of that. Pending sales of Canada and other divestitures will shrink the base slightly."
-    },
-    "value_at_old_defaults": 88.81467974786305,
-    "values": {
-     "base": 155.5376306750432,
-     "bear": 125.4957765066221,
-     "bull": 187.77190683710242
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 1474800000.0,
-     "excess_cash_before": 1474800000.0,
-     "k0_after": 1969380834.3678842,
-     "k0_before": 1969380834.3678842,
-     "k0_interest": 1359400000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 3448691647.9785166,
-     "x0_before": 3448691647.9785166
-    },
-    "confidence": "medium",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.08105412533166755,
-     "equity_value": 65907615968.45259,
-     "seam_ratio": 0.995835982227119,
-     "tv_share": 0.3842013932415258,
-     "wedge_rate_5": -0.009260122886386163
-    },
-    "flags": [
-     "margin_outside_filed_record: op_margin.y2 0.4560 (filed 0.2560 to 0.4552)",
-     "margin_outside_filed_record: op_margin.y3 0.4570 (filed 0.2560 to 0.4552)",
-     "margin_outside_filed_record: op_margin.y4 0.4580 (filed 0.2560 to 0.4552)",
-     "margin_outside_filed_record: op_margin.y5 0.4580 (filed 0.2560 to 0.4552)",
-     "tax_rate_representative_no: The base-year rate of 0.0818 is below the roughly 13% implied by the 2026 outlook (income tax provision 490), because REIT status shelters U.S. income while taxable subsidiaries and foreign operations are still taxed.",
-     "quotes_verified: 13 of 13",
-     "ffo_not_reported_or_not_found"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.05,
-     "fade_years": 10,
-     "long_run_op_margin": 0.45,
-     "op_margin": [
-      0.455,
-      0.456,
-      0.457,
-      0.458,
-      0.458
-     ],
-     "return_on_new_investment_long_run": 0.08,
-     "rev_growth": [
-      0.039,
-      0.032,
-      0.035,
-      0.036,
-      0.036
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0461 and margin 0.4566, margin 0.3950 (persist), growth 0.0375, terminal RONIC 0.0477 (equity return r 0.0890), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 14,
-     "kept": 72
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.41,
-      0.47
-     ],
-     "rev_growth_y3": [
-      0.022,
-      0.048
-     ],
-     "terminal_growth": [
-      0.022,
-      0.037
-     ]
-    },
-    "real_estate": {
-     "ffo": {
-      "status": "not_reported_or_not_found"
-     },
-     "property_business": "owns_or_operates",
-     "version": "decided.real_estate.v2 2026-11-19"
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P5",
-        "quote": "Capital improvement | 170 | to | 180"
-       },
-       {
-        "id": "P5",
-        "quote": "Redevelopment | 315 | to | 345"
-       },
-       {
-        "id": "P1",
-        "quote": "we require relatively low amounts of annual capital expenditures to maintain our communications sites"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "I count only upkeep: capital improvements, corporate, and the maintenance-like part of redevelopment, about $525 million, or roughly 5% of revenue. I exclude discretionary builds, ground lease purchases and data center development, which are growth spending. The filing gives no explicit upkeep figure, only the guided categories, so this is an estimate."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "we expect to generate over $54 billion of non-cancellable customer lease revenue over future periods"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Growth moves from about 3.6% to 3% over a decade because the long-lease contract base makes revenue visibility long and the transition gradual."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P5",
-        "quote": "Adjusted EBITDA Margin % | 65.8%"
-       },
-       {
-        "id": "F2",
-        "quote": "Depreciation, amortization and accretion | 519.4 | 522.9 | 1,552.0 | 1,525.7"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "I fade slightly below the current level because heavy-depreciation data center capex, carrier consolidation, RAN sharing and pricing pressure at renewals could trim margin. Tower economics remain very high margin."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "OPERATING INCOME | 1,269.0 | 1,233.3 | 3,777.0 | 3,685.1"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $10,644.6 million | 0.0511 | 0.4552"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The nine-month 2026 margin is about 0.457 and the Q3 margin about 0.456. Margin is held roughly flat with a small drift upward from data center operating leverage, offset by rising property costs and depreciation."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0477."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "New towers and data centers earn a stabilized after-tax yield of roughly 7-9% on tangible capital, far below the 0.40 average on the old asset base but above the 0.0477 break-even, so growth adds modest value."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P5",
-        "quote": "Total property revenue(1)(2) | $10,785 | to | $10,865 | 5.0%"
-       },
-       {
-        "id": "F2",
-        "quote": "Total operating revenues | $ 2,785.4 | $ 2,717.4 | $ 8,272.0 | $ 7,907.1"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "2026 guidance is property revenue growth of 5.0% at the midpoint, but the nine-month total of 4.6% slowed to 2.5% in Q3 as services shrank, so I take about 3.9% for year 1. Later years rest on about 3% escalators, 1% organic billings, data center growth and new sites, less DISH churn and the divested markets."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "averaging approximately 3% in the United States"
-       },
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0890; long-run nominal growth anchor g_anchor 0.0375."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Long-run growth is anchored on escalators of about 3% plus modest new-site and data center additions, net of churn, held a little below the 3.75% nominal anchor because of the mature U.S. base."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.02,
-      "input_hit": "rev_growth",
-      "risk": "AT&T Mexico arbitration abatement, DISH recovery failure and carrier consolidation or RAN sharing raise churn and cut tenant billings and revenue"
-     },
-     {
-      "bear_value": 0.4,
-      "input_hit": "long_run_op_margin",
-      "risk": "Higher refinancing cost, data center depreciation and rising property costs compress operating margin"
-     },
-     {
-      "bear_value": 0.055,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "New builds and data center investment earn closer to the cost of capital"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.41,
-      "rev_growth": [
-       0.025999999999999995,
-       0.018999999999999996,
-       0.022,
-       0.022999999999999993,
-       0.022999999999999993
-      ],
-      "terminal_growth": 0.022
-     },
-     "bull": {
-      "long_run_op_margin": 0.47,
-      "rev_growth": [
-       0.052,
-       0.045,
-       0.048,
-       0.048999999999999995,
-       0.048999999999999995
-      ],
-      "terminal_growth": 0.037
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Debt of about $37.2 billion is roughly 5x Adjusted EBITDA and is being rolled with new notes, so leverage looks stable relative to size, though buybacks and rising rates are pressure points."
-     },
-     "margin_position": "The GAAP operating margin is about 45%, high because long-lease tower rent carries little site-level cost and depreciation has fallen to about 19% of revenue from about 29-33% in 2022-2023. The 2024-2025 level is stable, and the nine-month 2026 margin is similar.",
-     "property_business": "owns_or_operates",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The base-year rate of 0.0818 is below the roughly 13% implied by the 2026 outlook (income tax provision 490), because REIT status shelters U.S. income while taxable subsidiaries and foreign operations are still taxed."
-     },
-     "why": "The 2025 margin of 0.4552 matches the nine-month 2026 run-rate of 3,777.0 / 8,272.0, about 0.457. Revenue is contract-driven, but there are stresses to absorb: DISH churn, the AT&T Mexico dispute, and divestitures of the Philippines, Bangladesh and soon Canada. Base-year non-operating costs (foreign-exchange losses) were unusually large, but the full-year base-year amount is not in the evidence."
-    },
-    "value_at_old_defaults": 88.81467974786305,
-    "values": {
-     "base": 154.69876640791588,
-     "bear": 127.17748169121168,
-     "bull": 184.99547836217562
-    }
-   }
-  },
-  "situation_unclear": false,
-  "value_at_old_defaults": 88.81467974786305,
-  "value_at_old_defaults_quoted": 88.81467974786305,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+ "based_on": {
+  "accepted": "2026-10-27T20:08:31.000Z",
+  "accepted_utc": "2026-10-28T00:08:31Z",
+  "accession": "0001053507-26-000157",
+  "decision_time": "2026-11-21T18:00:57Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
  },
- "equity_value": 72712741393.70833,
- "family": "family_not_built",
- "far_from_price": false,
- "filed_shares": 468757000.0,
+ "claims": 97,
+ "claims_supported": 94,
+ "date": "2026-11-21T18:00:57Z",
+ "family": "real_estate",
  "flags": [
-  "AMT delivered notices terminating its Strategic Collocation Agreement and related agreements with DISH, a U.S. customer that had been in default since January.",
-  "DISH, an AMT customer, filed for chapter 11 bankruptcy relief. AMT continues to seek relief for DISH's non-compliance. This is a customer's bankruptcy, not AMT's.",
-  "AMT recorded impairment charges related to DISH of $17.5 million in the nine months ended September 30, 2026."
+  "American Tower delivered notices terminating its Strategic Collocation Agreement and related agreements with DISH after DISH defaulted on its payment obligations, with 100% of DISH revenue reflected in churn and DISH having represented approximately 2% of total annual property revenue and 4% of U.S. & Canada property revenue in 2025.",
+  "Following American Tower's amended federal complaint seeking damages from DISH and adding EchoStar Corporation for tortious interference, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code.",
+  "American Tower recorded impairment charges related to DISH of $17.5 million."
  ],
  "in_code_book": false,
- "ke": 0.08903203083918919,
- "market_cap_at_publish": 85429890090,
- "model": "claude-sonnet-5-5",
- "no_value_reason": null,
+ "ke": null,
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
  "pending_offer": null,
- "price_at_publish": 184.21,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "seed_base": {
-  "1000": 155.5376306750432,
-  "3000": 154.69876640791588
- },
- "seeds_agree": true,
- "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited items",
-    "claim": "American Tower earns most of its revenue by leasing space on communications real estate (towers, DAS networks, rooftops, fiber and data centers) to wireless carriers, broadcasters, government agencies and other tenants. Property operations were 97% of total revenue in 2025 and 98% for the nine months ended September 30, 2026.",
+    "basis": "stated in S0 and P1",
+    "claim": "American Tower Corporation is a United States real estate investment trust in the REIT - Specialty industry that owns, operates, and develops multitenant communications real estate.",
     "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "Our primary business is the leasing of space on communications sites to wireless service providers, radio and television broadcast companies, wireless data providers, government agencies and municipalities and tenants in a number of other industries."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company reports six segments: U.S. & Canada property, Africa & APAC property, Europe property, Latin America property, Data Centers and Services.",
-    "facts": [
+     "S0",
      "P1"
     ],
     "quotes": [
-     "We report our results in six segments"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item (segment table and Services paragraph)",
-    "claim": "In 2025 the property segments contributed this share of consolidated revenue: U.S. & Canada 49%, Latin America 15%, Africa & APAC 13%, Data Centers 10% and Europe 9%. Services was 3%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Revenue is concentrated in a few carrier customers. In 2025 T-Mobile was 18% of revenue, AT&T 17%, Verizon Wireless 14% and Telef\u00f3nica 10%.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "A substantial portion of our total operating revenues is derived from a small number of customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Revenue is contractual and recurring. Carrier leases generally have initial non-cancellable terms of five to ten years with renewals, and rents escalate through a fixed percentage (averaging approximately 3% in the United States) or an inflation index in most international markets.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "generally have initial non-cancellable terms of five to ten years with multiple renewal terms",
-     "an inflationary index in most of our international markets"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated figures; no cause stated, so the cause is unknown",
-    "claim": "Contracted lease revenue visible over future periods is large but fell between year-end and the latest quarter. It was over $54 billion at December 31, 2025 and nearly $49 billion at September 30, 2026, before straight-line accounting.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Property revenue growth comes from new colocations and lease amendments, contractual escalators net of churn, and new or acquired sites. Data Centers growth and pass-through items (ground rent, power and fuel) add to it, partly offset by revenue reserves.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Contractual rent escalations on existing tenant leases, net of churn; and",
-     "Revenue growth from our Data Centers segment in the United States, including rental and power revenue from new lease commencements and expansions, contractual rent and power escalations on existing leases, mark-to-market increases on renewing leases and increased interconnection services and solutions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In Q3 2026 total revenue rose 2.5% to $2,785 million and property revenue rose 4.5% to $2,734 million. Organic Tenant Billings Growth was 1.1% and Data Centers cash revenue growth was 16.3%.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "Total property revenue increased 4.5% to $2,734 million, driven by 1.1% Organic Tenant Billings Growth and 16.3% cash revenue growth in Data Centers(1)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Churn is a key drag on revenue in 2026. It was approximately 2% of tenant billings in 2025 but approximately 5% for the nine months ended September 30, 2026, driven by DISH, whose revenue has been reflected 100% in churn since January 1, 2026.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "Beginning on January 1, 2026, 100% of DISH revenue has been reflected in churn."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "A customer dispute in Mexico affects collections. AT&T Mexico represented approximately $300 million of tenant revenue in 2025 and challenges the lease pricing. The company booked approximately $30 million of reserves in 2025 and approximately $30 million more in the nine months of 2026, and expects a final ruling in 2027.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "We expect to record future reserves until the Arbitration is settled."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Property costs are mainly ground rent, power and fuel, property taxes, and repairs and maintenance. Ground rent is largely fixed with annual escalations, and some or all power, fuel and ground rent costs are passed through to tenants, particularly internationally.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Our costs typically include ground rent (which is primarily fixed under long-term lease agreements with annual cost escalations) and power and fuel costs, some or all of which may be passed through to our tenants, as well as property taxes and repair and maintenance expenses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the outlook table",
-    "claim": "Pass-through revenue is large internationally. The 2026 outlook midpoint includes international pass-through revenue of $517 for Latin America, $500 for Africa & APAC and $242 for Europe, totalling $1,259 (table in millions).",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited statement",
-    "claim": "In Q3 2026 property cost of operations was 724.9 (table in millions), against 657.0 a year earlier. Total operating revenues were 2,785.4 against 2,717.4, and operating income was 1,269.0 against 1,233.3.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited statements and 8-Ks",
-    "claim": "Financing cost is a major expense. Cash paid for interest in the nine months was 1,220.5 (table in millions), against 1,105.2 a year earlier. Long-term obligations were 32,215.2 non-current plus 5,363.5 current at September 30, 2026, and new notes were issued at coupons of 5.300%, 5.560% and 5.750%.",
-    "facts": [
-     "F1",
-     "F3",
-     "P6",
-     "P9"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Data Centers is a growing, separate segment. It had 30 operating facilities in 11 U.S. markets at September 30, 2026. The 2026 outlook for Data Centers property revenue is $1,218 million to $1,228 million, a midpoint growth rate of 16.1%, against $1,053.1 (table in millions) in 2025.",
-    "facts": [
-     "P4",
-     "P5",
-     "P3"
-    ],
-    "quotes": [
-     "As of September 30, 2026, our property portfolio included 30 operating data center facilities across 11 markets in the United States"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Services is a small, shrinking support business. It sells site application, zoning and permitting, structural and mount analyses, and construction management, mainly to support tenant additions on AMT sites. Q3 2026 services revenue was 51.4 (table in millions) against 101.1 a year earlier, and services cost was 32.0 against 53.8.",
-    "facts": [
-     "P1",
-     "F2"
-    ],
-    "quotes": [
-     "Our services operations primarily support our site leasing business, including the addition of new tenants and equipment on our sites."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the outlook footnote; the 0.5% figure is inferred as a separate table line",
-    "claim": "U.S. & Canada property revenue is guided down at the midpoint for 2026 at (3.0)%, on a range of $5,085 million to $5,095 million. The company attributes an estimated negative impact of over 3% to lower non-cash straight-line revenue.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "The U.S. & Canada growth rate includes an estimated negative impact of over 3% associated with a decrease in non-cash straight-line revenue recognition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The geographic footprint is changing. At September 30, 2026 the company owned 130,787 towers and operated 15,735. The Philippines and Bangladesh operations were sold in the second quarter of 2026, and a sale of Canada is expected in the fourth quarter of 2026.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "We expect to complete the sale of our operations in Canada during the fourth quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "AMT is a REIT, so it generally pays no U.S. federal income tax on REIT income and distributes most cash to holders. In the nine months of 2026 operating cash flow was 4,280.2 (table in millions), capital expenditure on property and equipment was 1,167.8, common distributions paid were 2,475.6 and share repurchases were 503.0.",
-    "facts": [
-     "P1",
-     "F3"
-    ],
-    "quotes": [
-     "We operate as a real estate investment trust for U.S. federal income tax purposes"
-    ],
-    "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in the cited item (company's own description of itself)",
-    "claim": "AMT describes itself as one of the largest global REITs and a leading independent owner of multitenant communications real estate. Its portfolio had 149,686 communications sites at the last fiscal year-end.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
+     "industry: REIT - Specialty",
      "We are one of the largest global real estate investment trusts and a leading independent owner, operator and developer of multitenant communications real estate."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited tables; the link to divestitures is stated in the 10-Q footnotes",
-    "claim": "The portfolio shrank between the last year-end and September 30. Owned towers fell to 130,787 from 131,597 and operated towers fell to 15,735 from 17,227. The company sold its Philippines and Bangladesh operations and expects to sell Canada in the fourth quarter.",
+    "basis": "stated in P1",
+    "claim": "As a U.S. federal income tax REIT, American Tower generally does not pay U.S. federal income taxes on REIT-qualified income due to the dividends paid deduction, while paying U.S. federal income taxes on domestic taxable REIT subsidiaries and local taxes on international operations.",
     "facts": [
-     "P3",
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "We expect to complete the sale of our operations in Canada during the fourth quarter of 2026."
+     "Accordingly, we generally are not required to pay U.S. federal income taxes on income generated by our REIT operations, including the income derived from leasing space on our towers and in our data centers, as we receive a dividends paid deduction for distributions to stockholders that offsets our REIT taxable income and gains.",
+     "However, we remain obligated to pay U.S. federal income taxes on earnings from our domestic taxable REIT subsidiaries (\u201cTRSs\u201d)."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the drivers of the decline are not given",
-    "claim": "Long-term, escalating leases give revenue visibility. Non-cancellable customer lease revenue was nearly $49 billion at September 30, down from over $54 billion at the last year-end. U.S. leases escalate at approximately 3% a year.",
+    "basis": "stated in P1 and P4",
+    "claim": "The company's primary business is property operations\u2014leasing space on communications sites and U.S. data centers\u2014which accounted for 97% of total revenues in 2025 and 98% of total revenues in the nine months ended September 30, 2026.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting",
-     "an annual fixed escalation (averaging approximately 3% in the United States)"
+     "We refer to this business, inclusive of our data center business discussed below, as our property operations, which accounted for 97% of our total revenues for the year ended December 31, 2025.",
+     "We refer to the business encompassing the above as our property operations, which accounted for 98% and 98% of our total revenues for the three and nine months ended September 30, 2026, respectively, and includes our U.S. & Canada property, Africa & Asia-Pacific (\u201cAPAC\u201d) property, Europe property and Latin America property segments and Data Centers segment."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Revenue is concentrated in a few carriers. T-Mobile was 18% of revenue, AT&T 17%, Verizon Wireless 14% and Telef\u00f3nica 10% for the last fiscal year. The top three U.S. & Canada customers were 85% of that segment's revenue. This is a named threat as well as a source of strength.",
+    "basis": "stated in P1 and P4",
+    "claim": "As of September 30, 2026, the communications real estate portfolio (excluding managed sites) included 130,787 owned towers, 15,735 operated towers, and 847 owned DAS sites across the U.S. & Canada, Africa & APAC, Europe, and Latin America, alongside managed rooftop and tower sites, fiber assets, property interests, and shared backup power solutions.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "In addition to the communications sites in our portfolio, we manage rooftop and tower sites for property owners under various contractual arrangements.",
+     "The following table details the number of communications sites, excluding managed sites, that we owned or operated as of September 30, 2026:"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P4",
+    "claim": "In the United States, American Tower operates 30 data center facilities across 11 markets comprising 3,875 (table in thousands) net rentable square feet as of September 30, 2026 (excluding approximately 0.4 million of office and light industrial NRSF), providing power, cooling, network connectivity, and interconnection hubs.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "These buildings are designed to provide the power, cooling and network connectivity necessary to efficiently operate this equipment.",
+     "Data centers located at points where many communications networks converge can also function as interconnection hubs where customers are able to connect to multiple networks, cloud companies and other service providers to exchange traffic and interoperate with each other.",
+     "As of September 30, 2026, our property portfolio included 30 operating data center facilities across 11 markets in the United States that collectively comprise approximately 3.9 million net rentable square feet (\u201cNRSF\u201d) of data center space, as follows:"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P1, and P3",
+    "claim": "American Tower also sells U.S. tower-related services\u2014site application, zoning and permitting, structural and mount analyses, construction management, and program management\u2014which primarily support its site leasing business and generated 339.6 (table in millions) of revenue in 2025 and 180.3 (table in millions) in the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "These services include site application, zoning and permitting, structural and mount analyses, and construction management services, together with program management offerings that support customer deployment needs from project scoping through construction.",
+     "Our services operations primarily support our site leasing business, including the addition of new tenants and equipment on our sites."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Its customer base consists of wireless service providers, radio and television broadcast companies, wireless data providers, government agencies, and municipalities on communications sites; enterprises, network operators, cloud providers, and supporting service providers in data centers; and communications service providers and third-party tower operators for fiber and property interests.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our primary business is the leasing of space on communications sites to wireless service providers, radio and television broadcast companies, wireless data providers, government agencies and municipalities and tenants in a number of other industries.",
+     "We also hold other telecommunications infrastructure, fiber and property interests that we lease primarily to communications service providers and third-party tower operators, and, as discussed further below, we hold a portfolio of highly interconnected data center facilities and related assets in the United States that we provide for the leasing of space primarily to enterprises, network operators, cloud providers and supporting service providers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "Revenue is concentrated in a small number of customers: in 2025, T-Mobile (18%), AT&T (17%), Verizon Wireless (14%), and Telef\u00f3nica (10%) each represented at least 10% of total revenues, while top customers accounted for 85% of U.S. & Canada, 81% of Africa & APAC, 70% of Europe, and 71% of Latin America property segment revenue.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
      "A substantial portion of our total operating revenues is derived from a small number of customers.",
-     "accounted for an aggregate of 85% of U.S. & Canada property segment revenue"
+     "U.S. & Canada: AT&T Inc. (\u201cAT&T\u201d); T-Mobile US, Inc. (\u201cT-Mobile\u201d); and Verizon Communications Inc. (\u201cVerizon Wireless\u201d) accounted for an aggregate of 85% of U.S. & Canada property segment revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Churn has risen sharply, mainly because of DISH. Churn was about 2% of tenant billings for the last fiscal year and about 5% for the nine months to September 30. AMT counts 100% of DISH revenue as churn from January 1. DISH filed for chapter 11 bankruptcy on June 30, and AMT recorded $17.5 million of DISH-related impairment. DISH was about 2% of total property revenue and 4% of U.S. & Canada property revenue.",
+    "basis": "stated in P1 and P3",
+    "claim": "American Tower reports across U.S. & Canada property (49% of 2025 total revenue; $5,248.7 in table in millions), Africa & APAC property (13%; 1,422.9 in table in millions), Europe property (9%; 937.7 in table in millions), Latin America property (15%; 1,642.6 in table in millions), Data Centers (10%; 1,053.1 in table in millions), and Services (3%; 339.6 in table in millions), out of $10,644.6 (table in millions) total 2025 revenue.",
     "facts": [
      "P1",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "Beginning on January 1, 2026, 100% of DISH revenue has been reflected in churn.",
-     "On June 30, 2026, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code.",
-     "During the nine months ended September 30, 2026, we recorded impairment charges related to DISH of $17.5 million."
+     "We report our results in six segments: U.S. & Canada property (which includes all assets in the United States and Canada, other than our data center facilities and related assets), Africa & Asia-Pacific (\u201cAPAC\u201d) property, Europe property, Latin America property, Data Centers and Services."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The AT&T Mexico dispute is an unresolved risk. AT&T Mexico was approximately $300 million of tenant revenue in the last fiscal year and is challenging the lease calculation. AMT reserved approximately $30 million for it in that year and expects to record more until the arbitration ends. The hearing began in August and a final ruling is expected in 2027.",
+    "basis": "stated in P3, P4, and P5",
+    "claim": "The company has narrowed its geographic footprint through divestitures, selling South Africa fiber in 2025, ATC Philippines and its controlling interest in Kirtonkhola Tower Bangladesh Limited in June 2026, and agreeing to sell its Canada operations for approximately 288 million Canadian Dollars (approximately $202 million).",
     "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "The Arbitration hearing began in August 2026 and we expect a final ruling in 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited statements and release",
-    "claim": "Third-quarter revenue grew modestly, with property revenue rising and services revenue falling. Total revenue was 2,785.4 against 2,717.4 a year earlier (table in millions). Property revenue was 2,734.0 against 2,616.3, and services revenue was 51.4 against 101.1. Management cites 1.1% organic tenant billings growth and 16.3% Data Centers cash revenue growth.",
-    "facts": [
-     "F2",
-     "P5"
-    ],
-    "quotes": [
-     "Total property revenue increased 4.5% to $2,734 million, driven by 1.1% Organic Tenant Billings Growth and 16.3% cash revenue growth in Data Centers"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the causal reading is inferred from the lines shown",
-    "claim": "Margins remain high, but profit growth is thin. Property gross margin was 73.5% and Adjusted EBITDA margin 65.8%. Adjusted EBITDA rose only 0.9% to $1,832 million, and net income fell 14.4% to $781 million. Property operating costs rose to 724.9 from 657.0 (table in millions).",
-    "facts": [
-     "F2",
-     "P5"
-    ],
-    "quotes": [
-     "Adjusted EBITDA increased 0.9% to $1,832 million(3)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the outlook; the reading of where growth comes from is inferred",
-    "claim": "Segment performance diverges in the full-year outlook. U.S. & Canada property revenue is guided to a midpoint growth of (3.0)%, including a negative impact of over 3% from lower straight-line revenue, with organic tenant billings of about ~0.5%. Data Centers is guided to 16.1% and Latin America to 11.0%, but Latin America organic tenant billings are (~3%).",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "The U.S. & Canada growth rate includes an estimated negative impact of over 3% associated with a decrease in non-cash straight-line revenue recognition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the competitive tension is inferred from them",
-    "claim": "Data Centers is a growing but contested part of the position. AMT operates 30 facilities with 3,875 thousand net rentable square feet (table in thousands). Segment revenue was 1,053.1 for the last fiscal year (table in millions), and cash revenue growth was 16.3% in the third quarter. The 10-K warns that competitors may have advantages and that many data center leases expire each year.",
-    "facts": [
-     "P2",
      "P3",
      "P4",
      "P5"
     ],
     "quotes": [
-     "some of our data center competitors may have significant advantages over us",
-     "These risks are compounded by the fact that a significant percentage of our data center customer leases expire every year."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited risk factor",
-    "claim": "AMT names competition on lease pricing and customer consolidation as threats to its revenue.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Competition due to pricing or alternative contractual arrangements from peers could materially and adversely affect our lease rates.",
-     "Significant consolidation among our customers could reduce demand for our communications infrastructure and may materially and adversely affect our growth and revenues."
+     "During the year ended December 31, 2025, we completed the sale of our fiber assets in South Africa (\u201cSouth Africa Fiber\u201d).",
+     "Sale of Philippines Subsidiary\u2014On June 15, 2026, we completed the sale of ATC Philippines.",
+     "Divestitures \u2013 During the three months ended September 30, 2026, the Company, through its subsidiary, American Towers LLC, entered into an agreement pursuant to which it expects to sell 100% of the ownership interests in its subsidiaries in Canada for total aggregate consideration of approximately 288 million Canadian Dollars (approximately $202 million)."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited risk factors; no measured impact is given",
-    "claim": "Network sharing and new technology could slow leasing demand.",
+    "basis": "stated in P1, P3, and P4",
+    "claim": "Tenant leases for communications sites generally have initial non-cancellable multiyear terms with multiple renewal options and periodic escalations\u2014averaging approximately 3% fixed annually in the United States or tied to inflation in most international markets\u2014underpinning nearly $49 billion of expected future non-cancellable customer lease revenue as of September 30, 2026 (down from over $54 billion as of December 31, 2025).",
     "facts": [
-     "P2"
+     "P1",
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "may cause new lease activity to slow if carriers utilize shared equipment rather than deploy new equipment",
-     "Examples of these technologies include more spectrally efficient technologies"
+     "In most of our markets, our tenant leases for our communications sites with wireless carriers generally have initial non-cancellable terms of five to ten years with multiple renewal terms.",
+     "Most of our tenant leases for our communications sites have provisions that periodically increase or \u201cescalate\u201d the rent due under the lease, typically based on (a) an annual fixed escalation (averaging approximately 3% in the United States), (b) an inflationary index in most of our international markets, or (c) a combination of both.",
+     "Based upon existing customer leases and foreign currency exchange rates as of September 30, 2026, we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited risk factor",
-    "claim": "Larger or less selective rivals can compete for assets AMT wants to build or buy.",
+    "basis": "stated in P3 and P5",
+    "claim": "Property revenue grows from adding tenants (colocations) and equipment amendments on existing sites, contractual escalations net of churn, acquiring or building new sites (approximately 2,230 sites added globally in 2025), and data center lease commencements, expansions, mark-to-market renewals, and interconnections (with Data Centers cash revenue up 16.3% and Organic Tenant Billings Growth at 1.1% in the third quarter of 2026).",
     "facts": [
-     "P2"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "Some of our competitors are larger and may have greater financial resources than we do"
+     "During the year ended December 31, 2025, we grew our portfolio of communications real estate through the acquisition and construction of approximately 2,230 communications sites globally.",
+     "Total property revenue increased 4.5% to $2,734 million, driven by 1.1% Organic Tenant Billings Growth and 16.3% cash revenue growth in Data Centers(1)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the maturity pressure is inferred from the balance sheet lines",
-    "claim": "Debt is heavy and is named as a possible competitive disadvantage. The current portion of long-term obligations rose to 5,363.5 from 3,387.8 (table in millions), against long-term obligations of 32,215.2. Third-quarter interest expense was 366.1 against 347.1. Consolidated debt was approximately $37.2 billion at the last year-end.",
+    "basis": "stated in P2, P3, and P4",
+    "claim": "Property revenue is pressured by churn\u2014which rose from approximately 2% of tenant billings in 2025 to approximately 5% in the nine months ended September 30, 2026 after 100% of DISH revenue (2% of 2025 total property revenue) was reflected in churn following its default and bankruptcy filing\u2014and by reserves of approximately $30 million in 2025 and approximately $30 million in the nine months ended September 30, 2026 from an arbitration dispute with AT&T Mexico ($300 million of 2025 tenant revenue).",
     "facts": [
-     "F1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "During the nine months ended September 30, 2026, churn was approximately 5% of our tenant billings, primarily driven by churn due to one of our U.S. customers, DISH Wireless L.L.C., a subsidiary of DISH Network Corporation (\u201cDISH\u201d) in our U.S. & Canada property segment, as discussed below.",
+     "Beginning on January 1, 2026, 100% of DISH revenue has been reflected in churn.",
+     "We incurred approximately $30 million of reserves during the year ended December 31, 2025, and approximately $30 million of additional reserves during the nine months ended September 30, 2026, related to this customer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P5",
+    "claim": "Reported revenue is also moved by international pass-through reimbursements for ground rent, power, and fuel (which vary with fuel prices), foreign currency exchange fluctuations across Latin America, Africa & APAC, and Europe, and non-cash straight-line revenue recognition (which was approximately $(24.0) million in the third quarter of 2026 versus approximately $27.7 million in the prior-year period).",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "A portion of the Company\u2019s pass-through revenue is based on power and fuel expense reimbursements and therefore subject to fluctuations in fuel prices.",
+     "The majority of the Company\u2019s Latin America, Africa & APAC and Europe revenue and operating expenses are denominated in each country\u2019s local currency.",
+     "Q3 2026 growth rates impacted by a decrease in non-cash straight-line revenue, which represented approximately $(24.0) million in the current period as compared to approximately $27.7 million in the prior-year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P1, and P3",
+    "claim": "Direct property costs of operations (2,097.6 in table in millions for the nine months ended September 30, 2026, compared to 1,897.2 in the prior-year period) consist primarily of ground rent\u2014largely fixed under long-term leases with annual escalations\u2014power and fuel costs, property taxes, and repairs and maintenance, with ground rent or power and fuel costs partly or wholly passed through to tenants in many international markets.",
+    "facts": [
      "F2",
-     "P2"
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Our costs typically include ground rent (which is primarily fixed under long-term lease agreements with annual cost escalations) and power and fuel costs, some or all of which may be passed through to our tenants, as well as property taxes and repair and maintenance expenses.",
+     "Direct operating expenses incurred by our property segments include direct site or facility level expenses and consist primarily of ground rent and power and fuel costs, some or all of which may be passed through to our customers, as well as property taxes and repairs and maintenance expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P1, P3, and P5",
+    "claim": "Adding new tenants or equipment on existing sites requires minimal incremental direct cost and little additional property SG&A, yielding high operating margins (Property Gross Margin % was 73.5% in the third quarter of 2026), while consolidated selling, general, administrative and development expense was 719.4 (table in millions) in the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P1",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Incremental operating costs associated with adding new tenants or equipment to an existing communications site are typically relatively minimal.",
+     "In general, our property segments\u2019 selling, general, administrative and development expenses do not significantly increase as a result of adding incremental customers to our sites or facilities and typically increase only modestly year-over-year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P1, and P5",
+    "claim": "Maintaining communications sites requires relatively low capital expenditures (170 to 180 for capital improvements and 15 for corporate in the full-year 2026 outlook, table in millions), whereas total capex is driven by discretionary site builds and data center development (full-year 2026 total capex outlook of $1,765 to $1,875 in table in millions, including $695 million for Data Centers), alongside 1,552.0 (table in millions) of depreciation, amortization and accretion in the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "On average, we require relatively low amounts of annual capital expenditures to maintain our communications sites.",
+     "During the third quarter of 2026, total capital expenditures were approximately $407 million, of which $48 million was for non-discretionary capital improvements and corporate capital expenditures."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, F3, P2, and P5",
+    "claim": "American Tower finances its infrastructure portfolio with substantial leverage\u2014$37,579 (table in millions) of total debt and a 4.9x Net Leverage Ratio as of September 30, 2026\u2014resulting in (1,067.9) (table in millions) of interest expense and 1,220.5 (table in millions) of cash paid for interest in the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "F3",
+     "P2",
+     "P5"
     ],
     "quotes": [
      "We have a substantial amount of indebtedness.",
-     "thereby placing us at a possible competitive disadvantage to less leveraged competitors and competitors that may have better access to capital resources, including with respect to acquiring or building assets"
+     "Leverage \u2013 For the quarter ended September 30, 2026, the Company\u2019s Net Leverage Ratio was 4.9x net debt (total debt less cash and cash equivalents) to third quarter 2026 annualized Adjusted EBITDA."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q site and data center portfolio tables and the Q3 2026 earnings release.",
+    "claim": "American Tower positions itself as among the largest global REITs and a leading independent owner, operator, and developer of multitenant communications real estate, operating 130,787 owned towers, 15,735 operated towers, 847 owned DAS sites, and 30 U.S. data center facilities across 11 markets totaling approximately 3.9 million net rentable square feet as of September 30, 2026.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "We are one of the largest global real estate investment trusts and a leading independent owner, operator and developer of multitenant communications real estate.",
+     "American Tower, one of the largest global REITs, is a leading independent owner, operator and developer of multitenant communications real estate with a portfolio of over 147,000 communications sites and a highly interconnected footprint of U.S. data center facilities."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 8-Ks",
-    "claim": "AMT retains access to bond markets. It completed note offerings with net proceeds of approximately $1,579.9 million in September and $1,474.9 million in November. The notes carry coupons from 5.300% to 5.750%. Proceeds are intended in part to repay revolver debt.",
+    "basis": "Stated in the 2025 Form 10-K Item 1 and the Q3 2026 Form 10-Q Item 2.",
+    "claim": "High tenant switching costs and multiyear non-cancellable carrier leases with contractual escalations\u2014averaging approximately 3% annually in the United States\u2014support recurring revenue and nearly $49 billion of expected future non-cancellable customer lease revenue as of September 30, 2026.",
     "facts": [
-     "P6",
-     "P7",
-     "P9"
+     "P1",
+     "P4"
     ],
     "quotes": [
-     "The Company intends to use the net proceeds to repay existing indebtedness under its $6.0 billion senior unsecured multicurrency revolving credit facility and for general corporate purposes."
+     "Our tenants tend to renew leases because suitable alternative sites may not exist or be available and repositioning a site in their network may be expensive and may adversely affect network quality.",
+     "Based upon existing customer leases and foreign currency exchange rates as of September 30, 2026, we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1 and reported in the Q3 2026 earnings release.",
+    "claim": "Adding tenants or equipment to existing sites incurs minimal incremental operating cost, supporting third-quarter 2026 Property Gross Margin of 73.5%, Adjusted EBITDA Margin of 65.8%, and non-discretionary capital improvements and corporate capital expenditures of $48 million out of approximately $407 million total capital expenditures.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Incremental operating costs associated with adding new tenants or equipment to an existing communications site are typically relatively minimal.",
+     "During the third quarter of 2026, total capital expenditures were approximately $407 million, of which $48 million was for non-discretionary capital improvements and corporate capital expenditures."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Items 1 and 7 and the Q3 2026 earnings release.",
+    "claim": "American Tower's U.S. data centers function as network interconnection hubs for hybrid-cloud, multi-cloud, and early-stage AI workloads, delivering 16.3% cash revenue growth in the third quarter of 2026 and prompting a $55 million increase in the full-year 2026 property revenue outlook midpoint.",
+    "facts": [
+     "P1",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Data centers located at points where many communications networks converge can also function as interconnection hubs where customers are able to connect to multiple networks, cloud companies and other service providers to exchange traffic and interoperate with each other.",
+     "As a result of Data Centers segment outperformance, the Company is raising the midpoint of its full year 2026 outlook for property revenue by $55 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A customer concentration table and Item 1 segment customer disclosures.",
+    "claim": "Revenue is heavily concentrated among a small number of wireless carriers, with T-Mobile (18%), AT&T (17%), Verizon Wireless (14%), and Telef\u00f3nica (10%) each representing at least 10% of 2025 total revenues.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "A substantial portion of our total operating revenues is derived from a small number of customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 Form 10-Q Item 2 and the 2025 Form 10-K Item 1A.",
+    "claim": "Active customer disputes and distress have eroded billings and triggered charges: DISH defaulted and entered bankruptcy in 2026, lifting churn for the period ended September 30, 2026 to approximately 5% and causing $17.5 million in impairment charges, while AT&T Mexico's rent-abatement arbitration caused approximately $30 million of reserves in 2025 and approximately $30 million of additional reserves in 2026.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "During the nine months ended September 30, 2026, we recorded impairment charges related to DISH of $17.5 million.",
+     "We incurred approximately $30 million of reserves during the year ended December 31, 2025, and approximately $30 million of additional reserves during the nine months ended September 30, 2026, related to this customer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated explicitly in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Direct competition from peers offering alternative communications infrastructure and competing pricing or contractual terms threatens lease rates and renewals, while larger or less return-disciplined rivals compete to build or acquire new assets.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our industries are highly competitive and our customers have numerous alternatives in leasing communications infrastructure assets.",
+     "Some of our competitors are larger and may have greater financial resources than we do, while other competitors may apply less stringent investment criteria or less stringent contractual terms than we have."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "In data centers, some competitors hold advantages in scale, brand, leverage, network access, and lower power or operating costs, which are compounded by annual expirations of a significant share of American Tower's data center leases.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In addition, some of our data center competitors may have significant advantages over us, including greater name recognition, longer operating histories, lower operating costs, lower levels of leverage, pre-existing relationships with current or potential customers, greater financial, marketing and other resources, access to better networks and access to less expensive power.",
+     "These risks are compounded by the fact that a significant percentage of our data center customer leases expire every year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Customer consolidation, market exits, and infrastructure sharing\u2014such as RAN sharing, roaming, or resale arrangements\u2014threaten to slow new leasing activity and trigger equipment decommissioning or lease non-renewals.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Significant consolidation among our customers could reduce demand for our communications infrastructure and may materially and adversely affect our growth and revenues.",
+     "Our ongoing contractual revenues and our future results may be negatively impacted if a significant number of these leases are terminated or not renewed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "New wireless and computing technologies\u2014including spectrally efficient equipment, small cells, satellite services, and power-intensive AI workloads exceeding existing data center power and cooling density\u2014could shift carrier budgets away from towers or render existing facilities obsolete.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In addition, if the industry trends toward deploying increased capital to the development and implementation of new technologies, then customers may allocate less of their budgets to leasing space on our towers.",
+     "Similarly, our data center site infrastructure may become antiquated or obsolete due to the development of new systems that deliver power to, or eliminate heat from, the servers and other customer equipment that we house or due to the development of new technology, such as AI, which is potentially more power-intensive, that requires levels of power and cooling density that our facilities may not be designed to provide."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors and the Q3 2026 earnings release.",
+    "claim": "Substantial indebtedness\u2014$37,579 (table in millions) in total debt and a 4.9x Net Leverage Ratio as of September 30, 2026\u2014and restrictive debt covenants could constrain capital flexibility and disadvantage American Tower against less leveraged competitors.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "We have a substantial amount of indebtedness.",
+     "As of September 30, 2026, the Company had approximately $10.6 billion of total liquidity, consisting of approximately $1.9 billion in cash and cash equivalents plus the ability to borrow an aggregate of approximately $8.7 billion under its revolving credit facilities, net of any outstanding letters of credit."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Inflation exceeding fixed lease escalators, elevated interest rates, and foreign-currency volatility in international markets can compress profit margins, raise borrowing costs, and adversely affect asset values.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In addition, should inflation rates exceed our fixed escalator percentages in markets where our leases include fixed escalators, our returns could be adversely affected."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet figures. The reading of the gap is inferred.",
-    "claim": "Cash and cash equivalents were 1,871.9 (table in millions) at Sep. 30, 2026, up from 1,474.8 at Dec. 31, 2025. Total current assets of 3,150.3 sit against total current liabilities of 8,934.6.",
+    "basis": "Stated directly in the third quarter 2026 earnings release.",
+    "claim": "As of September 30, 2026, American Tower held approximately $10.6 billion of total liquidity, comprising approximately $1.9 billion in cash and cash equivalents and approximately $8.7 billion of revolving credit facility borrowing capacity net of letters of credit.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated. The maturity-reclassification mechanism is inferred.",
-    "claim": "Debt due within a year rose. The current portion of long-term obligations was 5,363.5 (table in millions) at Sep. 30, 2026 versus 3,387.8 at Dec. 31, 2025, while long-term obligations fell to 32,215.2 from 33,832.5.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the balance sheet and in the 10-K risk factor.",
-    "claim": "Leverage is high. Total liabilities were 53,214.7 (table in millions) against total equity of 9,765.6 at Sep. 30, 2026. The 10-K reported approximately $37.2 billion of consolidated debt at Dec. 31, 2025 and says the company has a substantial amount of indebtedness.",
-    "facts": [
-     "F1",
-     "P2"
+     "P5"
     ],
     "quotes": [
-     "We have a substantial amount of indebtedness."
+     "As of September 30, 2026, the Company had approximately $10.6 billion of total liquidity, consisting of approximately $1.9 billion in cash and cash equivalents plus the ability to borrow an aggregate of approximately $8.7 billion under its revolving credit facilities, net of any outstanding letters of credit."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the income statement and cash flow statement.",
-    "claim": "Interest cost is large relative to operating profit and rising. Nine-month interest expense was 1,067.9 (table in millions) versus 1,015.0 a year earlier, against operating income of 3,777.0. Cash paid for interest was 1,220.5 versus 1,105.2.",
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q consolidated balance sheet.",
+    "claim": "On the September 30, 2026 balance sheet, cash and cash equivalents were $ 1,871.9 (table in millions) and restricted cash was 135.4 (table in millions), while total current liabilities of 8,934.6 (table in millions) exceeded total current assets of 3,150.3 (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 1,871.9 | $ 1,474.8",
+     "Restricted cash | 135.4 | 130.4",
+     "Total current assets | 3,150.3 | 2,741.8",
+     "Total current liabilities | 8,934.6 | 6,913.8"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 earnings release.",
+    "claim": "As of September 30, 2026, total debt was $37,579 (table in millions) and net debt was $35,707 (table in millions), yielding a Net Leverage Ratio of 4.9x relative to third quarter annualized Adjusted EBITDA of 7,327 (table in millions).",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "For the quarter ended September 30, 2026, the Company\u2019s Net Leverage Ratio was 4.9x net debt (total debt less cash and cash equivalents) to third quarter 2026 annualized Adjusted EBITDA.",
+     "Total debt | $37,579",
+     "Net Debt | $35,707",
+     "Divided By: Third quarter annualized Adjusted EBITDA(1) | 7,327",
+     "Net Leverage Ratio | 4.9x"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q consolidated balance sheet.",
+    "claim": "As of September 30, 2026, balance sheet debt obligations consisted of 5,363.5 (table in millions) in current portion of long-term obligations and 32,215.2 (table in millions) in long-term obligations, alongside total liabilities of 53,214.7 (table in millions) and total equity of 9,765.6 (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Current portion of long-term obligations | 5,363.5 | 3,387.8",
+     "LONG-TERM OBLIGATIONS | 32,215.2 | 33,832.5",
+     "Total liabilities | 53,214.7 | 52,835.1",
+     "Total equity | 9,765.6 | 10,355.3"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q statement of operations and cash flow statement.",
+    "claim": "For the nine months ended September 30, 2026, interest expense rose to (1,067.9) (table in millions) from (1,015.0) (table in millions) a year earlier, while cash paid for interest increased to 1,220.5 (table in millions) from 1,105.2 (table in millions).",
     "facts": [
      "F2",
      "F3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Interest expense | (366.1) | (347.1) | (1,067.9) | (1,015.0)",
+     "CASH PAID FOR INTEREST | 1,220.5 | 1,105.2"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Operating cash generation for nine months was 4,280.2 (table in millions), up from 4,036.5. Capital spending on property, equipment and construction was 1,167.8 versus 1,101.2.",
+    "basis": "Stated directly in the 2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "The company's credit facilities contain restrictive covenants, leverage and financial maintenance tests, and cross-default or cross-acceleration provisions, and higher total leverage could trigger a credit rating downgrade below investment grade.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The agreements for our credit facilities also contain restrictive covenants and leverage and other financial maintenance tests that could limit our ability to take various actions, including incurring additional debt, guaranteeing indebtedness or making distributions to stockholders, including our required REIT distributions, and engaging in various types of transactions, including mergers, acquisitions and sales of assets.",
+     "An increase in our total leverage could lead to a downgrade of our credit rating below investment grade, which could negatively impact our ability to access credit markets or preclude us from obtaining funds on investment grade terms, rates and conditions or subject us to additional loan covenants, which could accelerate our debt repayment obligations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q cash flow statement.",
+    "claim": "For the nine months ended September 30, 2026, cash provided by operating activities increased to 4,280.2 (table in millions) from 4,036.5 (table in millions) in the prior-year period, while payments for property, equipment, and construction were (1,167.8) (table in millions).",
     "facts": [
      "F3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Cash provided by operating activities | 4,280.2 | 4,036.5",
+     "Payments for purchase of property and equipment and construction activities | (1,167.8) | (1,101.2)"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release table. The note on capex is read from that table.",
-    "claim": "In the third quarter, operating cash flow was $1,393 million, a change of (4.6)%. Free Cash Flow was $986 million, up 0.2%, and AFFO attributable to AMT common stockholders was $1,335 million, up 2.4%.",
+    "basis": "Stated directly in the third quarter 2026 earnings release.",
+    "claim": "In the third quarter of 2026, American Tower generated $986 (table in millions) of Free Cash Flow on $1,393 (table in millions) of operating cash flow and $407 (table in millions) of cash capital expenditures, alongside $1,832 (table in millions) of Adjusted EBITDA at a 65.8% margin and $1,335 (table in millions) of AFFO attributable to common stockholders.",
     "facts": [
      "P5"
     ],
-    "quotes": [],
-    "support": "number_not_listed"
+    "quotes": [
+     "Cash provided by operating activities | $1,393 | (4.6)%",
+     "Less: total cash capital expenditures(4) | $407 | (14.6)%",
+     "Free Cash Flow | $986 | 0.2%",
+     "Adjusted EBITDA(3) | $1,832 | 0.9%",
+     "Adjusted EBITDA Margin % | 65.8%",
+     "AFFO attributable to AMT common stockholders | $1,335 | 2.4%"
+    ],
+    "support": "supported"
    },
    {
-    "basis": "Figures stated. The competing-uses reading is inferred.",
-    "claim": "Cash returned to shareholders is a large call on cash. Nine-month distributions paid on common stock were 2,475.6 (table in millions) and purchases of common stock were 503.0, versus none in the prior-year period. After quarter end the Board authorized an additional $2.0 billion for repurchases.",
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q cash flow statement.",
+    "claim": "Nine-month operating cash flow of 4,280.2 (table in millions) exceeded GAAP net income of $ 2,546.8 (table in millions) primarily due to non-cash depreciation, amortization, and accretion of 1,552.0 (table in millions) and stock-based compensation of 124.1 (table in millions), with modest working-capital outflows from an increase in assets of (100.7) (table in millions) and decrease in liabilities of (85.1) (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net income | $ 2,546.8 | $ 1,791.7",
+     "Depreciation, amortization and accretion | 1,552.0 | 1,525.7",
+     "Stock-based compensation expense | 124.1 | 142.6",
+     "Increase in assets | (100.7) | (237.7)",
+     "Decrease in liabilities | (85.1) | (38.7)",
+     "Cash provided by operating activities | 4,280.2 | 4,036.5"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q MD&A.",
+    "claim": "Cash generation is underpinned by multiyear, generally non-cancellable tenant leases with annual fixed rent escalations averaging approximately 3% in the United States or inflation-linked escalators internationally, representing nearly $49 billion of expected future non-cancellable customer lease revenue as of September 30, 2026.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Most of our tenant leases for our communications sites have provisions that periodically increase or \u201cescalate\u201d the rent due under the lease, typically based on (a) an annual fixed escalation (averaging approximately 3% in the United States), (b) an inflationary index in most of our international markets, or (c) a combination of both.",
+     "Based upon existing customer leases and foreign currency exchange rates as of September 30, 2026, we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 Form 10-K Item 1 and third quarter 2026 Form 10-Q MD&A.",
+    "claim": "Cash flow quality faces contract-dispute and churn headwinds, as churn rose to approximately 5% of tenant billings in the nine months ended September 30, 2026 from approximately 2% in 2025 due to DISH's default and bankruptcy filing alongside $17.5 million in DISH impairments, while AT&T Mexico arbitration drove approximately $30 million of additional reserves in the nine-month period.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "During the year ended December 31, 2025, churn was approximately 2% of our tenant billings, primarily driven by churn in our U.S. & Canada property segment.",
+     "During the nine months ended September 30, 2026, churn was approximately 5% of our tenant billings, primarily driven by churn due to one of our U.S. customers, DISH Wireless L.L.C., a subsidiary of DISH Network Corporation (\u201cDISH\u201d) in our U.S. & Canada property segment, as discussed below.",
+     "During the nine months ended September 30, 2026, we recorded impairment charges related to DISH of $17.5 million.",
+     "We incurred approximately $30 million of reserves during the year ended December 31, 2025, and approximately $30 million of additional reserves during the nine months ended September 30, 2026, related to this customer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash outflows and the repurchase authorization are stated in the Form 10-Q cash flow statement and Q3 2026 earnings release; REIT mechanics are stated in the 2025 Form 10-K.",
+    "claim": "Operating as a REIT requires substantial stockholder payouts, with (2,475.6) (table in millions) in common stock distributions paid and (503.0) (table in millions) in common stock repurchases during the nine months ended September 30, 2026, plus an additional $2.0 billion repurchase authorization approved on October 23, 2026.",
+    "facts": [
+     "F3",
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "We operate as a real estate investment trust for U.S. federal income tax purposes (\u201cREIT\u201d).",
+     "Distributions paid on common stock | (2,475.6) | (2,361.0)",
+     "Purchases of common stock | (503.0) | 0.0",
+     "On October 23, 2026, the Company\u2019s Board of Directors authorized an increase in its share repurchase program to permit the Company to purchase up to an additional $2.0 billion of its outstanding common stock, in addition to the remaining available amount noted above."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 Form 10-Q balance sheet and earnings release.",
+    "claim": "Current portion of long-term obligations stood at 5,363.5 (table in millions) as of September 30, 2026 (up from 3,387.8 (table in millions) at year-end 2025), and American Tower subsequently repaid $1.0 billion of 3.375% senior unsecured notes upon maturity on October 14, 2026.",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "Current portion of long-term obligations | 5,363.5 | 3,387.8",
+     "On October 14, 2026, the Company repaid $1.0 billion aggregate principal amount of its 3.375% senior unsecured notes due October 15, 2026 upon their maturity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the third quarter 2026 earnings release and Form 10-Q cash flow statement.",
+    "claim": "Maturing debt can be met through approximately $10.6 billion in total liquidity, ongoing debt market access\u2014evidenced by $1.6 billion of senior unsecured notes issued on September 14, 2026 and 2,466.6 (table in millions) in nine-month net senior note proceeds\u2014and approximately $202 million in expected consideration from the pending Canadian subsidiary sale.",
     "facts": [
      "F3",
      "P5"
     ],
     "quotes": [
-     "Allocated $315 million to share repurchases, and subsequent to quarter end, the Board of Directors authorized an additional $2.0 billion for future repurchases"
+     "As of September 30, 2026, the Company had approximately $10.6 billion of total liquidity, consisting of approximately $1.9 billion in cash and cash equivalents plus the ability to borrow an aggregate of approximately $8.7 billion under its revolving credit facilities, net of any outstanding letters of credit.",
+     "On September 14, 2026, the Company issued an aggregate principal amount of $1.6 billion in senior unsecured notes due 2031, 2033, and 2036.",
+     "Proceeds from issuance of senior notes, net | 2,466.6 | 2,153.3",
+     "During the three months ended September 30, 2026, the Company, through its subsidiary, American Towers LLC, entered into an agreement pursuant to which it expects to sell 100% of the ownership interests in its subsidiaries in Canada for total aggregate consideration of approximately 288 million Canadian Dollars (approximately $202 million)."
     ],
     "support": "supported"
-   },
-   {
-    "basis": "Figures stated. The attribution to foreign exchange is inferred from the income statement caption and the cash flow reconciling items.",
-    "claim": "Reported earnings are a weaker guide than operating cash flow. Nine-month net income was 2,546.8 (table in millions) versus 1,791.7, but the prior period carried foreign currency losses of $(811.7) against gains of $137.2 now. Operating income rose more modestly, to 3,777.0 from 3,685.1.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Customer-credit events weigh on the quality of future cash flows. The 10-Q says DISH is fully counted as churn, with churn at about 5% of tenant billings for nine months. DISH filed for bankruptcy relief under the U.S. Bankruptcy Code, and the company recorded DISH impairment charges of $17.5 million.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Beginning on January 1, 2026, 100% of DISH revenue has been reflected in churn."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "The AT&T Mexico dispute, a tenant that represented approximately $300 million of 2025 tenant revenue, remains open. The company recorded approximately $30 million of additional reserves in the nine months, expects more reserves until the arbitration is settled, and expects a final ruling in 2027.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "We expect to record future reserves until the Arbitration is settled."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Both figures stated. The cause is not stated.",
-    "claim": "Contracted revenue visibility shrank. Expected non-cancellable customer lease revenue was nearly $49 billion at Sep. 30, 2026, against over $54 billion at Dec. 31, 2025, before straight-line accounting.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K. The interest-cost effect is inferred from the coupons.",
-    "claim": "The company has been refinancing with new senior notes. On Sep. 14 it issued $500.0 million of 5.300% notes due 2031, $500.0 million of 5.560% notes due 2033 and $600.0 million of 5.750% notes due 2036, with net proceeds of approximately $1,579.9 million. The stated uses were to repay $600.0 million of 1.450% notes due 2026, to repay revolver debt, and for general corporate purposes.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "to repay $600.0 million aggregate principal amount of its 1.450% senior unsecured notes due 2026"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in the 8-Ks.",
-    "claim": "A further add-on offering completed on Nov. 13, after the balance sheet date, raised net proceeds of approximately $1,474.9 million from $450.0 million, $500.0 million and $550.0 million of the same three note series. The company intends to use the proceeds to repay existing indebtedness under its $6.0 billion revolving credit facility and for general corporate purposes.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "The Company intends to use the net proceeds to repay existing indebtedness under its $6.0 billion senior unsecured multicurrency revolving credit facility and for general corporate purposes."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Figures stated. The reading of the funding route is inferred.",
-    "claim": "Debt maturities and refinancing have been funded in the market this year. In nine months the company drew 4,546.1 (table in millions) under credit facilities and issued senior notes with net proceeds of 2,466.6. It repaid 6,355.5 of notes, credit facilities, senior notes, secured debt and finance leases.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated for Dec. 31, 2025. The current position is not known.",
-    "claim": "Revolver capacity was large at year-end 2025. The 10-K stated the ability to borrow approximately $9.6 billion more under the $6.0 billion and $4.0 billion revolving credit facilities. Operating cash flow and this undrawn capacity are the stated routes for meeting debt service.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K and the release. Headroom is not stated.",
-    "claim": "Debt terms limit how much secured borrowing can be added. The notes indenture caps liens securing indebtedness at 3.5x Adjusted EBITDA. Third-quarter Adjusted EBITDA was $1,832 million, and the full-year 2026 outlook is 7,248 to 7,303 (table in millions).",
-    "facts": [
-     "P9",
-     "P5"
-    ],
-    "quotes": [
-     "provided the aggregate amount of indebtedness secured by such liens shall not exceed 3.5x Adjusted EBITDA as defined in the Indenture."
-    ],
-    "support": "number_not_listed"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the Q3 2026 earnings release outlook table and highlights.",
-    "claim": "Management guides to 2026 total property revenue of $10,785 to $10,865 (table in millions), a 5.0% midpoint growth rate, with Adjusted EBITDA midpoint growth of only 2.0%. It attributes the raised outlook to tower growth, Data Centers outperformance and capital allocation. For this to hold, each of those three sources has to deliver.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "Raising full-year 2026 outlook, reflecting consistent growth across our global tower portfolio, Data Centers outperformance, and disciplined capital allocation"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Escalator and backlog figures are stated in the 10-Q MD&A. The 1.1% is stated in the earnings release. The mechanism is described in the 10-K.",
-    "claim": "Contractual rent escalators and tenant billings growth are the base driver. US leases escalate at about 3% a year, and Q3 organic tenant billings growth was 1.1%. The company expects nearly $49 billion of non-cancellable lease revenue. To continue, carriers must keep leasing space and escalators must not be overtaken by churn or cost inflation.",
-    "facts": [
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Churn percentages and the DISH attribution are stated in the 10-Q and 10-K MD&A. That churn will normalise is not stated and is only an implied condition.",
-    "claim": "Churn is the main condition on the tower base. Churn was about 5% of tenant billings in the nine months of 2026, against about 2% in 2025. The 10-Q says this is primarily DISH, with 100% of DISH revenue treated as churn from January 1, 2026. Growth in the US base needs churn to fall back as the DISH effect passes.",
+    "basis": "stated in the 2025 Form 10-K Item 7 MD&A and Q3 2026 Form 8-K earnings release",
+    "claim": "American Tower drives organic property revenue growth by adding new tenants and equipment to existing communications sites through colocation and lease amendments, generating 1.1% Organic Tenant Billings Growth in the third quarter of 2026.",
     "facts": [
      "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Consistent with our strategy to increase the utilization and return on investment from our sites, our objective is to add new tenants and new equipment for existing tenants through colocation and lease amendments.",
+     "Total property revenue increased 4.5% to $2,734 million, driven by 1.1% Organic Tenant Billings Growth and 16.3% cash revenue growth in Data Centers(1)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors and Item 7 MD&A",
+    "claim": "Continued colocation and amendment growth requires wireless carriers and other tenants to maintain network capital spending and requires customers not to replace site leasing with RAN sharing, small cells, satellite services, or more spectrally efficient technologies.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our ability to lease additional space on our sites is primarily a function of the rate at which wireless carriers and other tenants deploy capital to improve and expand their wireless networks.",
+     "Additionally, certain small cell complementary network technologies or satellite services could shift a portion of our customers\u2019 network investments away from traditional tower-based networks, which may reduce the need for carriers to add more equipment at certain communications sites."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 Form 10-Q Item 2 MD&A",
+    "claim": "Recurring property revenue growth is supported by multi-year non-cancellable tenant leases that include annual escalations averaging approximately 3% in the United States and inflation-indexed escalations in most international markets, with nearly $49 billion of future non-cancellable lease revenue as of September 30, 2026.",
+    "facts": [
      "P4"
     ],
     "quotes": [
-     "churn was approximately 5% of our tenant billings",
-     "churn was approximately 2% of our tenant billings"
+     "Most of our tenant leases for our communications sites have provisions that periodically increase or \u201cescalate\u201d the rent due under the lease, typically based on (a) an annual fixed escalation (averaging approximately 3% in the United States), (b) an inflationary index in most of our international markets, or a combination of both.",
+     "Based upon existing customer leases and foreign currency exchange rates as of September 30, 2026, we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting."
     ],
-    "support": "number_not_listed"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Growth rates and spend are stated in the earnings release. The demand drivers are stated in the 10-K MD&A. Whether demand persists is inferred.",
-    "claim": "Data Centers are the fastest-growing US driver. Q3 Data Centers cash revenue grew 16.3%, and the 2026 outlook is $1,218 million to $1,228 million of segment revenue, a 16.1% midpoint growth rate. The outlook includes $695 million of data center development spend. Continuation requires new lease commencements, renewals at higher rents and interconnection demand, and it requires funding for the build-out.",
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors and Q3 2026 Form 10-Q Item 2 MD&A",
+    "claim": "Continued growth from contractual escalations requires high lease renewals without material churn, customer solvency and contract performance, and inflation that does not exceed fixed escalator percentages.",
     "facts": [
-     "P5",
-     "P3"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "Data Centers segment property revenue of $1,218 million to $1,228 million",
-     "$695 million of development spend",
-     "contractual rent and power escalations on existing leases, mark-to-market increases on renewing leases and increased interconnection services and solutions"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Growth rates are stated in the outlook footnote. The role of pass-through and new sites is stated in the 10-K MD&A. The currency dependence is inferred from the stated currency assumptions.",
-    "claim": "International segments carry the highest guided growth rates. Midpoint property revenue growth is 16.2% for Africa & APAC, 10.4% for Europe and 11.0% for Latin America. These rates include pass-through revenue and the foreign-exchange rates assumed in the outlook. Continuation requires stable currencies, new site additions and carriers that keep paying.",
-    "facts": [
-     "P5",
-     "P3"
-    ],
-    "quotes": [
-     "the revenue generated from newly acquired or constructed sites resulted in increases in both tenant and pass-through revenues (such as ground rent or power and fuel costs) and expenses"
+     "If any of these customers are unwilling or unable to perform their obligations under their agreements with us, our revenues, results of operations, financial condition and liquidity could be materially and adversely affected.",
+     "In addition, should inflation rates exceed our fixed escalator percentages in markets where our leases include fixed escalators, our returns could be adversely affected."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release outlook footnote and the 10-K segment mix and revenue table.",
-    "claim": "The US & Canada segment, the largest at 49% of 2025 revenue, is guided to shrink. The midpoint growth rate is (3.0)%, and the outlook says over 3% of that is a decrease in non-cash straight-line revenue. The 2025 segment revenue was flat versus 2024, with the table showing 0% (table in millions). Growth elsewhere has to outweigh this drag.",
+    "basis": "stated in the 2025 Form 10-K Item 7 MD&A",
+    "claim": "Tower leasing demand is driven by growing mobile data consumption, deployment of advanced mobile technologies and higher-band spectrum, and expected network densification.",
     "facts": [
-     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "We anticipate increasing network densification over the next several years, as existing network density is anticipated to be insufficient to account for rapidly increasing levels of wireless data usage.",
+     "Continued spectrum acquisition and deployment by wireless service providers, which is expected to result in additional sites and equipment on existing sites as operators optimize network configuration and utilize the additional spectrum."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors and Item 7 MD&A",
+    "claim": "For mobile data and spectrum trends to translate into revenue growth, wireless carriers must sustain capital deployment and continue outsourcing tower infrastructure rather than shifting budgets to alternative network architectures.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "According to industry data, recent aggregate annual wireless capital spending in the United States has averaged at least $30 billion, resulting in consistent demand for our sites.",
+     "Further, a customer may decide to cease outsourcing tower infrastructure or otherwise change its business model, which would result in a decrease in our revenue and operating results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 7 MD&A and Q3 2026 Form 8-K earnings release",
+    "claim": "The U.S. Data Centers segment is a primary growth driver, delivering 16.3% cash revenue growth in the third quarter of 2026 and full-year 2026 revenue outlook growth of 16.1% at the midpoint, supported by hybrid-cloud, multi-cloud, interconnection, and early-stage AI workloads.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "As a result of Data Centers segment outperformance, the Company is raising the midpoint of its full year 2026 outlook for property revenue by $55 million.",
+     "Our portfolio of highly interconnected data center facilities and related assets in the United States is well positioned to monetize elevated demand for hybrid-cloud and multi-cloud deployments, as well as demand from early-stage AI-related workloads like inferencing, machine learning models and GPU-as-a-Service from neo clouds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors",
+    "claim": "Continued Data Centers growth requires facilities to meet power and cooling density requirements for AI and high-density deployments while competing effectively on renewals and pricing.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Similarly, our data center site infrastructure may become antiquated or obsolete due to the development of new systems that deliver power to, or eliminate heat from, the servers and other customer equipment that we house or due to the development of new technology, such as AI, which is potentially more power-intensive, that requires levels of power and cooling density that our facilities may not be designed to provide.",
+     "These risks are compounded by the fact that a significant percentage of our data center customer leases expire every year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 7 MD&A and Q3 2026 Form 8-K earnings release",
+    "claim": "American Tower supplements organic growth by building and acquiring communications sites globally, adding approximately 2,230 sites in 2025 and targeting 1,300 to 1,900 site builds in 2026.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "In addition, we intend to continue to supplement our organic growth by selectively developing or acquiring new sites in our existing and new markets where we can achieve our risk-adjusted return on investment objectives.",
+     "We believe that the network technology migration we have seen in the United States, which has led to significantly denser networks and meaningful new business commencements for us over a number of years, will be replicated in our international markets over time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors and Q3 2026 Form 8-K earnings release",
+    "claim": "Continued external site growth requires winning build and acquisition opportunities at prices meeting hurdle rates, maintaining access to financing despite high debt and restrictive covenants, and managing international currency and political risks.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Higher prices or less favorable terms for the construction or acquisition of assets or the failure to build or otherwise add new assets to our portfolio could make it more difficult to achieve our anticipated returns on investment or future growth, which could materially and adversely affect our business, results of operations or financial condition.",
+     "An increase in our total leverage could lead to a downgrade of our credit rating below investment grade, which could negatively impact our ability to access credit markets or preclude us from obtaining funds on investment grade terms, rates and conditions or subject us to additional loan covenants, which could accelerate our debt repayment obligations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K Item 1 Business and Item 7 MD&A",
+    "claim": "Incremental revenue from adding tenants or equipment to existing sites largely flows through to gross margin and operating profit because incremental site operating and SG&A expenses are minimal.",
+    "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "The U.S. & Canada growth rate includes an estimated negative impact of over 3% associated with a decrease in non-cash straight-line revenue recognition."
+     "Therefore, as tenants or equipment are added, the substantial majority of incremental revenue flows through to gross margin and operating profit.",
+     "In general, our property segments\u2019 selling, general, administrative and development expenses do not significantly increase as a result of adding incremental customers to our sites or facilities and typically increase only modestly year-over-year."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release and the cash flow statement. The share-count mechanism is inferred from the per-share and total growth gap.",
-    "claim": "Per-share growth is helped by buybacks. Q3 AFFO per share grew 3.2% against 2.4% for total AFFO. The company allocated $315 million to repurchases in Q3, and the Board authorized an additional $2.0 billion afterwards. For this to continue, buybacks must remain affordable alongside distributions and debt service.",
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors and Item 7 MD&A",
+    "claim": "Operating margin expansion requires site revenue additions to outpace churn and direct cost inflation in land, labor, materials, and unrecovered power or fuel expenses.",
     "facts": [
-     "P5",
-     "F3"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "Allocated $315 million to share repurchases, and subsequent to quarter end, the Board of Directors authorized an additional $2.0 billion for future repurchases"
+     "Inflation can materially and adversely affect us by increasing the costs of land, materials, labor and other costs required to manage and grow our business.",
+     "Our profit margin growth is therefore positively impacted by the addition of new customers to our sites or facilities but can be temporarily diluted by our development or expansion activities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated figures from the cash flow statement and earnings release table. The sufficiency judgment is inferred.",
-    "claim": "Operating cash flow supports distributions and buybacks but is not growing in Q3. Nine-month cash from operations was 4,280.2 against 4,036.5 a year earlier (table in millions). Distributions paid on common stock were 2,475.6. Q3 cash from operations fell (4.6)%.",
+    "basis": "stated in the Q3 2026 Form 8-K earnings release",
+    "claim": "Capital allocation toward common stock repurchases boosts per-share AFFO growth, contributing to a $0.02 increase in the 2026 AFFO per share outlook midpoint while total AFFO midpoint was unchanged.",
     "facts": [
-     "F3",
      "P5"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Balances, interest expense and offering proceeds are stated in the filings. That refinancing is a condition for continued growth is inferred.",
-    "claim": "Growth depends on continued access to refinancing. The current portion of long-term obligations was 5,363.5 against 3,387.8 at year-end 2025 (table in millions). Nine-month interest expense was 1,067.9 against 1,015.0. The company issued notes with net proceeds of about $1,579.9 million in September and $1,474.9 million in November, with the November proceeds intended to repay revolver borrowings.",
-    "facts": [
-     "F1",
-     "F2",
-     "P6",
-     "P9"
     ],
     "quotes": [
-     "The Company intends to use the net proceeds to repay existing indebtedness under its $6.0 billion senior unsecured multicurrency revolving credit facility and for general corporate purposes."
+     "The Company is maintaining the prior outlook midpoint of AFFO attributable to AMT common stockholders and raising the midpoint of AFFO attributable to AMT common stockholders per share by $0.02, primarily due to capital allocation decisions.",
+     "During the third quarter of 2026, the Company repurchased a total of approximately 1.8 million shares of its common stock for an aggregate of approximately $315 million, including commissions and fees."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated figures from the income statement and earnings release. The conversion gap is inferred by comparing them.",
-    "claim": "Revenue growth is not yet converting to earnings. Q3 revenue grew 2.5% but Adjusted EBITDA grew 0.9%. Q3 property costs were 724.9 against 657.0 a year earlier (table in millions). Growth in earnings needs cost growth to slow or revenue to accelerate.",
+    "basis": "stated in the 2025 Form 10-K Item 1A Risk Factors and Q3 2026 Form 8-K earnings release",
+    "claim": "Continued per-share accretion from repurchases requires sufficient cash flow and liquidity to fund buybacks without breaching debt covenants, impairing REIT distribution capacity, or underfunding capital expenditures.",
     "facts": [
-     "F2",
+     "P2",
      "P5"
     ],
-    "quotes": [],
+    "quotes": [
+     "Additionally, our share repurchase program could diminish our available cash, which may impact our ability to finance future growth and pursue possible future strategic opportunities and acquisitions.",
+     "On October 23, 2026, the Company\u2019s Board of Directors authorized an increase in its share repurchase program to permit the Company to purchase up to an additional $2.0 billion of its outstanding common stock, in addition to the remaining available amount noted above."
+    ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "AMT delivered notices terminating its Strategic Collocation Agreement and related agreements with DISH, a U.S. customer that had been in default since January.",
+    "basis": "stated in P2, P3, and P4",
+    "claim": "American Tower delivered notices terminating its Strategic Collocation Agreement and related agreements with DISH after DISH defaulted on its payment obligations, with 100% of DISH revenue reflected in churn and DISH having represented approximately 2% of total annual property revenue and 4% of U.S. & Canada property revenue in 2025.",
     "facts": [
+     "P2",
+     "P3",
      "P4"
     ],
     "quotes": [
-     "We delivered notices of termination, effective June 2, 2026, to DISH of the SCA and related agreements with DISH."
+     "We delivered notices of termination, effective June 2, 2026, to DISH of the SCA and related agreements with DISH.",
+     "Beginning on January 1, 2026, 100% of DISH revenue has been reflected in churn.",
+     "DISH represented approximately 2% and 4% of our total annual property revenue and total annual U.S. & Canada property revenue, respectively, for 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "DISH, an AMT customer, filed for chapter 11 bankruptcy relief. AMT continues to seek relief for DISH's non-compliance. This is a customer's bankruptcy, not AMT's.",
+    "basis": "stated in P4",
+    "claim": "Following American Tower's amended federal complaint seeking damages from DISH and adding EchoStar Corporation for tortious interference, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code.",
     "facts": [
      "P4"
     ],
     "quotes": [
+     "On June 15, 2026, we amended the complaint to (i) add claims seeking damages for DISH\u2019s breaches of the SCA and other agreements, and (ii) add DISH\u2019s parent company, EchoStar Corporation, as a party for tortious interference with such agreements.",
      "On June 30, 2026, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "AMT recorded impairment charges related to DISH of $17.5 million in the nine months ended September 30, 2026.",
+    "basis": "stated in P4",
+    "claim": "American Tower recorded impairment charges related to DISH of $17.5 million.",
     "facts": [
      "P4"
     ],
@@ -1267,157 +845,311 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "The arbitration hearing with AT&T Mexico over the lease amount under the master lease agreement began, and AMT expects a final ruling in 2027. AMT expects to keep recording reserves until the arbitration is settled.",
+    "basis": "stated in P2, P3, and P4",
+    "claim": "AT&T Mexico (approximately $300 million of tenant revenue in 2025) challenged its Master Lease Agreement rent calculation and withheld tower rents, leading to an interim escrow agreement, arbitration hearings, and approximately $30 million of reserves in 2025 plus approximately $30 million of additional reserves in the nine-month period.",
     "facts": [
+     "P2",
+     "P3",
      "P4"
     ],
     "quotes": [
+     "AT&T Mexico, which represented approximately $300 million of tenant revenue in 2025, is challenging the calculation of the monthly lease amount established under our Master Lease Agreement with AT&T Mexico (the \u201cMLA\u201d), as well as certain other provisions of the MLA, seeking rent abatement both retroactively and prospectively, and had been withholding tower rents since the start of 2025.",
+     "On September 23, 2025, we and AT&T Mexico reached an agreement pursuant to which AT&T Mexico will remit payment of the majority of the withheld tower rents and will resume monthly payments of the majority of its owed tower rents.",
+     "We incurred approximately $30 million of reserves during the year ended December 31, 2025, and approximately $30 million of additional reserves during the nine months ended September 30, 2026, related to this customer.",
      "The Arbitration hearing began in August 2026 and we expect a final ruling in 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "AMT completed the sale of its Philippines subsidiary, ATC Philippines, previously in the Africa & APAC property segment.",
+    "basis": "stated in P4 and P5",
+    "claim": "American Tower, through American Towers LLC, entered into an agreement to sell 100% of the ownership interests in its Canadian subsidiaries for total aggregate consideration of approximately 288 million Canadian Dollars (approximately $202 million).",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "During the three months ended September 30, 2026, the Company, through its subsidiary, American Towers LLC, entered into an agreement pursuant to which it expects to sell 100% of the ownership interests in its subsidiaries in Canada for total aggregate consideration of approximately 288 million Canadian Dollars (approximately $202 million).",
+     "The Company expects to complete the sale during the fourth quarter of 2026, subject to customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "American Tower completed the sale of its subsidiary in the Philippines, ATC Philippines.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "On June 15, 2026, we completed the sale of ATC Philippines."
+     "Sale of Philippines Subsidiary\u2014On June 15, 2026, we completed the sale of ATC Philippines."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "AMT completed the sale of its controlling interest in Kirtonkhola Tower Bangladesh Limited, previously in the Africa & APAC property segment.",
+    "basis": "stated in P4",
+    "claim": "American Tower completed the sale of its controlling interest in Kirtonkhola Tower Bangladesh Limited.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "On June 29, 2026, we completed the sale of our controlling interest in KTBL."
+     "Sale of Bangladesh Partnership\u2014On June 29, 2026, we completed the sale of our controlling interest in KTBL."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q footnote",
-    "claim": "AMT expects to complete the sale of its Canada operations in the fourth quarter.",
+    "basis": "stated in P2 and P3",
+    "claim": "American Tower completed the sale of its fiber assets in South Africa.",
     "facts": [
-     "P4"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "We expect to complete the sale of our operations in Canada during the fourth quarter of 2026."
+     "During the year ended December 31, 2025, we completed the sale of our fiber assets in South Africa (\u201cSouth Africa Fiber\u201d)."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 8-K",
-    "claim": "AMT completed a registered public offering of three series of senior unsecured notes. Proceeds were to repay maturing notes and revolver debt and for general corporate purposes.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "which resulted in aggregate net proceeds to the Company of approximately $1,579.9 million, after deducting commissions and estimated expenses"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 8-K filed after the pricing announcement",
-    "claim": "AMT completed an add-on registered offering of the same three series of senior unsecured notes, fungible with the September issues. Proceeds were to repay revolver debt and for general corporate purposes.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "which resulted in aggregate net proceeds to the Company of approximately $1,474.9 million, after deducting commissions and estimated expenses"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited earnings release; the exact authorization date is not given",
-    "claim": "After quarter end, AMT's board authorized an additional $2.0 billion for share repurchases, announced in the third-quarter release. AMT also allocated $315 million to repurchases in the third quarter.",
+    "basis": "stated in P5",
+    "claim": "American Tower issued $1.6 billion aggregate principal amount of senior unsecured notes, using net proceeds to repay maturing notes, repay borrowings under its $6.0 billion senior unsecured multicurrency revolving credit facility, and fund general corporate purposes.",
     "facts": [
      "P5"
     ],
     "quotes": [
-     "Allocated $315 million to share repurchases, and subsequent to quarter end, the Board of Directors authorized an additional $2.0 billion for future repurchases"
+     "On September 14, 2026, the Company issued an aggregate principal amount of $1.6 billion in senior unsecured notes due 2031, 2033, and 2036.",
+     "The net proceeds were used to repay the 1.450% Notes, to repay the existing indebtedness under the Company\u2019s $6.0 billion senior unsecured multicurrency revolving credit facility and for general corporate purposes."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "AMT raised its full-year 2026 outlook for the third time in the year, lifting the property revenue midpoint by $55 million. It lowered the net income midpoints.",
+    "basis": "stated in P5",
+    "claim": "American Tower repaid $600.0 million aggregate principal amount of its 1.450% senior unsecured notes upon maturity.",
     "facts": [
      "P5"
     ],
     "quotes": [
-     "Raising full-year 2026 outlook, reflecting consistent growth across our global tower portfolio, Data Centers outperformance, and disciplined capital allocation"
+     "On September 14, 2026, the Company repaid $600.0 million aggregate principal amount of its 1.450% senior unsecured notes due September 15, 2026 (the \u201c1.450% Notes\u201d) upon their maturity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "American Tower repaid $1.0 billion aggregate principal amount of its 3.375% senior unsecured notes upon maturity.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On October 14, 2026, the Company repaid $1.0 billion aggregate principal amount of its 3.375% senior unsecured notes due October 15, 2026 upon their maturity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "American Tower's Board of Directors authorized an increase in its share repurchase program to permit up to an additional $2.0 billion of common stock repurchases, in addition to approximately $1.1 billion remaining available.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On October 23, 2026, the Company\u2019s Board of Directors authorized an increase in its share repurchase program to permit the Company to purchase up to an additional $2.0 billion of its outstanding common stock, in addition to the remaining available amount noted above.",
+     "As of October 20, 2026, the Company had approximately $1.1 billion remaining available under its stock repurchase program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P5",
+    "claim": "American Tower repurchased approximately 1.8 million shares of common stock for approximately $315 million during the third quarter and approximately 0.4 million shares for approximately $68 million subsequently through late October.",
+    "facts": [
+     "F3",
+     "P5"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the Company repurchased a total of approximately 1.8 million shares of its common stock for an aggregate of approximately $315 million, including commissions and fees.",
+     "Subsequent to the end of the third quarter, through October 20, 2026, the Company repurchased approximately 0.4 million shares of its common stock for an aggregate of approximately $68 million, including commissions and fees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "American Tower declared a quarterly regular cash distribution on its common stock of $1.79 per share ($831.0 (table in millions) aggregate), which was subsequently paid to stockholders.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Distributions per share | $1.79",
+     "Aggregate amount (in millions) | $831.0",
+     "The distribution declared on September 17, 2026 was paid on October 20, 2026 to stockholders of record as of the close of business on September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "American Tower raised the midpoint of its full-year property revenue outlook by $55 million and AFFO per share midpoint by $0.02, while lowering net income and common-stockholder net income midpoints by $30 million due to unrealized losses for equity securities.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "As a result of Data Centers segment outperformance, the Company is raising the midpoint of its full year 2026 outlook for property revenue by $55 million.",
+     "The Company is lowering the midpoints for net income and net income attributable to AMT common stockholders by $30 million and $30 million, respectively, primarily due to unrealized losses for equity securities.",
+     "The Company is maintaining the prior outlook midpoint of AFFO attributable to AMT common stockholders and raising the midpoint of AFFO attributable to AMT common stockholders per share by $0.02, primarily due to capital allocation decisions."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the 10-Q MD&A (P4) and the 10-K MD&A (P3). The mechanism is inferred.",
-    "claim": "DISH, a U.S. customer in default under its collocation agreement, has filed for bankruptcy. Nine-month 2026 churn was approximately 5% of tenant billings, against approximately 2% in 2025, and DISH-related impairment charges were $17.5 million. DISH was approximately 2% of 2025 total property revenue and 4% of U.S. & Canada property revenue.",
+    "basis": "Stated directly in P4 regarding the default, bankruptcy filing, churn, and impairment, and in P5 regarding the updated 2026 property revenue outlook.",
+    "claim": "DISH defaulted on its Strategic Collocation Agreement and filed for bankruptcy reorganization, driving churn to approximately 5% of tenant billings and $17.5 million in impairment charges.",
     "facts": [
+     "P2",
      "P4",
-     "P3"
+     "P5"
     ],
     "quotes": [
-     "On June 30, 2026, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code."
+     "Thereafter, DISH failed to meet its payment obligations, and as of January 2026, has been in default under the SCA.",
+     "On June 30, 2026, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code.",
+     "During the nine months ended September 30, 2026, we recorded impairment charges related to DISH of $17.5 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P4) and the 10-K risk factors (P2). The 10-K warns that adverse rulings could have a material negative impact.",
-    "claim": "The AT&T Mexico arbitration challenges the lease calculation under the master lease agreement. The customer represented approximately $300 million of 2025 tenant revenue, and the company recorded approximately $30 million of additional reserves in the nine months of 2026.",
+    "basis": "Stated directly in P2 and P4.",
+    "claim": "AT&T Mexico, which represented approximately $300 million of tenant revenue, is challenging monthly lease calculations in arbitration and withheld tower rents, leading AMT to incur approximately $30 million of reserves in the prior year and approximately $30 million in the current year-to-date period.",
     "facts": [
-     "P4",
-     "P2"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "The Arbitration hearing began in August 2026 and we expect a final ruling in 2027.",
-     "We expect to record future reserves until the Arbitration is settled."
+     "AT&T Mexico, which represented approximately $300 million of tenant revenue in 2025, is challenging the calculation of the monthly lease amount established under our Master Lease Agreement with AT&T Mexico (the \u201cMLA\u201d), as well as certain other provisions of the MLA, seeking rent abatement both retroactively and prospectively, and had been withholding tower rents since the start of 2025.",
+     "We incurred approximately $30 million of reserves during the year ended December 31, 2025, and approximately $30 million of additional reserves during the nine months ended September 30, 2026, related to this customer.",
+     "The Arbitration hearing began in August 2026 and we expect a final ruling in 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance-sheet and cash-flow figures are stated in F1 and F3. The refinancing mechanism is inferred from the 10-K risk language.",
-    "claim": "The company carries heavy debt that needs refinancing. Current portion of long-term obligations rose to 5,363.5 from 3,387.8 (table in millions), against cash and cash equivalents of 1,871.9 (table in millions). The company is issuing new notes, including $1,474.9 million of net proceeds in November 2026, to repay the revolver and for general corporate purposes.",
+    "basis": "Stated directly in P2 for customer revenue shares and credit risk, and in P4 for lease terms and backlog.",
+    "claim": "A substantial portion of AMT's total operating revenues comes from a small number of customers\u2014T-Mobile at 18%, AT&T at 17%, Verizon Wireless at 14%, and Telef\u00f3nica at 10%\u2014exposing AMT to customer creditworthiness and financial strength.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "A substantial portion of our total operating revenues is derived from a small number of customers.",
+     "If any of these customers are unwilling or unable to perform their obligations under their agreements with us, our revenues, results of operations, financial condition and liquidity could be materially and adversely affected.",
+     "The loss of significant customers, or the loss of all or a portion of our anticipated lease revenues from certain customers, could have a material adverse effect on our business, results of operations or financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F1, F3, P2, and P5.",
+    "claim": "AMT holds 5,363.5 (table in millions) in current portion of long-term obligations and 32,215.2 (table in millions) in long-term obligations against $ 1,871.9 (table in millions) in cash and cash equivalents, with a 4.9x Net Leverage Ratio.",
     "facts": [
      "F1",
      "F3",
-     "P6",
-     "P2"
+     "P2",
+     "P5"
     ],
     "quotes": [
      "We have a substantial amount of indebtedness.",
-     "The Company intends to use the net proceeds to repay existing indebtedness under its $6.0 billion senior unsecured multicurrency revolving credit facility and for general corporate purposes."
+     "An increase in our total leverage could lead to a downgrade of our credit rating below investment grade, which could negatively impact our ability to access credit markets or preclude us from obtaining funds on investment grade terms, rates and conditions or subject us to additional loan covenants, which could accelerate our debt repayment obligations.",
+     "For the quarter ended September 30, 2026, the Company\u2019s Net Leverage Ratio was 4.9x net debt (total debt less cash and cash equivalents) to third quarter 2026 annualized Adjusted EBITDA."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the 8-K earnings release (P5). The thesis-break interpretation is inferred.",
-    "claim": "Organic growth is thin and profit growth is weak. Q3 Organic Tenant Billings Growth was 1.1% and Adjusted EBITDA rose 0.9%. Net income attributable to common stockholders fell 10.3%. The full-year outlook midpoint for U.S. & Canada property revenue is (3.0)% growth.",
+    "basis": "Stated directly in P2 for covenant terms, and supported by distribution and liquidity disclosures in F3 and P5.",
+    "claim": "Restrictive covenants in AMT's credit facilities and securitization agreements limit debt incurrence, liens, and asset sales and could prohibit common stock dividends.",
     "facts": [
-     "P5",
-     "F2"
+     "F3",
+     "P2",
+     "P5"
     ],
     "quotes": [
-     "Adjusted EBITDA increased 0.9% to $1,832 million(3)"
+     "The agreements for our credit facilities also contain restrictive covenants and leverage and other financial maintenance tests that could limit our ability to take various actions, including incurring additional debt, guaranteeing indebtedness or making distributions to stockholders, including our required REIT distributions, and engaging in various types of transactions, including mergers, acquisitions and sales of assets.",
+     "Our credit agreements also contain cross-default and/or cross-acceleration provisions, which may be triggered if we default on certain indebtedness in excess of certain thresholds."
     ],
     "support": "supported"
    },
    {
-    "basis": "Customer percentages and risk language are stated in the 10-K (P2). The link to the DISH case is inferred.",
-    "claim": "Revenue is concentrated in a few carriers. In 2025, T-Mobile was 18% of total revenue, AT&T 17%, Verizon Wireless 14% and Telef\u00f3nica 10%.",
+    "basis": "Stated directly in F2, P2, and P4.",
+    "claim": "Inflation and elevated interest rates can raise operating and borrowing costs faster than fixed U.S. escalators averaging approximately 3% and drive foreign currency volatility, following $(811.7) (table in millions) of foreign currency losses in the prior-year period.",
+    "facts": [
+     "F2",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "In addition, should inflation rates exceed our fixed escalator percentages in markets where our leases include fixed escalators, our returns could be adversely affected.",
+     "An increase in rates can have a corresponding impact to our costs of borrowing and may have an adverse impact on our ability to raise funds through the offering of our securities or through the issuance of debt due to higher debt capital costs, diminished credit availability or less favorable equity markets.",
+     "Most of our tenant leases for our communications sites have provisions that periodically increase or \u201cescalate\u201d the rent due under the lease, typically based on (a) an annual fixed escalation (averaging approximately 3% in the United States), (b) an inflationary index in most of our international markets, or (c) a combination of both."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2, P3, and P5.",
+    "claim": "Carrier consolidation, RAN sharing, alternative technologies such as satellite services, or AI power-density demands could erode leasing growth, alongside a projected (3.0)% midpoint decline in U.S. & Canada property revenue and 1.1% quarterly Organic Tenant Billings Growth.",
     "facts": [
      "P2",
-     "P1"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "A substantial portion of our total operating revenues is derived from a small number of customers."
+     "A significant reduction in leasing demand for our communications infrastructure would materially and adversely affect our business, results of operations or financial condition.",
+     "Additionally, certain small cell complementary network technologies or satellite services could shift a portion of our customers\u2019 network investments away from traditional tower-based networks, which may reduce the need for carriers to add more equipment at certain communications sites.",
+     "Similarly, our data center site infrastructure may become antiquated or obsolete due to the development of new systems that deliver power to, or eliminate heat from, the servers and other customer equipment that we house or due to the development of new technology, such as AI, which is potentially more power-intensive, that requires levels of power and cooling density that our facilities may not be designed to provide."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 and P5.",
+    "claim": "Competition in towers and data centers could pressure lease rates, increase churn, and raise acquisition costs, compounded by a significant percentage of data center customer leases expiring every year.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Competition due to pricing or alternative contractual arrangements from peers could materially and adversely affect our lease rates.",
+     "These risks are compounded by the fact that a significant percentage of our data center customer leases expire every year.",
+     "Higher prices or less favorable terms for the construction or acquisition of assets or the failure to build or otherwise add new assets to our portfolio could make it more difficult to achieve our anticipated returns on investment or future growth, which could materially and adversely affect our business, results of operations or financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2, P4, and P5.",
+    "claim": "Divestitures, including the pending sale of Canada operations for approximately $202 million, and joint ventures expose AMT to separation challenges, partner conflicts, buyout obligations, and asset impairments.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Divestitures and our evaluation of assets or businesses in connection with potential divestitures may result in asset impairment charges, including those related to goodwill and other intangible assets, or losses realized in connection with a transaction, which could have an impact on our financial condition and results of operations.",
+     "Additionally, we may not realize any of the anticipated benefits of our joint ventures.",
+     "The Company expects to complete the sale during the fourth quarter of 2026, subject to customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 and P5.",
+    "claim": "Share repurchases, including $315 million in the third quarter and an additional $2.0 billion authorization increase, could diminish available cash and liquidity for growth or acquisitions.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Additionally, our share repurchase program could diminish our available cash, which may impact our ability to finance future growth and pursue possible future strategic opportunities and acquisitions.",
+     "On October 23, 2026, the Company\u2019s Board of Directors authorized an increase in its share repurchase program to permit the Company to purchase up to an additional $2.0 billion of its outstanding common stock, in addition to the remaining available amount noted above."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P1, P2, and P5.",
+    "claim": "Regulatory changes, environmental or cybersecurity liabilities, or failure to remain qualified as a REIT could restrict operations, raise compliance costs, or subject AMT to corporate income tax rates.",
+    "facts": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "if we fail to remain qualified for taxation as a REIT, we will be subject to tax at corporate income tax rates, which may substantially reduce funds otherwise available, and even if we qualify for taxation as a REIT, we may face tax liabilities that impact earnings and available cash flow",
+     "complying with REIT requirements may limit our flexibility or cause us to forego otherwise attractive opportunities"
     ],
     "support": "supported"
    }
@@ -1425,138 +1157,194 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "stated in P4: the filing, the claims against DISH and EchoStar, and the impairment charge. The recovery outcome is not stated.",
-    "claim": "What will AMT recover from DISH or EchoStar after the June 2026 chapter 11 filing, and will impairments beyond $17.5 million follow?",
+    "basis": "Stated in [P2] and [P4], which explicitly note that the outcome is uncertain and a ruling is expected in 2027.",
+    "claim": "What will be the final outcome of the AT&T Mexico arbitration regarding approximately $300 million of annual tenant revenue, including the disposition of escrowed rents and future revenue reserves?",
     "facts": [
+     "P2",
      "P4"
     ],
     "quotes": [
-     "On June 30, 2026, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code."
+     "AT&T Mexico, which represented approximately $300 million of tenant revenue in 2025, is challenging the calculation of the monthly lease amount established under our Master Lease Agreement with AT&T Mexico (the \u201cMLA\u201d), as well as certain other provisions of the MLA, seeking rent abatement both retroactively and prospectively, and had been withholding tower rents since the start of 2025.",
+     "The Arbitration hearing began in August 2026 and we expect a final ruling in 2027.",
+     "We expect to record future reserves until the Arbitration is settled."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4. The outcome and the eventual size of the reserve are not stated.",
-    "claim": "How will the AT&T Mexico Arbitration be decided, and how large will further reserves or rent abatement be? The customer represented about $300 million of 2025 tenant revenue, and AMT has reserved about $30 million in 2026 so far.",
+    "basis": "Stated in [P2] and [P4], which report the default, amended complaint, bankruptcy filing, and uncertainty of outcome.",
+    "claim": "What damages or contractual recovery will American Tower obtain in its litigation against DISH and EchoStar Corporation following DISH's bankruptcy filing and the $17.5 million in impairment charges recorded?",
     "facts": [
-     "P3",
+     "P2",
      "P4"
     ],
     "quotes": [
-     "The Arbitration hearing began in August 2026 and we expect a final ruling in 2027."
+     "On June 30, 2026, DISH filed petitions for relief under chapter 11 of the United States Bankruptcy Code.",
+     "During the nine months ended September 30, 2026, we recorded impairment charges related to DISH of $17.5 million.",
+     "The outcomes of these matters are uncertain, and there can be no assurance that our positions will be upheld."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4 for the two figures. The attribution is inferred, and no bridge is given.",
-    "claim": "How much of the fall in expected non-cancellable lease revenue, from over $54 billion at December 31, 2025 to nearly $49 billion at September 30, 2026, comes from DISH termination, divestitures, foreign exchange or other causes?",
+    "basis": "Stated in [P4] and [P5]; lack of carrying-value or gain/loss detail is directly observed from the absence of those figures in [P4] and [P5].",
+    "claim": "Will the agreement to sell the Canadian subsidiaries for approximately 288 million Canadian Dollars (approximately $202 million) close on schedule, and what net proceeds or gain or loss will be recognized?",
     "facts": [
-     "P3",
-     "P4"
+     "P4",
+     "P5"
     ],
     "quotes": [
-     "we expect to generate nearly $49 billion of non-cancellable customer lease revenue over future periods, before the impact of straight-line lease accounting."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P4 for both churn figures. Any return to the earlier level is inferred and not stated.",
-    "claim": "How much of the roughly 5% nine-month churn is DISH and how much is other customers? Will churn return toward the roughly 2% of 2025 once DISH is fully in the base?",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "During the nine months ended September 30, 2026, churn was approximately 5% of our tenant billings"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 for the expected sale. The financial effect is not given.",
-    "claim": "What are the price, gain or loss and revenue effect of the Canada sale AMT expects to complete in the fourth quarter of 2026?",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
+     "During the three months ended September 30, 2026, the Company, through its subsidiary, American Towers LLC, entered into an agreement pursuant to which it expects to sell 100% of the ownership interests in its subsidiaries in Canada for total aggregate consideration of approximately 288 million Canadian Dollars (approximately $202 million).",
+     "The Company expects to complete the sale during the fourth quarter of 2026, subject to customary closing conditions.",
      "We expect to complete the sale of our operations in Canada during the fourth quarter of 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 for the amounts. The cause is not in the packet.",
-    "claim": "Why did the Q3 2026 income tax provision rise to 117.6 from 37.4 (table in millions) while pre-tax income from continuing operations fell?",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Income tax provision | (117.6) | (37.4) | (379.0) | (287.6)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5 for the cause of the outlook cut. The securities and their size are not identified.",
-    "claim": "Which equity securities generated the unrealized losses that cut the full-year net income outlook by $30 million, and is further mark-to-market volatility expected?",
-    "facts": [
-     "P5",
-     "F2"
-    ],
-    "quotes": [
-     "The Company is lowering the midpoints for net income and net income attributable to AMT common stockholders by $30 million and $30 million, respectively, primarily due to unrealized losses for equity securities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and P6 for the balances and use of proceeds. Remaining capacity and maturities are not given, so the refinancing question is inferred.",
-    "claim": "How will AMT refinance or repay the current portion of long-term obligations, which was 5,363.5 versus 3,387.8 at December 31, 2025 (table in millions), against cash of 1,871.9, and how much revolver capacity remains?",
+    "basis": "Observed directly from [F1] and [P5]; the absence of a debt maturity breakdown results from omitted Form 10-Q footnotes.",
+    "claim": "How will American Tower refinance or repay the remaining current portion of long-term obligations of 5,363.5 (table in millions) after repaying $1.0 billion of senior unsecured notes upon maturity?",
     "facts": [
      "F1",
-     "P6"
+     "P5"
     ],
     "quotes": [
-     "The Company intends to use the net proceeds to repay existing indebtedness under its $6.0 billion senior unsecured multicurrency revolving credit facility and for general corporate purposes."
+     "Current portion of long-term obligations | 5,363.5 | 3,387.8",
+     "On October 14, 2026, the Company repaid $1.0 billion aggregate principal amount of its 3.375% senior unsecured notes due October 15, 2026 upon their maturity.",
+     "Liquidity and Financing Activities \u2013 As of September 30, 2026, the Company had approximately $10.6 billion of total liquidity, consisting of approximately $1.9 billion in cash and cash equivalents plus the ability to borrow an aggregate of approximately $8.7 billion under its revolving credit facilities, net of any outstanding letters of credit."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5 for the amounts. The funding and pace are inferred and not stated.",
-    "claim": "What pace of share repurchases will AMT follow under the additional $2.0 billion authorization after $315 million in Q3, and how will it be funded alongside the new debt issuance?",
+    "basis": "Stated in [P5] and reflected in Other (expense) income in [F2]; security identities and carrying values are not disclosed in the packet.",
+    "claim": "Which equity securities generated the $(71.5) million in quarterly unrealized losses and prompted the $30 million reduction in full-year net income guidance, and what is the remaining carrying exposure?",
     "facts": [
      "P5",
-     "P6",
-     "F3"
+     "F2"
     ],
     "quotes": [
-     "Allocated $315 million to share repurchases, and subsequent to quarter end, the Board of Directors authorized an additional $2.0 billion for future repurchases"
+     "The Company is lowering the midpoints for net income and net income attributable to AMT common stockholders by $30 million and $30 million, respectively, primarily due to unrealized losses for equity securities.",
+     "(2)Q3 2026 growth rates impacted by unrealized losses on equity investments of approximately $(71.5) million in the current period as compared to unrealized gains of approximately $10.9 million in the prior-year period."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 for the completed sales and in F1 for the balances. The link between them is inferred and unconfirmed.",
-    "claim": "What were the proceeds, gain or loss and noncontrolling-interest effect of the Philippines and Bangladesh sales, and do they explain the fall in noncontrolling interests?",
+    "basis": "Stated in [F1] and [P2]; specific covenant ratios and headroom are omitted due to truncation of [P2] and [P3].",
+    "claim": "What are the specific financial ratio covenant thresholds, cross-default limits, and distribution restrictions governing the 32,215.2 (table in millions) of long-term obligations and credit facilities?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "LONG-TERM OBLIGATIONS | 32,215.2 | 33,832.5",
+     "The agreements for our credit facilities also contain restrictive covenants and leverage and other financial maintenance tests that could limit our ability to take various actions, including incurring additional debt, guaranteeing indebtedness or making distributions to stockholders, including our required REIT distributions, and engaging in various types of transactions, including mergers, acquisitions and sales of assets.",
+     "Our credit agreements also contain cross-default and/or cross-acceleration provisions, which may be triggered if we default on certain indebtedness in excess of certain thresholds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1], [P2], and [P5]; specific contractual terms and redemption schedules are omitted from the packet.",
+    "claim": "What partner buyout obligations, distribution waterfalls, and governance rights govern the 6,249.0 (table in millions) of noncontrolling interests across the European, U.S. data center, and Africa & APAC joint ventures?",
+    "facts": [
+     "F1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Noncontrolling interests | 6,249.0 | 6,702.8",
+     "For example, we have joint ventures in our Europe property segment, Data Center property segment and Africa & APAC property segment.",
+     "As we continue to engage in and sustain partnership opportunities, our partners may have business or economic goals that are inconsistent or conflict with ours, be in positions to take action contrary to our interests, policies or objectives, have competing interests in our, or other, markets that could create conflict of interest issues, withhold consents contrary to our requests or become unable or unwilling to fulfill their commitments, any of which could present challenges with multiple partners or expose us to additional liabilities or costs, including requiring us to assume and fulfill the obligations of that partnership or to execute buyouts of our partners\u2019 interests."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2], [P3], and [P5]; exact annual expiration percentages and facility-level power density metrics are not in the packet.",
+    "claim": "Can American Tower's U.S. data center facilities accommodate higher-density AI workloads without unplanned retrofits beyond the $695 million in planned development spend, and what share of data center leases expire annually?",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "These risks are compounded by the fact that a significant percentage of our data center customer leases expire every year.",
+     "Similarly, our data center site infrastructure may become antiquated or obsolete due to the development of new systems that deliver power to, or eliminate heat from, the servers and other customer equipment that we house or due to the development of new technology, such as AI, which is potentially more power-intensive, that requires levels of power and cooling density that our facilities may not be designed to provide.",
+     "(1)Includes the construction of 1,300 to 1,900 communications sites globally and $695 million of development spend in the Company\u2019s Data Centers segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P5] and [P4]; the segment-level MD&A driver breakdown was truncated from [P4].",
+    "claim": "What tenant churn or rent reductions beyond the AT&T Mexico dispute explain the projected (~3%) contraction in Latin America Organic Tenant Billings?",
     "facts": [
      "P4",
-     "F1",
-     "F2"
+     "P5"
     ],
     "quotes": [
-     "Sale of Philippines Subsidiary\u2014On June 15, 2026, we completed the sale of ATC Philippines."
+     "Organic Tenant Billings | ~0.5% | (~3%) | ~8.5% | ~4% | ~1%",
+     "AT&T Mexico, which represented approximately $300 million of tenant revenue in 2025, is challenging the calculation of the monthly lease amount established under our Master Lease Agreement with AT&T Mexico (the \u201cMLA\u201d), as well as certain other provisions of the MLA, seeking rent abatement both retroactively and prospectively, and had been withholding tower rents since the start of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed directly from [F2], [P1], [P4], and [P5]; the absence of an explanation is due to the truncation of [P4].",
+    "claim": "What caused Services operating revenues to fall from 275.2 to 180.3 (table in millions) over the nine-month comparative period, and is this contraction expected to continue?",
+    "facts": [
+     "F2",
+     "P1",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Total operating revenues | 51.4 | 101.1 | 180.3 | 275.2",
+     "As we continue to focus on growing our property operations, we anticipate that our services revenue will continue to represent a small percentage of our total revenues."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Observed directly from [F2] and [P1]; tax rate and jurisdictional details are omitted from the packet.",
+    "claim": "Which jurisdictions or taxable REIT subsidiaries drove the increase in the nine-month income tax provision from (287.6) to (379.0) (table in millions)?",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "Income tax provision | (117.6) | (37.4) | (379.0) | (287.6)",
+     "However, we remain obligated to pay U.S. federal income taxes on earnings from our domestic taxable REIT subsidiaries (\u201cTRSs\u201d).",
+     "In addition, our international assets and operations, regardless of their classification for U.S. tax purposes, continue to be subject to taxation in the jurisdictions where those assets are held or those operations are conducted."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P5]; management's target leverage range and repurchase pacing are not disclosed in the packet.",
+    "claim": "How and over what timeframe will American Tower fund repurchases under its approximately $1.1 billion remaining authorization and $2.0 billion incremental authorization while managing its 4.9x Net Leverage Ratio?",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "As of October 20, 2026, the Company had approximately $1.1 billion remaining available under its stock repurchase program.",
+     "On October 23, 2026, the Company\u2019s Board of Directors authorized an increase in its share repurchase program to permit the Company to purchase up to an additional $2.0 billion of its outstanding common stock, in addition to the remaining available amount noted above.",
+     "Leverage \u2013 For the quarter ended September 30, 2026, the Company\u2019s Net Leverage Ratio was 4.9x net debt (total debt less cash and cash equivalents) to third quarter 2026 annualized Adjusted EBITDA.",
+     "Additionally, our share repurchase program could diminish our available cash, which may impact our ability to finance future growth and pursue possible future strategic opportunities and acquisitions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P5]; quantitative sensitivity figures reside in the omitted supplemental disclosure package and Form 10-Q Item 3.",
+    "claim": "How sensitive are American Tower's full-year property revenue outlook of $10,785 to $10,865 (table in millions) and Adjusted EBITDA outlook of 7,248 to 7,303 (table in millions) to foreign exchange and Secured Overnight Financing Rate fluctuations?",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Total property revenue(1)(2) | $10,785 | to | $10,865 | 5.0%",
+     "Adjusted EBITDA(3) | 7,248 | to | 7,303 | 2.0%",
+     "Additional information pertaining to the impact of foreign currency and Secured Overnight Financing Rate fluctuations on the Company\u2019s outlook has been provided in the supplemental disclosure package available on the Company\u2019s website."
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "AMT",
- "upside": -0.14886064681687183,
  "valuation": null,
- "value_base": 155.11819854147956,
- "value_bear": 126.33662909891689,
- "value_bull": 186.383692599639,
- "value_per_filed_share": {
-  "base": 155.11819854147956,
-  "bear": 126.33662909891689,
-  "bull": 186.383692599639
- },
- "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -5.9 points a year against the required return over 3 years"
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
 }
