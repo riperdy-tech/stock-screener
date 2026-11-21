@@ -247,6 +247,7 @@ export function Shell({ tab, loading, onReload, children }: {
                 fresh={fresh}
                 health={health}
                 regime={status.regime}
+                market={status.market}
                 anchor={status.anchor}
                 onOpenHealth={() => setShowHealth(true)}
             />

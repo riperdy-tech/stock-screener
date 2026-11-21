@@ -1059,7 +1059,7 @@ export interface MriEconomyState {
     inflation?: { level?: string | null; direction?: string | null; series?: Record<string, { rate_12?: MriMonthValue } | undefined> | null } | null;
     policy?: { direction?: string | null; funds_rate?: MriMonthValue; change_6m?: MriMonthValue } | null;
     jobs?: { state?: string | null; unemployment?: MriMonthValue; rise_from_low?: MriMonthValue } | null;
-    growth?: { state?: string | null; direction?: string | null; payrolls_rate_12?: MriMonthValue } | null;
+    growth?: { state?: string | null; direction?: string | null; payrolls?: { rate_12?: MriMonthValue } | null } | null;
 }
 
 export interface MriDriverMove { change?: number | null; moved?: boolean | null }

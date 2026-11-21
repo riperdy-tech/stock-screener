@@ -119,7 +119,7 @@ test('economyRows: words as written, one number each, null is a dash, zero is sh
         inflation: { level: 'well above target', direction: 'steady', series: { PCEPI: { rate_12: { value: 3.648, month: '2026-09' } } } },
         policy: { direction: 'tightening', funds_rate: { value: 3.88 }, change_6m: { value: 0.24 } },
         jobs: { state: 'steady', unemployment: { value: 4.1 }, rise_from_low: { value: 0 } },
-        growth: { state: 'expanding', direction: 'steady', payrolls_rate_12: { value: null } },
+        growth: { state: 'expanding', direction: 'steady', payrolls: { rate_12: { value: null } } },
     });
     assert.deepEqual(rows.map((r) => r.key), ['inflation', 'policy', 'jobs', 'growth']);
     assert.deepEqual(rows[0].numVars, { v: '3.6%' });
@@ -164,4 +164,9 @@ test('driverFlagsFor: absent entry or null exposures hides the panel; no flags i
     assert.equal(driverFlagsFor(p, 'CCC'), null);
     assert.equal(driverFlagsFor(p, 'ZZZ'), null);
     assert.equal(driverFlagsFor(null, 'AAA'), null);
+});
+
+test('driverFlagsFor: the t value in brackets is left out of the sentence', () => {
+    const p = { tickers: { AAA: { exposures: {}, flags: [{ text: 'Sensitive to oil: about +4.3 points per 10% (t +10.4). Oil fell 14.9%.' }] } } };
+    assert.deepEqual(driverFlagsFor(p as never, 'aaa'), ['Sensitive to oil: about +4.3 points per 10%. Oil fell 14.9%.']);
 });

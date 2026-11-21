@@ -7,8 +7,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageContext';
-import type { MriCostOfCapital, MriRegime } from '@/lib/data-service';
+import type { MriCostOfCapital, MriMarketState, MriRegime } from '@/lib/data-service';
+import { isWarnStep, stepKey } from '@/lib/desk/marketState';
 import { fmtMd, fmtMdHm, pctText, strengthKey, type Freshness, type Health, type HealthLevel } from '@/lib/desk/health';
+import { fill } from '@/lib/desk/text';
 
 export const LEVEL_COLOR: Record<HealthLevel, string> = {
     ok: 'var(--pos)', warn: 'var(--warn)', neg: 'var(--neg)',
@@ -23,15 +25,18 @@ function Stamp({ label, value, stale }: { label: string; value: string; stale?: 
     );
 }
 
-export function FreshnessStrip({ fresh, health, regime, anchor, onOpenHealth }: {
+export function FreshnessStrip({ fresh, health, regime, market, anchor, onOpenHealth }: {
     fresh: Freshness;
     health: Health;
     regime: MriRegime | null;
+    market: MriMarketState | null;
     anchor: MriCostOfCapital | null;
     onOpenHealth: () => void;
 }) {
     const { t } = useLanguage();
     const strength = strengthKey(regime?.confidence);
+    // The chip is the daily market state when its file loaded; else the monthly regime, as before.
+    const step = stepKey(market?.step);
 
     return (
         <div className="border-b border-rule-10">
@@ -51,7 +56,14 @@ export function FreshnessStrip({ fresh, health, regime, anchor, onOpenHealth }: 
                     {t('fsHealth')} <span style={{ color: LEVEL_COLOR[health.level] }}>●</span>
                 </button>
 
-                {regime && (
+                {step && (
+                    <Link href="/macro" className="w-full hover:text-ink sm:ml-auto sm:w-auto">
+                        {t('fsMarket')}: <span className={isWarnStep(market?.step) ? 'text-warn' : undefined}>{t(step)}</span>
+                        {market?.since && <> {fill(t('mcTSince'), { date: market.since.slice(5) })}</>}
+                        {' '}· {t('fsCoE')} {pctText(anchor?.implied_cost_of_equity, 2)} ›
+                    </Link>
+                )}
+                {!step && regime && (
                     <Link href="/macro" className="w-full hover:text-ink sm:ml-auto sm:w-auto">
                         {t('fsMacro')}: {regime.reported_regime?.replace(/_/g, ' ') ?? '—'}{' '}
                         {pctText(regime.reported_regime_probability, 0)}

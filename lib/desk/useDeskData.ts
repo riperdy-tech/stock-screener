@@ -235,6 +235,8 @@ export interface DeskStatus {
     ledgers: any | null;  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw paper_ledgers.json
     manifest: ChainManifest | null;
     regime: MriRegime | null;
+    /** The daily market state (the strip's macro chip); null when its file did not load. */
+    market: MriMarketState | null;
     anchor: MriCostOfCapital | null;
     pricesAsOf: string | null;
     /** When the post-close price refresh last ran, null when the file does not say. */
@@ -242,7 +244,7 @@ export interface DeskStatus {
 }
 
 const EMPTY_STATUS: DeskStatus = {
-    factor: null, depth: null, geminiC: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null, pricesRefreshedAt: null,
+    factor: null, depth: null, geminiC: null, ledgers: null, manifest: null, regime: null, market: null, anchor: null, pricesAsOf: null, pricesRefreshedAt: null,
 };
 
 /**
@@ -263,6 +265,7 @@ export function useDeskStatus(): DeskStatus {
             cached('ledgers', fetchPaperLedgers).then((ledgers) => put({ ledgers })).catch(() => { });
             cached('manifest', fetchChainManifest).then((manifest) => put({ manifest })).catch(() => { });
             cached('regime', fetchMriRegime).then((regime) => put({ regime })).catch(() => { });
+            cached('macro_market', fetchMriMarketState).then((market) => put({ market })).catch(() => { });
             cached('anchor', fetchMriCostOfCapital).then((anchor) => put({ anchor })).catch(() => { });
             Promise.all([
                 cached('stocks', () => fetchStocks('US')),

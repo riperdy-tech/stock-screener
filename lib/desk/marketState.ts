@@ -124,12 +124,18 @@ export interface SectorMove { id: string; name: string; rel: number }
 
 const titled = (id: string) => spaced(id).replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
+// The six industry funds, which the market state lists without a sector id.
+const INDUSTRY_FUNDS: Record<string, string> = {
+    SMH: 'Semiconductors', IGV: 'Software', KBE: 'Banks', XBI: 'Biotech', XHB: 'Homebuilders', XOP: 'Oil and gas producers',
+};
+const fundName = (fund: string, sectorId: string | null | undefined) => INDUSTRY_FUNDS[fund] ?? (sectorId ? titled(sectorId) : fund);
+
 /** The sectors by their 21-session move against the index: the top three and the bottom three (fewer when fewer exist; never the same one twice). */
 export function sectorLeadersLaggards(ms: MriMarketState | null | undefined): { leaders: SectorMove[]; laggards: SectorMove[] } {
     const all: SectorMove[] = [];
     for (const [fund, s] of Object.entries(ms?.facts?.sectors ?? {})) {
         if (s && typeof s.relative_21 === 'number' && Number.isFinite(s.relative_21)) {
-            all.push({ id: fund, name: s.sector_id ? titled(s.sector_id) : fund, rel: s.relative_21 });
+            all.push({ id: fund, name: fundName(fund, s.sector_id), rel: s.relative_21 });
         }
     }
     all.sort((a, b) => b.rel - a.rel);
@@ -187,7 +193,7 @@ export function economyRows(e: MriEconomyState | null | undefined): EconRow[] {
         { key: 'jobs', label: 'mcTJobs', words: [e?.jobs?.state ?? null],
             numKey: 'mcTJobNum', numVars: { u: p(mv(e?.jobs?.unemployment)), r: sgn(mv(e?.jobs?.rise_from_low), 1) } },
         { key: 'growth', label: 'mcTGrowth', words: [e?.growth?.state ?? null, e?.growth?.direction ?? null],
-            numKey: 'mcTGrowNum', numVars: { v: p(mv(e?.growth?.payrolls_rate_12)) } },
+            numKey: 'mcTGrowNum', numVars: { v: p(mv(e?.growth?.payrolls?.rate_12)) } },
     ];
 }
 
@@ -210,7 +216,7 @@ export function fundRows(x: MriDriverExposures | null | undefined): FundRow[] {
     const n = (v: Num) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
     const rows = Object.entries(x?.funds ?? {}).map(([id, f]) => {
         const r = f?.readings?.['21'];
-        return { id, name: f?.sector_id ? titled(f.sector_id) : id, realised: n(r?.realised), implied: n(r?.implied_total), unexplained: n(r?.unexplained) };
+        return { id, name: fundName(id, f?.sector_id), realised: n(r?.realised), implied: n(r?.implied_total), unexplained: n(r?.unexplained) };
     });
     return rows.sort((a, b) => (a.realised === null ? 1 : 0) - (b.realised === null ? 1 : 0) || (b.realised ?? 0) - (a.realised ?? 0));
 }
@@ -221,5 +227,7 @@ export function fundRows(x: MriDriverExposures | null | undefined): FundRow[] {
 export function driverFlagsFor(p: StockDriverFlags | null | undefined, ticker: string): string[] | null {
     const e = p?.tickers?.[ticker.toUpperCase()];
     if (!e || e.exposures == null) return null;
-    return (e.flags ?? []).map((f) => f?.text).filter((t): t is string => typeof t === 'string' && t.length > 0);
+    // The file's sentences carry the fit's t value in brackets; the page leaves it out (plain words).
+    return (e.flags ?? []).map((f) => f?.text).filter((t): t is string => typeof t === 'string' && t.length > 0)
+        .map((t) => t.replace(/ \(t [^)]*\)/g, ''));
 }
