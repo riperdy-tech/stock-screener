@@ -1,11 +1,11 @@
 {
- "count": 214,
+ "count": 215,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-21T06:06:46Z",
+ "generated_at": "2026-11-21T09:26:42Z",
  "list_covered": 155,
  "list_names": 158,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -2744,6 +2744,39 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -3.6 points a year against the required return over 3 years"
+  },
+  "DFIN": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-10-29T20:05:46.000Z",
+    "accepted_utc": "2026-10-30T00:05:46Z",
+    "accession": "0001193125-26-437777",
+    "decision_time": "2026-11-21T09:09:27Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 96,
+   "claims_supported": 94,
+   "date": "2026-11-21T09:09:27Z",
+   "family": "operating",
+   "flags": [
+    "DFIN amended its primary defined benefit plan in August 2024 to terminate it and settled the plan obligations during the year ended December 31, 2025 via lump sum payments and a non-participating irrevocable group annuity contract, making an $11.3 million net cash contribution and recognizing an $82.8 million non-cash settlement charge.",
+    "For the year ended December 31, 2025, DFIN recorded $6.1 million of employee termination costs for approximately 90 employees.",
+    "For the year ended December 31, 2024, DFIN recorded $5.5 million of employee termination costs for approximately 70 employees."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+   "source": "on request (operator)",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
   },
   "DHT": {
    "alpha_pts": 23.438600936887056,
@@ -9322,7 +9355,7 @@
  "verdict_counts": {
   "AVOID": 46,
   "BUY": 56,
-  "NO_CALL": 92,
+  "NO_CALL": 93,
   "WATCH": 20
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
