@@ -1,53 +1,149 @@
 {
- "alpha_pts": 6.183292808087576,
+ "alpha_pts": 12.1313010889792,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 119,
- "claims_supported": 112,
- "date": "2026-11-16T23:07:53Z",
+ "based_on": {
+  "accepted": "2026-11-02T22:55:20.000Z",
+  "accepted_utc": "2026-11-03T03:55:20Z",
+  "accession": "0000891103-26-000163",
+  "decision_time": "2026-11-22T04:39:31Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 71,
+ "claims_supported": 66,
+ "date": "2026-11-22T04:39:31Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
-   "run 1000: tax_rate_representative_no: The base-year tax rate of 6.9% is far below the 2026 nine-month provision of about 20% of pretax income (128,227 on 639,979), which is closer to what the company can keep paying.",
-   "run 1000: quotes_verified: 15 of 15",
+   "run 1000: tax_rate_representative_no: The base-year rate of 6.9% is far below the roughly 20% implied by 2026 nine-month tax of $128.2 million on $640.0 million of pretax income.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 10 of 10",
+   "run 1000: share_count_change_unexplained: shares 262,475,000 to 227,529,464 (-34,945,536); issuing and buying back at 39.14 (half to double) explains -16,982,831 to -4,245,708",
+   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
    "run 3000: base_year_not_representative",
-   "run 3000: tax_rate_representative_no: The base-year tax rate of 6.9% is far below the roughly 20% implied by 9M 2026 (128,227 of tax on 639,979 pretax), so it cannot be kept.",
-   "run 3000: confidence_low",
-   "run 3000: quotes_verified: 13 of 13"
+   "run 3000: tax_rate_representative_no: The filed-record rate of 6.86% is far below the 2026 nine-month provision of about 20% of pretax income, so the base-year rate is not sustainable.",
+   "run 3000: quotes_verified: 13 of 13",
+   "run 3000: share_count_change_unexplained: shares 262,475,000 to 227,529,464 (-34,945,536); issuing and buying back at 39.14 (half to double) explains -16,982,831 to -4,245,708",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0525 (equity return r 0.0985), F 10",
-  "run_gap": 0.015821862493210125,
+  "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0523 (equity return r 0.0976), F 10",
+  "run_gap": 0.0017821632037180754,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 698945000.0,
+      "excess_cash_before": 1031299000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000891103-26-000163",
+        "amount": 335511000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "read_amount": 335511000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 3157000.0,
+        "printed": 3157,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from issuance of common stock pursuant to stock-based awards and employee stock purchase plan | 3,157 | 3,598"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 262,475,000 to 227,529,464 (-34,945,536); issuing and buying back at 39.14 (half to double) explains -16,982,831 to -4,245,708"
+      ],
+      "gross_events": 338668000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 8905502790.0,
+      "net_effect_on_excess_cash": -332354000.0,
+      "shares": {
+       "after": 227529464.0,
+       "before": 262475000.0,
+       "change": -34945536.0,
+       "explained_range": [
+        -16982830.86356668,
+        -4245707.71589167
+       ],
+       "interim": 227529464.0,
+       "price_used": 39.14,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 1031299000.0,
+     "excess_cash_after": 698945000.0,
      "excess_cash_before": 1031299000.0,
      "k0_after": 168467929.3546257,
      "k0_before": 168467929.3546257,
      "k0_interest": 147551000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
      "x0_after": 655773982.7051866,
      "x0_before": 655773982.7051866
     },
-    "confidence": "medium",
+    "confidence": "low",
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 9898392294.41593,
-     "seam_ratio": 1.0240943176721933,
-     "tv_share": 0.3665104497494414,
-     "wedge_rate_5": -0.0004941569825979447
+     "equity_value": 10401611415.037628,
+     "seam_ratio": 1.028675913654924,
+     "tv_share": 0.37567649019342514,
+     "wedge_rate_5": -0.0007710764243553083
     },
     "flags": [
      "base_year_not_representative",
-     "tax_rate_representative_no: The base-year tax rate of 6.9% is far below the 2026 nine-month provision of about 20% of pretax income (128,227 on 639,979), which is closer to what the company can keep paying.",
-     "quotes_verified: 15 of 15"
+     "tax_rate_representative_no: The base-year rate of 6.9% is far below the roughly 20% implied by 2026 nine-month tax of $128.2 million on $640.0 million of pretax income.",
+     "confidence_low",
+     "quotes_verified: 10 of 10",
+     "share_count_change_unexplained: shares 262,475,000 to 227,529,464 (-34,945,536); issuing and buying back at 39.14 (half to double) explains -16,982,831 to -4,245,708",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
      "capex_to_revenue": 0.019,
@@ -55,25 +151,318 @@
      "long_run_op_margin": 0.26,
      "op_margin": [
       0.288,
+      0.278,
       0.275,
       0.272,
-      0.27,
-      0.268
+      0.27
      ],
-     "return_on_new_investment_long_run": 0.3,
+     "return_on_new_investment_long_run": 0.5,
      "rev_growth": [
       -0.003,
-      0.01,
-      0.025,
+      0.012,
       0.03,
-      0.03
+      0.035,
+      0.035
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0525 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0523 (equity return r 0.0976), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 7,
-     "kept": 112
+     "dropped_unsupported": 5,
+     "kept": 66
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.23,
+      0.29
+     ],
+     "rev_growth_y3": [
+      0.0,
+      0.05
+     ],
+     "terminal_growth": [
+      0.02,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0184"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex has run at about 1.8% of revenue over the pooled years, and was about 2.1% over nine months in 2026. I use 1.9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P2",
+        "quote": "The industry for social connection apps is competitive, with low switching costs and a consistent stream of new services and entrants"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Competition is intense and low switching costs allow rapid share shifts, so the margin and growth fade to the long-run level over a moderate period of 10 years."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $3,487.2 million | 0.0022 | 0.2502"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The 2025 margin of about 25% matches the company's own 5-year median. Low switching costs and platform fees cap the margin, but a mix shift toward Hinge and lower payment costs keep it a little above that median."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range"
+       },
+       {
+        "id": "P2",
+        "quote": "If Google does not reduce its standard in-app purchase fees, whether voluntarily or involuntarily, before that partnership expires, we expect that the fees paid to Google"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "2026 operating margin is about 29%, helped by alternative-payment savings. I fade it to about 27% because the Google partnership expires in Q1 2027 and marketing at Tinder and Hinge is rising."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year: return on tangible capital 1.0000"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The business is asset-light, with a base-year return on tangible capital of 1.0, so new investment earns far more than the 5.2% break-even rate. I assume a lower 0.5 as competition erodes returns."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "full-year 2026 Total Revenue to be flat Y/Y"
+       },
+       {
+        "id": "P4",
+        "quote": "Hinge Direct Revenue grew $114.2 million, or 23%"
+       },
+       {
+        "id": "P6",
+        "quote": "DAU inflected to Y/Y growth in September"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "2026 is guided flat, so year 1 is about -0.3%. After that, Hinge's strong growth and Tinder's improving user trends are partly offset by E&E and Azar declines, which gives low-single-digit growth that builds toward 3.5%. Tinder revenue growth is not yet demonstrated."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature subscription business with flat to slightly rising payers and some pricing power should grow slightly below the nominal anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.22,
+      "input_hit": "long_run_op_margin",
+      "risk": "The Google partnership lapses without lower standard fees, and Apple fees rise, reversing the in-app fee savings."
+     },
+     {
+      "bear_value": 0.0,
+      "input_hit": "rev_growth",
+      "risk": "Tinder payers keep falling and E&E keeps shrinking, so group revenue stays flat to declining."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Higher marketing at Tinder and Hinge does not convert to payers, and mature-category competition (including Facebook's free dating feature) compresses returns."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.23,
+      "rev_growth": [
+       -0.033,
+       -0.018,
+       0.0,
+       0.0050000000000000044,
+       0.0050000000000000044
+      ],
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "long_run_op_margin": 0.29,
+      "rev_growth": [
+       0.017000000000000005,
+       0.032,
+       0.05,
+       0.05500000000000001,
+       0.05500000000000001
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Management reports gross leverage of 2.6x and net leverage of 2.0x and has kept roughly $3.5 billion of notes outstanding, refinancing maturities rather than repaying them."
+     },
+     "margin_position": "The 2025 operating margin of 25.0% sits near the company's own 5-year median of about 25%. The 2026 margin is running higher, about 29% over nine months, because of lower Apple and Google in-app fees as payers move to alternative payment methods, and because the 2025 Tinder legal settlement does not repeat. The 2027 margin is at risk from the Google partnership expiring and from heavier marketing.",
+     "tax_rate_representative": {
+      "answer": "no",
+      "why": "The base-year rate of 6.9% is far below the roughly 20% implied by 2026 nine-month tax of $128.2 million on $640.0 million of pretax income."
+     },
+     "why": "2025 operating income was reduced by a $60.5 million Tinder settlement and a $14.0 million FTC settlement, and in-app fee savings were only partly in the numbers. Nine-month 2026 operating income is $750 million on flat revenue, so the margin has stepped up. Revenue is flat, with Hinge growing, Tinder slightly down and E&E shrinking."
+    },
+    "value_at_old_defaults": 39.93849341160807,
+    "values": {
+     "base": 52.75355821533351,
+     "bear": 38.08273186584328,
+     "bull": 71.42686274738453
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 698945000.0,
+      "excess_cash_before": 1031299000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000891103-26-000163",
+        "amount": 335511000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-03",
+        "form": "10-Q",
+        "read_amount": 335511000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 3157000.0,
+        "printed": 3157,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from issuance of common stock pursuant to stock-based awards and employee stock purchase plan | 3,157 | 3,598"
+         }
+        ],
+        "scale": "thousands",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 262,475,000 to 227,529,464 (-34,945,536); issuing and buying back at 39.14 (half to double) explains -16,982,831 to -4,245,708"
+      ],
+      "gross_events": 338668000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 8905502790.0,
+      "net_effect_on_excess_cash": -332354000.0,
+      "shares": {
+       "after": 227529464.0,
+       "before": 262475000.0,
+       "change": -34945536.0,
+       "explained_range": [
+        -16982830.86356668,
+        -4245707.71589167
+       ],
+       "interim": 227529464.0,
+       "price_used": 39.14,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 698945000.0,
+     "excess_cash_before": 1031299000.0,
+     "k0_after": 168467929.3546257,
+     "k0_before": 168467929.3546257,
+     "k0_interest": 147551000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
+     "x0_after": 655773982.7051866,
+     "x0_before": 655773982.7051866
+    },
+    "confidence": "medium",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 10381945378.235535,
+     "seam_ratio": 1.0271812056042824,
+     "tv_share": 0.4266644901371298,
+     "wedge_rate_5": -0.0006427335255639831
+    },
+    "flags": [
+     "base_year_not_representative",
+     "tax_rate_representative_no: The filed-record rate of 6.86% is far below the 2026 nine-month provision of about 20% of pretax income, so the base-year rate is not sustainable.",
+     "quotes_verified: 13 of 13",
+     "share_count_change_unexplained: shares 262,475,000 to 227,529,464 (-34,945,536); issuing and buying back at 39.14 (half to double) explains -16,982,831 to -4,245,708",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.02,
+     "fade_years": 8,
+     "long_run_op_margin": 0.26,
+     "op_margin": [
+      0.288,
+      0.278,
+      0.275,
+      0.272,
+      0.27
+     ],
+     "return_on_new_investment_long_run": 0.5,
+     "rev_growth": [
+      -0.003,
+      0.015,
+      0.03,
+      0.035,
+      0.035
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0523 (equity return r 0.0976), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 5,
+     "kept": 66
     },
     "ranges": {
      "long_run_op_margin": [
@@ -94,7 +483,7 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0184"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0184"
        },
        {
         "id": "F3",
@@ -102,275 +491,34 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Capex is light and consistent: 2026 nine-month capex of 54,651 is about 2.1% of revenue against a 1.84% pooled average. I use 1.9%."
+      "why": "Pooled capex is 1.84% of revenue and the 2026 nine-month figure is about 2.1% ($54.7 million on $2.6 billion), so I use 2%."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Tinder expects revenue to decrease in 2026 at a similar rate to the decrease in 2025"
+        "id": "P6",
+        "quote": "E&E is still early in its turnaround"
        }
       ],
       "quotes_given": 1,
-      "why": "The turnaround at Tinder and the Hinge expansion take time to settle, so I use a 10-year fade from 3% growth and a high-20s margin toward steady state."
+      "why": "Tinder is mid-turnaround, Hinge is still expanding and E&E is shrinking, so convergence to steady state will take a while; I use 8 years."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P2",
-        "quote": "The industry for social connection apps is competitive, with low switching costs and a consistent stream of new services and entrants"
+        "id": "REC",
+        "quote": "2023-12-31 | $3,364.5 million | 0.0551 | 0.2725"
        },
        {
-        "id": "P4",
-        "quote": "Cost of revenue decreased across all segments primarily due to Payers shifting from app store payments to alternate payment methods"
+        "id": "REC",
+        "quote": "2024-12-31 | $3,479.4 million | 0.0341 | 0.2366"
        }
       ],
       "quotes_given": 2,
-      "why": "Fee savings and cost cuts are partly durable, but low switching costs and large free competitors will force higher marketing, and Google fees may rise. I fade to 26%, about the 2023-2025 average, with a wide range."
+      "why": "Margins were 27.3% in 2023, 23.7% in 2024 and 25.0% in 2025, so 2026's 29% is above history. Part of the fee saving is durable, but competition and platform fees should pull the margin back to about 26%."
      },
      "op_margin": {
       "quotes": [
-       {
-        "id": "F2",
-        "quote": "Operating income | 268,569 | 221,334 | 750,435 | 587,848"
-       },
-       {
-        "id": "P6",
-        "quote": "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range"
-       },
-       {
-        "id": "P2",
-        "quote": "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Nine-month 2026 operating income of 750,435 on revenue of 2,608,271 is about 28.8%, and full-year guidance of a 38.8% Adjusted EBITDA margin supports about 29% for 2026. I fade the margin gently as the Google partnership expires in Q1 2027 and marketing is increased to support growth."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "return on tangible capital 1.0000"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0525."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The business is asset-light, so the filed return on tangible capital is very high and goodwill is excluded. Competition and the ongoing need for marketing mean new investment will not earn that, so I use 30%, well above the 5.25% break-even."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "we expect Match Group full-year 2026 Total Revenue to be flat Y/Y"
-       },
-       {
-        "id": "P6",
-        "quote": "Daily Active Users returned to Y/Y growth in September for the first time in three and a half years"
-       },
-       {
-        "id": "P4",
-        "quote": "Hinge Direct Revenue grew 19%, driven by 23% Payer growth"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Guidance implies 2026 revenue flat, Tinder revenue is still declining, and E&E is shrinking, so year 1 is slightly negative. Tinder DAU turning positive and Hinge expansion should lift growth to the low single digits by 2028-2030, but payers are still falling at the group level."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       },
-       {
-        "id": "P2",
-        "quote": "Declines in the number of Tinder users have adversely affected our revenue and financial results in recent years"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The company is mature, with a shrinking payer base offset by pricing, competition from free social platforms, and weak younger-generation demand. I set terminal growth somewhat below the 3.75% anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.21,
-      "input_hit": "long_run_op_margin",
-      "risk": "Google in-app fees rise after the 2024 partnership expires in Q1 2027, and app-store policy (Apple/Google) worsens, eroding the fee savings."
-     },
-     {
-      "bear_value": -0.02,
-      "input_hit": "rev_growth",
-      "risk": "Tinder's user recovery does not turn into revenue and E&E payers keep falling, so group revenue keeps shrinking."
-     },
-     {
-      "bear_value": 0.02,
-      "input_hit": "terminal_growth",
-      "risk": "Free competitors (Facebook dating, AI-led entrants) and soft younger-generation demand cap long-run growth."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.22,
-      "rev_growth": [
-       -0.028,
-       -0.015000000000000001,
-       0.0,
-       0.0049999999999999975,
-       0.0049999999999999975
-      ],
-      "terminal_growth": 0.02
-     },
-     "bull": {
-      "long_run_op_margin": 0.29,
-      "rev_growth": [
-       0.022000000000000002,
-       0.035,
-       0.05,
-       0.055,
-       0.055
-      ],
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Gross long-term debt of about $3.55 billion is essentially unchanged from year-end, since the 2026 exchangeable notes were repaid from cash and earlier new notes. Management keeps this leverage while returning cash to shareholders."
-     },
-     "margin_position": "GAAP operating margin was 25.0% in 2025 and is running near 29% in 2026. The rise comes from cost cuts and lower Apple/Google in-app fees as payers move to alternative payment methods, not from revenue growth. Revenue has been flat for about two years, so the margin is high against its own recent range (23.7% to 27.3% over 2023-2025) and only part of the gain is likely to last.",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The base-year tax rate of 6.9% is far below the 2026 nine-month provision of about 20% of pretax income (128,227 on 639,979), which is closer to what the company can keep paying."
-     },
-     "why": "2025 operating income carried a $60.5 million Tinder legal settlement and a $14.0 million FTC settlement in G&A, which depressed the margin. 2026 shows a structurally lower cost of revenue, so 2025 understates the near-term margin. Revenue is flat, with Tinder and Everyone Everywhere shrinking and Hinge growing, so near-term growth is close to zero."
-    },
-    "value_at_old_defaults": 39.570609203439574,
-    "values": {
-     "base": 44.87719723154428,
-     "bear": 33.24982870214129,
-     "bull": 61.9357934064655
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 1031299000.0,
-     "excess_cash_before": 1031299000.0,
-     "k0_after": 168467929.3546257,
-     "k0_before": 168467929.3546257,
-     "k0_interest": 147551000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 655773982.7051866,
-     "x0_before": 655773982.7051866
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "vintages",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 9728100996.902008,
-     "seam_ratio": 1.0192207250803647,
-     "tv_share": 0.35916567260727544,
-     "wedge_rate_5": -0.0006227527141599977
-    },
-    "flags": [
-     "base_year_not_representative",
-     "tax_rate_representative_no: The base-year tax rate of 6.9% is far below the roughly 20% implied by 9M 2026 (128,227 of tax on 639,979 pretax), so it cannot be kept.",
-     "confidence_low",
-     "quotes_verified: 13 of 13"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.018,
-     "fade_years": 10,
-     "long_run_op_margin": 0.25,
-     "op_margin": [
-      0.285,
-      0.275,
-      0.27,
-      0.27,
-      0.27
-     ],
-     "return_on_new_investment_long_run": 0.4,
-     "rev_growth": [
-      0.0,
-      0.01,
-      0.025,
-      0.03,
-      0.03
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth -0.0004 and margin 0.2877, margin 0.2502 (persist), growth 0.0375, terminal RONIC 0.0525 (equity return r 0.0985), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 7,
-     "kept": 112
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.2,
-      0.29
-     ],
-     "rev_growth_y3": [
-      -0.02,
-      0.06
-     ],
-     "terminal_growth": [
-      0.02,
-      0.04
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "F3",
-        "quote": "Capital expenditures | (54,651) | (42,100)"
-       },
-       {
-        "id": "REC",
-        "quote": "capital expenditure / revenue 0.0184"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Capex was 54.7M for 9M 2026 on revenue of 2.6B (about 2.1%), and the pooled history is 1.84% of revenue. I use 1.8%."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Tinder expects revenue to decrease in 2026 at a similar rate to the decrease in 2025"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A 10-year fade reflects a slow reversion of the margin and of growth as Hinge matures and the Tinder turnaround plays out."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "The industry for social connection apps is competitive, with low switching costs and a consistent stream of new services and entrants, and innovation by our competitors may disrupt our business."
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $3,487.2 million | 0.0022 | 0.2502"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Competition has low switching costs, free rival offerings and platform fee risk, so I fade below the current peak to about 25%, in line with the 2025 margin and the 2023-2024 range of 24-27%."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Operating income | 268,569 | 221,334 | 750,435 | 587,848"
-       },
        {
         "id": "P6",
         "quote": "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range"
@@ -380,85 +528,101 @@
         "quote": "our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027"
        }
       ],
-      "quotes_given": 3,
-      "why": "9M 2026 operating margin is about 28.8% and the company guides a full-year Adjusted EBITDA margin of 38.8%. I fade the margin from 28.5% to 27% as Google fees rise after Q1 2027 and Tinder and Hinge marketing increases."
+      "quotes_given": 2,
+      "why": "2026 margin is about 29% given nine-month operating income of $750 million on $2.6 billion revenue and a guided 38.8% adjusted EBITDA margin. I fade it toward 27% because Tinder and Hinge marketing is rising and the Google fee offset may lapse in Q1 2027."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
+        "quote": "return on tangible capital 1.0000"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0523."
        }
       ],
-      "quotes_given": 1,
-      "why": "The business is asset-light, with a base-year return on tangible capital of 1.0, but competition and marketing needs will erode returns. I assume 40%, well above the 5.25% break-even."
+      "quotes_given": 2,
+      "why": "The business is asset-light, with tangible capital returns far above the 5.2% break-even. I haircut the filed 100% heavily for competition and spending on marketing and product, which do not show up as tangible capital."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "We expect Q4 Total Revenue for Match Group of $865 million to $875 million, down 1% to flat Y/Y."
+        "quote": "Q4 Total Revenue for Match Group of $865 million to $875 million"
        },
        {
-        "id": "P4",
-        "quote": "Hinge Direct Revenue grew 19%, driven by 23% Payer growth"
-       },
-       {
-        "id": "P4",
-        "quote": "E&E Direct Revenue declined 20%, including a $20 million decrease in revenue at Azar"
+        "id": "P6",
+        "quote": "Ongoing execution enabled Q3 Y/Y growth of 12% in global MAU, 19% in Direct Revenue, and 23% in Payers."
        }
       ],
-      "quotes_given": 3,
-      "why": "2026 is guided flat, Tinder revenue is still declining and Everyone Everywhere is shrinking, while Hinge grows about 20%. Tinder's DAU recovery should turn into modest growth from 2027, as management targets."
+      "quotes_given": 2,
+      "why": "Year 1 (2026) is about flat, in line with Q4 guidance of down 1% to flat. Hinge, growing 19% on 23% payer growth, drives most of the growth. Tinder is stabilising and E&E is still shrinking, so I assume growth reaches 3 to 3.5% only by years 3 to 5, as Tinder returns to growth."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
         "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P1",
+        "quote": "has no single, dominant brand globally"
        }
       ],
-      "quotes_given": 1,
-      "why": "A mature subscription business with a shrinking payer base at Tinder and E&E and growth at Hinge, so long-run growth should sit below the nominal anchor."
+      "quotes_given": 2,
+      "why": "A mature, competitive dating portfolio with low switching costs should grow a little below the nominal anchor, so I use 3%."
      }
     },
     "risks": [
      {
-      "bear_value": 0.2,
+      "bear_value": 0.22,
       "input_hit": "long_run_op_margin",
-      "risk": "Google fees rise after the partnership expires in Q1 2027 and Apple fee rules tighten, reversing the fee savings and compressing the margin"
+      "risk": "Google partnership lapses in Q1 2027 without lower standard fees, and Apple or Google fee changes erode the in-app fee savings"
      },
      {
-      "bear_value": -0.02,
+      "bear_value": [
+       -0.01,
+       -0.01,
+       0.0,
+       0.01,
+       0.01
+      ],
       "input_hit": "rev_growth",
-      "risk": "Tinder payers keep falling and E&E keeps shrinking, so revenue declines"
+      "risk": "Tinder user recovery stalls, payers keep falling, and E&E keeps shrinking so the portfolio stays flat to declining"
      },
      {
-      "bear_value": 0.015,
-      "input_hit": "terminal_growth",
-      "risk": "Competition from free social platforms and generative-AI entrants lowers long-run growth"
+      "bear_value": [
+       0.27,
+       0.25,
+       0.24,
+       0.24,
+       0.24
+      ],
+      "input_hit": "op_margin",
+      "risk": "Higher marketing spend at Tinder and Hinge fails to convert into payers, compressing margins in the near term"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.2,
+      "long_run_op_margin": 0.22,
       "rev_growth": [
-       -0.045,
-       -0.034999999999999996,
-       -0.019999999999999997,
+       -0.033,
        -0.015,
-       -0.015
+       0.0,
+       0.0050000000000000044,
+       0.0050000000000000044
       ],
       "terminal_growth": 0.02
      },
      "bull": {
       "long_run_op_margin": 0.29,
       "rev_growth": [
-       0.034999999999999996,
-       0.045,
-       0.06,
-       0.065,
-       0.065
+       0.017000000000000005,
+       0.035,
+       0.05,
+       0.05500000000000001,
+       0.05500000000000001
       ],
       "terminal_growth": 0.04
      }
@@ -468,69 +632,72 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "Debt of about $3.55B is roughly 3x EBITDA and the company has refinanced it routinely, with the 2026 exchangeable notes repaid from the 2033 note proceeds, so this leverage is likely to persist."
+      "why": "Debt of about $3.55 billion was refinanced and is held at roughly 2.6x gross EBITDA; the 2026 exchangeable notes were repaid while the remaining notes stay in place."
      },
-     "margin_position": "The GAAP operating margin of 25.0% in 2025 is rising: 9M 2026 is about 28.8%. The rise comes from cost cuts, mainly lower app-store fees as payers move to alternative payments, and from lower G&A (the 2025 base included a $60.5M Tinder settlement and a $14.0M FTC settlement). Revenue is flat, so the margin gain is cost-driven. Part of it is exposed to the Google fee step-up and to higher marketing.",
+     "margin_position": "Operating margin is 25.0% in the base year and about 29% in 2026 year to date. The rise comes mainly from lower in-app purchase fees as payers move to alternative payment methods, plus the absence of the 2025 legal and FTC charges. Part of the fee saving depends on a Google partnership that expires in Q1 2027, and marketing spend is rising, so I fade the margin down toward 26%.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The base-year tax rate of 6.9% is far below the roughly 20% implied by 9M 2026 (128,227 of tax on 639,979 pretax), so it cannot be kept."
+      "why": "The filed-record rate of 6.86% is far below the 2026 nine-month provision of about 20% of pretax income, so the base-year rate is not sustainable."
      },
-     "why": "The 2025 base understates the current margin: 9M 2026 operating income is 750.4M on revenue of 2,608.3M, against a 25.0% margin for 2025. Revenue is flat and management guides Q4 down 1% to flat. Year 1 (2026) is therefore built from 2026 actuals and guidance rather than from the 2025 margin. Part of the fee savings may reverse after the Google partnership ends, so I keep only part of the gain."
+     "why": "The base year 2025 carries a $60.5 million Tinder settlement and a $14.0 million FTC settlement in G&A, so it understates the current margin. 2026 is lifted by fee savings that may partly reverse. Revenue has been flat for about two years, so year 1 (2026) is close to a flat year with a higher margin."
     },
-    "value_at_old_defaults": 39.570609203439574,
+    "value_at_old_defaults": 39.93849341160807,
     "values": {
-     "base": 44.17272938456898,
-     "bear": 28.62343163144783,
-     "bull": 67.02614434257654
+     "base": 52.65962646587072,
+     "bear": 37.24041183997506,
+     "bull": 71.15192933016687
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 39.570609203439574,
-  "value_at_old_defaults_quoted": 39.570609203439574,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 39.93849341160807,
+  "value_at_old_defaults_quoted": 39.93849341160807,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 11686689744.282164,
+ "equity_value": 11992302704.523705,
  "family": "operating",
  "far_from_price": false,
- "filed_shares": 262475000.0,
+ "filed_shares": 227529464.0,
  "flags": [
-  "Apple removed the Azar app from the Apple App Store after updating its App Review Guidelines.",
-  "A modified Azar app was reinstated on the App Store, but the required changes lowered its monetization.",
-  "In Q1 2026 the company recorded an impairment of $25.2 million on the Azar trade name after updating Azar's forecast."
+  "Apple removed the Azar app from the Apple App Store. A new version was reinstated after updates to comply with Apple's guidelines. The updated app monetizes less, which lowered Azar Direct Revenue in the three and nine months ended September 30, 2026.",
+  "In the quarter ended March 31, 2026 the company recorded a $25.2 million impairment of the Azar trade name, an indefinite-lived asset. It was reclassified to a definite-lived intangible asset.",
+  "The company reorganized its brands into three operating segments. Evergreen and Emerging and MG Asia were combined into a new segment called Everyone Everywhere, and historical periods were recast."
  ],
  "in_code_book": false,
- "ke": 0.09846177079828694,
+ "ke": 0.09762980557808662,
  "market_cap_at_publish": 8903228659,
- "model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 39.13,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 44.87719723154428,
-  "3000": 44.17272938456898
+  "1000": 52.75355821533351,
+  "3000": 52.65962646587072
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited item",
-    "claim": "Match Group sells digital social-connection and dating services through a portfolio of consumer app brands, including Tinder, Hinge, Match, Pairs and Azar.",
+    "basis": "stated in the 10-K Item 1 and the MD&A",
+    "claim": "Match Group sells access to dating and social-connection apps to consumers. Revenue is mainly direct, from recurring subscriptions and, to a lesser extent, pay-per-use features. Advertising (indirect revenue) is a much smaller part of the total.",
     "facts": [
-     "P1"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "Our global portfolio of brands includes Tinder\u00ae, Hinge\u00ae, Match\u00ae, Meetic\u00ae, OkCupid\u00ae, Pairs\u2122, Plenty Of Fish\u00ae, Azar\u00ae, BLK\u00ae, and more, each built to increase our users\u2019 likelihood of connecting with others."
+     "Our direct revenue is primarily derived from users in the form of recurring subscriptions",
+     "we generate indirect revenue from advertising, which comprises a much smaller percentage of our overall revenue as compared to direct revenue"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Most brands use a freemium model: the service is free to use, and a subset of users pays for premium features.",
+    "basis": "stated in the 10-K risk factors",
+    "claim": "Most brands use a freemium model: the service is free and only a subset of users pays, so the size of the user base and its conversion into payers set financial performance.",
     "facts": [
      "P2"
     ],
@@ -540,138 +707,67 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Direct revenue comes mainly from recurring subscriptions sold to end users, and to a lesser extent from one-off \u00e0 la carte feature purchases.",
+    "basis": "stated in the 10-Q MD&A; the change is applied to all historical periods presented",
+    "claim": "After a reorganization in the second quarter, the company reports three business units: Tinder, Hinge, and Everyone Everywhere (E&E). E&E combines the former Evergreen and Emerging and MG Asia segments and includes Match, BLK, OurTime, Upward, HER, The League, Pairs and Azar.",
     "facts": [
-     "P1"
+     "P4"
     ],
     "quotes": [
-     "Our direct revenue is primarily derived from users in the form of recurring subscriptions, which typically provide unlimited access to a package of features for a specified period of time, and to a lesser extent from \u00e0 la carte features, where users pay a non-recurring fee for a specific consumable benefit or feature."
+     "We manage our portfolio of brands in three business units: Tinder, Hinge, and Everyone Everywhere."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Advertising (Indirect Revenue) is a small share of revenue: in Q3 2026 Direct Revenue was 876,624 and Indirect Revenue was 14,608, out of Total Revenue of $891,232 (table in thousands).",
+    "basis": "stated in the 10-Q revenue table and income statement",
+    "claim": "In the latest quarter, Direct Revenue was Tinder $480,019, Hinge 220,586 and E&E 176,019, with Indirect Revenue of 14,608 and Total Revenue of $891,232 (table in thousands). Tinder is the largest unit, followed by Hinge.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A tables and text; the mechanism is from the key-term definitions",
+    "claim": "Direct Revenue is driven by Payers (unique paying users per brand per month) and revenue per payer (RPP). In the latest quarter Tinder Payers fell 4% and Hinge Payers rose 23%. E&E Payers fell 23% while E&E RPP rose 4%.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Payers are unique users at a brand level in a given month from whom we earned Direct Revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Revenue is recognized evenly over the subscription term, which is why subscription periods set how fast revenue follows sales.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Fees collected, or contractually due, in advance for subscriptions are deferred and recognized as revenue using the straight-line method over the term of the applicable subscription period"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1 and MD&A; the counter is stated in the 10-K risk factors",
+    "claim": "Apple and Google fees are the largest cost lever. Users buy mainly through app stores, and the company pays a meaningful share of that revenue, generally up to 30% on iOS and 15% on Android for subscribers.",
     "facts": [
      "P1",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "In addition to direct revenue from our users, we generate indirect revenue from advertising, which comprises a much smaller percentage of our overall revenue as compared to direct revenue."
+     "We pay Apple and Google a meaningful share of the revenue we receive from in-app transactions"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Subscription fees are paid in advance and recognized straight-line over the subscription term, so the balance sheet carries deferred revenue of 151,929 at September 30, 2026 (table in thousands).",
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Cost of revenue fell to $206,522 (table in thousands), or 23% of revenue against 27% a year earlier, mainly because payers shifted from app-store payments to alternative methods. This cut in-app purchase fees by $43.0 million, partly offset by $4.5 million more in credit card processing fees.",
     "facts": [
-     "P3",
-     "F1"
-    ],
-    "quotes": [
-     "Fees collected, or contractually due, in advance for subscriptions are deferred and recognized as revenue using the straight-line method over the term of the applicable subscription period, which primarily ranges from one week to six months, and corresponding in-app purchase fees incurred on such transactions, if any, are deferred and expensed over the same period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company now reports three operating segments: Tinder, Hinge and Everyone Everywhere. Everyone Everywhere combines the former Evergreen & Emerging and MG Asia segments.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "During the quarter ended June 30, 2026, we reorganized our brands into three operating segments.",
-     "Specifically, the Evergreen and Emerging and MG Asia operating segments were combined into a new segment called \u201cEveryone Everywhere.\u201d"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Revenue is driven by the number of Payers and by Revenue Per Payer (RPP). In Q3 2026 total Payers were 13,789 against 14,527 a year earlier, and total RPP was $21.19 against $20.58.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Revenue Per Payer (\u201cRPP\u201d) is the average monthly revenue earned from a Payer and is Direct Revenue for a period divided by the Payers in the period, further divided by the number of months in the period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Tinder is the largest segment, with Q3 2026 Direct Revenue of $480,019 (table in thousands). That revenue declined 2% as Payers fell 4%, partly offset by a 2% rise in RPP.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Tinder Direct Revenue declined 2%, driven by a 4% decrease in Payers, partially offset by an increase in RPP of 2%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Hinge Q3 2026 Direct Revenue was $220,586 (table in thousands), up 19%. The growth came from 23% Payer growth tied to European expansion, partly offset by a 3% decline in RPP to $31.81.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth, reflecting Hinge\u2019s continued European expansion, partially offset by a decrease in RPP of 3% to $31.81 as a result of the expansion of discount optimizations and testing of a new lower priced subscription tier."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Everyone Everywhere Q3 2026 Direct Revenue was $176,019 (table in thousands), down 20%. The decline includes a $20 million drop at Azar and Payer declines at most brands in the segment.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "E&E Direct Revenue declined 20%, including a $20 million decrease in revenue at Azar resulting from the changes discussed in the Azar business update above."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "App-store policy can move revenue directly. Apple's removal and later redesign requirement for Azar lowered monetization, and in 2025 76% of Azar's $155.8 million Direct Revenue came through Apple's App Store.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "For the year ended December 31, 2025, Azar Direct Revenue was $155.8 million, of which 76% was through Apple\u2019s App Store.",
-     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Distribution depends heavily on Apple and Google, through which the mobile apps are almost exclusively accessed.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Additionally, our mobile applications are almost exclusively accessed through the Apple App Store and Google Play Store."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The main cost of revenue is in-app purchase fees paid to Apple and Google, generally up to 30% on iOS and 15% on Android for subscribers. These fees totalled $687.1 million in 2025.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "a meaningful share (for subscribers, generally up to 30% on iOS and 15% on Android) of the revenue we receive from these transactions",
-     "Total in-app purchase fees were $687.1 million and $696.6 million in 2025 and 2024, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Moving Payers to alternative payment methods cut Q3 2026 cost of revenue to $206,522 from $247,043 (table in thousands). The shift produced $43.0 million lower in-app purchase fees, partly offset by $4.5 million higher card processing fees.",
-    "facts": [
-     "P4"
+     "P4",
+     "F2"
     ],
     "quotes": [
      "Cost of revenue decreased across all segments primarily due to Payers shifting from app store payments to alternate payment methods, resulting in $43.0 million lower in-app purchase fees partially offset by an increase of $4.5 million in credit card processing fees."
@@ -679,56 +775,56 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Google fee terms are a cost driver: the Google partnership entered into in 2024 expires in the first quarter of 2027.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "User acquisition marketing is a major cost. Selling and marketing expense rose to 185,028 in Q3 2026 from 169,142 (table in thousands), and higher marketing at Tinder and Hinge is cited for the expected Q4 Adjusted EBITDA decline.",
+    "basis": "stated in the 10-K MD&A and the earnings release prepared remarks",
+    "claim": "Marketing is a large, flexible cost. Selling and marketing rose $16 million, or 9%, in the latest quarter on higher spend at Tinder and Hinge, partly offset by lower spend at E&E.",
     "facts": [
      "P3",
-     "F2",
      "P6"
     ],
     "quotes": [
      "The cost of acquiring new users has consistently been one of our larger operating expenses.",
-     "The Y/Y decline in Adjusted EBITDA is largely due to increased marketing spend at Tinder and Hinge and a gain on sale related to an LA office building in the prior year quarter."
+     "Selling and marketing costs increased $16 million, or 9%"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Personnel costs, including stock-based compensation, drive product development and G&A. Stock-based compensation expense was 177,354 for the nine months to September 30, 2026, against 194,167 a year earlier (table in thousands).",
-    "facts": [
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Product development expense consists primarily of employee compensation expense and stock-based compensation expense that are not otherwise capitalized for personnel engaged in the design, development, testing, and enhancement of our services and related technology."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; Adjusted EBITDA is a non-GAAP measure",
-    "claim": "Profitability differs by segment. Q3 2026 Adjusted EBITDA margins were 50% at Tinder, 40% at Hinge and 25% at Everyone Everywhere. Segment operating income was $222,938, $70,214 and $21,835 respectively (table in thousands).",
+    "basis": "stated in the earnings release prepared remarks",
+    "claim": "Product development costs rose 14% in the latest quarter, driven by higher AI token costs and employee costs. General and administrative costs fell 38%, driven by a prior-year Tinder legal settlement charge.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Adjusted EBITDA Margin | 50% | 40% | 25% | NA | NA | 39%"
+     "driven by higher AI token costs and higher employee costs",
+     "driven by a legal settlement charge at Tinder in the prior year quarter"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "International markets are a majority of revenue, so currency movements affect reported results: international revenue was 56% of total revenue in 2025.",
+    "basis": "stated in the earnings release prepared remarks",
+    "claim": "Segment profitability differs widely. Latest-quarter Adjusted EBITDA margin was 50% at Tinder, 40% at Hinge and 25% at E&E, against 39% for the company. Tinder's margin is the highest and E&E's the lowest.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted EBITDA was $344 million, up 14%, representing an Adjusted EBITDA margin of 39%.",
+     "Adjusted EBITDA in the quarter was $244 million, up 20%, representing an Adjusted EBITDA margin of 50%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "E&E revenue is shrinking. Direct Revenue declined 20% in the latest quarter, including a $20 million decrease at Azar after its app was redesigned to comply with Apple's updated guidelines, plus payer declines across most E&E brands.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "E&E Direct Revenue declined 20%, including a $20 million decrease in revenue at Azar resulting from the changes discussed in the Azar business update above."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A and the 10-Q MD&A",
+    "claim": "Most revenue comes from outside the U.S. International revenue was 56% of total revenue in 2025 against 54% in 2024. International businesses earn in local currencies, so exchange rates move reported revenue.",
     "facts": [
      "P3"
     ],
@@ -738,33 +834,34 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (management expectation)",
-    "claim": "Product changes aimed at user outcomes can reduce revenue in the short term. Management expects Tinder tests and product changes to cut 2026 Direct Revenue by approximately $25 million.",
+    "basis": "stated in the earnings release; the debt balance is from the balance sheet",
+    "claim": "The business generates substantial cash and returns most of it to shareholders. Nine-month operating cash flow was $886 million and free cash flow $832 million, against $336 million of buybacks, $137 million of dividends and $118 million of net settlement of employee equity awards. Debt remains large: long-term debt, net was 3,553,307 (table in thousands).",
     "facts": [
      "P6",
-     "P2"
+     "F1",
+     "F3"
     ],
     "quotes": [
-     "At Tinder, we expect user experience tests and product changes to have an approximately $25 million negative impact to Direct Revenue in 2026, less than we initially anticipated."
+     "we generated Operating Cash Flow of $886 million and Free Cash Flow"
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated by management in the 10-K business section.",
-    "claim": "Match Group describes its multi-brand portfolio as a competitive advantage because many users use several dating services, at once or one after another.",
+    "basis": "stated in the 10-K Item 1 text",
+    "claim": "Match Group runs a multi-brand portfolio, with Tinder and Hinge as the largest named brands, and the filing describes the broad portfolio as a competitive advantage because many customers use several services.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "A large portion of customers use multiple services over a given period of time, either concurrently or sequentially, reflecting the various ways in which users seek connection, making our broad portfolio of brands a competitive advantage."
+     "making our broad portfolio of brands a competitive advantage"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K business section. No market-share data is given.",
-    "claim": "The company says its industry is competitive and has no single dominant brand worldwide.",
+    "basis": "stated in the 10-K Item 1 text",
+    "claim": "The company says the market is competitive with no single dominant brand globally, and names social media platforms such as Facebook, Instagram and TikTok as competitors.",
     "facts": [
      "P1"
     ],
@@ -774,17 +871,53 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the segment reconciliation table of the earnings release.",
-    "claim": "Tinder remains the largest revenue segment. Its Q3 2026 Adjusted EBITDA was $244,367 (table in thousands) at a 50% Adjusted EBITDA margin and a 45% operating income margin.",
+    "basis": "stated in the 10-K Item 1A risk factors",
+    "claim": "A threat named in the risk factors is low switching costs and large social platforms: Facebook offers a dating feature, and users can switch between services cheaply.",
     "facts": [
-     "P6"
+     "P2"
+    ],
+    "quotes": [
+     "costs for consumers to switch between services are low",
+     "Facebook offers a dating feature on its platform"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q income statement",
+    "claim": "Group revenue was slightly lower in Q3 2026 and flat over nine months, so the evidence shows a stable but not growing top line.",
+    "facts": [
+     "F2",
+     "P4"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Tinder's paying base is still shrinking. In Q3 2026 its Direct Revenue declined 2% as Payers fell 4%, partly offset by a 2% rise in RPP.",
+    "basis": "stated in the 10-Q MD&A and the earnings release; the link between lower fees and higher operating income is inferred",
+    "claim": "Operating income rose in Q3 2026 even though revenue fell, and the company attributes part of this to lower cost of revenue.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Cost of revenue decreased across all segments primarily due to Payers shifting from app store payments to alternate payment methods, resulting in $43.0 million lower in-app purchase fees partially offset by an increase of $4.5 million in credit card processing fees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release",
+    "claim": "Excluding the prior-year legal settlement, Adjusted EBITDA fell in Q3 2026 because of higher marketing spend at Tinder and Hinge, and Q4 guidance also points to a year-over-year decline.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Excluding the legal settlement charge in Q3 2025, Adjusted EBITDA was down 5% in Q3 2026, primarily due to higher marketing spend at Tinder and Hinge."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Tinder remains the largest revenue brand, but its Q3 Direct Revenue fell 2% on a 4% decline in Payers, partly offset by 2% higher RPP.",
     "facts": [
      "P4"
     ],
@@ -794,64 +927,35 @@
     "support": "supported"
    },
    {
-    "basis": "Stated by the CEO in the earnings press release. This is a non-audited operating metric.",
-    "claim": "Management reports that Tinder Daily Active Users returned to year-over-year growth in September 2026.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "and Daily Active Users returned to Y/Y growth in September for the first time in three and a half years"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q2 2026 earnings press release.",
-    "claim": "In Q2 2026, Tinder's year-over-year DAU declines narrowed to 4%, which the company calls the best result in 10 quarters.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Sparks and Sparks Coverage were broadly stable versus Q1, year-over-year (\u201cY/Y\u201d) DAU declines narrowed to 4% in Q2, the best result in 10 quarters, and Y/Y MAU declines improved across each of Tinder\u2019s top five revenue countries and among women."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Hinge is the growth brand. Its Q3 2026 Direct Revenue grew 19% on 23% Payer growth, while its RPP fell 3% to $31.81.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth, reflecting Hinge\u2019s continued European expansion, partially offset by a decrease in RPP of 3% to $31.81 as a result of the expansion of discount optimizations and testing of a new lower priced subscription tier."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q2 2026 earnings release, which cites Sensor Tower download data.",
-    "claim": "In Q2 2026, Hinge grew revenue 86% year over year in its European expansion markets and kept the number one downloaded position across those markets in aggregate.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Hinge also grew revenue 86% Y/Y across its European expansion markets1, while maintaining the number one downloaded2 position in aggregate across those markets in Q2."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the segment reconciliation table of the earnings release.",
-    "claim": "Hinge's Q3 2026 segment Adjusted EBITDA margin was 40%, and Everyone Everywhere's was 25%.",
+    "basis": "stated in management's prepared remarks; these are management's own characterizations",
+    "claim": "Tinder user trends improved in Q3 according to management: MAU declines narrowed and DAU was down only 1% in Q3 after returning to growth in September.",
     "facts": [
      "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "MAU declines narrowed to 5.5%, a one-point improvement from Q2.",
+     "DAU inflected to Y/Y growth in September, and was down just 1% Y/Y in Q3."
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Everyone Everywhere is losing ground. Its Q3 2026 Direct Revenue declined 20%, including a $20 million drop at Azar.",
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "Hinge is the strongest growth brand, with Q3 Direct Revenue up 19% on 23% Payer growth, though RPP fell 3% to $31.81 amid discounting and a test of a lower-priced tier.",
     "facts": [
-     "P4"
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "The Everyone Everywhere segment is the weak spot: Q3 Direct Revenue fell 20%, partly because of a $20 million revenue decrease at Azar, with Payer declines across most brands.",
+    "facts": [
+     "P4",
+     "P6"
     ],
     "quotes": [
      "E&E Direct Revenue declined 20%, including a $20 million decrease in revenue at Azar resulting from the changes discussed in the Azar business update above."
@@ -859,63 +963,25 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "User declines at the Evergreen brands have made those services less attractive to users.",
+    "basis": "stated in the 10-K and 10-Q",
+    "claim": "The company depends on Apple and Google app stores for distribution and monetization, and this dependency was a named threat: Apple removed Azar from the App Store in 2026.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Declines in the number of users for our Evergreen brands have also adversely affected our revenue and financial results in recent years and, in some cases, have rendered those services less attractive to both existing and potential users."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A revenue table.",
-    "claim": "Across the group, Payers fell 5% in Q3 2026 to 13,789 (table in thousands), while total RPP rose 3% to $21.19.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q income statement.",
-    "claim": "Consolidated revenue was flat over nine months, at $2,608,271 versus $2,609,191 (table in thousands), while operating income rose to 750,435 from 587,848.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Shifting payers to alternative payment methods cut in-app purchase fees by $43.0 million in Q3 2026. This improved the cost structure relative to app store distribution.",
-    "facts": [
+     "P1",
+     "P2",
      "P4"
     ],
     "quotes": [
-     "Cost of revenue decreased across all segments primarily due to Payers shifting from app store payments to alternate payment methods, resulting in $43.0 million lower in-app purchase fees partially offset by an increase of $4.5 million in credit card processing fees."
+     "We rely on the Apple App Store and the Google Play Store to distribute and monetize our mobile applications.",
+     "Updates were subsequently made to the app to comply with the updated guidelines, which led to the reinstatement of a new version on April 6, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors and MD&A.",
-    "claim": "Dependence on app stores is a named threat. The apps are almost exclusively accessed through Apple's and Google's stores, which take a meaningful share of in-app revenue.",
+    "basis": "stated in the 10-K risk factors and MD&A",
+    "claim": "The 2024 Google partnership that helps offset billing costs is set to expire in the first quarter of 2027, a named risk of higher platform fees.",
     "facts": [
      "P2",
      "P3"
-    ],
-    "quotes": [
-     "Additionally, our mobile applications are almost exclusively accessed through the Apple App Store and Google Play Store.",
-     "(for subscribers, generally up to 30% on iOS and 15% on Android)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "The Google partnership that offsets some fee costs expires in the first quarter of 2027. After that, fees paid to Google are expected to rise unless Google lowers its standard fees.",
-    "facts": [
-     "P2"
     ],
     "quotes": [
      "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
@@ -923,101 +989,51 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q Azar business update.",
-    "claim": "Apple's removal of Azar shows the platform risk in practice. The app was reinstated only after changes that lowered monetization, and the company took a $25.2 million impairment on the Azar trade name.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors. No size figures are given.",
-    "claim": "Large social platforms are named competitors, and Facebook's dating feature is cited as having grown dramatically.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "For example, Facebook offers a dating feature on its platform, which has grown dramatically in size supported by Facebook\u2019s massive worldwide user footprint."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Low switching costs and new entrants, including ones using generative AI, could take scale from existing brands.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "It is possible that a new service could gain rapid scale at the expense of existing brands through harnessing a new technology, such as generative AI, or a new or existing distribution channel, creating a new or different approach to connecting people, introducing a new business model, or some other means."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Demand for online dating has softened among younger generations, particularly among women.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "services has softened among younger generations, particularly among women in those generations, reflecting evolving preferences, shifting social behaviors, and changing expectations regarding digital interactions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q income statement and the earnings release guidance.",
-    "claim": "Defending position requires more marketing. Q3 2026 selling and marketing expense rose to 185,028 from 169,142 (table in thousands), and Q4 Adjusted EBITDA is guided lower partly because of higher marketing at Tinder and Hinge.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "The Y/Y decline in Adjusted EBITDA is largely due to increased marketing spend at Tinder and Hinge and a gain on sale related to an LA office building in the prior year quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as management guidance in the earnings release.",
-    "claim": "Tinder's user-experience changes are expected to reduce its 2026 Direct Revenue by approximately $25 million.",
+    "basis": "stated in the earnings release; this is guidance, not a result",
+    "claim": "Management guides Q4 2026 revenue to a range of roughly flat to slightly down year over year.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "At Tinder, we expect user experience tests and product changes to have an approximately $25 million negative impact to Direct Revenue in 2026, less than we initially anticipated."
+     "We expect Q4 Total Revenue for Match Group of $865 million to $875 million, down 1% to flat Y/Y."
     ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the balance sheet and earnings release; reading debt as a constraint on investment capacity is inferred",
+    "claim": "The balance sheet shows total shareholders' equity of negative 139,469 at Sep. 30, 2026, cash of 726,196 and long-term debt, net of 3,553,307 (table in thousands), and the company says gross leverage was 2.6x.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Our trailing twelve-month gross leverage4 was 2.6x and net leverage was 2.0x at the end of Q3."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement",
+    "claim": "Operating cash flow funds large capital returns: nine-month operating cash flow was 886,340, against 335,511 of treasury stock purchases and 136,886 of dividends (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1",
-    "claim": "Cash and cash equivalents fell to 726,196 at September 30, 2026 from 1,027,838 at December 31, 2025 (table in thousands).",
+    "basis": "Stated in the balance sheet; the comparison is made from its two columns.",
+    "claim": "Cash and cash equivalents fell to 726,196 (table in thousands) at the latest quarter-end from 1,027,838 at the prior year-end. Total current assets of 1,104,310 exceed total current liabilities of 615,926 (table in thousands).",
     "facts": [
      "F1"
     ],
-    "quotes": [
-     "Cash and cash equivalents | $ 726,196 | $ 1,027,838"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Total current assets of 1,104,310 exceeded total current liabilities of 615,926 at September 30, 2026 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 1,104,310 | 1,427,294",
-     "Total current liabilities | 615,926 | 1,006,545"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "The revolving Credit Facility had $499.4 million of availability, with $0.6 million of letters of credit outstanding, at September 30, 2026.",
+    "basis": "Stated in the cited 10-Q MD&A.",
+    "claim": "The revolving credit facility is undrawn apart from letters of credit, with $0.6 million of letters of credit outstanding and $499.4 million available, which gives a backstop to cash.",
     "facts": [
      "P4"
     ],
@@ -1027,312 +1043,165 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Long-term debt, net was 3,553,307 at September 30, 2026, and current maturities of long-term debt fell to 0 from 423,580 (table in thousands).",
+    "basis": "Stated in the balance sheet.",
+    "claim": "Long-term debt, net, is 3,553,307 (table in thousands) and current maturities of debt are 0, against 423,580 at the prior year-end. Total shareholders' equity is a deficit of (139,469).",
     "facts": [
      "F1"
     ],
-    "quotes": [
-     "Long-term debt, net | 3,553,307 | 3,549,099",
-     "Current maturities of long-term debt, net | 0 | 423,580"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Total shareholders' equity was negative at (139,469) at September 30, 2026, versus (253,396) at December 31, 2025 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total shareholders\u2019 equity | (139,469) | (253,396)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Q3 2026 Adjusted EBITDA for Match Group was $344,463 (table in thousands).",
+    "basis": "Stated in the earnings release prepared remarks.",
+    "claim": "Management reports trailing twelve-month gross leverage of 2.6x and net leverage of 2.0x at the end of the third quarter, measured against Adjusted EBITDA.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Adjusted EBITDA | $244,367 | $87,852 | $45,118 | $(32,874) | $\u2014 | $344,463"
+     "Our trailing twelve-month gross leverage4 was 2.6x and net leverage was 2.0x at the end of Q3."
     ],
     "support": "supported"
    },
    {
-    "basis": "figures stated in F2; mechanism inferred from note terms in P3 and P4",
-    "claim": "Interest expense rose to (126,416) for the nine months of 2026 from (104,440) a year earlier, and was (41,510) in Q3 2026 against Q3 operating income of 268,569 (table in thousands).",
+    "basis": "Stated in the cash flow statement and the release.",
+    "claim": "Operating cash flow for the nine months was 886,340 (table in thousands) versus 757,600 a year earlier. Capital expenditures were 54,651, and management reports free cash flow of $832 million.",
     "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Interest expense | (41,510) | (37,024) | (126,416) | (104,440)",
-     "Operating income | 268,569 | 221,334 | 750,435 | 587,848"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Net cash provided by operating activities was 886,340 for the nine months of 2026, up from 757,600, against capital expenditures of (54,651) (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 886,340 | 757,600",
-     "Capital expenditures | (54,651) | (42,100)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in F3; quality interpretation inferred",
-    "claim": "Operating cash flow includes a non-cash add-back of 177,354 for stock-based compensation, while (118,145) of withholding taxes on net-settled awards was paid in cash and classified in financing activities (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Stock-based compensation expense | 177,354 | 194,167",
-     "Withholding taxes paid on behalf of employees on net settled stock-based awards | (118,145) | (115,619)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; recurrence unknown",
-    "claim": "Working-capital and tax items helped 2026 operating cash flow, including income taxes payable and receivable of 39,394 versus (31,118) and deferred income taxes of 42,955 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Income taxes payable and receivable | 39,394 | (31,118)",
-     "Deferred income taxes | 42,955 | 35,161"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Full-year FCF is expected to be slightly above the high end of the February guidance, provided a 13th Apple payment is received by the final reporting day of the year.",
-    "facts": [
+     "F3",
      "P6"
     ],
     "quotes": [
-     "We expect full year FCF to be slightly above the high-end of our guidance range provided in February, assuming we receive a 13th Apple payment on or before the final reporting day of the year."
+     "Year-to-date through Q3, we generated Operating Cash Flow of $886 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Cash fell by (301,642) in the nine months of 2026, mainly because of payments to settle exchangeable notes of (423,854), treasury stock purchases of (335,511) and dividends of (136,886) (table in thousands).",
+    "basis": "Inferred from comparing the net income line with the reconciling items in the cash flow statement.",
+    "claim": "Cash generation is well above net income of 511,752 (table in thousands). Part of the gap is non-cash stock-based compensation of 177,354. Part is working-capital and tax items: income taxes payable and receivable of 39,394, deferred income taxes of 42,955 and receivables of 24,222.",
     "facts": [
      "F3"
     ],
-    "quotes": [
-     "Payments to settle exchangeable notes | (423,854) | (74,437)",
-     "Purchases of treasury stock | (335,511) | (549,905)",
-     "Dividends | (136,886) | (140,893)",
-     "Net (decrease) increase in cash and cash equivalents | (301,642) | 87,247"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "The 2026 Exchangeable Notes were repaid at maturity on June 15, 2026, from proceeds earmarked out of the 6.125% Senior Notes issued in August 2025.",
+    "basis": "Stated in the cash flow statement.",
+    "claim": "Financing outflows of 1,017,481 (table in thousands) exceeded operating cash flow. They included 423,854 to settle exchangeable notes, 335,511 of treasury stock purchases, 136,886 of dividends and 118,145 of employee award withholding taxes. Cash fell by 301,642.",
     "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and 10-Q MD&A; linking the 700,000 inflow to the notes' offering is an inference from matching periods.",
+    "claim": "The 2026 exchangeable notes were repaid at maturity. The 2025 filing says proceeds from the 6.125% Senior Notes would be used to repay them. In the prior-year nine months the company received 700,000 (table in thousands) from a Senior Notes offering.",
+    "facts": [
+     "P4",
      "P3",
-     "P4"
+     "F3"
     ],
     "quotes": [
      "The 0.875% Exchangeable Senior Notes which were repaid at maturity on June 15, 2026.",
-     "The proceeds from the issuance of these notes will be used to repay all of the outstanding 2026 Exchangeable Notes at or prior to their maturity, and the remaining proceeds will be used for general corporate purposes."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "The next debt maturity is the 5.00% Senior Notes due December 15, 2027, with $450 million outstanding at September 30, 2026.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "MG Holdings II\u2019s 5.00% Senior Notes due December 15, 2027, with interest payable each June 15 and December 15, which were issued on December 4, 2017."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; dilution risk from P2",
-    "claim": "Further maturities follow: $500 million of 4.625% notes due June 1, 2028, $350 million of 5.625% notes due February 15, 2029, $575 million of 2.00% Exchangeable Notes due January 15, 2030, and $500 million of 4.125% notes due August 1, 2030.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "MG Holdings II\u2019s 4.625% Senior Notes due June 1, 2028, with interest payable each June 1 and December 1, which were issued on May 19, 2020."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from F1, F3 and P4; no repayment plan stated",
-    "claim": "How the 2027 maturity can be met: by refinancing or from cash on hand, the Credit Facility and operating cash flow. The evidence states no specific plan.",
-    "facts": [
-     "F1",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 886,340 | 757,600"
+     "The proceeds from the issuance of these notes will be used to repay all of the outstanding 2026 Exchangeable Notes at or prior to their maturity"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in P2",
-    "claim": "The 10-K flags the risk that cash generation may not be enough to service all debt.",
+    "basis": "Stated in the 10-Q debt descriptions as of the latest quarter-end.",
+    "claim": "The nearest remaining maturities are $450 million of 5.00% Senior Notes due December 15, 2027, $500 million of 4.625% Senior Notes due June 1, 2028 and $350 million of 5.625% Senior Notes due February 15, 2029.",
     "facts": [
-     "P2"
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q debt descriptions.",
+    "claim": "Later maturities are $575 million of 2.00% exchangeable notes due January 15, 2030, $500 million of 4.125% notes due August 1, 2030, $500 million of 3.625% notes due October 1, 2031 and $700 million of 6.125% notes due September 15, 2033.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The policy is stated in the release; the implication for debt repayment is inferred.",
+    "claim": "Management says it will deploy 100% of free cash flow to buybacks, dividends and net settlement of employee equity awards over time. $623,005,160 remained available under the repurchase program at the end of September. Meeting upcoming debt maturities from internal cash would therefore depend on cash on hand, the revolver or new financing, not on retained free cash flow.",
+    "facts": [
+     "P6",
+     "P5"
     ],
     "quotes": [
-     "We may not be able to generate sufficient cash to service all of our indebtedness and may be forced to take other actions to satisfy our obligations under our indebtedness that may not be successful."
+     "We remain committed to deploying 100% of Free Cash Flow towards buybacks, dividends, and net settling of employee equity awards over time, recognizing that the pace of capital return may vary from quarter to quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5 and P7",
-    "claim": "Shareholder returns continue: $623,005,160 remained under the repurchase program after Q3 buybacks of 2,301,750 shares, and a $0.20 per share dividend was declared, payable January 21, 2027.",
+    "basis": "Figures stated in the income statement; the mechanism is inferred from the debt timeline.",
+    "claim": "For the nine months, interest expense was 126,416 (table in thousands) versus 104,440 a year earlier, against operating income of 750,435.",
     "facts": [
-     "P5",
-     "P7"
+     "F2"
     ],
-    "quotes": [
-     "Total | 2,301,750 | $39.15 | 2,301,750 | $623,005,160",
-     "On November 2, 2026, Match Group announced that its Board of Directors declared a cash dividend of $0.20 per share of its outstanding common stock, payable on January 21, 2027 to stockholders of record as of the close of business on January 6, 2027."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 as company guidance",
-    "claim": "Q4 2026 guidance calls for Adjusted EBITDA of $327.5 million to $332.5 million, an 11% decrease year over year at the mid-point.",
+    "basis": "Stated in the 10-K risk factors and 10-Q MD&A; the link to cash flow durability is inferred.",
+    "claim": "Margin support from lower in-app purchase fees, which helps cash generation, is tied to the Google partnership, which expires in the first quarter of 2027. Lower in-app fees cut third-quarter cost of revenue by $43.0 million.",
     "facts": [
-     "P6"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "We expect Match Group Adjusted EBITDA of $327.5 million to $332.5 million, representing an 11% Y/ Y decrease and an Adjusted EBITDA margin of 38% at the mid-points of the ranges."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and F3; link between the two lines not stated",
-    "claim": "Investing outflows in 2026 included purchases of investments of (112,000), while other non-current assets rose to 269,226 from 154,022 (table in thousands).",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Purchases of investments | (112,000) | 0",
-     "Other non-current assets | 269,226 | 154,022"
+     "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the 10-Q MD&A table and narrative.",
-    "claim": "Hinge is the main revenue growth driver: Q3 2026 Hinge Direct Revenue was $220,586 versus $184,671 a year earlier (table in thousands), up 19%.",
+    "basis": "Stated in the 10-Q MD&A and the Q3 prepared remarks; the condition for continuation is inferred from the RPP and Payer split.",
+    "claim": "Hinge is the clearest top-line growth driver. Q3 Direct Revenue grew 19%, on Payer growth of 23%. For this to continue, Payer growth must keep outpacing the RPP decline from discounting and the new lower-priced tier.",
     "facts": [
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth, reflecting Hinge\u2019s continued European expansion, partially offset by a decrease in RPP of 3% to $31.81 as a result of the expansion of discount optimizations and testing of a new lower priced subscription tier."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Hinge growth is payer-led: Q3 2026 Hinge Payers were 2,312 versus 1,873 (table in thousands), up 23%, while RPP fell 3% to $31.81.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth, reflecting Hinge\u2019s continued European expansion, partially offset by a decrease in RPP of 3% to $31.81 as a result of the expansion of discount optimizations and testing of a new lower priced subscription tier."
+     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth, reflecting Hinge\u2019s continued European expansion"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q2 2026 release and the 10-K MD&A.",
-    "claim": "For Hinge growth to continue, geographic expansion must keep working; Q2 2026 revenue in Hinge's European expansion markets grew 86% Y/Y.",
+    "basis": "Market shares are stated in the prepared remarks; the dependence on continued expansion is inferred from management's plans.",
+    "claim": "Hinge's geographic expansion must keep adding users. European expansion markets were roughly 15% of Hinge Direct Revenue and roughly 25% of global MAU, and Hinge relaunched in India with Japan planned for 2027.",
     "facts": [
-     "P8",
+     "P6"
+    ],
+    "quotes": [
+     "European expansion markets accounted for roughly 15% of Hinge\u2019s Direct Revenue in Q3 and roughly 25% of global MAU."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the Q3 release and 10-Q; conversion to revenue is a stated aim, not a result.",
+    "claim": "Tinder's recovery in user trends is a potential driver. Q3 Payers fell 4% and Direct Revenue fell 2%. For this to become growth, better user metrics must convert into more Payers and into monetization that has not yet been shown.",
+    "facts": [
+     "P4",
+     "P6",
      "P3"
     ],
     "quotes": [
-     "Hinge also grew revenue 86% Y/Y across its European expansion markets",
-     "Further geographic expansion in South America is expected in 2026, along with expansion into India."
+     "These improvements are also beginning to show up in Payers, which declined 4% Y/Y, a one-point improvement from Q2 and three points better than a year ago.",
+     "As user trends improve, we are beginning to turn our attention to monetization, applying the same urgency to revenue in 2027 that we applied to user outcomes in 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A and the Q3 2026 guidance.",
-    "claim": "Hinge growth also depends on continued investment in product development and marketing.",
+    "basis": "Savings amounts are stated in the 10-Q; the operating income comparison is from the income statement.",
+    "claim": "Profit growth so far comes from lower costs, not revenue. Nine-month revenue was flat while operating income rose to 750,435 from 587,848 (table in thousands). Q3 cost of revenue fell 16%, mainly because $43.0 million of in-app purchase fees went away as payments moved off app stores. This only continues if payers keep using alternative payment methods.",
     "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "In the near term, we expect to continue to make investments in the business to support Hinge\u2019s growth, including investments in product development as well as marketing.",
-     "The Y/Y decline in Adjusted EBITDA is largely due to increased marketing spend at Tinder and Hinge and a gain on sale related to an LA office building in the prior year quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated by management in the Q3 2026 earnings release; the magnitude of DAU growth is not given.",
-    "claim": "Tinder user engagement is improving: Daily Active Users returned to year-over-year growth in September 2026, which the company presents as an early turnaround driver.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Daily Active Users returned to Y/Y growth in September for the first time in three and a half years.",
-     "Tinder\u2019s Sparks1 and Sparks Coverage2 delivered their strongest quarterly Y/Y performance since we began tracking them"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Tinder engagement gains have not yet become revenue growth: Q3 2026 Tinder Direct Revenue was $480,019 versus $490,613 (table in thousands), down 2%, and Payers fell 4%.",
-    "facts": [
+     "F2",
      "P4"
-    ],
-    "quotes": [
-     "Tinder Direct Revenue declined 2%, driven by a 4% decrease in Payers, partially offset by an increase in RPP of 2%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Management goal stated in the release; the risk is stated in the 10-K.",
-    "claim": "For the Tinder driver to work, improving user trends must convert into revenue growth, which management targets for 2027.",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "Looking ahead, we're focused on translating Tinder's improving user trends into sustainable revenue growth in 2027, while continuing to deliver strong Free Cash Flow and shareholder return to shareholders.",
-     "This strategy includes introducing new features and experiences that we believe will improve user outcomes, some of which have in the past and in the future may again drive short-term decreases in both revenue and user numbers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 guidance.",
-    "claim": "Tinder product tests are costing less revenue than first expected, about $25 million of Direct Revenue in 2026.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "At Tinder, we expect user experience tests and product changes to have an approximately $25 million negative impact to Direct Revenue in 2026, less than we initially anticipated."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A and statement of operations.",
-    "claim": "Profit growth is driven by lower in-app purchase fees: Q3 2026 cost of revenue was $206,522 versus $247,043 (table in thousands), down 16%.",
-    "facts": [
-     "P4",
-     "F2"
     ],
     "quotes": [
      "Cost of revenue decreased across all segments primarily due to Payers shifting from app store payments to alternate payment methods, resulting in $43.0 million lower in-app purchase fees partially offset by an increase of $4.5 million in credit card processing fees."
@@ -1340,138 +1209,85 @@
     "support": "number_not_found"
    },
    {
-    "basis": "Stated in the 10-K risk factors and MD&A.",
-    "claim": "For the fee-savings driver to persist, app store fee structures must not worsen; the Google partnership expires in the first quarter of 2027.",
+    "basis": "The expiry and the expected fee increase are stated in the 10-K risk factors; the effect on margins is inferred.",
+    "claim": "A condition for keeping the fee savings is the Google partnership. It is set to expire in the first quarter of 2027, and the company expects higher Google fees if Google does not reduce its standard fees before then.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027.",
-     "We expect to realize significant in-app purchase fee savings in 2026 compared to 2025 for the same and similar reasons absent further developments with the Apple and Google app store fee structures."
+     "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q statement of operations; the attribution to G&A is inferred from the line items.",
-    "claim": "Operating income rose to 268,569 in Q3 2026 from 221,334 (table in thousands), helped by general and administrative expense falling to 92,181 from 148,021.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as company guidance.",
-    "claim": "The company expects a full-year 2026 Adjusted EBITDA margin of 38.8%, above its February guidance of 37.5%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range, meaningfully above the 37.5% Adjusted EBITDA guidance we provided in February, due to additional alternative payment savings, as well as lower compensation expense and operating costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q and the earnings release.",
-    "claim": "Per-share growth is driven by buybacks: Q3 2026 diluted EPS was $0.73 versus $0.62, and diluted shares outstanding were 241,960 versus 260,324 (table in thousands).",
+    "basis": "Share counts and the policy are stated; the link from fewer shares to higher EPS is inferred.",
+    "claim": "Per-share earnings are growing faster than the business because of buybacks. Q3 diluted EPS was $0.73 against $0.62, and diluted shares were 241,960 against 260,324 (table in thousands). Continuing this requires management to keep spending free cash flow on repurchases.",
     "facts": [
      "F2",
+     "P5",
      "P6"
     ],
     "quotes": [
-     "Our disciplined approach to capital allocation has reduced diluted shares outstanding3 by 4% Y/Y4, and 10% since the beginning of 2025."
+     "We remain committed to deploying 100% of Free Cash Flow towards buybacks, dividends, and net settling of employee equity awards over time, recognizing that the pace of capital return may vary from quarter to quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q cash flow statement.",
-    "claim": "Buybacks are funded by operating cash flow, which was 886,340 for the nine months of 2026 versus 757,600 (table in thousands); treasury stock purchases were 335,511.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q Item 2 and the 10-K risk factors.",
-    "claim": "For buybacks to continue, authorization and cash must remain; $623,005,160 remained available under the Share Repurchase Program at the end of September 2026.",
-    "facts": [
-     "P5",
-     "P2"
-    ],
-    "quotes": [
-     "The Company is not obligated to purchase any shares under the repurchase programs, and repurchases may be commenced, suspended or discontinued from time to time without prior notice.",
-     "We cannot guarantee that our share repurchase programs will be fully consummated or enhance long- term stockholder value, and the price of our stock is subject to volatility."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q balance sheet and the 10-K risk factors.",
-    "claim": "Leverage limits capital returns: long-term debt was 3,553,307 and total shareholders' equity was (139,469) at September 30, 2026 (table in thousands).",
+    "basis": "Figures are from the cash flow statement, balance sheet and release; the dependence is inferred.",
+    "claim": "Capital returns depend on cash generation. Nine-month operating cash flow was 886,340 against 757,600 (table in thousands), and free cash flow was $832 million. Cash and equivalents still fell to 726,196 from 1,027,838 (table in thousands) after returns and repayment of exchangeable notes.",
     "facts": [
      "F1",
-     "P2"
+     "F3",
+     "P6"
     ],
     "quotes": [
-     "We may not be able to generate sufficient cash to service all of our indebtedness and may be forced to take other actions to satisfy our obligations under our indebtedness that may not be successful."
+     "Year-to-date through Q3, we generated Operating Cash Flow of $886 million and Free Cash Flow (\u201cFCF\u201d) of $832 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Everyone Everywhere is a drag on growth: Q3 2026 Direct Revenue was $176,019 versus $221,377 (table in thousands), down 20%, including an Azar decrease of $20 million.",
+    "basis": "Guidance and attribution are stated in the release; the payback condition is inferred.",
+    "claim": "Near-term growth is guided to be flat, with higher marketing spend. Q4 total revenue guidance is $865 million to $875 million, and management attributes the expected Y/Y decline in Adjusted EBITDA largely to increased marketing spend at Tinder and Hinge. That spend must produce user and Payer gains for it to count as growth investment.",
     "facts": [
-     "P4"
+     "P6"
+    ],
+    "quotes": [
+     "The Y/Y decline in Adjusted EBITDA is largely due to increased marketing spend at Tinder and Hinge and a gain on sale related to an LA office building in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q and prepared remarks; the condition is inferred.",
+    "claim": "Everyone Everywhere (E&E) is a drag that must stabilize for the portfolio to grow. Q3 E&E Direct Revenue fell 20%, including a $20 million decrease at Azar after its app redesign, and Payers fell 23%.",
+    "facts": [
+     "P4",
+     "P6"
     ],
     "quotes": [
      "E&E Direct Revenue declined 20%, including a $20 million decrease in revenue at Azar resulting from the changes discussed in the Azar business update above."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated as company guidance.",
-    "claim": "Near-term guidance shows no consolidated revenue growth yet: Q4 2026 Total Revenue is guided at $865 million to $875 million, down 1% to flat Y/Y.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We expect Q4 Total Revenue for Match Group of $865 million to $875 million, down 1% to flat Y/Y."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited items",
-    "claim": "Apple removed the Azar app from the Apple App Store after updating its App Review Guidelines.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "On February 22, 2026, Apple removed the Azar app from the Apple App Store following a February 6, 2026 update to Apple\u2019s App Review Guidelines."
-    ],
-    "support": "supported"
-   },
-   {
     "basis": "stated in the cited item",
-    "claim": "A modified Azar app was reinstated on the App Store, but the required changes lowered its monetization.",
+    "claim": "Apple removed the Azar app from the Apple App Store. A new version was reinstated after updates to comply with Apple's guidelines. The updated app monetizes less, which lowered Azar Direct Revenue in the three and nine months ended September 30, 2026.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "Updates were subsequently made to the app to comply with the updated guidelines, which led to the reinstatement of a new version on April 6, 2026.",
-     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app."
+     "On February 22, 2026, Apple removed the Azar app from the Apple App Store following a February 6, 2026 update to Apple\u2019s App Review Guidelines.",
+     "Updates were subsequently made to the app to comply with the updated guidelines, which led to the reinstatement of a new version on April 6, 2026."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "In Q1 2026 the company recorded an impairment of $25.2 million on the Azar trade name after updating Azar's forecast.",
+    "claim": "In the quarter ended March 31, 2026 the company recorded a $25.2 million impairment of the Azar trade name, an indefinite-lived asset. It was reclassified to a definite-lived intangible asset.",
     "facts": [
-     "P4",
-     "F2"
+     "P4"
     ],
     "quotes": [
      "During the quarter ended March 31, 2026, we also updated the business forecast associated with the Azar app, which resulted in an impairment of $25.2 million to the indefinite-lived asset associated with the Azar trade name, which was reclassified to a definite-lived intangible asset as of March 31, 2026."
@@ -1479,8 +1295,21 @@
     "support": "supported"
    },
    {
+    "basis": "stated in P4; the amount is read from the F3 cash flow line",
+    "claim": "The 0.875% Exchangeable Senior Notes were repaid at maturity. The cash flow statement shows payments to settle exchangeable notes of 423,854 (table in thousands) for the nine months, and the current maturities of long-term debt line went to 0 at September 30, 2026.",
+    "facts": [
+     "P4",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "The 0.875% Exchangeable Senior Notes which were repaid at maturity on June 15, 2026."
+    ],
+    "support": "number_not_listed"
+   },
+   {
     "basis": "stated in the cited item",
-    "claim": "During the quarter ended June 30, 2026, the company reorganized into three operating segments by combining Evergreen and Emerging with MG Asia into 'Everyone Everywhere'.",
+    "claim": "The company reorganized its brands into three operating segments. Evergreen and Emerging and MG Asia were combined into a new segment called Everyone Everywhere, and historical periods were recast.",
     "facts": [
      "P4"
     ],
@@ -1490,312 +1319,38 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The 0.875% 2026 Exchangeable Notes were repaid at maturity; nine-month cash payments to settle exchangeable notes were (423,854) (table in thousands).",
-    "facts": [
-     "P4",
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "The 0.875% Exchangeable Senior Notes which were repaid at maturity on June 15, 2026.",
-     "Payments to settle exchangeable notes | (423,854)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; payment itself is not confirmed in evidence",
-    "claim": "The Board declared a cash dividend of $0.20 per share, payable on October 20, 2026.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "On August 4, 2026, Match Group announced that its Board of Directors declared a cash dividend of $0.20 per share of its outstanding common stock, payable on October 20, 2026 to stockholders of record as of the close of business on October 5, 2026."
-    ],
-    "support": "supported"
-   },
-   {
     "basis": "stated in the cited item",
-    "claim": "During the quarter ended September 30, 2026, the company repurchased 2,301,750 shares at an average price of $39.15, leaving $623,005,160 available under the program.",
-    "facts": [
-     "P5",
-     "F3"
-    ],
-    "quotes": [
-     "Total | 2,301,750 | $39.15"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company announced Q3 2026 results and Q4 2026 guidance of total revenue of $865 million to $875 million, and raised its full-year Adjusted EBITDA margin expectation above the February guidance.",
+    "claim": "The Board declared a cash dividend of $0.20 per share, payable on January 21, 2027 to shareholders of record on January 6, 2027.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "We expect Q4 Total Revenue for Match Group of $865 million to $875 million, down 1% to flat Y/Y.",
-     "We expect full-year 2026 Adjusted EBITDA margin of 38.8% at the mid-points of our Q4 guidance range, meaningfully above the 37.5% Adjusted EBITDA guidance we provided in February, due to additional alternative payment savings, as well as lower compensation expense and operating costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The Board declared a cash dividend of $0.20 per share, payable on January 21, 2027.",
-    "facts": [
-     "P7",
-     "P6"
-    ],
-    "quotes": [
-     "On November 2, 2026, Match Group announced that its Board of Directors declared a cash dividend of $0.20 per share of its outstanding common stock, payable on January 21, 2027 to stockholders of record as of the close of business on January 6, 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In 2025 the company launched an enterprise-wide cost-reduction initiative that included headcount reductions.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "From 2023 to 2025, we consolidated some of our legacy brands\u2019 platforms and, in 2025, we launched an enterprise-wide initiative to further leverage our portfolio approach and decrease operating costs by, among other things, reducing headcount and duplication of certain functions across the Company and sharing more operational infrastructure across brands."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In 2025 the company recorded a legal settlement at Tinder of $60.5 million and an FTC settlement of $14.0 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "General and administrative expense increased primarily due to (i) a legal settlement at Tinder in the amount of $60.5 million, (ii) a settlement with the FTC in the amount of $14.0 million related to certain E&E applications, and (iii) an increase in severance expense of $9.9 million primarily within Corporate and Unallocated Costs and E&E."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company repaid its Term Loan in full using cash on hand.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On January 21, 2025, we repaid the Term Loan in full utilizing cash on hand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company appointed a new CEO and a new CFO in February and March 2025, respectively.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For example, we appointed a new Chief Executive Officer and a new Chief Financial Officer in February and March 2025, respectively."
+     "Match Group's Board of Directors has declared a cash dividend of $0.20 per share of the company's common stock."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the 10-Q MD&A table and in the 10-K risk factors and MD&A. The counter is stated in the Q3 earnings release.",
-    "claim": "Tinder Payers kept falling in the three months to September, to 8,879 from 9,258, a (4)% decline.",
+    "basis": "stated in the cited items (10-Q MD&A and Q3 prepared remarks). The link to the risk is inferred.",
+    "claim": "Tinder, the largest segment, is still losing payers and revenue. Q3 Tinder Direct Revenue fell 2% on a 4% payer decline, and monthly active users were down 5.5%. If the user recovery stalls, revenue stays under pressure.",
     "facts": [
      "P4",
-     "P2",
-     "P3",
      "P6"
     ],
     "quotes": [
-     "Declines in the number of Tinder users have adversely affected our revenue and financial results in recent years and, in some cases, have rendered our services less attractive to both existing and potential users.",
-     "Tinder expects revenue to decrease in 2026 at a similar rate to the decrease in 2025, as these features and investments are tested and implemented."
+     "Tinder Direct Revenue declined 2%, driven by a 4% decrease in Payers, partially offset by an increase in RPP of 2%.",
+     "MAU declines narrowed to 5.5%, a one-point improvement from Q2."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors. The counter is stated in the 10-Q MD&A.",
-    "claim": "The Google partnership is set to expire, and Google in-app fees may rise afterward unless Google lowers its standard fees.",
+    "basis": "expiry and fee risk stated in the 10-K risk factors. The size of any impact is not stated, and the packet gives no post-expiry terms.",
+    "claim": "The Google partnership that helps offset app-store costs is set to expire in the first quarter of 2027. The filing expects fees to rise if Google does not cut its standard in-app purchase fees by then. Recent cost-of-revenue savings depend on payment-fee dynamics at Apple and Google.",
     "facts": [
      "P2",
      "P3",
      "P4"
-    ],
-    "quotes": [
-     "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A Azar Business Update and the Q3 release guidance.",
-    "claim": "Apple's removal of Azar and the required redesign led to a $25.2 million trade name impairment and a $20 million quarterly revenue decrease at Azar.",
-    "facts": [
-     "P4",
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A revenue table and narrative, and the release segment reconciliation.",
-    "claim": "Everyone Everywhere Direct Revenue fell (20)% to 176,019 (table in thousands) as its Payers fell (23)%.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Additional decreases occurred across most brands within E&E as a result of Payer declines."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Hinge RPP fell 3% to $31.81 because of discounting and a lower priced subscription tier.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "partially offset by a decrease in RPP of 3% to $31.81 as a result of the expansion of discount optimizations and testing of a new lower priced subscription tier"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance sheet figures are stated in the 10-Q. The risk is stated in the 10-K risk factors. Coverage is inferred from the F2 and F3 figures.",
-    "claim": "Long-term debt, net was 3,553,307 (table in thousands), against total shareholders' equity of (139,469) (table in thousands) and cash of 726,196 (table in thousands).",
-    "facts": [
-     "F1",
-     "P2",
-     "F2",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Our indebtedness may affect our ability to operate our business, and we and our subsidiaries may incur additional indebtedness, including secured indebtedness."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A debt key terms. The refinancing cost point is inferred from the stated coupon of the 2033 notes.",
-    "claim": "$450 million of senior notes is the nearest remaining debt maturity.",
-    "facts": [
-     "P4",
-     "F1"
-    ],
-    "quotes": [
-     "As of September 30, 2026, $450 million aggregate principal amount was outstanding."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 earnings release prepared remarks.",
-    "claim": "Fourth-quarter guidance calls for Adjusted EBITDA of $327.5 million to $332.5 million, an 11% decrease, largely because of higher marketing spend.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "The Y/Y decline in Adjusted EBITDA is largely due to increased marketing spend at Tinder and Hinge and a gain on sale related to an LA office building in the prior year quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 release. The timing interpretation is inferred.",
-    "claim": "The full-year FCF expectation assumes a 13th Apple payment arrives on or before the final reporting day of the year.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We expect full year FCF to be slightly above the high-end of our guidance range provided in February, assuming we receive a 13th Apple payment on or before the final reporting day of the year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors and MD&A. The counter is inferred from F2.",
-    "claim": "Match is defending user-harm lawsuits in Colorado and Texas, following prior settlements of $60.5 million at Tinder and $14.0 million with the FTC.",
-    "facts": [
-     "P2",
-     "P3",
-     "F2"
-    ],
-    "quotes": [
-     "For example, we are currently defending lawsuits in Colorado and Texas brought by multiple plaintiffs alleging harm by other users they met through our services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q cash flow statement and risk factors.",
-    "claim": "Cash fell by (301,642) (table in thousands) over nine months, with treasury stock purchases of (335,511) and dividends of (136,886) paid.",
-    "facts": [
-     "F3",
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "We cannot guarantee that our share repurchase programs will be fully consummated or enhance long- term stockholder value, and the price of our stock is subject to volatility."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors, the 10-Q debt terms and the Q3 release.",
-    "claim": "$575 million of 2030 Exchangeable Notes remains outstanding and could dilute shareholders.",
-    "facts": [
-     "P4",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Exchange of our outstanding exchangeable notes may dilute the ownership interests of existing stockholders or may otherwise depress the price of our common stock."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A and the Q3 release guidance.",
-    "claim": "On a consistent FX basis, Tinder nine-month Direct Revenue declined $32.3 million, or 2%, while reported RPP was helped by a weaker dollar.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "On a consistent foreign exchange rate basis, Direct Revenue declined $32.3 million, or 2%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors. The counter is stated in the 10-Q MD&A and the Q3 release.",
-    "claim": "Large platforms such as Facebook compete with free dating features and existing user bases.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "For example, Facebook offers a dating feature on its platform, which has grown dramatically in size supported by Facebook\u2019s massive worldwide user footprint."
-    ],
-    "support": "supported"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "stated in P6 as a management goal; the Q3 revenue decline is stated in P4",
-    "claim": "Will Tinder's improving user trends, including Daily Active Users returning to year-over-year growth in September, turn into Tinder revenue growth in 2027, given that Tinder Direct Revenue still declined 2% in Q3 2026?",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Looking ahead, we're focused on translating Tinder's improving user trends into sustainable revenue growth in 2027, while continuing to deliver strong Free Cash Flow and shareholder return to shareholders.",
-     "Tinder Direct Revenue declined 2%, driven by a 4% decrease in Payers, partially offset by an increase in RPP of 2%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 (expiry and expected fee increase); the savings are stated in P4",
-    "claim": "Will the in-app purchase fee savings that lowered cost of revenue continue after the Google partnership expires in the first quarter of 2027?",
-    "facts": [
-     "P2",
-     "P4",
-     "P3"
     ],
     "quotes": [
      "In particular, our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027.",
@@ -1804,141 +1359,187 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P6 as guidance; the outcome is not yet reported",
-    "claim": "Will Q4 2026 Total Revenue fall within the guided $865 million to $875 million range?",
+    "basis": "stated in the 10-Q MD&A and the 10-K risk factors. The extension to other brands is inferred from the general dependency language.",
+    "claim": "Azar shows the app-store dependency: Apple removed the app, and the redesign needed for reinstatement monetizes less. The new version lowered Azar revenue by $20 million in Q3 and contributed to a 20% fall in E&E Direct Revenue.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We expect Q4 Total Revenue for Match Group of $865 million to $875 million, down 1% to flat Y/Y."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; the nature of the payment is not explained in the visible evidence",
-    "claim": "What is the 13th Apple payment that the full-year free cash flow guidance assumes, and will it arrive by year end?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We expect full year FCF to be slightly above the high-end of our guidance range provided in February, assuming we receive a 13th Apple payment on or before the final reporting day of the year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 for past effects; future effects are not addressed",
-    "claim": "Will the reinstated Azar app recover its monetization, or will lower forecasts lead to further impairment beyond the $25.2 million charge on the Azar trade name?",
-    "facts": [
+     "P2",
      "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "balances, maturity and leverage stated in the cited items. The risk characterization is inferred.",
+    "claim": "The balance sheet is leveraged. Shareholders' equity is negative at (139,469) and long-term debt is 3,553,307, against cash of 726,196 (table in thousands), down from 1,027,838 at year-end. Net leverage was 2.0x and gross leverage 2.6x. $450 million of 5.00% Senior Notes mature in December 2027, and cash returns to shareholders were large.",
+    "facts": [
+     "F1",
+     "F3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "5.00% Senior Notes due December 15, 2027",
+     "net leverage was 2.0x at the end of Q3"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "guidance and drivers stated in the earnings release and prepared remarks. Whether marketing spend pays back is not shown.",
+    "claim": "Earnings are guided lower for Q4. Adjusted EBITDA is guided to $327.5 million to $332.5 million, an 11% year-over-year decrease, largely because of higher marketing spend at Tinder and Hinge and a prior-year building gain. In Q3, Adjusted EBITDA excluding the prior-year legal charge was already down 5% for the same marketing reason.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Excluding the legal settlement charge in Q3 2025, Adjusted EBITDA was down 5% in Q3 2026, primarily due to higher marketing spend at Tinder and Hinge.",
+     "The Y/Y decline in Adjusted EBITDA is largely due to increased marketing spend at Tinder and Hinge and a gain on sale related to an LA office building in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "past settlements and pending suits stated in the 10-K. Future outcomes are not in the evidence.",
+    "claim": "Legal and regulatory exposure has already produced costs. 2025 general and administrative expense included a $60.5 million Tinder legal settlement and a $14.0 million FTC settlement. Lawsuits alleging user harm are pending in Colorado and Texas.",
+    "facts": [
+     "P2",
      "P3"
     ],
     "quotes": [
-     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app.",
-     "During the quarter ended March 31, 2026, we also updated the business forecast associated with the Azar app, which resulted in an impairment of $25.2 million to the indefinite-lived asset associated with the Azar trade name, which was reclassified to a definite-lived intangible asset as of March 31, 2026."
+     "a legal settlement at Tinder in the amount of $60.5 million",
+     "a settlement with the FTC in the amount of $14.0 million related to certain E&E applications",
+     "we are currently defending lawsuits in Colorado and Texas brought by multiple plaintiffs alleging harm by other users they met through our services."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in P4 for Q3 2026; the future trend is unknown",
-    "claim": "Will Payer declines across most Everyone Everywhere brands stabilize, apart from the Azar effect?",
+    "basis": "impairment stated in the 10-Q MD&A and the 10-K lists impairment as a risk. Any further charge is inferred.",
+    "claim": "Intangible-asset impairment risk is live. The company recorded a $25.2 million impairment on the Azar trade name in Q1 2026 after cutting its Azar forecast. Goodwill remains large at 2,340,393 (table in thousands) against total assets of 4,192,268.",
     "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Additional decreases occurred across most brands within E&E as a result of Payer declines."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 for Q3 2026; the effect over future periods is unknown",
-    "claim": "Will Hinge's new lower-priced subscription tier and discount optimizations keep Hinge RPP below the prior year, after it fell to $31.81 in Q3 2026?",
-    "facts": [
+     "F1",
+     "P2",
      "P4"
     ],
     "quotes": [
-     "Hinge Direct Revenue grew 19%, driven by 23% Payer growth, reflecting Hinge\u2019s continued European expansion, partially offset by a decrease in RPP of 3% to $31.81 as a result of the expansion of discount optimizations and testing of a new lower priced subscription tier."
+     "an impairment of $25.2 million to the indefinite-lived asset associated with the Azar trade name"
     ],
     "support": "supported"
-   },
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
    {
-    "basis": "inferred from the maturity in P4 and the cash balance in F1; no repayment plan is stated",
-    "claim": "How will the 5.00% Senior Notes due 2027, with $450 million outstanding, be repaid or refinanced?",
+    "basis": "Stated in the cited items. The link from user trends to revenue is management's claim and has not yet been shown.",
+    "claim": "Will Tinder's improving user trends turn into Direct Revenue growth, given that Q3 Direct Revenue still fell 2% on a 4% Payer decline?",
     "facts": [
      "P4",
-     "F1",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "As of September 30, 2026, $450 million aggregate principal amount was outstanding.",
-     "Cash and cash equivalents | $ 726,196 | $ 1,027,838"
+     "Tinder Direct Revenue declined 2%, driven by a 4% decrease in Payers, partially offset by an increase in RPP of 2%.",
+     "DAU inflected to Y/Y growth in September, and was down just 1% Y/Y in Q3."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred; the statements show the figures but the packet gives no description",
-    "claim": "What investments were bought for 112,000 (table in thousands) in the first nine months of 2026, and do they explain the rise in other non-current assets?",
+    "basis": "Stated in the cited items. Persistence beyond Q3 is not addressed.",
+    "claim": "Is Azar's lower monetization after the app redesign permanent, and will it keep depressing Everyone Everywhere revenue beyond Q3?",
     "facts": [
-     "F3",
-     "F1"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Purchases of investments | (112,000) | 0",
-     "Other non-current assets | 269,226 | 154,022"
+     "The app updates necessitated by the new guidelines resulted in lower monetization from the new app."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5 that repurchases are discretionary; the future pace is unknown",
-    "claim": "How much of the $623,005,160 remaining repurchase authorization will be used, given that shareholders' equity is negative at (139,469) (table in thousands)?",
+    "basis": "The expiry and the 10-K's fee-increase warning are stated in the cited items. The size of any 2027 effect is not given.",
+    "claim": "What happens to in-app purchase fee savings when the Google partnership expires in Q1 2027?",
     "facts": [
-     "P5",
-     "F1",
-     "F3"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "The Company is not obligated to purchase any shares under the repurchase programs, and repurchases may be commenced, suspended or discontinued from time to time without prior notice.",
-     "Total shareholders\u2019 equity | (139,469) | (253,396)"
+     "our partnership with Google entered into in 2024 is set to expire in the first quarter of 2027"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2; the packet gives no outcome or estimate of loss",
-    "claim": "What will be the outcome of the lawsuits in Colorado and Texas brought by plaintiffs alleging harm by other users?",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For example, we are currently defending lawsuits in Colorado and Texas brought by multiple plaintiffs alleging harm by other users they met through our services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "How much will Tinder's user experience tests and product changes affect revenue after 2026, now that management will no longer quantify them?",
+    "basis": "The guidance and the timing shift are stated in the cited item. The return on marketing is not shown.",
+    "claim": "Will the higher Tinder and Hinge marketing spend, part of which shifted from Q3 into Q4, produce revenue gains large enough to offset the guided Q4 Adjusted EBITDA decline?",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "At Tinder, we expect user experience tests and product changes to have an approximately $25 million negative impact to Direct Revenue in 2026, less than we initially anticipated.",
-     "We do not plan to explicitly quantify user experience tests and product changes moving forward."
+     "driven primarily by the timing of marketing spend shifting somewhat from Q3 to Q4",
+     "representing an 11% Y/ Y decrease"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the cited items. Refinancing intent is not disclosed in the evidence shown.",
+    "claim": "How will the 5.00% Senior Notes due in December 2027 be refinanced or repaid, given lower cash after the 2026 exchangeable repayment and continued buybacks and dividends?",
+    "facts": [
+     "F1",
+     "F3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "5.00% Senior Notes due December 15, 2027, with interest payable each June 15 and December 15"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cited items. The full rollout effect has not been reported.",
+    "claim": "Will Hinge's planned lower-priced subscription tier and discount optimizations lift Payers enough to offset the RPP decline?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On monetization, Hinge is testing a lower-priced subscription tier designed to give users more choice and control through features like additional filters and custom location boundaries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The assumption is stated in the cited item. Whether it occurs is unknown.",
+    "claim": "Will the Apple payment timing assumption behind full-year free cash flow guidance hold?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "assuming we receive a 13th Apple payment on or before the final reporting day of the year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Declines are stated in the cited items. Any recovery is management's expectation only.",
+    "claim": "Can the narrowed set of Everyone Everywhere priority brands stabilize Payers and revenue?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "E&E is still early in its turnaround, and there is work to be done"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "MTCH",
- "upside": 0.31263502173095925,
+ "upside": 0.34696110409351943,
  "valuation": null,
- "value_base": 44.52496330805663,
- "value_bear": 30.93663016679456,
- "value_bull": 64.48096887452103,
+ "value_base": 52.706592340602114,
+ "value_bear": 37.66157185290917,
+ "value_bull": 71.28939603877569,
  "value_per_filed_share": {
-  "base": 44.52496330805663,
-  "bear": 30.93663016679456,
-  "bull": 64.48096887452103
+  "base": 52.706592340602114,
+  "bear": 37.66157185290917,
+  "bull": 71.28939603877569
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +6.2 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +12.1 points a year against the required return over 3 years"
 }
