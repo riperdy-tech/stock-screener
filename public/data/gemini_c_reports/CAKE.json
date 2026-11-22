@@ -1,797 +1,298 @@
 {
- "alpha_pts": -15.821538752250447,
+ "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 61,
- "claims_supported": 60,
- "date": "2026-11-17T19:02:31Z",
- "decided": {
-  "flags": [
-   "run 1000: base_year_not_representative",
-   "run 1000: tax_rate_representative_no: The 8.9% base-year rate reflects employment credits and equity-compensation windfalls, and the nine-month 2026 rate was already about 12% (24,417 on 203,659 pretax), rising toward a higher normal rate.",
-   "run 1000: confidence_low",
-   "run 1000: quotes_verified: 12 of 12",
-   "run 3000: base_year_not_representative",
-   "run 3000: tax_rate_representative_no: The 8.9% FY2025 effective rate is low because of employment credits and equity-compensation windfalls; the 2026 nine-month rate is about 12%, so it should drift up.",
-   "run 3000: confidence_low",
-   "run 3000: quotes_verified: 10 of 10"
-  ],
-  "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0902 and margin 0.0686, margin 0.0407 (persist), growth 0.0375, terminal RONIC 0.0614 (equity return r 0.1058), F 10",
-  "run_gap": 0.015091849638350164,
-  "runs": {
-   "1000": {
-    "adjustments": {
-     "base_year_one_offs": [
-      {
-       "amount": 15900000.0,
-       "printed": 15.9,
-       "quotes": [
-        {
-         "id": "P3",
-         "quote": "In fiscal 2025, we recorded a $15.9 million loss on early debt extinguishment."
-        }
-       ],
-       "quotes_given": 1,
-       "scale": "millions",
-       "sign": "charge",
-       "what": "Loss on early extinguishment of the 2026 convertible notes, in the base year between operating income and pretax income"
-      }
-     ],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 215729000.0,
-     "excess_cash_before": 215729000.0,
-     "k0_after": 17265838.39236948,
-     "k0_before": 33165838.39236948,
-     "k0_interest": 8682000.0,
-     "one_offs_charge": 15900000.0,
-     "one_offs_gain": 0,
-     "stamps": [
-      "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
-     ],
-     "x0_after": 154918408.17665228,
-     "x0_before": 140430613.5850442
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "vintages",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 2715063200.4480495,
-     "seam_ratio": 1.0494382982092307,
-     "tv_share": 0.41342137810720764,
-     "wedge_rate_5": 0.004732454636579246
-    },
-    "flags": [
-     "base_year_not_representative",
-     "tax_rate_representative_no: The 8.9% base-year rate reflects employment credits and equity-compensation windfalls, and the nine-month 2026 rate was already about 12% (24,417 on 203,659 pretax), rising toward a higher normal rate.",
-     "confidence_low",
-     "quotes_verified: 12 of 12"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.045,
-     "fade_years": 8,
-     "long_run_op_margin": 0.06,
-     "op_margin": [
-      0.064,
-      0.062,
-      0.062,
-      0.061,
-      0.061
-     ],
-     "return_on_new_investment_long_run": 0.15,
-     "rev_growth": [
-      0.093,
-      0.06,
-      0.055,
-      0.05,
-      0.045
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0902 and margin 0.0686, margin 0.0407 (persist), growth 0.0375, terminal RONIC 0.0614 (equity return r 0.1058), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 1,
-     "kept": 60
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.05,
-      0.07
-     ],
-     "rev_growth_y3": [
-      0.03,
-      0.08
-     ],
-     "terminal_growth": [
-      0.025,
-      0.037
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "We anticipate approximately $210 million in capital expenditures to support this level of unit development"
-       },
-       {
-        "id": "F3",
-        "quote": "Additions to property and equipment | (144,238) | (121,048)"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month capex was 4.7% of revenue and 2026 guidance is about $210 million (roughly 5% of revenue) on heavy unit development. I use 4.5% over the five years, above the 3.75% pooled history."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "We continue to target approximately 300 Company-owned and operated The Cheesecake Factory restaurants domestically over time."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Eight years allows unit growth of 6-7% to taper gradually toward maturity as the Cheesecake Factory unit target is approached."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Our objective is to drive margin expansion over time by leveraging incremental sales to increase restaurant-level margins"
-       },
-       {
-        "id": "REC",
-        "quote": "2024-12-31 | $3,581.7 million | 0.0413 | 0.0498"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Management targets margin expansion through sales leverage, but the 5-year history is much lower (median about 3%) and casual dining is cyclical. I take a long-run margin of about 6.0%, retaining roughly half of the gap between recent levels and the history."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Income from operations | 74,873 | 37,269 | 208,526 | 154,050"
-       },
-       {
-        "id": "F2",
-        "quote": "Acquisition-related contingent consideration, compensation and amortization (income)/expenses | (12,889) | 910 | (10,452) | 2,920"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month operating income of 208,526 is about 6.9% of revenue, but it includes 10,452 of acquisition-related income and Q4 normally carries heavier preopening costs. I set year 1 near 6.4% and let it ease as the comparable-sales surge normalizes and preopening costs persist."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0614."
-       },
-       {
-        "id": "P1",
-        "quote": "Total construction costs to build our restaurant premises average approximately $1,100 to $1,200 per interior square foot."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Restaurants are leased, so tangible capital is mainly build-out and the filed return on tangible capital is 26.6%. New units open with honeymoon sales and take time to reach target margins, and newer concepts may not reach targeted returns, so I use a lower 15%, well above the 6.1% break-even."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Total revenues were $1,033.4 million in the third quarter of fiscal 2026 compared to $907.2 million in the third quarter of fiscal 2025."
-       },
-       {
-        "id": "P3",
-        "quote": "We expect to open as many as 26 new restaurants in fiscal 2026 across our portfolio of concepts"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 (FY2026) is largely known: nine-month revenue is up 9.0% and Q3 was up about 14%, so year 1 is about 9%. Growth then slows toward unit growth of about 6-7% plus low-single-digit comparable sales as the Q3 surge is lapped. Openings are guided at up to 26 in 2026."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Long-run growth is held below the 3.75% nominal anchor because the company targets about 300 domestic Cheesecake Factory restaurants, so unit growth there is finite, while the newer concepts still have runway."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.045,
-      "input_hit": "long_run_op_margin",
-      "risk": "The Q3 comparable-sales surge fades toward the near-flat 2025 trend, so operating leverage shrinks and margins revert."
-     },
-     {
-      "bear_value": 0.03,
-      "input_hit": "rev_growth",
-      "risk": "Comparable sales and traffic revert, leaving growth driven only by new units, with the newer concepts underperforming."
-     },
-     {
-      "bear_value": 0.1,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Wage and commodity inflation, or a weaker consumer, lowers returns on new restaurants."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.05,
-      "rev_growth": [
-       0.068,
-       0.034999999999999996,
-       0.03,
-       0.025,
-       0.019999999999999997
-      ],
-      "terminal_growth": 0.025
-     },
-     "bull": {
-      "long_run_op_margin": 0.07,
-      "rev_growth": [
-       0.118,
-       0.08499999999999999,
-       0.08,
-       0.07500000000000001,
-       0.07
-      ],
-      "terminal_growth": 0.037
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Total debt of $630.1 million is mostly the 2030 convertible notes, which are convertible in the quarter ending December 29, 2026 and settle at least partly in cash, so the post-conversion debt level is uncertain."
-     },
-     "margin_position": "The 2025 operating margin of 4.99% is below the pre-2018 range of 7-9% but well above the 2021-2023 trough. In 2026 it has risen to about 6.9% over nine months. That rise comes from a very strong Cheesecake Factory comparable-sales surge, better labor and food ratios, and some acquisition-related income. Casual dining is discretionary, so the current margin is above the recent 5-year median of about 3% and likely to partly revert.",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The 8.9% base-year rate reflects employment credits and equity-compensation windfalls, and the nine-month 2026 rate was already about 12% (24,417 on 203,659 pretax), rising toward a higher normal rate."
-     },
-     "why": "FY2025 included a $15.9 million debt extinguishment loss, $23.0 million of impairments and a $17.3 million gift-card breakage gain, and comparable sales were only 0.1%. Fiscal 2026 is running far ahead of the base year, with nine-month revenue up 9.0% and operating margin about 6.9%. The base year therefore understates the current run-rate, but the Q3 surge is unlikely to be fully permanent."
-    },
-    "value_at_old_defaults": 36.514667199317216,
-    "values": {
-     "base": 65.55254637542929,
-     "bear": 49.97192152558465,
-     "bull": 88.05997225362285
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [
-      {
-       "amount": 15900000.0,
-       "printed": 15.9,
-       "quotes": [
-        {
-         "id": "P3",
-         "quote": "In fiscal 2025, we recorded a $15.9 million loss on early debt extinguishment."
-        }
-       ],
-       "quotes_given": 1,
-       "scale": "millions",
-       "sign": "charge",
-       "what": "Loss on early extinguishment of the 2026 Notes in fiscal 2025, between operating income and pretax income"
-      }
-     ],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 215729000.0,
-     "excess_cash_before": 215729000.0,
-     "k0_after": 17265838.39236948,
-     "k0_before": 33165838.39236948,
-     "k0_interest": 8682000.0,
-     "one_offs_charge": 15900000.0,
-     "one_offs_gain": 0,
-     "stamps": [
-      "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
-     ],
-     "x0_after": 154918408.17665228,
-     "x0_before": 140430613.5850442
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "vintages",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 2759352108.7260013,
-     "seam_ratio": 1.0510364996832318,
-     "tv_share": 0.41199054481012065,
-     "wedge_rate_5": 0.004770075243019438
-    },
-    "flags": [
-     "base_year_not_representative",
-     "tax_rate_representative_no: The 8.9% FY2025 effective rate is low because of employment credits and equity-compensation windfalls; the 2026 nine-month rate is about 12%, so it should drift up.",
-     "confidence_low",
-     "quotes_verified: 10 of 10"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.045,
-     "fade_years": 8,
-     "long_run_op_margin": 0.06,
-     "op_margin": [
-      0.065,
-      0.065,
-      0.063,
-      0.062,
-      0.061
-     ],
-     "return_on_new_investment_long_run": 0.16,
-     "rev_growth": [
-      0.093,
-      0.065,
-      0.055,
-      0.05,
-      0.045
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "year 1 growth 0.0902 and margin 0.0686, margin 0.0407 (persist), growth 0.0375, terminal RONIC 0.0614 (equity return r 0.1058), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 1,
-     "kept": 60
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.052,
-      0.07
-     ],
-     "rev_growth_y3": [
-      0.035,
-      0.075
-     ],
-     "terminal_growth": [
-      0.022,
-      0.04
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "We anticipate approximately $210 million in capital expenditures to support this level of unit development"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The 2026 plan of about $210M on roughly 4.1B of revenue is about 5%, above the 3.75% pooled history; nine-month capex was 4.7% of revenue. I use 4.5% as development stays heavy."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "We continue to target approximately 300 Company-owned and operated The Cheesecake Factory restaurants domestically over time."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The flagship concept still has room toward its roughly 300-unit domestic target, and the newer concepts (Flower Child, North Italia) keep unit growth above terminal for a while before maturing, so I use a moderately long fade."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2015-12-29 | $2,100.6 million | 0.0627 | 0.0787"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The company reached 7-9% in 2010-2016 but only 3-5% in 2021-2025. With 2026 above the 5-year median, I assume roughly half the gap persists and settle at 6%."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Acquisition-related contingent consideration, compensation and amortization (income)/expenses | (12,889) | 910"
-       },
-       {
-        "id": "F2",
-        "quote": "Income from operations | 74,873 | 37,269 | 208,526 | 154,050"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The nine-month 2026 operating margin of about 6.9% is flattered by a 12.9M acquisition-related credit in Q3, and Q4 normally carries heavy preopening costs and a lower margin. I set year 1 near 6.5% and let it drift slightly lower as the comp surge normalises."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "Total construction costs to build our restaurant premises average approximately $1,100 to $1,200 per interior square foot."
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0614."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "New units are costly to build at roughly $1,100-1,200 per square foot, but all are leased and sales per square foot are high. That gives after-tax returns on tangible capital well above the 6.1% break-even but below the 26.6% base-year figure."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026."
-       },
-       {
-        "id": "P3",
-        "quote": "We expect to open as many as 26 new restaurants in fiscal 2026"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 (FY2026) is already about 9% growth from nine months of actuals plus a strong Q4, driven by comparable sales and about 26 openings. After that, unit growth of roughly 5-7% and low-single-digit comparable growth should fade as the 15% comp surge is lapped."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.1058; long-run nominal growth anchor g_anchor 0.0375."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Mature US casual dining with unit growth tapering toward the roughly 300 domestic Cheesecake Factory target supports growth a bit below the nominal anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.03,
-      "input_hit": "rev_growth",
-      "risk": "The 15.2% comp surge reverses toward the near-flat FY2025 trend, cutting growth and operating leverage"
-     },
-     {
-      "bear_value": 0.05,
-      "input_hit": "long_run_op_margin",
-      "risk": "Margin falls back toward the 2021-2025 range of 3-5% on wage inflation, weak traffic, or new-unit dilution"
-     },
-     {
-      "bear_value": 0.1,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Cash settlement of the 2030 Notes strains liquidity or adds dilution, and new units fail to reach target returns"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.052,
-      "rev_growth": [
-       0.07300000000000001,
-       0.045000000000000005,
-       0.035,
-       0.030000000000000006,
-       0.025
-      ],
-      "terminal_growth": 0.022
-     },
-     "bull": {
-      "long_run_op_margin": 0.07,
-      "rev_growth": [
-       0.11299999999999999,
-       0.08499999999999999,
-       0.075,
-       0.07,
-       0.065
-      ],
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "yes",
-     "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Total debt of 630.1M is mostly the 2030 convertible notes, which are convertible in Q4 2026 and settled at least partly in cash, so the level and the dilution are uncertain."
-     },
-     "margin_position": "The FY2025 operating margin of 4.99% is below the 2010-2016 range of about 7.3% to 8.8%, because wage and commodity inflation hit in 2021-2023 and traffic was weak. 2026 is running well above that: 9-month operating income was 208.5M on 3,041.9M revenue, about 6.9%, after a sharp comparable-sales rebound. Part of the 2026 figure is a one-time 12.9M acquisition-related credit in Q3, so the underlying run-rate is nearer 6%.",
-     "tax_rate_representative": {
-      "answer": "no",
-      "why": "The 8.9% FY2025 effective rate is low because of employment credits and equity-compensation windfalls; the 2026 nine-month rate is about 12%, so it should drift up."
-     },
-     "why": "FY2025 comparable sales rose only 0.1% and operating income included 23.0M of impairments and 14.4M of acquisition-related expense, so the base year is depressed. 2026 is much stronger: Q3 revenue was up 13.9% and The Cheesecake Factory comparable sales were up 15.2%. That surge is probably not sustainable, so I fade growth and margin from the 2026 level rather than extrapolate it."
-    },
-    "value_at_old_defaults": 36.514667199317216,
-    "values": {
-     "base": 66.54937756192898,
-     "bear": 52.58094120606071,
-     "bull": 88.60041258511927
-    }
-   }
-  },
-  "situation_unclear": false,
-  "value_at_old_defaults": 36.514667199317216,
-  "value_at_old_defaults_quoted": 36.514667199317216,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+ "based_on": {
+  "accepted": "2026-11-02T22:01:05.000Z",
+  "accepted_utc": "2026-11-03T03:01:05Z",
+  "accession": "0001104659-26-121460",
+  "decision_time": "2026-11-22T00:03:19Z",
+  "form": "10-Q",
+  "period": "2026-09-29"
  },
- "equity_value": 3206840254.5413404,
+ "claims": 89,
+ "claims_supported": 88,
+ "date": "2026-11-22T00:03:19Z",
  "family": "operating",
- "far_from_price": false,
- "filed_shares": 48551000.0,
  "flags": [
-  "The conversion condition for the 2030 convertible notes was met: the stock price exceeded 130% of the conversion price for the required trading days. Holders may therefore convert the notes at their option during the quarter ending December 29, 2026.",
-  "The Board declared a quarterly cash dividend of $0.30 per share, payable November 24, 2026 to holders of record on November 10, 2026.",
-  "The President of the bakery subsidiary notified the company of his decision to retire. He will stay in the role into the first quarter of 2027 to assist with the leadership transition."
+  "The Company's 2030 Notes became convertible by holders at their option during the fiscal quarter ending December 29, 2026 after the common stock sale price exceeded 130% of the conversion price for at least 20 trading days during the 30 consecutive trading days ended September 29, 2026, with 563,713 (table in thousands) classified as current portion of long-term debt.",
+  "The Company's Board of Directors declared a quarterly dividend of $0.30 per share to be paid on November 24, 2026 to shareholders of record at the close of business on November 10, 2026.",
+  "In the third quarter of fiscal 2026, the Company recorded pre-tax net income of $12.9 million, or (12,889) (table in thousands), related to Fox Restaurant Concepts acquisition-related contingent consideration, compensation and amortization items."
  ],
  "in_code_book": false,
- "ke": 0.10578180622416283,
- "market_cap_at_publish": 5381891365,
- "model": "claude-sonnet-5-5",
- "no_value_reason": null,
+ "ke": null,
+ "model": "gemini-4-hydrogen-high",
+ "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
  "pending_offer": null,
- "price_at_publish": 107.95,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "seed_base": {
-  "1000": 65.55254637542929,
-  "3000": 66.54937756192898
- },
- "seeds_agree": true,
- "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the 10-Q MD&A. The licensing revenue stream is inferred from the licensing agreements, and its size is not given.",
-    "claim": "The company makes money by owning and operating restaurants in the US and Canada, and currently runs 384 across four groups: The Cheesecake Factory (218), North Italia (53), Flower Child (47) and other Fox Restaurant Concepts brands (60). A further 35 The Cheesecake Factory restaurants operate internationally under licensing agreements.",
+    "basis": "Stated directly in the General section of Item 2 MD&A in [P4].",
+    "claim": "The Cheesecake Factory Incorporated owns and operates 384 experiential dining restaurants across the United States and Canada\u2014including 218 The Cheesecake Factory, 53 North Italia, 47 Flower Child, and 60 Other FRC locations\u2014while 35 international The Cheesecake Factory restaurants operate under licensing agreements.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "Our revenue growth is primarily driven by new restaurant openings and increases in comparable restaurant sales."
+     "We currently own and operate 384 restaurants throughout the United States and Canada under brands including The Cheesecake Factory\u00ae (218 locations), North Italia\u00ae (53 locations), Flower Child\u00ae (47 locations) and additional brands within our FRC portfolio (60 locations).",
+     "Internationally, 35 The Cheesecake Factory\u00ae restaurants operate under licensing agreements."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q and 10-K business descriptions.",
-    "claim": "The company also runs a bakery division that makes cheesecakes and other baked goods. They are sold in its own restaurants, to international licensees and to third-party bakery customers.",
-    "facts": [
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "Our bakery division operates two facilities that produce quality cheesecakes and other baked products for our restaurants, international licensees and third-party bakery customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Item 1. The percentages apply to The Cheesecake Factory concept, not the whole company.",
-    "claim": "Its customers are restaurant diners at upscale casual prices. The 10-K gives an average check of $31.79 for fiscal 2025. Alcoholic beverages were 11% of The Cheesecake Factory restaurant sales, desserts about 17%, and off-premise orders about 21%.",
+    "basis": "Stated directly in Item 1 Business in [P1].",
+    "claim": "The Cheesecake Factory restaurants serve a fresh-from-scratch menu of approximately 225 items alongside approximately 45 dessert varieties and a full-service bar, with desserts representing approximately 17%, alcoholic beverages 11%, and off-premise sales approximately 21% of the concept's restaurant sales in fiscal 2025.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The average check for each customer, including beverages and desserts, was approximately $31.79 during fiscal 2025.",
-     "During fiscal 2025, alcoholic beverage sales represented 11% of The Cheesecake Factory restaurant sales."
+     "The Cheesecake Factory menu features approximately 225 items, exclusive of beverage and dessert items and including items presented on supplemental menus, such as our SkinnyLicious\u00ae menu that offers innovative items at 590 calories or less.",
+     "We offer approximately 45 varieties of proprietary cheesecake and other desserts in our restaurants.",
+     "All of our restaurants offer a full-service bar where our entire menu is served.",
+     "During fiscal 2025, alcoholic beverage sales represented 11% of The Cheesecake Factory restaurant sales.",
+     "Our brand identity and reputation for offering premium desserts results in a significant level of dessert sales, representing approximately 17% of The Cheesecake Factory sales during fiscal 2025.",
+     "We offer all items on our menu, except alcoholic beverages where disallowed by regulation, for off-premise consumption, sales of which comprised approximately 21% of The Cheesecake Factory restaurant sales during fiscal 2025.",
+     "In contrast to many restaurant chains, substantially all of our menu items, except those desserts produced at our bakery facilities, are prepared from scratch daily at our restaurants with high-quality, fresh ingredients using innovative and proprietary recipes."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the footnotes to the Q3 release's segment table. The Cheesecake Factory and North Italia are presumed to be separate segments, inferred from the 10-K's sales-by-concept discussion.",
-    "claim": "Reporting is split by concept. The Other FRC segment covers all Fox Restaurant Concepts brands except Flower Child. The Other segment holds Flower Child, Grand Lux Cafe, the third-party bakery, international and consumer packaged goods businesses, unallocated corporate expenses and gift card costs.",
+    "basis": "Stated directly in [P1], [P3], and the Condensed Consolidated Balance Sheets in [F1].",
+    "claim": "The company distributes off-premise orders via online ordering and a third-party delivery partner, while restaurant customers pay in cash or cash equivalents at the time of sale and purchase gift cards carrying 176,386 (table in USD thousands) in liabilities.",
+    "facts": [
+     "P1",
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "We work with a third party to provide delivery service from all of our locations and offer online ordering for to-go sales at all of our domestic locations.",
+     "Typically, our requirement for working capital has not been significant since our restaurant customers pay for their food and beverage purchases in cash or cash equivalents at the time of sale, and we are able to sell many of our restaurant inventory items before payment is due to the suppliers of such items.",
+     "Gift card liabilities | 176,386 | 212,859"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P2], [P3], and [P4].",
+    "claim": "An integrated bakery division produces cheesecakes and other baked products for company restaurants, international licensees, and third-party customers across supermarkets, mass market retailers, club stores, and other food service and retail channels, alongside international and consumer packaged goods royalty streams.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our bakery division operates two facilities that produce quality cheesecakes and other baked products for our restaurants, international licensees and third-party bakery customers.",
+     "In addition to selling products throughout the world through various distribution channels, including, without limitation, supermarkets, mass market retailers, club stores and various other food service and retail channels, our bakery facilities are the only sources of most of our baked desserts to our restaurants.",
+     "Our objective is to drive margin expansion over time by leveraging incremental sales to increase restaurant-level margins at The Cheesecake Factory concept, leveraging our bakery operations, international and consumer packaged goods royalty revenue streams and G&A expense, and optimizing our restaurant portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Selected Segment Information table and footnotes in [P6].",
+    "claim": "The company reports financial results across the following segments: The Cheesecake Factory restaurants, North Italia, Other FRC (all FRC brands except Flower Child), and Other (Flower Child, Grand Lux Cafe, third-party bakery, international and consumer packaged goods businesses, unallocated corporate expenses, and gift card costs).",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "The Other FRC segment includes all FRC brands except Flower Child."
+     "The Other FRC segment includes all FRC brands except Flower Child.",
+     "The Other segment includes the Flower Child and Grand Lux Cafe concepts, as well as the Company's third-party bakery, international and consumer packaged goods businesses, unallocated corporate expenses and gift card costs."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A. The remainder of fiscal 2025 revenue is not itemised in the extract, so it is not accounted for here.",
-    "claim": "Fiscal 2025 revenue was $3,751.8 million. By concept, sales were $2,688.8 million at The Cheesecake Factory, $345.9 million at North Italia, $185.3 million at Flower Child and $355.1 million at Other FRC. The namesake concept is therefore the largest revenue source, and the newer concepts are growing faster.",
+    "basis": "Stated directly in the Selected Segment Information table in [P6].",
+    "claim": "In the 39 weeks ended September 29, 2026 (table in thousands), The Cheesecake Factory restaurants generated $2,174,323 of the $3,041,906 total revenues and $349,126 of income from operations, compared with $280,912 revenue and $16,791 operating income at North Italia, $298,867 revenue and $6,604 operating income at Other FRC, and $287,804 revenue and $(163,995) operating loss in Other.",
     "facts": [
-     "P3"
+     "P6"
     ],
     "quotes": [
-     "The Cheesecake Factory sales increased 1.0% to $2,688.8 million for fiscal 2025 compared to $2,661.6 million for fiscal 2024."
+     "Revenues | $2,174,323 | $280,912 | $298,867 | $287,804 | $3,041,906",
+     "Income/(loss) from operations | $349,126 | $16,791 | $6,604 | $(163,995) | $208,526"
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the release and the income statement. The causes are management's own attribution, not independently shown.",
-    "claim": "Revenue moves with comparable restaurant sales and with new units. Q3 fiscal 2026 revenue was $1,033.4 million against $907.2 million a year earlier, and comparable sales at The Cheesecake Factory rose 15.2%. Management credits menu innovation, the rewards program and social media engagement.",
+    "basis": "Stated directly in [P3], [P4], and [P6].",
+    "claim": "Revenue growth is primarily driven by new restaurant openings and comparable restaurant sales, with the company expecting to open as many as 26 new restaurants in fiscal 2026 and targeting 7% annual unit growth longer-term.",
     "facts": [
-     "P6",
-     "F2"
+     "P3",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026."
+     "Our revenue growth is primarily driven by new restaurant openings and increases in comparable restaurant sales.",
+     "The Company continues to expect to open as many as 26 new restaurants in fiscal 2026, including as many as five The Cheesecake Factory restaurants, eight North Italia locations, seven Flower Child locations and as many as six FRC restaurants.",
+     "Longer-term, we believe our domestic revenue growth (comprised of our targeted annual unit growth of 7% in aggregate across concepts and comparable sales growth) combined with margin expansion, planned debt repayments and an anticipated capital return program will support our long-term financial objective of 10% to 15% total return to shareholders, on average."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A. The Q3 2026 traffic versus check split is not in the evidence.",
-    "claim": "Comparable sales at The Cheesecake Factory come from traffic and average check. Average check depends on menu pricing and mix. In fiscal 2025 comparable sales rose 0.1%, with check up 2.4% and traffic down 2.3%.",
+    "basis": "Stated directly in Item 1A Risk Factors in [P2] and Item 2 MD&A in [P4].",
+    "claim": "Comparable restaurant sales move with customer traffic and average check, where average check variations are driven by twice-yearly menu price increases and menu mix shifts.",
     "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Average check variations are driven by menu price increases and/or changes in menu mix."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the release, the 10-Q and the 10-K.",
-    "claim": "Unit growth is a core revenue driver. The company opened six restaurants in Q3 fiscal 2026 and continues to expect as many as 26 openings in fiscal 2026. It names new Company-owned restaurants as its top long-term capital allocation priority.",
-    "facts": [
-     "P6",
+     "P2",
      "P4"
     ],
     "quotes": [
-     "The Company continues to expect to open as many as 26 new restaurants in fiscal 2026, including as many as five The Cheesecake Factory restaurants, eight North Italia locations, seven Flower Child locations and as many as six FRC restaurants.",
-     "Our top long-term capital allocation priority is to develop new Company-owned restaurants, with a focus on opening our concepts in premier locations within new and existing markets."
+     "We strive to increase comparable restaurant sales by improving customer traffic trends and growing average check.",
+     "Average check variations are driven by menu price increases and/or changes in menu mix.",
+     "We generally update The Cheesecake Factory menus twice a year, and our philosophy is to use price increases to help offset key operating cost increases in a manner that supports both our margin and customer traffic objectives.",
+     "We utilize menu price increases in an effort to help offset inflation of key operating costs."
     ],
     "support": "supported"
    },
    {
-    "basis": "Percentages are stated in the Q3 release table. The explanation of the improvement is management's attribution.",
-    "claim": "The main cost lines are food and beverage, labor and other restaurant operating costs, which include occupancy. In Q3 fiscal 2026 food and beverage costs were 21.2% of revenues against 21.8% a year earlier, and labor was 34.8% against 35.6%. Management cites better labor productivity and food efficiency.",
+    "basis": "Stated directly in the Q3 fiscal 2026 earnings release and operating table in [P6].",
+    "claim": "Menu innovation, the Cheesecake Rewards program, and social media engagement support sales and traffic, contributing to a 15.2% year-over-year comparable sales increase at The Cheesecake Factory restaurants in the third quarter of fiscal 2026 even as North Italia comparable sales declined (3)%.",
     "facts": [
-     "P6",
+     "P6"
+    ],
+    "quotes": [
+     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
+     "Continued menu innovation, our rewards program and significant engagement across social media contributed to the impressive sales growth, while year-over-year improvements in labor productivity and food efficiency supported strong profitability.",
+     "Comparable restaurant sales vs. prior year | (3)% | (3)% | (3)% | (1)%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Unit Economics section of Item 1 Business in [P1].",
+    "claim": "The company leases all restaurant locations, incurs average construction costs of approximately $1,100 to $1,200 per interior square foot, and generated approximately $12.4 million in average sales per full-year The Cheesecake Factory restaurant ($1,151 per productive square foot) in fiscal 2025, with new openings typically seeing elevated initial volumes that normalize over the following months.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We currently lease all of our restaurant locations and utilize capital for leasehold improvements and furnishings, fixtures and equipment to build out our restaurant premises.",
+     "Total construction costs to build our restaurant premises average approximately $1,100 to $1,200 per interior square foot.",
+     "Average sales per location for The Cheesecake Factory restaurants open for the full year were approximately $12.4 million for fiscal 2025.",
+     "Average sales per productive square foot (defined as all interior square footage plus seasonally adjusted exterior patio square footage) for restaurants open for the full year were approximately $1,151 for fiscal 2025.",
+     "Our new restaurants have typically opened with initial sales volumes well in excess of their future run-rate levels.",
+     "During the three to six months following the opening of new restaurants, customer traffic has generally settled into its normal pattern, resulting in sales volumes that gradually adjust downward to their post-opening run-rate level."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F2], [P2], and [P6].",
+    "claim": "Labor is the largest operating cost at 1,059,002 (table in USD thousands), or 34.8% of revenues, in the 39 weeks ended September 29, 2026, driven by restaurant and bakery staffing, minimum and tip-credit wage mandates, self-insured healthcare claims, and the labor intensity of preparing a complex menu fresh from scratch.",
+    "facts": [
      "F2",
-     "P3"
+     "P2",
+     "P6"
     ],
     "quotes": [
-     "Food and beverage costs consist of raw materials and ingredients used in the food and beverage products sold in our restaurants and to our third-party bakery customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Labor is exposed to wage inflation, minimum wage rules and self-insured healthcare costs. The company says its from-scratch menu needs more labor per restaurant than competitors that use processed foods.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
+     "Labor expenses | 359,758 | 34.8% | 322,774 | 35.6% | 1,059,002 | 34.8% | 987,368 | 35.4%",
+     "Increased restaurant labor costs could impact us more than others in our industry because we have a complex menu made fresh from scratch at our restaurants, requiring more labor at each restaurant location than some of our competitors who use processed foods or commissaries to prepare their foods.",
+     "Certain state and localities have significantly increased their minimum wage and/or tip credit wage (or have eliminated the tip credit wage), and require significantly more mandated benefits, and other states and localities may also elect to do so.",
      "Our labor expenses include significant costs related to our self-insured health, pharmacy and dental benefit plans."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K and the balance sheet. The operating leverage point is inferred.",
-    "claim": "The company leases all of its restaurant locations and spends capital on leasehold improvements and equipment. Construction averages roughly $1,100 to $1,200 per interior square foot. Operating lease assets were 1,548,650 on the balance sheet (table in thousands), so occupancy is a large fixed cost base.",
-    "facts": [
-     "P1",
-     "F1"
-    ],
-    "quotes": [
-     "We currently lease all of our restaurant locations and utilize capital for leasehold improvements and furnishings, fixtures and equipment to build out our restaurant premises."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the income statement and the release. The revaluation mechanism is inferred from the 10-K's description of this line.",
-    "claim": "Q3 fiscal 2026 income from operations was 74,873 against 37,269 a year earlier (table in thousands). The quarter included acquisition-related income of (12,889). Net income was $61.3 million while adjusted net income was $52.3 million, so part of the reported profit came from a Fox acquisition-related item.",
+    "basis": "Stated directly in [F2], [P3], and [P6].",
+    "claim": "Other operating costs and expenses totaled 822,832 (table in USD thousands), or 27.1% of revenues, in the 39 weeks ended September 29, 2026, covering occupancy costs (rent, common area expenses, insurance, licenses, taxes, and utilities), supplies, maintenance, credit card fees, marketing and delivery commissions, incentive pay, and bakery overhead.",
     "facts": [
      "F2",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "The Company recorded a pre-tax net income of $12.9 million related to Fox Restaurant Concepts (\u201cFRC\u201d) acquisition-related items."
+     "Other operating costs and expenses | 285,791 | 27.7% | 255,724 | 28.2% | 822,832 | 27.1% | 757,871 | 27.2%",
+     "Other operating costs and expenses consist of all other restaurant-level operating costs, the major components of which are occupancy expenses (rent, common area expenses, insurance, licenses, taxes and utilities), dining room and to-go supplies, repairs and maintenance, janitorial expenses, credit card processing fees, marketing including delivery commissions, incentive compensation, and bakery production overhead."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the cited items. The seasonal explanation for the decline is not given.",
-    "claim": "Gift cards are a working-capital and revenue feature. Gift card liabilities were 176,386 at September 29, 2026 against 212,859 at December 30, 2025 (table in thousands). In fiscal 2025 the company recognized $17.3 million of additional gift card breakage as revenue.",
+    "basis": "Stated directly in [F2], [P3], and [P6].",
+    "claim": "Food and beverage costs were 655,016 (table in USD thousands), or 21.5% of revenues, in the 39 weeks ended September 29, 2026, reflecting raw materials across diversified commodity categories\u2014general grocery, dairy, produce, seafood, poultry, meat, and bread\u2014where cost movements in one category can sometimes offset another.",
     "facts": [
-     "F1",
-     "P3"
+     "F2",
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "As a result, in fiscal 2025, we recognized $17.3 million of additional gift card breakage."
+     "Food and beverage costs | 218,919 | 21.2% | 197,654 | 21.8% | 655,016 | 21.5% | 605,758 | 21.7%",
+     "The Cheesecake Factory restaurant menus are among the most diversified in the foodservice industry and, accordingly, are not overly dependent on a few select commodities.",
+     "Changes in costs for one commodity sometimes can be offset by cost changes in other commodity categories.",
+     "The principal commodity categories for our restaurants include general grocery items, dairy, produce, seafood, poultry, meat and bread."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the cash flow statement and balance sheet. The 10-K MD&A supports the working-capital point.",
-    "claim": "Operations fund expansion. Nine-month operating cash flow was 313,738 against additions to property and equipment shown as (144,238) (table in thousands). Dividends paid were (44,117) and treasury stock purchases were (31,801), also from this cash flow.",
+    "basis": "Stated directly in [F2], [P1], [P3], and [P6].",
+    "claim": "Beyond store-level direct costs, the company incurred 196,168 in general and administrative expenses (6.4% of revenues), 86,262 in depreciation and amortization (2.8%), and 23,591 in preopening costs (0.8%) in the 39 weeks ended September 29, 2026 (tables in USD thousands), while newly opened restaurants typically experience higher initial food and labor cost ratios until volumes and management stabilize.",
     "facts": [
-     "F3"
+     "F2",
+     "P1",
+     "P3",
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "General and administrative expenses | 66,645 | 6.4% | 58,996 | 6.5% | 196,168 | 6.4% | 177,706 | 6.4%",
+     "Depreciation and amortization expenses | 29,175 | 2.8% | 27,419 | 3.0% | 86,262 | 2.8% | 80,361 | 2.9%",
+     "Preopening costs | 11,160 | 1.1% | 6,584 | 0.7% | 23,591 | 0.8% | 23,718 | 0.8%",
+     "G&A expenses consist of the restaurant management recruiting and training program, restaurant field supervision, corporate support and bakery administrative organizations, as well as gift card commissions to third-party distributors.",
+     "Preopening costs can fluctuate significantly from period to period based on the number, mix and timing of restaurant openings and the specific preopening costs incurred for each restaurant.",
+     "Additionally, our new restaurants have typically required a period of time after reaching normal traffic levels to achieve their targeted restaurant-level margins due to actual-to-theoretical food cost inefficiencies and labor productivity inefficiencies commonly associated with new, highly complex restaurants such as ours."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Item 1A Risk Factors in [P2].",
+    "claim": "Because dining out is a discretionary expenditure, customer traffic and average check are sensitive to macroeconomic conditions, consumer confidence, and competition from full-service chains, independent restaurants, fast casual and quick-service operators, grocery stores, and meal kits.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Dining out is a discretionary expenditure that is influenced by domestic and global economic conditions, including, but not limited to: geopolitical instability, including armed conflicts, supply shortages, interest rates, changes to the terms of international trade agreements, unemployment, significant cost inflation, public health emergencies, consumer confidence, consumer purchasing and saving habits, credit conditions, stock market performance, home values, population growth, household incomes and tax policy.",
+     "We compete directly and indirectly for customer traffic with national and regional full-service dining restaurant chains as well as independently owned restaurants.",
+     "In addition, we face competition from fast casual and quick service restaurants, grocery stores and meal kits that have increased the quality and variety of their food products in response to consumer demand."
+    ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "The company operates a multi-brand footprint of 384 owned restaurants in the US and Canada, led by The Cheesecake Factory at 218 locations. The others are North Italia at 53, Flower Child at 47 and other Fox Restaurant Concepts brands at 60. A further 35 Cheesecake Factory restaurants are run by international licensees.",
+    "basis": "stated in P4",
+    "claim": "The company owns and operates 384 restaurants across the United States and Canada\u2014including 218 The Cheesecake Factory, 53 North Italia, 47 Flower Child, and 60 FRC portfolio locations\u2014plus 35 international licensed The Cheesecake Factory restaurants.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "We currently own and operate 384 restaurants throughout the United States and Canada under brands including The Cheesecake Factory\u00ae (218 locations), North Italia\u00ae (53 locations), Flower Child\u00ae (47 locations) and additional brands within our FRC portfolio (60 locations)."
+     "We currently own and operate 384 restaurants throughout the United States and Canada under brands including The Cheesecake Factory\u00ae (218 locations), North Italia\u00ae (53 locations), Flower Child\u00ae (47 locations) and additional brands within our FRC portfolio (60 locations).",
+     "Internationally, 35 The Cheesecake Factory\u00ae restaurants operate under licensing agreements."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K; these are management's own measures",
-    "claim": "The company positions The Cheesecake Factory in upscale casual dining, above core casual dining. It cites high sales productivity: about $12.4 million average sales per full-year location and about $1,151 per productive square foot in fiscal 2025.",
+    "basis": "stated in P1",
+    "claim": "Management positions The Cheesecake Factory as an upscale casual dining leader based on high unit productivity, with full-year locations averaging approximately $12.4 million in sales and $1,151 per productive square foot in fiscal 2025.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The Cheesecake Factory restaurants operate in the upscale casual dining segment, which is positioned above core casual dining, with standards that are closer to fine dining.",
-     "Average sales per location for The Cheesecake Factory restaurants open for the full year were approximately $12.4 million for fiscal 2025."
+     "We believe that we are a leader in upscale casual dining given the historically high average sales per square foot of our restaurants as compared to others in this segment.",
+     "Average sales per location for The Cheesecake Factory restaurants open for the full year were approximately $12.4 million for fiscal 2025.",
+     "Average sales per productive square foot (defined as all interior square footage plus seasonally adjusted exterior patio square footage) for restaurants open for the full year were approximately $1,151 for fiscal 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings releases and the 10-K",
-    "claim": "Third-quarter fiscal 2026 revenue was $1,033.4 million versus $907.2 million a year earlier. Comparable sales at The Cheesecake Factory rose 15.2%, after 5.8% in the second quarter and only 0.1% for fiscal 2025. This is the main evidence of competitive strength in the packet.",
+    "basis": "stated in P1",
+    "claim": "The Cheesecake Factory differentiates itself through a broad menu of approximately 225 items prepared from scratch daily and an average customer check of approximately $31.79 in fiscal 2025.",
     "facts": [
-     "P6",
-     "P10",
-     "P3",
-     "F2"
+     "P1"
     ],
     "quotes": [
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026."
+     "The Cheesecake Factory menu features approximately 225 items, exclusive of beverage and dessert items and including items presented on supplemental menus, such as our SkinnyLicious\u00ae menu that offers innovative items at 590 calories or less.",
+     "In contrast to many restaurant chains, substantially all of our menu items, except those desserts produced at our bakery facilities, are prepared from scratch daily at our restaurants with high-quality, fresh ingredients using innovative and proprietary recipes.",
+     "The average check for each customer, including beverages and desserts, was approximately $31.79 during fiscal 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated by management in the release; not verified",
-    "claim": "Management says Cheesecake Factory comparable sales and traffic meaningfully outperformed the broader casual dining industry. It attributes this to menu innovation, the rewards program and social media engagement. The packet has no independent industry data to check the comparison.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The Cheesecake Factory restaurants led our performance, with comparable sales and traffic meaningfully outperforming the broader casual dining industry."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement and release table",
-    "claim": "Third-quarter cost ratios improved. Food and beverage costs were 21.2% of revenue versus 21.8%, and labor was 34.8% versus 35.6%. Income from operations was 74,873 (table in thousands) versus 37,269. Management credits labor productivity and food efficiency.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "while year-over-year improvements in labor productivity and food efficiency supported strong profitability."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the release and income statement",
-    "claim": "Third-quarter GAAP earnings were flattered by Fox Restaurant Concepts acquisition-related items. These produced $12.9 million of pre-tax net income. Adjusted diluted EPS was $1.02 against GAAP diluted EPS of $1.19, so underlying earnings were lower than reported.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "The Company recorded a pre-tax net income of $12.9 million related to Fox Restaurant Concepts (\u201cFRC\u201d) acquisition-related items."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the release and the 10-K",
-    "claim": "Growth runs through new units. The company expects as many as 26 openings in fiscal 2026 and opened six in Q3. It continues to target about 300 domestic Cheesecake Factory restaurants over time, and new-restaurant development is its top long-term capital priority.",
-    "facts": [
-     "P6",
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "We continue to target approximately 300 Company-owned and operated The Cheesecake Factory restaurants domestically over time."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A; the concentration conclusion is inferred",
-    "claim": "The Cheesecake Factory concept is the dominant revenue source. Its fiscal 2025 sales were $2,688.8 million of $3,751.8 million total revenues, so the company depends on one flagship brand.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K",
-    "claim": "Differentiation rests partly on desserts and an integrated bakery. Desserts were about 17% of Cheesecake Factory sales in fiscal 2025, and the company says owning bakery production gives control over quality and is more profitable than buying from a third party.",
+    "basis": "stated in P1",
+    "claim": "Vertically integrated bakery operations supply proprietary cheesecakes and desserts that generated approximately 17% of The Cheesecake Factory sales in fiscal 2025.",
     "facts": [
      "P1"
     ],
@@ -802,352 +303,597 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K and the company presentation; not verified",
-    "claim": "Off-premise sales were about 21% of Cheesecake Factory restaurant sales in fiscal 2025. The October 2026 investor presentation says the company has the highest off-premise average weekly sales among the peers it charts, but this is a management presentation.",
+    "basis": "stated in P1 and P6 (peer comparison chart in P6 cites Company reports and Gordon Haskett Research Advisors)",
+    "claim": "Off-premise sales accounted for approximately 21% of The Cheesecake Factory restaurant sales in fiscal 2025 and reached $50.0 (table in thousands) in FY 2025 average weekly sales versus $26.3 (table in thousands) for Olive Garden, the next highest peer shown.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
+     "We offer all items on our menu, except alcoholic beverages where disallowed by regulation, for off-premise consumption, sales of which comprised approximately 21% of The Cheesecake Factory restaurant sales during fiscal 2025.",
      "LEVERAGING OUR DIFFERENTIATED POSITIONING TO DRIVE THE HIGHEST OFF-PREMISE AVERAGE WEEKLY SALES"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A",
-    "claim": "Fiscal 2025 showed weaker underlying demand than 2026. Cheesecake Factory comparable sales rose only 0.1% because a 2.4% higher average check was offset by 2.3% lower traffic. North Italia comparable sales fell about 2% on 5% lower traffic.",
+    "basis": "stated in P1 and P6",
+    "claim": "Experienced restaurant leadership supports execution, with General Managers and Executive Kitchen Managers averaging more than 15 years of company tenure (17 years and 16 years in the investor presentation) and Fortune naming the company to its \"100 Best Companies to Work For\u00ae\" list for 13 consecutive years through 2026.",
     "facts": [
-     "P3"
+     "P1",
+     "P6"
     ],
     "quotes": [
-     "partially offset by decreased customer traffic of 2.3%.",
+     "Each restaurant is generally staffed with a General Manager (\u201cGM\u201d) and an Executive Kitchen Manager (\u201cEKM\u201d) who possess an average of more than 15 years of experience with the Company.",
+     "Fortune \u2018100 Best Companies to Work For\u00ae\u2019 List for 13 consecutive years",
+     "In 2026, we were named to the FORTUNE Magazine \u201c100 Best Companies to Work For\u00ae\u201d list for the thirteenth consecutive year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (landlord leverage stated as management belief)",
+    "claim": "High sales productivity provides leverage to secure competitive lease terms in high-profile locations, with interior or exterior patio seating at approximately 95% of restaurants.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Interior and exterior patio seating, either or both of which are available at approximately 95% of our restaurants, allow for additional customer capacity at a comparatively low occupancy cost per seat.",
+     "We believe the relatively high sales productivity of our restaurants provides opportunities to obtain competitive leasing terms from landlords."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P6",
+    "claim": "In the third quarter of fiscal 2026, The Cheesecake Factory comparable restaurant sales grew 15.2% year-over-year as total revenues reached $1,033.4 million and income from operations rose to 74,873 (table in thousands) from 37,269 (table in thousands).",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Total revenues were $1,033.4 million in the third quarter of fiscal 2026 compared to $907.2 million in the third quarter of fiscal 2025.",
+     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
+     "The Cheesecake Factory restaurants led our performance, with comparable sales and traffic meaningfully outperforming the broader casual dining industry."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P6",
+    "claim": "Competitive performance has been uneven across concepts and periods: The Cheesecake Factory comparable sales grew 0.1% in fiscal 2025 due to a 2.3% customer traffic decline, while North Italia comparable sales fell approximately 2% in fiscal 2025 and (3)% in the 39 weeks ended September 29, 2026.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "The Cheesecake Factory comparable sales increased by 0.1%, or $2.2 million, from fiscal 2024.",
+     "The increase from fiscal 2024 was primarily driven by an increase in average check of 2.4% (based on an increase of 4.3% in menu pricing, partially offset by a 1.9% negative change from menu mix), partially offset by decreased customer traffic of 2.3%.",
      "North Italia comparable sales decreased approximately 2% from fiscal 2024."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "The company names competition and value perception as a threat. It competes with national and regional casual dining chains, independents, fast casual, quick-service, grocery stores and meal kits, and says traffic could suffer if rivals offer higher perceived value.",
+    "basis": "stated in P1 and P2",
+    "claim": "The company faces intense direct and indirect competition for customer traffic, prime sites, and restaurant staff from full-service chains, independent restaurants, fast casual and quick-service concepts, grocery stores, and meal kits, including growing competition in off-premise channels.",
     "facts": [
-     "P2",
-     "P1"
+     "P1",
+     "P2"
     ],
     "quotes": [
-     "We believe that many consumers remain focused on value and if our competitors promote and deliver a higher degree of perceived value, our customer traffic could suffer."
+     "We compete directly and indirectly for customer traffic with national and regional full-service dining restaurant chains as well as independently owned restaurants.",
+     "In addition, we face competition from fast casual and quick service restaurants, grocery stores and meal kits that have increased the quality and variety of their food products in response to consumer demand.",
+     "Growing competition in off-premise channels, our inability to differentiate our concepts in these channels or a change in customers\u2019 willingness to pay fees associated with third-party delivery could negatively impact our comparable restaurant sales performance.",
+     "We also compete with other restaurants and retail establishments for quality sites and staff and managers to operate our restaurants."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "The company names labor and cost inflation as a threat. It says its from-scratch menu requires more labor per restaurant than rivals that use processed foods or commissaries, so wage increases could affect it more than others.",
+    "basis": "stated in P2",
+    "claim": "Labor, healthcare, commodity, and tariff-driven cost inflation poses an elevated threat because daily scratch preparation requires more restaurant-level labor than competitors using processed foods or commissaries, while menu price increases risk lowering customer traffic or shifting menu mix.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Increased restaurant labor costs could impact us more than others in our industry because we have a complex menu made fresh from scratch at our restaurants, requiring more labor at each restaurant location than some of our competitors who use processed foods or commissaries to prepare their foods."
+     "Increased restaurant labor costs could impact us more than others in our industry because we have a complex menu made fresh from scratch at our restaurants, requiring more labor at each restaurant location than some of our competitors who use processed foods or commissaries to prepare their foods.",
+     "However, our menu price increases may be insufficient to meaningfully offset increased costs and may, if not accepted by customers, result in reduced customer traffic and unfavorable menu mix shifts (i.e., customers reducing their spend by purchasing fewer menu items or lower cost menu items)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors; no data on actual impact is given",
-    "claim": "The company names shifting consumer preferences as a threat, including health-related changes such as GLP-1 treatments, plus the risk that less-established concepts do not reach target returns.",
+    "basis": "stated in P2",
+    "claim": "Brand reputation is vulnerable to food-borne illness and contamination risks heightened by fresh in-restaurant preparation and third-party delivery, rapid amplification on social media, and reliance on company bakery facilities as the sole source for most baked desserts.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "New and current medical treatments such as GLP-1 agonists may shift consumer preferences."
+     "We freshly prepare our menu items at our restaurants, which may put us at greater risk for food-borne illness and food contamination outbreaks than some of our competitors who use processed foods or commissaries to prepare their food.",
+     "In addition to selling products throughout the world through various distribution channels, including, without limitation, supermarkets, mass market retailers, club stores and various other food service and retail channels, our bakery facilities are the only sources of most of our baked desserts to our restaurants.",
+     "These concerns are exacerbated by the speed with which negative information can be disseminated through social media."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the balance sheet and 10-Q risk factor; the link to flexibility is inferred",
-    "claim": "Financing is a named constraint. Current portion of long-term debt was 563,713 (table in thousands) at Sep. 29, 2026 versus 68,815 at Dec. 30, 2025, against cash of 249,269. The 2030 Notes are convertible during the quarter ending December 29, 2026, and conversions will be settled partly or wholly in cash.",
+    "basis": "stated in P2",
+    "claim": "Expanding newer concepts\u2014North Italia, Flower Child, and Other FRC\u2014carries heightened execution risk, with no assurance of market acceptance or achieving targeted returns on new locations.",
     "facts": [
-     "F1",
-     "P5"
+     "P2"
     ],
     "quotes": [
-     "All conversions of the 2030 Notes will be settled partially or entirely in cash."
+     "However, there is an enhanced level of risk and uncertainty related to the operation and expansion of our less-established restaurant concepts.",
+     "While we actively seek to grow these concepts, we can provide no assurance that new restaurants will be accepted in the markets targeted for expansion or that we will be able to achieve our targeted returns when opening new locations."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement; the funding conclusion is inferred",
-    "claim": "Operating cash flow for nine months was 313,738 (table in thousands) versus 226,374 a year earlier. This covered additions to property and equipment of 144,238, so growth capex was funded internally in the period.",
+    "basis": "stated in P2",
+    "claim": "Shifting consumer dining preferences\u2014including potential effects from GLP-1 agonist medical treatments\u2014alongside nutritional disclosure, ingredient, labor, and immigration regulations threaten market share and compliance costs.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K; the competitive relevance is inferred from the 10-K",
-    "claim": "A leadership transition is under way in the bakery, which the company treats as a differentiator. The president of the bakery subsidiary is retiring after 30 years and will stay into the first quarter of 2027.",
-    "facts": [
-     "P7",
-     "P1"
+     "P2"
     ],
     "quotes": [
-     "Mr. Carango will continue to serve as President of the bakery into the first quarter of 2027 to assist with the leadership transition."
+     "New and current medical treatments such as GLP-1 agonists may shift consumer preferences.",
+     "Our failure to quickly and effectively adapt to any significant shift in consumer dining preference could cause our or our licensees\u2019 restaurants to lose market share, which could materially adversely affect our financial performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Workforce or construction unionization attempts, macroeconomic pressures on consumer discretionary spending, adverse weather, public health emergencies, and acts of violence at restaurant centers are additional threats to traffic, expansion costs, and operations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our staff members and others may attempt to unionize our workforce, establish boycotts or picket lines or interrupt our supply chains, which could limit our ability to manage our workforce effectively, cause disruptions to our operations and could materially adversely affect our financial performance.",
+     "Further, the unionization of construction companies could cause our construction and build-out costs for new restaurants to materially increase.",
+     "Any factor affecting consumer discretionary spending may influence customer traffic in our restaurants and average check amount, thus potentially having a material impact on our financial performance."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet [F1]. The counter point is stated in the 10-K MD&A [P3].",
-    "claim": "Cash and cash equivalents were 249,269 (table in thousands) at Sep. 29, 2026, up from 215,729 at Dec. 30, 2025. Total current assets were 469,080 against total current liabilities of 1,318,709, so current liabilities are well above current assets.",
+    "basis": "Stated directly in P6 (Q3 2026 earnings release).",
+    "claim": "As of September 29, 2026, the company held $585.3 million in total available liquidity, consisting of $249.3 million in cash and $336.0 million of unused availability on its revolving credit facility.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the balance-sheet layout and from the filing's total-liabilities lines, which are consistent with no long-term debt at Sep. 29, 2026 [F1], and from the convertible-note disclosure [P5].",
-    "claim": "The current portion of long-term debt was 563,713 (table in thousands) at Sep. 29, 2026, against 68,815 at Dec. 30, 2025. The Long-term debt line shows a single figure of 561,259, which appears to be the Dec. 30, 2025 value, so no non-current debt appears to remain at Sep. 29, 2026.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the balance sheet [F1]. The lease-capacity point is stated in the 10-K MD&A [P3].",
-    "claim": "Leverage includes large lease obligations. Operating lease liabilities were 177,084 current and 1,404,351 noncurrent (table in thousands). Total liabilities were 2,875,344 against stockholders' equity of 574,066, which was up from 436,427.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cash flow statement [F3] and income statement [F2]. The opening plan is stated in the earnings release [P6].",
-    "claim": "Cash provided by operating activities for the nine months was 313,738 (table in thousands), against 226,374 a year earlier. Additions to property and equipment were 144,238 against 121,048. Net income for the nine months was 179,242.",
-    "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Line items are stated in the cash flow statement [F3]. The reversal point is inferred.",
-    "claim": "Operating cash flow exceeded net income partly because of non-cash charges and working-capital inflows. Depreciation and amortization was 86,262 and stock-based compensation was 22,810. Other accrued expenses added 64,360 and receivables added 35,724, partly offset by a 36,469 outflow from gift card liabilities (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Quoted from the earnings release [P6] and shown in the income statement [F2]. The point that the credit is non-cash is inferred.",
-    "claim": "Reported earnings for the third quarter were helped by acquisition-related income. The income statement shows acquisition-related contingent consideration, compensation and amortization income of (12,889) for the quarter (table in thousands). The company reported adjusted net income of $52.3 million against GAAP net income of $61.3 million.",
-    "facts": [
-     "F2",
      "P6"
     ],
     "quotes": [
-     "The Company recorded a pre-tax net income of $12.9 million related to Fox Restaurant Concepts (\u201cFRC\u201d) acquisition-related items."
+     "As of September 29, 2026, the Company had total available liquidity of $585.3 million, including a cash balance of $249.3 million and $336.0 million of availability on its revolving credit facility with no outstanding balance."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement [F3]. The dividend declaration is stated in the 8-K [P8].",
-    "claim": "Financing outflows in the nine months included 68,992 (table in thousands) to repay convertible debt, 44,117 of common stock dividends and 31,801 of treasury stock purchases. Treasury purchases were 142,722 in the prior-year period. Interest paid was 12,596 and income taxes paid were 22,567.",
+    "basis": "Stated in F1 (10-Q Condensed Consolidated Balance Sheets); reclassification inferred from long-term debt moving to blank at September 29, 2026 from 561,259 at December 30, 2025.",
+    "claim": "On the September 29, 2026 balance sheet, total current assets were 469,080 compared with total current liabilities of 1,318,709, up from 777,011 at December 30, 2025 as the current portion of long-term debt rose from 68,815 to 563,713 alongside 176,386 in gift card liabilities (table in thousands).",
     "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q risk factor [P5].",
-    "claim": "The main near-term refinancing issue is the 2030 Notes. They are convertible by holders during the fiscal quarter ending December 29, 2026, because the share price exceeded 130% of the conversion price for the required trading days.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "In addition, because the last reported sale price per share of our common stock exceeded 130% of the conversion price for the 2030 Notes for at least 20 trading days during the 30 consecutive trading days ending on, and including, September 29, 2026, the 2030 Notes are convertible by holders at their option during the fiscal quarter ending December 29, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the risk factor [P5]. The sources of cash are shown in [F1] and [F3].",
-    "claim": "Conversions of the 2030 Notes will be settled partially or entirely in cash, so conversions could draw on cash. The company says it may lack enough cash or be unable to obtain financing when required.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
-     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q risk factor [P5]. The ratio thresholds are paraphrased from the cited text.",
-    "claim": "The Loan Agreement limits how the notes can be met. Cash paid on conversion cannot exceed the principal converted plus any bond hedge proceeds. A fundamental-change repurchase is allowed only if no default exists and the net adjusted leverage ratio is at most 4.25 to 1.00 and the EBITDAR to interest and rental expense ratio is at least 1.90 to 1.00.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "For example, the Loan Agreement restricts us from paying cash upon conversion of the 2030 Notes in an amount that exceeds the sum of (i) the principal amount being converted and (ii) any payments received by us or any of our subsidiaries pursuant to the exercise, settlement or termination of any related permitted bond hedge transaction."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The repurchase is stated in the 10-K [P3]. The repayment is stated in [F3]. The link between the repayment and the 2026 Notes is inferred.",
-    "claim": "The earlier convertible notes are being paid down. A 2025 repurchase of about $276.0 million principal of the 2026 Notes cost $289.8 million including a premium. Another 68,992 (table in thousands) was repaid in the nine months to Sep. 29, 2026, and the current portion of debt at Dec. 30, 2025 was 68,815.",
-    "facts": [
-     "P3",
-     "F3",
      "F1"
     ],
     "quotes": [
+     "Total current assets | 469,080 | 454,828",
+     "Gift card liabilities | 176,386 | 212,859",
+     "Current portion of long-term debt | 563,713 | 68,815",
+     "Total current liabilities | 1,318,709 | 777,011"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P3 (10-K Item 7 MD&A).",
+    "claim": "Ongoing working capital requirements are typically low because restaurant guests pay in cash or cash equivalents at the time of sale and many inventory items are sold before supplier payments come due.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Typically, our requirement for working capital has not been significant since our restaurant customers pay for their food and beverage purchases in cash or cash equivalents at the time of sale, and we are able to sell many of our restaurant inventory items before payment is due to the suppliers of such items."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (Q3 2026 earnings release) and F1 (10-Q balance sheet).",
+    "claim": "Outstanding funded debt as of September 29, 2026 totaled $575 million in principal of 2.00% convertible senior notes due 2030 ($563.7 million net of $11.3 million in unamortized issuance costs), with no revolving credit facility borrowings, against total stockholders' equity of 574,066 (table in thousands).",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "Total principal amount of debt outstanding was $575 million, representing the principal amount of 2.00% convertible senior notes due 2030.",
+     "(1) As of September 29, 2026, includes $563.7 million net balance of 2.00% convertible senior notes due 2030 (principal amount of $575 million less $11.3 million in unamortized issuance costs).",
+     "Total stockholders' equity | 574,066 | 436,427"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P3 and F1.",
+    "claim": "The company leases all restaurant locations and carried current operating lease liabilities of 177,084 and noncurrent operating lease liabilities of 1,404,351 as of September 29, 2026 (table in thousands), which reduces its capacity to take on funded debt.",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "Similar to many restaurant and retail chain store operations, we utilize operating lease arrangements for all of our restaurant locations.",
+     "Accordingly, our lease arrangements reduce, to some extent, our capacity to utilize funded indebtedness in our capital structure.",
+     "Operating lease liabilities | 177,084 | 167,348",
+     "Operating lease liabilities | 1,404,351 | 1,332,413"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P5 (10-Q Part II Item 1A Risk Factors).",
+    "claim": "Under the Loan Agreement, repurchasing the convertible senior notes due 2030 upon a fundamental change is permitted only if no default exists, the pro forma net adjusted leverage ratio does not exceed 4.25 to 1.00, and the EBITDAR to interest and rental expense ratio is at least 1.90 to 1.00.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Under the Loan Agreement, we are permitted to repurchase 2030 Notes upon a fundamental change only if (i) no default or event of default exists and (ii) our pro forma net adjusted leverage ratio (as measured in accordance with the Loan Agreement) does not exceed 4.25 to 1.00 and our EBITDAR to interest and rental expense ratio (as measured in accordance with the Loan Agreement) is at least 1.90 to 1.00."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F2 (10-Q income statement) and F3 (10-Q cash flow statement).",
+    "claim": "In the nine months ended September 29, 2026, net interest expense decreased to (6,040) from (7,448) in the prior-year period, while cash interest paid was 12,596 compared with 8,382 (tables in thousands).",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Interest expense, net | (1,988) | (2,247) | (6,040) | (7,448)",
+     "Interest paid | 12,596 | 8,382"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F3 and P3.",
+    "claim": "Operating cash flow grew to 313,738 in the nine months ended September 29, 2026 from 226,374 in the prior-year period (table in thousands), following $301.3 in fiscal 2025 and $268.3 in fiscal 2024 (table in millions).",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Cash provided by operating activities | 313,738 | 226,374",
+     "Cash provided by operating activities | $301.3 | $268.3"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated directly in F3 and P3.",
+    "claim": "Additions to property and equipment totaled (144,238) in the nine months ended September 29, 2026 versus (121,048) a year earlier (table in thousands), after fiscal 2025 capital expenditures comprised $70.5 million for new restaurants, $63.2 million for existing restaurants, and $12.5 million for bakery and corporate infrastructure.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Additions to property and equipment | (144,238) | (121,048)",
+     "Capital expenditures for new restaurants, including locations under development as of each fiscal year-end, were $70.5 million and $99.0 million for fiscal 2025 and 2024, respectively.",
+     "Capital expenditures also included $63.2 million and $53.0 million for our existing restaurants and $12.5 million and $8.4 million for bakery and corporate capacity and infrastructure investments in fiscal 2025 and 2024, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F3 and P6.",
+    "claim": "Nine-month fiscal 2026 operating cash flow of 313,738 exceeded GAAP net income of $179,242 (tables in thousands), supported by 86,262 in depreciation and amortization, 22,810 in stock-based compensation, and a 64,360 inflow from other accrued expenses despite a (36,469) outflow in gift card liabilities.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Cash provided by operating activities | 313,738 | 226,374",
+     "Net income (GAAP) | $61,300 | $31,899 | $179,242 | $119,652",
+     "Depreciation and amortization expenses | 86,262 | 80,361",
+     "Stock-based compensation | 22,810 | 20,442",
+     "Gift card liabilities | (36,469) | (37,462)",
+     "Other accrued expenses | 64,360 | 47,568"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 and F3.",
+    "claim": "Third-quarter fiscal 2026 GAAP net income included a $12.9 million pre-tax benefit from FRC acquisition-related items (with non-GAAP adjusted net income of $52.3 million for the quarter and $173,082 for the nine months, table in thousands), while nine-month operating cash flow bore a (13,229) cash outflow for deferred consideration and compensation above acquisition-date fair value.",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "The Company recorded a pre-tax net income of $12.9 million related to Fox Restaurant Concepts (\u201cFRC\u201d) acquisition-related items.",
+     "Excluding the after-tax impact of these items and certain other items, adjusted net income and adjusted diluted net income per share for the third quarter of fiscal 2026 were $52.3 million and $1.02, respectively.",
+     "Adjusted net income (non-GAAP) | $52,321 | $33,212 | $173,082 | $134,656",
+     "Payment of deferred consideration and compensation in excess of acquisition-date fair value | (13,229) | (8,714)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P3 and F3.",
+    "claim": "Fiscal 2025 earnings benefited from $17.3 million in gift card breakage revenue partially offset by a $7.9 million gift card inventory write-down, whereas in the first nine months of fiscal 2026 operating cash flow funded (44,117) in dividends and (31,801) in treasury stock purchases while increasing cash by 33,540 (table in thousands).",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "(1) | Represents gift card breakage revenue of $17.3 million as a result of a change in historical redemption patterns, partially offset by a non-recurring $7.9 million write-down of gift card inventory.",
+     "Common stock dividends paid | (44,117) | (39,410)",
+     "Treasury stock purchases, inclusive of excise tax | (31,801) | (142,722)",
+     "Net change in cash and cash equivalents | 33,540 | 105,802"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Conversion trigger and quarterly convertibility stated in P5; current debt balance stated in F1.",
+    "claim": "Because the common stock closing price exceeded 130% of the conversion price for at least 20 of the 30 consecutive trading days ended September 29, 2026, holders may convert the convertible senior notes due 2030 during the quarter ending December 29, 2026, placing their 563,713 carrying balance (table in thousands) in current liabilities.",
+    "facts": [
+     "P5",
+     "F1"
+    ],
+    "quotes": [
+     "In addition, because the last reported sale price per share of our common stock exceeded 130% of the conversion price for the 2030 Notes for at least 20 trading days during the 30 consecutive trading days ending on, and including, September 29, 2026, the 2030 Notes are convertible by holders at their option during the fiscal quarter ending December 29, 2026.",
+     "Current portion of long-term debt | 563,713 | 68,815"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P5, F3, and P3.",
+    "claim": "All conversions of the convertible senior notes due 2030 will be settled partially or entirely in cash and principal is payable in cash at maturity or upon a fundamental change, after the company already repaid (68,992) of prior convertible debt in the first nine months of fiscal 2026 (table in thousands) following $289.8 million of repurchases in fiscal 2025.",
+    "facts": [
+     "P5",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
+     "Upon maturity of the 2030 Notes, we must pay their principal amount and accrued and unpaid interest in cash, unless they have been previously repurchased, redeemed or converted.",
+     "Repayment on long-term convertible debt, including premium on extinguishment | (68,992) | (289,800)",
      "On February 28, 2025, we repurchased approximately $276.0 million aggregate principal amount of the 2026 Notes (as defined below) for aggregate consideration of $289.8 million, which included a premium of $13.8 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Liquidity and debt principal stated in P6; nine-month operating cash flow in F3; settlement constraints and sufficiency risk stated in P5.",
+    "claim": "Cash settlement needs on the $575 million principal of convertible notes due 2030 can be met with $585.3 million in available liquidity ($249.3 million cash and $336.0 million revolver capacity), operating cash flow (313,738 in nine-month fiscal 2026, table in thousands), and permitted bond hedge proceeds, though management warns available cash or financing may fall short and the Loan Agreement limits cash conversion payments above principal plus bond hedge proceeds.",
+    "facts": [
+     "P6",
+     "F3",
+     "P5"
+    ],
+    "quotes": [
+     "As of September 29, 2026, the Company had total available liquidity of $585.3 million, including a cash balance of $249.3 million and $336.0 million of availability on its revolving credit facility with no outstanding balance.",
+     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion.",
+     "For example, the Loan Agreement restricts us from paying cash upon conversion of the 2030 Notes in an amount that exceeds the sum of (i) the principal amount being converted and (ii) any payments received by us or any of our subsidiaries pursuant to the exercise, settlement or termination of any related permitted bond hedge transaction."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the cited releases; the conditions for continuation are inferred from management's own attribution.",
-    "claim": "Comparable sales at The Cheesecake Factory concept are the main recent driver of revenue growth. They rose 15.2% in Q3 fiscal 2026 after 5.8% in Q2. Q3 revenues were 1,033,440 against 907,226 a year earlier (table in thousands). For this to continue, traffic and check gains tied to menu innovation, the rewards program and social media engagement must hold.",
-    "facts": [
-     "P6",
-     "P10",
-     "F2"
-    ],
-    "quotes": [
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
-     "Continued menu innovation, our rewards program and significant engagement across social media contributed to the impressive sales growth"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K, 10-Q and earnings release; the conditions are stated in the 10-K and partly inferred.",
-    "claim": "New restaurant openings are the second stated driver. The company opened six restaurants in Q3 and still expects as many as 26 in fiscal 2026. The restaurant count was 384, against 368 at February 23, 2026. For this to continue, sites, leases, permits and staffing must be available, and the company must fund the build-out. Nine-month additions to property and equipment were 144,238 (table in thousands).",
+    "basis": "Stated directly in [P3] and [P6].",
+    "claim": "New restaurant openings are a primary driver of revenue growth, with 25 restaurants opened in fiscal 2025 and as many as 26 new restaurants expected in fiscal 2026.",
     "facts": [
      "P3",
-     "P4",
-     "P6",
-     "F3"
+     "P6"
     ],
     "quotes": [
      "Our revenue growth is primarily driven by new restaurant openings and increases in comparable restaurant sales.",
-     "The Company continues to expect to open as many as 26 new restaurants in fiscal 2026"
+     "Revenues increased 4.7% to $3,751.8 million for fiscal 2025 compared to $3,581.7 million for fiscal 2024, primarily due to additional revenue related to new restaurant openings.",
+     "We opened 25 restaurants in fiscal 2025 comprised of four The Cheesecake Factory, six North Italia, nine Other FRC and six Flower Child locations compared to 23 restaurants in fiscal 2024 comprised of three The Cheesecake Factory, six North Italia, eight Other FRC and six Flower Child locations.",
+     "The Company continues to expect to open as many as 26 new restaurants in fiscal 2026, including as many as five The Cheesecake Factory restaurants, eight North Italia locations, seven Flower Child locations and as many as six FRC restaurants."
     ],
     "support": "supported"
    },
    {
-    "basis": "Cost percentages and the management quote are stated in the release; the mechanism is inferred.",
-    "claim": "Margin leverage is lifting profit faster than sales. Q3 food and beverage costs were 21.2% of revenues against 21.8%, and labor was 34.8% against 35.6%. Income from operations was 74,873 against 37,269 (table in thousands). For this to continue, labor productivity and food efficiency must hold and sales must stay high relative to the cost base.",
+    "basis": "Stated directly in [P1], [P3], [P4], and [P6].",
+    "claim": "Management targets 7% annual aggregate unit growth across concepts over the longer term, including a domestic target of approximately 300 Company-owned The Cheesecake Factory locations compared with 218 existing locations.",
     "facts": [
-     "P6",
-     "F2"
+     "P1",
+     "P3",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "year-over-year improvements in labor productivity and food efficiency supported strong profitability"
+     "Longer-term, we believe our domestic revenue growth (comprised of our targeted annual unit growth of 7% in aggregate across concepts and comparable sales growth) combined with margin expansion, planned debt repayments and an anticipated capital return program will support our long-term financial objective of 10% to 15% total return to shareholders, on average.",
+     "We continue to target approximately 300 Company-owned and operated The Cheesecake Factory restaurants domestically over time.",
+     "We currently own and operate 384 restaurants throughout the United States and Canada under brands including The Cheesecake Factory\u00ae (218 locations), North Italia\u00ae (53 locations), Flower Child\u00ae (47 locations) and additional brands within our FRC portfolio (60 locations)."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K and the investor presentation; the continuation conditions are drawn from the risk factor.",
-    "claim": "Flower Child and the other newer concepts are a further growth lever. Flower Child sales rose 27.8% in fiscal 2025, its comparable sales rose about 5%, and the company targets about 20% average annual unit growth. For this to continue, new units must be accepted in their markets and reach targeted returns.",
+    "basis": "Stated directly in [P1] and [P4].",
+    "claim": "Continued unit expansion depends on finding sites that meet selection criteria, negotiating acceptable lease terms, obtaining permits, completing construction, and recruiting and training staff without macroeconomic or supply-chain delays.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "In accordance with our broader capital allocation strategy, we plan to open as many locations in any given year as there are sites available that meet our site selection criteria and for which we can negotiate acceptable lease terms, obtain necessary permits, complete construction, and recruit and train personnel.",
+     "The development and opening process usually ranges from six to eighteen months, depending largely on the type and availability of the leased space we intend to occupy, our preferred opening date, as well as our ability to obtain goods, materials, permits and adequate staffing, and a variety of other circumstances beyond our control.",
+     "The impact of ongoing geopolitical and macroeconomic events, including evolving government policies and global trade and tariff dynamics, could lead to issues such as further wage inflation, product and services cost inflation, disruptions in the supply chain, staffing challenges, shifts in consumer behavior and delays in new restaurant openings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P2], with recent comparable sales declines at North Italia shown in [P3] and [P6].",
+    "claim": "New unit growth also requires market acceptance and achievement of targeted returns, which carry enhanced uncertainty for North Italia, Flower Child, and other FRC concepts.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "However, there is an enhanced level of risk and uncertainty related to the operation and expansion of our less-established restaurant concepts.",
+     "While we actively seek to grow these concepts, we can provide no assurance that new restaurants will be accepted in the markets targeted for expansion or that we will be able to achieve our targeted returns when opening new locations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P3], [P4], and [P6].",
+    "claim": "North Italia, Flower Child, and Other FRC provide faster revenue growth than the flagship brand, with fiscal 2025 sales increasing 15.5%, 27.8%, and 18.4%, respectively, compared with 1.0% at The Cheesecake Factory.",
     "facts": [
      "P3",
-     "P6",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The Cheesecake Factory sales increased 1.0% to $2,688.8 million for fiscal 2025 compared to $2,661.6 million for fiscal 2024.",
+     "North Italia sales increased 15.5% to $345.9 million for fiscal 2025 compared to $299.6 million for fiscal 2024.",
+     "Flower Child sales increased 27.8% to $185.3 million for fiscal 2025 compared to $145.0 million for fiscal 2024.",
+     "Other FRC sales increased 18.4% to $355.1 million for fiscal 2025 compared to $300.0 million for fiscal 2024.",
+     "In addition, our FRC subsidiary serves as an incubator, innovating new food, dining and hospitality experiences to create differentiated, high-quality concepts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P3], [P4], and [P6].",
+    "claim": "Comparable restaurant sales are a primary revenue growth driver and accelerated at The Cheesecake Factory to 15.2% year-over-year in the third quarter of fiscal 2026 and 7.5% for the 39 weeks ended September 29, 2026, following 0.1% growth in fiscal 2025.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Our revenue growth is primarily driven by new restaurant openings and increases in comparable restaurant sales.",
+     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
+     "The Cheesecake Factory comparable sales increased by 0.1%, or $2.2 million, from fiscal 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P3], [P4], and [P6].",
+    "claim": "Management seeks to grow comparable sales by raising average check through biannual menu price updates alongside menu innovation, the Cheesecake Rewards program, and digital and social media engagement.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "For The Cheesecake Factory concept, our strategy is to increase comparable restaurant sales by growing average check while maintaining customer traffic.",
+     "We generally update The Cheesecake Factory menus twice a year, and our philosophy is to use price increases to help offset key operating cost increases in a manner that supports both our margin and customer traffic objectives.",
+     "Continued menu innovation, our rewards program and significant engagement across social media contributed to the impressive sales growth, while year-over-year improvements in labor productivity and food efficiency supported strong profitability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P2] and supported by fiscal 2025 traffic metrics in [P3].",
+    "claim": "Sustaining comparable sales growth requires maintaining customer traffic and perceived value amid competition and consumer discretionary spending sensitivity, because menu price increases can reduce traffic or shift mix unfavorably.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We believe that many consumers remain focused on value and if our competitors promote and deliver a higher degree of perceived value, our customer traffic could suffer.",
+     "However, our menu price increases may be insufficient to meaningfully offset increased costs and may, if not accepted by customers, result in reduced customer traffic and unfavorable menu mix shifts (i.e., customers reducing their spend by purchasing fewer menu items or lower cost menu items)",
+     "Any factor affecting consumer discretionary spending may influence customer traffic in our restaurants and average check amount, thus potentially having a material impact on our financial performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P1] and [P2].",
+    "claim": "Sustaining brand-driven sales and social engagement depends on protecting reputation, preventing food-borne illness or safety failures, and retaining experienced restaurant managers and staff.",
+    "facts": [
+     "P1",
      "P2"
     ],
     "quotes": [
-     "Flower Child comparable sales increased approximately 5% from fiscal 2024.",
-     "Targeting ~20% average annual unit growth",
-     "we can provide no assurance that new restaurants will be accepted in the markets targeted for expansion or that we will be able to achieve our targeted returns when opening new locations"
+     "Negative publicity directed at any of our brands, regardless of factual basis, such as relating to the quality of our restaurant food or consumer packaged goods, the quality and condition of our restaurant facilities, customer complaints or litigation alleging injury or food-borne illnesses, food tampering or contamination or poor health inspection scores, sanitary or other issues with respect to food processing by us or our suppliers, labor relations, any failure to comply with applicable regulations or standards, allegations of harassment or disparate treatment based upon race, gender, gender identity, national origin, religion or other class, allegations of sexual harassment, politically motivated accusations or other negative publicity could damage our reputation.",
+     "These concerns are exacerbated by the speed with which negative information can be disseminated through social media.",
+     "One of the most important aspects of delivering a consistent and dependable level of service is having a team of experienced managers who can successfully operate our high-volume, complex restaurants."
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet and cash flow figures are stated; the link to funding growth is inferred.",
-    "claim": "Funding capacity is a condition for continued growth. Nine-month operating cash flow was 313,738 against capex of 144,238 (table in thousands). The current portion of long-term debt was 563,713, because the 2030 Notes are convertible in the quarter ending December 29, 2026 and conversions will be settled partially or entirely in cash. Self-funded expansion therefore depends on cash generation and on meeting these obligations.",
+    "basis": "Stated directly in [P1], [P3], and [P6].",
+    "claim": "Off-premise sales provide a major channel, representing approximately 21% of The Cheesecake Factory restaurant sales in fiscal 2025 and $50.0 (table in thousands) in fiscal 2025 average weekly sales per restaurant.",
+    "facts": [
+     "P1",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "We offer all items on our menu, except alcoholic beverages where disallowed by regulation, for off-premise consumption, sales of which comprised approximately 21% of The Cheesecake Factory restaurant sales during fiscal 2025.",
+     "Sales through the off-premise channel comprised approximately 21% of our restaurant sales during both fiscal 2025 and fiscal 2024.",
+     "$2.9 million in off-premise sales per restaurant based on annualized 3Q26."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P2].",
+    "claim": "Maintaining off-premise sales requires continuing to differentiate the concepts, preserving third-party delivery brand execution, and customers remaining willing to pay third-party delivery fees.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Growing competition in off-premise channels, our inability to differentiate our concepts in these channels or a change in customers\u2019 willingness to pay fees associated with third-party delivery could negatively impact our comparable restaurant sales performance.",
+     "Any failure of our third-party delivery provider to represent our brands in a favorable manner could damage our reputation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P1], [P4], and [P6].",
+    "claim": "International licensing of 35 The Cheesecake Factory restaurants, along with two integrated bakery facilities and consumer packaged goods royalty streams, adds revenue and margin leverage.",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Internationally, 35 The Cheesecake Factory\u00ae restaurants operate under licensing agreements.",
+     "Our bakery division operates two facilities that produce quality cheesecakes and other baked products for our restaurants, international licensees and third-party bakery customers.",
+     "Our objective is to drive margin expansion over time by leveraging incremental sales to increase restaurant-level margins at The Cheesecake Factory concept, leveraging our bakery operations, international and consumer packaged goods royalty revenue streams and G&A expense, and optimizing our restaurant portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P2] and [P4].",
+    "claim": "International and bakery growth depends on avoiding bakery product recalls or withdrawals, complying with international trade and regulatory laws, and maintaining foreign market acceptance and licensee health.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "If any of our bakery products becomes subject to a product recall or market withdrawal, whether voluntary or involuntary, our costs to conduct such recall or market withdrawal could be significant, restaurant sales as well as third-party sales of bakery products could be negatively impacted and our reputation could be damaged, any of which could materially adversely affect our financial performance.",
+     "Our international business exposes us to additional laws and regulations, including antitrust and tax requirements, anti-boycott legislation, import/export and customs regulations and other international trade regulations, privacy laws, the USA Patriot Act and the Foreign Corrupt Practices Act."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F1], [F3], [P3], [P5], and [P6].",
+    "claim": "Funding growth relies on operating cash flows (313,738 in the 9 months ended Sep. 29, 2026, table in thousands) and available liquidity ($585.3 million as of September 29, 2026), while $575 million of 2.00% convertible senior notes due 2030 became convertible at holders' option during the quarter ending December 29, 2026 and must be settled partially or entirely in cash.",
     "facts": [
      "F1",
      "F3",
-     "P5"
+     "P3",
+     "P5",
+     "P6"
     ],
     "quotes": [
-     "All conversions of the 2030 Notes will be settled partially or entirely in cash."
+     "Typically, cash flows generated from operating activities are our principal source of liquidity, which we use to finance our restaurant expansion plans, ongoing maintenance of our restaurants and bakery facilities and investment in our corporate and information technology infrastructures.",
+     "As of September 29, 2026, the Company had total available liquidity of $585.3 million, including a cash balance of $249.3 million and $336.0 million of availability on its revolving credit facility with no outstanding balance.",
+     "In addition, because the last reported sale price per share of our common stock exceeded 130% of the conversion price for the 2030 Notes for at least 20 trading days during the 30 consecutive trading days ending on, and including, September 29, 2026, the 2030 Notes are convertible by holders at their option during the fiscal quarter ending December 29, 2026.",
+     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
+     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "Stated in the cited 10-Q risk factor update.",
-    "claim": "The conversion condition for the 2030 convertible notes was met: the stock price exceeded 130% of the conversion price for the required trading days. Holders may therefore convert the notes at their option during the quarter ending December 29, 2026.",
+    "basis": "stated in the cited item",
+    "claim": "The Company's 2030 Notes became convertible by holders at their option during the fiscal quarter ending December 29, 2026 after the common stock sale price exceeded 130% of the conversion price for at least 20 trading days during the 30 consecutive trading days ended September 29, 2026, with 563,713 (table in thousands) classified as current portion of long-term debt.",
     "facts": [
-     "P5"
+     "P5",
+     "F1"
     ],
     "quotes": [
-     "the 2030 Notes are convertible by holders at their option during the fiscal quarter ending December 29, 2026"
+     "In addition, because the last reported sale price per share of our common stock exceeded 130% of the conversion price for the 2030 Notes for at least 20 trading days during the 30 consecutive trading days ending on, and including, September 29, 2026, the 2030 Notes are convertible by holders at their option during the fiscal quarter ending December 29, 2026.",
+     "All conversions of the 2030 Notes will be settled partially or entirely in cash."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K Item 8.01.",
-    "claim": "The Board declared a quarterly cash dividend of $0.30 per share, payable November 24, 2026 to holders of record on November 10, 2026.",
+    "basis": "stated in the cited item",
+    "claim": "The Company's Board of Directors declared a quarterly dividend of $0.30 per share to be paid on November 24, 2026 to shareholders of record at the close of business on November 10, 2026.",
     "facts": [
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "On October 21, 2026, the Board declared a quarterly cash dividend of $0.30 per share which will be paid on November 24, 2026"
+     "In addition, the Company\u2019s Board of Directors has declared a quarterly dividend of $0.30 per share to be paid on November 24, 2026, to shareholders of record at the close of business on November 10, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K Item 5.02 body.",
-    "claim": "The President of the bakery subsidiary notified the company of his decision to retire. He will stay in the role into the first quarter of 2027 to assist with the leadership transition.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "Keith T. Carango notified The Cheesecake Factory Incorporated",
-     "Mr. Carango will continue to serve as President of the bakery into the first quarter of 2027 to assist with the leadership transition."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in the 10-Q risk factor (P5) and the balance sheet (F1). The link between the debt reclassification and the 2030 Notes is inferred.",
-    "claim": "Debt due within a year jumped to $563,713 (table in thousands) from $68,815, and the 2030 Notes are convertible during the quarter ending December 29, 2026, with conversions settled partly or fully in cash. Cash was $249,269 (table in thousands) at September 29, 2026.",
-    "facts": [
-     "F1",
-     "P5"
-    ],
-    "quotes": [
-     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
-     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The comparable sales figures are stated. That they may not persist is inferred from the contrast between periods. The evidence gives no forward comparable sales guidance.",
-    "claim": "The Q3 fiscal 2026 comparable sales gain at The Cheesecake Factory (15.2%) is far above Q2 (5.8%) and the fiscal 2025 full-year figure (0.1%). If the surge reflects momentum from the rewards program and social media, it could fade and weaken the growth and margin story.",
-    "facts": [
-     "P6",
-     "P10",
-     "P3"
-    ],
-    "quotes": [
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 5.8% year-over-year in the second quarter of fiscal 2026.",
-     "The Cheesecake Factory comparable sales increased by 0.1%, or $2.2 million, from fiscal 2024."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release (P6) and in the income statement line for acquisition-related items (F2). The characterization as flattering is inferred.",
-    "claim": "Q3 GAAP earnings were flattered by FRC acquisition-related income. Net income was $61.3 million and diluted EPS $1.19, but adjusted net income was $52.3 million and adjusted EPS $1.02. GAAP profit may therefore overstate the ongoing run-rate.",
+    "basis": "stated in the cited item",
+    "claim": "In the third quarter of fiscal 2026, the Company recorded pre-tax net income of $12.9 million, or (12,889) (table in thousands), related to Fox Restaurant Concepts acquisition-related contingent consideration, compensation and amortization items.",
     "facts": [
      "P6",
      "F2"
@@ -1158,16 +904,221 @@
     "support": "supported"
    },
    {
-    "basis": "The figures and the opening plan are stated. The risk to returns is inferred from the 10-K discussion of new-unit inefficiencies and from the North Italia comparable sales decline.",
-    "claim": "Rapid unit growth, with as many as 26 new restaurants expected in fiscal 2026, raises preopening costs and execution risk, particularly at newer concepts. North Italia comparable sales fell about 2% in fiscal 2025. Q3 preopening costs were 11,160 (table in thousands) versus 6,584.",
+    "basis": "stated in the cited item",
+    "claim": "On February 28, 2025, the Company repurchased approximately $276.0 million aggregate principal amount of the 2026 Notes for aggregate consideration of $289.8 million, including a premium of $13.8 million, and recorded a $15.9 million loss on early debt extinguishment.",
     "facts": [
-     "P6",
      "P3",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "On February 28, 2025, we repurchased approximately $276.0 million aggregate principal amount of the 2026 Notes (as defined below) for aggregate consideration of $289.8 million, which included a premium of $13.8 million.",
+     "In fiscal 2025, we recorded a $15.9 million loss on early debt extinguishment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "During the nine months ended September 30, 2025 (within fiscal 2025), the Company received 575,000 (table in thousands) in proceeds from long-term convertible debt, representing $575 million principal amount of 2.00% convertible senior notes due 2030.",
+    "facts": [
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Total principal amount of debt outstanding was $575 million, representing the principal amount of 2.00% convertible senior notes due 2030.",
+     "(1) As of September 29, 2026, includes $563.7 million net balance of 2.00% convertible senior notes due 2030 (principal amount of $575 million less $11.3 million in unamortized issuance costs)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "During the nine months ended September 30, 2025 (within fiscal 2025), the Company made (110,000) (table in thousands) in repayments on its credit facility, leaving no outstanding balance on its revolving credit facility as of September 29, 2026.",
+    "facts": [
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "As of September 29, 2026, the Company had total available liquidity of $585.3 million, including a cash balance of $249.3 million and $336.0 million of availability on its revolving credit facility with no outstanding balance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "During the nine months ended September 29, 2026, the Company made a (68,992) (table in thousands) repayment on long-term convertible debt, including premium on extinguishment.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repayment on long-term convertible debt, including premium on extinguishment | (68,992) | (289,800)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "During fiscal 2025, the Company recorded $23.0 million of expense primarily related to long-lived asset impairments for one North Italia, one Grand Lux Cafe and four Other FRC locations and net lease termination expenses for two Grand Lux Cafes and one Other FRC location that closed in early 2026.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During fiscal 2025, we recorded $23.0 million of expense primarily related to the impairment of long-lived assets for one North Italia, one Grand Lux Cafe and four Other FRC locations (one previously partially impaired) and lease termination expense, net related to two Grand Lux Cafes (one that closed in fiscal 2023 and one that closed in early 2026) and one Other FRC (that closed in early 2026)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "During fiscal 2024, the Company recorded $13.6 million of impairment of assets and lease termination expense primarily related to long-lived asset impairments for one The Cheesecake Factory and six Other FRC locations, partially offset by net lease termination income.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During fiscal 2024, we recorded impairment of assets and lease terminations expense of $13.6 million primarily related to impairment of long-lived assets for one The Cheesecake Factory (previously partially impaired) and six Other FRC locations (one previously partially impaired), partially offset by lease termination income, net for four The Cheesecake Factory restaurants (including two relocations), one Grand Lux Cafe location, one Flower Child location, one Social Monk location and one Other FRC location (that closed in early fiscal 2025)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "During fiscal 2025, following a change in historical gift card redemption patterns, the Company recognized $17.3 million of additional gift card breakage revenue, partially offset by a non-recurring $7.9 million write-down of gift card inventory.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "As a result, in fiscal 2025, we recognized $17.3 million of additional gift card breakage.",
+     "Represents gift card breakage revenue of $17.3 million as a result of a change in historical redemption patterns, partially offset by a non-recurring $7.9 million write-down of gift card inventory."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in P5, P6, F1, and F3 (Q3 2026 10-Q Risk Factors, financial statements, and earnings release).",
+    "claim": "Holders of the $575 million principal convertible senior notes can require partial or full cash settlement upon conversion or a fundamental change, creating default risk if cash or financing is insufficient.",
+    "facts": [
+     "P5",
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
+     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion.",
+     "Total principal amount of debt outstanding was $575 million, representing the principal amount of 2.00% convertible senior notes due 2030.",
+     "Current portion of long-term debt | 563,713 | 68,815"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 (Q3 2026 10-Q Part II Item 1A) with supporting credit and earnings figures in P6 and F2.",
+    "claim": "Loan Agreement restrictions and financial covenants limit cash repurchases or conversion settlements on the convertible notes, and a note default could trigger cross-defaults accelerating other debt.",
+    "facts": [
+     "P5",
+     "P6",
      "F2"
     ],
     "quotes": [
-     "The Company continues to expect to open as many as 26 new restaurants in fiscal 2026",
-     "North Italia comparable sales decreased approximately 2% from fiscal 2024."
+     "A default under the indenture governing the 2030 Notes or the fundamental change itself could also lead to a default under the Loan Agreement and agreements governing our other or future indebtedness, which may result in that other indebtedness becoming immediately payable in full.",
+     "Under the Loan Agreement, we are permitted to repurchase 2030 Notes upon a fundamental change only if (i) no default or event of default exists and (ii) our pro forma net adjusted leverage ratio (as measured in accordance with the Loan Agreement) does not exceed 4.25 to 1.00 and our EBITDAR to interest and rental expense ratio (as measured in accordance with the Loan Agreement) is at least 1.90 to 1.00."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors), P3 (10-K MD&A), and P6 (Q3 2026 segment and operating tables).",
+    "claim": "Expansion of North Italia, Flower Child, and Other FRC concepts carries heightened execution risk, and North Italia comparable sales declined (3)% in the latest quarter.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "However, there is an enhanced level of risk and uncertainty related to the operation and expansion of our less-established restaurant concepts.",
+     "While we actively seek to grow these concepts, we can provide no assurance that new restaurants will be accepted in the markets targeted for expansion or that we will be able to achieve our targeted returns when opening new locations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, P3, and P6.",
+    "claim": "Macroeconomic weakness, tariffs, and inflation could depress discretionary dining traffic or raise input costs, while menu price increases risk reducing customer traffic and shifting mix.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Any factor affecting consumer discretionary spending may influence customer traffic in our restaurants and average check amount, thus potentially having a material impact on our financial performance.",
+     "However, our menu price increases may be insufficient to meaningfully offset increased costs and may, if not accepted by customers, result in reduced customer traffic and unfavorable menu mix shifts"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, P3, and P6.",
+    "claim": "Minimum wage mandates, healthcare claim volatility, and potential unionization could materially raise labor costs given the company's scratch-prepared menu and large workforce.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Increased restaurant labor costs could impact us more than others in our industry because we have a complex menu made fresh from scratch at our restaurants, requiring more labor at each restaurant location than some of our competitors who use processed foods or commissaries to prepare their foods.",
+     "Our staff members and others may attempt to unionize our workforce, establish boycotts or picket lines or interrupt our supply chains, which could limit our ability to manage our workforce effectively, cause disruptions to our operations and could materially adversely affect our financial performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, P3, and P6.",
+    "claim": "Changes in or noncompliance with labor, alcohol dram shop, immigration, environmental, food-labeling, and tax regulations could increase compliance costs, penalties, or legal liability.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Changes in, or any failure to comply with, applicable laws or regulations could materially adversely affect our ability to operate our restaurants and/or increase our cost to do so, which could materially adversely affect our financial performance.",
+     "We may incur penalties and other costs, sanctions and adverse publicity by failing to comply with applicable laws, any of which could materially adversely affect our financial performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1, P2, and P6.",
+    "claim": "Food-borne illness, contamination, or a recall at the company's bakery facilities\u2014the sole source of most restaurant baked desserts\u2014could halt supply and damage brand reputation.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "We freshly prepare our menu items at our restaurants, which may put us at greater risk for food-borne illness and food contamination outbreaks than some of our competitors who use processed foods or commissaries to prepare their food.",
+     "In addition to selling products throughout the world through various distribution channels, including, without limitation, supermarkets, mass market retailers, club stores and various other food service and retail channels, our bakery facilities are the only sources of most of our baked desserts to our restaurants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1, P2, and P4.",
+    "claim": "Severe weather, natural disasters, public health emergencies, and acts of violence at or near restaurants could force closures, curb patio dining, and reduce sales.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Adverse weather conditions, natural disasters and public health emergencies can impact customer traffic, make it more difficult to fully staff our restaurants and more severe events, such as hurricanes, earthquakes, tornadoes, blizzards, wildfires and other natural disasters and public health emergencies have resulted in and may in the future result in restaurant closures, underutilization of outdoor patio dining and curtailed operations, impediments to availability of staff and supplies and increased commodity costs, sometimes for prolonged periods of time.",
+     "Any act of violence at or threatened against our restaurants or the centers in which they are located, including civil unrest, customer intimidation, active shooter situations and terrorist activities, may result in damage and restricted access to our restaurants and/or restaurant closures in the short-term and, in the long-term, may cause our customers and staff to avoid our restaurants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, F2, F3, P1, and P3.",
+    "claim": "Leasing all restaurant locations creates large fixed lease obligations that limit debt capacity, while underperforming units and high build-out costs can cause asset impairments and lease-termination charges.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Accordingly, our lease arrangements reduce, to some extent, our capacity to utilize funded indebtedness in our capital structure.",
+     "Total construction costs to build our restaurant premises average approximately $1,100 to $1,200 per interior square foot."
     ],
     "support": "supported"
    }
@@ -1175,106 +1126,162 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Convertibility and cash settlement are stated in P5. The link between the 563,713 current debt and the 2030 Notes is inferred from the line item and P5, because the debt note is not in the packet.",
-    "claim": "How much cash will the company have to pay out if holders convert the 2030 Notes, and how will it fund that? The balance sheet shows current debt rising sharply while cash is modest.",
+    "basis": "stated in [P5], [P6], and [F1] that conversion is triggered, cash settlement applies, 563,713 (table in thousands) is classified as current, and available cash is $249.3 million",
+    "claim": "What are the conversion price and any permitted bond hedge terms of the 2.00% convertible senior notes due 2030, how much of the $575 million principal will holders convert in the current quarter, and how will the Company fund cash settlement above its $249.3 million cash balance?",
     "facts": [
      "F1",
-     "P5"
-    ],
-    "quotes": [
-     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
-     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The share counts are stated in F2 (shares in thousands). The dilution mechanism is inferred, because the conversion terms are not in the cited items.",
-    "claim": "How many shares could be issued, and how large is the dilution, when the 2030 Notes convert? The conversion price and hedge terms are not in the packet.",
-    "facts": [
-     "F2",
-     "P5"
-    ],
-    "quotes": [
-     "the last reported sale price per share of our common stock exceeded 130% of the conversion price for the 2030 Notes for at least 20 trading days"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Comp rates are stated in the releases. The persistence question is inferred from the size of the change between quarters.",
-    "claim": "Is the jump in The Cheesecake Factory comparable sales lasting, and how much of it came from traffic rather than price? The packet shows only the headline rates.",
-    "facts": [
-     "P6",
-     "P10"
-    ],
-    "quotes": [
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
-     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 5.8% year-over-year in the second quarter of fiscal 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The amounts are stated in F2 and P6. The driver of the Q3 income is not stated in the cited items. The fair-value inputs are described in P3 only for the prior year.",
-    "claim": "What caused the third-quarter income from FRC acquisition-related items, and could it reverse? It lifted GAAP results above adjusted results.",
-    "facts": [
-     "F2",
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "The Company recorded a pre-tax net income of $12.9 million related to Fox Restaurant Concepts (\u201cFRC\u201d) acquisition-related items."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The July target is stated in P9. Any October update is not visible in the packet, so the question is inferred from the omitted guidance text.",
-    "claim": "What is the current full-year net income margin target after the Q3 results? The only target in the packet is from July and the Q3 guidance text was cut off.",
-    "facts": [
-     "P9",
+     "P5",
      "P6"
     ],
     "quotes": [
-     "to correct a typographical error on slide 31 where the fiscal year 2026 net income margin target was reported as 5% instead of 5.4%."
+     "All conversions of the 2030 Notes will be settled partially or entirely in cash.",
+     "We may not have enough available cash or be able to obtain financing at the time we are required to repurchase the 2030 Notes or pay the cash amounts due upon conversion.",
+     "Total principal amount of debt outstanding was $575 million, representing the principal amount of 2.00% convertible senior notes due 2030.",
+     "Current portion of long-term debt | 563,713 | 68,815"
     ],
     "support": "supported"
    },
    {
-    "basis": "The cash flow figures are stated in F3. The link between buyback pace and note conversions is inferred.",
-    "claim": "Will share repurchases resume at the earlier pace, given the cash needs of the pending note conversions and Loan Agreement limits? Nine-month buybacks were far below the prior year.",
+    "basis": "stated in [F2] via the Note 10 reference alongside the jump in diluted weighted-average shares from 48,616 to 51,473 (table in thousands)",
+    "claim": "How is the increase in diluted weighted-average shares to 51,473 (table in thousands) in the third quarter of fiscal 2026 allocated between the convertible notes and equity awards?",
     "facts": [
-     "F3",
-     "P4",
-     "P5"
+     "F2",
+     "P6"
     ],
     "quotes": [
+     "Diluted (Note 10) (in dollars per share) | $ 1.19 | $ 0.66 | $ 3.62 | $ 2.46",
+     "Diluted (in shares) | 51,473 | 48,616 | 49,487 | 48,633"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6] for the 15.2% and (3)% comparable sales results; [P4] MD&A is truncated before the traffic, pricing, mix, and other-brand comparable sales disclosures",
+    "claim": "What shares of The Cheesecake Factory's 15.2% comparable restaurant sales increase and North Italia's (3)% comparable restaurant sales decrease in the third quarter of fiscal 2026 came from customer traffic versus average check, and what were comparable sales at Flower Child and Other FRC?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Comparable restaurant sales at The Cheesecake Factory restaurants increased 15.2% year-over-year in the third quarter of fiscal 2026.",
+     "Comparable restaurant sales vs. prior year | (3)% | (3)% | (3)% | (1)%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6] and [F2] that $12.9 million / (12,889) (table in thousands) of pre-tax income was recorded, without disclosing the underlying valuation inputs or remaining liability",
+    "claim": "What specific valuation assumptions or Fox Restaurant Concepts performance changes drove the $12.9 million pre-tax net income from acquisition-related items in the third quarter of fiscal 2026, and what remaining contingent or deferred liability stays on the balance sheet?",
+    "facts": [
+     "F2",
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "The Company recorded a pre-tax net income of $12.9 million related to Fox Restaurant Concepts (\u201cFRC\u201d) acquisition-related items.",
+     "Represents changes in the fair value of the deferred consideration and contingent consideration and compensation liabilities related to the FRC acquisition, as well as amortization of acquired definite-lived licensing agreements.",
+     "Payment of deferred consideration and compensation in excess of acquisition-date fair value | (13,229) | (8,714)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4] and [P5] that Loan Agreement terms and ratios constrain capital returns and note repurchases, while current ratios and maturity dates are omitted",
+    "claim": "What are the Company's current net adjusted leverage and EBITDAR-to-interest-and-rental-expense ratios under the Loan Agreement, when does the revolving credit facility mature, and what covenants restrict dividends and share repurchases?",
+    "facts": [
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Under the Loan Agreement, we are permitted to repurchase 2030 Notes upon a fundamental change only if (i) no default or event of default exists and (ii) our pro forma net adjusted leverage ratio (as measured in accordance with the Loan Agreement) does not exceed 4.25 to 1.00 and our EBITDAR to interest and rental expense ratio (as measured in accordance with the Loan Agreement) is at least 1.90 to 1.00.",
      "Future decisions to pay, increase or decrease dividends or to repurchase shares are at the discretion of the Board and will be dependent on a number of factors, including limitations pursuant to the terms and conditions of our Loan Agreement and applicable law."
     ],
     "support": "supported"
    },
    {
-    "basis": "The retirement is stated in P7. The effect on operations is not addressed in the cited items.",
-    "claim": "Who will succeed the bakery subsidiary's retiring president, and does the leadership change affect bakery operations? The filing gives only the retirement and a transition period.",
+    "basis": "stated in [F1] via the balance sheet line reference to Note 7, which is omitted from the packet",
+    "claim": "What legal proceedings, lease commitments, or other contingencies are disclosed in Note 7 of the Condensed Consolidated Financial Statements?",
     "facts": [
-     "P7"
+     "F1"
     ],
     "quotes": [
-     "Mr. Carango will continue to serve as President of the bakery into the first quarter of 2027 to assist with the leadership transition."
+     "Commitments and contingencies (Note 7)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3], [P4], and [P6] that reserves and IRS resolution are ongoing, while the omitted tax footnotes hold the cumulative unrecognized tax benefit balances",
+    "claim": "What is the total unrecognized tax benefit reserve and potential cash tax exposure from Internal Revenue Service positions related to tenant improvement allowances and Section 199 deductions?",
+    "facts": [
+     "F1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Represents change to a reserve for uncertain tax position taken in prior years related to tenant improvements allowances and Section 199 deductions.",
+     "Income taxes receivable | 30,658 | 20,702"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3], [P6], and [F3] for the full-year unit and capital expenditure expectations and nine-month additions, leaving fourth-quarter completions unsettled",
+    "claim": "How many of the expected as many as 26 new restaurants for fiscal 2026 will open by year-end, and is full-year capital spending on track with the anticipated approximately $210 million budget?",
+    "facts": [
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "The Company continues to expect to open as many as 26 new restaurants in fiscal 2026, including as many as five The Cheesecake Factory restaurants, eight North Italia locations, seven Flower Child locations and as many as six FRC restaurants.",
+     "We expect to open as many as 26 new restaurants in fiscal 2026 across our portfolio of concepts, with approximately one third of the openings occurring in the first half of fiscal 2026.",
+     "Additions to property and equipment | (144,238) | (121,048)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] and [F3] through the reported balance changes without an itemized breakdown",
+    "claim": "What specific accrued liabilities account for the increase in other accrued expenses from 265,275 to 320,832 (table in thousands) and the rise in construction payable to $ 38,800 (table in thousands)?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Other accrued expenses | 320,832 | 265,275",
+     "Construction payable | $ 38,800 | $ 15,920"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6] that these concepts and revenue streams are combined with unallocated corporate expenses and gift card costs in the Other segment",
+    "claim": "What are the separate revenues and operating profitability of Flower Child, Grand Lux Cafe, third-party bakery, international licensing, and consumer packaged goods within the Other segment?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Other segment includes the Flower Child and Grand Lux Cafe concepts, as well as the Company's third-party bakery, international and consumer packaged goods businesses, unallocated corporate expenses and gift card costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3] for first-quarter pricing and [P6] for third-quarter cost ratios, while [P4] MD&A expense analysis is truncated",
+    "claim": "What menu price increases were implemented after the first quarter of fiscal 2026, and how much of the third quarter decline in food and beverage costs to 21.2% and labor expenses to 34.8% reflected pricing, commodity trends, or sales leverage?",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We are in the process of implementing an approximate 1.5% menu price increase in the first quarter of fiscal 2026.",
+     "Food and beverage costs | 218,919 | 21.2% | 197,654 | 21.8% | 655,016 | 21.5% | 605,758 | 21.7%",
+     "Labor expenses | 359,758 | 34.8% | 322,774 | 35.6% | 1,059,002 | 34.8% | 987,368 | 35.4%"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "CAKE",
- "upside": -0.404142514767884,
  "valuation": null,
- "value_base": 66.05096196867913,
- "value_bear": 51.276431365822674,
- "value_bull": 88.33019241937106,
- "value_per_filed_share": {
-  "base": 66.05096196867913,
-  "bear": 51.276431365822674,
-  "bull": 88.33019241937106
- },
- "valued": true,
- "verdict": "AVOID",
- "verdict_reason": "expected return -15.8 points a year against the required return over 3 years"
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
 }
