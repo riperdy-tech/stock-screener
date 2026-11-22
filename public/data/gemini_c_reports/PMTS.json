@@ -1,652 +1,92 @@
 {
- "alpha_pts": 11.817530611444948,
+ "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 94,
- "claims_supported": 90,
- "date": "2026-11-18T03:46:38Z",
- "decided": {
-  "flags": [
-   "run 1000: quotes_verified: 11 of 11",
-   "run 3000: confidence_low",
-   "run 3000: quotes_verified: 9 of 9"
-  ],
-  "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.1643 and margin 0.0847, margin 0.1197 (persist), growth 0.0375, terminal RONIC 0.0828 (equity return r 0.0936), F 10",
-  "run_gap": 0.002109115503857087,
-  "runs": {
-   "1000": {
-    "adjustments": {
-     "base_year_one_offs": [
-      {
-       "amount": 287000.0,
-       "printed": 287,
-       "quotes": [
-        {
-         "id": "F2",
-         "quote": "Loss on debt extinguishment | (282) | (287) | (282) | (287)"
-        }
-       ],
-       "quotes_given": 1,
-       "scale": "thousands",
-       "sign": "charge",
-       "what": "Loss on debt extinguishment in 2025 (redemption of $20.0 million of Senior Notes); non-recurring non-operating item"
-      }
-     ],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 21700000.0,
-     "excess_cash_before": 21700000.0,
-     "k0_after": 33696179.076305225,
-     "k0_before": 33983179.076305225,
-     "k0_interest": 32360000.0,
-     "one_offs_charge": 287000.0,
-     "one_offs_gain": 0,
-     "stamps": [
-      "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
-     ],
-     "x0_after": 17687843.183671206,
-     "x0_before": 17488712.180911317
-    },
-    "confidence": "medium",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 326279809.8265201,
-     "seam_ratio": 1.0843313446996918,
-     "tv_share": 0.5024462439622158,
-     "wedge_rate_5": 0.0011105603457671098
-    },
-    "flags": [
-     "quotes_verified: 11 of 11"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.03,
-     "fade_years": 10,
-     "long_run_op_margin": 0.11,
-     "op_margin": [
-      0.09,
-      0.092,
-      0.094,
-      0.095,
-      0.096
-     ],
-     "return_on_new_investment_long_run": 0.2,
-     "rev_growth": [
-      0.125,
-      0.07,
-      0.06,
-      0.05,
-      0.045
-     ],
-     "terminal_growth": 0.035
-    },
-    "old_defaults_inputs": "year 1 growth 0.1643 and margin 0.0847, margin 0.1197 (persist), growth 0.0375, terminal RONIC 0.0828 (equity return r 0.0936), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 4,
-     "kept": 90
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.09,
-      0.13
-     ],
-     "rev_growth_y3": [
-      0.03,
-      0.09
-     ],
-     "terminal_growth": [
-      0.025,
-      0.04
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0266"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Pooled capital expenditure has been about 2.7% of revenue, but the new Indiana facility and finance-lease funded equipment push me slightly higher at 3%."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "The highly competitive, saturated and consolidated nature of our marketplace."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A competitive, consolidated market with customer concentration and contracts without volume commitments argues for a moderate fade period rather than a long or short one."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2022-12-31 | $475.7 million | 0.2683 | 0.1663"
-       },
-       {
-        "id": "P6",
-        "quote": "Integrated Paytech segment revenue increased 20% to $23.5 million"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Margins were 12-17% in 2020-2022 and 13-14% in 2023-2024, but they have slipped to about 10% as costs rose and tariffs and competition weigh. Growth in Integrated Paytech (gross margin above 55%) supports partial recovery, so I fade to 11%, below the 2020-2024 median."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "CPI continues to expect low-to-mid single-digit Adjusted EBITDA growth as growth and diversification investments continue."
-       },
-       {
-        "id": "F2",
-        "quote": "Selling, general and administrative expenses | 34,597 | 27,975 | 104,349 | 85,264"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 operating margin of 8.5% is below the 2025 level because SG&A is growing much faster than gross profit. Management guides only low-to-mid single-digit Adjusted EBITDA growth against double-digit revenue growth, so I start at about 9% and let it rise slowly with mix and operating leverage."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Base year: return on tangible capital 0.2600"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0828."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "The base-year return on tangible capital is 26%, helped by a small asset base and acquired intangibles, but new investment (including acquisitions at higher capital cost) should earn less, so I use 20%, well above the 8.3% break-even."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million"
-       },
-       {
-        "id": "F2",
-        "quote": "Revenue | $ 158,357 | $ 137,966 | $ 454,646 | $ 390,480"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 (fiscal 2026) is anchored on nine-month growth of 16.4% and guidance of low-double-digit growth for the year, which looks conservative given nine-month growth and implies a flat-to-down Q4. Growth then fades as the Arroweye and TRISM acquisition contributions lap and the market, described as saturated, grows more slowly."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0936; long-run nominal growth anchor g_anchor 0.0375."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Card reissuance gives steady demand, but mobile payments and a saturated market limit long-run growth, so I sit just below the long-run nominal growth anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.03,
-      "input_hit": "rev_growth",
-      "risk": "Loss or reduction of a key customer (one customer was about 16% of revenue, no volume commitments) or a prepaid or consumer-spending downturn"
-     },
-     {
-      "bear_value": 0.085,
-      "input_hit": "long_run_op_margin",
-      "risk": "Tariffs, SG&A growth and competitive pricing keep margins near 8-9%, and the tariff refunds do not recur"
-     },
-     {
-      "bear_value": 0.02,
-      "input_hit": "terminal_growth",
-      "risk": "Physical card demand erodes through mobile wallets and installment programs, lowering long-run growth"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.09,
-      "rev_growth": [
-       0.095,
-       0.04000000000000001,
-       0.03,
-       0.020000000000000004,
-       0.015
-      ],
-      "terminal_growth": 0.025
-     },
-     "bull": {
-      "long_run_op_margin": 0.13,
-      "rev_growth": [
-       0.155,
-       0.1,
-       0.09,
-       0.08,
-       0.075
-      ],
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Debt is $286.7 million at the 2025 year-end, down to $251.1 million at September 2026, and management targets a net leverage ratio of 2.5x-3.0x, so debt is roughly stable relative to earnings."
-     },
-     "margin_position": "The 2025 operating margin of 10.1% is below the 2020-2022 level of 12-17%. Gross margin fell as sales mix shifted, depreciation and tariff costs rose, and Arroweye integration costs hit SG&A. Nine-month 2026 operating margin is 8.5%, because SG&A grew 22.4% against revenue growth of 16.4%. Higher-margin Integrated Paytech and operating leverage should help recovery, but corporate and investment spending is heavy.",
-     "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The 30.6% base-year rate was lifted by non-deductible acquisition costs and state taxes, and the nine-month 2026 rate is about 32% (4,604 on 14,177), so it may fall toward the mid-20s but this is not confirmed."
-     },
-     "why": "2025 revenue grew 13.1% with a 10.1% operating margin, which is not a peak or a trough. 2026 is running at faster growth and a lower margin because of acquisitions (TRISM, Arroweye) and investment spending. Tariff refunds of about $4.0 million flatter 2026 gross profit, so I am not building in a quick margin rebound."
-    },
-    "value_at_old_defaults": 32.72147014030882,
-    "values": {
-     "base": 31.43624874167515,
-     "bear": 18.221982258084807,
-     "bull": 52.51285354413279
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [
-      {
-       "amount": 287000.0,
-       "printed": 287,
-       "quotes": [
-        {
-         "id": "F2",
-         "quote": "Loss on debt extinguishment | (282) | (287) | (282) | (287)"
-        }
-       ],
-       "quotes_given": 1,
-       "scale": "thousands",
-       "sign": "charge",
-       "what": "Loss on debt extinguishment (redemption of $20.0M of Senior Notes)"
-      }
-     ],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 21700000.0,
-     "excess_cash_before": 21700000.0,
-     "k0_after": 33696179.076305225,
-     "k0_before": 33983179.076305225,
-     "k0_interest": 32360000.0,
-     "one_offs_charge": 287000.0,
-     "one_offs_gain": 0,
-     "stamps": [
-      "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
-     ],
-     "x0_after": 17687843.183671206,
-     "x0_before": 17488712.180911317
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 325550123.55480266,
-     "seam_ratio": 1.0405551852882924,
-     "tv_share": 0.45103893621805213,
-     "wedge_rate_5": 0.0007681245128490999
-    },
-    "flags": [
-     "confidence_low",
-     "quotes_verified: 9 of 9"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.03,
-     "fade_years": 10,
-     "long_run_op_margin": 0.105,
-     "op_margin": [
-      0.092,
-      0.096,
-      0.1,
-      0.103,
-      0.105
-     ],
-     "return_on_new_investment_long_run": 0.18,
-     "rev_growth": [
-      0.135,
-      0.07,
-      0.06,
-      0.05,
-      0.045
-     ],
-     "terminal_growth": 0.035
-    },
-    "old_defaults_inputs": "year 1 growth 0.1643 and margin 0.0847, margin 0.1197 (persist), growth 0.0375, terminal RONIC 0.0828 (equity return r 0.0936), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 4,
-     "kept": 90
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.09,
-      0.12
-     ],
-     "rev_growth_y3": [
-      0.03,
-      0.09
-     ],
-     "terminal_growth": [
-      0.025,
-      0.04
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "F3",
-        "quote": "Capital expenditures for plant, equipment and leasehold improvements, net | (11,103) | (13,777)"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Nine-month 2026 net capex is about 2.4% of revenue, and the 5-year pooled figure is 2.7%. Finance-lease equipment sits outside capex, so a slightly higher 3.0% is used."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "Our marketplace is highly competitive, relatively saturated and increasingly consolidated."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A ten-year fade lets the acquisition-driven growth and the margin recovery settle gradually; the company is mature, with a saturated and consolidating market."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "Gross profit and gross profit margin decreased for the year ended December 31, 2025, primarily due to unfavorable sales mix and increased production costs, including increased depreciation and tariff expenses"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Half of the gap from the 2025 margin of 10.1% to the 13-16% of 2021-2024 is assumed to close. Tariffs, competition from larger global rivals and the investment spending limit the recovery."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "CPI continues to expect low-to-mid single-digit Adjusted EBITDA growth as growth and diversification investments continue."
-       },
-       {
-        "id": "F2",
-        "quote": "Income (loss) from operations | 15,655 | 13,018 | 38,513 | 36,545"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Management guides low-to-mid single-digit Adjusted EBITDA growth because growth investments continue, and 9M operating margin is about 8.5%, so 2026 margin stays near 9%. Margin recovers gradually as Integrated Paytech (gross margin above 55%) grows and SG&A levers."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "return on tangible capital 0.2600"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0828."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Return on tangible capital is high at 26% because the asset base is light, but competition and acquired goodwill should pull the return on new investment well below that. 0.18 stays comfortably above the break-even return of 0.0828."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "2026 guidance is low-double-digit growth with 9M up 16.4%, helped by Arroweye and TRISM, so year 1 is about 13.5%. Growth then fades toward the high single digits and mid single digits as acquisition contributions lapse, with contactless mix, share gains and Integrated Paytech supporting it."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Card reissuance is a steady demand base, but mobile and biometric payments could erode physical cards, so terminal growth is set slightly below the anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.02,
-      "input_hit": "rev_growth",
-      "risk": "Loss or downsizing of the largest customer (about 16% of revenue) or other top-10 customers, which have no exclusivity or volume commitments"
-     },
-     {
-      "bear_value": 0.085,
-      "input_hit": "long_run_op_margin",
-      "risk": "Tariff costs and pricing pressure keep margins at the 2025-2026 level (about 9-10%) with no recovery"
-     },
-     {
-      "bear_value": 0.02,
-      "input_hit": "terminal_growth",
-      "risk": "Substitution of physical cards by mobile, biometric and installment payments lowers long-run growth"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.09,
-      "rev_growth": [
-       0.10500000000000001,
-       0.04000000000000001,
-       0.03,
-       0.020000000000000004,
-       0.015
-      ],
-      "terminal_growth": 0.025
-     },
-     "bull": {
-      "long_run_op_margin": 0.12,
-      "rev_growth": [
-       0.165,
-       0.1,
-       0.09,
-       0.08,
-       0.075
-      ],
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "yes",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Debt fell to $251M at Sep 2026 and management targets net leverage of 2.5-3.0x, so the 2025 debt of $286.7M is somewhat high but near the level the company intends to keep."
-     },
-     "margin_position": "Operating margin was 10.1% in 2025, below the 13-17% of 2021-2024. Gross margin fell from 35.6% to 31.3% on unfavorable mix, tariffs and depreciation, and SG&A rose with the Arroweye integration. Nine-month 2026 margin is about 8.5%, held down by SG&A growth of 22.4% and helped by roughly $4.0M of tariff refunds. Margin is below its own multi-year median, so some recovery is likely but not all of it.",
-     "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The 2025 rate of 30.6% was lifted by non-deductible acquisition costs and state taxes, but the 9M 2026 rate is still about 32% (4,604 on 14,177 pretax), so the sustainable rate is uncertain."
-     },
-     "why": "2025 revenue grew 13.1% on Arroweye and contactless volumes, while operating margin fell 12.7% in operating income terms because of tariff and integration costs. Interest of $32.4M absorbs most of operating income, so equity value is very sensitive to operating margin. 2026 is running ahead on revenue, with 9M revenue up 16.4% and guidance raised twice. Margin is flat to slightly lower because of investment spending, so 2025 is a fair base for margin but understates the 2026 revenue level."
-    },
-    "value_at_old_defaults": 32.72147014030882,
-    "values": {
-     "base": 31.37001590841872,
-     "bear": 19.988658198487286,
-     "bull": 48.90210252375206
-    }
-   }
-  },
-  "situation_unclear": false,
-  "value_at_old_defaults": 32.72147014030882,
-  "value_at_old_defaults_quoted": 32.72147014030882,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+ "based_on": {
+  "accepted": "2026-11-04T12:06:05.000Z",
+  "accepted_utc": "2026-11-04T17:06:05Z",
+  "accession": "0001641614-26-000146",
+  "decision_time": "2026-11-22T01:24:29Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
  },
- "equity_value": 374384218.1876689,
+ "claims": 106,
+ "claims_supported": 104,
+ "date": "2026-11-22T01:24:29Z",
  "family": "operating",
- "far_from_price": false,
- "filed_shares": 11921875.0,
  "flags": [
-  "Selling stockholders affiliated with Tricor Pacific Capital Partners sold 2,337,323 common shares plus an exercised underwriters' option for 350,598 shares in a secondary public offering that yielded no proceeds to CPI and concluded Parallel49's ownership position.",
-  "Donna Abbey Carmignani ceased serving as Controller and Chief Accounting Officer under an agreement with CPI and became eligible for severance payments and benefits.",
-  "Brennan Hughes was appointed Chief Accounting Officer with an annual base salary of $350,000, target short-term and long-term incentive opportunities of $200,000 each, a $100,000 restricted stock unit award, and a $150,000 cash sign-on award."
+  "CPI increased its full-year financial guidance targets for revenue growth to low-double-digit growth and Free Cash Flow to $50 million to $55 million, while reaffirming all other financial guidance metrics.",
+  "Certain CPI stockholders completed a secondary public offering of approximately 2.7 million shares, concluding Parallel49's ownership position in CPI, while CPI incurred approximately $1.0 million of offering-related expenses.",
+  "CPI acquired TRISM, an on-premise instant issuance solution."
  ],
  "in_code_book": false,
- "ke": 0.09360305732783658,
- "market_cap_at_publish": 283478986,
+ "ke": null,
  "model": "gemini-4-hydrogen-high",
- "no_value_reason": null,
+ "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
  "pending_offer": null,
- "price_at_publish": 24.37,
  "qwen_book": null,
- "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
- "seed_base": {
-  "1000": 31.43624874167515,
-  "3000": 31.37001590841872
- },
- "seeds_agree": true,
- "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "release_truncated": [
+  "0001641614-26-000145"
+ ],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the cited items (P1 Business overview, P4 Company Overview).",
-    "claim": "CPI Card Group Inc. is a payments technology company providing physical and digital payment solutions to U.S. financial institutions, processors, fintechs, and prepaid program managers, serving thousands of customers through direct and indirect sales channels.",
+    "basis": "stated in P1 and P4",
+    "claim": "CPI generates revenue primarily by producing secure debit, credit, and prepaid debit cards and providing related services on major Payment Card Brand networks for U.S. financial institutions, processors, fintechs, prepaid program managers, and non-financial verticals such as healthcare and government disbursements.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
      "CPI is a payments technology company providing a comprehensive range of physical and digital payment solutions for U.S. financial institutions, processors, fintechs, prepaid program managers, and more.",
-     "We serve thousands of customers through direct and indirect sales channels and have maintained long-standing relationships with our top customers."
+     "Our revenues are primarily generated from the production and related service offerings of secure debit and credit cards that are issued on the networks of the Payment Card Brands, including Prepaid Debit Cards."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P1 Overview, P3 Company Overview).",
-    "claim": "The company primarily generates revenue by producing and servicing secure debit and credit cards, including Prepaid Debit Cards, issued on the Visa, Mastercard, American Express, and Discover networks.",
+    "basis": "stated in P1 and P3",
+    "claim": "CPI sells contact, contactless, metal, eco-focused, and magnetic-stripe cards along with card data personalization, mailing, and Arroweye on-demand fulfillment solutions, with contactless cards generally carrying higher selling prices than contact-only cards.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "Our revenues are primarily generated from the production and related service offerings of secure debit and credit cards that are issued on the networks of the Payment Card Brands, including Prepaid Debit Cards.",
-     "We are also a market leader in the production of \u201cPrepaid Debit Cards,\u201d defined as debit cards issued on the networks of the \u201cPayment Card Brands\u201d (Visa, Mastercard\u00ae, American Express\u00ae and Discover\u00ae) but not linked to a traditional bank account, and related secure packaging solutions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P1 Debit and Credit Payment and Other Cards).",
-    "claim": "Physical card production centers on contactless dual-interface cards using RFID and NFC technology, alongside eco-focused Second Wave and Earthwise cards, metal cards, and non-chip magnetic-stripe cards.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
      "We primarily produce contactless cards that are issued on the networks of the Payment Card Brands.",
-     "Dependent upon design and card construction, our Second Wave\u00ae and Earthwise\u00ae eco-focused cards incorporate various types and amounts of upcycled material, including recycled ocean-bound plastic (\u201cROBP\u201d) and recycled PVC.",
-     "We also have a variety of metal card offerings that we produce as contact or contactless depending on the needs of our customers."
+     "Contactless cards have additional technology to process contactless transactions and generally have a higher selling price than contact-only cards."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P1 Card Data Personalization and Fulfillment; Integrated End-to-End On-Demand Payment Card Solution).",
-    "claim": "CPI provides card data preparation, personalization, and mailing fulfillment\u2014expanded into an integrated, on-demand payment card solution through the acquisition of Arroweye\u2014across financial, healthcare, government, payroll, and incentive verticals.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We offer a variety of data personalization and mailing solutions for both daily and bulk mail programs.",
-     "We expanded our card production, data personalization and fulfillment capabilities in May 2025 through our acquisition of Arroweye.",
-     "Arroweye\u2019s payment card solutions expanded our customer base across prepaid program managers, payroll related providers, healthcare related providers, and fintechs of all types, in addition to banks and credit unions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited items (P1, P4, P6, P10).",
-    "claim": "CPI also sells its proprietary SaaS-based Card@Once instant issuance system\u2014servicing approximately 2,500 financial institutions with more than 14,000 active installations\u2014alongside on-premise instant issuance via TRISM and digital wallet push provisioning.",
+    "basis": "stated in P1 and P6",
+    "claim": "Through its Card@Once SaaS platform (more than 14,000 active installations across approximately 2,500 financial institutions at year-end 2025) and acquired TRISM on-premise solution, CPI earns initial hardware sales and recurring card-issuance revenue, while other digital solutions such as mobile-wallet push provisioning have generated insignificant revenue to date.",
     "facts": [
      "P1",
-     "P4",
-     "P6",
-     "P10"
+     "P6"
     ],
     "quotes": [
      "Our Card@Once solution generates both initial sales revenue for the hardware and recurring revenue from the related card issuance activities.",
      "As of December 31, 2025, we serviced approximately 2,500 financial institutions representing more than 14,000 active Card@Once installations.",
-     "Integrated Paytech: primarily provides cloud-based and on-premise solutions that enable customers to issue instantly personalized debit and credit cards at customer locations, as well as other digital payment solutions, including push provisioning for mobile wallets."
+     "Although revenues for these additional digital solutions have been insignificant to date, we believe these solutions have the opportunity to grow in the future."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P1 Prepaid Debit Cards and Related Tamper-Evident Secure Packaging Solutions, P4 Segment Overview).",
-    "claim": "In its prepaid business, CPI sells open-loop reloadable cards, retail gift cards, Restricted Authorization Network cards, tamper-evident secure packaging, and retail point-of-sale activation data and fulfillment services to U.S. prepaid program managers.",
+    "basis": "stated in P1",
+    "claim": "For U.S. prepaid program managers selling into retail channels, CPI produces open-loop, closed-loop retail gift, and Restricted Authorization Network prepaid cards alongside tamper-evident secure packaging, point-of-sale activation data, and retail fulfillment.",
     "facts": [
-     "P1",
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "Our prepaid solutions include open-loop general purpose reloadable cards that are issued on the networks of the Payment Card Brands, retail gift cards that can be utilized for purchases on an open or closed-loop network, and Restricted Authorization Network prepaid cards designed for a unique set of merchants.",
-     "For prepaid cards sold through retail, the relationships and processes we developed allow us to provide activation data, including information printed on the packaging which transacts with the retailer\u2019s point of sale system to activate cards for use."
+     "Prepaid program managers sell the cards and related packages we produce to retail channels, including national big box, grocery, and convenience/gas retailers, and others in various industries.",
+     "Our prepaid solutions include open-loop general purpose reloadable cards that are issued on the networks of the Payment Card Brands, retail gift cards that can be utilized for purchases on an open or closed-loop network, and Restricted Authorization Network prepaid cards designed for a unique set of merchants."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P3 2026 Changes in Reportable Segments, P4 Segment Overview, P6 Segment Summary Information).",
-    "claim": "Beginning in the first quarter of 2026, CPI reorganized its reporting structure from Debit and Credit, Prepaid Debit, and Other into three operating segments\u2014Secure Card Solutions, Prepaid Solutions, and Integrated Paytech\u2014plus Corporate expenses.",
-    "facts": [
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "In connection with our increased strategic focus on expanding and developing additional proprietary integrated technological solutions for our customer base and to reflect the manner in which the Company\u2019s Chief Operating Decision Maker (\u201cCODM\u201d), the Chief Executive Officer (\u201cCEO\u201d), manages our business, we implemented a revised segment structure to assess performance and allocate resources, beginning in the first quarter of 2026.",
-     "The changes in our segment structure primarily relate to the separation of the results of our proprietary integrated technologically related operations into a separate segment from the former Debit and Credit segment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P6 8-K Exhibit 99.1 prose and Segment Summary Information).",
-    "claim": "Secure Card Solutions is the largest operating segment, generating $332.6 million in revenue (up 21%) and a 26.1% gross profit margin in the first nine months of 2026.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Secure Card Solutions segment revenue increased 21% to $332.6 million, driven by increased sales of contactless cards and contributions from the acquisition of Arroweye.",
-     "Secure Card Solutions | $86,829 | 26.1% | $67,665 | 24.6% | $19,164 | 28.3%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P6 8-K Exhibit 99.1 prose and Segment Summary Information).",
-    "claim": "Prepaid Solutions generated $71.6 million in revenue (up 3%) with a 29.5% gross profit margin in the first nine months of 2026, and a 33.6% gross profit margin in the third quarter of 2026.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Prepaid Solutions segment revenue increased 3% to $71.6 million, primarily due to increased sales of closed loop prepaid cards, as well as the change in accounting that was implemented in the second quarter of 2025.",
-     "Prepaid Solutions | 21,109 | 29.5% | 21,962 | 31.7% | (853) | (3.9)%",
-     "Prepaid Solutions | 9,024 | 33.6% | 7,049 | 30.2% | 1,975 | 28.0%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P6 8-K Exhibit 99.1).",
-    "claim": "Integrated Paytech is CPI's highest-margin segment, generating $63.0 million in revenue (up 8%) in the first nine months of 2026 with gross profit margins above 55%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Integrated Paytech segment revenue increased 8% to $63.0 million compared to strong revenue levels in 2025, primarily driven by contributions from TRISM, while gross profit margins remained consistent at over 55%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P2 Risk Factors).",
-    "claim": "Revenue is concentrated among key accounts\u2014one customer accounted for approximately 16% of 2025 total revenue and the top 10 direct customers accounted for more than half\u2014under agreements generally lacking exclusivity or medium- or long-term volume commitments.",
+    "basis": "stated in P2",
+    "claim": "Revenue is concentrated among long-tenured accounts\u2014one customer represented approximately 16% of 2025 revenue and the top 10 direct customers (including Resellers) accounted for more than half\u2014without contractual exclusivity or medium- or long-term volume commitments.",
     "facts": [
      "P2"
     ],
@@ -658,97 +98,91 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P1 Overview).",
-    "claim": "Long-term revenue demand is driven by continuous payment card reissuance from expiration, re-branding, and replacement, alongside new account openings by legacy issuers and fintechs and consumers switching financial institutions.",
+    "basis": "stated in P3 and P4",
+    "claim": "Beginning in the first quarter of 2026, CPI reorganized its former Debit and Credit, Prepaid Debit, and Other reporting segments into three business segments\u2014Secure Card Solutions, Prepaid Solutions, and Integrated Paytech\u2014plus Corporate.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The U.S. payment card solutions market in which we operate has experienced growth in cards-in-circulation over a long-term period, driven by new account openings by legacy issuers and new entrants to the payment card market, such as financial technology companies (\u201cfintechs\u201d) and others.",
-     "The U.S. payment card solutions market is characterized by users (primarily U.S. consumers) maintaining multiple payment cards both physically and digitally and by historically stable and recurring revenue driven by the continuous reissuance of debit and credit cards due to card expiration, re-branding, and card replacement activity, and by U.S. consumers switching from one financial institution to another."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited items (P2, P3, P6).",
-    "claim": "Revenue growth and realized pricing also move with contactless mix\u2014contactless cards generally carry higher selling prices than contact-only cards\u2014acquisitions such as Arroweye ($42.8 million, or 7.9% of 2025 revenue) and TRISM, customer inventory practices, and macroeconomic spending.",
-    "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Contactless cards have additional technology to process contactless transactions and generally have a higher selling price than contact-only cards.",
-     "Revenue increased $62.9 million for the year ended December 31, 2025, primarily due to contributions of $42.8 million, or 7.9% of revenue for the year ended December 31, 2025, from the acquisition of Arroweye as well as increased volumes of contactless cards, partially offset by decreased revenue in our Prepaid Debit segment.",
-     "Our business depends heavily on consumer and business spending.",
-     "In particular, the rise in the adoption in digital payment systems or mobile payments may make physical cards less attractive as a method of payment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited items (P2, P3, P4).",
-    "claim": "Cost of goods sold (311,784 (table in thousands) in the first nine months of 2026) is driven by raw materials\u2014notably microchips and antennas, where 93% of 2025 purchase value came from three main suppliers and 74% from one supplier\u2014plus labor, facilities, overhead, depreciation, leases, and shipping.",
-    "facts": [
-     "P2",
      "P3",
      "P4"
     ],
     "quotes": [
-     "Cost of goods sold (1) | 108,105 | 96,973 | 11,132 | 11.5% | 311,784 | 268,671 | 43,113 | 16.0%",
-     "Costs include the cost of raw materials, including microchips for all applicable cards and antennas for contactless cards, labor costs, equipment and facilities costs, operation overhead, depreciation and amortization, leases and transport costs.",
-     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips."
+     "The changes in our segment structure primarily relate to the separation of the results of our proprietary integrated technologically related operations into a separate segment from the former Debit and Credit segment."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P2, P3, P6).",
-    "claim": "Inflation and trade tariffs move production and material costs, with gross margin in the first nine months of 2026 aided by approximately $4.0 million of Secure Card Solutions tariff refunds, partially offset by approximately $1.0 million of tariff expenses in other segments and higher depreciation.",
+    "basis": "stated in P6",
+    "claim": "In the nine months ended September 30, 2026, Secure Card Solutions generated the largest revenue at $332,618 (table in thousands) with a 26.1% gross margin, Prepaid Solutions generated $71,553 (table in thousands) at a 29.5% gross margin, and Integrated Paytech generated $62,974 (table in thousands) at a 55.5% gross margin, before (12,499) in intersegment revenue eliminations and $(56,184) in Corporate operating loss (both table in thousands).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Gross profit increased 23%, outpacing revenue growth and driving 200 basis points of gross margin expansion, supported by strong performance and better margins in Secure Card and Prepaid Solutions and accelerated growth in higher-margin Integrated Paytech.",
+     "Integrated Paytech segment revenue increased 8% to $63.0 million compared to strong revenue levels in 2025, primarily driven by contributions from TRISM, while gross profit margins remained consistent at over 55%."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "Underlying card demand is driven by U.S. cards-in-circulation growth from legacy issuers and fintechs and recurring card reissuance from expiration, re-branding, replacement, and bank switching, while macro spending downturns, tighter issuer credit, customer inventory shifts, and digital payment adoption can reduce demand.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The U.S. payment card solutions market in which we operate has experienced growth in cards-in-circulation over a long-term period, driven by new account openings by legacy issuers and new entrants to the payment card market, such as financial technology companies (\u201cfintechs\u201d) and others.",
+     "A sustained deterioration in general economic conditions, particularly in the United States, or increases in interest rates may adversely affect our financial performance by reducing the demand for our payment card solutions or reducing the purchase of our higher margin products and credit card issuers may reduce credit limits, close accounts and become more selective in issuing credit cards."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Recent consolidated revenue growth\u2014up 13.1% to $543,534 (table in thousands) in 2025 and up 16.4% to $454,646 (table in thousands) in the first nine months of 2026\u2014has been driven by higher contactless card volumes and acquisitions (Arroweye contributing $42.8 million, or 7.9% of 2025 revenue, and TRISM in 2026), alongside shifts in closed- and open-loop prepaid demand and a 2025 revenue-recognition timing change for work-in-process orders.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Revenue increased $62.9 million for the year ended December 31, 2025, primarily due to contributions of $42.8 million, or 7.9% of revenue for the year ended December 31, 2025, from the acquisition of Arroweye as well as increased volumes of contactless cards, partially offset by decreased revenue in our Prepaid Debit segment.",
+     "Secure Card Solutions segment revenue increased 21% to $332.6 million, driven by increased sales of contactless cards and contributions from the acquisition of Arroweye."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, and P6",
+    "claim": "Cost of goods sold is driven by raw materials (microchips, contactless antennas, substrates, and resin\u2014with approximately 93% of 2025 microchip and antenna purchases from three suppliers and approximately 74% from one supplier), production labor, facility and equipment depreciation, leases, shipping, and tariff impacts (tariff expenses compressed 2025 gross margin to 31.3%, while approximately $4.0 million of tariff refunds less approximately $1.0 million of tariff expenses aided the 31.4% gross margin in the first nine months of 2026).",
     "facts": [
      "P2",
      "P3",
      "P6"
     ],
     "quotes": [
-     "Inflation has adversely affected us by increasing the costs of materials and labor needed to operate our business and could continue to adversely affect us in future periods.",
-     "Changes in U.S. and global trade policy and the impact of tariffs have had and may continue to have a material adverse effect on our business and results of operations.",
+     "Costs include the cost of raw materials, including microchips for all applicable cards and antennas for contactless cards, labor costs, equipment and facilities costs, operation overhead, depreciation and amortization, leases and transport costs.",
+     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips.",
      "Gross profit margin of 31.4% increased from 31.2% in the prior year period, primarily due to increased revenue and approximately $4.0 million of tariff refunds in our Secure Card Solutions segment, partially offset by approximately $1.0 million of tariff expenses in our other reportable segments and increased depreciation expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P3, P4).",
-    "claim": "Selling, general and administrative expenses (104,349 (table in thousands) in the first nine months of 2026, up 22.4%) reflect corporate, sales, IT, R&D, and stock-based compensation costs, and increase with headcount, technology investments, and acquisition integration fees such as $6.0 million for Arroweye in 2025.",
+    "basis": "stated in F2, P3, P4, and P6",
+    "claim": "Below gross profit, SG&A\u2014covering corporate, sales, IT, R&D, stock-based compensation, and acquisition and integration expenses ($6.0 million in 2025 and $7.1 million in the first nine months of 2026)\u2014reached 104,349 (table in thousands) in the first nine months of 2026, while net interest expense of (23,072) (table in thousands) on Senior Secured Notes and the ABL Revolver weighed heavily against 38,513 (table in thousands) in operating income.",
     "facts": [
+     "F2",
      "P3",
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Selling, general and administrative expenses | 34,597 | 27,975 | 6,622 | 23.7% | 104,349 | 85,264 | 19,085 | 22.4%",
      "Selling, general and administrative expenses (\u201cSG&A\u201d) primarily consist of expenses for executive, finance, sales, marketing, legal and compliance, information technology, procurement, customer service, human resources, research and development and administrative personnel, including payroll, benefits and stock-based compensation expense, bad debt expense and outside legal and other advisory fees, including consulting, accounting, and software related fees.",
      "Selling, general and administrative expenses increased for the year ended December 31, 2025, primarily due to increased professional service fees and other costs of $6.0 million associated with the acquisition and integration of Arroweye."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited items (F1, F3, P3).",
-    "claim": "Interest expense is a major non-operating cost driver given 251,135 (table in thousands) of long-term debt as of September 30, 2026, with cash interest paid totaling 29,876 (table in thousands) in the first nine months of 2026.",
-    "facts": [
-     "F1",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Long-term debt | 251,135 | 286,668",
-     "Interest paid | 29,876 | 31,099",
-     "As of December 31, 2025, the total projected principal and interest payments on our borrowings are $392.7 million, primarily related to the Senior Notes, of which $28.5 million of interest is expected to be paid in the next 12 months."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated directly by management in Item 1 of the 2025 Form 10-K; no independent market share ranking is included in the evidence.",
-    "claim": "CPI is a market leader in U.S. debit and credit card production, personalization, SaaS-based instant issuance, and Prepaid Debit Cards with secure packaging solutions.",
+    "basis": "stated in P1",
+    "claim": "CPI holds market-leading U.S. positions in debit and credit card production, personalization, SaaS-based instant issuance, and Prepaid Debit Cards with secure packaging.",
     "facts": [
      "P1"
     ],
@@ -759,99 +193,85 @@
     "support": "supported"
    },
    {
-    "basis": "Stated as management belief in Item 1 of the 2025 Form 10-K and CEO commentary in the Q3 2026 earnings release.",
-    "claim": "Management reports that CPI gained estimated overall U.S. market share over recent years and continued gaining share through the third quarter.",
+    "basis": "stated in P1 as management's belief",
+    "claim": "Management reports that CPI gained estimated overall U.S. payment card market share over recent years through customer service, quality, and innovation.",
     "facts": [
-     "P1",
-     "P6"
+     "P1"
     ],
     "quotes": [
-     "We believe these efforts have resulted in CPI gaining estimated overall U.S. market share over the last several years.",
-     "We are gaining share while executing on our growth strategy to expand our capabilities, diversify our business and create new avenues for long-term growth and shareholder value creation."
+     "We believe these efforts have resulted in CPI gaining estimated overall U.S. market share over the last several years."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1 and Item 1A of the 2025 Form 10-K.",
-    "claim": "CPI serves thousands of customers and has collaborated with its top 10 direct customers for an average of more than 10 years, supported by operational and technology integrations.",
+    "basis": "stated in P1",
+    "claim": "CPI has collaborated with its top 10 customers for more than 10 years on average and integrates into customer workflows via secure data links.",
     "facts": [
-     "P1",
-     "P2"
+     "P1"
     ],
     "quotes": [
      "We have long-standing, trust-based relationships with customers and have collaborated with our top 10 customers for more than 10 years, on average.",
-     "Our customer relationships generally involve the handling of sensitive information and require process and/or technology integration."
+     "We are integral to many of our customers\u2019 card programs, pairing design and production with end-to-end offerings that are integrated within our customers\u2019 operations and require process and/or technology integration, such as secure data links to transfer highly sensitive cardholder information."
     ],
     "support": "supported"
    },
    {
-    "basis": "Installed base stated in Item 1 of the 2025 Form 10-K; addressable market doubling and leadership stated as management belief in the Q2 2026 earnings release.",
-    "claim": "CPI's proprietary and patented SaaS-based Card@Once instant issuance system served approximately 2,500 financial institutions across more than 14,000 active installations, and management believes the TRISM acquisition doubled its U.S. instant issuance addressable market.",
+    "basis": "stated in P1",
+    "claim": "CPI's proprietary and patented Card@Once SaaS instant issuance platform served approximately 2,500 financial institutions across more than 14,000 active installations at the end of 2025, backed by more than 10 years of U.S. payments ecosystem integrations.",
     "facts": [
-     "P1",
-     "P10"
+     "P1"
     ],
     "quotes": [
      "As of December 31, 2025, we serviced approximately 2,500 financial institutions representing more than 14,000 active Card@Once installations.",
-     "With the TRISM acquisition, we believe we have doubled our addressable market in U.S. instant issuance and are now the clear leader."
+     "We have been implementing these integrations for more than 10 years to support the reselling of card personalization services through our digital SaaS-based instant issuance solution."
     ],
     "support": "supported"
    },
    {
-    "basis": "Leadership stated as management belief and card brand approvals stated as fact in Item 1 of the 2025 Form 10-K.",
-    "claim": "Management believes CPI is a leading U.S. provider of eco-focused card solutions, with its Second Wave and Earthwise portfolio approved by major Payment Card Brands.",
+    "basis": "stated in P6 and P1",
+    "claim": "CPI's Integrated Paytech segment increased third-quarter 2026 revenue by 20% to $23.5 million while maintaining gross profit margin above 55%, supported by Card@Once growth and the TRISM acquisition.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We believe we are a leading provider of eco-focused card solutions in the U.S. payments market.",
-     "Cards in our eco-focused portfolio have been approved by two of the major Payment Card Brands."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1 of the 2025 Form 10-K.",
-    "claim": "CPI combines end-to-end card production, personalization, and Arroweye on-demand fulfillment with tamper-evident prepaid packaging and retail point-of-sale activation integration.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "This on-demand, highly customizable solution provides customers the opportunity to significantly reduce the time to set up new card programs and eliminates the need to maintain inventories of their customized cards and mailers.",
-     "We also offer specialized and innovative tamper-evident secure packaging solutions aimed at reducing fraud."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the consolidated statements of operations and MD&A of the 2025 Form 10-K and Q3 2026 Form 10-Q.",
-    "claim": "Consolidated revenue grew 13.1% to $543,534 (table in thousands) in the full fiscal year and increased 16.4% to $454,646 (table in thousands) year-to-date through September.",
-    "facts": [
-     "F2",
-     "P3",
+     "P6",
      "P4"
     ],
     "quotes": [
-     "Revenue increased $62.9 million for the year ended December 31, 2025, primarily due to contributions of $42.8 million, or 7.9% of revenue for the year ended December 31, 2025, from the acquisition of Arroweye as well as increased volumes of contactless cards, partially offset by decreased revenue in our Prepaid Debit segment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 8-K earnings release (Exhibit 99.1).",
-    "claim": "Each reportable segment posted double-digit third-quarter revenue growth, led by Integrated Paytech rising 20% to $23.5 million with a gross profit margin over 55%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Double-digit growth across each of our segments, improved profitability and strong commercial wins demonstrate the progress we are making against our strategy.",
      "Integrated Paytech segment revenue increased 20% to $23.5 million, primarily due to contributions from the acquisition of TRISM and growth in the cloud-based Card@Once solution, while gross profit margin remained consistent at over 55%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated as a risk factor in Item 1A of the 2025 Form 10-K and incorporated by reference in the Q3 2026 Form 10-Q.",
-    "claim": "CPI operates in a highly competitive, relatively saturated, and consolidating market against larger global rivals, new entrants, suppliers, and customers that may develop in-house solutions.",
+    "basis": "stated in P1 and P6",
+    "claim": "CPI differentiates through approved eco-focused cards, tamper-evident prepaid packaging, and Arroweye's on-demand model, which secured more than 30 new customer wins including a top 15 issuer since May 2025.",
     "facts": [
-     "P2",
-     "P4"
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "We believe we are a leading provider of eco-focused card solutions in the U.S. payments market.",
+     "We also offer specialized and innovative tamper-evident secure packaging solutions aimed at reducing fraud.",
+     "This on-demand, highly customizable solution provides customers the opportunity to significantly reduce the time to set up new card programs and eliminates the need to maintain inventories of their customized cards and mailers.",
+     "CPI is nearing completion of the integration of Arroweye, and continues to outperform the Company\u2019s original investment case and is generating strong commercial momentum by securing more than 30 new customer wins since the acquisition in May 2025, including a top 15 issuer that was not previously a CPI customer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4, P6, and P3",
+    "claim": "In the first nine months of 2026, consolidated revenue grew 16.4% to $454,646 (table in thousands) while third-quarter gross profit margin expanded to 31.7% from 29.7% in the prior-year period.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Revenue increased 16% to a company record of $454.6 million in the first nine months of 2026, compared to the prior year period.",
+     "Gross profit increased 23%, outpacing revenue growth and driving 200 basis points of gross margin expansion, supported by strong performance and better margins in Secure Card and Prepaid Solutions and accelerated growth in higher-margin Integrated Paytech."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "CPI faces intense competition in a saturated and consolidating marketplace from larger global rivals with greater resources and lower-cost geographies, new entrants, and customer insourcing.",
+    "facts": [
+     "P2"
     ],
     "quotes": [
      "Our marketplace is highly competitive, relatively saturated and increasingly consolidated.",
@@ -861,22 +281,32 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1 and Item 1A of the 2025 Form 10-K and referenced in Q3 2026 Form 10-Q risk disclosures.",
-    "claim": "Adoption of mobile payments, biometric payments, direct installment programs, and AI-enabled alternatives could reduce physical card demand, while CPI has limited research and development resources relative to many competitors.",
+    "basis": "stated in P2",
+    "claim": "CPI has limited research and development resources compared to many competitors, risking slower product roll-outs and disadvantage in commercializing new technologies and artificial intelligence.",
     "facts": [
-     "P1",
-     "P2",
-     "P4"
+     "P2"
     ],
     "quotes": [
-     "Mobile payments, biometric payments and direct installment payment programs allow consumers to make purchases without the need to carry a physical card and could, if widely adopted, reduce the number of debit and credit cards issued to consumers.",
      "We have limited research and development resources compared to many of our competitors, which may result in an immature product development process and lengthy product roll-outs, and competitors may be able to develop and commercialize competing products more quickly and efficiently."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1A of the 2025 Form 10-K.",
-    "claim": "Revenue is concentrated, with CPI's largest customer accounting for approximately 16% of total revenue and its top 10 direct customers accounting for more than half, under contracts generally without exclusivity or volume commitments.",
+    "basis": "stated in P2; counter stated in P1, P3, and P6",
+    "claim": "Widespread adoption of digital or mobile payments, direct merchant buy-now-pay-later programs, and artificial intelligence could reduce physical card demand and make CPI's products obsolete.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In particular, the rise in the adoption in digital payment systems or mobile payments may make physical cards less attractive as a method of payment.",
+     "Certain merchants are also increasingly offering \u201cbuy now pay later\u201d installment programs directly to consumers which may eliminate the use of a payment card to complete a transaction.",
+     "In addition, other new and developing technology solutions and products, including artificial intelligence and machine learning capabilities, could make our existing technology solutions and products obsolete or irrelevant."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Revenue is concentrated, with a single customer representing approximately 16% and top 10 direct customers representing more than half of 2025 revenue, under non-exclusive contracts without volume commitments.",
     "facts": [
      "P2"
     ],
@@ -888,67 +318,52 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1A of the 2025 Form 10-K.",
-    "claim": "CPI faces high supply-chain concentration, sourcing approximately 93% of purchased microchips and antennas by value from its main suppliers and approximately 74% from a single supplier.",
+    "basis": "stated in P2",
+    "claim": "CPI relies on concentrated suppliers\u2014sourcing approximately 93% of 2025 microchip and antenna purchase value from its main suppliers and approximately 74% from a single supplier without immediate replacements\u2014and faces tariff pressures.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips.",
-     "Moreover, in certain cases, such as with ROBP, microchip and resin suppliers, we may rely on suppliers for which there are not adequate and immediate replacements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1A of the 2025 Form 10-K and the Q3 2026 Form 8-K earnings release.",
-    "claim": "Changes in U.S. and global trade policy and tariffs have materially and adversely affected CPI's business and remain a threat to margins and costs.",
-    "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
+     "Moreover, in certain cases, such as with ROBP, microchip and resin suppliers, we may rely on suppliers for which there are not adequate and immediate replacements.",
      "Changes in U.S. and global trade policy and the impact of tariffs have had and may continue to have a material adverse effect on our business and results of operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1 and Item 1A of the 2025 Form 10-K and referenced in Q3 2026 Form 10-Q risk disclosures.",
-    "claim": "Cyber-attacks, encryption breaches, IT outages, or failure to maintain annual PCI Security Standards Council compliance could compromise sensitive cardholder data and damage CPI's competitive position.",
+    "basis": "stated in P2",
+    "claim": "Cyber-attacks, encryption breaches, or failure to maintain PCI Security Standards Council compliance could compromise sensitive cardholder data, disrupt production, and harm CPI's competitive position.",
     "facts": [
-     "P1",
-     "P2",
-     "P4"
+     "P2"
     ],
     "quotes": [
-     "Any material breach of our secured systems could harm our competitive position, result in a loss of customer trust and confidence, and cause us to incur significant costs to remedy the damages caused by system or network disruptions, which could ultimately have a material adverse effect on our business, financial condition and results of operations.",
-     "These processes are audited for Payment Card Industry (\u201cPCI\u201d) Security Standards Council data security standards compliance annually."
+     "A breach of our security defenses could result in a loss of our intellectual property, the release of sensitive cardholder information and customer, consumer or employee personal data, or the loss of production capabilities at one or more of our production facilities.",
+     "Our failure to comply with the standards of the PCI Security Standards Council and other industry standards, including due to an inability to continue to make investments in our facilities necessary to maintain compliance with such standards."
     ],
     "support": "supported"
    },
    {
-    "basis": "Long-term debt stated on the Q3 2026 Form 10-Q balance sheet; covenant and integration risks stated in Item 1A of the 2025 Form 10-K and Item 2 of the Q3 2026 Form 10-Q.",
-    "claim": "Long-term debt of 251,135 (table in thousands) and restrictive debt covenants limit cash flow flexibility and strategic pursuits, alongside integration risks from acquisitions such as Arroweye and TRISM.",
+    "basis": "stated in F1 and P2; counter stated in P6",
+    "claim": "Long-term debt of 251,135 (table in thousands) in the third quarter of 2026, restrictive debt covenants, and limited capital-markets access constrain cash flow allocation and strategic initiatives.",
     "facts": [
      "F1",
      "P2",
-     "P4"
+     "P6"
     ],
     "quotes": [
      "Our indebtedness and the covenants and restrictions in the agreements governing our indebtedness limiting our ability to use our cash flow in certain areas of our business, capitalize on certain business opportunities and pursue our business strategies, all of which could be further impacted if we incur additional debt and could impact our ability to make debt service payments.",
-     "We may not realize the potential benefits from the acquisition of Arroweye because of difficulties related to integration, the achievement of synergies and other challenges."
+     "Our inability to successfully access capital markets due to the effects of the low trading volume and fluctuating trading price of our common stock as well as terms of our outstanding indebtedness and unfavorable market conditions, which may lead to delays in innovation or the abandonment of our strategic initiatives."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1A of the 2025 Form 10-K and referenced in Q3 2026 Form 10-Q risk disclosures.",
-    "claim": "Economic downturns, inflation in labor and materials, and financial stress among fintech customers threaten card demand and pricing power.",
+    "basis": "stated in P2",
+    "claim": "CPI faces integration risks on the Arroweye acquisition and potential customer pushback or attrition if inflationary cost pressures require additional sales price increases.",
     "facts": [
-     "P2",
-     "P4"
+     "P2"
     ],
     "quotes": [
-     "Certain of our customers, especially in the fintech space, could be severely impacted by reduced credit card spending, or cease to exist altogether.",
+     "We may not realize the potential benefits from the acquisition of Arroweye because of difficulties related to integration, the achievement of synergies and other challenges.",
      "Such increases may result in customer pushback or attrition and be difficult or impossible in future periods, all of which may have an adverse effect on our financial condition and results of operations."
     ],
     "support": "supported"
@@ -956,146 +371,113 @@
   ],
   "financial_health": [
    {
-    "basis": "Stated in F1.",
-    "claim": "Cash and cash equivalents decreased to $ 15,177 (table in thousands) at quarter-end from $ 21,700 (table in thousands) at the prior year-end.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 15,177 | $ 21,700"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance sheet amounts stated in F1; working capital drivers stated in P3.",
-    "claim": "Total current assets were 183,002 (table in thousands) compared with total current liabilities of 88,739 (table in thousands), with accounts receivable of 91,086 and inventories of 64,444 (table in thousands) comprising most current assets.",
+    "basis": "stated in the cited items (Condensed Consolidated Balance Sheets in F1 and Exhibit B of P6)",
+    "claim": "As of September 30, 2026, CPI held cash and cash equivalents of $15,177 (table in thousands), down from $21,700 (table in thousands) at December 31, 2025, while total current assets of 183,002 (table in thousands) exceeded total current liabilities of 88,739 (table in thousands).",
     "facts": [
      "F1",
-     "P3"
+     "P6"
     ],
     "quotes": [
-     "Total current assets | 183,002 | 204,944",
-     "Total current liabilities | 88,739 | 84,097",
-     "Our working capital fluctuates primarily due to timing and size of tax payments, collections from customers, inventory purchases, payments of employee incentive programs, and interest payments on our outstanding Senior Notes, with the interest payments being due in the first and third quarters of the year."
+     "As of September 30, 2026, the Company had $15 million of cash and cash equivalents, ABL Revolver borrowings of $15 million, and $238.5 million of 10% Senior Secured Notes due 2029."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3.",
-    "claim": "The company maintains an asset-based revolving credit facility whose borrowing capacity was increased from $75.0 million to $100.0 million, with $74.7 million of available borrowing capacity and $25.0 million drawn at the prior year-end.",
+    "basis": "stated in the cited items (10-K MD&A in P3 and Q3 2026 earnings release in P6)",
+    "claim": "CPI has a $100.0 million ABL Revolver with $15 million borrowed as of September 30, 2026 (down from $25.0 million borrowed and $74.7 million of available borrowing capacity at December 31, 2025), subject to Borrowing Base limits and a 1.00 to 1.00 fixed charge coverage ratio if availability drops below the greater of $7.5 million and 10% of the Maximum Revolver Amount.",
     "facts": [
-     "P3"
+     "P3",
+     "P6"
     ],
     "quotes": [
      "On July 2, 2025, the Company, the Borrower, and JPMorgan entered into Amendment No. 1 to Credit Agreement (the \u201cAmendment\u201d), which amends the ABL Revolver to, among other things, increase the available borrowing capacity from $75.0 million to $100.0 million.",
-     "As of December 31, 2025, we had $25.0 million of outstanding borrowings on the ABL Revolver."
+     "The ABL Revolver includes limitations on the Borrower\u2019s ability to borrow in certain situations, including limitations based on the calculation of borrowing capacity and further limitations that are triggered if the amount available to borrow under the ABL Revolver is less than the greater of $7.5 million and 10% of the Maximum Revolver Amount."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1.",
-    "claim": "Long-term debt declined to 251,135 (table in thousands) from 286,668 (table in thousands), while total liabilities of 391,884 (table in thousands) exceeded total assets of 384,853 (table in thousands), leaving a stockholders\u2019 deficit of (7,031) (table in thousands).",
+    "basis": "stated in the cited items (Balance Sheets in F1 and Q3 2026 earnings release in P6)",
+    "claim": "Long-term debt fell from 286,668 (table in thousands) at December 31, 2025 to 251,135 (table in thousands) at September 30, 2026\u2014including $238.5 million of 10% Senior Secured Notes due 2029 and $15 million of ABL Revolver borrowings\u2014while total stockholders\u2019 deficit narrowed from (17,333) to (7,031) (table in thousands).",
     "facts": [
-     "F1"
+     "F1",
+     "P6"
     ],
     "quotes": [
-     "Long-term debt | 251,135 | 286,668",
-     "Total liabilities | 391,884 | 420,524",
-     "Total assets | 384,853 | 403,191",
-     "Total stockholders\u2019 deficit | (7,031) | (17,333)"
+     "As of September 30, 2026, the Company had $15 million of cash and cash equivalents, ABL Revolver borrowings of $15 million, and $238.5 million of 10% Senior Secured Notes due 2029."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6 and P10.",
-    "claim": "Management reported a non-GAAP Net Leverage Ratio of 2.6x at third-quarter end, down from 2.7x at second-quarter end, and expects year-end leverage toward the low end of 2.5x to 3.0x.",
-    "facts": [
-     "P6",
-     "P10"
-    ],
-    "quotes": [
-     "Record Cash From Operations of $57 Million in the First Nine Months; Net Leverage Ratio of 2.6x",
-     "Record Cash Flow From Operations of $42 Million in the First Half; Net Leverage Ratio Down to 2.7x",
-     "The Company also expects its year-end Net Leverage Ratio towards the low-end of the 2.5x and 3.0x range."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F2 and F3; semi-annual payment timing and covenants stated in P3 and P2.",
-    "claim": "Nine-month net interest expense of (23,072) (table in thousands) absorbed most of operating income of 38,513 (table in thousands), while cash interest paid was 29,876 (table in thousands).",
+    "basis": "stated in the cited items (Statement of Operations in F2 and earnings release in P6)",
+    "claim": "Net Leverage Ratio fell to 2.6x as of September 30, 2026 from 3.6x in the prior-year third quarter (with year-end guidance toward the low-end of 2.5x and 3.0x), while nine-month 2026 operating income was 38,513 (table in thousands) against net interest expense of (23,072) (table in thousands).",
     "facts": [
      "F2",
-     "F3",
-     "P2",
-     "P3"
+     "P6"
     ],
     "quotes": [
-     "Interest, net | (8,011) | (8,746) | (23,072) | (24,500)",
-     "Income (loss) from operations | 15,655 | 13,018 | 38,513 | 36,545",
-     "Interest paid | 29,876 | 31,099"
+     "Net Leverage Ratio decreased to 2.6x, down from 3.6x in the third quarter last year.",
+     "The Company also expects its year-end Net Leverage Ratio towards the low-end of the 2.5x and 3.0x range.",
+     "Management and various investors use the ratio of debt principal outstanding, plus finance lease obligations, less cash, divided by LTM Adjusted EBITDA, or \u201cNet Leverage Ratio\u201d, as a measure of our financial strength when making key investment decisions and evaluating us against peers."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in F3, P6, and P7.",
-    "claim": "Cash provided by operating activities rose to 57,252 (table in thousands) from 19,911 (table in thousands) in the prior-year period, generating record non-GAAP Free Cash Flow of $46 million and supporting raised full-year Free Cash Flow guidance of $50 million to $55 million.",
+    "basis": "stated in the cited items (Statement of Cash Flows in F3 and earnings release/Exhibit E in P6)",
+    "claim": "In the first nine months of 2026, cash provided by operating activities grew to $57.3 million from $19.9 million a year earlier and Free Cash Flow grew to $46.1 million from $6.1 million (including $10,098 in the third quarter, table in thousands), with full-year 2026 Free Cash Flow guidance raised to $50 million to $55 million.",
     "facts": [
      "F3",
-     "P6",
-     "P7"
+     "P6"
     ],
     "quotes": [
-     "Cash provided by operating activities | 57,252 | 19,911",
-     "CPI continued its strong cash flow performance, generating record cash from operating activities of $57 million and a record $46 million of Free Cash Flow through the first nine months of 2026.",
+     "The Company generated record cash from operating activities of $57.3 million in the first nine months, which compared to $19.9 million in the prior year period; and set a company record for Free Cash Flow of $46.1 million in the first nine months, which compared to $6.1 million in the prior year.",
      "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million, up from prior guidance of high-single-digit to low-double-digit revenue growth and $45 million to $50 million of Free Cash Flow."
     ],
     "support": "supported"
    },
    {
-    "basis": "Cash flow items stated in F3; inventory optimization stated in P10; tariff refunds stated in P6.",
-    "claim": "Operating cash flow of 57,252 (table in thousands) far exceeded net income of $ 9,115 (table in thousands), supported by depreciation of 16,440, amortization of 3,052, stock-based compensation of 5,296, an inventory inflow of 7,900, and receivables inflow of 4,679 (table in thousands), plus approximately $4.0 million of tariff refunds.",
+    "basis": "stated in the cited items (Statement of Cash Flows in F3, working capital discussion in P3, and earnings release in P6)",
+    "claim": "Nine-month operating cash flow of 57,252 versus 19,911 in the prior-year period (table in thousands) was heavily driven by working capital inflows\u2014such as inventories swinging from (9,126) to 7,900 and accrued expenses swinging from (16,192) to 468 (table in thousands)\u2014alongside 16,440 of depreciation and 5,296 of stock-based compensation on 9,115 of net income (table in thousands).",
     "facts": [
      "F3",
-     "P6",
-     "P10"
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Net income | $ 9,115 | $ 7,600",
-     "Inventories | 7,900 | (9,126)",
-     "Strong performance in CPI's Secure Card Solutions segment is driving significant operating cash flow growth as higher volumes accelerate inventory optimization initiatives.",
+     "The increase in Free Cash Flow was driven by strong operating performance, significant improvements in working capital, including lower inventory purchases, and lower capital expenditures compared with the prior year period.",
+     "Our working capital fluctuates primarily due to timing and size of tax payments, collections from customers, inventory purchases, payments of employee incentive programs, and interest payments on our outstanding Senior Notes, with the interest payments being due in the first and third quarters of the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (Statement of Cash Flows in F3 and earnings release/Exhibit E in P6)",
+    "claim": "Cash generation quality is tempered by finance lease obligations and non-recurring items: nine-month Free Cash Flow of $46,149 excludes (7,027) in finance lease principal payments while 10,113 of new financing lease right-of-use assets were added (table in thousands), and nine-month gross profit included approximately $4.0 million of Secure Card Solutions tariff refunds.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "However, this measure does not represent funds available for investment or other discretionary uses since it does not deduct cash used to make principal payments on outstanding debt and financing lease liabilities.",
      "Gross profit margin of 31.4% increased from 31.2% in the prior year period, primarily due to increased revenue and approximately $4.0 million of tariff refunds in our Secure Card Solutions segment, partially offset by approximately $1.0 million of tariff expenses in our other reportable segments and increased depreciation expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Line items stated in F3; distinction from cash capital expenditures inferred from F3 statement classification.",
-    "claim": "Net capital expenditures of (11,103) (table in thousands) excluded 10,113 (table in thousands) of non-cash financing lease right-of-use asset additions and (7,027) (table in thousands) of cash payments on finance lease obligations.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Capital expenditures for plant, equipment and leasehold improvements, net | (11,103) | (13,777)",
-     "Payments on finance lease obligations | (7,027) | (5,967)",
-     "Financing leases | 10,113 | 11,128"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3.",
-    "claim": "Substantially all debt matures in 2029, led by the 10.000% Senior Notes and the ABL Revolver, with projected debt principal and interest obligations of $392.7 million including $28.5 million of interest over the following twelve months.",
+    "basis": "stated in P3 (10-K MD&A Liquidity and Capital Resources and Material Cash Requirements)",
+    "claim": "Outstanding Senior Notes and ABL Revolver debt falls due no later than July 15, 2029 (with the ABL Revolver maturing on the earliest of July 11, 2029 and 91 days before Senior Notes maturity), and projected principal and interest payments on borrowings at December 31, 2025 totaled $392.7 million, including $28.5 million of interest over the next 12 months.",
     "facts": [
      "P3"
     ],
     "quotes": [
      "The Senior Notes mature on July 15, 2029 and interest is payable on January 15 and July 15 of each year.",
      "The ABL Revolver matures on the earliest to occur of July 11, 2029 and the date that is 91 days prior to the maturity of the Senior Notes.",
+     "Amounts borrowed and outstanding under the ABL Revolver and Senior Notes are required to be repaid in full, together with any accrued and unpaid interest, no later than July 15, 2029 and may be subject to earlier mandatory prepayment upon certain events.",
      "As of December 31, 2025, the total projected principal and interest payments on our borrowings are $392.7 million, primarily related to the Senior Notes, of which $28.5 million of interest is expected to be paid in the next 12 months."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F3, P2, and P3.",
-    "claim": "The company plans to meet debt service and obligations through operating cash flows, cash on hand, and ABL Revolver capacity, and reduced borrowings via payments on debt of (66,500) against proceeds from borrowings on debt of 30,000 (table in thousands) plus an early redemption premium of (795) (table in thousands).",
+    "basis": "stated in the cited items (Statement of Cash Flows in F3, Risk Factors in P2, and Liquidity discussion in P3)",
+    "claim": "CPI expects to meet debt service and operational cash needs through operating cash flows, existing cash, and the ABL Revolver (which includes an uncommitted accordion up to $25.0 million), and may redeem Senior Notes early or refinance borrowings\u2014having already made (66,500) in debt payments versus 30,000 in debt borrowings (table in thousands) in the first nine months of 2026.",
     "facts": [
      "F3",
      "P2",
@@ -1103,28 +485,509 @@
     ],
     "quotes": [
      "Although we can provide no assurances, we believe that our cash flows from operations, combined with our current cash levels and our senior secured revolving credit facility (the \u201cABL Revolver\u201d) with available borrowing capacity of $74.7 million as of December 31, 2025, will be adequate to fund debt service requirements and provide cash, as required, to support our ongoing operations, capital expenditures, lease obligations and working capital needs.",
+     "ABL Revolver also includes an uncommitted accordion feature whereby the Borrower may increase the ABL Revolver commitment by an aggregate amount not to exceed $25.0 million, subject to certain conditions.",
      "However, we may borrow additional amounts under the ABL Revolver, redeem principal on the Senior Notes early, or refinance all or a portion of our borrowings in future periods.",
      "Our inability to make debt service payments and an inability to refinance our existing debt on favorable terms or at all."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (Statement of Cash Flows in F3 and 10-K MD&A in P3)",
+    "claim": "Debt covenants restrict CPI from incurring additional debt, paying dividends, or making certain investments, while non-debt commitments include $7.5 million of Karta contingent consideration (plus an option to buy an additional 31% prior to early April 2027) after (6,300) (table in thousands) was spent on an acquisition in the first nine months of 2026.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "The Senior Notes and the ABL Revolver contain covenants limiting the ability of the Company, the Borrower and the Company\u2019s restricted subsidiaries to, among other things, incur or guarantee additional debt or issue disqualified stock or certain preferred stock; create or incur liens; pay dividends, redeem stock or make other distributions; make certain investments; create restrictions on the ability of the Borrower and its restricted subsidiaries to pay dividends to the Company or make other intercompany transfers; transfer or sell assets; merge or consolidate; and enter into certain transactions with affiliates, subject to a number of important exceptions and qualifications as set forth in the indenture governing the Senior Notes and the ABL Credit Agreement.",
+     "Total consideration for the transaction was $10.0 million, with $2.5 million paid in cash upon closing and the remaining $7.5 million was recorded as a contingent consideration, which is included in \u201cOther long-term liabilities\u201d on our consolidated balance sheet.",
+     "We also retain an option to purchase an additional 31% of Karta prior to early April 2027."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in [P1] (10-K Item 1 Business).",
-    "claim": "CPI's core growth is supported by long-term growth in U.S. cards-in-circulation, recurring card reissuance from expirations and replacements, and estimated U.S. market share gains.",
+    "basis": "stated in [P1]",
+    "claim": "The U.S. payment card solutions market has grown in cards-in-circulation over a long-term period, driven by new account openings from legacy issuers and fintechs alongside recurring card reissuance.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The U.S. payment card solutions market in which we operate has experienced growth in cards-in-circulation over a long-term period, driven by new account openings by legacy issuers and new entrants to the payment card market, such as financial technology companies (\u201cfintechs\u201d) and others.",
+     "The U.S. payment card solutions market in which we operate has experienced growth in cards-in-circulation over a long-term period, driven by new account openings by legacy issuers and new entrants to the payment card market, such as financial technology companies (\u201cfintechs\u201d) and others."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "For market-driven card demand to continue, U.S. consumer and business spending must hold up without higher interest rates tightening credit issuance or digital and mobile payments displacing physical cards.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "A sustained deterioration in general economic conditions, particularly in the United States, or increases in interest rates may adversely affect our financial performance by reducing the demand for our payment card solutions or reducing the purchase of our higher margin products and credit card issuers may reduce credit limits, close accounts and become more selective in issuing credit cards.",
+     "In particular, the rise in the adoption in digital payment systems or mobile payments may make physical cards less attractive as a method of payment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3] and [P6]",
+    "claim": "Increased contactless card volumes contributed to revenue growth in 2025 and drove a 13% increase in Secure Card Solutions revenue to $111.9 million in the third quarter of 2026.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Revenue increased $62.9 million for the year ended December 31, 2025, primarily due to contributions of $42.8 million, or 7.9% of revenue for the year ended December 31, 2025, from the acquisition of Arroweye as well as increased volumes of contactless cards, partially offset by decreased revenue in our Prepaid Debit segment.",
+     "Secure Card Solutions segment revenue increased 13% to $111.9 million, driven by increased volumes of contactless cards."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2] and [P6]",
+    "claim": "Continued contactless card growth requires uninterrupted supply from concentrated microchip and antenna vendors\u2014where three suppliers accounted for approximately 93% and one supplier accounted for approximately 74% of 2025 purchase value\u2014and managing tariff costs.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips.",
+     "Changes in U.S. and global trade policy and the impact of tariffs have had and may continue to have a material adverse effect on our business and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], [P3], and [P6]",
+    "claim": "The May 2025 acquisition of Arroweye added an on-demand payment card solution that contributed $42.8 million, or 7.9% of revenue, in 2025 and generated more than 30 new customer wins since acquisition.",
+    "facts": [
+     "P1",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "We expanded our card production, data personalization and fulfillment capabilities in May 2025 through our acquisition of Arroweye.",
+     "Revenue increased $62.9 million for the year ended December 31, 2025, primarily due to contributions of $42.8 million, or 7.9% of revenue for the year ended December 31, 2025, from the acquisition of Arroweye as well as increased volumes of contactless cards, partially offset by decreased revenue in our Prepaid Debit segment.",
+     "CPI is nearing completion of the integration of Arroweye, and continues to outperform the Company\u2019s original investment case and is generating strong commercial momentum by securing more than 30 new customer wins since the acquisition in May 2025, including a top 15 issuer that was not previously a CPI customer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "Sustaining Arroweye-led commercial momentum requires completing integration and achieving synergies without operational disruption, while winning repeat orders under customer contracts that generally lack exclusivity or volume commitments.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We may not realize the potential benefits from the acquisition of Arroweye because of difficulties related to integration, the achievement of synergies and other challenges.",
+     "Because our contractual arrangements with customers generally do not include exclusivity clauses or commitments to order specified quantities of products on a medium or long-term basis, there is no guarantee that we will receive orders on a consistent basis or on favorable terms, or be able to renew contracts or purchase orders in a given year on favorable terms or at all."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Integrated Paytech revenue rose 20% to $23.5 million in the third quarter of 2026, driven by the June 2026 acquisition of TRISM and growth in the cloud-based Card@Once instant issuance solution.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Integrated Paytech segment revenue increased 20% to $23.5 million, primarily due to contributions from the acquisition of TRISM and growth in the cloud-based Card@Once solution, while gross profit margin remained consistent at over 55%.",
+     "Since CPI acquired TRISM in June 2026, the business has performed on track with CPI\u2019s expectations, with strong customer retention and early commercial wins reinforcing the original investment thesis and building momentum across the pipeline."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2] and [P4]",
+    "claim": "Continued Integrated Paytech growth depends on successfully integrating TRISM, maintaining Payment Card Industry security standards and IT reliability, and competing technologically despite limited research and development resources.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "We have limited research and development resources compared to many of our competitors, which may result in an immature product development process and lengthy product roll-outs, and competitors may be able to develop and commercialize competing products more quickly and efficiently.",
+     "Our failure to comply with the standards of the PCI Security Standards Council and other industry standards, including due to an inability to continue to make investments in our facilities necessary to maintain compliance with such standards.",
+     "our inability to successfully execute on, integrate, or achieve the anticipated benefits of acquisitions, including the acquisition of Arroweye Solutions, Inc. (\u201cArroweye\u201d) and our acquisition of an on-premise instant issuance solution, or execute on divestitures, strategic relationships, or investments"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3] and [P6]",
+    "claim": "CPI is building a digital and international-technology growth pipeline by expanding cloud-based Push Provisioning relationships and advancing a U.S. retail pilot with Karta, in which CPI holds a 20% stake and an option for an additional 31% before early April 2027.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "CPI continued to build momentum across its Digital growth strategy, expanding the reach of its cloud-based Push Provisioning solution through new go-to-market relationships to bring CPI\u2019s tokenization capabilities to financial institutions and their customers.",
+     "CPI continues to progress well with Karta, an Australia-based payments technology firm in which CPI made a minority investment in 2025, as the companies work to bring Karta\u2019s chip-embedded payment technology to the U.S. market.",
+     "On October 7, 2025, we acquired a 20% equity interest in Gift Card Co Pty Ltd, doing business as \u201cKarta,\u201d a digital card technology company and prepaid program manager based in Australia.",
+     "We also retain an option to purchase an additional 31% of Karta prior to early April 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P2]",
+    "claim": "Digital solutions and strategic partnerships like Karta require upfront investment, technical integration, and successful commercial execution before generating meaningful revenue and higher margins.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Although revenues for these additional digital solutions have been insignificant to date, we believe these solutions have the opportunity to grow in the future.",
+     "Digital solutions often require upfront investment and additional integration but have the potential to deliver incremental revenue and increased margins over time.",
+     "Our inability to execute successfully on an acquisition strategy or strategic relationships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P6]",
+    "claim": "Prepaid Solutions revenue grew 15% to $26.9 million in the third quarter of 2026 on closed-loop prepaid sales and open-loop packages, alongside CPI's expansion into non-traditional verticals such as healthcare.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Prepaid Solutions segment revenue increased 15% to $26.9 million, primarily due to increased sales of closed loop prepaid payment solutions and healthy volumes of higher-value open loop packages.",
+     "We have initiated the expansion of our offerings to customers in non-traditional industry verticals, such as healthcare, which has already expanded our addressable markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "Prepaid and new-vertical growth depends on keeping retail channels open, retaining top customers where one customer represented approximately 16% of 2025 revenue, and successfully cross-selling into new markets.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Additionally, an economic downturn or a global health emergency could result in extended voluntary or mandated closure of retail locations that sell certain of our products to consumers, including our Prepaid Debit Cards.",
+     "The Company had one customer that accounted for approximately 16% of total revenue for the year ended December 31, 2025.",
+     "If we are unable to identify adequate opportunities to cross-sell our products and related services or successfully leverage our offerings to new customer verticals or markets, this may have a material adverse effect on our business, financial condition and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1], [P2], and [P3]",
+    "claim": "Funding growth investments and acquisitions requires generating sufficient operating cash flow to service 251,135 (table in thousands) of long-term debt as of the end of the third quarter of 2026 while complying with debt covenants.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our ability to make investments in and grow our business, service our debt, and improve our debt leverage ratios, while maintaining strong liquidity, depends on our ability to generate excess operating cash flows.",
+     "Our indebtedness and the covenants and restrictions in the agreements governing our indebtedness limiting our ability to use our cash flow in certain areas of our business, capitalize on certain business opportunities and pursue our business strategies, all of which could be further impacted if we incur additional debt and could impact our ability to make debt service payments."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in [P6]",
+    "claim": "CPI increased its full-year financial guidance targets for revenue growth to low-double-digit growth and Free Cash Flow to $50 million to $55 million, while reaffirming all other financial guidance metrics.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "CPI today increased its 2026 guidance for revenue growth and Free Cash Flow for the second consecutive quarter, while reaffirming all other financial guidance metrics.",
+     "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million, up from prior guidance of high-single-digit to low-double-digit revenue growth and $45 million to $50 million of Free Cash Flow."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Certain CPI stockholders completed a secondary public offering of approximately 2.7 million shares, concluding Parallel49's ownership position in CPI, while CPI incurred approximately $1.0 million of offering-related expenses.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Company successfully completed a secondary offering of the remaining shares held by Parallel49, fully concluding Parallel49\u2019s ownership position in CPI after nearly 20 years as an investor.",
+     "On September 14, 2026, certain CPI stockholders completed a secondary public offering of approximately 2.7 million shares, including the underwriters\u2019 full exercise of their option to purchase additional shares.",
+     "CPI did not sell any shares or receive any proceeds but incurred approximately $1.0 million of offering-related expenses under its registration rights agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "CPI acquired TRISM, an on-premise instant issuance solution.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Since CPI acquired TRISM in June 2026, the business has performed on track with CPI\u2019s expectations, with strong customer retention and early commercial wins reinforcing the original investment thesis and building momentum across the pipeline.",
+     "Balance represents acquisition and integration costs primarily related to the acquisition of Arroweye that occurred on May 6, 2025 and the acquisition of an on-premise instant issuance solution that occurred on June 23, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3] and [P6]",
+    "claim": "CPI made debt payments of (66,500) (table in thousands) and paid a debt early redemption premium of (795) (table in thousands), ending the third quarter with $238.5 million of Senior Secured Notes and $15 million of ABL Revolver borrowings.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Payments on debt | (66,500)",
+     "Payment for debt early redemption premium | (795)",
+     "As of September 30, 2026, the Company had $15 million of cash and cash equivalents, ABL Revolver borrowings of $15 million, and $238.5 million of 10% Senior Secured Notes due 2029."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "CPI implemented a revised reportable segment structure consisting of Secure Card Solutions, Prepaid Solutions, and Integrated Paytech, separating proprietary integrated technology operations from the former Debit and Credit segment.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "In connection with our increased strategic focus on expanding and developing additional proprietary integrated technological solutions for our customer base and to reflect the manner in which the Company\u2019s Chief Operating Decision Maker (\u201cCODM\u201d), the Chief Executive Officer (\u201cCEO\u201d), manages our business, we implemented a revised segment structure to assess performance and allocate resources, beginning in the first quarter of 2026.",
+     "The updated information reflects only reclassification of prior period segment data and does not represent a restatement of previously issued financial statements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "CPI acquired a 20% equity interest in Gift Card Co Pty Ltd (Karta) for total consideration of $10.0 million, consisting of $2.5 million paid in cash upon closing and $7.5 million in contingent consideration, with an option to purchase an additional 31%.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On October 7, 2025, we acquired a 20% equity interest in Gift Card Co Pty Ltd, doing business as \u201cKarta,\u201d a digital card technology company and prepaid program manager based in Australia.",
+     "Total consideration for the transaction was $10.0 million, with $2.5 million paid in cash upon closing and the remaining $7.5 million was recorded as a contingent consideration, which is included in \u201cOther long-term liabilities\u201d on our consolidated balance sheet.",
+     "We also retain an option to purchase an additional 31% of Karta prior to early April 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "CPI used available capacity under the ABL Revolver to redeem $20.0 million of its outstanding $285.0 million Senior Notes at a redemption price of 103.000% of par plus accrued and unpaid interest.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On July 15, 2025, the Company used available capacity under the ABL Revolver (defined below) to redeem $20.0 million of its outstanding $285.0 million aggregate principal amount Senior Notes.",
+     "The redemption was made pursuant to the terms of the indenture governing the Senior Notes, at a redemption price of 103.000% of par plus accrued and unpaid interest to the date of redemption."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "CPI, CPI CG Inc., and JPMorgan entered into an amendment to the ABL Revolver credit agreement increasing available borrowing capacity from $75.0 million to $100.0 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On July 2, 2025, the Company, the Borrower, and JPMorgan entered into Amendment No. 1 to Credit Agreement (the \u201cAmendment\u201d), which amends the ABL Revolver to, among other things, increase the available borrowing capacity from $75.0 million to $100.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "CPI acquired Arroweye for a final purchase price of $45.8 million, paying net cash consideration of $44.2 million after cash acquired of $1.6 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On May 6, 2025, we acquired Arroweye for a final purchase price of $45.8 million.",
+     "The net cash consideration paid was $44.2 million, which reflects cash acquired of $1.6 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3] and [P6]",
+    "claim": "CPI reassessed aspects of its revenue recognition accounting and prospectively began recognizing revenue for certain work-in-process orders at a point-in-time rather than over-time.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "In the second quarter of 2025, the Company reassessed certain aspects of its revenue recognition accounting under ASC 606 and prospectively began recognizing revenue for certain contracts at a point-in-time rather than over-time.",
+     "The decrease in revenue in the Prepaid Debit segment for the year ended December 31, 2025 was primarily attributable to a change in accounting in the second quarter of 2025 resulting in reduced revenue recognition related to work-in-process orders as discussed in Part II, Item 8, Financial Statements and Supplementary Data, Note 2, \u201cSummary of Significant Accounting Policies.\u201d"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "CPI CG Inc. completed a private offering of $285.0 million of Senior Notes at an issue price of 100%, redeemed the entire $267.9 million principal balance of prior Senior Secured Notes with a 2.156% early redemption premium, and entered into an ABL Revolver of up to $75.0 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On July 11, 2024 (the \u201cClosing Date\u201d), we completed a private offering by our wholly-owned subsidiary, CPI CG Inc. (the \u201cIssuer\u201d), of $285.0 million aggregate principal amount of 10.000% Senior Notes due 2029 (the \u201cSenior Notes\u201d) and related guarantees at an issue price of 100%.",
+     "Net proceeds from the Senior Notes, together with cash on hand, were used to redeem the entire principal balance of $267.9 million of the 8.625% Senior Secured Notes due 2026 (the \u201c2026 Senior Notes\u201d) as of the Closing Date, and to pay related fees, an early redemption premium of 2.156%, and other expenses.",
+     "On the Closing Date, the Company and CPI CG Inc. as borrower (the \u201cBorrower\u201d), entered into a credit agreement with JPMorgan Chase Bank, N.A., as lender, administrative agent and collateral agent (\u201cJPMorgan\u201d), providing for an asset-based, senior secured revolving credit facility (the \u201cABL Revolver\u201d) of up to $75.0 million."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated directly in the 2025 10-K Item 1A Risk Factors and Item 1 Business, and the Q3 2026 earnings release.",
+    "claim": "CPI relies heavily on concentrated customer relationships without exclusivity or minimum order commitments, with a single customer accounting for approximately 16% and the top 10 direct customers accounting for more than half of 2025 revenue.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The Company had one customer that accounted for approximately 16% of total revenue for the year ended December 31, 2025.",
+     "In addition, more than half of our revenue for the year ended December 31, 2025 were from our top 10 direct customers, which include certain Resellers.",
+     "Because our contractual arrangements with customers generally do not include exclusivity clauses or commitments to order specified quantities of products on a medium or long-term basis, there is no guarantee that we will receive orders on a consistent basis or on favorable terms, or be able to renew contracts or purchase orders in a given year on favorable terms or at all."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 10-K Item 1A Risk Factors, with inventory and revenue performance from the Q3 2026 10-Q balance sheet and earnings release.",
+    "claim": "CPI faces supply chain concentration risk because approximately 93% of its 2025 purchased microchips and antennas came from a small group of main suppliers and approximately 74% came from a single supplier.",
+    "facts": [
+     "P2",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips.",
+     "We generally do not maintain large volumes of certain types of inventory, which makes us even more susceptible to harm if a supplier fails to deliver products or materials as required."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 10-Q financial statements, 2025 10-K MD&A and Risk Factors, and Q3 2026 earnings release.",
+    "claim": "CPI carries 251,135 (table in thousands) of long-term debt and a (7,031) (table in thousands) stockholders' deficit, with Senior Notes and ABL Revolver borrowings maturing by 2029.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Long-term debt | 251,135 | 286,668",
+     "Total stockholders\u2019 deficit | (7,031) | (17,333)",
+     "Amounts borrowed and outstanding under the ABL Revolver and Senior Notes are required to be repaid in full, together with any accrued and unpaid interest, no later than July 15, 2029 and may be subject to earlier mandatory prepayment upon certain events.",
+     "As of September 30, 2026, the Company had $15 million of cash and cash equivalents, ABL Revolver borrowings of $15 million, and $238.5 million of 10% Senior Secured Notes due 2029."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Item 1A Risk Factors, balanced by business description and segment performance in the 2025 10-K Item 1 and Q3 2026 earnings release.",
+    "claim": "Widespread consumer adoption of mobile payments, biometric payments, digital payment systems, or merchant direct installment programs could reduce demand for physical payment cards.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In particular, the rise in the adoption in digital payment systems or mobile payments may make physical cards less attractive as a method of payment.",
+     "Mobile payments, biometric payments and direct installment payment programs allow consumers to make purchases without the need to carry a physical card and could, if widely adopted, reduce the number of debit and credit cards issued to consumers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Item 1A Risk Factors and Item 1 Business, and Q3 2026 earnings release.",
+    "claim": "CPI competes in a highly competitive, saturated, and consolidating market against larger global rivals with greater financial, production, and R&D capabilities.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Our marketplace is highly competitive, relatively saturated and increasingly consolidated.",
+     "Some of our competitors have larger global customer bases and significantly greater financial, sales and marketing, production, distribution, technical and other capabilities than we do.",
+     "We have limited research and development resources compared to many of our competitors, which may result in an immature product development process and lengthy product roll-outs, and competitors may be able to develop and commercialize competing products more quickly and efficiently."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 10-K Item 1A and Item 7, and the Q3 2026 earnings release.",
+    "claim": "Trade policy changes, tariffs, and material and labor inflation increase CPI's production costs and contributed to 2025 gross profit margin compression from 35.6% to 31.3%.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Inflation has adversely affected us by increasing the costs of materials and labor needed to operate our business and could continue to adversely affect us in future periods.",
+     "Gross profit and gross profit margin decreased for the year ended December 31, 2025, primarily due to unfavorable sales mix and increased production costs, including increased depreciation and tariff expenses, partially offset by benefits of operating leverage from increased revenue.",
+     "Gross profit margin of 31.4% increased from 31.2% in the prior year period, primarily due to increased revenue and approximately $4.0 million of tariff refunds in our Secure Card Solutions segment, partially offset by approximately $1.0 million of tariff expenses in our other reportable segments and increased depreciation expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 10-K Item 1A, Q3 2026 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "CPI may fail to integrate or realize anticipated benefits from its Arroweye and TRISM acquisitions while incurring $7.1 million of acquisition and integration costs in 2026.",
+    "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We may not realize the potential benefits from the acquisition of Arroweye because of difficulties related to integration, the achievement of synergies and other challenges.",
+     "CPI is nearing completion of the integration of Arroweye, and continues to outperform the Company\u2019s original investment case and is generating strong commercial momentum by securing more than 30 new customer wins since the acquisition in May 2025, including a top 15 issuer that was not previously a CPI customer.",
+     "Since CPI acquired TRISM in June 2026, the business has performed on track with CPI\u2019s expectations, with strong customer retention and early commercial wins reinforcing the original investment thesis and building momentum across the pipeline."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 10-K Item 1 and Item 1A Risk Factors, and reaffirmed in the Q3 2026 10-Q.",
+    "claim": "Cyber-attacks, encryption breaches, or non-compliance with data privacy laws and PCI Security Standards Council requirements could expose sensitive cardholder data and trigger regulatory penalties or litigation.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "A breach of our security defenses could result in a loss of our intellectual property, the release of sensitive cardholder information and customer, consumer or employee personal data, or the loss of production capabilities at one or more of our production facilities.",
+     "The protective measures we have implemented may not prevent system or network disruptions and may be insufficient to prevent or limit the damage from any future security breaches.",
+     "These processes are audited for Payment Card Industry (\u201cPCI\u201d) Security Standards Council data security standards compliance annually."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 10-K Item 1A Risk Factors and Item 1 Business, and Q3 2026 earnings release.",
+    "claim": "CPI's quarterly and annual operating results are unpredictable and exposed to consumer spending downturns, interest rate pressures, and customer inventory adjustments.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Our business depends heavily on consumer and business spending.",
+     "Our operating results are affected by a wide variety of factors that could materially and adversely affect revenue and profitability or lead to significant variability in our operating results.",
+     "CPI today increased its 2026 guidance for revenue growth and Free Cash Flow for the second consecutive quarter, while reaffirming all other financial guidance metrics."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Item 1A Risk Factors and Q3 2026 10-Q Item 2, countered by the Parallel49 exit reported in the Q3 2026 earnings release.",
+    "claim": "Concentrated ownership by significant stockholders and low common stock trading volume are cited as ongoing governance, control, and capital-access risks.",
+    "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The Company successfully completed a secondary offering of the remaining shares held by Parallel49, fully concluding Parallel49\u2019s ownership position in CPI after nearly 20 years as an investor.",
+     "On September 14, 2026, certain CPI stockholders completed a secondary public offering of approximately 2.7 million shares, including the underwriters\u2019 full exercise of their option to purchase additional shares."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "Stated directly in P1, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "CPI's core growth remains supported by long-term growth in U.S. cards-in-circulation, recurring card reissuance from expirations and replacements, and estimated U.S. market share gains, with no newer effective evidence altering this point.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The U.S. payment card solutions market is characterized by users (primarily U.S. consumers) maintaining multiple payment cards both physically and digitally and by historically stable and recurring revenue driven by the continuous reissuance of debit and credit cards due to card expiration, re-branding, and card replacement activity, and by U.S. consumers switching from one financial institution to another.",
      "We believe these efforts have resulted in CPI gaining estimated overall U.S. market share over the last several years."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P4] (10-Q MD&A) and [P6] (Q3 2026 earnings release).",
-    "claim": "Consolidated revenue grew 14.8% to $158,357 (table in thousands) in the third quarter ended September 30, 2026 and 16.4% to $454,646 (table in thousands) in the nine months ended September 30, 2026, with full-year 2026 guidance raised to low-double-digit revenue growth.",
+    "basis": "Stated directly in P4 and P6, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Consolidated revenue grew 14.8% to $158,357 (table in thousands) in the third quarter ended September 30, 2026 and 16.4% to $454,646 (table in thousands) in the nine months ended September 30, 2026, with full-year 2026 guidance raised to low-double-digit revenue growth and no newer effective evidence.",
     "facts": [
      "P4",
      "P6"
@@ -1136,8 +999,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] (10-K Item 1A Risk Factors).",
-    "claim": "To sustain growth, CPI must retain key customers\u2014including one customer representing approximately 16% and top 10 direct customers representing more than half of 2025 revenue\u2014despite contracts generally lacking exclusivity or volume commitments.",
+    "basis": "Stated directly in P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Retaining key customers\u2014including one customer representing approximately 16% and top 10 direct customers representing more than half of 2025 revenue\u2014remains critical despite contracts generally lacking exclusivity or volume commitments.",
     "facts": [
      "P2"
     ],
@@ -1149,8 +1012,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] (10-K Item 1A Risk Factors).",
-    "claim": "Continued growth requires resilient U.S. consumer and business spending and continued reliance on physical payment cards rather than widespread substitution by mobile payments, biometric payments, or direct installment programs.",
+    "basis": "Stated directly in P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Continued growth remains dependent on U.S. consumer and business spending and continued reliance on physical payment cards rather than widespread substitution by mobile payments, biometric payments, or direct installment programs.",
     "facts": [
      "P2"
     ],
@@ -1161,22 +1024,21 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] (Q3 2026 earnings release) and [P3] (10-K Item 7).",
-    "claim": "Secure Card Solutions revenue rose 13% to $111.9 million in the third quarter and 21% to $332.6 million in the first nine months of 2026, driven by higher contactless card volumes and Arroweye contributions.",
+    "basis": "Stated directly in P6 and supported by segment definitions in P3, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Secure Card Solutions revenue increased 13% to $111.9 million in the third quarter and 21% to $332.6 million in the first nine months of 2026, driven by higher contactless card volumes and Arroweye contributions, with no newer effective evidence.",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
-     "\u2022Secure Card Solutions segment revenue increased 13% to $111.9 million, driven by increased volumes of contactless cards.",
-     "\u2022Secure Card Solutions segment revenue increased 21% to $332.6 million, driven by increased sales of contactless cards and contributions from the acquisition of Arroweye.",
-     "Contactless cards have additional technology to process contactless transactions and generally have a higher selling price than contact-only cards."
+     "Secure Card Solutions segment revenue increased 13% to $111.9 million, driven by increased volumes of contactless cards.",
+     "Secure Card Solutions segment revenue increased 21% to $332.6 million, driven by increased sales of contactless cards and contributions from the acquisition of Arroweye."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] (10-K Item 1A Risk Factors) and [P6] (Q3 2026 earnings release).",
-    "claim": "Continued contactless card growth depends on uninterrupted supply from concentrated microchip and antenna vendors\u2014where three suppliers accounted for approximately 93% and one supplier for approximately 74% of 2025 purchased value\u2014and managing tariff costs.",
+    "basis": "Stated directly in P2 and P6, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Contactless card growth remains reliant on concentrated microchip and antenna suppliers\u2014where three suppliers accounted for approximately 93% and one supplier for approximately 74% of 2025 purchased value\u2014and on managing tariff costs.",
     "facts": [
      "P2",
      "P6"
@@ -1188,88 +1050,77 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P1], [P3] (10-K), and [P10] (Q2 2026 earnings release).",
-    "claim": "Acquisitions have expanded CPI's addressable market and revenue, led by the Arroweye purchase\u2014which contributed $42.8 million, or 7.9% of 2025 revenue\u2014and the TRISM instant issuance acquisition.",
+    "basis": "Stated directly in P1, P3, and P6, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Acquisitions have expanded CPI's addressable market and revenue, led by Arroweye contributing $42.8 million, or 7.9% of 2025 revenue, and TRISM performing on track since its June 2026 acquisition.",
     "facts": [
      "P1",
      "P3",
-     "P10"
+     "P6"
     ],
     "quotes": [
-     "We expanded our card production, data personalization and fulfillment capabilities in May 2025 through our acquisition of Arroweye.",
+     "Arroweye\u2019s payment card solutions expanded our customer base across prepaid program managers, payroll related providers, healthcare related providers, and fintechs of all types, in addition to banks and credit unions.",
      "Revenue increased $62.9 million for the year ended December 31, 2025, primarily due to contributions of $42.8 million, or 7.9% of revenue for the year ended December 31, 2025, from the acquisition of Arroweye as well as increased volumes of contactless cards, partially offset by decreased revenue in our Prepaid Debit segment.",
-     "With the TRISM acquisition, we believe we have doubled our addressable market in U.S. instant issuance and are now the clear leader."
+     "Since CPI acquired TRISM in June 2026, the business has performed on track with CPI\u2019s expectations, with strong customer retention and early commercial wins reinforcing the original investment thesis and building momentum across the pipeline."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] (10-K Item 1A Risk Factors) and [P4] (10-Q Item 2 Cautionary Statement).",
-    "claim": "To sustain acquisition-driven growth, CPI must successfully integrate Arroweye and its on-premise instant issuance acquisition and realize anticipated synergies and benefits.",
+    "basis": "Stated directly in P2 and P4, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Sustaining acquisition-driven growth still requires executing integration and realizing anticipated synergies and benefits from Arroweye and CPI's on-premise instant issuance acquisition.",
     "facts": [
      "P2",
      "P4"
     ],
     "quotes": [
      "We may not realize the potential benefits from the acquisition of Arroweye because of difficulties related to integration, the achievement of synergies and other challenges.",
-     "Our inability to execute successfully on an acquisition strategy or strategic relationships."
+     "our inability to successfully execute on, integrate, or achieve the anticipated benefits of acquisitions, including the acquisition of Arroweye Solutions, Inc. (\u201cArroweye\u201d) and our acquisition of an on-premise instant issuance solution, or execute on divestitures, strategic relationships, or investments"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] (Q3 2026 earnings release) and [P1] (10-K Item 1 Business).",
-    "claim": "Integrated Paytech revenue rose 20% to $23.5 million in the third quarter of 2026 at a gross profit margin over 55%, driven by TRISM and Card@Once cloud-based instant issuance growth, with fourth-quarter segment revenue growth expected to more than double.",
+    "basis": "Stated directly in P6 and supported by Card@Once background in P1, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Integrated Paytech revenue rose 20% to $23.5 million in the third quarter of 2026 at a gross profit margin over 55%, driven by TRISM and Card@Once growth, with fourth-quarter segment revenue growth expected to more than double.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "\u2022Integrated Paytech segment revenue increased 20% to $23.5 million, primarily due to contributions from the acquisition of TRISM and growth in the cloud-based Card@Once solution, while gross profit margin remained consistent at over 55%.",
+     "Integrated Paytech segment revenue increased 20% to $23.5 million, primarily due to contributions from the acquisition of TRISM and growth in the cloud-based Card@Once solution, while gross profit margin remained consistent at over 55%.",
      "The Company expects Integrated Paytech revenue growth to more than double in the fourth quarter compared with the third quarter, driven by continued momentum in Card@Once, the contribution from TRISM instant issuance and a more favorable year-over-year comparison."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P1] (10-K Item 1 Business) and [P2] (10-K Item 1A Risk Factors).",
-    "claim": "Sustaining Integrated Paytech and digital growth requires upfront investment, timely R&D and market acceptance despite limited R&D resources relative to competitors, and strict cybersecurity and PCI compliance.",
+    "basis": "Stated directly in P1 and P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Sustaining Integrated Paytech and digital growth continues to require upfront investment, timely R&D and market acceptance despite limited R&D resources relative to competitors, and PCI compliance.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
      "Digital solutions often require upfront investment and additional integration but have the potential to deliver incremental revenue and increased margins over time.",
-     "We have limited research and development resources compared to many of our competitors, which may result in an immature product development process and lengthy product roll-outs, and competitors may be able to develop and commercialize competing products more quickly and efficiently.",
-     "Our failure to comply with the standards of the PCI Security Standards Council and other industry standards, including due to an inability to continue to make investments in our facilities necessary to maintain compliance with such standards."
+     "These processes are audited for Payment Card Industry (\u201cPCI\u201d) Security Standards Council data security standards compliance annually.",
+     "We have limited research and development resources compared to many of our competitors, which may result in an immature product development process and lengthy product roll-outs, and competitors may be able to develop and commercialize competing products more quickly and efficiently."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] (Q3 2026 earnings release).",
-    "claim": "Prepaid Solutions revenue grew 15% to $26.9 million in the third quarter of 2026 on higher closed-loop prepaid sales and healthy open-loop package volumes, bringing nine-month 2026 revenue growth to 3% at $71.6 million.",
+    "basis": "Stated directly in P2 and P6, with no evidence items effective after the earlier analysis cutoff; P10 from the earlier analysis is not in this packet.",
+    "claim": "Continued Prepaid Solutions growth remains exposed to retail distribution stability, unpredictable customer ordering, and program managers retaining and winning customers, while third-quarter 2026 segment revenue rose 15% to $26.9 million.",
     "facts": [
+     "P2",
      "P6"
     ],
     "quotes": [
-     "\u2022Prepaid Solutions segment revenue increased 15% to $26.9 million, primarily due to increased sales of closed loop prepaid payment solutions and healthy volumes of higher-value open loop packages.",
-     "\u2022Prepaid Solutions segment revenue increased 3% to $71.6 million, primarily due to increased sales of closed loop prepaid cards, as well as the change in accounting that was implemented in the second quarter of 2025."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in [P2] (10-K Item 1A Risk Factors) and [P10] (Q2 2026 earnings release).",
-    "claim": "Continued Prepaid Solutions growth requires stable retail distribution channels and overcoming uneven demand, alongside program managers retaining and winning customers.",
-    "facts": [
-     "P2",
-     "P10"
-    ],
-    "quotes": [
      "Additionally, an economic downturn or a global health emergency could result in extended voluntary or mandated closure of retail locations that sell certain of our products to consumers, including our Prepaid Debit Cards.",
-     "The Company's Adjusted EBITDA outlook remains unchanged as the benefits from stronger Secure Card Solutions performance and tariff refunds are expected to largely be offset by continued investment in Integrated Paytech (\"IPT\") and ongoing uneven demand in the higher-margin Prepaid Solutions segment."
+     "In addition, our customer relationships may be impacted by several factors beyond our control, including changes in customer purchasing and inventory management practices, more attractive product offerings from our competitors, pricing and inflationary pressures, Resellers\u2019 and program managers\u2019 ability to retain existing or gain new customers, the financial health of our customers and macroeconomic conditions affecting the payment card industry or our customers.",
+     "Prepaid Solutions segment revenue increased 15% to $26.9 million, primarily due to increased sales of closed loop prepaid payment solutions and healthy volumes of higher-value open loop packages."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P1] (10-K Item 1 Business) and [P3] (10-K Item 7).",
-    "claim": "CPI is expanding its addressable market into non-traditional verticals such as healthcare and entered international digital prepaid through a 20% equity stake in Karta with an option for an additional 31%.",
+    "basis": "Stated directly in P1 and P3, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "CPI continues expanding into non-traditional verticals such as healthcare and holds a 20% equity interest in Karta with an option to purchase an additional 31% prior to early April 2027.",
     "facts": [
      "P1",
      "P3"
@@ -1282,8 +1133,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] (10-K Item 1A Risk Factors).",
-    "claim": "Expanding beyond core financial institutions requires identifying adequate cross-selling opportunities and successfully leveraging existing offerings into new customer verticals or markets.",
+    "basis": "Stated directly in P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Expanding beyond core financial institutions remains contingent on identifying adequate cross-selling opportunities and leveraging existing offerings into new customer verticals or markets.",
     "facts": [
      "P2"
     ],
@@ -1293,8 +1144,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [F1] (10-Q balance sheet), [P2] (10-K Item 1A), and [P3] (10-K Item 7).",
-    "claim": "Funding growth investments requires generating excess operating cash flow to service 251,135 (table in USD thousands) of long-term debt and satisfy debt covenants.",
+    "basis": "Stated directly in F1, P2, and P3, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Funding growth investments continues to require generating excess operating cash flows to service 251,135 (table in USD thousands) of long-term debt and satisfy debt covenants.",
     "facts": [
      "F1",
      "P2",
@@ -1306,229 +1157,37 @@
      "Our indebtedness and the covenants and restrictions in the agreements governing our indebtedness limiting our ability to use our cash flow in certain areas of our business, capitalize on certain business opportunities and pursue our business strategies, all of which could be further impacted if we incur additional debt and could impact our ability to make debt service payments."
     ],
     "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item",
-    "claim": "Selling stockholders affiliated with Tricor Pacific Capital Partners sold 2,337,323 common shares plus an exercised underwriters' option for 350,598 shares in a secondary public offering that yielded no proceeds to CPI and concluded Parallel49's ownership position.",
-    "facts": [
-     "P8",
-     "P6"
-    ],
-    "quotes": [
-     "On September 10, 2026, CPI Card Group Inc. (the \u201cCompany\u201d) entered into an underwriting agreement (the \u201cUnderwriting Agreement\u201d) by and among the Company, Tricor Pacific Capital Partners (Fund IV), Limited Partnership and Tricor Pacific Capital Partners (Fund IV) US, Limited Partnership (the \u201cSelling Stockholders\u201d) and B. Riley Securities, Inc., as representative of the several underwriters named therein (the \u201cUnderwriters\u201d), relating to the public offering (the \u201cOffering\u201d) of an aggregate of 2,337,323 shares of common stock of the Company by the Selling Stockholders.",
-     "In addition, under the terms of the Underwriting Agreement, the Selling Stockholders granted the Underwriters an option, exercisable for 30 days, to purchase up to an additional 350,598 shares of common stock of the Company.",
-     "The Underwriters exercised in full this option to purchase additional shares on September 11, 2026.",
-     "The Offering closed on September 14, 2026.",
-     "The Company did not sell any securities in the Offering and will not receive any proceeds from the sale of the shares offered by the Selling Stockholders.",
-     "\u2022The Company successfully completed a secondary offering of the remaining shares held by Parallel49, fully concluding Parallel49\u2019s ownership position in CPI after nearly 20 years as an investor."
-    ],
-    "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Donna Abbey Carmignani ceased serving as Controller and Chief Accounting Officer under an agreement with CPI and became eligible for severance payments and benefits.",
+    "basis": "Stated directly in P2 and supported by P1, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Customer concentration risk remains unchanged, with one customer accounting for approximately 16% and top 10 direct customers for more than half of 2025 revenue without exclusivity or medium- or long-term volume commitments.",
     "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "Also, on August 26, 2026, the Company announced that the Company and Donna Abbey Carmignani, Controller and Chief Accounting Officer, agreed that she would cease serving as Controller and Chief Accounting Officer effective as of August 20, 2026.",
-     "Upon her departure, Ms. Abbey Carmignani became eligible to receive severance payments and benefits under the Company\u2019s existing U.S. Executive Severance and Change in Control Guidelines, which are described in the Company\u2019s 2026 Proxy Statement."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Brennan Hughes was appointed Chief Accounting Officer with an annual base salary of $350,000, target short-term and long-term incentive opportunities of $200,000 each, a $100,000 restricted stock unit award, and a $150,000 cash sign-on award.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "On August 26, 2026, CPI Card Group Inc. (the \u201cCompany\u201d) announced that Brennan Hughes has been appointed as Chief Accounting Officer, effective as of August 24, 2026 (the \u201cAppointment Date\u201d).",
-     "In connection with Mr. Hughes\u2019s appointment as the Company\u2019s Chief Accounting Officer, the Compensation Committee of the Board approved the following compensation: (i) annual base salary of $350,000 effective as of the Appointment Date, (ii) target annual short-term incentive opportunity of $200,000, and (iii) target annual long-term incentive opportunity of $200,000.",
-     "In addition, the Compensation Committee of the Board approved (i) a one-time restricted stock unit award to Mr. Hughes with a grant date value of $100,000 to be granted on August 31, 2026 that is eligible to vest in equal annual installments over a three-year period beginning on the first anniversary of the grant date, generally subject to Mr. Hughes\u2019s continued service through such date, and (ii) a cash sign-on award of $150,000."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI acquired TRISM, an instant issuance solution that contributed to Integrated Paytech segment revenue growth.",
-    "facts": [
-     "P10",
-     "P6"
-    ],
-    "quotes": [
-     "The acquisition of TRISM is an excellent example of how we continue to execute on our strategy and grow our addressable market and solutions with strong profitability and growth potential.",
-     "\u2022Integrated Paytech segment revenue increased 20% to $23.5 million, primarily due to contributions from the acquisition of TRISM and growth in the cloud-based Card@Once solution, while gross profit margin remained consistent at over 55%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI acquired Arroweye for a final purchase price of $45.8 million ($44.2 million net cash consideration, reflecting $1.6 million of cash acquired), funded with cash on hand and available ABL Revolver capacity.",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "On May 6, 2025, we acquired Arroweye for a final purchase price of $45.8 million.",
-     "The net cash consideration paid was $44.2 million, which reflects cash acquired of $1.6 million.",
-     "The acquisition was funded through a combination of cash on hand and our available capacity under the ABL Revolver."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI acquired a 20% equity interest in Gift Card Co Pty Ltd (Karta) for total consideration of $10.0 million ($2.5 million cash at closing and $7.5 million contingent consideration), retaining an option to acquire an additional 31% before early April 2027.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On October 7, 2025, we acquired a 20% equity interest in Gift Card Co Pty Ltd, doing business as \u201cKarta,\u201d a digital card technology company and prepaid program manager based in Australia.",
-     "Total consideration for the transaction was $10.0 million, with $2.5 million paid in cash upon closing and the remaining $7.5 million was recorded as a contingent consideration, which is included in \u201cOther long-term liabilities\u201d on our consolidated balance sheet.",
-     "We also retain an option to purchase an additional 31% of Karta prior to early April 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI CG Inc. completed a private offering of $285.0 million of 10.000% Senior Notes, entered into an ABL Revolver of up to $75.0 million with JPMorgan, and redeemed the entire $267.9 million principal balance of its 8.625% Senior Secured Notes.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On July 11, 2024 (the \u201cClosing Date\u201d), we completed a private offering by our wholly-owned subsidiary, CPI CG Inc. (the \u201cIssuer\u201d), of $285.0 million aggregate principal amount of 10.000% Senior Notes due 2029 (the \u201cSenior Notes\u201d) and related guarantees at an issue price of 100%.",
-     "Net proceeds from the Senior Notes, together with cash on hand, were used to redeem the entire principal balance of $267.9 million of the 8.625% Senior Secured Notes due 2026 (the \u201c2026 Senior Notes\u201d) as of the Closing Date, and to pay related fees, an early redemption premium of 2.156%, and other expenses.",
-     "On the Closing Date, the Company and CPI CG Inc. as borrower (the \u201cBorrower\u201d), entered into a credit agreement with JPMorgan Chase Bank, N.A., as lender, administrative agent and collateral agent (\u201cJPMorgan\u201d), providing for an asset-based, senior secured revolving credit facility (the \u201cABL Revolver\u201d) of up to $75.0 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI, CPI CG Inc., and JPMorgan amended the ABL Revolver credit agreement to increase available borrowing capacity from $75.0 million to $100.0 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On July 2, 2025, the Company, the Borrower, and JPMorgan entered into Amendment No. 1 to Credit Agreement (the \u201cAmendment\u201d), which amends the ABL Revolver to, among other things, increase the available borrowing capacity from $75.0 million to $100.0 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI used available ABL Revolver capacity to redeem $20.0 million of its Senior Notes at 103.000% of par plus accrued and unpaid interest.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On July 15, 2025, the Company used available capacity under the ABL Revolver (defined below) to redeem $20.0 million of its outstanding $285.0 million aggregate principal amount Senior Notes.",
-     "The redemption was made pursuant to the terms of the indenture governing the Senior Notes, at a redemption price of 103.000% of par plus accrued and unpaid interest to the date of redemption."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "During the nine months ended Sep. 30, 2026, CPI made debt payments of (66,500) (table in thousands) against debt borrowing proceeds of 30,000 (table in thousands), paid a debt early redemption premium of (795) (table in thousands), and recorded a loss on debt extinguishment of (282) (table in thousands).",
-    "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [
-     "Proceeds from borrowings on debt | 30,000 | 67,000",
-     "Payments on debt | (66,500) | (40,000)",
-     "Payment for debt early redemption premium | (795) | (600)",
-     "Loss on debt extinguishment | (282) | (287) | (282) | (287)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI implemented an accounting change moving from over-time revenue recognition for certain work-in-process orders to point-in-time recognition upon shipment.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Revenue excluding the Impact of an Accounting Change has been presented in Exhibit F and defined as revenue excluding the impact from an accounting change implemented in the second quarter of 2025 resulting from the Company moving from over-time revenue recognition for certain WIP orders to point-in-time recognition (revenue booked when shipped)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI implemented a revised reportable segment structure separating proprietary integrated technology operations into Integrated Paytech alongside Secure Card Solutions and Prepaid Solutions.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "In connection with our increased strategic focus on expanding and developing additional proprietary integrated technological solutions for our customer base and to reflect the manner in which the Company\u2019s Chief Operating Decision Maker (\u201cCODM\u201d), the Chief Executive Officer (\u201cCEO\u201d), manages our business, we implemented a revised segment structure to assess performance and allocate resources, beginning in the first quarter of 2026.",
-     "The changes in our segment structure primarily relate to the separation of the results of our proprietary integrated technologically related operations into a separate segment from the former Debit and Credit segment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI raised its annual revenue growth guidance to high-single-digit to low-double-digit growth and raised its Free Cash Flow guidance to $45 million to $50 million.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "The Company now projects high-single-digit to low-double-digit revenue growth, up from previous guidance of high-single-digit growth, and Free Cash Flow ranging from $45 million to $50 million, up from a conversion rate in-line with 2025 results of $41 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "CPI raised its revenue growth guidance for the second consecutive quarter to low-double-digit growth and increased Free Cash Flow guidance to $50 million to $55 million, while reaffirming all other guidance targets.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "CPI today increased its 2026 guidance for revenue growth and Free Cash Flow for the second consecutive quarter, while reaffirming all other financial guidance metrics.",
-     "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million, up from prior guidance of high-single-digit to low-double-digit revenue growth and $45 million to $50 million of Free Cash Flow."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in 2025 Form 10-K Item 1A [P2]; customer tenure, integration, and Q3 2026 commercial wins stated in [P1], [P2], and [P6].",
-    "claim": "CPI derived approximately 16% of 2025 revenue from one customer and over half from its top 10 direct customers, without exclusivity or medium- or long-term volume commitments.",
-    "facts": [
-     "P2",
      "P1",
-     "P6"
+     "P2"
     ],
     "quotes": [
      "The Company had one customer that accounted for approximately 16% of total revenue for the year ended December 31, 2025.",
+     "In addition, more than half of our revenue for the year ended December 31, 2025 were from our top 10 direct customers, which include certain Resellers.",
      "Because our contractual arrangements with customers generally do not include exclusivity clauses or commitments to order specified quantities of products on a medium or long-term basis, there is no guarantee that we will receive orders on a consistent basis or on favorable terms, or be able to renew contracts or purchase orders in a given year on favorable terms or at all."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A [P2]; inventory balance and contactless volume growth stated in [F1], [P3], and [P6].",
-    "claim": "In 2025, approximately 93% of CPI's purchased microchips and antennas by value came from three suppliers and approximately 74% came from a single supplier.",
+    "basis": "Stated directly in P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Supplier concentration risk remains unchanged, with three suppliers accounting for approximately 93% and one supplier accounting for approximately 74% of 2025 purchased microchips and antennas by value.",
     "facts": [
-     "P2",
-     "F1",
-     "P3",
-     "P6"
+     "P2"
     ],
     "quotes": [
-     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips.",
-     "If such supplier is unable or delayed in fulfilling our microchip orders, we could fail to timely fulfill customer orders, which could damage our reputation and result in a loss of customers and customer opportunities and material harm to our financial results."
+     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A [P2]; market reissuance dynamics and Integrated Paytech growth stated in [P1] and [P6].",
-    "claim": "Widespread adoption of digital or mobile wallets, biometric payments, and direct merchant installment programs could reduce demand for physical debit and credit cards.",
+    "basis": "Stated directly in P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Payment-substitution risk remains unchanged, as widespread adoption of mobile payments, biometric payments, and direct installment programs could reduce demand for physical debit and credit cards.",
     "facts": [
-     "P2",
-     "P1",
-     "P6"
+     "P2"
     ],
     "quotes": [
      "In particular, the rise in the adoption in digital payment systems or mobile payments may make physical cards less attractive as a method of payment.",
@@ -1537,25 +1196,25 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in Q3 2026 financial statements [F1, F2, F3] and 2025 Form 10-K Item 7 [P3]; deleveraging and guidance stated in [F1], [F3], [P3], and [P6].",
-    "claim": "CPI carried 251,135 (table in thousands) in long-term debt versus 15,177 (table in thousands) in cash at period end, and incurred (23,072) (table in thousands) of net interest expense over nine months on debt including 10.000% Senior Notes.",
+    "basis": "Stated directly in F1, F2, F3, and P3, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Debt and interest burden remain unchanged, with 251,135 (table in thousands) in long-term debt versus 15,177 (table in thousands) in cash and cash equivalents and (23,072) (table in thousands) of nine-month net interest expense on debt including 10.000% Senior Notes.",
     "facts": [
      "F1",
      "F2",
      "F3",
-     "P2",
-     "P3",
-     "P6"
+     "P3"
     ],
     "quotes": [
-     "On July 11, 2024 (the \u201cClosing Date\u201d), we completed a private offering by our wholly-owned subsidiary, CPI CG Inc. (the \u201cIssuer\u201d), of $285.0 million aggregate principal amount of 10.000% Senior Notes due 2029 (the \u201cSenior Notes\u201d) and related guarantees at an issue price of 100%.",
-     "Amounts borrowed and outstanding under the ABL Revolver and Senior Notes are required to be repaid in full, together with any accrued and unpaid interest, no later than July 15, 2029 and may be subject to earlier mandatory prepayment upon certain events."
+     "Long-term debt | 251,135 | 286,668",
+     "Cash and cash equivalents, end of period | 15,177 | 15,955",
+     "Interest, net | (8,011) | (8,746) | (23,072) | (24,500)",
+     "On July 11, 2024 (the \u201cClosing Date\u201d), we completed a private offering by our wholly-owned subsidiary, CPI CG Inc. (the \u201cIssuer\u201d), of $285.0 million aggregate principal amount of 10.000% Senior Notes due 2029 (the \u201cSenior Notes\u201d) and related guarantees at an issue price of 100%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K [P2, P3] and Q3 2026 earnings release [P6].",
-    "claim": "Trade policy changes, tariffs, and cost inflation press production costs, with CPI incurring approximately $1.0 million of tariff expenses outside Secure Card Solutions in the first nine months of 2026 after gross margin fell from 35.6% to 31.3% in 2025.",
+    "basis": "Stated directly in P2, P3, and P6, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Tariff, trade policy, and cost-inflation pressures remain as disclosed, with CPI incurring approximately $1.0 million of tariff expenses in other reportable segments in the first nine months of 2026 after 2025 gross profit margin declined from 35.6% to 31.3%.",
     "facts": [
      "P2",
      "P3",
@@ -1563,188 +1222,121 @@
     ],
     "quotes": [
      "Changes in U.S. and global trade policy and the impact of tariffs have had and may continue to have a material adverse effect on our business and results of operations.",
-     "Such increases may result in customer pushback or attrition and be difficult or impossible in future periods, all of which may have an adverse effect on our financial condition and results of operations."
+     "Gross profit and gross profit margin decreased for the year ended December 31, 2025, primarily due to unfavorable sales mix and increased production costs, including increased depreciation and tariff expenses, partially offset by benefits of operating leverage from increased revenue.",
+     "Gross profit margin of 31.4% increased from 31.2% in the prior year period, primarily due to increased revenue and approximately $4.0 million of tariff refunds in our Secure Card Solutions segment, partially offset by approximately $1.0 million of tariff expenses in our other reportable segments and increased depreciation expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2], [P3], [P4], [F1], [F2], [P6], and [P10].",
-    "claim": "CPI faces integration and synergy execution risks across Arroweye, TRISM, and its 20% Karta investment, while nine-month 2026 SG&A rose 22.4% and equity in losses of unconsolidated affiliates reached (458) (table in thousands).",
+    "basis": "Stated directly in F2, P2, P3, P4, and P6, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Integration and execution risks across Arroweye, TRISM, and the 20% Karta investment remain unchanged, alongside a 22.4% nine-month 2026 increase in selling, general and administrative expenses and (458) (table in thousands) in equity in losses of unconsolidated affiliates.",
     "facts": [
+     "F2",
      "P2",
      "P3",
      "P4",
-     "F1",
-     "F2",
-     "P6",
-     "P10"
+     "P6"
     ],
     "quotes": [
      "We may not realize the potential benefits from the acquisition of Arroweye because of difficulties related to integration, the achievement of synergies and other challenges.",
-     "On October 7, 2025, we acquired a 20% equity interest in Gift Card Co Pty Ltd, doing business as \u201cKarta,\u201d a digital card technology company and prepaid program manager based in Australia."
+     "On October 7, 2025, we acquired a 20% equity interest in Gift Card Co Pty Ltd, doing business as \u201cKarta,\u201d a digital card technology company and prepaid program manager based in Australia.",
+     "Selling, general and administrative expenses | 34,597 | 27,975 | 6,622 | 23.7% | 104,349 | 85,264 | 19,085 | 22.4%",
+     "Equity in losses of unconsolidated affiliates | (55) | 0 | (458) | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A [P2]; annual PCI compliance audits stated in [P1].",
-    "claim": "Cyber-attacks, encryption failures, or failure to maintain PCI Security Standards Council and data privacy compliance could expose sensitive cardholder data and trigger regulatory penalties or customer losses.",
+    "basis": "Stated directly in P1 and P2, with no evidence items effective after the earlier analysis cutoff.",
+    "claim": "Cyber-attack, encryption, data privacy, and PCI Security Standards Council compliance risks remain unchanged.",
     "facts": [
-     "P2",
-     "P1"
+     "P1",
+     "P2"
     ],
     "quotes": [
-     "A breach of our security defenses could result in a loss of our intellectual property, the release of sensitive cardholder information and customer, consumer or employee personal data, or the loss of production capabilities at one or more of our production facilities.",
-     "Any material breach of our secured systems could harm our competitive position, result in a loss of customer trust and confidence, and cause us to incur significant costs to remedy the damages caused by system or network disruptions, which could ultimately have a material adverse effect on our business, financial condition and results of operations."
+     "System security risks, data protection breaches, and cyber-attacks could compromise our proprietary information, impair customer and vendor relationships, disrupt our internal operations, harm perception of our products and expose us to litigation and/or regulatory penalties, which could have a material adverse effect on our business and our reputation.",
+     "These processes are audited for Payment Card Industry (\u201cPCI\u201d) Security Standards Council data security standards compliance annually."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] and [P10]; Prepaid Solutions segment results and 2026 guidance raises stated in [P6] and [P10], with reissuance dynamics stated in [P1].",
-    "claim": "Economic downturns, issuer credit tightening, fintech customer distress, and uneven customer ordering can unpredictably reduce demand, as seen in uneven demand in Prepaid Solutions where nine-month 2026 operating income fell (7.6)%.",
+    "basis": "Stated directly in P2 and P6, with no evidence items effective after the earlier analysis cutoff; P10 from the earlier analysis is not in this packet.",
+    "claim": "Risks from economic downturns, issuer credit tightening, fintech customer distress, and unpredictable customer ordering remain unchanged, with nine-month 2026 Prepaid Solutions operating income down (7.6)%.",
     "facts": [
      "P2",
-     "P1",
-     "P6",
-     "P10"
+     "P6"
     ],
     "quotes": [
      "A sustained deterioration in general economic conditions, particularly in the United States, or increases in interest rates may adversely affect our financial performance by reducing the demand for our payment card solutions or reducing the purchase of our higher margin products and credit card issuers may reduce credit limits, close accounts and become more selective in issuing credit cards.",
-     "Certain of our customers, especially in the fintech space, could be severely impacted by reduced credit card spending, or cease to exist altogether."
+     "Certain of our customers, especially in the fintech space, could be severely impacted by reduced credit card spending, or cease to exist altogether.",
+     "Prepaid Solutions | 16,684 | 23.3% | 18,053 | 26.1% | (1,369) | (7.6)%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 Form 10-K Item 1A [P2]; September 2026 secondary offering and full exit of Parallel49 stated in [P6] and [P8].",
-    "claim": "CPI warned in its 2025 annual filing that concentrated stock ownership, large share sales, low trading volume, and limited analyst coverage could constrain capital access and increase stock volatility.",
+    "basis": "Stated directly in P2 and P6, with no evidence items effective after the earlier analysis cutoff; P8 from the earlier analysis is not in this packet.",
+    "claim": "Capital-access, low-trading-volume, and limited-analyst-coverage risks from the 2025 annual filing remain, while the third-quarter 2026 release notes Parallel49 completed a secondary offering of its remaining shares.",
     "facts": [
      "P2",
-     "P6",
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "The impact of concentrated ownership of our common stock and the sale or perceived sale of a substantial amount of common stock on the trading volume and market price of our common stock.",
+     "Our inability to successfully access capital markets due to the effects of the low trading volume and fluctuating trading price of our common stock as well as terms of our outstanding indebtedness and unfavorable market conditions, which may lead to delays in innovation or the abandonment of our strategic initiatives.",
+     "The influence of securities analysts over the trading market for and price of our common stock, particularly due to the lack of substantial research coverage of our common stock.",
      "The Company successfully completed a secondary offering of the remaining shares held by Parallel49, fully concluding Parallel49\u2019s ownership position in CPI after nearly 20 years as an investor."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2], [P4], and [P9].",
-    "claim": "CPI faces risks around maintaining effective internal control over financial reporting and Sarbanes-Oxley Act of 2002 compliance alongside its August 2026 Chief Accounting Officer transition.",
+    "basis": "Stated directly in P2 and P4, with no evidence items effective after the earlier analysis cutoff; P9 from the earlier analysis is not in this packet.",
+    "claim": "Risks regarding Sarbanes-Oxley Act of 2002 compliance and maintaining effective internal control over financial reporting remain as disclosed in the filings included in this packet.",
     "facts": [
      "P2",
-     "P4",
-     "P9"
+     "P4"
     ],
     "quotes": [
      "Our potential failure to comply with the Sarbanes-Oxley Act of 2002, including maintaining effective control over financial reporting and risks relating to investor confidence in our financial reports.",
-     "On August 26, 2026, CPI Card Group Inc. (the \u201cCompany\u201d) announced that Brennan Hughes has been appointed as Chief Accounting Officer, effective as of August 24, 2026 (the \u201cAppointment Date\u201d)."
+     "our failure to maintain effective internal control over financial reporting and risks relating to investor confidence in our financial reporting"
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in [F3], [P6], and [P10]; the 10-Q acquisitions footnote and omitted MD&A sections are absent from the packet.",
-    "claim": "What were the purchase price, acquired assets, and standalone financial contribution of the TRISM acquisition, and how much of the (6,300) (table in thousands) cash acquisition outflow in the nine months ended September 30, 2026 related to TRISM?",
+    "basis": "Stated in F1, F3, P4, and P6 that an on-premise instant issuance solution (TRISM) was acquired on June 23, 2026 with net cash paid of (6,300) (table in thousands); inferred that purchase price allocation and standalone financials are unavailable because the 10-Q footnotes and full Item 2 MD&A are omitted.",
+    "claim": "What were the total purchase price, purchase price allocation, and standalone revenue and earnings contributions of the June 23, 2026 TRISM acquisition, beyond the (6,300) (table in thousands) cash paid for acquisition, net of cash acquired?",
     "facts": [
+     "F1",
      "F3",
      "P4",
-     "P6",
-     "P10"
+     "P6"
     ],
     "quotes": [
-     "Cash paid for acquisition, net of cash acquired | (6,300) | (42,442)",
-     "our acquisition of an on-premise instant issuance solution",
-     "Integrated Paytech segment revenue increased 20% to $23.5 million, primarily due to contributions from the acquisition of TRISM and growth in the cloud-based Card@Once solution, while gross profit margin remained consistent at over 55%.",
-     "The acquisition of TRISM is an excellent example of how we continue to execute on our strategy and grow our addressable market and solutions with strong profitability and growth potential."
+     "Since CPI acquired TRISM in June 2026, the business has performed on track with CPI\u2019s expectations, with strong customer retention and early commercial wins reinforcing the original investment thesis and building momentum across the pipeline."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P3] and [F2]; contingent-consideration terms and whether the option will be exercised are not established in the provided items.",
-    "claim": "Will CPI exercise its option to purchase an additional 31% of Karta prior to early April 2027, and what milestone conditions govern the $7.5 million contingent consideration and ongoing equity losses of (458) (table in thousands)?",
+    "basis": "Stated in F1, F2, F3, and P6 across debt balances, cash flows, and extinguishment items; inferred that redemption terms, ABL Revolver availability as of September 30, 2026, and the extinguishment reconciliation require the omitted 10-Q Debt footnote and Liquidity section.",
+    "claim": "What are the remaining available borrowing capacity under the ABL Revolver, the terms and timing of the Senior Notes redemptions reducing principal to $238.5 million, and the reconciliation between the (282) (table in thousands) income statement loss on debt extinguishment and the 1,077 (table in thousands) cash flow adjustment?",
     "facts": [
      "F1",
      "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Total consideration for the transaction was $10.0 million, with $2.5 million paid in cash upon closing and the remaining $7.5 million was recorded as a contingent consideration, which is included in \u201cOther long-term liabilities\u201d on our consolidated balance sheet.",
-     "We also retain an option to purchase an additional 31% of Karta prior to early April 2027.",
-     "Equity in losses of unconsolidated affiliates | (55) | 0 | (458) | 0",
-     "Other long-term liabilities | 48,203 | 47,508"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [F1] and [F3]; [P3] only gives the December 31, 2025 debt split and the 2026 10-Q debt footnote is absent.",
-    "claim": "How is the 251,135 (table in thousands) long-term debt balance at September 30, 2026 divided between the Senior Notes and the ABL Revolver, and which debt was extinguished with the (66,500) (table in thousands) debt payments and (795) (table in thousands) early redemption premium?",
-    "facts": [
-     "F1",
      "F3",
-     "P3"
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Long-term debt | 251,135 | 286,668",
-     "Proceeds from borrowings on debt | 30,000 | 67,000",
-     "Payments on debt | (66,500) | (40,000)",
-     "Payment for debt early redemption premium | (795) | (600)"
+     "As of September 30, 2026, the Company had $15 million of cash and cash equivalents, ABL Revolver borrowings of $15 million, and $238.5 million of 10% Senior Secured Notes due 2029."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] and [P7] that reconciliations appear in omitted exhibits and tariff refunds aided margins, while [P2] flags ongoing tariff risk.",
-    "claim": "What GAAP-to-non-GAAP adjustments reconcile Adjusted EBITDA, Free Cash Flow, and the 2.6x Net Leverage Ratio, and are the $4.0 million of tariff refunds in Secure Card Solutions one-time recoveries or recurring offsets to tariff expenses?",
-    "facts": [
-     "P2",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Gross profit margin of 31.4% increased from 31.2% in the prior year period, primarily due to increased revenue and approximately $4.0 million of tariff refunds in our Secure Card Solutions segment, partially offset by approximately $1.0 million of tariff expenses in our other reportable segments and increased depreciation expenses.",
-     "See \u201cReconciliations of Non-GAAP Financial Measures\u201d at the end of this document for more information and reconciliations to the most directly comparable GAAP financial measures.",
-     "Adjusted EBITDA increased 17% to $27 million, driven by revenue growth and favorable segment mix driving improved profitability across the business.",
-     "Changes in U.S. and global trade policy and the impact of tariffs have had and may continue to have a material adverse effect on our business and results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P2] and reaffirmed without material change in [P5], without disclosing customer or supplier identities, contract terms, or 2026 shares.",
-    "claim": "Have CPI's concentrations in one customer representing approximately 16% of 2025 revenue and one supplier representing approximately 74% of 2025 microchip and antenna purchases changed in 2026, and what are the pricing and renewal terms of those relationships?",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "The Company had one customer that accounted for approximately 16% of total revenue for the year ended December 31, 2025.",
-     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips.",
-     "As of the date of this Quarterly Report on Form 10-Q, there have been no material changes with respect to such risk factors."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in [P6] and [P8] that Parallel49 exited its shares, while [P4] still references directors nominated by current or former significant stockholders.",
-    "claim": "Following the September 2026 secondary offering of 2,337,323 shares plus 350,598 option shares that concluded Parallel49's ownership position, which board seats or governance rights tied to former significant stockholders remain in place?",
-    "facts": [
-     "P4",
-     "P6",
-     "P8"
-    ],
-    "quotes": [
-     "The Company successfully completed a secondary offering of the remaining shares held by Parallel49, fully concluding Parallel49\u2019s ownership position in CPI after nearly 20 years as an investor.",
-     "In addition, under the terms of the Underwriting Agreement, the Selling Stockholders granted the Underwriters an option, exercisable for 30 days, to purchase up to an additional 350,598 shares of common stock of the Company.",
-     "The Underwriters exercised in full this option to purchase additional shares on September 11, 2026.",
-     "potential conflicts of interest that may arise due to our Board of Directors being comprised in part of directors who are principals of or were nominated by our current or former significant stockholders;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [F1] via the balance sheet reference to Note 9, which is not included in the packet.",
-    "claim": "What contingent liabilities, purchase commitments, or legal proceedings exist under Commitments and contingencies (Note 9) as of September 30, 2026?",
+    "basis": "Stated in F1 that Commitments and contingencies are covered in Note 9 and in P2 regarding litigation risks; inferred that the nature and amounts of any commitments or contingencies cannot be known without the omitted 10-Q Note 9.",
+    "claim": "What legal proceedings, purchase commitments, or contingent liabilities exist under Commitments and contingencies as of September 30, 2026?",
     "facts": [
      "F1",
-     "P2"
+     "P2",
+     "P6"
     ],
     "quotes": [
      "Commitments and contingencies (Note 9)",
@@ -1753,75 +1345,121 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] segment tables and outlook; the omitted [P4] MD&A segment commentary and fourth-quarter actuals are not in the packet.",
-    "claim": "What expense or integration drivers caused Integrated Paytech operating income to decrease (10.3)% in the nine months ended September 30, 2026 despite 8.4% revenue growth, and will fourth-quarter revenue growth more than double third-quarter growth of 20.3%?",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The Company expects Integrated Paytech revenue growth to more than double in the fourth quarter compared with the third quarter, driven by continued momentum in Card@Once, the contribution from TRISM instant issuance and a more favorable year-over-year comparison.",
-     "Integrated Paytech | 20,669 | 23,038 | (2,369) | (10.3)%",
-     "Integrated Paytech | 62,974 | 58,077 | 4,897 | 8.4%",
-     "Integrated Paytech | 23,451 | 19,498 | 3,953 | 20.3%"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in [F2] and [P6]; the omitted [P4] MD&A and missing 10-Q income tax footnote are not in the packet.",
-    "claim": "What discrete tax items reduced third-quarter 2026 income tax expense to (1,309) (table in thousands) on pre-tax income of 6,383 (table in thousands), compared with (1,435) (table in thousands) on 3,743 (table in thousands) in the prior-year quarter?",
+    "basis": "Stated in P3 regarding the 20% Karta acquisition, $7.5 million contingent consideration, and 31% option, and in F2 showing equity in losses of unconsolidated affiliates; inferred that updated carrying value, milestone status, and option exercise plans are not disclosed in the packet.",
+    "claim": "What are the current carrying value of the 20% Karta investment, the status and fair value of the $7.5 million contingent consideration liability, and the exercise terms and intent regarding the option to purchase an additional 31% prior to early April 2027?",
     "facts": [
      "F2",
-     "P4",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Income before income taxes and equity in losses of unconsolidated affiliates | 6,383 | 3,743 | 14,177 | 11,521",
-     "Income tax expense | (1,309) | (1,435) | (4,604) | (3,921)",
-     "Net income in the quarter increased 117% to $5 million primarily driven by higher operating income, as well as lower interest expense and a lower effective tax rate compared with the prior year period."
+     "Total consideration for the transaction was $10.0 million, with $2.5 million paid in cash upon closing and the remaining $7.5 million was recorded as a contingent consideration, which is included in \u201cOther long-term liabilities\u201d on our consolidated balance sheet.",
+     "We also retain an option to purchase an additional 31% of Karta prior to early April 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P9], which references the 2026 Proxy Statement guidelines without providing departure reasons or severance dollar figures.",
-    "claim": "What were the reasons for Donna Abbey Carmignani's August 20, 2026 departure as Controller and Chief Accounting Officer, and what total severance payments and benefits is she eligible to receive?",
+    "basis": "Stated in P2 that one customer accounted for approximately 16% of 2025 revenue and customer contracts generally lack exclusivity or volume commitments; inferred that 2026 concentration shifts and renewal schedules are not in the packet.",
+    "claim": "Has customer revenue concentration shifted from the 16% single-customer level reported for 2025 following recent acquisitions and new commercial wins, and when do contracts with major customers come up for renewal?",
     "facts": [
-     "P9"
+     "P2",
+     "P6"
     ],
     "quotes": [
-     "Also, on August 26, 2026, the Company announced that the Company and Donna Abbey Carmignani, Controller and Chief Accounting Officer, agreed that she would cease serving as Controller and Chief Accounting Officer effective as of August 20, 2026.",
-     "Upon her departure, Ms. Abbey Carmignani became eligible to receive severance payments and benefits under the Company\u2019s existing U.S. Executive Severance and Change in Control Guidelines, which are described in the Company\u2019s 2026 Proxy Statement."
+     "The Company had one customer that accounted for approximately 16% of total revenue for the year ended December 31, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] and [P7] as forward-looking 2026 targets; actual fourth-quarter and full-year 2026 results have not occurred or been filed by decision time T.",
-    "claim": "Will CPI achieve its raised 2026 guidance of low-double-digit revenue growth, Free Cash Flow of $50 million to $55 million, low-to-mid single-digit Adjusted EBITDA growth, and a year-end Net Leverage Ratio toward the low end of 2.5x to 3.0x?",
+    "basis": "Stated in P6 that Secure Card Solutions received approximately $4.0 million of tariff refunds while other segments incurred approximately $1.0 million of tariff expenses, and in P2 that tariffs have had and may continue to have a material adverse effect; inferred that the origin, recurrence, and future rate of tariffs are not settled in the packet.",
+    "claim": "What caused the approximately $4.0 million of tariff refunds in Secure Card Solutions during the first nine months of 2026, whether additional refunds are expected, and what ongoing tariff cost exposure remains across segments?",
     "facts": [
-     "P6",
-     "P7"
+     "P2",
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "The Company now expects low-double-digit revenue growth and Free Cash Flow of $50 million to $55 million, up from prior guidance of high-single-digit to low-double-digit revenue growth and $45 million to $50 million of Free Cash Flow.",
+     "Gross profit margin of 31.4% increased from 31.2% in the prior year period, primarily due to increased revenue and approximately $4.0 million of tariff refunds in our Secure Card Solutions segment, partially offset by approximately $1.0 million of tariff expenses in our other reportable segments and increased depreciation expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that the secondary offering concluded Parallel49\u2019s ownership position and covered approximately 2.7 million shares, and in P2 regarding significant stockholder concentration and Board relationships; inferred that post-offering ownership and Board changes are not shown in the packet.",
+    "claim": "Following the September 14, 2026 secondary offering of approximately 2.7 million shares that concluded Parallel49's ownership, who are the remaining significant stockholders and have any Parallel49-affiliated directors stepped down or changed Board roles?",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The Company successfully completed a secondary offering of the remaining shares held by Parallel49, fully concluding Parallel49\u2019s ownership position in CPI after nearly 20 years as an investor.",
+     "On September 14, 2026, certain CPI stockholders completed a secondary public offering of approximately 2.7 million shares, including the underwriters\u2019 full exercise of their option to purchase additional shares."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 Exhibit E that restructuring and other charges totaled 5,250 (table in thousands) in the first nine months of 2026 and include executive retention, severance, and offering-related expenses; inferred that specific personnel and future restructuring plans are not detailed in the packet.",
+    "claim": "Which executives or business functions account for the 5,250 (table in thousands) of restructuring and other charges in the first nine months of 2026, and are additional executive retention or severance charges anticipated?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Balance includes expenses related to executive retention and severance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3 that 10,113 (table in thousands) of financing lease right-of-use assets were obtained in exchange for lease obligations and in P3 that material cash requirements include lease payments and purchase obligations; inferred that lease and obligation schedules are absent because the Leases section of P3 and 10-Q footnotes are omitted.",
+    "claim": "What is the full schedule of operating and finance lease liabilities and purchase obligations as of September 30, 2026, given the 10,113 (table in thousands) of financing lease right-of-use assets added in the first nine months of 2026?",
+    "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Our material cash requirements include interest payments on our long-term debt, operating and finance lease payments, and purchase obligations to support our operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that Net Leverage Ratio was 2.6x and that LTM Adjusted EBITDA is reconciled in Exhibit E; inferred that the reconciliation figures are unavailable because the remainder of Exhibit 99.1 after footnote (4) was omitted from the packet.",
+    "claim": "What are the exact LTM Adjusted EBITDA figure and finance lease obligations used to compute the 2.6x Net Leverage Ratio as of September 30, 2026?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "LTM Adjusted EBITDA is used in the computation of Net Leverage Ratio, and is reconciled in Exhibit E."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 that full-year Adjusted EBITDA growth is guided to low-to-mid single-digit while nine-month Adjusted EBITDA grew 11.3% and Integrated Paytech growth is expected to more than double in the fourth quarter; inferred that specific fourth-quarter investment amounts are not quantified in the release.",
+    "claim": "Given 11.3% Adjusted EBITDA growth in the first nine months of 2026, what specific fourth-quarter growth and diversification investments or margin pressures explain the full-year guidance for low-to-mid single-digit Adjusted EBITDA growth despite expected fourth-quarter acceleration in Integrated Paytech?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
      "CPI continues to expect low-to-mid single-digit Adjusted EBITDA growth as growth and diversification investments continue.",
-     "The Company also expects its year-end Net Leverage Ratio towards the low-end of the 2.5x and 3.0x range."
+     "The Company expects Integrated Paytech revenue growth to more than double in the fourth quarter compared with the third quarter, driven by continued momentum in Card@Once, the contribution from TRISM instant issuance and a more favorable year-over-year comparison."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 that approximately 93% of 2025 microchip and antenna purchases came from three suppliers and 74% from one supplier, and in P5 that no material changes to risk factors occurred as of the Q3 2026 10-Q; inferred that supplier diversification progress and contract terms are not disclosed in the packet.",
+    "claim": "What steps has CPI taken to diversify away from the three main microchip and antenna suppliers that accounted for approximately 93% of 2025 purchases (and 74% from a single supplier), and are any long-term supply agreements in place?",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025 approximately 93% of the total value of our purchased microchips and antennas came from three main suppliers, and approximately 74% came from one supplier, including most of our contactless chips."
+    ],
+    "support": "supported"
    }
   ]
  },
  "ticker": "PMTS",
- "upside": 0.320677146021924,
  "valuation": null,
- "value_base": 31.403132325046933,
- "value_bear": 19.105320228286047,
- "value_bull": 50.70747803394242,
- "value_per_filed_share": {
-  "base": 31.403132325046933,
-  "bear": 19.105320228286047,
-  "bull": 50.70747803394242
- },
- "valued": true,
- "verdict": "BUY",
- "verdict_reason": "expected return +11.8 points a year against the required return over 3 years"
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
 }
