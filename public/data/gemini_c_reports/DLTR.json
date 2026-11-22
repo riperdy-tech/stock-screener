@@ -1,20 +1,36 @@
 {
- "alpha_pts": 0.4383120823821557,
+ "alpha_pts": 1.8117630768731656,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 114,
- "claims_supported": 97,
- "date": "2026-11-16T23:16:51Z",
+ "based_on": {
+  "accepted": "2026-08-27T10:35:11.000Z",
+  "accepted_utc": "2026-08-27T14:35:11Z",
+  "accession": "0000935703-26-000109",
+  "decision_time": "2026-11-22T05:02:39Z",
+  "form": "10-Q",
+  "period": "2026-08-01"
+ },
+ "claims": 67,
+ "claims_supported": 61,
+ "date": "2026-11-22T05:02:39Z",
  "decided": {
   "flags": [
-   "run 1000: debt_level_representative_no: Long-term debt has already risen from 2,431.7 to 2,933.5 after $500.0M of new borrowing alongside heavy buybacks, so the base-year debt is below the current level.",
-   "run 1000: confidence_low",
-   "run 1000: quotes_verified: 11 of 11",
-   "run 3000: quotes_verified: 11 of 11"
+   "run 1000: debt_level_representative_no: Long-term debt rose to $2,933.5 million after $500 million of new borrowing, so the $2,431.7 million base-year figure understates the level the company is carrying alongside large buybacks.",
+   "run 1000: quotes_verified: 8 of 8",
+   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
+   "run 3000: base_year_not_representative",
+   "run 3000: debt_level_representative_no: Long-term debt rose to 2,933.5 million after a 500.0 million issue in the first half, so the base-year 2,431.7 million understates the current level, and buybacks are being funded partly with debt.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 13 of 13",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0637 (equity return r 0.0781), F 10",
-  "run_gap": 0.06345549022681085,
+  "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0631 (equity return r 0.0772), F 10",
+  "run_gap": 0.0006433610252288077,
   "runs": {
    "1000": {
     "adjustments": {
@@ -31,12 +47,82 @@
        "quotes_given": 1,
        "scale": "millions",
        "sign": "gain",
-       "what": "Insurance gain on the destroyed Marietta distribution center, recorded in other income, net below operating income"
+       "what": "Insurance gain on the Marietta distribution center tornado, recorded in other income"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -487300000.0,
+      "excess_cash_before": 717800000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000935703-26-000109",
+        "amount": 1208900000.0,
+        "end": "2026-08-01",
+        "filed": "2026-08-27",
+        "form": "10-Q",
+        "read_amount": 1208900000.0,
+        "source": "xbrl",
+        "start": "2026-02-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "accn": "0000935703-26-000109",
+        "amount": 0.0,
+        "end": "2026-08-01",
+        "filed": "2026-08-27",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-02-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinesses"
+       },
+       "shares_issued_proceeds": {
+        "amount": 3800000.0,
+        "printed": 3.8,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from stock issued pursuant to stock-based compensation plans | 3.8 | 4.9"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 1212700000.0,
+      "interim_end": "2026-08-01",
+      "market_cap": 26313273171.0,
+      "net_effect_on_excess_cash": -1205100000.0,
+      "shares": {
+       "after": 187630299.0,
+       "before": 206300000.0,
+       "change": -18669701.0,
+       "explained_range": [
+        -17186252.13918996,
+        -4296563.03479749
+       ],
+       "interim": 187630299.0,
+       "price_used": 140.24,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 717800000.0,
+     "excess_cash_after": -487300000.0,
      "excess_cash_before": 717800000.0,
      "k0_after": 114403751.04838705,
      "k0_before": 52403751.04838705,
@@ -45,58 +131,63 @@
      "one_offs_gain": 62000000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "acquisitions_paid_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 1157020260.104579,
      "x0_before": 1203641064.032164
     },
-    "confidence": "low",
+    "confidence": "medium",
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 25133731486.496666,
-     "seam_ratio": 1.0490893724868333,
-     "tv_share": 0.5758435297833302,
-     "wedge_rate_5": 0.006385400211272684
+     "equity_value": 25591406914.28725,
+     "seam_ratio": 1.0416165187080189,
+     "tv_share": 0.5263101910042697,
+     "wedge_rate_5": 0.005891691217389433
     },
     "flags": [
-     "debt_level_representative_no: Long-term debt has already risen from 2,431.7 to 2,933.5 after $500.0M of new borrowing alongside heavy buybacks, so the base-year debt is below the current level.",
-     "confidence_low",
-     "quotes_verified: 11 of 11"
+     "debt_level_representative_no: Long-term debt rose to $2,933.5 million after $500 million of new borrowing, so the $2,431.7 million base-year figure understates the level the company is carrying alongside large buybacks.",
+     "quotes_verified: 8 of 8",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.055,
-     "fade_years": 8,
+     "capex_to_revenue": 0.054,
+     "fade_years": 10,
      "long_run_op_margin": 0.093,
      "op_margin": [
       0.098,
-      0.088,
-      0.09,
       0.092,
-      0.093
+      0.093,
+      0.094,
+      0.094
      ],
-     "return_on_new_investment_long_run": 0.16,
+     "return_on_new_investment_long_run": 0.15,
      "rev_growth": [
-      0.065,
+      0.062,
       0.05,
       0.045,
       0.04,
-      0.038
+      0.037
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0637 (equity return r 0.0781), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0631 (equity return r 0.0772), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 17,
-     "kept": 97
+     "dropped_unsupported": 6,
+     "kept": 61
     },
     "ranges": {
      "long_run_op_margin": [
       0.08,
-      0.108
+      0.105
      ],
      "rev_growth_y3": [
-      0.025,
+      0.03,
       0.06
      ],
      "terminal_growth": [
@@ -113,122 +204,110 @@
        }
       ],
       "quotes_given": 1,
-      "why": "Fiscal 2026 capex is guided at $1.1-1.2B, about 5.5% of revenue, in line with the 5-year pooled ratio of 5.5%, as distribution centers and store renovations continue."
+      "why": "Fiscal 2026 capex guidance of $1.1-1.2 billion is about 5.6% of guided sales, in line with the 5.5% five-year pooled ratio, and should ease slightly once the Phoenix and Marietta DCs are done."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P2",
-        "quote": "There are no significant economic barriers for others to enter our retail sector."
+        "id": "P3",
+        "quote": "We operate more than 9,200 stores and believe we have ample opportunities for new store growth in the future"
        }
       ],
       "quotes_given": 1,
-      "why": "A moderate-length fade fits a retailer with ample new-store runway but low barriers to entry, so excess returns erode gradually."
+      "why": "A ten-year fade lets new-store and multi-price growth normalize gradually to terminal growth."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "P3",
-        "quote": "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales through improved productivity, cost optimization, and right-sizing initiatives."
-       },
-       {
-        "id": "P3",
-        "quote": "Operating income margin | 8.5% | 8.3% | 10.6%"
+        "quote": "Operating income margin increased to 8.5% in fiscal 2025 compared to 8.3% in fiscal 2024"
        }
       ],
-      "quotes_given": 2,
-      "why": "Margins have run 8.3-10.6% on continuing operations. Management targets lower corporate SG&A and multi-price margin expansion, but tariffs, shrink, wages and low-barrier competition cap the upside. Partial reversion toward the roughly 9.5% 5-year median supports about 9.3%."
+      "quotes_given": 1,
+      "why": "The margin was 8.3-8.5% in FY2024-25 against 10.6% in FY2023. Management targets SG&A leverage and multi-price margin expansion, so a modest recovery to about 9.3% is reasonable, with wide uncertainty on tariffs and wages."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds"
-       },
-       {
-        "id": "P6",
-        "quote": "Increasing fiscal 2026 adjusted EPS outlook to a range of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
+        "quote": "Adjusted diluted EPS of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
        }
       ],
-      "quotes_given": 2,
-      "why": "Year 1 is lifted by the one-off tariff refunds. The adjusted EPS outlook of $7.70-8.05 implies a GAAP margin near 10%. Year 2 drops back as the refunds, reinvestment and transition income roll off, then recovers slowly with multi-price mix and SG&A leverage."
+      "quotes_given": 1,
+      "why": "Year 1 gets a modest lift from the roughly $0.60 EPS of net tariff refunds in guidance. After that the margin settles around 9.2-9.4%, since reinvestment, wages, DC start-up costs and a shift toward consumables offset pricing and shrink gains."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0637."
-       },
-       {
-        "id": "REC",
-        "quote": "Base year: return on tangible capital 0.2265;"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0631"
        }
       ],
-      "quotes_given": 2,
-      "why": "The base return on tangible capital of 22.7% is high, but new capital goes to stores, distribution centers and technology at rising build-out costs. I assume a lower long-run return, well above the 6.4% break-even."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is high, but competition has no significant entry barriers, and the new capital goes into distribution centers and renovations. I assume new investment earns well above the 6.3% breakeven but well below the current 22.7%."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Net sales increased 7.0% to $4,886.5 million primarily due to a 3.7% comparable store net sales increase and net sales of $225.9 million at non-comparable stores."
+        "id": "P6",
+        "quote": "Net sales from continuing operations of $20.5 billion to $20.7 billion, based on comparable store net sales growth of 3% to 4%"
        },
        {
         "id": "P6",
-        "quote": "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments"
+        "quote": "Approximately 400 new store openings and 75 closings"
        }
       ],
       "quotes_given": 2,
-      "why": "First-half growth was about 7%, on a 3.7% comp plus non-comparable store sales. Management guides Q3 comps to 3-4%, and square footage growth is slowing to 3.4%, so I fade growth from about 6.5% to under 4%. Traffic is fragile after the fiscal 2025 price changes."
+      "why": "Fiscal 2026 guidance of $20.5-20.7 billion implies about 6% growth on a 3-4% comp plus about 400 net openings. Growth then fades toward 3.5-4% as new-store contribution slows and ticket-led comps are lapped, with traffic thin."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Cost of equity r 0.0781; long-run nominal growth anchor g_anchor 0.0375."
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
       "quotes_given": 1,
-      "why": "A mature U.S. discount-store base with slowing square footage growth supports growth somewhat below the 3.75% nominal anchor."
+      "why": "A mature U.S. discount retailer with continued but slowing unit growth should grow a little below the long-run nominal anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.08,
+      "bear_value": 0.075,
       "input_hit": "long_run_op_margin",
-      "risk": "Tariffs are reimposed or increased and the 85% of products priced at $2.00 or less cannot pass them through, so the margin stays near 8%"
+      "risk": "Tariff re-escalation or loss of refunds, plus wage and freight inflation, with limited ability to pass costs through at a $1.25 price point"
      },
      {
-      "bear_value": 0.025,
+      "bear_value": 0.03,
       "input_hit": "rev_growth",
-      "risk": "Further price increases or multi-price expansion hurt traffic, as they did in the back half of fiscal 2025, and growth stalls"
+      "risk": "Price-led ticket growth fades and traffic declines, leaving comps near flat"
      },
      {
-      "bear_value": 0.1,
+      "bear_value": 0.09,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Higher build-out costs and weaker new-store productivity cut returns on new capital"
+      "risk": "Competition and consumables mix shift lower returns on new stores and DCs"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.08,
       "rev_growth": [
-       0.045000000000000005,
-       0.030000000000000006,
+       0.047,
+       0.035,
+       0.03,
        0.025,
-       0.020000000000000004,
-       0.018000000000000002
+       0.022
       ],
       "terminal_growth": 0.025
      },
      "bull": {
-      "long_run_op_margin": 0.108,
+      "long_run_op_margin": 0.105,
       "rev_growth": [
-       0.08,
+       0.077,
        0.065,
        0.06,
        0.055,
-       0.053
+       0.052
       ],
       "terminal_growth": 0.035
      }
@@ -238,20 +317,20 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "no",
-      "why": "Long-term debt has already risen from 2,431.7 to 2,933.5 after $500.0M of new borrowing alongside heavy buybacks, so the base-year debt is below the current level."
+      "why": "Long-term debt rose to $2,933.5 million after $500 million of new borrowing, so the $2,431.7 million base-year figure understates the level the company is carrying alongside large buybacks."
      },
-     "margin_position": "The base-year margin of 8.5% is below the 10.6% of fiscal 2023 because store payroll for the pricing initiatives, wage increases, higher shrink, markdowns and tariffs outran gross-margin gains. Fiscal 2026 is flattered by one-off tariff refunds (about 650bp in Q2) and by temporary Family Dollar transition income. The underlying margin is roughly 8.5-9%, with room to rise if multi-price and SG&A leverage work.",
+     "margin_position": "The FY2025 operating margin of 8.5% is below the roughly 10.6% of FY2023. Gross margin has improved through pricing, lower freight and less shrink, but SG&A has risen from 25.3% to 28.2% of revenue on wages, price-change labor, depreciation and liability claims. Fiscal 2026 year-to-date margin of 11.8% is inflated by one-off tariff refunds, so the underlying margin is nearer 9%.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 24.8% base-year rate is close to the 25.0% effective rate in the latest quarter and the 24.7% prior-year rate."
+      "why": "The 24.8% filed rate is in line with the 25.0% year-to-date rate, so it is a rate the company can keep paying."
      },
-     "why": "Fiscal 2025 is a full 52-week year of continuing operations after the Family Dollar sale, with a 5.3% comp. It includes $54.9M of temporary transition-services income, and a $62.0M insurance gain sits below operating income. Fiscal 2026 is distorted upward by tariff refunds, so I use the base year as the cleaner anchor and treat year 1 as inflated."
+     "why": "FY2025 is a clean continuing-operations year after the Family Dollar sale, with a 5.3% comp and an 8.5% margin. It includes a $62.0 million insurance gain in other income and some SKU write-off costs, both modest. Fiscal 2026 will show a higher reported margin because of the tariff refunds, so it should not be used as the base."
     },
-    "value_at_old_defaults": 102.76055143466573,
+    "value_at_old_defaults": 104.1350698268318,
     "values": {
-     "base": 132.78779386232603,
-     "bear": 100.05590258062308,
-     "bull": 175.34475627253607
+     "base": 142.2485177032846,
+     "bear": 109.1248820701218,
+     "bull": 186.05821678816858
     }
    },
    "3000": {
@@ -263,18 +342,88 @@
        "quotes": [
         {
          "id": "P3",
-         "quote": "The insurance gain recognized in fiscal 2025 totaled $62.0 million"
+         "quote": "The insurance gain recognized in fiscal 2025 totaled $62.0 million compared to $30.0 million in fiscal 2024."
         }
        ],
        "quotes_given": 1,
        "scale": "millions",
        "sign": "gain",
-       "what": "Insurance gain on the destroyed Marietta, Oklahoma distribution center, recorded in other income, net. It is non-operating and will not recur."
+       "what": "Non-operating insurance gain from the Marietta, Oklahoma distribution center tornado, recorded in other income, net"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -487300000.0,
+      "excess_cash_before": 717800000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000935703-26-000109",
+        "amount": 1208900000.0,
+        "end": "2026-08-01",
+        "filed": "2026-08-27",
+        "form": "10-Q",
+        "read_amount": 1208900000.0,
+        "source": "xbrl",
+        "start": "2026-02-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "accn": "0000935703-26-000109",
+        "amount": 0.0,
+        "end": "2026-08-01",
+        "filed": "2026-08-27",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-02-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinesses"
+       },
+       "shares_issued_proceeds": {
+        "amount": 3800000.0,
+        "printed": 3.8,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from stock issued pursuant to stock-based compensation plans | 3.8 | 4.9"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 1212700000.0,
+      "interim_end": "2026-08-01",
+      "market_cap": 26313273171.0,
+      "net_effect_on_excess_cash": -1205100000.0,
+      "shares": {
+       "after": 187630299.0,
+       "before": 206300000.0,
+       "change": -18669701.0,
+       "explained_range": [
+        -17186252.13918996,
+        -4296563.03479749
+       ],
+       "interim": 187630299.0,
+       "price_used": 140.24,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 717800000.0,
+     "excess_cash_after": -487300000.0,
      "excess_cash_before": 717800000.0,
      "k0_after": 114403751.04838705,
      "k0_before": 52403751.04838705,
@@ -283,48 +432,57 @@
      "one_offs_gain": 62000000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "acquisitions_paid_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 1157020260.104579,
      "x0_before": 1203641064.032164
     },
-    "confidence": "medium",
+    "confidence": "low",
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 26825185214.68924,
-     "seam_ratio": 1.048165551152933,
-     "tv_share": 0.5997362226876597,
-     "wedge_rate_5": 0.00583817946341739
+     "equity_value": 25607581417.12899,
+     "seam_ratio": 1.037589098227597,
+     "tv_share": 0.5217509119629353,
+     "wedge_rate_5": 0.0055309441954071925
     },
     "flags": [
-     "quotes_verified: 11 of 11"
+     "base_year_not_representative",
+     "debt_level_representative_no: Long-term debt rose to 2,933.5 million after a 500.0 million issue in the first half, so the base-year 2,431.7 million understates the current level, and buybacks are being funded partly with debt.",
+     "confidence_low",
+     "quotes_verified: 13 of 13",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.055,
-     "fade_years": 8,
-     "long_run_op_margin": 0.094,
+     "capex_to_revenue": 0.054,
+     "fade_years": 10,
+     "long_run_op_margin": 0.093,
      "op_margin": [
       0.098,
-      0.087,
-      0.09,
       0.092,
-      0.094
+      0.094,
+      0.095,
+      0.096
      ],
-     "return_on_new_investment_long_run": 0.16,
+     "return_on_new_investment_long_run": 0.14,
      "rev_growth": [
       0.062,
       0.05,
       0.045,
-      0.042,
-      0.04
+      0.04,
+      0.038
      ],
-     "terminal_growth": 0.034
+     "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0637 (equity return r 0.0781), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0713 and margin 0.1179, margin 0.0852 (persist), growth 0.0375, terminal RONIC 0.0631 (equity return r 0.0772), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 17,
-     "kept": 97
+     "dropped_unsupported": 6,
+     "kept": 61
     },
     "ranges": {
      "long_run_op_margin": [
@@ -333,11 +491,11 @@
      ],
      "rev_growth_y3": [
       0.03,
-      0.06
+      0.058
      ],
      "terminal_growth": [
-      0.028,
-      0.04
+      0.02,
+      0.038
      ]
     },
     "reasons": {
@@ -353,31 +511,31 @@
        }
       ],
       "quotes_given": 2,
-      "why": "FY2026 capex is guided at $1.1-1.2 billion, about 5.5% of revenue, matching the five-year pooled average of 5.54% as the distribution-center build-out continues."
+      "why": "Fiscal 2026 capex guidance of $1.1 to $1.2 billion is about 5.5% of guided sales, in line with the 5.5% pooled five-year ratio. Phoenix and Marietta distribution center spend should ease after 2027."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P3",
-        "quote": "Our multi-price strategy is designed to increase basket size and drive margin expansion"
+        "quote": "believe we have ample opportunities for new store growth in the future"
        }
       ],
       "quotes_given": 1,
-      "why": "Multi-price conversions and corporate cost work take several years to reach their full margin effect, so an eight-year fade is reasonable."
+      "why": "Management sees ample room for new store growth, and the multi-price rollout is only partly done at about 6,600 stores. A ten-year fade lets growth and margins converge gradually."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "P3",
-        "quote": "Operating income margin | 8.5% | 8.3% | 10.6%"
+        "quote": "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales"
        },
        {
-        "id": "P3",
-        "quote": "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales"
+        "id": "REC",
+        "quote": "2025-02-01 | $17,578.5 million | 0.0475 | 0.0832"
        }
       ],
       "quotes_given": 2,
-      "why": "The margin was 10.6% in FY2023 and 8.5% in FY2025. Management targets lower corporate SG&A and multi-price margin expansion, but tariffs and the low price points limit pass-through. Roughly half the gap back toward the earlier level gives about 9.4%."
+      "why": "I fade to 9.3%, above the 8.5% base year but below the 10.6% and 13.6% of earlier years, since SG&A has structurally risen from 25.3% to 28.2% of revenue. Management targets lower corporate SG&A and multi-price mix gains, but cost pressure and consumables mix shift limit the upside."
      },
      "op_margin": {
       "quotes": [
@@ -391,58 +549,66 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 is lifted by one-time tariff refunds, and FY2026 adjusted EPS guidance of $7.70-8.05 implies a margin near 10%. Year 2 drops once the refunds, and eventually the transition services income, fall away. After that it rebuilds on multi-price, SG&A leverage and shrink improvement, partly offset by tariff and distribution-center costs."
+      "why": "Year 1 is lifted by tariff refunds: the full-year EPS guide includes about $0.60 of refund benefit and the first-half margin was 11.8%, so I use 9.8%. Year 2 drops back to an underlying 9.2%, then recovers slowly with lower tariff costs, shrink improvement and corporate cost cuts, offset by wages and distribution costs."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
         "quote": "Base year: return on tangible capital 0.2265"
+       },
+       {
+        "id": "P2",
+        "quote": "We have experienced higher construction, rent, commodity and other costs associated with the build-out of new stores and the renovation of existing stores."
        }
       ],
-      "quotes_given": 1,
-      "why": "Base-year return on tangible capital is 22.7%, but new investment now goes into distribution centers, renovations and modernization with a lower payback. I assume it falls toward the middle, well above the 6.4% break-even."
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital is 22.7%, but new stores, distribution centers and renovations will earn less as competition and build-out costs rise. I use 14%, well above the 6.3% breakeven return."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth"
+        "quote": "Net sales from continuing operations of $20.5 billion to $20.7 billion, based on comparable store net sales growth of 3% to 4%"
        },
        {
-        "id": "P4",
-        "quote": "Net sales increased 7.0% to $4,886.5 million primarily due to a 3.7% comparable store net sales increase"
+        "id": "P6",
+        "quote": "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic"
        }
       ],
       "quotes_given": 2,
-      "why": "H1 net sales grew about 7% and Q3 comps are guided to 3-4%, so year 1 is near 6%. After that, growth slows toward the comp plus roughly 3% square-footage growth, because new-store growth has eased from 8.0% to 3.4%."
+      "why": "Management guides fiscal 2026 net sales to $20.5 to $20.7 billion on 3% to 4% comps, about 6% growth on the 19.4 billion base. Growth then fades toward comps of about 3% plus roughly 2% from new stores. Net store growth was 3.4% in square footage, and traffic is thin."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
         "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
+        "id": "P2",
+        "quote": "There are no significant economic barriers for others to enter our retail sector."
        }
       ],
-      "quotes_given": 1,
-      "why": "A mature U.S. discount retailer with about 9,400 stores should grow close to nominal GDP once store openings slow. I set it slightly below the anchor."
+      "quotes_given": 2,
+      "why": "Long-run growth is set a little below the nominal anchor of 3.75%, because a mature single-banner discount retailer in a fragmented, low-barrier competitive sector should grow roughly with inflation and modest unit growth."
      }
     },
     "risks": [
      {
-      "bear_value": 0.08,
-      "input_hit": "long_run_op_margin",
-      "risk": "Tariffs persist or rise, and limited price bands plus China sourcing prevent pass-through, so the margin does not recover."
+      "bear_value": 0.082,
+      "input_hit": "op_margin",
+      "risk": "Tariff refunds do not recur and tariffs rise again, with limited ability to pass costs through at the $1.25 price point"
      },
      {
       "bear_value": 0.03,
       "input_hit": "rev_growth",
-      "risk": "Price increases and multi-price changes hurt traffic again, as in Q3 and Q4 of fiscal 2025, slowing comps."
+      "risk": "Price-led ticket growth fades and traffic turns negative, so comps slow toward 1% to 2%"
      },
      {
-      "bear_value": 0.028,
-      "input_hit": "terminal_growth",
-      "risk": "Weaker consumers shift further to lower-margin consumables, and competition lowers long-run growth."
+      "bear_value": 0.08,
+      "input_hit": "long_run_op_margin",
+      "risk": "Wage, freight and general-liability cost inflation plus a shift to lower-margin consumables keeps SG&A elevated"
      }
     ],
     "scenarios": {
@@ -452,140 +618,106 @@
        0.047,
        0.035,
        0.03,
-       0.027000000000000003,
-       0.025
+       0.025,
+       0.023
       ],
-      "terminal_growth": 0.028
+      "terminal_growth": 0.02
      },
      "bull": {
       "long_run_op_margin": 0.105,
       "rev_growth": [
-       0.077,
-       0.065,
-       0.06,
-       0.057,
-       0.055
+       0.07500000000000001,
+       0.063,
+       0.058,
+       0.053000000000000005,
+       0.051000000000000004
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.038
      }
     },
     "situation": {
-     "base_year_representative": "unclear",
+     "base_year_representative": "no",
      "cyclical": "no",
      "debt_level_representative": {
-      "answer": "unclear",
-      "why": "Debt was $2,431.7 million at the base year but rose to $2,933.5 million after $500.0 million of new borrowing alongside heavy buybacks, so the future level relative to size is uncertain."
+      "answer": "no",
+      "why": "Long-term debt rose to 2,933.5 million after a 500.0 million issue in the first half, so the base-year 2,431.7 million understates the current level, and buybacks are being funded partly with debt."
      },
-     "margin_position": "The FY2025 margin of 8.5% is well below the 10.6% earned in FY2023. Higher store payroll, wage increases, tariff costs and price-change implementation costs held it down, while falling freight costs and better mark-on lifted gross margin. FY2026 is flattered by one-time tariff refunds, which gave a 650 basis point benefit in Q2. After that fades, the margin should settle between the FY2025 level and the FY2023 peak.",
+     "margin_position": "The base-year GAAP margin of 8.5% is well below the pre-2024 level of about 10.6% to 13.6%, because wages, price-change labor, distribution and general-liability costs have taken SG&A from 25.3% to 28.2% of revenue. Fiscal 2026 reported margin is inflated by one-time tariff refunds (650 bp in Q2, 320 bp in the first half). Underlying margin is closer to 9% to 9.5% and should drift up slowly as tariff costs ease and corporate costs fall.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The effective tax rate was 24.8% in FY2025 and 25.0% in Q2 FY2026, which is a stable, normal rate."
+      "why": "The 24.8% base-year rate matches the 25.0% rate in the first half of fiscal 2026 and the 24.7% to 25.5% seen in recent periods."
      },
-     "why": "FY2025 includes a $56.0 million slow-SKU write-off, tariff costs and price-change labor costs, which push the margin down. It also includes transition services agreement income that will end. The 10.4% revenue growth was boosted by Family Dollar conversions and a 5.3% comp, so it is above a sustainable pace. The base year is roughly a normal operating year, but not a clean one."
+     "why": "Fiscal 2025 was held back by price-change labor costs, tariff costs and a $56.0 million SKU write-off, and was helped by a $62.0 million non-operating insurance gain. Fiscal 2026 is distorted upward by tariff refunds. I treat year 1 as a refund-boosted year and years 2 to 5 as the underlying business with modest recovery. The Family Dollar sale means the base year is already continuing operations only."
     },
-    "value_at_old_defaults": 102.76055143466573,
+    "value_at_old_defaults": 104.1350698268318,
     "values": {
-     "base": 141.49001011725474,
-     "bear": 106.87289146288367,
-     "bull": 186.36659936047505
+     "base": 142.34006430422897,
+     "bear": 105.24531759049108,
+     "bull": 190.7033994947669
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 102.76055143466573,
-  "value_at_old_defaults_quoted": 102.76055143466573,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 104.1350698268318,
+  "value_at_old_defaults_quoted": 104.1350698268318,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 28291755480.493755,
+ "equity_value": 26698720367.027893,
  "family": "operating",
  "far_from_price": false,
- "filed_shares": 206300000.0,
+ "filed_shares": 187630299.0,
  "flags": [
-  "Dollar Tree completed the sale of its Family Dollar business to 1959 Holdings, LLC, with total cash generated of approximately $793 million.",
-  "The U.S. Supreme Court ruled that certain IEEPA tariffs were unlawful. The company is acting to preserve its rights to refunds of those tariffs.",
-  "In the latest reported quarter, the company received $368.7 million of tariff refunds, which helped lift gross profit."
+  "Dollar Tree completed the sale of the Family Dollar business to 1959 Holdings, LLC. Family Dollar results are reported as discontinued operations, and a transition services agreement continues.",
+  "Dollar Tree received $368.7 million of tariff refunds in the second quarter of fiscal 2026. This was the primary driver of the gross profit increase and of the jump in operating margin.",
+  "Dollar Tree announced a raised fiscal 2026 adjusted EPS outlook of $7.70 to $8.05. The range includes an approximate $0.60 benefit from the net impact of tariff refunds."
  ],
  "in_code_book": false,
- "ke": 0.0781318907508762,
+ "ke": 0.0772359950902752,
  "market_cap_at_publish": 25885480172,
- "model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 137.96,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 132.78779386232603,
-  "3000": 141.49001011725474
+  "1000": 142.2485177032846,
+  "3000": 142.34006430422897
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited 10-K Item 1",
-    "claim": "The company operates retail discount stores under the Dollar Tree and Dollar Tree Canada brand names, with approximately 9,000 stores across 48 states and the District of Columbia and approximately 275 stores in Canada.",
+    "basis": "stated in the cited item (10-K Item 1)",
+    "claim": "Dollar Tree is a discount variety retailer that operates stores under the Dollar Tree and Dollar Tree Canada banners. The 10-K counts about 9,000 US stores and about 275 Canadian stores at January 31, 2026.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "We are a leading operator of retail discount stores operating under the brand names of Dollar Tree and Dollar Tree Canada.",
-     "At January 31, 2026, we operated approximately 9,000 stores across 48 states and the District of Columbia and approximately 275 stores across seven Canadian provinces."
+     "We are a leading operator of retail discount stores operating under the brand names of Dollar Tree and Dollar Tree Canada."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K and earnings release",
-    "claim": "Continuing operations now reflect only the Dollar Tree U.S. and Dollar Tree Canada banners, because the Family Dollar business was sold and is reported as discontinued operations.",
-    "facts": [
-     "P1",
-     "P8"
-    ],
-    "quotes": [
-     "The operating results of the Family Dollar business are reported as discontinued operations for all periods presented.",
-     "Continuing operations reflect the results of the Dollar Tree U.S. and Dollar Tree Canada banners."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K Item 1",
-    "claim": "Canada contributes immaterial revenue and assets, so the business is effectively a U.S. store operator.",
+    "basis": "stated in the cited item (10-K Item 1)",
+    "claim": "It sells everyday consumables and discretionary goods (variety items and seasonal goods) to customers across a broad range of income levels, mainly from suburban stores.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Our revenue and assets in Canada are not material."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K Item 1",
-    "claim": "The stores serve customers across a broad range of income levels, mainly in suburban locations, in stores of 8,000 - 10,000 selling square feet.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
+     "Consumable merchandise, which includes everyday consumables such as household paper and chemicals, food, candy, health and personal care products, and in most stores, frozen and refrigerated food",
      "Our stores serve customers with a broad range of income levels principally in suburban locations and predominantly range from 8,000 - 10,000 selling square feet."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K Item 1",
-    "claim": "The company sells about 8,400 items spanning consumable merchandise and discretionary merchandise, which includes variety and seasonal goods.",
+    "basis": "stated in the cited items (10-K Item 1A and Item 1)",
+    "claim": "The value proposition rests on low price points. The majority of products are priced at $1.25, and 85% of products in the average store are $2.00 or less. The company is widening a multi-price assortment alongside the $1.25 price.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We carry approximately 8,400 items in our stores, and as of the end of fiscal 2025, approximately 40% of our items were automatically replenished.",
-     "We maintain a balanced selection of products within traditional variety store categories."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K Risk Factors",
-    "claim": "Pricing is concentrated at low price points: most products are priced at $1.25 and 85% are at $2.00 or less, which limits the company's ability to pass on cost increases.",
-    "facts": [
+     "P1",
      "P2"
     ],
     "quotes": [
@@ -594,19 +726,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "The multi-price format is being rolled out: about 710 stores were converted or added in the quarter, bringing the total to approximately 6,600 multi-price stores.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Converted or added about 710 stores to the Dollar Tree multi-price format, ending the quarter with approximately 6,600 multi-price stores"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-Q income statement",
-    "claim": "Revenue is almost entirely merchandise net sales: net sales were 4,886.5 out of total revenue of 4,891.2, with other revenue of 4.7 (table in millions).",
+    "basis": "stated in the income statement (10-Q)",
+    "claim": "Revenue is almost entirely merchandise sales from stores, with a very small other-revenue line. In the quarter ended August 1, 2026, net sales were 4,886.5 of total revenue of 4,891.2 (table in millions).",
     "facts": [
      "F2"
     ],
@@ -614,8 +735,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "Net sales growth comes from comparable store sales growth plus sales at non-comparable (new) stores; in the last fiscal year net sales rose 10.4% to $19,395.7 million on a 5.3% comparable increase and $1.4 billion at non-comparable stores.",
+    "basis": "stated in the cited item (10-K MD&A)",
+    "claim": "Revenue growth comes from comparable-store sales plus sales at new or non-comparable stores. In fiscal 2025, net sales rose 10.4% to $19,395.7 million on a 5.3% comparable-store increase and $1.4 billion of non-comparable store sales.",
     "facts": [
      "P3"
     ],
@@ -625,67 +746,56 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "Comparable sales growth breaks down into average ticket and customer traffic; in the latest quarter ticket rose 3.3% and traffic rose 0.4%.",
+    "basis": "stated in the cited item (10-Q MD&A)",
+    "claim": "The same two drivers were at work in the second quarter of fiscal 2026. Net sales rose 7.0% to $4,886.5 million on a 3.7% comparable-store increase and $225.9 million at non-comparable stores.",
     "facts": [
-     "P6"
+     "P4"
     ],
     "quotes": [
-     "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic"
+     "Net sales increased 7.0% to $4,886.5 million primarily due to a 3.7% comparable store net sales increase and net sales of $225.9 million at non-comparable stores."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "Ticket growth in the last fiscal year came from targeted retail price changes and greater multi-price penetration, but the price changes hurt customer traffic.",
+    "basis": "stated in the cited items (Q2 earnings release; 10-K MD&A)",
+    "claim": "Comparable sales split into average ticket and traffic. In the second quarter, a 3.3% ticket gain and a 0.4% traffic gain made up the 3.7% comparable increase. In fiscal 2025, ticket growth came mainly from price changes and multi-price penetration, and traffic declined in the third and fourth quarters after the price changes.",
     "facts": [
+     "P6",
      "P3"
     ],
     "quotes": [
-     "The increase in average ticket was primarily the result of targeted retail price changes executed during the second and third quarters of fiscal year 2025 and increased multi-price penetration.",
-     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025."
+     "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic",
+     "The increase in average ticket was primarily the result of targeted retail price changes executed during the second and third quarters of fiscal year 2025 and increased multi-price penetration."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A store table and earnings release",
-    "claim": "New store openings add to revenue: the store count went from 9,282 to 9,436 over 26 weeks, with 188 new stores and 34 closings.",
+    "basis": "stated in the cited items (10-Q MD&A; Q2 earnings release)",
+    "claim": "Store growth adds sales. The store count went from 9,282 to 9,436 over the 26 weeks to August 1, 2026, with 188 new stores and 34 closings. Management's fiscal 2026 outlook assumes about 400 openings and 75 closings.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "Ended the quarter with 9,436 stores across the Dollar Tree U.S. and Dollar Tree Canada banners"
+     "Approximately 400 new store openings and 75 closings"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited 10-K Risk Factors",
-    "claim": "The business is seasonal: Christmas and Easter are the peak sales periods, and a disproportionate share of sales and income falls in the fourth quarter.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our highest sales periods are during the Christmas and Easter seasons, and we generally realize a disproportionate amount of our net sales and our operating and net income during the fourth quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K Item 1",
-    "claim": "Delivery partnerships extend the store base's reach; over 8,800 stores were serviceable through Uber Eats.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "As of January 31, 2026, over 8,800 Dollar Tree stores were serviceable through Uber Eats."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "Cost of sales is the largest cost; its rate fell to 63.6% from 64.2%. Mark-on, freight, sales mix and occupancy lowered the rate, while tariffs, markdowns, shrink and distribution costs pushed it up.",
+    "basis": "stated in the 10-K results table",
+    "claim": "Cost of sales is the largest cost. In fiscal 2025 it was 12,345.0 against net sales of 19,395.7, and the gross margin was 36.4%. SG&A was 5,468.6, or 28.2% of revenue (table in millions).",
     "facts": [
      "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K MD&A and risk factors)",
+    "claim": "Gross margin depends on mark-on from pricing, freight, sales mix, occupancy leverage, tariffs, markdowns, shrink and distribution costs. The fiscal 2025 cost of sales rate fell to 63.6% from 64.2%.",
+    "facts": [
+     "P3",
+     "P2"
     ],
     "quotes": [
      "The cost of sales rate decreased to 63.6% in fiscal 2025 from 64.2% in fiscal 2024 primarily due to improved mark-on from pricing initiatives, lower domestic and import freight costs, favorable sales mix resulting from increased sales of higher margin discretionary merchandise as a percentage of net sales, and lower occupancy costs due to leverage from the comparable store net sales increase, partially offset by higher tariff costs, higher markdowns, higher shrink, and increased distribution costs expense."
@@ -693,578 +803,105 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K Risk Factors",
-    "claim": "Sales mix affects margin, because discretionary merchandise carries higher margins than consumables, and customers have shifted toward consumables.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Over the past several years, we have experienced a shift in consumer purchasing from higher-margin discretionary merchandise to lower-margin consumable goods."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K Item 1 and Risk Factors",
-    "claim": "Direct imports are about 40% of purchases, and China supplies the majority of them, which exposes merchandise cost to tariffs and trade measures.",
+    "basis": "stated in the cited items (10-K Items 1 and 1A)",
+    "claim": "Imports expose the company to tariffs. Directly imported goods are about 40% of total retail value purchases, and China supplies a vast majority of direct imports.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
      "Merchandise imported directly typically accounts for approximately 40% of our total retail value purchases, with the remaining merchandise purchased domestically.",
-     "Among our foreign suppliers, China is the source of the majority of our direct imports."
+     "Among our foreign suppliers, China is the source of a vast majority of our direct imports and we believe that a significant portion of our goods purchased from domestic vendors is imported."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "Latest-quarter gross profit was lifted by one-time tariff refunds: it rose 33.4% to $2,094.3 million, primarily due to $368.7 million of tariff refunds along with a 3.7% comparable sales increase.",
+    "basis": "stated in the cited items (10-Q MD&A; Q2 earnings release)",
+    "claim": "Tariff refunds sharply lifted the second-quarter fiscal 2026 results. Gross profit rose 33.4% to $2,094.3 million, helped by $368.7 million of tariff refunds. Operating margin expanded 900 basis points, including a 650 basis point benefit from the net impact of tariff refunds.",
     "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Gross profit increased 33.4% to $2,094.3 million primarily due to the receipt of $368.7 million of tariff refunds, the 3.7% comparable store net sales increase, our net store growth, lower tariff costs and improvements in shrink."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited earnings release",
-    "claim": "Of the 900 basis point expansion in operating margin, 650 basis points came from the net impact of tariff refunds.",
-    "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [
      "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds"
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "SG&A is driven mainly by store payroll and wages; the SG&A rate rose 70 basis points in the last fiscal year on higher store payroll, incentive compensation, depreciation and general liability claims.",
+    "basis": "stated in the cited item (10-K MD&A)",
+    "claim": "SG&A is driven mainly by store payroll and wages, and also by incentive pay, depreciation on store investments and general liability claims. The company aims to lower corporate SG&A as a share of net sales through cost optimization.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "The selling, general and administrative expense rate increased 70 basis points in fiscal 2025 primarily due to higher store payroll in support of our pricing initiatives and from wage increases, higher incentive compensation, higher depreciation expense from store investments, and unfavorable development of general liability claims, partially offset by lower stock compensation, lower impairment costs, lower corporate payroll, and leverage from the comparable store net sales increase."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "In the latest quarter, SG&A as a percentage of total revenue fell 40 basis points to 29.2%.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Selling, general and administrative expenses, as a percentage of total revenue, decreased 40 basis points to 29.2%."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited 10-K Item 1",
-    "claim": "The company runs its own distribution network of 16 U.S. distribution centers, which supply about 90% of store inventory, so distribution and freight are core cost drivers.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We currently operate 16 distribution centers in the United States.",
-     "Our stores receive approximately 90% of their inventory from our distribution centers."
+     "higher store payroll in support of our pricing initiatives and from wage increases",
+     "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales through improved productivity, cost optimization, and right-sizing initiatives."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A and 10-Q income statement",
-    "claim": "Income from a transition services agreement with Family Dollar is a temporary source of operating income, running for 18 months after the sale; it was 17.7 in the latest quarter (table in millions).",
+    "basis": "stated in the cited items (10-K Item 1; 10-Q income statement; 10-K MD&A)",
+    "claim": "The business is now a single-banner retailer after the Family Dollar sale. Family Dollar is reported as discontinued operations, and the company earns net transition services agreement income of 17.7 in the second quarter (table in millions) from services it provides to Family Dollar.",
     "facts": [
-     "P3",
-     "F2"
+     "P1",
+     "F2",
+     "P3"
     ],
     "quotes": [
-     "The Company has continuing involvement with Family Dollar under a transition services agreement, through which the Company and Family Dollar continue to provide certain services to each other for a period of 18 months following the date of sale."
+     "The operating results of the Family Dollar business are reported as discontinued operations for all periods presented."
     ],
+    "support": "supported"
+   },
+   {
+    "basis": "banner structure stated; single-segment reading is inferred from the absence of any segment disclosure in the packet",
+    "claim": "Continuing operations consist of the Dollar Tree U.S. and Dollar Tree Canada banners, and Canada is not material to revenue or assets. The evidence does not name separate reporting segments, so the business appears to be run as one retail operation.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Continuing operations reflect the results of the Dollar Tree U.S. and Dollar Tree Canada banners.",
+     "Our revenue and assets in Canada are not material."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K risk factors)",
+    "claim": "The business is seasonal. The company generally earns a disproportionate share of net sales and of operating and net income in the fourth quarter, around Christmas and Easter.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "we generally realize a disproportionate amount of our net sales and our operating and net income during the fourth quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement (10-Q)",
+    "claim": "The business converts sales into cash. Six-month operating cash flow from continuing operations was 1,565.5 against capital expenditures of 498.8. Share repurchases of 1,208.9 and long-term debt proceeds of 500.0 were the main financing flows (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item",
-    "claim": "Dollar Tree is a large-scale discount store operator with approximately 9,000 U.S. stores across 48 states and approximately 275 Canadian stores.",
+    "basis": "Store counts are stated in P4 and P6. The scale mechanism is inferred from the buying-power statement in P1.",
+    "claim": "Dollar Tree is a scaled value retailer. It had 9,436 stores across the U.S. and Canada at the end of the second quarter of fiscal 2026, up from 9,282 at the start of the year.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "At January 31, 2026, we operated approximately 9,000 stores across 48 states and the District of Columbia and approximately 275 stores across seven Canadian provinces."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The store base kept growing, from 9,282 stores to 9,436 stores over the latest 26 weeks.",
-    "facts": [
-     "P4",
-     "P6"
+     "P6",
+     "P4"
     ],
     "quotes": [
      "Ended the quarter with 9,436 stores across the Dollar Tree U.S. and Dollar Tree Canada banners"
     ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item as management belief",
-    "claim": "The company says it differentiates itself through high-value, low-cost merchandise in conveniently located stores.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We believe we differentiate ourselves from other retailers by providing high-value, high-quality, low-cost merchandise in attractively-designed stores that are conveniently located."
-    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "The price position is concentrated at low price points: most products are at $1.25, 85% are at $2.00 or less, and there are fewer price bands than at other retailers.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Although our multi-price assortment has grown, the majority of our products are priced at $1.25, and 85% of products in the average Dollar Tree store are currently priced at $2.00 or less, and we generally have fewer price bands for our goods than other retailers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The multi-price format is being rolled out quickly: about 710 stores were converted or added in the quarter, bringing the total to approximately 6,600 multi-price stores.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Converted or added about 710 stores to the Dollar Tree multi-price format, ending the quarter with approximately 6,600 multi-price stores"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Comparable store net sales rose 3.7% in the latest quarter on top of 6.5% a year earlier, with average ticket up 3.3% and traffic up 0.4%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Comparable store net sales increased 3.7% on top of 6.5% last year",
-     "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Last fiscal year's comparable sales gain of 5.3% came mostly from a 4.3% rise in ticket, and traffic declined in the third and fourth quarters after the retail price changes.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Comparable store net sales increased 5.3% in fiscal 2025, as a result of a 4.3% increase in average ticket and a 1.0% increase in customer traffic.",
-     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Store productivity improved: net sales per selling square foot rose to $241 from $232 over the fiscal year, and to $243 from $237 on a trailing 52-week basis.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Net sales per selling square foot | $241 | $232 | $234"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Gross margin rose 60 basis points to 36.4% last fiscal year, helped by pricing mark-on, lower freight and a more favorable mix.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Gross profit, as a percentage of net sales, increased 60 basis points to 36.4%."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Latest-quarter profitability was boosted by tariff refunds: operating margin expanded 900 basis points, of which 650 basis points came from the net tariff refund impact, and diluted EPS of $2.70 included a $1.31 refund benefit.",
-    "facts": [
-     "P6",
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds",
-     "Diluted EPS of $2.70, including a $1.31 benefit related to the net impact of tariff refunds"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Gross profit rose 33.4% to $2,094.3 million in the quarter, mainly because of $368.7 million of tariff refunds, with improved shrink also contributing.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Gross profit increased 33.4% to $2,094.3 million primarily due to the receipt of $368.7 million of tariff refunds, the 3.7% comparable store net sales increase, our net store growth, lower tariff costs and improvements in shrink."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item, partly as management belief",
-    "claim": "The company claims substantial buying power and a diversified vendor base, with no vendor above 10% of merchandise purchases.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We believe our substantial buying power and our flexibility in making sourcing decisions contributes to our successful purchasing strategy, which includes targeted merchandise margin goals by category.",
-     "Historically and in fiscal 2025, no merchandise vendor has accounted for more than 10% of total merchandise purchased by the company."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "A self-operated distribution network of 16 U.S. centers supplies about 90% of store inventory, and capacity is being expanded.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our stores receive approximately 90% of their inventory from our distribution centers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company competes against a wide range of retail formats, including dollar stores, mass merchandisers, warehouse clubs and online retailers.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our competitors include dollar stores, mass merchandisers, warehouse clubs, online retailers, discount retailers, drug stores, convenience stores, independently-operated discount stores, grocery stores and a wide variety of other retailers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: entry barriers are low, and some competitors have greater financial, distribution and marketing resources.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "There are no significant economic barriers for others to enter our retail sector.",
-     "Some of our current or potential competitors have greater financial, distribution, marketing and other resources than we do."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: despite delivery partnerships with Instacart and Uber Eats, some competitors have stronger online, mobile and AI capabilities.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "While we have partnered with online personal shopping providers like Instacart and UberEats, some of our current and potential competitors have more significant online and mobile shopping platforms or other advances in technologies and capabilities (including artificial intelligence) than we currently do."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: reliance on imports exposes the cost position to tariffs; direct imports are about 40% of retail value purchases, and China supplies the majority of them.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Merchandise imported directly typically accounts for approximately 40% of total retail value purchases.",
-     "Among our foreign suppliers, China is the source of the majority of our direct imports."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: competitors could react faster to tariff changes and raise the relative value of their products.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The competitiveness of our products could be reduced if our competitors are able to react quickly to changes in the tariff environment to increase the relative value of their products or are otherwise able to offset the impact of tariffs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: consumers have been shifting spending from higher-margin discretionary goods to lower-margin consumables.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Over the past several years, we have experienced a shift in consumer purchasing from higher-margin discretionary merchandise to lower-margin consumable goods."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Threat: the SG&A rate rose 70 basis points to 28.2% last fiscal year, driven by store payroll and wage increases.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Selling, general and administrative expenses, as a percentage of total revenues, increased 70 basis points to 28.2%."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: inventory shrinkage has recently reached historically high rates.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Risk of loss or theft of assets, including inventory shrinkage, is inherent in the retail business and has recently reached historically high rates."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Threat: new stores opened in existing markets may draw sales away from existing stores.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We also open or expand stores within our established geographic markets, where new or expanded stores may draw sales away from our existing stores."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Cash and cash equivalents were 1,058.1 at Aug. 01, 2026, up from 717.8 at Jan. 31, 2026 and 666.3 at Aug. 02, 2025 (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 1,058.1 | $ 717.8 | $ 666.3"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Total current assets of 3,744.6 exceeded total current liabilities of 3,303.1 at Aug. 01, 2026 (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 3,744.6 | 3,446.2 | 3,613.9",
-     "Total current liabilities | 3,303.1 | 3,228.6 | 3,486.9"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet and 10-K MD&A",
-    "claim": "Short-term borrowings were 0.0 at Aug. 01, 2026 versus 299.5 at Aug. 02, 2025 (table in millions), and no commercial paper was outstanding at January 31, 2026.",
-    "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "Short-term borrowings | 0.0 | 0.0 | 299.5",
-     "At January 31, 2026 and February 1, 2025, no notes were outstanding under the commercial paper program."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet and cash flow statement",
-    "claim": "Long-term debt, net rose to 2,933.5 at Aug. 01, 2026 from 2,431.7 at Jan. 31, 2026 (table in millions), alongside 500.0 of proceeds from long-term debt in the six months.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Long-term debt, net | 2,933.5 | 2,431.7 | 2,429.7",
-     "Proceeds from long-term debt | 500.0 | 0.0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Operating lease liabilities are a large fixed obligation: 1,011.0 current and 3,726.3 long-term at Aug. 01, 2026 (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Current portion of operating lease liabilities | 1,011.0 | 1,000.2 | 976.7",
-     "Operating lease liabilities, long-term | 3,726.3 | 3,623.7 | 3,636.8"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited statements; the link between buybacks and equity decline is inferred",
-    "claim": "Total shareholders' equity fell to 3,425.3 at Aug. 01, 2026 from 3,754.9 at Jan. 31, 2026 (table in millions), while payments for repurchase of stock were 1,208.9 in the six months.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Total shareholders\u2019 equity | 3,425.3 | 3,754.9 | 3,605.1",
-     "Payments for repurchase of stock | (1,208.9) | (924.2)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited income statement",
-    "claim": "Interest expense, net was 17.8 against operating income of 690.1 in the quarter ended Aug. 01, 2026 (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Interest expense, net | 17.8 | 22.8 | 34.1 | 45.5",
-     "Operating income | 690.1 | 231.0 | 1,163.4 | 615.1"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement",
-    "claim": "Net cash provided by operating activities of continuing operations was 1,565.5 in the 26 weeks ended Aug. 01, 2026 versus 639.2 a year earlier (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities of continuing operations | 1,565.5 | 639.2"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited 10-Q MD&A and earnings release",
-    "claim": "Part of the cash generation reflects non-recurring tariff refunds: gross profit included receipt of $368.7 million of tariff refunds, and diluted EPS of $2.70 included a $1.31 benefit from their net impact.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "primarily due to the receipt of $368.7 million of tariff refunds",
-     "including a $1.31 benefit related to the net impact of tariff refunds"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement; the reversal risk is inferred",
-    "claim": "Operating cash flow was also supported by a 193.9 provision for deferred income taxes, a 97.2 inflow from accounts payable and a 40.2 inflow from merchandise inventories (table in millions), while cash income taxes paid were 95.8.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Provision for deferred income taxes | 193.9 | 158.7",
-     "Accounts payable | 97.2 | (114.0)",
-     "Merchandise inventories | 40.2 | (7.4)",
-     "Income taxes | [1] | 95.8 | 144.1"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited earnings release",
-    "claim": "The company reported $922 million of Q2 operating cash flow from continuing operations and $675 million of free cash flow.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Generated $922 million of net cash provided by operating activities from continuing operations and $675 million of free cash flow"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "Fiscal 2025 operating cash flow from continuing operations was $2,190.7 versus $2,193.3 in fiscal 2024 (table in millions).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Operating activities of continuing operations | $2,190.7 | $2,193.3 | $2,400.8"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement and 10-K MD&A",
-    "claim": "Capital expenditures were 498.8 in the 26 weeks ended Aug. 01, 2026 (table in millions), against fiscal 2026 estimated capital expenditures of approximately $1.1 billion to $1.2 billion.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Capital expenditures | (498.8) | (493.9)",
-     "Our total estimated capital expenditures for fiscal 2026 are approximately $1.1 billion to $1.2 billion"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited earnings release and 10-K MD&A",
-    "claim": "Shareholder returns are a large use of cash: $605 million of repurchases in Q2, with $1.8 billion remaining under the $2.5 billion authorization at January 31, 2026.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Returned $605 million to shareholders through share repurchases in Q2",
-     "As of January 31, 2026, we had $1.8 billion remaining under the $2.5 billion Board repurchase authorization."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by management in the cited 10-K MD&A",
-    "claim": "Management stated it can fund working capital and planned capital expenditures from operating cash flow, its commercial paper program and credit facility borrowings.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We believe that we can adequately fund our working capital requirements and planned capital expenditures for the next 12 months and the foreseeable future from net cash provided by operations, our commercial paper program and borrowings under our credit facilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "The company uses commercial paper heavily for seasonal needs, having issued and repaid $10.1 billion in fiscal 2025, with working capital needs typically peaking in September and October.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We issued and repaid $10.1 billion and $3.2 billion principal amount of commercial paper notes in fiscal 2025 and fiscal 2024, respectively.",
-     "Our working capital requirements for existing stores are seasonal in nature and typically reach their peak in the months of September and October."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K MD&A and cash flow statement",
-    "claim": "The last large maturity disclosed, the $1.0 billion of 4.00% Senior Notes, was repaid in the second quarter of fiscal 2025.",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "Principal payments for long-term debt | 0.0 | (1,000.0)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated as a risk factor in the cited 10-Q",
-    "claim": "The company lists access to credit markets, credit ratings and interest rates as a financing risk.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "\u2022Our inability to access credit or capital markets, a downgrade of our credit ratings and/or increases in interest rates could negatively affect our financing costs, results of operations and financial condition."
-    ],
-    "support": "supported"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "Stated in P4; net sales figure matches F2.",
-    "claim": "Comparable store sales growth is the main organic driver: Q2 fiscal 2026 net sales rose 7.0% to $4,886.5 million on a 3.7% comp increase plus $225.9 million from non-comparable stores.",
+    "basis": "Stated in P4 and consistent with the income statement in F2.",
+    "claim": "Second-quarter sales growth was driven by both existing and new stores. Net sales rose 7.0% to $4,886.5 million, with comparable store net sales up 3.7%.",
     "facts": [
      "P4",
      "F2"
@@ -1275,35 +912,259 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P6.",
-    "claim": "The Q2 comp gain came mostly from average ticket, which rose 3.3%, while traffic rose only 0.4%.",
+    "basis": "Q2 figures are stated in P6. The year-to-date traffic decrease of 0.3% is in the P6 narrative. The price-change link is stated in P3.",
+    "claim": "Customer traffic is only marginally positive. Q2 comparable sales rose on a 3.3% higher average ticket and 0.4% higher traffic, and traffic was down for the 26-week period.",
     "facts": [
-     "P6"
+     "P6",
+     "P3"
     ],
     "quotes": [
      "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in P3 and P2.",
-    "claim": "Condition for comp growth to continue: traffic must hold up as prices rise. In fiscal 2025, retail price changes caused traffic to decline in Q3 and Q4.",
+    "basis": "Stated in P6. The one-time inference is from the refund footnote in P6.",
+    "claim": "Reported Q2 profitability is inflated by tariff refunds. Gross margin was 42.9%, including 680 basis points from the net impact of tariff refunds, and operating margin was 14.1%, including a 650 basis point benefit. Some of the improvement is therefore not recurring operating strength.",
     "facts": [
-     "P3",
-     "P2"
+     "P6",
+     "P4",
+     "F2"
     ],
     "quotes": [
-     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025.",
-     "Further, raising the price points of merchandise could cause customers to buy fewer products and affect our competitive position with other retailers."
+     "Gross profit margin increased 850 basis points to 42.9% and included 680 basis points related to the net impact of tariff refunds."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in P6 and P3.",
-    "claim": "The multi-price format rollout is a growth driver. About 710 stores were converted or added in Q2, for approximately 6,600 multi-price stores in total.",
+    "basis": "The store count is stated in P6. The purpose is stated in P3. The price-band limit is stated in P2.",
+    "claim": "The multi-price assortment is a differentiator that is being rolled out. About 710 stores were converted or added in Q2, ending the quarter with approximately 6,600 multi-price stores.",
     "facts": [
      "P6",
      "P3"
+    ],
+    "quotes": [
+     "ending the quarter with approximately 6,600 multi-price stores"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The import share and China exposure are stated in P1 and P2. The refund amount is stated in P4.",
+    "claim": "The company is heavily exposed to imports, and especially to China, so tariffs are a main threat to margins. About 40% of retail value purchases are imported directly. Tariff refund recovery is described as uncertain in the 10-K, yet Q2 included $368.7 million of refunds.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Merchandise imported directly typically accounts for approximately 40% of our total retail value purchases, with the remaining merchandise purchased domestically."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the risk factors in P2 and the business description in P1.",
+    "claim": "The 10-K names competition as a threat. Entry barriers are low, some competitors have greater resources, and rivals may have stronger online and mobile platforms.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "There are no significant economic barriers for others to enter our retail sector.",
+     "Some of our current or potential competitors have greater financial, distribution, marketing and other resources than we do."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2. The Q2 mix offset is stated in P6.",
+    "claim": "Consumer mix shift is a stated threat to profitability. Shoppers have moved from higher-margin discretionary goods to lower-margin consumables.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Over the past several years, we have experienced a shift in consumer purchasing from higher-margin discretionary merchandise to lower-margin consumable goods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 and P1.",
+    "claim": "The company is investing in supply chain capacity, and the 10-K says this could modestly pressure gross margin in the near-to-mid term. The 10-K projects capital expenditures of $1.1 billion to $1.2 billion for fiscal 2026, with distribution centers in Phoenix and a rebuilt Marietta.",
+    "facts": [
+     "P3",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "These investments are expected to support long-term growth and improve network resilience, though they may modestly impact gross margin in the near-to-mid term as capacity ramps up."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are taken from the 10-Q statements in F1 and F3. The $500.0 million is the 'Proceeds from long-term debt' line in F3. The flexibility reading is inferred.",
+    "claim": "The balance sheet supports continued investment and buybacks. Six-month operating cash flow was 1,565.5 against capital expenditures of 498.8 (table in millions). Repurchases were 1,208.9, and cash was 1,058.1 (table in millions). Long-term debt rose to 2,933.5 from 2,431.7 after $500.0 million of new borrowing.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the store activity tables in P6 and P4. The slowdown reading is inferred from the comparison.",
+    "claim": "Store expansion has slowed from last year. 188 new stores were opened in the first 26 weeks versus 254 a year earlier, and selling square footage growth was 3.4% versus 8.0%. The Q2 closings were 21 versus 10.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Guidance is stated in P6. The risk is stated in P4.",
+    "claim": "Management is reinvesting tariff refunds in the business, which dilutes near-term earnings. Q3 adjusted EPS guidance of $0.80 to $0.95 includes a $0.50 reinvestment impact, and full-year adjusted EPS guidance is $7.70 to $8.05.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet and the earnings release.",
+    "claim": "Liquidity looks comfortable at the latest balance sheet: cash was 1,058.1 (table in millions), up from 717.8 at fiscal year-end. Short-term borrowings were 0.0, and current assets of 3,744.6 exceeded current liabilities of 3,303.1.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "no commercial paper outstanding, and no borrowings under its revolving credit facility"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and cash flow statement. The balance sheet difference and the 500.0 proceeds are consistent, but the filings do not tie them to each other in the cited text.",
+    "claim": "Funded debt rose in the first half: long-term debt, net was 2,933.5 (table in millions), against 2,431.7 at fiscal year-end. The cash flow statement shows proceeds from long-term debt of 500.0 (table in millions) in the six months.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet. The link to repurchases is inferred from the cash flow statement.",
+    "claim": "Fixed obligations beyond funded debt are large. Long-term operating lease liabilities were 3,726.3 (table in millions), plus a current portion of 1,011.0. Total liabilities were 10,604.3 against shareholders' equity of 3,425.3, which was 3,754.9 at fiscal year-end.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and the earnings release reconciliation.",
+    "claim": "Cash generation strengthened. Net cash provided by operating activities of continuing operations was 1,565.5 (table in millions) in the six months, against 639.2 a year earlier. Capital expenditures were 498.8, and the company reports free cash flow of 1,066.7 against 145.3.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the quarterly MD&A and the earnings release. How much of the refund reached operating cash flow is not stated in the cited items.",
+    "claim": "Part of the earnings and cash strength comes from tariff refunds, which management does not present as a normal run rate. Gross profit growth in the second quarter was attributed primarily to the receipt of $368.7 million of tariff refunds. Management says the full-year adjusted EPS outlook includes an approximate $0.60 benefit from net tariff refunds.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "the receipt of $368.7 million of tariff refunds",
+     "including a $0.50 impact related to tariff refund reinvestments"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred by comparing figures stated in the income statement, cash flow statement and balance sheet.",
+    "claim": "Cash taxes were well below the tax provision, which helped operating cash flow. The provision for income taxes was 287.0 (table in millions) and the deferred tax provision was 193.9, while cash paid for income taxes was 95.8, against 144.1 a year earlier. The long-term deferred tax liability grew to 347.9 from 153.3.",
+    "facts": [
+     "F2",
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and balance sheet; the durability is inferred.",
+    "claim": "Working capital also contributed to operating cash flow. Accounts payable added 97.2 (table in millions), against an outflow of (114.0) a year earlier, and merchandise inventories released 40.2.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and the earnings release. The funding link is inferred.",
+    "claim": "Cash is being returned to shareholders at a pace above free cash flow's growth in buybacks. Payments for repurchase of stock were 1,208.9 (table in millions) in the six months, and net cash used in financing was 723.8. The company reports $2.5 billion remaining under its repurchase authorization.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated for the borrowing balances and the earlier note repayment; the conclusion that pressure is low is inferred.",
+    "claim": "Near-term refinancing pressure looks low on the evidence given. The company reports no commercial paper and no revolver borrowings, and short-term borrowings were 0.0 (table in millions) against 299.5 a year earlier. The prior year already saw repayment of the $1.0 billion principal amount of 4.00% Senior Notes that were due May 15, 2025.",
+    "facts": [
+     "F1",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "no commercial paper outstanding, and no borrowings under its revolving credit facility"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the annual MD&A; the comparison with first-half spend is inferred.",
+    "claim": "Management points to operating cash flow, commercial paper and credit facilities as the way to fund planned spending. Capital expenditures for the current fiscal year are estimated at approximately $1.1 billion to $1.2 billion, against 498.8 (table in millions) spent in the first half.",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "from net cash provided by operations, our commercial paper program and borrowings under our credit facilities"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Comp, ticket and traffic figures are stated in P6. The traffic condition is inferred from the P3 account of fiscal 2025.",
+    "claim": "Comparable store sales growth is a core driver. Q2 comps rose 3.7%, mostly from a 3.3% higher average ticket plus a 0.4% rise in traffic. For this to continue, traffic must hold up as ticket-raising pricing and mix changes are lapped.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Comparable store net sales increased 3.7%, driven by a 3.3% increase in average ticket and a 0.4% increase in traffic.",
+     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Store counts are stated in P6. The intent is stated in P3. The conditions are stated as risks in P2.",
+    "claim": "Multi-price conversion is a driver of ticket and margin. The company converted or added about 710 stores in the quarter and ended with approximately 6,600 multi-price stores. For it to continue, customers must keep accepting prices above the $1.25 point, and labor and implementation costs must stay manageable.",
+    "facts": [
+     "P6",
+     "P3",
+     "P2"
     ],
     "quotes": [
      "Converted or added about 710 stores to the Dollar Tree multi-price format, ending the quarter with approximately 6,600 multi-price stores",
@@ -1312,218 +1173,120 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P2.",
-    "claim": "Condition for the multi-price driver: customers must accept the expanded assortment and its value proposition.",
+    "basis": "Store counts and the outlook are stated in P6 and P4. The conditions are inferred from the P2 risk factors.",
+    "claim": "Net new store and square-footage growth adds non-comparable sales. Stores rose to 9,436 from 9,148 a year earlier, and selling square footage grew 3.4%. Management plans approximately 400 openings and 75 closings this year. For this to continue, new sites must be found and opened on schedule at acceptable build-out cost.",
     "facts": [
+     "P6",
+     "P4",
      "P2"
     ],
     "quotes": [
-     "Further, our failure to drive brand clarity and loyalty around our expanded product assortment could negatively affect our customer\u2019s perception of our value proposition or harm our reputation."
+     "Approximately 400 new store openings and 75 closings"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4 and P6.",
-    "claim": "New store growth adds sales. The company opened 188 new stores in the 26 weeks to August 1, 2026 and ended with 9,436 stores.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Opened 75 new Dollar Tree stores during the quarter"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in the P6 store activity table.",
-    "claim": "Square footage growth slowed to 3.4% from 8.0% a year earlier, while sales per square foot rose to $243 from $237.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2.",
-    "claim": "Condition for store growth: the company must open stores profitably despite higher build-out costs and delays, which it expects may continue.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Our growth is dependent on our ability to expand our square footage profitably.",
-     "We anticipate these increased costs and delays may continue for the foreseeable future, which could adversely affect our sales and profitability."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and P6.",
-    "claim": "Q2 profit growth was largely one-time. Gross profit rose 33.4% to $2,094.3 million, mainly from $368.7 million of tariff refunds, and 650 of the 900 basis points of operating margin expansion came from net tariff refund impact.",
+    "basis": "Stated in P4 and P6. The one-time character is inferred from the refund label and the guidance language.",
+    "claim": "Q2 gross profit rose 33.4% to $2,094.3 million, helped by $368.7 million of tariff refunds. That portion is a one-time benefit, so it is not a repeatable driver. Lasting margin growth requires the underlying drivers to persist: lower tariff rates, favorable shrink and occupancy leverage.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
      "Gross profit increased 33.4% to $2,094.3 million primarily due to the receipt of $368.7 million of tariff refunds, the 3.7% comparable store net sales increase, our net store growth, lower tariff costs and improvements in shrink.",
-     "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in P6.",
-    "claim": "Diluted EPS of $2.70 in Q2 included a $1.31 benefit from net tariff refunds. The fiscal 2026 adjusted EPS outlook of $7.70 to $8.05 includes an approximate $0.60 refund benefit.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Diluted EPS of $2.70, including a $1.31 benefit related to the net impact of tariff refunds1",
-     "Increasing fiscal 2026 adjusted EPS outlook to a range of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
+     "The remaining improvement in gross margin rate was primarily driven by lower tariff rates, favorable shrink, and occupancy leverage, partially offset by sales mix."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6 and P3.",
-    "claim": "Condition for margin gains to last: refund benefits are being reinvested, and tariff costs remain uncertain.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments",
-     "The tariff environment remains fluid, and we expect our results to continue to be impacted by near-term challenges, potentially including higher costs due to increases or variability in tariffs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4, P3 and P6.",
-    "claim": "SG&A leverage contributed in Q2: the SG&A rate fell 40 basis points to 29.2% of total revenue.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "Selling, general and administrative expenses, as a percentage of total revenue, decreased 40 basis points to 29.2%.",
-     "Our long-term objective includes reducing corporate selling, general and administrative expenses as a percentage of net sales through improved productivity, cost optimization, and right-sizing initiatives."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in F2, F3 and P6.",
-    "claim": "Share repurchases lift per-share growth. Q2 diluted weighted shares fell to 190.9 from 207.8 (in millions), and 26-week repurchase payments were 1,208.9 (table in millions).",
+    "basis": "Share counts and authorization are stated in F2 and P6. The mechanism is inferred.",
+    "claim": "Share repurchases lift per-share results. Diluted weighted average shares for the quarter were 190.9 versus 207.8 a year earlier (shares in millions). For this to continue, cash generation and financing must keep funding buybacks, with $2.5 billion of authorization remaining.",
     "facts": [
      "F2",
      "F3",
      "P6"
     ],
     "quotes": [
-     "Returned $605 million to shareholders through share repurchases in Q2"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in F3, F1 and P6. That first-half cash flow was lifted by tariff refunds is inferred from P4, not stated.",
-    "claim": "Condition for buybacks to continue: cash generation must stay strong. First-half operating cash flow was 1,565.5 vs 639.2 (table in millions), and Q2 free cash flow was $675 million. Debt has also risen: long-term debt went to 2,933.5 from 2,431.7 (table in millions) after 500.0 of new borrowing.",
-    "facts": [
-     "F3",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Generated $922 million of net cash provided by operating activities from continuing operations and $675 million of free cash flow"
+     "As of August 1, 2026, the Company had $2.5 billion remaining under its share repurchase authorization, $1.1 billion of cash and cash equivalents, no commercial paper outstanding, and no borrowings under its revolving credit facility.",
+     "Q3 quarter-to-date share repurchases totaled $5.3 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and P1 as of March 2026.",
-    "claim": "Supply chain capacity supports growth. The Phoenix distribution center was expected to open in spring 2026 and Marietta to be fully operational by spring 2027, though these may weigh on gross margin as they ramp up.",
+    "basis": "Figures are stated in F3. The sustainability condition is inferred from the line items.",
+    "claim": "Operating cash flow funds reinvestment and buybacks. Six-month net cash from continuing operations was 1,565.5 against 639.2 a year earlier, with capital expenditures of 498.8 (table in millions). For this to continue, working-capital inflows must not reverse. The year-to-date figure includes inflows from accounts payable of 97.2 and deferred taxes of 193.9.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Rates and amounts are stated in P6. The 18-month term is stated in P3. The replacement condition is inferred.",
+    "claim": "SG&A and corporate cost leverage supports profit growth. The Q2 SG&A rate fell to 29.2% from 29.6%, and corporate SG&A fell to $130.8 from $147.6 (table in millions). For this to continue, payroll savings must outweigh rising marketing and depreciation, and transition services income of $17.7 must be replaced once it ends.",
+    "facts": [
+     "P6",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "The remaining year-over-year decrease primarily reflected lower payroll expenses partially offset by higher marketing and depreciation."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P3 and P2. Whether the Phoenix center opened on schedule is not stated in the packet.",
+    "claim": "Distribution-network expansion is intended to support growth, with the Phoenix center and a rebuilt Marietta, Oklahoma center as the named projects. For it to pay off, the openings must be completed on time, because delays could hurt product availability, sales and margins.",
     "facts": [
      "P3",
-     "P1"
+     "P2"
     ],
     "quotes": [
      "These investments are expected to support long-term growth and improve network resilience, though they may modestly impact gross margin in the near-to-mid term as capacity ramps up."
     ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P3.",
-    "claim": "Fiscal 2026 capital spending is planned at approximately $1.1 billion to $1.2 billion to fund stores, supply chain and technology.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Our total estimated capital expenditures for fiscal 2026 are approximately $1.1 billion to $1.2 billion, including planned expenditures for supply chain investments, our new and expanded stores, store renovations and initiatives, information technology investments, and other property improvements."
-    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2.",
-    "claim": "Full-year growth depends on fourth-quarter holiday execution, because the company earns a disproportionate share of sales and income in Q4.",
+    "basis": "Stated in P6 as management outlook, not a result.",
+    "claim": "Management guidance depends on the comp and margin conditions above: fiscal 2026 net sales of $20.5 billion to $20.7 billion on comps of 3% to 4%, and adjusted EPS of $7.70 to $8.05 including about $0.60 from net tariff refunds.",
     "facts": [
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "Our highest sales periods are during the Christmas and Easter seasons, and we generally realize a disproportionate amount of our net sales and our operating and net income during the fourth quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3.",
-    "claim": "The fiscal 2025 base year showed broader growth: net sales rose 10.4% to $19,395.7 million on a 5.3% comp increase and $1.4 billion from non-comparable stores.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Net sales increased 10.4% to $19,395.7 million due to a 5.3% comparable store net sales increase and net sales of $1.4 billion at non-comparable stores."
+     "Adjusted diluted EPS of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "Stated in the 10-K Item 1 and Item 7 (P1, P3).",
-    "claim": "Dollar Tree completed the sale of its Family Dollar business to 1959 Holdings, LLC, with total cash generated of approximately $793 million.",
+    "basis": "stated in the cited item",
+    "claim": "Dollar Tree completed the sale of the Family Dollar business to 1959 Holdings, LLC. Family Dollar results are reported as discontinued operations, and a transition services agreement continues.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "On July 5, 2025, we completed our previously announced sale of the Family Dollar business to 1959 Holdings, LLC.",
-     "Total cash generated from the sale approximated $793 million, consisting of approximately $680 million of net proceeds, including from settlement of net working capital and net indebtedness, and approximately $113 million monetized primarily through a reduction of net working capital prior to the date of sale."
+     "On July 5, 2025, we completed our previously announced sale of the Family Dollar business to 1959 Holdings, LLC."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 7 and Item 1A (P3, P2).",
-    "claim": "The U.S. Supreme Court ruled that certain IEEPA tariffs were unlawful. The company is acting to preserve its rights to refunds of those tariffs.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "On February 20, 2026, the U.S. Supreme Court ruled that certain of the tariffs imposed last year under the International Emergency Economic Powers Act (\u201cIEEPA\u201d) were unlawful."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A and the earnings release (P4, P6).",
-    "claim": "In the latest reported quarter, the company received $368.7 million of tariff refunds, which helped lift gross profit.",
+    "basis": "stated in the cited item",
+    "claim": "Dollar Tree received $368.7 million of tariff refunds in the second quarter of fiscal 2026. This was the primary driver of the gross profit increase and of the jump in operating margin.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "Gross profit increased 33.4% to $2,094.3 million primarily due to the receipt of $368.7 million of tariff refunds, the 3.7% comparable store net sales increase, our net store growth, lower tariff costs and improvements in shrink.",
-     "Diluted EPS of $2.70, including a $1.31 benefit related to the net impact of tariff refunds1"
+     "Gross profit increased 33.4% to $2,094.3 million primarily due to the receipt of $368.7 million of tariff refunds, the 3.7% comparable store net sales increase, our net store growth, lower tariff costs and improvements in shrink."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K earnings release (P6, P8).",
-    "claim": "With its second-quarter results, the company raised its fiscal 2026 adjusted EPS outlook to a range of $7.70 to $8.05.",
+    "basis": "stated in the cited item",
+    "claim": "Dollar Tree announced a raised fiscal 2026 adjusted EPS outlook of $7.70 to $8.05. The range includes an approximate $0.60 benefit from the net impact of tariff refunds.",
     "facts": [
-     "P6",
-     "P8"
+     "P6"
     ],
     "quotes": [
      "Increasing fiscal 2026 adjusted EPS outlook to a range of $7.70 to $8.05 including an approximate $0.60 benefit related to the net impact of tariff refunds"
@@ -1531,206 +1294,120 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q cash flow statement and balance sheet (F3, F1). The instrument and its terms are not given.",
-    "claim": "In the first half of fiscal 2026, the company raised long-term debt of 500.0 (table in millions). Long-term debt, net rose from 2,431.7 to 2,933.5 (table in millions).",
+    "basis": "stated in the cash flow statement; the exact date within the six months is not given",
+    "claim": "Dollar Tree raised 500.0 (table in millions) of long-term debt during the six months ended August 1, 2026. No such proceeds appear in the prior-year period.",
     "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Proceeds from long-term debt | 500.0 | 0.0",
-     "Long-term debt, net | 2,933.5 | 2,431.7 | 2,429.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release and the 10-Q cash flow statement (P6, F3).",
-    "claim": "The company returned $605 million to shareholders through share repurchases in the second quarter. Payments for stock repurchases were 1,208.9 (table in millions) in the first half.",
-    "facts": [
-     "P6",
      "F3"
     ],
     "quotes": [
-     "Returned $605 million to shareholders through share repurchases in Q2",
-     "Payments for repurchase of stock | (1,208.9) | (924.2)"
+     "Proceeds from long-term debt | 500.0 | 0.0"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 7 (P3).",
-    "claim": "The company repaid its $1.0 billion principal amount of 4.00% Senior Notes.",
+    "basis": "stated in the cited item",
+    "claim": "Dollar Tree repurchased 11.1 million shares for $1.2 billion in the first half of fiscal 2026.",
     "facts": [
-     "P3",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "Interest expense, net decreased $22.0 million in fiscal 2025 compared to the prior year, primarily due to the repayment of our $1.0 billion principal amount of 4.00% Senior Notes in the second quarter of fiscal 2025, and higher interest income on investments, partially offset by higher borrowings of commercial paper."
+     "The Company repurchased 11.1 million shares for $1.2 billion, excluding applicable excise tax."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K Item 1 (P1).",
-    "claim": "The company announced the purchase of a 1.25 million square foot distribution center outside Phoenix, Arizona.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In October 2025, we announced the purchase of a 1.25 million square foot distribution center outside Phoenix, Arizona, expected to open in spring 2026 and service stores in Arizona, Colorado, Nevada, New Mexico, and Utah."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 7.01 (P7).",
-    "claim": "The company has formally announced that it will report third-quarter fiscal 2026 results before market open, followed by a conference call. That date falls after T.",
+    "basis": "stated in the cited item; the 8-K is dated November 3, 2026 and became public November 5, 2026",
+    "claim": "Dollar Tree announced it will report third quarter fiscal 2026 results before market open on November 24, 2026, followed by a conference call. The release was filed in an 8-K on November 5, 2026.",
     "facts": [
      "P7"
     ],
     "quotes": [
-     "On November 3, 2026, Dollar Tree, Inc. issued a press release regarding the company hosting its conference call for investors and analysts on Tuesday, November 24, 2026 at 8 a.m. (Eastern Time) to discuss financial results for the third quarter of fiscal year 2026 ended on October 31, 2026."
+     "will report financial results for the third quarter of fiscal year 2026 ended on October 31, 2026, before the stock market opens on Tuesday, November 24, 2026"
     ],
-    "support": "supported"
+    "support": "number_not_found"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the Q2 earnings release (P6) and 10-Q MD&A (P4).",
-    "claim": "Second-quarter fiscal 2026 earnings were lifted by one-time tariff refunds: diluted EPS of $2.70 included a $1.31 benefit, and the 900 basis point operating margin expansion included 650 basis points from tariff refunds.",
+    "basis": "Stated in P6 and P4 (refund benefit amounts); the conclusion about repeatability is inferred.",
+    "claim": "Q2 profit was lifted by tariff refunds: diluted EPS of $2.70 included a $1.31 benefit, the operating margin gain included a 650 basis point refund benefit, and the full-year outlook still counts an approximate $0.60 refund benefit. Underlying earnings power is therefore smaller than the headline, and the refund boost may not repeat.",
     "facts": [
      "P6",
-     "P4"
+     "P4",
+     "F2"
     ],
     "quotes": [
-     "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds",
-     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A (P3) and risk factors (P2).",
-    "claim": "Tariff policy remains fluid. After the February 20, 2026 Supreme Court ruling, new temporary Section 122 tariffs were imposed, and further refunds remain highly uncertain.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "The tariff environment remains fluid, and we expect our results to continue to be impacted by near-term challenges, potentially including higher costs due to increases or variability in tariffs.",
-     "We are taking action to preserve our rights to refunds for these IEEPA tariffs, but the availability, timing, and amount of any potential refunds remains highly uncertain and subject to further legal, regulatory, and administrative developments."
+     "Diluted EPS of $2.70, including a $1.31 benefit related to the net impact of tariff refunds",
+     "Operating income margin expanded 900 basis points including a 650 basis point benefit related to the net impact of tariff refunds"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and P2; Q2 traffic stated in P6.",
-    "claim": "Price increases have hurt customer traffic before. After the fiscal 2025 retail price changes, traffic declined in the third and fourth quarters of fiscal 2025.",
-    "facts": [
-     "P3",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025.",
-     "Further, raising the price points of merchandise could cause customers to buy fewer products and affect our competitive position with other retailers.",
-     "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in F1 and F3; credit risk factor stated in P4. Any link between the debt and the buybacks is inferred from the timing.",
-    "claim": "Long-term debt, net rose from 2,431.7 to 2,933.5 (table in millions) over six months. In the same period the company took in 500.0 of new long-term debt and paid 1,208.9 for share repurchases.",
-    "facts": [
-     "F1",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Long-term debt, net | 2,933.5 | 2,431.7 | 2,429.7",
-     "Proceeds from long-term debt | 500.0 | 0.0",
-     "Payments for repurchase of stock | (1,208.9) | (924.2)",
-     "Our inability to access credit or capital markets, a downgrade of our credit ratings and/or increases in interest rates could negatively affect our financing costs, results of operations and financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors (P2); counter inferred from F2.",
-    "claim": "Results depend heavily on the fourth quarter, when a disproportionate share of net sales and of operating and net income is earned.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our highest sales periods are during the Christmas and Easter seasons, and we generally realize a disproportionate amount of our net sales and our operating and net income during the fourth quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A (P3); capex figures from F3.",
-    "claim": "Distribution center investments may weigh on gross margin, and the company plans fiscal 2026 capital expenditures of approximately $1.1 billion to $1.2 billion.",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "These investments are expected to support long-term growth and improve network resilience, though they may modestly impact gross margin in the near-to-mid term as capacity ramps up."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors (P2) and MD&A (P3).",
-    "claim": "Customer purchasing has shifted from higher-margin discretionary goods toward lower-margin consumables, and economic pressure on customers could continue that shift.",
+    "basis": "Stated in P2 and P3 (uncertainty, volatility); the effect on margins is inferred from the risk-factor text.",
+    "claim": "Tariff policy remains unsettled. The 10-K says tariff volatility is expected to persist and that the availability, timing and amount of any further refunds are uncertain. New temporary tariffs followed the court ruling, so costs and margins could swing in either direction.",
     "facts": [
      "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Over the past several years, we have experienced a shift in consumer purchasing from higher-margin discretionary merchandise to lower-margin consumable goods.",
-     "favorable sales mix resulting from increased sales of higher margin discretionary merchandise as a percentage of net sales"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Term stated in P3; amounts in F2 and P6. The impact of expiry is inferred.",
-    "claim": "Transition services agreement income from Family Dollar was 17.7 in Q2 fiscal 2026 versus 8.0 a year earlier (table in millions). The agreement runs for a period of 18 months following the sale.",
-    "facts": [
-     "F2",
      "P3",
-     "P6"
-    ],
-    "quotes": [
-     "The Company has continuing involvement with Family Dollar under a transition services agreement, through which the Company and Family Dollar continue to provide certain services to each other for a period of 18 months following the date of sale."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors (P2); counter stated in the 10-Q MD&A (P4).",
-    "claim": "Inventory shrinkage has recently reached historically high rates.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "Risk of loss or theft of assets, including inventory shrinkage, is inherent in the retail business and has recently reached historically high rates."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and in the P6 footnote.",
-    "claim": "Anti-dumping and countervailing duties are a recurring cost: $25.0 million was accrued for paper plates imported in fiscal 2024, and Q2 fiscal 2026 included $13 million of certain duties on aluminum pans and paper plates.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Any additional duties related to these or other goods that we import, including any imposed on a retroactive basis, could increase the cost of our imported merchandise and adversely impact our operations and profit margins."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A (P4); outlook stated in P6.",
-    "claim": "Management lists failure to execute the reinvestment of tariff refunds, or to achieve its benefits, as a risk.",
-    "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "We may not be successful in executing or achieving the anticipated benefits of our reinvestment of tariff refunds or other important strategic initiatives, which may have an adverse impact on our business and financial results."
+     "We expect tariff volatility to persist in the near-term, and implementation costs associated with our mitigation strategies may continue to be experienced before the benefits from those efforts are expected to materialize.",
+     "As a result, our margins and operating results could vary significantly."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Traffic and ticket figures are stated in P6 and P3; the risk to future comps is inferred.",
+    "claim": "Traffic growth is thin and comparable sales growth depends mostly on average ticket. Q2 comps rose 3.7% with traffic up only 0.4%, and over six months traffic fell 0.3%. The 10-K said traffic declined in the last two quarters of fiscal 2025 after price changes. If price-led ticket growth fades, comps could slow.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Net sales increased 7.0% to $4.9 billion. Comparable store net sales increased 3.7%, driven by a 3.3% increase in average ticket and a 0.4% increase in traffic.",
+     "Comparable store net sales increased 3.6%, driven by a 3.9% increase in average ticket, partially offset by a 0.3% decrease in traffic.",
+     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Outlook and release date are stated in P6 and P7; the risk of a miss is inferred.",
+    "claim": "Q3 results are due right after the decision time. The Q3 outlook has adjusted EPS of $0.80 to $0.95, including a $0.50 impact from tariff refund reinvestments, which sharply lowers the quarter's EPS from Q2's $2.70. A miss or a guide-down could change the reading of the year.",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments",
+     "will report financial results for the third quarter of fiscal year 2026 ended on October 31, 2026, before the stock market opens on Tuesday, November 24, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "SG&A amounts are stated in F2; the risk descriptions are stated in P2; the forward effect is inferred.",
+    "claim": "Costs and mix pressure persist. Q2 SG&A rose to 1,426.6 (table in millions) from 1,350.7 on higher marketing, depreciation and general liability costs, and the 10-K warns of wage, freight, labor and tariff cost pressure and a shift to lower-margin consumables. If sales growth slows, expense growth could squeeze margins.",
+    "facts": [
+     "F2",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Our profitability is vulnerable to cost pressures from increases in merchandise, shipping, freight and fuel, wages, benefits and other operating costs.",
+     "Over the past several years, we have experienced a shift in consumer purchasing from higher-margin discretionary merchandise to lower-margin consumable goods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet and cash flow figures are stated in F1 and F3; the risk is an inference and is weakly supported.",
+    "claim": "Balance sheet leverage has risen alongside heavy buybacks. In six months the company drew 500.0 (table in millions) of long-term debt and repurchased stock for 1,208.9. Long-term debt, net rose to 2,933.5 from 2,431.7 and shareholders' equity fell to 3,425.3 from 3,754.9. Large lease obligations add fixed commitments.",
+    "facts": [
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "As of August 1, 2026, the Company had $2.5 billion remaining under its share repurchase authorization, $1.1 billion of cash and cash equivalents, no commercial paper outstanding, and no borrowings under its revolving credit facility."
     ],
     "support": "supported"
    }
@@ -1738,21 +1415,34 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in the cited items: the outlook is in P6, and P7 sets the reporting date after T.",
-    "claim": "Did third-quarter results land within the company's outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95?",
+    "basis": "Stated in the earnings release outlook. The date of the third-quarter report is stated in the November 3 8-K.",
+    "claim": "Will third-quarter results fall within the company's outlook of adjusted EPS $0.80 to $0.95, which includes a $0.50 tariff-refund reinvestment impact, and comparable sales growth of 3% to 4%?",
     "facts": [
      "P6",
      "P7"
     ],
     "quotes": [
-     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments",
-     "will report financial results for the third quarter of fiscal year 2026 ended on October 31, 2026, before the stock market opens on Tuesday, November 24, 2026, followed by a conference call for investors and analysts at 8 a.m. ET."
+     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6. Any update after August 27, 2026 is not in the evidence.",
-    "claim": "Will the full-year adjusted EPS outlook of $7.70 to $8.05 be kept, raised or lowered?",
+    "basis": "Refund amounts are stated in the release footnote. The uncertainty statement is in the 10-K MD&A. That the remaining refund exposure is unclear is inferred from the packet.",
+    "claim": "How much of the second-quarter profit is repeatable, given $383 million of IEEPA tariff refunds ($369 million in cost of sales), and will further refunds arrive?",
+    "facts": [
+     "P6",
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "IEEPA tariff refunds totaling $383 million, including $369 million in cost of sales and $14 million of interest in other income, net",
+     "the availability, timing, and amount of any potential refunds remains highly uncertain and subject to further legal, regulatory, and administrative developments"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Outlook figures are stated in the release. Whether they will change is not stated and cannot be inferred.",
+    "claim": "Will the raised full-year adjusted EPS outlook of $7.70 to $8.05, which includes an approximate $0.60 tariff-refund benefit, be maintained, raised or cut once third-quarter results are known?",
     "facts": [
      "P6"
     ],
@@ -1762,164 +1452,70 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 that the amount and timing were uncertain. The figure is from the P6 footnote. The evidence does not say whether $383 million is the full amount due.",
-    "claim": "Are further IEEPA tariff refunds due beyond the $383 million recognized in the second quarter, and if so, in what amount and when?",
+    "basis": "Amounts are stated in the release footnote and outlook. The form and duration of reinvestment are not stated.",
+    "claim": "In what form and over how many periods will tariff refunds be reinvested? The second quarter carried $22 million in cost of sales and $15 million in SG&A, while the third-quarter outlook carries a $0.50 EPS impact.",
     "facts": [
-     "P3",
-     "P4",
-     "P6"
+     "P6",
+     "P4"
     ],
     "quotes": [
-     "We are taking action to preserve our rights to refunds for these IEEPA tariffs, but the availability, timing, and amount of any potential refunds remains highly uncertain and subject to further legal, regulatory, and administrative developments.",
-     "Gross profit increased 33.4% to $2,094.3 million primarily due to the receipt of $368.7 million of tariff refunds, the 3.7% comparable store net sales increase, our net store growth, lower tariff costs and improvements in shrink."
+     "reinvestment expenses totaling $22 million in cost of sales and $15 million in selling, general and administrative expenses"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred: P4 and P6 name the reinvestment, but the included text does not describe what it is spent on.",
-    "claim": "What are the tariff refund reinvestments, and what is their size and duration beyond the $0.50 impact guided for the third quarter?",
+    "basis": "Traffic figures are stated in the release. The year-ago traffic decline is stated in the 10-K. Persistence is not stated.",
+    "claim": "Will customer traffic stay positive? Second-quarter traffic rose 0.4% and the first half was down 0.3%, after the prior-year price changes were said to have hurt traffic in the second half of the prior year.",
     "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "We may not be successful in executing or achieving the anticipated benefits of our reinvestment of tariff refunds or other important strategic initiatives, which may have an adverse impact on our business and financial results.",
-     "Q3 fiscal 2026 outlook of 3% to 4% comparable net sales growth and adjusted EPS of $0.80 to $0.95 including a $0.50 impact related to tariff refund reinvestments"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 as substantial uncertainty. No later update appears in the included evidence.",
-    "claim": "What are the scope, duration and cost impact of the temporary Section 122 tariffs and of any later tariffs imposed after the Supreme Court ruling?",
-    "facts": [
-     "P2",
+     "P6",
      "P3"
     ],
     "quotes": [
-     "Following the Supreme Court\u2019s decision, the United States imposed new, temporary tariffs on imports from all countries under section 122 of the Trade Act of 1974 and could take action to invoke other laws to collect additional tariffs."
+     "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic",
+     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from F1 and F3: the cash inflow is shown, but no debt terms are in the evidence.",
-    "claim": "What are the coupon, maturity and use of proceeds of the new long-term debt that raised net long-term debt from 2,431.7 to 2,933.5 (table in millions)?",
+    "basis": "Repurchase figures are stated in the release. The cause of the slowdown is not stated and is an open question.",
+    "claim": "How will the company deploy cash after a sharp slowdown in buybacks? Second-quarter repurchases were $605 million, but third-quarter-to-date repurchases were only $5.3 million, with $2.5 billion of authorization remaining.",
     "facts": [
+     "P6",
      "F1",
      "F3"
     ],
     "quotes": [
-     "Proceeds from long-term debt | 500.0",
-     "Long-term debt, net | 2,933.5 | 2,431.7 | 2,429.7"
+     "Returned $605 million to shareholders through share repurchases in Q2",
+     "Q3 quarter-to-date share repurchases totaled $5.3 million"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from F1 and F3: the change is reported but no explanation is included.",
-    "claim": "Why did the deferred income tax liability rise from 153.3 to 347.9 (table in millions) during the first half?",
+    "basis": "Store counts are stated in the release. The target and economics are not stated.",
+    "claim": "How far will the multi-price conversion go, and what is its effect on ticket and margin? About 710 stores were converted or added in the second quarter, ending at roughly 6,600 multi-price stores.",
     "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Deferred income taxes, net | 347.9 | 153.3 | 0.0",
-     "Provision for deferred income taxes | 193.9 | 158.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred: the remaining authorization after January 31, 2026 and the reason for the slower pace are not stated in the evidence.",
-    "claim": "How much of the repurchase authorization remains after first-half buybacks of 1,208.9 (table in millions), and why were quarter-to-date third-quarter repurchases only $5.3 million?",
-    "facts": [
-     "P3",
      "P6",
-     "F3"
-    ],
-    "quotes": [
-     "As of January 31, 2026, we had $1.8 billion remaining under the $2.5 billion Board repurchase authorization.",
-     "Q3 quarter-to-date share repurchases totaled $5.3 million",
-     "Payments for repurchase of stock | (1,208.9) | (924.2)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and P6 for past periods. Later quarters are not in the evidence.",
-    "claim": "Will the 0.4% traffic gain seen in the second quarter continue, after traffic declined in the back half of the prior year following price changes?",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "As a result of the retail price changes, customer traffic was negatively impacted and declined in the third and fourth quarters of fiscal 2025.",
-     "Comparable store net sales growth included a 3.3% increase in average ticket and a 0.4% increase in traffic"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred: P3 states the 18-month term, but no renewal or wind-down terms are given.",
-    "claim": "What happens to transition services agreement income, 17.7 (table in millions) in the second quarter, when the 18-month agreement ends, and will it be extended?",
-    "facts": [
-     "P3",
-     "F2"
-    ],
-    "quotes": [
-     "The Company has continuing involvement with Family Dollar under a transition services agreement, through which the Company and Family Dollar continue to provide certain services to each other for a period of 18 months following the date of sale.",
-     "Transition services agreement income, net | 17.7 | 8.0 | 38.8 | 8.0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 as of March 2026. Any update is not in the included 10-Q text.",
-    "claim": "Does the full-year capital expenditure estimate of $1.1 billion to $1.2 billion still hold, given first-half capital expenditures of 498.8 (table in millions)?",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "Our total estimated capital expenditures for fiscal 2026 are approximately $1.1 billion to $1.2 billion, including planned expenditures for supply chain investments, our new and expanded stores, store renovations and initiatives, information technology investments, and other property improvements.",
-     "Capital expenditures | (498.8) | (493.9)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred: the expected opening is stated, but its status is not in the included Q2 text.",
-    "claim": "Did the Phoenix, Arizona distribution center open on schedule, and is the Marietta rebuild on track?",
-    "facts": [
-     "P1",
      "P3"
     ],
     "quotes": [
-     "In October 2025, we announced the purchase of a 1.25 million square foot distribution center outside Phoenix, Arizona, expected to open in spring 2026 and service stores in Arizona, Colorado, Nevada, New Mexico, and Utah."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred: F1 references Note 3 Contingencies, but its text is not included.",
-    "claim": "What is the final exposure to anti-dumping and countervailing duties on paper plates and aluminum pans, beyond the $13 million recorded in the second quarter?",
-    "facts": [
-     "P2",
-     "P6",
-     "F1"
-    ],
-    "quotes": [
-     "For example, based on determinations by the Department of Commerce and International Trade Commission, we accrued $25.0 million related to additional duties on paper plates imported during fiscal 2024.",
-     "and $13 million of certain duties on aluminum pans and paper plates recorded in cost of sales"
+     "Converted or added about 710 stores to the Dollar Tree multi-price format, ending the quarter with approximately 6,600 multi-price stores"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "DLTR",
- "upside": 0.09295849613392893,
+ "upside": 0.031416847963576355,
  "valuation": null,
- "value_base": 137.13890198979038,
- "value_bear": 103.46439702175337,
- "value_bull": 180.85567781650556,
+ "value_base": 142.29429100375677,
+ "value_bear": 107.18509983030644,
+ "value_bull": 188.38080814146775,
  "value_per_filed_share": {
-  "base": 137.13890198979038,
-  "bear": 103.46439702175337,
-  "bull": 180.85567781650556
+  "base": 142.29429100375677,
+  "bear": 107.18509983030644,
+  "bull": 188.38080814146775
  },
  "valued": true,
  "verdict": "WATCH",
- "verdict_reason": "expected return +0.4 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict_reason": "expected return +1.8 points a year against the required return over 3 years (BUY needs 4 or more)"
 }
