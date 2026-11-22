@@ -1,23 +1,42 @@
 {
- "alpha_pts": -13.230809549163661,
+ "alpha_pts": -12.055406993615456,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 117,
- "claims_supported": 111,
- "date": "2026-11-16T13:09:24Z",
+ "based_on": {
+  "accepted": "2026-11-05T18:29:22.000Z",
+  "accepted_utc": "2026-11-05T23:29:22Z",
+  "accession": "0000932696-26-000081",
+  "decision_time": "2026-11-22T03:42:07Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 68,
+ "claims_supported": 68,
+ "date": "2026-11-22T03:42:07Z",
  "decided": {
   "flags": [
-   "situation_unclear",
    "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
    "run 1000: quotes_verified: 12 of 12",
+   "run 1000: share_count_change_unexplained: shares 32,347,000 to 28,810,461 (-3,536,539); issuing and buying back at 160.46 (half to double) explains -2,804,836 to -701,209",
+   "run 1000: acquisitions_paid_not_filed_taken_as_0",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
    "run 3000: base_year_not_representative",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 12 of 12"
+   "run 3000: quotes_verified: 11 of 12",
+   "run 3000: share_count_change_unexplained: shares 32,347,000 to 28,810,461 (-3,536,539); issuing and buying back at 160.46 (half to double) explains -2,804,836 to -701,209",
+   "run 3000: acquisitions_paid_not_filed_taken_as_0",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0909 (equity return r 0.1113), F 10",
-  "run_gap": 0.015851280510767087,
+  "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0904 (equity return r 0.1107), F 10",
+  "run_gap": 0.015359070996762456,
   "runs": {
    "1000": {
     "adjustments": {
@@ -34,12 +53,72 @@
        "quotes_given": 1,
        "scale": "millions",
        "sign": "charge",
-       "what": "Net loss on revaluation of warrant settlement liabilities in other expense, non-recurring after the 2025 warrant settlement"
+       "what": "Net loss on revaluation of warrant settlement liabilities recorded in other (income) expense, net in 2025; it will not recur because the warrants were settled"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 132988000.0,
+      "excess_cash_before": 358020000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000932696-26-000081",
+        "amount": 225032000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-05",
+        "form": "10-Q",
+        "read_amount": 225032000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 32,347,000 to 28,810,461 (-3,536,539); issuing and buying back at 160.46 (half to double) explains -2,804,836 to -701,209"
+      ],
+      "gross_events": 225032000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 4622926631.0,
+      "net_effect_on_excess_cash": -225032000.0,
+      "shares": {
+       "after": 28810461.0,
+       "before": 32347000.0,
+       "change": -3536539.0,
+       "explained_range": [
+        -2804836.0962233576,
+        -701209.0240558394
+       ],
+       "interim": 28810461.0,
+       "price_used": 160.46,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 358020000.0,
+     "excess_cash_after": 132988000.0,
      "excess_cash_before": 358020000.0,
      "k0_after": 98558735.1566265,
      "k0_before": 123658735.1566265,
@@ -48,7 +127,12 @@
      "one_offs_gain": 0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "acquisitions_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 234813204.73368934,
      "x0_before": 215991089.92618573
@@ -57,192 +141,193 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2606999698.6952925,
-     "seam_ratio": 1.0120381226586985,
-     "tv_share": 0.28838784277014357,
-     "wedge_rate_5": 0.0009916833569665613
+     "equity_value": 2580980615.402457,
+     "seam_ratio": 1.0099144115638208,
+     "tv_share": 0.2879927372692562,
+     "wedge_rate_5": 0.0008479410730984825
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 12 of 12",
+     "share_count_change_unexplained: shares 32,347,000 to 28,810,461 (-3,536,539); issuing and buying back at 160.46 (half to double) explains -2,804,836 to -701,209",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.0045,
+     "capex_to_revenue": 0.004,
      "fade_years": 10,
-     "long_run_op_margin": 0.042,
+     "long_run_op_margin": 0.04,
      "op_margin": [
       0.04,
+      0.041,
       0.042,
-      0.043,
-      0.043,
-      0.043
+      0.042,
+      0.042
      ],
-     "return_on_new_investment_long_run": 0.18,
+     "return_on_new_investment_long_run": 0.2,
      "rev_growth": [
-      0.13,
+      0.14,
       0.05,
-      0.03,
-      0.03,
+      0.04,
+      0.035,
       0.03
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0909 (equity return r 0.1113), F 10",
+    "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0904 (equity return r 0.1107), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 6,
-     "kept": 111
+     "dropped_unsupported": 0,
+     "kept": 68
     },
     "ranges": {
      "long_run_op_margin": [
-      0.036,
-      0.048
+      0.033,
+      0.047
      ],
      "rev_growth_y3": [
-      0.0,
+      0.01,
       0.07
      ],
      "terminal_growth": [
       0.02,
-      0.04
+      0.037
      ]
     },
     "reasons": {
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "F3",
-        "quote": "Purchases of property and equipment | (21,012) | (17,551)"
+        "id": "P6",
+        "quote": "capital expenditures between approximately $20 million and $30 million"
        },
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0051"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0051"
        }
       ],
       "quotes_given": 2,
-      "why": "Capital spending is light: nine-month 2026 purchases were $21.0M on $7.0B of sales (about 0.3%), against a five-year pooled ratio of 0.51%. I use 0.45% as a blend."
+      "why": "Capital spending is light: 2025 capex was 0.30% of revenue and 2026 guidance is $20-30 million against revenue near $9-10 billion. I hold about 0.4%, above recent levels but below the five-year pooled 0.51%."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P2",
-        "quote": "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue."
+        "quote": "The IT hardware, software and services industry is intensely competitive"
        }
       ],
       "quotes_given": 1,
-      "why": "Ten years reflects a fragmented, competitive industry where pricing pressure and vendor direct-sales erode the services mix advantage only gradually."
+      "why": "Competitive pressure and mix shifts make margins and growth converge to long-run levels over a moderate window, so I use 10 years."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Earnings from operations decreased to $334.9 million in 2025, a decrease of 14% compared to the prior year, which represented 4.1% of net sales."
+        "id": "REC",
+        "quote": "2025-12-31 | $8,247.2 million | -0.0522 | 0.0406"
        },
        {
-        "id": "P3",
-        "quote": "Consolidated gross margin expanded approximately 110 basis points to a record 21.4% of net sales in 2025."
+        "id": "P2",
+        "quote": "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue."
        }
       ],
       "quotes_given": 2,
-      "why": "GAAP margin was 4.5% in 2023-24 and 4.1% in 2025, with acquisition amortization of about $83M a year weighing on it. A long-run 4.2% sits near the middle of the 2023-26 range, with partial credit for services mix. Partner incentive changes and aggressive pricing limit upside."
+      "why": "The GAAP margin has run 4.0-4.6% over 2022-2025 and 2025 was 4.06%. Adjusted margin is much higher, but GAAP carries recurring amortization, stock compensation and acquisition earnouts, and pricing pressure and partner-incentive changes limit upside, so I use 4.0%."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Earnings from operations | 2.8 | 4.6 | 3.9 | 3.9"
+        "id": "F2",
+        "quote": "Earnings from operations | 68,691 | 93,067 | 271,340 | 239,702"
        },
        {
-        "id": "P6",
-        "quote": "Adjusted earnings from operations of $166.9 million, or 6.8% of net sales, increased 23% year over year"
+        "id": "P4",
+        "quote": "gross margin contracted approximately 30 basis points to 21.4% of net sales in the three months ended September 30, 2026"
        }
       ],
       "quotes_given": 2,
-      "why": "Nine-month GAAP margin is 3.9%, flat on last year, because adjusted gains were absorbed by earnouts and severance. The voluntary separation program should bring some savings in later years, and services mix helps gross margin, so a modest rise to about 4.3% is assumed. Hardware mix and earnout charges cap the improvement."
+      "why": "Nine-month GAAP operating margin was 3.9%, held down by earnout revaluations and voluntary separation costs. Year 1 is therefore about 4.0%, with modest recovery as restructuring charges lapse and services mix rises, but mix toward hardware caps the gain."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "return on tangible capital 0.2649"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0909."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0904."
        }
       ],
-      "quotes_given": 2,
-      "why": "The base-year return on tangible capital of 26.5% reflects a capital-light, payables-funded model, but returns should fade on a competitive reseller business that also pays for acquisitions. I assume 18%, well above the 9.1% break-even."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital of 26.5% is high because the model is asset-light and payables fund receivables. Competition should erode it on new investment, but growth stays value-creating well above the 9.0% break-even, so I use 20%."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Net sales of $7.0 billion for the nine months ended September 30, 2026 increased 12%, year over year"
+        "id": "P6",
+        "quote": "we are raising our gross profit growth expectations to be between 12.5% to 14.0% and expect gross margin to be approximately 21.5%"
        },
        {
         "id": "P4",
-        "quote": "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing"
+        "quote": "Net sales of $2.4 billion increased 22% compared to the three months ended September 30, 2025."
        }
       ],
       "quotes_given": 2,
-      "why": "Nine-month 2026 growth is 12% and Q3 growth is 22%, so FY2026 should land near 13% with Q4 slowing against tougher comps. Hardware is boosted by memory-driven pricing and devices, and acquisitions add inorganic growth. Growth should fade toward 3% because software is shrinking, the company has no long-term vendor contracts, and the memory shortage is constraining supply."
+      "why": "Nine-month 2026 sales rose 12% and Q3 rose 22%, and management guides full-year gross profit growth of 12.5-14%, so year 1 is about 14% off the depressed 2025 base. Growth then fades as hardware and memory-driven pricing normalize and the services mix grows more slowly."
      },
      "terminal_growth": {
       "quotes": [
+       {
+        "id": "REC",
+        "quote": "g_anchor 0.0375"
+       },
        {
         "id": "P1",
         "quote": "Our 2025 net sales of $8.2 billion represented less than 1% of that highly diverse market."
        }
       ],
-      "quotes_given": 1,
-      "why": "Insight is under 1% of a fragmented, growing IT market, so growth can track nominal GDP and IT spending. I set it slightly below the 3.75% anchor because the business is a low-moat reseller exposed to vendor disintermediation."
+      "quotes_given": 2,
+      "why": "Insight is under 1% of a fragmented market that grows with IT spending, so it can grow near nominal GDP. I set it below the 3.75% anchor because the business is a reseller exposed to vendors going direct."
      }
     },
     "risks": [
      {
-      "bear_value": 0.034,
+      "bear_value": 0.032,
       "input_hit": "long_run_op_margin",
-      "risk": "Partner incentive changes (Microsoft, about 32% of purchases) or vendor direct sales cut services gross margin and GAAP margin"
+      "risk": "Partner incentive cuts or vendors selling direct (Microsoft is about 17% of sales), together with a hardware mix shift, compress margins"
      },
      {
       "bear_value": 0.0,
       "input_hit": "rev_growth",
-      "risk": "Hardware demand reverses once the memory-driven pricing and refresh cycle fades, and software keeps shrinking"
-     },
-     {
-      "bear_value": 0.036,
-      "input_hit": "op_margin",
-      "risk": "Further earnout and severance charges keep GAAP margin depressed"
+      "risk": "Hardware demand and memory-driven price inflation reverse, or supply stays constrained, so growth stalls"
      },
      {
       "bear_value": 0.12,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Competition erodes returns on new capital and acquisitions"
+      "risk": "Receivables collection weakens, raising funding costs and cutting returns on the working-capital-heavy model"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.036,
+      "long_run_op_margin": 0.033,
       "rev_growth": [
-       0.1,
+       0.11000000000000001,
        0.020000000000000004,
-       0.0,
-       0.0,
+       0.010000000000000002,
+       0.0050000000000000044,
        0.0
       ],
       "terminal_growth": 0.02
      },
      "bull": {
-      "long_run_op_margin": 0.048,
+      "long_run_op_margin": 0.047,
       "rev_growth": [
        0.17,
-       0.09000000000000001,
+       0.08000000000000002,
        0.07,
-       0.07,
-       0.07
+       0.065,
+       0.060000000000000005
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.037
      }
     },
     "situation": {
@@ -250,20 +335,20 @@
      "cyclical": "unclear",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Debt is mostly variable-rate ABL borrowing that rose to $1,498.9M while buybacks continue, so the level is plausible relative to a $8-9B revenue base but is trending up."
+      "why": "Debt is mostly the variable-rate ABL revolver, which is drawn to fund receivables and buybacks and rose from $1.36 billion to $1.50 billion, so the level moves with working capital."
      },
-     "margin_position": "The GAAP operating margin of 4.1% in 2025 is below the 4.5% of 2023-24 and well below the roughly 6% adjusted margin. GAAP is depressed by about $83M a year of acquisition amortization, earnout revaluations, severance and stock compensation. Gross margin is at a record 21.4% because of the mix shift to services. Opex has grown faster than gross profit.",
+     "margin_position": "The 2025 GAAP operating margin of 4.06% is below the 2022-2024 range of about 4.0-4.6%. It is depressed by earnout revaluations, restructuring, intangible amortization and stock compensation, which GAAP includes but the adjusted margin (about 6.8% in Q3 2026) excludes. Gross margin is at a record of about 21.4-21.6%, helped by the services mix. Hardware-led growth dilutes it slightly, and the 2026 hardware surge may be partly memory-price inflation.",
      "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The 2025 rate was 30.3% on non-deductible earnout and warrant losses and the nine-month 2026 rate is about 35%, so the sustainable rate depends on whether earnout charges keep recurring."
+      "answer": "yes",
+      "why": "The base-year rate of 25.0% is close to management's 2026 outlook of about 25.5%, although earnout revaluations can distort it (49.9% in Q3 2026)."
      },
-     "why": "FY2025 revenue fell 5% while 2026 is running well ahead: nine-month sales rose 12% and Q3 rose 22%, helped by hardware demand, memory-driven pricing and the Sekuro and Inspire11 acquisitions. The 2025 GAAP margin carried a $25.1M warrant loss (non-operating), a $12.6M real estate impairment and $37.1M of severance. The base year therefore understates the current run-rate of sales but not necessarily GAAP margin. Year 1 growth is far above the base year; later years should normalise toward low single digits."
+     "why": "2025 revenue fell 5% and included a $25.1 million warrant-settlement loss below operating income plus a 30.3% tax rate. 2026 is a clear step-up: nine-month sales rose 12% and Q3 rose 22%, with management raising its gross profit growth outlook. Base-year revenue therefore understates the current run rate, and year 1 growth is set high to reflect that."
     },
-    "value_at_old_defaults": 82.46823416303607,
+    "value_at_old_defaults": 83.02607152272536,
     "values": {
-     "base": 99.47840061661073,
-     "bear": 80.39270144251475,
-     "bull": 136.30587257817191
+     "base": 103.00561103463876,
+     "bear": 80.23878840836036,
+     "bull": 137.35322418058863
     }
    },
    "3000": {
@@ -281,12 +366,72 @@
        "quotes_given": 1,
        "scale": "millions",
        "sign": "charge",
-       "what": "Net loss on revaluation of warrant settlement liabilities in 2025, in other (income) expense, net"
+       "what": "Net loss on revaluation of warrant settlement liabilities in other expense, tied to the cash settlement of warrants; not expected to recur"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 132988000.0,
+      "excess_cash_before": 358020000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "accn": "0000932696-26-000081",
+        "amount": 225032000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-05",
+        "form": "10-Q",
+        "read_amount": 225032000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 32,347,000 to 28,810,461 (-3,536,539); issuing and buying back at 160.46 (half to double) explains -2,804,836 to -701,209"
+      ],
+      "gross_events": 225032000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 4622926631.0,
+      "net_effect_on_excess_cash": -225032000.0,
+      "shares": {
+       "after": 28810461.0,
+       "before": 32347000.0,
+       "change": -3536539.0,
+       "explained_range": [
+        -2804836.0962233576,
+        -701209.0240558394
+       ],
+       "interim": 28810461.0,
+       "price_used": 160.46,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 358020000.0,
+     "excess_cash_after": 132988000.0,
      "excess_cash_before": 358020000.0,
      "k0_after": 98558735.1566265,
      "k0_before": 123658735.1566265,
@@ -295,7 +440,12 @@
      "one_offs_gain": 0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "acquisitions_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 234813204.73368934,
      "x0_before": 215991089.92618573
@@ -304,30 +454,36 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2560867644.676691,
-     "seam_ratio": 1.0071967697757294,
-     "tv_share": 0.3386904031760889,
-     "wedge_rate_5": 0.0008479410730984825
+     "equity_value": 2622803040.8036313,
+     "seam_ratio": 1.002959831316383,
+     "tv_share": 0.33357380973602885,
+     "wedge_rate_5": 0.0005451796353571187
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 11 of 12",
+     "share_count_change_unexplained: shares 32,347,000 to 28,810,461 (-3,536,539); issuing and buying back at 160.46 (half to double) explains -2,804,836 to -701,209",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.004,
+     "capex_to_revenue": 0.0035,
      "fade_years": 8,
-     "long_run_op_margin": 0.041,
+     "long_run_op_margin": 0.042,
      "op_margin": [
-      0.039,
-      0.041,
+      0.04,
       0.042,
-      0.042,
-      0.042
+      0.043,
+      0.043,
+      0.043
      ],
-     "return_on_new_investment_long_run": 0.18,
+     "return_on_new_investment_long_run": 0.15,
      "rev_growth": [
-      0.14,
+      0.13,
       0.05,
       0.04,
       0.035,
@@ -335,10 +491,10 @@
      ],
      "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0909 (equity return r 0.1113), F 10",
+    "old_defaults_inputs": "year 1 growth 0.1242 and margin 0.0389, margin 0.0406 (persist), growth 0.0375, terminal RONIC 0.0904 (equity return r 0.1107), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 6,
-     "kept": 111
+     "dropped_unsupported": 0,
+     "kept": 68
     },
     "ranges": {
      "long_run_op_margin": [
@@ -350,8 +506,8 @@
       0.07
      ],
      "terminal_growth": [
-      0.02,
-      0.04
+      0.022,
+      0.036
      ]
     },
     "reasons": {
@@ -362,50 +518,50 @@
         "quote": "Purchases of property and equipment | (21,012) | (17,551)"
        },
        {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0051"
+        "id": "P6",
+        "quote": "capital expenditures between approximately $20 million and $30 million"
        }
       ],
       "quotes_given": 2,
-      "why": "Capital spending is light: nine-month 2026 capex of $21.0M is about 0.3% of sales. I use 0.4%, slightly above the recent run-rate and below the pooled average."
+      "why": "Capital spending is light: $21.0 million over nine months, and guidance is $20-30 million on sales of about $9.3 billion, or roughly 0.3% of revenue. I use slightly more than the 2025 level of 0.30% because of IT and systems investment."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "The IT industry is very fragmented and highly competitive."
+        "id": "P3",
+        "quote": "We believe this trend could continue into future periods as we focus on selling solutions and increasing our services net sales."
        }
       ],
       "quotes_given": 1,
-      "why": "The competitive, fragmented market and the shift of mix toward services point to a moderate fade of about eight years."
+      "why": "Margin and growth should move from the current acquisition- and hardware-driven phase to a steady state over about eight years, with services mix shifting only gradually."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "We believe this trend could continue into future periods as we focus on selling solutions and increasing our services net sales."
+        "id": "REC",
+        "quote": "2025-12-31 | $8,247.2 million | -0.0522 | 0.0406"
        },
        {
-        "id": "REC",
-        "quote": "2023-12-31 | $9,175.8 million | -0.1203 | 0.0458"
+        "id": "P2",
+        "quote": "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue."
        }
       ],
       "quotes_given": 2,
-      "why": "Services mix supports gross margin, but the company faces aggressive pricing, partner incentive changes and heavy earnout and amortization charges. The margin sits above the long-run median, so I expect only part of the gap to persist, giving about 4.1%."
+      "why": "Reseller-integrator margins sat at 2.4-3.3% before 2021 and reached 4.0-4.6% in 2022-25 as services grew. I settle near the recent range, a bit below the 2023 peak, because pricing is competitive and partner incentives can change."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Earnings from operations | 2.8 | 4.6 | 3.9 | 3.9"
+        "id": "P6",
+        "quote": "Earnings from operations of $68.7 million, or 2.8% of net sales"
        },
        {
-        "id": "REC",
-        "quote": "2025-12-31 | $8,247.2 million | -0.0522 | 0.0406"
+        "id": "P4",
+        "quote": "Compared to the three months ended September 30, 2025, gross margin contracted approximately 30 basis points to 21.4% of net sales"
        }
       ],
       "quotes_given": 2,
-      "why": "Nine-month GAAP margin is 3.9%, held down by earnout and severance charges, with the voluntary separation program adding cost in Q3. I assume a gradual recovery to about 4.2% as services mix rises and one-offs ease."
+      "why": "GAAP margin was 3.9% for nine months, pulled down by earnouts and VSP severance, while Q4 is seasonally stronger. I expect about 4.0% in year 1 and a slow rise as services mix helps and earnout noise eases. Hardware mix and rising selling and administrative costs limit the gain."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
@@ -415,135 +571,134 @@
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0909."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0904."
        }
       ],
       "quotes_given": 2,
-      "why": "The business is capital-light, which gives a high measured return on tangible capital. Competition and acquisition-driven growth should erode returns on new investment well below that level, but they stay above the 9.1% break-even."
+      "why": "The business needs little fixed capital, which gives a high base-year return on tangible capital of 0.2649. New investment also needs working capital and acquisitions, and competition and acquisition costs should compress returns, so I assume 15%, well above the 0.0904 break-even."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Net sales of $2.4 billion increased 22% compared to the three months ended September 30, 2025."
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $8,247.2 million | -0.0522 | 0.0406"
+        "id": "P6",
+        "quote": "we are raising our gross profit growth expectations to be between 12.5% to 14.0% and expect gross margin to be approximately 21.5%"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 is fiscal 2026. Nine-month sales are up 12% and Q3 is up 22%, driven by hardware and services plus Sekuro. I assume about 14% for the full year, then a fade as hardware refresh and memory-driven pricing normalise and software keeps migrating to net-reported cloud."
+      "why": "Nine-month 2026 sales are up 12% and Q3 is up 22%, led by hardware. Guidance of 12.5-14% gross profit growth at about 21.5% gross margin implies roughly 13% revenue growth for 2026. I fade growth quickly because memory-driven hardware pricing and pull-forward demand are unlikely to last, and the 2023-25 history shows sales can fall."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "id": "P1",
+        "quote": "Our 2025 net sales of $8.2 billion represented less than 1% of that highly diverse market."
        }
       ],
       "quotes_given": 1,
-      "why": "This is a mature reseller and integrator in a fragmented market, so I set growth slightly below the nominal anchor."
+      "why": "The company is under 1% of a fragmented, growing IT market, which supports growth near nominal GDP. I set it below the 3.75% anchor because resellers face disintermediation from vendors selling direct."
      }
     },
     "risks": [
      {
       "bear_value": 0.01,
       "input_hit": "rev_growth",
-      "risk": "Hardware and infrastructure demand reverses once the memory-chip price effect and refresh cycle pass, or partner incentives are cut, so growth and margin fall."
+      "risk": "Hardware demand fades after the memory-price and refresh surge, or partner incentives are cut, so sales fall and margin is squeezed"
      },
      {
-      "bear_value": 0.032,
+      "bear_value": 0.034,
       "input_hit": "long_run_op_margin",
-      "risk": "Partner incentive cuts, pricing pressure and persistent earnout and severance charges hold the operating margin near its long-run median."
+      "risk": "Hardware mix, partner funding cuts and repeated earnout and restructuring charges keep GAAP margin low"
      },
      {
       "bear_value": 0.1,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Competition and acquisition-driven growth push returns on new investment down toward the break-even level."
+      "risk": "Receivables collection problems or tighter ABL financing hit a business that funds large receivables with payables and debt, cutting returns on new investment"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.034,
       "rev_growth": [
-       0.11000000000000001,
+       0.1,
        0.020000000000000004,
        0.010000000000000002,
        0.0050000000000000044,
        0.0
       ],
-      "terminal_growth": 0.02
+      "terminal_growth": 0.022
      },
      "bull": {
       "long_run_op_margin": 0.05,
       "rev_growth": [
-       0.17,
+       0.16,
        0.08000000000000002,
        0.07,
        0.065,
        0.060000000000000005
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.036
      }
     },
     "situation": {
      "base_year_representative": "no",
-     "cyclical": "yes",
+     "cyclical": "unclear",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Debt is ABL-heavy and rising with receivables, from $1,361.3M at year-end 2025 to $1,498.9M at 30 September 2026, so it is likely to scale with sales rather than stay fixed."
+      "why": "Long-term debt rose to $1,498,886 thousand from $1,361,327 thousand because the ABL funds working capital and buybacks, so year-end debt may not be a stable level relative to size."
      },
-     "margin_position": "The 2025 GAAP operating margin of 4.06% is above the 2009-2025 median of about 3%. It is below the 2023 peak of 4.58%. Gross margin is at a record because services are a larger share of the mix, but GAAP earnings are depressed by earnout revaluations, severance and amortization. Interest and tax costs weigh further on net earnings.",
+     "margin_position": "GAAP operating margin was 4.06% in 2025, below the 4.58% and 4.47% of 2023-24 and well below the adjusted 6.1%. The gap comes from earnout revaluations, restructuring, acquired-intangible amortization and stock compensation, which are real costs. Gross margin is a record 21.4% but is being diluted by lower-margin hardware growth, and operating expenses are rising.",
      "tax_rate_representative": {
       "answer": "unclear",
-      "why": "The FILED RECORD rate of 0.2501 is below the 30.3% effective rate reported for 2025, which was raised by non-deductible earnout and warrant losses, so the sustainable rate is uncertain."
+      "why": "The record shows 0.2501 and the 10-K cites a 30.3% effective rate in 2025 because of non-deductible losses, while management guides to about 25.5%, so a normal rate is probably 25-26%."
      },
-     "why": "2025 was a year of falling sales, down 5%. It included a $25.1M warrant loss, a $12.6M real estate impairment and $37.1M of severance. In 2026 sales are growing strongly, up 22% in Q3, helped by hardware demand and acquisitions. The base year therefore understates the current revenue level and mixes in one-off items."
+     "why": "2025 was a down year for sales (-5.2%) with a one-time warrant loss below operating income. In 2026 sales are growing about 12% for nine months, and management has raised its outlook, so year 1 will differ a lot from the base year. GAAP margin is noisy because of earnout and severance charges, so I anchor on a modest recovery rather than the adjusted margin."
     },
-    "value_at_old_defaults": 82.46823416303607,
+    "value_at_old_defaults": 83.02607152272536,
     "values": {
-     "base": 97.91393993622083,
-     "bear": 77.77983176666882,
-     "bull": 133.55457019829245
+     "base": 104.59992511919258,
+     "bear": 81.36675230127327,
+     "bull": 138.4522171390846
     }
    }
   },
-  "situation_unclear": true,
-  "value_at_old_defaults": 82.46823416303607,
-  "value_at_old_defaults_quoted": 82.46823416303607,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "situation_unclear": false,
+  "value_at_old_defaults": 83.02607152272536,
+  "value_at_old_defaults_quoted": 83.02607152272536,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 3192525019.9312215,
+ "equity_value": 2990605601.372024,
  "family": "operating",
  "far_from_price": false,
- "filed_shares": 32347000.0,
+ "filed_shares": 28810461.0,
  "flags": [
-  "The company started a voluntary separation program in the third quarter, and quarterly severance and restructuring expenses, net rose to 25,660 from 5,390 (table in thousands).",
-  "The company published its third-quarter results and raised its full-year outlook.",
-  "In the third quarter, the APAC segment recorded a 36,875 change in fair value of earnout liabilities (table in thousands), and APAC GAAP earnings from operations were $(22,302)."
+  "The company started a Voluntary Separation Program in the third quarter of 2026. Third-quarter severance and restructuring expenses, net were 25,660 (table in thousands), against 5,390 in the prior-year quarter.",
+  "With its third-quarter results the company raised its full-year 2026 outlook. It now expects Adjusted diluted EPS of $13.55 to $13.75.",
+  "In the nine months ended September 30, 2026 the company repurchased common stock for 225,032 (table in thousands), against 151,118 in the prior-year period."
  ],
  "in_code_book": false,
- "ke": 0.11134375453902048,
+ "ke": 0.11067161541982182,
  "market_cap_at_publish": 4334245958,
- "model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 150.44,
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+ "release_truncated": [
+  "0000932696-26-000076"
+ ],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 99.47840061661073,
-  "3000": 97.91393993622083
+  "1000": 103.00561103463876,
+  "3000": 104.59992511919258
  },
- "seeds_agree": false,
+ "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1",
-    "claim": "Insight sells hardware, software and services, including cloud solutions, and describes itself as a Solutions Integrator.",
+    "basis": "stated in the 10-K Item 1 text",
+    "claim": "Insight is an IT solutions integrator that sells hardware, software and services, including cloud solutions, to its clients.",
     "facts": [
      "P1"
     ],
@@ -553,8 +708,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1 segment table",
-    "claim": "The company reports three operating segments defined by geography. In 2025 North America was 81%, EMEA 16% and APAC 3% of consolidated net sales.",
+    "basis": "stated in the 10-K Item 1 segment table",
+    "claim": "The company reports three geographic operating segments. In 2025 North America was 81% of consolidated net sales, EMEA 16% and APAC 3%.",
     "facts": [
      "P1"
     ],
@@ -564,31 +719,32 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4 segment table",
-    "claim": "In Q3 2026 segment net sales were $1,983,461 for North America, 338,013 for EMEA and 120,036 for APAC (table in thousands). APAC grew 104% and total growth was 22%.",
+    "basis": "stated in the 10-Q MD&A and the 10-K risk factors",
+    "claim": "Customers are business and public-sector clients. Recent hardware growth was led by large enterprise and corporate clients, and public-sector buying depends on government spending policies.",
     "facts": [
-     "P4"
+     "P4",
+     "P2"
     ],
     "quotes": [
-     "Net sales of $2.4 billion for the three months ended September 30, 2026 increased 22%, year over year, compared to the three months ended September 30, 2025, driven by growth across all operating segments."
+     "led by large enterprise and corporate clients",
+     "Our sales to public sector clients are also impacted by government spending policies, government shutdowns, budget priorities and revenue levels."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "Products make up most of net sales, but services earn most of gross profit. In 2025 products were about 79% of net sales and 41% of gross profit, and services were 21% of net sales and 59% of gross profit.",
+    "basis": "stated in the 10-K Item 1; the margin mechanism is inferred from the mix shares and from the 10-K's reference to services 'typically at higher gross margins'",
+    "claim": "Products (hardware and software) are most of net sales but a minority of gross profit. In 2025 products were about 79% of net sales and services 21%, versus 41% and 59% of gross profit.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "On a consolidated basis, product (hardware and software) and services (including cloud solutions) represented approximately 79% and 21%, respectively, of our consolidated net sales in 2025.",
-     "On a consolidated basis, product (hardware and software) and services represented approximately 41% and 59%, respectively, of our gross profit in 2025."
+     "product (hardware and software) and services represented approximately 41% and 59%, respectively, of our gross profit in 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 income statement",
-    "claim": "In Q3 2026 products had net sales of 1,929,575 and gross profit of 201,027. Services had net sales of 511,935 and gross profit of 322,176 (table in thousands).",
+    "basis": "stated in the 10-Q income statement split by products and services",
+    "claim": "In the nine months ended September 30, 2026, products net sales were 5,481,730 and services net sales 1,487,263 (table in thousands). Services gross profit of 933,658 exceeded products gross profit of 573,298 (table in thousands).",
     "facts": [
      "F2"
     ],
@@ -596,58 +752,32 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "Part of revenue is booked net, as agent: cloud migrations, principal-to-agent vendor changes and EMEA pass-through agency transactions are reported net in services net sales.",
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "Third-quarter 2026 revenue growth came from hardware. Net sales rose 22% while hardware product net sales rose 32% and software product net sales fell 3%.",
     "facts": [
-     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Net sales of $2.4 billion increased 22% compared to the three months ended September 30, 2025.",
+     "Software product net sales decreased 3%, year to year, while hardware product net sales increased 32%, year over year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A for North America",
+    "claim": "Software net sales are held down by the migration of on-premise software to cloud solutions. Those cloud solutions are reported within services net sales.",
+    "facts": [
      "P4"
     ],
     "quotes": [
-     "The decrease in software net sales was primarily due to a significant multiyear transaction in the first quarter of 2024 with no comparable transaction in 2025, changes in certain vendor relationships (shifting us from a principal to an agent role), as well as the continued migration of on-premise software to cloud solutions, reported net in services net sales.",
-     "We acted as a paid pass-through agent in transactions for certain clients and their vendors that expanded into the Middle East beginning in 2025.",
      "Software net sales remained relatively flat compared to the prior-year period, as growth in software demand was offset by the continued migration of certain on-premise software solutions to cloud solutions, which are reported within services net sales."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P4; client mix by size not quantified",
-    "claim": "Clients include large enterprise, corporate, commercial and public sector organisations. Public sector sales depend on government spending.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Our sales to public sector clients are also impacted by government spending policies, government shutdowns, budget priorities and revenue levels.",
-     "The increase in hardware net sales was primarily driven by growth in infrastructure and devices offerings across client segments, led by large enterprise and corporate clients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "North America hardware net sales rose 30% to $1,332,404 (table in thousands) in Q3 2026, led by infrastructure and devices.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The increase in hardware net sales was primarily driven by growth in infrastructure and devices offerings across client segments, led by large enterprise and corporate clients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "North America services net sales grew 15% in Q3 2026, driven by Insight Delivered services and cloud solution offerings.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The increase in services net sales was primarily due to growth in Insight Delivered services and cloud solution offerings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Sales mix drives gross margin. In Q3 2026 gross margin contracted 30 basis points to 21.4% because of a higher hardware mix.",
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Gross margin depends on the sales mix. In the third quarter of 2026 it contracted about 30 basis points to 21.4% because hardware, which carries lower margins, was a larger share of sales.",
     "facts": [
      "P4"
     ],
@@ -657,46 +787,54 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "The company depends heavily on a few partners. Microsoft and TD Synnex were about 32% and 12% of 2025 purchases, and Microsoft products were about 17% of 2025 net sales.",
+    "basis": "stated in the earnings release segment highlights",
+    "claim": "The segments differ in size and margin. Third-quarter 2026 gross margin was 19.8% in North America, 26.8% in EMEA and 32.5% in APAC. North America is the largest segment by net sales.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Increased 15% in North America, year over year, to $393.6 million (19.8% gross margin);"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Vendor concentration shapes the cost of goods. In 2025 Microsoft and TD Synnex were about 32% and 12% of purchases, and Microsoft products were about 17% of net sales.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Purchases from Microsoft and TD Synnex accounted for approximately 32% and 12%, respectively, of our aggregate purchases in 2025.",
-     "During 2025, sales of Microsoft products accounted for approximately 17% of our consolidated net sales."
+     "Purchases from Microsoft and TD Synnex accounted for approximately 32% and 12%, respectively, of our aggregate purchases in 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2, P3 and P4",
-    "claim": "Partner incentives (rebates, marketing funds and similar funding) are a key driver of gross profit and change regularly.",
+    "basis": "stated in the 10-K risk factors and MD&A",
+    "claim": "Partner incentives such as rebates, marketing funds and price protection offset costs and affect gross profit. The company says they change regularly and can reduce earnings.",
     "facts": [
      "P2",
-     "P3",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "Our gross profit across the business and related to product versus services sales are, and will continue to be, impacted by partner incentives, which can and do change significantly in the amounts made available and the related product or services sales being incentivized by the partner.",
-     "For example, recent changes in incentives for certain cloud-based solutions adversely impacted our results of operations in 2025."
+     "We regularly experience partner funding program changes that reduce the incentives many partners make available to us and that change the requirements for earning such incentives."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2",
-    "claim": "Pricing competition is aggressive, and some manufacturer and publisher partners also sell directly to customers.",
+    "basis": "stated in the 10-K Item 1 and risk factors",
+    "claim": "The company operates in a competitive industry with pricing pressure. It competes with systems integrators and with resellers, and also with some of its own manufacturer and publisher partners.",
     "facts": [
+     "P1",
      "P2"
     ],
     "quotes": [
-     "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue.",
-     "Many of our manufacturer and publisher partners are also our competitors, as many sell directly to business customers, particularly large enterprise and corporate customers."
+     "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and P6",
-    "claim": "Selling and administrative expenses are the main operating cost. They were 428,619 in Q3 2026 versus 332,907 in Q3 2025 (table in thousands), driven by earnout revaluations, variable compensation and acquisitions.",
+    "basis": "figures from the 10-Q income statement; drivers stated in the earnings release",
+    "claim": "Selling and administrative expenses are the largest operating cost line. They were 428,619 in the third quarter of 2026 versus 332,907 a year earlier (table in thousands).",
     "facts": [
      "F2",
      "P6"
@@ -707,324 +845,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and P6",
-    "claim": "Earnout revaluations and severance costs cut Q3 2026 GAAP earnings from operations to 68,691 from 93,067 (table in thousands). Severance and restructuring rose to 25,660 from 5,390, partly because of a voluntary separation program.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "The decrease in earnings from operations was primarily attributable to higher earnout valuation adjustments compared to the prior-year period, as well as higher severance and restructuring costs in the current period, including costs associated with the Company\u2019s voluntary separation program initiated in the third quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 reconciliation table",
-    "claim": "APAC recorded a 36,875 change in fair value of earnout liabilities in Q3 2026, and its GAAP earnings from operations were $(22,302) (table in thousands).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Insight grows its services capabilities through acquisitions, including Inspire11 (data and AI) and Sekuro (APAC cybersecurity) in 2025.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We invest organically and through acquisitions to advance our technical capabilities and better serve the needs of our clients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; funding link inferred from F1 and F3",
-    "claim": "The business carries large receivables and payables. At September 30, 2026 accounts receivable were 7,383,646 and trade accounts payable 5,890,942 (table in thousands). Long-term debt was 1,498,886.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Working capital swings dominate operating cash flow. In the first nine months of 2026 receivables rose by 1,944,293 and payables by 1,680,390, and operating cash flow was 148,549 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and P4",
-    "claim": "Interest expense on variable-rate borrowings is a cost driver. Net interest expense was 25,123 in Q3 2026 (table in thousands).",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "We believe inflation contributed to sustained high interest rates on all of our variable rate borrowing facilities through the third quarter of 2026 consistent with the prior year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Supply conditions affect hardware supply and pricing. The company says a global memory chip shortage currently affects its supply chain.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Net sales are seasonal. Software and cloud are higher in Q2 and Q4, and US federal government sales are often stronger in Q3.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Software and certain cloud net sales are typically seasonally higher in our second and fourth quarters.",
-     "Sales to the federal government in the United States are often stronger in our third quarter, while sales in the state and local government and education markets are also often stronger in our second quarter."
-    ],
-    "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in the 10-K Item 1 (company self-description)",
-    "claim": "Insight describes itself as a Fortune 500-ranked Solutions Integrator offering end-to-end digital transformation, with 37 years of IT expertise.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "As a Fortune 500-ranked Solutions Integrator, we deliver secure, end-to-end digital transformation and meet the needs of our clients through a comprehensive portfolio of solutions, far-reaching partnerships and 37 years of broad IT expertise."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 as management belief",
-    "claim": "The company says it holds a small share of a fragmented market: 2025 net sales of $8.2 billion were less than 1% of an addressable market it puts at approximately $1.3 trillion in 2026.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We believe our addressable market represents approximately $1.3 trillion in 2026.",
-     "Our 2025 net sales of $8.2 billion represented less than 1% of that highly diverse market."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 segment table",
-    "claim": "Sales are concentrated in North America, which made up 81% of 2025 consolidated net sales, against 16% for EMEA and 3% for APAC.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "North America | United States and Canada | 81%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "The business mix is moving toward services. Services were approximately 21% of 2025 net sales, against 19% in 2024 and 17% in 2023, and services produced 59% of 2025 gross profit.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "On a consolidated basis, product (hardware and software) and services represented approximately 41% and 59%, respectively, of our gross profit in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q income statement",
-    "claim": "In Q3 2026, services generated gross profit of 322,176 on net sales of 511,935, while products generated gross profit of 201,027 on net sales of 1,929,575 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "The company describes its industry as fragmented and highly competitive. It names systems integrators such as Accenture and Infosys, and resellers such as CDW, Presidio, World Wide Technology, SHI and Computacenter, as competitors.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The IT industry is very fragmented and highly competitive."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Items 1 and 1A",
-    "claim": "Some of the company's own partners also compete with it by selling directly to business customers.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "We sometimes compete directly with publisher and manufacturer partners for many of these offerings, including Microsoft, Cisco Systems, Dell, HP Inc. and Adobe Systems.",
-     "Many of our manufacturer and publisher partners are also our competitors, as many sell directly to business customers, particularly large enterprise and corporate customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "The company depends heavily on Microsoft. Purchases from Microsoft were approximately 32% of 2025 purchases, and Microsoft products were approximately 17% of 2025 consolidated net sales.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Purchases from Microsoft and TD Synnex accounted for approximately 32% and 12%, respectively, of our aggregate purchases in 2025.",
-     "During 2025, sales of Microsoft products accounted for approximately 17% of our consolidated net sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A",
-    "claim": "The company typically does not have long-term contracts with its vendor partners, so a key relationship could be lost.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We typically do not have long-term contracts with our vendor partners."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Items 1A and 7",
-    "claim": "Changes to partner incentive programs are a named threat, and changes to cloud incentives hurt 2025 results.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Recent changes in incentives for cloud-based solutions impacted our results.",
-     "For example, recent changes in incentives for certain cloud-based solutions adversely impacted our results of operations in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A",
-    "claim": "The company names aggressive pricing competition as a continuing threat.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A",
-    "claim": "Partners selling cloud solutions directly to customers could bypass solutions providers like Insight.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "cloud-based solutions and technologies developed by manufacturer and publisher partners are alternatively marketed directly to customers without utilizing solutions providers like us"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A",
-    "claim": "The company says some competitors may have greater resources or lower cost structures.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Some of our competitors in each of our operating segments may have greater technical, marketing and other resources than we do.",
-     "Additionally, some of our competitors have higher margins and/or lower operating cost structures, allowing them to price more aggressively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A",
-    "claim": "The company lists credit availability, product availability and services capability among the bases of competition.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Competition in the industry is based on price, product availability, speed of delivery, credit availability, quality and breadth of product lines, and, increasingly, on the ability to provide services and tailor specific solutions to meet client needs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Items 1A and 7",
-    "claim": "The EMEA paid pass-through agent business, which helped expand 2025 EMEA services margin, carries no contractual guarantee of continuation.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "There is no contractual requirement or guarantee that our clients and these vendors will continue to use us an agent in this capacity."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K Item 7",
-    "claim": "In 2025, net sales of $8.2 billion fell 5%, while gross margin expanded to a record 21.4%.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Net sales of $8.2 billion decreased 5% compared to 2024.",
-     "Consolidated gross margin expanded approximately 110 basis points to a record 21.4% of net sales in 2025."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "In Q3 2026, net sales of $2.4 billion rose 22% year over year, with growth in all operating segments.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "Net sales of $2.4 billion for the three months ended September 30, 2026 increased 22%, year over year, compared to the three months ended September 30, 2025, driven by growth across all operating segments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "North America hardware net sales rose 30% in Q3 2026, to $1,332,404 from $1,021,930 (dollars in thousands), led by large enterprise and corporate clients.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The increase in hardware net sales was primarily driven by growth in infrastructure and devices offerings across client segments, led by large enterprise and corporate clients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K earnings release (management statement)",
-    "claim": "The CEO cites infrastructure hardware gross profit growth of more than 50%, plus more than 20% gross profit growth in Cloud and Insight Core Services.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We continue to see strong performance in our strategic growth priorities, with infrastructure hardware gross profit increasing more than 50% and more than 20% gross profit growth across Cloud and Insight Core Services",
-     "Cloud gross profit increased 26%, year over year, and Insight Core services gross profit increased 21%, year over year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "Q3 2026 gross margin contracted 30 basis points to 21.4% because of a higher mix of lower-margin hardware.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The contraction was primarily driven by a higher mix of hardware net sales, which carry lower gross margins, compared to the same period in the prior year."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 8-K release and 10-Q income statement",
-    "claim": "Q3 2026 earnings from operations fell 26% to $68.7 million, reflecting earnout revaluation adjustments and severance costs tied to the voluntary separation program.",
+    "basis": "stated in the earnings release",
+    "claim": "GAAP operating earnings fell 26% in the third quarter of 2026 even though gross profit rose, because of earnout revaluations and restructuring. Adjusted earnings from operations rose 23%.",
     "facts": [
      "P6",
      "F2"
@@ -1035,8 +857,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 8-K reconciliation table; the table's scale is not printed in that excerpt",
-    "claim": "APAC reported GAAP earnings from operations of $(22,302) in Q3 2026, which included a change in fair value of earnout liabilities of 36,875.",
+    "basis": "stated in the earnings release segment reconciliation; the link to acquisitions is inferred from the earnout label and from Sekuro being an acquired APAC business",
+    "claim": "Growth in APAC is partly acquired. The segment's GAAP operating result was a loss of 22,302 in the third quarter of 2026 (table in thousands), driven by a 36,875 change in fair value of earnout liabilities (table in thousands). Its adjusted result was a profit of 16,495 (table in thousands).",
     "facts": [
      "P6"
     ],
@@ -1044,19 +866,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "The global memory chip shortage is a named current supply-chain threat that is raising prices and constraining supply.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
-    ],
-    "support": "supported"
-   },
-   {
     "basis": "stated in the 10-K Item 1",
-    "claim": "The company builds capabilities through acquisitions as well as organic growth, including Inspire11 for data and AI and Sekuro for cybersecurity in 2025.",
+    "claim": "The company grows through acquisitions as well as organically, adding services capabilities such as Inspire11 and Sekuro in 2025.",
     "facts": [
      "P1"
     ],
@@ -1066,30 +877,210 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q balance sheet; the link to competition is inferred from P2",
-    "claim": "Accounts receivable grew to 7,383,646 at Sep. 30, 2026 from 5,516,984 at Dec. 31, 2025, and trade accounts payable grew to 5,890,942 from 4,263,796 (table in thousands).",
+    "basis": "figures stated in the balance sheet and cash flow statement; the mechanism is inferred",
+    "claim": "Sales growth is financed through working capital and borrowing. Accounts receivable rose to 7,383,646 from 5,516,984 and trade accounts payable rose to 5,890,942 from 4,263,796 (table in thousands). ABL borrowings of 5,355,820 and repayments of 5,216,713 were recorded in the nine months to September 30, 2026 (table in thousands).",
     "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in the 10-Q statements; the link to borrowing needs is inferred",
+    "claim": "Financing cost is a meaningful expense. Interest expense, net was 73,165 for the nine months to September 30, 2026 versus 61,274 a year earlier (table in thousands), and long-term debt was 1,498,886 (table in thousands).",
+    "facts": [
+     "F2",
      "F1"
     ],
     "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Sales are seasonal: larger enterprise clients in the United States tend to spend more on product in the fourth quarter, and software and certain cloud sales are seasonally higher in the second and fourth quarters.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Business clients, particularly larger enterprise businesses in the United States, tend to spend more, particularly on product, in our fourth quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Supply and cost conditions affect hardware sales. Management says the global memory chip shortage is limiting supply and raising prices.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P1",
+    "claim": "Insight is a small player in a very large, fragmented IT market: its 2025 net sales were less than 1% of the market it addresses.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our 2025 net sales of $8.2 billion represented less than 1% of that highly diverse market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1; this is the company's own positioning, not independent evidence",
+    "claim": "The company describes itself as a Fortune 500-ranked Solutions Integrator that combines hardware, software and services, and says it aspires to be an AI-first integrator.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "As a Fortune 500-ranked Solutions Integrator"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6; consistent with F2",
+    "claim": "Third-quarter 2026 growth was strong: net sales rose 22% to $2.4 billion and gross profit rose 20% to $523.2 million.",
+    "facts": [
+     "P4",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Net sales of $2.4 billion increased 22% compared to the three months ended September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Services are a small share of sales but most of gross profit: in 2025 services were 21% of net sales and 59% of gross profit, which supports the company's services-led strategy.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "On a consolidated basis, product (hardware and software) and services represented approximately 41% and 59%, respectively, of our gross profit in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6; consistent with F2 line items",
+    "claim": "In Q3 2026 services gross profit grew faster than product gross profit, at 23% against 17%.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Product gross profit increased 17%, year over year, and services gross profit increased 23%, year over year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Consolidated gross margin narrowed in Q3 2026 to 21.4% of net sales, a contraction of about 30 basis points, because more of the sales were lower-margin hardware.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The contraction was primarily driven by a higher mix of hardware net sales, which carry lower gross margins, compared to the same period in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Reliance on Microsoft is a concentration risk: Microsoft was 32% of 2025 purchases and about 17% of net sales, and TD Synnex was 12% of purchases.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Purchases from Microsoft and TD Synnex accounted for approximately 32% and 12%, respectively, of our aggregate purchases in 2025.",
+     "During 2025, sales of Microsoft products accounted for approximately 17% of our consolidated net sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Changes in partner incentive programs, especially for cloud solutions, have already hurt results and are a named threat.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Recent changes in incentives for cloud-based solutions impacted our results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "Competition is intense and includes the company's own suppliers, with aggressive pricing named as a continuing pressure.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The IT industry is very fragmented and highly competitive.",
+     "Generally, pricing competition is very aggressive in the industry, and we expect pricing pressures to continue.",
+     "We sometimes compete directly with publisher and manufacturer partners for many of these offerings, including Microsoft, Cisco Systems, Dell, HP Inc. and Adobe Systems."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "The 10-Q names a global memory chip shortage as a current supply chain constraint that may lift prices further.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "APAC growth is stated in P6; the link to Sekuro is inferred from P3 and the reconciliation in P6",
+    "claim": "APAC is the fastest-growing segment: Q3 2026 net sales rose 104% to $120.0 million, helped by acquisitions, though its GAAP operating result was a loss.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Net sales in APAC increased 104%, year over year, to $120.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6; the adjusted figure is non-GAAP",
+    "claim": "Growth is not yet reaching GAAP operating profit: Q3 2026 earnings from operations fell 26% to $68.7 million, while adjusted earnings from operations rose 23% to $166.9 million.",
+    "facts": [
+     "P4",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Earnings from operations decreased 26%, year to year, to $68.7 million in the third quarter of 2026 compared to $93.1 million in the third quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "balances stated in F1; the financing risk is stated in P2",
+    "claim": "The business is working-capital heavy and debt-funded: accounts receivable rose to 7,383,646 from 5,516,984 at year-end (table in thousands), and long-term debt was 1,498,886 (table in thousands).",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "A significant deterioration in our ability to collect on accounts receivable could also impact the cost or availability of financing under our accounts receivable securitization program."
+    ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1",
-    "claim": "Cash and cash equivalents were $ 397,711 at September 30, 2026, up from $ 358,020 at December 31, 2025 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 397,711 | $ 358,020"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the comparison of the two lines is inferred",
-    "claim": "Total current assets of 8,370,982 exceeded total current liabilities of 7,005,679 at September 30, 2026 (table in thousands).",
+    "basis": "Stated in the balance sheet [F1]; the interpretation of composition is inferred from the line items.",
+    "claim": "Current assets exceed current liabilities, but both grew sharply. Current assets were 8,370,982 against 7,005,679 of current liabilities (table in thousands). Prior year-end figures were 6,362,387 and 5,104,303. Cash and cash equivalents were 397,711, up from 358,020.",
     "facts": [
      "F1"
     ],
@@ -1100,99 +1091,10 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Accounts receivable rose to 7,383,646 from 5,516,984, while trade accounts payable rose to 5,890,942 from 4,263,796 (table in thousands).",
+    "basis": "Balances and flows are stated in [F1] and [F3]; the funding relationship is inferred from the matching movements.",
+    "claim": "Working capital is large and driven by trade receivables funded by trade payables. Accounts receivable rose to 7,383,646 from 5,516,984, while trade accounts payable rose to 5,890,942 from 4,263,796 (table in thousands). Long-term accounts receivable were 778,967.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Accounts payable\u2014trade | 5,890,942 | 4,263,796"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "Long-term debt was 1,498,886 at September 30, 2026, up from 1,361,327 at December 31, 2025, and the current portion of long-term debt was 0 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Long-term debt | 1,498,886 | 1,361,327",
-     "Current portion of long-term debt | 0 | 8"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the link to buybacks is inferred from F3",
-    "claim": "Total stockholders' equity fell to 1,568,026 from 1,648,874, and retained earnings fell to 1,436,846 from 1,520,404, against total liabilities of 9,461,168 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total stockholders\u2019 equity | 1,568,026 | 1,648,874"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "Other balance-sheet funding includes inventory financing facility payables of 243,270 and long-term accounts payable of 692,980 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Accounts payable\u2014inventory financing facilities | 243,270 | 225,035",
-     "Long-term accounts payable | 692,980 | 715,494"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2",
-    "claim": "Net interest expense was 25,123 in Q3 2026 versus 23,297 in Q3 2025, and 73,165 for the nine months versus 61,274 (table in thousands), against Q3 earnings from operations of 68,691.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Interest expense, net | 25,123 | 23,297 | 73,165 | 61,274"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Management expects interest rates on its variable-rate facilities to stay higher than historical levels through the rest of 2026.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Interest rates are expected to hold steady and continue to remain higher than historical rates through the remainder of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Nine-month operating cash flow was 148,549 in 2026 versus 150,057 in 2025, against net earnings of $ 129,739 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities: | 148,549 | 150,057"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "The company reported Q3 2026 operating cash flow of $128.4 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Cash flows provided by operating activities were $128.4 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the quality interpretation is inferred",
-    "claim": "Operating cash flow depended on large offsetting working-capital swings: receivables rose by (1,944,293) and accounts payable by 1,680,390, and accrued expenses added 234,010 (table in thousands).",
-    "facts": [
+     "F1",
      "F3"
     ],
     "quotes": [
@@ -1202,66 +1104,59 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Non-cash add-backs supported operating cash flow, including a 64,164 earnout revaluation, 31,079 of stock-based compensation and 85,888 of depreciation and amortization (table in thousands).",
+    "basis": "Balances stated in [F1]; the split between operating and funded liabilities is inferred from the line items.",
+    "claim": "Reported leverage is high relative to equity. Total liabilities were 9,461,168 against stockholders' equity of 1,568,026, down from 1,648,874 (table in thousands). Long-term debt was 1,498,886, up from 1,361,327.",
     "facts": [
-     "F3"
+     "F1"
     ],
     "quotes": [
-     "Net change on revaluation of earnout liabilities | 64,164 | 19,184"
+     "Long-term debt | 1,498,886 | 1,361,327",
+     "Total stockholders\u2019 equity | 1,568,026 | 1,648,874"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Capital spending is light: purchases of property and equipment were (21,012) in the nine months of 2026 (table in thousands).",
+    "basis": "Income statement figures are stated in [F2]; the guidance is stated in [P6]; the link to ABL borrowings is stated in the annual MD&A (not cited here) and is inferred for the current period.",
+    "claim": "Debt service is material. Net interest expense for the nine months was 73,165, up from 61,274, and for the third quarter 25,123 against 23,297 (table in thousands). Earnings from operations for the nine months were 271,340. Management guides to interest and other expenses of approximately $95 million for the full year.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "interest and other expenses of approximately $95 million;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F3] and [P6]; the explanation is inferred from the working-capital lines.",
+    "claim": "Cash generation over nine months was roughly flat year over year even though net earnings rose. Net cash provided by operating activities was 148,549 against 150,057, while net earnings were 129,739 against 105,393 (table in thousands). Operating cash flow for the third quarter alone was $128.4 million.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities: | 148,549 | 150,057",
+     "Cash flows provided by operating activities were $128.4 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items stated in [F3]; the quality judgement is inferred.",
+    "claim": "Quality of cash generation is mixed. Operating cash flow depends on payables funding receivables, with 234,010 from accrued expenses and other liabilities. Earnings carry a non-cash charge of 64,164 for earnout revaluation, and 31,079 of non-cash stock compensation was added back (table in thousands). Capital spending was light, with purchases of property and equipment of 21,012.",
     "facts": [
      "F3"
     ],
     "quotes": [
+     "Net change on revaluation of earnout liabilities | 64,164 | 19,184",
      "Purchases of property and equipment | (21,012) | (17,551)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3; the funding link is inferred",
-    "claim": "Share repurchases of (225,032) exceeded nine-month operating cash flow of 148,549 and were partly funded by net ABL use: borrowings of 5,355,820 against repayments of (5,216,713) (table in thousands).",
+    "basis": "Provision figures stated in [F3]; the risk statement is stated in [P2]; the allowance figures appear in the [F1] line description; the link is inferred.",
+    "claim": "Provisions for credit losses are rising. The provision for losses on accounts receivable was 14,866 against 6,743 a year earlier (table in thousands). The annual risk factors say a significant deterioration in collections could affect the cost or availability of financing under the receivables securitization program.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Repurchases of common stock | (225,032) | (151,118)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3; F3 shows (333,091) repayment of Convertible Notes principal and (221,968) warrants settlement in the 2025 nine months",
-    "claim": "In 2025 the company generated $303.8 million of operating cash flow and had net ABL borrowings of $818.8 million, partly to settle the Convertible Notes and Warrants.",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "We generated cash flows from operations of $303.8 million.",
-     "We had net borrowings of $818.8 million under our ABL facility."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Year-end 2025 cash was $358.0 million and debt under long-term facilities was $1,361.3 million, which included Senior Notes issued in May 2024 and ABL borrowings.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We ended the year with $358.0 million of cash and cash equivalents and $1,361.3 million of debt outstanding under our long-term debt facilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Financing access is tied to receivables quality through an accounts receivable securitization program.",
-    "facts": [
+     "F3",
      "P2"
     ],
     "quotes": [
@@ -1270,34 +1165,38 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P6",
-    "claim": "The 2026 outlook assumes no significant change in the company's debt instruments.",
+    "basis": "Flows stated in [F3]; that the revolver funded the gap is inferred from the net borrowing.",
+    "claim": "Share repurchases exceeded operating cash flow and were largely funded by the ABL revolver. Repurchases of common stock were 225,032 against operating cash flow of 148,549. Borrowings on the ABL were 5,355,820 and repayments 5,216,713, and net cash used in financing was (87,303) (table in thousands).",
     "facts": [
-     "P6"
+     "F3"
     ],
     "quotes": [
-     "no significant change in our debt instruments"
-    ],
-    "support": "number_not_listed"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "stated in P4",
-    "claim": "Third-quarter 2026 net sales rose 22% to $2.4 billion, with growth in every operating segment.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "Net sales of $2.4 billion for the three months ended September 30, 2026 increased 22%, year over year, compared to the three months ended September 30, 2025, driven by growth across all operating segments."
+     "Repurchases of common stock | (225,032) | (151,118)",
+     "Net cash (used in) provided by financing activities: | (87,303) | 136,521"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "Driver: North America hardware net sales grew 30%, from $1,021,930 to $1,332,404 (table in thousands), led by infrastructure and devices sold to large enterprise and corporate clients.",
+    "basis": "Current portion stated in [F1]; the 2025 settlement and ABL borrowing are stated in [P3]; the conclusion about the revolver is inferred.",
+    "claim": "No debt is classified as current at the latest quarter-end, so no debt maturity falls due within twelve months on the balance sheet. The current portion of long-term debt was 0, against 8 at prior year-end (table in thousands). The convertible notes that matured in 2025 were settled in cash, which raised ABL borrowings.",
     "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 0 | 8",
+     "We had net borrowings of $818.8 million under our ABL facility."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P4 and P6 for the quarter. That the demand continues is inferred, not stated.",
+    "claim": "Hardware is the largest growth driver: hardware net sales rose 32% year over year in Q3 2026, and North America hardware rose 30%, led by infrastructure and devices.",
+    "facts": [
+     "P6",
      "P4"
     ],
     "quotes": [
@@ -1306,86 +1205,58 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P6 (CEO quotation in the earnings release)",
-    "claim": "Management states that infrastructure hardware gross profit rose more than 50% and that Cloud and Insight Core Services gross profit each grew more than 20%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "with infrastructure hardware gross profit increasing more than 50% and more than 20% gross profit growth across Cloud and Insight Core Services"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2, P4 and P6",
-    "claim": "Driver: services net sales rose to 511,935 from 426,073, and services gross profit rose to $ 322,176 from $ 261,744 (tables in thousands). Growth came from Insight Delivered services and cloud offerings.",
-    "facts": [
-     "F2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The increase in services net sales was primarily due to growth in Insight Delivered services and cloud solution offerings.",
-     "Cloud gross profit increased 26%, year over year, and Insight Core services gross profit increased 21%, year over year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Services already make up most of gross profit: in 2025, products accounted for about 41% and services for about 59%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "On a consolidated basis, product (hardware and software) and services represented approximately 41% and 59%, respectively, of our gross profit in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; the nine-month figures are stated in P6",
-    "claim": "Condition: for margins to keep expanding, services must grow faster than lower-margin hardware. In Q3 2026 the hardware mix cut gross margin by 30 basis points to 21.4%.",
+    "basis": "The supply condition is stated in P4. Its effect on hardware growth is inferred.",
+    "claim": "For hardware growth to continue, supply must not tighten further. The filing says a global memory chip shortage is already limiting supply and raising prices.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "The contraction was primarily driven by a higher mix of hardware net sales, which carry lower gross margins, compared to the same period in the prior year."
+     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the P6 table",
-    "claim": "Over nine months, gross margin improved to 21.6% from 20.7%, an increase of 90 bps.",
+    "basis": "Stated in P4 and P6. The margin comparison is inferred from the F2 income statement, where Q3 services gross profit is 322,176 on net sales of 511,935 (table in thousands).",
+    "claim": "Services are the second driver. Services net sales rose 20% and services gross profit rose 23% in Q3 2026, on growth in Insight Delivered services and cloud solutions.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred: attributing APAC growth to Sekuro rests on the P3 acquisition date; the visible text does not quantify Sekuro's contribution",
-    "claim": "Driver: APAC net sales rose 104%, to 120,036 from 58,785 (table in thousands). Sekuro, acquired October 31, 2025, is not in the prior-year quarter.",
-    "facts": [
+     "P6",
      "P4",
+     "F2"
+    ],
+    "quotes": [
+     "The increase in services net sales was primarily due to growth in Insight Delivered services and cloud solution offerings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K. Its relevance to 2026 is inferred.",
+    "claim": "For services growth to continue, partner incentive programs must not shift against Insight. The filings say incentive changes hurt cloud results in 2025 and that incentives from the largest partners are significant.",
+    "facts": [
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "For example, recent changes in incentives for certain cloud-based solutions adversely impacted our results of operations in 2025.",
+     "Recent changes in incentives for cloud-based solutions impacted our results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The growth figures are stated in P6. Attributing APAC growth to Sekuro is inferred, because the 10-Q passage on APAC drivers was cut.",
+    "claim": "APAC grew fastest: net sales rose 104% to $120.0 million in Q3 2026, with gross profit up 121%. Acquisitions completed in Q4 2025 contributed to growth in the business.",
+    "facts": [
+     "P6",
      "P3"
     ],
     "quotes": [
-     "Our APAC organic business excludes Sekuro, which we acquired on October 31, 2025."
+     "Net sales in APAC increased 104%, year over year, to $120.0 million.",
+     "increased expenses associated with acquisitions completed in the fourth quarter of 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the P6 reconciliation and the F3 cash flow statement",
-    "claim": "Acquisition growth is costly at the GAAP level. APAC GAAP earnings from operations were $(22,302), after an earnout fair value change of 36,875 (table in thousands). Earnout revaluation in the cash flow statement was 64,164, against 19,184 a year earlier.",
-    "facts": [
-     "P6",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Adjusted earnings from operations rose 23% to $166.9 million, while GAAP earnings from operations fell 26% to $68.7 million because of earnout and severance charges, including the voluntary separation program.",
+    "basis": "Stated in P6. The condition about the charges is inferred from the reconciliation.",
+    "claim": "Adjusted profit is growing while GAAP profit is not. Adjusted earnings from operations rose 23% to $166.9 million in Q3 2026, but GAAP earnings from operations fell 26% to $68.7 million. For adjusted growth to turn into GAAP growth, earnout revaluation charges and severance costs would have to stop rising.",
     "facts": [
      "P6",
      "F2"
@@ -1396,23 +1267,202 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P1",
-    "claim": "Condition: partner incentives must hold. They change regularly, and Microsoft made up about 32% of 2025 purchases.",
+    "basis": "Stated in P6 as management's expectation, not an outcome.",
+    "claim": "Management raised its full-year 2026 outlook: gross profit growth of 12.5% to 14.0% and adjusted diluted EPS of $13.55 to $13.75. The outlook assumes no significant change in the macroeconomic environment.",
     "facts": [
-     "P4",
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "Incentives from our largest partners are significant and changes in the incentive requirements, which occur regularly, could impact our results of operations to the extent we are unable to effectively shift our focus and efficiently respond to them.",
-     "Purchases from Microsoft and TD Synnex accounted for approximately 32% and 12%, respectively, of our aggregate purchases in 2025."
+     "For the full year 2026, we are raising our gross profit growth expectations to be between 12.5% to 14.0% and expect gross margin to be approximately 21.5%.",
+     "We now expect our Adjusted diluted earnings per share to be between $13.55 and $13.75."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4",
-    "claim": "Condition: hardware growth depends on supply, and the global memory chip shortage is currently limiting supply and raising prices.",
+    "basis": "The figures are stated in F1 and F3. The funding link is inferred.",
+    "claim": "Sales growth is funded by working capital and debt. In the nine months to September 30, 2026, receivables increased by 1,944,293 and accounts payable by 1,680,390 (cash flow table in thousands), and long-term debt rose to 1,498,886 from 1,361,327 (balance sheet in thousands). For growth to continue, financing and collections must stay available.",
     "facts": [
-     "P4"
+     "F3",
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "A significant deterioration in our ability to collect on accounts receivable could also impact the cost or availability of financing under our accounts receivable securitization program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are stated. The causal link between the lower share count and the higher EPS growth is inferred.",
+    "claim": "Per-share growth is helped by a smaller share count. Diluted shares were 29,844 in Q3 2026 versus 31,536 a year earlier (in thousands), and repurchases were 225,032 in the nine months (table in thousands). Adjusted diluted EPS rose 34% while adjusted net earnings rose 28%. Continued buybacks would need continued cash or borrowing.",
+    "facts": [
+     "F2",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Diluted earnings per share for the quarter was $0.74, down 54% year to year, and Adjusted diluted earnings per share was $3.59, up 34% year over year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4.",
+    "claim": "Growth mix is pressuring gross margin. Gross margin fell 30 basis points to 21.4% in Q3 2026 because hardware, which carries lower margins, took a larger share of net sales. Profit growth depends on gross profit growing faster than operating costs.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The contraction was primarily driven by a higher mix of hardware net sales, which carry lower gross margins, compared to the same period in the prior year."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited items; the exact start date is not given",
+    "claim": "The company started a Voluntary Separation Program in the third quarter of 2026. Third-quarter severance and restructuring expenses, net were 25,660 (table in thousands), against 5,390 in the prior-year quarter.",
+    "facts": [
+     "P4",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "an initiative to simplify operations and align resources with strategic priorities"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release",
+    "claim": "With its third-quarter results the company raised its full-year 2026 outlook. It now expects Adjusted diluted EPS of $13.55 to $13.75.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We now expect our Adjusted diluted earnings per share to be between $13.55 and $13.75."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement",
+    "claim": "In the nine months ended September 30, 2026 the company repurchased common stock for 225,032 (table in thousands), against 151,118 in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repurchases of common stock | (225,032) | (151,118)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Balance sheet and cash flow figures are stated. The financing-access mechanism is stated in the risk factor. The link to current conditions is inferred.",
+    "claim": "Working capital is absorbing large amounts of financing: accounts receivable rose to 7,383,646 (table in thousands) from 5,516,984 at year-end, while nine-month operating cash flow was 148,549 against 150,057 a year earlier.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "A significant deterioration in our ability to collect on accounts receivable could also impact the cost or availability of financing under our accounts receivable securitization program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and the income statement. The point that the charge reflects better acquired-business performance is inferred, not stated.",
+    "claim": "GAAP earnings are volatile because of acquisition earnout revaluations and restructuring: third-quarter earnings from operations fell to 68,691 from 93,067 (table in thousands). APAC reported an operating loss, with a 36,875 earnout fair-value change in APAC.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "The decrease in earnings from operations was primarily attributable to higher earnout valuation adjustments compared to the prior-year period, as well as higher severance and restructuring costs in the current period, including costs associated with the Company\u2019s voluntary separation program initiated in the third quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The margin contraction and shortage are stated in the 10-Q. How much they affect results is not quantified in the evidence.",
+    "claim": "Growth is hardware-led and carries lower margin, and the supply chain is exposed to a memory chip shortage: gross margin contracted to 21.4% in the third quarter.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The contraction was primarily driven by a higher mix of hardware net sales, which carry lower gross margins, compared to the same period in the prior year.",
+     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Concentration and risk language are stated in the 10-K, which covers 2025. Current-year effects are not shown.",
+    "claim": "The company depends on a few partners with easily terminable arrangements and changing incentives. Microsoft products were about 17% of 2025 net sales, and partner program changes already affected results.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "During 2025, sales of Microsoft products accounted for approximately 17% of our consolidated net sales.",
+     "We typically do not have long-term contracts with our vendor partners.",
+     "Recent changes in incentives for cloud-based solutions impacted our results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The outlook and its assumptions are stated in the release. The risk of a miss is inferred.",
+    "claim": "The raised 2026 outlook rests on assumptions that no further severance, restructuring or transformation costs occur and that the macro environment does not change significantly. The company expects Adjusted diluted EPS between $13.55 and $13.75.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Insight raises full-year 2026 outlook"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are stated in the statements. How the buybacks were funded is inferred from the cash flow and balance sheet.",
+    "claim": "Capital return and interest costs lean on borrowed funds: nine-month share repurchases were 225,032 (table in thousands) against operating cash flow of 148,549. Net interest expense was 73,165 against 61,274 a year earlier, and long-term debt was 1,498,886.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Figures are stated in the cited reconciliation. The link between the charge and APAC performance is inferred, because the earnout terms are not in the packet.",
+    "claim": "What drove the 36,875 (table in thousands) change in fair value of APAC earnout liabilities in the third quarter, and how much earnout liability is left to revalue? The charge turned APAC into a $22.3 million operating loss, or (18.6)% of net sales, while adjusted APAC earnings stayed positive.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Decreased by more than 100% in APAC, year to year, to a loss of $22.3 million, or (18.6)% of net sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet and cash flow figures are stated. The collectability risk is inferred, and the packet gives no aging or concentration data.",
+    "claim": "Is the large build in receivables (7,383,646 against 5,516,984, table in thousands) collectible and sustainable, given that the allowance fell from 48,064 to 26,258 (table in thousands) and operating cash flow of 148,549 was slightly below the prior-year 150,057 despite higher net earnings?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Accounts receivable, net of allowance for doubtful accounts of $26,258 and $48,064, respectively"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The shortage and the hardware growth are stated. The price versus volume split is not given, so the link is inferred.",
+    "claim": "How much of the 32% hardware net sales growth reflects higher memory-driven pricing, volume, or pull-forward demand, and how much of the larger inventory (267,240 against 160,648, table in thousands) is held against possible further price rises?",
+    "facts": [
+     "P4",
+     "P6",
+     "F1"
     ],
     "quotes": [
      "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
@@ -1420,78 +1470,19 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Condition: growth must keep being financed through working capital. Accounts receivable used (1,944,293) and accounts payable supplied 1,680,390 (table in thousands). Operating cash flow was 148,549, against 150,057 a year earlier, even though net earnings were higher.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1, F2 and P4",
-    "claim": "Long-term debt rose to 1,498,886 from 1,361,327, and nine-month net interest expense rose to 73,165 from 61,274 (tables in thousands). Management expects rates to stay above historical levels.",
-    "facts": [
-     "F1",
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "Interest rates are expected to hold steady and continue to remain higher than historical rates through the remainder of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2, F3 and P4",
-    "claim": "Per-share driver: share repurchases of (225,032) (table in thousands) cut diluted shares to 29,844 from 31,536 (thousands), which partly offset lower net earnings in EPS.",
-    "facts": [
-     "F3",
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "Diluted earnings per share decreased 54% year to year, primarily as a result of a decrease in net earnings, partially offset by a lower number of dilutive shares outstanding in the third quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Counter: software is not growing. North America software sales were flat in the quarter and fell (14)% over nine months, to 849,759 from 983,556 (table in thousands), as on-premise licenses move to cloud offerings reported net in services.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Software net sales remained relatively flat compared to the prior-year period, as growth in software demand was offset by the continued migration of certain on-premise software solutions to cloud solutions, which are reported within services net sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Condition: business IT spending must hold up, because the company says any broad-based cut would hurt its results.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Weak economic conditions generally or any broad-based reduction in IT spending would adversely affect our business, operating results and financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; the guidance figures themselves were omitted",
-    "claim": "The company raised its full-year 2026 outlook.",
+    "basis": "The guidance and year-to-date figures are stated. The implied Q4 requirement is not computed here.",
+    "claim": "How much of the raised full-year Adjusted diluted EPS outlook of $13.55 to $13.75 depends on fourth-quarter results, and how far will GAAP EPS differ from it? Nine-month Adjusted diluted EPS was $10.32 and GAAP diluted EPS was $4.28, and management gives no GAAP reconciliation for the outlook.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Insight raises full-year 2026 outlook"
+     "Accordingly, the Company is unable to provide a reconciliation of GAAP to non-GAAP Adjusted diluted earnings per share for the full year 2026 forecast."
     ],
     "support": "supported"
-   }
-  ],
-  "material_events": [
+   },
    {
-    "basis": "Stated in P6 and P4; the expense amounts come from F2.",
-    "claim": "The company started a voluntary separation program in the third quarter, and quarterly severance and restructuring expenses, net rose to 25,660 from 5,390 (table in thousands).",
+    "basis": "The existence and Q3 amount are stated. Total cost and savings are not in the packet.",
+    "claim": "What is the total cost, expected savings and timing of the Voluntary Separation Program, and will more charges follow the third-quarter severance and restructuring expense of 25,660 (table in thousands)?",
     "facts": [
      "P6",
      "P4",
@@ -1503,431 +1494,43 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the P6 release headline.",
-    "claim": "The company published its third-quarter results and raised its full-year outlook.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Insight raises full-year 2026 outlook"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the P6 reconciliation tables and narrative.",
-    "claim": "In the third quarter, the APAC segment recorded a 36,875 change in fair value of earnout liabilities (table in thousands), and APAC GAAP earnings from operations were $(22,302).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "primarily attributable to higher earnout valuation adjustments compared to the prior-year period"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and P1.",
-    "claim": "Insight acquired Inspire11, a technology delivery firm with advisory, data and AI expertise.",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "Our North America organic business excludes Infocenter, which we acquired on May 1, 2024 and excludes Inspire11, which we acquired on October 1, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and P1.",
-    "claim": "Insight acquired Sekuro, a cybersecurity and digital resilience provider that expands its APAC capabilities.",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "Our APAC organic business excludes Sekuro, which we acquired on October 31, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3; the amounts come from F3.",
-    "claim": "In the nine months ended Sep. 30, 2025, the company repaid Convertible Notes principal of (333,091) and paid a warrants settlement of (221,968) (table in thousands), funded largely through ABL borrowings.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "primarily resulting from the cash settlement of the Convertible Notes and a portion of the Warrants in 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the F3 cash flow statement.",
-    "claim": "The company repurchased common stock for (225,032) in the nine months ended Sep. 30, 2026, compared with (151,118) a year earlier (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Repurchases of common stock"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 as a current condition.",
-    "claim": "The company says its supply chain is currently affected by a global memory chip shortage that has lowered supply and raised prices.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in F3, P4 and P6.",
-    "claim": "Acquisition earnout revaluations are a large and growing charge against GAAP earnings: the nine-month non-cash earnout revaluation was 64,164 versus 19,184 (table in thousands). In Q3 2026 the APAC segment's GAAP EFO was $(22,302) after a 36,875 change in fair value of earnout liabilities.",
-    "facts": [
-     "F3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Net change on revaluation of earnout liabilities | 64,164 | 19,184",
-     "In the third quarter of 2026, the decrease in net earnings was primarily driven by higher acquisition-related earnout revaluation adjustments, as well as higher severance and restructuring costs associated with the VSP noted above, partially offset by an increase in gross profit."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and F2.",
-    "claim": "GAAP earnings from operations fell 26% to $68.7 million in Q3 2026 from $93.1 million, while gross profit grew.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "Earnings from operations decreased 26%, year to year, to $68.7 million in the third quarter of 2026 compared to $93.1 million in the third quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F2, P4 and P6; the delivery-capacity effect is inferred.",
-    "claim": "Severance and restructuring expense rose to 25,660 in Q3 2026 from 5,390 (table in thousands). The 10-Q links this to a Voluntary Separation Program.",
-    "facts": [
-     "F2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "an initiative to simplify operations and align resources with strategic priorities"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance and flow figures stated in F1 and F3; the risk mechanism is stated in P2.",
-    "claim": "Working capital is absorbing cash. Accounts receivable rose to 7,383,646 from 5,516,984 (table in thousands), and nine-month operating cash flow was 148,549 versus 150,057 even though net earnings were higher.",
-    "facts": [
-     "F1",
-     "F3",
-     "P2"
-    ],
-    "quotes": [
-     "A significant deterioration in our ability to collect on accounts receivable could also impact the cost or availability of financing under our accounts receivable securitization program."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1, F2 and P4.",
-    "claim": "Debt and interest cost are rising. Long-term debt grew to 1,498,886 from 1,361,327 and nine-month net interest expense rose to 73,165 from 61,274 (tables in thousands).",
-    "facts": [
-     "F1",
-     "F2",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Interest rates are expected to hold steady and continue to remain higher than historical rates through the remainder of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1 and F3; the leverage effect is inferred from those balances.",
-    "claim": "Share repurchases of 225,032 (table in thousands) in nine months, funded alongside net ABL borrowing, coincided with lower stockholders' equity of 1,568,026 versus 1,648,874.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Repurchases of common stock | (225,032) | (151,118)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and P6.",
-    "claim": "Q3 2026 gross margin contracted about 30 basis points to 21.4% on a higher hardware mix, which runs against the services-led solutions-integrator strategy.",
-    "facts": [
-     "P4",
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "The contraction was primarily driven by a higher mix of hardware net sales, which carry lower gross margins, compared to the same period in the prior year."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P4, P2 and F1.",
-    "claim": "The 10-Q says a global memory chip shortage is affecting the supply chain. Inventories rose to 267,240 from 160,648 (table in thousands).",
-    "facts": [
-     "P4",
-     "F1",
-     "P2"
-    ],
-    "quotes": [
-     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing.",
-     "There can be no assurance that we will be able to avoid losses related to inventory obsolescence on these products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1, P2, P3 and P6.",
-    "claim": "The company depends on Microsoft and partner incentive programs. Microsoft products were about 17% of 2025 net sales, and Microsoft purchases were 32% of 2025 purchases.",
-    "facts": [
-     "P1",
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "During 2025, sales of Microsoft products accounted for approximately 17% of our consolidated net sales.",
-     "Recent changes in incentives for cloud-based solutions impacted our results."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2.",
-    "claim": "Vendor partners also compete with the company by selling directly to large enterprise and corporate customers.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "Many of our manufacturer and publisher partners are also our competitors, as many sell directly to business customers, particularly large enterprise and corporate customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in F2; the 2026 link to earnouts is inferred from P3.",
-    "claim": "Tax expense is high relative to pre-tax earnings: Q3 2026 income tax expense was 22,081 on earnings before income taxes of 44,242 (table in thousands). In 2025 the tax rate rose on non-deductible earnout and warrant losses.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "The increase in the tax rate in 2025 as compared to 2024 was primarily due to the non-deductibility of net losses related to both the fair value adjustments associated with the warrant settlement liabilities and the revaluation of earnout liabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1, F3, P2 and P4.",
-    "claim": "Foreign currency moves weighed on equity and cash. Accumulated other comprehensive loss widened to (49,529) from (36,400), and the FX effect on cash was (8,398) (tables in thousands).",
-    "facts": [
-     "F1",
-     "F3",
-     "P2"
-    ],
-    "quotes": [
-     "While we currently engage in certain hedging activities to limit our exposure to currency fluctuations, we cannot predict with precision the effect of future exchange-rate fluctuations, and significant rate fluctuations could have a material adverse effect on our business, financial condition and results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6; the risk of revision is inferred from its stated assumptions.",
-    "claim": "The raised 2026 outlook rests on assumptions that exclude about $83.4 million of intangibles amortization and assume no significant macroeconomic change.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Insight raises full-year 2026 outlook",
-     "This outlook excludes acquisition-related intangibles amortization expense of approximately $83.4 million, excludes non-cash stock-based compensation expense and assumes no acquisition or integration related expenses, transformation or severance and restructuring expenses, net, no significant change in our debt instruments, and no significant change in the macroeconomic environment, whether due to tariffs or otherwise."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and P4.",
-    "claim": "Public sector sales depend on government spending policies and shutdowns.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "Our sales to public sector clients are also impacted by government spending policies, government shutdowns, budget priorities and revenue levels."
-    ],
-    "support": "supported"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "inferred from the segment reconciliation in P6 and the earnout revaluation line in F3; the earnout terms are not in the packet",
-    "claim": "What drove the APAC change in fair value of earnout liabilities of 36,875 in the third quarter and 41,374 over nine months (tables in thousands), which turned APAC GAAP earnings from operations to $(22,302)?",
+    "basis": "The rates are stated. The explanation is inferred from the prior-year 10-K and is not confirmed for 2026.",
+    "claim": "What caused the 49.9% third-quarter effective tax rate, and can the full year reach the approximately 25.5% assumed in the outlook?",
     "facts": [
      "P6",
-     "F3",
      "P3"
     ],
     "quotes": [
-     "The decrease in earnings from operations was primarily attributable to higher earnout valuation adjustments compared to the prior-year period",
-     "Our APAC organic business excludes Sekuro, which we acquired on October 31, 2025."
+     "at an effective tax rate of 49.9%",
+     "an effective tax rate of approximately 25.5% for the full year"
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from balance sheet and cash flow figures; no rollforward is in the packet",
-    "claim": "Why did the allowance for doubtful accounts fall to $26,258 from $48,064 while accounts receivable rose to 7,383,646 from 5,516,984 (table in thousands)?",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Accounts receivable, net of allowance for doubtful accounts of $26,258 and $48,064, respectively"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred by comparing the quarterly figure in P6 with the nine-month figure in F3; the first-half statement is not in the packet",
-    "claim": "How did operating cash flow behave in the first half, given third-quarter operating cash flow of $128.4 million against a nine-month total of 148,549 (table in thousands)?",
-    "facts": [
-     "P6",
-     "F3"
-    ],
-    "quotes": [
-     "Cash flows provided by operating activities were $128.4 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 headline; the guidance figures were omitted from the excerpt",
-    "claim": "What are the figures and assumptions of the raised full-year outlook?",
+    "basis": "The risk wording is stated. The transition details are not in the packet.",
+    "claim": "What is the status and timing of the Chief Executive Officer transition cited as a risk, and does it affect execution of the strategy?",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Insight raises full-year 2026 outlook"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P6 that VSP costs are included; total and savings are not given",
-    "claim": "What total cost and expected savings does the voluntary separation program carry beyond third-quarter severance and restructuring expenses of 25,660 (table in thousands)?",
-    "facts": [
-     "F2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "costs associated with the Company\u2019s voluntary separation program initiated in the third quarter of 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 as a current and possible future impact; no quantification is given",
-    "claim": "How much will the global memory chip shortage constrain hardware supply or affect pricing and margins?",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Currently, our supply chain is impacted by the global memory chip shortage, which has resulted in lower overall supply and increased pricing and may result in further constrained overall supply and upward pressure on pricing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred; repurchase outflow is in F3 but the authorization is not in the packet",
-    "claim": "How much repurchase authorization remains after repurchases of common stock of (225,032) (table in thousands) in nine months?",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Repurchases of common stock"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the 2025 explanation in P3 applied to 2026 figures in F2; the 2026 tax explanation is not in the packet",
-    "claim": "Did non-deductible earnout revaluation losses drive third-quarter income tax expense of 22,081 against earnings before income taxes of 44,242 (table in thousands)?",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "The increase in the tax rate in 2025 as compared to 2024 was primarily due to the non-deductibility of net losses related to both the fair value adjustments associated with the warrant settlement liabilities and the revaluation of earnout liabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred; the acquisition date precedes the comparison quarter but the APAC split is not in the excerpt",
-    "claim": "How much of APAC third-quarter net sales of $120,036 versus $58,785 (table in thousands), a 104% rise, came from Sekuro rather than organic growth?",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "Our APAC organic business excludes Sekuro, which we acquired on October 31, 2025."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "inferred from combining P3 and P4; neither item links the two directly",
-    "claim": "How exposed are EMEA Middle East agency transactions to international conflicts including the war in Iran?",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "We acted as a paid pass-through agent in transactions for certain clients and their vendors that expanded into the Middle East beginning in 2025.",
-     "Additionally, international conflicts, including the war in Iran, may impact supply chain and increase inflation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred; balances are shown but facility capacity is not in the packet",
-    "claim": "What ABL availability and covenant headroom remain with long-term debt at 1,498,886 versus 1,361,327 (table in thousands)?",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Borrowings on ABL revolving credit facility"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated concentration in P1 and incentive risk in P2; current-year changes are not disclosed in the packet",
-    "claim": "Have Microsoft partner program or incentive terms changed in the current year, given Microsoft products were about 17% of net sales?",
-    "facts": [
-     "P1",
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "During 2025, sales of Microsoft products accounted for approximately 17% of our consolidated net sales."
+     "our ability to manage the business during the transition of our new Chief Executive Officer"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "NSIT",
- "upside": -0.2634185851777585,
+ "upside": -0.3100055625934037,
  "valuation": null,
- "value_base": 98.69617027641578,
- "value_bear": 79.08626660459178,
- "value_bull": 134.93022138823218,
+ "value_base": 103.80276807691567,
+ "value_bear": 80.80277035481681,
+ "value_bull": 137.90272065983663,
  "value_per_filed_share": {
-  "base": 98.69617027641578,
-  "bear": 79.08626660459178,
-  "bull": 134.93022138823218
+  "base": 103.80276807691567,
+  "bear": 80.80277035481681,
+  "bull": 137.90272065983663
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -13.2 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -12.1 points a year against the required return over 3 years"
 }
