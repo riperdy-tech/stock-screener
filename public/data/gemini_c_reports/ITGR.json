@@ -1,103 +1,198 @@
 {
- "alpha_pts": -13.959263097418159,
+ "alpha_pts": -14.726303212790956,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 119,
- "claims_supported": 116,
- "date": "2026-11-16T12:59:29Z",
+ "based_on": {
+  "accepted": "2026-10-29T12:05:21.000Z",
+  "accepted_utc": "2026-10-29T16:05:21Z",
+  "accession": "0001114483-26-000031",
+  "decision_time": "2026-11-22T04:04:59Z",
+  "form": "10-Q",
+  "period": "2026-10-02"
+ },
+ "claims": 68,
+ "claims_supported": 63,
+ "date": "2026-11-22T04:04:59Z",
  "decided": {
   "flags": [
+   "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 14 of 14",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 1000: share_count_change_unexplained: shares 35,594,000 to 33,997,337 (-1,596,663); issuing and buying back at 126.97 (half to double) explains -787,588 to -196,897",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
    "run 3000: base_year_not_representative",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 13 of 13"
+   "run 3000: quotes_verified: 8 of 8",
+   "run 3000: share_count_change_unexplained: shares 35,594,000 to 33,997,337 (-1,596,663); issuing and buying back at 126.97 (half to double) explains -787,588 to -196,897",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0633 (equity return r 0.0838), F 10",
-  "run_gap": 0.045648560566662215,
+  "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0627 (equity return r 0.0829), F 10",
+  "run_gap": 0.04323298308289527,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [
       {
-       "amount": 46681000.0,
-       "printed": 46681,
+       "amount": 46700000.0,
+       "printed": 46.7,
        "quotes": [
         {
-         "id": "F3",
-         "quote": "Debt conversion inducement expense | 0 | 46,681"
+         "id": "P3",
+         "quote": "Other loss, net for 2025 includes $46.7 million of debt conversion inducement expense"
         }
        ],
        "quotes_given": 1,
-       "scale": "thousands",
+       "scale": "millions",
        "sign": "charge",
-       "what": "Debt conversion inducement expense on the 2028 convertible note exchange, recorded in Other loss, net in 2025"
+       "what": "Debt conversion inducement expense on the partial exchange of the 2028 Convertible Notes, recorded in Other loss, net (non-operating, non-recurring)"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -32839000.0,
+      "excess_cash_before": 17161000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001114483-26-000031",
+        "amount": 0.0,
+        "end": "2026-10-02",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001114483-26-000031",
+        "amount": 50000000.0,
+        "end": "2026-10-02",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 50000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "accn": "0001114483-26-000031",
+        "amount": 0.0,
+        "end": "2026-10-02",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinessesNetOfCashDivested"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 35,594,000 to 33,997,337 (-1,596,663); issuing and buying back at 126.97 (half to double) explains -787,588 to -196,897"
+      ],
+      "gross_events": 50000000.0,
+      "interim_end": "2026-10-02",
+      "market_cap": 4316641792.0,
+      "net_effect_on_excess_cash": -50000000.0,
+      "shares": {
+       "after": 33997337.0,
+       "before": 35594000.0,
+       "change": -1596663.0,
+       "explained_range": [
+        -787587.6191226274,
+        -196896.90478065686
+       ],
+       "interim": 33997337.0,
+       "price_used": 126.97,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 17161000.0,
+     "excess_cash_after": -32839000.0,
      "excess_cash_before": 17161000.0,
-     "k0_after": 49884653.231726915,
+     "k0_after": 49865653.231726915,
      "k0_before": 96565653.23172691,
      "k0_interest": 43206000.0,
-     "one_offs_charge": 46681000.0,
+     "one_offs_charge": 46700000.0,
      "one_offs_gain": 0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
-     "x0_after": 193306350.0285617,
+     "x0_after": 193321930.8285872,
      "x0_before": 155025964.45007434
     },
     "confidence": "low",
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2632620592.3409433,
-     "seam_ratio": 1.0357434524208893,
-     "tv_share": 0.5392446371003077,
-     "wedge_rate_5": 0.008406415830927959
+     "equity_value": 2502784330.4599924,
+     "seam_ratio": 1.0151781953648704,
+     "tv_share": 0.5193543781362565,
+     "wedge_rate_5": 0.007191157381949238
     },
     "flags": [
+     "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 14 of 14"
+     "quotes_verified: 9 of 9",
+     "share_count_change_unexplained: shares 35,594,000 to 33,997,337 (-1,596,663); issuing and buying back at 126.97 (half to double) explains -787,588 to -196,897",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
-     "capex_to_revenue": 0.055,
+     "capex_to_revenue": 0.052,
      "fade_years": 8,
-     "long_run_op_margin": 0.115,
+     "long_run_op_margin": 0.11,
      "op_margin": [
-      0.068,
-      0.082,
+      0.07,
+      0.08,
       0.095,
       0.105,
       0.11
      ],
-     "return_on_new_investment_long_run": 0.16,
+     "return_on_new_investment_long_run": 0.15,
      "rev_growth": [
-      -0.027,
+      -0.025,
       0.03,
       0.05,
-      0.055,
-      0.055
+      0.05,
+      0.045
      ],
      "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0633 (equity return r 0.0838), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0627 (equity return r 0.0829), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 3,
-     "kept": 116
+     "dropped_unsupported": 5,
+     "kept": 63
     },
     "ranges": {
      "long_run_op_margin": [
-      0.1,
-      0.13
+      0.095,
+      0.125
      ],
      "rev_growth_y3": [
       0.02,
-      0.08
+      0.07
      ],
      "terminal_growth": [
       0.03,
@@ -109,7 +204,7 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0579"
+        "quote": "capital expenditure / revenue 0.0579"
        },
        {
         "id": "F3",
@@ -117,153 +212,133 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Pooled capex over the last five years is 5.8% of revenue, and nine-month 2026 capex of $67.2M is about 5.0% of sales; I use 5.5%."
+      "why": "The pooled five-year ratio is 5.8%, and nine-month 2026 capex of 67,181 on sales of 1,353,351 is about 5.0%. 5.2% is chosen as a middle value."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "The CDMO industry has traditionally been highly fragmented amongst several hundred companies"
-       },
-       {
-        "id": "P2",
-        "quote": "We have long-term supply agreements with a majority, but not all, of our large customers"
+        "id": "REC",
+        "quote": "2020-12-31 | $1,073.4 million | -0.1468 | 0.1124"
        }
       ],
-      "quotes_given": 2,
-      "why": "I use an 8-year fade. The company operates in a fragmented industry where few rivals match its breadth, which supports a moderate competitive advantage that erodes slowly. Most large customers have long-term supply agreements, but many lack minimum purchase levels, so growth and margins should converge to the long-run level over several years rather than immediately."
+      "quotes_given": 1,
+      "why": "Eight years allows growth to fade gradually from the mid single digits. The company's revenue and margin have held up through past shocks, such as 2020, so a very long fade is not needed."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2025-12-31 | $1,853.6 million | 0.0798 | 0.1194"
-       },
-       {
-        "id": "P2",
-        "quote": "In 2025, our top three customers collectively accounted for approximately 49% of our revenues."
+        "quote": "2024-12-31 | $1,716.6 million | 0.1035 | 0.1213"
        }
       ],
-      "quotes_given": 2,
-      "why": "Margins have run 10-13% in recent years, with 2025 at 11.9%. I set the long-run level slightly below that, at 11.5% after amortization of acquired intangibles, because of the pricing pressure and the three customers (49% of sales) with limited minimum purchase commitments."
+      "quotes_given": 1,
+      "why": "Filed history shows GAAP margins mostly around 11 to 12% in the stable years since 2017, with 2022 as a trough. About 11% is chosen, with customer pricing pressure and intangible amortization limiting upside."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P6",
-        "quote": "GAAP operating income from continuing operations totaled $28 million, a decrease of $28 million or 50%."
-       },
-       {
-        "id": "P2",
-        "quote": "we expect customer pressure for continued price reductions in future periods"
+        "id": "F2",
+        "quote": "Operating income | 28,209 | 56,439 | 94,606 | 165,329"
        }
       ],
-      "quotes_given": 2,
-      "why": "Q3 GAAP operating income fell 50% on lower gross profit and higher SG&A and RD&E, so year 1 is set near 6.8%. Margins rebuild through volume leverage over years 2-5, but not fully, given customer price pressure and elevated ERP and restructuring costs."
+      "quotes_given": 1,
+      "why": "The nine-month 2026 GAAP margin is about 7.0% (94,606 on 1,353,351), well below 2025. I assume a gradual recovery as volume returns and restructuring, ERP and merger charges fade, but not back to 2025 quickly."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0633."
-       },
-       {
-        "id": "REC",
-        "quote": "Base year: return on tangible capital 0.2484"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0627."
        }
       ],
-      "quotes_given": 2,
-      "why": "The current return on tangible capital of 24.8% is flattered by acquired intangibles. New investment should earn well above the 6.3% break-even but below that level, given pricing pressure and capacity-heavy manufacturing, so I use 16%."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is high at 0.2484 because acquired intangibles are excluded. New investment is assumed to earn a lower return, comfortably above the 0.0627 break-even, given the competitive CDMO market and pricing pressure."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Sales decreased 3.9% to $450 million. Organic sales decreased 2.2%."
+        "quote": "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products."
        },
        {
         "id": "P3",
         "quote": "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
-       },
-       {
-        "id": "P1",
-        "quote": "We currently expect Portable Medical sales to wind down with the final sales and market exit occurring in 2026."
        }
       ],
-      "quotes_given": 3,
-      "why": "Nine-month 2026 sales are down 2.0% and Q3 is down 3.9%. Lower adoption of customer new products and the Portable Medical exit (final sales in 2026) drive year 1 to about -3%. Year 2 onward recovers to mid-single digits as the drag ends and the end markets grow, but the company gives no outlook, so this is an estimate."
+      "quotes_given": 2,
+      "why": "Year 1 is negative: nine-month 2026 sales are down 2.0% and Q3 Cardio & Vascular is falling on weak customer product adoption. Growth recovers to the mid single digits as these programs stop dragging and CRM&N keeps growing. The Portable Medical drag also ends after 2026."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Cost of equity r 0.0829; long-run nominal growth anchor g_anchor 0.0375."
        }
       ],
       "quotes_given": 1,
-      "why": "Growth in implantable and interventional medical device components supports growth near the nominal anchor, but I set it a little below the anchor given customer concentration and in-sourcing risk."
+      "why": "Long-run growth is set a little below the code's nominal growth anchor. The company serves structurally growing medtech markets but faces customer concentration and price pressure."
      }
     },
     "risks": [
      {
-      "bear_value": 0.09,
+      "bear_value": 0.085,
       "input_hit": "long_run_op_margin",
-      "risk": "The new-product adoption shortfall persists, or a major OEM in-sources or dual sources, so the volume recovery does not happen and fixed-cost under-absorption continues"
+      "risk": "Weak new-product adoption persists and fixed-cost deleverage continues, so the margin never recovers"
      },
      {
-      "bear_value": 0.0,
+      "bear_value": 0.01,
       "input_hit": "rev_growth",
-      "risk": "Prolonged weak demand and customer price cuts keep growth low in the middle years"
+      "risk": "Loss or reduced volume at one of the three customers that make up about half of sales, or insourcing and dual sourcing"
      },
      {
       "bear_value": 0.1,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "High leverage (3.3x) constrains growth investment and the standalone business is weakened if the KKR merger fails"
+      "risk": "Higher leverage and a lower growth base leave less room for growth and make new investment less profitable"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.1,
+      "long_run_op_margin": 0.095,
       "rev_growth": [
-       -0.057,
+       -0.05500000000000001,
        -3.469446951953614e-18,
        0.02,
-       0.024999999999999998,
-       0.024999999999999998
+       0.02,
+       0.014999999999999996
       ],
       "terminal_growth": 0.03
      },
      "bull": {
-      "long_run_op_margin": 0.13,
+      "long_run_op_margin": 0.125,
       "rev_growth": [
-       0.002999999999999999,
-       0.06,
-       0.08,
-       0.08499999999999999,
-       0.08499999999999999
+       -0.0049999999999999975,
+       0.05,
+       0.07,
+       0.07,
+       0.065
       ],
       "terminal_growth": 0.04
      }
     },
     "situation": {
-     "base_year_representative": "unclear",
+     "base_year_representative": "no",
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Debt of $1.2B is 3.3x adjusted EBITDA, and the KKR take-private would likely reset the capital structure; the packet does not say how the debt will be treated."
+      "why": "Debt of $1.2 billion is 3.3x adjusted EBITDA and rising while EBITDA falls, and a KKR buyout would likely reset the capital structure, so the level cannot be judged."
      },
-     "margin_position": "The GAAP operating margin is falling from 11.9% in 2025 to about 7% in 2026. Sales on three customer new products (two electrophysiology, one neuromodulation) are lower than expected, cost of sales is not falling with sales, and ERP, restructuring and impairment charges are rising. This is volume-driven under-absorption of a fixed manufacturing base, not a commodity cycle. The 2025 margin sat near the company's 2018-2025 range of roughly 10-13%.",
+     "margin_position": "The margin is far below the 2025 level and below the long-run median. Q3 2026 GAAP operating margin was about 6.3% (28,209 on 449,661) against 11.9% in 2025. Sales fell on weak customer new-product adoption (two Electrophysiology products and one Neuromodulation product) and the Portable Medical exit. Cost of sales rose while sales fell, which points to fixed-cost deleverage. ERP, restructuring, merger and other charges also sit inside GAAP operating income, and about $64M a year of intangible amortization depresses the margin as well.",
      "tax_rate_representative": {
-      "answer": "yes",
-      "why": "The 2025 effective rate was 18.0%, the same as 2024, though Pillar 2 minimum tax is creeping up and the 2026 nine-month rate is lower on discrete items."
+      "answer": "unclear",
+      "why": "The 18.0% filed rate was stable in 2024 and 2025, but the 9-month 2026 rate was about 10% (6,065 on 61,154) and Pillar 2 is rising, so the sustainable rate is uncertain."
      },
-     "why": "The 2025 base year had 8% growth and a margin near the long-run range, but 2026 shows a clear break: nine-month sales are down 2.0% and operating income is down 42.8%. The 2025 pretax income also carries a $46.7M non-recurring debt conversion inducement charge. The base year is therefore a fair margin anchor but overstates the near-term starting point."
+     "why": "2025 was a peak-like year, with sales up 8% on new-product ramps and an 11.9% margin. 2026 is running about 2% lower on sales and about 7% on operating margin. Year 1 is therefore set from the 2026 run-rate rather than from 2025. A partial recovery is assumed because the program drag and one-off charges should fade, but the pending KKR merger means there is no guidance."
     },
-    "value_at_old_defaults": 48.377214693435434,
+    "value_at_old_defaults": 48.93389610275489,
     "values": {
-     "base": 79.85064037138102,
-     "bear": 58.429983802210245,
-     "bull": 113.0986690470409
+     "base": 78.08015944135175,
+     "bear": 57.073150251199,
+     "bull": 104.35535664496362
     }
    },
    "3000": {
@@ -275,18 +350,88 @@
        "quotes": [
         {
          "id": "P3",
-         "quote": "$46.7 million of debt conversion inducement expense recorded in 2025"
+         "quote": "Other loss, net for 2025 includes $46.7 million of debt conversion inducement expense, which was recognized in the first quarter of 2025"
         }
        ],
        "quotes_given": 1,
        "scale": "millions",
        "sign": "charge",
-       "what": "Debt conversion inducement expense in Other loss, net, from the 2028 convertible note exchange in Q1 2025; it does not recur."
+       "what": "Debt conversion inducement expense from the partial exchange of the 2028 Convertible Notes, recorded in Other loss, net in 2025"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": -32839000.0,
+      "excess_cash_before": 17161000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001114483-26-000031",
+        "amount": 0.0,
+        "end": "2026-10-02",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001114483-26-000031",
+        "amount": 50000000.0,
+        "end": "2026-10-02",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "read_amount": 50000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "accn": "0001114483-26-000031",
+        "amount": 0.0,
+        "end": "2026-10-02",
+        "filed": "2026-10-29",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:ProceedsFromDivestitureOfBusinessesNetOfCashDivested"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 35,594,000 to 33,997,337 (-1,596,663); issuing and buying back at 126.97 (half to double) explains -787,588 to -196,897"
+      ],
+      "gross_events": 50000000.0,
+      "interim_end": "2026-10-02",
+      "market_cap": 4316641792.0,
+      "net_effect_on_excess_cash": -50000000.0,
+      "shares": {
+       "after": 33997337.0,
+       "before": 35594000.0,
+       "change": -1596663.0,
+       "explained_range": [
+        -787587.6191226274,
+        -196896.90478065686
+       ],
+       "interim": 33997337.0,
+       "price_used": 126.97,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 17161000.0,
+     "excess_cash_after": -32839000.0,
      "excess_cash_before": 17161000.0,
      "k0_after": 49865653.231726915,
      "k0_before": 96565653.23172691,
@@ -295,7 +440,10 @@
      "one_offs_gain": 0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_from_latest_interim"
      ],
      "x0_after": 193321930.8285872,
      "x0_before": 155025964.45007434
@@ -304,46 +452,50 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 2756349984.15646,
-     "seam_ratio": 1.0389782358720636,
-     "tv_share": 0.4932282455000225,
-     "wedge_rate_5": 0.00815653457762253
+     "equity_value": 2612026374.162891,
+     "seam_ratio": 1.0356194785615471,
+     "tv_share": 0.49208594244171416,
+     "wedge_rate_5": 0.008567039348526333
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 13 of 13"
+     "quotes_verified: 8 of 8",
+     "share_count_change_unexplained: shares 35,594,000 to 33,997,337 (-1,596,663); issuing and buying back at 126.97 (half to double) explains -787,588 to -196,897",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
      "capex_to_revenue": 0.055,
      "fade_years": 10,
-     "long_run_op_margin": 0.115,
+     "long_run_op_margin": 0.11,
      "op_margin": [
       0.068,
       0.085,
-      0.1,
-      0.108,
-      0.113
+      0.095,
+      0.103,
+      0.108
      ],
-     "return_on_new_investment_long_run": 0.18,
+     "return_on_new_investment_long_run": 0.16,
      "rev_growth": [
-      -0.027,
+      -0.03,
       0.03,
-      0.055,
+      0.05,
       0.06,
       0.055
      ],
      "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0633 (equity return r 0.0838), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0204 and margin 0.0699, margin 0.1153 (persist), growth 0.0375, terminal RONIC 0.0627 (equity return r 0.0829), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 3,
-     "kept": 116
+     "dropped_unsupported": 5,
+     "kept": 63
     },
     "ranges": {
      "long_run_op_margin": [
-      0.095,
-      0.13
+      0.09,
+      0.125
      ],
      "rev_growth_y3": [
       0.02,
@@ -359,67 +511,51 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0579"
-       },
-       {
-        "id": "F3",
-        "quote": "Acquisition of property, plant and equipment | (67,181) | (63,555)"
+        "quote": "capital expenditure / revenue 0.0579"
        }
       ],
-      "quotes_given": 2,
-      "why": "Capex was 5.79% of revenue pooled over five years and about 4.96% in the nine months of 2026, so I use 5.5% as a sustaining and growth level."
+      "quotes_given": 1,
+      "why": "Capex was 5.0% of sales in nine months of 2026 and averaged 5.8% over the last five years. I use 5.5% to support growth and plant alignment."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "These markets are attractive to Integer because they have strong, long-term growth characteristics"
+        "quote": "The CDMO industry has traditionally been highly fragmented amongst several hundred companies"
        }
       ],
       "quotes_given": 1,
-      "why": "A 10-year fade lets growth and margin converge gradually, because the recovery from the new-product shortfall is uncertain and the markets served are long-lived."
+      "why": "The CDMO industry is fragmented and Integer has strong capabilities, but customer concentration and pricing pressure slowly erode excess returns, so I use a moderate 10-year fade."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2024-12-31 | $1,716.6 million | 0.1035 | 0.1213"
-       },
-       {
-        "id": "P2",
-        "quote": "we have reduced prices for some of our customers in recent years, and we expect customer pressure for continued price reductions in future periods"
+        "quote": "2025-12-31 | $1,853.6 million | 0.0798 | 0.1194"
        }
       ],
-      "quotes_given": 2,
-      "why": "I set the long-run margin slightly below the 2024-2025 level of about 12%. History spans 8% to 13% since 2017, and the customer price pressure and amortization of acquired intangibles in the GAAP margin argue against assuming full recovery."
+      "quotes_given": 1,
+      "why": "GAAP operating margins over the last decade ranged from about 8.5% to 12.8%, around 11% in most years. I fade to 11%, a little below the 2025 level, because customer price pressure and heavy intangible amortization persist."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P6",
         "quote": "GAAP operating income from continuing operations totaled $28 million, a decrease of $28 million or 50%."
-       },
-       {
-        "id": "F2",
-        "quote": "Operating income | 28,209 | 56,439 | 94,606 | 165,329"
        }
       ],
-      "quotes_given": 2,
-      "why": "Year 1 margin of about 6.8% follows the nine-month run rate of about 7.0%, with Q3 near 6.3%. It then recovers gradually as volumes return and ERP and restructuring charges fade, but it stays below the 2024-2025 level of about 12% for several years."
+      "quotes_given": 1,
+      "why": "The 2026 margin is about 7%, down from 11.9%, because gross profit fell while SG&A and R&D rose. I assume a gradual recovery toward about 10.8% by year 5 as volumes recover and ERP and restructuring costs fade, but GAAP amortization of acquired intangibles keeps the margin below adjusted levels."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.2484"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0633."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0627."
        }
       ],
-      "quotes_given": 2,
-      "why": "The base-year return on tangible capital is high (0.2484), but that figure is flattered by amortized intangibles and 2025 margins. Competition and price pressure should pull returns on new investment lower, though still well above the 0.0633 break-even."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is high at 0.2484 because acquired goodwill and intangibles are excluded. New investment in plants, inventory and contract assets earns less, so I set 0.16, above the 0.0627 break-even but well below the base-year return."
      },
      "rev_growth": {
       "quotes": [
@@ -433,60 +569,56 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 is negative: nine-month sales are down 2.0%, Q3 is down 3.9%, and Q4 2025 is a similar comparison. Growth then recovers as the new-product drag fades and the end markets (CRM, neuromodulation, EP, structural heart) grow, though the Portable Medical exit continues to weigh on Other Markets through 2026."
+      "why": "Year 1 is a decline of about 3%: nine-month sales are down 2.0%, Q3 is down 3.9%, and Portable Medical is exiting. Recovery to about 5-6% in years 3-5 assumes the weak new-product programs stabilize and the fragmented CDMO market and the ~$675 million backlog support growth, but the recovery is unproven."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Cost of equity r 0.0838; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "P1",
-        "quote": "These markets are attractive to Integer because they have strong, long-term growth characteristics"
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
-      "quotes_given": 2,
-      "why": "I set terminal growth just below the 3.75% long-run nominal anchor, since medtech outsourcing supports growth near nominal GDP but customer concentration and price pressure limit it."
+      "quotes_given": 1,
+      "why": "The company serves growing medtech markets such as electrophysiology, neuromodulation and structural heart, but it depends on a few large OEMs and faces insourcing and pricing pressure. I set terminal growth slightly below the nominal anchor."
      }
     },
     "risks": [
      {
       "bear_value": 0.0,
       "input_hit": "rev_growth",
-      "risk": "Loss of, or insourcing and dual sourcing by, one of the three customers that each exceed 10% of sales and total 49%; many contracts have no minimum purchase levels. Further new-product adoption shortfalls would also cut volume."
+      "risk": "New-product adoption stays weak, or a major OEM customer (Abbott, Boston Scientific or Medtronic) insources or dual-sources, so the recovery fails"
      },
      {
-      "bear_value": 0.09,
+      "bear_value": 0.085,
       "input_hit": "long_run_op_margin",
-      "risk": "Fixed-cost deleverage and price-downs keep margins near the current 6-7% level, with tariffs and raw-material cost increases not recovered from customers."
+      "risk": "Gross margin does not recover because fixed-cost under-absorption and price pressure persist"
      },
      {
-      "bear_value": 0.1,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Competition and intangible-heavy acquisitions lower the return on new investment well toward the break-even level."
+      "bear_value": 0.025,
+      "input_hit": "terminal_growth",
+      "risk": "Customer pricing pressure and consolidation cap long-run growth"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.095,
+      "long_run_op_margin": 0.09,
       "rev_growth": [
-       -0.062,
-       -0.0050000000000000044,
-       0.019999999999999997,
-       0.024999999999999994,
-       0.019999999999999997
+       -0.06,
+       -3.469446951953614e-18,
+       0.02,
+       0.029999999999999995,
+       0.024999999999999998
       ],
       "terminal_growth": 0.03
      },
      "bull": {
-      "long_run_op_margin": 0.13,
+      "long_run_op_margin": 0.125,
       "rev_growth": [
-       -0.0019999999999999983,
-       0.055,
+       0.0,
+       0.06,
        0.08,
-       0.08499999999999999,
-       0.08
+       0.09,
+       0.08499999999999999
       ],
       "terminal_growth": 0.04
      }
@@ -496,82 +628,95 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Debt of $1.185 billion is about 3.3x adjusted EBITDA and rose in 2026, and a KKR take-private would likely reset the capital structure, but the filings do not say how the debt will be treated."
+      "why": "Debt of $1.2 billion is about 3.3x adjusted EBITDA and is rising as earnings fall, and the pending KKR buyout would likely reset the capital structure in a way the packet does not describe."
      },
-     "margin_position": "The GAAP operating margin is far below the 2025 level of about 12% because 2026 sales are falling and cost of sales is not. Nine-month 2026 operating margin is about 7.0% (94.6 / 1,353.4) and Q3 is about 6.3%. Weak adoption of customer new products cuts volume, fixed capacity costs are left unabsorbed, and ERP, restructuring and other charges add cost. The margin looks depressed by company-specific problems rather than by an industry cycle.",
+     "margin_position": "The latest GAAP operating margin is far below the 2025 level of 0.1194. Nine-month 2026 operating income was 94,606 on sales of 1,353,351, about 7%, and Q3 was about 6.3%. Sales are falling and fixed manufacturing cost is not shrinking with volume. Weak OEM new-product adoption, SG&A and ERP costs and restructuring all weigh on it, and the history shows a recovery toward about 11%.",
      "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The 18.0% effective rate was stable in 2024 and 2025, but the nine-month 2026 rate is only about 9.9% (6,065 / 61,154), and management cites a Pillar 2 increase and discrete items."
+      "answer": "yes",
+      "why": "The effective rate was 18.0% in both 2024 and 2025, though nine-month 2026 tax was only about 10% of pretax income and Pillar 2 is rising."
      },
-     "why": "FY2025 had 8% growth and a 11.9% margin, but 2026 has reversed: nine-month sales are down 2.0% and operating income is down 42.8%. Year 1 therefore starts from a lower base than the filed base year. Management described the new-product shortfall as 'highly unusual', which suggests a partial recovery over time rather than a permanent reset. The pending KKR cash deal means no outlook is given, so the recovery path is uncertain."
+     "why": "The 2025 base year had an 8% sales rise on new-product ramps and a 0.1194 margin. In 2026 sales are declining and operating income is down about 43% for nine months. The 2025 pretax income also carries a $46.7 million debt conversion inducement charge. Year 1 is therefore set below the base year, with a gradual recovery."
     },
-    "value_at_old_defaults": 48.377214693435434,
+    "value_at_old_defaults": 48.93389610275489,
     "values": {
-     "base": 83.58084643333335,
-     "bear": 57.1265370617786,
-     "bull": 116.13335156054127
+     "base": 81.53037930202383,
+     "bear": 56.578757898340235,
+     "bull": 117.94022051135245
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 48.377214693435434,
-  "value_at_old_defaults_quoted": 48.377214693435434,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 48.93389610275489,
+  "value_at_old_defaults_quoted": 48.93389610275489,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 2908590170.6635017,
+ "equity_value": 2713166637.205048,
  "family": "operating",
  "far_from_price": false,
- "filed_shares": 35594000.0,
+ "filed_shares": 33997337.0,
  "flags": [
-  "Integer entered into a merger agreement with affiliates of KKR-managed investment funds. Each common share will convert into the right to receive $127 in cash. After closing, the company will be delisted from NYSE and become privately held.",
-  "The company filed a definitive proxy statement on Schedule 14A for the merger.",
-  "The company received early termination of the Hart-Scott-Rodino waiting period for the merger. This satisfies one closing condition; other antitrust and foreign direct investment approvals remain."
+  "Integer signed a merger agreement to be acquired by affiliates of KKR-managed funds, with each share converted into $127 in cash. The stockholders approved adopting the agreement, and the HSR waiting period ended early. Closing is anticipated by year-end, subject to remaining conditions including regulatory approvals.",
+  "Stockholders filed three complaints relating to the Merger, and attorneys for thirteen purported stockholders sent demand letters alleging disclosure deficiencies in the Proxy Statement. The company denies the allegations and calls the claims without merit.",
+  "Because of the pending acquisition, Integer is not providing a financial outlook for the period and is not hosting a third-quarter earnings call."
  ],
  "in_code_book": false,
- "ke": 0.08378973472633486,
+ "ke": 0.08292580428593418,
  "market_cap_at_publish": 4316641792.0,
- "model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
  "no_value_reason": null,
  "pending_offer": {
-  "claim": "Integer entered into a merger agreement with affiliates of KKR-managed investment funds. Each common share will convert into the right to receive $127 in cash. After closing, the company will be delisted from NYSE and become privately held.",
+  "claim": "Integer signed a merger agreement to be acquired by affiliates of KKR-managed funds, with each share converted into $127 in cash. The stockholders approved adopting the agreement, and the HSR waiting period ended early. Closing is anticipated by year-end, subject to remaining conditions including regulatory approvals.",
   "date": "August 2, 2026"
  },
  "price_at_publish": 126.97,
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+ "release_truncated": [],
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 79.85064037138102,
-  "3000": 83.58084643333335
+  "1000": 78.08015944135175,
+  "3000": 81.53037930202383
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "Integer is a medical device contract development and manufacturing organization (CDMO) serving the Cardio and Vascular, Neuromodulation and Cardiac Rhythm Management markets.",
+    "basis": "stated in the 10-K business description",
+    "claim": "Integer is a medical device contract development and manufacturing organization (CDMO). It makes products for other companies' devices in cardio and vascular, neuromodulation and cardiac rhythm management markets.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Integer is now a pure-play medical technology company focused on Cardio and Vascular, Neuromodulation, and Cardiac Rhythm Management markets."
+     "serving the Cardio and Vascular, Neuromodulation, and Cardiac Rhythm Management markets"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "Its main customers are large multinational medical device OEMs, and it sells to them directly with limited exceptions.",
+    "basis": "stated in the 10-K",
+    "claim": "Customers are mainly large multinational medical device OEMs, and a few of them dominate sales. Three customers (Abbott, Boston Scientific and Medtronic) each exceeded 10% of 2025 sales and together made up 49%.",
     "facts": [
-     "P1"
+     "P1",
+     "P2"
     ],
     "quotes": [
-     "With limited exceptions, we sell our products directly to our customers, including large, multi-national OEMs and their affiliated subsidiaries."
+     "During 2025, three of our customers, Abbott Laboratories, Boston Scientific and Medtronic were each in excess of 10% of total sales and collectively accounted for 49% of our total sales."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Items 1 and 7 (P1, P3)",
+    "basis": "stated in the 10-K risk factors",
+    "claim": "Many supply agreements carry no minimum purchase commitments, so revenue is exposed to customer demand and ordering changes.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Furthermore, many of our supply agreements do not contain minimum purchase level requirements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K",
     "claim": "The company reports one segment and earns revenue from three product lines: Cardio & Vascular, Cardiac Rhythm Management & Neuromodulation, and Other Markets.",
     "facts": [
      "P1",
@@ -583,85 +728,42 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A sales table (P3)",
-    "claim": "In 2025, Cardio & Vascular sales were $1,107,084, CRM&N sales were 668,803 and Other Markets sales were 77,750, out of total sales of $1,853,637 (table in thousands).",
+    "basis": "stated in the 10-K MD&A table",
+    "claim": "2025 sales by product line (table in thousands) were Cardio & Vascular 1,107,084, CRM & Neuromodulation 668,803 and Other Markets 77,750, for total sales of 1,853,637. Cardio & Vascular is the largest line.",
     "facts": [
      "P3"
     ],
     "quotes": [],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "Cardio & Vascular covers catheter-based and wire-based components, subassemblies and finished devices for interventional cardiology, structural heart, peripheral vascular, neurovascular, electrophysiology and related procedures.",
+    "basis": "stated in the 10-K",
+    "claim": "Most sales are custom-designed components and assemblies built to customer specifications. The company also supplies some finished system and device solutions that OEMs distribute. It sells directly to customers, and about 53% of products sold in 2025 shipped to U.S. locations.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The Cardio & Vascular product line leverages a global footprint to produce a full range of components, subassemblies, and finished devices used in interventional cardiology, structural heart, heart failure, peripheral vascular, neurovascular, interventional oncology, electrophysiology, vascular access, infusion therapy, hemodialysis, urology, and gastroenterology procedures."
+     "Although the majority of our customers contract with us to develop custom components and assemblies to fit their product specifications, we also provide system and device solutions ready for market distribution by OEMs.",
+     "approximately 53% of our products sold were shipped to locations in the United States"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "CRM&N supplies parts and systems for implanted pulse generators and leads, and the company cites leadership in battery, capacitor and feedthrough technology.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our investments in research and development have created leadership positions in battery, capacitor, and feedthrough technology, including filtered feedthroughs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Items 1 and 1A (P1, P2)",
-    "claim": "Revenue is concentrated: in 2025, Abbott Laboratories, Boston Scientific and Medtronic each exceeded 10% of sales and together accounted for 49%.",
+    "basis": "stated in the 10-K",
+    "claim": "Pricing is contract-based and subject to pressure. Contracts can include rebates and tiered volume pricing, and the company says it has cut prices for some customers and expects pressure for further cuts.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "During 2025, three of our customers, Abbott Laboratories, Boston Scientific and Medtronic were each in excess of 10% of total sales and collectively accounted for 49% of our total sales."
+     "Contracts with customers can include rebates and tiered pricing arrangements based on predetermined volume levels, in which higher volume levels typically have lower pricing, or specific prices are offered to customers in exchange for increased volume levels and/or longer contract terms.",
+     "Given the dynamics of the industry in which we operate, we have reduced prices for some of our customers in recent years, and we expect customer pressure for continued price reductions in future periods."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Items 1 and 1A (P1, P2)",
-    "claim": "Customer contracts can include rebates and tiered volume pricing, and they typically specify minimum order quantities and lead times.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Typically, our contracts specify minimum order quantities and lead times."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Items 1 and 1A (P1, P2)",
-    "claim": "Customer inventory programs, vertical integration and alternate supply arrangements can significantly move sales in a given period.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our customers may have inventory management programs, vertical integration plans and/or alternate supply arrangements that may not be communicated to or shared with us."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "In 2025, approximately 53% of products sold were shipped to U.S. locations.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In 2025, approximately 53% of our products sold were shipped to locations in the United States (\u201cU.S.\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 (P1)",
-    "claim": "Firm backlog at December 31, 2025 was approximately $675 million, and most of it was expected to ship within one year.",
+    "basis": "stated in the 10-K",
+    "claim": "Firm backlog at year-end 2025 was about $675 million, and the majority was expected to ship within one year. This gives some near-term revenue visibility.",
     "facts": [
      "P1"
     ],
@@ -671,8 +773,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A (P3)",
-    "claim": "Management attributed 2025 sales growth of 8% to new product ramps, higher base-business demand and acquisitions.",
+    "basis": "stated in the 10-K MD&A",
+    "claim": "In 2025, sales rose 8% to $1.854 billion. Management attributed the rise to new product ramps, base-business demand and acquisitions.",
     "facts": [
      "P3"
     ],
@@ -682,8 +784,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Items 1 and 7 (P1, P3)",
-    "claim": "Tuck-in acquisitions of coating businesses (Precision, VSi and Biocoat) add revenue, and 2025 acquisitions contributed $58.7 million of Cardio & Vascular sales in 2025.",
+    "basis": "stated in the 10-K",
+    "claim": "Tuck-in acquisitions of coating-technology businesses add revenue. 2025 acquisitions contributed $58.7 million of Cardio & Vascular sales in 2025.",
     "facts": [
      "P1",
      "P3"
@@ -694,155 +796,90 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A outlook (P3)",
-    "claim": "For 2026, management expected lower sales of three new products because their market adoption was lower than anticipated.",
+    "basis": "stated in the 10-K and the Q3 2026 earnings release",
+    "claim": "In 2026, new-product ramps have turned into a headwind. The 10-K expected lower sales from three new products on weaker-than-anticipated market adoption. In Q3 2026, Cardio & Vascular sales fell 5% to $263 million, reflecting two new Electrophysiology products, and CRM&N sales rose 4% to $176 million.",
     "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the Q3 2026 earnings release (P6)",
-    "claim": "In Q3 2026, Cardio & Vascular sales fell 5% to $263 million, which the company tied to two new Electrophysiology products.",
-    "facts": [
+     "P3",
      "P6"
     ],
     "quotes": [
+     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption.",
      "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the Q3 2026 earnings release (P6)",
-    "claim": "In Q3 2026, CRM&N sales rose 4% to $176 million, with growth partly offset by one new Neuromodulation product.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Cardiac Rhythm Management & Neuromodulation sales increased 4% to $176 million in the third quarter 2026 compared to the third quarter 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 and the Q3 2026 release (P1, P6)",
-    "claim": "Other Markets is shrinking as the company exits Portable Medical: Q3 2026 sales were $11 million versus $21 million a year earlier.",
+    "basis": "stated in the earnings release and the 10-K",
+    "claim": "Other Markets is shrinking by design because of the Portable Medical exit. Q3 2026 sales were $11 million versus $21 million a year earlier, and the 10-K expected final Portable Medical sales and market exit in 2026.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "We currently expect Portable Medical sales to wind down with the final sales and market exit occurring in 2026.",
      "Other Markets sales totaled $11 million in the third quarter 2026, compared to $21 million in the third quarter 2025, primarily due to the Portable Medical exit."
     ],
     "support": "supported"
    },
    {
-    "basis": "figures stated in P6 and F2; the link to fixed costs is inferred from P2",
-    "claim": "In Q3 2026, sales fell to $449,661 from $467,691 while cost of sales rose to 348,100 from 341,531, lowering gross profit to 101,561 from 126,160 (table in thousands).",
+    "basis": "stated in the earnings release and the 10-Q income statement",
+    "claim": "Company-wide sales fell in 2026. Q3 sales decreased 3.9% to $450 million and organic sales decreased 2.2%. Nine-month sales were 1,353,351 versus 1,381,577 (table in thousands).",
     "facts": [
      "P6",
      "F2"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A (P2)",
-    "claim": "Fixed manufacturing costs mean that lower demand can reduce gross margins.",
-    "facts": [
-     "P2"
-    ],
     "quotes": [
-     "Conversely, if demand for our products decreases, the fixed costs associated with excess manufacturing capacity may harm our financial results, including by decreasing gross margins and increasing research and development costs as a percentage of revenue."
+     "Sales decreased 3.9% to $450 million. Organic sales decreased 2.2%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1A (P2)",
-    "claim": "Costs depend on raw materials such as platinum, gold, titanium, nitinol and lithium, some of which come from a single supplier.",
+    "basis": "stated figures; the cost-to-volume link is inferred from the F2 figures plus the P2 risk factor",
+    "claim": "The main cost is cost of sales, and it rose while sales fell in 2026. For nine months, cost of sales was 1,029,253 versus 1,005,947 (table in thousands) and gross profit was 324,098 versus 375,630.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our business depends on a continuous supply of raw materials."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A (P2)",
-    "claim": "Customers press for price reductions, and the company has cut prices for some customers in recent years.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Given the dynamics of the industry in which we operate, we have reduced prices for some of our customers in recent years, and we expect customer pressure for continued price reductions in future periods."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1A (P2)",
-    "claim": "Tariffs are a cost driver because some products are made in Mexico and other countries and imported into the U.S.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "the cost of our products manufactured in Mexico or other countries and imported into the U.S. or other countries could increase further"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statements (P6, F2)",
-    "claim": "Operating expenses rose in the first nine months of 2026: SG&A was 170,557 vs 154,534, RD&E 41,049 vs 39,390, and restructuring and other charges 17,886 vs 16,377 (table in thousands).",
-    "facts": [
-     "P6",
      "F2"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in Table A of the Q3 2026 release (P6)",
-    "claim": "ERP implementation costs of 12,221 pre-tax were added back in the nine-month 2026 adjusted net income reconciliation, against none in the prior-year period (table in thousands).",
+    "basis": "stated in the 10-K risk factors",
+    "claim": "Idle capacity and raw-material prices drive costs. The 10-K says weaker demand leaves fixed capacity costs that can reduce gross margin. Inputs include platinum, titanium, nitinol, lithium and other metals, and not all cost increases can be passed through to customers.",
     "facts": [
-     "P6"
+     "P2"
     ],
-    "quotes": [],
+    "quotes": [
+     "Conversely, if demand for our products decreases, the fixed costs associated with excess manufacturing capacity may harm our financial results, including by decreasing gross margins and increasing research and development costs as a percentage of revenue.",
+     "The principal raw materials used in our business include platinum, stainless steel, gold, copper, titanium, nitinol, lithium, palladium, iridium, tantalum, nickel cobalt, ruthenium, vanadium oxide, carbon monoflouride and plastics, among others."
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the Q3 2026 release summary table (P6)",
-    "claim": "Nine-month 2026 operating income fell to $94,606 from $165,329 (table in thousands).",
+    "basis": "stated in the 10-K and the 10-Q; the cost drivers are those the company cites",
+    "claim": "Operating expenses are driven by SG&A, R&D and restructuring. 2025 SG&A rose to 211,748 from 185,202 (table in thousands), reflecting higher compensation and amortization of customer-list intangibles from acquisitions. Nine-month 2026 SG&A was 170,557 versus 154,534.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement (F3)",
-    "claim": "The business is capital- and acquisition-intensive: nine-month 2026 depreciation and amortization was 103,899 vs 95,158, and capital spending was (67,181) (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet and income statement (F1, F2)",
-    "claim": "Debt financing is a further cost: nine-month 2026 interest expense was 29,570 vs 33,926, against long-term debt of 1,219,247 at October 2, 2026 (table in thousands).",
-    "facts": [
-     "F1",
+     "P3",
      "F2"
     ],
-    "quotes": [],
+    "quotes": [
+     "Depreciation and amortization expense increased due to amortization of customer list intangible assets related to recent acquisitions."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the 10-Q cash flow statement and the earnings release",
+    "claim": "The business is capital-intensive and debt-funded. Nine-month 2026 operating cash flow was 121,061 versus 140,733, capital spending was 67,181, and inventories used 28,474 of cash (table in thousands). Total debt was $1.219 billion, a leverage ratio of 3.3 times adjusted EBITDA.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026."
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A and the Q3 2026 release (P4, P6, P5, P8)",
-    "claim": "The company has agreed to be acquired by KKR affiliates for $127 per share in cash, and because of the pending transaction it is not providing a financial outlook.",
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "A pending merger is a context item, not a driver of revenue. The company agreed on August 2, 2026 to be acquired by KKR affiliates for $127 per share in cash, expected to close by the end of 2026, and it is not providing a financial outlook.",
     "facts": [
      "P4",
      "P6"
@@ -855,87 +892,30 @@
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item (company self-description, no market share data given)",
-    "claim": "Integer describes itself as one of the world's largest medical device CDMOs, serving Cardio and Vascular, Neuromodulation and Cardiac Rhythm Management markets.",
+    "basis": "Stated by the company in the 10-K business section; a self-description, not a third-party ranking.",
+    "claim": "Integer describes itself as one of the world's largest medical device contract development and manufacturing organizations (CDMOs), serving the cardio and vascular, neuromodulation and cardiac rhythm management markets.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Integer Holdings Corporation, headquartered in Plano, Texas, is one of the world\u2019s largest medical device contract development and manufacturing organizations (\u201cCDMOs\u201d), serving the Cardio and Vascular, Neuromodulation, and Cardiac Rhythm Management markets."
+     "is one of the world\u2019s largest medical device contract development and manufacturing organizations"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item as management belief",
-    "claim": "The company says the CDMO industry is highly fragmented among several hundred companies, many with limited capabilities.",
+    "basis": "Stated as management belief in the 10-K; not independently verified in the evidence.",
+    "claim": "Management believes few competitors match the breadth of its manufacturing capabilities and services. It describes the CDMO industry as fragmented across several hundred companies, many with limited capabilities.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The CDMO industry has traditionally been highly fragmented amongst several hundred companies, many of which we believe have limited manufacturing capabilities and limited sales and marketing expertise."
+     "We believe that very few companies offer the scope of manufacturing capabilities and services that we provide to medical device companies"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item as management belief",
-    "claim": "Management believes very few companies match the scope of its manufacturing capabilities and services, but acknowledges broad-capability competitors may emerge.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We believe that very few companies offer the scope of manufacturing capabilities and services that we provide to medical device companies; however, we may compete in the future against other companies that provide broad manufacturing capabilities and related services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; the passage is truncated after this point",
-    "claim": "The company names the bases of competitive advantage in its industry, including quality, breadth of capabilities, price and customer relationships.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Competitive advantage is generally based on reputation, quality, delivery, responsiveness, breadth of capabilities, including design and engineering support, price, customer relationships"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (company claim, no external comparison given)",
-    "claim": "In CRM, the company claims leadership positions in battery, capacitor and feedthrough technology from its R&D investment.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our investments in research and development have created leadership positions in battery, capacitor, and feedthrough technology, including filtered feedthroughs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "A tuck-in acquisition strategy, including the 2025 coating-technology acquisitions of Precision, VSi and Biocoat, has added capabilities and scale. Acquisitions contributed $58.7 million of 2025 C&V sales.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Integer continues to execute a tuck-in acquisition strategy that has added capabilities, leading brands and complementary technologies, increased customer penetration, and enhanced scale in our targeted growth markets.",
-     "C&V sales for 2025 included $58.7 million of aggregate sales attributable to the 2025 acquisitions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In 2025, Cardio & Vascular sales rose to $1,107,084 from $949,576 (table in thousands), or 16.6%, driven by electrophysiology new product ramps, acquisitions and neurovascular demand.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The increase in C&V sales for 2025 was driven by strong growth from new product ramps in electrophysiology, contributions from acquisitions, and strong demand in neurovascular."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Firm backlog at December 31, 2025 was approximately $675 million, mostly expected to ship within one year.",
+    "basis": "Stated in the 10-K.",
+    "claim": "Firm backlog at year-end 2025 was about $675 million, and most of it was expected to ship within one year.",
     "facts": [
      "P1"
     ],
@@ -945,32 +925,20 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Three customers, Abbott Laboratories, Boston Scientific and Medtronic, each exceeded 10% of 2025 sales and together accounted for 49%, a concentration the company names as a risk.",
+    "basis": "Stated in the 10-K business and risk sections.",
+    "claim": "Customer concentration is high. Abbott, Boston Scientific and Medtronic each exceeded 10% of sales and together made up 49% of 2025 sales. The company names the loss of a large customer as a material threat.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "During 2025, three of our customers, Abbott Laboratories, Boston Scientific and Medtronic were each in excess of 10% of total sales and collectively accounted for 49% of our total sales."
+     "In 2025, our top three customers collectively accounted for approximately 49% of our revenues."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Long-term supply agreements cover a majority, but not all, of large customers, and many agreements lack minimum purchase requirements.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We have long-term supply agreements with a majority, but not all, of our large customers; however, these customers may not agree to renew or extend our supply agreements with them.",
-     "Furthermore, many of our supply agreements do not contain minimum purchase level requirements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company has cut prices for some customers and expects continued pressure for price reductions.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Customers pressure the company on price. It has cut prices for some customers and expects continued pressure.",
     "facts": [
      "P2"
     ],
@@ -980,383 +948,19 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Customers insourcing production or dual sourcing is a named competitive threat that has occurred in the past.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "In addition, our medical customers have in the past elected, and may in the future elect, to in source production or implement supplier diversification initiatives.",
-     "We also face competition from existing and prospective customers that employ in-house capabilities to produce some of the products we provide."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Customers' inventory programs, vertical integration plans or alternate supply arrangements may not be shared with the company, which limits its visibility into demand.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our customers may have inventory management programs, vertical integration plans and/or alternate supply arrangements that may not be communicated to or shared with us."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Consolidation in the healthcare industry could give customers market power to negotiate price cuts or pursue vertical integration.",
+    "basis": "Stated in the 10-K risk factors. The text is cut off after this point, so the full consequences are not shown.",
+    "claim": "Customers can in-source production or dual-source, which the company says has hurt it before and could again.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "These industry participants may try to use their market power to negotiate price reductions for our products or may undertake additional vertical integration or supplier diversification initiatives."
+     "our medical customers have in the past elected, and may in the future elect, to in source production or implement supplier diversification initiatives"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "For 2026, management expected lower sales from three new products because market adoption was lower than anticipated.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Q3 2026 Cardio & Vascular sales fell 5% to $263 million, which the company attributes to two new Electrophysiology products.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Q3 2026 Cardiac Rhythm Management & Neuromodulation sales grew 4% to $176 million, partly offset by one new Neuromodulation product.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Cardiac Rhythm Management & Neuromodulation sales increased 4% to $176 million in the third quarter 2026 compared to the third quarter 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Other Markets sales fell to $11 million from $21 million in Q3, mainly because of the Portable Medical exit; the company says it is not strategically focused on these markets.",
-    "facts": [
-     "P6",
-     "P1"
-    ],
-    "quotes": [
-     "Other Markets sales totaled $11 million in the third quarter 2026, compared to $21 million in the third quarter 2025, primarily due to the Portable Medical exit.",
-     "Other markets are areas where Integer is not strategically focused."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; the causes of the gross profit decline are not given in the evidence",
-    "claim": "Q3 2026 gross profit fell to 101,561 from 126,160 while sales fell to 449,661 from 467,691 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Gross profit | 101,561 | 126,160 | 324,098 | 375,630",
-     "Sales | $ 449,661 | $ 467,691 | $ 1,353,351 | $ 1,381,577"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Some raw materials come from a single supplier, and there are limited worldwide suppliers for several materials.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For reasons of quality, cost effectiveness or availability, we obtain some raw materials from a single supplier."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Tariffs on products made in Mexico or other countries and imported into the U.S. could make the company's products less competitive.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "If additional tariffs or trade restrictions are implemented by the U.S. or other countries in connection with a global trade war, the cost of our products manufactured in Mexico or other countries and imported into the U.S. or other countries could increase further, which, in turn, could adversely affect the demand for these products, make our products less competitive and have an adverse effect on our business and results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The pending KKR-affiliated merger, at $127 per share in cash, would take the company private, and the company names the risk that it disrupts customer and personnel relationships.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "the risk that the Merger and its announcement could have an adverse effect on the parties\u2019 business relationships and business generally, including our ability to retain customers and retain and hire key personnel"
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in F1",
-    "claim": "Cash and cash equivalents fell to $ 14,135 at Oct. 02, 2026 from $ 17,161 at Dec. 31, 2025 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 14,135 | $ 17,161"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the composition point is inferred from the F1 line items",
-    "claim": "Total current assets of 801,392 compare with total current liabilities of 201,125 at Oct. 02, 2026 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 801,392 | 770,097",
-     "Total current liabilities | 201,125 | 232,041"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3; the counter is inferred from F3",
-    "claim": "At year-end 2025 the company had $794.7 million of borrowing capacity under its Revolving Credit Facility, which then carried no outstanding principal balance.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025, we have access to $794.7 million of borrowing capacity under our Revolving Credit Facility, available for normal course of business and letters of credit."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Of year-end 2025 cash, $10.1 million was held by foreign subsidiaries, and the company intends to limit distributions from them.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "At December 31, 2025, $10.1 million of our cash and cash equivalents were held by foreign subsidiaries."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6; long-term debt of 1,219,247 is consistent with F1",
-    "claim": "Total debt rose $34 million to $1.219 billion from the end of 2025, and the company reports a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026.",
-    "facts": [
-     "P6",
-     "F1"
-    ],
-    "quotes": [
-     "From the end of 2025, total debt increased $34 million to $1.219 billion and Non-GAAP net total debt increased $33 million to $1.223 billion, resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in P6; the effect on leverage is inferred",
-    "claim": "Adjusted EBITDA fell to $87,916 from $105,898 in the third quarter and to $267,916 from $296,358 over nine months (table in thousands), which weighs on the leverage ratio.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Adjusted EBITDA(a) | $87,916 | $105,898 | (17.0) % | $267,916 | $296,358 | (9.6)%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2; the coverage reading is inferred",
-    "claim": "GAAP operating income was 28,209 against interest expense of 9,701 in Q3 2026, and 94,606 against 29,570 over nine months (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Operating income | 28,209 | 56,439 | 94,606 | 165,329",
-     "Interest expense | 9,701 | 9,367 | 29,570 | 33,926"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "About 92% of debt principal was at fixed rates at year-end 2025, up from 50% a year earlier.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025 and 2024, approximately 92% and 50%, respectively, of our principal amount of debt were fixed rate borrowings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Net cash provided by operating activities was 121,061 for the nine months ended Oct. 02, 2026, down from 140,733 a year earlier (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 121,061 | 140,733"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Capital expenditure was 67,181 over the nine months, against 63,555 a year earlier (table in thousands), absorbing a large part of operating cash flow.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Acquisition of property, plant and equipment | (67,181) | (63,555)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the amortization source is inferred from the P6 Table A amortization adjustment",
-    "claim": "Operating cash flow rests heavily on non-cash add-backs: depreciation and amortization of 103,899 exceeded net income of 55,089 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Depreciation and amortization | 103,899 | 95,158"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the link to falling sales is inferred from F2",
-    "claim": "Working capital consumed cash: inventories used 28,474 and accrued expenses and other liabilities used 29,421 in the nine months (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Inventories | (28,474) | (12,241)",
-     "Accrued expenses and other liabilities | (29,421) | (22,359)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the funding link is inferred",
-    "claim": "Share repurchases of 50,000 and RSU tax withholdings of 10,419 were funded alongside net revolver borrowing (221,000 drawn, 191,000 repaid), and cash fell by 3,026 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Repurchases of common stock | (50,000) | 0",
-     "Proceeds from revolving credit facility | 221,000 | 301,000"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "For full-year 2025, operating cash flow of $196.1 million was offset mainly by capex of $91.0 million and $50.0 million of buybacks.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Cash generated by operating activities of $196.1 million was primarily offset by purchases of property, plant and equipment of $91.0 million, $50.0 million of repurchases of common stock, and tax withholding payments related to net share settlements of restricted stock unit awards of $16.9 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3; the counter is inferred from P9",
-    "claim": "At year-end 2025 the company had prepaid all contractual principal due in the next twelve months, and 2026 debt service was estimated at approximately $27 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025, we have prepaid all contractual principal payments on our outstanding indebtedness required in the next twelve months.",
-     "As of December 31, 2025, our contractual debt service obligations for 2026, consisting of interest on our outstanding debt and commitment fees on the unused portion of the Revolving Credit Facility are estimated to be approximately $27 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The $800 million Revolving Credit Facility and the TLA Facility, with $91 million outstanding at year-end 2025, mature on February 15, 2028.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025, we had Senior Secured Credit Facilities that consist of an $800 million Revolving Credit Facility, with no outstanding principal balance, and a TLA Facility with an outstanding principal balance of $91 million.",
-     "The Revolving Credit Facility and TLA Facility mature on February 15, 2028."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The largest debt instrument is $1.0 billion of 1.875% Convertible Senior Notes due in 2030.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On March 18, 2025, we issued $1.0 billion in aggregate principal amount of 1.875% Convertible Senior Notes due in 2030 (the \u201c2030 Convertible Notes\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "terms stated in P9; the price comparison uses S0; the funding source is inferred from F1 and P3",
-    "claim": "The 2.125% Convertible Senior Notes due 2028 are convertible at holders' option from October 1, 2026 through December 31, 2026, with principal settled in cash, at a conversion price of approximately $87.20.",
-    "facts": [
-     "P9",
-     "S0"
-    ],
-    "quotes": [
-     "The Notes are convertible into cash, up to the principal amount of the Notes, and in cash, shares of the Company\u2019s common stock or a combination thereof, at the Company\u2019s election, in respect of the remainder, if any, of the Company\u2019s conversion obligation in excess of the aggregate principal amount of the Notes being converted.",
-     "The Notes are convertible at a conversion rate of 11.4681 shares of common stock per $1,000 principal amount of Notes, which is equivalent to a conversion price of approximately $87.20 per share of common stock."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "The company itself lists the conditional conversion feature of both convertible note series as a risk to its liquidity.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "the conditional conversion feature of the 2028 Notes (as defined below) and the 2030 Notes (as defined below) adversely impacting our liquidity"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "terms stated in P4 and P6; stockholder approval stated in P6 and P7; the refinancing implication is inferred",
-    "claim": "A pending all-cash acquisition by KKR affiliates at $127 per share is expected to close by the end of 2026, after which the company would become privately held, which would reshape its capital structure.",
-    "facts": [
-     "P4",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "If the Merger is consummated, the Company\u2019s securities will be delisted from NYSE as soon as practicable following the Effective Time (defined below), and the Company will become a privately held company.",
-     "The Transaction is anticipated to close by the end of 2026, subject to the satisfaction or waiver of customary closing conditions specified in the Merger Agreement, including the receipt of required regulatory approvals."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the reading is inferred",
-    "claim": "Goodwill of 1,100,799 and other intangible assets of 770,089 compare with total stockholders' equity of 1,726,399 (table in thousands), so the asset base backing the debt is largely intangible.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Goodwill | 1,100,799 | 1,110,908",
-     "Total stockholders\u2019 equity | 1,726,399 | 1,746,643"
-    ],
-    "support": "supported"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "stated in P3",
-    "claim": "Last full-year sales rose 8% to $1.854 billion, driven by new product ramps, base-business demand and acquisitions.",
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "In 2025, new product ramps, base-business demand and acquisitions drove sales growth to $1.854 billion. Cardio & Vascular sales rose 16.6%, mainly on new electrophysiology ramps.",
     "facts": [
      "P3"
     ],
@@ -1366,8 +970,227 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "Cardio & Vascular was the main growth engine, rising to $1,107,084 from $949,576 (table in thousands), up 16.6%, led by electrophysiology product ramps.",
+    "basis": "Stated in the earnings release and the 10-K MD&A. Whether adoption recovers is not addressed.",
+    "claim": "In 2026 the new-product tailwind reversed. Third-quarter Cardio & Vascular sales fell, which the company links to two new Electrophysiology products. Management expected lower sales on three new products because market adoption was lower than anticipated.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products.",
+     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Computed by the company's statements as printed; the causal link is inferred from the income statement figures.",
+    "claim": "Total third-quarter sales fell to $450 million, down 3.9%, while cost of sales rose. Gross profit dropped from 126,160 to 101,561 (table in thousands).",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Sales decreased 3.9% to $450 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and the 10-K.",
+    "claim": "The planned Portable Medical exit continues to shrink Other Markets, which the company says is not strategically focused.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Other Markets sales totaled $11 million in the third quarter 2026, compared to $21 million in the third quarter 2025, primarily due to the Portable Medical exit."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "The company relies on third-party suppliers for key raw materials and in some cases has only one source, which is a supply-side threat.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For reasons of quality, cost effectiveness or availability, we obtain some raw materials from a single supplier."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the earnings release. This describes deal risk to customer relationships, not an assessment of value.",
+    "claim": "Integer has agreed to be acquired by KKR affiliates for cash, and has said the announcement could affect customer relationships. The deal is expected to close by the end of 2026 and has stockholder approval and early HSR termination.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "automatically be converted into the right to receive $127 in cash, without interest",
+     "could have an adverse effect on the parties\u2019 business relationships and business generally, including our ability to retain customers"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and balance sheet. The effect on competitive position is inferred.",
+    "claim": "Leverage is a financial constraint on the company. Net total debt gave a leverage ratio of 3.3 times adjusted EBITDA at quarter-end, with cash of 14,135 (table in thousands).",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in the balance sheet",
+    "claim": "Cash on hand is thin: 14,135 (table in thousands) at the 10-Q balance sheet date versus 17,161 at the prior year-end. Total current assets of 801,392 are well above total current liabilities of 201,125.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the link between the draws and the buybacks is inferred",
+    "claim": "The revolver is the main liquidity backstop. At the prior year-end it was an $800 million facility with no outstanding balance and $794.7 million of borrowing capacity. In the nine months it drew 221,000 and repaid 191,000 (table in thousands).",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "an $800 million Revolving Credit Facility, with no outstanding principal balance",
+     "we have access to $794.7 million of borrowing capacity under our Revolving Credit Facility"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the release and the balance sheet",
+    "claim": "Leverage is 3.3 times adjusted EBITDA. Total debt rose to $1.219 billion and non-GAAP net total debt rose to $1.223 billion. Balance-sheet long-term debt was 1,219,247 (table in thousands) versus 1,185,179 at the prior year-end.",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement; the refinancing link is inferred from P3",
+    "claim": "Debt service is covered by operations but the margin has narrowed. Third-quarter interest expense was 9,701 (table in thousands) versus 9,367, against operating income of 28,209 versus 56,439. Nine-month interest expense fell to 29,570 from 33,926.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the statements and release",
+    "claim": "Earnings that feed cash flow weakened. Third-quarter gross profit was 101,561 (table in thousands) versus 126,160. Adjusted EBITDA was $87,916 versus $105,898 for the quarter and $267,916 versus $296,358 for nine months (tables in thousands).",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement",
+    "claim": "Operating cash flow was lower. Nine-month net cash from operations was 121,061 (table in thousands) versus 140,733, while capital spending was 67,181 versus 63,555.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the statements; the quality reading is inferred",
+    "claim": "Cash generation is helped by large non-cash charges and held back by working capital. Net income was 55,089 (table in thousands) against depreciation and amortization of 103,899. Inventories took (28,474), accrued expenses and other liabilities (29,421) and income taxes (11,589). Inventories on the balance sheet rose to 278,591 from 253,739.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash flow statement",
+    "claim": "Cash was also spent on shareholder and other items beyond capex: repurchases of (50,000), tax withholdings on share awards of (10,419), purchases of equity and other investments of (14,043) and finance lease principal of (6,558) (table in thousands). Cash fell by (3,026) over the nine months.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "The bank facilities fall due at the same date: the revolver and the term A loan (TLA) mature on February 15, 2028. At the prior year-end the TLA had an outstanding principal balance of $91 million. The company had prepaid all required principal payments for the next twelve months, and estimated its following-year contractual debt service at approximately $27 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The Revolving Credit Facility and TLA Facility mature on February 15, 2028.",
+     "we have prepaid all contractual principal payments on our outstanding indebtedness required in the next twelve months"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "The convertible notes are the other major debt layer. The company issued $1.0 billion of 1.875% Convertible Senior Notes due in 2030 and exchanged $383.7 million of its 2.125% notes due in 2028. About 92% of principal was fixed-rate at the prior year-end.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "we issued $1.0 billion in aggregate principal amount of 1.875% Convertible Senior Notes due in 2030",
+     "approximately 92% and 50%, respectively, of our principal amount of debt were fixed rate borrowings"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the earnings release; the debt implications are not addressed in the evidence",
+    "claim": "The pending acquisition by KKR affiliates at $127 per share in cash is expected to close by the end of the year. The company is not providing an outlook. The packet does not say how existing debt would be treated at closing, and the buyer's financing is listed as a risk factor.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The Transaction is anticipated to close by the end of 2026",
+     "Parent\u2019s ability to obtain the necessary financing arrangements set forth in the commitment letters received in connection with the Transaction"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "In the last fiscal year, management attributed sales growth of 8% to $1.854 billion to new product ramps in targeted high-growth markets, higher base-business demand and acquisitions. Continued growth needs all three sources to keep contributing, and the reported period shows that is no longer happening.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Sales for 2025 increased 8% to $1.854 billion, driven by new product ramps in targeted high-growth markets, higher demand across our base business, and contributions from our recent acquisitions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and the earnings release; the condition for resumption is inferred.",
+    "claim": "Electrophysiology new-product ramps were the main driver of Cardio & Vascular growth in the prior year. For that growth to resume, the two new electrophysiology products must stop being a drag. In the latest quarter C&V sales fell 5% to $263 million because of them.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "The increase in C&V sales for 2025 was driven by strong growth from new product ramps in electrophysiology, contributions from acquisitions, and strong demand in neurovascular.",
+     "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K for the prior year; the continuation condition is inferred.",
+    "claim": "Neurovascular demand was a named contributor to prior-year C&V growth. It would need to stay strong to support C&V, but the latest filings give no separate figure for it.",
     "facts": [
      "P3"
     ],
@@ -1377,54 +1200,11 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "For the new-product driver to continue, customer products must achieve market adoption; management flagged lower-than-anticipated adoption of three new products.",
+    "basis": "Stated in the release and 10-K; the conditions are inferred.",
+    "claim": "Cardiac Rhythm Management & Neuromodulation is still growing, with sales up 4% to $176 million in the latest quarter. Continued growth requires the market to keep growing and the weak new Neuromodulation product not to widen the offset.",
     "facts": [
+     "P6",
      "P3"
-    ],
-    "quotes": [
-     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "The electrophysiology driver reversed in the latest quarter: Cardio & Vascular sales decreased 5% to $263 million because of two new Electrophysiology products.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P1",
-    "claim": "Tuck-in acquisitions added $58.7 million of Cardio & Vascular sales in the last full year.",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "C&V sales for 2025 included $58.7 million of aggregate sales attributable to the 2025 acquisitions.",
-     "Integer continues to execute a tuck-in acquisition strategy that has added capabilities, leading brands and complementary technologies, increased customer penetration, and enhanced scale in our targeted growth markets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the F3 'Acquisitions, net of cash acquired' line",
-    "claim": "The acquisition driver requires continued deal activity, but the nine-month cash flow shows no acquisition spending, against (170,872) a year earlier (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Cardiac Rhythm Management & Neuromodulation sales increased 4% to $176 million in the latest quarter, partly offset by one new Neuromodulation product.",
-    "facts": [
-     "P6"
     ],
     "quotes": [
      "Cardiac Rhythm Management & Neuromodulation sales increased 4% to $176 million in the third quarter 2026 compared to the third quarter 2025.",
@@ -1433,80 +1213,70 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P2; the link to market growth is inferred from P3",
-    "claim": "CRM&N growth has tracked its end markets, so it depends on those markets continuing to grow.",
+    "basis": "Stated in the 10-K, release and cash flow statement; the financing condition is inferred.",
+    "claim": "Tuck-in acquisitions added sales in the prior year, with $58.7 million of C&V sales from acquisitions. Further acquisition-led growth would need financing capacity, and no cash was spent on acquisitions in the nine months to October 2, 2026. Leverage was 3.3 times adjusted EBITDA.",
     "facts": [
      "P3",
-     "P2"
+     "P6",
+     "F3"
     ],
     "quotes": [
-     "Slower growth in the cardiac rhythm management, neuromodulation, and cardio and vascular markets in particular would adversely impact our revenues."
+     "C&V sales for 2025 included $58.7 million of aggregate sales attributable to the 2025 acquisitions.",
+     "resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P2",
-    "claim": "Growth depends on retaining three large OEM customers that together accounted for 49% of sales, each above 10%.",
+    "basis": "Backlog is stated in the 10-K; the conversion condition is inferred from the risk factors.",
+    "claim": "The year-end backlog of about $675 million, with most orders expected to ship within a year, was a support for near-term sales. It supports growth only if the orders convert on schedule and customers do not rebalance inventory or reduce orders.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "During 2025, three of our customers, Abbott Laboratories, Boston Scientific and Medtronic were each in excess of 10% of total sales and collectively accounted for 49% of our total sales."
+     "Firm backlog orders at December 31, 2025 were approximately $675 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2",
-    "claim": "Growth also requires that customer price-reduction pressure does not offset volume gains.",
+    "basis": "Stated in the 10-K risk factors; the continuation condition is inferred.",
+    "claim": "Sales depend on a few large customers, whose top three accounted for about 49% of revenues. Growth therefore requires these customers to keep ramping programs and renewing supply agreements.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Given the dynamics of the industry in which we operate, we have reduced prices for some of our customers in recent years, and we expect customer pressure for continued price reductions in future periods."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Firm backlog of approximately $675 million at year-end supported near-term sales, with most orders expected to ship within one year.",
-    "facts": [
+     "P2",
      "P1"
     ],
     "quotes": [
-     "Firm backlog orders at December 31, 2025 were approximately $675 million.",
-     "The majority of the orders outstanding at December 31, 2025 are expected to be shipped within one year."
+     "In 2025, our top three customers collectively accounted for approximately 49% of our revenues."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 and P1",
-    "claim": "The planned Portable Medical exit is a drag on sales: Other Markets fell to $11 million from $21 million.",
+    "basis": "Stated in the release and 10-K; the inference that the drag ends after the exit is drawn from the 10-K wording.",
+    "claim": "The Portable Medical exit is a drag on total sales that ends once the wind-down finishes. Other Markets sales were $11 million against $21 million a year earlier. Growth in the remaining lines needs to outrun this fading drag.",
     "facts": [
      "P6",
      "P1"
     ],
     "quotes": [
-     "Other Markets sales totaled $11 million in the third quarter 2026, compared to $21 million in the third quarter 2025, primarily due to the Portable Medical exit.",
-     "We currently expect Portable Medical sales to wind down with the final sales and market exit occurring in 2026."
+     "Other Markets sales totaled $11 million in the third quarter 2026, compared to $21 million in the third quarter 2025, primarily due to the Portable Medical exit."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6",
-    "claim": "Total sales decreased 3.9% to $450 million in the latest quarter, and organic sales decreased 2.2%.",
+    "basis": "Stated in the 10-K and release; what must be true is inferred.",
+    "claim": "Management said in the 10-K that lower-than-anticipated adoption of three new products would weigh on sales growth. Growth resumes only if adoption of those products improves, and the evidence shows no sign of this yet.",
     "facts": [
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Sales decreased 3.9% to $450 million.",
-     "Organic sales decreased 2.2%."
+     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2",
-    "claim": "Gross profit fell to 101,561 from 126,160 (table in thousands) as sales declined.",
+    "basis": "Figures are stated in the income statement; the mechanism is inferred.",
+    "claim": "Sales growth has not converted into profit. Cost of sales rose to 348,100 from 341,531 while sales fell to 449,661 from 467,691 in the latest quarter (table in thousands). Earnings growth would need costs to fall in line with volume.",
     "facts": [
      "F2"
     ],
@@ -1514,228 +1284,86 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P2; the application to the current quarter is inferred",
-    "claim": "Prior margin gains came from volume leverage, so profit growth requires volumes to recover; falling demand leaves fixed capacity costs that compress margins.",
+    "basis": "Stated in the 10-Q MD&A and the release.",
+    "claim": "The pending KKR-affiliate acquisition at $127 in cash per share is anticipated to close by the end of the year, and management is giving no financial outlook. Any future growth path is therefore not guided in the public record.",
     "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Gross profit for 2025 increased $41.4 million, or 9%, primarily from higher sales volume leverage, efficiencies gained from the continued improvement in the supply chain and contributions from our recent acquisitions.",
-     "Conversely, if demand for our products decreases, the fixed costs associated with excess manufacturing capacity may harm our financial results, including by decreasing gross margins and increasing research and development costs as a percentage of revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "Financial capacity for growth investment is constrained by leverage of 3.3 times adjusted EBITDA and total debt of $1.219 billion.",
-    "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [
-     "From the end of 2025, total debt increased $34 million to $1.219 billion and Non-GAAP net total debt increased $33 million to $1.223 billion, resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; the implication for shareholders is inferred",
-    "claim": "Under the pending KKR-affiliated merger, each share converts into $127 in cash, and the company would become privately held.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "will automatically be converted into the right to receive $127 in cash, without interest (the \u201cMerger Consideration\u201d).",
-     "If the Merger is consummated, the Company\u2019s securities will be delisted from NYSE as soon as practicable following the Effective Time (defined below), and the Company will become a privately held company."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6, P4 and P10",
-    "claim": "Stockholders approved the merger, and closing is anticipated by year-end subject to remaining conditions, including regulatory approvals.",
-    "facts": [
-     "P6",
-     "P4",
-     "P10"
-    ],
-    "quotes": [
-     "The Transaction is anticipated to close by the end of 2026, subject to the satisfaction or waiver of customary closing conditions specified in the Merger Agreement, including the receipt of required regulatory approvals."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P8 and P5",
-    "claim": "Stockholder lawsuits seek an order enjoining the merger, which is a risk to its timing.",
-    "facts": [
-     "P8",
-     "P5"
-    ],
-    "quotes": [
-     "The Lawsuits seek, among other remedies, an order enjoining the consummation of the Merger."
+     "the Company is not providing a financial outlook and will not host a conference call to discuss its third quarter 2026 financial results."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "Stated in the 10-Q MD&A (P4) and repeated in the 8-Ks (P8, P10).",
-    "claim": "Integer entered into a merger agreement with affiliates of KKR-managed investment funds. Each common share will convert into the right to receive $127 in cash. After closing, the company will be delisted from NYSE and become privately held.",
+    "basis": "stated in the cited items (10-Q MD&A and the earnings release)",
+    "claim": "Integer signed a merger agreement to be acquired by affiliates of KKR-managed funds, with each share converted into $127 in cash. The stockholders approved adopting the agreement, and the HSR waiting period ended early. Closing is anticipated by year-end, subject to remaining conditions including regulatory approvals.",
     "facts": [
      "P4",
-     "P8",
-     "P10"
+     "P6"
     ],
     "quotes": [
-     "On August 2, 2026, the Company entered into an Agreement and Plan of Merger (the \u201cMerger Agreement,\u201d and the transactions contemplated thereby, the \u201cTransaction\u201d), by and among the Company, Armstrong Parent, Inc., a Delaware corporation (\u201cParent\u201d), and Armstrong Bidco, Inc., a Delaware corporation and a wholly owned subsidiary of Parent (\u201cMerger Sub\u201d).",
-     "Parent and Merger Sub are each affiliates of investment funds managed by Kohlberg Kravis Roberts & Co. L.P., a leading global investment firm.",
-     "will automatically be converted into the right to receive $127 in cash, without interest",
-     "If the Merger is consummated, the Company\u2019s securities will be delisted from NYSE as soon as practicable following the Effective Time (defined below), and the Company will become a privately held company."
+     "The Transaction is anticipated to close by the end of 2026, subject to the satisfaction or waiver of customary closing conditions specified in the Merger Agreement, including the receipt of required regulatory approvals.",
+     "on October 21, 2026, Integer's stockholders approved the adoption of the Merger Agreement"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P4).",
-    "claim": "The company filed a definitive proxy statement on Schedule 14A for the merger.",
+    "basis": "stated in the cited item (10-Q risk factor)",
+    "claim": "Stockholders filed three complaints relating to the Merger, and attorneys for thirteen purported stockholders sent demand letters alleging disclosure deficiencies in the Proxy Statement. The company denies the allegations and calls the claims without merit.",
     "facts": [
-     "P4",
-     "P10"
-    ],
-    "quotes": [
-     "On September 14, 2026, the Company filed with the SEC, a definitive proxy statement on Schedule 14A (the \u201cProxy Statement\u201d), containing more information about the Merger Agreement and the Merger."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q (P4) and the 8-K (P10).",
-    "claim": "The company received early termination of the Hart-Scott-Rodino waiting period for the merger. This satisfies one closing condition; other antitrust and foreign direct investment approvals remain.",
-    "facts": [
-     "P4",
-     "P10"
-    ],
-    "quotes": [
-     "On September 29, 2026, the Company received early termination of the waiting period under the Hart-Scott-Rodino Antitrust Improvements Act of 1976, as amended.",
-     "The receipt of early termination of the waiting period under the HSR Act with respect to the consummation of the merger satisfies one of the conditions to the closing of the transactions contemplated by the Merger Agreement, which remains subject to other customary closing conditions, including approvals under certain other applicable antitrust and foreign direct investment laws."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release (P6) and the 8-K Item 7.01 (P7).",
-    "claim": "Stockholders approved the adoption of the merger agreement at the special meeting.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "on October 21, 2026, Integer's stockholders approved the adoption of the Merger Agreement",
-     "On October 21, 2026, the Company issued a press release announcing that the stockholder approval required in connection with the Transaction has been obtained and that the Transaction is expected to close by the end of 2026 subject to the satisfaction or waiver of customary closing conditions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 8.01 (P8). The complaints carry separate filing dates in Sept. and Oct. rather than one date.",
-    "claim": "Stockholders filed three complaints relating to the merger. The complaints allege proxy disclosure deficiencies and seek, among other remedies, to enjoin the merger. Thirteen purported stockholders sent demand letters. The company voluntarily supplemented the proxy statement.",
-    "facts": [
-     "P8",
      "P5"
     ],
     "quotes": [
      "individual Company stockholders have filed three complaints relating to the Merger",
-     "The Lawsuits seek, among other remedies, an order enjoining the consummation of the Merger.",
-     "However, in order to alleviate the costs, risks and uncertainties inherent in potential litigation, the Company has determined to voluntarily supplement the Proxy Statement as described in this Current Report (the \u201cSupplemental Disclosures\u201d)."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the 8-K and press release (P9).",
-    "claim": "The company notified holders that its 2.125% Convertible Senior Notes due 2028 had become convertible at the holders' option through quarter-end. The conversion price is approximately $87.20 per share.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "The Notes are convertible at a conversion rate of 11.4681 shares of common stock per $1,000 principal amount of Notes, which is equivalent to a conversion price of approximately $87.20 per share of common stock.",
-     "was greater than 130% of the conversion price in effect on each applicable trading day."
+     "The Company believes that the claims asserted in the Litigation Matters are without merit"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 earnings release (P6).",
-    "claim": "Because of the pending acquisition, the company is not providing a financial outlook and did not host an earnings conference call for the third quarter.",
+    "basis": "stated in the cited item for the no-outlook position; the 'withdrawal' label is inferred",
+    "claim": "Because of the pending acquisition, Integer is not providing a financial outlook for the period and is not hosting a third-quarter earnings call.",
     "facts": [
      "P6"
     ],
     "quotes": [
      "the Company is not providing a financial outlook and will not host a conference call to discuss its third quarter 2026 financial results"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The figure is stated in F3; its materiality is inferred.",
-    "claim": "The nine-month cash flow statement records a non-cash fixed asset impairment of 7,141 (table in thousands), against 0 in the prior-year period.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Non-cash fixed asset impairment | 7,141 | 0"
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in P4; the price comes from the S0 screener row.",
-    "claim": "If the KKR-affiliated merger closes, ITGR shares will be delisted from NYSE and each common share converted into $127 in cash; the screener price was 126.7.",
-    "facts": [
-     "P4",
-     "S0"
-    ],
-    "quotes": [
-     "If the Merger is consummated, the Company\u2019s securities will be delisted from NYSE as soon as practicable following the Effective Time (defined below), and the Company will become a privately held company.",
-     "will automatically be converted into the right to receive $127 in cash, without interest",
-     "price: 126.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and P6; the counter is stated in P6 and P10.",
-    "claim": "Merger completion still depends on remaining closing conditions, and the merger agreement could be terminated.",
+    "basis": "stated in P4 and P6; the screener price is from S0",
+    "claim": "The cash merger with KKR-affiliated buyers at $127 per share has not closed and still depends on remaining conditions, including regulatory approvals. If it fails or is delayed, the pending-deal status would end.",
     "facts": [
      "P4",
      "P6",
-     "P10"
+     "S0"
     ],
     "quotes": [
-     "The Transaction is anticipated to close by the end of 2026, subject to the satisfaction or waiver of customary closing conditions specified in the Merger Agreement, including the receipt of required regulatory approvals.",
-     "the occurrence of any event, change or other circumstances that could give rise to the termination of the Merger Agreement"
+     "The Transaction is anticipated to close by the end of 2026",
+     "will automatically be converted into the right to receive $127 in cash, without interest"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P10 and P6.",
-    "claim": "HSR clearance satisfied only one closing condition; approvals under other antitrust and foreign direct investment laws were still outstanding.",
+    "basis": "stated in P5",
+    "claim": "Merger-related litigation could delay or block the merger and add defense and indemnification costs.",
     "facts": [
-     "P10",
-     "P6"
-    ],
-    "quotes": [
-     "The receipt of early termination of the waiting period under the HSR Act with respect to the consummation of the merger satisfies one of the conditions to the closing of the transactions contemplated by the Merger Agreement, which remains subject to other customary closing conditions, including approvals under certain other applicable antitrust and foreign direct investment laws."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P8 and P5; the counter is stated in P8 and P6.",
-    "claim": "Stockholder lawsuits over proxy disclosures seek to enjoin the merger, and further demand letters have been received.",
-    "facts": [
-     "P8",
      "P5"
     ],
     "quotes": [
-     "The Lawsuits seek, among other remedies, an order enjoining the consummation of the Merger.",
-     "The Lawsuits or any potential future lawsuits could prevent or delay the completion of the Merger and result in significant costs to us, including any costs associated with the indemnification of directors and officers."
+     "individual Company stockholders have filed three complaints relating to the Merger",
+     "The Company believes that the claims asserted in the Litigation Matters are without merit"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6.",
-    "claim": "The company is not providing a financial outlook and held no Q3 2026 earnings call.",
+    "basis": "stated in P6; the link to visibility is inferred",
+    "claim": "The company is giving no financial outlook and held no earnings call for the third quarter, so investors have no company guidance on the recent weakness.",
     "facts": [
      "P6"
     ],
@@ -1745,81 +1373,42 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P6 and P3.",
-    "claim": "Q3 2026 sales decreased 3.9% to $450 million, and Cardio & Vascular sales decreased 5% to $263 million because of new Electrophysiology products. Management had already flagged lower adoption of three new products for 2026.",
+    "basis": "stated in F2 and P6; the product-adoption link is stated in P3 and P6",
+    "claim": "Third-quarter sales fell 3.9% to $450 million and operating income fell sharply to 28,209 from 56,439 (table in thousands). The release attributes the sales decline partly to weak new product ramps.",
     "facts": [
+     "F2",
      "P6",
      "P3"
     ],
     "quotes": [
      "Sales decreased 3.9% to $450 million.",
-     "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products.",
-     "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption."
+     "reflecting the previously communicated impact from the two new Electrophysiology products"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2 and P6.",
-    "claim": "Q3 gross profit fell to 101,561 from 126,160 (table in thousands), and GAAP operating income fell $28 million or 50%.",
+    "basis": "figures are stated in P6, F1 and P3; the rupture mechanism is inferred, and the evidence does not support it as a stated risk",
+    "claim": "Leverage is meaningful and cash is thin. Total debt was $1.219 billion, leverage was 3.3 times adjusted EBITDA, and cash was 14,135 (table in thousands). Adjusted EBITDA is falling.",
     "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "GAAP operating income from continuing operations totaled $28 million, a decrease of $28 million or 50%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P9 and P6; the capacity is stated in P3. Its relevance at October 2026 is inferred.",
-    "claim": "The 2028 Convertible Notes became convertible for the December 2026 quarter, with cash settlement up to principal, while cash was $14,135 (table in thousands) at October 2, 2026.",
-    "facts": [
-     "P9",
      "P6",
+     "F1",
+     "F3",
      "P3"
     ],
     "quotes": [
-     "The Notes are convertible into cash, up to the principal amount of the Notes",
-     "which is equivalent to a conversion price of approximately $87.20 per share of common stock",
-     "As of December 31, 2025, we have access to $794.7 million of borrowing capacity under our Revolving Credit Facility, available for normal course of business and letters of credit."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P6 and P3; the covenant risk is listed in P4.",
-    "claim": "Total debt rose $34 million to $1.219 billion, giving a leverage ratio of 3.3 times adjusted EBITDA, while adjusted EBITDA fell.",
-    "facts": [
-     "P6",
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "From the end of 2025, total debt increased $34 million to $1.219 billion and Non-GAAP net total debt increased $33 million to $1.223 billion, resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026.",
-     "As of December 31, 2025 and 2024, approximately 92% and 50%, respectively, of our principal amount of debt were fixed rate borrowings."
+     "resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P1.",
-    "claim": "The top three customers accounted for approximately 49% of 2025 revenues, and many supply agreements lack minimum purchase requirements.",
+    "basis": "stated in P2 and P1",
+    "claim": "Sales are concentrated in three large customers, about 49% of 2025 revenue, and many supply agreements carry no minimum purchase levels. A reduction by one customer would hit sales.",
     "facts": [
      "P2",
      "P1"
     ],
     "quotes": [
-     "In 2025, our top three customers collectively accounted for approximately 49% of our revenues.",
-     "Furthermore, many of our supply agreements do not contain minimum purchase level requirements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as a risk factor in P2.",
-    "claim": "Tariffs and trade restrictions on products made in Mexico and other countries and imported into the U.S. could raise costs and reduce competitiveness.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "If additional tariffs or trade restrictions are implemented by the U.S. or other countries in connection with a global trade war, the cost of our products manufactured in Mexico or other countries and imported into the U.S. or other countries could increase further, which, in turn, could adversely affect the demand for these products, make our products less competitive and have an adverse effect on our business and results of operations."
+     "In 2025, our top three customers collectively accounted for approximately 49% of our revenues."
     ],
     "support": "supported"
    }
@@ -1827,145 +1416,88 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P4, P6 and P10; which approvals remain is not stated",
-    "claim": "Will the remaining closing conditions, including approvals under other antitrust and foreign direct investment laws, be met so the Merger closes on the stated timeline?",
-    "facts": [
-     "P4",
-     "P6",
-     "P10"
-    ],
-    "quotes": [
-     "The Transaction is anticipated to close by the end of 2026, subject to the satisfaction or waiver of customary closing conditions specified in the Merger Agreement, including the receipt of required regulatory approvals.",
-     "which remains subject to other customary closing conditions, including approvals under certain other applicable antitrust and foreign direct investment laws"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P5 and P8",
-    "claim": "How will the stockholder lawsuits and demand letters over proxy disclosure be resolved, and could they delay or enjoin the Merger?",
-    "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
-     "The Lawsuits seek, among other remedies, an order enjoining the consummation of the Merger.",
-     "The Lawsuits or any potential future lawsuits could prevent or delay the completion of the Merger and result in significant costs to us, including any costs associated with the indemnification of directors and officers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P9; the remaining 2028 Notes principal is not given in the evidence",
-    "claim": "How much 2028 Notes principal will holders convert in the current conversion period, and will the excess over principal be settled in cash, shares or a mix?",
-    "facts": [
-     "P9",
-     "P3"
-    ],
-    "quotes": [
-     "The Notes are convertible at a conversion rate of 11.4681 shares of common stock per $1,000 principal amount of Notes, which is equivalent to a conversion price of approximately $87.20 per share of common stock.",
-     "The Notes are convertible into cash, up to the principal amount of the Notes, and in cash, shares of the Company\u2019s common stock or a combination thereof, at the Company\u2019s election, in respect of the remainder, if any, of the Company\u2019s conversion obligation in excess of the aggregate principal amount of the Notes being converted."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Inferred from P3 and P4; the closing treatment is not described in the evidence",
-    "claim": "How will the 2028 and 2030 convertible notes and the related capped call transactions be treated when the Merger closes?",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "On March 18, 2025, we issued $1.0 billion in aggregate principal amount of 1.875% Convertible Senior Notes due in 2030 (the \u201c2030 Convertible Notes\u201d).",
-     "the conditional conversion feature of the 2028 Notes (as defined below) and the 2030 Notes (as defined below) adversely impacting our liquidity"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred; P4 names termination risk but the omitted text may hold the terms",
-    "claim": "What termination rights and fees apply under the Merger Agreement, and how will existing debt be handled at closing?",
+    "basis": "Stated in the cited items; the open question is inferred from the 'remaining' conditions language, which does not list them.",
+    "claim": "Will the pending KKR-affiliated merger at $127 per share in cash close by the end of 2026, and which required regulatory approvals are still outstanding?",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "the occurrence of any event, change or other circumstances that could give rise to the termination of the Merger Agreement",
-     "From the end of 2025, total debt increased $34 million to $1.219 billion and Non-GAAP net total debt increased $33 million to $1.223 billion, resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026."
+     "The Transaction is anticipated to close by the end of 2026, subject to the satisfaction or waiver of customary closing conditions specified in the Merger Agreement, including the receipt of required regulatory approvals."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures stated in F2; the cause is not stated in the evidence provided",
-    "claim": "Why did quarterly gross profit fall to 101,561 from 126,160 (table in thousands) while sales fell to 449,661 from 467,691 and cost of sales rose to 348,100 from 341,531?",
+    "basis": "Stated in the cited item; the outcome is not given.",
+    "claim": "How will the three stockholder complaints and the thirteen demand letters about the Proxy Statement be resolved, and could they delay the Merger or add costs?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "individual Company stockholders have filed three complaints relating to the Merger"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Inferred from the income statement figures; no cited item gives the cause.",
+    "claim": "What drove third-quarter gross profit down to 101,561 (table in thousands) from 126,160 when sales fell less sharply, and is the cost pressure temporary?",
     "facts": [
      "F2",
      "P6"
     ],
-    "quotes": [
-     "Gross profit | 101,561 | 126,160 | 324,098 | 375,630",
-     "Cardio & Vascular sales decreased 5% to $263 million in the third quarter 2026 compared to the third quarter 2025, reflecting the previously communicated impact from the two new Electrophysiology products."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and P6; the products are named only by category",
-    "claim": "Which specific new products saw lower than anticipated market adoption, and how long will the related sales decline last?",
+    "basis": "Stated in the cited items; the duration of the effect is not given.",
+    "claim": "Will the sales shortfall from the new Electrophysiology and Neuromodulation products persist, given that no financial outlook is being provided during the pending deal?",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
      "In 2026, we expect sales growth to be impacted by lower sales related to three new products due to lower than anticipated market adoption.",
-     "Growth was partially offset by the previously communicated impact from the one new Neuromodulation product."
+     "reflecting the previously communicated impact from the two new Electrophysiology products."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Figures stated in P6; the footnote definition was cut",
-    "claim": "What items make up the latest quarter's non-GAAP 'Other adjustments' of 8,568 (table in thousands), compared with 2,476 a year earlier?",
+    "basis": "Inferred; the packet omits the debt terms and the merger financing details.",
+    "claim": "How will the company's $1.219 billion of debt, including the 2028 and 2030 convertible notes, be treated if the Merger closes, given a leverage ratio of 3.3 times adjusted EBITDA?",
     "facts": [
+     "F1",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Other adjustments(j) | 8,568 | 6,768 | 0.20 | 2,476 | 1,956 | 0.06"
+     "resulting in a leverage ratio of 3.3 times adjusted EBITDA as of October 2, 2026"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Figure stated in F3; the explanation is not in the evidence",
-    "claim": "Which assets were behind the nine-month non-cash fixed asset impairment of 7,141 (table in thousands), and why?",
+    "basis": "Inferred from the balance sheet and cash flow figures; no cited item states the cause.",
+    "claim": "Is the rise in inventories to 278,591 from 253,739 (table in thousands) tied to the slower-selling new products, and does it explain lower operating cash flow of 121,061 versus 140,733?",
     "facts": [
+     "F1",
      "F3"
     ],
-    "quotes": [
-     "Non-cash fixed asset impairment | 7,141 | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Ratio stated in P6; covenant thresholds are not in the evidence",
-    "claim": "How close is the reported leverage ratio of 3.3 times adjusted EBITDA to the covenant limits in the Senior Secured Credit Facilities?",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "our significant amount of outstanding indebtedness and our ability to remain in compliance with financial and other covenants under the credit agreement governing our senior secured credit facilities (\u201cSenior Secured Credit Facilities\u201d)"
-    ],
+    "quotes": [],
     "support": "supported"
    }
   ]
  },
  "ticker": "ITGR",
- "upside": -0.326191444457131,
+ "upside": -0.3714635663692689,
  "valuation": null,
- "value_base": 81.71574340235719,
- "value_bear": 57.778260431994426,
- "value_bull": 114.61601030379109,
+ "value_base": 79.80526937168779,
+ "value_bear": 56.82595407476962,
+ "value_bull": 111.14778857815804,
  "value_per_filed_share": {
-  "base": 81.71574340235719,
-  "bear": 57.778260431994426,
-  "bull": 114.61601030379109
+  "base": 79.80526937168779,
+  "bear": 56.82595407476962,
+  "bull": 111.14778857815804
  },
  "valued": true,
  "verdict": "NO_CALL",
- "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: AVOID, expected return -14.0 points a year against the required return over 3 years)"
+ "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: AVOID, expected return -14.7 points a year against the required return over 3 years)"
 }
