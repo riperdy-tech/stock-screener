@@ -1,28 +1,33 @@
 {
- "alpha_pts": 5.116533816214347,
+ "alpha_pts": 4.505208811341713,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "based_on": {
   "accepted": "2026-08-28T17:53:59.000Z",
   "accepted_utc": "2026-08-28T21:53:59Z",
   "accession": "0000027419-26-000042",
-  "decision_time": "2026-11-19T18:02:52Z",
+  "decision_time": "2026-11-22T03:49:34Z",
   "form": "10-Q",
   "period": "2026-08-01"
  },
- "claims": 113,
- "claims_supported": 100,
- "date": "2026-11-19T18:02:52Z",
+ "claims": 96,
+ "claims_supported": 83,
+ "date": "2026-11-22T03:49:34Z",
  "decided": {
   "flags": [
+   "situation_unclear",
    "run 1000: base_year_not_representative",
-   "run 1000: quotes_verified: 18 of 18",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 13 of 13",
+   "run 1000: capital_event_read_differs_from_xbrl: buybacks_paid xbrl 3,000,000, read 253,000,000",
+   "run 1000: capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
    "run 1000: acquisitions_paid_not_filed_taken_as_0",
    "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
    "run 1000: special_distributions_not_filed_taken_as_0",
    "run 1000: disposals_received_not_filed_taken_as_0",
    "run 3000: base_year_not_representative",
-   "run 3000: quotes_verified: 22 of 22",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 12 of 12",
    "run 3000: capital_event_read_differs_from_xbrl: buybacks_paid xbrl 3,000,000, read 253,000,000",
    "run 3000: capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
    "run 3000: acquisitions_paid_not_filed_taken_as_0",
@@ -31,14 +36,14 @@
    "run 3000: disposals_received_not_filed_taken_as_0"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0596 and margin 0.0711, margin 0.0505 (persist), growth 0.0375, terminal RONIC 0.0667 (equity return r 0.0779), F 10",
-  "run_gap": 0.09811088155301205,
+  "old_defaults_inputs": "year 1 growth 0.0596 and margin 0.0711, margin 0.0505 (persist), growth 0.0375, terminal RONIC 0.0661 (equity return r 0.0772), F 10",
+  "run_gap": 0.012978742082923003,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
      "capital_events": {
-      "excess_cash_after": 10096000000.0,
+      "excess_cash_after": 9846000000.0,
       "excess_cash_before": 10099000000.0,
       "figures": {
        "acquisitions_paid": {
@@ -46,327 +51,19 @@
         "source": "none"
        },
        "buybacks_paid": {
-        "accn": "0000027419-26-000042",
-        "amount": 3000000.0,
-        "end": "2026-08-01",
-        "filed": "2026-08-28",
-        "form": "10-Q",
-        "read_amount": 3000000.0,
-        "source": "xbrl",
-        "start": "2026-02-01",
-        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
-       },
-       "disposals_received": {
-        "amount": 0.0,
-        "source": "none"
-       },
-       "shares_issued_proceeds": {
-        "amount": 0.0,
-        "source": "none"
-       },
-       "special_distributions": {
-        "amount": 0.0,
-        "source": "none"
-       }
-      },
-      "flags": [],
-      "gross_events": 3000000.0,
-      "interim_end": "2026-08-01",
-      "market_cap": 75381447278.0,
-      "net_effect_on_excess_cash": -3000000.0,
-      "shares": {
-       "after": 455600000.0,
-       "before": 455600000.0,
-       "interim": 454296736.0,
-       "replaced": false,
-       "source": "xbrl"
-      },
-      "stamps": [
-       "acquisitions_paid_not_filed_taken_as_0",
-       "shares_issued_proceeds_not_filed_taken_as_0",
-       "special_distributions_not_filed_taken_as_0",
-       "disposals_received_not_filed_taken_as_0"
-      ]
-     },
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 10096000000.0,
-     "excess_cash_before": 10099000000.0,
-     "k0_after": 755250880.2419357,
-     "k0_before": 755250880.2419357,
-     "k0_interest": 445000000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [
-      "acquisitions_paid_not_filed_taken_as_0",
-      "shares_issued_proceeds_not_filed_taken_as_0",
-      "special_distributions_not_filed_taken_as_0",
-      "disposals_received_not_filed_taken_as_0"
-     ],
-     "x0_after": 3390031568.8490934,
-     "x0_before": 3390031568.8490934
-    },
-    "confidence": "medium",
-    "diagnostics": {
-     "da_rule": "pooled",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 74841341782.7569,
-     "seam_ratio": 1.0386090594056987,
-     "tv_share": 0.5336707384781116,
-     "wedge_rate_5": 0.004828707338630516
-    },
-    "flags": [
-     "base_year_not_representative",
-     "quotes_verified: 18 of 18",
-     "acquisitions_paid_not_filed_taken_as_0",
-     "shares_issued_proceeds_not_filed_taken_as_0",
-     "special_distributions_not_filed_taken_as_0",
-     "disposals_received_not_filed_taken_as_0"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.043,
-     "fade_years": 10,
-     "long_run_op_margin": 0.055,
-     "op_margin": [
-      0.062,
-      0.053,
-      0.055,
-      0.056,
-      0.057
-     ],
-     "return_on_new_investment_long_run": 0.13,
-     "rev_growth": [
-      0.06,
-      0.048,
-      0.042,
-      0.038,
-      0.035
-     ],
-     "terminal_growth": 0.0325
-    },
-    "old_defaults_inputs": "year 1 growth 0.0596 and margin 0.0711, margin 0.0505 (persist), growth 0.0375, terminal RONIC 0.0667 (equity return r 0.0779), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 13,
-     "kept": 100
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.045,
-      0.065
-     ],
-     "rev_growth_y3": [
-      0.025,
-      0.055
-     ],
-     "terminal_growth": [
-      0.02,
-      0.04
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "P3",
-        "quote": "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores. We expect to open about 30 new stores during 2026."
-       },
-       {
-        "id": "P6",
-        "quote": "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
-       },
-       {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0384; depreciation (without amortization of acquired intangibles) / revenue 0.0267."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Target expects ~$5 billion of capex in 2026 (~4.5% of guided sales) and $5 billion to $6 billion in 2027 (~4.7% of sales) to fund ~30 annual store openings, remodels, supply chain, and technology, stepping up from the 5-year historical average of 3.84% before moderating toward ~4.0% in Years 3-5, averaging 4.3% over Years 1-5."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost."
-       },
-       {
-        "id": "P6",
-        "quote": "Total | 2,026 | 1,995 | 1,995 | 254,768 | 250,518 | 250,518"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "A 10-year fade reflects durable competitive advantages from Target's 2,026-store fulfillment network, exclusive owned brands, and growing Roundel ad platform, balanced against intense U.S. omnichannel rivalry and low switching costs."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "Since consumers can quickly comparison shop using digital tools, they may make decisions based solely on price or convenience, which could limit our ability to differentiate from our competitors."
-       },
-       {
-        "id": "P1",
-        "quote": "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost."
-       },
-       {
-        "id": "P1",
-        "quote": "Approximately thirty percent of our Merchandise Sales come from our owned and exclusive brands, including, but not limited to, the brands listed below."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "After Year 5, competitive retail pricing transparency, digital fulfillment costs, store payroll pressures, and tariff exposure compress operating margins slightly from 5.7% to 5.5%. That sits between Target's 5-year historical median (5.22%) and 10-year median (5.89%), supported by ~30% owned-brand penetration and store-hub fulfillment economics."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Full-year 2026 operating income margin rate in a range around 6.2 percent, including approximately 1.1 percentage points of benefit from tariff refunds recognized to date."
-       },
-       {
-        "id": "P6",
-        "quote": "Non-merchandise sales grew nearly 20 percent, reflecting strong growth in Roundel ad revenue, Target Circle Card profit sharing revenue, Target Circle 360 membership revenue, and the Target+ marketplace."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Year 1 reflects FY2026 GAAP guidance around 6.2%, which includes ~1.1 percentage points of non-recurring IEEPA tariff refunds recognized through Q3 (~5.1% underlying). Year 2 drops to 5.3% as those refunds drop out, then expands modestly to 5.7% by Year 5 on store sales leverage, Roundel retail media growth, owned-brand mix, and supply chain productivity."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Base year: return on tangible capital 0.1937; tax rate 0.2228; total debt $14,398.0 million; cash counted as excess $10,099.0 million; net debt (debt less that cash) $4,299.0 million."
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0667."
-       },
-       {
-        "id": "P6",
-        "quote": "For the trailing twelve months through third quarter 2026, after-tax return on invested capital (ROIC) was 16.5 percent, compared with 13.4 percent for the trailing twelve months through third quarter 2025."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Target earned 19.37% on tangible capital in the base year and reported 16.5% TTM Q3 2026 after-tax ROIC (13.7% excluding net tariff refunds and transformation costs), well above the 6.67% zero-value hurdle. Incremental long-run returns on new stores, remodels, and IT/supply chain assets should mean-revert from the 19.37% legacy average toward 13.0% as prime locations saturate and competition persists."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range."
-       },
-       {
-        "id": "P6",
-        "quote": "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
-       },
-       {
-        "id": "P1",
-        "quote": "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Year 1 reflects 6.4% 9M 2026 net sales growth and management's raised FY2026 guidance around 6%, driven by a 5.0% Q3 traffic rebound, new store openings, and ~20% non-merchandise growth. Growth moderates from 4.8% in Year 2 to 3.5% in Year 5 as post-2025 easy comparisons roll off, the Ulta Beauty shop-in-shop agreement expires, and new U.S. tariffs temper discretionary spending."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P1",
-        "quote": "Nearly all of our sales are generated within the U.S."
-       },
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0779; long-run nominal growth anchor g_anchor 0.0375."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Target generates nearly all sales in a mature U.S. retail market with over 2,000 stores already operating, so perpetual nominal growth should settle at 3.25%, modestly below the 3.75% nominal growth anchor and roughly in line with Target's pre-pandemic ~3.5% sales growth."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.042,
-      "input_hit": "long_run_op_margin",
-      "risk": "New U.S. tariffs across major trading partners (with ~50% of merchandise imported, led by China) cannot be fully mitigated or passed through, compressing gross margins and forcing higher markdowns."
-     },
-     {
-      "bear_value": 0.015,
-      "input_hit": "terminal_growth",
-      "risk": "Consumer boycotts, macroeconomic weakness in discretionary categories, or inability to offset the August 2026 Ulta Beauty exit and AI-driven price comparison erode traffic and long-run sales growth."
-     },
-     {
-      "bear_value": 0.085,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Elevated $5B-$6B annual investments in stores, supply chain replenishment capacity, and technology fail to earn target returns or experience delays and idle carrying costs."
-     },
-     {
-      "bear_value": 0.05,
-      "input_hit": "capex_to_revenue",
-      "risk": "Sustained store remodel, new-store, and digital infrastructure requirements keep capital intensity permanently near the 2026-2027 peak rather than normalizing."
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.045,
-      "rev_growth": [
-       0.043,
-       0.031,
-       0.025,
-       0.020999999999999998,
-       0.018000000000000002
-      ],
-      "terminal_growth": 0.02
-     },
-     "bull": {
-      "long_run_op_margin": 0.065,
-      "rev_growth": [
-       0.073,
-       0.061,
-       0.055,
-       0.051,
-       0.048
-      ],
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Target maintains an investment-grade capital structure rated A2/A/A with $15,330 million of total debt at Q3 2026 after $1,111 million of debt reductions and zero new debt issuances in 9M 2026, backed by a $4.0 billion revolving credit facility."
-     },
-     "margin_position": "Base-year FY2025 GAAP operating margin of 4.88% (4.56% adjusted excluding $593 million of credit card interchange settlement gains and $250 million of business transformation costs) reflected negative comparable sales, higher markdowns, and tariff turbulence. In FY2026 YTD, underlying operating margin expanded to ~5.15% (6.79% GAAP including $1.3 billion of one-time IEEPA tariff refunds) on +5.0% comparable sales, lower markdowns, supply chain productivity, and ~20% non-merchandise growth, with full-year FY2026 guided around 6.2% GAAP (~5.1% ex-refunds).",
-     "tax_rate_representative": {
-      "answer": "yes",
-      "why": "The 22.28% base-year tax rate aligns closely with FY2024's 22.2% and sits near the 23.1% trailing twelve-month Q3 2026 effective rate as higher pretax earnings modestly dilute fixed tax credit benefits."
-     },
-     "why": "Base-year FY2025 is not representative because revenue fell 1.68% on a 2.6% comparable sales decline before rebounding to 6.4% net sales growth in 9M 2026 and ~6% full-year 2026 guidance. GAAP operating income of $5,117 million (4.88% margin) was distorted by $593 million of credit card interchange litigation settlement gains and $250 million of business transformation costs, placing adjusted operating margin at 4.56%. Capital spending is also stepping up from $3,730 million (3.56% of sales) in FY2025 to ~$5 billion in 2026 and $5 billion to $6 billion in 2027."
-    },
-    "value_at_old_defaults": 158.17697658112633,
-    "values": {
-     "base": 196.5936954838508,
-     "bear": 139.7999448818621,
-     "bull": 266.31747455264343
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "capital_events": {
-      "excess_cash_after": 10096000000.0,
-      "excess_cash_before": 10099000000.0,
-      "figures": {
-       "acquisitions_paid": {
-        "amount": 0.0,
-        "source": "none"
-       },
-       "buybacks_paid": {
-        "accn": "0000027419-26-000042",
-        "amount": 3000000.0,
-        "end": "2026-08-01",
-        "filed": "2026-08-28",
-        "form": "10-Q",
-        "read_amount": 253000000.0,
-        "source": "xbrl",
-        "start": "2026-02-01",
-        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+        "amount": 253000000.0,
+        "printed": 253,
+        "quotes": [
+         {
+          "id": "P6",
+          "quote": "Repurchase of stock | (253) | (408)"
+         }
+        ],
+        "read_above_xbrl": true,
+        "scale": "millions",
+        "source": "read",
+        "xbrl_amount": 3000000.0,
+        "xbrl_tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
        },
        "disposals_received": {
         "amount": 0.0,
@@ -385,10 +82,10 @@
        "capital_event_read_differs_from_xbrl: buybacks_paid xbrl 3,000,000, read 253,000,000",
        "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31"
       ],
-      "gross_events": 3000000.0,
+      "gross_events": 253000000.0,
       "interim_end": "2026-08-01",
-      "market_cap": 75381447278.0,
-      "net_effect_on_excess_cash": -3000000.0,
+      "market_cap": 75814939765.0,
+      "net_effect_on_excess_cash": -253000000.0,
       "shares": {
        "after": 455600000.0,
        "before": 455600000.0,
@@ -405,7 +102,7 @@
      },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 10096000000.0,
+     "excess_cash_after": 9846000000.0,
      "excess_cash_before": 10099000000.0,
      "k0_after": 755250880.2419357,
      "k0_before": 755250880.2419357,
@@ -421,18 +118,19 @@
      "x0_after": 3390031568.8490934,
      "x0_before": 3390031568.8490934
     },
-    "confidence": "medium",
+    "confidence": "low",
     "diagnostics": {
      "da_rule": "pooled",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 66952759085.11508,
-     "seam_ratio": 1.0361311336417016,
-     "tv_share": 0.5011184367573613,
-     "wedge_rate_5": 0.00640569893119792
+     "equity_value": 68257758310.516205,
+     "seam_ratio": 1.0455111340123204,
+     "tv_share": 0.531566688606528,
+     "wedge_rate_5": 0.007616560019718736
     },
     "flags": [
      "base_year_not_representative",
-     "quotes_verified: 22 of 22",
+     "confidence_low",
+     "quotes_verified: 13 of 13",
      "capital_event_read_differs_from_xbrl: buybacks_paid xbrl 3,000,000, read 253,000,000",
      "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
      "acquisitions_paid_not_filed_taken_as_0",
@@ -441,7 +139,7 @@
      "disposals_received_not_filed_taken_as_0"
     ],
     "inputs": {
-     "capex_to_revenue": 0.043,
+     "capex_to_revenue": 0.045,
      "fade_years": 10,
      "long_run_op_margin": 0.055,
      "op_margin": [
@@ -449,34 +147,34 @@
       0.053,
       0.055,
       0.056,
-      0.057
+      0.056
      ],
      "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
       0.06,
-      0.042,
+      0.04,
       0.035,
       0.03,
-      0.028
+      0.03
      ],
-     "terminal_growth": 0.0275
+     "terminal_growth": 0.03
     },
-    "old_defaults_inputs": "year 1 growth 0.0596 and margin 0.0711, margin 0.0505 (persist), growth 0.0375, terminal RONIC 0.0667 (equity return r 0.0779), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0596 and margin 0.0711, margin 0.0505 (persist), growth 0.0375, terminal RONIC 0.0661 (equity return r 0.0772), F 10",
     "prior_read_claims": {
      "dropped_unsupported": 13,
-     "kept": 100
+     "kept": 83
     },
     "ranges": {
      "long_run_op_margin": [
-      0.044,
-      0.066
+      0.05,
+      0.062
      ],
      "rev_growth_y3": [
-      0.015,
+      0.02,
       0.05
      ],
      "terminal_growth": [
-      0.0175,
+      0.025,
       0.035
      ]
     },
@@ -484,56 +182,40 @@
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0384; depreciation (without amortization of acquired intangibles) / revenue 0.0267."
-       },
-       {
-        "id": "P3",
-        "quote": "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores."
-       },
-       {
         "id": "P6",
-        "quote": "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
+        "quote": "the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0384"
        }
       ],
-      "quotes_given": 3,
-      "why": "While Target's 5-year pooled capex-to-revenue ratio is 3.84%, management explicitly guided to ~$5 billion of capex in 2026 (~4.5% of sales) and $5-$6 billion in 2027 (~4.75% of sales) to fund new stores, remodels, supply chain, and technology. Holding 4.3% across Years 1-5 captures this 2026-2027 investment wave followed by modest normalization toward ~4.0% in Years 3-5."
+      "quotes_given": 2,
+      "why": "Management guides capex of $5-6 billion for 2027 against about $111 billion of revenue, and nine-month 2026 capex runs about 4.8% of sales. I use 4.5% across years 1-5, above the pooled 3.8%."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost."
-       },
-       {
-        "id": "P1",
-        "quote": "We compete with omnichannel retailers, including department stores, off-price general merchandise retailers, wholesale clubs, category-specific retailers, drug stores, supermarkets, direct-to-consumer brands, online marketplaces, and other forms of retail commerce."
+        "id": "P6",
+        "quote": "Comparable sales grew 5.6 percent in the third quarter"
        }
       ],
-      "quotes_given": 2,
-      "why": "A 10-year fade period reflects durable structural advantages from Target's stores-as-hubs fulfillment model (fulfilling over 97% of sales) and owned brands, balanced against intense competition across wholesale clubs, online marketplaces, and off-price retailers that gradually erodes excess returns."
+      "quotes_given": 1,
+      "why": "A 10-year fade lets the recent traffic rebound and the margin recovery normalize toward a mature retailer's growth and margin."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2019-02-02 | $75,356.0 million | 0.0363 | 0.0545"
+        "quote": "2018-02-03 | $72,714.0 million | 0.0348 | 0.0581"
        },
        {
-        "id": "REC",
-        "quote": "2020-02-01 | $78,112.0 million | 0.0366 | 0.0596"
-       },
-       {
-        "id": "P1",
-        "quote": "Approximately thirty percent of our Merchandise Sales come from our owned and exclusive brands, including, but not limited to, the brands listed below."
-       },
-       {
-        "id": "P2",
-        "quote": "Since consumers can quickly comparison shop using digital tools, they may make decisions based solely on price or convenience, which could limit our ability to differentiate from our competitors."
+        "id": "P6",
+        "quote": "Operating income margin rate of 6.2 percent, which included 1.1 percentage points of benefit from the tariff refunds"
        }
       ],
-      "quotes_given": 4,
-      "why": "A 5.5% long-run operating margin sits slightly above Target's 5-year median of 5.22% (which includes FY2023's 3.53% inventory markdown trough) and aligns with pre-pandemic FY2018-FY2020 margins (5.45%-5.96%). High-margin owned brands (~30% of merchandise sales) and Roundel retail media support margins above recent troughs, while digital price transparency and omnichannel competition prevent returning to pandemic highs."
+      "quotes_given": 2,
+      "why": "The margin history runs from about 5.4% to 8.4% with a recent median near 5.2%. Underlying gross margin gains and growing non-merchandise revenue support a level slightly above that median, but tariffs, competition and value investment cap it."
      },
      "op_margin": {
       "quotes": [
@@ -542,38 +224,26 @@
         "quote": "Full-year 2026 operating income margin rate in a range around 6.2 percent, including approximately 1.1 percentage points of benefit from tariff refunds recognized to date."
        },
        {
-        "id": "P4",
-        "quote": "The U.S. administration has instituted new tariffs against most major trading partners."
-       },
-       {
         "id": "P6",
-        "quote": "Non-merchandise sales grew nearly 20 percent, reflecting strong growth in Roundel ad revenue, Target Circle Card profit sharing revenue, Target Circle 360 membership revenue, and the Target+ marketplace."
+        "quote": "This increase in Adjusted SG&A rate reflects the impact of higher incentive compensation, additional store labor hours, as well as planned investments in new and existing stores"
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 GAAP operating margin of 6.2% matches management's FY2026 guidance, which includes 1.1 percentage points of non-recurring IEEPA tariff refunds (~5.1% underlying). Once those refunds drop out in Year 2, GAAP margin resets to 5.3% before gradually edging up to 5.7% by Year 5 on Roundel ad mix, supply chain productivity, and sales leverage, partially offset by store labor investments and new U.S. tariffs."
+      "quotes_given": 2,
+      "why": "Year 1 follows guidance of 6.2% including refunds. Year 2 drops back to the underlying margin of about 5.1% plus modest gains from advertising and supply chain productivity. SG&A deleverage from labor and store investment limits further expansion."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.1937; tax rate 0.2228; total debt $14,398.0 million; cash counted as excess $10,099.0 million; net debt (debt less that cash) $4,299.0 million."
+        "quote": "Base year: return on tangible capital 0.1937"
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0667."
-       },
-       {
-        "id": "P6",
-        "quote": "For the trailing twelve months through third quarter 2026, after-tax return on invested capital (ROIC) was 16.5 percent, compared with 13.4 percent for the trailing twelve months through third quarter 2025."
-       },
-       {
-        "id": "P6",
-        "quote": "For the trailing twelve months ended October 31, 2026, includes the impact of tariff refunds, which increased after-tax ROIC by 3.0 percentage points, and business transformation costs incurred in the trailing twelve-month period, which decreased after-tax ROIC by 0.2 percentage points."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0661."
        }
       ],
-      "quotes_given": 4,
-      "why": "Target's base-year return on tangible capital is 19.37% and TTM Q3 2026 after-tax ROIC is 16.5% (~13.7% excluding net tariff refund and transformation effects). On incremental long-run capital beyond Year 5, competitive pressure from major omnichannel rivals should compress returns from 19.37% down toward 12.0%, still well above the 6.67% zero-value hurdle thanks to store-hub economics and Roundel."
+      "quotes_given": 2,
+      "why": "The base-year return on tangible capital of 19.4% is inflated by refunds and depreciated store assets. New stores and remodels earn less, though still well above the 6.6% break-even, so I use 12%."
      },
      "rev_growth": {
       "quotes": [
@@ -582,80 +252,360 @@
         "quote": "Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range."
        },
        {
-        "id": "P6",
-        "quote": "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
-       },
-       {
-        "id": "P1",
-        "quote": "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026."
+        "id": "P3",
+        "quote": "Comparable sales decreased 2.6 percent, driven by a 2.2 percent decrease in traffic and a 0.4 percent decrease in average transaction amount."
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 growth of 6.0% directly follows management's Q3-updated FY2026 guidance after 7.1% Q3 sales growth (+5.0% traffic) and 31 net store additions through October 31, 2026. Growth then moderates from 4.2% in Year 2 toward 2.8% by Year 5 as Target laps the 2026 traffic rebound, absorbs the August 2026 Ulta Beauty shop-in-shop exit, and normalizes toward mature U.S. retail growth supported by ~1.5% space expansion and Roundel."
+      "quotes_given": 2,
+      "why": "Management guides FY2026 growth to about 6% on traffic-led comparable sales. That follows a weak, easy-comparison year, so I fade growth to 3% by year 5, in line with a mature U.S. retailer plus about 30 new stores a year."
      },
      "terminal_growth": {
       "quotes": [
        {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       },
+       {
         "id": "P1",
         "quote": "Nearly all of our sales are generated within the U.S."
-       },
-       {
-        "id": "P6",
-        "quote": "Total | 2,026 | 1,995 | 1,995 | 254,768 | 250,518 | 250,518"
-       },
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.0779; long-run nominal growth anchor g_anchor 0.0375."
        }
       ],
-      "quotes_given": 3,
-      "why": "Because Target already operates 2,026 U.S. stores and generates nearly all revenue domestically, perpetual growth of 2.75% sits modestly below the 3.75% nominal economy anchor. Long-run growth should track inflation plus modest share and non-merchandise monetization gains rather than physical unit expansion."
+      "quotes_given": 2,
+      "why": "Target is a mature U.S.-only discount retailer with about 2,000 stores. I set growth slightly below the long-run nominal anchor of 3.75%."
      }
     },
     "risks": [
      {
-      "bear_value": 0.042,
+      "bear_value": 0.047,
       "input_hit": "long_run_op_margin",
-      "risk": "New U.S. tariffs on imported merchandise (~50% sourced outside the U.S., led by China) combined with higher markdowns on discretionary/owned-brand inventory compress gross margins once 2026 tariff refunds fade."
+      "risk": "No further tariff refunds and new tariffs squeeze gross margin, so margins settle at about the FY2025 level"
      },
      {
-      "bear_value": 0.015,
-      "input_hit": "terminal_growth",
-      "risk": "Digital price comparison, third-party AI shopping intermediaries, or renewed reputational boycotts erode direct guest traffic and force permanent price/promotional concessions."
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Traffic gains fade after the easy comparisons and holiday demand disappoints, leaving growth near inflation"
      },
      {
-      "bear_value": 0.07,
+      "bear_value": 0.08,
       "input_hit": "return_on_new_investment_long_run",
-      "risk": "Elevated $5B-$6B capex commitments on store remodels, new stores, supply chain, and technology fail to earn adequate returns or require persistently higher capital intensity."
-     },
-     {
-      "bear_value": 0.052,
-      "input_hit": "capex_to_revenue",
-      "risk": "Supply chain expansion and store remodel cost inflation keep capex intensity permanently near 2026-2027 peak levels without commensurate revenue acceleration."
+      "risk": "Higher capex on stores and supply chain earns weak returns"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.044,
+      "long_run_op_margin": 0.05,
       "rev_growth": [
-       0.039999999999999994,
-       0.022,
-       0.015,
-       0.009999999999999995,
-       0.007999999999999997
+       0.045,
+       0.024999999999999998,
+       0.02,
+       0.014999999999999996,
+       0.014999999999999996
       ],
-      "terminal_growth": 0.0175
+      "terminal_growth": 0.025
      },
      "bull": {
-      "long_run_op_margin": 0.066,
+      "long_run_op_margin": 0.062,
       "rev_growth": [
        0.075,
-       0.057,
+       0.055,
        0.05,
        0.045,
-       0.043
+       0.045
       ],
       "terminal_growth": 0.035
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "cyclical": "yes",
+     "debt_level_representative": {
+      "answer": "yes",
+      "why": "Debt of $14.4 billion is roughly flat to slightly lower than the current $15.3 billion, and the company holds A-range ratings with stated debt-leverage covenants."
+     },
+     "margin_position": "The FY2025 margin of 4.88% is below the 2010-2013 level of about 7% and below the 5.2-5.3% of the two years before it. Deleveraged sales (comparable sales -2.6%), markdowns and tariff costs pushed it down. The FY2026 margin of about 6.2% is flattered by about 1.1 points of one-time tariff refunds, so the underlying margin is about 5.1%.",
+     "tax_rate_representative": {
+      "answer": "yes",
+      "why": "The base-year rate of 22.3% is close to the 23.1% trailing-twelve-month rate and the 23.9% current-quarter rate, so a rate of about 23% is sustainable."
+     },
+     "why": "FY2025 was a weak year with falling comparable sales, higher markdowns and $250 million of transformation costs, partly offset by a $593 million interchange gain. FY2026 is rebounding with 5-6% comparable sales growth and a refund-inflated margin, so neither year is a clean base. I anchor on the underlying margin of about 5.1-5.5% and let it settle near the 5-year median."
+    },
+    "value_at_old_defaults": 159.5667466311399,
+    "values": {
+     "base": 180.71559778372955,
+     "bear": 146.1888387003621,
+     "bull": 231.40659195434637
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 9846000000.0,
+      "excess_cash_before": 10099000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "buybacks_paid": {
+        "amount": 253000000.0,
+        "printed": 253,
+        "quotes": [
+         {
+          "id": "P6",
+          "quote": "Repurchase of stock | (253) | (408)"
+         }
+        ],
+        "read_above_xbrl": true,
+        "scale": "millions",
+        "source": "read",
+        "xbrl_amount": 3000000.0,
+        "xbrl_tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "capital_event_read_differs_from_xbrl: buybacks_paid xbrl 3,000,000, read 253,000,000",
+       "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31"
+      ],
+      "gross_events": 253000000.0,
+      "interim_end": "2026-08-01",
+      "market_cap": 75814939765.0,
+      "net_effect_on_excess_cash": -253000000.0,
+      "shares": {
+       "after": 455600000.0,
+       "before": 455600000.0,
+       "interim": 454296736.0,
+       "replaced": false,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "acquisitions_paid_not_filed_taken_as_0",
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 9846000000.0,
+     "excess_cash_before": 10099000000.0,
+     "k0_after": 755250880.2419357,
+     "k0_before": 755250880.2419357,
+     "k0_interest": 445000000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "acquisitions_paid_not_filed_taken_as_0",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0"
+     ],
+     "x0_after": 3390031568.8490934,
+     "x0_before": 3390031568.8490934
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "pooled",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 69270561789.46725,
+     "seam_ratio": 1.05734912996155,
+     "tv_share": 0.5848659070713729,
+     "wedge_rate_5": 0.007714220194695093
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 12 of 12",
+     "capital_event_read_differs_from_xbrl: buybacks_paid xbrl 3,000,000, read 253,000,000",
+     "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
+     "acquisitions_paid_not_filed_taken_as_0",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.045,
+     "fade_years": 8,
+     "long_run_op_margin": 0.055,
+     "op_margin": [
+      0.062,
+      0.054,
+      0.055,
+      0.055,
+      0.055
+     ],
+     "return_on_new_investment_long_run": 0.13,
+     "rev_growth": [
+      0.06,
+      0.04,
+      0.035,
+      0.03,
+      0.03
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0596 and margin 0.0711, margin 0.0505 (persist), growth 0.0375, terminal RONIC 0.0661 (equity return r 0.0772), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 83
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.047,
+      0.063
+     ],
+     "rev_growth_y3": [
+      0.02,
+      0.05
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
+       },
+       {
+        "id": "REC",
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0384"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Capex is stepping up to $5 to $6 billion in 2027, against about 4.8% of sales in the nine months of 2026. The five-year pooled ratio is 3.8%, so I use 4.5% held over years 1 to 5."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2023-01-28 | $109,120.0 million | 0.0294 | 0.0353"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Revenue was flat to down over fiscal 2022 to 2025 and is only now rebounding, so growth and margin take about eight years to settle to the long-run levels."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Operating income margin rate | 4.9 | 5.2 | 5.3"
+       },
+       {
+        "id": "P6",
+        "quote": "Excluding tariff refunds, third quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior year rate of 28.2 percent"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Recent margins run 4.9 to 5.3% against about 5.3 to 7% in earlier years, and the underlying 2026 margin is near 5.1%. Gains from Roundel and supply chain productivity are offset by labor, value and freight costs, so a long-run margin of about 5.5% is reasonable, with a wide range."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Full-year 2026 operating income margin rate in a range around 6.2 percent, including approximately 1.1 percentage points of benefit from tariff refunds recognized to date."
+       },
+       {
+        "id": "P6",
+        "quote": "The Company's guidance excludes any potential future tariff refunds."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 follows the guided 6.2%, which includes about 1.1 points of non-recurring tariff refunds. From year 2 the margin returns to an underlying level of about 5.4 to 5.5%, since SG&A is rising faster than sales and refunds are not guided to recur."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "after-tax return on invested capital (ROIC) was 16.5 percent"
+       },
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0661."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Reported after-tax ROIC is 16.5%, but 3.0 points of that come from tariff refunds. Returns on new stores and remodels should be well above the 6.6% break-even but below the filed 19.4% on tangible capital, so I use 13%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range."
+       },
+       {
+        "id": "P3",
+        "quote": "Comparable sales decreased 2.6 percent, driven by a 2.2 percent decrease in traffic and a 0.4 percent decrease in average transaction amount."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Management guides fiscal 2026 growth to about 6%, helped by traffic-led comparable sales after a weak fiscal 2025. Growth should fade toward 3% as the easy comparisons end and the store base grows at about 1 to 2% a year."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0772; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A mature U.S. discount retailer with roughly 2,000 stores should grow near nominal GDP. I set it a little below the 3.75% anchor because store growth is modest and competition is broad."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.048,
+      "input_hit": "op_margin",
+      "risk": "No further tariff refunds, and new tariffs, SG&A growth and value investments compress margin back toward 4.8%"
+     },
+     {
+      "bear_value": 0.02,
+      "input_hit": "rev_growth",
+      "risk": "Traffic gains fade as comparisons toughen and holiday demand disappoints after the large inventory build, leaving growth near 2%"
+     },
+     {
+      "bear_value": 0.047,
+      "input_hit": "long_run_op_margin",
+      "risk": "Rising capex on stores and remodels earns weak returns and the long-run margin settles at the low end of the range"
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.047,
+      "rev_growth": [
+       0.045,
+       0.024999999999999998,
+       0.02,
+       0.014999999999999996,
+       0.014999999999999996
+      ],
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "long_run_op_margin": 0.063,
+      "rev_growth": [
+       0.075,
+       0.055,
+       0.05,
+       0.045,
+       0.045
+      ],
+      "terminal_growth": 0.04
      }
     },
     "situation": {
@@ -663,72 +613,81 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "Target maintains a disciplined investment-grade capital structure (A2/A/A ratings) with total debt falling modestly by $1,111 million in 9M 2026 through scheduled repayments rather than a structural shift in leverage."
+      "why": "Debt of about $14.4 billion is held steadily with A-range credit ratings and was little changed through the third quarter of 2026."
      },
-     "margin_position": "Target's FY2025 GAAP operating margin of 4.88% (4.56% adjusted) sat below its pre-pandemic 5.45%-5.96% range and 5-year median of 5.22% due to three years of revenue contraction, elevated markdowns, tariffs, and transformation charges partially offset by a $593 million interchange settlement gain; in FY2026, traffic-led sales recovery, supply chain efficiencies, Roundel ad growth, and $1.3 billion of IEEPA tariff refunds have lifted margins to a guided ~6.2% (~5.1% excluding refunds).",
+     "margin_position": "The GAAP margin of 4.88% in the base year was below the 5.2 to 5.3% of the prior two years, held down by markdowns, tariff costs and sales deleverage. In fiscal 2026 it is lifted to about 6.2% by one-time IEEPA tariff refunds worth about 1.1 points, so the underlying margin is nearer 5.1%.",
      "tax_rate_representative": {
-      "answer": "yes",
-      "why": "Target's base-year 22.28% effective tax rate is consistent with FY2024's 22.2% and reflects its predominantly U.S. earnings base net of recurring tax credits, though the 9M 2026 rate ticked up to 23.9% on higher pretax earnings."
+      "answer": "unclear",
+      "why": "The filed 22.3% rate is below the 23.9% to 24% rates seen in recent quarters, so a rate near 23% to 24% is more likely to persist."
      },
-     "why": "FY2025 (ended January 31, 2026) marked a multi-year revenue trough (-1.68% revenue growth, -2.6% comparable sales) amid cautious discretionary spending, consumer boycotts, and tariff volatility, before accelerating to +6.4% nine-month sales growth in FY2026. Reported FY2025 operating income of $5,117 million was also distorted by $593 million in credit card interchange litigation settlement gains and $250 million in business transformation costs, alongside elevated tariff expenses subsequently partially refunded in 2026. Moreover, capex is stepping up from 3.56% of revenue in FY2025 to ~$5 billion in 2026 and $5-$6 billion in 2027."
+     "why": "The base year had falling comparable sales, elevated markdowns and tariffs, and one-off gains and charges. The fiscal 2026 rebound is strong, but part of it comes from refunds that guidance excludes in future. Year 1 therefore follows guidance, and margins step back from year 2."
     },
-    "value_at_old_defaults": 158.17697658112633,
+    "value_at_old_defaults": 159.5667466311399,
     "values": {
-     "base": 178.20765026453606,
-     "bear": 127.14698587945001,
-     "bull": 241.79340679298213
+     "base": 183.07637890235225,
+     "bear": 142.15526598081482,
+     "bull": 252.8115017242364
     }
    }
   },
-  "situation_unclear": false,
-  "value_at_old_defaults": 158.17697658112633,
-  "value_at_old_defaults_quoted": 158.17697658112633,
-  "version": "decided.v3 2026-11-20 WO_NC10a"
+  "situation_unclear": true,
+  "value_at_old_defaults": 159.5667466311399,
+  "value_at_old_defaults_quoted": 159.5667466311399,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 85379746561.48253,
+ "equity_value": 82871812289.08943,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 455600000.0,
  "flags": [
-  "Target and Ulta Beauty reached a mutual agreement to terminate their commercial shop-in-shop operating agreement when it expires in August 2026.",
-  "Target announced a multi-year business transformation initiative, reduced its headquarters workforce, exited facilities, and incurred $250 million in related costs.",
-  "Michael J. Fiddelke became Chief Executive Officer, Brian C. Cornell transitioned to Executive Chair, Lisa R. Roath became Chief Operating Officer, and Cara A. Sylvester became Chief Merchandising Officer."
+  "Target received refunds of certain IEEPA tariffs it had paid and booked $994 million of them as a reduction of Cost of Sales in the second quarter.",
+  "Target recognized a further $301 million of pretax IEEPA tariff refund benefit in the third quarter, within gross margin and operating income.",
+  "Target entered a new $4.0 billion unsecured revolving credit facility and terminated its prior $3.0 billion five-year facility and its $1.0 billion 364-day facility."
  ],
  "in_code_book": false,
- "ke": 0.0779318907508762,
+ "ke": 0.0772359950902752,
  "market_cap_at_publish": 75076985661,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 165.83,
  "qwen_book": null,
  "release_truncated": [],
- "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
+ "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
  "seed_base": {
-  "1000": 196.5936954838508,
-  "3000": 178.20765026453606
+  "1000": 180.71559778372955,
+  "3000": 183.07637890235225
  },
- "seeds_agree": true,
+ "seeds_agree": false,
  "share_unit_note": null,
- "source": "new filing (new_filing:8-K:0000027419-26-000051)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in S0 and P1",
-    "claim": "Target Corporation operates as a discount retailer selling fashionable, differentiated merchandise and everyday essentials to consumers (referred to as guests) primarily within the United States.",
+    "basis": "stated in the cited item (10-K Item 1)",
+    "claim": "Target sells fashionable, differentiated general merchandise and everyday essentials at discounted prices to consumers it calls guests, through its stores and digital channels.",
     "facts": [
-     "S0",
      "P1"
     ],
     "quotes": [
-     "We offer our customers, referred to as \"guests,\" fashionable, differentiated merchandise and everyday essentials at discounted prices.",
+     "We offer our customers, referred to as \"guests,\" fashionable, differentiated merchandise and everyday essentials at discounted prices."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Nearly all sales are generated in the U.S., so the customer base is U.S. consumers.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
      "Nearly all of our sales are generated within the U.S."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "Target reports its business as a single operating segment across its physical stores and digital channels.",
+    "basis": "stated in the cited item",
+    "claim": "Target reports one operating segment. Stores and digital channels are run as one business rather than as separate reporting segments.",
     "facts": [
      "P1"
     ],
@@ -738,161 +697,301 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P4, and P6",
-    "claim": "Merchandise sales represent the core of Target's revenue across Apparel & accessories, Beauty, Food & beverage, Hardlines (Fun 101), Home furnishings & d\u00e9cor, and Household essentials, totaling 77,291 (table in millions) out of $79,049 (table in millions) in Net sales for the nine months ended October 31, 2026.",
+    "basis": "stated in the cited items (10-K narrative and earnings release sales table)",
+    "claim": "Most revenue is merchandise sales, with a smaller non-merchandise layer. In the third quarter, merchandise sales were 26,449 of net sales of $27,067 (table in millions). Advertising revenue was 296, credit card profit sharing 153, and other 169.",
     "facts": [
-     "P1",
-     "P4",
-     "P6"
+     "P6",
+     "P1"
     ],
     "quotes": [
-     "The vast majority of our Net Sales are generated by the sale of merchandise to customers.",
-     "The majority of our stores offer a wide assortment of general merchandise and groceries."
+     "The vast majority of our Net Sales are generated by the sale of merchandise to customers."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P1 and P2",
-    "claim": "Target sells both national brands and higher-margin owned and exclusive brands, which account for approximately thirty percent of overall merchandise sales.",
+    "basis": "stated in the cited items (10-Q category table; 10-K Item 1)",
+    "claim": "The assortment spans several core categories, led by food & beverage and household essentials. In the second quarter, food & beverage was 23, household essentials 18 and apparel & accessories 16% of merchandise sales (table percentages).",
     "facts": [
-     "P1",
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "We manage our business across the six core merchandise categories shown below."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Owned and exclusive brands make up about thirty percent of merchandise sales and generally earn higher margins than national brands. They need longer lead times and accurate forecasting, which raises inventory and markdown risk.",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "A significant portion of our Merchandise Sales are from national brand merchandise.",
      "Our owned and exclusive brand products represent approximately thirty percent of our overall merchandise sales and generally carry higher margins than equivalent national brand products."
     ],
     "support": "number_not_found"
    },
    {
-    "basis": "stated in P1 and P6",
-    "claim": "Target supplements merchandise sales with higher-growth non-merchandise revenue from Roundel digital advertising (821, table in millions, in the nine months ended October 31, 2026), Target Circle Card credit card profit sharing (422, table in millions), the Target Plus third-party marketplace, Target Circle 360 membership fees, and in-store partner agreements such as CVS pharmacies.",
+    "basis": "stated in the cited items",
+    "claim": "Stores serve as fulfillment hubs for in-store and digital orders, which Target says lowers fulfillment cost. Stores fulfilled more than 97 percent of merchandise sales. Digitally originated sales were 19.8 of merchandise sales in the third quarter (table percentage).",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "We generate revenue through a variety of other sources, including Roundel, which provides advertising services to vendors and other third parties, including marketplace sellers; credit card profit sharing related to our Target Circle Card program; our third-party digital marketplace, Target Plus; membership fees; and others.",
-     "CVS Pharmacy, Inc. (CVS) operates pharmacies and clinics in our stores under a perpetual operating agreement from which we generate annual occupancy income."
+     "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P1 and P6",
-    "claim": "Target operates an omnichannel model centered on 2,026 stores as of October 31, 2026 that fulfill more than 97 percent of merchandise sales\u201497.5% in the nine months ended October 31, 2026\u2014spanning in-store purchases and digital fulfillment options, alongside the Target Circle loyalty program.",
+    "basis": "stated in the cited items; the margin mechanism is partly inferred from the 10-Q gross margin discussion",
+    "claim": "Non-merchandise revenue is growing faster than merchandise. In the third quarter, non-merchandise sales rose 19.3 percent against 6.9 percent for merchandise. The release attributes this to Roundel advertising, card profit sharing, paid membership and the Target+ marketplace.",
     "facts": [
-     "P1",
      "P6"
     ],
     "quotes": [
-     "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost.",
-     "Our stores fulfill the majority of digitally originated sales, including shipment from stores to guests, store Order Pickup or Drive Up, and Same-Day Delivery."
+     "reflecting a 6.9 percent increase in merchandise sales and a 19.3 percent increase in non-merchandise sales"
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in P3 and P6",
-    "claim": "Top-line merchandise growth is driven by comparable sales (guest traffic and average transaction amount) and new store openings; after Net sales fell 1.7 percent to $104,780 (table in millions) in 2025 on a (2.6)% comparable sales decline, Net sales rose 6.4% in the nine months ended October 31, 2026 on 5.0% comparable sales growth.",
+    "basis": "stated in the cited items",
+    "claim": "Sales depend on comparable sales, meaning traffic and average transaction size, plus new stores. Comparable sales fell 2.6 percent in the prior fiscal year and grew 5.6 percent in the third quarter, driven by a 5.0 percent increase in traffic.",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
-     "Merchandise Sales growth \u2013 from both comparable sales and new stores \u2013 represents an important driver of our long-term profitability."
+     "We expect that comparable sales growth will drive a significant portion of our total sales growth.",
+     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P2, and P6",
-    "claim": "Revenue is seasonal, with a larger share of annual net sales generated during the fourth-quarter November and December holiday period alongside peaks such as back-to-school and back-to-college.",
+    "basis": "stated in the cited item (10-K MD&A table)",
+    "claim": "Cost of sales is by far the largest cost line. In the latest fiscal year, net sales were $104,780, cost of sales 75,511, SG&A 21,535 and depreciation and amortization 2,617, leaving operating income of $5,117 (table in millions).",
     "facts": [
-     "P1",
-     "P2",
-     "P6"
+     "P3"
     ],
     "quotes": [
-     "A larger share of annual net sales are traditionally earned during the fourth quarter because it includes the November and December holiday sales period.",
-     "In addition to the November and December holiday sales period, we also see increased sales activity during the back-to-school and back-to-college period and other seasonal moments throughout the year."
+     "Note: Gross margin is calculated as Net Sales less Cost of Sales."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2, P3, P4, and P6",
-    "claim": "Cost of sales\u201475,511 in 2025 and 54,472 in the nine months ended October 31, 2026 (tables in millions)\u2014is Target's largest cost and is driven by merchandise costs, category sales mix, markdown rates, purchase order cancellation costs, freight and fuel costs, supply chain productivity, and inventory shrink.",
+    "basis": "stated in the cited item",
+    "claim": "Gross margin moves with merchandising decisions, sales mix and shrink. In the latest fiscal year the gross margin rate was 27.9 percent against 28.2 percent, reflecting higher markdowns and purchase order cancellation costs, partly offset by advertising and other revenue growth.",
     "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
+     "P3"
     ],
     "quotes": [
-     "However, we depend on sales of our higher-margin merchandise to drive net earnings growth.",
-     "These benefits were partially offset by elevated freight and fuel-related costs, continued investments in value, and modest pressure from category sales mix."
+     "merchandising activities, including higher markdown rates and purchase order cancellation costs, partially offset by growth in advertising and other revenues"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P3, P4, and P6",
-    "claim": "Because approximately one-half of Target's merchandise is sourced outside the United States with China as the largest import origin, tariffs and tariff refunds materially swing Cost of sales, including $1.3 billion of IEEPA tariff refunds recognized as a Cost of sales reduction in the nine months ended October 31, 2026 (a 1.6 percentage points benefit to gross margin rate).",
+    "basis": "stated in the cited items",
+    "claim": "About half of merchandise is sourced outside the U.S., with China the largest origin, so tariffs directly affect cost of sales. Recent refunds of certain IEEPA tariffs lowered cost of sales by $994 million in the second quarter and $301 million in the third quarter. These are one-time benefits, and guidance excludes future refunds.",
     "facts": [
      "P1",
-     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
      "Approximately one-half of the merchandise we offer is sourced from outside the United States, with China representing the largest country of origin for imported goods.",
-     "For the three and nine months ended October 31, 2026, Gross margin, Operating income, and Adjusted operating income include $301 million and $1.3 billion benefits from tariff refunds received during 2026, which are classified as a reduction of Cost of Sales."
+     "During the second quarter of 2026, we received refunds of certain IEEPA tariffs previously paid and recognized $994 million related to these refunds as a reduction of Cost of Sales.",
+     "The Company's guidance excludes any potential future tariff refunds."
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in P3, P4, and P6",
-    "claim": "SG&A expenses (21,535 in 2025 and 17,208 in the nine months ended October 31, 2026, tables in millions) and depreciation and amortization (2,617 in 2025 and 2,002 in the nine-month 2026 period, tables in millions) are driven by store payroll and incentive compensation, new store and remodel expenses, topline sales leverage, and discrete items such as business transformation costs and litigation settlements.",
+    "basis": "stated in the cited item; the fixed-cost mechanism is inferred from the leverage language",
+    "claim": "SG&A is the second-largest cost and is driven by labor and store investment. The third-quarter adjusted SG&A rate was 21.9 percent against 21.3 percent a year earlier, reflecting higher incentive compensation, more store labor hours and investment in stores, partly offset by sales leverage.",
     "facts": [
-     "P3",
-     "P4",
      "P6"
     ],
     "quotes": [
-     "The increase reflected higher compensation expense, including stores payroll and incentive compensation, new store and remodel-related expenses, and the net impact of other cost increases.",
      "This increase in Adjusted SG&A rate reflects the impact of higher incentive compensation, additional store labor hours, as well as planned investments in new and existing stores, partially offset by the leverage benefit of strong topline growth."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P3 and P6",
-    "claim": "Maintaining and expanding Target's store, supply chain, and technology base requires ongoing capital expenditures, totaling (3,762) (table in millions) in the nine months ended October 31, 2026, with approximately $5 billion planned for 2026 and $5 billion to $6 billion planned for 2027.",
+    "basis": "stated in the cited item",
+    "claim": "The model is capital-intensive: Target keeps spending on stores, remodels and new stores. Third-quarter capital expenditures were $1.4 billion, $0.4 billion above the prior year, driven mainly by new and existing stores.",
     "facts": [
-     "P3",
      "P6"
     ],
     "quotes": [
-     "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores.",
-     "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
+     "Third quarter capital expenditures of $1.4 billion were $0.4 billion higher than last year, driven primarily by increased investments in new and existing stores."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "seasonality is stated in the 10-K; the supplier-funding link is inferred from the balance sheet figures",
+    "claim": "Earnings are seasonal and working capital swings with the calendar. Inventory rose to 16,144 from 12,304 at fiscal year-end, while accounts payable rose to 15,514 from 12,622 (table in millions), so supplier credit funds much of the build before the holiday quarter.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "A larger share of annual net sales are traditionally earned during the fourth quarter because it includes the November and December holiday sales period."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated directly in S0 and P1 (Form 10-K Item 1 Business).",
-    "claim": "Target operates as a single-segment U.S. discount retailer differentiating through design, style, value, and a curated multi-category assortment across stores and digital channels.",
+    "basis": "Stated in the earnings release; the mechanism is inferred.",
+    "claim": "Target's recent traffic and sales momentum is strong: third quarter net sales grew 7.1 percent, comparable sales rose 5.6 percent, and comparable traffic rose 5.0 percent.",
     "facts": [
-     "S0",
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "We differentiate through design, style, and value, and a curated multi-category assortment delivered across stores and digital channels.",
-     "Our ability to positively differentiate ourselves from other retailers and provide compelling value to our guests largely determines our competitive position within the retail industry."
+     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 (Form 10-K Item 1 Competition).",
-    "claim": "Target competes across a wide set of omnichannel retail formats, spanning department stores, off-price retailers, wholesale clubs, category-specific retailers, drug stores, supermarkets, direct-to-consumer brands, and online marketplaces.",
+    "basis": "Stated in the annual MD&A; the base-effect reading is inferred.",
+    "claim": "The recent gains follow a weak prior fiscal year, in which comparable sales fell 2.6 percent and traffic fell 2.2 percent.",
     "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Comparable sales decreased 2.6 percent, driven by a 2.2 percent decrease in traffic and a 0.4 percent decrease in average transaction amount."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and 10-K; the mechanism is partly stated in the 10-K and partly inferred.",
+    "claim": "The digital channel is growing faster than stores (digital comparable sales up 9.8 percent versus 4.6 percent for stores), while stores remain the fulfillment hub for more than 97 percent of merchandise sales.",
+    "facts": [
+     "P6",
      "P1"
+    ],
+    "quotes": [
+     "Store comparable sales grew 4.6 percent, and digital comparable sales grew 9.8 percent.",
+     "with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the release; the link to the Fun 101 transformation is inferred from the 10-K description.",
+    "claim": "Growth is led by Hardlines (Fun 101), which the release says grew nearly 27 percent, with Beauty above 9 percent and Food and Beverage near 7 percent; Fun 101 net sales were 4,046 versus 3,190 a year earlier (table in millions).",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Net sales grew across a majority of core merchandising categories versus a year ago, including nearly 27 percent growth in Fun 101, more than 9 percent growth in Beauty, and nearly 7 percent growth in Food and Beverage."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Read directly from the release's net sales table; the evidence gives no cause for the decline.",
+    "claim": "Apparel & accessories is a soft spot: third quarter net sales were 3,691 versus 3,838 a year earlier (table in millions), a decline while most other categories grew.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Net sales grew across a majority of core merchandising categories versus a year ago"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and 10-K; the mechanism is inferred.",
+    "claim": "Non-merchandise revenue is a growing differentiator: non-merchandise sales grew nearly 20 percent, and advertising revenue was 296 versus 241 a year earlier (table in millions).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Non-merchandise sales grew nearly 20 percent, reflecting strong growth in Roundel ad revenue, Target Circle Card profit sharing revenue, Target Circle 360 membership revenue, and the Target+ marketplace."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Owned and exclusive brands, about thirty percent of merchandise sales, carry higher margins than comparable national brands and are part of Target's differentiation.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our owned and exclusive brand products represent approximately thirty percent of our overall merchandise sales and generally carry higher margins than equivalent national brand products."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the release.",
+    "claim": "Third quarter gross margin rate was 30.5 percent, including a 1.1 percentage point benefit from tariff refunds. Excluding refunds, the release says it would have expanded approximately 1.2 percentage points.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Third quarter gross margin rate was 30.5 percent, expanding 2.3 percentage points and reflecting 1.1 percentage points of benefit from tariff refunds.",
+     "Excluding tariff refunds, third quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior year rate of 28.2 percent"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and 10-Q.",
+    "claim": "Tariff exposure is a named threat: about one-half of merchandise is sourced outside the U.S., China is the largest source, and the 10-Q says new tariffs have been instituted against most major trading partners.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Approximately one-half of the merchandise we offer is sourced from outside the U.S., either directly or through our vendors, with China as the single largest source of merchandise we import.",
+     "The U.S. administration has instituted new tariffs against most major trading partners."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the 10-Q and release.",
+    "claim": "Recent profit and return figures are inflated by tariff refunds, which are not assured to recur: refunds were $994 million in the second quarter and $301 million in the third quarter, and they raised trailing after-tax ROIC by 3.0 percentage points.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We continue to pursue additional refund claims in accordance with the established refund filing and validation process, along with other importers seeking tariff refunds.",
+     "which increased after-tax ROIC by 3.0 percentage points",
+     "The Company's guidance excludes any potential future tariff refunds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release.",
+    "claim": "Cost pressure is rising: third quarter adjusted SG&A expense rate was 21.9 percent versus 21.3 percent a year earlier, and the release also cites elevated freight and fuel-related costs and continued investments in value.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "This increase in Adjusted SG&A rate reflects the impact of higher incentive compensation, additional store labor hours, as well as planned investments in new and existing stores, partially offset by the leverage benefit of strong topline growth.",
+     "These benefits were partially offset by elevated freight and fuel-related costs, continued investments in value, and modest pressure from category sales mix."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release, 10-K and 8-K.",
+    "claim": "Target is funding its position with heavy reinvestment backed by liquidity and strong credit ratings: it expects capital expenditures of between $5 billion and $6 billion in 2027, holds ratings of A2, A and A, and entered a new $4.0 billion revolving credit facility.",
+    "facts": [
+     "P6",
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027",
+     "Long-term debt | A2 | A | A",
+     "for a $4.0 billion unsecured revolving credit facility"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the 10-K.",
+    "claim": "Competition is broad and the company's position depends on differentiation: it names department stores, off-price retailers, wholesale clubs, drug stores, supermarkets, direct-to-consumer brands and online marketplaces.",
+    "facts": [
+     "P1",
+     "P2"
     ],
     "quotes": [
      "We compete with omnichannel retailers, including department stores, off-price general merchandise retailers, wholesale clubs, category-specific retailers, drug stores, supermarkets, direct-to-consumer brands, online marketplaces, and other forms of retail commerce."
@@ -900,604 +999,296 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P3 and P6 store data tables and P6 company overview.",
-    "claim": "Target expanded its U.S. store base to 2,026 stores and 254,768 (table in thousands) retail square feet at the end of the third quarter, up from 1,995 stores and 250,518 (table in thousands) retail square feet at the prior fiscal year-end.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Target Corporation (NYSE: TGT) brings together style, design and value to offer a distinct assortment and elevated shopping experience across more than 2,000 U.S. stores and online."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P1, P3, and P6 fulfillment channel tables.",
-    "claim": "Target uses its stores as fulfillment hubs, with stores fulfilling 97.6% of merchandise sales in the prior full fiscal year and 97.4% in the latest quarter, including in-store purchases and the majority of digitally originated orders.",
-    "facts": [
-     "P1",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost.",
-     "Our stores fulfill the majority of digitally originated sales, which allows improved product availability, faster fulfillment times, reduced shipping costs, and allows us to offer guests a suite of same-day fulfillment options such as Order Pickup, Drive Up, and Same-Day Delivery."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P1 and P2.",
-    "claim": "Target's owned and exclusive brands generate approximately thirty percent of merchandise sales and generally carry higher margins than equivalent national brands.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our owned and exclusive brand products represent approximately thirty percent of our overall merchandise sales and generally carry higher margins than equivalent national brand products."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated directly in P1 and P6.",
-    "claim": "Target extends its retail ecosystem with Target Circle loyalty tiers, the Target Plus digital marketplace, and the Roundel retail media network, driving a 19.3 percent increase in non-merchandise sales in the third quarter.",
-    "facts": [
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "We generate revenue through a variety of other sources, including Roundel, which provides advertising services to vendors and other third parties, including marketplace sellers; credit card profit sharing related to our Target Circle Card program; our third-party digital marketplace, Target Plus; membership fees; and others.",
-     "Net Sales of $27.1 billion in the third quarter were 7.1 percent higher than last year, reflecting a 6.9 percent increase in merchandise sales and a 19.3 percent increase in non-merchandise sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P3 (Form 10-K MD&A).",
-    "claim": "Target's top-line performance softened in the prior full fiscal year, with net sales decreasing 1.7 percent to $104.8 billion and comparable sales declining 2.6 percent amid cautious discretionary spending.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Net Sales were $104.8 billion, a decrease of $1.8 billion, or 1.7 percent, from the prior year.",
-     "Comparable sales decreased 2.6 percent, driven by a 2.2 percent decrease in traffic and a 0.4 percent decrease in average transaction amount."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P6 (Q3 2026 earnings release).",
-    "claim": "Target regained top-line and traffic momentum in the third quarter, with net sales growing 7.1 percent to $27.1 billion and comparable sales rising 5.6 percent on a 5.0 percent increase in comparable traffic.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic.",
-     "Store comparable sales grew 4.6 percent, and digital comparable sales grew 9.8 percent."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P6 (Q3 2026 earnings release and ROIC footnote).",
-    "claim": "Target improved underlying margins and capital returns in the third quarter, expanding gross margin rate by approximately 1.2 percentage points excluding tariff refunds and increasing trailing after-tax ROIC to 16.5 percent, including 3.0 percentage points from tariff refunds.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Excluding tariff refunds, third quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior year rate of 28.2 percent, reflecting the comparison against last year\u2019s elevated markdowns and tariff rates, as well as growth in non-merchandise sales and the benefit of productivity improvements at supply chain facilities.",
-     "For the trailing twelve months through third quarter 2026, after-tax return on invested capital (ROIC) was 16.5 percent, compared with 13.4 percent for the trailing twelve months through third quarter 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P2, P3, and P6.",
-    "claim": "Target is committing $5 billion in capital expenditures in 2026 and $5 billion to $6 billion in 2027 to remodel existing stores, open new stores, and invest in supply chain and technology infrastructure.",
-    "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores.",
-     "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P2 (Form 10-K Item 1A Risk Factors).",
-    "claim": "Threat: Digital comparison shopping, rapid advances in retail artificial intelligence, and consumer adoption of third-party search and ordering tools could erode Target's differentiation and make traffic dependent on third-party algorithms.",
+    "basis": "Stated in the 10-K risk factors; the counter is from the 10-K MD&A and the release.",
+    "claim": "Technology shifts are a named threat: AI and third-party shopping channels could make Target dependent on others to reach consumers and could lower barriers for new competitors.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Since consumers can quickly comparison shop using digital tools, they may make decisions based solely on price or convenience, which could limit our ability to differentiate from our competitors.",
      "Consumers may also use third-party channels, devices, technologies, and capabilities (including artificial intelligence) to initiate shopping searches and place orders, which could make us dependent on the capabilities and search algorithms of those third parties to reach those consumers."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P2 (Form 10-K Item 1A Risk Factors).",
-    "claim": "Threat: Target depends on higher-margin discretionary merchandise for net earnings growth, leaving profitability vulnerable to cyclical spending shifts and demand forecasting misses that cause excess inventory and markdowns.",
+    "basis": "Stated in the 10-K; the counter is inferred from the release.",
+    "claim": "Reputation is a named threat: the 10-K says changes to diversity, equity and inclusion initiatives led to consumer boycotts organized throughout 2025.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "However, we depend on sales of our higher-margin merchandise to drive net earnings growth.",
-     "We have not always been able to accurately forecast consumer demand or react to rapid changes in consumer preferences and spending patterns, which has previously resulted in insufficient or excess inventory, increased inventory markdowns, higher costs (including for storage, transportation, labor, and other expenses), and adverse impacts on our results of operations."
+     "which resulted in adverse reactions from some of our shareholders, guests, team members, and others, as well as consumer boycotts organized throughout 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P2 (Form 10-K Item 1A Risk Factors).",
-    "claim": "Threat: Conflicting stakeholder expectations regarding social, political, and diversity initiatives have previously led to negative publicity, litigation, and consumer boycotts, threatening brand reputation and sales.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For example, in 2025, we announced that we modified and concluded certain of our initiatives related to diversity, equity, and inclusion, which resulted in adverse reactions from some of our shareholders, guests, team members, and others, as well as consumer boycotts organized throughout 2025.",
-     "For example, we experienced adverse reactions from some of our shareholders, guests, team members, and others related to our assortment of Pride Month products in 2023 and other positions we have taken with respect to social issues, including LGBTQIA+ matters, which resulted in consumer boycotts and litigation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P1, P3, and P4.",
-    "claim": "Threat: Approximately one-half of Target's merchandise is sourced outside the United States, with China as the largest country of origin, exposing merchandise costs and demand to new tariffs and uncertain refund recovery.",
+    "basis": "Termination terms are stated in the 10-K; the effect on Beauty is not in the evidence.",
+    "claim": "The shop-in-shop agreement with Ulta Beauty was set to terminate when it expires in August, a change touching the Beauty category, which grew more than 9 percent in the third quarter.",
     "facts": [
      "P1",
-     "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "Approximately one-half of the merchandise we offer is sourced from outside the United States, with China representing the largest country of origin for imported goods.",
-     "The U.S. administration has instituted new tariffs against most major trading partners."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated directly in P1, P2, P3, and P4.",
-    "claim": "Threat: Target's multi-year business transformation initiative may fall short of targeted cost savings and agility gains while incurring restructuring charges and ending partner traffic drivers such as the Ulta Beauty shop-in-shop agreement.",
-    "facts": [
-     "P1",
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "We cannot assure that we will achieve all of the intended benefits of this initiative, including anticipated efficiencies, cost savings, or operational improvements, or that such benefits will be realized within expected timeframes.",
      "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P2 and P3.",
-    "claim": "Threat: Technology system disruptions, cybersecurity incidents, and localized inventory shrink threaten transaction continuity, guest data trust, store profitability, and store retention.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Any damage or disruption to our technology systems could severely interrupt our business operations, including our ability to process guest transactions and manage inventories, which could adversely affect our reputation, results of operations, and financial condition.",
-     "In addition, sustained high rates of inventory shrink at certain stores have contributed, and may continue to contribute, to the closure of certain stores and the impairment of long-term assets."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in [P6] Consolidated Statements of Financial Position",
-    "claim": "As of October 31, 2026, Target held $4,464 (table in millions) in cash and cash equivalents, down from $5,488 as of January 31, 2026 and up from $3,822 as of November 1, 2025.",
+    "basis": "Stated in the Q3 earnings-release balance sheet (unaudited); the comparison is inferred from the printed figures.",
+    "claim": "Cash was $4,464 (table in millions) at the latest quarter-end, down from $5,488 at fiscal year-end. Total current assets of $23,120 (table in millions) were slightly below total current liabilities of $23,296 (table in millions).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the Q3 earnings-release statements; the direction of change is inferred from comparing the columns.",
+    "claim": "Leverage is moderate and has changed little. Debt is $1,143 (table in millions) current plus $14,187 (table in millions) long-term, against shareholders' investment of $18,367 (table in millions). Noncurrent operating lease liabilities are a further $3,336 (table in millions). Net interest expense fell to $95 (table in millions) in the quarter from $115 (table in millions) a year earlier, with the company citing higher interest income.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Cash and cash equivalents | $4,464 | $5,488 | $3,822"
+     "The Company\u2019s third quarter 2026 net interest expense was $95 million, compared with $115 million last year, reflecting higher interest income in the current year."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in [P3] Liquidity and Capital Resources",
-    "claim": "As of January 31, 2026, Target's $5.5 billion cash and cash equivalents balance included $4.6 billion in short-term investments restricted by policy to large money market funds or highly rated instruments maturing in 60 days or less.",
+    "basis": "Stated in the 10-K MD&A as of fiscal year-end.",
+    "claim": "At fiscal year-end the long-term debt ratings were A2 (Moody's), A (S&P) and A (Fitch), and commercial paper was rated P-1, A-1 and F1. No later rating information is in the evidence.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Our year-end cash and cash equivalents balance increased to $5.5 billion from $4.8 billion in 2024.",
-     "Our cash and cash equivalents balance includes short-term investments of $4.6 billion and $3.9 billion as of January 31, 2026, and February 1, 2025, respectively.",
-     "This policy allows investments in large money market funds or in highly rated direct short-term instruments that mature in 60 days or less."
+     "If our credit ratings were lowered, our ability to access the debt markets, our cost of funds, and other terms for new debt issuances could be adversely impacted."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "stated in [P6] Consolidated Statements of Financial Position",
-    "claim": "As of October 31, 2026, total current assets were 23,120 against total current liabilities of 23,296 (table in millions), with inventory of 16,144 and accounts payable of 15,514 representing the largest working-capital lines.",
+    "basis": "Stated in the Q3 earnings-release cash flow statement; the comparison is inferred.",
+    "claim": "Operating cash flow over nine months was $5,727 (table in millions), against $3,485 (table in millions) a year earlier. Capital spending rose to $3,762 (table in millions) from $2,842 (table in millions). Dividends paid were $1,561 (table in millions) and share repurchases were $253 (table in millions).",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Inventory | 16,144 | 12,304 | 14,896",
-     "Total current assets | 23,120 | 20,005 | 20,702",
-     "Accounts payable | 15,514 | 12,622 | 13,792",
-     "Total current liabilities | 23,296 | 21,230 | 21,242"
+     "Third quarter capital expenditures of $1.4 billion were $0.4 billion higher than last year, driven primarily by increased investments in new and existing stores."
     ],
-    "support": "quote_not_found"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in [P8] Items 1.01 and 1.02, and [P3] Financing",
-    "claim": "On August 14, 2026, Target replaced its prior $3.0 billion and $1.0 billion credit agreements with a $4.0 billion unsecured revolving credit facility expiring August 14, 2031, with an option to increase commitments by up to $1.0 billion and two one-year extension options.",
+    "basis": "Stated in the release; the effect on cash is inferred from the refunds being described as received.",
+    "claim": "Part of the profit behind that cash flow came from non-recurring tariff refunds. These were $301 million in the third quarter and $1.3 billion over nine months, booked as a reduction of cost of sales. Guidance excludes any potential future refunds.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Third quarter 2026 results include $301 million of pretax tariff refund benefits within gross margin and operating income.",
+     "The Company's guidance excludes any potential future tariff refunds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and balance sheet; the interpretation is inferred.",
+    "claim": "Operating cash flow was supported by payables financing inventory. Over nine months the inventory build used $3,840 (table in millions) of cash, offset by a $2,795 (table in millions) increase in accounts payable. A year earlier the figures were $2,156 (table in millions) and $658 (table in millions).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the Q3 balance sheet and cash flow statement; the explanation of how it was paid is inferred.",
+    "claim": "The current portion of long-term debt was $1,143 (table in millions) at the latest quarter-end, down from $2,130 (table in millions) at fiscal year-end. Over nine months the company repaid $1,111 (table in millions) of long-term debt and added no new debt, against $1,984 (table in millions) of additions a year earlier.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 8-K and the 10-K; the role of the facility as a backstop is stated in the 10-K.",
+    "claim": "The back-up liquidity was renewed. The company signed a new $4.0 billion unsecured revolving credit facility with a five-year term and two one-year extension options. It replaced a prior $3.0 billion five-year facility and a $1.0 billion 364-day facility. In the last annual report no balances were outstanding on the facilities or commercial paper during the year.",
     "facts": [
      "P8",
      "P3"
     ],
     "quotes": [
-     "On August 14, 2026, Target Corporation (\u201cTarget\u201d) entered into a Five-Year Credit Agreement with certain lenders, Bank of America, N.A., as administrative agent, Citibank, N.A., and Wells Fargo Bank, National Association, as co-syndication agents, and JPMorgan Chase Bank, N.A., and U.S. Bank National Association, as co-documentation agents, for a $4.0 billion unsecured revolving credit facility (the \u201cCredit Agreement\u201d).",
-     "Target may increase the credit facility commitments up to an additional $1.0 billion, subject to the satisfaction of certain conditions.",
      "The Credit Agreement will expire on August 14, 2031, which may be extended pursuant to two extension options of one year each under the terms of the Credit Agreement.",
      "No balances were outstanding under either credit facility or our commercial paper program at any time during 2025 or 2024."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in [P6] Consolidated Statements of Financial Position and After-Tax Return on Invested Capital table",
-    "claim": "As of October 31, 2026, Target carried 1,143 in current portion of long-term debt and other borrowings, 14,187 in long-term debt and other borrowings, and 3,719 in total operating lease liabilities (tables in millions), compared with 18,367 in total shareholders\u2019 investment.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Current portion of long-term debt and other borrowings | 1,143 | 2,130 | 1,133",
-     "Long-term debt and other borrowings | 14,187 | 14,326 | 15,366",
-     "Total shareholders\u2019 investment | 18,367 | 16,165 | 15,501",
-     "+ Operating lease liabilities (c) | 3,719 | 3,924 | 3,765"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6] Consolidated Statements of Operations and narrative, and [P3] Net Interest Expense",
-    "claim": "For the nine months ended October 31, 2026, net interest expense decreased to 310 from 346 a year earlier against operating income of 5,367 (table in millions), after full-year 2025 net interest expense rose to $445 million from $411 million in 2024.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Operating income | 1,672 | 948 | 76.4 | 5,367 | 3,737 | 43.6",
-     "Net interest expense | 95 | 115 | (16.7) | 310 | 346 | (10.5)",
-     "The Company\u2019s third quarter 2026 net interest expense was $95 million, compared with $115 million last year, reflecting higher interest income in the current year.",
-     "Net interest expense was $445 million for 2025, compared with $411 million for 2024."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] Financing and [P8] Item 1.01",
-    "claim": "As of January 31, 2026, Target held long-term debt credit ratings of A2 from Moody's and A from S&P and Fitch and commercial paper ratings of P-1, A-1, and F1, remained in compliance with its debt covenants with no standalone downgrade acceleration triggers on its notes, and subsequently agreed to a leverage-ratio financial covenant in its August 14, 2026 Credit Agreement.",
+    "basis": "Stated by management in the 10-K and in the 8-K.",
+    "claim": "The credit facilities carry a leverage covenant, and management said it was in compliance with its debt covenants and expects to remain so. It also said that operating cash flow, credit facility capacity and capital market access should be adequate for debt maturities, capital spending and dividends.",
     "facts": [
      "P3",
      "P8"
     ],
     "quotes": [
-     "Long-term debt | A2 | A | A",
-     "Commercial paper | P-1 | A-1 | F1",
      "We are, and expect to remain, in compliance with these covenants.",
      "The Credit Agreement contains customary representations and warranties and affirmative and negative covenants, including a financial covenant regarding the leverage ratio of Target and its subsidiaries."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P6] Consolidated Statements of Cash Flows and [P3] Operating Cash Flows",
-    "claim": "Cash provided by operating activities reached 5,727 in the nine months ended October 31, 2026, up from 3,485 in the prior-year nine-month period (table in millions), following full-year 2025 operating cash flow of $6.6 billion versus $7.4 billion in 2024.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Cash provided by operating activities | 5,727 | 3,485",
-     "Cash flows provided by operating activities were $6.6 billion in 2025 compared with $7.4 billion in 2024."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6] Consolidated Statements of Cash Flows",
-    "claim": "Nine-month 2026 operating cash generation of 5,727 was supported by Net earnings of $3,869 and Depreciation and amortization of 2,405 (table in millions), while an Inventory cash outflow of (3,840) was largely offset by an Accounts payable inflow of 2,795.",
+    "basis": "Stated guidance in the release; the claim about pressure on cash is inferred.",
+    "claim": "Capital spending needs are rising. The company expects to invest between $5 billion and $6 billion in capital expenditures in 2027, after $3,762 (table in millions) spent over the first nine months of 2026.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Net earnings | $3,869 | $2,660",
-     "Depreciation and amortization | 2,405 | 2,331",
-     "Inventory | (3,840) | (2,156)",
-     "Accounts payable | 2,795 | 658",
-     "Cash provided by operating activities | 5,727 | 3,485"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in [P6] Operating Metrics note (a) and Guidance Reconciliation, and [P3] Financial Summary",
-    "claim": "Earnings and operating cash quality in the nine months ended October 31, 2026 included $1.3 billion in pretax IEEPA tariff refunds ($2.14 per share) that added 1.6 percentage points to gross margin and operating income margin rates, whereas full-year 2025 results included $593 million of credit card interchange settlement gains and $250 million of business transformation costs.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "For the three and nine months ended October 31, 2026, Gross margin, Operating income, and Adjusted operating income include $301 million and $1.3 billion benefits from tariff refunds received during 2026, which are classified as a reduction of Cost of Sales.",
-     "Tariff refunds provided 1.1 and 1.6 percentage points of benefit to Gross margin rate, Operating income margin rate, and Adjusted operating income margin rate for the three and nine month periods, respectively.",
-     "Note: The guidance includes tariff refund benefits of approximately $2.14 for the nine months ended October 31, 2026, but excludes any potential future refunds.",
-     "We recognized $593 million of net gains related to settlements of credit card interchange fee litigation matters.",
-     "We incurred $250 million of costs related to business transformation initiatives."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6] Consolidated Statements of Cash Flows and Guidance, and [P3] Capital Expenditures",
-    "claim": "During the nine months ended October 31, 2026, cash outflows for property and equipment expenditures of (3,762), dividends paid of (1,561), and stock repurchases of (253) (table in millions) along with debt reductions contributed to a net cash decrease of (1,024), with expected capital expenditures of approximately $5 billion in 2026 and $5 billion to $6 billion in 2027.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Expenditures for property and equipment | (3,762) | (2,842)",
-     "Dividends paid | (1,561) | (1,537)",
-     "Repurchase of stock | (253) | (408)",
-     "Net decrease in cash and cash equivalents | (1,024) | (940)",
-     "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores.",
      "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6] Consolidated Statements of Financial Position and Consolidated Statements of Cash Flows",
-    "claim": "As of October 31, 2026, current debt falling due stood at 1,143 (table in millions), down from 2,130 as of January 31, 2026 after Target made (1,111) (table in millions) in long-term debt reductions with zero long-term debt additions during the first nine months of 2026.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Current portion of long-term debt and other borrowings | 1,143 | 2,130 | 1,133",
-     "Additions to long-term debt | \u2014 | 1,984",
-     "Reductions of long-term debt | (1,111) | (1,609)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from [P6] balance sheet and cash flows and [P8] credit facility, and stated in [P3] Financing and Future Cash Requirements",
-    "claim": "Target can meet its 1,143 (table in millions) current debt maturities and ongoing obligations using its $4,464 (table in millions) cash balance, nine-month operating cash flows of 5,727 (table in millions), its $4.0 billion revolving credit facility expiring August 14, 2031, and access to commercial paper and long-term debt markets.",
-    "facts": [
-     "P6",
-     "P8",
-     "P3"
-    ],
-    "quotes": [
-     "We believe our sources of liquidity, namely operating cash flows, credit facility capacity, and access to capital markets, will continue to be adequate to meet our contractual obligations, working capital and capital expenditure requirements, finance anticipated expansion and strategic initiatives, fund debt maturities, pay dividends, and execute purchases under our share repurchase program for the foreseeable future.",
-     "Our ability to access the long-term debt and commercial paper markets has provided us with ample sources of liquidity.",
-     "On August 14, 2026, Target Corporation (\u201cTarget\u201d) entered into a Five-Year Credit Agreement with certain lenders, Bank of America, N.A., as administrative agent, Citibank, N.A., and Wells Fargo Bank, National Association, as co-syndication agents, and JPMorgan Chase Bank, N.A., and U.S. Bank National Association, as co-documentation agents, for a $4.0 billion unsecured revolving credit facility (the \u201cCredit Agreement\u201d)."
-    ],
-    "support": "supported"
+    "support": "number_not_listed"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated directly in the Q3 2026 earnings release [P6] and compared against FY 2025 MD&A [P3].",
-    "claim": "In the third quarter of 2026, net sales grew 7.1 percent and comparable sales grew 5.6 percent, driven by a 5.0 percent increase in comparable traffic, bringing nine-month 2026 net sales to $79,049 (table in millions), up 6.4%.",
+    "basis": "Stated in the cited items for the figures. The condition is inferred from the traffic-driven comparable sales.",
+    "claim": "Traffic-led comparable sales growth is the main driver of the sales rebound: comparable sales rose 3.8 percent in the second quarter on traffic of 3.6 percent, then 5.6 percent in the third quarter on traffic of 5.0 percent. For this to continue, guests must keep making more store and digital trips rather than just spending more per trip.",
     "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [
-     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic.",
-     "Net Sales of $27.1 billion in the third quarter were 7.1 percent higher than last year, reflecting a 6.9 percent increase in merchandise sales and a 19.3 percent increase in non-merchandise sales."
+     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Q2 2026 MD&A [P4], FY 2025 MD&A [P3], and 10-K Risk Factors [P2].",
-    "claim": "Continued comparable sales growth requires differentiating the guest experience across assortment, price, convenience, and store environment while accurately predicting consumer demand to drive traffic and average transaction amount.",
+    "basis": "Stated in the release. The condition is inferred.",
+    "claim": "Digital channels are growing faster than stores: third-quarter digital comparable sales grew 9.8 percent against 4.6 percent for stores. Continued growth requires digital demand to keep outpacing stores while fulfillment stays cost-efficient.",
     "facts": [
-     "P2",
-     "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "We believe that our ability to successfully differentiate our guests\u2019 shopping experience through a careful combination of merchandise assortment, price, convenience, guest experience, and other factors will over the long-term drive both increasing shopping frequency (number of transactions, or \"traffic\") and the amount spent each visit (average transaction amount).",
-     "If we do not accurately predict consumer demand and quickly respond to changing consumer preferences and spending patterns, we may experience lower sales, spoilage, and increased inventory markdowns, which could adversely affect our results of operations."
+     "Store comparable sales grew 4.6 percent, and digital comparable sales grew 9.8 percent."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 earnings release [P6] and 10-K Item 1 [P1].",
-    "claim": "Digital comparable sales grew 9.8 percent alongside 4.6 percent store comparable sales growth in the third quarter of 2026, with stores fulfilling 97.4% of merchandise sales.",
+    "basis": "Stated in the 10-K business section.",
+    "claim": "The stores-as-hubs fulfillment model must remain cost-effective for digital growth to stay profitable. Stores fulfilled more than 97 percent of merchandise sales in each of the last three years, at a reduced fulfillment cost.",
     "facts": [
-     "P1",
-     "P6"
+     "P1"
     ],
     "quotes": [
-     "Store comparable sales grew 4.6 percent, and digital comparable sales grew 9.8 percent.",
      "Our strategy continues to leverage stores as fulfillment hubs, with stores fulfilling more than 97 percent of total Merchandise Sales in each of the last three years, which provides convenience for our guests at a reduced fulfillment cost."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2].",
-    "claim": "Sustaining digital and store-fulfilled sales growth requires adequate supply chain replenishment capacity, uninterrupted technology systems, and offsetting costly digital and artificial intelligence investments with efficiencies.",
+    "basis": "Growth is stated in the release and the sales table. The condition draws on the 10-K Roundel risk factor.",
+    "claim": "Non-merchandise revenue, led by Roundel advertising, is a fast-growing driver: advertising revenue was 296 versus 241 a year earlier in the third quarter (table in millions), and non-merchandise sales grew nearly 20 percent. Continuation requires advertisers to keep buying and the shopper base to keep growing.",
     "facts": [
+     "P6",
      "P2"
     ],
     "quotes": [
-     "For example, our stores-as-hubs strategy depends on adequate replenishment facilities to receive, store, and move inventory to stores on a timely basis.",
-     "In addition, providing multiple fulfillment options, expanding our digital channels, expanding our digital assortment through third-party sellers on our Target Plus marketplace, and implementing new technology is complex, costly, and may not meet our guests\u2019 expectations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in FY 2025 MD&A [P3] and the Q3 2026 earnings release [P6].",
-    "claim": "Target is expanding its store footprint from 1,995 stores at the start of 2026 to 2,026 stores by the end of the third quarter of 2026, with planned capital expenditures of approximately $5 billion in 2026 and between $5 billion and $6 billion in 2027.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores.",
-     "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2].",
-    "claim": "Growth from new stores and remodels depends on securing suitable locations, labor, materials, and regulatory permits on schedule and achieving appropriate returns on invested capital.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our business depends, in part, on our ability to remodel existing stores and build new stores in a manner that achieves appropriate returns on our capital investment.",
-     "When building new stores, we compete with other retailers and businesses for suitable locations for our stores and available labor and materials."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Q2 2026 MD&A [P4], Q3 2026 earnings release [P6], and FY 2025 MD&A [P3].",
-    "claim": "Non-merchandise sales grew 20.1 percent in the second quarter of 2026 and 19.3 percent in the third quarter of 2026, led by Roundel advertising revenue reaching 821 (table in millions) across the first nine months of 2026 alongside Target Circle membership and card programs and the Target Plus marketplace.",
-    "facts": [
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Net Sales of $27.1 billion in the third quarter were 7.1 percent higher than last year, reflecting a 6.9 percent increase in merchandise sales and a 19.3 percent increase in non-merchandise sales.",
      "Non-merchandise sales grew nearly 20 percent, reflecting strong growth in Roundel ad revenue, Target Circle Card profit sharing revenue, Target Circle 360 membership revenue, and the Target+ marketplace."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2].",
-    "claim": "Because Roundel advertisers have no long-term commitments, sustaining advertising revenue growth requires maintaining vendor and seller participation, digital platform traffic, and third-party platform relationships while navigating data privacy rules and AI advertising competition.",
+    "basis": "Figures stated in the release table. Condition inferred from the 10-K strategy and risk text.",
+    "claim": "Category momentum in Hardlines is a driver: third-quarter Hardlines net sales were 4,046 versus 3,190 a year earlier (table in millions), while apparel and accessories fell to 3,691 from 3,838. For the gain to persist, the multi-category assortment must keep resonating and offset weaker categories.",
     "facts": [
-     "P2"
+     "P6",
+     "P3"
     ],
     "quotes": [
-     "The digital advertising environment is highly competitive, and our advertisers do not have long-term commitments with us.",
-     "If our vendor or seller base shrinks, consumer traffic to our digital platforms decreases, or we are unable maintain key relationships, our advertising revenue may fail to meet expectations or may decline."
+     "Net sales grew across a majority of core merchandising categories versus a year ago, including nearly 27 percent growth in Fun 101, more than 9 percent growth in Beauty, and nearly 7 percent growth in Food and Beverage."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 earnings release [P6], 10-K Item 1A [P2], and FY 2025 MD&A [P3], with Ulta Beauty termination in [P1].",
-    "claim": "Third-quarter 2026 merchandise growth was led by nearly 27 percent growth in Hardlines, more than 9 percent growth in Beauty, and nearly 7 percent growth in Food and Beverage, supported by higher-margin owned and exclusive brands.",
+    "basis": "Store counts and capex plan stated in the release. The returns condition is inferred from the risk factor.",
+    "claim": "The store base is growing and capital spending is planned to rise: there were 2,026 stores at October 31, 2026 versus 1,995 at January 31, 2026, and management expects to invest between $5 billion and $6 billion in capital expenditures for 2027. For this to add to growth, new stores and remodels must earn adequate returns.",
     "facts": [
-     "P2",
-     "P3",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release footnote.",
+    "claim": "Returns on invested capital have risen, but part of the gain comes from tariff refunds. After-tax ROIC was 16.5 percent for the twelve months to October 31, 2026, and the refunds raised it by 3.0 percentage points. Growth investment is therefore supported by returns that partly depend on a non-recurring benefit.",
+    "facts": [
      "P6"
     ],
     "quotes": [
-     "Net sales grew across a majority of core merchandising categories versus a year ago, including nearly 27 percent growth in Fun 101, more than 9 percent growth in Beauty, and nearly 7 percent growth in Food and Beverage.",
-     "Our owned and exclusive brand products represent approximately thirty percent of our overall merchandise sales and generally carry higher margins than equivalent national brand products."
+     "includes the impact of tariff refunds, which increased after-tax ROIC by 3.0 percentage points"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in 10-K Item 1 [P1], Item 1A [P2], FY 2025 MD&A [P3], and Q2 2026 MD&A [P4].",
-    "claim": "Expanding owned and exclusive brands requires accurate longer-term demand forecasting, intellectual property protection, and navigating trade policy and tariff changes on imported merchandise.",
+    "basis": "Stated in the release and the second-quarter 10-Q.",
+    "claim": "Tariff refunds boosted reported profit, and this must be separated from underlying growth. The third quarter included $301 million of refunds and the nine months $1.3 billion, and full-year EPS guidance includes about $2.14 of refund benefit. Guidance excludes any potential future refunds.",
     "facts": [
-     "P1",
-     "P2",
-     "P3",
+     "P6",
      "P4"
     ],
     "quotes": [
-     "This requires accurate longer-term forecasting of consumer demand to effectively manage our operations, including for categories where consumer preferences may change rapidly, and exposes us to enhanced risks of supply chain disruptions and trade policy or tariff impacts.",
-     "Approximately one-half of the merchandise we offer is sourced from outside the U.S., either directly or through our vendors, with China as the single largest source of merchandise we import."
+     "guidance excludes any potential future tariff refunds."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q3 2026 earnings release [P6], Q2 2026 MD&A [P4], and 10-K Item 1A [P2].",
-    "claim": "Underlying profitability in 2026 expanded through supply chain productivity improvements, lower markdowns, non-merchandise sales mix, and topline leverage, alongside business transformation initiatives aimed at simplifying operations and reducing costs.",
+    "basis": "Stated in the release.",
+    "claim": "Underlying gross margin has also improved without refunds: excluding refunds, third-quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior-year 28.2 percent. For the improvement to continue, supply chain productivity and non-merchandise growth must outweigh freight, fuel and value investments.",
     "facts": [
-     "P2",
-     "P4",
      "P6"
     ],
     "quotes": [
-     "Excluding tariff refunds, third quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior year rate of 28.2 percent, reflecting the comparison against last year\u2019s elevated markdowns and tariff rates, as well as growth in non-merchandise sales and the benefit of productivity improvements at supply chain facilities.",
-     "This initiative is intended to simplify cross-functional ways of working, increase role clarity, leverage technology (including artificial intelligence) and data to enhance decision-making, and reduce costs."
+     "growth in non-merchandise sales and the benefit of productivity improvements at supply chain facilities"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in 10-K Item 1A [P2], Q2 2026 MD&A [P4], and Q3 2026 earnings release [P6].",
-    "claim": "Sustaining margin and earnings growth requires realizing intended business transformation savings without major restructuring charges while offsetting freight, fuel, labor, value-pricing, and new tariff headwinds after non-recurring tariff refund benefits fade.",
+    "basis": "Stated in the release for the cost drivers. The condition is inferred.",
+    "claim": "Operating leverage is only partly achieved: the third-quarter SG&A expense rate was 21.9 percent versus an adjusted 21.3 percent a year earlier. Higher store labor, incentive pay and store investment must be covered by continued sales growth for profit to grow faster than sales.",
     "facts": [
-     "P2",
-     "P4",
      "P6"
     ],
     "quotes": [
-     "We cannot assure that we will achieve all of the intended benefits of this initiative, including anticipated efficiencies, cost savings, or operational improvements, or that such benefits will be realized within expected timeframes.",
-     "These benefits were partially offset by elevated freight and fuel-related costs, continued investments in value, and modest pressure from category sales mix."
+     "partially offset by the leverage benefit of strong topline growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Guidance stated in the release. The holiday condition is inferred from the seasonality disclosures.",
+    "claim": "Management expects growth to continue: full-year net sales growth around 6 percent, and GAAP and Adjusted EPS of $10.65 to $11.40, including about $2.14 of refund benefit. November net sales were reported in line with guidance. This holds only if holiday demand does not fade from the October trend.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "accelerating from October sales trends"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the cash flow statement and the 8-K. The condition is inferred.",
+    "claim": "Cash generation and liquidity fund the expansion. Nine-month operating cash flow was 5,727 against capital expenditures of 3,762 (table in millions), and the company entered a $4.0 billion unsecured revolving credit facility. Growth spending depends on cash flow staying strong and inventory and payables staying balanced.",
+    "facts": [
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "for a $4.0 billion unsecured revolving credit facility"
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated directly in [P1]",
-    "claim": "Target and Ulta Beauty reached a mutual agreement to terminate their commercial shop-in-shop operating agreement when it expires in August 2026.",
-    "facts": [
-     "P1",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P2] and [P3]",
-    "claim": "Target announced a multi-year business transformation initiative, reduced its headquarters workforce, exited facilities, and incurred $250 million in related costs.",
-    "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "We incurred costs and charges related to our business transformation initiatives in 2025, including a reduction in our headquarters workforce.",
-     "We incurred $250 million of costs related to business transformation initiatives.",
-     "For example, in 2025, we recognized costs and charges related to reductions in our workforce, facility exits, and the termination of a commercial partnership."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P1]",
-    "claim": "Michael J. Fiddelke became Chief Executive Officer, Brian C. Cornell transitioned to Executive Chair, Lisa R. Roath became Chief Operating Officer, and Cara A. Sylvester became Chief Merchandising Officer.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Michael J. Fiddelke | Chief Executive Officer since February 2026.",
-     "Brian C. Cornell | Executive Chair since February 2026.",
-     "Lisa R. Roath | Executive Vice President and Chief Operating Officer since February 2026.",
-     "Cara A. Sylvester | Executive Vice President and Chief Merchandising Officer since February 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P3] and [P6]",
-    "claim": "Target recognized $593 million of net gains from settlements of credit card interchange fee litigation matters in which it was a plaintiff.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "We recognized $593 million of net gains related to settlements of credit card interchange fee litigation matters.",
-     "Includes gains, net of legal fees, related to settlements during the first quarter of 2025 of credit card interchange fee litigation matters in which the Company was a plaintiff."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P3]",
-    "claim": "The U.S. Supreme Court ruled that tariffs imposed under IEEPA were not authorized by the statute.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On February 20, 2026, the U.S. Supreme Court ruled that tariffs imposed under IEEPA were not authorized by the statute."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P4]",
-    "claim": "Target received refunds of IEEPA tariffs previously paid and recognized $994 million as a reduction of cost of sales.",
+    "basis": "stated in the cited item",
+    "claim": "Target received refunds of certain IEEPA tariffs it had paid and booked $994 million of them as a reduction of Cost of Sales in the second quarter.",
     "facts": [
      "P4"
     ],
@@ -1507,681 +1298,427 @@
     "support": "supported"
    },
    {
-    "basis": "stated directly in [P6]",
-    "claim": "Target received additional IEEPA tariff refunds and recognized $301 million as a reduction of cost of sales, bringing nine-month tariff refund benefits to $1.3 billion.",
+    "basis": "stated in the cited item",
+    "claim": "Target recognized a further $301 million of pretax IEEPA tariff refund benefit in the third quarter, within gross margin and operating income.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "During the three months ended October 31, 2026, we recognized $301 million related to International Emergency Economic Powers Act (IEEPA) tariff refunds (\"tariff refunds\") received during the third quarter of 2026 as a reduction of Cost of Sales."
+     "Third quarter 2026 results include $301 million of pretax tariff refund benefits within gross margin and operating income."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in [P3]",
-    "claim": "Target obtained a committed $1.0 billion short-term unsecured revolving credit facility and terminated its prior short-term credit facility.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In October 2025, we obtained a new committed $1.0 billion 364-day unsecured revolving credit facility that will expire in October 2026 and terminated our prior 364-day credit facility."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P3]",
-    "claim": "Target issued $1.0 billion of unsecured debt in both March and June 2025 and repaid $1.5 billion of unsecured debt in April 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We issued $1.0 billion of unsecured debt in both March and June 2025, and repaid $1.5 billion of unsecured debt in April 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in [P8]",
-    "claim": "Target entered into a $4.0 billion five-year unsecured revolving credit facility, with an option to increase commitments by up to $1.0 billion, and terminated its prior $3.0 billion and $1.0 billion credit agreements.",
+    "basis": "stated in the cited item",
+    "claim": "Target entered a new $4.0 billion unsecured revolving credit facility and terminated its prior $3.0 billion five-year facility and its $1.0 billion 364-day facility.",
     "facts": [
      "P8"
     ],
     "quotes": [
-     "On August 14, 2026, Target Corporation (\u201cTarget\u201d) entered into a Five-Year Credit Agreement with certain lenders, Bank of America, N.A., as administrative agent, Citibank, N.A., and Wells Fargo Bank, National Association, as co-syndication agents, and JPMorgan Chase Bank, N.A., and U.S. Bank National Association, as co-documentation agents, for a $4.0 billion unsecured revolving credit facility (the \u201cCredit Agreement\u201d).",
-     "In connection with entering into the Credit Agreement described above, on August 14, 2026, Target terminated its prior $3.0 billion Five-Year Credit Agreement, dated as of October 18, 2021, with certain lenders, Bank of America, N.A. as administrative agent, and the co-documentation agents and syndication agent listed therein, as previously amended on October 25, 2022 and September 20, 2023 (as amended, the \u201cPrior Five-Year Credit Agreement\u201d).",
-     "Also in connection with entering into the Credit Agreement described above, on August 14, 2026, Target terminated its $1.0 billion 364-Day Credit Agreement, dated as of October 9, 2025, with certain lenders, Bank of America, N.A., as administrative agent, and the co-documentation agents and syndication agent listed therein (the \u201c364-Day Credit Agreement\u201d)."
+     "for a $4.0 billion unsecured revolving credit facility",
+     "Target terminated its prior $3.0 billion Five-Year Credit Agreement",
+     "Target terminated its $1.0 billion 364-Day Credit Agreement"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in [P9]",
-    "claim": "Target's Board of Directors elected Joe DePinto as a director and appointed him to the Audit & Risk and Infrastructure & Finance committees, effective August 1, 2026.",
+    "basis": "stated in the cited item",
+    "claim": "With its third-quarter release, Target published updated full-year guidance: net sales growth around 6 percent and GAAP and Adjusted EPS of $10.65 to $11.40, including about $2.14 of tariff refund benefits recognized to date.",
     "facts": [
-     "P9"
+     "P6"
     ],
     "quotes": [
-     "On July 18, 2026, the Board of Directors of Target Corporation (\u201cTarget\u201d) elected Joe DePinto as a director of Target, effective August 1, 2026.",
-     "Mr. DePinto was also appointed to serve on the Audit & Risk Committee and the Infrastructure & Finance Committee, each also effective August 1, 2026."
+     "Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range.",
+     "An updated GAAP and Adjusted EPS guidance range of $10.65 to $11.40, which includes approximately $2.14 in tariff refund benefits recognized to date."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in [P7]",
-    "claim": "Target's Board of Directors elected Sally Grimes as a director and appointed her to the Audit & Risk and Infrastructure & Finance committees, effective December 1, 2026.",
+    "basis": "stated in the cited item",
+    "claim": "Target's Board elected Sally Grimes as an independent director, effective December 1, 2026, with seats on the Audit & Risk and Infrastructure & Finance committees.",
     "facts": [
      "P7"
     ],
     "quotes": [
-     "On November 11, 2026, the Board of Directors of Target Corporation (\u201cTarget\u201d) elected Sally Grimes as a director of Target, effective as of December 1, 2026.",
+     "Target Appoints Sally Grimes to Board of Directors",
      "Ms. Grimes was also appointed to serve on the Audit & Risk Committee and the Infrastructure & Finance Committee, each also effective as of December 1, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in [P6]",
-    "claim": "Target announced third quarter 2026 financial results and updated full-year 2026 guidance to net sales growth around 6 percent, operating income margin rate around 6.2 percent, and GAAP and Adjusted EPS of $10.65 to $11.40.",
+    "basis": "stated in the cited item",
+    "claim": "Michael J. Fiddelke became Chief Executive Officer and Brian C. Cornell became Executive Chair.",
     "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Chief Executive Officer since February 2026.",
+     "Executive Chair since February 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; status inferred because no later item confirms the termination",
+    "claim": "Target agreed with Ulta Beauty to terminate their shop-in-shop operating agreement when it expires.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Target incurred $250 million of business transformation costs in fiscal 2025, including a headquarters workforce reduction.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We incurred $250 million of costs related to business transformation initiatives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the quarter comes from the P6 reconciliation footnote",
+    "claim": "Target recognized $593 million of net gains from settlements of credit card interchange fee litigation in fiscal 2025.",
+    "facts": [
+     "P3",
      "P6"
     ],
     "quotes": [
-     "MINNEAPOLIS (November 18, 2026) \u2013 Target Corporation (NYSE: TGT) today announced its third quarter 2026 financial results.",
-     "Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range.",
-     "Full-year 2026 operating income margin rate in a range around 6.2 percent, including approximately 1.1 percentage points of benefit from tariff refunds recognized to date.",
-     "An updated GAAP and Adjusted EPS guidance range of $10.65 to $11.40, which includes approximately $2.14 in tariff refund benefits recognized to date."
+     "We recognized $593 million of net gains related to settlements of credit card interchange fee litigation matters."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "stated in P1, P3, P4, and P6",
-    "claim": "New U.S. tariffs and uncertain recovery of IEEPA tariff refunds could adversely affect Target's sales, margins, and cash flows.",
+    "basis": "stated in P6 and P4; the link to a fall-back in reported earnings is inferred from the guidance footnote.",
+    "claim": "Reported earnings were lifted by tariff refunds, and the company's guidance excludes any future refunds. Third quarter EPS of $2.65 included $0.50 of refund benefit, and second quarter operating income included $994 million of refunds.",
     "facts": [
-     "P1",
-     "P3",
-     "P4",
-     "P6"
+     "P6",
+     "P4"
     ],
     "quotes": [
-     "Approximately one-half of the merchandise we offer is sourced from outside the United States, with China representing the largest country of origin for imported goods.",
+     "The Company's guidance excludes any potential future tariff refunds.",
+     "Excluding tariff refunds, GAAP EPS would have increased 42 percent, and Adjusted EPS would have increased 21 percent, when compared with the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P4; the margin mechanism is inferred from the stated sourcing mix.",
+    "claim": "Tariff and trade policy remains unsettled in both directions. The refund process for IEEPA tariffs is undefined, and new tariffs have been imposed on most major trading partners.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
      "The ruling does not establish a refund process, and significant uncertainty remains regarding how and when any amounts may be recovered.",
-     "The U.S. administration has instituted new tariffs against most major trading partners.",
-     "The collective interaction of tariffs, tariff refunds, sourcing strategies, pricing actions, consumer response and behaviors, and other factors could materially impact our sales, results of operations, and financial condition in future periods."
+     "The U.S. administration has instituted new tariffs against most major trading partners."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2, with offsetting 2026 traffic and sales results stated in P4 and P6",
-    "claim": "Negative public perceptions, consumer boycotts, and legal challenges tied to social, environmental, or governance initiatives could erode guest traffic, sales, and stakeholder relationships.",
+    "basis": "inferred from the balance sheet comparison in P6 and the stated risk factor in P2.",
+    "claim": "Inventory has built sharply ahead of the holidays, which creates markdown risk if demand falls short. Inventory was 16,144 (table in millions) at October 31, 2026, against 14,896 a year earlier.",
     "facts": [
-     "P2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Our continued success is dependent on positive perceptions of Target which, if eroded, could adversely affect our business and our relationships, including with our guests, team members, and vendors.",
-     "For example, in 2025, we announced that we modified and concluded certain of our initiatives related to diversity, equity, and inclusion, which resulted in adverse reactions from some of our shareholders, guests, team members, and others, as well as consumer boycotts organized throughout 2025.",
-     "In particular, certain federal and state officials and agencies have asserted that corporate initiatives regarding environmental, social, and governance matters, including with respect to sustainability, belonging, and diversity, equity, and inclusion, violate various federal and state laws."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P2, with Q3 2026 Beauty sales stated in P6",
-    "claim": "Target's shop-in-shop operating agreement with Ulta Beauty was mutually set to terminate upon expiration in August 2026, alongside broader exposure to commercial partner exits and reputational spillover.",
-    "facts": [
-     "P1",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026.",
-     "For example, in 2025, we recognized costs and charges related to reductions in our workforce, facility exits, and the termination of a commercial partnership.",
-     "If consumers have negative experiences with, or view unfavorably, any of the companies or individuals with whom we have relationships, it could cause them to not shop with us and negatively impact our results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2, with offsetting channel, brand, and AI execution stated in P1, P3, P4, and P6",
-    "claim": "Digital price comparison, rapid competitor advances in artificial intelligence, and consumer reliance on third-party AI search channels could erode Target's competitive differentiation.",
-    "facts": [
-     "P1",
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "If we fail to differentiate our guest experience from our competitors, our results of operations and financial condition could be adversely affected.",
-     "Since consumers can quickly comparison shop using digital tools, they may make decisions based solely on price or convenience, which could limit our ability to differentiate from our competitors.",
-     "For example, we may be unable to match or surpass the advances in technologies and capabilities (including artificial intelligence) that our competitors implement for consumer-facing platforms or for internal operations, which could adversely affect our competitive position.",
-     "Consumers may also use third-party channels, devices, technologies, and capabilities (including artificial intelligence) to initiate shopping searches and place orders, which could make us dependent on the capabilities and search algorithms of those third parties to reach those consumers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2, with inventory turns and 2026 margin and sales performance stated in P3, P4, and P6",
-    "claim": "Misforecasting consumer demand, compounded by longer owned-brand lead times and reliance on seasonal and higher-margin discretionary merchandise, could trigger excess inventory, markdowns, and margin compression.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "We have not always been able to accurately forecast consumer demand or react to rapid changes in consumer preferences and spending patterns, which has previously resulted in insufficient or excess inventory, increased inventory markdowns, higher costs (including for storage, transportation, labor, and other expenses), and adverse impacts on our results of operations.",
-     "In addition, owned brand products generally need longer lead times between order placement and product delivery and require us to take ownership of those products earlier in the supply chain.",
-     "However, we depend on sales of our higher-margin merchandise to drive net earnings growth.",
-     "Our business experiences some seasonality, with a larger portion of our sales traditionally occurring in the fourth quarter because it includes the November and December holiday sales period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P4, with 2025 costs and 2026 nine-month results stated in P3, P4, and P6",
-    "claim": "Target's multi-year business transformation initiative may fail to deliver expected efficiencies and could generate additional unquantifiable restructuring, severance, or asset impairment charges.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "If our execution is ineffective, if adoption by our team members is slower or more limited than expected, or if the initiative otherwise fails to adequately support our strategy, our competitive position, results of operations, and financial condition could be adversely affected.",
-     "In addition, the execution of our business transformation efforts has resulted, and may continue to result, in additional costs, including impairment of long-lived assets and costs associated with exiting certain activities or terminating commercial relationships.",
-     "We may incur additional costs and charges related to these initiatives in future periods, which may adversely affect our results of operations and financial condition; however, we cannot reasonably estimate the amount or timing of such costs and charges."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in P2, with capex plans and 2026 ROIC and store growth stated in P3, P4, and P6",
-    "claim": "Elevated capital investments in store remodels, new stores, technology, and supply chain infrastructure may face delays, cancellations, or inadequate returns on capital.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Pursuing the wrong remodel or new store opportunities and any delays, cost increases, or other difficulties related to those projects could adversely affect our results of operations and financial condition.",
-     "We have made, and expect to continue to make, significant investments in our technology infrastructure, digital platforms, and supply chain infrastructure.",
-     "Such delays or cancellations have resulted, and may in the future result, in the inefficient deployment of our capital relative to our expectations, including as a result of carrying costs for facilities that are not being utilized."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P3",
-    "claim": "Inventory shrink from theft and damage, along with anti-shrink store measures, could reduce gross margins, impair assets, force store closures, and hurt the guest experience.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "We have historically experienced loss of inventory (also called shrink) due to damage, theft (including from organized retail crime), and other causes.",
-     "To protect against rising inventory shrink, we have taken, and may continue to take, certain operational and strategic actions that could adversely affect our reputation, guest experience, and results of operations.",
-     "In addition, sustained high rates of inventory shrink at certain stores have contributed, and may continue to contribute, to the closure of certain stores and the impairment of long-term assets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2, with Roundel growth and advertising revenue figures stated in P3, P4, and P6",
-    "claim": "Target's Roundel retail media business lacks long-term advertiser commitments and faces digital ad competition, AI-enabled rivals, privacy rules, and third-party platform policy risks.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The digital advertising environment is highly competitive, and our advertisers do not have long-term commitments with us.",
-     "If advertisers reduce or discontinue their use of Roundel\u2019s offerings, our competitive position and results of operations could be adversely affected.",
-     "In addition, changes in data privacy laws and regulations (as discussed elsewhere in this Item 1A, Risk Factors), as well as new or modified policies of third-party platforms through which Roundel\u2019s offerings are delivered, could negatively affect Roundel\u2019s business model."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Technology system disruptions, cybersecurity incidents, or failures to comply with evolving data privacy regulations could halt operations and expose Target to government enforcement and litigation.",
-    "facts": [
+     "P6",
      "P2"
     ],
     "quotes": [
-     "Any damage or disruption to our technology systems could severely interrupt our business operations, including our ability to process guest transactions and manage inventories, which could adversely affect our reputation, results of operations, and financial condition.",
-     "If we, our vendors, or other third parties with whom we do business experience additional significant information security, cybersecurity, or data privacy incidents or fail to detect and appropriately respond to significant incidents, our business operations could be severely disrupted and we could be exposed to costly government enforcement actions and private litigation.",
-     "Complying with current or contemplated information security, cybersecurity, data privacy, data protection, and data processing laws and regulations (including reporting and disclosure regimes), or any actual or alleged failure to comply, could cause us to incur substantial costs, require changes to our business practices, and expose us to litigation and regulatory risks, each of which could adversely affect our reputation, results of operations, and financial condition.",
-     "None of these incidents has recently had a material impact on our business strategy, results of operations, or financial condition."
+     "we may experience lower sales, spoilage, and increased inventory markdowns, which could adversely affect our results of operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1, P3, P6, and P8",
-    "claim": "Target carries 1,143 (table in millions) in current debt and 14,187 (table in millions) in long-term debt with 23,296 (table in millions) in current liabilities exceeding 23,120 (table in millions) in current assets, alongside credit-rating and leverage-covenant sensitivities.",
+    "basis": "stated in P6; the sensitivity to slower sales is inferred.",
+    "claim": "Cost growth is outpacing the leverage benefit once refunds and one-offs are removed. The third quarter Adjusted SG&A rate was 21.9 percent against 21.3 percent a year earlier, and the gross margin gain excluding refunds was partly offset by freight and fuel costs.",
     "facts": [
-     "F1",
-     "P3",
-     "P6",
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "If our credit ratings were lowered, our ability to access the debt markets, our cost of funds, and other terms for new debt issuances could be adversely impacted.",
-     "In addition to a secured debt level covenant, our credit facilities also contain a debt leverage covenant.",
-     "Upon an event of default that is not cured or waived within any applicable cure periods, in addition to other remedies that may be available to the lenders, the obligations under the Credit Agreement may be accelerated."
+     "This increase in Adjusted SG&A rate reflects the impact of higher incentive compensation, additional store labor hours, as well as planned investments in new and existing stores, partially offset by the leverage benefit of strong topline growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 and P2; the return risk is the company's own risk-factor language, and the evidence shows no sign of it materialising yet.",
+    "claim": "Capital spending is rising, which raises the risk of weak returns on new stores and remodels. The company expects between $5 billion and $6 billion of capital expenditures in 2027.",
+    "facts": [
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "If our capital investments do not achieve appropriate returns or our efficiency efforts are not successful, our competitive position, results of operations, and financial condition could be adversely affected."
     ],
     "support": "supported"
    }
   ],
   "thesis_change": [
    {
-    "basis": "stated in P4 for second-quarter 2026 metrics and stated in P6 for third-quarter 2026 metrics",
-    "claim": "Second-quarter 2026 net sales increased 5.3 percent with 3.8 percent comparable sales growth (3.6 percent traffic and 0.2 percent average transaction amount), and the third-quarter release leaves those second-quarter figures unchanged while reporting 7.1 percent third-quarter net sales growth.",
+    "basis": "inferred from the effective time of P6 (2026-11-19T14:30:00Z) and the task statement that no newer evidence exists",
+    "claim": "No item became effective after the earlier analysis, so nothing newer addresses the third-quarter sales growth point. The latest item, the Q3 earnings release, predates that analysis.",
     "facts": [
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "A comparable sales increase of 3.8 percent, reflecting a 3.6 percent increase in traffic and a 0.2 percent increase in average transaction amount;",
-     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P4 for strategic drivers and stated in P6 for third-quarter progress and comparable sales",
-    "claim": "The third-quarter release reiterates Target's focus on style, design, and value alongside 5.6 percent comparable sales growth, leaving the differentiation and demand-anticipation requirement unchanged.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence exists to confirm or alter the point on differentiation and demand prediction as drivers of comparable sales.",
     "facts": [
-     "P2",
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "If we fail to differentiate our guest experience from our competitors, our results of operations and financial condition could be adversely affected.",
-     "\u201cOur third-quarter results reflect continued progress against our strategic priorities, centered on serving busy families with our signature blend of style, design and value,\u201d said Michael Fiddelke, Chief Executive Officer of Target."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4 for 2026 expectations and second-quarter contribution, and stated in P6 for ending store count and 2027 capital expenditure guidance",
-    "claim": "The third-quarter release does not alter the second-quarter new-store sales contribution or 2026 expectations of approximately $5 billion in capital expenditures and about 30 new stores, while reporting 2,026 ending stores versus 1,995 at January 31, 2026 and guiding to $5 billion to $6 billion in 2027 capital expenditures.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on digital and store comparable sales growth and store fulfillment.",
     "facts": [
-     "P3",
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "We expect capital expenditures in 2026 of approximately $5 billion to support our store experience and remodel program, continued investment in supply chain and technology projects, and investment in new stores.",
-     "We expect to open about 30 new stores during 2026.",
-     "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for expansion requirements and stated in P6 for ROIC; omission of location, labor, materials, and regulatory conditions observed in P6",
-    "claim": "The third-quarter release reports 16.5 percent trailing twelve-month after-tax ROIC and strong returns on 2026 capital investments, but does not address securing store locations, labor, materials, or regulatory clearances.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on supply chain capacity, technology uptime and investment offsets needed to sustain digital growth.",
     "facts": [
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "When building new stores, we compete with other retailers and businesses for suitable locations for our stores and available labor and materials.",
-     "For the trailing twelve months through third quarter 2026, after-tax return on invested capital (ROIC) was 16.5 percent, compared with 13.4 percent for the trailing twelve months through third quarter 2025."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 for second-quarter digital comparable sales and P6 for third-quarter digital comparable sales; absence of same-day delivery growth rate observed across all evidence items",
-    "claim": "While second-quarter digitally originated comparable sales grew 8.7 (table in percent) and third-quarter digital comparable sales grew 9.8 percent, no evidence item supports the claimed growth rate for same-day delivery.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on store count growth and capital expenditure plans.",
     "facts": [
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "Store comparable sales grew 4.6 percent, and digital comparable sales grew 9.8 percent."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for digital risks and stated in P6 for supply chain productivity improvements; omission of competitor AI parity and system disruption updates observed in P6",
-    "claim": "The third-quarter release cites supply chain facility productivity improvements and new AI-powered holiday shopping experiences, but does not address matching competitors' AI and digital capabilities or avoiding system disruptions.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on the dependencies of new store and remodel growth.",
     "facts": [
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "If we are unable to offset our investments in these or other initiatives with improved performance or efficiencies, our results of operations could be adversely affected.",
-     "Excluding tariff refunds, third quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior year rate of 28.2 percent, reflecting the comparison against last year\u2019s elevated markdowns and tariff rates, as well as growth in non-merchandise sales and the benefit of productivity improvements at supply chain facilities."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 for second-quarter non-merchandise sales growth and stated in P6 for third-quarter non-merchandise sales growth",
-    "claim": "The third-quarter release leaves the second-quarter 20.1 percent non-merchandise sales growth figure unchanged and reports third-quarter non-merchandise sales growth of 19.3 percent, reflecting Roundel ad revenue alongside Target Circle Card, Target Circle 360, and Target+ growth.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on non-merchandise sales growth and Roundel advertising revenue.",
     "facts": [
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "Non-merchandise sales growth of 20.1 percent, primarily driven by growth in our Roundel digital advertising business offering.",
-     "Net Sales of $27.1 billion in the third quarter were 7.1 percent higher than last year, reflecting a 6.9 percent increase in merchandise sales and a 19.3 percent increase in non-merchandise sales."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 for Roundel requirements and stated in P6 for advertising revenue; omission of vendor retention and third-party platform status observed in P6",
-    "claim": "The third-quarter release reports advertising revenue of 296 (table in millions) versus 241 (table in millions) a year earlier, but does not address retaining merchandise vendors and Target Plus sellers or maintaining third-party platform relationships.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "If our vendor or seller base shrinks, consumer traffic to our digital platforms decreases, or we are unable maintain key relationships, our advertising revenue may fail to meet expectations or may decline.",
-     "Non-merchandise sales grew nearly 20 percent, reflecting strong growth in Roundel ad revenue, Target Circle Card profit sharing revenue, Target Circle 360 membership revenue, and the Target+ marketplace."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 for third-quarter category performance; absence of second-quarter category growth rates and item price-cut figures observed in P4 and across all evidence items",
-    "claim": "No evidence item supports second-quarter category-wide sales growth or prior item price reductions; in the third quarter, net sales grew across a majority of core merchandising categories while Apparel & accessories declined from $3,838 (table in millions) to $3,691 (table in millions).",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on what Roundel needs to sustain advertising revenue growth.",
     "facts": [
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "Net sales grew across a majority of core merchandising categories versus a year ago, including nearly 27 percent growth in Fun 101, more than 9 percent growth in Beauty, and nearly 7 percent growth in Food and Beverage."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for owned-brand risks and stated in P6 for third-quarter tariff refunds; omission of owned-brand forecasting and intellectual property protection updates observed in P6",
-    "claim": "The third-quarter release reports $301 million in third-quarter IEEPA tariff refunds and excludes potential future refunds from guidance, but does not address longer-term owned-brand demand forecasting or intellectual property protection.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on category-led merchandise growth and owned-brand support.",
     "facts": [
-     "P1",
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "This requires accurate longer-term forecasting of consumer demand to effectively manage our operations, including for categories where consumer preferences may change rapidly, and exposes us to enhanced risks of supply chain disruptions and trade policy or tariff impacts.",
-     "During the three months ended October 31, 2026, we recognized $301 million related to International Emergency Economic Powers Act (IEEPA) tariff refunds (\"tariff refunds\") received during the third quarter of 2026 as a reduction of Cost of Sales."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P6",
-    "claim": "Target raised its full-year 2026 net sales growth guidance in the third-quarter release to a range around 6 percent, higher than the prior guidance range.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on the requirements for expanding owned and exclusive brands.",
     "facts": [
-     "P2",
-     "P3",
      "P6"
     ],
-    "quotes": [
-     "Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for transformation execution risks and stated in P6 for absence of 2026 adjustments; omission of change management and team adoption updates observed in P6",
-    "claim": "The third-quarter release reports no business transformation cost adjustments for the three and nine months ended October 31, 2026, but does not address execution effectiveness, change management, or team member adoption.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on the drivers of underlying profitability in 2026.",
     "facts": [
-     "P2",
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "If our execution is ineffective, if adoption by our team members is slower or more limited than expected, or if the initiative otherwise fails to adequately support our strategy, our competitive position, results of operations, and financial condition could be adversely affected.",
-     "In the past, these items have included both gains and losses, including certain asset impairments, severance, and other items that are discretely managed."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in P2 for reputational risks and stated in P6 for traffic growth; omission of brand perception or boycott updates observed in P6",
-    "claim": "The third-quarter release reports a 5.0 percent increase in comparable traffic, but does not address brand perceptions, consumer boycotts, or reputational incidents.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Negative reputational incidents or negative perceptions of us could adversely affect our business and results of operations, including through lower sales, the termination of existing business relationships, challenges in obtaining new vendors, third-party sellers or business collaborators, loss of new store and development opportunities, higher costs, and team member engagement, retention, and recruiting difficulties.",
-     "Third quarter net sales grew 7.1 percent over last year, with comparable sales growth of 5.6 percent driven by a 5.0 percent increase in comparable traffic."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P6",
-    "claim": "Target recognized an additional $301 million of IEEPA tariff refunds in the third quarter, bringing nine-month 2026 tariff refund benefits to $1.3 billion compared with $994 million through the second quarter, while guidance still excludes potential future refunds.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the point on sustaining margins once tariff refund benefits fade.",
     "facts": [
-     "P1",
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "During the second quarter of 2026, we received refunds of certain IEEPA tariffs previously paid and recognized $994 million related to these refunds as a reduction of Cost of Sales.",
-     "For the three and nine months ended October 31, 2026, Gross margin, Operating income, and Adjusted operating income include $301 million and $1.3 billion benefits from tariff refunds received during 2026, which are classified as a reduction of Cost of Sales.",
-     "The Company's guidance excludes any potential future tariff refunds."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 for the agreement expiration; omission of post-expiration Ulta Beauty updates observed in P6",
-    "claim": "The third-quarter release does not address the Ulta Beauty commercial agreement termination or provide updated traffic or charge impacts from its August 2026 expiration.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the tariff and IEEPA refund recovery risk.",
     "facts": [
-     "P1",
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "In 2025, we reached a mutual agreement with Ulta Beauty to terminate our commercial shop-in-shop operating agreement when it expires in August 2026."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for prior DEI reactions and boycotts; omission of updates on these topics observed in P6",
-    "claim": "The third-quarter release does not address diversity, equity, and inclusion initiatives, consumer boycotts, workforce unrest, or related litigation and regulatory proceedings.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the risk from public perception, boycotts and legal challenges.",
     "facts": [
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "For example, in 2025, we announced that we modified and concluded certain of our initiatives related to diversity, equity, and inclusion, which resulted in adverse reactions from some of our shareholders, guests, team members, and others, as well as consumer boycotts organized throughout 2025."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for third-party AI channel risks; omission of price-comparison or third-party AI shopping updates observed in P6",
-    "claim": "The third-quarter release highlights new AI-powered holiday shopping experiences, but does not address digital price-comparison tools or third-party artificial intelligence shopping channels.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the Ulta Beauty shop-in-shop termination and commercial partner exit exposure.",
     "facts": [
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "Consumers may also use third-party channels, devices, technologies, and capabilities (including artificial intelligence) to initiate shopping searches and place orders, which could make us dependent on the capabilities and search algorithms of those third parties to reach those consumers.",
-     "The most important risks and uncertainties are described in Item 1A of the Company\u2019s Form 10-K for the fiscal year ended January 31, 2026."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 for 2025 comparable sales and stated in P6 for third-quarter gross margin and inventory",
-    "claim": "The historical 2.6 percent annual comparable sales decline and demand-forecasting risk remain unchanged, while the third-quarter release reports 30.5 percent third-quarter gross margin rate expansion and inventory of 16,144 (table in millions) versus 14,896 (table in millions) a year earlier.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the risk to differentiation from price comparison and AI competition.",
     "facts": [
-     "P2",
-     "P3",
      "P6"
     ],
-    "quotes": [
-     "Comparable sales decreased 2.6 percent, driven by a 2.2 percent decrease in traffic and a 0.4 percent decrease in average transaction amount.",
-     "Third quarter gross margin rate was 30.5 percent, expanding 2.3 percentage points and reflecting 1.1 percentage points of benefit from tariff refunds."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 for prior-year costs and stated in P4 and P6 for unquantifiable discrete items",
-    "claim": "The prior-year $250 million business transformation cost and the risk of unquantifiable future charges remain unchanged, with the third-quarter release showing no transformation cost adjustments for the nine months ended October 31, 2026.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the demand misforecasting, inventory and markdown risk.",
     "facts": [
-     "P2",
-     "P3",
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "We incurred $250 million of costs related to business transformation initiatives.",
-     "The guidance does not currently reflect any such discrete items, which are subject to variability and therefore cannot be reconciled without unreasonable efforts."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for inventory shrink risks; omission of shrink updates observed in P6",
-    "claim": "The third-quarter release does not address inventory shrink, theft, related store closures, or shrink-driven asset impairments.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the risk of delays, cancellations or weak returns on capital investments.",
     "facts": [
-     "P2",
-     "P3",
      "P6"
     ],
-    "quotes": [
-     "In addition, sustained high rates of inventory shrink at certain stores have contributed, and may continue to contribute, to the closure of certain stores and the impairment of long-term assets."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 for 2026 capital expenditure plans and stated in P6 for third-quarter spending and 2027 guidance",
-    "claim": "Building on 2026 capital investment returns and third-quarter capital expenditures of $1.4 billion, Target expanded its forward capital expenditure plan in the third-quarter release to between $5 billion and $6 billion for 2027.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the inventory shrink risk.",
     "facts": [
-     "P3",
      "P6"
     ],
-    "quotes": [
-     "Third quarter capital expenditures of $1.4 billion were $0.4 billion higher than last year, driven primarily by increased investments in new and existing stores.",
-     "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for cybersecurity and privacy risks; omission of updates on these risks observed in P6",
-    "claim": "The third-quarter release does not address technology outages, cyberattacks, data privacy compliance, or Target's prior data breach.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the Roundel commitment, competition and privacy risks.",
     "facts": [
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "If we, our vendors, or other third parties with whom we do business experience additional significant information security, cybersecurity, or data privacy incidents or fail to detect and appropriately respond to significant incidents, our business operations could be severely disrupted and we could be exposed to costly government enforcement actions and private litigation."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 for Roundel contractual and platform risks and stated in P6 for advertising revenue and digital sales; omission of contract, privacy, or platform policy updates observed in P6",
-    "claim": "The third-quarter release reports nine-month advertising revenue of 821 (table in millions) versus 621 (table in millions) a year earlier and 9.8 percent third-quarter digital comparable sales growth, but does not address advertiser contract terms, privacy regulations, or third-party platform policies.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the technology disruption, cybersecurity and data privacy compliance risk.",
     "facts": [
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "The digital advertising environment is highly competitive, and our advertisers do not have long-term commitments with us.",
-     "Store comparable sales grew 4.6 percent, and digital comparable sales grew 9.8 percent."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in F1 for prior-quarter debt balances and stated in P6 for October 31, 2026 debt balances and interest expense",
-    "claim": "As of October 31, 2026, Target's long-term debt and other borrowings changed to 14,187 (table in millions) and current portion of long-term debt changed to 1,143 (table in millions), while the third-quarter release does not update credit ratings or debt covenants.",
+    "basis": "inferred from the effective time of P6 and the task statement",
+    "claim": "No newer evidence addresses the debt, current liabilities and covenant point. The latest balance sheet in the packet is the Q3 release, which predates the earlier analysis.",
     "facts": [
-     "F1",
-     "P3",
-     "P6",
-     "P8"
-    ],
-    "quotes": [
-     "The Company\u2019s third quarter 2026 net interest expense was $95 million, compared with $115 million last year, reflecting higher interest income in the current year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 for fourth-quarter seasonality and stated in P6 for early holiday sales trends",
-    "claim": "The fourth-quarter holiday sales concentration and seasonal disruption risk remain unchanged, while the third-quarter release reports that month-to-date November net sales are in line with guidance and expectations and accelerating from October trends.",
-    "facts": [
-     "P1",
-     "P2",
      "P6"
     ],
-    "quotes": [
-     "A larger share of annual net sales are traditionally earned during the fourth quarter because it includes the November and December holiday sales period.",
-     "Month-to-date, November net sales are in line with the Company's guidance and expectations, accelerating from October sales trends."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 for the second-quarter SG&A rate and stated in P6 for the third-quarter SG&A rate and drivers",
-    "claim": "In the third quarter, Target's GAAP and Adjusted SG&A expense rate increased to 21.9 percent from 21.6 percent in the second quarter, reflecting higher incentive compensation, additional store labor hours, and store investments, partially offset by topline leverage.",
-    "facts": [
-     "F2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "For the three months ended August 1, 2026, our SG&A expense rate was 21.6 percent compared with 21.3 percent for the comparable prior-year period.",
-     "Third quarter GAAP and Adjusted SG&A expense rate was 21.9 percent, compared with prior-year GAAP SG&A expense rate of 21.9 percent and Adjusted SG&A expense rate of 21.3 percent, which excluded non-recurring costs related to our business transformation initiative.",
-     "This increase in Adjusted SG&A rate reflects the impact of higher incentive compensation, additional store labor hours, as well as planned investments in new and existing stores, partially offset by the leverage benefit of strong topline growth."
-    ],
+    "quotes": [],
     "support": "supported"
    }
   ],
   "unresolved_questions": [
    {
-    "basis": "stated in the cited items: P3 and P4 explicitly state Target is unable to estimate the process, timing, or financial effects of potential additional tariff refunds, and P6 states guidance excludes any potential future refunds",
-    "claim": "What will be the process, timing, and ultimate financial effect of any additional IEEPA tariff refunds beyond the $994 million and $301 million recognized to date?",
+    "basis": "Stated in the cited items. The filings say the amounts cannot be estimated, so no figure is available.",
+    "claim": "How much more in IEEPA tariff refunds Target will receive, and when, is unresolved. Refunds of $994 million were booked in the second quarter and $301 million in the third, and management's guidance excludes any future refunds.",
     "facts": [
-     "P3",
      "P4",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "We continue to pursue additional refund claims in accordance with the established refund filing and validation process, along with other importers seeking tariff refunds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the stated drivers. The release does not say which are one-time.",
+    "claim": "How much of the third-quarter gross margin improvement excluding tariff refunds will persist is unresolved. Management attributes the rise partly to comparison against last year's elevated markdowns and tariff rates, and it also cites elevated freight and fuel costs.",
+    "facts": [
      "P6"
     ],
     "quotes": [
-     "Because the process, timing, and amount of any recovery are uncertain, we are unable to estimate the financial effects, if any, at this time.",
-     "However, due to uncertainties related to the refund process, timing, and amount of potential refunds, as well as ongoing legal and regulatory developments, we are unable to estimate the ultimate financial effects of any potential additional tariff refunds.",
-     "Note: The guidance includes tariff refund benefits of approximately $2.14 for the nine months ended October 31, 2026, but excludes any potential future refunds."
+     "Excluding tariff refunds, third quarter gross margin rate would have expanded approximately 1.2 percentage points over the prior year rate of 28.2 percent"
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "stated in the cited items: P1 discloses import reliance and P3 and P4 state that new tariffs and related commercial and consumer responses could materially impact future results",
-    "claim": "How will the new tariffs instituted in response to the U.S. Supreme Court ruling, combined with sourcing, pricing, and consumer responses, affect Target's future sales, results of operations, and financial condition?",
+    "basis": "Inferred from balance sheet comparisons and the guidance range in the cited items.",
+    "claim": "Whether the large inventory build and the wide full-year earnings guidance range will be validated by holiday sales is unresolved. Inventory is well above a year earlier, and the guidance range of $10.65 to $11.40 against $8.47 earned in nine months leaves a wide spread for the fourth quarter.",
     "facts": [
-     "P1",
-     "P3",
-     "P4"
+     "P6",
+     "P3"
     ],
     "quotes": [
-     "Approximately one-half of the merchandise we offer is sourced from outside the United States, with China representing the largest country of origin for imported goods.",
-     "We are closely monitoring the evolving consumer and regulatory landscape, including new tariffs announced in February 2026 in response to the U.S. Supreme Court ruling on IEEPA tariffs, and adjusting plans as needed.",
-     "The collective interaction of tariffs, tariff refunds, sourcing strategies, pricing actions, consumer response and behaviors, and other factors could materially impact our sales, results of operations, and financial condition in future periods."
+     "We believe the risk of inventory obsolescence is largely mitigated because our inventory typically turns in less than three months."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items: P4 states the amount and timing of future transformation costs cannot be reasonably estimated, and P2 states anticipated benefits cannot be assured",
-    "claim": "What additional costs and charges will Target incur for its multi-year business transformation initiatives beyond the $250 million incurred previously, and will the initiatives achieve their intended efficiencies and cost savings?",
+    "basis": "Stated in the cited release. The ROIC excluding refunds is not given and is not computed here.",
+    "claim": "How much of the 16.5% trailing-twelve-month return on invested capital is underlying is unresolved, because tariff refunds alone added 3.0 percentage points.",
     "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "We incurred $250 million of costs related to business transformation initiatives.",
-     "We may incur additional costs and charges related to these initiatives in future periods, which may adversely affect our results of operations and financial condition; however, we cannot reasonably estimate the amount or timing of such costs and charges.",
-     "We cannot assure that we will achieve all of the intended benefits of this initiative, including anticipated efficiencies, cost savings, or operational improvements, or that such benefits will be realized within expected timeframes."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P6: P1 notes fourth-quarter holiday sales concentration and P6 provides full-year guidance before the holiday quarter is complete",
-    "claim": "Will Target achieve its full-year guidance of net sales growth around 6 percent, operating income margin rate around 6.2 percent, and GAAP and Adjusted EPS of $10.65 to $11.40 given fourth-quarter holiday seasonality?",
-    "facts": [
-     "P1",
-     "P2",
      "P6"
     ],
     "quotes": [
-     "A larger share of annual net sales are traditionally earned during the fourth quarter because it includes the November and December holiday sales period.",
-     "\u2022Full-year net sales growth in a range around 6 percent, one percentage point higher than the prior guidance range.",
-     "\u2022Full-year 2026 operating income margin rate in a range around 6.2 percent, including approximately 1.1 percentage points of benefit from tariff refunds recognized to date.",
-     "\u2022An updated GAAP and Adjusted EPS guidance range of $10.65 to $11.40, which includes approximately $2.14 in tariff refund benefits recognized to date."
+     "tariff refunds, which increased after-tax ROIC by 3.0 percentage points"
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from P1 and P6: P1 states the Ulta Beauty agreement expires in August 2026, while P6 reports third-quarter Beauty net sales growth without disclosing post-expiration transition details or space plans",
-    "claim": "What financial and merchandising effects followed the expiration of Target's commercial shop-in-shop operating agreement with Ulta Beauty, and how is Target repurposing that store space?",
+    "basis": "Spending plans are stated. Returns on specific projects are not disclosed, so the link to future returns is inferred.",
+    "claim": "Whether the planned step-up in capital spending to between $5 billion and $6 billion next year will earn adequate returns is unresolved. The 10-K earlier guided about $5 billion for this year, and the company's own risk factors warn that capital investments may not achieve appropriate returns.",
+    "facts": [
+     "P6",
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred. The agreement's end is stated, but no disclosure links it to sales effects.",
+    "claim": "Whether the end of the Ulta Beauty shop-in-shop agreement will weaken Beauty sales or traffic is unresolved. The agreement expired in August 2026, partway through the third quarter, and the third-quarter release reports Beauty growth without quantifying any effect from the exit.",
     "facts": [
      "P1",
      "P6"
@@ -2192,86 +1729,33 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P8 and inferred from P6: P8 states rate and leverage covenant terms are specified in the Credit Agreement exhibit (not included in the packet), and P6 omits credit facility utilization disclosures",
-    "claim": "Did Target borrow under its $4.0 billion unsecured revolving credit facility or commercial paper program during the third quarter, and what specific interest rate spreads and leverage covenant thresholds apply under the Credit Agreement?",
+    "basis": "Inferred from the stated capital allocation priorities and cash flow figures in the cited items. About $8.0 billion remains under the repurchase program.",
+    "claim": "How management will balance the sharply higher capital spending, declining cash and share repurchases is unresolved. Cash fell over the nine months, buybacks were modest early in the year and then rose in the third quarter, and a large authorization remains.",
     "facts": [
-     "P3",
      "P6",
-     "P8"
-    ],
-    "quotes": [
-     "On August 14, 2026, Target Corporation (\u201cTarget\u201d) entered into a Five-Year Credit Agreement with certain lenders, Bank of America, N.A., as administrative agent, Citibank, N.A., and Wells Fargo Bank, National Association, as co-syndication agents, and JPMorgan Chase Bank, N.A., and U.S. Bank National Association, as co-documentation agents, for a $4.0 billion unsecured revolving credit facility (the \u201cCredit Agreement\u201d).",
-     "Borrowings under the Credit Agreement will bear interest at the rates specified in the Credit Agreement, which vary based on the type of loan and Target\u2019s debt ratings.",
-     "The Credit Agreement contains customary representations and warranties and affirmative and negative covenants, including a financial covenant regarding the leverage ratio of Target and its subsidiaries."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from P3 and P6: P6 reports the current debt balance and remaining repurchase authorization without maturity schedules or future repurchase pace, and P3 refers to Note 17 which is omitted from the packet",
-    "claim": "How does Target intend to address its 1,143 (table in millions) current portion of long-term debt and other borrowings, and at what pace will it deploy its remaining $8.0 billion share repurchase capacity?",
-    "facts": [
      "P3",
-     "P6"
+     "P8",
+     "F3"
     ],
     "quotes": [
-     "As of the end of the quarter, the Company had approximately $8.0 billion of remaining capacity under the repurchase program approved by Target\u2019s Board of Directors in August 2021.",
-     "Note 17 to the Financial Statements provides additional information."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and inferred from P6: P6 gives only an aggregate range for planned capital expenditures, while P2 notes returns on supply chain and technology investments are less predictable",
-    "claim": "How will Target allocate its planned $5 billion to $6 billion in capital expenditures across new stores, remodels, supply chain, and technology, and what returns will those investments generate?",
-    "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Additionally, building on the strong returns generated by capital investments in 2026, the Company expects to invest between $5 billion and $6 billion in capital expenditures in 2027.",
-     "The effectiveness of these investments can be less predictable than remodeling or building new stores, and might not provide the anticipated benefits, which could adversely affect our results of operations and financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from P1 and P2: P1 discloses multi-year first-sale refund claim cycles without outstanding balances, and P2 flags potential litigation and regulatory risk while Item 3 and contingency footnotes are absent from the packet",
-    "claim": "What amounts of pending first-sale customs duty refund claims remain unpaid, and are there active legal or regulatory proceedings\u2014including related to past diversity, equity, and inclusion or environmental, social, and governance initiatives\u2014that could result in material liabilities?",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "We generally pay duties based on the price Target pays its vendors for the goods, and later seek refunds for qualifying transactions by filing first sale claims, a significant portion of which have processing and payment cycles that extend beyond one year.",
-     "Although we believe that all of our corporate initiatives have complied with applicable laws, we could still become subject to litigation, investigations, and regulatory proceedings, including as it relates to corporate initiatives that have concluded."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6: footnote (a) discloses that Roundel services may be classified as reductions of Cost of Sales or SG&A expenses without quantifying the amounts classified outside Net sales",
-    "claim": "How much of Target's Roundel advertising services revenue was recorded as reductions of Cost of Sales or SG&A expenses rather than the 296 (table in millions) and 821 (table in millions) reported in Net sales for the third quarter and first nine months?",
-    "facts": [
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "Roundel services are classified as either Net Sales or as a reduction of Cost of Sales or Selling, General, and Administrative (SG&A) Expenses, depending on the nature of the advertising arrangement."
+     "The Company repurchased $251 million of its shares in the third quarter"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "TGT",
- "upside": 0.13722928284578795,
+ "upside": 0.10382444845729322,
  "valuation": null,
- "value_base": 187.40067287419345,
- "value_bear": 133.47346538065605,
- "value_bull": 254.05544067281278,
+ "value_base": 181.8959883430409,
+ "value_bear": 144.17205234058846,
+ "value_bull": 242.10904683929138,
  "value_per_filed_share": {
-  "base": 187.40067287419345,
-  "bear": 133.47346538065605,
-  "bull": 254.05544067281278
+  "base": 181.8959883430409,
+  "bear": 144.17205234058846,
+  "bull": 242.10904683929138
  },
  "valued": true,
  "verdict": "WATCH",
- "verdict_reason": "expected return +5.1 points a year against the required return over 3 years; the two runs do not both reach BUY"
+ "verdict_reason": "expected return +4.5 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }
