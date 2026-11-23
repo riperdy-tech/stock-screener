@@ -1,19 +1,19 @@
 {
   "counts": {
-    "stocks": 7054
+    "stocks": 7057
   },
   "fetch_run": {
-    "newest_last_updated_age_days": 0.23,
-    "processed": 6540,
-    "refreshed": 6540,
-    "scan_logged_at": "2026-11-22 21:17:51",
+    "newest_last_updated_age_days": 0.04,
+    "processed": 6541,
+    "refreshed": 6541,
+    "scan_logged_at": "2026-11-24 01:07:46",
     "skipped": 0,
     "skipped_share": 0.0
   },
-  "finished_at": "2026-11-22T17:49:40Z",
+  "finished_at": "2026-11-23T17:01:27Z",
   "invariants": [
     {
-      "detail": "newest row Last_Updated is 0.2 days old (max 8)",
+      "detail": "newest row Last_Updated is 0.0 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
       "ok": true
@@ -25,7 +25,7 @@
       "ok": false
     },
     {
-      "detail": "last scan (2026-11-22 21:17:51) refreshed 6540, skipped 0 of 6540 (0.0%, max 8%)",
+      "detail": "last scan (2026-11-24 01:07:46) refreshed 6541, skipped 0 of 6541 (0.0%, max 8%)",
       "level": "hard",
       "name": "fetch_skipped_share",
       "ok": true
@@ -37,13 +37,13 @@
       "ok": true
     },
     {
-      "detail": "universe 7054 -> 7054 (0.0% drift, max 10%)",
+      "detail": "universe 7054 -> 7057 (0.0% drift, max 10%)",
       "level": "soft",
       "name": "universe_drift",
       "ok": true
     },
     {
-      "detail": "7054/7054 stocks carry reverse object (100.0%, min 90%)",
+      "detail": "7057/7057 stocks carry reverse object (100.0%, min 90%)",
       "level": "hard",
       "name": "reverse_coverage",
       "ok": true
@@ -61,7 +61,7 @@
       "ok": true
     },
     {
-      "detail": "2758 stocks carry a Factor Lab score (min 500)",
+      "detail": "2755 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
@@ -79,13 +79,13 @@
       "ok": true
     },
     {
-      "detail": "59 research_now candidates",
+      "detail": "58 research_now candidates",
       "level": "soft",
       "name": "factor_research_now",
       "ok": true
     },
     {
-      "detail": "2729/2758 scored names carry momentum (98.9%, min 95.0%)",
+      "detail": "2727/2755 scored names carry momentum (99.0%, min 95.0%)",
       "level": "soft",
       "name": "momentum_coverage",
       "ok": true
@@ -97,7 +97,7 @@
       "ok": true
     },
     {
-      "detail": "152 reverse-DCF models built",
+      "detail": "153 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
@@ -117,60 +117,60 @@
   ],
   "ok": true,
   "price_asof": "2026-11-20",
-  "run_id": "20261122T174852Z",
+  "run_id": "20261123T165821Z",
   "steps": [
     {
-      "duration_s": 2.6,
+      "duration_s": 4.0,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.5,
+      "duration_s": 56.8,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 1.4,
+      "duration_s": 1.1,
       "name": "filter_tier1_hygiene",
       "returncode": 0
     },
     {
-      "duration_s": 28.9,
+      "duration_s": 38.8,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.6,
+      "duration_s": 0.5,
       "name": "build_stock_driver_flags",
       "returncode": 0
     },
     {
-      "duration_s": 0.9,
+      "duration_s": 0.8,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.7,
+      "duration_s": 7.2,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 2.2,
+      "duration_s": 64.6,
       "name": "fetch_analyst_targets",
       "returncode": 0
     },
     {
-      "duration_s": 1.3,
+      "duration_s": 0.8,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.0,
+      "duration_s": 0.4,
       "name": "build_macro_events",
       "returncode": 0
     },
     {
-      "duration_s": 1.8,
+      "duration_s": 9.7,
       "name": "track_paper_portfolios",
       "returncode": 0
     }

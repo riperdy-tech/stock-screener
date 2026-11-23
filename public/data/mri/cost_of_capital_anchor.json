@@ -1,22 +1,22 @@
 {
   "anchor_id": "cost_of_capital",
-  "asof": "2026-11-21",
-  "built_at": "2026-11-21T23:28:09.310101+00:00",
+  "asof": "2026-11-22",
+  "built_at": "2026-11-22T21:34:23.693618+00:00",
   "degraded": false,
   "equity_aggregate": {
     "basis": "universe",
-    "coverage_share": 0.7875,
+    "coverage_share": 0.7866,
     "path": "data/anchors/equity_aggregate.json",
     "source": "Screener corpus (public/data): market caps from financials/*.json, owner earnings NI+D&A-capex and revenue CAGR from fundamentals_history.json. US-dollar reporters only; share classes collapsed by CIK.",
     "universe_stats": {
-      "collapsed_market_cap_usd_t": 76.97,
+      "collapsed_market_cap_usd_t": 77.07,
       "constituent_market_cap_usd_t": 60.62,
-      "constituents": 1858,
-      "corpus_market_cap_usd_t": 81.71,
-      "coverage_share": 0.7875,
+      "constituents": 1861,
+      "corpus_market_cap_usd_t": 81.81,
+      "coverage_share": 0.7866,
       "excluded_non_usd_reporters": 503,
-      "names_with_market_cap": 5053,
-      "share_classes_collapsed": 143
+      "names_with_market_cap": 5057,
+      "share_classes_collapsed": 145
     }
   },
   "erp_basis": "universe",
@@ -36,8 +36,8 @@
   "erp_history_source": "Damodaran implied ERP (FCFE), annual 1961-2025",
   "erp_percentile_vs_history": 0.8,
   "erp_source": "implied",
-  "implied_cost_of_equity": 0.1052,
-  "implied_erp": 0.0548,
+  "implied_cost_of_equity": 0.1051,
+  "implied_erp": 0.0547,
   "inflation": {
     "cpi_yoy": null,
     "pce_yoy": 0.0365
@@ -50,7 +50,7 @@
   "loading_source": "beta_vs_SPY_5y",
   "market_implied_coe": null,
   "market_implied_erp": null,
-  "oldest_leg_age_days": 81,
+  "oldest_leg_age_days": 82,
   "provenance": {
     "degradation_reasons": [
       "inflation: CPIAUCSL yoy unavailable"
@@ -66,8 +66,8 @@
     },
     "notes": [
       "Cost of EQUITY, not WACC: the downstream cash flow (NI + D&A - capex) is levered and is compared against market cap, so a firm-level WACC would double-count the debt claim.",
-      "erp: solved over a universe aggregate (0.7875 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
-      "erp: implied from 1858 constituents covering 79% of the aggregate's own capitalisation"
+      "erp: solved over a universe aggregate (0.7866 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
+      "erp: implied from 1861 constituents covering 79% of the aggregate's own capitalisation"
     ],
     "regime_leg": null,
     "scoring_mode": "point_in_time"
