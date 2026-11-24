@@ -3,17 +3,17 @@
     "stocks": 7057
   },
   "fetch_run": {
-    "newest_last_updated_age_days": 0.04,
+    "newest_last_updated_age_days": 0.48,
     "processed": 6541,
     "refreshed": 6541,
     "scan_logged_at": "2026-11-24 01:07:46",
     "skipped": 0,
     "skipped_share": 0.0
   },
-  "finished_at": "2026-11-23T17:01:27Z",
+  "finished_at": "2026-11-24T03:41:11Z",
   "invariants": [
     {
-      "detail": "newest row Last_Updated is 0.0 days old (max 8)",
+      "detail": "newest row Last_Updated is 0.5 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
       "ok": true
@@ -37,7 +37,7 @@
       "ok": true
     },
     {
-      "detail": "universe 7054 -> 7057 (0.0% drift, max 10%)",
+      "detail": "universe 7057 -> 7057 (0.0% drift, max 10%)",
       "level": "soft",
       "name": "universe_drift",
       "ok": true
@@ -61,7 +61,7 @@
       "ok": true
     },
     {
-      "detail": "2755 stocks carry a Factor Lab score (min 500)",
+      "detail": "2764 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
@@ -79,13 +79,13 @@
       "ok": true
     },
     {
-      "detail": "58 research_now candidates",
+      "detail": "60 research_now candidates",
       "level": "soft",
       "name": "factor_research_now",
       "ok": true
     },
     {
-      "detail": "2727/2755 scored names carry momentum (99.0%, min 95.0%)",
+      "detail": "2735/2764 scored names carry momentum (99.0%, min 95.0%)",
       "level": "soft",
       "name": "momentum_coverage",
       "ok": true
@@ -97,13 +97,13 @@
       "ok": true
     },
     {
-      "detail": "153 reverse-DCF models built",
+      "detail": "152 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
     },
     {
-      "detail": "paper ledger latest row 2026-11-20 (expect >= price session 2026-11-20)",
+      "detail": "paper ledger latest row 2026-11-23 (expect >= price session 2026-11-23)",
       "level": "soft",
       "name": "paper_ledger_updated",
       "ok": true
@@ -116,61 +116,61 @@
     }
   ],
   "ok": true,
-  "price_asof": "2026-11-20",
-  "run_id": "20261123T165821Z",
+  "price_asof": "2026-11-23",
+  "run_id": "20261124T033959Z",
   "steps": [
     {
-      "duration_s": 4.0,
+      "duration_s": 3.0,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 56.8,
+      "duration_s": 2.8,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 1.1,
+      "duration_s": 1.2,
       "name": "filter_tier1_hygiene",
       "returncode": 0
     },
     {
-      "duration_s": 38.8,
+      "duration_s": 46.0,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.5,
+      "duration_s": 0.4,
       "name": "build_stock_driver_flags",
       "returncode": 0
     },
     {
-      "duration_s": 0.8,
+      "duration_s": 0.7,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 7.2,
+      "duration_s": 4.8,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 64.6,
+      "duration_s": 3.6,
       "name": "fetch_analyst_targets",
       "returncode": 0
     },
     {
-      "duration_s": 0.8,
+      "duration_s": 1.1,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.4,
+      "duration_s": 0.0,
       "name": "build_macro_events",
       "returncode": 0
     },
     {
-      "duration_s": 9.7,
+      "duration_s": 7.7,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
