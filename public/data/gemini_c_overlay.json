@@ -1,9 +1,9 @@
 {
- "count": 246,
+ "count": 247,
  "effort": "high",
- "fill_complete": false,
- "generated_at": "2026-11-24T00:58:28Z",
- "list_covered": 161,
+ "fill_complete": true,
+ "generated_at": "2026-11-24T01:09:28Z",
+ "list_covered": 162,
  "list_names": 162,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -7802,6 +7802,47 @@
    "verdict": "NO_CALL",
    "verdict_reason": "minority interests take too large a share of income"
   },
+  "PRDO": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "based_on": {
+    "accepted": "2026-11-05T21:02:39.000Z",
+    "accepted_utc": "2026-11-06T02:02:39Z",
+    "accession": "0001193125-26-449730",
+    "decision_time": "2026-11-24T00:58:56Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 81,
+   "claims_supported": 78,
+   "date": "2026-11-24T00:58:56Z",
+   "family": "operating",
+   "flags": [
+    "Perdoceo entered into a definitive agreement to acquire 100% of the membership interests of South University Savannah, LLC for an initial cash payment of $150 million subject to closing adjustments (stated as approximately $130 million - $150 million at closing in the third-quarter earnings release), $18 million of deferred consideration, and up to $56 million of earn-out payments.",
+    "Perdoceo completed the acquisition of the University of St. Augustine for Health Sciences (USAHS), which contributed an increase of $147.5 million in revenue in the following fiscal year.",
+    "Perdoceo's board of directors declared a quarterly cash dividend of $0.17 per share."
+   ],
+   "in_code_book": false,
+   "interest_from_filing": {
+    "fy0": "2025-12-31",
+    "kd_tagged": 0.45247760358342665,
+    "status": "cannot_tell",
+    "tagged_value": 6465000.0,
+    "version": "interest_from_filing.v1 2026-11-18 WO_NC8",
+    "why": "The provided evidence does not include the FY 2025 income statement or footnotes to show the breakdown of interest expense, while the Dec. 31, 2025 balance sheet lists $11,555 thousand of finance lease liabilities alongside $56,992 thousand of non-current sale lease-back financing excluded from the 11,555,000 debt figure."
+   },
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "implied borrowing cost outside the allowed range",
+   "pending_offer": null,
+   "qwen_book": null,
+   "release_truncated": [],
+   "screener_commit": "5974bf5f7bb3a82ac673c20ded73235c4937ccc2",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "implied borrowing cost outside the allowed range"
+  },
   "PRI": {
    "alpha_pts": 7.195731156601664,
    "analysis": "complete",
@@ -10996,7 +11037,7 @@
  "verdict_counts": {
   "AVOID": 55,
   "BUY": 57,
-  "NO_CALL": 114,
+  "NO_CALL": 115,
   "WATCH": 20
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
