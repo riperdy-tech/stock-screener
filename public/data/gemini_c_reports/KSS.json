@@ -1,48 +1,50 @@
 {
- "alpha_pts": 12.58831070595598,
+ "alpha_pts": 16.576033118951027,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "based_on": {
   "accepted": "2026-09-03T20:10:34.000Z",
   "accepted_utc": "2026-09-04T00:10:34Z",
   "accession": "0001193125-26-381893",
-  "decision_time": "2026-11-21T20:52:36Z",
+  "decision_time": "2026-11-25T15:46:53Z",
   "form": "10-Q",
   "period": "2026-08-01"
  },
- "claims": 95,
- "claims_supported": 84,
- "date": "2026-11-21T20:52:36Z",
+ "claims": 84,
+ "claims_supported": 74,
+ "date": "2026-11-25T15:46:53Z",
  "decided": {
   "flags": [
+   "run 1000: return_above_base_year: long-run 0.0900 against the base year's 0.0891",
    "run 1000: base_year_not_representative",
-   "run 1000: tax_rate_representative_no: The FY2025 effective tax rate of 19.05% benefited from favorable uncertain tax positions and federal tax credits at low pre-tax income, whereas the 1H 2026 effective tax rate is 24.1% (and was 25.0% in 1H 2025).",
-   "run 1000: debt_level_representative_no: Management prioritizes reducing debt and leverage, having already cut long-term debt from $1,436 million at FY2025 year-end to $1,325 million as of August 1, 2026 through $113 million of opportunistic debt repurchases while keeping zero borrowings on its revolving credit facility.",
-   "run 1000: quotes_verified: 21 of 21",
+   "run 1000: tax_rate_representative_no: The 19.0% base-year rate is below the 23-24% interim rates, and Q3 carries a $137M one-time tax benefit from examinations being settled.",
+   "run 1000: confidence_low",
+   "run 1000: quotes_verified: 11 of 11",
+   "run 1000: capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
    "run 1000: acquisitions_paid_not_filed_taken_as_0",
-   "run 1000: buybacks_paid_not_filed_taken_as_0",
    "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
    "run 1000: special_distributions_not_filed_taken_as_0",
    "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 3000: return_above_base_year: long-run 0.0900 against the base year's 0.0891",
    "run 3000: base_year_not_representative",
-   "run 3000: tax_rate_representative_no: The base-year effective tax rate of 19.05% benefited from uncertain tax position adjustments and federal tax credits, whereas the effective tax rate normalized to 24.1% in the first six months of fiscal 2026 (and 25.0% in the first six months of fiscal 2025).",
-   "run 3000: debt_level_representative_no: Total debt fell from $1,436.0 million at base year-end to $1,325 million by August 1, 2026 via open-market repurchases of $113 million of debt, and management continues to prioritize deleveraging while carrying sub-investment-grade ratings (Moody's B2, S&P B+, Fitch BB-).",
-   "run 3000: quotes_verified: 20 of 20",
+   "run 3000: tax_rate_representative_no: The base-year rate of 19.0% was low, the first-half FY2026 rate was 24.1%, and the Q3 tax benefit of $137M from settled examinations will not recur, so a mid-20s rate is more sustainable.",
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 10 of 10",
+   "run 3000: capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
    "run 3000: acquisitions_paid_not_filed_taken_as_0",
-   "run 3000: buybacks_paid_not_filed_taken_as_0",
    "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
    "run 3000: special_distributions_not_filed_taken_as_0",
    "run 3000: disposals_received_not_filed_taken_as_0"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.0143 and margin 0.0459, margin 0.0402 (persist), growth 0.0375, terminal RONIC 0.1115 (equity return r 0.1049), F 10",
-  "run_gap": 0.005551589379252803,
+  "old_defaults_inputs": "year 1 growth -0.0143 and margin 0.0459, margin 0.0402 (persist), growth 0.0375, terminal RONIC 0.1103 (equity return r 0.1035), F 10",
+  "run_gap": 0.031913245639753854,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
      "capital_events": {
-      "excess_cash_after": 674000000.0,
+      "excess_cash_after": 635000000.0,
       "excess_cash_before": 674000000.0,
       "figures": {
        "acquisitions_paid": {
@@ -50,8 +52,16 @@
         "source": "none"
        },
        "buybacks_paid": {
-        "amount": 0.0,
-        "source": "none"
+        "amount": 39000000.0,
+        "printed": 39,
+        "quotes": [
+         {
+          "id": "P6",
+          "quote": "Treasury stock purchases | (39) | \u2014"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
        },
        "disposals_received": {
         "amount": 0.0,
@@ -66,11 +76,13 @@
         "source": "none"
        }
       },
-      "flags": [],
-      "gross_events": 0.0,
+      "flags": [
+       "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31"
+      ],
+      "gross_events": 39000000.0,
       "interim_end": "2026-08-01",
-      "market_cap": 2606524510.0,
-      "net_effect_on_excess_cash": 0.0,
+      "market_cap": 2403580795.0,
+      "net_effect_on_excess_cash": -39000000.0,
       "shares": {
        "after": 114000000.0,
        "before": 114000000.0,
@@ -80,7 +92,6 @@
       },
       "stamps": [
        "acquisitions_paid_not_filed_taken_as_0",
-       "buybacks_paid_not_filed_taken_as_0",
        "shares_issued_proceeds_not_filed_taken_as_0",
        "special_distributions_not_filed_taken_as_0",
        "disposals_received_not_filed_taken_as_0"
@@ -88,7 +99,7 @@
      },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 674000000.0,
+     "excess_cash_after": 635000000.0,
      "excess_cash_before": 674000000.0,
      "k0_after": 315046152.41935486,
      "k0_before": 315046152.41935486,
@@ -97,7 +108,6 @@
      "one_offs_gain": 0,
      "stamps": [
       "acquisitions_paid_not_filed_taken_as_0",
-      "buybacks_paid_not_filed_taken_as_0",
       "shares_issued_proceeds_not_filed_taken_as_0",
       "special_distributions_not_filed_taken_as_0",
       "disposals_received_not_filed_taken_as_0"
@@ -105,266 +115,222 @@
      "x0_after": 250105495.66052225,
      "x0_before": 250105495.66052225
     },
-    "confidence": "medium",
+    "confidence": "low",
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 3044684335.75811,
-     "seam_ratio": 0.9094746053167269,
-     "tv_share": 0.2877289055614586,
-     "wedge_rate_5": -0.013041664621201805
+     "equity_value": 3355647182.596494,
+     "seam_ratio": 0.9686870445519576,
+     "tv_share": 0.19431100186372133,
+     "wedge_rate_5": -0.011358025701311723
     },
     "flags": [
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0891",
      "base_year_not_representative",
-     "tax_rate_representative_no: The FY2025 effective tax rate of 19.05% benefited from favorable uncertain tax positions and federal tax credits at low pre-tax income, whereas the 1H 2026 effective tax rate is 24.1% (and was 25.0% in 1H 2025).",
-     "debt_level_representative_no: Management prioritizes reducing debt and leverage, having already cut long-term debt from $1,436 million at FY2025 year-end to $1,325 million as of August 1, 2026 through $113 million of opportunistic debt repurchases while keeping zero borrowings on its revolving credit facility.",
-     "quotes_verified: 21 of 21",
+     "tax_rate_representative_no: The 19.0% base-year rate is below the 23-24% interim rates, and Q3 carries a $137M one-time tax benefit from examinations being settled.",
+     "confidence_low",
+     "quotes_verified: 11 of 11",
+     "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
      "acquisitions_paid_not_filed_taken_as_0",
-     "buybacks_paid_not_filed_taken_as_0",
      "shares_issued_proceeds_not_filed_taken_as_0",
      "special_distributions_not_filed_taken_as_0",
      "disposals_received_not_filed_taken_as_0"
     ],
     "inputs": {
-     "capex_to_revenue": 0.025,
-     "fade_years": 5,
+     "capex_to_revenue": 0.026,
+     "fade_years": 10,
      "long_run_op_margin": 0.04,
      "op_margin": [
-      0.037,
-      0.032,
+      0.047,
       0.034,
+      0.035,
       0.036,
-      0.038
+      0.037
      ],
-     "return_on_new_investment_long_run": 0.085,
+     "return_on_new_investment_long_run": 0.09,
      "rev_growth": [
-      -0.01,
-      -0.005,
-      0.0,
-      0.005,
-      0.01
+      0.003,
+      0.008,
+      0.012,
+      0.015,
+      0.015
      ],
-     "terminal_growth": 0.015
+     "terminal_growth": 0.02
     },
-    "old_defaults_inputs": "year 1 growth -0.0143 and margin 0.0459, margin 0.0402 (persist), growth 0.0375, terminal RONIC 0.1115 (equity return r 0.1049), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0143 and margin 0.0459, margin 0.0402 (persist), growth 0.0375, terminal RONIC 0.1103 (equity return r 0.1035), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 11,
-     "kept": 84
+     "dropped_unsupported": 10,
+     "kept": 74
     },
     "ranges": {
      "long_run_op_margin": [
-      0.025,
+      0.03,
       0.055
      ],
      "rev_growth_y3": [
-      -0.025,
-      0.02
+      -0.01,
+      0.025
      ],
      "terminal_growth": [
-      0.0,
-      0.025
+      0.01,
+      0.03
      ]
     },
     "reasons": {
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0328; depreciation (without amortization of acquired intangibles) / revenue 0.0442."
-       },
-       {
-        "id": "P3",
-        "quote": "The decrease was primarily driven by lower capital spend during the year on the expansion of our E-commerce Fulfillment center in Etna, Ohio, which was completed in 2025, and fewer Sephora shop openings and other investments, consistent with our reduced capital expenditure plans for fiscal 2025."
-       },
-       {
-        "id": "P3",
-        "quote": "In 2026, we anticipate capital expenditures of approximately $350 to $400 million as we continue to invest in our business, including enhancing omnichannel capabilities."
+        "id": "P6",
+        "quote": "Capital Expenditures: In the range of $365 million to $375 million"
        }
       ],
-      "quotes_given": 3,
-      "why": "While 5-year pooled capex-to-revenue was 3.28%, that period included the nationwide Sephora shop-in-shop rollout and the Etna, Ohio e-commerce fulfillment center expansion completed in 2025. FY2025 capex fell to 2.40% of revenue and FY2026 guidance is $350 million to $400 million (~2.3%-2.6% of revenue), supporting a 2.5% run-rate for maintenance and omnichannel investments."
+      "quotes_given": 1,
+      "why": "Management guides capex of $365-375M, about 2.4% of revenue. I use 2.6%, below the 3.3% five-year average because spending has been cut, but allowing some reinvestment."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "The retail industry is highly competitive. Management considers product and value to be the most significant competitive factors in the industry."
+        "id": "P2",
+        "quote": "Our core moderate-income customer is especially sensitive to these factors."
        }
       ],
       "quotes_given": 1,
-      "why": "Because Year 5 revenue growth (1.0%) and operating margin (3.8%) are already close to their long-run levels (1.5% and 4.0%) in a mature, highly competitive retail industry without durable moat expansion, a short 5-year fade is warranted."
+      "why": "The margin recovery from about 3.4% to 4.0% and the normalisation of growth should take about a decade, given the weak competitive position and the sensitivity of a moderate-income customer base."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "Our primary competitors are online retailers, off-price retailers, warehouse clubs, mass merchandisers, specialty stores, traditional department stores, and other forms of retail commerce."
+        "id": "P3",
+        "quote": "adjusted operating income was 3.3% compared to 3.1% in the prior year."
        },
        {
         "id": "REC",
-        "quote": "2024-02-03 | $17,476.0 million | -0.0344 | 0.0410"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-02-01 | $16,221.0 million | -0.0718 | 0.0267"
+        "quote": "2020-02-01 | $19,974.0 million | -0.0126 | 0.0550"
        }
       ],
-      "quotes_given": 3,
-      "why": "Kohl's post-2019 competitive reality against online, off-price, and mass merchandisers limits pricing power and makes a return to pre-2019 6%-11% margins unlikely, while recent 3%-4% adjusted margins reflect trough sales deleverage. A 4.0% long-run operating margin aligns with the post-COVID 5-year median (4.02%) as higher-margin proprietary brands and cost discipline balance promotional and tariff pressures."
+      "quotes_given": 2,
+      "why": "Adjusted margins have been about 3.1-3.3% and the filed margin has been 1.4-4.1% since 2023. Margins sat above 5.5% before 2020. Given partial mean reversion, a base-year adjusted margin below the long-run median, and structural competition, I use 4.0%."
      },
      "op_margin": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Adjusted Operating margin: In the range of 3.5% to 4.0% (b)"
+        "quote": "Operating margin: In the range of 4.7% to 4.9% which includes the benefit of:"
        },
        {
         "id": "P6",
-        "quote": "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million flowed through gross margin."
+        "quote": "1.0% from tariff refunds"
        },
        {
-        "id": "P3",
-        "quote": "On an adjusted non-GAAP basis, our adjusted operating income was $510 million compared to $509 million in the prior year.(a) As a percentage of total revenue, adjusted operating income was 3.3% compared to 3.1% in the prior year.(a)"
-       },
-       {
-        "id": "P1",
-        "quote": "Compared to national brands, proprietary brands generally have lower selling prices, but higher gross margins."
+        "id": "P6",
+        "quote": "0.4% from gain on real estate"
        }
       ],
-      "quotes_given": 4,
-      "why": "Year 1 operating margin of 3.7% reflects the midpoint of raised FY2026 guidance (3.5% to 4.0%), which includes an approximate $100 million Q2 gross margin benefit from IEEPA tariff refunds. Year 2 steps back to 3.2%\u2014in line with FY2025's 3.3% adjusted operating margin and initial pre-refund FY2026 guidance\u2014once that one-time refund drops out, before recovering gradually to 3.8% by Year 5 on higher-margin proprietary brand mix and SG&A discipline."
+      "quotes_given": 3,
+      "why": "Year 1 uses the GAAP guide of 4.7-4.9%, trimmed slightly because it includes the tariff-refund and real-estate benefits. Year 2 drops to the underlying margin of about 3.4% as those items go away. It then rises slowly on sales leverage, gross margin gains from proprietary brands, and lower interest-linked and corporate costs."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.0891; tax rate 0.1905; total debt $1,436.0 million; cash counted as excess $674.0 million; net debt (debt less that cash) $762.0 million."
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1115."
+        "quote": "Base year: return on tangible capital 0.0891"
        }
       ],
-      "quotes_given": 2,
-      "why": "Base-year return on tangible capital was 8.91% (even with the $129 million legal settlement gain and a 19.05% tax rate), below the 11.15% value-neutral return threshold. With intense competition limiting excess economic rents, incremental capital deployed into store refreshes, inventory depth, and omnichannel capabilities is estimated to earn an after-tax return of 8.5%, below the cost-of-capital hurdle."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 8.9%, below the 11.0% at which growth adds no value. New investment (Sephora shops, omnichannel) earns roughly the current return, so growth adds little value."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "2026-01-31 | $15,527.0 million | -0.0428 | 0.0402"
-       },
-       {
-        "id": "P4",
-        "quote": "Net sales decreased 0.9% in the second quarter of 2026 and 1.2% year to date 2026."
-       },
-       {
         "id": "P6",
-        "quote": "Net sales and Comparable sales: A decrease of (1.5%) to flat"
+        "quote": "Net sales and Comparable sales: In the range of flat to 0.5%"
        },
        {
-        "id": "P4",
-        "quote": "Digital sales increased 2.8% in the second quarter of 2026 and 3.4% year to date 2026."
-       },
-       {
-        "id": "P4",
-        "quote": "Other revenue decreased $2 million in the second quarter of 2026 and $17 million year to date 2026, due to lower revenue from our credit card operations."
+        "id": "P3",
+        "quote": "Net sales decreased 4.0%, to $14.8 billion, with comparable sales down 3.1%."
        }
       ],
-      "quotes_given": 5,
-      "why": "Following four years of revenue contraction, 1H 2026 net sales declined 1.2% (improving to -0.9% in Q2) and full-year 2026 guidance calls for net sales of -1.5% to flat, supporting -1.0% total revenue growth in Year 1 when factoring in lower credit card revenue. Over Years 2-5, growth in digital sales (+3.4% YTD 2026) and proprietary brands (+3% Q2 comps) gradually offsets brick-and-mortar department store traffic headwinds, moving revenue from -0.5% to +1.0%."
+      "quotes_given": 2,
+      "why": "Management guides FY2026 to flat to +0.5% after a 4% decline, and the Q4 outlook is flat to +2.0%. I assume a slow recovery to about 1.5% as the assortment and value initiatives take hold. Store closures and a moderate-income customer base cap the upside."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "Cost of equity r 0.1049; long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
-        "id": "P1",
-        "quote": "As of January 31, 2026, we operated 1,153 Kohl's stores and a website (www.Kohls.com)."
-       },
-       {
-        "id": "P4",
-        "quote": "Kohl's is a leading omnichannel retailer operating 1,151 stores and a website (www.Kohls.com) as of August 1, 2026."
+        "id": "P2",
+        "quote": "Because all of our physical stores are located in the United States, we are especially susceptible to deteriorations in the U.S. economy"
        }
       ],
-      "quotes_given": 3,
-      "why": "At 1.5%, long-run nominal revenue growth remains well below the 3.75% nominal growth anchor because U.S. department stores face secular share loss to digital and off-price formats and Kohl's physical store count is mature to slightly shrinking (1,153 stores at FY2025 year-end to 1,151 at Q2 2026)."
+      "quotes_given": 1,
+      "why": "A mature, shrinking-to-flat department store chain with a U.S.-only store base should grow below the 3.75% nominal anchor, so I use 2.0%."
      }
     },
     "risks": [
      {
-      "bear_value": 0.018,
-      "input_hit": "long_run_op_margin",
-      "risk": "New tariffs imposed under Section 122 of the Trade Act of 1974 or other trade authorities on predominantly Asian-sourced goods increase merchandise costs that cannot be passed through to value-sensitive customers, compressing margins."
-     },
-     {
-      "bear_value": -0.04,
+      "bear_value": -0.02,
       "input_hit": "rev_growth",
-      "risk": "Continued inflation or macroeconomic weakening curtails discretionary spending by Kohl's core moderate-income U.S. shoppers while off-price and online competitors take further share, renewing multi-year sales contraction."
+      "risk": "Sales recovery fades and the moderate-income customer cuts spending, leaving comparable sales negative again"
      },
      {
-      "bear_value": 0.025,
+      "bear_value": 0.03,
       "input_hit": "long_run_op_margin",
-      "risk": "Higher consumer credit write-offs, regulatory caps on credit card interest rates or fees, or migration to alternative payments further erode high-margin credit card other revenue and loyalty-linked sales."
+      "risk": "Tariff refunds do not recur and new tariffs or markdowns compress margin to the weak underlying level"
      },
      {
-      "bear_value": 0.02,
-      "input_hit": "op_margin",
-      "risk": "Disruption from the 2026 Chief Merchandising Officer transition or seasonal inventory misallocation during the critical back-to-school and holiday second half forces heavy clearance markdowns."
+      "bear_value": 0.01,
+      "input_hit": "terminal_growth",
+      "risk": "Competition from off-price and online retailers and credit-card regulation permanently depress margins and growth"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.025,
+      "long_run_op_margin": 0.03,
       "rev_growth": [
-       -0.035,
-       -0.030000000000000002,
-       -0.025,
-       -0.02,
-       -0.015000000000000001
+       -0.019,
+       -0.013999999999999999,
+       -0.009999999999999998,
+       -0.006999999999999999,
+       -0.006999999999999999
       ],
-      "terminal_growth": 0.0
+      "terminal_growth": 0.01
      },
      "bull": {
       "long_run_op_margin": 0.055,
       "rev_growth": [
-       0.01,
-       0.015,
-       0.02,
+       0.016,
+       0.021,
        0.025,
-       0.03
+       0.028,
+       0.028
       ],
-      "terminal_growth": 0.025
+      "terminal_growth": 0.03
      }
     },
     "situation": {
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "no",
-      "why": "Management prioritizes reducing debt and leverage, having already cut long-term debt from $1,436 million at FY2025 year-end to $1,325 million as of August 1, 2026 through $113 million of opportunistic debt repurchases while keeping zero borrowings on its revolving credit facility."
+      "answer": "yes",
+      "why": "Funded debt is falling ($1,326M at Q3, with the revolver undrawn), though the large finance-lease and operating-lease obligations sit outside this debt figure."
      },
-     "margin_position": "GAAP operating margin in the base year (4.02%) sits near a multi-year trough relative to Kohl's 2008-2019 levels (5.5% to 11.5%) and was flattered by a $129 million legal settlement gain partially offset by $15 million of impairment and store-closing costs; underlying adjusted operating margin was 3.3% as four consecutive years of revenue declines drove fixed-cost deleverage, partially cushioned by gross margin discipline and SG&A cuts.",
+     "margin_position": "Base-year GAAP margin of 4.0% is flattered by a $129M legal-settlement gain; the adjusted margin was 3.3%. That is far below the 8-11% of the 2008-2015 period, after a decade of sales decline, competition from off-price and online retailers, and heavy lease and interest costs. FY2026 GAAP margin guidance of 4.7-4.9% is lifted by 0.4% from a real-estate gain and 1.0% from tariff refunds, so the underlying margin is about 3.4%.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The FY2025 effective tax rate of 19.05% benefited from favorable uncertain tax positions and federal tax credits at low pre-tax income, whereas the 1H 2026 effective tax rate is 24.1% (and was 25.0% in 1H 2025)."
+      "why": "The 19.0% base-year rate is below the 23-24% interim rates, and Q3 carries a $137M one-time tax benefit from examinations being settled."
      },
-     "why": "Base-year FY2025 GAAP operating income of $624 million (4.02% margin) included a non-recurring $129 million gain on a credit card interchange fee lawsuit settlement and $15 million of impairment and store-closing charges, leaving adjusted operating income at $510 million (3.3% margin). In addition, FY2025 revenue fell 4.28%, whereas 1H 2026 trends and raised FY2026 guidance show sales declines moderating toward flat to down 1.5% alongside debt reduction."
+     "why": "FY2025 operating income of $624M includes a $129M legal-settlement gain; adjusted operating income was $510M, or 3.3%. Revenue fell 4.3% in the base year. Sales have only just stabilised, with Q3 comparable sales up 1.2% after a down Q2. FY2026 results are also inflated by one-offs, so the underlying margin is roughly 3.3-3.5%."
     },
-    "value_at_old_defaults": 37.99889763478535,
+    "value_at_old_defaults": 38.42553352252591,
     "values": {
-     "base": 34.853618693675735,
-     "bear": 26.744174239719346,
-     "bull": 44.170053111756935
+     "base": 37.469409628216596,
+     "bear": 32.02576261790546,
+     "bull": 45.88615121573151
     }
    },
    "3000": {
     "adjustments": {
      "base_year_one_offs": [],
      "capital_events": {
-      "excess_cash_after": 674000000.0,
+      "excess_cash_after": 635000000.0,
       "excess_cash_before": 674000000.0,
       "figures": {
        "acquisitions_paid": {
@@ -372,8 +338,16 @@
         "source": "none"
        },
        "buybacks_paid": {
-        "amount": 0.0,
-        "source": "none"
+        "amount": 39000000.0,
+        "printed": 39,
+        "quotes": [
+         {
+          "id": "P6",
+          "quote": "Treasury stock purchases | (39) | \u2014"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
        },
        "disposals_received": {
         "amount": 0.0,
@@ -388,11 +362,13 @@
         "source": "none"
        }
       },
-      "flags": [],
-      "gross_events": 0.0,
+      "flags": [
+       "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31"
+      ],
+      "gross_events": 39000000.0,
       "interim_end": "2026-08-01",
-      "market_cap": 2606524510.0,
-      "net_effect_on_excess_cash": 0.0,
+      "market_cap": 2403580795.0,
+      "net_effect_on_excess_cash": -39000000.0,
       "shares": {
        "after": 114000000.0,
        "before": 114000000.0,
@@ -402,7 +378,6 @@
       },
       "stamps": [
        "acquisitions_paid_not_filed_taken_as_0",
-       "buybacks_paid_not_filed_taken_as_0",
        "shares_issued_proceeds_not_filed_taken_as_0",
        "special_distributions_not_filed_taken_as_0",
        "disposals_received_not_filed_taken_as_0"
@@ -410,7 +385,7 @@
      },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 674000000.0,
+     "excess_cash_after": 635000000.0,
      "excess_cash_before": 674000000.0,
      "k0_after": 315046152.41935486,
      "k0_before": 315046152.41935486,
@@ -419,7 +394,6 @@
      "one_offs_gain": 0,
      "stamps": [
       "acquisitions_paid_not_filed_taken_as_0",
-      "buybacks_paid_not_filed_taken_as_0",
       "shares_issued_proceeds_not_filed_taken_as_0",
       "special_distributions_not_filed_taken_as_0",
       "disposals_received_not_filed_taken_as_0"
@@ -427,699 +401,609 @@
      "x0_after": 250105495.66052225,
      "x0_before": 250105495.66052225
     },
-    "confidence": "medium",
+    "confidence": "low",
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 3065096829.664181,
-     "seam_ratio": 0.9155039741780951,
-     "tv_share": 0.28613633005994704,
-     "wedge_rate_5": -0.012709775556123624
+     "equity_value": 3483476249.2252,
+     "seam_ratio": 0.9561651032678148,
+     "tv_share": 0.17964200223641033,
+     "wedge_rate_5": -0.01099929725238386
     },
     "flags": [
+     "return_above_base_year: long-run 0.0900 against the base year's 0.0891",
      "base_year_not_representative",
-     "tax_rate_representative_no: The base-year effective tax rate of 19.05% benefited from uncertain tax position adjustments and federal tax credits, whereas the effective tax rate normalized to 24.1% in the first six months of fiscal 2026 (and 25.0% in the first six months of fiscal 2025).",
-     "debt_level_representative_no: Total debt fell from $1,436.0 million at base year-end to $1,325 million by August 1, 2026 via open-market repurchases of $113 million of debt, and management continues to prioritize deleveraging while carrying sub-investment-grade ratings (Moody's B2, S&P B+, Fitch BB-).",
-     "quotes_verified: 20 of 20",
+     "tax_rate_representative_no: The base-year rate of 19.0% was low, the first-half FY2026 rate was 24.1%, and the Q3 tax benefit of $137M from settled examinations will not recur, so a mid-20s rate is more sustainable.",
+     "confidence_low",
+     "quotes_verified: 10 of 10",
+     "capital_event_interim_date_differs: xbrl 2026-08-01, read 2026-10-31",
      "acquisitions_paid_not_filed_taken_as_0",
-     "buybacks_paid_not_filed_taken_as_0",
      "shares_issued_proceeds_not_filed_taken_as_0",
      "special_distributions_not_filed_taken_as_0",
      "disposals_received_not_filed_taken_as_0"
     ],
     "inputs": {
-     "capex_to_revenue": 0.025,
-     "fade_years": 5,
+     "capex_to_revenue": 0.027,
+     "fade_years": 10,
      "long_run_op_margin": 0.04,
      "op_margin": [
-      0.037,
-      0.032,
-      0.034,
+      0.048,
       0.036,
-      0.038
+      0.038,
+      0.04,
+      0.041
      ],
-     "return_on_new_investment_long_run": 0.085,
+     "return_on_new_investment_long_run": 0.09,
      "rev_growth": [
-      -0.011,
-      -0.005,
       0.0,
       0.005,
-      0.008
+      0.01,
+      0.01,
+      0.01
      ],
-     "terminal_growth": 0.01
+     "terminal_growth": 0.02
     },
-    "old_defaults_inputs": "year 1 growth -0.0143 and margin 0.0459, margin 0.0402 (persist), growth 0.0375, terminal RONIC 0.1115 (equity return r 0.1049), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0143 and margin 0.0459, margin 0.0402 (persist), growth 0.0375, terminal RONIC 0.1103 (equity return r 0.1035), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 11,
-     "kept": 84
+     "dropped_unsupported": 10,
+     "kept": 74
     },
     "ranges": {
      "long_run_op_margin": [
-      0.022,
-      0.055
+      0.03,
+      0.052
      ],
      "rev_growth_y3": [
-      -0.025,
+      -0.015,
       0.02
      ],
      "terminal_growth": [
-      -0.01,
-      0.025
+      0.01,
+      0.03
      ]
     },
     "reasons": {
      "capex_to_revenue": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0328; depreciation (without amortization of acquired intangibles) / revenue 0.0442."
-       },
-       {
-        "id": "P3",
-        "quote": "The decrease was primarily driven by lower capital spend during the year on the expansion of our E-commerce Fulfillment center in Etna, Ohio, which was completed in 2025, and fewer Sephora shop openings and other investments, consistent with our reduced capital expenditure plans for fiscal 2025."
-       },
-       {
         "id": "P6",
-        "quote": "Capital Expenditures: In the range of $350 million to $400 million"
+        "quote": "Capital Expenditures: In the range of $365 million to $375 million"
        }
       ],
-      "quotes_given": 3,
-      "why": "Although 5-year pooled capital expenditure to revenue was 3.28% during the Sephora rollout and Etna fulfillment center expansion, those projects finished in 2025 and intensity dropped to 2.40% in FY2025. Setting CapEx to 2.5% of revenue aligns directly with FY2026 guidance of $350 million to $400 million for maintenance and omnichannel upgrades."
+      "quotes_given": 1,
+      "why": "FY2026 capex is guided at $365-375M on about $15.5B of revenue, or about 2.4%. Depreciation of about 4.4% of revenue exceeds that, so spending is likely to drift up toward maintenance levels, and I use 2.7%."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P1",
-        "quote": "As of January 31, 2026, we operated 1,153 Kohl's stores and a website (www.Kohls.com)."
-       },
-       {
-        "id": "P4",
-        "quote": "Kohl's is a leading omnichannel retailer operating 1,151 stores and a website (www.Kohls.com) as of August 1, 2026."
+        "id": "REC",
+        "quote": "2020-02-01 | $19,974.0 million | -0.0126 | 0.0550"
        }
       ],
-      "quotes_given": 2,
-      "why": "A 5-year fade is appropriate because Year 5 operating margin (3.8%) and revenue growth (0.8%) are already close to their long-run steady states (4.0% and 1.0%), and a mature 1,151-store retailer lacks multi-decade moat-driven compounding."
+      "quotes_given": 1,
+      "why": "The margin recovery from today's underlying level to a steady state should take about a decade, given the recent stabilisation and heavy fixed costs."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "2022-01-29 | $19,433.0 million | 0.2180 | 0.0865"
-       },
-       {
         "id": "P3",
-        "quote": "Gain on legal settlement was $129 million from a credit card interchange fee lawsuit settlement."
+        "quote": "adjusted operating income was $510 million compared to $509 million in the prior year"
        },
        {
-        "id": "P4",
-        "quote": "Other revenue decreased $2 million in the second quarter of 2026 and $17 million year to date 2026, due to lower revenue from our credit card operations."
+        "id": "REC",
+        "quote": "2020-02-01 | $19,974.0 million | -0.0126 | 0.0550"
        }
       ],
-      "quotes_given": 3,
-      "why": "Kohl's operating margin suffered a structural step-down from 2008\u20132019 levels due to digital competition, fulfillment costs, and lower credit card revenue, placing its recent 5-year median at 4.02%. Fading to 4.0% matches the 5-year median and reflects modest operating leverage above FY2025's 3.3% underlying margin without assuming a return to pre-pandemic margins."
+      "quotes_given": 2,
+      "why": "Adjusted operating income was flat at about $510M on a 3.3% margin in FY2025, and 2025 comparable sales fell 3.1% in a highly competitive, structurally pressured sector. A long-run margin of about 4% leaves room for modest improvement but well below the historical 6-11%."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "On an adjusted non-GAAP basis, our adjusted operating income was $510 million compared to $509 million in the prior year.(a) As a percentage of total revenue, adjusted operating income was 3.3% compared to 3.1% in the prior year.(a)"
+        "id": "P6",
+        "quote": "Operating margin: In the range of 4.7% to 4.9% which includes the benefit of:"
        },
        {
         "id": "P6",
-        "quote": "Adjusted Operating margin: In the range of 3.5% to 4.0% (b)"
-       },
-       {
-        "id": "P6",
-        "quote": "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million flowed through gross margin."
+        "quote": "1.0% from tariff refunds"
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 operating margin sits at 3.7%, the midpoint of raised FY2026 adjusted guidance (3.5%\u20134.0%), which embeds ~$100 million of Q2 IEEPA tariff refunds in cost of merchandise sold (~65 bps of annual sales). In Year 2, removing that non-recurring tariff benefit brings margins back to 3.2% (consistent with FY2025's 3.3% adjusted margin), followed by modest recovery to 3.8% by Year 5 from proprietary brand mix and SG&A cost control as revenue stabilizes."
+      "quotes_given": 2,
+      "why": "Year 1 follows the FY2026 GAAP guide of 4.7-4.9%, which embeds one-offs. Year 2 drops back to an underlying margin of about 3.6% once tariff refunds and the property gain are gone, then recovers slowly with proprietary-brand mix and cost control."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 0.0891; tax rate 0.1905; total debt $1,436.0 million; cash counted as excess $674.0 million; net debt (debt less that cash) $762.0 million."
-       },
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.1115."
-       },
-       {
-        "id": "P2",
-        "quote": "In particular, consumers can quickly and conveniently comparison shop with digital tools, which can lead to decisions based solely on price."
+        "quote": "return on tangible capital 0.0891"
        }
       ],
-      "quotes_given": 3,
-      "why": "Base-year return on tangible capital was 8.91%, which benefited from the $129 million legal settlement gain and a 19.05% tax rate, and sits below the 11.15% value-creation hurdle. Intense digital price transparency and lack of pricing power on national brands keep long-run returns on new capital around 8.5%, below cost of capital."
+      "quotes_given": 1,
+      "why": "The base-year return on tangible capital is 0.0891, below the 0.1103 break-even. A mature department store with weak pricing power should earn about that on new capital, so growth adds little value."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "2026-01-31 | $15,527.0 million | -0.0428 | 0.0402"
-       },
-       {
-        "id": "P4",
-        "quote": "Net sales decreased 0.9% in the second quarter of 2026 and 1.2% year to date 2026."
+        "id": "P6",
+        "quote": "Net sales and Comparable sales: In the range of flat to 0.5%"
        },
        {
         "id": "P6",
-        "quote": "Net sales and Comparable sales: A decrease of (1.5%) to flat"
+        "quote": "Net sales and Comparable sales: In the range of flat to up 2.0%"
        }
       ],
-      "quotes_given": 3,
-      "why": "After four straight years of revenue contraction culminating in -4.28% in FY2025, Year 1 revenue growth reflects H1 2026 sales trends and raised FY2026 net sales guidance of -1.5% to flat (plus modest credit card other revenue drag). Over Years 2 to 5, stabilizing comparable sales, 2.8%\u20133.4% digital growth, and 3% proprietary brand growth gradually offset store traffic and credit revenue headwinds, bringing nominal growth back toward flat-to-slightly-positive."
+      "quotes_given": 2,
+      "why": "Sales have only just turned, with Q3 comparable sales up 1.2% after years of decline. Management guides FY2026 net sales to flat to 0.5% and Q4 to flat to 2%, so year 1 is about flat, followed by low single-digit growth at best, given the store-based department-store format and a moderate-income customer."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375."
-       },
-       {
         "id": "P1",
-        "quote": "Our primary competitors are online retailers, off-price retailers, warehouse clubs, mass merchandisers, specialty stores, traditional department stores, and other forms of retail commerce."
-       },
-       {
-        "id": "P2",
-        "quote": "Because all of our physical stores are located in the United States, we are especially susceptible to deteriorations in the U.S. economy compared to more geographically diversified competitors."
+        "quote": "The retail industry is highly competitive."
        }
       ],
-      "quotes_given": 3,
-      "why": "Terminal growth of 1.0% sits well below the 3.75% nominal economy anchor because Kohl's operates strictly in the mature U.S. department store market and faces persistent share pressure from online, off-price, and mass-merchandise competitors. Once physical store attrition stabilizes, long-run nominal growth is likely to lag broad U.S. GDP."
+      "quotes_given": 1,
+      "why": "Department stores face competition from online, off-price and mass merchants, with a customer who is sensitive to the economy. Long-run growth should sit below the 3.75% nominal anchor, at about inflation or a little less."
      }
     },
     "risks": [
      {
-      "bear_value": 0.015,
+      "bear_value": 0.03,
       "input_hit": "long_run_op_margin",
-      "risk": "New U.S. tariffs under alternative authorities such as Section 122 of the Trade Act of 1974 raise Asia-sourced merchandise costs that cannot be passed through to moderate-income shoppers, compressing gross and operating margins."
+      "risk": "Tariff-refund and one-off benefits fall away and the Q3 sales turn reverses, leaving margins near the FY2025 adjusted level or below"
      },
      {
       "bear_value": -0.02,
+      "input_hit": "rev_growth",
+      "risk": "Comparable sales relapse into decline in the holiday season and beyond"
+     },
+     {
+      "bear_value": 0.01,
       "input_hit": "terminal_growth",
-      "risk": "Continued store traffic erosion, off-price/digital share loss, or disruption from the Chief Merchandising Officer transition forces store closures and prolonged top-line contraction."
-     },
-     {
-      "bear_value": 0.04,
-      "input_hit": "capex_to_revenue",
-      "risk": "Defending market share against online and mass-merchant competitors requires heavier store remodels, IT, and omnichannel fulfillment spending than currently planned."
-     },
-     {
-      "bear_value": 0.055,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Persistent promotional intensity, credit card portfolio revenue declines, and digital shipping surcharges depress returns on reinvested capital."
+      "risk": "Structural share loss to online and off-price retailers lowers long-run growth"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.022,
+      "long_run_op_margin": 0.03,
       "rev_growth": [
-       -0.036000000000000004,
-       -0.030000000000000002,
        -0.025,
        -0.02,
-       -0.017
+       -0.015000000000000001,
+       -0.015000000000000001,
+       -0.015000000000000001
       ],
-      "terminal_growth": -0.01
+      "terminal_growth": 0.01
      },
      "bull": {
-      "long_run_op_margin": 0.055,
+      "long_run_op_margin": 0.052,
       "rev_growth": [
-       0.009000000000000001,
+       0.01,
        0.015,
        0.02,
-       0.025,
-       0.028
+       0.02,
+       0.02
       ],
-      "terminal_growth": 0.025
+      "terminal_growth": 0.03
      }
     },
     "situation": {
      "base_year_representative": "no",
      "cyclical": "yes",
      "debt_level_representative": {
-      "answer": "no",
-      "why": "Total debt fell from $1,436.0 million at base year-end to $1,325 million by August 1, 2026 via open-market repurchases of $113 million of debt, and management continues to prioritize deleveraging while carrying sub-investment-grade ratings (Moody's B2, S&P B+, Fitch BB-)."
+      "answer": "yes",
+      "why": "Funded debt of about $1.3-1.4B is modest against adjusted EBITDA of $1,364M and is being repurchased below par, though large finance and operating lease liabilities sit on top of it."
      },
-     "margin_position": "GAAP operating margin in FY2025 (4.02%) sits at the 5-year median (4.02%) but was inflated by a $129 million legal settlement gain (adjusted operating margin was 3.3%), and FY2026 guidance of 3.5% to 4.0% includes an approximately $100 million one-time tariff refund benefit in gross margin; underlying margins are compressed by four consecutive years of revenue declines and fixed-cost deleverage relative to pre-2020 margins of 5.5% to 11.5%.",
+     "margin_position": "Kohl's operating margin has fallen from about 11% in FY2007-2011 to about 4% as sales shrank from about $20B to $15.5B, with a fixed layer of rent, depreciation and interest. The base-year 4.0% GAAP margin includes a $129M legal-settlement gain, so the adjusted margin was 3.3%. The FY2026 guide of 4.7-4.9% includes about 1.4 points of non-recurring tariff refunds and real-estate gain, so the underlying margin is about 3.4%.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The base-year effective tax rate of 19.05% benefited from uncertain tax position adjustments and federal tax credits, whereas the effective tax rate normalized to 24.1% in the first six months of fiscal 2026 (and 25.0% in the first six months of fiscal 2025)."
+      "why": "The base-year rate of 19.0% was low, the first-half FY2026 rate was 24.1%, and the Q3 tax benefit of $137M from settled examinations will not recur, so a mid-20s rate is more sustainable."
      },
-     "why": "Kohl's is a U.S. discretionary omnichannel department store operator whose moderate-income customer base makes results sensitive to U.S. macroeconomic cycles, while also facing secular brick-and-mortar traffic headwinds. The base year ended 2026-01-31 is not representative because GAAP operating income ($624 million) included a non-recurring $129 million credit card interchange lawsuit settlement gain net of $15 million in impairments and store closing costs (adjusted operating income was $510 million, or 3.3% of revenue), and the effective tax rate (19.05%) was depressed by favorable tax credits and uncertain tax position settlements. In the first half of FY2026, revenue declines moderated to -1.4% total (-1.2% net sales) and debt continued to be paid down, while one-time IEEPA tariff refunds temporarily boosted gross margin."
+     "why": "The base year (FY2025) GAAP operating income of $624M includes a $129M gain on a legal settlement and $15M of impairment and store-closing costs, and adjusted operating income was $510M. Year-1 guidance is likewise flattered by tariff refunds and a property gain. The earnings base is therefore underlying margin of roughly 3.3-3.6%, not the headline 4.0-4.8%. Sales are only just stabilising after years of decline."
     },
-    "value_at_old_defaults": 37.99889763478535,
+    "value_at_old_defaults": 38.42553352252591,
     "values": {
-     "base": 35.047650264848954,
-     "bear": 25.33294412349554,
-     "bull": 44.04595798393081
+     "base": 38.684569956685486,
+     "bear": 33.08761735457341,
+     "bull": 45.05824966708275
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 37.99889763478535,
-  "value_at_old_defaults_quoted": 37.99889763478535,
+  "value_at_old_defaults": 38.42553352252591,
+  "value_at_old_defaults_quoted": 38.42553352252591,
   "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 3984372330.6359076,
+ "equity_value": 4340776836.339419,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 114000000.0,
  "flags": [
-  "The U.S. Supreme Court struck down certain tariffs previously imposed under the International Emergency Economic Powers Act, enabling Kohl's to initiate tariff refund claims.",
-  "During the second quarter, Kohl's received approximately $150 million in IEEPA tariff refunds, of which approximately $100 million flowed through gross margin.",
-  "Kohl's raised its full-year 2026 financial outlook to net sales and comparable sales of a (1.5%) decrease to flat, adjusted operating margin of 3.5% to 4.0%, and adjusted diluted EPS of $1.80 to $2.40."
+  "Kohl's raised its full year 2026 outlook with its third quarter results, with GAAP diluted EPS guided to a range of $4.30 to $4.50.",
+  "Kohl's recognized a $61 million gain on the sale of two properties in the third quarter.",
+  "Kohl's recorded a $137 million tax benefit because tax examinations were effectively settled; it added $1.16 to diluted EPS for the quarter."
  ],
  "in_code_book": false,
- "ke": 0.10485394534336151,
+ "ke": 0.10346215402215951,
  "market_cap_at_publish": 2871825536,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "news": [],
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 25.33,
  "qwen_book": null,
  "release_truncated": [],
- "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+ "screener_commit": "6e8a85df740775db7ce05820a99b60a489a758f8",
  "seed_base": {
-  "1000": 34.853618693675735,
-  "3000": 35.047650264848954
+  "1000": 37.469409628216596,
+  "3000": 38.684569956685486
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "on request (method_changed)",
+ "source": "new filing (new_filing:8-K:0001193125-26-473133)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated directly in Form 10-K Item 1 Business and Form 10-Q MD&A.",
-    "claim": "Kohl's operates 1,151 stores and www.Kohls.com, selling moderately-priced proprietary and national brand apparel, footwear, accessories, beauty, and home products.",
+    "basis": "stated in the cited items",
+    "claim": "Kohl's is an omnichannel retailer that sells moderately-priced proprietary and national brand apparel, footwear, accessories, beauty and home products through 1,153 stores and its website at the latest fiscal year-end.",
     "facts": [
      "P1",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "Kohl's is a leading omnichannel retailer operating 1,151 stores and a website (www.Kohls.com) as of August 1, 2026.",
      "Our Kohl's stores and website sell moderately-priced proprietary and national brand apparel, footwear, accessories, beauty, and home products."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Form 10-K Item 1 Business.",
-    "claim": "Proprietary and exclusive brands generally carry lower selling prices but higher gross margins than national brands.",
+    "basis": "stated in the risk factors and the competition section",
+    "claim": "The core customer is moderate-income, and the company says this customer is especially sensitive to economic conditions. Competitors include online retailers, off-price retailers, warehouse clubs, mass merchandisers, specialty stores and other department stores.",
     "facts": [
+     "P2",
      "P1"
     ],
     "quotes": [
-     "Compared to national brands, proprietary brands generally have lower selling prices, but higher gross margins."
+     "Our core moderate-income customer is especially sensitive to these factors."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Form 10-K MD&A and Form 10-Q MD&A.",
-    "claim": "Kohl's had a Sephora shop-in-shop presence in over 1,100 stores at the end of 2025 and records amounts due to Sephora for its share of operating profits in cost of merchandise sold.",
+    "basis": "stated in the cited items; the margin effect of mix is the stated general relationship, not a measured figure",
+    "claim": "Proprietary brands are sold only at Kohl's and carry higher gross margins than national brands. Management reported 3.4% comparable sales growth for proprietary brands in the third quarter.",
     "facts": [
-     "P3",
-     "P4"
+     "P1",
+     "P6"
     ],
     "quotes": [
-     "At the end of 2025, we had a Sephora at Kohl's shop-in-shop (\"Sephora shop\") presence in over 1,100 of our stores, including 855 full size 2,500 square foot Sephora shops and 294 small format Sephora shops.",
-     "Cost of merchandise sold includes the total cost of products sold, including product development costs, net of vendor payments other than reimbursement of specific, incremental, and identifiable costs; inventory shrink; markdowns; freight expenses associated with moving merchandise from our vendors to our distribution centers; shipping expenses for digital sales; terms cash discount; and amounts due to Sephora for their share of operating profits under the Sephora arrangement."
+     "Compared to national brands, proprietary brands generally have lower selling prices, but higher gross margins.",
+     "Delivered 3.4% comparable sales growth for proprietary brands in Q3"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Form 8-K, Form 10-K Item 1A Risk Factors, and screener record.",
-    "claim": "Kohl's serves millions of families across 49 U.S. states, relying on a core moderate-income customer base.",
-    "facts": [
-     "S0",
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "Kohl's serves millions of families in its more than 1,100 stores in 49 states, online at Kohls.com, and through the Kohl's App.",
-     "Our core moderate-income customer is especially sensitive to these factors.",
-     "Because all of our physical stores are located in the United States, we are especially susceptible to deteriorations in the U.S. economy compared to more geographically diversified competitors."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-Q statement of operations and MD&A.",
-    "claim": "Total revenue comprises merchandise net sales across Women's, Accessories (including Sephora), Men's, Home, Children's, and Footwear of $6,316 (table in millions) alongside 366 (table in millions) of other revenue.",
+    "basis": "stated in the income statement and MD&A",
+    "claim": "Total revenue has two parts, net sales and other revenue. In the second quarter, net sales were 3,318, other revenue was 197 and total revenue was 3,515 (table in millions).",
     "facts": [
      "F2",
      "P4"
     ],
     "quotes": [
-     "Net sales | $3,318 | $3,347 | $(29) | $6,316 | $6,396 | $(80)",
-     "Other revenue | 197 | 199 | (2) | 366 | 383 | (17)",
      "Net sales includes revenue from the sale of merchandise, net of expected returns and deferrals due to future performance obligations, and shipping revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Form 10-Q MD&A.",
-    "claim": "Digital sales\u2014all orders initiated online or through mobile apps, including store-fulfilled omnichannel orders\u2014accounted for 27% of net sales in the second quarter and 26% year to date.",
+    "basis": "stated in the MD&A table",
+    "claim": "Net sales are reported by line of business. In the last fiscal year Women's was the largest at 3,601 of total net sales of 14,775 (table in millions), and Accessories (including Sephora) was the only line to grow, at 2.0%.",
     "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "We measure the change in digital sales by including all sales initiated online or through mobile applications, including omnichannel transactions which are fulfilled through our stores.",
-     "Digital penetration represented 27% of net sales in the second quarter of 2026 and 26% year to date 2026, compared to 26% in the second quarter of 2025 and 25% year to date 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-Q MD&A.",
-    "claim": "Other revenue is generated from credit card operations, third-party website advertising, gift card and merchandise return card breakage, and third-party digital marketplace commissions.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Other revenue includes revenue from credit card operations, third-party advertising on our website, unused gift cards and merchandise return cards (breakage), commissions from our third-party digital marketplace, and other non-merchandise revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-K Item 1A Risk Factors.",
-    "claim": "An unrelated third party owns the private label and co-branded Kohl's credit card accounts, with Kohl's sharing in net risk-adjusted revenue (finance charges, late fees, and other revenue less write-offs) and certain funding-cost swings.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The private label and co-branded Kohl's credit card accounts are owned by an unrelated third-party, but we share in the net risk-adjusted revenue of the portfolio, which is defined as the sum of finance charges, late fees, and other revenue less write-offs of uncollectible accounts.",
-     "Changes in funding costs related to interest rate fluctuations are shared similar to the revenue when interest rates exceed defined amounts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-Q MD&A.",
-    "claim": "Net sales are driven by transaction volume and average transaction value, decreasing 1.2% year to date on a 2% drop in transaction volume partially offset by an approximately 1% rise in average transaction value.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Net sales decreased 0.9% in the second quarter of 2026 and 1.2% year to date 2026.",
-     "The decrease year to date was driven by a 2% decrease in transaction volume offset by an increase in average transaction value of approximately 1%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-K Item 1, Item 1A, and Item 7.",
-    "claim": "Revenue and income are seasonal, with a major share historically earned in the second half of the fiscal year during back-to-school and holiday selling periods.",
-    "facts": [
-     "P1",
-     "P2",
      "P3"
     ],
     "quotes": [
-     "Our business is subject to seasonal influences, with a major portion of sales and income historically realized during the second half of the fiscal year, which includes the back-to-school and holiday seasons.",
+     "Sales decreased across all lines of business, except for Accessories, which increased approximately 2% during 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Other revenue is mostly credit card economics. The card accounts are owned by a third party and Kohl's shares in the portfolio's net risk-adjusted revenue. Other revenue fell $2 million in the second quarter and $17 million in the first half because of lower credit card revenue.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "we share in the net risk-adjusted revenue of the portfolio",
+     "Other revenue decreased $2 million in the second quarter of 2026 and $17 million year to date 2026, due to lower revenue from our credit card operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Sales are driven by traffic and basket size, and by comparable sales. Second-quarter comparable sales fell 0.9% because transaction value and volume fell equally. Third-quarter comparable sales rose 1.2%.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The decrease in the second quarter was driven by an equal decrease in average transaction value and in transaction volume.",
+     "Net sales increased 1.3% and comparable sales increased 1.2%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the MD&A",
+    "claim": "Digital is a sizable channel. Digital sales grew 2.8% in the second quarter and were 27% of net sales. Stores can also fulfil digital orders.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Digital sales increased 2.8% in the second quarter of 2026 and 3.4% year to date 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the MD&A",
+    "claim": "Last fiscal year's gross margin was 37.5% of net sales. Management attributed the improvement to inventory management (fewer clearance markdowns), merchandise mix and lower shrink, so markdowns, mix and shrink are the main margin drivers.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The increase was driven by strong inventory management, merchandise mix, and moderating shrink levels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the one-off nature is inferred from the declining refund contribution in the guidance",
+    "claim": "Tariff refunds have inflated recent gross margin. Second-quarter gross margin was 43.0%, up 305 basis points, driven by tariff refunds. Third-quarter refunds of about $45 million accounted for roughly 130 basis points of the 145 basis point gross margin gain.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The increase was driven by tariff refunds, partially offset by repayments to vendors and investments to drive value for our customers.",
+     "Tariff refunds of approximately $45 million flowed through gross margin in the quarter."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the risk factors",
+    "claim": "Most goods are sourced outside the United States, mainly in Asia, so tariffs and trade policy are a direct driver of merchandise cost.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The majority of goods we source are manufactured outside of the United States, primarily in Asia."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Selling, general and administrative expense (SG&A) is the largest operating cost line after merchandise. In the second quarter it was 1,188, or 33.8% of total revenue (table in millions). Management describes many of these costs, such as store payroll and distribution, as variable with sales.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Many of our expenses, including store payroll and distribution costs, are variable in nature."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the size of the profit share is not given",
+    "claim": "Sephora shop-in-shops are in over 1,100 stores. The company owes Sephora a share of operating profits, and that amount is booked in cost of merchandise sold.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "amounts due to Sephora for their share of operating profits under the Sephora arrangement"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the statements; the operating-leverage point is inferred",
+    "claim": "Debt and lease costs are a large fixed layer below gross profit. In the second quarter, depreciation and amortization was 173 and net interest expense was 63, against operating income of 261 (table in millions). The balance sheet carries long-term debt of 1,325 and long-term finance leases and financing obligations of 2,295 (table in millions).",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "The business is seasonal. Sales and income are higher in back-to-school and holiday periods, and inventory builds before the holiday peak. Inventory was 2,913 at the second-quarter end and 3,853 at the third-quarter end (table in millions).",
+    "facts": [
+     "P1",
+     "P3",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Sales and income are typically higher during the back-to-school and holiday seasons.",
      "Our working capital and inventory levels typically build throughout the fall, peaking during the November and December holiday selling season."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Form 10-Q MD&A.",
-    "claim": "Cost of merchandise sold includes product costs, shrink, markdowns, inbound vendor-to-distribution-center freight, digital shipping, and Sephora profit-share amounts, whereas distribution center and buying costs sit in SG&A.",
+    "basis": "stated in the earnings release and non-GAAP reconciliation",
+    "claim": "Reported third-quarter profit includes items outside the core operating run-rate. GAAP operating income was 217 against adjusted operating income of 156 (table in millions), after a gain on sale of real estate and a tax benefit from tax examinations being settled.",
     "facts": [
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "Our cost of merchandise sold may not be comparable with that of other retailers because we include distribution center and buying costs in selling, general, and administrative expenses while other retailers may include these expenses in cost of merchandise sold."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-Q MD&A and Part II Item 1A Risk Factors.",
-    "claim": "Most merchandise is manufactured outside the United States, primarily in Asia, exposing gross margins to tariff shifts, including approximately $100 million of IEEPA tariff refunds that helped lift second-quarter gross margin by 305 basis points to 43.0%.",
-    "facts": [
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "The majority of goods we source are manufactured outside of the United States, primarily in Asia.",
-     "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million was recognized within gross margin.",
-     "Gross margin as a percentage of net sales was 43.0%, an increase of 305 basis points year-over-year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-K MD&A.",
-    "claim": "Inventory management, clearance markdowns, and shrink also move gross margins, which rose 34 basis points to 37.5% of net sales as inventory decreased 7%.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Gross margin in 2025 was 37.5% of net sales, an increase of 34 basis points to last year.",
-     "The increase was driven by strong inventory management, merchandise mix, and moderating shrink levels.",
-     "Strong inventory management was driven by fewer clearance markdowns, as our inventory decreased 7% to last year, and receipts for the year were down 8%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-Q statement of operations and MD&A.",
-    "claim": "SG&A expenses\u2014comprising store, corporate, buying, and distribution center payroll and occupancy, store-bound freight, marketing, and credit card expenses\u2014totaled $2,333 (table in millions), or 34.9% of total revenue, with variable store and distribution costs scaling with sales.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "Many of our expenses, including store payroll and distribution costs, are variable in nature.",
-     "Year to date 2026, SG&A expenses decreased $30 million, or 1.3%, to $2.3 billion.",
-     "As a percent of total revenue | 33.8% | 33.8% | 0 | bps | 34.9% | 34.9% | 6 | bps"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 10-K Item 1 Business.",
-    "claim": "Kohl's purchases merchandise from numerous domestic and foreign suppliers with no significant long-term purchase commitments, and no single vendor accounted for more than 10% of net purchases in 2025.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "No vendor individually accounted for more than 10% of our net purchases in 2025.",
-     "We have no significant long-term purchase commitments with any of our suppliers and believe that we are not dependent on any one supplier or one geographical location."
+     "Gain on sale of real estate of $61 million was recognized related to the sale of two properties."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in [S0], [P4], and [P6]",
-    "claim": "Kohl's operates in the U.S. Department Stores industry with 1,151 stores across 49 states, a retail website (www.Kohls.com), and the Kohl's App as of the second quarter of fiscal 2026.",
+    "basis": "Stated in the cited items (store counts and business description).",
+    "claim": "Kohl's is a large, national, moderately-priced omnichannel department-store operator, with 1,153 stores at fiscal year-end, 1,151 at the end of the second quarter and 1,149 in the third-quarter presentation.",
     "facts": [
-     "S0",
+     "P1",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Kohl's is a leading omnichannel retailer operating 1,151 stores and a website (www.Kohls.com) as of August 1, 2026.",
-     "Kohl\u2019s serves millions of families in its more than 1,100 stores in 49 states, online at Kohls.com, and through the Kohl\u2019s App."
+     "a leading omnichannel retailer operating 1,151 stores and a website",
+     "Our Kohl's stores and website sell moderately-priced proprietary and national brand apparel, footwear, accessories, beauty, and home products."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1] and [P6]",
-    "claim": "Kohl's differentiates its merchandise mix with proprietary and exclusive brands available only at Kohl's, which generally carry lower selling prices and higher gross margins than national brands and delivered 3% comparable sales growth in the second quarter of fiscal 2026.",
+    "basis": "Stated in the 10-K business section and in the company's Q3 presentation.",
+    "claim": "Proprietary brands are a differentiator: the 10-K says they carry lower selling prices but higher gross margins than national brands, and management reports 3.4% comparable sales growth for them in the third quarter.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "Our merchandise mix includes both national brands and proprietary brands that are available only at Kohl's.",
      "Compared to national brands, proprietary brands generally have lower selling prices, but higher gross margins.",
-     "- In Q2, proprietary brands delivered 3% comparable sales growth"
+     "Delivered 3.4% comparable sales growth for proprietary brands in Q3, driven by increasing inventory depth, in-store investments, and scaling marketing efforts"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P3] and [P6]",
-    "claim": "Kohl's operates Sephora at Kohl's shop-in-shops in over 1,100 stores, comprising 855 full-size 2,500 square foot shops and 294 small-format shops at the end of fiscal 2025.",
+    "basis": "Stated for the store count and category sales; the traffic-anchor role is inferred from those figures.",
+    "claim": "The Sephora shop-in-shop is a traffic and category anchor: it is present in over 1,100 stores, and Accessories (including Sephora) was the only line of business that grew in the latest fiscal year, at $3,122 (table in millions) versus $3,060 (table in millions), up 2.0%.",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
-     "At the end of 2025, we had a Sephora at Kohl's shop-in-shop (\"Sephora shop\") presence in over 1,100 of our stores, including 855 full size 2,500 square foot Sephora shops and 294 small format Sephora shops."
+     "presence in over 1,100 of our stores"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A and the Q3 earnings release.",
+    "claim": "Top-line momentum has turned: net sales fell 4.0% to $14.8 billion with comparable sales down 3.1% in the latest fiscal year, then rose 1.3% in the third quarter with comparable sales up 1.2%, though nine-month net sales were still down 0.4%.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "In the third quarter, we returned to top-line growth with a positive 1.2% comparable sales performance."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P3] and [P4]",
-    "claim": "Digital penetration reached 29% of net sales in fiscal 2025 and 27% in the second quarter of fiscal 2026, with digital sales increasing 2.8% in the second quarter and 3.4% year-to-date in fiscal 2026.",
+    "basis": "Stated in the cited items; the split between refund and underlying gain is as given by management.",
+    "claim": "Part of the recent gross-margin gain comes from tariff refunds rather than competitive strength: third-quarter gross margin was 41.0% versus 39.6%, up 145 basis points, of which $45 million, or approximately 130 basis points, was tariff refunds.",
     "facts": [
-     "P3",
+     "P6",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "The increase was driven by tariff refunds, partially offset by repayments to vendors and investments to drive value for our customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "Digital is a growing but minority channel: second-quarter digital sales rose 2.8% and penetration was 27% of net sales versus 26% a year earlier.",
+    "facts": [
      "P4"
     ],
     "quotes": [
-     "Digital penetration represented 29% of net sales in 2025 and 28% of net sales in 2024.",
-     "Digital sales increased 2.8% in the second quarter of 2026 and 3.4% year to date 2026.",
-     "Digital penetration represented 27% of net sales in the second quarter of 2026 and 26% year to date 2026, compared to 26% in the second quarter of 2025 and 25% year to date 2025."
+     "Digital sales increased 2.8% in the second quarter of 2026 and 3.4% year to date 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1]",
-    "claim": "Kohl's owns the KOHL'S\u00ae trademark plus over 200 additional registered trademarks largely tied to private brands, and had no supplier representing more than 10% of net purchases or significant long-term purchase commitments in fiscal 2025.",
+    "basis": "Stated in the Q3 earnings release and reconciliation.",
+    "claim": "Reported profit is flattered by one-offs, so it is not a clean read on competitive strength: third-quarter net income was $254 million ($2.15 per diluted share), including a $137 million tax benefit, a $61 million real-estate gain and $45 million of tariff refunds, while adjusted net income was $207 million.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "This subsidiary has over 200 additional registered trademarks, most of which are used in connection with our private brand products.",
-     "No vendor individually accounted for more than 10% of our net purchases in 2025.",
-     "We have no significant long-term purchase commitments with any of our suppliers and believe that we are not dependent on any one supplier or one geographical location."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P2] and [P6]",
-    "claim": "Kohl's uses private-label and co-branded credit card programs owned by an unrelated third party alongside loyalty and marketing initiatives to support merchandise sales and generate credit revenue.",
-    "facts": [
-     "P2",
      "P6"
     ],
     "quotes": [
-     "Our credit card operations facilitate merchandise sales and generate additional revenue from fees related to extending credit.",
-     "The private label and co-branded Kohl's credit card accounts are owned by an unrelated third-party, but we share in the net risk-adjusted revenue of the portfolio, which is defined as the sum of finance charges, late fees, and other revenue less write-offs of uncollectible accounts."
+     "Includes tax benefit of $137 million or $1.16 per diluted share"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P3], [P4], and [P6]",
-    "claim": "Top-line demand has contracted, with net sales falling 4.0% to $14.8 billion and comparable sales down 3.1% in fiscal 2025, followed by a 0.9% net sales and comparable sales decline in the second quarter of fiscal 2026 and full-year 2026 sales guidance of (1.5%) to flat.",
+    "basis": "Stated in the Q3 earnings release and presentation.",
+    "claim": "Cost pressure and reinvestment limit operating leverage: third-quarter SG&A rose 1.2% on investments in store payroll and media and higher fuel-driven supply chain costs, partly offset by corporate and credit savings, and was 35.1% of total revenue.",
     "facts": [
-     "P3",
-     "P4",
      "P6"
     ],
     "quotes": [
-     "Net sales decreased 4.0%, to $14.8 billion, with comparable sales down 3.1%.",
-     "Comparable sales decreased 0.9% in the second quarter of 2026 and 1.0% year to date 2026.",
-     "Net sales and Comparable sales: A decrease of (1.5%) to flat"
+     "SG&A expense increased by 1.2% from investments into store payroll and media alongside higher supply chain costs due to fuel, partially offset by expense management across corporate and credit"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P3], [P4], and [P6]",
-    "claim": "Gross margin rose to 37.5% of net sales in fiscal 2025 (up 34 basis points) and 43.0% in the second quarter of fiscal 2026 (up 305 basis points), aided by inventory discipline and approximately $100 million of IEEPA tariff refunds recognized in second-quarter gross margin.",
-    "facts": [
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Gross margin in 2025 was 37.5% of net sales, an increase of 34 basis points to last year.",
-     "Gross margin as a percentage of net sales was 43.0%, an increase of 305 basis points year-over-year.",
-     "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million was recognized within gross margin."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F1], [P3], [P4], and [P6]",
-    "claim": "Kohl's corporate credit ratings were downgraded in fiscal 2025 by Moody's to B2 (stable outlook) and by S&P to B+ (negative outlook), alongside a BB- (negative outlook) Fitch rating, while holding $821 million in cash and cash equivalents and no revolving credit borrowings in the second quarter of fiscal 2026.",
-    "facts": [
-     "F1",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "During 2025, Moody's downgraded our corporate credit rating from Ba3 to B2 and revised their outlook to stable, and S&P downgraded our corporate credit rating from BB- to B+.",
-     "Cash & Cash equivalents of $821 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P1] and [P2]",
-    "claim": "Kohl's faces intense multi-channel competition from online retailers, off-price retailers, warehouse clubs, mass merchandisers, specialty stores, and traditional department stores, where digital price comparison erodes national-brand differentiation.",
+    "basis": "Stated in the 10-K business and risk-factor sections.",
+    "claim": "Named threat: the competitive set is broad, and the company says product and value are the key competitive factors, which exposes it to price-based comparison and competitor pricing changes.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
      "Our primary competitors are online retailers, off-price retailers, warehouse clubs, mass merchandisers, specialty stores, traditional department stores, and other forms of retail commerce.",
-     "The continuing migration and evolution of retailing to digital channels has increased our challenges in differentiating ourselves from other retailers especially as it relates to national brands.",
-     "In particular, consumers can quickly and conveniently comparison shop with digital tools, which can lead to decisions based solely on price.",
-     "Unanticipated changes in the pricing and other practices of our competitors may adversely affect our performance and lead to loss of market share in one or more categories."
+     "Management considers product and value to be the most significant competitive factors in the industry."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "Kohl's geographic concentration in the United States and reliance on moderate-income shoppers leave it exposed to domestic economic slowdowns and rising prices for food, fuel, and healthcare.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Named threat: the core customer is moderate-income and sensitive to the economy, and all physical stores are in the United States.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Our core moderate-income customer is especially sensitive to these factors.",
-     "When the cost of basic necessities, such as food, fuel, and healthcare, increases, these customers often reduce their discretionary spending, which may negatively impact our results of operations.",
      "Because all of our physical stores are located in the United States, we are especially susceptible to deteriorations in the U.S. economy compared to more geographically diversified competitors."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "Declining store traffic, omnichannel execution shortfalls, and rising digital fulfillment expenses from promotional shipping, split shipments, peak capacity surcharges, and long-zone deliveries threaten operating performance.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Any inability to maintain or increase store traffic or to improve sales conversion rates across both physical and digital channels could adversely affect our results of operations.",
-     "Additionally, declining store traffic or shifting sales from physical stores to digital platforms could lead to store closures, restructuring and other costs, and adverse effects on our financial performance.",
-     "We have and may continue to experience an increase in costs associated with shipping digital orders due to promotional shipping offers, split shipments, freight surcharges due to peak capacity constraints, and additional long-zone shipments necessary to ensure timely delivery for the holiday season."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P2] and [P5]",
-    "claim": "Because most merchandise is manufactured outside the United States, primarily in Asia, changing trade policies and new tariffs under alternative statutory authorities threaten merchandise costs, supply chain timing, and competitive positioning.",
+    "basis": "Stated in the 10-K and 10-Q risk factors.",
+    "claim": "Named threat: tariffs and trade policy, because the majority of goods are sourced outside the United States, mainly in Asia. Refunds helped recent results, but remaining and future refund claims are uncertain and new tariffs under alternative authorities could offset them.",
     "facts": [
      "P2",
      "P5"
     ],
     "quotes": [
      "The majority of goods we source are manufactured outside of the United States, primarily in Asia.",
-     "If we are unable to diversify our sourcing, divert production or sourcing away from specific countries to avoid tariffs, or otherwise successfully mitigate the impact of these trade policies, our gross margins, the comparability of our operating results, costs of merchandise sold, results of operations, and competitive position could be adversely affected."
+     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "Heavy seasonality in the back-to-school and holiday periods amplifies inventory forecasting risks, while rising external theft and organized retail crime threaten margins and the in-store shopping experience.",
+    "basis": "Stated in the Q3 presentation and balance sheet; the constraint on flexibility is inferred.",
+    "claim": "Balance-sheet leverage constrains flexibility: long-term debt was $1,326 (table in millions) against cash of $723 (table in millions). Reported net debt plus leases to EBITDAR was 3.4x, which management says falls to 1.7x if leases are counted over the periods actually exercised.",
     "facts": [
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "Our business is subject to seasonal influences, with a major portion of sales and income historically realized during the second half of the fiscal year, which includes the back-to-school and holiday seasons.",
-     "As with most retailers, we also experience inventory shrinkage due to theft or damage, and we have observed an increase in external theft incidents and organized retail crime.",
-     "Our efforts to contain or reduce inventory shrinkage may not be successful, and certain theft-deterrence measures could negatively impact the guest shopping experience, potentially reducing store traffic and conversion."
+     "Kohl's Leverage Ratio is reduced to 1.7x, down from the Unadjusted Ratio of 3.4x"
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "Consumer migration toward buy-now-pay-later and other digital payment options, along with potential credit card regulation, threatens loyalty and higher-margin transactions tied to Kohl's branded credit cards.",
+    "basis": "Stated in the 10-K MD&A; the later 2026 ratings are not in the evidence.",
+    "claim": "Credit agencies downgraded the company's corporate credit ratings in the latest fiscal year, and S&P and Fitch outlooks were negative at year-end, which can raise financing costs.",
     "facts": [
-     "P2"
+     "P3"
     ],
     "quotes": [
-     "A shift away from our branded credit products could reduce customer loyalty and the higher-margin transactions often associated with use of our credit card.",
-     "Although the Consumer Financial Protection Bureau\u2019s (CFPB) rule limiting credit card late fees was vacated, new or re-proposed rules, including potential federal limits on credit card interest rates, could adversely affect our program\u2019s profitability."
+     "During 2025, Moody's downgraded our corporate credit rating from Ba3 to B2 and revised their outlook to stable, and S&P downgraded our corporate credit rating from BB- to B+."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2] and [P9]",
-    "claim": "Brand image and execution are vulnerable to ineffective marketing or loyalty programs, negative social media or political publicity (including AI-generated misinformation), and senior leadership transitions such as the Chief Merchandising Officer change in 2026.",
+    "basis": "The risk is stated in the 10-K; its application to this change is inferred.",
+    "claim": "Named threat: leadership changes. The company announced a change of Chief Merchandising Officer in the fall, and the 10-K flags leadership transitions as a risk to execution.",
     "facts": [
      "P2",
-     "P9"
+     "P10"
     ],
     "quotes": [
-     "If our marketing and loyalty programs are not successful or efficient, we may fail to strengthen customer loyalty or increase shopping frequency, which could adversely affect our sales and operating results.",
-     "Negative publicity surrounding us, our activities, or the products we offer, including consumer perception of our response to political and social issues, and campaigns by political activists promoting certain causes, could adversely impact our brand image and may decrease demand for our products, thereby adversely affecting our business, results of operations, cash flows or financial condition.",
      "Leadership transitions can be disruptive and may result in the loss of key personnel, changes in business direction, or difficulties in maintaining operational focus and consistency."
     ],
     "support": "supported"
@@ -1127,900 +1011,616 @@
   ],
   "financial_health": [
    {
-    "basis": "Stated directly in the Q2 2026 Consolidated Balance Sheets (F1) and 2025 Form 10-K MD&A (P3).",
-    "claim": "As of Aug. 01, 2026, Kohl's held $ 821 (table in millions) in cash and cash equivalents and 4,019 (table in millions) in total current assets against 2,696 (table in millions) in total current liabilities, with 2,913 (table in millions) of current assets in merchandise inventories.",
+    "basis": "Stated in the Q3 balance sheet in the 8-K earnings release (unaudited); the $1.5 billion facility size is stated in the 10-K MD&A (P3).",
+    "claim": "Liquidity at the end of the third quarter: cash and cash equivalents were $723 (table in millions) and nothing was drawn on the revolving credit facility, against $144 and $45 a year earlier.",
     "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 821 | $ 674 | $ 174",
-     "Merchandise inventories | 2,913 | 2,745 | 2,994",
-     "Total current assets | 4,019 | 3,691 | 3,474",
-     "Total current liabilities | 2,696 | 2,531 | 2,548"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 Form 10-K (P3), Q2 2026 Form 10-Q MD&A (P4), and Q2 2026 earnings release (P6).",
-    "claim": "Kohl's maintains a $1.5 billion asset-based revolving credit facility with no outstanding borrowings as of Aug. 01, 2026, down from 75 (table in millions) a year earlier, and was in compliance with all covenants as of January 31, 2026.",
-    "facts": [
-     "P3",
-     "P4",
      "P6"
     ],
-    "quotes": [
-     "In 2025, we had $290 million of net repayments on our $1.5 billion credit facility compared to net borrowings of $198 million in 2024.",
-     "As of January 31, 2026, we were in compliance with all covenants.",
-     "Borrowings under revolving credit facility | \u2014 | 75"
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the unaudited balance sheet in the earnings release; the observation about inventory and payables is inferred from the same table.",
+    "claim": "Total current assets of 5,118 exceeded total current liabilities of 3,407 (table in millions) at October 31, 2026. A year earlier the figures were 4,308 and 3,307.",
+    "facts": [
+     "P6"
     ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q2 2026 Consolidated Balance Sheets (F1).",
-    "claim": "On its Aug. 01, 2026 balance sheet, Kohl's carried 1,325 (table in millions) in long-term debt, 92 (table in millions) in current and 2,295 (table in millions) in long-term finance leases and financing obligations, and 96 (table in millions) in current and 2,613 (table in millions) in long-term operating leases, against 4,168 (table in millions) in total shareholders' equity.",
+    "basis": "Stated in management's presentation (non-GAAP); the net debt and leverage figures are management's, not computed here.",
+    "claim": "Funded debt is modest relative to cash. Long-term debt was 1,326 (table in millions), cash was $723, and management's table shows net debt of 603 and Net Debt / EBITDA of 0.4x on adjusted EBITDA of $1,364.",
     "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the presentation (non-GAAP); the lease balances are stated in the 10-Q balance sheet.",
+    "claim": "Including leases, leverage is much higher. Net Debt + Leases / EBITDAR is 3.4x unadjusted, and management presents 1.7x after adjusting lease obligations to the periods it says are actually exercised.",
+    "facts": [
+     "P6",
      "F1"
     ],
     "quotes": [
-     "Long-term debt | 1,325 | 1,436 | 1,520",
-     "Finance leases and financing obligations | 92 | 85 | 84",
-     "Finance leases and financing obligations | 2,295 | 2,365 | 2,409",
-     "Operating leases | 96 | 94 | 96",
-     "Operating leases | 2,613 | 2,650 | 2,672",
-     "Total shareholders\u2019 equity | 4,168 | 4,048 | 3,927"
+     "Leverage Ratio is reduced to 1.7x, down from the Unadjusted Ratio of 3.4x"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q2 2026 earnings presentation (P6).",
-    "claim": "For the rolling twelve months as of Q2 2026, Kohl's reported Net Debt of 504 (table in millions) and Net Debt / EBITDA Leverage of 0.4x on Adjusted EBITDA of $ 1,293 (table in millions), while Net Debt + Leases / EBITDAR Leverage was 3.6x unadjusted versus 1.8x when adjusted for actually exercised lease periods.",
+    "basis": "Stated in the earnings release cash flow statement and presentation; the working-capital explanation is inferred from the cash flow line items.",
+    "claim": "Cash generation fell this year. Nine-month operating cash flow was 463 against 630 a year earlier, and free cash flow was 210 against 322 (table in millions). Adjusted free cash flow was 139 against 270.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release; that these items are non-recurring is inferred from the company's own adjusted-measure reconciliation and descriptions. The company states the tax benefit came from tax examinations being effectively settled.",
+    "claim": "Reported profit and cash this year include items that may not recur. These are tariff refunds of about $190 million received (about $145 million through gross margin), a $137 million tax benefit, and a $61 million real estate gain that also brought sale proceeds of 108.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Net Debt / EBITDA Leverage 0.4x 0.4x",
-     "The balance sheet lease liability of $5.1B currently reflects the lease periods probable to be exercised, which averages 18 years",
-     "When adjusting for the actual lease periods exercised Kohl's Leverage Ratio is reduced to 1.8x, down from the Unadjusted Ratio of 3.6x"
+     "Tariff refunds of approximately $190 million were received, of which approximately $145 million flowed through gross margin."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K MD&A (P3).",
-    "claim": "Kohl's held corporate credit ratings of B2 (Stable) from Moody's, B+ (Negative) from S&P, and BB- (Negative) from Fitch as of January 31, 2026, following 2025 downgrades that triggered an additional 50 basis points coupon increase on its 3.375% notes due May 2031.",
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "Prior-year operating cash flow was boosted by a one-time legal settlement and inventory reduction. Fiscal 2025 operating cash flow was 1,380 (table in millions) against 648, and adjusted free cash flow was 935 against 104.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Operating cash flow increased due to a higher net income, partially driven by a $129 million gain recognized with respect to settlement of a credit card interchange fee lawsuit and inventory decreasing 7% to last year compared to an increase of 2% in 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Partly stated (10-K MD&A and Q3 balance sheet) and partly inferred from the lack of a current debt line.",
+    "claim": "Debt maturities are not visible in the balance sheet near term. Long-term debt is 1,326 (table in millions) with no current-portion debt line, and the revolver is undrawn. The fixed-rate notes the company discusses are the 10.000% senior secured notes due 2030 (original $360 million) and the 3.375% notes due May 2031.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Long term debt increased $262 million through issuance of $360 million of 10.000% senior secured notes due 2030, partially offset by open market repurchases of $87 million of our outstanding long term debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and presentation.",
+    "claim": "The company is retiring debt below par and plans to address the 2030 notes. It has repurchased 113 of debt at a discount of 15 (table in millions, year to date), and the 2030 notes become callable in June 2027.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Kohl\u2019s will continue to evaluate the market to address long-term debt, including our 2030 notes which become callable in June 2027."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A; the ratings are dated January 31, 2026, so they may have changed since.",
+    "claim": "Credit quality sits below investment grade. As of January 31, 2026, ratings were B2 (Moody's), B+ (S&P) and BB- (Fitch), with S&P and Fitch outlooks negative. The revolver contains a springing fixed charge coverage covenant, and the company reported compliance as of January 31, 2026.",
     "facts": [
      "P3"
     ],
     "quotes": [
      "During 2025, Moody's downgraded our corporate credit rating from Ba3 to B2 and revised their outlook to stable, and S&P downgraded our corporate credit rating from BB- to B+.",
-     "As a result of the downgrades, the interest rate on our 3.375% notes due May 2031 increased an additional 50 basis points in the second quarter of 2025 due to the coupon adjustment provision within the notes."
+     "As of January 31, 2026, we were in compliance with all covenants."
     ],
     "support": "number_not_found"
-   },
-   {
-    "basis": "Stated directly in the Q2 2026 Consolidated Statements of Operations (F2), Cash Flows (F3), and MD&A (P4).",
-    "claim": "In the six months ended Aug. 01, 2026, net interest expense declined to 126 (table in millions) from 154 (table in millions) a year earlier against operating income of 307 (table in millions), aided by $15 million in debt extinguishment gains and no revolving credit balance, while cash interest paid was $ 146 (table in millions).",
-    "facts": [
-     "F2",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Operating income | 261 | 279 | 307 | 339",
-     "Interest expense, net | 63 | 78 | 126 | 154",
-     "Interest paid, net of capitalized interest | $ 146 | $ 147",
-     "Net interest expense decreased in the first half of 2026 due to gains on extinguishment of debt recognized in net interest expense and no outstanding balance on the revolving credit facility."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q2 2026 Consolidated Statements of Cash Flows (F3), 2025 Form 10-K (P3), and Q2 2026 earnings presentation (P6).",
-    "claim": "Kohl's generated 478 (table in millions) in operating cash flow, 332 (table in millions) in free cash flow after (146) (table in millions) of property and equipment acquisitions, and 288 (table in millions) in adjusted free cash flow in the six months ended Aug. 01, 2026, following $1,380 (table in millions) in operating cash flow and $935 (table in millions) in adjusted free cash flow in 2025.",
-    "facts": [
-     "F3",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 478 | 506",
-     "Acquisition of property and equipment | (146) | (200)",
-     "Free Cash Flow 332 306",
-     "Adjusted Free Cash Flow (Non-GAAP) 288 270"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the 2025 Form 10-K (P3), Q2 2026 Form 10-Q MD&A (P4) and Risk Factors (P5), and Q2 2026 earnings release (P6).",
-    "claim": "Cash generation and earnings quality benefited from non-recurring recoveries, including approximately $150 million of IEEPA tariff refunds received in the second quarter of 2026 (of which approximately $100 million flowed through gross margin) and a $129 million legal settlement cash gain in 2025.",
-    "facts": [
-     "P3",
-     "P4",
-     "P5",
-     "P6"
-    ],
-    "quotes": [
-     "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million was recognized within gross margin.",
-     "We recorded a gain, net of legal fees, and received cash of $129 million.",
-     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q2 2026 Consolidated Statements of Cash Flows (F3) and 2025 Form 10-K MD&A (P3).",
-    "claim": "Operating cash flow of 478 (table in millions) in the six months ended Aug. 01, 2026 relied on a 247 (table in millions) cash inflow from accounts payable to offset outflows of (166) (table in millions) for merchandise inventories and (77) (table in millions) for accrued and other long-term liabilities, while 2025 operating cash flow was lifted by a 7% inventory reduction.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Accounts payable | 247 | 93",
-     "Merchandise inventories | (166) | (48)",
-     "Accrued and other long-term liabilities | (77) | (105)",
-     "Operating cash flow increased due to a higher net income, partially driven by a $129 million gain recognized with respect to settlement of a credit card interchange fee lawsuit and inventory decreasing 7% to last year compared to an increase of 2% in 2024."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated directly in the Q2 2026 Consolidated Balance Sheets (F1), 2025 Form 10-K (P3), and Q2 2026 earnings release (P6).",
-    "claim": "Kohl's repaid $353 million of 4.25% notes at maturity in July 2025, issued $360 million of 10.000% senior secured notes due 2030, and repurchased $87 million of long-term debt in 2025 and $113 million of debt at a $15 million discount in the first half of 2026, leaving 1,325 (table in millions) in long-term debt alongside 3.375% notes due May 2031.",
-    "facts": [
-     "F1",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "In the second quarter of 2025, we issued $360 million in aggregate principal amount of 10.000% senior secured notes due 2030; in addition $353 million in aggregate principal amount of our 4.25% notes matured and were repaid.",
-     "In the fourth quarter of 2025, we reduced our outstanding debt by $87 million in aggregate principal through repurchases of various notes on the open market.",
-     "Long-term debt decreased $195 million to the prior year, primarily driven by $113 million of debt repurchased at a discount of $15 million in 2026 and $87 million of debt repurchases in the prior year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred for funding capacity from the liquidity and obligation figures stated in F1, P3, P6, and P7.",
-    "claim": "Near-term obligations\u2014including 92 (table in millions) in current finance lease and financing obligations, 96 (table in millions) in current operating leases, $350 million to $400 million in 2026 capital expenditures, a $0.125 per share quarterly dividend, and up to $100 million in restarted 2026 share repurchases\u2014can be met from $821 million in cash, operating cash flow, and the revolving credit facility.",
-    "facts": [
-     "F1",
-     "P3",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Cash & Cash equivalents of $821 million",
-     "Restarting share repurchases of up to $100 million in 2026 under existing $3 billion authorization",
-     "On November 18, 2026, the Board of Directors of Kohl's Corporation declared a quarterly cash dividend of $0.125 per share.",
-     "Our continued access to these markets depends on multiple factors, including the condition of debt capital markets, our operating performance, and our credit ratings."
-    ],
-    "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in P3 and P4",
-    "claim": "Digital sales grew 2.8% in the second quarter of 2026 and 3.4% year to date 2026, reaching 27% of net sales in the second quarter.",
+    "basis": "Figures are stated in the cited items. The causal link to the initiatives is management's own attribution.",
+    "claim": "Sales growth: Q3 2026 was the first quarter of top-line growth in the evidence, with net sales up 1.3% and comparable sales up 1.2%. For it to continue, comparable sales have to stay positive, since the nine-month figure is still negative at 0.2% and Q2 was down 0.9%.",
     "facts": [
-     "P3",
+     "P6",
      "P4"
     ],
     "quotes": [
-     "Digital sales increased 2.8% in the second quarter of 2026 and 3.4% year to date 2026.",
-     "Digital penetration represented 27% of net sales in the second quarter of 2026 and 26% year to date 2026, compared to 26% in the second quarter of 2025 and 25% year to date 2025."
+     "In the third quarter, we returned to top-line growth with a positive 1.2% comparable sales performance."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P6",
-    "claim": "For omnichannel and digital growth to continue, Kohl's must maintain uninterrupted website availability, accurate cross-channel inventory, timely order fulfillment, and store traffic to support pickup and returns.",
+    "basis": "Stated in the Q3 presentation. The condition is inferred from the 10-K risk factors.",
+    "claim": "Assortment: every line of business had positive comparable sales in Q3 and improved from Q2. For this to continue, the curated, more balanced assortment has to keep resonating with customers.",
     "facts": [
-     "P2",
      "P6"
     ],
     "quotes": [
-     "The success of our omnichannel strategy depends on the seamless integration of our physical and digital channels to deliver a frictionless shopping experience, both in-store and online.",
-     "This requires maintaining uninterrupted availability of our website and supporting applications, adequate and accurate inventory levels across our stores and digital platforms, timely fulfillment of customer orders, and accurate shipping of undamaged products.",
-     "Our physical stores play a crucial role in attracting customers, driving traffic to digital channels, and supporting fulfillment, returns, and other omnichannel functions.",
-     "Expanding same day delivery by scaling Instacart and launching partnership with Doordash"
+     "Every line of business delivered positive comparable sales and improved sequentially"
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in P1 and P6",
-    "claim": "Proprietary brands delivered 3% comparable sales growth in the second quarter of 2026 and carry higher gross margins than national brands.",
+    "basis": "Stated in the cited items (growth figure and margin characterization).",
+    "claim": "Proprietary brands: comparable sales for proprietary brands grew 3.4% in Q3. For this to continue, inventory depth, in-store investment and marketing have to keep scaling. Proprietary brands carry higher gross margins than national brands.",
     "facts": [
-     "P1",
-     "P6"
+     "P6",
+     "P1"
     ],
     "quotes": [
-     "In Q2, proprietary brands delivered 3% comparable sales growth",
-     "Key proprietary brands outperformed in Juniors, Men\u2019s, and Kids",
+     "Delivered 3.4% comparable sales growth for proprietary brands in Q3, driven by increasing inventory depth, in-store investments, and scaling marketing efforts",
      "Compared to national brands, proprietary brands generally have lower selling prices, but higher gross margins."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P6",
-    "claim": "For proprietary brand growth to continue, Kohl's must accurately predict changing consumer tastes, execute Fall inventory depth investments, and protect brand perception.",
+    "basis": "Q2 figures are stated in the 10-Q section. No Q3 digital growth rate is given in the evidence.",
+    "claim": "Digital: digital sales rose 2.8% in Q2 2026, and digital penetration reached 27% of net sales against 26% a year earlier. For this to continue, digital has to keep growing faster than total net sales, which fell 0.9% in Q2.",
     "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Our business is dependent on our ability to anticipate fluctuations in consumer demand for a wide variety of merchandise.",
-     "The Kohl's brand and many of our private brands are powerful sales and marketing tools that depend on positive consumer and stakeholder perceptions.",
-     "Increasing investments in proprietary brand inventory to meet strong demand"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in P3, P4, and P6",
-    "claim": "Accessories, including Sephora, was the only line of business to grow in fiscal 2025, rising 2.0% to $3,122 (table in millions), supported by over 1,100 Sephora shops.",
-    "facts": [
-     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Sales decreased across all lines of business, except for Accessories, which increased approximately 2% during 2025.",
-     "At the end of 2025, we had a Sephora at Kohl's shop-in-shop (\"Sephora shop\") presence in over 1,100 of our stores, including 855 full size 2,500 square foot Sephora shops and 294 small format Sephora shops.",
-     "Jewelry and impulse continue to be growth drivers for Accessories",
-     "In the second quarter and year to date 2026, Home, Accessories, and Children's net sales performed better than the total Company average."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P2 and P6",
-    "claim": "For Accessories and Sephora growth to continue, Kohl's must sustain product newness, adequate inventory restocking, and its third-party brand partnership.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "We also associate the Kohl\u2019s brand with third-party national brands that we sell in our store and through our partnerships with companies in pursuit of strategic initiatives.",
-     "Delivering newness across Haircare and Skincare"
+     "Digital sales increased 2.8% in the second quarter of 2026 and 3.4% year to date 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P6",
-    "claim": "Home net sales grew 1.2% in the second quarter of 2026 to $411 (table in millions), while Toys delivered double-digit growth and Marketplace gross merchandise value growth added 0.7% to second-quarter comparable sales.",
+    "basis": "Figures and attribution are stated in the cited items. The point that refunds fade is inferred from the Q4 guidance split.",
+    "claim": "Gross margin: Q3 gross margin rose 145 basis points to 41.0%, of which tariff refunds of $45 million added roughly 130 basis points. The remainder came from proprietary brands, stronger store sales and buy online pickup in store, partly offset by fuel costs. Margin gains beyond refunds depend on those operating drivers continuing, because the refund benefit is expected to shrink in Q4 (about 0.25% of operating margin).",
     "facts": [
-     "P4",
-     "P6"
+     "P6",
+     "P5"
     ],
     "quotes": [
-     "Home drove positive comp led by decor and innovation in small electrics",
-     "LEGO, KPOP Demon Hunters, and value towers helped deliver strong double-digit growth in Toys",
-     "Strong marketplace growth from expanded product assortment"
+     "- Gross margin benefitted $45 million or approximately 130 basis points from tariff refunds",
+     "- The remaining increase was driven by outperformance of proprietary brands, stronger store sales, and increased buy online pickup in store sales, partially offset by higher fuel costs"
     ],
     "support": "number_not_found"
    },
    {
-    "basis": "stated in P2, P5, and P6",
-    "claim": "For category and marketplace expansion to persist, Kohl's must maintain consistent in-stock inventory depth, refine store allocation, and mitigate tariff and sourcing cost pressures.",
+    "basis": "Stated in the release and tables. The 1.8% revenue growth is not cited in the evidence and is not used as a figure here.",
+    "claim": "Cost discipline and interest savings: Q3 SG&A fell to 35.1% of total revenue, a decrease of 20 basis points, even though SG&A dollars rose 1.2%. Net interest expense was 65 against 75 (table in millions) after debt repurchases. For this to continue, corporate and credit savings must keep offsetting store payroll, media and fuel-driven supply chain costs.",
     "facts": [
-     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "As a percentage of total revenue, SG&A expenses were 35.1%, a decrease of 20 basis points year-over-year.",
+     "Long-term debt decreased $196 million compared to the prior year, primarily driven by $113 million of debt repurchased at a discount of $15 million in 2026 and $87 million of debt repurchases in the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release. The remark that the adjusted measure still includes the tax and tariff items is read from the reconciliation table.",
+    "claim": "Earnings quality: Q3 diluted EPS of $2.15 includes a $1.16 tax benefit, a $0.39 real estate gain and a $0.28 tariff refund benefit. The reconciliation removes only the real estate gain and its tax effect, giving adjusted EPS of $1.76. Growth in reported EPS is therefore not a clean measure of repeatable growth, and the full-year outlook of $4.30 to $4.50 also embeds these items.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Includes tax benefit of $137 million or $1.16 per diluted share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are in the cited tables and presentation. The funding link is inferred.",
+    "claim": "Funding capacity: nine-month operating cash flow was 463 against 630 (table in millions), but cash was 723 with no revolver borrowings at October 31, 2026. Management plans capital expenditures of $365 million to $375 million and repurchases of up to $100 million in 2026. For investment-led growth to continue, cash generation in the holiday quarter has to cover these uses.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Continue to prioritize our investment into the business with $365 million to $375 million of Capital Expenditures in 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Risk language is stated in the 10-Q. The $1.03 outlook component is stated in the release.",
+    "claim": "Condition on trade policy: the margin and cash benefit from tariff refunds depends on further refunds being received, and management describes them as uncertain. New tariffs under alternative authorities could offset the benefit.",
+    "facts": [
      "P5",
      "P6"
     ],
     "quotes": [
-     "Restoring trip assurance through improved inventory depth to ensure consistent in-stock levels",
-     "Refining allocation process to ensure better product distribution, particularly in lower-volume stores",
-     "If we are unable to diversify our sourcing, divert production or sourcing away from specific countries to avoid tariffs, or otherwise successfully mitigate the impact of these trade policies, our gross margins, the comparability of our operating results, costs of merchandise sold, results of operations, and competitive position could be adversely affected."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P6",
-    "claim": "Kohl's is targeting sales recovery through value offerings, loyalty-focused promotional events, and $350 million to $400 million in planned 2026 capital expenditures.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Testing new promotional formats, including VIP Cardholder Events, Kohl\u2019s Deal Days, and personalized \u2018Just For You\u2019 offers, generating positive customer response",
-     "Introduced value throughout the store with Deal Bar, Toy Towers, and Impulse categories",
-     "Continue to prioritize our investment in the business with $350 million to $400 million of Capital Expenditures in 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P9",
-    "claim": "For value and loyalty initiatives to drive durable growth, Kohl's core moderate-income customers must sustain discretionary spending and marketing, loyalty, and merchandising leadership transitions must execute effectively.",
-    "facts": [
-     "P2",
-     "P9"
-    ],
-    "quotes": [
-     "When the cost of basic necessities, such as food, fuel, and healthcare, increases, these customers often reduce their discretionary spending, which may negatively impact our results of operations.",
-     "If our marketing and loyalty programs are not successful or efficient, we may fail to strengthen customer loyalty or increase shopping frequency, which could adversely affect our sales and operating results.",
-     "Leadership transitions can be disruptive and may result in the loss of key personnel, changes in business direction, or difficulties in maintaining operational focus and consistency.",
-     "On August 27, 2026, Ryan M. Waymire accepted his appointment as Chief Merchandising Officer of the Company, effective September 28, 2026."
+     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in [P2], [P3], and [P5]",
-    "claim": "The U.S. Supreme Court struck down certain tariffs previously imposed under the International Emergency Economic Powers Act, enabling Kohl's to initiate tariff refund claims.",
-    "facts": [
-     "P2",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "On February 20, 2026, the U.S. Supreme Court issued a ruling in Learning Resources, Inc. v. Trump striking down certain tariffs previously imposed under IEEPA.",
-     "Following the United States Supreme Court decision invalidating tariffs previously imposed under the IEEPA, we initiated refund claims and have received tariff refunds."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P4] and [P6]",
-    "claim": "During the second quarter, Kohl's received approximately $150 million in IEEPA tariff refunds, of which approximately $100 million flowed through gross margin.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million was recognized within gross margin.",
-     "The Company raises its guidance and includes the benefit of IEEPA Tariff refunds received in the second quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6]",
-    "claim": "Kohl's raised its full-year 2026 financial outlook to net sales and comparable sales of a (1.5%) decrease to flat, adjusted operating margin of 3.5% to 4.0%, and adjusted diluted EPS of $1.80 to $2.40.",
+    "basis": "stated in the cited item",
+    "claim": "Kohl's raised its full year 2026 outlook with its third quarter results, with GAAP diluted EPS guided to a range of $4.30 to $4.50.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "The Company raises its guidance and includes the benefit of IEEPA Tariff refunds received in the second quarter.",
-     "Net sales and Comparable sales: A decrease of (1.5%) to flat",
-     "Adjusted Operating margin: In the range of 3.5% to 4.0% (b)",
-     "Adjusted Diluted EPS: In the range of $1.80 to $2.40 (b)"
+     "Raises full year 2026 financial outlook",
+     "Diluted EPS: In the range of $4.30 to $4.50 which includes the benefit of:"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P6]",
-    "claim": "Kohl's announced it is restarting share repurchases of up to $100 million in 2026 under its existing $3 billion authorization.",
+    "basis": "stated in the cited item",
+    "claim": "Kohl's recognized a $61 million gain on the sale of two properties in the third quarter.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Restarting share repurchases of up to $100 million in 2026 under existing $3 billion authorization"
+     "Gain on sale of real estate of $61 million was recognized related to the sale of two properties."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P7]",
-    "claim": "Kohl's Board of Directors declared a quarterly cash dividend of $0.125 per share.",
+    "basis": "stated in the cited item",
+    "claim": "Kohl's recorded a $137 million tax benefit because tax examinations were effectively settled; it added $1.16 to diluted EPS for the quarter.",
     "facts": [
-     "P7"
+     "P6"
     ],
     "quotes": [
-     "On November 18, 2026, the Board of Directors of Kohl's Corporation declared a quarterly cash dividend of $0.125 per share.",
-     "The dividend will be payable on December 23, 2026, to shareholders of record at the close of business on December 9, 2026."
+     "Tax benefit of $137 million resulting from tax examinations being effectively settled was recorded during the quarter, which increased diluted EPS by $1.16 for the quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P6] and [P10]",
-    "claim": "Kohl's Board of Directors declared a quarterly cash dividend of $0.125 per share.",
+    "basis": "stated in the cited item",
+    "claim": "Kohl's received about $190 million of tariff refunds in the nine months, of which about $145 million flowed through gross margin.",
     "facts": [
      "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Tariff refunds of approximately $190 million were received, of which approximately $145 million flowed through gross margin."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Year to date, Kohl's repurchased $113 million of debt at a discount of $15 million.",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "Year to date, Kohl\u2019s has repurchased $113 million of debt at a discount of $15 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Kohl's repurchased $39 million of its shares in the third quarter under its $3 billion authorization and plans to repurchase up to $100 million in 2026.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Repurchased $39 million in Q3 under our current $3 billion authorization, with plans to repurchase up to $100 million in 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Kohl's announced that Chief Merchandising Officer Nick Jones would leave effective October 1, 2026, and that Ryan M. Waymire accepted the Chief Merchandising Officer role effective September 28, 2026.",
+    "facts": [
      "P10"
     ],
     "quotes": [
-     "As previously announced, on August 18, 2026, the Board of Directors of the Company declared a quarterly cash dividend of $0.125 per share.",
-     "The dividend will be paid on September 23, 2026, to all shareholders of record at the close of business on September 9, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3]",
-    "claim": "Kohl's Board of Directors declared a quarterly cash dividend of $0.125 per share.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On February 25, 2026, Kohl\u2019s Board of Directors declared a quarterly cash dividend on the Company\u2019s common stock of $0.125 per share.",
-     "The dividend is payable April 1, 2026 to shareholders of record at the close of business on March 18, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P8]",
-    "claim": "Kohl's Board of Directors increased its size from eight to nine members and appointed Stacy Taffet as a director serving on the Audit Committee.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "On October 29, 2026, the Board of Directors (the \u201cBoard\u201d) of Kohl\u2019s Corporation (the \u201cCompany\u201d) increased the size of the Board from eight to nine members and appointed Stacy Taffet as a director to fill the new Board seat, effective on that date.",
-     "Ms. Taffet will initially serve on the Audit Committee of the Board."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P9]",
-    "claim": "Kohl's announced that Chief Merchandising Officer Nick Jones will depart the Company with separation benefits under his executive compensation agreement.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "On August 31, 2026, Kohl\u2019s Corporation (the \u201cCompany\u201d) announced that Nick Jones, the Company\u2019s Chief Merchandising Officer, will be departing the Company effective October 1, 2026.",
-     "In connection with his departure, Mr. Jones is entitled to receive separation benefits in accordance with the terms of the Executive Compensation Agreement, dated March 20, 2023, between Kohl\u2019s, Inc. and Mr. Jones."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P9]",
-    "claim": "Ryan M. Waymire accepted his appointment as Chief Merchandising Officer of Kohl's.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "On August 27, 2026, Ryan M. Waymire accepted his appointment as Chief Merchandising Officer of the Company, effective September 28, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F3], [P4], and [P6]",
-    "claim": "During the first half of fiscal 2026, Kohl's repurchased $113 million of long-term debt on the open market at a discount of $15 million.",
-    "facts": [
-     "F3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Year to date, Kohl\u2019s repurchased $113 million of debt at a discount of $15 million.",
-     "The gains on extinguishment of debt resulted from open market purchases of long term debt, totaling $6 million for the second quarter and $15 million year to date."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F2], [P3], and [P4]",
-    "claim": "In the second quarter of fiscal 2025, Kohl's entered into a settlement agreement resolving a credit card interchange fee lawsuit in which it was a plaintiff, recording a gain and receiving cash of $129 million.",
-    "facts": [
-     "F2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Also in the second quarter of 2025, Kohl\u2019s entered into a settlement agreement to resolve a credit card interchange fee lawsuit in which we were a plaintiff.",
-     "We recorded a gain, net of legal fees, and received cash of $129 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F3] and [P3]",
-    "claim": "In the second quarter of fiscal 2025, Kohl's issued $360 million aggregate principal amount of 10.000% senior secured notes due 2030, receiving $357 million in proceeds net of debt discount.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "In the second quarter of 2025, we issued $360 million aggregate principal amount of 10.000% senior secured notes due 2030 and received proceeds of $357 million, net of the debt discount."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F3] and [P3]",
-    "claim": "In the second quarter of fiscal 2025, $353 million aggregate principal amount of Kohl's 4.25% notes matured and were repaid.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Also, during the second quarter of 2025, $353 million in aggregate principal amount of our 4.25% notes matured and were repaid."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] and [P6]",
-    "claim": "In the fourth quarter of fiscal 2025, Kohl's reduced its outstanding debt by $87 million aggregate principal through open-market note repurchases.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "In the fourth quarter of 2025, we reduced our outstanding debt by $87 million aggregate principal through repurchases of various notes on the open market."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3]",
-    "claim": "In fiscal 2025, Kohl's made $290 million of net repayments on its $1.5 billion revolving credit facility, eliminating its outstanding revolving credit borrowings by fiscal year-end.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In 2025, we had $290 million of net repayments on our $1.5 billion credit facility compared to net borrowings of $198 million in 2024.",
-     "There were no outstanding borrowings under the revolving credit facility, recorded as short-term debt, as of January 31, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3]",
-    "claim": "During fiscal 2025, Moody's and S&P downgraded Kohl's corporate credit ratings, and Moody's also downgraded its senior unsecured credit rating in the second quarter of 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "During 2025, Moody's downgraded our corporate credit rating from Ba3 to B2 and revised their outlook to stable, and S&P downgraded our corporate credit rating from BB- to B+.",
-     "During the second quarter of 2025, Moody's downgraded our senior unsecured credit rating from B1 to B3; however, further downgrades by Moody's do not trigger incremental interest rate increases."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3]",
-    "claim": "Following prior credit rating downgrades, the interest rate on Kohl's 3.375% notes due May 2031 increased an additional 50 basis points in the second quarter of 2025, bringing the total coupon adjustment increase since issuance to 175 basis points.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As a result of the downgrades, the interest rate on our 3.375% notes due May 2031 increased an additional 50 basis points in the second quarter of 2025 due to the coupon adjustment provision within the notes.",
-     "In total, the interest rate on the notes due May 2031 have increased 175 basis points since their issuance due to the coupon adjustment provision within the notes."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in [P3]",
-    "claim": "In fiscal 2024, Kohl's recognized $76 million in impairments, store closing, and other costs\u2014including $43 million of fixed asset impairments and $11 million of lease right-of-use asset impairments\u2014related to closing its San Bernardino, California e-commerce fulfillment center and 27 underperforming stores.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In 2024, we recognized $76 million in Impairments, store closing, and other costs related to the closure of our San Bernardino E-commerce Fulfillment Center and 27 underperforming stores.",
-     "Included in this amount was $43 million of fixed asset impairments, $11 million of lease Right of Use (\u201cROU\u201d) asset impairments, $14 million of severance, and $26 million in other costs relating to the closure of these locations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [F2], [F3], [P3], and [P4]",
-    "claim": "In fiscal 2025, Kohl's recognized $15 million in impairments, store closing, and other costs, including $11 million of non-cash asset impairments primarily related to closing its Monroe, Ohio e-commerce fulfillment center, partially offset by a $12 million exit-cost reversal.",
-    "facts": [
-     "F2",
-     "F3",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "In 2025, we recognized $15 million in Impairments, store closing, and other costs.",
-     "Included in this amount was $11 million of non-cash charges related to asset impairments, $10 million of severance, and $6 million of other costs primarily related to the closure of our Monroe, Ohio E-commerce Fulfillment Center.",
-     "We also reversed $12 million of other exit costs initially recognized in the fourth quarter of 2024, related to the closure of our San Bernardino, California E-commerce Fulfillment Center and 27 underperforming stores due to favorable landlord negotiations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3]",
-    "claim": "Kohl's paid cash dividends of $56 million ($0.50 per share) in fiscal 2025, down from $222 million ($2.00 per share) in fiscal 2024.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Cash dividend payments were $56 million ($0.50 per share) in 2025 and $222 million ($2.00 per share) in 2024."
+     "Nick Jones, the Company\u2019s Chief Merchandising Officer, will be departing the Company effective October 1, 2026",
+     "Ryan M. Waymire accepted his appointment as Chief Merchandising Officer of the Company, effective September 28, 2026."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in 2025 10-K Item 7, Q2 2026 10-Q Part I Item 2 and Part II Item 1A, and Q2 2026 8-K earnings release.",
-    "claim": "Kohl's faces higher merchandise costs, supply chain disruption, and gross margin comparability risk from new U.S. tariffs and uncertain remaining refund claims after receiving approximately $150 million in tariff refunds, with approximately $100 million flowing through gross margin, in the second quarter of 2026.",
+    "basis": "Stated in P6 (press release figures and non-GAAP reconciliation); the effect on future results is inferred.",
+    "claim": "Q3 reported earnings were lifted by items that may not recur. GAAP operating income was $217 million against adjusted operating income of $156 million. The quarter included a $137 million tax benefit, a $61 million real estate gain and about $45 million of tariff refunds in gross margin.",
     "facts": [
-     "P3",
-     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Tariff refunds of approximately $45 million flowed through gross margin in the quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Refund uncertainty and new tariffs are stated in P5 and P6; the margin effect is inferred.",
+    "claim": "Gross margin gains rely on tariff refunds, which the company says are uncertain, while new tariffs under alternative authorities are being imposed. About 130 basis points of the Q3 gross margin increase came from refunds, and the Q4 outlook still includes about 0.25% operating margin from refunds.",
+    "facts": [
      "P5",
      "P6"
     ],
     "quotes": [
-     "The majority of goods we source are manufactured outside of the United States, primarily in Asia.",
-     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt.",
-     "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million flowed through gross margin."
+     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in 2025 10-K Item 1A and Item 7, Q2 2026 10-Q Item 2, and Q2 2026 8-K earnings release and presentation.",
-    "claim": "Kohl's core moderate-income U.S. customer is sensitive to inflation and economic slowdowns, contributing to net sales declines of 4.0% in 2025 and 1.2% year to date 2026.",
+    "basis": "Figures stated in P3 and P6; the risk mechanism is inferred.",
+    "claim": "Leverage and credit quality are weak on a lease-inclusive basis, and cash generation fell. Net debt plus leases to EBITDAR is 3.4x unadjusted. Nine-month operating cash flow was 463 (table in millions) versus 630 (table in millions) a year earlier. Credit ratings were downgraded during 2025.",
     "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Our core moderate-income customer is especially sensitive to these factors.",
-     "Because all of our physical stores are located in the United States, we are especially susceptible to deteriorations in the U.S. economy compared to more geographically diversified competitors.",
-     "Net sales decreased 0.9% in the second quarter of 2026 and 1.2% year to date 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Q2 2026 10-Q balance sheet, 2025 10-K Item 7, and Q2 2026 8-K earnings release and presentation.",
-    "claim": "Following 2025 credit rating downgrades and negative outlooks from S&P and Fitch, Kohl's carries $1,325 (table in millions) in long-term debt and an unadjusted Net Debt + Leases / EBITDAR leverage ratio of 3.6x.",
-    "facts": [
-     "F1",
      "P3",
      "P6"
     ],
     "quotes": [
-     "During 2025, Moody's downgraded our corporate credit rating from Ba3 to B2 and revised their outlook to stable, and S&P downgraded our corporate credit rating from BB- to B+.",
-     "In total, the interest rate on the notes due May 2031 have increased 175 basis points since their issuance due to the coupon adjustment provision within the notes.",
-     "When adjusting for the actual lease periods exercised Kohl's Leverage Ratio is reduced to 1.8x, down from the Unadjusted Ratio of 3.6x",
-     "Our continued access to these markets depends on multiple factors, including the condition of debt capital markets, our operating performance, and our credit ratings."
+     "During 2025, Moody's downgraded our corporate credit rating from Ba3 to B2 and revised their outlook to stable, and S&P downgraded our corporate credit rating from BB- to B+."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated in 2025 10-K Item 1 and Item 1A, Q2 2026 10-Q Item 2, and Q2 2026 8-K presentation.",
-    "claim": "Intense retail competition, digital price transparency, failure to match shifting consumer tastes, and rising external theft and organized retail crime threaten Kohl's traffic, margins, and market share.",
+    "basis": "Figures stated in P4 and P6; durability of the recovery is inferred.",
+    "claim": "The sales recovery is recent and may not hold. Q3 comparable sales rose 1.2%, after a 0.9% decline in Q2 and a 0.2% decline over nine months. The Q4 outlook spans flat to up 2.0%.",
     "facts": [
-     "P1",
-     "P2",
      "P4",
      "P6"
     ],
     "quotes": [
-     "The retail industry is highly competitive.",
-     "In particular, consumers can quickly and conveniently comparison shop with digital tools, which can lead to decisions based solely on price.",
-     "As with most retailers, we also experience inventory shrinkage due to theft or damage, and we have observed an increase in external theft incidents and organized retail crime.",
-     "Additionally, declining store traffic or shifting sales from physical stores to digital platforms could lead to store closures, restructuring and other costs, and adverse effects on our financial performance."
+     "In the third quarter, we returned to top-line growth with a positive 1.2% comparable sales performance."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 10-K Item 1A and Item 7, Q2 2026 10-Q Item 2, and Q2 2026 8-K presentation.",
-    "claim": "Kohl's credit card program faces declining other revenue (down $84 million in 2025 and $17 million year to date 2026), sensitivity to customer credit defaults and funding costs, and regulatory proposals such as federal limits on credit card interest rates.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The profitability of our credit card program is sensitive to the economic health of our core moderate-income customer.",
-     "Although the Consumer Financial Protection Bureau\u2019s (CFPB) rule limiting credit card late fees was vacated, new or re-proposed rules, including potential federal limits on credit card interest rates, could adversely affect our program\u2019s profitability.",
-     "Other revenue decreased $2 million in the second quarter of 2026 and $17 million year to date 2026, due to lower revenue from our credit card operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A and the Form 8-K dated August 27, 2026.",
-    "claim": "The announced departure of Chief Merchandising Officer Nick Jones creates executive leadership transition risk.",
-    "facts": [
-     "P2",
-     "P9"
-    ],
-    "quotes": [
-     "Leadership transitions can be disruptive and may result in the loss of key personnel, changes in business direction, or difficulties in maintaining operational focus and consistency.",
-     "On August 31, 2026, Kohl\u2019s Corporation (the \u201cCompany\u201d) announced that Nick Jones, the Company\u2019s Chief Merchandising Officer, will be departing the Company effective October 1, 2026.",
-     "On August 27, 2026, Ryan M. Waymire accepted his appointment as Chief Merchandising Officer of the Company, effective September 28, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1 and Item 1A, Q2 2026 10-Q Item 2, and Q2 2026 8-K earnings release.",
-    "claim": "Kohl's generates a major portion of sales and income in the back-to-school and holiday second half, leaving full-year results disproportionately exposed to peak-season demand misses, website outages, or fulfillment delays.",
-    "facts": [
-     "P1",
-     "P2",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Our business is subject to seasonal influences, with a major portion of sales and income historically realized during the second half of the fiscal year, which includes the back-to-school and holiday seasons.",
-     "Additionally, any decrease in sales or profitability during the second half of the fiscal year could have a disproportionately adverse effect on our results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A and Q2 2026 10-Q Part II Item 1A.",
-    "claim": "Evolving state and federal ESG, PFAS, extended producer responsibility packaging, and climate reporting mandates could raise compliance and product costs or restrict sales in certain jurisdictions.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Increased governmental focus on climate change and other ESG matters has led to complex and conflicting regulatory requirements, such as increasing state-level regulations related to the use of per- and polyfluoroalkyl substances in merchandise, extended producer responsibility legislation related to packaging and waste, and climate risk and greenhouse gas reporting mandates across federal and state jurisdictions (which remain subject to evolving administrative actions, legal challenges, judicial stays, and potential rescissions or modifications) that require investment in data collection and compliance infrastructure.",
-     "Additionally, many of our suppliers may be subject to similar regulations and expectations, which may exacerbate existing risks or create new ones, including risks that may not be known to us."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A, Q2 2026 10-Q Item 2, and Q2 2026 8-K earnings release.",
-    "claim": "Severe weather, natural disasters, and unseasonable temperatures can close stores or distribution centers, disrupt inventory delivery, and force seasonal markdowns.",
+    "basis": "Stated in P2 (risk factor) and P4 (first-half results); Q3 comparison is from the P6 income statement.",
+    "claim": "Credit card program income is exposed to consumer stress and regulation. Other revenue fell in the first half on lower credit revenue, and the risk factors cite possible federal limits on credit card interest rates.",
     "facts": [
      "P2",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Severe weather\u2014including unusually heavy snow, ice, or rainstorms, and natural disasters such as earthquakes, wildfires, floods, or hurricanes\u2014has previously resulted, and could in the future result, in physical damage to or the closure of our stores, distribution centers, or other facilities.",
-     "This inconsistency between consumer spending and our typical inventory purchasing cycle may necessitate higher markdowns to clear seasonal products, which adversely affects our gross margins and profitability."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A and Item 7.",
-    "claim": "Adverse publicity, activist campaigns, AI-generated misinformation, or payment fraud and data breaches could damage Kohl's brand image, impair payment acceptance, and create third-party liability.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "This risk is exacerbated by the rise of generative artificial intelligence and deepfake technologies, which can be used to create fictitious media content, spread misinformation, or impersonate company leadership.",
-     "If we fail to comply with applicable rules or requirements for the payment methods we accept, or if payment-related data is compromised due to a breach or misuse of data, we may be liable for costs incurred by third parties or our ability to accept or facilitate certain types of payments may be impaired."
+     "Other revenue decreased $2 million in the second quarter of 2026 and $17 million year to date 2026, due to lower revenue from our credit card operations.",
+     "The profitability of our credit card program is sensitive to the economic health of our core moderate-income customer."
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
-  "unresolved_questions": [
+  "thesis_change": [
    {
-    "basis": "Stated directly in [P4], [P5], and [P6], which disclose receipt of approximately $150 million in refunds alongside explicit uncertainty over remaining claims and new tariffs.",
-    "claim": "What is the timing, legal entitlement, and ultimate amount of remaining or future IEEPA tariff refund claims beyond the approximately $150 million received in the second quarter of 2026, and how much will new tariffs under Section 122 of the Trade Act of 1974 or other trade authorities offset those recoveries?",
+    "basis": "Inferred from the absence of any digital growth figure in P6 and P7.",
+    "claim": "The Q3 release and deck do not give digital sales growth rates, so the Q2 and year-to-date growth figures are neither confirmed nor altered. The deck lists digital penetration as a Q3 key metric.",
     "facts": [
-     "P4",
-     "P5",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 results presentation (P6).",
+    "claim": "The new evidence updates proprietary-brand momentum to Q3, with comparable sales growth of 3.4%. P6 does not restate the Q2 proprietary-brand figure or the margin comparison with national brands.",
+    "facts": [
      "P6"
     ],
     "quotes": [
-     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt.",
-     "Tariff refunds of approximately $150 million were received in the quarter of which approximately $100 million flowed through gross margin."
+     "Delivered 3.4% comparable sales growth for proprietary brands in Q3, driven by increasing inventory depth, in-store investments, and scaling marketing efforts"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P4] and [P6], which report dollar amounts only for total refunds received and the second-quarter gross margin benefit without quantifying the remaining components.",
-    "claim": "How was the portion of the approximately $150 million tariff refund not included in the approximately $100 million Cost of Merchandise Sold benefit allocated among inventory reductions, vendor repayments, and customer value investments, and will those inventory reductions affect margins in later periods?",
+    "basis": "Inferred from the future-opportunities list in P6; it does not test the stated conditions directly.",
+    "claim": "The Q3 deck still frames Accessories and Sephora growth around newness, gifting assortments and brand launches. This is consistent with the conditions in the earlier point and adds no new figures.",
     "facts": [
-     "P4",
      "P6"
     ],
     "quotes": [
-     "A portion of the refund has been recorded as a reduction of inventory, shared with our vendor partners, and invested to deliver greater value to our customers",
-     "The increase was driven by tariff refunds, partially offset by repayments to vendors and investments to drive value for our customers."
+     "Expand gifting and value sets, new travel sized assortments, and exciting new brand launches"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from comparing the latest financial statements for the period ended August 1, 2026 in [F2] and [P6] against the 2026-11-21 decision time in [S0] and the 2026-11-18 dividend 8-K in [P7].",
-    "claim": "What were Kohl's third-quarter 2026 sales, gross margin, operating income, and cash flows, and is full-year 2026 performance tracking within the raised outlook of flat to (1.5%) net sales and comparable sales, 3.5% to 4.0% adjusted operating margin, and $1.80 to $2.40 adjusted diluted EPS?",
+    "basis": "Stated initiatives in P6; the dependency framing is inferred.",
+    "claim": "The Q3 deck points to the same dependencies: reliable in-stock depth, refined store allocation, and tariff refund effects on gross margin.",
     "facts": [
-     "S0",
-     "F2",
-     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Refining inventory allocation algorithms to better support lower-volume stores to ensure a more consistent shopping experience"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the updated outlook in P6.",
+    "claim": "The 2026 capital expenditure plan is now a narrower range of $365 million to $375 million. The deck again cites value messaging and VIP Cardholder promotional events.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Capital Expenditures: In the range of $365 million to $375 million"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Inferred from the absence of these topics in P6 and P7.",
+    "claim": "The new items do not address whether moderate-income customers can sustain discretionary spending. They also do not address how leadership transitions are being executed.",
+    "facts": [
      "P6",
      "P7"
     ],
-    "quotes": [
-     "Our fiscal year ends on the Saturday closest to January 31st each year.",
-     "The Company raises its guidance and includes the benefit of IEEPA Tariff refunds received in the second quarter."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in [F3] and [P6], which show no open-market share repurchases through the first six months of 2026 and announce a restart afterward without subsequent execution data.",
-    "claim": "How much common stock has Kohl's repurchased in 2026 under its restarted program for up to $100 million under the existing $3 billion authorization?",
+    "basis": "Stated in P6; the remaining-refund reading is inferred.",
+    "claim": "Cumulative tariff refunds have grown since the Q2 figures. Through nine months Kohl's received approximately $190 million, with approximately $145 million flowing through gross margin. Q3 gross margin benefited by $45 million, and the Q4 outlook still includes a tariff refund benefit.",
     "facts": [
-     "F3",
-     "P3",
      "P6"
     ],
     "quotes": [
-     "Restarting share repurchases of up to $100 million in 2026 under existing $3 billion authorization",
-     "We did not complete any share repurchases during fiscal 2025."
+     "Tariff refunds of approximately $190 million were received, of which approximately $145 million flowed through gross margin."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [F1], [P3], and [P6], where balance sheet debt totals and summary debt repurchases are reported while Note 2 is omitted from the packet.",
-    "claim": "Which specific debt issues comprised the $113 million of debt repurchased year to date in 2026 at a $15 million discount, and what are the maturity schedule, interest rates, collateral terms, and remaining availability on the 1,325 (table in millions) of long-term debt and the $1.5 billion revolving credit facility?",
+    "basis": "Stated figures in P6; the causal link in the earlier point is not tested.",
+    "claim": "Sales trends improved in Q3: net sales rose 1.3%, against a nine-month net sales decline of 0.4%. P6 does not link these results to customer sensitivity.",
     "facts": [
-     "F1",
-     "F3",
-     "P3",
      "P6"
     ],
     "quotes": [
-     "Year to date, Kohl\u2019s repurchased $113 million of debt at a discount of $15 million.",
-     "See Notes 2 and 3 to the Consolidated Financial Statements for amounts outstanding on January 31, 2026 related to debt and leases."
+     "Net sales increased 1.3% year-over-year, to $3.5 billion, with comparable sales also up 1.2%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] and [P3], which summarize the gap between unadjusted and exercised lease obligations while omitting Note 3.",
-    "claim": "What lease renewal options, escalation terms, and annual payment schedules explain the difference between the $5.1B balance sheet lease liability averaging 18 years for periods probable to be exercised and the $2.3B of contractually obligated payments averaging 4 years for periods actually exercised?",
+    "basis": "Inferred from the absence of these topics in P6 and P7.",
+    "claim": "The new items do not discuss competitive pressure, price transparency or theft and organized retail crime, so the risk is neither confirmed nor altered.",
     "facts": [
-     "F1",
-     "P3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the P6 income statement table; the drivers are not stated.",
+    "claim": "Other revenue, which includes credit card operations, rose in Q3 to 186 (table in millions) from 168. The nine-month figure was 552 versus 551, so the earlier declining trend did not hold through Q3. P6 does not explain the drivers.",
+    "facts": [
      "P6"
     ],
     "quotes": [
-     "The balance sheet lease liability of $5.1B currently reflects the lease periods probable to be exercised, which averages 18 years",
-     "The lease payments for periods actually exercised, is $2.3B, which averages 4 years"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in [P9] and [P2], which disclose the transition dates and agreement reference without stating dollar amounts or post-transition merchandising outcomes.",
-    "claim": "What separation benefits are payable to departing Chief Merchandising Officer Nick Jones, what compensation arrangements apply to incoming Chief Merchandising Officer Ryan M. Waymire, and what merchandising or assortment changes may follow the 2026 leadership transition?",
-    "facts": [
-     "P2",
-     "P9"
-    ],
-    "quotes": [
-     "In connection with his departure, Mr. Jones is entitled to receive separation benefits in accordance with the terms of the Executive Compensation Agreement, dated March 20, 2023, between Kohl\u2019s, Inc. and Mr. Jones.",
-     "Leadership transitions can be disruptive and may result in the loss of key personnel, changes in business direction, or difficulties in maintaining operational focus and consistency."
+     "Other revenue | 186 | 168 | 552 | 551"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P5] and [P6], which incorporate the first-quarter 2026 Form 10-Q risk factors by reference while omitting that filing from the evidence packet.",
-    "claim": "What risk factor changes were disclosed in Part II, Item 1A of the Form 10-Q for the first quarter of fiscal 2026, and what drove first-quarter 2026 results compared with the second quarter of 2026?",
+    "basis": "Inferred from the absence of the topic in P6 and P7.",
+    "claim": "The new items do not mention the Chief Merchandising Officer departure or any further executive changes.",
     "facts": [
-     "F2",
+     "P6",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the holiday preview and Q4 outlook in P6; no new risk language is given.",
+    "claim": "Holiday-season exposure remains. The Q3 deck presents a holiday plan built around peak volume moments, and Q4 guidance carries the remaining full-year earnings.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Leaning into broader, simplified promotional messaging to help our value proposition cut through the holiday noise during peak volume moments including Black Friday, Cyber Week, and the post-Christmas clearance window"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the absence of the topic in P6 and P7.",
+    "claim": "The new items do not address ESG, PFAS, packaging or climate-reporting regulation.",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the absence of the topic in P6 and P7.",
+    "claim": "The new items do not discuss weather, natural disasters or climate-related disruption.",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the absence of the topic in P6 and P7.",
+    "claim": "The new items do not discuss brand reputation, misinformation, payment fraud or data breaches.",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "unresolved_questions": [
+   {
+    "basis": "inferred from the reconciliation table in the 8-K release, which lists only the real estate gain, the legal settlement, impairments and the tax effect as adjustments",
+    "claim": "Does the adjusted Q3 result of $1.76 per share reflect a recurring earnings level? The reconciliation removes only the real estate gain, so the adjusted figure still appears to include the $1.16 tax benefit and the tariff refund benefit.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted net income was $207 million, or $1.76 per adjusted diluted share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items for the refund amounts; the gap in treatment is inferred from the two different totals",
+    "claim": "How much IEEPA tariff refund is still to be received, and where is the part of the refunds not recorded in gross margin recognized? Cumulative refunds received were about $190 million, with about $145 million in gross margin. The Q4 outlook still includes a refund benefit, and the company describes remaining claims as uncertain.",
+    "facts": [
      "P4",
      "P5",
      "P6"
     ],
     "quotes": [
-     "There have been no significant changes in the Risk Factors described in our 2025 Form 10-K, other than as set out in our Quarterly Report on Form 10-Q for the quarter ended May 2, 2026, in Item 1A of Part II and as follows:"
+     "Tariff refunds of approximately $190 million were received, of which approximately $145 million flowed through gross margin.",
+     "Remaining or future refund claims continue to be subject to uncertainty, including with respect to administrative processing, legal entitlement, timing, and ultimate receipt."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P6], which explicitly declines to provide a forward-looking GAAP reconciliation.",
-    "claim": "What GAAP operating margin and GAAP diluted EPS correspond to Kohl's raised 2026 guidance of 3.5% to 4.0% adjusted operating margin and $1.80 to $2.40 adjusted diluted EPS, and what non-GAAP adjustments will occur in the remainder of 2026?",
+    "basis": "stated in the 8-K cash flow statement and the CEO quote; the cause is not stated",
+    "claim": "Why did nine-month operating cash flow fall while net income rose, and how does that fit management's description of strong cash generation? Operating cash flow was 463 against 630 a year earlier, and adjusted free cash flow was 139 against 270 (table in millions).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "delivering strong cash generation"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the timing of balance sheet changes; the tax benefit amount is stated in the cited item",
+    "claim": "What tax examinations were effectively settled, which years and jurisdictions were involved, and how much cash will move? The $137 million benefit coincides with a drop in other long-term liabilities and other assets and a rise in other current assets.",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "Tax benefit of $137 million resulting from tax examinations being effectively settled was recorded during the quarter, which increased diluted EPS by $1.16 for the quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items for the plans; the reason for the change is not stated",
+    "claim": "What leverage or liquidity condition now permits buybacks? Management said in the 10-K it was not planning repurchases, but the November release plans up to $100 million in 2026 and reports $39 million repurchased in Q3.",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
-     "The Company provides adjusted operating margin and adjusted diluted earnings per share on a non-GAAP basis and does not provide a reconciliation of the Company\u2019s forward looking guidance to the most directly comparable GAAP financial measures because of the inherent difficulty in forecasting and quantifying certain amounts that are necessary for such reconciliations."
+     "While we are not currently planning for share repurchases, we expect to resume share repurchases over the long-term following improvement in overall leverage.",
+     "Planning share repurchases of up to $100 million in 2026 under existing $3 billion authorization"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2], [P3], [P4], and [P6], which describe the revenue-sharing structure and Other revenue declines without disclosing contract economics or standalone credit portfolio metrics.",
-    "claim": "What are the revenue-sharing, funding-cost, and servicing terms of the third-party private label and co-branded credit card program and the Klarna partnership, and how much did credit card revenue declines of $2 million in the second quarter of 2026 and $17 million year to date 2026 reflect lower usage versus credit losses or servicing shifts?",
+    "basis": "stated in the cited presentation; the validity of the adjustment is not testable from the evidence",
+    "claim": "Is the adjusted leverage ratio of 1.7x, which uses lease periods management expects to exercise rather than those probable under lease accounting, a reliable view of obligations? The unadjusted ratio is 3.4x.",
     "facts": [
-     "P2",
-     "P3",
-     "P4",
      "P6"
     ],
     "quotes": [
-     "The private label and co-branded Kohl's credit card accounts are owned by an unrelated third-party, but we share in the net risk-adjusted revenue of the portfolio, which is defined as the sum of finance charges, late fees, and other revenue less write-offs of uncollectible accounts.",
-     "Other revenue decreased $2 million in the second quarter of 2026 and $17 million year to date 2026, due to lower revenue from our credit card operations."
+     "Kohl's Leverage Ratio is reduced to 1.7x, down from the Unadjusted Ratio of 3.4x"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [S0], [F1], and [P6], which provide market capitalization, dollar par value of common stock, and rounded average share counts without exact share counts or dilutive security schedules.",
-    "claim": "What is the exact number of common shares issued and outstanding underlying the 2606524510 marketCap at price 22.99, and what securities account for the difference between 113 (table in millions) basic and 118 (table in millions) diluted average shares in the second quarter of 2026?",
+    "basis": "stated in the cited item for the comparable sales and outlook; durability is not answerable from the evidence",
+    "claim": "Is the Q3 return to positive comparable sales durable through the holiday quarter? Comparable sales were up 1.2% in Q3 and the Q4 outlook is flat to up 2.0%. Marketplace GMV added 0.6% to the comparison.",
     "facts": [
-     "S0",
-     "F1",
-     "F2",
      "P6"
     ],
     "quotes": [
-     "marketCap: 2606524510",
-     "price: 22.99"
+     "we returned to top-line growth with a positive 1.2% comparable sales performance"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in [P8], which describes the November 13, 2026 award as expected prior to the 2026-11-21 decision time without confirming completion or share count.",
-    "claim": "Was director Stacy Taffet's expected 2026 restricted-share grant with an approximate grant date fair value of $145,000 completed as scheduled, and how many shares were awarded?",
+    "basis": "stated in the cited item for the gain and sale count; the sale terms are not given",
+    "claim": "Which two properties were sold, for how much, and are further sales planned? The $61 million gain accounts for about 0.4% of the full-year operating margin outlook.",
     "facts": [
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "Pursuant to the Non-Employee Director Compensation Program, Ms. Taffet is expected to receive an equity award on November 13, 2026.",
-     "This award, which will be comprised of restricted shares, will have a grant date fair value of approximately $145,000, calculated in accordance with FASB ASC Topic 718."
+     "Gain on sale of real estate of $61 million was recognized related to the sale of two properties."
     ],
     "support": "supported"
    }
@@ -2028,17 +1628,17 @@
  },
  "ticker": "KSS",
  "under_review": null,
- "upside": 0.3874005508654643,
+ "upside": 0.5115043660992851,
  "valuation": null,
- "value_base": 34.95063447926235,
- "value_bear": 26.038559181607443,
- "value_bull": 44.108005547843874,
+ "value_base": 38.076989792451045,
+ "value_bear": 32.556689986239434,
+ "value_bull": 45.472200441407125,
  "value_per_filed_share": {
-  "base": 34.95063447926235,
-  "bear": 26.038559181607443,
-  "bull": 44.108005547843874
+  "base": 38.076989792451045,
+  "bear": 32.556689986239434,
+  "bull": 45.472200441407125
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +12.6 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +16.6 points a year against the required return over 3 years"
 }
