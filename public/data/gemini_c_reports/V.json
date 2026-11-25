@@ -1,32 +1,34 @@
 {
- "alpha_pts": -7.190336766480485,
+ "alpha_pts": -2.8851195669593768,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "based_on": {
   "accepted": "2026-11-05T21:07:24.000Z",
   "accepted_utc": "2026-11-06T02:07:24Z",
   "accession": "0001403161-26-000134",
-  "decision_time": "2026-11-20T02:55:24Z",
+  "decision_time": "2026-11-25T15:06:19Z",
   "form": "10-K",
   "period": "2026-09-30"
  },
- "claims": 93,
- "claims_supported": 89,
- "date": "2026-11-19T08:20:33Z",
+ "claims": 121,
+ "claims_supported": 119,
+ "date": "2026-11-25T15:06:19Z",
  "decided": {
   "flags": [
-   "run 1000: tax_rate_representative_no: The 16.3% GAAP rate includes a one-time $314m deferred tax benefit, and the non-GAAP rate of 17.9% (18.5% in Q4) with global minimum taxes is the better run-rate.",
+   "run 1000: base_year_not_representative",
+   "run 1000: tax_rate_representative_no: The base-year 16.34% GAAP effective tax rate was lowered by a one-time $314 million deferred tax benefit from a change in U.S. taxation of certain foreign earnings (Non-GAAP tax rate was 17.9% in FY26 and 17.7% in FY25, and Q4 FY26 was 18.5% GAAP / 18.4% Non-GAAP), so ongoing tax rates should sit closer to 17.5%-18.5%.",
    "run 1000: shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
    "run 1000: shares_reconciled_with_class_eps",
-   "run 1000: quotes_verified: 12 of 13",
-   "run 3000: tax_rate_representative_no: The 16.3% FY2026 rate includes a $314 million one-time deferred tax benefit, and the non-GAAP rate of 17.9% is the better run-rate, with OECD minimum-tax pressure upward.",
+   "run 1000: quotes_verified: 18 of 18",
+   "run 3000: base_year_not_representative",
+   "run 3000: tax_rate_representative_no: The FY2026 GAAP effective tax rate of 16.34% benefited from a one-time $314 million deferred tax adjustment and $284 million of legal-settlement tax benefits, whereas Visa's underlying non-GAAP effective tax rate was 17.9% (and 17.1%\u201317.4% GAAP in FY2025\u2013FY2024) alongside ongoing OECD global minimum tax and digital services tax exposure.",
    "run 3000: shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
    "run 3000: shares_reconciled_with_class_eps",
-   "run 3000: quotes_verified: 12 of 12"
+   "run 3000: quotes_verified: 19 of 19"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0807 (equity return r 0.0931), F 10",
-  "run_gap": 0.03544586549390984,
+  "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0793 (equity return r 0.0913), F 10",
+  "run_gap": 0.0616717223399097,
   "runs": {
    "1000": {
     "adjustments": {
@@ -36,14 +38,14 @@
        "printed": 124,
        "quotes": [
         {
-         "id": "F3",
-         "quote": "(Gains) losses on equity investments, net | (124) | 87 | 94"
+         "id": "P4",
+         "quote": "GAAP non-operating expense was $17 million for the fiscal full-year 2026, including $124 million of net equity investment gains. Excluding this item, non-GAAP non-operating expense was $141 million."
         }
        ],
        "quotes_given": 1,
        "scale": "millions",
        "sign": "gain",
-       "what": "Net gains on equity investments in non-operating income"
+       "what": "Net gains on equity investments included in non-operating investment income (expense) and other"
       }
      ],
      "capital_events": null,
@@ -67,55 +69,56 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 634073593087.0361,
-     "seam_ratio": 1.072119842832221,
-     "tv_share": 0.4713902677888657,
-     "wedge_rate_5": -0.041343595240357835
+     "equity_value": 665208067268.5422,
+     "seam_ratio": 1.0639762665951198,
+     "tv_share": 0.4567023793739122,
+     "wedge_rate_5": -0.036100826572463426
     },
     "flags": [
-     "tax_rate_representative_no: The 16.3% GAAP rate includes a one-time $314m deferred tax benefit, and the non-GAAP rate of 17.9% (18.5% in Q4) with global minimum taxes is the better run-rate.",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The base-year 16.34% GAAP effective tax rate was lowered by a one-time $314 million deferred tax benefit from a change in U.S. taxation of certain foreign earnings (Non-GAAP tax rate was 17.9% in FY26 and 17.7% in FY25, and Q4 FY26 was 18.5% GAAP / 18.4% Non-GAAP), so ongoing tax rates should sit closer to 17.5%-18.5%.",
      "shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
      "shares_reconciled_with_class_eps",
-     "quotes_verified: 12 of 13"
+     "quotes_verified: 18 of 18"
     ],
     "inputs": {
-     "capex_to_revenue": 0.035,
-     "fade_years": 10,
-     "long_run_op_margin": 0.62,
+     "capex_to_revenue": 0.0365,
+     "fade_years": 12,
+     "long_run_op_margin": 0.605,
      "op_margin": [
-      0.62,
-      0.625,
-      0.63,
-      0.63,
-      0.63
+      0.635,
+      0.64,
+      0.64,
+      0.638,
+      0.635
      ],
      "return_on_new_investment_long_run": 0.5,
      "rev_growth": [
-      0.12,
-      0.11,
-      0.1,
+      0.115,
+      0.105,
       0.095,
-      0.09
+      0.088,
+      0.08
      ],
-     "terminal_growth": 0.035
+     "terminal_growth": 0.04
     },
-    "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0807 (equity return r 0.0931), F 10",
+    "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0793 (equity return r 0.0913), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 4,
-     "kept": 89
+     "dropped_unsupported": 2,
+     "kept": 119
     },
     "ranges": {
      "long_run_op_margin": [
-      0.58,
-      0.66
+      0.55,
+      0.65
      ],
      "rev_growth_y3": [
-      0.07,
+      0.065,
       0.12
      ],
      "terminal_growth": [
-      0.03,
-      0.04
+      0.025,
+      0.05
      ]
     },
     "reasons": {
@@ -123,39 +126,47 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0350"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0350; depreciation (without amortization of acquired intangibles) / revenue 0.0297."
        },
        {
-        "id": "F3",
-        "quote": "Purchases of property, equipment and technology | (1,671) | (1,482) | (1,257)"
+        "id": "REC",
+        "quote": "2026-09-30 | 0.0364 | 0.0306"
        }
       ],
       "quotes_given": 2,
-      "why": "Capex has run at 3.2-3.7% of revenue over five years, with FY26 at 3.64% on technology investment. I hold the pooled average."
+      "why": "Capital expenditure averaged 3.50% of revenue over the past five fiscal years and stepped up to 3.70% in FY25 and 3.64% in FY26 as Visa invested in VisaNet, tokenization, AI/agentic commerce, and stablecoin infrastructure, supporting a 3.65% forecast ratio."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "We expect that the ongoing shift toward digital commerce and electronic payments will continue"
+        "id": "P1",
+        "quote": "Our foundation layer comprises the network infrastructure that enables connections to more than 18 billion cards, bank accounts and digital wallets with more than 400 million seller locations across more than 200 countries and territories."
+       },
+       {
+        "id": "P2",
+        "quote": "We and our competitors are developing or participating in alternative payment systems, including mobile payments, P2P services, RTP initiatives, ACH/direct debit solutions and cryptocurrency-based platforms, including stablecoin payments, that could reduce our role or disintermediate us from transaction processing."
        }
       ],
-      "quotes_given": 1,
-      "why": "A 10-year fade reflects a long runway from digital shift and value-added services but rising maturity of the core card network."
+      "quotes_given": 2,
+      "why": "Visa's global network connecting over 18 billion credentials/accounts with over 400 million seller locations across more than 200 countries and territories supports a durable multi-decade moat, justifying a 12-year fade after year 5, though not a maximum-length fade given emerging RTP, stablecoin, and AI-interface disintermediation risks."
      },
      "long_run_op_margin": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "2024-09-30 | $35,926.0 million | 0.1002 | 0.6568"
+        "id": "P2",
+        "quote": "To remain competitive, we may need to adjust our pricing or offer incentives to our clients to maintain or grow payments volume, enter new market segments, adapt to regulatory changes, and expand their use and acceptance of Visa products and services."
        },
        {
         "id": "P2",
-        "quote": "Continued pressures on pricing, incentives, fee discounts and rebates could moderate our growth."
+        "quote": "Regulators worldwide are expanding their authority over the payments industry, including IRFs, MDRs, network fees, operating rules, and related practices."
+       },
+       {
+        "id": "REC",
+        "quote": "2022-09-30 | $29,310.0 million | 0.2159 | 0.6419"
        }
       ],
-      "quotes_given": 2,
-      "why": "Long-run margin is set at 62%, near the FY2024-26 GAAP range of 60-66%. Interchange regulation, client incentive pressure and alternative rails argue against assuming the margin rises further."
+      "quotes_given": 3,
+      "why": "Visa's five-year median GAAP operating margin is 64.19%, but over the post-year-5 fade, intense competition from closed-loop networks, RTP, and stablecoins, higher client incentives to retain concentrated financial-institution clients, expanding global interchange/network fee regulation, and a rising mix of service-heavy VAS should compress long-run GAAP operating margin modestly to 60.5%."
      },
      "op_margin": {
       "quotes": [
@@ -165,111 +176,132 @@
        },
        {
         "id": "P4",
-        "quote": "Non-GAAP | $14,919 | $(141) | $5,529 | 17.9% | $25,314 | $13.27"
+        "quote": "Current year\u2019s results included special items of $1.7 billion for a litigation provision associated with the MDL case and other legal matters, $563 million for severance costs, $314 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings, and $282 million related to the donation of investments to the Visa Foundation."
+       },
+       {
+        "id": "P3",
+        "quote": "The estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation was approximately $17.4 billion(1) as of May 11, 2026 and was approximately $15.9 billion(1) as of October 1, 2026."
        }
       ],
-      "quotes_given": 2,
-      "why": "The GAAP margin is held near 62-63% because litigation provisions keep recurring (1,764 in FY26, 2,562 in FY25) and marketing and personnel costs are growing. Non-GAAP operating expenses grew 16% against 15% revenue growth, so there is little operating leverage."
+      "quotes_given": 3,
+      "why": "GAAP operating margin was 61.24% in FY26 versus 65.68% in FY24 because FY26 absorbed $1,764 million of litigation provisions, $563 million of severance, and $282 million of charitable contributions alongside recurring acquired-intangible amortization. As severance and foundation donations roll off and litigation accruals moderate toward a lower run rate\u2014while ~$15.9 billion of unresolved U.S. covered interchange claims and growing VAS/incentive costs keep margins slightly below FY24\u2014GAAP operating margin rebounds toward 63.5%-64.0%."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "return on tangible capital 1.0000"
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.1634; total debt $22,071.0 million; cash counted as excess $13,788.0 million; net debt (debt less that cash) $8,283.0 million."
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0807."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0793."
+       },
+       {
+        "id": "F1",
+        "quote": "Property, equipment and technology, net | 5,066 | 4,236"
        }
       ],
-      "quotes_given": 2,
-      "why": "Visa's tangible capital is very small relative to earnings (base return about 100%), but new investment includes acquisitions and technology spending, so I assume a still-high return of 50%, far above the break-even of 8.07%."
+      "quotes_given": 3,
+      "why": "Visa operates an asset-light four-party network with only $5,066 million in net property, equipment, and technology and negative net working capital from client incentives and settlement balances, yielding a capped 1.0000 return on tangible capital today against a 7.93% hurdle; in the long run, incremental technology, localization, and VAS capital requirements pull marginal returns on new investment down from 100% to a still-exceptional 50.0%."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Net revenue of $45.9B, an increase of 15%, or 14% on a constant-dollar basis"
+        "id": "P3",
+        "quote": "Net revenue increased 15% over the prior year, primarily due to the growth in nominal cross-border volume, processed transactions and nominal payments volume, partially offset by higher client incentives."
        },
        {
-        "id": "F2",
-        "quote": "Net revenue | $ 45,903 | $ 40,000 | $ 35,926"
+        "id": "P4",
+        "quote": "Net revenue in the fiscal fourth quarter was $12.1 billion, an increase of 13%, driven by the year-over-year growth in payments volume, cross-border volume and processed transactions. Net revenue increased 13% on a constant-dollar basis."
+       },
+       {
+        "id": "P1",
+        "quote": "Of this spend opportunity, we are pursuing an estimated more than $20 trillion annual opportunity in consumer spend, spread across cash, check, legacy Automated Clearing House (ACH), A2A payments, real-time payments (RTP) or other less effective forms of digital payments."
        }
       ],
-      "quotes_given": 2,
-      "why": "FY2026 net revenue grew 15% (14% constant-dollar), driven by payments volume of 9%, cross-border of 13% and processed transactions of 9%. I fade growth from 12% to 9% as the base grows, FX tailwind fades and value-added services (+31%) matures. BioCatch is an acquisition whose price code deducts separately."
+      "quotes_given": 3,
+      "why": "Fiscal 2026 net revenue rose 14.76% on 10% nominal payments volume growth, 9% processed transaction growth, 15% ex-intra-Europe cross-border volume growth, and 31% value-added services expansion, with Q4 moderating to 13% as client incentives rose 21%. Over years 1 to 5, Visa should compound at high-single to low-double digits (11.5% fading to 8.0%) as it converts the >$20 trillion cash, check, ACH, A2A, and RTP consumer spend opportunity and scales VAS and CMS, tempered by rising client incentives and a $45.9 billion base."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Cost of equity r 0.0913; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P3",
+        "quote": "We expect that the ongoing shift toward digital commerce and electronic payments will continue; however, the extent to which these trends support volume increases will depend on a number of factors, including consumer spending levels and broader macroeconomic conditions."
        }
       ],
       "quotes_given": 2,
-      "why": "Terminal growth is set slightly below the 3.75% nominal anchor to reflect mature scale and disintermediation risk from RTP, stablecoins and sovereignty policies."
+      "why": "With 62% of FY26 net revenue ($28,480 million) earned internationally and ongoing structural migration toward digital commerce, Visa's long-run nominal revenue growth should track slightly above the 3.75% nominal growth anchor at 4.0%, constrained by macro spending limits and mature card penetration."
      }
     },
     "risks": [
      {
-      "bear_value": 0.55,
-      "input_hit": "long_run_op_margin",
-      "risk": "Regulation II debit interchange cap cuts, Credit Card Competition Act routing mandates or other pricing and incentive pressure compress net revenue and margin"
-     },
-     {
-      "bear_value": 0.07,
-      "input_hit": "rev_growth",
-      "risk": "Disintermediation by RTP, stablecoins, agentic interfaces and sovereign payment systems slows volume and cross-border growth"
-     },
-     {
-      "bear_value": 0.03,
+      "bear_value": 0.02,
       "input_hit": "terminal_growth",
-      "risk": "Slower long-run growth from payment-sovereignty policies and closed-loop competition"
+      "risk": "Disintermediation of VisaNet by regulated stablecoins (post-GENIUS Act), government-backed real-time/A2A networks, digital currencies, or AI-controlled commerce interfaces steering payment routing."
+     },
+     {
+      "bear_value": 0.52,
+      "input_hit": "long_run_op_margin",
+      "risk": "Expanded interchange caps, credit routing mandates (such as Regulation II revisions or the Credit Card Competition Act), and client-incentive escalation outpacing volume growth."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "rev_growth",
+      "risk": "Loss or consolidation of major financial-institution clients or a consumer/cross-border travel downturn compressing transaction and cross-border volume growth."
+     },
+     {
+      "bear_value": 7,
+      "input_hit": "fade_years",
+      "risk": "Adverse antitrust/interchange litigation outcomes or forced operating-rule and localization mandates eroding network exclusivity faster than expected."
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.58,
+      "long_run_op_margin": 0.55,
       "rev_growth": [
-       0.09,
-       0.08,
-       0.07,
+       0.085,
+       0.075,
        0.065,
-       0.06
+       0.057999999999999996,
+       0.05
       ],
-      "terminal_growth": 0.03
+      "terminal_growth": 0.025
      },
      "bull": {
-      "long_run_op_margin": 0.66,
+      "long_run_op_margin": 0.65,
       "rev_growth": [
-       0.13999999999999999,
+       0.14,
        0.13,
        0.12,
-       0.11499999999999999,
-       0.10999999999999999
+       0.11299999999999999,
+       0.105
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.05
      }
     },
     "situation": {
-     "base_year_representative": "yes",
+     "base_year_representative": "no",
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "Debt of about $22.1bn is small against operating income of $28.1bn and operating cash flow of $23.7bn, and Visa refinances maturities with new notes while continuing buybacks."
+      "why": "Visa carries modest, routinely refinanced senior-note leverage of $22,071 million (0.78x operating income) after issuing $3.0 billion and repaying $5,565 million of senior notes in fiscal 2026, with no disclosed shift in target leverage."
      },
-     "margin_position": "GAAP operating margin of 61.2% is below the non-GAAP level of about 67.5% because litigation provisions ($1,764m), severance ($563m) and a Visa Foundation donation ($282m) sit inside operating expenses. The margin is below its 2024 level of 65.7% for the same reasons. The network model is asset-light and high margin, and the litigation provision is likely to keep recurring at some level.",
+     "margin_position": "Fiscal 2026 GAAP operating margin of 61.24% recovered slightly from 59.98% in fiscal 2025 but remains below the five-year median of 64.19% and fiscal 2024's 65.68% because operating expenses included $1,764 million in litigation provisions, $563 million in severance costs, $282 million in charitable investment donations, $305 million in acquired intangible amortization and acquisition-related costs, and elevated World Cup and Winter Olympics marketing, whereas underlying Non-GAAP operating margin was 67.50%.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The 16.3% GAAP rate includes a one-time $314m deferred tax benefit, and the non-GAAP rate of 17.9% (18.5% in Q4) with global minimum taxes is the better run-rate."
+      "why": "The base-year 16.34% GAAP effective tax rate was lowered by a one-time $314 million deferred tax benefit from a change in U.S. taxation of certain foreign earnings (Non-GAAP tax rate was 17.9% in FY26 and 17.7% in FY25, and Q4 FY26 was 18.5% GAAP / 18.4% Non-GAAP), so ongoing tax rates should sit closer to 17.5%-18.5%."
      },
-     "why": "FY2026 revenue growth of 14.8% is the fastest in years and was helped by about one point of FX, so it should not be extrapolated in full. The GAAP margin already carries recurring litigation charges. Some one-offs (severance, donation) depressed it, while a litigation provision of roughly 2-3% of revenue will probably persist. Base-year growth is therefore somewhat above trend but the margin is a fair starting point."
+     "why": "Fiscal 2026 net revenue growth of 14.76% benefited from a one-percentage-point foreign-exchange tailwind, major sporting-event marketing demand, and 31% value-added services expansion, while Q4 growth moderated to 13% as client incentives rose 21%. On the bottom line, GAAP operating margin (61.24%) was depressed by $1,764 million of litigation provisions, $563 million of severance, and $282 million of charitable donations, while the 16.34% tax rate reflected a one-time $314 million deferred tax benefit and non-operating items included $124 million of equity investment gains."
     },
-    "value_at_old_defaults": 183.42483788725423,
+    "value_at_old_defaults": 187.36878441885986,
     "values": {
-     "base": 343.8897531816726,
-     "bear": 255.7056408969005,
-     "bull": 437.38653510843875
+     "base": 360.7626862167895,
+     "bear": 237.78978029439745,
+     "bull": 529.8709249763942
     }
    },
    "3000": {
@@ -281,13 +313,13 @@
        "quotes": [
         {
          "id": "P4",
-         "quote": "including $124 million of net equity investment gains"
+         "quote": "GAAP non-operating expense was $17 million for the fiscal full-year 2026, including $124 million of net equity investment gains. Excluding this item, non-GAAP non-operating expense was $141 million."
         }
        ],
        "quotes_given": 1,
        "scale": "millions",
        "sign": "gain",
-       "what": "Net gains on equity investments, included in non-operating income and not expected to recur"
+       "what": "Net gains on equity investments included in non-operating income (expense)"
       }
      ],
      "capital_events": null,
@@ -311,55 +343,56 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 611515416621.8575,
-     "seam_ratio": 1.0629478075997478,
-     "tv_share": 0.474956632536525,
-     "wedge_rate_5": -0.033213138895607744
+     "equity_value": 708403570606.6467,
+     "seam_ratio": 1.069512497461873,
+     "tv_share": 0.4088584340029557,
+     "wedge_rate_5": -0.0364068949348964
     },
     "flags": [
-     "tax_rate_representative_no: The 16.3% FY2026 rate includes a $314 million one-time deferred tax benefit, and the non-GAAP rate of 17.9% is the better run-rate, with OECD minimum-tax pressure upward.",
+     "base_year_not_representative",
+     "tax_rate_representative_no: The FY2026 GAAP effective tax rate of 16.34% benefited from a one-time $314 million deferred tax adjustment and $284 million of legal-settlement tax benefits, whereas Visa's underlying non-GAAP effective tax rate was 17.9% (and 17.1%\u201317.4% GAAP in FY2025\u2013FY2024) alongside ongoing OECD global minimum tax and digital services tax exposure.",
      "shares_from_ix_class_members:0001403161-26-000134:CommonClassAMember",
      "shares_reconciled_with_class_eps",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 19 of 19"
     ],
     "inputs": {
-     "capex_to_revenue": 0.036,
-     "fade_years": 10,
-     "long_run_op_margin": 0.63,
+     "capex_to_revenue": 0.037,
+     "fade_years": 15,
+     "long_run_op_margin": 0.625,
      "op_margin": [
-      0.625,
       0.63,
-      0.635,
-      0.635,
-      0.635
+      0.638,
+      0.642,
+      0.642,
+      0.64
      ],
-     "return_on_new_investment_long_run": 0.6,
+     "return_on_new_investment_long_run": 0.55,
      "rev_growth": [
       0.115,
       0.105,
       0.095,
-      0.085,
-      0.075
+      0.088,
+      0.08
      ],
-     "terminal_growth": 0.037
+     "terminal_growth": 0.04
     },
-    "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0807 (equity return r 0.0931), F 10",
+    "old_defaults_inputs": "margin 0.6271 (persist), growth 0.0375, terminal RONIC 0.0793 (equity return r 0.0913), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 4,
-     "kept": 89
+     "dropped_unsupported": 2,
+     "kept": 119
     },
     "ranges": {
      "long_run_op_margin": [
-      0.59,
-      0.66
+      0.57,
+      0.665
      ],
      "rev_growth_y3": [
-      0.07,
+      0.065,
       0.12
      ],
      "terminal_growth": [
-      0.03,
-      0.04
+      0.025,
+      0.05
      ]
     },
     "reasons": {
@@ -367,172 +400,205 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0350"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0350; depreciation (without amortization of acquired intangibles) / revenue 0.0297."
+       },
+       {
+        "id": "REC",
+        "quote": "2026-09-30 | 0.0364 | 0.0306"
        },
        {
         "id": "F3",
         "quote": "Purchases of property, equipment and technology | (1,671) | (1,482) | (1,257)"
        }
       ],
-      "quotes_given": 2,
-      "why": "Capital spending has run at 3.2-3.7% of revenue for five years, and FY2026 was 3.64% on technology investment. I hold 3.6%."
+      "quotes_given": 3,
+      "why": "Capital expenditures for property, equipment and technology rose to 3.70% of revenue in FY2025 and 3.64% ($1,671 million) in FY2026, modestly above the 5-year pooled average of 3.50%, so holding 3.7% across Years 1\u20135 reflects continued investment in VisaNet, AI/agentic infrastructure, and tokenization."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P1",
-        "quote": "we see more than $40 trillion(2) of addressable consumer spend, excluding Russia and China"
+        "quote": "Our foundation layer comprises the network infrastructure that enables connections to more than 18 billion cards, bank accounts and digital wallets with more than 400 million seller locations across more than 200 countries and territories."
+       },
+       {
+        "id": "P2",
+        "quote": "We and our competitors are developing or participating in alternative payment systems, including mobile payments, P2P services, RTP initiatives, ACH/direct debit solutions and cryptocurrency-based platforms, including stablecoin payments, that could reduce our role or disintermediate us from transaction processing."
        }
       ],
-      "quotes_given": 1,
-      "why": "Visa has a very large, widely adopted network, so growth should step down gradually over a decade as new flows (commercial, money movement, agentic and stablecoin) mature."
+      "quotes_given": 2,
+      "why": "A 15-year fade reflects the durability of Visa's global four-party network connecting over 18 billion payment endpoints with more than 400 million seller locations across 200+ countries and territories, balanced against accelerating disintermediation threats from RTP networks, closed-loop wallets, stablecoins, and AI-controlled commerce interfaces."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2024-09-30 | $35,926.0 million | 0.1002 | 0.6568"
+        "quote": "2022-09-30 | $29,310.0 million | 0.2159 | 0.6419"
+       },
+       {
+        "id": "P4",
+        "quote": "Client incentives were $18.3 billion, up 16% over the prior year."
        },
        {
         "id": "P2",
-        "quote": "Continued pressures on pricing, incentives, fee discounts and rebates could moderate our growth."
+        "quote": "To remain competitive, we may need to adjust our pricing or offer incentives to our clients to maintain or grow payments volume, enter new market segments, adapt to regulatory changes, and expand their use and acceptance of Visa products and services. These include up-front cash payments, fee discounts, rebates, performance-based incentives, marketing and other support payments, all of which impact our net revenue and profitability."
        }
       ],
-      "quotes_given": 2,
-      "why": "Visa earned 64-66% GAAP in FY2021-24 and 60% in FY2025. I take 63%, below the peak, to allow for regulatory and competitive pressure on pricing and rising client incentives."
+      "quotes_given": 3,
+      "why": "Over the long run, operating leverage on VisaNet and resolution of U.S. covered litigation support margins near Visa's recent 64.2% 5-year GAAP median, but competitive client incentive concessions (up 16% in FY2026 to $18.3 billion), interchange/routing regulation, and localization and AI/cybersecurity compliance costs argue for fading to a slightly more conservative 62.5% steady-state GAAP operating margin."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "P3",
-        "quote": "Litigation provision decreased in fiscal 2026 over the prior year primarily due to lower accruals related to the U.S. covered litigation."
+        "id": "REC",
+        "quote": "2026-09-30 | $45,903.0 million | 0.1476 | 0.6124"
        },
        {
         "id": "F2",
         "quote": "Litigation provision | 1,764 | 2,562 | 462"
+       },
+       {
+        "id": "P4",
+        "quote": "GAAP operating expenses were $17.8 billion for the fiscal full-year 2026, an 11% increase over the prior year's results, primarily driven by increases in personnel and marketing expenses. GAAP operating expenses included the special items as well as the amortization of acquired intangible assets and acquisition-related costs in the current and prior year. Excluding these items, non-GAAP operating expenses increased 16% over the prior year, primarily driven by increases in personnel and marketing expenses."
        }
       ],
-      "quotes_given": 2,
-      "why": "GAAP margin was 61.2% in FY2026 after a $1,764 million litigation provision, which fell from $2,562 million the prior year. Severance and the donation should not repeat. I let the margin rise to about 63.5%, leaving room for continued litigation accruals and rising marketing and personnel costs."
+      "quotes_given": 3,
+      "why": "GAAP operating margin should recover from FY2026's 61.24% toward the 5-year median of 64.19% over Years 1\u20133 as the $563 million severance and $282 million charitable donation fall away and litigation provisions moderate from FY2025\u20132026 peaks, though ongoing acquired-intangible amortization, uncovered legal costs, and 16%-growing marketing/network/personnel investments keep GAAP margins below the 67.5% non-GAAP level."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Base year: return on tangible capital 1.0000"
+        "quote": "Base year: return on tangible capital 1.0000; tax rate 0.1634; total debt $22,071.0 million; cash counted as excess $13,788.0 million; net debt (debt less that cash) $8,283.0 million."
        },
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0807."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0793."
+       },
+       {
+        "id": "F1",
+        "quote": "Property, equipment and technology, net | 5,066 | 4,236"
        }
       ],
-      "quotes_given": 2,
-      "why": "The model prints a return on tangible capital of 1.0 for the base year, and the business is asset-light, with capex near 3.6% of revenue. I use a high but lower 60% for new investment because acquisitions and incentives dilute returns, and it sits far above the 8.07% breakeven."
+      "quotes_given": 3,
+      "why": "On a tangible capital basis, Visa currently earns a capped 100% return because its $5,066 million of net property, equipment and technology and negative net working capital support $28,110 million of operating income; while greater AI/data-center, tokenization, and onshore localization investment will dilute incremental tangible returns over time, they should remain far above the 7.93% break-even threshold at roughly 55%."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P4",
-        "quote": "Net revenue of $45.9B, an increase of 15%, or 14% on a constant-dollar basis"
+        "quote": "Net revenue in the fiscal full-year 2026 was $45.9 billion, an increase of 15%, driven by the year-over-year growth in payments volume, cross-border volume and processed transactions. Net revenue increased 14% on a constant-dollar basis."
+       },
+       {
+        "id": "P4",
+        "quote": "Net revenue of $12.1B, an increase of 13% on a nominal and constant-dollar basis"
        },
        {
         "id": "P3",
-        "quote": "We expect that the ongoing shift toward digital commerce and electronic payments will continue"
+        "quote": "For fiscal 2026, 2025, and 2024, revenue from value-added services was $14.2 billion, $10.9 billion and $8.8 billion, respectively. Value-added services revenue in fiscal 2026 increased 31% over the prior year, reflecting growth across all portfolios, with the largest contributions from Issuing Solutions and Advisory and Other Services."
        }
       ],
-      "quotes_given": 2,
-      "why": "FY2026 net revenue grew 15% (14% in constant dollars) on volume, transactions and value-added services growth of 31%. I fade growth from 11.5% to 7.5% over five years as the base grows and FX and pricing tailwinds normalize."
+      "quotes_given": 3,
+      "why": "After FY2026's 15% nominal (14% constant-dollar) growth and Q4's 13% constant-dollar run-rate, near-term growth should moderate to 11.5% in Year 1 and ease toward 8.0% by Year 5 as Visa laps major sporting sponsorships and faces higher client incentives, while benefiting from 9%\u201310% core volume/transaction growth, 31% value-added services expansion, and the Prisma/Newpay and pending BioCatch acquisitions."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Cost of equity r 0.0913; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "On an annual basis, we see more than $40 trillion(2) of addressable consumer spend, excluding Russia and China. Of this spend opportunity, we are pursuing an estimated more than $20 trillion annual opportunity in consumer spend, spread across cash, check, legacy Automated Clearing House (ACH), A2A payments, real-time payments (RTP) or other less effective forms of digital payments."
        }
       ],
-      "quotes_given": 1,
-      "why": "I use slightly below the code's long-run nominal growth anchor, because disintermediation from RTP, stablecoins and domestic networks is a real long-run risk even though digital payments keep growing."
+      "quotes_given": 2,
+      "why": "Visa's terminal revenue growth of 4.0% sits just above the 3.75% nominal macro anchor because global nominal consumer and commercial spending growth is supplemented over the long run by continued cash-to-digital conversion from the >$20 trillion cash, check, and legacy ACH addressable pool and growing cross-border/VAS mix."
      }
     },
     "risks": [
      {
-      "bear_value": 0.55,
+      "bear_value": 0.54,
       "input_hit": "long_run_op_margin",
-      "risk": "Interchange caps (Regulation II, the Credit Card Competition Act) and routing mandates, or large litigation outcomes, compress pricing and margin."
+      "risk": "Global regulatory interchange caps and routing mandates (e.g., Federal Reserve Regulation II reductions, reintroduced Credit Card Competition Act, EU caps) combined with financial institution client consolidation force higher client incentives and compliance costs, compressing steady-state profitability."
      },
      {
-      "bear_value": 0.06,
-      "input_hit": "rev_growth",
-      "risk": "Disintermediation by RTP, stablecoins, domestic networks and AI-agent interfaces, or a consumer spending slowdown, cuts growth."
-     },
-     {
-      "bear_value": 0.028,
+      "bear_value": 0.02,
       "input_hit": "terminal_growth",
-      "risk": "Faster growth in client incentives and sovereignty-driven loss of markets lowers terminal growth."
+      "risk": "Disintermediation from national real-time payment networks, account-to-account systems (such as the ECB pan-European A2A initiative), digital currencies, and regulated stablecoins under the U.S. GENIUS Act and EU crypto framework reduces Visa's long-run addressable payment growth."
+     },
+     {
+      "bear_value": 8,
+      "input_hit": "fade_years",
+      "risk": "AI-enabled agentic commerce interfaces and closed-loop payment networks (American Express, Discover, Alipay, WeChat Pay) steer payment credentials away from Visa and withhold transaction data, shortening Visa's competitive fade period."
+     },
+     {
+      "bear_value": 0.05,
+      "input_hit": "capex_to_revenue",
+      "risk": "Data localization and onshore processing mandates across sovereign markets, together with heavier AI/cybersecurity infrastructure demands, increase capital intensity relative to revenue."
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.59,
+      "long_run_op_margin": 0.57,
       "rev_growth": [
-       0.09000000000000001,
-       0.08,
-       0.07,
-       0.06000000000000001,
+       0.085,
+       0.075,
+       0.065,
+       0.057999999999999996,
        0.05
       ],
-      "terminal_growth": 0.03
+      "terminal_growth": 0.025
      },
      "bull": {
-      "long_run_op_margin": 0.66,
+      "long_run_op_margin": 0.665,
       "rev_growth": [
        0.14,
        0.13,
        0.12,
-       0.11,
-       0.09999999999999999
+       0.11299999999999999,
+       0.105
       ],
-      "terminal_growth": 0.04
+      "terminal_growth": 0.05
      }
     },
     "situation": {
-     "base_year_representative": "yes",
+     "base_year_representative": "no",
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "yes",
-      "why": "Total debt of about $22.1 billion is under one year of operating income and is refinanced routinely, although the BioCatch deal and buybacks may keep gross debt near this level."
+      "why": "Total debt of $22,071.0 million (under 0.8x FY2026 operating income of $28,110 million) reflects Visa's steady conservative leverage posture as it routinely refinances maturing senior notes while returning excess cash through buybacks and dividends."
      },
-     "margin_position": "The GAAP operating margin of 61.2% sits below the 64-66% of FY2021-24 and above FY2025's 60.0%. The gap to Visa's own history is mostly recurring-looking litigation provisions of $1,764 million (3.8% of revenue), plus FY2026 severance of $563 million and a $282 million charitable donation. The excluding-items (non-GAAP) margin is about 67.5%. Visa is an asset-light network, not a cyclical, so the margin should recover partway toward the median as these items shrink, but litigation accruals will likely continue.",
+     "margin_position": "FY2026 GAAP operating margin of 61.24% sits roughly 300 bps below Visa's 5-year median of 64.19% (and FY2024's 65.68%) because GAAP operating expenses absorbed $1,764 million in litigation provisions, $563 million in severance costs, and $282 million in charitable investment donations, even as underlying non-GAAP operating margin held steady around 67.5%.",
      "tax_rate_representative": {
       "answer": "no",
-      "why": "The 16.3% FY2026 rate includes a $314 million one-time deferred tax benefit, and the non-GAAP rate of 17.9% is the better run-rate, with OECD minimum-tax pressure upward."
+      "why": "The FY2026 GAAP effective tax rate of 16.34% benefited from a one-time $314 million deferred tax adjustment and $284 million of legal-settlement tax benefits, whereas Visa's underlying non-GAAP effective tax rate was 17.9% (and 17.1%\u201317.4% GAAP in FY2025\u2013FY2024) alongside ongoing OECD global minimum tax and digital services tax exposure."
      },
-     "why": "FY2026 is a clean year of 15% growth, driven by volume, processed transactions and value-added services, with an FX tailwind of about one point. Operating margin includes roughly 6 points of special or litigation items, which makes GAAP slightly conservative. Growth is above the 10-11% run-rate of recent years, so I fade it rather than extrapolate it."
+     "why": "While Visa's underlying economics remained strong in FY2026, top-line revenue growth of 14.76% was a 15-year high outside the post-pandemic recovery and acquisitions\u2014boosted by roughly 1 percentage point from FX, 31% value-added services growth tied partly to World Cup and Winter Olympics sponsorships, and the February 2026 Prisma/Newpay acquisition. Simultaneously, GAAP operating income was depressed by $2.6 billion of litigation, severance, and charitable contribution charges, non-operating income included $124 million of equity investment gains, and the 16.3% effective tax rate reflected a $314 million one-time deferred tax benefit."
     },
-    "value_at_old_defaults": 183.42483788725423,
+    "value_at_old_defaults": 187.36878441885986,
     "values": {
-     "base": 331.9125543353121,
-     "bear": 250.3884270037378,
-     "bull": 423.690632667626
+     "base": 383.7194335040139,
+     "bear": 248.68299752817865,
+     "bull": 571.4187998802826
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 183.42483788725423,
-  "value_at_old_defaults_quoted": 183.42483788725423,
+  "value_at_old_defaults": 187.36878441885986,
+  "value_at_old_defaults_quoted": 187.36878441885986,
   "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 644377500217.445,
+ "equity_value": 709863701153.7861,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 1907000000.0,
  "flags": [
-  "Visa entered into a definitive agreement to acquire BioCatch for $2.4 billion in cash, subject to customary closing conditions including applicable regulatory approvals.",
-  "Visa acquired Prisma Medios de Pago S.A.U. and Newpay S.A.U. in Argentina for a total purchase consideration of $1.5 billion in cash.",
-  "Visa completed an exchange offer accepting 3 million shares of class B-1 common stock and 120 million shares of class B-2 common stock, retiring them and issuing 61 million shares of class B-3 common stock and 23 million shares of class C common stock."
+  "Visa announced a definitive agreement to acquire BioCatch for $2.4 billion in cash, subject to customary closing conditions including applicable regulatory approvals.",
+  "Visa acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash.",
+  "Visa completed an exchange offer, accepting and retiring 3 million shares of class B-1 common stock and 120 million shares of class B-2 common stock in exchange for 61 million shares of class B-3 common stock and 23 million shares of class C common stock."
  ],
  "in_code_book": false,
- "ke": 0.0934350225480369,
+ "ke": 0.0913153703460336,
  "market_cap_at_publish": 777628138320,
  "model": "gemini-4-hydrogen-high",
  "news": [
@@ -614,74 +680,69 @@
  "pending_offer": null,
  "price_at_publish": 416.78,
  "qwen_book": null,
- "screener_commit": "715f77db58067c61fe551c9ad36633555af55470",
+ "release_truncated": [],
+ "screener_commit": "6e8a85df740775db7ce05820a99b60a489a758f8",
  "seed_base": {
-  "1000": 343.8897531816726,
-  "3000": 331.9125543353121
+  "1000": 360.7626862167895,
+  "3000": 383.7194335040139
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (decided.v3.1: balance sheet moved to the newest interim; re-valued 2026-11-20)",
+ "source": "news warning (news:2026-11-24:e0240e36f285:8-K:0001403161-26-000143)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated directly in S0, P1, and P3.",
-    "claim": "Visa Inc. operates in the Financial Services sector and Credit Services industry, providing transaction processing services\u2014primarily authorization, clearing and settlement\u2014across more than 200 countries and territories via its VisaNet network.",
+    "basis": "Stated in the cited item ([P1], 10-K Item 1 Business).",
+    "claim": "Visa operates the VisaNet transaction processing network across more than 200 countries and territories, providing authorization, clearing, and settlement services under a four-party model to consumers, issuing and acquiring financial institutions, sellers, digital banks, digital wallets, fintechs, governments, and NGOs.",
     "facts": [
-     "S0",
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "sector: Financial Services",
-     "industry: Credit Services",
      "We provide transaction processing services (primarily authorization, clearing and settlement) among consumers, issuing and acquiring financial institutions and sellers in a structure we call the \u201cfour-party\u201d model.",
      "We are focused on extending, enhancing and investing in our proprietary advanced transaction processing network, VisaNet, to offer a single connection point for facilitating money movement to multiple endpoints through various form factors and innovative technologies across more than 200 countries and territories."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P3.",
-    "claim": "Visa is not a financial institution and does not issue cards, extend credit, or bear credit risk; instead, it serves issuing and acquiring financial institutions, sellers, digital banks, digital wallets, fintechs, governments, and NGOs.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Visa is not a financial institution.",
-     "We do not issue cards, extend credit or set rates and fees for account holders of Visa card products nor do we earn revenue from or bear credit risk with respect to any of these activities.",
-     "As the payments ecosystem continues to evolve, we have broadened this model to include digital banks, digital wallets, a range of financial technology companies (fintechs), governments and non-governmental organizations (NGOs)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P2.",
-    "claim": "A significant portion of Visa's net revenue is concentrated among its largest financial institution clients, which generally have flexibility to issue non-Visa products or terminate relationships on relatively short notice.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Because a significant portion of our net revenue is concentrated among our largest clients, the loss of business from any one of them could materially harm our business, results of operations and financial condition.",
-     "While we have certain contractual protections, our clients, including some of our largest clients, generally have flexibility to issue non-Visa products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P1.",
-    "claim": "Visa's business spans consumer payments (credit, debit, and prepaid), commercial and money movement solutions (Visa Commercial Solutions and Visa Direct), and value-added services across Issuing Solutions, Acceptance Solutions, Risk and Security Solutions, and Advisory and Other Services.",
+    "basis": "Stated in the cited item ([P1], 10-K Item 1 Business).",
+    "claim": "Visa offers Visa-branded credit, debit, prepaid, and cash access payment products through clients including over 14,000 financial institutions, without issuing cards, extending credit, or bearing account-holder credit risk.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Visa\u2019s business spans consumer payments, CMS and VAS, which contribute to revenue recognized across our service, data processing, international transaction and other revenue categories.",
-     "Our solutions include Visa Commercial Solutions and Visa Direct.",
-     "Our services span four portfolios: Issuing Solutions, Acceptance Solutions, Risk and Security Solutions, and Advisory and Other Services."
+     "We offer a wide range of Visa-branded payment products that our clients, including over 14,000 financial institutions, use to develop and offer payment solutions or services, including credit, debit, prepaid and cash access programs for individual, business and government account holders.",
+     "We do not issue cards, extend credit or set rates and fees for account holders of Visa card products nor do we earn revenue from or bear credit risk with respect to any of these activities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P3.",
-    "claim": "In fiscal 2026, Visa generated $45,903 (table in millions) in net revenue, up 15% from $40,000 (table in millions) in fiscal 2025, comprising $17,423 (table in millions) in the U.S. and 28,480 (table in millions) internationally.",
+    "basis": "Stated in the cited item ([P1], 10-K Item 1 Business).",
+    "claim": "Beyond core consumer payments, Visa sells commercial and money movement solutions (Visa Commercial Solutions and Visa Direct) and value-added services across four portfolios that support both Visa and non-Visa payment flows.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our solutions include Visa Commercial Solutions and Visa Direct.",
+     "Our services span four portfolios: Issuing Solutions, Acceptance Solutions, Risk and Security Solutions, and Advisory and Other Services.",
+     "These capabilities support Visa and non-Visa payment flows and include issuer processing and engagement, acceptance and payment optimization, fraud prevention and authentication, consulting, data analytics, marketing services and open banking solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P1], 10-K Item 1 Business).",
+    "claim": "The fees Visa charges issuers and acquirers are set independently from default interchange reimbursement fees (IRFs) and merchant discount rates (MDRs) rather than being derived from them.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "These default IRFs are set independently from the revenue we receive from issuers and acquirers.",
+     "Therefore, the fees we receive from issuers and acquirers are not derived from IRFs or MDRs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "In fiscal 2026, Visa generated net revenue of $45,903 (table in millions), up 15% from $40,000 (table in millions) in fiscal 2025, with $17,423 (table in millions) earned in the U.S. and 28,480 (table in millions) earned internationally.",
     "facts": [
      "P3"
     ],
@@ -693,48 +754,76 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P3.",
-    "claim": "Service revenue of $19,918 (table in millions) in fiscal 2026 is earned for services supporting client usage of Visa's payment services and certain Issuing Solutions VAS, and is primarily driven by prior-quarter nominal payments volume, which grew 10%.",
+    "basis": "Stated in the cited items ([P1], 10-K Item 1 Business; [P3], 10-K Item 7 MD&A).",
+    "claim": "Service revenue was $19,918 (table in millions) in fiscal 2026, up 14%, earned for supporting client usage of Visa payment services and certain Issuing Solutions and assessed primarily on prior-quarter nominal payments volume.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "Service revenue in a given quarter is primarily assessed based on nominal payments volume in the prior quarter.",
-     "Service revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal payments volume of 10%, select pricing modifications and growth in card benefits."
+     "SERVICE REVENUE Earned for services provided in support of client usage of Visa\u2019s payment services and VAS related to certain Issuing Solutions",
+     "Service revenue | $19,918 | $17,539 | $16,114 | 14% | 9%",
+     "Service revenue in a given quarter is primarily assessed based on nominal payments volume in the prior quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P3.",
-    "claim": "Data processing revenue of 23,374 (table in millions) in fiscal 2026 is earned for authorization, clearing, settlement, network access, and certain VAS, and is primarily driven by processed transactions, which rose 9% to 281,331 (table in millions).",
+    "basis": "Stated in the cited items ([P1], 10-K Item 1 Business; [P3], 10-K Item 7 MD&A).",
+    "claim": "Data processing revenue was 23,374 (table in millions) in fiscal 2026, up 17%, earned for authorization, clearing, settlement, network access, maintenance, and certain value-added services.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "Payments volume is the primary driver for our service revenue, and the number of processed transactions is the primary driver for our data processing revenue.",
-     "Data processing revenue increased in fiscal 2026 over the prior year primarily due to growth in processed transactions of 9%, select pricing modifications, growth in value-added services and higher cross-border transaction mix."
+     "DATA PROCESSING REVENUE Earned for authorization, clearing and settlement; VAS primarily related to Acceptance Solutions, Risk and Security Solutions and certain Issuing Solutions; network access; and other maintenance and support services that facilitate transaction and information processing among our clients globally",
+     "Data processing revenue | 23,374 | 19,993 | 17,714 | 17% | 13%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P3.",
-    "claim": "International transaction revenue of 15,251 (table in millions) in fiscal 2026 is earned for cross-border processing and currency conversion activities, driven primarily by nominal cross-border volume excluding intra-Europe transactions, which grew 15%.",
+    "basis": "Stated in the cited items ([P1], 10-K Item 1 Business; [P3], 10-K Item 7 MD&A).",
+    "claim": "International transaction revenue was 15,251 (table in millions) in fiscal 2026, up 8%, earned for cross-border transaction processing and currency conversion activities.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "International transaction revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal cross-border volume of 15%, excluding transactions within Europe, partially offset by lower volatility of a broad range of currencies and business mix."
+     "INTERNATIONAL TRANSACTION REVENUE Earned for cross-border transaction processing and currency conversion activities",
+     "International transaction revenue | 15,251 | 14,166 | 12,665 | 8% | 12%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P3.",
-    "claim": "Other revenue of 5,677 (table in millions) in fiscal 2026 consists mainly of Advisory and Other Services, certain Issuing Solutions, and licensing and certification fees, while total value-added services revenue across categories reached $14.2 billion, up 31%.",
+    "basis": "Stated in the cited items ([P1], 10-K Item 1 Business; [P3], 10-K Item 7 MD&A).",
+    "claim": "Other revenue was 5,677 (table in millions) in fiscal 2026, up 40%, consisting mainly of Advisory and Other Services, certain Issuing Solutions, brand or technology license fees, and account holder, certification, and licensing fees.",
     "facts": [
      "P1",
+     "P3"
+    ],
+    "quotes": [
+     "OTHER REVENUE Consists mainly of VAS primarily related to Advisory and Other Services and certain Issuing Solutions; license fees for use of the Visa brand or technology; and fees for account holder services, certification and licensing",
+     "Other revenue | 5,677 | 4,053 | 3,197 | 40% | 27%",
+     "Other revenue increased in fiscal 2026 over the prior year primarily due to growth in Advisory and Other Services and select pricing modifications."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items ([P1], 10-K Item 1 Business; [P3], 10-K Item 7 MD&A).",
+    "claim": "Client incentives reduced gross revenue by (18,317) (table in millions) in fiscal 2026, up 16%, and are paid to financial institutions, sellers, and other business partners to grow payments volume and product acceptance.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "CLIENT INCENTIVES Paid to financial institution clients, sellers and other business partners to grow payments volume; increase Visa product acceptance; encourage seller acceptance and use of Visa\u2019s payment services; and drive innovation",
+     "Client incentives | (18,317) | (15,751) | (13,764) | 16% | 14%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "Value-added services revenue across all portfolios rose 31% to $14.2 billion in fiscal 2026 from $10.9 billion in fiscal 2025, led by Issuing Solutions and Advisory and Other Services.",
+    "facts": [
      "P3"
     ],
     "quotes": [
@@ -744,151 +833,192 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P3.",
-    "claim": "Client incentives of (18,317) (table in millions) in fiscal 2026, up 16%, are netted against gross revenue and paid to financial institution clients, sellers, and other partners to grow payments volume, acceptance, and innovation.",
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "In fiscal 2026, revenue growth was driven by 10% nominal payments volume growth, 9% growth in Visa processed transactions to 281,331 (table in millions), 15% nominal cross-border volume growth excluding Europe, select pricing modifications, and value-added services growth.",
     "facts": [
-     "P1",
      "P3"
     ],
     "quotes": [
-     "Client incentives | (18,317) | (15,751) | (13,764) | 16% | 14%",
-     "Client incentives increased in fiscal 2026 over the prior year primarily due to growth in payments volume."
+     "Service revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal payments volume of 10%, select pricing modifications and growth in card benefits.",
+     "Data processing revenue increased in fiscal 2026 over the prior year primarily due to growth in processed transactions of 9%, select pricing modifications, growth in value-added services and higher cross-border transaction mix.",
+     "Visa processed transactions | 281,331 | 257,545 | 233,758 | 9% | 10%",
+     "International transaction revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal cross-border volume of 15%, excluding transactions within Europe, partially offset by lower volatility of a broad range of currencies and business mix."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P1 and P2.",
-    "claim": "Visa sets its fees to issuers and acquirers independently from interchange reimbursement fees (IRFs) and merchant discount rates (MDRs), though regulatory caps on IRFs or MDRs and competitive pricing pressure can reduce volume, net revenue, and profits.",
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "Exchange rate movements and currency volatility also move Visa's net revenue; in fiscal 2026, foreign exchange movements added approximately one percentage point to net revenue growth while lower currency volatility partially offset international transaction revenue growth.",
     "facts": [
-     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "In fiscal 2026, exchange rate movements increased our net revenue growth by approximately one percentage point.",
+     "International transaction revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal cross-border volume of 15%, excluding transactions within Europe, partially offset by lower volatility of a broad range of currencies and business mix."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P2], 10-K Item 1A Risk Factors).",
+    "claim": "Regulatory caps on interchange and merchant fees, domestic payment localization mandates, and competition from closed-loop networks, real-time payment platforms, and stablecoins can pressure Visa's volumes, pricing, and costs.",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "Therefore, the fees we receive from issuers and acquirers are not derived from IRFs or MDRs.",
-     "Although we generally do not receive IRF revenue directly, IRFs are a key competitive factor that affects our overall payments volume and net revenue."
+     "Although we generally do not receive IRF revenue directly, IRFs are a key competitive factor that affects our overall payments volume and net revenue.",
+     "National laws protecting domestic providers or mandating local processing continue to evolve in the face of geopolitical developments, may increase costs; affect our ability to effectively compete with local providers, reduce payments volume and net revenue; limit our ability to leverage global processing capabilities; restrict growth, innovation, and market entry; and create new competitors, all of which could materially harm our business and financial results.",
+     "We and our competitors are developing or participating in alternative payment systems, including mobile payments, P2P services, RTP initiatives, ACH/direct debit solutions and cryptocurrency-based platforms, including stablecoin payments, that could reduce our role or disintermediate us from transaction processing."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P3.",
-    "claim": "Macro and secular drivers of Visa's revenue include consumer spending resilience, ongoing expansion in digital commerce, cross-border ecommerce and travel activity, select pricing modifications, and foreign currency exchange rate movements.",
+    "basis": "Stated in the cited items ([F2], 10-K Statements of Operations; [P3], 10-K Item 7 MD&A).",
+    "claim": "Total operating expenses were $17,793 (table in millions) in fiscal 2026, up 11% from $16,006 (table in millions) in fiscal 2025, driven primarily by higher personnel and marketing expenses.",
     "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Volume growth was driven primarily by continued resilience in consumer spending and ongoing expansion in digital commerce.",
-     "Exchange rate movements increased our net revenue growth by approximately one percentage point."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in P3.",
-    "claim": "In fiscal 2026, total operating expenses were $17,793 (table in millions), up 11% from fiscal 2025, led by personnel ($7,934 in the table in millions), marketing (2,315 in the table in millions), general and administrative (2,297 in the table in millions), and litigation provision (1,764 in the table in millions).",
-    "facts": [
+     "F2",
      "P3"
     ],
     "quotes": [
      "Total operating expenses | $17,793 | $16,006 | $12,331 | 11% | 30%",
-     "Personnel | $7,934 | $6,961 | $6,264 | 14% | 11%"
+     "Operating expenses increased 11% over the prior year, primarily driven by higher personnel and marketing expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P3.",
-    "claim": "Other fiscal 2026 operating expenses were depreciation and amortization of 1,403, network and processing of 1,066, and professional fees of 1,014 (table in millions), with cost growth driven by headcount, severance, acquisitions, sponsorship campaigns, technology investments, and Visa Foundation donations.",
+    "basis": "Stated in the cited items ([P3], 10-K Item 7 MD&A; [P4], Q4/FY26 earnings release).",
+    "claim": "Personnel expense is Visa's largest operating cost at $7,934 (table in millions) in fiscal 2026, up 14%, driven by higher employee headcount, acquisition-related compensation, and $563 million of severance costs.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Personnel | $7,934 | $6,961 | $6,264 | 14% | 11%",
+     "Personnel expenses increased in fiscal 2026 over the prior year primarily due to a higher number employees and compensation costs, including from acquisitions, and higher severance costs resulting from actions taken to drive operational efficiencies and reinvest in high-growth opportunities.",
+     "Current year\u2019s results included special items of $1.7 billion for a litigation provision associated with the MDL case and other legal matters, $563 million for severance costs, $314 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings, and $282 million related to the donation of investments to the Visa Foundation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "Marketing expenses rose 37% to 2,315 (table in millions) in fiscal 2026, driven by client marketing and brand campaigns linked in part to major sporting sponsorships.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Depreciation and amortization | 1,403 | 1,220 | 1,034 | 15% | 18%",
-     "Network and processing expenses increased in fiscal 2026 over the prior year primarily due to continued investments in technology and processing network to support ongoing business growth and incremental costs from acquired businesses.",
-     "General and administrative expenses increased in fiscal 2026 over the prior year primarily due to charitable contributions to the Visa Foundation in the current year."
+     "Marketing | 2,315 | 1,684 | 1,560 | 37% | 8%",
+     "Marketing expenses increased in fiscal 2026 over the prior year primarily due to higher spending for client marketing and various campaigns, both driven in part by the FIFA World Cup 2026TM and the Olympic and Paralympic Winter Games Milano Cortina 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in P2, P3, and P6.",
-    "claim": "Litigation provisions reflect accruals for U.S. covered interchange multidistrict litigation and uncovered legal matters, while monetary liabilities for U.S. covered litigation are recovered through downward adjustments to class B common stock conversion rates.",
+    "basis": "Stated in the cited items ([P3], 10-K Item 7 MD&A; [P4], Q4/FY26 earnings release).",
+    "claim": "General and administrative expenses rose 19% to 2,297 (table in millions) in fiscal 2026, reflecting cardholder benefits, facilities, and corporate overhead, and increased primarily due to $282 million in investment donations to the Visa Foundation.",
     "facts": [
-     "P2",
      "P3",
-     "P6"
+     "P4"
     ],
     "quotes": [
-     "Under the U.S. retrospective responsibility plan, we recover the monetary liabilities related to the U.S. covered litigation through a downward adjustment to the rates at which shares of our class B-1, B-2 and B-3 common stock ultimately convert into shares of class A common stock.",
-     "The conversion rate adjustments have the same effect on earnings per share as repurchasing the Company\u2019s class A common stock."
+     "General and administrative | 2,297 | 1,926 | 1,598 | 19% | 21%",
+     "General and administrative expenses increased in fiscal 2026 over the prior year primarily due to charitable contributions to the Visa Foundation in the current year.",
+     "Current year\u2019s results included special items of $1.7 billion for a litigation provision associated with the MDL case and other legal matters, $563 million for severance costs, $314 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings, and $282 million related to the donation of investments to the Visa Foundation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "Network and processing expenses of 1,066 (table in millions, up 19%), depreciation and amortization of 1,403 (table in millions, up 15%), and professional fees of 1,014 (table in millions, up 34%) are driven by technology infrastructure investments, client engagements, legal fees, and acquisitions.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Network and processing | 1,066 | 894 | 778 | 19% | 15%",
+     "Depreciation and amortization | 1,403 | 1,220 | 1,034 | 15% | 18%",
+     "Professional fees | 1,014 | 759 | 635 | 34% | 19%",
+     "Network and processing expenses increased in fiscal 2026 over the prior year primarily due to continued investments in technology and processing network to support ongoing business growth and incremental costs from acquired businesses.",
+     "Professional fees increased in fiscal 2026 over the prior year primarily due to higher legal fees, higher expenses associated with client engagements and costs incurred in the current year in connection with our acquisitions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item ([P3], 10-K Item 7 MD&A).",
+    "claim": "Litigation provision expenses decreased from 2,562 (table in millions) in fiscal 2025 to 1,764 (table in millions) in fiscal 2026, reflecting accruals for U.S. covered interchange litigation and uncovered legal matters.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Litigation provision | 1,764 | 2,562 | 462 | (31%) | NM",
+     "Litigation provision decreased in fiscal 2026 over the prior year primarily due to lower accruals related to the U.S. covered litigation."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the cited item (10-K Item 1 Business).",
-    "claim": "Visa is a leading global digital payments network connecting over 18 billion cards, bank accounts, and digital wallets with more than 400 million seller locations across more than 200 countries and territories.",
+    "basis": "stated in the cited item (10-K Item 1 Business)",
+    "claim": "Visa operates a global payments network connecting more than 18 billion cards, bank accounts, and digital wallets with more than 400 million seller locations across more than 200 countries and territories, serving over 14,000 financial institutions.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Visa is one of the world\u2019s leaders in digital payments.",
-     "Our foundation layer comprises the network infrastructure that enables connections to more than 18 billion cards, bank accounts and digital wallets with more than 400 million seller locations across more than 200 countries and territories."
+     "Our foundation layer comprises the network infrastructure that enables connections to more than 18 billion cards, bank accounts and digital wallets with more than 400 million seller locations across more than 200 countries and territories.",
+     "We offer a wide range of Visa-branded payment products that our clients, including over 14,000 financial institutions, use to develop and offer payment solutions or services, including credit, debit, prepaid and cash access programs for individual, business and government account holders."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1 Business).",
-    "claim": "Visa serves over 14,000 financial institution clients and had over 5 billion issued payment credentials available for use in fiscal 2026.",
+    "basis": "stated in the cited item (10-K Item 1 Business)",
+    "claim": "In fiscal 2026, Visa's total payments and cash volume reached $18 trillion and 355 billion Visa-branded transactions were processed globally, including 281 billion processed directly by Visa.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "We offer a wide range of Visa-branded payment products that our clients, including over 14,000 financial institutions, use to develop and offer payment solutions or services, including credit, debit, prepaid and cash access programs for individual, business and government account holders.",
-     "During fiscal 2026, Visa\u2019s total payments and cash volume was $18 trillion, and we had over 5 billion payment credentials, which are issued Visa card accounts, that were available to be used at more than 400 million(1) seller locations worldwide."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1 Business).",
-    "claim": "In fiscal 2026, Visa's total payments and cash volume was $18 trillion across 355 billion Visa-branded transactions, of which 281 billion were processed by Visa.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
+     "During fiscal 2026, Visa\u2019s total payments and cash volume was $18 trillion, and we had over 5 billion payment credentials, which are issued Visa card accounts, that were available to be used at more than 400 million(1) seller locations worldwide.",
      "During fiscal 2026, 355 billion payments and cash transactions with Visa\u2019s brand were processed by Visa or other networks, equating to an average of 973 million transactions per day.",
-     "Of the 355 billion total transactions, 281 billion were processed by Visa.",
-     "During fiscal 2026, Visa\u2019s total payments and cash volume was $18 trillion, and we had over 5 billion payment credentials, which are issued Visa card accounts, that were available to be used at more than 400 million(1) seller locations worldwide."
+     "Of the 355 billion total transactions, 281 billion were processed by Visa."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 7 MD&A).",
-    "claim": "Visa generated $45,903 (table in millions) in net revenue in fiscal 2026, up 15% from $40,000 (table in millions) in fiscal 2025, and $23,504 (table in millions) in GAAP net income.",
+    "basis": "stated in the cited items (10-K income statement and Item 7 MD&A)",
+    "claim": "In fiscal 2026, net revenue rose 15% to $45,903 (table in millions) and GAAP net income rose 17% to $23,504 (table in millions), alongside 9% growth in Visa processed transactions.",
     "facts": [
+     "F2",
      "P3"
     ],
     "quotes": [
-     "Net revenue | $45,903 | $40,000 | $35,926 | 15% | 11%",
-     "Net income | $23,504 | $20,058 | $19,743 | 17% | 2%",
      "Net revenue increased 15% over the prior year, primarily due to the growth in nominal cross-border volume, processed transactions and nominal payments volume, partially offset by higher client incentives."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1 Business and Item 7 MD&A).",
-    "claim": "Value-added services revenue rose 31% in fiscal 2026 to $14.2 billion from $10.9 billion in fiscal 2025 and $8.8 billion in fiscal 2024, supporting both Visa and non-Visa payment flows.",
+    "basis": "stated in the cited items (10-K Item 1 Business and Item 7 MD&A)",
+    "claim": "Value-added services revenue grew 31% in fiscal 2026 to $14.2 billion, supporting both Visa and non-Visa payment flows across four portfolios.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "These capabilities support Visa and non-Visa payment flows and include issuer processing and engagement, acceptance and payment optimization, fraud prevention and authentication, consulting, data analytics, marketing services and open banking solutions.",
-     "For fiscal 2026, 2025, and 2024, revenue from value-added services was $14.2 billion, $10.9 billion and $8.8 billion, respectively.",
-     "Value-added services revenue in fiscal 2026 increased 31% over the prior year, reflecting growth across all portfolios, with the largest contributions from Issuing Solutions and Advisory and Other Services."
+     "Value-added services revenue in fiscal 2026 increased 31% over the prior year, reflecting growth across all portfolios, with the largest contributions from Issuing Solutions and Advisory and Other Services.",
+     "These capabilities support Visa and non-Visa payment flows and include issuer processing and engagement, acceptance and payment optimization, fraud prevention and authentication, consulting, data analytics, marketing services and open banking solutions."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1 Business).",
-    "claim": "Contactless and tokenization adoption is widespread across Visa's network, with Tap to Pay comprising 84% of global and 76% of United States face-to-face transactions in September 2026 and over 60% of ecommerce transactions tokenized as of September 30, 2026.",
+    "basis": "stated in the cited items (10-K Item 1 Business and Item 7 MD&A)",
+    "claim": "Operating under a four-party model rather than as a financial institution, Visa earns fees for network and processing services without issuing cards, extending credit, or bearing account-holder credit risk.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We provide transaction processing services (primarily authorization, clearing and settlement) among consumers, issuing and acquiring financial institutions and sellers in a structure we call the \u201cfour-party\u201d model.",
+     "We do not issue cards, extend credit or set rates and fees for account holders of Visa card products nor do we earn revenue from or bear credit risk with respect to any of these activities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1 Business)",
+    "claim": "Contactless Tap to Pay comprised 84% of face-to-face transactions globally and 76% in the United States in September 2026, and over 60% of ecommerce transactions were tokenized as of September 30, 2026.",
     "facts": [
      "P1"
     ],
@@ -899,131 +1029,81 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1 Business).",
-    "claim": "Visa operates as a transaction processor rather than a financial institution, so it does not issue cards, extend credit, or bear credit risk on Visa card products.",
+    "basis": "stated in the cited item (10-K Item 1 Business, citing third-party studies for calendar year 2024)",
+    "claim": "Visa is pursuing an estimated more than $20 trillion annual consumer spend opportunity still in cash, check, legacy ACH, A2A, or RTP payments, while expanding into agentic commerce and over 225 stablecoin-linked card programs across more than 50 countries.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Visa is not a financial institution.",
-     "We do not issue cards, extend credit or set rates and fees for account holders of Visa card products nor do we earn revenue from or bear credit risk with respect to any of these activities."
+     "Of this spend opportunity, we are pursuing an estimated more than $20 trillion annual opportunity in consumer spend, spread across cash, check, legacy Automated Clearing House (ACH), A2A payments, real-time payments (RTP) or other less effective forms of digital payments.",
+     "As we extend our reach across a broader range of payment credentials and funding sources, stablecoin-linked card issuance has expanded to over 225 programs across more than 50 countries."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1 Business), citing Visa analysis based on third-party studies for calendar year 2024.",
-    "claim": "Visa is pursuing an estimated more than $20 trillion annual consumer spend opportunity in cash, check, legacy ACH, A2A, RTP, and other forms within more than $40 trillion of addressable consumer spend excluding Russia and China.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "On an annual basis, we see more than $40 trillion(2) of addressable consumer spend, excluding Russia and China.",
-     "Of this spend opportunity, we are pursuing an estimated more than $20 trillion annual opportunity in consumer spend, spread across cash, check, legacy Automated Clearing House (ACH), A2A payments, real-time payments (RTP) or other less effective forms of digital payments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1 Business).",
-    "claim": "Visa is extending into emerging payment flows with over 225 stablecoin-linked card programs across more than 50 countries and its Visa Intelligent Commerce platform for agentic transactions.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "As we extend our reach across a broader range of payment credentials and funding sources, stablecoin-linked card issuance has expanded to over 225 programs across more than 50 countries.",
-     "Through our agentic platform, Visa Intelligent Commerce, we are working with frontier AI labs, sellers, issuers and other ecosystem participants to make agent-initiated transactions transparent, trusted and scalable."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Visa faces intense competition from closed-loop payment networks\u2014including American Express, Discover, Alipay, and WeChat Pay\u2014as well as digital wallets, fintechs, and government-backed payment platforms.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "Visa faces intense competition from closed-loop networks such as American Express, Discover, Alipay, and WeChat Pay, as well as RTP, ACH, and stablecoin payment systems that could disintermediate its network.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Our core products compete with cash, checks, electronic payments, digital currencies and other payments networks, including closed-loop systems, digital wallets, alternative payments providers, and government-backed payment platforms.",
-     "Certain competitors, including American Express, Discover (owned by Capital One), private-label networks and alternative systems such as Alipay and WeChat Pay, operate closed-loop systems with direct connections to both sellers and consumers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Industry participants may withhold transaction data used to power Visa's solutions in order to support competing offerings, potentially reducing the effectiveness of Visa's value-added services.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Industry participants may also withhold data used to power our solutions in order to support their own competing offerings, potentially reducing the effectiveness of our value-added services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors; counter from 10-K Item 1 Business).",
-    "claim": "Advancements in generative AI and agentic commerce could weaken Visa's position if competitors achieve structural efficiency gains or if platforms controlling customer interfaces dictate payment initiation, credential selection, and seller choice.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "As AI-enabled commerce continues to evolve, digital wallets, software platforms, agentic commerce experiences, mobile applications and other technologies may increasingly influence payment initiation, credential selection and seller choice.",
-     "Companies that control these customer interfaces may gain greater influence over the payments ecosystem and the flow of transaction data."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Alternative payment rails\u2014including RTP networks, ACH/direct debit solutions, and stablecoin payments\u2014could disintermediate Visa from transaction processing, supported by regulatory clarity such as the U.S. GENIUS Act enacted in July 2025.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We and our competitors are developing or participating in alternative payment systems, including mobile payments, P2P services, RTP initiatives, ACH/direct debit solutions and cryptocurrency-based platforms, including stablecoin payments, that could reduce our role or disintermediate us from transaction processing.",
+     "Certain competitors, including American Express, Discover (owned by Capital One), private-label networks and alternative systems such as Alipay and WeChat Pay, operate closed-loop systems with direct connections to both sellers and consumers.",
      "The enactment of the U.S. GENIUS Act in July 2025 and the EU's crypto-asset framework, along with emerging regulatory frameworks in other countries, provide increasing regulatory certainty for stablecoins, which could disrupt existing payment networks, particularly in cross-border, B2B, and currency-unstable markets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Regulatory caps and routing mandates on interchange fees, merchant discount rates, and network fees\u2014such as U.S. Federal Reserve debit rule revisions, the reintroduced Credit Card Competition Act, and EU interchange caps\u2014could make Visa's network less attractive relative to closed-loop systems.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "Rapid advances in AI, digital wallets, and agentic commerce may give interface-controlling competitors greater influence over payment credential selection and allow industry participants to withhold transaction data from Visa's solutions.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "The Federal Reserve has recently taken actions to revisit its regulations that implement these aspects of the Dodd-Frank Act, including requiring issuers to ensure dual-network availability for ecommerce debit transactions and proposing further rate reductions with automatic biennial adjustments.",
-     "Separately, Congress has reintroduced the Credit Card Competition Act (CCCA), legislation requiring, among other things, large issuers to offer routing choices for credit transactions.",
-     "Reduced IRFs may make our network less attractive to issuers and acquirers and may make other payment systems including closed-loop payment systems that connect directly with sellers and consumers more competitive."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Payment sovereignty policies, data localization mandates, domestic processors such as China's UnionPay, and central bank digital currencies or regional A2A systems such as the ECB's European Payments Initiative threaten Visa's international market access and processing volume.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In China, UnionPay remains the predominant domestic processor and acceptance network for bank cards.",
-     "An increasing number of jurisdictions are also pursuing central bank digital currencies for retail payments.",
-     "For example, the ECB has launched the European Payments Initiative's pan-European A2A payment system and a multi-year effort to explore a digital euro, as an alternative to foreign digital currency and payment service providers."
+     "As AI-enabled commerce continues to evolve, digital wallets, software platforms, agentic commerce experiences, mobile applications and other technologies may increasingly influence payment initiation, credential selection and seller choice.",
+     "Industry participants may also withhold data used to power our solutions in order to support their own competing offerings, potentially reducing the effectiveness of our value-added services."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1A Risk Factors and Q4/FY2026 earnings release).",
-    "claim": "Visa faces client concentration and pricing pressure because large financial institutions can issue competing products or terminate agreements on short notice, contributing to client incentives of $18.3 billion in fiscal 2026, up 16% over the prior year.",
+    "basis": "stated in the cited items (10-K Item 1A Risk Factors and Q4/FY2026 earnings release)",
+    "claim": "Because net revenue is concentrated among large financial institution clients that can issue non-Visa products or terminate on short notice, competitive pricing pressure pushed client incentives up 16% in fiscal 2026 to $18.3 billion.",
     "facts": [
      "P2",
      "P4"
     ],
     "quotes": [
      "Because a significant portion of our net revenue is concentrated among our largest clients, the loss of business from any one of them could materially harm our business, results of operations and financial condition.",
-     "In certain circumstances, our financial institution clients may terminate our contractual relationship on relatively short notice without paying significant early termination fees.",
      "Client incentives were $18.3 billion, up 16% over the prior year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Sellers and seller-affiliated groups in the U.S., Australia, Canada, and Europe continue to challenge acceptance costs through lobbying, regulatory intervention, lawsuits, surcharging, or refusing Visa products.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "Regulatory caps and routing mandates on interchange reimbursement fees and merchant discount rates in the U.S., EU, and other jurisdictions threaten to reduce the competitiveness of Visa's four-party network.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "U.S. Federal Reserve regulations cap U.S. debit IRFs for large issuers, and the Dodd-Frank Act restricts network exclusivity and preferred routing for debit and prepaid products.",
+     "Reduced IRFs may make our network less attractive to issuers and acquirers and may make other payment systems including closed-loop payment systems that connect directly with sellers and consumers more competitive."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "Government payment sovereignty policies, data and processing localization mandates, central bank RTP and retail CBDC initiatives, and market access barriers in countries such as China restrict Visa's ability to compete.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Governments in numerous jurisdictions seek to strengthen domestic control over payments infrastructure and reduce reliance on international payment providers like Visa, through market access barriers, preferential domestic regulations, localization requirements and support for domestic systems.",
+     "In China, UnionPay remains the predominant domestic processor and acceptance network for bank cards."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "Sellers and seller-affiliated groups in the U.S., Australia, Canada, and Europe actively challenge acceptance costs and network practices through legislation, regulation, lawsuits, surcharging, or refusing Visa products.",
     "facts": [
      "P2"
     ],
@@ -1033,8 +1113,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (10-K Item 1A Risk Factors and Item 7 MD&A).",
-    "claim": "Ongoing litigation and government investigations\u2014including U.S. covered interchange multidistrict litigation with approximately $15.9 billion in estimated interchange reimbursement fees at issue in unresolved damages claims as of October 1, 2026\u2014could force changes to Visa's default IRFs, operating rules, or pricing.",
+    "basis": "stated in the cited items (10-K Item 1A Risk Factors and Item 7 MD&A)",
+    "claim": "Antitrust litigation and government investigations\u2014including unresolved U.S. covered claims involving approximately $15.9 billion in estimated interchange reimbursement fees as of October 1, 2026\u2014threaten monetary liabilities and forced changes to Visa's operating rules, IRFs, and pricing.",
     "facts": [
      "P2",
      "P3"
@@ -1046,8 +1126,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (10-K Item 1A Risk Factors).",
-    "claim": "Expanding privacy, cybersecurity, and AI regulations\u2014including the EU AI Act taking effect for most high-risk systems in 2027\u2014could raise compliance costs and weaken the competitiveness of Visa's data-driven products.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "Fragmented privacy, cybersecurity, and AI regulations such as GDPR and the EU AI Act (taking effect for most high-risk AI systems in 2027), along with third-party AI model risks, could raise compliance costs and hinder product competitiveness.",
     "facts": [
      "P2"
     ],
@@ -1060,22 +1140,22 @@
   ],
   "financial_health": [
    {
-    "basis": "stated in F1 and P4",
-    "claim": "At Sep. 30, 2026, Visa held $ 12,938 in cash and cash equivalents and 1,145 in current investment securities (table in millions), down from $ 17,164 and 1,833 at Sep. 30, 2025, with combined cash, cash equivalents and investment securities of $14.2 billion.",
+    "basis": "Stated directly in the consolidated balance sheet and the Q4 and full-year 2026 earnings release.",
+    "claim": "At September 30, 2026, Visa held $14.2 billion in cash, cash equivalents and investment securities, while unrestricted cash and cash equivalents declined from $17,164 to $12,938 and U.S. litigation escrow restricted cash equivalents fell from 2,990 to 628 (tables in millions).",
     "facts": [
      "F1",
      "P4"
     ],
     "quotes": [
-     "Cash and cash equivalents | $ 12,938 | $ 17,164",
-     "Investment securities | 1,145 | 1,833",
-     "Cash, cash equivalents and investment securities were $14.2 billion at September 30, 2026."
+     "Cash, cash equivalents and investment securities were $14.2 billion at September 30, 2026.",
+     "Cash and cash equivalents | $12,938 | $17,164",
+     "Restricted cash equivalents\u2014U.S. litigation escrow | 628 | 2,990"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Total current assets fell to 30,486 at Sep. 30, 2026 from 37,766 at Sep. 30, 2025 while total current liabilities were 31,588 versus 35,048 (table in millions), leaving current liabilities slightly above current assets.",
+    "basis": "Stated directly in the consolidated balance sheet, with relative position observed directly from the reported totals.",
+    "claim": "Total current assets fell from 37,766 to 30,486 while total current liabilities fell from 35,048 to 31,588 (table in millions), leaving current liabilities above current assets at fiscal year-end.",
     "facts": [
      "F1"
     ],
@@ -1086,51 +1166,52 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1 and P3",
-    "claim": "Restricted cash equivalents in the U.S. litigation escrow decreased to 628 at Sep. 30, 2026 from 2,990 at Sep. 30, 2025 (table in millions), despite $1.3 billion in additional escrow deposits and $1.6 billion in additional interchange litigation accruals during fiscal 2026.",
+    "basis": "Stated directly in Item 7 MD&A and the Q4 and full-year 2026 earnings release.",
+    "claim": "Near-term liquidity demands include $2.4 billion in cash for the pending BioCatch acquisition, a quarterly dividend raised 16% to $0.780 per share, and $24.4 billion in remaining share repurchase authorization as of September 30, 2026.",
     "facts": [
-     "F1",
-     "P3"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "Restricted cash equivalents\u2014U.S. litigation escrow | 628 | 2,990",
-     "During fiscal 2026, we recorded additional accruals of $1.6 billion to address claims associated with the interchange multidistrict litigation.",
-     "We also made additional deposits of $1.3 billion into the U.S. litigation escrow account."
+     "In August 2026, we entered into a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
+     "The board of directors increased Visa's quarterly cash dividend 16% to $0.780 per share",
+     "As of September 30, 2026, our share repurchase programs had remaining authorized funds of $24.4 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "At Sep. 30, 2026, Visa carried 2,716 in current maturities of debt and 19,355 in long-term debt against 36,111 in total equity and 94,360 in total assets (table in millions), down from 5,569 and 19,602 of debt at Sep. 30, 2025.",
+    "basis": "Stated directly in the consolidated balance sheet.",
+    "claim": "On the balance sheet at September 30, 2026, Visa carried 2,716 in current maturities of debt and 19,355 in long-term debt (down from 5,569 and 19,602 at September 30, 2025), alongside 58,249 in total liabilities and 36,111 in total equity (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
      "Current maturities of debt | 2,716 | 5,569",
      "Long-term debt | 19,355 | 19,602",
-     "Total equity | 36,111 | 37,909",
-     "Total assets | 94,360 | 99,627"
+     "Total liabilities | 58,249 | 61,718",
+     "Total equity | 36,111 | 37,909"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and F3",
-    "claim": "In fiscal 2026, interest expense of (758) and cash interest payments on debt of 720 (tables in millions) were small relative to operating income of 28,110 and nearly matched by 741 in investment income and other (table in millions).",
+    "basis": "Stated directly in the consolidated statements of operations and cash flows, with year-over-year drivers stated in Item 7 MD&A.",
+    "claim": "In fiscal 2026, Visa earned 28,110 in operating income against (758) in interest expense (table in millions) and made 720 in cash interest payments on debt (table in millions), while investment income (expense) and other contributed 741 (table in millions).",
     "facts": [
      "F2",
-     "F3"
+     "F3",
+     "P3"
     ],
     "quotes": [
-     "Interest expense | (758) | (589) | (641)",
      "Operating income | 28,110 | 23,994 | 23,595",
+     "Interest expense | (758) | (589) | (641)",
      "Investment income (expense) and other | 741 | 789 | 962",
      "Interest payments on debt | 720 | 587 | 583"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Visa generated 23,728 in net cash provided by operating activities in fiscal 2026, up from 23,059 in fiscal 2025 and 19,950 in fiscal 2024, while capital expenditures for property, equipment and technology were (1,671) in fiscal 2026 (table in millions).",
+    "basis": "Stated directly in the consolidated statements of cash flows.",
+    "claim": "Net cash provided by operating activities reached 23,728 in fiscal 2026 (up from 23,059 in fiscal 2025 and 19,950 in fiscal 2024), while purchases of property, equipment and technology were (1,671) (table in millions).",
     "facts": [
      "F3"
     ],
@@ -1141,8 +1222,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Fiscal 2026 operating cash flow of 23,728 closely tracked GAAP net income of $ 23,504 (table in millions), with non-cash add-backs for depreciation and amortization (1,403) and share-based compensation (928) offset by a (2,040) accrued litigation cash outflow and (631) in deferred income taxes.",
+    "basis": "Stated directly in the consolidated statements of cash flows.",
+    "claim": "Fiscal 2026 operating cash flow of 23,728 closely matched net income of $ 23,504 (table in millions), supported by non-cash depreciation and amortization of 1,403 and share-based compensation of 928, whereas cash outflows for accrued litigation of (2,040) and deferred income taxes of (631) reduced operating cash flow.",
     "facts": [
      "F3"
     ],
@@ -1150,30 +1231,30 @@
      "Net income | $ 23,504 | $ 20,058 | $ 19,743",
      "Depreciation and amortization | 1,403 | 1,220 | 1,034",
      "Share-based compensation | 928 | 897 | 850",
-     "Deferred income taxes | (631) | 152 | (100)",
-     "Accrued litigation | (2,040) | 1,303 | (28)"
+     "Accrued litigation | (2,040) | 1,303 | (28)",
+     "Deferred income taxes | (631) | 152 | (100)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Cash flow quality in fiscal 2026 also reflected a 2,115 settlement receivable inflow and (1,833) settlement payable outflow, 18,317 in non-cash client incentives against a (17,705) client incentive cash outflow (table in millions), and 5,684 in net tax payments that included $1.9 billion for clean energy tax credits.",
+    "basis": "Stated directly in the consolidated statements of cash flows supplemental disclosures and the Q4 and full-year 2026 earnings release.",
+    "claim": "Operating cash flow in fiscal 2026 reflected net cash income tax payments of 5,684 (table in millions) that included $1.9 billion paid for clean energy tax credits, while GAAP net income of $23.5 billion included $1.7 billion in litigation provisions, $563 million in severance costs, $282 million in charitable investment donations, $124 million in net equity investment gains, and a $314 million deferred tax benefit.",
     "facts": [
-     "F3"
+     "F3",
+     "P4"
     ],
     "quotes": [
-     "Settlement receivable | 2,115 | 374 | (2,175)",
-     "Settlement payable | (1,833) | (847) | 1,841",
-     "Client incentives | 18,317 | 15,751 | 13,764",
-     "Client incentives | (17,705) | (15,314) | (14,067)",
      "Cash paid for income taxes, net | [1] | 5,684 | 4,541 | 5,775",
-     "For each of fiscal 2026 and 2025, the amount includes cash paid for clean energy tax credits of $1.9 billion."
+     "For each of fiscal 2026 and 2025, the amount includes cash paid for clean energy tax credits of $1.9 billion.",
+     "GAAP net income in the fiscal full-year 2026 was $23.5 billion or $12.32 per share, an increase of 17% and 21%, respectively, over prior year\u2019s results.",
+     "Current year\u2019s results included special items of $1.7 billion for a litigation provision associated with the MDL case and other legal matters, $563 million for severance costs, $314 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings, and $282 million related to the donation of investments to the Visa Foundation.",
+     "Current year's results also included $124 million of net gains from equity investments and $305 million from the amortization of acquired intangible assets and acquisition-related costs."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "During fiscal 2026, share repurchases of (20,451) and dividends paid of (5,112) drove net financing outflows of (28,241) and a (5,869) decrease in total cash, cash equivalents and restricted cash to 19,118 (table in millions).",
+    "basis": "Stated directly in the consolidated statements of cash flows.",
+    "claim": "Financing cash outflows of (28,241) in fiscal 2026\u2014led by (20,451) in class A common stock repurchases and (5,112) in dividends paid\u2014drove a (5,869) decrease in total cash, cash equivalents, restricted cash and restricted cash equivalents to 19,118 at year-end (table in millions).",
     "facts": [
      "F3"
     ],
@@ -1187,23 +1268,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3, P4, and P5",
-    "claim": "Subsequent cash demands include a definitive agreement to acquire BioCatch for $2.4 billion in cash, a 16% increase in the quarterly cash dividend to $0.780 per share, and $24.4 billion in remaining share repurchase authorization as of September 30, 2026.",
-    "facts": [
-     "P3",
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "In August 2026, we entered into a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
-     "\u2022The board of directors increased Visa's quarterly cash dividend 16% to $0.780 per share",
-     "As of September 30, 2026, our share repurchase programs had remaining authorized funds of $24.4 billion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1, F3, and P3",
-    "claim": "Near-term refinancing needs consist of 2,716 in current maturities of debt at Sep. 30, 2026, following fiscal 2026 senior note repayments of (5,565) and senior note issuance proceeds of 2,995 (tables in millions) from $3.0 billion of fixed-rate senior notes with 3 to 10 year maturities.",
+    "basis": "Stated directly in the consolidated balance sheet, consolidated statements of cash flows, and Item 7 MD&A.",
+    "claim": "Visa has 2,716 in current maturities of debt falling due as of September 30, 2026 (table in millions), after repaying (5,565) of senior notes during fiscal 2026 and issuing 2,995 in proceeds from $3.0 billion of fixed-rate senior notes in February 2026 with maturities between 3 and 10 years.",
     "facts": [
      "F1",
      "F3",
@@ -1218,8 +1284,8 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from balance sheet liquidity, operating cash flow, and fiscal 2026 senior-note issuance stated in F1, F3, P3, and P4",
-    "claim": "Current debt maturities of 2,716 (table in millions) can be met from existing liquidity of $ 12,938 in cash and cash equivalents and 1,145 in current investment securities ($14.2 billion combined), 23,728 in annual operating cash flow (tables in millions), or capital-markets refinancing as shown by the $3.0 billion February 2026 note issuance.",
+    "basis": "Inferred by comparing reported current debt maturities against reported year-end cash and investment balances, operating cash flow, and fiscal 2026 senior note issuance.",
+    "claim": "The 2,716 in current maturities of debt (table in millions) at September 30, 2026 sits against $14.2 billion in cash, cash equivalents and investment securities at year-end and 23,728 in annual operating cash flow (table in millions), alongside demonstrated access to senior note issuance.",
     "facts": [
      "F1",
      "F3",
@@ -1228,7 +1294,6 @@
     ],
     "quotes": [
      "Current maturities of debt | 2,716 | 5,569",
-     "Cash and cash equivalents | $ 12,938 | $ 17,164",
      "Cash, cash equivalents and investment securities were $14.2 billion at September 30, 2026.",
      "Net cash provided by (used in) operating activities | 23,728 | 23,059 | 19,950",
      "In February 2026, we issued fixed-rate senior notes in a public offering in an aggregate principal amount of $3.0 billion, with maturities ranging between 3 and 10 years."
@@ -1238,43 +1303,30 @@
   ],
   "growth_thesis": [
    {
-    "basis": "Stated directly in [F2] and [P3].",
-    "claim": "In fiscal 2026, Visa's net revenue grew 15% from $40,000 (table in millions) to $45,903 (table in millions), driven primarily by growth in nominal cross-border volume, processed transactions, and nominal payments volume, partially offset by higher client incentives.",
+    "basis": "Stated directly in the 10-K Item 7 MD&A financial overview and highlights.",
+    "claim": "In fiscal 2026, Visa's net revenue increased 15% to $45,903 (table in millions), driven by growth in nominal cross-border volume, processed transactions, and nominal payments volume, partially offset by higher client incentives.",
     "facts": [
-     "F2",
      "P3"
     ],
     "quotes": [
-     "Net revenue increased in fiscal 2026 over the prior year primarily due to the growth in nominal cross-border volume, processed transactions and nominal payments volume, partially offset by higher client incentives."
+     "Net revenue increased 15% over the prior year, primarily due to the growth in nominal cross-border volume, processed transactions and nominal payments volume, partially offset by higher client incentives."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P3].",
-    "claim": "Service revenue rose 14% in 2026 to $19,918 (table in millions), driven primarily by 10% nominal payments volume growth supported by resilient consumer spending, credit and debit expansion, digital commerce, select pricing modifications, and card benefits growth.",
+    "basis": "Stated directly in 10-K Item 7 MD&A Net Revenue discussion and tables.",
+    "claim": "Service revenue grew 14% to $19,918 (table in millions) in fiscal 2026, driven by 10% nominal payments volume growth, select pricing modifications, and growth in card benefits.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Volume growth was driven primarily by continued resilience in consumer spending and ongoing expansion in digital commerce.",
      "Service revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal payments volume of 10%, select pricing modifications and growth in card benefits."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P3].",
-    "claim": "Continued payments volume growth requires that the shift toward digital commerce and electronic payments persists and that consumer spending levels and macroeconomic conditions remain supportive.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We expect that the ongoing shift toward digital commerce and electronic payments will continue; however, the extent to which these trends support volume increases will depend on a number of factors, including consumer spending levels and broader macroeconomic conditions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in [P3].",
-    "claim": "Data processing revenue grew 17% in 2026 to 23,374 (table in millions), driven primarily by a 9% increase in Visa processed transactions to 281,331 (table in millions), select pricing modifications, value-added services growth, and higher cross-border mix.",
+    "basis": "Stated directly in 10-K Item 7 MD&A Net Revenue discussion and tables.",
+    "claim": "Data processing revenue rose 17% to 23,374 (table in millions) in fiscal 2026, driven by 9% growth in processed transactions to 281,331 (table in millions), select pricing modifications, value-added services growth, and higher cross-border transaction mix.",
     "facts": [
      "P3"
     ],
@@ -1284,108 +1336,115 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P3].",
-    "claim": "International transaction revenue increased 8% in 2026 to 15,251 (table in millions), driven primarily by 15% nominal cross-border volume growth excluding intra-Europe transactions, supported by cross-border ecommerce and travel-related activity.",
+    "basis": "Stated directly in 10-K Item 7 MD&A Net Revenue discussion and table.",
+    "claim": "International transaction revenue increased 8% to 15,251 (table in millions) in fiscal 2026, driven by 15% growth in nominal cross-border volume excluding transactions within Europe, supported by cross-border ecommerce and travel-related activity.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Cross-border volume growth was supported by cross-border ecommerce and travel-related activity.",
      "International transaction revenue increased in fiscal 2026 over the prior year primarily due to growth in nominal cross-border volume of 15%, excluding transactions within Europe, partially offset by lower volatility of a broad range of currencies and business mix."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P3].",
-    "claim": "Value-added services revenue grew 31% in 2026 to $14.2 billion, led by Issuing Solutions and Advisory and Other Services, pushing other revenue up 40% to 5,677 (table in millions).",
+    "basis": "Stated directly in 10-K Item 7 MD&A Net Revenue discussion and table.",
+    "claim": "Value-added services revenue rose 31% to $14.2 billion in fiscal 2026 across all portfolios, led by Issuing Solutions and Advisory and Other Services, driving a 40% increase in other revenue to 5,677 (table in millions).",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Value-added services revenue in fiscal 2026 increased 31% over the prior year, reflecting growth across all portfolios, with the largest contributions from Issuing Solutions and Advisory and Other Services.",
-     "Other revenue increased in fiscal 2026 over the prior year primarily due to growth in Advisory and Other Services and select pricing modifications."
+     "Value-added services revenue in fiscal 2026 increased 31% over the prior year, reflecting growth across all portfolios, with the largest contributions from Issuing Solutions and Advisory and Other Services."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P2].",
-    "claim": "For value-added services growth to continue, industry participants must not withhold transaction data to favor competing offerings, and Visa must adapt its data and AI governance to fragmented privacy, cybersecurity, and AI laws.",
+    "basis": "Stated directly in 10-K Item 7 MD&A and the Q4 2026 8-K earnings release.",
+    "claim": "International net revenue grew 17% to 28,480 (table in millions) in fiscal 2026, outpacing U.S. net revenue growth of 11% to $17,423 (table in millions), alongside $1.5 billion in cash acquisitions of Prisma and Newpay in Argentina and a $2.4 billion agreement to acquire BioCatch.",
     "facts": [
-     "P2"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "Industry participants may also withhold data used to power our solutions in order to support their own competing offerings, potentially reducing the effectiveness of our value-added services.",
-     "Failure to adapt our data governance practices to keep pace with evolving AI technologies, data processing practices, cybersecurity threats, and regulatory requirements could harm our ability to compete, decrease the value of our products and services to clients, and adversely affect our future growth."
+     "In February 2026, we acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P1].",
-    "claim": "Visa is pursuing an estimated more than $20 trillion annual consumer spend opportunity across cash, check, legacy ACH, A2A, and RTP, while expanding Commercial and Money Movement Solutions, tokenization, Tap to Everything, stablecoin programs, and agentic commerce.",
+    "basis": "Stated directly in 10-K Item 1 Business.",
+    "claim": "Visa is pursuing an estimated more than $20 trillion annual consumer spend opportunity across cash, check, ACH, A2A, and RTP, while expanding Tap to Pay to 84% of global face-to-face transactions, tokenizing over 60% of ecommerce transactions, and growing stablecoin-linked card issuance to over 225 programs.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Of this spend opportunity, we are pursuing an estimated more than $20 trillion annual opportunity in consumer spend, spread across cash, check, legacy Automated Clearing House (ACH), A2A payments, real-time payments (RTP) or other less effective forms of digital payments.",
-     "We believe agentic commerce will expand our addressable market and drive future growth."
+     "Of this spend opportunity, we are pursuing an estimated more than $20 trillion annual opportunity in consumer spend, spread across cash, check, legacy Automated Clearing House (ACH), A2A payments, real-time payments (RTP) or other less effective forms of digital payments."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P2].",
-    "claim": "To sustain growth, Visa must prevent disintermediation by closed-loop networks, national RTP systems, digital wallets, and stablecoin payment platforms, and preserve network participation as AI and agentic interfaces reshape payment initiation.",
+    "basis": "Stated directly in 10-K Item 7 MD&A Net Revenue discussion.",
+    "claim": "Continued growth in payments and cross-border volumes requires resilient consumer spending, ongoing expansion in digital commerce and travel-related activity, and supportive macroeconomic conditions.",
     "facts": [
-     "P2"
+     "P3"
     ],
     "quotes": [
-     "We and our competitors are developing or participating in alternative payment systems, including mobile payments, P2P services, RTP initiatives, ACH/direct debit solutions and cryptocurrency-based platforms, including stablecoin payments, that could reduce our role or disintermediate us from transaction processing.",
-     "As AI-enabled commerce continues to evolve, digital wallets, software platforms, agentic commerce experiences, mobile applications and other technologies may increasingly influence payment initiation, credential selection and seller choice."
+     "We expect that the ongoing shift toward digital commerce and electronic payments will continue; however, the extent to which these trends support volume increases will depend on a number of factors, including consumer spending levels and broader macroeconomic conditions."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P2] and [P3].",
-    "claim": "For revenue growth to continue, Visa must retain large financial institution clients without margin-eroding pricing or client incentive concessions, and navigate interchange caps, routing mandates, and domestic localization barriers.",
+    "basis": "Stated directly in 10-K Item 1A Risk Factors and Item 7 MD&A.",
+    "claim": "Sustaining net revenue growth requires retaining large financial institution clients and sellers without client incentives, fee discounts, and pricing pressure outpacing volume gains.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "If we are unable to implement cost containment and productivity initiatives or grow volume in other areas to offset or absorb the financial impact of these incentives, it may adversely affect our net revenue and profits.",
-     "National laws protecting domestic providers or mandating local processing continue to evolve in the face of geopolitical developments, may increase costs; affect our ability to effectively compete with local providers, reduce payments volume and net revenue; limit our ability to leverage global processing capabilities; restrict growth, innovation, and market entry; and create new competitors, all of which could materially harm our business and financial results."
+     "If we are unable to implement cost containment and productivity initiatives or grow volume in other areas to offset or absorb the financial impact of these incentives, it may adversely affect our net revenue and profits."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P3].",
-    "claim": "Visa is using acquisitions to expand capabilities and markets\u2014acquiring Prisma and Newpay in Argentina for $1.5 billion in February 2026 and agreeing to acquire BioCatch for $2.4 billion in August 2026\u2014with the BioCatch transaction requiring customary closing conditions and regulatory approvals.",
+    "basis": "Stated directly in 10-K Item 1A Risk Factors.",
+    "claim": "Maintaining network economics and international market access requires avoiding disruptive interchange caps, credit routing mandates, and domestic localization or payment-sovereignty barriers.",
     "facts": [
-     "P3"
+     "P2"
     ],
     "quotes": [
-     "In February 2026, we acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash.",
-     "In August 2026, we entered into a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
-     "This acquisition is subject to customary closing conditions, including applicable regulatory approvals."
+     "Reduced IRFs may make our network less attractive to issuers and acquirers and may make other payment systems including closed-loop payment systems that connect directly with sellers and consumers more competitive."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in 10-K Item 1A Risk Factors, Item 7 MD&A, and the Q4 2026 8-K.",
+    "claim": "Sustaining growth from new technologies and value-added services requires preventing disintermediation by stablecoins, RTP networks, closed-loop systems, and AI customer interfaces, while closing pending acquisitions such as BioCatch.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The enactment of the U.S. GENIUS Act in July 2025 and the EU's crypto-asset framework, along with emerging regulatory frameworks in other countries, provide increasing regulatory certainty for stablecoins, which could disrupt existing payment networks, particularly in cross-border, B2B, and currency-unstable markets."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited item (P3)",
-    "claim": "Visa entered into a definitive agreement to acquire BioCatch for $2.4 billion in cash, subject to customary closing conditions including applicable regulatory approvals.",
+    "basis": "stated in P3 and P4",
+    "claim": "Visa announced a definitive agreement to acquire BioCatch for $2.4 billion in cash, subject to customary closing conditions including applicable regulatory approvals.",
     "facts": [
-     "P3"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "In August 2026, we entered into a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
-     "This acquisition is subject to customary closing conditions, including applicable regulatory approvals."
+     "On August 3, 2026, Visa announced it signed a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
+     "The transaction is subject to customary closing conditions, including applicable regulatory approvals, and is expected to close by the end of the fiscal second quarter of 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3)",
-    "claim": "Visa acquired Prisma Medios de Pago S.A.U. and Newpay S.A.U. in Argentina for a total purchase consideration of $1.5 billion in cash.",
+    "basis": "stated in P3",
+    "claim": "Visa acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash.",
     "facts": [
      "P3"
     ],
@@ -1395,9 +1454,10 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3)",
-    "claim": "Visa completed an exchange offer accepting 3 million shares of class B-1 common stock and 120 million shares of class B-2 common stock, retiring them and issuing 61 million shares of class B-3 common stock and 23 million shares of class C common stock.",
+    "basis": "stated in F2 and P3",
+    "claim": "Visa completed an exchange offer, accepting and retiring 3 million shares of class B-1 common stock and 120 million shares of class B-2 common stock in exchange for 61 million shares of class B-3 common stock and 23 million shares of class C common stock.",
     "facts": [
+     "F2",
      "P3"
     ],
     "quotes": [
@@ -1407,8 +1467,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3)",
-    "claim": "Visa issued fixed-rate senior notes in a public offering in an aggregate principal amount of $3.0 billion, with maturities ranging between 3 and 10 years.",
+    "basis": "stated in P3",
+    "claim": "Visa issued fixed-rate senior notes in a public offering in an aggregate principal amount of $3.0 billion.",
     "facts": [
      "P3"
     ],
@@ -1418,10 +1478,11 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (F3)",
-    "claim": "Visa made repayments of senior notes of (5,565) (statement of cash flows table in millions).",
+    "basis": "stated in F3 and P4",
+    "claim": "Visa recorded cash outflows for repayments of senior notes of (5,565) (table in millions) during the twelve months ended September 30, 2026.",
     "facts": [
-     "F3"
+     "F3",
+     "P4"
     ],
     "quotes": [
      "Repayments of senior notes | (5,565) | 0 | 0"
@@ -1429,7 +1490,7 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3)",
+    "basis": "stated in P3",
     "claim": "Visa's board of directors authorized an additional $20.0 billion share repurchase program.",
     "facts": [
      "P3"
@@ -1440,19 +1501,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3)",
-    "claim": "Visa repurchased 61 million shares of its class A common stock in the open market for $20.5 billion.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "During fiscal 2026, we repurchased 61 million shares of our class A common stock in the open market for $20.5 billion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3)",
-    "claim": "Visa recorded additional accruals of $1.6 billion for interchange multidistrict litigation claims and made additional deposits of $1.3 billion into the U.S. litigation escrow account.",
+    "basis": "stated in P3",
+    "claim": "During fiscal 2026, Visa recorded additional accruals of $1.6 billion for interchange multidistrict litigation claims and made additional deposits of $1.3 billion into the U.S. litigation escrow account.",
     "facts": [
      "P3"
     ],
@@ -1463,10 +1513,11 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P6)",
-    "claim": "Visa authorized a deposit of $405 million into the U.S. litigation escrow account, decreasing the class A conversion rates of class B-1, B-2, and B-3 common stock.",
+    "basis": "stated in P4 and P7",
+    "claim": "Visa authorized and deposited $405 million into the U.S. litigation escrow account, decreasing the conversion rates applicable to class B-1, B-2, and B-3 common stock.",
     "facts": [
-     "P6"
+     "P4",
+     "P7"
     ],
     "quotes": [
      "On September 18, 2026, Visa Inc. (the \u201cCompany\u201d) authorized the deposit of $405 million into the U.S. litigation escrow account previously established under the Company\u2019s U.S. retrospective responsibility plan (the \u201cPlan\u201d).",
@@ -1475,21 +1526,8 @@
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited items (P4, P5)",
-    "claim": "Visa's board of directors increased the quarterly cash dividend 16% and declared a quarterly cash dividend of $0.780 per share of class A common stock.",
-    "facts": [
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "The board of directors increased Visa's quarterly cash dividend 16% to $0.780 per share",
-     "On October 27, 2026, the Company\u2019s board of directors declared a quarterly cash dividend in the amount of $0.780 per share of class A common stock (determined in the case of all other outstanding common and preferred stock on an as-converted basis), payable on December 1, 2026, to all holders of record as of November 10, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2)",
-    "claim": "The People's Bank of China approved Visa's Application to Prepare to establish a domestic Bank Card Clearing Institution in China, though further regulatory approval is required before domestic bank card clearing operations can begin.",
+    "basis": "stated in P2",
+    "claim": "The People's Bank of China approved Visa's Application to Prepare to establish a domestic Bank Card Clearing Institution in China, permitting formal preparations while further regulatory approval is required before operations can begin.",
     "facts": [
      "P2"
     ],
@@ -1500,109 +1538,159 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P3, P4, P7)",
-    "claim": "Visa recorded $563 million in severance costs resulting from actions taken to drive operational efficiencies and reinvest in high-growth opportunities.",
+    "basis": "stated in P4 and P6",
+    "claim": "Visa's board of directors increased the quarterly cash dividend 16% and declared a dividend of $0.780 per share of class A common stock, payable on December 1, 2026.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On October 27, 2026, the Company\u2019s board of directors declared a quarterly cash dividend in the amount of $0.780 per share of class A common stock (determined in the case of all other outstanding common and preferred stock on an as-converted basis), payable on December 1, 2026, to all holders of record as of November 10, 2026.",
+     "The board of directors increased Visa's quarterly cash dividend 16% to $0.780 per share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P8",
+    "claim": "Visa's board of directors declared a quarterly cash dividend of $0.670 per share of class A common stock, payable on September 1, 2026.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "On July 28, 2026, the Company\u2019s board of directors declared a quarterly cash dividend in the amount of $0.670 per share of class A common stock (determined in the case of all other outstanding common and preferred stock on an as-converted basis), payable on September 1, 2026, to all holders of record as of August 11, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "Visa's Compensation Committee approved a performance stock option grant to CEO Ryan McInerney covering 378,940 shares of Class A common stock with a grant date value of approximately $50 million.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and P8",
+    "claim": "Visa recorded $563 million in severance costs during fiscal 2026 resulting from actions taken to drive operational efficiencies and reinvest in high-growth opportunities.",
     "facts": [
      "P3",
      "P4",
-     "P7"
+     "P8"
     ],
     "quotes": [
-     "Current year's results included special items of $563 million for severance costs, $237 million for a litigation provision associated with the interchange multidistrict litigation (\"MDL\") case and $18 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings.",
-     "Personnel expenses increased in fiscal 2026 over the prior year primarily due to a higher number employees and compensation costs, including from acquisitions, and higher severance costs resulting from actions taken to drive operational efficiencies and reinvest in high-growth opportunities."
+     "During fiscal 2026 and 2025, we recorded severance costs within personnel expense resulting from actions taken to drive operational efficiencies and reinvest in high-growth opportunities.",
+     "Current year's results included special items of $563 million for severance costs, $237 million for a litigation provision associated with the interchange multidistrict litigation (\"MDL\") case and $18 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P4",
+    "claim": "Visa recorded a one-time non-cash deferred tax benefit of $314 million during fiscal 2026 due to a change in the U.S. taxation of certain foreign earnings.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "During fiscal 2026, we recorded a deferred tax adjustment within income tax provision due to a change in the U.S. taxation of certain foreign earnings.",
+     "Current year\u2019s results included special items of $1.7 billion for a litigation provision associated with the MDL case and other legal matters, $563 million for severance costs, $314 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings, and $282 million related to the donation of investments to the Visa Foundation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3, P3, and P4",
+    "claim": "Visa donated investments to the Visa Foundation and recognized $282 million in non-cash general and administrative expenses in fiscal 2026.",
+    "facts": [
+     "F3",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "During fiscal 2026 and 2024, we donated investments to the Visa Foundation and recognized non-cash general and administrative expenses.",
+     "Current year\u2019s results included special items of $1.7 billion for a litigation provision associated with the MDL case and other legal matters, $563 million for severance costs, $314 million for a deferred tax benefit recognized due to a change in the U.S. taxation of certain foreign earnings, and $282 million related to the donation of investments to the Visa Foundation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Visa reported fiscal full-year 2026 net revenue of $45.9 billion, an increase of 15%, and GAAP net income of $23.5 billion or $12.32 per share.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Net revenue in the fiscal full-year 2026 was $45.9 billion, an increase of 15%, driven by the year-over-year growth in payments volume, cross-border volume and processed transactions.",
+     "GAAP net income in the fiscal full-year 2026 was $23.5 billion or $12.32 per share, an increase of 17% and 21%, respectively, over prior year\u2019s results."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "stated in P2 and P3",
-    "claim": "Visa faces complex and evolving global regulations that can increase compliance costs, restrict its operating rules, and reduce revenue opportunities.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "As a global payments technology company, we are subject to complex and evolving regulations governing our operations, including, but not limited to, authorization, clearing and settlement activities.",
-     "Complying with these regulations increases our costs and operational complexity, and reduces our revenue opportunities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1, P2, and P3",
-    "claim": "Regulatory caps on interchange reimbursement fees, merchant discount rates, and credit or debit routing mandates could reduce Visa's network attractiveness and transaction economics.",
+    "basis": "Stated directly in [P2] (Item 1A) regarding regulatory caps, routing mandates, and potential impacts; fee independence stated in [P1] (Item 1) and [P2] (Item 1A); fiscal 2026 net revenue growth stated in [P3] (Item 7).",
+    "claim": "Expanding global regulation of interchange reimbursement fees, merchant discount rates, network fees, and routing rules could reduce Visa's payments volume, limit products, and raise compliance costs.",
     "facts": [
      "P1",
      "P2",
      "P3"
     ],
     "quotes": [
+     "Regulators worldwide are expanding their authority over the payments industry, including IRFs, MDRs, network fees, operating rules, and related practices.",
      "Recent conflicting federal court decisions on the validity of Regulation II's interchange fee standard have created additional uncertainty and could result in a significantly lower interchange cap for debit transactions.",
-     "Reduced IRFs may make our network less attractive to issuers and acquirers and may make other payment systems including closed-loop payment systems that connect directly with sellers and consumers more competitive.",
-     "Therefore, the fees we receive from issuers and acquirers are not derived from IRFs or MDRs."
+     "Our EC settlement in 2019, which was extended through 2029, limits certain cross-border IRFs within the EEA."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P3",
-    "claim": "Government localization mandates, domestic payment preferences, and state-backed real-time or digital currency platforms may restrict market access and disintermediate Visa.",
+    "basis": "Stated in [P2] (Item 1A) regarding payment sovereignty, China BCCI status, RTP initiatives, and the digital euro; international revenue growth stated in [P3] (Item 7).",
+    "claim": "Government localization mandates, market access barriers, and state-backed domestic or regional payment systems and retail central bank digital currencies could restrict Visa's cross-border and domestic processing.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
      "Governments in numerous jurisdictions seek to strengthen domestic control over payments infrastructure and reduce reliance on international payment providers like Visa, through market access barriers, preferential domestic regulations, localization requirements and support for domestic systems.",
-     "National laws protecting domestic providers or mandating local processing continue to evolve in the face of geopolitical developments, may increase costs; affect our ability to effectively compete with local providers, reduce payments volume and net revenue; limit our ability to leverage global processing capabilities; restrict growth, innovation, and market entry; and create new competitors, all of which could materially harm our business and financial results."
+     "Central banks in numerous countries are developing or expanding national RTP networks, with some exploring cross-border RTP connectivity.",
+     "For example, the ECB has launched the European Payments Initiative's pan-European A2A payment system and a multi-year effort to explore a digital euro, as an alternative to foreign digital currency and payment service providers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P2",
-    "claim": "Fragmented privacy, cybersecurity, and AI regulations\u2014including EU AI Act provisions taking effect in 2027\u2014and agentic commerce vulnerabilities could increase compliance costs and legal liability.",
+    "basis": "Stated in [P2] (Item 1A) regarding privacy, cybersecurity, and AI rules and agentic risks; tokenization and security initiatives stated in [P1] (Item 1).",
+    "claim": "Fragmented privacy, cybersecurity, and AI regulations\u2014including high-risk AI provisions taking effect in 2027\u2014and third-party AI model dependencies could increase compliance costs, restrict deployments, or cause penalties and data exposure.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
      "The EU AI Act established harmonized rules across Europe, with key provisions for most high-risk AI systems taking effect in 2027.",
-     "Noncompliance with any of these regimes could result in regulatory penalties, significant legal liability and enforcement actions.",
+     "Our reliance on third-party AI tools, models, infrastructure and data processing environments may further limit our ability to monitor, control or remediate how confidential or personal information is accessed, retained, used, transferred or secured.",
      "As agentic commerce scales, there could be increased instances of unauthorized, erroneous or disputed payments, or fraud."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P3",
-    "claim": "Ongoing tax examinations by the IRS and foreign authorities, along with digital services taxes and global minimum tax rules, could increase Visa's effective tax rate and cash tax payments.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "We are currently under examination by, or in disputes with, the U.S. Internal Revenue Service as well as tax authorities and governments in various other jurisdictions, and we may be subject to additional examinations, disputes or assessments in the future, including those involving the availability of deductions or credits, transfer pricing, permanent establishment assertions, or indirect and other non-income taxes.",
-     "An adverse outcome in any of these matters could adversely affect our cash flows and financial position.",
-     "The impact on our effective tax rate was largely offset by foreign tax credit benefits across jurisdictions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2, P2, P3, and P6",
-    "claim": "Visa faces substantial antitrust and interchange litigation, recording $1.6 billion in additional interchange multidistrict litigation accruals in fiscal 2026 while unresolved U.S. covered claims held approximately $15.9 billion in estimated interchange at issue.",
+    "basis": "Stated in [P2] (Item 1A), [P3] (Item 7), [F2] (Statement of Operations), [P4] (Q4 2026 8-K), and [P7] (September 2026 8-K).",
+    "claim": "Pending antitrust and civil litigation\u2014with estimated unresolved U.S. covered litigation interchange claims of $15.9 billion and a fiscal 2026 GAAP litigation provision of $1,764 (table in millions)\u2014could cause material losses or force operating-rule changes.",
     "facts": [
      "F2",
      "P2",
      "P3",
-     "P6"
+     "P4",
+     "P7"
     ],
     "quotes": [
+     "In the event we are found liable or reach a settlement in any action, particularly in a large class action lawsuit, such as one involving an antitrust claim entitling the plaintiff to treble damages in the U.S., or we incur liability arising from a government investigation, we may be required to pay significant awards or judgments, settlements, costs or fines.",
      "The failure of one or both of the retrospective responsibility plans to adequately insulate us from the impact of such settlements, judgments, losses or liabilities could materially harm our financial condition or cash flows, or even cause us to become insolvent.",
-     "During fiscal 2026, we recorded additional accruals of $1.6 billion to address claims associated with the interchange multidistrict litigation.",
-     "The estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation was approximately $17.4 billion(1) as of May 11, 2026 and was approximately $15.9 billion(1) as of October 1, 2026."
+     "The estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation was approximately $17.4 billion(1) as of May 11, 2026 and was approximately $15.9 billion(1) as of October 1, 2026.",
+     "The interchange at issue for unresolved claims will continue to increase."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P2, and P3",
-    "claim": "Closed-loop networks, AI-controlled payment interfaces, national real-time payments, and regulated stablecoin rails could disintermediate Visa from transaction processing.",
+    "basis": "Stated in [P2] (Item 1A) regarding competitive and stablecoin/AI disintermediation threats; Visa's product initiatives and fiscal 2026 value-added services growth stated in [P1] (Item 1) and [P3] (Item 7).",
+    "claim": "Intense competition from closed-loop networks, real-time payment systems, stablecoins gaining regulatory certainty under the U.S. GENIUS Act and EU crypto framework, and AI-enabled customer interfaces could disintermediate Visa from transaction processing.",
     "facts": [
      "P1",
      "P2",
@@ -1616,29 +1704,44 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P2, P3, and P4",
-    "claim": "Revenue concentration among large financial institution clients, short-notice contract termination rights, and competitive pricing pressure drove client incentives up 16% to $18.3 billion in fiscal 2026.",
+    "basis": "Stated in [P2] (Item 1A) regarding client concentration, termination rights, and incentive pressure; client count in [P1] (Item 1); fiscal 2026 incentives and results in [F2], [P3], and [P4].",
+    "claim": "Loss or competitor acquisition of major financial institution clients\u2014who can issue competing products or terminate on short notice\u2014or rising client incentives, which grew 16% to $18.3 billion in fiscal 2026, could compress net revenue and profits.",
     "facts": [
+     "F2",
      "P1",
      "P2",
      "P3",
      "P4"
     ],
     "quotes": [
-     "Because a significant portion of our net revenue is concentrated among our largest clients, the loss of business from any one of them could materially harm our business, results of operations and financial condition.",
      "In certain circumstances, our financial institution clients may terminate our contractual relationship on relatively short notice without paying significant early termination fees.",
+     "Because a significant portion of our net revenue is concentrated among our largest clients, the loss of business from any one of them could materially harm our business, results of operations and financial condition.",
      "Continued pressures on pricing, incentives, fee discounts and rebates could moderate our growth.",
      "Client incentives were $18.3 billion, up 16% over the prior year."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P2, and P3",
-    "claim": "Sellers and processors in major markets are challenging acceptance costs, surcharging, or refusing Visa cards, which could increase litigation and reduce issuance or cardholder usage.",
+    "basis": "Stated in [P2] (Item 1A) and [P3] (Item 7, Effective Income Tax Rate).",
+    "claim": "Ongoing examinations by the IRS and foreign tax authorities, potential digital services taxes, and OECD global minimum tax rules could increase Visa's effective tax rate and cash tax payments.",
     "facts": [
-     "P1",
      "P2",
      "P3"
+    ],
+    "quotes": [
+     "We are currently under examination by, or in disputes with, the U.S. Internal Revenue Service as well as tax authorities and governments in various other jurisdictions, and we may be subject to additional examinations, disputes or assessments in the future, including those involving the availability of deductions or credits, transfer pricing, permanent establishment assertions, or indirect and other non-income taxes.",
+     "In addition, changes in existing laws, regulations or administrative guidance in the U.S. or foreign jurisdictions, including unilateral actions of foreign jurisdictions to introduce digital services taxes, or changes resulting from the Organization for Economic Cooperation and Development's proposals for the international tax system, including the implementation of global minimum taxes by various jurisdictions, may materially affect our effective tax rate and could increase our tax payments.",
+     "In fiscal 2026, we recorded a provision for global minimum taxes, primarily related to Singapore."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] (Item 1A); fiscal 2026 payments volume and processed transaction growth stated in [P3] (Item 7) and [P4] (Q4 2026 8-K).",
+    "claim": "Continued lobbying, lawsuits, surcharging, or refusal of Visa products by sellers and processors seeking lower acceptance costs could raise litigation and compliance expenses and depress card issuance and usage.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
     ],
     "quotes": [
      "In certain jurisdictions, including the U.S., Australia, Canada and Europe, sellers and seller-affiliated groups have exerted significant influence in the global payments system to lower acceptance costs paid by sellers to acquirers or their agents to accept payment products or services by lobbying for new legislation, seeking regulatory intervention, filing lawsuits and in some cases, surcharging or refusing to accept Visa products.",
@@ -1647,11 +1750,12 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4 (risk summary) and F1/F3 (balance sheet and cash flow balances); detailed indemnification mechanics are omitted from the packet",
-    "claim": "Visa is exposed to potential loss or liquidity reduction from its indemnification obligation to fund client settlement losses.",
+    "basis": "Indemnification liquidity risk stated in [P4] (Forward-Looking Statements); current assets, current liabilities, cash, and debt figures stated in [F1] (Balance Sheet); cash flows stated in [F3] (Cash Flow Statement); senior note issuance stated in [P3] (Item 7).",
+    "claim": "Visa faces liquidity loss risk from client settlement-loss indemnification obligations while ending fiscal 2026 with total current liabilities of 31,588 (table in millions) exceeding total current assets of 30,486 (table in millions).",
     "facts": [
      "F1",
      "F3",
+     "P3",
      "P4"
     ],
     "quotes": [
@@ -1660,99 +1764,375 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P4 (risk summary) and P1 (network scale and security capabilities)",
-    "claim": "A disruption, failure, or cyberattack affecting Visa's processing networks or systems could impair transaction processing operations.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "a disruption, failure or breach of our networks or systems, including as a result of cyber incidents or attacks"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P4",
-    "claim": "Pending and completed acquisitions\u2014including the $2.4 billion BioCatch agreement subject to regulatory approval\u2014carry closing, integration, and benefit-realization risks.",
+    "basis": "Acquisition terms, closing conditions, expected closing timeline, and acquisition-related costs stated in [P3] (Item 7) and [P4] (Q4 2026 8-K, including Forward-Looking Statements).",
+    "claim": "Visa's pending $2.4 billion cash acquisition of BioCatch and recent $1.5 billion cash acquisitions of Prisma and Newpay carry regulatory closing and integration execution risks.",
     "facts": [
      "P3",
      "P4"
     ],
     "quotes": [
+     "In August 2026, we entered into a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
      "This acquisition is subject to customary closing conditions, including applicable regulatory approvals.",
-     "our inability to achieve the anticipated benefits of our acquisitions, joint ventures or strategic investments"
+     "In February 2026, we acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P4] (Forward-Looking Statements), [P3] (Item 7), and [P7] (September 2026 8-K).",
+    "claim": "Conversions of class B and class C common stock or preferred stock into class A common stock could cause voting dilution and share-price pressure, while holders of those classes may have differing interests on significant transactions.",
+    "facts": [
+     "P3",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "the conversions of our class B-1, B-2, B-3 (class B) and class C common stock or series A, B and C preferred stock into shares of class A common stock would result in voting dilution to, and could adversely impact the market price of, our existing class A common stock",
+     "differing interests between holders of our class B and C common stock and series A, B and C preferred stock compared to our class A common stock concerning certain significant transactions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Network disruption and cyber risk stated in [P4] (Forward-Looking Statements); cybersecurity enforcement penalties stated in [P2] (Item 1A); network scale and tokenization stated in [P1] (Item 1).",
+    "claim": "A disruption, failure, or cyber breach of Visa's global transaction processing networks or systems could impair operations, trigger regulatory penalties, and damage trust.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "a disruption, failure or breach of our networks or systems, including as a result of cyber incidents or attacks",
+     "Noncompliance with any of these regimes could result in regulatory penalties, significant legal liability and enforcement actions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] (Item 7) and [P4] (Q4 2026 8-K, including Forward-Looking Statements), with geopolitical and sanctions context in [P2] (Item 1A).",
+    "claim": "Macroeconomic slowdowns, geopolitical tensions, and foreign exchange rate volatility could dampen consumer spending, cross-border travel, and reported U.S. dollar revenue.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Foreign exchange rate movements and volatility have contributed to periodic variability in our results, and may continue to do so in the future.",
+     "We expect that the ongoing shift toward digital commerce and electronic payments will continue; however, the extent to which these trends support volume increases will depend on a number of factors, including consumer spending levels and broader macroeconomic conditions."
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
+  "thesis_change": [
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no revenue disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address net revenue growth or its drivers.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no service revenue disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address service revenue or payments volume growth.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address payments volume conditions.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address digital commerce shifts, consumer spending levels, or macroeconomic conditions.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no data processing revenue disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address data processing revenue or processed transaction volume.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no international transaction disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address international transaction revenue or cross-border volume.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no value-added services disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address value-added services revenue or other revenue.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address data access or AI governance.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address transaction data withholding or privacy, cybersecurity, and artificial intelligence governance.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address product or market expansion initiatives.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address addressable consumer spend opportunities or product initiatives.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address competitive disintermediation.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address disintermediation risks or network participation in emerging payment interfaces.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address client pricing or regulatory barriers.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address financial institution client retention, incentive concessions, interchange caps, routing mandates, or localization barriers.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no acquisition disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address completed or pending acquisitions.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no global regulatory disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address global regulatory complexity or compliance costs.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address fee caps or routing regulation.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address interchange fee caps, merchant discount rate rules, or routing mandates.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address localization or sovereign payment systems.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address localization mandates, domestic payment preferences, or state-backed payment platforms.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address privacy, cybersecurity, or AI regulation.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address privacy, cybersecurity, or artificial intelligence regulations or agentic commerce vulnerabilities.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no tax disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address tax examinations, digital services taxes, or global minimum tax rules.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no litigation disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address antitrust or interchange litigation accruals or unresolved claims.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address competing payment rails.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address disintermediation from closed-loop networks, artificial intelligence interfaces, real-time payments, or stablecoins.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and contains no client incentive or concentration disclosures.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address client concentration, contract termination rights, pricing pressure, or client incentives.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address seller acceptance cost disputes.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address seller or processor challenges to acceptance costs, surcharging, or card refusal.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address settlement indemnification.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address indemnification obligations for client settlement losses.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address network security or operational resilience.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address network disruptions, system failures, or cyberattacks.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5: Item 5.02 covers only the Chief Executive Officer performance stock option grant and does not address acquisition risks.",
+    "claim": "The newer filing reports only a performance stock option grant to the Chief Executive Officer and does not address acquisition closing, integration, or benefit-realization risks.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million."
+    ],
+    "support": "supported"
+   }
+  ],
   "unresolved_questions": [
    {
-    "basis": "stated in [P3]",
-    "claim": "Will the $2.4 billion cash acquisition of BioCatch receive applicable regulatory approvals and close?",
+    "basis": "Stated in P3 and P4, which report the definitive agreement and state that closing depends on regulatory approvals and customary closing conditions.",
+    "claim": "Whether Visa will receive the applicable regulatory approvals and satisfy customary closing conditions to complete its $2.4 billion cash acquisition of BioCatch remains unresolved.",
     "facts": [
-     "P3"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "In August 2026, we entered into a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
-     "This acquisition is subject to customary closing conditions, including applicable regulatory approvals."
+     "On August 3, 2026, Visa announced it signed a definitive agreement to acquire BioCatch, a leading provider of behavioral-first, multi-signal fraud intelligence, for $2.4 billion in cash.",
+     "The transaction is subject to customary closing conditions, including applicable regulatory approvals, and is expected to close by the end of the fiscal second quarter of 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P3]",
-    "claim": "Will unresolved claims in the U.S. covered litigation\u2014estimated at $15.9 billion in interchange reimbursement fees compared to $17.4 billion earlier\u2014be reduced by 50% or more, and will Visa conduct a successive exchange offer?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Visa may, but is under no obligation to, conduct a successive exchange offer if (i) one year has passed since the exchange offer completed in May 2026; and (ii) the estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation have been reduced by 50% or more since the consummation of the exchange offer in May 2026, as determined by Visa.",
-     "The estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation was approximately $17.4 billion(1) as of May 11, 2026 and was approximately $15.9 billion(1) as of October 1, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P2]",
-    "claim": "Will Visa obtain the further regulatory approval from the People's Bank of China required to begin domestic bank card clearing operations, and on what timeline?",
+    "basis": "Stated directly in P2 (10-K Item 1A Risk Factors).",
+    "claim": "Whether and when Visa will obtain the further regulatory approval from the People\u2019s Bank of China required to begin domestic bank card clearing operations in China is uncertain.",
     "facts": [
      "P2"
     ],
     "quotes": [
+     "The People\u2019s Bank of China (PBOC) accepted our application to operate a Bank Card Clearing Institution (BCCI) in June 2020, and approved our Application to Prepare in October 2026, which permits us to begin formal preparations to establish a domestic BCCI.",
      "We must take additional steps, including obtaining further regulatory approval, before we can begin domestic bank card clearing operations.",
      "There can be no assurance that we will receive this approval, and its timing is uncertain."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2], [P3], and [F1]",
-    "claim": "What are the protection mechanisms, limits, and remaining liabilities for U.S. and Europe covered litigation and uncovered legal matters underlying the $1.6 billion in additional interchange multidistrict litigation accruals and 990 (table in millions) in accrued litigation?",
+    "basis": "Stated in F1, P2, and P3, which defer full legal and retrospective responsibility plan disclosures to omitted Item 8 Notes 5 and 20 and describe ongoing MDL uncertainty.",
+    "claim": "What the full details and ultimate financial outcomes of the U.S. covered litigation and uncovered legal matters are, and whether unresolved interchange reimbursement fees at issue will drop by 50% or more to allow a successive common stock exchange offer, cannot be settled from this packet.",
     "facts": [
+     "F1",
      "P2",
-     "P3",
-     "F1"
+     "P3"
     ],
     "quotes": [
-     "The two retrospective responsibility plans are different in the protections they provide and the mechanisms by which we are protected.",
+     "Commitments and contingencies (Note 18 and Note 20)",
      "Details of the most significant actions we face are described more fully in Note 20\u2014Legal Matters to our consolidated financial statements included in Item 8 of this report.",
-     "During fiscal 2026, we recorded additional accruals of $1.6 billion to address claims associated with the interchange multidistrict litigation."
+     "Visa may, but is under no obligation to, conduct a successive exchange offer if (i) one year has passed since the exchange offer completed in May 2026; and (ii) the estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation have been reduced by 50% or more since the consummation of the exchange offer in May 2026, as determined by Visa.",
+     "The estimated interchange reimbursement fees at issue in unresolved claims for damages in the U.S. covered litigation was approximately $17.4 billion(1) as of May 11, 2026 and was approximately $15.9 billion(1) as of October 1, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "How will conflicting federal court decisions on Regulation II's interchange fee standard and the reintroduced Credit Card Competition Act affect U.S. debit and credit interchange caps and routing rules?",
+    "basis": "Stated in P2, which cites omitted Note 14\u2014Segment Information for further detail on revenue concentration.",
+    "claim": "How concentrated Visa's net revenue is among its largest financial institution clients and what specific contractual risks apply if a major client consolidates or terminates are not shown.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Recent conflicting federal court decisions on the validity of Regulation II's interchange fee standard have created additional uncertainty and could result in a significantly lower interchange cap for debit transactions.",
-     "It remains unclear if the CCCA will gain sufficient traction to advance in the current Congress."
+     "Because a significant portion of our net revenue is concentrated among our largest clients, the loss of business from any one of them could materially harm our business, results of operations and financial condition.",
+     "For more information, please see Note 14\u2014Segment Information to our consolidated financial statements included in Item 8 of this report."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "stated in [P2] and [P3]",
-    "claim": "What are the exposures in ongoing tax examinations and disputes with the U.S. Internal Revenue Service and foreign tax authorities, and how will local minimum taxes and the OECD side-by-side safe harbor affect future effective tax rates?",
+    "basis": "Stated in P2 and P3, which refer to omitted Note 19\u2014Income Taxes and state that future global minimum tax impacts are still being assessed.",
+    "claim": "What amounts are at issue in Visa's ongoing examinations and disputes with the U.S. Internal Revenue Service and foreign tax authorities, and what future tax impact will result from local minimum taxes and the OECD side-by-side safe harbor, cannot be determined from the packet.",
     "facts": [
      "P2",
      "P3"
@@ -1765,104 +2145,121 @@
     "support": "supported"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "How much of Visa's net revenue is concentrated among its largest financial institution clients?",
+    "basis": "Stated directly in P2 (10-K Item 1A Risk Factors).",
+    "claim": "How conflicting federal court decisions on Regulation II's interchange fee standard, proposed Federal Reserve debit interchange rate reductions, and the reintroduced Credit Card Competition Act will be resolved remains unsettled.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Because a significant portion of our net revenue is concentrated among our largest clients, the loss of business from any one of them could materially harm our business, results of operations and financial condition.",
-     "For more information, please see Note 14\u2014Segment Information to our consolidated financial statements included in Item 8 of this report."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in [P3] and [F3]",
-    "claim": "Why does the $1.5 billion cash purchase consideration for Prisma and Newpay differ from the (705) (table in millions) net cash outflow for acquisitions on the statement of cash flows, and what assets and liabilities were recognized?",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "In February 2026, we acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash.",
-     "See Note 2\u2014Acquisitions to our consolidated financial statements included in Item 8 of this report."
+     "Recent conflicting federal court decisions on the validity of Regulation II's interchange fee standard have created additional uncertainty and could result in a significantly lower interchange cap for debit transactions.",
+     "Separately, Congress has reintroduced the Credit Card Competition Act (CCCA), legislation requiring, among other things, large issuers to offer routing choices for credit transactions.",
+     "It remains unclear if the CCCA will gain sufficient traction to advance in the current Congress."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [F1] and [P3]",
-    "claim": "What are the interest rates, maturity schedule, and covenants of Visa's 2,716 (table in millions) in current maturities of debt and 19,355 (table in millions) in long-term debt, including the $3.0 billion senior notes issuance?",
+    "basis": "Inferred from comparing P3 ($1.5 billion cash purchase consideration and reference to omitted Note 2) with F3 ((705) in millions for acquisitions net of cash acquired).",
+    "claim": "Why total purchase consideration for Prisma and Newpay was $1.5 billion in cash while consolidated acquisitions net of cash acquired on the cash flow statement were (705) (table in millions) is not explained in the included items.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "In February 2026, we acquired Prisma Medios de Pago S.A.U. (Prisma) and Newpay S.A.U. (Newpay) in Argentina for a total purchase consideration of $1.5 billion in cash.",
+     "See Note 2\u2014Acquisitions to our consolidated financial statements included in Item 8 of this report.",
+     "Acquisitions, net of cash, cash equivalents, restricted cash and restricted cash equivalents acquired | (705) | (887) | (915)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and P3, which report debt carrying amounts and the $3.0 billion senior notes issuance while pointing to omitted Note 10\u2014Debt.",
+    "claim": "What the interest rates, specific maturity dates, and covenants are for Visa's current maturities of debt of 2,716 (table in millions) and long-term debt of 19,355 (table in millions), including the recently issued $3.0 billion senior notes, is not disclosed in the packet.",
     "facts": [
      "F1",
      "P3"
     ],
     "quotes": [
      "In February 2026, we issued fixed-rate senior notes in a public offering in an aggregate principal amount of $3.0 billion, with maturities ranging between 3 and 10 years.",
-     "See Note 10\u2014Debt to our consolidated financial statements included in Item 8 of this report."
+     "See Note 10\u2014Debt to our consolidated financial statements included in Item 8 of this report.",
+     "Current maturities of debt | 2,716 | 5,569",
+     "Long-term debt | 19,355 | 19,602"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P3], [F2], and [F1]",
-    "claim": "What are the conversion terms, transfer restrictions, and voting rights of Visa's preferred stock and class B-1, B-2, B-3, and C common stock following the exchange of 3 million class B-1 shares and 120 million class B-2 shares into 61 million class B-3 shares and 23 million class C shares?",
+    "basis": "Stated in F2 and P3, both of which refer to omitted Note 15\u2014Stockholders\u2019 Equity for further details.",
+    "claim": "What the detailed terms, conversion mechanics, and share-count effects were for the exchange offer in which 3 million class B-1 and 120 million class B-2 shares were retired for 61 million class B-3 and 23 million class C shares cannot be seen without the stockholders' equity footnote.",
     "facts": [
-     "P3",
      "F2",
-     "F1"
+     "P3"
     ],
     "quotes": [
      "In May 2026, we accepted 3 million shares of class B-1 common stock and 120 million shares of class B-2 common stock tendered in the exchange offer.",
      "In exchange for the shares of class B-1 and B-2 common stock that were retired, we issued 61 million shares of class B-3 common stock and 23 million shares of class C common stock.",
+     "See Note 15\u2014Stockholders\u2019 Equity to our consolidated financial statements included in Item 8 of this report.",
      "No shares of class B-3 common stock were outstanding prior to the class B-1 and B-2 common stock exchange offer in May 2026."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "inferred from comparing [F1] balance sheet cash and escrow lines with [F3] ending cash and restricted cash",
-    "claim": "Which balance sheet accounts comprise the remaining restricted cash included in the 19,118 (table in millions) cash, cash equivalents, restricted cash and restricted cash equivalents on the cash flow statement beyond $ 12,938 (table in millions) in cash and cash equivalents and 628 (table in millions) in U.S. litigation escrow?",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 12,938 | $ 17,164",
-     "Cash, cash equivalents, restricted cash and restricted cash equivalents as of end of period | 19,118 | 24,987 | 19,763"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1] and [P3]",
-    "claim": "How does Visa account for revenue recognition across its four revenue categories and estimate client incentives under its accounting policies and client contracts?",
+    "basis": "Stated directly in P5 (Form 8-K Item 5.02).",
+    "claim": "What the exact grant-date exercise price and full award agreement terms are for the CEO's Performance Option covering 378,940 shares (grant date value approximately $50 million), and whether the $500, $550, and $600 per-share vesting hurdles will be satisfied, remain unsettled.",
     "facts": [
-     "P1",
-     "P3"
+     "P5"
     ],
     "quotes": [
-     "Please see Item 7 and Note 1\u2014Summary of Significant Accounting Policies to our consolidated financial statements included in Item 8 of this report, which include disclosures on how we earn and recognize our revenue.",
-     "The amount of client incentives we record in future periods will vary based on changes in performance expectations, actual client performance, amendments to existing contracts or the execution of new contracts."
+     "On November 18, 2026, the Compensation Committee (the \u201cCommittee\u201d) of the Board of Directors of Visa Inc. (the \u201cCompany\u201d) approved a performance stock option grant to the Company\u2019s Chief Executive Officer, Ryan McInerney, covering 378,940 shares of the Company\u2019s Class A common stock (the \u201cPerformance Option\u201d), with a grant date value of approximately $50 million.",
+     "The exercise price of the Performance Option is equal to the closing price of the Company\u2019s Class A common stock on the grant date of the award, and the Performance Option has a term of 10 years.",
+     "The above description of the Performance Option is qualified in its entirety by the full text of the form award agreement governing the Performance Option, a copy of which will be filed with the Company\u2019s next periodic report following the date hereof."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the packet metadata (no eligible quarterly filing after the annual report) and F1, F2, F3, and P4, whose reported financial statements end September 30, 2026.",
+    "claim": "What Visa's revenue, net income, cash flows, and volume trends have been since the end of the latest reported fiscal year cannot be determined because no subsequent quarterly report has been filed.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Net revenue in the fiscal full-year 2026 was $45.9 billion, an increase of 15%, driven by the year-over-year growth in payments volume, cross-border volume and processed transactions.",
+     "Net revenue | $ 45,903 | $ 40,000 | $ 35,926"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from S0 (which provides price and marketCap without a share count), P4 (remaining authorization as of September 30, 2026), and P7 (as-converted Class B counts only as of September 18, 2026).",
+    "claim": "Which share classes and share counts underlie the screener's marketCap of 763858536304 at price 409.4, and how much stock Visa repurchased after fiscal year-end under its remaining $24.4 billion authorization, are not stated.",
+    "facts": [
+     "S0",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "price: 409.4",
+     "marketCap: 763858536304",
+     "The Company had $24.4 billion of remaining authorized funds for share repurchases as of September 30, 2026.",
+     "Therefore the as-converted class B-1 common stock share count was reduced by approximately 9,804 from 3,367,156 to 3,357,351, the as-converted class B-2 common stock share count was reduced by approximately 4,377 from 730,688 to 726,311, and the as-converted class B-3 common stock share count was reduced by approximately 1,089,926 from 90,599,965 to 89,510,039."
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "V",
- "under_review": {
-  "headline": "Chase, Visa And Mastercard Confirm Vendor Cyber Incidents After Hackers Post Data",
-  "id": "e0240e36f285",
-  "since": "2026-11-24",
-  "why": "Visa confirmed a vendor cyber incident after hackers posted files, touching its risk of cyberattacks and processing or system disruptions."
- },
- "upside": -0.17135521663404807,
+ "under_review": null,
+ "upside": -0.08714247058062119,
  "valuation": null,
- "value_base": 337.90115375849234,
- "value_bear": 253.04703395031913,
- "value_bull": 430.53858388803235,
+ "value_base": 372.2410598604017,
+ "value_bear": 243.23638891128803,
+ "value_bull": 550.6448624283385,
  "value_per_filed_share": {
-  "base": 337.90115375849234,
-  "bear": 253.04703395031913,
-  "bull": 430.53858388803235
+  "base": 372.2410598604017,
+  "bear": 243.23638891128803,
+  "bull": 550.6448624283385
  },
  "valued": true,
  "verdict": "AVOID",
- "verdict_reason": "expected return -7.2 points a year against the required return over 3 years"
+ "verdict_reason": "expected return -2.9 points a year against the required return over 3 years"
 }
