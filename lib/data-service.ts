@@ -525,6 +525,15 @@ export interface QwenReport {
     tax_range?: { label?: string; rate?: number | null; rate_alt?: number | null; value_alt?: { bear?: number; base?: number; bull?: number } | null; status_alt?: string | null } | null;
     /** Why a thin profit record is thin (rs2-local tools/site/why_losses.py); `label` is null when it could not be explained. */
     loss_record?: { cause?: string | null; label?: string | null; explanation?: string | null; quotes?: DecidedQuote[] } | null;
+    /** News on the stock since its analysis (rs2-local tools/site/news_watch.py): events from the press that touch a point the analysis named, newest first. */
+    news?: NewsWarning[];
+    /** The newest serious news warning raised after the newest filing the report read; the value reads filings only. */
+    under_review?: { since: string; headline: string; why: string; id: string } | null;
+}
+
+export interface NewsWarning {
+    id: string; day: string; serious: boolean; direction: 'worse' | 'better' | 'unclear'; new_matter: boolean; why: string; quote: string;
+    touches: { id: string; claim: string }[]; headline: string; url: string; source: string | null; outlets: number;
 }
 
 export interface DecidedQuote { id: string; quote: string }
