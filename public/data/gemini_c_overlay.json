@@ -2,10 +2,10 @@
  "count": 248,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-25T16:11:34Z",
+ "generated_at": "2026-11-25T16:28:23Z",
  "list_covered": 160,
  "list_names": 160,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -2082,63 +2082,39 @@
    "verdict_reason": "expected return +14.5 points a year against the required return over 3 years"
   },
   "CENTA": {
-   "alpha_pts": 19.816051997566444,
+   "alpha_pts": null,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-08-06T18:30:42.000Z",
     "accepted_utc": "2026-08-06T22:30:42Z",
     "accession": "0000887733-26-000022",
-    "decision_time": "2026-11-22T06:22:40Z",
+    "decision_time": "2026-11-25T16:12:02Z",
     "form": "10-Q",
     "period": "2026-06-27"
    },
-   "claims": 108,
-   "claims_supported": 102,
-   "date": "2026-11-22T06:22:40Z",
-   "decided": {
-    "method": "decided.v1",
-    "version": "decided.v3.1 2026-11-20 WO_NC10a"
-   },
-   "equity_value": 3640183766.2127595,
+   "claims": 129,
+   "claims_supported": 125,
+   "date": "2026-11-25T16:12:02Z",
    "family": "operating",
-   "far_from_price": false,
-   "filed_shares": 63815000.0,
    "flags": [
-    "Central Garden & Pet Company entered into a Sale and Purchase Agreement to acquire approximately 80% of the outstanding shares of TRIXIE Heimtierbedarf GmbH & Co. KG for total consideration of up to \u20ac400 million, consisting of approximately \u20ac340 million upfront cash and an earn-out of up to \u20ac60.0 million.",
-    "Central contributed its pet distribution business (net assets of approximately $57 million) to a new partnership with Phillips Pet Food & Supplies in exchange for approximately $31 million in cash, a $5 million note receivable, and a 20% ownership interest valued at $26 million, recognizing a pre-tax gain of $2.5 million.",
-    "Central Garden & Pet Company announced that John D. Walker will retire as President, Garden Consumer Products."
+    "After fiscal year end, Central acquired W. Atlee Burpee Company (Burpee), a brand in packet seed, young plants, and garden supplies.",
+    "Central entered into a definitive Purchase Agreement to acquire an 80% interest in TRIXIE Heimtierbedarf GmbH & Co. KG for approximately \u20ac340 million in cash at closing plus an earn-out of up to \u20ac60.0 million, for total consideration of up to \u20ac400 million.",
+    "Central divested its pet distribution business (net assets of approximately $57 million) into a new partnership with Phillips Pet Food & Supplies in exchange for approximately $31 million in cash proceeds, an approximately $5 million note receivable, and a 20% partnership interest valued at $26 million, recognizing a pre-tax gain of $2.5 million."
    ],
    "in_code_book": false,
-   "ke": 0.0772359950902752,
-   "market_cap_at_publish": 2216404124,
+   "ke": null,
    "model": "gemini-4-hydrogen-high",
    "news_count": 0,
-   "no_value_reason": null,
+   "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
    "pending_offer": null,
-   "price_at_publish": 35.41,
    "qwen_book": null,
    "release_truncated": [],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
-   "seed_base": {
-    "1000": 56.45708686061521,
-    "3000": 57.62843429311854
-   },
-   "seeds_agree": true,
-   "share_unit_note": null,
-   "source": "on request (method_changed)",
+   "screener_commit": "6e8a85df740775db7ce05820a99b60a489a758f8",
+   "source": "new filing (new_filing:8-K:0000887733-26-000024)",
    "under_review": null,
-   "upside": 0.6423826895084588,
-   "value_base": 57.042760576866876,
-   "value_bear": 44.13217993064157,
-   "value_bull": 76.84787072662537,
-   "value_per_filed_share": {
-    "base": 57.042760576866876,
-    "bear": 44.13217993064157,
-    "bull": 76.84787072662537
-   },
-   "valued": true,
-   "verdict": "BUY",
-   "verdict_reason": "expected return +19.8 points a year against the required return over 3 years"
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
   },
   "CF": {
    "alpha_pts": 16.699604998069574,
@@ -11616,11 +11592,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +30.3 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 142,
+ "valued_count": 141,
  "verdict_counts": {
   "AVOID": 62,
-  "BUY": 57,
-  "NO_CALL": 115,
+  "BUY": 56,
+  "NO_CALL": 116,
   "WATCH": 14
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
