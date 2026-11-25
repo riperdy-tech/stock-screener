@@ -51,6 +51,9 @@ export function QwenPanel({ ticker, live }: { ticker: string; live: number | nul
                 <span className="font-mono text-[11px] text-ink-3">{fill(t('pgQwAsOf'), { date: q.date.slice(0, 10), source: q.source })}</span>
             </div>
             {q.verdict_reason && <p className="mt-1 text-[12px] text-ink-2">{q.verdict_reason}</p>}
+            {q.under_review && (
+                <p className="mt-1 text-[12px] text-warn">{fill(t('pgNwReview'), { date: q.under_review.since, headline: q.under_review.headline })}</p>
+            )}
 
             {q.valued ? (
                 <p className="mt-1 font-mono text-[12px] text-ink-2">
@@ -71,6 +74,27 @@ export function QwenPanel({ ticker, live }: { ticker: string; live: number | nul
                 <ul className="mt-1 list-disc pl-5 text-[12px] text-warn">
                     {q.flags.map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
+            )}
+
+            {(q.news ?? []).length > 0 && (
+                <div className="mt-2">
+                    <b className="text-[12px] font-semibold">{fill(t('pgNwTitle'), { n: String((q.news ?? []).length) })}</b>
+                    <ul className="mt-1 space-y-2 text-[12px] text-ink-2">
+                        {(q.news ?? []).map((w) => (
+                            <li key={w.id}>
+                                <span className="font-mono text-[11px] text-ink-3">{w.day}</span>{' '}
+                                <a href={w.url} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-accent">{w.headline}</a>
+                                {w.serious && <span className="font-mono text-[10px] text-warn"> ({t('pgNwSerious')})</span>}
+                                {w.outlets > 1 && <span className="font-mono text-[10px] text-ink-3"> {fill(t('pgNwOutlets'), { n: String(w.outlets) })}</span>}
+                                <div>{w.why}</div>
+                                {w.new_matter
+                                    ? <div className="text-ink-3">{t('pgNwNew')}</div>
+                                    : w.touches.slice(0, 2).map((p) => <div key={p.id} className="text-ink-3">{fill(t('pgNwTouches'), { claim: p.claim })}</div>)}
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="mt-1 text-[11px] text-ink-3">{t('pgNwNote')}</p>
+                </div>
             )}
 
             <button type="button" onClick={() => setOpen(!open)} className="mt-2 font-mono text-[11px] text-accent hover:text-ink">
