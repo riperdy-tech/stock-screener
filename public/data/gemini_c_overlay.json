@@ -1,10 +1,10 @@
 {
  "count": 247,
  "effort": "high",
- "fill_complete": true,
- "generated_at": "2026-11-24T01:09:28Z",
- "list_covered": 162,
- "list_names": 162,
+ "fill_complete": false,
+ "generated_at": "2026-11-25T00:34:53Z",
+ "list_covered": 159,
+ "list_names": 160,
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -5328,52 +5328,61 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +59.6 points a year against the required return over 3 years)"
   },
   "INSW": {
-   "alpha_pts": 13.998863446781826,
+   "alpha_pts": -10.76054076938642,
    "analysis": "complete",
-   "claims": 59,
-   "claims_supported": 55,
-   "date": "2026-11-17T18:56:01Z",
+   "based_on": {
+    "accepted": "2026-11-05T13:06:44.000Z",
+    "accepted_utc": "2026-11-05T18:06:44Z",
+    "accession": "0001104659-26-123078",
+    "decision_time": "2026-11-25T00:19:43Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 91,
+   "claims_supported": 75,
+   "date": "2026-11-25T00:19:43Z",
    "decided": {
     "method": "decided.v1",
-    "version": "decided.v2 2026-11-19 WO_NC9a"
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
    },
-   "equity_value": 4785600422.585226,
+   "equity_value": 2990997699.750977,
    "family": "commodity",
    "far_from_price": false,
-   "filed_shares": 49595945.0,
+   "filed_shares": 51155347.0,
    "flags": [
-    "INSW (the acquirer) completed its acquisition of Bruton Limited and its newbuilding VLCCs, paid mainly in INSW shares plus cash.",
-    "The Board declared a combined dividend of $5.05 per share, payable in the fourth quarter. It was declared but not yet paid as of the filing.",
-    "INSW sold a Suezmax in the third quarter, with net proceeds of $74 million and a gain of $53 million."
+    "INSW's Board of Directors declared a combined quarterly dividend of $5.05 per share of common stock.",
+    "INSW's Board of Directors increased its share repurchase program to $100 million and extended its expiration.",
+    "INSW paid total dividends of $11.75 per share of common stock for the nine-month period, including $5.05 per share paid in September."
    ],
    "in_code_book": false,
-   "ke": 0.08462083045154348,
+   "ke": 0.08214135214853849,
    "market_cap_at_publish": 4967184324,
-   "model": "claude-sonnet-5-5",
+   "model": "gemini-4-hydrogen-high",
    "no_value_reason": null,
    "pending_offer": null,
    "price_at_publish": 97.1,
    "qwen_book": null,
-   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "release_truncated": [],
+   "screener_commit": "6e8a85df740775db7ce05820a99b60a489a758f8",
    "seed_base": {
-    "1000": 98.69907268839788,
-    "3000": 94.28446346905315
+    "1000": 61.68313167933667,
+    "3000": 55.25470083115248
    },
    "seeds_agree": true,
    "share_unit_note": null,
-   "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
-   "upside": -0.036556706892758695,
-   "value_base": 96.49176807872551,
-   "value_bear": 51.009168118892234,
-   "value_bull": 315.04131059050155,
+   "source": "on request (method_changed)",
+   "upside": -0.3978484580692244,
+   "value_base": 58.46891625524458,
+   "value_bear": 36.070050477036375,
+   "value_bull": 130.66696323460445,
    "value_per_filed_share": {
-    "base": 96.49176807872551,
-    "bear": 51.009168118892234,
-    "bull": 315.04131059050155
+    "base": 58.46891625524458,
+    "bear": 36.070050477036375,
+    "bull": 130.66696323460445
    },
    "valued": true,
-   "verdict": "WATCH",
-   "verdict_reason": "expected return +14.0 points a year against the required return over 3 years; the two runs do not both reach BUY"
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -10.8 points a year against the required return over 3 years"
   },
   "IRDM": {
    "alpha_pts": null,
@@ -11035,10 +11044,10 @@
  },
  "valued_count": 141,
  "verdict_counts": {
-  "AVOID": 55,
+  "AVOID": 56,
   "BUY": 57,
   "NO_CALL": 115,
-  "WATCH": 20
+  "WATCH": 19
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }
