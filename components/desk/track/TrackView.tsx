@@ -51,7 +51,7 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
     const [tradeQuery, setTradeQuery] = useState('');
     // Opens on the AI book and Control against QQQ, the books' benchmark; SPY and IWM are one click away, SOXX and DRAM sit behind "+ more".
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        qwen_book: true, code_book: true, rn_depth: false, equal: false, equal_dial: false, QQQ: true, SPY: true, IWM: false,
+        ai_book: true, rn_depth: false, equal: false, equal_dial: false, QQQ: true, SPY: true, IWM: false,
     });
 
     useEffect(() => {
@@ -74,13 +74,13 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
     const commissionPct = Number.isFinite(bps) && bps >= 0 ? bps / 100 : 0;
 
     const books = ledgers?.ledgers ?? {};
-    const ai = books.qwen_book ?? books.rn_depth;   // the holdings, trades and history below follow Qwen's book once it exists
-    const aiIsQwen = !!books.qwen_book;
+    const ai = books.ai_book ?? books.rn_depth;   // the holdings, trades and history below follow the AI book once it exists
+    const aiIsBook = !!books.ai_book;
     const curve = useMemo(() => buildCurve(ledgers, commissionPct), [ledgers, commissionPct]);
     const early = useMemo(() => soldTooEarly(ledgers), [ledgers]);
     const board = useMemo(() => buildScoreboard(outcomes), [outcomes]);
     const rows = useMemo(() => ledgerRows(ai), [ai]);
-    const monthlyStart = bookStart(books.code_book) ?? bookStart(books.qwen_book);   // the monthly books' first day
+    const aiBookStart = bookStart(books.ai_book);   // the AI book's first day
     const since = bookStart(ai) ?? ledgers?.inception ?? '—';
 
     const holdings = useMemo(() => {
@@ -131,7 +131,7 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
                 className="mt-5 border-l-2 px-3.5 py-2.5 text-[13.5px] leading-snug text-ink"
                 style={{ background: 'color-mix(in oklch, var(--warn) 10%, var(--bg))', borderLeftColor: 'var(--warn)' }}
             >
-                {monthlyStart ? fill(t('trkBanner'), { date: monthlyStart }) : t('trkBannerNoBooks')}
+                {aiBookStart ? fill(t('trkBanner'), { date: aiBookStart }) : t('trkBannerNoBooks')}
             </p>
 
             <div className="mt-5 flex flex-wrap items-baseline gap-x-2.5 gap-y-2">
@@ -160,8 +160,8 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
                 </Micro>
             </TrackSection>
 
-            {/* THE LEDGER — the Qwen book (the old AI book if there is none) */}
-            <TrackSection title={t('trackLedger')} sub={aiIsQwen ? fill(t('trkLedgerQwen'), { date: since }) : t('trkAiBook')}>
+            {/* THE LEDGER — the AI book (the old AI book if there is none) */}
+            <TrackSection title={t('trackLedger')} sub={aiIsBook ? fill(t('trkLedgerAiBook'), { date: since }) : t('trkAiBook')}>
                 {!ai ? (
                     <p className="mt-4 text-[12px] text-ink-3">—</p>
                 ) : (

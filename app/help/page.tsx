@@ -200,9 +200,9 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'How can I trust the track record?', ko: '트랙 레코드를 어떻게 믿을 수 있나요?', zh: '我怎麼能相信績效紀錄？' },
         a: {
-            en: <>You should not treat it as proof yet. It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates, but it is a short paper record. The Code and AI books began on 6 November 2026, so there is almost nothing to read yet. Read it as an early scoreboard; see <Term term="not-yet-proven" />.</>,
-            ko: <>아직은 증거로 여기지 마세요. 날마다 앞으로 쌓아 가고(<Term term="point-in-time" />), <Term term="transaction-costs" />를 포함하며, 벤치마크는 같은 날짜로 측정하지만, 짧은 페이퍼 기록입니다. 재구축된 애널리스트가 가동되면 AI 기록은 0에서 다시 시작합니다. 초기 점수판으로 읽으세요. <Term term="not-yet-proven" />을 참조하세요.</>,
-            zh: <>目前不應把它當作證明。它是逐日往前建立的（<Term term="point-in-time" />），包含<Term term="transaction-costs" />，且基準以相同日期衡量，但它是一份短期的紙上紀錄。重建後的分析師上線時，AI 紀錄會從零重新開始。請把它當作早期的計分板；請見<Term term="not-yet-proven" />。</>,
+            en: <>You should not treat it as proof yet. It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates, but it is a short paper record. The AI book began on 27 November 2026, so there is almost nothing to read yet. Read it as an early scoreboard; see <Term term="not-yet-proven" />.</>,
+            ko: <>아직은 증거로 여기지 마세요. 날마다 앞으로 쌓아 가고(<Term term="point-in-time" />), <Term term="transaction-costs" />를 포함하며, 벤치마크는 같은 날짜로 측정하지만, 짧은 페이퍼 기록입니다. AI 북은 2026년 11월 27일에 시작했으므로 아직 읽을 것이 거의 없습니다. 초기 점수판으로 읽으세요. <Term term="not-yet-proven" />을 참조하세요.</>,
+            zh: <>目前不應把它當作證明。它是逐日往前建立的（<Term term="point-in-time" />），包含<Term term="transaction-costs" />，且基準以相同日期衡量，但它是一份短期的紙上紀錄。AI 帳本從 2026 年 11 月 27 日開始，所以目前幾乎沒有可讀的內容。請把它當作早期的計分板；請見<Term term="not-yet-proven" />。</>,
         },
     },
 ];

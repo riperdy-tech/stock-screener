@@ -1,6 +1,6 @@
 'use client';
 
-// The paper books: Qwen book and Code book (monthly), the old AI book (rn_depth, stopped), the Opus book (rn_opus, when present), Equal + risk dial (equal_dial, paper only, when present), Control (equal) and My book. Returns come after the
+// The paper books: the AI book (ai_book, when present), the old AI book (rn_depth, stopped), Equal + risk dial (equal_dial, paper only, when present), Control (equal) and My book. Returns come after the
 // scoreboard on purpose. CAGR and Sharpe stay hidden until a book has MIN_OBS_FOR_RATIOS observations.
 
 import React from 'react';
@@ -74,13 +74,11 @@ export function PaperBooks({ ledgers, loggedIn }: {
     const { t } = useLanguage();
     const books = ledgers.ledgers ?? {};
     const ai = books.rn_depth;
-    const qwen = bookStats(books.qwen_book);     // operator 2026-11-06: the monthly books, marked daily
-    const code = bookStats(books.code_book);
+    const aiBook = bookStats(books.ai_book);     // operator 2026-11-27: every BUY stock, equal weight; absent until its first run
     const control = bookStats(books.equal);
     const aiStats = bookStats(ai);
     const mine = bookStats(books.mine);
     const opusWatch = bookStats(books.rn_opus_watch);   // paper-only: the same run's WATCH names; absent until its first run
-    const opus = bookStats(books.rn_opus);       // paper-only Opus book (SPEC opus_v1); absent until its first run
     const v4 = bookStats(books.rn_v4);           // engine v2.1, paper-only, experimental and unpromoted (failed gate 2b); absent until its first run
     const dialBook = bookStats(books.equal_dial);   // paper only; absent until its first run
     const dial = dialNow(books.equal_dial);
@@ -90,26 +88,16 @@ export function PaperBooks({ ledgers, loggedIn }: {
 
     return (
         <TrackSection title={t('trkBooksTitle')}>
-            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (opus || v4 || qwen || code || dialBook) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
-                {qwen && (
-                    <Column title={t('trkQwenBook')} note={t('trkQwenNote')} since={bookStart(books.qwen_book)}>
-                        <StatGrid s={qwen} />
-                    </Column>
-                )}
-                {code && (
-                    <Column title={t('trkCodeBook')} note={t('trkCodeNote')} since={bookStart(books.code_book)}>
-                        <StatGrid s={code} />
+            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (opusWatch || v4 || aiBook || dialBook) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
+                {aiBook && (
+                    <Column title={t('trkAiBookTitle')} note={t('trkAiBookNote')} since={bookStart(books.ai_book)}>
+                        <StatGrid s={aiBook} />
                     </Column>
                 )}
                 <Column title={t('trkAiBook')} note={t('trkAiNote')} since={bookStart(books.rn_depth)}>
                     {aiStats ? <StatGrid s={aiStats} /> : <p className="mt-4 text-[12px] text-ink-3">—</p>}
                     {cash && <p className="mt-3 font-mono text-[11px] text-ink-2">{fill(t('trkCashSince'), { date: cash })}</p>}
                 </Column>
-                {opus && (
-                    <Column title={t('trkOpusBook')} note={t('trkOpusNote')} since={bookStart(books.rn_opus)}>
-                        <StatGrid s={opus} />
-                    </Column>
-                )}
                 {opusWatch && (
                     <Column title={t('trkOpusWatchBook')} note={t('trkOpusWatchNote')} since={bookStart(books.rn_opus_watch)}>
                         <StatGrid s={opusWatch} />

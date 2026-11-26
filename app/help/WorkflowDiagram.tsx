@@ -88,7 +88,7 @@ const STEPS: Step[] = [
         id: 'grading',
         title: { en: 'Grading', ko: '평가', zh: '評分' },
         desc: {
-            en: <>Two monthly paper books, Code and AI, are marked every day against QQQ, <Term term="spy" /> and <Term term="iwm" />, beside the <Term term="control-book" /> and yours, with real prices and assumed costs. The earlier analyst&apos;s verdicts were graded at 30, 91, 182 and 365 days.</>,
+            en: <>The paper AI book is marked every day against QQQ, <Term term="spy" /> and <Term term="iwm" />, beside the <Term term="control-book" /> and yours, with real prices and assumed costs. The earlier analyst&apos;s verdicts were graded at 30, 91, 182 and 365 days.</>,
             ko: <>각 판정은 30일, 91일, 182일, 365일 뒤 <Term term="iwm" />, <Term term="spy" />, QQQ와 비교해 평가됩니다. 세 개의 페이퍼 북 — AI 북, <Term term="control-book" />, 내 북 — 이 실제 가격과 가정한 비용으로 매일 거래합니다.</>,
             zh: <>每個判定會在 30、91、182 與 365 天後對照<Term term="iwm" />、<Term term="spy" />與 QQQ 評分。三個紙上帳本——AI 帳本、<Term term="control-book" />與你自己的帳本——每天以真實價格與假設成本交易。</>,
         },

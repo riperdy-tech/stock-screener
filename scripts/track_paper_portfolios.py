@@ -8,12 +8,16 @@ record what happens. Live books:
              Pure selection test, no sizing effects.
   rn_depth — equal-weight basket of research_now/watchlist names carrying an
              "undervalued" RS2 depth verdict (depth_overlay.json). The AI book.
+  ai_book  — equal-weight basket of every stock the AI analyst's filings read gives BUY
+             (gemini_c_overlay.json), whether or not it is on the screener list today.
+             It changes when a verdict changes. Started 2026-11-27 (operator). Paper only.
   mine     — the user's actual holdings (public/data/my_portfolio.json, written
              by the My Portfolio UI). Unitized like a fund: edits are treated
              as deposits/withdrawals that buy/sell units, so adding money never
              fakes performance. "Did I beat my own system?"
 
-  RETIRED (frozen in paper_ledgers.json, no longer computed): plan / plan2 (the
+  RETIRED (frozen in paper_ledgers.json, no longer computed): code_book / qwen_book
+  (the monthly formation books, stopped 2026-11-27 by the operator), plan / plan2 (the
   Kelly plan books, retired 2026-08-27), plan3 (momentum sleeve,
   retired 2026-08-27), and the *_llm overlay lane (plan_llm / plan2_llm /
   equal_llm, retired 2026-08-26 in the depth migration).
@@ -61,7 +65,6 @@ DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdict
 GEMINI_OVERLAY_JSON = DATA / "gemini_overlay.json"           # interim Gemini verdicts — rn_gemini ledger targets (paper only)
 GEMINI_C_OVERLAY_JSON = DATA / "gemini_c_overlay.json"       # the filings read by Gemini and Claude Opus (rs2-local gemini_ondemand): the Claude books follow it once it covers the list
 OPUS_OVERLAY_JSON = DATA / "opus_overlay.json"               # Opus valuation verdicts (SPEC opus_v1) — rn_opus ledger targets (paper only)
-M3O_BOOKS_JSON = DATA / "m3o_books.json"   # the monthly code book and Qwen's book (rs2-local tools/site/qwen_site.py, published from screener-publish)
 V4_PAPER_OVERLAY_JSON = DATA / "v4_paper_overlay.json"       # engine v2.1 shadow verdicts, EXPERIMENTAL and unpromoted — rn_v4 targets (paper only)
 # The old llm_overlay.json / portfolio_plan_llm.json lane (plan_llm/plan2_llm/equal_llm)
 # was RETIRED in the depth migration (2026-08-26); rn_depth is the depth paper book.
@@ -195,6 +198,18 @@ def ai_verdicts(opus_tk: dict, read: dict) -> dict:
             out[t] = {"verdict": r["verdict"], "direction": AI_DIRECTION[r["verdict"]], "run_source": "filings_read",
                       "model": r.get("model"), "not_for_real_money": True}
     return out
+
+
+def ai_book_targets(read: dict) -> dict:
+    """{ticker: weight_pct} for the AI book (operator 2026-11-27): every stock the filings read ran on and gives BUY, equally
+    weighted. No screener gate: a stock read on request counts as one on the list. Names the operator excluded are never in
+    the file (rs2-local leaves them out when it publishes)."""
+    tk = (read or {}).get("tickers") if isinstance(read, dict) else None
+    names = [t for t, r in (tk or {}).items() if isinstance(r, dict) and r.get("analysis") != "not run" and r.get("verdict") == "BUY"]
+    if not names:
+        return {}
+    weight = 100.0 / max(len(names), MIN_EQUAL_NAMES)
+    return {t: weight for t in names}
 
 
 def depth_targets(factor: dict, depth: dict) -> dict:
@@ -1339,7 +1354,8 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini", "rn_opus", "rn_opus_watch", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book", DIAL_LEDGER):
+    # code_book / qwen_book (the monthly formation books) stopped 2026-11-27 (operator): history kept, no longer advanced.
+    for _k in ("rn_depth", "rn_gemini", "rn_opus", "rn_opus_watch", "ai_book", "rn_v4", "rn_v4_low", "rn_v4_abs", DIAL_LEDGER):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1524,21 +1540,20 @@ def main():
             finalize_ledger(ledgers[_name], _nav, _stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[_name])
 
-        # ── code_book / qwen_book: the monthly formation books, marked daily (operator 2026-11-06) ──
-        # code_book = the screener's code-only book (rs2 engine series F); qwen_book = the same slots after Qwen's filing
-        # check (engine series FQ; a slot whose name Qwen flagged is cash). Targets change only at a formation. Held when
-        # m3o_books.json is missing; qwen_book may legitimately hold fewer names than code_book, never an empty set.
-        m3o_raw = load_json(M3O_BOOKS_JSON, {}) or {}
-        m3o_books = m3o_raw.get("books") or {}
-        m3o_ok = bool(m3o_books.get("code_book"))
-        for _name in ("code_book", "qwen_book"):
-            _nav, _stale = run_or_hold(_name, m3o_books.get(_name) or {}, "formation", source_ok=m3o_ok,
-                                       why="m3o_books.json missing or empty")
-            finalize_ledger(ledgers[_name], _nav, _stale, benches, as_of, book["inception"])
-            backfill_benches(ledgers[_name])
-        if m3o_ok:
-            print(f"  · code_book/qwen_book: formation {m3o_raw.get('formation')} "
-                  f"({len(m3o_books.get('code_book') or {})}/{len(m3o_books.get('qwen_book') or {})} names)", file=sys.stderr)
+        # ── ai_book: every stock the filings read gives BUY, PAPER ONLY (operator 2026-11-27: "Just form it now") ──
+        # The AI analyst's own book: no code book under it and no screener gate. A stock enters when its verdict becomes BUY
+        # and leaves when it stops being BUY (the usual two-run exit grace); a held name the file no longer lists is carried.
+        # Held, never liquidated, when the file is missing or empty. On no real-money list (kis/ledger_policy.py allow-list).
+        read_raw = load_json(GEMINI_C_OVERLAY_JSON, {}) or {}
+        read_tk = (read_raw.get("tickers") or {}) if isinstance(read_raw, dict) else {}
+        ai_targets = ai_book_targets(read_raw)
+        unknown_ai = {t for t in ledgers["ai_book"]["state"]["holdings"] if t not in read_tk}
+        nav_ai, stale_ai = run_or_hold("ai_book", ai_targets, "verdict", unknown=unknown_ai,
+                                       source_ok=bool(read_tk), why="gemini_c_overlay.json missing or empty")
+        finalize_ledger(ledgers["ai_book"], nav_ai, stale_ai, benches, as_of, book["inception"])
+        backfill_benches(ledgers["ai_book"])
+        if read_tk:
+            print(f"  · ai_book: {len(ai_targets)} BUY name(s) of {len(read_tk)} read", file=sys.stderr)
 
         # ── plan3 · bold (momentum sleeve): RETIRED 2026-08-27 ──────────────────
         # No longer computed. run_plan3_ledger + the kill-switch machinery stay defined
@@ -1584,7 +1599,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_opus", "rn_opus_watch", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
+        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_opus", "rn_opus_watch", "ai_book", "rn_v4", "rn_v4_low", "rn_v4_abs"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]

@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchAnalystTargets, fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
+    fetchAnalystTargets, fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchMacroEvents, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals, fetchMriMarketState, fetchMriEconomyState, fetchMriDriverExposures, fetchMriDailyRead, fetchStockDriverFlags,
     fetchMriDailySummary, fetchMriMacroFeatures, fetchMriRegimeTimeline, fetchMriRiskState, fetchMriSectorRanking, fetchMriSectorValidation,
     fetchMriCloudDaily, fetchMriCloudExport, fetchMriCombined, fetchMriDataHealth, fetchMriHistoryIndex, fetchMriNber, fetchMriNewsAccumulation,
@@ -22,7 +22,7 @@ import {
     type GeminiCOverlayPayload, type GeminiCRow, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
     type MriCloudDaily, type MriCloudExport, type MriCombinedDiagnostic, type MriDataHealth, type MriHistoryIndex, type MriNberBenchmark,
     type MriNewsAccumulation, type MriNewsMonitoring, type MriNewsScoreReport, type MriNewsSources, type MriSnapshotManifest,
-    type MonthlyBooksPayload, type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriMarketState, type MriEconomyState, type MriDriverExposures, type MriDailyRead, type StockDriverFlags, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict,
+    type MriDailySummary, type MriMacroFeatures, type MriRegimeTimeline, type MriRiskState, type MriMarketState, type MriEconomyState, type MriDriverExposures, type MriDailyRead, type StockDriverFlags, type MriSectorRanking, type MriSectorValidation, type OpusOverlayPayload, type OpusVerdict,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -79,8 +79,6 @@ export interface DeskData {
     geminiCMeta: Pick<GeminiCOverlayPayload, 'generated_at' | 'count' | 'valued_count' | 'verdict_counts'> | null;
     /** The analysts' targets by ticker (analyst_targets.json). An empty map when the file is absent. */
     analystTargets: AnalystTargetsPayload;
-    /** The monthly Code and AI books of record (m3o_books.json). Null when the file is absent. */
-    monthly: MonthlyBooksPayload | null;
     /** MRI news candidates index (display only). Null when the file is absent. */
     macroEvents: MacroEventsPayload | null;
     /** Measured sensitivities by ticker (display only). Null when the file is absent. */
@@ -99,7 +97,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, geminiC: {}, geminiCMeta: null, analystTargets: { tickers: {} }, monthly: null, macroEvents: null, driverFlags: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, geminiC: {}, geminiCMeta: null, analystTargets: { tickers: {} }, macroEvents: null, driverFlags: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null, priceSession: null,
 };
@@ -147,7 +145,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, gc, mb, ep, at, dfl] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, gc, ep, at, dfl] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -160,7 +158,6 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('opus', fetchOpusOverlay),
         optional('macroEvents', fetchMacroEvents),
         optional('geminiC', fetchGeminiCOverlay),
-        optional('monthly', fetchMonthlyBooks),
         optional('enginePrices', fetchEnginePrices),
         optional('analystTargets', fetchAnalystTargets),
         optional('driverFlags', fetchStockDriverFlags),
@@ -216,7 +213,6 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         geminiC: geminiCPayload?.tickers ?? {},
         geminiCMeta: geminiCPayload ? { generated_at: geminiCPayload.generated_at, count: geminiCPayload.count, valued_count: geminiCPayload.valued_count, verdict_counts: geminiCPayload.verdict_counts } : null,
         analystTargets: at ?? { tickers: {} },
-        monthly: (mb as MonthlyBooksPayload | null) ?? null,
         macroEvents: (me as MacroEventsPayload | null) ?? null,
         driverFlags: (dfl as StockDriverFlags | null) ?? null,
         ledgers: pl,

@@ -34,9 +34,9 @@ export function ChineseHelpBody() {
                     <b>目前狀況</b>
                     <ul className="mt-1.5 list-disc space-y-1 pl-5">
                         <li>
-                            篩選器每月挑出大約 50 到 60 檔股票組成一個月度帳本。從 2026 年 11 月 6 日起，有兩個紙上帳本跟隨它：
-                            代碼帳本（只有篩選器的選股）與 AI 帳本（同樣的選股，但當 AI 分析師閱讀申報文件發現重大事件時，
-                            該名額改以現金持有）。兩者都是模擬，不涉及真實資金。
+                            主要的紙上帳本是 AI 帳本。它以等權重持有 AI 分析師目前評為 BUY 的每一檔股票，
+                            包括應要求分析的股票，不只是篩選器的名單。判定變成 BUY 時股票進入，不再是 BUY 時離開。
+                            它從 2026 年 11 月 27 日開始。它是模擬，不涉及真實資金。
                         </li>
                         <li>
                             AI 分析師閱讀篩選器名單上股票的申報文件。它的分析在每檔股票的頁面上，只有在能算出價值時才附上價值。
@@ -52,7 +52,7 @@ export function ChineseHelpBody() {
                             本站絕不交易。
                         </li>
                         <li>
-                            這裡的一切都尚未被證明。真正重要的比較——AI 帳本是否打敗代碼帳本——還沒有被衡量。請見
+                            這裡的一切都尚未被證明。AI 帳本運行的時間太短，什麼都還說明不了，AI 分析師也尚未以報酬評分。請見
                             <A href="#validation">系統如何被驗證</A>。
                         </li>
                     </ul>
@@ -96,7 +96,7 @@ export function ChineseHelpBody() {
                         絕不賣出。<b>尚未運作。</b>請見<A href="#followup">每日跟進</A>。
                     </li>
                     <li>
-                        <b>評分 — 為紀錄評分。</b>代碼與 AI 兩個月度紙上帳本每天對照基準標記，旁邊還有對照帳本與你自己的
+                        <b>評分 — 為紀錄評分。</b>紙上的 AI 帳本每天對照基準標記，旁邊還有對照帳本與你自己的
                         持股。先前分析師的判定曾拿之後的股價來評分；AI 分析師尚未以報酬評分。請見<A href="#track">績效紀錄</A>。
                     </li>
                 </ol>
@@ -502,11 +502,11 @@ export function ChineseHelpBody() {
 
             {/* 上線 */}
             <Section id="relaunch" title="運作中、已停止與下一步">
-                <p>截至 2026 年 11 月 12 日，系統各部分的狀態：</p>
+                <p>截至 2026 年 11 月 27 日，系統各部分的狀態：</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>運作中。</b>篩選器與它的每日評分；個股頁面上 AI 分析師的分析；以及從 2026 年 11 月 6 日起每天以紙上
-                        方式標記的代碼帳本與 AI 帳本。
+                        <b>運作中。</b>篩選器與它的每日評分；個股頁面上 AI 分析師的分析；以及從 2026 年 11 月 27 日起每天以紙上
+                        方式標記的 AI 帳本。
                     </li>
                     <li>
                         <b>已停止。</b>先前的判定分析師與它的閘門。它的 AI 紙上帳本只持有現金。它的紀錄保留在 Track 頁面，
@@ -519,8 +519,8 @@ export function ChineseHelpBody() {
                         <b>關閉。</b>真實資金的鏡像已停止。本站絕不交易。
                     </li>
                     <li>
-                        <b>下一步。</b>每個月會建立新的月度帳本；下一個預定在 2026 年 11 月 30 日。AI 帳本是否打敗代碼帳本
-                        還沒有被衡量，要等帳本累積好幾個月的標記後才讀得出來。
+                        <b>下一步。</b>AI 帳本會隨判定改變而改變：定期更新之後、出現新的申報文件，或新聞警示觸發重新閱讀。
+                        它是否比基準做得更好還沒有被衡量，要等帳本累積好幾個月的標記後才讀得出來。
                     </li>
                 </ul>
                 <SubHeading>先前的 AI 紀錄</SubHeading>
@@ -533,7 +533,7 @@ export function ChineseHelpBody() {
             {/* 績效紀錄 */}
             <Section id="track" title="績效紀錄 — 誠實的量尺">
                 <p>
-                    系統不展示討好人的<Term term="backtest" />，而是每天對它每月的選股進行{' '}
+                    系統不展示討好人的<Term term="backtest" />，而是每天對 AI 帳本進行{' '}
                     <Term term="paper-trading" />，使用真實價格與假設的<Term term="transaction-costs" />。如果系統錯了，
                     這個頁面會說出來。這裡的每個數字都是紙上（模擬）的，而且涵蓋的期間很短。
                 </p>
@@ -548,17 +548,14 @@ export function ChineseHelpBody() {
                 </p>
                 <SubHeading>橫幅</SubHeading>
                 <p>
-                    頂端的橫幅說明：頁面上的每個帳本都是紙上帳本；代碼帳本與 AI 帳本從 2026 年 11 月 6 日開始，運行時間
+                    頂端的橫幅說明：頁面上的每個帳本都是紙上帳本；AI 帳本從 2026 年 11 月 27 日開始，運行時間
                     太短，什麼都還顯示不出來；AI 分析師尚未以報酬評分；而成績單與舊的 AI 帳本屬於已停止的分析師。
                 </p>
                 <SubHeading>紙上帳本</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>AI 帳本</b> — 代碼帳本的選股，但當 AI 分析師閱讀申報文件發現重大事件時，該名額改以現金持有。
-                        每月組成，每個名額等權重。
-                    </li>
-                    <li>
-                        <b>代碼帳本</b> — 只有篩選器的月度選股，也就是 AI 分析師檢查之前的同一批股票。
+                        <b>AI 帳本</b> — 以等權重持有 AI 分析師目前評為 BUY 的每一檔股票，包括應要求分析的股票。判定變成 BUY
+                        時股票進入，不再是 BUY 時離開。從 2026 年 11 月 27 日開始。
                     </li>
                     <li>
                         <b>舊 AI 帳本（已停止）</b> — 曾跟隨先前分析師通過閘門的判定（<Term term="rn-depth" />）。它只持有現金。
@@ -586,7 +583,7 @@ export function ChineseHelpBody() {
                 <p>
                     Growth of 100 把各帳本與基準（<Term term="qqq" />、<Term term="spy" />、<Term term="iwm" />與其他幾個）從同一個起點
                     畫出，附有區間選擇器與會為每筆交易重新計算成本的成本假設欄。帳本列出
-                    AI 帳本的交易與白話原因（例如「entered at the monthly formation」），沒有交易的日子則顯示為「no changes」。
+                    AI 帳本的交易與白話原因（例如「entered when the verdict became BUY」），沒有交易的日子則顯示為「no changes」。
                 </p>
                 <SubHeading>誠實的規則</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
@@ -597,7 +594,7 @@ export function ChineseHelpBody() {
                 <SubHeading>如何解讀</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li><b>對照帳本 vs QQQ</b> — 唯有選股打敗<Term term="benchmark" />QQQ，選股才算有效。</li>
-                    <li><b>AI 帳本 vs 代碼帳本</b> — 只有當 AI 帳本打敗代碼帳本時，AI 分析師的申報文件檢查才算物有所值。這還沒有被衡量：帳本從 2026 年 11 月 6 日才開始。</li>
+                    <li><b>AI 帳本 vs 基準與對照帳本</b> — 只有當 AI 帳本打敗基準（SPY、QQQ）與對照帳本時，AI 分析師的申報文件檢查才算物有所值。這還沒有被衡量：帳本從 2026 年 11 月 27 日才開始。</li>
                     <li><b>我的帳本 vs 其他</b> — 你自己的偏離會以<Term term="behavior-gap" />的形式顯現。</li>
                 </ul>
                 <Callout kind="info">
@@ -656,8 +653,8 @@ export function ChineseHelpBody() {
                         日期，而且同一檔股票的重複判定被視為彼此相關，而非獨立。
                     </li>
                     <li>
-                        <b>一個對照組。</b>最尖銳的問題是：AI 分析師的閱讀有沒有在篩選之上多帶來什麼。代碼帳本與 AI 帳本
-                        就是為了回答這個問題而存在：如果 AI 帳本打不贏代碼帳本，AI 分析師的申報文件檢查就沒有為選股多帶來
+                        <b>一個對照組。</b>最尖銳的問題是：AI 分析師的閱讀有沒有在篩選之上多帶來什麼。誠實的尺度是基準（SPY、QQQ）
+                        與對照帳本（以等權重持有篩選器名單）：如果 AI 帳本打不贏它們，AI 分析師的申報文件檢查就沒有為選股多帶來
                         什麼。這個比較還沒有被衡量。
                     </li>
                     <li>
@@ -669,7 +666,7 @@ export function ChineseHelpBody() {
                 </p>
                 <Callout kind="warn">
                     <b>尚無結論。</b><Term term="not-yet-proven" />：至今被評分的每個判定都來自先前的分析師，而它已被裁定無效，
-                    AI 分析師也尚未以報酬評分。要等月度帳本累積足夠月數的標記，才能對任何一方得出結論。
+                    AI 分析師也尚未以報酬評分。要等 AI 帳本累積足夠月數的標記，才能對任何一方得出結論。
                 </Callout>
             </Section>
 
