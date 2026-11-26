@@ -30,9 +30,8 @@ export const BOOKS: { key: string; color: string; width: number; dash?: string }
     // rn_depth is the AI book, drawn from its own inception only (no splice of the retired equal_llm
     // history). Its history so far is the old analyst's; the page says so, the line does not hide it.
     // Strong solid lines for the two books; labels come from i18n (see NavChart).
-    // qwen_book / code_book (operator 2026-11-06): the monthly formation books, marked daily; the old AI book stays, stopped since 09-24.
-    { key: 'qwen_book', color: 'var(--pos)', width: 2.4 },
-    { key: 'code_book', color: 'var(--accent)', width: 2.2, dash: '8 3' },
+    // ai_book (operator 2026-11-27): every stock the AI analyst rates BUY, equal weight; the old AI book stays, stopped since 09-24.
+    { key: 'ai_book', color: 'var(--pos)', width: 2.4 },
     { key: 'rn_depth', color: 'var(--ink)', width: 1.6 },
     { key: 'equal', color: 'var(--accent)', width: 2 },
     // equal_dial (operator 2026-11-13): paper only, Equal's rule at the MRI risk dial's gross

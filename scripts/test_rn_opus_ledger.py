@@ -66,7 +66,7 @@ def _run(tmp_path, monkeypatch, session, opus):
               "tickers": {t: dict(fct(i + 1), fct_band="research_now") for i, t in enumerate(NAMES)}}
     (d / "factor_scores.json").write_text(json.dumps(factor), encoding="utf-8")
     monkeypatch.setattr(tp, "FACTOR_SCORES_JSON", d / "factor_scores.json")
-    for name in ("DEPTH_OVERLAY_JSON", "GEMINI_OVERLAY_JSON", "GEMINI_C_OVERLAY_JSON", "M3O_BOOKS_JSON", "V4_PAPER_OVERLAY_JSON",
+    for name in ("DEPTH_OVERLAY_JSON", "GEMINI_OVERLAY_JSON", "GEMINI_C_OVERLAY_JSON", "V4_PAPER_OVERLAY_JSON",
                  "DIVIDENDS_JSON", "MY_PORTFOLIO_JSON", "RISK_STATE_JSON"):
         monkeypatch.setattr(tp, name, d / f"absent_{name}.json")
     op = d / "opus_overlay.json"

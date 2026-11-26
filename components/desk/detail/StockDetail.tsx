@@ -188,7 +188,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
             {/* Everything else, each closed by default */}
             <div className="mt-6 max-w-[720px]">
-                <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} monthly={data.monthly} />
+                <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} />
                 <DriverFlagsPanel p={data.driverFlags} ticker={row.ticker} />
                 {news > 0 && (
                     <div className="mt-6">

@@ -628,22 +628,6 @@ export async function fetchGeminiCOverlay(): Promise<GeminiCOverlayPayload | nul
     return fetchJson<GeminiCOverlayPayload>('/data/gemini_c_overlay.json');
 }
 
-/**
- * The monthly books of record (m3o_books.json, written with the Qwen files): ticker -> weight per book. A name in `code_book`
- * but not in `qwen_book` is a slot Qwen's filing check turned into cash.
- */
-export interface MonthlyBooksPayload {
-    schema?: string;
-    formation?: string;
-    generated_at?: string;
-    slots?: number;
-    books?: { code_book?: Record<string, number>; qwen_book?: Record<string, number> };
-}
-
-export async function fetchMonthlyBooks(): Promise<MonthlyBooksPayload | null> {
-    return fetchJson<MonthlyBooksPayload>('/data/m3o_books.json');
-}
-
 // ── Opus valuation verdicts (stocks-workspace/baselines/opus/SPEC.md v1, section 3d) ─────────────
 // Paper-only: written by stocks-workspace/baselines/opus/build_opus_overlay.py, shown on the stock page and graded by
 // the separate rn_opus paper book. The model supplies inputs; code does the arithmetic. Never part of depth.
