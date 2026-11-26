@@ -2,18 +2,46 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 68,
- "claims_supported": 62,
- "date": "2026-11-17T22:49:40Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-09T21:30:26.000Z",
+  "accepted_utc": "2026-11-10T02:30:26Z",
+  "accession": "0001628280-26-072251",
+  "decision_time": "2026-11-26T20:29:09Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 80,
+ "claims_supported": 76,
+ "date": "2026-11-26T20:29:09Z",
+ "family": "operating",
  "flags": [
-  "Hinge Health completed the acquisition of Cylinder Health, a virtual-first digestive healthcare company. The nine-month cash flow statement shows 97,353 (table in thousands) paid for the business, net of cash acquired. Goodwill rose to 113,030 (table in thousands) from 64,096 (table in thousands) at year-end 2025.",
-  "The Board approved an increase to the share repurchase program, leaving $300.0 million available for future repurchase and a total authorization of $496.5 million.",
-  "President James Pursley notified the company he will resign as President effective at the start of 2027 and was appointed a Class II director effective in early January 2027. The 8-K says the decision was not the result of any disagreement."
+  "Hinge Health announced a restructuring plan to reduce its workforce by approximately 160 people, or approximately 10% of its workforce, recording $7.5 million in restructuring charges, and completed execution of the plan.",
+  "Hinge Health completed its initial public offering, issuing and selling 8,522,528 shares of Class A common stock at $32.00 per share for $255.7 million in proceeds net of underwriting discounts and commissions, while selling stockholders sold 7,193,372 shares, alongside preferred stock conversions into Class B common stock and $571.4 million in stock-based compensation expense.",
+  "Hinge Health paid (50,000) (table in thousands) on a repurchase agreement with Coatue and recorded an adjustment of 104,174 (table in thousands) reflecting a deemed contribution from Series D and Series E redeemable convertible preferred stock extinguishment."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "loss_record": {
+  "cause": "operating_losses",
+  "explanation": "Hinge Health's continuing operations posted operating losses in all three fiscal years (in thousands: $(130,514) in 2023, $(31,910) in 2024, and $(546,371) in 2025) as operating expenses exceeded gross profit, while other income, net was positive in every year. The 2025 loss was further enlarged by $571.4 million of stock-based compensation expense recognized upon IPO effectiveness, and the company did not turn operationally profitable until 2026.",
+  "label": "the continuing operations themselves lose money",
+  "quotes": [
+   {
+    "id": "P3",
+    "quote": "Loss from operations | (546,371) | (31,910) | (130,514)"
+   },
+   {
+    "id": "P2",
+    "quote": "While we have achieved net income on a quarterly basis in certain periods, we have incurred net losses on an annual basis since our inception."
+   },
+   {
+    "id": "P3",
+    "quote": "Upon the effectiveness of the registration statement on Form S-1 relating to our IPO (the \"IPO Registration Statement\"), the time based and performance vesting condition of certain RSUs and PRSUs was met, and we recognized $571.4 million of stock-based compensation expense"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
+ "model": "gemini-4-hydrogen-high",
  "news": [
   {
    "day": "2026-11-25",
@@ -39,712 +67,953 @@
    "why": "The CEO discussed the new migraine care program at the HLTH 2026 conference, which is a routine promotional appearance around an already-launched expansion beyond MSK care."
   }
  ],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 3 fiscal years",
+ "no_value_reason": "the filings show the continuing operations themselves losing money, so no value is given",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited items",
-    "claim": "Hinge Health sells an AI-driven digital care platform that pairs motion tracking, a wearable nerve-stimulation device and a care team. It began with joint and muscle (MSK) care and has expanded into migraine and, through the Cylinder Health acquisition, gastrointestinal care.",
+    "basis": "stated in [P4]",
+    "claim": "Hinge Health sells an AI-powered software platform and proprietary wearable device that automate care for joint and muscle health, migraine, and gastrointestinal conditions under the oversight of a clinical care team.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Hinge Health leverages software, including AI, to automate care for joint and muscle health, migraine, and gastrointestinal (GI) conditions, delivering an outstanding member experience, improved member outcomes, and cost reductions for our clients.",
+     "Members receive personalized and automated care through our AI-powered motion tracking technology and a proprietary electrical nerve stimulation wearable device, all designed and monitored by our AI-supported care team of licensed physical therapists, physicians, registered dietitians, and board-certified health coaches."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P4]",
+    "claim": "From a single application, the platform offers chronic, acute, surgical, fall prevention, and no-charge prevention programs, adding HingeSelect in 2025, a Migraine Care Program in 2026, and an expected Gastrointestinal Care Program in 2027.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "Hinge Health leverages software, including AI, to automate care for joint and muscle health, delivering an outstanding member experience, improved member outcomes, and cost reductions for our clients and members.",
-     "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members."
+     "In 2025, we launched our high-performance in-person provider network for care, HingeSelect, which allows us to now provide members with end-to-end care while further reducing costs for members, employers, and health plans.",
+     "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members.",
+     "In August 2026, we acquired Cylinder Health, Inc. (\u201cCylinder\u201d), a virtual-first digestive healthcare company, and we expect to launch an integrated Gastrointestinal Care Program in 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The paying customers are mainly self-insured employers, with health plans' fully-insured and Medicare Advantage populations and federal plans as additional markets. Members use the platform through these clients.",
+    "basis": "stated in [P4]",
+    "claim": "Its clients are primarily self-insured employers, including public sector employers and labor unions, alongside health plans' fully-insured and Medicare Advantage populations and federal insurance plans, reaching 3,270 clients as of September 30, 2026.",
     "facts": [
-     "P1",
      "P4"
     ],
     "quotes": [
-     "Our clients are primarily self-insured employers and include many of the nation\u2019s leading enterprises across a broad range of industries and sizes."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Most revenue is channelled through partners, mainly health plans and PBMs. Client contracts through partners were 82% of revenue in the latest fiscal year. Three large health plans each exceeded 10%: HCSC 17.5%, Elevance 13.7% and Aetna 10.5%.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Revenue comes from annual per-member subscriptions, recognized ratably over 12 months, and clients pay only for members who engage. Most clients are now billed under an engagement-based model: an upfront annual platform fee per member plus a fee per completed billable session.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "We primarily recognize revenue ratably over the 12 months after an eligible life becomes a member, and as such our revenue has historically been highly predictable.",
-     "Most of our clients are billed through an engagement-based pricing model based on an annual upfront platform fee per member plus a fee per each completed billable session."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Revenue growth is driven by the client base, contracted lives and member engagement. Clients rose to 3,270 from 2,560 a year earlier, and third-quarter revenue grew 52% to $235.0 million. Contracted lives were about 25 million at the last year-end disclosed.",
-    "facts": [
-     "P4",
-     "P6",
-     "P3"
-    ],
-    "quotes": [
+     "Our clients are primarily self-insured employers and include many of the nation\u2019s leading enterprises across a broad range of industries and sizes.",
+     "We also serve health plans\u2019 fully-insured and Medicare Advantage populations and federal insurance plans.",
      "We have rapidly grown our client base, expanding to 3,270 clients as of September 30, 2026 compared to 2,560 clients as of September 30, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Billing is seasonal and runs ahead of revenue. Most new clients sign in the second half of the year and launch in the first half of the next. Billings peak in the second quarter and revenue is recognized later, so deferred revenue grew to 459,174 from 300,855 at the prior year-end (table in thousands). LTM calculated billings were $960.3 million versus $624.2 million.",
+    "basis": "stated in [P1] and [P3]",
+    "claim": "The client base provided access to approximately 25 million contracted lives as of December 31, 2025, consisting of approximately 22 million self-insured employer lives and approximately 3 million fully-insured, Medicare Advantage, and federal plan lives.",
     "facts": [
-     "P4",
-     "F1",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Approximately 22 million lives from self-insured employers were contracted in our existing client base as of December 31, 2025, and we intend to leverage our experienced sales force and strong relationships with health plans, benefits consultants, and other ecosystem partners to further expand our client base.",
+     "As of December 31, 2025, we were contracted with approximately 3 million lives in this segment.",
+     "This expansion has given us access to an increased number of contracted lives, which grew to approximately 25 million as of December 31, 2025 from 20 million as of December 31, 2024, and 16 million as of December 31, 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2] and [P4]",
+    "claim": "Hinge Health distributes through a direct sales force and over 60 partners, with partner-contracted clients generating 82% of 2025 revenue and HCSC, Elevance, and Aetna accounting for 17.5%, 13.7%, and 10.5% of 2025 revenue, respectively.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we had over 60 partners.",
+     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024.",
+     "For the years ended December 31, 2025 and 2024, client contracts through (i) Health Care Service Corporation (\u201cHCSC\u201d) accounted for 17.5% and 17.1% of our revenue, respectively, (ii) Elevance Health, Inc., formerly known as Anthem, Inc. (\u201cElevance\u201d), accounted for 13.7% and 14.0% of our revenue, respectively, and (iii) Aetna Life Insurance Company (\u201cAetna\u201d) accounted for 10.5% and 11.6% of our revenue, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P3]",
+    "claim": "The business primarily covers U.S. eligible lives and is in early-stage global expansion into Canada, France, Germany, Ireland, the Netherlands, and the United Kingdom for U.S.-based multinational clients without hardware or care team support.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We currently primarily cover eligible lives within the U.S. and we are in the early stages of our global expansion.",
+     "We have now expanded into Canada, France, Germany, Ireland, the Netherlands, and the United Kingdom (\"UK\") and expect to further expand our global footprint in 2026.",
+     "Because our global program does not utilize hardware and is streamlined without care team access and support, we expect to be able to reach more members across more countries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Clients pay only when eligible lives enroll and complete a billable activity\u2014most commonly via an annual upfront platform fee per member plus per-session fees\u2014with subscription revenue recognized primarily ratably over 12 months.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We primarily recognize revenue ratably over the 12 months after an eligible life becomes a member, and as such our revenue has historically been highly predictable.",
+     "We are able to bill our clients once an eligible life enrolls in our platform and performs a billable activity, in accordance with our clients\u2019 billing arrangements.",
+     "Most of our clients are billed through an engagement-based pricing model based on an annual upfront platform fee per member plus a fee per each completed billable session."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3] and [P6]",
+    "claim": "Revenue rose from $390,404 (table in thousands) in 2024 to $587,860 (table in thousands) in 2025 and grew 52% year-over-year to $235.0 million in Q3 2026, while LTM calculated billings increased 54% year-over-year to $960.3 million as of September 30, 2026.",
+    "facts": [
+     "P3",
      "P6"
     ],
     "quotes": [
-     "The majority of new clients enter into contracts with us in the second half of each calendar year, which aligns with the typical employee benefit enrollment period."
+     "Revenue | $587,860 | $390,404 | $292,730",
+     "Revenue increased 52% year-over-year to $235.0 million compared to revenue of $154.2 million in Q3 2025.",
+     "LTM calculated billings increased 54% year-over-year to $960.3 million as of September 30, 2026, compared to $624.2 million as of September 30, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the margin trend is read from the reported figures",
-    "claim": "Cost of revenue is mainly the care team, support staff, device inventory and technology costs, and it grew more slowly than revenue. Third-quarter GAAP gross margin was 87% versus 82% a year earlier.",
+    "basis": "stated in [P3]",
+    "claim": "Revenue expansion is driven by sole-provider client contracts averaging three years with a 97% 12-month retention rate as of December 31, 2025, alongside growing LTM average eligible lives to 20,105 (table in thousands) and members to 782,890 in 2025.",
     "facts": [
-     "P3",
-     "P6",
-     "F2"
+     "P3"
     ],
     "quotes": [
-     "These costs primarily include personnel-related costs, including employee salaries, stock-based compensation, and other related expenses for our care team, support operations personnel, and site reliability engineering personnel."
+     "Once we contract with a client, we are typically the sole digital MSK care provider to their contracted lives for an average contract term of three years.",
+     "Our 12-month client retention rate was 97% as of December 31, 2025.",
+     "Members | 782,890 | 532,326 | 370,526",
+     "LTM average eligible lives (in thousands) | 20,105 | 15,747 | 12,181"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in [P4]",
+    "claim": "Because most new clients contract in the second half of the calendar year and launch in the first half of the next year, calculated billings peak in the second quarter and free cash flow is lowest in the first quarter.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The majority of new clients enter into contracts with us in the second half of each calendar year, which aligns with the typical employee benefit enrollment period.",
+     "Historically, our calculated billings are highest in the second quarter of the year, as this is when we are able to bill the majority of clients who entered into contracts in the preceding year.",
+     "Consequently, our free cash flow is typically highest in the second or third quarter and is usually lowest in the first quarter due to increased new client onboarding expenses preceding cash inflows."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Operating costs are led by sales and marketing (85,241 in the third quarter), followed by research and development (37,473) and general and administrative (31,291) (table in thousands). Commissions are amortized over the benefit period. Operating income was 50,325 on revenue of 234,970, a 21% GAAP operating margin.",
+    "basis": "stated in [P3] and [P4]",
+    "claim": "Cost of revenue is driven by care team, support, and site reliability personnel costs, subscription-amortized hardware inventory, hosting, and internal-use software amortization, while TrueMotion AI reduced traditional physical therapy human care team hours by approximately 97% based on 2025 data.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "These costs primarily include personnel-related costs, including employee salaries, stock-based compensation, and other related expenses for our care team, support operations personnel, and site reliability engineering personnel.",
+     "Cost of revenue also includes inventory costs, which are amortized over the member\u2019s subscription period, provisions for excess and obsolete inventory, and technology support costs, which include hosting and information technology costs and amortization of internal-use software.",
+     "According to our estimates based on data from 2025, our platform reduced the number of human care team hours associated with traditional physical therapy by approximately 97%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2], [P3], and [P6]",
+    "claim": "GAAP gross margin expanded from 66% in 2023 to 80% in 2025 and 87% in Q3 2026, with cost of revenue at 87,582 (table in thousands) in the first 9 months of 2026.",
     "facts": [
      "F2",
      "P3",
      "P6"
     ],
     "quotes": [
-     "We amortize third-party sales commissions and amortize a portion of internal sales commissions over the respective benefit periods."
+     "Gross profit | 80% | 77% | 66%",
+     "GAAP gross margin was 87% compared to 82% in Q3 2025.",
+     "Cost of revenue | 30,640 | 28,012 | 87,582 | 92,939"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the link to the nine-month swing is inferred from the figures and the IPO disclosure",
-    "claim": "Reported profitability is distorted by one-off stock-based compensation. Nine-month stock-based compensation was 50,324 versus 625,837 a year earlier (table in thousands). Management attributes a $571.4 million charge to the IPO vesting trigger, which explains the prior-year net loss and the swing to profit.",
+    "basis": "stated in [P3]",
+    "claim": "Operating expenses across R&D, sales and marketing, and G&A are driven by employee salaries and stock-based compensation, amortized internal and third-party sales commissions, enrollment promotion, outside professional services, and public-company compliance costs.",
     "facts": [
-     "F3",
-     "P3",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Contracts often include performance guarantees that put part of the fees at risk, tied to engagement thresholds, member-reported outcomes and client return on investment. The company says payouts have been immaterial so far.",
-    "facts": [
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "We have historically paid an immaterial amount related to these performance guarantees."
+     "Research and development expenses consist primarily of personnel-related costs, including employee salaries, stock-based compensation, and other related expenses for our engineering and product teams that are responsible for enhancing our platform and developing new or enhanced programs.",
+     "Sales and marketing expenses consist primarily of personnel-related costs, including employee salaries, stock-based compensation, and other related expenses, internal and third-party sales commissions, and marketing and promotional expenses.",
+     "General and administrative expenses consist primarily of personnel-related costs, including employee salaries, stock-based compensation, and other related expenses for finance, legal, human resources, and other administrative related teams."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item; the link to deferred revenue is inferred from the cash flow lines",
-    "claim": "The business converts to cash well because billings precede revenue. Nine-month operating cash flow was 259,098 versus 107,548 a year earlier (table in thousands), helped by a 156,741 increase in deferred revenue. The company used cash for 157,384 of share repurchases and 97,353 for a business acquisition.",
+    "basis": "stated in [F2], [F3], and [P3]",
+    "claim": "IPO equity vesting in May 2025 triggered $571.4 million of stock-based compensation and a 2025 operating loss of (546,371) (table in thousands), whereas lower stock-based compensation of 50,324 (table in thousands) in the 9 months ended September 30, 2026 accompanied operating income of 122,834 (table in thousands).",
     "facts": [
+     "F2",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Upon the effectiveness of the registration statement on Form S-1 relating to our IPO (the \"IPO Registration Statement\"), the time based and performance vesting condition of certain RSUs and PRSUs was met, and we recognized $571.4 million of stock-based compensation expense for the portion of the service period completed by employees and service providers from the grant date through the effectiveness of the IPO Registration Statement, as further described in Note 9, Common Stock, Equity Incentive Plans and Stock-Based Compensation to the consolidated financial statements included elsewhere in this Annual Report.",
+     "Loss from operations | (546,371) | (31,910) | (130,514)",
+     "Stock-based compensation | 50,324 | 625,837",
+     "Income (loss) from operations | 50,325 | (6,093) | 122,834 | (573,627)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] and [F3]",
+    "claim": "Member billings expanded deferred revenue to 459,174 (table in thousands) as of September 30, 2026 and helped generate 259,098 (table in thousands) in operating cash flow over the 9 months ended September 30, 2026, partially offset by working-capital outflows for accounts receivable and deferred commissions.",
+    "facts": [
+     "F1",
      "F3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Deferred revenue | 459,174 | 300,855",
+     "Net cash provided by operating activities | 259,098 | 107,548",
+     "Accounts receivable | (79,402) | (47,610)",
+     "Deferred commissions | (74,246) | (38,320)"
+    ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the earnings release and shown in the income statement.",
-    "claim": "Revenue is growing quickly: third-quarter revenue rose 52% year over year to $235.0 million from $154.2 million.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Revenue increased 52% year-over-year to $235.0 million compared to revenue of $154.2 million in Q3 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release; the client count is repeated in the 10-Q MD&A.",
-    "claim": "The client base is widening: clients rose 28% year over year to 3,270 from 2,560. LTM calculated billings rose 54% to $960.3 million from $624.2 million.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Number of clients increased 28% year-over-year to 3,270 clients as of September 30, 2026, compared to 2,560 clients as of September 30, 2025.",
-     "LTM calculated billings increased 54% year-over-year to $960.3 million as of September 30, 2026, compared to $624.2 million as of September 30, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated by the company in the 10-Q; the advantage is the company's own characterisation.",
-    "claim": "Distribution through large payers is a stated advantage: the partners include the five largest national health plans and the top three PBMs, and most contracts are completed through partners.",
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A.",
+    "claim": "Hinge Health is most often the sole digital MSK, migraine, or GI care provider offered to a client's contracted lives under a multi-year average contract term.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "Our partners include the five largest national health plans by self-insured lives, and the top three PBMs by market share.",
-     "As of September 30, 2026, we had over 60 partners."
+     "Once we contract with a client, we are most often the sole digital MSK, migraine or GI care provider offered to their contracted lives for an average contract term of three years."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the filings; the retention figure is dated at year-end and no later retention figure is given.",
-    "claim": "Contracts are sticky: the company is most often the sole digital provider to a client's lives under an average three-year term, and 12-month client retention was 97% at the last year-end.",
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A.",
+    "claim": "Hinge Health maintains an ecosystem of over 60 partners, including the five largest national health plans by self-insured lives and the top three PBMs by market share.",
     "facts": [
-     "P4",
-     "P3"
+     "P4"
     ],
     "quotes": [
-     "Once we contract with a client, we are most often the sole digital MSK, migraine or GI care provider offered to their contracted lives for an average contract term of three years.",
-     "Our 12-month client retention rate was 97% as of December 31, 2025."
+     "As of September 30, 2026, we had over 60 partners.",
+     "Our partners include the five largest national health plans by self-insured lives, and the top three PBMs by market share."
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated by the company; the causal link to gross margin is inferred.",
-    "claim": "The company says its automation lowers the human effort per member: it estimates its platform cut care-team hours versus traditional physical therapy by about 97%. Gross margin rose to 87% from 82%.",
+    "basis": "Stated directly in the Q3 2026 Form 10-Q MD&A.",
+    "claim": "The vast majority of Hinge Health's client contracts are completed through partners, enabling most implementations to finish in a 40-100 day period.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "In the first nine months of 2026 and in 2025, the vast majority of our contracts were completed via our partners, negating the need for many clients to contract directly with us since many clients can leverage existing contracts through our partners.",
+     "As a result, most implementations are completed in a 40-100 day period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Hinge Health expanded its client base by 28% year-over-year to 3,270 clients compared to 2,560 clients a year earlier.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
+     "Number of clients increased 28% year-over-year to 3,270 clients as of September 30, 2026, compared to 2,560 clients as of September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the FY2025 Form 10-K and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Hinge Health achieved a 97% client retention rate and reached approximately 25 million contracted lives.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our 12-month client retention rate was 97% as of December 31, 2025.",
+     "This expansion has given us access to an increased number of contracted lives, which grew to approximately 25 million as of December 31, 2025 from 20 million as of December 31, 2024, and 16 million as of December 31, 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release.",
+    "claim": "Third-quarter revenue increased 52% year-over-year to $235.0 million and LTM calculated billings increased 54% year-over-year to $960.3 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenue increased 52% year-over-year to $235.0 million compared to revenue of $154.2 million in Q3 2025.",
+     "LTM calculated billings increased 54% year-over-year to $960.3 million as of September 30, 2026, compared to $624.2 million as of September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release.",
+    "claim": "Hinge Health expanded its GAAP gross margin to 87% from 82% a year earlier and generated $112.7 million in quarterly free cash flow compared to $81.3 million in the prior-year quarter.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "GAAP gross margin was 87% compared to 82% in Q3 2025.",
+     "Free cash flow increased to $112.7 million compared to $81.3 million in Q3 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the FY2025 Form 10-K Item 1 and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Hinge Health estimates its TrueMotion AI motion tracking technology reduced human care team hours versus traditional physical therapy by approximately 97%, backed by over 106 million tracked activity sessions and 39 million member-reported outcome logs.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
      "According to our estimates based on data from 2025, our platform reduced the number of human care team hours associated with traditional physical therapy by approximately 97%.",
-     "GAAP gross margin was 87% compared to 82% in Q3 2025."
+     "From inception through December 31, 2025, we have had over one and a half million members, tracked over 106 million activity sessions, and generated 39 million member-reported outcome logs."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the release and income statement; the stock-compensation effect is read from the cash flow statement.",
-    "claim": "Profitability has turned positive on a GAAP basis: third-quarter operating income was $50.3 million against a $6.1 million loss a year earlier, a 21% operating margin.",
+    "basis": "Stated directly in FY2025 Form 10-K Item 1 and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Hinge Health differentiates through a single-app platform combining digital MSK, Enso pain-relief wearables, the HingeSelect in-person network at up to 50% below commercial rates, a Migraine Care Program, and a planned Gastrointestinal Care Program via Cylinder Health.",
     "facts": [
-     "P6",
-     "F2"
+     "P1",
+     "P4"
     ],
     "quotes": [
-     "GAAP income from operations increased to $50.3 million compared to GAAP loss from operations of $6.1 million in Q3 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the release, 8-K and cash flow statement.",
-    "claim": "Cash generation is strong and funds buybacks and acquisitions: third-quarter free cash flow was $112.7 million and cash, securities and restricted cash were $358.5 million. A further $300.0 million of repurchase authorisation was available as of the company's July announcement.",
-    "facts": [
-     "P6",
-     "P9",
-     "F3"
-    ],
-    "quotes": [
-     "Free cash flow increased to $112.7 million compared to $81.3 million in Q3 2025.",
-     "Cash, cash equivalents, marketable securities and restricted cash were $358.5 million as of September 30, 2026.",
-     "The Company expects to fund repurchases with existing cash and cash equivalents and ongoing cash from operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q and release; the strategic interpretation is inferred.",
-    "claim": "The company is extending beyond MSK care, with a Migraine Care Program launched this year and the acquisition of Cylinder Health for digestive care. Management says client counts for these programs are rising.",
-    "facts": [
-     "P4",
-     "P6",
-     "F3"
-    ],
-    "quotes": [
+     "When members need imaging, injections, or other in-person care they are seamlessly connected to pre-vetted providers at up to 50% below commercial rates.",
+     "All of our programs are available for use from a single application, with members having the ability to treat multiple indications at once.",
      "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members.",
-     "On August 31, 2026, we acquired Cylinder Health, Inc."
+     "On August 31, 2026, we acquired Cylinder Health, Inc. (\"Cylinder\")."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors; figures are for the last fiscal year only.",
-    "claim": "Revenue depends on a few payer partners: partner-contracted clients were 82% of revenue in the latest annual filing, with HCSC at 17.5%, Elevance at 13.7% and Aetna at 10.5%. The partners are non-exclusive.",
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "A major threat is channel concentration and non-exclusivity: partners accounted for 82% of annual revenue\u2014including 17.5% from HCSC, 13.7% from Elevance, and 10.5% from Aetna\u2014and health plans can unilaterally terminate or refer business to competitors.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024.",
-     "These partners are not required to work with us on an exclusive basis."
+     "For the years ended December 31, 2025 and 2024, client contracts through (i) Health Care Service Corporation (\u201cHCSC\u201d) accounted for 17.5% and 17.1% of our revenue, respectively, (ii) Elevance Health, Inc., formerly known as Anthem, Inc. (\u201cElevance\u201d), accounted for 13.7% and 14.0% of our revenue, respectively, and (iii) Aetna Life Insurance Company (\u201cAetna\u201d) accounted for 10.5% and 11.6% of our revenue, respectively.",
+     "These partners are not required to work with us on an exclusive basis.",
+     "If we are unable to establish, maintain, or grow these relationships over time or if the partners refer business to our competitors instead, we are likely to lose a portion of our clients and our business, results of operations, and financial condition will suffer.",
+     "Most of our agreements with health plans are three-year contracts; however, health plans can generally unilaterally terminate their relationship with us pursuant to the terms of their agreements with us or can seek to renegotiate their agreements prior to the end of the contract term."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Health plans, the main channel, can end or reopen agreements early, a contract-level threat to the position.",
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Hinge Health faces direct competitive threats from existing and new entrants offering lower-cost alternatives or superior product features and functionality.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "health plans can generally unilaterally terminate their relationship with us pursuant to the terms of their agreements with us or can seek to renegotiate their agreements prior to the end of the contract term."
+     "new offerings from our competitors are introduced to the market, including those that have features or functionality that may be superior to ours or that are lower-cost alternatives.",
+     "Our client base may decline or fluctuate due to a number of factors, including our pricing, the prices of products and services offered by our competitors, reduced hiring by our clients or reductions in their contracted lives due to macroeconomic or other factors, the efficacy of our platform and programs for members, the desirability of our platform and programs to members and contracted lives, cost-effectiveness of our platform and programs for our clients, our ability to satisfy our obligations under our client contracts, and consolidation of our client base."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors; no competitor is named in the cited text.",
-    "claim": "Competition is named as a threat, but only generically: new entrants or competitors could offer superior features or lower-cost alternatives.",
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Member enrollment and engagement are threatened by clients offering many competing optional health benefits or by PBMs perceiving the platform as ineffective or untrustworthy.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "new offerings from our competitors are introduced to the market, including those that have features or functionality that may be superior to ours or that are lower-cost alternatives."
+     "clients offer their members or employees a significant volume of optional health benefits that result in contracted lives overlooking our platform and programs or choosing to focus on others;",
+     "For example, if PBMs at our clients do not perceive our platform and programs to be useful, effective, reliable, and trustworthy, we may not be able to attract or retain members or otherwise maintain or increase the frequency and duration of their engagement."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q and 10-K; the risk reading is inferred from the 10-K language on decreased revenue from some clients.",
-    "claim": "Pricing and performance guarantees expose revenue: most clients are now billed on an engagement-based model, and the fees at risk under guarantees vary with engagement and outcomes.",
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Engagement-based pricing, a transition to an alternative engagement-based pricing model, and client performance guarantees expose Hinge Health's revenue to low member utilization or missed outcome and ROI thresholds.",
     "facts": [
-     "P4",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Once our platform is launched, clients only pay for the members that engage with our programs.",
+     "Additionally, our client contracts often include a performance guarantee, which may include engagement thresholds, member reported outcomes, and client return on investment, and, if we are unable to achieve these performance guarantees on a consistent basis, our business, results of operations, and financial condition could be materially adversely affected.",
+     "In addition, we are implementing an alternative engagement-based pricing model in the near term based on member engagement, which may take more time and require more effort to implement than anticipated, may have results that are difficult to predict, and may result in decreased revenue from some clients."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A and Q3 2026 Form 10-Q Part II Item 1A Risk Factors.",
+    "claim": "Expansion into fully insured health plans, Medicare Advantage, and international markets introduces unfamiliar financial dynamics, higher costs, and potential revenue and gross margin variability.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The fully insured and Medicare Advantage markets operate under different financial dynamics compared to our core self-insured employer channel, and we may experience variability in our revenue and gross margin as we continue our expansion.",
+     "Further, the market for our global program operates under different financial dynamics compared to our core clients, and we may experience variability in results from our global program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Potential IRS guidance narrowing the pre-deductible telehealth safe harbor for high-deductible health plans could cause health plans to drop Hinge Health to protect members' HSA eligibility.",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "Most of our clients are billed through an engagement-based pricing model based on an annual upfront platform fee per member plus a fee per each completed billable session.",
-     "We typically provide various performance guarantees to our clients that may include engagement thresholds, member reported outcomes, and return on investment, where we put a portion of our fees at risk."
+     "We anticipate the Internal Revenue Service (the \u201cIRS\u201d) may issue guidance which could limit the scope of this safe harbor.",
+     "It could materially affect our business if and to the extent health plans elect to cease being clients rather than relying on the safe harbor set forth in Section 3701 or Section 223(c)(2)(A) of the Code and related guidance, particularly if the IRS issues regulations or guidance that limits the telehealth safe harbor or creates uncertainty regarding its application."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q risk factors.",
-    "claim": "Annual net losses since inception are a stated risk, even though the nine-month result was positive: net income was $136.2 million against a net loss of $560.4 million a year earlier.",
+    "basis": "Stated directly in FY2025 Form 10-K Item 1A Risk Factors.",
+    "claim": "Platform outages, cybersecurity breaches, or privacy concerns could impair member sentiment and client trust.",
     "facts": [
-     "P5",
-     "F3"
+     "P2"
     ],
     "quotes": [
-     "We generated net income of $136.2 million and a net loss of $560.4 million for the nine months ended September 30, 2026 and 2025, respectively.",
-     "While we have achieved net income on a quarterly basis in certain periods, we have incurred net losses on an annual basis since our inception."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the release and 8-K; any effect on sales execution is not addressed in the evidence.",
-    "claim": "A leadership change affects the commercial team: the President steps down at the start of next year and a Chief Commercial Officer will lead the commercial organization.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Following this transition, Aaryn Pure will lead the commercial organization as Chief Commercial Officer."
+     "disruptions or outages in our app and website availability, actual or perceived breaches of privacy, and compromises of the data of our contracted lives;",
+     "there are changes in member sentiment about the quality, effectiveness, or accessibility of our platform and programs or concerns related to privacy and data sharing, safety, security, or other factors;"
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet and in the earnings release.",
-    "claim": "Liquid resources at the latest quarter-end were cash and cash equivalents of 211,553, short-term marketable securities of 83,102 and long-term marketable securities of 59,542 (table in thousands). The company puts cash, cash equivalents, marketable securities and restricted cash at $358.5 million.",
+    "basis": "Directly stated in the third quarter 2026 earnings release, 10-Q balance sheet, and 10-Q cash flow statement.",
+    "claim": "As of September 30, 2026, Hinge Health held $358.5 million in cash, cash equivalents, marketable securities, and restricted cash, comprising $211,553 in cash and cash equivalents, 83,102 in short-term marketable securities, 59,542 in long-term marketable securities, and 4,282 in restricted cash (tables in thousands).",
     "facts": [
+     "P6",
      "F1",
-     "P6"
+     "F3"
     ],
     "quotes": [
-     "Cash, cash equivalents, marketable securities and restricted cash were $358.5 million as of September 30, 2026."
+     "Cash, cash equivalents, marketable securities and restricted cash were $358.5 million as of September 30, 2026.",
+     "Cash and cash equivalents | $211,553 | $207,995",
+     "Short-term marketable securities | 83,102 | 155,867",
+     "Long-term marketable securities | 59,542 | 113,172",
+     "Restricted cash | 4,282 | 1,802"
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance-sheet figures are stated. The reading that deferred revenue is settled through service delivery is inferred from the ratable recognition policy.",
-    "claim": "Total current assets of 567,863 exceed total current liabilities of 544,711 (table in thousands). Deferred revenue of 459,174 makes up most of the current liabilities.",
+    "basis": "Directly stated in the 10-Q balance sheet and 10-Q MD&A.",
+    "claim": "Total current assets of 567,863 exceeded total current liabilities of 544,711 as of September 30, 2026, with 459,174 of current liabilities consisting of deferred revenue rather than cash obligations such as accounts payable and accrued liabilities of 80,816 (table in thousands).",
     "facts": [
      "F1",
      "P4"
     ],
     "quotes": [
+     "Total current assets | 567,863 | 533,904",
+     "Total current liabilities | 544,711 | 362,409",
+     "Deferred revenue | 459,174 | 300,855",
+     "Accounts payable and accrued liabilities | 80,816 | 57,331",
      "We primarily recognize revenue ratably over the 12 months after an eligible life becomes a member, and as such our revenue has historically been highly predictable."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the absence of any borrowings line on the balance sheet, together with the listed liability lines.",
-    "claim": "Leverage is low in the sense of borrowings: the balance sheet has no debt line. Total liabilities of 574,663 compare with total stockholders' equity of 299,418 (table in thousands). Liabilities consist of accounts payable and accrued liabilities of 80,816, deferred revenue of 459,174, operating lease liabilities (4,721 current, 29,157 noncurrent) and deferred tax liabilities of 795.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Lease terms are stated in the 8-K. The link to the balance-sheet increase is inferred and not confirmed by the packet.",
-    "claim": "Noncurrent operating lease liabilities rose to 29,157 from 3,816 (table in thousands). A new San Francisco office lease carries aggregate estimated base rent of approximately $86.0 million, and the company must provide a $2.8 million standby letter of credit.",
+    "basis": "Amounts stated in the 10-Q balance sheet and cash flow statement; absence of funded debt is inferred from the absence of any debt or borrowing line items on the balance sheet.",
+    "claim": "The balance sheet as of September 30, 2026 shows no debt or borrowings, leaving operating lease liabilities of 4,721 current and 29,157 noncurrent as the only debt-like obligations against 299,418 in total stockholders' equity (table in thousands).",
     "facts": [
      "F1",
-     "P8"
+     "F3"
     ],
     "quotes": [
-     "The aggregate estimated base rent payments due over the term of the Lease are approximately $86.0 million."
+     "Operating lease liabilities | 4,721 | 4,223",
+     "Operating lease liabilities, noncurrent | 29,157 | 3,816",
+     "Total stockholders\u2019 equity | 299,418 | 178,662",
+     "Right-of-use assets obtained in exchange for lease obligation | 29,441 | 686"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement and the release. The seasonality point is stated in the 10-Q management discussion.",
-    "claim": "Operating cash generation is strong and rising. Nine-month net cash provided by operating activities was 259,098 against 107,548 a year earlier (table in thousands). In the third quarter, free cash flow was $112.7 million against $81.3 million a year earlier.",
+    "basis": "Directly stated in the 10-Q balance sheet, income statement, cash flow supplemental disclosures, and 10-K MD&A.",
+    "claim": "Redeemable convertible preferred stock fell from 199,874 at December 31, 2025 to 0 as of September 30, 2026 upon conversion to common stock, and the company earned 11,255 in other income, net during the nine months ended September 30, 2026 (tables in thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Redeemable convertible preferred stock, $0.00001 par value; 4,330,341 shares of Series E authorized as of September 30, 2026 and December 31, 2025; 0 shares and 2,581,837 shares of Series E preferred stock issued and outstanding as of September 30, 2026 and December 31, 2025, respectively; aggregate liquidation preference of $0 and $200,000 as of September 30, 2026 and December 31, 2025, respectively | 0 | 199,874",
+     "Conversion of redeemable convertible preferred stock Series E to common stock | 199,874 | 0",
+     "Other income, net | 3,392 | 4,455 | 11,255 | 14,147",
+     "Other income, net consists primarily of income earned from our cash deposits held in interest-bearing accounts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Directly stated in the 10-Q cash flow statement and third quarter 2026 earnings release.",
+    "claim": "Operating cash flow grew to 259,098 in the nine months ended September 30, 2026 from 107,548 a year earlier (table in thousands), including $114.6 million in operating cash flow and $112.7 million in free cash flow at a 48% free cash flow margin in the third quarter of 2026.",
     "facts": [
      "F3",
      "P6"
     ],
     "quotes": [
-     "Free cash flow increased to $112.7 million compared to $81.3 million in Q3 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release.",
-    "claim": "Free cash flow margin in the third quarter was 48%, on revenue growth of 52% and free cash flow of $113 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
+     "Net cash provided by operating activities | 259,098 | 107,548",
+     "Net cash provided by operating activities increased to $114.6 million compared to $82.4 million in Q3 2025.",
+     "Free cash flow increased to $112.7 million compared to $81.3 million in Q3 2025.",
      "Free cash flow of $113 million, representing a 48% free cash flow margin"
     ],
     "support": "supported"
    },
    {
-    "basis": "Line items are stated. The reading that deferred revenue drives part of the gap is inferred from the cash flow statement.",
-    "claim": "Part of the cash conversion comes from working capital. Operating cash flow of 259,098 exceeded net income of 136,217, helped by a deferred revenue inflow of 156,741 and offset by an accounts receivable build of (79,402) and deferred commissions of (74,246) (table in thousands). Stock-based compensation, a non-cash add-back, was 50,324, against 625,837 a year earlier.",
+    "basis": "Directly stated in the 10-Q cash flow statement and third quarter 2026 earnings release financial tables.",
+    "claim": "Nine-month 2026 operating cash flow of 259,098 reflected GAAP net income of $136,217, non-cash charges including 50,324 in stock-based compensation and 57,006 in deferred commission amortization, and a 156,741 deferred revenue inflow, partly offset by (79,402) in accounts receivable and (74,246) in deferred commissions outflows (table in thousands).",
     "facts": [
      "F3",
-     "F2"
+     "P6"
     ],
     "quotes": [
-     "Consequently, our free cash flow is typically highest in the second or third quarter and is usually lowest in the first quarter due to increased new client onboarding expenses preceding cash inflows."
+     "Net income (loss) | $57,398 | $(1,844) | $136,217 | $(560,356)",
+     "Stock-based compensation | 50,324 | 625,837",
+     "Amortization of deferred commissions | 57,006 | 32,436",
+     "Deferred revenue | 156,741 | 82,062",
+     "Accounts receivable | (79,402) | (47,610)",
+     "Deferred commissions | (74,246) | (38,320)"
     ],
-    "support": "quote_not_found"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in the cash flow statement. The funding link is inferred from the same statement.",
-    "claim": "Cash was deployed on shareholder returns and acquisitions rather than accumulated. Financing outflows were (265,582), including repurchase and retirement of common stock of (157,384) and RSU tax withholdings of (116,356). Acquisition of a business, net of cash acquired, was (97,353) and a cash asset acquisition was (9,036) (table in thousands). Cash, cash equivalents and restricted cash rose only by 6,039.",
+    "basis": "Directly stated in the 10-Q cash flow statement and third quarter 2026 earnings release non-GAAP definition.",
+    "claim": "Capital intensity remained low in the nine months ended September 30, 2026, with (582) spent on property and equipment purchases and (4,746) on capitalized internal-use software, while financing outflows included (116,356) for employee equity-award tax withholdings and (157,384) for common stock repurchases (table in thousands).",
     "facts": [
-     "F3"
+     "F3",
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "Purchase of property and equipment | (582) | (300)",
+     "Capitalized internal use software | (4,746) | (3,401)",
+     "Tax withholdings on settlement of restricted stock units and performance-based restricted stock units | (116,356) | (272,258)",
+     "Repurchase and retirement of common stock | (157,384) | 0",
+     "We define free cash flow as net cash provided by operating activities plus cash used for employer payroll taxes at IPO related to stock-based compensation less purchases of property, equipment and software (including capitalized internal-use software)."
+    ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the absence of borrowings in the balance sheet and cash flow statement. The conversion is stated in the cash flow supplemental disclosure.",
-    "claim": "No debt maturities are visible in the evidence. The only senior-ranking financing claim, Series E preferred stock with a $200,000 liquidation preference at the prior year-end, was converted to common stock (199,874, table in thousands) with no cash redemption, leaving a $0 preference.",
+    "basis": "Directly stated in the 10-Q MD&A and 10-Q cash flow statement.",
+    "claim": "Cash generation is seasonal\u2014free cash flow is typically highest in the second or third quarter and lowest in the first quarter\u2014and nine-month 2026 cash flows also funded (97,353) for a business acquisition and (9,036) for an asset acquisition (table in thousands).",
+    "facts": [
+     "P4",
+     "F3"
+    ],
+    "quotes": [
+     "Consequently, our free cash flow is typically highest in the second or third quarter and is usually lowest in the first quarter due to increased new client onboarding expenses preceding cash inflows.",
+     "Acquisition of a business, net of cash acquired | (97,353) | (4,000)",
+     "Cash paid for an asset acquisition | (9,036) | 0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Amounts directly stated in the 10-Q balance sheet, 10-Q cash flow statement, and third quarter 2026 earnings release; absence of refinancing needs is inferred from the absence of debt on the balance sheet.",
+    "claim": "Because no debt appears on the September 30, 2026 balance sheet, there are no debt maturities to refinance, and existing current operating lease liabilities of 4,721 and noncurrent operating lease liabilities of 29,157 (table in thousands) can be met from $358.5 million in cash, marketable securities, and restricted cash and 259,098 in nine-month operating cash flow (table in thousands).",
     "facts": [
      "F1",
-     "F3"
+     "F3",
+     "P6"
     ],
     "quotes": [
-     "Conversion of redeemable convertible preferred stock Series E to common stock"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K.",
-    "claim": "The company says it expects to fund repurchases from cash on hand and operating cash flow, with $300.0 million available for future repurchase. The program is discretionary and can be changed or stopped by the Board.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "This program does not obligate the Company to repurchase any particular dollar amount or number of shares of Class A common stock, has no expiration date, and may be modified, suspended or terminated at any time at the discretion of the Board."
+     "Operating lease liabilities | 4,721 | 4,223",
+     "Operating lease liabilities, noncurrent | 29,157 | 3,816",
+     "Cash, cash equivalents, marketable securities and restricted cash were $358.5 million as of September 30, 2026.",
+     "Net cash provided by operating activities | 259,098 | 107,548"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Client counts and the seasonality pattern are stated in the cited items. The link from signings to later revenue is inferred from the stated pattern.",
-    "claim": "Client count is a growth driver: clients rose 28% year over year to 3,270 from 2,560. For this to continue, new clients must keep signing, and the evidence says most new contracts are signed in the second half of each year and launched in the first half of the next.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Number of clients increased 28% year-over-year to 3,270 clients as of September 30, 2026, compared to 2,560 clients as of September 30, 2025.",
-     "The majority of new clients enter into contracts with us in the second half of each calendar year, which aligns with the typical employee benefit enrollment period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors; the mechanism is stated in the MD&A.",
-    "claim": "The partner channel is a condition for client growth. Client contracts through partners made up 82% of 2025 revenue, up from 79%. Continued growth therefore requires partners, mainly large health plans and PBMs, to keep referring and contracting with the company.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Retention is stated in the MD&A. The dependence on renewals and guarantees is stated in the risk factors.",
-    "claim": "Client retention supports growth: the 12-month client retention rate was 97% at the end of 2025, with an average contract term of three years. For this to continue, clients must keep renewing and the company must meet the performance guarantees written into most contracts.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Our 12-month client retention rate was 97% as of December 31, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Member counts and the pay-per-engaged-member model are stated. The dependence on engagement is stated in the risk factors.",
-    "claim": "Member engagement within existing clients is a driver: members grew to 782,890 at the end of 2025 from 532,326 a year earlier. Clients pay only for members who engage, so growth requires contracted lives to keep enrolling and using the programs.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "We sell an annual subscription model, whereby clients only pay for members that engage with our programs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the cited items. The billings-to-revenue mechanism is stated in the MD&A and inferred for deferred revenue.",
-    "claim": "Recent revenue growth is visible in the numbers: Q3 revenue rose 52% to $235.0 million, and LTM calculated billings rose 54% to $960.3 million. For billings to keep turning into revenue, the company must keep billing, because revenue is recognized ratably over about 12 months.",
-    "facts": [
-     "P6",
-     "P3",
-     "F1",
-     "F2"
-    ],
-    "quotes": [
-     "Revenue increased 52% year-over-year to $235.0 million compared to revenue of $154.2 million in Q3 2025.",
-     "LTM calculated billings increased 54% year-over-year to $960.3 million as of September 30, 2026, compared to $624.2 million as of September 30, 2025.",
-     "We primarily recognize revenue ratably over the 12 months after an eligible life becomes a member, and as such our revenue has historically been highly predictable."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Launch and acquisition facts are stated. The size of the contribution is not given, so the conditions are inferred.",
-    "claim": "Expansion beyond joint and muscle care is a newer driver: a Migraine Care Program launched in 2026 and Cylinder Health, a digestive care company, was acquired, with a GI program expected to launch in 2027. For this to contribute, the integration and launch must proceed and clients must adopt the new programs.",
-    "facts": [
-     "P4",
-     "P6",
-     "F3"
-    ],
-    "quotes": [
-     "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members.",
-     "and has nearly doubled for our Migraine Care Program since last quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Margins and the company's automation estimate are stated. The link between automation and margin is inferred.",
-    "claim": "Automation supports margins while the company grows: GAAP gross margin was 87% against 82% a year earlier. Growth stays profitable only if care delivery keeps scaling through software and AI rather than added human hours.",
-    "facts": [
-     "P6",
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "GAAP gross margin was 87% compared to 82% in Q3 2025.",
-     "According to our estimates based on data from 2025, our platform reduced the number of human care team hours associated with traditional physical therapy by approximately 97%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release; the dependency is inferred.",
-    "claim": "The company's own outlook assumes growth continues: full-year revenue guidance was raised to $879 million to $881 million, about 50% growth at the midpoint. This rests on the record sales season and the launches of contracted clients being realized.",
+    "basis": "stated in the cited item (P6)",
+    "claim": "Revenue grew 52% year-over-year to $235.0 million from $154.2 million in the prior-year quarter, alongside 54% year-over-year growth in last-twelve-month calculated billings to $960.3 million.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "We are raising our revenue guidance to be between $879 million and $881 million, reflecting year-over-year growth of 50% at the midpoint."
+     "Revenue increased 52% year-over-year to $235.0 million compared to revenue of $154.2 million in Q3 2025.",
+     "LTM calculated billings increased 54% year-over-year to $960.3 million as of September 30, 2026, compared to $624.2 million as of September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P4, P6)",
+    "claim": "Client count grew 28% year-over-year to 3,270 clients, expanding contracted lives through direct sales and over 60 ecosystem partners.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Number of clients increased 28% year-over-year to 3,270 clients as of September 30, 2026, compared to 2,560 clients as of September 30, 2025.",
+     "As of September 30, 2026, we had over 60 partners.",
+     "In the first nine months of 2026 and in 2025, the vast majority of our contracts were completed via our partners, negating the need for many clients to contract directly with us since many clients can leverage existing contracts through our partners."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2, P4)",
+    "claim": "Continued client-driven growth requires maintaining the 97% client retention rate, achieving performance guarantees, and preserving non-exclusive health plan partner relationships that accounted for 82% of annual revenue.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Our 12-month client retention rate was 97% as of December 31, 2025.",
+     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024.",
+     "Additionally, our client contracts often include a performance guarantee, which may include engagement thresholds, member reported outcomes, and client return on investment, and, if we are unable to achieve these performance guarantees on a consistent basis, our business, results of operations, and financial condition could be materially adversely affected."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P3, P4)",
+    "claim": "Increasing enrollment of eligible lives within launched clients drives billings and revenue because clients only pay for members who engage with the platform, with annual members rising to 782,890 from 532,326.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "We also intend to grow by expanding the number of enrollments of eligible lives within our launched clients.",
+     "Once our platform is launched, clients only pay for the members that engage with our programs.",
+     "Members | 782,890 | 532,326 | 370,526"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2, P4)",
+    "claim": "Member-driven growth depends on converting contracted lives into active billable users, executing the engagement-based pricing model without revenue dilution, and preserving tax safe harbors for high-deductible health plan participants.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Additionally, if we are unable to achieve the expected volume of members based on our engagement with clients, or are unable to do so in a timely manner and, as a result, contracted lives do not utilize our platform and programs, clients are unlikely to renew their agreement with us and we may not be able to generate future revenue from such clients, which may adversely impact our future business, results of operations, and financial condition.",
+     "In addition, we are implementing an alternative engagement-based pricing model in the near term based on member engagement, which may take more time and require more effort to implement than anticipated, may have results that are difficult to predict, and may result in decreased revenue from some clients.",
+     "It could materially affect our business if and to the extent health plans elect to cease being clients rather than relying on the safe harbor set forth in Section 3701 or Section 223(c)(2)(A) of the Code and related guidance, particularly if the IRS issues regulations or guidance that limits the telehealth safe harbor or creates uncertainty regarding its application."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P4, P6)",
+    "claim": "Product and clinical expansion beyond joint and muscle care is broadening addressable demand, including HingeSelect, the Migraine Care Program, and the Cylinder Health acquisition for digestive care.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In 2025, we launched HingeSelect, our high performance in-person provider network for care.",
+     "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members.",
+     "In August 2026, we acquired Cylinder Health, Inc. (\u201cCylinder\u201d), a virtual-first digestive healthcare company, and we expect to launch an integrated Gastrointestinal Care Program in 2027.",
+     "Our client base is up almost 30% YoY for our MSK Care Program, roughly 40% for our GI Care Program since our acquisition announcement of Cylinder Health in August, and has nearly doubled for our Migraine Care Program since last quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P2, P5, P6)",
+    "claim": "Sustaining growth from new programs, fully-insured and Medicare Advantage plans, and international markets requires successful integration and client adoption while absorbing different financial dynamics and higher regulatory and development costs.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "The fully insured and Medicare Advantage markets operate under different financial dynamics compared to our core self-insured employer channel, and we may experience variability in our revenue and gross margin as we continue our expansion.",
+     "As we continue to expand internationally, we could experience greater than anticipated costs to expand or we could be unable to successfully offer our global program or attract and retain clients and members to our global program.",
+     "For example, a client may take time to review and implement our new programs, which may delay our ability to market them to members and contracted lives, or a client may decide not to implement our new programs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P4, P6)",
+    "claim": "AI-powered motion tracking automates care delivery and reduced human care team hours compared with traditional physical therapy by approximately 97%, supporting GAAP gross margin expansion to 87% from 82%.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Our AI-powered motion tracking technology, TrueMotion, allows us to deliver highly scalable care remotely and reduce the human hours associated with traditional physical therapy.",
+     "According to our estimates based on data from 2025, our platform reduced the number of human care team hours associated with traditional physical therapy by approximately 97%.",
+     "GAAP gross margin was 87% compared to 82% in Q3 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P5)",
+    "claim": "For growth to translate into sustained profitability, revenue expansion must continue to outpace planned investments in R&D, sales, care-team staffing, and public-company compliance while avoiding platform or infrastructure failures.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "We expect our costs will continue to increase in the foreseeable future as we expect to invest additional funds to grow our business, maintain and increase our members and clients, expand our engagement with partners, hire additional employees, including our care team, develop new programs and enhance our platform.",
+     "Our efforts to grow our business may prove more expensive than we currently anticipate, and we may not succeed in increasing our revenue sufficiently to offset these expenses.",
+     "We may not be able to manage our anticipated future growth effectively, including due to a failure to maintain or enhance our information technology infrastructure, financial and accounting systems and controls, and regulatory compliance framework, or a failure to manage expanded operations and employees in geographically distributed locations."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the 10-Q MD&A, with the cash outflow and goodwill change shown in the 10-Q financial statements",
-    "claim": "Hinge Health completed the acquisition of Cylinder Health, a virtual-first digestive healthcare company. The nine-month cash flow statement shows 97,353 (table in thousands) paid for the business, net of cash acquired. Goodwill rose to 113,030 (table in thousands) from 64,096 (table in thousands) at year-end 2025.",
+    "basis": "stated in P3",
+    "claim": "Hinge Health announced a restructuring plan to reduce its workforce by approximately 160 people, or approximately 10% of its workforce, recording $7.5 million in restructuring charges, and completed execution of the plan.",
     "facts": [
-     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "In April 2024, we announced a restructuring plan (the \u201c2024 Restructuring Plan\u201d) to reduce our workforce by approximately 160 people, or approximately 10% of our workforce, to simplify our operations and better align resources with priorities.",
+     "Restructuring charges were $7.5 million, which consisted of employee transition, severance payments, and employee benefits.",
+     "The execution of the 2024 Restructuring Plan was completed by December 31, 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and F3",
+    "claim": "Hinge Health completed its initial public offering, issuing and selling 8,522,528 shares of Class A common stock at $32.00 per share for $255.7 million in proceeds net of underwriting discounts and commissions, while selling stockholders sold 7,193,372 shares, alongside preferred stock conversions into Class B common stock and $571.4 million in stock-based compensation expense.",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "In May 2025, we completed our IPO, in which we issued and sold an aggregate of 8,522,528 shares of our Class A common stock, and certain of our stockholders sold 7,193,372 shares of Class A common stock at a public offering price of $32.00 per share.",
+     "We received aggregate proceeds of $255.7 million, net of underwriting discounts and commissions before deducting offering expenses payable by us.",
+     "Upon the effectiveness of the registration statement on Form S-1 relating to our IPO (the \"IPO Registration Statement\"), the time based and performance vesting condition of certain RSUs and PRSUs was met, and we recognized $571.4 million of stock-based compensation expense for the portion of the service period completed by employees and service providers from the grant date through the effectiveness of the IPO Registration Statement, as further described in Note 9, Common Stock, Equity Incentive Plans and Stock-Based Compensation to the consolidated financial statements included elsewhere in this Annual Report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and F3",
+    "claim": "Hinge Health paid (50,000) (table in thousands) on a repurchase agreement with Coatue and recorded an adjustment of 104,174 (table in thousands) reflecting a deemed contribution from Series D and Series E redeemable convertible preferred stock extinguishment.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Payment on Repurchase Agreement with Coatue | 0 | (50,000)",
+     "Adjustment to reflect deemed contribution from Series D and Series E redeemable convertible preferred stock extinguishment | 0 | 0 | 0 | 104,174"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and F3",
+    "claim": "Hinge Health converted all 2,581,837 outstanding shares of Series E redeemable convertible preferred stock, carrying 199,874 (table in thousands) with an aggregate liquidation preference of $200,000 (table in thousands), to common stock, leaving 0 shares outstanding.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Conversion of redeemable convertible preferred stock Series E to common stock | 199,874 | 0",
+     "Redeemable convertible preferred stock, $0.00001 par value; 4,330,341 shares of Series E authorized as of September 30, 2026 and December 31, 2025; 0 shares and 2,581,837 shares of Series E preferred stock issued and outstanding as of September 30, 2026 and December 31, 2025, respectively; aggregate liquidation preference of $0 and $200,000 as of September 30, 2026 and December 31, 2025, respectively | 0 | 199,874"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P6",
+    "claim": "Hinge Health repurchased and retired common stock for (157,384) (table in thousands) during the nine-month period, including (25,893) (table in thousands) in the third quarter, with 85 (table in thousands) of unpaid excise tax at period end.",
+    "facts": [
      "F3",
-     "F1"
-    ],
-    "quotes": [
-     "On August 31, 2026, we acquired Cylinder Health, Inc."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K Item 8.01",
-    "claim": "The Board approved an increase to the share repurchase program, leaving $300.0 million available for future repurchase and a total authorization of $496.5 million.",
-    "facts": [
-     "P9"
-    ],
-    "quotes": [
-     "On July 29, 2026, the Board approved an increase to the program, resulting in $300.0 million of its Class A common stock available for future repurchase, for a total aggregate amount authorized under the program of $496.5 million as of that date."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K Item 5.02 and the earnings release",
-    "claim": "President James Pursley notified the company he will resign as President effective at the start of 2027 and was appointed a Class II director effective in early January 2027. The 8-K says the decision was not the result of any disagreement.",
-    "facts": [
-     "P7",
      "P6"
     ],
     "quotes": [
-     "James Pursley notified the Company of his intention to resign as President of the Company, effective January 1, 2027"
+     "Repurchase and retirement of common stock | (157,384) | 0",
+     "Repurchase and retirement of common stock | (25,893) | \u2014 | (157,384) | \u2014",
+     "Unpaid excise tax at the end of the period on repurchase and retirement of common stock included in additional paid in capital | 85 | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 8-K Items 1.01 and 2.03",
-    "claim": "The company entered into an office lease at 300 Mission Street, San Francisco, with aggregate estimated base rent of about $86.0 million over the term.",
+    "basis": "stated in P4",
+    "claim": "Hinge Health launched its Migraine Care Program, marking the company's first expansion beyond joint and muscle pain.",
     "facts": [
-     "P8"
+     "P4"
     ],
     "quotes": [
-     "The aggregate estimated base rent payments due over the term of the Lease are approximately $86.0 million."
+     "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the 8-K EX-99.1 earnings release",
-    "claim": "With third-quarter results the company raised its full-year 2026 revenue guidance to between $879 million and $881 million, about 50% growth at the midpoint.",
+    "basis": "stated in P4",
+    "claim": "Hinge Health acquired Cylinder Health, Inc., a virtual-first digestive healthcare company, to deliver an integrated Gastrointestinal Care Program.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "On August 31, 2026, we acquired Cylinder Health, Inc. (\"Cylinder\").",
+     "In August 2026, we acquired Cylinder Health, Inc. (\u201cCylinder\u201d), a virtual-first digestive healthcare company, and we expect to launch an integrated Gastrointestinal Care Program in 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P6",
+    "claim": "Hinge Health recorded cash outflows of (97,353) (table in thousands) for acquisition of a business, net of cash acquired, and (9,036) (table in thousands) for an asset acquisition during the third quarter.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Acquisition of a business, net of cash acquired | (97,353) | \u2014 | (97,353) | (4,000)",
+     "Cash paid for an asset acquisition | (9,036) | \u2014 | (9,036) | \u2014"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Hinge Health announced that Jim Pursley will step down as President and join the Board of Directors, and that Aaryn Pure will lead the commercial organization as Chief Commercial Officer.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "We are raising our revenue guidance to be between $879 million and $881 million, reflecting year-over-year growth of 50% at the midpoint."
+     "We also announced that Jim Pursley will step down as President, effective January 1, 2027, and will join our Board of Directors, effective January 4, 2027.",
+     "Following this transition, Aaryn Pure will lead the commercial organization as Chief Commercial Officer."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow supplemental disclosures and the balance sheet",
-    "claim": "All Series E redeemable convertible preferred stock, carried at 199,874 (table in thousands), was converted to common stock during the nine months ended September 30, 2026. No Series E shares remained outstanding at September 30, 2026.",
+    "basis": "stated in P6",
+    "claim": "Hinge Health raised its full-year revenue guidance to between $879 million and $881 million and raised its non-GAAP income from operations guidance to between $266 million and $268 million.",
     "facts": [
-     "F3",
-     "F1"
+     "P6"
     ],
     "quotes": [
-     "Conversion of redeemable convertible preferred stock Series E to common stock"
+     "Full Year 2026: We are raising our revenue guidance to be between $879 million and $881 million, reflecting year-over-year growth of 50% at the midpoint.",
+     "We are raising our non-GAAP income from operations guidance to be between $266 million and $268 million, reflecting year-over-year growth of 123% and non-GAAP operating margin of 30% at the midpoint, a ~1,000 bps increase over 2025."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "stated in the 10-K risk factors; the 2025 percentages are printed in P2. The retention rate is in P3.",
-    "claim": "Revenue is concentrated in a few health-plan partners that are not exclusive. Client contracts through partners were 82% of 2025 revenue, and three plans each exceeded 10%: HCSC 17.5%, Elevance 13.7% and Aetna 10.5%.",
+    "basis": "stated in [P2]",
+    "claim": "Client contracts routed through non-exclusive health plan and ecosystem partners accounted for 82% of revenue, including HCSC at 17.5%, Elevance at 13.7%, and Aetna at 10.5%, and health plans can generally unilaterally terminate their agreements.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "These partners are not required to work with us on an exclusive basis."
+     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024.",
+     "For the years ended December 31, 2025 and 2024, client contracts through (i) Health Care Service Corporation (\u201cHCSC\u201d) accounted for 17.5% and 17.1% of our revenue, respectively, (ii) Elevance Health, Inc., formerly known as Anthem, Inc. (\u201cElevance\u201d), accounted for 13.7% and 14.0% of our revenue, respectively, and (iii) Aetna Life Insurance Company (\u201cAetna\u201d) accounted for 10.5% and 11.6% of our revenue, respectively.",
+     "These partners are not required to work with us on an exclusive basis.",
+     "Most of our agreements with health plans are three-year contracts; however, health plans can generally unilaterally terminate their relationship with us pursuant to the terms of their agreements with us or can seek to renegotiate their agreements prior to the end of the contract term."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the 10-K and 10-Q risk factors; the counter is inferred from the F2 and F3 figures and the P3 explanation of the IPO stock-based compensation charge.",
-    "claim": "GAAP profitability is recent and history-limited. The company has had annual net losses since inception, including a net loss of $528.3 million for 2025, and nine-month 2026 net income of $136.2 million does not by itself show durability.",
+    "basis": "stated in [P2] and [P4]",
+    "claim": "Client agreements typically include performance guarantees putting fees at risk and allow clients to pay only for engaged members, exposing renewals and revenue to shortfalls in enrollment, outcomes, or client ROI.",
     "facts": [
      "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Additionally, our client contracts often include a performance guarantee, which may include engagement thresholds, member reported outcomes, and client return on investment, and, if we are unable to achieve these performance guarantees on a consistent basis, our business, results of operations, and financial condition could be materially adversely affected.",
+     "Additionally, if we are unable to achieve the expected volume of members based on our engagement with clients, or are unable to do so in a timely manner and, as a result, contracted lives do not utilize our platform and programs, clients are unlikely to renew their agreement with us and we may not be able to generate future revenue from such clients, which may adversely impact our future business, results of operations, and financial condition.",
+     "Once our platform is launched, clients only pay for the members that engage with our programs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P5]",
+    "claim": "Hinge Health has incurred net losses on an annual basis since inception, including a $528.3 million net loss in its most recent full fiscal year, and holds a $0.9 billion accumulated deficit while expecting costs to continue increasing.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "While we have achieved net income on a quarterly basis in certain periods, we have incurred net losses on an annual basis since our inception.",
+     "We incurred a net loss of $528.3 million and $11.9 million for the years ended December 31, 2025 and 2024, respectively.",
+     "As of September 30, 2026, we had an accumulated deficit of $0.9 billion.",
+     "We expect our costs will continue to increase in the foreseeable future as we expect to invest additional funds to grow our business, maintain and increase our members and clients, expand our engagement with partners, hire additional employees, including our care team, develop new programs and enhance our platform."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "Future IRS regulations or guidance could limit the CARES Act telehealth safe harbor for high deductible health plans, potentially causing health plans to cease being clients to preserve participants' HSA eligibility.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We anticipate the Internal Revenue Service (the \u201cIRS\u201d) may issue guidance which could limit the scope of this safe harbor.",
+     "The timing and exact nature of any such rules, if any, are unknown at this time.",
+     "It could materially affect our business if and to the extent health plans elect to cease being clients rather than relying on the safe harbor set forth in Section 3701 or Section 223(c)(2)(A) of the Code and related guidance, particularly if the IRS issues regulations or guidance that limits the telehealth safe harbor or creates uncertainty regarding its application."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P5] and [P6]",
+    "claim": "Expanding into fully insured, Medicare Advantage, international, Migraine, and Gastrointestinal Care markets\u2014including integrating acquired Cylinder Health\u2014exposes Hinge Health to different financial dynamics, higher costs, and execution risk that could prevent expected benefits from materializing.",
+    "facts": [
      "P5",
-     "F2"
-    ],
-    "quotes": [
-     "While we have achieved net income on a quarterly basis in certain periods, we have incurred net losses on an annual basis since our inception."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the risk factor and MD&A; the counter is from the P6 earnings release.",
-    "claim": "The shift to an engagement-based pricing model could make revenue less predictable. The 10-K says implementation may take longer than expected and may reduce revenue from some clients, and the 10-Q says most clients are now billed this way.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "we are implementing an alternative engagement-based pricing model in the near term based on member engagement, which may take more time and require more effort to implement than anticipated, may have results that are difficult to predict, and may result in decreased revenue from some clients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "balance sheet, cash flow and MD&A figures are stated; the impairment mechanism is inferred.",
-    "claim": "The Cylinder Health acquisition adds integration and execution risk. Goodwill rose to 113,030 from 64,096 and intangible assets to 68,328 from 2,512 (table in thousands). The company paid 97,353 net of cash acquired, and the GI program is not expected to launch until 2027.",
-    "facts": [
-     "F1",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "we expect to launch an integrated Gastrointestinal Care Program in 2027"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in F1, F3, P6 and P9; the absence of debt is inferred from the balance sheet lines shown.",
-    "claim": "Capital returns and employee tax withholdings are drawing down cash. Nine-month financing outflow was 265,582 (table in thousands), including repurchases of 157,384 and RSU tax withholdings of 116,356. This was slightly above operating cash flow of 259,098. Short-term marketable securities fell to 83,102 from 155,867, and the board added $300.0 million of buyback capacity.",
-    "facts": [
-     "F1",
-     "F3",
-     "P9",
      "P6"
     ],
     "quotes": [
-     "The Company expects to fund repurchases with existing cash and cash equivalents and ongoing cash from operations."
+     "The fully insured and Medicare Advantage markets operate under different financial dynamics compared to our core self-insured employer channel, and we may experience variability in our revenue and gross margin as we continue our expansion.",
+     "As we continue to expand internationally, we could experience greater than anticipated costs to expand or we could be unable to successfully offer our global program or attract and retain clients and members to our global program.",
+     "If, for any reason, the benefits we realize are less than our estimates or the implementation of these growth initiatives, strategies, and operating plans adversely affects our operations or costs more or takes longer to effectuate than we expect, or if our assumptions about their impact to our business prove inaccurate, our business, results of operations, and financial condition could be materially adversely affected.",
+     "Forward-looking statements in this release include, but are not limited to, statements regarding the integration, timing and anticipated benefits and synergies associated with the acquisition of Cylinder Health, statements regarding our expectations regarding our financial position and operating performance, including our outlook and guidance for the fourth quarter of 2026 and guidance for full year 2026 and our assumptions underlying such guidance; our planned leadership transitions; our ability to drive future growth and execute on our goals and strategies; and our expectations regarding our product innovation, including with respect to our Migraine Care Program and the anticipated launch of our integrated Gastrointestinal Care Program in 2027."
     ],
     "support": "supported"
    },
    {
-    "basis": "risk language and guidance are stated; a guidance miss or withdrawal is inferred as a possibility, not stated by the company.",
-    "claim": "Fourth-quarter timing slippage could cause results to miss expectations after the guidance raise. Full-year revenue guidance was raised to between $879 million and $881 million. The company warns that clients may engage later in Q4, delaying billings and revenue recognition.",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "certain clients or potential clients may not engage with us until later in the fourth quarter of a calendar year, which may delay the timing of our billings and the start of revenue recognition"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factor.",
-    "claim": "IRS guidance could narrow the HSA/HDHP telehealth safe harbor and cause some health-plan clients to stop contracting with the company.",
+    "basis": "stated in [P2]",
+    "claim": "Competitors introducing superior or lower-cost offerings, alongside voluntary member disengagement or failure to re-enroll, could erode Hinge Health's client base and recurring member revenue.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "We anticipate the Internal Revenue Service (the \u201cIRS\u201d) may issue guidance which could limit the scope of this safe harbor."
+     "new offerings from our competitors are introduced to the market, including those that have features or functionality that may be superior to ours or that are lower-cost alternatives.",
+     "Moreover, members who may benefit from our platform and programs may lose interest and disengage, and ultimately not re-enroll, for reasons outside of our control that are not in response to the effectiveness or utility of our platform and programs.",
+     "Any other number of factors could potentially negatively affect new member engagement and growth or existing member retention, including if:"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 8-K and earnings release; the disruption mechanism is inferred.",
-    "claim": "The President is resigning from the executive role, which raises commercial-leadership transition risk.",
+    "basis": "stated in [P2] and [P4]",
+    "claim": "Concentration of client contracting in the second half of the calendar year and extended sales cycles for larger enterprise and health plan accounts expose billings, cash flow, and revenue to seasonal and macroeconomic delays.",
     "facts": [
-     "P6",
-     "P7"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "Mr. Pursley\u2019s decision to resign was not the result of any disagreement with the Company on any matter relating to the Company\u2019s operations, policies or practices."
+     "For example, a majority of our clients enter into contracts with us in the third and fourth quarters of each calendar year, in line with the typical employee benefit enrollment period.",
+     "For example, we expect that, from time to time due to macroeconomic factors outside of our control, certain clients or potential clients may not engage with us until later in the fourth quarter of a calendar year, which may delay the timing of our billings and the start of revenue recognition.",
+     "Our typical sales cycle is five months between initial engagement and entering into a signed contract with a client; however, our sales cycle can be more than 12 months for larger enterprise clients and fully-insured and Medicare Advantage plans.",
+     "Consequently, our free cash flow is typically highest in the second or third quarter and is usually lowest in the first quarter due to increased new client onboarding expenses preceding cash inflows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1], [F3], and [P2]",
+    "claim": "Accounts receivable, net rose to 148,532 (table in thousands) from 66,061 (table in thousands), representing a (79,402) (table in thousands) operating cash flow use alongside client payment and liquidity risks.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "Accounts receivable, net of allowance for credit losses of $7,647 and $6,092 as of September 30, 2026 and December 31, 2025, respectively | 148,532 | 66,061",
+     "Accounts receivable | (79,402) | (47,610)",
+     "Reductions in spending by clients on our platform and programs, delays in purchasing decisions, fewer renewals, and an inability to attract new clients, as well as pressure for extended billing terms or pricing discounts, could limit our ability to grow our business and could adversely affect our business, results of operations, and financial condition.",
+     "In addition, if any of our clients are unable to access funds pursuant to instruments or lending arrangements with a financial institution that falls into receivership or experiences similar liquidity issues, such parties\u2019 ability to pay their obligations to us or to enter into new arrangements requiring additional payments to us could be adversely affected."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "President Jim Pursley will step down from his executive role, creating commercial leadership transition risk.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We also announced that Jim Pursley will step down as President, effective January 1, 2027, and will join our Board of Directors, effective January 4, 2027.",
+     "Following this transition, Aaryn Pure will lead the commercial organization as Chief Commercial Officer.",
+     "He's been instrumental in our scaling to over 3,200 clients."
     ],
     "support": "supported"
    }
@@ -752,139 +1021,188 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Inferred from comparing the cash flow statement with the 10-K MD&A description of the IPO-triggered charge",
-    "claim": "Stock-based compensation fell to 50,324 (table in thousands) for the nine months from 625,837 a year earlier, and GAAP income from operations was 122,834 (table in thousands). The evidence does not show what level of stock-based compensation applies once the one-time IPO charge is out of the comparison.",
-    "facts": [
-     "F2",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "we recognized $571.4 million of stock-based compensation expense"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the release, but the fourth-quarter paragraph is omitted",
-    "claim": "What fourth-quarter revenue and operating margin does management guide to? Nine-month revenue was 630,094 (table in thousands) and full-year revenue guidance is $879 million to $881 million. The fourth-quarter guidance text is omitted from the packet.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "We are raising our revenue guidance to be between $879 million and $881 million, reflecting year-over-year growth of 50% at the midpoint."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the balance sheet and cash flow changes; the acquisition note is not in the packet",
-    "claim": "How much did the Cylinder Health acquisition cost in total, how was the price allocated, and how much revenue and loss does it add? The cash flow shows 97,353 (table in thousands) paid net of cash acquired, and goodwill rose to 113,030 from 64,096 (table in thousands).",
+    "basis": "Stated directly in the condensed balance sheet (F1), condensed cash flow statement (F3), and 10-Q MD&A (P4); the accompanying financial statement footnotes are omitted from the packet.",
+    "claim": "What are the purchase price allocation, acquired intangible asset useful lives, contingent consideration terms, and standalone financial contribution of the Cylinder Health, Inc. business acquisition (cash outflow of 97,353, table in thousands) and the separate asset acquisition (cash outflow of 9,036, table in thousands), which drove Goodwill from 64,096 to 113,030 and Intangible assets, net from 2,512 to 68,328 (tables in thousands)?",
     "facts": [
      "F1",
      "F3",
      "P4"
     ],
     "quotes": [
-     "a virtual-first digestive healthcare company"
+     "On August 31, 2026, we acquired Cylinder Health, Inc. (\"Cylinder\").",
+     "Acquisition of a business, net of cash acquired | (97,353) | (4,000)",
+     "Cash paid for an asset acquisition | (9,036) | 0",
+     "Goodwill | 113,030 | 64,096",
+     "Intangible assets, net | 68,328 | 2,512"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred: the cash flow line is stated but the counterparty and asset are not described in the packet",
-    "claim": "What was the separate asset acquisition for which 9,036 (table in thousands) was paid in cash, and how does it differ from the Cylinder business combination?",
+    "basis": "Stated directly in F1, F2, F3, and S0; F1 shows zero value for Class A and Class B par value without period-end share counts, and F2 reports only weighted-average shares.",
+    "claim": "What are the total authorized size, remaining capacity, and number of shares retired under the common stock repurchase program (157,384 in cash outflows, table in thousands), and what is the exact ending share count by Class A and Class B common stock after the conversion of 2,581,837 Series E preferred shares?",
     "facts": [
-     "F3",
-     "P6"
+     "S0",
+     "F1",
+     "F2",
+     "F3"
     ],
     "quotes": [
-     "Cash paid for an asset acquisition"
+     "Repurchase and retirement of common stock | (157,384) | 0",
+     "Redeemable convertible preferred stock, $0.00001 par value; 4,330,341 shares of Series E authorized as of September 30, 2026 and December 31, 2025; 0 shares and 2,581,837 shares of Series E preferred stock issued and outstanding as of September 30, 2026 and December 31, 2025, respectively; aggregate liquidation preference of $0 and $200,000 as of September 30, 2026 and December 31, 2025, respectively | 0 | 199,874",
+     "Conversion of redeemable convertible preferred stock Series E to common stock | 199,874 | 0",
+     "Basic (in shares) | 80,868 | 78,858 | 79,493 | 46,173",
+     "marketCap: 8861010149"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement and the 8-K; future pace is not stated",
-    "claim": "How much more cash will go to share repurchases and RSU tax withholdings relative to cash on hand? Nine-month repurchases were 157,384 and tax withholdings were 116,356 (table in thousands), and $300.0 million remains authorized against $358.5 million of cash, securities and restricted cash.",
-    "facts": [
-     "F3",
-     "P9",
-     "P6"
-    ],
-    "quotes": [
-     "On July 29, 2026, the Board approved an increase to the program, resulting in $300.0 million of its Class A common stock available for future repurchase"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the contrast between the annual-report risk factor and the 10-Q business description",
-    "claim": "How does the shift to engagement-based billing affect the timing of billings, deferred revenue and revenue? The annual report called it a near-term rollout that could reduce revenue from some clients, yet the latest 10-Q says most clients are already billed this way. Deferred revenue was 459,174 versus 300,855 at year-end (table in thousands).",
+    "basis": "Stated directly in P2 and P4; P2 flagged unpredictable revenue outcomes from the alternative pricing model while P4 indicates most clients are now on it without quantifying the revenue or margin mix.",
+    "claim": "What proportion of clients and revenue has transitioned to the engagement-based pricing model versus flat annual or milestone-based subscriptions, and how does this shift affect revenue per member, billing timing, and gross margin?",
     "facts": [
      "P2",
-     "P4",
-     "F1"
+     "P4"
     ],
     "quotes": [
-     "Most of our clients are billed through an engagement-based pricing model based on an annual upfront platform fee per member plus a fee per each completed billable session."
+     "In addition, we are implementing an alternative engagement-based pricing model in the near term based on member engagement, which may take more time and require more effort to implement than anticipated, may have results that are difficult to predict, and may result in decreased revenue from some clients.",
+     "Most of our clients are billed through an engagement-based pricing model based on an annual upfront platform fee per member plus a fee per each completed billable session.",
+     "We also have some clients that are billed for the entirety of the members\u2019 annual subscriptions, and some that are billed in milestone-based payments, based on a subscription fee per member per year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the annual report risk factors; the current-period mix is not in the packet",
-    "claim": "Has dependence on a few large health plan partners changed this year? For the prior year, partners accounted for 82% of revenue, with HCSC at 17.5%, Elevance at 13.7% and Aetna at 10.5%. The packet gives no current-year figures.",
+    "basis": "Stated directly in P2 for FY2025 and FY2024 and qualitatively in P4 for the first nine months of 2026; quantitative 2026 partner concentration figures are omitted from the packet.",
+    "claim": "What share of current-year revenue is concentrated through partners\u2014particularly HCSC (17.5% prior-year share), Elevance (13.7%), and Aetna (10.5%) after partners accounted for 82% of revenue\u2014and have any top partner agreements been renegotiated or modified?",
     "facts": [
-     "P2"
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024."
+     "Client contracts through our partners accounted for 82% of our revenue for the year ended December 31, 2025 and 79% of our revenue for the year ended December 31, 2024.",
+     "For the years ended December 31, 2025 and 2024, client contracts through (i) Health Care Service Corporation (\u201cHCSC\u201d) accounted for 17.5% and 17.1% of our revenue, respectively, (ii) Elevance Health, Inc., formerly known as Anthem, Inc. (\u201cElevance\u201d), accounted for 13.7% and 14.0% of our revenue, respectively, and (iii) Aetna Life Insurance Company (\u201cAetna\u201d) accounted for 10.5% and 11.6% of our revenue, respectively.",
+     "Most of our agreements with health plans are three-year contracts; however, health plans can generally unilaterally terminate their relationship with us pursuant to the terms of their agreements with us or can seek to renegotiate their agreements prior to the end of the contract term.",
+     "In the first nine months of 2026 and in 2025, the vast majority of our contracts were completed via our partners, negating the need for many clients to contract directly with us since many clients can leverage existing contracts through our partners."
     ],
     "support": "supported"
    },
    {
-    "basis": "Margins are stated in the release; the causes are not stated in the packet",
-    "claim": "What drove the quarterly GAAP gross margin up to 87% from 82%, and will it hold as migraine, gastrointestinal and in-person network offerings and Medicare Advantage and fully-insured mix expand?",
+    "basis": "Stated directly in F1 and F3; the working capital discussion and credit-loss footnote in the Q3 2026 Form 10-Q are omitted from the packet.",
+    "claim": "What explains the surge in Accounts receivable, net from 66,061 to 148,532 (table in thousands)\u2014representing a (79,402) operating cash outflow (table in thousands)\u2014and what is the aging profile behind the $7,647 allowance for credit losses (table in thousands)?",
     "facts": [
-     "P6",
-     "F2",
-     "P2"
-    ],
-    "quotes": [
-     "GAAP gross margin was 87% compared to 82% in Q3 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred by comparing the 8-K lease terms with the balance sheet changes",
-    "claim": "How much of the new San Francisco office lease, with about $86.0 million of aggregate base rent, is on the balance sheet at quarter-end? Right-of-use assets rose to 33,317 from 6,861 and noncurrent lease liabilities to 29,157 (table in thousands).",
-    "facts": [
-     "P8",
-     "F1"
-    ],
-    "quotes": [
-     "The aggregate estimated base rent payments due over the term of the Lease are approximately $86.0 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The transition is stated in the 8-K; the Advisor Agreement terms are cut from the packet",
-    "claim": "What are the terms of Mr. Pursley's Advisor Agreement, and how will the commercial organization perform after the President's departure during a sales season the CEO calls a record?",
-    "facts": [
-     "P7",
-     "P6"
-    ],
-    "quotes": [
-     "Mr. Pursley\u2019s decision to resign was not the result of any disagreement with the Company on any matter relating to the Company\u2019s operations, policies or practices."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred: the allowance statement is dated to the annual report and the cause of the benefit is not stated",
-    "claim": "Does the full valuation allowance on U.S. deferred tax assets still apply, and could it be released? The third-quarter tax line was a benefit of (3,681) (table in thousands) and a deferred tax liability of 795 now appears.",
-    "facts": [
-     "F2",
      "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Accounts receivable, net of allowance for credit losses of $7,647 and $6,092 as of September 30, 2026 and December 31, 2025, respectively | 148,532 | 66,061",
+     "Accounts receivable | (79,402) | (47,610)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 and P4 that performance guarantees cover the vast majority of clients, while the dollar exposure and accrued refund liability are not disclosed in the packet.",
+    "claim": "How much total revenue or deferred revenue is currently subject to client performance guarantees, and how much refund liability or variable consideration constraint is accrued on the balance sheet?",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "We typically provide various performance guarantees to our clients that may include engagement thresholds, member reported outcomes, and return on investment, where we put a portion of our fees at risk.",
+     "We have historically paid an immaterial amount related to these performance guarantees.",
+     "Additionally, our client contracts often include a performance guarantee, which may include engagement thresholds, member reported outcomes, and client return on investment, and, if we are unable to achieve these performance guarantees on a consistent basis, our business, results of operations, and financial condition could be materially adversely affected."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F1 and F3; the lease footnote detailing lease terms, locations, discount rates, and maturities is omitted from the packet.",
+    "claim": "What facility or office leases drove Operating lease right-of-use assets from 6,861 to 33,317 and Operating lease liabilities, noncurrent from 3,816 to 29,157 (tables in thousands), with 29,441 of right-of-use assets obtained in exchange for lease obligations (table in thousands), and what is the maturity schedule of future lease payments?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Operating lease right-of-use assets | 33,317 | 6,861",
+     "Operating lease liabilities, noncurrent | 29,157 | 3,816",
+     "Right-of-use assets obtained in exchange for lease obligation | 29,441 | 686"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F1, F2, F3, and P3; the Q3 2026 Form 10-Q Income Taxes footnote explaining the deferred tax benefit and liability is omitted from the packet.",
+    "claim": "What drove the income tax benefit of (3,681) in the latest quarter and (2,128) over nine months (table in thousands) alongside Deferred taxes of (3,300) (table in thousands) and Deferred tax liabilities rising from 0 to 795 (table in thousands), and could sustained GAAP profitability trigger a release of the full U.S. deferred tax asset valuation allowance?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
      "P3"
     ],
     "quotes": [
-     "We maintain a full valuation allowance on our U.S. federal and state net deferred tax assets as we have concluded that it is not more likely than not that the deferred tax assets will be realized."
+     "We maintain a full valuation allowance on our U.S. federal and state net deferred tax assets as we have concluded that it is not more likely than not that the deferred tax assets will be realized.",
+     "(Benefit from) provision for income taxes | (3,681) | 206 | (2,128) | 876",
+     "Deferred tax liabilities | 795 | 0",
+     "Deferred taxes | (3,300) | 146"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P3 and P4 that members and LTM average eligible lives are reported annually and P4 cites December 31, 2025 figures for contracted lives and retention.",
+    "claim": "While Clients grew to 3,270 from 2,560, how have Members (782,890 at prior year-end), LTM average eligible lives (20,105, table in thousands), contracted lives (25 million), and the 97% retention rate evolved through the latest quarter, and what are the pricing and gross margin profiles of Migraine Care, HingeSelect, and GI?",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We have rapidly grown our client base, expanding to 3,270 clients as of September 30, 2026 compared to 2,560 clients as of September 30, 2025.",
+     "This expansion has given us access to an increased number of contracted lives, which was 25 million as of December 31, 2025.",
+     "We present members and LTM average eligible lives on an annual basis as these metrics may create an inaccurate picture of our business on a quarterly basis primarily due to timing of launches and member enrollments in a given period.",
+     "Members | 782,890 | 532,326 | 370,526",
+     "LTM average eligible lives (in thousands) | 20,105 | 15,747 | 12,181",
+     "Our 12-month client retention rate was 97% as of December 31, 2025.",
+     "In 2026, we launched our Migraine Care Program, our first expansion beyond joint and muscle pain, offering rapid drug-free pain relief, personalized trigger management, and expert-led prevention for members.",
+     "Our client base is up almost 30% YoY for our MSK Care Program, roughly 40% for our GI Care Program since our acquisition announcement of Cylinder Health in August, and has nearly doubled for our Migraine Care Program since last quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 that the timing and nature of any IRS rules are unknown, and F1 cross-references Note 7 which is omitted from the packet.",
+    "claim": "Has the IRS issued or signaled any guidance limiting the permanent CARES Act pre-deductible telehealth safe harbor for HDHP participants, and are there any material legal proceedings, indemnification claims, or unconditional purchase commitments?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "We anticipate the Internal Revenue Service (the \u201cIRS\u201d) may issue guidance which could limit the scope of this safe harbor.",
+     "The timing and exact nature of any such rules, if any, are unknown at this time.",
+     "Commitments and contingencies (Note 7)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F3 and P6; the equity award footnotes and Item 5.02 executive transition disclosures are not in the packet.",
+    "claim": "What are the remaining unrecognized stock-based compensation expense, future RSU and PRSU vesting schedule behind the (116,356) nine-month and (96,565) third-quarter settlement tax withholdings (tables in thousands), and the contractual terms of Jim Pursley stepping down as President and Aaryn Pure becoming Chief Commercial Officer?",
+    "facts": [
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Tax withholdings on settlement of restricted stock units and performance-based restricted stock units | (96,565) | \u2014 | (116,356) | \u2014",
+     "We also announced that Jim Pursley will step down as President, effective January 1, 2027, and will join our Board of Directors, effective January 4, 2027.",
+     "Following this transition, Aaryn Pure will lead the commercial organization as Chief Commercial Officer.",
+     "Stock-based compensation | 50,324 | 625,837"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated directly in P5 and P6, where management explicitly declines to provide GAAP operating income guidance or a GAAP reconciliation for Q4 and full-year 2026.",
+    "claim": "Given nine-month GAAP net income of $136.2 million versus fourth-quarter non-GAAP operating income guidance of $81 million to $83 million without GAAP guidance, what will stock-based compensation, Cylinder intangible amortization, and acquisition-related expenses total in the fourth quarter?",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "We generated net income of $136.2 million and a net loss of $560.4 million for the nine months ended September 30, 2026 and 2025, respectively.",
+     "We expect non-GAAP income from operations to be between $81 million and $83 million, reflecting year-over-year growth of 71% and non-GAAP operating margin of 33% at the midpoint, a ~470 bps increase over Q4 2025.",
+     "Moreover, we have not reconciled our non-GAAP income from operations and non-GAAP operating margin guidance to GAAP income from operations and GAAP operating margin because we do not and are not able to provide guidance for GAAP income from operations due to the uncertainty and potential variability of stock-based compensation expense, employer payroll tax expense related to stock-based compensation, amortization of intangible assets and adjustments, such as acquisition-related expense, which are reconciling items between non-GAAP and GAAP income from operations and operating margin."
     ],
     "support": "supported"
    }
@@ -895,5 +1213,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 3 fiscal years"
+ "verdict_reason": "the filings show the continuing operations themselves losing money, so no value is given"
 }
