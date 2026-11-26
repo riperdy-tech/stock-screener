@@ -1,470 +1,1784 @@
 {
- "alpha_pts": null,
+ "alpha_pts": -31.94051059114056,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
  "based_on": {
   "accepted": "2026-11-04T14:03:11.000Z",
   "accepted_utc": "2026-11-04T19:03:11Z",
   "accession": "0001802768-26-000028",
-  "decision_time": "2026-11-22T03:36:39Z",
+  "decision_time": "2026-11-26T17:45:18Z",
   "form": "10-Q",
   "period": "2026-09-30"
  },
- "claims": 68,
- "claims_supported": 63,
- "date": "2026-11-22T03:36:39Z",
+ "claims": 119,
+ "claims_supported": 119,
+ "date": "2026-11-26T17:45:18Z",
+ "decided": {
+  "flags": [
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 25 of 25",
+   "run 1000: shares_scale_proven_eps_gap:-23%",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 18 of 18",
+   "run 3000: shares_scale_proven_eps_gap:-23%"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.1286, growth 0.0375, r 0.0815, F 10",
+  "route": "financial",
+  "run_gap": 0.020881821872994203,
+  "runs": {
+   "1000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 11235413115.851194,
+     "implied_pb": 1.8620220243554295,
+     "seam_ratio": 1.0277647058823507,
+     "tv_share": 0.5306295905609633
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 25 of 25",
+     "shares_scale_proven_eps_gap:-23%"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.065,
+      0.055,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.11,
+     "roe": [
+      0.096,
+      0.112,
+      0.118,
+      0.122,
+      0.125
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1286, growth 0.0375, r 0.0815, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 119
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.01,
+      0.09
+     ],
+     "long_run_roe": [
+      0.08,
+      0.14
+     ],
+     "terminal_growth": [
+      0.015,
+      0.055
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $6,476.9 million | $0.0 million | $6,476.9 million | $770.9 million | 0.1110 | -0.0676"
+       },
+       {
+        "id": "P1",
+        "quote": "In 2025, we generated Portfolio Receipts of $3.3 billion. We deployed $2.6 billion of cash in 2025 to acquire royalties, milestones and other contractual receipts, paid dividends and distributions of $511.9 million and repurchased $1.2 billion of shares."
+       },
+       {
+        "id": "F3",
+        "quote": "Net cash provided by operating activities | 2,132,770 | 1,662,675"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchases of Class A ordinary shares | (181,081) | (1,146,846)"
+       },
+       {
+        "id": "F1",
+        "quote": "Additional paid-in capital | 4,340,833 | 4,123,088"
+       },
+       {
+        "id": "F1",
+        "quote": "Non-controlling interests | 2,958,348 | 3,238,039"
+       }
+      ],
+      "quotes_given": 6,
+      "why": "Unlike 2025 when $1.2 billion of share repurchases shrank common equity by 6.76%, 9M 2026 share buybacks slowed to $181.1 million while non-controlling interest exchanges and share-based compensation lifted APIC and lowered NCI, putting common equity on pace for ~6.5% growth in Year 1. Over Years 2-5, strong operating cash generation enables Royalty Pharma to fund portfolio acquisitions while paying dividends and resuming moderate buybacks, keeping common equity growth at 4.0%-5.5% well below ROE."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The estimated weighted average duration of our portfolio is approximately 13 years based on projected cumulative cash royalty receipts."
+       },
+       {
+        "id": "P1",
+        "quote": "Existing patent applications covering Trikafta, the most significant product in that franchise, are expected to provide exclusivity through 2037."
+       },
+       {
+        "id": "P4",
+        "quote": "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%"
+       },
+       {
+        "id": "P3",
+        "quote": "As of December 31, 2025, we had $646.5 million of unrecognized compensation expense related to 19.5 million RP Holdings Class E Interests that is expected to vest over a weighted average period of 5.5 years."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Royalty Pharma's portfolio carries an estimated weighted average duration of ~13 years, with Trikafta exclusivity (31%-35% of total income in 2025-9M 2026) extending through 2037 and Class E Internalization compensation vesting over ~5.5 years from end-2025. A 10-year fade after Year 5 (2030 to 2040) spans the 2037 cystic fibrosis exclusivity cliff and allows full turnover of the current asset base toward steady-state economics."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0074, p25 0.1110, median 0.1286, p75 0.1316, max 0.2016, last 0.1110."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0815; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "We have executed transactions with an aggregate announced value of $19.4 billion from 2020 through 2025, which represents an estimated market share of approximately 48% of all royalty transactions during this period."
+       },
+       {
+        "id": "P1",
+        "quote": "As of December 31, 2025, products underlying $6.5 billion of these development-stage acquisitions have already been approved, representing a success rate to date of 90%, while products underlying $0.7 billion were not approved and products underlying $2.4 billion are still in development."
+       },
+       {
+        "id": "F2",
+        "quote": "Income tax expense | 0 | 0 | 0 | 0"
+       },
+       {
+        "id": "P6",
+        "quote": "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion."
+       }
+      ],
+      "quotes_given": 6,
+      "why": "Royalty Pharma's 48% share of the royalty market, 90% historical approval success rate on resolved development-stage deals, top-line revenue structure without fixed R&D or manufacturing overhead, $8.8 billion debt leverage, and 0% current income tax expense support a durable spread above the 8.15% cost of equity. We set long_run_roe at 11.0%, modestly below the 12.86% historical median to allow for deal-pricing competition, periodic clinical write-downs, and potential long-term tax normalization."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year (the last filed fiscal year): ended 2025-12-31; common equity at its end, which opens year 1, $6,476.9 million; income to common $770.9 million; return on opening common equity 0.1110."
+       },
+       {
+        "id": "F2",
+        "quote": "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0"
+       },
+       {
+        "id": "F2",
+        "quote": "Net income attributable to Royalty Pharma plc | $ 144,675 | $ 284,217 | $ 457,248 | $ 555,742"
+       },
+       {
+        "id": "P3",
+        "quote": "As of December 31, 2025, we had $646.5 million of unrecognized compensation expense related to 19.5 million RP Holdings Class E Interests that is expected to vest over a weighted average period of 5.5 years."
+       },
+       {
+        "id": "P6",
+        "quote": "Royalty Pharma now expects 2026 Portfolio Receipts to be between $3,500 million and $3,550 million (previously $3,400 million to $3,500 million), representing expected Royalty Receipts growth of 10% to 11%."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "Year 1 (2026) ROE reflects 9M 2026 net income to common of $457.2 million (depressed by $219.8 million of royalty impairments, $334.8 million of share-based compensation, and $62.3 million of AFS debt losses) alongside raised full-year Portfolio Receipts guidance of $3,500-$3,550 million. Years 2-5 recover toward 11.2%-12.5% as recent approvals and $1.9 billion of 2026 transactions scale and cash operating costs drop to 5.5%-6.0% of Portfolio Receipts, though remaining Class E Internalization compensation and ongoing R&D funding prevent full return to prior peaks."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0815; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "Global prescription pharmaceutical sales are projected to grow from $1.2 trillion in 2025 to $2.0 trillion in 2032, representing a compound annual growth rate of 7% according to EvaluatePharma."
+       },
+       {
+        "id": "P1",
+        "quote": "We estimate the market for biopharmaceutical royalties reached $10.0 billion in transaction value in 2025, which is an approximately 40% increase over the average value of $7.1 billion over the prior five years (2021-2025)."
+       },
+       {
+        "id": "P2",
+        "quote": "However, we may not be able to identify and acquire a sufficient number of royalties, or royalties of sufficient scale, to invest the capital available to us at our targeted rate of capital deployment, which could prevent us from executing our growth strategy and negatively impact our business."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Secular biopharmaceutical sales growth (7% projected CAGR through 2032) and expanding synthetic and R&D co-funding royalty volume ($10.0 billion market in 2025) underpin long-term reinvestment capacity. However, continuous amortization of finite patent lives and potential limits on large-scale royalty supply anchor perpetual common equity growth at 3.5%, slightly below the 3.75% nominal growth anchor."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 5,
+      "input_hit": "fade_years",
+      "risk": "Early patent invalidation, generic entry, or sales erosion in the concentrated Vertex cystic fibrosis franchise (31% of Q3 2026 total income), shortening effective portfolio duration ahead of the expected 2037 Trikafta exclusivity horizon."
+     },
+     {
+      "bear_value": 0.075,
+      "input_hit": "long_run_roe",
+      "risk": "Heightened competition for large royalty transactions or clinical failures on development-stage and R&D co-funding assets (similar to the $150 million pelacarsen impairment) compressing realized portfolio yields against $8.8 billion of debt."
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "long_run_roe",
+      "risk": "Adverse tax legislation changes ending Royalty Pharma's 0% effective income tax rate on consolidated pre-tax earnings."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Structural slowdown in biopharmaceutical royalty deal supply or tighter credit-agreement covenant capacity restricting capital redeployment to replace maturing royalties."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.025,
+       0.015,
+       0.010000000000000002,
+       0.0049999999999999975,
+       0.0
+      ],
+      "long_run_roe": 0.08,
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "book_growth": [
+       0.105,
+       0.095,
+       0.09,
+       0.08499999999999999,
+       0.07999999999999999
+      ],
+      "long_run_roe": 0.14,
+      "terminal_growth": 0.055
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Royalty Pharma is a biopharmaceutical royalty acquirer rather than a bank or insurer, and its GAAP return on opening common equity (11.10% in 2025; 12.86% historical median) is shaped by effective-interest-method accounting volatility, non-cash impairments ($219.8 million in 9M 2026, largely $150 million on pelacarsen), R&D co-funding expenses ($452.0 million in 2025; $200.8 million in 9M 2026), share-based compensation from the May 2025 Internalization ($334.8 million in 9M 2026), higher interest expense on $8.8 billion of debt principal, and zero income tax expense.",
+     "why": "Royalty Pharma's 2025 base year was distorted by $(295.8) million of non-cash provision income reversals, $452.0 million of R&D funding expense, a mid-year May 2025 Internalization that reshaped compensation from management fees to equity-vesting G&A, and $1.2 billion of share buybacks that shrank common equity by 6.76%. The company faces no bank or insurer regulatory capital constraints, and its $2,132.8 million of 9M 2026 operating cash flow plus $1.8 billion revolving credit capacity comfortably fund dividends, debt service, and capital deployment, subject only to credit-agreement leverage, interest-coverage, and Portfolio Cash Flow covenants."
+    },
+    "value_at_old_defaults": 25.504657365627867,
+    "values": {
+     "base": 21.36597328316284,
+     "bear": 15.126381159385156,
+     "bull": 44.77881363763397
+    }
+   },
+   "3000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 11003221512.348858,
+     "implied_pb": 1.8235413850470457,
+     "seam_ratio": 1.0341145833333327,
+     "tv_share": 0.4801649550749394
+    },
+    "flags": [
+     "base_year_not_representative",
+     "quotes_verified: 18 of 18",
+     "shares_scale_proven_eps_gap:-23%"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.065,
+      0.055,
+      0.05,
+      0.045,
+      0.045
+     ],
+     "fade_years": 12,
+     "long_run_roe": 0.105,
+     "roe": [
+      0.103,
+      0.115,
+      0.122,
+      0.125,
+      0.125
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1286, growth 0.0375, r 0.0815, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 0,
+     "kept": 119
+    },
+    "ranges": {
+     "book_growth_y3": [
+      -0.01,
+      0.095
+     ],
+     "long_run_roe": [
+      0.08,
+      0.128
+     ],
+     "terminal_growth": [
+      0.015,
+      0.05
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $6,476.9 million | $0.0 million | $6,476.9 million | $770.9 million | 0.1110 | -0.0676"
+       },
+       {
+        "id": "F1",
+        "quote": "Non-controlling interests | 2,958,348 | 3,238,039"
+       },
+       {
+        "id": "F3",
+        "quote": "Dividends to shareholders | (314,522) | (283,910)"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchases of Class A ordinary shares | (181,081) | (1,146,846)"
+       },
+       {
+        "id": "P1",
+        "quote": "We deployed $2.6 billion of cash in 2025 to acquire royalties, milestones and other contractual receipts, paid dividends and distributions of $511.9 million and repurchased $1.2 billion of shares."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "Common equity already rose 5.56% through 9M 2026 ($6,476.9 million to $6,836.9 million) as share repurchases slowed sharply ($181.1 million vs. $1,146.8 million in 9M 2025) and non-controlling interests exchanged into Class A equity alongside non-cash SBC credits to APIC. With dividends at $314.5 million in 9M 2026 and buybacks expected to remain below 2025's $1.2 billion pace while funding $1.9 billion in new transactions, book growth starts near 6.5% in Year 1 and moderates toward 4.5%-5.0% in Years 3-5."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "The estimated weighted average duration of our portfolio is approximately 13 years based on projected cumulative cash royalty receipts."
+       },
+       {
+        "id": "P1",
+        "quote": "Existing patent applications covering Trikafta, the most significant product in that franchise, are expected to provide exclusivity through 2037."
+       },
+       {
+        "id": "P3",
+        "quote": "As of December 31, 2025, we had $646.5 million of unrecognized compensation expense related to 19.5 million RP Holdings Class E Interests that is expected to vest over a weighted average period of 5.5 years."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Royalty Pharma's portfolio carries an estimated weighted average duration of approximately 13 years, and patent applications on its largest franchise (Trikafta) extend exclusivity through 2037, roughly 11 years from the decision date or 6-7 years beyond Year 5. Meanwhile, Class E Internalization compensation vests over a 5.5-year weighted average period, supporting a 12-year fade after Year 5 before reaching terminal steady state."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0815; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "We have executed transactions with an aggregate announced value of $19.4 billion from 2020 through 2025, which represents an estimated market share of approximately 48% of all royalty transactions during this period."
+       },
+       {
+        "id": "P2",
+        "quote": "Changes in the royalty market, including its structure, participants, growth rate, changes in preferred methods of financing and capital raising in the biopharmaceutical industry, or a reduction in the growth of the biopharmaceutical industry, could lead to diminished opportunities for us to acquire royalties, fewer royalties (or fewer royalties of significant scale) being available, or increased competition for royalties."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Royalty Pharma's scale, 48% market share, and 90% approval rate on resolved development-stage acquisitions support durable returns above its 8.15% cost of equity. However, heightened competition for royalty deals, eventual generic erosion on key franchises like Vertex's cystic fibrosis royalties, and potential tax or interest rate pressure warrant fading ROE from 12.5% to 10.5% over time, with a wide interquartile range of 8.0%-12.8%."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0074, p25 0.1110, median 0.1286, p75 0.1316, max 0.2016, last 0.1110."
+       },
+       {
+        "id": "F2",
+        "quote": "Net income attributable to Royalty Pharma plc | $ 144,675 | $ 284,217 | $ 457,248 | $ 555,742"
+       },
+       {
+        "id": "F2",
+        "quote": "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0"
+       },
+       {
+        "id": "P6",
+        "quote": "Payments for operating and professional costs in 2026 are expected to decrease as a percentage of Portfolio Receipts, compared to 8.9% in 2025, primarily due to extinguishment of the management fee following the completion of the internalization transaction on May 16, 2025."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Annualizing 9M 2026 net income to common of $457.2 million (depressed by $219.8 million of impairments including $150 million on pelacarsen and $334.8 million of share-based compensation) puts Year 1 (2026) ROE near 10.3% despite raised 2026 Portfolio Receipts guidance (+10% to 11%). Over Years 2-5, ROE recovers toward the 5-year historical median of 12.86% as new commercial royalties scale, cash operating costs remain low post-Internalization (5.5%-6.0% of Portfolio Receipts), and Class E vesting expense gradually runs off."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0815; long-run nominal growth anchor g_anchor 0.0375."
+       },
+       {
+        "id": "P1",
+        "quote": "Global prescription pharmaceutical sales are projected to grow from $1.2 trillion in 2025 to $2.0 trillion in 2032, representing a compound annual growth rate of 7% according to EvaluatePharma."
+       },
+       {
+        "id": "P6",
+        "quote": "Royalty Pharma now expects 2026 Portfolio Receipts to be between $3,500 million and $3,550 million (previously $3,400 million to $3,500 million), representing expected Royalty Receipts growth of 10% to 11%."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "While global prescription pharmaceutical sales are projected to grow at 7% through 2032 and RPRX's Portfolio Receipts are guided up 10%-11% in 2026, mature patent expirations and capital return through dividends and buybacks restrain perpetual common equity compounding. Setting terminal growth at 3.5%, slightly below the 3.75% nominal anchor, reflects modest net equity retention at a 10.5% long-run ROE."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.065,
+      "input_hit": "long_run_roe",
+      "risk": "Earlier-than-expected generic competition, patent invalidation, or sales erosion in Vertex's cystic fibrosis franchise (31% of Q3 2026 total income and other revenues), causing structural margin and yield compression post-2037."
+     },
+     {
+      "bear_value": 0.04,
+      "input_hit": "roe",
+      "risk": "Clustered clinical trial failures across the 16 development-stage candidates and $1 billion of R&D co-funding commitments, triggering large financial royalty asset impairments (like pelacarsen's $150 million Q3 2026 charge) and ASC 835-30 downward consensus provision charges."
+     },
+     {
+      "bear_value": -0.04,
+      "input_hit": "book_growth",
+      "risk": "Return to aggressive share repurchases ($1.2 billion in 2025) or tighter credit-covenant constraints on $8.8 billion of debt principal, shrinking retained common equity."
+     },
+     {
+      "bear_value": 0.075,
+      "input_hit": "long_run_roe",
+      "risk": "Higher refinancing costs on $8.8 billion debt principal or adverse tax law changes removing RPRX's current zero effective income tax rate."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.0049999999999999975,
+       -0.0050000000000000044,
+       -0.010000000000000002,
+       -0.015000000000000006,
+       -0.015000000000000006
+      ],
+      "long_run_roe": 0.08,
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "book_growth": [
+       0.11,
+       0.1,
+       0.095,
+       0.09,
+       0.09
+      ],
+      "long_run_roe": 0.128,
+      "terminal_growth": 0.05
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "other",
+     "roe_position": "Royalty Pharma is a biopharmaceutical royalty acquirer rather than a bank or insurer, so its GAAP ROE (11.10% in 2025 vs. a 2021-2025 median of 12.86% and range of 0.74%-20.16%) is driven by effective-interest accretion on financial royalty assets, large non-cash provision swings from sell-side sales forecast updates, zero tax expense, and leverage ($8.8 billion debt principal), offset by R&D funding outlays, clinical trial impairments, and post-Internalization share-based compensation.",
+     "why": "Although 2025 ROE of 11.10% sits near the 2021-2025 median of 12.86%, the base year included a $(295.8) million non-cash provision credit, $452.0 million of R&D funding expense, only a partial year of post-Internalization compensation following the May 16, 2025 close, and -6.76% common equity contraction from $1.2 billion in buybacks. In 9M 2026, GAAP net income to common fell to $457.2 million due to $219.8 million in impairments and $334.8 million in share-based compensation despite 9% Q3 Portfolio Receipts growth. As a royalty company, RPRX faces no regulatory capital constraint and generates strong operating cash flow ($2.13 billion in 9M 2026), though discretionary buybacks, dividends, and credit-agreement covenants govern net equity retention."
+    },
+    "value_at_old_defaults": 25.504657365627867,
+    "values": {
+     "base": 20.924423021872798,
+     "bear": 15.302374427585436,
+     "bull": 37.752366421400545
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 25.504657365627867,
+  "value_at_old_defaults_quoted": 25.504657365627867,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 11935512823.179447,
  "family": "financial",
+ "far_from_price": true,
+ "filed_shares": 564455000.0,
  "flags": [
-  "Royalty Pharma recorded a non-cash impairment charge of $150 million on pelacarsen after Novartis reported that its Phase 3 trial missed its primary endpoint.",
-  "Royalty Pharma raised its full-year 2026 Portfolio Receipts guidance to a range of $3,500 million to $3,550 million.",
-  "Royalty Pharma repaid its $380 million term loan, which cut total debt principal from $9.2 billion to $8.8 billion."
+  "Following Novartis's announcement that the Phase 3 Lp(a)HORIZON trial of pelacarsen did not meet its primary endpoint, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen in the third quarter of 2026, with total financial royalty asset impairment of 150,361 (table in thousands) for the three months and 219,804 (table in thousands) for the nine months ended Sep. 30, 2026.",
+  "Pursuant to the Purchase Agreement entered on January 10, 2025, Royalty Pharma completed the Internalization acquisition of all equity interests of RP Manager on May 16, 2025, issuing 24.5 million RP Holdings Class E Interests and extinguishing the external management fee.",
+  "In July 2026, Royalty Pharma repaid its $380 million term loan (reported as long-term debt repayment of (380,000), table in thousands, for the nine months ended Sep. 30, 2026), reducing total debt principal from $9.2 billion to $8.8 billion."
  ],
  "in_code_book": false,
- "ke": null,
- "model": "claude-sonnet-5-5",
+ "ke": 0.08149794340513286,
+ "market_cap_at_publish": 40577023825,
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "share count does not reconcile with filed EPS",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 70.57,
  "qwen_book": null,
  "release_truncated": [],
- "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
- "source": "screener list refresh",
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "seed_base": {
+  "1000": 21.36597328316284,
+  "3000": 20.924423021872798
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the 10-K business section and the 10-Q MD&A.",
-    "claim": "Royalty Pharma buys royalties on biopharmaceutical products and funds drug development. It holds royalties on more than 35 commercial products and 16 development-stage product candidates.",
+    "basis": "stated in [P1] and [P4]",
+    "claim": "Royalty Pharma buys biopharmaceutical royalties and funds clinical innovation across academic institutions, research hospitals, not-for-profits, biotechnology companies, and global pharmaceutical companies rather than manufacturing or selling drugs itself.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
      "We are the largest buyer of biopharmaceutical royalties and a leading funder of innovation across the biopharmaceutical industry.",
-     "royalties on more than 35 commercial products"
+     "Since our founding in 1996, we have been pioneers in the royalty market, collaborating with innovators from academic institutions, research hospitals and not-for-profits through small and mid-cap biotechnology companies to leading global pharmaceutical companies.",
+     "By acquiring royalties, we are able to realize payments based directly on the top-line sales of leading biopharmaceutical therapies, without the costs associated with fixed R&D, manufacturing and commercial infrastructure."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1; the marketer list comes from the product table in P6.",
-    "claim": "Its counterparties are the innovators that sell or syndicate royalties and receive funding, from academic institutions to global pharmaceutical companies. Cash comes from the marketers of the products, such as Vertex, GSK, Roche and Johnson & Johnson.",
+    "basis": "stated in [P1]",
+    "claim": "The company deploys capital through third-party royalties, synthetic royalties, senior unsecured debt, direct equity investments, and launch and development capital on approved or late-stage therapies.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The majority of our current portfolio consists of third-party royalties.",
+     "A synthetic royalty is the contractual right to a percentage of top-line sales by the developer or marketer of a therapy in exchange for funding.",
+     "This may include senior unsecured debt, direct equity investments and launch and development capital (in exchange for fixed long-term payments)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1] and [P6]",
+    "claim": "Royalty Pharma's current portfolio includes royalties on more than 35 commercial products and 16 development-stage product candidates across diverse therapeutic areas.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "collaborating with innovators from academic institutions, research hospitals and not-for-profits through small and mid-cap biotechnology companies to leading global pharmaceutical companies."
+     "Royalty Pharma\u2019s current portfolio includes royalties on more than 35 commercial products, including Vertex\u2019s Trikafta and Alyftrek, GSK\u2019s Trelegy, Biogen\u2019s Tysabri and Spinraza, Roche\u2019s Evrysdi, Astellas and Pfizer\u2019s Xtandi, Johnson & Johnson\u2019s Tremfya, AbbVie and Johnson & Johnson\u2019s Imbruvica, Servier\u2019s Voranigo, Gilead\u2019s Trodelvy, Amgen\u2019s Imdelltra and Alnylam\u2019s Amvuttra, among others, and 16 development-stage product candidates.",
+     "Our portfolio is highly diversified across products, therapeutic areas and marketers."
     ],
     "support": "supported"
    },
    {
-    "basis": "The figures are in F2. The description of the other line is from the 10-K MD&A (P3) and is inferred to still apply.",
-    "claim": "Revenue is reported in two lines: income from financial royalty assets and other royalty income and revenues. For the three months ended Sep. 30, 2026 these were 647,608 and 42,495 (table in thousands), totalling 690,103 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and repeated in P4.",
-    "claim": "Most royalties are accounted for as financial assets under the effective interest method, so reported revenue is accreted yield and not cash received. The company says income does not correlate directly with royalty receipts.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "The yield, which is calculated at the end of each reporting period and applied prospectively, is then recognized via accretion into our income at the effective rate of return over the expected life of the financial royalty asset.",
-     "We believe there is no direct correlation between income from financial royalty assets and royalty receipts due to the nature of the accounting methodology applied for financial royalty assets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are from F2; the mechanism is stated in P3 and P4.",
-    "claim": "A key non-cash driver is the provision for changes in expected cash flows, which moves with sell-side analysts' consensus sales forecasts. It was income of (88,320) in Q3 2026 and (17,589) for nine months, against (318,943) for nine months in 2025 (table in thousands).",
+    "basis": "stated in [P3] and [P4]",
+    "claim": "Total income and other revenues consists primarily of interest income accreted on financial royalty assets and other royalty income from fully amortized royalties, synthetic royalties, and R&D funding milestones.",
     "facts": [
      "F2",
      "P3",
      "P4"
     ],
     "quotes": [
-     "Our cash flow forecasts are updated each reporting period primarily using sell-side equity research analysts\u2019 consensus sales estimates."
+     "Total income and other revenues is primarily comprised of interest income from our financial royalty assets and royalty income generally arising from successful commercialization of products developed through research and development (\u201cR&D\u201d) funding arrangements.",
+     "Other royalty income and revenues primarily includes income from financial royalty assets that have been fully amortized and income from synthetic royalties and milestones arising out of R&D funding arrangements."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the company's earnings release; guidance is management's own and excludes future transactions.",
-    "claim": "Cash generation is measured by Portfolio Receipts, which were $890 million in Q3 2026, up 9%. Royalty Receipts of $883 million grew 9%, driven by Tremfya, Voranigo, Evrysdi and Imdelltra. Management raised 2026 Portfolio Receipts guidance to $3,500 million to $3,550 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Royalty Receipts grew 9% to $883 million, driven by Tremfya, Voranigo, Evrysdi and Imdelltra."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Cash collections from financial royalty assets for the nine months to Sep. 30, 2026 were 2,660,285, against 2,438,620 a year earlier (table in thousands). Net cash from operating activities was 2,132,770.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A table.",
-    "claim": "Revenue is concentrated in Vertex's cystic fibrosis franchise, which was 31% of total income and other revenues in Q3 2026 and 32% for nine months. The Q3 2025 and nine-month 2025 shares were each 35%.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Figures are from F2 and P6; the mechanism is from P3.",
-    "claim": "Costs since the May 2025 internalization are mainly employee compensation, including share-based pay. G&A was 471,475 for nine months in 2026 against 409,209, including share-based compensation of 334,794 against 165,099 (table in thousands). Operating and professional cash costs are guided to 5.5% to 6.0% of Portfolio Receipts against 8.9% in 2025.",
-    "facts": [
-     "F2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Payments for operating and professional costs in 2026 are expected to decrease as a percentage of Portfolio Receipts, compared to 8.9% in 2025, primarily due to extinguishment of the management fee following the completion of the internalization transaction on May 16, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are from F2 and P6; the leverage statement is from the 10-K risk factors.",
-    "claim": "Leverage funds acquisitions, and interest expense is a rising cost. Interest expense was 277,833 for nine months in 2026 against 213,493 (table in thousands). Total debt principal was $8.8 billion at Sep. 30, 2026.",
-    "facts": [
-     "F2",
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "We finance a significant portion of our capital deployment with borrowed funds."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are from F2; the pelacarsen charge is stated in P6.",
-    "claim": "R&D funding expense and impairments add costs that depend on how development-stage assets perform. R&D funding expense was 200,798 for nine months in 2026 against 401,500. Financial royalty asset impairment was 219,804, with the Q3 2026 charge of $150 million related to pelacarsen.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are from F2; the structure is described in P3 and P4.",
-    "claim": "Part of consolidated earnings goes to non-controlling interests. Net income attributable to them was 359,131 of consolidated net income of 816,379 for nine months in 2026 (table in thousands). They include legacy investors, continuing investors and founder performance awards equal to 20% of Net Economic Profit.",
-    "facts": [
-     "F2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are from F3; Capital Deployment is from P6.",
-    "claim": "Cash is redeployed into new royalties and returned to shareholders. Nine-month Capital Deployment was $1.2 billion, including acquisitions of financial royalty assets of (982,383) (table in thousands). Dividends were 314,522 and share repurchases 181,081.",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in the cited item (company self-description, not independently verified in the packet)",
-    "claim": "The company describes itself as the largest buyer of biopharmaceutical royalties. This is its own characterisation of its position.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We are the largest buyer of biopharmaceutical royalties and a leading funder of innovation across the biopharmaceutical industry."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item as the company's estimates",
-    "claim": "By the company's own estimate, it executed $19.4 billion of announced royalty transactions from 2020 through 2025, about 48% of the market. It puts its nearest competitor at $5.5 billion, or 14%.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We have executed transactions with an aggregate announced value of $19.4 billion from 2020 through 2025, which represents an estimated market share of approximately 48% of all royalty transactions during this period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company's share is higher in large deals: it executed 13 of the 21 royalty transactions of $500 million or more since 2020, an estimated 69% share by value.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We have executed 13 of these 21 large transactions, for a total transaction value of approximately $12.7 billion and an estimated market share of 69% based on the transaction value."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The portfolio is diversified across more than 35 commercial products. In 2025 no single product was more than 26% of Portfolio Receipts.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In 2025, no individual product accounted for more than 26% of our Portfolio Receipts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the concentration reading is inferred from the percentages",
-    "claim": "Revenue is concentrated in Vertex's cystic fibrosis franchise. It was 35% of total income and other revenues in 2025 and 32% in the nine months to September 2026, against 35% a year earlier.",
+    "basis": "stated in [P3] and [P4]",
+    "claim": "Revenue has significant payor concentration, with Vertex's cystic fibrosis franchise accounting for 35% of total income and other revenues in 2025 and 31% in the three months ended September 30, 2026.",
     "facts": [
      "P3",
      "P4"
     ],
     "quotes": [
+     "The royalty payors that accounted for greater than 10% of our total income and other revenues are shown in the table below:",
      "Vertex | Cystic fibrosis franchise | 35% | 36%",
      "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (management estimate)",
-    "claim": "Portfolio duration is a stated strength. The company puts weighted-average duration at about 13 years and expects Trikafta exclusivity through 2037.",
+    "basis": "stated in [P3]",
+    "claim": "GAAP income from financial royalty assets is driven by royalty acquisitions, changes in sell-side consensus sales forecasts, new indication approvals, estimated royalty duration, projected payment timing, and royalty-bearing sales.",
     "facts": [
-     "P1"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "The estimated weighted average duration of our portfolio is approximately 13 years based on projected cumulative cash royalty receipts."
+     "Variables affecting the recognition of interest income from financial royalty assets under the prospective effective interest method include any one of the following: (1) additional acquisitions, (2) changes in expected cash flows of the underlying pharmaceutical products, derived primarily from sell-side equity research analysts\u2019 consensus sales forecasts, (3) regulatory approval of additional indications which leads to new cash flow streams, (4) changes to the estimated duration of the royalty (e.g., patent expiration date), (5) changes in amounts and timing of projected royalty receipts and milestone payments and (6) changes in the portion of sales that are subject to the royalty, which is referred to as royalty bearing sales."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Cash generation is growing. Q3 2026 Portfolio Receipts rose 9% to $890 million and full-year 2026 guidance was raised, with Tremfya, Voranigo, Evrysdi and Imdelltra driving the increase.",
+    "basis": "stated in [P1], [P2], and [P6]",
+    "claim": "Underlying cash royalty receipts are driven by end-market product sales growth, new product launches and label expansions, patent exclusivity and generic competition, and foreign currency movements.",
     "facts": [
+     "P1",
+     "P2",
      "P6"
     ],
     "quotes": [
-     "Raised full year 2026 guidance: Portfolio Receipts expected to be $3,500 million to $3,550 million"
+     "The royalties in our portfolio entitle us to payments based directly on the top-line sales of the associated therapies, rather than the profits of these therapies.",
+     "Biopharmaceutical product sales may be lower than expected due to a number of reasons, including pricing pressures, insufficient demand, product competition, failure of clinical trials, delays or failures in obtaining marketing approval in one or more jurisdictions or for additional product indications, lack of market acceptance, changes in the marketer\u2019s strategic priorities, obsolescence, lack of coverage or insufficient reimbursement by healthcare programs or insurance plans, loss of patent protection, government regulations and other factors.",
+     "The increase was primarily driven by Tremfya, Voranigo, Evrysdi and Imdelltra, partially offset by declines from Promacta due to U.S. generic competition and from Imbruvica.",
+     "Certain products pay royalties in currencies other than U.S. dollars, which creates foreign currency risk primarily with respect to the Euro, Canadian dollar, British pound, Swiss franc and Japanese yen, as our functional and reporting currency is the U.S. dollar."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item; the percentages are the printed Portfolio Receipts changes for Promacta and Imbruvica",
-    "claim": "Some existing royalties face competition. Promacta receipts fell on U.S. generic competition and Imbruvica also declined.",
+    "basis": "stated in [F2], [P3], and [P6]",
+    "claim": "Operating expenses are heavily driven by non-cash provisions for changes in expected cash flows, credit loss allowances on unfunded commitments, and financial royalty asset impairments.",
     "facts": [
+     "F2",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "partially offset by declines from Promacta due to U.S. generic competition and from Imbruvica."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Development-stage assets can fail. In Q3 2026 Novartis's pelacarsen Phase 3 trial missed its primary endpoint and the company recorded a non-cash impairment charge. A Niktimvo trial in idiopathic pulmonary fibrosis also missed its primary endpoint.",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
+     "As we update our forecasted cash flows on a periodic basis and recalculate the present value of the remaining future cash flows, any shortfall when compared to the carrying value of the financial royalty asset is recorded directly in the consolidated statements of operations through the line item Provision for changes in expected cash flows from financial royalty assets.",
+     "The provision for credit losses on unfunded commitments, a non-cash item, represents the current expected credit losses on the unfunded portions of our funding arrangements with Revolution Medicines.",
      "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Leverage is a stated threat. Total debt principal was $8.8 billion at September 30, 2026, and nine-month interest expense rose to 277,833 from 213,493 (table in thousands).",
+    "basis": "stated in [P3]",
+    "claim": "Research and development funding expense reflects upfront, pre-approval milestone, and clinical trial co-funding payments to counterparties for development-stage product candidates.",
     "facts": [
-     "P6",
-     "F2",
-     "P2"
+     "P3"
     ],
     "quotes": [
-     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
-     "Our interest expense has increased in recent years."
+     "R&D funding expense consists of certain development-stage funding payments that we have made to counterparties to acquire royalties or milestones on product candidates.",
+     "The payments can be made on an upfront basis, upon pre-approval milestones or over time as the related product candidates undergo clinical trials."
     ],
     "support": "supported"
    },
    {
-    "basis": "risk language stated in P2; the deployment comparison is read from the P6 table",
-    "claim": "The pace of new deals is a risk. The company warns the royalty market may not keep growing and it may not find enough royalties to deploy capital. Q3 2026 Capital Deployment was $362 million, against (1,013) (table in millions) a year earlier.",
+    "basis": "stated in [P3]",
+    "claim": "General and administrative expenses shifted from external management fees based on royalty cash receipts and security values to internal employee cash and share-based compensation following the 2025 Internalization.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Under the Legacy Management Agreement, we paid a quarterly operating and personnel payment to RPM or its affiliates equal to 6.5% of the cash receipts from Royalty Investments (as defined in the Legacy Management Agreement) and 0.25% of the value of our security investments under GAAP as of the end of such quarter (\u201cManagement Fees\u201d).",
+     "Following the Internalization, we no longer pay Management Fees; instead, employee compensation expenses represent the most significant component of G&A expenses.",
+     "We completed the acquisition of RP Manager on May 16, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2], [P2], [P3], and [P4]",
+    "claim": "The company uses debt leverage to fund capital deployment, making interest expense a key non-operating cost alongside profit allocations to non-controlling interests.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "We finance a significant portion of our capital deployment with borrowed funds.",
+     "The use of leverage creates an opportunity for an increased return but also increases the risk of loss if our assets do not generate sufficient cash flows.",
+     "Equity Performance Awards (\u201cEPAs\u201d) represent 20% of the Net Economic Profit (as defined below) generated from investments made during each two-year investment period (each, a \u201cPortfolio\u201d)."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P1, P3, P4, and P6 (market share figures are company estimates in P1)",
+    "claim": "Royalty Pharma is the largest buyer of biopharmaceutical royalties, executing $19.4 billion in announced transactions from 2020 through 2025 for an estimated 48% market share versus $5.5 billion and 14% for its nearest competitor.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We are the largest buyer of biopharmaceutical royalties and a leading funder of innovation across the biopharmaceutical industry.",
+     "We have executed transactions with an aggregate announced value of $19.4 billion from 2020 through 2025, which represents an estimated market share of approximately 48% of all royalty transactions during this period.",
+     "In comparison, we believe our nearest competitor has executed $5.5 billion of transactions over the same period, representing an estimated market share of 14%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (market share is a company estimate)",
+    "claim": "Royalty Pharma dominates large royalty deals, executing 13 of 21 transactions valued at $500 million or more since 2020 for approximately $12.7 billion and an estimated 69% market share by transaction value.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Since 2020, there have been 21 large royalty transactions each with an aggregate value of $500 million or more.",
+     "We have executed 13 of these 21 large transactions, for a total transaction value of approximately $12.7 billion and an estimated market share of 69% based on the transaction value."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "From 2012 through 2025, Royalty Pharma deployed $27.5 billion of cash to acquire royalties, milestones, and other contractual receipts, achieving a 90% approval success rate to date on resolved development-stage acquisitions ($6.5 billion approved versus $0.7 billion not approved).",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "From 2012 through 2025, we deployed $27.5 billion of cash to acquire royalties, milestones and other contractual receipts.",
+     "As of December 31, 2025, products underlying $6.5 billion of these development-stage acquisitions have already been approved, representing a success rate to date of 90%, while products underlying $0.7 billion were not approved and products underlying $2.4 billion are still in development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "Royalty Pharma's portfolio spans more than 35 commercial products and 16 development-stage product candidates, entitling it to payments tied directly to top-line sales of leading therapies.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We have assembled a portfolio of royalties which entitles us to payments based directly on the top-line sales of many of the industry\u2019s leading therapies, which includes royalties on more than 35 commercial products, including Vertex\u2019s Trikafta and Alyftrek, GSK\u2019s Trelegy, Biogen\u2019s Tysabri and Spinraza, Roche\u2019s Evrysdi, Astellas and Pfizer\u2019s Xtandi, Johnson & Johnson\u2019s Tremfya, AbbVie and Johnson & Johnson\u2019s Imbruvica, Servier\u2019s Voranigo, Gilead\u2019s Trodelvy, Amgen\u2019s Imdelltra and Alnylam\u2019s Amvuttra, among others, and 16 development-stage product candidates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "In 2025, Royalty Pharma's portfolio included royalties on 16 therapies that each generated over $1 billion in end-market sales, including 7 therapies generating $3 billion or more.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "As of December 31, 2025, our portfolio included royalties on 16 therapies that each generated end-market sales of more than $1 billion in 2025, including 7 therapies that each generated end-market sales of $3 billion or more."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1; counter stated in P2",
+    "claim": "The portfolio has an estimated weighted average duration of approximately 13 years based on projected cumulative cash royalty receipts, with Trikafta patent applications expected to provide exclusivity through 2037.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The estimated weighted average duration of our portfolio is approximately 13 years based on projected cumulative cash royalty receipts.",
+     "Existing patent applications covering Trikafta, the most significant product in that franchise, are expected to provide exclusivity through 2037."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P3, and P4",
+    "claim": "While no individual product exceeded 26% of Portfolio Receipts in 2025, revenue remains concentrated in Vertex's cystic fibrosis franchise, which accounted for 35% of total income and other revenues in 2025 and 31% in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In 2025, no individual product accounted for more than 26% of our Portfolio Receipts.",
+     "Vertex | Cystic fibrosis franchise | 35% | 36%",
+     "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Royalty Pharma's operating model captures top-line biopharmaceutical sales without fixed R&D, manufacturing, or commercial infrastructure costs, while offering innovators non-dilutive capital that preserves operational control.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "By acquiring royalties, we are able to realize payments based directly on the top-line sales of leading biopharmaceutical therapies, without the costs associated with fixed R&D, manufacturing and commercial infrastructure.",
+     "In addition, royalties are emerging as an attractive alternative to a traditional partnership with a larger global biopharmaceutical company, as they allow the biotechnology company to retain operational control of their program, a higher proportion of the economics and reduce administrative complexity.",
+     "Our model combines a unique structure, long investment time horizon, structuring flexibility, scale and diversification, and singular focus on biopharmaceuticals."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Royalty Pharma generated $890 million in Portfolio Receipts in the third quarter of 2026 (up 9% from $814 million a year earlier) and announced $1.9 billion in transactions as of November 3, 2026, including $1 billion in R&D co-funding.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Portfolio Receipts was $890 million in the third quarter of 2026, an increase of 9% compared to $814 million in the third quarter of 2025, primarily driven by the same Royalty Receipts increases noted above, in addition to higher Milestones and other contractual receipts.",
+     "Announced value of transactions of $1.9 billion and Capital Deployment of $1.6 billion as of November 3, 2026.",
+     "Lastly, we remain excited by the potential for R&D co-funding with global biopharma - where we have announced $1 billion of transactions so far this year - which represents an important new opportunity for our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P5",
+    "claim": "A slowdown in royalty market growth, shifts in preferred biopharmaceutical financing methods, or heightened competition for deals could prevent Royalty Pharma from deploying capital at its targeted scale.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Changes in the royalty market, including its structure, participants, growth rate, changes in preferred methods of financing and capital raising in the biopharmaceutical industry, or a reduction in the growth of the biopharmaceutical industry, could lead to diminished opportunities for us to acquire royalties, fewer royalties (or fewer royalties of significant scale) being available, or increased competition for royalties.",
+     "However, we may not be able to identify and acquire a sufficient number of royalties, or royalties of sufficient scale, to invest the capital available to us at our targeted rate of capital deployment, which could prevent us from executing our growth strategy and negatively impact our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P5, and P6",
+    "claim": "Because marketers of royalty-generating products are outside Royalty Pharma's control, sales can be eroded by generic competition, pricing pressures, patent loss, or changing marketer priorities\u2014as seen in Promacta's (75)% year-over-year Royalty Receipts decline in the third quarter of 2026 due to U.S. generic competition.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Biopharmaceutical product sales may be lower than expected due to a number of reasons, including pricing pressures, insufficient demand, product competition, failure of clinical trials, delays or failures in obtaining marketing approval in one or more jurisdictions or for additional product indications, lack of market acceptance, changes in the marketer\u2019s strategic priorities, obsolescence, lack of coverage or insufficient reimbursement by healthcare programs or insurance plans, loss of patent protection, government regulations and other factors.",
+     "The increase was primarily driven by Tremfya, Voranigo, Evrysdi and Imdelltra, partially offset by declines from Promacta due to U.S. generic competition and from Imbruvica.",
+     "Promacta | Novartis | Hematology | 9 | 38 | (75)%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P5, and P6",
+    "claim": "Development-stage royalties and R&D co-funding expose Royalty Pharma to clinical and regulatory failures without development control, leading to write-downs such as the $150 million non-cash impairment charge on pelacarsen after its Phase 3 trial missed its primary endpoint.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "We have previously acquired royalties on development-stage product candidates for which clinical development was stopped for a number of reasons, including clinical trials failing to meet their primary endpoints.",
+     "These failures have resulted in, and future failures could lead to, non-cash impairment charges or other investment write downs.",
+     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen.",
+     "In October 2026, Syndax Pharmaceuticals (Syndax) announced that the Phase 2 MAXPIRe trial of Niktimvo in idiopathic pulmonary fibrosis (IPF) did not meet its primary endpoint."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P5",
+    "claim": "Royalty returns face competitive threats if rivals introduce safer, cheaper, more effective, or earlier therapies, or if small partner developers fail to secure sales, marketing, and distribution capabilities.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "If other product developers introduce and market products that are more effective, safer or less expensive than the products that generate our royalties, or if such developers introduce their products prior to the competing products underlying our royalties, the products in which we have invested may not achieve commercial success and thereby result in diminished returns or reduced royalties for us, adversely affecting our business, financial condition or results of operations.",
+     "If no sales, marketing or distribution arrangements can be made on acceptable terms or at all, the affected product may not be able to be successfully commercialized, which will result in a loss for us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P5",
+    "claim": "Information available on underlying products is often limited to public domain disclosures, so inaccurate valuation assumptions or unexpectedly shortened royalty terms can reduce effective yields and cause permanent impairments.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Often, the information we have regarding products following our acquisition of a royalty may be limited to the information that is available in the public domain.",
+     "If an unexpected shortening of a royalty term were to occur, it could result in a reduction in the effective interest rate for the asset, a decline in income from royalties, a significant reduction in royalty receipts compared to expectations, or a permanent impairment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Royalty Pharma finances a substantial portion of capital deployment with debt\u2014holding $8.8 billion in total debt principal against $514 million in cash and cash equivalents as of September 30, 2026\u2014exposing it to interest rate risk and restrictive borrowing covenants.",
     "facts": [
      "P2",
      "P6"
     ],
     "quotes": [
-     "The royalty market may not grow at the same rate as it has in the past, or at all, and we may not be able to acquire sufficient royalties to sustain the growth of our business."
+     "We finance a significant portion of our capital deployment with borrowed funds.",
+     "The agreements governing our borrowings may impose operating and financial restrictions which could affect the number and size of the royalties that we may pursue.",
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (CEO comments in the earnings release)",
-    "claim": "The company is extending its model into new areas. It adds royalties on new therapies each quarter and sees R&D co-funding with global biopharma as an important new opportunity.",
+    "basis": "stated in P2",
+    "claim": "Deal sourcing and execution depend heavily on key team members' expertise and relationships, while external roles\u2014such as CEO Pablo Legorreta's co-founder role and influence at Pharmakon Advisors\u2014create potential conflicts of interest and competing time demands.",
     "facts": [
-     "P6"
+     "P2"
     ],
     "quotes": [
-     "We continued to strengthen our portfolio by adding royalties on three innovative therapies in the third quarter."
+     "We depend on the expertise, skill and network of business contacts of key members of our team, who evaluate, negotiate, structure, execute, monitor and service our assets.",
+     "For instance, Mr. Legorreta, our Chief Executive Officer, is also a co-founder of and has significant influence over Pharmakon Advisors, which manages BioPharma Credit PLC (LSE: BPCR) and other investment vehicles that collectively are leading providers of debt capital to the biopharmaceutical industry and he has a substantial investment in BioPharma Credit."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P5",
+    "claim": "Potential strategic acquisitions of operating biopharmaceutical companies could expose Royalty Pharma to direct product liability claims, high fixed costs, and unfamiliar integration risks.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Moreover, the acquisition of operating biopharmaceutical companies may expose us to liabilities not inherent in our other royalty acquisitions, such as direct exposure to product liability claims, high fixed costs or an expansion of our operations and expense structure, thereby potentially decreasing our profitability.",
+     "Despite our business, financial and legal due diligence efforts, we have limited experience in assessing opportunities to acquire operating businesses, and we ultimately may be unsuccessful in ascertaining or evaluating all risks associated with such acquisitions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Worldwide royalty entitlements expose Royalty Pharma to foreign currency fluctuations and macroeconomic or geopolitical disruptions, including tariffs, trade barriers, inflation, and interest rate shifts.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Certain products pay royalties in currencies other than U.S. dollars, which creates foreign currency risk primarily with respect to the Euro, Canadian dollar, British pound, Swiss franc and Japanese yen, as our functional and reporting currency is the U.S. dollar.",
+     "We are also subject to risks and uncertainties caused by significant events with macroeconomic impacts, including, but not limited to geopolitical events, including the Russia-Ukraine conflict, conflicts in the Middle East, tensions between China and Taiwan, trade and other international disputes, including new or increased tariffs and other barriers to trade, rising inflation and interest rates, monetary policy changes, financial services sector instability, recessions, global pandemics, significant natural disasters and foreign currency fluctuations."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet; the comparison is inferred from the printed lines, with no ratio computed.",
-    "claim": "Cash and cash equivalents were $513,657 (table in thousands) at the latest quarter end, down from $618,696 at year-end. Total current assets of 1,525,567 exceeded total current liabilities of 1,179,003.",
+    "basis": "stated in the cited item",
+    "claim": "Cash and cash equivalents stood at $514 million, alongside 1,525,567 of total current assets, 1,179,003 of total current liabilities, 31,200 of current available for sale debt securities, and 350,000 of non-current available for sale debt securities (balance sheet table in thousands).",
     "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release.",
-    "claim": "Total debt had a principal value of $8.8 billion at the latest quarter end, down from $9.2 billion three months earlier because a $380 million term loan was repaid in July.",
-    "facts": [
+     "F1",
      "P6"
     ],
     "quotes": [
-     "The reduction in total debt from $9.2 billion as of June 30, 2026 reflects payment of the $380 million term loan in July 2026."
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "Total current assets | 1,525,567 | 1,528,091",
+     "Total current liabilities | 1,179,003 | 636,211",
+     "Available for sale debt securities | 31,200 | 18,800",
+     "Available for sale debt securities | 350,000 | 419,000"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the balance sheet; the leverage comparison is inferred.",
-    "claim": "On the balance sheet, long-term debt was 7,590,522 and the current portion of long-term debt was 996,973 (table in thousands). Total liabilities were 9,665,952 against total shareholders' equity of 9,795,271.",
+    "basis": "stated in the cited item",
+    "claim": "External credit capacity included up to $1.8 billion in available Revolving Credit Facility commitments and up to $350 million under an uncommitted credit facility, while quarterly Adjusted EBITDA (non-GAAP) was $840 million and Portfolio Cash Flow (non-GAAP) was $673 million.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Net cash provided by operating activities for the nine months was 2,132,770, against 1,662,675 a year earlier (table in thousands).",
-    "facts": [
+     "P2",
+     "P6",
      "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release. Portfolio Cash Flow is a non-GAAP measure.",
-    "claim": "In the third quarter Portfolio Receipts were $890 million, against 814 a year earlier. Portfolio Cash Flow was 673 against 657, and net cash from operating activities was 686 against 703 (release table, $ in millions).",
-    "facts": [
-     "P6"
     ],
     "quotes": [
-     "Portfolio Receipts increased by 9% to $890 million, reflecting higher milestones and other contractual receipts."
+     "In addition to this indebtedness, we have up to $1.8 billion of available revolving commitments under our Revolving Credit Facility (as defined below).",
+     "Furthermore, on August 4, 2025, we entered into an uncommitted credit facility, which provides for borrowing capacity of up to $350 million at the discretion of the lender thereunder.",
+     "Adjusted EBITDA (non-GAAP) was $840 million in the third quarter of 2026.",
+     "Portfolio Cash Flow (non-GAAP) was $673 million in the third quarter of 2026.",
+     "Noncompliance with the interest coverage ratio, leverage ratio and Portfolio Cash Flow ratio covenants under the credit agreement could result in lenders requiring the company to immediately repay all amounts borrowed."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the cash flow statement line items; the lower-outflow pattern is stated, the causal link is not.",
-    "claim": "The rise in nine-month operating cash flow coincided with lower development-stage funding payments and lower payments for operating and professional costs. Development-stage funding payments were (192,998) against (401,500), and operating and professional cost payments were (122,965) against (229,896) (table in thousands).",
+    "basis": "stated in the cited item",
+    "claim": "Total debt principal was $8.8 billion, down from $9.2 billion following repayment of a $380 million term loan, while balance-sheet carrying amounts stood at 996,973 for current debt, 7,590,522 for long-term debt, and 9,795,271 for total shareholders' equity (balance sheet table in thousands).",
     "facts": [
-     "F3"
+     "F1",
+     "P6",
+     "P2"
     ],
-    "quotes": [],
+    "quotes": [
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "The reduction in total debt from $9.2 billion as of June 30, 2026 reflects payment of the $380 million term loan in July 2026.",
+     "Current portion of long-term debt | 996,973 | 380,000",
+     "Long-term debt | 7,590,522 | 8,570,917",
+     "Total shareholders\u2019 equity | 9,795,271 | 9,714,939"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Impairment and net income are stated in the filings; the non-cash character is stated in the release.",
-    "claim": "GAAP earnings are weaker and noisier than cash generation. Third-quarter net income attributable to Royalty Pharma plc was $144,675 against $284,217 (table in thousands), after a financial royalty asset impairment of 150,361.",
+    "basis": "stated in the cited item",
+    "claim": "Nine-month interest expense rose to 277,833 from 213,493 and cash interest paid rose to (351,720) from (269,610) (tables in thousands), with full-year cash interest expected to be approximately $350 million to $360 million.",
     "facts": [
      "F2",
+     "F3",
+     "P2",
      "P6"
     ],
     "quotes": [
+     "Interest expense | 90,494 | 79,564 | 277,833 | 213,493",
+     "Interest paid | (351,720) | (269,610)",
+     "In 2026, Royalty Pharma anticipates interest paid to be approximately $350 million to $360 million.",
+     "Interest paid is anticipated to be a de minimis amount in the fourth quarter of 2026.",
+     "If interest rates were to increase, our borrowing costs may increase and our leverage strategy may become more costly, which could reduce Portfolio Cash Flow and net profits."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Nine-month net cash provided by operating activities grew to 2,132,770 from 1,662,675 on $ 2,660,285 of cash collections from financial royalty assets (cash flow table in thousands), while quarterly operating cash flow was 686 versus 703 (press release table in millions).",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 2,132,770 | 1,662,675",
+     "Cash collections from financial royalty assets | $ 2,660,285 | $ 2,438,620",
+     "Net cash provided by operating activities | 686 | 703 | (2)%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Quarterly Portfolio Receipts increased 9% to $890 million as Royalty Receipts rose 9% to $883 million, and management raised full-year Portfolio Receipts guidance to $3,500 million to $3,550 million with expected Royalty Receipts growth of 10% to 11%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Portfolio Receipts was $890 million in the third quarter of 2026, an increase of 9% compared to $814 million in the third quarter of 2025, primarily driven by the same Royalty Receipts increases noted above, in addition to higher Milestones and other contractual receipts.",
+     "Royalty Receipts was $883 million in the third quarter of 2026, an increase of 9% compared to $811 million in the third quarter of 2025.",
+     "Royalty Pharma now expects 2026 Portfolio Receipts to be between $3,500 million and $3,550 million (previously $3,400 million to $3,500 million), representing expected Royalty Receipts growth of 10% to 11%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Royalty cash generation is tied directly to top-line sales across more than 35 commercial products with an estimated weighted average portfolio duration of approximately 13 years and without fixed R&D, manufacturing, or commercial infrastructure costs.",
+    "facts": [
+     "P1",
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "By acquiring royalties, we are able to realize payments based directly on the top-line sales of leading biopharmaceutical therapies, without the costs associated with fixed R&D, manufacturing and commercial infrastructure.",
+     "The estimated weighted average duration of our portfolio is approximately 13 years based on projected cumulative cash royalty receipts.",
+     "We have assembled a portfolio of royalties which entitles us to payments based directly on the top-line sales of many of the industry\u2019s leading therapies, which includes royalties on more than 35 commercial products, including Vertex\u2019s Trikafta and Alyftrek, GSK\u2019s Trelegy, Biogen\u2019s Tysabri and Spinraza, Roche\u2019s Evrysdi, Astellas and Pfizer\u2019s Xtandi, Johnson & Johnson\u2019s Tremfya, AbbVie and Johnson & Johnson\u2019s Imbruvica, Servier\u2019s Voranigo, Gilead\u2019s Trodelvy, Amgen\u2019s Imdelltra and Alnylam\u2019s Amvuttra, among others, and 16 development-stage product candidates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Although no product exceeded 26% of prior-year Portfolio Receipts, Vertex's cystic fibrosis franchise contributed 31% of quarterly and 32% of nine-month total income and other revenues, and 225 of 890 in quarterly Portfolio Receipts (press release table in millions).",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In 2025, no individual product accounted for more than 26% of our Portfolio Receipts.",
+     "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%",
+     "Cystic fibrosis franchise | Vertex | Rare disease | 225 | 222 | 1%",
+     "Portfolio Receipts | 890 | 814 | 9%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "GAAP earnings quality diverges from cash generation because effective-interest accounting and clinical setbacks drive non-cash swings, including a (88,320) provision credit and a 150,361 financial royalty asset impairment in the third quarter (income statement table in thousands).",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We believe there is no direct correlation between income from financial royalty assets and royalty receipts due to the nature of the accounting methodology applied for financial royalty assets.",
+     "Provision for changes in expected cash flows from financial royalty assets | (88,320) | 12,135 | (17,589) | (318,943)",
+     "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0",
      "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement and the release.",
-    "claim": "Cash interest is a growing call on cash. Interest paid over the nine months was (351,720) against (269,610) (table in thousands), and full-year guidance is $350 million to $360 million, with only a de minimis amount expected in the fourth quarter.",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Interest paid is anticipated to be a de minimis amount in the fourth quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balances and the repayment are stated; the reclassification link is inferred.",
-    "claim": "Debt due within a year is larger than a year earlier. The current portion of long-term debt was 996,973 against 380,000 at year-end (table in thousands). The 380,000 was repaid in the nine months.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the cited items; their use against the current portion is inferred.",
-    "claim": "The sources named for meeting debt payments are cash, operating cash flow and revolving credit. Cash was 513,657 and nine-month operating cash flow was 2,132,770 (table in thousands). The annual report cited up to $1.8 billion of available revolving commitments and a $350 million uncommitted facility.",
-    "facts": [
-     "F1",
-     "F3",
-     "P2"
-    ],
-    "quotes": [
-     "In addition to this indebtedness, we have up to $1.8 billion of available revolving commitments under our Revolving Credit Facility (as defined below)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Cash was also used for investment and shareholder returns over the nine months: acquisitions of financial royalty assets (982,383), dividends (314,522) and share repurchases (181,081) against (1,146,846) a year earlier. Cash fell by (105,039) (table in thousands).",
+    "basis": "stated in the cited item",
+    "claim": "Nine-month GAAP operating cash flow of 2,132,770 sits above financing outflows of (257,036) to legacy non-controlling interests, (107,662) to continuing non-controlling interests, (314,522) in dividends, and (181,081) in share repurchases, as well as investing outflows of (982,383) to acquire financial royalty assets (cash flow table in thousands).",
     "facts": [
      "F3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Net cash provided by operating activities | 2,132,770 | 1,662,675",
+     "Distributions to legacy non-controlling interests - Portfolio Receipts | (257,036) | (275,752)",
+     "Distributions to continuing non-controlling interests | (107,662) | (126,719)",
+     "Dividends to shareholders | (314,522) | (283,910)",
+     "Repurchases of Class A ordinary shares | (181,081) | (1,146,846)",
+     "Acquisitions of financial royalty assets | (982,383) | (964,044)"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release.",
-    "claim": "The credit agreement carries covenants that could force repayment if breached.",
+    "basis": "stated in the cited item",
+    "claim": "The current portion of long-term debt increased to 996,973 from 380,000 at prior year-end (balance sheet table in thousands).",
     "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 996,973 | 380,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from reported cash balances, current debt, Portfolio Cash Flow, expected fourth-quarter interest, debt securities, and disclosed credit facilities",
+    "claim": "Cash of $514 million is smaller than the current debt portion, so near-term maturities can be met through recurring cash generation such as quarterly Portfolio Cash Flow of $673 million, de minimis expected fourth-quarter cash interest, debt security holdings, or credit facility borrowings.",
+    "facts": [
+     "F1",
+     "P2",
      "P6"
     ],
     "quotes": [
-     "Noncompliance with the interest coverage ratio, leverage ratio and Portfolio Cash Flow ratio covenants under the credit agreement could result in lenders requiring the company to immediately repay all amounts borrowed."
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "Portfolio Cash Flow (non-GAAP) was $673 million in the third quarter of 2026.",
+     "Interest paid is anticipated to be a de minimis amount in the fourth quarter of 2026.",
+     "In addition to this indebtedness, we have up to $1.8 billion of available revolving commitments under our Revolving Credit Facility (as defined below).",
+     "In October 2026, Royalty Pharma funded the required first $250 million tranche of the up to $750 million senior secured term loans to Revolution Medicines."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in the cited item",
-    "claim": "Royalty Receipts from the existing portfolio grew 9% to $883 million in the third quarter, led by Tremfya, Voranigo, Evrysdi and Imdelltra. This continues only if sales of those products keep rising.",
+    "basis": "Stated in [P6] (8-K earnings release).",
+    "claim": "Royalty Receipts grew 9% to $883 million and Portfolio Receipts grew 9% to $890 million in the third quarter of 2026, driven by Tremfya, Voranigo, Evrysdi and Imdelltra.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "\u2022Royalty Receipts grew 9% to $883 million, driven by Tremfya, Voranigo, Evrysdi and Imdelltra."
+     "Royalty Receipts grew 9% to $883 million, driven by Tremfya, Voranigo, Evrysdi and Imdelltra.",
+     "Portfolio Receipts increased by 9% to $890 million, reflecting higher milestones and other contractual receipts."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from the Portfolio Receipts table for the quarter, in the release's $ in millions scale",
-    "claim": "The cystic fibrosis franchise is the largest receipt line and was roughly flat at 225 versus 222 (table in millions). Total growth therefore has to come mainly from other products.",
+    "basis": "Stated in [P6] (8-K earnings release).",
+    "claim": "Management raised full year 2026 guidance for Portfolio Receipts to $3,500 million to $3,550 million, reflecting expected Royalty Receipts growth of 10% to 11%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Royalty Pharma now expects 2026 Portfolio Receipts to be between $3,500 million and $3,550 million (previously $3,400 million to $3,500 million), representing expected Royalty Receipts growth of 10% to 11%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] (10-K Risk Factors) and [P5] (10-Q Risk Factors).",
+    "claim": "For commercial royalty growth to continue, underlying biopharmaceutical products must maintain end-market demand, pricing, reimbursement, and patent exclusivity without safety withdrawals or superior competing therapies.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Biopharmaceutical product sales may be lower than expected due to a number of reasons, including pricing pressures, insufficient demand, product competition, failure of clinical trials, delays or failures in obtaining marketing approval in one or more jurisdictions or for additional product indications, lack of market acceptance, changes in the marketer\u2019s strategic priorities, obsolescence, lack of coverage or insufficient reimbursement by healthcare programs or insurance plans, loss of patent protection, government regulations and other factors.",
+     "As a result, payments of our royalties may be reduced, delayed or ceased, which could adversely affect our near-term financial performance, internal rates of return, returns on invested capital and returns on invested equity or long-term outlook."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] (10-K Item 1 Business, citing EvaluatePharma).",
+    "claim": "Global prescription pharmaceutical sales are projected to grow at a 7% compound annual growth rate from $1.2 trillion in 2025 to $2.0 trillion in 2032, supporting growing demand for royalty financing.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Global prescription pharmaceutical sales are projected to grow from $1.2 trillion in 2025 to $2.0 trillion in 2032, representing a compound annual growth rate of 7% according to EvaluatePharma.",
+     "The rapid expansion of the royalty market reflects the growing recognition in the life sciences industry of the benefits of royalty funding, and this growth has come in both strong and more restrictive capital market environments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] (10-K Item 1 Business) and [P6] (8-K earnings release).",
+    "claim": "Royalty Pharma compounds its portfolio by deploying cash into new deals, including $2.6 billion deployed in 2025 and $1.9 billion of announced transactions in 2026.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "In 2025, we announced transactions with a total potential value of $4.7 billion and deployed $2.6 billion of cash to acquire royalties, milestones and other contractual receipts (\u201cCapital Deployment\u201d).",
+     "Capital Deployment was $1.2 billion for the nine months ended September 30, 2026, with the announced value of transactions of $1.9 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P5] (Risk Factors) and [P6] (8-K).",
+    "claim": "To sustain acquisition-driven growth, the royalty market must supply sufficient large-scale deals at attractive returns while the company preserves borrowing capacity and covenant compliance.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "However, we may not be able to identify and acquire a sufficient number of royalties, or royalties of sufficient scale, to invest the capital available to us at our targeted rate of capital deployment, which could prevent us from executing our growth strategy and negatively impact our business.",
+     "If Royalty Pharma cannot satisfy these covenants, it would be prohibited under the credit agreement from engaging in certain activities, such as incurring additional indebtedness, paying dividends, making certain payments, and acquiring and disposing of assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] (10-K) and [P6] (8-K).",
+    "claim": "Clinical and regulatory progress across the development-stage pipeline converts R&D funding into commercial royalty streams, as seen with FDA approvals for Rasonque, Weltruza, Ziihera, Mimrylo, and Jideytro in 2026.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "As of December 31, 2025, products underlying $6.5 billion of these development-stage acquisitions have already been approved, representing a success rate to date of 90%, while products underlying $0.7 billion were not approved and products underlying $2.4 billion are still in development.",
+     "We have also seen tremendous clinical and regulatory progress across our portfolio, including FDA approvals of Revolution Medicines\u2019 Rasonque and Teva\u2019s Weltruza and positive Phase 3 results for Amgen\u2019s Imdelltra."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P5] (Risk Factors) and [P6] (8-K).",
+    "claim": "For development-stage investments to drive future growth, partner-led clinical trials must meet their endpoints, win regulatory approval on time, and secure commercial partner support.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "We have previously acquired royalties on development-stage product candidates for which clinical development was stopped for a number of reasons, including clinical trials failing to meet their primary endpoints.",
+     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] (10-K Item 1 Business).",
+    "claim": "Long patent protection across key franchises underpins durable compounding cash flows, with an estimated weighted average portfolio duration of approximately 13 years and Trikafta exclusivity expected through 2037.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The estimated weighted average duration of our portfolio is approximately 13 years based on projected cumulative cash royalty receipts.",
+     "Existing patent applications covering Trikafta, the most significant product in that franchise, are expected to provide exclusivity through 2037."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] (10-K Risk Factors).",
+    "claim": "For portfolio cash flow durability to hold, key patents and regulatory exclusivities must withstand litigation, generic or biosimilar challenges, and design-around competition.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If an unexpected shortening of a royalty term were to occur, it could result in a reduction in the effective interest rate for the asset, a decline in income from royalties, a significant reduction in royalty receipts compared to expectations, or a permanent impairment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] (10-K MD&A) and [P6] (8-K earnings release).",
+    "claim": "Completing the Internalization on May 16, 2025 extinguished external management fees and is expected to reduce operating and professional costs from 8.9% of Portfolio Receipts in 2025 to 5.5% to 6.0% in 2026.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Following the Internalization, we no longer pay Management Fees; instead, employee compensation expenses represent the most significant component of G&A expenses.",
+     "Payments for operating and professional costs in 2026 are expected to decrease as a percentage of Portfolio Receipts, compared to 8.9% in 2025, primarily due to extinguishment of the management fee following the completion of the internalization transaction on May 16, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P5] (Risk Factors).",
+    "claim": "To sustain operating leverage and deal-sourcing growth, Royalty Pharma must retain key investment professionals and realize the expected benefits of the Internalization without disproportionate compensation costs or conflicts of interest.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Our future success depends to a significant extent on the continued service and coordination of our team.",
+     "we may not realize the anticipated benefits of the Internalization and we may be exposed to new risks and costs;"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited items ([F2] and [P6])",
+    "claim": "Following Novartis's announcement that the Phase 3 Lp(a)HORIZON trial of pelacarsen did not meet its primary endpoint, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen in the third quarter of 2026, with total financial royalty asset impairment of 150,361 (table in thousands) for the three months and 219,804 (table in thousands) for the nine months ended Sep. 30, 2026.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "In September 2026, Novartis announced that the Phase 3 Lp(a)HORIZON trial of pelacarsen did not meet its primary endpoint of reducing the risk of cardiovascular events in the overall study population compared to placebo.",
+     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen.",
+     "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items ([P3], [P4], and [P6])",
+    "claim": "Pursuant to the Purchase Agreement entered on January 10, 2025, Royalty Pharma completed the Internalization acquisition of all equity interests of RP Manager on May 16, 2025, issuing 24.5 million RP Holdings Class E Interests and extinguishing the external management fee.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On January 10, 2025, we entered into an agreement (as amended, the \u201cPurchase Agreement\u201d) with RPM, Royalty Pharma Manager, LLC, a Delaware limited liability company (\u201cRP Manager\u201d) and the sellers named therein (the \u201cSellers\u201d).",
+     "We completed the acquisition of RP Manager on May 16, 2025.",
+     "In connection with the Internalization, we issued 24.5 million RP Holdings Class E Interests, subject to vesting conditions, to the Sellers (the \u201cHolders of RP Holdings Class E Interests\u201d) as part of the transaction considerations.",
+     "Payments for operating and professional costs in 2026 are expected to decrease as a percentage of Portfolio Receipts, compared to 8.9% in 2025, primarily due to extinguishment of the management fee following the completion of the internalization transaction on May 16, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items ([F3] and [P6])",
+    "claim": "In July 2026, Royalty Pharma repaid its $380 million term loan (reported as long-term debt repayment of (380,000), table in thousands, for the nine months ended Sep. 30, 2026), reducing total debt principal from $9.2 billion to $8.8 billion.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "The reduction in total debt from $9.2 billion as of June 30, 2026 reflects payment of the $380 million term loan in July 2026.",
+     "Repayment of long-term debt | (380,000) | (1,000,000)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P2])",
+    "claim": "On August 4, 2025, Royalty Pharma entered into an uncommitted credit facility providing borrowing capacity of up to $350 million at the lender's discretion.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Furthermore, on August 4, 2025, we entered into an uncommitted credit facility, which provides for borrowing capacity of up to $350 million at the discretion of the lender thereunder."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([F3])",
+    "claim": "During the nine months ended Sep. 30, 2025, Royalty Pharma issued long-term debt for net proceeds of 1,954,475 (table in thousands) and made long-term debt repayments of (1,000,000) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from issuance of long-term debt, net of discount | 0 | 1,954,475",
+     "Repayment of long-term debt | (380,000) | (1,000,000)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "On November 4, 2026, Royalty Pharma raised its full year 2026 Portfolio Receipts guidance to $3,500 million to $3,550 million from $3,400 million to $3,500 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Royalty Pharma now expects 2026 Portfolio Receipts to be between $3,500 million and $3,550 million (previously $3,400 million to $3,500 million), representing expected Royalty Receipts growth of 10% to 11%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "As of November 3, 2026, Royalty Pharma had announced new transactions of up to $1.9 billion (including $1 billion of R&D co-funding transactions) and Capital Deployment of $1.6 billion.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Announced value of transactions of $1.9 billion and Capital Deployment of $1.6 billion as of November 3, 2026.",
+     "As of November 3, 2026, Royalty Pharma has announced new transactions of up to $1.9 billion, which reflects the entire amount of potential capital committed for new transactions, including potential future milestones.",
+     "Lastly, we remain excited by the potential for R&D co-funding with global biopharma - where we have announced $1 billion of transactions so far this year - which represents an important new opportunity for our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In July 2026, Royalty Pharma acquired a portion of Neurimmune AG's royalty interest in AstraZeneca's cliramitug for up to $425 million, including $125 million upfront.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In July 2026, Royalty Pharma acquired a portion of Neurimmune AG\u2019s royalty interest in AstraZeneca\u2019s cliramitug for up to $425 million, including $125 million upfront."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Royalty Pharma acquired a royalty interest in Mimrylo from Zealand Pharma for $100 million, comprising $50 million paid upfront and $50 million payable on the first anniversary of closing.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Royalty Pharma acquired a royalty interest in Mimrylo, formerly known as rusfertide, from Zealand Pharma for $100 million, consisting of $50 million paid upfront and the remaining $50 million payable on the first anniversary of the closing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In September 2026, Royalty Pharma acquired a royalty interest in Zoryve from AstraZeneca for $100 million upfront.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In September 2026, Royalty Pharma acquired a royalty interest in Zoryve from AstraZeneca for $100 million upfront."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In October 2026, Royalty Pharma funded the required first $250 million tranche of up to $750 million in senior secured term loans to Revolution Medicines, while Revolution Medicines elected not to exercise its option for the third royalty funding tranche of up to $250 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, Royalty Pharma funded the required first $250 million tranche of the up to $750 million senior secured term loans to Revolution Medicines.",
+     "Additionally, Revolution Medicines elected not to exercise its option for the third royalty funding tranche (which was up to $250 million)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In October 2026, Syndax Pharmaceuticals announced that the Phase 2 MAXPIRe trial of Niktimvo in idiopathic pulmonary fibrosis did not meet its primary endpoint and that it does not plan further development in that indication.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, Syndax Pharmaceuticals (Syndax) announced that the Phase 2 MAXPIRe trial of Niktimvo in idiopathic pulmonary fibrosis (IPF) did not meet its primary endpoint.",
+     "Syndax does not plan to move forward with further development in IPF."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items ([F3], [P1], and [P6])",
+    "claim": "Royalty Pharma received $511 million of proceeds in 2025 from the sale of the MorphoSys Development Funding Bonds (reported as proceeds from sales of available for sale debt securities of 510,553, table in thousands, for the nine months ended Sep. 30, 2025).",
+    "facts": [
+     "F3",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "2025 Portfolio Receipts does not include the $511 million of proceeds from the sale of the MorphoSys Development Funding Bonds, as the transaction was treated as an asset sale.",
+     "Proceeds from sales of available for sale debt securities | 0 | 510,553"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items ([P1] and [P6])",
+    "claim": "Royalty Pharma repurchased $1.2 billion of shares in 2025 and 3.5 million Class A ordinary shares for $183 million during the first nine months of 2026.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "We deployed $2.6 billion of cash in 2025 to acquire royalties, milestones and other contractual receipts, paid dividends and distributions of $511.9 million and repurchased $1.2 billion of shares.",
+     "Royalty Pharma repurchased approximately 1.5 million Class A ordinary shares for $87 million in the third quarter and 3.5 million Class A ordinary shares for $183 million during the first nine months of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In July 2026, GSK announced FDA approval of Jideytro and the completion of its acquisition of Nuvalent for approximately $10.6 billion, including Jideytro and neladalkib.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In July 2026, GSK announced that the FDA approved Jideytro, a ROS proto-oncogene 1 (ROS1)-selective inhibitor, for the treatment of adult patients with metastatic ROS1-positive non-small cell lung cancer who have received a prior ROS1 kinase inhibitor.",
+     "In July 2026, GSK announced that it completed the acquisition of Nuvalent for approximately $10.6 billion, including Jideytro and neladalkib, two highly selective ROS1 and anaplastic lymphoma kinase inhibitors for the treatment of non-small cell lung cancer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Revolution Medicines announced FDA approval of Rasonque for metastatic pancreatic adenocarcinoma.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Revolution Medicines announced that the U.S. Food and Drug Administration (FDA) approved Rasonque for the treatment of adults with metastatic pancreatic adenocarcinoma who have received at least one prior systemic therapy or who are not candidates for multiagent systemic therapy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In October 2026, Revolution Medicines announced that the EMA's Committee for Medicinal Products for Human Use (CHMP) adopted a positive opinion of Rasonque for metastatic pancreatic adenocarcinoma.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, Revolution Medicines announced that the European Medicines Agency\u2019s Committee for Medicinal Products for Human Use (CHMP) had adopted a positive opinion of Rasonque for the treatment of adult patients with metastatic pancreatic adenocarcinoma who have received at least one prior systemic therapy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Takeda announced FDA approval of Mimrylo for erythrocytosis in adults with polycythemia vera.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Takeda announced that the FDA approved Mimrylo, a hepcidin mimetic peptide, for the treatment of erythrocytosis in adults with polycythemia vera."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Jazz Pharmaceuticals announced FDA approval of Ziihera in combination with chemotherapy, with or without tislelizumab, for first-line metastatic HER2-positive gastroesophageal adenocarcinoma.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Jazz Pharmaceuticals announced that the FDA approved Ziihera in combination with chemotherapy, with or without tislelizumab, for the first-line treatment of adults with metastatic human epidermal growth factor receptor 2 (HER2)-positive gastroesophageal adenocarcinoma."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Gilead announced European Commission approval of Trodelvy in combination with Keytruda for first-line PD-L1-positive metastatic triple-negative breast cancer.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Gilead announced that the European Commission approved Trodelvy in combination with Keytruda as a first-line treatment for PD-L1-positive metastatic triple-negative breast cancer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In October 2026, Teva Pharmaceuticals announced FDA approval of Weltruza for the treatment of schizophrenia in adults.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, Teva Pharmaceuticals (Teva) announced that the FDA approved Weltruza for extended-release injectable suspension, a new, once-monthly, subcutaneous long-acting injectable (LAI) for the treatment of schizophrenia in adults."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In September 2026, Amgen announced positive Phase 3 DeLLphi-305 results for Imdelltra in combination with Imfinzi in first-line maintenance treatment for extensive-stage small cell lung cancer.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In September 2026, Amgen announced positive results from the Phase 3 DeLLphi-305 study of Imdelltra in combination with Imfinzi as first-line maintenance treatment for extensive-stage small cell lung cancer."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In September 2026, Pharvaris announced positive results from the CHAPTER-3 pivotal Phase 3 study of deucrictibant extended-release for prevention of hereditary angioedema attacks.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In September 2026, Pharvaris announced positive results from the CHAPTER-3 pivotal Phase 3 study evaluating deucrictibant extended-release for the prevention of hereditary angioedema (HAE) attacks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In October 2026, Novartis completed the European Union regulatory submission for pelabresib in myelofibrosis.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In October 2026, Novartis announced that the regulatory submission for pelabresib in myelofibrosis was completed in the European Union, based on the positive Phase 3 MANIFEST-2 study."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In July 2026, Pharvaris announced that the FDA accepted its New Drug Application for deucrictibant immediate-release with a PDUFA date of April 23, 2027.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In July 2026, Pharvaris announced that the FDA accepted its New Drug Application (NDA) for deucrictibant immediate-release for the on-demand treatment of HAE attacks and assigned a Prescription Drug User Fee Act (PDUFA) date of April 23, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Teva announced that the FDA accepted its NDA for ecopipam with Priority Review and a PDUFA date late in the first quarter of 2027.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Teva announced that the FDA accepted its NDA for ecopipam for the treatment of pediatric Tourette syndrome and granted the application Priority Review with a PDUFA date late in the first quarter of 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item ([P6])",
+    "claim": "In August 2026, Zenas BioPharma announced that the FDA accepted its Biologics License Application for obexelimab with a PDUFA target action date of May 27, 2027.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In August 2026, Zenas BioPharma announced that the FDA accepted for review its Biologics License Application for obexelimab for the treatment of immunoglobulin G4-related disease (IgG4-RD) and assigned a PDUFA target action date of May 27, 2027."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in the cited items",
+    "claim": "Vertex\u2019s cystic fibrosis franchise accounted for 31% of total income and other revenues in the third quarter of 2026, and Trikafta exclusivity is expected through 2037.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Our largest marketed royalty in 2025 was on Vertex\u2019s cystic fibrosis franchise.",
+     "Existing patent applications covering Trikafta, the most significant product in that franchise, are expected to provide exclusivity through 2037.",
+     "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%",
+     "If an unexpected shortening of a royalty term were to occur, it could result in a reduction in the effective interest rate for the asset, a decline in income from royalties, a significant reduction in royalty receipts compared to expectations, or a permanent impairment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "At the end of the third quarter of 2026, current portion of long-term debt was 996,973 (table in thousands) and total debt principal stood at $8.8 billion against $514 million in cash and cash equivalents, creating refinancing and credit-covenant risk.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 996,973 | 380,000",
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "Noncompliance with the interest coverage ratio, leverage ratio and Portfolio Cash Flow ratio covenants under the credit agreement could result in lenders requiring the company to immediately repay all amounts borrowed.",
+     "We use leverage in connection with our capital deployment, which magnifies the potential for loss if the royalties we acquire do not generate sufficient income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Development-stage trial failures have caused non-cash impairments, including 219,804 (table in thousands) of financial royalty asset impairment in the first nine months of 2026 after pelacarsen failed to meet its primary endpoint.",
+    "facts": [
+     "F2",
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0",
+     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen.",
+     "These failures have resulted in, and future failures could lead to, non-cash impairment charges or other investment write downs.",
+     "We intend to continue to provide capital to innovators to co-fund clinical development of a product candidate in exchange for a share of the future revenues of that asset and when we do so, we do not control its clinical development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Product competition and generic entry are eroding mature royalties, with third-quarter 2026 Royalty Receipts falling (75)% for Promacta due to U.S. generic competition and (24)% for Imbruvica.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Promacta | Novartis | Hematology | 9 | 38 | (75)%",
+     "Imbruvica | AbbVie, Johnson & Johnson | Oncology | 31 | 41 | (24)%",
+     "The increase was primarily driven by Tremfya, Voranigo, Evrysdi and Imdelltra, partially offset by declines from Promacta due to U.S. generic competition and from Imbruvica.",
+     "marketers of products that generate our royalties are outside of our control"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Regulatory delays, non-approvals, post-marketing restrictions, or adverse government reimbursement decisions by agencies such as the FDA, MHRA, EMA, or PMDA could prevent or curtail commercial sales underlying royalties.",
+    "facts": [
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "There can be no assurance that the FDA, the Medicines and Healthcare products Regulatory Agency (\u201cMHRA\u201d), the EMA, Pharmaceuticals and Medical Devices Agency (\u201cPMDA\u201d) or other regulatory authorities will approve such products or that such products will be brought to market on a timely basis or at all, the pricing or reimbursement of such products, if approved, or that the market will be receptive to such products.",
+     "The subsequent discovery of previously unknown problems with the product, including adverse events of unanticipated severity or frequency, may result in marketing restrictions or withdrawal from the market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Slower royalty market growth, shifting biopharma financing preferences, or heightened competition could prevent Royalty Pharma from deploying capital at sufficient scale and return.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The royalty market may not grow at the same rate as it has in the past, or at all, and we may not be able to acquire sufficient royalties to sustain the growth of our business.",
+     "Even if we continue to acquire royalties, they generally will not generate a meaningful return for several years, if at all, due to transaction structures, circumstances relating to the underlying products or other factors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Effective interest accounting makes GAAP earnings volatile when analyst consensus sales forecasts shift, contributing to Net income attributable to Royalty Pharma plc declining to $ 457,248 (table in thousands) in the first nine months of 2026 from $ 555,742 in the prior-year period.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "As a result of the non-cash charges associated with applying the effective interest method accounting methodology to our financial royalty assets, our condensed consolidated statements of operations activity can be volatile and unpredictable.",
+     "Net income attributable to Royalty Pharma plc | $ 144,675 | $ 284,217 | $ 457,248 | $ 555,742"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Following the Internalization, the company faces execution and conflict-of-interest risks alongside higher GAAP general and administrative expenses of 471,475 (table in thousands) in the first nine months of 2026 versus 409,209 in the prior-year period.",
+    "facts": [
+     "F1",
+     "F2",
+     "P2",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "we may not realize the anticipated benefits of the Internalization and we may be exposed to new risks and costs",
+     "There can be no assurance that the policies and procedures we have established to mitigate conflicts of interest will be effective.",
+     "General and administrative expenses (includes $105,146 and $73,353 of share-based compensation expense for the three months ended September 30, 2026 and 2025, respectively, and $334,794 and $165,099 for the nine months ended September 30, 2026 and 2025, respectively; see Note 4) | 150,098 | 118,734 | 471,475 | 409,209"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Limited non-public product data and subjective multi-year assumptions on sales, pricing, and non-fixed royalty durations create risk that actual cash flows fall materially below acquisition models.",
+    "facts": [
+     "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Often, the information we have regarding products following our acquisition of a royalty may be limited to the information that is available in the public domain.",
+     "Our future income is dependent upon numerous royalty-specific assumptions and, if these assumptions prove not to be accurate, we may not achieve our expected rates of returns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Unfunded R&D commitments with limited protective rights and holdings of biopharma securities expose earnings to credit and mark-to-market losses, including 62,300 (table in thousands) in losses on available for sale debt securities in the first nine months of 2026.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Losses/(gains) on available for sale debt securities | 20,740 | (52,480) | 62,300 | (21,779)",
+     "Because we have limited protective rights with respect to each unfunded portion once the committed funding is provided, we are required to recognize an allowance for current expected credit losses based on our estimate of probability of future funding.",
+     "Where we acquire equity securities as all or part of the consideration for business development activities, the value of those securities will fluctuate, and may depreciate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Variable-rate debt, non-U.S. dollar royalty settlements, inflation, and trade barriers or tariffs expose borrowing costs, revenues, and guidance to macroeconomic swings.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "We are subject to interest rate fluctuations through any borrowings under our Revolving Credit Facility, Term Loan and through investments in money market accounts and marketable securities, the majority of which bear variable interest rates.",
+     "Certain products pay royalties in currencies other than U.S. dollars, which creates foreign currency risk primarily with respect to the Euro, Canadian dollar, British pound, Swiss franc and Japanese yen, as our functional and reporting currency is the U.S. dollar."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Potential acquisitions of operating biopharmaceutical companies could expose Royalty Pharma to product liability, high fixed costs, and diligence risks outside its traditional passive royalty model.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Moreover, the acquisition of operating biopharmaceutical companies may expose us to liabilities not inherent in our other royalty acquisitions, such as direct exposure to product liability claims, high fixed costs or an expansion of our operations and expense structure, thereby potentially decreasing our profitability.",
+     "Despite our business, financial and legal due diligence efforts, we have limited experience in assessing opportunities to acquire operating businesses, and we ultimately may be unsuccessful in ascertaining or evaluating all risks associated with such acquisitions."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "stated in P6",
+    "claim": "No evidence items became effective after the prior analysis; third-quarter Royalty Receipts grew 9% to $883 million, led by Tremfya, Voranigo, Evrysdi and Imdelltra, and depend on sales of those underlying products.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Royalty Receipts grew 9% to $883 million, driven by Tremfya, Voranigo, Evrysdi and Imdelltra.",
+     "Royalty Receipts includes variable payments based on sales of products, net of contractual payments to the legacy non-controlling interests, that are attributed to Royalty Pharma."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "No evidence items became effective after the prior analysis; the cystic fibrosis franchise remained the largest Portfolio Receipts line at 225 versus 222 a year earlier (table in millions), up 1%, leaving overall growth largely dependent on other products.",
     "facts": [
      "P6"
     ],
@@ -474,8 +1788,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (management guidance, not an outcome)",
-    "claim": "Management raised full-year Portfolio Receipts guidance to $3,500 million to $3,550 million, implying Royalty Receipts growth of 10% to 11%. This holds only if no major adverse events or foreign exchange changes occur.",
+    "basis": "stated in P6",
+    "claim": "No evidence items became effective after the prior analysis; full-year Portfolio Receipts guidance remains $3,500 million to $3,550 million, representing expected Royalty Receipts growth of 10% to 11% and assuming no major unforeseen adverse events or foreign exchange changes.",
     "facts": [
      "P6"
     ],
@@ -486,345 +1800,337 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Guidance includes an estimated foreign exchange benefit of about +1% to Portfolio Receipts. Part of the expected growth therefore depends on current exchange rates holding.",
+    "basis": "stated in P6",
+    "claim": "No evidence items became effective after the prior analysis; full-year Portfolio Receipts guidance still reflects an estimated foreign exchange impact of approximately +1%, assuming current exchange rates hold.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "reflects an estimated foreign exchange impact of approximately +1% to Portfolio Receipts"
+     "Royalty Pharma\u2019s full year 2026 guidance reflects an estimated foreign exchange impact of approximately +1% to Portfolio Receipts, assuming current foreign exchange rates prevail for the rest of 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the counter is read from the Capital Deployment table, whose figures are 1,239 and 1,709 in the release's $ in millions scale",
-    "claim": "New royalty acquisitions are a growth driver. Announced transaction value reached $1.9 billion and Capital Deployment $1.6 billion as of the release date. This needs a continuing supply of acceptable royalties and capital to buy them.",
+    "basis": "stated in P6 and P2",
+    "claim": "No evidence items became effective after the prior analysis; new acquisitions remain a growth driver with announced transactions of $1.9 billion and Capital Deployment of $1.6 billion, conditioned on identifying and acquiring sufficient royalties.",
     "facts": [
      "P6",
      "P2"
     ],
     "quotes": [
-     "\u2022Announced value of transactions of $1.9 billion and Capital Deployment of $1.6 billion as of November 3, 2026.",
-     "we may not be able to identify and acquire a sufficient number of royalties, or royalties of sufficient scale"
+     "Announced value of transactions of $1.9 billion and Capital Deployment of $1.6 billion as of November 3, 2026.",
+     "However, we may not be able to identify and acquire a sufficient number of royalties, or royalties of sufficient scale, to invest the capital available to us at our targeted rate of capital deployment, which could prevent us from executing our growth strategy and negatively impact our business."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the CEO quote; the link to future receipts is inferred",
-    "claim": "Management points to R&D co-funding with global biopharma as a new opportunity, with $1 billion of transactions announced so far this year. For it to add growth, funded programs must reach approval and generate royalties.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "where we have announced $1 billion of transactions so far this year"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Regulatory and clinical progress on development-stage royalties is a growth condition. Recent approvals and positive late-stage results were reported. But a failed pelacarsen trial led to a $150 million non-cash impairment.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "\u2022FDA approvals for Revolution Medicines\u2019 Rasonque (daraxonrasib) for metastatic pancreatic cancer, Teva\u2019s Weltruza (olanzapine LAI) for schizophrenia and Jazz and BeOne\u2019s Ziihera for HER2+ metastatic gastric cancer.",
-     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement; the reading of the drivers is inferred",
-    "claim": "Reported revenue is rising: total income and other revenues for the nine months were 1,994,820 versus 1,756,203 (table in thousands). Net income attributable to Royalty Pharma plc fell to 457,248 from 555,742.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Total income and other revenues | $ 690,103 | $ 609,291 | $ 1,994,820 | $ 1,756,203"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement and release; the funding role is inferred",
-    "claim": "Operating cash generation funds deployment. Nine-month net cash provided by operating activities was 2,132,770 versus 1,662,675 (table in thousands), against 982,383 spent on acquisitions of financial royalty assets. Continued deployment needs this cash flow to hold.",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 2,132,770 | 1,662,675"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet, release and risk factor; the link to growth is inferred",
-    "claim": "Growth through acquisitions relies on leverage. Total debt principal was $8.8 billion, the current portion of long-term debt was 996,973 (table in thousands), and cash was 513,657. Continued deployment needs refinancing capacity and sufficient cash flow.",
-    "facts": [
-     "F1",
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "We finance a significant portion of our capital deployment with borrowed funds."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited release; the income statement also shows a separate financial royalty asset impairment line.",
-    "claim": "Royalty Pharma recorded a non-cash impairment charge of $150 million on pelacarsen after Novartis reported that its Phase 3 trial missed its primary endpoint.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K earnings release.",
-    "claim": "Royalty Pharma raised its full-year 2026 Portfolio Receipts guidance to a range of $3,500 million to $3,550 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Raised full year 2026 guidance: Portfolio Receipts expected to be $3,500 million to $3,550 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited release; the 10-Q cash flow statement shows a matching repayment of long-term debt.",
-    "claim": "Royalty Pharma repaid its $380 million term loan, which cut total debt principal from $9.2 billion to $8.8 billion.",
-    "facts": [
-     "P6",
-     "F3"
-    ],
-    "quotes": [
-     "The reduction in total debt from $9.2 billion as of June 30, 2026 reflects payment of the $380 million term loan in July 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited release.",
-    "claim": "Royalty Pharma acquired part of Neurimmune AG's royalty interest in AstraZeneca's cliramitug for up to $425 million, including $125 million upfront.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "In July 2026, Royalty Pharma acquired a portion of Neurimmune AG\u2019s royalty interest in AstraZeneca\u2019s cliramitug for up to $425 million, including $125 million upfront."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited release.",
-    "claim": "Royalty Pharma funded the required first $250 million tranche of up to $750 million of senior secured term loans to Revolution Medicines.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "In October 2026, Royalty Pharma funded the required first $250 million tranche of the up to $750 million senior secured term loans to Revolution Medicines."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "The balance sheet and press release state the figures; the rupture mechanism is taken from the risk factor text, and the near-term horizon is inferred.",
-    "claim": "Debt is large relative to cash: the current portion of long-term debt was $996,973 (table in thousands) against cash of $513,657 (table in thousands) at Sep. 30, 2026, and total debt principal was $8.8 billion.",
-    "facts": [
-     "F1",
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "We use leverage in connection with our capital deployment, which magnifies the potential for loss if the royalties we acquire do not generate sufficient income."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The charge and trial outcome are stated in the release and income statement; the earnings-impact mechanism is stated in the risk factors.",
-    "claim": "Development-stage bets can fail and cause write-downs: Q3 2026 included a non-cash impairment charge of $150 million on pelacarsen after its Phase 3 trial missed its primary endpoint. Financial royalty asset impairment was 150,361 (table in thousands) for the quarter.",
+    "basis": "stated in P6, F2 and P2",
+    "claim": "No evidence items became effective after the prior analysis; management cited $1 billion of announced R&D co-funding transactions alongside nine-month research and development funding expense of 200,798 (table in thousands), while funded development-stage candidates remain subject to regulatory approval and commercialization risks.",
     "facts": [
      "P6",
      "F2",
      "P2"
     ],
     "quotes": [
+     "Lastly, we remain excited by the potential for R&D co-funding with global biopharma - where we have announced $1 billion of transactions so far this year - which represents an important new opportunity for our business.",
+     "Research and development funding expense | 63,157 | 50,500 | 200,798 | 401,500",
+     "Acquisitions of royalties from our investments in development-stage biopharmaceutical product candidates are subject to additional risks and uncertainties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "No evidence items became effective after the prior analysis; regulatory approvals and positive late-stage clinical results supported the portfolio, offset by a $150 million non-cash impairment charge on pelacarsen after its trial missed its primary endpoint.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We have also seen tremendous clinical and regulatory progress across our portfolio, including FDA approvals of Revolution Medicines\u2019 Rasonque and Teva\u2019s Weltruza and positive Phase 3 results for Amgen\u2019s Imdelltra.",
      "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
     ],
     "support": "supported"
    },
    {
-    "basis": "The revenue-share figures are stated in the 10-Q table; the 26% figure and its caveat come from the 10-K; the impact is inferred.",
-    "claim": "Revenue is concentrated in one royalty: Vertex's cystic fibrosis franchise was 31% of total income and other revenues in Q3 2026 (35% a year earlier).",
+    "basis": "stated in F2",
+    "claim": "No evidence items became effective after the prior analysis; nine-month total income and other revenues rose to $ 1,994,820 from $ 1,756,203 a year earlier, while net income attributable to Royalty Pharma plc fell to $ 457,248 from $ 555,742 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Total income and other revenues | $ 690,103 | $ 609,291 | $ 1,994,820 | $ 1,756,203",
+     "Net income attributable to Royalty Pharma plc | $ 144,675 | $ 284,217 | $ 457,248 | $ 555,742"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P6",
+    "claim": "No evidence items became effective after the prior analysis; nine-month net cash provided by operating activities was 2,132,770 versus 1,662,675 a year earlier, compared with (982,383) spent on acquisitions of financial royalty assets (table in thousands), supporting deployment while portfolio cash generation continues.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 2,132,770 | 1,662,675",
+     "Acquisitions of financial royalty assets | (982,383) | (964,044)",
+     "Portfolio Receipts is a key performance metric that represents Royalty Pharma\u2019s ability to generate cash from Royalty Pharma\u2019s portfolio investments, the primary source of capital that is deployed to make new portfolio investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P6 and P2",
+    "claim": "No evidence items became effective after the prior analysis; capital deployment uses borrowed funds, with total debt principal value of $8.8 billion, current portion of long-term debt of 996,973, and cash and cash equivalents of $ 513,657 (table in thousands), requiring cash flow and refinancing access.",
+    "facts": [
+     "F1",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 996,973 | 380,000",
+     "Cash and cash equivalents | $ 513,657 | $ 618,696",
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "We finance a significant portion of our capital deployment with borrowed funds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P6 and P2",
+    "claim": "No evidence items became effective after the prior analysis; debt remains large relative to cash, with current portion of long-term debt of 996,973 against cash and cash equivalents of $ 513,657 (table in thousands) and total debt principal value of $8.8 billion.",
+    "facts": [
+     "F1",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 996,973 | 380,000",
+     "Cash and cash equivalents | $ 513,657 | $ 618,696",
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion.",
+     "If we cannot generate the required cash, we may be unable to make the required payments under our indebtedness."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6, F2 and P2",
+    "claim": "No evidence items became effective after the prior analysis; development-stage failures can trigger write-downs, shown by the $150 million non-cash impairment charge on pelacarsen after its trial missed its primary endpoint and third-quarter financial royalty asset impairment of 150,361 (table in thousands).",
+    "facts": [
+     "P6",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "In September 2026, Novartis announced that the Phase 3 Lp(a)HORIZON trial of pelacarsen did not meet its primary endpoint of reducing the risk of cardiovascular events in the overall study population compared to placebo.",
+     "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen.",
+     "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0",
+     "These failures have resulted in, and future failures could lead to, non-cash impairment charges or other investment write downs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P1",
+    "claim": "No evidence items became effective after the prior analysis; revenue remains concentrated in Vertex's cystic fibrosis franchise, representing 31% of third-quarter total income and other revenues versus 35% a year earlier.",
     "facts": [
      "P4",
      "P1"
     ],
     "quotes": [
-     "In 2025, no individual product accounted for more than 26% of our Portfolio Receipts."
+     "Vertex | Cystic fibrosis franchise | 31% | 35% | 32% | 35%",
+     "Our largest marketed royalty in 2025 was on Vertex\u2019s cystic fibrosis franchise."
     ],
     "support": "supported"
    },
    {
-    "basis": "The figures and the accounting explanation are stated in the cited items; the split of the earnings decline by cause is not fully stated.",
-    "claim": "GAAP earnings are volatile because of non-cash accounting: Q3 2026 net income attributable to Royalty Pharma plc was $144,675 (table in thousands) versus $284,217 (table in thousands) a year earlier, even as Portfolio Receipts rose.",
+    "basis": "stated in F2, P4 and P6",
+    "claim": "No evidence items became effective after the prior analysis; GAAP earnings remain volatile from non-cash accounting, with third-quarter net income attributable to Royalty Pharma plc at $ 144,675 versus $ 284,217 a year earlier (table in thousands) even as Portfolio Receipts grew 9% to $890 million.",
     "facts": [
      "F2",
      "P4",
      "P6"
     ],
     "quotes": [
-     "As a result of the non-cash charges associated with applying the effective interest method accounting methodology to our financial royalty assets, our condensed consolidated statements of operations activity can be volatile and unpredictable."
+     "Net income attributable to Royalty Pharma plc | $ 144,675 | $ 284,217 | $ 457,248 | $ 555,742",
+     "As a result of the non-cash charges associated with applying the effective interest method accounting methodology to our financial royalty assets, our condensed consolidated statements of operations activity can be volatile and unpredictable.",
+     "Portfolio Receipts increased by 9% to $890 million, reflecting higher milestones and other contractual receipts."
     ],
     "support": "supported"
    },
    {
-    "basis": "The expense figures and vesting periods are stated; the dilution effect is inferred from the exchangeability terms.",
-    "claim": "Share-based compensation is rising and adds cost and dilution: nine-month share-based compensation in G&A was $334,794 (table in thousands) versus $165,099 (table in thousands) a year earlier.",
-    "facts": [
-     "F2",
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "which are expensed over vesting periods on a straight-line basis of generally five to nine years"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "The declines and their cause are stated in the release; any further impact is inferred.",
-    "claim": "Some royalties are eroding: Promacta Portfolio Receipts fell (75)% in Q3 2026 on U.S. generic competition, and Imbruvica fell (24)%.",
+    "basis": "stated in P6",
+    "claim": "No evidence items became effective after the prior analysis; certain royalties are eroding, with third-quarter Promacta Portfolio Receipts down (75)% due to U.S. generic competition and Imbruvica down (24)%.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "partially offset by declines from Promacta due to U.S. generic competition and from Imbruvica"
+     "Promacta | Novartis | Hematology | 9 | 38 | (75)%",
+     "Imbruvica | AbbVie, Johnson & Johnson | Oncology | 31 | 41 | (24)%",
+     "The increase was primarily driven by Tremfya, Voranigo, Evrysdi and Imdelltra, partially offset by declines from Promacta due to U.S. generic competition and from Imbruvica."
     ],
     "support": "supported"
-   },
-   {
-    "basis": "The assumptions are stated in the release; the risk is inferred as a possibility, not a stated expectation.",
-    "claim": "The raised 2026 Portfolio Receipts guidance of $3,500 million to $3,550 million rests on conditions that could change, including foreign exchange and no major adverse events.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "This guidance assumes no major unforeseen adverse events or changes in foreign exchange rates and excludes the contributions from transactions announced subsequent to the date of this press release."
-    ],
-    "support": "number_not_listed"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "The charge is stated in the cited items. Whether more charges will follow is not addressed, so this is an inferred open question.",
-    "claim": "Will further non-cash impairments or provision charges follow the $150 million pelacarsen charge? The nine-month impairment is 219,804 (table in thousands), of which 150,361 (table in thousands) fell in the third quarter, and the Phase 3 trial missed its primary endpoint.",
+    "basis": "stated in F1 and P6",
+    "claim": "What are the maturity dates, interest rates, and repayment or refinancing sources for the 996,973 (table in thousands) current portion of long-term debt and $8.8 billion of total debt principal in 2026?",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 996,973 | 380,000",
+     "As of September 30, 2026, Royalty Pharma had cash and cash equivalents of $514 million and total debt with principal value of $8.8 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P6; the difference between the nine-month impairment and third-quarter pelacarsen charge is inferred to reflect earlier 2026 impairment activity",
+    "claim": "Which financial royalty assets besides pelacarsen accounted for the remainder of the 219,804 (table in thousands) impairment charge in 2026, and does any carrying value remain on pelacarsen after the $150 million charge?",
     "facts": [
      "F2",
      "P6"
     ],
     "quotes": [
+     "Financial royalty asset impairment | 150,361 | 0 | 219,804 | 0",
      "In the third quarter of 2026, Royalty Pharma recorded a non-cash impairment charge of $150 million related to pelacarsen."
     ],
     "support": "supported"
    },
    {
-    "basis": "The expense figures are stated in F2. The split between the fixed and fluctuating components in 2026 is not in the packet, so the question is inferred.",
-    "claim": "How long will share-based compensation inside G&A stay elevated? It was $105,146 (table in thousands) in the third quarter against $73,353 (table in thousands) a year earlier. For nine months it was $334,794 (table in thousands) against $165,099 (table in thousands).",
+    "basis": "stated in F2 and P5",
+    "claim": "Why did Royalty Pharma record 0 (table in thousands) in income tax expense on 816,379 (table in thousands) of pre-tax net income in 2026, and what tax legislation or tax position changes could alter that treatment?",
     "facts": [
      "F2",
-     "P3"
+     "P5"
     ],
     "quotes": [
-     "includes $105,146 and $73,353 of share-based compensation expense for the three months ended September 30, 2026 and 2025, respectively"
+     "Consolidated net income before tax | 266,637 | 440,211 | 816,379 | 967,279",
+     "Income tax expense | 0 | 0 | 0 | 0",
+     "\u2022the effect of changes to tax legislation and our tax position;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet figures and the guidance assumption are stated. Maturity dates and the funding plan are not in the packet, so this is inferred.",
-    "claim": "How will the current portion of long-term debt, 996,973 (table in thousands) against 380,000 (table in thousands) at the prior year end, be repaid or refinanced? Guidance assumes no additional debt financing this year.",
+    "basis": "stated in P3 and P6; potential fourth-quarter accounting impact is inferred from the post-quarter October 2026 timing",
+    "claim": "What is the carrying value of the Niktimvo royalty asset, and will the October 2026 MAXPIRe IPF trial failure trigger a non-cash provision expense or impairment charge?",
     "facts": [
-     "F1",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "These projections assume no additional debt financing in 2026."
+     "In October 2026, Syndax Pharmaceuticals (Syndax) announced that the Phase 2 MAXPIRe trial of Niktimvo in idiopathic pulmonary fibrosis (IPF) did not meet its primary endpoint.",
+     "Syndax does not plan to move forward with further development in IPF.",
+     "The provision income for credit losses was primarily related to Niktimvo as a result of changes in sell-side equity research analysts\u2019 consensus sales forecasts, partially offset by the addition of Imdelltra"
     ],
     "support": "supported"
    },
    {
-    "basis": "The accounting policy and funding event are stated. The size of the allowance after funding is not in the packet, so this is inferred.",
-    "claim": "How will the Revolution Medicines funding commitments affect future provisions and cash outlays? The provision for unfunded commitments was 13,339 (table in thousands) for nine months against 93,301 (table in thousands). The first $250 million tranche of up to $750 million of term loans was funded in October.",
+    "basis": "stated in F2, P3, and P6",
+    "claim": "What milestones, interest or royalty terms, and credit loss allowances govern the $250 million Revolution Medicines loan tranche funded in October 2026 and the remaining $500 million optional loan and royalty funding commitments?",
     "facts": [
      "F2",
      "P3",
      "P6"
     ],
     "quotes": [
-     "In October 2026, Royalty Pharma funded the required first $250 million tranche of the up to $750 million senior secured term loans to Revolution Medicines."
+     "In October 2026, Royalty Pharma funded the required first $250 million tranche of the up to $750 million senior secured term loans to Revolution Medicines.",
+     "Up to an additional $500 million may be available at Revolution Medicines\u2019 option under each of the senior secured term loan and royalty funding agreement, based on the achievement of certain milestones.",
+     "The provision for credit losses on unfunded commitments, a non-cash item, represents the current expected credit losses on the unfunded portions of our funding arrangements with Revolution Medicines."
     ],
     "support": "supported"
    },
    {
-    "basis": "The guidance is stated in P6. Whether it will be met is unknowable from the packet.",
-    "claim": "Will full-year Portfolio Receipts land within the raised guidance range of $3,500 million to $3,550 million? The raised range implies Royalty Receipts growth of 10% to 11%.",
+    "basis": "stated in F1, F3, P3, and P4",
+    "claim": "How much of the 774,445 (table in thousands) in accrued compensation liabilities in 2026 will be settled in cash versus shares, and what are the remaining unrecognized compensation expense and vesting conditions for the RP Holdings Class E Interests and Employee EPAs?",
+    "facts": [
+     "F1",
+     "F3",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Accrued compensation liabilities | 774,445 | 577,870",
+     "Payments for Employee EPAs | (17,656) | (1,868)",
+     "As of December 31, 2025, we had $646.5 million of unrecognized compensation expense related to 19.5 million RP Holdings Class E Interests that is expected to vest over a weighted average period of 5.5 years.",
+     "In connection with the Internalization, we issued 24.5 million RP Holdings Class E Interests, subject to vesting conditions, to the Sellers (the \u201cHolders of RP Holdings Class E Interests\u201d) as part of the transaction considerations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P4",
+    "claim": "How is the 2,958,348 (table in thousands) non-controlling interests balance in 2026 divided between legacy and continuing non-controlling interests, and when do the underlying Old RPI royalty assets expire?",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "Non-controlling interests | 2,958,348 | 3,238,039",
+     "The value of this non-controlling interest will continue to decline over time as the assets in Old RPI expire."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "What are Royalty Pharma's total aggregate unfunded capital deployment commitments, milestone triggers, and payment timelines across all transactions, including the $1.9 billion of new transactions announced in 2026?",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Royalty Pharma now expects 2026 Portfolio Receipts to be between $3,500 million and $3,550 million (previously $3,400 million to $3,500 million), representing expected Royalty Receipts growth of 10% to 11%."
+     "As of November 3, 2026, Royalty Pharma has announced new transactions of up to $1.9 billion, which reflects the entire amount of potential capital committed for new transactions, including potential future milestones."
     ],
     "support": "supported"
    },
    {
-    "basis": "The share counts are stated in F2. The reason is not given, so any explanation is inferred.",
-    "claim": "Why is the nine-month diluted share count of 448,610 close to basic 442,662, when the third-quarter diluted count is 557,001 and the prior nine-month diluted count was 566,754?",
+    "basis": "stated in P2 and P6",
+    "claim": "What are the required numerical thresholds and current compliance headroom for the interest coverage ratio, leverage ratio, and Portfolio Cash Flow ratio covenants under Royalty Pharma's credit agreement?",
     "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Noncompliance with the interest coverage ratio, leverage ratio and Portfolio Cash Flow ratio covenants under the credit agreement could result in lenders requiring the company to immediately repay all amounts borrowed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P4, and P6",
+    "claim": "What are the contractual royalty rates, patent expiration dates beyond Trikafta's 2037 exclusivity, and product-level contributions for the therapies in Other products and the 16 development-stage product candidates?",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Existing patent applications covering Trikafta, the most significant product in that franchise, are expected to provide exclusivity through 2037.",
+     "We have assembled a portfolio of royalties which entitles us to payments based directly on the top-line sales of many of the industry\u2019s leading therapies, which includes royalties on more than 35 commercial products, including Vertex\u2019s Trikafta and Alyftrek, GSK\u2019s Trelegy, Biogen\u2019s Tysabri and Spinraza, Roche\u2019s Evrysdi, Astellas and Pfizer\u2019s Xtandi, Johnson & Johnson\u2019s Tremfya, AbbVie and Johnson & Johnson\u2019s Imbruvica, Servier\u2019s Voranigo, Gilead\u2019s Trodelvy, Amgen\u2019s Imdelltra and Alnylam\u2019s Amvuttra, among others, and 16 development-stage product candidates.",
+     "Other products(5) | 121 | 114 | 6%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "How do the non-GAAP liquidity measures Adjusted EBITDA of 840 (table in millions) and Portfolio Cash Flow of 673 (table in millions) for the third quarter of 2026 reconcile line by line to GAAP net cash provided by operating activities of 686 (table in millions)?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Refer to Table 4 for Royalty Pharma\u2019s reconciliation of each non-GAAP measure to the most directly comparable GAAP financial measure, net cash provided by operating activities.",
+     "Adjusted EBITDA (non-GAAP)* | 840 | 779 | 8%",
+     "Portfolio Cash Flow (non-GAAP)* | 673 | 657 | 2%",
+     "Net cash provided by operating activities | 686 | 703 | (2)%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in S0, F1, and F2",
+    "claim": "What exact share counts and exchange conversions separate basic weighted-average Class A shares of 446,032 (table in thousands) from diluted shares of 557,001 (table in thousands) in the third quarter of 2026, and how do they reconcile to the 41002514690 market cap at a 71.31 share price?",
+    "facts": [
+     "S0",
+     "F1",
      "F2"
     ],
     "quotes": [
+     "price: 71.31",
+     "marketCap: 41002514690",
+     "Basic (in shares) | 446,032 | 431,887 | 442,662 | 430,281",
      "Diluted (in shares) | 557,001 | 559,611 | 448,610 | 566,754"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The trial result and the prior-year provision link are stated. The effect on provisions is inferred.",
-    "claim": "Does the failed trial of Niktimvo in idiopathic pulmonary fibrosis change expected cash flows or credit-loss provisions for that royalty?",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "In October 2026, Syndax Pharmaceuticals (Syndax) announced that the Phase 2 MAXPIRe trial of Niktimvo in idiopathic pulmonary fibrosis (IPF) did not meet its primary endpoint."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The balances and settlement description are stated. The expected timing and cash share are not in the packet, so this is inferred.",
-    "claim": "When and in what form will the accrued compensation liabilities be settled? They rose to 774,445 (table in thousands) from 577,870 (table in thousands), while cash payments for Employee EPAs were only 17,656 (table in thousands) for nine months.",
-    "facts": [
-     "F1",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Accrued compensation liabilities | 774,445 | 577,870"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The cash flow figures are stated. The company's intent for future repurchases is not stated in the packet, so this is inferred.",
-    "claim": "Will share repurchases stay at the lower pace seen this year? Repurchases of Class A ordinary shares were 181,081 (table in thousands) for nine months against 1,146,846 (table in thousands) a year earlier, while debt maturities rose.",
-    "facts": [
-     "F3",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Royalty Pharma repurchased approximately 1.5 million Class A ordinary shares for $87 million in the third quarter and 3.5 million Class A ordinary shares for $183 million during the first nine months of 2026."
     ],
     "support": "supported"
    }
@@ -832,8 +2138,17 @@
  },
  "ticker": "RPRX",
  "under_review": null,
+ "upside": -0.7058553906108355,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "share count does not reconcile with filed EPS"
+ "value_base": 21.14519815251782,
+ "value_bear": 15.214377793485296,
+ "value_bull": 41.265590029517256,
+ "value_per_filed_share": {
+  "base": 21.14519815251782,
+  "bear": 15.214377793485296,
+  "bull": 41.265590029517256
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -31.9 points a year against the required return over 3 years"
 }
