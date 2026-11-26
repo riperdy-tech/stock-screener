@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T18:36:22Z",
+ "generated_at": "2026-11-26T18:43:30Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -4354,30 +4354,63 @@
    "verdict_reason": "debt_unavailable"
   },
   "EMR": {
-   "alpha_pts": null,
+   "alpha_pts": -10.715174752387176,
    "analysis": "complete",
-   "claims": 126,
-   "claims_supported": 113,
-   "date": "2026-11-16T17:58:22Z",
+   "based_on": {
+    "accepted": "2026-11-09T21:27:01.000Z",
+    "accepted_utc": "2026-11-10T02:27:01Z",
+    "accession": "0000032604-26-000054",
+    "decision_time": "2026-11-26T18:37:09Z",
+    "form": "10-K",
+    "period": "2026-09-30"
+   },
+   "claims": 76,
+   "claims_supported": 70,
+   "date": "2026-11-26T18:37:09Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 63290961114.37489,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 562000000.0,
    "flags": [
-    "Emerson entered a pricing agreement for a public offering of \u20ac750,000,000 of 4.000% Notes due 2032. It expects net proceeds of approximately \u20ac744.5 million, to be used primarily to repay commercial paper borrowings.",
-    "Emerson declared a 7% increase in its quarterly cash dividend, to $0.595 per share.",
-    "Emerson published an initial fiscal 2027 outlook. It assumes ~$2.5B of share repurchases and ~$1.3B of dividends and gives adjusted EPS of ~$7.25."
+    "Emerson completed a public offering of \u20ac750,000,000 of 4.000% Notes due 2032; net proceeds are expected to go mainly to repaying commercial paper borrowings.",
+    "Emerson declared a 7% increase in its quarterly cash dividend to $0.595 per share, payable December 10, 2026.",
+    "During fiscal 2026 Emerson filed IEEPA tariff refund claims and received refunds of $121, recorded as a benefit in cost of sales."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-opus-5-5",
+   "ke": 0.09249397915404685,
+   "market_cap_at_publish": 86256375512,
+   "model": "claude-sonnet-5-5",
    "news_count": 1,
-   "no_value_reason": "operating income for the latest year is not filed under a standard tag",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 157.23,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
+   "release_truncated": [],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 112.53033946550138,
+    "3000": 112.70439759633098
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "operating income for the latest year is not filed under a standard tag"
+   "upside": -0.2662459935431689,
+   "value_base": 112.61736853091618,
+   "value_bear": 90.14872712059937,
+   "value_bull": 146.0398562712407,
+   "value_per_filed_share": {
+    "base": 112.61736853091618,
+    "bear": 90.14872712059937,
+    "bull": 146.0398562712407
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -10.7 points a year against the required return over 3 years"
   },
   "EQNR": {
    "alpha_pts": 4.830033461452496,
@@ -12189,11 +12222,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 151,
+ "valued_count": 152,
  "verdict_counts": {
-  "AVOID": 67,
+  "AVOID": 68,
   "BUY": 57,
-  "NO_CALL": 108,
+  "NO_CALL": 107,
   "WATCH": 18
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
