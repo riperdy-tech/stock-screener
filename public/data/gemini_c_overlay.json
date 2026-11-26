@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T18:58:09Z",
+ "generated_at": "2026-11-26T19:07:17Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -7335,46 +7335,65 @@
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
   "MRX": {
-   "alpha_pts": null,
+   "alpha_pts": 52.23066161768838,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-11-05T12:35:05.000Z",
     "accepted_utc": "2026-11-05T17:35:05Z",
     "accession": "0001997464-26-000075",
-    "decision_time": "2026-11-21T10:20:27Z",
+    "decision_time": "2026-11-26T18:58:57Z",
     "form": "6-K",
     "period": "2026-09-30"
    },
    "claims": 101,
-   "claims_supported": 100,
-   "date": "2026-11-21T10:20:27Z",
+   "claims_supported": 99,
+   "date": "2026-11-26T18:58:57Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 13285631857.716711,
    "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 76126884.0,
    "flags": [
-    "Marex recorded an impairment of goodwill of (10.7) (table in millions), with 0.0 recorded in the subsequent fiscal years.",
-    "Marex completed the acquisition of Hamilton Court Group, which contributed to its FX franchise and geographic expansion.",
-    "Marex completed the acquisition of Aarna Capital Limited."
+    "The Group announced it had agreed terms to acquire Valcourt SA to strengthen its fixed income business. The 20-F said completion needed regulatory approval and was expected early in the second quarter of 2026.",
+    "The Group acquired Webb Traders, a European equity derivatives market maker, which it had announced in February 2026. The Q3 2026 release reports the acquisition as done and contributing revenue to Market Making.",
+    "The Group completed its acquisition of Levmet. Levmet contributed to Market Making and net physical commodities income in Q3 2026."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
+   "ke": 0.09115143990563293,
+   "market_cap_at_publish": 4311729664,
+   "model": "claude-sonnet-5-5",
    "news_count": 3,
-   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 59.5,
    "qwen_book": null,
    "release_truncated": [
     "0001997464-26-000075"
    ],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
-   "source": "on request (operator)",
-   "under_review": {
-    "headline": "Marex Group (MRX) Is Reportedly Discussing A Cryptocurrency Unit Acquisition",
-    "id": "20636e42e843",
-    "since": "2026-11-25",
-    "why": "Marex is reportedly in talks to acquire Nomura's Laser Digital cryptocurrency unit, which bears directly on its acquisition-led growth capacity, integration risk, and digital-asset regulatory exposure."
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 234.02196446612373,
+    "3000": 115.0171964620107
    },
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
+   "under_review": null,
+   "upside": 2.081276632123454,
+   "value_base": 174.51958046406722,
+   "value_bear": 88.16859517817352,
+   "value_bull": 332.26793837721476,
+   "value_per_filed_share": {
+    "base": 174.51958046406722,
+    "bear": 88.16859517817352,
+    "bull": 332.26793837721476
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +52.2 points a year against the required return over 3 years"
   },
   "MSGE": {
    "alpha_pts": -31.09354342887437,
@@ -12270,11 +12289,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 154,
+ "valued_count": 155,
  "verdict_counts": {
   "AVOID": 70,
-  "BUY": 57,
-  "NO_CALL": 105,
+  "BUY": 58,
+  "NO_CALL": 104,
   "WATCH": 18
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
