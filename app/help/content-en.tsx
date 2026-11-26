@@ -35,10 +35,10 @@ export function EnglishHelpBody() {
                     <b>Where things stand today.</b>
                     <ul className="mt-1.5 list-disc space-y-1 pl-5">
                         <li>
-                            The screener picks a monthly book of roughly 50 to 60 stocks. Two paper books follow it from 6
-                            November 2026: the Code book (the screener&apos;s picks alone) and the AI book (the same
-                            picks, with a slot held as cash when the AI analyst&apos;s reading of the filings finds a material
-                            event). Both are simulated; no real money is involved.
+                            The main paper book is the AI book. It holds, in equal weight, every stock the AI analyst
+                            currently rates BUY, including stocks analysed on request, not only the screener&apos;s list. A
+                            stock enters when its verdict becomes BUY and leaves when it stops being BUY. It started on 27
+                            November 2026. It is simulated; no real money is involved.
                         </li>
                         <li>
                             The AI analyst reads the filings of the names on the screener&apos;s list. Its analysis is on each stock
@@ -56,8 +56,8 @@ export function EnglishHelpBody() {
                             running yet. Real-money mirroring is halted; this site never trades.
                         </li>
                         <li>
-                            Nothing here is proven yet. The comparison that matters, whether the AI book beats the Code
-                            book, has not been measured. See <A href="#validation">How it is validated</A>.
+                            Nothing here is proven yet. The AI book has run far too short a time to say anything, and the AI
+                            analyst has not been graded on returns. See <A href="#validation">How it is validated</A>.
                         </li>
                     </ul>
                 </Callout>
@@ -105,7 +105,7 @@ export function EnglishHelpBody() {
                         <b>Not running yet.</b> See <A href="#followup">The daily follow-up</A>.
                     </li>
                     <li>
-                        <b>Grading — scores the record.</b> Two monthly paper books, Code and AI, are marked every day
+                        <b>Grading — scores the record.</b> The paper AI book is marked every day
                         against benchmarks, beside a control book and your own holdings. The earlier analyst&apos;s verdicts
                         were graded against later prices; the AI analyst has not been graded on returns. See{' '}
                         <A href="#track">Track record</A>.
@@ -565,8 +565,8 @@ export function EnglishHelpBody() {
                 <p>Where each part of the system stands on 12 November 2026:</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>Live.</b> The screener and its daily scoring; the AI analyst&apos;s analysis on the stock pages; and the Code
-                        book and the AI book, marked every day on paper from 6 November 2026.
+                        <b>Live.</b> The screener and its daily scoring; the AI analyst&apos;s analysis on the stock pages; and the AI
+                        book, marked every day on paper from 27 November 2026.
                     </li>
                     <li>
                         <b>Stopped.</b> The earlier verdict analyst and its gate. Its AI paper book holds only cash. Its
@@ -579,9 +579,9 @@ export function EnglishHelpBody() {
                         <b>Off.</b> Real-money mirroring is halted. The site never trades.
                     </li>
                     <li>
-                        <b>Next.</b> A new monthly book is formed each month; the next is due on 30 November 2026. Whether
-                        the AI book beats the Code book has not been measured, and it cannot be read until the books have
-                        several months of marks.
+                        <b>Next.</b> The AI book changes as verdicts change: after the periodic refresh, a new filing, or a news
+                        warning that triggers a re-read. Whether it does better than the benchmarks has not been measured,
+                        and it cannot be read until the book has several months of marks.
                     </li>
                 </ul>
                 <SubHeading>The earlier AI record</SubHeading>
@@ -596,7 +596,7 @@ export function EnglishHelpBody() {
             <Section id="track" title="Track record — the honest meter">
                 <p>
                     Instead of a flattering <Term term="backtest" />, the system <Term term="paper-trading">paper-trades</Term> its
-                    monthly picks every day with real prices and assumed <Term term="transaction-costs" />. If the system
+                    AI book every day with real prices and assumed <Term term="transaction-costs" />. If the system
                     is wrong, this page will say so. Every number on it is paper (simulated) and covers a short period.
                 </p>
                 <SubHeading>The earlier analyst&apos;s verdict scoreboard</SubHeading>
@@ -612,18 +612,16 @@ export function EnglishHelpBody() {
                 </p>
                 <SubHeading>The banner</SubHeading>
                 <p>
-                    A banner at the top says that every book on the page is paper, that the Code book and the AI book
-                    began on 6 November 2026 and have run far too short a time to show anything, that the AI analyst has not been
+                    A banner at the top says that every book on the page is paper, that the AI book
+                    began on 27 November 2026 and has run far too short a time to show anything, that the AI analyst has not been
                     graded on returns, and that the scoreboard and the old AI book belong to the stopped analyst.
                 </p>
                 <SubHeading>The paper books</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>AI book</b> — the Code book&apos;s picks, with a slot held as cash when the AI analyst&apos;s reading of the
-                        filings finds a material event. Formed monthly, equal weight per slot.
-                    </li>
-                    <li>
-                        <b>Code book</b> — the screener&apos;s monthly picks alone, the same names before the AI analyst&apos;s check.
+                        <b>AI book</b> — every stock the AI analyst currently rates BUY, at equal weight, including stocks analysed on
+                        request. A stock enters when its verdict becomes BUY and leaves when it stops being BUY. It started on 27
+                        November 2026.
                     </li>
                     <li>
                         <b>Old AI book (stopped)</b> — followed the earlier analyst&apos;s verdicts that passed the gate
@@ -655,8 +653,8 @@ export function EnglishHelpBody() {
                 <p>
                     Growth of 100 plots the books and the benchmarks (<Term term="qqq" />, <Term term="spy" />, <Term term="iwm" /> and a few
                     more) from the same start, with a window selector and a what-if cost box that re-costs every trade. The ledger
-                    lists the AI book&apos;s trades with a plain reason (for example &ldquo;entered at the monthly
-                    formation&rdquo;) and shows days with no trade as &ldquo;no changes&rdquo;.
+                    lists the AI book&apos;s trades with a plain reason (for example &ldquo;entered when the verdict
+                    became BUY&rdquo;) and shows days with no trade as &ldquo;no changes&rdquo;.
                 </p>
                 <SubHeading>Honest rules</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
@@ -667,7 +665,7 @@ export function EnglishHelpBody() {
                 <SubHeading>How to read it</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li><b>Control vs QQQ</b> — the stock selection works only if the picks beat the <Term term="benchmark" />, QQQ.</li>
-                    <li><b>AI book vs Code book</b> — the AI analyst&apos;s filing check earns its keep only if its book beats the Code book. This has not been measured: the books began on 6 November 2026.</li>
+                    <li><b>AI book vs the benchmarks and Control</b> — the AI analyst&apos;s filing check earns its keep only if the AI book beats the benchmarks (SPY, QQQ) and the Control book. This has not been measured: the book began on 27 November 2026.</li>
                     <li><b>My book vs the others</b> — your own deviations show up as the <Term term="behavior-gap" />.</li>
                 </ul>
                 <Callout kind="info">
@@ -732,8 +730,8 @@ export function EnglishHelpBody() {
                     </li>
                     <li>
                         <b>A control.</b> The sharpest question is whether the AI analyst&apos;s reading adds anything on top of the
-                        screen. The Code book and the AI book exist to answer it: if the AI book cannot beat the Code
-                        book, the AI analyst&apos;s filing check adds nothing to the picks. That comparison has not been measured.
+                        screen. The honest yardsticks are the benchmarks (SPY, QQQ) and the Control book, which is the screener&apos;s list at equal
+                        weight: if the AI book cannot beat them, the AI analyst&apos;s filing check adds nothing to the picks. That comparison has not been measured.
                     </li>
                     <li>
                         <b>Paper books.</b> The <A href="#track">track record</A> books trade daily with real prices and
@@ -747,7 +745,7 @@ export function EnglishHelpBody() {
                 <Callout kind="warn">
                     <b>No conclusion yet.</b> <Term term="not-yet-proven" />: every graded verdict so far is from the earlier
                     analyst, which was ruled invalid, and the AI analyst has not been graded on returns. No conclusion can be drawn
-                    about either until the monthly books have enough months of marks.
+                    about either until the AI book has enough months of marks.
                 </Callout>
             </Section>
 

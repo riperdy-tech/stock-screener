@@ -717,7 +717,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'The paper book that followed the earlier analyst’s passing verdicts. Stopped.',
         definition:
-            'It held equal amounts of every name on the list whose verdict was undervalued and passed the gate. The earlier analyst was stopped in October 2026 after it was ruled invalid, so the book holds only cash and its record allows no conclusion. It is shown on the Track page as the old AI book. It is not the current AI book, which follows the monthly picks (see Record reset).',
+            'It held equal amounts of every name on the list whose verdict was undervalued and passed the gate. The earlier analyst was stopped in October 2026 after it was ruled invalid, so the book holds only cash and its record allows no conclusion. It is shown on the Track page as the old AI book. It is not the current AI book, which holds every stock the AI analyst currently rates BUY (see Record reset).',
         related: ['actionable', 'track-record', 'record-reset', 'control-book'],
     },
 
@@ -997,7 +997,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'A planned restart of the AI paper record that did not happen.',
         definition:
-            'It was planned that the AI book’s record would restart from zero when a rebuilt verdict analyst went live. That analyst was stopped instead, so there was no restart. The old AI book stays on the Track page, labelled as the stopped analyst’s. The Code book and the AI book, which began on 6 November 2026, are separate records.',
+            'It was planned that the AI book’s record would restart from zero when a rebuilt verdict analyst went live. That analyst was stopped instead, so there was no restart. The old AI book stays on the Track page, labelled as the stopped analyst’s. The current AI book, which began on 27 November 2026, is a separate record.',
         related: ['rn-depth', 'rebuilt-analyst', 'track-record'],
     },
     'graded-pending': {
