@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T19:16:18Z",
+ "generated_at": "2026-11-26T19:23:23Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -8685,38 +8685,61 @@
    "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
   },
   "PNRG": {
-   "alpha_pts": null,
+   "alpha_pts": 9.441362983395008,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-11-16T21:24:22.000Z",
     "accepted_utc": "2026-11-17T02:24:22Z",
     "accession": "0001437749-26-037190",
-    "decision_time": "2026-11-19T17:35:54Z",
+    "decision_time": "2026-11-26T19:17:04Z",
     "form": "10-Q",
     "period": "2026-09-30"
    },
-   "claims": 75,
+   "claims": 78,
    "claims_supported": 72,
-   "date": "2026-11-19T17:35:54Z",
+   "date": "2026-11-26T19:17:04Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 391411838.0997006,
    "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 1574500.0,
    "flags": [
-    "PrimeEnergy Resources Corporation amended its borrowing base agreement with Citibank, N.A., decreasing the borrowing base from $115,000,000 to $105,000,000, with no outstanding borrowings under the credit facility.",
-    "PrimeEnergy Resources Corporation sold Eastern Oil Well Service Company, reducing field service equipment utilization."
+    "The company amended its borrowing base agreement with Citibank, N.A., cutting the borrowing base from $115,000,000 to $105,000,000. It reported no outstanding borrowings under the facility at the time of the filing."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
+   "ke": 0.08191349126773717,
+   "market_cap_at_publish": 355207210,
+   "model": "claude-sonnet-5-5",
    "news_count": 0,
-   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 225.6,
    "qwen_book": null,
    "release_truncated": [],
-   "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
-   "source": "new filing (new_filing:10-Q:0001437749-26-037190)",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 235.95236780971294,
+    "3000": 261.23637540997663
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "some filed figures are years older than the latest annual report"
+   "upside": 0.10192537504996202,
+   "value_base": 248.59437160984479,
+   "value_bear": 109.90073234112053,
+   "value_bull": 552.7711562678205,
+   "value_per_filed_share": {
+    "base": 248.59437160984479,
+    "bear": 109.90073234112053,
+    "bull": 552.7711562678205
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +9.4 points a year against the required return over 3 years; the two runs do not both reach BUY"
   },
   "PRCH": {
    "alpha_pts": null,
@@ -12313,12 +12336,12 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 156,
+ "valued_count": 157,
  "verdict_counts": {
   "AVOID": 70,
   "BUY": 58,
-  "NO_CALL": 103,
-  "WATCH": 19
+  "NO_CALL": 102,
+  "WATCH": 20
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }
