@@ -2,793 +2,1159 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 76,
- "claims_supported": 73,
- "date": "2026-11-17T14:01:33Z",
+ "based_on": {
+  "accepted": "2026-11-05T22:33:35.000Z",
+  "accepted_utc": "2026-11-06T03:33:35Z",
+  "accession": "0001273441-26-000039",
+  "decision_time": "2026-11-26T21:21:36Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 92,
+ "claims_supported": 90,
+ "date": "2026-11-26T21:21:36Z",
  "family": "commodity",
  "flags": [
-  "Gran Tierra signed a share sale agreement to sell its Colombian and Ecuadorian businesses to Maurel & Prom Andina for total consideration of $1.33 billion, including assumed debt. Closing is still subject to regulatory approvals and other conditions.",
-  "Stockholders approved the sale of the Colombian and Ecuadorian businesses. The company expects net cash proceeds of approximately US$315 million, and closing still needs regulatory approvals in Colombia and Ecuador.",
-  "Gran Tierra obtained the requisite noteholder consent for amendments to the indenture governing its 9.75% Senior Secured Amortizing Notes due 2031."
+  "Gran Tierra recorded a non-cash ceiling test asset impairment in Colombia and Ecuador of $136.3 million in 2025.",
+  "Gran Tierra entered into a definitive Share Sale and Purchase Agreement to sell its Colombian and Ecuadorian businesses to Maurel & Prom for total consideration of approximately $1.33 billion and expected net cash proceeds of approximately $315 million.",
+  "Following receipt of requisite consents from holders of the 2031 Notes, Gran Tierra executed a supplemental indenture in connection with the Sale that becomes operative on closing."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "loss_record": {
+  "cause": "cannot_tell",
+  "explanation": "The provided filings only cover 2023 through Q3 2026 and contain no evidence explaining the largest loss in the record (2020 pretax loss of -$853.4 million) or the thin 2021 profit. Even within 2025 and 9M 2026, no single listed cause accounts for the losses because 2025 combined a $136.3 million ceiling test impairment with $101.3 million of interest expense on lower gross profit, while 9M 2026 combined $105.8 million of derivative losses, $46.4 million of stock-based compensation, and $98.2 million of interest expense.",
+  "label": "the filings in the packet do not say",
+  "quotes": [
+   {
+    "id": "P3",
+    "quote": "This Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations generally discusses items related to the fiscal year ended December 31, 2025, and year-to-year comparisons between the fiscal years ended December 31, 2025, and 2024, respectively."
+   },
+   {
+    "id": "P3",
+    "quote": "Net loss in 2025 was $193.1 million or $5.45 per share basic and diluted, which included a non-cash ceiling test impairment in Colombia and Ecuador of $136.3 million, compared to net income of $3.2 million or $0.10 per share basic and diluted in 2024"
+   },
+   {
+    "id": "P3",
+    "quote": "Interest expense | 101,309 | 26 | 80,466 | 44 | 55,806"
+   },
+   {
+    "id": "F2",
+    "quote": "LOSS BEFORE INCOME TAXES | (67,990) | (31,226) | (168,408) | (55,046)"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no positive earnings base",
+ "no_value_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the 10-K business section and MD&A.",
-    "claim": "Gran Tierra is an oil and gas exploration and production company. It sells oil, natural gas and NGLs produced from assets in Colombia, Canada and Ecuador.",
+    "basis": "Stated directly in the 2025 10-K Item 1 and Item 1A.",
+    "claim": "Gran Tierra Energy Inc. generates revenue by exploring for, producing, and selling oil, natural gas, and natural gas liquids (NGLs).",
     "facts": [
      "P1",
-     "P3"
-    ],
-    "quotes": [
-     "is a company focused on oil and gas exploration and production, with assets in Colombia, Canada and Ecuador"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A overview.",
-    "claim": "In 2025 revenue was concentrated in Colombia at 70%, with Canada at 19% and Ecuador at 11%. Canada and Ecuador have grown their shares since 2024.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "19% of our revenue was generated in Canada (2024 - 3%; 2023 - nil)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors. Named customers are not in the evidence.",
-    "claim": "Realized prices are set by contracts with purchasers. They are based on international benchmark prices less deductions for quality differentials and transportation.",
-    "facts": [
      "P2"
     ],
     "quotes": [
-     "are established by contracts with purchasers and include the deductions for quality differentials and transportation"
+     "Gran Tierra Energy Inc., together with its subsidiaries (\u201cGran Tierra\u201d, \u201cthe Company\u201d, \u201cus\u201d, \u201cour\u201d, or \u201cwe\u201d), is a company focused on oil and gas exploration and production, with assets in Colombia, Canada and Ecuador.",
+     "We generate revenue through the production and sale of oil, natural gas and NGLs."
     ],
     "support": "supported"
    },
    {
-    "basis": "The balance is stated. The link to a prepayment arrangement is inferred.",
-    "claim": "The balance sheet carries a long-term customer advance of 192,548 (table in thousands) at Sep. 30, 2026, up from 115,909 at Dec. 31, 2025. This suggests part of the business is funded by customer prepayment arrangements.",
+    "basis": "Stated directly in the 2025 10-K Item 7 MD&A.",
+    "claim": "South American sales are 100% Brent-priced oil, whereas Canadian production in 2025 was 51% natural gas, 25% oil, and 24% NGLs on a net-after-royalty basis.",
     "facts": [
-     "F1",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "Customer advance (Note 7)"
+     "During the years ended December 31, 2025, 2024 and 2023, 100% of sales from South America were oil, priced against Brent.",
+     "For the year ended December 31, 2025, 25% of NAR production in Canada was oil, compared with 21% during the two month period of 2024.",
+     "For the year ended December 31, 2025, 24% of NAR production in Canada was NGLs, compared to 27% during the two month period of 2024.",
+     "For the year ended December 31, 2025, 51% of NAR production in Canada was natural gas, compared to 52% during the two month period of 2024."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the MD&A and press release tables. The segment label is inferred.",
-    "claim": "The MD&A reports results and operating netback by country: Colombia, Ecuador and Canada. For the nine months to Sep. 30, 2026, operating netback was 205,734 in Colombia, 84,639 in Ecuador and 40,523 in Canada (table in thousands).",
+    "basis": "Stated in the 2025 10-K Item 1A and Q3 2026 earnings release.",
+    "claim": "The company sells its production under contracts with purchasers, faces a smaller pool of potential regional buyers in concentrated operating areas, and has physical oil sales arrangements with Trafigura.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Furthermore, prices which we receive for our oil and natural gas sales, while based on international oil and natural gas prices, are established by contracts with purchasers and include the deductions for quality differentials and transportation.",
+     "As a result of this concentration, we may be disproportionately exposed to the impact of, among other things, regional supply and demand factors including limitations on our ability to most profitably sell or market our oil and natural gas to a smaller pool of potential buyers, delays or interruptions of production from wells in these areas caused by governmental regulation, community protests, guerrilla activities, processing or transportation capacity constraints, continued authorization by the government to explore and drill in these areas, severe weather events and the availability of drilling rigs and related equipment, facilities, personnel or services.",
+     "Gran Tierra has secured price protection on 5,000 bbl per day of first quarter 2027 oil sales, through its physical sales arrangements with Trafigura."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 10-K Item 7 MD&A.",
+    "claim": "Properties and revenues span Colombia, Canada, and Ecuador, which generated 70%, 19%, and 11% of 2025 revenue and represented 46%, 38%, and 16% of proved reserves NAR, respectively.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our Colombian properties represented 46%, our Canadian properties represented 38%, and our Ecuadorian properties represented 16% of our proved reserves NAR at December 31, 2025, and for the year ended December 31, 2025, 70% of our revenue was generated in Colombia (2024 - 93%; 2023 -97%), 19% of our revenue was generated in Canada (2024 - 3%; 2023 - nil) and 11% (2024 - 4%; 2023 - 3%) of our revenue was generated in Ecuador."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Field concentration stated in 2025 10-K Item 1A; geographic disaggregation observed in 10-K Item 7, Q3 2026 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "Management disaggregates operating netback and production across Colombia, Ecuador, and Canada, with four Colombian fields\u2014Acordionero, Costayaco, Moqueta, and Cohembi\u2014accounting for 49% of 2025 production.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "For the year ended December 31, 2025, the Acordionero, Costayaco, Moqueta and Cohembi fields collectively generated 49% of our production and at December 31, 2025, these four fields accounted for 51% of our proved reserves.",
+     "If, for any reason, the Sale is not completed or is materially delayed, there may be ongoing or additional uncertainty regarding us and our business, operations and assets, including with respect to our business segments not subject to the Sale (the \u201cRetained Business\u201d) and the retention of key personnel.",
+     "Gran Tierra Energy Inc., together with its subsidiaries, is an independent international energy company currently focused on oil and natural gas exploration and production in Canada, Colombia and Ecuador."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 10-Q Item 2 and Q3 2026 earnings release.",
+    "claim": "The company agreed to sell its Colombian and Ecuadorian businesses to Maurel & Prom for approximately $1.33 billion, after which operations will focus on Canada and an onshore Azerbaijan block.",
     "facts": [
      "P4",
      "P6"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Revenue moves mainly with benchmark oil prices. Q3 2026 Brent averaged $91.29 per bbl, up 34% year on year. Oil, natural gas and NGL sales rose 13% to $168.3 million.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
     "quotes": [
-     "Oil, natural gas and NGL sales for the third quarter of 2026 increased by 13% to $168.3 million, compared to the third quarter of 2025, due to increase in benchmark oil prices"
+     "On August 5, 2026, Gran Tierra entered into a definitive Share Sale and Purchase Agreement (the \u201cShare Purchase Agreement\u201d) to sell its Colombian and Ecuadorian businesses (the \u201cSale\u201d) to Maurel & Prom for total consideration of approximately $1.33 billion, subject to adjustment, including the assumption of its 2031 Notes, its 9.50% Senior Secured Amortizing Notes due 2029 and the facility under its oil prepayment agreement.",
+     "Upon completion of the Sale, the Company\u2019s operations will be focused on Canada and Azerbaijan, and the Company will continue to pursue additional new growth opportunities that would further strengthen the Company\u2019s portfolio.",
+     "On October 5, 2026, Azerbaijan\u2019s Parliament (the Milli Majlis) ratified Gran Tierra\u2019s EDPSA for the onshore Guba-Khazaryani region.",
+     "During the three months ended September 30, 2026, we entered into a definitive share sale agreement to sell our Colombia and Ecuador oil business for a total approximate consideration of $1.33 billion, subject to adjustment, including the assumption of our 2029 and 2031 Senior Notes and the Prepayment Agreement facility, with expected net cash proceeds of approximately $315.0 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Quality and transportation discounts cut the South American price. They averaged $18.09 per boe in Q3 2026, against $10.76 a year earlier. The closed Colombia-Ecuador border forced costlier alternative routes for Putumayo production.",
+    "basis": "Stated in the 2025 10-K Item 7, Q3 2026 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "Revenue moves primarily with benchmark hydrocarbon prices\u2014Brent for South American oil, WTI for Canadian oil, and AECO for Canadian gas\u2014with Ecuador sales priced on a prior-month M-1 Brent basis.",
     "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Quality and transportation discounts per boe in South America were $18.09, an increase from $10.76 in the third quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A and the earnings release table.",
-    "claim": "Royalties are a large and price-sensitive deduction from working-interest production. Royalties were 21% of WI production in Q3 2026, against 16% a year earlier. Higher oil prices raised in-kind royalties in Ecuador.",
-    "facts": [
+     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "higher in-kind royalties Ecuador driven by higher oil prices and asset sales in Canada"
+     "Oil, natural gas and NGL sales for 2025 decreased by 4% to $596.7 million compared to $621.8 million in 2024, primarily as a result of a 15% decrease in Brent price, lower sales volumes in Colombia, offset by higher sales volumes in Ecuador, lower differentials, and a full year of sales from Canadian operations",
+     "Ecuador oil sales are priced on an \u201cM-1\u201d basis, a pricing convention whereby the realized price for volumes lifted in a given month is determined by reference to the average Brent crude oil price of the immediately preceding calendar month, rather than the month in which lifting occurs.",
+     "Oil, natural gas and NGL sales for the third quarter of 2026 increased by 13% to $168.3 million, compared to the third quarter of 2025, due to increase in benchmark oil prices, partially offset by lower sales volumes in Colombia and Canada and higher quality and transportation discounts in Colombia associated with using alternative transportation routes for Putumayo production as the Colombia and Ecuador border remained closed."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Volumes are a second revenue driver. Net-after-royalty production fell 13% to 31,390 BOEPD from 35,962 BOEPD, because of lower Colombian output, higher Ecuador royalties and Canadian asset sales.",
+    "basis": "Stated in the 2025 10-K Item 1A, Q3 2026 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "Realized revenue per barrel is reduced by quality differentials and transportation discounts, which increased in South America during the third quarter of 2026 to $15.83 per barrel partly from rerouting Putumayo crude after the Colombia\u2013Ecuador border closed.",
     "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The differentials and transportation costs can change over time and have a detrimental impact on realized prices.",
+     "The Company\u2019s average quality and transportation discounts per bbl in South America during the Quarter increased to $15.83 from $10.80 in the third quarter of 2025 and $10.31 in the Prior Quarter.",
+     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed, which was significantly more expensive and resulted in additional discounts of approximately $3.7 million for the current quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Item 1A and Item 7 and Q3 2026 10-Q Item 2.",
+    "claim": "Sales volumes are driven by development drilling and acquisitions offsetting natural reservoir decline, alongside asset divestitures and operational disruptions from pipeline outages, field shut-ins, and social or security events.",
+    "facts": [
+     "P2",
+     "P3",
      "P4"
     ],
     "quotes": [
-     "NAR production for the third quarter of 2026 decreased by 13% to 31,390 BOEPD, compared to 35,962 BOEPD in the third quarter of 2025"
+     "Producing oil and natural gas reservoirs generally are characterized by declining production rates that vary depending upon reservoir characteristics and other factors.",
+     "Our 2025 average production NAR was 38,443 BOEPD, an increase from 27,890 BOEPD in 2024 as a result of positive exploration drilling results in Ecuador, full year production from the Canadian operations, partially offset by lower production in the Acordionero and Costayaco fields as a result of export pipeline disruptions and trunk line repairs at the Moqueta field which resulted in the field being shut-in during the third quarter of 2025",
+     "NAR production for the third quarter of 2026 decreased by 13% to 31,390 BOEPD, compared to 35,962 BOEPD in the third quarter of 2025, primarily due to lower production in Colombia, higher in-kind royalties Ecuador driven by higher oil prices and asset sales in Canada and decreased by 2% from 31,990 BOEPD in the prior quarter primarily due to sale of the Lodgepole area in Canada and lower production in Colombia, partially offset by lower in-kind royalties in Ecuador"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A and the earnings release.",
-    "claim": "Canadian revenue comes from oil, natural gas and NGLs. In 2025 Canadian production was 25% oil, 24% NGLs and 51% natural gas. Q3 2026 Canadian sales were 19,066 oil, 3,403 gas and 4,304 NGL (table in thousands).",
+    "basis": "Stated in the 2025 10-K Item 1 and Item 7 and Q3 2026 earnings release.",
+    "claim": "Price-sensitive government and third-party royalties, Ecuadorian participation-sharing splits, and Suroriente working-interest step-downs reduce net-after-royalty volumes and revenues as oil prices rise.",
     "facts": [
+     "P1",
      "P3",
      "P6"
     ],
     "quotes": [
-     "For the year ended December 31, 2025, 25% of NAR production in Canada was oil, compared with 21% during the two month period of 2024."
+     "Royalties as a percentage of production for the year ended December 31, 2025, decreased 4% compared to 2024 commensurate with the decrease in benchmark oil prices and the price sensitive royalty regime in Colombia, Ecuador, and Canada.",
+     "The biddable price component is a sliding scale that is based on the Oriente oil price ranging from $30 per boe to $120 per boe, with the Company\u2019s production share varying between 40% and 87.5%, respectively.",
+     "During the Quarter, operationally, production was down from the second quarter primarily as a result of lower production in Colombia, partly due to a contractual reduction in our working interest production at higher oil prices in the Suroriente Block, and the asset sale in Canada."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "The main cash operating cost is lifting cost. Q3 2026 operating expenses were $64.2 million, down 6% year on year. They were $21.32 per boe, driven by workover activity, field personnel costs and equipment maintenance.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "Operating expenses for the third quarter of 2026 decreased by 6% to $64.2 million when compared to the third quarter of 2025 primarily due to lower workover activities, reduced field personnel costs and lower equipment maintenance."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The figures are stated. The mechanism is inferred from the line description.",
-    "claim": "Depletion, depreciation and accretion is a large non-cash cost. It was 196,599 for the nine months to Sep. 30, 2026, against 205,818 a year earlier (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated. Linking the charge to the liability revaluation is inferred.",
-    "claim": "G&A swings with stock-based compensation. Q3 2026 G&A was 42,279, against 13,389 a year earlier (table in thousands). Stock-based compensation expense was 30,465 against 143.",
+    "basis": "Amounts from Q3 2026 10-Q income statement; cost drivers stated in 2025 10-K Item 7, Q3 2026 10-Q Item 2, and Q3 2026 earnings release.",
+    "claim": "Operating and transportation expenses\u2014$ 181,896 and 14,752 (table in USD thousands) in the first nine months of 2026\u2014are driven by workover activity, lifting volumes and inventory timing, portfolio mix, pipeline transport share, and Colombian peso strength.",
     "facts": [
      "F2",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated. The price-direction mechanism is inferred.",
-    "claim": "Derivatives add earnings volatility. The nine-month derivative instruments line was a loss of 105,774, against a gain of (10,499) a year earlier. A derivative liability of 39,477 was on the balance sheet at Sep. 30, 2026 (table in thousands).",
-    "facts": [
-     "F2",
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the financial statements and the 10-K.",
-    "claim": "Debt service is a heavy cost. Interest expense was 98,229 for nine months, against 73,048. Long-term debt was 542,951 plus a current portion of 45,980 (table in thousands). Management says capital allocation is anchored on debt reduction.",
-    "facts": [
-     "F2",
-     "F1",
-     "P1"
-    ],
-    "quotes": [
-     "Capital allocation is anchored in generating sustainable free cash flow and deploying that cash toward meaningful debt reduction."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Operating cash flow funds reinvestment and debt repayment. Nine-month operating cash flow was 256,706 and capital additions were 148,110, against 218,155 a year earlier. Senior Notes repayment was 125,000 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-Ks and the 10-Q.",
-    "claim": "A pending sale would reshape the model. Gran Tierra agreed to sell its Colombia and Ecuador oil business for approximately $1.33 billion, with expected net cash proceeds of approximately $315.0 million. It would keep Canada and Azerbaijan.",
-    "facts": [
-     "P4",
-     "P7",
-     "P8",
-     "P5"
-    ],
-    "quotes": [
-     "Upon the completion of the Sale Transaction, the Company will continue to operate its assets in Canada and Azerbaijan."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A and risk factors.",
-    "claim": "The reserve base underpins future production. Estimated proved reserves were 111.6 MMBOE at year-end 2025, down 17%.",
-    "facts": [
      "P3",
-     "P2"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "we had estimated proved reserves NAR of 111.6 MMBOE, a 17% decrease from the prior year"
+     "Operating | $ 64,186 | $ 68,170 | $ 181,896 | $ 190,863",
+     "Transportation | 5,542 | 4,297 | 14,752 | 13,342",
+     "Total operating expenses were $248.7 million in 2025, compared to $202.3 million in 2024, representing an 23% increase as a result of higher operating costs in Ecuador driven by a production ramp-up in 2025, and the full year of Canadian operations",
+     "Transportation expenses increased by 29% when compared to the third quarter of 2025 and increased by 42% from the prior quarter primarily due to higher volumes transported via pipeline which had higher costs per boe",
+     "Total operating expenses increased by 24% to $64 million and on a per boe basis increased by 25% when compared to the Prior Quarter, primarily due to higher workover activities and lifting costs on inventory accumulated at the end of the Prior Quarter and sold during the Quarter, including two liftings in Ecuador compared to one in the Prior Quarter, and the strengthening of the Colombian peso."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "DD&A figure from Q3 2026 10-Q income statement; impairment figure and mechanism stated in 2025 10-K Item 7 and Item 1A.",
+    "claim": "Depletion, depreciation, and accretion is a major non-cash cost\u2014196,599 (table in USD thousands) in the first nine months of 2026\u2014while lower prices or reserve revisions can trigger ceiling-test asset impairments such as $136.3 million in 2025.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Depletion, depreciation and accretion (Note 5) | 64,391 | 64,981 | 196,599 | 205,818",
+     "Such changes could materially reduce our revenues and result in the impairment of our oil and natural gas interests.",
+     "Net loss in 2025 was $193.1 million or $5.45 per share basic and diluted, which included a non-cash ceiling test impairment in Colombia and Ecuador of $136.3 million, compared to net income of $3.2 million or $0.10 per share basic and diluted in 2024"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Total G&A from Q3 2026 10-Q income statement; component drivers stated in Q3 2026 10-Q Item 2 and Q3 2026 earnings release.",
+    "claim": "General and administrative expenses\u201486,566 (table in USD thousands) in the first nine months of 2026\u2014reflect cash overhead such as salaries, legal, and consulting fees alongside non-cash stock-based compensation that fluctuates with the share price.",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "General and administrative | 42,279 | 13,389 | 86,566 | 39,478",
+     "General and administrative (\u201cG&A\u201d) expenses before stock-based compensation for the third quarter of 2026 decreased to $11.8 million compared to $13.2 million in the third quarter of 2025 and $13.2 million in the prior quarter due to lower consulting and legal expenses, lower costs associated with project optimization and lower salaries associated with headcount optimization when compared to the prior quarter",
+     "The net loss in the Quarter was primarily due to non-cash stock-based compensation expense of $30 million, driven by the increase in the Company\u2019s share price during the Quarter, and derivative instrument losses of $29 million, partially offset by a deferred income tax recovery of $30 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Amounts from Q3 2026 10-Q income statement; debt context from Q3 2026 earnings release and Colombian excise tax from 2025 10-K Item 7.",
+    "claim": "Financing, derivative, foreign exchange, and tax items materially affect net earnings, including interest expense of 98,229, derivative losses of 105,774, and current income tax of 19,476 (table in USD thousands) in the first nine months of 2026.",
+    "facts": [
+     "F2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Interest expense (Note 6) | 23,878 | 25,447 | 98,229 | 73,048",
+     "Derivative instruments loss (gain) (Note 12) | 29,228 | 2,066 | 105,774 | (10,499)",
+     "Current (Note 10) | 4,511 | 4,022 | 19,476 | 14,482",
+     "As of September 30, 2026, the Company had a cash balance of $141 million, total gross debt of $591 million and net debt3,4 of $450 million.",
+     "In February 2025, the Colombian government introduced a temporary 1% excise tax on the first sale or export of crude oil pursuant to a declared state of internal emergency, effective through December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow amounts from Q3 2026 10-Q cash flow statement; capital allocation and Trafigura price protection stated in 2025 10-K Item 1 and Q3 2026 earnings release.",
+    "claim": "Ongoing development capital spending\u2014(148,110) (table in USD thousands) in property, plant and equipment additions in the first nine months of 2026\u2014is funded by operating cash flow of 256,706 (table in USD thousands) alongside asset sales and physical price protection.",
+    "facts": [
+     "F3",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Additions to property, plant and equipment (Notes 5 and 13) | (148,110) | (218,155)",
+     "Net cash provided by operating activities | 256,706 | 156,056",
+     "Capital allocation is anchored in generating sustainable free cash flow and deploying that cash toward meaningful debt reduction.",
+     "Gran Tierra has secured price protection on 5,000 bbl per day of first quarter 2027 oil sales, through its physical sales arrangements with Trafigura."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the 10-K Item 1 text.",
-    "claim": "Gran Tierra is a small, geographically diversified oil and gas producer, but its Colombian assets still dominate revenue (70% in 2025) and proved reserves (46%).",
+    "basis": "Stated directly in 10-K Item 1 Business [P1].",
+    "claim": "Gran Tierra focuses on hydrocarbon development in conventional basins across Colombia, Canada, and Ecuador, operating 24 blocks in Colombia and Ecuador and 70% across 11 Canadian areas.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "with assets in Colombia, Canada and Ecuador"
+     "We are an exploration and production company focused on hydrocarbon development in proven, under-explored conventional basins which have access to established infrastructure and competitive fiscal regimes.",
+     "As of December 31, 2025, excluding blocks subject to relinquishment, we had interests in 20 blocks in Colombia, five blocks in Ecuador, and were the operator of 24 of these blocks.",
+     "As of December 31, 2025, we held interests in 12 areas in Canada of which the entire interest in Simonette was divested subsequent to year-end and as of February 27, 2026 we held interest in 11 areas in Canada and were the operator of 70% across all the areas."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Roughly half of production comes from four Colombian fields, so the company is exposed to disruption at a few assets.",
+    "basis": "Stated directly in 10-K Item 1 Business [P1] and 10-K Item 7 MD&A [P3].",
+    "claim": "Management cites a track record in technically difficult reservoirs, enhanced oil recovery, and remote jurisdictions, backed by 111.6 MMBOE of proved reserves NAR (57% proved developed, 71% oil) despite a 17% decline from the prior year.",
     "facts": [
-     "P2"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "Approximately half of our production comes from four fields located in Colombia."
+     "The senior management team has a proven track record in developing technically difficult reservoirs, enhanced oil recovery, and operating in remote locations in demanding jurisdictions.",
+     "As of December 31, 2025, we had estimated proved reserves NAR of 111.6 MMBOE, a 17% decrease from the prior year, of which 57% were proved developed reserves and 71% were oil."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Third-quarter 2026 production fell year on year: NAR production was down 13% to 31,390 BOEPD, mainly on lower Colombian output and Canadian asset sales.",
+    "basis": "Stated directly in 10-K Item 7 MD&A [P3] and Q3 2026 earnings release [P6].",
+    "claim": "Gran Tierra is shifting away from its South America-heavy revenue mix\u2014where Colombia and Ecuador generated 70% and 11% of 2025 revenue\u2014by agreeing to sell its Colombian and Ecuadorian businesses to Maurel & Prom for approximately $1.33 billion and target a debt-free focus on Canada and Azerbaijan.",
     "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "NAR production for the third quarter of 2026 decreased by 13% to 31,390 BOEPD, compared to 35,962 BOEPD in the third quarter of 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A and the earnings release.",
-    "claim": "The company is a price-taker whose realised prices depend on Brent and on quality and transportation discounts. South America discounts rose to $18.09 per boe, partly because the closed Colombia-Ecuador border forced costlier routes.",
-    "facts": [
-     "P4",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Quality and transportation discounts per boe in South America were $18.09, an increase from $10.76 in the third quarter of 2025.",
-     "as the Colombia and Ecuador border remained closed"
+     "Our Colombian properties represented 46%, our Canadian properties represented 38%, and our Ecuadorian properties represented 16% of our proved reserves NAR at December 31, 2025, and for the year ended December 31, 2025, 70% of our revenue was generated in Colombia (2024 - 93%; 2023 -97%), 19% of our revenue was generated in Canada (2024 - 3%; 2023 - nil) and 11% (2024 - 4%; 2023 - 3%) of our revenue was generated in Ecuador.",
+     "On August 5, 2026, Gran Tierra entered into a definitive Share Sale and Purchase Agreement (the \u201cShare Purchase Agreement\u201d) to sell its Colombian and Ecuadorian businesses (the \u201cSale\u201d) to Maurel & Prom for total consideration of approximately $1.33 billion, subject to adjustment, including the assumption of its 2031 Notes, its 9.50% Senior Secured Amortizing Notes due 2029 and the facility under its oil prepayment agreement.",
+     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are taken from the income statement and MD&A. The link between the gains and the losses is inferred from the line items.",
-    "claim": "Higher benchmark prices lifted Q3 2026 revenue to 168,306 (table in thousands) from 149,254 a year earlier. Operating netback also improved, but the quarter still posted a net loss of (42,415).",
+    "basis": "Stated directly in 10-K Item 7 MD&A [P3] and Q3 2026 earnings release tables [P6].",
+    "claim": "Adding Canadian operations structurally reduced consolidated realized prices by 30% to $43.41 per boe in 2025 due to wider benchmark differentials and transportation costs, and in the third quarter of 2026 Canada generated a $10.74 per boe operating netback versus $32.52 in Colombia and $33.66 in Ecuador.",
     "facts": [
-     "F2",
-     "P4"
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Operating netback(2) was $98.6 million compared to $76.8 million in the third quarter of 2025"
+     "On a consolidated basis, the average realized price decreased by 30% to $43.41 per boe for the year ended December 31, 2025, compared to $61.93 in 2024, reflecting the structural impact of adding Canadian operations which carry wider benchmark differentials and transportation costs.",
+     "Operating Netback3,6 | $32.52 | $25.71 | $45.56 | $36.80 | $29.03",
+     "Operating Netback3,6 | $33.66 | $22.90 | $46.20 | $33.61 | $22.44",
+     "Operating Netback3,6 | $10.74 | $8.04 | $11.77 | $10.66 | $9.18"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Unit operating cost rose: operating expenses per boe were $21.32 in Q3 2026, up $1.48 on Q3 2025, as lower sales volumes spread fixed costs over fewer barrels.",
+    "basis": "Stated directly in Q3 2026 earnings release [P6].",
+    "claim": "Gran Tierra expanded into Azerbaijan by obtaining parliamentary ratification of its onshore EDPSA with SOCAR, where it operates with a 65% working interest and completed an airborne gravity gradiometry survey over 4,815 km\u00b2.",
     "facts": [
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "On a per boe basis, operating expenses increased by $1.48 to $21.32 when compared to the third quarter of 2025"
+     "On October 5, 2026, Azerbaijan\u2019s Parliament (the Milli Majlis) ratified Gran Tierra\u2019s EDPSA for the onshore Guba-Khazaryani region.",
+     "The Company is the operator of, and holds a 65% working interest in, an onshore exploration, development and production sharing agreement in Azerbaijan.",
+     "Gran Tierra has also completed the flying of its airborne digital full tensor gradiometry (\u201cdFTG\u201d) survey, acquiring 102 lines (5,775 line-km) over 4,815 km\u00b2."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are from the balance sheet and cash flow statement. The reading of the constraint is inferred.",
-    "claim": "The balance sheet is stretched. Cash was 141,077 (table in thousands) against current liabilities of 581,123 and current assets of 265,836, and equity fell to 90,204 from 228,744.",
+    "basis": "Stated directly in Q3 2026 earnings release [P6] and Q3 2026 balance sheet [F1].",
+    "claim": "Gran Tierra held $141 million in cash and approximately $53 million of undrawn Canadian credit facility availability against $591 million of gross debt, and secured zero-upfront-cost Brent price protection on 5,000 bbl per day of first-quarter 2027 oil sales with a $95.00 floor and $111.00 ceiling.",
     "facts": [
      "F1",
      "P6"
     ],
     "quotes": [
-     "Ended the Quarter with $141 Million of Cash and Approximately $53 Million of Undrawn Credit Facility Availability"
+     "As of September 30, 2026, the Company had a cash balance of $141 million, total gross debt of $591 million and net debt3,4 of $450 million.",
+     "In addition to the $141 million cash on hand as of September 30, 2026, the Company has approximately $53 million in undrawn availability under its Canadian revolving credit facility.",
+     "Gran Tierra has secured price protection on 5,000 bbl per day of first quarter 2027 oil sales, through its physical sales arrangements with Trafigura.",
+     "The structure provides a floor of $95.00 per barrel and a ceiling of $111.00 per barrel, based on monthly average Brent prices.",
+     "Total Current Assets | 265,836 | 213,527",
+     "Total Current Liabilities | 581,123 | 355,692"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q, the 8-K filed October 2026 and the 8-K of August 2026.",
-    "claim": "The company has agreed to sell its Colombian and Ecuadorian oil business to Maurel & Prom for about $1.33 billion in total consideration, with expected net cash proceeds of about $315.0 million. This would leave Canada and Azerbaijan as the retained operations.",
+    "basis": "Stated directly in 10-K Item 1 Business [P1] and 10-K Item 1A Risk Factors [P2].",
+    "claim": "Fiscal stability investment agreements on three of five Ecuadorian blocks and Alberta's Modernized Royalty Framework\u2014which applies an initial flat 5% royalty rate on newly drilled wells until payout\u2014support project economics.",
     "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "In Ecuador, we have entered into investment agreements with the Ecuadorian government in respect of three of our five Blocks and are in the process of finalizing an additional investment agreement in connection with a recently acquired Perico Block.",
+     "These agreements are intended to provide certain legal and fiscal stability protections, including stabilization of the applicable tax regime and access to international arbitration mechanisms.",
+     "Under this system, producers initially pay a flat 5% royalty rate until cumulative revenues equal standardized well drilling and completion costs, known as the \"C* cost allowance.\""
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2].",
+    "claim": "Geographic concentration threatens performance because four Colombian fields\u2014Acordionero, Costayaco, Moqueta, and Cohembi\u2014generated 49% of 2025 production and accounted for 51% of proved reserves.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Approximately half of our production comes from four fields located in Colombia.",
+     "For the year ended December 31, 2025, the Acordionero, Costayaco, Moqueta and Cohembi fields collectively generated 49% of our production and at December 31, 2025, these four fields accounted for 51% of our proved reserves."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2], Q3 2026 10-Q MD&A [P4], and Q3 2026 earnings release [P6].",
+    "claim": "Volatile oil and gas prices, widening heavy-oil differentials, and the Colombia-Ecuador border closure erode realized pricing, with alternative Putumayo transport routes adding approximately $3.7 million of discounts in the third quarter and $13.6 million year to date in 2026.",
+    "facts": [
+     "P2",
      "P4",
-     "P7",
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "expected net cash proceeds of approximately $315.0 million",
-     "Upon the completion of the Sale Transaction, the Company will continue to operate its assets in Canada and Azerbaijan."
+     "Future decreases in the prices of oil or natural gas, sustained low prices, periods of extended pricing volatility, and increasing borrowing costs may have a material adverse effect on our financial condition, the future results of our operations (including rendering existing projects unprofitable or requiring temporary suspension of fields), financing available to us, and quantities of reserves recoverable on an economic basis, as well as the market price for our securities.",
+     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed, which was significantly more expensive and resulted in additional discounts of approximately $3.7 million for the current quarter.",
+     "These discounts had an impact of approximately $3.7 million for the Quarter and $13.6 million year to date in 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q risk factors and the 8-K.",
-    "claim": "The sale is not certain. Completion depends on conditions, some outside the company's control, and either party can terminate in certain circumstances.",
+    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2] and 10-K Item 7 MD&A [P3].",
+    "claim": "Less developed South American storage and transport infrastructure and pipeline outages\u2014including soil-erosion outages on Ecuador's SOTE and OCP pipelines and Colombian export pipeline and Moqueta trunk-line shut-ins\u2014threaten production and market access.",
     "facts": [
-     "P5",
-     "P7"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "The Sale is subject to certain completion conditions and may not be completed as anticipated, or at all"
+     "The infrastructure in Colombia and Ecuador, including storage and transportation facilities, is less developed than that in North America and may be insufficient for our needs at commercially acceptable terms in the localities in which we operate.",
+     "Oil production in Ecuador has been impacted by outages experienced by the nation\u2019s two major pipelines (the Sistema de Oleoductos Trans Ecuadoriano (\u201cSOTE\u201d) and the Oleoducto de Crudos Pesados (\u201cOCP\u201d) pipelines) caused by physical damage from significant soil erosion in areas along the Coca river.",
+     "Our 2025 average production NAR was 38,443 BOEPD, an increase from 27,890 BOEPD in 2024 as a result of positive exploration drilling results in Ecuador, full year production from the Canadian operations, partially offset by lower production in the Acordionero and Costayaco fields as a result of export pipeline disruptions and trunk line repairs at the Moqueta field which resulted in the field being shut-in during the third quarter of 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release and the 10-K.",
-    "claim": "The retained Canadian business is shrinking through disposals. Q3 2026 working-interest production was 12,852 BOEPD against 16,112 in Q3 2025, after the sale of the Lodgepole area.",
+    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2] and 10-K Item 7 MD&A [P3].",
+    "claim": "Security, social, and sovereign risks threaten operations across jurisdictions, including guerrilla pipeline attacks, illegal blockades, community consultation lawsuits, potential regulatory or contract interference in Colombia, Ecuador, and Azerbaijan, and temporary levies such as Colombia's 1% crude oil excise tax in 2025.",
     "facts": [
-     "P6",
-     "P1"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "the sale of the Lodgepole area in Canada in June 2026"
+     "Oil pipelines have historically been primary targets of terrorist activity in Colombia.",
+     "Notwithstanding our compliance with these requirements, we may be sued by such communities through a writ for protection of tutela in the Colombian courts for enhanced consultation, potentially leading to increased costs, operational delays and other impacts.",
+     "In February 2025, the Colombian government introduced a temporary 1% excise tax on the first sale or export of crude oil pursuant to a declared state of internal emergency, effective through December 31, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A. The risk is described in the risk factors.",
-    "claim": "Proved reserves fell 17% in 2025 to 111.6 MMBOE, so replacing reserves is a named threat to the company's position.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "As of December 31, 2025, we had estimated proved reserves NAR of 111.6 MMBOE, a 17% decrease from the prior year"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Political, social and security conditions in Colombia and Ecuador are named threats, including possible tax, royalty or contract changes.",
+    "basis": "Stated directly in 10-K Item 1A Risk Factors [P2].",
+    "claim": "Canadian assets face threats from sour gas concentrations requiring well shut-ins, fresh water shortages and withdrawal license limits, seasonal spring-thaw and wildlife access restrictions, Crown lease expiry risks, and potential Indigenous title or stakeholder opposition.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Both Colombia and Ecuador may experience future political and economic instability."
+     "If a well encounters a high concentration of sour gas it would have to be shut-in due to the lack of existing sour gas handling infrastructure.",
+     "Drought and low water levels could impact the year-round availability and associated costs of fresh water for our Canadian operations such as drilling fluid, completions fluid and power or hydrogen plant cooling water.",
+     "Claims of Indigenous peoples and protests and demonstrations pertaining to Aboriginal rights and title may disrupt or delay third-party operations or new development on our Canadian properties.",
+     "Permanent restrictions imposed to protect endangered species could prohibit drilling in certain areas or require the implementation of expensive mitigation measures."
     ],
     "support": "supported"
    },
    {
-    "basis": "Taken from the screener row. The price as-of zone is not stated.",
-    "claim": "The market capitalisation shown by the screener is small: 324805079 at a price of 9.18, as of 2026-11-16.",
+    "basis": "Stated directly in 10-K Item 1 [P1], 10-K Item 1A [P2], and Q3 2026 10-Q MD&A [P4].",
+    "claim": "Natural reservoir decline, dry exploration wells, and asset divestitures threaten volume replacement\u2014with third-quarter 2026 NAR production down 13% year-over-year to 31,390 BOEPD\u2014while non-operated joint venture interests limit day-to-day operational control.",
     "facts": [
-     "S0"
+     "P1",
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "marketCap: 324805079"
+     "The value of our securities and our ability to raise capital will be adversely impacted if we are not able to replace our reserves that are depleted by production.",
+     "In the areas where the Company operates as non-operating partner it may have limited control over the day-to-day management or operations of these assets.",
+     "As at December 31, 2025, of the exploration and development wells drilled, sixteen were producing, two were service wells, one well in the Suroriente Block was in-progress and three wells in the Llanos-85 Block, the Alea 1848-A Block and the Suroriente Block in Colombia were dry.",
+     "NAR production for the third quarter of 2026 decreased by 13% to 31,390 BOEPD, compared to 35,962 BOEPD in the third quarter of 2025, primarily due to lower production in Colombia, higher in-kind royalties Ecuador driven by higher oil prices and asset sales in Canada and decreased by 2% from 31,990 BOEPD in the prior quarter primarily due to sale of the Lodgepole area in Canada and lower production in Colombia, partially offset by lower in-kind royalties in Ecuador"
     ],
-    "support": "number_not_listed"
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated directly in Q3 2026 10-Q Part II Item 1A Risk Factors [P5].",
+    "claim": "The pending Sale creates execution and transition threats, including regulatory approval risk in Colombia and Ecuador, counterparty contract deferrals to competitors, heightened turnover among key Retained Business personnel, and unrecouped costs or worse alternatives if the Sale fails.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The completion of the Sale is subject to a number of conditions, certain of which are outside of control of Gran Tierra and Purchaser, including certain regulatory approvals in Colombia and Ecuador.",
+     "Any change, delay or deferral of those decisions by our customers, suppliers, joint venture partners and other counterparties could negatively impact the business, operations and prospects of Gran Tierra, regardless of whether the Sale is ultimately completed.",
+     "As a result of the Sale, we may experience higher employee turnover and finding qualified replacements may be more difficult.",
+     "An alternative transaction, if available, may yield lower consideration or value than the Sale, be on less favorable terms and conditions than those contained in the Share Purchase Agreement and involve significant delay."
+    ],
+    "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in the cited items",
-    "claim": "Liquidity: cash and cash equivalents were 141,077 (table in thousands) at the latest quarter end, up from 82,931 at the prior year-end. The company also reported about $53 Million of undrawn credit facility availability.",
+    "basis": "Stated directly in [P6].",
+    "claim": "As of September 30, 2026, Gran Tierra held $141 million in cash on hand and approximately $53 million in undrawn availability under its Canadian revolving credit facility.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As of September 30, 2026, the Company had a cash balance of $141 million, total gross debt of $591 million and net debt3,4 of $450 million.",
+     "In addition to the $141 million cash on hand as of September 30, 2026, the Company has approximately $53 million in undrawn availability under its Canadian revolving credit facility."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F3] and [P6].",
+    "claim": "The $141 million cash balance as of September 30, 2026 includes the $50 million deposit received on the pending sale of the Colombian and Ecuadorian oil business, while total cash, cash equivalents and restricted cash and cash equivalents stood at $ 150,915 (table in thousands).",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Of the expected net cash proceeds, approximately $250 million is payable in cash, including the $50 million deposit received during the Quarter, which is included in the $141 million cash balance, and the remaining $65 million is payable under an unsecured note 364 days after closing.",
+     "Cash and cash equivalents and restricted cash and cash equivalents, end of period (Note 13) | $ 150,915 | $ 58,178"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F1].",
+    "claim": "At September 30, 2026, total current liabilities of 581,123 (table in thousands) exceeded total current assets of 265,836 (table in thousands), widening from 355,692 and 213,527 (table in thousands) at December 31, 2025 as accounts payable, accrued liabilities and other rose from 314,005 to 444,757 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total Current Assets | 265,836 | 213,527",
+     "Total Current Liabilities | 581,123 | 355,692",
+     "Accounts payable, accrued liabilities and other (Notes 6 and 7) | 444,757 | 314,005"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F1] and [P6].",
+    "claim": "As of September 30, 2026, total gross debt was $591 million and net debt was $450 million (based on $591 million outstanding of Senior Notes less $141 million of cash and cash equivalents), carried on the balance sheet as 45,980 in current portion of long-term debt and 542,951 in long-term debt (table in thousands), down from 21,212 and 686,521 (table in thousands) at December 31, 2025.",
     "facts": [
      "F1",
      "P6"
     ],
     "quotes": [
-     "Ended the Quarter with $141 Million of Cash and Approximately $53 Million of Undrawn Credit Facility Availability"
+     "As of September 30, 2026, the Company had a cash balance of $141 million, total gross debt of $591 million and net debt3,4 of $450 million.",
+     "4 Net debt is based on $591 million outstanding of Senior Notes less $141 million of cash and cash equivalents as at September 30, 2026.",
+     "Current portion of long-term debt (Notes 6 and 12) | 45,980 | 21,212",
+     "Long-term debt (Notes 6 and 12) | 542,951 | 686,521"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the balance sheet; the link to near-term cash calls is inferred from the current classification",
-    "claim": "Working capital is negative: total current liabilities of 581,123 (table in thousands) exceed total current assets of 265,836. Current liabilities include accounts payable, accrued liabilities and other of 444,757 (314,005 at the prior year-end), the current portion of long-term debt of 45,980, a current derivatives liability of 39,477 and a current equity compensation award liability of 33,107.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet",
-    "claim": "Leverage is high relative to the equity base. Long-term debt is 542,951 (table in thousands) plus a current portion of 45,980. Total shareholders' equity fell to 90,204 from 228,744 at the prior year-end, and the accumulated deficit is (1,189,659).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "balance-sheet figures are stated; the characterisation as financing-like is inferred",
-    "claim": "A customer advance of 192,548 (table in thousands) is carried as a long-term liability, up from 115,909 at the prior year-end. It is a further financing-like obligation outside the debt lines. The evidence does not give its repayment terms.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited statements; the characterisation is inferred",
-    "claim": "Earnings do not cover the financing cost on a net basis. For the nine months, net loss was (136,726) (table in thousands) versus (51,971) a year earlier, and interest expense was 98,229 versus 73,048. Adjusted EBITDA, a non-GAAP measure, was 227,102 versus 231,183.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement",
-    "claim": "Operating cash flow for the nine months was 256,706 (table in thousands) versus 156,056 a year earlier, while additions to property, plant and equipment fell to (148,110) from (218,155).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated; the repeatability point is inferred",
-    "claim": "The quality of operating cash flow is weaker than the headline. The net change in assets and liabilities contributed 138,518 (table in thousands) versus 9,867 a year earlier, which is more than half of 256,706 of operating cash flow. Funds flow from operations, a non-GAAP measure before working capital, was 134,752 versus 150,935.",
+    "basis": "Stated directly in [F3] and [P6].",
+    "claim": "During the nine months ended September 30, 2026, Gran Tierra had Senior Notes repayments of (125,000) and Senior Notes repurchases of (21,569) (table in thousands), retiring $24.2 million in face value of its 9.75% Senior Secured Amortizing Notes due 2031 at an 11% discount.",
     "facts": [
      "F3",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Cash generation weakened in the third quarter. Operating cash flow was 26,558 (in thousands), against 48,149 a year earlier and 57,414 in the prior quarter. Funds flow from operations was 31,640 against 60,289 in the prior quarter. Free cash flow, a non-GAAP measure, was 980.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "compared to the second quarter, lower realized prices in South America reduced cash flow by approximately $17 million, net of lower royalties"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated; the mechanism is inferred from the Brent price move reported in P4",
-    "claim": "The nine-month net loss includes large non-cash and non-operating items. Derivative instruments loss was 105,774 (table in thousands) versus a gain of (10,499) a year earlier, of which the unrealized loss was 42,455. Stock-based compensation expense was 46,384, and a current derivatives liability of 39,477 now sits on the balance sheet.",
-    "facts": [
-     "F2",
-     "F3",
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement; the link to the debt reduction is inferred",
-    "claim": "Cash flow was supported by one-off sale items, and debt was cut. Investing included proceeds on disposition of property, plant and equipment of 57,944 (table in thousands) and a deposit of 50,000 on the sale of the Colombia and Ecuador business. Financing used 161,689, including repayment of Senior Notes of (125,000) and re-purchase of Senior Notes of (21,569).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Debt falling due is addressed through the planned sale of the Colombia and Ecuador business. Closing conditions require redemption of the 7.750% Senior Notes due 2027. The purchaser is to assume the 9.500% notes due 2029, the 9.750% notes due 2031 and the prepayment facility.",
-    "facts": [
-     "P8",
-     "P4"
-    ],
-    "quotes": [
-     "the redemption of all of the Company\u2019s outstanding 7.750% Senior Notes due 2027",
-     "including the assumption of our 2029 and 2031 Senior Notes and the Prepayment Agreement facility"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Expected sale proceeds are modest relative to the headline value. Net cash proceeds are expected at approximately US$315 million, of which approximately US$250 million is payable on closing and approximately US$65 million 364 days thereafter. Management expects to be debt-free on closing.",
-    "facts": [
-     "P7",
      "P6"
     ],
     "quotes": [
-     "Gran Tierra expects to receive total net cash proceeds from the Sale of approximately US$315 million, of which approximately US$250 million is payable on closing and approximately US$65 million is payable 364 days thereafter."
+     "Repayment of Senior Notes (Note 6) | (125,000) | (24,828)",
+     "Re-purchase of Senior Notes (Note 6) | (21,569) | (1,712)",
+     "During the nine months ended September 30, 2026, Gran Tierra repurchased $24.2 million in face value of the Company\u2019s 9.75% Senior Secured Amortizing Notes due 2031 (the \u201c2031 Notes\u201d) at a discount of 11% to the face value of the repurchased 2031 Notes."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Refinancing depends on the sale closing. Remaining conditions include Colombian and Ecuadorian regulatory approvals, and either party has termination rights. Stockholders have already approved the sale.",
+    "basis": "Stated directly in [F1] and [F2].",
+    "claim": "Total shareholders' equity decreased from 228,744 at December 31, 2025 to 90,204 at September 30, 2026 as the deficit widened from (1,052,933) to (1,189,659) (table in thousands), while long-term customer advance obligations rose from 115,909 to 192,548 (table in thousands) and nine-month interest expense reached 98,229 (table in thousands).",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "Total Shareholders\u2019 Equity | 90,204 | 228,744",
+     "Deficit | (1,189,659) | (1,052,933)",
+     "Customer advance (Note 7) | 192,548 | 115,909",
+     "Interest expense (Note 6) | 23,878 | 25,447 | 98,229 | 73,048"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F3], [P4], and [P6].",
+    "claim": "For the nine months ended September 30, 2026, Gran Tierra generated 256,706 in net cash provided by operating activities (table in thousands), $134,752 in funds flow from operations (table in thousands), and $4,424 in free cash flow (table in thousands) after $130,328 in capital expenditures before changes in working capital (table in thousands).",
+    "facts": [
+     "F3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 256,706 | 156,056",
+     "Funds Flow from Operations(2) | $31,640 | $41,685 | (24) | $60,289 | $134,752 | $150,935 | (11)",
+     "Capital Expenditures (before changes in working capital) | $30,660 | $57,340 | (47) | $54,309 | $130,328 | $203,237 | (36)",
+     "Free Cash Flow3 | $980 | $(15,655) | $5,980 | $4,424 | $(52,302)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F3]; reliance on working capital inflows is inferred from comparing net change in operating assets and liabilities to total net cash provided by operating activities.",
+    "claim": "Despite a nine-month net loss of $ (136,726) (table in thousands), operating cash flow of 256,706 (table in thousands) was heavily supported by 138,518 from net change in operating assets and liabilities (table in thousands) along with non-cash charges including 196,599 in depletion, depreciation and accretion, 42,455 in unrealized derivative losses, 16,591 in non-cash interest expense, and 14,749 in amortization of debt issuance costs (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net loss | $ (136,726) | $ (51,971)",
+     "Net cash provided by operating activities | 256,706 | 156,056",
+     "Net change in assets and liabilities from operating activities (Note 13) | 138,518 | 9,867",
+     "Depletion, depreciation and accretion (Note 5) | 196,599 | 205,818",
+     "Unrealized derivative instruments loss (gain) (Note 12) | 42,455 | (964)",
+     "Non-cash interest expense | 16,591 | 0",
+     "Amortization of debt issuance costs (Note 6) | 14,749 | 12,184"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P6].",
+    "claim": "In the third quarter of 2026, net cash provided by operating activities fell 54% from the second quarter of 2026 and 45% year-over-year to $27 million ($26,558 in table in thousands), funds flow from operations dropped 48% sequentially to $32 million, and free cash flow fell to $1 million ($980 in table in thousands) even as capital expenditures were reduced to $31 million with no wells drilled.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities was $27 million ($0.75 per share1), down 54% from the Prior Quarter and down 45% from the third quarter of 2025.",
+     "Funds flow from operations3 was $32 million ($0.89 per share1), down 48% from the Prior Quarter and down 24% from the third quarter of 2025.",
+     "During the Quarter, the Company generated free cash flow3 of approximately $1 million, compared to $6 million in the Prior Quarter and negative free cash flow3 of $16 million reported in the third quarter of 2025.",
+     "Capital expenditures of $31 million were lower than the $54 million in the Prior Quarter and lower than the $57 million in the third quarter of 2025, as the Company did not drill any wells during the Quarter.",
+     "Net Cash Provided by Operating Activities | $26,558 | $48,149 | $57,414 | $256,706 | $156,056",
+     "Free Cash Flow3 | $980 | $(15,655) | $5,980 | $4,424 | $(52,302)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F3] and [P3].",
+    "claim": "Nine-month net cash used in investing activities of (39,583) reflected (148,110) in property, plant and equipment additions partially offset by 57,944 in asset disposition proceeds and the 50,000 sale deposit (table in thousands), following negative free cash flow of $(78,515) in 2025 when capital expenditures of $256,277 exceeded funds flow from operations of $177,762 (table in thousands).",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Additions to property, plant and equipment (Notes 5 and 13) | (148,110) | (218,155)",
+     "Proceeds on disposition of property, plant and equipment (Note 5) | 57,944 | 7,500",
+     "Deposit on sale of oil business in Colombia and Ecuador (Note 5) | 50,000 | 0",
+     "Net cash used in investing activities | (39,583) | (210,655)",
+     "Funds flow from operations (non-GAAP) | $177,762 | $224,941 | $276,785 | $26,827 | $44,129 | $41,685",
+     "Capital expenditures | $256,277 | $248,103 | $218,882 | $53,040 | $78,579 | $57,340",
+     "Free cash flow (non-GAAP) | $(78,515) | $(23,162) | $57,903 | $(26,213) | $(34,450) | $(15,655)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F1] and [P6].",
+    "claim": "Of the company's debt, 45,980 (table in thousands) is due as a current portion of long-term debt as of September 30, 2026, while its debt instruments include the 9.50% Senior Secured Amortizing Notes due 2029, the 9.75% Senior Secured Amortizing Notes due 2031, and an oil prepayment agreement facility.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Current portion of long-term debt (Notes 6 and 12) | 45,980 | 21,212",
+     "On August 5, 2026, Gran Tierra entered into a definitive Share Sale and Purchase Agreement (the \u201cShare Purchase Agreement\u201d) to sell its Colombian and Ecuadorian businesses (the \u201cSale\u201d) to Maurel & Prom for total consideration of approximately $1.33 billion, subject to adjustment, including the assumption of its 2031 Notes, its 9.50% Senior Secured Amortizing Notes due 2029 and the facility under its oil prepayment agreement.",
+     "During the nine months ended September 30, 2026, Gran Tierra repurchased $24.2 million in face value of the Company\u2019s 9.75% Senior Secured Amortizing Notes due 2031 (the \u201c2031 Notes\u201d) at a discount of 11% to the face value of the repurchased 2031 Notes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P6].",
+    "claim": "Gran Tierra intends to meet and eliminate its debt through the Maurel & Prom sale for approximately $1.33 billion in total consideration\u2014under which the buyer assumes the 2029 Notes, 2031 Notes, and oil prepayment agreement facility\u2014and expects approximately $315 million in net cash proceeds ($250 million in cash including the $50 million deposit, plus $65 million under an unsecured note due 364 days after closing) and to be debt-free on closing.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On August 5, 2026, Gran Tierra entered into a definitive Share Sale and Purchase Agreement (the \u201cShare Purchase Agreement\u201d) to sell its Colombian and Ecuadorian businesses (the \u201cSale\u201d) to Maurel & Prom for total consideration of approximately $1.33 billion, subject to adjustment, including the assumption of its 2031 Notes, its 9.50% Senior Secured Amortizing Notes due 2029 and the facility under its oil prepayment agreement.",
+     "Expected net cash proceeds are approximately $315 million.",
+     "Of the expected net cash proceeds, approximately $250 million is payable in cash, including the $50 million deposit received during the Quarter, which is included in the $141 million cash balance, and the remaining $65 million is payable under an unsecured note 364 days after closing.",
+     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P5] and [P6].",
+    "claim": "Although Gran Tierra secured 2031 Note holder consent on September 22, 2026 and stockholder approval on October 9, 2026 and targets closing before year-end, completion remains subject to regulatory approvals in Colombia and Ecuador and termination rights including on a material adverse change, leaving $141 million in cash and approximately $53 million in undrawn Canadian credit facility availability as the stated liquidity cushion.",
     "facts": [
      "P5",
-     "P7",
      "P6"
     ],
     "quotes": [
-     "There is no certainty, nor can we provide any assurance, that these conditions will be satisfied or, if satisfied, when they will be satisfied."
+     "On September 22, 2026, following receipt of the requisite consents from holders of the 2031 Notes, the Company executed a supplemental indenture in connection with the Sale, which becomes operative on closing.",
+     "On October 9, 2026, Gran Tierra\u2019s stockholders approved the Sale.",
+     "Closing remains subject to the remaining consents, regulatory approvals in Colombia and Ecuador and other closing conditions, and the Company continues to target closing before the end of the year.",
+     "The completion of the Sale is subject to a number of conditions, certain of which are outside of control of Gran Tierra and Purchaser, including certain regulatory approvals in Colombia and Ecuador.",
+     "For instance, Purchaser has the right, in certain circumstances, to terminate the Share Purchase Agreement following delivery of a notice regarding the occurrence of a material adverse change.",
+     "In addition to the $141 million cash on hand as of September 30, 2026, the Company has approximately $53 million in undrawn availability under its Canadian revolving credit facility."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the Q3 10-Q MD&A (P4) and the income statement (F2).",
-    "claim": "Higher benchmark oil prices are the clearest driver of top-line growth: third-quarter sales rose to $168.3 million, up 13% on the year-earlier quarter, with Brent averaging $91.29 per bbl. Nine-month sales were 527,544 against 466,784 (table in thousands).",
+    "basis": "stated in the cited item (10-K Item 7 MD&A)",
+    "claim": "Full-year production from acquired Canadian operations and exploration drilling in Ecuador drove 2025 production NAR up 38% to 38,443 BOEPD from 27,890 BOEPD in 2024.",
     "facts": [
-     "P4",
-     "F2"
+     "P3"
     ],
     "quotes": [
-     "due to increase in benchmark oil prices"
+     "Oil, natural gas and NGL production NAR for the year ended December 31, 2025, increased by 38% to 38,443 BOEPD compared to 27,890 BOEPD in 2024.",
+     "The increase in production was a result of positive exploration well drilling in Ecuador, full-year production from the Canadian operations acquired on October 31, 2024, partially offset by lower production in the Acordionero and Costayaco fields as a result of export pipeline disruptions, and trunk line repairs in the Moqueta field which resulted in the field being shut-in during the third quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Differentials are stated in P4. The royalty percentages are in the P6 table. The link to growth is inferred.",
-    "claim": "For price-led growth to continue, Brent must stay high and South American quality and transportation discounts must not widen further. Q3 discounts were $18.09 per boe against $10.76 a year earlier, and royalties took 21% of working-interest production against 16%.",
+    "basis": "stated in the cited items (10-K Item 7 MD&A and Q3 2026 earnings release)",
+    "claim": "Exploration results in Ecuador and the fourth-quarter 2025 acquisition of the Perico and Espejo Blocks drove Ecuador WI production before royalties to 7,747 boe/d in the third quarter of 2026 from 3,872 boe/d in the third quarter of 2025.",
     "facts": [
-     "P4",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Quality and transportation discounts per boe in South America were $18.09, an increase from $10.76 in the third quarter of 2025."
+     "During the fourth quarter of 2025, we completed the acquisition for 100% working interest of Perico and Espejo Blocks in the Oriente Basin in Ecuador for cash consideration of $8.3 million, deferred payment of $3.1 million and $1.1 million contingent consideration payable upon achieving 2.0 million barrels of crude oil production in the Perico Block",
+     "the Charapa and Chanangue Blocks and additional production from the Perico Block in Ecuador acquired in December 2025.",
+     "WI Production Before Royalties | 7,747 | 3,872 | 7,993 | 8,162 | 4,166"
     ],
     "support": "supported"
    },
    {
-    "basis": "Production and royalty figures are in the P6 table. The dependence on royalties is stated in P4. The condition is inferred.",
-    "claim": "Ecuador is a volume-growth driver: working-interest production was 7,747 boe/d in Q3 against 3,872 boe/d a year earlier. To continue, production must keep rising faster than in-kind royalties, which took 41% of working-interest production against 33%.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "higher in-kind royalties Ecuador driven by higher oil prices"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the cash flow statement. The reversal risk is inferred.",
-    "claim": "Operating cash generation improved: nine-month net cash provided by operating activities was 256,706 against 156,056, while additions to property, plant and equipment fell to 148,110 from 218,155 (table in thousands). For this to continue, the working-capital inflow that helped must not reverse.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 (non-GAAP measures).",
-    "claim": "Underlying cash earnings did not grow: Q3 funds flow from operations decreased to $31.6 million from $41.7 million, and Q3 adjusted EBITDA was $68.1 million against $69.0 million. Growth in cash earnings needs the sales gain to outrun higher discounts, royalties and lower volumes.",
+    "basis": "stated in the cited item (10-Q Part I Item 2 MD&A)",
+    "claim": "Third-quarter 2026 oil, natural gas and NGL sales rose 13% to $168.3 million from the third quarter of 2025 primarily due to a 34% increase in Brent oil price to $91.29 per bbl.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "Funds flow from operations(2) decreased to $31.6 million compared to $41.7 million in the third quarter of 2025"
+     "Oil, natural gas and NGL sales for the third quarter of 2026 increased by 13% to $168.3 million, compared to the third quarter of 2025, due to increase in benchmark oil prices, partially offset by lower sales volumes in Colombia and Canada and higher quality and transportation discounts in Colombia associated with using alternative transportation routes for Putumayo production as the Colombia and Ecuador border remained closed.",
+     "Brent oil price averaged $91.29 per bbl during the quarter, an increase of 34% from the comparative period of 2025, and a decrease of 6% from the prior quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4.",
-    "claim": "Q3 volumes fell: NAR production was 31,390 BOEPD against 35,962 BOEPD, down 13%. For growth to resume, production must stabilize after the Canadian asset sales and lower Colombian output.",
+    "basis": "stated in the cited items (10-K Item 1A Risk Factors and 10-Q Part I Item 2 MD&A)",
+    "claim": "For price-driven revenue growth to continue, benchmark oil and gas prices must avoid sustained declines and quality and transportation differentials must not widen further beyond the $3.7 million border-closure discount impact in the third quarter of 2026.",
     "facts": [
+     "P2",
      "P4"
     ],
     "quotes": [
-     "NAR production for the third quarter of 2026 decreased by 13% to 31,390 BOEPD, compared to 35,962 BOEPD in the third quarter of 2025"
+     "Future decreases in the prices of oil or natural gas, sustained low prices, periods of extended pricing volatility, and increasing borrowing costs may have a material adverse effect on our financial condition, the future results of our operations (including rendering existing projects unprofitable or requiring temporary suspension of fields), financing available to us, and quantities of reserves recoverable on an economic basis, as well as the market price for our securities.",
+     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed, which was significantly more expensive and resulted in additional discounts of approximately $3.7 million for the current quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4, P5, P7 and P8.",
-    "claim": "The sale of the Colombian and Ecuadorian businesses is the central transaction: total consideration is $1.33 billion including debt assumption, with expected net cash proceeds of about $315.0 million. For it to deliver, closing must occur, which still needs regulatory approvals in Colombia and Ecuador.",
+    "basis": "stated in the cited item (Q3 2026 earnings release)",
+    "claim": "Management plans to drive post-sale growth by divesting its Colombia and Ecuador businesses for approximately $1.33 billion, exiting debt-free with approximately $315 million in expected net cash proceeds to build its Canada and Azerbaijan businesses.",
     "facts": [
-     "P8",
-     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On August 5, 2026, Gran Tierra entered into a definitive Share Sale and Purchase Agreement (the \u201cShare Purchase Agreement\u201d) to sell its Colombian and Ecuadorian businesses (the \u201cSale\u201d) to Maurel & Prom for total consideration of approximately $1.33 billion, subject to adjustment, including the assumption of its 2031 Notes, its 9.50% Senior Secured Amortizing Notes due 2029 and the facility under its oil prepayment agreement.",
+     "Expected net cash proceeds are approximately $315 million.",
+     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-Q Part II Item 1A Risk Factors and Q3 2026 earnings release)",
+    "claim": "For the Sale-enabled growth pivot to proceed, Gran Tierra must obtain remaining consents and regulatory approvals in Colombia and Ecuador, avoid a material adverse change termination, and retain key personnel for the Retained Business.",
+    "facts": [
      "P5",
-     "P7"
+     "P6"
     ],
     "quotes": [
      "The completion of the Sale is subject to a number of conditions, certain of which are outside of control of Gran Tierra and Purchaser, including certain regulatory approvals in Colombia and Ecuador.",
-     "Gran Tierra continues to target closing of the Sale on or about December 31, 2026."
+     "For instance, Purchaser has the right, in certain circumstances, to terminate the Share Purchase Agreement following delivery of a notice regarding the occurrence of a material adverse change.",
+     "Closing remains subject to the remaining consents, regulatory approvals in Colombia and Ecuador and other closing conditions, and the Company continues to target closing before the end of the year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6 and P7 as management expectation.",
-    "claim": "Deleveraging and capital return depend on the sale closing. Management expects to be debt-free on closing, with flexibility to return capital and build Canada and Azerbaijan. Any share repurchase is conditional on completion of the Sale.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan.",
-     "Any share repurchase is conditional on completion of the Sale."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the balance sheet and cash flow statement. The strategy quote is from the 10-K.",
-    "claim": "Debt is already being reduced: nine-month repayment of Senior Notes was 125,000, and long-term debt fell to 542,951 from 686,521 (tables in thousands). This continues only if cash generation holds, and the current portion of long-term debt rose to 45,980 from 21,212.",
-    "facts": [
-     "F3",
-     "F1",
-     "P1"
-    ],
-    "quotes": [
-     "Capital allocation is anchored in generating sustainable free cash flow and deploying that cash toward meaningful debt reduction."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Volumes and netback are stated in P6 and P4. The condition is inferred from the budget in P1.",
-    "claim": "Retained Canada is the base for future growth but is shrinking in volume: Canadian working-interest production was 12,852 boe/d against 16,112 boe/d after area sales, while Canadian operating netback was $12,697 against $11,922 (table in thousands). Growth there needs capital to be deployed against a 2026 Canadian capital budget of 35 - 45 million.",
-    "facts": [
-     "P6",
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "the sale of the Lodgepole area in Canada in June 2026"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Ratification is stated in P6. The conditions are inferred.",
-    "claim": "Azerbaijan is a stated future growth option: the Exploration, Development and Production Sharing Agreement with SOCAR was formally ratified. Continuing requires funding and execution, and the packet gives no production, capital or timing for it.",
+    "basis": "stated in the cited item (Q3 2026 earnings release)",
+    "claim": "Gran Tierra is advancing a new onshore growth leg in Azerbaijan as operator with a 65% working interest under its ratified EDPSA with SOCAR after completing an airborne dFTG survey.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Announced the Formal Ratification of its Exploration, Development and Production Sharing Agreement with SOCAR in Azerbaijan"
+     "On October 5, 2026, Azerbaijan\u2019s Parliament (the Milli Majlis) ratified Gran Tierra\u2019s EDPSA for the onshore Guba-Khazaryani region.",
+     "Once processed and integrated with existing seismic and exploratory well data, the dFTG data is expected to help define the geometry of sedimentary basins and fault-related structures that may trap oil and gas, guiding the selection of future seismic acquisition areas and drilling locations.",
+     "The Company is the operator of, and holds a 65% working interest in, an onshore exploration, development and production sharing agreement in Azerbaijan."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the income statement, balance sheet and cash flow statement. The link to growth capacity is inferred.",
-    "claim": "Financial capacity is a condition for any growth: the nine-month net loss was (136,726), including a derivative instruments loss of 105,774, and shareholders' equity fell to 90,204 from 228,744 (tables in thousands).",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "For Azerbaijan and ongoing operations to deliver sustainable growth, exploration and development must economically replace declining reserves and avoid dry or unprofitable wells.",
     "facts": [
-     "F2",
-     "F1"
+     "P2"
     ],
-    "quotes": [],
+    "quotes": [
+     "Our future success depends on our ability to find, develop and acquire additional oil and natural gas reserves that are economically recoverable.",
+     "Producing oil and natural gas reservoirs generally are characterized by declining production rates that vary depending upon reservoir characteristics and other factors.",
+     "Future oil and natural gas exploration may involve unprofitable efforts, not only from dry wells, but from wells that are productive but do not produce sufficient net revenues to return a profit after drilling, operating and other costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1 Business and Q3 2026 earnings release)",
+    "claim": "Gran Tierra's 2026 base capital program of $120 million to $160 million allocates over 90% to development, including approximately 20% of development to facilities intended to support future production growth and enhance recovery factors.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Our base capital program for 2026 is $120 million to $160 million, with over 90% attributed to development activities.",
+     "Based on the mid-point of the 2026 guidance, approximately 20% of the development activities included in the 2026 capital program are expected to be directed to facilities to support future production growth and enhance recovery factors.",
+     "Capital expenditures of $31 million were lower than the $54 million in the Prior Quarter and lower than the $57 million in the third quarter of 2025, as the Company did not drill any wells during the Quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1A Risk Factors and Q3 2026 earnings release)",
+    "claim": "For Canadian growth to continue as a core retained business, Gran Tierra must secure sufficient water licenses, meet Alberta lease tenure drilling deadlines, and manage sour gas, wildlife restrictions, and Indigenous or stakeholder approvals.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The surface water resources of some of the regions in Canada where we operate and aspire to operate may be insufficient for the full commercial-scale development of the region at a pace matching the industry's ambitions.",
+     "We also risk losing leases if they are not drilled and brought on to production within the terms of the relevant lease.",
+     "Seasonal restrictions may limit our ability to operate in protected areas and can intensify competition for drilling rigs, oilfield equipment, services, supplies and qualified personnel, which may lead to periodic shortages when drilling is allowed.",
+     "Upon completion of the Sale, the Company\u2019s operations will be focused on Canada and Azerbaijan, and the Company will continue to pursue additional new growth opportunities that would further strengthen the Company\u2019s portfolio."
+    ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the 8-K and repeated in the 10-Q MD&A",
-    "claim": "Gran Tierra signed a share sale agreement to sell its Colombian and Ecuadorian businesses to Maurel & Prom Andina for total consideration of $1.33 billion, including assumed debt. Closing is still subject to regulatory approvals and other conditions.",
-    "facts": [
-     "P8",
-     "P4"
-    ],
-    "quotes": [
-     "The total consideration to be paid by Purchaser in the Sale Transaction is $1.33 billion, which includes, among other things, cash, the assumption of Company debt and a prepayment facility and a note payable 364 days from the date the Share Purchase Agreement was executed, subject to adjustment as described in the Share Purchase Agreement."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 8-K press release",
-    "claim": "Stockholders approved the sale of the Colombian and Ecuadorian businesses. The company expects net cash proceeds of approximately US$315 million, and closing still needs regulatory approvals in Colombia and Ecuador.",
-    "facts": [
-     "P7",
-     "P6"
-    ],
-    "quotes": [
-     "Gran Tierra continues to target closing of the Sale on or about December 31, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release",
-    "claim": "Gran Tierra obtained the requisite noteholder consent for amendments to the indenture governing its 9.75% Senior Secured Amortizing Notes due 2031.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Obtained Requisite Consent for Amendments to the Indenture Governing its 9.75% Senior Secured Amortizing Notes due 2031"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A highlights, with the reconciliation tables placing the charge in the fourth quarter",
-    "claim": "The 2025 results included a non-cash ceiling test impairment in Colombia and Ecuador of $136.3 million.",
+    "basis": "stated in [P3]",
+    "claim": "Gran Tierra recorded a non-cash ceiling test asset impairment in Colombia and Ecuador of $136.3 million in 2025.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "a non-cash ceiling test impairment in Colombia and Ecuador of $136.3 million"
+     "Net loss in 2025 was $193.1 million or $5.45 per share basic and diluted, which included a non-cash ceiling test impairment in Colombia and Ecuador of $136.3 million, compared to net income of $3.2 million or $0.10 per share basic and diluted in 2024"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release and the 10-K",
-    "claim": "Gran Tierra sold the Lodgepole area in Canada, and divested its entire interest in Simonette after year-end 2025. Both sales reduced Canadian production.",
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra entered into a definitive Share Sale and Purchase Agreement to sell its Colombian and Ecuadorian businesses to Maurel & Prom for total consideration of approximately $1.33 billion and expected net cash proceeds of approximately $315 million.",
     "facts": [
-     "P6",
+     "P6"
+    ],
+    "quotes": [
+     "On August 5, 2026, Gran Tierra entered into a definitive Share Sale and Purchase Agreement (the \u201cShare Purchase Agreement\u201d) to sell its Colombian and Ecuadorian businesses (the \u201cSale\u201d) to Maurel & Prom for total consideration of approximately $1.33 billion, subject to adjustment, including the assumption of its 2031 Notes, its 9.50% Senior Secured Amortizing Notes due 2029 and the facility under its oil prepayment agreement.",
+     "Expected net cash proceeds are approximately $315 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Following receipt of requisite consents from holders of the 2031 Notes, Gran Tierra executed a supplemental indenture in connection with the Sale that becomes operative on closing.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On September 22, 2026, following receipt of the requisite consents from holders of the 2031 Notes, the Company executed a supplemental indenture in connection with the Sale, which becomes operative on closing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra's stockholders approved the sale of the Colombian and Ecuadorian businesses.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On October 9, 2026, Gran Tierra\u2019s stockholders approved the Sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra announced that it expects to use a portion of the net cash proceeds from the Sale to return capital to stockholders through a share repurchase conditional on completion of the Sale.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As previously announced, the Company expects to use a portion of the net cash proceeds from the Sale to return capital to stockholders through a share repurchase, the structure, size and terms of which will be determined by the Board of Directors and announced separately.",
+     "Any share repurchase is conditional on completion of the Sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra signed an Exploration, Development and Production Sharing Agreement with SOCAR in Azerbaijan, in which it is operator with a 65% working interest.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Gran Tierra signed the EDPSA with the State Oil Company of the Republic of Azerbaijan (\u201cSOCAR\u201d) on February 18, 2026.",
+     "The Company is the operator of, and holds a 65% working interest in, an onshore exploration, development and production sharing agreement in Azerbaijan."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Azerbaijan's Parliament ratified Gran Tierra's Exploration, Development and Production Sharing Agreement for the onshore Guba-Khazaryani region.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On October 5, 2026, Azerbaijan\u2019s Parliament (the Milli Majlis) ratified Gran Tierra\u2019s EDPSA for the onshore Guba-Khazaryani region."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1]",
+    "claim": "Gran Tierra divested its entire interest in the Simonette area in Canada.",
+    "facts": [
      "P1"
     ],
     "quotes": [
-     "the sale of the Lodgepole area in Canada in June 2026",
      "Subsequent to December 31, 2025, the entire interest in Simonette was divested."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release, which places the ratification after quarter end",
-    "claim": "The Exploration, Development and Production Sharing Agreement with SOCAR in Azerbaijan was formally ratified.",
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra sold the Lodgepole area in Canada.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The decrease from the Prior Quarter was primarily due to lower production from the Cohembi field in Colombia and the sale of the Lodgepole area in Canada in June 2026, partially offset by an increase in production from the Acordionero field in Colombia."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra repurchased $24.2 million in face value of its 9.75% Senior Secured Amortizing Notes due 2031 at a discount of 11%.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Announced the Formal Ratification of its Exploration, Development and Production Sharing Agreement with SOCAR in Azerbaijan"
+     "During the nine months ended September 30, 2026, Gran Tierra repurchased $24.2 million in face value of the Company\u2019s 9.75% Senior Secured Amortizing Notes due 2031 (the \u201c2031 Notes\u201d) at a discount of 11% to the face value of the repurchased 2031 Notes."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3]",
+    "claim": "Gran Tierra recorded a cash outflow for repayment of Senior Notes of (125,000) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repayment of Senior Notes (Note 6) | (125,000) | (24,828)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "Gran Tierra secured Brent price protection on 5,000 bbl per day of first quarter 2027 oil sales through physical sales arrangements with Trafigura, with a $95.00 per barrel floor and $111.00 per barrel ceiling.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Gran Tierra has secured price protection on 5,000 bbl per day of first quarter 2027 oil sales, through its physical sales arrangements with Trafigura.",
+     "The structure provides a floor of $95.00 per barrel and a ceiling of $111.00 per barrel, based on monthly average Brent prices."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4] and [P6]",
+    "claim": "Closure of the Colombia and Ecuador border required alternative transportation routes for Putumayo production, resulting in additional discounts of approximately $3.7 million in the third quarter and $13.6 million year to date.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed, which was significantly more expensive and resulted in additional discounts of approximately $3.7 million for the current quarter.",
+     "These discounts had an impact of approximately $3.7 million for the Quarter and $13.6 million year to date in 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "Gran Tierra completed the acquisition of a 100% working interest in the Perico and Espejo Blocks in Ecuador for $8.3 million cash, $3.1 million deferred payment, and $1.1 million contingent consideration.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During the fourth quarter of 2025, we completed the acquisition for 100% working interest of Perico and Espejo Blocks in the Oriente Basin in Ecuador for cash consideration of $8.3 million, deferred payment of $3.1 million and $1.1 million contingent consideration payable upon achieving 2.0 million barrels of crude oil production in the Perico Block"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "Gran Tierra repurchased 0.7 million shares of Common Stock in 2025 through its 2024 share repurchase program, representing about 2% of shares outstanding at year-end.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In 2025, we re-purchased 0.7 million shares of Common Stock through the 2024 share re-purchase program, representing about 2% of shares outstanding as of December 31, 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "The Colombian government introduced a temporary 1% excise tax on the first sale or export of crude oil, which the Colombian Constitutional Court upheld subject to a cap on total collections.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In February 2025, the Colombian government introduced a temporary 1% excise tax on the first sale or export of crude oil pursuant to a declared state of internal emergency, effective through December 31, 2025.",
+     "On October 16, 2025, the Colombian Constitutional Court upheld the validity of the emergency tax measures, including the excise tax on hydrocarbons, subject to a cap on total collections."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "Export pipeline disruptions lowered production in the Acordionero and Costayaco fields, and trunk line repairs caused the Moqueta field to be shut in during the third quarter of 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The increase in production was a result of positive exploration well drilling in Ecuador, full-year production from the Canadian operations acquired on October 31, 2024, partially offset by lower production in the Acordionero and Costayaco fields as a result of export pipeline disruptions, and trunk line repairs in the Moqueta field which resulted in the field being shut-in during the third quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "Oil production in Ecuador was impacted by outages on the SOTE and OCP pipelines caused by physical damage from soil erosion along the Coca river, before the pipelines were rerouted and returned to service.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Oil production in Ecuador has been impacted by outages experienced by the nation\u2019s two major pipelines (the Sistema de Oleoductos Trans Ecuadoriano (\u201cSOTE\u201d) and the Oleoducto de Crudos Pesados (\u201cOCP\u201d) pipelines) caused by physical damage from significant soil erosion in areas along the Coca river.",
+     "While these pipelines have now been rerouted and are back in service, there remains some risk to our ability to transport oil to market through these systems from future, unforeseen natural events that could again generate outages in the OCP and SOTE pipelines."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "Gran Tierra entered Canada through the acquisition of i3 Energy.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We entered Canada with the acquisition of i3 Energy which closed on October 31, 2024, and as a result, we only have two months of comparative data available for the corresponding period of 2024, and no comparative data available for 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P3]",
+    "claim": "Gran Tierra completed a 1-for-10 reverse stock split of its Common Stock.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On May 5, 2023, the Company completed 1-for-10 reverse stock split of the Company\u2019s Common Stock."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "stated in P5, P7 and P8",
-    "claim": "The sale of the Colombian and Ecuadorian businesses has not closed. It still needs regulatory approvals in Colombia and Ecuador and other conditions, and either party may terminate in certain circumstances, including after a material adverse change notice.",
+    "basis": "stated in P5 and P6",
+    "claim": "The approximately $1.33 billion sale of Gran Tierra's Colombia and Ecuador businesses faces regulatory and termination conditions that could delay or prevent closing.",
     "facts": [
      "P5",
-     "P7",
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "The Sale is subject to certain completion conditions and may not be completed as anticipated, or at all",
-     "Gran Tierra continues to target closing of the Sale on or about December 31, 2026."
+     "The completion of the Sale is subject to a number of conditions, certain of which are outside of control of Gran Tierra and Purchaser, including certain regulatory approvals in Colombia and Ecuador.",
+     "For instance, Purchaser has the right, in certain circumstances, to terminate the Share Purchase Agreement following delivery of a notice regarding the occurrence of a material adverse change.",
+     "On October 9, 2026, Gran Tierra\u2019s stockholders approved the Sale."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from the F1 and F3 figures and stated in P6",
-    "claim": "Current liabilities exceed current assets, and debt remains large while equity has fallen sharply, so the balance sheet depends on the sale or on continued operating cash flow.",
+    "basis": "stated in F1, F2, F3, and P6",
+    "claim": "Current liabilities of 581,123 exceed current assets of 265,836 alongside 542,951 in long-term debt and 45,980 in current debt (table in thousands), while nine-month net loss reached (136,726) (table in thousands).",
     "facts": [
      "F1",
+     "F2",
      "F3",
      "P6"
     ],
     "quotes": [
-     "Ended the Quarter with $141 Million of Cash and Approximately $53 Million of Undrawn Credit Facility Availability"
+     "Total Current Assets | 265,836 | 213,527",
+     "Total Current Liabilities | 581,123 | 355,692",
+     "NET LOSS | (42,415) | (19,950) | (136,726) | (51,971)",
+     "As of September 30, 2026, the Company had a cash balance of $141 million, total gross debt of $591 million and net debt3,4 of $450 million.",
+     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan."
     ],
     "support": "supported"
    },
    {
-    "basis": "inferred from P4 and P6 production data; the business scope is stated in P8",
-    "claim": "After the sale, the retained business is Canada plus a newly ratified Azerbaijan agreement, and the Canadian assets are shrinking through sales and lower production.",
+    "basis": "stated in P2, P6, and F2",
+    "claim": "Oil and gas price volatility and widening quality differentials reduced South American cash flow by approximately $17 million quarter-over-quarter, alongside a nine-month derivative instruments loss of 105,774 (table in thousands).",
     "facts": [
-     "P4",
+     "P2",
      "P6",
-     "P8"
+     "F2"
     ],
     "quotes": [
-     "Upon the completion of the Sale Transaction, the Company will continue to operate its assets in Canada and Azerbaijan."
+     "Future decreases in the prices of oil or natural gas, sustained low prices, periods of extended pricing volatility, and increasing borrowing costs may have a material adverse effect on our financial condition, the future results of our operations (including rendering existing projects unprofitable or requiring temporary suspension of fields), financing available to us, and quantities of reserves recoverable on an economic basis, as well as the market price for our securities.",
+     "Financially, compared to the second quarter, lower realized prices in South America reduced cash flow by approximately $17 million, net of lower royalties.",
+     "Derivative instruments loss (gain) (Note 12) | 29,228 | 2,066 | 105,774 | (10,499)",
+     "The structure provides a floor of $95.00 per barrel and a ceiling of $111.00 per barrel, based on monthly average Brent prices."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2, F3 and P4",
-    "claim": "Derivative losses and widening South American price discounts are hurting reported results, with nine-month net loss well above the prior year.",
+    "basis": "stated in P2, P4, and P6",
+    "claim": "Geographic concentration in four Colombian fields representing 49% of annual production and 51% of proved reserves, along with the Colombia and Ecuador border closure costing $13.6 million in year-to-date discounts, exposes operations to regional disruptions.",
     "facts": [
-     "F1",
-     "F2",
-     "P4"
+     "P2",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed"
+     "For the year ended December 31, 2025, the Acordionero, Costayaco, Moqueta and Cohembi fields collectively generated 49% of our production and at December 31, 2025, these four fields accounted for 51% of our proved reserves.",
+     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed, which was significantly more expensive and resulted in additional discounts of approximately $3.7 million for the current quarter.",
+     "These discounts had an impact of approximately $3.7 million for the Quarter and $13.6 million year to date in 2026.",
+     "While these pipelines have now been rerouted and are back in service, there remains some risk to our ability to transport oil to market through these systems from future, unforeseen natural events that could again generate outages in the OCP and SOTE pipelines."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, P3, P5, and P6",
+    "claim": "Changes to tax or royalty regimes such as Colombia's 1% temporary oil excise tax and Alberta's authority to alter crown royalties, along with permit restrictions and pending regulatory approvals, could raise costs or block development and transaction closing.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "The Government of Alberta has the power to unilaterally change the royalty charged or the conditions of renewal.",
+     "In February 2025, the Colombian government introduced a temporary 1% excise tax on the first sale or export of crude oil pursuant to a declared state of internal emergency, effective through December 31, 2025.",
+     "A substantial delay in obtaining the required regulatory approvals, or the imposition of unfavorable terms or conditions in connection with any such regulatory approvals, could delay completion and may adversely affect our business, financial condition or results of operations.",
+     "On October 5, 2026, Azerbaijan\u2019s Parliament (the Milli Majlis) ratified Gran Tierra\u2019s EDPSA for the onshore Guba-Khazaryani region."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, P3, and P6",
+    "claim": "Estimated proved reserves decreased by 17% to 111.6 MMBOE alongside a $136.3 million non-cash ceiling test impairment, highlighting risks from reserve depletion, dry holes, and Canadian sour gas or water constraints.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we had estimated proved reserves NAR of 111.6 MMBOE, a 17% decrease from the prior year, of which 57% were proved developed reserves and 71% were oil.",
+     "Net loss in 2025 was $193.1 million or $5.45 per share basic and diluted, which included a non-cash ceiling test impairment in Colombia and Ecuador of $136.3 million, compared to net income of $3.2 million or $0.10 per share basic and diluted in 2024",
+     "The value of our securities and our ability to raise capital will be adversely impacted if we are not able to replace our reserves that are depleted by production.",
+     "If a well encounters a high concentration of sour gas it would have to be shut-in due to the lack of existing sour gas handling infrastructure."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P5 and inferred as to pendency duration from P6",
+    "claim": "Uncertainty around the pending Sale could trigger stockholder litigation, counterparty contract deferrals, and executive or employee turnover that harm the Retained Business.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Transactions such as the Sale are often subject to lawsuits by stockholders.",
+     "As a result of the Sale, we may experience higher employee turnover and finding qualified replacements may be more difficult.",
+     "Any change, delay or deferral of those decisions by our customers, suppliers, joint venture partners and other counterparties could negatively impact the business, operations and prospects of Gran Tierra, regardless of whether the Sale is ultimately completed."
     ],
     "support": "supported"
    }
@@ -796,132 +1162,182 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Conditions and the target date are stated in the cited items; whether they will be met is not stated.",
-    "claim": "Will the Sale of the Colombian and Ecuadorian businesses close on the targeted date, given that regulatory approvals in Colombia and Ecuador and other conditions are still outstanding?",
+    "basis": "Stated directly in [P4], [P5], and [P6] that closing remains subject to regulatory approvals in Colombia and Ecuador, remaining consents, and termination rights.",
+    "claim": "Will Gran Tierra obtain the remaining consents and Colombian and Ecuadorian regulatory approvals to close the $1.33 billion Sale to Maurel & Prom before year-end, and what will the final adjusted net cash proceeds be?",
     "facts": [
-     "P7",
-     "P5",
-     "P4"
-    ],
-    "quotes": [
-     "Gran Tierra continues to target closing of the Sale on or about December 31, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The right is stated in P5; the definition is not in the excerpts, so the scope is unknown.",
-    "claim": "Could the Purchaser invoke its material adverse change termination right before closing, and what would count as a material adverse change?",
-    "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
-     "Purchaser has the right, in certain circumstances, to terminate the Share Purchase Agreement following delivery of a notice regarding the occurrence of a material adverse change."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The figures and the adjustment language are stated; the size of any adjustment is not.",
-    "claim": "What net cash will the company actually receive, given that the stated proceeds are approximate, subject to adjustment, and split between closing and a later payment?",
-    "facts": [
-     "P7",
      "P4",
-     "P8"
-    ],
-    "quotes": [
-     "Gran Tierra expects to receive total net cash proceeds from the Sale of approximately US$315 million, of which approximately US$250 million is payable on closing and approximately US$65 million is payable 364 days thereafter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The conditionality is stated; the size and structure are not given.",
-    "claim": "How large will the post-closing share repurchase be, and how will it be structured?",
-    "facts": [
-     "P7",
+     "P5",
      "P6"
     ],
     "quotes": [
+     "Subsequent to September 30, 2026, we obtained shareholders\u2019 approval for the sale, and closing remains subject to remaining consents, regulatory approvals and other customary conditions",
+     "The completion of the Sale is subject to a number of conditions, certain of which are outside of control of Gran Tierra and Purchaser, including certain regulatory approvals in Colombia and Ecuador.",
+     "Closing remains subject to the remaining consents, regulatory approvals in Colombia and Ecuador and other closing conditions, and the Company continues to target closing before the end of the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P6] that the structure, size, and terms remain to be determined by the Board of Directors and depend on closing.",
+    "claim": "What structure, size, and terms will the Board of Directors adopt for the planned share repurchase conditional on closing the Sale?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As previously announced, the Company expects to use a portion of the net cash proceeds from the Sale to return capital to stockholders through a share repurchase, the structure, size and terms of which will be determined by the Board of Directors and announced separately.",
      "Any share repurchase is conditional on completion of the Sale."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the balance sheet and the transaction description; the closing-date amounts are not in the items.",
-    "claim": "How exactly will the 7.750% Senior Notes due 2027, the assumed 2029 and 2031 notes and the prepayment facility be dealt with at closing so that the company is debt-free, given long-term debt of 542,951 and a customer advance of 192,548 (table in thousands) at September 30, 2026?",
+    "basis": "Inferred from [P6], which discloses the principal amount, unsecured status, and 364-day maturity without interest or covenant terms.",
+    "claim": "What interest rate, covenants, and credit protections apply to the $65 million unsecured note payable 364 days after closing of the Sale?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Of the expected net cash proceeds, approximately $250 million is payable in cash, including the $50 million deposit received during the Quarter, which is included in the $141 million cash balance, and the remaining $65 million is payable under an unsecured note 364 days after closing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from [F1], [P5], and [P6], which provide consolidated balance sheet totals and Canadian segment netbacks but omit standalone pro forma statements and credit facility covenants.",
+    "claim": "What standalone pro forma balance sheet, corporate overhead, and borrowing base terms under the Canadian revolving credit facility ($53 million undrawn) will characterize the Retained Business in Canada and Azerbaijan after the Sale closes?",
     "facts": [
      "F1",
-     "P8",
-     "P6",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "In addition to the $141 million cash on hand as of September 30, 2026, the Company has approximately $53 million in undrawn availability under its Canadian revolving credit facility.",
+     "Upon completion of the Sale, the Company\u2019s operations will be focused on Canada and Azerbaijan, and the Company will continue to pursue additional new growth opportunities that would further strengthen the Company\u2019s portfolio.",
+     "If, for any reason, the Sale is not completed or is materially delayed, there may be ongoing or additional uncertainty regarding us and our business, operations and assets, including with respect to our business segments not subject to the Sale (the \u201cRetained Business\u201d) and the retention of key personnel."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6] that dFTG processing is pending and will guide future seismic and drilling selections, while capital budgets and contractual commitments in Azerbaijan are omitted from [P2] and [P6].",
+    "claim": "What minimum work commitments, capital expenditure obligations, fiscal terms, and exploration timeline govern Gran Tierra's 65% working interest in the Guba-Khazaryani EDPSA in Azerbaijan?",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "On October 5, 2026, Azerbaijan\u2019s Parliament (the Milli Majlis) ratified Gran Tierra\u2019s EDPSA for the onshore Guba-Khazaryani region.",
+     "The Company is the operator of, and holds a 65% working interest in, an onshore exploration, development and production sharing agreement in Azerbaijan.",
+     "Once processed and integrated with existing seismic and exploratory well data, the dFTG data is expected to help define the geometry of sedimentary basins and fault-related structures that may trap oil and gas, guiding the selection of future seismic acquisition areas and drilling locations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from [F1], [P4], and [P6], as Note 6 and the supplemental indenture text are omitted from the packet.",
+    "claim": "What maturity schedules, covenants, and supplemental indenture amendments govern the 45,980 current portion and 542,951 long-term debt (table in thousands) if the Sale closes or fails to close?",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Current portion of long-term debt (Notes 6 and 12) | 45,980 | 21,212",
+     "Long-term debt (Notes 6 and 12) | 542,951 | 686,521",
+     "On September 22, 2026, following receipt of the requisite consents from holders of the 2031 Notes, the Company executed a supplemental indenture in connection with the Sale, which becomes operative on closing.",
+     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from [F1], [F3], and [P4], because Notes 7 and 13 are omitted from the packet and current liabilities in [F1] combine Notes 6 and 7 in Accounts payable, accrued liabilities and other.",
+    "claim": "What delivery obligations, pricing terms, and maturity schedule govern the 192,548 customer advance (table in thousands), and what portion of the 138,518 operating working-capital inflow (table in thousands) came from customer advances versus payables?",
+    "facts": [
+     "F1",
+     "F3",
      "P4"
     ],
     "quotes": [
-     "On closing, we expect to be debt-free, with the flexibility to return capital to stockholders and build our businesses in Canada and Azerbaijan."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Inferred from the balance sheet and cash flow lines; the settlement terms are not in the items.",
-    "claim": "How much of the equity compensation award liabilities (33,107 current and 34,651 long-term, table in thousands) will be paid in cash and when, and why did stock-based compensation reach 46,384 (table in thousands) for the nine months?",
-    "facts": [
-     "F1",
-     "F3",
-     "P4",
-     "P7"
-    ],
-    "quotes": [
-     "Equity compensation award liability (Note 8)"
+     "Customer advance (Note 7) | 192,548 | 115,909",
+     "Net change in assets and liabilities from operating activities (Note 13) | 138,518 | 9,867",
+     "During the three months ended September 30, 2026, we entered into a definitive share sale agreement to sell our Colombia and Ecuador oil business for a total approximate consideration of $1.33 billion, subject to adjustment, including the assumption of our 2029 and 2031 Senior Notes and the Prepayment Agreement facility, with expected net cash proceeds of approximately $315.0 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated; treatment at closing is not stated.",
-    "claim": "What happens to the derivative contracts, a liability of 39,477 (table in thousands) at September 30, 2026, when the Colombian and Ecuadorian business is sold?",
+    "basis": "Inferred from [F1], [F2], and [P6], as Note 12 detailing open derivative volumes, strike prices, and counterparties is omitted from the packet.",
+    "claim": "Which commodity or foreign-exchange contracts make up the 39,477 current derivative liability (table in thousands) and 105,774 nine-month derivative loss (table in thousands), and how will they settle or transfer upon the Sale?",
     "facts": [
      "F1",
      "F2",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "Derivatives (Note 12)"
+     "Derivatives (Note 12) | 39,477 | 0",
+     "Derivative instruments loss (gain) (Note 12) | 29,228 | 2,066 | 105,774 | (10,499)",
+     "Gran Tierra has secured price protection on 5,000 bbl per day of first quarter 2027 oil sales, through its physical sales arrangements with Trafigura."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the cash flow line; the balance sheet presentation and terms are not in the items.",
-    "claim": "Is the 50,000 (table in thousands) deposit received on the sale refundable if the Sale fails, and where is it presented on the balance sheet?",
+    "basis": "Stated in [F1] that contingencies are addressed in Note 11, which is omitted from the packet, and in [P5] that stockholder or stakeholder litigation is possible.",
+    "claim": "What pending legal, environmental, or tax contingencies are disclosed in the omitted contingencies note referenced on the balance sheet?",
     "facts": [
-     "F3",
      "F1",
      "P5"
     ],
     "quotes": [
-     "Deposit on sale of oil business in Colombia and Ecuador (Note 5)"
+     "Contingencies (Note 11)",
+     "It is possible that our stockholders or other stakeholders will commence or seek to commence litigation against Gran Tierra or our board of directors."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the balance sheet; no accounting conclusion appears in the items.",
-    "claim": "How will the Sale be accounted for, including any gain or loss on disposal, given that equity fell from 228,744 to 90,204 (table in thousands) and no separate held-for-sale line appears on the balance sheet?",
+    "basis": "Stated in [F1] and [P6] that the liability and $30 million quarterly expense reflected share price increases, while Note 8 award terms are omitted.",
+    "claim": "What award terms and settlement triggers govern the 33,107 current and 34,651 long-term equity compensation award liabilities (table in thousands), and will the Sale accelerate vesting or cash payout?",
     "facts": [
      "F1",
-     "F2",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "closing remains subject to remaining consents, regulatory approvals and other customary conditions"
+     "Equity compensation award liability (Note 8) | 33,107 | 8,569",
+     "Equity compensation award liability (Note 8) | 34,651 | 14,993",
+     "The net loss in the Quarter was primarily due to non-cash stock-based compensation expense of $30 million, driven by the increase in the Company\u2019s share price during the Quarter, and derivative instrument losses of $29 million, partially offset by a deferred income tax recovery of $30 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Canada's figure is stated; Azerbaijan's economics are not in the items.",
-    "claim": "What will the retained business (Canada and Azerbaijan) earn and need in capital after the Sale?",
+    "basis": "Inferred from [F3], [P1], and [P6], since the reserve report in [P1] is as of December 31, 2025 and Note 5 of the Q3 2026 Form 10-Q is omitted.",
+    "claim": "How much of Gran Tierra's Canadian proved reserves and asset retirement obligations were transferred in the Simonette and Lodgepole divestitures?",
     "facts": [
-     "P8",
-     "P6",
-     "P4"
+     "F3",
+     "P1",
+     "P6"
     ],
     "quotes": [
-     "Upon the completion of the Sale Transaction, the Company will continue to operate its assets in Canada and Azerbaijan."
+     "Subsequent to December 31, 2025, the entire interest in Simonette was divested.",
+     "The decrease from the Prior Quarter was primarily due to lower production from the Cohembi field in Colombia and the sale of the Lodgepole area in Canada in June 2026, partially offset by an increase in production from the Acordionero field in Colombia.",
+     "Proceeds on disposition of property, plant and equipment (Note 5) | 57,944 | 7,500"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P4] and [P6] that the border remained closed and created additional discounts, with no reopening timeline disclosed.",
+    "claim": "When will the Colombia and Ecuador border reopen, and how much additional quality and transportation discount beyond the $13.6 million year-to-date impact will Putumayo production incur before the Sale closes?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Quality and transportation discounts in Colombia were affected by using an alternative transportation route for Putumayo production as the Colombia and Ecuador border remained closed, which was significantly more expensive and resulted in additional discounts of approximately $3.7 million for the current quarter.",
+     "These discounts had an impact of approximately $3.7 million for the Quarter and $13.6 million year to date in 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P3] that whether excess collections exist cannot be determined until the Colombian tax authority reports total collections.",
+    "claim": "Will Gran Tierra receive a proportional refund of the temporary 1% Colombian crude oil excise tax collected in 2025 following the Colombian tax authority's collection report?",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In February 2025, the Colombian government introduced a temporary 1% excise tax on the first sale or export of crude oil pursuant to a declared state of internal emergency, effective through December 31, 2025.",
+     "Accordingly, while we were required to comply with the tax through December 31, 2025, any potential refund would be assessed thereafter and cannot be determined at this time."
     ],
     "support": "supported"
    }
@@ -932,5 +1348,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no positive earnings base"
+ "verdict_reason": "the filings in the packet do not explain why the profit record is thin, so no value is given"
 }
