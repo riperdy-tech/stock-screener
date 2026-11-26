@@ -2,29 +2,38 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 126,
- "claims_supported": 117,
- "date": "2026-11-16T23:42:49Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-04T22:05:30.000Z",
+  "accepted_utc": "2026-11-05T03:05:30Z",
+  "accession": "0000077543-26-000220",
+  "decision_time": "2026-11-26T23:13:52Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 72,
+ "claims_supported": 67,
+ "date": "2026-11-26T23:13:52Z",
+ "family": "operating",
  "flags": [
-  "The company completed a refinancing of its senior notes and an amendment and restatement of its revolving credit facility, recognizing a one-time loss on extinguishment of debt of $51.4 million, which included a $35.6 million cash redemption premium.",
-  "The company settled its obligations under its defined benefit pension plan and recorded a one-time non-cash charge of $33.8 million.",
-  "In its earnings release, the company raised its full-year adjusted EPS guidance to $5.90 to $6.10, up from $5.15 to $5.45."
+  "The company refinanced its senior notes and amended and restated its revolving credit facility, and booked a one-time loss on extinguishment of debt of $51.4 million.",
+  "The company settled its obligations under its defined benefit pension plan and recorded a one-time non-cash pension settlement charge of $33.8 million.",
+  "The company published a raised full-year adjusted EPS guidance range of $5.90 to $6.10, up from $5.15 to $5.45."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
  "news": [],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+ "no_value_reason": "minority interests take too large a share of income",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1 (10-K Item 1)",
-    "claim": "Tutor Perini sells general contracting, construction management and design-build services to private customers and public agencies.",
+    "basis": "Stated in the 10-K business description.",
+    "claim": "Tutor Perini sells construction services (general contracting, construction management and design-build) to private customers and public agencies.",
     "facts": [
      "P1"
     ],
@@ -34,18 +43,7 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "The company self-performs many trades on its projects and worked on approximately 1,600 construction projects during 2025.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "During 2025, we performed work on approximately 1,600 construction projects."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
+    "basis": "Stated in the 10-K.",
     "claim": "The business reports three segments: Civil, Building and Specialty Contractors.",
     "facts": [
      "P1"
@@ -56,8 +54,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1; figures from the P6 segment table",
-    "claim": "Civil builds public works and infrastructure such as highways, bridges, tunnels and mass transit, and it was the largest segment in the first nine months of 2026, with revenue from external customers of $2,407,385 and income from construction operations of $337,493 (table in thousands).",
+    "basis": "Segment description is stated in the 10-K. Backlog figures are from the earnings release backlog table.",
+    "claim": "Civil does public-works and infrastructure construction and is the largest segment by backlog: $10,006.9 of $20,353.3 total (table in millions).",
     "facts": [
      "P1",
      "P6"
@@ -68,43 +66,41 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1",
-    "claim": "Civil customers award contracts either by competitive bid, where price is the main factor, or by best-value proposal.",
+    "basis": "Stated in the 10-K and the release segment table.",
+    "claim": "Building serves private and public building customers, with a stated leadership position in hospitality and gaming. Its revenue from external customers was $1,573,110 (table in thousands) for the latest nine months.",
     "facts": [
-     "P1"
+     "P1",
+     "P6"
     ],
     "quotes": [
-     "the traditional public \u201ccompetitive bid\u201d method, in which price is the major determining factor"
+     "We are a recognized leader in the hospitality and gaming market, specializing in the construction of high-end resorts and casinos."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1; figures from P6",
-    "claim": "Building serves private and public customers in specialized markets including hospitality and gaming, healthcare, education and government facilities; its nine-month 2026 revenue from external customers was $1,573,110 and its income from construction operations was $74,781 (table in thousands).",
+    "basis": "Stated in the 10-K and the release segment table.",
+    "claim": "Specialty Contractors does electrical, mechanical, plumbing, HVAC and fire-protection work. Much of it is performed for the Civil and Building segments, and its revenue from external customers was $766,266 (table in thousands) for the latest nine months.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
-     "Our Building segment has significant experience providing services to several specialized building markets for private and public works customers, including hospitality and gaming, transportation, healthcare, commercial offices, government facilities, sports and entertainment, education, correctional and detention facilities, biotech, pharmaceutical, industrial and technology."
+     "A significant portion of the segment's work has been, and is expected to continue to be, performed for our Civil and Building segments"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P1; figures from P6",
-    "claim": "Specialty Contractors performs electrical, mechanical, plumbing, HVAC and fire protection work, much of it for the Civil and Building segments; its nine-month 2026 revenue from external customers was $766,266 and its income from construction operations was $16,398 (table in thousands).",
+    "basis": "Taken directly from the segment information table; the attribution of share-based compensation to Corporate is inferred.",
+    "claim": "For the latest nine months, Civil produced most of the segment operating income: $337,493, against $74,781 for Building and $16,398 for Specialty Contractors. Unallocated corporate costs were $(126,336) (table in thousands).",
     "facts": [
-     "P1",
      "P6"
     ],
-    "quotes": [
-     "A significant portion of the segment's work has been, and is expected to continue to be, performed for our Civil and Building segments, although the segment also continues to contract directly with state and local municipal agencies, real estate developers, school districts and other commercial and industrial customers."
-    ],
-    "support": "number_not_listed"
+    "quotes": [],
+    "support": "supported"
    },
    {
-    "basis": "stated in P2",
-    "claim": "Government entities accounted for 86% of backlog as of December 31, 2025, which makes public spending the main demand source.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Customers are mostly government entities, which accounted for 86% of backlog at the last year-end.",
     "facts": [
      "P2"
     ],
@@ -114,212 +110,52 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P3",
-    "claim": "Public funding sources drive Civil demand; the Bipartisan Infrastructure Law provided $1.2 trillion, but its current funding window closes on September 30, 2026.",
+    "basis": "Stated in the 10-K.",
+    "claim": "Civil demand depends on public funding sources such as loans and grants, tax revenue and bonds, and for certain projects private capital.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026"
+     "Funding for major Civil segment infrastructure projects is typically provided through a combination of one or more of the following: local, regional, state and federal loans and grants; other direct allocations sourced through tax revenue; bonds; user fees; and, for certain projects, private capital."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2",
-    "claim": "International work, including U.S. territories, provided $489.7 million, or 9%, of 2025 revenue.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For the year ended December 31, 2025, we derived $489.7 million, or 9%, of revenue from our work on projects in international locations, including U.S. territories."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Operations are concentrated in New York and California.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Lastly, we are more susceptible to adverse economic conditions in New York and California, as a significant portion of our operations are concentrated in those states."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P3",
-    "claim": "Revenue comes from converting awarded backlog into work performed; Civil backlog typically converts over three to five years, and Building and Specialty Contractors backlog over one to three years.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Backlog in our industry is a measure of the total value of work that is remaining to be performed on projects that have been awarded.",
-     "Most projects in the Civil segment\u2019s backlog typically convert to revenue over a period of three to five years and in the Building and Specialty Contractors segments over a period of one to three years."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "Backlog was $20.4 billion at September 30, 2026, down 6% from $21.6 billion a year earlier.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Consolidated backlog as of September 30, 2026 was $20.4 billion, up compared to $19.9 billion at the end of the second quarter of 2026, and down 6% compared to $21.6 billion at the end of the third quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4",
-    "claim": "New awards, which replenish backlog, were $4.5 billion in the first nine months of 2026 against $7.0 billion a year earlier.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Consolidated new awards for the three and nine months ended September 30, 2026 totaled $2.2 billion and $4.5 billion, respectively, compared to $2.0 billion and $7.0 billion for the same periods in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; figures from P6",
-    "claim": "Recent revenue growth has come from increased execution on newer, larger and higher-margin projects; nine-month 2026 revenue was $4,746,761 against $4,035,674 a year earlier (table in thousands).",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "primarily driven by increased project execution activities on certain newer, larger and higher-margin projects that have significant scope of work remaining."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Design-build projects generate smaller revenue and earnings during an initial design phase and larger amounts during the later construction phase.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Many of the Company\u2019s newer projects are design-build projects that have an initial six to eighteen month design phase during which smaller revenue and earnings are generated prior to the start of a multi-year construction phase that generates substantially larger revenue and earnings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2",
-    "claim": "Cost of operations is the dominant cost: in the first nine months of 2026 it was (4,159,388), leaving gross profit of 587,373 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Cost overruns on fixed price and guaranteed maximum price contracts can reduce profit or cause losses, and inflation and tariffs can raise costs.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In addition, cost overruns, including unanticipated cost increases on fixed price contracts and guaranteed maximum price contracts, have previously resulted, and in the future may result, in lower profits or losses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "To limit cost escalation, the company buys out materials early and uses fixed-price subcontracts that pass escalation risk to subcontractors.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Also at that time, the Company enters into fixed-price contracts with its key project subcontractors whereby the risk of unforeseen escalation is transferred to the subcontractors."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P3",
-    "claim": "Profit depends on estimates at completion; changes in estimates, claims, litigation and settlements move reported earnings, and in 2025 legal judgments or decisions had net unfavorable impacts of $32.5 million.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "If we are unable to accurately estimate contract risks, revenue or costs, we may incur a loss or achieve lower than anticipated profit."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P4",
-    "claim": "Share-based compensation is a cost tied to the share price; it fell by $43.5 million in the first nine months of 2026 compared with 2025.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "These liability-classified awards are remeasured at fair value at the end of each reporting period with the change recognized in earnings.",
-     "Both periods of 2026 were also positively impacted by a significant decrease in share-based compensation expense of $39.5 million and $43.5 million, respectively, compared to the same periods in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the P6 segment table",
-    "claim": "Corporate general and administrative expenses were 124,266 in the first nine months of 2026 against 165,380 a year earlier (table in thousands).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and F2",
-    "claim": "Projects are often done through joint ventures, so part of net income goes to noncontrolling interests: 49,336 of nine-month 2026 net income of 161,475 (table in thousands).",
-    "facts": [
-     "P2",
-     "F2"
-    ],
-    "quotes": [
-     "As part of our business, we enter into joint venture arrangements typically to jointly bid on and execute particular projects, thereby reducing our risk profile while enhancing execution capabilities and increasing surety bonding capacity."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "figures stated in F1 and F3; the funding interpretation is inferred",
-    "claim": "Billings in excess of costs and estimated earnings were 2,044,207 at September 30, 2026, up from 1,838,610 at December 31, 2025 (table in thousands), and operating cash flow for the nine months was 665,063.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "The company is often required to provide surety bonds, so access to bonding is a condition for winning contracts.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We are often required to provide surety bonds securing our performance under our contracts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and P4",
-    "claim": "In the third quarter of 2026, results below the operating line included a loss on extinguishment of debt of (51,386) and a pension settlement charge of (33,753) (table in thousands), both described as one-time.",
+    "basis": "Stated in the 10-Q MD&A; figures are from the income statement.",
+    "claim": "Revenue growth comes mainly from executing newer, larger projects. Revenue was $4,746,761 for the latest nine months against $4,035,674 a year earlier (table in thousands).",
     "facts": [
      "F2",
      "P4"
     ],
     "quotes": [
-     "This resulted in a one-time non-cash charge of $33.8 million ($0.40 per diluted share, after tax) primarily related to the accelerated recognition of unamortized net actuarial losses, which would otherwise have been recognized in future periods."
+     "primarily driven by increased project execution activities on certain newer, larger and higher-margin projects that have significant scope of work remaining."
     ],
     "support": "supported"
-   }
-  ],
-  "competitive_position": [
+   },
    {
-    "basis": "Stated by the company in its 10-K Item 1.",
-    "claim": "The company states that vertical integration is a competitive advantage that lets it self-perform more work than its competitors.",
+    "basis": "Conversion timing is stated in the 10-K; the awards and backlog figures are from the release table.",
+    "claim": "Backlog converts to revenue over several years, and new awards must replace the revenue recognized. Over the latest nine months, new awards of $4,540.3 were below revenue recognized of $(4,746.8), and backlog moved from $20,559.8 to $20,353.3 (table in millions).",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Most projects in the Civil segment\u2019s backlog typically convert to revenue over a period of three to five years and in the Building and Specialty Contractors segments over a period of one to three years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are from the income statement; the breakdown of cost components is inferred and not itemized in the evidence.",
+    "claim": "Cost of operations is the main cost line. In the latest nine months it was 4,159,388 against revenue of 4,746,761, leaving gross profit of 587,373, with general and administrative expense of 285,037 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K.",
+    "claim": "Vertical integration lets the company self-perform more of the work than competitors, which it presents as a bidding and execution advantage.",
     "facts": [
      "P1"
     ],
@@ -329,8 +165,91 @@
     "support": "supported"
    },
    {
-    "basis": "Stated by the company in its 10-K Item 1.",
-    "claim": "Pre-qualification requirements in civil work act as a barrier that the company says smaller, less diversified contractors often cannot meet.",
+    "basis": "Stated in the 10-K risk factors and MD&A.",
+    "claim": "Project margins depend on cost estimates and inflation or tariff exposure. The company says it mitigates this by transferring escalation risk to vendors and subcontractors.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "If we are unable to accurately estimate contract risks, revenue or costs, we may incur a loss or achieve lower than anticipated profit.",
+     "Also at that time, the Company enters into fixed-price contracts with its key project subcontractors whereby the risk of unforeseen escalation is transferred to the subcontractors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Mechanism is stated in the 10-K; amounts are from the cash flow statement.",
+    "claim": "Share-based compensation is a swing cost tied to the stock price. It was 77,179 for the latest nine months against 120,676 a year earlier (table in thousands).",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "These liability-classified awards are remeasured at fair value at the end of each reporting period with the change recognized in earnings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet and cash flow figures are stated; the funding interpretation is inferred.",
+    "claim": "Customer billings in advance fund much of the working capital. Billings in excess of costs and estimated earnings were 2,044,207, well above costs and estimated earnings in excess of billings of 767,432 (table in thousands). Operating cash flow was 665,063 for the nine months.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Risk is stated in the 10-K; the balance trend is stated in the earnings release.",
+    "claim": "Extra work and disputes can slow cash conversion and cut profit. The company reports a lower balance of unbilled costs: costs and estimated earnings in excess of billings were $767.4 million, which the release calls the lowest balance since the end of 2014.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Our contracts often require us to perform extra work beyond the initial project scope, which can result in disputes or claims and adversely affect our working capital, profits and cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The risk is stated in the 10-K; the income figures are from the income statement. That the noncontrolling interests relate to joint ventures is inferred.",
+    "claim": "Joint ventures are part of how projects are won, and partners' share of earnings reduces profit attributable to shareholders. Net income attributable to noncontrolling interests was 49,336 of net income of 161,475 for the nine months (table in thousands).",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Generally, we and our joint venture partners are jointly and severally liable for all liabilities and obligations of our joint ventures."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Surety bonding capacity is a condition for winning work, because contracts often require performance bonds.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We are often required to provide surety bonds securing our performance under our contracts."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 10-K business section; the advantage itself is management's assertion.",
+    "claim": "The company says its vertical integration, which lets it self-perform more work than competitors, is a competitive advantage on large, complex projects.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our vertical integration capabilities, which also involve close interactions between our Civil and Building segment resources on large, complex projects, are a competitive advantage that allow us to self-perform a greater amount of work than our competitors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K business section.",
+    "claim": "Financial strength and track record let the company pre-qualify for civil projects that smaller, less diversified contractors cannot, which it presents as a barrier to entry for the largest projects.",
     "facts": [
      "P1"
     ],
@@ -340,30 +259,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated by management in the 10-Q MD&A.",
-    "claim": "Management attributes its award success partly to limited competition in select markets for some of the larger projects.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "The Company has been successful in winning its share of major new project opportunities over the past several years due to a combination of its strategic bidding approach and favorable market dynamics, including limited competition in select markets for some of the larger projects."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated by the company in its 10-K Item 1. The cited project list is the company's own evidence and is not an independent ranking.",
-    "claim": "The company has a long track record on large civil projects and says it is one of the leading civil contractors in the United States.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We have been active in civil construction since 1894 and believe we have a particular expertise in large, complex civil construction projects."
-    ],
-    "support": "supported"
-   },
-   {
     "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Consolidated backlog was $20.4 billion at the latest quarter end. That was up from $19.9 billion the prior quarter and down 6% from $21.6 billion a year earlier.",
+    "claim": "Backlog at the end of Q3 2026 was $20.4 billion. That is up from $19.9 billion at the end of Q2 2026 but down 6% from $21.6 billion a year earlier.",
     "facts": [
      "P4"
     ],
@@ -373,8 +270,32 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A. The explanation for the decline is management's.",
-    "claim": "Year-to-date new awards fell to $4.5 billion from $7.0 billion. Management attributes this to an unusually strong prior-year period and fewer large opportunities reaching award.",
+    "basis": "Figures are from the income statement; the explanation is stated by management in the 10-Q.",
+    "claim": "Q3 2026 revenue was higher than a year earlier, which the company attributes to newer, larger, higher-margin projects with substantial work remaining.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "The Company experienced strong double-digit growth across all three segments in the third quarter and through the first nine months of 2026 compared to the same periods last year, primarily driven by increased project execution activities on certain newer, larger and higher-margin projects that have significant scope of work remaining."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the 10-Q and the earnings release.",
+    "claim": "Management says limited competition in select markets for larger projects, together with strong public funding, supports its win rate, and it cites a bid pipeline of more than $200 billion.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The Company has been successful in winning its share of major new project opportunities over the past several years due to a combination of its strategic bidding approach and favorable market dynamics, including limited competition in select markets for some of the larger projects."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "New awards in the first nine months of 2026 were below the prior-year period, though Q3 awards were slightly higher.",
     "facts": [
      "P4"
     ],
@@ -384,80 +305,32 @@
     "support": "supported"
    },
    {
-    "basis": "Stated by management in the earnings release.",
-    "claim": "Management describes a potential project pipeline of more than $200 billion, about three times the pipeline of a couple of years earlier.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Overall, the Company's pipeline of potential projects over the next three to four years totals more than $200 billion, which is approximately three times larger than the pipeline from just a couple of years ago."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures from the 10-Q income statement. The record characterisation is stated in the MD&A.",
-    "claim": "Latest-quarter revenue was 1,720,256 against 1,415,360 a year earlier (table in thousands). Management says this was a quarterly record, with growth in all three segments.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "The Company's revenue for the third quarter of 2026 was the highest of any quarter ever, and revenue for the first nine months of 2026 also set a new record for the first nine months of any year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures from the segment table in the earnings release. That Civil is the profit centre is inferred from those figures.",
-    "claim": "The Civil segment produced most segment profit in the latest quarter: $125,236, against $27,159 for Building and $10,110 for Specialty Contractors (table in thousands).",
+    "basis": "Stated in the earnings release; the balance sheet is consistent with it.",
+    "claim": "The company reports a net cash position, with cash exceeding total debt as of September 30, 2026.",
     "facts": [
      "P6",
-     "P4"
+     "F1"
     ],
     "quotes": [
-     "The Civil segment's income from construction operations also set records for these same periods."
+     "the Company's cash exceeded its total debt by $707 million as of September 30, 2026, continuing the Company's strong net cash position."
     ],
     "support": "supported"
    },
    {
     "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Part of the improvement in income from construction operations came from lower share-based compensation expense, which fell by $39.5 million in the quarter and $43.5 million year to date. This is not an operating gain.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Both periods of 2026 were also positively impacted by a significant decrease in share-based compensation expense of $39.5 million and $43.5 million, respectively, compared to the same periods in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures from the 10-Q statements. The record label comes from the release. The competitive link is inferred from P1.",
-    "claim": "The balance sheet strengthened. Cash and cash equivalents rose to 1,111,049 from 734,553 (table in thousands), and year-to-date operating cash flow was 665,063, which the company calls a record. Financial strength supports pre-qualification.",
-    "facts": [
-     "F1",
-     "F3",
-     "P6",
-     "P1"
-    ],
-    "quotes": [
-     "Operating cash flow for the third quarter of 2026 was the highest result of any quarter in the Company's history, and the result for the first nine months of 2026 was the highest of any first-nine-month period ever."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "The refinancing more than doubled the available revolving credit facility and extended maturities. It cost a one-time loss on extinguishment of debt of $51.4 million.",
+    "claim": "A July 2026 refinancing extended debt maturities, more than doubled the revolving credit facility and is expected to lower interest expense. It also produced a one-time loss on extinguishment of debt.",
     "facts": [
      "P4",
      "F2"
     ],
     "quotes": [
-     "As a result of this transaction, the Company recognized a one-time loss on extinguishment of debt of $51.4 million ($0.70 per diluted share, after tax) for the three and nine months ended September 30, 2026, which consisted of a $35.6 million cash redemption premium and $15.8 million of non-cash expense related to the acceleration of previously unamortized discounts and deferred financing costs."
+     "the Company completed the refinancing of its 2024 Senior Notes and entered into an amendment and restatement of its existing revolving credit facility, which, among other things, extended debt maturities, is expected to significantly reduce future interest expense, more than doubled the size of its available revolving credit facility and provided meaningfully improved terms."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in the 10-K risk factors. The 10-Q reports no material change to risk factors (P5).",
-    "claim": "Dependence on government customers is high and rising: government entities accounted for 86% of backlog at the last year-end.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Government customers made up 86% of backlog at December 31, 2025, which ties the company's position to public funding and procurement risk.",
     "facts": [
      "P2"
     ],
@@ -467,52 +340,19 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A.",
-    "claim": "The current funding window of the Bipartisan Infrastructure Law closed at the end of the latest quarter, and the amount and composition of any future funding were not determined.",
+    "basis": "Stated in the 10-K; whether follow-on funding has passed is not in the evidence.",
+    "claim": "The current funding window of the Bipartisan Infrastructure Law closes on September 30, 2026, and the amount and composition of any follow-on funding is undetermined.",
     "facts": [
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026, we believe that Congress recognizes the long-term nature of infrastructure work and is already engaged in the legislative process to secure future funding beyond that date, although the amount and composition of such future funding is yet to be determined."
+     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026, we believe that Congress recognizes the long-term nature of infrastructure work and is already engaged in the legislative process to secure future funding beyond that date, although any amount and composition of such future funding is yet to be determined."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "The company names the shift toward progressive design-build delivery as a possible source of more competition and lower margins.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In addition, evolving changes in the construction industry, such as the trend toward an increased use of the progressive design-build project delivery method that may reduce project risks for both owners and contractors, could result in increased competition and potentially lower margins on certain projects in the future."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Rapid growth in backlog has constrained labor resources, which could delay projects or force the company to curtail new pursuits.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "A significant, rapid growth in our backlog has led, and could continue to lead, to situations in which labor resources become constrained."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Access to reasonably priced surety bonds is a condition for winning new contracts.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "If we are unable to obtain reasonably priced surety bonds in the future, it could significantly affect our ability to be awarded new contracts and could, consequently, have a material adverse effect on our business, results of operations and financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Disputes and litigation have previously hit results, including a $101.6 million non-cash charge from an adverse arbitration decision on a completed bridge project.",
+    "basis": "Stated in the 10-K risk factors and the earnings release.",
+    "claim": "Contract estimate risk and legal disputes are a named threat: an adverse arbitration decision produced a large non-cash charge that the company is appealing.",
     "facts": [
      "P2"
     ],
@@ -523,7 +363,18 @@
    },
    {
     "basis": "Stated in the 10-K risk factors.",
-    "claim": "Operations are concentrated in New York and California, which raises exposure to those regional economies.",
+    "claim": "Competition for awards is described as intense, and a shift toward progressive design-build delivery could increase competition and lower margins on some future projects.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In addition, evolving changes in the construction industry, such as the trend toward an increased use of the progressive design-build project delivery method that may reduce project risks for both owners and contractors, could result in increased competition and potentially lower margins on certain projects in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Operations are concentrated in New York and California, which makes the company more exposed to economic conditions in those states.",
     "facts": [
      "P2"
     ],
@@ -533,478 +384,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Items 1 and 1A.",
-    "claim": "The company holds a leading position in Guam through Black Construction, but that work depends on U.S. federal funding.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Black Construction is the largest contractor in Guam and provides a variety of predominantly heavy civil, building, mechanical and electrical construction services throughout the Asia-Pacific region and in other strategic military locations.",
-     "Any decrease in U.S. federal government funding for projects in Guam or in other U.S. Territories or countries in which we are pursuing work may result in project delays or cancellations, which could reduce our revenue and earnings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The retirement is stated in the 8-K. The relevance to competitive position is inferred from the key-personnel risk factor.",
-    "claim": "A senior civil executive, the Executive Vice President - Civil West, retired during the latest quarter. The company names retention of key management as a risk.",
-    "facts": [
-     "P8",
-     "P2"
-    ],
-    "quotes": [
-     "On August 11, 2026, William E. Jensen, Executive Vice President - Civil West, notified Tutor Perini Corporation (the \u201cCompany\u201d) of his decision to retire from the Company effective September 4, 2026."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Cash and cash equivalents rose to 1,111,049 at Sep. 30, 2026 from 734,553 at Dec. 31, 2025 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents ($500,168 and $361,898 related to variable interest entities (\u201cVIEs\u201d)) | $ 1,111,049 | $ 734,553"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "amount stated in F1; the availability point is inferred",
-    "claim": "Of the cash balance, 500,168 (table in thousands) relates to variable interest entities, up from 361,898.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and cash equivalents ($500,168 and $361,898 related to variable interest entities (\u201cVIEs\u201d)) | $ 1,111,049 | $ 734,553"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "The company also held restricted cash of 35,495 and restricted investments of 292,316 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Restricted investments | 292,316 | 228,959"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement",
-    "claim": "Cash, cash equivalents and restricted cash at the end of the period were 1,146,544, compared with 770,194 at the beginning (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Cash, cash equivalents and restricted cash at end of period | $ 1,146,544 | $ 758,084"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Total current assets of 4,680,655 exceeded total current liabilities of 3,678,699 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 4,680,655 | 4,116,885",
-     "Total current liabilities | 3,678,699 | 3,239,498"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "amounts stated in F1; the mechanism is inferred from the line description",
-    "claim": "Billings in excess of costs and estimated earnings, the largest current liability, rose to 2,044,207 from 1,838,610 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Billings in excess of costs and estimated earnings ($566,775 and $520,455 related to VIEs) | 2,044,207 | 1,838,610"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Balance-sheet debt was 4,563 in current maturities plus 399,078 of long-term debt at Sep. 30, 2026, versus 14,589 and 392,785 at Dec. 31, 2025 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Current maturities of long-term debt | 4,563 | 14,589"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "At year-end 2025, management reported total debt of $407.4 million, of which $14.6 million was current.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "As of December 31, 2025, our total debt was $407.4 million, with $14.6 million classified as current debt."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Total equity was 1,374,920 against total liabilities of 4,364,749 at Sep. 30, 2026 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "TOTAL EQUITY | 1,374,920 | 1,262,662",
-     "TOTAL LIABILITIES | 4,364,749 | 3,897,760"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "amounts stated in F2; the link to the refinancing is from P4",
-    "claim": "Interest expense fell to 7,290 in Q3 2026 from 13,549, and to 34,407 for nine months from 41,489 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Interest expense | (7,290) | (13,549) | (34,407) | (41,489)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited income statement; no coverage ratio is computed",
-    "claim": "Income from construction operations was 302,336 for the nine months, compared with interest expense of 34,407 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "INCOME FROM CONSTRUCTION OPERATIONS | 125,419 | 40,094 | 302,336 | 181,849"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement",
-    "claim": "Net cash provided by operating activities was 665,063 for the nine months of 2026, compared with 574,396 a year earlier (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "NET CASH PROVIDED BY OPERATING ACTIVITIES | 665,063 | 574,396"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "amounts stated in F3; the quality reading is inferred",
-    "claim": "Changes in working capital contributed 249,832 to operating cash flow, against net income of 161,475 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Changes in other components of working capital | 249,832 | 263,469"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the cash premium point is from P4",
-    "claim": "Operating cash flow also added back non-cash items: share-based compensation of 77,179, a pension settlement charge of 33,753, a loss on extinguishment of debt of 51,386 and deferred income taxes of 57,460 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Share-based compensation expense | 77,179 | 120,676",
-     "Deferred income taxes | 57,460 | 39,268"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement",
-    "claim": "Capital expenditure was 91,265 and investments in securities were 111,513 over the nine months (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Acquisition of property and equipment | (91,265) | (105,891)",
-     "Investments in securities | (111,513) | (56,299)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release",
-    "claim": "Q3 2026 operating cash flow was a record $330.9 million; the company attributes it to higher volume, execution, earnings and collections.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The record operating cash flow for both periods was driven by higher volume, strong execution, record earnings and collections on profitable projects."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A",
-    "claim": "Operating cash flow for 2025 was a record $748.1 million, partly helped by collections from dispute resolutions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The Company generated record cash flow from operations of $748.1 million in 2025 largely driven by collections from newer and ongoing projects and, to a much lesser extent, from collections related to recent dispute resolutions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "amounts stated in F2 and F3; the mechanism is inferred",
-    "claim": "Noncontrolling interests took 49,336 of nine-month net income, and 23,800 was distributed to them in cash (table in thousands).",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Distributions paid to noncontrolling interests | (23,800) | (27,900)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement",
-    "claim": "Cash returned to shareholders comprised dividends of 11,202 and share repurchases of 30,000 (table in thousands); neither occurred in the prior-year period.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Payment of dividends | (11,202) | 0",
-     "Repurchase of common stock | (30,000) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "On July 2, 2026, the company refinanced its 2024 Senior Notes and amended its revolving credit facility, extending maturities and more than doubling the revolver.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "As discussed further in Liquidity and Capital Resources below, as of July 2, 2026, the Company completed the refinancing of its 2024 Senior Notes and entered into an amendment and restatement of its existing revolving credit facility, which, among other things, extended debt maturities, is expected to significantly reduce future interest expense, more than doubled the size of its available revolving credit facility and provided meaningfully improved terms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "The refinancing caused a $51.4 million loss on extinguishment, including a $35.6 million cash redemption premium.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "As a result of this transaction, the Company recognized a one-time loss on extinguishment of debt of $51.4 million ($0.70 per diluted share, after tax) for the three and nine months ended September 30, 2026, which consisted of a $35.6 million cash redemption premium and $15.8 million of non-cash expense related to the acceleration of previously unamortized discounts and deferred financing costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited cash flow statement",
-    "claim": "Financing flows show proceeds from debt of 400,000, repayment of debt of 414,272, and debt issuance and extinguishment costs of 45,880 (table in thousands).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Proceeds from debt | 400,000 | 188,215",
-     "Repayment of debt | (414,272) | (312,215)",
-     "Debt issuance and extinguishment costs | (45,880) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "In Q3 2026 the company settled its defined benefit pension obligations, ending future cash contributions to the plan.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "In the third quarter of 2026, the Company settled its obligations under its defined benefit pension plan to eliminate future cash contributions and associated ongoing administrative expenses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "As of the 10-K, the credit agreement carried a maximum First Lien Net Leverage Ratio covenant that had twice required amendments to stay in compliance.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "A significant amount of debt under our credit agreement contains financial covenants, including one covenant to maintain a maximum First Lien Net Leverage Ratio (as defined in the 2020 Credit Agreement (as defined below)), which has required us to obtain two amendments, the First Amendment, dated as of October 31, 2022 and the Second Amendment, dated as of March 10, 2023, to the 2020 Credit Agreement in order to remain in compliance with this covenant."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "The company depends on surety bonding to win contracts, and that capacity depends partly on working capital and capitalization.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "If we are unable to obtain reasonably priced surety bonds in the future, it could significantly affect our ability to be awarded new contracts and could, consequently, have a material adverse effect on our business, results of operations and financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Unrecovered claims on projects have hurt liquidity in the past and could do so again.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "A failure to promptly recover on these types of claims has had and could continue to have a material adverse effect on our liquidity and financial results and could result in further legal proceedings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q",
-    "claim": "The Q3 2026 10-Q reports no material changes to the 10-K risk factors.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "There have been no material changes to our risk factors as disclosed in our Annual Report on Form 10-K for the year ended December 31, 2025."
-    ],
-    "support": "number_not_listed"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "Stated in P4; F2 shows the underlying revenue lines.",
-    "claim": "Revenue growth is driven by more execution work on newer, larger and higher-margin projects: Q3 and nine-month 2026 revenue was $1.7 billion and $4.7 billion, up 21.5% and 17.6%.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "primarily driven by increased project execution activities on certain newer, larger and higher-margin projects that have significant scope of work remaining"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P6.",
-    "claim": "Growth was broad across segments: Q3 2026 revenue rose 16% in Civil, 29% in Building and 26% in Specialty Contractors.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Revenue for the Civil, Building, and Specialty Contractors segments for the third quarter of 2026 was up 16%, 29%, and 26%, respectively, compared to the same quarter last year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and the P6 segment table.",
-    "claim": "Operating profit grew faster than revenue: Q3 2026 income from construction operations was $125.4 million, up 212.8%. Civil segment income was $125,236 against $99,152 a year earlier (table in thousands).",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Income from construction operations for the third quarter of 2026 was the highest result of any quarter in the Company\u2019s history, and the result for the first nine months of 2026 also set a new record for the first nine months of any year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as a risk in P2; P5 confirms it is unchanged.",
-    "claim": "For margins to hold, contract estimates must stay accurate and cost overruns on fixed-price and GMP contracts must be avoided. The 10-Q reports no material change to these risks.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "In addition, cost overruns, including unanticipated cost increases on fixed price contracts and guaranteed maximum price contracts, have previously resulted, and in the future may result, in lower profits or losses.",
-     "There have been no material changes to our risk factors as disclosed in our Annual Report on Form 10-K for the year ended December 31, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4.",
-    "claim": "Future revenue rests on backlog of $20.4 billion at September 30, 2026. That is up from $19.9 billion at June 30 but down 6% from $21.6 billion a year earlier.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Consolidated backlog as of September 30, 2026 was $20.4 billion, up compared to $19.9 billion at the end of the second quarter of 2026, and down 6% compared to $21.6 billion at the end of the third quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and P2.",
-    "claim": "Backlog converts over several years: Civil over three to five years, Building and Specialty Contractors over one to three years. Growth continuing therefore depends on backlog not being cancelled or reduced in scope.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Most projects in the Civil segment\u2019s backlog typically convert to revenue over a period of three to five years and in the Building and Specialty Contractors segments over a period of one to three years.",
-     "The cancellation or reduction in scope of significant projects included in our backlog could have a material adverse effect on our financial condition, results of operations and cash flows."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 and P4.",
-    "claim": "Sustaining backlog requires new awards to keep pace with revenue burn. Q3 2026 was a second straight quarter of book-to-burn above 1.0x, but nine-month awards were $4.5 billion against $7.0 billion a year earlier.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "a second straight quarter with a book-to-burn ratio greater than 1.0x",
-     "Consolidated new awards for the three and nine months ended September 30, 2026 totaled $2.2 billion and $4.5 billion, respectively, compared to $2.0 billion and $7.0 billion for the same periods in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated by management in P6 and P4.",
-    "claim": "The future award source is a pipeline of more than $200 billion over the next three to four years. Converting it requires winning bids, many of which are expected in 2027.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Overall, the Company's pipeline of potential projects over the next three to four years totals more than $200 billion, which is approximately three times larger than the pipeline from just a couple of years ago.",
-     "The Company expects a significant number of large opportunities to bid in 2027, all of which are well aligned with the Company's disciplined bidding strategy and preferred contractual and margin characteristics."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4; the counter-risk is stated in P2.",
-    "claim": "Management attributes its award success partly to limited competition on some larger projects. That condition must persist for wins and margins to hold.",
-    "facts": [
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "favorable market dynamics, including limited competition in select markets for some of the larger projects",
-     "In addition, evolving changes in the construction industry, such as the trend toward an increased use of the progressive design-build project delivery method that may reduce project risks for both owners and contractors, could result in increased competition and potentially lower margins on certain projects in the future."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as management expectation in P3; P6 reiterates.",
-    "claim": "Building segment projects in preconstruction are a further driver, including a multi-billion-dollar California healthcare project. This depends on those projects moving into construction.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "These projects are expected to transition from preconstruction to construction over the next few years, and they include a large, multi-billion-dollar healthcare project in California that is anticipated to be incrementally added to backlog over the next two to three years."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and P1.",
-    "claim": "Growth depends on public funding: government entities accounted for 86% of backlog. The current Bipartisan Infrastructure Law funding window closes on September 30, 2026, and the amount of future funding is undetermined.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "The percentage of our business coming from government entities has continued to increase in recent years, and as of December 31, 2025 accounted for 86% of our backlog.",
-     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026, we believe that Congress recognizes the long-term nature of infrastructure work and is already engaged in the legislative process to secure future funding beyond that date, although any amount and composition of such future funding is yet to be determined."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as a risk in P2.",
-    "claim": "Executing backlog requires enough skilled labour and subcontractors. Rapid backlog growth has constrained labour before.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Rapid backlog growth has constrained skilled labor, and failure to hire and retain personnel is a named threat to executing backlog.",
     "facts": [
      "P2"
     ],
@@ -1012,59 +393,87 @@
      "A significant, rapid growth in our backlog has led, and could continue to lead, to situations in which labor resources become constrained."
     ],
     "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet; the comparison of current assets with current liabilities is read directly from the printed totals.",
+    "claim": "Liquidity is large against short-term obligations. Cash and cash equivalents were 1,111,049 (table in thousands) at the latest balance sheet date, up from 734,553 at year-end. Total current assets of 4,680,655 exceeded total current liabilities of 3,678,699 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
    },
    {
-    "basis": "Stated as a risk in P2.",
-    "claim": "Winning new contracts requires continued access to reasonably priced surety bonds.",
+    "basis": "The VIE amounts are stated in the balance sheet line; the availability caveat is inferred and unconfirmed.",
+    "claim": "A large part of reported cash sits in consolidated variable interest entities. 500,168 (table in thousands) of the cash balance is flagged as related to VIEs, against 361,898 at year-end. The evidence does not say how freely this cash can be moved to the parent.",
     "facts": [
-     "P2"
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release; the net cash figure is management's own.",
+    "claim": "Leverage is low in absolute terms and the company holds net cash. Management states total debt of $404 million, down from $407 million at the end of 2025, and cash exceeding total debt by $707 million.",
+    "facts": [
+     "P6"
     ],
     "quotes": [
-     "If we are unable to obtain reasonably priced surety bonds in the future, it could significantly affect our ability to be awarded new contracts and could, consequently, have a material adverse effect on our business, results of operations and financial condition."
+     "Total debt as of September 30, 2026 was $404 million, down 1% compared to $407 million at the end of 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4; amounts in F3.",
-    "claim": "Earnings growth was helped by lower share-based compensation expense, down $39.5 million in Q3 and $43.5 million over nine months. The nine-month expense fell to 77,179 from 120,676 (table in thousands).",
+    "basis": "Stated in the balance sheet; the link to the refinancing is inferred from the MD&A.",
+    "claim": "Debt on the balance sheet is almost all long-term. Current maturities were 4,563 (table in thousands), down from 14,589. Long-term debt, net of discount and issuance costs, was 399,078 versus 392,785. Unamortized discount and issuance costs fell to 7,444 from 17,983.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the MD&A and cash flow statement; the matching of the proceeds to the refinancing is inferred.",
+    "claim": "Refinancing needs were addressed in the third quarter. The company redeemed its Senior Notes and amended and restated its revolving credit facility. Management says this extended debt maturities, is expected to cut interest expense, and more than doubled the available revolver. The cash flow statement shows proceeds from debt of 400,000 and repayment of debt of 414,272 (table in thousands).",
     "facts": [
      "P4",
      "F3"
     ],
     "quotes": [
-     "Both periods of 2026 were also positively impacted by a significant decrease in share-based compensation expense of $39.5 million and $43.5 million, respectively, compared to the same periods in 2025."
+     "which, among other things, extended debt maturities, is expected to significantly reduce future interest expense, more than doubled the size of its available revolving credit facility and provided meaningfully improved terms"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3.",
-    "claim": "For the compensation benefit to persist, the company must not reissue liability-classified awards. It stopped issuing them after shareholders approved additional plan shares.",
+    "basis": "Stated in the income statement, cash flow statement and MD&A.",
+    "claim": "The refinancing carried a one-time cost. The loss on extinguishment of debt was 51,386 (table in thousands). Management splits it into a $35.6 million cash redemption premium and $15.8 million of non-cash expense. Debt issuance and extinguishment costs paid in cash were 45,880 (table in thousands).",
     "facts": [
-     "P3"
+     "F2",
+     "F3",
+     "P4"
     ],
     "quotes": [
-     "After the Company\u2019s shareholders approved additional shares under the Plan in May 2025, the Company stopped issuing liability-classified, long-term incentive compensation awards, which will help to reduce future earnings volatility."
+     "which consisted of a $35.6 million cash redemption premium and $15.8 million of non-cash expense related to the acceleration of previously unamortized discounts and deferred financing costs"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4; figures in F2.",
-    "claim": "The July 2026 refinancing is expected to cut interest expense. Q3 interest expense was (7,290) against (13,549) a year earlier (table in thousands), and the refinancing cost a $51.4 million loss on extinguishment.",
+    "basis": "Figures are stated in the income statement; the cause is inferred.",
+    "claim": "Interest expense is lower than a year earlier. For nine months it was 34,407 against 41,489, and for the third quarter 7,290 against 13,549 (table in thousands).",
     "facts": [
-     "P4",
      "F2"
     ],
-    "quotes": [
-     "extended debt maturities, is expected to significantly reduce future interest expense, more than doubled the size of its available revolving credit facility and provided meaningfully improved terms"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6; the counter is inferred from the F1 balance sheet.",
-    "claim": "Operating cash flow grew with volume: $330.9 million in Q3 and $665.1 million over nine months, up 14% and 16%. Billings in excess of costs rose to 2,044,207 from 1,838,610 (table in thousands).",
+    "basis": "Figures are stated in the cash flow statement; the drivers are management's explanation.",
+    "claim": "Operating cash generation is strong and rising. Net cash provided by operating activities was 665,063 for nine months against 574,396 a year earlier (table in thousands). Management says the third quarter was $330.9 million, a record, and attributes it to higher volume, execution, earnings and collections on profitable projects.",
     "facts": [
-     "P6",
-     "F1"
+     "F3",
+     "P6"
     ],
     "quotes": [
      "The record operating cash flow for both periods was driven by higher volume, strong execution, record earnings and collections on profitable projects."
@@ -1072,46 +481,190 @@
     "support": "supported"
    },
    {
-    "basis": "Stated as management expectation in P6.",
-    "claim": "Management raised 2026 adjusted EPS guidance to $5.90 to $6.10, from $5.15 to $5.45. It expects strong revenue and adjusted EPS growth in 2027 based on backlog visibility.",
+    "basis": "Figures are stated; the quality assessment is inferred from the line items.",
+    "claim": "Part of operating cash flow comes from non-cash add-backs and working capital rather than earnings alone. Net income was 161,475, and the add-backs include share-based compensation of 77,179, a pension settlement charge of 33,753, a loss on extinguishment of 51,386 and deferred income taxes of 57,460. Changes in other working capital components added 249,832 (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and balance sheet; the link between the two is inferred.",
+    "claim": "Capital spending is modest relative to operating cash flow. Acquisition of property and equipment was 91,265 against 105,891 a year earlier. Investments in securities were 111,513 against 56,299, and restricted investments rose to 292,316 from 228,959 (table in thousands).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement; the prior-year dividend figure is printed as zero.",
+    "claim": "Cash was returned to shareholders and minority partners in addition to debt service. Nine-month payments included dividends of 11,202, stock repurchases of 30,000, and distributions to noncontrolling interests of 23,800. Net cash used in financing was 131,435 (table in thousands). No dividends were paid in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the risk factor text; the cautionary reading against the refinancing is inferred.",
+    "claim": "Covenant and financing risks were disclosed in the annual report, and the latest 10-Q reports no material changes to risk factors. The 10-K described a substantial amount of indebtedness with restrictive covenants and a net leverage covenant that needed two amendments. Total debt then was $407.4 million, with $14.6 million current.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "We have a substantial amount of indebtedness with restrictive covenants which could adversely affect our financial position and prevent us from fulfilling our obligations under our debt agreements.",
+     "There have been no material changes to our risk factors as disclosed in our Annual Report on Form 10-K for the year ended December 31, 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the 10-Q MD&A; revenue figures from the income statement.",
+    "claim": "Revenue growth is driven by higher execution activity on newer, larger, higher-margin projects. Third-quarter revenue was 1,720,256 against 1,415,360 a year earlier (table in thousands), and the company reports 21.5% growth for the quarter and 17.6% for nine months.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "primarily driven by increased project execution activities on certain newer, larger and higher-margin projects that have significant scope of work remaining"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A and 10-Q MD&A; the conversion condition is inferred from them.",
+    "claim": "For growth to continue, the large backlog must keep converting to revenue on schedule. Conversion takes several years and differs by segment, and many newer design-build projects are early in a multi-year path.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Most projects in the Civil segment\u2019s backlog typically convert to revenue over a period of three to five years and in the Building and Specialty Contractors segments over a period of one to three years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Backlog and award figures are stated in the 10-Q MD&A and the earnings release; the replenishment condition is inferred.",
+    "claim": "Backlog is the base for future revenue, and it must be replenished. Backlog of $20.4 billion is down 6% from $21.6 billion a year earlier. Nine-month new awards of $4.5 billion compare with $7.0 billion in the prior-year period, so the condition is that new awards keep pace with revenue burn.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "down 6% compared to $21.6 billion at the end of the third quarter of 2025",
+     "a second straight quarter with a book-to-burn ratio greater than 1.0x"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the earnings release and 10-Q; whether it converts to awards is not shown.",
+    "claim": "A large bid pipeline is the source of future awards. The company cites a pipeline of more than $200 billion and expects many large opportunities to bid in the next one to two years, while intending to stay selective on margin and risk.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Overall, the Company's pipeline of potential projects over the next three to four years totals more than $200 billion, which is approximately three times larger than the pipeline from just a couple of years ago."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement, 10-Q MD&A, earnings release and 10-K MD&A.",
+    "claim": "Profit is growing faster than revenue. Third-quarter income from construction operations was 125,419 versus 40,094 (table in thousands), helped by a $39.5 million decline in share-based compensation. The condition is that execution stays profitable and share-based compensation stays low.",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Share-based compensation expense is expected to decline significantly in 2027, as most of the remaining liability-classified awards will vest by the end of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow and balance sheet figures are stated; the reversal risk is inferred from the balance sheet structure.",
+    "claim": "Operating cash flow supports growth and capital returns. Nine-month operating cash flow was 665,063 against 574,396 (table in thousands). It funded dividends of 11,202 and repurchases of 30,000, and cash and equivalents reached 1,111,049.",
+    "facts": [
+     "F3",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "The record operating cash flow for both periods was driven by higher volume, strong execution, record earnings and collections on profitable projects."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Debt, cash and interest figures are stated; the future benefit is management's expectation.",
+    "claim": "A lower financing cost and net cash position support earnings. Total debt of $404 million is below cash by $707 million, and third-quarter interest expense fell to 7,290 from 13,549 (table in thousands) after the July refinancing. This depends on the refinancing delivering the lower interest cost the company expects.",
+    "facts": [
+     "P6",
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "is expected to significantly reduce future interest expense"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K; the dependency conclusion is inferred.",
+    "claim": "Demand depends on public infrastructure funding. Government customers were 86% of backlog at the 10-K date, and the Bipartisan Infrastructure Law funding window has closed. Continued growth requires follow-on funding or other state, local and federal sources.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026",
+     "as of December 31, 2025 accounted for 86% of our backlog"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the earnings release; it is a forward-looking statement, not a result.",
+    "claim": "Management expects growth to continue and has raised its 2026 adjusted EPS guidance to $5.90 to $6.10 from $5.15 to $5.45. It also expects continued revenue and adjusted EPS growth in 2027, resting on the long-duration backlog.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "The Company also anticipates continued strong revenue and adjusted EPS growth in 2027 due to solid visibility provided by its high-quality, long-duration backlog."
+     "Tutor Perini anticipates continued strong revenue and adjusted EPS growth in 2027 due to clear visibility provided by long-duration backlog",
+     "The Company's guidance continues to factor in contingency for various unknown or unexpected developments."
     ],
     "support": "number_not_listed"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited item (P4), with the charge shown as a line in F2",
-    "claim": "The company completed a refinancing of its senior notes and an amendment and restatement of its revolving credit facility, recognizing a one-time loss on extinguishment of debt of $51.4 million, which included a $35.6 million cash redemption premium.",
+    "basis": "stated in the cited item (P4 MD&A; F2 income statement line)",
+    "claim": "The company refinanced its senior notes and amended and restated its revolving credit facility, and booked a one-time loss on extinguishment of debt of $51.4 million.",
     "facts": [
      "P4",
      "F2"
     ],
     "quotes": [
-     "As a result of this transaction, the Company recognized a one-time loss on extinguishment of debt of $51.4 million ($0.70 per diluted share, after tax) for the three and nine months ended September 30, 2026, which consisted of a $35.6 million cash redemption premium and $15.8 million of non-cash expense related to the acceleration of previously unamortized discounts and deferred financing costs."
+     "as of July 2, 2026, the Company completed the refinancing of its 2024 Senior Notes and entered into an amendment and restatement of its existing revolving credit facility"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P4)",
-    "claim": "The company settled its obligations under its defined benefit pension plan and recorded a one-time non-cash charge of $33.8 million.",
+    "basis": "stated in the cited item (P4 MD&A; F2 income statement line)",
+    "claim": "The company settled its obligations under its defined benefit pension plan and recorded a one-time non-cash pension settlement charge of $33.8 million.",
     "facts": [
      "P4",
      "F2"
     ],
     "quotes": [
-     "In the third quarter of 2026, the Company settled its obligations under its defined benefit pension plan to eliminate future cash contributions and associated ongoing administrative expenses.",
-     "This resulted in a one-time non-cash charge of $33.8 million ($0.40 per diluted share, after tax) primarily related to the accelerated recognition of unamortized net actuarial losses, which would otherwise have been recognized in future periods."
+     "In the third quarter of 2026, the Company settled its obligations under its defined benefit pension plan to eliminate future cash contributions and associated ongoing administrative expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P6)",
-    "claim": "In its earnings release, the company raised its full-year adjusted EPS guidance to $5.90 to $6.10, up from $5.15 to $5.45.",
+    "basis": "stated in the cited item (8-K earnings release)",
+    "claim": "The company published a raised full-year adjusted EPS guidance range of $5.90 to $6.10, up from $5.15 to $5.45.",
     "facts": [
      "P6"
     ],
@@ -1121,8 +674,160 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P7)",
-    "claim": "After sales of company stock by his affiliated trusts, Ronald N. Tutor's beneficial ownership fell below the 11.25% threshold that entitles him to a Board designee.",
+    "basis": "stated in the cited item (8-K Item 5.02). Status is announced_pending because the effective date of October 30, 2026 is stated in the filing, and the filing does not itself show the resignation took effect.",
+    "claim": "Board member Sid Feltenstein, designee of Ronald Tutor, gave notice that he will resign from the Board effective October 30, 2026, after Mr. Tutor's beneficial ownership fell below the 11.25% designation threshold. The Board is expected to reduce its size.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "his beneficial ownership fell below 11.25%"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Inferred from the stated adjusted-versus-GAAP structure in P6 and the F2 GAAP figures. No item states a risk of withdrawal.",
+    "claim": "The raised 2026 guidance is for adjusted EPS only, and management gives no GAAP EPS guidance. Adjusted EPS excludes share-based compensation, the debt-extinguishment loss and the pension charge. Nine-month adjusted diluted EPS was $4.59 against GAAP diluted EPS of $2.09.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "As previously disclosed, the Company is not providing forward-looking guidance for GAAP EPS or a quantitative reconciliation of adjusted EPS guidance to GAAP EPS guidance due to the difficulty in forecasting share-based compensation expense, which fluctuates with future share price movements.",
+     "The Company's guidance continues to factor in contingency for various unknown or unexpected developments."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P4 and P6; the link to growth risk is inferred.",
+    "claim": "Backlog is $20.4 billion, down 6% from $21.6 billion a year earlier. Nine-month new awards were $4.5 billion against $7.0 billion in the same period of 2025. The backlog table shows nine-month awards of 4,540.3 against revenue recognized of 4,746.8 (table in millions), so the backlog that supports the growth outlook was drawn down over the nine months.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "down 6% compared to $21.6 billion at the end of the third quarter of 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the risk factors and MD&A; the current exposure is not quantified in the evidence shown.",
+    "claim": "Contract estimates, disputes and legal outcomes have caused large past charges, including a $101.6 million non-cash charge from an adverse arbitration decision that the company is appealing.",
+    "facts": [
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "in October 2024, we received an unexpected adverse arbitration decision on a legacy dispute related to a completed Civil segment bridge project in California that resulted in a non-cash charge of $101.6 million, which we are appealing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from balance-sheet VIE disclosures in F1. No item states a liquidity constraint.",
+    "claim": "A large part of reported cash sits in variable interest entities: $500,168 of cash and cash equivalents of $1,111,049 (table in thousands) relates to VIEs. Billings in excess of costs and estimated earnings of 2,044,207 (table in thousands) are a large current liability, so the cash balance may not be fully available to the parent.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Billings in excess of costs and estimated earnings ($566,775 and $520,455 related to VIEs) | 2,044,207 | 1,838,610"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in risk factors and MD&A. The company's own assessment is that the risk is currently limited.",
+    "claim": "Government customers accounted for 86% of backlog as of December 31, 2025. Most government contracts can be terminated or renegotiated at any time without cause, and previously committed funding has sometimes been withheld.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The percentage of our business coming from government entities has continued to increase in recent years, and as of December 31, 2025 accounted for 86% of our backlog.",
+     "most of these contracts provide for termination or renegotiation by the government at any time, without cause"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The facts are stated in P7; any risk implication is inferred.",
+    "claim": "Ronald Tutor's board-designation right under the Shareholders Agreement lapsed after sales by his affiliated trusts took his beneficial ownership below 11.25%. His board designee announced his resignation.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Following recently reported sales of Company common stock by Mr. Tutor\u2019s affiliated trusts, his beneficial ownership fell below 11.25%."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Backlog and award figures are stated in the cited items. Whether replenishment will continue is not stated and is the open question.",
+    "claim": "Backlog is down 6% from a year earlier, from $21.6 billion to $20.4 billion, and nine-month new awards of $4.5 billion trail the $7.0 billion of a year ago. Will new awards keep pace with revenue burn into 2027?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Consolidated backlog as of September 30, 2026 was $20.4 billion, up compared to $19.9 billion at the end of the second quarter of 2026, and down 6% compared to $21.6 billion at the end of the third quarter of 2025."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "The expense decrease is stated in the cited items. The split of earnings between margin and lower expense is not given and is inferred as unresolved.",
+    "claim": "Third-quarter income from construction operations was $125.4 million. How much of the improvement came from project margins and how much from the $39.5 million drop in share-based compensation expense, and what will GAAP earnings look like when the company guides only adjusted EPS?",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Both periods of 2026 were also positively impacted by a significant decrease in share-based compensation expense of $39.5 million and $43.5 million, respectively, compared to the same periods in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash and VIE amounts are in the balance sheet. Availability of the VIE cash is not stated and is inferred as unresolved.",
+    "claim": "Reported cash is $1,111,049 (table in thousands), of which $500,168 (table in thousands) relates to variable interest entities. How much of the company's stated net cash of $707 million is freely available to the parent rather than tied to joint ventures or noncontrolling holders?",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "the Company's cash exceeded its total debt by $707 million as of September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances and cash flow are stated in the items. Management's explanation is stated. The reversal risk is inferred.",
+    "claim": "Operating cash flow was a record $665,063 (table in thousands), while billings in excess of costs rose to $2,044,207 (table in thousands) from $1,838,610 (table in thousands). How much of the cash flow comes from customer advances and working-capital timing that could reverse as projects progress?",
+    "facts": [
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "The record operating cash flow for both periods was driven by higher volume, strong execution, record earnings and collections on profitable projects."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The appeal is stated in the FY2025 10-K. Anything after that is not in the evidence.",
+    "claim": "The $101.6 million non-cash charge from an October 2024 adverse arbitration decision on a California bridge project is under appeal. What is the appeal's status and could it produce a further charge or a recovery?",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "in October 2024, we received an unexpected adverse arbitration decision on a legacy dispute related to a completed Civil segment bridge project in California that resulted in a non-cash charge of $101.6 million, which we are appealing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The threshold crossing is stated in the 8-K. The amounts sold are not in the evidence.",
+    "claim": "Ronald Tutor's affiliated trusts have recently sold stock, taking his beneficial ownership below 11.25%. How large were the sales, what is his remaining stake, and does the sell-down continue?",
     "facts": [
      "P7"
     ],
@@ -1132,377 +837,40 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P7)",
-    "claim": "Director Sidney Feltenstein, Mr. Tutor's Board designee, notified the company that he would resign from the Board.",
+    "basis": "Inferred from the balance sheet and cash flow lines. The composition of the deferred tax asset is not in the evidence.",
+    "claim": "The deferred income tax asset fell to 29,158 (table in thousands) from 96,573 (table in thousands), with a deferred tax charge of 57,460 (table in thousands) in the cash flow statement. When will cash taxes rise as deferred assets are used up?",
     "facts": [
-     "P7"
+     "F1",
+     "F3",
+     "F2"
     ],
-    "quotes": [
-     "Accordingly, on October 7, 2026, Sidney (\u201cSid\u201d) Feltenstein, Mr. Tutor\u2019s Board designee, informed the Company that he would resign from the Board effective October 30, 2026."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P8)",
-    "claim": "William E. Jensen, Executive Vice President - Civil West, notified the company of his decision to retire.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "On August 11, 2026, William E. Jensen, Executive Vice President - Civil West, notified Tutor Perini Corporation (the \u201cCompany\u201d) of his decision to retire from the Company effective September 4, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the cash flow statement line in F3",
-    "claim": "The company paid dividends of (11,202) (table in thousands) in the nine months to the latest quarter end. It paid none in the prior-year period.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Payment of dividends | (11,202) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the cash flow statement line in F3",
-    "claim": "The company repurchased common stock of (30,000) (table in thousands) in the nine months to the latest quarter end. It made no repurchases in the prior-year period.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Repurchase of common stock | (30,000) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2)",
-    "claim": "The company received an adverse arbitration decision on a legacy California bridge project. It recorded a non-cash charge of $101.6 million and is appealing the decision.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "For example, in October 2024, we received an unexpected adverse arbitration decision on a legacy dispute related to a completed Civil segment bridge project in California that resulted in a non-cash charge of $101.6 million, which we are appealing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2)",
-    "claim": "The long-time Chairman and CEO became Executive Chairman, and a new CEO was appointed.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our long-time Chairman and CEO transitioned to the role of Executive Chairman, and we appointed a new CEO, both effective as of January 1, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3)",
-    "claim": "During 2025 the company voluntarily prepaid its outstanding Term Loan B debt of $121.9 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The Company utilized some of its cash flow from operations in 2025 to voluntarily prepay its outstanding Term Loan B debt of $121.9 million."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "stated in the 10-K risk factors (P2) and MD&A (P3)",
-    "claim": "Litigation and arbitration outcomes have caused large charges, including a $101.6 million non-cash charge from an adverse arbitration decision on a California bridge project that the company is appealing.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "For example, in October 2024, we received an unexpected adverse arbitration decision on a legacy dispute related to a completed Civil segment bridge project in California that resulted in a non-cash charge of $101.6 million, which we are appealing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Business section (P1), risk factors (P2) and MD&A (P3)",
-    "claim": "Government entities accounted for 86% of backlog, and the current funding window for the Bipartisan Infrastructure Law closed on September 30, 2026, with future funding yet to be determined.",
+    "basis": "The window closing and management's belief are stated in the FY2025 10-K. The outcome of reauthorization is not in the evidence.",
+    "claim": "The Bipartisan Infrastructure Law funding window closed on September 30, 2026, and 86% of backlog is government work. What will replace the funding after that date and how will it affect civil awards?",
     "facts": [
      "P1",
      "P2",
      "P3"
     ],
     "quotes": [
-     "The percentage of our business coming from government entities has continued to increase in recent years, and as of December 31, 2025 accounted for 86% of our backlog.",
-     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026, we believe that Congress recognizes the long-term nature of infrastructure work and is already engaged in the legislative process to secure future funding beyond that date, although any amount and composition of such future funding is yet to be determined."
+     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A (P4) and earnings release (P6)",
-    "claim": "Backlog of $20.4 billion at September 30, 2026 was down 6% from $21.6 billion a year earlier, and nine-month new awards were $4.5 billion versus $7.0 billion in the prior-year period.",
+    "basis": "The refinancing and charge are stated. The new terms and the interest saving are not in the excerpts.",
+    "claim": "The July 2026 refinancing cost $51.4 million in extinguishment loss and is described as expected to significantly reduce future interest expense. What are the new debt terms, maturities, covenants, and the expected interest saving?",
     "facts": [
      "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Consolidated backlog as of September 30, 2026 was $20.4 billion, up compared to $19.9 billion at the end of the second quarter of 2026, and down 6% compared to $21.6 billion at the end of the third quarter of 2025.",
-     "The decrease for the nine-month period of 2026 primarily reflects an unusually strong period of major project lettings and successful awards in the comparable 2025 period, together with fewer significant opportunities reaching the award stage in 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors (P2) and MD&A (P3)",
-    "claim": "Fixed price and guaranteed maximum price contracts expose the company to cost overruns, and estimate revisions have materially affected results before.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "In addition, cost overruns, including unanticipated cost increases on fixed price contracts and guaranteed maximum price contracts, have previously resulted, and in the future may result, in lower profits or losses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors (P2). Balance figures come from F1 and the refinancing from P4. The post-refinancing covenant terms are not in the evidence.",
-    "claim": "The 10-K describes a substantial amount of indebtedness with restrictive covenants; total debt was $407.4 million at December 31, 2025.",
-    "facts": [
-     "P2",
-     "F1",
-     "P4"
-    ],
-    "quotes": [
-     "We currently have, and expect to continue to have, a substantial amount of indebtedness.",
-     "As of December 31, 2025, our total debt was $407.4 million, with $14.6 million classified as current debt."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the balance sheet (F1) and cash flow statement (F3). The counter is stated in the release (P6).",
-    "claim": "Operating cash flow of 665,063 for the nine months ended September 30, 2026 included 249,832 from changes in other components of working capital, and billings in excess of costs stood at 2,044,207 (tables in thousands).",
-    "facts": [
-     "F1",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "The record operating cash flow for both periods was driven by higher volume, strong execution, record earnings and collections on profitable projects."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A (P3) and earnings release (P6). Amounts are from F3.",
-    "claim": "Share-based compensation tied to the stock price makes GAAP earnings volatile; it was 77,179 in the first nine months of 2026 versus 120,676 a year earlier (table in thousands).",
-    "facts": [
-     "P3",
      "P6",
-     "F3"
-    ],
-    "quotes": [
-     "Variations in share-based compensation expense could have a material impact on GAAP EPS for the guidance period.",
-     "The Company currently projects a decrease in share-based compensation expense in 2026 and a much more significant decrease in 2027 as certain such awards have vested and most of the remaining liability-classified awards will vest by the end of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release (P6). Fluctuation risk is stated in P2. Any shortfall is inferred, not stated.",
-    "claim": "2026 guidance of $5.90 to $6.10 is for adjusted EPS only; the company provides no GAAP EPS guidance and no reconciliation.",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "The Company's guidance continues to factor in contingency for various unknown or unexpected developments."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "facts are stated in the 8-K (P7) and the 10-Q risk list (P4). The consequences are inferred.",
-    "claim": "Sales by Mr. Tutor's affiliated trusts took his beneficial ownership below 11.25%, and his Board designee resigned effective October 30, 2026.",
-    "facts": [
-     "P7",
-     "P4"
-    ],
-    "quotes": [
-     "Following recently reported sales of Company common stock by Mr. Tutor\u2019s affiliated trusts, his beneficial ownership fell below 11.25%.",
-     "The exertion of influence over the Company by our executive chairman due to his position and significant ownership interests;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "facts are stated in the 8-K (P8) and 10-K risk factors (P2). The impact is inferred.",
-    "claim": "Execution depends on retaining key management; the Executive Vice President - Civil West retired from the company in September 2026.",
-    "facts": [
-     "P8",
-     "P2"
-    ],
-    "quotes": [
-     "The execution of our business strategies also substantially depends on our ability to retain several key members of our management."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors (P2). Figures are from F2 and the VIE cash from F1. Exposure size is inferred.",
-    "claim": "Joint venture partners share earnings and liabilities; net income attributable to noncontrolling interests was 49,336 of 161,475 net income in the first nine months of 2026 (table in thousands).",
-    "facts": [
-     "P2",
      "F2",
-     "F1"
-    ],
-    "quotes": [
-     "Generally, we and our joint venture partners are jointly and severally liable for all liabilities and obligations of our joint ventures."
-    ],
-    "support": "supported"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "The 10-K states the appeal is pending. No item in the packet reports its outcome.",
-    "claim": "Has the appeal of the adverse arbitration decision on the completed California bridge project, which caused a non-cash charge of $101.6 million, been resolved, and with what result?",
-    "facts": [
-     "P2",
-     "P3",
-     "F1"
-    ],
-    "quotes": [
-     "For example, in October 2024, we received an unexpected adverse arbitration decision on a legacy dispute related to a completed Civil segment bridge project in California that resulted in a non-cash charge of $101.6 million, which we are appealing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The 10-K states the amount and composition of future funding is yet to be determined. The packet has no later update on it.",
-    "claim": "Has federal infrastructure funding been secured beyond the Bipartisan Infrastructure Law funding window, which closed during the reported quarter, and in what amount and composition?",
-    "facts": [
-     "P1",
-     "P3",
      "P2"
     ],
     "quotes": [
-     "While the current funding window for the Bipartisan Infrastructure Law closes on September 30, 2026, we believe that Congress recognizes the long-term nature of infrastructure work and is already engaged in the legislative process to secure future funding beyond that date, although the amount and composition of such future funding is yet to be determined."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The terms appear in the omitted Liquidity section, not in the packet. Inferred from P4's reference to further discussion below.",
-    "claim": "What are the coupon, maturity and covenants of the new notes, and what is the size of the amended revolving credit facility, following the refinancing that produced a $51.4 million loss on extinguishment?",
-    "facts": [
-     "P4",
-     "F2",
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "As a result of this transaction, the Company recognized a one-time loss on extinguishment of debt of $51.4 million ($0.70 per diluted share, after tax) for the three and nine months ended September 30, 2026, which consisted of a $35.6 million cash redemption premium and $15.8 million of non-cash expense related to the acceleration of previously unamortized discounts and deferred financing costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P7 that ownership fell below the threshold. The current level and the board action are not in the packet.",
-    "claim": "What is Ronald N. Tutor's beneficial ownership after the trust sales that took it below the board-designation threshold, will further sales follow, and has the board been reduced in size?",
-    "facts": [
-     "P7",
-     "P4"
-    ],
-    "quotes": [
-     "Following recently reported sales of Company common stock by Mr. Tutor\u2019s affiliated trusts, his beneficial ownership fell below 11.25%.",
-     "It is expected that the Board will reduce the size of the Board following Mr. Feltenstein\u2019s resignation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The projection is stated in P3 and the figures are in F3. The amount of unvested liability awards outstanding is not in the packet.",
-    "claim": "How much share-based compensation expense will remain after the liability-classified awards finish vesting, given that 9-month expense fell to 77,179 from 120,676 (table in thousands)?",
-    "facts": [
-     "P3",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "The Company currently projects a decrease in share-based compensation expense in 2026 and a much more significant decrease in 2027 as certain such awards have vested and most of the remaining liability-classified awards will vest by the end of 2026."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "The guidance is stated in P6. The actual result comes after T.",
-    "claim": "Will full-year 2026 adjusted EPS fall within the raised guidance range, and how will it reconcile to GAAP EPS?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Raising 2026 adjusted EPS guidance to $5.90 to $6.10 (up from $5.15 to $5.45)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The backlog figures are stated in P4. Expected conversion timing for the September 2026 backlog is not in the packet.",
-    "claim": "Will backlog be rebuilt after it fell year over year, and how much of it is expected to convert to revenue in 2027?",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Consolidated backlog as of September 30, 2026 was $20.4 billion, up compared to $19.9 billion at the end of the second quarter of 2026, and down 6% compared to $21.6 billion at the end of the third quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the VIE parenthetical in F1. Any restrictions on that cash are not described in the packet.",
-    "claim": "How much of the cash balance is freely available to the company, given that $500,168 of the 1,111,049 (table in thousands) in cash relates to VIEs?",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Cash and cash equivalents ($500,168 and $361,898 related to variable interest entities (\u201cVIEs\u201d))"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The referenced discussion is in an omitted part of P4.",
-    "claim": "What explains the change in the effective tax rate and the drop in the deferred income tax asset from 96,573 to 29,158 (table in thousands)?",
-    "facts": [
-     "F1",
-     "F2",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "See Corporate, Tax and Other Matters below for a discussion of the change in the effective tax rate."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The expectation is stated in P3. The packet has no update on it.",
-    "claim": "Have the temporary negative project adjustments of $78.7 million recorded in 2025 begun to reverse as management expected?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "temporary aggregate negative project adjustments of $78.7 million in 2025 compared to $97.2 million in 2024"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The cash flows are in F3. The program terms are not in the packet.",
-    "claim": "What are the size of the repurchase authorization and the dividend rate behind the nine-month repurchases of 30,000 and dividends of 11,202 (table in thousands), and how much authorization remains?",
-    "facts": [
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "We cannot guarantee the timing, amount, or payment of dividends on our common stock or that we will repurchase our common stock pursuant to our stock repurchase program"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The retirement is stated in P8. The packet names no successor.",
-    "claim": "Who has succeeded the retired Executive Vice President - Civil West, and is the Civil West leadership transition complete?",
-    "facts": [
-     "P8",
-     "P2"
-    ],
-    "quotes": [
-     "On August 11, 2026, William E. Jensen, Executive Vice President - Civil West, notified Tutor Perini Corporation (the \u201cCompany\u201d) of his decision to retire from the Company effective September 4, 2026."
+     "which, among other things, extended debt maturities, is expected to significantly reduce future interest expense, more than doubled the size of its available revolving credit facility and provided meaningfully improved terms."
     ],
     "support": "supported"
    }
@@ -1513,5 +881,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+ "verdict_reason": "minority interests take too large a share of income"
 }
