@@ -2,148 +2,210 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 65,
- "claims_supported": 60,
- "date": "2026-11-17T23:48:07Z",
+ "based_on": {
+  "accepted": "2026-11-12T21:21:32.000Z",
+  "accepted_utc": "2026-11-13T02:21:32Z",
+  "accession": "0001104659-26-126267",
+  "decision_time": "2026-11-26T19:39:03Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 81,
+ "claims_supported": 71,
+ "date": "2026-11-26T19:39:03Z",
  "family": "financial",
  "flags": [
-  "The company's financing subsidiary issued $100 million of additional 8.250% Senior Notes due 2030. Proceeds are meant to repay part of the revolving credit facility, with any remainder for general corporate purposes.",
-  "The company's $300 million 2026 senior unsecured notes matured and were paid off using the revolving credit facility. This was repayment at maturity, not a default.",
-  "The company completed the purchase of a credit card receivables portfolio from Bluestem for a net price of $196.3 million. It estimated remaining collections on the portfolio at $295.6 million."
+  "Following the Reorganization, Jefferson Capital, Inc. became a holding company owning 100% of JCAP TopCo, LLC and changed its taxpayer status to a corporation.",
+  "Jefferson Capital, Inc. completed its initial public offering at $15.00 per share, with selling shareholders selling 10,875,000 shares and the Company issuing and selling 625,000 shares for $4.5 million in net proceeds.",
+  "Following year-end, the Company executed a follow-on equity offering that reduced JCF Stockholders' ownership to 53.1% and repurchased $58.9 million of stock to support the transaction."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "share count does not reconcile with filed EPS",
+ "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 and 10-Q MD&A overview.",
-    "claim": "The company buys portfolios of charged-off consumer receivables at deep discounts to face value and collects on them. Its main asset classes are credit card, auto, utilities and telecom receivables.",
+    "basis": "Stated directly in Item 1 Business and Item 7 MD&A of the 2025 Form 10-K.",
+    "claim": "Jefferson Capital primarily purchases portfolios of previously charged-off consumer receivables at deep discounts to face value from independent third parties and earns money by managing and collecting repayments from individual debtors.",
     "facts": [
      "P1",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "The Company primarily purchases portfolios of consumer receivables at deep discounts to face value and manages them by working with individuals as they repay their obligations and work toward financial recovery."
+     "We primarily purchase portfolios of previously charged-off consumer receivables at deep discounts to face value and manage them by working with individuals as they repay their obligations and work toward financial recovery.",
+     "All deployments are made to independent third parties."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 and the Item 1A risk factor.",
-    "claim": "Sellers of the portfolios are creditors: banks, fintech platforms, telecom providers, card issuers and auto finance companies. Purchases are concentrated among a few of them, with the top five clients at 45.2% and 55.3% of purchases and the top client at 23.6% and 32.8% (years ended December 31, 2025 and 2024).",
+    "basis": "Stated in Item 1 Business and Item 1A Risk Factors of the 2025 Form 10-K.",
+    "claim": "The company buys credit card, secured and unsecured automotive, utilities, telecom, and other receivables from creditors, banks, fintech origination platforms, telecommunications providers, credit card issuers, and auto finance companies, with its top five clients accounting for 45.2% of purchases in 2025 and its top client accounting for 23.6%.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
+     "The Company purchases portfolios of receivables from a diverse client base, including Fortune 500 creditors, banks, fintech origination platforms, telecommunications providers, credit card issuers, and auto finance companies.",
      "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q and 10-K MD&A overviews.",
-    "claim": "The company reports four geographic segments: United States, United Kingdom, Canada and Latin America. It also runs two lines of business, Distressed (the largest) and Insolvency.",
+    "basis": "Stated in Item 1 Business and Item 7 MD&A of the 2025 Form 10-K.",
+    "claim": "Alongside debt purchasing, the company provides debt servicing and portfolio management services to credit originators for a percentage of collections or a fixed fee, and generates credit card revenue from programs sourced from two issuers.",
     "facts": [
-     "P4",
+     "P1",
      "P3"
     ],
     "quotes": [
-     "We operate and manage our business through four reportable segments that are based on geography: United States, United Kingdom, Canada, and Latin America.",
-     "Distressed, our largest line of business, represents the purchase, collection, and servicing collection of nonperforming consumer loans"
+     "Servicing revenue consists of the revenue we generate from providing collection services to certain third parties.",
+     "Generally, we receive a percentage of collections as the fee for services, and in some cases, we receive a fixed fee.",
+     "For credit card receivables, the Company purchases from two issuers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the segment table of the 10-K MD&A and the 8-K earnings release table.",
-    "claim": "The United States is the dominant segment. For 2025 it had total revenue of $450.3 (table in millions) out of $613.3 million, against $50.8 (United Kingdom), $71.8 (Canada) and $40.4 (Latin America), all table in millions. U.S. ERC at September 30, 2026 was $2,586.0 (table in millions) of a total of $3.6 billion.",
+    "basis": "Stated in the Results of Operations table and prose in Item 7 MD&A of the 2025 Form 10-K.",
+    "claim": "Portfolio revenue is the primary revenue source, contributing $566.4 (table in millions) or 92.4% of $613.3 (table in millions) total revenues in 2025, alongside 6.5% from servicing revenue and 1.2% from credit card revenue.",
     "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the income statement and the 10-K MD&A revenue description.",
-    "claim": "Revenue comes mainly from portfolio revenue, with smaller credit card and servicing (fee-for-collection) revenue. In the nine months to September 30, 2026, total portfolio revenue was 502,598 of total revenues of 539,493, with credit card revenue of 4,984 and servicing revenue of 31,911 (all in thousands).",
-    "facts": [
-     "F2",
      "P3"
     ],
     "quotes": [
-     "Servicing revenue consists of the revenue we generate from providing collection services to certain third parties."
+     "Our revenue is primarily derived from revenue from investments in receivables, which is revenue recognized from engaging in debt purchasing and recovery activities, and from credit card and servicing revenue streams.",
+     "Total revenues were $613.3 million for the year ended December 31, 2025, an increase of $179.9 million, or 41.5%, compared to $433.3 million for the year ended December 31, 2024."
     ],
     "support": "supported"
    },
    {
-    "basis": "definition stated in the 10-K MD&A; amounts stated in the income statement.",
-    "claim": "Portfolio revenue has two parts: portfolio income, which accretes at each pool's effective interest rate, and changes in recoveries, which reflect collections above or below forecast and revisions to expected future collections. In Q3 2026 portfolio income was 165,491 and changes in recoveries were 7,181 (thousands). For the nine months, changes in recoveries were 23,248 against 5,670 a year earlier.",
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and Part I Item 2 MD&A of the Q3 2026 Form 10-Q.",
+    "claim": "The company manages its operations through four geographic reportable segments\u2014United States, United Kingdom, Canada, and Latin America\u2014and two primary lines of business, Distressed and Insolvency.",
     "facts": [
      "P3",
-     "F2"
-    ],
-    "quotes": [
-     "Portfolio revenue consists of two components"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A, the earnings release and the income statement.",
-    "claim": "Revenue is driven by how much is deployed into new portfolios and how much is collected. In Q3 2026 the company invested $318.0 million, up 110.6% from $151.0 million, and collections were $319.2 million, up 34.8% from $236.8 million. Total revenues were 185,514 against 150,842 (thousands).",
-    "facts": [
-     "P4",
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Deployments are a key driver of the growth of our ERC and a measure to compare growth in our business with the growth of other companies in the debt collection industry."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A.",
-    "claim": "The price paid relative to face value varies with the type and age of the accounts bought. Newly charged-off or paying portfolios cost more per dollar of face value. In Q3 2026 the average purchase price was 8.6% of face value against 5.3% a year earlier; for the nine months it was 6.7% against 6.1%.",
-    "facts": [
      "P4"
     ],
     "quotes": [
-     "The average purchase price as a percentage of face value is higher for newly charged-off portfolios as compared to more seasoned portfolios because newly charged-off portfolios generally have higher liquidation rates."
+     "We operate and manage our business through four reportable segments that are based on geography: United States, United Kingdom, Canada, and Latin America."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 Seasonality section.",
-    "claim": "The business is seasonal. Deployments peak in the fourth quarter, when originators clear their books before year end. Collections are strongest from February to mid-April, when tax refunds are paid.",
+    "basis": "Stated in the Segment Results of Operations table in Item 7 MD&A of the 2025 Form 10-K.",
+    "claim": "In 2025, the United States segment generated $450.3 (table in millions) of $613.3 (table in millions) total revenue, followed by Canada at $71.8 (table in millions), the United Kingdom at $50.8 (table in millions), and Latin America at $40.4 (table in millions).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Total Revenue |  | $450.3 |  | $50.8 |  | $71.8 |  | $40.4 |  | $613.3"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and Part I Item 2 MD&A of the Q3 2026 Form 10-Q.",
+    "claim": "Portfolio revenue is driven by the stock of purchased receivables\u2014measured by Estimated Remaining Collections of $3,610.8 (table in millions) at September 30, 2026\u2014and consists of effective interest rate accretion plus changes in actual and expected recoveries.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Portfolio revenue consists of two components: (i) portfolio income, which is the accretion of the discount on the negative allowance due to the passage of time (generally the portfolio balance multiplied by the established pool effective interest rate (\u201cEIR\u201d)), and (ii) changes in recoveries, which includes recoveries above or below forecast (the difference between actual cash collected or recovered during the current year and expected cash recoveries for the current period) and changes in expected future recoveries (the present value change of expected future recoveries, where such change generally results from changes to the expected timing of collections and changes to the total amount of expected future collections).",
+     "Deployments are a key driver of the growth of our ERC and a measure to compare growth in our business with the growth of other companies in the debt collection industry.",
+     "Total |  | $3,610.8 |  | $2,929.6 |  | $681.2 |  | 23.3%"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and Part I Item 2 MD&A of the Q3 2026 Form 10-Q.",
+    "claim": "Revenue expansion is driven by portfolio deployments\u2014$832.0 million at 6.4% of face value in 2025 and $619.9 million at 6.7% of face value in the nine months ended September 30, 2026\u2014and major acquisitions such as Conn\u2019s and Bluestem.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "During the year ended December 31, 2025, we invested $832.0 million to acquire receivable portfolios, with face values aggregating $13,030.7 million, for an average purchase price of 6.4% of face value.",
+     "During the nine months ended September 30, 2026, we invested $619.9 million to acquire receivable portfolios, with face values aggregating $9,290.0 million, for an average purchase price of 6.7% of face value.",
+     "The increase is primarily a result of increased deployments during the year as well as the Conn\u2019s portfolio acquisition in December 2024 which contributed $95.8 million of revenue as well as the Bluestem acquisition in December 2025 which contributed $5.4 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q income statement and Q3 2026 earnings release.",
+    "claim": "In the nine months ended September 30, 2026, total revenues rose to 539,493 (table in thousands) from 458,490 (table in thousands) in the prior-year period, supported by strong deployments in prior periods.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Total Revenues | 185,514 | 150,842 | 539,493 | 458,490",
+     "The growth was primarily the result of strong deployments in prior periods"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in Item 1 Business (Seasonality) of the 2025 Form 10-K.",
+    "claim": "The business exhibits seasonality in both buying and collecting, with deployments heaviest in the fourth quarter and U.S. collections strongest from February to mid-April.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Our business typically experiences its busiest season in terms of deployments in the fourth quarter of the year."
+     "Our business typically experiences its busiest season in terms of deployments in the fourth quarter of the year.",
+     "By contrast, the strongest months for collections, particularly in the United States, correspond to the period from February to the middle of April, due to the timing of income tax refund checks resulting in higher collections and recoveries as consumers are more likely to use their excess cash to pay off old debts."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement, the 10-K MD&A and the earnings release.",
-    "claim": "Servicing expense, the cost of collecting, is the largest operating cost. In Q3 2026 it was 67,737 of total operating expenses of 98,379 (thousands), against 47,609 a year earlier. The release attributes a $20.1 million increase to servicing, including $6.3 million of higher court costs.",
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and the Q3 2026 Form 10-Q income statement.",
+    "claim": "Servicing expenses are the largest operating cost driver at $187.2 million or 30.5% of total revenues in 2025 and 198,137 (table in thousands) in the nine months ended September 30, 2026, led by upfront court costs and third-party agency and legal commissions.",
     "facts": [
-     "F2",
      "P3",
-     "P6"
+     "F2"
     ],
     "quotes": [
-     "Servicing expenses primarily consists of collections and customer service expenses associated with previously charged-off receivables, such as the cost of outsourced collections, debtor correspondence, legal fees associated with the collection of debt and other direct expenses associated with collections and customer service efforts."
+     "Servicing expenses were $187.2 million for the year ended December 31, 2025, an increase of $56.3 million, or 43.0%, compared to $130.9 million for the year ended December 31, 2024.",
+     "The increase in servicing expenses was primarily driven by increased collections including $12.1 million from the Conn\u2019s portfolio and increased court costs of $22.4 million which are incurred upfront at the outset of consumer litigation in anticipation of generating future collections.",
+     "Servicing expenses | 67,737 | 47,609 | 198,137 | 133,948"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the balance sheet, the income statement, the earnings release and the 8-K.",
-    "claim": "The company funds purchases with debt, so interest is the second major cost. Notes payable were 1,538,195 (thousands) at September 30, 2026, and Q3 interest expense was 31,612 against 26,467. The leverage ratio was 1.73x against 1.59x. The company had $554 million drawn under the RCF and issued an additional $100 million of 8.250% Senior Notes due 2030 in August 2026.",
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and Part I Item 2 MD&A and the income statement of the Q3 2026 Form 10-Q.",
+    "claim": "Salaries and benefits\u2014including base pay, commissions, bonuses, benefits, and stock-based compensation\u2014totaled $64.6 million in 2025 and 65,145 (table in thousands) in the nine months ended September 30, 2026 across 1,040 FTE as of September 30, 2026.",
+    "facts": [
+     "P3",
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Salaries and benefits were $64.6 million for the year ended December 31, 2025, which is an increase of $16.5 million, or 34.2%, compared to $48.1 million for the year ended December 31, 2024.",
+     "Salaries and benefits | 20,890 | 23,314 | 65,145 | 43,590",
+     "We are headquartered in Minneapolis, Minnesota, and as of September 30, 2026, with 1,040 FTE (including our offshore co-sourced operation)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and the Q3 2026 Form 10-Q income statement.",
+    "claim": "Other operating costs include professional fees of $18.6 million in 2025 and 9,905 (table in thousands) in the nine months ended September 30, 2026, and other selling, general and administrative expenses of $18.8 million in 2025 and 13,677 (table in thousands) in the nine months ended September 30, 2026.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Professional fees were $18.6 million for the year ended December 31, 2025, an increase of $7.2 million, or 63.6%, compared to $11.4 million for the year ended December 31, 2024.",
+     "These expenses totaled $18.8 million for the year ended December 31, 2025, an increase of $2.2 million or 13.3%, compared to $16.6 million for the year ended December 31, 2024.",
+     "Professional fees | 4,571 | 3,743 | 9,905 | 15,353",
+     "Other selling, general and administrative | 4,402 | 4,221 | 13,677 | 13,783"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 Form 10-Q financial statements, 2025 Form 10-K Item 7, Q3 2026 earnings release, and August 2026 Form 8-K.",
+    "claim": "Debt financing is a major non-operating cost driver, with net notes payable of 1,538,195 (table in thousands) at September 30, 2026\u2014including 8.250% Senior Notes due 2030 and $554 million drawn on the revolving credit facility\u2014resulting in interest expense of $105.8 million in 2025 and (92,559) (table in thousands) in the nine months ended September 30, 2026.",
     "facts": [
      "F1",
      "F2",
@@ -152,441 +214,649 @@
      "P7"
     ],
     "quotes": [
-     "Interest expense consists of interest expense on our outstanding debt and amortization of debt issuance costs.",
-     "At September 30, 2026, the Company had $554 million drawn under the RCF"
+     "Notes payable, net | 1,538,195 | 1,409,039",
+     "Total interest expense was $105.8 million for the year ended December 31, 2025, an increase of $28.5 million, or 37.0%, compared to $77.2 million for the year ended December 31, 2024.",
+     "Interest expense | (31,612) | (26,467) | (92,559) | (77,184)",
+     "At September 30, 2026, the Company had $554 million drawn under the RCF",
+     "On August 20, 2026, Jefferson Capital Holdings, LLC (the \u201cIssuer\u201d), an indirect wholly-owned subsidiary of Jefferson Capital, Inc. (the \u201cCompany\u201d) issued $100 million aggregate principal amount of 8.250% Senior Notes due 2030 (the \u201cAdd-On Notes\u201d), pursuant to an indenture, dated as of May 2, 2025 (the \u201cExisting Indenture\u201d), among the Issuer, the guarantors thereto and U.S. Bank Trust Company, National Association, as trustee (the \u201cTrustee\u201d), as further supplemented by the first supplemental indenture, dated August 20, 2026 (the \u201cSupplemental Indenture\u201d and, together with the Existing Indenture, the \u201cIndenture\u201d), among the Issuer, the guarantors thereto and the Trustee."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement; the funding link is inferred from the financing lines.",
-    "claim": "Cash is recycled into new portfolios. In the nine months to September 30, 2026 the company bought receivables of 619,951 and applied collections of 450,579 (thousands, investing section of the cash flow statement). Operating cash flow was 136,232 against 193,645, and financing included stock repurchases of 58,912 and dividends of 44,376.",
+    "basis": "Stated in Item 7 MD&A of the 2025 Form 10-K and the Q3 2026 Form 10-Q income statement.",
+    "claim": "After converting to a corporate taxpayer in the June 2025 IPO reorganization, the company\u2019s effective income tax rate rose from 6.3% in 2024 to 13.9% in 2025, with income tax provisions of $30.5 million in 2025 and (37,549) (table in thousands) in the nine months ended September 30, 2026.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K, the 10-K risk factors and the earnings release.",
-    "claim": "Acquired portfolios add revenue but also expense. The Bluestem credit card portfolio, bought in December 2025 for a net price of $196.3 million, contributed Q3 2026 portfolio revenue of $13.4 million and net operating income of $10.3 million. Earlier Conn's and Bluestem purchases brought added staff and operating costs.",
-    "facts": [
-     "P1",
-     "P6",
-     "P2"
+     "P3",
+     "F2"
     ],
     "quotes": [
-     "For the third quarter 2026, the Company recognized portfolio revenue of $13.4 million and net operating income of $10.3 million related to the Bluestem portfolio purchase"
+     "The Company\u2019s effective tax rate for the year ended December 31, 2025 was 13.9%, compared to 6.3% for the year ended December 31, 2024.",
+     "The Company has recognized a provision of $30.5 million for the year ended December 31, 2025 to reflect the change in tax payer status to a corporation as a result of the reorganization related to the initial public offering.",
+     "Provision for income taxes | (12,090) | (7,151) | (37,549) | (24,086)"
     ],
-    "support": "supported"
-   },
-   {
-    "basis": "amounts stated in the income statement and cash flow statement; the explanation is partly inferred and partly from the 10-K MD&A tax discussion.",
-    "claim": "Profit growth is uneven. Q3 net income was 46,858 against 38,362, but nine-month net income was 125,788 against 150,234 (thousands). Over the nine months, operating expenses, interest, stock compensation (24,995 against 8,850) and income taxes (37,549 against 24,086) all rose.",
-    "facts": [
-     "F2",
-     "F3",
-     "P3"
-    ],
-    "quotes": [],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited items (company business description)",
-    "claim": "The company is a buyer and manager of charged-off consumer receivables, bought at deep discounts to face value. It operates in the U.S., Canada, the U.K. and Latin America and also earns servicing fees.",
+    "basis": "Stated as management's belief in P1 and P4.",
+    "claim": "Larger operational scale helps Jefferson Capital absorb regulatory costs, satisfy selective credit issuers, and commit to large purchases and forward flow agreements that constrain smaller and middle-market debt buyers.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "The Company primarily purchases portfolios of consumer receivables at deep discounts to face value and manages them by working with individuals as they repay their obligations and work toward financial recovery."
+     "We believe that smaller competitors continue to face difficulties in the portfolio purchasing market because of the high cost to operate due to regulatory pressure, issuers\u2019 selectiveness with buyers and lack of consistent access to capital.",
+     "We believe these operational costs favor larger participants, such as us, because the larger market participants are better able to adapt to these pressures and commit to larger purchases and forward flow agreements.",
+     "Some smaller competitors occasionally bid for portfolios as well, although middle market debt buyers have come under capital constraints recently and as result have reduced their purchasing activity."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Scale and momentum: Q3 2026 collections reached $319.2 million, up 34.8% from the year before, which the company attributes mainly to higher purchases.",
+    "basis": "Stated in P1 under Competition.",
+    "claim": "Jefferson Capital avoids direct head-to-head competition in selected niches by focusing on internally serviced portfolios, non-bank assets in the United Kingdom, and smaller regional markets in Canada and Latin America.",
     "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Collections from purchased receivables increased by $82.4 million or 34.8% to $319.2 million during the three months ended September 30, 2026, from $236.8 million during the three months ended September 30, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the pricing caveat is inferred from the 10-Q and 10-K descriptions of purchase price",
-    "claim": "Q3 2026 deployments were $318.0 million, up 110.6% from the prior-year quarter, which supports the company's claim of a leading position in buying portfolios.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The Company invested $318.0 million during the quarter to acquire receivable portfolios, up 110.6% compared to $151.0 million in the third quarter 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Committed forward flows give some visibility on future supply. The company had $384.3 million in committed forward flows at September 30, 2026.",
-    "facts": [
-     "P6",
      "P1"
     ],
     "quotes": [
+     "In some of our asset classes, we do not believe we have any significant competitors, and our growth strategy is not to take market share away from other debt buyers, but rather to unlock debt sales of portfolios which are currently serviced internally.",
+     "In the United Kingdom, there are a handful of large debt buyers that focus on the high street banks, but our focus is on utilities and telecom and point-of-sale installment loans.",
+     "In the United Kingdom, there are no significant competitors to ResolveCall for consumer reconnection services nationally.",
+     "In Latin America, we face competition from mainly smaller local players, which vary from country to country."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 under Portfolio Purchasing and Competition.",
+    "claim": "Regulatory complexity, strict privacy laws in Canada and the United Kingdom, and seller vetting of experienced buyers create barriers to entry for new competitors.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Regulatory complexity and burdens, strict privacy laws in the case of Canada and the United Kingdom, combined with seller preference for experienced portfolio purchasers, create significant barriers to successful entry for new competitors.",
+     "In either case, invited purchasers will typically have already successfully completed a qualification process and due diligence examination that includes the seller\u2019s review of the purchaser\u2019s experience, financial standing, operating procedures, business practices, and compliance oversight."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1, P4, and P6.",
+    "claim": "Founded in 2002, the company uses proprietary statistical and behavioral models to underwrite and manage mixed portfolios containing both performing and nonperforming loans.",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Founded in 2002, Jefferson Capital is an analytically driven purchaser and manager of charged-off, insolvency and active consumer accounts with operations in the United States, Canada, the United Kingdom and Latin America.",
+     "We purchase receivables based on robust, account-level valuation methods and employ proprietary statistical and behavioral models across our operations.",
+     "When we purchase portfolios with credit deterioration, we find that our expertise in evaluating and managing charged-off accounts allows us to confidently manage such portfolios with a higher level of credit risk than a buyer without that level of expertise would be comfortable."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3, P4, and P6.",
+    "claim": "Portfolio deployments increased 15.0% to $832.0 million in 2025 and 110.6% to $318.0 million in the third quarter of 2026, with $384.3 million in committed forward flows as of September 30, 2026.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "During the year ended December 31, 2025, we invested $832.0 million to acquire receivable portfolios, with face values aggregating $13,030.7 million, for an average purchase price of 6.4% of face value.",
+     "The amount invested in receivable portfolios increased $108.6 million, or 15.0%, compared with the $723.3 million invested during the year ended December 31, 2024, to acquire receivable portfolios with face values aggregating $9,198.5 million, for an average purchase price of 7.9% of face value.",
+     "During the three months ended September 30, 2026, we invested $318.0 million to acquire receivable portfolios, with face values aggregating $3,708.7 million, for an average purchase price of 8.6% of face value.",
+     "The amount invested in receivable portfolios increased $167.0 million, or 110.6%, compared with the $151.0 million invested during the three months ended September 30, 2025, to acquire receivable portfolios with face values aggregating $2,848.8 million, for an average purchase price of 5.3% of face value.",
      "As of September 30, 2026, the Company had $384.3 million in committed forward flows"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated by the company; not verified by third-party data in the packet",
-    "claim": "Management says scale and capital access favour larger buyers like itself, and lists underwriting and its data set among its competitive strengths. This is the company's own assessment.",
+    "basis": "Stated in P1, P3, P4, and P6.",
+    "claim": "Estimated Remaining Collections reached $3,610.8 (table in millions) as of September 30, 2026, up 23.3% year-over-year, supported by large portfolio acquisitions such as Bluestem for $196.3 million and Conn's.",
     "facts": [
+     "P1",
+     "P3",
      "P4",
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "We believe these operational costs favor larger participants, such as us, because the larger market participants are better able to adapt to these pressures and commit to larger purchases and forward flow agreements.",
-     "our disciplined and proprietary underwriting process;"
+     "The net purchase price for the portfolio was $196.3 million and the estimated remaining collections associated with the portfolio are $295.6 million.",
+     "The increase is primarily a result of increased deployments during the year as well as the Conn\u2019s portfolio acquisition in December 2024 which contributed $95.8 million of revenue as well as the Bluestem acquisition in December 2025 which contributed $5.4 million.",
+     "For the three months ended September 30, 2026, ERC in our United States reportable segment included $185.8 million from the Bluestem portfolio purchase with the comparative 2025 period having no ERC related to Bluestem.",
+     "Record ERC rose 23% to $3.6 billion"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K as management belief",
-    "claim": "The company describes weaker competition in parts of its market. Middle-market debt buyers are capital-constrained, some asset classes have no significant competitors, and the U.K. reconnection service ResolveCall has no significant national competitor.",
+    "basis": "Stated in F2 and P6; the sector-leading claim is management's unbenchmarked assertion in P6.",
+    "claim": "The company reported a 72.9% Cash Efficiency Ratio in the third quarter of 2026 alongside total revenues of 185,514 (table in thousands) and net operating income of 86,514 (table in thousands).",
     "facts": [
-     "P1"
+     "F2",
+     "P6"
     ],
     "quotes": [
-     "Some smaller competitors occasionally bid for portfolios as well, although middle market debt buyers have come under capital constraints recently and as result have reduced their purchasing activity.",
-     "In the United Kingdom, there are no significant competitors to ResolveCall for consumer reconnection services nationally."
+     "Sector-leading Cash Efficiency Ratio of 72.9%",
+     "Total revenues increased $34.6 million for the quarter, or 22.9%, to $185.5 million compared to $150.8 million for the third quarter 2025.",
+     "Total Revenues | 185,514 | 150,842 | 539,493 | 458,490",
+     "Net Operating Income | 86,514 | 70,036 | 248,132 | 245,940"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Client concentration is a named threat. The top five clients were 45.2% of 2025 purchases and the top client 23.6%, though both shares were lower than in 2024.",
+    "basis": "Stated in P6, P7, and P8.",
+    "claim": "As of September 30, 2026, the company maintained a 1.73x leverage ratio with $554 million drawn on its revolving credit facility after issuing $100 million of 8.250% Senior Notes due 2030 and paying off $300 million of maturing 2026 notes.",
+    "facts": [
+     "P6",
+     "P7",
+     "P8"
+    ],
+    "quotes": [
+     "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth",
+     "At September 30, 2026, the Company had $554 million drawn under the RCF",
+     "On August 15, 2026, the Company\u2019s $300 million 2026 senior unsecured notes matured and were paid off using the RCF",
+     "On August 20, 2026, Jefferson Capital Holdings, LLC (the \u201cIssuer\u201d), an indirect wholly-owned subsidiary of Jefferson Capital, Inc. (the \u201cCompany\u201d) issued $100 million aggregate principal amount of 8.250% Senior Notes due 2030 (the \u201cAdd-On Notes\u201d), pursuant to an indenture, dated as of May 2, 2025 (the \u201cExisting Indenture\u201d), among the Issuer, the guarantors thereto and U.S. Bank Trust Company, National Association, as trustee (the \u201cTrustee\u201d), as further supplemented by the first supplemental indenture, dated August 20, 2026 (the \u201cSupplemental Indenture\u201d and, together with the Existing Indenture, the \u201cIndenture\u201d), among the Issuer, the guarantors thereto and the Trustee."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P2.",
+    "claim": "Portfolio purchases are concentrated among large sellers, with the top five clients representing 45.2% and the top client representing 23.6% of 2025 purchases, while credit card receivables are purchased from two issuers.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively."
+     "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively.",
+     "For credit card receivables, the Company purchases from two issuers.",
+     "As a substantial percentage of our purchases are concentrated with a few large sellers, with our top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively, a significant decrease in the volume of nonperforming loan purchases from any of these large sellers could force us to seek to source nonperforming loan portfolios from other existing or new clients, which could cost time and additional resources and adversely impact our business."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (risk factor)",
-    "claim": "The risk factors name supply and pricing as a threat: the company may be unable to keep replacing portfolios or to buy them at appropriate prices.",
+    "basis": "Stated in P1, P2, and P4.",
+    "claim": "Competitive bidding, fluctuating portfolio pricing, and potential declines in nonperforming loan sales by credit originators threaten the company's ability to replace portfolios profitably.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We may not be able to continually replace our nonperforming loans with additional portfolios sufficient to operate efficiently and profitably, and/or we may not be able to purchase nonperforming loans at appropriate prices."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement; the mechanism is inferred from the Q3 release's account of servicing expenses",
-    "claim": "Costs rose faster than operating income in the first nine months of 2026. Revenues were 539,493 (table in thousands) against 458,490 a year earlier, but net operating income was only 248,132 against 245,940. Servicing expenses were 198,137 against 133,948.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the link to capital-access advantage is inferred",
-    "claim": "Leverage is rising as growth is funded with debt. The leverage ratio was 1.73x, up from 1.59x, and the company says it is partly because of increased borrowings for portfolio purchases. Funding depends on access to credit markets.",
-    "facts": [
-     "P6",
+     "P1",
      "P2",
-     "P7"
+     "P4"
     ],
     "quotes": [
-     "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth"
+     "To operate profitably, we must purchase and service a sufficient amount of nonperforming loans to generate revenue that exceeds our expenses.",
+     "Moreover, there can be no assurance that credit originators will continue to sell their nonperforming loans consistent with historical levels or at all, or that we will be able to bid competitively for those portfolios.",
+     "Sales levels are expected to fluctuate from quarter to quarter with portfolio pricing remaining competitive."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The Bluestem credit-card portfolio contributed to Q3 results, but management lists underperformance of the Conn's and Bluestem portfolios as a risk.",
+    "basis": "Stated in P2 Risk Factors.",
+    "claim": "Inaccurate valuation models, lower-than-projected recoveries, or expense overruns on acquired portfolios such as Conn's and Bluestem threaten profitability and risk impairment charges.",
     "facts": [
-     "P6",
      "P2"
     ],
     "quotes": [
-     "For the third quarter 2026, the Company recognized portfolio revenue of $13.4 million and net operating income of $10.3 million related to the Bluestem portfolio purchase",
-     "Our expected collections from the Conn\u2019s and Bluestem Portfolio Purchases may not be realized, or our expenses from the FTE that were formerly employed by Conn\u2019s may be higher than we anticipated, which may adversely impact our financial results."
+     "Furthermore, if the statistical and behavioral models we use to prepare financial projections and make business decisions are inaccurate, we may acquire nonperforming loan portfolios that ultimately prove to be unprofitable.",
+     "The portfolios acquired could underperform relative to our expectations or not perform in accordance with our anticipated timetable, either of which could result in an impairment charge.",
+     "We may also find that the operating expenses we incur to make our expected collections of the Conn\u2019s and Bluestem Portfolios exceed our forecast."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the ERC table; the dependence point is inferred",
-    "claim": "Estimated remaining collections (ERC) are concentrated in the U.S., at $2,586.0 (table in millions) of a $3,610.8 (table in millions) total. Latin America is the fastest-growing region, with ERC of 379.5 (table in millions), up 48.6%.",
+    "basis": "Stated in P2 Risk Factors.",
+    "claim": "Economic downturns, sustained inflation, tightening credit markets, and personal bankruptcy liquidations threaten debtor repayment capacity, unsecured recoveries, and portfolio supply.",
     "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by the company; the comparison is unsupported in the packet",
-    "claim": "The company reports a 'Sector-leading' Cash Efficiency Ratio of 72.9% for Q3 2026. This is a management claim, and the evidence has no peer figures to test it.",
-    "facts": [
-     "P6"
+     "P2"
     ],
     "quotes": [
-     "Sector-leading Cash Efficiency Ratio of 72.9%"
+     "Deterioration in economic conditions, or a significant rise in inflation or high level of sustained inflation could negatively affect the ability of consumers to pay their debts and could reduce the real value of our purchased receivables.",
+     "If global credit market conditions and the stability of global banks deteriorate, the amount of consumer or commercial lending and financing could be reduced, thus reducing the volume of nonperforming loans available for purchase, which could adversely affect our business, financial results and ability to succeed in the markets in which we operate.",
+     "Under certain of these filings, a debtor\u2019s assets may be sold to repay creditors, but because most of the receivables we collect through our collection operations are unsecured, we typically would not be able to collect on those receivables."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (risk factors)",
-    "claim": "Operational and regulatory dependencies are named threats: reliance on a co-sourced Mumbai operation for voluntary collections, and the risk that non-compliance with collection regulation could limit its ability to collect.",
+    "basis": "Stated in P1 and P2.",
+    "claim": "Extensive debt-collection, licensing, and privacy regulations across operating jurisdictions, alongside potential restrictions on AI collection tools in Latin America, threaten collection rights and operating costs.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Our failure to comply with these laws could result in enforcement action against us, the payment of significant fines and penalties, restrictions upon our operations or our inability to recover amounts owed to us.",
+     "Some laws and regulations applicable to credit issuers may preclude us from collecting on nonperforming and performing loans we acquire if the credit issuer previously failed to comply with applicable laws in generating or servicing those receivables.",
+     "There is a risk that regulatory regimes in Latin America may change in the future and impose greater restrictions on the use of new technologies, including through increased restrictions on debt collection practices and enhanced consumer protection laws."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 Risk Factors.",
+    "claim": "Reliance on third-party service providers and a co-sourced collection operation in Mumbai exposes the company to operational disruption, compliance penalties, and transition risk.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Our co-sourced operation in Mumbai, India provides critical support within our voluntary collection channel.",
-     "Our failure to comply with laws or regulations applicable to us could limit our ability to collect on our receivables, which could reduce our profitability and adversely affect our business."
+     "Should our Mumbai operation be disrupted, there is no guarantee that we could transition our servicing back to our domestic operations or to external resources without the disruption significantly impacting our business.",
+     "If any of these third-party service providers violate laws, regulatory requirements, contractual obligations, or act inappropriately in the conduct of their business, our operations and reputation could be negatively impacted and result in regulatory fines and penalties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 Risk Factors.",
+    "claim": "Expanding into unfamiliar receivable asset classes or new geographies without prior collection experience threatens underwriting accuracy and expected profits.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We may sometimes evaluate and may acquire portfolios consisting of assets with which we have little or no collection experience or portfolios of receivables in new geographies where we do not historically maintain an operational footprint.",
+     "Further, our existing methods of collections may prove less effective than we expect for these new receivables, which may have an adverse effect on our business, financial condition and results of operations."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Figures stated in the balance sheet, cash flow statement and earnings release; the reliance on the RCF is inferred.",
-    "claim": "Balance-sheet cash is small: cash and cash equivalents were $23,427 (table in thousands) at September 30, 2026 and restricted cash was 5,391, against 24,320 of restricted cash at year-end 2025. Cash plus restricted cash fell to 28,818 from 46,071 a year earlier. The company relies on its revolving credit facility for liquidity, with $554 million drawn.",
+    "basis": "stated in the cited item (P6)",
+    "claim": "At September 30, 2026, Jefferson Capital held $23,427 of cash and cash equivalents and 5,391 of restricted cash (table in thousands), compared with $23,231 and 24,320 at December 31, 2025.",
     "facts": [
-     "F1",
-     "F3",
      "P6"
     ],
     "quotes": [
-     "At September 30, 2026, the Company had $554 million drawn under the RCF"
+     "Cash and cash equivalents | | $23,427 | | $23,231",
+     "Restricted cash | | | 5,391 | | | 24,320",
+     "Cash and cash equivalents and restricted cash, end of period | | $28,818 | | $46,071"
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Ratio and driver stated in the earnings release; debt balances stated in the balance sheet.",
-    "claim": "Leverage rose year on year. The company's leverage ratio was 1.73x versus 1.59x, and management attributes this to more borrowing to fund portfolio purchases. Notes payable, net were $1,538,195 (table in thousands) against $1,409,039 at year-end 2025, with total stockholders' equity of 518,148.",
+    "basis": "stated in the cited item (P6)",
+    "claim": "At September 30, 2026, the company had $554 million drawn under its revolving credit facility (RCF), while management stated it had ample capital resources.",
     "facts": [
-     "F1",
      "P6"
     ],
     "quotes": [
-     "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth"
+     "At September 30, 2026, the Company had $554 million drawn under the RCF",
+     "We are well positioned to take advantage of the opportunities ahead with low leverage and ample capital resources."
     ],
     "support": "supported"
    },
    {
-    "basis": "Statement figures are stated; the classification point is inferred from the cash flow statement layout.",
-    "claim": "Operating cash flow weakened over nine months. Net cash provided by operating activities was $136,232 (table in thousands) versus 193,645 a year earlier, and net income fell to 125,788 from 150,234.",
+    "basis": "stated in the cited items (P4 and P6)",
+    "claim": "As of September 30, 2026, the company had $384.3 million in committed forward flows for future portfolio purchases.",
     "facts": [
-     "F3",
-     "F2"
+     "P4",
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "As of September 30, 2026, the Company had $384.3 million in committed forward flows",
+     "Under a forward flow contract, we agree to purchase statistically similar nonperforming loan portfolios from credit grantors on a periodic basis at a negotiated price over a specified time period, generally from six months to a year."
+    ],
     "support": "supported"
    },
    {
-    "basis": "Line items stated in the cash flow and income statements; the interpretation is inferred.",
-    "claim": "Reported earnings contain large non-cash items. Over nine months, stock-based compensation was $24,995 (table in thousands) versus 8,850, deferred income tax was 32,034, and changes in recoveries of (23,248) were deducted as a non-cash revenue item. Cash income taxes paid were only 6,599 against a provision for income taxes of 37,549.",
+    "basis": "stated in the cited item (F1)",
+    "claim": "As of September 30, 2026, notes payable, net stood at 1,538,195 and total liabilities were 1,746,097 against total stockholders' equity of 518,148 (table in thousands), up from notes payable, net of 1,409,039 at December 31, 2025.",
     "facts": [
-     "F3",
-     "F2"
+     "F1"
     ],
-    "quotes": [],
+    "quotes": [
+     "Notes payable, net | 1,538,195 | 1,409,039",
+     "Total Liabilities | 1,746,097 | 1,611,238",
+     "Total stockholders' equity | 518,148 | 476,135"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement and earnings release; the funding link is inferred.",
-    "claim": "Growth in receivable purchases consumes more cash than the business generates. Purchases of receivables were (619,951) (table in thousands) versus (451,531), and net cash used in investing activities was (170,839) versus (121,491). Operating cash flow of 136,232 did not cover that investing outflow.",
+    "basis": "stated in the cited item (P6)",
+    "claim": "Reported non-GAAP leverage rose from 1.59x at September 30, 2025 to 1.73x at September 30, 2026, based on Net Debt of $1,531.0 and Adjusted Cash EBITDA of $882.9 (table in millions).",
     "facts": [
-     "F3"
+     "P6"
     ],
-    "quotes": [],
-    "support": "supported"
+    "quotes": [
+     "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth",
+     "Borrowings, as reported | | $1,538.2 | | $1,182.6",
+     "Unamortized issuance costs | | 16.2 | | 17.4",
+     "Unrestricted cash | | (23.4) | | (42.3)",
+     "Net Debt (B) | | $1,531.0 | | $1,157.7",
+     "Adjusted Cash EBITDA (A) | | $882.9 | | $727.2"
+    ],
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in the cash flow statement; the interpretation is inferred.",
-    "claim": "Financing flows were net positive and borrowing-driven. Proceeds from notes payable were $1,548,430 (table in thousands) against payments of (1,421,307), and net cash provided by financing was 21,498. Shareholder distributions were repurchase of common stock (58,912) and dividends paid (44,376), against dividends of (47,942) a year earlier.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the income statement and cash flow statement.",
-    "claim": "Interest cost is rising. Interest expense was $92,559 (table in thousands) for nine months versus 77,184, and $31,612 for the third quarter versus 26,467. Cash interest paid was 87,875 versus 73,168.",
+    "basis": "stated in the cited items (F2 and F3)",
+    "claim": "For the nine months ended September 30, 2026, interest expense rose to (92,559) from (77,184) and cash interest paid rose to 87,875 from 73,168 (tables in thousands), compared with net operating income of 248,132.",
     "facts": [
      "F2",
      "F3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Interest expense | (31,612) | (26,467) | (92,559) | (77,184)",
+     "Net Operating Income | 86,514 | 70,036 | 248,132 | 245,940",
+     "Interest paid | 87,875 | 73,168"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release.",
-    "claim": "The $300 million 2026 senior unsecured notes matured in August 2026 and were repaid using the RCF. That shifted the maturity onto the revolver.",
+    "basis": "stated in the cited items (F3 and P6)",
+    "claim": "Net cash provided by operating activities declined to 136,232 in the nine months ended September 30, 2026 from 193,645 in the prior-year period (table in thousands), while trailing twelve-month operating cash flow was $211.4 versus $270.9 (table in millions).",
     "facts": [
+     "F3",
      "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "Net cash provided by operating activities | 136,232 | 193,645",
+     "Net cash provided by operating activities | | $211.4 | | $270.9"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited items (F3 and P3)",
+    "claim": "Operating cash flow of 136,232 lagged the prior year despite net income of $ 125,788 because non-cash change in recoveries subtracted (23,248) and accounts payable and accrued expenses used (30,805), partly offset by 32,034 of deferred income tax and 24,995 of stock-based compensation (table in thousands).",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 136,232 | 193,645",
+     "Net income | $ 125,788 | $ 150,234",
+     "Change in Recoveries | (23,248) | 0",
+     "Accounts payable and accrued expenses | (30,805) | 8,956",
+     "Deferred income tax | 32,034 | 17,254",
+     "Stock-based compensation | 24,995 | 8,850"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Terms stated in the 8-Ks; the use of proceeds is stated as intent, not as an outcome.",
-    "claim": "The company issued an additional $100 million of 8.250% Senior Notes due 2030 in August 2026, on top of $500 million previously issued under the same indenture. It intended the proceeds to repay part of the RCF borrowings. The notes pay interest semiannually and mature in 2030.",
+    "basis": "stated in the cited item (F3)",
+    "claim": "Under GAAP, principal collections applied to receivables of 450,579 are classified in investing activities alongside portfolio purchases of (619,951), resulting in net cash used in investing activities of (170,839) (table in thousands).",
     "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Collections applied to receivables | 450,579 | 331,042",
+     "Purchases of receivables, net | (619,951) | (451,531)",
+     "Net cash used in investing activities | (170,839) | (121,491)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (F3 and P1)",
+    "claim": "Because investing outflows, common stock repurchases of (58,912), and dividends of (44,376) exceeded operating cash flow, financing activities provided 21,498 of net cash via 1,548,430 of proceeds from notes payable against (1,421,307) of payments (table in thousands).",
+    "facts": [
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Repurchase of common stock | (58,912) | 0",
+     "Dividends paid to stockholders | (44,376) | (47,942)",
+     "Net cash provided by / (used in) financing activities | 21,498 | (59,036)",
+     "Proceeds from notes payable | 1,548,430 | 681,790",
+     "Payments on notes payable | (1,421,307) | (694,872)",
+     "The company repurchased $58.9 million of stock to support that transaction;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (P4 and P6)",
+    "claim": "On a gross cash basis, trailing twelve-month gross collections reached 1,175.3 and cash efficiency for the three months ended September 30, 2026 was 72.9% on cash receipts of $332.0 and adjusted operating expenses of $90.0 (tables in millions).",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Gross collections | 1,175.3 | 927.7",
+     "Cash Receipts (A) | | $332.0 | | $248.0",
+     "Adjusted Operating Expenses (B) | | $90.0 | | $69.0",
+     "Cash Efficiency Ratio (A-B) / A | | 72.9% | 72.2%",
+     "We believe that our ERC estimation represents an important supplemental measure to compare our cash generating capacity with other companies in the debt collection industry, even though we can provide no assurance that we will achieve such collections within a specified time period, or at all."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited items (P6, P7, and P8)",
+    "claim": "The company paid off its $300 million 2026 senior unsecured notes at maturity on August 15, 2026 using its RCF, leaving its 8.250% senior notes\u2014comprising $500 million issued under the May 2, 2025 indenture and $100 million of add-on notes issued August 20, 2026\u2014due May 15, 2030.",
+    "facts": [
+     "P6",
      "P7",
      "P8"
     ],
     "quotes": [
-     "The Add-On Notes will mature on May 15, 2030, subject to earlier repurchase or redemption.",
-     "previously issued $500 million in aggregate principal amount of 8.250% senior notes due 2030"
+     "On August 15, 2026, the Company\u2019s $300 million 2026 senior unsecured notes matured and were paid off using the RCF",
+     "The Add-On Notes will mature on May 15, 2030.",
+     "On August 20, 2026, Jefferson Capital Holdings, LLC (the \u201cIssuer\u201d), an indirect wholly-owned subsidiary of Jefferson Capital, Inc. (the \u201cCompany\u201d) issued $100 million aggregate principal amount of 8.250% Senior Notes due 2030 (the \u201cAdd-On Notes\u201d), pursuant to an indenture, dated as of May 2, 2025 (the \u201cExisting Indenture\u201d), among the Issuer, the guarantors thereto and U.S. Bank Trust Company, National Association, as trustee (the \u201cTrustee\u201d), as further supplemented by the first supplemental indenture, dated August 20, 2026 (the \u201cSupplemental Indenture\u201d and, together with the Existing Indenture, the \u201cIndenture\u201d), among the Issuer, the guarantors thereto and the Trustee.",
+     "The Add-On Notes are being offered as additional notes under the Indenture, dated as of May 2, 2025, pursuant to which the Issuer previously issued $500 million in aggregate principal amount of 8.250% senior notes due 2030 (the \u201cExisting Notes\u201d and, together with the Add-On Notes, the \u201cNotes\u201d)."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from what is and is not stated.",
-    "claim": "The packet does not show a debt maturity ladder, so it cannot say what falls due in 2027 and 2028. The visible refinancing sources are the revolver, the 2030 notes, collections of $319.2 million in the third quarter, and $384.3 million of committed forward flows. The RCF's size and maturity are not given.",
+    "basis": "stated in the cited items (P2, P6, and P7)",
+    "claim": "Maturing debt and RCF balances can be met through draws on the RCF, capital-markets note offerings such as the $100 million add-on notes, gross collections of 1,175.3 (table in millions), and cash and cash equivalents of $23,427 (table in thousands).",
     "facts": [
+     "P2",
      "P6",
      "P7"
     ],
-    "quotes": [],
-    "support": "number_not_found"
+    "quotes": [
+     "On August 15, 2026, the Company\u2019s $300 million 2026 senior unsecured notes matured and were paid off using the RCF",
+     "On August 20, 2026 the Company issued an additional $100 million aggregate principal amount of 8.25% Senior Notes due 2030 (the \u201cAdd-On Notes\u201d) to the 2030 Notes dated May 2, 2025.",
+     "The Issuer intends to use the net proceeds from this offering (i) to repay a portion of the borrowings currently outstanding under the Issuer\u2019s Revolving Credit Facility and (ii) the remainder, if any, for general corporate purposes.",
+     "Gross collections | 1,175.3 | 927.7",
+     "Cash and cash equivalents | | $23,427 | | $23,231",
+     "For example, deterioration in the financial markets could contribute to the insolvency of lending institutions, notably those providing our Revolving Credit Facility, or the tightening of credit markets, which could make it difficult or impossible for us to obtain credit on favorable terms or at all."
+    ],
+    "support": "quote_not_found"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Deployment figures are stated in the 10-Q MD&A and the earnings release. The conditions come from the 10-K risk factors.",
-    "claim": "Portfolio purchasing (deployments) is the lead growth driver: Q3 2026 deployments were $318.0 million, up 110.6% from $151.0 million a year earlier. For this to continue, credit originators must keep selling portfolios at prices that give an acceptable return, and the company must keep winning bids.",
+    "basis": "stated in the cited item (P3, P4, P6)",
+    "claim": "Increased deployments of purchased receivable portfolios are a primary driver of revenue and ERC growth, with annual purchases rising 15.0% to $832.0 million in 2025 and nine-month purchases rising 37.3% to $619.9 million in 2026.",
     "facts": [
+     "P3",
      "P4",
-     "P6",
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "The Company invested $318.0 million during the quarter to acquire receivable portfolios, up 110.6% compared to $151.0 million in the third quarter 2025",
-     "there can be no assurance that credit originators will continue to sell their nonperforming loans consistent with historical levels or at all"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The amount is stated in the earnings release. The contract length is stated in the 10-K Item 1. The link to near-term volume is inferred.",
-    "claim": "Committed forward flow contracts support near-term deployment volume. The company had $384.3 million in committed forward flows at September 30, 2026. For this to hold, counterparties must keep delivering volume under the contracts and renew them as they expire, which the 10-K says is generally within six months to a year.",
-    "facts": [
-     "P6",
-     "P1"
-    ],
-    "quotes": [
+     "Deployments are a key driver of the growth of our ERC and a measure to compare growth in our business with the growth of other companies in the debt collection industry.",
+     "During the year ended December 31, 2025, we invested $832.0 million to acquire receivable portfolios, with face values aggregating $13,030.7 million, for an average purchase price of 6.4% of face value.",
+     "The amount invested in receivable portfolios increased $168.4 million, or 37.3%, compared with the $451.5 million invested during the nine months ended September 30, 2025, to acquire receivable portfolios with face values aggregating $7,365.7 million, for an average purchase price of 6.1% of face value.",
      "As of September 30, 2026, the Company had $384.3 million in committed forward flows"
     ],
     "support": "supported"
    },
    {
-    "basis": "The figures are stated in the 10-Q and the release. The caveat is quoted from the 10-Q.",
-    "claim": "Collections and ERC are growing. Q3 collections were $319.2 million, up 34.8% from $236.8 million, and total ERC was 3,610.8 (table in millions), up 23.3%. For this to continue, actual collections must meet the projections that underlie ERC and the carrying value of receivables.",
+    "basis": "stated in the cited item (P1, P2)",
+    "claim": "Continued deployment growth requires credit originators to keep selling sufficient nonperforming loan volumes at appropriate prices despite top-five client concentration of 45.2% and top-client concentration of 23.6% in 2025.",
     "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively.",
+     "To operate profitably, we must purchase and service a sufficient amount of nonperforming loans to generate revenue that exceeds our expenses.",
+     "Moreover, there can be no assurance that credit originators will continue to sell their nonperforming loans consistent with historical levels or at all, or that we will be able to bid competitively for those portfolios."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P1, P3, P6)",
+    "claim": "Large mixed-portfolio acquisitions such as Conn's and Bluestem and unlocking internally serviced originator portfolios drive step-ups in revenue, contributing $95.8 million and $5.4 million, respectively, to 2025 revenue.",
+    "facts": [
+     "P1",
+     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Collections from purchased receivables increased 34.8% or $82.4 million to $319.2 million during the third quarter of 2026 versus $236.8 million during the same quarter in 2025",
-     "even though we can provide no assurance that we will achieve such collections within a specified time period, or at all"
+     "In some of our asset classes, we do not believe we have any significant competitors, and our growth strategy is not to take market share away from other debt buyers, but rather to unlock debt sales of portfolios which are currently serviced internally.",
+     "The increase is primarily a result of increased deployments during the year as well as the Conn\u2019s portfolio acquisition in December 2024 which contributed $95.8 million of revenue as well as the Bluestem acquisition in December 2025 which contributed $5.4 million.",
+     "For the third quarter 2026, the Company recognized portfolio revenue of $13.4 million and net operating income of $10.3 million related to the Bluestem portfolio purchase"
     ],
     "support": "supported"
    },
    {
-    "basis": "Revenue figures are stated in F2 and the release. The role of changes in recoveries is inferred from the statement line items.",
-    "claim": "Revenue growth follows earlier deployments. Q3 total revenues were $185.5 million, up 22.9% from $150.8 million. The company attributes the growth to prior-period deployments, so revenue keeps rising only if deployments stay high enough to offset portfolio run-off.",
+    "basis": "stated in the cited item (P2)",
+    "claim": "To sustain returns from large acquisitions like Conn's and Bluestem and new asset classes, actual collections must meet expected timetables without exceeding forecasted servicing and integration expenses.",
     "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "The growth was primarily the result of strong deployments in prior periods"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Q3 contribution and purchase terms are stated. That Bluestem is a continuing growth contributor is inferred.",
-    "claim": "The Bluestem credit card portfolio, acquired in December 2025, adds to results. In Q3 2026 it contributed portfolio revenue of $13.4 million and net operating income of $10.3 million. For this to continue, the portfolio must collect close to the $295.6 million of remaining collections estimated at purchase.",
-    "facts": [
-     "P6",
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "For the third quarter 2026, the Company recognized portfolio revenue of $13.4 million and net operating income of $10.3 million related to the Bluestem portfolio purchase",
-     "The net purchase price for the portfolio was $196.3 million and the estimated remaining collections associated with the portfolio are $295.6 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in the 10-Q tables. The regulatory condition is stated in the 10-K risk factors.",
-    "claim": "International expansion, especially Latin America, is a growth driver. Q3 Latin America deployments were 36.7 (table in millions) against 8.9 a year earlier, up 312.4%. Latin America ERC was 379.5 against 255.3, up 48.6%. For this to continue, the regulatory environment there must stay permissive for the collection methods the company uses.",
-    "facts": [
-     "P4",
      "P2"
     ],
     "quotes": [
-     "There is a risk that regulatory regimes in Latin America may change in the future and impose greater restrictions on the use of new technologies"
+     "The portfolios acquired could underperform relative to our expectations or not perform in accordance with our anticipated timetable, either of which could result in an impairment charge.",
+     "We may also find that the operating expenses we incur to make our expected collections of the Conn\u2019s and Bluestem Portfolios exceed our forecast.",
+     "Further, our existing methods of collections may prove less effective than we expect for these new receivables, which may have an adverse effect on our business, financial condition and results of operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet and leverage figures are stated. The funding-as-condition framing is inferred from the stated use of proceeds.",
-    "claim": "Debt funding finances the purchasing, so continued access to capital is a condition for growth. Notes payable, net were 1,538,195 (table in thousands) at September 30, 2026 against 1,409,039 at December 31, 2025. The leverage ratio rose to 1.73x from 1.59x. The company issued $100 million of add-on 8.25% senior notes in August 2026.",
+    "basis": "stated in the cited item (P4, P6)",
+    "claim": "Geographic expansion across four reportable segments is growing collections and ERC, with total ERC up 23% to $3.6 billion and third-quarter collections up 34.8% to $319.2 million in 2026.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We operate and manage our business through four reportable segments that are based on geography: United States, United Kingdom, Canada, and Latin America.",
+     "Record ERC rose 23% to $3.6 billion",
+     "Collections from purchased receivables increased 34.8% or $82.4 million to $319.2 million during the third quarter of 2026 versus $236.8 million during the same quarter in 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2)",
+    "claim": "Continued collections growth requires stable consumer repayment capacity, accurate valuation models, uninterrupted Mumbai co-sourced and third-party servicing, and regulatory compliance across operating jurisdictions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Deterioration in economic conditions, or a significant rise in inflation or high level of sustained inflation could negatively affect the ability of consumers to pay their debts and could reduce the real value of our purchased receivables.",
+     "Should our Mumbai operation be disrupted, there is no guarantee that we could transition our servicing back to our domestic operations or to external resources without the disruption significantly impacting our business.",
+     "Our failure to comply with laws or regulations applicable to us could limit our ability to collect on our receivables, which could reduce our profitability and adversely affect our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F2, P1, P3)",
+    "claim": "Third-party debt servicing revenue has also expanded, rising 36.3% to 39.7 (table in millions) in 2025 and reaching 31,911 (table in thousands) over the first nine months of 2026.",
+    "facts": [
+     "F2",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The Company also provides debt servicing and other portfolio management services to credit originators for non-performing loans.",
+     "Regulatory complexity and burdens, strict privacy laws in the case of Canada and the United Kingdom, combined with seller preference for experienced portfolio purchasers, create significant barriers to successful entry for new competitors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (F1, P2, P6, P7)",
+    "claim": "Continued portfolio growth requires ongoing access to credit facilities and debt capital, with net notes payable at 1,538,195 (table in thousands) and leverage at 1.73x in 2026.",
     "facts": [
      "F1",
+     "P2",
      "P6",
      "P7"
     ],
     "quotes": [
-     "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth"
+     "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth",
+     "Other economic factors that could influence our performance include the financial stability of the lenders on our Revolving Credit Facility (as defined herein) and our access to capital and credit.",
+     "The Issuer may in the future reborrow amounts under the Issuer\u2019s Revolving Credit Facility to, among other things, purchase portfolios, fund acquisitions."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Figures are stated in F2 and the release. That operating leverage is limited is inferred from comparing the two growth rates.",
-    "claim": "Operating leverage so far is limited. Q3 operating expenses rose 22.7%, against revenue growth of 22.9%, and net operating income rose to 86,514 (table in thousands) from 70,036. For growth to translate into profit, collection costs such as court costs and commissions must stay in proportion to collections.",
+    "basis": "stated in F2 and P3 for the figures and expectations; inferred that margin expansion is required for revenue growth to lift GAAP net income",
+    "claim": "For revenue growth to translate into higher earnings, servicing and compensation expenses must scale down as a share of revenue over time, whereas nine-month 2026 operating expenses rose to 289,360 from 210,880 (table in thousands) while net income fell to 125,788 from 150,234 (table in thousands).",
     "facts": [
-     "P6",
      "F2",
      "P3"
     ],
     "quotes": [
-     "Total operating expenses increased $18.2 million, or 22.7% to $98.4 million compared to $80.2 million for the third quarter 2025.",
-     "increased court costs of $22.4 million which are incurred upfront at the outset of consumer litigation in anticipation of generating future collections"
+     "While we expect our salaries and benefits expense will increase in absolute dollars as we continue to invest in our growth and operate as a public company (including as a result of increased stock-based compensation), we expect such expense to decline as a percentage of revenue over time as we scale our business and leverage our investments already made.",
+     "While we expect our servicing expenses will increase in absolute dollars as our business grows, we expect such expenses will vary from year-to-year as a percentage of revenue for the foreseeable future and decrease as a percentage of revenue over the long term as a result of continued investments to improve the efficiency of our operations and support organization."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited 8-K body (P7); P8 reports the earlier launch announcement.",
-    "claim": "The company's financing subsidiary issued $100 million of additional 8.250% Senior Notes due 2030. Proceeds are meant to repay part of the revolving credit facility, with any remainder for general corporate purposes.",
+    "basis": "stated in P1 and P3",
+    "claim": "Following the Reorganization, Jefferson Capital, Inc. became a holding company owning 100% of JCAP TopCo, LLC and changed its taxpayer status to a corporation.",
     "facts": [
-     "P7",
-     "P8"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "issued $100 million aggregate principal amount of 8.250% Senior Notes due 2030"
+     "Following a series of transactions that we refer to collectively as the \u201cReorganization,\u201d Jefferson Capital, Inc. became a holding company with no material assets other than 100% of the equity interests in JCAP TopCo, LLC, which is held by Jefferson Capital, Inc. both directly and indirectly through other wholly-owned holding companies that have no material assets other than direct or indirect equity interests in JCAP TopCo, LLC.",
+     "The Company has recognized a provision of $30.5 million for the year ended December 31, 2025 to reflect the change in tax payer status to a corporation as a result of the reorganization related to the initial public offering."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release (P6).",
-    "claim": "The company's $300 million 2026 senior unsecured notes matured and were paid off using the revolving credit facility. This was repayment at maturity, not a default.",
+    "basis": "stated in P1",
+    "claim": "Jefferson Capital, Inc. completed its initial public offering at $15.00 per share, with selling shareholders selling 10,875,000 shares and the Company issuing and selling 625,000 shares for $4.5 million in net proceeds.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In June 2025, the Company completed its initial public offering (\u201cIPO\u201d), in which the selling shareholders sold 10,875,000 shares after giving effect to the underwriters\u2019 exercise of the over-allotment option, at a public offering price of $15.00 per share.",
+     "The Company also issued and sold 625,000 shares of its common stock in the IPO, which resulted in net proceeds of $4.5 million after deducting the underwriting discounts and commissions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Following year-end, the Company executed a follow-on equity offering that reduced JCF Stockholders' ownership to 53.1% and repurchased $58.9 million of stock to support the transaction.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Following quarter end, we executed a follow-on equity offering, which reduced the ownership of JCF Stockholders to 53.1%.",
+     "The company repurchased $58.9 million of stock to support that transaction;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "The Company acquired a portfolio of unsecuritized loans and credit card receivables from Conn's, Inc., which contributed $95.8 million of revenue in the following year.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our ability to realize the anticipated benefits of the purchase of a substantial portfolio of unsecuritized loans and credit card receivables from Conn\u2019s, Inc. (the \u201cConn\u2019s Portfolio Purchase\u201d) and Bluestem depends on our ability to collect the unsecuritized loans and credit card receivables we acquired.",
+     "The increase is primarily a result of increased deployments during the year as well as the Conn\u2019s portfolio acquisition in December 2024 which contributed $95.8 million of revenue as well as the Bluestem acquisition in December 2025 which contributed $5.4 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P8",
+    "claim": "Jefferson Capital Holdings, LLC issued $500 million in aggregate principal amount of 8.250% senior notes due 2030.",
+    "facts": [
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "The Add-On Notes are proposed to be issued as additional notes under the Indenture, dated as of May 2, 2025, pursuant to which the Issuer previously issued $500 million in aggregate principal amount of 8.250% senior notes due 2030 (the \u201cExisting Notes\u201d and, together with the Add-On Notes, the \u201cNotes\u201d).",
+     "The increase was primarily driven by higher interest expense related to the outstanding notes payable, as well as increased amortization of note payable origination costs of $6.2 million, an increase of $1.9 million or 44.0% higher compared to $4.3 million for the year ended December 31, 2024, due to the issuance of the 2030 Senior Notes in May 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "The Company completed the portfolio acquisition of credit card assets from Bluestem for a net purchase price of $196.3 million and estimated remaining collections of $295.6 million.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "On December 4, 2025, pursuant to the terms and conditions of the Purchase Agreement, we completed the portfolio acquisition of credit card assets from Bluestem (the \u201cAcquisition\u201d).",
+     "The net purchase price for the portfolio was $196.3 million and the estimated remaining collections associated with the portfolio are $295.6 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "The Company's $300 million 2026 senior unsecured notes matured and were paid off using its revolving credit facility.",
     "facts": [
      "P6"
     ],
@@ -596,92 +866,177 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 (P1).",
-    "claim": "The company completed the purchase of a credit card receivables portfolio from Bluestem for a net price of $196.3 million. It estimated remaining collections on the portfolio at $295.6 million.",
+    "basis": "stated in P7 and P8",
+    "claim": "Jefferson Capital Holdings, LLC issued $100 million aggregate principal amount of 8.250% Senior Notes due 2030 as add-on notes.",
     "facts": [
-     "P1"
+     "P7",
+     "P8"
     ],
     "quotes": [
-     "The net purchase price for the portfolio was $196.3 million and the estimated remaining collections associated with the portfolio are $295.6 million."
+     "On August 20, 2026, Jefferson Capital Holdings, LLC (the \u201cIssuer\u201d), an indirect wholly-owned subsidiary of Jefferson Capital, Inc. (the \u201cCompany\u201d) issued $100 million aggregate principal amount of 8.250% Senior Notes due 2030 (the \u201cAdd-On Notes\u201d), pursuant to an indenture, dated as of May 2, 2025 (the \u201cExisting Indenture\u201d), among the Issuer, the guarantors thereto and U.S. Bank Trust Company, National Association, as trustee (the \u201cTrustee\u201d), as further supplemented by the first supplemental indenture, dated August 20, 2026 (the \u201cSupplemental Indenture\u201d and, together with the Existing Indenture, the \u201cIndenture\u201d), among the Issuer, the guarantors thereto and the Trustee.",
+     "On August 18, 2026, Jefferson Capital, Inc. (the \u201cCompany\u201d) issued a press release regarding the pricing of the proposed offering of the Add-On Notes described above."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "Jefferson Capital, Inc. announced its third quarter 2026 financial results, reporting net income of $46.9 million and EPS of $0.76.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Jefferson Capital, Inc. (\u201cJefferson Capital, the \u201cCompany\u201d), a leading analytically driven purchaser and manager of charged-off, insolvency and active consumer accounts, today announced its third quarter 2026 financial results.",
+     "Pre-tax Income of $58.9 million with Net Income of $46.9 million and EPS of $0.76"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1; the repurchase line in F3 is consistent with it, and linking the two is an inference.",
-    "claim": "The company executed a follow-on equity offering that reduced the JCF Stockholders' ownership to 53.1%. It repurchased $58.9 million of stock to support that transaction, and the nine-month 2026 cash flow statement shows a common stock repurchase.",
+    "basis": "stated in P6",
+    "claim": "The Board of Directors declared a quarterly cash dividend of $0.24 per share on its outstanding common stock.",
     "facts": [
-     "P1",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "Following quarter end, we executed a follow-on equity offering, which reduced the ownership of JCF Stockholders to 53.1%.",
-     "The company repurchased $58.9 million of stock to support that transaction"
+     "The Board of Directors declared a quarterly cash dividend of $0.24 per share on its outstanding common stock, payable on December 3, 2026, to shareholders of record as of the close of business on November 24, 2026."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Debt balances, leverage ratio and RCF draw are stated in the cited items; the funding-stress mechanism is inferred from them.",
-    "claim": "Borrowing has grown: notes payable, net were 1,538,195 (table in thousands) at Sep. 30, 2026 against 1,409,039 at Dec. 31, 2025. The leverage ratio was 1.73x versus 1.59x a year earlier, and $554 million was drawn under the RCF.",
+    "basis": "stated in P1, P2, P4, and P6",
+    "claim": "Purchases are concentrated among a small number of large sellers, with the top five clients accounting for 45.2% and the top client representing 23.6% of annual purchases, creating supply risk if a major seller reduces portfolio sales.",
     "facts": [
-     "F1",
+     "P1",
+     "P2",
+     "P4",
      "P6"
     ],
     "quotes": [
+     "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively.",
+     "Moreover, there can be no assurance that credit originators will continue to sell their nonperforming loans consistent with historical levels or at all, or that we will be able to bid competitively for those portfolios.",
+     "As of September 30, 2026, the Company had $384.3 million in committed forward flows"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P6, and F2",
+    "claim": "Collections on acquired nonperforming loans\u2014including the Conn's and Bluestem portfolios\u2014may fall short of projections or model estimates, failing to cover acquisition and operating costs or triggering impairment charges.",
+    "facts": [
+     "P2",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "These nonperforming loans are difficult to collect, and we may not collect a sufficient amount to cover our investment and the costs of running our business.",
+     "Furthermore, if the statistical and behavioral models we use to prepare financial projections and make business decisions are inaccurate, we may acquire nonperforming loan portfolios that ultimately prove to be unprofitable.",
+     "The portfolios acquired could underperform relative to our expectations or not perform in accordance with our anticipated timetable, either of which could result in an impairment charge.",
+     "Collections from purchased receivables increased 34.8% or $82.4 million to $319.2 million during the third quarter of 2026 versus $236.8 million during the same quarter in 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F3, P2, P6, and P7",
+    "claim": "Substantial indebtedness\u2014with Notes payable, net of 1,538,195 (table in thousands), $554 million drawn on the RCF, and a 1.73x leverage ratio against $ 23,427 (table in thousands) in unrestricted cash\u2014exposes the company to credit-market tightening and lender solvency risk.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "For example, deterioration in the financial markets could contribute to the insolvency of lending institutions, notably those providing our Revolving Credit Facility, or the tightening of credit markets, which could make it difficult or impossible for us to obtain credit on favorable terms or at all.",
      "Leverage ratio* was 1.73x at September 30, 2026 compared to 1.59x at September 30, 2025 primarily reflecting increased borrowings to fund portfolio purchases and continued business growth",
      "At September 30, 2026, the Company had $554 million drawn under the RCF"
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the statements; the link to margin pressure is inferred from the comparison of the lines.",
-    "claim": "Nine-month earnings and cash generation fell while revenue and costs rose. Total revenues were 539,493 (table in thousands) versus 458,490, but net income was 125,788 versus 150,234, servicing expenses were 198,137 versus 133,948, and operating cash flow was 136,232 versus 193,645.",
-    "facts": [
-     "F2",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "The increase was primarily due to a $20.1 million increase in servicing expenses, including $6.3 million in higher court costs"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Concentration percentages and the risk language are stated in the 10-K; the forward flow figure is stated in the earnings release.",
-    "claim": "Purchases are concentrated with a few sellers: the top five clients were 45.2% of purchases in 2025 and the top client 23.6%. Losing a large seller would force the company to source portfolios elsewhere.",
+    "basis": "stated in P1, P2, P4, and P5",
+    "claim": "Strict licensing, collection, privacy, and legal-ethics rules across U.S. and international jurisdictions\u2014including SRA oversight of Moriarty in the U.K. and potential AI restrictions in Latin America\u2014expose the company to fines, lost licenses, or collection limits.",
     "facts": [
      "P1",
-     "P2"
-    ],
-    "quotes": [
-     "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the risk factor text; no event is evidenced, so the likelihood is not inferable.",
-    "claim": "The business operates under extensive debt-collection regulation in several countries. The 10-K says non-compliance could bring fines, litigation or suspension of its ability to operate, and the latest 10-Q reports no material change in risk factors.",
-    "facts": [
      "P2",
+     "P4",
      "P5"
     ],
     "quotes": [
-     "Failure to comply with government regulation of the collections industry could result in penalties, fines, litigation, damage to our reputation or the suspension or termination of our ability to conduct our business.",
-     "There have been no material changes to the risk factors identified in the Company\u2019s 2025 Form 10-K."
+     "If any such investigations result in findings that we or our vendors have failed to comply with applicable laws and regulations, we could be subject to penalties, litigation losses and expenses, damage to our reputation, or the suspension or termination of, or required modification to, our ability to conduct collections, which would adversely affect our business, financial condition, results of operations.",
+     "In addition, under these ethical requirements of the legal profession, for Moriarty\u2019s external cases, we will have no right to, and will not make decisions with respect to, the conduct or direction of any particular legal claim or any settlement or resolution thereof.",
+     "There is a risk that regulatory regimes in Latin America may change in the future and impose greater restrictions on the use of new technologies, including through increased restrictions on debt collection practices and enhanced consumer protection laws."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Figures are stated in the cited items; the downside mechanism is inferred from the revenue recognition description and risk factor.",
-    "claim": "Reported revenue depends on collection forecasts and purchase pricing. Changes in recoveries added 23,248 (table in thousands) to nine-month revenue, and the third-quarter average purchase price rose to 8.6% of face value from 5.3%.",
+    "basis": "stated in P1, P2, and P4",
+    "claim": "Disruption at the co-sourced operation in Mumbai or failure of outsourced law firms, collection agencies, and service providers could interrupt voluntary collections and impair revenues.",
     "facts": [
-     "F2",
+     "P1",
      "P2",
      "P4"
     ],
     "quotes": [
-     "We may not be able to collect sufficient amounts on our nonperforming loans to fund our operations."
+     "Our co-sourced operation in Mumbai, India provides critical support within our voluntary collection channel.",
+     "Should our Mumbai operation be disrupted, there is no guarantee that we could transition our servicing back to our domestic operations or to external resources without the disruption significantly impacting our business.",
+     "One or more of these third parties could fail to meet its obligations and service level expectations, become insolvent or cease operations, which could adversely impact our business operations and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, F2, and P6",
+    "claim": "Macroeconomic downturns, sustained inflation, reduced bank lending, and currency swings\u2014evidenced by a foreign currency translation loss of (5,482) (table in thousands)\u2014could erode consumer repayment capacity, portfolio real value, and supply.",
+    "facts": [
+     "P2",
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Deterioration in economic conditions, or a significant rise in inflation or high level of sustained inflation could negatively affect the ability of consumers to pay their debts and could reduce the real value of our purchased receivables.",
+     "If global credit market conditions and the stability of global banks deteriorate, the amount of consumer or commercial lending and financing could be reduced, thus reducing the volume of nonperforming loans available for purchase, which could adversely affect our business, financial results and ability to succeed in the markets in which we operate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Acquiring receivables in unfamiliar asset classes or new geographies without an established operational footprint may result in lower-than-expected collection effectiveness and portfolio losses.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We may sometimes evaluate and may acquire portfolios consisting of assets with which we have little or no collection experience or portfolios of receivables in new geographies where we do not historically maintain an operational footprint.",
+     "Further, our existing methods of collections may prove less effective than we expect for these new receivables, which may have an adverse effect on our business, financial condition and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F2, and P2",
+    "claim": "Goodwill of 57,771 (table in thousands) is exposed to impairment if reporting-unit fair values decline, and actual losses from judicial, regulatory, or arbitration proceedings could exceed accrued loss contingencies.",
+    "facts": [
+     "F1",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Significant changes in our assessment of such factors, including the deterioration of market conditions, could affect our assessment of the fair value of one or more of our reporting units and could result in a goodwill impairment charge in a future period.",
+     "In addition, actual losses may be higher than the amount accrued for a certain matter, or in the aggregate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P2, P3, F1, and F3",
+    "claim": "Following its shift to corporate taxpayer status and U.S. and foreign tax law changes including the OBBBA, the company faces rising tax obligations, with its effective tax rate increasing from 6.3% to 13.9% and Deferred tax liabilities reaching 138,186 (table in thousands).",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "The United States and many countries in Europe, as well as a number of other countries and organizations, have recently proposed or recommended changes to existing tax laws or have enacted new laws that could significantly increase our tax obligations in countries where we do business, or require us to change the manner in which we operate our business.",
+     "The Company\u2019s effective tax rate for the year ended December 31, 2025 was 13.9%, compared to 6.3% for the year ended December 31, 2024.",
+     "The majority of the tax law changes will take effect in future years."
     ],
     "support": "supported"
    }
@@ -689,131 +1044,146 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Figures are stated in the cash flow statement and release; the cause is not stated, so the question is inferred.",
-    "claim": "Nine-month stock-based compensation was far above the prior year while Q3 stock compensation fell. What drove the nine-month step-up, and does it recur? It is one reason nine-month net income fell despite higher revenue.",
+    "basis": "stated in [F1], [P6], and [P7]: [F1] reports total Notes payable, net without a debt schedule, [P6] states the RCF balance without capacity or terms, and [P7] refers to omitted Exhibits 4.1 and 4.3 for full Indenture covenants.",
+    "claim": "What are the borrowing capacity, maturity, interest rate, and financial covenants of the Revolving Credit Facility ($554 million drawn as of September 30, 2026), and what are the remaining debt instruments, maturities, and negative covenants within Notes payable, net of 1,538,195 (table in thousands)?",
     "facts": [
-     "F2",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "$2.4 million decrease in salaries and benefits (including $0.7 million on lower stock-based compensation)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Repurchase amount and ownership change are stated; the transaction mechanics and any company proceeds are not in the items, so the question is inferred.",
-    "claim": "How was the follow-on equity offering structured (selling-holder sale or company issuance)? How does it relate to the nine-month stock repurchase?",
-    "facts": [
-     "P1",
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "The company repurchased $58.9 million of stock to support that transaction"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Leverage ratio and drawn amount are stated in the release; capacity and covenants are not stated, so headroom is inferred as unknown.",
-    "claim": "How much undrawn revolver capacity and covenant headroom remain? Leverage rose and notes payable grew while deployments surged.",
-    "facts": [
-     "P6",
      "F1",
+     "P6",
      "P7"
     ],
     "quotes": [
-     "At September 30, 2026, the Company had $554 million drawn under the RCF"
+     "At September 30, 2026, the Company had $554 million drawn under the RCF",
+     "The Indenture also contains customary negative covenants."
     ],
     "support": "supported"
    },
    {
-    "basis": "Deployment and price figures are stated; the return outcome is not in the items, so the question is inferred.",
-    "claim": "Will the Q3 deployment surge, bought at a higher share of face value, convert into collections and ERC at acceptable returns?",
+    "basis": "stated in [F2] and [P3], and inferred from the truncation of [P4] before Results of Operations and the absence of Q3 2026 Form 10-Q financial statement footnotes.",
+    "claim": "How much of the 23,248 (table in thousands) in Changes in recoveries during the nine months ended September 30, 2026 came from cash collections above forecast versus upward revisions to expected future recoveries, and which geographic segments or portfolios drove it?",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Portfolio revenue consists of two components: (i) portfolio income, which is the accretion of the discount on the negative allowance due to the passage of time (generally the portfolio balance multiplied by the established pool effective interest rate (\u201cEIR\u201d)), and (ii) changes in recoveries, which includes recoveries above or below forecast (the difference between actual cash collected or recovered during the current year and expected cash recoveries for the current period) and changes in expected future recoveries (the present value change of expected future recoveries, where such change generally results from changes to the expected timing of collections and changes to the total amount of expected future collections)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P4] and [P6]; [P4] describes general drivers of purchase price relative to face value without disaggregating the Q3 2026 deployments or forward-flow contracts.",
+    "claim": "What portfolio mix or asset types drove the average purchase price up to 8.6% of face value in the third quarter of 2026 from 5.3% in the prior-year quarter, and what are the pricing, duration, and asset composition of the $384.3 million in committed forward flows?",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "for an average purchase price of 8.6% of face value"
+     "During the three months ended September 30, 2026, we invested $318.0 million to acquire receivable portfolios, with face values aggregating $3,708.7 million, for an average purchase price of 8.6% of face value.",
+     "The average purchase price as a percentage of face value is higher for newly charged-off portfolios as compared to more seasoned portfolios because newly charged-off portfolios generally have higher liquidation rates.",
+     "As of September 30, 2026, the Company had $384.3 million in committed forward flows"
     ],
     "support": "supported"
    },
    {
-    "basis": "Statement figures are stated; the composition of the payables decline is not given, so the cause is inferred.",
-    "claim": "Why did operating cash flow fall while collections and revenue rose? How much was a payables paydown (for example, accrued items from the IPO or Conn's periods) rather than a lasting change?",
-    "facts": [
-     "F3",
-     "F1",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Balances and flows are stated; reversal timing is not stated, so the question is inferred.",
-    "claim": "What is driving the higher tax provision and the growth in deferred tax liabilities? When might deferred taxes turn into cash taxes, given how little cash tax was paid?",
-    "facts": [
-     "F1",
-     "F2",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Realization of our deferred tax assets depends, in part, on the reversal of our deferred tax liabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Line items are stated; the composition of the recoveries change is not stated, so the question is inferred.",
-    "claim": "How much of reported revenue growth comes from non-cash changes in recoveries (forecast revisions) rather than portfolio income? How sustainable is that contribution?",
-    "facts": [
-     "F2",
-     "F3",
-     "P3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated figures come from the filings; the performance versus the original forecast is not stated, so the question is inferred.",
-    "claim": "Is the Bluestem portfolio performing against the collections expected at purchase? The filings show Q3 contribution but not a cumulative comparison or any impairment indication.",
+    "basis": "stated in [P1] and [P2], which report 2024 and 2025 purchase concentration percentages without counterparty identities, contract durations, or 2026 concentration figures.",
+    "claim": "Who are the top clients representing 45.2% (and 23.6% for the top client) of 2025 portfolio purchases and the credit card issuers, what are their contract renewal terms, and did seller concentration change in 2026?",
     "facts": [
      "P1",
-     "P4",
-     "P6",
      "P2"
     ],
     "quotes": [
-     "For the third quarter 2026, the Company recognized portfolio revenue of $13.4 million and net operating income of $10.3 million related to the Bluestem portfolio purchase"
+     "The Company\u2019s top five clients accounted for 45.2% and 55.3%, with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively.",
+     "For credit card receivables, the Company purchases from two issuers."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Expense figures are stated; whether the spending pays back is inferred.",
-    "claim": "Are rising servicing and court costs, expensed up front, being repaid by future collections? Servicing expense growth in Q3 was a large share of the operating expense increase.",
+    "basis": "stated in [P2], [P3], [P4], and [P6]; [P4] and [P6] disclose Q3 2026 Bluestem ERC, collections, revenue, and net operating income, but omit Conn's 2026 performance and original acquisition curves.",
+    "claim": "How have cumulative collections, carrying value, and remaining ERC on the Conn's portfolio ($139.9 million ERC at December 31, 2025) performed in 2026, and are cumulative collections and servicing expenses on the Bluestem portfolio ($185.8 million ERC at September 30, 2026) tracking acquisition expectations?",
     "facts": [
-     "F2",
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "a $20.1 million increase in servicing expenses, including $6.3 million in higher court costs"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated for 2025 and 2024 only; the 2026 concentration is unknown.",
-    "claim": "How concentrated are 2026 purchases among top sellers? The only concentration data are for 2025 and 2024.",
-    "facts": [
-     "P1",
      "P2",
+     "P3",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "with the top client representing 23.6% and 32.8% of purchases for the years ended December 31, 2025 and 2024, respectively"
+     "The portfolios acquired could underperform relative to our expectations or not perform in accordance with our anticipated timetable, either of which could result in an impairment charge.",
+     "ERC in our United States reportable segment included $139.9 million from the Conn\u2019s Portfolio Purchase and $295.6 million for the Bluestem portfolio purchase.",
+     "For the three months ended September 30, 2026, ERC in our United States reportable segment included $185.8 million from the Bluestem portfolio purchase with the comparative 2025 period having no ERC related to Bluestem."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2], [P3], and [P6], and inferred from the truncation of [P4] before nine-month expense commentary and segment operating results.",
+    "claim": "What drove Servicing expenses up to 198,137 (table in thousands) in the nine months ended September 30, 2026 versus 133,948 (table in thousands) a year earlier, and how did revenues and operating margins break down across the geographic segments?",
+    "facts": [
+     "F2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We operate and manage our business through four reportable segments that are based on geography: United States, United Kingdom, Canada, and Latin America.",
+     "The increase was primarily due to a $20.1 million increase in servicing expenses, including $6.3 million in higher court costs, $8.5 million in agency and legal commission expense including $3.1 million related to the Bluestem portfolio purchase, partially offset by a $2.4 million decrease in salaries and benefits (including $0.7 million on lower stock-based compensation) and $0.6 million lower depreciation and amortization"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P1], which summarizes the follow-on offering and concurrent share repurchase without share counts, offering price, or stockholder agreement provisions.",
+    "claim": "What were the pricing, share count, and post-offering governance or registration-rights terms of the follow-on equity offering in which JCF Stockholders' ownership declined to 53.1% and the company repurchased $58.9 million of stock?",
+    "facts": [
+     "F1",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Following quarter end, we executed a follow-on equity offering, which reduced the ownership of JCF Stockholders to 53.1%.",
+     "The company repurchased $58.9 million of stock to support that transaction;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F3], [P1], and [P6]; the cash flow statement and non-GAAP EPS reconciliation show the nine-month expense and unvested share count without award-level schedules.",
+    "claim": "What awards or vesting schedules drove Stock-based compensation up to 24,995 (table in thousands) in the nine months ended September 30, 2026 from 8,850 (table in thousands) a year earlier, and what are the remaining vesting terms and forfeiture conditions for the 4.1 (table in millions) non-vested restricted stock?",
+    "facts": [
+     "F3",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "These shares were issued as restricted stock either with the same time-based vesting requirements that the corresponding Class B Units were subject to prior to the Reorganization or, if such corresponding Class B Units had performance vesting requirements, with a three year time-vesting requirement.",
+     "If the vesting conditions of the restricted stock are not satisfied, such restricted stock will be forfeited and canceled."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1], [F2], [F3], and [P3]; [P3] notes OBBBA changes take effect in future years and the packet omits the Income Taxes footnote.",
+    "claim": "What temporary differences caused Deferred tax liabilities to reach 138,186 (table in thousands) as of September 30, 2026 while nine-month Income taxes paid were 6,599 (table in thousands) against a Provision for income taxes of (37,549) (table in thousands), and how will future-effective One Big Beautiful Bill Act rules affect cash taxes?",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Realization of our deferred tax assets depends, in part, on the reversal of our deferred tax liabilities.",
+     "The majority of the tax law changes will take effect in future years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2] and [P5], which describe legal and regulatory risks generally without listing specific proceedings or loss contingency accruals.",
+    "claim": "What specific judicial, regulatory, or arbitration proceedings are pending against the company or its U.K. law firm subsidiary Moriarty, and what amounts are accrued or estimated as reasonably possible losses?",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "We are involved in judicial, regulatory and arbitration proceedings or investigations concerning matters arising from our business activities.",
+     "In addition, actual losses may be higher than the amount accrued for a certain matter, or in the aggregate.",
+     "There have been no material changes to the risk factors identified in the Company\u2019s 2025 Form 10-K."
+    ],
+    "support": "supported"
    }
   ]
  },
@@ -822,5 +1192,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "share count does not reconcile with filed EPS"
+ "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
 }
