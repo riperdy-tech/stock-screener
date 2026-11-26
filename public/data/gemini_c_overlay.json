@@ -2,10 +2,10 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T18:19:23Z",
+ "generated_at": "2026-11-26T18:27:44Z",
  "list_covered": 159,
  "list_names": 159,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -11393,30 +11393,63 @@
    "verdict_reason": "expected return +24.8 points a year against the required return over 3 years"
   },
   "VG": {
-   "alpha_pts": null,
+   "alpha_pts": 54.54361777884845,
    "analysis": "complete",
-   "claims": 80,
-   "claims_supported": 73,
-   "date": "2026-11-17T13:04:26Z",
+   "based_on": {
+    "accepted": "2026-11-09T22:43:21.000Z",
+    "accepted_utc": "2026-11-10T03:43:21Z",
+    "accession": "0002007855-26-000088",
+    "decision_time": "2026-11-26T18:20:18Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 77,
+   "claims_supported": 69,
+   "date": "2026-11-26T18:20:18Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 85183600826.55795,
    "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 2635000000.0,
    "flags": [
-    "An ICC arbitration tribunal issued a partial final award finding that Calcasieu Pass breached its obligation to declare COD in a timely manner under the Galp SPA. Damages are still to be set, and the final award will be subject to a $170 million seller aggregate liability cap.",
-    "Phase 1 of the Plaquemines Project declared COD and began selling LNG under its post-COD SPAs.",
-    "VGLNG entered into power and grid frame agreements for up to 16 power islands and related equipment. If all orders proceed, the aggregate amount payable would be approximately $17.2 billion."
+    "The first phase of the Plaquemines Project declared commercial operations (COD) and began selling LNG under its post-COD SPAs.",
+    "The board declared a cash dividend of $0.04 per share on Class A and Class B common stock, payable after the report date.",
+    "The second phase of the CP2 Project reached FID and the company obtained $8.6 billion of additional project financing."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.08191349126773717,
+   "market_cap_at_publish": 29557200320,
    "model": "claude-sonnet-5-5",
    "news_count": 1,
-   "no_value_reason": "share count does not reconcile with filed EPS",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 11.74,
    "qwen_book": null,
-   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
-   "source": "screener list refresh",
+   "release_truncated": [],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 32.164130328945866,
+    "3000": 32.49135416939034
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "share count does not reconcile with filed EPS"
+   "upside": 1.8819915250538166,
+   "value_base": 32.327742249168104,
+   "value_bear": 13.515289641146836,
+   "value_bull": 81.63523974772073,
+   "value_per_filed_share": {
+    "base": 32.327742249168104,
+    "bear": 13.515289641146836,
+    "bull": 81.63523974772073
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +54.5 points a year against the required return over 3 years"
   },
   "VITL": {
    "alpha_pts": 38.306513365463196,
@@ -12161,11 +12194,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 150,
+ "valued_count": 151,
  "verdict_counts": {
   "AVOID": 67,
-  "BUY": 56,
-  "NO_CALL": 109,
+  "BUY": 57,
+  "NO_CALL": 108,
   "WATCH": 18
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
