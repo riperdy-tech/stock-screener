@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T19:07:17Z",
+ "generated_at": "2026-11-26T19:16:18Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -7608,41 +7608,65 @@
    "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
   },
   "NEM": {
-   "alpha_pts": null,
+   "alpha_pts": 1.4298334493717757,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-10-22T20:46:01.000Z",
     "accepted_utc": "2026-10-23T00:46:01Z",
     "accession": "0001164727-26-000043",
-    "decision_time": "2026-11-21T12:38:12Z",
+    "decision_time": "2026-11-26T19:08:07Z",
     "form": "10-Q",
     "period": "2026-09-30"
    },
-   "claims": 70,
-   "claims_supported": 59,
-   "date": "2026-11-21T12:38:12Z",
+   "claims": 84,
+   "claims_supported": 70,
+   "date": "2026-11-26T19:08:07Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 102457654255.63521,
    "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 1039193185.0,
    "flags": [
-    "Newmont and Barrick amended the Nevada Gold Mines joint venture. Newmont agreed to contribute $1.95 billion in cash within 30 days after the Fourmile property is contributed. That contribution had not yet taken place at the 10-Q date.",
-    "Operations at the Cadia mine were temporarily suspended after seismic activity was recorded near the operation.",
-    "Ghana's Parliament enacted legislation, effective early March 2026, replacing the fixed 5% gold royalty with a sliding scale of 5% to 12%. It also cut the Growth and Sustainability Levy to 1%, effective April 1, 2026."
+    "Newmont and Barrick amended the Nevada Gold Mines joint venture. Three development properties are to be contributed to NGM, and Newmont agreed to a cash contribution after the Fourmile contribution. The contribution is expected in the fourth quarter.",
+    "Newmont sent Barrick a notice of default under the Nevada JV Agreement over alleged mismanagement at NGM.",
+    "Operations at Cadia were temporarily suspended after seismic activity recorded near the operation."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.09159895298843757,
+   "market_cap_at_publish": 105415764457,
    "model": "claude-sonnet-5-5",
    "news_count": 0,
-   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 101.44,
    "qwen_book": null,
    "release_truncated": [
     "0001164727-26-000041"
    ],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
-   "source": "on request (operator)",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 98.31793174477961,
+    "3000": 98.86899313990429
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+   "upside": -0.028061364603312544,
+   "value_base": 98.59346244234195,
+   "value_bear": 48.784154212531575,
+   "value_bull": 175.94325374867555,
+   "value_per_filed_share": {
+    "base": 98.59346244234195,
+    "bear": 48.784154212531575,
+    "bull": 175.94325374867555
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +1.4 points a year against the required return over 3 years (BUY needs 4 or more)"
   },
   "NGVT": {
    "alpha_pts": 5.4211110385123495,
@@ -12289,12 +12313,12 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 155,
+ "valued_count": 156,
  "verdict_counts": {
   "AVOID": 70,
   "BUY": 58,
-  "NO_CALL": 104,
-  "WATCH": 18
+  "NO_CALL": 103,
+  "WATCH": 19
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }
