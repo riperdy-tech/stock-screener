@@ -2,631 +2,721 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 68,
- "claims_supported": 61,
- "date": "2026-11-17T18:37:01Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-04T20:43:09.000Z",
+  "accepted_utc": "2026-11-05T01:43:09Z",
+  "accession": "0001055160-26-000023",
+  "decision_time": "2026-11-26T21:34:42Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 76,
+ "claims_supported": 73,
+ "date": "2026-11-26T21:34:42Z",
+ "family": "financial",
  "flags": [
-  "The Q3 2026 income statement shows a (223,303) (table in thousands) line for impairment and other net loss on securities and other portfolio investments, against a gain of 18,004 a year earlier. The nine-month figure is (265,423).",
-  "MFA reported a Q3 2026 GAAP net loss to common stockholders of $(122.4) million, or $(1.19) per share. GAAP book value was $11.12 per common share, and total economic return was (10.6)%.",
-  "MFA announced that CEO Craig Knutson will retire and that Bryan Wulfsohn, currently President and Chief Investment Officer, will become CEO in mid-2027. Wulfsohn also joins the Board from the start of 2027."
+  "For the three and nine months ended Sep. 30, 2026, MFA recorded (223,303) (table in thousands) and (265,423) (table in thousands), respectively, in impairment and other net gain/(loss) on securities and other portfolio investments amid spiking Treasury yields and wider spreads.",
+  "For the third quarter ended September 30, 2026, MFA incurred a GAAP net loss to common stockholders and participating securities of $(122.4) million, or $(1.19) per basic and diluted common share, and recorded a total economic return of (10.6)%.",
+  "MFA announced that Chief Executive Officer Craig Knutson will retire effective June 30, 2027, and is expected to remain on the Board of Directors and stand for reelection at the 2027 annual meeting."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no valuation route yet for a real estate company or trust",
+ "no_value_reason": "preferred stock is not filed for every year needed",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "release_truncated": [
+  "0001055160-26-000021"
+ ],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K business section and the 10-Q MD&A",
-    "claim": "MFA is an internally managed mortgage REIT. It makes money by investing, with borrowed money, in residential mortgage assets: whole loans and mortgage securities.",
+    "basis": "Stated directly in [P1] and [P4].",
+    "claim": "MFA Financial, Inc. is an internally-managed REIT and specialty finance company that invests in and finances residential mortgage assets on a leveraged basis.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
      "We are a specialty finance company that invests in and finances residential mortgage assets.",
-     "We are an internally-managed real estate investment trust."
+     "We are an internally-managed real estate investment trust (or REIT).",
+     "We invest, on a leveraged basis, in residential whole loans, residential mortgage securities and other real estate assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A; consistent with the balance sheet",
-    "claim": "Whole loans are the largest asset class. They were $8.7 billion, or 64%, of about $13.5 billion of total assets at quarter-end. Agency MBS were about $3.9 billion, or 29%, of total assets.",
-    "facts": [
-     "P4",
-     "F1"
-    ],
-    "quotes": [
-     "At September 30, 2026, we had total assets of approximately $13.5 billion, of which $8.7 billion, or 64%, represented residential whole loans.",
-     "we had approximately $3.9 billion, or 29%, of total assets invested in investments in Agency MBS"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and the earnings release asset table (table in millions)",
-    "claim": "The whole-loan book is mainly Non-QM loans, which are residential loans outside the Qualified Mortgage definition. It also holds business purpose loans, mostly originated by Lima One for real estate investors, and seasoned re-performing and non-performing loans. By amount, Non-QM is the largest category.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "loans to finance (or refinance) one-to-four family residential properties that are not considered to meet the definition of a \u201cQualified Mortgage\u201d"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K, the 10-Q segment note and the income statement",
-    "claim": "Lima One, a wholly owned subsidiary, originates and services business purpose loans for real estate investors. It is a second revenue source through mortgage banking income, and it is one of two reportable segments alongside mortgage-related assets. A Corporate column holds corporate cash and interest income, unallocated G&A, senior note interest, securitization issuance costs and preferred dividends.",
+    "basis": "Stated directly in [P1], with the Seasoned RPL/NPL terminology updated in [P4].",
+    "claim": "Its residential whole loan portfolio comprises Non-QM loans, Business purpose loans, and Legacy or Seasoned RPL/NPL loans held through consolidated trusts, along with REO acquired through foreclosure or liquidation of delinquent loans.",
     "facts": [
      "P1",
-     "P6",
-     "F2"
+     "P4"
     ],
     "quotes": [
-     "the Company\u2019s reportable segments include (i) mortgage-related assets and (ii) Lima One",
-     "we originate and service BPLs for real estate investors"
+     "Residential whole loans, including Non-QM loans, Business purpose loans, and Legacy RPL/NPL loans, which we acquire and hold through certain trusts that are consolidated on our balance sheet for financial reporting purposes.",
+     "We also own real estate (or REO), which is typically acquired as a result of the foreclosure or other liquidation of delinquent whole loans in connection with our loan investment activities."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement",
-    "claim": "The main earnings driver is net interest income, the gap between interest on loans and securities and interest on financing. For nine months, interest income was 593,630, interest expense 413,442 and net interest income 180,188 (all $ in thousands). Whole loans supplied 429,130 of interest income and securities 155,573 (also $ in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release spread table; the reading of the narrowing is inferred from the table",
-    "claim": "The company's net interest spread on its whole balance sheet was 1.63% in the third quarter, against 1.86% a year earlier. The net yield was 6.01%, the cost of funding (4.76)%, and net swap carry added 0.38%. The spread shrank over the year because net swap carry, a hedging benefit, fell from 0.65% to 0.38%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K and the balance sheet; the leverage effect is inferred",
-    "claim": "The business runs on heavy leverage. Financing agreements were 11,520,131 against stockholders' equity of 1,615,709 (both $ in thousands). Whole loans are financed through securitizations, term warehouse facilities and repurchase agreements, and Agency MBS mainly through repurchase agreements.",
+    "basis": "Stated directly in [F1] and [P1].",
+    "claim": "MFA also invests in residential mortgage securities\u2014primarily Agency MBS along with Non-Agency MBS and CRT securities\u2014holding 3,977,565 (table in thousands) in securities at fair value at Sep. 30, 2026.",
     "facts": [
      "F1",
      "P1"
     ],
     "quotes": [
-     "For our Residential whole loan portfolio, we use loan securitizations, term warehouse facilities and shorter term repurchase agreements to finance our holdings of Residential whole loans."
+     "We invest in residential mortgage securities, primarily Agency MBS, as well as Non-Agency MBS and CRT securities.",
+     "Securities, at fair value | [2] | 3,977,565 | 3,360,280"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement and the 10-K risk factor; the offset reading is inferred",
-    "claim": "Reported GAAP results swing with fair-value changes. In the third quarter, net loss was (111,690) (in thousands). Other income/(loss) was (145,870), including a loss of (203,991) on whole loans at fair value and (223,303) on securities impairment and other items. Gains of 158,845 on derivatives and 115,540 on securitized debt partly offset these.",
-    "facts": [
-     "F2",
-     "P2"
-    ],
-    "quotes": [
-     "We have elected the fair value option accounting model for certain of our investments and financing agreements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A and the earnings release table",
-    "claim": "Swaps are the main hedge used against interest-rate mismatch. Assets have longer contractual maturities than the non-securitization financings, and the financing rates reset faster.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "In order to reduce this interest rate risk exposure, we may enter into derivative instruments, which currently include Swaps."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the delinquency table and income statement; linking credit to fair-value marks is inferred",
-    "claim": "Credit performance is a cost driver, and it is weakest in the Multifamily transitional loan book. Total whole-loan 60+ day delinquency was 6.7%, and 23.7% for Multifamily transitional loans. Credit costs reach earnings through fair-value marks on most loans and a small provision on loans held at carrying value.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the income statement",
-    "claim": "Operating costs are small next to funding costs. For nine months, operating and other expense was 113,230, against 120,383 a year earlier (in thousands). It consists mainly of compensation and benefits (56,043), other G&A (33,058) and loan servicing, financing and related costs (23,429).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K and the cash flow statement and release",
-    "claim": "As a REIT, MFA must pay out most taxable income, so cash earnings largely go to holders. It paid 114,125 of common dividends and 31,665 of preferred dividends in nine months (in thousands), and the regular common dividend was $0.36 per share.",
+    "basis": "Stated directly in [P1] and [P3].",
+    "claim": "Through its wholly-owned subsidiary Lima One, MFA originates and services business purpose loans for real estate investors and sells certain recently originated single-family rental loans to third parties.",
     "facts": [
      "P1",
-     "F3",
-     "P6"
+     "P3"
     ],
     "quotes": [
-     "we must distribute at least 90% of our annual REIT taxable income to our stockholders"
+     "Through our wholly-owned subsidiary, Lima One Capital, LLC (together with its parent company, Lima One Holdings, LLC, \u201cLima One\u201d), a leading nationwide originator and servicer of Business purpose loans (or BPLs), which we acquired on July 1, 2021, we originate and service BPLs for real estate investors.",
+     "During 2025, Lima One sold $212.9 million of recently originated single-family rental loans to third parties and realized gains of $6.1 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the portfolio table and cash flow statement; the funding link is inferred",
-    "claim": "The portfolio is kept running by continuous buying against runoff, and the company relies on borrowing to fund it. Third-quarter acquisitions and originations were 1,619 and runoff 614 (table in millions). For nine months, loan and securities purchases exceeded principal and sale proceeds, and financing activities provided 568,280 of cash (in thousands).",
+    "basis": "Stated directly in [P6].",
+    "claim": "MFA's reportable segments are mortgage-related assets and Lima One, alongside a Corporate category for corporate cash, loan originator investments, unallocated G&A, unsecured senior notes interest, securitization issuance costs, and preferred dividends.",
     "facts": [
-     "P6",
-     "F3"
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "At September 30, 2026, the Company\u2019s reportable segments include (i) mortgage-related assets and (ii) Lima One.",
+     "The Corporate column in the table below primarily consists of corporate cash and related interest income, investments in loan originators and related economics, general and administrative expenses not directly attributable to Lima One, interest expense on unsecured senior notes, securitization issuance costs, and preferred stock dividends."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P6].",
+    "claim": "At September 30, 2026, Mortgage-Related Assets held $11,178,381 (table in thousands) of total assets with $163,073 (table in thousands) in Q3 2026 interest income, while Lima One held $2,213,296 (table in thousands) of total assets with $39,457 (table in thousands) in interest income and 7,418 (table in thousands) in mortgage banking income.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Interest Income | $163,073 | $39,457 | $1,377 | $203,907",
+     "Lima One mortgage banking income | \u2014 | 7,418 | \u2014 | 7,418",
+     "Total Assets | $11,178,381 | $2,213,296 | $149,611 | $13,541,288"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F2].",
+    "claim": "MFA's primary revenue engine is net interest income\u2014earning 593,630 (table in thousands) in interest income against 413,442 (table in thousands) in interest expense for 180,188 (table in thousands) of net interest income over the nine months ended Sep. 30, 2026.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Interest Income | 203,907 | 186,002 | 593,630 | 555,962",
+     "Interest Expense | 142,503 | 129,001 | 413,442 | 379,037",
+     "Net Interest Income | 61,404 | 57,001 | 180,188 | 176,925"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P6].",
+    "claim": "On an economic basis in Q3 2026, MFA's total balance sheet net yield of 6.01% against a funding cost of (4.76)% plus a 0.38% net Swap carry produced a 1.63% net interest spread.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Net Yield (1) | 6.01% | 5.98% | 6.50%",
+     "Cost of Funding (2) | (4.76)% | (4.77)% | (5.29)%",
+     "Impact of net Swap carry (3) | 0.38% | 0.37% | 0.65%",
+     "Net Interest Spread | 1.63% | 1.58% | 1.86%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F2] and [P6].",
+    "claim": "Lima One also contributes fee and gain-on-sale revenue through mortgage banking income of 22,422 (table in thousands) in the nine months ended Sep. 30, 2026, including a $2.4 million gain from $94.8 million of single-family rental loan sale proceeds in Q3 2026.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Lima One mortgage banking income | 7,418 | 5,383 | 22,422 | 15,796",
+     "Asset dispositions included $94.8 million of proceeds from recently-originated single-family rental (SFR) loans, generating a $2.4 million gain on sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F1], [P1], and [P6].",
+    "claim": "To fund its portfolio, MFA uses loan securitizations, term warehouse facilities, and shorter-term repurchase agreements, carrying 11,520,131 (table in thousands) in financing agreements at Sep. 30, 2026 with a 7.1x Debt/Net Equity Ratio and 3.4x recourse leverage.",
+    "facts": [
+     "F1",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "For our Residential whole loan portfolio, we use loan securitizations, term warehouse facilities and shorter term repurchase agreements to finance our holdings of Residential whole loans.",
+     "Financing agreements ($5,545,908 and $5,956,057 held at fair value, respectively) | 11,520,131 | 10,940,014",
+     "MFA\u2019s Debt/Net Equity Ratio was 7.1x while recourse leverage was 3.4x at September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P3] and [P4].",
+    "claim": "Net interest income is driven by interest rates, the slope of the yield curve, borrowing costs, loan delinquencies, and prepayment speeds (CPRs) that alter premium amortization and discount accretion.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our net interest income varies primarily as a result of changes in interest rates, the slope of the yield curve (i.e., the differential between long-term and short-term interest rates), borrowing costs (i.e., our interest expense), the level of loan delinquencies, which may result in changes in the amount of non-accrual loans, and prepayment speeds, the behavior of which involves various risks and uncertainties.",
+     "An increase in the prepayment rate, as measured by the CPR, will typically accelerate the amortization of purchase premiums, thereby reducing the interest income earned on these assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F2] and [P4].",
+    "claim": "Because MFA measures most loans and certain securitized debt and hedges at fair value through earnings, interest-rate and spread movements drive large GAAP valuation swings, yielding a net other loss of (133,093) (table in thousands) in the nine months ended Sep. 30, 2026.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Further, our GAAP results may be impacted by market volatility, resulting in changes in market values of certain financial instruments for which changes in fair value are recorded in net income each period, including certain residential whole loans, securitized debt and Swaps.",
+     "Other Income/(Loss), net | (145,870) | 30,748 | (133,093) | 66,399"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P6].",
+    "claim": "Credit performance affects asset valuations and realized credit losses, with residential whole loan 60+ day delinquencies at 6.7% of UPB at September 30, 2026, led by 23.7% on Multifamily transitional loans and 16.9% on Seasoned RPL/NPL loans.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "60+ day delinquencies (measured as a percentage of UPB) for MFA\u2019s residential loan portfolio decreased to 6.7% at September 30, 2026 from 7.0% at June 30, 2026.",
+     "Multifamily transitional (5) | 263,448 | 263,448 | 298,916 | 10.04% | 1 | 95% | 751 | 211,256 | 16,887 | 8,755 | 62,018 | 23.7% | 156%",
+     "Seasoned RPL/NPL loans | 880,060 | 880,365 | 1,016,119 | 5.08% | 239 | 52% | 646 | 747,447 | 97,192 | 39,152 | 132,328 | 16.9% | 58%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [F2].",
+    "claim": "MFA's operating expenses consist primarily of compensation and benefits (56,043, table in thousands), other general and administrative expense (33,058, table in thousands), and loan servicing, financing and other related costs (23,429, table in thousands) in the nine months ended Sep. 30, 2026.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Compensation and benefits | 15,892 | 18,185 | 56,043 | 60,750",
+     "Other general and administrative expense | 7,742 | 10,769 | 33,058 | 31,681",
+     "Loan servicing, financing and other related costs | 3,445 | 10,216 | 23,429 | 26,052"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P1].",
+    "claim": "MFA's structure and capital retention are governed by REIT tax rules requiring distribution of at least 90% of annual REIT taxable income and by the Investment Company Act 40% Test limiting investment securities to less than 40% of adjusted total assets.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In order to maintain our qualification as a REIT, we must comply with a number of requirements under federal tax law, including that we must distribute at least 90% of our annual REIT taxable income to our stockholders.",
+     "We are a holding company and conduct our real estate finance businesses primarily through wholly-owned subsidiaries, so as to maintain an exemption from registration under the Investment Company Act of 1940, as amended (or the Investment Company Act) by ensuring that less than 40% of the value of our total assets, exclusive of U.S. Government securities and cash items (which we refer to as our adjusted total assets for Investment Company Act purposes), on an unconsolidated basis, consist of \u201cinvestment securities\u201d as defined by the Investment Company Act."
+    ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item (self-description)",
-    "claim": "MFA describes itself as an internally managed specialty finance REIT that invests in and finances residential mortgage assets. It originates business purpose loans through its subsidiary Lima One. This is the company's own description, not an independent ranking.",
+    "basis": "Stated in [S0], [P1], and [P6].",
+    "claim": "MFA Financial is an internally-managed residential mortgage REIT that has distributed over $5 billion in dividends since its 1998 IPO.",
     "facts": [
-     "P1"
+     "S0",
+     "P1",
+     "P6"
     ],
     "quotes": [
      "We are an internally-managed real estate investment trust (or REIT).",
-     "a leading nationwide originator and servicer of Business purpose loans (or BPLs)"
+     "MFA Financial, Inc. (NYSE: MFA) is a leading specialty finance company that invests in residential mortgage loans, residential mortgage-backed securities and other real estate assets.",
+     "MFA has distributed over $5 billion in dividends to stockholders since its initial public offering in 1998."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "At the latest quarter end, MFA's balance sheet was concentrated in residential whole loans, with a large Agency MBS holding alongside.",
-    "facts": [
-     "P4",
-     "F1"
-    ],
-    "quotes": [
-     "At September 30, 2026, we had total assets of approximately $13.5 billion, of which $8.7 billion, or 64%, represented residential whole loans."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Non-QM loans are the largest whole-loan category and were still being added in the quarter.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Lima One's mortgage banking income is an internal origination advantage that grew over nine months. Its Q3 funding was modest.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Lima One funded $166.1 million of new business purpose loans with a maximum loan amount of $287.8 million.",
-     "Lima One generated $7.4 million of mortgage banking income."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Lima One's annual origination volume fell in 2025, which limits how far its origination edge can be called growing.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "For the year, our Lima One subsidiary originated Business purpose loans with a maximum unpaid principal balance of $0.9 billion, a decrease from the $1.4 billion originated in 2024."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Net interest spread on the balance sheet narrowed from a year earlier, led by whole loans. Falling funding costs and lower swap carry did not fully offset lower asset yields.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Net interest income rose year on year in Q3, as larger securities income outweighed lower whole-loan interest income.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "MFA added Agency MBS at scale, which adds a lower-risk, lower-spread asset next to its credit loans.",
-    "facts": [
-     "P6",
-     "F3"
-    ],
-    "quotes": [
-     "MFA purchased $884.2 million and sold $750.3 million of Agency MBS during the quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Q3 results show how exposed MFA is to market moves. Fair-value losses on loans and securities produced a large GAAP loss, partly offset by gains on derivatives and securitized debt.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "The third quarter was challenging for mortgage investors with Treasury yields spiking across the curve and heightened volatility sending spreads wider"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "GAAP book value per common share has fallen through 2026 to the latest quarter end.",
-    "facts": [
-     "P6",
-     "P9",
-     "P3"
-    ],
-    "quotes": [
-     "GAAP book value at September 30, 2026 was $11.12 per common share."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items for the figures and the securitization purpose; the margin-call link is inferred from the 'mark-to-market collateral' label",
-    "claim": "MFA runs a highly leveraged balance sheet, and leverage is a named risk. It states that it uses securitizations to limit margin-call exposure.",
+    "basis": "Stated in [F1] and [P4].",
+    "claim": "MFA held $13.5 billion in total assets at September 30, 2026, anchored by 64% in residential whole loans and 29% in Agency MBS.",
     "facts": [
      "F1",
+     "P4"
+    ],
+    "quotes": [
+     "At September 30, 2026, we had total assets of approximately $13.5 billion, of which $8.7 billion, or 64%, represented residential whole loans.",
+     "In addition, at September 30, 2026, we had approximately $3.9 billion, or 29%, of total assets invested in investments in Agency MBS."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P3].",
+    "claim": "MFA owns Lima One, a nationwide business purpose loan originator and servicer that has funded over $7.3 billion of loans since its July 2021 acquisition.",
+    "facts": [
      "P1",
-     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Through our wholly-owned subsidiary, Lima One Capital, LLC (together with its parent company, Lima One Holdings, LLC, \u201cLima One\u201d), a leading nationwide originator and servicer of Business purpose loans (or BPLs), which we acquired on July 1, 2021, we originate and service BPLs for real estate investors.",
+     "This includes $0.9 billion of loans originated by our wholly-owned subsidiary, Lima One, which has funded more than $7.3 billion of loans since July 2021, when we fully acquired Lima One.",
+     "At December 31, 2025, we had 307 employees, including 250 employees working in our Lima One subsidiary."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] and [P6].",
+    "claim": "Lima One expanded distribution by selling $212.9 million of single-family rental loans in 2025 and $94.8 million in the third quarter of 2026, while launching a wholesale channel and relaunching multifamily lending in 2026.",
+    "facts": [
+     "P3",
      "P6"
     ],
     "quotes": [
-     "Our business strategy involves the use of leverage, and we may not achieve what we believe to be optimal levels of leverage or we may become overleveraged.",
-     "using loan securitizations to minimize our exposure to margin risk"
+     "During 2025, Lima One sold $212.9 million of recently originated single-family rental loans to third parties and realized gains of $6.1 million.",
+     "We believe that these sales to third parties help to strengthen Lima One\u2019s franchise value, create additional distribution channels to accommodate future growth, and enhance returns.",
+     "In early 2026, we relaunched multifamily lending and began funding loans through our newly established wholesale channel, which represent two key areas of growth for Lima One.",
+     "Asset dispositions included $94.8 million of proceeds from recently-originated single-family rental (SFR) loans, generating a $2.4 million gain on sale."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "The company's own rate-sensitivity table shows equity falling more than portfolio value when rates rise, a threat in a quarter when Treasury yields spiked.",
+    "basis": "Stated in [P1], [P3], and [P6].",
+    "claim": "MFA uses loan securitizations to lock in non-recourse, fixed-rate funding and reduce margin risk, reaching approximately $5.9 billion of securitized debt at September 30, 2026.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Liquidity buffers were lower at the end of Q3 than at the end of Q2. Unrestricted cash also fell from year-end 2025.",
-    "facts": [
-     "P6",
-     "P9",
-     "F1"
-    ],
-    "quotes": [
-     "MFA closed the quarter with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS.",
-     "MFA closed the quarter with $141.2 million of unrestricted cash and $294.1 million of unpledged Agency MBS."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Credit quality is uneven across the loan book, and the multifamily transitional and seasoned RPL/NPL books carry the most delinquency. MFA is reducing its legacy multifamily exposure.",
-    "facts": [
+     "P1",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "we purchased Non-QM loans and Agency MBS at attractive levels while further reducing our legacy multifamily exposure"
+     "While market conditions have improved and recession risks have moderated, we have maintained our emphasis on preserving sufficient liquidity, prudently managing our interest rate exposure, and using loan securitizations to minimize our exposure to margin risk.",
+     "During 2025, we completed five Non-QM loan securitizations with unpaid principal balance (or UPB) of loans sold of $1.8 billion.",
+     "These securitizations provide longer term, non-recourse, fixed rate financing.",
+     "MFA completed one securitization during the quarter collateralized by $446.5 million UPB of loans, bringing its total securitized debt to approximately $5.9 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item; the pressure on the payout is inferred from comparing the two figures",
-    "claim": "The quarterly dividend exceeded Q3 distributable earnings per share, which is a pressure on the payout that rivals could exploit.",
+    "basis": "Stated in [P3], [P4], and [P6].",
+    "claim": "Management positions underwriting around low origination LTVs and discounted purchases of seasoned RPL/NPL loans, achieving a 64% weighted average LTV across residential whole loans at September 30, 2026.",
     "facts": [
+     "P3",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "MFA paid a regular cash dividend of $0.36 per common share on October 30, 2026.",
-     "Distributable earnings, a non-GAAP financial measure, were $26.4 million, or $0.26 per basic common share."
+     "With respect to investments in Business purpose and Non-QM loans, we believe that sound underwriting standards, including low LTVs at origination, significantly mitigate our risk of loss.",
+     "Further, we believe the discounted purchase prices paid on Seasoned RPL/NPL loans mitigate our risk of loss in the event that we receive less than 100% of the unpaid principal balance of these investments.",
+     "60+ day delinquencies (measured as a percentage of UPB) for MFA\u2019s residential loan portfolio decreased to 6.7% at September 30, 2026 from 7.0% at June 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "The 10-K names competition as a threat and says many competitors have more financial resources and capital access than MFA.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "many of these entities have greater financial resources and access to capital than we have"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Regulation and housing-finance reform are named threats to MFA's asset choices and operations. The Investment Company Act exemption also limits what it can do.",
+    "basis": "Stated in [P1] and [P2].",
+    "claim": "MFA faces intense competition from larger, less-regulated institutions that can bid up residential mortgage asset prices and compress investment yields.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
+     "We believe that our principal competitors in the business of acquiring and holding residential mortgage assets of the types in which we invest are financial institutions, such as banks, specialty finance companies, insurance companies, institutional investors, including mutual funds and pension funds, hedge funds and other mortgage REITs.",
+     "Some of these entities may not be subject to the same regulatory constraints (i.e., REIT compliance or maintaining an exemption under the Investment Company Act) as we are.",
+     "In addition, many of these entities have greater financial resources and access to capital than we have.",
+     "The existence of these entities, as well as the possibility of additional entities forming in the future, may increase the competition for the acquisition of residential mortgage assets, resulting in higher prices and lower yields on such assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P2].",
+    "claim": "Maintaining REIT tax qualification and the Investment Company Act 40% Test restricts MFA's asset mix, hedging flexibility, and capital retention compared with non-REIT competitors.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "In order to maintain our qualification as a REIT, we must comply with a number of requirements under federal tax law, including that we must distribute at least 90% of our annual REIT taxable income to our stockholders.",
+     "We are a holding company and conduct our real estate finance businesses primarily through wholly-owned subsidiaries, so as to maintain an exemption from registration under the Investment Company Act of 1940, as amended (or the Investment Company Act) by ensuring that less than 40% of the value of our total assets, exclusive of U.S. Government securities and cash items (which we refer to as our adjusted total assets for Investment Company Act purposes), on an unconsolidated basis, consist of \u201cinvestment securities\u201d as defined by the Investment Company Act.",
      "Maintaining our exemption from registration under the Investment Company Act significantly limits our operations.",
-     "it is possible that the adoption of any such reforms could adversely affect the types of assets we can buy, the costs of these assets and our business operations"
+     "Complying with REIT requirements may limit our ability to hedge effectively and may cause us to incur tax liabilities."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "A leadership transition is under way. The CEO will retire and be succeeded by the current President and Chief Investment Officer, and an outside hire will become Chief Investment Officer.",
+    "basis": "Stated in [F2], [P2], and [P6].",
+    "claim": "Interest rate spikes, spread widening, and leveraged mark-to-market exposure threaten MFA's net interest spread and book value, driving a (10.6)% total economic return in the third quarter of 2026.",
     "facts": [
-     "P8"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; no reason for the gap is given",
-    "claim": "The screener shows the share price well below the latest reported GAAP book value per share. The filings do not explain this gap.",
-    "facts": [
-     "S0",
+     "F2",
+     "P2",
      "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "Therefore, a period of high interest rates and flattening or inverted yield curves, such as the conditions experienced during the past few years, which may continue in 2026, presents challenges on our ability to effectively manage the risks associated with our business operations, including interest rate, prepayment, financing, liquidity and credit risks, while maintaining our qualification as a REIT.",
+     "\u201cThe third quarter was challenging for mortgage investors with Treasury yields spiking across the curve and heightened volatility sending spreads wider,\u201d said Craig Knutson, MFA\u2019s Chief Executive Officer.",
+     "Total economic return was (10.6)% for the third quarter.",
+     "MFA incurred a GAAP net loss to common stockholders and participating securities for the third quarter of $(122.4) million, or $(1.19) per basic and diluted common share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Geographic concentration in key states, borrower refinancing dependency, and third-party counterparty and valuation-model limitations threaten loan credit performance and asset recoveries.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, we have significant exposure in California, Florida, Texas, Georgia and New York.",
+     "Our investments in residential whole loans are difficult to value and are dependent upon the borrower\u2019s ability to service or refinance their debt.",
+     "We are subject to counterparty risk and may be unable to seek indemnity or require counterparties to repurchase residential whole loans if they breach representations and warranties, which could cause us to suffer losses.",
+     "The use of models in connection with the valuation and credit losses of our assets subjects us to potential risks in the event that such models are incorrect, misleading or based on incomplete information."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1] and [P2].",
+    "claim": "Potential U.S. mortgage finance reform affecting Fannie Mae and Freddie Mac and evolving CFPB rules threaten MFA's Agency MBS valuations, borrower refinancing, and compliance costs.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "While the likelihood of enactment of major mortgage finance system reform in the short term remains uncertain, it is possible that the adoption of any such reforms could adversely affect the types of assets we can buy, the costs of these assets and our business operations.",
+     "In addition, any decline in the value of securities issued by Fannie Mae and Freddie Mac may affect the value of our Agency MBS and Residential whole loans in general.",
+     "We believe that the Dodd-Frank Act and the regulations promulgated thereunder are likely to continue to increase the economic and compliance costs for participants in the mortgage and securitization industries, including us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P6].",
+    "claim": "MFA faces an upcoming executive leadership transition as CEO Craig Knutson retires effective June 30, 2027, creating execution risk given its dependence on key personnel.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "We are dependent on our executive officers and other key personnel for our success.",
+     "As previously announced, Craig Knutson will retire as Chief Executive Officer, effective June 30, 2027.",
+     "Bryan Wulfsohn will join the Board on January 1, 2027 and become Chief Executive Officer on July 1, 2027.",
+     "In addition, Andrew Kail will join MFA as Senior Vice President and Chief Investment Officer, effective January 1, 2027."
+    ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in the cited items; the 'additional collateral' mechanism is inferred",
-    "claim": "Liquidity at September 30, 2026 was thin relative to the balance sheet: $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS. Cash and cash equivalents of 119,548 (table in thousands) were down from 213,211 at December 31, 2025.",
+    "basis": "Stated directly in the Q3 2026 earnings release and the September 30, 2026 Form 10-Q balance sheet.",
+    "claim": "As of September 30, 2026, MFA held $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS, while cash and cash equivalents had declined from 213,211 (table in thousands) at December 31, 2025 to 119,548 (table in thousands) at September 30, 2026.",
     "facts": [
      "P6",
      "F1"
     ],
     "quotes": [
-     "MFA closed the quarter with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS."
+     "MFA closed the quarter with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS.",
+     "Cash and cash equivalents | 119,548 | 213,211"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement",
-    "claim": "Cash, cash equivalents and restricted cash fell over nine months to 326,866 (table in thousands) from 386,668 at the start of the year, a net decrease of (59,802).",
+    "basis": "Stated directly in the September 30, 2026 Form 10-Q balance sheet and footnote [1].",
+    "claim": "Of MFA's 13,541,288 (table in thousands) in total assets at September 30, 2026, approximately $6.9 billion of residential whole loans were transferred to consolidated variable interest entities and can be used only to settle each respective entity's obligations.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total Assets | 13,541,288 | 13,046,449",
+     "Includes approximately $6.9 billion and $7.6 billion of Residential whole loans transferred to consolidated variable interest entities (\u201cVIEs\u201d) at September 30, 2026 and December 31, 2025, respectively.",
+     "Such assets can be used only to settle the obligations of each respective VIE."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the September 30, 2026 Form 10-Q balance sheet, the Q3 2026 earnings release, and the 2025 Form 10-K MD&A.",
+    "claim": "At September 30, 2026, MFA carried 11,520,131 (table in thousands) of financing agreements against 1,615,709 (table in thousands) of total stockholders' equity, resulting in a 7.1x Debt/Net Equity Ratio and 3.4x recourse leverage.",
+    "facts": [
+     "F1",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Financing agreements ($5,545,908 and $5,956,057 held at fair value, respectively) | 11,520,131 | 10,940,014",
+     "Total Stockholders\u2019 Equity | 1,615,709 | 1,827,695",
+     "MFA\u2019s Debt/Net Equity Ratio was 7.1x while recourse leverage was 3.4x at September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in Table 1 of the Q3 2026 earnings release.",
+    "claim": "In the September 30, 2026 asset allocation (table in millions), MFA deducts securitized debt of (5,940), mark-to-market financing agreements of (5,302), senior notes and other secured financing of (219), and non-mark-to-market financing agreements of (59), with mark-to-market debt concentrated in Agency MBS at (3,523).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Securitized Debt | (4,109) | (862) | (198) | \u2014 | (740) | \u2014 | (31) | (5,940)",
+     "Financing Agreements with Mark-to-market Collateral Provisions | (1,029) | (75) | (323) | (194) | (46) | (3,523) | (112) | (5,302)",
+     "Senior Notes and Other secured financing | \u2014 | \u2014 | \u2014 | \u2014 | \u2014 | \u2014 | (219) | (219)",
+     "Financing Agreements with Non-mark-to-market Collateral Provisions | \u2014 | (9) | (47) | (3) | \u2014 | \u2014 | \u2014 | (59)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the September 30, 2026 Form 10-Q cash flow statement.",
+    "claim": "For the nine months ended September 30, 2026, MFA generated 430,984 (table in thousands) in net cash provided by operating activities, up from 38,619 (table in thousands) in the prior-year period, despite a GAAP net loss of $ (65,876) (table in thousands).",
     "facts": [
      "F3"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance sheet figures are stated. Taking 7.1x and 6.0x as the totals is inferred from column position, because the 'Other, net' column shows no ratio in either table.",
-    "claim": "Leverage rose over 2026 and equity fell. The total debt/net equity ratio was 7.1x at September 30, 2026 against 6.0x at December 31, 2025. Total liabilities were 11,925,579 against total stockholders' equity of 1,615,709 (table in thousands), down from 1,827,695.",
-    "facts": [
-     "P6",
-     "P3",
-     "F1"
-    ],
     "quotes": [
-     "Total Debt/Net Equity ratio represents the sum of borrowings under our financing agreements as a multiple of net equity allocated."
+     "Net income/(loss) | $ (65,876) | $ 122,464",
+     "Net cash provided by/(used in) operating activities | 430,984 | 38,619"
     ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items; the link between losses and the book value fall is inferred",
-    "claim": "Book value per common share dropped to $11.12 at September 30, 2026 from $12.71 at June 30, 2026 and $13.20 at December 31, 2025. The third-quarter net loss was (111,690) (table in thousands), driven by fair-value losses on loans and securities.",
-    "facts": [
-     "P6",
-     "P9",
-     "P3",
-     "F2"
-    ],
-    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in the table; the margin-call mechanism is inferred from the 'mark-to-market collateral provisions' label and the 10-K risk language",
-    "claim": "Debt is mostly securitized or repo-style funding. The allocation table shows financing agreements with mark-to-market collateral provisions of (5,302) and securitized debt of (5,940) (table in millions), plus (59) non-mark-to-market and (219) senior notes and other secured financing. Mark-to-market financing carries margin-call exposure.",
+    "basis": "Stated directly in the September 30, 2026 Form 10-Q cash flow statement and income statement.",
+    "claim": "Operating cash flow in the nine months ended September 30, 2026 included 233,088 (table in thousands) of net margin received for derivatives\u2014reversing a (96,176) (table in thousands) margin outflow a year earlier\u2014while net interest income was 180,188 (table in thousands).",
     "facts": [
-     "P6",
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated; the quality assessment is inferred from the cash flow adjustments",
-    "claim": "Reported operating cash flow was well above earnings: net cash from operations was 430,984 against a net loss of (65,876) (table in thousands). Part of the gap came from net margin received on derivatives of 233,088, against (96,176) paid a year earlier. This looks more like a collateral inflow than a recurring earnings stream.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the shortfall implication is inferred",
-    "claim": "Recurring earnings power was below the dividend in Q3. Distributable earnings were $26.4 million, or $0.26 per share, while a regular dividend of $0.36 per share was paid on October 30, 2026. Net interest income was 61,404 (table in thousands) for the quarter.",
-    "facts": [
-     "P6",
+     "F3",
      "F2"
     ],
     "quotes": [
+     "Net margin received/(paid) for derivatives | 233,088 | (96,176)",
+     "Net Interest Income | 61,404 | 57,001 | 180,188 | 176,925"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release and its non-GAAP reconciliation table.",
+    "claim": "In Q3 2026, MFA's non-GAAP distributable earnings of $26.4 million ($0.26 per basic common share) reflected 18,939 (table in thousands) of realized credit losses net of recoveries and fell below the $0.36 per common share cash dividend paid on October 30, 2026.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Distributable earnings, a non-GAAP financial measure, were $26.4 million, or $0.26 per basic common share.",
+     "Adjustment \u2013 realized credit losses on Residential whole loans at fair value, net of recoveries | 18,939 | 24,463 | 4,373 | 3,003 | 10,052",
      "MFA paid a regular cash dividend of $0.36 per common share on October 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement",
-    "claim": "Cash was deployed rather than retained. Investing used (1,059,066) and financing provided 568,280 (table in thousands). Operating inflow of 430,984 was the largest source, followed by net borrowing. Common dividends paid were (114,125) and preferred dividends (31,665).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the 'non-recourse, fixed rate' description comes from the 10-K discussion of 2025 securitizations",
-    "claim": "Management's stated way of meeting refinancing needs is securitization. The 10-K says it uses loan securitizations to cut margin exposure, and Q3 included a re-securitization of $447 million of seasoned NPL collateral that unlocked $40 million of capital.",
-    "facts": [
-     "P1",
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "using loan securitizations to minimize our exposure to margin risk",
-     "We also re-securitized $447 million of seasoned NPL collateral after calling a prior issuance, unlocking $40 million of capital and additional financing capacity.",
-     "These securitizations provide longer term, non-recourse, fixed rate financing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the sensitivity table; the leverage mechanism is inferred",
-    "claim": "Rate-driven equity risk is notable: a +100 basis point rate rise would change total stockholders' equity by (10.87)%, against a (1.25)% change in net portfolio value.",
+    "basis": "Stated directly in Table 2, Table 6, and the portfolio activity summary of the Q3 2026 earnings release.",
+    "claim": "MFA's total balance sheet net interest spread narrowed to 1.63% in Q3 2026 from 1.86% in Q3 2025, while 60+ day residential loan delinquencies stood at 6.7% of unpaid principal balance at September 30, 2026 (including 23.7% in multifamily transitional loans).",
     "facts": [
      "P6"
     ],
-    "quotes": [],
-    "support": "number_not_listed"
+    "quotes": [
+     "Net Interest Spread | 1.63% | 1.58% | 1.86%",
+     "60+ day delinquencies (measured as a percentage of UPB) for MFA\u2019s residential loan portfolio decreased to 6.7% at September 30, 2026 from 7.0% at June 30, 2026.",
+     "Multifamily transitional (5) | 263,448 | 263,448 | 298,916 | 10.04% | 1 | 95% | 751 | 211,256 | 16,887 | 8,755 | 62,018 | 23.7% | 156%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the September 30, 2026 Form 10-Q cash flow statement.",
+    "claim": "During the nine months ended September 30, 2026, net cash used in investing activities of (1,059,066) (table in thousands) and dividend outlays were funded by 568,280 (table in thousands) of net financing cash inflows and a (59,802) (table in thousands) decrease in total cash and restricted cash.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by/(used in) investing activities | (1,059,066) | (554,026)",
+     "Net cash provided by/(used in) financing activities | 568,280 | 451,064",
+     "Net increase/(decrease) in cash, cash equivalents and restricted cash | (59,802) | (64,343)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 2025 Form 10-K Business and MD&A sections and the September 30, 2026 Form 10-Q cash flow statement.",
+    "claim": "Because MFA's non-securitization financing liabilities have shorter contractual maturities than its mortgage investments and reprice faster, the company faces continual rollover needs, recording principal repayments of (2,476,458) (table in thousands) on mark-to-market financing agreements and (2,304,456) (table in thousands) on other collateralized financing agreements in the nine months ended September 30, 2026.",
+    "facts": [
+     "P3",
+     "P1",
+     "F3"
+    ],
+    "quotes": [
+     "Our residential mortgage investments have longer-term contractual maturities than our non-securitization related financing liabilities, and the interest rates we pay on our non-securitization related financings will typically change at a faster pace than the interest rates we earn on our investments.",
+     "For our MBS portfolio, we primarily use shorter term repurchase agreements to finance our holdings of Securities.",
+     "Principal payments on financing agreements with mark-to-market collateral provisions | (2,476,458) | (2,014,431)",
+     "Principal payments on other collateralized financing agreements | (2,304,456) | (1,293,259)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release and the 2025 Form 10-K Business section, and inferred from borrowing proceeds in the Form 10-Q cash flow statement.",
+    "claim": "MFA meets ongoing funding and refinancing needs via new borrowings, asset runoff ($614.0 million in Q3 2026), loan and REO sales ($94.8 million and $20.5 million in Q3 2026), liquid cash and unpledged Agency MBS, and securitizations\u2014such as re-securitizing $447 million of seasoned NPL collateral in Q3 2026 to unlock $40 million of capital.",
+    "facts": [
+     "P6",
+     "P1",
+     "F3"
+    ],
+    "quotes": [
+     "Portfolio runoff was $614.0 million.",
+     "Asset dispositions included $94.8 million of proceeds from recently-originated single-family rental (SFR) loans, generating a $2.4 million gain on sale.",
+     "MFA also sold 62 REO properties in the third quarter for aggregate net proceeds of $20.5 million.",
+     "We also re-securitized $447 million of seasoned NPL collateral after calling a prior issuance, unlocking $40 million of capital and additional financing capacity.",
+     "We expect that our investment activities will continue to be financed primarily through a combination of securitization transactions, term loan warehouse financing and repurchase agreement financing."
+    ],
+    "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in the cited items (acquisition and portfolio figures, financing expectation); the link between supply and financing is inferred.",
-    "claim": "Non-QM loan purchases are the largest portfolio growth driver in the evidence: Q3 2026 acquisitions were $480.5 million, taking the Non-QM portfolio to $5.8 billion. To continue, MFA needs loan supply at attractive levels and securitization and warehouse financing to stay available.",
+    "basis": "stated in the cited items (10-K MD&A and Q3 2026 earnings release)",
+    "claim": "MFA expanded its residential mortgage asset portfolio from $10.5 billion at December 31, 2024 to $12.3 billion at December 31, 2025, supported by $1.8 billion of Non-QM loan additions in 2025 and $480.5 million of Non-QM loan acquisitions in the quarter ended September 30, 2026.",
     "facts": [
-     "P6",
-     "P1"
-    ],
-    "quotes": [
-     "Non-QM loan acquisitions totaled $480.5 million, bringing MFA\u2019s Non-QM portfolio to $5.8 billion at September 30, 2026.",
-     "We expect that our investment activities will continue to be financed primarily through a combination of securitization transactions, term loan warehouse financing and repurchase agreement financing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the statements; the financing dependence is inferred from the balance sheet and the 10-K financing strategy.",
-    "claim": "Agency MBS growth lifted interest income. Interest income on securities was 57,050 (table in thousands) in Q3 2026 against 27,708 a year earlier. Securities held reached 3,977,565 (table in thousands) against 3,360,280 at year-end 2025. To continue, repo financing must remain available and mark-to-market collateral calls must stay manageable.",
-    "facts": [
-     "F2",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "MFA purchased $884.2 million and sold $750.3 million of Agency MBS during the quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the statements and press release table; the balance-sheet-size explanation is inferred.",
-    "claim": "Net interest income rose to 61,404 (table in thousands) in Q3 2026 from 57,001 a year earlier. The total balance sheet net interest spread was 1.63% against 1.86% a year earlier, so the growth came from a larger balance sheet rather than a wider spread. To continue, funding costs must stay below asset yields.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items for the income, volume and strategy; the dependence on the new channels is inferred.",
-    "claim": "Lima One business-purpose lending and mortgage banking is a stated growth area. Mortgage banking income was 7,418 (table in thousands) in Q3 2026 against 5,383 a year earlier, and Lima One funded $166.1 million of new loans in the quarter. Continuation depends on the relaunched multifamily lending and the new wholesale channel producing volume.",
-    "facts": [
-     "F2",
      "P3",
      "P6"
     ],
     "quotes": [
-     "In early 2026, we relaunched multifamily lending and began funding loans through our newly established wholesale channel, which represent two key areas of growth for Lima One."
+     "At December 31, 2025, our residential mortgage asset portfolio, which includes residential whole loans and REO, and Securities, at fair value, was approximately $12.3 billion compared to $10.5 billion at December 31, 2024.",
+     "These additions included $2.1 billion of Agency MBS, $1.8 billion of Non-QM loans, and approximately $900 million of funded originations of Business purpose loans and draws on existing Transitional loans at Lima One.",
+     "Non-QM loan acquisitions totaled $480.5 million, bringing MFA\u2019s Non-QM portfolio to $5.8 billion at September 30, 2026."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items (10-K Item 1 and Q3 2026 10-Q forward-looking statements)",
+    "claim": "Continued growth of the residential whole loan portfolio depends on an adequate supply of loans offered for sale in the market and supportive economic conditions for residential mortgage assets.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "During 2026, assuming economic conditions continue to support markets for residential mortgage assets, we expect to continue pursuing investment opportunities, focused primarily on residential whole loans and Agency MBS as market opportunities arise.",
+     "MFA\u2019s ability to continue growing its residential whole loan portfolio, which is dependent on, among other things, the supply of loans offered for sale in the market"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited items (10-Q statement of operations, 10-K Item 1, and Q3 2026 earnings release)",
+    "claim": "MFA grew Securities, at fair value interest income from 81,156 to 155,573 (table in thousands) year-over-year through September 30, 2026 after adding $2.1 billion of Agency MBS in 2025 and rotating $750 million into higher coupon bonds.",
+    "facts": [
+     "F2",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "During 2025, we opportunistically added $2.1 billion of Agency MBS.",
+     "We acquired $1.6 billion of assets during the quarter, including a $750 million rotation within our Agency MBS portfolio into higher coupon bonds"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the press release; repeatability is inferred.",
-    "claim": "Re-securitization recycles capital into new investments. MFA re-securitized $447 million of seasoned NPL collateral in Q3, unlocking $40 million of capital. Continuation requires open securitization markets and loans that can be securitized on acceptable terms.",
+    "basis": "stated in the cited items (10-K Item 1 and Item 1A)",
+    "claim": "Continued growth and net interest contribution from the Agency MBS portfolio requires accessible shorter-term repurchase financing at favorable borrowing costs relative to asset yields, alongside manageable credit spreads and prepayment speeds.",
     "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "For our MBS portfolio, we primarily use shorter term repurchase agreements to finance our holdings of Securities.",
+     "Our net interest income varies primarily as a result of changes in interest rates, the slope of the yield curve (i.e., the differential between long-term and short-term interest rates), market credit spreads, borrowing costs (i.e., our interest expense), delinquencies, defaults and prepayment speeds on our investments, the behavior of which involves various risks and uncertainties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-Q statement of operations and 10-K MD&A)",
+    "claim": "MFA is driving growth at subsidiary Lima One through a newly established wholesale channel, a relaunch of multifamily lending in early 2026, sales-force and technology investments, and third-party loan sales that increased Lima One mortgage banking income from 15,796 to 22,422 (table in thousands) year-over-year through September 30, 2026.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "During the year, we expanded Lima One\u2019s sales force, invested in technology initiatives that we expect to improve the borrower experience, and made key hires to Lima One\u2019s leadership team in strategic growth areas.",
+     "In early 2026, we relaunched multifamily lending and began funding loans through our newly established wholesale channel, which represent two key areas of growth for Lima One.",
+     "During 2025, Lima One sold $212.9 million of recently originated single-family rental loans to third parties and realized gains of $6.1 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K MD&A and Q3 2026 10-Q forward-looking statements)",
+    "claim": "Lima One\u2019s growth requires realizing management\u2019s assumptions for business purpose loan origination volumes, maintaining third-party distribution demand for loan sales, and controlling credit defaults and loss severities amid industry competition.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "failure to realize management\u2019s assumptions regarding expected growth in business purpose loan (BPL) origination volumes and credit risks underlying BPLs, including changes in the default rates and management\u2019s assumptions regarding default rates and loss severities on the BPLs originated by Lima One",
+     "We believe that these sales to third parties help to strengthen Lima One\u2019s franchise value, create additional distribution channels to accommodate future growth, and enhance returns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K MD&A and Q3 2026 earnings release)",
+    "claim": "MFA unlocks capital and expands financing capacity for redeployment into higher-yielding assets by executing loan securitizations and re-securitizations, including $1.7 billion of securitized debt issued in 2025 and a $447 million seasoned NPL re-securitization in the quarter ended September 30, 2026 that unlocked $40 million of capital.",
+    "facts": [
+     "P3",
      "P6"
     ],
     "quotes": [
+     "During 2025, we executed five securitizations and issued $1.7 billion of securitized debt.",
      "We also re-securitized $447 million of seasoned NPL collateral after calling a prior issuance, unlocking $40 million of capital and additional financing capacity."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated figures; the link to capacity for growth is inferred.",
-    "claim": "The capital base is a condition for continued growth and it shrank. GAAP book value was $11.12 per common share at September 30, 2026, against $12.71 at June 30, 2026. The $0.36 dividend exceeded Q3 distributable earnings of $0.26 per share. Continuation needs book value and earnings stabilizing so that leverage-funded growth does not strain equity.",
+    "basis": "stated in the cited items (10-K Item 1 and Q3 2026 10-Q forward-looking statements)",
+    "claim": "Securitization-driven capital unlocking and redeployment requires receptive securitization market conditions and access to borrowing facilities on acceptable cost and maturity terms.",
     "facts": [
-     "P6",
-     "P9",
-     "F1"
+     "P1",
+     "P4"
     ],
     "quotes": [
-     "MFA paid a regular cash dividend of $0.36 per common share on October 30, 2026."
+     "Going forward, in connection with our current and any future investment in residential whole loans, we expect that our financing strategy will continue to include loan securitization and other forms of structured financing, subject to market conditions.",
+     "MFA\u2019s ability to borrow to finance its assets and the terms, including the cost, maturity and other terms, of any such borrowings"
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "stated figures; the margin-call mechanism is inferred from the 10-K risk factors on leverage, hedging and mark-to-market financing.",
-    "claim": "Liquidity and leverage must hold for growth to continue. MFA ended Q3 with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS, while financing agreements were 11,520,131 (table in thousands). A +100 basis point rate move would change total stockholders' equity by (10.87)%.",
-    "facts": [
-     "P6",
-     "F1"
-    ],
-    "quotes": [
-     "MFA closed the quarter with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the statements and risk factors; the offset conclusion is inferred.",
-    "claim": "Credit and fair-value results can offset growth in earning assets. Q3 2026 net loss on residential whole loans at fair value was (203,991) (table in thousands). Whole-loan 60+ day delinquency was 6.7%. Net income was (111,690) (table in thousands). Growth continues only if credit performance and fair-value marks stop eroding book value.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated figures; the sustainability judgement is inferred.",
-    "claim": "Lower operating expense supports earnings growth. Operating and other expense was 27,179 (table in thousands) in Q3 2026 against 39,470 a year earlier. Continuation depends on expenses staying low while Lima One expands.",
+    "basis": "stated in the cited items (10-Q statement of operations and 10-K MD&A)",
+    "claim": "Expense reduction initiatives lowered compensation and benefits and other G&A expenses by 9.5% from $131.9 million in 2024 to $119.4 million in 2025, with total Operating and Other Expense declining from 120,383 to 113,230 (table in thousands) year-over-year through September 30, 2026.",
     "facts": [
      "F2",
      "P3"
     ],
-    "quotes": [],
+    "quotes": [
+     "For the year, compensation and benefits and other G&A expenses were $119.4 million, a 9.5% reduction from $131.9 million incurred in 2024 attributable to expense reduction initiatives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1)",
+    "claim": "Continued portfolio and earnings growth is constrained by MFA\u2019s requirement to distribute at least 90% of annual REIT taxable income to maintain REIT status and to keep investment securities under 40% of adjusted total assets on an unconsolidated basis.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In order to maintain our qualification as a REIT, we must comply with a number of requirements under federal tax law, including that we must distribute at least 90% of our annual REIT taxable income to our stockholders.",
+     "We are a holding company and conduct our real estate finance businesses primarily through wholly-owned subsidiaries, so as to maintain an exemption from registration under the Investment Company Act of 1940, as amended (or the Investment Company Act) by ensuring that less than 40% of the value of our total assets, exclusive of U.S. Government securities and cash items (which we refer to as our adjusted total assets for Investment Company Act purposes), on an unconsolidated basis, consist of \u201cinvestment securities\u201d as defined by the Investment Company Act."
+    ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited income statement; the 'impairment' label is the line's own title",
-    "claim": "The Q3 2026 income statement shows a (223,303) (table in thousands) line for impairment and other net loss on securities and other portfolio investments, against a gain of 18,004 a year earlier. The nine-month figure is (265,423).",
+    "basis": "stated in F2 and P6",
+    "claim": "For the three and nine months ended Sep. 30, 2026, MFA recorded (223,303) (table in thousands) and (265,423) (table in thousands), respectively, in impairment and other net gain/(loss) on securities and other portfolio investments amid spiking Treasury yields and wider spreads.",
     "facts": [
-     "F2"
+     "F2",
+     "P6"
     ],
     "quotes": [
-     "Impairment and other net gain/(loss) on securities and other portfolio investments | (223,303) | 18,004 | (265,423) | 45,828"
+     "Impairment and other net gain/(loss) on securities and other portfolio investments | (223,303) | 18,004 | (265,423) | 45,828",
+     "\u201cThe third quarter was challenging for mortgage investors with Treasury yields spiking across the curve and heightened volatility sending spreads wider,\u201d said Craig Knutson, MFA\u2019s Chief Executive Officer."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release (P6) and income statement (F2); the June 30, 2026 book value comparison in P9 is $12.71",
-    "claim": "MFA reported a Q3 2026 GAAP net loss to common stockholders of $(122.4) million, or $(1.19) per share. GAAP book value was $11.12 per common share, and total economic return was (10.6)%.",
+    "basis": "stated in P6 and F2",
+    "claim": "For the third quarter ended September 30, 2026, MFA incurred a GAAP net loss to common stockholders and participating securities of $(122.4) million, or $(1.19) per basic and diluted common share, and recorded a total economic return of (10.6)%.",
     "facts": [
      "P6",
-     "F2",
-     "P9"
+     "F2"
     ],
     "quotes": [
      "MFA incurred a GAAP net loss to common stockholders and participating securities for the third quarter of $(122.4) million, or $(1.19) per basic and diluted common share.",
@@ -635,118 +725,215 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 8-K Item 5.02 text",
-    "claim": "MFA announced that CEO Craig Knutson will retire and that Bryan Wulfsohn, currently President and Chief Investment Officer, will become CEO in mid-2027. Wulfsohn also joins the Board from the start of 2027.",
+    "basis": "stated in P6",
+    "claim": "MFA announced that Chief Executive Officer Craig Knutson will retire effective June 30, 2027, and is expected to remain on the Board of Directors and stand for reelection at the 2027 annual meeting.",
     "facts": [
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "On October 8, 2026, MFA announced the appointment of Bryan Wulfsohn, age 43, as CEO of the Company, effective July 1, 2027, following the retirement of Mr. Knutson."
+     "As previously announced, Craig Knutson will retire as Chief Executive Officer, effective June 30, 2027.",
+     "Mr. Knutson is expected to remain on the Board of Directors following his retirement and will stand for reelection to the Board at MFA\u2019s 2027 annual meeting of stockholders."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 8-K Item 7.01 text",
-    "claim": "MFA announced that Andrew P. Kail, formerly of Starwood Capital Group, will join as Chief Investment Officer effective January 1, 2027.",
+    "basis": "stated in P6",
+    "claim": "MFA announced that President and Chief Investment Officer Bryan Wulfsohn will join the Board on January 1, 2027 and become Chief Executive Officer on July 1, 2027.",
     "facts": [
-     "P8"
+     "P6"
     ],
     "quotes": [
-     "On October 8, 2026, MFA announced that Andrew P. Kail, age 57, will join the Company as its Chief Investment Officer, effective January 1, 2027."
+     "Bryan Wulfsohn will join the Board on January 1, 2027 and become Chief Executive Officer on July 1, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "MFA announced that Andrew Kail will join MFA as Senior Vice President and Chief Investment Officer effective January 1, 2027.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "In addition, Andrew Kail will join MFA as Senior Vice President and Chief Investment Officer, effective January 1, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "During the third quarter ended September 30, 2026, MFA called a prior securitization issuance and re-securitized $447 million of seasoned NPL collateral, unlocking $40 million of capital and additional financing capacity.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "\u201cWe also re-securitized $447 million of seasoned NPL collateral after calling a prior issuance, unlocking $40 million of capital and additional financing capacity.\u201d"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "In early 2026, MFA relaunched multifamily lending and began funding loans through a newly established wholesale channel at Lima One.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In early 2026, we relaunched multifamily lending and began funding loans through our newly established wholesale channel, which represent two key areas of growth for Lima One."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "During the nine months ended Sep. 30, 2026, MFA recorded a lease modification resulting in a change of (32,581) (table in thousands) to its right-of-use lease asset and $ (36,509) (table in thousands) to its lease liability.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Increase/(decrease) in right-of-use lease asset from lease modification | (32,581) | 0",
+     "Increase/(decrease) in lease liability from lease modification | $ (36,509) | $ 0"
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Figures are stated in the cited items. The mechanism is stated in the 10-K risk factor, and its application to Q3 is inferred from the statements and press release.",
-    "claim": "Fair-value accounting makes reported results and book value swing with markets. In Q3 2026 the company posted a GAAP net loss to common of $(122.4) million, or $(1.19) per share. GAAP book value fell to $11.12 per share from $13.20 at December 31, 2025. The income statement (in thousands) shows a net loss of (203,991) on residential whole loans at fair value and (223,303) on securities and other portfolio investments, partly offset by a 158,845 derivative gain.",
+    "basis": "Stated in [P6], [F2], and [P2] through third-quarter 2026 GAAP and book value figures, Shock Table projections, and fair value option disclosures.",
+    "claim": "Rising Treasury yields and wider credit spreads drove a 2026 third-quarter GAAP net loss to common stockholders of $(122.4) million, a (10.6)% total economic return, and a decline in GAAP book value to $11.12 per common share, while a +100 basis point rate shock is projected to reduce stockholders' equity by (10.87)%.",
     "facts": [
+     "P6",
      "F2",
-     "P2",
-     "P3",
-     "P6"
+     "P2"
     ],
     "quotes": [
-     "We have elected the fair value option accounting model for certain of our investments and financing agreements.",
-     "MFA incurred a GAAP net loss to common stockholders and participating securities for the third quarter of $(122.4) million, or $(1.19) per basic and diluted common share."
+     "MFA incurred a GAAP net loss to common stockholders and participating securities for the third quarter of $(122.4) million, or $(1.19) per basic and diluted common share.",
+     "Total economic return was (10.6)% for the third quarter.",
+     "GAAP book value at September 30, 2026 was $11.12 per common share.",
+     "\u201cThe third quarter was challenging for mortgage investors with Treasury yields spiking across the curve and heightened volatility sending spreads wider,\u201d said Craig Knutson, MFA\u2019s Chief Executive Officer.",
+     "+100 Basis Point Increase | (1.25)% | (10.87)%",
+     "Changes in the fair value of assets, and a portion of the changes in the fair value of liabilities, accounted for using the fair value option are recorded in our consolidated statements of operations each period, which may result in volatility in our financial results."
     ],
     "support": "supported"
    },
    {
-    "basis": "Per-share figures are stated in the cited items. The pressure on book value is inferred from the comparison and from the 10-K explanation of the 2025 book value decline.",
-    "claim": "Distributable earnings per share ran below the regular dividend in the last two quarters. Q3 distributable earnings were $0.26 per share against a $0.36 dividend paid October 30, 2026. Q2 distributable earnings were $0.12 per share against the same $0.36 dividend. Continued shortfalls could pressure book value or the dividend.",
+    "basis": "Stated in [P6] Tables 4 and 6 and non-GAAP reconciliation, [F2], and [P2].",
+    "claim": "Elevated credit stress persists in parts of the residential whole loan portfolio, with 60+ day delinquencies at 23.7% and 60+ LTV at 156% for Multifamily transitional loans, 10.8% for Single-family transitional loans, and 16.9% for Seasoned RPL/NPL loans.",
     "facts": [
      "P6",
-     "P9",
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "In general, these investments are more exposed to credit risk than Agency MBS because the former are not guaranteed as to principal or interest by the U.S. Government, any federal agency or any federally chartered corporation.",
+     "Higher-than-expected rates of default and/or higher-than-expected loss severities on the mortgages underlying these investments could adversely affect the value of these assets.",
+     "60+ day delinquencies (measured as a percentage of UPB) for MFA\u2019s residential loan portfolio decreased to 6.7% at September 30, 2026 from 7.0% at June 30, 2026.",
+     "Multifamily transitional (5) | 263,448 | 263,448 | 298,916 | 10.04% | 1 | 95% | 751 | 211,256 | 16,887 | 8,755 | 62,018 | 23.7% | 156%",
+     "Single-family transitional (5) | 678,052 | 678,325 | 692,847 | 9.93% | 7 | 68% | 756 | 597,146 | 21,141 | 3,966 | 70,594 | 10.8% | 84%",
+     "Seasoned RPL/NPL loans | 880,060 | 880,365 | 1,016,119 | 5.08% | 239 | 52% | 646 | 747,447 | 97,192 | 39,152 | 132,328 | 16.9% | 58%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6], [F1], [P2], and [P3].",
+    "claim": "MFA operates with a 7.1x Debt/Net Equity Ratio, 3.4x recourse leverage, and (5,302) (table in millions) in financing agreements with mark-to-market collateral provisions, exposing it to margin calls and liquidity strain if asset values fall or repo markets tighten.",
+    "facts": [
+     "P6",
+     "F1",
      "P2",
      "P3"
     ],
     "quotes": [
-     "Distributable earnings, a non-GAAP financial measure, were $26.4 million, or $0.26 per basic common share.",
+     "MFA\u2019s Debt/Net Equity Ratio was 7.1x while recourse leverage was 3.4x at September 30, 2026.",
+     "Financing Agreements with Mark-to-market Collateral Provisions | (1,029) | (75) | (323) | (194) | (46) | (3,523) | (112) | (5,302)",
+     "Our residential mortgage investments have longer-term contractual maturities than our non-securitization related financing liabilities, and the interest rates we pay on our non-securitization related financings will typically change at a faster pace than the interest rates we earn on our investments.",
+     "A lack of liquidity in our investments may materially adversely affect our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6], [P3], [P2], [F2], and [F3].",
+    "claim": "MFA paid a $0.36 per share common dividend in October 2026 despite reporting third-quarter Distributable earnings of $0.26 per basic common share and a GAAP loss of $(1.19) per basic common share, continuing a pattern of distributions exceeding GAAP earnings.",
+    "facts": [
+     "P6",
+     "F2",
+     "F3",
+     "P3",
+     "P2"
+    ],
+    "quotes": [
      "MFA paid a regular cash dividend of $0.36 per common share on October 30, 2026.",
+     "Distributable earnings, a non-GAAP financial measure, were $26.4 million, or $0.26 per basic common share.",
+     "The decrease in GAAP book value and Economic book value during 2025 primarily reflects dividends declared on our common stock in excess of our GAAP earnings.",
      "We have not established a minimum dividend payment level."
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet and liquidity figures are stated in the cited items. The margin-call mechanism is inferred from the financing structure.",
-    "claim": "The company is highly leveraged and relies on mark-to-market repo financing, while unrestricted cash is modest. Financing agreements were 11,520,131 (thousands) against total stockholders' equity of 1,615,709 (thousands). Financing with mark-to-market collateral provisions was (5,302) (table in millions). Unrestricted cash was $119.5 million, with $241.2 million of unpledged Agency MBS.",
+    "basis": "Stated in [P1], [P2], and [P4].",
+    "claim": "MFA must distribute at least 90% of annual REIT taxable income and keep investment securities below 40% of adjusted unconsolidated total assets to preserve its REIT status and Investment Company Act exemption, while facing CFPB rules and potential GSE conservatorship reform.",
     "facts": [
-     "F1",
-     "P6",
-     "P1"
+     "P1",
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "MFA closed the quarter with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS.",
-     "using loan securitizations to minimize our exposure to margin risk"
+     "In order to maintain our qualification as a REIT, we must comply with a number of requirements under federal tax law, including that we must distribute at least 90% of our annual REIT taxable income to our stockholders.",
+     "We are a holding company and conduct our real estate finance businesses primarily through wholly-owned subsidiaries, so as to maintain an exemption from registration under the Investment Company Act of 1940, as amended (or the Investment Company Act) by ensuring that less than 40% of the value of our total assets, exclusive of U.S. Government securities and cash items (which we refer to as our adjusted total assets for Investment Company Act purposes), on an unconsolidated basis, consist of \u201cinvestment securities\u201d as defined by the Investment Company Act.",
+     "If we fail to remain qualified as a REIT, we will be subject to tax as a regular corporation and could face a substantial tax liability.",
+     "Maintaining our exemption from registration under the Investment Company Act significantly limits our operations.",
+     "While the likelihood of enactment of major mortgage finance system reform in the short term remains uncertain, it is possible that the adoption of any such reforms could adversely affect the types of assets we can buy, the costs of these assets and our business operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the sensitivity table in the cited item. The leverage explanation is inferred.",
-    "claim": "Equity is sensitive to higher interest rates. In the Q3 disclosure, a +100 basis point shock changes total stockholders' equity by (10.87)% and net portfolio value by (1.25)%. This follows a quarter in which Treasury yields spiked.",
+    "basis": "Stated in [P2], [P3], and [P4], with third-quarter 2026 rotation stated in [P6].",
+    "claim": "Changes in conditional prepayment rates on residential mortgage assets can either compress yields and force reinvestment at lower coupons when prepayments rise, or extend asset duration and increase interest rate sensitivity when prepayments slow.",
     "facts": [
+     "P2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Prepayment rates on the mortgage loans underlying certain of our residential mortgage assets may materially adversely affect our profitability or could require us to sell assets in unfavorable market conditions.",
+     "An increase in the prepayment rate, as measured by the CPR, will typically accelerate the amortization of purchase premiums, thereby reducing the interest income earned on these assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2]; the exact state concentration percentages referenced in Item 7A are not included in this packet.",
+    "claim": "Concentrations of mortgage collateral in California, Florida, Texas, Georgia, and New York expose MFA to disproportionate credit losses from regional housing downturns, natural disasters, and property tax or insurance cost pressures.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, we have significant exposure in California, Florida, Texas, Georgia and New York.",
+     "Any event that adversely affects the economy or real estate market in any of these states could have a disproportionately adverse effect on our residential whole loan and residential mortgage securities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2], with third-quarter 2026 disposition and securitization activity stated in [P6].",
+    "claim": "Residential whole loans\u2014especially RPLs, NPLs, and business purpose loans\u2014are illiquid and valued using internal models and disclaimed third-party quotes that may materially exceed realizable market exit prices.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "While the determination of the fair value of our investment assets generally takes into consideration valuations provided by third-party dealers and pricing services, the final determination of exit price fair values for our investment assets is based on our judgment, and such valuations may differ from those provided by third-party dealers and pricing services.",
+     "Our results of operations, financial condition and business could be materially adversely affected if our fair value determinations of these assets are materially higher than could actually be realized in the market.",
+     "The difficulty in valuation is particularly significant with respect to our less liquid investments such as our re-performing loans (or RPLs), non-performing loans (or NPLs) and business purpose loans."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2], [P3], and [P6].",
+    "claim": "MFA faces operational and earnings risk at subsidiary Lima One, which reported a third-quarter segment net loss of $(2,467) (table in thousands), alongside a planned CEO retirement in 2027.",
+    "facts": [
+     "P2",
+     "P3",
      "P6"
     ],
     "quotes": [
-     "+100 Basis Point Increase | (1.25)% | (10.87)%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Delinquency figures are stated in the cited table. The link to future losses is inferred.",
-    "claim": "Credit quality is weak in parts of the loan book. Multifamily transitional loans show 23.7% 60+ day delinquency with a 156% 60+ LTV. Single-family transitional loans are 10.8% delinquent, Seasoned RPL/NPL loans 16.9%, and the whole loan portfolio 6.7%. Losses on these loans largely flow through fair value.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "we purchased Non-QM loans and Agency MBS at attractive levels while further reducing our legacy multifamily exposure."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Dates are stated in the 8-K. The risk to execution is inferred.",
-    "claim": "Senior leadership is changing. The CEO is retiring effective June 30, 2027, with the President to succeed him on July 1, 2027. A new Chief Investment Officer joins effective January 1, 2027. This creates execution and transition risk during a period of market stress.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "will be retiring as Chief Executive Officer of the Company effective June 30, 2027"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Business section and the 10-Q risk factor update.",
-    "claim": "Housing finance reform and regulation could change the assets the company can buy and their value. The 10-K says reform could adversely affect the types of assets the company can buy, their costs and its operations. The latest 10-Q reports no material change in risk factors.",
-    "facts": [
-     "P1",
-     "P5"
-    ],
-    "quotes": [
-     "While the likelihood of enactment of major mortgage finance system reform in the short term remains uncertain, it is possible that the adoption of any such reforms could adversely affect the types of assets we can buy, the costs of these assets and our business operations.",
-     "There are no material changes from the risk factors set forth in the 2025 Form 10-K."
+     "Net Income/(Loss) | $(94,189) | $(2,467) | $(15,034) | $(111,690)",
+     "As previously announced, Craig Knutson will retire as Chief Executive Officer, effective June 30, 2027.",
+     "Our ownership of Lima One and our investments in mortgage loan originators expose us to additional risks.",
+     "We are dependent on our executive officers and other key personnel for our success."
     ],
     "support": "supported"
    }
@@ -754,77 +941,147 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "The loss lines are stated in F2. The split between market and credit causes is not given in the excerpts, so it is inferred from the CEO's market commentary.",
-    "claim": "How much of the third-quarter fair-value losses, (203,991) on residential whole loans and (223,303) on securities and other portfolio investments (table in thousands), is a temporary rate and spread mark rather than credit deterioration, and how much will reverse or be realized?",
+    "basis": "stated in [F1] (footnote 2 referencing omitted Note 6) and [P6] (Table 1 financing breakdown)",
+    "claim": "What portion of MFA's assets is pledged as collateral, and what are the maturity dates, interest terms, and margin-call triggers on its 11,520,131 (table in thousands) of financing agreements?",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "See Note 6 for information regarding the Company\u2019s pledged assets.",
+     "MFA\u2019s Debt/Net Equity Ratio was 7.1x while recourse leverage was 3.4x at September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F1] (balance sheet reference to omitted Note 9) and [P6]",
+    "claim": "What legal contingencies, guarantees, or unfunded loan commitments exist under MFA's commitments and contingencies?",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Commitments and contingencies (See Note 9)",
+     "In addition, $88.4 million of draws were funded on previously originated Transitional loans."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6] (Table 6 and CEO remarks) and [P3]",
+    "claim": "What drove the 23.7% delinquency rate and 156% collateral LTV on severely delinquent multifamily transitional loans, and what portion of MFA's realized credit losses stem from this portfolio?",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "While we were not immune to these market movements, we purchased Non-QM loans and Agency MBS at attractive levels while further reducing our legacy multifamily exposure.",
+     "At December 31, 2025, approximately 66% of our Multifamily transitional loans and 31% of our Single-family transitional loans held as of period end had been extended."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from [P4] (Economic book value reconciliation) and [P6] (Table 4)",
+    "claim": "Why did the fair value adjustment on residential whole loans held at carrying value fall to (23.2) (table in millions) while the allowance for credit losses stood at (7,953) (table in thousands)?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "To calculate our Economic book value, our portfolios of Residential whole loans and securitized debt held at carrying value are adjusted to their fair value, rather than the carrying value that is required to be reported under the GAAP accounting model applied to these financial instruments.",
+     "Allowance for Credit Losses | (7,953) | (9,705) | \u2014 | \u2014 | (7,953) | (9,705)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2] and [P6]",
+    "claim": "How much of the third-quarter fair value losses of (203,991) (table in thousands) on loans and (223,303) (table in thousands) on securities resulted from wider spreads versus higher Treasury yields, and what are the terms of MFA's interest rate derivatives?",
     "facts": [
      "F2",
      "P6"
     ],
     "quotes": [
-     "The third quarter was challenging for mortgage investors with Treasury yields spiking across the curve and heightened volatility sending spreads wider",
-     "Net gain/(loss) on residential whole loans measured at fair value through earnings"
+     "Net gain/(loss) on residential whole loans measured at fair value through earnings | (203,991) | 31,241 | (288,605) | 105,690",
+     "MFA added a net $357.2 million of new interest rate hedges and estimates the net effective duration of its investment portfolio was 1.09 years."
     ],
     "support": "supported"
    },
    {
-    "basis": "The dividend and earnings figures are stated in P6. Sustainability is not addressed in the excerpts, so the question is inferred from the gap.",
-    "claim": "Can the regular common dividend of $0.36 per share be sustained when third-quarter distributable earnings were $0.26 per basic share and GAAP book value fell over the year?",
+    "basis": "stated in [P1], [P3], [P4], and [P6]",
+    "claim": "What is MFA's estimated REIT taxable income for the current year, and can its $0.36 per common share dividend be sustained given Distributable earnings of $0.26 per basic common share?",
     "facts": [
-     "P6",
-     "P9",
+     "P1",
      "P3",
-     "F3"
+     "P4",
+     "P6"
     ],
     "quotes": [
+     "Distributable earnings, a non-GAAP financial measure, were $26.4 million, or $0.26 per basic common share.",
      "MFA paid a regular cash dividend of $0.36 per common share on October 30, 2026.",
-     "The decrease in GAAP book value and Economic book value during 2025 primarily reflects dividends declared on our common stock in excess of our GAAP earnings."
+     "In order to maintain our qualification as a REIT, we must comply with a number of requirements under federal tax law, including that we must distribute at least 90% of our annual REIT taxable income to our stockholders."
     ],
     "support": "supported"
    },
    {
-    "basis": "The delinquency and LTV figures are stated in the P6 table. Eventual loss outcomes are inferred, not stated.",
-    "claim": "Will the very high delinquency in Multifamily transitional loans (60+ delinquent 23.7%, 60+ LTV 156%) turn into realized credit losses, and how quickly is the legacy multifamily book shrinking?",
+    "basis": "stated in [P1] and [P4]",
+    "claim": "What percentage of MFA's unconsolidated adjusted total assets currently consists of investment securities under the 40% Test, and how has the expansion in Agency MBS affected compliance headroom?",
     "facts": [
-     "P6",
-     "P3"
+     "P1",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "further reducing our legacy multifamily exposure"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "The cash and unpledged figures are stated in P6 and P9. The adequacy question is inferred.",
-    "claim": "Is liquidity adequate if spreads widen again? Unrestricted cash and unpledged Agency MBS both fell from the prior quarter, while most financing carries mark-to-market collateral provisions.",
-    "facts": [
-     "P6",
-     "P9",
-     "F1"
-    ],
-    "quotes": [
-     "MFA closed the quarter with $119.5 million of unrestricted cash and $241.2 million of unpledged Agency MBS."
+     "We refer to this test as the \u201c40% Test.\u201d",
+     "In addition, at September 30, 2026, we had approximately $3.9 billion, or 29%, of total assets invested in investments in Agency MBS."
     ],
     "support": "supported"
    },
    {
-    "basis": "The cash flow figures are stated in F3. The reversal mechanism is inferred.",
-    "claim": "Operating cash flow was 430,984 for nine months against 38,619 a year earlier (table in thousands), helped by net margin received on derivatives of 233,088. Is that cash recurring, or does it reverse if rates or spreads move back?",
+    "basis": "stated in [P3], [P4], and [P6]",
+    "claim": "What portion of Lima One's recent originations came from its newly established wholesale channel and relaunched multifamily lending, and what drove its $(2,467) (table in thousands) segment net loss?",
     "facts": [
-     "F3"
+     "P3",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "Net margin received/(paid) for derivatives"
+     "In early 2026, we relaunched multifamily lending and began funding loans through our newly established wholesale channel, which represent two key areas of growth for Lima One.",
+     "Lima One funded $166.1 million of new business purpose loans with a maximum loan amount of $287.8 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "The appointments are stated in P8. Any strategic change is not stated and is only a question.",
-    "claim": "Will the announced CEO and CIO transition change the investment or financing strategy? The CEO retirement is planned for mid-2027, the current President and CIO becomes CEO, and an external CIO has been named.",
+    "basis": "stated in [P4] and [P6] (Table 1)",
+    "claim": "What are the interest rates, maturity dates, and covenants of the Senior Notes and other secured financing totaling (219) (table in millions)?",
     "facts": [
-     "P8"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "will be retiring as Chief Executive Officer of the Company effective June 30, 2027"
+     "Senior Notes and Other secured financing | \u2014 | \u2014 | \u2014 | \u2014 | \u2014 | \u2014 | (219) | (219)",
+     "The Corporate column in the table below primarily consists of corporate cash and related interest income, investments in loan originators and related economics, general and administrative expenses not directly attributable to Lima One, interest expense on unsecured senior notes, securitization issuance costs, and preferred stock dividends."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P2]",
+    "claim": "What percentage of MFA's residential whole loans and residential mortgage securities is currently concentrated in California, Florida, Texas, Georgia, and New York?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, we have significant exposure in California, Florida, Texas, Georgia and New York."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [P6]",
+    "claim": "What are the employment, compensation, and transition terms governing the announced CEO succession and incoming CIO appointment?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "As previously announced, Craig Knutson will retire as Chief Executive Officer, effective June 30, 2027.",
+     "Bryan Wulfsohn will join the Board on January 1, 2027 and become Chief Executive Officer on July 1, 2027."
     ],
     "support": "supported"
    }
@@ -835,5 +1092,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a real estate company or trust"
+ "verdict_reason": "preferred stock is not filed for every year needed"
 }
