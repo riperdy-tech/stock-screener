@@ -559,7 +559,7 @@ export function KoreanHelpBody() {
 
             {/* 가동 */}
             <Section id="relaunch" title="가동 중인 것, 중단된 것, 다음 단계">
-                <p>2026년 11월 12일 기준으로 시스템 각 부분의 상태입니다.</p>
+                <p>2026년 11월 27일 기준으로 시스템 각 부분의 상태입니다.</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
                         <b>가동 중.</b> 스크리너와 그 일일 채점, 종목 페이지의 AI 분석, 그리고 2026년 11월 27일부터

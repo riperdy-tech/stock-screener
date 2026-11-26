@@ -502,7 +502,7 @@ export function ChineseHelpBody() {
 
             {/* 上線 */}
             <Section id="relaunch" title="運作中、已停止與下一步">
-                <p>截至 2026 年 11 月 12 日，系統各部分的狀態：</p>
+                <p>截至 2026 年 11 月 27 日，系統各部分的狀態：</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
                         <b>運作中。</b>篩選器與它的每日評分；個股頁面上 AI 分析師的分析；以及從 2026 年 11 月 27 日起每天以紙上

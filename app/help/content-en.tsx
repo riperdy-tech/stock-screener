@@ -562,7 +562,7 @@ export function EnglishHelpBody() {
 
             {/* Relaunch */}
             <Section id="relaunch" title="What is live, stopped and next">
-                <p>Where each part of the system stands on 12 November 2026:</p>
+                <p>Where each part of the system stands on 27 November 2026:</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
                         <b>Live.</b> The screener and its daily scoring; the AI analyst&apos;s analysis on the stock pages; and the AI
