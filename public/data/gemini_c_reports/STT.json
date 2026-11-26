@@ -1,47 +1,525 @@
 {
- "alpha_pts": null,
- "analysis": "complete",
+ "alpha_pts": 0.10289505346149086,
+ "analysis": "analysis_incomplete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 96,
- "claims_supported": 90,
- "date": "2026-11-16T11:37:06Z",
+ "based_on": {
+  "accepted": "2026-10-28T20:21:42.000Z",
+  "accepted_utc": "2026-10-29T00:21:42Z",
+  "accession": "0000093751-26-000600",
+  "decision_time": "2026-11-26T18:00:11Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 83,
+ "claims_supported": 70,
+ "date": "2026-11-26T18:00:11Z",
+ "decided": {
+  "flags": [
+   "run 1000: roe_outside_filed_record: roe.y1 0.1430 (filed 0.0772 to 0.1163)",
+   "run 1000: roe_outside_filed_record: roe.y2 0.1400 (filed 0.0772 to 0.1163)",
+   "run 1000: roe_outside_filed_record: roe.y3 0.1350 (filed 0.0772 to 0.1163)",
+   "run 1000: roe_outside_filed_record: roe.y4 0.1300 (filed 0.0772 to 0.1163)",
+   "run 1000: roe_outside_filed_record: roe.y5 0.1260 (filed 0.0772 to 0.1163)",
+   "run 1000: roe_outside_filed_record: long_run_roe 0.1200 (filed 0.0772 to 0.1163)",
+   "run 1000: base_year_not_representative",
+   "run 1000: quotes_verified: 16 of 16",
+   "run 1000: shares_scale_proven_eps_gap:+8%",
+   "run 3000: roe_outside_filed_record: roe.y1 0.1330 (filed 0.0772 to 0.1163)",
+   "run 3000: roe_outside_filed_record: roe.y2 0.1360 (filed 0.0772 to 0.1163)",
+   "run 3000: roe_outside_filed_record: roe.y3 0.1320 (filed 0.0772 to 0.1163)",
+   "run 3000: roe_outside_filed_record: roe.y4 0.1270 (filed 0.0772 to 0.1163)",
+   "run 3000: roe_outside_filed_record: roe.y5 0.1220 (filed 0.0772 to 0.1163)",
+   "run 3000: base_year_not_representative",
+   "run 3000: quotes_verified: 17 of 17",
+   "run 3000: shares_scale_proven_eps_gap:+8%"
+  ],
+  "method": "decided.v1",
+  "old_defaults_inputs": "roe 0.1028, growth 0.0375, r 0.0912, F 10",
+  "route": "financial",
+  "run_gap": 0.11716553997408242,
+  "runs": {
+   "1000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 44555618223.750145,
+     "implied_pb": 1.731688858306224,
+     "seam_ratio": 1.0281758241758256,
+     "tv_share": 0.4340428117827956
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y1 0.1430 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y2 0.1400 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y3 0.1350 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y4 0.1300 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y5 0.1260 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: long_run_roe 0.1200 (filed 0.0772 to 0.1163)",
+     "base_year_not_representative",
+     "quotes_verified: 16 of 16",
+     "shares_scale_proven_eps_gap:+8%"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.04,
+      0.04,
+      0.038,
+      0.036,
+      0.035
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.12,
+     "roe": [
+      0.143,
+      0.14,
+      0.135,
+      0.13,
+      0.126
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.1028, growth 0.0375, r 0.0912, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 70
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.015,
+      0.06
+     ],
+     "long_run_roe": [
+      0.1,
+      0.135
+     ],
+     "terminal_growth": [
+      0.02,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Repurchases of common stock | (1,200) | (800)"
+       },
+       {
+        "id": "F3",
+        "quote": "Payments for cash dividends | (873) | (824)"
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive income (loss) | (1,624) | (1,043)"
+       },
+       {
+        "id": "P3",
+        "quote": "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively. Standardized capital ratios were binding for both periods."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "Through 9M 2026, total equity grew +3.12% ($27,841 million to $28,710 million) as $2,938 million net income and $496 million Series L preferred issuance were largely offset by $1,200 million common buybacks, $873 million dividends, and $581 million AOCI widening (to $(1,624) million). With CET1 at 11.0% (top of 10-11% target) and Tier 1 leverage at 5.5% (5.25-5.75% target), State Street returns ~70-75% of earnings and retains ~3.5-4.0% annual book growth to support modest balance sheet expansion and gradual AOCI pull-to-par."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "With respect to the current asset mandates of approximately $2.5 trillion of AUC/A that are yet to be installed as of December 31, 2025, we expect the conversion will mostly occur over the coming 24 months, with approximately 70% expected to be installed in 2026, with the balance expected to be installed largely in 2027."
+       },
+       {
+        "id": "P1",
+        "quote": "As a G-SIB, we are subject to extensive regulation and supervision with respect to our operations and activities."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Deeply integrated custody, fund-accounting, and Charles River/Alpha workflows create multi-year switching costs (installations typically span 6 to 36 months) that slow competitive erosion relative to commodity lenders. A 10-year fade reflects durable institutional franchise inertia tempered by ongoing ~2% annual fee repricing and emerging AI/digital-asset competition."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively."
+       },
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0772, p25 0.1014, median 0.1028, p75 0.1129, max 0.1163, last 0.1163."
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0912; long-run nominal growth anchor g_anchor 0.0375. Growth of book equity adds value only where the return on equity is above r."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "State Street's global custody scale and embedded State Street Alpha/CRD platforms support a durable spread above its 9.12% cost of equity, generating >20% ROTCE even with $8.9 billion of goodwill and intangibles on the balance sheet. However, persistent ~2% annual servicing fee compression, lower-fee passive AUM mix, G-SIB regulatory overhead, and equity-market sensitivity cap sustainable GAAP ROE on REC's total-equity basis near 12.0%, modestly above the 2021-2025 REC median of 10.28% (which included 2023 securities losses and 2025 restructuring)."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net income | 1,090 | 861 | 2,938 | 2,198"
+       },
+       {
+        "id": "P5",
+        "quote": "Return on average common equity | 10.6 | 10.8 | 13.4 | 11.3 | 11.6 | 16.7 | 16.4 | 3.0 | (0.3) | 11.6 | 15.0 | 3.4"
+       },
+       {
+        "id": "P3",
+        "quote": "Notable items reduced income before income tax expense by $344 million in 2025, including repositioning charges of $326 million and other notable items of $18 million, net."
+       },
+       {
+        "id": "REC",
+        "quote": "Base year (the last filed fiscal year): ended 2025-12-31; common equity at its end, which opens year 1, $27,841.0 million; income to common $2,945.0 million; return on opening common equity 0.1163."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "With 9M 2026 net income at $2,938 million ($2,761 million to common) and $59.17 trillion AUC/A / $6.31 trillion AUM entering 4Q26, FY2026 net income should reach ~$3.98 billion (~14.3% on REC's $27,841 million base; ~15.4% on $24,282 million common equity ex-preferred). Over 2027-2030, remaining backlog onboarding (~30% of $2.5 trillion in 2027) and HTM roll-off support earnings, while ~2% annual servicing fee pricing pressure, normalization in FX/market gains, and periodic restructuring fade ROE toward 12.6%."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "State Street Bank operates as a specialized bank, referred to as a trust or custody bank, that services and manages assets on behalf of its institutional clients."
+       },
+       {
+        "id": "P4",
+        "quote": "Our business and capital-related activities, including common share repurchases, may be adversely affected by regulatory requirements and considerations, including capital, credit and liquidity;"
+       },
+       {
+        "id": "P5",
+        "quote": "Tier 1 leverage ratio | 5.5 | 5.3 | 5.6"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Because State Street is predominantly a fee-based custody and passive asset-management business, it does not need high equity retention to grow, and G-SIB capital/leverage ratios (CET1 11.0%, Tier 1 leverage 5.5%) alongside ongoing shareholder payouts keep equity compounding near 3.5%, slightly below the 3.75% nominal GDP anchor. At 12.0% long-run ROE, 3.5% book growth implies ~71% steady-state payout/buyback capacity, consistent with historical capital return."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.09,
+      "input_hit": "long_run_roe",
+      "risk": "A sustained global equity market drawdown combined with client fee-rate compression and shifts into lower-fee cash/passive mandates (each 10% drop in equities cuts management fees ~5% and servicing fees ~3%) erodes operating leverage."
+     },
+     {
+      "bear_value": 0.105,
+      "input_hit": "roe",
+      "risk": "Central bank rate cuts, deposit runoff, or renewed restructuring/technology spending compresses FTE NIM back below 1.00% and eliminates 2026 margin gains."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Adverse interest-rate or credit-spread shocks deepen unrealized HTM losses ($5,419 million at 3Q26) and AOCI ($(1,624) million), or tighter G-SIB Tier 1 leverage/CET1 requirements curtail balance sheet growth and force higher retention or capital raises."
+     },
+     {
+      "bear_value": 4,
+      "input_hit": "fade_years",
+      "risk": "Rapid disruption from AI, distributed ledger/stablecoin settlement, or better-capitalized G-SIB and non-bank fintech rivals accelerates fee erosion and shortens State Street's competitive advantage period."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.017,
+       0.017,
+       0.015,
+       0.012999999999999998,
+       0.012000000000000004
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.02
+     },
+     "bull": {
+      "book_growth": [
+       0.062,
+       0.062,
+       0.06,
+       0.057999999999999996,
+       0.057
+      ],
+      "long_run_roe": 0.135,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "yes",
+     "institution": "bank",
+     "roe_position": "State Street is a fee-driven trust and custody bank (~78% fee revenue, tiny credit provisions) whose 2025 ROE of 11.5% (11.63% in REC) was depressed by $344 million of notable/repositioning charges and a 1.00% FTE NIM, whereas 9M 2026 ROE jumped to 15.0% (16.4% in 3Q26; 25.1% ROTCE) on ~15% YoY AUC/A and AUM market growth, 1.12%-1.16% NIM, and positive operating leverage with no notable items.",
+     "why": "2025 is not representative because $344 million of pre-tax notable charges (mainly $326 million repositioning) and trough NIM depressed margins before 2026 operating leverage lifted 3Q26 pre-tax margin to 34.6% and ROE to 16.4%. Note also that REC did not deduct $3,559 million of 2025-end preferred stock ($4,055 million at 3Q26) or $226 million of 2025 preferred dividends from the $27,841 million opening equity base, so projections here are anchored on REC's total-equity basis (~1.1% below pure common ROE in 2026). Book equity growth is constrained by high total capital returns (dividends plus $1.2 billion buybacks in 9M 2026) and regulatory limits, with Standardized CET1 at 11.0% (top of 10-11% target) and Tier 1 leverage at 5.5% (mid 5.25-5.75% target) while assets grew to $403.3 billion."
+    },
+    "value_at_old_defaults": 126.83848918005238,
+    "values": {
+     "base": 166.81238778109253,
+     "bear": 137.92130770344542,
+     "bull": 210.49714128468386
+    }
+   },
+   "3000": {
+    "confidence": "medium",
+    "diagnostics": {
+     "equity_value": 39624135097.37292,
+     "implied_pb": 1.5400229197485478,
+     "seam_ratio": 1.0165652173913036,
+     "tv_share": 0.3862219113208371
+    },
+    "flags": [
+     "roe_outside_filed_record: roe.y1 0.1330 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y2 0.1360 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y3 0.1320 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y4 0.1270 (filed 0.0772 to 0.1163)",
+     "roe_outside_filed_record: roe.y5 0.1220 (filed 0.0772 to 0.1163)",
+     "base_year_not_representative",
+     "quotes_verified: 17 of 17",
+     "shares_scale_proven_eps_gap:+8%"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.035,
+      0.025,
+      0.028,
+      0.03,
+      0.03
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.11,
+     "roe": [
+      0.133,
+      0.136,
+      0.132,
+      0.127,
+      0.122
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "roe 0.1028, growth 0.0375, r 0.0912, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 13,
+     "kept": 70
+    },
+    "ranges": {
+     "book_growth_y3": [
+      -0.01,
+      0.06
+     ],
+     "long_run_roe": [
+      0.088,
+      0.13
+     ],
+     "terminal_growth": [
+      0.015,
+      0.042
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F1",
+        "quote": "Total shareholders\u2019 equity | 28,710 | 27,841"
+       },
+       {
+        "id": "F1",
+        "quote": "Accumulated other comprehensive income (loss) | (1,624) | (1,043)"
+       },
+       {
+        "id": "F3",
+        "quote": "Repurchases of common stock | (1,200) | (800)"
+       },
+       {
+        "id": "F3",
+        "quote": "Proceeds from issuance of preferred stock, net of issuance costs | 496 | 743"
+       },
+       {
+        "id": "P3",
+        "quote": "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively. Standardized capital ratios were binding for both periods."
+       }
+      ],
+      "quotes_given": 5,
+      "why": "Total equity already rose 3.12% in 9M26 to $28,710 million due to $496 million of Series L preferred stock issuance partially offset by $1,200 million of common buybacks, common dividends, and an AOCI decline from $(1,043) million to $(1,624) million, supporting 0.035 in Year 1. Thereafter, ongoing common dividends and buybacks (~75-80% total payout) to manage CET1 within the 10-11% target range keep book growth around 2.5%-3.0% annually, though historical AOCI and buyback swings spanned -7.94% to +9.93%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P1",
+        "quote": "State Street Bank operates as a specialized bank, referred to as a trust or custody bank, that services and manages assets on behalf of its institutional clients."
+       },
+       {
+        "id": "P3",
+        "quote": "With respect to the current asset mandates of approximately $2.5 trillion of AUC/A that are yet to be installed as of December 31, 2025, we expect the conversion will mostly occur over the coming 24 months, with approximately 70% expected to be installed in 2026, with the balance expected to be installed largely in 2027."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "A 10-year fade reflects durable switching costs in global custody ($59.17 trillion AUC/A), multi-year Alpha and Charles River platform onboarding (6-36 months installation), and ongoing backlog conversion, tempered by client contract terminability, -2% annual fee compression, and market/rate cyclicality."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min 0.0772, p25 0.1014, median 0.1028, p75 0.1129, max 0.1163, last 0.1163."
+       },
+       {
+        "id": "P3",
+        "quote": "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively."
+       },
+       {
+        "id": "P1",
+        "quote": "As a G-SIB, we are subject to extensive regulation and supervision with respect to our operations and activities."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "A long-run ROE of 0.110 on the FILED RECORD total-equity base (roughly ~12.8% on true common equity after preferred dividends) sits between the 2021-2025 historical median (0.1028) and 2025 level (0.1163), remaining above the 0.0912 cost of equity due to State Street's $59.17 trillion AUC/A scale, ETF franchise, and Alpha integration. Persistent ~2% annual servicing fee compression, passive mix shift, and G-SIB regulatory overhead cap long-run excess returns well below 2026's peak."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Base year (the last filed fiscal year): ended 2025-12-31; common equity at its end, which opens year 1, $27,841.0 million; income to common $2,945.0 million; return on opening common equity 0.1163."
+       },
+       {
+        "id": "F2",
+        "quote": "Net income available to common shareholders, basic | 1,030 | 802 | 2,761 | 2,029"
+       },
+       {
+        "id": "P5",
+        "quote": "Return on average common equity | 10.6 | 10.8 | 13.4 | 11.3 | 11.6 | 16.7 | 16.4 | 3.0 | (0.3) | 11.6 | 15.0 | 3.4"
+       },
+       {
+        "id": "P3",
+        "quote": "Notable items reduced income before income tax expense by $344 million in 2025, including repositioning charges of $326 million and other notable items of $18 million, net."
+       }
+      ],
+      "quotes_given": 4,
+      "why": "On the FILED RECORD's $27,841.0 million opening equity (which includes $3,559 million of preferred stock), 9M26 common net income of $2,761 million annualizes to roughly $3,700 million for Year 1 (~0.133), rising modestly to 0.136 in Year 2 on clean operating run-rate, remaining backlog installation, and HTM runoff before gradually easing toward 0.122 by Year 5 under pricing pressure and market normalization. Using common net income over the FILED RECORD equity base avoids overstating common cash flows by capitalizing ~$240 million of annual preferred dividends."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0912; long-run nominal growth anchor g_anchor 0.0375. Growth of book equity adds value only where the return on equity is above r."
+       },
+       {
+        "id": "P3",
+        "quote": "In 2025, we returned approximately $2.1 billion to our shareholders in the form of common share repurchases and common stock dividends."
+       },
+       {
+        "id": "P5",
+        "quote": "Tier 1 leverage ratio | 5.5 | 5.3 | 5.6"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Terminal book equity growth of 0.030 sits below the 0.0375 nominal anchor because State Street operates as a capital-returning custody bank (returning ~$2.1 billion in 2025, resulting in a 1.22% book equity CAGR from 2020 to 2025) and manages balance-sheet growth around a 5.25-5.75% Tier 1 leverage target. Steady nominal growth in institutional assets and modest capital retention support ~3% long-term book expansion."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.085,
+      "input_hit": "roe",
+      "risk": "Sustained equity and fixed-income market downturn or shift into lower-fee cash products depressing AUC/A and AUM fee revenues (10% equity drop moves management fees ~5% and servicing fees ~3%) against relatively fixed technology and compensation costs."
+     },
+     {
+      "bear_value": 0.085,
+      "input_hit": "long_run_roe",
+      "risk": "Accelerating institutional pricing pressure (-2% to -3% annually), client in-sourcing, or disruption from larger G-SIBs, non-bank fintechs, AI, and distributed ledger platforms compressing long-run profitability below cost of equity."
+     },
+     {
+      "bear_value": -0.05,
+      "input_hit": "book_growth",
+      "risk": "Interest rate and spread shocks or volatile deposit/collateral outflows deepening AOCI losses ($(1,624)M at 3Q26) and $5,419M HTM unrealized losses, forcing securities restructuring or capital retention alongside buybacks."
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Tighter G-SIB capital or Tier 1 leverage requirements and rising regulatory/technology compliance expenses limiting balance-sheet capacity and sustainable payout-adjusted book growth."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       -0.0029999999999999957,
+       -0.012999999999999998,
+       -0.009999999999999998,
+       -0.008,
+       -0.008
+      ],
+      "long_run_roe": 0.088,
+      "terminal_growth": 0.015
+     },
+     "bull": {
+      "book_growth": [
+       0.067,
+       0.057,
+       0.06,
+       0.062,
+       0.062
+      ],
+      "long_run_roe": 0.13,
+      "terminal_growth": 0.042
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "yes",
+     "institution": "bank",
+     "roe_position": "ROE surged in 2026 (15.0% YTD26, 16.4% in 3Q26) from 11.5% in 2025 due to record servicing and management fees, zero notable items in 2Q26-3Q26 (versus $344M pre-tax notable charges in 2025), 11 consecutive quarters of positive operating leverage, FTE NIM recovery to 1.12%-1.16%, and minimal credit provisions ($12M in 9M26).",
+     "why": "State Street is a G-SIB trust and custody bank whose 2025 base year was depressed by $344 million of pre-tax notable charges and a 1.00% FTE NIM, whereas 9M26 common net income ($2,761 million) already exceeded all of 2025 ($2,717 million). In addition, the FILED RECORD leaves $3,559 million of year-end 2025 preferred stock ($4,055 million at 3Q26) inside the $27,841.0 million opening equity base and includes $226 million of preferred dividends in 2025 net income. Common equity growth is tightly constrained by G-SIB Standardized CET1 (11.0% vs. 10-11% target) and Tier 1 leverage (5.5% vs. 5.25-5.75% target) alongside heavy capital returns ($2.1 billion in 2025; $1.2 billion buybacks plus dividends in 9M26)."
+    },
+    "value_at_old_defaults": 126.83848918005238,
+    "values": {
+     "base": 148.34934073095303,
+     "bear": 124.75272681125476,
+     "bull": 196.41587043536575
+    }
+   }
+  },
+  "situation_unclear": false,
+  "value_at_old_defaults": 126.83848918005238,
+  "value_at_old_defaults_quoted": 126.83848918005238,
+  "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+ },
+ "equity_value": 45543863806.411446,
  "family": "financial",
- "flags": [
-  "State Street Corporation issued $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 in a public offering, expecting net proceeds of approximately $745.6 million.",
-  "State Street Bank and Trust Company issued $500,000,000 aggregate principal amount of Floating Rate Senior Notes due 2028 and $750,000,000 aggregate principal amount of 5.147% Senior Notes due 2028 in an offering exempt from registration.",
-  "State Street notified holders of its $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 that it will redeem all of the notes at 100% of principal plus accrued and unpaid interest using cash on hand."
- ],
+ "far_from_price": false,
+ "filed_shares": 289019000.0,
+ "flags": [],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.09115143990563293,
+ "market_cap_at_publish": 44084805300,
  "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "share count does not reconcile with filed EPS",
+ "no_value_reason": null,
  "pending_offer": null,
+ "price_at_publish": 162.03,
  "qwen_book": null,
- "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
- "source": "screener list refresh",
+ "release_truncated": [
+  "0000093751-26-000592"
+ ],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "seed_base": {
+  "1000": 166.81238778109253,
+  "3000": 148.34934073095303
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited items (P1 Item 1 Business Overview and P4 Item 2 MD&A General)",
-    "claim": "State Street Corporation is a financial holding company that operates primarily through State Street Bank and Trust Company, a trust or custody bank providing investment servicing, markets and financing solutions, and investment management to institutional investors across more than 100 geographic markets worldwide.",
+    "basis": "stated in the cited items",
+    "claim": "State Street Corporation provides financial services\u2014including investment servicing, markets and financing solutions, and investment management\u2014across more than 100 geographic markets worldwide through subsidiaries including its principal banking subsidiary, State Street Bank and Trust Company.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
      "State Street Corporation is one of the world\u2019s leading providers of financial services to institutional investors, including investment servicing, markets and financing solutions and investment management.",
-     "Through our subsidiaries, including our principal banking subsidiary, State Street Bank and Trust Company, referred to as State Street Bank, we operate in more than 100 geographic markets worldwide, providing a broad range of financial products and services to institutional investors globally.",
-     "State Street Bank operates as a specialized bank, referred to as a trust or custody bank, that services and manages assets on behalf of its institutional clients."
+     "Through our subsidiaries, including our principal banking subsidiary, State Street Bank and Trust Company, referred to as State Street Bank, we operate in more than 100 geographic markets worldwide, providing a broad range of financial products and services to institutional investors globally."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P1 Item 1 Business and P2 Item 1A Risk Factors)",
-    "claim": "State Street sells its services to institutional clients, including asset managers and owners, insurance companies, wealth managers, official institutions, central banks, mutual and collective investment funds, corporate and public retirement plans, foundations, and endowments.",
+    "basis": "stated in the cited item",
+    "claim": "Its client base consists of institutional investors, including asset managers and owners, insurance companies, wealth managers, official institutions, central banks, mutual funds, collective investment funds, corporate and public retirement plans, foundations, and endowments.",
     "facts": [
-     "P1",
-     "P2"
+     "P1"
     ],
     "quotes": [
      "Our clients \u2014 asset managers and owners, insurance companies, wealth managers, official institutions and central banks \u2014 rely on us to deliver solutions that support their business objectives across the investment life cycle.",
@@ -50,253 +528,270 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P1 Lines of Business and P4 MD&A General)",
-    "claim": "State Street organizes its operations into the Investment Servicing and Investment Management lines of business, defined based on the products and services provided.",
+    "basis": "stated in the cited items",
+    "claim": "Operations are organized into two lines of business defined by products and services provided: Investment Servicing and Investment Management.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "Our operations are organized into two lines of business: Investment Servicing and Investment Management, which are defined based on products and services provided.",
-     "Our operations are organized into two lines of business, Investment Servicing and Investment Management, which are defined based on products and services provided."
+     "Our operations are organized into two lines of business: Investment Servicing and Investment Management, which are defined based on products and services provided."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P1 Investment Servicing, P4 MD&A General, and P5 3Q26 earnings release)",
-    "claim": "Through Investment Servicing, State Street sells back-, middle-, and front-office solutions\u2014including custody, accounting, fund administration, recordkeeping, analytics, foreign exchange and brokerage trading, securities finance, deposit and short-term investment facilities, State Street Alpha and Charles River technology, Wealth Services, and digital asset tokenization solutions\u2014reporting $59.17 trillion in AUC/A as of September 30, 2026.",
+    "basis": "stated in the cited items",
+    "claim": "The Investment Servicing segment sells back-, middle-, and front-office solutions\u2014including custody, accounting, fund administration, recordkeeping, analytics, FX trading, securities finance, deposit and short-term investment facilities, and the State Street Alpha and Charles River technology platforms\u2014supporting $59.17 trillion in AUC/A as of September 30, 2026 and $53.80 trillion as of December 31, 2025.",
     "facts": [
      "P1",
-     "P4",
-     "P5"
+     "P4"
     ],
     "quotes": [
-     "Through State Street Investment Services and State Street Markets, we offer a full range of back-, middle- and front-office solutions, including custody, accounting and fund administration services for traditional and alternative assets, as well as multi-asset class investments; recordkeeping, client reporting and investment book of record, transaction management, loans, cash, derivatives and collateral services; investor services operations outsourcing; performance, risk and compliance analytics; financial data management to support institutional investors; foreign exchange, brokerage and other trading services; securities finance, including prime services products; and deposit and short-term investment facilities.",
      "Our State Street Alpha platform combines portfolio management, trading and execution, analytics and compliance tools, along with advanced data aggregation and integration with other industry platforms and providers.",
-     "As the digital asset space continues to mature, we continue to build solutions to tokenize assets.",
-     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States.",
-     "As of September 30, 2026, we reported $59.17 trillion in AUC/A and $6.31 trillion in AUM."
+     "As of September 30, 2026, we reported $59.17 trillion in AUC/A and $6.31 trillion in AUM.",
+     "As of December 31, 2025, we reported $53.80 trillion in AUC/A and $5.67 trillion in AUM."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P1 Investment Management, P3 Management Fee Revenue, and P4 MD&A General)",
-    "claim": "Through Investment Management (State Street Investment Management, formerly State Street Global Advisors), State Street sells equity, fixed income, liquidity and cash, multi-asset, and alternatives investment strategies via ETFs, custom indexed, and actively managed funds and mandates, managing $6.31 trillion in AUM as of September 30, 2026 with AUM primarily weighted to passive products.",
+    "basis": "stated in the cited items",
+    "claim": "The Investment Management segment (State Street Investment Management, previously State Street Global Advisors) manages equity, fixed income, liquidity and cash, multi-asset, and alternative strategies delivered through ETFs, custom indexed, and actively managed funds and mandates, overseeing $6.31 trillion in AUM as of September 30, 2026 and $5.67 trillion as of December 31, 2025.",
     "facts": [
      "P1",
-     "P3",
      "P4"
     ],
     "quotes": [
      "Our Investment Management line of business provides a comprehensive range of investment management solutions and products for our clients through State Street Investment Management (previously State Street Global Advisors).",
      "Our investment management solutions span across equity, fixed income, liquidity and cash, multi-asset and alternatives strategies, delivered through products such as ETFs, custom indexed, and actively managed funds and mandates.",
-     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products.",
-     "As of September 30, 2026, we reported $59.17 trillion in AUC/A and $6.31 trillion in AUM."
+     "As of September 30, 2026, we reported $59.17 trillion in AUC/A and $6.31 trillion in AUM.",
+     "As of December 31, 2025, we reported $53.80 trillion in AUC/A and $5.67 trillion in AUM."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P3 Table 1 and Table 2, and F2 Consolidated Statement of Income)",
-    "claim": "State Street generates revenue primarily from fee revenue\u2014$10,980 (table in millions) in 2025 and 9,288 (table in millions) in the nine months ended September 30, 2026\u2014and net interest income of 2,960 (table in millions) in 2025 and 2,559 (table in millions) in the nine months ended September 30, 2026, out of total revenue of $13,944 (table in millions) and 11,848 (table in millions), respectively.",
+    "basis": "stated in the cited items",
+    "claim": "State Street generates revenue predominantly from fee revenue\u2014$10,980 (table in millions) in 2025 and 9,288 (table in millions) in the nine months ended September 30, 2026\u2014supplemented by net interest income of 2,960 and 2,559 (tables in millions) in those respective periods, alongside other income of 4 and 1.",
     "facts": [
-     "F2",
-     "P3"
+     "P3",
+     "F2"
     ],
     "quotes": [
      "Total fee revenue | $10,980 | $10,156 | $9,480",
      "Net interest income | 2,960 | 2,923 | 2,759",
-     "Total revenue | $13,944 | $13,000 | $11,945 | 7 | 9",
+     "Total other income | 4 | (79) | (294)",
      "Total fee revenue | 3,140 | 2,829 | 9,288 | 8,118",
      "Net interest income | 864 | 715 | 2,559 | 2,158",
-     "Total revenue | 4,004 | 3,545 | 11,848 | 10,277"
+     "Total other income | 0 | 1 | 1 | 1"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (F2 Consolidated Statement of Income and P3 Fee Revenue)",
-    "claim": "Fee revenue comprises servicing fees, management fees, foreign exchange trading services, securities finance, software services, and other fee revenue, with servicing and management fees together accounting for approximately 70% of total fee revenue in 2025.",
+    "basis": "stated in the cited items",
+    "claim": "Fee revenue is anchored by servicing fees and management fees\u2014which together made up approximately 70% of total fee revenue in both 2025 and 2024\u2014alongside foreign exchange trading services, software services, securities finance, and other fee revenue; in the nine months ended September 30, 2026, servicing fees were $4,369 (table in millions), management fees were 2,293, foreign exchange trading services were 1,356, software services were 510, securities finance was 417, and other fee revenue was 343.",
     "facts": [
+     "P3",
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "Servicing and management fees collectively made up approximately 70% of the total fee revenue in both 2025 and 2024, and 72% in 2023.",
+     "Servicing fees | $1,275 | $1,304 | $1,357 | $1,388 | $1,409 | $1,468 | $1,492 | 9.9% | 1.6% | $3,936 | $4,369 | 11.0%",
+     "Management fees(1) | 587 | 600 | 664 | 717 | 724 | 772 | 797 | 20.0 | 3.2 | 1,851 | 2,293 | 23.9",
+     "Foreign exchange trading services(1) | 337 | 393 | 364 | 350 | 435 | 494 | 427 | 17.3 | (13.6) | 1,094 | 1,356 | 23.9",
+     "Securities finance | 114 | 126 | 138 | 127 | 116 | 150 | 151 | 9.4 | 0.7 | 378 | 417 | 10.3",
+     "Software services(1) | 158 | 169 | 167 | 163 | 169 | 166 | 175 | 4.8 | 5.4 | 494 | 510 | 3.2",
+     "Other fee revenue(1) | 99 | 127 | 139 | 117 | 107 | 138 | 98 | (29.5) | (29.0) | 365 | 343 | (6.0)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Net interest income is earned from the spread between interest collected on interest-earning assets\u2014primarily interest-bearing deposits with banks, investment securities, loans, and resale agreements\u2014and interest paid on U.S. and non-U.S. deposits and debt, producing 8,410 in interest income against 5,851 in interest expense (table in millions) in the nine months ended September 30, 2026.",
+    "facts": [
+     "F1",
      "F2",
-     "P3"
+     "P5"
     ],
     "quotes": [
-     "Servicing fees | $ 1,492 | $ 1,357 | $ 4,369 | $ 3,936",
-     "Management fees | 797 | 664 | 2,293 | 1,851",
-     "Foreign exchange trading services | 427 | 364 | 1,356 | 1,094",
-     "Securities finance | 151 | 138 | 417 | 378",
-     "Software services | 175 | 167 | 510 | 494",
-     "Other fee revenue | 98 | 139 | 343 | 365",
-     "Servicing and management fees collectively made up approximately 70% of the total fee revenue in both 2025 and 2024, and 72% in 2023."
+     "Interest income | 2,916 | 2,918 | 8,410 | 8,895",
+     "Interest expense | 2,052 | 2,203 | 5,851 | 6,737",
+     "Total interest-earning assets | 289,516 | 4.09 | 304,648 | 4.02 | 295,457 | 3.92 | 289,231 | 3.77 | 293,114 | 3.67 | 305,406 | 3.73 | 305,120 | 3.79 | 3.3 | (0.1)",
+     "Total interest-bearing liabilities | 263,730 | 3.40 | 279,323 | 3.34 | 270,349 | 3.23 | 262,727 | 2.94 | 262,291 | 2.81 | 276,574 | 2.88 | 274,957 | 2.96 | 1.7 | (0.6)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3 Servicing Fee Revenue)",
-    "claim": "Servicing fee revenues are driven mainly by asset valuations (approximately 65% on average, including daily average AUC/A) and fund activity volumes (approximately 20% on average), with approximately 15% non-variable; a 10% change in worldwide equity valuations is estimated to change total servicing fee revenues by approximately 3% over multiple quarters.",
+    "basis": "stated in the cited item",
+    "claim": "Based on an indicative revenue sample, State Street estimates that approximately 65% of servicing fee revenue varies with asset valuations such as daily average AUC/A, approximately 20% depends on fund activity volume, and approximately 15% is non-variable.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values.",
+     "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Management fee revenue is more sensitive to market valuations than servicing fee revenue: holding other factors constant, a 10% change in worldwide equity valuations is estimated to move management fees by approximately 5% versus approximately 3% for servicing fees on average over multiple quarters.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Management fee revenue is more sensitive to market valuations than servicing fee revenue, as a higher proportion of the underlying services provided, and the associated management fees earned, are dependent on equity and fixed-income security valuations.",
+     "A 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our management fees are calculated, would result in a corresponding change in our total management fee revenues, on average and over multiple quarters, of approximately 5%; and",
      "Assuming that all other factors remain constant, including client activity, asset flows and pricing, we estimate, using relevant information as of December 31, 2025, that a 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our servicing fees are calculated, would result in a corresponding change in our total servicing fee revenues, on average and over multiple quarters, of approximately 3%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P2 Item 1A Risk Factors and P3 Net New Business and Pricing)",
-    "claim": "Servicing fee growth is also driven by onboarding new client mandates\u2014which take 6 to 36 months to install, with approximately $2.50 trillion of AUC/A remaining to be installed as of December 31, 2025\u2014while ongoing client pricing pressure reduced existing-client servicing fees by approximately (2)% annually on average over the five years ended December 31, 2025.",
+    "basis": "stated in the cited items",
+    "claim": "Fee revenue is also shaped by product mix\u2014with passively managed AUM generally carrying lower fee rates than actively managed products\u2014and competitive pricing pressure from large institutional clients, which reduced servicing fees by an estimated (2)% annually on average over the five years ended December 31, 2025.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "Our installation timeline in general can range from 6 to 36 months with the average installation timeline being approximately 9 to 12 months over the past two full fiscal years.",
-     "Investment servicing assets remaining to be installed in future periods totaled approximately $2.50 trillion as of December 31, 2025, which will be reflected in AUC/A in future periods after installation and will generate servicing fee revenue in subsequent periods.",
-     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively.",
-     "Large institutional clients also, by their nature, are often able to exert considerable market influence, and this, combined with strong competitive forces in the markets for our services, has resulted in, and may continue to result in, significant pressure to reduce the fees we charge for our services in both our investment servicing and investment management lines of business."
+     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products.",
+     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3 Management Fee Revenue)",
-    "claim": "Management fee revenue is driven by AUM levels, asset mix, and market valuations, carrying greater equity-market sensitivity than servicing fees: a 10% change in worldwide equity valuations is estimated to change total management fee revenues by approximately 5% over multiple quarters.",
+    "basis": "stated in the cited items",
+    "claim": "Servicing fee revenue from newly won mandates is not recognized until assets are installed, an onboarding timeline ranging from 6 to 36 months (averaging approximately 9 to 12 months over the prior two full fiscal years), with approximately $2.50 trillion of AUC/A remaining to be installed as of December 31, 2025.",
     "facts": [
-     "P3"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "Management fees generally are affected by our level of AUM, which we report based on month-end valuations.",
-     "Management fee revenue is more sensitive to market valuations than servicing fee revenue, as a higher proportion of the underlying services provided, and the associated management fees earned, are dependent on equity and fixed-income security valuations.",
-     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products.",
-     "\u2022A 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our management fees are calculated, would result in a corresponding change in our total management fee revenues, on average and over multiple quarters, of approximately 5%; and"
+     "Servicing fee revenue associated with new investment servicing mandates is not reflected in our servicing fee revenue until the assets have been installed, and may vary between mandates based on the breadth of services provided, the time required to install the assets, and the types of assets installed.",
+     "Our installation timeline in general can range from 6 to 36 months with the average installation timeline being approximately 9 to 12 months over the past two full fiscal years.",
+     "Investment servicing assets remaining to be installed in future periods totaled approximately $2.50 trillion as of December 31, 2025, which will be reflected in AUC/A in future periods after installation and will generate servicing fee revenue in subsequent periods."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P2 Item 1A Risk Factors and P5 3Q26 earnings release and presentation)",
-    "claim": "Foreign exchange trading revenue is driven by client trading volumes and currency volatility, while software services revenue is driven by SaaS client implementations, conversions, go-live revenue from onboarded clients, and new bookings.",
+    "basis": "stated in the cited items",
+    "claim": "Foreign exchange trading services revenue moves with client trading volumes and currency volatility, as higher currency volatility increases foreign exchange revenue opportunities while lower volatility tends to reduce them.",
     "facts": [
      "P2",
      "P5"
     ],
     "quotes": [
-     "Further, the degree of volatility in foreign exchange rates can affect our foreign exchange trading revenue.",
      "In general, increased currency volatility tends to increase our market risk but also increases our opportunity to generate foreign exchange revenue.",
-     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities.",
-     "\u2022 Software and data revenue up 10% YoY driven by higher go-live revenue from onboarded clients"
+     "Conversely, periods of lower currency volatility tend to decrease our market risk but also decrease our foreign exchange revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (F1 Consolidated Statement of Condition, P2 Item 1A Risk Factors, and P3 2025 Performance Highlights)",
-    "claim": "State Street earns net interest income by funding interest-earning assets\u2014including interest-bearing bank deposits, available-for-sale and held-to-maturity securities, and loans\u2014primarily with 311,651 (table in millions) of deposits as of September 30, 2026, with NII driven by average interest-earning asset balances, net interest margin, and prevailing interest rates.",
+    "basis": "stated in the cited items",
+    "claim": "Net interest income is driven by average interest-earning asset balances, monetary policy and interest rate shifts, and net interest margin (NIM): in 2025, NII rose 1% as 11% growth in average interest-earning assets was partly offset by a 10 bps NIM decline, while third-quarter 2026 NII rose 20.8% year-over-year as FTE NIM reached 1.12% versus 0.96% a year earlier.",
     "facts": [
-     "F1",
      "P2",
-     "P3"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "Total deposits | 311,651 | 274,350",
-     "Interest-bearing deposits with banks | 138,426 | 126,930",
-     "Investment securities available-for-sale | 74,008 | 67,154",
-     "Loans (less allowance for credit losses on loans of $152 and $193) | 49,157 | 46,589",
-     "\u25e6NII increased 1% compared to 2024, primarily driven by 11% growth in average interest-earnings assets, partially offset by a 10 bps decline in NIM.",
-     "For example, among other risks, changes in prevailing interest rates or other market conditions have led, and were they to occur in the future could further lead, to decreases in our NII or to portfolio management decisions resulting in reductions in our capital or liquidity ratios."
+     "Uncertain economic and monetary policy environments continue to drive risks for ongoing NII volatility.",
+     "NII increased 1% compared to 2024, primarily driven by 11% growth in average interest-earnings assets, partially offset by a 10 bps decline in NIM.",
+     "Net interest income | 864 | 860 | 715 | 0.5% | 20.8%",
+     "Net interest margin (FTE)(a) | 1.12% | 1.13% | 0.96% | (1) | bp | 16 | bps"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (F2 Consolidated Statement of Income and P3 Table 1)",
-    "claim": "State Street's operating cost base consists of compensation and employee benefits, information systems and communications, transaction processing services, occupancy, and other expenses, totaling 8,090 (table in millions) in the nine months ended September 30, 2026 and 10,154 (table in millions) in 2025.",
+    "basis": "stated in the cited items",
+    "claim": "Total expenses were 10,154 (table in millions) in 2025 and 8,090 (table in millions) in the nine months ended September 30, 2026, led by compensation and employee benefits (3,984 in the nine-month period) and information systems and communications (1,820), alongside other expenses (1,138), transaction processing services (849), and occupancy (299).",
     "facts": [
-     "F2",
-     "P3"
+     "P3",
+     "F2"
     ],
     "quotes": [
+     "Total expenses | 10,154 | 9,530 | 9,583",
      "Compensation and employee benefits | 1,251 | 1,162 | 3,984 | 3,704",
      "Information systems and communications | 594 | 517 | 1,820 | 1,537",
      "Transaction processing services | 286 | 276 | 849 | 794",
      "Occupancy | 102 | 106 | 299 | 314",
      "Other | 387 | 373 | 1,138 | 1,064",
-     "Total expenses | 2,620 | 2,434 | 8,090 | 7,413",
-     "Total expenses | 10,154 | 9,530 | 9,583"
+     "Total expenses | 2,620 | 2,434 | 8,090 | 7,413"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items (P1 Human Capital, P2 Risk Factors, P3 Performance Highlights, P4 MD&A General, and P5 FY2026 Updated Outlook)",
-    "claim": "Operating costs are driven upward by business, technology, and strategic growth investments, revenue-related costs, competitive labor compensation across approximately 51,000 employees as of September 30, 2026 (with approximately 77% located outside the United States as of December 31, 2025), and foreign currency translation, partially offset by productivity, organization design, and automation savings.",
+    "basis": "stated in the cited items",
+    "claim": "Costs are driven upward by business and technology investments, revenue-related costs, and notable items such as $326 million in repositioning charges in 2025, partially offset by productivity and automation initiatives that lowered headcount by approximately 2% to approximately 52,000 employees as of December 31, 2025 and approximately 51,000 as of September 30, 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Total expenses increased 7% compared to 2024, primarily due to higher business and technology investments, revenue-related costs and higher impact of notables items in the current year, partially offset by productivity and other savings.",
+     "Notable items reduced income before income tax expense by $344 million in 2025, including repositioning charges of $326 million and other notable items of $18 million, net.",
+     "Our employee population at December 31, 2025 decreased approximately 2% to approximately 52,000 employees, compared to December 31, 2024, primarily driven by our continued efforts to simplify our operations through organization design and technology and automation efforts.",
+     "We had consolidated total assets of $403.34 billion, consolidated total deposits of $311.65 billion, consolidated total shareholders' equity of $28.71 billion and approximately 51,000 employees, as of September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Operating costs are also affected by intense competition for skilled technology and security personnel, extensive U.S. and non-U.S. regulatory compliance requirements as a G-SIB, and foreign currency translation on expenses paid outside the United States, where approximately 77% of employees were located as of December 31, 2025.",
     "facts": [
      "P1",
      "P2",
-     "P3",
-     "P4",
-     "P5"
+     "P4"
     ],
     "quotes": [
-     "\u2022Total expenses increased 7% compared to 2024, primarily due to higher business and technology investments, revenue-related costs and higher impact of notables items in the current year, partially offset by productivity and other savings.",
-     "Our employee population at December 31, 2025 decreased approximately 2% to approximately 52,000 employees, compared to December 31, 2024, primarily driven by our continued efforts to simplify our operations through organization design and technology and automation efforts.",
      "Approximately 77% of our employees are located outside the United States.",
-     "We had consolidated total assets of $403.34 billion, consolidated total deposits of $311.65 billion, consolidated total shareholders' equity of $28.71 billion and approximately 51,000 employees, as of September 30, 2026.",
+     "These adverse impacts may be exacerbated by increased costs and expenses driven by the competitive labor market in several jurisdictions in which we operate, particularly with regard to the ability to meet compensation and hybrid working expectations.",
+     "We face extensive and changing government regulation and supervision in the U.S. and non-U.S. jurisdictions in which we operate, which may increase our costs and compliance risks and may affect our business activities and strategies;",
      "In addition, as our business grows globally and a significant percentage of our revenue is earned (and of our expenses paid) in currencies other than U.S. dollars, our exposure to foreign currency volatility could affect our levels of consolidated revenue, our consolidated expenses and our consolidated results of operations, as well as the value of our investment in our non-U.S. operations and our non-U.S. investment portfolio holdings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (P1 Competition and Supervision and Regulation, and P2 Item 1A Risk Factors)",
-    "claim": "Designation as a G-SIB and financial holding company subjects State Street to extensive regulatory capital, liquidity, and supervisory standards\u2014such as Basel III, LCR, and NSFR\u2014that impose compliance costs and business constraints not shared equally by all competitors.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "As a G-SIB, we are subject to extensive regulation and supervision with respect to our operations and activities.",
-     "Not all of our competitors have similarly been designated as systemically important nor are all of them subject to the same degree of regulation as a bank or financial holding company; therefore some of our competitors may not be subject to the same limitations, requirements and standards with respect to their operations and activities.",
-     "Some of our competitors, including our competitors in core services, have substantially greater capital resources than we do, are not subject to as stringent capital or other regulatory requirements as we are, or may not be as constrained as we are by these requirements due to the relative size of our balance sheet."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited items P1 and P4",
-    "claim": "State Street is an institutional financial services provider operating across more than 100 geographic markets through Investment Servicing and Investment Management.",
+    "basis": "stated in P1 and P4",
+    "claim": "State Street operates across more than 100 geographic markets worldwide as a leading provider of investment servicing, markets and financing solutions, and investment management to institutional investors.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
      "State Street Corporation is one of the world\u2019s leading providers of financial services to institutional investors, including investment servicing, markets and financing solutions and investment management.",
-     "Through our subsidiaries, including our principal banking subsidiary, State Street Bank and Trust Company, referred to as State Street Bank, we operate in more than 100 geographic markets worldwide, providing a broad range of financial products and services to institutional investors globally.",
-     "Our operations are organized into two lines of business: Investment Servicing and Investment Management, which are defined based on products and services provided."
+     "Through our subsidiaries, including our principal banking subsidiary, State Street Bank and Trust Company, referred to as State Street Bank, we operate in more than 100 geographic markets worldwide, providing a broad range of financial products and services to institutional investors globally."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item P4",
-    "claim": "State Street's scale in asset servicing and management is evidenced by $59.17 trillion in AUC/A and $6.31 trillion in AUM at period-end.",
+    "basis": "stated in P5",
+    "claim": "State Street's scale in 3Q26 reached $59,173 (table in billions) in AUC/A, up 15% year-over-year, and 6,306 (table in billions) in AUM.",
     "facts": [
-     "P4"
+     "P5"
     ],
     "quotes": [
-     "As of September 30, 2026, we reported $59.17 trillion in AUC/A and $6.31 trillion in AUM."
+     "AUC/A ($ billions)(2) | $59,173 | $57,858 | $51,664 | 2% | 15%",
+     "AUM ($ billions)(2) | 6,306 | 6,278 | 5,446 | \u2014 | 16"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited item P3",
-    "claim": "State Street generates a substantial share of its fee business internationally, with approximately 48% of servicing fees and approximately 25% of management fees earned outside the United States.",
+    "basis": "stated in P5",
+    "claim": "In 3Q26, State Street generated record quarterly servicing and management fees, record FX client volumes, and its eleventh consecutive quarter of year-over-year positive operating leverage excluding notable items, expanding pre-tax margin to approximately 35%.",
     "facts": [
-     "P3"
+     "P5"
     ],
     "quotes": [
-     "Servicing fees generated outside the United States were approximately 48% of total servicing fees in 2025, compared to approximately 47% of total servicing fees in 2024.",
-     "Management fees generated outside the United States were approximately 25% of total management fees in both 2025 and 2024."
+     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities.",
+     "This performance drove our eleventh consecutive quarter of year-over-year positive operating leverage, excluding notable items, resulting in pre-tax margin expansion to approximately 35%."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited items P1 and P5",
-    "claim": "State Street differentiates through its integrated State Street Alpha platform and won its first Wealth Services mandate in the third quarter by building on an existing Charles River client relationship.",
+    "basis": "stated in P1 and P5",
+    "claim": "State Street's integrated State Street Alpha platform combines front-, middle-, and back-office capabilities, supporting cross-selling such as winning its first Wealth Services mandate with one of the largest U.S. registered investment advisors from an existing Charles River relationship.",
     "facts": [
      "P1",
      "P5"
@@ -309,380 +804,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items F2 and P5",
-    "claim": "In the third quarter, State Street reported total revenue of 4,004 (table in millions), up 13%, alongside record quarterly servicing and management fees, record FX client volumes, and pre-tax margin expansion to 34.6%.",
-    "facts": [
-     "F2",
-     "P5"
-    ],
-    "quotes": [
-     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities.",
-     "This performance drove our eleventh consecutive quarter of year-over-year positive operating leverage, excluding notable items, resulting in pre-tax margin expansion to approximately 35%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P5",
-    "claim": "State Street's software services business reached $175M in quarterly revenue, up 5% year-over-year, with ARR up ~8% year-over-year and new bookings of $14M.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "Software services of $175M up 5% YoY and 5% QoQ11",
-     "3Q26 ARR increased ~8% YoY driven by continued SaaS client implementations and conversions13",
-     "New bookings of $14M, reflecting demand across new and existing clients14"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P3",
-    "claim": "State Street entered the year with approximately $2.50 trillion in un-installed investment servicing asset mandates, though conversion typically takes 6 to 36 months and excludes undisclosed client terminations.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Investment servicing assets remaining to be installed in future periods totaled approximately $2.50 trillion as of December 31, 2025, which will be reflected in AUC/A in future periods after installation and will generate servicing fee revenue in subsequent periods.",
-     "Our installation timeline in general can range from 6 to 36 months with the average installation timeline being approximately 9 to 12 months over the past two full fiscal years.",
-     "Such assets therefore do not include the impact of clients who have notified us during the period of their intent to terminate or reduce their relationship with us, which from time to time may be significant."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P3",
-    "claim": "State Street's AUM is primarily weighted toward passively managed products, which generally carry lower fee rates than actively managed products.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items P1 and P2",
-    "claim": "State Street faces intense global competition across all businesses from traditional banks and asset managers as well as technology, data, and software firms, compounded by industry consolidation.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our competitors include a broad range of financial institutions and servicing companies, including other custodial banks, deposit-taking institutions, investment management firms, insurance companies, mutual funds, broker/dealers, investment banks, benefits consultants, investment analytics businesses, business service and software companies, technology companies, data providers and information services firms.",
-     "We are subject to intense competition in all aspects of our business, which could negatively affect our ability to maintain or increase our profitability.",
-     "Further consolidation within the financial services industry could also pose challenges to us in the markets we serve, including potentially increased downward pricing pressure across our businesses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items P1 and P2",
-    "claim": "As a G-SIB, State Street competes against firms that either avoid systemic regulatory constraints or are larger G-SIBs with substantially greater financial resources to bear compliance costs.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Not all of our competitors have similarly been designated as systemically important nor are all of them subject to the same degree of regulation as a bank or financial holding company; therefore some of our competitors may not be subject to the same limitations, requirements and standards with respect to their operations and activities.",
-     "Most other financial institutions designated as systemically important have substantially greater financial resources and a broader base of operations than we do and are, consequently, in a better competitive position to manage and bear the costs of this enhanced regulatory requirement.",
-     "Some of our competitors, including our competitors in core services, have substantially greater capital resources than we do, are not subject to as stringent capital or other regulatory requirements as we are, or may not be as constrained as we are by these requirements due to the relative size of our balance sheet."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items P2 and P3",
-    "claim": "Persistent pricing pressure on existing clients reduced State Street's servicing fees by approximately (2)% annually on average over five years, including an estimated (2)% impact in the prior full year.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "We have also experienced, and anticipate that we will continue to experience, significant pricing pressure in many of our core businesses, particularly our custodial and investment management services.",
-     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively.",
-     "Pricing concessions can be a part of a contract renegotiation with a client including terms that may benefit us, such as extending the term of our relationship with the client, expanding the scope of services that we provide or reducing our dependency on manual processes through the standardization of the services we provide."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P2",
-    "claim": "Large institutional clients exert considerable fee pressure and can materially impact AUC/A, AUM, and fee rates through client losses, in-sourcing, short-notice terminations, or asset-class shifts.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Due to the large pools of assets controlled by these clients, the loss or gain of one client, or even a portion of the assets controlled by one client, or a client\u2019s decision to in-source certain services that we provide, could have a significant effect on our AUC/A or our AUM, as applicable, in the relevant period.",
-     "Many of our core services are subject to contracts that have relatively short terms or may be terminated by our client after a short notice period.",
-     "Large institutional clients also, by their nature, are often able to exert considerable market influence, and this, combined with strong competitive forces in the markets for our services, has resulted in, and may continue to result in, significant pressure to reduce the fees we charge for our services in both our investment servicing and investment management lines of business.",
-     "Similarly, if one or more clients change the asset class in which a significant portion of assets are invested (e.g., by shifting investments from emerging markets to the United States), those changes could have a significant effect on our results of operations in the relevant period, as our fee rates often change based on the type of asset classes we are servicing or managing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P2",
-    "claim": "Serving major competitors as significant clients creates retention risks around service quality, intra-company confidentiality, and actual or perceived conflicts of interest.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In some of our businesses, we are service providers to significant competitors.",
-     "These competitors are in some instances significant clients, and the retention of these clients involves additional risks, such as the avoidance of actual or perceived conflicts of interest and the maintenance of high levels of service quality and intra-company confidentiality."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P2",
-    "claim": "Emerging technologies such as artificial intelligence and distributed ledger technology, along with faster or better-resourced competitors in Fintech, digital assets, and wealth servicing, threaten to disrupt State Street's markets and profitability.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "For example, the adoption and implementation of evolving and emerging technologies, such as artificial intelligence and distributed ledger technology, and related regulatory frameworks, have the potential to disrupt materially the activities of the financial services industry, the operation of financial markets, processes, infrastructure and service providers, including State Street, and the servicing and other requirements of financial services clients, including our clients.",
-     "In addition, new market entrants and competitors may address or influence changes in the markets more rapidly than we do, may have materially greater resources to invest in infrastructure, technology and product development than we do, or may provide clients with a more attractive or cost-efficient offering of products and services, adversely affecting our business.",
-     "Our efforts to develop and market new products, particularly in the \u201cFintech\u201d sector including through State Street Alpha and broader digital asset-related initiatives or in attractive areas of focus such as wealth servicing and alternative investment management, may position us in new markets with pre-existing or less regulated competitors with strong market position."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P2",
-    "claim": "Developing new offerings such as State Street Alpha, wealth servicing, digital assets, and AI-enabled tools requires significant investment, creates third-party and joint-venture dependencies, and carries execution risk.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "New products and services, such as State Street Alpha and those related to wealth servicing, alternative investment management or digital assets or incorporating artificial intelligence, often also involve dependencies on third parties to, among other things, access or support innovative technologies, develop new distribution channels or form collaborative product and service offerings, and can require complex strategic alliances and joint venture relationships.",
-     "New products or services may fail to operate or perform as expected and may not be suitable for the intended client or may not produce anticipated efficiencies, savings or benefits for either the client or us.",
-     "Failure to successfully manage all of the above risks in the development and implementation of new products or services, including State Street Alpha and those related to wealth servicing, alternative investment management or digital assets, or incorporating artificial intelligence, could have a material adverse effect on our business and reputation, consolidated results of operations or financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P2",
-    "claim": "Acquisitions and strategic alliances carry regulatory approval risks\u2014illustrated by the terminated Brown Brothers Harriman Investor Services transaction\u2014alongside integration, client-retention, and cross-selling risks.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We may not complete these transactions following announcement or we may not achieve the expected benefits of these transactions, which could result in increased costs, lowered revenues, ineffective deployment of capital, regulatory concerns, exit costs or diminished competitive position or reputation.",
-     "As an example, after consideration of both regulatory feedback and potential transaction modifications to address that feedback, we determined in November 2022 to no longer pursue our acquisition of the Brown Brothers Harriman\u2019s Investor Services business announced in September 2021.",
-     "We also face the risk of being unable to retain, or cross-sell our products or services to, the clients of acquired companies or joint ventures and the risk of being unable to cross-sell acquired products or services to our existing clients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P2",
-    "claim": "Intense labor competition\u2014particularly for technology and information security talent\u2014combined with bank compensation restrictions threatens State Street's ability to attract and retain key personnel.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We may not be able to hire people or retain them, particularly in light of challenges associated with compensation restrictions applicable, or which may become applicable, to banks and some asset managers and that are not applicable to other financial services firms in all jurisdictions or to technology or other firms with which we compete for personnel, generally.",
-     "This can be particularly constraining when competing for skill sets which are in high demand, such as technology and information security."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items P2 and P3",
-    "claim": "With approximately 65% of servicing fees tied to asset valuations and management fees even more market-sensitive, market downturns and client shifts into lower-fee cash threaten fee revenue.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values.",
-     "Management fee revenue is more sensitive to market valuations than servicing fee revenue, as a higher proportion of the underlying services provided, and the associated management fees earned, are dependent on equity and fixed-income security valuations.",
-     "Market disruptions can adversely affect our consolidated results of operations if the value of our AUC/A or AUM decline, while the costs of providing the related services remain constant or increase.",
-     "They may also result in investor preference trends towards asset classes and markets deemed more secure, such as cash or non-emerging markets, with respect to which our fee rates are often lower."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P4",
-    "claim": "Increased and conflicting political, regulatory, and client scrutiny of investment management, stewardship, and sustainable investment strategies threatens State Street's businesses.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Our businesses may be adversely affected by increased and conflicting political, regulatory and client scrutiny of investment management, stewardship and sustainable investment strategies and services offered;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item P4",
-    "claim": "Misappropriation of confidential information, government enforcement and litigation, and adverse publicity or reputational harm threaten State Street's franchise and operations.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Any misappropriation of the confidential information we possess could have an adverse impact on our business and could subject us to regulatory actions, litigation and other adverse effects;",
-     "Our businesses may be adversely affected by government enforcement and litigation;",
-     "Our businesses may be negatively affected by adverse publicity or other reputational harm."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in F1",
-    "claim": "As of Sep. 30, 2026, State Street held $ 4,796 in cash and due from banks, 138,426 in interest-bearing deposits with banks, 7,222 in securities purchased under resale agreements, and 74,008 in available-for-sale investment securities against 403,341 in total assets and 311,651 in total deposits (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Cash and due from banks | $ 4,796 | $ 4,433",
-     "Interest-bearing deposits with banks | 138,426 | 126,930",
-     "Securities purchased under resale agreements | 7,222 | 6,812",
-     "Investment securities available-for-sale | 74,008 | 67,154",
-     "Total assets | 403,341 | 366,047",
-     "Total deposits | 311,651 | 274,350"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "State Street also carried 34,116 in held-to-maturity investment securities as of Sep. 30, 2026 whose fair value was $28,697 (table in millions), compared with a carrying value of 38,171 and fair value of $34,166 as of Dec. 31, 2025.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Investment securities held-to-maturity (fair value of $28,697 and $34,166) | 34,116 | 38,171"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "As of Sep. 30, 2026, total liabilities were 374,631 against total shareholders' equity of 28,710, including 25,132 of long-term debt, 903 of other short-term borrowings, and 411 of securities sold under repurchase agreements (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total liabilities | 374,631 | 338,206",
-     "Total shareholders\u2019 equity | 28,710 | 27,841",
-     "Long-term debt | 25,132 | 25,143",
-     "Other short-term borrowings | 903 | 3,821",
-     "Securities sold under repurchase agreements | 411 | 841"
-    ],
-    "support": "supported"
-   },
-   {
     "basis": "stated in P3",
-    "claim": "As of December 31, 2025, State Street reported a CET1 capital ratio of 11.6% (up from 10.9% in 2024 and above its 10-11% target range) and a Tier 1 leverage ratio of 5.5% (up from 5.2% in 2024 and within its 5.25-5.75% target range).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Our CET1 capital ratio was 11.6% as of December 31, 2025, compared to 10.9% as of December 31, 2024, primarily due to capital generated from earnings, partially offset by continued capital return.",
-     "Our Tier 1 leverage ratio increased to 5.5% as of December 31, 2025, compared to 5.2% as of December 31, 2024, mainly driven by capital generated from earnings and higher preferred equity, partially offset by continued capital return and higher average balance sheet levels.",
-     "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2",
-    "claim": "In the nine months ended Sep. 30, 2026, State Street generated 2,938 of net income on 11,848 of total revenue (9,288 fee revenue and 2,559 net interest income), up from 2,198 of net income on 10,277 of total revenue in the prior-year period (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Total fee revenue | 3,140 | 2,829 | 9,288 | 8,118",
-     "Net interest income | 864 | 715 | 2,559 | 2,158",
-     "Total revenue | 4,004 | 3,545 | 11,848 | 10,277",
-     "Net income | 1,090 | 861 | 2,938 | 2,198"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Despite net income of $ 2,938 in the nine months ended Sep. 30, 2026, net cash used in operating activities was (12,219) compared to 1,856 provided in the prior-year period (table in millions), driven by (12,330) of net change in collateral deposits and (4,881) of net change in unrealized losses on foreign exchange derivatives.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net income | $ 1,090 | $ 764 | $ 861 | $ 644 | $ 2,938 | $ 2,198",
-     "Change in collateral deposits, net | (12,330) | (1,916)",
-     "Change in unrealized losses on foreign exchange derivatives, net | (4,881) | 4,131",
-     "Net cash (used in) provided by operating activities | (12,219) | 1,856"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "In the nine months ended Sep. 30, 2026, investing activities used (20,070) of cash\u2014including (11,495) placed in interest-bearing deposits with banks and (1,290) for net purchases of premises and equipment\u2014while financing activities provided 32,652, led by a 37,767 net increase in all other deposits even after (1,200) of common stock repurchases and (873) of cash dividends (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net increase in interest-bearing deposits with banks | (11,495) | (9,685)",
-     "Purchases of premises and equipment, net | (1,290) | (788)",
-     "Net cash used in investing activities | (20,070) | (14,934)",
-     "Net increase in all other deposits | 37,767 | 18,848",
-     "Repurchases of common stock | (1,200) | (800)",
-     "Payments for cash dividends | (873) | (824)",
-     "Net cash provided by financing activities | 32,652 | 14,689"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P7",
-    "claim": "During the nine months ended Sep. 30, 2026, State Street made (2,432) of payments for long-term debt and finance leases and reduced other short-term borrowings by (2,918) (table in millions), and on October 14, 2026 called all $500,000,000 of its 1.684% Fixed-to-Floating Rate Senior Notes due 2027 for redemption on November 18, 2026 using cash on hand.",
-    "facts": [
-     "F3",
-     "P7"
-    ],
-    "quotes": [
-     "Net decrease in other short-term borrowings | (2,918) | (15)",
-     "Payments for long-term debt and obligations under finance leases | (2,432) | (3,639)",
-     "On October 14, 2026, State Street notified the holders of its $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 (the \u201cNotes\u201d) that it will redeem all of the Notes on November 18, 2026 (the \u201cRedemption Date\u201d).",
-     "State Street intends to fund the aggregate redemption price using cash on hand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3, P6, and P9",
-    "claim": "To raise funding, State Street received 2,859 in net long-term debt proceeds and 496 in net preferred stock proceeds in the nine months ended Sep. 30, 2026 (table in millions, including approximately $495.7 million expected net proceeds from Series L depositary shares in August 2026), followed on October 20, 2026 by $750,000,000 of parent senior notes due 2037 (approximately $745.6 million expected net proceeds) and $500,000,000 of floating-rate and $750,000,000 of 5.147% State Street Bank senior notes due 2028.",
-    "facts": [
-     "F3",
-     "P6",
-     "P9"
-    ],
-    "quotes": [
-     "Proceeds from issuance of long-term debt, net of issuance costs | 2,859 | 4,728",
-     "Proceeds from issuance of preferred stock, net of issuance costs | 496 | 743",
-     "State Street expects to receive net proceeds from the offering of the Depositary Shares of approximately $495.7 million, after deducting the underwriting discount and estimated offering expenses.",
-     "On October 20, 2026, State Street Corporation (\u201cState Street\u201d) issued $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 (the \u201cFixed-to-Floating Rate Senior Notes\u201d) in a public offering pursuant to a registration statement on Form S-3 (File No. 333-288196) and a related prospectus supplement filed with the Securities and Exchange Commission (the \u201cSEC\u201d).",
-     "State Street expects to receive net proceeds from the offering of the Fixed-to-Floating Rate Senior Notes of approximately $745.6 million, after deducting the underwriting discount and estimated offering expenses.",
-     "Also on October 20, 2026, State Street Bank and Trust Company, a Massachusetts trust company (\u201cState Street Bank\u201d) and a direct, wholly-owned subsidiary of State Street, issued $500,000,000 aggregate principal amount of Floating Rate Senior Notes due 2028 and $750,000,000 aggregate principal amount of 5.147% Senior Notes due 2028 (together, the \u201cBank Notes\u201d), in an offering exempt from registration under Section 3(a)(2) of the Securities Act of 1933, as amended."
-    ],
-    "support": "supported"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "Stated in the 2025 10-K MD&A, 3Q26 10-Q income statement, and 3Q26 earnings release.",
-    "claim": "Servicing fees increased 6% in 2025 compared to 2024 and rose from $ 1,357 to $ 1,492 (table in millions) year-over-year in 3Q26, driven by higher market levels and net new business.",
-    "facts": [
-     "F2",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "Servicing fees, as presented in Table 2: Total Revenue, increased 6% in 2025 compared to 2024, primarily reflecting higher average market levels and net new business.",
-     "AUC/A of $53.80 trillion as of December 31, 2025 increased 16% compared to December 31, 2024, primarily due to higher market levels and client flows.",
-     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as management sensitivity estimates as of December 31, 2025 in the 2025 10-K MD&A.",
-    "claim": "Because approximately 65% of servicing fee revenue is variable with asset valuations and a 10% move in worldwide equity valuations shifts servicing fees by approximately 3%, equity and fixed-income market levels must remain supportive for servicing fee growth to continue.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values.",
-     "Assuming that all other factors remain constant, including client activity, asset flows and pricing, we estimate, using relevant information as of December 31, 2025, that a 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our servicing fees are calculated, would result in a corresponding change in our total servicing fee revenues, on average and over multiple quarters, of approximately 3%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 10-K MD&A.",
-    "claim": "Installing the approximately $2.50 trillion of investment servicing AUC/A backlog at the end of 2025\u2014with approximately 70% expected in 2026 and the balance largely in 2027\u2014drives future servicing fee growth.",
+    "claim": "State Street held approximately $2.50 trillion of announced investment servicing assets remaining to be installed, with conversion expected mostly over 24 months.",
     "facts": [
      "P3"
     ],
@@ -693,522 +816,272 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in 2025 10-K Item 1A Risk Factors and Item 7 MD&A.",
-    "claim": "For servicing mandate backlog and AUC/A growth to translate into revenue, pending deals must clear client consents and regulatory approvals without large client losses, in-sourcing, or fee concessions offsetting wins.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "New investment servicing mandates, including Alpha servicing mandates, may be subject to completion of definitive agreements, consents or assignments, approval of applicable boards, shareholders and customary regulatory approvals or other conditions, the failure to complete any of which will prevent the relevant mandate from being installed and serviced.",
-     "Due to the large pools of assets controlled by these clients, the loss or gain of one client, or even a portion of the assets controlled by one client, or a client\u2019s decision to in-source certain services that we provide, could have a significant effect on our AUC/A or our AUM, as applicable, in the relevant period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 10-K MD&A, 3Q26 10-Q income statement, and 3Q26 earnings release.",
-    "claim": "Management fees grew 13% in 2025 compared to 2024 and rose from 664 to 797 (table in millions) year-over-year in 3Q26 as AUM reached 6,306 (table in billions) on higher market levels and net inflows.",
-    "facts": [
-     "F2",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "Management fees increased 13% in 2025 compared to 2024, primarily due to higher average market levels and net inflows.",
-     "AUM of $5.67 trillion as of December 31, 2025 increased 20% compared to December 31, 2024, primarily due to higher market levels and net inflows."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 7 MD&A (equity sensitivity estimate as of December 31, 2025) and Item 1A Risk Factors.",
-    "claim": "Because a 10% move in worldwide equity valuations shifts management fees by approximately 5% and AUM is weighted toward lower-fee passive products, continued management fee growth requires supportive equity markets, net inflows, and favorable asset-class mix.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products.",
-     "Similarly, if one or more clients change the asset class in which a significant portion of assets are invested (e.g., by shifting investments from emerging markets to the United States), those changes could have a significant effect on our results of operations in the relevant period, as our fee rates often change based on the type of asset classes we are servicing or managing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 3Q26 10-Q income statement and 3Q26 earnings release.",
-    "claim": "Foreign exchange trading services revenue rose from 364 to 427 (table in millions) year-over-year in 3Q26 and from 1,094 to 1,356 (table in millions) in the first nine months of 2026, supported by record FX client volumes.",
-    "facts": [
-     "F2",
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A Risk Factors.",
-    "claim": "Sustained foreign exchange revenue growth depends on ongoing client transaction activity and currency volatility, because periods of lower currency volatility tend to reduce foreign exchange revenue.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In general, increased currency volatility tends to increase our market risk but also increases our opportunity to generate foreign exchange revenue.",
-     "Conversely, periods of lower currency volatility tend to decrease our market risk but also decrease our foreign exchange revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 10-K MD&A, 3Q26 10-Q financial statements, and 3Q26 earnings presentation.",
-    "claim": "Net interest income increased 1% in 2025 on 11% growth in average interest-earning assets and rose from 715 to 864 (table in millions) year-over-year in 3Q26 as deposits reached 311,651 (table in millions), with FY2026 NII outlook raised to up ~15 \u2013 16% YoY.",
-    "facts": [
-     "F1",
-     "F2",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "NII increased 1% compared to 2024, primarily driven by 11% growth in average interest-earnings assets, partially offset by a 10 bps decline in NIM."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A Risk Factors and the 3Q26 earnings presentation outlook.",
-    "claim": "Continued NII growth depends on realized interest rates tracking forward rate assumptions and on managing portfolio reinvestment and net interest margin amid monetary policy uncertainty.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Outlook, in particular fee revenue and NII, are, among other things, dependent on macroeconomic, industry and other factors, including, but not limited to, the impacts from changes in interest rates, as well as equity and fixed income markets (which are highly uncertain).",
-     "Uncertain economic and monetary policy environments continue to drive risks for ongoing NII volatility.",
-     "Managing reinvestment for both higher and lower rate outcomes will continue to be a challenge."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 3Q26 10-Q income statement and 3Q26 earnings release and presentation.",
-    "claim": "Software services revenue rose from 167 to 175 (table in millions) year-over-year in 3Q26\u2014with ARR reaching $442 (table in $M) and software and data revenue up 10% YoY on client go-lives\u2014while cross-selling Charles River relationships won a first Wealth Services mandate.",
-    "facts": [
-     "F2",
-     "P5"
-    ],
-    "quotes": [
-     "Software and data revenue up 10% YoY driven by higher go-live revenue from onboarded clients",
-     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States.",
-     "Building on an existing Charles River relationship, this mandate demonstrates One State Street in action, leveraging our shared client base, integrated capabilities, and unified coverage model to deepen relationships, expand our addressable market, and drive future growth."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A Risk Factors.",
-    "claim": "For software, State Street Alpha, wealth servicing, digital asset, and AI initiatives to drive durable growth, new offerings must perform as expected, onboarded clients must go live on schedule, and third-party and regulatory risks must be managed.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "New products or services may fail to operate or perform as expected and may not be suitable for the intended client or may not produce anticipated efficiencies, savings or benefits for either the client or us.",
-     "Failure to successfully manage all of the above risks in the development and implementation of new products and services, including State Street Alpha and those related to wealth servicing, alternative investment management or digital assets, or incorporating artificial intelligence, could have a material adverse effect on our business and reputation, consolidated results of operations or financial condition."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in the 2025 10-K Item 1, 3Q26 10-Q MD&A, and 3Q26 earnings release and presentation.",
-    "claim": "Earnings growth has also been driven by positive operating leverage\u2014reaching 531BPS in 3Q26 and targeting 500+ bps in FY2026\u2014supported by organization design and automation reducing headcount to approximately 51,000 employees.",
-    "facts": [
-     "P1",
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "This performance drove our eleventh consecutive quarter of year-over-year positive operating leverage, excluding notable items, resulting in pre-tax margin expansion to approximately 35%.",
-     "Our employee population at December 31, 2025 decreased approximately 2% to approximately 52,000 employees, compared to December 31, 2024, primarily driven by our continued efforts to simplify our operations through organization design and technology and automation efforts.",
-     "We had consolidated total assets of $403.34 billion, consolidated total deposits of $311.65 billion, consolidated total shareholders' equity of $28.71 billion and approximately 51,000 employees, as of September 30, 2026."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 1A Risk Factors and the 3Q26 earnings presentation.",
-    "claim": "Sustaining positive operating leverage requires revenue growth to continue outpacing strategic investment and revenue-related expenses (projected up ~8 \u2013 8.5% YoY in FY2026) while retaining skilled technology and operational talent.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Competition for qualified members of our workforce is intense, and we may not be able to attract and retain the personnel we need to support our business.",
-     "These adverse impacts may be exacerbated by increased costs and expenses driven by the competitive labor market in several jurisdictions in which we operate, particularly with regard to the ability to meet compensation and hybrid working expectations."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the 2025 10-K MD&A, 3Q26 10-Q financial statements, and 3Q26 earnings release.",
-    "claim": "Common share repurchases totaling (1,200) (table in millions) in cash outflows in the first nine months of 2026 and approximately $1.2 billion in 2025 reduced average diluted shares to 279,292 (table in thousands) in 3Q26, supporting diluted EPS of $3.69.",
-    "facts": [
-     "F2",
-     "F3",
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "We acquired an aggregate of 11.5 million shares of common stock at an average per share cost of $104.05 and an aggregate cost of approximately $1.2 billion.",
-     "STATE STREET REPORTS THIRD QUARTER 2026 EPS OF $3.69"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 2025 10-K Item 7 MD&A and 3Q26 10-Q Item 2 MD&A.",
-    "claim": "Continued EPS contribution from buybacks requires sufficient earnings generation, regulatory capital ratios maintained within or above target ranges, and Board of Directors approval.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Our return of capital to shareholders through common share repurchases and common stock dividends may be variable and is subject to various business and financial factors and regulatory requirements and approvals of our Board of Directors (the Board);",
-     "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "Stated directly in Form 8-K Item 8.01.",
-    "claim": "State Street Corporation issued $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 in a public offering, expecting net proceeds of approximately $745.6 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "On October 20, 2026, State Street Corporation (\u201cState Street\u201d) issued $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 (the \u201cFixed-to-Floating Rate Senior Notes\u201d) in a public offering pursuant to a registration statement on Form S-3 (File No. 333-288196) and a related prospectus supplement filed with the Securities and Exchange Commission (the \u201cSEC\u201d).",
-     "State Street expects to receive net proceeds from the offering of the Fixed-to-Floating Rate Senior Notes of approximately $745.6 million, after deducting the underwriting discount and estimated offering expenses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Item 8.01.",
-    "claim": "State Street Bank and Trust Company issued $500,000,000 aggregate principal amount of Floating Rate Senior Notes due 2028 and $750,000,000 aggregate principal amount of 5.147% Senior Notes due 2028 in an offering exempt from registration.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Also on October 20, 2026, State Street Bank and Trust Company, a Massachusetts trust company (\u201cState Street Bank\u201d) and a direct, wholly-owned subsidiary of State Street, issued $500,000,000 aggregate principal amount of Floating Rate Senior Notes due 2028 and $750,000,000 aggregate principal amount of 5.147% Senior Notes due 2028 (together, the \u201cBank Notes\u201d), in an offering exempt from registration under Section 3(a)(2) of the Securities Act of 1933, as amended."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Item 7.01.",
-    "claim": "State Street notified holders of its $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 that it will redeem all of the notes at 100% of principal plus accrued and unpaid interest using cash on hand.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On October 14, 2026, State Street notified the holders of its $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 (the \u201cNotes\u201d) that it will redeem all of the Notes on November 18, 2026 (the \u201cRedemption Date\u201d).",
-     "The Notes will be redeemed at a redemption price equal to 100% of the principal amount of the Notes to be redeemed, plus accrued and unpaid interest thereon to, but excluding, the Redemption Date.",
-     "State Street intends to fund the aggregate redemption price using cash on hand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Item 5.02.",
-    "claim": "State Street Corporation's Board of Directors elected Alexander Vollert as an independent director and appointed him to the Board's Technology and Operations Committee and Risk Committee.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On October 9, 2026, State Street Corporation\u2019s Board of Directors elected Alexander Vollert as an independent director of the corporation.",
-     "Dr. Vollert has also been appointed as a member to the Board\u2019s Technology and Operations Committee and its Risk Committee effective the date of his election to the Board."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Item 5.02.",
-    "claim": "State Street appointed Mostapha Tahiri as President of State Street Alpha (continuing as Chairman of Asia Pacific) and Ann Fogarty as Enterprise Chief Operating Officer succeeding Mr. Tahiri, effective immediately, with a $5,650,000 target incentive compensation award for Ms. Fogarty.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "On September 14, 2026, State Street Corporation announced two executive leadership appointments.",
-     "Mostapha Tahiri, currently Enterprise Chief Operating Officer, has been appointed President of State Street Alpha and will continue as Chairman of Asia Pacific.",
-     "Ann Fogarty, currently Investment Services Chief Operating Officer, has been appointed Enterprise Chief Operating Officer, succeeding Mr. Tahiri.",
-     "These appointments are effective immediately.",
-     "In connection with her appointment as COO, Ms. Fogarty\u2019s target incentive compensation award will be $5,650,000."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Item 8.01 and reflected in the Q3 2026 Form 10-Q balance sheet and cash flow statement.",
-    "claim": "State Street issued and sold 500,000 depositary shares representing 1/100th ownership interests in Series L Preferred Stock in a public offering, expecting net proceeds of approximately $495.7 million.",
-    "facts": [
-     "P9",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "On August 12, 2026, State Street Corporation (\u201cState Street\u201d) issued and sold 500,000 depositary shares (the \u201cDepositary Shares\u201d) each representing a 1/100th ownership interest in a share of State Street\u2019s Fixed Rate Reset Non-Cumulative Perpetual Preferred Stock, Series L, without par value per share (the \u201cSeries L Preferred Stock\u201d), with a liquidation preference of $100,000 per share (equivalent to $1,000 per Depositary Share) in a public offering pursuant to a registration statement on Form S-3 (File No. 333-288196) and a related prospectus supplement filed with the Securities and Exchange Commission (the \u201cSEC\u201d).",
-     "State Street expects to receive net proceeds from the offering of the Depositary Shares of approximately $495.7 million, after deducting the underwriting discount and estimated offering expenses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Exhibit 99.1 earnings release and Q3 2026 Form 10-Q income statement.",
-    "claim": "State Street reported third-quarter 2026 diluted EPS of $3.69 on total revenue of 4,004 (table in millions) and net income of 1,090 (table in millions).",
-    "facts": [
-     "P5",
-     "F2"
-    ],
-    "quotes": [
-     "STATE STREET REPORTS THIRD QUARTER 2026 EPS OF $3.69",
-     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Exhibit 99.1 earnings release.",
-    "claim": "In the third quarter, State Street won its first Wealth Services mandate with one of the largest registered investment advisors in the United States, building on an existing Charles River relationship.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States.",
-     "Building on an existing Charles River relationship, this mandate demonstrates One State Street in action, leveraging our shared client base, integrated capabilities, and unified coverage model to deepen relationships, expand our addressable market, and drive future growth."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Form 8-K Exhibit 99.3 earnings presentation.",
-    "claim": "State Street updated its full-year 2026 outlook (ex-notable items) to fee revenue up ~13 \u2013 14% YoY, NII up ~15 \u2013 16% YoY, expenses up ~8 \u2013 8.5% YoY, and 500+ bps operating leverage.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "Prior full-year Outlook as of 2Q26 Earnings announcement.",
-     "Outlook does not reflect items outside of the normal course of business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 7.",
-    "claim": "Notable items reduced State Street's income before income tax expense by $344 million in 2025, including repositioning charges of $326 million and other notable items of $18 million, net.",
+    "basis": "stated in P3",
+    "claim": "State Street estimates that approximately 15% of its servicing fee revenues tend not to be variable or impacted by market fluctuations, while approximately 65% vary with asset valuations and 20% depend on fund activity volumes.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Notable items reduced income before income tax expense by $344 million in 2025, including repositioning charges of $326 million and other notable items of $18 million, net."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 7.",
-    "claim": "State Street increased its quarterly common stock dividend declared per common share by 11% in the third quarter of 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We increased the quarterly common stock dividend declared per common share by 11% in the third quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 7.",
-    "claim": "In 2024, notable items reduced income before income tax expense by $188 million, including a net loss on sale of investment securities of $81 million related to an investment portfolio repositioning, deferred compensation expense acceleration of approximately $79 million, and other notable items of $30 million, net.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In 2024, notable items reduced income before income tax expense by $188 million, including a net loss on sale of investment securities of $81 million related to an investment portfolio repositioning, a deferred compensation expense acceleration of approximately $79 million and other notable items of $30 million, net."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 1A.",
-    "claim": "State Street acquired PriceStats in 2025.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In recent years, we have undertaken acquisitions, including our 2025 acquisition of PriceStats, our 2024 acquisition of CF Global, our 2021 acquisition of Mercatus and our 2018 acquisition of CRD."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 1A.",
-    "claim": "State Street acquired CF Global in 2024.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In recent years, we have undertaken acquisitions, including our 2025 acquisition of PriceStats, our 2024 acquisition of CF Global, our 2021 acquisition of Mercatus and our 2018 acquisition of CRD."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 1A.",
-    "claim": "State Street determined in November 2022 to no longer pursue its acquisition of Brown Brothers Harriman's Investor Services business that had been announced in September 2021.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "As an example, after consideration of both regulatory feedback and potential transaction modifications to address that feedback, we determined in November 2022 to no longer pursue our acquisition of the Brown Brothers Harriman\u2019s Investor Services business announced in September 2021."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 1A.",
-    "claim": "State Street acquired Mercatus in 2021.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In recent years, we have undertaken acquisitions, including our 2025 acquisition of PriceStats, our 2024 acquisition of CF Global, our 2021 acquisition of Mercatus and our 2018 acquisition of CRD."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 2025 Form 10-K Item 1A.",
-    "claim": "State Street acquired CRD in 2018.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In recent years, we have undertaken acquisitions, including our 2025 acquisition of PriceStats, our 2024 acquisition of CF Global, our 2021 acquisition of Mercatus and our 2018 acquisition of CRD."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in 10-K Item 1A [P2] and 10-K Item 7 [P3], with offsetting 3Q26 fee revenue stated in 10-Q [F2] and 8-K [P5].",
-    "claim": "Core servicing contracts can have relatively short terms or short-notice termination rights, and pricing pressure with respect to existing clients impacted servicing fees by approximately (2)% in 2025.",
-    "facts": [
-     "P2",
-     "P3",
-     "P5",
-     "F2"
-    ],
-    "quotes": [
-     "Many of our core services are subject to contracts that have relatively short terms or may be terminated by our client after a short notice period.",
-     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively.",
-     "Pricing concessions can be a part of a contract renegotiation with a client including terms that may benefit us, such as extending the term of our relationship with the client, expanding the scope of services that we provide or reducing our dependency on manual processes through the standardization of the services we provide."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 10-K Item 1 [P1], 10-K Item 1A [P2], 10-K Item 7 [P3], 10-Q MD&A [P4], and 10-Q cash flows [F3].",
-    "claim": "As a G-SIB financial holding company, State Street faces potential Federal Reserve activity restrictions, enforcement actions, and higher regulatory costs if it fails to remain well capitalized and well managed or as supervision tightens.",
-    "facts": [
-     "P1",
-     "P2",
-     "P3",
-     "P4",
-     "F3"
-    ],
-    "quotes": [
-     "Failure to maintain these standards may result in restrictions on our activities and may ultimately permit the Federal Reserve to take enforcement actions against us and restrict our ability to engage in activities defined to be financial in nature.",
-     "Developments at the federal banking agencies that regulate banking organizations, including the Federal Reserve, the FDIC and the OCC (the U.S. Agencies), or in the financial system more generally, may result in increased prudential and conduct oversight, more extensive regulatory requirements, changing interpretations of existing rules and guidelines, and potentially more stringent enforcement and more severe penalties.",
-     "As an example, after consideration of both regulatory feedback and potential transaction modifications to address that feedback, we determined in November 2022 to no longer pursue our acquisition of the Brown Brothers Harriman\u2019s Investor Services business announced in September 2021."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 10-Q cash flows [F3], 10-Q balance sheet [F1], 10-Q MD&A [P4], and 8-K filings [P6], [P7], [P9].",
-    "claim": "Operating cash flow swung to (12,219) (table in millions) in the 9 months ended Sep. 30, 2026, reflecting collateral deposit and FX derivative cash outflows alongside liquidity and counterparty risks.",
-    "facts": [
-     "F1",
-     "F3",
-     "P4",
-     "P6",
-     "P7",
-     "P9"
-    ],
-    "quotes": [
-     "Net cash (used in) provided by operating activities | (12,219) | 1,856",
-     "If we are unable to effectively manage our capital and liquidity, our financial condition, capital ratios, results of operations and business prospects could be adversely affected;",
-     "We assume significant credit risk of counterparties, who may also have substantial financial dependencies on other financial institutions, and these credit exposures and concentrations could expose us to financial loss;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 10-K Item 1A [P2] and 10-Q balance sheet [F1], with offsetting NII performance and outlook in [F2] and [P5].",
-    "claim": "The investment securities portfolio represented approximately 29% of total assets as of December 31, 2025, exposing NII, AOCI of (1,624) (table in millions), and capital ratios to interest-rate and mark-to-market risk.",
-    "facts": [
-     "F1",
-     "F2",
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Our investment securities portfolio represented approximately 29% of our total assets as of December 31, 2025.",
-     "For example, among other risks, changes in prevailing interest rates or other market conditions have led, and were they to persist or occur in the future could further lead, to decreases in our NII or to portfolio management decisions resulting in reductions in our capital or liquidity ratios.",
-     "Uncertain economic and monetary policy environments continue to drive risks for ongoing NII volatility."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in 10-K Item 1 [P1] and 10-K Item 1A [P2], with offsetting product traction in 10-Q [F2] and 8-K [P5].",
-    "claim": "Evolving technologies such as artificial intelligence and distributed ledger technology, alongside competitors with substantially greater capital resources, could disrupt State Street's servicing model and profitability.",
-    "facts": [
-     "P1",
-     "P2",
-     "P5",
-     "F2"
-    ],
-    "quotes": [
-     "For example, the adoption and implementation of evolving and emerging technologies, such as artificial intelligence and distributed ledger technology, and related regulatory frameworks, have the potential to disrupt materially the activities of the financial services industry, the operation of financial markets, processes, infrastructure and service providers, including State Street, and the servicing and other requirements of financial services clients, including our clients.",
-     "Some of our competitors, including our competitors in core services, have substantially greater capital resources than we do, are not subject to as stringent capital or other regulatory requirements as we are, or may not be as constrained as we are by these requirements due to the relative size of our balance sheet.",
-     "New products or services may fail to operate or perform as expected and may not be suitable for the intended client or may not produce anticipated efficiencies, savings or benefits for either the client or us."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 10-K Item 1A [P2], 10-K Item 7 [P3], 10-Q MD&A [P4], and 8-K [P5].",
-    "claim": "Because approximately 65% of servicing fees vary with asset valuations and a 10% move in worldwide equity valuations changes servicing fees by approximately 3% and management fees by approximately 5%, market downturns or shifts to lower-fee cash products directly reduce revenue.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "Market disruptions can adversely affect our consolidated results of operations if the value of our AUC/A or AUM decline, while the costs of providing the related services remain constant or increase.",
-     "They may also result in investor preference trends towards asset classes and markets deemed more secure, such as cash or non-emerging markets, with respect to which our fee rates are often lower.",
      "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 1A [P2] and 10-Q balance sheet [F1], with recent operating context in 8-K [P5].",
-    "claim": "Past and future acquisitions carry integration, client-retention, and goodwill or intangible impairment risks, with goodwill at 8,094 and other intangible assets at 763 (table in millions) as of Sep. 30, 2026.",
+    "basis": "stated in P3 and P5",
+    "claim": "State Street's AUM is primarily weighted toward passively managed products, and its ETF franchise recorded net inflows of $69 (table in billions) in 3Q26.",
     "facts": [
-     "F1",
-     "P2",
+     "P3",
      "P5"
     ],
     "quotes": [
-     "Further, past acquisitions have resulted in the recognition of goodwill and other significant intangible assets in our consolidated statement of condition.",
-     "In addition, we may be required to record impairment in our consolidated statement of income in future periods if we determine that the value of these assets has declined.",
-     "Integration activities are complicated and time consuming and can involve significant unforeseen costs."
+     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products.",
+     "Memo: ETF Total Flows, net | $69 | $68 | $25 | $51 | $37"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "State Street faces intense global competition across custody banks, investment managers, broker/dealers, software, data, and technology firms, with industry consolidation potentially intensifying downward pricing pressure.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We operate in a highly competitive environment in all areas of our business globally.",
+     "We are subject to intense competition in all aspects of our business, which could negatively affect our ability to maintain or increase our profitability.",
+     "Further consolidation within the financial services industry could also pose challenges to us in the markets we serve, including potentially increased downward pricing pressure across our businesses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in 10-K Item 1 [P1], 10-K Item 1A [P2], 10-Q MD&A [P4], and 8-K [P8].",
-    "claim": "Intense competition for technology and security talent\u2014exacerbated by bank compensation restrictions\u2014alongside cybersecurity and operational resiliency threats could impair State Street's operations and client retention.",
+    "basis": "stated in P1 and P2",
+    "claim": "Some competitors possess substantially greater financial and capital resources or face less stringent regulatory constraints, while most other G-SIBs have a broader operational base to absorb regulatory costs.",
     "facts": [
      "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Most other financial institutions designated as systemically important have substantially greater financial resources and a broader base of operations than we do and are, consequently, in a better competitive position to manage and bear the costs of this enhanced regulatory requirement.",
+     "Some of our competitors, including our competitors in core services, have substantially greater capital resources than we do, are not subject to as stringent capital or other regulatory requirements as we are, or may not be as constrained as we are by these requirements due to the relative size of our balance sheet."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "In some businesses State Street acts as a service provider to significant competitors, creating client-retention, conflict-of-interest, and confidentiality risks.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "These competitors are in some instances significant clients, and the retention of these clients involves additional risks, such as the avoidance of actual or perceived conflicts of interest and the maintenance of high levels of service quality and intra-company confidentiality.",
+     "Our relationships with other businesses, including competitors, necessarily involve the sharing of confidential information, and we cannot be certain, notwithstanding the existence of confidentiality obligations on the part of those other businesses, that our information will not be used to the competitive advantage of others."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Core custodial and investment management services face persistent pricing pressure under relatively short-term or short-notice-terminable contracts, reducing existing-client servicing fees by an estimated (2)% annually on average over five years.",
+    "facts": [
      "P2",
-     "P4",
-     "P8"
+     "P3"
+    ],
+    "quotes": [
+     "We have also experienced, and anticipate that we will continue to experience, significant pricing pressure in many of our core businesses, particularly our custodial and investment management services.",
+     "Many of our core services are subject to contracts that have relatively short terms or may be terminated by our client after a short notice period.",
+     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Large institutional clients exert considerable market influence over fees, and client losses, client in-sourcing, or shifts toward lower-fee asset classes can materially reduce AUC/A, AUM, and results of operations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Due to the large pools of assets controlled by these clients, the loss or gain of one client, or even a portion of the assets controlled by one client, or a client\u2019s decision to in-source certain services that we provide, could have a significant effect on our AUC/A or our AUM, as applicable, in the relevant period.",
+     "Large institutional clients also, by their nature, are often able to exert considerable market influence, and this, combined with strong competitive forces in the markets for our services, has resulted in, and may continue to result in, significant pressure to reduce the fees we charge for our services in both our investment servicing and investment management lines of business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Emerging technologies such as artificial intelligence, distributed ledger technology, and digital assets could materially disrupt financial servicing, while new product initiatives carry significant costs, third-party dependencies, and execution risk.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, the adoption and implementation of evolving and emerging technologies, such as artificial intelligence and distributed ledger technology, and related regulatory frameworks, have the potential to disrupt materially the activities of the financial services industry, the operation of financial markets, processes, infrastructure and service providers, including State Street, and the servicing and other requirements of financial services clients, including our clients.",
+     "New products or services may fail to operate or perform as expected and may not be suitable for the intended client or may not produce anticipated efficiencies, savings or benefits for either the client or us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Acquisitions and alliances pose integration, IT conversion, cybersecurity, and client-attrition risks, and heightened regulatory scrutiny can block strategic transactions as occurred with the terminated Brown Brothers Harriman Investor Services acquisition.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "U.S. anti-trust and banking agencies continue to express concerns about the growth of large banking institutions, and competition authorities in many jurisdictions have increased the scrutiny and standards they apply in their review of transactions.",
+     "As an example, after consideration of both regulatory feedback and potential transaction modifications to address that feedback, we determined in November 2022 to no longer pursue our acquisition of the Brown Brothers Harriman\u2019s Investor Services business announced in September 2021."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Intense competition for skilled personnel, especially in technology and information security, is compounded by bank compensation restrictions that do not apply to non-bank financial and technology competitors.",
+    "facts": [
+     "P2"
     ],
     "quotes": [
      "We may not be able to hire people or retain them, particularly in light of challenges associated with compensation restrictions applicable, or which may become applicable, to banks and some asset managers and that are not applicable to other financial services firms in all jurisdictions or to technology or other firms with which we compete for personnel, generally.",
-     "The unexpected loss of services of personnel in business units, control functions, information technology, operations or other areas could have a material adverse impact on our business and operations because of the loss of skills, knowledge of our markets, operations and clients, years of industry experience and, in some cases, the difficulty of promptly finding qualified replacement personnel.",
-     "The integration of an acquired business\u2019 information technology infrastructure into ours has in the past and may in the future also expose us to additional cybersecurity and resiliency risks."
+     "This can be particularly constraining when competing for skill sets which are in high demand, such as technology and information security."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Fee revenue remains exposed to financial market swings, with an estimated 10% change in worldwide equity valuations shifting servicing fees by approximately 3% and management fees by approximately 5% over multiple quarters.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Assuming that all other factors remain constant, including client activity, asset flows and pricing, we estimate, using relevant information as of December 31, 2025, that a 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our servicing fees are calculated, would result in a corresponding change in our total servicing fee revenues, on average and over multiple quarters, of approximately 3%.",
+     "A 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our management fees are calculated, would result in a corresponding change in our total management fee revenues, on average and over multiple quarters, of approximately 5%; and"
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
-  "unresolved_questions": [
+  "financial_health": [
    {
-    "basis": "Stated in F3; the cash flow statement reports the line-item figures without footnote or narrative explanation.",
-    "claim": "What drove the shift in net cash (used in) provided by operating activities to (12,219) (table in millions) in the nine months ended September 30, 2026 from 1,856 (table in millions) in the prior-year period, particularly the (12,330) (table in millions) net outflow in collateral deposits and (4,881) (table in millions) change in unrealized losses on foreign exchange derivatives?",
+    "basis": "Stated directly in the 3Q26 Form 8-K earnings release.",
+    "claim": "At 3Q26 period-end, State Street's Liquidity coverage ratio (LCR) was 106%, compared with 107% at 2Q26 and 106% at 3Q25.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "(As of period end) | 3Q26 | 2Q26 | 3Q25",
+     "State Street Corporation Liquidity coverage ratio (LCR)(1) | 106% | 107% | 106%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of condition.",
+    "claim": "As of Sep. 30, 2026, State Street held $ 4,796 in cash and due from banks, 138,426 in interest-bearing deposits with banks, and 7,222 in securities purchased under resale agreements against 403,341 in total assets (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "CONSOLIDATED STATEMENT OF CONDITION - USD ($) $ in Millions | Sep. 30, 2026 | Dec. 31, 2025",
+     "Cash and due from banks | $ 4,796 | $ 4,433",
+     "Interest-bearing deposits with banks | 138,426 | 126,930",
+     "Securities purchased under resale agreements | 7,222 | 6,812",
+     "Total assets | 403,341 | 366,047"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of condition.",
+    "claim": "As of Sep. 30, 2026, State Street held 74,008 in available-for-sale investment securities and 34,116 in held-to-maturity investment securities with a fair value of $28,697 (table in millions), compared with 67,154 and 38,171 (fair value $34,166) as of Dec. 31, 2025.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Investment securities available-for-sale | 74,008 | 67,154",
+     "Investment securities held-to-maturity (fair value of $28,697 and $34,166) | 34,116 | 38,171"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of condition.",
+    "claim": "Total deposits increased to 311,651 as of Sep. 30, 2026 from 274,350 as of Dec. 31, 2025 (table in millions), comprising 41,853 non-interest-bearing, 192,437 U.S. interest-bearing, and 77,361 non-U.S. interest-bearing deposits.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Non-interest-bearing | 41,853 | 35,267",
+     "Interest-bearing - U.S. | 192,437 | 168,079",
+     "Interest-bearing - non-U.S. | 77,361 | 71,004",
+     "Total deposits | 311,651 | 274,350"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of condition.",
+    "claim": "As of Sep. 30, 2026, total liabilities were 374,631 and total shareholders' equity was 28,710 against 403,341 in total assets (table in millions), compared with 338,206, 27,841, and 366,047 as of Dec. 31, 2025.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total assets | 403,341 | 366,047",
+     "Total liabilities | 374,631 | 338,206",
+     "Total shareholders\u2019 equity | 28,710 | 27,841"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 3Q26 Form 8-K earnings release and addendum and the 2025 Form 10-K.",
+    "claim": "At 3Q26 period-end, State Street's estimated Tier 1 leverage ratio was 5.5 and its supplementary leverage ratio (SLR) was 6.4, within the 5.25-5.75% target range for Tier 1 leverage stated in the 2025 Form 10-K.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "Tier 1 leverage ratio | 5.5 | 5.3 | 5.6",
+     "Supplementary leverage ratio (SLR) | 6.4 | 6.2 | 6.4",
+     "Capital ratios as of September 30, 2026 are estimates.",
+     "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in the 3Q26 Form 8-K earnings release and the 2025 Form 10-K.",
+    "claim": "At 3Q26 period-end, State Street's estimated Basel III Standardized CET1 ratio was 11.0%, Tier 1 capital ratio was 13.9, and Total capital ratio was 15.2 (compared with 13.4, 16.9, and 18.4 under Advanced Approaches), at the top of the 10-11% CET1 target range.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "Common equity tier 1 ratio (CET1) | 11.0% | 10.8% | 11.3%",
+     "Tier 1 capital ratio | 13.9 | 13.2 | 13.9",
+     "Total capital ratio | 15.2 | 14.5 | 15.5",
+     "Common equity tier 1 ratio (CET1) | 13.4 | 13.2 | 13.1",
+     "Tier 1 capital ratio | 16.9 | 16.3 | 16.2",
+     "Total capital ratio | 18.4 | 17.8 | 17.8",
+     "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of condition.",
+    "claim": "As of Sep. 30, 2026, debt obligations comprised 25,132 in long-term debt, 903 in other short-term borrowings, and 411 in securities sold under repurchase agreements (table in millions), down from 25,143, 3,821, and 841 as of Dec. 31, 2025, while Series L preferred stock of $ 496 was added.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Securities sold under repurchase agreements | 411 | 841",
+     "Other short-term borrowings | 903 | 3,821",
+     "Long-term debt | 25,132 | 25,143",
+     "Preferred stock, no par, 3,500,000 shares authorized: | $ 496 | $ 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of cash flows.",
+    "claim": "For the nine months ended Sep. 30, 2026, State Street reported net income of $ 2,938 but net cash used in operating activities of (12,219) (table in millions), compared with net income of $ 2,198 and net cash provided by operating activities of 1,856 in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net income | $ 1,090 | $ 764 | $ 861 | $ 644 | $ 2,938 | $ 2,198",
+     "Net cash (used in) provided by operating activities | (12,219) | 1,856"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of cash flows.",
+    "claim": "Operating cash outflow of (12,219) in the nine months ended Sep. 30, 2026 (table in millions) was driven by net collateral deposit changes of (12,330) and net unrealized FX derivative loss changes of (4,881), contrasting with (1,916) and 4,131 in the prior-year period.",
     "facts": [
      "F3"
     ],
@@ -1220,136 +1093,583 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in F1; balance sheet lines provide totals and fair value parentheticals without component schedules.",
-    "claim": "What accounts for the increase in Other assets to 76,738 (table in millions) as of September 30, 2026 from 58,468 (table in millions) as of December 31, 2025, and what are the composition, maturity profile, and unrealized loss details of the Investment securities held-to-maturity carrying value of 34,116 (table in millions) versus fair value of $28,697 (table in millions)?",
+    "basis": "Stated directly in the 10-Q consolidated statement of cash flows.",
+    "claim": "In the nine months ended Sep. 30, 2026, net cash used in investing activities was (20,070) versus (14,934) in the prior-year period, including (1,290) in net purchases of premises and equipment versus (788) (table in millions).",
     "facts": [
-     "F1"
+     "F3"
     ],
     "quotes": [
-     "Other assets | 76,738 | 58,468",
-     "Investment securities held-to-maturity (fair value of $28,697 and $34,166) | 34,116 | 38,171"
+     "Net cash used in investing activities | (20,070) | (14,934)",
+     "Purchases of premises and equipment, net | (1,290) | (788)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1 and P4 via explicit cross-references to Notes 9, 10, and 17 and Line of Business Information, which are omitted from the packet.",
-    "claim": "What off-balance-sheet commitments, guarantees, contingencies, and segment-level financial results are disclosed in the omitted footnotes and Line of Business Information of the September 30, 2026 Form 10-Q?",
+    "basis": "Stated directly in the 10-Q consolidated statement of cash flows.",
+    "claim": "In the nine months ended Sep. 30, 2026, net cash provided by financing activities was 32,652 versus 14,689 a year earlier (table in millions), led by a 37,767 net increase in all other deposits, alongside (1,200) in common stock repurchases and (873) in cash dividends paid.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by financing activities | 32,652 | 14,689",
+     "Net increase in all other deposits | 37,767 | 18,848",
+     "Repurchases of common stock | (1,200) | (800)",
+     "Payments for cash dividends | (873) | (824)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of income and the 3Q26 Form 8-K earnings release.",
+    "claim": "For the nine months ended Sep. 30, 2026, total revenue reached 11,848 (9,288 total fee revenue and 2,559 net interest income) with a 12 credit loss provision (table in millions), while 3Q26 pre-tax margin reached 34.6% with no notable items.",
+    "facts": [
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Total fee revenue | 3,140 | 2,829 | 9,288 | 8,118",
+     "Net interest income | 864 | 715 | 2,559 | 2,158",
+     "Total revenue | 4,004 | 3,545 | 11,848 | 10,277",
+     "Provision for credit losses | (4) | 9 | 12 | 51",
+     "34.6% | PRE-TAX MARGIN",
+     "There were no notable items in any of 3Q26, 2Q26, or 3Q25."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q consolidated statement of cash flows.",
+    "claim": "During the nine months ended Sep. 30, 2026, State Street issued 2,859 in long-term debt (net of issuance costs) and 496 in preferred stock (net of issuance costs), while paying (2,432) on long-term debt and finance leases and reducing other short-term borrowings by (2,918) (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net decrease in other short-term borrowings | (2,918) | (15)",
+     "Proceeds from issuance of long-term debt, net of issuance costs | 2,859 | 4,728",
+     "Payments for long-term debt and obligations under finance leases | (2,432) | (3,639)",
+     "Proceeds from issuance of preferred stock, net of issuance costs | 496 | 743"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q Part I Item 2 Forward-Looking Statements risk summary.",
+    "claim": "Management warns that future debt or capital raises may not be available or may only be available on unfavorable terms, and a credit rating downgrade could adversely affect borrowing costs and liquidity.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We may need to raise additional capital or debt in the future, which may not be available to us or may only be available on unfavorable terms;",
+     "If we experience a downgrade in our credit ratings, or an actual or perceived reduction in our financial strength, our borrowing and capital costs, liquidity and reputation could be adversely affected."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in P3 and P5",
+    "claim": "Servicing fees increased 6% in 2025 and 9.9% year-over-year in 3Q26 to $1,492 (table in millions), alongside AUC/A reaching $59,173 (table in billions), up 15% year-over-year.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Servicing fees, as presented in Table 2: Total Revenue, increased 6% in 2025 compared to 2024, primarily reflecting higher average market levels and net new business.",
+     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Newly announced investment servicing mandates totaled approximately $2.12 trillion of AUC/A in 2025, leaving approximately $2.50 trillion of AUC/A remaining to be installed in future periods.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Investment servicing mandates newly announced in 2025 totaled approximately $2.12 trillion of AUC/A.",
+     "Investment servicing assets remaining to be installed in future periods totaled approximately $2.50 trillion as of December 31, 2025, which will be reflected in AUC/A in future periods after installation and will generate servicing fee revenue in subsequent periods."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "For servicing fee growth from the $2.50 trillion backlog to continue, pending mandates must satisfy definitive agreements, consents, and regulatory approvals and install within the 6 to 36 months onboarding timeline.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Servicing fee revenue associated with new investment servicing mandates is not reflected in our servicing fee revenue until the assets have been installed, and may vary between mandates based on the breadth of services provided, the time required to install the assets, and the types of assets installed.",
+     "New investment servicing mandates, including Alpha servicing mandates, may be subject to completion of definitive agreements, consents or assignments, approval of applicable boards, shareholders and customary regulatory approvals or other conditions, the failure to complete any of which will prevent the relevant mandate from being installed and serviced."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "For ongoing servicing fee growth to continue, global asset valuations and client activity must remain supportive enough to offset pricing pressure that averaged approximately (2)% annually through 2025.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values.",
+     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P5",
+    "claim": "Management fees grew 13% in 2025 and 20.0 (table % change) year-over-year in 3Q26 to 797 (table in millions), driven by higher market levels and net inflows that lifted AUM to $6,306 (table in billions), including $69 (table in billions) of net ETF flows in 3Q26.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Management fees increased 13% in 2025 compared to 2024, primarily due to higher average market levels and net inflows.",
+     "AUM of $5.67 trillion as of December 31, 2025 increased 20% compared to December 31, 2024, primarily due to higher market levels and net inflows."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "For management fee growth to continue, equity valuations and positive net inflows must hold up, as a 10% change in worldwide equity valuations shifts management fees by approximately 5% and AUM is primarily weighted toward lower-fee passive products.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Management fee revenue is more sensitive to market valuations than servicing fee revenue, as a higher proportion of the underlying services provided, and the associated management fees earned, are dependent on equity and fixed-income security valuations.",
+     "A 10% increase or decrease in worldwide equity valuations, on a weighted average basis, over the relevant periods for which our management fees are calculated, would result in a corresponding change in our total management fee revenues, on average and over multiple quarters, of approximately 5%",
+     "Asset-based management fees for passively managed products, to which our AUM is currently primarily weighted, are generally charged at a lower fee on AUM than for actively managed products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P5",
+    "claim": "Markets-related fee revenue expanded as foreign exchange trading services and securities finance each rose 15 (table % change) in 2025, while in 3Q26 foreign exchange trading services rose 17.3 (table % change) year-over-year on record FX client volumes and average securities on loan rose 14.9 (table % change) year-over-year.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "For foreign exchange trading services and securities finance growth to continue, currency volatility and institutional client transaction volumes must remain supportive.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In general, increased currency volatility tends to increase our market risk but also increases our opportunity to generate foreign exchange revenue.",
+     "Conversely, periods of lower currency volatility tend to decrease our market risk but also decrease our foreign exchange revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P3, and P5",
+    "claim": "Net interest income grew 1% in 2025 on 11% growth in average interest-earning assets and accelerated to 20.8% year-over-year in 3Q26 at 864 (table in millions) as net interest margin rose to 1.12% from 0.96% in 3Q25.",
+    "facts": [
+     "F2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "NII increased 1% compared to 2024, primarily driven by 11% growth in average interest-earnings assets, partially offset by a 10 bps decline in NIM."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2 and P4",
+    "claim": "For net interest income growth to continue, State Street must manage portfolio reinvestment across changing interest rate and monetary policy outcomes without forcing actions that reduce capital or liquidity ratios.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Uncertain economic and monetary policy environments continue to drive risks for ongoing NII volatility.",
+     "Managing reinvestment for both higher and lower rate outcomes will continue to be a challenge.",
+     "For example, among other risks, changes in prevailing interest rates or market conditions have led, and were they to persist or occur in the future could further lead, to decreases in our NII or to portfolio management decisions resulting in reductions in our capital or liquidity ratios;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P5",
+    "claim": "Strategic growth initiatives built around State Street Alpha, Charles River, and Wealth Services are expanding the addressable market, demonstrated by a Wealth Services mandate win in 3Q26 leveraging an existing Charles River relationship.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "Together with our back- and middle-office services, CRD\u2019s front- and middle-office technology offerings form the foundation of State Street Alpha.",
+     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States.",
+     "Building on an existing Charles River relationship, this mandate demonstrates One State Street in action, leveraging our shared client base, integrated capabilities, and unified coverage model to deepen relationships, expand our addressable market, and drive future growth."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and inferred from P5 expense trends",
+    "claim": "For new product and technology initiatives such as State Street Alpha, Wealth Services, AI, and digital assets to sustain growth, State Street must execute complex third-party integrations and regulatory approvals while containing technology expenses.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "New products and services, such as State Street Alpha and those related to wealth servicing, alternative investment management or digital assets or incorporating artificial intelligence, often also involve dependencies on third parties to, among other things, access or support innovative technologies, develop new distribution channels or form collaborative product and service offerings, and can require complex strategic alliances and joint venture relationships.",
+     "New products or services may fail to operate or perform as expected and may not be suitable for the intended client or may not produce anticipated efficiencies, savings or benefits for either the client or us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P5",
+    "claim": "Positive operating leverage of 531BPS in 3Q26 expanded pre-tax margin to 34.6% from 31.1 (table %) in 3Q25 and 26.8 (table %) in 2025, lifting 3Q26 diluted EPS 33% year-over-year to $3.69.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "This performance drove our eleventh consecutive quarter of year-over-year positive operating leverage, excluding notable items, resulting in pre-tax margin expansion to approximately 35%."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2 and P4",
+    "claim": "For earnings and per-share growth to continue, State Street must attract and retain skilled personnel without excessive compensation inflation and maintain regulatory capital capacity for Board-approved share repurchases.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "These adverse impacts may be exacerbated by increased costs and expenses driven by the competitive labor market in several jurisdictions in which we operate, particularly with regard to the ability to meet compensation and hybrid working expectations.",
+     "Our return of capital to shareholders through common share repurchases and common stock dividends may be variable and is subject to various business and financial factors and regulatory requirements and approvals of our Board of Directors (the Board);"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [],
+  "risks": [
+   {
+    "basis": "Stated in P2 (Risk Factors); counterevidence stated in P3 (MD&A) and P5 (3Q26 earnings release).",
+    "claim": "Large institutional clients can terminate core service contracts on short notice or in-source services, which could materially reduce AUC/A, AUM, and fee revenue.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Many of our core services are subject to contracts that have relatively short terms or may be terminated by our client after a short notice period.",
+     "Loss of all or a portion of the servicing of a client\u2019s assets can occur for a variety of reasons.",
+     "We generated record quarterly Servicing and Management fees as well as record FX client volumes, reflecting the strength of our client relationships and the breadth of our capabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (Risk Factors) and P3 (MD&A); counterevidence stated in P3 and P5.",
+    "claim": "Intense competition and client pricing pressure have compressed existing-client servicing fees by approximately (2)% annually on average, ranging from (2)% to (3)% in any given year.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "We have also experienced, and anticipate that we will continue to experience, significant pricing pressure in many of our core businesses, particularly our custodial and investment management services.",
+     "On average, over the five years ended December 31, 2025, we estimate that pricing pressure with respect to existing clients has impacted our servicing fees by approximately (2)% annually, with the impact ranging from (2)% to (3)% in any given year and approximately (2)% and (3)% in 2025 and 2024, respectively.",
+     "This performance drove our eleventh consecutive quarter of year-over-year positive operating leverage, excluding notable items, resulting in pre-tax margin expansion to approximately 35%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (Risk Factors); commercial and financial counterevidence stated in F2 and P5.",
+    "claim": "Emerging technologies such as artificial intelligence and distributed ledger technology could materially disrupt State Street's industry, while developing new offerings such as State Street Alpha imposes costs and third-party dependencies.",
+    "facts": [
+     "P2",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "For example, the adoption and implementation of evolving and emerging technologies, such as artificial intelligence and distributed ledger technology, and related regulatory frameworks, have the potential to disrupt materially the activities of the financial services industry, the operation of financial markets, processes, infrastructure and service providers, including State Street, and the servicing and other requirements of financial services clients, including our clients.",
+     "New products or services may fail to operate or perform as expected and may not be suitable for the intended client or may not produce anticipated efficiencies, savings or benefits for either the client or us.",
+     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (Risk Factors), P3 (MD&A), and P4 (10-Q MD&A); counterevidence stated in P3 and P5.",
+    "claim": "Fee revenue is highly sensitive to market valuation declines and client asset-mix shifts, with a 10% change in worldwide equity valuations estimated to shift servicing fees by approximately 3% and management fees by approximately 5%.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Market disruptions can adversely affect our consolidated results of operations if the value of our AUC/A or AUM decline, while the costs of providing the related services remain constant or increase.",
+     "Historically, and based on an indicative sample of revenue, we estimate that approximately 65%, on average, of our servicing fee revenues have been variable due to changes in asset valuations including changes in daily average valuations of AUC/A; another approximately 20%, on average, of our servicing fees are impacted by the volume of activity in the funds we serve; and the remaining approximately 15% of our servicing fees tend not to be variable in nature nor impacted by market fluctuations or values.",
+     "Our fee revenue represents a significant portion of our revenue and is subject to and may decline based on, among other factors, market and currency declines, investment activities and preferences of our clients and their business mix, as well as the timing of new business onboarding;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K Item 1) and P4 (10-Q MD&A); capital and dividend counterevidence stated in P3 and P5.",
+    "claim": "As a G-SIB financial holding company, State Street faces extensive global supervision, stricter capital and liquidity demands than non-G-SIB rivals, and potential enforcement or activity restrictions if regulatory standards are not maintained.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "As a G-SIB, we are subject to extensive regulation and supervision with respect to our operations and activities.",
+     "Failure to maintain these standards may result in restrictions on our activities and may ultimately permit the Federal Reserve to take enforcement actions against us and restrict our ability to engage in activities defined to be financial in nature.",
+     "Our business and capital-related activities, including common share repurchases, may be adversely affected by regulatory requirements and considerations, including capital, credit and liquidity;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances stated in F1 and F3; portfolio, NII, and liquidity risks stated in P2 and P4; liquidity and NII counterevidence stated in F1, F3, and P5.",
+    "claim": "Held-to-maturity investment securities had a fair value of $28,697 (table in millions) against a carrying amount of 34,116 (table in millions) and accumulated other comprehensive loss stood at (1,624) (table in millions), exposing net interest income, capital ratios, and liquidity to interest-rate and funding shifts.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Our investment securities portfolio represented approximately 29% of our total assets as of December 31, 2025.",
+     "For example, among other risks, changes in prevailing interest rates or market conditions have led, and were they to persist or occur in the future could further lead, to decreases in our NII or to portfolio management decisions resulting in reductions in our capital or liquidity ratios;",
+     "If we are unable to effectively manage our capital and liquidity, our financial condition, capital ratios, results of operations and business prospects could be adversely affected;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances stated in F1; acquisition and impairment risks stated in P2 (Risk Factors); counterevidence stated in P5.",
+    "claim": "Past acquisitions have created 8,094 (table in millions) of goodwill and 763 (table in millions) of other intangible assets excluded from regulatory capital, posing integration, client-retention, deal-completion, and impairment risks.",
+    "facts": [
+     "F1",
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Further, past acquisitions have resulted in the recognition of goodwill and other significant intangible assets in our consolidated statement of condition.",
+     "In addition, we may be required to record impairment in our consolidated statement of income in future periods if we determine that the value of these assets has declined.",
+     "Acquisitions or joint ventures we announce may not be completed if we do not receive the required regulatory approvals, if regulatory approvals are significantly delayed or if other closing conditions are not satisfied."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (Risk Factors), P3 (MD&A), and P4 (10-Q MD&A); FX revenue and AUM counterevidence stated in P2 and P5.",
+    "claim": "Geopolitical conflicts, macroeconomic and central-bank uncertainty, and foreign currency exposure\u2014with approximately 48% of servicing fees and 25% of management fees generated outside the U.S.\u2014can cause revenue and expense volatility.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "In addition, as our business grows globally and a significant percentage of our revenue is earned (and of our expenses paid) in currencies other than U.S. dollars, our exposure to foreign currency volatility could affect our levels of consolidated revenue, our consolidated expenses and our consolidated results of operations, as well as the value of our investment in our non-U.S. operations and our non-U.S. investment portfolio holdings.",
+     "Servicing fees generated outside the United States were approximately 48% of total servicing fees in 2025, compared to approximately 47% of total servicing fees in 2024.",
+     "We could be adversely affected by political, geopolitical, economic and market conditions, including, for example, as a result of liquidity or capital deficiencies (actual or perceived) by other financial institutions and related market and government actions, changes in U.S. trade or other policies or those policies of other nations, the ongoing conflicts in Ukraine and in the Middle East, major political shifts domestically or internationally (including the potential for retaliatory actions by governments, market participants or clients based on diverging perspectives or otherwise), actions taken by central banks in an attempt to address prevailing economic conditions, changes in monetary policy or periods of significant volatility in the markets for equity, fixed income and other asset classes globally or within specific markets;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (Risk Factors) and P1 (10-K Item 1); headcount and operating leverage counterevidence stated in P1, P4, and P5.",
+    "claim": "Intense competition for technology, information security, and investment talent\u2014compounded by bank compensation restrictions\u2014could increase labor costs or impair operations and client confidence.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Competition for labor in most activities in which we engage can be intense, including for both individuals identified as key talent and for other personnel.",
+     "We may not be able to hire people or retain them, particularly in light of challenges associated with compensation restrictions applicable, or which may become applicable, to banks and some asset managers and that are not applicable to other financial services firms in all jurisdictions or to technology or other firms with which we compete for personnel, generally.",
+     "Our employee population at December 31, 2025 decreased approximately 2% to approximately 52,000 employees, compared to December 31, 2024, primarily driven by our continued efforts to simplify our operations through organization design and technology and automation efforts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 (10-Q MD&A); credit allowance and provision counterevidence stated in F1, F2, and P5.",
+    "claim": "State Street assumes significant counterparty credit exposure and could face higher borrowing and capital costs, reduced liquidity, and reputational harm if its credit ratings are downgraded.",
+    "facts": [
+     "P4",
+     "F1",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "We assume significant credit risk of counterparties, who may also have substantial financial dependencies on other financial institutions, and these credit exposures and concentrations could expose us to financial loss;",
+     "If we experience a downgrade in our credit ratings, or an actual or perceived reduction in our financial strength, our borrowing and capital costs, liquidity and reputation could be adversely affected."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (Risk Factors) and P4 (10-Q MD&A); spending and lack of disclosed 3Q26 notable items observed in F2 and P5.",
+    "claim": "Cyber-attacks, unauthorized system access, or misappropriation of confidential client or competitor information could disrupt operations and trigger regulatory actions and litigation.",
+    "facts": [
+     "P2",
+     "P4",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Any misappropriation of the confidential information we possess could have an adverse impact on our business and could subject us to regulatory actions, litigation and other adverse effects;",
+     "The integration of an acquired business\u2019 information technology infrastructure into ours has in the past and may in the future also expose us to additional cybersecurity and resiliency risks."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in F1 (reference to omitted Notes 9 and 10) and P4 (contingencies listed as a significant accounting estimate and government enforcement and litigation listed as a risk factor)",
+    "claim": "What off-balance-sheet commitments, guarantees, and legal or regulatory contingencies apply to State Street as of September 30, 2026, and what losses could arise from them?",
     "facts": [
      "F1",
      "P4"
     ],
     "quotes": [
      "Commitments, guarantees and contingencies (Notes 9 and 10)",
-     "Additional information about our lines of business is provided in \"Line of Business Information\" in this Management's Discussion and Analysis and Note 17 to the consolidated financial statements in this Quarterly Report on Form 10-Q for the quarter ended September 30, 2026 (Form 10-Q)."
+     "\u2022Our businesses may be adversely affected by government enforcement and litigation;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the packet header noting quarterly_risk_factors 0000093751-26-000600 was not found, alongside P2 and P4.",
-    "claim": "Were any material risk factors added or updated in Part II, Item 1A of the September 30, 2026 Form 10-Q beyond the risk factors in the December 31, 2025 Form 10-K and the forward-looking risk summary in the September 30, 2026 MD&A?",
+    "basis": "stated in F1 (balance sheet values), P2 (investment portfolio risk exposure), and P5 (omitted addendum schedule listed in table of contents)",
+    "claim": "What securities, maturities, and interest-rate sensitivities account for the gap between the $28,697 fair value and 34,116 carrying value of held-to-maturity securities (table in millions) and the (1,624) accumulated other comprehensive loss (table in millions) as of September 30, 2026?",
     "facts": [
+     "F1",
      "P2",
-     "P4"
-    ],
-    "quotes": [
-     "The following is a discussion of material risk factors applicable to us.",
-     "Forward-looking statements are subject to various risks and uncertainties, which change over time, are based on management's expectations and assumptions at the time the statements are made and are not guarantees of future results."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 (capital ratio framework and 2025 figures), P4 (Q3 2026 assets), F3 (9M 2026 share repurchases and preferred issuance), and P5 (omitted Q3 2026 capital tables).",
-    "claim": "What were State Street's regulatory capital ratios (including CET1, Tier 1 leverage, and supplementary leverage ratios) and risk-weighted assets as of September 30, 2026, following total asset growth to $403.34 billion, common stock repurchases of (1,200) (table in millions), and preferred stock issuance proceeds of 496 (table in millions)?",
-    "facts": [
-     "P3",
-     "P4",
-     "F3",
      "P5"
     ],
     "quotes": [
-     "We had consolidated total assets of $403.34 billion, consolidated total deposits of $311.65 billion, consolidated total shareholders' equity of $28.71 billion and approximately 51,000 employees, as of September 30, 2026.",
-     "Our target ranges for CET1 capital and Tier 1 leverage ratios remain at 10-11% and 5.25-5.75%, respectively.",
-     "Repurchases of common stock | (1,200) | (800)",
-     "Proceeds from issuance of preferred stock, net of issuance costs | 496 | 743"
+     "Investment securities held-to-maturity (fair value of $28,697 and $34,166) | 34,116 | 38,171",
+     "Accumulated other comprehensive income (loss) | (1,624) | (1,043)",
+     "As such, our consolidated financial condition and results of operations are materially exposed to the risks associated with our investment portfolio, including changes in interest rates, credit spreads, credit performance (including risk of default), and credit ratings, our access to liquidity and foreign exchange markets and mark-to-market valuations, and our ability to profitably manage changes in repayment rates of principal with respect to our portfolio securities.",
+     "Investment Portfolio Holdings by Asset Class | 9"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 (2025 backlog and conversion timeline) and P5 (omitted AUC/A highlights and Wealth Services mandate announcement), while P4 reports total AUC/A without backlog figures.",
-    "claim": "How much of the approximately $2.50 trillion in uninstalled investment servicing assets reported as of December 31, 2025 was installed during the first nine months of 2026, what backlog remained as of September 30, 2026, and what are the asset size and fee terms of the first Wealth Services mandate won in the third quarter?",
+    "basis": "stated in F3 (nine-month cash flow statement) and F1 (balance sheet); underlying counterparty and collateral details are omitted from the packet",
+    "claim": "What transactions caused the (12,219) net cash used in operating activities\u2014including (12,330) from collateral deposits and (4,881) from unrealized losses on foreign exchange derivatives\u2014and the rise in other assets to 76,738 from 58,468 (tables in millions)?",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Change in collateral deposits, net | (12,330) | (1,916)",
+     "Change in unrealized losses on foreign exchange derivatives, net | (4,881) | 4,131",
+     "Net cash (used in) provided by operating activities | (12,219) | 1,856",
+     "Other assets | 76,738 | 58,468"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (cross-reference to omitted MD&A section and Note 17) and P5 (omitted addendum section listed in table of contents)",
+    "claim": "How did revenue, expenses, and pre-tax profit divide between State Street's Investment Servicing and Investment Management lines of business during 2026?",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Our operations are organized into two lines of business, Investment Servicing and Investment Management, which are defined based on products and services provided.",
+     "Additional information about our lines of business is provided in \"Line of Business Information\" in this Management's Discussion and Analysis and Note 17 to the consolidated financial statements in this Quarterly Report on Form 10-Q for the quarter ended September 30, 2026 (Form 10-Q).",
+     "Line of Business Information | 15"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (year-end 2025 backlog and exclusion of termination notices) and P5 (backlog caveats, with Q3 2026 backlog figures omitted)",
+    "claim": "How much of the $2.50 trillion investment servicing backlog as of December 31, 2025 has been installed in 2026, what is the remaining backlog as of September 30, 2026, and have any significant client termination notices occurred?",
     "facts": [
      "P3",
-     "P4",
      "P5"
     ],
     "quotes": [
      "Investment servicing assets remaining to be installed in future periods totaled approximately $2.50 trillion as of December 31, 2025, which will be reflected in AUC/A in future periods after installation and will generate servicing fee revenue in subsequent periods.",
-     "With respect to the current asset mandates of approximately $2.5 trillion of AUC/A that are yet to be installed as of December 31, 2025, we expect the conversion will mostly occur over the coming 24 months, with approximately 70% expected to be installed in 2026, with the balance expected to be installed largely in 2027.",
-     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States."
+     "Such assets therefore do not include the impact of clients who have notified us during the period of their intent to terminate or reduce their relationship with us, which from time to time may be significant.",
+     "Servicing fee/backlog estimates are not updated to reflect those changes, regardless of the magnitude or direction of, or reason for, any change."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P9 (issuance volume, net proceeds, and incorporation by reference to omitted exhibits) and F1 (balance sheet carrying amount).",
-    "claim": "What are the dividend rate, reset formula, and first optional redemption date for the 500,000 depositary shares of Series L Preferred Stock issued on August 12, 2026 for net proceeds of approximately $495.7 million?",
+    "basis": "stated in F1, F3, P3, P4, and P5; specific Series L terms, RWA drivers, Stress Capital Buffer, G-SIB surcharge, and remaining repurchase authorization are omitted",
+    "claim": "What are the dividend terms of the 5,000 shares of Series L preferred stock issued for 496 (table in millions), what drove the Standardized CET1 ratio from 11.6% at year-end 2025 to 11.0% at September 30, 2026, and what regulatory capital buffers and share repurchase capacity apply?",
     "facts": [
      "F1",
-     "P9"
+     "F3",
+     "P3",
+     "P4",
+     "P5"
     ],
     "quotes": [
-     "State Street expects to receive net proceeds from the offering of the Depositary Shares of approximately $495.7 million, after deducting the underwriting discount and estimated offering expenses.",
-     "The above descriptions of the Deposit Agreement, the Articles of Amendment, the form of certificate of the Series L Preferred Stock and the Underwriting Agreement are qualified in their entirety by reference to such exhibits, which are incorporated herein by reference."
+     "Preferred stock, no par, 3,500,000 shares authorized: | $ 496 | $ 0",
+     "Proceeds from issuance of preferred stock, net of issuance costs | 496 | 743",
+     "Our CET1 capital ratio was 11.6% as of December 31, 2025, compared to 10.9% as of December 31, 2024, primarily due to capital generated from earnings, partially offset by continued capital return.",
+     "\u2022Our return of capital to shareholders through common share repurchases and common stock dividends may be variable and is subject to various business and financial factors and regulatory requirements and approvals of our Board of Directors (the Board);",
+     "Series L, 5,000 shares issued and outstanding | \u2014 | \u2014 | 496",
+     "Common equity tier 1 ratio (CET1) | 11.0% | 10.8% | 11.3%"
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in P6; pricing terms for the floating-rate tranches and the final 414 characters of Item 8.01 are omitted.",
-    "claim": "What are the coupon, reset spread, and use of proceeds for the $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 issued on October 20, 2026, and what are the interest rate terms and net proceeds of State Street Bank's $500,000,000 Floating Rate Senior Notes due 2028 and $750,000,000 5.147% Senior Notes due 2028?",
+    "basis": "stated in P2, P4, and P5; quantitative NII rate-shock sensitivity tables and hedge maturity schedules are omitted from the packet",
+    "claim": "How sensitive are State Street's net interest income and 1.12% fully taxable-equivalent net interest margin to future interest-rate changes, shifts in non-interest-bearing deposits (which stood at $41,853 in 3Q26 versus $46,489 in 2Q26, table in millions), and hedging roll-offs?",
     "facts": [
-     "P6"
+     "P2",
+     "P4",
+     "P5"
     ],
     "quotes": [
-     "On October 20, 2026, State Street Corporation (\u201cState Street\u201d) issued $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 (the \u201cFixed-to-Floating Rate Senior Notes\u201d) in a public offering pursuant to a registration statement on Form S-3 (File No. 333-288196) and a related prospectus supplement filed with the Securities and Exchange Commission (the \u201cSEC\u201d).",
-     "Also on October 20, 2026, State Street Bank and Trust Company, a Massachusetts trust company (\u201cState Street Bank\u201d) and a direct, wholly-owned subsidiary of State Street, issued $500,000,000 aggregate principal amount of Floating Rate Senior Notes due 2028 and $750,000,000 aggregate principal amount of 5.147% Senior Notes due 2028 (together, the \u201cBank Notes\u201d), in an offering exempt from registration under Section 3(a)(2) of the Securities Act of 1933, as amended."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P7; the redemption date is after decision time T of 2026-11-16T11:37:06Z.",
-    "claim": "Did the scheduled November 18, 2026 redemption of the $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 close as planned after the November 16, 2026 decision time, and what was the total cash paid including accrued and unpaid interest?",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On October 14, 2026, State Street notified the holders of its $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 (the \u201cNotes\u201d) that it will redeem all of the Notes on November 18, 2026 (the \u201cRedemption Date\u201d).",
-     "The Notes will be redeemed at a redemption price equal to 100% of the principal amount of the Notes to be redeemed, plus accrued and unpaid interest thereon to, but excluding, the Redemption Date.",
-     "State Street intends to fund the aggregate redemption price using cash on hand."
+     "Uncertain economic and monetary policy environments continue to drive risks for ongoing NII volatility.",
+     "\u2022Our business activities expose us to interest rate risk;",
+     "Net interest margin (FTE)(a) | 1.12% | 1.13% | 0.96% | (1) | bp | 16 | bps",
+     "Non-interest-bearing | $32,265 | $34,569 | $34,395 | $35,267 | $39,643 | $46,489 | $41,853 | 21.7 | (10.0)"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in P5 (guidance issued October 14, 2026); fourth-quarter and full-year 2026 results occur after decision time T.",
-    "claim": "Did State Street achieve its updated full-year 2026 outlook\u2014including fee revenue up ~13 \u2013 14% YoY, NII up ~15 \u2013 16% YoY, expenses up ~8 \u2013 8.5% YoY, and 500+ bps operating leverage excluding notable items\u2014and did any notable items occur in the fourth quarter of 2026?",
+    "basis": "stated in P5 (1Q26 GAAP vs. ex-notables pre-tax margin), P4 (September 30, 2026 headcount), and P3 (2025 repositioning charges); 1Q26 notable-item details are omitted",
+    "claim": "What caused the 1Q26 notable items reflected in the gap between the 25.5 GAAP pre-tax margin and 29.0 pre-tax margin excluding notable items (table in %), and are further restructuring charges planned alongside the workforce level of approximately 51,000 employees?",
     "facts": [
+     "P3",
+     "P4",
      "P5"
     ],
     "quotes": [
-     "There were no notable items in any of 3Q26, 2Q26, or 3Q25.",
-     "Outlook does not reflect items outside of the normal course of business.",
-     "FY2026 updated outlook and key assumptions July OutlookA,B FY2026 Updated OutlookA Key AssumptionsA Fee Revenue Up ~12 \u2013 13% YoY Up ~13 \u2013 14% YoY \u2022 Global equity markets flat from current levels \u2022 Organic growth in Investment Services and Investment Management NII Up ~14 \u2013 15% YoY Up ~15 \u2013 16% YoY \u2022 Broadly aligned with current forward interest rates Expenses Up ~8% +/- YoY Up ~8 \u2013 8.5% YoY \u2022 Higher revenue-related costs \u2022 Investments in strategic and growth initiatives ~500bps operating leverage 500+ bps operating leverage"
+     "Notable items reduced income before income tax expense by $344 million in 2025, including repositioning charges of $326 million and other notable items of $18 million, net.",
+     "We had consolidated total assets of $403.34 billion, consolidated total deposits of $311.65 billion, consolidated total shareholders' equity of $28.71 billion and approximately 51,000 employees, as of September 30, 2026.",
+     "Pre-tax margin | 25.0 | 25.8 | 31.1 | 25.0 | 25.5 | 34.3 | 34.6 | 3.5 | 0.3 | 27.4 | 31.6 | 4.2",
+     "Pre-tax margin, excluding notable items(4) | 25.0 | 29.6 | 31.1 | 30.7 | 29.0 | 34.3 | 34.6 | 3.5 | 0.3 | 28.7 | 32.7 | 4.0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in F1 (net loans and allowance for credit losses on loans), F2 (provision for credit losses), and P5 (total allowance ending balances); loan portfolio composition and reserve assumptions are omitted",
+    "claim": "What borrower sectors and credit exposures comprise the 49,157 net loan portfolio (table in millions), and what assumptions supported reducing the allowance for credit losses on loans to $152 (table in millions) from $193 at year-end 2025?",
+    "facts": [
+     "F1",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Loans (less allowance for credit losses on loans of $152 and $193) | 49,157 | 46,589",
+     "Provision for credit losses | (4) | 9 | 12 | 51",
+     "Ending Balance | $166 | $175 | $201 | (5.1)% | (17.4)%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P8; base salary, Mr. Tahiri's compensation, and the replacement for Investment Services COO are not disclosed.",
-    "claim": "Who succeeded Ann Fogarty as Investment Services Chief Operating Officer following her September 14, 2026 appointment as Enterprise Chief Operating Officer with a $5,650,000 target incentive compensation award, and what are her base salary and Mostapha Tahiri's compensation as President of State Street Alpha?",
+    "basis": "stated in P5 (CEO commentary) and P2 (new-product and third-party dependency risk factors); Exhibit 99.3 and quantitative medium-term targets are not included in the packet",
+    "claim": "What are the contract size, implementation schedule, and expected financial contribution of the first Wealth Services mandate won in 3Q, and what quantitative benchmarks define State Street's medium-term targets?",
     "facts": [
-     "P8"
+     "P5",
+     "P2"
     ],
     "quotes": [
-     "Mostapha Tahiri, currently Enterprise Chief Operating Officer, has been appointed President of State Street Alpha and will continue as Chairman of Asia Pacific.",
-     "Ann Fogarty, currently Investment Services Chief Operating Officer, has been appointed Enterprise Chief Operating Officer, succeeding Mr. Tahiri.",
-     "In connection with her appointment as COO, Ms. Fogarty\u2019s target incentive compensation award will be $5,650,000."
+     "In 3Q, we won our first Wealth Services mandate with one of the largest registered investment advisors in the United States.",
+     "We enter the final quarter of the year with strong momentum, a clear strategy, and confidence in our ability to deliver against our medium-term targets while continuing to create long-term value for shareholders.",
+     "New products and services, such as State Street Alpha and those related to wealth servicing, alternative investment management or digital assets or incorporating artificial intelligence, often also involve dependencies on third parties to, among other things, access or support innovative technologies, develop new distribution channels or form collaborative product and service offerings, and can require complex strategic alliances and joint venture relationships."
     ],
     "support": "supported"
    }
@@ -1357,8 +1677,17 @@
  },
  "ticker": "STT",
  "under_review": null,
+ "upside": 0.03309663038052357,
  "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "share count does not reconcile with filed EPS"
+ "value_base": 157.58086425602278,
+ "value_bear": 131.33701725735008,
+ "value_bull": 203.4565058600248,
+ "value_per_filed_share": {
+  "base": 157.58086425602278,
+  "bear": 131.33701725735008,
+  "bull": 203.4565058600248
+ },
+ "valued": true,
+ "verdict": "WATCH",
+ "verdict_reason": "expected return +0.1 points a year against the required return over 3 years (BUY needs 4 or more)"
 }

@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T17:59:43Z",
+ "generated_at": "2026-11-26T18:19:23Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "gemini-4-hydrogen-high",
@@ -10416,30 +10416,61 @@
    "verdict_reason": "no usable tax rate in the filings"
   },
   "STT": {
-   "alpha_pts": null,
-   "analysis": "complete",
-   "claims": 96,
-   "claims_supported": 90,
-   "date": "2026-11-16T11:37:06Z",
+   "alpha_pts": 0.10289505346149086,
+   "analysis": "analysis_incomplete",
+   "based_on": {
+    "accepted": "2026-10-28T20:21:42.000Z",
+    "accepted_utc": "2026-10-29T00:21:42Z",
+    "accession": "0000093751-26-000600",
+    "decision_time": "2026-11-26T18:00:11Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 83,
+   "claims_supported": 70,
+   "date": "2026-11-26T18:00:11Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.fin.v1 2026-11-18 WO_NC9b"
+   },
+   "equity_value": 45543863806.411446,
    "family": "financial",
-   "flags": [
-    "State Street Corporation issued $750,000,000 aggregate principal amount of Fixed-to-Floating Rate Senior Notes due 2037 in a public offering, expecting net proceeds of approximately $745.6 million.",
-    "State Street Bank and Trust Company issued $500,000,000 aggregate principal amount of Floating Rate Senior Notes due 2028 and $750,000,000 aggregate principal amount of 5.147% Senior Notes due 2028 in an offering exempt from registration.",
-    "State Street notified holders of its $500,000,000 aggregate principal amount of 1.684% Fixed-to-Floating Rate Senior Notes due 2027 that it will redeem all of the notes at 100% of principal plus accrued and unpaid interest using cash on hand."
-   ],
+   "far_from_price": false,
+   "filed_shares": 289019000.0,
+   "flags": [],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.09115143990563293,
+   "market_cap_at_publish": 44084805300,
    "model": "gemini-4-hydrogen-high",
    "news_count": 0,
-   "no_value_reason": "share count does not reconcile with filed EPS",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 162.03,
    "qwen_book": null,
-   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
-   "source": "screener list refresh",
+   "release_truncated": [
+    "0000093751-26-000592"
+   ],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 166.81238778109253,
+    "3000": 148.34934073095303
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "share count does not reconcile with filed EPS"
+   "upside": 0.03309663038052357,
+   "value_base": 157.58086425602278,
+   "value_bear": 131.33701725735008,
+   "value_bull": 203.4565058600248,
+   "value_per_filed_share": {
+    "base": 157.58086425602278,
+    "bear": 131.33701725735008,
+    "bull": 203.4565058600248
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +0.1 points a year against the required return over 3 years (BUY needs 4 or more)"
   },
   "SWBI": {
    "alpha_pts": -13.398321406644998,
@@ -12130,12 +12161,12 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 149,
+ "valued_count": 150,
  "verdict_counts": {
   "AVOID": 67,
   "BUY": 56,
-  "NO_CALL": 110,
-  "WATCH": 17
+  "NO_CALL": 109,
+  "WATCH": 18
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }
