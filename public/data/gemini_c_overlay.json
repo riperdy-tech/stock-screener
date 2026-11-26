@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T23:33:53Z",
+ "generated_at": "2026-11-26T23:41:56Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -10676,39 +10676,70 @@
    "verdict_reason": "expected return -29.2 points a year against the required return over 3 years"
   },
   "SNDK": {
-   "alpha_pts": null,
+   "alpha_pts": 56.16910296630551,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-10-30T20:42:14.000Z",
     "accepted_utc": "2026-10-31T00:42:14Z",
     "accession": "0001628280-26-068601",
-    "decision_time": "2026-11-24T00:46:39Z",
+    "decision_time": "2026-11-26T23:34:45Z",
     "form": "10-Q",
     "period": "2026-10-02"
    },
-   "claims": 102,
-   "claims_supported": 96,
-   "date": "2026-11-24T00:46:39Z",
-   "family": "family_not_built",
+   "claims": 96,
+   "claims_supported": 93,
+   "date": "2026-11-26T23:34:45Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 124285608514.49345,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 142289365.0,
    "flags": [
-    "Western Digital Corporation (WDC) completed the spin-off of Sandisk by distributing 116,035,464 shares, or 80.1%, of Sandisk's outstanding common stock to WDC stockholders while retaining 28,827,787 shares, or 19.9%, after which Sandisk began trading on Nasdaq under the symbol SNDK.",
-    "WDC disposed of its remaining Sandisk common stock through debt-for-equity exchanges of 21,314,768 shares (14.6%) and 5,821,135 shares, plus subsequent share exchanges, resulting in WDC having sold or exchanged all of its retained shares.",
-    "Sandisk entered into a Loan Agreement providing a $2.0 billion Term Loan B facility and a $1.5 billion revolving credit facility (including up to $150 million for letters of credit), borrowed $2.0 billion under the Term Loan Facility, and used part of the proceeds to make a $1.5 billion net distribution payment to WDC."
+    "The Board approved a $14 billion share repurchase program, which the company may suspend or discontinue at any time.",
+    "In the fiscal first quarter, Sandisk repurchased about 3.2 million shares and returned $5.0 billion to stockholders; the cash flow statement shows the repurchase outflow.",
+    "Sandisk entered into Amendment No. 1 to its loan agreement. It refinanced the revolving credit facility in full at an aggregate principal amount of $1,500.0 million and extended maturity to September 9, 2031. No amounts were outstanding as of October 2, 2026."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
+   "ke": 0.10965930240162478,
+   "loss_record": {
+    "cause": "profit_in_newest_year",
+    "explanation": "",
+    "label": "operating income was at or below zero in 3 of the last 4 fiscal years; the newest year earned an operating profit, and the value rests on it",
+    "quotes": [],
+    "version": "thin_record.v1 2026-11-27"
+   },
+   "market_cap_at_publish": 83791356599,
+   "model": "claude-sonnet-5-5",
    "news_count": 0,
-   "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 73.61,
    "qwen_book": null,
    "release_truncated": [],
-   "screener_commit": "5974bf5f7bb3a82ac673c20ded73235c4937ccc2",
-   "source": "screener list refresh",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 835.5715200629515,
+    "3000": 911.3701226169978
+   },
+   "seeds_agree": true,
+   "share_unit_note": "filed shares 142,289,365 against 1,138,314,857 quoted (x8); values are per quoted share",
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+   "upside": 0.4832748097072428,
+   "value_base": 109.18385874255016,
+   "value_bear": 48.73943776684832,
+   "value_bull": 738.9677357360499,
+   "value_per_filed_share": {
+    "base": 873.4708213399747,
+    "bear": 389.91548043966156,
+    "bull": 5911.741556955647
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +56.2 points a year against the required return over 3 years"
   },
   "SPG": {
    "alpha_pts": -8.148640943031682,
@@ -12844,11 +12875,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 163,
+ "valued_count": 164,
  "verdict_counts": {
   "AVOID": 73,
-  "BUY": 60,
-  "NO_CALL": 96,
+  "BUY": 61,
+  "NO_CALL": 95,
   "WATCH": 21
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
