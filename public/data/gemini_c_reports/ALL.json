@@ -1,254 +1,81 @@
 {
- "alpha_pts": 0.9550513827892404,
+ "alpha_pts": 6.782738397724438,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 69,
- "claims_supported": 64,
- "date": "2026-11-17T23:03:09Z",
+ "based_on": {
+  "accepted": "2026-11-04T21:18:21.000Z",
+  "accepted_utc": "2026-11-05T02:18:21Z",
+  "accession": "0000899051-26-000157",
+  "decision_time": "2026-11-26T22:32:11Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 62,
+ "claims_supported": 55,
+ "date": "2026-11-26T22:32:11Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 11 of 12",
+   "run 1000: quotes_verified: 9 of 9",
    "run 3000: base_year_not_representative",
-   "run 3000: quotes_verified: 10 of 10"
+   "run 3000: confidence_low",
+   "run 3000: quotes_verified: 11 of 11"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0936, F 10",
+  "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0912, F 10",
   "route": "financial",
-  "run_gap": 0.07863333687940474,
+  "run_gap": 0.14294839981968024,
   "runs": {
    "1000": {
     "confidence": "low",
     "diagnostics": {
-     "equity_value": 64195784678.97628,
-     "implied_pb": 2.4276109669832766,
-     "seam_ratio": 1.031333333333335,
-     "tv_share": 0.3605922647583007
+     "equity_value": 81482209187.42914,
+     "implied_pb": 3.0818559586056145,
+     "seam_ratio": 1.0555833333333333,
+     "tv_share": 0.4402683287707439
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 11 of 12"
-    ],
-    "inputs": {
-     "book_growth": [
-      0.08,
-      0.05,
-      0.04,
-      0.04,
-      0.04
-     ],
-     "fade_years": 10,
-     "long_run_roe": 0.14,
-     "roe": [
-      0.34,
-      0.24,
-      0.2,
-      0.175,
-      0.16
-     ],
-     "terminal_growth": 0.03
-    },
-    "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0936, F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 5,
-     "kept": 64
-    },
-    "ranges": {
-     "book_growth_y3": [
-      0.02,
-      0.06
-     ],
-     "long_run_roe": [
-      0.11,
-      0.17
-     ],
-     "terminal_growth": [
-      0.02,
-      0.04
-     ]
-    },
-    "reasons": {
-     "book_growth": {
-      "quotes": [
-       {
-        "id": "F3",
-        "quote": "Treasury stock purchases | (2,904) | (799)"
-       },
-       {
-        "id": "F3",
-        "quote": "Dividends paid on common stock | (816) | (773)"
-       },
-       {
-        "id": "F1",
-        "quote": "Total accumulated other comprehensive (loss) income | (2,148) | 255"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Common equity was about $30.3bn at September 30, 2026, up about 6% from $28.6bn. Earnings were largely offset by buybacks, dividends and a swing to unrealised losses. Buybacks are running at more than three times the prior-year pace. Growth should stay well below the return on equity because most earnings are paid out, so I assume 4-5% a year once income normalises."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P4",
-        "quote": "Combined ratio | 86.6 | 80.1 | 85.1 | 89.4"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The return needs a long fade, because it must come down from a peak near 40% to about 14% as the hard market softens. A 10-year fade is a middle estimate for a cyclical personal-lines business."
-     },
-     "long_run_roe": {
-      "quotes": [
-       {
-        "id": "P2",
-        "quote": "Certain states impose or are contemplating regulatory limitations on the amount of profit that insurance companies may earn."
-       },
-       {
-        "id": "P3",
-        "quote": "For the last ten years, the average annual impact of catastrophes on our loss ratio was 8.8 points"
-       },
-       {
-        "id": "P3",
-        "quote": "was 42.3%, an increase of 16.5 points from 25.8%"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "A personal-lines insurer facing rate regulation, competition and catastrophe volatility should earn well above the 9.36% cost of equity but far below the current 40%+. About 14% reflects a combined ratio in the low-to-mid 90s plus investment income. The ten-year average catastrophe load is 8.8 points of loss ratio, and some states cap profits."
-     },
-     "roe": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Net income applicable to common shareholders, basic | 2,050 | 3,717 | 7,719 | 6,362"
-       },
-       {
-        "id": "REC",
-        "quote": "Return on opening common equity over the years above: min -0.0607, p25 -0.0204, median 0.0531, p75 0.2885, max 0.5229, last 0.5229."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Year 1 (FY2026) is largely known: nine-month income to common was $7.7bn, and a normal Q4 gives about $9.5-10bn, or roughly 0.34 on $28.6bn opening equity. After that, returns fade as reserve releases shrink, the weather normalises and auto underlying margins weaken (Q3 auto underlying combined ratio 89.8 vs 86.0). The historical record shows how cyclical the return is."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "Auto and homeowners insurance policies were 3.4% and 3.3% higher than last year, respectively"
-       },
-       {
-        "id": "P2",
-        "quote": "Increasing adoption of newer technologies such as advanced driver assistance systems and autonomous vehicles"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Policies in force are growing about 3-4%, but long-run equity growth should track nominal growth, with the anchor at 3.75%. I choose slightly below that because of heavy payout and the risk that autonomous-vehicle trends shrink the auto market."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.1,
-      "input_hit": "long_run_roe",
-      "risk": "Faster margin normalisation: softer pricing, auto severity inflation from oil, tariffs and attorney involvement, fewer reserve releases and heavier catastrophe years push returns down quickly."
-     },
-     {
-      "bear_value": 0.28,
-      "input_hit": "roe",
-      "risk": "Year-1 and year-2 income undershoot because Q4 catastrophe losses are heavy or reserve releases end."
-     },
-     {
-      "bear_value": 0.01,
-      "input_hit": "book_growth",
-      "risk": "Further unrealised bond losses or investment-market stress reduce book equity, while buybacks continue at the current pace."
-     }
-    ],
-    "route": "financial",
-    "scenarios": {
-     "bear": {
-      "book_growth": [
-       0.06,
-       0.030000000000000002,
-       0.02,
-       0.02,
-       0.02
-      ],
-      "long_run_roe": 0.11,
-      "terminal_growth": 0.02
-     },
-     "bull": {
-      "book_growth": [
-       0.1,
-       0.07,
-       0.06,
-       0.06,
-       0.06
-      ],
-      "long_run_roe": 0.17,
-      "terminal_growth": 0.04
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "capital_constrained": "no",
-     "institution": "insurer",
-     "roe_position": "The 2025 return of 52% and the 12-month return of 41% to September 2026 are far above normal for a personal-lines insurer. They reflect a hard-market margin recovery after the 2022-23 losses: rate increases pushed the combined ratio to about 85. Large prior-year reserve releases, higher investment income and a base year with disposition gains added to it. The opening equity base is also small because of the earlier loss years. The return should fade as rates, reserve releases and catastrophe losses normalise.",
-     "why": "2025 income to common of $10.2bn on opening common equity of $28.6bn is a cyclical peak. It includes disposition gains and $1.8bn of reserve releases, so it is not a through-cycle level. The company is returning capital quickly (nine-month buybacks of $2.9bn plus dividends) with flat debt, so equity growth is limited by payout choices, not regulatory capital. Subsidiary dividend limits and rate regulation remain background constraints."
-    },
-    "value_at_old_defaults": 45.88640778038408,
-    "values": {
-     "base": 260.0206744830571,
-     "bear": 214.20159001320604,
-     "bull": 338.6268232276866
-    }
-   },
-   "3000": {
-    "confidence": "medium",
-    "diagnostics": {
-     "equity_value": 69450303620.92676,
-     "implied_pb": 2.6263144780235868,
-     "seam_ratio": 1.0452272727272716,
-     "tv_share": 0.4069386716991243
-    },
-    "flags": [
-     "base_year_not_representative",
-     "quotes_verified: 10 of 10"
+     "quotes_verified: 9 of 9"
     ],
     "inputs": {
      "book_growth": [
       0.08,
       0.09,
+      0.08,
       0.07,
-      0.06,
-      0.05
+      0.06
      ],
      "fade_years": 10,
-     "long_run_roe": 0.14,
+     "long_run_roe": 0.15,
      "roe": [
-      0.34,
-      0.26,
-      0.21,
-      0.18,
-      0.16
+      0.35,
+      0.25,
+      0.22,
+      0.2,
+      0.18
      ],
      "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0936, F 10",
+    "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0912, F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 5,
-     "kept": 64
+     "dropped_unsupported": 7,
+     "kept": 51
     },
     "ranges": {
      "book_growth_y3": [
       0.04,
-      0.09
+      0.11
      ],
      "long_run_roe": [
-      0.115,
-      0.17
+      0.12,
+      0.18
      ],
      "terminal_growth": [
-      0.03,
-      0.04
+      0.025,
+      0.045
      ]
     },
     "reasons": {
@@ -259,54 +86,50 @@
         "quote": "Treasury stock purchases | (2,904) | (799)"
        },
        {
-        "id": "F3",
-        "quote": "Dividends paid on common stock | (816) | (773)"
+        "id": "P6",
+        "quote": "$1.3 billion remains under the $4.0 billion share repurchase authorization initiated in February 2026"
        }
       ],
       "quotes_given": 2,
-      "why": "Common equity was about $30.3bn at September 30 versus $28.6bn at the 2025 year-end base. Buybacks ($2.9bn in nine months, against $0.8bn a year earlier) and dividends absorb most earnings, so growth is held to about 5-9% a year. Unrealized bond losses also reduced equity in 2026."
+      "why": "Common equity was 30,310 at 30 Sep 2026 against 28,609 at year-end 2025, held back by heavy buybacks and an unrealized loss on bonds. Allstate pays out most earnings, leaving growth in the high single digits that trends down as earnings fall. The buyback authorization has only $1.3 billion left, so the pace may slow and growth could rise."
      },
      "fade_years": {
       "quotes": [
        {
         "id": "P6",
-        "quote": "Adjusted net income* | 2,493 | 2,976 | (16.2)% | 7,620 | 5,516 | 38.1%"
+        "quote": "Underlying combined ratio* | 80.5 | 78.7 | 1.8 | 80.0 | 80.4 | (0.4)"
        }
       ],
       "quotes_given": 1,
-      "why": "The excess-return fade from about 16% to 14% is gradual because the franchise has scale and growing policy counts, but competition and rate regulation erode it over roughly a decade."
+      "why": "The competitive advantage in cost and scale should erode gradually, and it takes several years to move from a high-teens return to the mid-teens long-run level. A decade-long fade reflects both the pricing cycle and the long persistence of insurer franchise returns."
      },
      "long_run_roe": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on opening common equity over the years above: min -0.0607, p25 -0.0204, median 0.0531, p75 0.2885, max 0.5229, last 0.5229."
+        "quote": "Return on opening common equity over the years above: min -0.0607, p25 -0.0204, median 0.0531"
        },
        {
-        "id": "P4",
-        "quote": "Combined ratio | 86.6 | 80.1 | 85.1 | 89.4"
+        "id": "P3",
+        "quote": "the average annual impact of catastrophes on our loss ratio was 8.8 points"
        }
       ],
       "quotes_given": 2,
-      "why": "Allstate's through-cycle personal lines ROE is well below the current peak. The filed history shows a median of about 5% and a swing from negative to 52%, and auto and homeowners margins move with the catastrophe, inflation and rate-approval cycle. I use about 14%, above the 9.4% cost of equity because scale, a low-cost position and investment income support some excess return, but well below the current level. State profit limits and competition cap it."
+      "why": "Over the filed years the return was negative to low, with a median of 0.0531, so the current 40%-plus is a peak. A personal-lines carrier with a ten-year average catastrophe load of 8.8 points and a cost of equity of 9.1% should settle in the mid-teens, above r because of scale and low-cost distribution. Competitive pricing and rate regulation limit it."
      },
      "roe": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Net income increased $1.36 billion to $7.72 billion in the first nine months of 2026"
+        "id": "P6",
+        "quote": "Adjusted net income return on equity* was 39.7% over the last 12 months"
        },
        {
         "id": "P4",
-        "quote": "Effect of prior year reserve reestimates on combined ratio | (5.0) | (2.9) | (5.3) | (2.5)"
-       },
-       {
-        "id": "REC",
-        "quote": "2025-12-31 | $30,610.0 million | $2,001.0 million | $28,609.0 million | $10,165.0 million | 0.5229 | 0.4716"
+        "quote": "Prior year reserve reestimates, excluding catastrophes (1) | $(763) | $(396) | $(2,471) | $(1,007)"
        }
       ],
-      "quotes_given": 3,
-      "why": "Nine-month income to common is $7.72bn, which with a normal Q4 implies about 34% on opening common equity of $28.6bn for 2026. After that I fade the ROE as the equity base grows, reserve releases fade and the combined ratio moves back toward the low 90s."
+      "quotes_given": 2,
+      "why": "Nine-month 2026 income to common of 7,719 plus a normal Q4 gives roughly $10 billion on opening common equity of 28,609, so about 0.35. After that, reserve releases of about 5 points of combined ratio and the low-catastrophe-load years should fade, and auto average premiums are falling. The return therefore steps down toward the high teens."
      },
      "terminal_growth": {
       "quotes": [
@@ -315,87 +138,270 @@
         "quote": "long-run nominal growth anchor g_anchor 0.0375"
        },
        {
-        "id": "P6",
-        "quote": "Total policies in force (in thousands) | 217,610 | 209,481 | 3.9%"
+        "id": "P2",
+        "quote": "Since auto insurance constitutes a significant portion of the overall business, we may be more sensitive than other insurers"
        }
       ],
       "quotes_given": 2,
-      "why": "Growth is anchored near nominal GDP. Policies in force are growing about 3-4% and premiums are rising with inflation, but a mature market share and heavy payout limit book growth beyond the fade."
+      "why": "Long-run growth of a mature top-three US personal lines writer should sit near nominal GDP, close to the anchor given. Auto concentration and a possible shrinking of the auto market from autonomous or driver-assistance technology argue for slightly below it."
      }
     },
     "risks": [
      {
-      "bear_value": 0.1,
+      "bear_value": 0.11,
       "input_hit": "long_run_roe",
-      "risk": "Underwriting margins normalize faster: heavier catastrophe losses, fewer reserve releases and auto severity or rate regulation squeeze the combined ratio."
+      "risk": "Catastrophe load or adverse reserve development reverses the recent releases, and auto margins compress as lower-priced products and competition erode pricing"
+     },
+     {
+      "bear_value": 0.15,
+      "input_hit": "roe",
+      "risk": "Near-term returns fall faster as reserve releases stop and auto underlying combined ratio keeps rising"
      },
      {
       "bear_value": 0.03,
       "input_hit": "book_growth",
-      "risk": "Unrealized bond losses and a hard-market reversal cut earnings and slow equity growth, while buybacks still drain capital."
-     },
-     {
-      "bear_value": 0.025,
-      "input_hit": "terminal_growth",
-      "risk": "Nominal growth slows and the book shrinks in auto as technology and regulation reduce demand and returns."
+      "risk": "Rising rates lead to realized bond losses and equity erosion, with buybacks cut to rebuild capital"
      }
     ],
     "route": "financial",
     "scenarios": {
      "bear": {
       "book_growth": [
-       0.049999999999999996,
-       0.05999999999999999,
        0.04,
-       0.029999999999999992,
+       0.049999999999999996,
+       0.04,
+       0.030000000000000006,
        0.019999999999999997
       ],
-      "long_run_roe": 0.115,
-      "terminal_growth": 0.03
+      "long_run_roe": 0.12,
+      "terminal_growth": 0.025
      },
      "bull": {
       "book_growth": [
-       0.09999999999999999,
-       0.10999999999999999,
-       0.09,
-       0.07999999999999999,
-       0.06999999999999999
+       0.11,
+       0.12,
+       0.11,
+       0.1,
+       0.09
       ],
-      "long_run_roe": 0.17,
-      "terminal_growth": 0.04
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.045
      }
     },
     "situation": {
      "base_year_representative": "no",
      "capital_constrained": "no",
      "institution": "insurer",
-     "roe_position": "Reported ROE is very high because the personal auto and homeowners underwriting cycle is near its peak. Combined ratios are in the mid-80s, there are large prior-year reserve releases, and net investment income is rising. The 2025 base year also includes disposition gains. The ROE is on a common equity base that was depressed by 2022-2023 losses, so it flatters the long-run level. I expect it to fade as rates normalize, reserve releases shrink, catastrophe losses revert and equity compounds.",
-     "why": "The 2025 ROE of 52% rests on a 2022-23 loss-depleted equity base, $1.5bn of disposition gains and $1.8bn of reserve releases, so it is not a run-rate. Capital does not appear to limit book growth: nine-month buybacks of $2.9bn plus dividends were funded from $10.0bn of operating cash flow with flat debt. Book equity growth is therefore set by earnings less a near-full payout, not by regulatory capital. Parent deployable capital and statutory surplus are not shown in the packet, so that conclusion carries some uncertainty."
+     "roe_position": "The return on equity is far above normal because of an exceptional underwriting stretch. The Property-Liability combined ratio fell to 85.1 in nine months of 2026, and 2025 was 85.2, from 104.5 in 2023. Large prior-year reserve releases helped, and so did higher net investment income. 2025 also included disposition gains. Equity was small after the 2022-23 losses, which inflates the ratio. Part of the margin will fade as releases shrink, catastrophe losses revert to the ten-year average and auto pricing softens. Equity has also grown, so the ratio mechanically falls.",
+     "why": "2025 return of 0.5229 on a depressed opening equity base included about $1.1 billion of after-tax disposition gains and $1.8 billion of reserve releases, so it is not repeatable. The company is returning capital well above its dividend ($2,904 million of buybacks in nine months of 2026), so regulatory capital is not binding growth now. Subsidiary dividend limits and rating-agency capital metrics are a latent constraint, but the evidence shows no sign they bind."
     },
-    "value_at_old_defaults": 45.88640778038408,
+    "value_at_old_defaults": 47.6362730197702,
     "values": {
-     "base": 281.30374729231295,
-     "bear": 227.7111508581114,
-     "bull": 365.3114292294751
+     "base": 330.0966571312169,
+     "bear": 246.9677808008537,
+     "bull": 478.78146672831446
+    }
+   },
+   "3000": {
+    "confidence": "low",
+    "diagnostics": {
+     "equity_value": 70611437480.47105,
+     "implied_pb": 2.670696849226696,
+     "seam_ratio": 1.0270000000000012,
+     "tv_share": 0.39639323943286775
+    },
+    "flags": [
+     "base_year_not_representative",
+     "confidence_low",
+     "quotes_verified: 11 of 11"
+    ],
+    "inputs": {
+     "book_growth": [
+      0.1,
+      0.07,
+      0.05,
+      0.045,
+      0.04
+     ],
+     "fade_years": 10,
+     "long_run_roe": 0.14,
+     "roe": [
+      0.35,
+      0.26,
+      0.21,
+      0.18,
+      0.16
+     ],
+     "terminal_growth": 0.035
+    },
+    "old_defaults_inputs": "roe 0.0531, growth 0.0266, r 0.0912, F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 7,
+     "kept": 51
+    },
+    "ranges": {
+     "book_growth_y3": [
+      0.02,
+      0.08
+     ],
+     "long_run_roe": [
+      0.1,
+      0.18
+     ],
+     "terminal_growth": [
+      0.025,
+      0.045
+     ]
+    },
+    "reasons": {
+     "book_growth": {
+      "quotes": [
+       {
+        "id": "F3",
+        "quote": "Treasury stock purchases | (2,904) | (799)"
+       },
+       {
+        "id": "P6",
+        "quote": "As of Sept. 30, $1.3 billion remains under the $4.0 billion share repurchase authorization initiated in February 2026."
+       },
+       {
+        "id": "P6",
+        "quote": "Unrealized net capital losses were $2.6 billion (pre-tax) at September 30, 2026"
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Common equity was 30,310 at Sept 30 against 28,609 at year-end, so year 1 growth is about 10%. This is held back by buybacks and a $2.6bn unrealized loss on bonds. Later growth falls as earnings fall and heavy repurchases continue, with payout near 70-75% of earnings."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P3",
+        "quote": "Effect of prior year reserve reestimates on combined ratio | (3.1) | (0.5) | 1.2"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The current ROE is far above the long-run level, so the fade needs many years. Ten years is a middle assumption for competition and regulation to erode excess margins gradually."
+     },
+     "long_run_roe": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on opening common equity over the years above: min -0.0607, p25 -0.0204, median 0.0531, p75 0.2885, max 0.5229, last 0.5229."
+       },
+       {
+        "id": "P2",
+        "quote": "Certain states impose or are contemplating regulatory limitations on the amount of profit that insurance companies may earn."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Personal lines can earn well above the 9.1% cost of equity when well run, but the 2021-2023 record (-6% to 5%) shows cycle and catastrophe risk. A mid-teens ROE through the cycle is a reasonable fade target. It is above r because of scale and pricing sophistication, and below the current ROE because of competition and rate regulation."
+     },
+     "roe": {
+      "quotes": [
+       {
+        "id": "F2",
+        "quote": "Net income applicable to common shareholders, diluted | $ 2,050 | $ 3,717 | $ 7,719 | $ 6,362"
+       },
+       {
+        "id": "P4",
+        "quote": "Effect of prior year reserve reestimates on combined ratio | (5.0) | (2.9) | (5.3) | (2.5)"
+       },
+       {
+        "id": "P6",
+        "quote": "The underlying auto insurance combined ratio* was 89.8 in the third quarter of 2026, compared to 86.0 in the prior year quarter."
+       }
+      ],
+      "quotes_given": 3,
+      "why": "Nine-month 2026 income to common of 7,719 implies about 10bn for the year, or about 35% of opening common equity of 28,609. After that, reserve releases, auto margin pressure and catastrophes reverting to the 8.8-point ten-year average should pull ROE down gradually."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Policies in force (in thousands) | 39,319 | 38,056 | 3.3%"
+       },
+       {
+        "id": "REC",
+        "quote": "Cost of equity r 0.0912; long-run nominal growth anchor g_anchor 0.0375."
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Policies in force are growing at about 3-4%, and the long-run nominal anchor is 3.75%. Terminal growth close to that anchor, slightly below, is appropriate for a mature personal lines insurer with auto concentration risk."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "long_run_roe",
+      "risk": "Catastrophe losses and reserve development revert hard: reserve releases stop or reverse, and the underwriting cycle softens with price competition and auto margin compression."
+     },
+     {
+      "bear_value": 0.2,
+      "input_hit": "roe",
+      "risk": "Near-term ROE falls faster than assumed: Q4 catastrophes, further investment losses from rising rates, and auto underlying margin deterioration."
+     },
+     {
+      "bear_value": 0.03,
+      "input_hit": "book_growth",
+      "risk": "Interest-rate losses on the bond portfolio and a lower capital return reduce or slow the growth of book equity, or higher payout reduces it."
+     }
+    ],
+    "route": "financial",
+    "scenarios": {
+     "bear": {
+      "book_growth": [
+       0.07,
+       0.04000000000000001,
+       0.02,
+       0.014999999999999996,
+       0.009999999999999998
+      ],
+      "long_run_roe": 0.1,
+      "terminal_growth": 0.025
+     },
+     "bull": {
+      "book_growth": [
+       0.13,
+       0.1,
+       0.08,
+       0.075,
+       0.07
+      ],
+      "long_run_roe": 0.18,
+      "terminal_growth": 0.045
+     }
+    },
+    "situation": {
+     "base_year_representative": "no",
+     "capital_constrained": "no",
+     "institution": "insurer",
+     "roe_position": "ROE is far above any normal level. It rests on a very strong underwriting cycle: the Property-Liability combined ratio fell from 104.5 in 2023 to 85.2 in 2025 and 85.1 over nine months of 2026, aided by large prior-year reserve releases and higher net investment income. The ROE is also measured on an opening equity base that was small after the 2022-23 losses. Over the years in the record the ROE ranged from -6% to +52%.",
+     "why": "The 2025 ROE of 52% reflects peak underwriting margins, about $1.8bn of reserve releases and about $1.1bn of disposal gains, so it is not a base to extrapolate. Capital is not binding: Allstate is returning most earnings through buybacks, and book equity growth is a choice about payout, not a regulatory limit. The holding company still depends on dividends from regulated subsidiaries, and some states limit insurer profits, so ROE should fade toward the mid-teens as pricing competition, reserve releases and catastrophe normalization take effect."
+    },
+    "value_at_old_defaults": 47.6362730197702,
+    "values": {
+     "base": 286.05752961260407,
+     "bear": 215.99600024644897,
+     "bull": 427.6345377138283
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 45.88640778038408,
-  "value_at_old_defaults_quoted": 45.88640778038408,
+  "value_at_old_defaults": 47.6362730197702,
+  "value_at_old_defaults_quoted": 47.6362730197702,
   "version": "decided.fin.v1 2026-11-18 WO_NC9b"
  },
- "equity_value": 72293876528.10068,
+ "equity_value": 82287391639.63728,
  "family": "financial",
  "far_from_price": false,
  "filed_shares": 267100000.0,
  "flags": [
   "Arity, an Allstate subsidiary, acquired substantially all of the assets of INRIX, Inc., a transportation intelligence and mobility analytics provider.",
-  "Arity entered into a definitive agreement to acquire the remaining ownership of Replica, a mobility data and technology company. Closing is expected before the end of 2026.",
-  "Allstate closed the sale of its employer voluntary benefits business (American Heritage Life Insurance Company and American Heritage Service Company) and recorded a gain on the sale."
+  "Arity entered into a definitive agreement to acquire the remaining ownership of Replica, a mobility data and technology company. The deal is expected to close before the end of the year, subject to customary closing conditions.",
+  "A press report says an Allstate outage locked customers out of their accounts. The snippet names Georgia among the affected areas."
  ],
  "in_code_book": false,
- "ke": 0.09360305732783658,
+ "ke": 0.09115143990563293,
  "market_cap_at_publish": 67155328553,
  "model": "claude-sonnet-5-5",
  "news": [
@@ -428,197 +434,209 @@
    "why": "Allstate reportedly plans to cut thousands of jobs while expanding AI use, a major restructuring and operational shift not named in the analysis with uncertain net impact on margins and service."
   }
  ],
+ "news_read": {
+  "evidence_file": "ALL_20261126T223211Z.json",
+  "rows": 2,
+  "rows_left_out": 0,
+  "text_from": [
+   "headline_and_snippet",
+   "headline_and_snippet"
+  ],
+  "warnings": [
+   "c3b983d7e3f1",
+   "557141622bf7"
+  ]
+ },
  "no_value_reason": null,
  "pending_offer": null,
  "price_at_publish": 271.39,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+ "release_truncated": [
+  "0000899051-26-000156"
+ ],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
  "seed_base": {
-  "1000": 260.0206744830571,
-  "3000": 281.30374729231295
+  "1000": 330.0966571312169,
+  "3000": 286.05752961260407
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "news warning (news:2026-11-25:c3b983d7e3f1:8-K:0000899051-26-000162)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 text",
-    "claim": "Allstate mainly sells personal property-liability insurance (auto, homeowners and other personal lines) to consumers. The Allstate Protection segment accounts for 93.9% of consolidated insurance premiums and contract charges in the latest annual report.",
+    "basis": "stated in the 10-K Item 1 business description",
+    "claim": "Allstate is mainly a personal lines property-liability insurer. It sells auto, homeowners and other personal lines insurance, plus select commercial coverages, to consumers, and it also sells consumer protection products.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The Allstate Corporation is one of the largest publicly held personal lines insurers in the United States.",
-     "Our Allstate Protection segment accounted for 93.9% of Allstate\u2019s 2025 consolidated insurance premiums and contract charges"
+     "The Allstate Corporation is one of the largest publicly held personal lines insurers in the United States."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K segment table and the 10-Q MD&A",
-    "claim": "Reporting segments are Allstate Protection, Run-off Property-Liability, Protection Services and Corporate. Underwriting income measures the two insurance segments, and adjusted net income measures Protection Services and Corporate.",
+    "basis": "stated in the 10-K segment table",
+    "claim": "Allstate reports four segments: Allstate Protection, Run-off Property-Liability, Protection Services and Corporate. The first two together make up Property-Liability. Protection Services covers protection plans, roadside, dealer services, identity protection and Arity telematics.",
     "facts": [
-     "P1",
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "The measure of segment profit or loss used in evaluating performance is underwriting income for the Allstate Protection and Run-off Property-Liability segments and adjusted net income for the Protection Services and Corporate segments.",
-     "Includes holding company activities and certain non-insurance operations"
+     "Allstate Protection and Run-off Property-Liability segments comprise Property-Liability."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q income statement",
-    "claim": "Premiums are the dominant revenue line. In the nine months to September 30 (table in millions), total revenues were 52,885. Property and casualty insurance premiums and contract charges were 47,079, net investment income was 3,124 and other revenue was 2,171.",
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Customers are reached through exclusive agents, independent agents and direct channels (contact centers and online). The brands are Allstate, National General and Direct Auto.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We serve our customers through three distribution channels: exclusive agency, independent agency and direct channels primarily under the Allstate and National General (including Direct Auto) brands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q income statement; the share of revenue is read from the two lines, not computed",
+    "claim": "Insurance premiums are the bulk of revenue. In the nine months to Sept 30, 2026, property and casualty premiums were 47,079 of total revenues of 52,885 (table in millions). Net investment income of 3,124 and other revenue of 2,171 were the next-largest lines.",
     "facts": [
      "F2"
     ],
     "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 text; the link to cost lines is inferred from the cost line items in the 10-Q",
-    "claim": "The company sells through three channels: exclusive agents, independent agents and direct. Exclusive agents are paid a base commission on eligible written premium plus variable pay and bonuses tied to growth and profitability. Distribution cost therefore scales with premium and with growth.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We serve our customers through three distribution channels: exclusive agency, independent agency and direct channels primarily under the Allstate and National General (including Direct Auto) brands.",
-     "Compensation includes a monthly base commission as a percentage of eligible written premium, variable pay for new customer acquisition and product bundling and monthly and annual bonuses based on profitable customer growth."
-    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release and 10-Q MD&A",
-    "claim": "Revenue growth is driven by policies in force and average premium. Auto and homeowners policies in force were 3.4% and 3.3% higher than a year earlier.",
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Segment performance is judged by underwriting income for the two Property-Liability segments and by adjusted net income for Protection Services and Corporate. Property-Liability underwriting income was 6,686 in the nine months of 2026 (table in millions), with a combined ratio of 85.1.",
     "facts": [
-     "P6",
      "P4"
     ],
     "quotes": [
-     "Auto and homeowners insurance policies were 3.4% and 3.3% higher than last year, respectively",
-     "primarily due to higher auto and homeowners insurance policies in force, homeowners insurance average premium, net investment income and valuation gains on equity investments"
+     "The measure of segment profit or loss used in evaluating performance is underwriting income for the Allstate Protection and Run-off Property-Liability segments and adjusted net income for the Protection Services and Corporate segments."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release tables; the mechanism is inferred from the MD&A language on policies in force and average premium",
-    "claim": "Growth is uneven by line. In the third quarter, homeowners premiums earned rose 11.5% while auto premiums earned rose 0.6%.",
+    "basis": "stated in the 10-Q income statement; the cost drivers are described in the 10-K risk factors (P2)",
+    "claim": "Claims are the largest cost. For the nine months of 2026 (table in millions), property and casualty claims and claims expense were 28,990, amortization of deferred policy acquisition costs was 6,600 and operating costs and expenses were 6,876.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 earnings release",
+    "claim": "Premium growth in Property-Liability comes from more policies in force and higher homeowners average premiums. Auto average premiums fell with a shift to new Affordable, Simple, Connected products. Q3 2026 Property-Liability earned premiums were $15.1 billion, up 3.8%.",
     "facts": [
      "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "Property-Liability earned premiums of $15.1 billion increased 3.8% in the third quarter of 2026 compared to the prior year, primarily driven by policies in force growth and higher homeowners insurance average premiums."
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Pricing depends on rate increases that regulators must approve. Regulatory approval of rates can restrict the changes needed to reach target profitability.",
+    "basis": "stated in the 10-K Item 1 and Item 1A",
+    "claim": "Pricing is set to keep pace with loss costs, but state regulators can restrict rate changes. Both points limit how fast premium can respond to cost inflation.",
     "facts": [
+     "P1",
      "P2"
     ],
     "quotes": [
-     "Regulatory approval of rates, especially during inflationary periods, may restrict rate changes that may be required to achieve targeted levels of profitability and returns on equity."
+     "Rate increases and decreases are pursued to keep pace with loss cost trends including the impacts of inflation and losses from catastrophic events"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q income statement",
-    "claim": "Claims and claims expense is the largest cost. In the nine months (table in millions), property and casualty claims and claims expense was 28,990 against premiums of 47,079. Amortization of deferred policy acquisition costs was 6,600 and operating costs and expenses were 6,876.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A, the earnings release and the 8-K",
-    "claim": "Catastrophe losses are the main swing factor in the cost of claims. They were 1,650 in the third quarter against 558 a year earlier (table in millions). The Property-Liability combined ratio moved to 86.6 from 80.1.",
+    "basis": "stated in the 10-Q MD&A table and the earnings release",
+    "claim": "Catastrophe losses are the main source of quarterly volatility in underwriting. Q3 2026 total catastrophe losses were 1,650 versus 558 a year earlier (table in millions). The Property-Liability combined ratio rose to 86.6 from 80.1.",
     "facts": [
      "P4",
-     "P6",
-     "P7"
+     "P6"
     ],
     "quotes": [
-     "Underwriting income decreased $800 million in the third quarter of 2026 compared to the third quarter of 2025, due to higher losses, primarily from catastrophes",
-     "Total catastrophe losses for the third quarter were $1.65 billion or $1.30 billion, after-tax."
+     "Property-Liability recorded combined ratio was 86.6 for the quarter, which was 6.5 points above the prior year quarter primarily due to 7.1 points of higher catastrophe losses, partially offset by 2.4 points of more favorable non-catastrophe prior year reserve releases."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q table; the risk comes from the 10-K reserve risk factor",
-    "claim": "Favourable prior-year reserve reestimates (releases) reduce reported claims costs. In the nine months (table in millions), prior year reserve reestimates were (2,398) against (1,045) a year earlier. Releases are shown in parentheses.",
+    "basis": "stated in the 10-Q MD&A table; the risk is stated in the 10-K risk factors",
+    "claim": "Favorable prior-year reserve reestimates boosted 2026 underwriting results. Nine-month prior year reserve reestimates were (2,398) versus (1,045) a year earlier (table in millions; releases shown in parentheses). Reserve estimates are uncertain and can move earnings either way.",
     "facts": [
-     "P4"
+     "P4",
+     "P2"
     ],
     "quotes": [
      "(1)Reserve releases are shown in parentheses."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the 10-K and 10-Q MD&A",
-    "claim": "Claim severity is driven by inflation and repair, medical and legal costs. Management links severity to higher repair costs, total-loss mix, medical consumption and attorney representation. The latest 10-Q adds that higher oil prices and other macro factors could raise costs.",
+    "basis": "stated in the 10-Q statements and the earnings release",
+    "claim": "The investment portfolio is a second profit source. Net investment income was 1,177 in Q3 2026 versus 949 and 3,124 for nine months (table in millions), on total investments of 87,375. Market-driven gains and losses add volatility: net losses on investments and derivatives were (545) in Q3.",
     "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Estimated report year 2025 incurred claim severity for Allstate brand increased compared to report year 2024 for major coverages due to higher repair costs, mix of total loss frequency, medical consumption and attorney representation.",
-     "Increased oil prices may contribute to higher transportation, manufacturing and repair costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q and the earnings release",
-    "claim": "Net investment income is a second earnings source. It was 3,124 in the nine months against 2,557 a year earlier (table in millions). Market-based income was 2,515 and performance-based income was 801.",
-    "facts": [
+     "F1",
      "F2",
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "due to both higher market-based and performance-based investment results"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures are stated in the 10-Q balance sheet; the float interpretation is inferred",
-    "claim": "The balance sheet shows the float structure. Unearned premiums (30,378) and the reserve for property and casualty claims (40,796) sit beside total investments of 87,375 (table in millions).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K segment table and the earnings release",
-    "claim": "Protection Services is a smaller fee- and premium-based segment. It covers consumer product protection plans, roadside, dealer services, identity protection and Arity telematics. Its revenues were 2,821 in the nine months, with adjusted net income of 164 (table in millions). Protection Plans contributed 1,859 of the revenue.",
-    "facts": [
-     "P1",
      "P6"
     ],
     "quotes": [
-     "consumer product protection plans, roadside assistance, automotive protection and insurance products, identity protection and restoration"
+     "Net losses on investments and derivatives were $545 million in the third quarter of 2026, compared to gains of $252 million in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 earnings release; the 'small' comparison is inferred from the Q3 consolidated revenue of $17.3 billion",
+    "claim": "Protection Services adds fee and product revenue outside core insurance. Q3 2026 revenues were $964 million, up 6.9%, and adjusted net income was $64 million. It is small next to Property-Liability.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Protection Services broadens Allstate\u2019s customer value proposition through embedded protection products and services across five businesses."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item (company self-description and A.M. Best-based footnote)",
-    "claim": "Allstate describes itself as a scale player in U.S. personal lines. It reports 211 million policies in force and ranks third largest among U.S. personal property and casualty insurers.",
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Allstate describes itself as one of the largest publicly held US personal lines insurers, ranked 3rd largest by 2024 statutory direct premiums written, with 211 million policies in force.",
     "facts": [
      "P1"
     ],
     "quotes": [
      "The Allstate Corporation is one of the largest publicly held personal lines insurers in the United States.",
-     "3rd largest personal property and casualty insurer in the United States"
+     "3rd largest personal property and casualty insurer in the United States (1)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release; the link between policy growth and premium growth is inferred from the tables",
-    "claim": "Customer growth continues. Total policies in force rose to 217,610 (in thousands) from 209,481 (in thousands), up 3.9%. Auto policies grew 3.4% and homeowners policies grew 3.3%. Management attributes this to the new Affordable, Simple and Connected products and broad distribution.",
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Allstate sells through three channels: exclusive agents (over 27,400 in the US), independent agent locations (approximately 58,700) and direct contact centers and online.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In the U.S., we distribute our products through approximately 58,700 independent agent locations"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A table and the earnings release",
+    "claim": "Property-Liability underwriting profitability improved over nine months: the recorded combined ratio was 85.1 against 89.4 a year earlier. Management cites strong auto and homeowners margins.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Earnings reflected strong underwriting margins on auto and homeowners insurance, higher investment income and continued growth of Protection Services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release",
+    "claim": "Policy growth indicates share gains: total policies in force reached 217,610 (table in thousands), up 3.9%. Auto policies rose 3.4% and homeowners 3.3%, and management credits the new Affordable, Simple and Connected products and broad distribution.",
     "facts": [
      "P6"
     ],
@@ -628,171 +646,208 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the annual report tables and Item 1",
-    "claim": "New-business momentum was broad-based in the last annual report. Auto new issued applications reached 8,902 (table in thousands) versus 7,102 (table in thousands). Management says Transformative Growth drove new business growth in all channels.",
+    "basis": "stated in the earnings release",
+    "claim": "Auto premium growth is thin and underlying margin is weaker. Q3 earned premiums grew 0.6% as lower average premiums offset policy growth, and the underlying combined ratio rose to 89.8 from 86.0.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "policies in force growth was largely offset by lower average premiums"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release",
+    "claim": "Homeowners is a strength: Q3 earned premiums grew 11.5% on rate and policy growth, and the underlying combined ratio was 60.1, though catastrophe losses lifted the recorded ratio.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Catastrophe losses were $1.3 billion in the quarter compared to $479 million the prior year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factor and the 10-Q and release tables",
+    "claim": "Catastrophe volatility is a named threat to results. Q3 Property-Liability catastrophe losses were 1,650 against 558 a year earlier (table in millions), moving the combined ratio to 86.6 from 80.1.",
+    "facts": [
+     "P2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Catastrophes and severe weather events may subject us to significant losses"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A and risk factors",
+    "claim": "Allstate manages catastrophe exposure by pulling back in high-risk states, which limits homeowners growth there.",
     "facts": [
      "P3",
-     "P1"
+     "P2"
     ],
     "quotes": [
-     "Transformative Growth enhanced our direct sales capabilities and successfully repositioned distribution, driving new business growth in all channels."
+     "In Florida, we are not writing new homeowners business and are substantially complete with the non-renewal of certain policies."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the annual report Item 1 and Item 1A",
-    "claim": "The distribution network is multi-channel. It includes over 27,400 U.S. exclusive agents and approximately 58,700 independent agent locations, plus direct sales through contact centers and online.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In the U.S., we offer products through over 27,400 Allstate exclusive agents and licensed sales professionals.",
-     "In the U.S., we distribute our products through approximately 58,700 independent agent locations"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release tables; the interpretation is inferred",
-    "claim": "Underwriting profitability is strong. The nine-month property-liability combined ratio was 85.1 versus 89.4, and underwriting income rose 47.5%. The third quarter was weaker, with a combined ratio of 86.6 versus 80.1.",
+    "basis": "stated in the earnings release",
+    "claim": "Protection Services diversifies the business beyond auto and home: Q3 revenues were $964 million, up 6.9%, led by Protection Plans and Roadside.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Allstate delivered excellent financial results and increased Property-Liability growth in the third quarter"
+     "Protection Services broadens Allstate\u2019s customer value proposition through embedded protection products and services across five businesses."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release and 10-Q MD&A",
-    "claim": "The business is diversified beyond personal lines through Protection Services. Its third-quarter revenues rose 6.9% to $964 (table in millions). Protection Plans, Roadside and Arity grew, and management says Protection Plans' international revenues are growing rapidly. Arity also agreed to acquire Replica and acquired INRIX assets.",
+    "basis": "stated in the earnings release; income also shown in the 10-Q statement",
+    "claim": "The investment portfolio supports earnings, with Q3 net investment income of $1.2 billion, up $228 million. It also adds rate sensitivity: higher rates produced $2.6 billion of unrealized net capital losses.",
     "facts": [
      "P6",
-     "P4"
+     "F2"
     ],
     "quotes": [
-     "Protection Plans\u2019 international revenues are growing rapidly.",
-     "In October 2026, Arity, a subsidiary of The Allstate Corporation, acquired substantially all of the assets of INRIX, Inc., a provider of transportation intelligence and mobility analytics."
+     "Unrealized net capital losses were $2.6 billion (pre-tax) at September 30, 2026, compared to losses of $97 million in the prior quarter, primarily reflecting lower fixed income valuations as interest rates increased."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the financial statements; the role as a competitive support is inferred",
-    "claim": "The investment portfolio is a supporting strength. Net investment income was $1,177 (table in millions) in the third quarter versus $949 (table in millions). Total investments were 87,375 (table in millions) at quarter-end.",
-    "facts": [
-     "F2",
-     "F1",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release and monthly 8-Ks",
-    "claim": "Catastrophe losses are the main near-term threat shown. Third-quarter catastrophe losses were $1,650 (table in millions) versus $558 (table in millions). Homeowners underwriting income fell to $452 (table in millions) from $1,107 (table in millions), and its combined ratio rose to 89.5 from 71.5.",
+    "basis": "stated in the earnings release and the cash flow statement",
+    "claim": "Financial strength and capital return are visible: trailing-12-month return on common equity was 41.3%, book value per share was $120.23, and treasury stock purchases were 2,904 over nine months (table in millions).",
     "facts": [
      "P6",
-     "P7"
+     "F3"
     ],
     "quotes": [
-     "Total catastrophe losses for the third quarter were $1.65 billion or $1.30 billion, after-tax."
+     "Disciplined capital management gives us the flexibility to fund growth and pursue attractive investment opportunities while returning excess capital to shareholders"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated figures; the interpretation is inferred",
-    "claim": "Auto, the largest line, shows weakening underlying margins. The third-quarter auto underlying combined ratio was 89.8 versus 86.0, and auto underwriting income fell 6.0% to $1,623 (table in millions). Auto premiums written were nearly flat at $9,884 (table in millions) versus $9,869 (table in millions).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the annual report risk factors and the 10-Q risk-factor update",
-    "claim": "The annual report names competition and rate regulation as threats. Carriers compete on price, underwriting, service and innovation. Rate approval requirements and state profit limits could restrict pricing, and regulators may force refunds or retroactive rate adjustments.",
+    "basis": "stated in the 10-K risk factors; the 10-Q Item 1A says no material changes",
+    "claim": "Competition and pricing are named threats: rivals may lower prices or use more sophisticated pricing models, and rate approval rules can delay needed rate changes.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "The personal property-liability market is highly competitive with carriers competing through underwriting, advertising, price, customer service, innovation and distribution.",
-     "Certain states impose or are contemplating regulatory limitations on the amount of profit that insurance companies may earn."
+     "Competitors may alter underwriting standards, lower prices, have more sophisticated pricing models, introduce new products and features and increase advertising, which could result in lower growth and retention and decrease our competitive position."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the annual report; the effect on growth is stated as a risk, not quantified",
-    "claim": "Catastrophe-driven underwriting restrictions limit homeowners growth. The company stopped writing new homeowners business in Florida and California. Since the prior year-end, policies in force declined by approximately 5% in California and 15% in Florida.",
+    "basis": "stated in the 10-K risk factors; the premium figures are from the 10-K MD&A table",
+    "claim": "Auto concentration and technology change are named threats: auto was 38,090 of 57,682 of 2025 Allstate Protection premiums earned (table in millions), and the 10-K says Allstate may be more sensitive than peers to trends that reduce auto demand or rates.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "Catastrophe risk management actions have led us to reduce the size of the homeowners business in certain states, including customers with auto and other personal lines products, and may negatively impact future sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and annual report risk factors",
-    "claim": "Macro and technology shifts are cited as risks. The latest 10-Q says higher oil prices may raise repair and transportation costs and may change auto claim frequency and increase severity. The annual report says autonomous vehicles and ride sharing could shrink the auto market, and auto is a significant portion of the business.",
-    "facts": [
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "Increased oil prices may contribute to higher transportation, manufacturing and repair costs.",
      "Since auto insurance constitutes a significant portion of the overall business, we may be more sensitive than other insurers and more adversely affected by trends that could decrease auto insurance rates or reduce demand for auto insurance over time."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement and earnings release; relevance to competitive position is inferred",
-    "claim": "Capital strength and shareholder returns reinforce the position, but they do not measure competitive advantage. Treasury stock purchases rose to 2,904 (table in millions) from 799 (table in millions) over nine months. Book value per common share was $120.23, up 25.3%.",
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Macroeconomic cost pressure is flagged: higher oil prices and other conditions may raise repair and transportation costs and increase claim severity.",
     "facts": [
-     "F3",
-     "P6"
+     "P4"
     ],
-    "quotes": [],
+    "quotes": [
+     "Increased oil prices may contribute to higher transportation, manufacturing and repair costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from truncated press snippets only",
+    "claim": "Secondary press snippets report a customer-account outage and planned job cuts alongside expanded AI use, which bear on operational risk and the technology strategy.",
+    "facts": [
+     "N1",
+     "N2"
+    ],
+    "quotes": [
+     "This issue has caused Allstates customers to be locked out of their accounts",
+     "Allstate reportedly plans to cut thousands of jobs while expanding AI use"
+    ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1 (balance sheet); the liquidity reading is inferred from the asset mix",
-    "claim": "Cash on hand is small next to the investment portfolio. Cash was 549 (table in millions) against total investments of 87,375, and cash fell from 678. Short-term investments of 5,779 add a further liquid layer.",
+    "basis": "Stated in the 10-Q balance sheet; the liquidity characterisation of limited partnerships comes from the 10-K risk factor text.",
+    "claim": "Balance-sheet liquidity sits mainly in the investment portfolio, not in cash. At 30 Sep 2026 (table in millions) cash was 549, short-term investments were 5,779 and total investments were 87,375.",
     "facts": [
      "F1"
     ],
     "quotes": [
-     "Cash | 549 | 678"
+     "Total investments | 87,375 | 83,237"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1; the funding link is inferred",
-    "claim": "Near-term cash calls on the business are large. The reserve for property and casualty claims and claims expense was 40,796 (table in millions), little changed from 41,079, and claim payments outstanding rose to 1,661 from 1,419.",
+    "basis": "Stated in the 10-Q balance sheet. No debt-to-capital ratio is quoted in the packet.",
+    "claim": "Leverage is moderate against the equity base. Debt was 7,494 (table in millions) at 30 Sep 2026 against total equity of 32,292, and debt was essentially unchanged from 7,490 at 31 Dec 2025.",
     "facts": [
      "F1"
     ],
     "quotes": [
-     "Claim payments outstanding | 1,661 | 1,419"
+     "Debt | 7,494 | 7,490"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1; the characterisation is inferred from the line items",
-    "claim": "Leverage on the balance sheet is moderate. Debt was 7,494 (table in millions), almost unchanged from 7,490, against total equity of 32,292. Total liabilities were 95,557 against total assets of 127,849.",
+    "basis": "Stated in the cash flow statement; the reading of what drove the change is inferred from the line items.",
+    "claim": "Cash generation was strong in the nine months to 30 Sep 2026. Net cash provided by operating activities was 9,979 (table in millions) against 7,121 a year earlier, and it exceeded net income of 7,809.",
     "facts": [
-     "F1"
+     "F3"
     ],
     "quotes": [
-     "Debt | 7,494 | 7,490",
-     "Total equity | 32,292 | 30,589"
+     "Net cash provided by operating activities | 9,979 | 7,121"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2; the comparison is inferred",
-    "claim": "Debt service looks small against earnings. Nine-month interest expense was 291 (table in millions), down from 301, against income before tax of 9,867.",
+    "basis": "Stated in the income statement and earnings release.",
+    "claim": "Underlying earnings quality is mixed. Net income of 2,080 (table in millions) for the third quarter fell from 3,744, and net losses on investments and derivatives of 545 contrasted with a 2025 gain on disposition of operations of 720. Net investment income of 1,177 was higher than 949.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Net income applicable to common shareholders was $2.1 billion in the third quarter of 2026, compared to $3.7 billion in the prior year quarter primarily due to increased catastrophe losses, a gain on sale of the group health business in 2025 and net losses on investments and derivatives, partially offset by increased premiums earned."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement and release; the funding link is inferred.",
+    "claim": "Cash is being returned to shareholders at a faster pace. Nine-month treasury stock purchases were 2,904 (table in millions) against 799 a year earlier. Common dividends paid were 816 and preferred dividends 88. Net cash used in financing activities was 3,766.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "As of Sept. 30, $1.3 billion remains under the $4.0 billion share repurchase authorization initiated in February 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and release.",
+    "claim": "Rising interest rates have created unrealized losses on the fixed income book. Fixed income at fair value was 60,246 (table in millions) against amortized cost, net of 62,818, and accumulated unrealized net capital gains and losses went from 297 at year-end to (2,024).",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Unrealized net capital losses were $2.6 billion (pre-tax) at September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement; the coverage reading is inferred without computing a ratio.",
+    "claim": "Debt service looks well covered by earnings. Interest expense was 291 (table in millions) for the nine months, against income from operations before income tax expense of 9,867.",
     "facts": [
      "F2"
     ],
@@ -802,78 +857,10 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and F2; the comparison is inferred",
-    "claim": "Operating cash generation was strong and above reported earnings. Net cash provided by operating activities was 9,979 (table in millions) against 7,121 a year earlier, and net income was 7,809 against 6,439.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 9,979 | 7,121"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the reversal risk is inferred from the nature of the items",
-    "claim": "Part of the operating cash flow came from working-capital items that can reverse. Income taxes added 790 (table in millions), reinsurance and indemnification recoverables added 774, other operating assets and liabilities added 462, and unearned premiums added 1,339. Premium installment receivables used (927), and claims and other insurance reserves changed by (213) after adding 1,129 a year earlier.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Reinsurance and indemnification recoverables, net | 774 | (394)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; the cash interpretation is inferred",
-    "claim": "Earnings include non-cash prior-year reserve releases and swing with catastrophe losses. Prior year reserve reestimates were (2,398) (table in millions, releases in parentheses) over nine months, against nine-month underwriting income of $6,686. Third-quarter catastrophe losses were $1,650 against $558.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Reserve releases are shown in parentheses."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3; the funding link is inferred",
-    "claim": "Cash is being returned to shareholders at a much higher pace than last year. Treasury stock purchases were (2,904) (table in millions) against (799), common dividends were (816), and preferred dividends were (88). Net cash used in financing activities was (3,766) against (1,588).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Treasury stock purchases | (2,904) | (799)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the interpretation is inferred",
-    "claim": "Unrealized losses on bonds have reduced book equity but are not a direct cash outflow. Fixed income securities carried at fair value of 60,246 (table in millions) sit below amortized cost, net of 62,818. Accumulated unrealized net capital gains and losses moved to (2,024) from 297.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Unrealized net capital gains and losses | (2,024) | 297"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1; the settlement-timing reading is inferred",
-    "claim": "Quarter-end balances were inflated by unsettled securities trades. Receivable for securities sold was 3,750 (table in millions) against 133, and payable for securities purchased was 4,241 against 49.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Receivable for securities sold | 3,750 | 133"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "debt figure stated in F1 and operating cash flow in F3; the parent-liquidity mechanism is stated in P2; the maturity position is not in the evidence",
-    "claim": "Debt carried is 7,494 (table in millions). The evidence gives no maturity schedule, so how much falls due in the near term cannot be stated. The sources available to meet it are operating cash flow of 9,979 and the investment portfolio, and the holding company also relies on subsidiary dividends.",
+    "basis": "Debt amount stated in the 10-Q; funding mechanism stated in the 10-K risk factors; maturities not in the evidence.",
+    "claim": "Refinancing needs cannot be read from the evidence. The statements show total debt of 7,494 (table in millions) but no maturity dates or credit facilities. The 10-K says the parent is a holding company that depends on subsidiary dividends, which regulators limit, to meet obligations such as servicing debt.",
     "facts": [
      "F1",
-     "F3",
      "P2"
     ],
     "quotes": [
@@ -881,162 +868,130 @@
      "Limits on the ability of the subsidiaries to pay dividends could adversely affect holding company liquidity, including the ability to pay dividends to shareholders, service debt or complete share repurchase programs as planned."
     ],
     "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P5",
-    "claim": "Access to refinancing depends on financial strength ratings and on the terms of the securities. The 10-K risk factors say a ratings downgrade could raise the cost of refinancing existing debt, and the subordinated debenture terms restrict dividends and buybacks if interest is deferred. The latest 10-Q reports no material change in these risk factors.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "A downgrade in ratings could have an adverse effect on sales, competitiveness, customer retention, the marketability of product offerings, liquidity, access to and cost of borrowing or refinancing existing debt obligations, results of operations and financial condition.",
-     "There have been no material changes in our risk factors from those disclosed in Part I, Item 1A in our annual report on Form 10-K for the year ended December 31, 2025."
-    ],
-    "support": "supported"
    }
   ],
   "growth_thesis": [
    {
     "basis": "Stated in the Q3 2026 earnings release.",
-    "claim": "Growth in auto and homeowners policies in force is a main driver. Management says auto and homeowners policies were 3.4% and 3.3% higher than a year earlier.",
+    "claim": "Policy growth is the main volume driver: Property-Liability policies in force were 39,319 thousand at Q3 2026, up 3.3%, with auto up 3.4% and homeowners up 3.3%.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Auto and homeowners insurance policies were 3.4% and 3.3% higher than last year, respectively"
+     "Auto and homeowners insurance policies were 3.4% and 3.3% higher than last year, respectively, as new Affordable, Simple and Connected products and broad distribution resulted in increased market share."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in the 10-K Item 1; the risk is stated in 10-K Item 1A.",
-    "claim": "For policy growth to continue, the Affordable, Simple and Connected rollout must finish and keep converting. The 10-K targets rollout completion in 2026, with auto in 43 states and homeowners in 31 as of year-end 2025.",
+    "basis": "Growth rates and state counts are stated in the release. That rollout is the cause of the growth is the company's own attribution.",
+    "claim": "For policy growth to continue, new business must keep converting as the new products roll out. Auto new business rose 6.3% and homeowners new business rose 10.2%, and the new products are in 46 states for auto and 42 for homeowners.",
     "facts": [
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "Our Affordable, Simple and Connected auto and homeowners insurance products are available in 43 and 31 states, respectively, with rollout completion targeted for 2026."
+     "Allstate-branded Affordable, Simple, Connected auto insurance products are now available in 46 states with the homeowners insurance product available in 42 states."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release table and 10-Q MD&A.",
-    "claim": "Homeowners premium growth is a driver. Nine-month homeowners premiums earned rose 12.2%, and the 10-Q cites higher homeowners average premium as a revenue driver alongside policy growth.",
+    "basis": "Growth figures are stated in the release. The regulatory condition is stated in the 10-K risk factors.",
+    "claim": "Homeowners earned premiums grew 11.5%, faster than policies in force at 3.3%, because average premium rose. For this to continue, rate increases must keep being approved and implemented ahead of replacement-cost inflation.",
     "facts": [
      "P6",
-     "P4"
-    ],
-    "quotes": [
-     "primarily due to higher auto and homeowners insurance policies in force, homeowners insurance average premium, net investment income and valuation gains on equity investments"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in 10-K Item 1A; the 10-Q (P5) says the risk factors are unchanged.",
-    "claim": "Continued pricing growth requires that regulators keep approving rate changes at the pace of loss costs.",
-    "facts": [
      "P2"
     ],
     "quotes": [
-     "Regulatory approval of rates, especially during inflationary periods, may restrict rate changes that may be required to achieve targeted levels of profitability and returns on equity."
+     "Allstate brand homeowners insurance average gross written premium increased 4.9% compared to the prior year quarter, reflecting rate increases and higher home replacement costs."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from comparing the policies-in-force and premiums-written lines in the Q3 release; the cause is not stated.",
-    "claim": "Auto policy growth has not yet turned into premium growth. Auto policies in force rose 3.4%, but Q3 auto premiums written rose only 0.2%, so growth depends on premium per policy not eroding further.",
+    "basis": "Stated in the 10-Q MD&A and the earnings release.",
+    "claim": "Underwriting profit drove nine-month earnings growth. The Property-Liability combined ratio was 85.1 versus 89.4, and underwriting income was $6,686 versus $4,534 (table in millions).",
     "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A; balance figures from the balance sheet.",
-    "claim": "Net investment income is a driver. It rose $228 million to $1.18 billion in Q3 and $567 million to $3.12 billion over nine months, on higher market-based and performance-based results. Total investments were 87,375 against 83,237 at year-end 2025.",
+    "basis": "Stated in the release. That releases cannot be relied on to continue is inferred from the 10-K risk factor on reserve uncertainty.",
+    "claim": "For margins to hold, catastrophe losses must not repeat the Q3 spike, and prior-year reserve releases must continue. In Q3 the combined ratio was 86.6, 6.5 points above the prior year, with 7.1 points from higher catastrophe losses and 2.4 points of offsetting reserve releases.",
     "facts": [
-     "P4",
-     "F1",
-     "F2"
-    ],
-    "quotes": [
-     "Net investment income increased $228 million to $1.18 billion in the third quarter of 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Risk stated in the 10-K; the figures come from the earnings release table.",
-    "claim": "For the investment income gain to continue, performance-based returns must hold up, because the company says that income can swing widely.",
-    "facts": [
-     "P2",
      "P6"
     ],
     "quotes": [
-     "The amount and timing of net investment income, capital contributions and distributions from performance-based investments, which primarily include limited partnership interests that are recorded on a lag, can fluctuate significantly due to the underlying investments\u2019 performance or changes in market or economic conditions."
+     "Property-Liability recorded combined ratio was 86.6 for the quarter, which was 6.5 points above the prior year quarter primarily due to 7.1 points of higher catastrophe losses, partially offset by 2.4 points of more favorable non-catastrophe prior year reserve releases."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q and earnings release tables; the drivers follow the 10-Q text.",
-    "claim": "Underwriting profit growth is a driver. Nine-month Property-Liability underwriting income was $6,686 (table in millions) against $4,534, and the combined ratio was 85.1 against 89.4.",
+    "basis": "Stated in the release.",
+    "claim": "Net investment income is a second driver, at $1,177 versus $949 in Q3, up $228. For it to continue, market-based asset balances (reported at $77.6 billion) and fixed income yields must hold.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Market-based investment income was $887 million in the third quarter of 2026, an increase of $107 million, or 13.7%, compared to the prior year quarter, reflecting growth in market-based asset balances to $77.6 billion and higher fixed income yields."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Q3 figures and the stated cause are in the release. The variability is stated in both the release and the risk factors.",
+    "claim": "Performance-based investment income added $355 versus $227 in Q3, from private equity valuation increases. That income is variable, so its continuation depends on those valuations holding.",
     "facts": [
      "P6",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in the 10-Q table; the sustainability condition is inferred from the cited risk factor.",
-    "claim": "Margin gains require catastrophe losses and reserve releases to stay favorable. Q3 catastrophe losses were $1,650 (table in millions) against $558, and nine-month prior-year reserve releases were (2,398) against (1,045).",
-    "facts": [
-     "P4",
      "P2"
     ],
     "quotes": [
-     "Catastrophic events could adversely affect operating results and cause them to vary significantly from one period to the next."
+     "Performance-based assets provide diversification and attractive long-term returns despite periodic variability."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in the earnings release.",
-    "claim": "Protection Services is a growth driver. Q3 revenues were $964 (table in millions) against $902, led by Protection Plans, which the CEO says is growing rapidly internationally.",
+    "basis": "Revenue figures are stated in the release. The condition is inferred from the segment commentary and the 10-K risk list.",
+    "claim": "Protection Services is a smaller growth driver, with Q3 revenues of $964, up 6.9%. Protection Plans revenue was $631, up 7.3%, and Roadside grew 18.6%. For this to continue, international and retail-partner expansion must continue.",
     "facts": [
-     "P6"
+     "P6",
+     "P3"
     ],
     "quotes": [
      "Protection Plans\u2019 international revenues are growing rapidly."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Figures stated in the statements; the link between cash flow and buybacks is inferred from the cash flow statement.",
-    "claim": "Per-share earnings growth is helped by buybacks. Nine-month diluted EPS was $29.79 against $23.76, weighted diluted shares fell to 259.1 from 267.8, and treasury stock purchases were (2,904) (table in millions) against (799).",
+    "basis": "Share counts, purchases and the authorization are stated. That buybacks lift per-share results is inferred.",
+    "claim": "Per-share growth is amplified by buybacks. Common shares outstanding were 248.8 million versus 262.1 million a year earlier, and treasury stock purchases were 2,904 versus 799 in the nine months (table in millions). For this to continue, the repurchase authorization must be used and funded.",
     "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A; any financial contribution is not stated.",
-    "claim": "Arity's acquisitions of INRIX assets (October 2026) and the rest of Replica are a possible growth addition. Replica depends on closing.",
-    "facts": [
-     "P4"
+     "P6",
+     "F3",
+     "P2"
     ],
     "quotes": [
-     "The acquisition is expected to close before the end of 2026, subject to customary closing conditions."
+     "As of Sept. 30, $1.3 billion remains under the $4.0 billion share repurchase authorization initiated in February 2026."
     ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Cash flow figures are stated. The funding link and dividend dependence are inferred from the cash flow statement and the 10-K risk factors.",
+    "claim": "Cash generation funds the capital return. Net cash provided by operating activities was 9,979 versus 7,121 in the nine months (table in millions). For buybacks to continue, operating cash flow and subsidiary dividend capacity must remain sufficient.",
+    "facts": [
+     "F3",
+     "P2"
+    ],
+    "quotes": [],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited item (10-Q MD&A, Acquisitions section)",
+    "basis": "Stated in the 10-Q MD&A (P4) and repeated in the earnings release (P6). The filing says some acquisition-related disclosures are not yet available because of the timing of the transaction.",
     "claim": "Arity, an Allstate subsidiary, acquired substantially all of the assets of INRIX, Inc., a transportation intelligence and mobility analytics provider.",
     "facts": [
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "In October 2026, Arity, a subsidiary of The Allstate Corporation, acquired substantially all of the assets of INRIX, Inc., a provider of transportation intelligence and mobility analytics."
@@ -1044,10 +999,11 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (10-Q MD&A, Acquisitions section)",
-    "claim": "Arity entered into a definitive agreement to acquire the remaining ownership of Replica, a mobility data and technology company. Closing is expected before the end of 2026.",
+    "basis": "Stated in the 10-Q MD&A (P4) and the earnings release (P6).",
+    "claim": "Arity entered into a definitive agreement to acquire the remaining ownership of Replica, a mobility data and technology company. The deal is expected to close before the end of the year, subject to customary closing conditions.",
     "facts": [
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "In November 2026, Arity entered into a definitive agreement to acquire the remaining ownership of Replica, a mobility data and technology company."
@@ -1055,103 +1011,99 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (2025 10-K MD&A, Dispositions)",
-    "claim": "Allstate closed the sale of its employer voluntary benefits business (American Heritage Life Insurance Company and American Heritage Service Company) and recorded a gain on the sale.",
+    "basis": "Press report (secondary source, mlive.com); the company has not confirmed it in any filing in this packet.",
+    "claim": "A press report says an Allstate outage locked customers out of their accounts. The snippet names Georgia among the affected areas.",
     "facts": [
-     "P3"
+     "N1"
     ],
     "quotes": [
-     "On April 1, 2025, we closed the sale of American Heritage Life Insurance Company and American Heritage Service Company, comprising our employer voluntary benefits business.",
-     "We recorded a gain on the sale of $888 million or $641 million, after-tax for the year ended December 31, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (2025 10-K MD&A, Dispositions)",
-    "claim": "Allstate closed the sale of its group health business (Direct General Life Insurance Company, NSM Sales Corporation and The Association Benefits Solution, LLC) and recorded a gain on the sale.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On July 1, 2025, we closed the sale of Direct General Life Insurance Company, NSM Sales Corporation and The Association Benefits Solution, LLC, comprising the group health business.",
-     "We recorded a gain on sale of $715 million or $499 million, after-tax for the year ended December 31, 2025."
+     "This issue has caused Allstates customers to be locked out of their accounts"
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the cited items (catastrophe losses, combined ratios); the mechanism is inferred from the underwriting results tables and the risk factor.",
-    "claim": "Catastrophe losses drove a sharp Q3 2026 deterioration: the monthly release puts third-quarter catastrophe losses at $1.65 billion, and the Property-Liability combined ratio rose to 86.6 from 80.1.",
-    "facts": [
-     "P7",
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Total catastrophe losses for the third quarter were $1.65 billion or $1.30 billion, after-tax.",
-     "Catastrophic events could adversely affect operating results and cause them to vary significantly from one period to the next."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Release size is stated in the 10-Q MD&A table; the reversal risk is stated generically in the 10-K risk factor, and the link to future earnings is inferred.",
-    "claim": "Earnings are supported by prior-year reserve releases: the nine-month 2026 reestimates were (2,398) (table in millions), a (5.3)-point effect on the combined ratio. If releases fade or reverse, margins would be lower.",
-    "facts": [
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "The ultimate cost of losses, or current estimates, have and may continue to vary materially from recorded reserves and such variance may adversely affect the results of operations and financial condition as the reserves and amounts due from reinsurers are reestimated."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Balance sheet and income statement figures are stated; the rate and spread mechanism is stated in the 10-K risk factor, and the cause of the Q3 move is not given in the cited items.",
-    "claim": "Investment marks are volatile: Q3 2026 net losses on investments and derivatives were (545), and unrealized net capital gains and losses moved to (2,024) at Sep. 30, 2026 from 297 at Dec. 31, 2025 (table in millions).",
-    "facts": [
-     "F2",
-     "F1",
-     "P2"
-    ],
-    "quotes": [
-     "Increases in market interest rates, credit spreads or a decrease in liquidity could have an adverse effect on the value of fixed income securities"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Underlying ratios are stated in the earnings release; the severity risk is stated in the 10-Q MD&A, and the inference that the trend continues is not supported by a stated horizon.",
-    "claim": "Auto margins show pressure beneath the recorded ratio: the Q3 2026 auto underlying combined ratio was 89.8 versus 86.0 a year earlier, and the 10-Q warns of macroeconomic cost pressure on severity.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "If sustained, these conditions may change claims frequency in auto coverages and may increase severity in auto and homeowners coverages and place additional pressure on operating costs and consumer affordability."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factor and 10-Q Item 1A; no specific action or date is given.",
-    "claim": "State regulation could limit rate adequacy or profits: the 10-K says some states impose or are considering profit limits, which could require premium credits, refunds or retroactive rate adjustments.",
-    "facts": [
-     "P2",
-     "P5"
-    ],
-    "quotes": [
-     "Certain states impose or are contemplating regulatory limitations on the amount of profit that insurance companies may earn."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Transaction timing and the disclosure gap are stated in the 10-Q; the financial impact is inferred and not quantified in the evidence.",
-    "claim": "Arity acquisition and integration risk: Arity acquired INRIX assets in October 2026 and agreed in November 2026 to acquire the rest of Replica, while Arity's nine-month adjusted net result was a loss of (25).",
+    "basis": "stated in P4 and P6 (figures and the cause of the underwriting income decline); the forward volatility is stated in the 10-K, which the packet shows only in part.",
+    "claim": "Catastrophe losses are volatile: Q3 2026 Property-Liability catastrophe losses were $1,650 (table in millions) against $558 (table in millions) a year earlier, which cut quarterly underwriting income.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "Certain acquisition-related disclosures are not yet available due to the timing of the transaction."
+     "Underwriting income was $2.0 billion compared to $2.9 billion in the prior year quarter, primarily reflecting the impact of increased catastrophe losses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 and F1 (figures and cause); the effect on later periods is inferred.",
+    "claim": "Rising interest rates produced unrealized net capital losses of $2.6 billion pre-tax at September 30, 2026, and moved accumulated other comprehensive income to (2,148) (table in millions) from 255 at year-end 2025.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Unrealized net capital losses were $2.6 billion (pre-tax) at September 30, 2026, compared to losses of $97 million in the prior quarter, primarily reflecting lower fixed income valuations as interest rates increased."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (ratios and premium drivers); the margin-compression mechanism is inferred.",
+    "claim": "Auto underlying profitability weakened: the underlying auto combined ratio rose to 89.8 from 86.0 in Q3 2026, while auto earned premiums grew only 0.6% as lower average premiums offset policy growth.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The underlying auto insurance combined ratio* was 89.8 in the third quarter of 2026, compared to 86.0 in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated: the 10-K risk language and the 10-Q reserve table; the exposure to a reversal is inferred. This is the only risk here that is not tied to a specific event, and the risk_type label is the closest available fit.",
+    "claim": "Recorded results lean on favorable reserve development, so a reversal in claim cost estimates would hit earnings: nine-month prior year reserve reestimates excluding catastrophes were $(2,471) (table in millions) versus $(1,007) (table in millions), and the 10-K says claim costs may vary materially from recorded reserves.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The ultimate cost of losses, or current estimates, have and may continue to vary materially from recorded reserves and such variance may adversely affect the results of operations and financial condition as the reserves and amounts due from reinsurers are reestimated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (macro language) and P6 (homeowners ratio); the margin effect is inferred.",
+    "claim": "Management flags higher oil prices and other macro pressures as a possible source of higher auto and homeowners claim severity and cost pressure.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Increased oil prices may contribute to higher transportation, manufacturing and repair costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "risk language stated in P2; linking it to the 41.3% return is inferred, and the packet does not show whether any state threshold applies.",
+    "claim": "State profit-limit rules could force premium credits or refunds if returns exceed regulatory thresholds; the company reports a 41.3% trailing-12-month return on equity.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "If our returns exceed regulatory thresholds, we may be required to issue premium credits, refunds, or implement retroactive rate adjustments to comply with applicable law."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated only as press headlines or snippets; any financial effect is inferred and unsupported.",
+    "claim": "Secondary press reports a customer-account outage and planned job cuts tied to AI expansion. The packet has only headline snippets and no filing detail.",
+    "facts": [
+     "N1",
+     "N2"
+    ],
+    "quotes": [
+     "This issue has caused Allstates customers to be locked out of their accounts",
+     "Allstate reportedly plans to cut thousands of jobs while expanding AI use"
     ],
     "support": "supported"
    }
@@ -1159,26 +1111,23 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in the cited items (catastrophe figures); the open question is inferred from the lack of post-September data.",
-    "claim": "Is the Q3 2026 jump in catastrophe losses (about $1.65 billion, against $558 a year earlier, table in millions) a one-off weather quarter or a lasting change in exposure? The packet has no catastrophe data after September.",
+    "basis": "Quarter and nine-month figures are stated in the cited items. Whether the quarter repeats is inferred and cannot be settled from this packet.",
+    "claim": "Was the third-quarter 2026 catastrophe spike a one-off, or does it point to a higher catastrophe load for coming quarters? The Property-Liability recorded combined ratio was 86.6 against 80.1, and the catastrophe effect was 10.9 points against 3.8.",
     "facts": [
      "P6",
-     "P7",
-     "P8",
-     "P9"
+     "P4"
     ],
     "quotes": [
-     "Total catastrophe losses for the third quarter were $1.65 billion or $1.30 billion, after-tax."
+     "Property-Liability recorded combined ratio was 86.6 for the quarter, which was 6.5 points above the prior year quarter primarily due to 7.1 points of higher catastrophe losses, partially offset by 2.4 points of more favorable non-catastrophe prior year reserve releases."
     ],
     "support": "supported"
    },
    {
-    "basis": "Release amounts are stated in the cited items; adequacy of reserves is not addressed, so the question is inferred.",
-    "claim": "How much of the 2026 underwriting income rests on prior year reserve releases, and are the reserves still adequate? Nine-month Property-Liability reserve reestimates were (2,398) (releases in parentheses, table in millions), set against underwriting income of $6,686.",
+    "basis": "The release effects are stated in the cited items. Their persistence is inferred and not covered by the evidence.",
+    "claim": "How much of the 2026 underwriting margin depends on prior-year reserve releases, and will they continue? The effect of prior year reserve reestimates on the combined ratio was (5.3) for nine months 2026 against (2.5) a year earlier.",
     "facts": [
      "P4",
-     "P6",
-     "F1"
+     "P6"
     ],
     "quotes": [
      "Underwriting income increased $2.22 billion in the first nine months of 2026 compared to the first nine months of 2025, primarily due to an increase in premiums earned and the benefit of prior year reserve releases, partially offset by higher losses, excluding catastrophes, and increased expenses."
@@ -1186,56 +1135,43 @@
     "support": "supported"
    },
    {
-    "basis": "Balance sheet figures are stated; the cause is not stated and is left open.",
-    "claim": "What drove the move to net unrealized capital losses? Fixed income at fair value of 60,246 sits below amortized cost of 62,818, and accumulated unrealized net capital gains and losses went from 297 to (2,024) (table in millions). The packet does not split the cause between rates, credit spreads and credit quality.",
+    "basis": "The ratios and the explanations are stated in the release. The future direction is not stated.",
+    "claim": "Is the rise in the underlying auto combined ratio, to 89.8 from 86.0, a lasting margin trend? Premium mix shift, higher underlying losses and lower average premiums are cited, but the evidence does not say which dominates.",
     "facts": [
-     "F1",
      "P6"
     ],
     "quotes": [
-     "Fixed income securities, at fair value (amortized cost, net $62,818 and $58,730) | $ 60,246 | $ 59,115"
+     "The underlying auto insurance combined ratio* was 89.8 in the third quarter of 2026, compared to 86.0 in the prior year quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the balance sheet; the cited items give no explanation.",
-    "claim": "Are the large securities-settlement balances at September 30, 2026 simple timing effects? The receivable for securities sold was 3,750 against 133 at year-end 2025, and the payable for securities purchased was 4,241 against 49 (table in millions).",
+    "basis": "Loss amounts and the rate explanation are stated. Their path is not covered by the evidence.",
+    "claim": "Will the unrealized net capital losses from higher interest rates persist, reverse or be realized as losses? The release reports unrealized net capital losses of $2.6 billion pre-tax against $97 million in the prior quarter.",
     "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Receivable for securities sold | 3,750 | 133"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Buyback and share figures are stated; the remaining authorization is not in the cited items.",
-    "claim": "How much share repurchase authorization remains, and what is the planned pace? Treasury stock purchases were (2,904) in nine months against (799) a year earlier (table in millions), and common shares outstanding fell to 248.8 million from 262.1 million.",
-    "facts": [
-     "F3",
      "P6",
      "F1"
     ],
     "quotes": [
-     "Treasury stock purchases | (2,904) | (799)"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Figures are stated in the table; the explanation is inferred as unknown.",
-    "claim": "Why is auto premium growth flat while policies in force grow, and why is the underlying combined ratio worsening? Q3 auto premiums written were $9,884 against $9,869, up 0.2%, while policies in force rose 3.4% and the underlying combined ratio went from 86.0 to 89.8.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Underlying combined ratio* | 89.8 | 86.0 | 3.8 | 89.0 | 88.3 | 0.7"
+     "Unrealized net capital losses were $2.6 billion (pre-tax) at September 30, 2026, compared to losses of $97 million in the prior quarter, primarily reflecting lower fixed income valuations as interest rates increased."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item that disclosures are not yet available; the effect on earnings is inferred as unknown.",
-    "claim": "What are the price and financial effect of Arity's October 2026 INRIX acquisition and the pending Replica deal? Arity reported an adjusted net loss of (25) in the nine months (table in millions).",
+    "basis": "Amounts are stated in the cited items. Future buyback decisions are not stated.",
+    "claim": "Will the pace of share repurchases continue? Treasury stock purchases were 2,904 (table in millions) for nine months 2026 against 799, and $1.3 billion remains under the $4.0 billion authorization.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "As of Sept. 30, $1.3 billion remains under the $4.0 billion share repurchase authorization initiated in February 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The transactions and the missing disclosure are stated in the filing. Size and effect are not in the evidence.",
+    "claim": "What do the INRIX acquisition (October 2026) and the planned Replica acquisition cost, and how will they affect Protection Services and Arity results? The 10-Q says the disclosures are not yet available.",
     "facts": [
      "P4",
      "P6"
@@ -1246,37 +1182,33 @@
     "support": "supported"
    },
    {
-    "basis": "The macro statement is quoted; the size of any effect is not stated.",
-    "claim": "Will higher oil prices and other macro pressures raise auto and homeowners claim costs enough to affect margins? The company states uncertainty remains but gives no quantified impact.",
+    "basis": "The headlines are stated in the news items. Any link to the financials is inferred.",
+    "claim": "Do the reported job cuts and the customer-account outage carry material restructuring costs or operational effects? The filings show restructuring charges of 40 (table in millions) in Q3 2026 against 17 but say nothing on either news item.",
     "facts": [
-     "P4",
-     "P2"
+     "N1",
+     "N2",
+     "F2"
     ],
     "quotes": [
-     "Increased oil prices may contribute to higher transportation, manufacturing and repair costs."
+     "Allstate job cuts raise questions about AI's future in the insurance industry"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "ALL",
- "under_review": {
-  "headline": "Allstate outage: What we know, and what it affects",
-  "id": "c3b983d7e3f1",
-  "since": "2026-11-25",
-  "why": "Allstate suffered a multi-day nationwide website and mobile app outage ahead of Thanksgiving, blocking customers from accessing accounts, filing claims, or paying bills, an operational disruption not addressed in the analysis."
- },
- "upside": 0.07651735291631034,
+ "under_review": null,
+ "upside": 0.22532929869734497,
  "valuation": null,
- "value_base": 270.66221088768503,
- "value_bear": 220.95637043565873,
- "value_bull": 351.9691262285809,
+ "value_base": 308.07709337191045,
+ "value_bear": 231.48189052365132,
+ "value_bull": 453.2080022210714,
  "value_per_filed_share": {
-  "base": 270.66221088768503,
-  "bear": 220.95637043565873,
-  "bull": 351.9691262285809
+  "base": 308.07709337191045,
+  "bear": 231.48189052365132,
+  "bull": 453.2080022210714
  },
  "valued": true,
  "verdict": "WATCH",
- "verdict_reason": "expected return +1.0 points a year against the required return over 3 years (BUY needs 4 or more)"
+ "verdict_reason": "expected return +6.8 points a year against the required return over 3 years; the two runs do not both reach BUY"
 }
