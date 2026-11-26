@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T17:06:31Z",
+ "generated_at": "2026-11-26T17:22:05Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "gemini-4-hydrogen-high",
@@ -2360,30 +2360,63 @@
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
   "CHEF": {
-   "alpha_pts": null,
+   "alpha_pts": -15.928793994507807,
    "analysis": "complete",
-   "claims": 123,
-   "claims_supported": 119,
-   "date": "2026-11-17T02:51:02Z",
+   "based_on": {
+    "accepted": "2026-10-28T12:36:56.000Z",
+    "accepted_utc": "2026-10-28T16:36:56Z",
+    "accession": "0001517175-26-000036",
+    "decision_time": "2026-11-26T17:06:59Z",
+    "form": "10-Q",
+    "period": "2026-09-25"
+   },
+   "claims": 89,
+   "claims_supported": 85,
+   "date": "2026-11-26T17:06:59Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 2523944555.3170934,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 43462895.0,
    "flags": [
-    "The company's subsidiaries entered into a new senior secured term loan facility of $675,000,000, priced at SOFR plus 2.00% per annum or the Alternate Base Rate plus 1.00% per annum.",
-    "At the same time, the borrowers repaid all outstanding obligations of approximately $244.7 million under the Prior Term Loan Credit Agreement, which was then terminated.",
-    "In its Q3 2026 earnings release, the company raised its fiscal 2026 full-year guidance, including net sales of $4.56 billion to $4.61 billion."
+    "The Company and certain subsidiaries entered into the New Term Loan Credit Agreement providing a $675,000,000 senior secured term loan facility.",
+    "Concurrently with entering the New Term Loan Credit Agreement, the Borrowers repaid in full approximately $244.7 million of obligations under the Prior Term Loan Credit Agreement and terminated that facility.",
+    "Proceeds from the New Term Loan Facility were used to redeem the Notes."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-opus-5-5",
+   "ke": 0.07571223854887288,
+   "market_cap_at_publish": 4396706975,
+   "model": "gemini-4-hydrogen-high",
    "news_count": 0,
-   "no_value_reason": "share count does not reconcile with filed EPS",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 101.16,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
+   "release_truncated": [],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 57.91804707688403,
+    "3000": 58.22444896794195
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "share count does not reconcile with filed EPS"
+   "upside": -0.4259466073885687,
+   "value_base": 58.07124802241299,
+   "value_bear": 36.756283667091054,
+   "value_bull": 97.2914064936509,
+   "value_per_filed_share": {
+    "base": 58.07124802241299,
+    "bear": 36.756283667091054,
+    "bull": 97.2914064936509
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -15.9 points a year against the required return over 3 years"
   },
   "CIX": {
    "alpha_pts": -14.450163287772677,
@@ -12064,11 +12097,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 147,
+ "valued_count": 148,
  "verdict_counts": {
-  "AVOID": 65,
+  "AVOID": 66,
   "BUY": 56,
-  "NO_CALL": 112,
+  "NO_CALL": 111,
   "WATCH": 17
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
