@@ -2,1278 +2,1068 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 90,
- "claims_supported": 85,
- "date": "2026-11-19T13:03:41Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-08-26T22:05:50.000Z",
+  "accepted_utc": "2026-08-27T02:05:50Z",
+  "accession": "0001660134-26-000069",
+  "decision_time": "2026-11-26T23:51:06Z",
+  "form": "10-Q",
+  "period": "2026-07-31"
+ },
+ "claims": 87,
+ "claims_supported": 84,
+ "date": "2026-11-26T23:51:06Z",
+ "family": "operating",
  "flags": [
-  "Emilie Choi provided notice that she would resign as a Class I director of Okta, Inc.'s Board of Directors effective that day, and her resignation was not the result of any disagreement with the Company.",
-  "The Board appointed Helen Riley as an independent Class I director and member of the Audit Committee, with annual Board compensation of $35,000, Audit Committee compensation of $13,000, and an initial grant of 2,907 restricted stock units.",
-  "During the quarter ended July 31, 2026, Okta settled the remaining principal amount of the 2026 Notes for $350 million in cash, reducing convertible senior notes, net on the balance sheet from 350 to 0 (table in millions)."
+  "Okta paid off the remaining principal of its maturing convertible senior notes in cash, $350 million, during the quarter ended July 31, 2026. The convertible notes line on the balance sheet went from 350 to zero.",
+  "The board authorized a share repurchase program of up to $1 billion of Class A common stock, and the company repurchased common stock for 372 (table in millions) in the six months ended July 31, 2026, versus 0 in the prior-year period.",
+  "Director Emilie Choi resigned from the board, and the board appointed Helen Riley as an independent Class I director and Audit Committee member, effective September 18, 2026. The 8-K says the resignation was not due to a disagreement with the company."
  ],
  "in_code_book": false,
+ "interest_from_filing": {
+  "fy0": "2026-01-31",
+  "kd_tagged": 0.006622516556291391,
+  "kd_used": 0.006622516556291391,
+  "printed": "4",
+  "quote": "Interest expense | $(4) | $(5) | $1 | (34)%",
+  "quotes": [
+   {
+    "id": "P3",
+    "quote": "Interest expense | $(4) | $(5) | $1 | (34)%"
+   },
+   {
+    "id": "P3",
+    "quote": "Interest and other, net consists of interest expense, which primarily includes amortization of debt issuance costs and contractual interest expense for our convertible senior notes"
+   }
+  ],
+  "scale": "millions",
+  "status": "used",
+  "tagged_value": 4000000.0,
+  "value": 4000000.0,
+  "version": "interest_from_filing.v1 2026-11-18 WO_NC8",
+  "what": "Interest expense",
+  "why": "The tagged 4,000,000 is the same $4 million interest expense the 10-K reports, which it says consists of amortization of debt issuance costs and contractual interest on the convertible senior notes, so the 0.66% ratio probably comes from a wrong debt denominator (858 million is the January 31, 2026 cash and equivalents balance in F1, not debt)."
+ },
  "ke": null,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "news": [],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+ "no_value_reason": "implied borrowing cost outside the allowed range",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "6d64d0af96751bb68dfa782658e8004d75ae87df",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1 and P3",
-    "claim": "Okta employs a SaaS business model, generating revenue primarily from multi-year subscriptions to its cloud-based Okta Platform and Auth0 Platform for workforce identity and customer identity.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "We employ a SaaS business model and generate revenue primarily by selling multi-year subscriptions to our cloud-based offerings.",
-     "Our platforms are traditionally used by organizations in two distinct ways: \u201cworkforce identity\u201d, supported by our Okta Platform, to manage and secure employees, contractors and partners; and \u201ccustomer identity\u201d, supported by both our Okta Platform and Auth0 Platform, to secure customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The Okta Platform manages access, security, and identity governance for employees, contractors, partners, and non-human identities, while the developer-centric Auth0 Platform embeds identity into customer- and citizen-facing applications, with both expanding to address AI agents.",
+    "basis": "Stated in the 10-K business description.",
+    "claim": "Okta sells cloud identity software through two platforms, the Okta Platform and the Auth0 Platform, covering workforce identity and customer identity.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The Okta Platform governs and simplifies the way an organization\u2019s employees, contractors, partners and NHIs connect to applications and data from any device.",
-     "The Auth0 Platform is developer-centric and enables companies, nonprofits and governmental agencies to rapidly embed secure, extensible identity management into customer- and citizen-facing cloud, mobile, and web applications.",
-     "We are extending our platforms to address the unique identity security challenges posed by AI agents."
+     "We are the leading independent identity partner."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "Subscription revenue\u2014covering platform access, technical support, and platform management\u2014constituted approximately 98% of total revenue in fiscal 2026 ($2,855 of $2,919, table in millions) and 98% in the six months ended July 31, 2026 ($1,543 of 1,570, table in millions).",
+    "basis": "Stated in the 10-K.",
+    "claim": "Customers are organizations of all sizes, from large enterprises to small businesses, universities, nonprofits and government agencies. The 10-K counts more than 20,000 of them.",
     "facts": [
-     "P3",
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "Our subscription fees include the use of our service and our technical support and management of our platforms.",
-     "Our revenue is relatively predictable as a result of our subscription-based business model, which constituted approximately 98% of total revenue for fiscal 2026.",
-     "Our revenue is relatively predictable as a result of our subscription-based business model, which constituted 98% of total revenue for the six months ended July 31, 2026."
+     "As of January 31, 2026, more than 20,000 customers across nearly every industry used our solutions to secure and manage identities around the world."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "Okta also earns professional services and other revenue\u201464 (table in millions) in fiscal 2026 and 27 (table in millions) in the six months ended July 31, 2026\u2014from implementation, configuration, system integration, and training, though the cost of providing these services has historically exceeded their revenue.",
+    "basis": "Stated in the 10-K MD&A and results table.",
+    "claim": "Revenue is almost entirely subscription: $2,855 (table in millions) of $2,919 (table in millions) total revenue in fiscal 2026, or approximately 98%. Professional services are the small remainder.",
     "facts": [
-     "P3",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "Professional services revenue includes fees from assisting customers in implementing and optimizing the use of our solutions.",
-     "These services include application configuration, system integration and training services.",
-     "The cost of providing professional services has historically been higher than the associated revenue we generate."
+     "Our revenue is relatively predictable as a result of our subscription-based business model, which constituted approximately 98% of total revenue for fiscal 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P3, and P4",
-    "claim": "Okta serves enterprises, small- and medium-sized businesses, universities, nonprofits, and government agencies worldwide, with more than 20,000 customers and over 7,000 partner integrations as of January 31, 2026.",
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "Okta reports as one reportable segment.",
     "facts": [
-     "P1",
-     "P3",
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "These customers consist of leading global organizations ranging from the largest enterprises to small- and medium-sized businesses, universities, nonprofits and government agencies.",
-     "As of January 31, 2026, more than 20,000 customers across nearly every industry used our solutions to secure and manage identities around the world.",
-     "As of January 31, 2026, we had over 7,000 integrations with these cloud, mobile and web applications, and IT infrastructure and security vendors."
+     "We operate our business as one reportable segment."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P2",
-    "claim": "International customers accounted for 20% of total revenue in fiscal 2026, compared with 21% in fiscal 2025.",
+    "basis": "Pricing and invoicing are stated in the 10-Q MD&A. The deferred revenue figure comes from the balance sheet. The link between them is inferred.",
+    "claim": "Pricing is based on the solutions used and the number of users, and customers are invoiced annually in advance. This is why the balance sheet carries deferred revenue of $1,751 (table in millions) current at July 31, 2026.",
     "facts": [
-     "P1",
-     "P2"
+     "P4",
+     "F1"
     ],
     "quotes": [
-     "We currently have sales personnel outside the United States and maintain offices outside the United States in the Americas, Asia-Pacific and Europe, and our international revenue was 21% and 20% of our total revenue in fiscal 2025 and fiscal 2026, respectively."
+     "We base subscription fees primarily on the solutions used and the number of users on our platforms.",
+     "We typically invoice customers in advance in annual installments for subscriptions to our platforms."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P3, and P4",
-    "claim": "Okta sells directly through field and inside sales teams\u2014further specialized at the start of fiscal 2026 between Okta and Auth0 buyer centers\u2014and indirectly through channel partners including cloud marketplaces, resellers, system integrators, and other distribution partners.",
+    "basis": "Stated in the 10-K MD&A.",
+    "claim": "Subscription revenue growth is driven by customer count, users per customer and the solutions each customer uses. Expansion within existing customers is measured by dollar-based net retention, which fell to 106% at January 31, 2026 from 107% a year earlier.",
     "facts": [
-     "P1",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "We sell our product offerings directly through our field and inside sales teams, as well as indirectly through our network of channel partners, including cloud marketplaces, resellers, system integrators, and other distribution partners.",
-     "At the start of fiscal 2026, we further specialized our go-to-market organization to better meet the needs of the distinct buying centers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and F2",
-    "claim": "Okta operates as one reportable segment, while disaggregating revenue and cost of revenue into subscription and professional services and other in its statements of operations.",
-    "facts": [
-     "P3",
-     "F2"
-    ],
-    "quotes": [
-     "We operate our business as one reportable segment.",
-     "Professional services and other"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2, P3, and P4",
-    "claim": "Subscription revenue is driven by the number of customers, users per customer, and solutions used, with customers typically invoiced in advance in annual installments and revenue recognized over the service term.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
+     "P4",
+     "P3"
     ],
     "quotes": [
      "Subscription revenue is driven primarily by the number of customers, the number of users per customer and the solutions used.",
-     "We typically invoice customers in advance in annual installments for subscriptions to our platforms.",
-     "Because we generally recognize revenue from our subscriptions and support services over the term of the relevant service period, a decrease in sales during a reporting period may not be immediately reflected in our results of operations for that period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Expansion within the existing customer base through added users and solutions is measured by Dollar-Based Net Retention Rate, which was 106% as of January 31, 2026 compared with 107% as of January 31, 2025 and 111% as of January 31, 2024.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Our Dollar-Based Net Retention Rate measures our ability to increase revenue across our existing customer base through expansion of users and solutions associated with a customer as offset by churn and contraction in the number of users and/or solutions associated with a customer.",
      "The decrease in our Dollar-Based Net Retention Rate as of January 31, 2026, compared to January 31, 2025, was primarily a result of the macroeconomic environment, with overall ACV from existing customers increasing at a slower rate in the current period."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P1 and P3",
-    "claim": "Growth in large enterprise accounts is a key driver, with customers exceeding $100,000 in annual contract value (ACV) increasing from 4,485 as of January 31, 2024 to 4,800 as of January 31, 2025 and 5,100 as of January 31, 2026.",
+    "basis": "The figures are stated in the 10-K key metrics table. The quote comes from P1, which is not cited here, so it does not support this claim and should be disregarded.",
+    "claim": "Larger customers are a growth focus: customers with annual contract value above $100,000 rose to 5,100 at January 31, 2026 from 4,800 a year earlier.",
     "facts": [
-     "P1",
      "P3"
     ],
     "quotes": [
-     "The number of customers who have greater than $100,000 in ACV with us was 5,100, 4,800 and 4,485 as of January 31, 2026, 2025 and 2024, respectively."
+     "Drive Growth with Large Customers."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in the 10-K business section. The counterpoint is stated in the risk factors.",
+    "claim": "Okta sells directly through field and inside sales teams and indirectly through channel partners such as cloud marketplaces, resellers and system integrators.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We sell our product offerings directly through our field and inside sales teams, as well as indirectly through our network of channel partners, including cloud marketplaces, resellers, system integrators, and other distribution partners."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P6",
-    "claim": "Contracted subscription backlog (remaining performance obligations) was $4,827 (table in millions) with $2,513 (table in millions) current as of January 31, 2026, and stood at $4.858 billion with $2.585 billion current as of July 31, 2026.",
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "Most revenue comes from the United States. International revenue was 20% of total revenue in fiscal 2026.",
     "facts": [
-     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "our international revenue was 21% and 20% of our total revenue in fiscal 2025 and fiscal 2026, respectively"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement and the earnings release.",
+    "claim": "Recent revenue growth is steady at low double digits. Q2 fiscal 2027 total revenue was $805 (table in millions) against $728 (table in millions) a year earlier. Subscription revenue was $793 (table in millions) against $711 (table in millions), up 12%. Professional services fell to $12 (table in millions) from $17 (table in millions).",
+    "facts": [
+     "F2",
      "P6"
     ],
     "quotes": [
-     "RPO represent all future, non-cancelable, contracted revenue under our subscription contracts with customers that has not yet been recognized, inclusive of deferred revenue that has been invoiced and non-cancelable amounts that will be invoiced and recognized as revenue in future periods.",
-     "RPO, or subscription backlog, was $4.858 billion, an increase of 17% year-over-year.",
-     "cRPO, which represents subscription backlog expected to be recognized over the next 12 months, was $2.585 billion, up 14% compared to the second quarter of fiscal 2026."
+     "Q2 revenue grew 11% and subscription revenue grew 12% year-over-year"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2, P3, and P4",
-    "claim": "Revenue and backlog growth face headwinds from longer sales cycles delaying deal closings, macroeconomic uncertainty, intense competition (principally from Microsoft), and past or future cybersecurity incidents.",
+    "basis": "The cost description is stated in the 10-Q. The margin is shown in the gross profit reconciliation in the earnings release.",
+    "claim": "The main cost of revenue is hosting and support for the subscription service. Q2 cost of revenue was $164 (table in millions) against revenue of $805 (table in millions), leaving gross profit of $641 (table in millions), about 80% of revenue.",
     "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Future growth may be impacted by longer sales cycles, which we have experienced, which in turn, could result in delays in deals closing, creating near-term headwinds for cash flow, RPO and current RPO growth as well as potential future impacts on revenue growth and other key metrics on a trailing basis.",
-     "Our principal competitor is Microsoft.",
-     "While we expect the impact of these security incidents to adversely affect our future financial performance, we cannot predict the extent of such impact with certainty."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P6",
-    "claim": "Beginning in fiscal 2027, Okta is accelerating the shift of professional services engagements to its partner ecosystem, creating a headwind to professional services revenue and total revenue growth.",
-    "facts": [
-     "P3",
+     "P4",
+     "F2",
      "P6"
     ],
     "quotes": [
-     "Beginning in fiscal 2027, we expect professional services and other revenue to decline as we shift more engagements to our partner ecosystem.",
-     "Reflected in the revenue guidance is an approximately one percentage point impact to total revenue growth resulting from our decision to accelerate the shift of professional services business to our partners."
+     "Cost of subscription primarily consists of expenses related to hosting our services and providing support."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P4",
-    "claim": "Cost of subscription revenue is driven by cloud infrastructure, security, and support personnel costs, third-party hosting fees, software and maintenance, outside services, amortization of capitalized internal-use software and acquired developed technology, and allocated overhead, with subscription gross margin improving from 79% in fiscal 2025 to 80% in fiscal 2026.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "These expenses include employee-related costs associated with our cloud-based infrastructure, our product security organization and our customer support organization, third-party hosting fees, software and maintenance costs, outside services associated with the delivery of our subscription services, amortization expense associated with capitalized internal-use software and acquired developed technology and allocated overhead.",
-     "Our gross margin for subscription revenue improved from 79% to 80% during fiscal 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P4",
-    "claim": "Sales and marketing is Okta's largest operating expense category at $1,018 (table in millions) or 35% of total revenue in fiscal 2026, driven by employee compensation, deferred sales commissions, marketing, travel, acquired intangible amortization, and allocated overhead.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "We expect our sales and marketing expenses will continue to be our largest operating expense category for the foreseeable future.",
-     "Commissions earned by our sales force that are considered incremental and recoverable costs of obtaining a contract with a customer are deferred and then amortized on a straight-line basis over a period of benefit that we have determined to be generally five years."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P4",
-    "claim": "Research and development ($639, table in millions; 22% of total revenue in fiscal 2026) and general and administrative expenses ($448, table in millions; 15% of total revenue in fiscal 2026) are driven primarily by employee compensation and allocated overhead, alongside corporate professional fees and acquisition-related costs in G&A.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Research and development expenses consist primarily of employee compensation costs and allocated overhead.",
-     "General and administrative expenses consist primarily of employee compensation costs for finance, accounting, legal, information technology and human resources personnel."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3, P4, and F3",
-    "claim": "Shared facilities, IT, security, and recruiting costs are allocated across cost of revenue and operating expenses by headcount, and employee compensation includes stock-based compensation totaling $544 (table in millions) in fiscal 2026 and $231 (table in millions) in the six months ended July 31, 2026.",
+    "basis": "Stated in the 10-K and 10-Q MD&A, with figures from the income statement.",
+    "claim": "Sales and marketing is the largest operating expense and is expected to stay so. It was $273 (table in millions) in Q2 against $246 (table in millions) a year earlier. Sales commissions are deferred and amortized straight-line over the period of benefit.",
     "facts": [
      "P3",
      "P4",
-     "F3"
+     "F2"
     ],
     "quotes": [
-     "We allocate shared costs, such as facilities costs (including rent, utilities and depreciation on assets shared by all departments), certain information technology costs, security costs and recruiting costs to all departments based on headcount.",
-     "Employee compensation costs reflected in each of the cost of revenue and operating expense categories include salaries, bonuses, compensation related taxes, benefits and stock-based compensation."
+     "We expect our sales and marketing expenses will continue to be our largest operating expense category for the foreseeable future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q stock-based compensation table and cash flow statement. The link to operating income is inferred.",
+    "claim": "Stock-based compensation is a large cost embedded in every expense line, and it is declining. It was $114 (table in millions) in Q2 against $144 (table in millions) a year earlier. For six months it was $231 (table in millions) against $272 (table in millions).",
+    "facts": [
+     "P4",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cash flow statement. The explanation is inferred.",
+    "claim": "The business converts to cash well because customers pay in advance. Six-month operating cash flow was $511 (table in millions) against net income of $190 (table in millions), with $231 (table in millions) of stock-based compensation added back.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the 10-K and inferred as a driver only.",
+    "claim": "Management presents AI agents and non-human identities as a potential new demand driver. It describes adoption as early, and the related products as in early access or development.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors and MD&A.",
+    "claim": "The main constraints on revenue are competition, with Microsoft named as the principal competitor, and longer sales cycles.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our principal competitor is Microsoft.",
+     "Future growth may be impacted by longer sales cycles, which we have experienced"
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item (P1 Item 1 Business and P4 Item 2 MD&A)",
-    "claim": "Okta positions itself as an independent, neutral identity provider serving workforce identity through the Okta Platform and customer identity through both the Okta Platform and Auth0 Platform across cloud, hybrid, and on-premises environments.",
+    "basis": "stated by the company in its own filings; this is self-description, not independent verification",
+    "claim": "Okta describes itself as the leading independent identity provider. It sells two platforms, Okta (workforce and customer identity) and Auth0 (developer-centric customer identity), and positions its technological neutrality as a differentiator.",
     "facts": [
-     "P1",
-     "P4"
+     "P4",
+     "P1"
     ],
     "quotes": [
-     "We are the leading independent identity partner.",
      "We are the leading independent identity provider.",
-     "We offer independent and neutral cloud-based identity solutions that allow our customers to integrate with nearly any application, service or cloud that they choose through our secure, reliable, and scalable platforms.",
-     "We prioritize the compatibility of our platforms with public clouds, on-premises infrastructures and hybrid clouds.",
-     "Our platforms are traditionally used by organizations in two distinct ways: \u201cworkforce identity\u201d, supported by our Okta Platform, to manage and secure employees, contractors and partners; and \u201ccustomer identity\u201d, supported by both our Okta Platform and Auth0 Platform, to secure customers."
+     "Our technological neutrality allows our customers to adopt the best technologies easily, and our two platforms are"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P1 Item 1 Business and P3 Item 7 MD&A Key Business Metrics)",
-    "claim": "Okta's installed base exceeded 20,000 customers as of January 31, 2026, and its count of customers with annual contract value above $100,000 increased from 4,485 as of January 31, 2024 to 4,800 as of January 31, 2025 and 5,100 as of January 31, 2026.",
+    "basis": "stated in the 10-K",
+    "claim": "The customer and ecosystem base is broad: the 10-K reports more than 20,000 customers and over 7,000 integrations at the latest fiscal year-end.",
     "facts": [
-     "P1",
+     "P1"
+    ],
+    "quotes": [
+     "As of January 31, 2026, more than 20,000 customers across nearly every industry used our solutions to secure and manage identities around the world."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release and consistent with the 10-Q income statement",
+    "claim": "Q2 revenue grew 11% to $805 million and subscription revenue grew 12%, so the franchise is still expanding.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Total revenue was $805 million, an increase of 11% year-over-year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K and the earnings release; the reading of a slowdown is inferred from the two growth rates and the guide",
+    "claim": "Growth is slowing. Revenue growth in the latest fiscal year was 12% versus 15% the year before, and management guides Q3 revenue growth to 10%.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "representing a growth rate of 12% and 15% in fiscal 2026 and 2025, respectively",
+     "Total revenue of $813 million to $817 million, representing a growth rate of 10% year-over-year;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K; the cause is management's explanation",
+    "claim": "Net retention has fallen over three years, from 111% to 107% to 106%. The company attributes the latest decline to the macroeconomic environment and slower ACV growth at existing customers.",
+    "facts": [
      "P3"
     ],
     "quotes": [
-     "As of January 31, 2026, more than 20,000 customers across nearly every industry used our solutions to secure and manage identities around the world.",
-     "The number of customers who have greater than $100,000 in ACV with us was 5,100, 4,800 and 4,485 as of January 31, 2026, 2025 and 2024, respectively.",
-     "We expect this trend to continue as larger enterprises recognize the value of our platforms and replace their legacy identity access management infrastructure."
+     "The decrease in our Dollar-Based Net Retention Rate as of January 31, 2026, compared to January 31, 2025, was primarily a result of the macroeconomic environment, with overall ACV from existing customers increasing at a slower rate in the current period."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P1 Item 1 Business and P4 Item 2 MD&A)",
-    "claim": "Okta maintained over 7,000 integrations in the Okta Integration Network as of July 31, 2026, creating network effects and identity threat-intelligence data advantages as customers, users, developers, and integrations expand.",
+    "basis": "figures stated in the 10-K; the continuing trend is a management expectation",
+    "claim": "The base of large customers is growing: customers with ACV above $100,000 rose from 4,485 to 4,800 to 5,100 over three year-ends. Management expects larger enterprises to keep replacing legacy identity access management infrastructure.",
     "facts": [
-     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We expect this trend to continue as larger enterprises recognize the value of our platforms and replace their legacy identity access management infrastructure."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the earnings release; the comparison with revenue growth is inferred",
+    "claim": "Contracted backlog is growing faster than revenue: RPO was $4.858 billion (up 17%) and cRPO was $2.585 billion (up 14%). Management guides Q3 cRPO growth lower, to 11% to 12%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "RPO, or subscription backlog, was $4.858 billion, an increase of 17% year-over-year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the release and the 10-Q margin table; the drivers of the gain are inferred from the reconciliation tables",
+    "claim": "Profitability has improved. GAAP operating income was $107 million (13% of revenue) against $41 million (6%) a year earlier. Gross margin rose to 80% from 77%, and stock-based compensation fell.",
+    "facts": [
+     "P6",
+     "F2",
      "P4"
     ],
     "quotes": [
-     "As of July 31, 2026, we had over 7,000 integrations with these cloud, mobile and web applications and IT infrastructure and security vendors.",
-     "As we add new customers, users, developers and integrations to our platforms, our business, customers, partners and users benefit from powerful network effects that increase the value and security of our solutions.",
-     "Our position at the intersection of people, devices, applications and infrastructure gives us unique access to powerful identity threat intelligence data, and the opportunity to provide differentiated insights based on that data, as well as predictive capabilities based on that data to help keep customers more secure."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3 Item 7 MD&A and P6 Q2 FY27 earnings release)",
-    "claim": "Financial and backlog growth continued through the second quarter of fiscal 2027, with fiscal 2026 revenue up 12% to $2,919 million, second-quarter fiscal 2027 revenue up 11% year-over-year to $805 million, RPO up 17% to $4.858 billion, and cRPO up 14% to $2.585 billion, supported by new products led by Okta Identity Governance.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "For fiscal 2026, 2025 and 2024, our revenue was $2,919 million, $2,610 million and $2,263 million, respectively, representing a growth rate of 12% and 15% in fiscal 2026 and 2025, respectively.",
-     "Total revenue was $805 million, an increase of 11% year-over-year.",
-     "RPO, or subscription backlog, was $4.858 billion, an increase of 17% year-over-year.",
-     "cRPO, which represents subscription backlog expected to be recognized over the next 12 months, was $2.585 billion, up 14% compared to the second quarter of fiscal 2026.",
-     "Top-line growth also benefited from strong contributions from our portfolio of new products, led by Okta Identity Governance."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3 Item 7 MD&A and P6 Q2 FY27 earnings release)",
-    "claim": "Okta expanded operating profitability alongside growth, lifting subscription gross margin from 79% to 80% in fiscal 2026 and increasing GAAP operating income in the second quarter of fiscal 2027 to $107 million (13% of total revenue) from $41 million (6% of total revenue) a year earlier.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Our gross margin for subscription revenue improved from 79% to 80% during fiscal 2026.",
      "GAAP operating income was $107 million, or 13% of total revenue, compared to GAAP operating income of $41 million, or 6% of total revenue, in the second quarter of fiscal 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P1 Item 1 Business, P4 Item 2 MD&A, and P6 Q2 FY27 earnings release)",
-    "claim": "Okta is extending its platforms to govern non-human identities and AI agents through Okta for AI Agents, Auth0 for AI Agents, and the Cross App Access extension to MCP, though adoption remains in its early stages.",
+    "basis": "stated in the release and the 10-Q cash flow statement",
+    "claim": "Cash generation and liquidity are strong. Q2 free cash flow was $227 million (28% of revenue), and the company holds $2.299 billion of cash and short-term investments after repaying $350 million of notes in cash.",
     "facts": [
-     "P1",
-     "P4",
+     "P6",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Cash, cash equivalents, and short-term investments were $2.299 billion at July 31, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated by management; not independently quantified",
+    "claim": "Newer products are contributing to growth. The CFO credits strong contributions from new products, led by Okta Identity Governance, and ACV acceleration in both the Okta and Auth0 businesses.",
+    "facts": [
      "P6"
     ],
     "quotes": [
-     "We see a potential long-term opportunity for our platforms to serve as a unified, independent control plane for non-human identities (\u201cNHIs\u201d) and AI agents, a distinct class of identity that requires authenticated, secure access to sensitive resources at a scale and speed exceeding traditional security models designed for human users.",
-     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature.",
-     "Okta for AI Agents, currently available in early access, provides governance and visibility for AI agents through the Okta Platform.",
-     "Auth0 for AI Agents enables developers to leverage the Auth0 Platform to secure and scale agentic applications from pilot to production."
+     "Top-line growth also benefited from strong contributions from our portfolio of new products, led by Okta Identity Governance."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3 Item 7 MD&A and P4 Item 2 MD&A)",
-    "claim": "Existing-customer expansion slowed over recent fiscal years, with Okta's trailing dollar-based net retention rate declining from 111% as of January 31, 2024 to 107% as of January 31, 2025 and 106% as of January 31, 2026, alongside longer sales cycles that can delay deal closings.",
+    "basis": "stated in the 10-K as a potential opportunity",
+    "claim": "AI agents and non-human identities are positioned as a long-term opportunity, but the company describes adoption as early and the related products as in early access or development.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors; the 10-Q says there are no material changes to them",
+    "claim": "The main named competitive threat is Microsoft. Larger rivals have more resources and can bundle products, sell at zero or negative margins, or add identity features to existing offerings.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our principal competitor is Microsoft.",
+     "As a result, they can leverage their relationships based on other solutions, or incorporate functionality into existing solutions, to gain business in a manner that discourages users from purchasing our solutions, including selling at zero or negative margins, bundling products or maintaining closed technology platforms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K and repeated in the 10-Q",
+    "claim": "Past cybersecurity incidents are a named threat to Okta's position. Management says they harmed its reputation and customer relations and expects them to adversely affect future financial performance, to an extent it cannot predict.",
     "facts": [
      "P3",
      "P4"
     ],
     "quotes": [
-     "The decrease in our Dollar-Based Net Retention Rate as of January 31, 2026, compared to January 31, 2025, was primarily a result of the macroeconomic environment, with overall ACV from existing customers increasing at a slower rate in the current period.",
+     "While we expect the impact of these security incidents to adversely affect our future financial performance, we cannot predict the extent of such impact with certainty."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Longer sales cycles are a named near-term pressure on cash flow, RPO and cRPO growth.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
      "Future growth may be impacted by longer sales cycles, which we have experienced, which in turn, could result in delays in deals closing, creating near-term headwinds for cash flow, RPO and current RPO growth as well as potential future impacts on revenue growth and other key metrics on a trailing basis."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P2 Item 1A Risk Factors)",
-    "claim": "Okta faces intense competition from larger, better-resourced rivals\u2014principally Microsoft\u2014that can bundle identity functionality into broader products, price at zero or negative margins, or maintain closed platforms to discourage purchases of Okta's solutions.",
+    "basis": "stated in the 10-K; the Q2 increase is read from the income statement",
+    "claim": "Winning customers is costly. Sales and marketing is the largest expense line, and quarterly sales and marketing expense rose year on year. Management expects it to stay the largest category.",
     "facts": [
-     "P2"
+     "P3",
+     "F2"
     ],
     "quotes": [
-     "We face intense competition, especially from larger, well-established companies, and we may lack sufficient financial or other resources to maintain or improve our competitive position.",
-     "Our principal competitor is Microsoft.",
-     "As a result, they can leverage their relationships based on other solutions, or incorporate functionality into existing solutions, to gain business in a manner that discourages users from purchasing our solutions, including selling at zero or negative margins, bundling products or maintaining closed technology platforms.",
-     "These competitive pressures or our failure to compete effectively may result in price reductions, fewer orders, reduced revenue and gross margins, increased net losses and loss of market share, which could harm our business, results of operations and financial condition."
+     "We expect our sales and marketing expenses will continue to be our largest operating expense category for the foreseeable future."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P2 Item 1A Risk Factors)",
-    "claim": "Larger competitors and acquired startups spend considerably more on research and development and may introduce competing or AI-integrated offerings faster or give equivalent features away for free, threatening Okta's ability to recoup its R&D investments.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Further, many of our competitors expend a considerably greater amount of funds on their respective research and development programs, and those that do not have, in some cases, been acquired by larger companies that allocate greater resources to our competitors\u2019 research and development programs.",
-     "For example, if we develop a new feature but our competitors give an equivalent feature away for free, we may need to also include our newly developed feature for free as part of an existing product offering to remain competitive in the marketplace.",
-     "It is also possible that products and services developed by others, including, but not limited to, new technologies and offerings integrating AI, or products and services developed by competitors, could put us at a competitive disadvantage."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2 Item 1A Risk Factors, P3 Item 7 MD&A, and P4 Item 2 MD&A)",
-    "claim": "Past cybersecurity incidents\u2014including a January 2022 third-party service provider incident and an October 2023 breach of its third-party customer support system\u2014harmed Okta's reputation, customer relations, and financial results, and future incidents or customer sentiment could reduce retention and expansion.",
+    "basis": "stated in the 10-K risk factors and the earnings release",
+    "claim": "Okta depends on channel partners and third-party developers, and some partners also sell competitors' products. The company is also shifting professional services to partners, which management expects to reduce total revenue growth by about one percentage point this year.",
     "facts": [
      "P2",
-     "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "In the past we have experienced cybersecurity incidents, such as the January 2022 incident involving one of our third-party service providers and the October 2023 incident where a threat actor gained unauthorized access to and stole information from our third-party customer support system, that harmed our reputation and customer relations and adversely impacted our financial results.",
-     "We and our third-party service providers may experience similar incidents in the future which may also include disabling access to our service.",
-     "Due to the nature of our business, the announcement of any security incidents, even if not significant, could have these impacts."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in the cited item (P2 Item 1A Risk Factors)",
-    "claim": "Okta's competitiveness is exposed to interoperability, ecosystem, and implementation risks because it depends on third-party operating systems and applications remaining compatible, third-party developers continuing to support its APIs, and partners\u2014some of whom also compete with Okta\u2014successfully selling and deploying its solutions.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "If we are unable to ensure that our solutions integrate or interoperate with a variety of operating systems, platforms, services, software applications devices, mobile phones and other hardware form factors that are developed by others, our platforms may become less competitive and our results of operations may be harmed.",
-     "Some of our partners compete with certain of our solutions and may elect to no longer integrate with our platforms or sell our solutions.",
-     "If these third-party developers stop developing on or supporting our platforms, we will lose the benefit of network effects that have contributed to the growth in our number of customers.",
-     "Unsuccessful, lengthy or costly customer implementation and integration projects could result in claims from customers, harm to our reputation and opportunities for competitors to displace our solutions, each of which could have an adverse effect on our business and results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2 Item 1A Risk Factors)",
-    "claim": "Issues in developing, deploying, or maintaining AI and machine learning technologies under an uncertain regulatory environment could cause reputational harm, liability, or operational setbacks.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Issues with our use, development, adoption, deployment and maintenance of AI and machine learning technologies, combined with an uncertain regulatory environment, may result in reputational harm, liability or other adverse consequences to our business operations."
+     "For example, some of our channel partners sell or provide integration and administration services for our competitors\u2019 solutions.",
+     "Reflected in the revenue guidance is an approximately one percentage point impact to total revenue growth resulting from our decision to accelerate the shift of professional services business to our partners."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1, P3, and P6",
-    "claim": "As of July 31, 2026, Okta held $ 763 (table in millions) in cash and cash equivalents and 1,536 (table in millions) in short-term investments, totaling $2.299 billion, down from $ 858 and 1,695 (table in millions), or $2,553 million, at January 31, 2026.",
-    "facts": [
-     "F1",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | $ 763 | $ 858",
-     "Short-term investments | 1,536 | 1,695",
-     "Cash, cash equivalents, and short-term investments were $2.299 billion at July 31, 2026.",
-     "As of January 31, 2026, our principal sources of liquidity were cash, cash equivalents and short-term investments totaling $2,553 million, which were held for working capital and general corporate purposes, including potential future acquisition activity."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "Okta holds its cash equivalents and investments primarily in U.S. treasury securities, money market funds, corporate debt securities, and certificates of deposit, distributed across large financial institutions under investment policy restrictions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Our cash equivalents and investments consisted primarily of U.S. treasury securities, money market funds, corporate debt securities and certificates of deposit.",
-     "To mitigate risk, our cash and cash equivalents are distributed across large financial institutions.",
-     "In addition, we have policy restrictions in place on the types of securities that can be purchased as part of our available-for-sale securities portfolio."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "Total current assets were 3,089 (table in millions) against total current liabilities of 2,025 (table in millions) at July 31, 2026, with 1,751 (table in millions) of current liabilities consisting of deferred revenue.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Total current assets | 3,089 | 3,644",
-     "Deferred revenue | 1,751 | 1,875",
-     "Total current liabilities | 2,025 | 2,554"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and P6",
-    "claim": "Okta carried 0 (table in millions) in convertible senior notes as of July 31, 2026, down from 350 (table in millions) as of January 31, 2026 after paying $350 million in cash to settle the remaining principal.",
+    "basis": "Stated in the balance sheet F1 and the earnings release P6.",
+    "claim": "Liquidity is ample against near-term obligations. At the latest quarter-end the company held cash and cash equivalents of 763 and short-term investments of 1,536 (table in millions), which the release gives as $2.299 billion in total. Total current assets of 3,089 compare with total current liabilities of 2,025 (table in millions).",
     "facts": [
      "F1",
      "P6"
     ],
     "quotes": [
-     "Convertible senior notes, net | 0 | 350",
-     "During the quarter, the Company settled the remaining principal amount of the 2026 Notes for $350 million in cash."
+     "Cash, cash equivalents, and short-term investments were $2.299 billion at July 31, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Total liabilities were 2,165 (table in millions) versus total stockholders' equity of 6,973 (table in millions) at July 31, 2026, with noncurrent non-deferred-revenue obligations consisting of 53 (table in millions) in operating lease liabilities and 57 (table in millions) in other noncurrent liabilities.",
+    "basis": "Line items are stated in F1 and F2. Absence of other debt is inferred from the balance sheet lines shown.",
+    "claim": "Financial leverage is low. Convertible senior notes, net, were 0 at the latest quarter-end against 350 at fiscal year-end (table in millions), and the balance sheet shows no other debt line. Total liabilities of 2,165 (table in millions) are mostly deferred revenue of 1,751, with total stockholders' equity at 6,973. Interest expense was (1) for the six months.",
     "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Operating lease liabilities, noncurrent | 53 | 72",
-     "Other liabilities, noncurrent | 57 | 55",
-     "Total liabilities | 2,165 | 2,711",
-     "Total stockholders\u2019 equity | 6,973 | 6,999"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2",
-    "claim": "Interest expense fell to 0 (table in millions) in the three months ended July 31, 2026 and (1) (table in millions) in the six months ended July 31, 2026, while interest income and other, net contributed 19 and 42 (table in millions), respectively.",
-    "facts": [
+     "F1",
      "F2"
     ],
     "quotes": [
-     "Interest expense | 0 | (1) | (1) | (2)",
-     "Interest income and other, net | 19 | 27 | 42 | 57"
+     "Convertible senior notes, net | 0 | 350"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and P6",
-    "claim": "Operating cash flow increased to 511 (table in millions) in the six months ended July 31, 2026 from 408 (table in millions) a year earlier, including $234 million (29% of total revenue) in the second quarter, while second-quarter free cash flow was $227 million (28% of total revenue) and six-month free cash flow was $498 (table in P6 matching F3 in millions; 32% free cash flow margin).",
+    "basis": "Stated in P6 and the cash flow statement F3.",
+    "claim": "The only debt that fell due, the remaining convertible notes, was repaid in cash from existing resources, so no refinancing was needed. The company paid $350 million at maturity, and the cash flow statement shows the same payment of (350) (table in millions).",
     "facts": [
+     "P6",
      "F3",
-     "P6"
+     "F1"
     ],
     "quotes": [
-     "Net cash provided by operating activities | 511 | 408",
-     "Net cash provided by operations was $234 million, or 29% of total revenue, compared to net cash provided by operations of $167 million, or 23% of total revenue, in the second quarter of fiscal 2026.",
-     "Free cash flow was $227 million, or 28% of total revenue, compared to $162 million, or 22% of total revenue, in the second quarter of fiscal 2026.",
-     "Free cash flow | $227 | $162 | $498 | $400",
-     "Free cash flow margin | 28% | 22% | 32% | 28%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "For the third quarter of fiscal 2027, Okta expects non-GAAP free cash flow of $175 million to $185 million (a 21% to 23% margin), while full-year fiscal 2027 free cash flow guidance reflects an approximately one percentage point impact from lower interest income due to share repurchases and cash settlement of the 2026 Notes.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Non-GAAP free cash flow of $175 million to $185 million, yielding a free cash flow margin of 21% to 23%.",
-     "Reflected in the free cash flow guidance is an approximately one percentage point impact related to lower interest income due to the combined impact from the stock repurchase program and our settlement of the 2026 Notes in cash."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "Operating cash flow of 511 (table in millions) in the six months ended July 31, 2026 exceeded GAAP net income of $ 190 (table in millions), driven by non-cash add-backs including stock-based compensation of 231, amortization of deferred commissions of 92, and depreciation and amortization of 37 (all table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net income | $ 190 | $ 129",
-     "Stock-based compensation | 231 | 272",
-     "Depreciation and amortization | 37 | 48",
-     "Amortization of deferred commissions | 92 | 76",
-     "Net cash provided by operating activities | 511 | 408"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P4",
-    "claim": "Working capital in the six months ended July 31, 2026 reflected a 217 cash inflow from accounts receivable offset by outflows of (124) in deferred revenue, (96) in deferred commissions, and (56) in accrued compensation (all table in millions).",
-    "facts": [
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Accounts receivable | 217 | 201",
-     "Deferred commissions | (96) | (80)",
-     "Accrued compensation | (56) | (75)",
-     "Deferred revenue | (124) | (143)",
-     "We typically invoice customers in advance in annual installments for subscriptions to our platforms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P3",
-    "claim": "Capital expenditures were low at (11) for capitalized software and (2) for property and equipment (table in millions) in the six months ended July 31, 2026, while financing cash outflows included (100) for taxes on net share settlement of equity awards and (372) for common stock repurchases (all table in millions) under the $1 billion repurchase authorization.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Capitalized software | (11) | (5)",
-     "Purchases of property and equipment | (2) | (3)",
-     "Taxes paid related to net share settlement of equity awards | (100) | (102)",
-     "Repurchases of common stock | (372) | 0",
-     "In January 2026, our board authorized a stock repurchase program of up to $1 billion of our outstanding shares of Class A common stock (the \u201cShare Repurchase Program\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P6",
-    "claim": "Cash generation is supported by a subscription model accounting for 98% of total revenue in the six months ended July 31, 2026, backed by $4.858 billion in remaining performance obligations (up 17% year-over-year) and $2.585 billion in current RPO (up 14% year-over-year).",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Our revenue is relatively predictable as a result of our subscription-based business model, which constituted 98% of total revenue for the six months ended July 31, 2026.",
-     "RPO, or subscription backlog, was $4.858 billion, an increase of 17% year-over-year.",
-     "cRPO, which represents subscription backlog expected to be recognized over the next 12 months, was $2.585 billion, up 14% compared to the second quarter of fiscal 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1, F3, and P6",
-    "claim": "Okta settled its maturing convertible senior notes in full for $350 million in cash during the quarter ended July 31, 2026, reducing convertible senior notes on the balance sheet from 350 to 0 (table in millions) with no refinancing required.",
-    "facts": [
-     "F1",
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Payments upon maturity of convertible senior notes | (350) | 0",
-     "Convertible senior notes, net | 0 | 350",
      "During the quarter, the Company settled the remaining principal amount of the 2026 Notes for $350 million in cash."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1, F3, and P6",
-    "claim": "With no convertible senior notes outstanding as of July 31, 2026, remaining non-deferred-revenue obligations such as 19 (table in millions) in six-month operating lease cash payments and 53 (table in millions) in noncurrent operating lease liabilities sit alongside $2.299 billion in cash, cash equivalents, and short-term investments and 511 (table in millions) of six-month operating cash flow.",
+    "basis": "Stated in F3 and the release P6.",
+    "claim": "Cash generation is strong and rising. Operating cash flow for the six months was 511 against 408 a year earlier (table in millions). Free cash flow was $498 against $400 (dollars in millions). Second-quarter free cash flow was $227 million, or 28% of revenue.",
     "facts": [
-     "F1",
      "F3",
      "P6"
     ],
     "quotes": [
-     "Operating lease liabilities, noncurrent | 53 | 72",
-     "Operating leases | 19 | 18",
-     "Net cash provided by operating activities | 511 | 408",
-     "Cash, cash equivalents, and short-term investments were $2.299 billion at July 31, 2026."
+     "Free cash flow was $227 million, or 28% of total revenue, compared to $162 million, or 22% of total revenue, in the second quarter of fiscal 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the cash flow statement F3. The explanation is inferred from those line items.",
+    "claim": "Quality of cash generation: operating cash flow of 511 is well above net income of 190 (table in millions). The gap comes mainly from the non-cash stock-based compensation add-back of 231 and an accounts receivable inflow of 217, partly offset by a deferred revenue outflow of (124). Stock-based compensation was lower than the 272 of a year earlier.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3 and F1. The funding link is inferred from the cash flow totals.",
+    "claim": "Cash returned and retired this period was large. Net cash used in financing was (794) for the six months (table in millions). It comprised the (350) note payment, (372) of common stock repurchases and (100) of taxes paid on net share settlement. Cash and cash equivalents fell from 858 to 763 and short-term investments from 1,695 to 1,536.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Repurchases of common stock | (372) | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release P6 and the annual MD&A P3. Guidance is management's own projection.",
+    "claim": "Guidance points to continued cash generation, with less interest income. Full-year free cash flow is guided to $910 million to $930 million, and third-quarter free cash flow to $175 million to $185 million. The company says about one percentage point of the free cash flow margin reflects lower interest income from the buyback and the cash settlement of the notes.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Reflected in the free cash flow guidance is an approximately one percentage point impact related to lower interest income due to the combined impact from the stock repurchase program and our settlement of the 2026 Notes in cash."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in Item 1 Business of the 2026 Form 10-K.",
-    "claim": "Digital transformation, cloud adoption, and shifting to Zero Trust security models drive demand for Okta's identity management solutions.",
+    "basis": "Stated in the 10-K MD&A",
+    "claim": "Expansion inside the existing customer base is a named driver of subscription growth: more users and added solutions at current customers, plus new customers, with dollar-based net retention of 106%. For this to continue, existing customers must keep renewing and buying more.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The acceleration of digital transformation, cloud adoption and the evolving security threat landscape continue to drive a shift in how organizations securely manage the identity of their employees, contractors and partners.",
-     "As organizations shift from network-based security models to a Zero Trust security model focused on adaptive and context-aware controls, identity has become the most reliable way to manage user access and protect digital assets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1A Risk Factors and Item 7 MD&A of the 2026 Form 10-K and Item 2 MD&A of the Q2 FY27 Form 10-Q.",
-    "claim": "For demand from cloud and security transitions to continue growing, macroeconomic and political conditions must not cause customers to reduce workforce or customer identity spending.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Adverse general economic, market and industry conditions and reductions in workforce identity and customer identity spending have, in the past and may, in the future, reduce demand for our solutions, which could harm our revenue, results of operations and cash flows."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1 Business and Item 7 MD&A of the 2026 Form 10-K.",
-    "claim": "Subscription revenue growth has been driven primarily by existing customers adding users and buying additional solutions, reflected in a Dollar-Based Net Retention Rate of 106%.",
-    "facts": [
-     "P1",
      "P3"
     ],
     "quotes": [
-     "For fiscal 2026, the increase in subscription revenue was primarily due to an increase in users and sales of additional solutions to existing customers and the addition of new customers.",
-     "The increase in revenue was attributable to increased revenue from existing customers as reflected in our Dollar-Based Net Retention Rate of 106% as of January 31, 2026 and an increase in the number of customers as detailed in our Key Business Metrics."
+     "For fiscal 2026, the increase in subscription revenue was primarily due to an increase in users and sales of additional solutions to existing customers and the addition of new customers."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1A Risk Factors of the 2026 Form 10-K.",
-    "claim": "For existing-customer expansion to continue, customers must renew expiring subscriptions, maintain or increase user counts, and buy additional products despite competitive or macro pressures.",
+    "basis": "Counts and the management expectation are stated in the 10-K. The sales-cycle risk is stated in the 10-K and the 10-Q.",
+    "claim": "Growth in large customers is a second driver: customers with annual contract value above $100,000 rose from 4,485 to 4,800 to 5,100 across the last three fiscal year-ends. For this to continue, larger enterprises must keep replacing legacy identity infrastructure.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "This requires that our existing customers continue to use our platforms, either by purchasing additional subscriptions or by renewing their subscriptions when existing contract terms expire.",
-     "They may decide not to renew their subscriptions with a similar contract period, at the same prices and terms or with the same or a greater number of users."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1 Business and Item 7 MD&A of the 2026 Form 10-K and the Q2 FY27 earnings release.",
-    "claim": "Growth is supported by winning larger enterprises replacing legacy identity infrastructure, with customers above $100,000 in annual contract value rising from 4,485 to 5,100.",
-    "facts": [
-     "P1",
      "P3",
-     "P6"
-    ],
-    "quotes": [
-     "The number of customers who have greater than $100,000 in ACV with us was 5,100, 4,800 and 4,485 as of January 31, 2026, 2025 and 2024, respectively.",
-     "We expect this trend to continue as larger enterprises recognize the value of our platforms and replace their legacy identity access management infrastructure.",
-     "\u201cOur Q2 performance was highlighted by accelerating cRPO, success with our largest customers, and strong profitability and cash flow,\u201d said Brett Tighe, Chief Financial Officer of Okta."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1A Risk Factors of the 2026 Form 10-K and Item 2 MD&A of the Q2 FY27 Form 10-Q.",
-    "claim": "For large-customer acquisition to continue, Okta must compete effectively against larger, bundled vendors like Microsoft and convert deals despite lengthening, less predictable sales cycles.",
-    "facts": [
-     "P2",
      "P4"
     ],
     "quotes": [
-     "Our principal competitor is Microsoft.",
-     "We are increasingly focused on sales to larger organizations, which often involve lengthy purchasing approval processes and less predictable sales cycles.",
+     "We expect this trend to continue as larger enterprises recognize the value of our platforms and replace their legacy identity access management infrastructure.",
      "Future growth may be impacted by longer sales cycles, which we have experienced, which in turn, could result in delays in deals closing, creating near-term headwinds for cash flow, RPO and current RPO growth as well as potential future impacts on revenue growth and other key metrics on a trailing basis."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the Q2 FY27 earnings release and Item 1 Business of the 2026 Form 10-K.",
-    "claim": "Top-line growth benefits from newer products led by Okta Identity Governance, while AI agent and non-human identity offerings represent a potential long-term growth driver.",
+    "basis": "Stated in the Q2 earnings release",
+    "claim": "Contracted backlog supports near-term revenue growth: RPO was $4.858 billion (up 17%) and current RPO was $2.585 billion (up 14%) at the latest quarter-end. For this to continue, current RPO growth must hold; guidance for the next quarter is 11% to 12%, lower than the 14% reported.",
     "facts": [
-     "P1",
      "P6"
     ],
     "quotes": [
-     "Top-line growth also benefited from strong contributions from our portfolio of new products, led by Okta Identity Governance.",
-     "We see a potential long-term opportunity for our platforms to serve as a unified, independent control plane for non-human identities (\u201cNHIs\u201d) and AI agents, a distinct class of identity that requires authenticated, secure access to sensitive resources at a scale and speed exceeding traditional security models designed for human users.",
-     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature."
+     "Current RPO of $2.590 billion to $2.600 billion, representing a growth rate of 11% to 12% year-over-year;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1A Risk Factors of the 2026 Form 10-K.",
-    "claim": "For new-product and AI-driven growth to materialize, Okta must sustain R&D execution, achieve timely market acceptance, and monetize new features without competitors forcing free inclusion.",
+    "basis": "Guidance and results are stated in the release. The deceleration is read from the 10-K growth rates.",
+    "claim": "Current top-line growth is running near 11%, and management guides full-year revenue growth of 10% to 11%. About one point of that outlook is a drag from accelerating the shift of professional services to partners, so continued subscription growth is the condition for holding the rate.",
     "facts": [
-     "P2"
+     "P6",
+     "F2"
     ],
     "quotes": [
-     "Any delay or failure in the introduction of new or enhanced solutions that gain market acceptance and meet customer requirements could harm our business, results of operations and financial condition.",
-     "Even if we maintain adequate research and development resources, we may be unable to monetize newly developed solutions or features such that we can recoup our research and development expenditures.",
-     "For example, if we develop a new feature but our competitors give an equivalent feature away for free, we may need to also include our newly developed feature for free as part of an existing product offering to remain competitive in the marketplace."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1 Business of the 2026 Form 10-K, Item 2 MD&A of the Q2 FY27 Form 10-Q, and the Q2 FY27 earnings release.",
-    "claim": "Okta uses over 7,000 integrations, a specialized Okta and Auth0 go-to-market structure, and partner and developer ecosystems to drive adoption and network effects.",
-    "facts": [
-     "P1",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "As of July 31, 2026, we had over 7,000 integrations with these cloud, mobile and web applications and IT infrastructure and security vendors.",
-     "As we add new customers, users, developers and integrations to our platforms, our business, customers, partners and users benefit from powerful network effects that increase the value and security of our solutions.",
-     "At the start of fiscal 2026, we further specialized our go-to-market organization to better meet the needs of the distinct buying centers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1A Risk Factors of the 2026 Form 10-K.",
-    "claim": "For ecosystem-led growth to continue, channel partners must prioritize Okta and supply enough implementation capacity, and third-party developers must keep building on the platforms.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "They may choose to devote greater resources to our competitors that are more effective in incentivizing them to favor their solutions over ours.",
-     "If these third-party developers stop developing on or supporting our platforms, we will lose the benefit of network effects that have contributed to the growth in our number of customers.",
-     "Increasingly, we, as well as our customers, rely on our network of partners to deliver implementation services, and there may not be enough qualified implementation partners available to meet customer demand."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1 Business and Item 1A Risk Factors of the 2026 Form 10-K.",
-    "claim": "International markets remain a growth opportunity, with 20% of full-year revenue generated outside the United States.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "With 20% of our revenue generated outside of the United States in fiscal 2026, we believe there is a significant opportunity to continue to grow our international business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in Item 1A Risk Factors of the 2026 Form 10-K.",
-    "claim": "For international expansion to succeed, Okta must manage foreign operations and partners while navigating local laws, data privacy rules, and cross-border trade barriers.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Any international expansion efforts that we may undertake may not be successful.",
-     "Establishing operations in international markets also requires significant management attention and financial resources and we cannot guarantee that these investments will produce desired levels of revenue or profitability."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q2 FY27 earnings release and Item 7 MD&A of the 2026 Form 10-K.",
-    "claim": "Contracted subscription backlog supports near-term growth, with RPO of $4.858 billion (up 17% year-over-year) and cRPO of $2.585 billion (up 14% year-over-year) underpinning full-year revenue growth guidance of 10% to 11%.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "RPO, or subscription backlog, was $4.858 billion, an increase of 17% year-over-year.",
-     "cRPO, which represents subscription backlog expected to be recognized over the next 12 months, was $2.585 billion, up 14% compared to the second quarter of fiscal 2026.",
+     "Total revenue was $805 million, an increase of 11% year-over-year.",
      "Total revenue of $3.216 billion to $3.226 billion, representing a growth rate of 10% to 11% year-over-year;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in Item 1A Risk Factors and Item 7 MD&A of the 2026 Form 10-K and Item 2 MD&A of the Q2 FY27 Form 10-Q.",
-    "claim": "For backlog conversion and customer growth to continue, Okta must avoid further cybersecurity incidents, service disruptions, and interoperability failures with third-party platforms.",
+    "basis": "Stated by management in the release and the 10-K. Management's characterization is not independently quantified.",
+    "claim": "New products, led by Okta Identity Governance, are credited with strong contributions to top-line growth. AI-agent identity products are described as early-stage opportunities with no revenue quantified. For AI agents to become a driver, customer adoption must mature.",
     "facts": [
-     "P2",
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Top-line growth also benefited from strong contributions from our portfolio of new products, led by Okta Identity Governance.",
+     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the 10-Q statements. The expense expectation is stated in the 10-K. The interpretation as leverage is inferred.",
+    "claim": "Earnings are growing faster than revenue because of operating leverage: Q2 operating income was 107 against 41 a year earlier (table in millions), on revenue of 805 against 728. General and administrative expense fell to 98 from 113. For this to continue, operating expenses must grow more slowly than revenue.",
+    "facts": [
+     "F2",
      "P3",
      "P4"
     ],
     "quotes": [
-     "While we expect the impact of these security incidents to adversely affect our future financial performance, we cannot predict the extent of such impact with certainty.",
-     "Due to the nature of our business, the announcement of any security incidents, even if not significant, could have these impacts.",
-     "If we are unable to ensure that our solutions integrate or interoperate with a variety of operating systems, platforms, services, software applications devices, mobile phones and other hardware form factors that are developed by others, our platforms may become less competitive and our results of operations may be harmed."
+     "We expect sales and marketing expenses as a percentage of total revenue to decrease as our total revenue grows."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and the cash flow statement. The link between buybacks and per-share growth is inferred.",
+    "claim": "Cash generation funds shareholder returns and debt repayment. Q2 free cash flow was $227 million, or 28% of revenue. In the six months the company repurchased stock and repaid maturing convertible notes. For this to continue, collections and billings must hold, and lower interest income will weigh on free cash flow.",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "Reflected in the free cash flow guidance is an approximately one percentage point impact related to lower interest income due to the combined impact from the stock repurchase program and our settlement of the 2026 Notes in cash."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors",
+    "claim": "Competition and demand conditions limit all of these drivers. The 10-K names Microsoft as the principal competitor and says customers may renew on less favorable terms or not at all. The drivers continue only if Okta keeps winning against larger bundlers and if customer spending holds.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our principal competitor is Microsoft."
+    ],
+    "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "Stated directly in Item 5.02 of the Form 8-K [P7].",
-    "claim": "Emilie Choi provided notice that she would resign as a Class I director of Okta, Inc.'s Board of Directors effective that day, and her resignation was not the result of any disagreement with the Company.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On September 14, 2026, Emilie Choi, a Class I director of the Board of Directors (the \u201cBoard\u201d) of Okta, Inc. (the \u201cCompany\u201d), provided notice that she would resign from the Board, effective that day.",
-     "Ms. Choi\u2019s resignation is not the result of disagreement with the Company on any matters relating to its operations, policies or practices."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Item 5.02 and Exhibit 99.1 of the Form 8-K [P7].",
-    "claim": "The Board appointed Helen Riley as an independent Class I director and member of the Audit Committee, with annual Board compensation of $35,000, Audit Committee compensation of $13,000, and an initial grant of 2,907 restricted stock units.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "Additionally, on September 17, 2026, the Board, upon the recommendation of its Compensation and Corporate Governance Committee, appointed Helen Riley as an independent director of the Company, effective September 18, 2026.",
-     "The Board appointed Ms. Riley as a Class I director, to serve until the Company\u2019s 2027 Annual Meeting of Stockholders, and as a member of the Audit Committee of the Board (the \u201cAudit Committee\u201d).",
-     "Under the terms of those arrangements, she will receive, among other things, annual compensation of $35,000 for her service on the Board, $13,000 for her service on the Audit Committee, and an initial grant of 2,907 restricted stock units that vest annually over three years, subject to continuous service."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Exhibit 99.1 of the Form 8-K [P6] and reflected in the Q2 FY27 balance sheet [F1] and cash flow statement [F3].",
-    "claim": "During the quarter ended July 31, 2026, Okta settled the remaining principal amount of the 2026 Notes for $350 million in cash, reducing convertible senior notes, net on the balance sheet from 350 to 0 (table in millions).",
+    "basis": "stated in the cited items; the exact settlement date is not given, only 'during the quarter'",
+    "claim": "Okta paid off the remaining principal of its maturing convertible senior notes in cash, $350 million, during the quarter ended July 31, 2026. The convertible notes line on the balance sheet went from 350 to zero.",
     "facts": [
      "P6",
-     "F1",
-     "F3"
+     "F3",
+     "F1"
     ],
     "quotes": [
      "During the quarter, the Company settled the remaining principal amount of the 2026 Notes for $350 million in cash.",
-     "Convertible senior notes, net | 0 | 350",
      "Payments upon maturity of convertible senior notes | (350) | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Item 7 MD&A of the FY2026 Form 10-K [P3].",
-    "claim": "In January 2026, Okta's board authorized a stock repurchase program of up to $1 billion of its outstanding shares of Class A common stock.",
+    "basis": "stated in the cited items",
+    "claim": "The board authorized a share repurchase program of up to $1 billion of Class A common stock, and the company repurchased common stock for 372 (table in millions) in the six months ended July 31, 2026, versus 0 in the prior-year period.",
     "facts": [
-     "P3"
+     "P3",
+     "F3"
     ],
     "quotes": [
-     "In January 2026, our board authorized a stock repurchase program of up to $1 billion of our outstanding shares of Class A common stock (the \u201cShare Repurchase Program\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q2 FY27 cash flow statement [F3] and referenced in Exhibit 99.1 of the Form 8-K [P6].",
-    "claim": "During the six months ended July 31, 2026, Okta executed repurchases of common stock totaling (372) (table in millions).",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
+     "In January 2026, our board authorized a stock repurchase program of up to $1 billion of our outstanding shares of Class A common stock",
      "Repurchases of common stock | (372) | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Item 7 MD&A of the FY2026 Form 10-K [P3].",
-    "claim": "Okta conducted restructuring initiatives involving employee severance, termination benefits, notice period costs, and certain lease impairment charges, recording restructuring and other charges of 4 in fiscal 2026, 11 in fiscal 2025, and 56 in fiscal 2024 (table in millions).",
+    "basis": "stated in the cited 8-K Item 5.02",
+    "claim": "Director Emilie Choi resigned from the board, and the board appointed Helen Riley as an independent Class I director and Audit Committee member, effective September 18, 2026. The 8-K says the resignation was not due to a disagreement with the company.",
     "facts": [
-     "P3"
+     "P7"
     ],
     "quotes": [
-     "Restructuring and other charges consist primarily of personnel costs, such as notice period, employee severance payments and termination benefits.",
-     "In addition, restructuring and other charges include certain lease impairment charges.",
-     "Restructuring and other charges decreased in fiscal 2026 due to a reduction in the scale of restructuring initiatives compared to fiscal 2025.",
-     "Restructuring and other charges | 4 | 11 | 56"
+     "Ms. Choi\u2019s resignation is not the result of disagreement with the Company on any matters relating to its operations, policies or practices.",
+     "Additionally, on September 17, 2026, the Board, upon the recommendation of its Compensation and Corporate Governance Committee, appointed Helen Riley as an independent director of the Company, effective September 18, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in Item 7 MD&A of the FY2026 Form 10-K [P3] and Part I, Item 2 MD&A of the Q2 FY27 Form 10-Q [P4].",
-    "claim": "Okta experienced a cybersecurity incident in January 2022 involving one of its third-party service providers that harmed its reputation and customer relations and adversely impacted its financial results.",
+    "basis": "stated in the cited MD&A sections; the 10-Q repeats the 10-K wording",
+    "claim": "Okta says past cybersecurity incidents harmed its reputation and customer relations and hurt its financial results. They include a January 2022 incident involving a third-party service provider and an October 2023 incident in which a threat actor stole information from its third-party customer support system.",
     "facts": [
      "P3",
      "P4"
     ],
     "quotes": [
      "In the past we have experienced cybersecurity incidents, such as the January 2022 incident involving one of our third-party service providers and the October 2023 incident where a threat actor gained unauthorized access to and stole information from our third-party customer support system, that harmed our reputation and customer relations and adversely impacted our financial results."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Item 7 MD&A of the FY2026 Form 10-K [P3] and Part I, Item 2 MD&A of the Q2 FY27 Form 10-Q [P4].",
-    "claim": "Okta experienced a cybersecurity incident in October 2023 in which a threat actor gained unauthorized access to and stole information from its third-party customer support system, harming its reputation and customer relations and adversely impacting its financial results.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "In the past we have experienced cybersecurity incidents, such as the January 2022 incident involving one of our third-party service providers and the October 2023 incident where a threat actor gained unauthorized access to and stole information from our third-party customer support system, that harmed our reputation and customer relations and adversely impacted our financial results."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Item 7 MD&A of the FY2026 Form 10-K [P3] and Exhibit 99.1 of the Q2 FY27 Form 8-K [P6].",
-    "claim": "Okta decided to accelerate the shift of its professional services business to its partner ecosystem beginning in fiscal 2027, creating a headwind to professional services revenue and total revenue growth.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Beginning in fiscal 2027, we expect professional services and other revenue to decline as we shift more engagements to our partner ecosystem.",
-     "Reflected in the revenue guidance is an approximately one percentage point impact to total revenue growth resulting from our decision to accelerate the shift of professional services business to our partners."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in Item 7 MD&A of the FY2026 Form 10-K [P3].",
-    "claim": "Okta repurchased convertible senior notes prior to maturity, recording gains on early extinguishment of debt of 19 in fiscal 2025 and 106 in fiscal 2024 (table in millions).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Gain on early extinguishment of debt | \u2014 | 19 | 106",
-     "For fiscal 2026, interest and other, net decreased primarily due to a decrease in gains on early extinguishment of debt related to repurchases of the convertible senior notes offset by an increase in interest income from our short-term investments."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated directly in 10-K Item 1A Risk Factors ([P2]), with competitive positioning and recent operating results stated in [P1] and [P6].",
-    "claim": "Okta faces intense competition from larger, well-established companies such as Microsoft, which could pressure pricing, orders, revenue, gross margins, and market share.",
-    "facts": [
-     "P2",
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "We face intense competition, especially from larger, well-established companies, and we may lack sufficient financial or other resources to maintain or improve our competitive position.",
-     "Our principal competitor is Microsoft.",
-     "These competitive pressures or our failure to compete effectively may result in price reductions, fewer orders, reduced revenue and gross margins, increased net losses and loss of market share, which could harm our business, results of operations and financial condition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 10-K Item 1A ([P2]) and 10-Q Item 2 ([P4]), with customer scale and backlog growth stated in [P1] and [P6].",
-    "claim": "Prior cybersecurity incidents involving third-party systems harmed Okta's reputation, customer relations, and financial results, and future incidents could disable service access or create additional liability.",
-    "facts": [
-     "P2",
-     "P4",
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "In the past, we have experienced cybersecurity incidents that allowed unauthorized access to our systems or data or our customers\u2019 data, harmed our reputation, created additional liability and adversely impacted our financial results.",
-     "We and our third-party service providers may experience similar incidents in the future which may also include disabling access to our service.",
-     "While we expect the impact of these security incidents to adversely affect our future financial performance, we cannot predict the extent of such impact with certainty."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 10-K Item 7 ([P3]) and 10-Q Item 2 ([P4]), with Q2 FY2027 trends stated in [P6].",
-    "claim": "Longer sales cycles and macroeconomic pressures have slowed expansion within existing customers, as Dollar-Based Net Retention Rate declined from 111% to 107% to 106%.",
+    "basis": "Stated in the cited items. The link between falling net retention and slower growth is the company's own explanation for fiscal 2026; the extension to the guided growth rate is inferred.",
+    "claim": "Management guides revenue growth to about 10% for the third quarter, against 12% growth in the prior fiscal year, and dollar-based net retention fell from 111% to 107% to 106% over the last three fiscal year-ends.",
     "facts": [
      "P3",
-     "P4",
-     "P2",
      "P6"
     ],
     "quotes": [
-     "Future growth may be impacted by longer sales cycles, which we have experienced, which in turn, could result in delays in deals closing, creating near-term headwinds for cash flow, RPO and current RPO growth as well as potential future impacts on revenue growth and other key metrics on a trailing basis.",
+     "Total revenue of $813 million to $817 million, representing a growth rate of 10% year-over-year",
      "The decrease in our Dollar-Based Net Retention Rate as of January 31, 2026, compared to January 31, 2025, was primarily a result of the macroeconomic environment, with overall ACV from existing customers increasing at a slower rate in the current period."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in 10-K Item 1A ([P2]), with customer metrics and revenue mix stated in [P3], [P4], and [P6].",
-    "claim": "Okta's subscription revenue relies on customer renewals and expansion, as customers have no obligation to renew upon contract expiration and decreases in sales may not immediately appear in recognized revenue.",
+    "basis": "The sales-cycle risk is stated in the 10-Q. The link to the lower free cash flow guide is inferred from the two items.",
+    "claim": "Longer sales cycles are an acknowledged headwind. The company says they could delay deals and weigh on cash flow, RPO and cRPO growth. Third-quarter free cash flow is guided to $175 million to $185 million, against $227 million in the second quarter.",
     "facts": [
-     "P2",
-     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Our customers have no obligation to renew their subscriptions after the expiration of their subscription period.",
-     "Because we generally recognize revenue from our subscriptions and support services over the term of the relevant service period, a decrease in sales during a reporting period may not be immediately reflected in our results of operations for that period."
+     "Future growth may be impacted by longer sales cycles, which we have experienced, which in turn, could result in delays in deals closing"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P2], [P3], and [P6], with segment revenue and cost figures in [F2].",
-    "claim": "Accelerating the shift of professional services to partners creates a revenue growth headwind and increases reliance on partner implementation capacity, where delays or failures could cause subscription cancellations.",
+    "basis": "Stated in the cited items. The characterization as a risk is inferred.",
+    "claim": "Cash returned to holders and used to settle the notes is reducing the cash balance and interest income. Cash and short-term investments were $2.299 billion, after repurchases of 372 and note maturity payments of 350 (table in millions) in six months.",
     "facts": [
-     "P2",
-     "P3",
+     "F3",
      "P6",
-     "F2"
+     "F1"
     ],
     "quotes": [
-     "Reflected in the revenue guidance is an approximately one percentage point impact to total revenue growth resulting from our decision to accelerate the shift of professional services business to our partners.",
-     "Increasingly, we, as well as our customers, rely on our network of partners to deliver implementation services, and there may not be enough qualified implementation partners available to meet customer demand.",
-     "These and other circumstances may delay our ability to sell additional solutions or result in customers canceling or failing to renew their subscriptions before our solutions have been fully implemented."
+     "Reflected in the free cash flow guidance is an approximately one percentage point impact related to lower interest income due to the combined impact from the stock repurchase program and our settlement of the 2026 Notes in cash."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in [P1] and [P2], with product adoption and governance updates stated in [P6] and [P7].",
-    "claim": "Okta's investments in AI and agentic identity solutions face uncertain market adoption, potential inability to monetize R&D expenditures, and operational or regulatory risks from AI deployment.",
+    "basis": "The risk is stated in the 10-K risk factors. The absence of observed damage is inferred from the financial statements.",
+    "claim": "Okta names Microsoft as its principal competitor. It warns that larger rivals may bundle products or sell at zero or negative margins, which could lead to price cuts, fewer orders and lost market share.",
     "facts": [
-     "P1",
-     "P2",
-     "P6",
-     "P7"
+     "P2"
     ],
     "quotes": [
-     "Issues with our use, development, adoption, deployment and maintenance of AI and machine learning technologies, combined with an uncertain regulatory environment, may result in reputational harm, liability or other adverse consequences to our business operations.",
-     "Even if we maintain adequate research and development resources, we may be unable to monetize newly developed solutions or features such that we can recoup our research and development expenditures.",
-     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature."
+     "Our principal competitor is Microsoft.",
+     "including selling at zero or negative margins, bundling products or maintaining closed technology platforms"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in 10-K Item 1A ([P2]) and MD&A ([P3], [P4]).",
-    "claim": "Failure to comply with evolving data privacy, cybersecurity, localization, or international trade laws and tariffs across U.S. and foreign jurisdictions could result in liability and higher operating costs.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Any actual or perceived failure by us, our third-party service providers or our customers to comply with new or existing laws, regulations or other requirements relating to the privacy, security and processing of personal information could adversely affect our business, results of operations or financial condition.",
-     "Establishing operations in international markets also requires significant management attention and financial resources and we cannot guarantee that these investments will produce desired levels of revenue or profitability."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 10-K Item 1A ([P2]), with integration network counts stated in [P1] and [P4].",
-    "claim": "Okta's growth and competitiveness depend on maintaining interoperability with third-party platforms and retaining channel partners and developers, some of whom also sell or compete with Okta's solutions.",
-    "facts": [
-     "P2",
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "If we are unable to ensure that our solutions integrate or interoperate with a variety of operating systems, platforms, services, software applications devices, mobile phones and other hardware form factors that are developed by others, our platforms may become less competitive and our results of operations may be harmed.",
-     "Some of our partners compete with certain of our solutions and may elect to no longer integrate with our platforms or sell our solutions.",
-     "If these third-party developers stop developing on or supporting our platforms, we will lose the benefit of network effects that have contributed to the growth in our number of customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in 10-K Item 1A ([P2]), with Board appointment details in [P7].",
-    "claim": "Okta's dual-class common stock concentrates 32% of total voting power with pre-IPO holders, directors, executive officers, and their affiliates, limiting public Class A stockholders' influence over corporate governance.",
-    "facts": [
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "The dual class structure of our common stock has the effect of concentrating voting control with those stockholders who held our capital stock prior to the completion of our IPO, including our directors, executive officers, and their affiliates, who held in the aggregate 32% of the voting power of our capital stock as of January 31, 2026.",
-     "This will limit or preclude your ability to influence corporate matters, including the election of directors, amendments of our organizational documents, and any merger, consolidation, sale of all or substantially all of our assets or other major corporate transaction requiring stockholder approval."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in [P3] and [P6], supported by balance sheet and cash flow statement figures in [F1] and [F3].",
-    "claim": "Deploying cash for the $1 billion Share Repurchase Program and settling the remaining convertible senior notes for $350 million reduces investable cash and interest income, while banking and interest rate conditions create financial uncertainty.",
+    "basis": "Stated in the cited items. The counter is inferred from reported results.",
+    "claim": "The company says its past cybersecurity incidents harmed its reputation and customer relations and that it expects them to adversely affect future financial performance. It cannot predict the extent, and any new incident could repeat the harm.",
     "facts": [
      "P3",
-     "P6",
-     "F1",
-     "F3"
+     "P2"
     ],
     "quotes": [
-     "We expect interest income to decrease in fiscal 2027 as we deploy investable cash to fund our Share Repurchase Program, settle our 2026 Convertible Senior Notes obligation, and due to changes in the interest rate environment.",
-     "Reflected in the free cash flow guidance is an approximately one percentage point impact related to lower interest income due to the combined impact from the stock repurchase program and our settlement of the 2026 Notes in cash.",
-     "We continue to monitor the impacts of this situation; however, there can be no assurances that conditions in the banking sector and in global financial markets will not worsen and/or adversely affect us."
-    ],
-    "support": "supported"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "Stated in [P6] as forward guidance; actual third quarter fiscal 2027 financial results are absent from the evidence packet.",
-    "claim": "Did Okta achieve its third quarter of fiscal 2027 guidance of $813 million to $817 million in total revenue and $2.590 billion to $2.600 billion in current RPO?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "For the third quarter of fiscal 2027, the Company expects:",
-     "\u2022Total revenue of $813 million to $817 million, representing a growth rate of 10% year-over-year;",
-     "\u2022Current RPO of $2.590 billion to $2.600 billion, representing a growth rate of 11% to 12% year-over-year;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P3]; [P4] omits the income taxes footnote and does not disclose whether the valuation allowance remained in full as of July 31, 2026.",
-    "claim": "When and in what amount will Okta release the full valuation allowance on its deferred tax assets in the United States?",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Given our current and anticipated future earnings, we may release a significant portion of our valuation allowance in the foreseeable future if there is sufficient positive evidence that outweighs the negative evidence.",
-     "However, the exact timing and amount of any potential valuation allowance release remains uncertain and is subject to change on the basis of the level of profitability that we are able to actually achieve.",
-     "As of January 31, 2026 we continue to maintain a full valuation allowance on our deferred tax assets in the United States."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P3] that the company is still evaluating the impact of these provisions.",
-    "claim": "What impact will the international taxation provisions of the One Big Beautiful Bill Act taking effect in fiscal 2027 have on Okta's financial statements and tax positions?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In addition, certain provisions of the Act, particularly those related to international taxation, are effective beginning in the fiscal period ending January 31, 2027.",
-     "We are currently evaluating the impact of these provisions on our financial statements and tax positions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P3] that the program was authorized and in [F3] that cash outflows for common stock repurchases occurred; the omitted liquidity and equity footnotes would specify share counts, prices, and remaining authorization.",
-    "claim": "How many shares were repurchased and how much authorization remains under Okta's $1 billion Share Repurchase Program?",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "In January 2026, our board authorized a stock repurchase program of up to $1 billion of our outstanding shares of Class A common stock (the \u201cShare Repurchase Program\u201d).",
-     "Repurchases of common stock | (372) | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P3] as of January 31, 2026 and referenced qualitatively in [P6]; the Q2 fiscal 2027 key business metrics section in [P4] was omitted from the packet.",
-    "claim": "What were Okta's Dollar-Based Net Retention Rate and number of customers with annual contract value above $100,000 for the second quarter of fiscal 2027?",
-    "facts": [
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Customers with annual contract value (\u201cACV\u201d) above $100,000 | 5,100 | 4,800 | 4,485",
-     "Dollar-based net retention rate for the trailing 12 months ended | 106% | 107% | 111%",
-     "\u201cOur Q2 performance was highlighted by accelerating cRPO, success with our largest customers, and strong profitability and cash flow,\u201d said Brett Tighe, Chief Financial Officer of Okta."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P1] and [P4] that these offerings are in early access or development, with no general availability dates or revenue figures provided.",
-    "claim": "When will Okta's early-access AI agent products reach general availability, and how will they be priced and monetized?",
-    "facts": [
-     "P1",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Okta for AI Agents, currently available in early access, provides governance and visibility for AI agents through the Okta Platform.",
-     "Cross App Access, currently available in early access, is the interoperability standard that allows these AI agents to securely interact across third-party ecosystems, including through an extension to the emerging Model Context Protocol (\u201cMCP\u201d) standard.",
-     "We are expanding these capabilities to include AI agents through product offerings that are currently available or under development."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P3], [P4], and [P6] that partner shifting creates a professional services revenue headwind and that service costs have historically exceeded revenue, while [F2] continues to show cost exceeding revenue through July 31, 2026.",
-    "claim": "How far will professional services and other revenue decline as Okta accelerates the shift of engagements to partners, and will that shift eliminate professional services gross losses?",
-    "facts": [
-     "P3",
-     "P4",
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "Beginning in fiscal 2027, we expect professional services and other revenue to decline as we shift more engagements to our partner ecosystem.",
-     "The cost of providing professional services has historically been higher than the associated revenue we generate.",
-     "Reflected in the revenue guidance is an approximately one percentage point impact to total revenue growth resulting from our decision to accelerate the shift of professional services business to our partners."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [F1] that Note 7 covers commitments and contingencies (note omitted) and in [P3] and [P4] that the future financial impact of prior security incidents cannot be predicted with certainty.",
-    "claim": "What material commitments, litigation, or regulatory contingencies exist under Note 7, and what is the ongoing financial impact of Okta's past cybersecurity incidents?",
-    "facts": [
-     "F1",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Commitments and contingencies (Note 7)",
      "While we expect the impact of these security incidents to adversely affect our future financial performance, we cannot predict the extent of such impact with certainty."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P6] that acquisition and integration-related expenses were incurred during the three months ended July 31, 2026 while [F3] reports zero cash payments for business acquisitions and an outflow for intangible asset purchases.",
-    "claim": "What transaction or integration activity gave rise to Okta's acquisition and integration-related expenses in the second quarter of fiscal 2027?",
+    "basis": "Early-stage status is stated in the 10-K. The risk to the growth thesis is inferred.",
+    "claim": "The AI-agent identity opportunity is described as early-stage. The related products are in early access or development, so the growth it is meant to support may not arrive on the timing implied.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "While adoption is in its early stages, we believe the inherent challenges of governing NHIs and agentic identities may drive increased demand for our solutions as these technologies and customer adoption continue to mature."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "inferred: the packet lists no item effective after 2026-11-19T13:03:41Z",
+    "claim": "No evidence became effective after the earlier analysis, so the demand-driver point is neither confirmed nor altered. The business description in the 10-K is unchanged.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses whether macroeconomic conditions will reduce identity spending. The latest filings still describe the macro risk as uncertain.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses the drivers of subscription revenue growth or the net retention rate. The point rests on the 10-K MD&A as before.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses whether customers will renew and expand. The dependency on renewals and expansion is described only in the earlier risk factors.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence updates the large-customer count or the legacy-replacement trend. The count comes from the fiscal 2026 10-K.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses new-product contributions or the AI agent opportunity. The latest statements remain the Q2 FY27 earnings release and the 10-K.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses execution, market acceptance or monetization of new features. This remains a risk-factor statement only.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence changes the description of the integrations, go-to-market structure and ecosystem. The latest source is the Q2 10-Q.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses partner prioritization, implementation capacity or developer support. The dependency is described only in the earlier risk factors.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence updates the international revenue share. The figure comes from the fiscal 2026 10-K.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses the conditions for international expansion. The point rests on the 10-K risk factors.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence updates the backlog figures or the full-year guidance. They remain as stated in the August 2026 earnings release.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses the competitive risk. The point rests on the 10-K risk factors.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses the cybersecurity risk. The Q2 10-Q MD&A repeats the earlier incident discussion.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence updates the net retention rate trend or the effect of longer sales cycles. The latest retention data is from the fiscal 2026 10-K.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses renewal dependence or the lag between sales and recognized revenue. This remains a risk-factor statement.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses the professional services shift to partners or its revenue headwind. The latest statement is the August 2026 earnings release.",
+    "facts": [
+     "P2",
+     "P6",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses AI adoption, monetization or regulatory risk. The latest items are the earnings release and the September 2026 board announcement.",
+    "facts": [
+     "P2",
+     "P6",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses compliance risk with privacy, cybersecurity and trade laws. The point rests on the 10-K and 10-Q risk discussions.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence addresses interoperability or partner and developer dependence. The point rests on the 10-K risk factors.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence updates the dual-class voting concentration. The figure comes from the fiscal 2026 10-K.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred: no item is effective after the earlier analysis date",
+    "claim": "No newer evidence updates the cash deployment for buybacks and note settlement. The latest data is the July 2026 quarter-end balance sheet and cash flow statement.",
+    "facts": [
+     "P3",
+     "P6",
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "unresolved_questions": [
+   {
+    "basis": "Both growth figures are stated in the earnings release. The cause of the gap is not stated, so the explanation is inferred.",
+    "claim": "Does the guided drop in cRPO growth, from 14% in Q2 to 11% to 12% in Q3, reflect longer sales cycles or the professional-services shift, or something else?",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "current remaining performance obligations (cRPO) grew 14% year-over-year",
+     "representing a growth rate of 11% to 12% year-over-year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The one-point impact is stated in the release. How subscription growth will evolve is not stated.",
+    "claim": "How much of the guided full-year revenue growth of 10% to 11%, against 11% in Q2, comes from the shift of professional services to partners, and how much from subscription demand?",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Reflected in the revenue guidance is an approximately one percentage point impact to total revenue growth resulting from our decision to accelerate the shift of professional services business to our partners."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The fiscal 2026 rates and the stated cause come from the 10-K. The Q2 net retention rate is not in the packet, so any recovery is not confirmed.",
+    "claim": "Has the dollar-based net retention rate stabilized after falling from 111% to 107% to 106% through fiscal 2026?",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Dollar-based net retention rate for the trailing 12 months ended | 106% | 107% | 111%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The six-month repurchase amount and the authorization size are stated. The remaining authorization and the intended pace are not in the evidence.",
+    "claim": "How much of the $1 billion repurchase authorization remains after 372 (table in millions) of repurchases in six months, and at what pace will the rest be used?",
+    "facts": [
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Repurchases of common stock | (372) | 0",
+     "our board authorized a stock repurchase program of up to $1 billion of our outstanding shares of Class A common stock"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The compensation figures are stated. That the margin improvement depends on this decline is inferred from the table and the unchanged 28% non-GAAP operating margin.",
+    "claim": "Will quarterly stock-based compensation keep falling after $114 versus $144 (table in millions) in Q2, or has the GAAP margin gain from lower stock-based compensation run its course?",
+    "facts": [
+     "P6",
+     "P4",
+     "F3"
+    ],
+    "quotes": [
+     "Total stock-based compensation expense | $114 | $144 | $231 | $272"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The possibility and uncertainty are stated in the 10-K. Whether the allowance was still in place after July 31, 2026 is not in the packet.",
+    "claim": "Will Okta release its U.S. deferred-tax valuation allowance, and when, given the 10-K's statement that a release is possible?",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "As of January 31, 2026 we continue to maintain a full valuation allowance on our deferred tax assets in the United States."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The expense line and the zero acquisition payments are stated. The nature of the transaction is not stated.",
+    "claim": "What transaction produced the acquisition and integration-related expenses in Q2, when the cash flow statement shows no acquisition payments in the six months?",
     "facts": [
      "P6",
      "F3"
     ],
     "quotes": [
      "Acquisition and integration-related expenses | 2 | \u2014 | 2 | \u2014",
-     "Payments for business acquisitions, net of cash acquired | 0 | (3)",
-     "Purchases of intangible assets | (2) | 0"
+     "Payments for business acquisitions, net of cash acquired | 0 | (3)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P2] as of January 31, 2026; [F1] omits period-end Class A and Class B share counts on the extracted balance sheet.",
-    "claim": "What are the exact Class A and Class B common stock share counts outstanding and resulting dual-class voting power concentration as of the latest balance sheet date?",
+    "basis": "The early-access status is stated in the 10-K. No revenue from AI-agent products is disclosed, so any link to growth is unconfirmed.",
+    "claim": "Do the AI-agent products add measurable revenue, or are they still in early access with no contribution shown?",
     "facts": [
-     "F1",
-     "P2"
+     "P1",
+     "P6"
     ],
     "quotes": [
-     "The dual class structure of our common stock has the effect of concentrating voting control with those stockholders who held our capital stock prior to the completion of our IPO, including our directors, executive officers, and their affiliates, who held in the aggregate 32% of the voting power of our capital stock as of January 31, 2026.",
-     "Common stock | 0 | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P6] and [F1] that the 2026 Notes were settled and convertible senior notes carried at zero as of July 31, 2026, while the debt footnote is omitted from the packet.",
-    "claim": "Following the cash settlement of the remaining $350 million principal of the 2026 Notes, does Okta maintain any undrawn credit facilities or other debt agreements?",
-    "facts": [
-     "P6",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "During the quarter, the Company settled the remaining principal amount of the 2026 Notes for $350 million in cash.",
-     "Convertible senior notes, net | 0 | 350"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [P7] that Ms. Choi resigned and Ms. Riley was appointed to the Board and Audit Committee, while Ms. Choi's prior committee memberships and post-September 2026 filings are absent.",
-    "claim": "Were any board committee roles left vacant by Emilie Choi's resignation or were any additional leadership or board changes announced after September 18, 2026?",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "On September 14, 2026, Emilie Choi, a Class I director of the Board of Directors (the \u201cBoard\u201d) of Okta, Inc. (the \u201cCompany\u201d), provided notice that she would resign from the Board, effective that day.",
-     "Additionally, on September 17, 2026, the Board, upon the recommendation of its Compensation and Corporate Governance Committee, appointed Helen Riley as an independent director of the Company, effective September 18, 2026.",
-     "The Board appointed Ms. Riley as a Class I director, to serve until the Company\u2019s 2027 Annual Meeting of Stockholders, and as a member of the Audit Committee of the Board (the \u201cAudit Committee\u201d)."
+     "Okta for AI Agents, currently available in early access, provides governance and visibility for AI agents through the Okta Platform."
     ],
     "support": "supported"
    }
@@ -1284,5 +1074,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+ "verdict_reason": "implied borrowing cost outside the allowed range"
 }
