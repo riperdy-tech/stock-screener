@@ -2,281 +2,250 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 63,
- "claims_supported": 50,
- "date": "2026-11-17T13:25:19Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-02T13:23:05.000Z",
+  "accepted_utc": "2026-11-02T18:23:05Z",
+  "accession": "0000003499-26-000042",
+  "decision_time": "2026-11-26T22:14:14Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 79,
+ "claims_supported": 74,
+ "date": "2026-11-26T22:14:14Z",
+ "family": "real_estate",
  "flags": [
-  "Alexander's completed the sale of its Rego Park I property for $235,500,000 and recorded a financial statement gain of $148,002,000.",
-  "Alexander's and Bloomberg signed a lease amendment giving Bloomberg a rent abatement of $56,809,000 for April 1, 2026 to December 1, 2026, which cuts the tenant fund by the same amount.",
-  "Kohl's terminated its lease at the Rego Park shopping center and paid the remaining $25,100,000 of a $29,000,000 termination payment."
+  "Alexander\u2019s completed the sale of its Rego Park I property for $235,500,000, generating net proceeds of $202,750,000 and a financial statement gain of $148,002,000.",
+  "Kohl\u2019s early terminated its lease for its 135,000 square foot store at the Rego Park shopping center and paid the remaining $25,100,000 of the $29,000,000 termination payment.",
+  "Alexander\u2019s entered into a 15-year lease, plus renewal options, with Target for the 135,000 square foot Rego Park shopping center space formerly leased to Kohl\u2019s."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no valuation route yet for a real estate company or trust",
+ "no_value_reason": "some filed figures are years older than the latest annual report",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited items",
-    "claim": "Alexander's is a REIT that makes money by leasing, managing, developing and redeveloping its New York City properties. It is externally managed and its properties are leased and developed by Vornado, so it has no separate management employees.",
+    "basis": "stated in P4 (10-Q for the period ended September 30, 2026)",
+    "claim": "Alexander's, Inc. is a Delaware-incorporated REIT engaged in leasing, managing, developing, and redeveloping four properties aggregating 2,106,000 square feet in New York City.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Alexander\u2019s, Inc. (NYSE: ALX) is a real estate investment trust (\u201cREIT\u201d), incorporated in Delaware, engaged in leasing, managing, developing and redeveloping its properties.",
+     "We have four properties in New York City.",
+     "Our portfolio is comprised of four properties aggregating 2,106,000 square feet."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (property descriptions, excluding Rego Park I sold in May 2026 per P4) and P4 (occupancy rates)",
+    "claim": "The portfolio spans Manhattan office and retail space at 731 Lexington Avenue, Queens retail space at Rego Park II and Flushing, and 312 residential units at The Alexander apartment tower, with commercial occupancy of 94.6% and residential occupancy of 98.1% as of September 30, 2026.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "engaged in leasing, managing, developing and redeveloping its properties",
-     "We are managed by, and our properties are leased and developed by, Vornado Realty Trust"
+     "The building contains 952,000 and 128,000 of rentable square feet of office and retail space, respectively.",
+     "The Alexander apartment tower, located above our Rego Park II shopping center, contains 312 units aggregating 255,000 square feet.",
+     "As of September 30, 2026, the commercial occupancy rate was 94.6% and the residential occupancy rate was 98.1%."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Bloomberg L.P. is the company's largest customer, leasing approximately 952,000 square feet of office space at 731 Lexington Avenue through February 2040 and accounting for $99,004,000, or approximately 55%, of rental revenues in the nine months ended September 30, 2026.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Bloomberg L.P. (\u201cBloomberg\u201d) leases approximately 952,000 square feet at our 731 Lexington Avenue property and accounted for revenue of $99,004,000 and $96,655,000 for the nine months ended September 30, 2026 and 2025, respectively, representing approximately 55% and 60% of our rental revenues in each period, respectively.",
+     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement; that this line includes recoveries is inferred from the MD&A text on operating expense recoveries",
-    "claim": "The product is space rented to tenants, and all reported revenue is rental revenue. Nine-month 2026 rental revenues were $180,179 (table in thousands), against $159,928 (table in thousands) a year earlier.",
+    "basis": "stated in P1 and P4",
+    "claim": "The company also leases retail space to tenants including Costco, Burlington, Best Buy, Marshalls, a newly signed Target lease replacing Kohl's at Rego Park II, and New World Mall LLC at Flushing, as well as apartments to residential tenants, with no other tenant besides Bloomberg and Kohl's (due to a termination payment) exceeding 10% of rental revenues in the nine months ended September 30, 2026.",
     "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The center also includes a 60,000 square foot Burlington, a 47,000 square foot Best Buy, and a 40,000 square foot Marshalls.",
+     "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space.",
+     "Other than Bloomberg and Kohl\u2019s (due to the recognition of the termination payment), no other tenant accounted for more than 10% of our rental revenues for the three and nine months ended September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (2025 10-K) and P4 (confirming Vornado management continues)",
+    "claim": "Alexander's is externally managed, leased, and developed by Vornado Realty Trust under automatically renewable annual agreements expiring each March, while employing 103 property-level staff for cleaning, engineering, parking, and security.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "We are managed by, and our properties are leased and developed by, Vornado, pursuant to various agreements which expire in March of each year and are automatically renewable.",
+     "Since we are externally managed by Vornado, we do not have separate employees that provide management, leasing and development services.",
+     "We currently have 103 property-level employees who provide cleaning, engineering, parking and security services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and F2",
+    "claim": "Rental revenue is the primary revenue and cash flow source\u2014$180,179,000 in the nine months ended September 30, 2026 and $213,183,000 in 2025\u2014and is driven by occupancy, rental rates, lease modifications or expirations, straight-line rent adjustments, and operating expense recoveries.",
+    "facts": [
+     "P3",
+     "P4",
      "F2"
     ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The customers are tenants in four New York City properties. Bloomberg is the office tenant at 731 Lexington Avenue. Rego Park II is a shopping center with retail anchors. The Alexander is an apartment tower with 312 units.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
     "quotes": [
-     "The center is anchored by a 145,000 square foot Costco",
-     "The Alexander apartment tower, located above our Rego Park II shopping center, contains 312 units aggregating 255,000 square feet."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items; the point about the Kohl's payment is inferred from the statement that Kohl's exceeded 10% because of the termination payment",
-    "claim": "Revenue is heavily concentrated in one tenant. Bloomberg accounted for $99,004,000 of nine-month 2026 revenue, about 55% of rental revenues, down from about 60% in the prior-year nine months. In 2025 the 731 Lexington Avenue property was about 67% of rental revenues.",
-    "facts": [
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "accounted for revenue of $99,004,000 and $96,655,000 for the nine months ended September 30, 2026 and 2025, respectively, representing approximately 55% and 60% of our rental revenues in each period, respectively",
-     "731 Lexington Avenue accounted for revenue of $143,534,000"
+     "The sources of liquidity to fund these cash requirements include rental revenue, which is our primary source of cash flow and is dependent upon the occupancy and rental rates of our properties, as well as our existing cash, proceeds from financings, including mortgage or construction loans secured by our properties and proceeds from asset sales.",
+     "Rental revenues were $180,179,000 for the nine months ended September 30, 2026, compared to $159,928,000 for the prior year\u2019s nine months, an increase of $20,251,000.",
+     "Rental revenues were $213,183,000 in the year ended December 31, 2025, compared to $226,374,000 in the prior year, a decrease of $13,191,000."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A; the non-recurring and non-cash reading is inferred",
-    "claim": "Revenue moves with lease events, which can be large and one-off. Third-quarter 2026 rental revenues were $72,056 (table in thousands) versus $53,424 (table in thousands). The management discussion attributes most of the increase to $18,800,000 of higher straight-line revenue from the Kohl's lease modification at Rego Park. Kohl's terminated its lease and paid its termination payment, and a new 15-year Target lease replaced it.",
+    "basis": "stated in F2 and P4",
+    "claim": "Secondary income and liquidity come from interest and other income on investment balances\u20146,259 (table in thousands) in the nine months ended September 30, 2026\u2014and periodic property sales, such as the May 2026 sale of Rego Park I for $202,750,000 in net proceeds and a $148,002,000 gain.",
     "facts": [
      "F2",
      "P4"
     ],
     "quotes": [
-     "paid the remaining $25,100,000 of the $29,000,000 termination payment",
-     "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated amounts; the mechanism is inferred from the balance sheet and cash flow lines",
-    "claim": "Expiring leases reduce revenue. Home Depot's lease at 731 Lexington Avenue expired in January 2025, and the filing puts its annual rental revenue at approximately $15,000,000. Bloomberg also received a rent abatement of $56,809,000 for April to December 2026, which reduces its tenant fund from $113,618,000.",
-    "facts": [
-     "P4",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Annual rental revenues from Home Depot were approximately $15,000,000.",
-     "providing Bloomberg with a rent abatement of $56,809,000 for the period of April 1, 2026 to December 1, 2026"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the income statement and MD&A",
-    "claim": "Operating costs rise largely with recoverable property costs. Nine-month 2026 operating expenses were $81,608 (table in thousands) versus $78,191 (table in thousands). The management discussion cites $3,846,000 of higher recoverable expenses and $4,290,000 of higher recoveries on the revenue side. Fees paid to Vornado are within operating costs, $4,947 (table in thousands) for nine months, and in G&A, $1,930 (table in thousands).",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "$3,846,000 of higher operating expenses subject to recovery, including common area maintenance and real estate taxes",
-     "Operating, including fees to Vornado of $1,422, $1,253, $4,947 and $4,435, respectively"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited items; the non-cash reading of PIK interest is inferred from the cash flow add-back",
-    "claim": "Debt is a major cost. Mortgages payable were $837,164 (table in thousands) at Sep. 30, 2026, and nine-month interest and debt expense was $32,458 (table in thousands) versus $37,673 (table in thousands). The December 2025 restructuring of the 731 Lexington retail loan lowered interest, and part of the loan accrues PIK interest.",
-    "facts": [
-     "F1",
-     "F2",
-     "F3",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "which accrues PIK interest at 4.55%",
-     "$2,520,000 of lower interest expense from the 731 Lexington Avenue retail loan restructuring in December 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated for Q3; the nine-month figures are from the income statement",
-    "claim": "Interest income on cash balances is a secondary earnings line that fell with rates. Nine-month interest and other income was $6,259 (table in thousands) versus $11,555 (table in thousands). Third-quarter income was lower mainly because of lower average interest rates on investment balances.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
+     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000.",
      "This was primarily due to a decrease in average interest rates on investment balances."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; that the gain accounts for most of net income is inferred from comparing the two amounts",
-    "claim": "Asset sales add occasional gains. The Rego Park I sale completed on May 28, 2026 produced a net gain of $148,002 (table in thousands), which accounts for most of nine-month net income of $187,428 (table in thousands) against $24,400 (table in thousands) a year earlier.",
+    "basis": "stated in P2, P3, P4, and F2",
+    "claim": "Property operating expenses\u2014$81,608,000 in the nine months ended September 30, 2026 and $106,376,000 in 2025\u2014are the largest operating cost and are driven by common area maintenance, real estate taxes, Vornado fees, expense capitalization, and portfolio changes.",
     "facts": [
-     "F2",
-     "P4"
+     "P2",
+     "P3",
+     "P4",
+     "F2"
     ],
     "quotes": [
-     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000"
+     "Operating expenses were $81,608,000 for the nine months ended September 30, 2026, compared to $78,191,000 for the prior year\u2019s nine months, an increase of $3,417,000.",
+     "Operating expenses were $106,376,000 in the year ended December 31, 2025, compared to $103,240,000 in the prior year, an increase of $3,136,000.",
+     "While increases in most operating expenses at our properties can be passed on to our office and retail tenants, some tenants have fixed reimbursement charges, and expenses at our residential property may not be able to be passed on to residential tenants."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated amounts; funding source is inferred",
-    "claim": "Cash from operations goes mainly to dividends and capital spending. In nine months of 2026 the company paid dividends of 69,352 (table in thousands) and had net cash from operations of 29,913 (table in thousands). A quarterly dividend of $4.50 per share was declared in February 2026.",
+    "basis": "stated in F1, F2, P2, P3, and P4",
+    "claim": "Interest and debt expense\u2014(32,458) (table in thousands) in the nine months ended September 30, 2026 and $51,624,000 in 2025\u2014is driven by property-level mortgage debt of 837,164 (table in thousands, net) as of September 30, 2026, variable SOFR rates and hedging, and loan refinancings or restructurings.",
     "facts": [
-     "F3",
-     "P3"
+     "F1",
+     "F2",
+     "P2",
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "On February 4, 2026, our Board of Directors declared a regular quarterly dividend of $4.50 per share"
+     "Interest and debt expense was $51,624,000 in the year ended December 31, 2025, compared to $62,818,000 in the prior year, a decrease of $11,194,000.",
+     "This was primarily due to (i) $2,520,000 of lower interest expense from the 731 Lexington Avenue retail loan restructuring in December 2025 and (ii) $403,000 of lower interest expense from the Rego Park shopping center loan refinancing in December 2025.",
+     "In addition, the volatility in the interest rate environment in recent years has led to fluctuations in interest rates on our variable rate debt, including new hedging instruments, and the cost of refinancing our existing debt and entering into new debt, all which could reduce our operating cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and F2",
+    "claim": "Depreciation and amortization ($25,979,000 in the nine months ended September 30, 2026) and general and administrative expenses ($6,967,000 in the same period) are driven respectively by capital costs for new leases and property held-for-sale cessation, and by Vornado management fees, professional fees, and director deferred stock unit compensation.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Depreciation and amortization was $25,979,000 for the nine months ended September 30, 2026, compared to $26,324,000 for the prior year\u2019s nine months, a decrease of $345,000.",
+     "General and administrative expenses were $6,967,000 for the nine months ended September 30, 2026, compared to $4,895,000 for the prior year\u2019s nine months, an increase of $2,072,000.",
+     "This was primarily due to (i) $1,688,000 of higher professional fees and (ii) $262,000 of higher stock-based compensation expense from an increase in the value of deferred stock units granted to our Board of Directors in the current year."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited items",
-    "claim": "The company is a small, externally managed REIT whose assets are all in New York City. Vornado manages, leases and develops its properties, so its position rests on the quality of its Manhattan and Queens real estate and on Vornado's services, not on its own operating platform.",
+    "basis": "stated in S0 and P4",
+    "claim": "Alexander's is a retail REIT with a New York City portfolio aggregating 2,106,000 square feet following the sale of Rego Park I.",
     "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "We are managed by, and our properties are leased and developed by, Vornado Realty Trust (\u201cVornado\u201d) (NYSE: VNO).",
-     "All of our properties are in New York City and are affected by the economic cycles and risks inherent to this area."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The main support for the competitive position is Bloomberg, which occupies all of the office space at 731 Lexington Avenue. Bloomberg was 55% of rental revenues in the nine months to September 30, 2026, against 60% a year earlier. Its revenue was $99,004,000, against $96,655,000. This is also the largest dependency.",
-    "facts": [
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "If we were to lose Bloomberg as a tenant, or if Bloomberg were to be unable to fulfill its obligations under its lease, it would adversely affect our results of operations and financial condition."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Bloomberg's lease was extended to February 2040, which gives long-dated tenure for the main office asset. A March 2026 amendment then gave Bloomberg a rent abatement of $56,809,000, which cut its tenant fund from $113,618,000 to $56,809,000.",
-    "facts": [
+     "S0",
      "P4"
     ],
     "quotes": [
-     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Occupancy is high. The commercial occupancy rate was 94.6% and the residential occupancy rate was 98.1% at September 30, 2026, against 94.6% and 97.7% at December 31, 2025.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "As of September 30, 2026, the commercial occupancy rate was 94.6% and the residential occupancy rate was 98.1%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The company re-tenanted a Rego Park anchor box. Kohl's terminated its lease on August 2, 2026 and paid the remaining $25,100,000 of a $29,000,000 termination payment, and the company signed a new long-term lease with Target for the same space.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the income statement, the cash flow statement and the MD&A explanation",
-    "claim": "Recent revenue growth is largely a non-cash accounting effect, not a sign of stronger cash rents. Three-month rental revenues were $72,056 (table in thousands), against $53,424 a year earlier. The main cause cited was $18,800,000 of higher straight-line revenue from the Kohl's lease modification. Nine-month net cash from operating activities was $29,913 (table in thousands), against $50,020.",
-    "facts": [
-     "F2",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "$18,800,000 of higher straight-line revenue resulting from Kohl\u2019s lease modification at the Rego Park shopping center"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The company sold its vacant Rego Park I property, which turned an underused asset into cash. The sale price was $235,500,000, net proceeds were $202,750,000 and the gain was $148,002,000. Cash and cash equivalents were $299,789 (table in thousands) at September 30, 2026, against $128,167 at December 31, 2025.",
-    "facts": [
-     "P4",
-     "P1",
-     "F1"
-    ],
-    "quotes": [
-     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the effect on concentration is inferred",
-    "claim": "The portfolio is smaller after the sale. It has four properties totalling 2,106,000 square feet, against five properties and 2,446,000 square feet at December 31, 2025. This makes the remaining assets, and Bloomberg's share, more important.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
+     "industry: REIT - Retail",
+     "We have four properties in New York City.",
      "Our portfolio is comprised of four properties aggregating 2,106,000 square feet."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Retail space at 731 Lexington Avenue is a weak spot. The Home Depot lease expired on January 31, 2025, and the nine-month rental revenue comparison cites lower revenue from that expiration and other retail tenant expirations there.",
+    "basis": "stated in P3 and P4",
+    "claim": "The portfolio maintains high utilization, with a 94.6% commercial occupancy rate and a 98.1% residential occupancy rate.",
     "facts": [
-     "P4",
-     "P3"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired.",
-     "Annual rental revenues from Home Depot were approximately $15,000,000."
+     "As of September 30, 2026, the commercial occupancy rate was 94.6% and the residential occupancy rate was 98.1%.",
+     "The commercial occupancy rate was 94.6% and the residential occupancy rate was 97.7%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The company names competition and office-market trends as threats. It operates in a highly competitive environment, competes with investors who may accept lower returns, and the 10-K flags work-from-home and AI-driven changes in space use as risks to its office-heavy revenue.",
+    "basis": "stated in P1 and P4",
+    "claim": "Bloomberg leases approximately 952,000 square feet of office space at 731 Lexington Avenue under leases extended to February 2040.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "Bloomberg L.P. (\u201cBloomberg\u201d) occupies all of the office space.",
+     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P3, and P4",
+    "claim": "Rego Park II attracts national retail anchors including Costco, Burlington, Best Buy, Marshalls, and Target on a 15-year lease replacing Kohl's.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The center is anchored by a 145,000 square foot Costco and a 133,000 square foot Kohl\u2019s.",
+     "The center also includes a 60,000 square foot Burlington, a 47,000 square foot Best Buy, and a 40,000 square foot Marshalls.",
+     "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Alexander's properties are managed, leased, and developed by Vornado, a fully-integrated REIT operating more than 26 million square feet of LEED-certified buildings.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are managed by, and our properties are leased and developed by, Vornado, pursuant to various agreements which expire in March of each year and are automatically renewable.",
+     "Vornado is a fully-integrated REIT with significant experience in managing, leasing, developing, and operating office and retail properties.",
+     "Vornado is an industry leader in sustainability, owning and operating more than 26 million square feet of LEED (Leadership in Energy and Environmental Design) certified buildings, representing 100% of its certifiable office portfolio, with over 24 million square feet at LEED Gold or Platinum."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "All properties compete in New York City against numerous real estate investors, owners, developers, co-working spaces, and subleases, including rivals willing to accept lower returns.",
     "facts": [
      "P1",
      "P2"
@@ -284,267 +253,503 @@
     "quotes": [
      "We operate in a highly competitive environment located in New York City.",
      "We compete with a large number of real estate investors, property owners and developers, some of whom may be willing to accept lower returns on their investments.",
-     "We may be adversely affected by trends in office real estate."
+     "Substantially all of our properties face competition from similar properties in the same market, which may adversely impact the rents we can charge at those properties and our results of operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated for the balances and maturity; the constraint is inferred and the maturity table is from the 10-K",
-    "claim": "Leverage and refinancing are a constraint. Mortgages payable were $837,164 (table in thousands) against total equity of $227,893. The 731 Lexington retail loan was restructured in December 2025. At year-end 2025 the Alexander apartment tower loan of $94,000 (table in thousands) was due on Nov. 01, 2027.",
+    "basis": "stated in P2 and P4",
+    "claim": "Bloomberg accounted for approximately 61% of rental revenues in 2025 and $99,004,000, or approximately 55% of rental revenues, in the 2026 nine-month period, creating severe single-tenant concentration risk.",
     "facts": [
-     "F1",
-     "P3",
+     "P2",
      "P4"
     ],
     "quotes": [
-     "Our success is also subject to our ability to refinance existing debt on acceptable terms as it comes due."
+     "In 2025, approximately 61% of our rental revenues was from Bloomberg, the office tenant at our 731 Lexington Avenue office property.",
+     "Bloomberg L.P. (\u201cBloomberg\u201d) leases approximately 952,000 square feet at our 731 Lexington Avenue property and accounted for revenue of $99,004,000 and $96,655,000 for the nine months ended September 30, 2026 and 2025, respectively, representing approximately 55% and 60% of our rental revenues in each period, respectively.",
+     "If we were to lose Bloomberg as a tenant, or if Bloomberg were to be unable to fulfill its obligations under its lease, it would adversely affect our results of operations and financial condition."
     ],
-    "support": "number_not_found"
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "All revenues come from New York City, with 731 Lexington Avenue generating approximately 67% of rental revenues in 2025, exposing results to local economic cycles and single-asset loss.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "All of our revenues come from properties located in New York City.",
+     "731 Lexington Avenue accounted for revenue of $143,534,000, $153,298,000 and $148,806,000 in the years ended December 31, 2025, 2024 and 2023, respectively, representing approximately 67%, 68% and 66% of our rental revenues in each year, respectively.",
+     "Loss of or damage to the building in excess of our insurance coverage, including as a result of a terrorist attack, would adversely affect our results of operations and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Work-from-home adoption, AI-driven space reconfiguration, and tenant preference for modern amenitized buildings threaten long-term office demand and require higher capital outlays.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Changes in tenant space utilization, including from the continuation of work from home and flexible work arrangement policies, may cause office tenants to reassess their long-term physical space needs, which could have an adverse effect on our business.",
+     "Additionally, the increased use of artificial intelligence (\u201cAI\u201d) could result in changes in tenant space utilization, including the need to reduce or reconfigure space.",
+     "Work from home, flexible or hybrid work schedules, open workplaces, videoconferencing, and teleconferencing have become more common in recent years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Retail properties face threats from online shopping, consumer and tourism sensitivity, tariffs, and anchor-tenant defaults or closures that can trigger co-tenancy rent reductions or terminations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Certain of our properties are New York City retail properties and thus are affected by the general and New York City retail environments, including the level of consumer spending and consumer confidence, New York City tourism, office and residential occupancy rates, employer remote-working policies, the threat of terrorism or other criminal acts, increasing competition from online retailers and other retail centers and the impact of technological change upon the retail environment generally.",
+     "Additionally, closure of an anchor or major tenant could result in lease terminations by, or reductions of rent from other tenants if the other tenants\u2019 leases have co-tenancy clauses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P4",
+    "claim": "Expiring leases can lead to lost revenue or costly concessions, evidenced by Home Depot's expired 83,000 square foot lease that previously generated approximately $15,000,000 in annual rent.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Even if tenants do renew or we can relet the space, the terms of renewal or reletting, considering among other things, rent and concessions, the cost of improvements to the property and leasing commissions, may be on less economically favorable terms.",
+     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired.",
+     "Annual rental revenues from Home Depot were approximately $15,000,000."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "New York decarbonization mandates, building carbon-emission limits, fossil-fuel restrictions, and inflation threaten to increase retrofit capital costs, energy expenses, and potential penalties.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Decarbonization of grid-supplied energy (as has been mandated by the Climate Leadership and Community Protection Act (\u201cCLCPA\u201d) in New York State) could lead to increased energy costs and operating expenses for our buildings.",
+     "We may become subject to costs, taxes or penalties, or increases therein, associated with natural resource or energy usage, such as a \u201ccarbon tax\u201d and by local legislation such as New York City\u2019s Local Law 97, which sets limits on carbon emissions in our buildings and imposes penalties if we exceed those limits, and New York City\u2019s Intro 2317, or the \u201cgas ban\u201d bill, which limits any onsite fossil fuel combustion in new construction and major renovations.",
+     "While increases in most operating expenses at our properties can be passed on to our office and retail tenants, some tenants have fixed reimbursement charges, and expenses at our residential property may not be able to be passed on to residential tenants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P2",
+    "claim": "Mortgage debt of 837,164 (table in thousands) carries refinancing and interest-rate risks and imposes covenants requiring lender approval of certain leases.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Mortgages payable, net of deferred debt issuance costs | 837,164 | 829,451",
+     "These mortgages contain covenants that limit our ability to incur additional indebtedness on these properties, provide for lender approval of tenants\u2019 leases in certain circumstances, and in certain cases provide for yield maintenance or defeasance premiums to prepay them.",
+     "If the cost or amount of our indebtedness increases or we cannot refinance our debt in sufficient amounts or on acceptable terms, we potentially could be at risk of default on our obligations that could adversely affect our financial condition and results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Tenant bankruptcies or insolvencies can disrupt rent collection, complicate re-leasing of remaining space, and reduce cash available for debt service and dividends.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As a result, the bankruptcy or insolvency of, or nonpayment by, a major tenant could cause us to suffer lower revenues and operational difficulties, including leasing the remainder of the property, which could in turn result in decreased net income and funds available to pay our indebtedness or make distributions to stockholders."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Development, redevelopment, and repositioning activities expose the company to cost overruns, regulatory delays, and leasing shortfalls, while real estate illiquidity limits prompt asset sales.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We continue to engage in development, redevelopment and repositioning activities with respect to our properties, and accordingly, we are subject to certain risks which could adversely affect us, including our financial condition and results of operations.",
+     "Real estate investments are relatively illiquid.",
+     "Consequently, we may have limited ability to dispose of assets in our portfolio promptly in response to changes in economic or other conditions which could have an adverse effect on our sources of working capital and our ability to satisfy our indebtedness."
+    ],
+    "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in the cited balance sheet",
-    "claim": "Liquidity on the balance sheet rose: cash and cash equivalents were 299,789 (table in thousands) at the latest balance sheet against 128,167 at the prior year-end, and restricted cash was 49,344.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement and the 10-Q MD&A",
-    "claim": "The rise in cash came from investing, not operations: proceeds from the sale of real estate were 205,819 (table in thousands), net cash from investing was 196,347, and cash plus restricted cash grew by 156,908 to 349,133.",
-    "facts": [
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet; the link between equity and the gain is inferred from the income statement",
-    "claim": "Leverage: mortgages payable, net of issuance costs, were 837,164 (table in thousands) against total liabilities of 970,425, total equity of 227,893 and total assets of 1,198,318. Prior-year-end mortgages were 829,451 and equity was 109,156.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "figures are stated; the PIK explanation is inferred from the 10-K debt description",
-    "claim": "Reported mortgage debt rose from 829,451 to 837,164 (table in thousands) with no debt repayments (0) in the nine months. A non-cash PIK interest expense of 5,779 was added back in operating cash flow.",
+    "basis": "Stated in the Sep. 30, 2026 10-Q balance sheet and cash flow statement.",
+    "claim": "Total cash and restricted cash increased to 349,133 (table in thousands) at Sep. 30, 2026 from 192,225 (table in thousands) at Dec. 31, 2025, consisting of 299,789 (table in thousands) in cash and cash equivalents (up from 128,167) and 49,344 (table in thousands) in restricted cash (down from 64,058).",
     "facts": [
      "F1",
-     "F3",
-     "P3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow and income statements and in the MD&A",
-    "claim": "Operating cash flow was 29,913 (table in thousands) for the nine months against 50,020 a year earlier, even though net income was 187,428 against 24,400. The net gain on sale of 148,002 is removed as a non-cash item.",
-    "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [
-     "Net income for the nine months ended September 30, 2026 included $148,002,000, or $28.81 per diluted share, of income as a result of a net gain from the sale of the Rego Park I property."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "figures are stated; the cash flow link is inferred",
-    "claim": "Cash generation is weighed down by the Bloomberg lease incentive. The lease incentive liability line used 39,793 (table in thousands) of operating cash against 1,500 a year earlier, and the liability fell to 73,825 from 113,618. Bloomberg was approximately 55% of nine-month rental revenues.",
-    "facts": [
-     "F3",
-     "F1",
-     "P4"
-    ],
-    "quotes": [
-     "providing Bloomberg with a rent abatement of $56,809,000 for the period of April 1, 2026 to December 1, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the MD&A; the cash-quality reading is inferred",
-    "claim": "Reported rental revenue growth is partly non-cash: rental revenues were 180,179 (table in thousands) against 159,928, and the filing attributes $20,500,000 of higher straight-line revenue to the Kohl's lease modification.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "$20,500,000 of higher straight-line revenue resulting from Kohl"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures are stated; the coverage statement is a comparison of cited figures",
-    "claim": "Dividends paid of 69,352 (table in thousands) were more than twice operating cash flow of 29,913 in the nine months, so they were covered by sale proceeds rather than operations.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "The dividend, if declared by the Board of Directors at the same rate for all of 2026, would require us to pay out approximately $92,450,000 in 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Non-GAAP FFO for the nine months was $65,251,000 against $50,524,000 a year earlier. The company states that FFO is not cash from operating activities.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "FFO does not represent cash generated from operating activities"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income and cash flow statements",
-    "claim": "The interest burden eased: interest and debt expense was 32,458 (table in thousands) against 37,673, and cash interest paid was 24,796 against 34,052. Interest and other income fell to 6,259 from 11,555.",
-    "facts": [
-     "F2",
      "F3"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A debt table",
-    "claim": "Debt maturities, as listed at the prior year-end: the apartment tower loan of 94,000 (table in thousands) matures Nov. 01, 2027, the 731 Lexington office loan of 400,000 matures Oct. 09, 2028, the Rego Park II loan of 175,000 matures Dec. 05, 2030, and the retail condominium loan of 167,691 matures Dec. 23, 2035. Scheduled principal and interest was 33,117 in under one year and 552,747 in one to three years.",
-    "facts": [
-     "P3"
-    ],
     "quotes": [
-     "The Alexander apartment tower | 94,000 | 2.63% | Nov. 01, 2027"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "inferred from the cited balances and the company's stated options",
-    "claim": "Cash on hand of 299,789 (table in thousands) is larger than the nearest maturity, the 94,000 apartment tower loan. The 400,000 office loan would still need to be refinanced or paid down. Expected 2026 capital spending is $55,000,000.",
-    "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "We may refinance our maturing debt as it comes due or choose to pay it down.",
-     "During 2026, we expect to spend approximately $55,000,000 of capital expenditures at our properties."
+     "Cash and cash equivalents | 299,789 | 128,167",
+     "Restricted cash | 49,344 | 64,058",
+     "Cash and cash equivalents and restricted cash at end of period | 349,133 | 352,258 | 349,133 | 352,258 | 192,225"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K debt table footnote; the effect after the cap is inferred",
-    "claim": "The Rego Park II loan is floating-rate at SOFR plus 2.00%, with a SOFR cap of 4.50% in place through December 2026, so rate protection on this loan is stated to run only to that date.",
+    "basis": "Stated in the Sep. 30, 2026 10-Q MD&A and cash flow statement.",
+    "claim": "Liquidity in the nine months ended Sep. 30, 2026 was boosted by the May 28, 2026 sale of Rego Park I for $235,500,000 (yielding $202,750,000 net of costs, reported as 205,819 in F3, table in thousands) and Kohl\u2019s August 2, 2026 payment of the remaining $25,100,000 of its $29,000,000 lease termination payment.",
     "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Interest at SOFR plus 2.00% (SOFR is capped at a rate of 4.50% through December 2026)."
-    ],
-    "support": "supported"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "Revenue figures and the extension are stated in the 10-Q; the dependency on Bloomberg's performance is stated as a risk in the 10-K.",
-    "claim": "Bloomberg at 731 Lexington Avenue is the largest revenue source and rose to $99,004,000 for nine months from $96,655,000, after its leases were extended. For this to continue, Bloomberg must keep paying and honoring its lease.",
-    "facts": [
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Amounts and the Target lease are stated in the 10-Q; that straight-line revenue is non-cash and non-repeating is inferred from how it is described.",
-    "claim": "Re-leasing the Kohl's space at the Rego Park shopping center lifted reported rental revenue: straight-line revenue was $18,800,000 higher in the quarter, Kohl's paid $25,100,000 of a $29,000,000 termination payment, and a Target lease was signed for the space. For this to continue, Target must take occupancy and pay rent on the new lease.",
-    "facts": [
+     "F3",
      "P4"
     ],
     "quotes": [
-     "$18,800,000 of higher straight-line revenue resulting from Kohl\u2019s lease modification at the Rego Park shopping center",
+     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000.",
+     "Proceeds from sale of real estate | 205,819 | 0",
      "On August 2, 2026, Kohl\u2019s terminated its lease and paid the remaining $25,100,000 of the $29,000,000 termination payment."
     ],
     "support": "supported"
    },
    {
-    "basis": "FFO figures are stated; the link to the Kohl's item is inferred from the revenue explanation in the same filing.",
-    "claim": "Funds from operations (FFO, non-GAAP) rose to $36,349,000 in the quarter from $14,920,000, and to $65,251,000 for nine months from $50,524,000. For this to continue, the revenue items behind the rise (Kohl's, Bloomberg) must persist beyond their one-time components.",
+    "basis": "Stated in the Dec. 31, 2025 10-K MD&A.",
+    "claim": "As of December 31, 2025, management anticipated that cash flow from continuing operations over the next twelve months plus existing cash balances ($192,225,000) would be adequate to fund operations, cash dividends (estimated at approximately $92,450,000 in 2026 at $4.50 per quarter), debt service, and approximately $55,000,000 of planned 2026 capital expenditures.",
     "facts": [
-     "P4"
+     "P3"
     ],
     "quotes": [
-     "Funds from operations (\u201cFFO\u201d) (non-GAAP) for the three months ended September 30, 2026 was $36,349,000, or $7.07 per diluted share, compared to $14,920,000 or $2.91 per diluted share in the prior year\u2019s three months."
+     "As of December 31, 2025, we had $192,225,000 of liquidity comprised of cash and cash equivalents and restricted cash.",
+     "The ongoing fluctuations in interest rates and the effects of inflation could adversely affect our cash flow from continuing operations but we anticipate that cash flow from continuing operations over the next twelve months, together with existing cash balances, will be adequate to fund our business operations, cash dividends to stockholders, debt service and capital expenditures.",
+     "The dividend, if declared by the Board of Directors at the same rate for all of 2026, would require us to pay out approximately $92,450,000 in 2026.",
+     "During 2026, we expect to spend approximately $55,000,000 of capital expenditures at our properties."
     ],
     "support": "supported"
    },
    {
-    "basis": "Decrease and its causes are stated in the 10-Q; the rate-cap condition is stated in the 10-K debt table; that this is a forward condition is inferred.",
-    "claim": "Lower interest and debt expense contributed: $10,933,000 in the quarter versus $14,078,000, a decrease of $3,145,000, from the loan restructuring and refinancing in December 2025. For this to continue, rates on the floating Rego Park II loan must stay manageable and the restructured retail loan terms must hold.",
+    "basis": "Stated in the Sep. 30, 2026 10-Q balance sheet and Dec. 31, 2025 10-K Risk Factors.",
+    "claim": "Mortgages payable, net of deferred debt issuance costs, stood at 837,164 (table in thousands) at Sep. 30, 2026 compared with 829,451 (table in thousands) at Dec. 31, 2025, against total assets of 1,198,318 and total equity of 227,893 (up from 109,156, table in thousands), while total debt to total enterprise value was 46% at Dec. 31, 2025.",
     "facts": [
-     "P4",
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "Interest and debt expense was $10,933,000 for the three months ended September 30, 2026, compared to $14,078,000 for the prior year\u2019s three months, a decrease of $3,145,000."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Sale terms and balances are stated; the one-time nature is inferred from it being a property sale.",
-    "claim": "The sale of Rego Park I for $235,500,000, with total proceeds of $202,750,000 and a gain of $148,002,000, drove net income and raised cash to 299,789 (table in thousands) from 128,167 (table in thousands). For the cash to support growth, it must be used or redeployed productively. The gain itself is a one-time item.",
-    "facts": [
-     "P4",
      "F1",
-     "F2"
-    ],
-    "quotes": [
-     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in the 10-Q; pass-through mechanism and its limits stated in the 10-K risk factors.",
-    "claim": "Higher operating expense recoveries from tenants added $4,290,000 to nine-month rental revenue, against operating expenses that rose $3,417,000. For this to continue, tenants must keep reimbursing cost increases.",
-    "facts": [
-     "P4",
      "P2"
     ],
     "quotes": [
-     "$4,290,000 of higher operating expense recoveries from higher operating expenses"
+     "Mortgages payable, net of deferred debt issuance costs | 837,164 | 829,451",
+     "Assets | 1,198,318 | 1,110,708",
+     "Total equity | 227,893 | 109,156",
+     "As of December 31, 2025, total mortgages payable, excluding deferred debt issuance costs, was $836,691,000, and our rate of total debt to total enterprise value was 46%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Capital expenditure plan stated in the 10-K, made before the sale; its sufficiency is inferred from the balance sheet and cash flow statement.",
-    "claim": "Capital spending planned at approximately $55,000,000 is a condition of the re-leasing and redevelopment path. It must be funded from operating cash flow, existing liquidity and/or borrowings.",
+    "basis": "Stated in the Dec. 31, 2025 10-K Risk Factors.",
+    "claim": "As of December 31, 2025, mortgage indebtedness of $836,691,000 was secured by three properties and carried covenants limiting additional property debt, requiring lender approval of tenant leases in certain circumstances, and imposing yield maintenance or defeasance premiums on prepayment.",
     "facts": [
-     "P3",
-     "F1"
+     "P2"
     ],
     "quotes": [
-     "During 2026, we expect to spend approximately $55,000,000 of capital expenditures at our properties."
+     "As of December 31, 2025, we had outstanding mortgage indebtedness of $836,691,000, secured by three of our properties.",
+     "These mortgages contain covenants that limit our ability to incur additional indebtedness on these properties, provide for lender approval of tenants\u2019 leases in certain circumstances, and in certain cases provide for yield maintenance or defeasance premiums to prepay them."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Sep. 30, 2026 10-Q statements and MD&A and the Dec. 31, 2025 10-K MD&A.",
+    "claim": "Interest and debt expense fell to (32,458) (table in thousands) in the nine months ended Sep. 30, 2026 from (37,673) (table in thousands) a year earlier, and cash interest paid fell to 24,796 from 34,052 (table in thousands), reflecting the December 2025 restructuring of the 731 Lexington Avenue retail loan (leaving a $167,500,000 junior C-Note accruing 4.55% PIK interest) and the Rego Park II refinancing ($175,000,000 at SOFR plus 2.00%, with SOFR capped at 4.50% through December 2026).",
+    "facts": [
+     "F2",
+     "F3",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Interest and debt expense | (10,933) | (14,078) | (32,458) | (37,673)",
+     "Cash payments for interest | 24,796 | 34,052",
+     "On December 5, 2025, we completed a $175,000,000 refinancing of the mortgage loan on our Rego Park II shopping center.",
+     "The restructured loan was split into (i) a $132,500,000 senior A-Note that was purchased by a wholly owned subsidiary of Alexander\u2019s, which bears interest at a fixed rate of 7.00% and (ii) a $167,500,000 junior C-Note held by the lenders of the original loan, which accrues PIK interest at 4.55%.",
+     "Interest at SOFR plus 2.00% (SOFR is capped at a rate of 4.50% through December 2026)."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the Sep. 30, 2026 10-Q cash flow statement and Dec. 31, 2025 10-K MD&A.",
+    "claim": "Net cash provided by operating activities declined to 29,913 (table in thousands) in the nine months ended Sep. 30, 2026 from 50,020 (table in thousands) in the prior-year period (following $73,444,000 in full-year 2025), and was less than dividends paid of (69,352) and real estate additions of (9,472) (table in thousands) during the same nine-month period.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 29,913 | 50,020",
+     "Dividends paid | (69,352) | (69,314)",
+     "Construction in progress and real estate additions | (9,472) | (18,986)",
+     "This resulted from (i) $254,268,000 of net cash used in financing activities and (ii) $20,787,000 of net cash used in investing activities, partially offset by (iii) $73,444,000 of net cash provided by operating activities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Sep. 30, 2026 10-Q income statement, cash flow statement, and MD&A.",
+    "claim": "Nine-month 2026 GAAP net income of $ 187,428 (table in thousands) was largely driven by a one-time net gain on sale of real estate of 148,002 (table in thousands) from Rego Park I, which is deducted in operating cash flow as (148,002) while the 205,819 (table in thousands) sale proceeds are recorded in investing cash flows.",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Net income | $ 27,404 | $ 5,968 | $ 187,428 | $ 24,400",
+     "Net gain on sale of real estate | 0 | 0 | 148,002 | 0",
+     "Net gain on sale of real estate | 0 | 0 | (148,002) | 0",
+     "Proceeds from sale of real estate | 205,819 | 0",
+     "Net income for the nine months ended September 30, 2026 included $148,002,000, or $28.81 per diluted share, of income as a result of a net gain from the sale of the Rego Park I property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Sep. 30, 2026 10-Q income statement, cash flow statement, and MD&A.",
+    "claim": "Operating cash flow quality in the nine months ended Sep. 30, 2026 was affected by lease-modification and non-cash items: operating cash absorbed a (39,793) (table in thousands) lease incentive liability outflow as Bloomberg received a $56,809,000 rent abatement (April 1 to December 1, 2026) and a (17,451) (table in thousands) other-assets outflow, while rental revenues of $ 180,179 (table in thousands) included $20,500,000 of higher straight-line revenue from Kohl\u2019s lease modification and operating cash flow included non-cash add-backs of 5,779 for PIK interest and 5,620 for straight-lining of rents (table in thousands).",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Lease incentive liability | (39,793) | (1,500)",
+     "Other assets | (17,451) | (19,271)",
+     "PIK interest expense | 5,779 | 0",
+     "Straight-lining of rents | 5,620 | 2,105",
+     "Rental revenues | $ 72,056 | $ 53,424 | $ 180,179 | $ 159,928",
+     "On March 31, 2026, Alexander\u2019s and Bloomberg entered into a lease amendment providing Bloomberg with a rent abatement of $56,809,000 for the period of April 1, 2026 to December 1, 2026, which reduces the tenant fund by a corresponding amount over that period from $113,618,000 to $56,809,000.",
+     "This was primarily due to (i) $20,500,000 of higher straight-line revenue resulting from Kohl\u2019s lease modification and $3,473,000 of higher straight-line rental revenue from new leases at the Rego Park shopping center, (ii) $4,290,000 of higher operating expense recoveries from higher operating expenses and (iii) $399,000 of higher lease termination fee income, partially offset by (iv) $4,072,000 of lower rental revenue from Home Depot\u2019s lease expiration and other retail tenant expirations at 731 Lexington Avenue, (v) $3,367,000 of lower rental revenue from the sale of Rego Park I and (vi) $1,551,000 of payments received in the prior year for tenant receivables that were previously written off."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Sep. 30, 2026 10-Q MD&A and Dec. 31, 2025 10-K Risk Factors.",
+    "claim": "Recurring cash generation is heavily concentrated in New York City and in Bloomberg, which provided $99,004,000 (approximately 55%) of rental revenues in the nine months ended September 30, 2026 (61% in 2025) under a lease extended to February 2040, while no tenant other than Bloomberg and Kohl\u2019s (due to its termination payment) exceeded 10% of nine-month rental revenues and Home Depot\u2019s approximately $15,000,000 annual lease expired on January 31, 2025.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Bloomberg L.P. (\u201cBloomberg\u201d) leases approximately 952,000 square feet at our 731 Lexington Avenue property and accounted for revenue of $99,004,000 and $96,655,000 for the nine months ended September 30, 2026 and 2025, respectively, representing approximately 55% and 60% of our rental revenues in each period, respectively.",
+     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040.",
+     "Other than Bloomberg and Kohl\u2019s (due to the recognition of the termination payment), no other tenant accounted for more than 10% of our rental revenues for the three and nine months ended September 30, 2026.",
+     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired.",
+     "Annual rental revenues from Home Depot were approximately $15,000,000.",
+     "In 2025, approximately 61% of our rental revenues was from Bloomberg, the office tenant at our 731 Lexington Avenue office property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Dec. 31, 2025 10-K MD&A debt table and Sep. 30, 2026 10-Q cash flow statement.",
+    "claim": "As of December 31, 2025, debt maturities start on Nov. 01, 2027 with 94,000 (table in thousands) at 2.63% on The Alexander apartment tower, followed by $400,000 (table in thousands) at 5.04% on the 731 Lexington Avenue office condominium on Oct. 09, 2028, 175,000 (table in thousands) at 5.72% on Rego Park II on Dec. 05, 2030, and 167,691 (table in thousands) at 4.55% on the 731 Lexington Avenue retail condominium on Dec. 23, 2035, with 0 debt repayments during the nine months ended Sep. 30, 2026.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "The Alexander apartment tower | 94,000 | 2.63% | Nov. 01, 2027",
+     "731 Lexington Avenue, office condominium | $400,000 | 5.04% | Oct. 09, 2028",
+     "Rego Park II shopping center(1)(2) | 175,000 | 5.72% | Dec. 05, 2030",
+     "731 Lexington Avenue, retail condominium(3) | 167,691 | 4.55% | Dec. 23, 2035",
+     "Debt repayments | 0 | (3,189)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Dec. 31, 2025 10-K MD&A repayment schedule.",
+    "claim": "Scheduled principal and interest repayments as of December 31, 2025 totaled $1,043,493 (table in thousands), led by $552,747 due in one to three years alongside $33,117 due in less than one year, $194,580 in three to five years, and $263,049 in more than five years.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Long-term debt obligations | $1,043,493 | $33,117 | $552,747 | $194,580 | $263,049"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Dec. 31, 2025 10-K MD&A and Risk Factors and Sep. 30, 2026 10-Q balance sheet.",
+    "claim": "Maturing debt can be met by refinancing or repaying from cash (299,789 unrestricted and 49,344 restricted at Sep. 30, 2026, table in thousands) and operating cash flow, while any unpaid C-Note balance on the 731 Lexington Avenue retail loan is forgiven if sale or refinancing proceeds or appraised value are insufficient; however, management cautions there is no assurance refinancing will be available on acceptable terms and insufficient property income could trigger foreclosure.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We may refinance our maturing debt as it comes due or choose to repay it.",
+     "However, there can be no assurance that additional financing or capital will be available to refinance our debt, or that the terms will be acceptable or advantageous to us.",
+     "If such proceeds (or appraised value in such refinancing) are insufficient to cover the C-Note loan balance, any outstanding C-Note indebtedness that remains unpaid shall be forgiven.",
+     "If a property is mortgaged to secure payment of indebtedness and income from such property is insufficient to pay that indebtedness, the property could be foreclosed upon by the mortgagee resulting in our loss of the property.",
+     "Cash and cash equivalents | 299,789 | 128,167",
+     "Restricted cash | 49,344 | 64,058"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the 2025 10-K Business and MD&A sections and the Q3 2026 10-Q MD&A.",
+    "claim": "Bloomberg rental revenue rose from $120,351,000 to $125,349,000 to $129,317,000 across the three reported annual periods, and from $96,655,000 to $99,004,000 in the nine-month comparison, aided by an eleven-year lease extension.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Bloomberg accounted for revenue of $129,317,000, $125,349,000 and $120,351,000 in the years ended December 31, 2025, 2024 and 2023, respectively, representing approximately 61%, 55% and 54% of our rental revenues in each year, respectively.",
+     "Bloomberg L.P. (\u201cBloomberg\u201d) leases approximately 952,000 square feet at our 731 Lexington Avenue property and accounted for revenue of $99,004,000 and $96,655,000 for the nine months ended September 30, 2026 and 2025, respectively, representing approximately 55% and 60% of our rental revenues in each period, respectively.",
+     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Business and Risk Factors sections and the Q3 2026 10-Q MD&A.",
+    "claim": "For Bloomberg-driven revenue growth to continue, Bloomberg must maintain its creditworthiness, fulfill its lease obligations, and retain its Manhattan office space despite remote work and artificial intelligence trends.",
+    "facts": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "If we were to lose Bloomberg as a tenant, or if Bloomberg were to be unable to fulfill its obligations under its lease, it would adversely affect our results of operations and financial condition.",
+     "Changes in tenant space utilization, including from the continuation of work from home and flexible work arrangement policies, may cause office tenants to reassess their long-term physical space needs, which could have an adverse effect on our business.",
+     "Additionally, the increased use of artificial intelligence (\u201cAI\u201d) could result in changes in tenant space utilization, including the need to reduce or reconfigure space."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K MD&A and the Q3 2026 10-Q MD&A.",
+    "claim": "New retail leases at the Rego Park shopping center added $4,399,000 of rental revenue in the annual comparison and $3,473,000 of straight-line rental revenue in the nine-month comparison, alongside a new fifteen-year lease with Target replacing Kohl's.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "In the fourth quarter of 2024, we entered into ten-year leases with Burlington and Marshalls to relocate them to our Rego Park II property in 2025 from our Rego Park I property which is now vacant.",
+     "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space.",
+     "This was primarily due to (i) $20,500,000 of higher straight-line revenue resulting from Kohl\u2019s lease modification and $3,473,000 of higher straight-line rental revenue from new leases at the Rego Park shopping center, (ii) $4,290,000 of higher operating expense recoveries from higher operating expenses and (iii) $399,000 of higher lease termination fee income, partially offset by (iv) $4,072,000 of lower rental revenue from Home Depot\u2019s lease expiration and other retail tenant expirations at 731 Lexington Avenue, (v) $3,367,000 of lower rental revenue from the sale of Rego Park I and (vi) $1,551,000 of payments received in the prior year for tenant receivables that were previously written off."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Risk Factors.",
+    "claim": "For Rego Park retail growth to continue, anchor and replacement tenants must fulfill their contractual obligations and remain open without bankruptcies, rent concessions, or co-tenancy triggers.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The value of this property would be adversely affected if our anchor tenants failed to meet their contractual obligations, sought concessions in order to continue operations or ceased their operations, including as a result of bankruptcy.",
+     "Additionally, closure of an anchor or major tenant could result in lease terminations by, or reductions of rent from other tenants if the other tenants\u2019 leases have co-tenancy clauses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K MD&A and the Q3 2026 10-Q MD&A.",
+    "claim": "Higher recoveries of operating expenses and capital expenditures increased rental revenues by $3,403,000 in the annual comparison and operating expense recoveries rose by $4,290,000 in the nine-month comparison.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "This was primarily due to (i) $13,831,000 of lower rental revenue from Home Depot\u2019s lease expiration at 731 Lexington Avenue and (ii) $9,001,000 of lower rental revenue from IKEA\u2019s lease expiration at Rego Park I, partially offset by (iii) $4,399,000 of higher rental revenue from new leases at Rego Park II, (iv) $3,403,000 of higher recoveries of operating expenses and capital expenditures and (v) $2,325,000 of higher rental revenue from Bloomberg\u2019s lease extension at 731 Lexington Avenue.",
+     "This was primarily due to (i) $20,500,000 of higher straight-line revenue resulting from Kohl\u2019s lease modification and $3,473,000 of higher straight-line rental revenue from new leases at the Rego Park shopping center, (ii) $4,290,000 of higher operating expense recoveries from higher operating expenses and (iii) $399,000 of higher lease termination fee income, partially offset by (iv) $4,072,000 of lower rental revenue from Home Depot\u2019s lease expiration and other retail tenant expirations at 731 Lexington Avenue, (v) $3,367,000 of lower rental revenue from the sale of Rego Park I and (vi) $1,551,000 of payments received in the prior year for tenant receivables that were previously written off."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Risk Factors.",
+    "claim": "For operating expense recovery growth to continue protecting cash flow, leases must permit cost pass-throughs without fixed caps and tenants must remain financially able to pay recovery charges.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "While increases in most operating expenses at our properties can be passed on to our office and retail tenants, some tenants have fixed reimbursement charges, and expenses at our residential property may not be able to be passed on to residential tenants.",
+     "If the level of sales at stores operating at this property were to decline significantly due to economic conditions, increased competition from online shopping, closing of anchors or for other reasons, tenants may be unable to pay their minimum rents or expense recovery charges."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K MD&A and the Q3 2026 10-Q MD&A.",
+    "claim": "Interest and debt expense fell from $62,818,000 to $51,624,000 in the annual comparison and from $14,078,000 to $10,933,000 in the quarterly comparison, driven by loan downsizing, lower rates, the retail mortgage restructuring, and the Rego Park loan refinancing.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Interest and debt expense was $51,624,000 in the year ended December 31, 2025, compared to $62,818,000 in the prior year, a decrease of $11,194,000.",
+     "Interest and debt expense was $10,933,000 for the three months ended September 30, 2026, compared to $14,078,000 for the prior year\u2019s three months, a decrease of $3,145,000.",
+     "This was primarily due to (i) $2,520,000 of lower interest expense from the 731 Lexington Avenue retail loan restructuring in December 2025 and (ii) $403,000 of lower interest expense from the Rego Park shopping center loan refinancing in December 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Risk Factors and MD&A.",
+    "claim": "For lower debt expense to persist, Alexander's must refinance maturing mortgages on acceptable terms and avoid adverse spikes in variable interest rates or hedging costs.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "However, there can be no assurance that additional financing or capital will be available to refinance our debt, or that the terms will be acceptable or advantageous to us.",
+     "If the cost or amount of our indebtedness increases or we cannot refinance our debt in sufficient amounts or on acceptable terms, we potentially could be at risk of default on our obligations that could adversely affect our financial condition and results of operations.",
+     "In addition, the volatility in the interest rate environment in recent years has led to fluctuations in interest rates on our variable rate debt, including new hedging instruments, and the cost of refinancing our existing debt and entering into new debt, all which could reduce our operating cash flows."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K MD&A and Risk Factors and the Q3 2026 10-Q MD&A.",
+    "claim": "Alexander's plans approximately $55,000,000 of capital expenditures to maintain and improve properties, fund tenant improvements, and support leasing and redevelopment.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "During 2026, we expect to spend approximately $55,000,000 of capital expenditures at our properties.",
+     "Capital expenditures consist of expenditures to maintain and improve assets, tenant improvement allowances, lease incentives and leasing commissions.",
+     "We continue to engage in development, redevelopment and repositioning activities with respect to our properties, and accordingly, we are subject to certain risks which could adversely affect us, including our financial condition and results of operations.",
+     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Risk Factors.",
+    "claim": "For capital reinvestment and redevelopment to generate growth, projects must finish on time and within budget and vacant space must be relet at rents that cover improvement and leasing costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We may not succeed in (i) acquiring, developing or redeveloping properties; (ii) completing these activities on time or within budget; and (iii) leasing or selling acquired, developed or redeveloped properties at amounts sufficient to cover our costs.",
+     "Even if tenants do renew or we can relet the space, the terms of renewal or reletting, considering among other things, rent and concessions, the cost of improvements to the property and leasing commissions, may be on less economically favorable terms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 10-Q balance sheet and MD&A.",
+    "claim": "The sale of Rego Park I generated $202,750,000 in net proceeds and a $148,002,000 gain, lifting cash and cash equivalents from 128,167 to 299,789 (table in thousands).",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000.",
+     "Cash and cash equivalents | 299,789 | 128,167"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the 2025 10-K Risk Factors and MD&A and the Q3 2026 10-Q MD&A.",
+    "claim": "For asset sale proceeds to support ongoing earnings growth rather than one-time gains, Alexander's must deploy cash into interest-earning investments, debt reduction, or accretive redevelopment.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Although our current business strategy is not to engage in acquisitions, we may acquire, develop or redevelop properties when we believe that an acquisition, development or redevelopment project is otherwise consistent with our business strategy.",
+     "We plan to fund these capital expenditures from operating cash flow, existing liquidity and/or borrowings.",
+     "Interest and other income was $3,129,000 for the three months ended September 30, 2026, compared to $3,682,000 for the prior year\u2019s three months, a decrease of $553,000."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "Alexander's completed the sale of its Rego Park I property for $235,500,000 and recorded a financial statement gain of $148,002,000.",
+    "basis": "stated in P4 (10-Q Part I Item 2 MD&A)",
+    "claim": "Alexander\u2019s completed the sale of its Rego Park I property for $235,500,000, generating net proceeds of $202,750,000 and a financial statement gain of $148,002,000.",
     "facts": [
-     "P4",
-     "F2"
+     "P4"
     ],
     "quotes": [
      "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000."
@@ -552,8 +757,32 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "Alexander's and Bloomberg signed a lease amendment giving Bloomberg a rent abatement of $56,809,000 for April 1, 2026 to December 1, 2026, which cuts the tenant fund by the same amount.",
+    "basis": "stated in P4 (10-Q Part I Item 2 MD&A)",
+    "claim": "Kohl\u2019s early terminated its lease for its 135,000 square foot store at the Rego Park shopping center and paid the remaining $25,100,000 of the $29,000,000 termination payment.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "On June 26, 2026, we entered into a lease modification agreement with Kohl\u2019s for its 135,000 square foot store at our Rego Park shopping center providing options for us and Kohl\u2019s to early terminate the lease in August 2026, subject to a termination payment of approximately $29,000,000 from Kohl\u2019s.",
+     "On August 2, 2026, Kohl\u2019s terminated its lease and paid the remaining $25,100,000 of the $29,000,000 termination payment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (10-Q Part I Item 2 MD&A)",
+    "claim": "Alexander\u2019s entered into a 15-year lease, plus renewal options, with Target for the 135,000 square foot Rego Park shopping center space formerly leased to Kohl\u2019s.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "On June 26, 2026, we entered into a lease modification agreement with Kohl\u2019s for its 135,000 square foot store at our Rego Park shopping center providing options for us and Kohl\u2019s to early terminate the lease in August 2026, subject to a termination payment of approximately $29,000,000 from Kohl\u2019s.",
+     "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (10-Q Part I Item 2 MD&A)",
+    "claim": "Alexander\u2019s and Bloomberg entered into a lease amendment providing Bloomberg with a rent abatement of $56,809,000 that reduces the tenant fund from $113,618,000 to $56,809,000.",
     "facts": [
      "P4"
     ],
@@ -563,135 +792,200 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "Kohl's terminated its lease at the Rego Park shopping center and paid the remaining $25,100,000 of a $29,000,000 termination payment.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "On August 2, 2026, Kohl\u2019s terminated its lease and paid the remaining $25,100,000 of the $29,000,000 termination payment."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "Alexander's restructured the $300,000,000 mortgage loan on the 731 Lexington Avenue retail condominium; the $167,500,000 C-Note held by the original lenders accrues PIK interest.",
+    "basis": "stated in P3 (10-K Item 7 MD&A)",
+    "claim": "Alexander\u2019s restructured the $300,000,000 mortgage loan on the retail condominium portion of 731 Lexington Avenue into a $132,500,000 senior A-Note purchased by a wholly owned subsidiary at 7.00% and a $167,500,000 junior C-Note accruing PIK interest at 4.55%.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "On December 23, 2025, we entered into an agreement to restructure the $300,000,000 mortgage loan on the retail condominium portion of 731 Lexington Avenue, which previously bore interest at SOFR plus 1.51%."
+     "On December 23, 2025, we entered into an agreement to restructure the $300,000,000 mortgage loan on the retail condominium portion of 731 Lexington Avenue, which previously bore interest at SOFR plus 1.51%.",
+     "The restructured loan was split into (i) a $132,500,000 senior A-Note that was purchased by a wholly owned subsidiary of Alexander\u2019s, which bears interest at a fixed rate of 7.00% and (ii) a $167,500,000 junior C-Note held by the lenders of the original loan, which accrues PIK interest at 4.55%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "Alexander's completed a $175,000,000 refinancing of the Rego Park II mortgage loan, maturing December 5, 2030.",
+    "basis": "stated in P3 (10-K Item 7 MD&A)",
+    "claim": "Alexander\u2019s completed a $175,000,000 refinancing of the mortgage loan on its Rego Park II shopping center and paid down the previous $198,544,000 loan by $23,544,000.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "On December 5, 2025, we completed a $175,000,000 refinancing of the mortgage loan on our Rego Park II shopping center."
+     "On December 5, 2025, we completed a $175,000,000 refinancing of the mortgage loan on our Rego Park II shopping center.",
+     "We paid down by $23,544,000 the previous $198,544,000 loan that bore interest at SOFR plus 1.45% and was scheduled to mature on December 12, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-Q MD&A",
-    "claim": "Home Depot's 83,000 square foot lease at 731 Lexington Avenue expired.",
+    "basis": "stated in P3 (10-K Item 7 MD&A) and P4 (10-Q Part I Item 2 MD&A)",
+    "claim": "Home Depot\u2019s 83,000 square foot retail lease at 731 Lexington Avenue expired, representing approximately $15,000,000 in annual rental revenues.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired.",
+     "Annual rental revenues from Home Depot were approximately $15,000,000."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (10-Q Part I Item 2 MD&A)",
+    "claim": "Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases from February 2029 to February 2040, with Bloomberg entitled to a $113,618,000 tenant fund.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired."
+     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040.",
+     "In connection with the lease extension, Bloomberg was entitled to a $113,618,000 tenant fund which is accounted for as a lease incentive under GAAP."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (10-K Item 7 MD&A)",
+    "claim": "Alexander\u2019s entered into ten-year leases with Burlington and Marshalls to relocate them from Rego Park I to Rego Park II in 2025, leaving Rego Park I vacant.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In the fourth quarter of 2024, we entered into ten-year leases with Burlington and Marshalls to relocate them to our Rego Park II property in 2025 from our Rego Park I property which is now vacant."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Concentration percentages and the risk language are stated in the cited items. The mechanism is inferred.",
-    "claim": "Revenue depends heavily on one tenant, Bloomberg. It was 55% of rental revenues in the nine months to September 30, 2026 and 61% in the 2025 year. The company says losing Bloomberg or a Bloomberg default would hurt results.",
+    "basis": "Stated in 10-K Item 1 and Item 1A ([P1], [P2]) and 10-Q Item 2 MD&A ([P4]).",
+    "claim": "Bloomberg accounted for $129,317,000, or approximately 61% of annual rental revenues, creating single-tenant concentration risk.",
     "facts": [
-     "P4",
-     "P3",
-     "P2"
+     "P1",
+     "P2",
+     "P4"
     ],
     "quotes": [
-     "If we were to lose Bloomberg as a tenant, or if Bloomberg were to be unable to fulfill its obligations under its lease, it would adversely affect our results of operations and financial condition."
+     "In 2025, approximately 61% of our rental revenues was from Bloomberg, the office tenant at our 731 Lexington Avenue property.",
+     "Bloomberg accounted for revenue of $129,317,000, $125,349,000 and $120,351,000 in the years ended December 31, 2025, 2024 and 2023, respectively, representing approximately 61%, 55% and 54% of our rental revenues in each year, respectively.",
+     "If we were to lose Bloomberg as a tenant, or if Bloomberg were to be unable to fulfill its obligations under its lease, it would adversely affect our results of operations and financial condition.",
+     "In May 2024, Alexander\u2019s and Bloomberg entered into an agreement to extend Bloomberg\u2019s leases that were scheduled to expire in February 2029 for a term of eleven years to February 2040."
     ],
-    "support": "number_not_listed"
+    "support": "quote_not_found"
    },
    {
-    "basis": "The cash figures are stated in the cash flow statement and balance sheet. The link between the lease incentive liability, the abatement and operating cash flow is inferred.",
-    "claim": "Operating cash flow in the first nine months of 2026 did not cover dividends paid. The cash gap was met with real estate sale proceeds, and 2026 dividends and capital expenditure are expected to stay large.",
+    "basis": "Stated in 10-K Item 1A ([P2]) and 10-Q Item 2 MD&A ([P4]).",
+    "claim": "All revenues come from New York City properties, with its Manhattan mixed-use building alone generating $143,534,000 or approximately 67% of annual rental revenues.",
     "facts": [
-     "F3",
-     "F1",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "All of our revenues come from properties located in New York City.",
+     "731 Lexington Avenue accounted for revenue of $143,534,000, $153,298,000 and $148,806,000 in the years ended December 31, 2025, 2024 and 2023, respectively, representing approximately 67%, 68% and 66% of our rental revenues in each year, respectively.",
+     "Loss of or damage to the building in excess of our insurance coverage, including as a result of a terrorist attack, would adversely affect our results of operations and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1, 1A, and 7 ([P1], [P2], [P3]) and 10-Q Item 2 MD&A ([P4]).",
+    "claim": "Retail tenant expirations and departures, including Home Depot's 83,000 square foot lease generating approximately $15,000,000 in annual rent and Kohl's early lease termination, threaten retail rental income.",
+    "facts": [
+     "P1",
+     "P2",
      "P3",
      "P4"
     ],
     "quotes": [
-     "providing Bloomberg with a rent abatement of $56,809,000 for the period of April 1, 2026 to December 1, 2026"
+     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired.",
+     "Annual rental revenues from Home Depot were approximately $15,000,000.",
+     "On August 2, 2026, Kohl\u2019s terminated its lease and paid the remaining $25,100,000 of the $29,000,000 termination payment.",
+     "Additionally, closure of an anchor or major tenant could result in lease terminations by, or reductions of rent from other tenants if the other tenants\u2019 leases have co-tenancy clauses."
     ],
     "support": "supported"
    },
    {
-    "basis": "Debt balances, maturities and the assurance language are stated. The refinancing-risk mechanism follows the company's own risk language.",
-    "claim": "Mortgage debt of 837,164 (table in thousands) must be refinanced as maturities arrive. The 10-K debt table lists the apartment tower loan, 94,000 (table in thousands), maturing in 2027, and the company gives no assurance that refinancing will be available or acceptable.",
+    "basis": "Stated in 10-Q balance sheet ([F1]) and 10-K Item 1A and Item 7 ([P2], [P3]).",
+    "claim": "Mortgages payable of 837,164 (table in USD thousands) exceeded total equity of 227,893 (table in USD thousands), exposing the company to refinancing, covenant, and interest-rate risks.",
     "facts": [
      "F1",
+     "P2",
      "P3"
     ],
     "quotes": [
-     "However, there can be no assurance that additional financing or capital will be available to refinance our debt, or that the terms will be acceptable or advantageous to us."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The cap and spread are stated. The exposure after the cap ends is inferred.",
-    "claim": "The Rego Park II loan floats at SOFR plus 2.00%, and the SOFR cap at 4.50% runs only through December 2026, so interest cost is exposed to rates after the cap ends.",
-    "facts": [
-     "P3",
-     "F2"
-    ],
-    "quotes": [
+     "Mortgages payable, net of deferred debt issuance costs | 837,164 | 829,451",
+     "Total equity | 227,893 | 109,156",
+     "If the cost or amount of our indebtedness increases or we cannot refinance our debt in sufficient amounts or on acceptable terms, we potentially could be at risk of default on our obligations that could adversely affect our financial condition and results of operations.",
      "Interest at SOFR plus 2.00% (SOFR is capped at a rate of 4.50% through December 2026)."
     ],
     "support": "supported"
    },
    {
-    "basis": "The loan terms are stated in the 10-K. How the waterfall affects equity is inferred.",
-    "claim": "The restructured 731 Lexington retail loan accrues PIK interest, and future sale or refinancing proceeds go through a payment waterfall. The PIK expense recorded in the nine months was 5,779 (table in thousands).",
+    "basis": "Stated in 10-Q cash flow statement ([F3]), 10-Q balance sheet ([F1]), and 10-K Item 7 ([P3]).",
+    "claim": "Net cash provided by operating activities of 29,913 (table in USD thousands) did not cover dividends paid of (69,352) and real estate additions of (9,472) (table in USD thousands).",
     "facts": [
-     "P3",
-     "F3"
+     "F1",
+     "F3",
+     "P3"
     ],
     "quotes": [
-     "All future net sales or refinancing proceeds will be distributed through the payment waterfall per the terms of the restructured loan agreement."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "The items are stated in the cited sections. The earnings-quality interpretation is inferred.",
-    "claim": "Reported earnings in 2026 are boosted by items that may not recur or are non-cash. These are a Rego Park I sale gain of $148,002,000 and $18,800,000 of higher straight-line revenue from the Kohl's lease modification in the third quarter.",
-    "facts": [
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "$18,800,000 of higher straight-line revenue"
+     "Net cash provided by operating activities | 29,913 | 50,020",
+     "Dividends paid | (69,352) | (69,314)",
+     "Construction in progress and real estate additions | (9,472) | (18,986)",
+     "The dividend, if declared by the Board of Directors at the same rate for all of 2026, would require us to pay out approximately $92,450,000 in 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Ownership, the control status and the agreement terms are stated. The mechanism is inferred.",
-    "claim": "The company is externally managed by Vornado and is a controlled company. It is not required to keep a majority-independent board, and the related-party agreements renew each March.",
+    "basis": "Stated in 10-K Item 1A ([P2]) and Item 1 ([P1]).",
+    "claim": "New York City carbon emission limits, fossil-fuel restrictions, and New York State decarbonization mandates could impose substantial energy, retrofit, compliance, and penalty costs.",
     "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Although these laws and regulations have not had any material adverse effects on our business to date, they could result in substantial costs, including compliance costs, increased energy costs, retrofit costs and construction costs.",
+     "We may become subject to costs, taxes or penalties, or increases therein, associated with natural resource or energy usage, such as a \u201ccarbon tax\u201d and by local legislation such as New York City\u2019s Local Law 97, which sets limits on carbon emissions in our buildings and imposes penalties if we exceed those limits, and New York City\u2019s Intro 2317, or the \u201cgas ban\u201d bill, which limits any onsite fossil fuel combustion in new construction and major renovations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 and Item 7 ([P1], [P3]) and 10-Q financial statements ([F1], [F2]).",
+    "claim": "Vornado externally manages and leases all properties while owning 32.4% of common stock alongside insiders holding 26.0%, making Alexander's a controlled company.",
+    "facts": [
+     "F1",
+     "F2",
      "P1",
      "P3"
     ],
     "quotes": [
+     "We are managed by, and our properties are leased and developed by, Vornado, pursuant to various agreements which expire in March of each year and are automatically renewable.",
+     "As of December 31, 2025, Vornado owned 32.4% of our outstanding common stock.",
+     "As of December 31, 2025, Mr. Roth, Interstate and its other two general partners, David Mandelbaum and Russell B. Wight, Jr. (who are also directors of the Company and trustees of Vornado) owned, in the aggregate, 26.0% of our outstanding common stock, in addition to the 2.3% they indirectly own through Vornado.",
      "While we have voluntarily complied with a majority of the independence requirements of the NYSE Rules, we are under no obligation to do so and this situation may change at any time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A ([P2]) and Item 7 ([P3]).",
+    "claim": "Uninsured losses, deductibles, and a 20% retention plus $348,000 deductible on covered NBCR terrorism losses could result in material uninsured liabilities.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "For NBCR acts, FNSIC is responsible for a deductible of $348,000 and 20% of the balance of a covered loss, and the Federal government is responsible for the remaining 80% of a covered loss.",
+     "We are responsible for uninsured losses and for deductibles and losses in excess of our insurance coverage, which could be material and adversely affect our business, results of operations and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A ([P2]) and 10-Q Item 2 MD&A ([P4]).",
+    "claim": "Inflation, property redevelopment execution challenges, and real estate illiquidity could compress margins and constrain capital recovery.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "In a highly inflationary environment, we may be unable to raise rental rates at or above the rate of inflation, which could reduce our profit margins.",
+     "While increases in most operating expenses at our properties can be passed on to our office and retail tenants, some tenants have fixed reimbursement charges, and expenses at our residential property may not be able to be passed on to residential tenants.",
+     "Real estate investments are relatively illiquid."
     ],
     "support": "supported"
    }
@@ -699,101 +993,145 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P4 (abatement and tenant fund amounts); the question about the run rate afterwards is inferred, because no item gives post-abatement rent.",
-    "claim": "What is 731 Lexington Avenue's rental revenue and cash flow once Bloomberg's rent abatement period ends? The 10-Q says the abatement reduces the tenant fund, but not what the post-abatement run rate is.",
+    "basis": "Stated in P1, P3, and P4 that Home Depot's lease expired on January 31, 2025 and reduced retail rental revenues; inferred that the space remains unleased or not yet revenue-producing because no replacement tenant is disclosed.",
+    "claim": "Has the vacant 83,000 square foot retail space at 731 Lexington Avenue formerly leased to Home Depot (which generated approximately $15,000,000 in annual rental revenues) been re-leased, and under what rent and capital terms?",
     "facts": [
-     "P4",
-     "F1"
-    ],
-    "quotes": [
-     "providing Bloomberg with a rent abatement of $56,809,000"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Figures are stated in F3. The link between the abatement and the lower operating cash flow is inferred from the line items and P4.",
-    "claim": "Can operating cash flow cover the regular dividend once the Bloomberg abatement ends? Nine-month net cash from operations was 29,913 against dividends paid of 69,352 (table in thousands), and the lease incentive liability line was an outflow of (39,793).",
-    "facts": [
-     "F3",
+     "P1",
+     "P3",
      "P4"
     ],
     "quotes": [
-     "Net cash provided by operating activities | 29,913 | 50,020"
+     "On January 31, 2025, Home Depot\u2019s 83,000 square foot lease at the retail portion of our 731 Lexington Avenue property expired.",
+     "Annual rental revenues from Home Depot were approximately $15,000,000."
     ],
     "support": "supported"
    },
    {
-    "basis": "The lease and the capital expenditure expectation are stated in P3 and P4. The cost and timing of the Target build-out are not in the evidence and remain open.",
-    "claim": "How much capital will the Target re-leasing of the former Kohl's space at Rego Park need, and when will rent start? Nine-month real estate additions were 9,472 (table in thousands), against a full-year capital expenditure expectation of $55,000,000.",
+    "basis": "Stated in P4 that a 15-year lease with Target was signed on June 26, 2026 and Kohl's terminated on August 2, 2026; financial terms and commencement timing are not disclosed.",
+    "claim": "What are the annual rent, rent commencement date, and required landlord capital costs for the Target lease replacing Kohl\u2019s 135,000 square foot store at the Rego Park shopping center?",
     "facts": [
-     "P3",
-     "P4",
-     "F3"
+     "P4"
     ],
     "quotes": [
-     "During 2026, we expect to spend approximately $55,000,000 of capital expenditures at our properties.",
+     "On June 26, 2026, we entered into a lease modification agreement with Kohl\u2019s for its 135,000 square foot store at our Rego Park shopping center providing options for us and Kohl\u2019s to early terminate the lease in August 2026, subject to a termination payment of approximately $29,000,000 from Kohl\u2019s.",
      "Simultaneously, we entered into a 15-year lease, plus renewal options, with Target for that space."
     ],
     "support": "supported"
    },
    {
-    "basis": "The $18,800,000 attribution is stated in P4. Whether it is a one-time effect on later quarters is inferred, because the items do not state the future straight-line schedule.",
-    "claim": "How much of the $72,056,000 third-quarter rental revenue, and of net income and FFO, is non-cash straight-line revenue from the Kohl's lease modification rather than recurring? The 10-Q attributes $18,800,000 of the quarterly rise to it.",
+    "basis": "Stated in P4 that the March 31, 2026 amendment reduces the tenant fund from $113,618,000 to $56,809,000 over April 1, 2026 to December 1, 2026, and F1 shows a lease incentive liability of 73,825 (table in thousands) at September 30, 2026; disposition of the remaining $56,809,000 is not stated.",
+    "claim": "How and over what schedule will the remaining $56,809,000 Bloomberg tenant fund be drawn or abated after the $56,809,000 rent abatement period ends on December 1, 2026?",
     "facts": [
-     "P4",
-     "F2"
+     "F1",
+     "P4"
     ],
     "quotes": [
-     "$18,800,000 of higher straight-line revenue resulting from Kohl\u2019s lease modification at the Rego Park shopping center"
+     "On March 31, 2026, Alexander\u2019s and Bloomberg entered into a lease amendment providing Bloomberg with a rent abatement of $56,809,000 for the period of April 1, 2026 to December 1, 2026, which reduces the tenant fund by a corresponding amount over that period from $113,618,000 to $56,809,000."
     ],
     "support": "supported"
    },
    {
-    "basis": "The balance, rate and maturity are stated in P3. The effect of refinancing on cost is inferred and nothing says whether the loan will be refinanced or repaid.",
-    "claim": "Will the Alexander apartment tower mortgage be refinanced, and on what terms? At year-end it was the earliest maturity in the debt table, at 94,000 (table in thousands) and 2.63%.",
+    "basis": "Stated in P4 and F2 that the sale produced $202,750,000 in net proceeds and a $148,002,000 financial statement gain, and F1 shows cash and cash equivalents increased to 299,789 (table in thousands); tax gain and use of proceeds are not disclosed.",
+    "claim": "How does management plan to deploy the $202,750,000 of net proceeds from the Rego Park I sale, and will the $148,002,000 financial statement gain trigger a special dividend to satisfy REIT distribution requirements?",
     "facts": [
-     "P3",
-     "F1"
+     "F1",
+     "F2",
+     "F3",
+     "P4"
     ],
     "quotes": [
-     "The Alexander apartment tower | 94,000 | 2.63% | Nov. 01, 2027"
+     "On May 28, 2026, we completed the sale of our Rego Park I property, located in Queens, New York, for $235,500,000, with total proceeds of $202,750,000, net of costs, and a financial statement gain of $148,002,000."
     ],
     "support": "supported"
    },
    {
-    "basis": "The dividend rate and the gain are stated in P3 and P4. The tax effect is inferred as an open question and is not addressed in the items.",
-    "claim": "Will the Rego Park I gain of $148,002,000 lead to a dividend above the regular $4.50 quarterly rate, or to other distributions? The evidence states the regular rate and the gain but not any distribution requirement.",
+    "basis": "Stated in F1 that mortgages payable, net of deferred debt issuance costs, rose from 829,451 to 837,164 (table in thousands) and in F3 that PIK interest expense was 5,779 (table in thousands); the Q3 2026 debt footnote is omitted from the packet.",
+    "claim": "Which properties account for the increase in mortgages payable, net of deferred debt issuance costs, to 837,164 (table in thousands) at September 30, 2026, and did any B-Note draws occur on the 731 Lexington Avenue retail condominium loan?",
     "facts": [
+     "F1",
+     "F3",
      "P3",
-     "P4",
-     "F2"
+     "P4"
     ],
     "quotes": [
-     "declared a regular quarterly dividend of $4.50 per share (an indicated annual rate of $18.00 per share)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The loan terms are stated in P3. Whether funding will be needed is inferred as open, since the retail space was partly vacant after the Home Depot expiry.",
-    "claim": "Will Alexander's need to fund operating shortfalls, A-Note interest or re-leasing capital for the 731 Lexington retail space through the B-Note, and what would the C-Note outcome be? The restructured loan's waterfall depends on future sale or refinancing proceeds.",
-    "facts": [
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "Alexander\u2019s has the right to fund operating shortfalls, interest on the A-Note and capital for re-leasing at the property through a B-Note"
+     "In addition, Alexander\u2019s has the right to fund operating shortfalls, interest on the A-Note and capital for re-leasing at the property through a B-Note, which will be junior to the A-Note and senior to the C-Note.",
+     "Since the debt balances related to the A-Note and B-Note are eliminated in consolidation, the balance presented as mortgages payable for this loan on our consolidated balance sheet as of December 31, 2025 is $167,691,000, which is comprised of the principal balance of the C-Note and the PIK interest due upon maturity."
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "The increase is stated in P4. Its cause and recurrence are not in the evidence.",
-    "claim": "What drove the $1,688,000 increase in nine-month professional fees? The 10-Q gives the amount but not the nature or whether it recurs.",
+    "basis": "Stated in P3 that 2026 capital expenditures were expected to be approximately $55,000,000 and in F3 that construction in progress and real estate additions were (9,472) (table in thousands) for the nine months ended September 30, 2026; the updated Q3 2026 capital expenditure section is omitted.",
+    "claim": "Why were cash outflows for construction in progress and real estate additions only 9,472 (table in thousands) during the first nine months of 2026 compared to the full-year capital expenditure expectation of approximately $55,000,000?",
     "facts": [
-     "P4",
-     "F2"
+     "F3",
+     "P3"
     ],
     "quotes": [
-     "$1,688,000 of higher professional fees"
+     "During 2026, we expect to spend approximately $55,000,000 of capital expenditures at our properties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3, P4, and F3 that the indicated annual dividend requires approximately $92,450,000 while 9M 2026 FFO was $65,251,000 and 9M 2026 operating cash flow was 29,913 (table in thousands).",
+    "claim": "How will the company fund its indicated annual dividend of $18.00 per share (approximately $92,450,000 per year) on an ongoing basis when nine-month 2026 operating cash flow was 29,913 (table in thousands) and nine-month FFO was $65,251,000?",
+    "facts": [
+     "F3",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The dividend, if declared by the Board of Directors at the same rate for all of 2026, would require us to pay out approximately $92,450,000 in 2026.",
+     "FFO (non-GAAP) for the nine months ended September 30, 2026 was $65,251,000, or $12.70 per diluted share, compared to $50,524,000 or $9.84 per diluted share in the prior year\u2019s nine months."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 that the Rego Park II SOFR cap runs through December 2026 and The Alexander apartment tower loan matures Nov. 01, 2027 at 2.63%; replacement hedging and refinancing plans are not disclosed.",
+    "claim": "Will the company extend or replace the 4.50% SOFR interest rate cap on the $175,000,000 Rego Park II mortgage after December 2026, and how does it plan to refinance or repay the 94,000 (table in thousands) mortgage on The Alexander apartment tower maturing in November 2027?",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Interest at SOFR plus 2.00% (SOFR is capped at a rate of 4.50% through December 2026).",
+     "We may refinance our maturing debt as it comes due or choose to repay it."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 that amounts due to Vornado appear under both Related Party and Nonrelated Party, and P3 directs readers to Note 4 of the 2025 Form 10-K, which is not in the packet.",
+    "claim": "Why is $ 22,138 (table in thousands) of amounts due to Vornado classified under Nonrelated Party alongside 1,359 (table in thousands) under Related Party at September 30, 2026, and what are the fee terms of the Vornado management, leasing, and development agreements?",
+    "facts": [
+     "F1",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We are managed by, and our properties are leased and developed by, Vornado, pursuant to various agreements which expire in March of each year and are automatically renewable.",
+     "These agreements are described in Note 4 \u2013 Related Party Transactions, to our consolidated financial statements in this Annual Report on Form 10-K."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 that Flushing is ground leased through January 2037 and subleased to New World Mall LLC; option terms and sublease economics are omitted.",
+    "claim": "Does the Flushing ground lease expiring in January 2037 include extension or purchase options, and what are the rental rate and expiration terms of the New World Mall LLC sublease?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "\u2022Flushing, a 167,000 square foot building, located on Roosevelt Avenue and Main Street in Queens, that is subleased to New World Mall LLC.",
+     "The property is ground leased through January 2037;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 that climate regulations have not had material adverse effects to date but could result in substantial compliance, energy, retrofit, and construction costs; property-level exposure is not quantified.",
+    "claim": "Do any of the company\u2019s New York City properties exceed Local Law 97 carbon-emission limits, and what are the estimated retrofit costs or penalties under Local Law 97 and New York State CLCPA regulations?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We may become subject to costs, taxes or penalties, or increases therein, associated with natural resource or energy usage, such as a \u201ccarbon tax\u201d and by local legislation such as New York City\u2019s Local Law 97, which sets limits on carbon emissions in our buildings and imposes penalties if we exceed those limits, and New York City\u2019s Intro 2317, or the \u201cgas ban\u201d bill, which limits any onsite fossil fuel combustion in new construction and major renovations.",
+     "Although these laws and regulations have not had any material adverse effects on our business to date, they could result in substantial costs, including compliance costs, increased energy costs, retrofit costs and construction costs."
     ],
     "support": "supported"
    }
@@ -804,5 +1142,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a real estate company or trust"
+ "verdict_reason": "some filed figures are years older than the latest annual report"
 }
