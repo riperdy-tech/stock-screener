@@ -2,566 +2,890 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 62,
- "claims_supported": 56,
- "date": "2026-11-17T23:23:06Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-04T21:04:37.000Z",
+  "accepted_utc": "2026-11-05T02:04:37Z",
+  "accession": "0001628280-26-070112",
+  "decision_time": "2026-11-26T20:40:51Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 81,
+ "claims_supported": 75,
+ "date": "2026-11-26T20:40:51Z",
+ "family": "operating",
  "flags": [
-  "BioCryst completed its merger with Astria Therapeutics and acquired navenibart. The cash flow statement shows 697,761 (table in thousands) of acquired in-process R&D charged to expense and 489,480 (table in thousands) cash paid net of cash acquired. The filings link the first-quarter 2026 net loss to this non-cash charge.",
-  "On the Merger closing date, BioCryst entered the Blackstone Loan Agreement. Lenders funded initial term loans of $400.0 million, secured by substantially all assets, to fund the Merger cash consideration and related costs. The balance sheet at Sep. 30, 2026 carries a secured term loan of 395,609 (table in thousands).",
-  "BioCryst announced the Birmingham Closure Plan: it will discontinue internal discovery programs and close its Birmingham, Alabama discovery facility. Related one-time expenses were recognized in the third quarter of 2026, and closure activities are expected to be substantially complete by year-end."
+  "BioCryst completed its acquisition of Astria Therapeutics, Inc. via merger, with cash outflow net of cash acquired of (489,480) (table in thousands), common stock issued of 251,655 (table in thousands), and acquired in-process research and development expense of 697,761 (table in thousands).",
+  "BioCryst entered into the Blackstone Loan Agreement, under which lenders funded $400.0 million in initial secured term loans maturing on the fifth anniversary of the Closing Date.",
+  "BioCryst announced the Birmingham Closure Plan to discontinue its internal discovery programs and close its Discovery Center of Excellence facility in Birmingham, Alabama, expecting approximately $10 million in total cash costs and approximately $30 million to $35 million in annualized cost savings once fully realized."
  ],
  "in_code_book": false,
+ "interest_from_filing": {
+  "fy0": "2025-12-31",
+  "kd_tagged": 0.5009829484642819,
+  "status": "cannot_tell",
+  "tagged_value": 78872000.0,
+  "version": "interest_from_filing.v1 2026-11-18 WO_NC8",
+  "why": "The tagged 2025 interest expense of $78,872,000 ($78.9 million in the 10-K MD&A) combines non-cash interest expense on the company's royalty financing obligations ($465,688 thousand on the December 31, 2025 balance sheet) with interest expense and deferred financing cost amortization on the Pharmakon term loan prior to its October 8, 2025 payoff, and the provided filings do not break out the borrowing-only interest amount."
+ },
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+ "no_value_reason": "implied borrowing cost outside the allowed range",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1 and P4",
-    "claim": "The company's core product is ORLADEYO, an oral, once-daily preventive therapy for hereditary angioedema (HAE) attacks. The company discovered and developed it internally.",
+    "basis": "stated in P1, P4, and P6",
+    "claim": "BioCryst's primary commercial product is ORLADEYO (berotralstat), an oral, once-daily plasma kallikrein inhibitor approved for preventing hereditary angioedema (HAE) attacks in capsule and oral pellet formulations.",
     "facts": [
      "P1",
-     "P4"
-    ],
-    "quotes": [
-     "ORLADEYO is an oral, once-daily therapy discovered and developed by us for the prevention of HAE attacks."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the F2 income statement and the P4 revenue table",
-    "claim": "Most revenue is net product sales, with a smaller licence and other line. For the nine months to Sep. 30, 2026, total revenues were 554,955 (table in thousands). Product sales, net were 481,209 and licence and other revenues were 73,746. In Q3, total revenues were 180,292, of which ORLADEYO was 174,833.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4; the identity of the pharmacy is stated in P6",
-    "claim": "In the U.S., ORLADEYO reaches patients through a specialty pharmacy. From Q3 2026 a new sole-source specialty pharmacy (CareMed) takes title to the drug and must hold 7-21 days of inventory. Its initial stocking added to Q3 revenue, so Q3 sales are not purely patient demand.",
-    "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "the new specialty pharmacy takes title to and maintains inventory of ORLADEYO prior to dispensing to patients and is required to maintain 7-21 days of inventory on hand."
+     "We have built a robust commercial infrastructure to support the successful commercialization of ORLADEYO, an oral, once-daily therapy discovered and developed internally for the prevention of HAE attacks.",
+     "In December 2025, the U.S. Food and Drug Administration (\u201cFDA\u201d) approved an oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years, and in October 2026, the FDA approved the 150 mg oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in adults and adolescents aged 12 years and older.",
+     "This approval enables prescribers to offer their patients a more personalized treatment choice with ORLADEYO in either capsule or pellet form."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the FY2025 10-K MD&A (P3) and Business section (P1)",
-    "claim": "ORLADEYO revenue is driven by patient volume, net price and the share of shipments that are paid rather than free. The company says the first quarter is seasonally weaker because payor reauthorization can temporarily move patients from paid drug to free product.",
+    "basis": "stated in P1, P3, and P4",
+    "claim": "BioCryst also sells peramivir injection\u2014marketed as RAPIVAB, RAPIACTA, and PERAMIFLU\u2014for acute uncomplicated influenza across multiple approved jurisdictions.",
     "facts": [
+     "P1",
      "P3",
-     "P1"
+     "P4"
     ],
     "quotes": [
-     "an increase in volume of direct sales of ORLADEYO, which was driven by strong patient demand, an increase in price, and an increase in the rate of paid shipments",
-     "we believe there is a seasonal impact to our business in the first quarter of each year due to typical first quarter requirements from payors for prescription reauthorization of specialty products"
+     "RAPIVAB (peramivir injection) is approved in the United States for the treatment of acute uncomplicated influenza for patients six months and older.",
+     "Peramivir injection is also approved in Canada (RAPIVAB), Australia (RAPIVAB), Japan (RAPIACTA), Taiwan (RAPIACTA), and Korea (PERAMIFLU)."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in P4 and P6",
-    "claim": "Pediatric oral pellets are a new volume driver. They shipped to children from August, and the FDA approved a pellet form for patients 12 and older in October.",
+    "claim": "For the nine months ended September 30, 2026, ORLADEYO generated $481,382 (table in thousands) of BioCryst's $554,955 (table in thousands) total revenues, while license and other revenues contributed 73,573 (table in thousands).",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "The launch of ORLADEYO oral pellets in patients with hereditary angioedema (HAE) aged 2 to <12 years began in August."
+     "ORLADEYO | $481,382 | $411,499",
+     "License and other revenues | 73,573 | 18,125",
+     "Total revenues | $554,955 | $468,282",
+     "BIOCRYST PHARMACEUTICALS, INC. CONSOLIDATED FINANCIAL SUMMARY (In thousands, except per share)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 MD&A",
-    "claim": "Licence and other revenue comes from partner deals and royalties and rose sharply. For the nine months, it was 73,573 against 18,125 a year earlier (table in thousands). The 9-month drivers were a $58.0 million increase from the Neopharmed License Agreement, a $7.2 million increase from royalties from BioCryst Ireland and a $4.1 million increase from the Kaken License Agreement. A $13.2 million fall in peramivir sales to the U.S. Department of Health and Human Services (HHS) partly offset these.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P4 and P3",
-    "claim": "The sale of the European ORLADEYO business to Neopharmed on October 1, 2025 removed that revenue stream. It contributed 38,658 in the 2025 nine months and nothing in 2026 (table in thousands). The company received a purchase price of $250.0 million.",
+    "basis": "stated in P4 and P6",
+    "claim": "In the United States, BioCryst distributes ORLADEYO to patients through a sole-source specialty pharmacy partner, transitioning in Q3 2026 to CareMed, which takes title and maintains 7-21 days of inventory prior to dispensing.",
     "facts": [
      "P4",
-     "P3"
+     "P6"
     ],
-    "quotes": [],
-    "support": "number_not_listed"
+    "quotes": [
+     "In August, the company commenced operations with CareMed as its sole-source specialty pharmacy partner for ORLADEYO shipments to patients.",
+     "Unlike the previous specialty pharmacy arrangement, the new specialty pharmacy takes title to and maintains inventory of ORLADEYO prior to dispensing to patients and is required to maintain 7-21 days of inventory on hand."
+    ],
+    "support": "supported"
    },
    {
-    "basis": "stated in the F2 income statement; the interpretation that costs are mostly operating expenses is inferred from it",
-    "claim": "Product cost of goods is very small relative to revenue, so the main costs are R&D and selling, general and administrative (SG&A). For the nine months, cost of product sales was 10,791, R&D was 170,501 and SG&A was 225,705, against revenues of 554,955 (table in thousands). In Q3, these were 1,574, 58,213 and 67,175.",
+    "basis": "stated in P1, P3, and P4",
+    "claim": "Outside the United States, BioCryst monetizes ORLADEYO through licensing, royalty, and distribution partners, including Neopharmed Gentili S.p.A. after selling its European ORLADEYO business, Pint Pharma in pan-Latin America, and Kaken in Japan.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "We have also established relationships with licensing, distribution and other partners in certain markets, including Japan, the pan-Latin America region, and parts of Europe and Asia, and will continue to seek such relationships where we determine this to be an effective approach.",
+     "We have an exclusive collaboration with Pint Pharma GmbH (\u201cPint Pharma\u201d) to register and promote ORLADEYO in the pan-Latin America region.",
+     "On October 1, 2025 (the \u201cClosing\u201d), under the terms of the Stock Purchase Agreement, we sold to Neopharmed all of our equity interests in BioCryst Ireland, which, together with its subsidiaries, holds certain assets, rights, and employees related to our European ORLADEYO business.",
+     "recognition of $2.2 million of revenue related to the Neopharmed License Agreement and $1.6 million of revenue related to the Kaken License Agreement"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 for revenue disaggregation; segment reporting omission inferred from the absence of financial statement footnotes",
+    "claim": "In its condensed consolidated income statement, BioCryst disaggregates total revenues into net product sales and license and other revenues, while formal operating or reportable segments are not disclosed in the provided excerpts.",
     "facts": [
      "F2"
     ],
-    "quotes": [],
+    "quotes": [
+     "Product sales, net",
+     "License and other revenues"
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2, F1 and P6",
-    "claim": "Part of every ORLADEYO dollar goes to financing holders. The company sold royalty rights to RPI and OMERS. Royalty financing obligations on the balance sheet are 43,745 current and 377,938 non-current (table in thousands). Cash paid on them was 74,164 in the nine months (P6 table in thousands).",
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Underlying ORLADEYO revenue growth is driven by patient demand, direct sales volume, net price increases, the rate of paid shipments, and adoption of the oral pellet formulation.",
     "facts": [
-     "P2",
-     "F1",
+     "P3",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "our obligation to pay RPI and OMERS, as applicable, royalties on certain revenues from ORLADEYO under the Royalty Purchase Agreements"
+     "primarily due to an increase in volume of direct sales of ORLADEYO, which was driven by strong patient demand, an increase in price, and an increase in the rate of paid shipments",
+     "growth in the underlying U.S. business (reflecting an increase in net price and higher volume of oral pellets for pediatric patients, partially offset by lower capsule shipments)",
+     "The launch of ORLADEYO oral pellets in patients with hereditary angioedema (HAE) aged 2 to <12 years began in August.",
+     "Early reimbursement is strong and new prescriptions continue to be filled ahead of the company\u2019s expectations."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1, F2 and F3; P3 says the loan proceeds funded the merger cash consideration",
-    "claim": "The Astria acquisition changed the cost and capital structure. The company issued a secured term loan under the Blackstone Loan Agreement, with proceeds of 400,000 (table in thousands). The balance sheet shows 395,609. Interest expense in Q3 was 21,185. A one-time acquired in-process R&D charge of 697,761 drove the nine-month net loss of (605,501), while Q3 net income was 37,916.",
+    "basis": "stated in P1 and P3",
+    "claim": "ORLADEYO revenue faces a recurring first-quarter seasonal headwind when payor prescription reauthorization requirements temporarily shift patients from paid drug to free product.",
     "facts": [
-     "F1",
-     "F2",
-     "F3"
+     "P1",
+     "P3"
     ],
-    "quotes": [],
+    "quotes": [
+     "Based on our commercialization experience with ORLADEYO, we believe there is a seasonal impact to our business in the first quarter of each year due to typical first quarter requirements from payors for prescription reauthorization of specialty products, like ORLADEYO, that can temporarily move patients from paid drug to free product."
+    ],
     "support": "supported"
    },
    {
     "basis": "stated in P4 and P6",
-    "claim": "The strategy is shifting the pipeline toward external innovation. The company will discontinue internal discovery and close its Birmingham facility. It acquired navenibart, now in Phase 3 for HAE, and expects top-line pivotal results in Q3 2027. This is a cost line with no revenue yet.",
+    "claim": "In Q3 2026, CareMed's initial ORLADEYO inventory build contributed favorably to revenues by an amount in the upper teens of millions of dollars, though management expects that inventory level to remain relatively stable over time.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "In June 2026, we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama"
+     "In connection with the transition, the new specialty pharmacy established its initial inventory position in the third quarter of 2026, and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars.",
+     "The company expects that inventory level to remain relatively stable over time."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the Nov. 4, 2026 earnings release (P6)",
-    "claim": "Management guidance for FY2026 is ORLADEYO revenue of $625 to $645 million. Total revenue guidance was raised to $715 million to $730 million, mainly on navenibart licensing and peramivir orders from international partners.",
+    "basis": "stated in P3 and P4",
+    "claim": "Following the European ORLADEYO divestiture, licensing and royalty streams became a major revenue driver\u2014generating $243.3 million in 2025 Neopharmed license revenue and a $55.4 million increase in license and other revenues in the first nine months of 2026\u2014while removing direct European ORLADEYO product revenue.",
     "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "$244.0 million increase in license revenue primarily comprised of $243.3 million related to the license of intellectual property to Neopharmed;",
+     "$55.4 million increase in license and other revenues primarily attributable to:",
+     "$38.7 million decrease in revenues associated with our European ORLADEYO business due to the sale of our European ORLADEYO business to Neopharmed on October 1, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "Peramivir revenue is driven by government and international partner orders: direct sales fell by $13.2 million in the first nine months of 2026 after an HHS base ordering period expired without renewal, whereas higher international RAPIVAB orders and navenibart licensing supported raised 2026 total revenue guidance of $715 million to $730 million.",
+    "facts": [
+     "P4",
      "P6"
     ],
     "quotes": [
-     "Maintained Full Year 2026 ORLADEYO revenue guidance of $625 to $645 million and increased total revenue guidance to $715 million to $730 million"
+     "$13.2 million decrease in direct sales of peramivir primarily due to lower direct sales of peramivir to the U.S. Department of Health and Human Services (\u201cHHS\u201d)",
+     "The company maintained its outlook for full year 2026 global net ORLADEYO revenue of $625 million to $645 million and increased its full year 2026 total revenue outlook, including revenue from RAPIVAB\u00ae (peramivir injection) and the licensing of navenibart European rights, to $715 million to $730 million.",
+     "The increase was primarily driven by higher revenues from the licensing of navenibart rights, as well as higher RAPIVAB orders from international partners."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P3",
+    "claim": "Cost of product sales was 10,791 (table in thousands) in the nine months ended September 30, 2026, representing a small fraction of revenue and moving primarily with direct sales of peramivir and ORLADEYO.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Cost of product sales | 1,574 | 2,187 | 10,791 | 9,553",
+     "The increase in cost of product sales was primarily due to the increase in peramivir direct sales."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P3, and P6",
+    "claim": "Research and development expenses totaled 170,501 (table in thousands) in the nine months ended September 30, 2026 and are driven by clinical trial stage and enrollment (such as Phase 3 navenibart and Phase 1 BCX17725), manufacturing, compensation, and Birmingham site closure charges.",
+    "facts": [
+     "F2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Research and development | 58,213 | 44,603 | 170,501 | 125,259",
+     "Later stage clinical programs tend to cost more than earlier stage programs due to the longer length of time of the clinical trials and the higher number of patients enrolled in these clinical trials.",
+     "Research and development expenses for the quarter include one-time impairment charges associated with the closure of the Birmingham site and employee termination costs.",
+     "While costs increased due to navenibart pivotal program, overall expenses decreased due to lower expenses related to BCX17725 and the termination of programs related to the Birmingham facility closure."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "BioCryst is restructuring its R&D cost base by closing its Birmingham internal discovery site and discontinuing STAR-0310, expecting approximately $10 million in total cash closure costs and approximately $30 million to $35 million in annualized cost savings once fully realized.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In June 2026, we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama (the \u201cBirmingham Closure Plan\u201d).",
+     "The company expects the site closure and associated restructuring to result in cash costs of approximately $10 million total and annualized cost savings of approximately $30 million to $35 million once fully realized, not including additional savings from other program-related expenses.",
+     "The company has discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the acquisition of Astria Therapeutics, to focus resources on rare diseases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P3, and P6",
+    "claim": "Selling, general and administrative expenses totaled 225,705 (table in thousands) in the nine months ended September 30, 2026 and are driven by ORLADEYO commercialization, specialty pharmacy transition fees, compensation and stock-based compensation, and transaction costs, partially offset by shedding European ORLADEYO operating expenses.",
+    "facts": [
+     "F2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Selling, general and administrative | 67,175 | 83,014 | 225,705 | 252,866",
+     "Fees related to the specialty pharmacy transition contributed to the increase.",
+     "Expenses associated with our European ORLADEYO business (excluding stock-based compensation) decreased to $38.6 million for the year ended December 31, 2025 from $45.3 million for the year ended December 31, 2024 due to the sale of our European ORLADEYO business to Neopharmed on October 1, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P5",
+    "claim": "External business development acquisitions can introduce major non-cash GAAP expense swings, as the Astria merger resulted in a 697,761 (table in thousands) acquired in-process research and development charge that drove an operating loss of (549,803) (table in thousands) for the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Acquired in-process research and development | 0 | 0 | 697,761 | 0",
+     "Income (loss) from operations | 53,330 | 29,591 | (549,803) | 80,604",
+     "For example, as a result of the accounting treatment for the Merger, we recorded a net loss on a U.S. GAAP basis for the quarter ended March 31, 2026, due to a special, non-cash charge related to the acquired in-process research and development asset for navenibart."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, P2, P3, and P6",
+    "claim": "Profitability and cash flows are further burdened by ORLADEYO royalty financing obligations to RPI and OMERS\u2014on which BioCryst paid $74,164 (table in thousands) in cash in the first nine months of 2026\u2014and interest expense of (62,676) (table in thousands), including the $400.0 million Blackstone secured term loan.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Even if we are able to successfully commercialize our existing products, or to develop or otherwise acquire new commercially viable products, certain obligations we have to third parties, including, without limitation, our obligation to pay RPI and OMERS, as applicable, royalties on certain revenues from ORLADEYO under the Royalty Purchase Agreements (as defined in \u201cNote 9\u2014Royalty Financing Obligations\u201d in the Notes to Consolidated Financial Statements in Part II, Item 8 of this report), may reduce the profitability of such products.",
+     "Total Cash Paid on Royalty Financing Obligations | $33,745 | $30,737 | $74,164 | $71,646",
+     "Interest expense | (21,185) | (19,661) | (62,676) | (64,737)",
+     "On the Closing Date, we also entered into a Loan Agreement (the \u201cBlackstone Loan Agreement\u201d) with Blackstone Alternative Credit Advisors LP and Blackstone Life Sciences Advisors L.L.C., (together, \u201cBlackstone\u201d), as the Blackstone representatives thereunder, the guarantors from time to time party thereto, the lenders from time to time party thereto, and Wilmington Trust, National Association, as agent, pursuant to which the lenders funded initial term loans in the aggregate principal amount of $400.0 million (the \u201cTerm Loans\u201d)."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited earnings release",
-    "claim": "ORLADEYO, the company's oral once-daily HAE prophylaxis, is the revenue anchor. Q3 2026 ORLADEYO net revenue was $174.8 million of $180.3 million total revenue.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Total net revenue of $180.3 million and ORLADEYO\u00ae net revenue of $174.8 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited 10-Q MD&A; the one-time reading is the filing's own description",
-    "claim": "Part of the Q3 ORLADEYO increase was a one-time stocking effect from the new sole-source specialty pharmacy. Underlying growth was also cited, but the quarter overstates the run-rate.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K and the earnings release",
-    "claim": "ORLADEYO has a differentiated position in pediatrics: it is described as the first and only targeted oral prophylactic therapy for young children with HAE, and the oral pellet label was later extended to adults and adolescents.",
+    "basis": "stated directly in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release",
+    "claim": "ORLADEYO is the first oral, once-daily plasma kallikrein inhibitor commercialized for hereditary angioedema and the first and only targeted oral prophylactic therapy for children aged 2 to <12 years.",
     "facts": [
      "P1",
-     "P6"
-    ],
-    "quotes": [
-     "ORLADEYO is the first and only targeted oral prophylactic therapy for children with HAE aged 2 to <12 years.",
-     "This approval enables prescribers to offer their patients a more personalized treatment choice with ORLADEYO in either capsule or pellet form."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K; reliability of the survey is inferred as company-sourced",
-    "claim": "The company's own survey points to patient preference for oral prophylaxis, which supports ORLADEYO's positioning against injectable options.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "the percentage of U.S. HAE patients who describe a strong preference for an oral prophylaxis therapy increased to 70 percent, up from 50 percent in 2023"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited earnings release",
-    "claim": "Management guides to full-year ORLADEYO revenue of $625 to $645 million, unchanged. The increase in total revenue guidance came from navenibart licensing and peramivir orders, not from ORLADEYO.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The increase was primarily driven by higher revenues from the licensing of navenibart rights, as well as higher RAPIVAB orders from international partners."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The pipeline adds an HAE injectable alternative. Navenibart (acquired via the Astria merger) is in Phase 3, aims at every 3- or 6-month dosing, and has pivotal top-line results guided for Q3 2027. BCX17725 for Netherton syndrome is in Phase 1.",
-    "facts": [
-     "P4",
-     "P6",
-     "P1"
-    ],
-    "quotes": [
-     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027.",
-     "which could offer significant improvements over existing injectable options and address key unmet needs in the HAE patient community."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and earnings release",
-    "claim": "The company has shifted from internal discovery to external innovation, closing its Birmingham discovery facility. This narrows its internal research engine, and future pipeline depth depends on business development.",
-    "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama"
+     "BioCryst has commercialized ORLADEYO\u00ae (berotralstat), the first oral, once-daily plasma kallikrein inhibitor, and is advancing a pipeline of potential first-in-class or best-in-class therapeutics for rare diseases.",
+     "ORLADEYO is the first and only targeted oral prophylactic therapy for children with HAE aged 2 to <12 years."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the statements; the one-time reading is inferred from the separate line item",
-    "claim": "Q3 2026 income from operations was 53,330 (table in thousands), up from 29,591 a year earlier. The nine-month loss from operations of (549,803) (table in thousands) reflects a one-time 697,761 (table in thousands) acquired in-process R&D charge, not weakness in the core business.",
+    "basis": "stated directly in the Q3 2026 Form 10-Q and Q3 2026 earnings release",
+    "claim": "BioCryst expanded ORLADEYO's regulatory footprint with FDA approval of an oral pellet formulation for pediatric patients aged 2 to <12 years in December 2025, marketing approval in Japan for that pediatric group in August 2026, and FDA approval of 150 mg oral pellets for patients aged 12 years and older in October 2026.",
     "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "Revenue quality is mixed: license and other revenue was boosted by Neopharmed license revenue, while peramivir sales to HHS fell and the sold European ORLADEYO business no longer contributes.",
-    "facts": [
-     "P4"
+     "P1",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "decrease in revenues associated with our European ORLADEYO business due to the sale of our European ORLADEYO business to Neopharmed"
+     "In December 2025, the U.S. Food and Drug Administration (\u201cFDA\u201d) approved an oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years, and in October 2026, the FDA approved the 150 mg oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in adults and adolescents aged 12 years and older.",
+     "Additionally, in August 2026, Japan\u2019s Ministry of Health, Labor and Welfare granted marketing approval for ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the balance sheet, earnings release and 10-Q risk factors",
-    "claim": "Heavy financing obligations constrain the company. It carries a secured term loan of 395,609 (table in thousands) and long-term royalty financing obligations of 377,938 (table in thousands). Stockholders' deficit is (397,384) (table in thousands) against cash and investments of 374,998 (in thousands).",
+    "basis": "stated in the 2025 Form 10-K summarizing 2025 company announcements",
+    "claim": "Company surveys and real-world data support ORLADEYO adoption, showing 97 percent of 60 surveyed HAE treaters considering prescribing it, 70 percent of surveyed U.S. HAE patients strongly preferring oral prophylaxis (up from 50 percent in 2023), and substantial attack-rate reductions across over 350 patients in an underserved HAE segment.",
     "facts": [
-     "F1",
-     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "On February 24, 2025, we announced that a new market tracking survey of 60 HAE treaters showed that 97 percent are considering prescribing ORLADEYO and 59 percent (up from 26 percent 18 months prior) of current prescribers indicate they are extremely likely to prescribe for more of their patients.",
+     "On May 5, 2025, we announced that the percentage of U.S. HAE patients who describe a strong preference for an oral prophylaxis therapy increased to 70 percent, up from 50 percent in 2023, in our latest market survey of HAE patients.",
+     "On August 4, 2025, we announced that new real-world data from over 350 patients with HAE with normal C1 inhibitor showed substantial reductions in attack rates with ORLADEYO, which we believe reinforces its value for a historically underserved patient segment and provides strong evidence to close gaps in both treatment and reimbursement."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release",
+    "claim": "ORLADEYO revenue grew from 437,660 (table in thousands) in 2024 to 601,839 (table in thousands) in 2025 and reached $481,382 (table in thousands) in the nine months ended September 30, 2026, with full-year 2026 guidance maintained at $625 million to $645 million and management projecting global peak annual net revenue potential of $1 billion.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Based on proprietary analyses of HAE prevalence and market research studies with HAE patients, physicians, and payors in the United States and Europe, and five full years of commercialization experience with ORLADEYO, we anticipate that the global commercial market for ORLADEYO has the potential to reach a global peak of $1 billion in annual net ORLADEYO revenues.",
+     "The company maintained its outlook for full year 2026 global net ORLADEYO revenue of $625 million to $645 million and increased its full year 2026 total revenue outlook, including revenue from RAPIVAB\u00ae (peramivir injection) and the licensing of navenibart European rights, to $715 million to $730 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release",
+    "claim": "BioCryst leverages a U.S. rare-disease commercial infrastructure backed by CareMed as its sole-source specialty pharmacy partner (requiring 7-21 days of inventory) while monetizing ex-U.S. markets through partners such as Neopharmed Gentili in Europe, Kaken, and Pint Pharma.",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In August, the company commenced operations with CareMed as its sole-source specialty pharmacy partner for ORLADEYO shipments to patients.",
+     "Unlike the previous specialty pharmacy arrangement, the new specialty pharmacy takes title to and maintains inventory of ORLADEYO prior to dispensing to patients and is required to maintain 7-21 days of inventory on hand.",
+     "We have also established relationships with licensing, distribution and other partners in certain markets, including Japan, the pan-Latin America region, and parts of Europe and Asia, and will continue to seek such relationships where we determine this to be an effective approach."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release",
+    "claim": "Through the January 23, 2026 acquisition of Astria Therapeutics, BioCryst added Phase 3 plasma kallikrein inhibitor navenibart, which holds FDA Fast Track and Orphan Drug designations and aims for every three-month and every six-month subcutaneous dosing with pivotal results expected in Q3 2027.",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On January 23, 2026, we completed the previously announced merger (the \u201cMerger\u201d) with Astria Therapeutics, Inc. (\u201cAstria\u201d).",
+     "Navenibart is currently in Phase 3 clinical development, and the FDA has granted Fast Track and Orphan Drug designations to navenibart for the treatment of HAE.",
+     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in the 2025 Form 10-K, Q3 2026 Form 10-Q, and Q3 2026 earnings release",
+    "claim": "BioCryst is advancing Phase 1 investigational KLK5 inhibitor BCX17725\u2014which holds FDA Fast Track designation for Netherton syndrome, a condition with no approved treatments targeting the underlying cause\u2014while discontinuing STAR-0310 and closing its Birmingham internal discovery facility (announced June 2026) to concentrate resources on rare diseases and external innovation.",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Currently, there are no approved treatments that target the underlying cause of Netherton syndrome.",
+     "In June 2026, we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama (the \u201cBirmingham Closure Plan\u201d).",
+     "The company has discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the acquisition of Astria Therapeutics, to focus resources on rare diseases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in the Risk Factors and MD&A of the 2025 Form 10-K and Q3 2026 Form 10-Q",
+    "claim": "BioCryst warns that competition, reimbursement levels, patient and physician acceptance, and first-quarter payor prescription reauthorization requirements that temporarily shift patients from paid drug to free product could prevent sustained profitability or cause results to miss expectations.",
+    "facts": [
+     "P3",
+     "P4",
      "P5"
     ],
     "quotes": [
-     "certain obligations we have to third parties, including, without limitation, our obligation to pay RPI and OMERS, as applicable, royalties on certain revenues from ORLADEYO under the Royalty Purchase Agreements"
+     "Our beliefs and projections regarding the attainment of our financial goals may differ from actual results based on market factors like competition, patient and physician acceptance of our products, reimbursement levels, or on our ability to execute our operational and budget plans, including management\u2019s ability to properly forecast our capital allocation needs.",
+     "Based on our commercialization experience with ORLADEYO, we believe there is a seasonal impact to our business in the first quarter of each year due to typical first quarter requirements from payors for prescription reauthorization of specialty products, like ORLADEYO, that can temporarily move patients from paid drug to free product."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the risk factors and MD&A; no competitor data is given",
-    "claim": "The evidence names competition and the payer and reimbursement environment as generic threats but identifies no specific competitors.",
+    "basis": "stated in the Q3 2026 Form 10-Q revenue table and Risk Factors of the 2025 Form 10-K and Q3 2026 Form 10-Q",
+    "claim": "BioCryst's revenues are concentrated in ORLADEYO ($481,382 of $554,955 total revenues in the nine months ended September 30, 2026, table in thousands), while ORLADEYO royalty obligations to RPI and OMERS and heavy reliance on third-party manufacturers, CROs, and partners threaten profitability and operational continuity.",
     "facts": [
      "P2",
-     "P4"
+     "P4",
+     "P5"
     ],
     "quotes": [
-     "market factors like competition, patient and physician acceptance of our products, reimbursement levels",
-     "the number of patients receiving free product, our pricing strategy, competition and market trends."
+     "Even if we are able to successfully commercialize our existing products, or to develop or otherwise acquire new commercially viable products, certain obligations we have to third parties, including, without limitation, our obligation to pay RPI and OMERS, as applicable, royalties on certain revenues from ORLADEYO under the Royalty Purchase Agreements (as defined in \u201cNote 7\u2014Royalty Financing Obligations\u201d in the Notes to Consolidated Financial Statements in Part I, Item 1 of this report), may reduce the profitability of such products.",
+     "If we lose our relationship with any one or more of these parties, we could experience a significant delay in both identifying another comparable provider and then contracting for its services."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the Q3 2026 Form 10-Q balance sheet and Risk Factors/MD&A of the 2025 Form 10-K and Q3 2026 Form 10-Q",
+    "claim": "BioCryst's pipeline and expansion face clinical trial and regulatory approval uncertainties, Astria integration and unanticipated liability risks, a 395,609 (table in thousands) secured term loan under the Blackstone Loan Agreement, and ongoing risk of not achieving sustained profitability.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Although we achieved net income on a U.S. GAAP basis for the year ended December 31, 2025 for the first time on an annual basis, we have not yet achieved sustained profitability.",
+     "The outcome of preclinical testing and early clinical trials may not be predictive of the success of later clinical trials, and interim results of a clinical trial do not necessarily predict final results.",
+     "As a result, we may not yet be aware of all material risks, liabilities, or challenges associated with Astria\u2019s business or product candidates (in particular, navenibart), including risks that were not identified or fully appreciated during our due diligence process.",
+     "Our obligations under the Blackstone Loan Agreement are secured by a security interest in, subject to certain exceptions, substantially all of our and our subsidiaries\u2019 assets."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in the balance sheet and the earnings release table",
-    "claim": "Liquidity is ample against near-term obligations. Total current assets were 531,151 against total current liabilities of 195,830 (table in thousands). Cash and cash equivalents were 96,971 and short-term investments 278,027. The company reports cash, cash equivalents and investments of 374,998, up from 335,911 at the prior year-end (table in thousands).",
+    "basis": "stated in F1 and P6",
+    "claim": "On September 30, 2026, cash, cash equivalents, restricted cash and investments totaled $376.4 million (comprising $ 96,971 in cash and cash equivalents, 278,027 in short-term investments, and 1,451 in total restricted cash, tables in thousands), up from $335,911 in cash, cash equivalents and investments (table in thousands) at December 31, 2025.",
     "facts": [
      "F1",
      "P6"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet",
-    "claim": "Leverage is high. A secured term loan of 395,609, current and non-current royalty financing obligations of 43,745 and 377,938, and total liabilities of 988,454 sit against total assets of 591,070 (table in thousands). Stockholders' deficit widened to (397,384) from (119,153) (table in thousands).",
-    "facts": [
-     "F1"
+    "quotes": [
+     "As a result, cash, cash equivalents, restricted cash and investments totaled $376.4 million on September 30, 2026.",
+     "Short-term investments | 278,027 | 185,011",
+     "Cash, cash equivalents and investments | $374,998 | $335,911"
     ],
-    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement and income statement",
-    "claim": "Operations generate cash. Net cash provided by operating activities was 75,534 for the nine months versus 55,409 a year earlier (table in thousands). This came despite a net loss of (605,501), because acquired in-process R&D of 697,761 is a non-cash add-back (table in thousands).",
+    "basis": "stated in F1",
+    "claim": "At September 30, 2026, Total current assets were 531,151 (up from 404,346 at December 31, 2025) against Total current liabilities of 195,830 (table in thousands).",
     "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A; the license and other revenue and deferred revenue figures are from the 10-Q tables",
-    "claim": "Part of the cash-generation quality is flattered by non-recurring or timing items. A new specialty pharmacy built its initial inventory in the third quarter, which boosted ORLADEYO revenue. License and other revenues were 73,573 for the nine months versus 18,125 (table in thousands). Deferred revenue appeared at 10,535 current and 11,614 non-current (table in thousands).",
-    "facts": [
-     "P4",
      "F1"
     ],
     "quotes": [
-     "the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars"
+     "Total current assets | 531,151 | 404,346",
+     "Total current liabilities | 195,830 | 196,066"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement, cash flow statement and earnings release table",
-    "claim": "Debt service is largely covered by operating profit and cash. Nine-month interest expense was (62,676) (table in thousands), of which 38,669 was non-cash interest on royalty financing obligations. Cash paid for interest was 22,789. In the third quarter, income from operations of 53,330 compared with interest expense of (21,185) (table in thousands).",
+    "basis": "stated in F1 and P6",
+    "claim": "Total liabilities rose from 633,311 at December 31, 2025 to 988,454 at September 30, 2026 (against Total assets of 591,070), driven by a 395,609 Secured term loan alongside 421,683 in Royalty financing obligation (tables in thousands), widening Stockholders\u2019 deficit from (119,153) to (397,384) (tables in thousands).",
     "facts": [
-     "F2",
-     "F3"
+     "F1",
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "Total liabilities | 988,454 | 633,311",
+     "Secured term loan | 395,609 | 0",
+     "Royalty financing obligation | 421,683 | 465,688",
+     "Stockholders\u2019 deficit | (397,384) | (119,153)"
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A; the loan draw is from the cash flow statement",
-    "claim": "The main refinancing event in the evidence is the term loan maturity. The Blackstone term loan was drawn for 400,000 in the period (table in thousands). The 10-K states that it matures on the fifth anniversary of the closing date and is secured by substantially all assets. The 10-K also states the company may request further term loans, subject to mutual agreement.",
+    "basis": "stated in P3",
+    "claim": "The Blackstone Loan Agreement funded $400.0 million in initial Term Loans on January 23, 2026 to finance the Astria acquisition, secured by substantially all of BioCryst's and its subsidiaries' assets, following the October 8, 2025 payoff of the $198.7 million Pharmakon Loan Agreement balance.",
     "facts": [
-     "F3",
      "P3"
     ],
     "quotes": [
-     "The maturity date of the Term Loans under the Loan Agreement is January 23, 2031, the fifth anniversary of the Closing Date.",
+     "On October 8, 2025, we used a portion of the proceeds from the sale of the European ORLADEYO business to pay off in full the outstanding principal balance of $198.7 million and terminate the Pharmakon Loan Agreement (as defined below).",
      "Our obligations under the Blackstone Loan Agreement are secured by a security interest in, subject to certain exceptions, substantially all of our and our subsidiaries\u2019 assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the balance sheet and the 10-Q risk factors",
-    "claim": "The balance sheet shows 43,745 of royalty financing obligations due within one year, and 377,938 non-current (table in thousands). The company says it may need more capital and that further borrowing could carry tighter covenants.",
+    "basis": "stated in F2, F3, and P6",
+    "claim": "During the nine months ended September 30, 2026, BioCryst recorded Interest expense of (62,676) (including 38,669 of Non-cash interest expense on royalty financing obligations), Cash paid for interest of 22,789, and Total Cash Paid on Royalty Financing Obligations of $74,164 (tables in thousands).",
     "facts": [
-     "F1",
-     "P5"
+     "F2",
+     "F3",
+     "P6"
     ],
     "quotes": [
-     "Additional borrowings may subject us to more restrictive covenants than are currently applicable to us under the Blackstone Loan Agreement."
+     "Interest expense | (21,185) | (19,661) | (62,676) | (64,737)",
+     "Non-cash interest expense on royalty financing obligations | 38,669 | 39,839",
+     "Cash paid for interest | 22,789 | 22,789",
+     "Total Cash Paid on Royalty Financing Obligations | $33,745 | $30,737 | $74,164 | $71,646"
     ],
     "support": "supported"
-   }
-  ],
-  "growth_thesis": [
+   },
    {
-    "basis": "Stated in the 10-Q MD&A revenue table and text.",
-    "claim": "Underlying U.S. ORLADEYO demand is the main growth driver. Q3 2026 ORLADEYO revenue was 174,833 against 145,265 a year earlier (table in thousands), which excludes the Europe business sold on October 1, 2025. Growth came from higher net price and more pediatric pellet volume, partly offset by fewer capsule shipments.",
+    "basis": "stated in F3 and P6",
+    "claim": "BioCryst generated 75,534 in Net cash provided by operating activities during the nine months ended September 30, 2026 (up from 55,409 in the prior-year period), with Acquisitions of property and equipment of (845) (table in thousands) and positive cash flow in Q3 2026.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 75,534 | 55,409",
+     "Acquisitions of property and equipment | (845) | (1,666)",
+     "During Q3 2026, the company generated positive cash flow."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "For the nine months ended September 30, 2026, Net cash (used in) provided by investing activities was (457,671) due to the (489,480) Acquisition of Astria Therapeutics, Inc., net of cash acquired, funded primarily by 400,000 in Proceeds from the Term Loans under the Blackstone Loan Agreement within 389,323 of Net cash provided by (used in) financing activities (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Acquisition of Astria Therapeutics, Inc., net of cash acquired | (489,480) | 0",
+     "Net cash (used in) provided by investing activities | (457,671) | 69,794",
+     "Proceeds from the Term Loans under the Blackstone Loan Agreement | 400,000 | 0",
+     "Net cash provided by (used in) financing activities | 389,323 | (131,971)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Nine-month 2026 Net cash provided by operating activities of 75,534 relied on non-cash add-backs to the $ (605,501) Net (loss) income\u2014primarily 697,761 in Acquired in-process research and development, 44,963 in Stock-based compensation expense, 38,669 in Non-cash interest expense on royalty financing obligations, and 9,538 in Impairment of long-lived assets\u2014partially offset by outflows for Decrease in royalty financing obligations of (45,647), (Decrease) increase in accounts payable and accrued expenses of (45,674), Increase in inventory of (16,067), and Increase in trade receivables of (12,991) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net (loss) income | $ (605,501) | $ 18,016",
+     "Acquired in-process research and development | 697,761 | 0",
+     "Stock-based compensation expense | 44,963 | 61,273",
+     "Decrease in royalty financing obligations | (45,647) | (55,240)",
+     "(Decrease) increase in accounts payable and accrued expenses | (45,674) | 22,441"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "Nine-month 2026 revenues and cash generation benefited from non-recurring drivers, including an initial inventory build by new specialty pharmacy CareMed in Q3 2026 (required to hold 7-21 days of inventory) that contributed an amount in the upper teens of millions of dollars and a $58.0 million increase in Neopharmed License Agreement revenue, while Q3 2026 R&D included $6.3 million in cash and $9.3 million in non-cash Birmingham restructuring costs.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "growth in the underlying U.S. business (reflecting an increase in net price and higher volume of oral pellets for pediatric patients, partially offset by lower capsule shipments)"
+     "In connection with the transition, the new specialty pharmacy established its initial inventory position in the third quarter of 2026, and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars.",
+     "ORLADEYO revenue, excluding European revenue, grew year-over-year when removing the effect of the initial inventory build.",
+     "Total restructuring costs in research and development included cash costs of $6.3 million and non-cash costs of $9.3 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "Part of the Q3 revenue gain is a one-time pipeline fill from the new sole-source specialty pharmacy. For this to support later growth, the pharmacy must keep its required inventory as patient demand rises. Inventory was at the lower end of the required range at quarter-end.",
+    "basis": "stated in F1 and P3",
+    "claim": "The $400.0 million Blackstone Term Loans mature on January 23, 2031 (with Secured term loan carried as non-current at 395,609 on September 30, 2026), while current liabilities include 43,745 in Royalty financing obligations, 2,421 in Operating lease liabilities, and 1,023 in Finance lease liabilities (table in thousands).",
     "facts": [
-     "P4"
+     "F1",
+     "P3"
     ],
     "quotes": [
-     "and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars",
-     "the new specialty pharmacy takes title to and maintains inventory of ORLADEYO prior to dispensing to patients and is required to maintain 7-21 days of inventory on hand"
+     "The maturity date of the Term Loans under the Loan Agreement is January 23, 2031, the fifth anniversary of the Closing Date.",
+     "Royalty financing obligations | 43,745 | 38,455",
+     "Secured term loan | 395,609 | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "Management statements in the earnings release and the 10-Q.",
-    "claim": "The ORLADEYO pellet formulation is a stated growth lever, in children and now in adolescents and adults. Management reports strong early reimbursement and prescriptions ahead of expectations. For this to continue, reimbursement and prescription fills must hold as the launch scales.",
+    "basis": "stated in P2, P3, P5, and P6",
+    "claim": "Obligations and future refinancing needs are supported by $376.4 million in cash, restricted cash and investments, positive operating cash flow, full-year 2026 total revenue guidance of $715 million to $730 million versus Non-GAAP operating expense guidance of $415 million to $425 million (plus $30 million to $35 million in expected annualized Birmingham closure savings), and up to $150.0 million in mutually agreed incremental Blackstone term loans, though external financing may still be needed and is not assured.",
     "facts": [
-     "P6",
-     "P4"
+     "P2",
+     "P3",
+     "P5",
+     "P6"
     ],
     "quotes": [
+     "Subject to the mutual agreement between the Company, Blackstone and the lenders, we may request additional term loans up to an aggregate principal amount not exceeding $150.0 million.",
+     "The company maintained its outlook for full year 2026 global net ORLADEYO revenue of $625 million to $645 million and increased its full year 2026 total revenue outlook, including revenue from RAPIVAB\u00ae (peramivir injection) and the licensing of navenibart European rights, to $715 million to $730 million.",
+     "The company improved its outlook for full year 2026 non-GAAP operating expenses, excluding stock-based compensation, restructuring, and transaction-related costs, to $415 million to $425 million.",
+     "The company expects the site closure and associated restructuring to result in cash costs of approximately $10 million total and annualized cost savings of approximately $30 million to $35 million once fully realized, not including additional savings from other program-related expenses.",
+     "If we are unable to obtain sufficient additional capital if and when needed, we may be forced to adjust or curtail our operations; delay, reduce, or stop ongoing clinical trials or commercialization efforts; cease operations altogether; or file for bankruptcy."
+    ],
+    "support": "quote_not_found"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in P1, P3, P4, and P6",
+    "claim": "ORLADEYO revenue outside the divested European business increased by $168.7 million in 2025 and by $69.9 million in the nine-month 2026 period, driven by patient demand, price increases, and paid shipment growth toward a projected $1 billion global annual peak.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Total revenues increased to $874.8 million for the year ended December 31, 2025 compared to $450.7 million for the year ended December 31, 2024.",
+     "ORLADEYO revenue, excluding European revenue, grew year-over-year when removing the effect of the initial inventory build.",
+     "Based on proprietary analyses of HAE prevalence and market research studies with HAE patients, physicians, and payors in the United States and Europe, and five full years of commercialization experience with ORLADEYO in the United States from 2021 through 2025, we anticipate that the global commercial market for ORLADEYO has the potential to reach a global peak of $1 billion in annual net ORLADEYO revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Continued ORLADEYO commercial growth requires sustaining new patient switches, retention, physician prescribing, payor reimbursement, and pricing discipline beyond the initial CareMed inventory build.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Revenue from sales of ORLADEYO in future periods is subject to uncertainties and will depend on several factors, including, but not limited to the success of our and our partners\u2019 commercialization efforts in the United States and elsewhere, the number of new patients switching to ORLADEYO, patient retention and demand, the number of physicians prescribing ORLADEYO, the rate of monthly prescriptions, reimbursement from third-party and government payors, the number of patients receiving free product, our pricing strategy, and market trends.",
+     "In connection with the transition, the new specialty pharmacy established its initial inventory position in the third quarter of 2026, and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars.",
+     "The company expects that inventory level to remain relatively stable over time."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "ORLADEYO oral pellets expand the addressable HAE market following regulatory approvals in the United States and Japan for pediatric patients and U.S. FDA approval of the oral pellet formulation for adults and adolescents.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In December 2025, the U.S. Food and Drug Administration (\u201cFDA\u201d) approved an oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years, and in October 2026, the FDA approved the 150 mg oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in adults and adolescents aged 12 years and older.",
+     "Additionally, in August 2026, Japan\u2019s Ministry of Health, Labor and Welfare granted marketing approval for ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years.",
      "Early reimbursement is strong and new prescriptions continue to be filled ahead of the company\u2019s expectations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A and the earnings release table.",
-    "claim": "License and other revenues add to growth, mainly through the Neopharmed license. Nine-month license and other revenues were 73,573 against 18,125 (table in thousands). Continuation requires further license revenue recognition, royalties from BioCryst Ireland and partner activity.",
+    "basis": "inferred from CareMed transition disclosures and forward-looking risks in P4 and P6",
+    "claim": "Sustaining growth from the oral pellet rollout requires continued payor reimbursement, prescriber uptake, and reliable fulfillment execution by sole-source specialty pharmacy partner CareMed.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "$58.0 million increase due to the recognition of revenue related to the Neopharmed License Agreement"
+     "In August, the company commenced operations with CareMed as its sole-source specialty pharmacy partner for ORLADEYO shipments to patients.",
+     "CareMed\u2019s deep rare disease experience, high-touch patient services, and operational scale make it a strong partner to drive continued growth of ORLADEYO across patient segments and formulations.",
+     "This approval enables prescribers to offer their patients a more personalized treatment choice with ORLADEYO in either capsule or pellet form."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release outlook.",
-    "claim": "Full-year guidance shows management expects growth to continue. ORLADEYO guidance was maintained at $625 million to $645 million, and total revenue guidance was raised to $715 million to $730 million. Delivering it requires Q4 ORLADEYO sales and licensing revenue to come in as planned.",
+    "basis": "stated in P4 and P6; acquisition amounts in F3",
+    "claim": "The Astria Therapeutics acquisition added navenibart, a pivotal-stage injectable plasma kallikrein inhibitor for HAE designed for every three- and six-month subcutaneous dosing.",
     "facts": [
+     "P1",
+     "P4",
      "P6"
     ],
     "quotes": [
+     "Pursuant to the Merger, we acquired Astria\u2019s lead product candidate navenibart, an injectable monoclonal antibody designed to inhibit plasma kallikrein for the treatment of HAE.",
+     "The company is studying navenibart, an investigational, long-acting plasma kallikrein inhibitor, in ALPHA-ORBIT, the ongoing and fully enrolled pivotal study in hereditary angioedema with every three-month and every six-month subcutaneous dosing, and ORBIT-EXPANSE, the long-term extension study."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Navenibart must deliver positive six- and twelve-month top-line results in the third quarter of 2027, obtain regulatory approval, and integrate smoothly into BioCryst's operations to drive future growth.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027.",
+     "To realize the anticipated benefits and synergies from the Merger, we must successfully integrate and combine our businesses in a manner that permits those benefits and synergies to be realized.",
+     "The outcome of preclinical testing and early clinical trials may not be predictive of the success of later clinical trials, and interim results of a clinical trial do not necessarily predict final results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P4, and P6",
+    "claim": "BioCryst is advancing BCX17725 in clinical development for Netherton syndrome while shifting R&D capital away from closed internal discovery programs toward external rare disease innovation.",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Currently, there are no approved treatments that target the underlying cause of Netherton syndrome.",
+     "The company is studying BCX17725, an investigational KLK5 inhibitor for the treatment of Netherton syndrome (NS), in a Phase 1 trial.",
+     "We are focusing on identifying and advancing high-value opportunities through external innovation, rigorous scientific evaluation, and disciplined capital allocation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Pipeline growth outside HAE depends on BCX17725 demonstrating clinical safety and efficacy starting with initial patient data expected by the end of 2026 and on acquiring viable external assets on acceptable terms.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The company has enrolled Part 4 of this trial and expects to report initial data in patients with NS by the end of 2026.",
+     "Identifying, selecting, and in-licensing or acquiring products or product candidates requires substantial expense and technical and financial expertise, and if we are unable to effectively manage our pipeline or integrate viable products or product candidates into our business on acceptable terms, or at all, our business and product development efforts could suffer.",
+     "The company has discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the acquisition of Astria Therapeutics, to focus resources on rare diseases."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "License and other revenues increased by $55.4 million in the nine-month 2026 period, and higher navenibart European licensing revenue and international RAPIVAB orders lifted 2026 total revenue guidance to $715 million to $730 million.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "$55.4 million increase in license and other revenues",
+     "The company maintained its outlook for full year 2026 global net ORLADEYO revenue of $625 million to $645 million and increased its full year 2026 total revenue outlook, including revenue from RAPIVAB\u00ae (peramivir injection) and the licensing of navenibart European rights, to $715 million to $730 million.",
      "The increase was primarily driven by higher revenues from the licensing of navenibart rights, as well as higher RAPIVAB orders from international partners."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the income statement. The cost-savings mechanism is stated in the release, and the savings and cost-base effects are inferred.",
-    "claim": "Operating leverage supports profit growth. Q3 operating income was 53,330 against 29,591 (table in thousands), while total operating expenses were 126,962 against 129,804. Continuation requires the Birmingham closure to deliver the cost savings management expects.",
+    "basis": "stated in P3, P4, and P6",
+    "claim": "Sustaining licensing and partner revenue requires partners to achieve commercial milestones and royalties because upfront license events and expired government ordering periods do not recur automatically.",
     "facts": [
-     "F2",
+     "P3",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "The decrease was primarily driven by continued progress on the Birmingham site closure."
+     "Furthermore, revenues related to our collaborative development activities are dependent upon the progress toward, and the achievement of, developmental milestones by us or our collaborative partners.",
+     "In addition, Neopharmed has agreed to pay us up to $14.0 million if certain revenue milestones are achieved prior to December 31, 2032.",
+     "after which no additional ordering periods were exercised"
     ],
     "support": "supported"
    },
    {
-    "basis": "Timelines are stated in the release. The accounting figure is stated in the cash flow statement. The growth mechanism is inferred.",
-    "claim": "Pipeline programs are a longer-dated growth option. Navenibart, acquired in the Astria merger, has pivotal Phase 3 results expected in Q3 2027. BCX17725 initial patient data is expected by the end of 2026. Success requires positive trial outcomes and regulatory approval.",
+    "basis": "stated in P6",
+    "claim": "Operating profit grew to $53.3 million in the third quarter of 2026 from $29.6 million in the third quarter of 2025, supported by lower selling, general, and administrative expenses and the Birmingham site closure targeting $30 million to $35 million in annualized cost savings.",
     "facts": [
-     "P6",
-     "P2",
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027."
+     "The company recorded an operating profit of $53.3 million for the third quarter of 2026 compared to $29.6 million for the third quarter of 2025.",
+     "The company expects the site closure and associated restructuring to result in cash costs of approximately $10 million total and annualized cost savings of approximately $30 million to $35 million once fully realized, not including additional savings from other program-related expenses.",
+     "The company improved its outlook for full year 2026 non-GAAP operating expenses, excluding stock-based compensation, restructuring, and transaction-related costs, to $415 million to $425 million."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Balance sheet and cash flow figures are stated. Their role as a condition for growth is inferred.",
-    "claim": "Funding capacity is a condition for the growth plan. Operating cash flow was 75,534 for nine months, and cash, cash equivalents and investments were 374,998 (tables in thousands). Against that, the secured term loan is 395,609 and stockholders' deficit is (397,384). Growth and any further business development depend on cash generation covering debt and royalty obligations.",
+    "basis": "stated in P5 and P6; net loss in F2 and P6",
+    "claim": "Sustaining operating and net profitability requires realizing the expected Birmingham cost savings while generating enough cash flow to cover the 395,609 (table in thousands) secured term loan, 421,683 (table in thousands) in royalty financing obligations, and ongoing clinical costs.",
     "facts": [
-     "F3",
-     "F1",
-     "P6",
-     "P5"
+     "P2",
+     "P5",
+     "P6"
     ],
     "quotes": [
-     "We may need to raise additional capital or obtain additional financing in the future."
+     "Although we achieved net income on a U.S. GAAP basis for the year ended December 31, 2025 for the first time on an annual basis, we have not yet achieved sustained profitability.",
+     "Even if we are able to successfully commercialize our existing products, or to develop or otherwise acquire new commercially viable products, certain obligations we have to third parties, including, without limitation, our obligation to pay RPI and OMERS, as applicable, royalties on certain revenues from ORLADEYO under the Royalty Purchase Agreements (as defined in \u201cNote 7\u2014Royalty Financing Obligations\u201d in the Notes to the Condensed Consolidated Financial Statements in Part I, Item 1 of this report), may reduce the profitability of such products.",
+     "BioCryst\u2019s ability to successfully execute its plan to close the Birmingham research facility and wind-down its internal discovery programs, including the timing and costs of such actions and its ability to realize the anticipated cost savings;"
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited items (completion date, statement line items); the link to the first-quarter loss is stated in the 10-Q risk factor",
-    "claim": "BioCryst completed its merger with Astria Therapeutics and acquired navenibart. The cash flow statement shows 697,761 (table in thousands) of acquired in-process R&D charged to expense and 489,480 (table in thousands) cash paid net of cash acquired. The filings link the first-quarter 2026 net loss to this non-cash charge.",
-    "facts": [
-     "P4",
-     "F2",
-     "F3",
-     "P5"
-    ],
-    "quotes": [
-     "On January 23, 2026, we completed the previously announced merger (the \u201cMerger\u201d) with Astria Therapeutics, Inc. (\u201cAstria\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "On the Merger closing date, BioCryst entered the Blackstone Loan Agreement. Lenders funded initial term loans of $400.0 million, secured by substantially all assets, to fund the Merger cash consideration and related costs. The balance sheet at Sep. 30, 2026 carries a secured term loan of 395,609 (table in thousands).",
-    "facts": [
-     "P3",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "the lenders funded initial term loans in the aggregate principal amount of $400.0 million (the \u201cTerm Loans\u201d)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the year-end completion timing is from the 8-K text, which is truncated in the packet",
-    "claim": "BioCryst announced the Birmingham Closure Plan: it will discontinue internal discovery programs and close its Birmingham, Alabama discovery facility. Related one-time expenses were recognized in the third quarter of 2026, and closure activities are expected to be substantially complete by year-end.",
-    "facts": [
-     "P4",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "In June 2026, we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama (the \u201cBirmingham Closure Plan\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "BioCryst recorded a long-lived asset impairment of $9,538 (table in thousands) tied to the Birmingham Closure Plan.",
-    "facts": [
-     "P6",
-     "F3",
-     "P4"
-    ],
-    "quotes": [
-     "Long-lived asset impairment | $9,538"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "BioCryst completed the sale of its European ORLADEYO business to Neopharmed Gentili for total cash proceeds of $254.5 million. This removed European ORLADEYO revenue from 2026 results.",
+    "basis": "Stated directly in the 10-K Business section, 10-K MD&A, and 10-Q cash flow statement.",
+    "claim": "BioCryst completed its acquisition of Astria Therapeutics, Inc. via merger, with cash outflow net of cash acquired of (489,480) (table in thousands), common stock issued of 251,655 (table in thousands), and acquired in-process research and development expense of 697,761 (table in thousands).",
     "facts": [
      "P1",
      "P3",
-     "P4"
+     "F3"
     ],
     "quotes": [
-     "On October 1, 2025, we announced the successful completion of the sale of our European ORLADEYO business to Neopharmed Gentili.",
-     "At the Closing, we received total cash proceeds of $254.5 million"
+     "On January 23, 2026 (the \u201cClosing Date\u201d), BioCryst completed the transactions contemplated by the Agreement and Plan of Merger, dated as of October 14, 2025 (the \u201cMerger Agreement\u201d), by and among BioCryst, Axel Merger Sub, Inc., a Delaware corporation and a wholly owned subsidiary of BioCryst (\u201cMerger Sub\u201d) and Astria Therapeutics, Inc., a Delaware corporation (\u201cAstria\u201d).",
+     "Acquisition of Astria Therapeutics, Inc., net of cash acquired | (489,480) | 0",
+     "Issuance of common stock for the acquisition of Astria Therapeutics, Inc. | 251,655 | 0",
+     "Acquired in-process research and development | 697,761 | 0"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "BioCryst paid off in full the Pharmakon loan principal of $198.7 million and terminated the Pharmakon Loan Agreement, using proceeds from the European business sale.",
+    "basis": "Stated directly in the 10-K MD&A.",
+    "claim": "BioCryst entered into the Blackstone Loan Agreement, under which lenders funded $400.0 million in initial secured term loans maturing on the fifth anniversary of the Closing Date.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "we used a portion of the proceeds from the sale of the European ORLADEYO business to pay off in full the outstanding principal balance of $198.7 million"
+     "On the Closing Date, we also entered into a Loan Agreement (the \u201cBlackstone Loan Agreement\u201d) with Blackstone Alternative Credit Advisors LP and Blackstone Life Sciences Advisors L.L.C., (together, \u201cBlackstone\u201d), as the Blackstone representatives thereunder, the guarantors from time to time party thereto, the lenders from time to time party thereto, and Wilmington Trust, National Association, as agent, pursuant to which the lenders funded initial term loans in the aggregate principal amount of $400.0 million (the \u201cTerm Loans\u201d).",
+     "The maturity date of the Term Loans under the Loan Agreement is January 23, 2031, the fifth anniversary of the Closing Date."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The FDA approved the oral pellet formulation of ORLADEYO for prophylaxis in pediatric HAE patients.",
+    "basis": "Stated directly in the 10-Q MD&A and Q3 2026 earnings release.",
+    "claim": "BioCryst announced the Birmingham Closure Plan to discontinue its internal discovery programs and close its Discovery Center of Excellence facility in Birmingham, Alabama, expecting approximately $10 million in total cash costs and approximately $30 million to $35 million in annualized cost savings once fully realized.",
     "facts": [
-     "P3",
-     "P1"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "we announced that the FDA approved our new drug application (\u201cNDA\u201d) for the use of an oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years"
+     "In June 2026, we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama (the \u201cBirmingham Closure Plan\u201d).",
+     "The company's Birmingham site closure activities are on track to be substantially complete by year-end.",
+     "The company expects the site closure and associated restructuring to result in cash costs of approximately $10 million total and annualized cost savings of approximately $30 million to $35 million once fully realized, not including additional savings from other program-related expenses."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Japan's Ministry of Health, Labor and Welfare granted marketing approval for ORLADEYO for pediatric HAE patients.",
+    "basis": "Stated directly in the 10-Q cash flow statement and Q3 2026 earnings release non-GAAP reconciliation.",
+    "claim": "BioCryst recorded a long-lived asset impairment of $9,538 (table in thousands) and severance agreement expenses of $6,061 (table in thousands) in connection with the Birmingham Closure Plan, alongside workforce reduction expenses of $3,374 (table in thousands), during the third quarter.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Research and development expenses for the quarter include one-time impairment charges associated with the closure of the Birmingham site and employee termination costs.",
+     "Long-lived asset impairment | $9,538",
+     "Expense associated with severance agreements | $6,061",
+     "Workforce Reduction | $3,374"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K MD&A.",
+    "claim": "BioCryst conducted a workforce reduction in December 2025, recognizing $2.0 million of related expense in research and development, $1.8 million in sales and marketing, and $2.5 million in general and administrative expenses.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "$2.0 million of expense associated with our December 2025 workforce reduction",
+     "$1.8 million of expense associated with our December 2025 workforce reduction",
+     "$2.5 million of expense associated with our December 2025 workforce reduction."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K MD&A.",
+    "claim": "BioCryst sold all of its equity interests in BioCryst Ireland, holding its European ORLADEYO business, to Neopharmed Gentili S.p.A., receiving $254.5 million in total cash proceeds at closing with up to $14.0 million in potential revenue milestones.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On October 1, 2025 (the \u201cClosing\u201d), under the terms of the Stock Purchase Agreement, we sold to Neopharmed all of our equity interests in BioCryst Ireland, which, together with its subsidiaries, holds certain assets, rights, and employees related to our European ORLADEYO business.",
+     "At the Closing, we received total cash proceeds of $254.5 million, comprised of the purchase price of $250.0 million and customary purchase price adjustments of $4.5 million as set forth in the Stock Purchase Agreement.",
+     "In addition, Neopharmed has agreed to pay us up to $14.0 million if certain revenue milestones are achieved prior to December 31, 2032."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K MD&A.",
+    "claim": "BioCryst used proceeds from the sale of the European ORLADEYO business to pay off in full the $198.7 million outstanding principal balance and terminate the Pharmakon Loan Agreement.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On October 8, 2025, we used a portion of the proceeds from the sale of the European ORLADEYO business to pay off in full the outstanding principal balance of $198.7 million and terminate the Pharmakon Loan Agreement (as defined below)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q MD&A.",
+    "claim": "The initial base ordering period for direct sales of peramivir to the U.S. Department of Health and Human Services expired with no additional ordering periods exercised, contributing to a $13.2 million decrease in direct sales of peramivir.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "$13.2 million decrease in direct sales of peramivir primarily due to lower direct sales of peramivir to the U.S. Department of Health and Human Services (\u201cHHS\u201d) following the expiration of the initial 12\u2011month base ordering period in September 2025, after which no additional ordering periods were exercised"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K Business section and 10-K MD&A.",
+    "claim": "The FDA approved BioCryst's new drug application for an oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in pediatric patients with HAE.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "On December 12, 2025, we announced that the FDA approved our new drug application (\u201cNDA\u201d) for the use of an oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in pediatric patients with HAE aged 2 to <12 years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q MD&A.",
+    "claim": "Japan's Ministry of Health, Labor and Welfare granted marketing approval for ORLADEYO for prophylactic therapy in pediatric patients with HAE.",
     "facts": [
      "P4"
     ],
@@ -571,8 +895,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The FDA approved the supplemental application for the oral pellet formulation of ORLADEYO for adults and adolescents.",
+    "basis": "Stated directly in the 10-Q MD&A and Q3 2026 earnings release.",
+    "claim": "The FDA approved BioCryst's supplemental new drug application for the oral pellet formulation of once-daily ORLADEYO for prophylactic therapy in adults and adolescents.",
     "facts": [
      "P4",
      "P6"
@@ -583,92 +907,142 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "BioCryst moved to a new sole-source specialty pharmacy (CareMed) that takes title to and holds inventory. Its initial stocking purchases lifted third-quarter revenue by an amount in the upper teens of millions of dollars, and inventory was at the lower end of the required range at Sep. 30, 2026.",
+    "basis": "Stated directly in the 10-Q MD&A and Q3 2026 earnings release.",
+    "claim": "BioCryst commenced operations with CareMed as its sole-source U.S. specialty pharmacy partner for ORLADEYO shipments, and CareMed's initial inventory build contributed favorably to revenue.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "we announced that we engaged a new commercial pharmacy partner for ORLADEYO to serve as our sole source specialty pharmacy for ORLADEYO shipments to patients in the United States"
+     "In August, the company commenced operations with CareMed as its sole-source specialty pharmacy partner for ORLADEYO shipments to patients.",
+     "In connection with the transition, the new specialty pharmacy established its initial inventory position in the third quarter of 2026, and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "In its third-quarter release, BioCryst increased its full-year 2026 total revenue outlook to $715 million to $730 million. It kept ORLADEYO revenue guidance unchanged and improved its non-GAAP operating expense outlook.",
+    "basis": "Stated directly in the Q3 2026 earnings release.",
+    "claim": "BioCryst discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the Astria Therapeutics acquisition, after concluding partnering efforts.",
     "facts": [
-     "P6",
-     "P7"
+     "P6"
     ],
     "quotes": [
-     "increased its full year 2026 total revenue outlook"
+     "The company has discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the acquisition of Astria Therapeutics, to focus resources on rare diseases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release.",
+    "claim": "BioCryst increased its full year 2026 total revenue outlook to $715 million to $730 million, driven primarily by licensing of navenibart European rights and higher RAPIVAB orders, maintained ORLADEYO revenue guidance at $625 million to $645 million, and improved non-GAAP operating expense guidance to $415 million to $425 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The company maintained its outlook for full year 2026 global net ORLADEYO revenue of $625 million to $645 million and increased its full year 2026 total revenue outlook, including revenue from RAPIVAB\u00ae (peramivir injection) and the licensing of navenibart European rights, to $715 million to $730 million.",
+     "The company improved its outlook for full year 2026 non-GAAP operating expenses, excluding stock-based compensation, restructuring, and transaction-related costs, to $415 million to $425 million."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Balance sheet figures and the lien are stated in F1 and P3. The rupture mechanism is inferred.",
-    "claim": "New secured debt of 395,609 (table in thousands) sits on a balance sheet with total liabilities of 988,454 and a stockholders' deficit of (397,384) (table in thousands). The loan is secured by substantially all assets.",
+    "basis": "Stated in the Q3 2026 Form 10-Q Risk Factors and supported by the Q3 2026 income statement and earnings release.",
+    "claim": "BioCryst has not yet achieved sustained profitability and reported a GAAP net loss of $(605,501) (table in thousands) in the nine-month period, while ORLADEYO royalty obligations to RPI and OMERS may reduce profitability.",
+    "facts": [
+     "P5",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Although we achieved net income on a U.S. GAAP basis for the year ended December 31, 2025 for the first time on an annual basis, we have not yet achieved sustained profitability.",
+     "For example, as a result of the accounting treatment for the Merger, we recorded a net loss on a U.S. GAAP basis for the quarter ended March 31, 2026, due to a special, non-cash charge related to the acquired in-process research and development asset for navenibart."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 balance sheet, cash flow statement, earnings release, and 10-K/10-Q Risk Factors.",
+    "claim": "BioCryst carries a secured term loan of 395,609 (table in thousands), royalty financing obligations of 421,683 (table in thousands), and a stockholders\u2019 deficit of (397,384) (table in thousands), and may need to raise additional capital or financing in the future.",
     "facts": [
      "F1",
+     "P2",
      "P3",
-     "P5"
+     "P5",
+     "P6"
     ],
     "quotes": [
-     "Our obligations under the Blackstone Loan Agreement are secured by a security interest in, subject to certain exceptions, substantially all of our and our subsidiaries\u2019 assets.",
-     "Additional borrowings may subject us to more restrictive covenants than are currently applicable to us under the Blackstone Loan Agreement."
+     "Additional borrowings may subject us to more restrictive covenants than are currently applicable to us under the Blackstone Loan Agreement.",
+     "If we are unable to obtain sufficient additional capital if and when needed, we may be forced to adjust or curtail our operations; delay, reduce, or stop ongoing clinical trials or commercialization efforts; cease operations altogether; or file for bankruptcy."
     ],
     "support": "supported"
    },
    {
-    "basis": "Balances are stated in F1 and the profitability effect is stated in P5. The size of the drag is inferred.",
-    "claim": "Royalty financing obligations of 43,745 current and 377,938 non-current (table in thousands) divert part of ORLADEYO revenue to third parties.",
+    "basis": "Stated in the Form 10-K Risk Factors and Business section, and Q3 2026 Form 10-Q MD&A and earnings release.",
+    "claim": "BioCryst\u2019s clinical pipeline candidates, including navenibart and BCX17725, face clinical development failure and regulatory denial risks that could prevent future product revenues.",
     "facts": [
-     "F1",
-     "P5"
+     "P1",
+     "P2",
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "may reduce the profitability of such products."
+     "If we or our partners do not obtain regulatory approvals for our product candidates or maintain regulatory approvals for our products, we or our partners will not be able to commercialize and sell these products and potential products, which would significantly harm our business because we will receive no revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "The stocking effect is stated in P4. How it affects later quarters is inferred.",
-    "claim": "Part of the $29.6 million rise in Q3 ORLADEYO revenue came from a one-time inventory build at the new specialty pharmacy, which the filing sizes in the upper teens of millions of dollars. This may not repeat.",
+    "basis": "Stated in the Form 10-K Business and MD&A, Q3 2026 Form 10-Q MD&A, and Q3 2026 earnings release.",
+    "claim": "In the third quarter, ORLADEYO accounted for $174.8 million of $180.3 million in total net revenues, leaving BioCryst exposed to first-quarter payer reauthorization seasonality and specialty pharmacy inventory variability.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Based on our commercialization experience with ORLADEYO, we believe there is a seasonal impact to our business in the first quarter of each year due to typical first quarter requirements from payors for prescription reauthorization of specialty products, like ORLADEYO, that can temporarily move patients from paid drug to free product.",
+     "In connection with the transition, the new specialty pharmacy established its initial inventory position in the third quarter of 2026, and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Risk Factors and Q3 2026 earnings release.",
+    "claim": "Integrating Astria Therapeutics after issuing 17.5% of pre-merger common shares could be more costly or difficult than expected and expose BioCryst to unforeseen liabilities or asset discontinuations.",
+    "facts": [
+     "P2",
+     "P6",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Combining Astria with our business may be more difficult, costly or time consuming than expected and the combined company may fail to realize the anticipated benefits and synergies of the Merger.",
+     "In connection with the payment of the merger consideration, we issued 17.5% of the shares of our common stock issued and outstanding immediately prior to the effective time of the Merger.",
+     "The company has discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the acquisition of Astria Therapeutics, to focus resources on rare diseases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and Q3 2026 10-Q Risk Factors, Q3 2026 10-Q MD&A, and Q3 2026 earnings release.",
+    "claim": "BioCryst depends heavily on third-party CROs, manufacturers, and commercial partners (including sole-source U.S. specialty pharmacy CareMed), whose failure or non-exercise of contract options can delay development or reduce revenues.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "If our development collaborations with third parties, such as our development partners, contractors and contract research organizations, fail, the development of our product candidates will be delayed or stopped."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and Q3 2026 Form 10-Q MD&A.",
+    "claim": "Full-year 2026 financial guidance and expected annualized Birmingham site closure savings of $30 million to $35 million are subject to execution, timing, and cost forecasting uncertainties.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "the new specialty pharmacy established its initial inventory position in the third quarter of 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The charge and the timeline are stated in F2 and P6. The downside link is inferred from the generic risk factor language in P2.",
-    "claim": "The company expensed 697,761 (table in thousands) of acquired in-process R&D for navenibart, and its pivotal results are still pending. A poor outcome would weaken the rationale for the acquisition.",
-    "facts": [
-     "F2",
-     "F3",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Loss and profitability statement are in F2 and P5. The financing need is stated only as a possibility in P5.",
-    "claim": "The nine-month net loss was (605,501) (table in thousands), driven by the one-time acquired R&D charge, and the company says it has not yet achieved sustained profitability.",
-    "facts": [
-     "F2",
-     "P5"
-    ],
-    "quotes": [
-     "we have not yet achieved sustained profitability."
+     "The company expects the site closure and associated restructuring to result in cash costs of approximately $10 million total and annualized cost savings of approximately $30 million to $35 million once fully realized, not including additional savings from other program-related expenses.",
+     "We have not provided a reconciliation against the comparable forward-looking GAAP measure because we are unable to predict with reasonable certainty the full amount of stock-based compensation expense or restructuring or transaction-related costs for the full year 2026 without unreasonable effort."
     ],
     "support": "supported"
    }
@@ -676,105 +1050,154 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in the 10-Q MD&A as 'in an amount in the upper teens of millions of dollars'. The exact amount is not given.",
-    "claim": "How much of the third-quarter ORLADEYO revenue growth was a one-time stocking effect from the new specialty pharmacy, and how much was underlying demand? The filing gives only a range for the stocking amount.",
+    "basis": "stated in F1, F3, and P3",
+    "claim": "What are the interest rate, amortization schedule, and financial covenants governing the $400.0 million Term Loans under the Blackstone Loan Agreement (carrying value 395,609, table in thousands)?",
+    "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Secured term loan | 395,609 | 0",
+     "Proceeds from the Term Loans under the Blackstone Loan Agreement | 400,000 | 0",
+     "The maturity date of the Term Loans under the Loan Agreement is January 23, 2031, the fifth anniversary of the Closing Date.",
+     "See \u201cNote 21\u2014Subsequent Events\u201d in the Notes to Consolidated Financial Statements in Part II, Item 8 of this report for additional information about the Blackstone Loan Agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P1, P5, and P6",
+    "claim": "What are the royalty tiers, payment caps, and effective interest rates of the RPI and OMERS royalty financing obligations totaling 43,745 current and 377,938 non-current (table in thousands)?",
+    "facts": [
+     "F1",
+     "P1",
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Royalty financing obligations | 43,745 | 38,455",
+     "Royalty financing obligations | 377,938 | 427,233",
+     "See \u201cNote 9\u2014Royalty Financing Obligations\u201d in the Notes to Consolidated Financial Statements in Part II, Item 8 of this report for additional information about our obligations under the Royalty Purchase Agreements.",
+     "Total Cash Paid on Royalty Financing Obligations | $33,745 | $30,737 | $74,164 | $71,646"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2, F3, P3, and P5",
+    "claim": "How was the Astria Therapeutics acquisition consideration\u2014including (489,480) net cash paid and 251,655 in common stock issued (table in thousands)\u2014allocated across acquired assets, liabilities, and the 697,761 acquired in-process research and development charge (table in thousands)?",
+    "facts": [
+     "F2",
+     "F3",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Acquired in-process research and development | 0 | 0 | 697,761 | 0",
+     "Acquisition of Astria Therapeutics, Inc., net of cash acquired | (489,480) | 0",
+     "Issuance of common stock for the acquisition of Astria Therapeutics, Inc. | 251,655 | 0",
+     "For example, as a result of the accounting treatment for the Merger, we recorded a net loss on a U.S. GAAP basis for the quarter ended March 31, 2026, due to a special, non-cash charge related to the acquired in-process research and development asset for navenibart."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, F2, P4, and P6",
+    "claim": "Who is the counterparty and what are the upfront, milestone, and royalty terms of the navenibart European rights licensing agreement, and what obligations comprise the 10,535 current and 11,614 non-current deferred revenue (table in thousands)?",
+    "facts": [
+     "F1",
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Deferred revenue | 10,535 | 0",
+     "Deferred revenue | 11,614 | 0",
+     "(see \u201cNote 12\u2014Collaborative and Other Relationships\u201d in the Notes to the Condensed Consolidated Financial Statements in Part I, Item 1 of this report for additional information on these agreements)",
+     "The increase was primarily driven by higher revenues from the licensing of navenibart rights, as well as higher RAPIVAB orders from international partners."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "What was the exact dollar amount of CareMed's initial ORLADEYO inventory build, and what was underlying third-quarter end-patient demand growth excluding that stocking?",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "the new specialty pharmacy established its initial inventory position in the third quarter of 2026",
-     "As of September 30, 2026, inventory levels at the new specialty pharmacy were at the lower end of the required range"
+     "In connection with the transition, the new specialty pharmacy established its initial inventory position in the third quarter of 2026, and the related purchases contributed favorably to revenues during the period in an amount in the upper teens of millions of dollars.",
+     "ORLADEYO revenue, excluding European revenue, grew year-over-year when removing the effect of the initial inventory build."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from balance sheet figures and the risk-factor language. The filings excerpted here do not state covenant headroom.",
-    "claim": "Can the company carry its debt and royalty obligations from operating cash flow, or will it need new capital? Secured term loan debt and royalty financing obligations are both large relative to cash and investments, and stockholders' equity is negative (table in thousands).",
+    "basis": "stated in P4 and P6",
+    "claim": "What specific lease exits, severance schedules, and remaining restructuring charges comprise the approximately $10 million expected cash cost and $30 million to $35 million expected annualized cost savings of the Birmingham Closure Plan?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "See \u201cNote 3\u2014Birmingham Closure\u201d in the Notes to the Condensed Consolidated Financial Statements in Part I, Item 1 of this report for additional details on the Birmingham Closure Plan and related expenses.",
+     "The company expects the site closure and associated restructuring to result in cash costs of approximately $10 million total and annualized cost savings of approximately $30 million to $35 million once fully realized, not including additional savings from other program-related expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P4, and P6",
+    "claim": "Will BCX17725 demonstrate safety and clinical activity in Netherton syndrome patients in its initial clinical readout, and will navenibart meet its six- and twelve-month endpoints in the ALPHA-ORBIT pivotal study?",
+    "facts": [
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The company has enrolled Part 4 of this trial and expects to report initial data in patients with NS by the end of 2026.",
+     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from avoralstat's inclusion in P1 and P3 alongside its omission from the Products and Product Candidates section of P4 after the internal discovery discontinuation disclosed in P4 and P6",
+    "claim": "Has BioCryst secured a strategic partner for avoralstat, paused its development, or discontinued the program following the Birmingham Closure Plan?",
+    "facts": [
+     "P1",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We plan to seek a strategic partner for development of avoralstat beyond phase 1.",
+     "In June 2026, we announced that we would discontinue our internal discovery programs and close our Discovery Center of Excellence facility in Birmingham, Alabama (the \u201cBirmingham Closure Plan\u201d).",
+     "The company has discontinued development of STAR-0310, the early-stage atopic dermatitis program acquired through the acquisition of Astria Therapeutics, to focus resources on rare diseases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P5, and P6",
+    "claim": "What are BioCryst's near-term contractual commitments, debt service requirements, and liquidity adequacy assessment given $374,998 in cash, cash equivalents and investments versus 395,609 in secured term loan and 421,683 in royalty financing obligation (table in thousands)?",
     "facts": [
      "F1",
      "P5",
      "P6"
     ],
     "quotes": [
-     "We may need to raise additional capital or obtain additional financing in the future.",
-     "Secured term loan | 395,609 | 0"
+     "See \u201cManagement\u2019s Discussion and Analysis of Financial Condition and Results of Operations\u2014Liquidity and Capital Resources\u201d in Part I, Item 2 of this report for additional information about our liquidity needs, capital requirements, potential funding alternatives, and adequacy of available funds.",
+     "Cash, cash equivalents and investments | $374,998 | $335,911",
+     "Secured term loan | 395,609 | -",
+     "Royalty financing obligation | 421,683 | 465,688"
     ],
     "support": "supported"
    },
    {
-    "basis": "Timing is stated in the earnings release. The outcome cannot be known from the evidence.",
-    "claim": "Will the navenibart pivotal study read out positively? The merger put a large acquired in-process R&D charge through the nine-month income statement (table in thousands).",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "The program remains on track to report top-line results at six- and twelve-month endpoints in Q3 2027."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the revenue breakdown and the guidance text. Contract terms and future milestones are not in the evidence.",
-    "claim": "How much of the 2026 revenue guidance increase is recurring, and how much is one-time license revenue? License and other revenue was large in the nine months, and deferred revenue is on the balance sheet (table in thousands).",
-    "facts": [
-     "F1",
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "The increase was primarily driven by higher revenues from the licensing of navenibart rights, as well as higher RAPIVAB orders from international partners."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Charges are stated in the release reconciliation. Total expected closure cost is not visible in the excerpts.",
-    "claim": "What was the full cost of the Birmingham closure, and does operating spending fall as guided? Third-quarter R&D rose year over year while the guidance for non-GAAP operating expense was lowered (table in thousands).",
-    "facts": [
-     "P6",
-     "P7",
-     "F2"
-    ],
-    "quotes": [
-     "The company's Birmingham site closure activities are on track to be substantially complete by year-end."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated qualitatively by the company. Quantified uptake data is absent from the evidence.",
-    "claim": "How fast is the pediatric ORLADEYO pellet launch ramping? Management calls demand ahead of expectations but gives no revenue or patient count beyond prescriptions written through the second quarter.",
-    "facts": [
-     "P6",
-     "P8"
-    ],
-    "quotes": [
-     "Prescription demand is strong: 47 prescriptions have been written year-to-date.",
-     "Early reimbursement is strong and new prescriptions continue to be filled ahead of the company"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as plans in the 10-K and 10-Q. No deal terms or timing are given.",
-    "claim": "What will become of STAR-0310 and avoralstat, and what external assets will the company acquire now that internal discovery is discontinued? The filings describe only plans to seek alternatives, partners and external innovation.",
+    "basis": "stated in P3 and P4",
+    "claim": "What revenue milestone thresholds govern the up to $14.0 million contingent earnout from Neopharmed, and what contractual deliverables drove the $58.0 million Neopharmed License Agreement revenue recognition?",
     "facts": [
      "P3",
      "P4"
     ],
     "quotes": [
-     "We plan to seek strategic alternatives for this asset.",
-     "We plan to seek a strategic partner for development of avoralstat beyond phase 1."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Timing is stated in the earnings release. The results are unknown.",
-    "claim": "Will the BCX17725 Netherton syndrome trial deliver the promised initial patient data by year-end, and what will it show?",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "The company has enrolled Part 4 of this trial and expects to report initial data in patients with NS by the end of 2026."
+     "In addition, Neopharmed has agreed to pay us up to $14.0 million if certain revenue milestones are achieved prior to December 31, 2032.",
+     "$58.0 million increase due to the recognition of revenue related to the Neopharmed License Agreement;"
     ],
     "support": "supported"
    }
@@ -785,5 +1208,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+ "verdict_reason": "implied borrowing cost outside the allowed range"
 }
