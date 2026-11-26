@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-26T18:43:30Z",
+ "generated_at": "2026-11-26T18:50:50Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -5412,39 +5412,63 @@
    "verdict_reason": "expected return +11.6 points a year against the required return over 3 years; the two runs do not both reach BUY"
   },
   "HCSG": {
-   "alpha_pts": null,
+   "alpha_pts": -11.0171744289722,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-10-23T20:04:20.000Z",
     "accepted_utc": "2026-10-24T00:04:20Z",
     "accession": "0000731012-26-000059",
-    "decision_time": "2026-11-21T05:24:44Z",
+    "decision_time": "2026-11-26T18:44:16Z",
     "form": "10-Q",
     "period": "2026-09-30"
    },
-   "claims": 73,
-   "claims_supported": 71,
-   "date": "2026-11-21T05:24:44Z",
+   "claims": 79,
+   "claims_supported": 76,
+   "date": "2026-11-26T18:44:16Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 1218676073.3125842,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 67432007.0,
    "flags": [
-    "HCSG completed the acquisition of NEXDINE Hospitality for an upfront purchase price of $93.5 million, funded with cash on hand.",
-    "Genesis Healthcare, a large HCSG customer, filed for Chapter 11 bankruptcy protection. This is a customer bankruptcy, not an HCSG filing.",
-    "A court approved the sale of Genesis to 101 W. State Street in the Genesis bankruptcy. HCSG recorded an estimated recovery of $6.1 million as a result."
+    "Genesis Healthcare, a major customer, filed for Chapter 11 bankruptcy protection. It contributed 7.3% of 2025 consolidated revenues, and the company booked $63.9 million of bad debt expense tied to the bankruptcy in 2025.",
+    "The company completed the acquisition of NEXDINE Hospitality for an upfront price of $93.5 million, funded with cash on hand. It is expected to contribute over $150 million in annual revenue.",
+    "In its third quarter earnings release the company raised its 2027 revenue growth outlook from mid single-digits to low double-digits."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.08149794340513286,
+   "market_cap_at_publish": 1714796053,
    "model": "claude-sonnet-5-5",
    "news_count": 0,
-   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 25.43,
    "qwen_book": null,
    "release_truncated": [],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
-   "source": "on request (operator)",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 18.29030388430995,
+    "3000": 17.85502613122953
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+   "upside": -0.2893171924553152,
+   "value_base": 18.07266500776974,
+   "value_bear": 13.39644524826128,
+   "value_bull": 24.150941317836676,
+   "value_per_filed_share": {
+    "base": 18.07266500776974,
+    "bear": 13.39644524826128,
+    "bull": 24.150941317836676
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -11.0 points a year against the required return over 3 years"
   },
   "HG": {
    "alpha_pts": 13.309703326519795,
@@ -12222,11 +12246,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 152,
+ "valued_count": 153,
  "verdict_counts": {
-  "AVOID": 68,
+  "AVOID": 69,
   "BUY": 57,
-  "NO_CALL": 107,
+  "NO_CALL": 106,
   "WATCH": 18
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
