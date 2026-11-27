@@ -2,389 +2,280 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 134,
- "claims_supported": 128,
- "date": "2026-11-17T00:17:45Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-05T21:15:52.000Z",
+  "accepted_utc": "2026-11-06T02:15:52Z",
+  "accession": "0001193125-26-449873",
+  "decision_time": "2026-11-27T09:32:12Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 98,
+ "claims_supported": 97,
+ "date": "2026-11-27T09:32:12Z",
+ "family": "operating",
  "flags": [
-  "In the FY2025 10-K, the auditor and management reported substantial doubt about the company's ability to continue as a going concern. They cited debt service obligations, historical negative cash flows and recurring losses.",
-  "In the Q3 2026 10-Q, management concluded that substantial doubt about going concern no longer exists. The credit facility was reclassified to long-term and appears as $45,476 (table in thousands) at September 30, 2026.",
-  "The company entered a five-year Perceptive credit facility of up to $60 million. It drew $50 million at closing and repaid its prior debt, leaving net proceeds of approximately $6.0 million."
+  "Management and the independent auditor concluded that substantial doubt existed about the Company's ability to continue as a going concern due to debt obligations, historical negative cash flows, and recurring losses.",
+  "AVITA Medical entered into a senior secured credit facility with Perceptive Credit Holdings V, LP for up to $60 million, funded $50 million at closing, and repaid in full its obligations under the Previous Credit Agreement with OrbiMed Advisors, LLC.",
+  "Management concluded that substantial doubt about the Company's ability to continue as a going concern no longer exists and reclassified the credit facility from a current to a long-term liability."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-opus-5-5",
+ "loss_record": {
+  "cause": "operating_losses",
+  "explanation": "AVITA Medical has incurred operating losses since inception because its operating expenses\u2014primarily sales and marketing, general and administrative, and research and development\u2014have consistently exceeded gross profit. Operating losses continued through 2023\u20132025 and the first nine months of 2026.",
+  "label": "the continuing operations themselves lose money",
+  "quotes": [
+   {
+    "id": "P7",
+    "quote": "The Company has incurred operating losses and negative cash flows from operations since its inception and has an accumulated deficit of $432.9 million as of September 30, 2026."
+   },
+   {
+    "id": "P2",
+    "quote": "We anticipate that we may continue to incur losses at least until sales of our products are adequate to fund operating expenses."
+   },
+   {
+    "id": "F2",
+    "quote": "Operating loss | (2,629) | (9,153) | (18,287) | (32,126)"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 4 of its last 4 fiscal years",
+ "no_value_reason": "the filings show the continuing operations themselves losing money, so no value is given",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited item",
-    "claim": "AVITA Medical sells acute wound care products: RECELL plus two complementary products, PermeaDerm and Cohealyx.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our current commercial portfolio includes RECELL\u00ae (\u201cRECELL\u201d), and two complementary wound care products, PermeaDerm\u00ae and Cohealyx\u2122, which together support a comprehensive standard of care for acute wounds."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "RECELL is the core product, and the company describes itself as a multi-product acute wound care platform.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "RECELL remains the cornerstone of our business; however, beginning in 2024 we evolved AVITA Medical into a multi-product acute wound care platform company."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The main customers are U.S. hospital burn and trauma centers: about 200 targeted centers, within a burn market concentrated in about 140 specialized burn centers.",
-    "facts": [
-     "P5",
-     "P1"
-    ],
-    "quotes": [
-     "We are executing a focused commercial strategy centered on approximately 200 U.S. burn and trauma centers that represent the highest value and procedural volume within the acute wound care market.",
-     "The U.S. burn treatment market is highly concentrated, with approximately 140 specialized burn centers treating the majority of severe burn patients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited statement; the filing excerpts do not explain what is leased",
-    "claim": "Reported revenue has two lines. In the third quarter, sales revenue was 25,862 and lease revenue was 252 (table in thousands).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "device design stated; the link to recurring kit revenue is inferred",
-    "claim": "RECELL GO pairs a reusable processing device with a single-use preparation kit, so each procedure needs a new kit.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "RECELL GO\u00ae Autologous Cell Harvesting Device (\u201cRECELL GO\u201d): A next-generation system consisting of a reusable, AC-powered RECELL Processing Device (\u201cRPD\u201d) and a single-use preparation kit (\u201cRPK\u201d)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "RECELL produced most third-quarter revenue: U.S. RECELL revenue of $22.4 million, driven by higher procedure volumes and more account ordering.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "RECELL (Q3 U.S. revenue of $22.4 million, approximately 20% growth compared to Q2 2026) continued to drive the business, reflecting higher procedure volumes and increased account ordering."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Year-over-year, third-quarter revenue growth came mainly from RECELL sales, which rose 50%, or $7.7 million.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "The growth in revenues was primarily driven by a 50% increase, or $7.7 million, in sales of RECELL."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In the third quarter, Cohealyx brought in $2.1 million, PermeaDerm $0.6 million and international sales $0.9 million.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Cohealyx (Q3 revenue of $2.1 million, approximately 21% growth compared to Q2 2026) continued to build commercial momentum, reflecting an expanding customer base and additional hospital value analysis committee (VAC) approvals.",
-     "PermeaDerm (Q3 revenue of $0.6 million, essentially flat compared to Q2 2026) maintained stable revenue.",
-     "International (Q3 revenue of $0.9 million, essentially flat compared to Q2 2026) continued to contribute consistent revenue from established international markets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "In the third quarter, Cohealyx and PermeaDerm made up 8% and 2% of total commercial sales.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "Cohealyx and PermeaDerm represented 8% and 2%, respectively, of total commercial sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the PermeaDerm share is inconsistent across sources",
-    "claim": "Cohealyx is made by Regenity and PermeaDerm is licensed from Stedical, and the company keeps only a share of their sale prices, which lowers overall gross margin.",
-    "facts": [
-     "P8",
-     "P7",
-     "P3"
-    ],
-    "quotes": [
-     "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage.",
-     "Under the terms of the Regenity Agreement, Regenity manufactures and supplies Cohealyx and the Company commercializes it under its private label in the U.S."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "An August amendment with Stedical raised the company's PermeaDerm revenue share to 67% for sheets and 80% for gloves, with a $1.0 million minimum for the year.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "In addition, the Company\u2019s share of revenue from PermeaDerm sales will increase to 67% for products sold in sheet form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 50%, and to 80% for products sold in glove form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 35%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company also manufactures PermeaDerm for Stedical to sell, priced at a ten percent premium to its manufacturing cost.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "The Company will sell PermeaDerm for such sales to Stedical at a ten percent premium to the Company\u2019s actual manufacturing costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Third-quarter gross margin was 84.0%, against 81.3% a year earlier; RECELL alone had a gross margin of 88.4%.",
-    "facts": [
-     "P8",
-     "P5"
-    ],
-    "quotes": [
-     "Gross profit margin across all products was 84.0%, a 270-basis point increase from 81.3% in the same period last year.",
-     "The increase in the overall gross margin percentage from the prior year was primarily caused by lower volume discounts, lower inventory reserves"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Revenue depends on hospital reimbursement. When Medicare contractors were slow to publish RECELL payment rates, clinicians used RECELL less.",
+    "basis": "stated directly in P1 and P5",
+    "claim": "AVITA Medical commercializes an acute wound care portfolio comprising RECELL (including RECELL EOU, RECELL GO, and RECELL GO mini), Cohealyx, and PermeaDerm.",
     "facts": [
      "P1",
      "P5"
     ],
     "quotes": [
-     "In the U.S., RECELL is reimbursed through established inpatient and outpatient reimbursement mechanisms.",
-     "Delay by the MACs in establishing and publishing reimbursement rates temporarily slowed clinician use of RECELL."
+     "Our current commercial portfolio includes RECELL\u00ae (\u201cRECELL\u201d), and two complementary wound care products, PermeaDerm\u00ae and Cohealyx\u2122, which together support a comprehensive standard of care for acute wounds.",
+     "The single-use RECELL Autologous Cell Harvesting Device (\u201cRECELL Ease-of-Use\u201d or \u201cRECELL EOU\u201d) is approved by the FDA for the treatment of thermal burn wounds and full-thickness skin defects.",
+     "Our next-generation device, RECELL GO\u00ae Autologous Cell Harvesting Device (\u201cRECELL GO\u201d), is FDA-approved to treat thermal burn wounds and full-thickness skin defects.",
+     "RECELL GO mini\u00ae Autologous Cell Harvesting Device (\u201cRECELL GO mini\u201d), which was approved by the FDA in December 2024, is a line extension of RECELL GO, designed specifically to treat smaller wounds up to 480 cm2."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "A Medicare add-on payment (NTAP) of up to $4,875 per case applied to certain inpatient non-thermal RECELL uses for a limited period.",
+    "basis": "stated directly in F2, P1, and P3",
+    "claim": "RECELL generates revenue from single-use cell harvesting devices and preparation kits (RPKs) used with a multi-use processing device (RPD), and the company records both sales revenue and lease revenue.",
     "facts": [
+     "F2",
+     "P1",
      "P3"
     ],
     "quotes": [
-     "This NTAP designation allows Medicare Part A inpatient claims to receive up to $4,875 in additional reimbursement per case, beyond the standard MS-DRG base rate, provided CMS thresholds and coding criteria are met."
+     "RECELL is an autologous cell harvesting technology that enables clinicians to create a suspension of a patient\u2019s own skin cells, called Spray-On Skin\u2122, at the point of care.",
+     "It consists of two components: the RECELL GO Processing Device (the \u201cRPD\u201d) and the RECELL GO Preparation Kit (the \u201cRPK\u201d).",
+     "The RPD is a multi-use, AC-powered device that controls the RPK.",
+     "The RPK contains a single-use cartridge and the RECELL Enzyme\u2122.",
+     "Sales revenue | $ 25,862 | $ 16,897 | $ 66,415 | $ 53,448",
+     "Lease revenue | 252 | 165 | 652 | 547"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "CMS has finalized national physician payment values for RECELL procedures, taking effect next year.",
+    "basis": "stated directly in P5 and P8",
+    "claim": "RECELL is the primary revenue driver, generating $22.4 million in U.S. revenue in the third quarter of 2026 alongside $2.1 million from Cohealyx, $0.6 million from PermeaDerm, and $0.9 million from international sales out of approximately $26.1 million in total revenue.",
     "facts": [
+     "P5",
      "P8"
     ],
     "quotes": [
-     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
+     "Total revenue was approximately $26.1 million in the three months ended September 30, 2026, an increase of 53% compared to $17.1 million in the prior-year period.",
+     "RECELL (Q3 U.S. revenue of $22.4 million, approximately 20% growth compared to Q2 2026) continued to drive the business, reflecting higher procedure volumes and increased account ordering.",
+     "Cohealyx (Q3 revenue of $2.1 million, approximately 21% growth compared to Q2 2026) continued to build commercial momentum, reflecting an expanding customer base and additional hospital value analysis committee (VAC) approvals.",
+     "PermeaDerm (Q3 revenue of $0.6 million, essentially flat compared to Q2 2026) maintained stable revenue.",
+     "International (Q3 revenue of $0.9 million, essentially flat compared to Q2 2026) continued to contribute consistent revenue from established international markets.",
+     "Cohealyx and PermeaDerm represented 8% and 2%, respectively, of total commercial sales."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Weak reimbursement can stop a market: the company paused commercial investment in vitiligo for that reason.",
+    "basis": "stated directly in P1 and P5",
+    "claim": "In the U.S., the company focuses on approximately 200 burn and trauma centers as well as surgical settings treating thermal burns and full-thickness skin defects, while pausing further commercial investment in vitiligo due to limited and uncertain reimbursement.",
     "facts": [
-     "P1"
+     "P1",
+     "P5"
     ],
     "quotes": [
+     "We are executing a focused commercial strategy centered on approximately 200 U.S. burn and trauma centers that represent the highest value and procedural volume within the acute wound care market.",
+     "With the expansion of RECELL indications to include full-thickness skin defects, we have broadened our commercial focus to additional trauma and surgical settings that treat complex acute wounds and often share clinical, operational, and economic characteristics with burn centers.",
      "Despite regulatory approval and demonstrated clinical benefit, reimbursement for vitiligo procedures remains limited and uncertain.",
      "As a result, we have paused further commercial investment in vitiligo at this time."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Hospital value analysis committees decide whether to adopt the products, and surgeons tend to widen RECELL use from large burns to smaller wounds over time.",
-    "facts": [
-     "P1",
-     "P5"
-    ],
-    "quotes": [
-     "Adoption decisions in burn centers are typically evaluated through hospital value analysis committees (\u201cVACs\u201d), which assess both clinical outcomes and total cost of care.",
-     "We have observed that surgeons often adopt RECELL first in larger and more complex burns, where the clinical and economic benefits are most pronounced, and subsequently expand use to smaller or less severe wounds as familiarity with the technology increases."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Outside the U.S., the company sells partly through third-party distributors.",
+    "basis": "stated directly in P2, P5, and P8",
+    "claim": "Outside the U.S., AVITA Medical sells through third-party distributors in approved markets\u2014including Europe, Australia, New Zealand, and Japan\u2014and also holds a ten-year BARDA agreement worth up to $25.5 million for mass-casualty RECELL supply and readiness services.",
     "facts": [
      "P2",
-     "P5"
+     "P5",
+     "P8"
     ],
     "quotes": [
-     "We rely on third-party distributors for a portion of our sales in countries outside of the U.S."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "A ten-year BARDA agreement worth up to $25.5 million pays for keeping a RECELL supply ready for mass casualty incidents, including about $4.0 million in access and maintenance fees.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
+     "We rely on third-party distributors for a portion of our sales in countries outside of the U.S.",
+     "RECELL and RECELL GO\u00ae are CE-marked in Europe, have TGA certification in Australia, and are listed with Medsafe in New Zealand; RECELL is PMDA-approved in Japan.",
      "On April 6, 2026, we entered into a ten-year agreement with the Biomedical Advanced Research and Development Authority (\u201cBARDA\u201d), part of the U.S. Department of Health and Human Services, with a total potential value of up to $25.5 million.",
-     "The agreement provides approximately $4.0 million in access and maintenance fees over the ten-year term, with additional potential revenue tied to procurement options exercised by BARDA."
+     "Under the agreement, we will maintain a supply of RECELL for deployment in mass casualty incidents and provide associated readiness and support services."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited statement",
-    "claim": "Operating expenses are the largest cost, led by sales and marketing. In the third quarter, sales and marketing was 13,566, G&A 6,307 and R&D 4,697, for total operating expenses of 24,570 (table in thousands).",
+    "basis": "stated directly in P5 and P11",
+    "claim": "The company markets and distributes Cohealyx exclusively in the U.S. under an agreement with manufacturer Regenity Biosciences, and manufactures and distributes PermeaDerm in the U.S. under exclusive agreements with Stedical Scientific, which may also buy PermeaDerm from AVITA for unserved U.S. and non-U.S. markets.",
     "facts": [
-     "F2"
+     "P5",
+     "P11"
     ],
-    "quotes": [],
+    "quotes": [
+     "Regenity manufactures and supplies Cohealyx\u2122, an AVITA Medical-branded, FDA-cleared, collagen-based dermal matrix.",
+     "Under the agreement with Regenity, we hold the exclusive rights to market, sell, and distribute Cohealyx in the U.S., with the potential to expand such commercialization into the European Union, Australia, and Japan.",
+     "In addition, in the United States, we hold the rights to manufacture and exclusively market, sell, and distribute PermeaDerm\u00ae, a biosynthetic wound matrix, under the terms of exclusive multi-year distribution and contract manufacturing agreements with Stedical Scientific, Inc.",
+     "Also under the Global Amendment, Stedical may pursue the commercialization of PermeaDerm in certain U.S. markets not currently served by the Company."
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Sales and marketing cost moves with commissions, incentive pay and the size of the sales force.",
+    "basis": "stated directly in P3 and P5",
+    "claim": "Revenue growth is driven by deeper penetration in existing customer accounts, new accounts treating traumatic and surgical wounds, adoption of RECELL GO mini for smaller wounds, and hospital Value Analysis Committee (VAC) approvals for Cohealyx.",
     "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "The growth in revenues was largely driven by deeper penetration within customer accounts, new accounts for the treatment of traumatic and surgical wounds and, to a lesser extent, new product launches.",
+     "The increase in RECELL sales was due to continued normalization in RECELL utilization following the publication by all of the MACs of reimbursement rates related to healthcare providers use of RECELL and also higher sales of RECELL GO mini in trauma and smaller wounds.",
+     "Cohealyx sales increased 154%, or $1.3 million, primarily driven by more Value Analysis Committees (\u201cVAC\u201d) approvals allowing broader adoption of the product in more facilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in P3, P5, and P8",
+    "claim": "Third-party reimbursement directly moves RECELL demand: regional MAC pricing delays in 2025 slowed utilization until all seven MACs published rates by March 2026, while CMS approved an inpatient NTAP of up to $4,875 per case and finalized national physician payment values effective in 2027.",
+    "facts": [
+     "P3",
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "Delay by the MACs in establishing and publishing reimbursement rates temporarily slowed clinician use of RECELL.",
+     "As of March 2026, all seven MACs had published rates, restoring reimbursement clarity and supporting a return toward normalized utilization.",
+     "This NTAP designation allows Medicare Part A inpatient claims to receive up to $4,875 in additional reimbursement per case, beyond the standard MS-DRG base rate, provided CMS thresholds and coding criteria are met.",
+     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in P3, P5, P8, and P11",
+    "claim": "Revenue-sharing on Cohealyx and PermeaDerm lowers consolidated gross margin (82.1% in 2025 and 84.0% in the third quarter of 2026) relative to standalone RECELL gross margin (84.3% in 2025 and 88.4% in the third quarter of 2026), although an August 2026 amendment raised AVITA's PermeaDerm revenue share to 67% for sheets and 80% for gloves.",
+    "facts": [
+     "P3",
+     "P5",
      "P8",
-     "P3"
+     "P11"
     ],
     "quotes": [
-     "The increase was driven largely by higher sales and marketing expenses, which rose $1.5 million due primarily to increased commissions and compensation, including annual incentive costs.",
-     "The decreases are primarily due to the reduction of our sales force as part of cost savings initiatives."
+     "Gross profit margin was 82.1% compared to 85.8% in the corresponding period in the prior year.",
+     "Note that the gross margin for RECELL products only was 84.3% for the year.",
+     "Note that the gross margin for RECELL products on a standalone basis was 88.4% for the quarter.",
+     "Gross margin was 84.0%, an increase of 270 basis points year over year, reflecting higher RECELL revenue and improvements in manufacturing efficiency",
+     "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage.",
+     "In addition, the Company\u2019s share of revenue from PermeaDerm sales will increase to 67% for products sold in sheet form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 50%, and to 80% for products sold in glove form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 35%."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "The company makes RECELL and PermeaDerm at its own Ventura, California facility and buys some components from third-party and single-source suppliers.",
+    "basis": "stated directly in P2, P3, and P8",
+    "claim": "On the supply and production side, AVITA Medical manufactures, packages, and warehouses RECELL and PermeaDerm at its Ventura, California facility while relying on third-party and some single-source suppliers for RECELL components, with gross margin affected by product mix, manufacturing efficiency, and inventory reserves.",
     "facts": [
-     "P2"
+     "P2",
+     "P3",
+     "P8"
     ],
     "quotes": [
-     "We have a manufacturing facility located in Ventura, California where we produce, package, and warehouse RECELL and PermeaDerm."
+     "We have a manufacturing facility located in Ventura, California where we produce, package, and warehouse RECELL and PermeaDerm.",
+     "We also rely on global third-party manufacturers for production of some of the components used in RECELL.",
+     "Due to the cost and regulatory requirements associated with qualifying multiple suppliers, in 2023, we single-sourced some of our material components.",
+     "The decrease in the overall gross margin percentage from the prior year was primarily caused by product mix and higher inventory reserve."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Financing adds costs below the operating line: third-quarter interest expense of 1,479 (table in thousands) on a SOFR-based loan, plus a $2.1 million non-cash charge for warrant revaluation.",
+    "basis": "stated directly in P3 and P8",
+    "claim": "Operating expenses\u2014totaling $101.4 million in 2025 across sales and marketing ($53.1 million), general and administrative ($27.3 million), and research and development ($20.8 million)\u2014exceed gross profit and are driven mainly by headcount, salaries and benefits, sales commissions, stock-based compensation, and clinical study costs.",
+    "facts": [
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "Total operating expenses decreased by 9% or $10.4 million to $101.4 million, compared with $111.8 million in the year-ended December 31, 2024.",
+     "Sales and marketing expenses decreased by 9%, or $5.1 million, to $53.1 million, compared to $58.2 million in the year-ended December 31, 2024.",
+     "General and administrative expenses decreased by 18%, or $5.8 million, to $27.3 million, compared to $33.1 million in the year-ended December 31, 2024.",
+     "Research and development expenses increased by 2%, or $0.5 million, to $20.8 million, compared to $20.3 million in the year-ended December 31, 2024.",
+     "The increase was driven largely by higher sales and marketing expenses, which rose $1.5 million due primarily to increased commissions and compensation, including annual incentive costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated directly in F2, P3, and P8",
+    "claim": "Below operating loss, costs include interest expense\u2014(5,004) (table in thousands) in 2025 and (4,366) (table in thousands) in the first nine months of 2026\u2014under a secured credit facility accruing cash interest at the greater of SOFR or 4.00% plus 7.50%, alongside non-cash warrant and debt fair value changes.",
     "facts": [
      "F2",
      "P3",
      "P8"
     ],
     "quotes": [
+     "Interest expense | (5,004) | (5,361) | 357 | 7%",
+     "Interest expense | (1,479) | (1,268) | (4,366) | (3,754)",
      "During the term of the Perceptive Loan Facility, interest payable in cash shall accrue on any outstanding amounts under the Loan Facility at a rate per annum equal to the greater of (x) the SOFR rate for such period and (y) 4.00% plus, in either case, 7.50%.",
      "Net loss for the current period was negatively impacted by $2.1 million in non-cash expense related to the revaluation of warrants due to the increase in AVITA Medical\u2019s share price."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The loan requires minimum trailing twelve-month revenue, $70.8 million at the third quarter, and the company says it complied.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "As of September 30, 2026, we were in compliance with these covenants."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in P1 (10-K Item 1)",
-    "claim": "RECELL is the company's core product, and since 2024 the company has added complementary products to become a multi-product acute wound care platform.",
+    "basis": "stated in the cited item (10-K Item 1 Business and 10-Q Item 2 MD&A)",
+    "claim": "AVITA Medical centers its acute wound care portfolio on RECELL, an FDA-approved autologous cell harvesting device, alongside exclusive U.S. rights to Cohealyx and PermeaDerm.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "RECELL remains the cornerstone of our business; however, beginning in 2024 we evolved AVITA Medical into a multi-product acute wound care platform company."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The strategy uses one commercial infrastructure to sell a portfolio that runs from wound coverage and wound bed preparation through definitive closure.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our strategy is to build a comprehensive portfolio that addresses wound management from initial coverage and wound bed preparation through definitive closure and healing, while leveraging a single commercial infrastructure focused on burn, trauma and surgical centers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The core U.S. burn market is concentrated in about 140 specialized burn centers.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The U.S. burn treatment market is highly concentrated, with approximately 140 specialized burn centers treating the majority of severe burn patients."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5 (10-Q MD&A)",
-    "claim": "Commercial focus is on about 200 U.S. burn and trauma centers.",
-    "facts": [
+     "P1",
      "P5"
     ],
     "quotes": [
+     "At the forefront of our portfolio is RECELL\u00ae (\u201cRECELL\u201d), approved by the United States Food & Drug Administration (the \u201cFDA\u201d) for the treatment of thermal burn wounds and full-thickness skin defects.",
+     "Under the agreement with Regenity, we hold the exclusive rights to market, sell, and distribute Cohealyx in the U.S., with the potential to expand such commercialization into the European Union, Australia, and Japan.",
+     "In addition, in the United States, we hold the rights to manufacture and exclusively market, sell, and distribute PermeaDerm\u00ae, a biosynthetic wound matrix, under the terms of exclusive multi-year distribution and contract manufacturing agreements with Stedical Scientific, Inc."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1 Business and 10-Q Item 2 MD&A)",
+    "claim": "The company concentrates its U.S. commercial strategy on approximately 200 burn and trauma centers, building on a concentrated base of approximately 140 specialized U.S. burn centers.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "The U.S. burn treatment market is highly concentrated, with approximately 140 specialized burn centers treating the majority of severe burn patients.",
      "We are executing a focused commercial strategy centered on approximately 200 U.S. burn and trauma centers that represent the highest value and procedural volume within the acute wound care market."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 as the company's description of trial results",
-    "claim": "The company says pivotal trials showed RECELL cut donor-skin needs by up to 97.5% for second-degree burns and 32% for third-degree burns.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In pivotal clinical trials, RECELL significantly reduced donor-skin requirements by up to 97.5% for second-degree burns and 32% for third-degree burns when used with meshed autografts, compared to standard of care autografting, without compromising healing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Real-world registry data linked RECELL to an average 36% shorter hospital stay than split-thickness skin grafting.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In a matched analysis, RECELL treatment for such patients was associated with an average 36% reduction in hospital length of stay compared to traditional split-thickness skin grafting."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 as a company estimate",
-    "claim": "The company estimates about 272,000 U.S. procedures a year may be eligible for RECELL in full-thickness skin defects.",
+    "basis": "stated in the cited item (10-K Item 1 Business)",
+    "claim": "Expansion into full-thickness skin defects gives RECELL an estimated addressable market of approximately 272,000 U.S. procedures annually across trauma, surgical wounds, and cancer resections.",
     "facts": [
      "P1"
     ],
@@ -394,219 +285,175 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and P5",
-    "claim": "Q3 2026 total revenues were 26,114 versus 17,062 a year earlier (table in thousands), an increase of 53%.",
+    "basis": "stated in the cited item (10-K Item 1 Business)",
+    "claim": "Pivotal trials and retrospective studies show RECELL reduced donor-skin requirements by up to 97.5% for second-degree burns and 32% for third-degree burns, and reduced mean autograft procedures by 56% in pediatric cases and 60% in adults over 50% TBSA.",
     "facts": [
-     "F2",
-     "P5"
+     "P1"
     ],
     "quotes": [
-     "Total revenues increased by 53%, or $9.0 million, to approximately $26.1 million, compared to $17.1 million in the same period in the prior year."
+     "In pivotal clinical trials, RECELL significantly reduced donor-skin requirements by up to 97.5% for second-degree burns and 32% for third-degree burns when used with meshed autografts, compared to standard of care autografting, without compromising healing.",
+     "In pediatric cases (N = 284), treatment with RECELL resulted in a 56% reduction in the mean number of autograft procedures required compared to National Burn Registry (\u201cNBR\u201d) data.",
+     "Additionally, in adult patients with greater than 50% TBSA (N=318), RECELL resulted in a 60% reduction in the mean number of autograft procedures versus NBR data."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5",
-    "claim": "RECELL sales rose 50% in Q3 2026, driven by normalized utilization after the MACs published reimbursement rates and by higher RECELL GO mini sales.",
+    "basis": "stated in the cited item (10-K Item 7 MD&A)",
+    "claim": "Real-world registry data from 741 matched adult patients showed RECELL was associated with a 36% reduction in hospital length of stay, and a systematic review of 99 peer-reviewed studies supported its clinical and economic benefits.",
     "facts": [
-     "P5"
+     "P3"
     ],
     "quotes": [
-     "The growth in revenues was primarily driven by a 50% increase, or $7.7 million, in sales of RECELL.",
-     "The increase in RECELL sales was due to continued normalization in RECELL utilization following the publication by all of the MACs of reimbursement rates related to healthcare providers use of RECELL and also higher sales of RECELL GO mini in trauma and smaller wounds."
+     "A registry-based analysis of 741 matched adult patients with deep partial-thickness burns from the American Burn Association\u2019s Burn Care Quality Platform compared RECELL with split-thickness skin grafting.",
+     "The study demonstrated a statistically significant reduction in hospital length of stay of approximately 5.6 days, or 36%, for RECELL-treated patients, with consistent reductions across burn size subgroups up to 30% TBSA.",
+     "A systematic review of 99 peer-reviewed studies, including 27 comparative analyses and more than 8,000 patients, found that RECELL consistently reduced donor site burden, achieved healing times comparable to or faster than conventional grafting, and demonstrated favorable pain, aesthetic and health economic outcomes across wound types."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5 and P8",
-    "claim": "Q3 2026 gross margin was 84.0% versus 81.3% a year earlier, and RECELL alone had a gross margin of 88.4%.",
-    "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
-     "Gross profit margin was 84.0% compared to 81.3% in the corresponding period in the prior year.",
-     "Note that the gross margin for RECELL products on a standalone basis was 88.4% for the quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P8; the amended terms are stated in P10",
-    "claim": "The partner products earn the company only part of their selling price, which lowers overall gross margin.",
-    "facts": [
-     "P8",
-     "P10"
-    ],
-    "quotes": [
-     "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5",
-    "claim": "Cohealyx sales rose 154% in Q3 2026 on more hospital value analysis committee approvals, but Cohealyx and PermeaDerm together remain a small share of sales.",
+    "basis": "stated in the cited item (10-Q Item 2 MD&A)",
+    "claim": "Post-market studies showed Cohealyx reduced mean time to autografting readiness to 13.6 days versus 33.2 days for a literature benchmark, while PermeaDerm achieved 70% lower product cost and 95.7% less preparation time than allograft.",
     "facts": [
      "P5"
     ],
     "quotes": [
-     "Cohealyx sales increased 154%, or $1.3 million, primarily driven by more Value Analysis Committees (\u201cVAC\u201d) approvals allowing broader adoption of the product in more facilities.",
-     "Cohealyx and PermeaDerm represented 8% and 2%, respectively, of total commercial sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5",
-    "claim": "Interim Cohealyx I results showed mean time to autografting readiness of 13.6 days against a literature-derived benchmark of 33.2 days.",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "In April 2026, we announced positive interim results from our Cohealyx I post-market clinical study, demonstrating a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a literature-derived benchmark (13.6 days versus 33.2 days; p<0.001)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5",
-    "claim": "The PermeaDerm I randomized study met its primary endpoint, showing 70% lower mean product cost than allograft.",
-    "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
+     "In April 2026, we announced positive interim results from our Cohealyx I post-market clinical study, demonstrating a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a literature-derived benchmark (13.6 days versus 33.2 days; p<0.001).",
      "The study met its primary endpoint, demonstrating a 70% lower mean product cost per 1% total body surface area treated with PermeaDerm (p<0.001), and showed a 95.7% reduction in preparation time, comparable graft take and wound healing, and no adverse events attributed to PermeaDerm."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "A CMS NTAP allowed up to $4,875 of extra inpatient reimbursement per case for RECELL in non-thermal full-thickness defects, effective through September 30, 2026.",
+    "basis": "stated in the cited item (10-Q Item 2 MD&A and 8-K Q3 2026 earnings release)",
+    "claim": "Total revenue rose 53% year-over-year to $26.1 million in the third quarter of 2026, led by 50% growth in RECELL sales and 154% growth in Cohealyx sales.",
     "facts": [
-     "P3"
+     "P5",
+     "P8"
     ],
     "quotes": [
+     "Q3 total revenue increased 53% year over year and 20% sequentially to $26.1 million, driven primarily by continued growth in RECELL\u00ae and increasing adoption of Cohealyx\u00ae",
+     "The growth in revenues was primarily driven by a 50% increase, or $7.7 million, in sales of RECELL.",
+     "Cohealyx sales increased 154%, or $1.3 million, primarily driven by more Value Analysis Committees (\u201cVAC\u201d) approvals allowing broader adoption of the product in more facilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-Q Item 2 MD&A, 8-K Q3 2026 earnings release, and 8-K Global Amendment)",
+    "claim": "RECELL generates high standalone gross margin at 88.4% in the third quarter of 2026, while overall gross margin was 84.0% due to lower revenue-share economics on Cohealyx and PermeaDerm.",
+    "facts": [
+     "P5",
+     "P8",
+     "P11"
+    ],
+    "quotes": [
+     "Gross profit margin was 84.0% compared to 81.3% in the corresponding period in the prior year.",
+     "Note that the gross margin for RECELL products on a standalone basis was 88.4% for the quarter.",
+     "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 7 MD&A, 10-Q Item 2 MD&A, and 8-K Q3 2026 earnings release)",
+    "claim": "CMS finalized national physician payment values and simplified billing codes for RECELL procedures effective January 1, 2027, following a prior NTAP add-on payment of up to $4,875 per inpatient case.",
+    "facts": [
+     "P3",
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027",
      "This NTAP designation allows Medicare Part A inpatient claims to receive up to $4,875 in additional reimbursement per case, beyond the standard MS-DRG base rate, provided CMS thresholds and coding criteria are met."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P8",
-    "claim": "On November 4, 2026, CMS finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027.",
+    "basis": "stated in the cited item (10-Q Item 2 MD&A and 8-K Q3 2026 earnings release)",
+    "claim": "International approvals for RECELL GO in Europe, Australia, and New Zealand and a BARDA preparedness agreement worth up to $25.5 million support geographic and government-channel positioning.",
     "facts": [
-     "P8",
-     "P5"
+     "P5",
+     "P8"
     ],
     "quotes": [
-     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
+     "RECELL and RECELL GO\u00ae are CE-marked in Europe, have TGA certification in Australia, and are listed with Medsafe in New Zealand; RECELL is PMDA-approved in Japan.",
+     "On April 6, 2026, we entered into a ten-year agreement with the Biomedical Advanced Research and Development Authority (\u201cBARDA\u201d), part of the U.S. Department of Health and Human Services, with a total potential value of up to $25.5 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 and P5",
-    "claim": "Threat: reimbursement disruption has already hurt demand, since MAC pricing delays in 2025 temporarily slowed clinician use of RECELL.",
-    "facts": [
-     "P3",
-     "P5"
-    ],
-    "quotes": [
-     "MAC delay in establishing and publishing reimbursement rates temporarily slowed clinician use of RECELL."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "Threat: limited reimbursement led the company to pause commercial investment in vitiligo despite FDA approval.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Despite regulatory approval and demonstrated clinical benefit, reimbursement for vitiligo procedures remains limited and uncertain."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2; no competitors are named",
-    "claim": "Threat: competitors may develop more effective products and may have significantly more resources.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Our competitors may have significantly more financial and other resources to invest in product development."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Threat: the business depends heavily on the RECELL PMA received from the FDA in September 2018.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "The company faces intense competition from rivals with significantly greater financial and development resources who could introduce products that make AVITA Medical's offerings obsolete.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Our business is highly dependent on the PMA we received in September 2018 from the FDA, including subsequent PMA supplement approvals for acute wound indications."
+     "The markets for our products are highly competitive and our competitors may develop products that may more effectively compete with our products.",
+     "Our competitors may have significantly more financial and other resources to invest in product development.",
+     "We must, therefore, continue to develop and market new products, or we risk our products becoming obsolete, in which case, our revenues may decline, adversely impacting our financial condition or our business prospects."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2",
-    "claim": "Threat: some material components are single-sourced, which exposes the company to supply disruption.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors)",
+    "claim": "The business is highly dependent on maintaining its September 2018 FDA Premarket Approval for RECELL and RECELL GO in the United States.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Due to the cost and regulatory requirements associated with qualifying multiple suppliers, in 2023, we single-sourced some of our material components."
+     "Our business is highly dependent on the PMA we received in September 2018 from the FDA, including subsequent PMA supplement approvals for acute wound indications.",
+     "This PMA allows us to sell RECELL and RECELL GO in the United States, our current primary market.",
+     "While we intend to take every action and precaution to ensure that our PMA remains effective, it is possible that the FDA could take a position in the future that requires a modification, temporary suspension or revocation of our PMA."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P5",
-    "claim": "Threat: covenants under the Perceptive credit agreement may limit the company's ability to compete with less-restricted companies, and missing revenue thresholds would be a default.",
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors, 10-Q Item 2 MD&A, and 8-K Global Amendment)",
+    "claim": "Operations face supply and partner concentration risks from single-source components, a single manufacturing facility in Ventura, California, and reliance on Regenity to supply Cohealyx.",
+    "facts": [
+     "P2",
+     "P5",
+     "P11"
+    ],
+    "quotes": [
+     "Due to the cost and regulatory requirements associated with qualifying multiple suppliers, in 2023, we single-sourced some of our material components.",
+     "We have a manufacturing facility located in Ventura, California where we produce, package, and warehouse RECELL and PermeaDerm.",
+     "If our facility or the facilities of our third-party contract manufacturers suffer damage or experience a force majeure event, this could materially impact our ability to operate.",
+     "Regenity manufactures and supplies Cohealyx\u2122, an AVITA Medical-branded, FDA-cleared, collagen-based dermal matrix."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors, 10-Q Note 1, and 8-K Q3 2026 earnings release)",
+    "claim": "Recurring net losses, an accumulated deficit of $432.9 million as of September 30, 2026, and restrictive debt covenants could limit strategic flexibility and R&D or commercial investment.",
+    "facts": [
+     "P2",
+     "P7",
+     "P8"
+    ],
+    "quotes": [
+     "The Company has incurred operating losses and negative cash flows from operations since its inception and has an accumulated deficit of $432.9 million as of September 30, 2026.",
+     "The restrictions and covenants in the Perceptive Credit Agreement may also prevent us from taking actions that we believe would be in the best interests of our business, and may make it difficult for us to successfully execute our business strategy or effectively compete with companies that are not similarly restricted.",
+     "In addition, if the Company\u2019s net revenue does not equal or exceed a certain amount for upcoming fiscal periods as set forth in the Perceptive Credit Agreement, then the Company will be in default of the Perceptive Credit Agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K Item 1A Risk Factors and 10-Q Item 2 MD&A)",
+    "claim": "Changes in third-party payor reimbursement policies and reliance on third-party distributors outside the U.S. and CROs for clinical trials pose ongoing commercial and development risks.",
     "facts": [
      "P2",
      "P5"
     ],
     "quotes": [
-     "The restrictions and covenants in the Perceptive Credit Agreement may also prevent us from taking actions that we believe would be in the best interests of our business, and may make it difficult for us to successfully execute our business strategy or effectively compete with companies that are not similarly restricted."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1",
-    "claim": "The balance sheet shows a stockholders' deficit of (31,037) and cash of 10,500 at September 30, 2026 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P8 and P5",
-    "claim": "International presence is small: Q3 international revenue was $0.9 million, flat with the prior quarter, even as RECELL GO gained approvals in Australia and New Zealand.",
-    "facts": [
-     "P8",
-     "P5"
-    ],
-    "quotes": [
-     "International (Q3 revenue of $0.9 million, essentially flat compared to Q2 2026) continued to contribute consistent revenue from established international markets.",
-     "In April 2026, RECELL GO received Therapeutic Goods Administration certification in Australia and was listed on New Zealand's Web Assisted Notification of Devices database by Medsafe, enabling commercialization in both markets."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P10",
-    "claim": "Under the August 2026 Global Amendment, Stedical may itself commercialize PermeaDerm in some U.S. markets the company does not currently serve.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "Also under the Global Amendment, Stedical may pursue the commercialization of PermeaDerm in certain U.S. markets not currently served by the Company."
+     "Changes in reimbursement rates and coverage policy by third party payors may place additional financial pressure on hospitals and the broader healthcare system.",
+     "We rely on third-party distributors for a portion of our sales in countries outside of the U.S.",
+     "We rely on clinical research organizations (\u201cCROs\u201d) and clinical trial sites to ensure our clinical trials are conducted properly and on time."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the F1 balance sheet.",
-    "claim": "Cash and cash equivalents were 10,500 at September 30, 2026 versus 10,243 at December 31, 2025 (table in thousands), and marketable securities fell from 7,942 to 0.",
+    "basis": "stated in the cited item",
+    "claim": "At September 30, 2026, cash and cash equivalents were $ 10,500 and marketable securities were 0 (table in thousands), compared with $ 10,243 and 7,942 at December 31, 2025.",
     "facts": [
      "F1"
     ],
@@ -617,35 +464,10 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the P8 earnings release.",
-    "claim": "The company described cash, cash equivalents and marketable securities as approximately $10.5 million at September 30, 2026, compared with $11.1 million at the beginning of the quarter.",
+    "basis": "stated in the cited item",
+    "claim": "Total current assets were 27,676 and total current liabilities were 23,037 at September 30, 2026, compared with 35,490 and 62,677 at December 31, 2025 (table in thousands).",
     "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Cash, cash equivalents and marketable securities totaled approximately $10.5 million at September 30, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P7 and P8.",
-    "claim": "Subsequent to quarter end, the company received the $10.0 million Additional Commitment Amount on November 3, 2026, bringing total borrowings under the Perceptive facility to $60 million.",
-    "facts": [
-     "P7",
-     "P8"
-    ],
-    "quotes": [
-     "As a result, on November 3, 2026, the Company received the Additional Commitment Amount of $10.0 million.",
-     "Subsequent to quarter-end, the Company drew down the $10.0 million tranche, bringing total borrowings under the facility to $60 million and further strengthening its balance sheet and liquidity position."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in F1. The reclassification reason is stated in P7.",
-    "claim": "Working capital turned positive: total current assets were 27,676 against total current liabilities of 23,037 at September 30, 2026, compared with 35,490 against 62,677 at December 31, 2025 (table in thousands).",
-    "facts": [
-     "F1",
-     "P7"
+     "F1"
     ],
     "quotes": [
      "Total current assets | 27,676 | 35,490",
@@ -654,44 +476,78 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the F1 balance sheet.",
-    "claim": "Leverage is high relative to the balance sheet: the long-term loan facility was 45,476 and total liabilities were 77,831, against total assets of 46,794 and a stockholders' deficit of (31,037) at September 30, 2026 (table in thousands).",
+    "basis": "stated in the cited items",
+    "claim": "On November 3, 2026, the company received the Additional Commitment Amount of $10.0 million under its credit facility, while its minimum cash balance covenant was lowered to $5.0 million from $10 million under the prior facility.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "As a result, on November 3, 2026, the Company received the Additional Commitment Amount of $10.0 million.",
+     "In addition, pursuant to the terms of the Credit Agreement, the Company\u2019s minimum cash balance covenant was lowered to $5.0 million.",
+     "Pursuant with the terms of the Previous Credit Agreement, as of December 31, 2025, the Company was required to maintain compliance with a minimum of $10 million cash balance covenant within the next twelve months following the date of issuance of these Consolidated Financial Statements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Management concluded in the September 30, 2026 Form 10-Q that substantial doubt about continuing as a going concern no longer exists and liquidity is sufficient for the next twelve months, reversing its December 31, 2025 assessment.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Based on the Company\u2019s liquidity position and current forecast of operating results and cash flows, management has now concluded that substantial doubt about the Company\u2019s ability to continue as a going concern no longer exists, and that the Company has sufficient liquidity to meet its obligations as they become due within the next twelve months following the date of issuance of these Consolidated Financial Statements.",
+     "Based on the Company\u2019s liquidity position and the Company\u2019s current forecast of operating results and cash flows, management determined there is substantial doubt about the Company\u2019s ability to continue as a going concern over the next twelve months following the date of issuance of these Consolidated Financial Statements due to the Company\u2019s debt repayment obligations, historical negative cash flows, and recurring losses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "At September 30, 2026, the company carried 45,476 in long-term loan facility debt, 77,831 in total liabilities, and (31,037) in total stockholders' equity (deficit), compared with 42,984 in current loan facility debt, 73,042 in total liabilities, and (16,650) in stockholders' deficit at December 31, 2025 (table in thousands).",
     "facts": [
      "F1"
     ],
     "quotes": [
+     "Loan facility | 0 | 42,984",
      "Loan facility, long-term | 45,476",
+     "Total liabilities | 77,831 | 73,042",
      "Total stockholders' equity (deficit) | (31,037) | (16,650)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the P3 10-K MD&A.",
-    "claim": "The Perceptive debt carries a floating cash interest rate equal to the greater of SOFR and 4.00%, plus 7.50%.",
+    "basis": "stated in the cited items",
+    "claim": "After the post-quarter draw, total borrowings under the five-year senior secured Perceptive facility reached $60 million, accruing cash interest at the greater of SOFR or 4.00% plus 7.50% per annum and requiring trailing twelve-month minimum net revenue covenants including $73.0 million for 2026.",
     "facts": [
-     "P3"
+     "P2",
+     "P3",
+     "P5",
+     "P8"
     ],
     "quotes": [
-     "During the term of the Perceptive Loan Facility, interest payable in cash shall accrue on any outstanding amounts under the Loan Facility at a rate per annum equal to the greater of (x) the SOFR rate for such period and (y) 4.00% plus, in either case, 7.50%."
+     "Subsequent to quarter-end, the Company drew down the $10.0 million tranche, bringing total borrowings under the facility to $60 million and further strengthening its balance sheet and liquidity position.",
+     "During the term of the Perceptive Loan Facility, interest payable in cash shall accrue on any outstanding amounts under the Loan Facility at a rate per annum equal to the greater of (x) the SOFR rate for such period and (y) 4.00% plus, in either case, 7.50%.",
+     "This facility also establishes trailing twelve-month revenue covenants aligned with our current operating trajectory, including $68.5 million for the quarter ended March 31, 2026, $69.0 million for the quarter ended June 30, 2026, $70.8 million for the quarter ended September 30, 2026, and $73.0 million for the year ending December 31, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2 and F3.",
-    "claim": "Earnings did not cover interest in Q3 2026: the operating loss was (2,629) against interest expense of (1,479) (table in thousands). Interest paid in the nine months was 4,344.",
+    "basis": "stated in the cited items",
+    "claim": "Interest expense was (4,366) and interest paid was 4,344 during the nine months ended September 30, 2026, compared with (3,754) and 3,738 in the prior-year period (table in thousands).",
     "facts": [
      "F2",
      "F3"
     ],
     "quotes": [
-     "Operating loss | (2,629) | (9,153) | (18,287) | (32,126)",
+     "Interest expense | (1,479) | (1,268) | (4,366) | (3,754)",
      "Interest paid during the period | 4,344 | 3,738"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred. The nine-month attribution rests on the beginning cash of 10,243 matching the December 31, 2025 balance, and on P7 tying (31,200) and (48,900) to full-year 2025 and 2024.",
-    "claim": "Operating cash flow remained negative: net cash used in operating activities was (14,278) in the nine months to September 30, 2026, versus (25,757) in the prior-year period (table in thousands).",
+    "basis": "stated in the cited item",
+    "claim": "Net cash used in operating activities narrowed to (14,278) in the nine months ended September 30, 2026 from (25,757) in the prior-year period, following full-year operating cash outflows of $ (31,200) in 2025 and $ (48,900) in 2024 (table in thousands).",
     "facts": [
      "F3"
     ],
@@ -701,433 +557,330 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P8. The measure's definition is not given.",
-    "claim": "Quarterly net cash use improved to approximately $0.6 million in Q3 2026 from $3.2 million in Q2 2026.",
+    "basis": "stated in the cited item",
+    "claim": "Third-quarter 2026 net cash use improved to approximately $0.6 million from $3.2 million in the second quarter of 2026, and management reaffirmed its expectation of achieving cash flow breakeven in the fourth quarter of 2026.",
     "facts": [
      "P8"
     ],
     "quotes": [
-     "Net cash use improved to approximately $0.6 million, from $3.2 million in the second quarter of 2026."
+     "Net cash use improved to approximately $0.6 million, compared with $3.2 million in Q2 2026.",
+     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures stated in F3 and F1. The deferral interpretation is inferred.",
-    "claim": "Part of the operating cash improvement came from working capital: accrued wages and fringe benefits added 3,686 and inventory added 1,880, while accounts payable and accrued expenses used (4,192) in the nine months (table in thousands).",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Accrued wages and fringe benefits | 3,686 | (4,656)",
-     "Inventory | 1,880 | (666)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F3 and P8.",
-    "claim": "The nine-month net loss of (24,496) includes large non-cash items: stock-based compensation of 4,757 and a change in fair value of warrant liabilities of 2,697 (table in thousands).",
-    "facts": [
-     "F3",
-     "P8"
-    ],
-    "quotes": [
-     "Stock-based compensation | 4,757 | 8,146",
-     "Net loss for the current period was negatively impacted by $2.1 million in non-cash expense related to the revaluation of warrants due to the increase in AVITA Medical\u2019s share price."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F3.",
-    "claim": "The nine-month cash balance was held flat by investing inflows of 7,819, mainly from maturities of marketable securities of 12,000, and by net financing inflows of 6,716 (table in thousands).",
+    "basis": "stated in the cited item",
+    "claim": "In the nine months ended September 30, 2026, operating cash outflow of (14,278) was smaller than the net loss of $ (24,496) primarily because of non-cash adjustments including 4,757 of stock-based compensation, 2,697 from warrant liability fair value change, 2,152 for common stock issued related to a loan amendment, and 1,824 of depreciation and amortization (table in thousands).",
     "facts": [
      "F3"
     ],
     "quotes": [
+     "Net Income (Loss) | $ (6,222) | $ (13,187) | $ (24,496) | $ (36,966)",
+     "Stock-based compensation | 4,757 | 8,146",
+     "Change in fair value of warrant liabilities | 2,697 | (1,572)",
+     "Fair value of common stock issued related to loan amendment | 2,152",
+     "Depreciation and amortization | 1,824 | 1,647"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "During the nine months ended September 30, 2026, operating cash flow included 3,686 from accrued wages and fringe benefits and 1,880 from inventory, offset by (4,192) in accounts payable and accrued expenses and (1,292) in receivables, while cash burn was funded by 7,819 from investing activities and 6,716 from financing activities (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Accrued wages and fringe benefits | 3,686 | (4,656)",
+     "Inventory | 1,880 | (666)",
+     "Accounts payable and accrued expenses | (4,192) | 1,762",
+     "Trade and other receivables | (1,292) | 3,714",
      "Net cash provided by investing activities | 7,819 | 12,441",
      "Net cash provided by financing activities | 6,716 | 14,688"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P8 as a management expectation.",
-    "claim": "Management reaffirmed its expectation of achieving cash flow breakeven in Q4 2026.",
+    "basis": "stated in the cited items",
+    "claim": "On January 13, 2026, the company refinanced its $40.0 million Previous Credit Agreement (repaying (42,984) in the cash flow statement, table in thousands) with $50 million initial funding under the Perceptive facility, yielding net proceeds of approximately $6.0 million after repayment and fees.",
     "facts": [
-     "P8"
+     "F3",
+     "P2",
+     "P5"
     ],
     "quotes": [
-     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
+     "We had previously entered into a credit agreement with OrbiMed Advisors, LLC (as amended, the \u201cPrevious Credit Agreement\u201d) on October 18, 2023, most recently amended in the Previous Credit Agreement\u2019s Sixth Amendment, on November 5, 2025 (the \u201cSixth Amendment\u201d) and incurred $40.0 million of indebtedness secured by substantially all of our assets.",
+     "At closing, we drew $50 million and used a portion of the proceeds to repay our existing debt, resulting in net proceeds of approximately $6.0 million after repayment of our prior debt and certain related transaction fees.",
+     "Repayment of Previous Credit Agreement | (42,984)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P7 and P4.",
-    "claim": "Management concluded that substantial doubt about the company's ability to continue as a going concern no longer exists, reversing the 10-K conclusion.",
-    "facts": [
-     "P7",
-     "P4"
-    ],
-    "quotes": [
-     "Based on the Company\u2019s liquidity position and current forecast of operating results and cash flows, management has now concluded that substantial doubt about the Company\u2019s ability to continue as a going concern no longer exists, and that the Company has sufficient liquidity to meet its obligations as they become due within the next twelve months following the date of issuance of these Consolidated Financial Statements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P5 and P8.",
-    "claim": "The facility carries trailing twelve-month revenue covenants of $70.8 million for the quarter ended September 30, 2026 and $73.0 million for the year ending December 31, 2026, and the company reported compliance as of September 30, 2026.",
-    "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
-     "As of September 30, 2026, we were in compliance with these covenants.",
-     "Achieved the $85 million trailing twelve-month revenue milestone required to access the remaining $10 million under the Company\u2019s credit facility with Perceptive Advisors LLC, and subsequent to quarter-end, drew the additional tranche, strengthening the Company\u2019s cash reserves"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P7 and F1. The headroom framing is inferred.",
-    "claim": "The credit agreement requires a minimum cash balance of $5.0 million, compared with cash of 10,500 (table in thousands) at September 30, 2026.",
-    "facts": [
-     "P7",
-     "F1"
-    ],
-    "quotes": [
-     "In addition, pursuant to the terms of the Credit Agreement, the Company\u2019s minimum cash balance covenant was lowered to $5.0 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and P7.",
-    "claim": "The facility is a five-year senior secured loan entered on January 13, 2026, with a prepayment premium ranging from 1% to 10% and default interest of 4.00% above the applicable rate.",
-    "facts": [
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "Upon the occurrence and during the continuance of an event of default, any outstanding amount under the Perceptive Loan Facility will bear interest at a rate of 4.00% in excess of the otherwise applicable rate of interest."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Approval stated in P7 and the conditions stated in P3. That the approval satisfies the ASX requirement is inferred.",
-    "claim": "Shareholders approved the lender warrant on June 3, 2026, which addresses the condition tied to the 5% exit fee and the November 30, 2026 event-of-default trigger.",
-    "facts": [
-     "P7",
-     "P3"
-    ],
-    "quotes": [
-     "On June 3, 2026, our shareholders approved the issuance of such warrants."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1. Its nature is not given in the evidence.",
-    "claim": "A contingent liability of 3,000 moved from long-term to current liabilities between December 31, 2025 and September 30, 2026 (table in thousands).",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Contingent liability | 3,000 | 0"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1 and P9.",
-    "claim": "Warrant liabilities rose to 2,975 from 1,243 (table in thousands), and the lender's cashless warrant exercise led to the issue of 387,716 shares on October 28, 2026.",
+    "basis": "stated in the cited items",
+    "claim": "Current loan facility debt was 0 at September 30, 2026 (table in thousands) following reclassification to long-term, and obligations are expected to be met via operating revenue, cash bolstered by the November 3, 2026 $10.0 million draw, and potentially additional equity financing.",
     "facts": [
      "F1",
-     "P9"
+     "P2",
+     "P4",
+     "P7",
+     "P8"
     ],
     "quotes": [
-     "Perceptive exercised the Warrant on October 26, 2026 via a cashless exercise whereby the Company withheld 112,284 shares covered by the Warrant in respect of the exercise price and issued the remaining 387,716 shares to Perceptive on October 28, 2026."
+     "Loan facility | 0 | 42,984",
+     "As a result of this conclusion, the Company\u2019s credit facility has been reclassified from a current to a long-term liability in the accompanying Consolidated Balance Sheet as of September 30, 2026.",
+     "If we are unable to generate sufficient cash flow to satisfy payment obligations under the Perceptive Credit Agreement, we may be required to adopt one or more alternatives, such as obtaining additional equity capital on terms that may be onerous or highly dilutive."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "At September 30, 2026, a contingent liability of 3,000 moved from long-term to current liabilities compared with December 31, 2025 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Contingent liability | 3,000 | 0",
+     "Contingent liability, long-term | 0 | 3,000"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in F2 figures and P5/P8 text",
-    "claim": "Q3 2026 total revenues were 26,114 versus 17,062 a year earlier (table in thousands), a 53% increase, with RECELL as the primary driver.",
+    "basis": "stated in the cited item (P5 and P8 report Q3 2026 revenue and RECELL growth figures directly)",
+    "claim": "RECELL sales increased 50% year-over-year in the third quarter of 2026, driving total revenues up 53% to approximately $26.1 million.",
     "facts": [
-     "F2",
      "P5",
      "P8"
     ],
     "quotes": [
-     "Q3 total revenue increased 53% year over year and 20% sequentially to $26.1 million, driven primarily by continued growth in RECELL\u00ae and increasing adoption of Cohealyx\u00ae"
+     "Total revenues increased by 53%, or $9.0 million, to approximately $26.1 million, compared to $17.1 million in the same period in the prior year.",
+     "The growth in revenues was primarily driven by a 50% increase, or $7.7 million, in sales of RECELL."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5",
-    "claim": "Driver 1: RECELL sales rose 50%, or $7.7 million, year over year, largely because utilization normalized after all MACs published reimbursement rates.",
+    "basis": "stated in the cited item (P5 describes the 200-center strategy and surgeon/wound-size expansion as drivers of RECELL sales)",
+    "claim": "Continued RECELL growth depends on expanding adoption across approximately 200 targeted U.S. burn and trauma centers, including RECELL GO mini use in smaller wounds.",
     "facts": [
      "P5"
     ],
     "quotes": [
-     "The growth in revenues was primarily driven by a 50% increase, or $7.7 million, in sales of RECELL.",
+     "We are executing a focused commercial strategy centered on approximately 200 U.S. burn and trauma centers that represent the highest value and procedural volume within the acute wound care market.",
      "The increase in RECELL sales was due to continued normalization in RECELL utilization following the publication by all of the MACs of reimbursement rates related to healthcare providers use of RECELL and also higher sales of RECELL GO mini in trauma and smaller wounds."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P5 and P8; the condition is inferred",
-    "claim": "Condition for Driver 1: reimbursement clarity must hold, including the move to national physician payment values that CMS finalized for January 1, 2027.",
+    "basis": "stated in the cited item (P5 explicitly links MAC rate publication by March 2026 to normalized utilization)",
+    "claim": "Publication of RECELL reimbursement rates by all regional Medicare Administrative Contractors by March 2026 restored clarity and supported normalized utilization.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "As of March 2026, all seven MACs had published rates, restoring reimbursement clarity and supporting a return toward normalized utilization."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from P5 and P8 (P8 states the rules were finalized effective January 1, 2027; P5 and P8 caution that implementation delays or reimbursement changes remain a risk)",
+    "claim": "Sustaining reimbursement-driven growth requires smooth implementation of finalized national Medicare physician payment values and simplified billing codes effective January 1, 2027.",
     "facts": [
      "P5",
      "P8"
     ],
     "quotes": [
-     "As of March 2026, all seven MACs had published rates, restoring reimbursement clarity and supporting a return toward normalized utilization.",
-     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
+     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027",
+     "If finalized, RECELL physician reimbursement would transition from the current regional MACs contractor-priced methodology to a more transparent, nationally published PFS."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P8",
-    "claim": "RECELL Q3 U.S. revenue was $22.4 million, approximately 20% above Q2 2026, reflecting higher procedure volumes and more account ordering.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "RECELL (Q3 U.S. revenue of $22.4 million, approximately 20% growth compared to Q2 2026) continued to drive the business, reflecting higher procedure volumes and increased account ordering."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5 and P1",
-    "claim": "Driver 2: more surgeons using RECELL, and use across more wound sizes, including RECELL GO mini in trauma and smaller wounds.",
-    "facts": [
-     "P5",
-     "P1"
-    ],
-    "quotes": [
-     "RECELL sales also benefited from the commercial team focusing on expanding the number of surgeons using RECELL and also expanding use by surgeons on different sizes of wounds.",
-     "We have observed that surgeons often adopt RECELL first in larger and more complex burns, where the clinical and economic benefits are most pronounced, and subsequently expand use to smaller or less severe wounds as familiarity with the technology increases."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P1 and P3 as company estimates; the condition is inferred",
-    "claim": "Condition for Driver 2: adoption must keep extending into trauma and surgical full-thickness defects, which the company estimates at approximately 272,000 eligible U.S. procedures a year, through about 200 burn and trauma centers.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "In the U.S., we estimate that approximately 272,000 procedures annually may be eligible for treatment with RECELL across traumatic injuries, surgical wounds, and cancer-related resections.",
-     "We are executing a focused commercial strategy centered on approximately 200 U.S. burn and trauma centers that represent the highest value and procedural volume within the acute wound care market."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The inpatient NTAP that supports RECELL use in non-thermal full-thickness defects had a stated term ending September 30, 2026.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The NTAP is effective from October 1, 2025, through September 30, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5 and P8",
-    "claim": "Driver 3: Cohealyx sales rose 154%, or $1.3 million, year over year, to Q3 revenue of $2.1 million, driven by more hospital VAC approvals.",
+    "basis": "stated in the cited item (P5 and P8 report Q3 2026 Cohealyx revenue, growth rate, and commercial sales share)",
+    "claim": "Cohealyx sales increased 154% year-over-year to $2.1 million in the third quarter of 2026, reaching 8% of total commercial sales.",
     "facts": [
      "P5",
      "P8"
     ],
     "quotes": [
-     "Cohealyx sales increased 154%, or $1.3 million, primarily driven by more Value Analysis Committees",
+     "Cohealyx sales increased 154%, or $1.3 million, primarily driven by more Value Analysis Committees (\u201cVAC\u201d) approvals allowing broader adoption of the product in more facilities.",
+     "Cohealyx and PermeaDerm represented 8% and 2%, respectively, of total commercial sales.",
      "Cohealyx (Q3 revenue of $2.1 million, approximately 21% growth compared to Q2 2026) continued to build commercial momentum, reflecting an expanding customer base and additional hospital value analysis committee (VAC) approvals."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P5; the link to VAC approvals is inferred",
-    "claim": "Condition for Driver 3: clinical evidence must keep supporting VAC approvals; interim Cohealyx I data showed time to autografting readiness of 13.6 days versus a 33.2-day benchmark.",
+    "basis": "inferred from P5, P7, and P8 (P5 links VAC approvals to Cohealyx growth; P7 and P8 identify dependence on Regenity for manufacturing and supply)",
+    "claim": "Continued Cohealyx growth requires securing additional hospital Value Analysis Committee approvals and maintaining third-party supply from Regenity.",
     "facts": [
      "P5",
+     "P7",
      "P8"
     ],
     "quotes": [
-     "In April 2026, we announced positive interim results from our Cohealyx I post-market clinical study, demonstrating a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a literature-derived benchmark (13.6 days versus 33.2 days; p<0.001).",
-     "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage."
+     "Under the terms of the Regenity Agreement, Regenity manufactures and supplies Cohealyx and the Company commercializes it under its private label in the U.S.",
+     "In April 2026, we announced positive interim results from our Cohealyx I post-market clinical study, demonstrating a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a literature-derived benchmark (13.6 days versus 33.2 days; p<0.001)."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P8",
-    "claim": "PermeaDerm is not yet a growth driver: Q3 revenue was $0.6 million, essentially flat to Q2 2026.",
+    "basis": "stated in the cited item for study results and contract terms (P5, P8, P11); inferred as a potential growth lever given flat Q3 2026 revenue (P8)",
+    "claim": "PermeaDerm provides a potential growth lever after PermeaDerm I demonstrated 70% lower product cost than allograft and an August 2026 amendment raised AVITA's revenue share to 67% on sheets and 80% on gloves.",
     "facts": [
-     "P8"
+     "P5",
+     "P8",
+     "P11"
     ],
     "quotes": [
+     "PermeaDerm\u00ae I met its primary endpoint, demonstrating comparable clinical outcomes to allograft while reducing product costs by 70% and preparation time by 95.7%",
+     "In addition, the Company\u2019s share of revenue from PermeaDerm sales will increase to 67% for products sold in sheet form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 50%, and to 80% for products sold in glove form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 35%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P5 states the allograft repositioning strategy; P11 states the 2026\u20132030 revenue-sharing minimums)",
+    "claim": "Realizing PermeaDerm growth requires converting burn-center usage from cadaver allograft and meeting Stedical revenue-sharing minimums of $1.0 million in 2026 and 20% annual growth through 2030.",
+    "facts": [
+     "P5",
+     "P8",
+     "P11"
+    ],
+    "quotes": [
+     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030.",
      "PermeaDerm (Q3 revenue of $0.6 million, essentially flat compared to Q2 2026) maintained stable revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5 and P10; the condition is inferred",
-    "claim": "Condition for PermeaDerm growth: repositioning it against allograft, backed by PermeaDerm I results showing 70% lower mean product cost and a 95.7% cut in preparation time, while meeting contractual minimums of $1.0 million in 2026 and 20% growth a year.",
+    "basis": "stated in the cited item (P3, P5, and P8 detail the international regulatory authorizations)",
+    "claim": "Regulatory clearances for RECELL GO in Europe, Australia, and New Zealand expand international commercialization opportunities beyond Japan.",
     "facts": [
+     "P3",
      "P5",
-     "P10"
+     "P8"
     ],
     "quotes": [
-     "Repositioning PermeaDerm as an alternative to allograft (cadaver skin), leveraging its clinical, economic, and operational advantages to establish a higher-value role in burn care",
-     "The study met its primary endpoint, demonstrating a 70% lower mean product cost per 1% total body surface area treated with PermeaDerm (p<0.001), and showed a 95.7% reduction in preparation time, comparable graft take and wound healing, and no adverse events attributed to PermeaDerm.",
-     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030."
+     "On September 14, 2025, we obtained the CE Mark for RECELL GO under the European Union Medical Device Regulation (\u201cEU MDR\u201d).",
+     "In April 2026, RECELL GO received Therapeutic Goods Administration certification in Australia and was listed on New Zealand's Web Assisted Notification of Devices database by Medsafe, enabling commercialization in both markets.",
+     "RECELL and RECELL GO\u00ae are CE-marked in Europe, have TGA certification in Australia, and are listed with Medsafe in New Zealand; RECELL is PMDA-approved in Japan."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P8, P5 and P3",
-    "claim": "International revenue was $0.9 million in Q3, flat to Q2 2026; growth there depends on distributor-led launches under the new CE Mark, TGA and Medsafe authorizations.",
+    "basis": "stated in the cited item (P2 states distributor reliance and risks; P8 shows flat Q3 2026 international revenue)",
+    "claim": "International revenue growth depends on third-party distributors committing adequate marketing and sales resources to translate regulatory approvals into orders.",
     "facts": [
-     "P8",
-     "P5",
-     "P3"
+     "P2",
+     "P8"
     ],
     "quotes": [
-     "International (Q3 revenue of $0.9 million, essentially flat compared to Q2 2026) continued to contribute consistent revenue from established international markets.",
-     "This allows us to commercialize RECELL GO in Europe and other markets that recognize the CE Mark.",
-     "In April 2026, RECELL GO received Therapeutic Goods Administration certification in Australia and was listed on New Zealand's Web Assisted Notification of Devices database by Medsafe, enabling commercialization in both markets."
+     "We rely on third-party distributors for a portion of our sales in countries outside of the U.S.",
+     "Our distributors may not commit the necessary resources to market and sell our products to the level of our expectations, and, regardless of the resources they commit, they may not be successful.",
+     "International (Q3 revenue of $0.9 million, essentially flat compared to Q2 2026) continued to contribute consistent revenue from established international markets."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P5",
-    "claim": "The BARDA agreement adds a small recurring base: up to $25.5 million in total potential value, of which approximately $4.0 million is access and maintenance fees over ten years.",
+    "basis": "stated in the cited item (P5 states the April 6, 2026 agreement terms and values)",
+    "claim": "A ten-year BARDA agreement entered in April 2026 adds approximately $4.0 million in base access and maintenance fees and up to $25.5 million in total potential revenue.",
     "facts": [
      "P5"
     ],
     "quotes": [
-     "with a total potential value of up to $25.5 million",
+     "On April 6, 2026, we entered into a ten-year agreement with the Biomedical Advanced Research and Development Authority (\u201cBARDA\u201d), part of the U.S. Department of Health and Human Services, with a total potential value of up to $25.5 million.",
      "The agreement provides approximately $4.0 million in access and maintenance fees over the ten-year term, with additional potential revenue tied to procurement options exercised by BARDA."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P8, P5 and F2",
-    "claim": "Operating leverage turns revenue growth into lower losses: gross margin was 84.0% (up 270 basis points), and operating loss narrowed to (2,629) from (9,153) (table in thousands).",
+    "basis": "stated in the cited item (P5 explicitly states additional potential revenue is tied to procurement options exercised by BARDA)",
+    "claim": "Realizing revenue beyond the base access and maintenance fees under the BARDA contract requires BARDA to exercise its procurement options.",
     "facts": [
-     "P8",
-     "F2",
      "P5"
     ],
     "quotes": [
-     "Gross margin was 84.0%, an increase of 270 basis points year over year, reflecting higher RECELL revenue and improvements in manufacturing efficiency",
-     "Note that the gross margin for RECELL products on a standalone basis was 88.4% for the quarter."
+     "The agreement provides approximately $4.0 million in access and maintenance fees over the ten-year term, with additional potential revenue tied to procurement options exercised by BARDA."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P8 as management expectation",
-    "claim": "Management raised FY2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million, and reaffirmed cash flow breakeven in the fourth quarter of 2026.",
+    "basis": "stated in the cited item (P2 states covenant default risks, P5 lists 2026 TTM revenue covenants, P8 states Q4 2026 breakeven expectation, and F2/F3 report nine-month losses and cash outflows)",
+    "claim": "Sustaining commercial expansion without scaling back operations requires meeting Perceptive credit facility covenants, including $73.0 million trailing twelve-month revenue for 2026, and reaching expected cash flow breakeven.",
     "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Based on its third-quarter performance, AVITA Medical is raising its full-year 2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million.",
-     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P5, P7 and P2",
-    "claim": "Funding condition: growth must stay above the lender's trailing twelve-month revenue covenants, including $73.0 million for 2026; the company was in compliance at September 30, 2026 and drew the extra $10.0 million.",
-    "facts": [
+     "P2",
      "P5",
-     "P7"
+     "P8",
+     "F2",
+     "F3"
     ],
     "quotes": [
-     "As of September 30, 2026, we were in compliance with these covenants.",
-     "As a result, on November 3, 2026, the Company received the Additional Commitment Amount of $10.0 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P7 and F1/F3",
-    "claim": "Management concluded that substantial doubt about going concern no longer exists, although the balance sheet still shows a stockholders' deficit of (31,037) and a long-term loan facility of 45,476 (table in thousands).",
-    "facts": [
-     "P7",
-     "F1"
-    ],
-    "quotes": [
-     "Based on our liquidity position and current forecast of operating results and cash flows, management has now concluded that substantial doubt about our ability to continue as a going concern no longer exists, and that we have sufficient liquidity to meet our obligations as they become due within the next twelve months following the date of issuance of these Consolidated Financial Statements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2",
-    "claim": "Concentration risk: the business depends heavily on the RECELL PMA.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our business is highly dependent on the PMA we received in September 2018 from the FDA, including subsequent PMA supplement approvals for acute wound indications."
+     "This facility also establishes trailing twelve-month revenue covenants aligned with our current operating trajectory, including $68.5 million for the quarter ended March 31, 2026, $69.0 million for the quarter ended June 30, 2026, $70.8 million for the quarter ended September 30, 2026, and $73.0 million for the year ending December 31, 2026.",
+     "In addition, if the Company\u2019s net revenue does not equal or exceed a certain amount for upcoming fiscal periods as set forth in the Perceptive Credit Agreement, then the Company will be in default of the Perceptive Credit Agreement.",
+     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "Stated in the 10-K auditor report and Note 1 passages (P4).",
-    "claim": "In the FY2025 10-K, the auditor and management reported substantial doubt about the company's ability to continue as a going concern. They cited debt service obligations, historical negative cash flows and recurring losses.",
+    "basis": "Stated directly in [P3] and [P4].",
+    "claim": "Management and the independent auditor concluded that substantial doubt existed about the Company's ability to continue as a going concern due to debt obligations, historical negative cash flows, and recurring losses.",
     "facts": [
+     "P3",
      "P4"
     ],
     "quotes": [
+     "Based on our liquidity position and current forecast of operating results and cash flows, management determined there is substantial doubt about our ability to continue as a going concern over the next twelve months following the date of issuance of these Consolidated Financial Statements due to our debt repayment obligations, historical negative cash flows, and recurring losses.",
      "These conditions, along with other matters as set forth in Note 1, raise substantial doubt about the Company\u2019s ability to continue as a going concern."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q going concern note (P7) and the earnings release (P8); the balance figure is from F1.",
-    "claim": "In the Q3 2026 10-Q, management concluded that substantial doubt about going concern no longer exists. The credit facility was reclassified to long-term and appears as $45,476 (table in thousands) at September 30, 2026.",
+    "basis": "Stated directly in [P2] and [P3].",
+    "claim": "AVITA Medical entered into a senior secured credit facility with Perceptive Credit Holdings V, LP for up to $60 million, funded $50 million at closing, and repaid in full its obligations under the Previous Credit Agreement with OrbiMed Advisors, LLC.",
     "facts": [
-     "P7",
-     "F1",
-     "P8"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "Based on the Company\u2019s liquidity position and current forecast of operating results and cash flows, management has now concluded that substantial doubt about the Company\u2019s ability to continue as a going concern no longer exists, and that the Company has sufficient liquidity to meet its obligations as they become due within the next twelve months following the date of issuance of these Consolidated Financial Statements."
+     "The Perceptive Credit Agreement provides for a five-year senior secured credit facility in an aggregate principal amount of up to $60 million (the \u201cLoan Facility\u201d), of which (i) $50 million was funded on the Closing Date (the \u201cInitial Commitment Amount\u201d) and (ii) $10 million will be made available, at our discretion by notice to the Administrative Agent on or before March 31, 2027, subject to satisfaction of a certain net revenue requirement (the \u201cAdditional Commitment Amount\u201d).",
+     "Simultaneously with the closing of the Initial Commitment Amount, we repaid in full and terminated all of obligations and commitments (other than previously issued warrants) (the \u201cRefinancing Transaction\u201d)[1] under the Previous Credit Agreement."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P5) and the 10-K MD&A (P3).",
-    "claim": "The company entered a five-year Perceptive credit facility of up to $60 million. It drew $50 million at closing and repaid its prior debt, leaving net proceeds of approximately $6.0 million.",
+    "basis": "Stated directly in [P7] and [P8].",
+    "claim": "Management concluded that substantial doubt about the Company's ability to continue as a going concern no longer exists and reclassified the credit facility from a current to a long-term liability.",
     "facts": [
-     "P5",
-     "P3",
-     "F3"
-    ],
-    "quotes": [
-     "On January 13, 2026, we entered into a five-year credit facility with Perceptive Credit Holdings V, LP (\u201cPerceptive\u201d), an affiliate of Perceptive Credit Advisors, LLC, providing up to $60 million in available capital.",
-     "At closing, we drew $50 million and used a portion of the proceeds to repay our existing debt, resulting in net proceeds of approximately $6.0 million after repayment of our prior debt and certain related transaction fees."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q (P5, P7) and the earnings release (P8).",
-    "claim": "After meeting the net revenue requirement, the company borrowed an additional $10.0 million under the Perceptive facility.",
-    "facts": [
-     "P5",
      "P7",
      "P8"
     ],
     "quotes": [
-     "On November 3, 2026, we borrowed an additional $10.0 million under our credit facility with Perceptive."
+     "Based on the Company\u2019s liquidity position and current forecast of operating results and cash flows, management has now concluded that substantial doubt about the Company\u2019s ability to continue as a going concern no longer exists, and that the Company has sufficient liquidity to meet its obligations as they become due within the next twelve months following the date of issuance of these Consolidated Financial Statements.",
+     "As a result of this conclusion, the Company\u2019s credit facility has been reclassified from a current to a long-term liability in the accompanying Consolidated Balance Sheet as of September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q passages (P7).",
-    "claim": "After shareholder approval on June 3, 2026, the company issued Perceptive a warrant for up to 650,000 shares at an exercise price of $3.4019 per share.",
+    "basis": "Stated directly in [P5], [P7], and [P8].",
+    "claim": "After achieving trailing twelve-month revenue of at least $85.0 million, AVITA Medical borrowed the additional $10.0 million tranche under its credit facility with Perceptive, bringing total borrowings to $60 million, and 150,000 warrant shares vested at a $3.4019 per share exercise price.",
+    "facts": [
+     "P5",
+     "P7",
+     "P8"
+    ],
+    "quotes": [
+     "On November 3, 2026, we borrowed an additional $10.0 million under our credit facility with Perceptive.",
+     "In connection therewith, 150,000 shares of common stock vested under the warrant that we issued to Perceptive on June 5, 2026.",
+     "The warrant has a per share exercise price of $3.4019.",
+     "The Company has achieved trailing twelve-month revenue of at least $85.0 million, satisfying the revenue milestone required to access the remaining $10.0 million under its credit facility with Perceptive Advisors LLC.",
+     "Subsequent to quarter-end, the Company drew down the $10.0 million tranche, bringing total borrowings under the facility to $60 million and further strengthening its balance sheet and liquidity position."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P7].",
+    "claim": "Following shareholder approval, AVITA Medical issued a warrant to Perceptive covering up to 650,000 shares of common stock at an exercise price of $3.4019 per share, with 500,000 shares immediately exercisable.",
     "facts": [
      "P7"
     ],
@@ -1138,11 +891,11 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K Item 7.01 (P9) and the 10-Q (P7).",
-    "claim": "Perceptive exercised the warrant by cashless exercise. The company withheld 112,284 shares and issued 387,716 shares on October 28, 2026.",
+    "basis": "Stated directly in [P7] and [P10].",
+    "claim": "Perceptive exercised its warrant for up to 500,000 shares via cashless exercise, with the Company withholding 112,284 shares and issuing 387,716 shares of common stock.",
     "facts": [
-     "P9",
-     "P7"
+     "P7",
+     "P10"
     ],
     "quotes": [
      "Perceptive exercised the Warrant on October 26, 2026 via a cashless exercise whereby the Company withheld 112,284 shares covered by the Warrant in respect of the exercise price and issued the remaining 387,716 shares to Perceptive on October 28, 2026."
@@ -1150,22 +903,59 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K earnings release (P8).",
-    "claim": "The company raised its full-year 2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million.",
+    "basis": "Stated directly in [P9].",
+    "claim": "Perceptive exercised its warrant for up to 150,000 shares via cashless exercise, with the Company withholding 30,625 shares and issuing 119,375 shares of common stock.",
     "facts": [
-     "P8"
+     "P9"
     ],
     "quotes": [
-     "Based on its third-quarter performance, AVITA Medical is raising its full-year 2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million."
+     "Perceptive exercised the Perceptive Warrant via a cashless exercise whereby the Company withheld 30,625 shares covered by the Perceptive Warrant in respect of the exercise price and issued the remaining 119,375 shares to Perceptive on November 11, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release (P8); background on the proposed rules is in P5.",
-    "claim": "CMS finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027.",
+    "basis": "Stated directly in [P9].",
+    "claim": "OrbiMed exercised its warrant for up to 409,661 shares via cashless exercise, with the Company withholding 261,503 shares and issuing 148,158 shares of common stock.",
     "facts": [
-     "P8",
+     "P9"
+    ],
+    "quotes": [
+     "OrbiMed exercised the OrbiMed Warrant via a cashless exercise whereby the Company withheld 261,503 shares covered by the OrbiMed Warrant in respect of the exercise price and issued the remaining 148,158 shares to OrbiMed on November 11, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P5].",
+    "claim": "AVITA Medical entered into a ten-year agreement with BARDA with a total potential value of up to $25.5 million, including approximately $4.0 million in access and maintenance fees.",
+    "facts": [
      "P5"
+    ],
+    "quotes": [
+     "On April 6, 2026, we entered into a ten-year agreement with the Biomedical Advanced Research and Development Authority (\u201cBARDA\u201d), part of the U.S. Department of Health and Human Services, with a total potential value of up to $25.5 million.",
+     "The agreement provides approximately $4.0 million in access and maintenance fees over the ten-year term, with additional potential revenue tied to procurement options exercised by BARDA."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P11].",
+    "claim": "AVITA Medical and Stedical Scientific, Inc. entered into a Global Amendment under which the Company paid a $500,000 fee for expansion rights of first offer and refusal, increased its PermeaDerm revenue share to 67% for sheets and 80% for gloves, waived prior minimums, and set a $1.0 million minimum with 20% annual growth minimums.",
+    "facts": [
+     "P11"
+    ],
+    "quotes": [
+     "On August 5, 2026, the Company and Stedical Scientific, Inc. (\u201cStedical\u201d) entered into a Global Amendment of their existing distribution agreement and manufacturing agreement (the \u201cGlobal Amendment\u201d).",
+     "Under the terms of the Global Amendment, in exchange for a $500,000 fee the Company will hold the right of first offer and refusal to expand its exclusive distribution territory to include all or a portion of the European Union, the United Kingdom, and/or Australia.",
+     "In addition, the Company\u2019s share of revenue from PermeaDerm sales will increase to 67% for products sold in sheet form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 50%, and to 80% for products sold in glove form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 35%.",
+     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P8].",
+    "claim": "The Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures.",
+    "facts": [
+     "P5",
+     "P8"
     ],
     "quotes": [
      "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
@@ -1173,34 +963,22 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P5).",
-    "claim": "The company entered a ten-year BARDA agreement with a total potential value of up to $25.5 million to maintain a RECELL supply for mass casualty incidents.",
+    "basis": "Stated directly in [P8].",
+    "claim": "AVITA Medical raised its full-year revenue guidance to $92 million to $94 million, from $86 million to $89 million, and reaffirmed its expectation of achieving cash flow breakeven in the fourth quarter.",
     "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "On April 6, 2026, we entered into a ten-year agreement with the Biomedical Advanced Research and Development Authority (\u201cBARDA\u201d), part of the U.S. Department of Health and Human Services, with a total potential value of up to $25.5 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K Item 1.01 (P10).",
-    "claim": "The company and Stedical entered a Global Amendment of the PermeaDerm distribution and manufacturing agreements. It includes a $500,000 fee for a right of first offer and refusal on territory expansion.",
-    "facts": [
-     "P10"
-    ],
-    "quotes": [
-     "On August 5, 2026, the Company and Stedical Scientific, Inc. (\u201cStedical\u201d) entered into a Global Amendment of their existing distribution agreement and manufacturing agreement (the \u201cGlobal Amendment\u201d).",
-     "Under the terms of the Global Amendment, in exchange for a $500,000 fee the Company will hold the right of first offer and refusal to expand its exclusive distribution territory to include all or a portion of the European Union, the United Kingdom, and/or Australia."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K MD&A (P3); the current title is from P8.",
-    "claim": "Board Chair Mr. Vance became Interim CEO upon the departure of Mr. Corbett. The November 2026 release names Cary Vance as President and Chief Executive Officer.",
-    "facts": [
-     "P3",
      "P8"
+    ],
+    "quotes": [
+     "Based on its third-quarter performance, AVITA Medical is raising its full-year 2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million.",
+     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P3].",
+    "claim": "Board Chair Mr. Vance assumed the position of Interim Chief Executive Officer upon the departure of Mr. Corbett from the Company and the Board.",
+    "facts": [
+     "P3"
     ],
     "quotes": [
      "On October 16, 2025, Mr. Vance, the Chair of the Board of Directors, assumed the position of Interim Chief Executive Officer (the \u201cInterim CEO\u201d) upon the departure of Mr. Corbett from the Company and the Board."
@@ -1208,19 +986,31 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A (P3).",
-    "claim": "CMS approved an NTAP for RECELL for inpatient non-thermal full-thickness skin defects. It runs through September 30, 2026.",
+    "basis": "Stated directly in [P3].",
+    "claim": "Former Board Chair Lou Panaccio retired from the Board of Directors and Joe Woody was appointed as a new Director.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "On October 1, 2025, the CMS approved a New Technology Add-On Payment (\u201cNTAP\u201d) for the RECELL\u00ae System, applicable to acute non-thermal full-thickness skin defects\u2014such as traumatic injuries and surgical wounds\u2014that require inpatient care and are treated with RECELL in combination with a meshed autograft."
+     "On January 5, 2026, the Board of Directors recognized the contributions of long-time Director (and former Chair of the Board) Lou Panaccio, whose last day of service was December 31, 2025.",
+     "Following Mr. Panaccio\u2019s retirement, the Board was pleased to announce Joe Woody\u2019s appointment as a new Director pursuant to an offer letter to join the Board as of January 1, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P5).",
-    "claim": "RECELL GO received TGA certification in Australia and a Medsafe listing in New Zealand.",
+    "basis": "Stated directly in [P3].",
+    "claim": "AVITA Medical obtained the CE Mark for RECELL GO under the European Union Medical Device Regulation.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On September 14, 2025, we obtained the CE Mark for RECELL GO under the European Union Medical Device Regulation (\u201cEU MDR\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P5].",
+    "claim": "RECELL GO received Therapeutic Goods Administration certification in Australia and was listed on New Zealand's Web Assisted Notification of Devices database by Medsafe.",
     "facts": [
      "P5"
     ],
@@ -1230,8 +1020,45 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P5).",
-    "claim": "The company announced positive interim Cohealyx I results: mean time to autografting readiness was 13.6 days versus a 33.2-day literature benchmark.",
+    "basis": "Stated directly in [P1] and [P3].",
+    "claim": "CMS approved a New Technology Add-On Payment for the RECELL System for certain inpatient non-thermal full-thickness skin defects, allowing Medicare Part A claims to receive up to $4,875 in additional reimbursement per case.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "On October 1, 2025, the CMS approved a New Technology Add-On Payment (\u201cNTAP\u201d) for the RECELL\u00ae System, applicable to acute non-thermal full-thickness skin defects\u2014such as traumatic injuries and surgical wounds\u2014that require inpatient care and are treated with RECELL in combination with a meshed autograft.",
+     "This NTAP designation allows Medicare Part A inpatient claims to receive up to $4,875 in additional reimbursement per case, beyond the standard MS-DRG base rate, provided CMS thresholds and coding criteria are met."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P5].",
+    "claim": "All regional Medicare Administrative Contractors published reimbursement rates for the RECELL CPT code, restoring reimbursement clarity after prior delays that temporarily slowed clinician use.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Delay by the MACs in establishing and publishing reimbursement rates temporarily slowed clinician use of RECELL.",
+     "As of March 2026, all seven MACs had published rates, restoring reimbursement clarity and supporting a return toward normalized utilization."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P1].",
+    "claim": "AVITA Medical paused further commercial investment in RECELL for vitiligo because reimbursement for vitiligo procedures remains limited and uncertain.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "While RECELL is also approved in the United States for restoring pigmentation of stable depigmented vitiligo lesions, we have paused further commercial investment in vitiligo at this time.",
+     "Despite regulatory approval and demonstrated clinical benefit, reimbursement for vitiligo procedures remains limited and uncertain."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P5].",
+    "claim": "AVITA Medical announced positive interim results from its Cohealyx I post-market clinical study showing a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a benchmark.",
     "facts": [
      "P5"
     ],
@@ -1241,8 +1068,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A (P5) and the earnings release (P8).",
-    "claim": "The PermeaDerm I randomized study met its primary endpoint, with 70% lower mean product cost versus allograft and a 95.7% reduction in preparation time.",
+    "basis": "Stated directly in [P5] and [P8].",
+    "claim": "AVITA Medical announced that its PermeaDerm I study met its primary endpoint, showing a 70% lower mean product cost per 1% total body surface area treated and a 95.7% reduction in preparation time compared with allograft.",
     "facts": [
      "P5",
      "P8"
@@ -1251,201 +1078,184 @@
      "The study met its primary endpoint, demonstrating a 70% lower mean product cost per 1% total body surface area treated with PermeaDerm (p<0.001), and showed a 95.7% reduction in preparation time, comparable graft take and wound healing, and no adverse events attributed to PermeaDerm."
     ],
     "support": "supported"
+   },
+   {
+    "basis": "Stated directly in [P1].",
+    "claim": "AVITA Medical commercially launched Cohealyx in the United States under its exclusive development and distribution agreement with Regenity.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Cohealyx was commercially launched in the U.S. on April 1, 2025."
+    ],
+    "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Covenant and default terms stated in P2 and P5. Compliance and trailing revenue stated in P5 and P8.",
-    "claim": "The Perceptive credit facility carries trailing twelve-month revenue covenants, including $70.8 million for the quarter ended September 30, 2026 and $73.0 million for the year ending December 31, 2026, and missing one is an event of default.",
+    "basis": "Stated directly in the Q3 2026 financial statements (F1, F2, F3), 10-K Risk Factors (P2), Q3 2026 going concern note (P7), and Q3 2026 earnings release (P8).",
+    "claim": "AVITA Medical has a history of operating losses and negative operating cash flows, resulting in an accumulated deficit of $432.9 million and total stockholders' deficit of (31,037) (table in thousands), and may require additional financing if it cannot sustain liquidity or achieve profitability.",
     "facts": [
+     "F1",
+     "F2",
+     "F3",
      "P2",
+     "P7",
+     "P8"
+    ],
+    "quotes": [
+     "The Company has incurred operating losses and negative cash flows from operations since its inception and has an accumulated deficit of $432.9 million as of September 30, 2026.",
+     "If we are unable to secure additional capital as circumstances require, we may not be able to fund our planned activities or continue our operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K Risk Factors (P2), 10-K MD&A and going concern note (P3, P4), Q3 2026 10-Q (F1, P5, P7), and Q3 2026 earnings release (P8).",
+    "claim": "AVITA Medical carries a $60 million senior secured credit facility with floating cash interest (minimum 4.00% base plus 7.50%) and strict minimum cash ($5.0 million) and trailing twelve-month net revenue covenants, where non-compliance or insufficient cash flow could trigger default and debt acceleration.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3",
+     "P4",
      "P5",
+     "P7",
      "P8"
     ],
     "quotes": [
      "In addition, if the Company\u2019s net revenue does not equal or exceed a certain amount for upcoming fiscal periods as set forth in the Perceptive Credit Agreement, then the Company will be in default of the Perceptive Credit Agreement.",
-     "As of September 30, 2026, we were in compliance with these covenants.",
-     "The Company has achieved trailing twelve-month revenue of at least $85.0 million, satisfying the revenue milestone required to access the remaining $10.0 million under its credit facility with Perceptive Advisors LLC."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balances and the covenant level are stated in F1 and P7. That the headroom is thin is inferred from comparing them.",
-    "claim": "Cash and cash equivalents were 10,500 (table in thousands) at September 30, 2026, against a $5.0 million minimum cash covenant, and marketable securities had fallen to 0.",
-    "facts": [
-     "F1",
-     "P7",
-     "P8"
-    ],
-    "quotes": [
-     "In addition, pursuant to the terms of the Credit Agreement, the Company\u2019s minimum cash balance covenant was lowered to $5.0 million.",
-     "As a result, on November 3, 2026, the Company received the Additional Commitment Amount of $10.0 million.",
-     "Net cash use improved to approximately $0.6 million, from $3.2 million in the second quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4, P7 and P8.",
-    "claim": "The 10-K auditor and management reported substantial doubt about going concern; the 10-Q states this doubt no longer exists.",
-    "facts": [
-     "P4",
-     "P7",
-     "P8"
-    ],
-    "quotes": [
-     "These conditions, along with other matters as set forth in Note 1, raise substantial doubt about the Company\u2019s ability to continue as a going concern.",
-     "Based on the Company\u2019s liquidity position and current forecast of operating results and cash flows, management has now concluded that substantial doubt about the Company\u2019s ability to continue as a going concern no longer exists, and that the Company has sufficient liquidity to meet its obligations as they become due within the next twelve months following the date of issuance of these Consolidated Financial Statements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures stated in F1 and P8. The leverage interpretation is inferred, with support from P2.",
-    "claim": "Total liabilities of 77,831 exceeded total assets of 46,794 (table in thousands), leaving a stockholders' deficit of (31,037), and facility borrowings rose to $60 million after quarter-end.",
-    "facts": [
-     "F1",
-     "P8"
-    ],
-    "quotes": [
-     "Total stockholders' equity (deficit)",
-     "Subsequent to quarter-end, the Company drew down the $10.0 million tranche, bringing total borrowings under the facility to $60 million and further strengthening its balance sheet and liquidity position."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Guidance stated in P8. The risk of a miss is inferred.",
-    "claim": "Raised 2026 revenue guidance of $92 million to $94 million implies Q4 revenue of $24.9 to $26.9 million, and the company reaffirmed cash flow breakeven in Q4 2026.",
-    "facts": [
-     "P8"
-    ],
-    "quotes": [
-     "Based on year-to-date results, our new guidance implies revenue of $24.9 to $26.9 million for the fourth quarter.",
-     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as a risk factor in P2. No event is reported.",
-    "claim": "The business depends on the FDA PMA for RECELL, and any FDA modification, suspension or revocation would materially hurt it.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "Our business is highly dependent on the PMA we received in September 2018 from the FDA, including subsequent PMA supplement approvals for acute wound indications.",
-     "Any such action by the FDA would have a material adverse effect on our business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The past slowdown is stated in P5. The future disruption risk is inferred from the transition.",
-    "claim": "Reimbursement changes have hurt RECELL use before: MAC pricing delays slowed utilization, and physician payment moves to a national fee schedule on January 1, 2027.",
-    "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
-     "Delay by the MACs in establishing and publishing reimbursement rates temporarily slowed clinician use of RECELL.",
-     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "End date stated in P3. The effect is inferred.",
-    "claim": "The NTAP add-on payment of up to $4,875 per case for non-thermal full-thickness skin defects ran only through September 30, 2026.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The NTAP is effective from October 1, 2025, through September 30, 2026, and was granted under CMS\u2019s alternative pathway recognizing RECELL\u2019s FDA Breakthrough Device status, reinforcing its clinical value and supporting broader hospital adoption."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 and P7. The evidence indicates this risk is resolved.",
-    "claim": "Failure to obtain Warrant Shareholder Approval by November 30, 2026 would be an event of default, but shareholders approved the warrant on June 3, 2026.",
-    "facts": [
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "Additionally, the Company\u2019s failure to obtain the Warrant Shareholder Approval on or prior to November 30, 2026 shall constitute an event of default under the Perceptive Credit Agreement.",
-     "On June 3, 2026, our shareholders approved the issuance of such warrants."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Terms stated in P10. The risk of a shortfall is inferred.",
-    "claim": "The Stedical Global Amendment requires $1.0 million of PermeaDerm revenue sharing payments in 2026, with 20% growth minimums each year through 2030, while PermeaDerm Q3 revenue was $0.6 million.",
-    "facts": [
-     "P10",
-     "P8"
-    ],
-    "quotes": [
-     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030.",
-     "PermeaDerm (Q3 revenue of $0.6 million, essentially flat compared to Q2 2026) maintained stable revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 and P7.",
-    "claim": "Some material components are single-sourced, and Cohealyx is manufactured and supplied by Regenity.",
-    "facts": [
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "Due to the cost and regulatory requirements associated with qualifying multiple suppliers, in 2023, we single-sourced some of our material components.",
-     "Under the terms of the Regenity Agreement, Regenity manufactures and supplies Cohealyx and the Company commercializes it under its private label in the U.S."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1, P7 and P8.",
-    "claim": "Warrant liabilities rose to 2,975 from 1,243 (table in thousands), and the warrant revaluation added $2.1 million of non-cash expense in Q3.",
-    "facts": [
-     "F1",
-     "P8",
-     "P7"
-    ],
-    "quotes": [
-     "Net loss for the current period was negatively impacted by $2.1 million in non-cash expense related to the revaluation of warrants due to the increase in AVITA Medical\u2019s share price."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2, P7 and P8.",
-    "claim": "The company remains loss-making: Q3 net loss was $6.2 million, and the accumulated deficit was $432.9 million.",
-    "facts": [
-     "P2",
-     "P7",
-     "P8"
-    ],
-    "quotes": [
-     "We have experienced significant losses, expect losses to continue for the foreseeable future and may never achieve or maintain profitability.",
-     "Net loss improved to $6.2 million, or a loss of $0.20 per basic and diluted share, compared with a net loss of $13.2 million, or a loss of $0.46 per basic and diluted share, in the prior year period."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Terms stated in P3. The cash-drain effect is inferred.",
-    "claim": "The Perceptive loan accrues cash interest at the greater of SOFR and 4.00%, plus 7.50%, and carries a prepayment premium of 1% to 10%.",
-    "facts": [
-     "P3",
-     "F2"
-    ],
-    "quotes": [
      "During the term of the Perceptive Loan Facility, interest payable in cash shall accrue on any outstanding amounts under the Loan Facility at a rate per annum equal to the greater of (x) the SOFR rate for such period and (y) 4.00% plus, in either case, 7.50%."
     ],
     "support": "supported"
    },
    {
-    "basis": "The balance is stated in F1. The near-term horizon is inferred from the classification.",
-    "claim": "A contingent liability of 3,000 (table in thousands) moved from long-term to current at September 30, 2026.",
+    "basis": "Stated directly in the 10-K Risk Factors (P2), with regulatory approvals and clinical evidence stated in P1, P5, and P8.",
+    "claim": "AVITA Medical's U.S. commercial operations depend heavily on maintaining its FDA Premarket Approval and supplements for RECELL, and any FDA modification, suspension, revocation, or off-label enforcement action would severely impair sales.",
     "facts": [
-     "F1"
+     "P1",
+     "P2",
+     "P5",
+     "P8"
     ],
     "quotes": [
-     "Contingent liability"
+     "While we intend to take every action and precaution to ensure that our PMA remains effective, it is possible that the FDA could take a position in the future that requires a modification, temporary suspension or revocation of our PMA.",
+     "If the FDA determines that our marketing activities constitute off-label promotion, the FDA could impose civil fines or even criminal penalties on the Company and our executives, withdraw or recall our approved product from the market, as well as limit our products from such off-label usage."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K Business and MD&A (P1, P3), Q3 2026 10-Q MD&A (P5), and Q3 2026 earnings release (P8).",
+    "claim": "Changes or delays in Medicare and commercial payor reimbursement for RECELL procedures can reduce hospital adoption and clinician utilization, as occurred during regional MAC pricing delays and with limited vitiligo coverage.",
+    "facts": [
+     "P1",
+     "P3",
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "Changes in reimbursement rates and coverage policy by third party payors may place additional financial pressure on hospitals and the broader healthcare system.",
+     "Delay by the MACs in establishing and publishing reimbursement rates temporarily slowed clinician use of RECELL.",
+     "Despite regulatory approval and demonstrated clinical benefit, reimbursement for vitiligo procedures remains limited and uncertain."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K Risk Factors (P2), Q3 2026 10-Q and earnings release (P5, P7, P8), and August 2026 Form 8-K (P11).",
+    "claim": "AVITA Medical depends on single-source suppliers, a single Ventura manufacturing facility for RECELL and PermeaDerm, and third-party partners for Cohealyx and PermeaDerm, including an obligation to reach $1.0 million in PermeaDerm revenue-sharing payments growing 20% annually.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5",
+     "P7",
+     "P8",
+     "P11"
+    ],
+    "quotes": [
+     "To the extent that any of these single-sourced suppliers experience disruptions in deliveries due to production, quality, or other issues, we are potentially subject to similar production delays or unfavorable cost increases.",
+     "We have a manufacturing facility located in Ventura, California where we produce, package, and warehouse RECELL and PermeaDerm.",
+     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K MD&A (P3), Q3 2026 10-Q MD&A (P5), Q3 2026 earnings release (P8), and August 2026 Form 8-K (P11).",
+    "claim": "Growing sales of partner-sourced Cohealyx and PermeaDerm dilute overall gross margin relative to standalone RECELL (88.4%) because AVITA Medical shares a substantial portion of their sales prices with partners.",
+    "facts": [
+     "P3",
+     "P5",
+     "P8",
+     "P11"
+    ],
+    "quotes": [
+     "Therefore, the product mix is expected to continue to reduce the overall gross margin percentage while increasing the gross profit, and given that costs associated with this revenue do not increase significantly, operating profit increases on a quarterly basis.",
+     "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K Risk Factors (P2), with clinical evidence stated in P1, P3, P5, and P8.",
+    "claim": "Competitors with significantly greater financial and development resources could introduce superior acute wound care products that render AVITA Medical's portfolio less attractive or obsolete.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "The markets for our products are highly competitive and our competitors may develop products that may more effectively compete with our products.",
+     "Our competitors may have significantly more financial and other resources to invest in product development."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 balance sheet (F1), 10-K/10-Q MD&A (P3, P5), and Q3 2026 earnings release (P8).",
+    "claim": "Achieving raised full-year revenue guidance of $92 million to $94 million and fourth-quarter cash flow breakeven is exposed to variability in hospital ordering patterns, receivables collection, and commercial concentration in approximately 200 U.S. burn and trauma centers.",
+    "facts": [
+     "F1",
+     "P3",
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "Based on its third-quarter performance, AVITA Medical is raising its full-year 2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million.",
+     "We are executing a focused commercial strategy centered on approximately 200 U.S. burn and trauma centers that represent the highest value and procedural volume within the acute wound care market.",
+     "These statements are based on management\u2019s current expectations and are subject to risks and uncertainties that could cause actual results to differ materially, including variability in volumes and hospital ordering patterns; changes in, or delays in implementing, Medicare and other third-party reimbursement for RECELL, including the transition to national physician payment rates; the Company\u2019s ability to collect receivables and manage operating expenses and working capital; the Company\u2019s ability to comply with the covenants under its credit facility with Perceptive Advisors LLC and to service its indebtedness; changes in product mix and manufacturing costs affecting gross margin; the Company\u2019s dependence on third parties for the supply of Cohealyx and PermeaDerm and the terms of its arrangements with those parties; the interpretation of clinical data and the scope of claims permitted under applicable FDA requirements; product liability and regulatory actions; and the other risks described under \u201cRisk Factors\u201d in the Company\u2019s Annual Report on Form 10-K for the year ended December 31, 2025 and its subsequent Quarterly Reports on Form 10-Q."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in S0, F1, P2, P5, P7, P8, P9, and P10.",
+    "claim": "Existing stockholders face dilution from warrant exercises\u2014including recent exercises of warrants covering 500,000, 150,000, and 409,661 shares\u2014and from potential future equity raises, while warrant revaluation adds non-cash earnings volatility.",
+    "facts": [
+     "S0",
+     "F1",
+     "P2",
+     "P5",
+     "P7",
+     "P8",
+     "P9",
+     "P10"
+    ],
+    "quotes": [
+     "If we raise additional capital through the issuance of equity, the percentage ownership held by existing stockholders may be reduced, and the market price of our common stock or CDIs could fall due to an increased number of shares or CDIs available for sale in the market.",
+     "Net loss for the current period was negatively impacted by $2.1 million in non-cash expense related to the revaluation of warrants due to the increase in AVITA Medical\u2019s share price."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-K Risk Factors and MD&A (P2, P3), Q3 2026 10-Q MD&A (P5), and Q3 2026 earnings release (P8).",
+    "claim": "AVITA Medical faces operational and financial exposure from potential IT or cybersecurity incidents, macroeconomic pressures such as inflation and tariffs, and dependence on third-party international distributors.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "A material cyberattack or security incident could cause interruptions in our operations and could also damage our reputation, financial condition, and results of operations.",
+     "There remains significant uncertainty in the current macroeconomic environment due to factors including supply chain shortages, increased cost of healthcare, changes to inflation rates, a competitive labor market, tariffs, and other related global economic and geopolitical conditions.",
+     "We rely on third-party distributors for a portion of our sales in countries outside of the U.S."
     ],
     "support": "supported"
    }
@@ -1453,180 +1263,169 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P8 as an expectation only; no Q4 actuals exist before T.",
-    "claim": "Did AVITA reach cash flow breakeven in Q4 2026 as it said it expected to?",
+    "basis": "Stated in P8 as management guidance and expectations as of November 5, 2026; actual Q4 2026 financial statements are not yet available.",
+    "claim": "Will AVITA Medical achieve its raised full-year 2026 revenue guidance of $92 million to $94 million and reach cash flow breakeven in the fourth quarter of 2026?",
     "facts": [
-     "P8",
-     "F3"
+     "P8"
     ],
     "quotes": [
-     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026.",
-     "Net cash used in operating activities | (14,278) | (25,757) | $ (31,200) | $ (48,900)"
+     "Based on its third-quarter performance, AVITA Medical is raising its full-year 2026 revenue guidance to $92 million to $94 million, from $86 million to $89 million.",
+     "The Company also reaffirms its expectation of achieving cash flow breakeven in the fourth quarter of 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Guidance stated in P8; the outcome is not in the evidence.",
-    "claim": "Will FY2026 revenue land within the raised $92 million to $94 million guidance, given the implied Q4 range of $24.9 to $26.9 million against Q3 revenue of 26,114 (table in thousands)?",
+    "basis": "Stated in P5 that covenants were met as of September 30, 2026, while covenant amounts after December 31, 2026 and year-end compliance are not disclosed in the packet.",
+    "claim": "Will AVITA Medical satisfy the $73.0 million trailing twelve-month revenue covenant for 2026 and the $5.0 million minimum cash balance covenant following the additional $10.0 million borrowing, and what minimum net revenue covenants apply after 2026?",
     "facts": [
-     "P8",
-     "F2"
+     "P2",
+     "P5",
+     "P7"
     ],
     "quotes": [
-     "Based on year-to-date results, our new guidance implies revenue of $24.9 to $26.9 million for the fourth quarter."
+     "This facility also establishes trailing twelve-month revenue covenants aligned with our current operating trajectory, including $68.5 million for the quarter ended March 31, 2026, $69.0 million for the quarter ended June 30, 2026, $70.8 million for the quarter ended September 30, 2026, and $73.0 million for the year ending December 31, 2026.",
+     "On November 3, 2026, we borrowed an additional $10.0 million under our credit facility with Perceptive.",
+     "In addition, pursuant to the terms of the Credit Agreement, the Company\u2019s minimum cash balance covenant was lowered to $5.0 million.",
+     "In addition, if the Company\u2019s net revenue does not equal or exceed a certain amount for upcoming fiscal periods as set forth in the Perceptive Credit Agreement, then the Company will be in default of the Perceptive Credit Agreement."
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "P3 and P5 state that the covenant exists and give thresholds only through 2026.",
-    "claim": "What minimum trailing twelve-month revenue levels does the Perceptive facility require after the $73.0 million test for 2026?",
+    "basis": "Stated in P8 that CMS finalized national physician values on November 4, 2026 without stating the dollar rates or outpatient/ASC facility outcomes, and stated in P3 that NTAP ran through September 30, 2026 with no renewal status reported in P5 or P8.",
+    "claim": "What exact 2027 Medicare payment values and facility rates did CMS finalize for RECELL procedures, and was the inpatient NTAP of up to $4,875 per case extended beyond its initial effective period?",
     "facts": [
      "P3",
-     "P5"
+     "P5",
+     "P8"
     ],
     "quotes": [
-     "Among such covenants, the Perceptive Credit Agreement includes a financial maintenance test that requires the Obligors to maintain a specified minimum net revenue for each trailing twelve-month period ending on the last day of a fiscal quarter occurring prior to the maturity date of the Loan Facility.",
-     "As of September 30, 2026, we were in compliance with these covenants."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated end date in P3; no item reports a renewal.",
-    "claim": "Was the NTAP for RECELL in non-thermal full-thickness skin defects extended past its stated end date?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
+     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027",
+     "The proposed rules reflect the new Category I CPT code family effective January 1, 2027 and include proposed national physician relative value units based on American Medical Association recommended valuation, as well as proposed increases to hospital outpatient and ASC facility payment rates.",
+     "This NTAP designation allows Medicare Part A inpatient claims to receive up to $4,875 in additional reimbursement per case, beyond the standard MS-DRG base rate, provided CMS thresholds and coding criteria are met.",
      "The NTAP is effective from October 1, 2025, through September 30, 2026, and was granted under CMS\u2019s alternative pathway recognizing RECELL\u2019s FDA Breakthrough Device status, reinforcing its clinical value and supporting broader hospital adoption."
     ],
     "support": "supported"
    },
    {
-    "basis": "P8 states that the rule was finalized but gives no payment values.",
-    "claim": "What are the finalized national payment values for RECELL procedures, and how will the move from MAC contractor pricing affect utilization?",
+    "basis": "Observed in F1's balance sheet line items and Note 11 reference; Note 11 is omitted from the packet.",
+    "claim": "What obligation underlies the 3,000 (table in thousands) contingent liability reclassified from long-term to current on the 2026 balance sheet, and how will it be settled?",
     "facts": [
-     "P5",
-     "P8"
+     "F1"
     ],
     "quotes": [
-     "On November 4, 2026, the Centers for Medicare & Medicaid Services finalized national physician payment values and simplified billing codes for RECELL procedures, effective January 1, 2027"
+     "Contingent liability | 3,000 | 0",
+     "Contingent liability, long-term | 0 | 3,000",
+     "Commitments and contingencies (Note 11)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the differing ranges printed in two documents released the same day.",
-    "claim": "Which outlook range for RECELL standalone gross margin does management hold, 85% to 90% in the 10-Q or 86% to 90% in the release?",
+    "basis": "Stated in P11 as contractual obligations and option rights; full-year 2026 PermeaDerm revenue-sharing totals and territory decisions are not yet reported.",
+    "claim": "Will AVITA Medical meet the $1.0 million PermeaDerm revenue-sharing requirement for 2026 and 20% annual growth minimums through 2030, and will it exercise its right of first offer and refusal for European, United Kingdom, or Australian distribution?",
     "facts": [
-     "P5",
-     "P8"
-    ],
-    "quotes": [
-     "We believe gross margin for RECELL products on a standalone basis will be in the range of 85% to 90% for future quarters.",
-     "Gross margin for RECELL products only was 88.4% for the quarter and is currently expected to remain between 86% and 90% over the coming quarters."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from inconsistent percentages across P3, P8 and P10.",
-    "claim": "What share of PermeaDerm revenue does AVITA actually retain, given that the filings print 60%, up to 55%, and 67% or 80% after the amendment?",
-    "facts": [
-     "P3",
      "P8",
+     "P11"
+    ],
+    "quotes": [
+     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030.",
+     "Under the terms of the Global Amendment, in exchange for a $500,000 fee the Company will hold the right of first offer and refusal to expand its exclusive distribution territory to include all or a portion of the European Union, the United Kingdom, and/or Australia.",
+     "PermeaDerm (Q3 revenue of $0.6 million, essentially flat compared to Q2 2026) maintained stable revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Observed in F1, P4, P8, P9, and P10; the Q3 2026 Form 10-Q footnotes detailing all remaining warrant tranches are omitted from the packet.",
+    "claim": "Which warrants remain outstanding within the 2,975 (table in thousands) warrant liabilities balance after the November 2026 Perceptive and OrbiMed cashless exercises, and what future share dilution or revaluation expense will they cause?",
+    "facts": [
+     "F1",
+     "P4",
+     "P8",
+     "P9",
      "P10"
     ],
     "quotes": [
-     "We share the average sales price for Cohealyx at 50% and for PermeaDerm at 60%.",
+     "Warrant liabilities | 2,975 | 1,243",
+     "As a result of the Placement, the $10.218 Warrants were repriced from their original exercise price of $10.9847 to $10.218.",
+     "Net loss for the current period was negatively impacted by $2.1 million in non-cash expense related to the revaluation of warrants due to the increase in AVITA Medical\u2019s share price.",
+     "Perceptive exercised the Perceptive Warrant via a cashless exercise whereby the Company withheld 30,625 shares covered by the Perceptive Warrant in respect of the exercise price and issued the remaining 119,375 shares to Perceptive on November 11, 2026.",
+     "OrbiMed exercised the OrbiMed Warrant via a cashless exercise whereby the Company withheld 261,503 shares covered by the OrbiMed Warrant in respect of the exercise price and issued the remaining 148,158 shares to OrbiMed on November 11, 2026.",
+     "Perceptive exercised the Warrant on October 26, 2026 via a cashless exercise whereby the Company withheld 112,284 shares covered by the Warrant in respect of the exercise price and issued the remaining 387,716 shares to Perceptive on October 28, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 that Cohealyx I results were interim and that study analyses and submissions for publication remain ongoing.",
+    "claim": "Will final results from the Cohealyx I post-market clinical study confirm its interim findings, and will peer-reviewed publications of Cohealyx I and PermeaDerm I accelerate hospital adoption?",
+    "facts": [
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "In April 2026, we announced positive interim results from our Cohealyx I post-market clinical study, demonstrating a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a literature-derived benchmark (13.6 days versus 33.2 days; p<0.001).",
+     "Complete analyses of the results of the clinical studies for Cohealyx and PermeaDerm and prepare for submission of the data for publication;",
+     "PermeaDerm\u00ae I met its primary endpoint, demonstrating comparable clinical outcomes to allograft while reducing product costs by 70% and preparation time by 95.7%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 that revenue beyond approximately $4.0 million depends on procurement options exercised by BARDA.",
+    "claim": "Will BARDA exercise procurement options under its emergency preparedness agreement beyond the approximately $4.0 million in access and maintenance fees toward the total potential value of up to $25.5 million?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "On April 6, 2026, we entered into a ten-year agreement with the Biomedical Advanced Research and Development Authority (\u201cBARDA\u201d), part of the U.S. Department of Health and Human Services, with a total potential value of up to $25.5 million.",
+     "The agreement provides approximately $4.0 million in access and maintenance fees over the ten-year term, with additional potential revenue tied to procurement options exercised by BARDA."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3, P8, and P11; the net blended gross margin impact as product mix shifts is not yet observed.",
+    "claim": "How will overall gross profit margin evolve as Cohealyx and PermeaDerm grow in the revenue mix and as the amended PermeaDerm revenue-sharing terms take effect?",
+    "facts": [
+     "P3",
+     "P8",
+     "P11"
+    ],
+    "quotes": [
+     "Therefore, the product mix is expected to continue to reduce the overall gross margin percentage while increasing the gross profit, and given that costs associated with this revenue do not increase significantly, operating profit increases on a quarterly basis.",
+     "Gross margin for RECELL products only was 88.4% for the quarter and is currently expected to remain between 86% and 90% over the coming quarters.",
      "The Company receives 50% of the average sales price for Cohealyx and up to 55% for PermeaDerm, which lowers the overall gross margin percentage.",
      "In addition, the Company\u2019s share of revenue from PermeaDerm sales will increase to 67% for products sold in sheet form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 50%, and to 80% for products sold in glove form, subject to increased revenue sharing in the event the Company\u2019s gross margin on those products exceeds 35%."
     ],
     "support": "supported"
    },
    {
-    "basis": "The minimum is stated in P10; the shortfall consequences and full-year results are not in the evidence.",
-    "claim": "Will AVITA meet the $1.0 million 2026 PermeaDerm revenue-sharing minimum, given Q3 PermeaDerm revenue of $0.6 million, and what applies if it falls short?",
+    "basis": "Stated in P3, P5, and P8 that RECELL GO regulatory clearances are obtained and Cohealyx international expansion is potential, while international revenue has remained flat.",
+    "claim": "Will distributor-led commercialization of RECELL GO in Europe, Australia, and New Zealand and potential international expansion of Cohealyx increase international revenue beyond $0.9 million per quarter?",
     "facts": [
-     "P10",
-     "P8"
-    ],
-    "quotes": [
-     "For 2026, the Company is required to reach total PermeaDerm revenue sharing payments of $1.0 million, with 20% growth minimums each year through 2030.",
-     "PermeaDerm (Q3 revenue of $0.6 million, essentially flat compared to Q2 2026) maintained stable revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the balance sheet reclassification; its nature is not described in any item.",
-    "claim": "What is the contingent liability of 3,000 (table in thousands) that moved from long-term to current, and when is it payable?",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Contingent liability | 3,000 | 0",
-     "Contingent liability, long-term | 0 | 3,000"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from matching amounts; no item links them.",
-    "claim": "Is the unpaid intangible asset purchase of 500 (table in thousands) the $500,000 Stedical right-of-first-offer fee?",
-    "facts": [
-     "F3",
-     "P10"
-    ],
-    "quotes": [
-     "Intangible asset purchase not yet paid | 500",
-     "Under the terms of the Global Amendment, in exchange for a $500,000 fee the Company will hold the right of first offer and refusal to expand its exclusive distribution territory to include all or a portion of the European Union, the United Kingdom, and/or Australia."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The mechanism is stated in P8; outstanding counts after the October exercise and later valuations are not given.",
-    "claim": "How many warrants remain outstanding after the cashless exercise and the 150,000-share vesting, and how much more remeasurement expense will they cause?",
-    "facts": [
-     "F1",
-     "P5",
-     "P7",
-     "P8",
-     "S0"
-    ],
-    "quotes": [
-     "Net loss for the current period was negatively impacted by $2.1 million in non-cash expense related to the revaluation of warrants due to the increase in AVITA Medical\u2019s share price.",
-     "In connection therewith, 150,000 shares of common stock vested under the warrant that we issued to Perceptive on June 5, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "The draw is stated in P8; post-draw balances are not in the evidence.",
-    "claim": "What are the carrying value and interest cost of the loan facility after the $10.0 million draw brought total borrowings to $60 million?",
-    "facts": [
-     "F1",
-     "F3",
      "P3",
+     "P5",
      "P8"
     ],
     "quotes": [
-     "Loan facility, long-term | 45,476",
-     "Subsequent to quarter-end, the Company drew down the $10.0 million tranche, bringing total borrowings under the facility to $60 million and further strengthening its balance sheet and liquidity position."
+     "On September 14, 2025, we obtained the CE Mark for RECELL GO under the European Union Medical Device Regulation (\u201cEU MDR\u201d).",
+     "In April 2026, RECELL GO received Therapeutic Goods Administration certification in Australia and was listed on New Zealand's Web Assisted Notification of Devices database by Medsafe, enabling commercialization in both markets.",
+     "Under the agreement with Regenity, we hold the exclusive rights to market, sell, and distribute Cohealyx in the U.S., with the potential to expand such commercialization into the European Union, Australia, and Japan.",
+     "International (Q3 revenue of $0.9 million, essentially flat compared to Q2 2026) continued to contribute consistent revenue from established international markets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the rise in the accrual; payment timing is not stated.",
-    "claim": "When will the higher accrued wages and incentive compensation be paid in cash, and will that payment affect the breakeven target?",
+    "basis": "Stated in P2 as an ongoing effort initiated in 2024 with no updated qualification status in subsequent 2026 filings in the packet.",
+    "claim": "To what extent has AVITA Medical qualified additional suppliers for single-sourced raw materials and components to mitigate manufacturing disruption risk?",
     "facts": [
-     "F1",
-     "F3",
-     "P8"
+     "P2"
     ],
     "quotes": [
-     "Accrued wages and fringe benefits | 11,499 | 7,813",
-     "even as the Company supported higher performance-based compensation associated with commercial growth"
+     "In 2024, we started investing resources to secure additional suppliers for some of our key raw materials, but these efforts only mitigate, but do not eliminate, our supply chain risk.",
+     "We have a manufacturing facility located in Ventura, California where we produce, package, and warehouse RECELL and PermeaDerm."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the change of title between P3 and P8; no appointment filing is in the packet.",
-    "claim": "When and on what terms did Cary Vance move from Interim CEO to President and Chief Executive Officer?",
+    "basis": "Observed directly in the title difference between P3 (Interim CEO) and P8 (President and Chief Executive Officer); no appointment filing is included in the packet.",
+    "claim": "Was Cary Vance formally appointed permanent President and Chief Executive Officer after assuming the Interim CEO role in October 2025, and under what employment terms?",
     "facts": [
      "P3",
      "P8"
@@ -1634,28 +1433,6 @@
     "quotes": [
      "On October 16, 2025, Mr. Vance, the Chair of the Board of Directors, assumed the position of Interim Chief Executive Officer (the \u201cInterim CEO\u201d) upon the departure of Mr. Corbett from the Company and the Board.",
      "Cary Vance, President and Chief Executive Officer of AVITA Medical, commented:"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "P5 describes the options as potential; no exercise is reported.",
-    "claim": "Will BARDA exercise procurement options beyond the approximately $4.0 million in access and maintenance fees?",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "The agreement provides approximately $4.0 million in access and maintenance fees over the ten-year term, with additional potential revenue tied to procurement options exercised by BARDA."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "P5 states that the results are interim and that analysis and publication are still a strategic objective.",
-    "claim": "Do the final Cohealyx I results confirm the interim reduction in time to autografting readiness?",
-    "facts": [
-     "P5"
-    ],
-    "quotes": [
-     "In April 2026, we announced positive interim results from our Cohealyx I post-market clinical study, demonstrating a statistically significant reduction in mean time to autografting readiness of approximately 20 days compared to a literature-derived benchmark (13.6 days versus 33.2 days; p<0.001)."
     ],
     "support": "supported"
    }
@@ -1666,5 +1443,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 4 of its last 4 fiscal years"
+ "verdict_reason": "the filings show the continuing operations themselves losing money, so no value is given"
 }
