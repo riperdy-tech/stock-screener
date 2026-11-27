@@ -1,36 +1,129 @@
 {
- "alpha_pts": 20.14994081003144,
+ "alpha_pts": 29.78469582868859,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 73,
- "claims_supported": 67,
- "date": "2026-11-17T07:49:34Z",
+ "based_on": {
+  "accepted": "2026-11-04T21:31:24.000Z",
+  "accepted_utc": "2026-11-05T02:31:24Z",
+  "accession": "0001554855-26-002297",
+  "decision_time": "2026-11-27T04:45:14Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 67,
+ "claims_supported": 58,
+ "date": "2026-11-27T04:45:14Z",
  "decided": {
   "flags": [
-   "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 13 of 13",
-   "run 3000: base_year_not_representative",
+   "run 1000: quotes_verified: 9 of 9",
+   "run 1000: share_count_change_unexplained: shares 45,782,801 to 36,737,747 (-9,045,054); issuing and buying back at 67.67 (half to double) explains -5,911,039 to -1,477,760",
+   "run 1000: capital_events_over_5pct_of_market_cap: events sum to 209,700,000, 8.4% of the market cap 2,486,043,509",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: disposals_received_not_filed_taken_as_0",
+   "run 1000: shares_from_latest_interim",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 11 of 11"
+   "run 3000: quotes_verified: 9 of 9",
+   "run 3000: share_count_change_unexplained: shares 45,782,801 to 36,737,747 (-9,045,054); issuing and buying back at 67.67 (half to double) explains -5,911,039 to -1,477,760",
+   "run 3000: capital_events_over_5pct_of_market_cap: events sum to 209,700,000, 8.4% of the market cap 2,486,043,509",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: disposals_received_not_filed_taken_as_0",
+   "run 3000: shares_from_latest_interim"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0764 (equity return r 0.1113), F 10",
-  "run_gap": 0.049843599697671125,
+  "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0754 (equity return r 0.1097), F 10",
+  "run_gap": 0.05144269041739791,
   "runs": {
    "1000": {
     "adjustments": {
      "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 830600000.0,
+      "excess_cash_before": 1040300000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001554855-26-002297",
+        "amount": 9700000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-04",
+        "form": "10-Q",
+        "read_amount": 9700000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "amount": 200000000.0,
+        "printed": 200.0,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Repurchase of shares | (200.0) | (441.9)"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 45,782,801 to 36,737,747 (-9,045,054); issuing and buying back at 67.67 (half to double) explains -5,911,039 to -1,477,760",
+       "capital_events_over_5pct_of_market_cap: events sum to 209,700,000, 8.4% of the market cap 2,486,043,509"
+      ],
+      "gross_events": 209700000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2486043509.0,
+      "net_effect_on_excess_cash": -209700000.0,
+      "shares": {
+       "after": 36737747.0,
+       "before": 45782801.0,
+       "change": -9045054.0,
+       "explained_range": [
+        -5911038.865080538,
+        -1477759.7162701346
+       ],
+       "interim": 36737747.0,
+       "price_used": 67.67,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 1040300000.0,
+     "excess_cash_after": 830600000.0,
      "excess_cash_before": 1040300000.0,
      "k0_after": 128903567.31116158,
      "k0_before": 128903567.31116158,
      "k0_interest": 84500000.0,
      "one_offs_charge": 0,
      "one_offs_gain": 0,
-     "stamps": [],
+     "stamps": [
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
+     "w_after": 0.08444465388058998,
+     "w_before": 0.08444465388058998,
      "x0_after": 295468950.09283,
      "x0_before": 295468950.09283
     },
@@ -38,15 +131,20 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 3906421595.220066,
-     "seam_ratio": 1.0282631186991966,
-     "tv_share": 0.3546017219891196,
-     "wedge_rate_5": 0.003914707074152469
+     "equity_value": 4077543377.16174,
+     "seam_ratio": 1.035229072750378,
+     "tv_share": 0.370661090762278,
+     "wedge_rate_5": 0.003918501923665815
     },
     "flags": [
-     "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 13 of 13"
+     "quotes_verified: 9 of 9",
+     "share_count_change_unexplained: shares 45,782,801 to 36,737,747 (-9,045,054); issuing and buying back at 67.67 (half to double) explains -5,911,039 to -1,477,760",
+     "capital_events_over_5pct_of_market_cap: events sum to 209,700,000, 8.4% of the market cap 2,486,043,509",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
     ],
     "inputs": {
      "capex_to_revenue": 0.029,
@@ -54,25 +152,25 @@
      "long_run_op_margin": 0.125,
      "op_margin": [
       0.112,
-      0.116,
-      0.121,
-      0.124,
-      0.126
+      0.115,
+      0.119,
+      0.122,
+      0.124
      ],
      "return_on_new_investment_long_run": 0.25,
      "rev_growth": [
       0.031,
-      0.045,
-      0.055,
-      0.055,
-      0.05
+      0.05,
+      0.06,
+      0.06,
+      0.055
      ],
      "terminal_growth": 0.035
     },
-    "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0764 (equity return r 0.1113), F 10",
+    "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0754 (equity return r 0.1097), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 6,
-     "kept": 67
+     "dropped_unsupported": 9,
+     "kept": 58
     },
     "ranges": {
      "long_run_op_margin": [
@@ -80,236 +178,8 @@
       0.135
      ],
      "rev_growth_y3": [
-      0.03,
+      0.035,
       0.075
-     ],
-     "terminal_growth": [
-      0.028,
-      0.042
-     ]
-    },
-    "reasons": {
-     "capex_to_revenue": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0292"
-       },
-       {
-        "id": "F3",
-        "quote": "Purchases of property and equipment | (91.3) | (93.9)"
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Capex has run steadily near 3% of revenue (nine-month 2026 purchases of $91.3 million against $93.9 million), consistent with the five-year pool."
-     },
-     "fade_years": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "increased 33% for the nine months ended September 30, 2026"
-       }
-      ],
-      "quotes_given": 1,
-      "why": "Segments are mature but still reinvesting in digital, so growth and margin should converge to long-run values over about a decade."
-     },
-     "long_run_op_margin": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "2024-12-31 | $3,989.8 million | 0.0818 | 0.1261"
-       },
-       {
-        "id": "P3",
-        "quote": "Revenue per transaction was $0.08 and $0.10 for the year ended December 31, 2025 and 2024, respectively."
-       }
-      ],
-      "quotes_given": 2,
-      "why": "Margins of 11.5-12.6% in 2022-2025 and the ordinary-company base rate (about half of a gap persists) point to roughly 12.5%. Low-revenue-per-transaction digital mix and cost inflation limit upside."
-     },
-     "op_margin": {
-      "quotes": [
-       {
-        "id": "F2",
-        "quote": "Operating income | 171.6 | 195.0 | 380.7 | 428.8"
-       },
-       {
-        "id": "P6",
-        "quote": "Operating income of $37.3 million, a 37% decrease from $59.3 million"
-       },
-       {
-        "id": "P4",
-        "quote": "the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax"
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Nine-month 2026 operating income of 380.7 on 3,281.3 of revenue is an 11.6% margin, and Q4 is seasonally weaker. Cross-Border Payments operating income fell 37% in Q3. I start at about 11.2% and recover gradually as digital volume offsets retail weakness."
-     },
-     "return_on_new_investment_long_run": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0764."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "The 41.8% base-year return is flattered by excluding acquired goodwill and by the asset-light remittance and epay segments. ATM cash funding and ATM and POS hardware are capital-intensive, so I assume a lower marginal return, well above the 7.6% break-even."
-     },
-     "rev_growth": {
-      "quotes": [
-       {
-        "id": "P6",
-        "quote": "approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA"
-       },
-       {
-        "id": "P6",
-        "quote": "increased 33% for the nine months ended September 30, 2026"
-       },
-       {
-        "id": "P3",
-        "quote": "Our annual consolidated revenues increased by 6.4% for 2025 compared to 2024."
-       }
-      ],
-      "quotes_given": 3,
-      "why": "Management's revised 2026 outlook implies year-1 growth of about 3% against $4,244.2 million of 2025 revenue. I assume recovery to 5-5.5% as digital accelerators, merchant acquiring and Ren grow and the immigration drag eases, but CoreCard's acquired contribution fades after October 2026."
-     },
-     "terminal_growth": {
-      "quotes": [
-       {
-        "id": "REC",
-        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
-       }
-      ],
-      "quotes_given": 1,
-      "why": "A global payments business with 77% non-USD revenue and emerging-market exposure should grow near, but slightly below, the nominal anchor."
-     }
-    },
-    "risks": [
-     {
-      "bear_value": 0.1,
-      "input_hit": "op_margin",
-      "risk": "Cross-Border Payments pressure from immigration policy and the remittance tax persists or worsens, and digital growth does not offset it"
-     },
-     {
-      "bear_value": 0.025,
-      "input_hit": "rev_growth",
-      "risk": "Revenue growth stays near 2-3% as retail remittance volumes keep falling and the CoreCard contribution fades"
-     },
-     {
-      "bear_value": 0.105,
-      "input_hit": "long_run_op_margin",
-      "risk": "Cost inflation and acquisition amortization keep growing faster than revenue, permanently lowering the margin"
-     }
-    ],
-    "scenarios": {
-     "bear": {
-      "long_run_op_margin": 0.105,
-      "rev_growth": [
-       0.005999999999999998,
-       0.019999999999999997,
-       0.03,
-       0.03,
-       0.025
-      ],
-      "terminal_growth": 0.028
-     },
-     "bull": {
-      "long_run_op_margin": 0.135,
-      "rev_growth": [
-       0.051,
-       0.065,
-       0.075,
-       0.075,
-       0.07
-      ],
-      "terminal_growth": 0.042
-     }
-    },
-    "situation": {
-     "base_year_representative": "no",
-     "cyclical": "no",
-     "debt_level_representative": {
-      "answer": "yes",
-      "why": "Total debt of about $2.0 billion is roughly 2.5-3x Adjusted EBITDA, and the 2026 convertible issuance mostly refinanced existing short-term debt, so the level looks maintainable."
-     },
-     "margin_position": "The 2025 operating margin of 12.5% sits near the company's 2022-2025 range of about 11.5-12.6%. The 2026 margin is falling to roughly 11% because Cross-Border Payments (remittances) is hurt by U.S. immigration policy and the remittance tax. Costs (salaries, SG&A and CoreCard amortization) are also rising faster than revenue. I treat this as a partly temporary trough, not a cycle.",
-     "tax_rate_representative": {
-      "answer": "unclear",
-      "why": "The 30.2% base-year rate is above the statutory level, and the nine-month 2026 rate is about 34.7% with no stated driver, so I cannot say whether it will persist."
-     },
-     "why": "2025 was a good year: revenue grew 6.4% and the margin was 12.5%. 2026 guidance of about $4.375 billion of revenue implies growth of only about 3%, and nine-month operating income fell to 380.7 from 428.8. The base year therefore overstates near-term earnings, and I start the margin lower and let it recover only partly."
-    },
-    "value_at_old_defaults": 97.69677502144702,
-    "values": {
-     "base": 116.3488870693126,
-     "bear": 91.78908198059858,
-     "bull": 141.47734059577823
-    }
-   },
-   "3000": {
-    "adjustments": {
-     "base_year_one_offs": [],
-     "cash_interest_returned": 0.0,
-     "cash_not_free": null,
-     "excess_cash_after": 1040300000.0,
-     "excess_cash_before": 1040300000.0,
-     "k0_after": 128903567.31116158,
-     "k0_before": 128903567.31116158,
-     "k0_interest": 84500000.0,
-     "one_offs_charge": 0,
-     "one_offs_gain": 0,
-     "stamps": [],
-     "x0_after": 295468950.09283,
-     "x0_before": 295468950.09283
-    },
-    "confidence": "low",
-    "diagnostics": {
-     "da_rule": "vintages",
-     "depreciation_kept_rate": 0.0,
-     "equity_value": 3670340190.585594,
-     "seam_ratio": 1.0148869714377475,
-     "tv_share": 0.334624198994583,
-     "wedge_rate_5": 0.004009798214299886
-    },
-    "flags": [
-     "base_year_not_representative",
-     "confidence_low",
-     "quotes_verified: 11 of 11"
-    ],
-    "inputs": {
-     "capex_to_revenue": 0.029,
-     "fade_years": 10,
-     "long_run_op_margin": 0.12,
-     "op_margin": [
-      0.115,
-      0.119,
-      0.123,
-      0.125,
-      0.126
-     ],
-     "return_on_new_investment_long_run": 0.2,
-     "rev_growth": [
-      0.031,
-      0.04,
-      0.05,
-      0.05,
-      0.045
-     ],
-     "terminal_growth": 0.035
-    },
-    "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0764 (equity return r 0.1113), F 10",
-    "prior_read_claims": {
-     "dropped_unsupported": 6,
-     "kept": 67
-    },
-    "ranges": {
-     "long_run_op_margin": [
-      0.105,
-      0.135
-     ],
-     "rev_growth_y3": [
-      0.02,
-      0.07
      ],
      "terminal_growth": [
       0.03,
@@ -321,7 +191,299 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "Pooled over those years: capital expenditure / revenue 0.0292"
+        "quote": "capital expenditure / revenue 0.0292"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Capex has run steadily at 2.6% to 3.1% of revenue. Nine-month 2026 purchases of property and equipment were 91.3 against 93.9, so I hold about 2.9%."
+     },
+     "fade_years": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Digital transactions within the Cross-Border Payments segment increased 34% in the third quarter of 2026 compared to the prior year period."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A 10-year fade lets the margin and growth rates move gradually from the recovery path to the steady state, given the many moving segments."
+     },
+     "long_run_op_margin": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "2024-12-31 | $3,989.8 million | 0.0818 | 0.1261"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "Margins have been 11.5% to 12.6% for the last four years. I take a long-run value near the 2025 level, since the digital mix and Payments Infrastructure support margin but the low-value digital transactions and remittance policy risk limit it. The 2019 peak of 17.3% was a different mix and is not a base case."
+     },
+     "op_margin": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "Operating income of $171.6 million, a 12% decrease from $195.0 million"
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $4,244.2 million | 0.0638 | 0.1248"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Q3 operating income fell 12% on 1% revenue growth, and the guided Adjusted EBITDA of about $725 million implies a 2026 GAAP margin of roughly 11%. I assume a gradual recovery as Cross-Border Payments stabilizes, partly held back by higher purchase amortization and digital investment."
+     },
+     "return_on_new_investment_long_run": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0754."
+       }
+      ],
+      "quotes_given": 1,
+      "why": "The current return on tangible capital (41.8%) is high because ATM cash is partly funded by third parties and the business is asset-light. New investment in acquired intangibles, ATMs and digital platforms should earn well above the 7.5% break-even but far below the current return, so I assume about 25%."
+     },
+     "rev_growth": {
+      "quotes": [
+       {
+        "id": "P6",
+        "quote": "We now expect approximately $4.375 billion of revenue"
+       },
+       {
+        "id": "P6",
+        "quote": "the last few months have shown stabilizing to modestly improving trends"
+       }
+      ],
+      "quotes_given": 2,
+      "why": "Year 1 (2026) follows management's revised outlook of about $4.375 billion, which is roughly 3% growth on 4,244.2. Growth should then recover to 5-6% as digital accelerators (up 33% over nine months), Payments Infrastructure and CoreCard offset the retail remittance drag. Management calls the stabilizing trend in Cross-Border Payments 'fragile', so the recovery is not assured."
+     },
+     "terminal_growth": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+       }
+      ],
+      "quotes_given": 1,
+      "why": "A globally diversified payments company with about 77% of revenue outside the USD should grow near nominal GDP in the long run, so I set it close to the code anchor, slightly below."
+     }
+    },
+    "risks": [
+     {
+      "bear_value": 0.1,
+      "input_hit": "op_margin",
+      "risk": "US immigration policy and the remittance tax keep Cross-Border Payments depressed or deteriorating, with the 37% operating income decline persisting and digital growth too small to offset it."
+     },
+     {
+      "bear_value": 0.025,
+      "input_hit": "rev_growth",
+      "risk": "Low-value digital transactions, ATM fee pressure and weak travel spend limit Payments Infrastructure revenue growth, leaving consolidated growth at 1-3%."
+     },
+     {
+      "bear_value": 0.105,
+      "input_hit": "long_run_op_margin",
+      "risk": "Structural margin erosion from higher D&A (CoreCard), cost inflation and agent commission pressure lowers the long-run margin."
+     }
+    ],
+    "scenarios": {
+     "bear": {
+      "long_run_op_margin": 0.105,
+      "rev_growth": [
+       0.006000000000000005,
+       0.02500000000000001,
+       0.035,
+       0.035,
+       0.030000000000000006
+      ],
+      "terminal_growth": 0.03
+     },
+     "bull": {
+      "long_run_op_margin": 0.135,
+      "rev_growth": [
+       0.046,
+       0.065,
+       0.075,
+       0.075,
+       0.07
+      ],
+      "terminal_growth": 0.04
+     }
+    },
+    "situation": {
+     "base_year_representative": "unclear",
+     "cyclical": "no",
+     "debt_level_representative": {
+      "answer": "unclear",
+      "why": "Total debt of 2,020.8 at the base year-end includes funding for seasonal ATM cash, and indebtedness moved between 2,654.0 and 2,177.3 within a quarter in 2026, so the structural level is unclear."
+     },
+     "margin_position": "The 2025 operating margin of 12.5% sits just below the 2024 level and well below the 2019 peak of 17.3%. In 2026 it is falling toward about 11% because Cross-Border Payments is weak (US immigration policy, remittance tax) while D&A and SG&A are rising, including CoreCard amortization. The margin is pressured by company-specific policy and cost factors, not a commodity-type cycle.",
+     "tax_rate_representative": {
+      "answer": "unclear",
+      "why": "The base-year rate is 30.2%, but nine-month 2026 tax expense of 121.4 on pretax income of 350.1 implies about 35%, and the filings do not explain the jump."
+     },
+     "why": "2025 was a normal growth year with revenue up 6.4% and margin 12.5%. The 2026 run-rate is already lower: nine-month operating income was 380.7 against 428.8, and management cut its full-year outlook to about $4.375 billion of revenue. The base year therefore probably overstates near-term margin, but the Payments Infrastructure and digital growth lines support a partial recovery."
+    },
+    "value_at_old_defaults": 99.0894338260991,
+    "values": {
+     "base": 144.58262209569762,
+     "bear": 112.67669422187372,
+     "bull": 170.63579307724908
+    }
+   },
+   "3000": {
+    "adjustments": {
+     "base_year_one_offs": [],
+     "capital_events": {
+      "excess_cash_after": 830600000.0,
+      "excess_cash_before": 1040300000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001554855-26-002297",
+        "amount": 9700000.0,
+        "end": "2026-09-30",
+        "filed": "2026-11-04",
+        "form": "10-Q",
+        "read_amount": 9700000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "amount": 200000000.0,
+        "printed": 200.0,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Repurchase of shares | (200.0) | (441.9)"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "disposals_received": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [
+       "share_count_change_unexplained: shares 45,782,801 to 36,737,747 (-9,045,054); issuing and buying back at 67.67 (half to double) explains -5,911,039 to -1,477,760",
+       "capital_events_over_5pct_of_market_cap: events sum to 209,700,000, 8.4% of the market cap 2,486,043,509"
+      ],
+      "gross_events": 209700000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 2486043509.0,
+      "net_effect_on_excess_cash": -209700000.0,
+      "shares": {
+       "after": 36737747.0,
+       "before": 45782801.0,
+       "change": -9045054.0,
+       "explained_range": [
+        -5911038.865080538,
+        -1477759.7162701346
+       ],
+       "interim": 36737747.0,
+       "price_used": 67.67,
+       "replaced": true,
+       "source": "xbrl"
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "disposals_received_not_filed_taken_as_0",
+       "shares_from_latest_interim"
+      ]
+     },
+     "cash_interest_returned": 0.0,
+     "cash_not_free": null,
+     "excess_cash_after": 830600000.0,
+     "excess_cash_before": 1040300000.0,
+     "k0_after": 128903567.31116158,
+     "k0_before": 128903567.31116158,
+     "k0_interest": 84500000.0,
+     "one_offs_charge": 0,
+     "one_offs_gain": 0,
+     "stamps": [
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "disposals_received_not_filed_taken_as_0",
+      "shares_from_latest_interim"
+     ],
+     "w_after": 0.08444465388058998,
+     "w_before": 0.08444465388058998,
+     "x0_after": 295468950.09283,
+     "x0_before": 295468950.09283
+    },
+    "confidence": "low",
+    "diagnostics": {
+     "da_rule": "vintages",
+     "depreciation_kept_rate": 0.0,
+     "equity_value": 3835137756.4975986,
+     "seam_ratio": 1.0289592401273242,
+     "tv_share": 0.34379202071783777,
+     "wedge_rate_5": 0.004059384423163657
+    },
+    "flags": [
+     "confidence_low",
+     "quotes_verified: 9 of 9",
+     "share_count_change_unexplained: shares 45,782,801 to 36,737,747 (-9,045,054); issuing and buying back at 67.67 (half to double) explains -5,911,039 to -1,477,760",
+     "capital_events_over_5pct_of_market_cap: events sum to 209,700,000, 8.4% of the market cap 2,486,043,509",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "disposals_received_not_filed_taken_as_0",
+     "shares_from_latest_interim"
+    ],
+    "inputs": {
+     "capex_to_revenue": 0.029,
+     "fade_years": 10,
+     "long_run_op_margin": 0.125,
+     "op_margin": [
+      0.113,
+      0.117,
+      0.121,
+      0.123,
+      0.124
+     ],
+     "return_on_new_investment_long_run": 0.22,
+     "rev_growth": [
+      0.031,
+      0.045,
+      0.055,
+      0.055,
+      0.05
+     ],
+     "terminal_growth": 0.03
+    },
+    "old_defaults_inputs": "year 1 growth 0.0465 and margin 0.1160, margin 0.1211 (persist), growth 0.0375, terminal RONIC 0.0754 (equity return r 0.1097), F 10",
+    "prior_read_claims": {
+     "dropped_unsupported": 9,
+     "kept": 58
+    },
+    "ranges": {
+     "long_run_op_margin": [
+      0.105,
+      0.14
+     ],
+     "rev_growth_y3": [
+      0.035,
+      0.07
+     ],
+     "terminal_growth": [
+      0.025,
+      0.04
+     ]
+    },
+    "reasons": {
+     "capex_to_revenue": {
+      "quotes": [
+       {
+        "id": "REC",
+        "quote": "capital expenditure / revenue 0.0292"
        },
        {
         "id": "F3",
@@ -329,7 +491,7 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Capex has been steady at about 2.6-3.1% of revenue, and nine-month 2026 purchases of property and equipment ($91.3m) are in line with the prior year."
+      "why": "Capex has held at about 2.6-3.1% of revenue. Nine-month 2026 purchases of $91.3M are about 2.8% of revenue."
      },
      "fade_years": {
       "quotes": [
@@ -339,7 +501,7 @@
        }
       ],
       "quotes_given": 1,
-      "why": "Growth has been mid-single digit and the mix is shifting toward digital and acquiring, so I assume a fairly long fade from year-5 growth to the terminal rate."
+      "why": "A 10-year fade lets the recent growth rate converge slowly to the terminal rate for a diversified three-segment business."
      },
      "long_run_op_margin": {
       "quotes": [
@@ -349,31 +511,27 @@
        }
       ],
       "quotes_given": 1,
-      "why": "The 2022-25 margins were 11.5-12.6% and the 2021 and 2020 margins were depressed. Following the base rate that about half of a gap to the median persists, I set a long-run margin of 12%, slightly above the 5-year median of about 11.7% and below the 2025 peak."
+      "why": "The margin was 11.7%-12.6% in 2023-25 and the 2019 peak was 17.3%. I assume a return to about 12.5%. The range is wide because remittance policy, ATM fee pressure and low-margin digital mix are all unresolved."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "F2",
-        "quote": "Operating income | 171.6 | 195.0 | 380.7 | 428.8"
-       },
-       {
         "id": "P6",
-        "quote": "continued impact of U.S. immigration policy and global economic pressures on the Cross Border Payments segment, which has persisted longer than we anticipated"
+        "quote": "Operating income of $171.6 million, a 12% decrease from $195.0 million"
        }
       ],
-      "quotes_given": 2,
-      "why": "Nine-month 2026 operating income is 380.7 on 3,281.3 revenue (11.6%), and guided Adjusted EBITDA of about $725m implies roughly an 11.5% GAAP margin for 2026. I assume a gradual recovery toward 12.5% by year 5, as Cross-Border Payments stabilises and CoreCard cost growth anniversaries."
+      "quotes_given": 1,
+      "why": "Q3 2026 operating income fell 12% on 1% revenue growth because of the Cross-Border Payments decline, higher SG&A and CoreCard amortization. I set 2026 near 11.3% and assume a gradual recovery to about 12.4% by year 5 as Cross-Border volumes stabilize."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0764."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0754."
        }
       ],
       "quotes_given": 1,
-      "why": "The base-year return on tangible capital is very high (0.4176), but it is flattered by ATM cash and settlement balances being outside tangible capital and by acquired goodwill. New ATM, POS and acquisition investment will earn less. I use 20%, well above the 0.0764 break-even and well below the base year."
+      "why": "The base-year return on tangible capital of 0.42 is very high because of the asset-light remittance and epay businesses. New investment includes ATM cash, terminals and acquisitions, so I assume a much lower 22%, comfortably above the 7.5% breakeven."
      },
      "rev_growth": {
       "quotes": [
@@ -382,61 +540,57 @@
         "quote": "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
        },
        {
-        "id": "P6",
-        "quote": "Digital transactions within the Cross-Border Payments segment increased 34% in the third quarter of 2026 compared to the prior year period."
-       },
-       {
-        "id": "P3",
-        "quote": "Our annual consolidated revenues increased by 6.4% for 2025 compared to 2024."
+        "id": "REC",
+        "quote": "2025-12-31 | $4,244.2 million | 0.0638 | 0.1248"
        }
       ],
-      "quotes_given": 3,
-      "why": "Year 1 (fiscal 2026) is set by the revised outlook of about $4.375bn against $4,244.2m, i.e. about 3.1%. Later years assume a recovery to mid-single digits as digital volume (+34% in Cross-Border Payments) and merchant acquiring offset the retail remittance drag. Growth was 6.4% in 2025."
+      "quotes_given": 2,
+      "why": "Management guides 2026 revenue to about $4.375B, about 3% growth on the $4,244.2M base. After that I assume remittance pressure stabilizes and digital accelerators, merchant acquiring, Ren and CoreCard lift growth to about 5-5.5%. Growth stays below the 8-10% of 2023-24 because transaction-heavy growth earns little revenue per transaction."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Cost of equity r 0.1113; long-run nominal growth anchor g_anchor 0.0375."
+        "quote": "long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
       "quotes_given": 1,
-      "why": "Long-run growth should be close to the nominal anchor. The business is global and fragmented, but physical remittance and prepaid mobile airtime are mature, and digital offsets are uncertain."
+      "why": "A global payments network with about 77% non-USD revenue and emerging-market exposure supports growth near but slightly below the nominal anchor. Regulatory and immigration headwinds argue for caution."
      }
     },
     "risks": [
      {
-      "bear_value": 0.105,
-      "input_hit": "op_margin",
-      "risk": "U.S. immigration and remittance-tax pressure persists or worsens, and further guidance cuts follow, so Cross-Border Payments profit keeps falling."
-     },
-     {
-      "bear_value": 0.015,
+      "bear_value": 0.03,
       "input_hit": "rev_growth",
-      "risk": "Digital growth does not offset retail volume declines, and the revenue cuts are deeper than assumed."
+      "risk": "U.S. remittance pressure (immigration policy, remittance tax) persists or worsens, and digital growth cannot offset retail declines"
      },
      {
       "bear_value": 0.105,
       "input_hit": "long_run_op_margin",
-      "risk": "Cost inflation and acquisition amortization keep running ahead of revenue, lowering the sustainable margin."
+      "risk": "Margins stay compressed by cost inflation, low-margin digital mix and Cross-Border operating deleverage"
+     },
+     {
+      "bear_value": 0.12,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Regulatory or card network changes to ATM fees, DCC rules or epay margins reduce returns on new investment"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.105,
       "rev_growth": [
-       0.0009999999999999974,
-       0.009999999999999998,
-       0.02,
-       0.02,
-       0.014999999999999996
+       0.011000000000000003,
+       0.025,
+       0.035,
+       0.035,
+       0.030000000000000006
       ],
-      "terminal_growth": 0.03
+      "terminal_growth": 0.025
      },
      "bull": {
-      "long_run_op_margin": 0.135,
+      "long_run_op_margin": 0.14,
       "rev_growth": [
-       0.051000000000000004,
+       0.046000000000000006,
        0.060000000000000005,
        0.07,
        0.07,
@@ -446,42 +600,42 @@
      }
     },
     "situation": {
-     "base_year_representative": "no",
+     "base_year_representative": "yes",
      "cyclical": "no",
      "debt_level_representative": {
-      "answer": "yes",
-      "why": "Debt of about $2.0bn funds ATM cash and was refinanced into convertibles and long-term debt, and it is roughly 3x the guided EBITDA of about $725 million, which looks like a level the company will keep."
+      "answer": "unclear",
+      "why": "Debt of about $2.0-2.2B is partly seasonal ATM cash funding and partly structural, and the evidence does not separate the two."
      },
-     "margin_position": "The 2025 GAAP operating margin of 12.5% is near the top of the post-2021 range. In 2026 it is below that level (9 months 11.6%, Q3 14.8% vs 17.0% a year earlier). The Cross-Border Payments segment is under pressure from U.S. immigration policy and the remittance tax, and costs (SG&A, salaries, CoreCard amortization) are growing faster than revenue. I expect a partial recovery as digital volume grows and cost growth slows, but not to the 2024-25 peak.",
+     "margin_position": "The 2025 operating margin of 12.5% matches the 2023-24 level of about 12-12.6%. Margin is now falling because Cross-Border Payments (formerly Money Transfer) volumes are hit by U.S. immigration policy and the remittance tax. Costs, CoreCard amortization and digital investment are also rising faster than revenue. The nine-month 2026 margin is about 11.6%, and the full-year 2026 margin should be near 11.3%.",
      "tax_rate_representative": {
       "answer": "unclear",
-      "why": "The base-year rate is 30.2% but the nine-month 2026 rate is about 35% (121.4 on 350.1 pretax), and the filings do not explain the rise."
+      "why": "The base-year rate is 30.2%, but nine-month 2026 tax was 121.4 on pretax income of 350.1 (about 35%), and the filings do not explain the jump."
      },
-     "why": "2025 was a year of 6.4% revenue growth and a 12.5% margin, before the remittance weakness and the CoreCard amortization. Management has now cut 2026 guidance, so the base-year margin overstates near-term earning power. Year 1 is fiscal 2026, and I anchor it to the revised outlook."
+     "why": "2025 growth (6.4%) and margin (12.5%) are in line with the prior three years. 2026 is a dip from a policy-driven remittance shock, not a structural change. The firm's 2026 outlook (revenue about $4.375B, Adjusted EBITDA about $725M) implies about 3% growth and a margin near 11%. I assume partial recovery toward about 12.5% as digital accelerators grow and the U.S. remittance pressure stabilizes."
     },
-    "value_at_old_defaults": 97.69677502144702,
+    "value_at_old_defaults": 99.0894338260991,
     "values": {
-     "base": 110.69065309164944,
-     "bear": 88.65349917593585,
-     "bull": 134.90527937291805
+     "base": 137.33141385776113,
+     "bear": 111.07859247903347,
+     "bull": 169.3974834352016
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 97.69677502144702,
-  "value_at_old_defaults_quoted": 97.69677502144702,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 99.0894338260991,
+  "value_at_old_defaults_quoted": 99.0894338260991,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 5197253043.160416,
+ "equity_value": 5178443264.303536,
  "family": "operating",
  "far_from_price": true,
- "filed_shares": 45782801.0,
+ "filed_shares": 36737747.0,
  "flags": [
-  "Euronet signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks. No definitive agreement is shown.",
-  "Euronet completed the acquisition of 100% of CoreCard Corporation. The third-quarter 2026 release says it lifted Payments Infrastructure revenue and added $4.7 million of incremental non-cash purchase price amortization."
+  "Euronet completed the acquisition of 100% of CoreCard Corporation, an issuer processor. The company says the acquisition contributed to Payments Infrastructure revenue growth and added $4.7 million of non-cash purchase price amortization in the third quarter of 2026.",
+  "Euronet announced it signed a letter of intent with Diebold Nixdorf to collaborate globally on transforming ATM networks. No definitive agreement or terms appear in the evidence."
  ],
  "in_code_book": false,
- "ke": 0.11134375453902048,
+ "ke": 0.10965930240162478,
  "market_cap_at_publish": 2537476319,
  "model": "claude-sonnet-5-5",
  "news": [],
@@ -489,19 +643,20 @@
  "pending_offer": null,
  "price_at_publish": 69.07,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
  "seed_base": {
-  "1000": 116.3488870693126,
-  "3000": 110.69065309164944
+  "1000": 144.58262209569762,
+  "3000": 137.33141385776113
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited item (10-K Item 1)",
-    "claim": "Euronet sells electronic payment and transaction processing to financial institutions, retailers, service providers and individual consumers, through its own global payments network, platforms and technologies.",
+    "basis": "Stated in the 10-K business overview.",
+    "claim": "Euronet sells electronic payment and transaction processing solutions over its own global network, platforms and technologies. Its customers are financial institutions, retailers, service providers and individual consumers.",
     "facts": [
      "P1"
     ],
@@ -511,158 +666,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The company reports three segments. In 2025 they contributed about 30% (EFT Processing), 28% (epay) and 42% (Money Transfer) of consolidated revenues. In May 2026 EFT Processing was renamed Payments Infrastructure and Money Transfer was renamed Cross-Border Payments. Only the names changed.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "We operate in the following three segments as of December 31, 2025:",
-     "In May 2026, the Company changed the name of the EFT Processing Segment to Payments Infrastructure and the name of the Money Transfer Segment to Cross-Border Payments in order to more accurately reflect the products and services provided by these segments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A segment descriptions",
-    "claim": "The segment mix has shifted. In the latest quarter Payments Infrastructure was about 38% of revenues, epay 25% and Cross-Border Payments 37%. Over the nine months the shares were 34%, 27% and 39%.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Payments Infrastructure (the ATM and POS segment) earns recurring management fees, transaction fees, surcharges and foreign-exchange margin on dynamic currency conversion (DCC), and it also sells software.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "The primary sources of revenues generated by our ATM network are recurring monthly management fees, transaction-based fees, surcharges, and margins earned on DCC transactions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K",
-    "claim": "Segment revenue growth depends on ATM count and higher-value cross-border transactions, not on raw transaction volume. The 10-K for 2025 shows transactions of 15,534 million versus 11,424 million, but revenue per transaction fell from $0.10 to $0.08 as low-value digital transactions grew.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "The decrease in revenue per transaction is due to an increase in processing digital transactions with a high volume and a low value per transaction."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the earnings release",
-    "claim": "Payments Infrastructure revenue grew in the latest quarter on merchant acquiring, Ren software sales and the CoreCard acquisition. Weaker international travel spending, which lowers ATM cash withdrawals, partly offset this.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Constant currency revenue growth was driven by continued growth in merchant acquiring, Ren sales, and the fourth quarter 2025 acquisition of CoreCard, partially offset by continued economic pressures on discretionary travel spend which negatively affects international ATM cash withdrawals."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "epay earns commissions and processing fees from mobile operators and from distributing digital content, vouchers and gifts through retail point-of-sale terminals. Digital media content is now about 77% of epay revenues, up from about 73% in the 10-K.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "are primarily derived from commissions or processing fees received from mobile phone operators for the processing and distribution of prepaid mobile airtime and commissions earned from the distribution of other electronic content, vouchers, and physical gifts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K segment discussion",
-    "claim": "epay is a thin-margin, volume business. Its cost of revenue is mainly commissions paid to retailers, which were $891.8 million against revenues of $1,187.6 million in the 10-K year.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Direct operating costs primarily consist of the commissions paid to retail merchants for the distribution and sale of prepaid mobile airtime and other prepaid products"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K",
-    "claim": "Cross-Border Payments (formerly Money Transfer) earns transaction fees plus the spread between wholesale and retail foreign-exchange rates. Agent and correspondent commissions are its main direct cost.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "are primarily derived from transaction fees, as well as the margin earned from purchasing foreign currency at wholesale exchange rates and selling the foreign currency to customers at retail exchange rates.",
-     "Sending and correspondent agents each earn fees for cash collection and distribution services, which are recognized as direct operating costs at the time of sale."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release and the 10-Q MD&A",
-    "claim": "Cross-Border Payments is the segment currently under pressure. Its revenue fell 5% in the latest quarter to $431.0 million from $452.4 million, and operating income fell to $37.3 million from $59.3 million. Management cites U.S. immigration policy and global economic conditions.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Our third-quarter results reflect the continued impact of U.S. immigration policy and global economic pressures on the Cross Border Payments segment, which has persisted longer than we anticipated"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement; the description of direct-cost contents is from the 10-K segment discussion (P3)",
-    "claim": "Direct operating costs are the largest cost line, followed by salaries and benefits. For the nine months, direct operating costs were 1,914.0 and salaries and benefits were 577.2 against revenues of 3,281.3 (table in millions), leaving operating income of 380.7 (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet and the 10-K; the link to borrowings is inferred from the debt balances and the 10-K risk discussion of funding ATM cash",
-    "claim": "Euronet funds much of the cash in its own ATM network, so the model is capital-intensive. ATM cash was 912.7 at September 30, 2026 versus 650.3 at December 31, 2025 (table in millions). It uses borrowings that carry interest expense.",
-    "facts": [
-     "F1",
-     "P1"
-    ],
-    "quotes": [
-     "The financial institution provides the cash needed to complete transactions on the ATM, but we provide a significant portion of the cash to our IAD network to fund ATM transactions ourselves."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Results are sensitive to currency moves because about 77% of revenues are in currencies other than the U.S. dollar. In the latest quarter revenue rose 1% as reported and 3% in constant currency.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "With approximately 77% of our revenues denominated in currencies other than the U.S. dollar, any significant changes in foreign currency exchange rates will likely have a significant impact on our results of operations"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release",
-    "claim": "Management points to digital growth as its offset to the retail remittance weakness. Digital transactions in Cross-Border Payments rose 34% in the latest quarter. The company revised its outlook to about $4.375 billion of revenue and about $725 million of Adjusted EBITDA.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Digital transactions within the Cross-Border Payments segment increased 34% in the third quarter of 2026 compared to the prior year period."
-    ],
-    "support": "supported"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in the cited 10-K Item 1 text",
-    "claim": "Euronet is diversified across three segments. In 2025 Money Transfer was approximately 42% of consolidated revenues, EFT Processing approximately 30% and epay approximately 28%.",
+    "basis": "Stated in the 10-K Item 1 segment descriptions.",
+    "claim": "The company reports three segments. In 2025 the EFT segment was about 30% of consolidated revenues, epay about 28% and Money Transfer about 42%.",
     "facts": [
      "P1"
     ],
@@ -672,81 +677,279 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from segment-share statements in the 10-K and the 10-Q",
-    "claim": "The revenue mix shifted in 2026 toward Payments Infrastructure (the renamed EFT segment) and away from Cross-Border Payments (the renamed Money Transfer segment). Payments Infrastructure was approximately 38% of Q3 2026 revenues and 34% of nine-month revenues; Cross-Border Payments was approximately 37% and 39%.",
+    "basis": "Stated in the 10-Q MD&A overview.",
+    "claim": "In May 2026 the EFT Processing segment was renamed Payments Infrastructure and the Money Transfer segment was renamed Cross-Border Payments. The names changed but the segment composition did not. By revenue share, Payments Infrastructure was about 38% of revenues for the three months and 34% for the nine months ended September 30, 2026. epay was about 25% and 27%, and Cross-Border Payments about 37% and 39%.",
     "facts": [
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "which represented approximately 38% and 34% of total consolidated revenues for the three and nine months ended September 30, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release and the 10-Q MD&A",
-    "claim": "Euronet has a large physical network. As of September 30, 2026 it had 58,420 active ATMs, up 4% from 56,431 a year earlier. The Payments Infrastructure segment also had approximately 685,000 POS terminals.",
-    "facts": [
-     "P6",
      "P4"
     ],
     "quotes": [
-     "Total of 58,420 active ATMs as of September 30, 2026, a 4% increase from 56,431 as of September 30, 2025."
+     "In May 2026, the Company changed the name of the EFT Processing Segment to Payments Infrastructure and the name of the Money Transfer Segment to Cross-Border Payments in order to more accurately reflect the products and services provided by these segments."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release",
-    "claim": "Payments Infrastructure revenue grew in Q3 2026 to $437.9 million, up 7% from $409.4 million. Management attributes this to merchant acquiring, Ren sales and the CoreCard acquisition.",
+    "basis": "Stated in the 10-K Item 1 EFT segment description.",
+    "claim": "Payments Infrastructure (formerly EFT) earns recurring management fees, transaction-based fees, surcharges and dynamic currency conversion (DCC) margins from its ATM and POS network and from outsourced management contracts for banks.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The Payments Infrastructure segment benefitted from the acquisition of CoreCard, together with growth in merchant acquiring and Ren sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K MD&A and Item 1",
-    "claim": "Transaction volume in EFT Processing grew much faster than revenue, because the added volume is low-value digital payments. Revenue per transaction fell to $0.08 in 2025 from $0.10 in 2024.",
-    "facts": [
-     "P3",
      "P1"
     ],
     "quotes": [
+     "The primary sources of revenues generated by our ATM network are recurring monthly management fees, transaction-based fees, surcharges, and margins earned on DCC transactions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1 and MD&A.",
+    "claim": "Transactions on the Payments Infrastructure network grew 36.0% in 2025, but revenue per transaction fell from $0.10 to $0.08. The 10-K attributes this to high-volume, low-value digital transactions, so revenue does not rise in step with transaction counts.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "As a result, our revenue growth will not correlate proportionately with the increase in our transaction volume growth.",
      "The decrease in revenue per transaction is due to an increase in processing digital transactions with a high volume and a low value per transaction."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated by the company in its earnings release",
-    "claim": "Digital growth initiatives are a stated competitive strength. Management reports the digital accelerators grew 33% year to date and were 26% of year-to-date revenues. Cross-Border Payments digital transactions rose 34% in Q3 2026.",
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Payments Infrastructure revenue was $437.9 million in Q3 2026, up 7%. Management ties the constant-currency growth to merchant acquiring, Ren sales and the CoreCard acquisition, partly offset by weaker discretionary travel spend that reduces international ATM cash withdrawals.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Year-to-date, these accelerators have grown 33%, reflecting the benefit of our continued investment in these strategic initiatives.",
-     "Digital transactions within the Cross-Border Payments segment increased 34% in the third quarter of 2026 compared to the prior year period."
+     "Constant currency revenue growth was driven by continued growth in merchant acquiring, Ren sales, and the fourth quarter 2025 acquisition of CoreCard, partially offset by continued economic pressures on discretionary travel spend which negatively affects international ATM cash withdrawals."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release and 10-Q, consistent with the 10-K risk factor on immigration policy",
-    "claim": "The main named threat is pressure on Cross-Border Payments from U.S. immigration policy and the U.S. remittance tax. Q3 2026 segment revenue was $431.0 million, down 5% from $452.4 million. Operating income was $37.3 million, down 37% from $59.3 million.",
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "The epay segment earns commissions or processing fees from mobile operators for prepaid airtime, and commissions from distributing other digital content, vouchers and physical gifts. Digital media content is about 77% of epay revenues.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "primarily derived from commissions or processing fees received from mobile phone operators for the processing and distribution of prepaid mobile airtime and commissions earned from the distribution of other electronic content, vouchers, and physical gifts"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A epay discussion.",
+    "claim": "epay is a lower-margin distribution business. Its direct operating costs are mainly commissions paid to retail merchants, POS terminal operating costs and the cost of vouchers sold. In 2025 these costs were $891.8 million and the gross margin was 24.9%.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Direct operating costs primarily consist of the commissions paid to retail merchants for the distribution and sale of prepaid mobile airtime and other prepaid products, expenses incurred to operate POS terminals and the cost of vouchers sold and physical gifts fulfilled."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A.",
+    "claim": "Cross-Border Payments (formerly Money Transfer, sold under Ria, Xe and Dandelion) earns transaction fees plus the margin between wholesale and retail foreign currency rates. Its main cost is commissions to sending and correspondent agents, booked in direct operating costs.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "primarily derived from transaction fees, as well as the margin earned from purchasing foreign currency at wholesale exchange rates and selling the foreign currency to customers at retail exchange rates",
+     "Sending and correspondent agents each earn fees for cash collection and distribution services, which are recognized as direct operating costs at the time of sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release and 10-K risk factors.",
+    "claim": "Cross-Border Payments is under pressure. Q3 2026 revenue was $431.0 million, down 5%, and operating income was $37.3 million, down 37%. Management cites U.S. immigration policy and global economic uncertainty. The 10-K explains that the business depends on remittances from migrant workers.",
     "facts": [
      "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Constant currency revenue was impacted by continued pressure from U.S. immigration policy and broader global economic uncertainty, partially offset by continued strength in the digital business, with digital transactions growing 34% and continued momentum in our Dandelion cross-border payments platform.",
+     "Our money transfer business depends heavily on remittances sent by workers who migrate to foreign countries for employment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A summary.",
+    "claim": "Consolidated revenue growth in 2025 was driven mainly by transaction volumes across all three segments. Revenue rose 6.4% in 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The increase in revenues for 2025 was primarily due to the increases in transaction volumes across all three segments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q and the earnings release.",
+    "claim": "Foreign exchange moves both reported revenue and costs because about 77% of revenue is in non-U.S.-dollar currencies. In Q3 2026 revenue rose 1% as reported ($1,161.1 million versus $1,145.7 million) and 3% in constant currency.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "With approximately 77% of our revenues denominated in currencies other than the U.S. dollar, any significant changes in foreign currency exchange rates will likely have a significant impact on our results of operations",
+     "Revenues of $1,161.1 million, a 1% increase from $1,145.7 million (3% increase on a constant currency1 basis)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement. The cost mechanism is inferred from the 10-K cost descriptions.",
+    "claim": "Direct operating costs are the largest cost line. In Q3 2026 they were 657.0 against revenues of 1,161.1, with salaries and benefits of 194.0, SG&A of 99.0 and depreciation and amortization of 39.5 (table in millions). Operating income fell to 171.6 from 195.0 as total operating expenses rose to 989.5 from 950.7.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A segment table. The comparison with revenue shares draws on P1 and is inferred.",
+    "claim": "In 2025 the segments differed in profit contribution. Operating income was 278.8 for EFT Processing, 136.2 for epay and 207.2 for Money Transfer, with corporate costs of (92.4) (table in millions). EFT contributed the most operating income although Money Transfer had the largest revenue share.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and 10-Q balance sheet. The financing link is inferred from the Q3 release, which says debt fell on the seasonal return of ATM cash.",
+    "claim": "The ATM business is balance-sheet intensive. Euronet funds a significant part of the cash in its own ATM network, and ATM cash on the balance sheet was 912.7 at September 30, 2026 against 650.3 at December 31, 2025 (table in millions).",
+    "facts": [
+     "P1",
+     "F1"
+    ],
+    "quotes": [
+     "The financial institution provides the cash needed to complete transactions on the ATM, but we provide a significant portion of the cash to our IAD network to fund ATM transactions ourselves."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Management points to digital accelerators as the growth engine. Their revenue grew 33% in the nine months to September 30, 2026 and was 26% of year-to-date revenues. They include Ria digital, merchant acquiring and the Ren product suite.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "increased 33% for the nine months ended September 30, 2026 and represented 26% of year-to-date revenues"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 earnings release.",
+    "claim": "Acquisitions add to depreciation and amortization. The CoreCard acquisition added $4.7 million of incremental non-cash purchase price amortization to Q3 2026 adjusted operating income.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted operating income includes a $4.7 million increase in non-cash purchase price amortization related to the CoreCard acquisition."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the cited items. 'Leader' is the company's own description, not independent evidence of rank.",
+    "claim": "Euronet presents itself as a global payments network spread over three segments. In the latest 10-K, Money Transfer was about 42% of revenues, EFT about 30% and epay about 28%, so no single segment dominates.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Euronet is a leader in electronic payment and transaction processing solutions for Financial Institutions, Retailers, Service Providers, and Individual Consumers utilizing our global payments network, platforms, and technologies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. Relative size against competitors is not given.",
+    "claim": "The Payments Infrastructure segment has physical scale: 58,420 active ATMs and approximately 685,000 POS terminals. Active ATMs were up 4% from 56,431 a year earlier.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Transactions processed span a network of 58,420 active ATMs and approximately 685,000 POS terminals.",
+     "Total of 58,420 active ATMs as of September 30, 2026, a 4% increase from 56,431 as of September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item.",
+    "claim": "Payments Infrastructure is the strongest segment in the latest quarter. Revenues were $437.9 million, up 7% from $409.4 million, driven by merchant acquiring, Ren sales and the CoreCard acquisition.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenues of $437.9 million, a 7% increase from $409.4 million (9% increase on a constant currency basis).",
+     "Constant currency revenue growth was driven by continued growth in merchant acquiring, Ren sales, and the fourth quarter 2025 acquisition of CoreCard"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items.",
+    "claim": "In EFT processing the company's own filing shows a mix shift toward high-volume, low-value digital transactions. Revenue per transaction was $0.08 against $0.10 the year before, so revenue growth does not track volume growth.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Revenue per transaction was $0.08 and $0.10 for the year ended December 31, 2025 and 2024, respectively.",
+     "The decrease in revenue per transaction is due to an increase in processing digital transactions with a high volume and a low value per transaction."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items.",
+    "claim": "The epay segment is growing modestly. Quarterly revenues were $294.7 million, up 3% from $286.5 million. Digital media content produces approximately 77% of segment revenues.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Revenues of $294.7 million, a 3% increase from $286.5 million (5% increase on a constant currency basis).",
+     "digital media content now produces approximately 77% of epay Segment revenues"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited item.",
+    "claim": "Cross-Border Payments is the main current threat to results. Quarterly revenues fell 5% to $431.0 million from $452.4 million, and operating income fell 37% to $37.3 million from $59.3 million. Management attributes this to U.S. immigration policy and global economic uncertainty.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Constant currency revenue was impacted by continued pressure from U.S. immigration policy and broader global economic uncertainty",
+     "Operating income of $37.3 million, a 37% decrease from $59.3 million (35% decrease on a constant currency basis)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items.",
+    "claim": "The 10-Q names a U.S. remittance tax and immigration-policy changes as reducing U.S. outbound remittance volumes in certain corridors. The 10-K risk factors already flagged immigration enforcement as a risk to in-person remittance transactions.",
+    "facts": [
      "P4",
      "P2"
     ],
     "quotes": [
      "More recently, the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax, which have affected certain remittance corridors.",
-     "Our third-quarter results reflect the continued impact of U.S. immigration policy and global economic pressures on the Cross Border Payments segment, which has persisted longer than we anticipated"
+     "Changes in immigration policies and enforcement practices may adversely affect our money transfer business."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the earnings release and income statement",
-    "claim": "Consolidated profitability weakened in 2026 even though revenue edged up. Q3 revenues were $1,161.1 million versus $1,145.7 million, while operating income fell to $171.6 million from $195.0 million.",
+    "basis": "Stated in the cited item. The size comparison is inferred from the two printed transaction counts.",
+    "claim": "Digital is the company's answer in Cross-Border Payments. Digital transactions were 8.1 million, up 34% from 6.1 million, and the Dandelion platform is cited as showing momentum. The digital base is small next to total segment transactions of 45.3 million.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Total digital transactions of 8.1 million, a 34% increase from 6.1 million.",
+     "Total transactions of 45.3 million, a 2% decrease from 46.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. The cost-line comparison is inferred from the income statement.",
+    "claim": "Consolidated profitability weakened while revenue held up. Quarterly revenues were $1,161.1 million, up 1%, but operating income was $171.6 million, down 12% from $195.0 million.",
     "facts": [
      "P6",
      "F2"
@@ -757,149 +960,145 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from comparing line items in the 10-Q income statement",
-    "claim": "Over nine months of 2026 operating costs grew faster than revenue. Revenues were 3,281.3 versus 3,135.5, salaries and benefits 577.2 versus 525.0, and SG&A 290.0 versus 255.4. Operating income was 380.7 versus 428.8 (table in millions).",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release",
-    "claim": "Management cut its 2026 outlook from the targets given at its Investor Day in May. It now expects approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%.",
+    "basis": "Stated in the cited item.",
+    "claim": "Management cut its 2026 outlook. It now expects approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%. The CEO called the results below expectations and said the pressure persisted longer than anticipated.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
+     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%.",
+     "While these results are below our expectations and our historical performance, we continued to see growth in the digital accelerators we introduced during our Investor Day in May."
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in the release and 10-Q",
-    "claim": "epay is a steady but thin-margin position. Q3 2026 revenue was $294.7 million, up 3% from $286.5 million, on 736,000 POS terminals. Digital media content is about 77% of epay revenue.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Constant currency revenue and operating income each increased 5% and adjusted EBITDA increased 6% as a result of continued demand for higher-value digital content, merchant acquiring and promotional campaigns."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "epay depends on short-term, non-exclusive contracts that content providers can reprice, which is a named threat to the segment.",
+    "basis": "Stated in the cited item as risk factors. How much any of them has affected results is not shown.",
+    "claim": "Several structural dependencies are named as threats. epay contracts with content providers typically run under three years and are non-exclusive. ATM operations depend on sponsor banks, cash providers and card networks, and face competitive pressure on ATM transaction fees.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "In addition, our contracts generally permit content providers to reduce our margin or commission at any time."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "The EFT Processing business depends on agreements with banks and card organizations that are not obligated to renew, and it faces competitive pressure on ATM transaction fees.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "These agreements have expiration dates, and banks and international card organizations are generally not obligated to renew them.",
+     "Our contracts with content providers to distribute and process content, including prepaid mobile airtime top-up services, typically have terms of less than three years.",
      "We are subject to competitive pressures on ATM transaction fees, including potential reductions in interchange fees set by card networks and declining fees charged to customers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A and the earnings release",
-    "claim": "Currency exposure is large: about 77% of revenues are in non-U.S.-dollar currencies, so exchange-rate moves affect reported results.",
+    "basis": "Stated in the cited items.",
+    "claim": "The company is exposed to currency swings and carries meaningful debt. About 77% of revenues are in non-U.S.-dollar currencies. Total indebtedness was $2,177.3 million, down from $2,654.0 million at the prior quarter-end, with about $1.1 billion available under revolving credit facilities.",
     "facts": [
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
-     "With approximately 77% of our revenues denominated in currencies other than the U.S. dollar, any significant changes in foreign currency exchange rates will likely have a significant impact on our results of operations"
+     "any significant changes in foreign currency exchange rates will likely have a significant impact on our results of operations",
+     "Total indebtedness was $2,177.3 million, down from $2,654.0 million at June 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the balance sheet, cash flow statement and 10-K risk factor; the link to competitive position is inferred",
-    "claim": "Financing is a constraint on flexibility. Debt obligations net of current portion rose to 1,706.2 from 1,037.6, short-term debt and current maturities fell to 470.5 from 983.2, and nine-month operating cash flow was 252.1 versus 381.9 (table in millions).",
+    "basis": "Stated in the cited item. Any competitive benefit is not shown.",
+    "claim": "The company is pursuing partnerships and product launches to strengthen its ATM and merchant offering. It signed a letter of intent to collaborate globally with Diebold Nixdorf and unveiled OLON, a unified commerce ecosystem.",
     "facts": [
-     "F1",
-     "F3",
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "Restrictive covenants in our credit facilities may adversely affect us."
+     "Signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks"
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet; the point about ATM cash being operationally committed is inferred from the 10-K business description.",
-    "claim": "Unrestricted cash and cash equivalents were 955.4 (table in millions) at the latest quarter-end, down from 1,040.3 at the prior year-end. Cash held in ATMs rose to 912.7 from 650.3.",
+    "basis": "Stated in the 10-Q balance sheet; the point about the composition of current assets is inferred from the line items.",
+    "claim": "Reported cash and cash equivalents were 955.4 at the latest balance sheet date, down from 1,040.3 at the prior year-end (table in millions). Total current assets were 3,962.4 against total current liabilities of 2,792.8.",
     "facts": [
      "F1"
     ],
-    "quotes": [
-     "Cash and cash equivalents"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the balance sheet; the offsetting reading of the settlement lines is inferred from their equal amounts.",
-    "claim": "Current assets of 3,962.4 exceed current liabilities of 2,792.8 (table in millions). Settlement assets and settlement obligations are identical at 1,385.1 and offset each other.",
+    "basis": "Cash totals and ATM cash are stated in the release and balance sheet; the characterisation of ATM cash as not freely available is inferred.",
+    "claim": "Total cash including ATM cash, unrestricted cash and restricted cash was 1,887.9 at the latest quarter-end, versus 2,220.7 one quarter earlier (release, in millions). ATM cash on the balance sheet was 912.7 versus 650.3 at the prior year-end. The company says it provides a significant part of ATM cash itself, and its funders are third-party financial institutions.",
     "facts": [
+     "P6",
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "We rely on third-party financial institutions to provide a significant portion of the cash required to operate our ATM networks."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the release and 10-Q balance sheet; the comparison with equity is inferred.",
+    "claim": "Total indebtedness was 2,177.3, down from 2,654.0 one quarter earlier (release, in millions). The balance sheet shows 470.5 of short-term debt and current maturities and 1,706.2 of non-current debt, against total equity of 1,300.3 and total liabilities of 4,753.8.",
+    "facts": [
+     "P6",
      "F1"
     ],
     "quotes": [
-     "Total current assets"
+     "Total indebtedness was $2,177.3 million, down from $2,654.0 million at June 30, 2026."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in the balance sheet; the leverage reading is inferred from the balance sheet lines.",
-    "claim": "Total liabilities were 4,753.8 against total equity of 1,300.3 (table in millions). At the prior year-end they were 5,166.2 and 1,322.5. Debt net of current portion rose to 1,706.2 from 1,037.6.",
+    "basis": "Stated in the earnings release.",
+    "claim": "The decline in debt during the quarter was 476.7 (release, in millions). The company attributes it to the seasonal return of ATM cash and to operating cash, partly offset by 50 million of share repurchases. It states a commitment to reduce debt to maintain an investment-grade rating.",
     "facts": [
-     "F1"
+     "P6"
     ],
     "quotes": [
-     "Debt obligations, net of current portion"
+     "Total indebtedness decreased by $476.7 million during the quarter, reflecting the seasonal return of ATM cash following the peak European travel season and cash generated from operations, partially offset by $50 million of share repurchases.",
+     "The Company remains committed to reducing its debt balances in order to maintain its investment-grade credit rating."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in the income statement; the coverage comparison is inferred from two statement lines.",
-    "claim": "Debt service is covered by operating profit at the latest quarter. Quarterly operating income was 171.6 against interest expense of 21.7, and nine-month interest expense fell to 56.4 from 70.1 (table in millions). Quarterly operating income was down from 195.0 a year earlier.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Interest expense"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance sheet and cash flow figures are stated; the link between the convertible issue and the shift in maturities is inferred from timing and size.",
-    "claim": "Current debt fell to 470.5 from 983.2 (table in millions) over the nine months, while non-current debt rose to 1,706.2 from 1,037.6. The shift suggests part of the near-term maturity stack was refinanced into longer-dated debt.",
+    "basis": "Balance sheet figures are stated; the refinancing interpretation is inferred.",
+    "claim": "Debt has shifted from current to non-current. Short-term debt and current maturities fell to 470.5 from 983.2 at the prior year-end, while non-current debt rose to 1,706.2 from 1,037.6 (table in millions). The cash flow statement shows convertible note proceeds of 1,000.0 and repayment of long-term debt of 700.4.",
     "facts": [
      "F1",
      "F3"
     ],
-    "quotes": [
-     "Short-term debt obligations and current maturities of long-term debt obligations"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Cash flow and balance sheet figures and the covenant text are stated; that the revolver is a refinancing route is inferred.",
-    "claim": "Debt falling due can be met from cash of 955.4, operating cash flow of 252.1 and revolving borrowings. Borrowings under credit agreements were 7,007.5 and repayments 6,322.7 over the nine months (table in millions). The credit facility carries leverage and interest coverage covenants.",
+    "basis": "Stated in the 10-Q cash flow statement; the interpretation is inferred.",
+    "claim": "Nine-month operating cash flow was 252.1 versus 381.9 a year earlier, while net income was 228.7 versus 261.2 (table in millions). Purchases of property and equipment were 91.3 versus 93.9.",
     "facts": [
-     "F1",
-     "F3",
-     "P2"
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are stated; the quality assessment is inferred.",
+    "claim": "The quality of operating cash flow depends on non-cash add-backs and settlement timing. Add-backs include depreciation and amortization of 119.4 and share-based compensation of 47.2 (table in millions). Working-capital lines swing widely: trade receivables including settlement assets contributed 275.4 and trade payables including settlement obligations used (361.4).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the release and income statement; the debt-service implication is inferred.",
+    "claim": "Earnings that service debt softened. Third-quarter operating income was 171.6 versus 195.0 and adjusted EBITDA was 226.1 versus 244.6 (millions). Nine-month interest expense fell to 56.4 from 70.1, and the company cut its full-year adjusted EBITDA outlook to approximately $725 million.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Covenant types are stated in the 10-K; no covenant calculation is available, so any pressure is inferred.",
+    "claim": "The credit facility carries two financial covenants, on leverage and interest coverage. Current covenant ratios and headroom are not in the evidence, and the company says no material risk-factor changes occurred since the annual report.",
+    "facts": [
+     "P2",
+     "P5"
     ],
     "quotes": [
      "Our Credit Facility (as defined below) contains two financial covenants that we must meet as defined in the agreement: (1) Consolidated Total Leverage Ratio, and (2) Consolidated Interest Coverage Ratio."
@@ -907,437 +1106,56 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement.",
-    "claim": "Operating cash flow for the nine months was 252.1, down from 381.9 a year earlier (table in millions). Purchases of property and equipment were 91.3 against 93.9.",
+    "basis": "Inferred from stated balances and availability; no maturity schedule is provided.",
+    "claim": "Near-term debt of 470.5 can be met from several sources. Cash and cash equivalents were 955.4 (table in millions), and revolving credit availability was approximately $1.1 billion. Operating cash flow was 252.1 over nine months.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Line items are stated; the reading on quality is inferred from the size of the add-backs and working capital lines.",
-    "claim": "Cash generation relies on non-cash add-backs and large working capital swings. Net income was 228.7, and depreciation and amortization of 119.4 and share-based compensation of 47.2 were added back. Trade payables including settlement obligations used 361.4, partly offset by 275.4 from receivables (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Share-based compensation"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cash flow statement and the earnings release.",
-    "claim": "Discretionary use of cash includes share repurchases of 200.0 over the nine months versus 441.9 a year earlier (table in millions). The company repurchased $50 million of stock in the latest quarter. Net cash used in financing was 25.6.",
-    "facts": [
+     "F1",
      "F3",
      "P6"
     ],
     "quotes": [
-     "Repurchased $50 million of common stock"
+     "Availability under the Company's revolving credit facilities was approximately $1.1 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release.",
-    "claim": "Earnings power is under pressure. Adjusted EBITDA for the quarter was 226.1 against 244.6 a year earlier, and management revised its 2026 outlook to approximately $725 million of Adjusted EBITDA. The release attributes the pressure to immigration policy effects on the Cross-Border Payments segment.",
+    "basis": "Stated in the cash flow statement and release.",
+    "claim": "Cash returned to shareholders competes with debt reduction. Share repurchases were 200.0 over nine months versus 441.9 a year earlier (table in millions), and 50 million was repurchased in the third quarter.",
     "facts": [
+     "F3",
      "P6"
     ],
+    "quotes": [],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Risk factor stated in the 10-K, which the 10-Q says has no material changes; interest paid is stated in the cash flow statement.",
+    "claim": "Part of the debt carries variable interest rates, which exposes debt service to rate changes. Nine-month interest paid was 53.0 versus 53.7 (table in millions).",
+    "facts": [
+     "P2",
+     "F3"
+    ],
     "quotes": [
-     "have caused us to revise our 2026 outlook from the targets provided during our Investor Day in May."
+     "because a portion of our debt bears interest at a variable rate of interest, our actual debt service obligations could increase as a result of adverse changes in interest rates"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in the cited item",
-    "claim": "Payments Infrastructure is the segment growing fastest in the third quarter: revenue was $437.9 million against $409.4 million a year earlier, led by merchant acquiring, Ren sales and the CoreCard acquisition. For this to continue, merchant acquiring and Ren sales must keep growing and travel-related ATM withdrawals must stop weighing on results.",
+    "basis": "Growth rate and revenue share stated in the earnings release; the sustainability condition is inferred.",
+    "claim": "The digital accelerators introduced at the May Investor Day (Ria digital, merchant acquiring, Ren) are the main growth driver management points to: their revenue rose 33% over nine months and was 26% of year-to-date revenues. For this to continue, they must keep growing fast enough to offset the pressured retail businesses.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Constant currency revenue growth was driven by continued growth in merchant acquiring, Ren sales, and the fourth quarter 2025 acquisition of CoreCard, partially offset by continued economic pressures on discretionary travel spend which negatively affects international ATM cash withdrawals."
+     "Revenue from the digital accelerators introduced at the Company\u2019s Investor Day(*) increased 33% for the nine months ended September 30, 2026 and represented 26% of year-to-date revenues"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the items for the acquisition and amortization; the fading of the contribution is inferred from the closing date",
-    "claim": "The CoreCard acquisition adds revenue to Payments Infrastructure but also adds non-cash purchase price amortization of $4.7 million. For the revenue to keep contributing, CoreCard must be integrated successfully. The acquisition closed on October 30, 2025, so its contribution to year-over-year growth would be expected to fade once the anniversary passes. That last point is inferred from the closing date.",
-    "facts": [
-     "P1",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "On October 30, 2025, the Company completed the acquisition of 100% of the outstanding equity of CoreCard Corporation.",
-     "Adjusted operating income includes a $4.7 million increase in non-cash purchase price amortization related to the CoreCard acquisition."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the link between ATM count and cash needs is inferred",
-    "claim": "The ATM footprint is expanding: active ATMs were 58,420, a 4% increase from 56,431 a year earlier. Continued growth needs ATM cash funding, and ATM cash on the balance sheet rose to 912.7 (table in millions) from 650.3. The company says it relies on third-party financial institutions for a significant portion of ATM cash.",
-    "facts": [
-     "P6",
-     "F1",
-     "P2"
-    ],
-    "quotes": [
-     "Total of 58,420 active ATMs as of September 30, 2026, a 4% increase from 56,431 as of September 30, 2025.",
-     "We rely on third-party financial institutions to provide a significant portion of the cash required to operate our ATM networks."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Processing volume is a long-running driver, but it converts to revenue weakly. EFT transactions reached 15,534 (table in millions) in the last fiscal year from 11,424, yet revenue per transaction fell to $0.08 from $0.10. For volume to keep lifting profit, the mix of low-value digital transactions must not dilute margins further.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "As a result, our revenue growth will not correlate proportionately with the increase in our transaction volume growth."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Management points to the digital accelerators from its Investor Day, namely Ria digital, merchant acquiring and the Ren product suite, as the growth engine. Their revenue rose 33% over nine months and was 26% of year-to-date revenue. This needs continued investment and sustained customer adoption.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Year-to-date, these accelerators have grown 33%, reflecting the benefit of our continued investment in these strategic initiatives."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Digital cross-border transactions are growing quickly: 8.1 million, a 34% increase from 6.1 million, supported by the Dandelion platform. For this to offset retail weakness, digital volume must grow faster than retail declines.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Total digital transactions of 8.1 million, a 34% increase from 6.1 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Cross-Border Payments is the main condition on growth. The segment was approximately 42% of last fiscal year's revenue, and its third-quarter revenue fell 5% to $431.0 million from $452.4 million. Group growth resuming depends on US immigration-related pressure and the remittance tax easing, or on digital growth outrunning them.",
-    "facts": [
-     "P1",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "More recently, the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax, which have affected certain remittance corridors.",
-     "Constant currency revenue was impacted by continued pressure from U.S. immigration policy and broader global economic uncertainty, partially offset by continued strength in the digital business, with digital transactions growing 34% and continued momentum in our Dandelion cross-border payments platform."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "epay is a steady contributor: third-quarter revenue was $294.7 million against $286.5 million, on demand for higher-value digital content and promotions. Digital media content produces approximately 77% of epay revenue. Continued growth needs contracts with content providers and retailers to renew on acceptable terms.",
-    "facts": [
-     "P6",
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "Constant currency revenue and operating income each increased 5% and adjusted EBITDA increased 6% as a result of continued demand for higher-value digital content, merchant acquiring and promotional campaigns.",
-     "In addition, our contracts generally permit content providers to reduce our margin or commission at any time."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items for the share counts and repurchase; the effect on per-share results is inferred",
-    "claim": "Share repurchases support per-share results. The quarter's basic weighted shares fell to 37,289,653 from 40,331,347, and the company bought back $50 million of stock in the quarter. Continuing this requires cash and debt capacity.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "Repurchased $50 million of common stock, representing approximately690,000 shares, during the quarter, reflecting disciplined capital allocation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement; the link to capacity for capital return is inferred",
-    "claim": "Funding for buybacks and investment depends on cash generation, which has weakened: nine-month net cash provided by operating activities was 252.1 (table in millions) against 381.9, while share repurchases were 200.0 against 441.9. Proceeds from convertible notes of 1,000.0 and borrowings also appear in financing.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the statements; the explanation is partly inferred from the segment commentary",
-    "claim": "Revenue growth is currently not converting into profit growth. Third-quarter revenues were 1,161.1 (table in millions) against 1,145.7, while operating income fell to 171.6 from 195.0 and selling, general and administrative expense rose to 99.0 from 84.6. Growth needs costs to be contained as revenue rises.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "Adjusted EBITDA and operating income were impacted by continued cost inflation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Management lowered its full-year outlook to approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%. This implies that growth is expected to continue but at a lower level than the targets set in May. It rests on Cross-Border Payments pressure and currency rates not worsening.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item (8-K earnings release, Outlook section and CEO statement)",
-    "claim": "Euronet revised its 2026 outlook downward from the targets given at its May Investor Day. It cited Cross-Border Payments pressure from U.S. immigration policy, broader economic pressures and FX changes. The new targets are about $4.375 billion of revenue, about $725 million of Adjusted EBITDA and about 10% adjusted EPS growth.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "inferred from the placement of the line in the cash flow statement and the balance sheet debt changes; the item gives no date",
-    "claim": "The 9-month 2026 cash flow statement shows $1,000.0 million of proceeds from convertible notes, with a capped call and debt issuance costs also shown. Noncurrent debt rose and short-term debt fell over the same period.",
-    "facts": [
-     "F3",
-     "F1"
-    ],
-    "quotes": [
-     "Proceeds from convertible notes | 1,000.0"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item (8-K earnings release highlights)",
-    "claim": "Euronet repurchased $50 million of common stock, about 690,000 shares, during the third quarter of 2026.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Repurchased $50 million of common stock"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item (8-K earnings release highlights)",
-    "claim": "Euronet signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks. No definitive agreement is shown.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (10-K Recent Developments; 8-K release)",
-    "claim": "Euronet completed the acquisition of 100% of CoreCard Corporation. The third-quarter 2026 release says it lifted Payments Infrastructure revenue and added $4.7 million of incremental non-cash purchase price amortization.",
-    "facts": [
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "On October 30, 2025, the Company completed the acquisition of 100% of the outstanding equity of CoreCard Corporation."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "stated in the 8-K earnings release; the horizon is not given.",
-    "claim": "Cross-Border Payments third-quarter revenue fell 5% to $431.0 million and operating income fell 37% to $37.3 million. Management ties this to U.S. immigration policy and global economic pressure.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Our third-quarter results reflect the continued impact of U.S. immigration policy and global economic pressures on the Cross Border Payments segment, which has persisted longer than we anticipated"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the earnings release; the chance of a further cut is inferred from the excluded factors.",
-    "claim": "Management revised its 2026 outlook from the Investor Day targets to approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%. The CEO said results were below expectations, so further revisions are possible.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "The Company is revising its 2026 outlook previously provided at its Investor Day in May to approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted earnings per share growth of approximately 10% year-over-year."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement and release; the margin-compression framing is inferred from the figures.",
-    "claim": "Consolidated operating income for nine months fell to 380.7 from 428.8 (table in millions), even though revenues rose to 3,281.3 from 3,135.5. Selling, general and administrative expense and depreciation and amortization grew, and Payments Infrastructure cites cost inflation.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "Adjusted EBITDA and operating income were impacted by continued cost inflation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet, cash flow statement and risk factor; the risk reading is inferred.",
-    "claim": "Debt has shifted toward long-term (net of current portion 1,706.2 vs 1,037.6) while short-term debt obligations are 470.5 against cash and cash equivalents of 955.4 (table in millions). Operating cash flow fell to 252.1 from 381.9.",
-    "facts": [
-     "F1",
-     "F3",
-     "P2"
-    ],
-    "quotes": [
-     "We have a substantial amount of debt and other contractual commitments"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the income statement and release; the dilution reading is inferred.",
-    "claim": "The convertible notes dilute earnings per share. Third-quarter diluted EPS was $2.53 against basic EPS of $3.05, on 45,761,882 diluted shares vs 37,289,653 basic shares.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A.",
-    "claim": "The U.S. remittance tax and changes in immigration policy have lowered U.S. outbound remittance volumes in certain corridors.",
-    "facts": [
-     "P4",
-     "P5"
-    ],
-    "quotes": [
-     "More recently, the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax, which have affected certain remittance corridors."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated for the 77% share and the reported vs constant-currency gap; the effect on guidance is stated in the release.",
-    "claim": "Currency exposure is large: about 77% of revenues are in non-U.S. dollar currencies. The third-quarter revenue increase was 1% reported and 3% in constant currency, and management cites FX conversion rate changes in the outlook revision.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "With approximately 77% of our revenues denominated in currencies other than the U.S. dollar, any significant changes in foreign currency exchange rates will likely have a significant impact on our results of operations"
-    ],
-    "support": "supported"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "Stated in the Q3 release and 10-Q MD&A; the duration is not stated, so the question is inferred.",
-    "claim": "How long will U.S. immigration-policy and remittance-tax pressure keep depressing Cross-Border Payments results? Q3 segment operating income was $37.3 million against $59.3 million a year earlier, and management says the pressure has outlasted its expectations.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "which has persisted longer than we anticipated"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Outlook stated in P6; whether it is achievable cannot be settled from the evidence.",
-    "claim": "Can the revised 2026 outlook of about $4.375 billion revenue, about $725 million Adjusted EBITDA and about 10% adjusted EPS growth be met? The packet gives no segment-level Q4 assumptions and no FX rates behind the outlook, and the outlook excludes further FX or interest-rate changes.",
-    "facts": [
-     "P6",
-     "F2"
-    ],
-    "quotes": [
-     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Inferred from the cash flow statement; the 10-Q's own explanation is in omitted text.",
-    "claim": "Is the fall in nine-month operating cash flow, to 252.1 (table in millions) from 381.9 (table in millions), mainly timing in working capital and settlement balances, or does it reflect lower underlying earnings? Working-capital lines moved sharply, and net income was lower.",
-    "facts": [
-     "F3",
-     "F2"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Balance sheet, cash flow and release figures are stated; the terms and the net dilution effect are inferred and unknown.",
-    "claim": "What are the terms of the convertible notes (1,000.0 (table in millions) proceeds) and the capped call (99.8 (table in millions)), and how much dilution will they cause? Short-term debt fell to 470.5 (table in millions) while non-current debt rose to 1,706.2 (table in millions), and the adjusted EPS share count excludes 8,047,923 shares for convertible notes. Conversion price, maturity and the cap price are not in the packet.",
-    "facts": [
-     "F3",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Effect of adjusted EPS dilution of convertible notes"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the income statement; no explanation is in the cited items.",
-    "claim": "Why did the nine-month income tax expense rise to 121.4 (table in millions) on pre-tax income of 350.1 (table in millions), against 95.8 (table in millions) on 357.0 (table in millions) a year earlier? The drivers of the higher effective tax rate are not in the packet.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Partly stated in P6; the split across all cost lines is inferred and not disclosed in the packet.",
-    "claim": "How much of the rise in operating costs is CoreCard purchase amortization and one-time items, and how much is run-rate cost inflation? In Q3, SG&A was 99.0 (table in millions) against 84.6 (table in millions) and D&A was 39.5 (table in millions) against 34.8 (table in millions).",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "Adjusted EBITDA and operating income were impacted by continued cost inflation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Repurchase amounts are stated; future pace is inferred and unknown.",
-    "claim": "Will share repurchases continue at the recent pace now that guidance has been cut and debt has grown? Repurchases were 200.0 (table in millions) over nine months against 441.9 (table in millions) a year earlier, and $50 million in Q3. The remaining authorization and the intended pace are not in the packet.",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Repurchased $50 million of common stock, representing approximately690,000 shares, during the quarter, reflecting disciplined capital allocation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Existence stated in P6; everything else is unknown.",
-    "claim": "What are the terms, timing and financial effect of the planned global collaboration with Diebold Nixdorf? It is described only as a letter of intent.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Growth rates are stated; the margin comparison is inferred and not disclosed.",
-    "claim": "Can the digital accelerators, which grew 33% and were 26% of year-to-date revenue, offset the decline in Cross-Border Payments retail volumes, and what are their margins? Total Cross-Border Payments transactions still fell to 45.3 million from 46.0 million.",
+    "basis": "Figures stated in the release; the condition is inferred from the segment results.",
+    "claim": "Digital transactions in Cross-Border Payments were 8.1 million, up 34% from 6.1 million. Continuing this requires the Dandelion platform and Ria/Xe digital channels to keep adding volume while the retail corridors stay weak.",
     "facts": [
      "P6"
     ],
@@ -1347,30 +1165,295 @@
     "support": "supported"
    },
    {
-    "basis": "Inferred from balance sheet and results; no impairment disclosure is in the cited items.",
-    "claim": "Is the Cross-Border Payments goodwill at risk of impairment given the weaker results? Consolidated goodwill is 1,018.3 (table in millions) against 1,042.3 (table in millions) at year-end, and the packet gives no segment goodwill split or impairment-test conclusions.",
+    "basis": "Stated in the release; the conditions are inferred from the stated drivers and offsets.",
+    "claim": "Payments Infrastructure (formerly EFT Processing) grew revenue to $437.9 million, a 7% increase from $409.4 million, and active ATMs reached 58,420, up 4% from 56,431. Continuing this requires merchant acquiring, Ren sales and the CoreCard acquisition to keep contributing, and ATM cash withdrawals to hold up despite pressure on discretionary travel.",
     "facts": [
-     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Constant currency revenue growth was driven by continued growth in merchant acquiring, Ren sales, and the fourth quarter 2025 acquisition of CoreCard, partially offset by continued economic pressures on discretionary travel spend which negatively affects international ATM cash withdrawals."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release; the conditions are inferred from the stated reasons.",
+    "claim": "epay grew revenue to $294.7 million, a 3% increase from $286.5 million. Continuing this requires ongoing demand for higher-value digital content, merchant acquiring and promotional campaigns.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Constant currency revenue and operating income each increased 5% and adjusted EBITDA increased 6% as a result of continued demand for higher-value digital content, merchant acquiring and promotional campaigns."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and the 10-Q; the 'must be true' framing is inferred.",
+    "claim": "The condition that matters most for total growth is whether U.S.-related remittance pressure eases. Cross-Border Payments revenue was $431.0 million, a 5% decrease from $452.4 million, because of immigration policy and the remittance tax. Management says recent months show stabilizing to modestly improving trends.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Pressure persisted primarily in the U.S. market, but the last few months have shown stabilizing to modestly improving trends.",
+     "More recently, the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax, which have affected certain remittance corridors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and outlook stated in the release; the interpretation is inferred.",
+    "claim": "Consolidated growth is thin at present: third-quarter revenue was $1,161.1 million, a 1% increase, while operating income was $171.6 million, a 12% decrease. Management cut its full-year outlook to about $4.375 billion of revenue and about $725 million of Adjusted EBITDA. For growth to resume, revenue gains must outrun the cost increases.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Debt and buyback figures stated in the release; the condition is inferred.",
+    "claim": "Growth funding depends on keeping the balance sheet in order: total indebtedness was $2,177.3 million, down from $2,654.0 million at June 30, and management says it will keep reducing debt to maintain its investment-grade rating. It also repurchased $50 million of stock in the quarter. Reinvestment and buybacks must therefore fit within that debt-reduction commitment.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Company remains committed to reducing its debt balances in order to maintain its investment-grade credit rating."
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited earnings release",
+    "claim": "Euronet published a revised 2026 outlook, replacing the targets given at its May Investor Day. The new figures are about $4.375 billion of revenue, about $725 million of Adjusted EBITDA and adjusted EPS growth of about 10%. The company ties the revision to immigration-related pressure in Cross-Border Payments, broader economic pressures and FX conversion rate changes.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited 10-K and earnings release",
+    "claim": "Euronet completed the acquisition of 100% of CoreCard Corporation, an issuer processor. The company says the acquisition contributed to Payments Infrastructure revenue growth and added $4.7 million of non-cash purchase price amortization in the third quarter of 2026.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "On October 30, 2025, the Company completed the acquisition of 100% of the outstanding equity of CoreCard Corporation.",
+     "Adjusted operating income includes a $4.7 million increase in non-cash purchase price amortization related to the CoreCard acquisition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited earnings release; the signing date is not given",
+    "claim": "Euronet announced it signed a letter of intent with Diebold Nixdorf to collaborate globally on transforming ATM networks. No definitive agreement or terms appear in the evidence.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in the Q3 2026 earnings release and the 10-Q MD&A; the mechanism is partly management's own wording and partly inferred.",
+    "claim": "Cross-Border Payments (formerly Money Transfer) is weakening: Q3 2026 revenue was $431.0 million, down 5% from $452.4 million, and operating income was $37.3 million, down 37% from $59.3 million.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "which has persisted longer than we anticipated",
+     "Constant currency revenue was impacted by continued pressure from U.S. immigration policy and broader global economic uncertainty"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Outlook figures and the exclusion wording are stated in the 8-K release; the risk of a further cut is inferred.",
+    "claim": "The company has already cut its 2026 outlook to about $4.375 billion of revenue, about $725 million of Adjusted EBITDA and adjusted EPS growth of about 10%. The outlook excludes further moves in FX, interest rates and other factors, so it could be cut again.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "This outlook does not include any further changes that may develop in foreign exchange rates, interest rates or other unforeseen factors."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Debt, availability and cash flow figures are stated; covenant stress is inferred from the 10-K risk language, and no breach is reported.",
+    "claim": "Leverage is meaningful: total indebtedness was $2,177.3 million at September 30, 2026, and nine-month operating cash flow fell to 252.1 from 381.9 (table in millions) while earnings softened. Credit-facility covenants require EBITDA and leverage ratios to be met.",
+    "facts": [
+     "P6",
+     "F3",
+     "P2"
+    ],
+    "quotes": [
+     "We cannot assure you that we will have sufficient assets, liquidity or EBITDA to meet or avoid these obligations, which could have an adverse impact on our financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the 10-K risk factors.",
+    "claim": "Policy and regulation affecting remittances are a stated risk: the 10-Q ties lower U.S. outbound volumes to immigration policy and the U.S. remittance tax, and the 10-K warns that enforcement activity is keeping some customers away from agent locations.",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "More recently, the U.S. outbound remittance market has experienced lower transaction volumes due to changes in U.S. immigration policies and the implementation of the U.S. remittance tax, which have affected certain remittance corridors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the 10-Q income statement and the earnings release; the margin-compression mechanism is inferred.",
+    "claim": "Costs are growing faster than revenue. Q3 2026 revenue was 1,161.1 against 1,145.7, while total operating expenses were 989.5 against 950.7 (table in millions), and operating income fell 12%.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted EBITDA and operating income were impacted by continued cost inflation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Share counts and EPS are stated; the dilution mechanism is inferred from the convertible-note proceeds and the adjusted EPS reconciliation.",
+    "claim": "Diluted share count is rising while basic shares fall: diluted weighted shares were 45,761,882 against 44,809,457, while basic shares fell to 37,289,653 from 40,331,347. Diluted EPS was $2.53 against $2.75, so dilution from convertible notes weighs on per-share results.",
+    "facts": [
+     "F2",
+     "P6",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "The decline and management's commentary are stated in P6. Whether the stabilization lasts is not in the evidence.",
+    "claim": "Will the Cross-Border Payments decline end? Q3 revenue fell 5% and operating income fell 37%. Management says the pressure has lasted longer than it expected, yet describes recent months as stabilizing to modestly improving.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Pressure persisted primarily in the U.S. market, but the last few months have shown stabilizing to modestly improving trends."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The outlook and its exclusions are stated in P6. The Investor Day targets and the split of the cut are not in the packet.",
+    "claim": "Will the revised 2026 outlook be achieved? The outlook was cut from the Investor Day targets, and the evidence does not show how much of the cut is immigration pressure, broader economic pressure or FX conversion rates.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We now expect approximately $4.375 billion of revenue, approximately $725 million of Adjusted EBITDA and adjusted EPS growth of approximately 10%."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Inferred from the F3 line items. The liquidity discussion that would explain them is cut from P4.",
+    "claim": "Why did nine-month operating cash flow fall from the prior year? The statement shows large offsetting working-capital swings in receivables, payables and settlement items, and the evidence does not separate seasonal or settlement timing from underlying cash generation.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 252.1 | 381.9"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the F2 comparison. The cause is not stated in the evidence.",
+    "claim": "Why did nine-month income tax expense rise while pre-tax income was slightly lower? Tax expense was 121.4 against 95.8 and pre-tax income was 350.1 against 357.0 (table in millions), and the evidence does not explain the jump in the effective tax rate.",
+    "facts": [
+     "F2",
      "P6"
     ],
     "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The debt movement is stated in P6 and F1. The year-end level and refinancing plans are not in the evidence.",
+    "claim": "How much of the debt level is structural and how much is seasonal ATM cash funding? The debt fell $476.7 million in Q3 on the seasonal return of ATM cash, and the balance sheet still shows 470.5 (table in millions) of short-term debt and current maturities.",
+    "facts": [
+     "P6",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Total indebtedness decreased by $476.7 million during the quarter, reflecting the seasonal return of ATM cash following the peak European travel season and cash generated from operations, partially offset by $50 million of share repurchases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The repurchase amounts are in F3 and P6. Future capital allocation and remaining authorization are not stated.",
+    "claim": "Will buybacks continue at the slower pace? Nine-month repurchases were 200.0 against 441.9 (table in millions), $50 million was repurchased in Q3, and management says it is committed to reducing debt to keep its investment-grade rating.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "The Company remains committed to reducing its debt balances in order to maintain its investment-grade credit rating."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Transaction counts and the investment amount are stated in P6. Digital unit economics are not provided.",
+    "claim": "Will digital growth offset the retail remittance decline? Digital transactions grew 34% while total Cross-Border Payments transactions fell, and the segment is spending about $6 million more on digital initiatives. The evidence does not give the digital revenue or margin contribution.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Declines in constant currency operating income and adjusted EBITDA were principally the result of the flow through of the revenue declines to the bottom line and approximately $6 million incremental investment in digital initiatives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The amortization and the letter of intent are stated in P6. CoreCard's standalone contribution and the terms of the Diebold arrangement are not given.",
+    "claim": "How large are the benefits and costs from CoreCard, and what will come of the Diebold Nixdorf letter of intent? CoreCard added $4.7 million of incremental non-cash purchase price amortization in Q3, and the Diebold arrangement is only a letter of intent.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Signed a letter of intent to collaborate globally with Diebold Nixdorf to transform ATM networks"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The cost lines are in F2 and the commentary is in P6. The line-level breakdown is not in the evidence.",
+    "claim": "What is behind the faster growth in operating costs? Q3 selling, general and administrative expense was 99.0 against 84.6 and depreciation and amortization was 39.5 against 34.8 (table in millions), so operating income fell while revenue rose. The evidence does not separate acquisition effects, FX, investment and inflation.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted EBITDA and operating income were impacted by continued cost inflation."
+    ],
     "support": "supported"
    }
   ]
  },
  "ticker": "EEFT",
  "under_review": null,
- "upside": 1.0481976538045537,
+ "upside": 1.0407848638935562,
  "valuation": null,
- "value_base": 113.51977008048101,
- "value_bear": 90.22129057826722,
- "value_bull": 138.19130998434815,
+ "value_base": 140.9570179767294,
+ "value_bear": 111.8776433504536,
+ "value_bull": 170.01663825622535,
  "value_per_filed_share": {
-  "base": 113.51977008048101,
-  "bear": 90.22129057826722,
-  "bull": 138.19130998434815
+  "base": 140.9570179767294,
+  "bear": 111.8776433504536,
+  "bull": 170.01663825622535
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +20.1 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +29.8 points a year against the required return over 3 years"
 }
