@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T04:58:54Z",
+ "generated_at": "2026-11-27T09:10:18Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -5756,39 +5756,79 @@
    "verdict_reason": "the latest annual report's figures are not in SEC's company facts yet"
   },
   "HAS": {
-   "alpha_pts": null,
+   "alpha_pts": -4.234787633192924,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-10-29T20:06:41.000Z",
     "accepted_utc": "2026-10-30T00:06:41Z",
     "accession": "0000046080-26-000065",
-    "decision_time": "2026-11-21T11:58:33Z",
+    "decision_time": "2026-11-27T04:59:43Z",
     "form": "10-Q",
     "period": "2026-09-27"
    },
-   "claims": 95,
-   "claims_supported": 94,
-   "date": "2026-11-21T11:58:33Z",
+   "claims": 94,
+   "claims_supported": 77,
+   "date": "2026-11-27T04:59:43Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 13274810232.514013,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 140200000.0,
    "flags": [
-    "Hasbro recognized a non-cash goodwill impairment of $1,021.9 million in the Consumer Products segment in the second quarter of 2025.",
-    "Hasbro recorded a one-time $56.4 million non-cash impairment charge in the second quarter of 2026 related to its decision to refocus the Digital Games portfolio.",
-    "In late March 2026, Hasbro identified unauthorized access to its network that disrupted order processing, shipping, and invoicing in the second quarter, was later contained with systems restored for the third quarter, and resulted in approximately $11.8 million of incremental expenses during the nine months ended September 27, 2026."
+    "Hasbro recorded a one-time non-cash impairment of $56.4 million after deciding to refocus its Digital Games portfolio.",
+    "Hasbro recorded a non-cash goodwill impairment of $1,021.9 million in the Consumer Products segment, triggered by tariffs and macroeconomic headwinds. It did not recur in 2026.",
+    "Hasbro identified unauthorized access to its network. Order processing, shipping and invoicing were disrupted, which hurt net sales and operating profit in the second quarter, especially in Consumer Products. The company says systems are restored and third-quarter operations were normal."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
+   "ke": 0.10336215402215951,
+   "loss_record": {
+    "cause": "one_off_charges",
+    "explanation": "The thin profit record comes mainly from a non-recurring $1,021.9 million non-cash goodwill impairment in 2025, which turned a small operating profit into a pre-tax loss, while the 2026 filings show strong operating profit once it no longer recurs. The evidence does not explain the 2023 loss.",
+    "label": "the losses came from write-downs, restructuring or other charges that do not recur",
+    "quotes": [
+     {
+      "id": "P3",
+      "quote": "During 2025, the Company recorded a $1,021.9 million non-cash goodwill impairment charge associated with goodwill assigned to reporting units within the Company's Consumer Products segment."
+     },
+     {
+      "id": "P4",
+      "quote": "The increase in Operating profit for the nine months ended September 27, 2026 was also impacted by a one-time $1,021.9 million non-cash goodwill impairment recorded in the Consumer Products segment in the second quarter of 2025 which did not recur in 2026"
+     }
+    ],
+    "version": "why_losses.v1 2026-11-18 WO_NC5"
+   },
+   "market_cap_at_publish": 15466006272,
+   "model": "claude-sonnet-5-5",
    "news_count": 0,
-   "no_value_reason": "no positive earnings base",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 110.58,
    "qwen_book": null,
    "release_truncated": [],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
-   "source": "on request (operator)",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 100.01805548910558,
+    "3000": 89.3515626637334
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no positive earnings base"
+   "upside": -0.14167820709170253,
+   "value_base": 94.6848090764195,
+   "value_bear": 68.76213346821996,
+   "value_bull": 135.1882309405983,
+   "value_per_filed_share": {
+    "base": 94.6848090764195,
+    "bear": 68.76213346821996,
+    "bull": 135.1882309405983
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -4.2 points a year against the required return over 3 years"
   },
   "HCI": {
    "alpha_pts": 11.587097173369742,
@@ -13337,11 +13377,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 174,
+ "valued_count": 175,
  "verdict_counts": {
-  "AVOID": 77,
+  "AVOID": 78,
   "BUY": 64,
-  "NO_CALL": 86,
+  "NO_CALL": 85,
   "WATCH": 23
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
