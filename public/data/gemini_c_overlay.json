@@ -2,10 +2,10 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T09:10:18Z",
+ "generated_at": "2026-11-27T09:31:44Z",
  "list_covered": 159,
  "list_names": 159,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -9437,41 +9437,65 @@
    "verdict_reason": "expected return -11.8 points a year against the required return over 3 years"
   },
   "PMTS": {
-   "alpha_pts": null,
+   "alpha_pts": 21.631527725878026,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-11-04T12:06:05.000Z",
     "accepted_utc": "2026-11-04T17:06:05Z",
     "accession": "0001641614-26-000146",
-    "decision_time": "2026-11-22T01:24:29Z",
+    "decision_time": "2026-11-27T09:11:59Z",
     "form": "10-Q",
     "period": "2026-09-30"
    },
-   "claims": 106,
-   "claims_supported": 104,
-   "date": "2026-11-22T01:24:29Z",
+   "claims": 111,
+   "claims_supported": 103,
+   "date": "2026-11-27T09:11:59Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 451191658.71913314,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 11632292.0,
    "flags": [
-    "CPI increased its full-year financial guidance targets for revenue growth to low-double-digit growth and Free Cash Flow to $50 million to $55 million, while reaffirming all other financial guidance metrics.",
-    "Certain CPI stockholders completed a secondary public offering of approximately 2.7 million shares, concluding Parallel49's ownership position in CPI, while CPI incurred approximately $1.0 million of offering-related expenses.",
-    "CPI acquired TRISM, an on-premise instant issuance solution."
+    "CPI acquired Arroweye for a final purchase price of $45.8 million and net cash consideration of $44.2 million.",
+    "CPI acquired a 20% equity interest in Gift Card Co Pty Ltd, doing business as Karta, for total consideration of $10.0 million, with $2.5 million paid in cash upon closing.",
+    "CPI acquired TRISM and an on-premise instant issuance solution, with cash paid for acquisition, net of cash acquired, of (6,300) (table in thousands)."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.09115143990563293,
+   "market_cap_at_publish": 284642152,
    "model": "gemini-4-hydrogen-high",
    "news_count": 0,
-   "no_value_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 24.47,
    "qwen_book": null,
    "release_truncated": [
     "0001641614-26-000145"
    ],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 36.43706810750358,
+    "3000": 41.13864246082348
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
    "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "the cloud read's valuation inputs did not pass the code's checks, even after one repair, so no value is given"
+   "upside": 0.5851189135161301,
+   "value_base": 38.78785528416353,
+   "value_bear": 21.244060146105767,
+   "value_bull": 69.57585161642072,
+   "value_per_filed_share": {
+    "base": 38.78785528416353,
+    "bear": 21.244060146105767,
+    "bull": 69.57585161642072
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +21.6 points a year against the required return over 3 years"
   },
   "PNRG": {
    "alpha_pts": 9.441362983395008,
@@ -13377,11 +13401,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 175,
+ "valued_count": 176,
  "verdict_counts": {
   "AVOID": 78,
-  "BUY": 64,
-  "NO_CALL": 85,
+  "BUY": 65,
+  "NO_CALL": 84,
   "WATCH": 23
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
