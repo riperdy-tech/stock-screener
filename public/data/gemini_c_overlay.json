@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T00:16:42Z",
+ "generated_at": "2026-11-27T00:25:04Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -9399,35 +9399,70 @@
    "verdict_reason": "no valuation route yet for a real estate company or trust"
   },
   "PTCT": {
-   "alpha_pts": null,
+   "alpha_pts": 56.99314866521665,
    "analysis": "complete",
-   "claims": 67,
-   "claims_supported": 55,
-   "date": "2026-11-17T07:25:33Z",
-   "family": "family_not_built",
+   "based_on": {
+    "accepted": "2026-10-29T20:31:05.000Z",
+    "accepted_utc": "2026-10-30T00:31:05Z",
+    "accession": "0001104659-26-120223",
+    "decision_time": "2026-11-27T00:17:37Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 80,
+   "claims_supported": 74,
+   "date": "2026-11-27T00:17:37Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 13074853828.455423,
+   "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 83544284.0,
    "flags": [
-    "PTC completed its acquisition of the ST-920 Fabry disease gene therapy from Sangamo, for $111 million upfront plus up to $100 million in contingent milestones. The 10-Q income statement shows 111,000 (table in thousands) of acquired in-process R&D expense for the quarter.",
-    "The Board authorized a share repurchase program of up to $500 million of common stock.",
-    "During the nine months ended Sep. 30, 2026, PTC issued 2031 Convertible Notes with proceeds of 550,000 (table in thousands). It also repurchased 2026 Convertible Notes for 402,653 (table in thousands) and booked a 19,263 (table in thousands) loss on extinguishment of debt."
+    "PTC acquired the ST-920 Fabry disease gene therapy assets from Sangamo for $111.0 million upfront, with up to $100.0 million in contingent milestone payments. The upfront amount was booked as acquired in-process R&D expense.",
+    "In the nine months ended September 30, 2026, PTC repurchased 2026 Convertible Notes, issued 2031 Convertible Notes, and recorded a loss on extinguishment of debt. Cash flow figures are in thousands.",
+    "PTC sold its retained interest in the Evrysdi royalty to Royalty Pharma for $240.0 million upfront, so Royalty Pharma now owns 100% of the royalty."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.08149794340513286,
+   "loss_record": {
+    "cause": "profit_in_newest_year",
+    "explanation": "",
+    "label": "operating income was at or below zero in 3 of the last 4 fiscal years; the newest year earned an operating profit, and the value rests on it",
+    "quotes": [],
+    "version": "thin_record.v1 2026-11-27"
+   },
+   "market_cap_at_publish": 5183923136,
    "model": "claude-sonnet-5-5",
    "news_count": 1,
-   "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 62.05,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
-   "under_review": {
-    "headline": "PTC's Huntington study was positive. Why did its stock fall?",
-    "id": "63a30f7716d0",
-    "since": "2026-11-25",
-    "why": "PTC's potentially pivotal Huntington's disease trial met its primary endpoint, but questions about the data have raised doubts about the program's regulatory and commercial outlook."
+   "release_truncated": [],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 165.69234850956423,
+    "3000": 147.3118021623219
    },
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
+   "under_review": null,
+   "upside": 1.5221928422619695,
+   "value_base": 156.50207533594306,
+   "value_bear": 49.55617883244668,
+   "value_bull": 521.1394426939153,
+   "value_per_filed_share": {
+    "base": 156.50207533594306,
+    "bear": 49.55617883244668,
+    "bull": 521.1394426939153
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +57.0 points a year against the required return over 3 years"
   },
   "PXED": {
    "alpha_pts": null,
@@ -12999,11 +13034,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 166,
+ "valued_count": 167,
  "verdict_counts": {
   "AVOID": 74,
-  "BUY": 62,
-  "NO_CALL": 93,
+  "BUY": 63,
+  "NO_CALL": 92,
   "WATCH": 21
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
