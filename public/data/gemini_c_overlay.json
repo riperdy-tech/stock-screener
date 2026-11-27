@@ -2,10 +2,10 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T00:25:04Z",
+ "generated_at": "2026-11-27T00:40:18Z",
  "list_covered": 159,
  "list_names": 159,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -6133,42 +6133,90 @@
    "verdict_reason": "expected return -3.4 points a year against the required return over 3 years"
   },
   "HZO": {
-   "alpha_pts": null,
+   "alpha_pts": -27.452555929613553,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-11-16T21:04:48.000Z",
     "accepted_utc": "2026-11-17T02:04:48Z",
     "accession": "0001193125-26-463429",
-    "decision_time": "2026-11-24T00:35:24Z",
+    "decision_time": "2026-11-27T00:25:32Z",
     "form": "10-K",
     "period": "2026-09-30"
    },
-   "claims": 81,
-   "claims_supported": 77,
-   "date": "2026-11-24T00:35:24Z",
+   "claims": 104,
+   "claims_supported": 103,
+   "date": "2026-11-27T00:25:32Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 468589792.69692355,
    "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 22032133.0,
    "flags": [
-    "MarineMax entered into an Agreement and Plan of Merger with affiliates of Safe Harbor Marinas, LLC (a portfolio company of Blackstone Infrastructure Partners L.P.) under which each outstanding share of common stock will convert into the right to receive $53.00 per share in cash, representing an enterprise value of approximately $1.5 billion.",
-    "The Hart-Scott-Rodino Act waiting period applicable to the proposed Merger expired, and all required governmental approvals and clearances under applicable foreign antitrust and foreign direct investment laws were received.",
-    "MarineMax held a special meeting of shareholders at which the shareholder approval required under the Merger Agreement was received."
+    "MarineMax entered into an Agreement and Plan of Merger with affiliates of Safe Harbor Marinas, LLC and Blackstone Infrastructure Partners L.P. under which each common share converts into the right to receive $53.00 per share in cash, with regulatory clearances and shareholder approval subsequently obtained and closing pending.",
+    "MarineMax announced that, due to its pending acquisition by Safe Harbor, it will not hold a fourth quarter and full year results conference call and does not intend to provide financial guidance for fiscal 2027.",
+    "Purported shareholders sent demand letters alleging material omissions in the Proxy Statement and filed litigation in New York State Court against MarineMax and its directors seeking to enjoin or rescind the Merger."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.10336215402215951,
+   "loss_record": {
+    "cause": "financing_burden",
+    "explanation": "MarineMax generated positive operating income in both fiscal 2026 ($51,260 thousand) and fiscal 2025 ($34,017 thousand, even after a $69,055 thousand goodwill impairment), as well as fiscal 2024 ($128,226 thousand). In fiscal 2026 and fiscal 2025, interest expense of $58,035 thousand and $71,158 thousand exceeded operating income, turning operating profits into pretax losses of $6,775 thousand and $37,141 thousand.",
+    "label": "the operations earn a profit before interest; interest or other financing cost made the loss",
+    "quotes": [
+     {
+      "id": "F2",
+      "quote": "Sep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2024"
+     },
+     {
+      "id": "F2",
+      "quote": "Income (loss) from operations | 51,260 | 34,017 | 128,226"
+     },
+     {
+      "id": "F2",
+      "quote": "Interest expense | 58,035 | 71,158 | 73,895"
+     },
+     {
+      "id": "F2",
+      "quote": "(Loss) income before income tax provision | (6,775) | (37,141) | 54,331"
+     }
+    ],
+    "version": "why_losses.v1 2026-11-18 WO_NC5"
+   },
+   "market_cap_at_publish": 1188567905,
    "model": "gemini-4-hydrogen-high",
    "news_count": 0,
-   "no_value_reason": "no positive earnings base",
+   "no_value_reason": null,
    "pending_offer": {
-    "claim": "MarineMax entered into an Agreement and Plan of Merger with affiliates of Safe Harbor Marinas, LLC (a portfolio company of Blackstone Infrastructure Partners L.P.) under which each outstanding share of common stock will convert into the right to receive $53.00 per share in cash, representing an enterprise value of approximately $1.5 billion.",
+    "claim": "MarineMax entered into an Agreement and Plan of Merger with affiliates of Safe Harbor Marinas, LLC and Blackstone Infrastructure Partners L.P. under which each common share converts into the right to receive $53.00 per share in cash, with regulatory clearances and shareholder approval subsequently obtained and closing pending.",
     "date": "August 9, 2026"
    },
+   "price_at_publish": 52.94,
    "qwen_book": null,
    "release_truncated": [],
-   "screener_commit": "5974bf5f7bb3a82ac673c20ded73235c4937ccc2",
-   "source": "screener list refresh",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 21.454738865514035,
+    "3000": 21.082204125609298
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
+   "upside": -0.6057526114194346,
+   "value_base": 21.268471495561666,
+   "value_bear": 15.956878036033663,
+   "value_bull": 31.268987323932734,
+   "value_per_filed_share": {
+    "base": 21.268471495561666,
+    "bear": 15.956878036033663,
+    "bull": 31.268987323932734
+   },
+   "valued": true,
    "verdict": "NO_CALL",
-   "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value"
+   "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: AVOID, expected return -27.5 points a year against the required return over 3 years)"
   },
   "IHS": {
    "alpha_pts": 59.57213812039057,
@@ -13034,7 +13082,7 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 167,
+ "valued_count": 168,
  "verdict_counts": {
   "AVOID": 74,
   "BUY": 63,
