@@ -27,7 +27,7 @@ const MIN_WINDOW = 5; // trading days
 export interface SeriesToggle { key: string; label: string; color: string; width: number; dash?: string }
 
 /** Benchmarks beyond the three the page compares against sit behind the "+ more" chip. */
-const EXTRA_BENCHES = ['SOXX', 'DRAM'];
+const EXTRA_BENCHES = ['SOXX'];
 
 const BOOK_LABEL = { ai_book: 'trkSerAiBook', rn_depth: 'trkSerAi', equal: 'trkSerControl', equal_dial: 'trkSerDial', mine: 'trkSerMine' } as const;
 

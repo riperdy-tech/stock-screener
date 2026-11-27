@@ -23,7 +23,9 @@ export interface Trade {
 }
 
 // QQQ first: it is the benchmark the paper books are judged against (operator ruling 2026-10-06).
-export const BENCHMARKS = ['QQQ', 'SPY', 'IWM', 'SOXX', 'DRAM'] as const;
+// Operator 2026-11-28: the AI book is read against a 60/40 portfolio, QQQ, SPY, IWM, DRAM and SOXL. SOXX stays behind "+ more".
+export const SIXTY_FORTY = '60/40';
+export const BENCHMARKS = ['QQQ', 'SPY', 'IWM', SIXTY_FORTY, 'DRAM', 'SOXL', 'SOXX'] as const;
 
 /** Strategy books, in the order they appear in the chart legend. */
 export const BOOKS: { key: string; color: string; width: number; dash?: string }[] = [
@@ -43,10 +45,11 @@ export const BOOKS: { key: string; color: string; width: number; dash?: string }
  * Benchmarks are references, not players. Each gets its own hue AND its own dash pattern, so they
  * stay apart in greyscale too. The hues never reuse pos / neg / warn (green, coral, amber).
  */
-export const BENCH_DASH: Record<string, string> = { IWM: '6 4', SPY: '2 3', QQQ: '8 3 2 3', SOXX: '1 4', DRAM: '10 6' };
+export const BENCH_DASH: Record<string, string> = { IWM: '6 4', SPY: '2 3', QQQ: '8 3 2 3', SOXX: '1 4', DRAM: '10 6', SOXL: '4 2 1 2', [SIXTY_FORTY]: '12 4' };
 
 export const BENCH_STYLE: Record<string, string> = {
     IWM: 'var(--bench-iwm)', SPY: 'var(--bench-spy)', QQQ: 'var(--bench-qqq)', DRAM: 'var(--bench-dram)', SOXX: 'var(--bench-soxx)',
+    SOXL: 'var(--bench-soxl)', [SIXTY_FORTY]: 'var(--bench-6040)',
 };
 
 export interface Curve {
@@ -123,6 +126,7 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
     // Benchmarks: raw closes re-based to 100 at their first observation.
     const benchSource = (books.equal?.nav_series ?? []) as NavPoint[];
     for (const b of BENCHMARKS) {
+        if (b === SIXTY_FORTY) continue;
         const arr = blank();
         let base: number | null = null;
         for (const p of benchSource) {
@@ -134,8 +138,34 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
         }
         if (base !== null) series[b] = arr;
     }
+    const mix = sixtyForty(benchSource.map((p) => ({ date: (p.date ?? '').slice(0, 10), spy: p.benches?.SPY ?? null, agg: p.benches?.AGG ?? null })));
+    if (mix.length) {
+        const arr = blank();
+        for (const m of mix) {
+            const i = idx.get(m.date);
+            if (i !== undefined) arr[i] = m.value;
+        }
+        series[SIXTY_FORTY] = arr;
+    }
 
     return { dates, series, tradeCounts, tradedValue };
+}
+
+/**
+ * A 60/40 portfolio: 60% SPY and 40% AGG (US aggregate bonds), set back to 60/40 at every close, 100 at the first day both have a close.
+ * A day missing either close is skipped: the next day's return runs from the last day that had both.
+ */
+export function sixtyForty(rows: { date: string; spy: number | null; agg: number | null }[]): { date: string; value: number }[] {
+    const out: { date: string; value: number }[] = [];
+    let prev: { spy: number; agg: number } | null = null;
+    let value = 100;
+    for (const r of rows) {
+        if (r.spy == null || r.agg == null) continue;
+        if (prev) value *= 1 + 0.6 * (r.spy / prev.spy - 1) + 0.4 * (r.agg / prev.agg - 1);
+        prev = { spy: r.spy, agg: r.agg };
+        out.push({ date: r.date, value });
+    }
+    return out;
 }
 
 /** First index at or after `from` where the series has a value. */
