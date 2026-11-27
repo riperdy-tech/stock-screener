@@ -2,79 +2,91 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 68,
- "claims_supported": 67,
- "date": "2026-11-17T07:15:28Z",
+ "based_on": {
+  "accepted": "2026-10-30T20:30:41.000Z",
+  "accepted_utc": "2026-10-31T00:30:41Z",
+  "accession": "0001213900-26-114422",
+  "decision_time": "2026-11-27T04:08:20Z",
+  "form": "20-F",
+  "period": "2026-06-30"
+ },
+ "claims": 69,
+ "claims_supported": 65,
+ "date": "2026-11-27T04:08:20Z",
  "family": "operating",
  "flags": [
-  "The company completed the acquisition of a 60% equity interest in Brightray, a prefabricated modular data center provider. This was after the fiscal year end, and Brightray's results are not in the FY2026 financial statements.",
-  "The company completed a first closing of a private placement of Purchaser Units, with gross proceeds of US$10,000,000.",
-  "A 10-for-1 forward subdivision of Class A and Class B ordinary shares was approved by the board and became effective, and the shares began trading on a split-adjusted basis."
+  "The company closed its acquisition of a 60% equity interest in Brightray, a prefabricated modular data center business, after the fiscal year-end. Brightray became a consolidated subsidiary and is not in the FY2026 statements.",
+  "The company completed a first closing of its private placement, selling 1,000,000 Purchaser Units for gross proceeds of US$10,000,000.",
+  "A 10-for-1 forward share subdivision took effect, and Class A shares began trading on a split-adjusted basis."
  ],
  "in_code_book": false,
  "ke": null,
- "model": "claude-sonnet-5-5-high",
+ "model": "claude-sonnet-5-5",
  "news": [],
- "no_value_reason": "no positive earnings base",
+ "no_value_reason": "diluted share count not filed",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in the cited items",
-    "claim": "The historical operating business sells meetings, incentives, conferences and exhibitions (MICE) services in Hong Kong. It has two service lines, event management and stage production.",
+    "basis": "Stated in Items 4 and 5 of the 20-F.",
+    "claim": "The company sells meetings, incentives, conferences and exhibitions (MICE) services in Hong Kong. The services fall into two areas: event management (design, planning, project management, on-site supervision) and stage production.",
     "facts": [
-     "P1",
-     "P3"
+     "P3",
+     "P1"
     ],
     "quotes": [
-     "Established in 2017, our operating business provides meetings, incentives, conferences and exhibitions, or MICE, solutions in Hong Kong."
+     "our service portfolio comprised two core areas: (i) event management and (ii) stage production"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item",
-    "claim": "In fiscal 2026 event management brought in $5,567,719 and stage production $1,083,413 of revenue. All revenue was earned in Hong Kong from third parties.",
+    "basis": "Stated in the revenue breakdown table (US$) and in Item 4.",
+    "claim": "Event management is the larger revenue line. In the year ended June 30, 2026 it was 5,567,719 (US$) of total revenue of 6,651,132, about 83.7%. Stage production made up the rest.",
     "facts": [
      "P3",
+     "P1",
      "F2"
     ],
     "quotes": [
-     "We generated all of our revenue during the fiscal years presented in Hong Kong, from third parties, through the provision of event management and stage production services."
+     "Our revenue derived from event management services represents approximately 83.7%, 83.4% and 80.5% of our total revenue for the years ended June 30, 2026, 2025 and 2024, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (risk factors)",
-    "claim": "The company is paid project by project, not under long-term contracts. Prices come from quotations set on a cost-plus margin basis when a project is awarded.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We offer our MICE services to clients on an individual project basis and typically do not enter into long-term contracts with them.",
-     "quotations that are formulated on a cost-plus margin basis"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item",
-    "claim": "Revenue depends heavily on one customer. The largest customer was 50.7% of fiscal 2026 revenue, against 27.9% in fiscal 2025.",
+    "basis": "Stated in Item 5.",
+    "claim": "Customers are third parties in Hong Kong, and all revenue in the periods presented came from Hong Kong. Customer concentration is high: the largest customer was about 50.7% of FY2026 revenue, against 27.9% and 29.1% in the two prior years.",
     "facts": [
      "P3"
     ],
     "quotes": [
+     "We generated all of our revenue during the fiscal years presented in Hong Kong, from third parties, through the provision of event management and stage production services.",
      "Our largest customer accounted for approximately 50.7%, 27.9% and 29.1% of our revenue for the years ended June 30, 2026, 2025 and 2024, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items",
-    "claim": "Fiscal 2026 revenue rose 5.1%, from 6,328,425 to 6,651,132. Management attributes the rise mainly to event management.",
+    "basis": "Stated in the risk factors.",
+    "claim": "Revenue is project-based, not recurring. Clients engage the company per project with no long-term contracts, and quotes are set on a cost-plus margin basis. Customers are granted credit terms of 60 to 90 days.",
     "facts": [
-     "F2",
-     "P3"
+     "P2"
+    ],
+    "quotes": [
+     "We offer our MICE services to clients on an individual project basis and typically do not enter into long-term contracts with them.",
+     "we generally derive our revenue from service contracts, with each contract sum being determined with reference to quotations that are formulated on a cost-plus margin basis",
+     "For our MICE services, we typically grant our customers a credit period ranging from 60 to 90 days from the invoice date."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Item 5 discussion and the income statement.",
+    "claim": "Revenue rose 5.1% in FY2026, to 6,651,132 from 6,328,425. Management attributes the rise mainly to event management, through more and larger projects.",
+    "facts": [
+     "P3",
+     "F2"
     ],
     "quotes": [
      "The growth was mainly attributable to an increase in the number of event management projects and the larger scale of those projects."
@@ -82,35 +94,35 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item",
-    "claim": "Cost of revenue has three parts: purchase costs (2,647,597), labor costs (911,134) and subcontracting costs (1,961,780) in fiscal 2026.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Purchase costs primarily consist of furniture, equipment and supplies used in the implementation of our event and exhibition projects, including costs charged by stage equipment providers and transportation costs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item",
-    "claim": "Gross margin fell from 31.0% to 17.0% in fiscal 2026. Purchase costs rose 62.3% while revenue rose 5.1%, and the higher costs were not fully passed on to customers.",
+    "basis": "Stated in Item 5.",
+    "claim": "Cost of revenue has three components: purchase costs (furniture, equipment, supplies, transportation), labor costs and subcontracting costs. Purchase costs were 2,647,597 in FY2026, or 48.0% of cost of revenue, and rose about 62.3% as inflation and larger stage-equipment needs hit. Gross margin fell from about 31.0% to about 17.0%.",
     "facts": [
      "P3",
      "F2"
     ],
     "quotes": [
-     "During the year ended June 30, 2026, purchase costs increased by approximately 62.3%, while revenue increased by approximately 5.1%."
+     "The decrease in our gross profit margin was mainly due to the increase in cost of revenue being proportionately larger than the increase in revenue"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items",
-    "claim": "Operating expenses are almost entirely general administrative expenses. They rose to $5,981,844 from $935,014, mainly because of non-cash share-based compensation of $3,979,714, and the business moved to a loss from operations.",
+    "basis": "Stated in the risk factors.",
+    "claim": "Fees are largely fixed once a contract is signed, so the company bears cost overruns. This makes cost management central to project profitability.",
     "facts": [
-     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "our service fee will be fixed once the contract has been signed and any additional costs incurred during the service period would be borne by us"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement, cash flow statement and Item 5.",
+    "claim": "FY2026 swung to an operating loss of (4,851,223) because general administrative expenses jumped to $5,981,844. These included share-based compensation of $3,979714 versus nil a year earlier, a non-cash item in the cash flow statement.",
+    "facts": [
      "F2",
-     "F3"
+     "F3",
+     "P3"
     ],
     "quotes": [
      "Share-based compensation was $3,979,714 for the year ended June 30, 2026, compared to nil for the year ended June 30, 2025."
@@ -118,55 +130,67 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item",
-    "claim": "Demand is seasonal. It is higher around Easter, the summer holiday and Christmas, and fixed costs such as rent and staff remain in the quieter periods.",
+    "basis": "Stated in the risk factors.",
+    "claim": "Demand is seasonal. The company saw higher demand around Easter, the summer holiday and Christmas, while fixed costs such as rent and staff remain in the quieter months.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "During the years ended June 30, 2026, 2025 and 2024, we experienced higher demands for our services during Easter, the summer holiday, and Christmas."
+     "we experienced higher demands for our services during Easter, the summer holiday, and Christmas"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items",
-    "claim": "After fiscal year-end the company acquired a 60% interest in Brightray, which provides prefabricated modular data center solutions. Brightray's results are not in the fiscal 2026 financial statements, so the historical figures describe only the MICE business.",
+    "basis": "Stated in Items 4 and 5. How Brightray earns revenue is not described in the excerpts.",
+    "claim": "After year-end the company acquired a 60% stake in Brightray, which provides prefabricated modular data center solutions. The deal closed on September 15, 2026. Brightray is not in the FY2026 results, so the historical figures describe only the MICE business.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "As the Acquisition was completed after June 30, 2026, the results of Brightray are not included in our consolidated financial statements for the year ended June 30, 2026 included in this annual report."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item",
-    "claim": "Brightray's early commercial arrangements, a Macao framework agreement for about 40MW and an Indiana letter of intent for about 10MW, are non-binding. They do not create obligations to purchase or supply.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding."
+     "Brightray\u2019s operating results are not included in our consolidated results for the years ended June 30, 2026, 2025 and 2024."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item",
-    "claim": "The historical MICE business sells on a project-by-project basis with no long-term client contracts, so clients are not obliged to rehire the company.",
+    "basis": "stated in P1 and P3; the positioning language is the company's self-description",
+    "claim": "The operating business is a Hong Kong MICE provider, with event management as the larger of its two service lines at 83.7% of revenue in the latest fiscal year.",
     "facts": [
-     "P2"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "We offer our MICE services to clients on an individual project basis and typically do not enter into long-term contracts with them."
+     "Established in 2017, we have rapidly grown into a premier MICE solutions provider based in Hong Kong."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Revenue is concentrated in one customer. The largest customer was 50.7% of revenue in the latest fiscal year, against 27.9% and 29.1% in the two prior years.",
+    "basis": "stated in the income statement F2; the growth reading is inferred",
+    "claim": "Revenue grew modestly over three fiscal years, from 5,812,204 to 6,328,425 to 6,651,132 USD, which suggests the client franchise has held up.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (management discussion); the pricing-power reading is inferred",
+    "claim": "Pricing power looks weak: gross margin fell from approximately 31.0% to approximately 17.0%. Purchase costs rose 62.3% against revenue growth of 5.1%, and the company says the higher costs were not fully passed on to customers.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "which were not fully passed on to customers"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "Customer concentration is a named threat: the largest customer was approximately 50.7% of revenue in the latest year, up from 27.9% and 29.1% in the two prior years.",
     "facts": [
      "P3"
     ],
@@ -176,21 +200,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Revenue rose 5.1% to 6,651,132, but the gross margin fell from 31.0% to 17.0%. The filing says higher costs were not fully passed on to customers, which points to limited pricing power in the latest year.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Our gross profit margin decreased from approximately 31.0% for the year ended June 30, 2025 to approximately 17.0% for the year ended June 30, 2026.",
-     "which were not fully passed on to customers"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The company says its Hong Kong market is highly competitive with low barriers to entry, which can push prices down and cut its margin.",
+    "basis": "stated in P3 and P2 (risk factors)",
+    "claim": "The company names a competitive market with low entry barriers and possible aggressive pricing, which threatens its gross margin.",
     "facts": [
      "P3",
      "P2"
@@ -202,138 +213,30 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "All revenue in the years presented came from Hong Kong, so the historical business depends on local conditions.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "We generated all of our revenue during the fiscal years presented in Hong Kong, from third parties, through the provision of event management and stage production services."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Event management is the core service line, at about 83.7% of revenue in the latest fiscal year.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our revenue derived from event management services represents approximately 83.7%, 83.4% and 80.5% of our total revenue for the years ended June 30, 2026, 2025 and 2024, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company has no long-term supply contracts with its suppliers or subcontractors. It faces input-price and supplier-availability risk that it may not be able to pass on to customers.",
+    "basis": "stated in P2",
+    "claim": "Revenue is project-based with no long-term customer contracts, so customer retention is not locked in.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Our Operating Subsidiaries do not enter into long-term supply contracts with its suppliers or subcontractors, so there is no assurance that they will not significantly increase the prices of their labor, materials and subcontracting charges in the future."
+     "We offer our MICE services to clients on an individual project basis and typically do not enter into long-term contracts with them."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "After year-end the company acquired a 60% equity interest in Brightray, a prefabricated modular data center provider. The filing says this business differs significantly from the MICE business, and its results are not in the reported financials. Any competitive position in data centers is therefore not shown by the financial statements.",
+    "basis": "stated in P2",
+    "claim": "The company has no long-term supply contracts, and fees are largely fixed once a project is awarded, so supplier price increases can squeeze margin.",
     "facts": [
-     "P1",
      "P2"
     ],
     "quotes": [
-     "As the Acquisition was completed after June 30, 2026, the results of Brightray are not included in our consolidated financial statements for the year ended June 30, 2026 included in this annual report.",
-     "Brightray\u2019s business differs significantly from our historical MICE business in Hong Kong."
+     "Our Operating Subsidiaries do not enter into long-term supply contracts with its suppliers or subcontractors"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Named Brightray demand is so far non-binding. The 40MW Macao framework agreement and the 10MW Indiana letter of intent create no obligation to buy or supply.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding.",
-     "The principal cooperation terms of the letter of intent are non-binding and do not create any obligation to purchase, supply or pay, and the letter of intent will expire 12 months after signing unless replaced earlier by a definitive agreement."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "General administrative expenses rose to 5,981,844, and the loss from operations was 4,851,223. Share-based compensation of 3,979,714 was the first-named driver of the rise.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Share-based compensation was $3,979,714 for the year ended June 30, 2026, compared to nil for the year ended June 30, 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "IPO proceeds raised cash to 3,755,687 from 101,535, giving the company funds to invest. Net cash from operating activities was only 15,939.",
-    "facts": [
-     "F1",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "As of June 30, 2026 and 2025, we had cash and cash equivalents of $3,755,687 and $101,535, respectively."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in the cited items",
-    "claim": "Cash rose sharply over the year to $3,755,687 at June 30, 2026, from $101,535 a year earlier.",
-    "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "As of June 30, 2026 and 2025, we had cash and cash equivalents of $3,755,687 and $101,535, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Short-term liquidity is positive. Current assets were $5,406,820 against current liabilities of $1,798,376, leaving working capital of $3,608,444.",
-    "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "As of June 30, 2026, total current assets were $5,406,820 and total current liabilities were $1,798,376, resulting in working capital of $3,608,444."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Leverage is modest against equity. Total liabilities were 2,178,082 against total equity of 5,595,146. Bank borrowings were $358,021, down from $432,101. Lease liabilities are also on the balance sheet.",
-    "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "Outstanding bank borrowings were $358,021 and $432,101 as of June 30, 2026 and 2025, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cash flow statement",
-    "claim": "Operating cash generation was thin. Net cash provided by operating activities was 15,939, down from 336,061 and 87,272 in the two prior years.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The fiscal 2026 loss is largely non-cash. Share-based compensation was $3,979,714 against nil in the prior year, so the cash loss is smaller than the accounting loss. Gross margin also fell sharply.",
+    "basis": "stated in F2, F3 and P3",
+    "claim": "The latest year swung to a loss from operations of (4,851,223) from a profit of 1,028,500. Share-based compensation of 3,979,714 was a major driver, and operating cash flow stayed slightly positive at 15,939.",
     "facts": [
      "F2",
      "F3",
@@ -345,24 +248,12 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "The cash balance came from financing, not operations. Net IPO proceeds of 5,804,648 drove net financing inflow of 5,240,035. Investing outflow of (1,612,879) was mostly deposits for investments of (1,600,000).",
+    "basis": "stated in F1, F3 and P3",
+    "claim": "Financial capacity improved after the IPO: cash rose to 3,755,687 from 101,535, helped by IPO proceeds of 5,804,648. Bank borrowings of 358,021 are repayable on demand, and 1,600,000 is held as deposits for investments.",
     "facts": [
-     "F3",
      "F1",
+     "F3",
      "P3"
-    ],
-    "quotes": [
-     "As of June 30, 2026, we also held $1,600,000 of refundable deposits for pending equity investments in a private company incorporated in Delaware."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated for the classification; the coverage point is inferred from comparing balance sheet lines",
-    "claim": "All bank borrowings are classified as current because the loan agreements carry repayment-on-demand clauses. This is the debt that could fall due soonest.",
-    "facts": [
-     "P3",
-     "F1"
     ],
     "quotes": [
      "The loan agreements contain repayment-on-demand clauses, and the entire outstanding balances were classified as current liabilities."
@@ -370,45 +261,159 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the counter is inferred from F3",
-    "claim": "Management states that cash resources, expected operating cash flows and available financing are adequate for at least twelve months, subject to uncertainties including financing access.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "This assessment is subject to uncertainties, including our operating performance, customer collections, investment and acquisition requirements and access to financing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Post year-end, the company reports a first closing of a private placement for gross proceeds of US$10,000,000. Further closings of up to 2,000,000 units were allowed by November 9, 2026.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "for gross proceeds of US$10,000,000"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "The Brightray acquisition consideration is a non-interest-bearing P-Note settled solely in Class A Ordinary Shares. It carries no cash interest or cash principal repayment, but it is dilutive.",
+    "basis": "stated in P1 and P2",
+    "claim": "The company is moving beyond MICE by acquiring 60% of Brightray, a prefabricated modular data center provider. The company says this business differs significantly from its historical business, and Brightray's results are not in the reported financials.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "non-interest-bearing promissory note with an initial face amount of US$200,000,000"
+     "Brightray\u2019s business differs significantly from our historical MICE business in Hong Kong."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "The Brightray deal is paid in newly issued shares and a P-Note settled in shares, which the company says would dilute existing shareholders. The cap is 24,000,000 Class A shares (240,000,000 after the split), and the P-Note has an initial face amount of US$200,000,000.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "would dilute the economic and voting interests of our existing shareholders"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Brightray's disclosed pipeline is non-binding: the Macao framework agreement for about 40MW creates no purchase or supply obligation, and the Indiana letter of intent for about 10MW is also non-binding.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (risk factors)",
+    "claim": "Integration of Brightray is a named threat to the existing MICE business, because it will absorb management attention.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Integration will require significant management attention and resources and may divert attention from our MICE business."
     ],
     "support": "supported"
    }
   ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet and the MD&A liquidity section.",
+    "claim": "Liquidity improved sharply over the latest fiscal year. Cash rose to $3,755,687 from $101,535, and current assets of 5,406,820 exceed current liabilities of 1,798,376 (balance-sheet figures in USD).",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "As of June 30, 2026 and 2025, we had cash and cash equivalents of $3,755,687 and $101,535, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement.",
+    "claim": "The cash increase was funded by financing. Net cash from financing was 5,240,035, including 5,804,648 of IPO proceeds net of offering cost. Operating cash flow was only 15,939, against 336,061 in the prior year.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the reconciliation lines in the cash flow statement and the income statement.",
+    "claim": "Cash generation is of low quality. The net loss of 4,813,197 turned into slightly positive operating cash flow only because of 3,979,714 of non-cash share-based compensation and working-capital inflows, such as a 493,332 reduction in trade receivables and a 411,414 increase in trade payables.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement and the MD&A.",
+    "claim": "Operating profitability deteriorated. The loss from operations was 4,851,223 against a profit of 1,028,500 in the prior year. Gross margin fell from about 31.0% to about 17.0% on higher purchase costs, and general administrative expenses rose to 5,981,844.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Our gross profit margin decreased from approximately 31.0% for the year ended June 30, 2025 to approximately 17.0% for the year ended June 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet.",
+    "claim": "Leverage is low. Total liabilities were 2,178,082 against total equity of 5,595,146. Bank borrowings were 358,021, all current, and finance lease liabilities were 49,454 current and 42,024 non-current.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated for the clauses and classification; the coverage by cash is inferred from the balance sheet.",
+    "claim": "All bank borrowings of 358,021 fall due on demand and are classed as current. Cash of 3,755,687 is many times that amount, so the debt can be met from cash on hand. The company repaid 86,144 of bank borrowings in the year.",
+    "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "The loan agreements contain repayment-on-demand clauses, and the entire outstanding balances were classified as current liabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the going concern note and the MD&A.",
+    "claim": "Management states that existing cash, expected operating cash flows and available financing are adequate for at least twelve months. Its financial statements are prepared on a going concern basis.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Management believes that the Company\u2019s existing cash resources, together with expected cash flows from operations and available financing sources, provide adequate financial resources to continue as a going concern for at least twelve months from the date these consolidated financial statements are issued."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and the MD&A; the link to the PINK 308 LLC memorandum of understanding is not established.",
+    "claim": "A cash commitment is pending. 1,600,000 of refundable deposits for equity investments in a private Delaware company sit in non-current assets, outside cash and working capital, and the expected closing date has been extended once.",
+    "facts": [
+     "F1",
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "As of June 30, 2026, we also held $1,600,000 of refundable deposits for pending equity investments in a private company incorporated in Delaware."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Item 4 passages.",
+    "claim": "After year-end the company completed a first closing of a private placement with gross proceeds of US$10,000,000. The Brightray acquisition is paid in shares and a share-settled P-Note, not cash. This adds liquidity and potential dilution, not debt.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The P-Note is settled solely in Class A Ordinary Shares at the fixed issue price in annual instalments determined by reference to Brightray\u2019s Net Profit"
+    ],
+    "support": "quote_not_found"
+   }
+  ],
   "growth_thesis": [
    {
-    "basis": "Stated in P3 (management discussion); revenue figures match F2.",
-    "claim": "Historical driver: the existing Hong Kong event management and stage production business grew revenue, with event management the main contributor.",
+    "basis": "Revenue figures are stated in the income statement. The driver is stated in Item 5. The continuation condition is inferred from the project-based risk factor and the customer concentration disclosure.",
+    "claim": "Core MICE revenue has grown for three years, to 6,651,132 from 6,328,425 and 5,812,204, with the latest rise tied to more and larger event management projects. For this to continue, customers must keep commissioning projects.",
     "facts": [
      "F2",
      "P3"
@@ -419,33 +424,36 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the risk factors (P2).",
-    "claim": "Condition for the MICE business to keep growing: customers must keep commissioning projects, because the work is project-based without long-term contracts.",
+    "basis": "Margin figures and the cause are stated in Item 5. The condition is inferred from that explanation.",
+    "claim": "The core business grew revenue but not profit. Gross profit fell to 1,130,621 from 1,963,514, and gross margin fell to 17.0% from 31.0%. For core growth to add profit, cost increases must be passed on to customers.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We offer our MICE services to clients on an individual project basis and typically do not enter into long-term contracts with them."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3.",
-    "claim": "Condition: revenue depends heavily on one customer, whose share of revenue rose to 50.7% in fiscal 2026. Continued growth requires that customer to keep spending or other customers to grow.",
-    "facts": [
+     "F2",
      "P3"
     ],
     "quotes": [
-     "Our largest customer accounted for approximately 50.7%, 27.9% and 29.1% of our revenue for the years ended June 30, 2026, 2025 and 2024, respectively."
+     "which were not fully passed on to customers"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 and P3.",
-    "claim": "Prospective driver: the acquisition of a 60% equity interest in Brightray, a prefabricated modular data center provider, extends the business beyond MICE. Its results are not in the reported fiscal-year financials.",
+    "basis": "Stated in the balance sheet, cash flow statement and liquidity discussion. The condition on deployment is inferred.",
+    "claim": "The IPO raised cash that funds expansion. Cash rose to $3,755,687 from $101,535, helped by net IPO proceeds of 5,804,648. For this to support growth, the cash must be deployed productively, because operating cash flow was only 15,939.",
+    "facts": [
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "As of June 30, 2026 and 2025, we had cash and cash equivalents of $3,755,687 and $101,535, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in Item 4 and the risk factors. No Brightray financial figures are in the packet.",
+    "claim": "The main stated growth step is the acquisition of a 60% interest in Brightray, a prefabricated modular data center provider. It closed after the fiscal year end, so none of its results are in the reported figures. The benefit depends on integrating a business that differs significantly from the MICE business.",
     "facts": [
      "P1",
-     "P3"
+     "P2"
     ],
     "quotes": [
      "As the Acquisition was completed after June 30, 2026, the results of Brightray are not included in our consolidated financial statements for the year ended June 30, 2026 included in this annual report."
@@ -453,19 +461,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P2.",
-    "claim": "Condition for the Brightray driver: the company must integrate a business that differs significantly from its historical MICE business.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Brightray\u2019s business differs significantly from our historical MICE business in Hong Kong."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1; the dilution point is from P2.",
-    "claim": "Condition for the Brightray driver: the seller has guaranteed minimum cumulative net profit, and any shortfall reduces the consideration. This ties the deal's economics to Brightray actually earning profit over the next three fiscal years.",
+    "basis": "Stated in Item 4.",
+    "claim": "Brightray's value to the company depends on its Net Profit. DeedTech guarantees cumulative Net Profit of not less than US$150 million, and any shortfall reduces the consideration.",
     "facts": [
      "P1"
     ],
@@ -475,8 +472,42 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P1.",
-    "claim": "Pipeline for Brightray: a framework agreement for a planned data center of approximately 40MW in Macao exists but creates no purchase or supply obligation.",
+    "basis": "Stated in Item 4 and the risk factors.",
+    "claim": "The remaining share consideration for Brightray is released only in stages, as cash is collected and after Brightray's core trade marks and intellectual property are transferred or licensed. Brightray's operating base therefore depends on that IP transfer being completed.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "no Class A Ordinary Shares are issuable after the Consideration Shares until the core trade marks used in Brightray\u2019s business have been transferred to, and licences of its other core intellectual property have been granted to, the Brightray group."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in Item 4 and the risk factors.",
+    "claim": "The acquisition is paid for in shares, not cash. The 60% interest is capped at 24,000,000 Class A shares, or 240,000,000 after the share subdivision. Growth through Brightray therefore comes with dilution of existing holders.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The aggregate number of Class A Ordinary Shares issuable under the Share Purchase Agreement for our 60% equity interest, inclusive of the Consideration Shares, is capped at 24,000,000 Class A Ordinary Shares (240,000,000 after giving effect to the Share Subdivision)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in Item 4.",
+    "claim": "A private placement gave first-closing gross proceeds of US$10,000,000, which the company intends to use for Brightray's capacity expansion and working capital. Further closings of up to 2,000,000 units, or 20,000,000 after the split, were allowed.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We intend to use the proceeds of the Private Placement for capacity expansion and working capital requirements in connection with the expansion of the business of Brightray."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in Item 4.",
+    "claim": "A Macao data center framework agreement of about 40MW of IT capacity is a possible Brightray order source. It is non-binding, and a definitive contract depends on the customer first securing a tenant.",
     "facts": [
      "P1"
     ],
@@ -486,57 +517,34 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P1.",
-    "claim": "Pipeline for Brightray: a non-binding letter of intent for a planned prefabricated data center of approximately 10MW in Indiana is Brightray's first U.S. project letter of intent. Whether a purchase order followed is not shown.",
+    "basis": "Stated in Item 4. The condition on the purchase order is inferred from the non-binding terms.",
+    "claim": "An Indiana letter of intent for a prefabricated data center of about 10MW is Brightray's first U.S. project letter of intent. Its principal cooperation terms are non-binding, so growth from it depends on a purchase order actually being issued.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "The partner has indicated that it intends to issue a purchase order by November 15, 2026."
+     "The principal cooperation terms of the letter of intent are non-binding and do not create any obligation to purchase, supply or pay, and the letter of intent will expire 12 months after signing unless replaced earlier by a definitive agreement."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 and P3.",
-    "claim": "Funding driver: IPO proceeds lifted cash at fiscal year end, and a private placement is intended to fund Brightray's capacity expansion and working capital. Whether further placement closings happened is not shown.",
+    "basis": "Stated in Item 4, Item 5 and the balance sheet. The link between the deposits and PINK 308 is not stated.",
+    "claim": "A possible acquisition of PINK 308 LLC, a holding company for film assets, is another growth option. It is only a non-binding memorandum of understanding, and its expected closing has been pushed back. The company holds 1,600,000 in refundable deposits for pending equity investments.",
     "facts": [
      "P1",
-     "P3"
-    ],
-    "quotes": [
-     "We intend to use the proceeds of the Private Placement for capacity expansion and working capital requirements in connection with the expansion of the business of Brightray.",
-     "As of June 30, 2026 and 2025, we had cash and cash equivalents of $3,755,687 and $101,535, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1.",
-    "claim": "Possible further expansion: a non-binding memorandum of understanding to explore acquiring a holding company of film and screenplay assets is pending, and is not a commitment.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The memorandum of understanding does not constitute a definitive agreement, and the terms of any transaction, including consideration, structure and timing, remain subject to due diligence, negotiation and definitive documentation."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3; the deposit line also appears in F1.",
-    "claim": "Cash is also committed to refundable deposits for pending equity investments in a private company, held outside cash and working capital. Closing has been extended.",
-    "facts": [
      "P3",
      "F1"
     ],
     "quotes": [
-     "These deposits were classified as non-current assets and were not included in cash and cash equivalents or working capital."
+     "The memorandum of understanding does not constitute a definitive agreement, and the terms of any transaction, including consideration, structure and timing, remain subject to due diligence, negotiation and definitive documentation."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    }
   ],
   "material_events": [
    {
     "basis": "stated in the cited item",
-    "claim": "The company completed the acquisition of a 60% equity interest in Brightray, a prefabricated modular data center provider. This was after the fiscal year end, and Brightray's results are not in the FY2026 financial statements.",
+    "claim": "The company closed its acquisition of a 60% equity interest in Brightray, a prefabricated modular data center business, after the fiscal year-end. Brightray became a consolidated subsidiary and is not in the FY2026 statements.",
     "facts": [
      "P1"
     ],
@@ -547,40 +555,29 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "The company completed a first closing of a private placement of Purchaser Units, with gross proceeds of US$10,000,000.",
+    "claim": "The company completed a first closing of its private placement, selling 1,000,000 Purchaser Units for gross proceeds of US$10,000,000.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "we completed a first closing of 1,000,000 Purchaser Units (10,000,000 Purchaser Units after giving effect to the Share Subdivision) for gross proceeds of US$10,000,000."
+     "we completed a first closing of 1,000,000 Purchaser Units (10,000,000 Purchaser Units after giving effect to the Share Subdivision) for gross proceeds of US$10,000,000"
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "A 10-for-1 forward subdivision of Class A and Class B ordinary shares was approved by the board and became effective, and the shares began trading on a split-adjusted basis.",
+    "claim": "A 10-for-1 forward share subdivision took effect, and Class A shares began trading on a split-adjusted basis.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "On September 28, 2026, our board of directors approved the Share Subdivision, a 10-for-1 forward subdivision of our Class A Ordinary Shares and Class B Ordinary Shares."
+     "The Share Subdivision became effective, and our Class A Ordinary Shares began trading on the Nasdaq Capital Market on a split-adjusted basis, at market open on October 26, 2026, under a new CUSIP number G1739L110."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "The company closed its Nasdaq initial public offering, with gross proceeds of approximately US$6.7 million.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The gross proceeds received from the initial public offering totaled approximately US$6.7 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The company announced that it intends to relocate its corporate headquarters from Hong Kong to Singapore.",
+    "claim": "The company announced that it intends to relocate its corporate headquarters from Hong Kong to Singapore. The principal executive office remains in Hong Kong as of the annual report date.",
     "facts": [
      "P1"
     ],
@@ -591,7 +588,7 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "The company entered a non-binding memorandum of understanding to explore acquiring PINK 308 LLC, a film and screenplay asset holding company. The acquisition remains pending.",
+    "claim": "The company signed a non-binding memorandum of understanding to explore acquiring PINK 308 LLC, a film and screenplay asset holding company. The acquisition remains pending and its expected closing date was extended.",
     "facts": [
      "P1"
     ],
@@ -602,174 +599,88 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "A Brightray subsidiary signed a non-binding framework agreement for a planned data center project in Macao.",
+    "claim": "A Brightray subsidiary signed a framework agreement with a customer for a planned data center project in Macao. The agreement is non-binding and creates no purchase or supply obligation.",
     "facts": [
      "P1"
     ],
     "quotes": [
+     "Brightray Veridian Pte. Ltd., a wholly owned subsidiary of Brightray, entered into a prefabricated module sales framework agreement with a customer",
      "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "A Brightray subsidiary signed a non-binding letter of intent for a planned prefabricated data center project in Indiana, United States.",
+    "claim": "A Brightray subsidiary signed a non-binding letter of intent with a U.S. partner for a planned prefabricated data center project in Indiana.",
     "facts": [
      "P1"
     ],
     "quotes": [
+     "Brightray Veridian Pte. Ltd. entered into a letter of intent with a U.S.-based mission critical infrastructure partner",
      "The principal cooperation terms of the letter of intent are non-binding and do not create any obligation to purchase, supply or pay, and the letter of intent will expire 12 months after signing unless replaced earlier by a definitive agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The company closed its Nasdaq initial public offering of 1,500,000 Class A shares at US$4.00 per share. A partial over-allotment exercise followed.",
+    "facts": [
+     "P1",
+     "F3"
+    ],
+    "quotes": [
+     "On August 15, 2025, the Company closed its initial public offering of 1,500,000 Class A Ordinary Shares at a public offering price of US$4.00 per share on the Nasdaq."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "stated in P3 and F2 (reported figures)",
-    "claim": "Gross margin fell sharply in fiscal 2026 on higher purchase costs that were not fully passed on to customers, and the company posted an operating loss.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Higher purchase costs, together with increased direct labor costs, contributed to the decline in our gross profit margin from approximately 31.0% to approximately 17.0%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P2",
-    "claim": "The Brightray acquisition could dilute existing shareholders and the integration could fail. Brightray is a data center business that differs from the MICE business, and the shares issuable for the 60% interest are capped at 24,000,000 Class A shares.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Brightray\u2019s business differs significantly from our historical MICE business in Hong Kong.",
-     "The aggregate number of Class A Ordinary Shares issuable under the Share Purchase Agreement for our 60% equity interest, inclusive of the Consideration Shares, is capped at 24,000,000 Class A Ordinary Shares (240,000,000 after giving effect to the Share Subdivision)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from F3, F1 and P3 figures; the repayment-on-demand clause is stated in P3",
-    "claim": "Operating cash flow was only 15,939 in fiscal 2026, and year-end cash of 3,755,687 rested on IPO proceeds of 5,804,648 (statement tables in USD). Bank borrowings of 358,021 are repayable on demand.",
-    "facts": [
-     "F1",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "The loan agreements contain repayment-on-demand clauses, and the entire outstanding balances were classified as current liabilities."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P2",
-    "claim": "Revenue depends on one large customer (50.7% of revenue in fiscal 2026, against 27.9% in fiscal 2025) and on project-by-project work without long-term contracts.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Our largest customer accounted for approximately 50.7%, 27.9% and 29.1% of our revenue for the years ended June 30, 2026, 2025 and 2024, respectively.",
-     "We offer our MICE services to clients on an individual project basis and typically do not enter into long-term contracts with them."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and F1",
-    "claim": "A refundable deposit of $1,600,000 for pending equity investments in a private Delaware company is outside cash and working capital. Its closing has already been pushed back to December 2026.",
-    "facts": [
-     "F1",
-     "P3"
-    ],
-    "quotes": [
-     "As of June 30, 2026, we also held $1,600,000 of refundable deposits for pending equity investments in a private company incorporated in Delaware."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1",
-    "claim": "The Brightray project documents disclosed so far (Macao framework agreement, Indiana letter of intent) are non-binding and have no purchase obligations.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from the two figures shown in F2 and P3; the reason is not stated",
-    "claim": "The reported loss per share differs between the income statement ($0.03) and the MD&A ($0.29), and the filing does not reconcile the two.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Basic and diluted loss per ordinary share was $0.29 for fiscal 2026, compared with basic and diluted earnings per ordinary share of $0.05 for fiscal 2025."
-    ],
-    "support": "supported"
-   }
-  ],
-  "thesis_change": [],
-  "unresolved_questions": [
-   {
-    "basis": "stated in the cited items; the final share count is not stated",
-    "claim": "How many Class A shares will finally be issued to DeedTech for the 60% Brightray interest? The P-Note of US$200,000,000 adjusts with Brightray's Net Profit, and the share cap of 240,000,000 compares with 148,780,000 Class A shares now outstanding.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "The aggregate number of Class A Ordinary Shares issuable under the Share Purchase Agreement for our 60% equity interest, inclusive of the Consideration Shares, is capped at 24,000,000 Class A Ordinary Shares (240,000,000 after giving effect to the Share Subdivision).",
-     "As of the date of this annual report, 148,780,000 Class A Ordinary Shares and 50,000,000 Class B Ordinary Shares were issued and outstanding, after giving effect to the Share Subdivision."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items that Brightray is excluded; the absence of its figures is inferred from the packet",
-    "claim": "What are Brightray's historical revenue, profit and net assets? Its results are excluded from the reported financials, and the consideration is tied to a guaranteed cumulative Net Profit of US$150 million.",
+    "basis": "Stated in the Item 3.D risk factor; the mechanism is partly inferred from the risk text.",
+    "claim": "The company is moving from a Hong Kong events business into prefabricated data centers through the Brightray acquisition, and Brightray's results are not in the reported financials. Integration could fail or the business could underperform.",
     "facts": [
      "P1",
      "P2",
      "P3"
     ],
     "quotes": [
-     "As the Acquisition was completed after June 30, 2026, the results of Brightray are not included in our consolidated financial statements for the year ended June 30, 2026 included in this annual report.",
-     "DeedTech has guaranteed that such cumulative Net Profit will be not less than US$150 million, and any shortfall reduces the consideration"
+     "Brightray\u2019s business differs significantly from our historical MICE business in Hong Kong."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3; the future expense pattern is inferred from the stated recognition periods",
-    "claim": "How much more share-based compensation will weigh on future results? The year's general administrative expenses were driven by it, and unrecognized costs remain for RSUs and options.",
+    "basis": "Stated in the Item 4 and Item 3.D passages.",
+    "claim": "Settling the P-Note and any further acquisition consideration in new Class A shares could substantially dilute existing holders. The share issuance is capped at 24,000,000 shares (240,000,000 after the subdivision), and the uplift for late issuance sits outside the cap.",
     "facts": [
-     "P3",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Any issuance of Class A Ordinary Shares in settlement of the P-Note, and any consideration payable in Class A Ordinary Shares for the remaining 40% interest in Brightray if we exercise our call option, would dilute the economic and voting interests of our existing shareholders."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash figures are stated in F1, F3 and P3; the liquidity-pressure inference is analyst reasoning. Management's contrary conclusion is stated in P4.",
+    "claim": "Operating cash flow was very small, and the year-end cash of $3,755,687 came from IPO proceeds rather than operations. The company reported a net loss, holds a refundable deposit, and has bank borrowings repayable on demand.",
+    "facts": [
+     "F1",
+     "F2",
      "F3",
-     "F2"
+     "P3",
+     "P4"
     ],
     "quotes": [
-     "Share-based compensation was $3,979,714 for the year ended June 30, 2026, compared to nil for the year ended June 30, 2025."
+     "Management believes that the Company\u2019s existing cash resources, together with expected cash flows from operations and available financing sources, provide adequate financial resources to continue as a going concern for at least twelve months from the date these consolidated financial statements are issued."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3; durability is not stated",
-    "claim": "Is the fall in gross margin from 31.0% to 17.0% a one-year effect of project mix and cost inflation, or a lasting shift? The filing says higher costs were not fully passed on to customers.",
+    "basis": "Concentration percentage stated in P3; the project-based contract nature is stated in P2.",
+    "claim": "One customer accounted for about half of revenue in fiscal 2026, up from about a quarter or a third in earlier years. The company does not usually have long-term contracts, so losing that customer would hit revenue.",
     "facts": [
      "P3",
-     "F2"
-    ],
-    "quotes": [
-     "Higher purchase costs, together with increased direct labor costs, contributed to the decline in our gross profit margin from approximately 31.0% to approximately 17.0%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3; future behavior is not stated",
-    "claim": "Will the largest customer's share of revenue, 50.7% in the latest year versus 27.9% the year before, persist, and what happens if that customer's spending changes?",
-    "facts": [
-     "P3"
+     "P2"
     ],
     "quotes": [
      "Our largest customer accounted for approximately 50.7%, 27.9% and 29.1% of our revenue for the years ended June 30, 2026, 2025 and 2024, respectively."
@@ -777,57 +688,55 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items; the link between the deposits and PINK 308 LLC is not stated",
-    "claim": "Will the pending PINK 308 LLC transaction become a definitive agreement and close, and will the $1,600,000 deposits be applied or refunded? The packet does not say whether the Delaware company holding the deposits is PINK 308 LLC.",
+    "basis": "Stated in the Item 5 discussion and the income statement.",
+    "claim": "Gross margin fell sharply in fiscal 2026 as costs rose faster than revenue and were not fully passed on to customers, and the core MICE business may not recover.",
     "facts": [
-     "P1",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Higher purchase costs, together with increased direct labor costs, contributed to the decline in our gross profit margin from approximately 31.0% to approximately 17.0%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Amounts and periods stated in P3; the earnings effect is inferred.",
+    "claim": "A large amount of share-based compensation has not yet been recognized and will weigh on reported results in coming periods. The prior year already included a large share-based compensation charge.",
+    "facts": [
      "P3",
-     "F1",
      "F3"
     ],
     "quotes": [
-     "The memorandum of understanding does not constitute a definitive agreement, and the terms of any transaction, including consideration, structure and timing, remain subject to due diligence, negotiation and definitive documentation."
+     "As of June 30, 2026, unrecognized compensation costs relating to outstanding unvested RSUs and share options were $6,083,370 and $2,103,995, respectively."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in P1; the outcome after the deadline is not in the packet",
-    "claim": "Did any further private placement closing occur by the stated outside date, and how much additional capital was raised beyond the first closing?",
+    "basis": "Stated in the Item 4 Recent Developments passages.",
+    "claim": "The first Brightray project agreements are non-binding, so expected revenue from them may not turn into contracts.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "is to occur no later than November 9, 2026 and may take place in one or more closings"
+     "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1; the outcomes are not stated",
-    "claim": "Will the non-binding Macao framework agreement and the Indiana letter of intent turn into binding purchase orders or contracts? The Indiana partner had indicated a purchase order date that has since passed.",
+    "basis": "Stated in F1 and P3; the risk to recovery is inferred.",
+    "claim": "The company holds a refundable deposit for a pending equity investment in a private Delaware company, and closing has slipped from July 2026 to December 2026.",
     "facts": [
-     "P1"
+     "F1",
+     "P3"
     ],
     "quotes": [
-     "The framework agreement does not create any obligation to purchase or supply modules, and pricing under it is provisional and non-binding.",
-     "The partner has indicated that it intends to issue a purchase order by November 15, 2026."
+     "These deposits were classified as non-current assets and were not included in cash and cash equivalents or working capital."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1; completion status is not stated",
-    "claim": "Have Brightray's core trade marks been transferred and its other core intellectual property licensed to the Brightray group? Share issuance beyond the Consideration Shares depends on this.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "no Class A Ordinary Shares are issuable after the Consideration Shares until the core trade marks used in Brightray\u2019s business have been transferred to, and licences of its other core intellectual property have been granted to, the Brightray group"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "inferred from comparing the printed figures; no reconciliation is in the packet",
-    "claim": "Which share basis underlies the reported loss per share? F2 prints (0.03), while the discussion in P3 states $0.29 for the same year and $0.05 for the prior year's earnings per share.",
+    "basis": "Inferred from comparing F2 and P3; the cause is not stated.",
+    "claim": "The filing shows inconsistent per-share loss figures. The statement of operations shows a loss of $(0.03) per share, and the Item 5 text states $0.29.",
     "facts": [
      "F2",
      "P3"
@@ -838,6 +747,123 @@
     ],
     "support": "supported"
    }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in the cited items. The cause of the mismatch is inferred, not stated.",
+    "claim": "The income statement prints a fiscal 2026 loss per share of (0.03) on 164,913,300 weighted shares, and 0.01 for the prior two years. The MD&A text gives a loss of $0.29 and prior-year earnings of $0.05. Which basis is correct, and are the shares split-adjusted?",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Basic and diluted loss per ordinary share was $0.29 for fiscal 2026, compared with basic and diluted earnings per ordinary share of $0.05 for fiscal 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. The absence of Brightray financials follows from what the packet lacks.",
+    "claim": "Brightray's own revenue, profit and balance sheet are not in the evidence. The 60% acquisition closed after year-end. So the size of the data center business, and how the contingent P-Note consideration will be accounted for, are unknown.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "As the Acquisition was completed after June 30, 2026, the results of Brightray are not included in our consolidated financial statements for the year ended June 30, 2026 included in this annual report."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. The link between the deposit and PINK 308 LLC is not stated.",
+    "claim": "The company holds $1,600,000 of deposits for investments, and the proposed acquisition of PINK 308 LLC is pending only under a non-binding memorandum of understanding. Will it close and be completed, or will the deposit be refunded? The filing does not say whether the deposit relates to PINK 308 LLC.",
+    "facts": [
+     "F1",
+     "F3",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "its expected closing date has been extended from July 2026 to December 2026"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cited items.",
+    "claim": "Share-based compensation of $3,979,714 was a large part of the fiscal 2026 loss. Unrecognized costs of $6,083,370 for RSUs and $2,103,995 for options remain. What will the underlying operating result be once these charges run off?",
+    "facts": [
+     "F2",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Share-based compensation was $3,979,714 for the year ended June 30, 2026, compared to nil for the year ended June 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. Whether the margin recovers is not addressed.",
+    "claim": "Gross margin fell from approximately 31.0% to approximately 17.0% as purchase and labor costs rose. The largest customer made up approximately 50.7% of revenue. Will the margin and customer mix persist?",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Higher purchase costs, together with increased direct labor costs, contributed to the decline in our gross profit margin from approximately 31.0% to approximately 17.0%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. Whether the further closing occurred is not in the packet.",
+    "claim": "Cash at year-end was $3,755,687, but operating cash flow was only 15,939. A first closing of the private placement raised US$10,000,000. Did the further closing take place, and how will the Brightray capacity expansion be funded?",
+    "facts": [
+     "F1",
+     "F3",
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "any further closing, for up to 2,000,000 Purchaser Units (20,000,000 Purchaser Units after giving effect to the Share Subdivision), is to occur no later than November 9, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Share counts are stated in the cited items. The screener's share basis is not stated and is only inferred.",
+    "claim": "At the report date 148,780,000 Class A and 50,000,000 Class B shares were outstanding after the split. The June 30 balance sheet shows 118,065,000 Class A shares. The packet does not itemize the change, so the share base behind the screener market cap of 787168803 at a price of 3.96 is unclear.",
+    "facts": [
+     "F1",
+     "P1",
+     "S0"
+    ],
+    "quotes": [
+     "As of the date of this annual report, 148,780,000 Class A Ordinary Shares and 50,000,000 Class B Ordinary Shares were issued and outstanding, after giving effect to the Share Subdivision."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cited item. The outcome is not in the packet.",
+    "claim": "Brightray's visible pipeline rests on a non-binding framework agreement and a non-binding letter of intent. Will the Indiana partner issue a purchase order, and will the Macao project secure a tenant and a definitive contract?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The partner has indicated that it intends to issue a purchase order by November 15, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items. Current status is not in the packet.",
+    "claim": "Share issuance under the P-Note depends on core trade marks being transferred and other IP being licensed to the Brightray group. Mr. Wang Bin has not yet been appointed. Have these conditions been met, and when will the P-Note shares start to be issued?",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "no Class A Ordinary Shares are issuable after the Consideration Shares until the core trade marks used in Brightray\u2019s business have been transferred to, and licences of its other core intellectual property have been granted to, the Brightray group"
+    ],
+    "support": "supported"
+   }
   ]
  },
  "ticker": "BUUU",
@@ -845,5 +871,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no positive earnings base"
+ "verdict_reason": "diluted share count not filed"
 }
