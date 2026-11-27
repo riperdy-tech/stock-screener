@@ -2,592 +2,924 @@
  "alpha_pts": null,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 60,
- "claims_supported": 54,
- "date": "2026-11-18T03:34:47Z",
- "family": "family_not_built",
+ "based_on": {
+  "accepted": "2026-11-09T21:30:44.000Z",
+  "accepted_utc": "2026-11-10T02:30:44Z",
+  "accession": "0001193125-26-453696",
+  "decision_time": "2026-11-27T11:31:58Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 79,
+ "claims_supported": 77,
+ "date": "2026-11-27T11:31:58Z",
+ "family": "operating",
  "flags": [
-  "The company entered a new $1.0 billion senior secured credit facility that replaced its existing credit agreement, and repaid $200.0 million of obligations under the old agreement the same day.",
-  "The company closed its acquisition of Marigold's Enterprise Business. The 10-K ties the rise in acquisition-related expenses to this deal."
+  "Zeta closed its acquisition of Marigold\u2019s Enterprise Business, which contributed $48.0 million to third-quarter 2026 GAAP revenue.",
+  "Zeta completed acquisitions of Senso Agentic Inc. and Social Audience B.V. prior to its November 9, 2026 earnings release.",
+  "During the nine months ended September 30, 2026, Zeta recorded investing cash outflows for acquisitions and other investments, net of cash acquired, of (51,061) (table in thousands) and issued shares of 87,192 (table in thousands) in connection with acquisitions and other agreements."
  ],
  "in_code_book": false,
+ "interest_from_filing": {
+  "fy0": "2025-12-31",
+  "kd_tagged": 0.0018862600445889504,
+  "status": "cannot_tell",
+  "tagged_value": 371000.0,
+  "version": "interest_from_filing.v1 2026-11-18 WO_NC8",
+  "why": "The tagged figure ($371 thousand) is \"Interest expenses, net,\" which deducts interest earned on short-term investments in money market accounts and other short-term deposits from interest payable on long-term borrowings, and the provided evidence does not disclose gross interest expense on borrowings separately."
+ },
  "ke": null,
- "model": "claude-sonnet-5-5",
+ "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+ "no_value_reason": "implied borrowing cost outside the allowed range",
  "pending_offer": null,
  "qwen_book": null,
- "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
- "source": "screener list refresh",
+ "release_truncated": [],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K business section",
-    "claim": "Zeta sells an AI-powered cloud marketing platform, the Zeta Marketing Platform (ZMP), to enterprises. It combines consumer intelligence data with marketing automation software.",
+    "basis": "stated in P1",
+    "claim": "Zeta sells the Zeta Marketing Platform (ZMP), an AI-powered consumer intelligence and marketing automation software platform comprising Email Service Provider (ESP), CDP+, and DSP products, the Zeta Answers suite, Athena, and technical and consulting services.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Zeta is a leading AI-powered omnichannel data-driven cloud platform that provides enterprises with consumer intelligence and marketing automation software."
+     "Zeta is a leading AI-powered omnichannel data-driven cloud platform that provides enterprises with consumer intelligence and marketing automation software.",
+     "The platform consists of three core products (Email Service Provider (\u201cESP\u201d), CDP+, and DSP) with modules that can be activated to meet our customers\u2019 specific business needs.",
+     "We also offer various technical upgrades, consulting services, additional integrations, and access to ad-hoc data sources, services, and channels."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1 and Item 7",
-    "claim": "The product set has three core products (ESP messaging, CDP+ data management and DSP media activation), plus the Zeta Answers intelligence suite. Customers can buy them individually or in combination.",
+    "basis": "stated in P1, P2, P3, and P5",
+    "claim": "Zeta generates revenue from subscription fees, volume-based utilization fees, and professional services fees, with a substantial portion derived from usage-based pricing.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our customers can purchase our products individually or in combination based on their evolving needs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K and 10-Q MD&A",
-    "claim": "Revenue comes from subscription fees, volume-based utilization fees and professional-services fees. In the nine months to September 30, 2026, 72% came from direct platforms and 28% from integrated platforms, versus 75% and 25% a year earlier.",
-    "facts": [
+     "P1",
+     "P2",
      "P3",
      "P5"
     ],
     "quotes": [
      "Our revenue primarily arises from use of our technology platform via subscription fees, volume-based utilization fees and fees for professional services.",
-     "For the nine months ended September 30, 2026 and 2025, we derived 72% and 75% of our revenues from direct platforms, respectively, and 28% and 25% of our revenues from integrated platforms, respectively."
+     "A substantial portion of our revenue is derived from usage-based pricing, which is less stable than subscription-based pricing.",
+     "The terms of our subscription agreements are typically quarterly or annual."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in both the 10-K and the 10-Q MD&A. No product or segment revenue split is given in the visible text.",
-    "claim": "Zeta reports a single reportable segment. The chief operating decision maker is the CEO.",
+    "basis": "stated in P3, P5, and P7",
+    "claim": "Zeta derives most of its platform revenue from direct platforms rather than third-party API-integrated platforms, at 74% versus 26% in 2025 and 72% versus 28% in the nine months ended September 30, 2026.",
     "facts": [
      "P3",
-     "P5"
+     "P5",
+     "P7"
     ],
     "quotes": [
-     "We operate as a single reportable segment"
+     "Our platform revenue is comprised of a mix of direct platform revenue and integrated platform revenue, which leverages API integrations with third parties.",
+     "For 2025 and 2024, we derived 74% and 70% of our revenues from direct platforms, respectively, and 26% and 30% of our revenues from integrated platforms, respectively.",
+     "For the nine months ended September 30, 2026 and 2025, we derived 72% and 75% of our revenues from direct platforms, respectively, and 28% and 25% of our revenues from integrated platforms, respectively.",
+     "When the Company generates revenues entirely through the Company platform, the Company considers it direct platform revenue."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A",
-    "claim": "Customers are enterprises. Super-scaled customers (at least $1.0 million of revenue in the trailing twelve months) were 184 at year-end 2025 and made up 87% of 2025 revenue, up from 148 and 84% in 2024.",
+    "basis": "stated in P1 and P3",
+    "claim": "Zeta sells to enterprises across multiple industry verticals and marketing agencies in the U.S. and Europe, with 602 scaled customers generating 97% of total revenue in 2025 and 184 super-scaled customers generating 87%.",
     "facts": [
+     "P1",
      "P3"
     ],
     "quotes": [
+     "We also have extensive relationships with many marketing agencies and enterprises and believe we can continue to extend our platform to provide B2B marketing capabilities.",
+     "As we expand relationships with our existing customers in the U.S., we are also continuing to invest in select regions in Europe.",
+     "As of December 31, 2025, we had 602 scaled customers representing 97% of total revenue in 2025, compared to 527 scaled customers as of December 31, 2024, representing 98% of total revenue in 2024.",
      "As of December 31, 2025, we had 184 super-scaled customers representing 87% of total revenue in 2025, compared to 148 super-scaled customers as of December 31, 2024, representing 84% of total revenue in 2024."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Customer concentration is notable. In 2025 one customer exceeded 10% of revenue, and customers can change spend or leave on limited notice.",
+    "basis": "stated in P2",
+    "claim": "Customer revenue is concentrated among large accounts, with the top ten customers accounting for more than one-third of 2025 revenue and one customer exceeding 10%, while non-exclusive contracts carry low switching costs.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "In 2025, our top ten customers accounted for more than one-third of our total revenue, and one customer accounted for more than 10% of our total revenue.",
-     "Such agreements allow our customers to change the amount of spend through our platform or terminate our services with limited notice."
+     "Many of our contracts and relationships with customers do not include automatic renewal or exclusive obligations requiring them to use our platform or maintain or increase their use of our platform.",
+     "Our customers, in particular our super-scaled customers, typically have relationships with numerous providers and can use both our platform and those of our competitors without incurring significant costs or disruption."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A",
-    "claim": "Revenue growth is driven by higher usage and ARPU among existing customers plus new customers and acquisitions. In 2025, $190.9 million of the revenue increase came from existing customers and $108.0 million from new customers, including approximately $84.2 million from acquisitions.",
+    "basis": "stated in P3 and P5",
+    "claim": "Zeta operates as a single reportable segment managed by its Chief Executive Officer as the Chief Operating Decision Maker.",
     "facts": [
-     "P3"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "The increase in revenues is attributable to incremental revenues of $108.0 million from new customers (including approximately $84.2 million from acquisitions) and $190.9 million from existing customers.",
-     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively."
+     "We operate as a single reportable segment to reflect the way our Chief Operating Decision Maker (\u201cCODM\u201d) reviews and assesses the performance of the business.",
+     "The Company\u2019s CODM is the Chief Executive Officer."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q income statement and the earnings release. The acquisition closing date comes from the 10-K MD&A and is not cited here.",
-    "claim": "Third-quarter 2026 revenue was 492,658 versus 337,169 a year earlier (table in thousands of USD). Management cites growth of 46%, or 30% excluding Marigold and political candidate revenue, so acquisition revenue contributes materially.",
+    "basis": "stated in P3, P5, and P7",
+    "claim": "Revenue growth is driven by adding super-scaled customers (at least $1,000,000 in trailing twelve-month revenue) and expanding existing customer spend, with 2025 annual NRR reaching 128.0% and super-scaled customers rising 18% to 212 as of September 30, 2026.",
     "facts": [
-     "F2",
-     "P7"
-    ],
-    "quotes": [
-     "Delivered revenue of $493 million for the third quarter, an increase of 46% Y/Y or 30% Y/Y excluding Marigold and political candidate revenue, an acceleration from 28% growth excluding Marigold last quarter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and the earnings release",
-    "claim": "Customer metrics rose in the third quarter of 2026. Super-scaled customers increased 18% to 212 from 180, and quarterly super-scaled ARPU rose 22% to $2.0 million.",
-    "facts": [
+     "P3",
      "P5",
      "P7"
     ],
     "quotes": [
-     "Super-scaled customers increased 18% to 212 as of September 30, 2026, compared to 180 as of September 30, 2025, primarily due to higher usage of our platform among our customers and new additions to our super-scaled customer base."
+     "We define \u201csuper-scaled customers\u201d as customers from which we generated at least $1,000,000 in revenues in the trailing twelve months.",
+     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively.",
+     "Super-scaled customers increased 18% to 212 as of September 30, 2026, compared to 180 as of September 30, 2025, primarily due to higher usage of our platform among our customers and new additions to our super-scaled customer base.",
+     "Super-scaled customer Average Revenue Per User (\u201cARPU\u201d) increased 22% to $2.0 million (across 212 customers) for the three months ended September 30, 2026, compared to $1.6 million (across 180 customers) for the three months ended September 30, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A and the 10-Q income statement",
-    "claim": "The largest cost is cost of revenues, mainly media and marketing fees paid to third-party publishers and partners. These rise with revenue. In 2025, $89.9 million of the cost increase was incremental media costs.",
+    "basis": "stated in P2, P3, and P7",
+    "claim": "Acquisitions, fourth-quarter holiday seasonality, and biennial U.S. election cycles also drive revenue, with political and advocacy customers representing 8.0% of revenue in 2024 versus 1.0% in 2025 and Marigold\u2019s Enterprise Business adding $48.0 million in the third quarter of 2026.",
     "facts": [
+     "P2",
      "P3",
-     "F2"
+     "P7"
+    ],
+    "quotes": [
+     "Historically, marketing activity is higher in the fourth quarter of the calendar year to coincide with the holiday shopping season as compared to the first quarter.",
+     "We exclude political and advocacy customers, which represented 1.0% and 8.0% of revenue for 2025 and 2024, respectively, from our calculation of annual NRR rate because of the biennial nature of these customers.",
+     "The increase in revenues is attributable to incremental revenues of $108.0 million from new customers (including approximately $84.2 million from acquisitions) and $190.9 million from existing customers.",
+     "Reflects the removal of Marigold\u2019s Enterprise Business contribution to revenue of $48.0 million and political candidate revenue of $7.4 million from total GAAP revenue of $492.7 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, P5, and P7",
+    "claim": "Cost of revenues (excluding depreciation and amortization) is driven mainly by third-party media and marketing fees, internet traffic costs, customer support, and delivery staff costs, increasing 28.5% in 2025 alongside 29.7% revenue growth.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5",
+     "P7"
     ],
     "quotes": [
      "Cost of revenues excludes depreciation and amortization and consists primarily of media and marketing costs and certain employee-related costs.",
-     "This increase was primarily driven by $89.9 million of incremental media costs related to incremental revenues, higher technology expenses of $22.8 million and employee-related costs of $1.3 million."
+     "We pay these third-party publishers, media owners or managers and strategic partners on revenue-share, a cost-per-lead, cost-per-click, or cost-per-thousand-impressions basis.",
+     "Cost of revenues (excluding depreciation and amortization) increased by $114.0 million, or 28.5%, for the year ended December 31, 2025, as compared to the year ended December 31, 2024.",
+     "Revenues increased by $298.9 million, or 29.7%, for the year ended December 31, 2025 as compared to the year ended December 31, 2024."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K and in the 10-Q statements",
-    "claim": "People costs, much of it stock-based compensation, are the main operating cost beyond media. For the nine months to September 30, 2026, selling and marketing was 315,884, R&D was 128,724 and stock-based compensation was 155,125 (tables in thousands of USD).",
+    "basis": "stated in P1, P2, P3, P5, and P7",
+    "claim": "Operating expenses are driven mainly by employee-related costs, stock-based compensation ($155,125 in the nine months ended September 30, 2026, table in thousands), hybrid-cloud infrastructure, and development operations in India, with a significant share fixed in the short term.",
     "facts": [
+     "P1",
+     "P2",
      "P3",
-     "F2",
-     "F3"
+     "P5",
+     "P7"
     ],
     "quotes": [
-     "Selling and marketing expenses primarily consist of employee-related costs, including salaries, bonuses, employee benefits costs, stock-based compensation and commission costs for our sales and marketing personnel."
+     "In addition, a significant percentage of our operating expenses are fixed in nature in the short term and based on forecasted revenue trends.",
+     "We expect to continue to rely on significant cost savings obtained by concentrating our technology and development and engineering work in India and other non-U.S. locations, but difficulties resulting from the factors noted above and other risks related to our operations in India or such other non-U.S. locations could increase our expenses and harm our competitive position.",
+     "We have incurred substantial stock-based compensation expense and will continue to incur stock-based compensation expense in future years as a result of our equity compensation plan under which we grant time-based and performance-based restricted stock awards.",
+     "The ZMP is hosted in the Zeta Hybrid Cloud, which is a unique pairing of a public cloud (AWS/Google/Azure) deployment and self-hosted private cloud (VMware/Docker/Kubernetes) resources designed to facilitate workload management in a cost-effective, performant and efficient manner."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q income statement and the earnings release",
-    "claim": "Revenue growth has outpaced costs recently, turning the business GAAP-profitable. Nine-month 2026 operating income was 44,033 and net income 33,199, versus operating loss (12,466) and net loss (38,048) a year earlier (table in thousands of USD).",
+    "basis": "stated in F2, F3, P3, and P5",
+    "claim": "Acquisitions and internal restructurings drive additional operating and non-operating costs through intangible asset amortization, acquisition-related expenses, restructuring charges, and fair-value remeasurements of acquisition-related liabilities.",
     "facts": [
      "F2",
-     "P7"
-    ],
-    "quotes": [
-     "Achieved positive GAAP net income of $38 million, and diluted GAAP earnings per share of $0.14 for the third quarter."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-K MD&A. The political figure is from the earnings release reconciliation table.",
-    "claim": "Revenue is seasonal and cyclical. Activity is higher in the fourth quarter than the first, and political spending lifts revenue in election years. The third quarter of 2026 included $7.4 million of political candidate revenue (table in millions).",
-    "facts": [
+     "F3",
      "P3",
-     "P7"
+     "P5"
     ],
     "quotes": [
-     "Historically, marketing activity is higher in the fourth quarter of the calendar year to coincide with the holiday shopping season as compared to the first quarter."
+     "Depreciation and amortization relate to property and equipment, website and software development costs as well as acquisition-related and other acquired intangible assets.",
+     "Acquisition-related expenses primarily consist of legal and professional services fees and employee related expenses that are associated with business combinations.",
+     "Restructuring expenses primarily consist of employee termination costs due to internal restructuring.",
+     "Other expenses, net primarily consist of changes in fair value of acquisition-related liabilities, gains and losses on assets and foreign exchange gains and losses."
     ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 8-K and the 10-Q cash flow statement",
-    "claim": "Zeta uses acquisitions and buybacks as part of its growth model. In July 2026 it closed a $1 billion credit facility for mergers and acquisitions, share repurchases and general corporate purposes. Nine-month 2026 cash flow shows 51,061 for acquisitions and 85,513 for share repurchases (table in thousands of USD).",
-    "facts": [
-     "P8",
-     "F3"
-    ],
-    "quotes": [
-     "Zeta Global Closes $1 Billion Credit Facility for Mergers & Acquisitions, Share Repurchases and General Corporate Purposes"
-    ],
-    "support": "number_not_listed"
+    "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the 10-K business section. This is the company's own description, not independent evidence of market position.",
-    "claim": "Zeta presents itself as a leading AI-powered omnichannel marketing platform. Its Zeta Marketing Platform (ZMP) combines email, data management (CDP+) and ad-buying (DSP) products on one platform.",
+    "basis": "Stated in 10-K Item 1 Business and Item 7 MD&A.",
+    "claim": "Zeta positions its Zeta Marketing Platform as a single AI-powered platform combining Email Service Provider, CDP+, and DSP products with embedded identity data and Zeta Answers intelligence.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The platform consists of three core products (Email Service Provider (\u201cESP\u201d), CDP+, and DSP) with modules that can be activated to meet our customers\u2019 specific business needs.",
+     "While we do not believe our competitors offer a comparable all-in-one platform solution for marketing automation, certain competitors offer point solutions that compete with specific tools and products we offer as part of the ZMP."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Zeta's proprietary data set covers more than 245 million individuals in the U.S. and more than 535 million individuals globally, averaging more than 2,500 attributes per individual.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Zeta is a leading AI-powered omnichannel data-driven cloud platform that provides enterprises with consumer intelligence and marketing automation software."
+     "Our data set, which contains more than 245 million individuals in the U.S. and more than 535 million individuals globally, is a comprehensive mix of proprietary, partner, and publicly available data providing enhanced first-party resolution.",
+     "This data set includes an average of more than 2,500 attributes per individual, which may be demographic, behavioral, psychographic, transactional, or indicative of preference."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K. The size claim is the company's own and is not independently verified.",
-    "claim": "The company's data asset is a stated competitive strength. It covers more than 245 million individuals in the U.S. and more than 535 million globally.",
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Zeta's DSP operates on a people-based identity graph with minimal reliance on third-party cookies, supported by Zeta SuperGraph for identity resolution.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Our data set, which contains more than 245 million individuals in the U.S. and more than 535 million individuals globally, is a comprehensive mix of proprietary, partner, and publicly available data providing enhanced first-party resolution."
+     "It operates on one of the industry\u2019s most durable and persistent identity graphs, anchored by people-based identifiers with minimal reliance on third-party cookies.",
+     "This infrastructure includes our proprietary Zeta SuperGraph that enables identity resolution and relationship mapping across disparate data sources, as well as data pipelines and APIs that support the ingestion, normalization, governance, and activation of large volumes of structured and unstructured data."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are from the 10-Q statement and the earnings release. The split between acquired and underlying growth is from management's own non-GAAP framing.",
-    "claim": "Reported growth is strong but includes acquired revenue. Q3 2026 revenue was 492,658 (table in thousands) versus 337,169 a year earlier, and income from operations was 45,948 versus 8,752. Management gives the 46% headline growth and 30% growth excluding Marigold and political candidate revenue.",
+    "basis": "Stated in 10-K Item 1 Business.",
+    "claim": "Independent industry analysts recognized Zeta in 2023, 2024, and 2025, including a Leader ranking in Forrester Wave Email Marketing Service Providers and recognition from IDC, QKS Group, and Gartner.",
     "facts": [
-     "F2",
-     "P7"
+     "P1"
     ],
     "quotes": [
-     "Delivered revenue of $493 million for the third quarter, an increase of 46% Y/Y or 30% Y/Y excluding Marigold and political candidate revenue"
+     "In 2024, we were recognized, for the third time in a row, as a \u201cLeader\u201d in The Forrester Wave\u2122: Email Marketing Service Providers, Q3 2024 and received the highest Current Offering score and the highest possible scores across 13 criteria including vision, roadmap, AI, organizational improvement, and privacy.",
+     "In 2024, we were also recognized as a \u201cStrong Performer\u201d in The Forrester Wave\u2122: Customer Data Platforms for B2C, with the highest possible scores across six criteria, and as a \u201cChallenger\u201d in Gartner\u2019s Magic Quadrant\u2122: Multi-Channel Marketing Hubs, Q4, 2024.",
+     "In addition, in 2023, we were named as a \u201cLeader\u201d in IDC\u2019s MarketScape for Worldwide Omni-Channel Marketing Platforms for B2C Enterprises.",
+     "In 2025, we were awarded IDC\u2019s CX Customer Data Platforms Customer Satisfaction Award and named as \u201cMost Valuable Pioneer\u201d for CDP in QKS Group\u2019s 2025 AI Maturity Matrix."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A and the earnings release.",
-    "claim": "The large-customer base is growing. Super-scaled customers (at least $1.0 million of trailing-twelve-month revenue) rose 18% to 212 from 180. Their ARPU rose 22% to $2.0 million.",
+    "basis": "Stated in 10-K Item 7 MD&A and 10-Q Item 2 MD&A.",
+    "claim": "Zeta generates most of its revenue directly through its platform rather than third-party integrations, deriving 74% from direct platforms and 26% from integrated platforms in 2025, and 72% direct versus 28% integrated in the nine months ended September 30, 2026.",
     "facts": [
-     "P5",
-     "P7"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "Super-scaled customers increased 18% to 212 as of September 30, 2026, compared to 180 as of September 30, 2025, primarily due to higher usage of our platform among our customers and new additions to our super-scaled customer base."
+     "For 2025 and 2024, we derived 74% and 70% of our revenues from direct platforms, respectively, and 26% and 30% of our revenues from integrated platforms, respectively.",
+     "For the nine months ended September 30, 2026 and 2025, we derived 72% and 75% of our revenues from direct platforms, respectively, and 28% and 25% of our revenues from integrated platforms, respectively."
     ],
-    "support": "number_not_listed"
+    "support": "number_not_found"
    },
    {
-    "basis": "Stated in the 10-K MD&A. The mechanism is the company's description.",
-    "claim": "Existing customers are expanding their spend. Net revenue retention was 128.0% for 2025, up from 113.6% for 2024, and channels per super-scaled customer rose to 3.3 from 3.0.",
+    "basis": "Stated in 10-K Item 7 MD&A.",
+    "claim": "Existing customer expansion is evidenced by an annual net revenue retention rate of 128.0% in 2025 versus 113.6% in 2024, alongside an increase in channels per super-scaled customer from 3.0 to 3.3.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively."
+     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively.",
+     "We exclude political and advocacy customers, which represented 1.0% and 8.0% of revenue for 2025 and 2024, respectively, from our calculation of annual NRR rate because of the biennial nature of these customers.",
+     "During the years ended December 31, 2025 and 2024, our channels per super-scaled customer were 3.3 and 3.0, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A and risk factors.",
-    "claim": "Revenue is concentrated in large customers. In 2025, 184 super-scaled customers produced 87% of revenue, and one customer accounted for more than 10% of total revenue.",
+    "basis": "Stated in 10-K Item 7 MD&A and 10-Q Item 2 MD&A.",
+    "claim": "Super-scaled customers grew 24% to 184 in 2025, representing 87% of total revenue, and rose 18% to 212 as of September 30, 2026, while Q3 2026 super-scaled ARPU increased 22% to $2.0 million.",
     "facts": [
      "P3",
-     "P2"
+     "P5"
     ],
     "quotes": [
-     "we had 184 super-scaled customers representing 87% of total revenue in 2025",
-     "In 2025, our top ten customers accounted for more than one-third of our total revenue, and one customer accounted for more than 10% of our total revenue."
+     "As of December 31, 2025, we had 184 super-scaled customers representing 87% of total revenue in 2025, compared to 148 super-scaled customers as of December 31, 2024, representing 84% of total revenue in 2024.",
+     "Super-scaled customers increased 24% to 184 as of December 31, 2025, compared to 148 as of December 31, 2024.",
+     "Super-scaled customers increased 18% to 212 as of September 30, 2026, compared to 180 as of September 30, 2025, primarily due to higher usage of our platform among our customers and new additions to our super-scaled customer base.",
+     "Super-scaled customer Average Revenue Per User (\u201cARPU\u201d) increased 22% to $2.0 million (across 212 customers) for the three months ended September 30, 2026, compared to $1.6 million (across 180 customers) for the three months ended September 30, 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "Customer lock-in is weak. Contracts often lack automatic renewal or exclusivity, much revenue is usage-based, and customers can use competitors alongside Zeta.",
+    "basis": "Stated in 10-K Item 7 MD&A.",
+    "claim": "In 2025, 90 of 184 super-scaled customers (49.0%) had tenures of 5+ years and generated 68.2% of super-scaled customer revenue, while 209 of 602 scaled customers (34.7%) had 5+ years tenure and generated 64.2% of scaled customer revenue.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our customer loyalty is also reflected in the table below, which breaks down the tenure of our scaled and super-scaled customers for the year ended December 31, 2025.",
+     "5+ Years | 90 | 49.0% | 68.2%",
+     "5+ Years | 209 | 34.7% | 64.2%",
+     "Total | 602 | 100.0% | 100.0%",
+     "Total | 184 | 100.0% | 100.0%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 MD&A and Q3 2026 8-K earnings release.",
+    "claim": "Revenues rose 29.7% (or $298.9 million) in 2025 and reached $492,658 (table in thousands) in the three months ended September 30, 2026 (up 46% year-over-year, or 30% excluding Marigold and political candidate revenue), alongside positive GAAP net income of $38,273 (table in thousands).",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Revenues increased by $298.9 million, or 29.7%, for the year ended December 31, 2025 as compared to the year ended December 31, 2024.",
+     "Delivered revenue of $493 million for the third quarter, an increase of 46% Y/Y or 30% Y/Y excluding Marigold and political candidate revenue, an acceleration from 28% growth excluding Marigold last quarter.",
+     "Revenues | $492,658 | $337,169 | $1,331,728 | $910,030",
+     "Net income / (loss) | $38,273 | $(3,634) | $33,199 | $(38,048)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors and Item 7 MD&A.",
+    "claim": "Zeta faces intense competition and industry consolidation in marketing technology, where larger companies hold greater resources to acquire emerging technologies and competitive pressure could force price reductions that lower profit margins.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our industry is intensely competitive.",
+     "Larger companies typically have more assets to purchase emerging companies or technologies, which gives them a competitive edge.",
+     "In such an event, we may experience a reduction in market share and may have to respond by reducing our prices, resulting in lower profit margins for us.",
+     "Potential customers may also elect to build in-house solutions for marketing automation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Many customer contracts lack automatic renewal or exclusivity, and super-scaled customers typically use competing providers concurrently and can reduce spend or terminate with limited notice without significant switching disruption.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Many of our contracts and relationships with customers do not include automatic renewal or exclusive obligations requiring them to use our platform or maintain or increase their use of our platform.",
-     "A substantial portion of our revenue is derived from usage-based pricing, which is less stable than subscription-based pricing."
+     "Our customers, in particular our super-scaled customers, typically have relationships with numerous providers and can use both our platform and those of our competitors without incurring significant costs or disruption.",
+     "Such agreements allow our customers to change the amount of spend through our platform or terminate our services with limited notice."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors and MD&A. No competitor names or share data are given.",
-    "claim": "The company names competition as a threat. It describes the industry as intensely competitive, notes that larger consolidated rivals have more assets to buy emerging companies or technologies, and says point-solution competitors and in-house builds compete with parts of the ZMP.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Larger companies typically have more assets to purchase emerging companies or technologies, which gives them a competitive edge.",
-     "certain competitors offer point solutions that compete with specific tools and products we offer as part of the ZMP."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factor summary. The 10-Q reports no material change to these risks.",
-    "claim": "Data-access and privacy rules are a named threat to the platform's effectiveness.",
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "In 2025, Zeta's top ten customers accounted for more than one-third of total revenue and a single customer exceeded 10%, while reliance on usage-based pricing makes revenue less stable than subscription-based pricing.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Our business and the effectiveness of our platform depends on our ability to collect and use data online."
+     "In 2025, our top ten customers accounted for more than one-third of our total revenue, and one customer accounted for more than 10% of our total revenue.",
+     "However, if a holding company of multiple marketing agencies chooses to exert control over the individual agencies in the future and terminate their relationship with us, it could result in a disproportionate loss of revenue.",
+     "A substantial portion of our revenue is derived from usage-based pricing, which is less stable than subscription-based pricing."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "Figures are from the 10-Q statements and the earnings release. The profit-versus-SBC comparison is inferred from the cited statements.",
-    "claim": "Operating scale is improving, and cash generation backs the strategy. Nine-month operating cash flow was 210,260 (table in thousands) versus 134,767, and Q3 adjusted EBITDA margin was 24.6%. Nine-month GAAP net income of 33,199 is small beside stock-based compensation of 155,125.",
+    "basis": "Stated in 10-K Item 1A Risk Factors and confirmed unchanged in 10-Q Part II Item 1A.",
+    "claim": "Zeta's platform effectiveness is threatened by consumer anti-tracking tools, web browser and mobile OS changes, privacy and AI regulations, and private inbox provider standards governing email delivery.",
     "facts": [
-     "F2",
-     "F3",
-     "P7"
-    ],
-    "quotes": [
-     "Generated $121 million of adjusted EBITDA and expanded adjusted EBITDA margin by 140 bps Y/Y to 24.6%, reflecting the rule of 71."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K, the balance sheet and the 10-K risk factors.",
-    "claim": "The company is using acquisitions and debt to extend its position, which adds integration and covenant risk. It signed a five-year $1.0 billion credit facility, including a $250.0 million term loan, with a leverage covenant. It also recorded Marigold integration risk.",
-    "facts": [
-     "P8",
      "P2",
-     "F1"
+     "P6"
     ],
     "quotes": [
-     "In addition, the Credit Agreement contains a financial covenant that requires the Company to maintain a Consolidated Net Leverage Ratio not greater than 3.25:1.00, with a step-up to 3.75:1.00 for four consecutive fiscal quarters following an acquisition by the Company of at least $100 million."
+     "New consumer tools, regulatory restrictions and potential changes to web browsers and mobile operating systems all threaten our ability to collect such data, which could harm our operating results and financial condition and adversely affect the demand for our products and solutions.",
+     "The standards that private entities and inbox service providers adopt in the future to regulate the use and delivery of email may interfere with the effectiveness of our platform and our ability to conduct business.",
+     "Any actual or perceived failure to comply with evolving regulatory frameworks around the development and use of machine learning and AI technologies and our use of artificial intelligence technologies may expose us to technical, legal, and regulatory risks, which could adversely affect our business, results of operations, and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors and confirmed unchanged in 10-Q Part II Item 1A.",
+    "claim": "Execution threats include long enterprise sales cycles, integration risks from acquisitions such as Marigold's Enterprise Business, competition for engineering and sales talent, and reliance on technology development operations in India.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "We often have long sales cycles, which can result in significant time between initial contact with a potential customer and execution of a customer agreement, making it difficult to project when, if at all, we will generate revenue from those customers.",
+     "Acquisitions or strategic investments could be difficult to identify and integrate (including the integration of our recent acquisition of Marigold\u2019s Enterprise Business), divert the attention of management and disrupt our business, dilute stockholder value and adversely affect our business, operating results and financial condition.",
+     "We conduct a significant amount of our technology and product development work in India and other global locations.",
+     "Our success depends upon the continued service of members of our senior management team and other key employees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors.",
+    "claim": "Disruptions at third-party data centers and technology vendors, data or security breaches, and undetected fraud or malware on the platform threaten customer and publisher confidence.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We depend on third-party data centers, systems and technologies to operate our business, the disruption of which could adversely affect our business, operating results and financial condition.",
+     "A significant inadvertent disclosure or breach of confidential and/or personal information we process, or a security breach of our or our customers\u2019, suppliers\u2019 or other partners\u2019 IT Systems could be detrimental to our business, reputation, financial performance and results of operations.",
+     "If we fail to detect or prevent fraud or malware intrusion on our platform, devices, or systems, or into the systems or devices of our customers and their consumers, publishers could lose confidence in our platform, and we could face legal claims and regulatory investigations, any of which could adversely affect our business, operating results and financial condition."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet; the comparison is read directly from the line items.",
-    "claim": "Liquidity is comfortable on the balance sheet: cash was 340,085 (table in thousands) against total current liabilities of 331,850, and total current assets were 764,503.",
+    "basis": "Stated directly in the condensed unaudited consolidated balance sheet in F1.",
+    "claim": "As of September 30, 2026, the company held $ 340,085 of cash and cash equivalents and 764,503 of total current assets (including 370,252 of net accounts receivable) against 331,850 of total current liabilities (table in thousands), compared with $ 319,764 of cash, 685,783 of total current assets, and 429,481 of total current liabilities as of December 31, 2025.",
     "facts": [
      "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the balance sheet; no leverage ratio is computed here.",
-    "claim": "Debt is modest relative to cash and equity. Long-term borrowings were 243,949 (table in thousands), up from 197,083 at the prior year-end. Total liabilities were 632,431 against stockholders' equity of 998,132. Cash of 340,085 exceeds the borrowings.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K; headroom is not given in the evidence.",
-    "claim": "The credit agreement sets a maximum Consolidated Net Leverage Ratio of 3.25:1.00, stepping up to 3.75:1.00 for four quarters after an acquisition of at least $100 million. The evidence does not give the company's actual ratio.",
-    "facts": [
-     "P8"
     ],
     "quotes": [
-     "the Credit Agreement contains a financial covenant that requires the Company to maintain a Consolidated Net Leverage Ratio not greater than 3.25:1.00"
+     "Cash and cash equivalents | $ 340,085 | $ 319,764",
+     "Accounts receivable, net of allowance of $4,528 and $3,832 as of September 30, 2026 and December 31, 2025, respectively | 370,252 | 322,391",
+     "Total current assets | 764,503 | 685,783",
+     "Total current liabilities | 331,850 | 429,481"
     ],
     "support": "supported"
    },
    {
-    "basis": "Operating cash flow is stated in the cash flow statement; free cash flow is stated in the earnings release reconciliation.",
-    "claim": "Cash generation strengthened. Operating cash flow for the nine months was 210,260 (table in thousands), against 134,767 a year earlier. Free cash flow was $181,169 against $108,881.",
+    "basis": "Stated in the 10-K risk factors (P2, unchanged per P6) and the 10-Q balance sheet (F1).",
+    "claim": "Liquidity is subject to seasonal quarterly fluctuations and customer credit risk, because the company carries 370,252 of net accounts receivable (net of an allowance of $4,528, table in thousands) as of September 30, 2026 and can remain obligated to pay for campaign inventory even if customers delay or fail to pay.",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "Our liquidity and revenue can fluctuate quarter to quarter as certain of our customers have seasonal marketing activity.",
+     "Even if we are not paid by our customers on time or at all, we may still be obligated to pay for the inventory we have purchased for our customers\u2019 marketing campaigns, and consequently, our results of operations and financial condition would be adversely impacted.",
+     "Accounts receivable, net of allowance of $4,528 and $3,832 as of September 30, 2026 and December 31, 2025, respectively | 370,252 | 322,391"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 10-Q balance sheet (F1) and statement of operations (F2).",
+    "claim": "As of September 30, 2026, long-term borrowings were 243,949 (up from 197,083 as of December 31, 2025, table in thousands), which is less than cash and cash equivalents of $ 340,085 and stockholders' equity of 998,132, while nine-month operating income of 44,033 covered net interest expense of 2,568.",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 340,085 | $ 319,764",
+     "Long-term borrowings | 243,949 | 197,083",
+     "Total stockholders' equity | 998,132 | [1] | 804,589 | [2]",
+     "Income / (loss) from operations | 45,948 | 8,752 | 44,033 | (12,466)",
+     "Interest expenses / (income), net | 909 | (180) | 2,568 | 317"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q cash flow statement (F3) and 10-K liquidity risk disclosures (P4).",
+    "claim": "During the nine months ended September 30, 2026, the company drew 255,799 in net proceeds from credit facilities and repaid (210,000) (table in thousands), and its Senior Secured Credit Facility carries minimum quarterly financial maintenance covenants whose unwaived breach could accelerate all outstanding indebtedness.",
+    "facts": [
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Proceeds from credit facilities, net of issuance costs | 255,799 | 6,250",
+     "Repayments against the credit facilities | (210,000) | (6,250)",
+     "In addition, our Senior Secured Credit Facility contains customary minimum quarterly financial maintenance covenants.",
+     "If not waived, future defaults could cause all of the outstanding indebtedness under the Senior Secured Credit Facility to become immediately due and payable, and our access to further credit under the Senior Secured Credit Facility may terminate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Historical cash flows are stated in F3 and P7; full-year 2026 guidance is management's stated outlook in P7.",
+    "claim": "In the nine months ended September 30, 2026, net cash provided by operating activities rose to 210,260 (from 134,767 in the prior-year period) and non-GAAP free cash flow reached $181,169 (up from $108,881, table in thousands), with full-year 2026 free cash flow guided to a range of $270.6 million to $271.6 million.",
     "facts": [
      "F3",
      "P7"
     ],
-    "quotes": [],
+    "quotes": [
+     "Net cash provided by operating activities | 210,260 | 134,767",
+     "Free cash flow | $81,523 | $47,126 | $181,169 | $108,881",
+     "Increasing free cash flow guidance to a range of $270.6 million to $271.6 million, up $15.8 million at the midpoint from the prior guidance of $255.3 million."
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement and the 10-Q MD&A; the dilution link is inferred from the repurchase line.",
-    "claim": "Cash quality is flattered by stock-based compensation. 155,125 (table in thousands) was added back in operating cash flow, which is a non-cash cost paid in shares. Unrecognized stock-based compensation still to be expensed totals $334,371. Working capital absorbed cash, with accounts receivable growth of (48,516).",
+    "basis": "Stated in the 10-Q cash flow statement (F3) and Q3 2026 earnings release non-GAAP definitions (P7).",
+    "claim": "Operating cash flow of 210,260 in the nine months ended September 30, 2026 far exceeded GAAP net income of $ 33,199 primarily due to non-cash add-backs of 155,125 for stock-based compensation and 67,326 for depreciation and amortization (table in thousands), while the company spent (85,513) on share repurchases in the same period.",
     "facts": [
      "F3",
-     "P5"
+     "P7"
     ],
-    "quotes": [],
+    "quotes": [
+     "Net income / (loss) | $ 33,199 | $ (38,048)",
+     "Stock-based compensation | 155,125 | 134,090",
+     "Depreciation and amortization | 67,326 | 52,281",
+     "Repurchase of shares | (85,513) | (85,964)",
+     "Free cash flow is a non-GAAP financial measure defined as cash from operating activities, less capital expenditures and website and software development costs, adjusted for the effect of exchange rates on cash and cash equivalents."
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement; the link to other non-current assets is inferred and unconfirmed.",
-    "claim": "Cash was used for acquisitions, a loan and buybacks, so cash rose only modestly. Investing outflow was (151,282) (table in thousands), including loan advances of (70,000) and acquisitions of (51,061). Net financing outflow was (39,787) and cash increased by 20,321.",
+    "basis": "Stated directly in the 10-Q cash flow statement (F3).",
+    "claim": "Cash generation quality was also shaped by working-capital outflows including (48,516) in accounts receivable and (18,824) in accounts payable, plus investing outflows of (10,862) for capital expenditures, (19,359) for website and software development costs, (51,061) for acquisitions, and (70,000) for loan advances (table in thousands) during the nine months ended September 30, 2026.",
     "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 8-K and the cash flow statement; the 'no near-term maturity' reading is inferred from the five-year term.",
-    "claim": "The main debt was refinanced into a five-year facility, so no large debt maturity is visible in the near term. The new $1.0 billion facility has a $250.0 million term loan and a $750.0 million revolver, undrawn at closing. It repaid $200.0 million owed under the old agreement.",
-    "facts": [
-     "P8",
      "F3"
     ],
     "quotes": [
-     "a five-year $1.0 billion senior secured credit facility"
+     "Account receivable | (48,516) | (40,314)",
+     "Accounts payable | (18,824) | (14,929)",
+     "Capital expenditures | (10,862) | (10,558)",
+     "Website and software development costs | (19,359) | (15,112)",
+     "Acquisitions and other investments, net of cash acquired | (51,061) | (1,202)",
+     "Loan advances | (70,000)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet and cash flow lines are stated; how the liabilities were settled is inferred.",
-    "claim": "Acquisition-related liabilities have fallen sharply. The current portion was 25,169 (table in thousands) versus 149,036 at the prior year-end, and the non-current portion was 28,020. These are the nearest-dated obligations visible besides operating liabilities.",
+    "basis": "Stated in the 10-Q balance sheet (F1) and 10-K liquidity risk disclosures (P4).",
+    "claim": "As of September 30, 2026, the balance sheet reports no separate current debt line and classifies 243,949 of borrowings as long-term alongside 25,169 of current and 28,020 of non-current acquisition-related liabilities (table in thousands), though an unwaived covenant default under the Senior Secured Credit Facility would make all outstanding debt immediately due and payable.",
     "facts": [
      "F1",
-     "F3"
+     "P4"
     ],
-    "quotes": [],
+    "quotes": [
+     "Long-term borrowings | 243,949 | 197,083",
+     "Acquisition-related liabilities | 25,169 | 149,036",
+     "Acquisition-related liabilities | 28,020 | 39,447",
+     "If not waived, future defaults could cause all of the outstanding indebtedness under the Senior Secured Credit Facility to become immediately due and payable, and our access to further credit under the Senior Secured Credit Facility may terminate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash, debt, and free cash flow figures are stated in F1 and P7; reliance on internal cash or external financing at maturity or default is stated in P4, while coverage sufficiency is inferred without a maturity schedule.",
+    "claim": "Debt obligations can be met from existing cash and cash equivalents of $ 340,085 (table in thousands, exceeding long-term borrowings of 243,949) and ongoing cash generation of $181,169 in nine-month free cash flow (with $270.6 million to $271.6 million guided for full-year 2026), or via additional debt or equity financing if internal cash is insufficient.",
+    "facts": [
+     "F1",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 340,085 | $ 319,764",
+     "Long-term borrowings | 243,949 | 197,083",
+     "Free cash flow | $81,523 | $47,126 | $181,169 | $108,881",
+     "Increasing free cash flow guidance to a range of $270.6 million to $271.6 million, up $15.8 million at the midpoint from the prior guidance of $255.3 million.",
+     "If we do not have or are unable to generate sufficient cash to repay our debt obligations when they become due and payable, either upon maturity or in the event of a default, we would be required to obtain additional debt or equity financing, which may not be available on favorable terms, or at all, which may negatively impact our ability to operate and continue our business as a going concern."
+    ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the 8-K earnings release, which is management's own presentation.",
-    "claim": "Revenue growth is accelerating and is not only acquired: the third quarter grew 46% to $493 million, and 30% excluding Marigold and political candidate revenue. This condition holds only if the 30% organic pace, up from 28% the prior quarter, is sustained.",
+    "basis": "Stated in [P3] and [P5].",
+    "claim": "Zeta grew its super-scaled customer count by 24% to 184 in 2025 and by 18% to 212 in 2026, with those customers representing 87% of total revenue in 2025.",
     "facts": [
-     "P7"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "an increase of 46% Y/Y or 30% Y/Y excluding Marigold and political candidate revenue"
+     "Super-scaled customers increased 24% to 184 as of December 31, 2025, compared to 148 as of December 31, 2024.",
+     "As of December 31, 2025, we had 184 super-scaled customers representing 87% of total revenue in 2025, compared to 148 super-scaled customers as of December 31, 2024, representing 84% of total revenue in 2024.",
+     "Super-scaled customers increased 18% to 212 as of September 30, 2026, compared to 180 as of September 30, 2025, primarily due to higher usage of our platform among our customers and new additions to our super-scaled customer base."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K MD&A; the condition for continuation is inferred from the risk factor text.",
-    "claim": "Expansion within existing customers is the largest driver of the last full year's revenue increase: $190.9 million came from existing customers against $108.0 million from new customers, and net revenue retention rose to 128.0% from 113.6%. For this to continue, customers must keep raising usage.",
+    "basis": "Stated in [P2] and [P3].",
+    "claim": "Continued super-scaled customer growth requires Zeta to win and retain large customers and skilled sales personnel despite non-exclusive contracts without automatic renewal and long enterprise sales cycles.",
     "facts": [
+     "P2",
      "P3"
     ],
     "quotes": [
-     "The increase in revenues is attributable to incremental revenues of $108.0 million from new customers (including approximately $84.2 million from acquisitions) and $190.9 million from existing customers.",
-     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively."
+     "Many of our contracts and relationships with customers do not include automatic renewal or exclusive obligations requiring them to use our platform or maintain or increase their use of our platform.",
+     "We often have long sales cycles, which can result in significant time between initial contact with a potential customer and execution of a customer agreement, making it difficult to project when, if at all, we will obtain new customers and when we will generate revenue from those customers.",
+     "Our ability to achieve growth in revenue in the future will depend, in large part, on our success in recruiting, training and retaining sufficient numbers of sales personnel with relevant industry knowledge and strong selling skills."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A, the earnings release and the risk factors.",
-    "claim": "Growth in super-scaled customers is a driver: their count rose to 212, up 18%, and their ARPU to $2.0 million, up 22%, both faster than the prior quarter. For this to continue, Zeta must keep adding such customers and capturing a larger share of their marketing spend.",
+    "basis": "Stated in [P3] and [P5].",
+    "claim": "Revenue expansion within existing customers drove $190.9 million of incremental revenue and a 128.0% annual NRR rate in 2025, alongside 22% year-over-year super-scaled customer ARPU growth to $2.0 million in the third quarter of 2026.",
     "facts": [
-     "P7",
-     "P5",
-     "P2"
-    ],
-    "quotes": [
-     "Grew Super-Scaled Customer count to 212, an increase of 18% Y/Y and Super-Scaled Customer ARPU grew to $2.0 million, up 22% Y/Y",
-     "Our success and revenue growth depends on our ability to add, grow and retain super-scaled customers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated as a management attribution by the CFO; no figure ties Athena to revenue.",
-    "claim": "Management attributes the acceleration to Athena adoption and usage. For this to continue, Athena must keep being adopted; the evidence does not quantify its revenue.",
-    "facts": [
-     "P7",
-     "P1"
-    ],
-    "quotes": [
-     "with accelerating revenue growth driven by increased Athena adoption and usage",
-     "Athena is emerging as the orchestration layer that connects data, analytics, and activation"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the release table and the 10-K; the dependence on integration is inferred from the risk factor.",
-    "claim": "Acquisitions add revenue: Marigold's Enterprise Business contributed 48.0 (table in millions) in the September 2026 quarter, and the prior full year included approximately $84.2 million of acquired revenue. For this to continue, integration must work and further deals must be found and funded.",
-    "facts": [
-     "P7",
      "P3",
+     "P5"
+    ],
+    "quotes": [
+     "The increase in revenues is attributable to incremental revenues of $108.0 million from new customers (including approximately $84.2 million from acquisitions) and $190.9 million from existing customers.",
+     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively.",
+     "Super-scaled customer Average Revenue Per User (\u201cARPU\u201d) increased 22% to $2.0 million (across 212 customers) for the three months ended September 30, 2026, compared to $1.6 million (across 180 customers) for the three months ended September 30, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "For existing-customer expansion to continue, customers must maintain or increase usage-based marketing spend and perceive sufficient ROI, as flexible agreements let them cut spend or terminate with limited notice.",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "The anticipated benefits of any acquisition (including our recent acquisition of Marigold\u2019s Enterprise Business) or investment may not be realized"
+     "A substantial portion of our revenue is derived from usage-based pricing, which is less stable than subscription-based pricing.",
+     "Our customers may also choose to decrease their overall marketing spend for any reason, including if they do not believe they are generating a sufficient return on their marketing spend.",
+     "Such agreements allow our customers to change the amount of spend through our platform or terminate our services with limited notice."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 8-K; whether the revolver stays undrawn after the closing date is not shown.",
-    "claim": "The financing needed for acquisitions is in place: a new $1.0 billion credit facility whose $750 million revolver was undrawn at closing, for acquisitions, share repurchases and general purposes. Use of it is conditional on staying within a net leverage covenant of 3.25:1.00.",
+    "basis": "Stated in [P1] and [P7].",
+    "claim": "Increased adoption and usage of Athena and Zeta\u2019s AI infrastructure helped accelerate revenue growth excluding Marigold and political candidate revenue to 30% in the third quarter of 2026, up from 28% excluding Marigold in the prior quarter.",
     "facts": [
-     "P8"
+     "P1",
+     "P7"
     ],
     "quotes": [
-     "Zeta Global Closes $1 Billion Credit Facility for Mergers & Acquisitions, Share Repurchases and General Corporate Purposes",
-     "the Credit Agreement contains a financial covenant that requires the Company to maintain a Consolidated Net Leverage Ratio not greater than 3.25:1.00"
+     "Delivered revenue of $493 million for the third quarter, an increase of 46% Y/Y or 30% Y/Y excluding Marigold and political candidate revenue, an acceleration from 28% growth excluding Marigold last quarter.",
+     "\u201cOur third-quarter results demonstrate the strength of our business, with accelerating revenue growth driven by increased Athena adoption and usage,\u201d said Chris Greiner, Zeta\u2019s CFO.",
+     "Athena is the interface to Zeta\u2019s AI-native infrastructure layer and intends to power all intelligent decisioning, automation, and user interaction across the ZMP."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the release and the income statement; the cost-growth condition is inferred from those figures.",
-    "claim": "Growth is converting to profit: the adjusted EBITDA margin rose 140 bps to 24.6%, and operating income was 45,948 (table in thousands) in the quarter against 8,752 a year earlier. For this to continue, operating costs must grow more slowly than revenue.",
+    "basis": "Stated in [P2] and [P7].",
+    "claim": "Sustaining AI-led platform growth requires ongoing product innovation and market acceptance of new offerings such as AthenaOS, continued ability to collect online data, and compliance with evolving privacy and AI regulations.",
     "facts": [
-     "P7",
-     "F2"
+     "P2",
+     "P7"
     ],
     "quotes": [
-     "Generated $121 million of adjusted EBITDA and expanded adjusted EBITDA margin by 140 bps Y/Y to 24.6%, reflecting the rule of 71."
+     "Our industry is subject to rapid and frequent changes in technology, evolving customer needs and the frequent introduction of new and enhanced offerings by our competitors, making it intensely competitive.",
+     "New consumer tools, regulatory restrictions and potential changes to web browsers and mobile operating systems all threaten our ability to collect such data, which could harm our operating results and financial condition and adversely affect the demand for our products and solutions.",
+     "Any actual or perceived failure to comply with evolving regulatory frameworks around the development and use of machine learning and AI technologies and our use of artificial intelligence technologies may expose us to technical, legal, and regulatory risks, which could adversely affect our business, results of operations, and financial condition."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement and the release; the balance sheet comparison is inferred.",
-    "claim": "Operating cash flow funds growth and buybacks internally: nine-month operating cash flow was 210,260 (table in thousands) against 134,767, and third-quarter free cash flow was $82 million, up 73%. For this to continue, collections and cash margins must hold.",
+    "basis": "Stated in [P3] and [P7].",
+    "claim": "Acquisitions contributed $84.2 million to 2025 revenue growth from new customers, and Marigold\u2019s Enterprise Business added $48.0 million of revenue in the third quarter of 2026 as total revenue grew 46% year-over-year to $493 million.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "The increase in revenues is attributable to incremental revenues of $108.0 million from new customers (including approximately $84.2 million from acquisitions) and $190.9 million from existing customers.",
+     "3Q\u201926 Revenue growth excluding Marigold and Political Candidate: Reflects the removal of Marigold\u2019s Enterprise Business contribution to revenue of $48.0 million and political candidate revenue of $7.4 million from total GAAP revenue of $492.7 million.",
+     "Delivered revenue of $493 million for the third quarter, an increase of 46% Y/Y or 30% Y/Y excluding Marigold and political candidate revenue, an acceleration from 28% growth excluding Marigold last quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] and [P7] (with the Marigold close date of November 24, 2025 stated in [P3]).",
+    "claim": "For acquisition-driven growth to hold and translate into durable returns, Zeta must successfully integrate Marigold\u2019s Enterprise Business, Senso Agentic Inc., and Social Audience B.V. while retaining key personnel and customer relationships.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "Acquisitions or strategic investments could be difficult to identify and integrate (including the integration of our recent acquisition of Marigold\u2019s Enterprise Business), divert the attention of management and disrupt our business, dilute stockholder value and adversely affect our business, operating results and financial condition.",
+     "Any statements made in this press release or during the earnings call that are not statements of historical fact, including statements about our fourth quarter 2026 guidance, full year 2026 guidance, the Zeta 2028 targets, the expected benefits, adoption, impact of Athena, and AthenaOS, including the expected timing of the AthenaOS beta and general availability expectations regarding the contribution of Marigold\u2019s Enterprise Business and the expected benefits of our recent acquisitions of Senso Agentic Inc. and Social Audience B.V., the expected benefits of and contributions from our partnerships and other strategic relationships, anticipated market share growth, the impacts of our prior investments on accelerating the timing of the marketing cloud replacement cycle, our products\u2019 capabilities to provide strong investment returns to our customers, our strong competitive position, expansion of existing customers, the capabilities of AI and Zeta\u2019s platform, the predictability and profitability of our growth, and the growth and expansion of AI and the Zeta Marketing Platform, are forward-looking statements and should be evaluated as such."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] and [P7].",
+    "claim": "Secular shifts in enterprise marketing spend toward digital automation and biennial political cycles also boost revenue, with political and advocacy customers accounting for 8.0% of revenue in 2024 and political candidate revenue adding $7.4 million in the third quarter of 2026.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Additionally, as enterprise marketing spend shifts towards digital from offline channels, we expect marketing automation technology will benefit.",
+     "We exclude political and advocacy customers, which represented 1.0% and 8.0% of revenue for 2025 and 2024, respectively, from our calculation of annual NRR rate because of the biennial nature of these customers.",
+     "3Q\u201926 Revenue growth excluding Marigold and Political Candidate: Reflects the removal of Marigold\u2019s Enterprise Business contribution to revenue of $48.0 million and political candidate revenue of $7.4 million from total GAAP revenue of $492.7 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P3] and [P5] (and echoed in [P2]).",
+    "claim": "Secular growth depends on enterprises continuing to prioritize digital marketing technology budgets despite inflation, tariffs, and recession risks, while political revenue is cyclical and peaks in presidential and midterm election years rather than repeating annually.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Our business and the operations of our customers depend on the overall state of the economy, and we and they could be negatively impacted by slower economic growth and the potential for a recession.",
+     "However, the evolving tariffs and changes in global trade policies continue to cause overall economic uncertainty and may increase our costs and adversely impact our operations as well as customers\u2019 businesses and operations.",
+     "In addition, political and advocacy customers are impacted by political cycles, with generally higher activity in presidential and, to a lesser extent, midterm election years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1], [P3], and [P7].",
+    "claim": "Zeta is expanding into European international markets, B2B marketing capabilities, and its partnership ecosystem to broaden its addressable customer base.",
+    "facts": [
+     "P1",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "As we expand relationships with our existing customers in the U.S., we are also continuing to invest in select regions in Europe.",
+     "We also have extensive relationships with many marketing agencies and enterprises and believe we can continue to extend our platform to provide B2B marketing capabilities.",
+     "Lastly, we expect to invest in the expansion of markets including international and the B2B sector."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2].",
+    "claim": "Executing international and operational expansion requires managing data-center and multi-region infrastructure, retaining engineering talent in India and other locations, and avoiding margin erosion from wage inflation or currency shifts.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we do not manage our growth well, the efficacy and performance of our platform may suffer, which could harm our reputation, reduce demand for our platform and solutions and have an adverse effect on our business, operating results and financial condition.",
+     "We expect to continue to rely on significant cost savings obtained by concentrating our technology and development and engineering work in India and other non-U.S. locations, but difficulties resulting from the factors noted above and other risks related to our operations in India or such other non-U.S. locations could increase our expenses and harm our competitive position."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F3] and [P7].",
+    "claim": "Rising operating cash flow of $210,260 (table in thousands) in the first nine months of 2026 and third-quarter free cash flow of $82 million, up 73% year-over-year, give Zeta internal cash generation to fund ongoing platform and AI investments.",
     "facts": [
      "F3",
      "P7"
     ],
     "quotes": [
-     "Generated net cash provided by operating activities of $91 million, an increase of 58% Y/Y, and free cash flow of $82 million, an increase of 73% Y/Y."
+     "Net cash provided by operating activities | $210,260 | $134,767",
+     "Generated net cash provided by operating activities of $91 million, an increase of 58% Y/Y, and free cash flow of $82 million, an increase of 73% Y/Y.",
+     "We have the free cash flow to fund this next chapter and believe our opportunity is greater than ever."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the guidance; the comparison with the third-quarter 30% is inferred.",
-    "claim": "Organic momentum is expected to slow in the fourth quarter: guidance of $521 million to $525 million implies 32% to 33% growth, and 22% to 24% excluding M&A and political candidate revenue. For the full-year raise to hold, the fourth quarter must land in that range.",
+    "basis": "Stated in [F1], [P4], and [P7].",
+    "claim": "To keep funding growth internally, Zeta must maintain compliance with its Senior Secured Credit Facility minimum quarterly financial maintenance covenants and manage long-term borrowings of $243,949 (table in thousands) and acquisition-related liabilities.",
     "facts": [
+     "F1",
+     "P4",
      "P7"
     ],
     "quotes": [
-     "The revised guidance represents a year-over-year growth rate of 32% to 33%, and 22% to 24% when excluding M&A and political candidate revenue."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K Items 1 and 1A; the link to growth is inferred.",
-    "claim": "The proprietary data asset underpins the platform: more than 245 million individuals in the U.S. and more than 535 million globally. The growth case therefore requires continued ability to collect and use data online.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our data set, which contains more than 245 million individuals in the U.S. and more than 535 million individuals globally, is a comprehensive mix of proprietary, partner, and publicly available data providing enhanced first-party resolution.",
-     "Our business and the effectiveness of our platform depends on our ability to collect and use data online."
+     "In addition, our Senior Secured Credit Facility contains customary minimum quarterly financial maintenance covenants.",
+     "The operating and financial restrictions and covenants in the Senior Secured Credit Facility, as well as any future financing arrangements that we may enter into, may restrict our ability to finance our operations, engage in, expand, or otherwise pursue our business activities and strategies.",
+     "Long-term borrowings | $243,949 | $197,083"
     ],
     "support": "supported"
    }
   ],
   "material_events": [
    {
-    "basis": "stated in the cited 8-K (Items 1.01 and 1.02)",
-    "claim": "The company entered a new $1.0 billion senior secured credit facility that replaced its existing credit agreement, and repaid $200.0 million of obligations under the old agreement the same day.",
+    "basis": "stated in P3 (10-K Item 7) and P7 (8-K earnings release)",
+    "claim": "Zeta closed its acquisition of Marigold\u2019s Enterprise Business, which contributed $48.0 million to third-quarter 2026 GAAP revenue.",
     "facts": [
-     "P8"
+     "P3",
+     "P7"
     ],
     "quotes": [
-     "Concurrently with entering into the Credit Agreement, on July 24, 2026, the Company repaid all outstanding obligations in the amount of $200.0 million under the Existing Credit Agreement and terminated all commitments thereunder, including both the revolving credit facility and the term loan facility thereunder."
+     "This increase was primarily driven by expenses incurred in connection with our acquisition of Marigold\u2019s Enterprise Business, which was closed on November 24, 2025.",
+     "3Q\u201926 Revenue growth excluding Marigold and Political Candidate: Reflects the removal of Marigold\u2019s Enterprise Business contribution to revenue of $48.0 million and political candidate revenue of $7.4 million from total GAAP revenue of $492.7 million."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "The company closed its acquisition of Marigold's Enterprise Business. The 10-K ties the rise in acquisition-related expenses to this deal.",
+    "basis": "stated in P7 (8-K earnings release) as recent acquisitions; closing dates not stated",
+    "claim": "Zeta completed acquisitions of Senso Agentic Inc. and Social Audience B.V. prior to its November 9, 2026 earnings release.",
     "facts": [
-     "P3"
+     "P7"
     ],
     "quotes": [
-     "This increase was primarily driven by expenses incurred in connection with our acquisition of Marigold\u2019s Enterprise Business, which was closed on November 24, 2025."
+     "Any statements made in this press release or during the earnings call that are not statements of historical fact, including statements about our fourth quarter 2026 guidance, full year 2026 guidance, the Zeta 2028 targets, the expected benefits, adoption, impact of Athena, and AthenaOS, including the expected timing of the AthenaOS beta and general availability expectations regarding the contribution of Marigold\u2019s Enterprise Business and the expected benefits of our recent acquisitions of Senso Agentic Inc. and Social Audience B.V., the expected benefits of and contributions from our partnerships and other strategic relationships, anticipated market share growth, the impacts of our prior investments on accelerating the timing of the marketing cloud replacement cycle, our products\u2019 capabilities to provide strong investment returns to our customers, our strong competitive position, expansion of existing customers, the capabilities of AI and Zeta\u2019s platform, the predictability and profitability of our growth, and the growth and expansion of AI and the Zeta Marketing Platform, are forward-looking statements and should be evaluated as such."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 (10-Q cash flow statement)",
+    "claim": "During the nine months ended September 30, 2026, Zeta recorded investing cash outflows for acquisitions and other investments, net of cash acquired, of (51,061) (table in thousands) and issued shares of 87,192 (table in thousands) in connection with acquisitions and other agreements.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Acquisitions and other investments, net of cash acquired | (51,061) | (1,202)",
+     "Shares issued in connection with acquisitions and other agreements | 87,192 | 4,833"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 (10-Q income statement), P3 (10-K Item 7), and P5 (10-Q Item 2)",
+    "claim": "Zeta executed internal restructuring involving employee termination costs (not bankruptcy), recording restructuring expenses of $3.2 million for 2025 and 9,375 (table in thousands) for the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "We recorded restructuring expenses of $3.2 million for the year ended December 31, 2025 related to employee termination costs due to internal restructuring.",
+     "Restructuring expenses | 2,623 | 0 | 9,375 | 3,152",
+     "Restructuring expenses primarily consist of employee termination costs due to internal restructuring."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 (10-Q cash flow statement)",
+    "claim": "During the nine months ended September 30, 2026, Zeta made loan advances resulting in an investing cash outflow of (70,000) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Loan advances | (70,000)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 (10-Q balance sheet) and F3 (10-Q cash flow statement)",
+    "claim": "During the nine months ended September 30, 2026, Zeta drew proceeds from credit facilities, net of issuance costs, of 255,799 (table in thousands) and repaid (210,000) (table in thousands), ending the period with long-term borrowings of 243,949 (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from credit facilities, net of issuance costs | 255,799 | 6,250",
+     "Repayments against the credit facilities | (210,000) | (6,250)",
+     "Long-term borrowings | 243,949 | 197,083"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 (10-Q cash flow statement)",
+    "claim": "During the nine months ended September 30, 2026, Zeta repurchased shares for (85,513) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repurchase of shares | (85,513) | (85,964)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 (8-K earnings release) and F2 (10-Q income statement)",
+    "claim": "Zeta announced third-quarter 2026 results achieving positive GAAP net income of $38 million (38,273 (table in thousands) in the 10-Q) and diluted GAAP earnings per share of $0.14, as well as positive year-to-date GAAP net income of 33,199 (table in thousands).",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Achieved positive GAAP net income of $38 million, and diluted GAAP earnings per share of $0.14 for the third quarter.",
+     "Achieved positive GAAP net income on a year-to-date basis and over the last twelve months.",
+     "Net income / (loss) | 38,273 | (3,634) | 33,199 | (38,048)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 (8-K earnings release)",
+    "claim": "Zeta formally raised its full-year 2026 revenue guidance midpoint by $37 million to $1,855 million, its fourth-quarter 2026 revenue guidance midpoint by $15 million to a range of $521 million to $525 million, and its full-year 2026 GAAP EPS guidance midpoint to $0.23.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Increasing full year 2026 revenue guidance by $37 million to $1,855 million at the midpoint, up from prior guidance of $1,818 million, reflecting Y/Y growth of 42%.",
+     "Increasing full year 2026 GAAP EPS guidance to $0.23 at the midpoint, up $0.20 or over 600% from our initial guidance of $0.03.",
+     "Increasing revenue guidance to a range of $521 million to $525 million, up $15 million at the midpoint from the prior guidance of $508 million."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Concentration and usage-pricing risk are stated in the 10-K risk factors. The counter-evidence is in the 10-K MD&A and the 10-Q MD&A; any actual customer loss is not stated.",
-    "claim": "Revenue is concentrated: one customer accounted for more than 10% of total revenue and the top ten for more than one-third, and much revenue is usage-based, so a few customers cutting usage could reduce revenue.",
+    "basis": "stated in the cited item (P2 Risk Factors, with counter-evidence in P3 and P5 MD&A)",
+    "claim": "Customer concentration and non-exclusive, usage-based contracts create revenue retention risk, as one customer accounted for more than 10% of total revenue in 2025.",
     "facts": [
-     "P2"
+     "P2",
+     "P3",
+     "P5"
     ],
     "quotes": [
      "In 2025, our top ten customers accounted for more than one-third of our total revenue, and one customer accounted for more than 10% of our total revenue.",
+     "Many of our contracts and relationships with customers do not include automatic renewal or exclusive obligations requiring them to use our platform or maintain or increase their use of our platform.",
      "A substantial portion of our revenue is derived from usage-based pricing, which is less stable than subscription-based pricing."
     ],
     "support": "supported"
    },
    {
-    "basis": "The covenant terms are stated in the 8-K. The default mechanism is stated in the 10-K. The balance-sheet comparison is read from the 10-Q statements; the actual covenant ratio is not given.",
-    "claim": "The new credit agreement requires a Consolidated Net Leverage Ratio not above 3.25:1.00, and long-term borrowings were 243,949 (table in thousands) against cash of 340,085 (table in thousands); a covenant breach could make debt immediately due.",
+    "basis": "stated in the cited item (P4 going-concern and liquidity passage, with F1, F3, and P7 balance sheet and cash flow figures)",
+    "claim": "Breaching minimum quarterly financial maintenance covenants under the Senior Secured Credit Facility could accelerate repayment of long-term borrowings of 243,949 (table in thousands) and threaten going-concern liquidity if replacement financing is unavailable.",
     "facts": [
-     "P8",
      "P4",
      "F1",
-     "F3"
+     "F3",
+     "P7"
     ],
     "quotes": [
-     "In addition, the Credit Agreement contains a financial covenant that requires the Company to maintain a Consolidated Net Leverage Ratio not greater than 3.25:1.00, with a step-up to 3.75:1.00 for four consecutive fiscal quarters following an acquisition by the Company of at least $100 million."
+     "In addition, our Senior Secured Credit Facility contains customary minimum quarterly financial maintenance covenants.",
+     "If not waived, future defaults could cause all of the outstanding indebtedness under the Senior Secured Credit Facility to become immediately due and payable, and our access to further credit under the Senior Secured Credit Facility may terminate.",
+     "If we do not have or are unable to generate sufficient cash to repay our debt obligations when they become due and payable, either upon maturity or in the event of a default, we would be required to obtain additional debt or equity financing, which may not be available on favorable terms, or at all, which may negatively impact our ability to operate and continue our business as a going concern."
     ],
     "support": "supported"
    },
    {
-    "basis": "The risk is stated in the 10-K. Cash amounts are from the 10-Q cash flow statement; how the loan advances will be used is not stated.",
-    "claim": "Acquisition integration is a flagged risk (Marigold's Enterprise Business), and the company is deploying cash and shares on deals: nine-month acquisitions used 51,061 (table in thousands) and loan advances were 70,000 (table in thousands).",
+    "basis": "stated in the cited item (P2 Risk Factors, with mitigating product architecture in P1)",
+    "claim": "Evolving data privacy, security, and AI regulations, alongside browser, operating-system, or consumer tracking restrictions, could impair online data collection and expose Zeta to legal or regulatory actions.",
     "facts": [
      "P2",
-     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "The technology industry is subject to increasing scrutiny that could result in U.S. federal or state government, or international regulatory actions that could negatively affect our business.",
+     "New consumer tools, regulatory restrictions and potential changes to web browsers and mobile operating systems all threaten our ability to collect such data, which could harm our operating results and financial condition and adversely affect the demand for our products and solutions.",
+     "Any actual or perceived failure to comply with evolving regulatory frameworks around the development and use of machine learning and AI technologies and our use of artificial intelligence technologies may expose us to technical, legal, and regulatory risks, which could adversely affect our business, results of operations, and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and F1 (goodwill impairment risk inferred from F1 carrying values; counter-evidence stated in P7)",
+    "claim": "Difficulties integrating acquired businesses, including Marigold\u2019s Enterprise Business, could divert management attention, disrupt operations, fail to realize expected benefits, and risk impairment of goodwill totaling 532,466 (table in thousands).",
+    "facts": [
+     "P2",
      "F1",
      "P7"
     ],
@@ -597,63 +929,90 @@
     "support": "supported"
    },
    {
-    "basis": "Inferred from the 10-Q income and cash flow statements and the earnings release reconciliations; the company does not state this as a risk.",
-    "claim": "GAAP profit is thin relative to stock-based compensation: nine-month net income was 33,199 (table in thousands) after stock-based compensation of 155,125 (table in thousands), so lower profitability or more dilution could remove GAAP profit.",
-    "facts": [
-     "F2",
-     "F3",
-     "P5",
-     "P7"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Cyclicality is stated in the 10-K; the third-quarter political amount is from the earnings release table; the effect on future quarters is inferred.",
-    "claim": "Results fluctuate with seasonality and political cycles, and the third quarter included 7.4 (table in millions) of political candidate revenue, so quarters without it could show slower growth.",
+    "basis": "stated in the cited item (P2 Risk Factors, countered by P1 capabilities/recognitions and P7 performance)",
+    "claim": "Intense competition from larger consolidated vendors and rapid technological change could erode market share, force price reductions, or render platform offerings obsolete.",
     "facts": [
      "P2",
+     "P1",
      "P7"
     ],
     "quotes": [
-     "Our revenues are also impacted by political cycles in which we generally generate higher revenues in congressional elections years, and particularly presidential election years and, to a lesser extent, midterm election years."
+     "Our industry is intensely competitive, and if we do not effectively compete against current and future competitors or fail to innovate and make the right investment decisions in our product offerings and platform, our business, operating results and financial condition could be harmed.",
+     "Without the timely introduction of new products, solutions and enhancements, our offerings could become technologically or commercially obsolete over time, or we may be required to make unanticipated and costly changes to our platform or business model, in which case our revenue and operating results would suffer."
     ],
     "support": "supported"
    },
    {
-    "basis": "The risk is stated in the 10-K; the receivable balances are from the 10-Q balance sheet; any link between the two is inferred.",
-    "claim": "Customer credit risk: sequential liability contracts with marketing agencies and growing receivables (370,252 (table in thousands) versus 322,391 (table in thousands) at year-end) could lead to write-offs if customers do not pay.",
+    "basis": "stated in the cited item (P2, P3, P5, and P7)",
+    "claim": "Biennial election-cycle swings, fourth-quarter seasonality, and macro or tariff-driven uncertainty can cause revenue fluctuations that largely fixed short-term operating expenses cannot offset.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5",
+     "P7"
+    ],
+    "quotes": [
+     "We may experience fluctuations in our operating results, including during presidential and, to a lesser extent, midterm election years where we generally generate higher revenues, which could make our future operating results difficult to compare and predict.",
+     "In addition, a significant percentage of our operating expenses are fixed in nature in the short term and based on forecasted revenue trends.",
+     "However, the evolving tariffs and changes in global trade policies continue to cause overall economic uncertainty and may increase our costs and adversely impact our operations as well as customers\u2019 businesses and operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 Risk Factors, with F1 and F3 liquidity and allowance figures)",
+    "claim": "Customer payment delays, bankruptcies, or sequential-liability agency contracts could trigger bad-debt write-offs on accounts receivable of 370,252 (table in thousands) while leaving Zeta obligated to pay for purchased media inventory.",
     "facts": [
      "P2",
      "F1",
      "F3"
     ],
     "quotes": [
-     "Certain of our contracts with marketing agencies state that if their customer does not pay the agency, the agency is not liable to us, and we must seek payment solely from their customer, a type of arrangement called sequential liability."
+     "Certain of our contracts with marketing agencies state that if their customer does not pay the agency, the agency is not liable to us, and we must seek payment solely from their customer, a type of arrangement called sequential liability.",
+     "Even if we are not paid by our customers on time or at all, we may still be obligated to pay for the inventory we have purchased for our customers\u2019 marketing campaigns, and consequently, our results of operations and financial condition would be adversely impacted."
     ],
     "support": "supported"
    },
    {
-    "basis": "The forecasting difficulty is stated in the 10-K; the guidance figures are from the earnings release; the risk of a miss is inferred.",
-    "claim": "Usage-based pricing makes revenue hard to forecast, so the guidance raised in the earnings release (and Q4 guidance of $521 million to $525 million) could be missed.",
+    "basis": "stated in the cited item (P2 Risk Factors and P1 infrastructure disclosures)",
+    "claim": "Data breaches, third-party infrastructure outages, or stricter inbox-provider email standards could disrupt platform delivery, provoke legal claims, and impair customer retention.",
     "facts": [
      "P2",
+     "P1"
+    ],
+    "quotes": [
+     "A significant inadvertent disclosure or breach of confidential and/or personal information we process, or a security breach of our or our customers\u2019, suppliers\u2019 or other partners\u2019 IT Systems could be detrimental to our business, reputation, financial performance and results of operations.",
+     "We depend on third-party data centers, systems and technologies to operate our business, the disruption of which could adversely affect our business, operating results and financial condition.",
+     "The standards that private entities and inbox service providers adopt in the future to regulate the use and delivery of email may interfere with the effectiveness of our platform and our ability to conduct business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2 Risk Factors, F3 cash flows, P5 SBC schedule, and P7 earnings release)",
+    "claim": "Cost inflation or weaker IP enforcement in India, loss of uninsured key executives, and continuing equity grants\u2014with 155,125 (table in thousands) in nine-month stock-based compensation\u2014could pressure margins or dilute stockholders.",
+    "facts": [
+     "P2",
+     "F3",
+     "P5",
      "P7"
     ],
     "quotes": [
-     "our usage-based pricing model makes it difficult to forecast revenues from our current customers and future prospects;"
+     "If the cost of technology and development work in India significantly increases or the labor environment in India changes unfavorably, our cost savings may be diminished.",
+     "We do not maintain \u201ckey person\u201d insurance for any member of our senior management team or any of our other key employees.",
+     "Additional issuances of equity securities would dilute the investment of our current stockholders and could cause the market price of our Class A Common Stock to decline."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated as a general risk factor in the 10-K; no concrete action is identified.",
-    "claim": "Privacy, data-collection and AI regulation, and regulatory scrutiny of the technology industry, could limit the data the platform relies on.",
+    "basis": "stated in the cited item (P2 Risk Factors, countered by P3 and P5 MD&A)",
+    "claim": "Long enterprise sales cycles and non-product buyer constraints can delay or prevent revenue conversion after Zeta incurs substantial upfront sales expenses.",
     "facts": [
      "P2",
-     "P6"
+     "P3",
+     "P5"
     ],
     "quotes": [
-     "The technology industry is subject to increasing scrutiny that could result in U.S. federal or state government, or international regulatory actions that could negatively affect our business."
+     "We often have long sales cycles, which can result in significant time between initial contact with a potential customer and execution of a customer agreement, making it difficult to project when, if at all, we will generate revenue from those customers.",
+     "We may spend substantial time and resources prospecting for new business or responding to requests for proposals from potential customers, and these efforts may not result in us ultimately generating any revenue from a potential customer."
     ],
     "support": "supported"
    }
@@ -661,89 +1020,160 @@
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in the cited items; the open amount and timing are what the items leave unsaid.",
-    "claim": "Will a portion of the U.S. deferred tax valuation allowance be released, when, and in what amount? Management calls a release reasonably possible but gives no amount or date.",
+    "basis": "Stated directly in the Q3 2026 balance sheet (F1) and cash flow statement (F3); the supporting footnotes are absent from the packet.",
+    "claim": "What counterparties and terms underlie the (70,000) (table in thousands) in loan advances and the increase in other non-current assets from 4,687 to 91,768 (table in thousands)?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Other non-current assets | 91,768 | 4,687",
+     "Loan advances | (70,000)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Form 10-Q MD&A (P5) and Q3 2026 earnings release (P7).",
+    "claim": "When will sufficient positive evidence support releasing a portion of the U.S. deferred tax asset valuation allowance, and what dollar amount will be recognized?",
     "facts": [
      "P5",
      "P7"
     ],
     "quotes": [
-     "However, given anticipated future earnings, we believe that there is a reasonable possibility that within the next 12 months, sufficient positive evidence may become available to allow us to reach a conclusion that a portion of the valuation allowance will no longer be needed."
+     "However, given anticipated future earnings, we believe that there is a reasonable possibility that within the next 12 months, sufficient positive evidence may become available to allow us to reach a conclusion that a portion of the valuation allowance will no longer be needed.",
+     "However, the exact timing and amount of the valuation allowance release are subject to change on the basis of the level of profitability that we are able to actually achieve.",
+     "This guidance excludes the potential impact of a one-time, non-cash tax benefit from the release of a portion of our valuation allowance, which we believe has a reasonable possibility of occurring within the next 12 months."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the balance sheet and cash flow statement lines; neither item explains the loan.",
-    "claim": "What are the 70,000 of loan advances (table in thousands) in investing cash flows: who is the counterparty and what are the terms and repayment risk? Other non-current assets rose from 4,687 to 91,768 (table in thousands), and the items do not say whether the two are linked.",
+    "basis": "Stated directly in the cash flow statement (F3), balance sheet (F1), and earnings release (P7).",
+    "claim": "What were the purchase terms, acquired assets, and revenue contributions for Senso Agentic Inc. and Social Audience B.V. relative to the (51,061) (table in thousands) net cash outflow and 87,192 (table in thousands) in shares issued for acquisitions?",
     "facts": [
      "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Other non-current assets | 91,768 | 4,687"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release; the reason for the lower Q4 ex-M&A rate is not stated.",
-    "claim": "How durable is the organic growth? The Q3 release cites 46% reported growth and 30% excluding Marigold and political candidate revenue, against 28% the prior quarter. Q4 guidance implies 22% to 24% on the same ex-M&A and political basis, and the evidence does not explain the step-down.",
-    "facts": [
+     "F3",
      "P7"
     ],
     "quotes": [
-     "an acceleration from 28% growth excluding Marigold last quarter",
-     "and 22% to 24% when excluding M&A and political candidate revenue"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Covenant terms are stated in the 8-K; the computed ratio and headroom are not in the evidence.",
-    "claim": "What is the company's actual Consolidated Net Leverage Ratio against the 3.25:1.00 covenant under the new $1.0 billion facility, and how will the undrawn revolver be used? Long-term borrowings are 243,949 (table in thousands). The facility is described as for M&A, share repurchases and general corporate purposes, but the actual ratio is not shown.",
-    "facts": [
-     "P8",
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "contains a financial covenant that requires the Company to maintain a Consolidated Net Leverage Ratio not greater than 3.25:1.00"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from comparing balance sheet and cash flow lines; no item gives a reconciliation.",
-    "claim": "How was the current acquisition-related liability of 149,036 (table in thousands) reduced to 25,169 (table in thousands) in nine months: by cash, by share issuance, or by fair value changes? Cash payments and the fair value change shown are smaller than the decline, and the items do not reconcile it.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
+     "Any statements made in this press release or during the earnings call that are not statements of historical fact, including statements about our fourth quarter 2026 guidance, full year 2026 guidance, the Zeta 2028 targets, the expected benefits, adoption, impact of Athena, and AthenaOS, including the expected timing of the AthenaOS beta and general availability expectations regarding the contribution of Marigold\u2019s Enterprise Business and the expected benefits of our recent acquisitions of Senso Agentic Inc. and Social Audience B.V., the expected benefits of and contributions from our partnerships and other strategic relationships, anticipated market share growth, the impacts of our prior investments on accelerating the timing of the marketing cloud replacement cycle, our products\u2019 capabilities to provide strong investment returns to our customers, our strong competitive position, expansion of existing customers, the capabilities of AI and Zeta\u2019s platform, the predictability and profitability of our growth, and the growth and expansion of AI and the Zeta Marketing Platform, are forward-looking statements and should be evaluated as such.",
+     "Acquisitions and other investments, net of cash acquired | (51,061) | (1,202)",
+     "Shares issued in connection with acquisitions and other agreements | 87,192 | 4,833",
      "Acquisition-related liabilities | 25,169 | 149,036"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from cash flow supplemental disclosures; the share-count bridge is not in the items.",
-    "claim": "How much of the increase in shares outstanding comes from acquisition-related share issuance versus stock compensation, and how far do repurchases offset it? Shares issued in acquisitions and other agreements were 87,192 (table in thousands) and share repurchases were 85,513 (table in thousands).",
+    "basis": "Stated directly in the balance sheet (F1), cash flow statement (F3), and Form 10-K liquidity passage (P4).",
+    "claim": "What are the interest rate, maturity date, and financial maintenance covenant thresholds of the Senior Secured Credit Facility underlying the 243,949 (table in thousands) in long-term borrowings?",
     "facts": [
+     "F1",
      "F3",
-     "F1"
+     "P4"
     ],
     "quotes": [
-     "Shares issued in connection with acquisitions and other agreements | 87,192 | 4,833"
+     "In addition, our Senior Secured Credit Facility contains customary minimum quarterly financial maintenance covenants.",
+     "Long-term borrowings | 243,949 | 197,083",
+     "Proceeds from credit facilities, net of issuance costs | 255,799 | 6,250",
+     "Repayments against the credit facilities | (210,000) | (6,250)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated figures in the release; the full-year political amount and its effect on 2027 are not given.",
-    "claim": "How large is political candidate revenue in 2026, and how much will it weigh on 2027 comparisons? The Q3 reconciliation shows 7.4 (table in millions) of political candidate revenue, with earlier quarters marked NM. The filing says the business is cyclical around election years.",
+    "basis": "Stated directly in the FY 2025 Form 10-K risk factors (P2) and Q3 2026 balance sheet (F1).",
+    "claim": "Does a single customer still account for more than 10% of total revenue, and how much of the 370,252 (table in thousands) in net accounts receivable is subject to agency sequential liability?",
     "facts": [
-     "P7",
-     "P3"
+     "F1",
+     "P2"
     ],
     "quotes": [
-     "Political candidate revenue | NM* | NM* | NM* | NM* | (7.4)"
+     "In 2025, our top ten customers accounted for more than one-third of our total revenue, and one customer accounted for more than 10% of our total revenue.",
+     "Certain of our contracts with marketing agencies state that if their customer does not pay the agency, the agency is not liable to us, and we must seek payment solely from their customer, a type of arrangement called sequential liability.",
+     "Accounts receivable, net of allowance of $4,528 and $3,832 as of September 30, 2026 and December 31, 2025, respectively | 370,252 | 322,391"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release (P7), FY 2025 Form 10-K risk factors (P2), and MD&A (P3).",
+    "claim": "What are the standalone margin profile, customer retention, and integration costs of Marigold\u2019s Enterprise Business alongside its $48.0 million quarterly revenue contribution?",
+    "facts": [
+     "P2",
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "3Q\u201926 Revenue growth excluding Marigold and Political Candidate: Reflects the removal of Marigold\u2019s Enterprise Business contribution to revenue of $48.0 million and political candidate revenue of $7.4 million from total GAAP revenue of $492.7 million.",
+     "Acquisitions or strategic investments could be difficult to identify and integrate (including the integration of our recent acquisition of Marigold\u2019s Enterprise Business), divert the attention of management and disrupt our business, dilute stockholder value and adversely affect our business, operating results and financial condition.",
+     "This increase was primarily driven by expenses incurred in connection with our acquisition of Marigold\u2019s Enterprise Business, which was closed on November 24, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Note 8 reference appears on the Q3 2026 balance sheet (F1) alongside litigation risk disclosures in P2, while Note 8 itself is omitted.",
+    "claim": "What material legal proceedings, unconditional purchase commitments, or contingent liabilities are disclosed in the omitted commitments and contingencies footnote?",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Commitments and contingencies (Note 8)",
+     "We may become involved in disputes with our customers over the operation of our platform, the terms of our agreements or our billings for purchases made by them through our platform."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 balance sheet footnote (F1) and cash flow statement (F3).",
+    "claim": "Under what share repurchase authorization were (85,513) (table in thousands) of shares repurchased, and what voting and conversion rights govern the 23,638,426 outstanding shares of Class B Common Stock?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Repurchase of shares | (85,513) | (85,964)",
+     "Includes 226,704,999 outstanding shares of Class A Common Stock, 23,638,426 outstanding shares of Class B Common Stock, 1,533,383 unvested shares of Class A restricted stock and no unvested shares of Class B restricted stock."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 earnings release (P7) and FY 2025 Form 10-K business description (P1).",
+    "claim": "What specific financial metrics comprise the Zeta 2028 targets, and what are the pricing model and general availability schedule for AthenaOS?",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "Zeta 2028: Zeta 2028 is the Company\u2019s next medium-term plan with targets for business, product, and industry leadership.",
+     "Grew Super-Scaled Customer count to 212, an increase of 18% Y/Y and Super-Scaled Customer ARPU grew to $2.0 million, up 22% Y/Y, both accelerated versus the prior quarter and are ahead of the 2028 model.",
+     "Athena is emerging as the orchestration layer that connects data, analytics, and activation, with the goal of enabling users to interact with the platform through natural-language and voice-enabled interfaces."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the Q3 2026 statement of operations (F2) and truncated MD&A (P5).",
+    "claim": "What operational changes drove the 9,375 (table in thousands) in nine-month restructuring expenses and the increase in cost of revenues from 353,700 to 539,076 (table in thousands)?",
+    "facts": [
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "Cost of revenues (excluding depreciation and amortization) | 195,633 | 133,224 | 539,076 | 353,700",
+     "Restructuring expenses | 2,623 | 0 | 9,375 | 3,152",
+     "Restructuring expenses primarily consist of employee termination costs due to internal restructuring."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the FY 2025 Form 10-K MD&A (P3) and Q3 2026 Form 10-Q MD&A (P5).",
+    "claim": "How have total scaled customer count, scaled customer ARPU, and net revenue retention evolved since the annual NRR rate of 128.0%?",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "We no longer intend to include metrics with respect to our scaled customers in our quarterly reports on Form 10-Q, as these metrics are expected to be less relevant.",
+     "Our annual NRR rate was 128.0% and 113.6% for the years ended December 31, 2025 and 2024, respectively.",
+     "Super-scaled customers increased 18% to 212 as of September 30, 2026, compared to 180 as of September 30, 2025, primarily due to higher usage of our platform among our customers and new additions to our super-scaled customer base."
+    ],
+    "support": "supported"
    }
   ]
  },
@@ -752,5 +1182,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+ "verdict_reason": "implied borrowing cost outside the allowed range"
 }
