@@ -6,21 +6,41 @@
   "accepted": "2026-11-09T21:31:16.000Z",
   "accepted_utc": "2026-11-10T02:31:16Z",
   "accession": "0001628280-26-072254",
-  "decision_time": "2026-11-25T14:51:02Z",
+  "decision_time": "2026-11-27T10:13:41Z",
   "form": "10-Q",
   "period": "2026-09-30"
  },
- "claims": 106,
- "claims_supported": 97,
- "date": "2026-11-25T14:51:02Z",
- "family": "family_not_built",
+ "claims": 100,
+ "claims_supported": 92,
+ "date": "2026-11-27T10:13:41Z",
+ "family": "operating",
  "flags": [
-  "Rockstar Games released Grand Theft Auto VI, reaching $3.79 billion in day one retail sales and 32.5 million units sold pre-release.",
-  "Take-Two and Microsoft entered into a new long-term XBOX Publisher License Agreement superseding and replacing all existing XBOX publisher license agreements between them.",
-  "2K released NBA 2K27 on PS5, Xbox Series X|S, Switch 2, and PC."
+  "Rockstar Games launched Grand Theft Auto VI, achieving $3.79 billion in day one retail sales and selling 32.5 million units pre-release.",
+  "Take-Two entered into a new long-term XBOX Publisher License Agreement with Microsoft Corporation superseding all existing XBOX publisher license agreements.",
+  "Take-Two recorded goodwill impairment charges of $3,545.2 (unit scale not printed in the excerpt) that drove an operating loss of $4,391.1."
  ],
  "in_code_book": false,
  "ke": null,
+ "loss_record": {
+  "cause": "operating_losses",
+  "explanation": "Take-Two's continuing operations have posted operating losses across fiscal years 2024 through 2026 and the six months ended September 30, 2026, because operating expenses exceeded gross profit. Although fiscal 2024 and 2025 losses were enlarged by goodwill impairments and business reorganization charges, continuing operations remained unprofitable even excluding those items and generated a $104.2 million operating loss in fiscal 2026 (with no goodwill impairment) and a $153.0 million operating loss in the first half of fiscal 2027.",
+  "label": "the continuing operations themselves lose money",
+  "quotes": [
+   {
+    "id": "P3",
+    "quote": "Our operating loss for the fiscal year ended March 31, 2026 was $104.2 compared to operating loss of $4,391.1 for fiscal year ended March 31, 2025, primarily driven by Goodwill impairment charges of $3,545.2 in the prior year, with no corresponding expense in the current year, as well as, higher sales of our products."
+   },
+   {
+    "id": "P3",
+    "quote": "Income (loss) from operations | (104.2) | (1.5)% | (4,391.1) | (78.0)% | (3,590.6) | (67.1)%"
+   },
+   {
+    "id": "F2",
+    "quote": "Loss from operations | (117.5) | (98.0) | (153.0) | (76.4)"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
  "model": "gemini-4-hydrogen-high",
  "news": [
   {
@@ -113,106 +133,45 @@
    "why": "Grand Theft Auto VI generated $3.79 billion in worldwide launch sales with 32.5 million presold copies, delivering record market acceptance that substantially de-risks Take-Two's $8.0 to $8.2 billion fiscal 2027 Net Bookings outlook."
   }
  ],
- "no_value_reason": "no valuation route yet for a company with no operating profit in 4 of its last 4 fiscal years",
+ "no_value_reason": "the filings show the continuing operations themselves losing money, so no value is given",
  "pending_offer": null,
  "qwen_book": null,
  "release_truncated": [],
- "screener_commit": "6e8a85df740775db7ce05820a99b60a489a758f8",
- "source": "news warning (news:2026-11-24:143e97b65600:8-K:0001628280-26-075217)",
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1 and P4",
-    "claim": "Take-Two develops, operates, and publishes interactive entertainment products for console, mobile, and PC principally through its Rockstar Games, 2K, and Zynga labels.",
+    "basis": "Stated directly in the FY2026 Form 10-K Item 1 and Q2 FY2027 Form 10-Q Item 2.",
+    "claim": "Take-Two Interactive Software develops, operates, and publishes interactive entertainment products globally, principally through Rockstar Games, 2K, and Zynga, for console gaming systems, mobile devices, and PC.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
+     "We are a leading developer, publisher, and marketer of interactive entertainment for consumers around the globe.",
      "We develop, operate, and publish products principally through Rockstar Games, 2K, and Zynga.",
      "Our products are currently designed for console gaming systems, mobile, including smartphones and tablets, and personal computer (\"PC\")."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P3, and P6",
-    "claim": "The company generates revenue from full game sales and recurrent consumer spending\u2014including virtual currency, add-on content, in-game purchases, and in-game advertising\u2014with recurrent consumer spending accounting for 78.1% of net revenue in the fiscal year ended March 31, 2026 and 82% in the six months ended September 30, 2026.",
+    "basis": "Stated directly in the FY2026 Form 10-K Item 1 and reflected in the Q2 FY2027 Form 10-Q income statement.",
+    "claim": "The company generates revenue by selling internally developed and third-party software titles, in-game virtual items and currency, add-on content, live services, and in-game advertising to consumers worldwide and to marketers.",
     "facts": [
      "P1",
-     "P3",
-     "P6"
+     "F2"
     ],
     "quotes": [
      "We derive substantially all of our revenue from the sale of our interactive entertainment content, which includes internally developed software titles and software titles developed by third parties, in-game virtual items and advertising, and live services on console, mobile, and PC.",
-     "Recurrent consumer spending (\"RCS\") is generated from ongoing consumer engagement and includes revenue from virtual currency, add-on content, in-game purchases, and in-game advertising.",
-     "Net revenue from recurrent consumer spending increased by $722.0 and accounted for 78.1% of net revenue for the fiscal year ended March 31, 2026, as compared to 79.4% for the prior year period.",
-     "Recurrent consumer spending | $2,500.0 | 82% | $2,532.0 | 77%"
+     "We also sell advertising within a number of our games, primarily in mobile.",
+     "This enables us to appeal to a wide array of consumers worldwide, ranging from game enthusiasts to casual gamers."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P3, and P7",
-    "claim": "Its portfolio spans internally owned and selectively licensed franchises\u2014led by Grand Theft Auto, NBA 2K, Borderlands, Red Dead Redemption, WWE 2K, and Zynga mobile titles such as Toon Blast, Match Factory!, Empires & Puzzles, and Color Block Jam\u2014and includes Grand Theft Auto VI, which generated $3.79 billion in day one retail sales upon its November 19, 2026 release.",
-    "facts": [
-     "P1",
-     "P3",
-     "P7"
-    ],
-    "quotes": [
-     "Most of our intellectual property is internally owned and developed, which we believe best positions us financially and competitively.",
-     "Our net revenue for the fiscal year ended March 31, 2026 was led by a variety of our top franchises, primarily NBA 2K, Grand Theft Auto, Borderlands, Red Dead Redemption, and WWE 2K, as well as our top mobile contributors, primarily Toon Blast, Match Factory!, Empires & Puzzles, and Color Block Jam.",
-     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 and P4",
-    "claim": "Revenue comes predominantly from mobile and console platforms via digital online distribution, with mobile at 50.1%, console at 39.0%, and PC and other at 10.9% of net revenue in the fiscal year ended March 31, 2026, while digital online channels provided 97.0% in that fiscal year and 97.9% in the six months ended September 30, 2026.",
-    "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Net revenue from mobile increased by $391.0 and accounted for 50.1% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 52.2% in the prior year period.",
-     "Net revenue from console games increased by $498.2 and accounted for 39.0% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 37.3% in the prior year period.",
-     "Net revenue from PC and other increased by $133.6 and accounted for 10.9% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 10.5% in the prior year period.",
-     "Net revenue from digital online channels comprised 97.0% of our net revenue for the fiscal year ended March 31, 2026.",
-     "Net revenue from digital online channels comprised 97.9% of our net revenue for the six months ended September 30, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P6",
-    "claim": "Take-Two sells globally to consumers\u2014ranging from game enthusiasts to casual gamers\u2014through digital storefronts, platform partners, large retail customers, third-party distributors, and its direct-to-consumer platform, and sells in-game advertising to marketers and advertisers, with 60% of net revenue in the United States and 40% International for the six months ended September 30, 2026.",
-    "facts": [
-     "P1",
-     "P6"
-    ],
-    "quotes": [
-     "We sell software titles both digitally and physically through direct relationships with digital storefronts and platform partners, large retail customers, and third-party distributors.",
-     "We manage a direct-to-consumer platform, primarily for our mobile business, to drive purchases directly with our consumer base.",
-     "Our advertising offerings provide creative ways for marketers and advertisers to reach and engage with our players and are generally essential for our free-to-play titles.",
-     "United States | $1,808.9 | 60% | $1,936.5 | 59%",
-     "International | 1,222.0 | 40% | 1,341.1 | 41%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P2",
-    "claim": "Customer and platform distribution is highly concentrated: the five largest customers accounted for 80.6% of net revenue in the fiscal year ended March 31, 2026\u2014with Apple, Sony, Google, and Microsoft each accounting for more than 10.0%\u2014and Apple and Google platforms generated 91.0% of mobile revenue.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
-     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and P6",
-    "claim": "On its Condensed Consolidated Statements of Operations, Take-Two disaggregates net revenue into Game ($2,798.8, table in millions) and Advertising (232.1, table in millions) out of 3,030.9 (table in millions) in total net revenue for the six months ended September 30, 2026.",
+    "basis": "Stated in the Q2 FY2027 Form 10-Q income statement and the Q2 FY2027 Form 8-K earnings release tables.",
+    "claim": "In the six months ended September 30, 2026, total net revenue was 3,030.9 (table in millions), consisting of $2,798.8 (table in millions) in Game net revenue and 232.1 (table in millions) in Advertising net revenue.",
     "facts": [
      "F2",
      "P6"
@@ -225,141 +184,205 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P4",
-    "claim": "Revenue fluctuates significantly with the timing, seasonality, and commercial reception of hit titles, as the five best-selling franchises generated 54.3% of net revenue in the fiscal year ended March 31, 2026 and Grand Theft Auto alone contributed 12.4% in that year and 12.6% in the six months ended September 30, 2026.",
+    "basis": "Stated in the FY2026 Form 10-K Item 7.",
+    "claim": "Revenue is primarily driven by recurrent consumer spending\u2014including virtual currency, add-on content, in-game purchases, and in-game advertising\u2014which generated $5,196.6 (table in millions), or 78.1% of net revenue, in the fiscal year ended March 31, 2026, versus 1,459.8 (table in millions), or 21.9%, from full game and other.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Recurrent consumer spending (\"RCS\") is generated from ongoing consumer engagement and includes revenue from virtual currency, add-on content, in-game purchases, and in-game advertising.",
+     "Recurrent consumer spending | $5,196.6 | 78.1% | $4,474.6 | 79.4% | $4,213.5 | 78.8%",
+     "Full game and other | 1,459.8 | 21.9% | 1,159.0 | 20.6% | 1,136.1 | 21.2%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the FY2026 Form 10-K Item 1 and Item 7.",
+    "claim": "Take-Two sells digitally and physically through digital storefronts, platform partners, large retail customers, third-party distributors, and a direct-to-consumer platform primarily for mobile, with digital online channels providing $6,459.7 (table in millions), or 97.0% of net revenue, in the fiscal year ended March 31, 2026.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We sell software titles both digitally and physically through direct relationships with digital storefronts and platform partners, large retail customers, and third-party distributors.",
+     "We manage a direct-to-consumer platform, primarily for our mobile business, to drive purchases directly with our consumer base.",
+     "Digital online | $6,459.7 | 97.0% | $5,431.8 | 96.4% | $5,112.2 | 95.6%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the FY2026 Form 10-K Item 1 and Item 7.",
+    "claim": "Revenue across platforms in the fiscal year ended March 31, 2026 was 50.1% Mobile, 39.0% Console, and 10.9% PC and other, while sales to the five largest customers accounted for 80.6% of net revenue and Apple, Sony, Google, and Microsoft each exceeded 10.0%.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
+     "Net revenue from mobile increased by $391.0 and accounted for 50.1% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 52.2% in the prior year period.",
+     "Net revenue from console games increased by $498.2 and accounted for 39.0% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 37.3% in the prior year period.",
+     "Net revenue from PC and other increased by $133.6 and accounted for 10.9% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 10.5% in the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q2 FY2027 Form 8-K earnings release geographic disaggregation table.",
+    "claim": "In the six months ended September 30, 2026, the United States generated $1,808.9 (table in millions), or 60% of net revenue, and International markets generated 1,222.0 (table in millions), or 40%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "United States | $1,808.9 | 60% | $1,936.5 | 59%",
+     "International | 1,222.0 | 40% | 1,341.1 | 41%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the FY2026 Form 10-K Item 1A and Q2 FY2027 Form 10-Q Item 2.",
+    "claim": "A key revenue driver is concentration in hit franchises: the five best-selling franchises generated 54.3% of net revenue in the fiscal year ended March 31, 2026, and Grand Theft Auto products alone generated 12.4% in that fiscal year and 12.6% in the six months ended September 30, 2026.",
     "facts": [
      "P2",
-     "P4"
+     "P4",
+     "P7"
     ],
     "quotes": [
      "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
-     "The life cycle of a console or PC title generally involves a relatively high level of sales during the first few months after introduction followed by a rapid decline in sales.",
      "Sales of Grand Theft Auto products generated 12.6% of our net revenue for the six months ended September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2 and P3",
-    "claim": "External revenue drivers include third-party console installed base growth, hardware generation transitions, macroeconomic conditions and global tariff policies affecting consumer spending and hardware pricing, and foreign currency exchange rates.",
+    "basis": "Stated in the FY2026 Form 10-K Item 1A and Item 7 and the Q2 FY2027 Form 8-K earnings release.",
+    "claim": "Console and PC title sales are front-loaded into the first few months after release and follow fourth-calendar-quarter holiday and sports-season seasonality, with management tracking Net Bookings ($1.60 billion in the second quarter of fiscal 2027) as a key operating metric.",
     "facts": [
      "P2",
-     "P3"
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "The success of our business is dependent upon consumer acceptance of these platforms and the continued growth in the installed base of these platforms, which has been and could be impacted by global economic factors, including global tariff policies.",
-     "When new hardware platforms are introduced, demand for interactive entertainment developed for older platforms typically declines, which may negatively affect our business during the market transition to the new consoles.",
-     "We continue to monitor various macroeconomic and geopolitical factors, such as global tariff policies, that may affect our business in several areas, including consumer demand, inflation, pricing pressure on our products and third party hardware platforms, credit quality of our receivables, and foreign currency exchange rates."
+     "The life cycle of a console or PC title generally involves a relatively high level of sales during the first few months after introduction followed by a rapid decline in sales.",
+     "In addition, the interactive entertainment industry is highly seasonal, with sales typically higher during the fourth calendar quarter, primarily due to increased demand for games during the holiday season.",
+     "We monitor Net Bookings as a key operating metric in evaluating the performance of our business.",
+     "\u2022Total Net Bookings* decreased 18% to $1.60 billion compared to $1.96 billion during last year\u2019s fiscal second quarter."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2, P1, P3, P6, and P8",
-    "claim": "Cost of revenue\u2014which was 42.8% of net revenue in the fiscal year ended March 31, 2026 and 1,288.0 (table in millions) on 3,030.9 (table in millions) of net revenue in the six months ended September 30, 2026\u2014is driven by digital platform fees (giving mobile a lower gross margin percentage than Console or PC), content licenses, console and internal royalties, and amortization of game intangibles and capitalized software.",
+    "basis": "Stated in the FY2026 Form 10-K Item 1, Item 1A, and Item 7, Q2 FY2027 Form 10-Q Item 2, and the September 28, 2026 Form 8-K.",
+    "claim": "Revenue generation relies on third-party platform approvals, licensing and revenue-share agreements with Sony and Microsoft, Apple and Google app-store rules, and the console hardware cycle and macroeconomic backdrop.",
     "facts": [
-     "F2",
      "P1",
+     "P2",
      "P3",
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "The agreement requires us to submit products to Sony for approval and for us to make royalty payments to Sony based on the number of units manufactured or revenue from digitally downloaded content.",
+     "Microsoft will pay the Company the applicable wholesale price and/or agreed revenue share for any of the Company\u2019s digitally delivered products and content sold by Microsoft.",
+     "Each platform provider has broad discretion to change and interpret its terms of service and other policies with respect to us and other developers, and those changes may be unfavorable to us.",
+     "Historically, when next generation consoles are announced or introduced into the market, consumers have typically reduced their purchases of products for prior-generation consoles in anticipation of purchasing a next-generation console and products for that console."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q2 FY2027 Form 8-K earnings release and FY2026 Form 10-K Item 7 / Q2 FY2027 Form 10-Q Item 2.",
+    "claim": "Cost of revenue totaled 1,288.0 (table in millions) in the six months ended September 30, 2026 and is driven by product costs (including mobile platform fees), amortization of game intangibles and capitalized software development costs, licenses, and internal royalties.",
+    "facts": [
+     "P3",
+     "P4",
      "P6",
      "P8"
     ],
     "quotes": [
-     "Cost of revenue | 2,846.7 | 42.8% | 2,571.4 | 45.7% | 275.3 | 10.7%",
-     "Further, as a result of the platform fees associated with online game sales, our mobile net revenue generally generates a lower gross margin percentage than our Console or PC revenue.",
      "Total cost of revenue | 636.6 | 793.3 | 1,288.0 | 1,352.1",
-     "Total net revenue | 1,497.0 | 1,773.8 | 3,030.9 | 3,277.6",
-     "The agreement requires us to submit products to Sony for approval and for us to make royalty payments to Sony based on the number of units manufactured or revenue from digitally downloaded content.",
-     "Additionally, Microsoft charges the Company fees and royalties under the Agreement for each physical media product manufactured on behalf of the Company."
+     "These platform fees are recorded as Cost of revenue as incurred.",
+     "Further, as a result of the platform fees associated with online game sales, our mobile net revenue generally generates a lower gross margin percentage than our Console or PC revenue.",
+     "The increase in gross profit as a percentage of net revenue was primarily driven by (i) lower amortization of intangible assets primarily due to higher impairments in the prior year and (ii) lower product costs as a percentage of net revenue, partially offset by higher amortization of capitalized software and development costs primarily due to the timing of releases."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "stated in P1 and P3",
-    "claim": "Operating expenses are led by Selling and marketing (26.6% of net revenue in the fiscal year ended March 31, 2026) and Research and development (16.1% of net revenue), driven by mobile player acquisition and retention, launch marketing, performance-based compensation, and a workforce of 12,909 full-time employees including 9,998 in development studios as of March 31, 2026.",
+    "basis": "Stated in the Q2 FY2027 Form 10-Q income statement, Q2 FY2027 Form 8-K, and FY2026 Form 10-K Item 7.",
+    "claim": "Selling and marketing is the largest operating expense at 814.6 (table in millions) in the six months ended September 30, 2026, driven by new title launch promotion, mobile player acquisition and retention campaigns, and performance-based compensation.",
     "facts": [
-     "P1",
-     "P3"
+     "F2",
+     "P3",
+     "P6"
     ],
     "quotes": [
-     "Our headcount includes 12,909 full-time employees as of March 31, 2026, including 9,998 in development studios.",
-     "Selling and marketing | $1,770.8 | 26.6% | $1,683.7 | 29.9% | $87.1 | 5.2%",
-     "Research and development | 1,074.6 | 16.1% | 1,005.2 | 17.8% | 69.4 | 6.9%",
+     "Selling and marketing | 444.9 | 536.7 | 814.6 | 945.9",
+     "Principally for our mobile titles, we use advertising and other forms of player acquisition and retention to grow and retain our player audience.",
      "These expenditures, which are recorded within Selling and marketing in our Consolidated Statements of Operations, generally relate to the promotion of new game launches and ongoing performance-based programs to drive new player acquisition and lapsed player reactivation."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "Other operating cost drivers include General and administrative expenses (13.1% of net revenue in the fiscal year ended March 31, 2026), Depreciation and amortization (3.0%), foreign currency movements, business reorganization charges, and prior-period goodwill impairments (62.9% of net revenue in the fiscal year ended March 31, 2025 with none in the fiscal year ended March 31, 2026).",
+    "basis": "Stated in the Q2 FY2027 Form 10-Q income statement and FY2026 Form 10-K Items 1, 1A, and 7.",
+    "claim": "Research and development expense was 528.2 (table in millions) in the six months ended September 30, 2026 and is driven by studio headcount\u20149,998 full-time development staff out of 12,909 total full-time employees as of March 31, 2026\u2014multi-year title development cycles, studio acquisitions, and R&D tax credits.",
     "facts": [
+     "F2",
+     "P1",
+     "P2",
      "P3"
     ],
     "quotes": [
-     "General and administrative | 874.4 | 13.1% | 883.3 | 15.7% | (8.9) | (1.0)%",
-     "Depreciation and amortization | 198.5 | 3.0% | 229.4 | 4.1% | (30.9) | (13.5)%",
-     "Goodwill impairment | \u2014 | \u2014% | 3,545.2 | 62.9% | (3,545.2) | (100.0)%",
-     "Foreign currency exchange rates increased total operating expenses by $31.2 for the fiscal year ended March 31, 2026 as compared to the prior year period."
+     "Research and development | 254.4 | 268.0 | 528.2 | 524.4",
+     "Our headcount includes 12,909 full-time employees as of March 31, 2026, including 9,998 in development studios.",
+     "The development cycle for new titles generally ranges from 12 months or less for most mobile titles and annual console/PC sports releases, to multiple years for certain of our top-selling titles.",
+     "Research and development expenses increased by $69.4 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by (i) higher personnel expense due to the acquisition of Gearbox in June 2024 and higher performance-based compensation, and (ii) the timing of additional R&D-related credits related to certain titles."
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "stated in F1 and F3",
-    "claim": "Financing and development cash-flow demands include interest expense of 60.6 (table in millions) in the six months ended September 30, 2026 on 629.2 of short-term debt and 1,890.6 of long-term debt (table in millions) at September 30, 2026, alongside (372.4) (table in millions) of cash invested in software development costs and licenses.",
+    "basis": "Stated in the Q2 FY2027 Form 10-Q financial statements and FY2026 Form 10-K Item 7.",
+    "claim": "Operating results are also moved by general and administrative expenses of 456.8 (table in millions) and stock-based compensation of 176.0 (table in millions) in the six months ended September 30, 2026, as well as legal contingencies, goodwill impairments, business reorganizations, and foreign currency exchange rates.",
     "facts": [
-     "F1",
-     "F3"
+     "F2",
+     "F3",
+     "P3"
     ],
     "quotes": [
-     "Short-term debt, net | 629.2 | 30.0",
-     "Long-term debt, net | 1,890.6 | 2,488.0",
-     "Interest expense | 60.6 | 76.3",
-     "Software development costs and licenses | (372.4) | (345.0)"
+     "General and administrative | 230.5 | 225.0 | 456.8 | 432.4",
+     "Stock-based compensation | 176.0 | 136.6",
+     "General and administrative expenses decreased by $8.9 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by lower legal fees and contingencies related to the IBM case against Zynga, partially offset by higher personnel expense due to higher performance-based compensation.",
+     "Changes in foreign currency exchange rates increased net revenue by $9.9 and increased gross profit by $45.4, respectively, in the fiscal year ended March 31, 2026 as compared to the prior year period."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1 and Q2 FY2027 Form 10-Q MD&A.",
-    "claim": "Take-Two operates across console, mobile, and PC through its principal labels\u2014Rockstar Games, 2K, and Zynga\u2014with most of its intellectual property internally owned and developed.",
+    "basis": "stated in the cited 10-K and 10-Q items",
+    "claim": "Take-Two develops, operates, and publishes interactive entertainment principally through Rockstar Games, 2K, and Zynga, supported by mostly internally owned intellectual property and 12,909 full-time employees including 9,998 in development studios.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
      "We develop, operate, and publish products principally through Rockstar Games, 2K, and Zynga.",
-     "Most of our intellectual property is internally owned and developed, which we believe best positions us financially and competitively."
+     "Most of our intellectual property is internally owned and developed, which we believe best positions us financially and competitively.",
+     "Our headcount includes 12,909 full-time employees as of March 31, 2026, including 9,998 in development studios."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1.",
-    "claim": "As of March 31, 2026, Take-Two employed 12,909 full-time employees, including 9,998 in internal development studios located across multiple countries.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our headcount includes 12,909 full-time employees as of March 31, 2026, including 9,998 in development studios.",
-     "We have internal development studios located in Australia, Canada, China, Czech Republic, Finland, Germany, Hungary, India, Serbia, South Korea, Spain, Turkey, the United Kingdom (\"U.K.\"), and the United States (\"U.S.\")."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the Q2 FY2027 Form 10-Q MD&A and November 20, 2026 Form 8-K (Exhibit 99.1).",
-    "claim": "Rockstar Games anchors Take-Two's console and PC franchise strength, with the Grand Theft Auto series having sold-in over 475 million units worldwide, Grand Theft Auto V reaching nearly 235 million units, and the Red Dead Redemption series reaching nearly 118 million units.",
+    "basis": "stated in the cited 10-Q and 8-K items",
+    "claim": "Rockstar Games anchors Take-Two's catalog with the Grand Theft Auto series at over 475 million units sold-in worldwide, including over 230 million units for Grand Theft Auto V, alongside nearly 118 million units sold-in for the Red Dead Redemption series.",
     "facts": [
      "P4",
      "P7"
     ],
     "quotes": [
      "Rockstar Games has established a uniquely original, popular, cultural phenomenon with its Grand Theft Auto series, which is the interactive entertainment industry's most iconic and critically acclaimed brand and has sold-in over 475 million units worldwide.",
-     "The series\u2019 most recent iteration, Grand Theft Auto V, has sold-in nearly 235 million units alone.",
+     "Our most recent installment, Grand Theft Auto V, which was released in 2013, has sold-in over 230 million units worldwide and includes access to Grand Theft Auto Online.",
      "Rockstar Games\u2019 blockbuster Western series, Red Dead Redemption, has sold-in nearly 118 million units worldwide to date, with its most recent release, Red Dead Redemption 2, breaking new ground in fidelity and immersion."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the November 20, 2026 Form 8-K (Exhibit 99.1).",
-    "claim": "Launched on November 19, 2026, Grand Theft Auto VI generated $3.79 billion in company-estimated day-one retail sales, sold 32.5 million units pre-release, and achieved a score of 99 on Metacritic.",
+    "basis": "stated in the cited 8-K Exhibit 99.1",
+    "claim": "Grand Theft Auto VI launched with $3.79 billion in day-one retail sales based on company estimates, 32.5 million units sold pre-release, and a Metacritic score of 99.",
     "facts": [
      "P7"
     ],
@@ -367,110 +390,107 @@
      "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
      "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms."
     ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1 and Q2 FY2027 Form 10-Q MD&A.",
-    "claim": "Take-Two's 2K label publishes the top-ranked NBA basketball video game (NBA 2K), operates China's top online PC sports game (NBA 2K Online) through a partnership with Tencent, and owns multi-million unit franchises including BioShock, Borderlands, Mafia, Sid Meier's Civilization, and XCOM.",
-    "facts": [
-     "P1",
-     "P4"
-    ],
-    "quotes": [
-     "Within these regions, China is our most established market, where we offer NBA 2K Online through our partnership with Tencent.",
-     "Our NBA 2K Online business is the top online PC sports game in China.",
-     "2K's internally owned and developed series include the critically acclaimed, multi-million unit selling BioShock, Borderlands, Mafia, Sid Meier's Civilization, and XCOM franchises.",
-     "2K's sports simulation titles include NBA 2K, which continues to be the top-ranked NBA basketball video game, WWE 2K professional wrestling, and PGA TOUR 2K."
-    ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1 and Q2 FY2027 Form 10-Q MD&A.",
-    "claim": "Take-Two's Zynga label provides substantial mobile reach, with its free-to-play mobile game portfolio downloaded more than 10 billion times.",
+    "basis": "stated in the cited 10-K and 10-Q items",
+    "claim": "The 2K and Zynga labels provide leadership in sports and mobile gaming, with NBA 2K ranked as the top NBA basketball video game, NBA 2K Online as the top online PC sports game in China, and Zynga's mobile portfolio downloaded more than 10 billion times.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
+     "2K's sports simulation titles include NBA 2K, which continues to be the top-ranked NBA basketball video game, WWE 2K professional wrestling, and PGA TOUR 2K.",
+     "Our NBA 2K Online business is the top online PC sports game in China.",
      "Zynga's diverse portfolio of popular game franchises has been downloaded more than 10 billion times, including Color Block Jam, CSR2, Empires & Puzzles, Game of Thrones: Legends, Game of Thrones Slots Casino, Golf Rival, Harry Potter: Puzzles & Spells, Hit it Rich! Casino, Match Factory!, Merge Dragons!, Toon Blast, Toy Blast, Wizard of Oz Slots Casino, Words With Friends, and Zynga Poker."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 7, Q2 FY2027 Form 10-Q MD&A, and November 9, 2026 Form 8-K (Exhibit 99.1).",
-    "claim": "Monetization is heavily recurring and digital, with recurrent consumer spending generating 78.1% of net revenue in the fiscal year ended March 31, 2026 and 81% of GAAP net revenue in the quarter ended September 30, 2026, while digital online channels produced 97.9% of net revenue for the six months ended September 30, 2026.",
+    "basis": "stated in the cited 10-K, 10-Q, and 8-K items",
+    "claim": "Take-Two's business is predominantly digital and recurring, with digital online channels supplying 97.9% of six-month net revenue and recurrent consumer spending supplying 78.1% of prior-year and 81% of second-quarter GAAP net revenue, though the company recorded a second-quarter GAAP net loss of $54.0 million.",
     "facts": [
      "P3",
      "P4",
      "P6"
     ],
     "quotes": [
+     "Net revenue from digital online channels comprised 97.9% of our net revenue for the six months ended September 30, 2026.",
      "Net revenue from recurrent consumer spending increased by $722.0 and accounted for 78.1% of net revenue for the fiscal year ended March 31, 2026, as compared to 79.4% for the prior year period.",
      "Recurrent consumer spending** decreased 5% and accounted for 81% of total GAAP net revenue.",
-     "Net revenue from digital online channels comprised 97.9% of our net revenue for the six months ended September 30, 2026."
+     "GAAP net loss was $54.0 million, or $0.29 per share, as compared to $133.9 million, or $0.73 per share, for the comparable period last year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the Q2 FY2027 Form 10-Q balance sheet and November 9, 2026 Form 8-K (Exhibit 99.1).",
-    "claim": "Take-Two held $1,149.4 (table in millions) in cash and cash equivalents and 524.2 (table in millions) in short-term investments as of September 30, 2026, while reiterating an outlook for fiscal year 2027 Net Bookings of $8.0 to $8.2 billion.",
-    "facts": [
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Company updates fiscal year 2027 outlook and reiterates expectation for Net Bookings of $8.0 to $8.2 billion",
-     "Cash and cash equivalents | $1,149.4 | $1,545.5",
-     "Short-term investments | 524.2 | 443.8"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1A Risk Factors (unchanged in Q2 FY2027 Form 10-Q Part II Item 1A).",
-    "claim": "Take-Two faces intense competition from larger, better-resourced game publishers and technology companies\u2014including Sony, Microsoft, Apple, Google, Tencent, Electronic Arts, Nintendo, Epic Games, Roblox, and Ubisoft\u2014as well as alternative entertainment like social media, television, and movies.",
+    "basis": "stated in the cited 10-K Item 1A Risk Factors",
+    "claim": "Take-Two faces intense competition from major game publishers and large technology companies with mobile and online offerings, some of which hold greater financial, technical, personnel, and marketing resources.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "We also compete with game publishers, such as Electronic Arts, Embracer Group, Epic Games, Microsoft, Nintendo, Playrix, Playtika, Roblox, Savvy Games, Sony, Tencent, and Ubisoft.",
-     "Some of our competitors have greater financial, technical, personnel, and other resources than we do and are able to finance larger budgets for development and marketing, make higher offers to licensors and developers for commercially desirable properties, adopt more aggressive pricing policies to develop more commercially successful video game products than we do, recruit our key creative and technical talent or otherwise disrupt our operations.",
-     "Our titles also compete with other forms of entertainment, such as social media, in addition to motion pictures, television, short-form video, and audio and video products featuring similar themes, online computer programs and other entertainment, which may be less expensive or provide other advantages to consumers."
+     "We also face competition from online game developers and distributors who have primarily focused on specific international markets and with high-profile companies with significant online presences with new and expanded mobile gaming offerings, such as Apple, Google, and Microsoft.",
+     "Some of our competitors have greater financial, technical, personnel, and other resources than we do and are able to finance larger budgets for development and marketing, make higher offers to licensors and developers for commercially desirable properties, adopt more aggressive pricing policies to develop more commercially successful video game products than we do, recruit our key creative and technical talent or otherwise disrupt our operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1A Risk Factors.",
-    "claim": "Low barriers to entry in mobile and online gaming, amplified by artificial intelligence tools, expose Take-Two to title proliferation, competitor imitation of hit games, and rising player acquisition and retention costs.",
+    "basis": "stated in the cited 10-K Item 1A Risk Factors",
+    "claim": "Low barriers to entry in mobile and online gaming are increasing title proliferation in open developer channels, making player differentiation harder and driving up acquisition and retention costs.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Additionally, competitors may develop content that imitates or competes with our best-selling games, including by using AI to do so, potentially reducing our sales or our ability to charge the same prices we have historically charged for our products.",
-     "We also compete or will compete with a vast number of small companies and individuals who are able to create and launch games and other content for devices and platforms using relatively limited resources, including AI resources, and with relatively limited start-up time or expertise.",
+     "As there are relatively low barriers to entry to develop a mobile or online game, we expect new game competitors to enter the market and existing competitors to allocate more resources to develop and market competing games and applications.",
+     "The proliferation of titles in these open developer channels makes it difficult for us to differentiate ourselves from other developers and to compete for players without substantially increasing our marketing expenses and development costs.",
      "Increasing competition could result in loss of players, increasing player acquisition and retention costs, and loss of talent, all of which could harm our business, financial condition or results of operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Items 1, 1A, and 7 and Q2 FY2027 Form 10-Q MD&A.",
-    "claim": "Distribution is highly concentrated: five customers accounted for 80.6% of net revenue in the fiscal year ended March 31, 2026 (with Apple, Sony, Google, and Microsoft each above 10.0%), consoles generated 39.0% of net revenue (41.4% in the six months ended September 30, 2026), and Apple and Google accounted for 91.0% of mobile revenue.",
+    "basis": "stated in the cited 10-K Item 1A Risk Factors",
+    "claim": "Rapid adoption of artificial intelligence creates a threat that competitors could imitate Take-Two's best-selling titles or deploy AI more efficiently, pressuring sales, pricing power, and intellectual property protection.",
     "facts": [
-     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Additionally, competitors may develop content that imitates or competes with our best-selling games, including by using AI to do so, potentially reducing our sales or our ability to charge the same prices we have historically charged for our products.",
+     "While the impact of AI on our industry is still emerging and uncertain, to the extent our competitors successfully implement AI technologies into their products or services more effectively or efficiently than we do, are able to imitate or compete more easily with our products, or if we fail to anticipate and respond to changing industry standards or consumer demand, or experience delays in integrating these technologies into our operations, we may face significant risks to our competitive position, financial performance, and long-term growth prospects."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q items",
+    "claim": "Revenue is concentrated in a small number of hit franchises, with Grand Theft Auto accounting for 12.4% of prior-year net revenue and 12.6% in the latest six-month period, while the top five franchises accounted for 54.3% of prior-year net revenue.",
+    "facts": [
      "P2",
-     "P3",
      "P4"
     ],
     "quotes": [
+     "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
+     "Sales of Grand Theft Auto products generated 12.6% of our net revenue for the six months ended September 30, 2026.",
+     "We also expect that a relatively limited number of popular franchises will continue to produce a disproportionately high percentage of our revenues and profits."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K items",
+    "claim": "Distribution and customer exposure is heavily concentrated in a few platform partners, with the five largest customers representing 80.6% of prior-year net revenue, Apple, Sony, Google, and Microsoft each exceeding 10.0%, Apple and Google generating 91.0% of mobile revenue, and third-party consoles generating 39.0% of net revenue.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
      "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
-     "We derive a significant portion of our revenue from the sale of products made for video game consoles manufactured by third parties, such as Sony's PlayStation consoles and Microsoft's Xbox consoles, which comprised 39.0% of our net revenue by product platform for the fiscal year ended March 31, 2026.",
-     "Such console revenue comprised 41.4% of our net revenue for the six months ended September 30, 2026.",
-     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms."
+     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
+     "We derive a significant portion of our revenue from the sale of products made for video game consoles manufactured by third parties, such as Sony's PlayStation consoles and Microsoft's Xbox consoles, which comprised 39.0% of our net revenue by product platform for the fiscal year ended March 31, 2026."
     ],
     "support": "quote_not_found"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Items 1, 1A, and 7 and the September 30, 2026 Form 8-K.",
-    "claim": "Third-party platform gatekeepers hold unilateral leverage over Take-Two's access and margins: Sony and Microsoft retain product approval rights and royalty terms (with Sony able to terminate on 30 days' notice), while Apple and Google control app store fees and privacy/advertising policies.",
+    "basis": "stated in the cited 10-K and 8-K items",
+    "claim": "Platform gatekeepers control access, fees, and policies: Apple and Google can unilaterally change platform fees and privacy or advertising rules, Microsoft holds concept and final approval rights over Xbox titles, and Sony may terminate its PlayStation agreement for any or no reason upon 30 days' notice.",
     "facts": [
      "P1",
      "P2",
@@ -478,47 +498,28 @@
      "P8"
     ],
     "quotes": [
-     "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice.",
-     "Microsoft has the right to review, evaluate, and approve each game concept and the final version of the game, including the game\u2019s packaging and marketing materials featuring Microsoft\u2019s marks.",
      "Apple and Google generally have the discretion to set the amounts of their platform fees and change their platforms\u2019 terms of service and other policies with respect to us or other developers at their sole discretion, and those changes may be unfavorable to us.",
-     "Further, as a result of the platform fees associated with online game sales, our mobile net revenue generally generates a lower gross margin percentage than our Console or PC revenue."
+     "A platform provider may also change its fee structure, add fees associated with access to and use of its platform, alter how we are able to advertise on the platform, change how the personal information of its users is made available to application developers on the platform, limit the use of personal information for advertising purposes, or restrict how players can share information with their friends on the platform or across platforms.",
+     "Microsoft has the right to review, evaluate, and approve each game concept and the final version of the game, including the game\u2019s packaging and marketing materials featuring Microsoft\u2019s marks.",
+     "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Items 1A and 7 and Q2 FY2027 Form 10-Q MD&A.",
-    "claim": "Revenue is concentrated in a small number of hit franchises\u2014its five best-selling franchises generated 54.3% of net revenue in the fiscal year ended March 31, 2026, and Grand Theft Auto accounted for 12.4% then and 12.6% in the six months ended September 30, 2026\u2014exposing results to delays, front-loaded sales declines, and IP write-offs.",
+    "basis": "stated in the cited 10-K Item 1A Risk Factors",
+    "claim": "Console hardware transitions, supply chain or tariff impacts on console availability and pricing, and multi-year development cycles threaten timely releases and demand.",
     "facts": [
-     "P2",
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
-     "Sales of Grand Theft Auto products generated 12.6% of our net revenue for the six months ended September 30, 2026.",
-     "The life cycle of a console or PC title generally involves a relatively high level of sales during the first few months after introduction followed by a rapid decline in sales.",
-     "Additionally, if the popularity of a franchise declines, as has happened in the past with other popular franchises, we may have to write off the unrecovered portion of the underlying intellectual property assets, which could negatively impact our business."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated directly in the FY2026 Form 10-K Items 1A and 7 and Q2 FY2027 Form 10-Q MD&A.",
-    "claim": "Console hardware transition cycles, supply chain or tariff-driven hardware price increases, and macroeconomic downturns threaten console demand and increase dual-generation development costs.",
-    "facts": [
-     "P2",
-     "P3",
-     "P4"
+     "P2"
     ],
     "quotes": [
      "Historically, when next generation consoles are announced or introduced into the market, consumers have typically reduced their purchases of products for prior-generation consoles in anticipation of purchasing a next-generation console and products for that console.",
-     "During console transitions, we may simultaneously incur costs both in continuing to develop and market new titles for prior-generation video game platforms, which may not sell at premium prices, and also in developing products for next-generation platforms, which may not generate immediate or near-term revenues.",
      "We also rely on the availability of an adequate supply of these video game consoles (which sometimes has been negatively affected by supply chain issues, and which has been and could be affected by an increase in tariffs or trade restrictions on component parts) and the continued support for these consoles by their manufacturers, including our ability to reach consumers via the online networks operated by these console manufacturers."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the FY2026 Form 10-K Items 1 and 1A.",
-    "claim": "Take-Two depends on time-limited third-party intellectual property licenses (such as sports leagues, players associations, and music labels) and third-party developers, exposing its pipeline to partner non-performance or non-renewal.",
+    "basis": "stated in the cited 10-K items",
+    "claim": "Take-Two faces risks from its dependence on time-limited third-party IP licenses and from potential declines in paying player retention or monetization rates.",
     "facts": [
      "P1",
      "P2"
@@ -526,75 +527,42 @@
     "quotes": [
      "We also enter into content license agreements, such as those with sports leagues, players associations, copyrighted fictional characters and entertainment brands, car manufacturers, music labels, and musicians.",
      "These licenses are typically limited to the use of the licensed rights in products for specific time periods.",
-     "The risk of distributors, development, and licensing partners or other third parties being unable to honor their commitments or otherwise putting our brand at risk"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1A, Q2 FY2027 Form 10-Q financial statements, and November 9, 2026 Form 8-K.",
-    "claim": "Take-Two carries significant outstanding debt\u2014629.2 (table in millions) in short-term debt, net and 1,890.6 (table in millions) in long-term debt, net as of September 30, 2026\u2014while reporting a GAAP net loss of $(88.1) (table in millions) and negative operating cash flow of (173.5) (table in millions) in the six months ended September 30, 2026.",
-    "facts": [
-     "F1",
-     "F2",
-     "F3",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "We have a significant amount of outstanding debt",
-     "Short-term debt, net | 629.2 | 30.0",
-     "Long-term debt, net | 1,890.6 | 2,488.0",
-     "Net loss | $(54.0) | $(133.9) | $(88.1) | $(145.8)",
-     "Net cash (used in) provided by operating activities | (173.5) | 83.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated directly in the FY2026 Form 10-K Item 1A Risk Factors.",
-    "claim": "Live-service and digital operations face threats from cybersecurity breaches, server or bandwidth disruptions, data-privacy regulation, and unauthorized external trading of virtual items and accounts.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Reliance on complex information technology systems and networks and potential adverse impact of security breaches",
-     "The loss of server capacity, lack of sufficient bandwidth, or connectivity issues could cause our business to suffer",
-     "The value of our virtual items is highly dependent on how we manage the economies in our games",
-     "There is potential for unauthorized or fraudulent transactions of accounts and virtual items outside of our games"
+     "If we fail to grow or sustain the number of our paying players, if the rates at which we attract and retain paying players declines (whether due to financial hardship as a result of an economic downturn or for any other reason), or if the average amount our players pay declines, our financial results could be negatively affected."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in F1",
-    "claim": "As of September 30, 2026, Take-Two held $ 1,149.4 in cash and cash equivalents and 524.2 in short-term investments (table in millions), alongside 15.0 in current restricted cash and cash equivalents and 68.0 in long-term restricted cash and cash equivalents.",
+    "basis": "Stated in the 10-Q condensed consolidated balance sheets (F1).",
+    "claim": "At September 30, 2026, Take-Two held $ 1,149.4 in cash and cash equivalents (down from $ 1,545.5 at March 31, 2026) and 524.2 in short-term investments (up from 443.8) (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
+     "CONDENSED CONSOLIDATED BALANCE SHEETS - USD ($) $ in Millions | Sep. 30, 2026 | Mar. 31, 2026",
      "Cash and cash equivalents | $ 1,149.4 | $ 1,545.5",
-     "Short-term investments | 524.2 | 443.8",
-     "Restricted cash and cash equivalents | 15.0 | 13.2",
-     "Long-term restricted cash and cash equivalents | 68.0 | 79.4"
+     "Short-term investments | 524.2 | 443.8"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1",
-    "claim": "Total current assets were 3,236.2 compared with total current liabilities of 2,974.0 at September 30, 2026 (table in millions), versus 3,199.5 and 2,588.8 at March 31, 2026, with 1,017.1 of current liabilities consisting of deferred revenue.",
+    "basis": "Stated in the 10-Q condensed consolidated balance sheets (F1).",
+    "claim": "Total current assets were 3,236.2 against total current liabilities of 2,974.0 at September 30, 2026 (compared with 3,199.5 and 2,588.8 at March 31, 2026), with current liabilities including 1,017.1 of deferred revenue and 629.2 of short-term debt, net (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
      "Total current assets | 3,236.2 | 3,199.5",
      "Total current liabilities | 2,974.0 | 2,588.8",
-     "Deferred revenue | 1,017.1 | 1,159.9"
+     "Deferred revenue | 1,017.1 | 1,159.9",
+     "Short-term debt, net | 629.2 | 30.0"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3",
-    "claim": "Management expects to satisfy working capital needs through cash and cash equivalents, short-term investments, operating cash flows, and its 2022 Credit Agreement.",
+    "basis": "Stated in the 10-K Management's Discussion and Analysis (P3).",
+    "claim": "Management expects to satisfy working capital needs using cash and cash equivalents, short-term investments, operating cash flows, and its credit agreement.",
     "facts": [
      "P3"
     ],
@@ -604,64 +572,56 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1 and P2",
-    "claim": "The company carries a significant amount of outstanding debt, reporting 629.2 in short-term debt, net and 1,890.6 in long-term debt, net at September 30, 2026 (table in millions), alongside 66.9 in current lease liabilities, 324.7 in non-current lease liabilities, and 3,673.6 in total stockholders' equity.",
+    "basis": "Stated in the 10-Q balance sheet (F1) and 10-K risk factors (P2).",
+    "claim": "Balance sheet leverage at September 30, 2026 comprised 629.2 of short-term debt, net and 1,890.6 of long-term debt, net (versus 30.0 and 2,488.0 at March 31, 2026), plus 66.9 in current lease liabilities and 324.7 in non-current lease liabilities, within 5,697.1 of total liabilities against 3,673.6 of stockholders' equity (table in millions).",
     "facts": [
      "F1",
      "P2"
     ],
     "quotes": [
-     "We have a significant amount of outstanding debt",
      "Short-term debt, net | 629.2 | 30.0",
      "Long-term debt, net | 1,890.6 | 2,488.0",
      "Lease liabilities | 66.9 | 70.1",
      "Non-current lease liabilities | 324.7 | 370.2",
-     "Total stockholders' equity | 3,673.6 | 3,510.9"
+     "Total liabilities | 5,697.1 | 5,872.3",
+     "Total stockholders' equity | 3,673.6 | 3,510.9",
+     "\u2022We have a significant amount of outstanding debt"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2 and P3",
-    "claim": "Interest expense for the six months ended September 30, 2026 was (60.6) compared with (76.3) in the prior-year period (table in millions), partially offset by 42.1 in interest income, reflecting lower debt balances after repaying the 2025 Notes and 2026 Notes.",
+    "basis": "Stated in the 10-Q statement of operations (F2) and 10-K MD&A (P3).",
+    "claim": "Interest expense declined to (60.6) in the six months ended September 30, 2026 from (76.3) a year earlier alongside interest income of 42.1, following a reduction to (151.4) in fiscal 2026 from (167.3) in fiscal 2025 driven by lower debt balances after note repayments (tables in millions).",
     "facts": [
      "F2",
      "P3"
     ],
     "quotes": [
-     "Interest expense | (30.2) | (37.4) | (60.6) | (76.3)",
      "Interest income | 19.3 | 20.7 | 42.1 | 37.2",
+     "Interest expense | (30.2) | (37.4) | (60.6) | (76.3)",
+     "Interest expense | (151.4) | (2.3)% | (167.3) | (3.0)% | 15.9 | (9.5)%",
      "The net decrease in expense was primarily driven by lower outstanding debt balances and lower interest expense due to the repayment of our 2025 Notes in April 2025 and our 2026 Notes in March 2026 (refer to Note 11 - Debt), decrease in foreign currency losses, and changes in fair value based on the observable price changes of our long-term investments."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Take-Two used (173.5) in operating cash flow during the six months ended September 30, 2026 (table in millions), compared with 83.7 provided by operating activities in the prior-year period.",
+    "basis": "Stated in the 10-Q condensed consolidated statements of cash flows (F3).",
+    "claim": "In the six months ended September 30, 2026, net cash used in operating activities was (173.5) versus 83.7 provided a year earlier, and net cash used in investing activities was (259.9) including (163.3) in fixed asset purchases, resulting in a (405.7) net decrease in cash, cash equivalents, and restricted cash to $ 1,232.4 (table in millions).",
     "facts": [
      "F3"
     ],
     "quotes": [
-     "Net cash (used in) provided by operating activities | (173.5) | 83.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3",
-    "claim": "During the six months ended September 30, 2026, investing activities used (259.9) including (163.3) for purchases of fixed assets, while financing activities provided 30.4 (table in millions), resulting in a (405.7) net change in cash, cash equivalents, and restricted cash and cash equivalents.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash used in investing activities | (259.9) | (314.0)",
+     "Net cash (used in) provided by operating activities | (173.5) | 83.7",
      "Purchases of fixed assets | (163.3) | (57.0)",
-     "Net cash provided by financing activities | 30.4 | 618.0",
-     "Net change in cash, cash equivalents, and restricted cash and cash equivalents | (405.7) | 401.8"
+     "Net cash used in investing activities | (259.9) | (314.0)",
+     "Net change in cash, cash equivalents, and restricted cash and cash equivalents | (405.7) | 401.8",
+     "Cash, cash equivalents, and restricted cash and cash equivalents, end of period | [1] | $ 1,232.4 | $ 1,961.0"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3",
-    "claim": "Operating cash flow quality in the six months ended September 30, 2026 was weighed down by (372.4) in software development costs and licenses outflows, (205.8) in prepaid expenses and other assets outflows, (147.3) in deferred revenue reductions, and (138.1) in accounts payable and accrued liability reductions (table in millions), which exceeded non-cash add-backs including 321.3 of intangible amortization and impairment, 190.8 of software development amortization and impairment, 176.0 of stock-based compensation, and 80.5 of depreciation against a $ (88.1) net loss.",
+    "basis": "Stated in the 10-Q condensed consolidated statements of cash flows (F3).",
+    "claim": "Cash generation quality in the six months ended September 30, 2026 reflected a GAAP net loss of $ (88.1) and large non-cash add-backs\u2014321.3 in intangible amortization and impairment, 190.8 in software development amortization and impairment, 176.0 in stock-based compensation, and 80.5 in depreciation\u2014outweighed by outflows of (372.4) for software development costs and licenses, (205.8) for prepaid and other assets, (147.3) for deferred revenue, and (138.1) for payables and accrued liabilities (table in millions).",
     "facts": [
      "F3"
     ],
@@ -679,20 +639,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P6",
-    "claim": "For the six months ended September 30, 2026, Non-GAAP EBITDA was $259.2 compared with $342.2 in the prior-year period (table in millions), while recurrent consumer spending generated $2,500.0 (table in millions) or 82% of total GAAP net revenue.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "EBITDA | $92.2 | $116.7 | $259.2 | $342.2",
-     "Recurrent consumer spending | $2,500.0 | 82% | $2,532.0 | 77%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 and P7",
-    "claim": "Management projects fiscal year 2027 net cash provided by operating activities of over $1,000 and capital expenditures of approximately $290 (table in millions), anchored by the November 19, 2026 launch of Grand Theft Auto VI, which reached $3.79 billion in day-one retail sales based on company estimates.",
+    "basis": "Stated in the Q2 FY2027 earnings release outlook (P6) and Form 8-K launch release (P7).",
+    "claim": "For the fiscal year ending March 31, 2027, management projects net cash provided by operating activities of over $1,000 and capital expenditures of approximately $290 (table in millions), supported by the November 19, 2026 launch of Grand Theft Auto VI, which reached $3.79 billion in estimated day-one retail sales.",
     "facts": [
      "P6",
      "P7"
@@ -705,39 +653,494 @@
     "support": "supported"
    },
    {
-    "basis": "inferred from the offsetting shift in short-term and long-term debt balances in F1",
-    "claim": "Between March 31, 2026 and September 30, 2026, short-term debt, net increased from 30.0 to 629.2 while long-term debt, net decreased from 2,488.0 to 1,890.6 (table in millions), indicating debt obligations rolling into current maturities.",
+    "basis": "Inferred from the offsetting balance-sheet shift between short-term and long-term debt (F1) alongside zero debt repayment on the cash flow statement (F3).",
+    "claim": "Between March 31, 2026 and September 30, 2026, short-term debt, net rose from 30.0 to 629.2 while long-term debt, net fell from 2,488.0 to 1,890.6 with 0.0 of debt repaid, indicating existing debt moved within one year of maturity (tables in millions).",
     "facts": [
-     "F1"
+     "F1",
+     "F3"
     ],
     "quotes": [
      "Short-term debt, net | 629.2 | 30.0",
-     "Long-term debt, net | 1,890.6 | 2,488.0"
+     "Long-term debt, net | 1,890.6 | 2,488.0",
+     "Repayment of debt | 0.0 | (600.0)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1, P3, and P6 for the balances and liquidity sources; inferred that these resources could address near-term maturities",
-    "claim": "The 629.2 in short-term debt, net at September 30, 2026 compares against $ 1,149.4 in cash and cash equivalents and 524.2 in short-term investments (table in millions), alongside projected fiscal year 2027 operating cash flow of over $1,000 (table in millions) and the 2022 Credit Agreement.",
+    "basis": "Inferred by comparing reported cash, short-term investments, and short-term debt (F1) with stated liquidity sources (P3) and operating cash flow guidance (P6).",
+    "claim": "The 629.2 of short-term debt, net at September 30, 2026 can be addressed through $ 1,149.4 of cash and cash equivalents and 524.2 of short-term investments on hand (table in millions), alongside projected fiscal 2027 operating cash flow over $1,000 against approximately $290 of capital expenditures (table in millions) and the company's credit facility.",
     "facts": [
      "F1",
      "P3",
      "P6"
     ],
     "quotes": [
-     "Short-term debt, net | 629.2 | 30.0",
      "Cash and cash equivalents | $ 1,149.4 | $ 1,545.5",
      "Short-term investments | 524.2 | 443.8",
+     "Short-term debt, net | 629.2 | 30.0",
+     "We expect to rely on cash and cash equivalents as well as on short-term investments, funds provided by our operating activities, and our 2022 Credit Agreement to satisfy our working capital needs.",
      "Net cash provided by operating activities | over $1,000",
-     "We expect to rely on cash and cash equivalents as well as on short-term investments, funds provided by our operating activities, and our 2022 Credit Agreement to satisfy our working capital needs."
+     "Capital expenditures | approximately $290"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in the November 20, 2026 Form 8-K press release (P7).",
-    "claim": "Rockstar Games launched Grand Theft Auto VI with $3.79 billion in day one retail sales and 32.5 million pre-release units sold.",
+    "basis": "Stated directly in the Q2 fiscal 2027 earnings release [P6] and Rockstar Games launch 8-K [P7], with launch date stated in the 10-Q [P4].",
+    "claim": "Grand Theft Auto VI generated $3.79 billion in day one retail sales on November 19, 2026 after selling 32.5 million units pre-release, underpinning Take-Two's reiterated fiscal 2027 Net Bookings outlook of $8.0 to $8.2 billion.",
+    "facts": [
+     "P4",
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
+     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms.",
+     "Company updates fiscal year 2027 outlook and reiterates expectation for Net Bookings of $8.0 to $8.2 billion",
+     "Rockstar Games will release Grand Theft Auto VI on November 19, 2026."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors [P2] and Q2 fiscal 2027 earnings release outlook dependencies [P6].",
+    "claim": "Because five best-selling franchises (including Grand Theft Auto) accounted for 54.3% of fiscal 2026 net revenue, sustained growth requires avoiding release delays or post-launch disruptions, continuing to produce hit sequels, and growing PlayStation 5 and Xbox Series X|S installed bases.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
+     "If we fail to continue to develop and sell new commercially successful hit titles or sequels to such hit titles or experience any delays in product releases or disruptions following the commercial release of our hit titles or their sequels, our revenue and profits may decrease substantially, and we may incur losses.",
+     "Key assumptions and dependencies underlying the Company\u2019s outlook include: a continuation of the current economic backdrop; the timely delivery of the titles included in this financial outlook; continued growth in the installed base of PlayStation 5 and Xbox Series X|S; the ability to develop and publish products that capture market share for these current generation systems while also leveraging opportunities on PC, mobile and other platforms; factors affecting our performance on mobile, such as player acquisition costs; our ongoing focus on our live services portfolio and new game pipeline; and stable foreign exchange rates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 [P3], 10-Q MD&A [P4], and Q2 fiscal 2027 earnings release [P6].",
+    "claim": "Broad-based title releases and franchise expansion drove fiscal 2026 net revenue up $1,022.8 (table in millions), or 18.2%, to $6,656.4 (table in millions), led by NBA 2K, Borderlands 4, Color Block Jam, Toon Blast, and Grand Theft Auto, alongside an announced multi-label pipeline.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Our net revenue for the fiscal year ended March 31, 2026 was $6,656.4, an increase of $1,022.8 or 18.2% compared to the fiscal year ended March 31, 2025.",
+     "The increase was primarily driven by higher net revenue of $416.9 from our NBA 2K franchise; $210.3 from our Borderlands franchise, the latest installment of which, Borderlands 4, released in September 2025; $206.6 from Color Block Jam, which released in November 2024; $121.9 from Toon Blast; and $115.1 from our Grand Theft Auto franchise.",
+     "To date we have also announced that, during the remainder of fiscal year 2027, 2K plans to release PGA 2K27 and WWE 2K27."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors [P2] and 10-Q balance sheet [F1].",
+    "claim": "Sustaining pipeline-driven growth requires timely title deliveries within budgeted costs and strong initial market acceptance to recoup multi-year development investments, including 2,494.9 (table in millions) of non-current software development costs and licenses on the balance sheet.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "New products may not achieve significant market acceptance, generate sufficient sales, or be introduced in a timely manner to permit us to recover development, manufacturing and marketing costs associated with these products.",
+     "The development cycle for new titles generally ranges from 12 months or less for most mobile titles and annual console/PC sports releases, to multiple years for certain of our top-selling titles.",
+     "Software development costs and licenses, net of current portion | 2,494.9 | 2,277.5"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 [P3] and Q2 fiscal 2027 earnings release [P6].",
+    "claim": "Recurrent consumer spending grew by $722.0 (table in millions) in fiscal 2026 to $5,196.6 (table in millions), or 78.1% of total net revenue, and reached 82% of net revenue in the six months ended September 30, 2026.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Net revenue from recurrent consumer spending increased by $722.0 and accounted for 78.1% of net revenue for the fiscal year ended March 31, 2026, as compared to 79.4% for the prior year period.",
+     "Recurrent consumer spending | $5,196.6 | 78.1% | $4,474.6 | 79.4% | $4,213.5 | 78.8%",
+     "Recurrent consumer spending | $2,500.0 | 82% | $2,532.0 | 77%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors [P2].",
+    "claim": "For recurrent consumer spending growth to continue, Take-Two must sustain or grow paying player counts and average player spend, manage in-game virtual economies effectively, and generate enough live-service revenue to offset ongoing development costs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we fail to grow or sustain the number of our paying players, if the rates at which we attract and retain paying players declines (whether due to financial hardship as a result of an economic downturn or for any other reason), or if the average amount our players pay declines, our financial results could be negatively affected.",
+     "For our products with live services, we are required to support continued development.",
+     "There can be no assurance that these continued efforts will generate sufficient revenue to offset these costs.",
+     "\u2022The value of our virtual items is highly dependent on how we manage the economies in our games"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 [P3] and 10-Q MD&A [P4].",
+    "claim": "Mobile net revenue rose by $391.0 (table in millions) in fiscal 2026 to 50.1% of total net revenue, while digital online distribution reached 97.9% of net revenue in the six months ended September 30, 2026 and direct-to-consumer mobile commerce is expanding to enhance profitability.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Net revenue from mobile increased by $391.0 and accounted for 50.1% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 52.2% in the prior year period.",
+     "Net revenue from digital online channels comprised 97.9% of our net revenue for the six months ended September 30, 2026.",
+     "We are also continuing to expand our direct-to-consumer efforts more meaningfully across our mobile portfolio to enhance profitability."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors [P2] and Item 7 [P3].",
+    "claim": "Because 91.0% of fiscal 2026 mobile revenue was derived on Apple and Google platforms, continued mobile growth depends on favorable app-store fees, terms of service, and privacy policies, as well as cost-effective player acquisition and retention.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
+     "Apple and Google generally have the discretion to set the amounts of their platform fees and change their platforms\u2019 terms of service and other policies with respect to us or other developers at their sole discretion, and those changes may be unfavorable to us.",
+     "Over time, the effectiveness or cost of these acquisition and retention-related programs may change, affecting our operating results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 [P3], 10-Q MD&A [P4], and 8-K Item 1.01 [P8].",
+    "claim": "Console net revenue rose $498.2 (table in millions) to 39.0% of fiscal 2026 net revenue (reaching 41.4% in the six months ended September 30, 2026) and PC and other rose $133.6 (table in millions), supported by a new long-term Xbox Publisher License Agreement with Microsoft.",
+    "facts": [
+     "P3",
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "Net revenue from console games increased by $498.2 and accounted for 39.0% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 37.3% in the prior year period.",
+     "Net revenue from PC and other increased by $133.6 and accounted for 10.9% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 10.5% in the prior year period.",
+     "Such console revenue comprised 41.4% of our net revenue for the six months ended September 30, 2026.",
+     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 [P1], Item 1A Risk Factors [P2], and 8-K Item 1.01 [P8].",
+    "claim": "Because Take-Two's five largest customers accounted for 80.6% of fiscal 2026 net revenue (with Apple, Sony, Google, and Microsoft each above 10.0%), continued console and PC growth requires maintaining platform-holder approvals and license renewals, adequate console supply without tariff disruptions, and smooth console transitions.",
+    "facts": [
+     "P1",
+     "P2",
+     "P8"
+    ],
+    "quotes": [
+     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
+     "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice.",
+     "We also rely on the availability of an adequate supply of these video game consoles (which sometimes has been negatively affected by supply chain issues, and which has been and could be affected by an increase in tariffs or trade restrictions on component parts) and the continued support for these consoles by their manufacturers, including our ability to reach consumers via the online networks operated by these console manufacturers.",
+     "Microsoft has the right to review, evaluate, and approve each game concept and the final version of the game, including the game\u2019s packaging and marketing materials featuring Microsoft\u2019s marks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 [P1], Item 7 [P3], and Q2 fiscal 2027 earnings release [P6].",
+    "claim": "Take-Two pursues incremental growth through international expansion (particularly in Asia, the Middle East, and Latin America, with international markets at 41% of Net Bookings in the six months ended September 30, 2026) and strategic acquisitions such as Gearbox.",
+    "facts": [
+     "P1",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "In particular, we believe that there are meaningful opportunities to expand our presence in Asia, the Middle East, and Latin America.",
+     "We believe that we can increase our scale by launching new intellectual properties; growing our core franchises through high-quality, fresh sequels, relevant brand extensions, and robust live services; and expanding our intellectual property portfolio and talent base through strategic acquisitions and partnerships.",
+     "International | 1,213.6 | 41% | 1,358.4 | 40%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors [P2] and Item 7 [P3].",
+    "claim": "For M&A and international expansion to drive profitable growth, Take-Two must avoid repeating fiscal 2025 goodwill impairments of $3,545.2 (table in millions), compete effectively against local international rivals, and manage foreign currency and tariff risks.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Our operating loss for the fiscal year ended March 31, 2026 was $104.2 compared to operating loss of $4,391.1 for fiscal year ended March 31, 2025, primarily driven by Goodwill impairment charges of $3,545.2 in the prior year, with no corresponding expense in the current year, as well as, higher sales of our products.",
+     "Internationally, local competitors may have a greater brand recognition than us in their local country and a stronger understanding of local culture and commerce.",
+     "\u2022Our acquisitions and investments may not have the anticipated results"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in 10-K Item 7 [P3].",
+    "claim": "Take-Two invests in artificial intelligence tools and technologies to enhance gameplay, anticipate changes in consumer behavior, and evolve its business.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We are continually innovating the design and development of our products, including by investing in artificial intelligence (\"AI\") tools and technologies, in order to enhance game play, anticipate changes in consumer behavior, and evolve our business as new dynamics develop."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1A Risk Factors [P2].",
+    "claim": "For AI investments to support rather than erode growth, Take-Two must adopt AI as effectively as competitors, defend against AI-enabled game imitation and low-barrier entrants, and navigate evolving AI regulations and intellectual property rules.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "While the impact of AI on our industry is still emerging and uncertain, to the extent our competitors successfully implement AI technologies into their products or services more effectively or efficiently than we do, are able to imitate or compete more easily with our products, or if we fail to anticipate and respond to changing industry standards or consumer demand, or experience delays in integrating these technologies into our operations, we may face significant risks to our competitive position, financial performance, and long-term growth prospects.",
+     "Additionally, competitors may develop content that imitates or competes with our best-selling games, including by using AI to do so, potentially reducing our sales or our ability to charge the same prices we have historically charged for our products."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated in the Form 8-K press release (P7) based on company estimates through end of day November 19, with the November 19, 2026 release date stated in the Form 10-Q (P4).",
+    "claim": "Rockstar Games launched Grand Theft Auto VI, achieving $3.79 billion in day one retail sales and selling 32.5 million units pre-release.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Rockstar Games will release Grand Theft Auto VI on November 19, 2026.",
+     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
+     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 8-K Item 1.01 disclosure (P8).",
+    "claim": "Take-Two entered into a new long-term XBOX Publisher License Agreement with Microsoft Corporation superseding all existing XBOX publisher license agreements.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026.",
+     "The Agreement supersedes and replaces all of the Company\u2019s existing XBOX publisher license agreements with Microsoft."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 8-K earnings release (P6).",
+    "claim": "Take-Two reported fiscal second quarter Net Bookings of $1.60 billion, updated its fiscal year outlook, and reiterated expectations for full-year Net Bookings of $8.0 to $8.2 billion.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "New York, NY \u2013 November 9, 2026 \u2013 Take-Two Interactive Software, Inc. (NASDAQ:TTWO) today reported results for the second quarter of its fiscal year 2027, ended September 30, 2026.",
+     "Fiscal second quarter Net Bookings were $1.60 billion",
+     "Company updates fiscal year 2027 outlook and reiterates expectation for Net Bookings of $8.0 to $8.2 billion"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 MD&A (P3).",
+    "claim": "Take-Two recorded goodwill impairment charges of $3,545.2 (unit scale not printed in the excerpt) that drove an operating loss of $4,391.1.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our operating loss for the fiscal year ended March 31, 2026 was $104.2 compared to operating loss of $4,391.1 for fiscal year ended March 31, 2025, primarily driven by Goodwill impairment charges of $3,545.2 in the prior year, with no corresponding expense in the current year, as well as, higher sales of our products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 Consolidated Statements of Operations summary table (P3).",
+    "claim": "Take-Two recorded goodwill impairment charges of 2,342.1 (unit scale not printed in the excerpt), representing 43.8% of total net revenue.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Goodwill impairment | \u2014 | \u2014% | 3,545.2 | 62.9% | 2,342.1 | 43.8%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 MD&A (P3).",
+    "claim": "Take-Two implemented a cost reduction program resulting in business reorganization expense of $106.5 (unit scale not printed in the excerpt).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Business reorganization expense decreased by $110.9 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by our cost reduction program in fiscal year 2025 (the \"2024 Plan\").",
+     "Business reorganization | (4.4) | (0.1)% | $106.5 | 1.9% | (110.9) | (104.1)%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 MD&A (P3).",
+    "claim": "Take-Two completed an underwritten public offering of common stock that contributed to higher cash and basic weighted average shares.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "This increase was primarily driven by proceeds from our May 2025 underwritten public offering of common stock (refer to Note 12 - Loss Per Share) and positive cash flow from product sales.",
+     "Basic weighted average shares of 183.9 were 8.8 higher as compared to the prior year period basic weighted average shares, primarily due to our May 2025 underwritten public offering of common stock, as well as normal stock compensation activity, including vests, grants, and forfeitures in the prior year being fully outstanding in the current year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 MD&A (P3).",
+    "claim": "Take-Two repaid its 2025 Notes.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The net decrease in expense was primarily driven by lower outstanding debt balances and lower interest expense due to the repayment of our 2025 Notes in April 2025 and our 2026 Notes in March 2026 (refer to Note 11 - Debt), decrease in foreign currency losses, and changes in fair value based on the observable price changes of our long-term investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 MD&A (P3).",
+    "claim": "Take-Two repaid its 2026 Notes.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The net decrease in expense was primarily driven by lower outstanding debt balances and lower interest expense due to the repayment of our 2025 Notes in April 2025 and our 2026 Notes in March 2026 (refer to Note 11 - Debt), decrease in foreign currency losses, and changes in fair value based on the observable price changes of our long-term investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Form 10-K Item 7 MD&A (P3).",
+    "claim": "Take-Two acquired Gearbox, contributing to higher research and development personnel expense.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Research and development expenses increased by $69.4 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by (i) higher personnel expense due to the acquisition of Gearbox in June 2024 and higher performance-based compensation, and (ii) the timing of additional R&D-related credits related to certain titles."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in [F1], [F2], [F3], [P2], [P3], [P6], and [P7]; liquidity pressure mechanism is inferred from the balance sheet and cash flow figures.",
+    "claim": "Short-term debt, net rose to 629.2 from 30.0 (table in millions) while six-month operating cash flow was (173.5) (table in millions) alongside ongoing net losses.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P2",
+     "P3",
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "We have a significant amount of outstanding debt",
+     "Short-term debt, net | 629.2 | 30.0",
+     "Net cash (used in) provided by operating activities | (173.5) | 83.7",
+     "Net cash provided by operating activities | over $1,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1], [P2], and [P8].",
+    "claim": "Sales to the five largest customers accounted for 80.6% of net revenue, with Apple, Sony, Google, and Microsoft each exceeding 10.0%, while Sony may terminate its PlayStation license agreement for any or no reason.",
+    "facts": [
+     "P1",
+     "P2",
+     "P8"
+    ],
+    "quotes": [
+     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
+     "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice.",
+     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2], [P3], [P4], [P6], and [P7].",
+    "claim": "Grand Theft Auto products generated 12.4% of annual net revenue and 12.6% of six-month net revenue, while the top five franchises accounted for 54.3% of annual net revenue, leaving results sensitive to hit-title acceptance and release timing.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
+     "Sales of Grand Theft Auto products generated 12.6% of our net revenue for the six months ended September 30, 2026.",
+     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1], [P2], [P3], [P4], and [P6].",
+    "claim": "Mobile accounted for 50.1% of annual net revenue with 91.0% of mobile revenue on Apple and Google platforms, exposing margins to unilateral platform fees, privacy rules, and player acquisition costs.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
+     "Net revenue from mobile increased by $391.0 and accounted for 50.1% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 52.2% in the prior year period.",
+     "Further, as a result of the platform fees associated with online game sales, our mobile net revenue generally generates a lower gross margin percentage than our Console or PC revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P1], [P2], and [P3].",
+    "claim": "Low barriers to entry in mobile and online games, better-capitalized competitors, and advances in AI that help rivals imitate hit games could erode player share and raise development and marketing expenses.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Additionally, competitors may develop content that imitates or competes with our best-selling games, including by using AI to do so, potentially reducing our sales or our ability to charge the same prices we have historically charged for our products.",
+     "The proliferation of titles in these open developer channels makes it difficult for us to differentiate ourselves from other developers and to compete for players without substantially increasing our marketing expenses and development costs.",
+     "We are continually innovating the design and development of our products, including by investing in artificial intelligence (\"AI\") tools and technologies, in order to enhance game play, anticipate changes in consumer behavior, and evolve our business as new dynamics develop."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2], [P3], and [P4].",
+    "claim": "Evolving AI regulations such as the E.U. Artificial Intelligence Act, data privacy laws, global tariff policies, and tax regime changes could increase compliance costs, effective tax burdens, or console prices.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "For instance, the European Union (\"E.U.\") Artificial Intelligence Act entered into force in August 2024, with some provisions becoming enforceable between February 2025 and August 2027, subject to a likely delay of the Act's high-risk enforcement until December 2027.",
+     "Further, intellectual property ownership surrounding AI technologies has not been fully addressed by U.S. courts or other federal or state laws or regulations, and the use or adoption of third-party AI technologies into our products and services may result in exposure to claims of copyright infringement, other intellectual property misappropriation, or uncertainty regarding copyright ownership of AI-generated assets.",
+     "Effective for tax years starting after December 31, 2026 (April 1, 2027 for the Company), the ARPA expands the limitation to cover the next five most highly compensated employees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2], [P3], and [P4].",
+    "claim": "Console revenue represented 39.0% of annual net revenue and 41.4% of six-month net revenue, making sales vulnerable to console hardware transitions, supply constraints, and console price increases.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "We derive a significant portion of our revenue from the sale of products made for video game platforms manufactured by third parties, such as Sony's PlayStation consoles and Microsoft's Xbox consoles, which comprised 39.0% of our net revenue by product platform for the fiscal year ended March 31, 2026.",
+     "Such console revenue comprised 41.4% of our net revenue for the six months ended September 30, 2026.",
+     "The latest Sony and Microsoft consoles provide \"backwards compatibility\" (i.e., the ability to play games for the previous generation of consoles)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1], [P2], and [P3]; write-down exposure of current capitalized software balances is inferred from the balance sheet and risk disclosures.",
+    "claim": "Capitalized software development costs and licenses reached 2,494.9 non-current and 82.4 current (table in millions), while goodwill and intangibles face write-down risk following prior-year goodwill impairments of $3,545.2 (figures in millions).",
+    "facts": [
+     "F1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Software development costs and licenses, net of current portion | 2,494.9 | 2,277.5",
+     "Additionally, if the popularity of a franchise declines, as has happened in the past with other popular franchises, we may have to write off the unrecovered portion of the underlying intellectual property assets, which could negatively impact our business.",
+     "Our operating loss for the fiscal year ended March 31, 2026 was $104.2 compared to operating loss of $4,391.1 for fiscal year ended March 31, 2025, primarily driven by Goodwill impairment charges of $3,545.2 in the prior year, with no corresponding expense in the current year, as well as, higher sales of our products."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "stated in the cited item [P7], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the launch results for Grand Theft Auto VI, which reached $3.79 billion in day one retail sales and sold 32.5 million pre-release units.",
     "facts": [
      "P7"
     ],
@@ -748,47 +1151,34 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q2 FY2027 Form 8-K earnings release outlook tables and CEO comments (P6).",
-    "claim": "Management's full-year outlook projects total net revenue of $7,980 to $8,180 (table in millions) and Net Bookings of $8,000 to $8,200 (table in millions), supported by Grand Theft Auto VI pre-orders and upcoming releases.",
+    "basis": "stated in the cited item [P6], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters management's full-year outlook of $7,980 to $8,180 (table in millions) in total net revenue and $8,000 to $8,200 (table in millions) in Net Bookings, supported by Grand Theft Auto VI pre-orders and upcoming releases.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "We are reiterating our outlook for Fiscal 2027 Net Bookings of $8 to $8.2 billion, and are confident in our ability to build on this incredible year as we release new hits, explore emerging business opportunities, expand our geographic footprint, and pursue accretive M&A \u2013 all of which will set us on a path to unlock greater earnings power and long-term shareholder value.",
      "Total net revenue | $7,980 to $8,180 | $20",
-     "Net Bookings | $8,000 to $8,200"
+     "Net Bookings | $8,000 to $8,200",
+     "We are reiterating our outlook for Fiscal 2027 Net Bookings of $8 to $8.2 billion, and are confident in our ability to build on this incredible year as we release new hits, explore emerging business opportunities, expand our geographic footprint, and pursue accretive M&A \u2013 all of which will set us on a path to unlock greater earnings power and long-term shareholder value."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Item 7 MD&A (P3).",
-    "claim": "Prior full-year net revenue increased by $1,022.8 or 18.2% to $6,656.4, and Net Bookings increased by $1,073.0 or 19.0% to $6,721.0, led by NBA 2K, Borderlands, Color Block Jam, Toon Blast, and Grand Theft Auto.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Our net revenue for the fiscal year ended March 31, 2026 was $6,656.4, an increase of $1,022.8 or 18.2% compared to the fiscal year ended March 31, 2025.",
-     "For the fiscal year ended March 31, 2026, Net Bookings increased by $1,073.0 as compared to the prior year period.",
-     "Net Bookings | $6,721.0 | 5,648.0 | $1,073.0 | 19.0%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in the FY2026 Form 10-K Risk Factors (P2) and Q2 FY2027 earnings release outlook assumptions (P6).",
-    "claim": "Continued hit-title and pipeline growth requires timely delivery of scheduled releases within development budgets, broad market acceptance, and sustained consumer demand for current-generation consoles.",
+    "basis": "stated in the cited items [P2] and [P6], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the dependency of continued hit-title and pipeline growth on timely releases within budget, broad market acceptance, and sustained consumer demand for current-generation consoles.",
     "facts": [
      "P2",
      "P6"
     ],
     "quotes": [
-     "If we fail to continue to develop and sell new commercially successful hit titles or sequels to such hit titles or experience any delays in product releases or disruptions following the commercial release of our hit titles or their sequels, our revenue and profits may decrease substantially, and we may incur losses.",
+     "If we or our third-party developers experience unanticipated development delays, financial difficulties, or additional costs, for example, as a result of unforeseen circumstances, we may not be able to release titles according to our schedule and at budgeted costs.",
      "Key assumptions and dependencies underlying the Company\u2019s outlook include: a continuation of the current economic backdrop; the timely delivery of the titles included in this financial outlook; continued growth in the installed base of PlayStation 5 and Xbox Series X|S; the ability to develop and publish products that capture market share for these current generation systems while also leveraging opportunities on PC, mobile and other platforms; factors affecting our performance on mobile, such as player acquisition costs; our ongoing focus on our live services portfolio and new game pipeline; and stable foreign exchange rates."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Item 7 MD&A (P3) and Q2 FY2027 earnings release (P6).",
-    "claim": "Recurrent consumer spending grew by $722.0 to reach 78.1% of net revenue in the prior fiscal year and accounted for 81% of net revenue and Net Bookings in the latest quarter.",
+    "basis": "stated in the cited items [P3] and [P6], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the recurrent consumer spending record, which grew by $722.0 to 78.1% of net revenue in the prior fiscal year and accounted for 81% of GAAP net revenue and total Net Bookings in the latest quarter.",
     "facts": [
      "P3",
      "P6"
@@ -798,52 +1188,52 @@
      "Recurrent consumer spending** decreased 5% and accounted for 81% of total GAAP net revenue.",
      "Net Bookings from recurrent consumer spending** decreased 9% and accounted for 81% of total Net Bookings."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Risk Factors (P2).",
-    "claim": "Sustaining recurrent consumer spending requires retaining and growing paying players, maintaining monetization rates and in-game virtual economies, and generating live-service revenues above ongoing support costs.",
+    "basis": "stated in the cited item [P2], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the drivers required to sustain recurrent consumer spending, including retaining paying players, maintaining monetization rates and virtual economies, and generating live-service revenue above support costs.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "If we fail to grow or sustain the number of our paying players, if the rates at which we attract and retain paying players declines (whether due to financial hardship as a result of an economic downturn or for any other reason), or if the average amount our players pay declines, our financial results could be negatively affected.",
-     "For our products with live services, we are required to support continued development.",
-     "There can be no assurance that these continued efforts will generate sufficient revenue to offset these costs."
+     "We might not succeed in our efforts to increase monetization rates, particularly if we are unable to retain our paying players.",
+     "There can be no assurance that these continued efforts will generate sufficient revenue to offset these costs.",
+     "The value of our virtual items is highly dependent on how we manage the economies in our games"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Item 1 (P1) and Item 7 MD&A (P3).",
-    "claim": "Mobile net revenue increased by $391.0 to $3,333.0, representing 50.1% of prior-year total net revenue, supported by Zynga titles and an expanding direct-to-consumer commerce platform.",
+    "basis": "stated in the cited items [P1] and [P3], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the prior-year mobile performance, in which mobile net revenue increased by $391.0 to $3,333.0, or 50.1% of total net revenue, supported by Zynga titles and direct-to-consumer expansion.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
-     "Net revenue from mobile increased by $391.0 and accounted for 50.1% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 52.2% in the prior year period.",
-     "Mobile | $3,333.0 | 50.1% | $2,942.0 | 52.2% | $2,748.0 | 51.4%",
      "We also engage with emerging marketing platforms, technologies, and services to enhance our reach and capabilities, including our direct-to-consumer commerce platform, through which players can purchase in-game offerings, primarily for our mobile titles.",
-     "We are also continuing to expand our direct-to-consumer efforts more meaningfully across our mobile portfolio to enhance profitability."
+     "Net revenue from mobile increased by $391.0 and accounted for 50.1% of our total net revenue in the fiscal year ended March 31, 2026, as compared to 52.2% in the prior year period.",
+     "Mobile | $3,333.0 | 50.1% | $2,942.0 | 52.2% | $2,748.0 | 51.4%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Risk Factors (P2) and Item 7 MD&A (P3).",
-    "claim": "Mobile growth depends on cost-effective player acquisition and retention spending and continued favorable terms on Apple and Google platforms, which accounted for 91.0% of prior-year mobile revenue.",
+    "basis": "stated in the cited items [P2] and [P3], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the reliance of mobile growth on player acquisition and retention cost-effectiveness and favorable terms on Apple and Google platforms, which accounted for 91.0% of prior-year mobile revenue.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
      "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
-     "Over time, the effectiveness or cost of these acquisition and retention-related programs may change, affecting our operating results."
+     "Over time, the effectiveness or cost of these acquisition and retention-related programs may change, affecting our operating results.",
+     "Apple and Google generally have the discretion to set the amounts of their platform fees and change their platforms\u2019 terms of service and other policies with respect to us or other developers at their sole discretion, and those changes may be unfavorable to us."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Item 7 MD&A (P3) and Q2 FY2027 Form 10-Q MD&A (P4).",
-    "claim": "Digital online distribution increased by $1,027.9 to $6,459.7, or 97.0% of prior-year net revenue, and reached 97.9% of net revenue in the latest six-month period.",
+    "basis": "stated in the cited items [P3] and [P4], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the digital online distribution shift, which increased by $1,027.9 to $6,459.7, or 97.0% of prior-year net revenue, and comprised 97.9% of net revenue in the latest six-month period.",
     "facts": [
      "P3",
      "P4"
@@ -856,23 +1246,23 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Item 1 (P1) and Risk Factors (P2), and the September 2026 Form 8-K (P8).",
-    "claim": "Digital and console distribution requires maintaining platform license agreements and title approvals with console and mobile gatekeepers alongside reliable online server infrastructure.",
+    "basis": "stated in the cited items [P1], [P2], and [P8], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the requirement that digital and console distribution depends on maintaining platform license agreements, gatekeeper title approvals, and reliable server infrastructure.",
     "facts": [
      "P1",
      "P2",
      "P8"
     ],
     "quotes": [
-     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
-     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026.",
-     "The loss of server capacity, lack of sufficient bandwidth, or connectivity issues could cause our business to suffer"
+     "The agreement requires us to submit products to Sony for approval and for us to make royalty payments to Sony based on the number of units manufactured or revenue from digitally downloaded content.",
+     "The loss of server capacity, lack of sufficient bandwidth, or connectivity issues could cause our business to suffer",
+     "Microsoft has the right to review, evaluate, and approve each game concept and the final version of the game, including the game\u2019s packaging and marketing materials featuring Microsoft\u2019s marks."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Item 1 (P1) and Item 7 MD&A (P3), and CEO remarks in the Q2 FY2027 earnings release (P6).",
-    "claim": "Management identifies international expansion in Asia, the Middle East, and Latin America, accretive M&A, and investments in AI tools and emerging platforms as additional growth levers.",
+    "basis": "stated in the cited items [P1], [P3], and [P6], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters management's stated growth levers of expansion in Asia, the Middle East, and Latin America, accretive M&A, and investments in AI tools and emerging opportunities.",
     "facts": [
      "P1",
      "P3",
@@ -886,568 +1276,139 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the FY2026 Form 10-K Risk Factors (P2).",
-    "claim": "Executing geographic expansion, M&A, and AI initiatives requires achieving expected returns on acquisitions while navigating foreign currency, tariff, regulatory, and AI intellectual-property risks.",
+    "basis": "stated in the cited item [P2], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the execution risks surrounding geographic expansion, M&A, and AI initiatives, including uncertain acquisition returns, foreign currency and trade risks, and AI intellectual-property uncertainty.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Our acquisitions and investments may not have the anticipated results",
-     "However, forecasting the financial impact of any such strategic investment is inherently uncertain and volatile.",
+     "We are subject to risks and uncertainties of international trade, including foreign currency fluctuations",
      "Further, intellectual property ownership surrounding AI technologies has not been fully addressed by U.S. courts or other federal or state laws or regulations, and the use or adoption of third-party AI technologies into our products and services may result in exposure to claims of copyright infringement, other intellectual property misappropriation, or uncertainty regarding copyright ownership of AI-generated assets."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in [P4] for the release date and [P7] (Form 8-K Item 7.01 press release) for day-one retail sales based on company estimates through end of day November 19th worldwide and pre-release units sold",
-    "claim": "Rockstar Games released Grand Theft Auto VI, reaching $3.79 billion in day one retail sales and 32.5 million units sold pre-release.",
-    "facts": [
-     "P4",
-     "P7"
-    ],
-    "quotes": [
-     "Rockstar Games will release Grand Theft Auto VI on November 19, 2026.",
-     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P8] (Form 8-K Item 1.01)",
-    "claim": "Take-Two and Microsoft entered into a new long-term XBOX Publisher License Agreement superseding and replacing all existing XBOX publisher license agreements between them.",
+    "basis": "stated in the cited items [P2] and [P4], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters Take-Two's franchise concentration, with Grand Theft Auto generating 12.4% of net revenue and the five best-selling franchises accounting for 54.3% in the fiscal year ended March 31, 2026, and Grand Theft Auto generating 12.6% in the six months ended September 30, 2026.",
     "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
+     "Sales of Grand Theft Auto products generated 12.6% of our net revenue for the six months ended September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items [P1], [P2], and [P8], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters customer and platform concentration: the five largest customers accounted for 80.6% of net revenue in the fiscal year ended March 31, 2026 with Apple, Sony, Google, and Microsoft each exceeding 10.0%, Apple and Google represented 91.0% of mobile revenue, and Sony's PlayStation agreement expires March 31, 2027 with 30 days' termination notice.",
+    "facts": [
+     "P1",
+     "P2",
      "P8"
     ],
     "quotes": [
-     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026.",
+     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
+     "The term of the agreement, as amended, expires on March 31, 2027, with automatic one-year renewal terms thereafter (unless one party gives the other notice of termination).",
+     "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice.",
+     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
      "The Agreement supersedes and replaces all of the Company\u2019s existing XBOX publisher license agreements with Microsoft."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P6] (Form 8-K Item 2.02 earnings release)",
-    "claim": "Take-Two reported fiscal second quarter GAAP net revenue of $1.50 billion, GAAP net loss of $54.0 million, and Net Bookings of $1.60 billion, updated its full-year outlook reiterating Net Bookings of $8.0 to $8.2 billion, and issued its initial third quarter outlook.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "New York, NY \u2013 November 9, 2026 \u2013 Take-Two Interactive Software, Inc. (NASDAQ:TTWO) today reported results for the second quarter of its fiscal year 2027, ended September 30, 2026.",
-     "Company updates fiscal year 2027 outlook and reiterates expectation for Net Bookings of $8.0 to $8.2 billion",
-     "GAAP net revenue was $1.50 billion, compared to $1.77 billion in last year\u2019s fiscal second quarter.",
-     "GAAP net loss was $54.0 million, or $0.29 per share, as compared to $133.9 million, or $0.73 per share, for the comparable period last year.",
-     "Total Net Bookings* decreased 18% to $1.60 billion compared to $1.96 billion during last year\u2019s fiscal second quarter."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in [P6] (Form 8-K Item 2.02 Product Releases table) and [P4] (10-Q Item 2)",
-    "claim": "2K released NBA 2K27 on PS5, Xbox Series X|S, Switch 2, and PC.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "2K | NBA 2K27 | PS5, Xbox Series X|S, Switch 2, PC | September 4, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6] (Form 8-K Item 2.02 Product Releases table)",
-    "claim": "Rockstar Games released the Grand Theft Auto Online Kortz Center Heist Summer Update.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Rockstar Games | Grand Theft Auto Online Kortz Center Heist Summer Update | PS4, PS5, Xbox One, Xbox Series X|S, PC | July 14, 2026"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P4] (10-Q Item 2) and [P6] (Form 8-K Item 2.02 future lineup table)",
-    "claim": "Take-Two formally announced upcoming titles including PGA TOUR 2K27, WWE 2K27, Top Goal, CSR 3, Project ETHOS, BioShock next iteration, and Judas.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "To date we have also announced that, during the remainder of fiscal year 2027, 2K plans to release PGA 2K27 and WWE 2K27.",
-     "Take-Two's future lineup announced to-date includes:"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "Take-Two repaid its 2026 Notes.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The net decrease in expense was primarily driven by lower outstanding debt balances and lower interest expense due to the repayment of our 2025 Notes in April 2025 and our 2026 Notes in March 2026 (refer to Note 11 - Debt), decrease in foreign currency losses, and changes in fair value based on the observable price changes of our long-term investments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "Take-Two completed an underwritten public offering of common stock.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "This increase was primarily driven by proceeds from our May 2025 underwritten public offering of common stock (refer to Note 12 - Loss Per Share) and positive cash flow from product sales."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "Take-Two repaid its 2025 Notes.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The net decrease in expense was primarily driven by lower outstanding debt balances and lower interest expense due to the repayment of our 2025 Notes in April 2025 and our 2026 Notes in March 2026 (refer to Note 11 - Debt), decrease in foreign currency losses, and changes in fair value based on the observable price changes of our long-term investments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "2K released Mafia: The Old Country, NBA 2K26, Borderlands 4, and WWE 2K26 during fiscal year 2026.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "During fiscal year 2026, 2K released Mafia: The Old Country, NBA 2K26, Borderlands 4, and WWE 2K26."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "Take-Two executed a cost reduction program (the \"2024 Plan\"), recording $106.5 in business reorganization expense in fiscal year 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Business reorganization expense decreased by $110.9 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by our cost reduction program in fiscal year 2025 (the \"2024 Plan\").",
-     "Business reorganization | (4.4) | (0.1)% | $106.5 | 1.9% | (110.9) | (104.1)%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "Take-Two recognized goodwill impairment charges of $3,545.2 for the fiscal year ended March 31, 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Our operating loss for the fiscal year ended March 31, 2026 was $104.2 compared to operating loss of $4,391.1 for fiscal year ended March 31, 2025, primarily driven by Goodwill impairment charges of $3,545.2 in the prior year, with no corresponding expense in the current year, as well as, higher sales of our products."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7 Consolidated Statements of Operations summary table)",
-    "claim": "Take-Two recognized goodwill impairment of 2,342.1 for the fiscal year ended March 31, 2024.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Goodwill impairment | \u2014 | \u2014% | 3,545.2 | 62.9% | 2,342.1 | 43.8%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in [P3] (10-K Item 7)",
-    "claim": "Take-Two acquired Gearbox.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Research and development expenses increased by $69.4 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by (i) higher personnel expense due to the acquisition of Gearbox in June 2024 and higher performance-based compensation, and (ii) the timing of additional R&D-related credits related to certain titles."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in P2, P4, P6, and P7.",
-    "claim": "Take-Two's revenue is concentrated in a small number of hit franchises, with Grand Theft Auto generating 12.4% of net revenue and the top five franchises accounting for 54.3% of net revenue in the fiscal year ended March 31, 2026, and Grand Theft Auto generating 12.6% of net revenue in the six months ended September 30, 2026.",
-    "facts": [
-     "P1",
-     "P2",
-     "P4",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto products contributed 12.4% of our net revenue for the fiscal year ended March 31, 2026, and the five best-selling franchises (including Grand Theft Auto), which may change year over year, in the aggregate accounted for 54.3% of our net revenue for the fiscal year ended March 31, 2026.",
-     "Sales of Grand Theft Auto products generated 12.6% of our net revenue for the six months ended September 30, 2026.",
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1, P2, and P8.",
-    "claim": "Five customers accounted for 80.6% of net revenue in the fiscal year ended March 31, 2026, with Apple, Sony, Google, and Microsoft each exceeding 10.0%, while Apple and Google accounted for 91.0% of mobile revenue and Sony's PlayStation agreement expires March 31, 2027 and may be terminated on 30 days' notice.",
-    "facts": [
-     "P1",
-     "P2",
-     "P3",
-     "P4",
-     "P8"
-    ],
-    "quotes": [
-     "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
-     "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice.",
-     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
-     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F1 and F3; counter-evidence stated in F1, P3, P6, and P7.",
-    "claim": "At September 30, 2026, short-term debt, net rose to 629.2 (table in millions) from 30.0 (table in millions) at March 31, 2026 alongside 1,890.6 (table in millions) of long-term debt, net, while operating activities used (173.5) (table in millions) of cash in the six months ended September 30, 2026.",
+    "basis": "stated in the cited items [F1] and [F3], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the debt and operating cash flow position: at September 30, 2026, short-term debt, net stood at 629.2 (table in millions) versus 30.0 (table in millions) at March 31, 2026 alongside 1,890.6 (table in millions) of long-term debt, net, while operating activities used (173.5) (table in millions) of cash in the six months ended September 30, 2026.",
     "facts": [
      "F1",
-     "F3",
-     "P2",
-     "P3",
-     "P6",
-     "P7"
+     "F3"
     ],
     "quotes": [
      "Short-term debt, net | 629.2 | 30.0",
+     "Long-term debt, net | 1,890.6 | 2,488.0",
      "Net cash (used in) provided by operating activities | (173.5) | 83.7"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2 and P3; counter-evidence stated in P6 and P7.",
-    "claim": "Take-Two reported GAAP operating losses of (117.5) and (153.0) (table in millions) and GAAP net losses of $ (54.0) and $ (88.1) (table in millions) for the three and six months ended September 30, 2026, following a $298.2 (table in millions) net loss in the fiscal year ended March 31, 2026.",
+    "basis": "stated in the cited items [F2] and [P3], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters the GAAP loss record, with operating losses of (117.5) and (153.0) (table in millions) and net losses of $ (54.0) and $ (88.1) (table in millions) for the three and six months ended September 30, 2026, following a $298.2 net loss in the fiscal year ended March 31, 2026.",
     "facts": [
      "F2",
-     "P2",
-     "P3",
-     "P6",
-     "P7"
+     "P3"
     ],
     "quotes": [
      "Loss from operations | (117.5) | (98.0) | (153.0) | (76.4)",
-     "Net loss | $ (54.0) | $ (133.9) | $ (88.1) | $ (145.8)"
+     "Net loss | $ (54.0) | $ (133.9) | $ (88.1) | $ (145.8)",
+     "For the fiscal year ended March 31, 2026, our net loss was $298.2, as compared to net loss of $4,478.9 in the prior year."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2; counter-evidence stated in P1, P3, P4, and P7.",
-    "claim": "Take-Two faces intense competition from larger technology and gaming firms and low-barrier mobile and online entrants using AI tools, as well as operational, copyright, and reputational risks from integrating AI into its own products.",
+    "basis": "stated in the cited item [P2], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters competitive and AI-related risks from larger technology and gaming competitors, low-barrier mobile and online entrants using AI resources, and operational, copyright, and reputational risks from AI integration.",
     "facts": [
-     "P1",
-     "P2",
-     "P3",
-     "P4",
-     "P7"
+     "P2"
     ],
     "quotes": [
      "We also compete or will compete with a vast number of small companies and individuals who are able to create and launch games and other content for devices and platforms using relatively limited resources, including AI resources, and with relatively limited start-up time or expertise.",
-     "Any integration of any AI technologies into our products or services may result in new or enhanced governmental or regulatory scrutiny, litigation, confidentiality or security risks, ethical concerns, negative user perceptions as to automation and AI, or other complications that could adversely affect our business, reputation, or financial results."
+     "The development, use, and incorporation of artificial intelligence (\"AI\") into our products and within our industry may present operational, reputational, financial, and competition risks"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 and P3.",
-    "claim": "Take-Two is exposed to evolving AI, internet, and data-privacy regulations\u2014including the E.U. Artificial Intelligence Act\u2014as well as tax audits and tax law changes under the OBBB, CAMT, ARPA, and OECD Pillar Two.",
+    "basis": "stated in the cited items [P2] and [P3], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters regulatory and tax exposure across evolving AI, internet, and data-privacy laws, including the E.U. Artificial Intelligence Act, as well as tax examinations and changes under the OBBB, CAMT, ARPA, and OECD Pillar Two.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
      "For instance, the European Union (\"E.U.\") Artificial Intelligence Act entered into force in August 2024, with some provisions becoming enforceable between February 2025 and August 2027, subject to a likely delay of the Act's high-risk enforcement until December 2027.",
-     "It is possible that these changes could have an adverse impact on our effective tax rate, tax payments, financial condition, or results of operations."
+     "On July 4, 2025, the One Big Beautiful Bill Act (\"OBBB\") was signed into law.",
+     "The American Rescue Plan Act of 2021 (the \u201cARPA\u201d), among other things, includes provisions to expand the IRC Section 162(m) disallowance for deduction of certain compensation paid by publicly held corporations.",
+     "The Inflation Reduction Act of 2022 (the \u201cInflation Reduction Act\u201d) includes a corporate alternative minimum tax (\"CAMT\") of 15% on the adjusted financial statement income (\"AFSI\") of corporations with an average AFSI exceeding $1.0 billion over a consecutive three-year period.",
+     "The Organization for Economic Co-operation and Development (\"OECD\") has proposed a global minimum tax of 15% of reported profits, referred to as Pillar Two.",
+     "In addition, we are regularly examined by domestic and foreign taxing authorities."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2, P3, and P4.",
-    "claim": "Macroeconomic pressures, global tariff policies, console supply or pricing constraints, console-generation transitions, and foreign-exchange fluctuations pose demand and cost risks where consoles generated 41.4% of net revenue in the six months ended September 30, 2026.",
+    "basis": "stated in the cited items [P2] and [P4], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters macroeconomic, tariff, console supply and pricing, console-transition, and foreign-exchange risks for a business where console revenue comprised 41.4% of net revenue in the six months ended September 30, 2026.",
     "facts": [
      "P2",
-     "P3",
-     "P4",
-     "P6"
+     "P4"
     ],
     "quotes": [
      "We continue to monitor various macroeconomic and geopolitical factors, such as global tariff policies, that may affect our business in several areas, including consumer demand, inflation, pricing pressure on our products and third party hardware platforms, credit quality of our receivables, and foreign currency exchange rates.",
-     "Such console revenue comprised 41.4% of our net revenue for the six months ended September 30, 2026."
+     "Such console revenue comprised 41.4% of our net revenue for the six months ended September 30, 2026.",
+     "We also rely on the availability of an adequate supply of these video game consoles (which sometimes has been negatively affected by supply chain issues, and which has been and could be affected by an increase in tariffs or trade restrictions on component parts) and the continued support for these consoles by their manufacturers, including our ability to reach consumers via the online networks operated by these console manufacturers."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2, P3, and P6; counter-evidence stated in F3 and P3.",
-    "claim": "Equity offerings and employee stock compensation have expanded Take-Two's share base\u2014increasing basic weighted average shares by 8.8 to 183.9 in the fiscal year ended March 31, 2026, with diluted shares projected at 192.0 million in the fiscal third quarter ending December 31, 2026\u2014creating ongoing dilution risk.",
+    "basis": "stated in the cited items [P2], [P3], and [P6], with no evidence effective after 2026-11-25T14:51:02Z",
+    "claim": "No newer evidence alters ongoing dilution risk from equity issuances and stock compensation, after basic weighted average shares rose by 8.8 to 183.9 in the fiscal year ended March 31, 2026 and diluted share count is expected to be 192.0 million in the fiscal third quarter ending December 31, 2026.",
     "facts": [
-     "F3",
      "P2",
      "P3",
      "P6"
     ],
     "quotes": [
+     "Additional issuances or sales of equity securities by us would dilute the ownership of our existing stockholders and could adversely affect the market price of our common stock",
      "Basic weighted average shares of 183.9 were 8.8 higher as compared to the prior year period basic weighted average shares, primarily due to our May 2025 underwritten public offering of common stock, as well as normal stock compensation activity, including vests, grants, and forfeitures in the prior year being fully outstanding in the current year.",
      "Share count used to calculate GAAP and management reporting diluted net income per share is expected to be 192.0 million"
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [
-   {
-    "basis": "stated directly in P7 for launch sales and pre-release units and in P6 for the full-year Net Bookings outlook",
-    "claim": "Grand Theft Auto VI has moved from a planned release to launch, achieving $3.79 billion in day one retail sales and 32.5 million units sold pre-release, while the full-year Net Bookings outlook of $8,000 to $8,200 (table in millions) is not updated in the newer filing.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms.",
-     "Net Bookings | $8,000 to $8,200"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in P7 for Grand Theft Auto VI launch execution and storefront availability; inferred that general multi-title requirements in G2 remain unchanged",
-    "claim": "P7 shows Grand Theft Auto VI launched on the PlayStation Store and Microsoft Store with $3.79 billion in day one retail sales and a 99 Metacritic score, leaving the general delivery, market-acceptance, console installed-base, and platform-approval requirements for hit-title growth unchanged.",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto VI is available at the PlayStation\u00ae Store, Microsoft Store, Rockstar Games Store, and global retailers and storefronts.",
-     "Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which covers the Grand Theft Auto VI launch and cumulative Rockstar series sell-in rather than prior fiscal-year revenue",
-    "claim": "P7 reports only Grand Theft Auto VI launch metrics and series sell-in figures and does not address prior completed fiscal-year net revenue growth or its franchise drivers.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in P7 for Grand Theft Auto VI reception and day-one sales; inferred that the structural dependencies in P2 remain unchanged",
-    "claim": "P7 reports that Grand Theft Auto VI launched with a 99 Metacritic score and $3.79 billion in day one retail sales without addressing full-year franchise revenue concentration, creative talent retention, or development budgets, leaving the general franchise-growth requirements unchanged.",
-    "facts": [
-     "P2",
-     "P7"
-    ],
-    "quotes": [
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms.",
-     "Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which contains no recurrent consumer spending figures",
-    "claim": "P7 announces the Grand Theft Auto VI launch and does not address recurrent consumer spending dollar growth or its share of full-year or second-quarter net revenue.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which reports launch retail sales, pre-release units, review score, and storefront availability only",
-    "claim": "P7 does not address paying-player retention, average player spend, in-game virtual economies, or live-service development costs.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which covers Rockstar Games and Grand Theft Auto VI rather than mobile operations",
-    "claim": "P7 does not address Zynga, mobile gaming revenue growth, mobile net revenue share, or direct-to-consumer commerce.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which mentions console and retail storefronts for Grand Theft Auto VI and does not discuss mobile platforms",
-    "claim": "P7 does not address mobile revenue concentration on Apple and Google platforms, app store fees, privacy policies, player acquisition costs, or mobile competition.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto VI is available at the PlayStation\u00ae Store, Microsoft Store, Rockstar Games Store, and global retailers and storefronts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which combines digital and physical storefronts in day-one retail sales without a channel revenue breakdown",
-    "claim": "P7 states that Grand Theft Auto VI is available through digital storefronts and global retailers without reporting digital online channel net revenue or its share of total net revenue.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto VI is available at the PlayStation\u00ae Store, Microsoft Store, Rockstar Games Store, and global retailers and storefronts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which makes no mention of regional expansion plans or M&A",
-    "claim": "P7 does not address geographic expansion in Asia, the Middle East, or Latin America or selective acquisitions and partnerships.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which contains no discussion of M&A integration, currency/trade risks, or top-customer revenue share",
-    "claim": "P7 does not address acquisition integration, goodwill impairments, foreign currency or trade risks, or customer concentration.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which contains no mention of artificial intelligence or cloud streaming",
-    "claim": "P7 does not address artificial intelligence, cloud streaming, or AI-related regulatory, intellectual property, or imitation risks.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in P7 for the launch, day-one retail sales, pre-release units, and Metacritic score, and in P6 for the Net Bookings outlook",
-    "claim": "Grand Theft Auto VI has launched with $3.79 billion in day one retail sales, 32.5 million pre-release units sold, and a 99 Metacritic score, altering the risk that the full-year Net Bookings outlook of $8,000 to $8,200 (table in millions) faces pre-launch delays or weak initial market acceptance for the title.",
-    "facts": [
-     "P2",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms.",
-     "Net Bookings | $8,000 to $8,200"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which does not discuss second-quarter financial results",
-    "claim": "P7 reports Grand Theft Auto VI launch results and does not address second-quarter Net Bookings, GAAP net revenue, or recurrent consumer spending declines.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which mentions platform storefronts without addressing contract terms or revenue concentration",
-    "claim": "P7 lists the PlayStation Store and Microsoft Store among launch storefronts for Grand Theft Auto VI and does not address top-customer revenue concentration, console revenue share, or Sony PlayStation license expiration and termination terms.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "Grand Theft Auto VI is available at the PlayStation\u00ae Store, Microsoft Store, Rockstar Games Store, and global retailers and storefronts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which contains no mobile segment or app-store platform disclosures",
-    "claim": "P7 does not address mobile net revenue share, Apple and Google platform concentration, app store fees, policy restrictions, or mobile gross margins.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which provides no balance-sheet, cash-flow, or GAAP earnings figures",
-    "claim": "P7 does not address short-term or long-term debt balances, operating cash flow, or GAAP net loss.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which contains no regulatory or tax disclosures",
-    "claim": "P7 does not address artificial intelligence laws, intellectual property litigation, or international and U.S. tax law changes.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which contains no commentary on tariffs, macro conditions, or console hardware cycles",
-    "claim": "P7 does not address macroeconomic pressures, global tariff policies, next-generation console transitions, or console net revenue share.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated by omission in P7, which reports title sales and review reception without balance-sheet or impairment figures",
-    "claim": "P7 does not address balance-sheet carrying amounts for software development costs, other intangibles, or goodwill, nor any asset impairment risk.",
-    "facts": [
-     "P7"
-    ],
-    "quotes": [
-     "The latest Rockstar Games release is Grand Theft Auto VI."
-    ],
-    "support": "supported"
-   }
-  ],
   "unresolved_questions": [
    {
-    "basis": "Stated across [P6] and [P7]; the conversion from retail sales estimates to Net Bookings and GAAP net revenue is inferred because [P7] reports retail sales rather than company Net Bookings or GAAP revenue.",
-    "claim": "How will Grand Theft Auto VI's $3.79 billion in day-one retail sales and 32.5 million pre-release units convert into fiscal third quarter Net Bookings and GAAP net revenue relative to the $3,350 to $3,500 and $8,000 to $8,200 (tables in millions) Net Bookings outlooks?",
-    "facts": [
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
-     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms.",
-     "Take-Two is updating its outlook for the fiscal year and providing its initial outlook for its fiscal third quarter ending December 31, 2026:"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [F1] and [P3]; the debt composition, maturity terms, and credit facility availability are omitted because the debt footnotes and 10-Q liquidity section are not in the packet.",
-    "claim": "Which debt instruments shifted into Short-term debt, net as it rose from 30.0 to 629.2 (table in millions) while Long-term debt, net fell from 2,488.0 to 1,890.6 (table in millions), and what are their maturity dates, interest rates, and available credit capacity?",
+    "basis": "Stated in [F1] balance sheet debt lines and [P3] reference to Note 11 - Debt, which is omitted from the packet.",
+    "claim": "What debt instruments, maturity dates, and refinancing terms explain the shift in Short-term debt, net from 30.0 to 629.2 (table in millions) and Long-term debt, net from 2,488.0 to 1,890.6 (table in millions) between March 31, 2026 and September 30, 2026?",
     "facts": [
      "F1",
      "P3"
@@ -1455,69 +1416,107 @@
     "quotes": [
      "Short-term debt, net | 629.2 | 30.0",
      "Long-term debt, net | 1,890.6 | 2,488.0",
-     "We expect to rely on cash and cash equivalents as well as on short-term investments, funds provided by our operating activities, and our 2022 Credit Agreement to satisfy our working capital needs."
+     "Refer to Note 11 - Debt for additional discussion of our outstanding debt obligations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P8]; the Item 1.01 Form 8-K summarizes the agreement without disclosing economic terms or expiration dates and defers the full text to a Form 10-Q exhibit.",
-    "claim": "What are the contract duration, agreed revenue-share rates, wholesale prices, and physical-media fees and royalties under the new XBOX Publisher License Agreement with Microsoft?",
+    "basis": "Stated in [P6] outlook tables issued November 9, 2026 and [P7] Form 8-K press release issued November 20, 2026.",
+    "claim": "How do Grand Theft Auto VI day one retail sales of $3.79 billion and 32.5 million units sold pre-release translate into Take-Two Net Bookings and GAAP net revenue, and will they prompt an update to the Fiscal 2027 Net Bookings outlook of $8,000 to $8,200 (table in millions) and Three Months Ending December 31, 2026 Net Bookings outlook of $3,350 to $3,500 (table in millions)?",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "NEW YORK, NY, November 20, 2026 \u2013 Rockstar Games\u00ae, a label of Take-Two Interactive Software, Inc. (NASDAQ: TTWO), is proud to announce that Grand Theft Auto VI day one retail sales* reached $3.79 billion, setting a new record for entertainment across any medium, and becoming the biggest entertainment launch in history.",
+     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms.",
+     "*based on company estimates through end of day November 19th worldwide",
+     "Net Bookings | $8,000 to $8,200",
+     "Net Bookings | $3,350 to $3,500"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F1] balance sheet, [F3] cash flow statement, [P4] Q2 FY27 MD&A, and [P7] Form 8-K press release.",
+    "claim": "Why did current Deferred revenue decline from 1,159.9 to 1,017.1 (table in millions) and Contract assets fall from 89.7 to 0.0 (table in millions) between March 31, 2026 and September 30, 2026, despite Grand Theft Auto VI pre-orders commencing in June 2026 and reaching 32.5 million units pre-release?",
+    "facts": [
+     "F1",
+     "F3",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Deferred revenue | 1,017.1 | 1,159.9",
+     "Contract assets | 0.0 | 89.7",
+     "Deferred revenue | (147.3) | 156.2",
+     "Pre-orders for the title commenced in June 2026, generating initial demand that has outpaced historical benchmarks for the series.",
+     "Achieving a near perfect score of 99 on Metacritic and resounding critical acclaim, Grand Theft Auto VI sold 32.5 million units pre-release, a new record across all platforms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P8] Form 8-K Item 1.01 summary, which defers full terms to the 10-Q exhibit not included in this packet.",
+    "claim": "What are the wholesale pricing, revenue-share percentages, physical manufacturing fees and royalties, and contract duration of the new long-term XBOX Publisher License Agreement with Microsoft?",
     "facts": [
      "P8"
     ],
     "quotes": [
+     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026.",
      "Microsoft will pay the Company the applicable wholesale price and/or agreed revenue share for any of the Company\u2019s digitally delivered products and content sold by Microsoft.",
-     "Additionally, Microsoft charges the Company fees and royalties under the Agreement for each physical media product manufactured on behalf of the Company.",
      "The foregoing description of the Agreement is a summary only and is qualified in its entirety by reference to the text of the Agreement, which will be filed as an exhibit to the Company\u2019s Quarterly Report on Form 10-Q for the period ending September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P1] and [P8]; while Microsoft's prior agreements with the same March 31, 2027 expiration were replaced in [P8], no comparable update for Sony appears in the packet.",
-    "claim": "Has Take-Two amended, renewed, or replaced its Sony PlayStation Global Developer and Publisher Agreement ahead of its scheduled expiration, or has either party given notice of termination?",
+    "basis": "Stated in [P1] 10-K Business section and [P4] 10-Q MD&A.",
+    "claim": "Will the PlayStation Global Developer and Publisher Agreement with Sony renew automatically beyond March 31, 2027 or be renegotiated, and what royalty rates apply to manufactured units and digitally downloaded content?",
     "facts": [
      "P1",
-     "P8"
+     "P4"
     ],
     "quotes": [
+     "The agreement requires us to submit products to Sony for approval and for us to make royalty payments to Sony based on the number of units manufactured or revenue from digitally downloaded content.",
      "The term of the agreement, as amended, expires on March 31, 2027, with automatic one-year renewal terms thereafter (unless one party gives the other notice of termination).",
      "Sony may terminate the agreement for any or no reason upon 30 days\u2019 notice.",
-     "On September 28, 2026, Take-Two Interactive Software, Inc. (the \u201cCompany\u201d) and Microsoft Corporation (\u201cMicrosoft\u201d) entered into a new long-term XBOX Publisher License Agreement (together with all exhibits, addendums and amendments thereto, the \u201cAgreement\u201d), with an effective date of September 17, 2026."
+     "Such console revenue comprised 41.4% of our net revenue for the six months ended September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [F2] and [P3]; the packet omits the 10-Q income tax footnote and notes management is still evaluating enacted tax legislation.",
-    "claim": "What drove the (73.1) (table in millions) benefit from income taxes on a (161.2) (table in millions) pre-tax loss versus the prior-year 16.5 (table in millions) tax provision on a (129.3) (table in millions) pre-tax loss, and how will OBBB, ARPA, CAMT, and Pillar Two affect future cash taxes and effective tax rates?",
+    "basis": "Stated in [F2] income statement and [P3] 10-K MD&A tax discussion; the 10-Q income tax footnote is not in this packet.",
+    "claim": "What drove the income tax benefit of (73.1) (table in millions) on a pre-tax loss of (161.2) (table in millions) in the six months ended September 30, 2026, and how will the U.S. valuation allowance, OBBB tax legislation, and Pillar Two affect GAAP effective tax rates and cash taxes?",
     "facts": [
      "F2",
      "P3"
     ],
     "quotes": [
+     "Loss before income taxes | (111.9) | (115.5) | (161.2) | (129.3)",
      "(Benefit from) provision for income taxes | (57.9) | 18.4 | (73.1) | 16.5",
-     "We are continuing to evaluate the impact of OBBB on the Company.",
+     "It did not, however, impact our U.S. deferred tax assets or liabilities since we continue to maintain a full valuation allowance against U.S. net deferred tax assets.",
+     "It is possible that these changes could have an adverse impact on our effective tax rate, tax payments, financial condition, or results of operations.",
      "We will continue to evaluate the impact Pillar Two and any additional guidance may have on our results and operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [F1] and [F3]; the packet omits the 10-Q footnotes and MD&A Liquidity and Capital Resources discussion explaining these changes.",
-    "claim": "What caused the (205.8) (table in millions) cash outflow in prepaid and other assets, the increase in Prepaid expenses and other from 294.2 to 650.3 (table in millions), and the rise in Purchases of fixed assets from (57.0) to (163.3) (table in millions) as operating cash flow turned to (173.5) (table in millions)?",
+    "basis": "Stated in [F1] balance sheet, [F3] cash flow statement, and [P6] Fiscal 2027 outlook table; supporting balance sheet footnotes are not in this packet.",
+    "claim": "What caused Prepaid expenses and other to rise from 294.2 to 650.3 (table in millions) and operating cash flow to swing to (173.5) (table in millions) in the six months ended September 30, 2026, and what portion of the 2,494.9 (table in millions) non-current software development costs and licenses belongs to unreleased titles?",
     "facts": [
      "F1",
-     "F3"
+     "F3",
+     "P6"
     ],
     "quotes": [
      "Prepaid expenses and other | 650.3 | 294.2",
-     "Prepaid expenses, other current and other non-current assets | (205.8) | (5.7)",
-     "Purchases of fixed assets | (163.3) | (57.0)",
-     "Net cash (used in) provided by operating activities | (173.5) | 83.7"
+     "Software development costs and licenses, net of current portion | 2,494.9 | 2,277.5",
+     "Net cash (used in) provided by operating activities | (173.5) | 83.7",
+     "Net cash provided by operating activities | over $1,000"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [F1], [P2], and [P3]; the referenced Note 12 and Legal Proceedings disclosures are not included in the packet.",
-    "claim": "What contractual commitments, minimum royalty obligations, and active legal proceedings or loss contingencies exist under the commitments and contingencies footnote referenced on the balance sheet?",
+    "basis": "Stated in [F1] balance sheet reference to Note 12, [P2] risk factor summary, and [P3] 10-K MD&A.",
+    "claim": "What material legal proceedings, contractual commitments, and contingent liabilities are disclosed under Note 12 of the September 30, 2026 financial statements, and what is their potential financial exposure?",
     "facts": [
      "F1",
      "P2",
@@ -1525,51 +1524,71 @@
     ],
     "quotes": [
      "Commitments and contingencies (See Note 12)",
-     "\u2022We are and may become involved in legal proceedings that may result in adverse outcomes",
+     "We are and may become involved in legal proceedings that may result in adverse outcomes",
      "General and administrative expenses decreased by $8.9 for the fiscal year ended March 31, 2026, as compared to the prior year period, primarily driven by lower legal fees and contingencies related to the IBM case against Zynga, partially offset by higher personnel expense due to higher performance-based compensation."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P1] and [P2]; Item 1 and Item 1A provide only the aggregate five-customer total and a 10.0% threshold for the four named platform partners.",
-    "claim": "Who is the fifth largest customer contributing to the 80.6% top-five customer revenue concentration, and what exact net revenue shares above 10.0% did Apple, Sony, Google, and Microsoft each represent?",
+    "basis": "Stated in [P1] 10-K Business section, [P2] 10-K Risk Factors, and [P3] 10-K MD&A.",
+    "claim": "What exact percentage of net revenue does each of Apple, Sony, Google, and Microsoft contribute above 10.0%, and how much of mobile revenue and gross margin comes from Take-Two's direct-to-consumer commerce platform?",
     "facts": [
      "P1",
-     "P2"
+     "P2",
+     "P3"
     ],
     "quotes": [
      "Sales to our five largest customers during the fiscal year ended March 31, 2026, accounted for 80.6% of our net revenue, with Apple, Sony, Google, and Microsoft each accounting for more than 10.0% of our net revenue.",
-     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms."
+     "In the fiscal year ended March 31, 2026, we derived 91.0% of our mobile revenue on Apple and Google platforms.",
+     "We are also continuing to expand our direct-to-consumer efforts more meaningfully across our mobile portfolio to enhance profitability."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in [P4] and [P6]; [P4] places two 2K sports titles in the remainder of fiscal year 2027 while [P6] still lists release dates and platforms for post-Grand Theft Auto VI titles as TBA.",
-    "claim": "What are the specific release dates and supported platforms for the announced future pipeline titles listed with TBA release dates, and will the planned fiscal-year sports releases launch on schedule?",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "To date we have also announced that, during the remainder of fiscal year 2027, 2K plans to release PGA 2K27 and WWE 2K27.",
-     "2K | PGA TOUR 2K27 | TBA | TBA",
-     "2K | WWE 2K27 | TBA | TBA"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in [F1] and [P6]; management states an intention to pursue accretive M&A alongside existing liquidity and projected operating cash flow, without specifying debt repayment or acquisition plans.",
-    "claim": "How will Take-Two allocate its cash and cash equivalents of $1,149.4 (table in millions), short-term investments of 524.2 (table in millions), and projected operating cash flow of over $1,000 (table in millions) between retiring its $629.2 (table in millions) short-term debt and pursuing accretive M&A?",
+    "basis": "Stated in [F1] balance sheet, [P2] 10-K Risk Factors, and [P3] 10-K MD&A; asset-level impairment footnotes are not in this packet.",
+    "claim": "Which reporting units and titles carry the remaining 1,060.2 of Goodwill and 1,344.3 of Other intangibles, net (table in millions) as of September 30, 2026, and what fair value headroom remains after prior-year goodwill impairments of $3,545.2 (in millions)?",
     "facts": [
      "F1",
-     "P6"
+     "P2",
+     "P3"
     ],
     "quotes": [
-     "We are reiterating our outlook for Fiscal 2027 Net Bookings of $8 to $8.2 billion, and are confident in our ability to build on this incredible year as we release new hits, explore emerging business opportunities, expand our geographic footprint, and pursue accretive M&A \u2013 all of which will set us on a path to unlock greater earnings power and long-term shareholder value.",
-     "Net cash provided by operating activities | over $1,000",
-     "Short-term debt, net | $629.2 | $30.0"
+     "Goodwill | 1,060.2 | 1,061.9",
+     "Other intangibles, net | 1,344.3 | 1,653.2",
+     "Our operating loss for the fiscal year ended March 31, 2026 was $104.2 compared to operating loss of $4,391.1 for fiscal year ended March 31, 2025, primarily driven by Goodwill impairment charges of $3,545.2 in the prior year, with no corresponding expense in the current year, as well as, higher sales of our products.",
+     "Additionally, if the popularity of a franchise declines, as has happened in the past with other popular franchises, we may have to write off the unrecovered portion of the underlying intellectual property assets, which could negatively impact our business."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P6] future lineup table and [P7] launch press release.",
+    "claim": "When will Grand Theft Auto VI release on PC, and what are the release dates and target platforms for the TBA titles in Take-Two's announced lineup including Judas, BioShock next iteration, and Project ETHOS?",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "Rockstar Games | Grand Theft Auto VI | PS5, Xbox Series X|S | November 19, 2026",
+     "2K | Project ETHOS | TBA | TBA",
+     "2K | BioShock next iteration | TBA | TBA",
+     "Ghost Story Games | Judas | PS5, Xbox Series X|S, PC | TBA",
+     "Grand Theft Auto VI is available at the PlayStation\u00ae Store, Microsoft Store, Rockstar Games Store, and global retailers and storefronts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [P2] 10-K Risk Factors and [P3] 10-K MD&A.",
+    "claim": "How much is Take-Two investing in AI tools and technologies, and what financial or operational impact will the E.U. Artificial Intelligence Act, state AI laws, and unresolved copyright ownership of AI-generated assets have on development costs and competitiveness?",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We are continually innovating the design and development of our products, including by investing in artificial intelligence (\"AI\") tools and technologies, in order to enhance game play, anticipate changes in consumer behavior, and evolve our business as new dynamics develop.",
+     "The AI regulatory landscape is evolving, and we may be required to dedicate additional operational and financial resources to ensure compliance with new legal requirements.",
+     "Further, intellectual property ownership surrounding AI technologies has not been fully addressed by U.S. courts or other federal or state laws or regulations, and the use or adoption of third-party AI technologies into our products and services may result in exposure to claims of copyright infringement, other intellectual property misappropriation, or uncertainty regarding copyright ownership of AI-generated assets."
+    ],
+    "support": "supported"
    }
   ]
  },
@@ -1578,5 +1597,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no valuation route yet for a company with no operating profit in 4 of its last 4 fiscal years"
+ "verdict_reason": "the filings show the continuing operations themselves losing money, so no value is given"
 }
