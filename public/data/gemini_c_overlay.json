@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T04:12:59Z",
+ "generated_at": "2026-11-27T04:21:41Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -2341,41 +2341,81 @@
    "verdict_reason": "expected return +9.8 points a year against the required return over 3 years"
   },
   "CE": {
-   "alpha_pts": null,
+   "alpha_pts": 30.54850417735495,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-11-03T21:16:20.000Z",
     "accepted_utc": "2026-11-04T02:16:20Z",
     "accession": "0001306830-26-000133",
-    "decision_time": "2026-11-21T13:28:04Z",
+    "decision_time": "2026-11-27T04:14:10Z",
     "form": "10-Q",
     "period": "2026-09-30"
    },
-   "claims": 69,
-   "claims_supported": 64,
-   "date": "2026-11-21T13:28:04Z",
+   "claims": 87,
+   "claims_supported": 82,
+   "date": "2026-11-27T04:14:10Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 10177589014.285645,
    "family": "commodity",
+   "far_from_price": true,
+   "filed_shares": 109530303.0,
    "flags": [
-    "Celanese signed a definitive agreement to sell an additional 19 percent of the Nutrinova food ingredients joint venture to Mitsui for about $152 million in cash and keep an 11 percent interest. Closing is expected in the fourth quarter of 2026, subject to regulatory approvals and customary conditions.",
-    "Celanese completed the previously announced closure of its acetate tow facility in Lanaken, Belgium.",
-    "The sale of the Micromax business has been completed. It lowered Engineered Materials volume in the third quarter of 2026 versus the prior-year quarter."
+    "Celanese published its Q3 2026 results and raised its full-year outlook, including a free cash flow outlook of $750 to $800 million.",
+    "Celanese signed a definitive agreement to sell an additional 19 percent of the Nutrinova joint venture to Mitsui for about $152 million in cash, keeping an 11 percent interest. Closing is expected in Q4 2026, subject to regulatory approvals and customary conditions.",
+    "Celanese completed the previously announced closure of its acetate tow facility in Lanaken, Belgium."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.09159895298843757,
+   "loss_record": {
+    "cause": "one_off_charges",
+    "explanation": "The recent losses come from large noncash impairment charges (goodwill and trade names), not from weak operations. Without the 2025 impairment, operating profit was positive, and in 2026 it is positive again at $688 million for nine months.",
+    "label": "the losses came from write-downs, restructuring or other charges that do not recur",
+    "quotes": [
+     {
+      "id": "P2",
+      "quote": "During the year ended December 31, 2025, we recognized a noncash goodwill impairment loss of $1.1 billion in our Engineered Materials segment."
+     },
+     {
+      "id": "F2",
+      "quote": "Other (charges) gains, net | (32) | (1,491) | (83) | (1,542)"
+     }
+    ],
+    "version": "why_losses.v1 2026-11-18 WO_NC5"
+   },
+   "market_cap_at_publish": 4987164219,
    "model": "claude-sonnet-5-5",
    "news_count": 1,
-   "no_value_reason": "no positive earnings base",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 45.44,
    "qwen_book": null,
    "release_truncated": [
     "0001306830-26-000129"
    ],
-   "screener_commit": "1c6396ca5d60cb0d335576b3f6eb8abbb9c871dd",
-   "source": "on request (operator)",
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 95.54918153422607,
+    "3000": 90.2914257776271
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no positive earnings base"
+   "upside": 1.0407567441856571,
+   "value_base": 92.92030365592657,
+   "value_bear": 69.96688431460984,
+   "value_bull": 125.2377430002775,
+   "value_per_filed_share": {
+    "base": 92.92030365592657,
+    "bear": 69.96688431460984,
+    "bull": 125.2377430002775
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +30.5 points a year against the required return over 3 years"
   },
   "CENT": {
    "alpha_pts": 19.484776044910944,
@@ -13247,11 +13287,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 172,
+ "valued_count": 173,
  "verdict_counts": {
   "AVOID": 76,
-  "BUY": 63,
-  "NO_CALL": 88,
+  "BUY": 64,
+  "NO_CALL": 87,
   "WATCH": 23
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
