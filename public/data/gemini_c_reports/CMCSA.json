@@ -1,23 +1,37 @@
 {
- "alpha_pts": 24.28440184906852,
+ "alpha_pts": 26.261992887163178,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 78,
- "claims_supported": 67,
- "date": "2026-11-18T03:47:07Z",
+ "based_on": {
+  "accepted": "2026-10-22T18:57:29.000Z",
+  "accepted_utc": "2026-10-22T22:57:29Z",
+  "accession": "0001628280-26-066863",
+  "decision_time": "2026-11-27T04:22:30Z",
+  "form": "10-Q",
+  "period": "2026-09-30"
+ },
+ "claims": 71,
+ "claims_supported": 69,
+ "date": "2026-11-27T04:22:30Z",
  "decided": {
   "flags": [
    "run 1000: base_year_not_representative",
    "run 1000: confidence_low",
-   "run 1000: quotes_verified: 12 of 12",
+   "run 1000: quotes_verified: 9 of 10",
+   "run 1000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 1000: special_distributions_not_filed_taken_as_0",
+   "run 1000: shares_outstanding_at_interim_not_found_base_count_kept",
    "run 3000: base_year_not_representative",
-   "run 3000: debt_level_representative_no: Debt has been paid down during 2026 (noncurrent debt of 83,806 against 92,979 at year-end), so the $98.9 billion in the filed record overstates the current level, and the spin-off may reallocate debt.",
+   "run 3000: debt_level_representative_no: Debt is being paid down from cash flow, with noncurrent debt at 83,806 against 92,979 at year-end, and the planned NBCUniversal and Sky spin-off will require refinancing and a reallocation of debt.",
    "run 3000: confidence_low",
-   "run 3000: quotes_verified: 11 of 11"
+   "run 3000: quotes_verified: 11 of 12",
+   "run 3000: shares_issued_proceeds_not_filed_taken_as_0",
+   "run 3000: special_distributions_not_filed_taken_as_0",
+   "run 3000: shares_outstanding_at_interim_not_found_base_count_kept"
   ],
   "method": "decided.v1",
-  "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0675 (equity return r 0.0985), F 10",
-  "run_gap": 0.015833358605303126,
+  "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0664 (equity return r 0.0962), F 10",
+  "run_gap": 0.019324091822656445,
   "runs": {
    "1000": {
     "adjustments": {
@@ -28,18 +42,82 @@
        "quotes": [
         {
          "id": "P3",
-         "quote": "In June 2025, we sold our interest in Hulu, at which time we recognized the sale of our interest with a pre-tax gain of $9.4 billion"
+         "quote": "a $9.4 billion pre-tax gain from the sale of our interest in Hulu in 2025"
         }
        ],
        "quotes_given": 1,
        "scale": "billions",
        "sign": "gain",
-       "what": "Pre-tax gain on the 2025 sale of the Hulu interest, in other income, which will not recur"
+       "what": "Pre-tax gain on the sale of the Hulu interest, in other income (loss), net"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 7106000000.0,
+      "excess_cash_before": 9495000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001628280-26-066863",
+        "amount": 0.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-22",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001628280-26-066863",
+        "amount": 2517000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-22",
+        "form": "10-Q",
+        "read_amount": 2517000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 128000000.0,
+        "printed": 128,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from sales of businesses and investments | 128 | 644"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 2645000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 90124530353.0,
+      "net_effect_on_excess_cash": -2389000000.0,
+      "shares": {
+       "after": 3709000000.0,
+       "before": 3709000000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 9495000000.0,
+     "excess_cash_after": 7106000000.0,
      "excess_cash_before": 9495000000.0,
      "k0_after": 4249028170.788952,
      "k0_before": -5150971829.211048,
@@ -48,8 +126,13 @@
      "one_offs_gain": 9400000000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
      ],
+     "w_after": -0.06057862530010428,
+     "w_before": -0.06057862530010428,
      "x0_after": 17783709778.86708,
      "x0_before": 24956107512.31426
     },
@@ -57,15 +140,18 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 149986628737.5343,
-     "seam_ratio": 1.0044917200726589,
-     "tv_share": 0.33088350316743337,
-     "wedge_rate_5": 0.0017901836827751755
+     "equity_value": 159405407967.6976,
+     "seam_ratio": 1.0080362251613104,
+     "tv_share": 0.34574092454976,
+     "wedge_rate_5": 0.0012178708716278582
     },
     "flags": [
      "base_year_not_representative",
      "confidence_low",
-     "quotes_verified: 12 of 12"
+     "quotes_verified: 9 of 10",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
      "capex_to_revenue": 0.092,
@@ -73,38 +159,38 @@
      "long_run_op_margin": 0.17,
      "op_margin": [
       0.163,
-      0.164,
-      0.166,
+      0.165,
       0.167,
-      0.168
+      0.168,
+      0.169
      ],
      "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
-      -0.025,
-      0.008,
-      0.015,
+      -0.02,
+      0.01,
       0.02,
-      0.02
+      0.025,
+      0.025
      ],
      "terminal_growth": 0.025
     },
-    "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0675 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0664 (equity return r 0.0962), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 11,
-     "kept": 67
+     "dropped_unsupported": 2,
+     "kept": 69
     },
     "ranges": {
      "long_run_op_margin": [
       0.15,
-      0.185
+      0.19
      ],
      "rev_growth_y3": [
-      -0.01,
-      0.03
+      0.0,
+      0.04
      ],
      "terminal_growth": [
       0.015,
-      0.03
+      0.035
      ]
     },
     "reasons": {
@@ -112,7 +198,7 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0922"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0922"
        },
        {
         "id": "F3",
@@ -120,124 +206,117 @@
        }
       ],
       "quotes_given": 2,
-      "why": "The five-year pooled capex is 9.2% of revenue, and nine-month 2026 capex of 8,311 on revenue of 90,695 is about 9.2%, so I hold 9.2%."
+      "why": "The five-year pooled capex-to-revenue ratio is 9.2%, and 9-month 2026 capex of $8,311 million on $90,695 million revenue is also about 9.2%. Network, customer premise equipment and parks spending continue."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+        "id": "REC",
+        "quote": "Cost of equity r 0.0962; long-run nominal growth anchor g_anchor 0.0375"
        }
       ],
       "quotes_given": 1,
-      "why": "A 10-year fade lets wireless and Business Services growth gradually meet the structural declines in video and broadband. The spin-off in mid-2027 adds uncertainty but I do not model it."
+      "why": "A 10-year fade lets mix shift slowly from video and broadband toward wireless, enterprise, streaming and parks, which already earn very different margins."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
         "quote": "2025-12-31 | $123,707.0 million | -0.0002 | 0.1671"
-       },
-       {
-        "id": "P3",
-        "quote": "Our customer relationship additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
        }
       ],
-      "quotes_given": 2,
-      "why": "Ordinary-company base rates suggest only about half of the gap to the 5-year median closes, so I fade to about 17%. That is below the old 20%+ margins because linear video and broadband keep eroding, partly offset by wireless, Peacock profitability and lower acquisition amortization."
+      "quotes_given": 1,
+      "why": "Margin fades to about 17%, a little above the 2025 level of 16.7% but well below the 2013-2019 peak of roughly 20-21%, because broadband and video are structurally pressured."
      },
      "op_margin": {
       "quotes": [
        {
-        "id": "F2",
-        "quote": "Operating income | 5,320 | 5,534 | 14,616 | 17,184"
+        "id": "P6",
+        "quote": "Residential Connectivity & Platforms revenue and Adjusted EBITDA performance reflect the investment in our go-to-market strategy."
        },
        {
-        "id": "P6",
-        "quote": "Total Connectivity & Platforms Adjusted EBITDA Margin | 38.6% | 39.3% | (70) bps | (70) bps"
+        "id": "F2",
+        "quote": "Operating income | 5,320 | 5,534 | 14,616 | 17,184"
        }
       ],
       "quotes_given": 2,
-      "why": "The nine-month 2026 operating income of 14,616 on revenue of 90,695 is a margin of about 16.1%. Connectivity margins are falling, but lower acquisition amortization and cost-saving initiatives should hold the GAAP margin near 16-17%."
+      "why": "Residential margins are compressing because of the free-wireless-line go-to-market investment, and 9-month operating income is down 14.9% on higher programming and production costs. The Versant separation lowers amortization, and Peacock is now profitable, so I assume a slow margin recovery from about 16.3%."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value"
-       },
-       {
-        "id": "P3",
-        "quote": "which we expect will improve customer retention and strengthen our ability to compete for new customers, but will negatively impact average domestic broadband revenue per customer"
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0664"
        }
       ],
-      "quotes_given": 2,
-      "why": "The base-year return on tangible capital of 23.8% reflects an old, heavily depreciated network. New spend on DOCSIS 4.0, fiber and theme parks is in a competitive market with the free wireless line trading revenue for retention, so I assume about 12%, above the 6.75% break-even."
+      "quotes_given": 1,
+      "why": "The filed return on tangible capital of 0.2378 is flattered by heavily amortized acquired assets, and new network, fiber and parks capex faces competition. I assume 12%, above the 6.64% breakeven return."
      },
      "rev_growth": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "Consolidated revenue remained consistent for the nine months ended September 30, 2026 compared to the same period in 2025"
-       },
-       {
         "id": "P6",
-        "quote": "Pro Forma Revenue1 | $29,298 | $29,151 | 0.5%"
+        "quote": "revenue and Adjusted EBITDA were consistent with the prior year period"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 (FY2026) falls because Versant and Sky Germany leave the base: nine-month revenue is already down 0.8%, and Q4 2025 still carried Versant. Pro forma growth is only about +0.5%, because broadband and video declines offset wireless, Business Services and Peacock. I assume a slow recovery to about 2% growth."
+      "why": "Year 1 is negative because Versant and Sky Germany leave the base: 9-month 2026 revenue is $90,695 million against $91,397 million, and Q3 fell 6.1%. On a pro forma basis revenue is flat, so I assume low growth afterwards. Wireless, enterprise, Peacock and Studios offset broadband and video erosion."
      },
      "terminal_growth": {
       "quotes": [
        {
-        "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "id": "P2",
+        "quote": "As consumers increasingly turn to DTC streaming services in lieu of linear video services, which continue to experience accelerated net customer losses"
        }
       ],
       "quotes_given": 1,
-      "why": "Mature, competitive connectivity and media businesses with shrinking video should grow below the 3.75% long-run nominal anchor, so I use 2.5%."
+      "why": "Cord-cutting, ad fragmentation and broadband competition from fiber and fixed wireless hold long-run growth below the 3.75% nominal anchor, so I use 2.5%."
      }
     },
     "risks": [
      {
-      "bear_value": 0.15,
-      "input_hit": "long_run_op_margin",
-      "risk": "Accelerating broadband and video customer losses and price concessions compress connectivity revenue and margin"
-     },
-     {
       "bear_value": -0.005,
       "input_hit": "rev_growth",
-      "risk": "Revenue stays weak because linear cord-cutting, advertising decline and theme park softness outweigh wireless and Peacock gains"
+      "risk": "Faster broadband customer and rate erosion from fiber and fixed wireless, with video declines accelerating"
+     },
+     {
+      "bear_value": 0.145,
+      "input_hit": "long_run_op_margin",
+      "risk": "Residential margin compression becomes permanent and theme parks stay weak, so margin does not recover"
      },
      {
       "bear_value": 0.015,
       "input_hit": "terminal_growth",
-      "risk": "Spin-off execution, financing or tax problems, or a lower-growth competitive environment, lower the long-run growth rate"
+      "risk": "Weak growth, plus separation dis-synergies and diseconomies of scale after the NBCUniversal/Sky spin-off"
+     },
+     {
+      "bear_value": 0.08,
+      "input_hit": "return_on_new_investment_long_run",
+      "risk": "Returns on new network, parks and content investment fall toward the breakeven level"
      }
     ],
     "scenarios": {
      "bear": {
       "long_run_op_margin": 0.15,
       "rev_growth": [
-       -0.05,
-       -0.017,
-       -0.010000000000000002,
-       -0.005000000000000001,
-       -0.005000000000000001
+       -0.04,
+       -0.01,
+       0.0,
+       0.005000000000000001,
+       0.005000000000000001
       ],
       "terminal_growth": 0.015
      },
      "bull": {
-      "long_run_op_margin": 0.185,
+      "long_run_op_margin": 0.19,
       "rev_growth": [
-       -0.010000000000000002,
-       0.023,
+       0.0,
        0.03,
-       0.035,
-       0.035
+       0.04,
+       0.045,
+       0.045
       ],
-      "terminal_growth": 0.03
+      "terminal_growth": 0.035
      }
     },
     "situation": {
@@ -245,20 +324,20 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "unclear",
-      "why": "Debt is already falling, from $98.9B at the base year to about $87.4B at September 2026, and the spin-off may reallocate it, so the right long-run level is not clear."
+      "why": "Debt of $98.9 billion at year-end 2025 is already falling through repayments, and the planned NBCUniversal/Sky spin-off needs financing arrangements that could change the level."
      },
-     "margin_position": "The 2025 GAAP operating margin of 16.7% sits below the 5-year median of about 17.9% and well below the 20-21% of 2008-2018. Linear video and broadband are shrinking, residential Adjusted EBITDA margin is eroding, and Epic Universe added depreciation. Peacock has only just turned profitable. Amortization of acquired intangibles is also a large GAAP charge, and part of it leaves with Versant.",
+     "margin_position": "The 2025 operating margin of 16.7% sits below the roughly 19-21% of 2013-2019 and 2023-24. Causes: rising amortization and impairments, Epic Universe depreciation, and a shrinking, lower-margin broadband and video base. 2026 shows further pressure in residential connectivity (margin 35.9% against 36.8%) offset by better Peacock and Studios results. Lower amortization after the Versant spin-off flatters the GAAP margin.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 23.7% base-year rate is close to the 2026 nine-month rate of about 25% (2,983 on 11,791 pretax), so it is a rate the company can plausibly keep paying."
+      "why": "The 2025 effective rate of 23.7% is close to the 9-month 2026 rate of about 25%, with state, foreign and uncertain-tax-position effects."
      },
-     "why": "FY2025 includes Versant, sold Sky Germany and a $9.4B Hulu gain below the operating line. Revenue was flat in 2025 and has been shrinking in reported terms in 2026 because of the Versant separation and the Sky Germany sale. Pro forma Q3 revenue is up slightly, so the underlying base is roughly stable. The NBCUniversal and Sky spin-off in mid-2027 is another structural change that is not modelled."
+     "why": "The 2025 base includes Versant (spun off 2 January 2026) and Sky Germany (sold 31 May 2026), so reported revenue falls in 2026 even though pro forma revenue is flat. Pre-tax income also includes a one-time $9.4 billion Hulu gain that sits in non-operating income. Year-1 growth is therefore negative on the reported base, followed by low growth."
     },
-    "value_at_old_defaults": 73.9600783234559,
+    "value_at_old_defaults": 75.81126166450304,
     "values": {
-     "base": 46.49147132607574,
-     "bear": 36.62483394681922,
-     "bull": 54.82238610920819
+     "base": 48.62830774988214,
+     "bear": 38.88552627654503,
+     "bull": 62.62926029876665
     }
    },
    "3000": {
@@ -276,12 +355,76 @@
        "quotes_given": 1,
        "scale": "billions",
        "sign": "gain",
-       "what": "Pre-tax gain on the sale of the Hulu interest, in 2025 other income"
+       "what": "Pre-tax gain on the sale of the Hulu interest in 2025, included in investment and other income"
       }
      ],
+     "capital_events": {
+      "excess_cash_after": 7106000000.0,
+      "excess_cash_before": 9495000000.0,
+      "figures": {
+       "acquisitions_paid": {
+        "accn": "0001628280-26-066863",
+        "amount": 0.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-22",
+        "form": "10-Q",
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired"
+       },
+       "buybacks_paid": {
+        "accn": "0001628280-26-066863",
+        "amount": 2517000000.0,
+        "end": "2026-09-30",
+        "filed": "2026-10-22",
+        "form": "10-Q",
+        "read_amount": 2517000000.0,
+        "source": "xbrl",
+        "start": "2026-01-01",
+        "tag": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+       },
+       "disposals_received": {
+        "amount": 128000000.0,
+        "printed": 128,
+        "quotes": [
+         {
+          "id": "F3",
+          "quote": "Proceeds from sales of businesses and investments | 128 | 644"
+         }
+        ],
+        "scale": "millions",
+        "source": "read"
+       },
+       "shares_issued_proceeds": {
+        "amount": 0.0,
+        "source": "none"
+       },
+       "special_distributions": {
+        "amount": 0.0,
+        "source": "none"
+       }
+      },
+      "flags": [],
+      "gross_events": 2645000000.0,
+      "interim_end": "2026-09-30",
+      "market_cap": 90124530353.0,
+      "net_effect_on_excess_cash": -2389000000.0,
+      "shares": {
+       "after": 3709000000.0,
+       "before": 3709000000.0,
+       "interim": null,
+       "replaced": false,
+       "source": null
+      },
+      "stamps": [
+       "shares_issued_proceeds_not_filed_taken_as_0",
+       "special_distributions_not_filed_taken_as_0",
+       "shares_outstanding_at_interim_not_found_base_count_kept"
+      ]
+     },
      "cash_interest_returned": 0.0,
      "cash_not_free": null,
-     "excess_cash_after": 9495000000.0,
+     "excess_cash_after": 7106000000.0,
      "excess_cash_before": 9495000000.0,
      "k0_after": 4249028170.788952,
      "k0_before": -5150971829.211048,
@@ -290,8 +433,13 @@
      "one_offs_gain": 9400000000.0,
      "stamps": [
       "base_year_one_offs_taken_out_of_k0",
-      "ronic0_not_readjusted"
+      "ronic0_not_readjusted",
+      "shares_issued_proceeds_not_filed_taken_as_0",
+      "special_distributions_not_filed_taken_as_0",
+      "shares_outstanding_at_interim_not_found_base_count_kept"
      ],
+     "w_after": -0.06057862530010428,
+     "w_before": -0.06057862530010428,
      "x0_after": 17783709778.86708,
      "x0_before": 24956107512.31426
     },
@@ -299,54 +447,57 @@
     "diagnostics": {
      "da_rule": "vintages",
      "depreciation_kept_rate": 0.0,
-     "equity_value": 152519860232.5383,
-     "seam_ratio": 1.002928665118451,
-     "tv_share": 0.3954776327167736,
-     "wedge_rate_5": 0.0015775702879482294
+     "equity_value": 156229390863.43024,
+     "seam_ratio": 1.0023814384715446,
+     "tv_share": 0.34588531313825105,
+     "wedge_rate_5": 0.001450291418277474
     },
     "flags": [
      "base_year_not_representative",
-     "debt_level_representative_no: Debt has been paid down during 2026 (noncurrent debt of 83,806 against 92,979 at year-end), so the $98.9 billion in the filed record overstates the current level, and the spin-off may reallocate debt.",
+     "debt_level_representative_no: Debt is being paid down from cash flow, with noncurrent debt at 83,806 against 92,979 at year-end, and the planned NBCUniversal and Sky spin-off will require refinancing and a reallocation of debt.",
      "confidence_low",
-     "quotes_verified: 11 of 11"
+     "quotes_verified: 11 of 12",
+     "shares_issued_proceeds_not_filed_taken_as_0",
+     "special_distributions_not_filed_taken_as_0",
+     "shares_outstanding_at_interim_not_found_base_count_kept"
     ],
     "inputs": {
      "capex_to_revenue": 0.092,
-     "fade_years": 8,
+     "fade_years": 10,
      "long_run_op_margin": 0.17,
      "op_margin": [
-      0.161,
       0.162,
       0.165,
-      0.167,
-      0.168
+      0.168,
+      0.17,
+      0.17
      ],
-     "return_on_new_investment_long_run": 0.13,
+     "return_on_new_investment_long_run": 0.12,
      "rev_growth": [
-      -0.025,
+      -0.022,
       0.005,
-      0.015,
-      0.02,
+      0.012,
+      0.017,
       0.02
      ],
-     "terminal_growth": 0.028
+     "terminal_growth": 0.027
     },
-    "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0675 (equity return r 0.0985), F 10",
+    "old_defaults_inputs": "year 1 growth -0.0077 and margin 0.1612, margin 0.1730 (persist), growth 0.0375, terminal RONIC 0.0664 (equity return r 0.0962), F 10",
     "prior_read_claims": {
-     "dropped_unsupported": 11,
-     "kept": 67
+     "dropped_unsupported": 2,
+     "kept": 69
     },
     "ranges": {
      "long_run_op_margin": [
-      0.15,
-      0.19
+      0.145,
+      0.195
      ],
      "rev_growth_y3": [
-      -0.005,
+      -0.01,
       0.03
      ],
      "terminal_growth": [
-      0.02,
+      0.015,
       0.035
      ]
     },
@@ -355,7 +506,7 @@
       "quotes": [
        {
         "id": "REC",
-        "quote": "capital expenditure / revenue 0.0922"
+        "quote": "Pooled over those years: capital expenditure / revenue 0.0922"
        },
        {
         "id": "F3",
@@ -363,31 +514,35 @@
        }
       ],
       "quotes_given": 2,
-      "why": "Capital expenditure is running at about 9.2% of revenue in 2026 (8,311 on 90,695), matching the five-year pooled average. DOCSIS 4.0 and network extension keep it elevated."
+      "why": "Capex has run at about 9 to 10% of revenue, and 9M 2026 capex of 8,311 is about 9.2% of revenue. Network upgrades and customer premise equipment continue, though Epic Universe construction has ended."
      },
      "fade_years": {
       "quotes": [
        {
-        "id": "P4",
-        "quote": "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+        "id": "P3",
+        "quote": "Amortization expense from acquisition-related intangible assets totaled $3.3 billion and $2.7 billion in 2025 and 2024, respectively."
+       },
+       {
+        "id": "REC",
+        "quote": "2025-12-31 | $123,707.0 million | -0.0002 | 0.1671"
        }
       ],
-      "quotes_given": 1,
-      "why": "A moderate fade of about 8 years allows for the spin-off, a slow margin recovery and the transition from video to wireless and enterprise."
+      "quotes_given": 2,
+      "why": "A 10-year fade lets the margin move gradually from the year-5 level to the long-run level. Acquisition-related amortization is declining as the Sky and NBCUniversal intangibles run off, while broadband and video pressure persists and the planned spin-off adds uncertainty, so a mid-length fade fits."
      },
      "long_run_op_margin": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "2025-12-31 | $123,707.0 million | -0.0002 | 0.1671"
+        "quote": "2023-12-31 | $121,572.0 million | 0.0012 | 0.1918"
        },
        {
-        "id": "P3",
-        "quote": "Our customer relationship additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
+        "id": "REC",
+        "quote": "2025-12-31 | $123,707.0 million | -0.0002 | 0.1671"
        }
       ],
       "quotes_given": 2,
-      "why": "The margin was about 17-19% in recent normal years. Competition in broadband and the decline of linear video cap it, while falling acquisition amortization and cost initiatives help. I settle at 17%, below the pre-2020 level."
+      "why": "The margin settles below the 2023-24 levels of about 19% because broadband and linear video are structurally pressured. Amortization of acquired intangibles keeps declining, which offsets some of that."
      },
      "op_margin": {
       "quotes": [
@@ -397,84 +552,80 @@
        },
        {
         "id": "P6",
-        "quote": "Total Connectivity & Platforms Adjusted EBITDA Margin | 38.6% | 39.3% | (70) bps | (70) bps"
+        "quote": "Residential Connectivity & Platforms | 35.9% | 36.8% | (90) bps | (90) bps"
        }
       ],
       "quotes_given": 2,
-      "why": "Nine-month operating income of 14,616 on revenue of 90,695 is about 16.1%, against 18.8% a year earlier. Connectivity & Platforms Adjusted EBITDA margin is slipping. I assume a slow recovery as acquisition-related amortization runs off and cost savings arrive."
+      "why": "Nine-month 2026 GAAP operating income of 14,616 on revenue of 90,695 is about 16.1%, below 2025. Lower amortization after the Versant separation helps, but residential EBITDA margin is falling as the free wireless line trades margin for retention, so recovery is gradual."
      },
      "return_on_new_investment_long_run": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0675."
+        "quote": "Return on new investment at which growth adds no value (code, after the company's leverage): 0.0664."
        }
       ],
       "quotes_given": 1,
-      "why": "The base-year return on tangible capital of 23.8% is high for a capital-heavy cable and theme-park company that faces fiber and fixed-wireless competition. I assume new investment earns well above the 6.75% break-even but far below the current level."
+      "why": "The base-year return on tangible capital is high because of the cable franchise, but new investment faces fiber and fixed wireless competition and expensive theme parks and content. I assume a return well below the base level but above the break-even level."
      },
      "rev_growth": {
       "quotes": [
        {
         "id": "P6",
         "quote": "Pro Forma Revenue1 | $29,298 | $29,151 | 0.5%"
-       },
-       {
-        "id": "P4",
-        "quote": "Consolidated revenue remained consistent for the nine months ended September 30, 2026 compared to the same period in 2025 primarily driven by a decrease due to the Versant Separation"
        }
       ],
       "quotes_given": 2,
-      "why": "Year 1 (2026) falls because Versant and Sky Germany have left. Nine-month revenue is already down, and the 2025 base includes both businesses. Later years recover only modestly: pro forma revenue was up 0.5% in Q3, wireless and Business Services grow, and video and broadband shrink."
+      "why": "Year 1 reflects the Versant separation and the Germany Sky sale, which cut reported revenue (9M 2026 revenue was 90,695 against 91,397, with a larger Q4 step-down since Q4 2025 included Versant). Pro forma revenue is roughly flat, so growth after year 1 is low: wireless, Peacock and business services offset broadband and video declines."
      },
      "terminal_growth": {
       "quotes": [
        {
         "id": "REC",
-        "quote": "long-run nominal growth anchor g_anchor 0.0375"
+        "quote": "Cost of equity r 0.0962; long-run nominal growth anchor g_anchor 0.0375."
        }
       ],
       "quotes_given": 1,
-      "why": "A mature, shrinking-video and ex-growth broadband business with a growing wireless and enterprise piece should grow below the nominal anchor."
+      "why": "A mature connectivity and media business with a shrinking video base and broadband competition should grow below the long-run nominal anchor."
      }
     },
     "risks": [
      {
-      "bear_value": 0.15,
-      "input_hit": "long_run_op_margin",
-      "risk": "Broadband customer losses and price pressure (free wireless line, fiber and fixed-wireless competition) erode Connectivity margins further"
-     },
-     {
       "bear_value": -0.005,
       "input_hit": "rev_growth",
-      "risk": "Linear video and advertising decline faster, and Theme Parks stay weak, keeping growth negative"
+      "risk": "Broadband customer and rate erosion from fiber and fixed wireless competition outpaces wireless and Peacock growth"
      },
      {
-      "bear_value": 0.09,
-      "input_hit": "return_on_new_investment_long_run",
-      "risk": "Spin-off dis-synergies or a taxable outcome, and lower returns on network capex"
+      "bear_value": 0.145,
+      "input_hit": "long_run_op_margin",
+      "risk": "Free-line promotions and lower broadband rates keep compressing margin, while Theme Parks weakness persists"
+     },
+     {
+      "bear_value": 0.015,
+      "input_hit": "terminal_growth",
+      "risk": "Spin-off financing or separation dis-synergies lower returns and growth"
      }
     ],
     "scenarios": {
      "bear": {
-      "long_run_op_margin": 0.15,
+      "long_run_op_margin": 0.145,
       "rev_growth": [
-       -0.045,
-       -0.015,
-       -0.005000000000000001,
-       0.0,
-       0.0
+       -0.044,
+       -0.016999999999999998,
+       -0.009999999999999998,
+       -0.0049999999999999975,
+       -0.0019999999999999983
       ],
-      "terminal_growth": 0.02
+      "terminal_growth": 0.015
      },
      "bull": {
-      "long_run_op_margin": 0.19,
+      "long_run_op_margin": 0.195,
       "rev_growth": [
-       -0.010000000000000002,
-       0.02,
+       -0.004,
+       0.023,
        0.03,
        0.035,
-       0.035
+       0.038
       ],
       "terminal_growth": 0.035
      }
@@ -484,39 +635,39 @@
      "cyclical": "no",
      "debt_level_representative": {
       "answer": "no",
-      "why": "Debt has been paid down during 2026 (noncurrent debt of 83,806 against 92,979 at year-end), so the $98.9 billion in the filed record overstates the current level, and the spin-off may reallocate debt."
+      "why": "Debt is being paid down from cash flow, with noncurrent debt at 83,806 against 92,979 at year-end, and the planned NBCUniversal and Sky spin-off will require refinancing and a reallocation of debt."
      },
-     "margin_position": "The 2025 operating margin of 16.7% sits below the 19-21% of 2013-2019. Impairments and amortization of acquired intangibles weigh on it, and the core business is shifting: video and broadband margins are eroding while wireless, which carries third-party access fees, grows. The 9-month 2026 margin is about 16.1%, and amortization is falling after the Versant separation, so I expect only a partial recovery.",
+     "margin_position": "The 2025 GAAP operating margin of 16.7% is below the 2023-24 levels of about 19%. Amortization of acquired intangibles, impairments and separation costs weigh on it, and so does the free-wireless-line trade-off in residential connectivity. Falling amortization after the Versant spin should lift GAAP margin a little, while broadband and video erosion and Theme Parks weakness hold it back.",
      "tax_rate_representative": {
       "answer": "yes",
-      "why": "The 2025 effective rate of 23.7% is close to the roughly 25% implied by 9-month 2026 tax of 2,983 on pretax income of 11,791, so a mid-20s rate looks sustainable."
+      "why": "The 2025 effective rate of 23.7% is close to the roughly 25% implied by 2026 nine-month tax of 2,983 on pretax income of 11,791."
      },
-     "why": "The 2025 base year includes Versant and Sky Germany, which have since left. It also includes a $9.4 billion Hulu gain below operating income, which inflates pretax income. Reported revenue will fall in 2026 (9-month revenue was $90,695 million against $91,397 million) because of those exits. The NBCUniversal and Sky spin-off planned for mid-2027 adds further structural uncertainty that these inputs do not model."
+     "why": "The 2025 base year includes Versant and the German Sky business, which have since left, so reported revenue falls in 2026 even though pro forma revenue is flat. Base-year pretax income also includes a roughly $9.4 billion Hulu gain that will not recur. Year 1 should therefore show a structural revenue step-down, followed by low growth from wireless, Peacock and business services against broadband and video declines."
     },
-    "value_at_old_defaults": 73.9600783234559,
+    "value_at_old_defaults": 75.81126166450304,
     "values": {
-     "base": 47.23346156241647,
-     "bear": 38.10822977758977,
-     "bull": 57.759084581149416
+     "base": 47.69760238372079,
+     "bear": 36.869912622964584,
+     "bull": 61.010642155799395
     }
    }
   },
   "situation_unclear": false,
-  "value_at_old_defaults": 73.9600783234559,
-  "value_at_old_defaults_quoted": 73.9600783234559,
-  "version": "decided.v2 2026-11-19 WO_NC9a"
+  "value_at_old_defaults": 75.81126166450304,
+  "value_at_old_defaults_quoted": 75.81126166450304,
+  "version": "decided.v3.1 2026-11-20 WO_NC10a"
  },
- "equity_value": 173812888041.70883,
+ "equity_value": 178636400342.76663,
  "family": "operating",
  "far_from_price": false,
  "filed_shares": 3709000000.0,
  "flags": [
-  "Comcast completed the spin-off of Versant, a company holding certain former cable networks and digital platforms, as an independent public company.",
-  "Comcast completed the sale of its Sky operations in Germany.",
-  "Comcast announced its intention to split into two independent public companies through a tax-free spin-off of NBCUniversal and Sky. It is expected to complete in mid-2027, subject to conditions."
+  "Comcast completed the separation of Versant into an independent, publicly traded company, distributing 100% of Versant shares to Comcast shareholders.",
+  "Comcast completed the sale of its Sky operations in Germany; results are included in consolidated results through the sale date and excluded from segment results.",
+  "Comcast announced its intention to separate into two independent publicly traded companies through a tax-free spin-off of NBCUniversal and Sky. Completion is expected in mid-2027 and is subject to customary conditions."
  ],
  "in_code_book": false,
- "ke": 0.09846177079828694,
+ "ke": 0.09623390991748562,
  "market_cap_at_publish": 91367386354,
  "model": "claude-sonnet-5-5",
  "news": [
@@ -589,19 +740,22 @@
  "pending_offer": null,
  "price_at_publish": 25.73,
  "qwen_book": null,
- "screener_commit": "66e779f8d7bd30fc478bb9b79d2d6b9992536096",
+ "release_truncated": [
+  "0001628280-26-066783"
+ ],
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
  "seed_base": {
-  "1000": 46.49147132607574,
-  "3000": 47.23346156241647
+  "1000": 48.62830774988214,
+  "3000": 47.69760238372079
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "valuation inputs decided by claude-sonnet-5-5 (new valuation method, 2026-11-18)",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the cited item (business description); the revenue-type mapping is inferred from the business and segment descriptions",
-    "claim": "Comcast describes itself as a global media and technology company. It sells connectivity and platform services (broadband, wireless, video, voice) and also creates content and runs theme parks.",
+    "basis": "stated in the cited item (10-K Item 1)",
+    "claim": "Comcast describes itself as a global media and technology company that earns revenue from connectivity services sold to customers and from content and experiences sold to viewers and guests.",
     "facts": [
      "P1"
     ],
@@ -611,11 +765,22 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Reporting is organised into two primary businesses and five segments: Connectivity & Platforms (Residential Connectivity & Platforms, Business Services Connectivity) and Content & Experiences (Media, Studios, Theme Parks).",
+    "basis": "stated in the cited item",
+    "claim": "Products sold: broadband, wireless, video and voice services under the Xfinity, Comcast Business, Sky and NOW brands; entertainment, sports and news content under brands such as NBC, Telemundo, Universal, Peacock and Sky; and Universal theme parks.",
     "facts": [
-     "P3",
-     "P4"
+     "P1"
+    ],
+    "quotes": [
+     "We deliver broadband, wireless, video and voice services primarily under the Xfinity, Comcast Business, Sky and NOW brands; produce, distribute and stream leading entertainment, sports and news through brands including NBC, Telemundo, Universal, Peacock and Sky; and own and operate Universal theme parks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Reporting structure: Connectivity & Platforms is split into Residential Connectivity & Platforms and Business Services Connectivity. Content & Experiences is split into Media, Studios and Theme Parks. The segments were recomposed in the first quarter of 2026.",
+    "facts": [
+     "P4",
+     "P6"
     ],
     "quotes": [
      "We present the operations of (1) our Connectivity & Platforms business in two segments: Residential Connectivity & Platforms and Business Services Connectivity; and (2) our Content & Experiences business in three segments: Media, Studios and Theme Parks."
@@ -623,47 +788,49 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Customers span the United States, United Kingdom and Italy for connectivity and video. Content & Experiences serves global audiences and runs theme parks in the United States and Asia.",
+    "basis": "stated in the cited tables; the remainder is inferred from the separate Corporate & Other and Eliminations lines",
+    "claim": "In the third quarter of 2026 Connectivity & Platforms was the larger business by revenue: $19,663 (table in millions) against Content & Experiences at $10,537 (table in millions). Consolidated revenue was $29,298 (table in millions). Corporate, other and eliminations make up the remainder.",
     "facts": [
-     "P1"
+     "P6",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited table",
+    "claim": "Residential Connectivity & Platforms earns revenue from domestic broadband, domestic wireless service and equipment, international connectivity, video, advertising and other lines. Third-quarter 2026 revenue was $6,241 (table in millions) for domestic broadband, 1,050 for wireless service, 5,910 for video and 918 for advertising.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Residential revenue is driven by customer counts and average rates. Broadband revenue fell on lower rates and fewer customers, video revenue fell on fewer video customers, and wireless service revenue grew with the customer base and the conversion of free lines to paid.",
+    "facts": [
+     "P6"
     ],
     "quotes": [
-     "Contains our broadband, wireless, video and wireline voice businesses in the United States, United Kingdom and Italy"
+     "Domestic broadband revenue decreased due to lower average rates and a decline in the number of domestic broadband customers.",
+     "Video revenue decreased primarily due to a decline in the number of video customers.",
+     "Domestic wireless service revenue increased, reflecting growth in the customer base and the conversion of promotional free lines to paid service."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the income statement and release tables; the explanation of the decline is stated in the MD&A (P4), which is not cited here",
-    "claim": "Connectivity & Platforms is the larger business by revenue. In the third quarter it produced 19,663 of consolidated revenue of 29,298, against 10,537 for Content & Experiences (table in millions). Consolidated revenue fell versus the prior-year quarter's 31,198.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in the release; the mechanism is inferred from the release and the management commentary in P4",
-    "claim": "In the largest segment, Residential Connectivity & Platforms, the third-quarter revenue lines moved in different directions. Domestic broadband was 6,241 against 6,550 a year earlier (a (4.7%) change). Domestic wireless service was 1,050 against 915 (14.7%). Video was 5,910 against 6,475 ((8.7%)) (table in millions).",
+    "basis": "stated in the cited table",
+    "claim": "Customer base in the third quarter of 2026: domestic wireless lines reached 10,555 (table in thousands) after net additions of 368, while domestic broadband residential customers had net losses of (144) and video customers had net losses of (274). Growth is therefore coming from wireless lines while broadband and video customer counts decline.",
     "facts": [
      "P6"
     ],
     "quotes": [],
     "support": "supported"
-   },
-   {
-    "basis": "stated in the release table (customer counts in thousands); the bundling link is stated in P1",
-    "claim": "Customer counts drive recurring connectivity revenue. In the third quarter domestic residential broadband customers were 28,343 thousand after net losses of (144) thousand, and domestic video customers were 10,394 thousand after net losses of (274) thousand. Domestic wireless lines rose by 368 thousand to 10,555 thousand.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_listed"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Management deliberately trades near-term broadband revenue per customer for retention and customer growth. It simplified broadband pricing and gives a free wireless line for a year to new and existing domestic broadband customers.",
+    "claim": "Management says the competitive environment weighs on customer additions. In 2025 it began offering a free wireless line for one year to domestic broadband customers to support retention.",
     "facts": [
      "P4"
     ],
@@ -674,105 +841,66 @@
    },
    {
     "basis": "stated in the cited items",
-    "claim": "Domestic wireless is sold through an MVNO arrangement. Comcast rents network capacity from Verizon rather than owning a wireless network, and third-party access fees and device costs appear in direct product costs.",
+    "claim": "Programming is the main cost of the video business. Residential programming expense was $3,624 (table in millions) in the third quarter of 2026 against $3,952 a year earlier, and non-programming expense rose to 7,284 from 7,200 on higher direct product costs tied to wireless growth.",
     "facts": [
-     "P1",
-     "P3"
+     "P6",
+     "P2"
     ],
     "quotes": [
-     "Our domestic wireless services are offered over Verizon\u2019s wireless network",
-     "Direct product costs primarily consist of access fees related to using wireless and broadband networks owned by third parties to deliver our services and costs of products sold, including wireless devices and Sky Glass smart televisions."
+     "We expect programming expenses for our video services to continue to be the largest single expense item for our Residential Connectivity & Platforms business and to continue to increase on a per subscriber basis.",
+     "Programming expenses decreased primarily due to a decline in the number of domestic video customers."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited items",
-    "claim": "Programming is the main cost of the video business and moves with video subscribers and per-subscriber rates. Third-quarter residential programming expense was 3,624 against 3,952 a year earlier, a (8.3%) change (table in millions).",
+    "claim": "Business Services Connectivity sells broadband, voice and wireless to small businesses and enterprise solutions to larger customers. Third-quarter 2026 revenue was $2,645 (table in millions) with a 55.9% Adjusted EBITDA margin, and growth came mainly from enterprise solutions.",
     "facts": [
-     "P2",
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "We expect programming expenses for our video services to continue to be the largest single expense item for our Residential Connectivity & Platforms business and to continue to increase on a per subscriber basis."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "figures stated in the release; the growth drivers are stated in the 10-K discussion (P3), not cited here",
-    "claim": "Business Services Connectivity (Comcast Business, serving small businesses and enterprises) is the smaller, higher-margin and growing connectivity segment. Third-quarter revenue was 2,645 (table in millions), up 2.7%, with an Adjusted EBITDA margin of 55.9% against 56.4%.",
-    "facts": [
-     "P6",
-     "P1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the release tables; the mechanism is inferred from the cited percentage changes",
-    "claim": "Residential Connectivity & Platforms profitability is under pressure. Its third-quarter Adjusted EBITDA margin was 35.9% against 36.8% and total Connectivity & Platforms margin was 38.6% against 39.3%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the release tables",
-    "claim": "Media earns money from advertising, distribution fees paid by video providers, and international networks. Third-quarter Media revenue was 5,359 (table in millions) against 4,744, up 13.0%. Excluding the FIFA World Cup, revenue was 5,136, up 8.3%.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the 10-K comparison is stated in P3, not cited in this claim",
-    "claim": "Peacock is a streaming business inside Media and reached profitability in the quarter. Management reports 261 million of Adjusted EBITDA on 1.8 billion of revenue, its second consecutive profitable quarter.",
-    "facts": [
+     "P1",
      "P6"
     ],
     "quotes": [
-     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue, driven by strong growth in distribution"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the release tables; the lumpiness is inferred from the timing note",
-    "claim": "Studios earns from licensing content and from theatrical releases, so results swing with release timing. Third-quarter Studios revenue was 2,967 (table in millions): content licensing fell to 1,553 from 2,035 while theatrical rose to 1,129 from 639. Adjusted EBITDA was 402 against 339.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the attendance-driven framing is inferred",
-    "claim": "Theme Parks earns from guest admissions and spending and is capital intensive. Third-quarter revenue was 2,597 against 2,717 (table in millions), down (4.4%). Adjusted EBITDA fell to 780 from 940 as operating expenses rose 2.3%.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Despite near-term cyclical headwinds in Theme Parks",
-     "increased depreciation due to the opening of Epic Universe in May 2025"
+     "Revenue for Business Services Connectivity increased primarily due to an increase in revenue from enterprise solutions offerings."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Advertising is a material revenue source and is sensitive to audience levels and ad budgets. Management flags declining linear viewership and competition from digital and streaming platforms as risks.",
+    "claim": "Media earns revenue from domestic advertising, domestic distribution fees, international networks and other lines, with Peacock a growing part. Third-quarter 2026 Media revenue was $5,359 (table in millions), including domestic distribution of 2,069, domestic advertising of 1,783 and international networks of 1,270. Management reports Peacock Adjusted EBITDA of $261 million on $1.8 billion of revenue.",
     "facts": [
-     "P2"
+     "P6"
     ],
     "quotes": [
-     "Because we derive substantial revenue from the sale of advertising, a decline in expenditures by advertisers, including through traditional linear television distribution models or on Peacock, could negatively impact our results of operations."
+     "Domestic distribution revenue increased primarily due to higher revenue at Peacock, driven by higher average rates and an increase in paid subscribers compared to the prior year period.",
+     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue, driven by strong growth in distribution"
     ],
     "support": "supported"
    },
    {
-    "basis": "figures stated in the income statement; the explanations are stated in the MD&A (P4), not cited here",
-    "claim": "Consolidated costs are mostly content, operating and depreciation costs. In the third quarter, programming and production was 7,515, other operating and administrative 10,645, depreciation 2,385 and amortization 1,314, within total costs of 23,978 (table in millions). Interest expense was 962.",
+    "basis": "stated in the cited item; the point about lumpiness is inferred from the release's reference to timing of content availability",
+    "claim": "Studios earns revenue from content licensing, theatrical releases and other sources. Third-quarter 2026 revenue was $2,967 (table in millions), made up of content licensing of 1,553, theatrical of 1,129 and other of 285. Licensing is lumpy and depends on when content is delivered, while theatrical depends on film performance.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenue for Studios decreased primarily due to lower content licensing revenue, partially offset by higher theatrical revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Theme Parks earns revenue mainly from park admissions. Third-quarter 2026 revenue was $2,597 (table in millions) and Adjusted EBITDA was 780, down from 940, as promotional activity lowered admissions revenue and operating expenses rose.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenue for Theme Parks decreased primarily due to lower revenue from park admissions, including from the impact of increased promotional activity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited income statement",
+    "claim": "Consolidated cost structure for the nine months of 2026: other operating and administrative expense was 31,498 (table in millions) and programming and production was 26,789, against revenue of 90,695. Depreciation was 7,108 and amortization 4,144.",
     "facts": [
      "F2"
     ],
@@ -780,226 +908,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cash flow statement and balance sheet (F1)",
-    "claim": "The model is capital intensive and funded by operating cash flow. Over nine months, operating cash flow was 22,886 against capital expenditures of (8,311) and dividends of (3,606). Debt repayments of (10,405) and repurchases of (2,517) used the rest (table in millions).",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; the exact pro forma definition sits in an omitted footnote",
-    "claim": "The corporate perimeter is changing, which affects year-over-year revenue comparisons. Versant was spun off on January 2 and the Sky operations in Germany were sold on May 31. A tax-free spin-off of NBCUniversal and Sky is planned for mid-2027, subject to conditions. Third-quarter revenue fell (6.1%) as reported but was up 0.5% on a pro forma basis, at 29,298 against 29,151.",
-    "facts": [
-     "P4",
-     "P5",
-     "P6"
-    ],
-    "quotes": [
-     "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
-    ],
-    "support": "number_not_listed"
-   }
-  ],
-  "competitive_position": [
-   {
-    "basis": "stated in the cited item (10-K Item 1)",
-    "claim": "Comcast describes itself as a global media and technology company that combines connectivity and platforms services with content and experiences, which gives it two sides (a network and a content/parks business) to compete from.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We are a global media and technology company that reaches customers, viewers and guests worldwide through the connectivity and platforms services we provide and the content and experiences we create."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "The core domestic broadband base is shrinking. In the 2025 annual report, domestic broadband customers decreased by 711,000 to 31.3 million, and the company says customer additions and losses continue to be hurt by an increasingly competitive environment.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Domestic broadband customers decreased by 711,000 to 31.3 million.",
-     "Our customer relationship additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item's tables",
-    "claim": "The broadband weakness continued in the third quarter of 2026. Domestic residential broadband net additions/(losses) were (144) (table in thousands) against (91) a year earlier, and domestic broadband revenue was $6,241 versus $6,550 (table in millions), a change of (4.7%).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item; the slower pace is inferred from the table",
-    "claim": "Wireless is the clearest growth lever inside the connectivity business. Total wireless lines reached 10.6 million, with 368,000 net line additions in the quarter and 1.6 million over twelve months, and management cites strong conversion of free lines to paid.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Domestic Wireless Customer Line Net Additions Were 368,000 and 1.6 Million Over the Last 12 Months",
-     "Total Wireless Lines Increased to 10.6 Million, Reaching Nearly 18% Penetration of Our Domestic Residential Broadband Customers and 7% of Total Addressable Wireless Lines in Our Footprint",
-     "strong conversion of free wireless lines to paid relationships"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (management's own expectation)",
-    "claim": "The company has chosen to give up some broadband revenue per customer to defend the base. It simplified broadband pricing and began offering a free wireless line for one year, which it expects to help retention but to lower average domestic broadband revenue per customer.",
-    "facts": [
-     "P4",
-     "P3"
-    ],
-    "quotes": [
-     "we simplified our broadband pricing structure and began offering a free wireless line for one year to new and existing domestic broadband customers",
-     "but will negatively impact average domestic broadband revenue per customer"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Its wireless offering depends on third-party networks, which limits control over this part of the offering. Domestic wireless service runs over Verizon's network, with T-Mobile's network to be added for business customers in 2026, and the risk factors say it relies on third-party wireless networks.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "as well as on third-party wireless networks to offer certain wireless services in the United States and internationally"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items' tables; mechanism inferred from the residential revenue lines",
-    "claim": "Connectivity & Platforms revenue and Adjusted EBITDA both fell in the third quarter of 2026. Revenue was $19,663 versus $20,212, a change of (2.7%), and Adjusted EBITDA was $7,588 versus $7,938, a change of (4.4%) (tables in millions).",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items; mechanism inferred from the segment tables",
-    "claim": "Margins in connectivity are being squeezed. Total Connectivity & Platforms Adjusted EBITDA margin was 38.6% against 39.3% in the third quarter and 39.5% against 40.6% for nine months, while the residential segment margin was 35.9% against 36.8% in the quarter.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Business Services Connectivity is a relative strength. Third-quarter revenue was $2,645 versus $2,576, up 2.7%, and Adjusted EBITDA was $1,478 versus $1,454, up 1.7%, with a margin of 55.9% (tables in millions). Its stated competitors are wireline telecommunications companies and wide area network managed service providers.",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "Business Services Connectivity primarily competes with wireline telecommunications companies and wide area network managed service providers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Video is a declining part of the position. Domestic video customers fell by 1.3 million to 11.3 million in the annual report. In the third quarter of 2026 they were 10,394 (table in thousands) with net losses of (274), and video revenue was $5,910 against $6,475, a change of (8.7%) (table in millions). The company attributes this to streaming substitution.",
-    "facts": [
-     "P3",
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "Domestic video customers decreased by 1.3 million to 11.3 million.",
-     "As consumers increasingly turn to DTC streaming services in lieu of linear video services, which continue to experience accelerated net customer losses, our video customers and video revenues, and linear television network subscriber fees received from video service providers, each decrease."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Programming cost is a structural pressure on the video business. The filing expects it to remain the largest single expense for Residential Connectivity & Platforms and to keep rising per subscriber.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "We expect programming expenses for our video services to continue to be the largest single expense item for our Residential Connectivity & Platforms business and to continue to increase on a per subscriber basis."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (risk factors)",
-    "claim": "Content & Experiences competes against a growing set of rivals, including streamers, social and user-generated content and AI-generated content, and the filings name this as a threat to Peacock, linear networks and advertising.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our businesses in Content & Experiences, as well as our video business, face substantial and increasing competition from providers of similar types of entertainment, sports, news and information content",
-     "Because we derive substantial revenue from the sale of advertising, a decline in expenditures by advertisers, including through traditional linear television distribution models or on Peacock, could negatively impact our results of operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Peacock has reached profitability on a quarterly basis. In the third quarter of 2026 it was the second consecutive profitable quarter, with $261 million of Adjusted EBITDA on $1.8 billion of revenue, driven by distribution growth.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Over the full year 2025, Peacock was still loss-making: revenue was $5.4 billion against costs and expenses of $6.5 billion, with paid subscribers up by 8 million to 44 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Peacock generated revenue and costs and expenses of $5.4 billion and $6.5 billion in 2025, respectively",
-     "Paid subscribers increased by 8 million to 44 million in 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item's tables; the one-time nature is inferred from the excluding-World-Cup line",
-    "claim": "Media revenue rose in the third quarter of 2026, helped by the FIFA World Cup. It was $5,359 against $4,744, up 13.0%, or $5,136 and 8.3% excluding the event, and Media Adjusted EBITDA was $769 against $247 (table in millions).",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item; the cause is management's description, not shown by the figures",
-    "claim": "Theme Parks weakened in the third quarter of 2026. Revenue was $2,597 against $2,717, a change of (4.4%), and Adjusted EBITDA was $780 against $940, a change of (17.1%) (table in millions). Management calls the headwinds near-term and cyclical.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Despite near-term cyclical headwinds in Theme Parks"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items",
-    "claim": "Reported consolidated results are depressed by portfolio changes. Third-quarter 2026 revenue was $29,298 against $31,198, a change of (6.1%) (table in millions), mainly because of the Versant separation and the Sky Germany sale. Pro forma revenue was $29,298 against $29,151, up 0.5%.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Consolidated revenue decreased for the three months ended September 30, 2026 compared to the same period in 2025 primarily driven by a decrease due to the Versant Separation, a decrease due to the sale of our Sky operations in Germany and a decrease in the Connectivity & Platforms business, partially offset by an increase in the Content & Experiences business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items' tables; the mechanism is inferred",
-    "claim": "The company generates cash to fund network investment, but cash flow is lower. Nine-month operating cash flow was 22,886 against 24,802, capital expenditures were (8,311) against (8,001) (table in millions), and third-quarter free cash flow was $4,211 against $4,945, a change of (14.8%).",
+    "basis": "stated in the cited statements and reconciliation",
+    "claim": "The business is capital intensive. In the nine months of 2026, operating cash flow was 22,886 (table in millions), capital expenditures 8,311 and cash paid for intangible assets 1,859. Free cash flow as the company defines it was $12,716.",
     "facts": [
      "F3",
      "P6"
@@ -1009,99 +919,285 @@
    },
    {
     "basis": "stated in the cited items",
-    "claim": "Management plans a further structural change: a tax-free spin-off of NBCUniversal and Sky, expected to complete in mid-2027. The filing warns that the two smaller companies would bear separate costs now shared and could be more vulnerable to market conditions.",
+    "claim": "Portfolio changes affect reported revenue. The Versant spin-off and the sale of the Sky operations in Germany lowered third-quarter 2026 revenue to $29,298 (table in millions) from $31,198, while pro forma revenue was $29,298 against $29,151. A spin-off of NBCUniversal and Sky is planned.",
+    "facts": [
+     "P4",
+     "P6",
+     "P5"
+    ],
+    "quotes": [
+     "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited risk factors",
+    "claim": "The main competitive and structural pressures on the model are competition in broadband from fiber and wireless providers, consumers moving from linear video to streaming, and advertising pressure on linear networks.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Changes in consumer behavior continue to adversely affect our businesses and challenge existing business models."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the 10-K business description and repeated in the Q3 10-Q overview.",
+    "claim": "Comcast describes itself as a global media and technology company with two primary businesses, Connectivity & Platforms and Content & Experiences, spanning broadband, wireless, video, studios, media and theme parks.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "We are a global media and technology company that reaches customers, viewers and guests worldwide through the connectivity and platforms services we provide and the content and experiences we create."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release segment table and text; the 10-Q table shows the same figures.",
+    "claim": "Connectivity & Platforms is under pressure: in the third quarter its revenue fell 2.7% to $19,663 and Adjusted EBITDA fell 4.4% to $7,588 (table in millions).",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Revenue for Connectivity & Platforms decreased compared to the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Domestic broadband, the core connectivity product, is losing customers and revenue: residential net losses were 144,000 in the third quarter and domestic broadband revenue fell 4.7%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Domestic broadband revenue decreased due to lower average rates and a decline in the number of domestic broadband customers.",
+     "Total domestic broadband residential customer net losses were 144,000, total domestic wireless line net additions were 368,000 and total domestic video customer net losses were 274,000."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and the 10-K; the dependence on Verizon is stated, while the reading as a competitive constraint is inferred.",
+    "claim": "Wireless is the growth lever of the connectivity business: total wireless lines reached 10.6 million, about 18% of domestic residential broadband customers and 7% of addressable lines in the footprint.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Total Wireless Lines Increased to 10.6 Million, Reaching Nearly 18% Penetration of Our Domestic Residential Broadband Customers and 7% of Total Addressable Wireless Lines in Our Footprint",
+     "Our domestic wireless services are offered over Verizon\u2019s wireless network and our existing network of secure residential, outdoor and business Wi-Fi hotspots"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and the release; the margin figures come from the release segment table.",
+    "claim": "Management chose to trade near-term residential revenue and margin for retention and competitiveness, using a free wireless line offer; residential Adjusted EBITDA margin was 35.9% against 36.8% a year earlier.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "began offering a free wireless line for one year to new and existing domestic broadband customers, which we expect will improve customer retention and strengthen our ability to compete for new customers, but will negatively impact average domestic broadband revenue per customer",
+     "Residential Connectivity & Platforms revenue and Adjusted EBITDA performance reflect the investment in our go-to-market strategy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Business Services Connectivity is a relative strength: third-quarter revenue rose 2.7% to $2.6 billion at a 55.9% Adjusted EBITDA margin, led by enterprise solutions.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Business Services Connectivity Revenue Increased 2.7% to $2.6 Billion, EBITDA Increased 1.7% to $1.5 Billion and EBITDA Margin Was 55.9%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Revenue and customer figures are stated in the release; the cause is stated in the 10-K risk factors.",
+    "claim": "The video business keeps shrinking: third-quarter video revenue fell 8.7% and domestic video customers had net losses of 274,000, which the 10-K attributes to a shift toward DTC streaming.",
+    "facts": [
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "As consumers increasingly turn to DTC streaming services in lieu of linear video services, which continue to experience accelerated net customer losses, our video customers and video revenues, and linear television network subscriber fees received from video service providers, each decrease."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors and the 10-Q MD&A.",
+    "claim": "The filings name competition from fiber-building wireline telecom companies as a threat to broadband, and say customer relationship additions continue to be hurt by an increasingly competitive environment.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Connectivity & Platforms\u2019 broadband services compete primarily against wireline telecommunications companies, including many that are increasing deployment of fiber-based networks",
+     "Our customer relationship net additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors.",
+    "claim": "The Content & Experiences businesses and the video business face substantial and increasing competition for talent, content, sports rights and advertising.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our businesses in Content & Experiences, as well as our video business, face substantial and increasing competition from providers of similar types of entertainment, sports, news and information content"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and the 10-K; the 2025 comparison is drawn from the 10-K MD&A.",
+    "claim": "Peacock is improving: it posted $261 million of Adjusted EBITDA on $1.8 billion of revenue in the third quarter, with paid subscribers up 17% to 48 million.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue, driven by strong growth in distribution",
+     "Paid Subscribers Increased 17% Year-over-Year to 48 Million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Studios improved in the third quarter, with Adjusted EBITDA up 18.6% to $402 million on theatrical strength, even though revenue was slightly lower.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Studios EBITDA Increased 18.6% to $402 Million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release; the reading that promotions reflect competitive pressure is not stated.",
+    "claim": "Theme Parks weakened in the third quarter: revenue fell 4.4% and Adjusted EBITDA fell 17.1%, with promotions weighing on admissions revenue.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenue for Theme Parks decreased primarily due to lower revenue from park admissions, including from the impact of increased promotional activity.",
+     "Despite near-term cyclical headwinds in Theme Parks, we remain confident in the business's long-term growth potential."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and the 10-Q MD&A; the pro forma measures are non-GAAP.",
+    "claim": "Reported results fell in the third quarter, with Adjusted EBITDA down 5.8%. On a pro forma basis, excluding the Versant separation and the Germany Sky sale, revenue and Adjusted EBITDA were consistent with the prior year, with Adjusted EBITDA up 0.8%.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "On a pro forma basis to reflect the Versant separation, which was completed on January 2, 2026, and the sale of our Sky operations in Germany, which was completed on May 31, 2026, revenue and Adjusted EBITDA were consistent with the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release and 10-K; the defensive role against fiber is inferred.",
+    "claim": "The network is being upgraded and customers are moving to higher-speed tiers, which supports the connectivity franchise: nearly 45% of broadband customers are on gig-plus tiers, and the company is rolling out DOCSIS 4.0 in select markets.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Nearly 45% of Our Broadband Customers Are Now on Gig-Plus Speed Tiers, Up Nearly 10 Percentage Points Year-over-Year",
+     "Executing on our multi-year strategy to evolve our existing HFC network, including the rollout of DOCSIS 4.0 in select markets, which allows for multigigabit symmetrical speeds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and the cash flow statement.",
+    "claim": "Cash generation continues, funding dividends and debt reduction, while share repurchases have been paused. Third-quarter free cash flow was $4,211, down from $4,945 (table in millions).",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "Comcast suspended its share repurchase program beginning in the third quarter and expects the pause to remain in place through the proposed separation of its businesses into two independent publicly traded companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet and cash flow statement; the 10,405 and 4,366 figures are cash flow lines, and the link between repayments and lower debt is inferred.",
+    "claim": "Debt fell between year-end and September 30: the noncurrent portion was 83,806 against 92,979, and the current portion was 3,560 against 5,958 (table in millions).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and risk factors.",
+    "claim": "The company plans to separate NBCUniversal and Sky from the rest of the business in a tax-free spin-off, expected by mid-2027, and the filings flag cost and conditionality risks to the resulting companies.",
     "facts": [
      "P4",
      "P5"
     ],
     "quotes": [
      "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions.",
-     "Because completion of the NBCUniversal Spin-off will result in two companies that are smaller, each company will incur separate ongoing costs that may be shared today and may become more vulnerable to changing market conditions"
+     "each company will incur separate ongoing costs that may be shared today and may become more vulnerable to changing market conditions"
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet F1.",
-    "claim": "Cash and cash equivalents fell to 7,596 (table in millions) at the latest quarter-end, from 9,481 at the prior year-end.",
+    "basis": "Stated in the balance sheet in F1; the comparison of current assets with current liabilities is read directly from the table.",
+    "claim": "Liquidity on the balance sheet is moderate and shrinking. Cash and cash equivalents were 7,596 (table in millions) at the latest quarter-end, down from 9,481 at the prior year-end. Total current assets of 25,223 were below total current liabilities of 30,719.",
     "facts": [
      "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Both totals are stated in F1. The comparison is mine and uses no computed figure.",
-    "claim": "Total current assets of 25,223 (table in millions) are below total current liabilities of 30,719, so short-term liabilities exceed short-term assets.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the balance sheet F1.",
-    "claim": "Debt has fallen. The current portion is 3,560 (table in millions), down from 5,958, and the noncurrent portion is 83,806, down from 92,979.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cash flow statement F3.",
-    "claim": "In the nine months the company repaid more debt than it raised: repurchases and repayments of debt were (10,405) against proceeds from borrowings of 1,990 (table in millions), against (4,366) and 2,494 a year earlier.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures are stated in F2. The explanation for the interest decrease is stated in P4.",
-    "claim": "Interest expense for the nine months was (3,108) against (3,283) a year earlier (table in millions), while operating income fell to 14,616 from 17,184. Management attributes the lower interest cost to lower average debt outstanding.",
-    "facts": [
-     "F2",
-     "P4"
     ],
     "quotes": [
-     "Consolidated interest expense decreased for the three and nine months ended September 30, 2026 compared to the same period in 2025 primarily due to a decrease in average debt outstanding."
+     "Cash and cash equivalents | $ 7,596 | $ 9,481"
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in P4. The pro forma counter is stated in P6.",
-    "claim": "Adjusted EBITDA, a non-GAAP measure, was 25,938 (table in millions) for the nine months against 29,484 a year earlier, a decline of 12.0%. A debt-to-EBITDA ratio cannot be computed from the packet.",
+    "basis": "Stated in the balance sheet in F1; the direction of change is read from the two columns.",
+    "claim": "Debt is large but lower than at the prior year-end. The current portion of debt was 3,560 (table in millions), against 5,958 at the prior year-end. The noncurrent portion was 83,806, against 92,979. Total equity was 92,497.",
     "facts": [
-     "P4"
+     "F1"
     ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the cash flow statement F3.",
-    "claim": "Operating cash flow for the nine months was 22,886 (table in millions) against 24,802. Capital expenditures were (8,311) and cash paid for intangible assets was (1,859).",
-    "facts": [
-     "F3"
+    "quotes": [
+     "Noncurrent portion of debt | 83,806 | 92,979"
     ],
-    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release P6.",
-    "claim": "Third-quarter free cash flow was $4,211 (table in millions) against $4,945, a decline of 14.8%. Operating cash flow was $7,902 against $8,693. Management cites $4.2 billion of free cash flow.",
+    "basis": "Operating cash flow and capital spending are stated in F3; free cash flow figures are stated in the reconciliation in P6.",
+    "claim": "The company generates substantial operating cash flow, but it declined. Net cash provided by operating activities for the nine months was 22,886 (table in millions), against 24,802 a year earlier. Free cash flow was 12,716 against 14,866. In the third quarter alone, free cash flow was 4,211 against 4,945.",
     "facts": [
+     "F3",
      "P6"
     ],
     "quotes": [
-     "We generated $4.2 billion in free cash flow and are making meaningful progress on the separation of NBCUniversal and Sky"
+     "Net cash provided by operating activities | 22,886 | 24,802"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2, F3 and P4. Linking the (9,282) adjustment to the Hulu gain is inferred from the similar size.",
-    "claim": "Cash flow is not inflated by the prior-year Hulu gain. Nine-month net income was 8,807 (table in millions) against 17,590, but the cash flow statement removes the gain on investments: (7) this year against (9,282) last year.",
+    "basis": "Line items are stated in F3; the explanation of the gap is inferred from the reconciliation lines.",
+    "claim": "Cash generation quality: operating cash flow was well above reported net income, mainly because of non-cash charges. Nine-month net income was 8,807 (table in millions) and operating cash flow was 22,886. Depreciation and amortization added back 11,252 and deferred income taxes 1,523.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Depreciation and amortization | 11,252 | 12,023"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The gain is stated in P4; the link to the cash flow statement is read from the adjustment line in F3.",
+    "claim": "The year-earlier net income comparison was inflated by a one-time gain, which makes the current decline in net income look larger than the underlying cash trend. Nine-month net income was 17,590 a year earlier against 8,807 now. The prior period included a pre-tax gain of $9.4 billion on the sale of the Hulu interest. Operating cash flow fell by a much smaller amount, to 22,886 from 24,802.",
     "facts": [
      "F2",
      "F3",
@@ -1113,39 +1209,47 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement F3. The interpretation is inferred.",
-    "claim": "Operating cash flow of 22,886 (table in millions) is much larger than net income of 8,807, mainly because of non-cash charges: depreciation and amortization of 11,252, share-based compensation of 1,134 and deferred income taxes of 1,523. Working capital was a mixed contribution, with receivables absorbing (1,000) and trade payables adding 890.",
+    "basis": "Figures are stated in P4, P6 and F2; the reasoning on interest is stated in P4 as a decrease in average debt outstanding.",
+    "claim": "Operating earnings available to service debt have weakened. Nine-month Adjusted EBITDA was 25,938 (in millions), down from 29,484, and interest expense was 3,108 against 3,283. Third-quarter Adjusted EBITDA was 9,106 against 9,669.",
     "facts": [
-     "F3"
+     "F2",
+     "P4",
+     "P6"
     ],
-    "quotes": [],
+    "quotes": [
+     "Adjusted EBITDA(a) | $9,106 | $9,669 | (5.8)% | $25,938 | $29,484 | (12.0)%"
+    ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement F3.",
-    "claim": "Cash was used for debt repayment, dividends of (3,606) (table in millions), buybacks of (2,517) against (5,618) a year earlier, and (750) of cash transferred to Versant. Total cash, including restricted cash, fell by (2,882).",
+    "basis": "Line items are stated in F3; the funding explanation is inferred from the cash flow statement.",
+    "claim": "The company has been paying down debt from internal cash flow, not from new borrowing. Nine-month repurchases and repayments of debt were 10,405 (table in millions) against 1,990 of proceeds from borrowings. Cash, cash equivalents and restricted cash fell by 2,882.",
     "facts": [
      "F3"
     ],
-    "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the balance sheet F1 and the cash flow statement F3. The maturity ladder itself is not stated.",
-    "claim": "Near-term refinancing need is visible only as the current portion of debt, 3,560 (table in millions). It can be met from cash of 7,596, ongoing operating cash flow, or new borrowing. A full maturity schedule is not in the packet.",
-    "facts": [
-     "F1",
-     "F3"
+    "quotes": [
+     "Repurchases and repayments of debt | (10,405) | (4,366)"
     ],
-    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in P5, with the mid-2027 timing stated in P4. The debt-allocation effect is inferred.",
-    "claim": "The planned NBCUniversal and Sky spin-off is a potential financing event. Its conditions include completion of financing arrangements, and the company says there is no guarantee it will be completed.",
+    "basis": "Cash flow lines are stated in F3; the buyback pause is stated in P6.",
+    "claim": "Capital returns have been reduced, which frees cash for debt service. Share repurchases were 2,517 (table in millions) in the nine months against 5,618 a year earlier, and dividends paid were 3,606 against 3,685. The company suspended its buyback program in the third quarter.",
     "facts": [
-     "P5",
-     "P4"
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Comcast suspended its share repurchase program beginning in the third quarter and expects the pause to remain in place through the proposed separation of its businesses into two independent publicly traded companies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Timing is stated in P4 and the conditions in P5; the link to refinancing is inferred from the reference to financing arrangements.",
+    "claim": "Refinancing is tied to the planned NBCUniversal and Sky spin-off. The spin-off is expected mid-2027, and one of its conditions is completion of financing arrangements. How existing debt would be divided or refinanced is not described in the evidence.",
+    "facts": [
+     "P4",
+     "P5"
     ],
     "quotes": [
      "The NBCUniversal Spin-off will be subject to the satisfaction of customary conditions, including obtaining final approval by our Board of Directors, receipt of tax opinions and regulatory approvals, and completion of financing arrangements."
@@ -1155,94 +1259,117 @@
   ],
   "growth_thesis": [
    {
-    "basis": "Figures are stated in the earnings release. What must hold (paid conversion) is stated by management; the broadband offset is read from the same table.",
-    "claim": "Domestic wireless is the clearest growth engine in Connectivity & Platforms. Third-quarter domestic wireless service revenue was $1,050 (table in millions) against $915, up 14.7%. Wireless lines reached 10,555 (table in thousands) against 8,941, with 368 net additions in the quarter.",
+    "basis": "Stated in the Q3 earnings release table and commentary.",
+    "claim": "Domestic wireless is the clearest growth line in Residential Connectivity: wireless service revenue rose to 1,050 from 915 (table in millions), up 14.7%, and total lines reached 10.6 million.",
     "facts": [
-     "P6",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "strong conversion of free wireless lines to paid relationships",
-     "began offering a free wireless line for one year to new and existing domestic broadband customers"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Figures and the enterprise-led statement come from the earnings release. P4 states the segment's stated focus.",
-    "claim": "Business Services Connectivity grows steadily. Third-quarter revenue was $2,645 (table in millions) against $2,576, up 2.7%. Adjusted EBITDA was $1,478 against $1,454, and margin was 55.9% against 56.4%. Growth is led by enterprise solutions, so it must continue to win enterprise customers without further margin erosion.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "healthy growth in Business Services, led by Enterprise, where there is substantial opportunity ahead."
+     "Domestic wireless service revenue increased, reflecting growth in the customer base and the conversion of promotional free lines to paid service."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release. The earlier-loss and risk context is from the 10-K.",
-    "claim": "Peacock has turned profitable and is a stated growth driver in Content & Experiences. It delivered $261 million of Adjusted EBITDA on $1.8 billion of revenue in the third quarter, its second consecutive profitable quarter. For this to continue, distribution revenue must keep growing faster than content costs.",
+    "basis": "Net additions and the conversion comment are stated in the release. That conversion must continue is inferred.",
+    "claim": "For wireless growth to continue, free lines must keep converting to paid and line additions must hold up. Net additions were 368,000 against 414 (table in thousands) a year earlier.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "strong conversion of free wireless lines to paid relationships"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 earnings release; the conditional is inferred from those figures.",
+    "claim": "Wireless growth has to outrun broadband erosion. Domestic broadband revenue fell 4.7% to 6,241 from 6,550 (table in millions), and domestic broadband residential customers had net losses of 144 (table in thousands).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Domestic broadband revenue decreased due to lower average rates and a decline in the number of domestic broadband customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 earnings release.",
+    "claim": "Business Services Connectivity, led by enterprise solutions, is a steady growth contributor. Revenue rose 2.7% to 2,645 (table in millions) and Adjusted EBITDA rose 1.7% to 1,478.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenue for Business Services Connectivity increased primarily due to an increase in revenue from enterprise solutions offerings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and drivers are stated in the Q3 release. The conditions for continuation are inferred from the stated drivers and the 10-K risk factor.",
+    "claim": "Peacock is a growth driver and has turned profitable: Adjusted EBITDA of $261 million on $1.8 billion of revenue, with paid subscribers up 17% to 48 Million. Continued growth needs further distribution revenue gains, from higher average rates and more paid subscribers.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue, driven by strong growth in distribution",
+     "Domestic distribution revenue increased primarily due to higher revenue at Peacock, driven by higher average rates and an increase in paid subscribers compared to the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 release; that the film slate must keep delivering is inferred.",
+    "claim": "Studios profit rose on theatrical strength. Studios Adjusted EBITDA rose 18.6% to 402 (table in millions) as theatrical revenue rose 76.6% to 1,129 from 639. Continuation depends on further hit releases.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Theatrical revenue increased primarily due to the successful performance of recent releases, including The Odyssey and Minions & Monsters, as well as the carryover benefit of Obsession."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Latest-quarter figures are stated in the release; the prior-year driver is stated in the 10-K. That admissions must recover is inferred.",
+    "claim": "Theme Parks is a headwind to growth in the latest quarter. Revenue fell 4.4% to 2,597 from 2,717 (table in millions) and Adjusted EBITDA fell to 780 from 940. For it to resume growth, admissions must recover despite increased promotional activity.",
     "facts": [
      "P6",
      "P3"
     ],
     "quotes": [
-     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue, driven by strong growth in distribution"
+     "Revenue for Theme Parks decreased primarily due to lower revenue from park admissions, including from the impact of increased promotional activity.",
+     "Revenue increased primarily due to an increase in revenue at our theme parks in Orlando, driven by the opening of Epic Universe in May 2025."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the segment tables. The reading that the event is non-recurring is inferred from the 'excluding' line.",
-    "claim": "Media revenue rose in the third quarter to $5,359 (table in millions) from $4,744, up 13.0%. Excluding the FIFA World Cup it was $5,136, up 8.3%. Domestic distribution grew 22.4%. Sustained growth requires distribution gains to continue once event-driven revenue is stripped out.",
+    "basis": "Figures are stated in the cited items; the link between share count and EPS is inferred.",
+    "claim": "Per-share earnings are growing faster than net income because of a shrinking share count and lower interest cost. Diluted EPS was 0.97 against 0.90, net income attributable to Comcast rose 3.5%, diluted weighted shares fell to 3,562 from 3,689 (millions), and interest expense fell to 962 from 1,128 (table in millions).",
     "facts": [
-     "P6"
-    ],
-    "quotes": [],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Figures and the box office statement are stated. Dependence on releases is inferred from the licensing decline and the risk factors.",
-    "claim": "Studios earnings are growing on theatrical strength. Theatrical revenue was $1,129 (table in millions) against $639, up 76.6%, and Studios Adjusted EBITDA was $402 against $339. Continued growth needs further successful film releases, because licensing revenue is lumpy.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Universal surpassed $5 billion at the global box office"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Quarter figures and management confidence are stated. The Epic Universe contribution is stated in the 10-K.",
-    "claim": "Theme Parks is a stated long-term growth business but is currently a drag. Third-quarter revenue was $2,597 (table in millions) against $2,717, down (4.4%). Adjusted EBITDA was $780 against $940, down (17.1%). A recovery requires the cyclical headwinds management describes to ease.",
-    "facts": [
-     "P6",
-     "P3"
-    ],
-    "quotes": [
-     "Despite near-term cyclical headwinds in Theme Parks, we remain confident in the business's long-term growth potential."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Figures and the interest explanation are stated. The link from share count to EPS is inferred.",
-    "claim": "Per-share earnings are growing faster than net income. Net income attributable to Comcast was $3,448 (table in millions) against $3,332, and diluted EPS was $0.97 against $0.90. Diluted shares fell to 3,562 million from 3,689 million, and interest expense fell to 962 from 1,128. This needs a continued lower share count and lower debt.",
-    "facts": [
-     "F2",
      "P4",
-     "P6"
+     "P6",
+     "F2"
     ],
     "quotes": [
      "Consolidated interest expense decreased for the three and nine months ended September 30, 2026 compared to the same period in 2025 primarily due to a decrease in average debt outstanding."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Figures are stated in the cash flow statement and balance sheet. The funding relationship is inferred.",
-    "claim": "Cash generation funds balance-sheet repair and shareholder returns. Nine-month operating cash flow was 22,886 (table in millions) against 24,802. Capital expenditures were 8,311, debt repurchases and repayments were 10,405, and dividends were 3,606. Noncurrent debt fell to 83,806 from 92,979. This needs operating cash flow to stay near current levels.",
+    "basis": "The suspension and the repurchase amounts are stated; the effect on EPS is inferred.",
+    "claim": "The buyback support to EPS may fade. Repurchases were 2,517 in the nine months against 5,618 a year earlier (table in millions), and the program is suspended through the proposed separation.",
     "facts": [
-     "F3",
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "Comcast suspended its share repurchase program beginning in the third quarter"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the cited statements and release; the link between free cash flow and repayments is inferred.",
+    "claim": "Cash generation funds deleveraging. Free cash flow was $4.2 billion (4,211 against 4,945, down 14.8%), and nine-month debt repayments of 10,405 (table in millions) helped cut noncurrent debt to 83,806 from 92,979. Continuation requires free cash flow to hold.",
+    "facts": [
+     "P6",
      "F1",
-     "P6"
+     "F3"
     ],
     "quotes": [
      "We generated $4.2 billion in free cash flow"
@@ -1250,26 +1377,13 @@
     "support": "supported"
    },
    {
-    "basis": "Pro forma figures and the cost-initiative language are stated. That the base is stable is inferred; the pro forma definition is not shown.",
-    "claim": "Reported earnings fell largely because of the Versant separation and the sale of Sky Germany. On a pro forma basis, third-quarter Adjusted EBITDA was $9,106 (table in millions) against $9,038, up 0.8%, so the underlying base is roughly stable. Growth therefore depends on management's cost-saving initiatives offsetting margin pressure in the residential business.",
+    "basis": "Stated in the Q3 release; the conclusion about the base is inferred.",
+    "claim": "After adjusting for the Versant separation and the Germany sale, the base is roughly stable: pro forma revenue was 29,298 against 29,151 and pro forma Adjusted EBITDA was 9,106 against 9,038 (table in millions). The reported decline is largely structural, so the growth drivers above must add to a flat base.",
     "facts": [
-     "P6",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "including through cost saving initiatives designed to simplify our operations and improve efficiency"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q.",
-    "claim": "The planned spin-off of NBCUniversal and Sky is the structural path management links to future growth. It is not assured: it depends on conditions that have not yet been met.",
-    "facts": [
-     "P5",
-     "P4"
-    ],
-    "quotes": [
-     "The NBCUniversal Spin-off will be subject to the satisfaction of customary conditions, including obtaining final approval by our Board of Directors, receipt of tax opinions and regulatory approvals, and completion of financing arrangements."
+     "revenue and Adjusted EBITDA were consistent with the prior year period."
     ],
     "support": "supported"
    }
@@ -1277,10 +1391,10 @@
   "material_events": [
    {
     "basis": "stated in the cited items",
-    "claim": "Comcast completed the spin-off of Versant, a company holding certain former cable networks and digital platforms, as an independent public company.",
+    "claim": "Comcast completed the separation of Versant into an independent, publicly traded company, distributing 100% of Versant shares to Comcast shareholders.",
     "facts": [
-     "P4",
-     "P1"
+     "P1",
+     "P4"
     ],
     "quotes": [
      "The Versant Separation occurred on January 2, 2026."
@@ -1288,10 +1402,11 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Comcast completed the sale of its Sky operations in Germany.",
+    "basis": "stated in the cited items",
+    "claim": "Comcast completed the sale of its Sky operations in Germany; results are included in consolidated results through the sale date and excluded from segment results.",
     "facts": [
-     "P4"
+     "P4",
+     "P6"
     ],
     "quotes": [
      "The sale of our Sky operations in Germany was completed on May 31, 2026"
@@ -1300,10 +1415,11 @@
    },
    {
     "basis": "stated in the cited items",
-    "claim": "Comcast announced its intention to split into two independent public companies through a tax-free spin-off of NBCUniversal and Sky. It is expected to complete in mid-2027, subject to conditions.",
+    "claim": "Comcast announced its intention to separate into two independent publicly traded companies through a tax-free spin-off of NBCUniversal and Sky. Completion is expected in mid-2027 and is subject to customary conditions.",
     "facts": [
      "P4",
-     "P5"
+     "P5",
+     "P6"
     ],
     "quotes": [
      "In June 2026, we announced our intention to separate into two independent publicly traded companies through a tax-free spin-off of NBCUniversal and Sky."
@@ -1311,101 +1427,108 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited items",
-    "claim": "Comcast sold its interest in Hulu and recognized a pre-tax gain of $9.4 billion.",
+    "basis": "stated in the cited item",
+    "claim": "Comcast suspended its share repurchase program starting in the third quarter and expects the pause to last through the proposed separation.",
     "facts": [
-     "P3",
-     "P4"
+     "P6"
     ],
     "quotes": [
-     "In June 2025, we sold our interest in Hulu, at which time we recognized the sale of our interest with a pre-tax gain of $9.4 billion (see Note 8)."
+     "Comcast suspended its share repurchase program beginning in the third quarter and expects the pause to remain in place through the proposed separation of its businesses into two independent publicly traded companies."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in the 10-Q and earnings release tables and MD&A; the mechanism is inferred from the 10-K discussion of pricing.",
-    "claim": "Domestic residential broadband customer losses widened to (144) in Q3 2026 from (91) a year earlier (table in thousands). Domestic broadband revenue fell (4.7%), and the Residential Connectivity & Platforms Adjusted EBITDA margin slipped to 35.9% from 36.8%. Management links customer losses to competition.",
+    "basis": "Stated in the Q3 release and the 10-K risk factors; the link to long-run erosion is inferred.",
+    "claim": "Residential Connectivity & Platforms is under pressure: Q3 Adjusted EBITDA was $6,110 against $6,484 a year earlier (table in millions), and domestic broadband residential customer net losses were 144,000.",
     "facts": [
      "P6",
-     "P4"
+     "P2"
     ],
     "quotes": [
-     "Our customer relationship net additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
+     "Domestic broadband revenue decreased due to lower average rates and a decline in the number of domestic broadband customers.",
+     "Our businesses operate in intensely competitive, consumer-driven, rapidly changing environments."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in the 10-K risk factors and MD&A and in the Q3 release tables; the offset is stated in the 10-K MD&A.",
-    "claim": "Linear video keeps shrinking. Q3 2026 video revenue fell (8.7%) and domestic video customers had net losses of (274) (table in thousands). The 10-K says shifting consumption to streaming lowers video customers, video revenue and network subscriber fees.",
-    "facts": [
-     "P6",
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "As consumers increasingly turn to DTC streaming services in lieu of linear video services, which continue to experience accelerated net customer losses, our video customers and video revenues, and linear television network subscriber fees received from video service providers, each decrease."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q MD&A and Item 1A risk factor and in the earnings release.",
-    "claim": "The planned spin-off of NBCUniversal and Sky is expected in mid-2027 and carries execution and tax risk. It depends on board approval, tax opinions, regulatory approvals and financing. The company warns it may not occur or may not be tax-free, and that the two companies would be smaller.",
+    "basis": "Stated in the 10-Q MD&A and risk factors.",
+    "claim": "The planned spin-off of NBCUniversal and Sky is not certain and could be delayed or fail. It is expected in mid-2027 and depends on board approval, tax opinions, regulatory approvals and financing.",
     "facts": [
      "P4",
-     "P5",
-     "P6"
+     "P5"
     ],
     "quotes": [
-     "There is no guarantee that the NBCUniversal Spin-off, if completed, will be successful in meeting its objectives or achieving its intended benefits.",
-     "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+     "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions.",
+     "There is no guarantee that the NBCUniversal Spin-off, if completed, will be successful in meeting its objectives or achieving its intended benefits."
     ],
     "support": "supported"
    },
    {
-    "basis": "Cash flow figures are stated in the filings; the mechanism is inferred from them.",
-    "claim": "Cash generation is lower year on year while capital spending is higher. Nine-month operating cash flow was 22,886 versus 24,802, and Q3 free cash flow was $4,211 versus $4,945, down (14.8%). Capital expenditures were (8,311) versus (8,001) (cash flow table in millions).",
+    "basis": "Stated in the 10-Q risk factor.",
+    "claim": "If the NBCUniversal Spin-off were determined to be taxable, Comcast and/or its shareholders could face substantial taxes and significant liabilities.",
     "facts": [
-     "F3",
-     "P6",
-     "F1"
+     "P5"
+    ],
+    "quotes": [
+     "In addition, although we intend for the NBCUniversal Spin-off to be tax-free to our shareholders for U.S. federal income tax purposes, there can be no assurance that the NBCUniversal Spin-off will qualify as tax-free and, if the NBCUniversal Spin-off is ultimately determined to be taxable, we and/or holders of our common stock could be subject to substantial U.S. and/or applicable non-U.S. taxes as a result, and we could incur significant liabilities under applicable law."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 release; the characterisation of the cause is management's.",
+    "claim": "Theme Parks earnings are weakening: Q3 Adjusted EBITDA was $780 against $940 a year earlier (table in millions), with lower park admissions revenue and more promotional activity.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Revenue for Theme Parks decreased primarily due to lower revenue from park admissions, including from the impact of increased promotional activity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The event contribution is stated; the recurrence concern is inferred.",
+    "claim": "Part of the Q3 Media improvement came from a one-off event: the FIFA World Cup added $224 million of incremental revenue, and Media revenue growth was 8.3% without it. Gains in Media may not recur once the event is excluded.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Excluding $224 million of incremental revenue from the FIFA World Cup, Media revenue increased 8.3%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance-sheet and cash-flow figures are stated; the risk framing is inferred, and the evidence does not identify a specific liquidity threat.",
+    "claim": "The company carries sizeable debt: $3,560 current and $83,806 noncurrent against $7,596 of cash (table in millions), and nine-month operating cash flow fell to $22,886 from $24,802.",
+    "facts": [
+     "F1",
+     "F3"
     ],
     "quotes": [],
-    "support": "supported"
-   },
-   {
-    "basis": "Segment figures and management's description are stated in the release; the cost mechanism is inferred from the 10-Q MD&A comments on Epic Universe.",
-    "claim": "Theme Parks weakened in Q3 2026: revenue fell (4.4%) and Adjusted EBITDA was $780 versus $940, down (17.1%) (table in millions). Management cites near-term cyclical headwinds.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Despite near-term cyclical headwinds in Theme Parks, we remain confident in the business's long-term growth potential."
-    ],
     "support": "supported"
    }
   ],
   "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in the cited items; the outcome is not in the evidence.",
-    "claim": "Will the NBCUniversal and Sky spin-off be completed in mid-2027 on the intended tax-free basis, and on what terms?",
+    "basis": "Stated in P4 and P5; the 'on track' language is in P6.",
+    "claim": "Will the NBCUniversal and Sky spin-off close on the expected mid-2027 timeline and qualify as tax-free? The filings say it depends on unmet conditions.",
     "facts": [
      "P4",
      "P5"
     ],
     "quotes": [
-     "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions."
+     "The NBCUniversal Spin-off is expected to be completed in mid-2027, subject to the satisfaction of customary conditions.",
+     "There can be no assurance that a separation transaction will occur, or, if one does occur, of its terms or timing."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the stated financing condition and the balance sheet debt; no financing terms appear in the evidence.",
-    "claim": "How will existing debt be divided between the two companies, and what financing arrangements does the spin-off require? The September 30, 2026 balance sheet shows 83,806 noncurrent and 3,560 current debt (table in millions).",
+    "basis": "The debt figures are in F1 and the financing condition is in P5. The allocation is not in the evidence, so the open question is inferred.",
+    "claim": "How will the existing debt be split between the two companies after the spin-off, and what financing arrangements are planned? At September 30, 2026 the balance sheet showed 83,806 of noncurrent debt and 3,560 of current debt (table in millions).",
     "facts": [
      "F1",
-     "F3",
      "P5"
     ],
     "quotes": [
@@ -1414,95 +1537,80 @@
     "support": "supported"
    },
    {
-    "basis": "Stated by management in the cited items; the net effect is not shown.",
-    "claim": "Will the free wireless line offer reduce residential broadband customer losses enough to offset lower broadband revenue per customer? Q3 domestic broadband revenue fell (4.7%) and residential broadband customers had net losses of (144) thousand.",
+    "basis": "Management's explanation is stated in P6 and P4. Whether the decline is temporary is inferred as unresolved, because the evidence gives no duration.",
+    "claim": "Is the Residential Connectivity & Platforms Adjusted EBITDA decline temporary investment in the go-to-market strategy, or does it reflect lasting competitive pressure? Q3 Adjusted EBITDA was 6,110 against 6,484 a year earlier (table in millions), and the margin fell to 35.9% from 36.8%.",
     "facts": [
-     "P4",
-     "P6"
+     "P6",
+     "P4"
     ],
     "quotes": [
-     "which we expect will improve customer retention and strengthen our ability to compete for new customers, but will negatively impact average domestic broadband revenue per customer."
+     "Residential Connectivity & Platforms revenue and Adjusted EBITDA performance reflect the investment in our go-to-market strategy.",
+     "Our customer relationship net additions/(losses) continue to be negatively impacted by an increasingly competitive environment."
     ],
     "support": "supported"
    },
    {
-    "basis": "Margins are stated in the items; the link to cost initiatives is inferred.",
-    "claim": "Will Connectivity & Platforms Adjusted EBITDA margin stabilize? The Q3 total margin was 38.6% versus 39.3%, with Adjusted EBITDA down (4.4%), despite cost-saving initiatives.",
+    "basis": "The pause is stated in P6 and the repurchase figures are in F3. The post-separation policy is not in the evidence.",
+    "claim": "How long will the share repurchase pause last, and what dividend and buyback policy will each company follow after the separation? Nine-month repurchases fell to 2,517 from 5,618 (table in millions).",
     "facts": [
-     "P4",
+     "F3",
      "P6"
     ],
     "quotes": [
-     "We continue to focus on growing our higher-margin connectivity businesses while managing overall operating costs, including through cost saving initiatives designed to simplify our operations and improve efficiency."
+     "As previously announced, Comcast suspended its share repurchase program beginning in the third quarter and expects the pause to remain in place through the proposed separation of its businesses into two independent publicly traded companies."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred; the balance sheet shows the change but no cited item attributes it.",
-    "claim": "How much of the fall in goodwill from 61,502 to 53,239 and in other intangibles was due to the Versant separation, the Sky Germany sale, or impairments? Figures are from a table in millions.",
+    "basis": "The figures and management's cyclical framing are stated in P6. The cause is not established, so the question is inferred.",
+    "claim": "Are the Theme Parks declines cyclical, or do they stem from lower admissions revenue and higher promotional activity? Q3 Adjusted EBITDA was 780 against 940 (table in millions), a 17.1% decrease.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Despite near-term cyclical headwinds in Theme Parks, we remain confident in the business's long-term growth potential.",
+     "Revenue for Theme Parks decreased primarily due to lower revenue from park admissions, including from the impact of increased promotional activity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balance sheet change is in F1. The Versant, Germany sale and impairment items are in P4. The allocation is not in the packet.",
+    "claim": "How much of the fall in goodwill and other intangibles came from the Versant separation, the Sky Germany sale, or impairments? Goodwill went to 53,239 from 61,502 (table in millions).",
     "facts": [
      "F1",
      "P4"
     ],
     "quotes": [
-     "The sale of our Sky operations in Germany was completed on May 31, 2026; its results are included in our consolidated results of operations through the date of sale (see Note 6) and are excluded from our segment operating results."
+     "increased impairments of certain long-lived assets in the current year period compared to the prior year period"
     ],
     "support": "supported"
    },
    {
-    "basis": "Declines are stated in the item; the cause is not explained in the retained text.",
-    "claim": "How long will the Theme Parks 'cyclical headwinds' last? Q3 Theme Parks revenue fell (4.4%) and Adjusted EBITDA fell (17.1%).",
+    "basis": "The inclusion of World Cup amounts is stated in P6. The size of the effect is not given, so the question is inferred.",
+    "claim": "How much of Peacock's $261 million Q3 Adjusted EBITDA came from the one-time FIFA World Cup, and is the profit repeatable in quarters without that event?",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Despite near-term cyclical headwinds in Theme Parks, we remain confident in the business's long-term growth potential."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the separate FIFA line; the Adjusted EBITDA effect is not stated.",
-    "claim": "Is Peacock's profitability, and the Media Adjusted EBITDA gain to $769 from $247, sustainable beyond the FIFA World Cup? Peacock earned $261 million of Adjusted EBITDA on $1.8 billion of revenue. Media figures are from a table in millions.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Peacock delivered its second consecutive profitable quarter, generating $261 million in Adjusted EBITDA on $1.8 billion in revenue, driven by strong growth in distribution"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Inferred from the pro forma label and the MD&A's description of the Versant and Germany effects.",
-    "claim": "What is the underlying trend once Versant and Sky Germany are removed? Reported Q3 Adjusted EBITDA fell (5.8%), while pro forma Adjusted EBITDA is shown as $9,106 versus $9,038, up 0.8%. The pro forma adjustments were not visible in the retained text.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "Pro Forma Adjusted EBITDA1 | $9,106 | $9,038 | 0.8%"
+     "which includes amounts attributable to the FIFA World Cup"
     ],
     "support": "supported"
    }
   ]
  },
  "ticker": "CMCSA",
- "under_review": {
-  "headline": "Prejudgment Interest Boosts WhereverTV\u2019s Award to $334M in Patent Fight Against Comcast",
-  "id": "4f4197bf9e67",
-  "since": "2026-11-25",
-  "why": "A federal judge added $121 million in prejudgment interest, boosting WhereverTV's patent judgment against Comcast to $334 million."
- },
- "upside": 0.9023515389646408,
+ "under_review": null,
+ "upside": 0.9551440341156925,
  "valuation": null,
- "value_base": 46.86246644424611,
- "value_bear": 37.366531862204496,
- "value_bull": 56.2907353451788,
+ "value_base": 48.162955066801466,
+ "value_bear": 37.87771944975481,
+ "value_bull": 61.81995122728303,
  "value_per_filed_share": {
-  "base": 46.86246644424611,
-  "bear": 37.366531862204496,
-  "bull": 56.2907353451788
+  "base": 48.162955066801466,
+  "bear": 37.87771944975481,
+  "bull": 61.81995122728303
  },
  "valued": true,
  "verdict": "BUY",
- "verdict_reason": "expected return +24.3 points a year against the required return over 3 years"
+ "verdict_reason": "expected return +26.3 points a year against the required return over 3 years"
 }
