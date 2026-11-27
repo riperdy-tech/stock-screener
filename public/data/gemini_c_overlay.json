@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T03:09:54Z",
+ "generated_at": "2026-11-27T03:26:22Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "gemini-4-hydrogen-high",
@@ -9422,30 +9422,63 @@
    "verdict_reason": "expected return +6.1 points a year against the required return over 3 years; the two runs do not both reach BUY"
   },
   "PSA": {
-   "alpha_pts": null,
+   "alpha_pts": -2.553466740430521,
    "analysis": "complete",
-   "claims": 73,
-   "claims_supported": 66,
-   "date": "2026-11-17T08:32:20Z",
-   "family": "family_not_built",
+   "based_on": {
+    "accepted": "2026-10-26T20:14:59.000Z",
+    "accepted_utc": "2026-10-27T00:14:59Z",
+    "accession": "0001628280-26-067286",
+    "decision_time": "2026-11-27T03:10:21Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 88,
+   "claims_supported": 87,
+   "date": "2026-11-27T03:10:21Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 57481420434.82189,
+   "family": "real_estate",
+   "far_from_price": false,
+   "filed_shares": 186843449.0,
    "flags": [
-    "Public Storage closed its acquisition of National Storage Affiliates Trust (NSA).",
-    "Public Storage completed its acquisition of PS Canada.",
-    "In its third quarter release, Public Storage raised its 2026 guidance for Same Store NOI and Core FFO per share."
+    "Public Storage completed the all-stock acquisition of National Storage Affiliates Trust (NSA), expanding its portfolio to over 4,500 locations and more than 327 million operating square feet, and provided a $237 million mezzanine loan to the PS-NSA JV at an average interest rate of 10.22%.",
+    "Public Storage completed the acquisition of PS Canada (68 properties totaling 5.3 million square feet) for US $1.2 billion including assumed debt, plus potential earn-out consideration of up to 768,000 PS OP Units.",
+    "Public Storage Operating Company issued $900 million aggregate principal amount of senior notes at an effective interest rate of 4.855% ($400 million at 4.700% and $500 million at 5.150%), receiving $886 million of net proceeds."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-sonnet-5-5",
+   "ke": 0.08651648297658487,
+   "market_cap_at_publish": 63149357061,
+   "model": "gemini-4-hydrogen-high",
    "news_count": 0,
-   "no_value_reason": "no valuation route yet for a real estate company or trust",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 337.98,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
+   "release_truncated": [],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 299.4967354801545,
+    "3000": 315.7929173545231
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no valuation route yet for a real estate company or trust"
+   "upside": -0.08975446291089051,
+   "value_base": 307.6448264173388,
+   "value_bear": 232.78340522062052,
+   "value_bull": 410.7533842428215,
+   "value_per_filed_share": {
+    "base": 307.6448264173388,
+    "bear": 232.78340522062052,
+    "bull": 410.7533842428215
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -2.6 points a year against the required return over 3 years"
   },
   "PTCT": {
    "alpha_pts": 56.99314866521665,
@@ -13106,11 +13139,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 169,
+ "valued_count": 170,
  "verdict_counts": {
-  "AVOID": 74,
+  "AVOID": 75,
   "BUY": 63,
-  "NO_CALL": 91,
+  "NO_CALL": 90,
   "WATCH": 22
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
