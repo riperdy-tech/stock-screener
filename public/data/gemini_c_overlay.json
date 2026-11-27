@@ -2,7 +2,7 @@
  "count": 250,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-27T00:03:25Z",
+ "generated_at": "2026-11-27T00:09:33Z",
  "list_covered": 159,
  "list_names": 159,
  "model": "claude-sonnet-5-5",
@@ -6970,30 +6970,70 @@
    "verdict_reason": "expected return -8.1 points a year against the required return over 3 years"
   },
   "LFST": {
-   "alpha_pts": null,
+   "alpha_pts": -13.68077911747089,
    "analysis": "complete",
-   "claims": 116,
-   "claims_supported": 113,
-   "date": "2026-11-17T03:19:30Z",
-   "family": "family_not_built",
+   "based_on": {
+    "accepted": "2026-11-05T21:04:14.000Z",
+    "accepted_utc": "2026-11-06T02:04:14Z",
+    "accession": "0001193125-26-449746",
+    "decision_time": "2026-11-27T00:04:12Z",
+    "form": "10-Q",
+    "period": "2026-09-30"
+   },
+   "claims": 59,
+   "claims_supported": 55,
+   "date": "2026-11-27T00:04:12Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 3532793491.119655,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 380190724.0,
    "flags": [
-    "LifeStance reported third quarter 2026 revenue of $455.9 million and raised its full year 2026 outlook, with revenue guidance raised to $1.741 billion to $1.761 billion.",
-    "The company entered into an underwriting agreement for a secondary offering of 45,000,000 shares sold entirely by selling stockholders, and the company purchased 2,000,000 of those shares from the underwriters; the offering closed on November 12, 2026.",
-    "The company entered into an underwriting agreement for a secondary offering of 22,250,000 shares sold by selling stockholders and agreed to purchase 2,000,000 of those shares from the underwriter; the offering closed on September 11, 2026."
+    "The company says it is no longer a Nasdaq \"controlled company\", so it is phasing in independent-committee governance requirements.",
+    "Underwritten public offerings of company shares by certain selling stockholders were completed in the three and nine months ended September 30, 2026, and the company incurred related transaction costs.",
+    "The company repurchased common stock in the nine months ended September 30, 2026, with no repurchases in the prior-year period."
    ],
    "in_code_book": false,
-   "ke": null,
-   "model": "claude-opus-5-5",
+   "ke": 0.08149794340513286,
+   "loss_record": {
+    "cause": "profit_in_newest_year",
+    "explanation": "",
+    "label": "operating income was at or below zero in 3 of the last 4 fiscal years; the newest year earned an operating profit, and the value rests on it",
+    "quotes": [],
+    "version": "thin_record.v1 2026-11-27"
+   },
+   "market_cap_at_publish": 5505161042,
+   "model": "claude-sonnet-5-5",
    "news_count": 0,
-   "no_value_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 14.48,
    "qwen_book": null,
-   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
-   "source": "screener list refresh",
+   "release_truncated": [],
+   "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 9.495561605255073,
+    "3000": 9.088760778789496
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "on request (method_changed)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "no valuation route yet for a company with no operating profit in 3 of its last 4 fiscal years"
+   "upside": -0.358276085991445,
+   "value_base": 9.292161192022284,
+   "value_bear": 4.760591716314227,
+   "value_bull": 15.257958531552287,
+   "value_per_filed_share": {
+    "base": 9.292161192022284,
+    "bear": 4.760591716314227,
+    "bull": 15.257958531552287
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -13.7 points a year against the required return over 3 years"
   },
   "LH": {
    "alpha_pts": -2.4472307242812104,
@@ -12926,11 +12966,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 164,
+ "valued_count": 165,
  "verdict_counts": {
-  "AVOID": 73,
+  "AVOID": 74,
   "BUY": 61,
-  "NO_CALL": 95,
+  "NO_CALL": 94,
   "WATCH": 21
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
