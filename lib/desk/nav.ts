@@ -23,7 +23,7 @@ export interface Trade {
 }
 
 // QQQ first: it is the benchmark the paper books are judged against (operator ruling 2026-10-06).
-// Operator 2026-11-28: the AI book is read against a 60/40 portfolio, QQQ, SPY, IWM, DRAM and SOXL. SOXX stays behind "+ more".
+// Operator 2026-11-27: the AI book is read against a 60/40 portfolio, QQQ, SPY, IWM, DRAM and SOXL. SOXX stays behind "+ more".
 export const SIXTY_FORTY = '60/40';
 export const BENCHMARKS = ['QQQ', 'SPY', 'IWM', SIXTY_FORTY, 'DRAM', 'SOXL', 'SOXX'] as const;
 

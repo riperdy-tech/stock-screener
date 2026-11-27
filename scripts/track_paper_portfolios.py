@@ -89,7 +89,7 @@ price_asof_holder = {}
 
 COST_BPS = 25  # real KIS overseas commission per side (user 2026-07-20); was 10 (idealized)
 BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM", "SOXL", "AGG"]  # small-cap, S&P500, Nasdaq-100, semis, memory; SOXL (3x semis) and AGG
-# (US bonds, the 40 of the 60/40 the Track page draws from SPY and AGG) added 2026-11-28, operator: the AI book is read against these
+# (US bonds, the 40 of the 60/40 the Track page draws from SPY and AGG) added 2026-11-27, operator: the AI book is read against these
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
 POST_EXIT_DAYS = 30
