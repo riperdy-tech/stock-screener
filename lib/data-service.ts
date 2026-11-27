@@ -529,6 +529,8 @@ export interface QwenReport {
     news?: NewsWarning[];
     /** The newest serious news warning raised after the newest filing the report read; the value reads filings only. */
     under_review?: { since: string; headline: string; why: string; id: string } | null;
+    /** A news re-read (rs2-local, 2026-11-28): `in_value.inputs` are the valuation inputs whose reason quotes a press report; `value_before` is per filed share. */
+    news_read?: { in_value?: { inputs: string[]; runs_citing: number; runs: number; value_before: number | null } | null } | null;
 }
 
 export interface NewsWarning {

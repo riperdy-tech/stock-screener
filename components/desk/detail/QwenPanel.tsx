@@ -54,6 +54,11 @@ export function QwenPanel({ ticker, live }: { ticker: string; live: number | nul
             {q.under_review && (
                 <p className="mt-1 text-[12px] text-warn">{fill(t('pgNwReview'), { date: q.under_review.since, why: q.under_review.why })}</p>
             )}
+            {(q.news_read?.in_value?.inputs ?? []).length > 0 && (
+                <p className="mt-1 text-[12px] text-warn">
+                    {fill(t('pgNwInValue'), { inputs: (q.news_read?.in_value?.inputs ?? []).join(', ') })}
+                </p>
+            )}
 
             {q.valued ? (
                 <p className="mt-1 font-mono text-[12px] text-ink-2">
