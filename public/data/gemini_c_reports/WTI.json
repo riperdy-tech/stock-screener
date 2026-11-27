@@ -6,62 +6,58 @@
   "accepted": "2026-10-29T21:00:35.000Z",
   "accepted_utc": "2026-10-30T01:00:35Z",
   "accession": "0001104659-26-120259",
-  "decision_time": "2026-11-20T00:15:18Z",
+  "decision_time": "2026-11-27T11:04:22Z",
   "form": "10-Q",
   "period": "2026-09-30"
  },
- "claims": 98,
- "claims_supported": 90,
- "date": "2026-11-20T00:15:18Z",
+ "claims": 113,
+ "claims_supported": 96,
+ "date": "2026-11-27T11:04:22Z",
  "family": "commodity",
  "flags": [
-  "W&T Offshore declared a regular quarterly dividend of $0.01 per share of common stock for the fourth quarter of 2026, payable on November 19, 2026 to stockholders of record on November 12, 2026.",
-  "W&T Offshore reported third quarter 2026 operational and financial results, including a net loss of $13.6 million, or $(0.09) per diluted share, and Adjusted Net Income of $0.9 million, or $0.01 per diluted share.",
-  "W&T Offshore entered into the Second Amendment to its Credit Agreement, converting its $50.0 million revolving credit facility into a reserve-based revolving credit facility with an aggregate maximum credit amount of $100.0 million and eliminating the 75% excess cash flow sweep and $100.0 million minimum PDP PV-10 covenant."
+  "W&T converted its $50.0 million revolving credit facility into a reserve-based revolving credit facility with an aggregate maximum credit amount of $100.0 million and an initial elected commitment of $50.0 million.",
+  "W&T utilized its At-the-Market agreement to issue 3.6 million common shares with net proceeds of $14.7 million (reported as 14,670, table in thousands).",
+  "W&T declared a regular quarterly dividend of $0.01 per share of common stock for the fourth quarter, payable to stockholders of record."
  ],
  "in_code_book": false,
  "ke": null,
+ "loss_record": {
+  "cause": "operating_losses",
+  "explanation": "In both 2024 and 2025, total operating expenses ($567,455 thousand and $554,265 thousand) exceeded total revenues ($525,261 thousand and $501,462 thousand), generating operating losses before interest and taxes. Although operating income turned positive in the first nine months of 2026 ($49,086 thousand versus an operating loss of $33,707 thousand in the prior-year period), the prior full-year losses and nine-month 2026 derivative losses ($42,230 thousand) and interest expense ($27,373 thousand) kept pretax income negative.",
+  "label": "the continuing operations themselves lose money",
+  "quotes": [
+   {
+    "id": "F2",
+    "quote": "Operating income (loss) | 11,821 | (12,610) | 49,086 | (33,707)"
+   }
+  ],
+  "version": "why_losses.v1 2026-11-18 WO_NC5"
+ },
  "model": "gemini-4-hydrogen-high",
  "news": [],
- "no_value_reason": "no positive earnings base",
+ "no_value_reason": "the filings show the continuing operations themselves losing money, so no value is given",
  "pending_offer": null,
  "qwen_book": null,
  "release_truncated": [],
- "screener_commit": "36df9bfc9d4903cf63c14e67a378c67723080252",
- "source": "screener list refresh",
+ "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+ "source": "on request (method_changed)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated directly in the 2025 Form 10-K Item 1 (P1) and Item 7 (P3).",
-    "claim": "W&T Offshore, Inc. is an independent oil and natural gas producer operating offshore in the Gulf of America that derives revenue from selling oil, natural gas, and NGLs.",
+    "basis": "stated in P1",
+    "claim": "W&T Offshore, Inc. is an independent oil and natural gas producer operating substantially all of its business offshore in the Gulf of America through acquisition, exploration, and development.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
      "We are an independent oil and natural gas producer with substantially all our operations offshore in the Gulf of America.",
-     "Our revenues are derived from the sale of our oil and natural gas production, as well as the sale of NGLs."
+     "We are active in the acquisition, exploration and development of oil and natural gas properties."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q Condensed Consolidated Statements of Operations (F2).",
-    "claim": "For the 9 Months Ended Sep. 30, 2026, total revenues were $ 479,718 (table in thousands), comprising $ 322,330 from oil, 123,184 from natural gas, 22,069 from NGLs, and $ 12,135 from other revenues.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Total revenues | $ 167,080 | $ 127,515 | $ 479,718 | $ 379,749",
-     "Total revenues | $ 111,773 | $ 84,131 | $ 322,330 | $ 251,861",
-     "Total revenues | 9,121 | 4,000 | 22,069 | 13,487",
-     "Total revenues | 41,204 | 37,400 | 123,184 | 107,311",
-     "Total revenues | $ 4,982 | $ 1,984 | $ 12,135 | $ 7,090"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q Part I, Item 2 (P4).",
-    "claim": "As of September 30, 2026, the company held working interests in 48 offshore fields covering approximately 588,500 gross acres (455,800 net acres) in federal and state waters, with a majority of daily production derived from wells it operates.",
+    "basis": "stated in P4",
+    "claim": "As of September 30, 2026, the company held working interests in 48 offshore fields (41 in federal waters and seven in state waters) across approximately 588,500 gross acres (455,800 net acres), with a majority of daily production from wells it operates.",
     "facts": [
      "P4"
     ],
@@ -73,8 +69,33 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1 (P1).",
-    "claim": "The company sells its oil, NGLs, and natural gas to third-party customers under mostly short-term contracts at prices generally tied to monthly or daily indices quoted in industry publications.",
+    "basis": "stated in P1",
+    "claim": "The company operates in one reportable segment.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We operate in one reportable segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and F2",
+    "claim": "Revenues come from selling oil, natural gas, and NGLs plus an other revenue line; in 2025, total revenues were $501,462 (table in thousands) from oil ($327,845), natural gas (143,948), NGLs (20,371), and other (9,298), and in the first nine months of 2026, total revenues were $ 479,718 (table in thousands) from oil ($ 322,330), natural gas (123,184), NGLs (22,069), and other ($ 12,135).",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Our revenues are derived from the sale of our oil and natural gas production, as well as the sale of NGLs.",
+     "Total revenues |  | $501,462 |  | $525,261 |  | $(23,799)",
+     "Total revenues | $ 167,080 | $ 127,515 | $ 479,718 | $ 379,749"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "The company sells its oil, NGLs, and natural gas to third-party customers under mostly short-term contracts of one year or less at prices generally tied to monthly or daily industry indices.",
     "facts": [
      "P1"
     ],
@@ -86,8 +107,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1 (P1).",
-    "claim": "In 2025, BP Products North America and Shell Trading (US) Company accounted for 33% and 17%, respectively, of oil, NGLs, and natural gas sales revenues, though management believes replacement customers could be obtained quickly due to the commoditized nature of the products.",
+    "basis": "stated in P1",
+    "claim": "In 2025, BP Products North America and Shell Trading (US) Company accounted for 33% and 17%, respectively, of oil, NGL, and natural gas sales revenues, though management states replacement customers could be obtained quickly due to commodity fungibility.",
     "facts": [
      "P1"
     ],
@@ -98,19 +119,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K Item 1 (P1).",
-    "claim": "The company operates in one reportable segment.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "We operate in one reportable segment."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Item 7 (P3) and Q3 2026 Form 10-Q Item 2 (P4).",
-    "claim": "Revenues are primarily driven by oil, NGLs, and natural gas production volumes and realized sales prices, which differ from WTI oil and NYMEX Henry Hub natural gas benchmarks due to quality, location, transportation, and volume-weighting differentials.",
+    "basis": "stated in P3 and P4",
+    "claim": "Revenues and cash flows are driven primarily by production volumes and realized sales prices, which differ from WTI oil and NYMEX Henry Hub natural gas benchmarks due to quality, location, volume-weighting, and transportation differentials.",
     "facts": [
      "P3",
      "P4"
@@ -122,177 +132,197 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q Item 2 (P4).",
-    "claim": "During the three months ended September 30, 2026, oil, NGL, and natural gas revenues increased by $36,567 (table in thousands) year over year\u2014driven by $32,355 from price changes and $4,212 from volume changes\u2014as production increased by 239 to 3,514 MBoe primarily due to a well recompletion at the Garden Banks 783 field.",
+    "basis": "stated in P3 and P4",
+    "claim": "Between 2024 and 2025, price changes reduced oil, NGL, and natural gas revenues by $(16,952) and volume mix by $(5,359) (table in thousands) even as production rose by 219 MBoe to 12,402 MBoe, whereas in the third quarter of 2026 versus 2025, higher realized prices added $32,355 and higher volumes added $4,212 (table in thousands) for a $36,567 increase.",
     "facts": [
+     "P3",
      "P4"
     ],
     "quotes": [
-     " | $32,355 |  | $4,212 |  | $36,567",
-     "Production volumes increased by 239 Mboe to 3,514 MBoe during the three months ended September 30, 2026 compared to the same period in 2025 primarily due to recompletion of a well at our Garden Banks 783 field."
+     "$(16,952) |  | $(5,359) |  | $(22,311)",
+     "Production volumes increased by 219 MBoe to 12,402 MBoe during 2025 compared to the same period in 2024, primarily due to restoring production at our West Delta 73, MO 916 and Main Pass 108 fields and increased production at our Mobile Bay fields due to well stimulation work and reduced downtime, partially offset by unplanned third party pipeline outages and the shut-in of a well due to solids production.",
+     "$32,355 |  | $4,212 |  | $36,567"
     ],
     "support": "quote_not_found"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1 (P1), Item 1A (P2), and Item 7 (P3).",
-    "claim": "Production and revenues are exposed to planned and unplanned downtime, Gulf of America storms, third-party infrastructure outages, and asset concentration\u2014with Mobile Bay Properties accounting for approximately 36% of production and 20% of total revenue in 2025 while experiencing approximately 686 MBoe of deferred production from shut-ins out of approximately 2.5 MMBoe total deferred production in 2025.",
+    "basis": "stated in P1, P2, and P6",
+    "claim": "Production and reserves rely on acquisitions, exploitation, exploration, workovers, and recompletions, while Gulf of America proved reserves have short lives with 34.0% of total proved reserves as of December 31, 2025 estimated to be depleted within three years.",
     "facts": [
      "P1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "We have continually grown our footprint in the Gulf of America through acquisitions, exploration and development.",
+     "During the third quarter of 2026, W&T performed seven workover projects and one recompletion that positively impacted production.",
+     "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Output is exposed to storm, third-party pipeline or plant, and mechanical shut-ins\u2014causing approximately 2.5 MMBoe of deferred production in 2025\u2014with high geographic concentration in the Mobile Bay Properties, which generated approximately 36% of production and 20% of total revenue in 2025.",
+    "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
-     "These shut-ins resulted in deferred production of approximately 686 MBoe based on production rates prior to the shut-ins.",
      "For 2025, we estimate deferred production was approximately 2.5 MMBoe.",
+     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
+     "During 2025, our Mobile Bay Properties were shut-in for various reasons, including compressor problems and downstream operated plant issues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, and F2",
+    "claim": "The company uses commodity derivative contracts on a portion of expected future production to manage price volatility, recording results outside product revenues in Derivative loss (gain), net, which was a (13,593) net gain in 2025 and a 42,230 net loss in the first nine months of 2026 (tables in thousands).",
+    "facts": [
+     "P2",
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "In order to manage our exposure to price risk in the marketing of our production, we have entered into commodity derivative positions with respect to a portion of our expected future production from oil and natural gas, and may in the future enter into commodity derivative positions with respect to oil or natural gas.",
+     "Our oil, NGL and natural gas revenues do not include the effects of derivatives, which are reported in Derivative gain, net in our Consolidated Statements of Operations.",
+     "While these commodity derivative positions are intended to reduce the effects of price volatility, they may also limit future income if prices were to rise substantially over the price established by such positions.",
+     "Derivative gain, net |  | (13,593) |  |  | (3,589) |  | (10,004)",
+     "Derivative loss (gain), net | 15,800 | (4,108) | 42,230 | (13,398)"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "Seasonal weather and demand patterns affect both revenue and operations, as natural gas demand and prices generally rise in winter while summer and fall tropical storms and periodic winter storms can force evacuations and shut in Gulf of America production.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Generally, the demand for and price of natural gas increases during the winter months and decreases during the summer months.",
      "Tropical storms and hurricanes occur in the Gulf of America during the summer and fall, which can require us to evacuate personnel and shut in production until a storm subsides."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 2025 Form 10-K Item 1A (P2).",
-    "claim": "Gulf of America proved reserves have relatively short reserve lives\u2014with 34.0% of total proved reserves as of December 31, 2025 estimated to be depleted within three years\u2014requiring ongoing capital investments or acquisitions to replace reserves and sustain revenue.",
+    "basis": "stated in P3 and F2",
+    "claim": "Lease operating expenses\u2014the largest operating cost at $298,781 in 2025 and 214,348 in the first nine months of 2026 (tables in thousands)\u2014are driven by direct labor, materials, supplies, repairs, third-party costs, insurance premiums, workover activity, facility maintenance, storm repairs, commodity mix, and property location.",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
-     "As a result, our need to replace proved reserves and production from new investments is relatively greater than that of producers who recover lower percentages of their proved reserves over a similar time period, such as those producers who have a larger portion of their proved reserves in areas other than the Gulf of America."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q financial statements (F2, F3) and MD&A (P4), and 2025 Form 10-K Item 1A (P2).",
-    "claim": "The company uses commodity derivative positions to manage price volatility for a portion of future production, recording gains and losses outside revenues in Derivative loss (gain), net\u2014resulting in a derivative loss of 42,230 and net derivative cash settlement outflows of (20,908) (tables in thousands) in the 9 Months Ended Sep. 30, 2026.",
-    "facts": [
-     "P2",
-     "P4",
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Our oil, NGL and natural gas revenues do not include the effects of derivatives, which are reported in Derivative loss (gain), net in our Condensed Consolidated Statements of Operations.",
-     "While these commodity derivative positions are intended to reduce the effects of price volatility, they may also limit future income if prices were to rise substantially over the price established by such positions.",
-     "Derivative loss (gain), net | 15,800 | (4,108) | 42,230 | (13,398)",
-     "Derivative cash (settlements) receipts, net | (20,908) | 14,169"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q statement of operations (F2) and MD&A (P4), and 2025 Form 10-K Item 7 (P3).",
-    "claim": "Lease operating expenses are the largest operating expense\u2014totaling 214,348 out of 430,632 in total operating expenses (table in thousands) for the 9 Months Ended Sep. 30, 2026\u2014and are driven by direct labor, materials, supplies, repairs, third-party costs, insurance premiums, workover activity, facility maintenance, commodity type, and property location.",
-    "facts": [
-     "F2",
      "P3",
-     "P4"
+     "F2"
     ],
     "quotes": [
-     "Lease operating expenses | 76,671 | 76,215 | 214,348 | 224,151",
-     "Total operating expenses | 155,259 | 140,125 | 430,632 | 413,456",
      "These operating costs are comprised of several components including direct or base lease operating expenses, insurance premiums, workover costs and facility maintenance expenses.",
-     "Expenses for direct labor, materials, supplies, repair, third-party costs and insurance comprise the most significant portion of our base lease operating expense."
+     "Expenses for direct labor, materials, supplies, repair, third-party costs and insurance comprise the most significant portion of our base lease operating expense.",
+     "Our lease operating costs, which depend in part on the type of commodity produced, the level of workover activity and the geographical location of the properties, increased $17.3 million to $298.8 million in 2025 compared to $281.5 million in 2024.",
+     "Lease operating expenses |  | $298,781 |  | $281,488 |  | $17,293",
+     "Lease operating expenses | 76,671 | 76,215 | 214,348 | 224,151"
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q statement of operations (F2) and 2025 Form 10-K Item 7 (P3).",
-    "claim": "Gathering, transportation, and production taxes (24,595 for the 9 Months Ended Sep. 30, 2026, table in thousands) are driven by post-production shipping costs, state severance taxes in Alabama, Louisiana, and Texas, and third-party processing routing.",
+    "basis": "stated in P2, P3, and F2",
+    "claim": "Depreciation, depletion, and amortization expense (116,405 in 2025 and 81,109 in the first nine months of 2026, tables in thousands) uses the full cost method and is driven by the depreciable cost base, future development costs, production volumes, and proved reserves, with low prices risking quarterly ceiling-test impairments.",
     "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Gathering, transportation and production taxes | 9,376 | 5,818 | 24,595 | 16,976",
-     "Gathering and transportation consist of costs incurred in the post-production shipping of oil, NGLs, and natural gas to the point of sale.",
-     "Production taxes consist of severance taxes levied by the Alabama Department of Revenue, the Louisiana Department of Revenue and the Texas Department of Revenue on production of oil and natural gas from land or water bottoms within the boundaries of each state."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q statement of operations (F2) and 2025 Form 10-K Items 1A and 7 (P2, P3).",
-    "claim": "Depreciation, depletion, and amortization (81,109 for the 9 Months Ended Sep. 30, 2026, table in thousands) expenses capitalized acquisition, exploration, and development costs under the full cost method and varies with production volumes, future development costs, proved reserves, and full-cost pool adjustments, with depressed commodity prices risking quarterly ceiling-test impairments.",
-    "facts": [
-     "F2",
      "P2",
-     "P3"
+     "P3",
+     "F2"
     ],
     "quotes": [
-     "Depreciation, depletion, and amortization | 28,266 | 28,580 | 81,109 | 87,917",
+     "Depreciation, depletion and amortization expense (\u201cDD&A\u201d) is the expensing of the capitalized costs incurred to acquire, explore and develop oil and natural gas reserves.",
      "We use the full cost method of accounting for oil and natural gas activities.",
-     "The DD&A rate per Boe decreased primarily as a result of decreases in future development costs and a lower depreciable base, partially offset by decreased proved reserves.",
-     "Impairments of our oil and gas properties are more likely to occur during prolonged periods of depressed oil, NGLs and natural gas pricing."
+     "Under the full cost method of accounting for oil and gas producing activities, a ceiling test is performed at the end of each quarter to determine if our oil and gas properties have been impaired.",
+     "Depreciation, depletion and amortization | 116,405 |  | 143,025 |  | (26,620)",
+     "Depreciation, depletion, and amortization | 28,266 | 28,580 | 81,109 | 87,917"
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q balance sheet and statement of operations (F1, F2), 2025 Form 10-K Item 7 (P3), and Q3 2026 earnings release (P6).",
-    "claim": "Offshore operations carry large asset retirement obligations (558,802 non-current and 22,010 current as of Sep. 30, 2026, table in thousands) that drive recurring accretion expense (25,899 for the 9 Months Ended Sep. 30, 2026, table in thousands), cash settlement outflows, assumptions of bankrupt partners' decommissioning obligations, and surety bonding litigation costs.",
+    "basis": "stated in P3, P6, and F2",
+    "claim": "General and administrative expenses (79,955 in 2025 and 84,026 in the first nine months of 2026, tables in thousands) reflect corporate payroll and benefits, headquarters and operational overhead, audit and legal fees, bad debt, and share-based compensation that moves with the company's share price alongside non-recurring surety litigation costs.",
+    "facts": [
+     "P3",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "General and administrative (\u201cG&A\u201d) expenses generally consist of costs incurred for overhead, including payroll and benefits for our corporate staff, costs of maintaining our headquarters, costs of managing our production operations, bad debt expense, share-based compensation costs, audit and other fees for professional services and legal compliance.",
+     "The increase was driven primarily by an increase in the Company\u2019s share price used to value certain of the Company\u2019s share-based compensation awards that are marked-to-market at the end of each reporting period.",
+     "General and administrative expenses |  | 79,955 |  | 82,391 |  | (2,436)",
+     "General and administrative expenses | 31,685 | 21,510 | 84,026 | 59,337"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P3 and F2",
+    "claim": "Gathering, transportation, and production taxes (25,743 in 2025 and 24,595 in the first nine months of 2026, tables in thousands) are driven by post-production shipping, third-party processing fees, and severance taxes levied by Alabama, Louisiana, and Texas.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Gathering and transportation consist of costs incurred in the post-production shipping of oil, NGLs, and natural gas to the point of sale.",
+     "Production taxes consist of severance taxes levied by the Alabama Department of Revenue, the Louisiana Department of Revenue and the Texas Department of Revenue on production of oil and natural gas from land or water bottoms within the boundaries of each state.",
+     "Gathering, transportation and production taxes |  | 25,743 |  | 28,177 |  | (2,434)",
+     "Gathering, transportation and production taxes | 9,376 | 5,818 | 24,595 | 16,976"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in F1, F2, F3, P3, and P6",
+    "claim": "Offshore asset retirement obligations (558,802 non-current and 22,010 current as of September 30, 2026, table in thousands) generate accretion expense (33,381 in 2025 and 25,899 in the first nine months of 2026, tables in thousands) and cash settlements ((26,512) in the first nine months of 2026, table in thousands), and can expand when bankrupt or insolvent partners or divestiture counterparties fail to perform abandonment duties.",
     "facts": [
      "F1",
-     "F2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Current portion of asset retirement obligations | 22,010 | 26,147",
-     "Asset retirement obligations | 558,802 | 535,704",
-     "Asset retirement obligations accretion | 8,606 | 8,002 | 25,899 | 25,075",
-     "Accretion expense increased to $33.4 million in 2025 compared to $32.4 million in 2024 primarily due to the increase in our ARO liability as a result of revisions to the estimates used in calculating the liability.",
-     "Settlement of decommissioning obligations as a result of working interest partners or counterparties of divestiture transactions that were unable to perform the required abandonment obligations due to bankruptcy or insolvency."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Q3 2026 Form 10-Q statements (F2, F3), 2025 Form 10-K Item 7 (P3), and Q3 2026 earnings release (P6).",
-    "claim": "General and administrative expenses (84,026 for the 9 Months Ended Sep. 30, 2026 versus 59,337 in the prior-year period, table in thousands) cover corporate overhead, management of production operations, legal compliance, and professional fees, and increased in 2026 largely due to higher non-cash share-based compensation (28,915 versus 8,497, table in thousands) tied to mark-to-market increases in the company's share price.",
-    "facts": [
      "F2",
      "F3",
      "P3",
      "P6"
     ],
     "quotes": [
-     "General and administrative expenses | 31,685 | 21,510 | 84,026 | 59,337",
-     "Share-based compensation | 28,915 | 8,497",
-     "General and administrative (\u201cG&A\u201d) expenses generally consist of costs incurred for overhead, including payroll and benefits for our corporate staff, costs of maintaining our headquarters, costs of managing our production operations, bad debt expense, share-based compensation costs, audit and other fees for professional services and legal compliance.",
-     "The increase was driven primarily by an increase in the Company\u2019s share price used to value certain of the Company\u2019s share-based compensation awards that are marked-to-market at the end of each reporting period."
+     "Accretion expense is the expensing of the changes in value of our ARO as a result of the passage of time over the estimated productive life of the related assets as the discounted liabilities are accreted to their expected settlement values.",
+     "Settlement of decommissioning obligations as a result of working interest partners or counterparties of divestiture transactions that were unable to perform the required abandonment obligations due to bankruptcy or insolvency.",
+     "Current portion of asset retirement obligations | 22,010 | 26,147",
+     "Asset retirement obligations | 558,802 | 535,704",
+     "Asset retirement obligation settlements | (26,512) | (24,873)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the Q3 2026 Form 10-Q statements (F1, F2) and 2025 Form 10-K Item 7 (P3).",
-    "claim": "Interest expense, net (27,373 for the 9 Months Ended Sep. 30, 2026, table in thousands) reflects debt obligations (350,972 long-term debt, net and 1,000 current portion as of Sep. 30, 2026, table in thousands), primarily $350.0 million of 10.75% Notes issued on January 28, 2025.",
+    "basis": "stated in P3 and F2",
+    "claim": "Financing and financial-assurance costs include net interest expense ($36,495 in 2025 and 27,373 in the first nine months of 2026, tables in thousands) primarily on $350.0 million of 10.75% Notes and credit facilities, alongside surety bond premiums and potential collateral demands under BOEM offshore decommissioning rules.",
     "facts": [
-     "F1",
-     "F2",
-     "P3"
+     "P3",
+     "F2"
     ],
     "quotes": [
-     "Interest expense, net | 8,956 | 8,998 | 27,373 | 27,495",
-     "Current portion of long-term debt, net | 1,000 | 8,458",
-     "Long-term debt, net | 350,972 | 342,355",
-     "On January 28, 2025, we issued $350.0 million of 10.75% Notes."
+     "On January 28, 2025, we issued $350.0 million of 10.75% Notes.",
+     "The BOEM requires that lessees demonstrate financial strength and reliability according to its regulations and provide acceptable financial assurances to assure satisfaction of lease obligations, including decommissioning activities in the OCS.",
+     "Pursuant to the terms of our agreement with various sureties under our existing bonding arrangements, we may be required to post collateral.",
+     "Interest expense, net |  | $36,495 |  | $40,454 |  | $(3,959)",
+     "Interest expense, net | 8,956 | 8,998 | 27,373 | 27,495"
     ],
-    "support": "supported"
+    "support": "quote_not_found"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in [P4]",
-    "claim": "W&T Offshore holds working interests in 48 offshore fields in federal and state waters across approximately 588,500 gross acres (455,800 net acres) in the Gulf of America and derives a majority of its daily production from wells it operates.",
+    "basis": "stated in P1, P2, and P4",
+    "claim": "W&T Offshore is an independent oil and natural gas producer with all of its current production in the Gulf of America, holding working interests in 48 offshore fields and approximately 588,500 gross acres (455,800 net acres) as of September 30, 2026.",
     "facts": [
+     "P1",
+     "P2",
      "P4"
     ],
     "quotes": [
+     "We are an independent oil and natural gas producer with substantially all our operations offshore in the Gulf of America.",
+     "All of our current production is from the Gulf of America.",
      "As of September 30, 2026, we hold working interests in 48 offshore fields in federal and state waters (which include 41 fields in federal waters and seven in state waters).",
-     "We currently have under lease approximately 588,500 gross acres (455,800 net acres) spanning across the outer continental shelf off the coasts of Louisiana, Texas, Mississippi and Alabama, with approximately 5,600 gross acres in Alabama state waters, 446,700 gross acres on the conventional shelf and approximately 136,200 gross acres in the deepwater.",
-     "A majority of our daily production is derived from wells we operate."
+     "We currently have under lease approximately 588,500 gross acres (455,800 net acres) spanning across the outer continental shelf off the coasts of Louisiana, Texas, Mississippi and Alabama, with approximately 5,600 gross acres in Alabama state waters, 446,700 gross acres on the conventional shelf and approximately 136,200 gross acres in the deepwater."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1] and [P2]",
-    "claim": "W&T Offshore owns an existing portfolio of 200 structures, of which it operates 142, and operates 86.7% of its wells, which reduces capital expenditures and maximizes returns on capital expenditures when developing prospects.",
+    "basis": "stated in P1 and P2",
+    "claim": "W&T operates 86.7% of its wells as of December 31, 2025 and owns a portfolio of 200 structures (142 operated), which helps lower capital expenditures on prospect development.",
     "facts": [
      "P1",
      "P2"
@@ -304,33 +334,34 @@
     "support": "supported"
    },
    {
-    "basis": "stated in [P1]",
-    "claim": "The company's Gulf of America offshore reservoirs feature high porosity and permeability with higher initial production rates than other domestic reservoirs, natural drive mechanisms requiring fewer conventional wells, and some of the lowest greenhouse gas emissions intensity due to subsea wells and established pipelines.",
+    "basis": "stated in P1",
+    "claim": "The company's Gulf of America reservoirs generally feature high porosity and permeability with higher initial production rates than other domestic reservoirs, alongside low GHG emissions intensity from subsea wells and established pipelines.",
     "facts": [
      "P1"
     ],
     "quotes": [
      "The reservoirs in our offshore fields are generally characterized as having high porosity and permeability, with higher initial production rates relative to other domestic reservoirs.",
-     "Fewer conventional wells are required to develop these fields.",
      "Production from the Gulf of America continues to provide some of the lowest greenhouse gas (\u201cGHG\u201d) emissions intensity due to the nature of subsea wells and established offshore pipelines, and we continue to strive to lower our GHG emissions."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1] as management's assessment",
-    "claim": "As a smaller oil and natural gas company, W&T Offshore asserts greater decision-making flexibility, faster adaptation to market changes, potential for higher profit margins on smaller projects, and alignment through significant insider ownership.",
+    "basis": "stated in P1 and P2",
+    "claim": "As a smaller producer, W&T benefits from faster decision-making, adaptability to market shifts, and potentially higher margins on smaller projects, but faces larger competitors with substantially greater financial, technical, and personnel resources.",
     "facts": [
-     "P1"
+     "P1",
+     "P2"
     ],
     "quotes": [
+     "Many of these competitors are large, well-established companies that have financial and other resources substantially greater than ours.",
      "As a smaller oil and natural gas company, however, we have greater flexibility in decision making, can adapt quicker to market changes, have the potential for higher profit margins on smaller projects and have the opportunity to develop innovative strategies without the constraints of large-scale operations.",
-     "Our significant inside ownership ensures that executive management\u2019s interests are highly aligned with those of our shareholders, thus incentivizing executive management to maximize value and mitigate risk in executing our business strategy, generating shareholder value."
+     "Our competitors may be able to evaluate, bid for and purchase a greater number of properties and prospects than our financial or personnel resources permit."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1]",
-    "claim": "BP Products North America and Shell Trading (US) Company accounted for 33% and 17% of oil, NGL, and natural gas sales revenues, though the company states it could replace them quickly on substantially similar terms.",
+    "basis": "stated in P1",
+    "claim": "In 2025, BP Products North America accounted for 33% and Shell Trading (US) Company accounted for 17% of W&T's oil, NGL, and natural gas sales revenues, though management expects replacement buyers could be secured quickly due to the commoditized nature of its production.",
     "facts": [
      "P1"
     ],
@@ -341,124 +372,102 @@
     "support": "supported"
    },
    {
-    "basis": "stated in [P6]",
-    "claim": "Third-quarter production rose to 38.2 thousand barrels of oil equivalent per day (up 10% sequentially and 7% year-over-year), while nine-month Adjusted EBITDA reached $163.9 million (up 50% year-over-year) and nine-month Free Cash Flow reached $89.3 million.",
+    "basis": "stated in F2 and F3",
+    "claim": "Operating performance improved in the first nine months of 2026, with total revenues rising to $ 479,718 (table in thousands) from $ 379,749 (table in thousands) a year earlier, operating income turning positive to 49,086 (table in thousands), and operating cash flow increasing to 72,520 (table in thousands).",
     "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Total revenues | $ 167,080 | $ 127,515 | $ 479,718 | $ 379,749",
+     "Operating income (loss) | 11,821 | (12,610) | 49,086 | (33,707)",
+     "Net cash provided by operating activities | 72,520 | 51,303"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1, P4, and P6",
+    "claim": "W&T strengthened its liquidity to $234.7 million as of September 30, 2026 (including $191.3 million in unrestricted cash) and converted its $50.0 million credit facility into a reserve-based lending facility with a $100.0 million maximum credit amount on October 1, 2026, though it still carries long-term debt, net of 350,972 (table in thousands) and asset retirement obligations of 558,802 (table in thousands).",
+    "facts": [
+     "F1",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "Produced 38.2 thousand barrels of oil equivalent per day (\u201cMBoe/d\u201d) (50% liquids), which was approximately 9% above midpoint and 4% above the high end of the Company\u2019s guidance and up 10% from the second quarter of 2026;",
-     "Generated Adjusted EBITDA of $51.1 million, an increase of 30% over the third quarter of 2025 and $163.9 million of Adjusted EBITDA generated in the first nine months of 2026, an increase of 50% compared to the first nine months of 2025;",
-     "Generated Free Cash Flow of $33.2 million for the third quarter of 2026 and $89.3 million for the first nine months of 2026;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P6], [P4], and [F1]",
-    "claim": "Available liquidity reached $234.7 million with Net Debt down to $160.7 million (0.9 times trailing twelve-month Adjusted EBITDA), and W&T converted its revolving credit facility into a reserve-based lending structure with an aggregate maximum credit amount of $100.0 million and initial elected commitments of $50.0 million.",
-    "facts": [
-     "P6",
-     "P4",
-     "F1"
-    ],
-    "quotes": [
      "As of September 30, 2026, W&T had available liquidity of $234.7 million comprised of $191.3 million in unrestricted cash and cash equivalents and $43.4 million of borrowing availability under W&T\u2019s revolving credit facility, based on a borrowing base of $50.0 million and $6.6 million of letters of credit outstanding.",
-     "As of September 30, 2026, the Company had total debt of $352.0 million, Net Debt of $160.7 million and Net Debt to trailing twelve month Adjusted EBITDA was 0.9 times.",
-     "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million."
+     "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million.",
+     "Long-term debt, net | 350,972 | 342,355",
+     "Asset retirement obligations | 558,802 | 535,704"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P1] and [P2]",
-    "claim": "W&T faces intense competition from larger domestic, foreign, and independent oil companies that have substantially greater financial, technical, and personnel resources to bid for BOEM leases, acquire properties, absorb regulatory assurance burdens, and withstand commodity downturns.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Many of these competitors are large, well-established companies that have financial and other resources substantially greater than ours.",
-     "For example, new leases acquired from the BOEM are acquired through a \u201csealed bid\u201d process and are generally awarded to the highest bidder.",
-     "Finally, companies with larger financial resources may have a significant advantage in terms of meeting any potential new bonding or financial assurance requirements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P2]",
-    "claim": "Because Gulf of America proved reserves have shorter reserve lives, an independent petroleum consultant estimated that 34.0% of W&T's total proved reserves will be depleted within three years, creating greater capital-intensive reserve replacement needs.",
+    "basis": "stated in P2",
+    "claim": "Shorter Gulf of America reserve lives threaten production durability, with 34.0% of W&T's total proved reserves as of December 31, 2025 estimated to be depleted within three years.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
-     "As a result, our need to replace proved reserves and production from new investments is relatively greater than that of producers who recover lower percentages of their proved reserves over a similar time period, such as those producers who have a larger portion of their proved reserves in areas other than the Gulf of America."
+     "As a result, our need to replace proved reserves and production from new investments is relatively greater than that of producers who recover lower percentages of their proved reserves over a similar time period, such as those producers who have a larger portion of their proved reserves in areas other than the Gulf of America.",
+     "Our need to generate revenues to fund ongoing capital commitments or repay debt may limit our ability to slow or shut-in production from producing wells during periods of low prices for oil and natural gas."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in [P2]",
-    "claim": "Consolidation and decommissioning of midstream gathering, pipeline, and processing assets in the Gulf of America threaten W&T's ability to market production, with fields holding approximately 1.0 MMBoe (or 0.8%) of proved reserves tied back to third-party platforms.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "In recent years, we have seen a consolidation of gathering systems, pipelines and processing facilities in the Gulf of America, which has led to fewer midstream counterparties to contract with for transportation and processing.",
-     "A reduction in the number of potential midstream counterparties and available midstream infrastructure could negatively impact our ability to market production.",
-     "As of December 31, 2025, two fields, accounting for approximately 1.0 MMBoe (or 0.8%) of our total proved reserves, are tied back to separate, third-party owned platforms."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P2], [P3], and [P6]",
-    "claim": "All current production is concentrated in the Gulf of America\u2014exposed to hurricanes and shared regional disruptions\u2014with approximately 36% of production and 20% of total revenue concentrated in Mobile Bay Properties, where shut-ins deferred approximately 686 MBoe of production.",
-    "facts": [
-     "P2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "All of our current production is from the Gulf of America.",
-     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
-     "These shut-ins resulted in deferred production of approximately 686 MBoe based on production rates prior to the shut-ins."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P3] and [P6]",
-    "claim": "Regulatory financial assurance requirements from BOEM and ongoing surety litigation over collateral demands\u2014where mediation reached an impasse with non-settling sureties despite approximately $94 million in withdrawn demands from USSIC and PIIC and a $105 million preliminary injunction denial recommendation\u2014could materially constrain liquidity and capital spending.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations.",
-     "The entry into the Settlement Agreements resulted in the withdrawal of approximately $94 million in collateral demands.",
-     "The preliminary injunction would have required us to immediately post $105 million of collateral.",
-     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P2] and [P3]",
-    "claim": "Sustained declines in oil, NGL, and natural gas prices threaten W&T's cash flows, capital expenditure funding, borrowing capacity, proved reserve volumes, and full-cost ceiling-test carrying values.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Extended periods of lower prices for oil, NGLs and natural gas can have a material adverse impact on our results of operations, financial condition and liquidity.",
-     "While we have not recorded an impairment of our oil and gas properties during 2025, any further decreases in commodity pricing could cause an impairment, which would result in a non-cash charge to earnings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in [P1] and [P2]",
-    "claim": "Deep shelf and deepwater drilling carry higher costs and mechanical failure risks, while W&T lacks business interruption insurance and could fall behind better-funded competitors if it cannot adopt new exploration and seismic technologies at acceptable cost.",
+    "basis": "stated in P1 and P2",
+    "claim": "Geographic concentration in the Gulf of America exposes W&T to simultaneous hurricane and weather disruptions without business interruption insurance, while Mobile Bay alone accounted for approximately 36% of production and 20% of total revenue in 2025.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
      "We do not carry business interruption insurance.",
+     "Because a majority of our properties could experience the same conditions at the same time, these conditions could have a greater impact on our results of operations than they might have on other operators who have properties over a wider geographic area.",
+     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
+     "These shut-ins resulted in deferred production of approximately 686 MBoe based on production rates prior to the shut-ins."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "W&T relies on third-party pipelines and processing platforms that it does not control, and midstream consolidation and decommissioning in the Gulf of America threaten its ability to market production, with two fields representing 1.0 MMBoe (or 0.8%) of year-end 2025 proved reserves tied back to third-party platforms.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Because we do not own or operate these pipelines, their continued operation is not within our control.",
+     "As of December 31, 2025, two fields, accounting for approximately 1.0 MMBoe (or 0.8%) of our total proved reserves, are tied back to separate, third-party owned platforms.",
+     "In recent years, we have seen a consolidation of gathering systems, pipelines and processing facilities in the Gulf of America, which has led to fewer midstream counterparties to contract with for transportation and processing.",
+     "A reduction in the number of potential midstream counterparties and available midstream infrastructure could negatively impact our ability to market production."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "Regulatory financial assurance requirements and surety collateral demands pose a material liquidity threat: W&T must demonstrate $70.0 million in OPA financial responsibility, and while settlements withdrew approximately $94 million in surety collateral demands through December 31, 2026 and a $105 million preliminary injunction was recommended denied, mediation with remaining sureties reached an impasse.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We are currently required to demonstrate that we have ready access to $70.0 million.",
+     "The entry into the Settlement Agreements resulted in the withdrawal of approximately $94 million in collateral demands.",
+     "The preliminary injunction would have required us to immediately post $105 million of collateral.",
+     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements.",
+     "To the extent we are unable to provide collateral or provide an adequate alternative, including financing, we may be forced to reduce our capital expenditures in the current year or future years, may be unable to execute our ARO plan or may be unable to comply with our existing debt instruments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Prolonged declines in oil, NGL, and natural gas prices threaten cash flows, reserve volumes, and full-cost ceiling-test carrying values, while deepwater/deep-shelf drilling complexity and rapid technological advances by better-funded peers pose ongoing operational and competitive risks.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Extended periods of lower prices for oil, NGLs and natural gas can have a material adverse impact on our results of operations, financial condition and liquidity.",
+     "While we have not recorded an impairment of our oil and gas properties during 2025, any further decreases in commodity pricing could cause an impairment, which would result in a non-cash charge to earnings.",
      "There are additional risks associated with deep shelf and deepwater drilling that could result in substantial cost overruns and/or result in uneconomic projects or wells.",
      "In addition, competitors may have greater financial, technical and personnel resources that allow them to enjoy technological advantages, and that may in the future, allow them to implement new technologies before we can."
     ],
@@ -467,8 +476,8 @@
   ],
   "financial_health": [
    {
-    "basis": "Stated directly in the October 29, 2026 earnings release (Balance Sheet and Liquidity section).",
-    "claim": "As of September 30, 2026, W&T held $191.3 million in unrestricted cash and cash equivalents and $43.4 million in revolving credit borrowing availability (after $6.6 million of outstanding letters of credit on a $50.0 million borrowing base), providing $234.7 million of total available liquidity.",
+    "basis": "stated in P6",
+    "claim": "As of September 30, 2026, W&T held $234.7 million of available liquidity, consisting of $191.3 million in unrestricted cash and cash equivalents and $43.4 million of borrowing availability under its $50.0 million borrowing base after $6.6 million of outstanding letters of credit.",
     "facts": [
      "P6"
     ],
@@ -478,79 +487,74 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the September 30, 2026 Condensed Consolidated Balance Sheets and October 29, 2026 earnings release.",
-    "claim": "On the September 30, 2026 balance sheet (table in thousands), total current assets of 314,362 exceeded total current liabilities of 239,969, supported by cash and cash equivalents of $ 191,317 (up from $ 140,558 at December 31, 2025), while the amended credit facility requires a minimum current ratio of 1.00x.",
+    "basis": "stated in F1",
+    "claim": "On the balance sheet at September 30, 2026, total current assets were 314,362 (table in thousands) against total current liabilities of 239,969 (table in thousands), compared with 239,269 (table in thousands) and 234,279 (table in thousands) at December 31, 2025.",
     "facts": [
-     "F1",
-     "P6"
+     "F1"
     ],
     "quotes": [
      "Total current assets | 314,362 | 239,269",
-     "Total current liabilities | 239,969 | 234,279",
-     "Cash and cash equivalents | $ 191,317 | $ 140,558",
-     "Unchanged pricing and covenants: No change to interest rate margins, the Term SOFR floor, maturity, collateral, or the Company\u2019s financial covenants, including a maximum net leverage ratio of 2.50x and a minimum current ratio of 1.00x;"
+     "Total current liabilities | 239,969 | 234,279"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the third-quarter 2026 Form 10-Q MD&A and October 29, 2026 earnings release.",
-    "claim": "On October 1, 2026, W&T converted its $50.0 million revolving credit facility into a reserve-based lending facility with an aggregate maximum credit amount of $100.0 million and initial elected commitments of $50.0 million, eliminating the 75% excess cash flow sweep, the quarterly balance repayment requirement, and the $100.0 million minimum PDP PV-10 asset coverage covenant.",
+    "basis": "stated in P4 and P6",
+    "claim": "On October 1, 2026, W&T converted its revolving credit facility into a reserve-based structure with a $50.0 million initial borrowing base and $100.0 million maximum credit amount, while eliminating the 75% excess cash flow sweep, quarterly paydown requirement, and $100.0 million minimum PDP PV-10 covenant.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
      "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million.",
-     "Removal of restrictive features: Eliminates the 75% excess cash flow sweep, the requirement to repay any outstanding revolving credit facility balance every three months and the $100.0 million minimum PDP PV-10 asset coverage covenant, giving the Company greater control over its cash flow and liquidity;"
+     "Eliminates the 75% excess cash flow sweep, the requirement to repay any outstanding revolving credit facility balance every three months and the $100.0 million minimum PDP PV-10 asset coverage covenant, giving the Company greater control over its cash flow and liquidity;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the 2025 Form 10-K MD&A (Bonding Disputes and Key Challenges and Uncertainties).",
-    "claim": "Surety collateral disputes remain a liquidity risk: although 2025 settlement agreements with USSIC and PIIC withdrew approximately $94 million in collateral demands until after December 31, 2026 at the earliest and a judge recommended denying a $105 million preliminary injunction, mediation reached an impasse with remaining surety providers who may request additional collateral.",
+    "basis": "stated in P3",
+    "claim": "Liquidity remains exposed to surety collateral disputes: although settlement agreements withdrew approximately $94 million in collateral demands until after December 31, 2026 at the earliest and a preliminary injunction for $105 million of collateral was recommended denied, mediation with remaining sureties reached an impasse.",
     "facts": [
      "P3"
     ],
     "quotes": [
      "The entry into the Settlement Agreements resulted in the withdrawal of approximately $94 million in collateral demands.",
      "The preliminary injunction would have required us to immediately post $105 million of collateral.",
-     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements.",
-     "These sureties may request additional collateral from us in the future, which could be significant and could materially impact our liquidity."
+     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated directly in the October 29, 2026 earnings release.",
-    "claim": "As of September 30, 2026, W&T had total debt of $352.0 million and Net Debt of $160.7 million (a 20% decrease from $200.9 million at June 30, 2026), lowering Net Debt to trailing twelve months Adjusted EBITDA to 0.9 times (from 1.1x at June 30, 2026 and 1.6x at September 30, 2025) against a 2.50x maximum net leverage ratio covenant.",
+    "basis": "stated in P6",
+    "claim": "As of September 30, 2026, W&T reported $352.0 million in total debt and $160.7 million in Net Debt, reducing Net Debt to trailing twelve months Adjusted EBITDA to 0.9x from 1.1x at June 30, 2026 and 1.6x at September 30, 2025, below the 2.50x maximum net leverage ratio covenant.",
     "facts": [
      "P6"
     ],
     "quotes": [
      "As of September 30, 2026, the Company had total debt of $352.0 million, Net Debt of $160.7 million and Net Debt to trailing twelve month Adjusted EBITDA was 0.9 times.",
-     "Grew unrestricted cash and cash equivalents 27% to $191.3 million from $150.7 million at June 30, 2026, which resulted in a 20% decrease in Net Debt to $160.7 million from $200.9 million at June 30, 2026;",
      "Reduced net debt to trailing twelve months Adjusted EBITDA to 0.9x from 1.1x at June 30, 2026 and 1.6x at September 30, 2025;",
-     "Unchanged pricing and covenants: No change to interest rate margins, the Term SOFR floor, maturity, collateral, or the Company\u2019s financial covenants, including a maximum net leverage ratio of 2.50x and a minimum current ratio of 1.00x;"
+     "No change to interest rate margins, the Term SOFR floor, maturity, collateral, or the Company\u2019s financial covenants, including a maximum net leverage ratio of 2.50x and a minimum current ratio of 1.00x;"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the September 30, 2026 Condensed Consolidated Balance Sheets.",
-    "claim": "On the September 30, 2026 balance sheet (table in thousands), carrying debt consisted of 350,972 in net long-term debt and 1,000 in current portion of net long-term debt, alongside a total shareholders' deficit of (189,931) and asset retirement obligations of 558,802 non-current and 22,010 current.",
+    "basis": "stated in F1",
+    "claim": "At September 30, 2026, the balance sheet carried long-term debt net of 350,972 (table in thousands) and current portion of long-term debt net of 1,000 (table in thousands), alongside a total shareholders' deficit of (189,931) (table in thousands) and asset retirement obligations of 558,802 non-current and 22,010 current (table in thousands).",
     "facts": [
      "F1"
     ],
     "quotes": [
-     "Long-term debt, net | 350,972 | 342,355",
      "Current portion of long-term debt, net | 1,000 | 8,458",
-     "Total shareholders' deficit | (189,931) | (199,752)",
+     "Long-term debt, net | 350,972 | 342,355",
      "Asset retirement obligations | 558,802 | 535,704",
-     "Current portion of asset retirement obligations | 22,010 | 26,147"
+     "Current portion of asset retirement obligations | 22,010 | 26,147",
+     "Total shareholders' deficit | (189,931) | (199,752)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the September 30, 2026 Condensed Consolidated Statements of Cash Flows and October 29, 2026 earnings release.",
-    "claim": "W&T generated 72,520 in net cash provided by operating activities (table in thousands) during the nine months ended September 30, 2026 (up from 51,303 in the prior-year period), and reported non-GAAP Free Cash Flow of $33.2 million in the third quarter of 2026 and $89.3 million in the first nine months of 2026.",
+    "basis": "stated in F3 and P6",
+    "claim": "For the nine months ended September 30, 2026, net cash provided by operating activities increased to 72,520 (table in thousands) from 51,303 (table in thousands) a year earlier, while Free Cash Flow totaled $89.3 million in the first nine months of 2026 and $33.2 million in the third quarter.",
     "facts": [
      "F3",
      "P6"
@@ -562,117 +566,100 @@
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the September 30, 2026 Condensed Consolidated Statements of Operations and October 29, 2026 earnings release.",
-    "claim": "Adjusted EBITDA reached $51.1 million in the third quarter of 2026 (a 30% year-over-year increase) and $163.9 million in the first nine months of 2026 (a 50% year-over-year increase), whereas GAAP net loss was $ (13,649) for the third quarter and $ (23,618) for the nine-month period (table in thousands).",
+    "basis": "stated in F2 and P6",
+    "claim": "Adjusted EBITDA rose 50% year-over-year to $163.9 million in the first nine months of 2026 and 30% to $51.1 million in the third quarter, whereas GAAP results recorded a net loss of $ (23,618) (table in thousands) for the nine months amid derivative losses of 42,230 (table in thousands) and net interest expense of 27,373 (table in thousands).",
     "facts": [
      "F2",
      "P6"
     ],
     "quotes": [
      "Generated Adjusted EBITDA of $51.1 million, an increase of 30% over the third quarter of 2025 and $163.9 million of Adjusted EBITDA generated in the first nine months of 2026, an increase of 50% compared to the first nine months of 2025;",
-     "Net loss | $ (13,649) | $ (71,474) | $ (23,618) | $ (122,935)"
+     "Net loss | $ (13,649) | $ (71,474) | $ (23,618) | $ (122,935)",
+     "Derivative loss (gain), net | 15,800 | (4,108) | 42,230 | (13,398)",
+     "Interest expense, net | 8,956 | 8,998 | 27,373 | 27,495"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated directly in the September 30, 2026 Condensed Consolidated Statements of Cash Flows.",
-    "claim": "In the nine months ended September 30, 2026 (table in thousands), operating cash flow of 72,520 reconciled from a net loss of $ (23,618) via non-cash charges\u2014including 107,008 in DD&A and accretion, 42,230 in net derivative loss, and 28,915 in share-based compensation\u2014less cash outflows of (26,512) for ARO settlements, (20,908) for net derivative settlements, (7,300) for derivative premiums, and (20,462) from higher accounts receivable.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net loss | $ (23,618) | $ (122,935)",
-     "Depreciation, depletion, amortization and accretion | 107,008 | 112,992",
-     "Share-based compensation | 28,915 | 8,497",
-     "Derivative loss (gain), net | 42,230 | (13,398)",
-     "Derivative premium payment | (7,300)",
-     "Derivative cash (settlements) receipts, net | (20,908) | 14,169",
-     "Accounts receivable | (20,462) | 4,001",
-     "Asset retirement obligation settlements | (26,512) | (24,873)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 2025 Form 10-K Risk Factors, September 30, 2026 Cash Flow Statement, and October 29, 2026 earnings release.",
-    "claim": "Third-quarter 2026 accrual capital expenditures declined 70% sequentially to $3,101 from $10,358 (table in thousands) and nine-month property investments totaled (26,900) (table in thousands), supporting near-term Free Cash Flow even though 34.0% of year-end 2025 proved reserves are estimated to deplete within three years and full-year 2026 capital expenditures are guided at $35.0 to $38.0 million.",
+    "basis": "stated in F3 and P6",
+    "claim": "Nine-month 2026 operating cash flow funded investment in oil and natural gas properties and equipment of (26,900) (table in thousands) and asset retirement obligation settlements of (26,512) (table in thousands) without one-off insurance or asset-sale inflows, though full-year capital expenditures are expected at $35.0 to $38.0 million after pulling 2027 projects into the fourth quarter.",
     "facts": [
      "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Investment in oil and natural gas properties and equipment | (26,900) | (38,881)",
+     "Asset retirement obligation settlements | (26,512) | (24,873)",
+     "Full year 2026 capital expenditures are now expected to be in the range of $35.0 to $38.0 million as a result of pulling forward 2027 capital projects to the fourth quarter to capitalize on higher commodity prices."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P2 and P6",
+    "claim": "Quality constraints on cash generation include third-quarter equity issuance of 3.6 million common shares for $14.7 million in net proceeds under an At-the-Market agreement, 34.0% of year-end 2025 proved reserves estimated to deplete within three years, and 36% of 2025 production concentrated in Mobile Bay.",
+    "facts": [
      "P2",
      "P6"
     ],
     "quotes": [
-     "Capital expenditures (accrual basis) |  | $3,101 |  | $10,358 |  | (70)% |  | $22,542 |  | (86)%",
-     "Investment in oil and natural gas properties and equipment | (26,900) | (38,881)",
+     "Utilized W&T\u2019s At-the-Market (\u201cATM\u201d) agreement to issue 3.6 million common shares with net proceeds of $14.7 million to further enhance liquidity and support near-term strategic growth objectives;",
      "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
-     "Full year 2026 capital expenditures are now expected to be in the range of $35.0 to $38.0 million as a result of pulling forward 2027 capital projects to the fourth quarter to capitalize on higher commodity prices."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated directly in the 2025 Form 10-K MD&A, September 30, 2026 Balance Sheet, and October 29, 2026 earnings release.",
-    "claim": "Following its January 2025 refinancing, W&T's major debt maturities fall in 2028 and 2029\u2014its $350.0 million of 10.75% Notes mature on February 1, 2029 and its Credit Agreement matures on July 28, 2028\u2014while only 1,000 (table in thousands) of net long-term debt was classified as current as of September 30, 2026.",
-    "facts": [
-     "F1",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "On January 28, 2025, we issued $350.0 million of 10.75% Notes.",
-     "The 10.75% Notes were issued at par and mature on February 1, 2029.",
-     "The Credit Agreement matures on July 28, 2028.",
-     "Current portion of long-term debt, net | 1,000 | 8,458",
-     "Unchanged pricing and covenants: No change to interest rate margins, the Term SOFR floor, maturity, collateral, or the Company\u2019s financial covenants, including a maximum net leverage ratio of 2.50x and a minimum current ratio of 1.00x;"
+     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d)."
     ],
     "support": "supported"
    },
    {
-    "basis": "Liquidity and cash generation figures stated directly in the September 30, 2026 financial statements and October 29, 2026 earnings release; debt-service capacity inferred from those sources.",
-    "claim": "Near-term debt obligations (1,000 current portion, table in thousands) can be met from $191.3 million in unrestricted cash and $43.4 million in RBL borrowing availability (with $100.0 million maximum credit capacity), alongside internal Free Cash Flow ($89.3 million in the first nine months of 2026) and ATM equity issuance ($14.7 million net proceeds in the third quarter of 2026).",
+    "basis": "stated in P3",
+    "claim": "On January 28, 2025, W&T refinanced its prior debt by issuing $350.0 million of 10.75% Notes maturing February 1, 2029 to redeem and defease its 11.75% Notes and repay its Term Loan, while entering a Credit Agreement maturing July 28, 2028.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On January 28, 2025, we issued $350.0 million of 10.75% Notes.",
+     "The 10.75% Notes were issued at par and mature on February 1, 2029.",
+     "The net proceeds from the issuance of the 10.75% Notes along with cash on hand were used to (i) purchase for cash pursuant to a tender offer (the \u201cTender Offer\u201d), such of our 11.75% Senior Second Lien Notes due 2026 (the \u201c11.75% Notes\u201d) that were validly tendered (and not validly withdrawn) pursuant to the Tender Offer, (ii) on or after August 1, 2025, redeem in full any remaining 11.75% Notes not validly tendered and accepted for purchase in the Tender Offer and, pending such redemptions, satisfy and discharge the indenture governing the 11.75% Notes; (iii) repay outstanding amounts under the credit agreement of certain of our indirect, wholly-owned subsidiaries (the \u201cTerm Loan\u201d), and (iv) pay any premiums, fees and expenses relating to these transactions.",
+     "The Credit Agreement matures on July 28, 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and F3",
+    "claim": "The current portion of long-term debt net fell to 1,000 (table in thousands) at September 30, 2026 from 8,458 (table in thousands) at December 31, 2025, following nine-month TVPX Loan repayments of (8,825) (table in thousands) and issuance of a New TVPX Loan of 8,000 (table in thousands).",
     "facts": [
      "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Current portion of long-term debt, net | 1,000 | 8,458",
+     "Repayments of TVPX Loan | (8,825) | (825)",
+     "Proceeds from issuance of New TVPX Loan | 8,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from F1, P3, P4, and P6",
+    "claim": "The 1,000 (table in thousands) current portion of long-term debt compares with $234.7 million of available liquidity and $89.3 million of nine-month Free Cash Flow, whereas meeting the $350.0 million of 10.75% Notes due February 1, 2029 depends on future cash generation, potential borrowing expansion under the $100.0 million maximum credit amount, or refinancing.",
+    "facts": [
+     "F1",
+     "P3",
+     "P4",
      "P6"
     ],
     "quotes": [
      "Current portion of long-term debt, net | 1,000 | 8,458",
      "As of September 30, 2026, W&T had available liquidity of $234.7 million comprised of $191.3 million in unrestricted cash and cash equivalents and $43.4 million of borrowing availability under W&T\u2019s revolving credit facility, based on a borrowing base of $50.0 million and $6.6 million of letters of credit outstanding.",
-     "Conventional RBL structure: Initial borrowing base of $50.0 million, fully supporting $50.0 million of elected commitments, with an aggregate maximum credit amount of $100.0 million that provides capacity to increase commitments to support future growth.",
      "Generated Free Cash Flow of $33.2 million for the third quarter of 2026 and $89.3 million for the first nine months of 2026;",
-     "During Q3 2026, W&T utilized its ATM agreement to issue 3.6 million common shares with net proceeds of $14.7 million to further enhance liquidity and support near-term strategic growth objectives."
+     "On January 28, 2025, we issued $350.0 million of 10.75% Notes.",
+     "The 10.75% Notes were issued at par and mature on February 1, 2029.",
+     "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million."
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "stated in P4 revenue variance and realized price tables and F2 income statement",
-    "claim": "Higher realized commodity prices drove $32,355 (table in thousands) of the $36,567 (table in thousands) year-over-year increase in oil, NGL, and natural gas revenues in the third quarter of 2026, led by average realized oil prices rising from $64.62 to $85.06 per Bbl.",
-    "facts": [
-     "F2",
-     "P4"
-    ],
-    "quotes": [
-     "Our financial condition, cash flow and results of operations are significantly affected by the volume of our oil, NGLs and natural gas production and the prices that we receive for such production."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 Business Outlook and P2 Risk Factors",
-    "claim": "For price-driven revenue growth to continue, realized commodity prices must remain supportive rather than follow EIA forecasts for WTI spot oil to fall from $97.00 per barrel in the fourth quarter of 2026 to $80.00 per barrel in 2027 and Henry Hub natural gas to decline 9% to $3.16 per MMBtu in 2027.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "In spite of the increased production and flows from the Middle East, the EIA is forecasting that the spot price for WTI will average $97.00 per barrel in the fourth quarter of 2026 and then fall to an average of $80.00 per barrel in 2027.",
-     "The EIA is forecasting the Henry Hub spot price for natural gas to average $3.16 per MMBtu in 2027, a 9% decrease from 2026.",
-     "Extended periods of lower prices for oil, NGLs and natural gas can have a material adverse impact on our results of operations, financial condition and liquidity.",
-     "While these commodity derivative positions are intended to reduce the effects of price volatility, they may also limit future income if prices were to rise substantially over the price established by such positions."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3, P4, and P6",
-    "claim": "Operational execution on well recompletions, workovers, and field restorations drove production volume growth of 239 Mboe year over year to 3,514 MBoe (38.2 thousand Boe/d) in the third quarter of 2026, following 2025 volume growth of 219 MBoe to 12,402 MBoe.",
+    "basis": "Stated directly in the 2025 10-K MD&A, Q3 2026 10-Q MD&A, and Q3 2026 earnings release.",
+    "claim": "Production volume growth to 3,514 MBoe in the third quarter of 2026 was driven by a well recompletion and workover projects, following 2025 production gains from field restarts and Mobile Bay well stimulation.",
     "facts": [
      "P3",
      "P4",
@@ -686,8 +673,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P6 guidance commentary",
-    "claim": "Pulling forward 2027 capital projects into the fourth quarter of 2026 raises expected full-year 2026 capital expenditures to $35.0 to $38.0 million to support production in the first half of 2027.",
+    "basis": "Stated in the Q3 2026 earnings release guidance commentary.",
+    "claim": "W&T Offshore pulled forward 2027 capital projects into the fourth quarter of 2026, lifting expected full-year 2026 capital expenditures to $35.0 to $38.0 million to realize production benefits in the first half of 2027.",
     "facts": [
      "P6"
     ],
@@ -695,23 +682,527 @@
      "Full year 2026 capital expenditures are now expected to be in the range of $35.0 to $38.0 million as a result of pulling forward 2027 capital projects to the fourth quarter to capitalize on higher commodity prices.",
      "The benefits to production from these expenditures are expected to be realized over the first half of 2027."
     ],
-    "support": "supported"
+    "support": "number_not_found"
    },
    {
-    "basis": "stated in P2 Risk Factors",
-    "claim": "For production growth from drilling, workovers, and capital projects to continue, the company must continually replace proved reserves at acceptable costs because 34.0% of its total proved reserves as of December 31, 2025 are estimated to deplete within three years.",
+    "basis": "Stated in the 2025 10-K Risk Factors.",
+    "claim": "For organic production growth to continue, W&T Offshore must sustain capital investment to replace reserves because 34.0% of its total proved reserves as of December 31, 2025 are estimated to be depleted within three years.",
     "facts": [
      "P2"
     ],
     "quotes": [
      "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
-     "We cannot assure you that our future exploitation, exploration, development and acquisition activities will result in additional proved reserves or that we will be able to drill productive wells at acceptable costs."
+     "We may not be able to economically find, develop or acquire additional reserves or make the necessary capital investments if our cash flows from operations decline or external sources of capital become limited or unavailable."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P2, P3, and P6",
-    "claim": "Sustaining production growth requires limiting hurricanes, midstream disruptions, and shut-ins\u2014particularly at Mobile Bay, which represented 36% of 2025 production\u2014after 2.5 MMBoe of deferred production in 2025 and an estimated 2,600 Boe/d impact in the fourth quarter of 2026.",
+    "basis": "Stated in the 2025 10-K Risk Factors and Q3 2026 earnings release.",
+    "claim": "Continued production growth requires uninterrupted third-party pipeline and processing capacity and limited storm or maintenance shut-ins, especially as Mobile Bay accounted for approximately 36% of 2025 production.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Our ability to market our production depends substantially on the availability and capacity of gathering systems, pipelines and processing facilities, which in some cases are owned and operated by third parties.",
+     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
+     "Fourth quarter 2026 production guidance includes short-term sales volumes reductions from Hurricane Isaias and planned Mobile Bay turnaround with a combined impact to production of approximately 2,600 Boe/d."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Business section and Q3 2026 earnings release.",
+    "claim": "Acquiring and integrating producing properties is a core growth driver supported by $234.7 million in available liquidity at September 30, 2026, $14.7 million in ATM equity proceeds, and an amended credit facility expandable to $100 million.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "We strategically pursue the acquisition of compelling producing assets that generate cash flows at attractive valuations with upside potential and optimization opportunities.",
+     "We have materially strengthened our balance sheet, added financial flexibility and remain very well positioned to execute on our strategy which includes evaluating and integrating accretive acquisitions.",
+     "As of September 30, 2026, W&T had available liquidity of $234.7 million comprised of $191.3 million in unrestricted cash and cash equivalents and $43.4 million of borrowing availability under W&T\u2019s revolving credit facility, based on a borrowing base of $50.0 million and $6.6 million of letters of credit outstanding.",
+     "The change strengthens our capital structure by eliminating restrictive lending requirements thereby improving liquidity and financial flexibility while providing the potential to significantly expand our borrowing capacity to $100 million from $50 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K Risk Factors.",
+    "claim": "For acquisition-driven growth to continue, W&T Offshore must source attractively priced assets and maintain financing access despite competition from larger producers with greater financial and technical resources.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our competitors may also be able to pay more to acquire productive oil and natural gas properties and exploratory prospects than we are able or willing to pay or finance.",
+     "Further, current market conditions may adversely impact our ability to obtain financing to fund acquisitions, and further lower the level of activity and depress values in the oil and natural gas property sales market."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 2026 10-Q Statements of Operations, MD&A revenue bridge, and Q3 2026 earnings release.",
+    "claim": "Higher realized commodity prices drove $32,355 (table in thousands) of revenue growth in the three months ended September 30, 2026 and helped lift nine-month Adjusted EBITDA by 50% to $163.9 million.",
+    "facts": [
+     "F2",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Total revenues | $ 167,080 | $ 127,515 | $ 479,718 | $ 379,749",
+     " | $32,355 |  | $4,212 |  | $36,567",
+     "Generated Adjusted EBITDA of $51.1 million, an increase of 30% over the third quarter of 2025 and $163.9 million of Adjusted EBITDA generated in the first nine months of 2026, an increase of 50% compared to the first nine months of 2025;"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in the Q3 2026 10-Q MD&A Business Outlook and 2025 10-K Risk Factors.",
+    "claim": "For price-driven revenue and cash flow growth to continue, commodity prices must remain elevated rather than declining toward EIA forecasts of $80.00 per barrel for WTI oil and $3.16 per MMBtu for Henry Hub natural gas in 2027.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "In spite of the increased production and flows from the Middle East, the EIA is forecasting that the spot price for WTI will average $97.00 per barrel in the fourth quarter of 2026 and then fall to an average of $80.00 per barrel in 2027.",
+     "The EIA is forecasting the Henry Hub spot price for natural gas to average $3.16 per MMBtu in 2027, a 9% decrease from 2026.",
+     "Extended periods of lower prices for oil, NGLs and natural gas can have a material adverse impact on our results of operations, financial condition and liquidity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 10-K MD&A.",
+    "claim": "Continued growth investment requires manageable BOEM supplemental financial assurance obligations and avoiding significant collateral demands from surety providers.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations.",
+     "To the extent we are unable to provide collateral or provide an adequate alternative, including financing, we may be forced to reduce our capital expenditures in the current year or future years, may be unable to execute our ARO plan or may be unable to comply with our existing debt instruments."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "W&T converted its $50.0 million revolving credit facility into a reserve-based revolving credit facility with an aggregate maximum credit amount of $100.0 million and an initial elected commitment of $50.0 million.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million.",
+     "On October 1, 2026, the Company entered into the Second Amendment to its Credit Agreement with Texas Capital Bank, as administrative agent, and its bank group, converting its existing $50.0 million revolving credit facility into a conventional reserve-based revolving credit facility (\u201cRBL\u201d), effective as of that date."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 and F3",
+    "claim": "W&T utilized its At-the-Market agreement to issue 3.6 million common shares with net proceeds of $14.7 million (reported as 14,670, table in thousands).",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "During Q3 2026, W&T utilized its ATM agreement to issue 3.6 million common shares with net proceeds of $14.7 million to further enhance liquidity and support near-term strategic growth objectives.",
+     "Proceeds from issuance of common stock | 14,670"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "W&T declared a regular quarterly dividend of $0.01 per share of common stock for the fourth quarter, payable to stockholders of record.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "On October 29, 2026, we declared a regular quarterly dividend of $0.01 per share of common stock for the fourth quarter of 2026.",
+     "We expect to pay the dividend on November 19, 2026 to stockholders of record as of the close of business on November 12, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, F2, and F3",
+    "claim": "W&T issued $350.0 million of 10.75% Notes and used the net proceeds plus cash on hand to tender and redeem its 11.75% Notes, repay its Term Loan, and record a loss on extinguishment of debt of 15,015 (table in thousands).",
+    "facts": [
+     "P3",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "On January 28, 2025, we issued $350.0 million of 10.75% Notes.",
+     "The net proceeds from the issuance of the 10.75% Notes along with cash on hand were used to (i) purchase for cash pursuant to a tender offer (the \u201cTender Offer\u201d), such of our 11.75% Senior Second Lien Notes due 2026 (the \u201c11.75% Notes\u201d) that were validly tendered (and not validly withdrawn) pursuant to the Tender Offer, (ii) on or after August 1, 2025, redeem in full any remaining 11.75% Notes not validly tendered and accepted for purchase in the Tender Offer and, pending such redemptions, satisfy and discharge the indenture governing the 11.75% Notes; (iii) repay outstanding amounts under the credit agreement of certain of our indirect, wholly-owned subsidiaries (the \u201cTerm Loan\u201d), and (iv) pay any premiums, fees and expenses relating to these transactions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "W&T terminated its Legacy Credit Agreement and entered into a new Credit Agreement providing initial bank lending commitments of $50.0 million with a $10.0 million letter of credit sublimit.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On January 28, 2025, in conjunction with the issuance of the 10.75% Notes, we terminated our Sixth Amended and Restated Credit Agreement (the \u201cLegacy Credit Agreement\u201d) and entered into the Credit Agreement which provides us a revolving credit and letter of credit facility with initial bank lending commitments of $50.0 million with a letter of credit sublimit of $10.0 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and F3",
+    "claim": "W&T received $58.5 million in insurance proceeds (reported as 58,500, table in thousands) settling claims from a prior Mobile Bay plant turnaround.",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "In January 2025, we received $58.5 million related to the settlement of claims related to the Mobile Bay plant turnaround in February 2023."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "W&T entered into settlement agreements with USSIC and PIIC to dismiss Sureties Litigation claims without prejudice, resulting in the withdrawal of approximately $94 million in collateral demands.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On June 14, 2025, we entered into the USSIC Settlement Agreement and, on June 15, 2025, we entered into the PIIC Settlement Agreement to dismiss all claims with the applicable parties related to the Sureties Litigation without prejudice.",
+     "The entry into the Settlement Agreements resulted in the withdrawal of approximately $94 million in collateral demands."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "W&T announced that the presiding judge in the Sureties Litigation recommended denying preliminary injunction requests by two surety providers that would have required immediately posting $105 million of collateral.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On June 30, 2025, we announced that the presiding judge in the Sureties Litigation recommended denying the requests for preliminary injunction submitted by two surety providers.",
+     "The preliminary injunction would have required us to immediately post $105 million of collateral."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P6",
+    "claim": "In the remaining Sureties Litigation, the mediator declared an impasse with non-settling surety providers, and W&T obtained a court order requiring defendants to review and produce relevant communications.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements.",
+     "W&T has continued to pursue discovery materials in the surety lawsuits, and it has made significant progress in obtaining agreements from opposing counsel and a court order requiring defendants to review and produce communications relevant to W&T\u2019s claims."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "The U.S. District Court for the Eastern District of Louisiana issued a favorable summary judgment order in W&T's ONRR royalty appeal, ONRR released W&T's administrative appeal bonds, and W&T reversed its $5.3 million accrual.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On August 26, 2025, the United States District Court for the Eastern District of Louisiana issued a favorable order on the Company\u2019s motion for summary judgment regarding the disallowance of allowable reduction of cash payments for royalties owed to the ONRR.",
+     "On December 15, 2025 and December 16, 2025, the ONRR released the Company\u2019s administrative appeal bonds.",
+     "As a result of the order, the Company reversed its $5.3 million accrual related to this matter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "The DOI indicated in a joint federal court filing that it will not seek supplemental financial assurance in the Gulf of America except for sole liability properties and certain non-sole liability properties.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On April 8, 2025, pursuant to directives from the Trump administration, the DOI, through a joint filing in the U.S. District Court for the Western District of Louisiana (Case no. 2:24-cv-00820), indicated that it will not seek supplemental financial assurance in the Gulf of America except in the case of (a) sole liability properties and (b) certain non-sole liability properties that do not have a financially strong co-owner or predecessor in title and meet other conditions."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "BOEM published a proposed rule to amend the offshore supplemental financial assurance regulatory framework, subject to a public comment period.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Further, in May 2025, the DOI announced its intent to revise the rule, and in March 2026, BOEM published a proposed rule setting forth amendments to the existing financial assurance regulatory framework."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P3",
+    "claim": "W&T's Mobile Bay Properties experienced shut-ins due to compressor problems and downstream operated plant issues, resulting in approximately 686 MBoe of deferred production out of approximately 2.5 MMBoe of total estimated deferred production.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "During 2025, our Mobile Bay Properties were shut-in for various reasons, including compressor problems and downstream operated plant issues.",
+     "These shut-ins resulted in deferred production of approximately 686 MBoe based on production rates prior to the shut-ins.",
+     "For 2025, we estimate deferred production was approximately 2.5 MMBoe."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "W&T disclosed short-term sales volume reductions from Hurricane Isaias and a planned Mobile Bay turnaround with a combined production impact of approximately 2,600 Boe/d.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Fourth quarter 2026 production guidance includes short-term sales volumes reductions from Hurricane Isaias and planned Mobile Bay turnaround with a combined impact to production of approximately 2,600 Boe/d."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "W&T settled historical refund claims resulting in an $8.5 million net royalty credit included in fourth-quarter lease operating expense guidance.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Lease operating expenses include an $8.5 million net royalty credit related to the settlement of historical refund claims."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in P3 and P6.",
+    "claim": "Unresolved surety disputes outside existing settlements could force W&T to post significant collateral, with a preliminary injunction previously seeking $105 million in collateral.",
+    "facts": [
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "These sureties may request additional collateral from us in the future, which could be significant and could materially impact our liquidity.",
+     "The preliminary injunction would have required us to immediately post $105 million of collateral.",
+     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements.",
+     "While the outcome of the litigation remains uncertain, and there can be no assurance of a successful result, management continues to believe that assuming W&T prevails in the litigation (including on its antitrust claims), the Company\u2019s damages claims could be substantial."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3, with counterparty decommissioning settlements stated in P6 and ARO balances in F1.",
+    "claim": "BOEM supplemental financial assurance requirements and potential decommissioning liability orders could require additional bonding or financial assurances from W&T as a current or predecessor lessee.",
+    "facts": [
+     "P3",
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations.",
+     "Additionally, regardless of the final rule, BOEM has the right to issue liability orders in the future, including if it determines there is a substantial risk of nonperformance of the interest holder\u2019s decommissioning liabilities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, P4, and P6.",
+    "claim": "Sustained declines in oil, NGL, or natural gas prices reduce W&T's revenues, cash flows, and proved reserve estimates and could trigger full-cost ceiling test impairments.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Extended periods of lower prices for oil, NGLs and natural gas can have a material adverse impact on our results of operations, financial condition and liquidity.",
+     "While we have not recorded an impairment of our oil and gas properties during 2025, any further decreases in commodity pricing could cause an impairment, which would result in a non-cash charge to earnings.",
+     "The EIA is forecasting the Henry Hub spot price for natural gas to average $3.16 per MMBtu in 2027, a 9% decrease from 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, F2, and F3.",
+    "claim": "Commodity derivative contracts limit upside when prices rise, expose W&T to basis and counterparty risks, and generated a net derivative loss of 42,230 (table in thousands).",
+    "facts": [
+     "P2",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "While these commodity derivative positions are intended to reduce the effects of price volatility, they may also limit future income if prices were to rise substantially over the price established by such positions.",
+     "In addition, such transactions may expose us to the risk of financial loss in certain circumstances, including instances in which there is a widening of price differentials between delivery points for our production and the delivery points assumed in the hedge arrangements or the counterparties to the derivative contracts fail to perform under the terms of the contracts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2, with counter-evidence stated in P1, P2, P4, and P6.",
+    "claim": "W&T faces rapid reserve depletion in the Gulf of America, with 34.0% of total proved reserves estimated to deplete in the near term, requiring continuous capital-intensive replacement.",
+    "facts": [
+     "P2",
+     "P1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
+     "As a result, our need to replace proved reserves and production from new investments is relatively greater than that of producers who recover lower percentages of their proved reserves over a similar time period, such as those producers who have a larger portion of their proved reserves in areas other than the Gulf of America.",
+     "There are additional risks associated with deep shelf and deepwater drilling that could result in substantial cost overruns and/or result in uneconomic projects or wells."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1, P2, P3, and P6.",
+    "claim": "Geographic concentration in the Gulf of America and reliance on Mobile Bay for approximately 36% of production expose W&T to storms, hurricanes, and facility shut-ins without business interruption insurance.",
+    "facts": [
+     "P1",
+     "P2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Because a majority of our properties could experience the same conditions at the same time, these conditions could have a greater impact on our results of operations than they might have on other operators who have properties over a wider geographic area.",
+     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
+     "We do not carry business interruption insurance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2.",
+    "claim": "W&T depends on third-party pipelines and processing platforms that are consolidating and decommissioning, creating shut-in risk and costly restarts.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our ability to market our production depends substantially on the availability and capacity of gathering systems, pipelines and processing facilities, which in some cases are owned and operated by third parties.",
+     "A reduction in the number of potential midstream counterparties and available midstream infrastructure could negatively impact our ability to market production.",
+     "Cost increases necessary to bring the associated wells back online may be significant enough that such wells would become uneconomic at low commodity price levels, which may lead to decreases in our proved reserve estimates and potential impairments and associated charges to our earnings."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, F2, F3, P3, and P6.",
+    "claim": "W&T carries a shareholders' deficit of (189,931), long-term debt, net of 350,972, and asset retirement obligations of 558,802 (table in thousands) while reporting GAAP net losses.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Total shareholders' deficit | (189,931) | (199,752)",
+     "Long-term debt, net | 350,972 | 342,355",
+     "Asset retirement obligations | 558,802 | 535,704",
+     "The 10.75% Notes were issued at par and mature on February 1, 2029."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P2.",
+    "claim": "BP Products North America and Shell Trading (US) Company accounted for 33% and 17%, respectively, of W&T's oil, NGLs, and natural gas sales revenues in 2025.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "In 2025, BP Products North America and Shell Trading (US) Company accounted for 33% and 17%, respectively, of our revenues from sales of oil, NGLs and natural gas.",
+     "The terms of sale under the majority of existing contracts are short-term, usually one year or less in duration.",
+     "In addition, extended periods or low commodity prices can have a material adverse impact on the results of operations, financial condition and liquidity of our suppliers, vendors, partners and customers upon which our own results of operations and financial condition depend."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P2.",
+    "claim": "Larger competitors with greater financial, technical, and personnel resources can outbid W&T for BOEM leases and properties and adopt new technologies faster.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Our competitors may be able to evaluate, bid for and purchase a greater number of properties and prospects than our financial or personnel resources permit.",
+     "Finally, companies with larger financial resources may have a significant advantage in terms of meeting any potential new bonding or financial assurance requirements.",
+     "If we are unable to maintain technological advancements consistent with industry standards, our business, results of operations and financial condition may be materially adversely affected."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P2.",
+    "claim": "Increasing environmental compliance costs and potential amendments raising OPA oil-spill financial responsibility requirements above $70.0 million could raise operating expenses and strain financial assurances.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "However, based on policy and regulatory trends and increasingly stringent laws, our capital expenditures and operating expenses related to compliance with the protection of the environment have increased over the years and may continue to increase.",
+     "We are currently required to demonstrate that we have ready access to $70.0 million.",
+     "If OPA is amended to increase the minimum level of financial responsibility, we may experience difficulty in providing financial assurances sufficient to comply with this requirement."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "stated in P4 and F2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, higher realized commodity prices remain the driver of $32,355 (table in thousands) of the $36,567 (table in thousands) year-over-year increase in oil, NGL, and natural gas revenues in the third quarter of 2026, led by realized oil prices rising from $64.62 to $85.06 per Bbl.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Total revenues | $ 167,080 | $ 127,515 | $ 479,718 | $ 379,749",
+     "Changes in average sales prices and production volumes caused the following changes to our oil, NGL and natural gas revenues between the three months ended September 30, 2026 and 2025 (in thousands):",
+     "Oil ($/Bbl) (5) |  | $85.06 |  | $64.62 |  | $20.44"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P2 and P4; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, sustaining price-driven revenue growth still depends on commodity prices remaining supportive rather than following EIA forecasts for WTI spot oil to fall from $97.00 per barrel in the fourth quarter of 2026 to $80.00 per barrel in 2027 and Henry Hub natural gas to decline 9% to $3.16 per MMBtu in 2027.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The price we receive for our oil, NGLs and natural gas production directly affects our revenues, profitability, access to capital, ability to produce these commodities economically and future rate of growth.",
+     "In spite of the increased production and flows from the Middle East, the EIA is forecasting that the spot price for WTI will average $97.00 per barrel in the fourth quarter of 2026 and then fall to an average of $80.00 per barrel in 2027.",
+     "The EIA is forecasting the Henry Hub spot price for natural gas to average $3.16 per MMBtu in 2027, a 9% decrease from 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4, and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, well recompletions, workovers, and field restorations remain recorded as driving production growth of 239 Mboe year over year to 3,514 MBoe (38.2 MBoe/d) in the third quarter of 2026, following 2025 volume growth of 219 MBoe to 12,402 MBoe.",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Production volumes increased by 219 MBoe to 12,402 MBoe during 2025 compared to the same period in 2024, primarily due to restoring production at our West Delta 73, MO 916 and Main Pass 108 fields and increased production at our Mobile Bay fields due to well stimulation work and reduced downtime, partially offset by unplanned third party pipeline outages and the shut-in of a well due to solids production.",
+     "Production volumes increased by 239 Mboe to 3,514 MBoe during the three months ended September 30, 2026 compared to the same period in 2025 primarily due to recompletion of a well at our Garden Banks 783 field.",
+     "During the third quarter of 2026, W&T performed seven workover projects and one recompletion that positively impacted production.",
+     "Average daily equivalent sales (MBoe/d) |  |  | 38.2 |  |  | 34.7 |  | 10% |  |  | 35.6 |  | 7%"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, pulling forward 2027 capital projects into the fourth quarter of 2026 continues to put expected full-year 2026 capital expenditures at $35.0 to $38.0 million to support production in the first half of 2027.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Full year 2026 capital expenditures are now expected to be in the range of $35.0 to $38.0 million as a result of pulling forward 2027 capital projects to the fourth quarter to capitalize on higher commodity prices.",
+     "The benefits to production from these expenditures are expected to be realized over the first half of 2027."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, continuing production growth still requires replacing proved reserves at acceptable costs because 34.0% of total proved reserves as of December 31, 2025 are estimated to deplete within three years.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
+     "As a result, our need to replace proved reserves and production from new investments is relatively greater than that of producers who recover lower percentages of their proved reserves over a similar time period, such as those producers who have a larger portion of their proved reserves in areas other than the Gulf of America."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2, P3, and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, sustaining production growth still depends on limiting storms, midstream outages, and shut-ins\u2014particularly at Mobile Bay, which accounted for approximately 36% of 2025 production\u2014after 2.5 MMBoe of deferred production in 2025 and an estimated 2,600 Boe/d impact in the fourth quarter of 2026.",
     "facts": [
      "P2",
      "P3",
@@ -725,8 +1216,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1 Business Strategy; ARO figures from F1",
-    "claim": "The company's existing Gulf of America portfolio of 200 structures (142 operated) lowers capital expenditures and supports returns when developing nearby prospect opportunities.",
+    "basis": "stated in P1; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, the company's existing portfolio of 200 structures (142 operated) remains cited as reducing capital expenditures and supporting returns on prospect development.",
     "facts": [
      "P1"
     ],
@@ -736,21 +1227,22 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1 and P6",
-    "claim": "Internal Free Cash Flow generation of $33.2 million in the third quarter of 2026 and $89.3 million in the first nine months of 2026 has strengthened liquidity and reduced net debt to trailing twelve months Adjusted EBITDA to 0.9x, supporting balance sheet capacity for reinvestment.",
+    "basis": "stated in P1 and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, Free Cash Flow of $33.2 million in the third quarter of 2026 and $89.3 million in the first nine months of 2026 remains recorded alongside a reduction in net debt to trailing twelve months Adjusted EBITDA to 0.9x.",
     "facts": [
      "P1",
      "P6"
     ],
     "quotes": [
      "By operating within our free cash flow, we are able to improve liquidity and optimize our balance sheet.",
-     "The first nine months of 2026 have led to some outstanding results, where we have generated Adjusted EBITDA of $164 million, Free Cash Flow of $89 million and we have increased our cash on hand to almost $200 million."
+     "Generated Free Cash Flow of $33.2 million for the third quarter of 2026 and $89.3 million for the first nine months of 2026;",
+     "Reduced net debt to trailing twelve months Adjusted EBITDA to 0.9x from 1.1x at June 30, 2026 and 1.6x at September 30, 2025;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1, P4, P6, and F3",
-    "claim": "Accretive acquisitions of producing properties are a primary growth driver backed by $234.7 million of available liquidity at September 30, 2026\u2014including $14.7 million in net ATM equity proceeds\u2014and a reserve-based credit facility conversion with an aggregate maximum credit amount of $100.0 million.",
+    "basis": "stated in F3, P1, P4, and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, acquiring producing properties remains a stated strategy backed by $234.7 million of available liquidity at September 30, 2026, $14.7 million in net ATM equity proceeds, and a reserve-based credit facility conversion with an aggregate maximum credit amount of $100.0 million.",
     "facts": [
      "F3",
      "P1",
@@ -760,405 +1252,184 @@
     "quotes": [
      "We strategically pursue the acquisition of compelling producing assets that generate cash flows at attractive valuations with upside potential and optimization opportunities.",
      "As of September 30, 2026, W&T had available liquidity of $234.7 million comprised of $191.3 million in unrestricted cash and cash equivalents and $43.4 million of borrowing availability under W&T\u2019s revolving credit facility, based on a borrowing base of $50.0 million and $6.6 million of letters of credit outstanding.",
-     "We have materially strengthened our balance sheet, added financial flexibility and remain very well positioned to execute on our strategy which includes evaluating and integrating accretive acquisitions.",
-     "Initial borrowing base of $50.0 million, fully supporting $50.0 million of elected commitments, with an aggregate maximum credit amount of $100.0 million that provides capacity to increase commitments to support future growth."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 Risk Factors and P3 MD&A",
-    "claim": "For acquisition-led and capital-funded growth to continue, the company must compete effectively against larger, better-capitalized rivals while avoiding material liquidity drains from BOEM supplemental financial assurance requirements or surety collateral demands.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "Our competitors may also be able to pay more to acquire productive oil and natural gas properties and exploratory prospects than we are able or willing to pay or finance.",
-     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations.",
-     "To the extent we are unable to provide collateral or provide an adequate alternative, including financing, we may be forced to reduce our capital expenditures in the current year or future years, may be unable to execute our ARO plan or may be unable to comply with our existing debt instruments."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in P4 and P6",
-    "claim": "W&T Offshore declared a regular quarterly dividend of $0.01 per share of common stock for the fourth quarter of 2026, payable on November 19, 2026 to stockholders of record on November 12, 2026.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "On October 29, 2026, we declared a regular quarterly dividend of $0.01 per share of common stock for the fourth quarter of 2026.",
-     "We expect to pay the dividend on November 19, 2026 to stockholders of record as of the close of business on November 12, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2 and P6",
-    "claim": "W&T Offshore reported third quarter 2026 operational and financial results, including a net loss of $13.6 million, or $(0.09) per diluted share, and Adjusted Net Income of $0.9 million, or $0.01 per diluted share.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "HOUSTON, October 29, 2026 \u2013 W&T Offshore, Inc. (NYSE: WTI) (\u201cW&T,\u201d the \u201cCompany,\u201d \u201cwe\u201d or \u201cus\u201d) today reported operational and financial results for the third quarter of 2026 and declared a fourth quarter 2026 dividend of $0.01 per share.",
-     "Reported net loss of $13.6 million, or $(0.09) per diluted share, and Adjusted Net Income of $0.9 million, or $0.01 per diluted share;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P4 and P6",
-    "claim": "W&T Offshore entered into the Second Amendment to its Credit Agreement, converting its $50.0 million revolving credit facility into a reserve-based revolving credit facility with an aggregate maximum credit amount of $100.0 million and eliminating the 75% excess cash flow sweep and $100.0 million minimum PDP PV-10 covenant.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
+     "During Q3 2026, W&T utilized its ATM agreement to issue 3.6 million common shares with net proceeds of $14.7 million to further enhance liquidity and support near-term strategic growth objectives.",
      "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million.",
-     "Eliminates the 75% excess cash flow sweep, the requirement to repay any outstanding revolving credit facility balance every three months and the $100.0 million minimum PDP PV-10 asset coverage covenant, giving the Company greater control over its cash flow and liquidity;"
+     "Proceeds from issuance of common stock | 14,670"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and P6",
-    "claim": "During the third quarter of 2026, W&T Offshore used its At-the-Market agreement to issue 3.6 million common shares for net proceeds of $14.7 million.",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "During Q3 2026, W&T utilized its ATM agreement to issue 3.6 million common shares with net proceeds of $14.7 million to further enhance liquidity and support near-term strategic growth objectives."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P6",
-    "claim": "During the nine months ended September 30, 2026, W&T Offshore made repayments of (8,825) (table in thousands) on the TVPX Loan and received proceeds of 8,000 (table in thousands) from the issuance of the New TVPX Loan.",
-    "facts": [
-     "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Repayments of TVPX Loan | (8,825) | (825)",
-     "Proceeds from issuance of New TVPX Loan | 8,000"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "W&T Offshore paid its 12th consecutive quarterly dividend of $0.01 per share.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Paid 12th consecutive quarterly dividend of $0.01 per share on August 26, 2026 and declared a quarterly dividend of $0.01 per share for 4Q 2026, payable on November 19, 2026 to shareholders of record on November 12, 2026;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "W&T Offshore settled historical refund claims, resulting in an $8.5 million net royalty credit included in fourth quarter 2026 lease operating expense guidance.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Lease operating expenses include an $8.5 million net royalty credit related to the settlement of historical refund claims."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "W&T Offshore announced that fourth quarter 2026 sales volumes will reflect short-term reductions from Hurricane Isaias and a planned Mobile Bay turnaround with a combined production impact of approximately 2,600 Boe/d.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Fourth quarter 2026 production guidance includes short-term sales volumes reductions from Hurricane Isaias and planned Mobile Bay turnaround with a combined impact to production of approximately 2,600 Boe/d."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6",
-    "claim": "In its ongoing surety lawsuits, W&T Offshore obtained agreements from opposing counsel and a court order requiring defendants to review and produce relevant communications.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "W&T has continued to pursue discovery materials in the surety lawsuits, and it has made significant progress in obtaining agreements from opposing counsel and a court order requiring defendants to review and produce communications relevant to W&T\u2019s claims."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "W&T Offshore declared a first quarter 2026 dividend of $0.01 per share.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On March 5, 2026, we declared a first quarter dividend of $0.01 per share."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The U.S. District Court for the Eastern District of Louisiana granted summary judgment in W&T Offshore's favor in its ONRR royalty dispute, leading to the release of administrative appeal bonds on December 15 and December 16, 2025 and the reversal of a $5.3 million accrual.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On August 26, 2025, the United States District Court for the Eastern District of Louisiana issued a favorable order on the Company\u2019s motion for summary judgment regarding the disallowance of allowable reduction of cash payments for royalties owed to the ONRR.",
-     "On December 15, 2025 and December 16, 2025, the ONRR released the Company\u2019s administrative appeal bonds.",
-     "As a result of the order, the Company reversed its $5.3 million accrual related to this matter."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "W&T Offshore entered into settlement agreements with USSIC on June 14, 2025 and PIIC on June 15, 2025 to dismiss claims in the Sureties Litigation without prejudice, withdrawing approximately $94 million in collateral demands.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On June 14, 2025, we entered into the USSIC Settlement Agreement and, on June 15, 2025, we entered into the PIIC Settlement Agreement to dismiss all claims with the applicable parties related to the Sureties Litigation without prejudice.",
-     "The entry into the Settlement Agreements resulted in the withdrawal of approximately $94 million in collateral demands."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "The presiding judge in the Sureties Litigation recommended denying preliminary injunction requests from two surety providers that would have required $105 million of collateral, and the mediator later declared an impasse with the remaining non-settling surety providers.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On June 30, 2025, we announced that the presiding judge in the Sureties Litigation recommended denying the requests for preliminary injunction submitted by two surety providers.",
-     "The preliminary injunction would have required us to immediately post $105 million of collateral.",
-     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F2, F3, and P3",
-    "claim": "W&T Offshore issued $350.0 million of 10.75% Notes maturing February 1, 2029 and used the proceeds with cash on hand to tender for and redeem its 11.75% Notes and repay its Term Loan, recording a loss on extinguishment of debt of 15,015 (table in thousands).",
-    "facts": [
-     "F2",
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "On January 28, 2025, we issued $350.0 million of 10.75% Notes.",
-     "The 10.75% Notes were issued at par and mature on February 1, 2029.",
-     "During 2025, we recorded a loss on extinguishment of debt related to our January 2025 refinancing.",
-     "Loss on extinguishment of debt | 15,015"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3",
-    "claim": "W&T Offshore terminated its Sixth Amended and Restated Credit Agreement and entered into a new Credit Agreement with initial revolving commitments of $50.0 million and a $10.0 million letter of credit sublimit.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "On January 28, 2025, in conjunction with the issuance of the 10.75% Notes, we terminated our Sixth Amended and Restated Credit Agreement (the \u201cLegacy Credit Agreement\u201d) and entered into the Credit Agreement which provides us a revolving credit and letter of credit facility with initial bank lending commitments of $50.0 million with a letter of credit sublimit of $10.0 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 and P3",
-    "claim": "W&T Offshore received $58.5 million in insurance proceeds settling claims related to the February 2023 Mobile Bay plant turnaround.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "In January 2025, we received $58.5 million related to the settlement of claims related to the Mobile Bay plant turnaround in February 2023."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P2 and P3",
-    "claim": "During 2025, W&T Offshore experienced shut-ins at its Mobile Bay Properties due to compressor problems and downstream operated plant issues resulting in approximately 686 MBoe of deferred production, with total 2025 deferred production estimated at approximately 2.5 MMBoe.",
+    "basis": "stated in P2 and P3; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, acquisition-led and capital-funded growth still faces competition from better-capitalized rivals and potential liquidity pressure from BOEM supplemental financial assurance rules or surety collateral demands.",
     "facts": [
      "P2",
      "P3"
     ],
     "quotes": [
-     "During 2025, our Mobile Bay Properties were shut-in for various reasons, including compressor problems and downstream operated plant issues.",
-     "These shut-ins resulted in deferred production of approximately 686 MBoe based on production rates prior to the shut-ins.",
-     "For 2025, we estimate deferred production was approximately 2.5 MMBoe."
+     "Many of these competitors have financial resources that allow them to obtain substantially greater technical expertise and personnel than we have.",
+     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations.",
+     "These sureties may request additional collateral from us in the future, which could be significant and could materially impact our liquidity."
     ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
+    "support": "quote_not_found"
+   },
    {
-    "basis": "Stated in P2, P3, P4, and P6.",
-    "claim": "Depressed oil, NGL, and natural gas prices reduce W&T's revenues, cash flows, and proved reserve estimates and could trigger full-cost ceiling test impairments.",
+    "basis": "stated in P2 and P3; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, depressed oil, NGL, and natural gas prices continue to pose risks to W&T's revenues, cash flows, proved reserves, and full-cost ceiling test carrying values.",
     "facts": [
      "P2",
-     "P3",
-     "P4",
-     "P6"
+     "P3"
     ],
     "quotes": [
      "Depressed oil, NGLs or natural gas prices adversely affect our business, financial condition, cash flow, liquidity or results of operations and could affect our ability to fund future capital expenditures needed to find and replace reserves, meet our financial commitments and to implement our business strategy.",
      "While we have not recorded an impairment of our oil and gas properties during 2025, any further decreases in commodity pricing could cause an impairment, which would result in a non-cash charge to earnings.",
-     "In spite of the increased production and flows from the Middle East, the EIA is forecasting that the spot price for WTI will average $97.00 per barrel in the fourth quarter of 2026 and then fall to an average of $80.00 per barrel in 2027."
+     "A prolonged period of weak commodity prices may create uncertainties in our financial condition and results of operations."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 and P6.",
-    "claim": "Unfavorable rulings in remaining surety litigation or renewed demands after the settlement standstill could force W&T to post significant collateral, after surety providers previously sought $105 million.",
+    "basis": "stated in P3 and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, remaining surety litigation and potential collateral demands after settlement standstill periods remain unresolved risks after surety providers previously sought a preliminary injunction for $105 million in collateral.",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
-     "These sureties may request additional collateral from us in the future, which could be significant and could materially impact our liquidity.",
      "The preliminary injunction would have required us to immediately post $105 million of collateral.",
-     "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements."
+     "The recommendation would effectively nullify all current collateral requests related to the surety litigation by the surety providers and we will not be required to post collateral (if at all) until a determination on the merits of the Sureties Litigation with the remaining surety providers.",
+     "While the outcome of the litigation remains uncertain, and there can be no assurance of a successful result, management continues to believe that assuming W&T prevails in the litigation (including on its antitrust claims), the Company\u2019s damages claims could be substantial."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1, P3, and P6.",
-    "claim": "BOEM supplemental financial assurance rules or future liability orders could increase bonding and compliance costs for W&T's decommissioning obligations, while counterparty insolvencies shift abandonment costs onto W&T.",
+    "basis": "stated in F1, P3, and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, BOEM supplemental financial assurance rules, future liability orders, and counterparty insolvencies that shift decommissioning obligations onto W&T remain ongoing risks.",
     "facts": [
      "F1",
      "P3",
      "P6"
     ],
     "quotes": [
-     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations.",
-     "Additionally, regardless of the final rule, BOEM has the right to issue liability orders in the future, including if it determines there is a substantial risk of nonperformance of the interest holder\u2019s decommissioning liabilities."
+     "Additionally, regardless of the final rule, BOEM has the right to issue liability orders in the future, including if it determines there is a substantial risk of nonperformance of the interest holder\u2019s decommissioning liabilities.",
+     "Settlement of decommissioning obligations as a result of working interest partners or counterparties of divestiture transactions that were unable to perform the required abandonment obligations due to bankruptcy or insolvency.",
+     "Asset retirement obligations | 558,802 | 535,704"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1, P2, and P6.",
-    "claim": "W&T faces short Gulf of America reserve lives, with 34.0% of total proved reserves estimated to be depleted over the near term, requiring ongoing capital investment to replace reserves.",
+    "basis": "stated in P1 and P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, W&T continues to face short Gulf of America reserve lives, with 34.0% of total proved reserves estimated to deplete within three years, requiring ongoing capital investment.",
     "facts": [
      "P1",
-     "P2",
-     "P6"
+     "P2"
     ],
     "quotes": [
+     "Proved reserves in the Gulf of America generally have shorter reserve lives than proved reserves in many other producing regions of the United States, in part due to the difference in rules related to booking PUDs between conventional and unconventional basins.",
      "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
-     "We may not be able to economically find, develop or acquire additional reserves or make the necessary capital investments if our cash flows from operations decline or external sources of capital become limited or unavailable."
+     "We are active in the acquisition, exploration and development of oil and natural gas properties."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1, P2, P3, P4, and P6.",
-    "claim": "W&T's Gulf of America concentration and reliance on Mobile Bay Properties, which generated 36% of production and 20% of total revenue, expose output to storms and operational shut-ins without business interruption insurance.",
+    "basis": "stated in P1 and P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, W&T's concentration in the Gulf of America and Mobile Bay Properties\u2014which accounted for 36% of 2025 production and 20% of total revenue\u2014continues to expose output to storms and shut-ins without business interruption insurance.",
     "facts": [
      "P1",
-     "P2",
-     "P3",
-     "P4",
-     "P6"
+     "P2"
     ],
     "quotes": [
-     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
-     "These shut-ins resulted in deferred production of approximately 686 MBoe based on production rates prior to the shut-ins.",
      "We do not carry business interruption insurance.",
-     "Fourth quarter 2026 production guidance includes short-term sales volumes reductions from Hurricane Isaias and planned Mobile Bay turnaround with a combined impact to production of approximately 2,600 Boe/d."
+     "For 2025, approximately 36% of our production and 20% of our total revenue was attributable to our interests in certain oil and natural gas leasehold interests and associated wells and units located off the coast of Alabama, in state coastal and federal Gulf of America waters approximately 70 miles south of Mobile, Alabama (the \u201cMobile Bay Properties\u201d).",
+     "We may experience production interruptions for which we do not have business interruption insurance."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1, P2, and P3.",
-    "claim": "W&T depends on third-party pipelines and processing platforms that are consolidating and decommissioning in the Gulf of America, which could curtail production or block market access.",
+    "basis": "stated in P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, dependence on third-party pipelines and processing platforms that are consolidating and decommissioning in the Gulf of America continues to pose production curtailment and market-access risks.",
     "facts": [
-     "P1",
-     "P2",
-     "P3"
+     "P2"
     ],
     "quotes": [
-     "We also depend upon third-party pipelines that provide delivery options from our facilities.",
-     "A reduction in the number of potential midstream counterparties and available midstream infrastructure could negatively impact our ability to market production.",
-     "As of December 31, 2025, two fields, accounting for approximately 1.0 MMBoe (or 0.8%) of our total proved reserves, are tied back to separate, third-party owned platforms."
+     "Our ability to market our production depends substantially on the availability and capacity of gathering systems, pipelines and processing facilities, which in some cases are owned and operated by third parties.",
+     "In recent years, we have seen a consolidation of gathering systems, pipelines and processing facilities in the Gulf of America, which has led to fewer midstream counterparties to contract with for transportation and processing.",
+     "As part of these consolidation efforts, we have also seen a decommissioning of midstream assets."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F1, F2, F3, P3, and P6.",
-    "claim": "At quarter-end, W&T carried a shareholders' deficit of (189,931) (table in thousands) and long-term debt, net of 350,972 (table in thousands), while reporting a nine-month net loss of $ (23,618) (table in thousands).",
+    "basis": "stated in F1, F2, F3, and P6; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, W&T's September 30, 2026 balance sheet and nine-month results remain as reported, with a shareholders' deficit of (189,931) (table in thousands), long-term debt, net of 350,972 (table in thousands), and a nine-month net loss of $ (23,618) (table in thousands).",
     "facts": [
      "F1",
      "F2",
      "F3",
-     "P3",
      "P6"
     ],
     "quotes": [
      "Total shareholders' deficit | (189,931) | (199,752)",
      "Long-term debt, net | 350,972 | 342,355",
      "Net loss | $ (13,649) | $ (71,474) | $ (23,618) | $ (122,935)",
-     "The 10.75% Notes were issued at par and mature on February 1, 2029.",
-     "As of September 30, 2026, the Company had total debt of $352.0 million, Net Debt of $160.7 million and Net Debt to trailing twelve month Adjusted EBITDA was 0.9 times."
+     "Net loss | $ (23,618) | $ (122,935)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2, F3, and P2.",
-    "claim": "Commodity derivative positions can cap upside gains during price rallies and expose W&T to basis differential widening and counterparty nonperformance.",
+    "basis": "stated in F2 and P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, commodity derivative positions continue to carry the risk of capping upside gains during price rallies and exposing W&T to basis differential widening and counterparty nonperformance.",
     "facts": [
      "F2",
-     "F3",
      "P2"
     ],
     "quotes": [
      "While these commodity derivative positions are intended to reduce the effects of price volatility, they may also limit future income if prices were to rise substantially over the price established by such positions.",
-     "In addition, such transactions may expose us to the risk of financial loss in certain circumstances, including instances in which there is a widening of price differentials between delivery points for our production and the delivery points assumed in the hedge arrangements or the counterparties to the derivative contracts fail to perform under the terms of the contracts."
+     "In addition, such transactions may expose us to the risk of financial loss in certain circumstances, including instances in which there is a widening of price differentials between delivery points for our production and the delivery points assumed in the hedge arrangements or the counterparties to the derivative contracts fail to perform under the terms of the contracts.",
+     "Derivative loss (gain), net | 15,800 | (4,108) | 42,230 | (13,398)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 and P2.",
-    "claim": "Offshore and deepwater operations expose W&T to mechanical failures, cost overruns, uninsurable hazards, and potential increases in OPA financial responsibility requirements above $70.0 million.",
+    "basis": "stated in P1 and P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, offshore and deepwater operations continue to expose W&T to mechanical failures, cost overruns, uninsurable hazards, and potential increases in OPA financial responsibility requirements above $70.0 million.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "Moreover, drilling costs and the risk of mechanical failure are significantly higher because of the additional depth and adverse conditions, such as high temperature and pressure.",
+     "We believe that our coverage limits are sufficient and are consistent with our exposure; however, we cannot insure against all possible losses.",
+     "There are additional risks associated with deep shelf and deepwater drilling that could result in substantial cost overruns and/or result in uneconomic projects or wells.",
      "We are currently required to demonstrate that we have ready access to $70.0 million.",
      "If OPA is amended to increase the minimum level of financial responsibility, we may experience difficulty in providing financial assurances sufficient to comply with this requirement."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1.",
-    "claim": "BP Products North America and Shell Trading (US) Company accounted for 33% and 17% of oil, NGLs, and natural gas sales revenues, respectively.",
+    "basis": "stated in P1; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, customer concentration disclosures remain unchanged, with BP Products North America and Shell Trading (US) Company accounting for 33% and 17% of 2025 oil, NGLs, and natural gas sales revenues, respectively.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "In 2025, BP Products North America and Shell Trading (US) Company accounted for 33% and 17%, respectively, of our revenues from sales of oil, NGLs and natural gas.",
-     "Given the commoditized nature of the products we produce and market and the location of our production in the Gulf of America, we believe the loss of any of the customers above would not result in a material adverse effect on our ability to market future oil and natural gas production, as we believe that replacement customers could be obtained in a relatively short period of time on terms, conditions, and pricing substantially similar to those currently existing."
+     "In 2025, BP Products North America and Shell Trading (US) Company accounted for 33% and 17%, respectively, of our revenues from sales of oil, NGLs and natural gas."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 and P2.",
-    "claim": "Larger competitors with greater financial and technical resources can outbid W&T in sealed-bid BOEM lease auctions and better absorb offshore bonding requirements.",
+    "basis": "stated in P1 and P2; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, larger competitors with greater financial and technical resources retain the ability to outbid W&T in sealed-bid BOEM lease auctions and better absorb offshore bonding requirements.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "Competition for oil and natural gas properties and prospects is intense; some of our competitors have larger financial, technical and personnel resources that may give them an advantage in evaluating and obtaining properties and prospects.",
+     "Many of these competitors are large, well-established companies that have financial and other resources substantially greater than ours.",
+     "For example, new leases acquired from the BOEM are acquired through a \u201csealed bid\u201d process and are generally awarded to the highest bidder.",
      "Finally, companies with larger financial resources may have a significant advantage in terms of meeting any potential new bonding or financial assurance requirements."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3.",
-    "claim": "U.S. and retaliatory tariffs create uncertainty for industry capital costs, operating expenses, and commodity prices.",
+    "basis": "stated in P3; no evidence items became effective after 2026-11-20T00:15:18Z",
+    "claim": "With no newer evidence effective after the prior analysis, U.S. and retaliatory tariffs continue to represent an area of uncertainty for the oil and gas industry and commodity prices.",
     "facts": [
      "P3"
     ],
@@ -1169,61 +1440,85 @@
     "support": "supported"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "stated in P3 and P6 (mediation impasse with non-settling sureties, pending depositions, expert damages quantification, and uncertain litigation outcome)",
-    "claim": "What will be the outcome of the remaining Sureties Litigation after the mediation impasse, including whether W&T must post $105 million of demanded collateral and what damages, if any, W&T will recover?",
+    "basis": "Stated in [P3] and [P6] that mediation reached an impasse with non-settling sureties and the litigation outcome remains uncertain.",
+    "claim": "What will be the outcome and financial impact of the remaining Sureties Litigation, including whether non-settling surety providers force collateral postings and whether W&T recovers damages on its antitrust claims?",
     "facts": [
      "P3",
      "P6"
     ],
     "quotes": [
      "Mediation is no longer active as the mediator has declared an impasse with respect to the surety providers that did not enter into the Settlement Agreements.",
-     "The preliminary injunction would have required us to immediately post $105 million of collateral.",
      "While the outcome of the litigation remains uncertain, and there can be no assurance of a successful result, management continues to believe that assuming W&T prevails in the litigation (including on its antitrust claims), the Company\u2019s damages claims could be substantial."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 (proposed rule comment period expected to end May 8, 2026, with substance and timing of final action unpredictable)",
-    "claim": "Whether BOEM finalized its proposed financial assurance rule in 2026 and what future supplemental financial assurance costs or liability orders W&T will incur?",
+    "basis": "Stated directly in [P3] that the substance and timing of the legal and regulatory actions cannot be predicted.",
+    "claim": "What final financial assurance rule will BOEM adopt following its proposed amendments, and what supplemental bonding or decommissioning liability orders will apply to W&T?",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "The substance and timing of such legal and regulatory actions cannot be predicted at this time.",
-     "The future cost of compliance with respect to supplemental financial assurances, including the obligations imposed on us, whether as current or predecessor lessee or grant holder in respect of BOEM\u2019s final rule or any new, more stringent, rules related to supplemental financial assurances could materially and adversely affect our financial condition, cash flows, liquidity and results of operations."
+     "The proposed rule is subject to a 60-day public comment period, which is expected to end on May 8, 2026.",
+     "The substance and timing of such legal and regulatory actions cannot be predicted at this time."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 and P6 (initial redetermination scheduled for November 1, 2026, prior to decision time T, with no result reported in the packet)",
-    "claim": "What borrowing base resulted from the initial semi-annual redetermination scheduled to begin in November 2026 under the Amended Credit Agreement, relative to the initial $50.0 million borrowing base and $100.0 million aggregate maximum credit amount?",
+    "basis": "Stated in [P4], which cross-references Note 13 \u2013 Subsequent Event that is omitted from the evidence packet.",
+    "claim": "What are the complete terms, borrowing base conditions, and covenants of the Amended Credit Agreement entered into after the third quarter?",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "On October 1, 2026, we entered into the Amended Credit Agreement, pursuant to which our revolving credit facility was converted into a reserve-based revolving credit facility, with an aggregate maximum credit amount of $100.0 million and an aggregate elected commitment amount initially set at $50.0 million.",
+     "For additional information about the Amended Credit Agreement, see Part I, Item 1. Financial Statements \u2013 Note 13 \u2013 Subsequent Event.",
+     "On October 1, 2026, the Company entered into the Second Amendment to its Credit Agreement with Texas Capital Bank, as administrative agent, and its bank group, converting its existing $50.0 million revolving credit facility into a conventional reserve-based revolving credit facility (\u201cRBL\u201d), effective as of that date."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from [P6] stating the initial semi-annual redetermination begins November 1, 2026, with no post-redetermination filing present in the packet as of decision time T.",
+    "claim": "What borrowing base and elected commitment amounts resulted from the initial semi-annual RBL redetermination scheduled under the Amended Credit Agreement?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
      "The borrowing base will be redetermined semi-annually each May 1 and November 1, beginning November 1, 2026;"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P4 (explicitly cross-references Note 13, which is not included in the evidence packet)",
-    "claim": "What are the complete terms, interest rate margins, maturity date, and covenant definitions of the Amended Credit Agreement referenced in Note 13 of the 2026 Form 10-Q?",
+    "basis": "Stated in [P2] and [P6] that derivative position details are provided in Note 10 and the company's investor presentation, neither of which is in the packet.",
+    "claim": "What are the hedged volumes, strike prices, contract maturities, and counterparty exposures of W&T's outstanding commodity derivative positions?",
     "facts": [
-     "P4"
+     "P2",
+     "P6"
     ],
     "quotes": [
-     "For additional information about the Amended Credit Agreement, see Part I, Item 1. Financial Statements \u2013 Note 13 \u2013 Subsequent Event."
+     "See Financial Statements and Supplementary Data\u2013 Note 10 \u2013Financial Instruments under Part II, Item 8 in this Form 10-K for additional information on our derivative contracts and transactions.",
+     "A summary of the Company\u2019s outstanding derivative positions is provided in the investor presentation posted on W&T\u2019s website."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F1, F3, and P3 (debt carrying values and New TVPX Loan cash flows are reported without the Form 10-Q debt footnote)",
-    "claim": "What are the interest rate, maturity, collateral, and repayment terms of the New TVPX Loan (proceeds of 8,000, table in thousands) and the debt instruments comprising the 1,000 current portion and 350,972 long-term portion of net debt (table in thousands)?",
+    "basis": "Stated in [P1], which refers to Item 2 Properties (omitted from the packet), and inferred from [P2] citing depletion percentages without total reserve volumes.",
+    "claim": "What are W&T's proved reserve volumes by commodity, standardized measure of discounted future net cash flows, and field-level property details?",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Our acreage, well, production and reserves information are described in more detail under Part I, Item 2. Properties, in this Form 10-K.",
+     "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in [F3] and [F1] that the New TVPX Loan was issued and long-term debt, net stands at 350,972 (table in thousands), while the debt footnotes are omitted from the packet.",
+    "claim": "What are the interest rate, maturity date, collateral, and covenant terms of the New TVPX Loan of 8,000 (table in thousands) and the remaining components of long-term debt?",
     "facts": [
      "F1",
      "F3",
@@ -1231,93 +1526,63 @@
     ],
     "quotes": [
      "Proceeds from issuance of New TVPX Loan | 8,000",
-     "Current portion of long-term debt, net | 1,000 | 8,458",
      "Long-term debt, net | 350,972 | 342,355"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F2, F3, P2, and P6 (derivative losses and cash settlements are reported, while open contract schedules are omitted from the packet)",
-    "claim": "What are the hedged volumes, strike prices, contract types, maturities, and counterparties of W&T's outstanding commodity derivative positions following the 42,230 net derivative loss (table in thousands) in the first nine months of 2026?",
-    "facts": [
-     "F2",
-     "F3",
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "A summary of the Company\u2019s outstanding derivative positions is provided in the investor presentation posted on W&T\u2019s website.",
-     "Derivative loss (gain), net | 15,800 | (4,108) | 42,230 | (13,398)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 and P2 (reserve depletion share and ceiling-test mechanism are disclosed, while Item 2 and Item 8 reserve tables are omitted from the packet)",
-    "claim": "What are W&T's total proved reserve quantities, present value of future net revenues, and ceiling-test impairment cushion, given that 34.0% of total proved reserves at year-end 2025 are estimated to be depleted within three years?",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "Our acreage, well, production and reserves information are described in more detail under Part I, Item 2. Properties, in this Form 10-K.",
-     "Our independent petroleum consultant estimates that 34.0% of our total proved reserves as of December 31, 2025 will be depleted within three years.",
-     "While we have not recorded an impairment of our oil and gas properties during 2025, any further decreases in commodity pricing could cause an impairment, which would result in a non-cash charge to earnings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 and P6 (the balance sheet reduction is shown across periods without the accompanying commitments and contingencies footnote)",
-    "claim": "What underlying obligations comprise the 13,851 commitments and contingencies balance (table in thousands) at the end of the third quarter of 2026, following its decrease from 27,440 (table in thousands) at year-end 2025?",
+    "basis": "Inferred from the balance sheet totals in [F1] and the decommissioning settlement footnote in [P6] without the underlying ARO and commitments footnotes.",
+    "claim": "What settlement schedules, discount rate assumptions, and third-party insolvency exposures underlie W&T's non-current asset retirement obligations of 558,802 (table in thousands) and commitments and contingencies of 13,851 (table in thousands)?",
     "facts": [
      "F1",
      "P6"
     ],
     "quotes": [
-     "Commitments and contingencies | 13,851 | 27,440"
+     "Asset retirement obligations | 558,802 | 535,704",
+     "Commitments and contingencies | 13,851 | 27,440",
+     "Settlement of decommissioning obligations as a result of working interest partners or counterparties of divestiture transactions that were unable to perform the required abandonment obligations due to bankruptcy or insolvency."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 (quarterly settlement amounts are disclosed without total estimated remaining third-party default exposure)",
-    "claim": "What is W&T's remaining exposure to decommissioning obligations from bankrupt or insolvent working interest partners and divestiture counterparties after decommissioning obligation settlements reached 1,881 (table in thousands) in the third quarter of 2026?",
+    "basis": "Stated directly in [P3] that discussions with the ONRR remain ongoing and any refund or credit amount is unresolved.",
+    "claim": "What amount, if any, will the ONRR refund or credit to W&T regarding the litigation bond from the royalty deduction dispute?",
     "facts": [
-     "P6"
+     "P3"
     ],
     "quotes": [
-     "Decommissioning obligation settlements (1) | 1,881 | 1,196 | 57% | 62 | 2,934%",
-     "Settlement of decommissioning obligations as a result of working interest partners or counterparties of divestiture transactions that were unable to perform the required abandonment obligations due to bankruptcy or insolvency."
+     "The Company remains in discussions with the ONRR regarding the related litigation bond and the amount, if any, to be refunded or credited to the Company."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in P3 and P6 (P3 notes ongoing ONRR discussions over the litigation bond, while P6 reports an $8.5 million net royalty credit without identifying the counterparty)",
-    "claim": "What amount, if any, will be refunded or credited to W&T from the ONRR litigation bond, and whether the $8.5 million net royalty credit in fourth-quarter 2026 lease operating expense guidance relates to that ONRR matter?",
+    "basis": "Stated in [P6] as fourth-quarter and full-year guidance rather than reported actual results as of decision time T.",
+    "claim": "What were the actual fourth-quarter production volumes, accelerated capital expenditures, and lease operating expenses following Hurricane Isaias, the planned Mobile Bay turnaround, and the $8.5 million net royalty credit?",
     "facts": [
-     "P3",
      "P6"
     ],
     "quotes": [
-     "The Company remains in discussions with the ONRR regarding the related litigation bond and the amount, if any, to be refunded or credited to the Company.",
+     "Fourth quarter 2026 production guidance includes short-term sales volumes reductions from Hurricane Isaias and planned Mobile Bay turnaround with a combined impact to production of approximately 2,600 Boe/d.",
      "Lease operating expenses include an $8.5 million net royalty credit related to the settlement of historical refund claims."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in F3 and P6 (share-based compensation expense is reported and attributed in part to mark-to-market awards without plan terms)",
-    "claim": "What are the grant terms, settlement mechanics, and share-price sensitivity of the mark-to-market awards that drove share-based compensation of 28,915 (table in thousands) in the first nine months of 2026?",
+    "basis": "Inferred from [F2] showing income tax expense during pre-tax loss periods and [P3] omitting the Income tax discussion.",
+    "claim": "What tax items or valuation allowance movements caused income tax expense of 55,991 (table in thousands) in the prior-year third quarter and 1,767 (table in thousands) in the current-year nine-month period alongside pre-tax losses?",
     "facts": [
-     "F3",
-     "P6"
+     "F2",
+     "P3"
     ],
     "quotes": [
-     "Share-based compensation | 28,915 | 8,497",
-     "The increase was driven primarily by an increase in the Company\u2019s share price used to value certain of the Company\u2019s share-based compensation awards that are marked-to-market at the end of each reporting period."
+     "Loss before income taxes | (13,151) | (15,483) | (21,851) | (73,941)",
+     "Income tax expense | 498 | 55,991 | 1,767 | 48,994"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P6 (reports third-quarter 2026 ATM share issuance and net proceeds without stating total program size or remaining capacity)",
-    "claim": "How much common stock issuance capacity remains under W&T's At-the-Market (ATM) agreement after issuing 3.6 million common shares for net proceeds of $14.7 million in the third quarter of 2026?",
+    "basis": "Inferred from [P6], which reports shares issued and net proceeds under the ATM agreement without stating the remaining authorized capacity.",
+    "claim": "How much equity issuance capacity remains under W&T's At-the-Market agreement after issuing 3.6 million common shares for net proceeds of $14.7 million?",
     "facts": [
      "P6"
     ],
@@ -1327,50 +1592,13 @@
     "support": "supported"
    },
    {
-    "basis": "stated in F1 and F2 (the balance sheet deferred tax asset and historical tax expense are presented without the income tax footnote)",
-    "claim": "What valuation allowance and tax attributes explain why deferred income tax assets stand at 96 (table in thousands) following a 55,991 income tax expense (table in thousands) in the third quarter of 2025?",
-    "facts": [
-     "F1",
-     "F2"
-    ],
-    "quotes": [
-     "Deferred income taxes | 96 | 35",
-     "Income tax expense | 498 | 55,991 | 1,767 | 48,994"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 (the text of Exhibit 99.1 truncates mid-table inside the Adjusted Net Income reconciliation before the Adjusted EBITDA and Free Cash Flow tables)",
-    "claim": "How are W&T's reported Adjusted EBITDA of $51.1 million and Free Cash Flow of $33.2 million for the third quarter of 2026 reconciled to GAAP measures in the omitted final tables of the earnings release?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Generated Adjusted EBITDA of $51.1 million, an increase of 30% over the third quarter of 2025 and $163.9 million of Adjusted EBITDA generated in the first nine months of 2026, an increase of 50% compared to the first nine months of 2025;",
-     "Generated Free Cash Flow of $33.2 million for the third quarter of 2026 and $89.3 million for the first nine months of 2026;"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P6 (guidance and expected production benefits from accelerated capital expenditures are forward-looking)",
-    "claim": "Will actual fourth-quarter 2026 production and first-half 2027 production gains materialize as guided given the approximately 2,600 Boe/d impact from Hurricane Isaias and the Mobile Bay turnaround and the $35.0 to $38.0 million full-year 2026 capital expenditure plan?",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Fourth quarter 2026 production guidance includes short-term sales volumes reductions from Hurricane Isaias and planned Mobile Bay turnaround with a combined impact to production of approximately 2,600 Boe/d.",
-     "Full year 2026 capital expenditures are now expected to be in the range of $35.0 to $38.0 million as a result of pulling forward 2027 capital projects to the fourth quarter to capitalize on higher commodity prices."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P3 (management notes significant uncertainty as to tariff duration and industry impacts while limiting its materiality expectation to 2026)",
-    "claim": "What financial impact will U.S. federal tariffs announced in 2025 and 2026 and any retaliatory tariffs have on W&T's capital expenditures, operating expenses, and realized commodity prices after 2026?",
+    "basis": "Stated in [P3] that interests are held through Monza Energy LLC without disclosing ownership percentages or contractual terms in the packet.",
+    "claim": "What are the ownership percentage, governance structure, and asset or liability commitments of W&T's proportionately consolidated interest in Monza Energy LLC and its unconsolidated affiliates?",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "While there is significant uncertainty as to the duration of these and any further tariffs, and the impacts these tariffs and any corresponding retaliatory tariffs will have on the oil and gas industry and on commodity prices, we do not currently expect that the financial impact of the tariffs will be material to capital expenditures or operating expenses in 2026."
+     "Our interests in fields, leases, structures and equipment are primarily owned by our wholly-owned subsidiaries and through our proportionately consolidated interest in Monza Energy LLC."
     ],
     "support": "supported"
    }
@@ -1381,5 +1609,5 @@
  "valuation": null,
  "valued": false,
  "verdict": "NO_CALL",
- "verdict_reason": "no positive earnings base"
+ "verdict_reason": "the filings show the continuing operations themselves losing money, so no value is given"
 }
