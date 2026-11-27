@@ -6,7 +6,8 @@ Pins:
     run are not bought;
   * it holds, never liquidates, when the file is missing or empty; a held name the file no longer lists is carried;
   * a name that stops being BUY is sold after the usual two-run exit grace;
-  * code_book and qwen_book are no longer advanced or seeded; a book that already holds them keeps their history untouched.
+  * code_book and qwen_book are no longer advanced or seeded; a book that already holds them keeps their history untouched;
+  * a BUY stock that is under review is not entered until the mark goes; a held stock under review stays (monitoring never sells).
 
 main() runs over tmp files only (made-up tickers); no network. Run: python -m pytest scripts/test_ai_book_ledger.py -q
 """
@@ -109,3 +110,32 @@ def test_the_monthly_books_are_no_longer_seeded_or_advanced(tmp_path, monkeypatc
     book = _run(tmp_path / "b", monkeypatch, "2026-11-30", read(), seed=old)
     assert book["ledgers"]["code_book"] == frozen and book["ledgers"]["qwen_book"] == frozen       # history kept, untouched
     assert _ai(book)["nav_series"][-1]["date"] == "2026-11-30"
+
+
+REVIEW = {"since": "2026-11-27", "headline": "h", "why": "w", "id": "x"}
+
+
+def _under_review(overlay, *tickers):
+    for t in tickers:
+        overlay["tickers"][t]["under_review"] = dict(REVIEW)
+    return overlay
+
+
+def test_a_buy_stock_under_review_is_not_a_target_unless_it_is_held():
+    r = _under_review(read(), "TESTA")
+    assert set(tp.ai_book_targets(r)) == {"TESTE"}
+    assert set(tp.ai_book_targets(r, held=frozenset({"TESTA"}))) == {"TESTA", "TESTE"}
+    r["tickers"]["TESTA"]["under_review"] = None                                  # the mark is gone: a target again
+    assert set(tp.ai_book_targets(r)) == {"TESTA", "TESTE"}
+
+
+def test_main_does_not_enter_a_stock_under_review_keeps_a_held_one_and_enters_when_the_mark_goes(tmp_path, monkeypatch):
+    book = _run(tmp_path, monkeypatch, "2026-11-27", _under_review(read(TESTB="BUY"), "TESTB"))
+    assert set(_ai(book)["state"]["holdings"]) == {"TESTA", "TESTE"}              # TESTB is BUY but under review: not bought
+    for session in ("2026-11-30", "2026-12-01", "2026-12-02"):                    # a HELD stock goes under review: it stays, run after run
+        book = _run(tmp_path, monkeypatch, session, _under_review(read(TESTB="BUY"), "TESTA", "TESTB"))
+        assert set(_ai(book)["state"]["holdings"]) == {"TESTA", "TESTE"}, session
+    assert not [t for t in _ai(book)["trades"] if t["side"] == "sell"]
+    book = _run(tmp_path, monkeypatch, "2026-12-03", _under_review(read(TESTB="BUY"), "TESTA"))      # TESTB was read again: the mark is gone
+    assert set(_ai(book)["state"]["holdings"]) == {"TESTA", "TESTB", "TESTE"}
+    assert [t["date"] for t in _ai(book)["trades"] if t["ticker"] == "TESTB"] == ["2026-12-03"]

@@ -201,12 +201,16 @@ def ai_verdicts(opus_tk: dict, read: dict) -> dict:
     return out
 
 
-def ai_book_targets(read: dict) -> dict:
+def ai_book_targets(read: dict, held=frozenset()) -> dict:
     """{ticker: weight_pct} for the AI book (operator 2026-11-27): every stock the filings read ran on and gives BUY, equally
     weighted. No screener gate: a stock read on request counts as one on the list. Names the operator excluded are never in
-    the file (rs2-local leaves them out when it publishes)."""
+    the file (rs2-local leaves them out when it publishes).
+    Under review (operator 2026-11-27, the held-names plan, H3): a BUY stock whose report carries `under_review` (a serious
+    warning raised after the report was made; rs2-local news_watch) is not ENTERED until it has been read again. A stock the
+    book already holds (`held`) stays: monitoring never sells, only a changed verdict does."""
     tk = (read or {}).get("tickers") if isinstance(read, dict) else None
-    names = [t for t, r in (tk or {}).items() if isinstance(r, dict) and r.get("analysis") != "not run" and r.get("verdict") == "BUY"]
+    names = [t for t, r in (tk or {}).items() if isinstance(r, dict) and r.get("analysis") != "not run" and r.get("verdict") == "BUY"
+             and (not r.get("under_review") or t in held)]
     if not names:
         return {}
     weight = 100.0 / max(len(names), MIN_EQUAL_NAMES)
@@ -1547,14 +1551,17 @@ def main():
         # Held, never liquidated, when the file is missing or empty. On no real-money list (kis/ledger_policy.py allow-list).
         read_raw = load_json(GEMINI_C_OVERLAY_JSON, {}) or {}
         read_tk = (read_raw.get("tickers") or {}) if isinstance(read_raw, dict) else {}
-        ai_targets = ai_book_targets(read_raw)
+        ai_targets = ai_book_targets(read_raw, held=frozenset(ledgers["ai_book"]["state"]["holdings"]))
         unknown_ai = {t for t in ledgers["ai_book"]["state"]["holdings"] if t not in read_tk}
         nav_ai, stale_ai = run_or_hold("ai_book", ai_targets, "verdict", unknown=unknown_ai,
                                        source_ok=bool(read_tk), why="gemini_c_overlay.json missing or empty")
         finalize_ledger(ledgers["ai_book"], nav_ai, stale_ai, benches, as_of, book["inception"])
         backfill_benches(ledgers["ai_book"])
         if read_tk:
-            print(f"  · ai_book: {len(ai_targets)} BUY name(s) of {len(read_tk)} read", file=sys.stderr)
+            waiting = sorted(t for t, r in read_tk.items() if isinstance(r, dict) and r.get("analysis") != "not run"
+                             and r.get("verdict") == "BUY" and t not in ai_targets)
+            print(f"  · ai_book: {len(ai_targets)} BUY name(s) of {len(read_tk)} read"
+                  + (f"; not entered while under review: {waiting}" if waiting else ""), file=sys.stderr)
 
         # ── plan3 · bold (momentum sleeve): RETIRED 2026-08-27 ──────────────────
         # No longer computed. run_plan3_ledger + the kill-switch machinery stay defined
