@@ -49,6 +49,7 @@ import json
 import math
 import os
 import sys
+import time
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -1104,6 +1105,9 @@ def run_mine_ledger(ledger, snapshot, prices, as_of):
 bench_hist_holder = {}  # {sym: {date: close}} fetched once per run for backfill
 
 
+BENCH_RETRY_WAITS = (20, 60, None)      # seconds to wait after a refused call; None: the last try
+
+
 def fetch_benchmark_history(start_date):
     """Daily closes for every benchmark from start_date -> today: {sym: {date: close}}.
     Lets benchmarks added after inception (e.g. SOXX/DRAM) be backfilled to the
@@ -1112,14 +1116,20 @@ def fetch_benchmark_history(start_date):
     try:
         import yfinance as yf
         for b in BENCHMARKS:
-            try:
-                hist = yf.Ticker(b).history(start=start_date, interval="1d")
-                if hist is not None and not hist.empty:
-                    for idx, c in hist["Close"].dropna().items():
-                        d = idx.date().isoformat() if hasattr(idx, "date") else str(idx)[:10]
-                        out[b][d] = round(float(c), 4)
-            except Exception as e:
-                print(f"  {b} history failed: {e}", file=sys.stderr)
+            # Yahoo refuses a call now and then right after the price fetch (2026-11-28: the primary benchmark, so no
+            # book got its row that day). A refused call is tried again before the benchmark is given up.
+            for wait in BENCH_RETRY_WAITS:
+                try:
+                    hist = yf.Ticker(b).history(start=start_date, interval="1d")
+                    if hist is not None and not hist.empty:
+                        for idx, c in hist["Close"].dropna().items():
+                            d = idx.date().isoformat() if hasattr(idx, "date") else str(idx)[:10]
+                            out[b][d] = round(float(c), 4)
+                    break
+                except Exception as e:
+                    print(f"  {b} history failed: {e}", file=sys.stderr)
+                    if wait is not None:
+                        time.sleep(wait)
     except Exception as e:
         print(f"  benchmark history fetch failed: {e}", file=sys.stderr)
     return out

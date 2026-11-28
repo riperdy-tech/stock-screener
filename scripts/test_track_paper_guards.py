@@ -335,6 +335,40 @@ def test_guard_does_not_raise_systemexit():
     assert "sys.exit(" not in src, "main() still calls sys.exit — would break the chain"
 
 
+# ── a refused benchmark call is tried again ──────────────────────────────────
+
+def test_a_refused_benchmark_call_is_tried_again_and_a_dead_one_is_given_up():
+    import types
+    import pandas as pd
+    calls, waits = {}, []
+
+    class Ticker:
+        def __init__(self, sym):
+            self.sym = sym
+
+        def history(self, start, interval):
+            calls[self.sym] = calls.get(self.sym, 0) + 1
+            if self.sym == tp.PRIMARY_BENCHMARK and calls[self.sym] == 1:
+                raise RuntimeError("Too Many Requests. Rate limited. Try after a while.")
+            if self.sym == "AGG":
+                raise RuntimeError("dead")
+            return pd.DataFrame({"Close": [10.0]}, index=pd.to_datetime(["2026-11-27"]))
+
+    real_yf, real_sleep = sys.modules.get("yfinance"), tp.time.sleep
+    sys.modules["yfinance"], tp.time.sleep = types.SimpleNamespace(Ticker=Ticker), waits.append
+    try:
+        out = tp.fetch_benchmark_history("2026-11-01")
+    finally:
+        tp.time.sleep = real_sleep
+        if real_yf is None:
+            del sys.modules["yfinance"]
+        else:
+            sys.modules["yfinance"] = real_yf
+    assert out[tp.PRIMARY_BENCHMARK] == {"2026-11-27": 10.0} and calls[tp.PRIMARY_BENCHMARK] == 2
+    assert out["AGG"] == {} and calls["AGG"] == len(tp.BENCH_RETRY_WAITS)
+    assert waits == [tp.BENCH_RETRY_WAITS[0]] + [w for w in tp.BENCH_RETRY_WAITS if w is not None]
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     failed = 0
