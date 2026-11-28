@@ -1,10 +1,10 @@
 {
  "count": 250,
  "effort": "high",
- "fill_complete": true,
- "generated_at": "2026-11-27T23:56:53Z",
- "list_covered": 159,
- "list_names": 159,
+ "fill_complete": false,
+ "generated_at": "2026-11-28T00:13:13Z",
+ "list_covered": 160,
+ "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -3413,36 +3413,46 @@
    "verdict_reason": "expected return +32.6 points a year against the required return over 3 years"
   },
   "CXW": {
-   "alpha_pts": null,
+   "alpha_pts": 22.20983913788045,
    "analysis": "complete",
    "based_on": {
     "accepted": "2026-11-05T17:03:08.000Z",
     "accepted_utc": "2026-11-05T22:03:08Z",
     "accession": "0001193125-26-449151",
-    "decision_time": "2026-11-27T22:58:47Z",
+    "decision_time": "2026-11-28T00:05:04Z",
     "form": "10-Q",
     "period": "2026-09-30"
    },
-   "claims": 103,
-   "claims_supported": 96,
-   "date": "2026-11-27T22:58:47Z",
+   "claims": 94,
+   "claims_supported": 91,
+   "date": "2026-11-28T00:05:04Z",
+   "decided": {
+    "method": "decided.v1",
+    "version": "decided.v3.1 2026-11-20 WO_NC10a"
+   },
+   "equity_value": 4418805581.677531,
    "family": "real_estate",
+   "far_from_price": false,
+   "filed_shares": 86498076.0,
    "flags": [
-    "CoreCivic sold four detention facilities with 7,187 beds to the U.S. government (DHS) for gross proceeds of $2.2 billion. The Q3 2026 income statement shows a gain on sale of real estate assets, net, of 1,770,664 (table in thousands).",
-    "The company redeemed in full the remaining 4.75% 2027 senior notes ($238.5 million outstanding). It also paid off the Revolving Credit Facility and the term loans with facility sale proceeds.",
-    "CoreCivic entered into a $500 million accelerated share repurchase agreement. Final settlement is scheduled before the end of the second quarter of 2027."
+    "CoreCivic sold four detention facilities with 7,187 beds to the U.S. government (DHS) for gross proceeds of $2.2 billion. It continues to manage them under existing ICE contracts.",
+    "CoreCivic entered into a $500.0 million accelerated share repurchase agreement and received 12.4 million shares up front. Final settlement is still pending.",
+    "The board increased the share repurchase authorization by an additional $500.0 million."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.09192594437424717,
+   "market_cap_at_publish": 2609647024,
    "model": "claude-sonnet-5-5",
    "news_count": 6,
    "news_read": {
-    "evidence_file": "CXW_20261127T225847Z.json",
+    "evidence_file": "CXW_20261128T000504Z.json",
     "in_value": {
-     "inputs": [],
+     "inputs": [
+      "long_run_op_margin"
+     ],
      "runs": 2,
-     "runs_citing": 0,
-     "value_before": 46.512136432912875
+     "runs_citing": 2,
+     "value_before": null
     },
     "rows": 4,
     "rows_left_out": 2,
@@ -3463,16 +3473,32 @@
      "5ce2bb214f0f"
     ]
    },
-   "no_value_reason": "the filings are too long for one request to the reader, so no value is given",
+   "no_value_reason": null,
    "pending_offer": null,
+   "price_at_publish": 30.17,
    "qwen_book": null,
    "release_truncated": [],
    "screener_commit": "6e1ae39647d91b93fdd83ac4d160ef14b62b0d6c",
+   "seed_base": {
+    "1000": 53.77404036400794,
+    "3000": 48.397147389983985
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
    "source": "news warning (news:2026-11-27:9e9cfaa7dc9c)",
    "under_review": null,
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "the filings are too long for one request to the reader, so no value is given"
+   "upside": 0.6932579544433941,
+   "value_base": 51.08559387699596,
+   "value_bear": 42.1539534572663,
+   "value_bull": 65.98778775447616,
+   "value_per_filed_share": {
+    "base": 51.08559387699596,
+    "bear": 42.1539534572663,
+    "bull": 65.98778775447616
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +22.2 points a year against the required return over 3 years"
   },
   "DAC": {
    "alpha_pts": 27.818798952406176,
@@ -13712,11 +13738,11 @@
    "verdict_reason": "an offer to acquire the company is announced and pending: the price follows the offer's terms, not the company's standalone value (on the value alone: BUY, expected return +29.7 points a year against the required return over 3 years)"
   }
  },
- "valued_count": 176,
+ "valued_count": 177,
  "verdict_counts": {
   "AVOID": 78,
-  "BUY": 65,
-  "NO_CALL": 84,
+  "BUY": 66,
+  "NO_CALL": 83,
   "WATCH": 23
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
