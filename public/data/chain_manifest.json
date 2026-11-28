@@ -3,17 +3,17 @@
     "stocks": 7063
   },
   "fetch_run": {
-    "newest_last_updated_age_days": 0.5,
-    "processed": 6542,
-    "refreshed": 6542,
-    "scan_logged_at": "2026-11-28 00:58:25",
+    "newest_last_updated_age_days": 0.01,
+    "processed": 6531,
+    "refreshed": 6531,
+    "scan_logged_at": "2026-11-28 20:51:13",
     "skipped": 0,
     "skipped_share": 0.0
   },
-  "finished_at": "2026-11-28T03:53:27Z",
+  "finished_at": "2026-11-28T12:16:42Z",
   "invariants": [
     {
-      "detail": "newest row Last_Updated is 0.5 days old (max 8)",
+      "detail": "newest row Last_Updated is 0.0 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
       "ok": true
@@ -25,7 +25,7 @@
       "ok": false
     },
     {
-      "detail": "last scan (2026-11-28 00:58:25) refreshed 6542, skipped 0 of 6542 (0.0%, max 8%)",
+      "detail": "last scan (2026-11-28 20:51:13) refreshed 6531, skipped 0 of 6531 (0.0%, max 8%)",
       "level": "hard",
       "name": "fetch_skipped_share",
       "ok": true
@@ -97,16 +97,16 @@
       "ok": true
     },
     {
-      "detail": "152 reverse-DCF models built",
+      "detail": "153 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
     },
     {
-      "detail": "paper ledger latest row 2026-11-25 (expect >= price session 2026-11-27)",
+      "detail": "paper ledger latest row 2026-11-27 (expect >= price session 2026-11-27)",
       "level": "soft",
       "name": "paper_ledger_updated",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "mine ledger idle (no My Portfolio snapshot saved yet)",
@@ -117,15 +117,15 @@
   ],
   "ok": true,
   "price_asof": "2026-11-27",
-  "run_id": "20261128T035226Z",
+  "run_id": "20261128T121125Z",
   "steps": [
     {
-      "duration_s": 2.8,
+      "duration_s": 4.3,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.3,
+      "duration_s": 56.0,
       "name": "score_reverse",
       "returncode": 0
     },
@@ -135,42 +135,42 @@
       "returncode": 0
     },
     {
-      "duration_s": 17.9,
+      "duration_s": 40.4,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.4,
+      "duration_s": 0.5,
       "name": "build_stock_driver_flags",
       "returncode": 0
     },
     {
-      "duration_s": 0.6,
+      "duration_s": 0.8,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.6,
+      "duration_s": 6.5,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 28.8,
+      "duration_s": 196.8,
       "name": "fetch_analyst_targets",
       "returncode": 0
     },
     {
-      "duration_s": 0.9,
+      "duration_s": 0.8,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.0,
+      "duration_s": 0.4,
       "name": "build_macro_events",
       "returncode": 0
     },
     {
-      "duration_s": 1.4,
+      "duration_s": 8.2,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
